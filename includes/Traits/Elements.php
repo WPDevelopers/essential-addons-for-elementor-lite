@@ -345,7 +345,7 @@ trait Elements {
 
 		$post_id         = get_the_ID();
 		$html            = '';
-		$global_settings = $setting_data = $document = [];
+		$global_settings = $settings_data = $document = [];
 
 		if ( $this->get_settings( 'reading-progress' ) || $this->get_settings( 'table-of-content' ) || $this->get_settings( 'scroll-to-top' ) ) {
 			$html            = '';
@@ -354,6 +354,28 @@ trait Elements {
 
 			if ( is_object( $document ) ) {
 				$settings_data = $document->get_settings();
+			}
+		}
+
+		$conditions_manager = \ElementorPro\Plugin::instance()->modules_manager->get_modules( 'theme-builder' )->get_conditions_manager();
+		
+		if( ! empty( $conditions_manager->get_documents_for_location( 'archive') ) ) {
+			// This page has a valid Elementor archive template
+			$page_body_classes = get_body_class();
+
+			if( is_array( $page_body_classes ) && count( $page_body_classes ) ){
+				foreach( $page_body_classes as $page_body_class){
+					if ( strpos( $page_body_class, 'elementor-page-' ) !== FALSE ) {
+						$template_id = intval( str_replace('elementor-page-', '', $page_body_class) );
+					} 
+				}
+			}
+
+			if ( ! empty( $template_id ) ) {
+				$document_template        = Plugin::$instance->documents->get( $template_id, false );
+				if ( is_object( $document_template ) ) {
+					$settings_data = $document_template->get_settings();
+				}
 			}
 		}
 
