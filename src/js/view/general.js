@@ -88,6 +88,7 @@ let ea_swiper_slider_init_inside_template = (content) => {
 }
 
 ea.hooks.addAction("ea-advanced-tabs-triggered", "ea", ea_swiper_slider_init_inside_template);
+ea.hooks.addAction("ea-advanced-accordion-triggered", "ea", ea_swiper_slider_init_inside_template);
 
 jQuery(window).on("elementor/frontend/init", function () {
 	window.isEditMode = elementorFrontend.isEditMode();
