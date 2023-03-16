@@ -5790,7 +5790,7 @@ class Login_Register extends Widget_Base {
 	 */
 	protected function print_form_header( $form_type = 'login' ) {
 		$title    = ! empty( $this->ds["{$form_type}_form_title"] ) ?  esc_html__( wp_strip_all_tags( $this->ds["{$form_type}_form_title"] ), 'essential-addons-for-elementor-lite' )  : '';
-		$subtitle = ! empty( $this->ds["{$form_type}_form_subtitle"] ) ? esc_html__( wp_strip_all_tags( $this->ds["{$form_type}_form_subtitle"] ), 'essential-addons-for-elementor-lite' ) : '';
+		$subtitle = ! empty( $this->ds["{$form_type}_form_subtitle"] ) ? HelperCLass::eael_wp_kses( $this->ds["{$form_type}_form_subtitle"] ) : '';
 		
 		$show_form_logo_class = '';
 		if( 'lostpassword' === $form_type || 'resetpassword' === $form_type ){
