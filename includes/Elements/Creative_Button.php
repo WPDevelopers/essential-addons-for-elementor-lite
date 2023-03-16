@@ -408,7 +408,7 @@ class Creative_Button extends Widget_Base
 						{{WRAPPER}} .eael-creative-button.eael-creative-button--ujarak::before,
 						{{WRAPPER}} .eael-creative-button.eael-creative-button--wayra:hover::before,
 						{{WRAPPER}} .eael-creative-button.eael-creative-button--tamaya:hover,
-						{{WRAPPER}} .eael-creative-button.eael-creative-button--rayen::before
+						{{WRAPPER}} .eael-creative-button.eael-creative-button--rayen::before,
                         {{WRAPPER}} .eael-creative-button.eael-creative-button--rayen:hover::before
 					',
                     'condition' => [
