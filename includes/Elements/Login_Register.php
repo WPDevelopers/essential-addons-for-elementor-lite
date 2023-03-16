@@ -1397,7 +1397,7 @@ class Login_Register extends Widget_Base {
 	protected function social_login_promo() {
 
 		$this->start_controls_section( 'section_content_social_login', [
-			'label'      => __( 'Social Login', 'essential-addons-elementor' ),
+			'label'      => __( 'Social Login', 'essential-addons-for-elementor-lite' ),
 			'conditions' => $this->get_form_controls_display_condition( 'login' ),
 		] );
 

@@ -1161,7 +1161,7 @@ class NinjaForms extends Widget_Base
         $this->add_control(
             'checked_checkbox_heading',
             [
-                'label' => __('Checkbox', 'essential-addons-elementor'),
+                'label' => __('Checkbox', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'condition' => [
                     'custom_radio_checkbox' => 'yes',
@@ -1173,7 +1173,7 @@ class NinjaForms extends Widget_Base
         $this->add_responsive_control(
             'checked_checkbox_position_x_axis',
             [
-                'label' => __('Position: X Axis', 'essential-addons-elementor'),
+                'label' => __('Position: X Axis', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -1195,7 +1195,7 @@ class NinjaForms extends Widget_Base
         $this->add_responsive_control(
             'checked_checkbox_position_y_axis',
             [
-                'label' => __('Position: Y Axis', 'essential-addons-elementor'),
+                'label' => __('Position: Y Axis', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -1217,7 +1217,7 @@ class NinjaForms extends Widget_Base
         $this->add_control(
             'checked_radio_buttons_heading',
             [
-                'label' => __('Radio Buttons', 'essential-addons-elementor'),
+                'label' => __('Radio Buttons', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'condition' => [
                     'custom_radio_checkbox' => 'yes',
@@ -1229,7 +1229,7 @@ class NinjaForms extends Widget_Base
         $this->add_responsive_control(
             'checked_radio_position_x_axis',
             [
-                'label' => __('Position: X Axis', 'essential-addons-elementor'),
+                'label' => __('Position: X Axis', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -1251,7 +1251,7 @@ class NinjaForms extends Widget_Base
         $this->add_responsive_control(
             'checked_radio_position_y_axis',
             [
-                'label' => __('Position: Y Axis', 'essential-addons-elementor'),
+                'label' => __('Position: Y Axis', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [

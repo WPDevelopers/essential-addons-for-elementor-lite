@@ -922,7 +922,7 @@ class Adv_Tabs extends Widget_Base
         $this->start_controls_section(
             'eael_ad_responsive_controls',
             [
-                'label' => esc_html__('Responsive Controls', 'essential-addons-elementor'),
+                'label' => esc_html__('Responsive Controls', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -930,7 +930,7 @@ class Adv_Tabs extends Widget_Base
         $this->add_control(
             'responsive_vertical_layout',
             [
-                'label' => __('Vertical Layout', 'essential-addons-elementor'),
+                'label' => __('Vertical Layout', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
                 'label_off' => __('No', 'essential-addons-for-elementor-lite'),
