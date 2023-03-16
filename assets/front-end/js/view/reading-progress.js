@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("jQuery(document).ready(function () {\n  // scroll func\n  jQuery(window).scroll(function () {\n    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;\n    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;\n\n    if (height === 0) {\n      height = document.documentElement.scrollHeight;\n    }\n\n    var scrolled = winScroll / height * 100;\n    jQuery(\".eael-reading-progress-fill\").css({\n      width: scrolled + \"%\"\n    });\n  });\n});\n\n//# sourceURL=webpack:///./src/js/view/reading-progress.js?");
+eval("jQuery(document).ready(function () {\n  // scroll func\n  jQuery(window).scroll(function () {\n    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;\n    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;\n    if (height === 0) {\n      height = document.documentElement.scrollHeight;\n    }\n    var scrolled = winScroll / height * 100;\n    jQuery(\".eael-reading-progress-fill\").css({\n      width: scrolled + \"%\"\n    });\n  });\n});\n\n//# sourceURL=webpack:///./src/js/view/reading-progress.js?");
 
 /***/ })
 
