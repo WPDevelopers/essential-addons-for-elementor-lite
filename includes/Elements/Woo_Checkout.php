@@ -421,11 +421,11 @@ class Woo_Checkout extends Widget_Base {
 		$this->add_control(
 			'ea_section_woo_login_show',
 			[
-				'label' => __( 'Show Preview of Login', 'essential-addons-elementor' ),
+				'label' => __( 'Show Preview of Login', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'no',
-				'label_on' => __( 'Show', 'essential-addons-elementor' ),
-				'label_off' => __( 'Hide', 'essential-addons-elementor' ),
+				'label_on' => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 				'description' => 'You can force show login in order to style them properly.',
 			]
@@ -557,7 +557,7 @@ class Woo_Checkout extends Widget_Base {
             'eael_new_checkout_fields_not_found',
             [
                 'type' => Controls_Manager::RAW_HTML,
-                'raw' => __('If you didn\'t find your custom checkout fields. Please remove this widget and again add this.' , 'essential-addons-elementor'),
+                'raw' => __('If you didn\'t find your custom checkout fields. Please remove this widget and again add this.' , 'essential-addons-for-elementor-lite'),
                 'content_classes' => 'eael-warning',
             ]
         );
