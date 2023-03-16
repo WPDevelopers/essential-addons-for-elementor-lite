@@ -191,6 +191,7 @@ class Elements_Manager {
 			'eael-dynamic-filterable-gallery' => 'eael-dynamic-filter-gallery',
 			'eael-google-map'                 => 'eael-adv-google-map',
 			'eael-instafeed'                  => 'eael-instagram-gallery',
+			'eael-ninja'                      => 'eael-ninja-form',
 		];
 	}
 
