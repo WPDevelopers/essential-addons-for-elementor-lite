@@ -1396,3 +1396,9 @@
   height: 35px;
   position: relative;
 }
+.theme-flexia .eael-woo-product-carousel-container.preset-2 .eael-product-carousel .carousel-overlay, .theme-flexia .eael-woo-product-carousel-container.preset-4 .eael-product-carousel .carousel-overlay {
+  z-index: 1;
+}
+.theme-flexia .eael-woo-product-carousel-container.preset-2 .eael-product-carousel .product-overlay-content, .theme-flexia .eael-woo-product-carousel-container.preset-4 .eael-product-carousel .product-overlay-content {
+  z-index: 2;
+}
