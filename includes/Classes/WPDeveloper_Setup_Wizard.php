@@ -691,7 +691,6 @@ class WPDeveloper_Setup_Wizard {
 					[
 						'key'         => 'business-reviews',
 						'title'       => __( 'Business Reviews', 'essential-addons-for-elementor-lite' ),
-						'preferences' => 'basic',
 					],
 				]
 			],
