@@ -234,6 +234,12 @@ jQuery(window).on("elementor/frontend/init", function () {
 					filterControls.removeClass("open-filters");
 				}
 			});
+
+			$( document ).ready(function() {
+				if( window.location.hash ) {
+					jQuery('#' + window.location.hash.substring(1) ).trigger('click');
+				}
+			});
 		}
 	};
 
