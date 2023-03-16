@@ -112,8 +112,8 @@ class Helper
             // 'archive',
             'search-results',
             'error-404',
-            'product',
-            'product-archive',
+            // 'product',
+            // 'product-archive',
             'section',
         ];
 
