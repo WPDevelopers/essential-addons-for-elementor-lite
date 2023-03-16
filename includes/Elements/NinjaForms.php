@@ -1350,6 +1350,7 @@ class NinjaForms extends Widget_Base
                 'size_units' => ['px', '%'],
                 'selectors' => [
                     '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"]' => 'width: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-ninja-form .submit-container input[type="submit"]' => 'width: {{SIZE}}{{UNIT}}',
                 ],
                 'condition' => [
                     'button_width_type' => 'custom',
@@ -1374,6 +1375,7 @@ class NinjaForms extends Widget_Base
                 'default' => '',
                 'selectors' => [
                     '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"]' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-ninja-form .submit-container input[type="submit"]' => 'background-color: {{VALUE}}',
                 ],
             ]
         );
@@ -1386,6 +1388,7 @@ class NinjaForms extends Widget_Base
                 'default' => '',
                 'selectors' => [
                     '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"]' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-ninja-form .submit-container input[type="submit"]' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -1397,7 +1400,8 @@ class NinjaForms extends Widget_Base
                 'label' => __('Border', 'essential-addons-for-elementor-lite'),
                 'placeholder' => '1px',
                 'default' => '1px',
-                'selector' => '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"]',
+                'selector' => '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"],
+                {{WRAPPER}} .eael-ninja-form .submit-container input[type="submit"]',
             ]
         );
 
@@ -1409,6 +1413,7 @@ class NinjaForms extends Widget_Base
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
                     '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"]' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-ninja-form .submit-container input[type="submit"]' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1421,6 +1426,7 @@ class NinjaForms extends Widget_Base
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
                     '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"]' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-ninja-form .submit-container input[type="submit"]' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1440,6 +1446,7 @@ class NinjaForms extends Widget_Base
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
                     '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"]' => 'margin-top: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-ninja-form .submit-container input[type="submit"]' => 'margin-top: {{SIZE}}{{UNIT}}',
                 ],
             ]
         );
@@ -1461,6 +1468,7 @@ class NinjaForms extends Widget_Base
                 'default' => '',
                 'selectors' => [
                     '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"]:hover' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-ninja-form .submit-container input[type="submit"]:hover' => 'background-color: {{VALUE}}',
                 ],
             ]
         );
@@ -1473,6 +1481,7 @@ class NinjaForms extends Widget_Base
                 'default' => '',
                 'selectors' => [
                     '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"]:hover' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-ninja-form .submit-container input[type="submit"]:hover' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -1485,6 +1494,7 @@ class NinjaForms extends Widget_Base
                 'default' => '',
                 'selectors' => [
                     '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"]:hover' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-ninja-form .submit-container input[type="submit"]:hover' => 'border-color: {{VALUE}}',
                 ],
             ]
         );
@@ -1499,7 +1509,7 @@ class NinjaForms extends Widget_Base
                 'name' => 'button_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
                 'scheme' => Typography::TYPOGRAPHY_4,
-                'selector' => '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"]',
+                'selector' => '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"],{{WRAPPER}} .eael-ninja-form .submit-container input[type="submit"]',
                 'separator' => 'before',
             ]
         );
@@ -1508,7 +1518,7 @@ class NinjaForms extends Widget_Base
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'button_box_shadow',
-                'selector' => '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"]',
+                'selector' => '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"],{{WRAPPER}} .eael-ninja-form .submit-container input[type="submit"]',
                 'separator' => 'before',
             ]
         );
