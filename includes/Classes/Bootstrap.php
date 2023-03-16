@@ -72,8 +72,8 @@ class Bootstrap
     protected $installer;
 
 
-    const EAEL_PROMOTION_FLAG = 3;
-    const EAEL_ADMIN_MENU_FLAG = 3;
+    const EAEL_PROMOTION_FLAG = 4;
+    const EAEL_ADMIN_MENU_FLAG = 4;
     /**
      * Singleton instance
      *
@@ -204,9 +204,9 @@ class Bootstrap
         //rank math support
         add_filter('rank_math/researches/toc_plugins', [$this, 'toc_rank_math_support']);
 
-        if(defined('WPML_TM_VERSION')){
-	        add_filter( 'elementor/documents/get/post_id',[$this, 'eael_wpml_template_translation']);
-        }
+//        if(defined('WPML_TM_VERSION')){
+//	        add_filter( 'elementor/documents/get/post_id',[$this, 'eael_wpml_template_translation']);
+//        }
 
 
         //templately plugin support
@@ -283,9 +283,9 @@ class Bootstrap
 	        add_action( 'eael_admin_page_setting', [ $this, 'eael_show_admin_menu_notice' ] );
 
 	        // Black Friday Optin
-	        add_action( 'admin_notices', [ $this, 'eael_black_friday_optin' ] );
-	        add_action( 'eael_admin_notices', [ $this, 'eael_black_friday_optin' ] );
-	        add_action( 'wp_ajax_eael_black_friday_optin_dismiss', [ $this, 'eael_black_friday_optin_dismiss' ] );
+//	        add_action( 'admin_notices', [ $this, 'eael_black_friday_optin' ] );
+//	        add_action( 'eael_admin_notices', [ $this, 'eael_black_friday_optin' ] );
+//	        add_action( 'wp_ajax_eael_black_friday_optin_dismiss', [ $this, 'eael_black_friday_optin_dismiss' ] );
         }
 
 	    // beehive theme compatibility
