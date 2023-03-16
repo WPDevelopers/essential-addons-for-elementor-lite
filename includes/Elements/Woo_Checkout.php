@@ -553,6 +553,15 @@ class Woo_Checkout extends Widget_Base {
 			]
 		);
 
+        $this->add_control(
+            'eael_new_checkout_fields_not_found',
+            [
+                'type' => Controls_Manager::RAW_HTML,
+                'raw' => __('If you didn\'t find your custom checkout fields. Please remove this widget and again add this.' , 'essential-addons-elementor'),
+                'content_classes' => 'eael-warning',
+            ]
+        );
+
 		$this->start_controls_tabs( 'ea_woo_checkout_reorder_fields');
 		$this->start_controls_tab( 'ea_woo_checkout_reorder_billing_fields_tab',
             [
