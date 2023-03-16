@@ -397,6 +397,16 @@ class Filterable_Gallery extends Widget_Base
                         'label_block' => true,
                         'default' => esc_html__('Gallery Item', 'essential-addons-for-elementor-lite'),
                     ],
+                    [
+                        'name' => 'eael_fg_control_custom_id',
+                        'label' => esc_html__('Custom ID', 'essential-addons-for-elementor-lite'),
+                        'description' => esc_html__('Adding a custom ID will function as an anchor tag. For instance, if you input "test" as your custom ID, the link will change to "https://www.example.com/#test" and it will immediately open the corresponding tab.', 'essential-addons-for-elementor-lite'),
+                        'type' => Controls_Manager::TEXT,
+                        'dynamic'   => ['active' => true],
+                        'label_block' => true,
+                        'default' => esc_html__('', 'essential-addons-for-elementor-lite'),
+                    ],
+                    
                 ],
                 'title_field' => '{{eael_fg_control}}',
             ]
@@ -2807,7 +2817,7 @@ class Filterable_Gallery extends Widget_Base
 
                     foreach ($settings['eael_fg_controls'] as $key => $control) :
                         $sorter_filter = $this->sorter_class($control['eael_fg_control']);
-                    ?><li data-load-more-status="0" data-first-init="0" class="control <?php if ($key == 0 && empty($settings['eael_fg_all_label_text'])) {
+                    ?><li <?php if( ! empty( $control['eael_fg_control_custom_id'] ) ) : ?> id="<?php echo esc_attr( $control['eael_fg_control_custom_id'] )?>" <?php endif; ?> data-load-more-status="0" data-first-init="0" class="control <?php if ($key == 0 && empty($settings['eael_fg_all_label_text'])) {
                             echo 'active';
                         } ?>" data-filter=".eael-cf-<?php echo esc_attr($sorter_filter); ?>"><?php echo esc_html( $control['eael_fg_control'] ); ?></li><?php
                     endforeach;
