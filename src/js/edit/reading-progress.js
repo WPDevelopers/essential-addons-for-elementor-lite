@@ -25,4 +25,12 @@ ea.hooks.addAction("editMode.init", "ea", () => {
 				.addClass("eael-reading-progress-" + newValue);
 		}
 	);
+
+	elementor.settings.page.addChangeCallback(
+		"eael_ext_reading_progress_fill_color",
+		function (newValue) {
+			let idSelector = jQuery('.eael-reading-progress-wrap').attr('id');
+			jQuery(`#${idSelector}  .eael-reading-progress .eael-reading-progress-fill`).css('background-color', newValue);
+		}
+	);
 });
