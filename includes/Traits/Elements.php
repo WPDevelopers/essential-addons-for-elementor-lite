@@ -329,13 +329,13 @@ trait Elements {
 		return $config;
 	}
 
-	public function eael_is_theme_builder_archive_template(){
+	public function eael_is_theme_builder_archive_template( $type = 'archive' ){
 		$is_archive_template = false;
 
 		if ( class_exists( 'ElementorPro\Modules\ThemeBuilder\Module' ) ) {
 			$conditions_manager = \ElementorPro\Plugin::instance()->modules_manager->get_modules( 'theme-builder' )->get_conditions_manager();
 		
-			if( ! empty( $conditions_manager->get_documents_for_location( 'archive') ) ) {
+			if( ! empty( $conditions_manager->get_documents_for_location( 'archive') ) || ! empty( $conditions_manager->get_documents_for_location( 'single') ) ) {
 				$is_archive_template = true;
 			}
 		}
