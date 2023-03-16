@@ -410,7 +410,8 @@ trait Elements {
 
 		// Table of Contents
 		if ( $this->get_settings( 'table-of-content' ) ) {
-			$toc_status = false;
+			$toc_status 		= false;
+			$toc_status_global 	= false;
 
 			if ( is_object( $document ) ) {
 				$settings_data = $document->get_settings();
@@ -419,9 +420,11 @@ trait Elements {
 			if ( isset( $settings_data['eael_ext_table_of_content'] ) && $settings_data['eael_ext_table_of_content'] == 'yes' ) {
 				$toc_status = true;
 			} elseif ( isset( $global_settings['eael_ext_table_of_content']['enabled'] ) && $global_settings['eael_ext_table_of_content']['enabled'] ) {
-				$toc_status    = true;
-				$settings_data = $global_settings['eael_ext_table_of_content'];
+				$toc_status    	= true;
+				$settings_data 	= $global_settings['eael_ext_table_of_content'];
 			}
+
+			$toc_status_global = isset( $global_settings['eael_ext_table_of_content']['enabled'] ) && $global_settings['eael_ext_table_of_content']['enabled'];
 
 			if ( $toc_status ) {
 				$this->extensions_data = $settings_data;
@@ -486,6 +489,17 @@ trait Elements {
 					if ( get_post_status( $this->get_extensions_value( 'post_id' ) ) != 'publish' ) {
 						$table_of_content_html = '';
 					} else if ( $toc_global_display_condition == 'pages' && ! is_page() ) {
+						$table_of_content_html = '';
+					} else if ( $toc_global_display_condition == 'posts' && ! is_single() ) {
+						$table_of_content_html = '';
+					}
+				}
+
+				// Exclude TOC configured page / post based on display condition
+				if ( $toc_status && $toc_status_global ) {
+					$toc_global_display_condition = $this->get_extensions_value( 'eael_ext_toc_global_display_condition' );
+					
+					if ( $toc_global_display_condition == 'pages' && ! is_page() ) {
 						$table_of_content_html = '';
 					} else if ( $toc_global_display_condition == 'posts' && ! is_single() ) {
 						$table_of_content_html = '';
