@@ -535,7 +535,7 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 }
 
 /*--- Gallery Column CSS ---*/
-@media only screen and (min-width: 1025px) {
+@media only screen and (max-width: 2399px) and (min-width: 1594px) {
 	/* For Desktop: */
 	.elementor-element.elementor-grid-1 {
 		position: relative;
@@ -613,6 +613,170 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 		margin-right: 0 !important;
 	}
 	.elementor-element.elementor-grid-6 .eael-filterable-gallery-item-wrap:nth-of-type(6n+1) {
+		clear: left;
+	}
+}
+
+@media only screen and (min-width: 2400px) {
+	/* For Widescreens: */
+	.elementor-element.elementor-grid-widescreen-1 {
+		position: relative;
+	}
+	.elementor-element.elementor-grid-widescreen-1 .eael-filterable-gallery-item-wrap {
+		width: 100%;
+		float: left;
+	}
+	.elementor-element.elementor-grid-widescreen-2 {
+		position: relative;
+	}
+	.elementor-element.elementor-grid-widescreen-2 .eael-filterable-gallery-item-wrap {
+		width: 50%;
+		float: left;
+	}
+	.elementor-element.elementor-grid-widescreen-2 .eael-filterable-gallery-item-wrap:nth-of-type(2n) {
+		margin-right: 0 !important;
+	}
+	.elementor-element.elementor-grid-widescreen-2 .eael-filterable-gallery-item-wrap:nth-of-type(2n+1) {
+		clear: left;
+	}
+	.elementor-element.elementor-grid-widescreen-3 {
+		position: relative;
+	}
+	.elementor-element.elementor-grid-widescreen-3 .eael-filterable-gallery-item-wrap {
+		width: 33.3333%;
+		float: left;
+	}
+	.elementor-element.elementor-grid-widescreen-3 .eael-filterable-gallery-item-wrap:nth-of-type(3n) {
+		margin-right: 0 !important;
+	}
+	.elementor-element.elementor-grid-widescreen-3 .eael-filterable-gallery-item-wrap:nth-of-type(3n+1) {
+		clear: left;
+	}
+	.elementor-element.elementor-grid-widescreen-4 {
+		position: relative;
+	}
+	.elementor-element.elementor-grid-widescreen-4 .eael-filterable-gallery-item-wrap {
+		width: 25%;
+		float: left;
+	}
+	.elementor-element.elementor-grid-widescreen-4 .eael-filterable-gallery-item-wrap:nth-of-type(4n) {
+		margin-right: 0 !important;
+	}
+	.elementor-element.elementor-grid-widescreen-4 .eael-filterable-gallery-item-wrap:nth-of-type(4n+1) {
+		clear: left;
+	}
+	.elementor-element.elementor-grid-widescreen-5 {
+		position: relative;
+	}
+	.elementor-element.elementor-grid-widescreen-5 .pp-logo-grid {
+		margin-right: -5px;
+	}
+	.elementor-element.elementor-grid-widescreen-5 .eael-filterable-gallery-item-wrap {
+		width: 20%;
+		float: left;
+	}
+	.elementor-element.elementor-grid-widescreen-5 .eael-filterable-gallery-item-wrap:nth-of-type(5n) {
+		margin-right: 0 !important;
+	}
+	.elementor-element.elementor-grid-widescreen-5 .eael-filterable-gallery-item-wrap:nth-of-type(5n+1) {
+		clear: left;
+	}
+	.elementor-element.elementor-grid-widescreen-6 {
+		position: relative;
+	}
+	.elementor-element.elementor-grid-widescreen-6 .pp-logo-grid {
+		margin-right: -6px;
+	}
+	.elementor-element.elementor-grid-widescreen-6 .eael-filterable-gallery-item-wrap {
+		width: 16.65%;
+		float: left;
+	}
+	.elementor-element.elementor-grid-widescreen-6 .eael-filterable-gallery-item-wrap:nth-of-type(6n) {
+		margin-right: 0 !important;
+	}
+	.elementor-element.elementor-grid-widescreen-6 .eael-filterable-gallery-item-wrap:nth-of-type(6n+1) {
+		clear: left;
+	}
+}
+
+@media only screen and (max-width: 1593px) and (min-width: 1025px) {
+	/* For Laptops: */
+	.elementor-element.elementor-grid-laptop-1 {
+		position: relative;
+	}
+	.elementor-element.elementor-grid-laptop-1 .eael-filterable-gallery-item-wrap {
+		width: 100%;
+		float: left;
+	}
+	.elementor-element.elementor-grid-laptop-2 {
+		position: relative;
+	}
+	.elementor-element.elementor-grid-laptop-2 .eael-filterable-gallery-item-wrap {
+		width: 50%;
+		float: left;
+	}
+	.elementor-element.elementor-grid-laptop-2 .eael-filterable-gallery-item-wrap:nth-of-type(2n) {
+		margin-right: 0 !important;
+	}
+	.elementor-element.elementor-grid-laptop-2 .eael-filterable-gallery-item-wrap:nth-of-type(2n+1) {
+		clear: left;
+	}
+	.elementor-element.elementor-grid-laptop-3 {
+		position: relative;
+	}
+	.elementor-element.elementor-grid-laptop-3 .eael-filterable-gallery-item-wrap {
+		width: 33.3333%;
+		float: left;
+	}
+	.elementor-element.elementor-grid-laptop-3 .eael-filterable-gallery-item-wrap:nth-of-type(3n) {
+		margin-right: 0 !important;
+	}
+	.elementor-element.elementor-grid-laptop-3 .eael-filterable-gallery-item-wrap:nth-of-type(3n+1) {
+		clear: left;
+	}
+	.elementor-element.elementor-grid-laptop-4 {
+		position: relative;
+	}
+	.elementor-element.elementor-grid-laptop-4 .eael-filterable-gallery-item-wrap {
+		width: 25%;
+		float: left;
+	}
+	.elementor-element.elementor-grid-laptop-4 .eael-filterable-gallery-item-wrap:nth-of-type(4n) {
+		margin-right: 0 !important;
+	}
+	.elementor-element.elementor-grid-laptop-4 .eael-filterable-gallery-item-wrap:nth-of-type(4n+1) {
+		clear: left;
+	}
+	.elementor-element.elementor-grid-laptop-5 {
+		position: relative;
+	}
+	.elementor-element.elementor-grid-laptop-5 .pp-logo-grid {
+		margin-right: -5px;
+	}
+	.elementor-element.elementor-grid-laptop-5 .eael-filterable-gallery-item-wrap {
+		width: 20%;
+		float: left;
+	}
+	.elementor-element.elementor-grid-laptop-5 .eael-filterable-gallery-item-wrap:nth-of-type(5n) {
+		margin-right: 0 !important;
+	}
+	.elementor-element.elementor-grid-laptop-5 .eael-filterable-gallery-item-wrap:nth-of-type(5n+1) {
+		clear: left;
+	}
+	.elementor-element.elementor-grid-laptop-6 {
+		position: relative;
+	}
+	.elementor-element.elementor-grid-laptop-6 .pp-logo-grid {
+		margin-right: -6px;
+	}
+	.elementor-element.elementor-grid-laptop-6 .eael-filterable-gallery-item-wrap {
+		width: 16.65%;
+		float: left;
+	}
+	.elementor-element.elementor-grid-laptop-6 .eael-filterable-gallery-item-wrap:nth-of-type(6n) {
+		margin-right: 0 !important;
+	}
+	.elementor-element.elementor-grid-laptop-6 .eael-filterable-gallery-item-wrap:nth-of-type(6n+1) {
 		clear: left;
 	}
 }
