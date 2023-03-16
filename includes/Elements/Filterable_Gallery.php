@@ -3045,7 +3045,7 @@ class Filterable_Gallery extends Widget_Base
         }
 
         if (!empty($icon_url)) {
-            $html .= '<img src="' . esc_url($icon_url) . '">';
+            $html .= '<img src="' . esc_url($icon_url) . '" alt="eael-fg-video-play-icon" >';
         }
 
         $html .= '</a>';
