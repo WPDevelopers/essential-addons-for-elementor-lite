@@ -6,7 +6,9 @@ jQuery(window).on("elementor/frontend/init", function () {
 			input         = $scope.find("#fg-search-box-input"),
 			searchRegex,
 			buttonFilter,
-			timer;
+			timer,
+			fg_mfp_counter_text = localize.eael_translate_text.fg_mfp_counter_text;
+			fg_mfp_counter_text = fg_mfp_counter_text ? '%curr% '+fg_mfp_counter_text+' %total%' : '%curr% of %total%';
 
 		if (form.length) {
 			form.on("submit", function (e) {
@@ -67,7 +69,8 @@ jQuery(window).on("elementor/frontend/init", function () {
 				delegate: ".eael-magnific-link.active",
 				type: "image",
 				gallery: {
-					enabled: $gallery_enabled
+					enabled: $gallery_enabled,
+					tCounter: fg_mfp_counter_text,
 				},
 				image: {
 					titleSrc: function (item) {

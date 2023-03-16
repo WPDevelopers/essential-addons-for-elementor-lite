@@ -381,6 +381,7 @@ class Asset_Builder {
 				'invalid_text'  => esc_html__( 'Invalid', 'essential-addons-for-elementor-lite' ),
 				'billing_text'  => esc_html__( 'Billing', 'essential-addons-for-elementor-lite' ),
 				'shipping_text' => esc_html__( 'Shipping', 'essential-addons-for-elementor-lite' ),
+                'fg_mfp_counter_text' => apply_filters( 'eael/filterble-gallery/mfp-counter-text', __( 'of', 'essential-addons-for-elementor-lite' ) ),
 			],
 			'page_permalink'     => get_the_permalink(),
 			'cart_redirectition' => get_option( 'woocommerce_cart_redirect_after_add' ),
