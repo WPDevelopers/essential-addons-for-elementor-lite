@@ -279,9 +279,6 @@ class Simple_Menu extends Widget_Base
             [
                 'label' => __('Hamburger Menu', 'essential-addons-for-elementor-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
-                'condition' => [
-	                'eael_simple_menu_layout' => ['horizontal'],
-                ],
             ]
         );
 	    $this->add_responsive_control(
