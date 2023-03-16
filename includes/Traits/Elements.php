@@ -329,6 +329,40 @@ trait Elements {
 		return $config;
 	}
 
+	public function eael_is_theme_builder_archive_template( $type = 'archive' ){
+		$is_archive_template = false;
+
+		if ( class_exists( 'ElementorPro\Modules\ThemeBuilder\Module' ) ) {
+			$conditions_manager = \ElementorPro\Plugin::instance()->modules_manager->get_modules( 'theme-builder' )->get_conditions_manager();
+		
+			if( ! empty( $conditions_manager->get_documents_for_location( 'archive') ) || ! empty( $conditions_manager->get_documents_for_location( 'single') ) ) {
+				$is_archive_template = true;
+			}
+		}
+
+		return $is_archive_template;
+	}
+
+	public function eael_get_theme_builder_archive_template_id(){
+		$template_id = 0;
+
+		if ( class_exists( 'ElementorPro\Modules\ThemeBuilder\Module' ) ) {
+			if ( $this->eael_is_theme_builder_archive_template() ) {
+				$page_body_classes = get_body_class();
+
+				if( is_array( $page_body_classes ) && count( $page_body_classes ) ){
+					foreach( $page_body_classes as $page_body_class){
+						if ( strpos( $page_body_class, 'elementor-page-' ) !== FALSE ) {
+							$template_id = intval( str_replace('elementor-page-', '', $page_body_class) );
+						} 
+					}
+				}
+			}
+		}
+
+		return $template_id;
+	}
+
 	/**
 	 * Inject global extension html.
 	 *
@@ -345,12 +379,22 @@ trait Elements {
 
 		$post_id         = get_the_ID();
 		$html            = '';
-		$global_settings = $setting_data = $document = [];
+		$global_settings = $settings_data = $document = [];
 
 		if ( $this->get_settings( 'reading-progress' ) || $this->get_settings( 'table-of-content' ) || $this->get_settings( 'scroll-to-top' ) ) {
 			$html            = '';
 			$global_settings = get_option( 'eael_global_settings' );
-			$document        = Plugin::$instance->documents->get( $post_id, false );
+
+			$is_archive_template = $this->eael_is_theme_builder_archive_template();
+			if( ! empty ( $is_archive_template ) ){
+				$template_id = $this->eael_get_theme_builder_archive_template_id();
+
+				if ( ! empty( $template_id ) ) {
+					$post_id = $template_id;
+				}
+			}
+
+			$document = Plugin::$instance->documents->get( $post_id, false );
 
 			if ( is_object( $document ) ) {
 				$settings_data = $document->get_settings();
