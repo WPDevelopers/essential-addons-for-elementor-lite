@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.1
 Requires PHP: 7.0
-Stable tag: 5.6.0
+Stable tag: 5.6.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -243,6 +243,14 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.6.1 - 12/03/2023 =
+
+- Fixed: Throwing Fatal error on PHP 8.1 for specific servers
+- Fixed: Throwing fatal error when trying to save Elementor Template with Conditions while WPML is activated
+- Improved: EA Product Grid | Added controller to show specific products
+- Improved: EA Product Grid | Filter Products based on status
+- Few minor bug fixes & improvements
 
 = 5.6.0 - 28/02/2023 =
 
