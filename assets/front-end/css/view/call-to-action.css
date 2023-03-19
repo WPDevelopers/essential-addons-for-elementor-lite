@@ -265,7 +265,7 @@
 
 @media only screen and (max-width: 768px) {
   .eael-call-to-action.cta-flex,
-  .eael-call-to-action.cta-icon-flex {
+.eael-call-to-action.cta-icon-flex {
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
   }
@@ -283,7 +283,7 @@
     text-align: center;
   }
   .eael-call-to-action.cta-flex .content,
-  .eael-call-to-action.cta-icon-flex .content {
+.eael-call-to-action.cta-icon-flex .content {
     -webkit-box-flex: 1;
         -ms-flex-positive: 1;
             flex-grow: 1;
@@ -291,7 +291,7 @@
     padding: 0px;
   }
   .eael-call-to-action.cta-flex .action,
-  .eael-call-to-action.cta-icon-flex .action {
+.eael-call-to-action.cta-icon-flex .action {
     text-align: center;
     padding-top: 0px;
   }
