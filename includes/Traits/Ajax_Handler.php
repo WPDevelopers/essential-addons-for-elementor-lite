@@ -148,9 +148,31 @@ trait Ajax_Handler {
 			];
 
 			if ( strpos($args['tax_query']['taxonomy'], '|') !== false ) {
-				$tags_query = true;
-				$cats_query = true;
-				//Query for both
+				//Query for category and tag
+				$args_multiple['tax_query'] = [];
+
+                if( isset( $args['tax_query']['terms'] ) ){
+					$args_multiple['tax_query'][] = [
+						'taxonomy' => 'product_cat',
+						'field' => 'term_id',
+						'terms' => $args['tax_query']['terms'],
+					];
+				}
+				
+				if( isset( $args['tax_query']['terms_tag'] ) ){
+					$args_multiple['tax_query'][] = [
+						'taxonomy' => 'product_tag',
+						'field' => 'term_id',
+						'terms' => $args['tax_query']['terms_tag'],
+					];
+				}
+                
+
+                if ( count( $args_multiple['tax_query'] ) ) {
+                    $args_multiple['tax_query']['relation'] = 'AND';
+                }
+
+				$args['tax_query'] = $args_multiple['tax_query'];
 			}
 
 			if( isset( $args['tax_query']['terms_tag'] ) ){
