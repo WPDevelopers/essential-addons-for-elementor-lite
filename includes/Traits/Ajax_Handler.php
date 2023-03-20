@@ -646,7 +646,7 @@ trait Ajax_Handler {
 
 			$args['tax_query'] = $this->eael_terms_query_multiple( $args['tax_query'] );
 		}
-
+		
 		$template_info = $this->eael_sanitize_template_param( $_REQUEST['template_info'] );
 
 		if ( $template_info ) {
@@ -719,8 +719,11 @@ trait Ajax_Handler {
 
 			$args_tax_query = $args_multiple['tax_query'];
 		}
-
-		if( isset( $args_tax_query['terms_tag'] ) ){
+		
+		if( isset( $args_tax_query[0]['terms_tag'] ) ){
+			if( 'product_tag' === $args_tax_query[0]['taxonomy'] ){
+				$args_tax_query[0]['terms'] = $args_tax_query[0]['terms_tag'];
+			}
 			unset($args_tax_query['terms_tag']);
 		}
 
