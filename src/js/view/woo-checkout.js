@@ -113,6 +113,9 @@ jQuery(document.body).on('country_to_state_changing', function(event, country, w
 		_wrapper = typeof _wrapper !== 'undefined' ? _wrapper : wrapper;
 		$.each(checkout_keys[type], function (field_key, form_class){
 			let $fieldHtml = _wrapper.find(`#${field_key}_field`);
+			if ( $fieldHtml.length === 0 ){
+				 $fieldHtml = _wrapper.find(`input[name='${field_key}']`).closest('p');
+			}
 			$fieldHtml.removeClass('form-row-first form-row-last form-row-wide').addClass(form_class);
 			$(`#eael-wc-${type}-reordered-fields .eael-woo-${type}-fields`).append($fieldHtml);
 		});
