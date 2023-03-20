@@ -690,29 +690,31 @@ trait Ajax_Handler {
 	}
 
 	public function eael_terms_query_multiple( $args_tax_query = [] ){
-		if ( strpos($args_tax_query['taxonomy'], '|') !== false ) {
+		if ( strpos($args_tax_query[0]['taxonomy'], '|') !== false ) {
+			$args_tax_query_item = $args_tax_query[0];
+			
 			//Query for category and tag
 			$args_multiple['tax_query'] = [];
 
-			if( isset( $args_tax_query['terms'] ) ){
+			if( isset( $args_tax_query_item['terms'] ) ){
 				$args_multiple['tax_query'][] = [
 					'taxonomy' => 'product_cat',
 					'field' => 'term_id',
-					'terms' => $args_tax_query['terms'],
+					'terms' => $args_tax_query_item['terms'],
 				];
 			}
 			
-			if( isset( $args_tax_query['terms_tag'] ) ){
+			if( isset( $args_tax_query_item['terms_tag'] ) ){
 				$args_multiple['tax_query'][] = [
 					'taxonomy' => 'product_tag',
 					'field' => 'term_id',
-					'terms' => $args_tax_query['terms_tag'],
+					'terms' => $args_tax_query_item['terms_tag'],
 				];
 			}
 			
 
 			if ( count( $args_multiple['tax_query'] ) ) {
-				$args_multiple['tax_query']['relation'] = 'AND';
+				$args_multiple['tax_query']['relation'] = 'OR';
 			}
 
 			$args_tax_query = $args_multiple['tax_query'];
