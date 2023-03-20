@@ -2679,20 +2679,34 @@ class Woo_Product_Gallery extends Widget_Base {
 
 			$product_cats_data = ! empty( $product_cats ) ? json_encode( $product_cats ) : '';
 			$product_tags_items_data = ! empty( $product_tags_items ) ? json_encode( $product_tags_items ) : '';
-			
+
 			echo '<li><a href="javascript:;" data-taxonomy="' . esc_attr( $all_taxonomy ) . '" data-page="1" data-tagid=' . esc_attr( $product_tags_items_data ) . ' data-id=' . esc_attr( $product_cats_data ) .
 			     ' class="active post-list-filter-item post-list-cat-'
 			     . $this->get_id() . '">' .$show_all_cat_thumb. '' . __( $settings[ 'eael_woo_product_gallery_terms_all_text' ], 'essential-addons-for-elementor-lite' ) . '</a></li>';
 		}
 
-		// Category retrieve
-		$catargs            = array(
-			'order'      => 'ASC',
-			'hide_empty' => false,
-			'include'    => $product_cats,
-			'orderby'    => 'include',
-		);
-		$product_categories = get_terms( 'product_cat', $catargs );
+		// Category and tag retrieve
+		$product_categories = $product_tags = [];
+
+		if ( ! empty( $product_cats ) ) {
+			$catargs	= array(
+				'order'      => 'ASC',
+				'hide_empty' => false,
+				'include'    => $product_cats,
+				'orderby'    => 'include',
+			);
+			$product_categories = get_terms( 'product_cat', $catargs );
+		}
+
+		if ( ! empty( $product_tags_items ) ) {
+			$tagargs	= array(
+				'order'      => 'ASC',
+				'hide_empty' => false,
+				'include'    => $product_tags_items,
+				'orderby'    => 'include',
+			);
+			$product_tags = get_terms( 'product_tag', $tagargs );
+		}
 
 		if ( !empty( $product_cats ) && count( $product_categories ) > 0 ) {
 			foreach ( $product_categories as $category ) {
