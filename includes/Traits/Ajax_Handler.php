@@ -724,7 +724,7 @@ trait Ajax_Handler {
 			if( 'product_tag' === $args_tax_query[0]['taxonomy'] ){
 				$args_tax_query[0]['terms'] = $args_tax_query[0]['terms_tag'];
 			}
-			unset($args_tax_query['terms_tag']);
+			unset($args_tax_query[0]['terms_tag']);
 		}
 
 		return $args_tax_query;
