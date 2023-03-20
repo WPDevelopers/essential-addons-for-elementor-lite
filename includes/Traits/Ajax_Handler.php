@@ -146,6 +146,16 @@ trait Ajax_Handler {
 			$args['tax_query'] = [
 				$this->sanitize_taxonomy_data( $_REQUEST['taxonomy'] ),
 			];
+
+			if ( strpos($args['tax_query']['taxonomy'], '|') !== false ) {
+				$tags_query = true;
+				$cats_query = true;
+				//Query for both
+			}
+
+			if( isset( $args['tax_query']['terms_tag'] ) ){
+				unset($args['tax_query']['terms_tag']);
+			}
 		}
 
 		if ( $class == '\Essential_Addons_Elementor\Elements\Post_Grid' ) {
