@@ -123,8 +123,6 @@ class Filterable_Gallery extends Widget_Base
                 'label' => __('Columns', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => '3',
-                'widescreen_default' => '4',
-                'laptop_default' => '3',
                 'tablet_default' => '2',
                 'mobile_default' => '1',
                 'options' => [
