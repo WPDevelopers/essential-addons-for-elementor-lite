@@ -2647,7 +2647,10 @@ class Woo_Product_Gallery extends Widget_Base {
 		$get_product_cats = $settings[ 'eael_product_gallery_categories' ];
 		$product_cats     = str_replace( ' ', '', $get_product_cats );
 
-		if ( $settings[ 'eael_woo_product_gallery_terms_show_all' ] == '' && empty( $get_product_cats ) ) {
+		$get_product_tags = $settings[ 'eael_product_gallery_tags' ];
+		$product_tags_items = str_replace( ' ', '', $get_product_tags );
+
+		if ( $settings[ 'eael_woo_product_gallery_terms_show_all' ] == '' && empty( $get_product_cats ) && empty( $get_product_tags ) ) {
 			return;
 		}
 
@@ -2659,10 +2662,13 @@ class Woo_Product_Gallery extends Widget_Base {
 				$this->get_filename_only( $template ), 'name'                                                                                        => $this->process_directory_name() ], 1 ) . '  data-nonce="' . wp_create_nonce( 'eael_product_gallery' ) . '" data-page-id="' . $this->page_id . '" data-widget-id="' . $this->get_id() . '" data-widget="' . $this->get_id() . '" data-class="' . get_class( $this ) . '" data-args="' . http_build_query( $args ) . '" data-page="1">';
 
 		if ( $settings[ 'eael_woo_product_gallery_terms_show_all' ] == 'yes' ) {
-			if ( empty( $product_cats ) ) {
-				$all_taxonomy = 'all';
-			} else {
+			$all_taxonomy = 'all';
+			if ( ! empty( $product_cats ) && ! empty( $product_tags_items ) ) {
+				$all_taxonomy = 'product_cat|product_tag';
+			} else if ( ! empty( $product_cats ) ) {
 				$all_taxonomy = 'product_cat';
+			} else if ( ! empty( $product_tags_items ) ) {
+				$all_taxonomy = 'product_tag';
 			}
 
 			if ( $show_cat_thumb && !empty($settings['eael_all_tab_thumb']['url'])) {
@@ -2671,8 +2677,10 @@ class Woo_Product_Gallery extends Widget_Base {
 				$show_all_cat_thumb = '';
 			}
 
-
-			echo '<li><a href="javascript:;" data-taxonomy="' . $all_taxonomy . '" data-page="1" data-id=' . json_encode( $product_cats ) .
+			$product_cats_data = ! empty( $product_cats ) ? json_encode( $product_cats ) : '';
+			$product_tags_items_data = ! empty( $product_tags_items ) ? json_encode( $product_tags_items ) : '';
+			
+			echo '<li><a href="javascript:;" data-taxonomy="' . esc_attr( $all_taxonomy ) . '" data-page="1" data-tagid=' . esc_attr( $product_tags_items_data ) . ' data-id=' . esc_attr( $product_cats_data ) .
 			     ' class="active post-list-filter-item post-list-cat-'
 			     . $this->get_id() . '">' .$show_all_cat_thumb. '' . __( $settings[ 'eael_woo_product_gallery_terms_all_text' ], 'essential-addons-for-elementor-lite' ) . '</a></li>';
 		}
