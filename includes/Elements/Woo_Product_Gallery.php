@@ -268,13 +268,13 @@ class Woo_Product_Gallery extends Widget_Base {
 		$this->add_control(
 			'eael_woo_product_gallery_terms_thumb',
 			[
-				'label'        => __( 'Show Category Thumbnail', 'essential-addons-for-elementor-lite' ),
+				'label'        => __( 'Show Terms Thumbnail', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'default'      => 'no',
 				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
-				'description'  => __( 'Display thumbnail if a category has a thumbnail.', 'essential-addons-for-elementor-lite' ),
+				'description'  => __( 'Display thumbnail if a term (Category/Tag) has a thumbnail.', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 
@@ -2696,6 +2696,24 @@ class Woo_Product_Gallery extends Widget_Base {
 				'orderby'    => 'include',
 			);
 			$product_categories = get_terms( 'product_cat', $catargs );
+
+			if ( count( $product_categories ) > 0 ) {
+				foreach ( $product_categories as $category ) {
+					$thumbnail_id = get_term_meta( $category->term_id, 'thumbnail_id', true );
+					$image_url    = wp_get_attachment_url( $thumbnail_id );
+	
+					if ( $show_cat_thumb && $image_url ) {
+						$show_cat_thumb_tag = '<img src="' . $image_url . '" />';
+					} else {
+						$show_cat_thumb_tag = '';
+					}
+	
+					echo '<li><a href="javascript:;" data-page="1" data-taxonomy="product_cat" data-terms='
+						 . json_encode
+						 ( [ $category->slug ] ) . ' data-id="'
+						 . $category->term_id . '" class="post-list-filter-item ">' . $show_cat_thumb_tag . '' . $category->name . '</a></li>';
+				}
+			}
 		}
 
 		if ( ! empty( $product_tags_items ) ) {
@@ -2706,23 +2724,23 @@ class Woo_Product_Gallery extends Widget_Base {
 				'orderby'    => 'include',
 			);
 			$product_tags = get_terms( 'product_tag', $tagargs );
-		}
 
-		if ( !empty( $product_cats ) && count( $product_categories ) > 0 ) {
-			foreach ( $product_categories as $category ) {
-				$thumbnail_id = get_term_meta( $category->term_id, 'thumbnail_id', true );
-				$image_url    = wp_get_attachment_url( $thumbnail_id );
-
-				if ( $show_cat_thumb && $image_url ) {
-					$show_cat_thumb_tag = '<img src="' . $image_url . '" />';
-				} else {
-					$show_cat_thumb_tag = '';
+			if ( count( $product_tags ) > 0 ) {
+				foreach ( $product_tags as $product_tag ) {
+					$thumbnail_id = get_term_meta( $product_tag->term_id, 'thumbnail_id', true );
+					$image_url    = wp_get_attachment_url( $thumbnail_id );
+	
+					if ( $show_cat_thumb && $image_url ) {
+						$show_cat_thumb_tag = '<img src="' . $image_url . '" />';
+					} else {
+						$show_cat_thumb_tag = '';
+					}
+	
+					echo '<li><a href="javascript:;" data-page="1" data-taxonomy="product_tag" data-terms='
+						 . json_encode
+						 ( [ $product_tag->slug ] ) . ' data-id="'
+						 . $product_tag->term_id . '" class="post-list-filter-item ">' . $show_cat_thumb_tag . '' . $product_tag->name . '</a></li>';
 				}
-
-				echo '<li><a href="javascript:;" data-page="1" data-taxonomy="product_cat" data-terms='
-				     . json_encode
-				     ( [ $category->slug ] ) . ' data-id="'
-				     . $category->term_id . '" class="post-list-filter-item ">' . $show_cat_thumb_tag . '' . $category->name . '</a></li>';
 			}
 		}
 
