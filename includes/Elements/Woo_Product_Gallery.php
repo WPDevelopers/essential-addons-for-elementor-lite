@@ -2520,51 +2520,51 @@ class Woo_Product_Gallery extends Widget_Base {
 		}
 
 		if ( !empty( $settings[ 'eael_product_gallery_categories' ] ) ) {
+			$args_tax_query_combined['relation'] = 'OR';
+			
 			if ( $settings[ 'eael_woo_product_gallery_terms_show_all' ] == '' ) {
 				if ( !empty( $product_cats ) && count( $product_categories ) > 0 ) {
-					$args[ 'tax_query' ] = [
-						[
-							'taxonomy' => 'product_cat',
-							'field'    => 'term_id',
-							'terms'    => $product_categories[ 0 ]->term_id,
-							'operator' => 'IN',
-						],
+					$args_tax_query_combined[] = [
+						'taxonomy' => 'product_cat',
+						'field'    => 'term_id',
+						'terms'    => $product_categories[ 0 ]->term_id,
+						'operator' => 'IN',
 					];
 				}
 			} else {
-				$args[ 'tax_query' ] = [
-					[
-						'taxonomy' => 'product_cat',
-						'field'    => 'term_id',
-						'terms'    => $settings[ 'eael_product_gallery_categories' ],
-						'operator' => 'IN',
-					],
+				$args_tax_query_combined[] = [
+					'taxonomy' => 'product_cat',
+					'field'    => 'term_id',
+					'terms'    => $settings[ 'eael_product_gallery_categories' ],
+					'operator' => 'IN',
 				];
 			}
 		}
 
 		if ( ! empty( $settings[ 'eael_product_gallery_tags' ] ) ) {
+			$args_tax_query_combined['relation'] = 'OR';
+
 			if ( $settings[ 'eael_woo_product_gallery_terms_show_all' ] == '' ) {
 				if ( ! empty( $product_tags_items ) && count( $product_tags ) > 0 ) {
-					$args[ 'tax_query' ] = [
-						[
-							'taxonomy' => 'product_tag',
-							'field'    => 'term_id',
-							'terms'    => $product_tags[ 0 ]->term_id,
-							'operator' => 'IN',
-						],
+					$args_tax_query_combined[] = [
+						'taxonomy' => 'product_tag',
+						'field'    => 'term_id',
+						'terms'    => $product_tags[ 0 ]->term_id,
+						'operator' => 'IN',
 					];
 				}
 			} else {
-				$args[ 'tax_query' ] = [
-					[
-						'taxonomy' => 'product_tag',
-						'field'    => 'term_id',
-						'terms'    => $settings[ 'eael_product_gallery_tags' ],
-						'operator' => 'IN',
-					],
+				$args_tax_query_combined[] = [
+					'taxonomy' => 'product_tag',
+					'field'    => 'term_id',
+					'terms'    => $settings[ 'eael_product_gallery_tags' ],
+					'operator' => 'IN',
 				];
 			}
+		}
+
+		if( isset( $args_tax_query_combined ) ){
+			$args[ 'tax_query' ][] = $args_tax_query_combined;
 		}
 
 		$args[ 'meta_query' ] = [ 'relation' => 'AND' ];
@@ -2618,6 +2618,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			$args[ 'orderby' ]  = 'meta_value_num';
 			$args[ 'order' ]    = 'DESC';
 		}
+
 		return $args;
 	}
 
