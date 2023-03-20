@@ -2681,8 +2681,8 @@ class Woo_Product_Gallery extends Widget_Base {
 			$product_cats_data = ! empty( $product_cats ) ? json_encode( $product_cats ) : '';
 			$product_tags_items_data = ! empty( $product_tags_items ) ? json_encode( $product_tags_items ) : '';
 
-			echo '<li><a href="javascript:;" data-taxonomy="' . esc_attr( $all_taxonomy ) . '" data-page="1" data-tagid="' . esc_attr( $product_tags_items_data ) . '" data-id=' . esc_attr( $product_cats_data ) .
-			     ' class="active post-list-filter-item post-list-cat-'
+			echo '<li><a href="javascript:;" data-taxonomy="' . esc_attr( $all_taxonomy ) . '" data-page="1" data-tagid="' . esc_attr( $product_tags_items_data ) . '" data-id="' . esc_attr( $product_cats_data ) .
+			     '" class="active post-list-filter-item post-list-cat-'
 			     . $this->get_id() . '">' .$show_all_cat_thumb. '' . __( $settings[ 'eael_woo_product_gallery_terms_all_text' ], 'essential-addons-for-elementor-lite' ) . '</a></li>';
 		}
 
