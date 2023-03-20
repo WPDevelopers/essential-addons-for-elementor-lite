@@ -147,37 +147,7 @@ trait Ajax_Handler {
 				$this->sanitize_taxonomy_data( $_REQUEST['taxonomy'] ),
 			];
 
-			if ( strpos($args['tax_query']['taxonomy'], '|') !== false ) {
-				//Query for category and tag
-				$args_multiple['tax_query'] = [];
-
-                if( isset( $args['tax_query']['terms'] ) ){
-					$args_multiple['tax_query'][] = [
-						'taxonomy' => 'product_cat',
-						'field' => 'term_id',
-						'terms' => $args['tax_query']['terms'],
-					];
-				}
-				
-				if( isset( $args['tax_query']['terms_tag'] ) ){
-					$args_multiple['tax_query'][] = [
-						'taxonomy' => 'product_tag',
-						'field' => 'term_id',
-						'terms' => $args['tax_query']['terms_tag'],
-					];
-				}
-                
-
-                if ( count( $args_multiple['tax_query'] ) ) {
-                    $args_multiple['tax_query']['relation'] = 'AND';
-                }
-
-				$args['tax_query'] = $args_multiple['tax_query'];
-			}
-
-			if( isset( $args['tax_query']['terms_tag'] ) ){
-				unset($args['tax_query']['terms_tag']);
-			}
+			$args['tax_query'] = $this->eael_terms_query_multiple( $args['tax_query'] );
 		}
 
 		if ( $class == '\Essential_Addons_Elementor\Elements\Post_Grid' ) {
@@ -673,6 +643,8 @@ trait Ajax_Handler {
 			$args['tax_query'] = [
 				$this->sanitize_taxonomy_data( $_REQUEST['taxonomy'] ),
 			];
+
+			$args['tax_query'] = $this->eael_terms_query_multiple( $args['tax_query'] );
 		}
 
 		$template_info = $this->eael_sanitize_template_param( $_REQUEST['template_info'] );
@@ -715,6 +687,42 @@ trait Ajax_Handler {
 			}
 		}
 		wp_die();
+	}
+
+	public function eael_terms_query_multiple( $args_tax_query = [] ){
+		if ( strpos($args_tax_query['taxonomy'], '|') !== false ) {
+			//Query for category and tag
+			$args_multiple['tax_query'] = [];
+
+			if( isset( $args_tax_query['terms'] ) ){
+				$args_multiple['tax_query'][] = [
+					'taxonomy' => 'product_cat',
+					'field' => 'term_id',
+					'terms' => $args_tax_query['terms'],
+				];
+			}
+			
+			if( isset( $args_tax_query['terms_tag'] ) ){
+				$args_multiple['tax_query'][] = [
+					'taxonomy' => 'product_tag',
+					'field' => 'term_id',
+					'terms' => $args_tax_query['terms_tag'],
+				];
+			}
+			
+
+			if ( count( $args_multiple['tax_query'] ) ) {
+				$args_multiple['tax_query']['relation'] = 'AND';
+			}
+
+			$args_tax_query = $args_multiple['tax_query'];
+		}
+
+		if( isset( $args_tax_query['terms_tag'] ) ){
+			unset($args_tax_query['terms_tag']);
+		}
+
+		return $args_tax_query;
 	}
 
 	/**
