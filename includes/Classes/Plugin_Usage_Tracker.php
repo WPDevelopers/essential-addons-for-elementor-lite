@@ -916,7 +916,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			foreach ( $post_ids as $post_id ) {
 				$ea_elements = get_post_meta( (int) $post_id, '_eael_widget_elements', true );
 				$el_controls = get_post_meta( (int) $post_id, '_elementor_controls_usage', true );
-				if ( empty( $ea_elements ) || ! is_array( $ea_elements ) ) {
+				if ( empty( $ea_elements ) || empty( $el_controls ) || ! is_array( $ea_elements ) || ! is_array( $el_controls ) ) {
 					continue;
 				}
 
