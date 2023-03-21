@@ -488,7 +488,7 @@ trait Helper
 
 			/*Added admin notice which is basically uses for display new promotion message*/
 			if ( get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG ) {
-				add_action( 'eael_admin_notices', array( $this, 'promotion_message_on_admin_screen' ) );
+				add_action( 'eael_admin_notices', array( $this, 'promotion_message_on_admin_screen' ), 1 );
 			}
 		}
 	}
