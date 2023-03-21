@@ -254,7 +254,7 @@ class SVG_Draw Extends Widget_Base
             [
                 'label' => esc_html__( 'Animation', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::SELECT,
-                'default' => 'none',
+                'default' => 'page-load',
                 'options' => [
                     'none' => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
                     'page-load' => esc_html__( 'On Page Load', 'essential-addons-for-elementor-lite' ),
@@ -304,7 +304,7 @@ class SVG_Draw Extends Widget_Base
                 'label_on' => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
                 'label_off' => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
                 'return_value' => 'yes',
-                'default' => 'no',
+                'default' => 'yes',
                 'condition' => [
                     'eael_svg_animation_on!' => [ 'page-scroll', 'none'],
                 ]
