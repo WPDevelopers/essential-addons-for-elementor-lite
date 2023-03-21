@@ -112,7 +112,7 @@ class Bootstrap
 
         // start plugin tracking
         if (!$this->pro_enabled) {
-            // $this->start_plugin_tracking();
+             $this->start_plugin_tracking();
         }
 
         // register extensions
