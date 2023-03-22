@@ -41,7 +41,7 @@
                     return;
 
                 _this.options = opts;
-                _this.$paths = _this.$elm.find('path');
+                _this.$paths = _this.$elm.find('path, circle, rect, polygon');
 
                 _this.totalDuration = opts.duration + (opts.stagger * _this.$paths.length);
                 _this.duration = opts.duration / _this.totalDuration;
