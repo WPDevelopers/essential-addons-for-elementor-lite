@@ -213,10 +213,10 @@ class SVG_Draw Extends Widget_Base
             [
                 'label' => esc_html__( 'Source', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::SELECT,
-                'default' => 'custom',
+                'default' => 'icon',
                 'options' => [
                     'icon' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
-                    'custom' => esc_html__( 'Custom HTML', 'essential-addons-for-elementor-lite' ),
+                    'custom' => esc_html__( 'Custom SVG', 'essential-addons-for-elementor-lite' ),
                 ],
             ]
         );
@@ -226,10 +226,10 @@ class SVG_Draw Extends Widget_Base
             [
                 'label' => esc_html__( 'Icon', 'textdomain' ),
                 'type' => \Elementor\Controls_Manager::ICONS,
-                'default' => [
-                    'value' => 'fas fa-circle',
-                    'library' => 'fa-solid',
-                ],
+//                'default' => [
+//                    'value' => 'fas fa-circle',
+//                    'library' => 'fa-solid',
+//                ],
                 'condition' => [
                     'eael_svg_src' => 'icon'
                 ]
@@ -652,11 +652,15 @@ class SVG_Draw Extends Widget_Base
 
         if ( $settings['eael_svg_src'] === 'icon' ):
 
-            if ( $settings['eael_svg_icon']['library'] === 'svg' ):
+            if ( $settings['eael_svg_icon']['library'] === 'svg' ) {
                 Icons_Manager::render_icon($settings['eael_svg_icon'], ['aria-hidden' => 'true', 'class' => ['eael-svg-drow-wrapper']]);
-            else:
-               echo Helper::get_svg_by_icon( $settings['eael_svg_icon'] );
-            endif;
+            }
+            else if( $settings['eael_svg_icon']['library'] === '' && $settings['eael_svg_icon']['value'] === '' ){
+                echo $this->default_custom_svg();
+            }
+            else {
+                echo Helper::get_svg_by_icon($settings['eael_svg_icon']);
+            }
 
         else:
             echo $svg_html;
