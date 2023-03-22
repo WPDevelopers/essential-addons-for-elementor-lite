@@ -995,7 +995,7 @@ class Pricing_Table extends Widget_Base
         $this->add_control(
             'eael_pricing_table_header_bg_heading',
             [
-                'label'     => esc_html__('Background', 'essential-addons-elementor'),
+                'label'     => esc_html__('Background', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::HEADING,
                 'separator' => 'before',
                 'condition' => [

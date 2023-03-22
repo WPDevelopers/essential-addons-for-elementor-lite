@@ -1227,6 +1227,49 @@ class Helper
 	            'id'    => [],
 	            'style' => [],
             ],
+            'table' => [
+	            'class' => [],
+	            'id'    => [],
+	            'style' => [],
+                'dir'   => [],
+                'align' => [],
+            ],
+            'thead' => [
+	            'class' => [],
+	            'id'    => [],
+	            'style' => [],
+                'align' => [],
+            ],
+            'tbody' => [
+	            'class' => [],
+	            'id'    => [],
+	            'style' => [],
+                'align' => [],
+            ],
+            'tfoot' => [
+	            'class' => [],
+	            'id'    => [],
+	            'style' => [],
+                'align' => [],
+            ],
+            'th' => [
+	            'class' => [],
+	            'id'    => [],
+	            'style' => [],
+                'align' => [],
+            ],
+            'tr' => [
+	            'class' => [],
+	            'id'    => [],
+	            'style' => [],
+                'align' => [],
+            ],
+            'td' => [
+	            'class' => [],
+	            'id'    => [],
+	            'style' => [],
+                'align' => [],
+            ],
         ];
     }
 

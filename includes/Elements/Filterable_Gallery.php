@@ -12,6 +12,7 @@ use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
+use Elementor\Plugin;
 use \Elementor\Widget_Base;
 use \Elementor\Repeater;
 use \Elementor\Group_Control_Background;
@@ -132,8 +133,6 @@ class Filterable_Gallery extends Widget_Base
                     '5' => '5',
                     '6' => '6',
                 ],
-                'prefix_class' => 'elementor-grid%s-',
-                'frontend_available' => true,
             ]
         );
         
@@ -394,9 +393,36 @@ class Filterable_Gallery extends Widget_Base
                         'name' => 'eael_fg_control',
                         'label' => esc_html__('List Item', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::TEXT,
-                        'dynamic'   => ['active' => true],
+                        'dynamic' => ['active' => true],
                         'label_block' => true,
                         'default' => esc_html__('Gallery Item', 'essential-addons-for-elementor-lite'),
+                    ],
+                    [
+                        'name' => 'eael_fg_control_custom_id',
+                        'label' => esc_html__('Custom ID', 'essential-addons-for-elementor-lite'),
+                        'description' => esc_html__('Adding a custom ID will function as an anchor tag. For instance, if you input "test" as your custom ID, the link will change to "https://www.example.com/#test" and it will immediately open the corresponding tab.', 'essential-addons-for-elementor-lite'),
+                        'type' => Controls_Manager::TEXT,
+                        'dynamic' => ['active' => true],
+                        'label_block' => true,
+                        'default' => esc_html__('', 'essential-addons-for-elementor-lite'),
+                    ],
+                    [
+                        'name' => 'eael_fg_custom_label',
+                        'label' => __('Custom Label', 'essential-addons-for-elementor-lite'),
+                        'type' => Controls_Manager::SWITCHER,
+                        'dynamic' => ['active' => true],
+                        'return' => 'yes',
+                        'default' => '',
+                    ],
+                    [
+                        'name' => 'eael_fg_control_label',
+                        'label' => esc_html__('Item Label', 'essential-addons-for-elementor-lite'),
+                        'type' => Controls_Manager::TEXT,
+                        'dynamic' => ['active' => true],
+                        'label_block' => true,
+                        'condition' => [
+                            'eael_fg_custom_label' => 'yes',
+                        ],
                     ],
                 ],
                 'title_field' => '{{eael_fg_control}}',
@@ -2808,9 +2834,10 @@ class Filterable_Gallery extends Widget_Base
 
                     foreach ($settings['eael_fg_controls'] as $key => $control) :
                         $sorter_filter = $this->sorter_class($control['eael_fg_control']);
-                    ?><li data-load-more-status="0" data-first-init="0" class="control <?php if ($key == 0 && empty($settings['eael_fg_all_label_text'])) {
+                        $sorter_label  = $control['eael_fg_control_label'] != '' ? $control['eael_fg_control_label'] : $control['eael_fg_control'];
+                    ?><li <?php if( ! empty( $control['eael_fg_control_custom_id'] ) ) : ?> id="<?php echo esc_attr( $control['eael_fg_control_custom_id'] ); ?>" <?php endif; ?> data-load-more-status="0" data-first-init="0" class="control <?php if ($key == 0 && empty($settings['eael_fg_all_label_text'])) {
                             echo 'active';
-                        } ?>" data-filter=".eael-cf-<?php echo esc_attr($sorter_filter); ?>"><?php echo esc_html( $control['eael_fg_control'] ); ?></li><?php
+                        } ?>" data-filter=".eael-cf-<?php echo esc_attr($sorter_filter); ?>"><?php echo esc_html( $sorter_label ); ?></li><?php
                     endforeach;
                 ?></ul>
             </div>
@@ -3045,7 +3072,7 @@ class Filterable_Gallery extends Widget_Base
         }
 
         if (!empty($icon_url)) {
-            $html .= '<img src="' . esc_url($icon_url) . '">';
+            $html .= '<img src="' . esc_url($icon_url) . '" alt="eael-fg-video-play-icon" >';
         }
 
         $html .= '</a>';
@@ -3248,8 +3275,8 @@ class Filterable_Gallery extends Widget_Base
             if ($settings['eael_section_fg_full_image_clickable']) {
                 $html .= $this->gallery_item_full_image_clickable_content($settings, $item);
             }
-            
-            if (isset($item['video_gallery_switch']) && ($item['video_gallery_switch'] === 'true') 
+
+            if (isset($item['video_gallery_switch']) && ($item['video_gallery_switch'] === 'true')
             && isset($settings['eael_section_fg_full_image_clickable']) && $settings['eael_section_fg_full_image_clickable'] === 'yes') {
                 $html .= '<div class="gallery-item-thumbnail-wrap video_gallery_switch_on">';
             } else {
@@ -3289,6 +3316,33 @@ class Filterable_Gallery extends Widget_Base
         return $gallery_markup;
     }
 
+    protected function render_media_query( $settings ){
+        $media_query = '';
+        $section_id  = $this->get_id();
+        $breakpoints = method_exists( Plugin::$instance->breakpoints, 'get_breakpoints_config' ) ? Plugin::$instance->breakpoints->get_breakpoints_config() : [];
+        $brp_desktop = isset( $breakpoints['widescreen'] ) ? $breakpoints['widescreen']['value'] - 1 : 2400;
+
+        $media_query .= '@media only screen and (max-width: '. $brp_desktop .'px) {
+					.elementor-element.elementor-element-'. $section_id .' .eael-filterable-gallery-item-wrap {
+					        width: '. 100/$settings["columns"] .'%;
+					    }
+					}';
+        if ( !empty( $breakpoints ) ){
+            $breakpoints = array_reverse( $breakpoints );
+            foreach ( $breakpoints as $device => $breakpoint ){
+                if ( !empty( $settings['columns_'.$device] ) && $breakpoint['is_enabled'] ){
+                    $media_query .= '@media only screen and ('. $breakpoint['direction'] .'-width: '. $breakpoint['value'] .'px) {
+					.elementor-element.elementor-element-'. $section_id .'  .eael-filterable-gallery-item-wrap {
+					        width: '. 100/$settings["columns_".$device] .'%;
+					    }
+					}';
+                }
+            }
+        }
+
+        echo '<style id="eael-fg-inline-css-'. $section_id .'">'. __( $media_query ) .'</style>';
+    }
+
     protected function render() {
         $settings = $this->get_settings_for_display();
 
@@ -3320,7 +3374,11 @@ class Filterable_Gallery extends Widget_Base
         } else {
             $gallery_settings['post_id'] = get_the_ID();
         }
-        
+        if ( method_exists( \Elementor\Plugin::$instance->breakpoints, 'get_breakpoints_config' ) && ! empty( $breakpoints = \Elementor\Plugin::$instance->breakpoints->get_breakpoints_config() ) ) {
+
+            $this->add_render_attribute('gallery', 'data-breakpoints', wp_json_encode( $breakpoints ) );
+        }
+
         $gallery_settings['widget_id'] = $this->get_id();
         
         $no_more_items_text = Helper::eael_wp_kses($settings['nomore_items_text']);
@@ -3343,6 +3401,7 @@ class Filterable_Gallery extends Widget_Base
             $this->add_render_attribute( 'gallery-items-wrap', 'data-gallery-items', wp_json_encode( $this->render_gallery_items(), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE ) );
         }
         $this->add_render_attribute('gallery-items-wrap', 'data-init-show', esc_attr($settings['eael_fg_items_to_show']));
+        $this->render_media_query( $settings );
         ?>
         <div <?php echo $this->get_render_attribute_string('gallery'); ?>>
             
