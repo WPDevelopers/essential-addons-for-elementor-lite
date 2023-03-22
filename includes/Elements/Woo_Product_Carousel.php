@@ -373,20 +373,38 @@ class Woo_Product_Carousel extends Widget_Base {
             ]
         );
 
-	    $this->add_control(
-		    'eael_product_carousel_not_found_msg',
-		    [
-			    'label'     => __( 'Not Found Message', 'essential-addons-for-elementor-lite' ),
-			    'type'      => Controls_Manager::TEXT,
-			    'default'   => __( 'Products Not Found', 'essential-addons-for-elementor-lite' ),
-			    'separator' => 'before'
-		    ]
-	    );
+        $this->add_control(
+            'eael_product_button_appearance',
+            [
+                'label' => __('Button Appears', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'hover',
+                'separator' => 'before',
+                'options' => [
+                    'hover' => __('On Hover', 'essential-addons-for-elementor-lite'),
+                    'static' => __('Static', 'essential-addons-for-elementor-lite'),
+                    'hide' => __('No Buttons', 'essential-addons-for-elementor-lite'),
+                ],
+            ]
+        );
+        $this->add_control(
+            'eael_product_button_appearance_note_for_preset_4',
+            [
+                'label' => '',
+                'type' => \Elementor\Controls_Manager::RAW_HTML,
+                'raw' => esc_html__( 'Static option will not work for Preset 4.', 'essential-addons-for-elementor-lite' ),
+                'content_classes' => 'eael-warning',
+                'condition' => [
+                    'eael_dynamic_template_layout' => 'preset-4',
+                    'eael_product_button_appearance' => 'static',
+                ],
+            ]
+        );
 
 	    $this->add_control(
 		    'eael_product_carousel_quick_view',
 		    [
-			    'label'        => esc_html__( 'Show Quick view?', 'essential-addons-for-elementor-lite' ),
+			    'label'        => esc_html__( 'Show Quick View?', 'essential-addons-for-elementor-lite' ),
 			    'type'         => Controls_Manager::SWITCHER,
 			    'return_value' => 'yes',
 			    'default'      => 'yes',
@@ -396,10 +414,9 @@ class Woo_Product_Carousel extends Widget_Base {
         $this->add_control(
             'eael_product_quick_view_title_tag',
             [
-                'label' => __('Quick view Title Tag', 'essential-addons-for-elementor-lite'),
+                'label' => __('Quick View Title Tag', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'h1',
-                'separator' => 'after',
                 'options' => [
                     'h1' => __('H1', 'essential-addons-for-elementor-lite'),
                     'h2' => __('H2', 'essential-addons-for-elementor-lite'),
@@ -424,6 +441,7 @@ class Woo_Product_Carousel extends Widget_Base {
 			    'type' => Controls_Manager::SWITCHER,
 			    'return_value' => 'yes',
 			    'default' => 'no',
+                'separator' => 'before',
 		    ]
 	    );
 
@@ -435,6 +453,16 @@ class Woo_Product_Carousel extends Widget_Base {
                 'type' => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default' => 'no',
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_carousel_not_found_msg',
+            [
+                'label'     => __( 'Not Found Message', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::TEXT,
+                'default'   => __( 'Products Not Found', 'essential-addons-for-elementor-lite' ),
+                'separator' => 'before'
             ]
         );
 
@@ -1138,11 +1166,23 @@ class Woo_Product_Carousel extends Widget_Base {
         $this->add_control(
             'eael_product_carousel_price_color',
             [
-                'label'     => esc_html__( 'Product Price Color', 'essential-addons-for-elementor-lite' ),
+                'label'     => esc_html__( 'Regular Price Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-product-carousel .price, {{WRAPPER}} .eael-product-carousel .eael-product-price' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-carousel .price, {{WRAPPER}} .eael-product-carousel .eael-product-price .amount' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_carousel_sale_price_color',
+            [
+                'label'     => esc_html__( 'Sale Price Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-carousel .price del, {{WRAPPER}} .eael-product-carousel .eael-product-price del .amount' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -2825,6 +2865,7 @@ class Woo_Product_Carousel extends Widget_Base {
                     'eael-woo-product-carousel',
                     'swiper-container-' . esc_attr( $this->get_id() ),
                     'eael-product-appender-' . esc_attr( $this->get_id() ),
+                    $settings['eael_product_button_appearance'] ? 'eael-'.esc_attr( $settings['eael_product_button_appearance'] ).'-buttons' : ''
                 ],
                 'data-pagination' => '.swiper-pagination-' . esc_attr( $this->get_id() ),
                 'data-arrow-next' => '.swiper-button-next-' . esc_attr( $this->get_id() ),

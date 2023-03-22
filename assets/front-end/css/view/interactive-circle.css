@@ -237,14 +237,14 @@
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-info[data-items="4"] .eael-circle-item #eael-circle-item-3 {
   top: 85.35%;
-  left: 14.65%;
+  left: 85.35%;
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-info[data-items="4"] .eael-circle-item #eael-circle-item-4 {
   top: 85.35%;
-  left: 85.35%;
+  left: 14.65%;
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
@@ -265,14 +265,14 @@
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-info[data-items="5"] .eael-circle-item #eael-circle-item-3 {
   top: 90%;
-  left: 20%;
+  left: 80%;
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-info[data-items="5"] .eael-circle-item #eael-circle-item-4 {
   top: 90%;
-  left: 80%;
+  left: 20%;
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);

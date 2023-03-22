@@ -1517,7 +1517,7 @@ trait Controls
         $wb->start_controls_section(
             'section_terms_style',
             [
-                'label' => __('Terms', 'essential-addons-elementor'),
+                'label' => __('Terms', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_show_post_terms' => 'yes',
@@ -1528,7 +1528,7 @@ trait Controls
         $wb->add_control(
             'terms_color',
             [
-                'label' => __('Color', 'essential-addons-elementor'),
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -1541,7 +1541,7 @@ trait Controls
             Group_Control_Typography::get_type(),
             [
                 'name' => 'terms_typography',
-                'label' => __('Typography', 'essential-addons-elementor'),
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
                 'selector' => '{{WRAPPER}} .post-carousel-categories li a',
             ]
         );
@@ -1549,19 +1549,19 @@ trait Controls
         $wb->add_responsive_control(
             'terms_color_alignment',
             [
-                'label' => __('Alignment', 'essential-addons-elementor'),
+                'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => __('Left', 'essential-addons-elementor'),
+                        'title' => __('Left', 'essential-addons-for-elementor-lite'),
                         'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => __('Center', 'essential-addons-elementor'),
+                        'title' => __('Center', 'essential-addons-for-elementor-lite'),
                         'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
-                        'title' => __('Right', 'essential-addons-elementor'),
+                        'title' => __('Right', 'essential-addons-for-elementor-lite'),
                         'icon' => 'eicon-text-align-right',
                     ],
                 ],
@@ -1574,7 +1574,7 @@ trait Controls
         $wb->add_control(
             'terms_spacing',
             [
-                'label' => __('Spacing', 'essential-addons-elementor'),
+                'label' => __('Spacing', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
