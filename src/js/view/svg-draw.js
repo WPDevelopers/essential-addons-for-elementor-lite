@@ -12,10 +12,11 @@ var SVGDraw = function ($scope, $) {
         stepCount = 0,
         $doc = $(document),
         $win = $(window),
+        lines = $('path, circle, rect, polygon', svg_icon),
         max = $doc.height() - $win.height();
 
-    if ( settings.excludeFill === 'yes' ){
-        $('path', svg_icon).css('fill', '');
+    if ( settings.excludeStyle === 'yes' ){
+        lines.attr('style', '');
     }
 
     function dashArrayReset(){
