@@ -245,7 +245,7 @@ class SVG_Draw Extends Widget_Base
                     'eael_svg_src' => 'custom'
                 ],
                 'default' => $this->default_custom_svg(),
-                'description' => esc_html__( 'SVG code needs path elements to draw.', 'essential-addons-for-elementor-lite' ),
+                'description' => esc_html__( 'SVG draw works best on path elements.', 'essential-addons-for-elementor-lite' ),
             ]
         );
 
@@ -529,7 +529,7 @@ class SVG_Draw Extends Widget_Base
                     '{{WRAPPER}} svg rect' => 'stroke:{{VALUE}};',
                     '{{WRAPPER}} svg polygon' => 'stroke:{{VALUE}};',
                 ],
-                'default' => '#000000'
+                'default' => '#974CF3'
             ]
         );
 
@@ -545,7 +545,7 @@ class SVG_Draw Extends Widget_Base
                     '{{WRAPPER}} .elementor-widget-container .eael-svg-draw-container.fill-svg svg rect' => 'fill:{{VALUE}};',
                     '{{WRAPPER}} .elementor-widget-container .eael-svg-draw-container.fill-svg svg polygon' => 'fill:{{VALUE}};'
                 ],
-                'default' => '#FF677D',
+                'default' => '#D8C2F3',
                 'condition' => [
                     'eael_svg_fill!' => 'none'
                 ]
