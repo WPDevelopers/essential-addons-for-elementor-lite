@@ -688,6 +688,10 @@ class WPDeveloper_Setup_Wizard {
 						'title'       => __( 'NFT Gallery', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
 					],
+					[
+						'key'         => 'business-reviews',
+						'title'       => __( 'Business Reviews', 'essential-addons-for-elementor-lite' ),
+					],
 				]
 			],
 			'creative-elements'        => [
