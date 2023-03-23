@@ -1005,7 +1005,8 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#404040',
 				'selectors' => [
-					'{{WRAPPER}} .ea-woo-checkout-order-review .footer-content' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-woo-checkout-order-review .footer-content' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-woo-checkout-order-review .footer-content #shipping_method label' => 'color: {{VALUE}};',
 				],
 				'condition' => [
 					'ea_woo_checkout_layout' => 'default',
@@ -1312,7 +1313,9 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#404040',
 				'selectors' => [
-					'{{WRAPPER}} .woo-checkout-login, {{WRAPPER}} .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-info' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .woo-checkout-login' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-info' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-info .woocommerce-info-text' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1650,7 +1653,9 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#404040',
 				'selectors' => [
-					'{{WRAPPER}} .ea-woo-checkout .woo-checkout-coupon, {{WRAPPER}} .ea-woo-checkout .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-info' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .ea-woo-checkout .woo-checkout-coupon' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-woo-checkout .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-info' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-woo-checkout .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-info .woocommerce-info-text' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -2721,7 +2726,7 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#7866ff',
 				'selectors' => [
-					'{{WRAPPER}} #place_order' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} #place_order' => 'background-color: {{VALUE}};background: {{VALUE}};',
 				],
 			]
 		);
@@ -2761,7 +2766,7 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#7866ff',
 				'selectors' => [
-					'{{WRAPPER}} #place_order:hover' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} #place_order:hover' => 'background-color: {{VALUE}};background: {{VALUE}};',
 				],
 			]
 		);

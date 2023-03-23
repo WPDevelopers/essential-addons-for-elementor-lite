@@ -702,3 +702,10 @@
 .theme-dt-the7.popup-message-style .ea-woo-checkout .woocommerce-info .close-message:before {
   display: none !important;
 }
+.theme-dt-the7.eael-woo-checkout .woocommerce .woo-checkout-payment #payment .payment_methods .payment_box {
+  padding: 10px;
+}
+.theme-dt-the7 .ea-woo-checkout-btn-prev,
+.theme-dt-the7 .ea-woo-checkout-btn-next {
+  border: none;
+}

@@ -826,5 +826,12 @@ $base-font-size: 14px;
 			}
 		}
 	}
+	&.eael-woo-checkout .woocommerce .woo-checkout-payment #payment .payment_methods .payment_box{
+		padding: 10px;
+	}
+	.ea-woo-checkout-btn-prev,
+	.ea-woo-checkout-btn-next{
+		border: none;
+	}
 }
 
