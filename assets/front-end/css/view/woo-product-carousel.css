@@ -38,7 +38,11 @@
 .eael-woo-product-carousel-container .woocommerce ul.products.products[class*=columns-] li.product {
   width: 100%;
 }
-.eael-woo-product-carousel-container .eael-woo-product-carousel:not(.swiper-container-initialized) .eael-product-carousel {
+.eael-woo-product-carousel-container .eael-woo-product-carousel.swiper-8:not(.swiper-initialized) .eael-product-carousel {
+  width: 350px;
+  height: 450px;
+}
+.eael-woo-product-carousel-container .eael-woo-product-carousel.swiper-8-lower:not(.swiper-container-initialized) .eael-product-carousel {
   width: 350px;
   height: 450px;
 }
