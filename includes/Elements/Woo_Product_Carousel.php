@@ -2861,6 +2861,7 @@ class Woo_Product_Carousel extends Widget_Base {
             [
                 'class'           => [
                     'woocommerce',
+                    'swiper',
                     'swiper-container',
                     'eael-woo-product-carousel',
                     'swiper-container-' . esc_attr( $this->get_id() ),
@@ -3036,7 +3037,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		}
 
 		$this->add_render_attribute('eael_gallery_pagination_wrapper', [
-			'class' => ['swiper-container eael-woo-product-carousel-gallary-pagination', $visibility]
+			'class' => ['swiper swiper-container eael-woo-product-carousel-gallary-pagination', $visibility]
 		]);
 
 		if ( $settings['direction'] == 'right' ) {
