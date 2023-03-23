@@ -213,6 +213,14 @@
 	}
 }
 
+@supports (-webkit-appearance: none) {
+	.eael-animate-flip.eael-animate-left,
+	.eael-animate-flip.eael-animate-right,
+	.eael-animate-flip.eael-animate-up,
+	.eael-animate-flip.eael-animate-down {
+		transform-style: unset;
+	}
+}
 
 .eael-animate-flip.eael-animate-up.eael-elements-flip-box-container:hover .eael-elements-flip-box-flip-card,
 .eael-animate-flip.eael-animate-up .eael-elements-flip-box-rear-container {
