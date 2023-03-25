@@ -29,6 +29,10 @@ class advancedDataTable {
       // woocommerce
       this.initWooFeatures(table);
 
+      let isEscapedHtmlString = function (str) {
+        return /&[a-zA-Z]+;/.test(str);
+      }
+
       if ($(table).hasClass('ea-advanced-data-table-static')){
         $(table).find('th, td').each(function (){
           let text = $(this).text().replace("<script>", "").replace("</script>", "").replace("<script", "");
