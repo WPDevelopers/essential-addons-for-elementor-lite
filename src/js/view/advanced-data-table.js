@@ -33,11 +33,13 @@ class advancedDataTable {
         return /&[a-zA-Z]+;/.test(str);
       }
 
-      if ($(table).hasClass('ea-advanced-data-table-static')){
-        $(table).find('th, td').each(function (){
-          let text = $(this).text().replace("<script>", "").replace("</script>", "").replace("<script", "");
-          $(this).html(text);
-        })
+      if ($(table).hasClass('ea-advanced-data-table-static')) {
+        $(table).find('th, td').each(function () {
+          let text = $(this)[0].innerHTML;
+          if (isEscapedHtmlString(text)) {
+            $(this).html($(this).text().replace("<script>", "").replace("</script>", "").replace("<script", ""));
+          }
+        });
       }
     }
   }
