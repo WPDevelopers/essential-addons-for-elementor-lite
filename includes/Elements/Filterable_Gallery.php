@@ -1440,6 +1440,14 @@ class Filterable_Gallery extends Widget_Base
         );
         
         $this->add_control(
+            'eael_section_fg_video_item_mouseover_effect_heading',
+            [
+                'label' => esc_html__('Mouseover Effects', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_control(
             'eael_fg_video_item_hover_bg',
             [
                 'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
@@ -1525,6 +1533,58 @@ class Filterable_Gallery extends Widget_Base
                 ],
             ]
         );
+
+        $this->add_control(
+            'eael_section_fg_lightbox_custom_width',
+            [
+                'label'     => __('Custom Width', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::SWITCHER,
+                'label_on'  => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default'   => '',
+                'separator' => 'before',
+                'frontend_available' => true,
+            ]
+        );
+
+        $this->add_responsive_control(
+			'eael_section_fg_lightbox_video_width',
+			[
+				'label' => esc_html__( 'Video Content Width', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SLIDER,
+				'default' => [
+					'unit' => '%',
+				],
+                'widescreen_default' => [
+                    'unit' => '%',
+                ],
+                'laptop_default' => [
+                    'unit' => '%',
+                    'size' => 100,
+                ],
+                'tablet_default' => [
+                    'unit' => '%',
+                    'size' => 100,
+                ],
+                'mobile_default' => [
+                    'unit' => '%',
+                    'size' => 100,
+                ],
+				'range' => [
+					'%' => [
+						'min' => 30,
+					],
+				],
+                'devices' => [ 'widescreen', 'desktop', 'laptop', 'tablet', 'mobile' ],
+                'selectors' => [
+					'.mfp-container.mfp-iframe-holder .mfp-content' => 'max-width: {{SIZE}}{{UNIT}};',
+				],
+                'condition' => [
+                    'eael_section_fg_lightbox_custom_width' => 'yes',
+                ]
+			]
+		);
         
         $this->end_controls_section();
         
@@ -1974,72 +2034,6 @@ class Filterable_Gallery extends Widget_Base
         $this->end_controls_tab();
         
         $this->end_controls_tabs();
-        $this->end_controls_section();
-        
-        /**
-         * -------------------------------------------
-         * Tab Style (Lightbox Style)
-         * -------------------------------------------
-         */
-        $this->start_controls_section(
-            'eael_section_fg_lightbox_style',
-            [
-                'label' => esc_html__('Lightbox', 'essential-addons-for-elementor-lite'),
-                'tab' => Controls_Manager::TAB_STYLE,
-            ]
-        );
-
-        $this->add_control(
-            'eael_section_fg_lightbox_custom_width',
-            [
-                'label' => __('Custom Width', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
-                'return_value' => 'yes',
-                'default' => '',
-                'frontend_available' => true,
-            ]
-        );
-
-        $this->add_responsive_control(
-			'eael_section_fg_lightbox_video_width',
-			[
-				'label' => esc_html__( 'Video Content Width', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::SLIDER,
-				'default' => [
-					'unit' => '%',
-				],
-                'widescreen_default' => [
-                    'unit' => '%',
-                ],
-                'laptop_default' => [
-                    'unit' => '%',
-                    'size' => 100,
-                ],
-                'tablet_default' => [
-                    'unit' => '%',
-                    'size' => 100,
-                ],
-                'mobile_default' => [
-                    'unit' => '%',
-                    'size' => 100,
-                ],
-				'range' => [
-					'%' => [
-						'min' => 30,
-					],
-				],
-                'devices' => [ 'widescreen', 'desktop', 'laptop', 'tablet', 'mobile' ],
-                'selectors' => [
-					'.mfp-container.mfp-iframe-holder .mfp-content' => 'max-width: {{SIZE}}{{UNIT}};',
-				],
-                'condition' => [
-                    'eael_section_fg_lightbox_custom_width' => 'yes',
-                ]
-			]
-		);
-
         $this->end_controls_section();
 
         $this->start_controls_section(
