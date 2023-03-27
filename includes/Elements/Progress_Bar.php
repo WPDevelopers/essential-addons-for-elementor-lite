@@ -789,7 +789,7 @@ class Progress_Bar extends Widget_Base
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'name' => 'progress_bar_title_typography_inner',
+                'name' => 'progress_bar_inner_title_typography',
                 'label' => __('Inner Title', 'essential-addons-for-elementor-lite'),
                 'scheme' => Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .eael-progressbar-line-fill.eael-has-inner-title',
@@ -797,13 +797,25 @@ class Progress_Bar extends Widget_Base
         );
 
         $this->add_control(
-            'progress_bar_title_color_inner',
+            'progress_bar_inner_title_color',
             [
                 'label' => __('Inner Title Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-progressbar-line-fill.eael-has-inner-title' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'progress_bar_inner_title_padding',
+            [
+                'label'      => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-progressbar-line-fill.eael-has-inner-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'separator' => 'after',
             ]
