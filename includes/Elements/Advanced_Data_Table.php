@@ -1575,7 +1575,8 @@ class Advanced_Data_Table extends Widget_Base
                 }
             }
         } else {
-            _e('No content found', 'essential-addons-for-elementor-lite');
+	        $no_content = apply_filters( 'eael/advanced-data-table/no-content-found-text', __( 'No content found', 'essential-addons-for-elementor-lite' ) );
+	        echo esc_html( $no_content );
         }
 
         echo '</div>';

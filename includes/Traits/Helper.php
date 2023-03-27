@@ -237,7 +237,7 @@ trait Helper
 			WC()->cart->set_quantity( $cart_item_key, $cart_item_quantity, true );
 			wp_send_json_success(
                 array(
-                    'message' => __( 'Quantity updated successfully.', 'essential-addons-elementor' ),
+                    'message' => __( 'Quantity updated successfully.', 'essential-addons-for-elementor-lite' ),
                     // 'cart_item_key' => $cart_item_key,
                     'cart_item_quantity' => $cart_item_quantity,
                     'cart_item_subtotal' => WC()->cart->get_product_subtotal( $cart_item['data'], $cart_item_quantity ),
@@ -248,7 +248,7 @@ trait Helper
 		} else {
     		wp_send_json_error(
                 array(
-                    'message' => __( 'Quantity update failed.', 'essential-addons-elementor' ),
+                    'message' => __( 'Quantity update failed.', 'essential-addons-for-elementor-lite' ),
                 )
             );
         }
@@ -488,7 +488,7 @@ trait Helper
 
 			/*Added admin notice which is basically uses for display new promotion message*/
 			if ( get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG ) {
-				add_action( 'eael_admin_notices', array( $this, 'promotion_message_on_admin_screen' ) );
+				add_action( 'eael_admin_notices', array( $this, 'promotion_message_on_admin_screen' ), 1 );
 			}
 		}
 	}
