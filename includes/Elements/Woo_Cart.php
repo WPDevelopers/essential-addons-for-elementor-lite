@@ -2298,7 +2298,7 @@ class Woo_Cart extends Widget_Base {
 				],
 				'selectors' => [
 					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .eael-cart-update-btn,
-					{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-clear-btn .button,
+					{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-clear-btn,
 					.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals .wc-proceed-to-checkout' => 'text-align: {{VALUE}};',
 				],
 			]
