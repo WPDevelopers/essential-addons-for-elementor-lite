@@ -1199,7 +1199,7 @@ class Filterable_Gallery extends Widget_Base
         $this->start_controls_section(
             'eael_section_fg_item_cap_style_settings',
             [
-                'label' => esc_html__('Item Hover', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Mouseover Effect', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_fg_caption_style' => ['hoverer']
@@ -1207,6 +1207,12 @@ class Filterable_Gallery extends Widget_Base
             ]
         );
         
+        $this->add_control( 'eael_section_fg_item_card_hover_note_hoverer', [
+			'type'            => Controls_Manager::RAW_HTML,
+			'raw'             => __( 'These controls will be in effect when the mouse hovers over the items.', 'essential-addons-for-elementor-lite' ),
+			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+		] );
+
         $this->add_control(
             'eael_fg_item_cap_bg_color',
             [
@@ -1389,7 +1395,7 @@ class Filterable_Gallery extends Widget_Base
         $this->start_controls_section(
             'eael_section_fg_item_card_hover_style',
             [
-                'label' => esc_html__('Item Hover Style', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Mouseover Effect', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_fg_caption_style' => ['card', 'layout_3']
@@ -1397,6 +1403,12 @@ class Filterable_Gallery extends Widget_Base
             ]
         );
         
+        $this->add_control( 'eael_section_fg_item_card_hover_note_card', [
+			'type'            => Controls_Manager::RAW_HTML,
+			'raw'             => __( 'These controls will be in effect when the mouse hovers over the items.', 'essential-addons-for-elementor-lite' ),
+			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+		] );
+
         $this->add_control(
             'eael_fg_item_card_hover_bg_color',
             [
@@ -1419,7 +1431,7 @@ class Filterable_Gallery extends Widget_Base
         $this->start_controls_section(
             'eael_section_fg_video_item_style',
             [
-                'label' => esc_html__('Video item hover', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Video', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_fg_caption_style!' => 'layout_3'
@@ -1972,7 +1984,7 @@ class Filterable_Gallery extends Widget_Base
         $this->start_controls_section(
             'eael_section_fg_lightbox_style',
             [
-                'label' => esc_html__('Lightbox Style', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Lightbox', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
