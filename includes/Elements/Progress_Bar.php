@@ -789,6 +789,29 @@ class Progress_Bar extends Widget_Base
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
+                'name' => 'progress_bar_title_typography_inner',
+                'label' => __('Inner Title', 'essential-addons-for-elementor-lite'),
+                'scheme' => Typography::TYPOGRAPHY_1,
+                'selector' => '{{WRAPPER}} .eael-progressbar-line-fill.eael-has-inner-title',
+            ]
+        );
+
+        $this->add_control(
+            'progress_bar_title_color_inner',
+            [
+                'label' => __('Inner Title Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#fff',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-progressbar-line-fill.eael-has-inner-title' => 'color: {{VALUE}}',
+                ],
+                'separator' => 'after',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
                 'name' => 'progress_bar_count_typography',
                 'label' => __('Counter', 'essential-addons-for-elementor-lite'),
                 'scheme' => Typography::TYPOGRAPHY_1,
