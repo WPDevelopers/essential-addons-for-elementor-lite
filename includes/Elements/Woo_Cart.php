@@ -2093,6 +2093,7 @@ class Woo_Cart extends Widget_Base {
 				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals button, 
 				.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .button,
 				{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-clear-btn .button,
+				.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-clear-btn .button,
 				.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals .wc-proceed-to-checkout .button:not(:hover):not(:active)',
 			]
 		);
