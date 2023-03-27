@@ -429,6 +429,35 @@ class Progress_Bar extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-progressbar-line' => 'height: {{SIZE}}{{UNIT}}',
                 ],
+                'condition' => [
+                    'progress_bar_title_inner_show!' => 'yes',
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'progress_bar_line_height_inner_title',
+            [
+                'label' => __('Height', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 24,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-progressbar-line' => 'height: {{SIZE}}{{UNIT}}',
+                ],
+                'condition' => [
+                    'progress_bar_title_inner_show' => 'yes',
+                ]
             ]
         );
 
@@ -481,6 +510,35 @@ class Progress_Bar extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-progressbar-line-fill' => 'height: {{SIZE}}{{UNIT}}',
                 ],
+                'condition' => [
+                    'progress_bar_title_inner_show!' => 'yes',
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'progress_bar_line_fill_height_inner_title',
+            [
+                'label' => __('Height', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 24,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-progressbar-line-fill' => 'height: {{SIZE}}{{UNIT}}',
+                ],
+                'condition' => [
+                    'progress_bar_title_inner_show' => 'yes',
+                ]
             ]
         );
 
@@ -789,7 +847,11 @@ class Progress_Bar extends Widget_Base
         $wrap_classes = ['eael-progressbar'];
         $circle_wrapper = [];
 	    $settings['progress_bar_title']         = Helper::eael_wp_kses($settings['progress_bar_title']);
-	    $settings['progress_bar_title_inner']   = ! empty( $settings['progress_bar_title_inner_show'] ) && ! empty( $settings['progress_bar_title_inner'] ) ? Helper::eael_wp_kses( $settings['progress_bar_title_inner'] ) : '';
+        
+        $has_inner_title                        = ! empty( $settings['progress_bar_title_inner_show'] ) && ! empty( $settings['progress_bar_title_inner'] );
+        $has_inner_title_class                  = $has_inner_title ? 'eael-has-inner-title' : '';
+	    $settings['progress_bar_title_inner']   = $has_inner_title ? Helper::eael_wp_kses( $settings['progress_bar_title_inner'] ) : '';
+        
         if (!apply_filters('eael/pro_enabled', false)) {
             if (in_array($settings['progress_bar_layout'], ['line', 'line_rainbow', 'circle_fill', 'half_circle_fill', 'box'])) {
                 $settings['progress_bar_layout'] = 'line';
@@ -818,7 +880,7 @@ class Progress_Bar extends Widget_Base
             ]);
 
             $this->add_render_attribute('eael-progressbar-line-fill', [
-                'class' => 'eael-progressbar-line-fill',
+                'class' => 'eael-progressbar-line-fill ' . esc_attr( $has_inner_title_class ),
                 'style' => '-webkit-transition-duration:' . $settings['progress_bar_animation_duration']['size'] . 'ms;-o-transition-duration:' . $settings['progress_bar_animation_duration']['size'] . 'ms;transition-duration:' . $settings['progress_bar_animation_duration']['size'] . 'ms;',
             ]);
 
