@@ -2113,7 +2113,7 @@ class Woo_Cart extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals button,
-				{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-clear-btn .button, 
+				.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-clear-btn .button, 
 				.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .button' => 'background-color: {{VALUE}};',
 				],
 			]
@@ -2137,6 +2137,7 @@ class Woo_Cart extends Widget_Base {
 				'name'     => 'ea_woo_cart_btn_border',
 				'selector' => '{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals button,
 				{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-clear-btn .button, 
+				.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-clear-btn .button, 
 				.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .button',
 			]
 		);
@@ -2203,7 +2204,7 @@ class Woo_Cart extends Widget_Base {
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
 					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals button,
-				{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-clear-btn .button:hover, 
+				{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-clear-btn .button, 
 				.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
@@ -2217,7 +2218,7 @@ class Woo_Cart extends Widget_Base {
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
 					'{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals button,
-				{{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-clear-btn .button, 
+				.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-clear-btn .button, 
 				.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .button,
 				.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals .wc-proceed-to-checkout .button:not(:hover):not(:active)' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
