@@ -898,6 +898,31 @@ class Woo_Cart extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_woo_cart_components_cart_clear_button',
+			[
+				'label'        => esc_html__( 'Cart Clear Button', 'essential-addons-for-elementor-lite' ),
+				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cart_components_cart_clear_button_text',
+			[
+				'label'     => esc_html__( 'Button Text', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::TEXT,
+				'default'   => esc_html__( 'Clear Cart', 'essential-addons-for-elementor-lite' ),
+				'separator'	=> 'after',
+				'condition' => [
+					'eael_woo_cart_components_cart_clear_button' => 'yes'
+				]
+			]
+		);
+
+		$this->add_control(
 			'eael_woo_cart_components_cart_update_button',
 			[
 				'label'        => esc_html__( 'Cart Update Button', 'essential-addons-for-elementor-lite' ),
