@@ -853,7 +853,7 @@ class Filterable_Gallery extends Widget_Base
         $this->start_controls_section(
             'eael_section_fg_style_settings',
             [
-                'label' => esc_html__('General Style', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('General', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -940,7 +940,7 @@ class Filterable_Gallery extends Widget_Base
         $this->start_controls_section(
             'eael_section_fg_control_style_settings',
             [
-                'label' => esc_html__('Control Style', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Control', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_fg_caption_style!' => 'layout_3'
@@ -1124,7 +1124,7 @@ class Filterable_Gallery extends Widget_Base
         $this->start_controls_section(
             'eael_section_fg_item_style_settings',
             [
-                'label' => esc_html__('Item Style', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Item', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1199,7 +1199,7 @@ class Filterable_Gallery extends Widget_Base
         $this->start_controls_section(
             'eael_section_fg_item_cap_style_settings',
             [
-                'label' => esc_html__('Item Hover Style', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Item Hover', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_fg_caption_style' => ['hoverer']
@@ -1736,7 +1736,7 @@ class Filterable_Gallery extends Widget_Base
         $this->start_controls_section(
             'eael_section_fg_item_hover_icons_style',
             [
-                'label' => esc_html__('Icons Style', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Icons', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
