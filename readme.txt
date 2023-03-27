@@ -251,7 +251,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Fixed: EA Creative Buttons | Gradient colour issue on hover
 - Fixed: EA Interactive Circle | Circle ordering system
 - Fixed: EA Simple Menu | Hamburger menu style option not showing for vertical layout
-= Fixed: EA  Advanced Data Table | Added filter hook for "No Content Found" text
+- Fixed: EA Advanced Data Table | Added filter hook for "No Content Found" text
 - Fixed: EA Filterable Gallery | Added XStore theme compatibility
 - Few minor bug fixes & improvements
 
@@ -1167,7 +1167,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Added: WPML translation support for URL in Team Member
 - Added: <span> as tag support in Tooltip
 - Added: Option to change heading tag in CTA
-- Fixed: Expansion indicator disappearence bug in Post Grid
+- Fixed: Expansion indicator disappearance bug in Post Grid
 - Fixed: Polish letters displaying bug for Filterable Gallery
 - Few minor bugfix and improvements
 
@@ -1377,7 +1377,7 @@ Your existing elements/content will work with premium version. So you won't lose
 = 3.0.2 - 29/05/2019 =
 - Fixed : Notice style breaking issue
 - Fixed : Pricing Table tooltip issue
-- Enhanced : ALT tag for all images thourghout the elements
+- Enhanced : ALT tag for all images throughout the elements
 - Few minor bugfix and improvements
 
 = 3.0.1 - 27/05/2019 =
