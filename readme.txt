@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.1
 Requires PHP: 7.0
-Stable tag: 5.6.2
+Stable tag: 5.6.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -244,9 +244,16 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+= 5.6.3 - 27/03/2023 =
+
+- Fixed: EA Advanced Data Table | Inline Editor HTML not working
+- Fixed: EA Filterable Gallery | Mobile layout showing wrong item count
+- Fixed: EA Image Accordion | Default active tab not working
+- Few minor bug fixes & improvements
+
 = 5.6.2 - 22/03/2023 =
 
-- Fixed: Improved : EA Login/Register Form | Added support for HTML tag in the title & subtitles
+- Improved : EA Login/Register Form | Added support for HTML tag in the title & subtitles
 - Improved : EA Filterable Gallery | Improved translation support
 - Fixed: EA Creative Buttons | Gradient colour issue on hover
 - Fixed: EA Interactive Circle | Circle ordering system
