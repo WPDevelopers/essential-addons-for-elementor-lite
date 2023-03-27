@@ -335,6 +335,9 @@
   margin-top: 25px;
   display: inline-block;
 }
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-clear-btn .button {
+  margin-top: 15px;
+}
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals {
   width: 50%;
   float: left;
