@@ -905,7 +905,7 @@ class Woo_Cart extends Widget_Base {
 				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
-				'default'      => 'yes',
+				'default'      => '',
 			]
 		);
 
