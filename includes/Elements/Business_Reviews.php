@@ -2724,7 +2724,7 @@ class Business_Reviews extends Widget_Base {
 		] );
 
 		$this->add_render_attribute( 'eael-google-reviews-content', [
-			'class'               => [ 'eael-google-reviews-content', 'swiper-container', 'swiper-container-' . esc_attr( $this->get_id() ) ],
+			'class'               => [ 'eael-google-reviews-content', 'swiper', 'swiper-container', 'swiper-container-' . esc_attr( $this->get_id() ) ],
 			'data-pagination'     => '.swiper-pagination-' . esc_attr( $this->get_id() ),
 			'data-arrow-next'     => '.swiper-button-next-' . esc_attr( $this->get_id() ),
 			'data-arrow-prev'     => '.swiper-button-prev-' . esc_attr( $this->get_id() ),
