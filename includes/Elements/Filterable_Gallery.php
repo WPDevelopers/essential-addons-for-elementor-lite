@@ -1964,6 +1964,49 @@ class Filterable_Gallery extends Widget_Base
         $this->end_controls_tabs();
         $this->end_controls_section();
         
+        /**
+         * -------------------------------------------
+         * Tab Style (Lightbox Style)
+         * -------------------------------------------
+         */
+        $this->start_controls_section(
+            'eael_section_fg_lightbox_style',
+            [
+                'label' => esc_html__('Lightbox Style', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_responsive_control(
+			'eael_section_fg_lightbox_video_width',
+			[
+				'label' => esc_html__( 'Video Content Width', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SLIDER,
+				'default' => [
+					'unit' => '%',
+                    'size' => 100,
+				],
+                'tablet_default' => [
+                    'unit' => '%',
+                    'size' => 100,
+                ],
+                'mobile_default' => [
+                    'unit' => '%',
+                    'size' => 100,
+                ],
+				'range' => [
+					'%' => [
+						'min' => 30,
+					],
+				],
+                'devices' => [ 'desktop', 'tablet', 'mobile' ],
+                'selectors' => [
+					'.mfp-iframe-holder .mfp-content' => 'max-width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+        $this->end_controls_section();
         
         $this->start_controls_section(
             'fg_item_price_style',
