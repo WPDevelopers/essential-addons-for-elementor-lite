@@ -1977,6 +1977,19 @@ class Filterable_Gallery extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_section_fg_lightbox_custom_width',
+            [
+                'label' => __('Cumtom Width', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default' => '',
+                'frontend_available' => true,
+            ]
+        );
+
         $this->add_responsive_control(
 			'eael_section_fg_lightbox_video_width',
 			[
@@ -1984,7 +1997,7 @@ class Filterable_Gallery extends Widget_Base
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'unit' => '%',
-                    'size' => 100,
+                    // 'size' => 100,
 				],
                 'tablet_default' => [
                     'unit' => '%',
@@ -2001,13 +2014,16 @@ class Filterable_Gallery extends Widget_Base
 				],
                 'devices' => [ 'desktop', 'tablet', 'mobile' ],
                 'selectors' => [
-					'.mfp-iframe-holder .mfp-content' => 'max-width: {{SIZE}}{{UNIT}};',
+					'.mfp-container.mfp-iframe-holder .mfp-content' => 'max-width: {{SIZE}}{{UNIT}};',
 				],
+                'condition' => [
+                    'eael_section_fg_lightbox_custom_width' => 'yes',
+                ]
 			]
 		);
 
         $this->end_controls_section();
-        
+
         $this->start_controls_section(
             'fg_item_price_style',
             [
