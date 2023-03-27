@@ -1596,7 +1596,7 @@ class Filterable_Gallery extends Widget_Base
         $this->start_controls_section(
             'eael_section_fg_item_content_style_settings',
             [
-                'label' => esc_html__('Item Card Style', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Item Card', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_fg_caption_style' => ['card', 'layout_3']
