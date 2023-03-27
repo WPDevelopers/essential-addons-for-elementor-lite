@@ -1980,7 +1980,7 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'eael_section_fg_lightbox_custom_width',
             [
-                'label' => __('Cumtom Width', 'essential-addons-for-elementor-lite'),
+                'label' => __('Custom Width', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
                 'label_off' => __('No', 'essential-addons-for-elementor-lite'),
@@ -1997,8 +1997,14 @@ class Filterable_Gallery extends Widget_Base
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'unit' => '%',
-                    // 'size' => 100,
 				],
+                'widescreen_default' => [
+                    'unit' => '%',
+                ],
+                'laptop_default' => [
+                    'unit' => '%',
+                    'size' => 100,
+                ],
                 'tablet_default' => [
                     'unit' => '%',
                     'size' => 100,
@@ -2012,7 +2018,7 @@ class Filterable_Gallery extends Widget_Base
 						'min' => 30,
 					],
 				],
-                'devices' => [ 'desktop', 'tablet', 'mobile' ],
+                'devices' => [ 'widescreen', 'desktop', 'laptop', 'tablet', 'mobile' ],
                 'selectors' => [
 					'.mfp-container.mfp-iframe-holder .mfp-content' => 'max-width: {{SIZE}}{{UNIT}};',
 				],
