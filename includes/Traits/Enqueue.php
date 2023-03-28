@@ -120,7 +120,7 @@ trait Enqueue
             height: 12px;
         }
         
-        .elementor-add-new-section .elementor-add-section-area-button {
+        body .elementor-add-new-section .elementor-add-section-area-button {
             margin-left: 0;
         }";
         wp_add_inline_style( 'elementor-icons', $css );
