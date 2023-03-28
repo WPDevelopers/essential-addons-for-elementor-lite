@@ -900,6 +900,21 @@ body.theme-woodmart.eael-woo-cart .eael-woo-cart-wrapper {
     }
 }
 
+//Blocksy Theme Compatibility
+.theme-blocksy{
+    .eael-woo-cart-table{
+        .product-quantity{
+            .ct-increase,
+            .ct-decrease{
+                display: none;
+            }
+            .quantity input[type=number]{
+                padding: 10px !important;
+            }
+        }
+    }
+}
+
 // Responsive Tablet
 @media (max-width: 1024px) {
     .eael-woo-cart .eael-woo-cart-wrapper {
