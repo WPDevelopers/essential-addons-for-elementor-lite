@@ -113,12 +113,15 @@ trait Enqueue
             background-image: url({$src});
             background-repeat: no-repeat;
             background-position: center center;
-            margin-left: 5px;
             position: relative;
         }
         
 		.elementor-add-new-section .elementor-add-templately-promo-button > i{
             height: 12px;
+        }
+        
+        .elementor-add-new-section .elementor-add-section-area-button {
+            margin-left: 0;
         }";
         wp_add_inline_style( 'elementor-icons', $css );
     }
