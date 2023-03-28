@@ -118,7 +118,7 @@ trait Enqueue
         }
         
 		.elementor-add-new-section .elementor-add-templately-promo-button > i{
-            height: 16px;
+            height: 12px;
         }";
         wp_add_inline_style( 'elementor-icons', $css );
     }
