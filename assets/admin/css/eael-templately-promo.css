@@ -5,6 +5,10 @@
 	background-position: center center;
 }
 
+.elementor-add-new-section .elementor-add-templately-promo-button > i{
+	height: 16px;
+}
+
 #eael-templately-promo-popup.dialog-type-lightbox .dialog-widget-content {
 	width: 1060px;
 	min-height: 80%;
