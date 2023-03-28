@@ -115,7 +115,6 @@ trait Enqueue
             background-position: center center;
             margin-left: 5px;
             position: relative;
-            bottom: 5px;
         }";
         wp_add_inline_style( 'elementor-icons', $css );
     }
