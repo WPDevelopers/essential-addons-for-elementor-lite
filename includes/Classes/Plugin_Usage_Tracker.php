@@ -404,6 +404,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 			if( $theme->Version ) {
 				$body['theme_version'] = sanitize_text_field( $theme->Version );
 			}
+
+			if ( ! empty( $this->get_used_elements_count() ) ) {
+				$body['optional_data'] = $this->get_used_elements_count();
+			}
+
 			return $body;
 		}
 
@@ -891,4 +896,67 @@ if ( ! defined( 'ABSPATH' ) ) {
 				});
 			</script>
 		<?php }
+
+		/**
+         * Get Used Elements Count
+         * Get eael all used elements from all pages
+		 * @return array
+         *
+         * @since 3.7.0
+		 */
+		public static function get_used_elements_count() {
+			global $wpdb;
+
+			$sql           = "SELECT `post_id`
+            FROM  $wpdb->postmeta
+            WHERE `meta_key` = '_eael_widget_elements'";
+			$post_ids      = $wpdb->get_col( $sql );
+			$used_elements = [];
+
+			foreach ( $post_ids as $post_id ) {
+				$ea_elements = get_post_meta( (int) $post_id, '_eael_widget_elements', true );
+				$el_controls = get_post_meta( (int) $post_id, '_elementor_controls_usage', true );
+				if ( empty( $ea_elements ) || empty( $el_controls ) || ! is_array( $ea_elements ) || ! is_array( $el_controls ) ) {
+					continue;
+				}
+
+				foreach ( $ea_elements as $element ) {
+					$element_name        = "eael-{$element}";
+					$replace_widget_name = array_flip( Elements_Manager::replace_widget_name() );
+					$count               = 0;
+
+					if ( isset( $replace_widget_name[ $element_name ] ) ) {
+						$element_name = $replace_widget_name[ $element_name ];
+					}
+
+					if ( ! empty( $el_controls[ $element_name ] ) && is_array( $el_controls[ $element_name ] ) ) {
+						$count = $el_controls[ $element_name ]['count'];
+					}
+
+					$used_elements[ $element_name ] = isset( $used_elements[ $element_name ] ) ? $used_elements[ $element_name ] + $count : $count;
+				}
+
+				array_walk_recursive( $el_controls, function ( $value, $key ) use ( &$used_elements ) {
+					$element_name = '';
+
+					if ( $key === 'eael_particle_switch' ) {
+						$element_name = 'eael-section-particles';
+					} elseif ( $key === 'eael_parallax_switcher' ) {
+						$element_name = 'eael-section-parallax';
+					} elseif ( $key === 'eael_tooltip_section_enable' ) {
+						$element_name = 'eael-tooltip-section';
+					} elseif ( $key === 'eael_ext_content_protection' ) {
+						$element_name = 'eael-content-protection';
+					} elseif ( $key === 'eael_cl_enable' ) {
+						$element_name = 'eael-conditional-display';
+					}
+
+					if ( ! empty( $element_name ) ) {
+						$used_elements[ $element_name ] = isset( $used_elements[ $element_name ] ) ? $used_elements[ $element_name ] + $value : $value;
+					}
+				} );
+			}
+
+			return $used_elements;
+		}
 	}
