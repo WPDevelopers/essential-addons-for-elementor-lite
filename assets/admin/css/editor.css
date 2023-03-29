@@ -70,6 +70,10 @@
 	display: none;
 }
 
+.ea-dialog-buttons-action[style="display: none;"] + button {
+	display: block;
+}
+
 .elementor-element-wrapper .icon {
 	max-height: 28px;
 	box-sizing: content-box;
