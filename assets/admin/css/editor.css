@@ -66,12 +66,8 @@
 	text-align: center;
 }
 
-.ea-dialog-buttons-action + button {
+.ea-dialog-buttons-action:not([style="display: none;"]) + button {
 	display: none;
-}
-
-.ea-dialog-buttons-action[style="display: none;"] + button {
-	display: block;
 }
 
 .elementor-element-wrapper .icon {
