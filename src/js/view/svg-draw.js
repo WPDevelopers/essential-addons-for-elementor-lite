@@ -68,7 +68,14 @@ var SVGDraw = function ($scope, $) {
     if (svg_icon.parent().hasClass('page-scroll')){
         $win.on('scroll', function() {
             let step =( ($win.scrollTop()-offset) / max );
-            svg_icon.drawsvg('progress', step);
+            let offsetTop = svg_icon.offset().top,
+                viewPort = $win.innerHeight(),
+                offsetBottom = offsetTop-viewPort;
+
+            if (offsetTop > $win.scrollTop() && offsetBottom < $win.scrollTop()){
+                step = (($win.scrollTop()-offset)-offsetBottom)/viewPort;
+                svg_icon.drawsvg('progress', step);
+            }
             dashArrayReset();
         });
     }
