@@ -216,12 +216,12 @@ trait Admin {
         }
 
 
-        $notice->options_args = array(
-            'notice_will_show' => [
-                // 'opt_in' => $notice->timestamp,
-                'review' => $notice->makeTime( $notice->timestamp, '7 Day' ), // after 3 days
-            ],
-        );
+	    $notice->options_args = array(
+		    'notice_will_show' => [
+			    'opt_in' => $notice->makeTime( $notice->timestamp, '3 Day' ), // after 3 days
+			    'review' => $notice->makeTime( $notice->timestamp, '7 Day' ), // after 7 days
+		    ],
+	    );
         if ( $this->pro_enabled && \version_compare( EAEL_PRO_PLUGIN_VERSION, '4.0.0', '<' ) ) {
             $notice->options_args[ 'notice_will_show' ][ 'update' ] = $notice->timestamp;
         }

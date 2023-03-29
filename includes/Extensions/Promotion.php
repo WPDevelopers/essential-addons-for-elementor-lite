@@ -42,7 +42,7 @@ class Promotion
         $element->start_controls_section(
             'eael_ext_section_parallax_section',
             [
-                'label' => __('<i class="eaicon-logo"></i> Parallax', 'essential-addons-elementor'),
+                'label' => __('<i class="eaicon-logo"></i> Parallax', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_LAYOUT,
             ]
         );
@@ -66,7 +66,7 @@ class Promotion
         $element->start_controls_section(
             'eael_ext_section_particles_section',
             [
-                'label' => __('<i class="eaicon-logo"></i> Particles', 'essential-addons-elementor'),
+                'label' => __('<i class="eaicon-logo"></i> Particles', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_LAYOUT,
             ]
         );
@@ -90,7 +90,7 @@ class Promotion
         $element->start_controls_section(
             'eael_ext_content_protection_section',
             [
-                'label' => __('<i class="eaicon-logo"></i> Content Protection', 'essential-addons-elementor'),
+                'label' => __('<i class="eaicon-logo"></i> Content Protection', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_ADVANCED,
             ]
         );
@@ -114,7 +114,7 @@ class Promotion
         $element->start_controls_section(
             'eael_ext_section_tooltip_section',
             [
-                'label' => __('<i class="eaicon-logo"></i> Advanced Tooltip', 'essential-addons-elementor'),
+                'label' => __('<i class="eaicon-logo"></i> Advanced Tooltip', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_ADVANCED,
             ]
         );
