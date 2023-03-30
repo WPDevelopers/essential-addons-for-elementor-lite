@@ -97,6 +97,10 @@ jQuery(window).on("elementor/frontend/init", function () {
 					let item_found = initData;
 					let index_list = $items =  [];
 
+					if (typeof $images_per_page === 'string'){
+						$images_per_page = $init_show_setting;
+					}
+
 					if (item_found < $images_per_page) {
 						for (const [index, item] of fg_items.entries()) {
 							if (buttonFilter !== '' && buttonFilter !== '*') {
