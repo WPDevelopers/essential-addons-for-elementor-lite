@@ -824,7 +824,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-footer { padding: 8px 18px; margin-bottom: 15px; }';
 				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-footer > .wpinsights-goodbye-form-buttons { display: flex; align-items: center; justify-content: space-between; }';
 				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-footer .wpinsights-submit-btn {';
-					$styles .= 'background-color: #f3bafd; -webkit-border-radius: 3px; border-radius: 3px; color: #0c0d0e; line-height: 1; padding: 10px 20px; font-size: 13px; font-weight: 500; text-transform: uppercase;';
+					$styles .= 'background-color: #f3bafd; -webkit-border-radius: 3px; border-radius: 3px; color: #0c0d0e; line-height: 1; padding: 10px 20px; font-size: 13px; font-weight: 500; text-transform: uppercase; transition: .3s;';
+				$styles .= '}';
+                $styles .= $wrapper_class . ' .wpinsights-goodbye-form-footer .wpinsights-submit-btn:hover {';
+					$styles .= 'background-color: #f5d0fe;';
 				$styles .= '}';
 				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-footer .wpinsights-deactivate-btn {';
 					$styles .= 'font-size: 13px; color: #a4afb7; background: none; float: right; padding-right: 10px; width: auto; text-decoration: underline;';
