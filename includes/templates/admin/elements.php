@@ -375,7 +375,7 @@ $elements = [
                 'key'       => 'svg-draw',
                 'title'     => __( 'SVG Draw', 'essential-addons-for-elementor-lite' ),
                 'demo_link' => 'https://essential-addons.com/elementor/svg-draw/',
-                'doc_link'  => 'https://essential-addons.com/elementor/docs/svg-draw/',
+                'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-svg-draw/',
                 'promotion' => 'new'
             ]
 		]
