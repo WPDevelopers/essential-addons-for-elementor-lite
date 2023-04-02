@@ -102,7 +102,7 @@ class SVG_Draw Extends Widget_Base
         $this->add_control(
             'eael_svg_icon',
             [
-                'label' => esc_html__( 'Icon', 'textdomain' ),
+                'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
                 'type' => \Elementor\Controls_Manager::ICONS,
 //                'default' => [
 //                    'value' => 'fas fa-circle',
