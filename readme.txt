@@ -2,9 +2,9 @@
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk
 Tags: elementor, elements, addons, elementor addons, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
 Requires at least: 5.0
-Tested up to: 6.1
+Tested up to: 6.2
 Requires PHP: 7.0
-Stable tag: 5.6.3
+Stable tag: 5.6.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -244,6 +244,12 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+= 5.6.4 - 30/03/2023 =
+
+- Added: Compatibility with Elementor 3.12.0
+- Fixed: Assets not generating in private pages
+- Few minor bug fixes & improvements
+
 = 5.6.3 - 27/03/2023 =
 
 - Fixed: EA Advanced Data Table | Inline Editor HTML not working
@@ -253,9 +259,9 @@ Your existing elements/content will work with premium version. So you won't lose
 
 = 5.6.2 - 22/03/2023 =
 
-- Improved : EA Login/Register Form | Added support for HTML tag in the title & subtitles
-- Improved : EA Filterable Gallery | Improved translation support
-- Fixed: EA Creative Buttons | Gradient colour issue on hover
+- Improved: EA Login/Register Form | Added support for HTML tag in the title & subtitles
+- Improved: EA Filterable Gallery | Improved translation support
+- Fixed: EA Creative Buttons | Gradient color issue on hover
 - Fixed: EA Interactive Circle | Circle ordering system
 - Fixed: EA Simple Menu | Hamburger menu style option not showing for vertical layout
 - Fixed: EA Advanced Data Table | Added filter hook for "No Content Found" text
