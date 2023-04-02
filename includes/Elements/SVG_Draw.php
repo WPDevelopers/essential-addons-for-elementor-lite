@@ -58,7 +58,7 @@ class SVG_Draw Extends Widget_Base
 
     public function get_custom_help_url()
     {
-        return 'https://essential-addons.com/elementor/docs/advanced-tabs/';
+        return 'https://essential-addons.com/elementor/docs/ea-svg-draw/';
     }
 
     protected function default_custom_svg(){
