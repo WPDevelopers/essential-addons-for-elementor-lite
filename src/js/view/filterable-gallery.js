@@ -151,8 +151,22 @@ jQuery(window).on("elementor/frontend/init", function () {
 			});
 
 			//quick search
+			var loaded_on_search = false;
 			input.on("input", function () {
-				var $this = $(this);
+				var $this = $(this),$items=[];
+				console.log($gallery.data('search-all'))
+				if ( ! loaded_on_search && $gallery.data('search-all') === 'yes' ) {
+					for (const [index, item] of fg_items.entries()) {
+						$items.push($(item)[0]);
+					}
+					$isotope_gallery.isotope();
+					$gallery.append($items);
+					$isotope_gallery.isotope('appended', $items);
+					$isotope_gallery.imagesLoaded().progress(function () {
+						$isotope_gallery.isotope("layout");
+					});
+					loaded_on_search = true;
+				}
 
 				clearTimeout(timer);
 				timer = setTimeout(function () {
