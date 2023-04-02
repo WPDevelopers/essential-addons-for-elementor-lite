@@ -177,6 +177,34 @@ class Filterable_Gallery extends Widget_Base
                 ],
             ]
         );
+
+        $this->add_control(
+            'eael_search_among_all',
+            [
+                'label' => __('Search Among All ?', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default' => '',
+                'condition' => [
+                      'eael_fg_caption_style' =>  'layout_3'
+                ]
+            ]
+        );
+
+        $this->add_control(
+			'eael_search_among_note',
+			[
+				'label' => esc_html__( '', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::RAW_HTML,
+				'raw' => esc_html__( 'If this option is enabled, the search function will search among all items and show all items as visible.', 'essential-addons-for-elementor-lite' ),
+				'content_classes' => 'eael-warning',
+				'condition' => [
+                        'eael_search_among_all' => 'yes'
+                ]
+			]
+		);
         
         $this->add_control(
             'eael_fg_grid_hover_style',
@@ -2329,11 +2357,13 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label' => __('Placeholder Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
+                'default' => '#858e9a',
                 'selectors' => [
                     '{{WRAPPER}} .fg-layout-3-search-box input[type="text"]::-webkit-input-placeholder' => 'color: {{VALUE}}',
                     '{{WRAPPER}} .fg-layout-3-search-box input[type="text"]::-moz-placeholder'  => 'color: {{VALUE}}',
                     '{{WRAPPER}} .fg-layout-3-search-box input[type="text"]:-ms-input-placeholder' => 'color: {{VALUE}}',
-                    '{{WRAPPER}} .fg-layout-3-search-box input[type="text"]:-moz-placeholder'   => 'color: {{VALUE}}'
+                    '{{WRAPPER}} .fg-layout-3-search-box input[type="text"]:-moz-placeholder'   => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .fg-layout-3-search-box input'   => 'color: {{VALUE}}'
                 ]
             ]
         );
@@ -3396,8 +3426,9 @@ class Filterable_Gallery extends Widget_Base
             'data-total-gallery-items' => count($settings['eael_fg_gallery_items']),
             'data-nomore-item-text' => $no_more_items_text,
         ]);
-        
+
         $this->add_render_attribute('gallery-items-wrap', 'data-settings', wp_json_encode($gallery_settings));
+        $this->add_render_attribute('gallery-items-wrap', 'data-search-all', esc_attr( $settings['eael_search_among_all'] ));
         if ('layout_3' == $settings['eael_fg_caption_style']) {
             $this->add_render_attribute( 'gallery-items-wrap', 'data-gallery-items', wp_json_encode( $this->render_layout_3_gallery_items(), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE ) );
         } else {
