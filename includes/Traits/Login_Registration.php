@@ -1514,16 +1514,56 @@ trait Login_Registration {
 	 * @since 5.1.4
 	 */
 	public function eael_extra_user_profile_fields( $user ){ ?>
+		<?php $eael_custom_profile_fields_text = $this->get_eael_custom_profile_fields('text'); ?>
+		<?php $eael_custom_profile_fields_image = $this->get_eael_custom_profile_fields('image'); ?>
+
+		<?php //if ( count( $eael_custom_profile_fields_text ) || count( $eael_custom_profile_fields_image ) ): ?>
 		<h3><?php _e("EA Login | Register Form", "blank"); ?></h3>
+		<?php // endif; ?>
 
 		<table class="form-table">
 		<tr>
-			<th><label for="eael_phone_number"><?php _e("Phone"); ?></label></th>
-			<td>
-				<input type="text" name="eael_phone_number" id="eael_phone_number" value="<?php echo esc_attr( get_the_author_meta( 'eael_phone_number', $user->ID ) ); ?>" class="regular-text" /><br />
-				<p class="description"><?php esc_html_e("Please enter your phone number."); ?></p>
-			</td>
-		</tr>
+				<th><label for="eael_phone_number"><?php _e("Phone"); ?></label></th>
+				<td>
+					<input type="text" name="eael_phone_number" id="eael_phone_number" value="<?php echo esc_attr( get_the_author_meta( 'eael_phone_number', $user->ID ) ); ?>" class="regular-text" /><br />
+					<p class="description"><?php esc_html_e("Please enter your phone number."); ?></p>
+				</td>
+			</tr>
+		<?php 
+		if( count( $eael_custom_profile_fields_text ) ) :
+			foreach( $eael_custom_profile_fields_text as $eael_custom_profile_field_text_key => $eael_custom_profile_field_value ) : 
+		?>
+			<tr>
+				<th><label for="<?php echo esc_attr( $eael_custom_profile_field_text_key ); ?>"><?php _e( esc_html( $eael_custom_profile_field_value ) ); ?></label></th>
+				<td>
+					<input type="text" name="<?php echo esc_attr( $eael_custom_profile_field_text_key ); ?>" id="<?php echo esc_attr( $eael_custom_profile_field_text_key ); ?>" value="<?php echo esc_attr( get_the_author_meta( self::$eael_custom_profile_field_prefix . $eael_custom_profile_field_text_key, $user->ID ) ); ?>" class="regular-text" /><br />
+					<!-- <p class="description"><?php //printf( __( "Please Enter %s", 'essential-addons-for-elementor-lite'), esc_html( $custom_profile_fields_text )); ?></p> -->
+				</td>
+			</tr>
+		<?php 
+			endforeach; 
+		endif;
+		?>
+
+		<?php 
+		if( count( $eael_custom_profile_fields_image ) ) :
+			foreach( $eael_custom_profile_fields_image as $eael_custom_profile_field_image_key => $eael_custom_profile_field_value ) : 
+				$user_meta_attachment_id = get_the_author_meta( self::$eael_custom_profile_field_prefix . $eael_custom_profile_field_image_key, $user->ID );
+		?>
+			<tr>
+				<th><label for="<?php echo esc_attr( $eael_custom_profile_field_image_key ); ?>"><?php _e( esc_html( $eael_custom_profile_field_value ) ); ?></label></th>
+				<td>
+					<input type="text" name="<?php echo esc_attr( $eael_custom_profile_field_image_key ); ?>" id="<?php echo esc_attr( $eael_custom_profile_field_image_key ); ?>" value="<?php echo esc_attr( $user_meta_attachment_id ); ?>" class="regular-text" /><br />
+					<p class="description"><?php printf( __( "Above, input the %s of the attachment.", 'essential-addons-for-elementor-lite'), esc_html( 'ID' )); ?></p>
+					<?php if( ! empty( $user_meta_attachment_id ) ): ?>
+					<p><img src="<?php echo esc_attr( wp_get_attachment_image_url( $user_meta_attachment_id ) ); ?>" alt="Image"></p>
+					<?php endif; ?>
+				</td>
+			</tr>
+		<?php 
+			endforeach; 
+		endif;
+		?>
 		</table>
 	<?php }
 
