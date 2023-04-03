@@ -91,7 +91,7 @@ class SVG_Draw Extends Widget_Base
             [
                 'label' => esc_html__( 'Source', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::SELECT,
-                'default' => 'icon',
+                'default' => 'custom',
                 'options' => [
                     'icon' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
                     'custom' => esc_html__( 'Custom SVG', 'essential-addons-for-elementor-lite' ),
@@ -104,10 +104,12 @@ class SVG_Draw Extends Widget_Base
             [
                 'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
                 'type' => \Elementor\Controls_Manager::ICONS,
-//                'default' => [
-//                    'value' => 'fas fa-circle',
-//                    'library' => 'fa-solid',
-//                ],
+                'default' => [
+                    'value' => [
+						'url' => EAEL_PLUGIN_URL . 'assets/admin/images/svg-draw.svg',
+                    ],
+                    'library' => 'svg',
+                ],
                 'condition' => [
                     'eael_svg_src' => 'icon'
                 ]
@@ -498,6 +500,8 @@ class SVG_Draw Extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
+		var_dump($settings['eael_svg_icon']);
+		return;
         $svg_html = isset( $settings['svg_html'] ) ? preg_replace('#<script(.*?)>(.*?)</script>#is', '', $settings['svg_html'] ) : '';
         $this->add_render_attribute('eael-svg-drow-wrapper', [
             'class'           => [
