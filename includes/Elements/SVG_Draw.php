@@ -500,8 +500,6 @@ class SVG_Draw Extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-		var_dump($settings['eael_svg_icon']);
-		return;
         $svg_html = isset( $settings['svg_html'] ) ? preg_replace('#<script(.*?)>(.*?)</script>#is', '', $settings['svg_html'] ) : '';
         $this->add_render_attribute('eael-svg-drow-wrapper', [
             'class'           => [
