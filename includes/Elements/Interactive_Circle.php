@@ -813,6 +813,7 @@ class Interactive_Circle extends Widget_Base {
                     <div class="eael-circle-info" data-items="<?php echo $item_count; ?>">
                         <div class="eael-circle-inner">
 							<?php foreach ( $settings['eael_interactive_circle_item'] as $index => $item ) :
+								$item_style_classic = ! empty( $item['eael_interactive_circle_tab_bgtype_background'] ) && 'classic' === $item['eael_interactive_circle_tab_bgtype_background'] ? 'classic' : '';
 								$item_count = $index + 1;
 								?>
                                 <div class="eael-circle-item elementor-repeater-item-<?php echo $item['_id']; ?>">
@@ -821,7 +822,7 @@ class Interactive_Circle extends Widget_Base {
                                             <div class="eael-shape-1"></div>
                                             <div class="eael-shape-2"></div>
                                         </div>
-                                        <div class="eael-circle-btn-icon">
+                                        <div class="eael-circle-btn-icon <?php esc_attr( $item_style_classic ); ?>">
                                             <div class="eael-circle-icon-inner">
 												<?php
 												if ( $show_btn_icon ) {
