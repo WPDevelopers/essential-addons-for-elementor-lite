@@ -851,6 +851,18 @@ trait Ajax_Handler {
 				update_option( 'eael_recaptcha_language_v3', sanitize_text_field( $settings['recaptchaLanguageV3'] ) );
 			}
 
+			if ( isset( $settings['lr_custom_profile_fields_text'] ) ) {
+				update_option( 'eael_custom_profile_fields_text', sanitize_text_field( $settings['lr_custom_profile_fields_text'] ) );
+			} else {
+				update_option( 'eael_custom_profile_fields_text', '' );
+			}
+	
+			if ( isset( $settings['lr_custom_profile_fields_img'] ) ) {
+				update_option( 'eael_custom_profile_fields_img', sanitize_text_field( $settings['lr_custom_profile_fields_img'] ) );
+			} else {
+				update_option( 'eael_custom_profile_fields_img', '' );
+			}	
+
 			//pro settings
 			if ( isset( $settings['gClientId'] ) ) {
 				update_option( 'eael_g_client_id', sanitize_text_field( $settings['gClientId'] ) );
