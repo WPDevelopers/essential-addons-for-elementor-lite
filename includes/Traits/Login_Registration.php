@@ -1581,7 +1581,19 @@ trait Login_Registration {
 		if ( !current_user_can( 'edit_user', $user_id ) ) { 
 			return false; 
 		}
-		update_user_meta( $user_id, 'eael_phone_number', $_POST['eael_phone_number'] );
+		update_user_meta( $user_id, 'eael_phone_number', sanitize_text_field( $_POST['eael_phone_number'] ) );
+
+		$eael_custom_profile_fields = $this->get_eael_custom_profile_fields('all');
+
+		if( count( $eael_custom_profile_fields ) ){
+			foreach( $eael_custom_profile_fields as $eael_custom_profile_field_key => $eael_custom_profile_field_value ){
+				if( empty( $_POST[ $eael_custom_profile_field_key ] ) ){
+					continue;
+				}
+
+				update_user_meta( $user_id, sanitize_key( self::$eael_custom_profile_field_prefix . $eael_custom_profile_field_key ), sanitize_text_field( $_POST[ $eael_custom_profile_field_key ] ) );
+			}
+		}
 	}
 
 	public function eael_is_phone($phone){
