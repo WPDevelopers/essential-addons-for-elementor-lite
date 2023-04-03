@@ -33,7 +33,7 @@ class SVG_Draw Extends Widget_Base
 
     public function get_icon()
     {
-        return 'eaicon-advanced-tabs';
+        return 'eaicon-svg-draw';
     }
 
     public function get_categories()
