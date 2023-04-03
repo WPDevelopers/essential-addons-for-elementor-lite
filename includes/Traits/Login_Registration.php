@@ -1387,6 +1387,36 @@ trait Login_Registration {
 		return $message;
 	}
 
+	public function replace_placeholders_custom_fields( $message ){
+		// replace custom profile field shortcodes
+		$eael_custom_profile_fields_text = $this->get_eael_custom_profile_fields('text');
+		$eael_custom_profile_fields_image = $this->get_eael_custom_profile_fields('image');
+		$eael_custom_profile_fields_text_keys = count( $eael_custom_profile_fields_text ) ? array_keys( $eael_custom_profile_fields_text ) : [];
+		$eael_custom_profile_fields_image_keys = count( $eael_custom_profile_fields_image ) ? array_keys( $eael_custom_profile_fields_image ) : [];
+
+		$custom_field_placeholders = $custom_field_replacements = [];
+
+		if( count( $eael_custom_profile_fields_text_keys ) ){
+			foreach( $eael_custom_profile_fields_text_keys as $eael_custom_profile_fields_text_key){
+				$custom_field_placeholders[] = '/\[' . esc_html( $eael_custom_profile_fields_text_key ) . '\]/';
+				$custom_field_replacements[] = esc_html( self::$email_options[$eael_custom_profile_fields_text_key] );
+			}
+		}
+
+		if( count( $eael_custom_profile_fields_image_keys ) ){
+			foreach( $eael_custom_profile_fields_image_keys as $eael_custom_profile_fields_image_key){
+				$custom_field_placeholders[] = '/\[' . esc_html( $eael_custom_profile_fields_image_key ) . '\]/';
+				$custom_field_replacements[] = esc_url( self::$email_options[$eael_custom_profile_fields_image_key] );
+			}
+		}
+
+		if( count( $custom_field_placeholders ) ){
+			$message = preg_replace( $custom_field_placeholders, $custom_field_replacements, $message );
+		}
+
+		return $message;
+	}
+
 	/**
 	 * It replaces placeholders with dynamic value and returns it.
 	 *
