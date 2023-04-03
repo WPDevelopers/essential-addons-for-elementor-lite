@@ -705,6 +705,14 @@
 .theme-dt-the7.eael-woo-checkout .woocommerce .woo-checkout-payment #payment .payment_methods .payment_box {
   padding: 10px;
 }
+.theme-dt-the7 .ea-woo-checkout.layout-multi-steps .woocommerce #customer_details.col2-set .col-2,
+.theme-dt-the7 .ea-woo-checkout.layout-split .woocommerce #customer_details.col2-set .col-2 {
+  float: right !important;
+}
+.theme-dt-the7 .ea-woo-checkout.layout-multi-steps .steps-buttons,
+.theme-dt-the7 .ea-woo-checkout.layout-split .steps-buttons {
+  display: block;
+}
 .theme-dt-the7 .ea-woo-checkout-btn-prev,
 .theme-dt-the7 .ea-woo-checkout-btn-next {
   border: none;

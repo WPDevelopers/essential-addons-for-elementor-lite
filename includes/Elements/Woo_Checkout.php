@@ -1029,7 +1029,8 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#ffffff',
 				'selectors' => [
-					'{{WRAPPER}} .ea-woo-checkout-order-review .footer-content' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-woo-checkout-order-review .footer-content' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-woo-checkout-order-review .footer-content #shipping_method label' => 'color: {{VALUE}};',
 				],
 				'condition' => [
 					'ea_woo_checkout_layout!' => 'default',
@@ -1513,7 +1514,7 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#7866ff',
 				'selectors' => [
-					'{{WRAPPER}} .ea-woo-checkout .woocommerce .woo-checkout-login .button' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .ea-woo-checkout .woocommerce .woo-checkout-login .button' => 'background-color: {{VALUE}};background: {{VALUE}};',
 				],
 			]
 		);
@@ -1865,7 +1866,7 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#7866ff',
 				'selectors' => [
-					'{{WRAPPER}} .ea-woo-checkout .woocommerce .woo-checkout-coupon .button' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .ea-woo-checkout .woocommerce .woo-checkout-coupon .button' => 'background: {{VALUE}};',
 				],
 			]
 		);
@@ -1905,7 +1906,7 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#7866ff',
 				'selectors' => [
-					'{{WRAPPER}} .ea-woo-checkout .woocommerce .woo-checkout-coupon .button:hover' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .ea-woo-checkout .woocommerce .woo-checkout-coupon .button:hover' => 'background: {{VALUE}};',
 				],
 			]
 		);
@@ -2495,7 +2496,7 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#443e6d',
 				'selectors' => [
-					'.eael-woo-checkout {{WRAPPER}} .woo-checkout-payment, {{WRAPPER}} #payment' => 'background-color: {{VALUE}};',
+					'.eael-woo-checkout {{WRAPPER}} .woo-checkout-payment, {{WRAPPER}} #payment' => 'background-color: {{VALUE}};background: {{VALUE}};',
 				],
 			]
 		);

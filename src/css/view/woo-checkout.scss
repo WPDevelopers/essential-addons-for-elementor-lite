@@ -826,8 +826,20 @@ $base-font-size: 14px;
 			}
 		}
 	}
-	&.eael-woo-checkout .woocommerce .woo-checkout-payment #payment .payment_methods .payment_box{
-		padding: 10px;
+	&.eael-woo-checkout {
+		.woocommerce .woo-checkout-payment #payment .payment_methods .payment_box{
+			padding: 10px;
+		}
+	}
+
+	.ea-woo-checkout.layout-multi-steps,
+	.ea-woo-checkout.layout-split{
+		.woocommerce #customer_details.col2-set .col-2{
+			float: right !important;
+		}
+		.steps-buttons{
+			display: block;
+		}
 	}
 	.ea-woo-checkout-btn-prev,
 	.ea-woo-checkout-btn-next{
