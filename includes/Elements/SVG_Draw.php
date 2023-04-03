@@ -91,7 +91,7 @@ class SVG_Draw Extends Widget_Base
             [
                 'label' => esc_html__( 'Source', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::SELECT,
-                'default' => 'custom',
+                'default' => 'icon',
                 'options' => [
                     'icon' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
                     'custom' => esc_html__( 'Custom SVG', 'essential-addons-for-elementor-lite' ),
