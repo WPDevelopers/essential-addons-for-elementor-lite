@@ -20,6 +20,8 @@ trait Login_Registration {
 	public static $send_custom_email = false;
 	public static $send_custom_email_admin = false;
 	public static $send_custom_email_lostpassword = false;
+	public static $eael_custom_profile_field_prefix = 'eael_profile_field_';
+
 	/**
 	 * It will contain all email related options like email subject, content, email content type etc.
 	 * @var array   $email_options {
@@ -190,6 +192,16 @@ trait Login_Registration {
 			update_option( 'eael_login_error_' . $widget_id, $err_msg, false );
 		} else {
 			wp_set_current_user( $user_data->ID, $user_login );
+			$current_user_role = ! empty( $user_data->roles[0] ) ? $user_data->roles[0] : '';
+
+			$redirect_to = '';
+			if ( ! empty( $_POST['redirect_to'] ) ) { 
+				$redirect_to = esc_url_raw( $_POST['redirect_to'] );
+				if( ! empty( $current_user_role ) ){
+					$redirect_to = ! empty( $_POST['redirect_to_' . esc_html( $current_user_role )] ) ? esc_url_raw( $_POST['redirect_to_' . esc_html( $current_user_role )] ) : $redirect_to;
+				}
+			}
+			
 			do_action( 'wp_login', $user_data->user_login, $user_data );
 			do_action( 'eael/login-register/after-login', $user_data->user_login, $user_data );
 			if ( $ajax ) {
@@ -197,14 +209,14 @@ trait Login_Registration {
 				$data = [
 					'message' => isset( $settings['success_login'] ) ? Helper::eael_wp_kses( $settings['success_login'] ) : __( 'You are logged in successfully', 'essential-addons-for-elementor-lite' ),
 				];
-				if ( ! empty( $_POST['redirect_to'] ) ) {
-					$data['redirect_to'] = esc_url_raw( $_POST['redirect_to'] );
+				if ( ! empty( $redirect_to ) ) {
+					$data['redirect_to'] = esc_url_raw( $redirect_to );
 				}
 				wp_send_json_success( $data );
 			}
 
-			if ( ! empty( $_POST['redirect_to'] ) ) {
-				wp_safe_redirect( esc_url_raw( $_POST['redirect_to'] ) );
+			if ( ! empty( $redirect_to ) ) {
+				wp_safe_redirect( esc_url_raw( $redirect_to ) );
 				exit();
 			}
 		}
