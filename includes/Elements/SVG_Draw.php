@@ -532,15 +532,15 @@ class SVG_Draw Extends Widget_Base
 
         if ( $settings['eael_svg_src'] === 'icon' ):
 
-            if ( $settings['eael_svg_icon']['library'] === 'svg' ) {
-                Icons_Manager::render_icon($settings['eael_svg_icon'], ['aria-hidden' => 'true', 'class' => ['eael-svg-drow-wrapper']]);
-            }
-            else if( $settings['eael_svg_icon']['library'] === '' && $settings['eael_svg_icon']['value'] === '' ){
-                echo $this->default_custom_svg();
-            }
-            else {
-                echo Helper::get_svg_by_icon($settings['eael_svg_icon']);
-            }
+	        if ( $settings['eael_svg_icon']['library'] === 'svg' ) {
+		        if ( empty( $settings['eael_svg_icon']['value']['id'] ) ) {
+			        echo $this->default_custom_svg();
+		        }
+
+		        Icons_Manager::render_icon( $settings['eael_svg_icon'], [ 'aria-hidden' => 'true', 'class' => [ 'eael-svg-drow-wrapper' ] ] );
+	        } else {
+		        echo Helper::get_svg_by_icon( $settings['eael_svg_icon'] );
+	        }
 
         else:
             echo $svg_html;
