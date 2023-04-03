@@ -1133,7 +1133,7 @@ class Adv_Accordion extends Widget_Base
                 'class'         => $tab_title_class,
                 'tabindex'      => $id_int . $tab_count,
                 'data-tab'      => $tab_count,
-                'role'          => 'tab',
+//                'role'          => 'tab',
                 'aria-controls' => 'elementor-tab-content-' . $id_int . $tab_count,
             ]);
 
@@ -1141,7 +1141,7 @@ class Adv_Accordion extends Widget_Base
                 'id'              => 'elementor-tab-content-' . $id_int . $tab_count,
                 'class'           => $tab_content_class,
                 'data-tab'        => $tab_count,
-                'role'            => 'tabpanel',
+//                'role'            => 'tabpanel',
                 'aria-labelledby' => $tab_id,
             ]);
 
@@ -1179,8 +1179,8 @@ class Adv_Accordion extends Widget_Base
                     }
 
                 } else {
-                    echo '<span class="eael-advanced-accordion-icon-closed"><i class="' . $tab['eael_adv_accordion_tab_title_icon'] . ' fa-accordion-icon"></i></span>';
-                    echo '<span class="eael-advanced-accordion-icon-opened"><i class="' . !empty($tab['eael_adv_accordion_tab_title_icon_opened']) ? $tab['eael_adv_accordion_tab_title_icon_opened'] : ' fa fa-minus ' . ' fa-accordion-icon"></i></span>';
+                    echo '<span class="eael-advanced-accordion-icon-closed"><i class="' . ( ! empty( $tab['eael_adv_accordion_tab_title_icon'] ) ? $tab['eael_adv_accordion_tab_title_icon'] : '' ) . ' fa-accordion-icon"></i></span>';
+                    echo '<span class="eael-advanced-accordion-icon-opened"><i class="' . ( ! empty( $tab['eael_adv_accordion_tab_title_icon_opened'] ) ? $tab['eael_adv_accordion_tab_title_icon_opened'] : ' fa fa-minus ' ) . ' fa-accordion-icon"></i></span>';
                 }
             }
             // tab title
