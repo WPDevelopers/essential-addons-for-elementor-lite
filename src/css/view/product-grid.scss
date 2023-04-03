@@ -268,13 +268,14 @@
 
                     a.added_to_cart {
                         display: block;
-                        margin: 0 0 15px 0;
-                        padding: 0;
+                        margin: 15px 15px;
+                        padding: 12px;
                         font-size: 14px;
                         line-height: 1;
-                        text-transform: capitalize;
-                        color: #333;
-                        background-color: transparent;
+                        text-transform: uppercase;
+                        color: #fff;
+                        background-color: #333;
+                        font-weight: 400;
                     }
 
                     .add-to-whishlist {

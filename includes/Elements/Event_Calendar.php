@@ -1643,7 +1643,7 @@ class Event_Calendar extends Widget_Base
             [
                 'name' => 'event_popup_content_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .eaelec-modal-body',
+                'selector' => '{{WRAPPER}} .eaelec-modal-body, {{WRAPPER}} .eaelec-modal-body *',
             ]
         );
 
@@ -1654,7 +1654,9 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eaelec-modal-body' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eaelec-modal-body *' => 'color: {{VALUE}};',
                 ],
+                'default' => '#555'
             ]
         );
 
@@ -1978,7 +1980,8 @@ class Event_Calendar extends Widget_Base
 		            'borderColor'       => ! empty( $settings_eael_event_global_popup_ribbon_color ) ? $settings_eael_event_global_popup_ribbon_color : '#10ecab',
 		            'textColor'         => $settings_eael_event_global_text_color,
 		            'color'             => $settings_eael_event_global_bg_color,
-		            'url'               => ( $settings['eael_event_details_link_hide'] !== 'yes' ) ? esc_url_raw( $event["eael_event_link"]["url"] ) : '',
+                    'hide_details_link' => $settings['eael_event_details_link_hide'],
+                    'url'               => esc_url_raw( $event["eael_event_link"]["url"] ),
 		            'allDay'            => $event['eael_event_all_day'],
 		            'external'          => $event['eael_event_link']['is_external'],
 		            'nofollow'          => $event['eael_event_link']['nofollow'],

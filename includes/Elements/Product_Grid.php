@@ -746,6 +746,7 @@ class Product_Grid extends Widget_Base
                 'toggle' => true,
                 'selectors' => [
                     '{{WRAPPER}} .eael-product-grid:not(.list) .woocommerce ul.products li.product' => 'text-align: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-grid:not(.list) .woocommerce ul.products li.product .star-rating' => 'margin-{{VALUE}}: 0;',
                 ],
                 'conditions' => [
                     'relation' => 'and',
