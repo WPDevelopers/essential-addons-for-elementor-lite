@@ -3331,6 +3331,9 @@ class Filterable_Gallery extends Widget_Base
         if ( !empty( $breakpoints ) ){
             $breakpoints = array_reverse( $breakpoints );
             foreach ( $breakpoints as $device => $breakpoint ){
+                if ( empty( $settings['columns_'.$device] ) && in_array( $device, ['mobile', 'tablet'] ) ) {
+                    $settings['columns_'.$device] = $device === 'mobile' ? 1 : 2;
+                }
                 if ( !empty( $settings['columns_'.$device] ) && $breakpoint['is_enabled'] ){
                     $media_query .= '@media only screen and ('. $breakpoint['direction'] .'-width: '. $breakpoint['value'] .'px) {
 					.elementor-element.elementor-element-'. $section_id .'  .eael-filterable-gallery-item-wrap {
