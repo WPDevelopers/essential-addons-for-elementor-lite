@@ -15,6 +15,7 @@ use Elementor\Utils;
 use Elementor\Widget_Base;
 use Essential_Addons_Elementor\Classes\Helper as HelperCLass;
 use Essential_Addons_Elementor\Traits\Login_Registration;
+use WP_Roles;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -220,6 +221,8 @@ class Login_Register extends Widget_Base {
 
 		if( 'on' === get_option( 'eael_custom_profile_fields' ) ){
 			$eael_form_field_types['eael_phone_number'] = __( 'Phone', 'essential-addons-for-elementor-lite' );
+			$eael_custom_profile_fields = $this->get_eael_custom_profile_fields( 'all' );
+			$eael_form_field_types = array_merge( $eael_form_field_types, $eael_custom_profile_fields );
 		}
 		
 		return apply_filters( 'eael/registration-form-fields', $eael_form_field_types );
@@ -1388,10 +1391,44 @@ class Login_Register extends Widget_Base {
 				'is_external' => false,
 				'nofollow'    => true,
 			],
-			'separator'     => 'after',
 		] );
 
+		$this->add_control( 'redirect_based_on_roles', [
+			'label' => __( 'Redirect Based On User Roles', 'essential-addons-for-elementor-lite' ),
+			'type'  => Controls_Manager::SWITCHER,
+			'condition' => [
+				'redirect_after_login' => 'yes',
+			]
+		] );
+
+		$user_roles = $this->eael_get_role_names();
+
+		if( ! empty( $user_roles ) && is_array( $user_roles ) && count( $user_roles ) ){
+			foreach( $user_roles as $user_role_key => $user_role_value ){
+				$this->add_control( 'redirect_url_' . esc_html( $user_role_key ), [
+					'type'          => Controls_Manager::URL,
+					'label'			=> esc_html( __( $user_role_value, 'essential-addons-for-elementor-lite' ) ),
+					'show_external' => false,
+					'placeholder'   => admin_url(),
+					'condition'     => [
+						'redirect_after_login' 		=> 'yes',
+						'redirect_based_on_roles' 	=> 'yes',
+					],
+				] );		
+			}
+		}
+
 		$this->end_controls_section();
+	}
+
+	public function eael_get_role_names() {
+
+		global $wp_roles;
+
+		if ( ! isset( $wp_roles ) )
+			$wp_roles = new WP_Roles();
+
+		return $wp_roles->get_names();
 	}
 
 	protected function social_login_promo() {
@@ -1673,6 +1710,7 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function init_content_register_fields_controls() {
+		$custom_fields_image = array_keys( $this->get_eael_custom_profile_fields( 'image' ) );
 
 		$this->start_controls_section( 'section_content_register_fields', [
 			'label'      => __( 'Register Form Fields', 'essential-addons-for-elementor-lite' ),
@@ -1692,6 +1730,15 @@ class Login_Register extends Widget_Base {
 			'default' => 'first_name',
 		] );
 
+		$repeater->add_control( 'field_type_custom_image_note', [
+			'type'            	=> Controls_Manager::RAW_HTML,
+			'raw'             	=> __( 'File upload works with Non AJAX submission only.', 'essential-addons-for-elementor-lite' ),
+			'condition'       	=> [
+				'field_type' 	=> array_keys( $this->get_eael_custom_profile_fields( 'image' ) ),
+			],
+			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+		] );
+
 		$repeater->add_control( 'field_label', [
 			'label'   => __( 'Label', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::TEXT,
@@ -1701,12 +1748,57 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 
+		$repeater->add_control( 'field_type_custom_image_extensions', [
+			'label'   		=> __( 'File Extensions', 'essential-addons-for-elementor-lite' ),
+			'type'    		=> Controls_Manager::TEXT,
+			'default'		=> '',
+			'placeholder' 	=> '.png, .jpg, .jpeg',
+			'dynamic' => [
+				'active' => true,
+			],
+			'condition' => [
+				'field_type' => $custom_fields_image,
+			],
+		] );
+
+		$repeater->add_control(
+            'field_type_custom_image_filename_length',
+            [
+                'label' 	=> __('Max Filename Length', 'essential-addons-for-elementor-lite'),
+                'type' 		=> Controls_Manager::NUMBER,
+                'default' 	=> '128',
+				'min' 		=> '1',
+				'max' 		=> '128',
+                'condition' => [
+					'field_type' => $custom_fields_image,
+				],
+            ]
+        );
+
+		$repeater->add_control(
+            'field_type_custom_image_filesize',
+            [
+                'label' 		=> __('Max Filesize (MB)', 'essential-addons-for-elementor-lite'),
+                'description'	=> __('Set max filesize up to 512 MB', 'essential-addons-for-elementor-lite'),
+                'type' 			=> Controls_Manager::NUMBER,
+                'default' 		=> '5',
+				'Min'			=> '1',
+				'Max'			=> '512',
+                'condition' 	=> [
+					'field_type' => $custom_fields_image,
+				],
+            ]
+        );
+
 		$repeater->add_control( 'placeholder', [
 			'label'   => __( 'Placeholder', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::TEXT,
 			'default' => '',
 			'dynamic' => [
 				'active' => true,
+			],
+			'condition' => [
+				'field_type!' => $custom_fields_image,
 			],
 		] );
 
@@ -1959,7 +2051,7 @@ class Login_Register extends Widget_Base {
 
 		$this->add_control( 'reg_email_content_note', [
 			'type'            => Controls_Manager::RAW_HTML,
-			'raw'             => __( '<strong>Note:</strong> You can use dynamic content in the email body like [fieldname]. For example [username] will be replaced by user-typed username. Available tags are: [password], [username], [email], [firstname],[lastname], [website], [loginurl], [password_reset_link] and [sitetitle] ', 'essential-addons-for-elementor-lite' ),
+			'raw'             => __( '<strong>Note:</strong> You can use dynamic content in the email body like [fieldname]. For example [username] will be replaced by user-typed username. Available tags are: [password], [username], [email], [firstname],[lastname], [website], [loginurl], [password_reset_link], [eael_phone_number] and [sitetitle]. <br>For custom profile fields use slug of the field name e.x. [my_custom_field_1]', 'essential-addons-for-elementor-lite' ),
 			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 			'condition'       => [
 				'reg_email_template_type' => 'custom',
@@ -2065,7 +2157,7 @@ class Login_Register extends Widget_Base {
 
 		$this->add_control( 'reg_admin_email_content_note', [
 			'type'            => Controls_Manager::RAW_HTML,
-			'raw'             => __( '<strong>Note:</strong> You can use dynamic content in the email body like [fieldname]. For example [username] will be replaced by user-typed username. Available tags are: [username], [email], [firstname],[lastname], [website], [loginurl] and [sitetitle] ', 'essential-addons-for-elementor-lite' ),
+			'raw'             => __( '<strong>Note:</strong> You can use dynamic content in the email body like [fieldname]. For example [username] will be replaced by user-typed username. Available tags are: [username], [email], [firstname],[lastname], [website], [loginurl] and [sitetitle]. <br>For custom profile fields use slug of the field name e.x. [my_custom_field_1]', 'essential-addons-for-elementor-lite' ),
 			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 			'condition'       => [
 				'reg_admin_email_template_type' => 'custom',
@@ -5229,17 +5321,28 @@ class Login_Register extends Widget_Base {
 			$eael_phone_number_exists = 0;
 			
 			$f_labels            = [
-				'email'            => __( 'Email', 'essential-addons-for-elementor-lite' ),
-				'password'         => __( 'Password', 'essential-addons-for-elementor-lite' ),
-				'confirm_password' => __( 'Confirm Password', 'essential-addons-for-elementor-lite' ),
-				'user_name'        => __( 'Username', 'essential-addons-for-elementor-lite' ),
-				'first_name'       => __( 'First Name', 'essential-addons-for-elementor-lite' ),
-				'last_name'        => __( 'Last Name', 'essential-addons-for-elementor-lite' ),
-				'website'          => __( 'Website', 'essential-addons-for-elementor-lite' ),
-				'eael_phone_number'          => __( 'Phone', 'essential-addons-for-elementor-lite' ),
+				'email'            	=> __( 'Email', 'essential-addons-for-elementor-lite' ),
+				'password'         	=> __( 'Password', 'essential-addons-for-elementor-lite' ),
+				'confirm_password' 	=> __( 'Confirm Password', 'essential-addons-for-elementor-lite' ),
+				'user_name'        	=> __( 'Username', 'essential-addons-for-elementor-lite' ),
+				'first_name'       	=> __( 'First Name', 'essential-addons-for-elementor-lite' ),
+				'last_name'        	=> __( 'Last Name', 'essential-addons-for-elementor-lite' ),
+				'website'          	=> __( 'Website', 'essential-addons-for-elementor-lite' ),
+				'eael_phone_number'	=> __( 'Phone', 'essential-addons-for-elementor-lite' ),
 			];
-			$repeated_f_labels   = [];
 
+			$eael_custom_profile_fields_text = $this->get_eael_custom_profile_fields( 'text' );
+			$eael_custom_profile_fields_image = $this->get_eael_custom_profile_fields( 'image' );
+			$eael_custom_profile_fields = array_merge( $eael_custom_profile_fields_text, $eael_custom_profile_fields_image );
+
+			$f_labels = array_merge($f_labels, $eael_custom_profile_fields);
+
+			foreach( $eael_custom_profile_fields as $eael_custom_profile_field_key => $eael_custom_profile_field_value ) {
+				$eael_custom_profile_field_key_exists = $eael_custom_profile_field_key . '_exists';
+				$$eael_custom_profile_field_key_exists = 0; // dynamic variable
+			}
+
+			$repeated_f_labels   = [];
 
 			//Login link related
 			$lgn_link_action = ! empty( $this->ds['login_link_action'] ) ? $this->ds['login_link_action'] : 'form';
@@ -5310,10 +5413,24 @@ class Login_Register extends Widget_Base {
 						<?php
 						$this->print_form_header( 'register' );
 						do_action( 'eael/login-register/before-register-form', $this );
+						
+						$has_file_input = 0;
+						foreach ( $this->ds['register_fields'] as $single_field ) {
+							$single_field_type = $single_field['field_type'];
+
+							if( ! empty( $eael_custom_profile_fields_image[ $single_field_type ] ) ){
+								$has_file_input = 1;
+								break;
+							}
+						}
 						?>
                         <form class="eael-register-form eael-lr-form"
                               id="eael-register-form"
-                              method="post">
+                              method="post"
+							  <?php if ( $has_file_input ) : ?> 
+								enctype="multipart/form-data"
+							  <?php endif; ?>
+							  >
 							<?php do_action( 'eael/login-register/after-register-form-open', $this ); ?>
 							<?php // Print all dynamic fields
 							foreach ( $this->ds['register_fields'] as $f_index => $field ) :
@@ -5321,9 +5438,14 @@ class Login_Register extends Widget_Base {
 								$dynamic_field_name = "{$field_type}_exists";
 								$$dynamic_field_name ++; //NOTE, double $$ intentional. Dynamically update the var check eg. $username_exists++ to prevent user from using the same field twice
 								// is same field repeated?
-								if ( $$dynamic_field_name > 1 ) {
-									$repeated_f_labels[] = $f_labels[ $field_type ];
+								if( isset( $$dynamic_field_name ) ){
+									$$dynamic_field_name ++; //NOTE, double $$ intentional. Dynamically update the var check eg. $username_exists++ to prevent user from using the same field twice
+									// is same field repeated?
+									if ( $$dynamic_field_name > 1 ) {
+										$repeated_f_labels[] = $f_labels[ $field_type ];
+									}
 								}
+
 								if ( 'password' === $field_type ) {
 									$is_pass_valid = true;
 								}
@@ -5355,6 +5477,14 @@ class Login_Register extends Widget_Base {
 										break;
 									default:
 										$field_input_type = $field_type;
+								}
+
+								if( ! empty( $eael_custom_profile_fields_text[ $field_type ] ) ){
+									$field_input_type = 'text';
+								}
+
+								if( ! empty( $eael_custom_profile_fields_image[ $field_type ] ) ){
+									$field_input_type = 'file';
 								}
 
 								$this->add_render_attribute( [
