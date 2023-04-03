@@ -322,12 +322,53 @@ trait Login_Registration {
 		}
 		// prepare vars and flag errors
 		$settings_register_fields = isset($settings['register_fields']) ? $settings['register_fields'] : array();
+
+		$eael_custom_profile_fields_text = $this->get_eael_custom_profile_fields('text');
+		$eael_custom_profile_fields_image = $this->get_eael_custom_profile_fields('image');
+		$eael_custom_profile_fields = array_merge( $eael_custom_profile_fields_text, $eael_custom_profile_fields_image );
+
+		$eael_custom_profile_fields_image_keys = array_keys( $eael_custom_profile_fields_image );
+
 		if( count($settings_register_fields) ){
 			foreach($settings_register_fields as $register_field){
 				if( isset( $register_field['field_type'] ) && 'eael_phone_number' === $register_field['field_type']	){
 					//Phone number field
 					if( !empty( $register_field['required'] ) && 'yes' === $register_field['required'] && empty( $_POST['eael_phone_number'] ) ) {
 						$errors['eael_phone_number'] = isset( $settings['err_phone_number_missing'] ) ? $settings['err_phone_number_missing'] : __( 'Phone number is required', 'essential-addons-for-elementor-lite' );
+					}
+				}
+
+				if( isset( $register_field['field_type'] ) && in_array( $register_field['field_type'], $eael_custom_profile_fields_image_keys )	){
+					if ( ! empty( $_FILES[ $register_field['field_type'] ] ) ) {
+						$custom_field_file_name 		= sanitize_text_field( $_FILES[ $register_field['field_type'] ]["name"] );
+						$custom_field_file_extension 	= end( ( explode( ".", $custom_field_file_name ) ) ); # extra () to prevent notice
+						$custom_field_file_size 		= intval( $_FILES[ $register_field['field_type'] ]["size"] );
+
+						if( ! empty ( $register_field['field_type_custom_image_extensions'] ) ){
+							$field_type_custom_image_extensions_trimmed = trim( sanitize_text_field( $register_field['field_type_custom_image_extensions'] ), ' ,\t\n\r\0\x0B' );
+							$field_type_custom_image_extensions_array 	= array_unique( explode( ',', $field_type_custom_image_extensions_trimmed ) );	
+
+							if( ! in_array( $custom_field_file_extension, $field_type_custom_image_extensions_array ) ) {
+								$errors[ $register_field['field_type'] ] = isset( $settings['field_type_custom_image_extensions_error'] ) ? $settings['field_type_custom_image_extensions_error'] : __( 'Invalid File Type!', 'essential-addons-for-elementor-lite' );
+							}
+						}
+
+						if( ! empty ( $register_field['field_type_custom_image_filesize'] ) ){
+							$field_type_custom_image_filesize 		= intval( $register_field['field_type_custom_image_extensions'] );
+							$field_type_custom_image_filesize_kb 	= $field_type_custom_image_filesize * 1000;
+
+							if( $custom_field_file_size > $field_type_custom_image_filesize_kb || $custom_field_file_size < 512000 ) {
+                                $errors[ $register_field['field_type'] ] = isset( $settings['field_type_custom_image_filesize_error'] ) ? $settings['field_type_custom_image_filesize_error'] : __( 'File Size Limit Exceeded!', 'essential-addons-for-elementor-lite' );
+                            }
+						}
+
+						if( ! empty ( $register_field['field_type_custom_image_filename_length'] ) ){
+							$field_type_custom_image_filename_length	= intval( $register_field['field_type_custom_image_filename_length'] );
+
+							if( strlen( $custom_field_file_name ) > $field_type_custom_image_filename_length ) {
+                                $errors[ $register_field['field_type'] ] = isset( $settings['field_type_custom_image_filename_length_error'] ) ? $settings['field_type_custom_image_filename_length_error'] : __( 'Filename Max Length Exceeded!', 'essential-addons-for-elementor-lite' );
+                            }
+						}
 					}
 				}
 
@@ -428,7 +469,7 @@ trait Login_Registration {
 		self::$email_options['lastname']            = '';
 		self::$email_options['website']             = '';
 		self::$email_options['password_reset_link'] = '';
-		self::$email_options['eael_phone_number'] = '';
+		self::$email_options['eael_phone_number'] 	= '';
 
 		// handle registration...
 		$user_data = [
