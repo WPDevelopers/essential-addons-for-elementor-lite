@@ -1348,6 +1348,7 @@ trait Login_Registration {
 	 */
 	public function replace_placeholders( $message, $receiver = 'user' ) {
 		$placeholders = [
+			'/\[eael_phone_number\]/',
 			'/\[password\]/',
 			'/\[password_reset_link\]/',
 			'/\[username\]/',
@@ -1359,6 +1360,7 @@ trait Login_Registration {
 			'/\[sitetitle\]/',
 		];
 		$replacement  = [
+			self::$email_options['eael_phone_number'],
 			self::$email_options['password'],
 			self::$email_options['password_reset_link'],
 			self::$email_options['username'],
@@ -1378,7 +1380,11 @@ trait Login_Registration {
 			unset( $replacement[1] );
 		}
 
-		return preg_replace( $placeholders, $replacement, $message );
+		$message = preg_replace( $placeholders, $replacement, $message );
+
+		$message = $this->replace_placeholders_custom_fields($message);
+
+		return $message;
 	}
 
 	/**
