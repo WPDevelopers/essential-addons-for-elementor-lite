@@ -1613,4 +1613,45 @@ trait Login_Registration {
 		return true;
 	}
 
+	public function get_eael_custom_profile_fields( $type = 'text' ){
+		$eael_custom_profile_fields = [];
+		$custom_profile_fields_arr 	= [];
+
+		$eael_custom_profile_field_text_trimmed  	= trim( get_option( 'eael_custom_profile_fields_text' ), ' ,\t\n\r\0\x0B' );
+		$eael_custom_profile_field_image_trimmed 	= trim( get_option( 'eael_custom_profile_fields_img' ), ' ,\t\n\r\0\x0B' );
+
+		$eael_custom_profile_field_text_trimmed 	= str_replace('eael_profile_field_', '', $eael_custom_profile_field_text_trimmed);
+		$eael_custom_profile_field_image_trimmed 	= str_replace('eael_profile_field_', '', $eael_custom_profile_field_image_trimmed);
+
+		$custom_profile_fields_text_arr 			= ! empty ( $eael_custom_profile_field_text_trimmed ) ? array_unique( explode( ',', $eael_custom_profile_field_text_trimmed ) ) 	: [];
+		$custom_profile_fields_img_arr  			= ! empty( $eael_custom_profile_field_image_trimmed ) ? array_unique( explode( ',', $eael_custom_profile_field_image_trimmed ) ) 	: [];
+		$custom_profile_fields_all_arr 				= array_merge( $custom_profile_fields_text_arr, $custom_profile_fields_img_arr ); 
+
+		switch( $type ){
+			case 'text': 
+				$custom_profile_fields_arr = $custom_profile_fields_text_arr;
+				break;
+
+			case 'image':
+				$custom_profile_fields_arr = $custom_profile_fields_img_arr;
+				break;
+
+			case 'all':
+				$custom_profile_fields_arr = $custom_profile_fields_all_arr;
+				break;
+
+			default:
+				break;
+		}
+
+		if( count( $custom_profile_fields_arr ) ){
+			foreach( $custom_profile_fields_arr as $custom_profile_field_text ){
+				$custom_profile_field_slug = str_replace(' ', '_', trim( strtolower( sanitize_text_field( $custom_profile_field_text ) ), ' ' ));
+				$eael_custom_profile_fields[ sanitize_text_field( $custom_profile_field_slug ) ] = __( esc_html( $custom_profile_field_text ), 'essential-addons-for-elementor-lite' );
+			}
+		}
+
+		return $eael_custom_profile_fields;
+	}
+
 }
