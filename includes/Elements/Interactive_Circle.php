@@ -822,7 +822,7 @@ class Interactive_Circle extends Widget_Base {
                                             <div class="eael-shape-1"></div>
                                             <div class="eael-shape-2"></div>
                                         </div>
-                                        <div class="eael-circle-btn-icon <?php esc_attr( $item_style_classic ); ?>">
+                                        <div class="eael-circle-btn-icon <?php echo esc_attr( $item_style_classic ); ?>">
                                             <div class="eael-circle-icon-inner">
 												<?php
 												if ( $show_btn_icon ) {
