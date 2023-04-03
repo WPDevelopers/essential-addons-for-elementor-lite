@@ -492,6 +492,16 @@ trait Login_Registration {
 			$user_data['eael_phone_number'] = self::$email_options['eael_phone_number'] = sanitize_text_field( $_POST['eael_phone_number'] );
 		}
 
+		if( count( $eael_custom_profile_fields_text ) ){
+			foreach( $eael_custom_profile_fields_text as $eael_custom_profile_field_text_key => $eael_custom_profile_field_text_value ){
+				self::$email_options[$eael_custom_profile_field_text_key] = '';
+
+				if ( ! empty( $_POST[ $eael_custom_profile_field_text_key ] ) ) {
+					$user_data[$eael_custom_profile_field_text_key] = self::$email_options[$eael_custom_profile_field_text_key] = sanitize_text_field( $_POST[ $eael_custom_profile_field_text_key ] );
+				}
+			}
+		}
+
 		$register_actions    = [];
 		$custom_redirect_url = '';
 		if ( !empty( $settings) ) {
@@ -531,7 +541,6 @@ trait Login_Registration {
 			}
 		}
 
-
 		$user_data = apply_filters( 'eael/login-register/new-user-data', $user_data );
 
 		do_action( 'eael/login-register/before-insert-user', $user_data );
@@ -547,8 +556,34 @@ trait Login_Registration {
 
 		$user_id = wp_insert_user( $user_data );
 
+		if( count( $eael_custom_profile_fields_image ) ){
+			require_once( ABSPATH . 'wp-admin/includes/image.php' );
+			require_once( ABSPATH . 'wp-admin/includes/file.php' );
+			require_once( ABSPATH . 'wp-admin/includes/media.php' );
+
+			foreach( $eael_custom_profile_fields_image as $eael_custom_profile_field_image_key => $eael_custom_profile_field_value ){
+				self::$email_options[$eael_custom_profile_field_image_key] = '';
+
+				if ( ! empty( $_FILES[ $eael_custom_profile_field_image_key ] ) ) {
+					$attachment_id = media_handle_upload( $eael_custom_profile_field_image_key, 0, [ 'post_author' => $user_id ] );
+					if ( ! is_wp_error( $attachment_id ) ) {
+						$user_data[ $eael_custom_profile_field_image_key ] = sanitize_text_field( $attachment_id );
+						self::$email_options[$eael_custom_profile_field_image_key] = wp_get_attachment_image_url( sanitize_text_field( $attachment_id ) );
+					}
+				}
+			}
+		}
+
 		if ( ! empty( $user_data['eael_phone_number'] ) ) {
 			update_user_meta( $user_id, 'eael_phone_number', $user_data['eael_phone_number'] );
+		}
+
+		if( count( $eael_custom_profile_fields ) ){
+			foreach( $eael_custom_profile_fields as $eael_custom_profile_field_key => $eael_custom_profile_field_value ){
+				if ( ! empty( $user_data[ $eael_custom_profile_field_key ] ) ) {
+					update_user_meta( $user_id, $eael_custom_profile_field_key, $user_data[ $eael_custom_profile_field_key ] );
+				}
+			}
 		}
 
 		do_action( 'eael/login-register/after-insert-user', $user_id, $user_data );
