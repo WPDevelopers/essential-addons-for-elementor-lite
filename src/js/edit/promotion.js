@@ -25,6 +25,7 @@ ea.hooks.addAction("editMode.init", "ea", () => {
 								"dialog-action",
 								"dialog-buttons-action",
 								"elementor-button",
+								"go-pro",
 								"elementor-button-success",
 								"ea-dialog-buttons-action"
 							);
