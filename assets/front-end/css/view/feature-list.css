@@ -19,7 +19,7 @@
 }
 @media (max-width: 767px) {
   .elementor-widget-eael-feature-list .-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
     padding: 0 30px 0 0;
   }
 }
@@ -134,7 +134,6 @@
   max-width: inherit;
   -ms-interpolation-mode: nearest-neighbor;
       image-rendering: -webkit-optimize-contrast;
-      image-rendering: -moz-crisp-edges;
       image-rendering: -o-pixelated;
       image-rendering: pixelated;
 }
@@ -265,7 +264,7 @@
     margin-bottom: 0 !important;
   }
   .elementor-widget-eael-feature-list .-icon-position-left .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right .eael-feature-list-item {
+  .elementor-widget-eael-feature-list .-icon-position-right .eael-feature-list-item {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -287,7 +286,7 @@
 }
 @media all and (max-width: 1024px) {
   .elementor-widget-eael-feature-list .-tablet-icon-position-left .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-tablet-icon-position-right .eael-feature-list-item {
+  .elementor-widget-eael-feature-list .-tablet-icon-position-right .eael-feature-list-item {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -309,110 +308,110 @@
 }
 @media all and (min-width: 768px) and (max-width: 1024px) {
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-left .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left .eael-feature-list-content-box {
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left .eael-feature-list-content-box,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left .eael-feature-list-content-box {
     margin-right: 0 !important;
     margin-top: 0 !important;
     margin-bottom: 0 !important;
   }
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
     padding: 0 0 0 50px;
   }
 }
 @media (min-width: 768px) and (max-width: 1024px) and (max-width: 767px) {
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
     padding: 0 0 0 30px;
   }
 }
 @media all and (min-width: 768px) and (max-width: 1024px) {
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before {
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before {
     left: 0;
     right: auto;
   }
 }
 @media all and (min-width: 768px) and (max-width: 1024px) {
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after {
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after {
     left: 5px;
     top: 30px;
   }
 }
 @media all and (min-width: 768px) and (max-width: 1024px) {
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top .eael-feature-list-content-box {
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top .eael-feature-list-content-box,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top .eael-feature-list-content-box {
     margin-left: 0 !important;
     margin-right: 0 !important;
     margin-bottom: 0 !important;
   }
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
     padding: 0 0 0 50px;
   }
 }
 @media (min-width: 768px) and (max-width: 1024px) and (max-width: 767px) {
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
     padding: 0 0 0 30px;
   }
 }
 @media all and (min-width: 768px) and (max-width: 1024px) {
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before {
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before {
     left: 0;
     right: auto;
   }
 }
 @media all and (min-width: 768px) and (max-width: 1024px) {
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after {
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after {
     left: 5px;
   }
 }
 @media all and (min-width: 768px) and (max-width: 1024px) {
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right .eael-feature-list-content-box {
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right .eael-feature-list-content-box,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right .eael-feature-list-content-box {
     margin-left: 0 !important;
     margin-top: 0 !important;
     margin-bottom: 0 !important;
   }
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
     padding: 0 50px 0 0;
   }
 }
 @media (min-width: 768px) and (max-width: 1024px) and (max-width: 767px) {
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
     padding: 0 30px 0 0;
   }
 }
 @media all and (min-width: 768px) and (max-width: 1024px) {
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before {
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before {
     right: 0;
     left: auto;
   }
 }
 @media all and (min-width: 768px) and (max-width: 1024px) {
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after {
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after {
     left: auto;
     right: 5px;
   }
@@ -433,14 +432,14 @@
 }
 @media all and (max-width: 767px) {
   .elementor-widget-eael-feature-list .-icon-position-left .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-tablet-icon-position-left .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-tablet-icon-position-right .eael-feature-list-item {
+  .elementor-widget-eael-feature-list .-icon-position-right .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-tablet-icon-position-left .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-tablet-icon-position-right .eael-feature-list-item {
     display: block;
     text-align: left;
   }
   .elementor-widget-eael-feature-list .-mobile-icon-position-left .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-mobile-icon-position-right .eael-feature-list-item {
+  .elementor-widget-eael-feature-list .-mobile-icon-position-right .eael-feature-list-item {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -460,199 +459,199 @@
     flex-direction: row-reverse;
   }
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-content-box {
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-content-box,
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-content-box,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-content-box,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-content-box,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-content-box,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-content-box,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-content-box,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-content-box {
     margin-right: 0 !important;
     margin-top: 0 !important;
     margin-bottom: 0 !important;
   }
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
     padding: 0 0 0 50px;
   }
 }
 @media (max-width: 767px) and (max-width: 767px) {
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
     padding: 0 0 0 30px;
   }
 }
 @media all and (max-width: 767px) {
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before {
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before {
     left: 0;
     right: auto;
   }
 }
 @media all and (max-width: 767px) {
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after {
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-left .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after {
     left: 5px;
   }
 }
 @media all and (max-width: 767px) {
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-left.-mobile-icon-position-top .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-top .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-top .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-content-box {
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-content-box,
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-content-box,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-top .eael-feature-list-content-box,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-content-box,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-content-box,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-top .eael-feature-list-content-box,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-content-box,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-content-box {
     margin-left: 0 !important;
     margin-right: 0 !important;
     margin-bottom: 0 !important;
   }
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-left.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
     padding: 0 0 0 50px;
   }
 }
 @media (max-width: 767px) and (max-width: 767px) {
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-left.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
     padding: 0 0 0 30px;
   }
 }
 @media all and (max-width: 767px) {
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-left.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before {
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before {
     left: 0;
     right: auto;
   }
 }
 @media all and (max-width: 767px) {
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-left.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after {
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-top .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after {
     left: 5px;
   }
 }
 @media all and (max-width: 767px) {
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-left.-mobile-icon-position-right .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-right .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-right .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-content-box,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-content-box {
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-content-box,
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-content-box,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-right .eael-feature-list-content-box,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-content-box,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-content-box,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-right .eael-feature-list-content-box,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-content-box,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-content-box {
     margin-left: 0 !important;
     margin-top: 0 !important;
     margin-bottom: 0 !important;
   }
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-left.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
     padding: 0 50px 0 0;
   }
 }
 @media (max-width: 767px) and (max-width: 767px) {
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-left.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item {
     padding: 0 30px 0 0;
   }
 }
 @media all and (max-width: 767px) {
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-left.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before {
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:before {
     right: 0;
     left: auto;
   }
 }
 @media all and (max-width: 767px) {
   .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-left.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
-.elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after {
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
+  .elementor-widget-eael-feature-list .-icon-position-left.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-left.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
+  .elementor-widget-eael-feature-list .-icon-position-right.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-left.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-right.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after,
+  .elementor-widget-eael-feature-list .-icon-position-top.-tablet-icon-position-top.-mobile-icon-position-right .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after {
     left: auto;
     right: 5px;
   }
