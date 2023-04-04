@@ -3953,7 +3953,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-wrapper .forget-menot" => $this->apply_dim( 'margin' ),
+				"{{WRAPPER}} .lr-form-wrapper .forget-menot label" => $this->apply_dim( 'margin' ),
 			],
 			'condition'  => [
 				'remember_me_style_pot' => 'yes',
