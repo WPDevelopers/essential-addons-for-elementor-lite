@@ -705,6 +705,10 @@
 .theme-dt-the7.eael-woo-checkout .woocommerce .woo-checkout-payment #payment .payment_methods .payment_box {
   padding: 10px;
 }
+.theme-dt-the7 .ea-woo-checkout.layout-multi-steps form.woocommerce-checkout,
+.theme-dt-the7 .ea-woo-checkout.layout-split form.woocommerce-checkout {
+  display: grid;
+}
 .theme-dt-the7 .ea-woo-checkout.layout-multi-steps .woocommerce #customer_details.col2-set .col-2,
 .theme-dt-the7 .ea-woo-checkout.layout-split .woocommerce #customer_details.col2-set .col-2 {
   float: right !important;
