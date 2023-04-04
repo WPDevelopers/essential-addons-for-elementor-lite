@@ -3689,7 +3689,7 @@ class Login_Register extends Widget_Base {
 
 		$this->end_popover();
 		$this->add_control( 'lpv_po_toggle', [
-			'label'     => __( 'Password Visibility Style', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Password Visibility', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::POPOVER_TOGGLE,
 			'condition' => [
 				'password_toggle' => 'yes',
@@ -3786,7 +3786,7 @@ class Login_Register extends Widget_Base {
 		$this->end_popover();
 
 		$this->add_control( 'lpv_po_toggle_resetpassword', [
-			'label'     => __( 'Reset Password Visibility Style', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Reset Password Visibility', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::POPOVER_TOGGLE,
 			'condition' => [
 				'password_toggle_resetpassword' => 'yes',
@@ -3885,11 +3885,11 @@ class Login_Register extends Widget_Base {
 		//Remember Me Style
 		$this->add_control( 'eael_form_rm_fields_heading', [
 			'type'      => Controls_Manager::HEADING,
-			'label'     => __( 'Remember Me Field', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Remember Me', 'essential-addons-for-elementor-lite' ),
 			'separator' => 'before',
 		] );
 		$this->add_control( 'remember_me_style_pot', [
-			'label'        => __( 'Remember Me Style', 'essential-addons-for-elementor-lite' ),
+			'label'        => __( 'Style', 'essential-addons-for-elementor-lite' ),
 			'type'         => Controls_Manager::POPOVER_TOGGLE,
 			'label_off'    => __( 'Default', 'essential-addons-for-elementor-lite' ),
 			'label_on'     => __( 'Custom', 'essential-addons-for-elementor-lite' ),
@@ -4025,7 +4025,7 @@ class Login_Register extends Widget_Base {
 		] );
 		$this->end_popover();
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-			'label'    => __( 'Remember Me Typography', 'essential-addons-for-elementor-lite' ),
+			'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
 			'name'     => "eael_rm_label_typography",
 			'selector' => "{{WRAPPER}} .lr-form-wrapper .forget-menot",
 		] );
@@ -4037,7 +4037,7 @@ class Login_Register extends Widget_Base {
 			'separator' => 'before',
 		] );
 		$this->add_control( 'forget_pass_style_pot', [
-			'label'        => __( 'Forgot Password Style', 'essential-addons-for-elementor-lite' ),
+			'label'        => __( 'Style', 'essential-addons-for-elementor-lite' ),
 			'type'         => Controls_Manager::POPOVER_TOGGLE,
 			'label_off'    => __( 'Default', 'essential-addons-for-elementor-lite' ),
 			'label_on'     => __( 'Custom', 'essential-addons-for-elementor-lite' ),
@@ -4154,7 +4154,7 @@ class Login_Register extends Widget_Base {
 
 		$this->end_popover();
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-			'label'    => __( 'Forgot Password Typography', 'essential-addons-for-elementor-lite' ),
+			'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
 			'name'     => "eael_forget_pass_label_typography",
 			'selector' => "{{WRAPPER}} .lr-form-wrapper .forget-pass a",
 		] );
