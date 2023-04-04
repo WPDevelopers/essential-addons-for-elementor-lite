@@ -47,6 +47,7 @@ class SVG_Draw Extends Widget_Base
             'animation',
             'icon',
             'icon animation',
+            'svg animation',
             'ea',
             'essential addons',
         ];
