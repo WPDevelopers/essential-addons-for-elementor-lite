@@ -3,8 +3,8 @@
 namespace Essential_Addons_Elementor\Elements;
 
 // If this file is called directly, abort.
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
 use \Elementor\Controls_Manager;
@@ -485,60 +485,59 @@ class SVG_Draw extends Widget_Base {
 		$this->end_controls_section();
 	}
 
-    protected function render()
-    {
-        $settings = $this->get_settings_for_display();
-        $svg_html = isset( $settings['svg_html'] ) ? preg_replace('#<script(.*?)>(.*?)</script>#is', '', $settings['svg_html'] ) : '';
-        $this->add_render_attribute('eael-svg-drow-wrapper', [
-            'class'           => [
-                'eael-svg-draw-container',
-                esc_attr( $settings['eael_svg_animation_on'] ),
-                $settings['eael_svg_fill'] === 'before' ? 'fill-svg' : ''
-            ],
-        ]);
+	protected function render() {
+		$settings = $this->get_settings_for_display();
+		$svg_html = isset( $settings['svg_html'] ) ? preg_replace( '#<script(.*?)>(.*?)</script>#is', '', $settings['svg_html'] ) : '';
+		$this->add_render_attribute( 'eael-svg-drow-wrapper', [
+			'class' => [
+				'eael-svg-draw-container',
+				esc_attr( $settings['eael_svg_animation_on'] ),
+				$settings['eael_svg_fill'] === 'before' ? 'fill-svg' : ''
+			],
+		] );
 
-        $svg_options = [
-            'fill' => $settings['eael_svg_fill'] === 'after' ? 'fill-svg' : '',
-            'speed' => esc_attr( $settings['eael_svg_draw_speed'] ),
-            'offset' => esc_attr( $settings['eael_svg_draw_offset'] ),
-            'loop' => $settings['eael_svg_loop'] ? esc_attr( $settings['eael_svg_loop'] ) : 'no',
-            'pause' => $settings['eael_svg_pause_on_hover'] ? esc_attr( $settings['eael_svg_pause_on_hover'] ) : 'no',
-            'direction' => esc_attr( $settings['eael_svg_animation_direction'] ),
-            'excludeStyle' => esc_attr( $settings['eael_svg_exclude_style'] )
-        ];
+		$svg_options = [
+			'fill'         => $settings['eael_svg_fill'] === 'after' ? 'fill-svg' : '',
+			'speed'        => esc_attr( $settings['eael_svg_draw_speed'] ),
+			'offset'       => esc_attr( $settings['eael_svg_draw_offset'] ),
+			'loop'         => $settings['eael_svg_loop'] ? esc_attr( $settings['eael_svg_loop'] ) : 'no',
+			'pause'        => $settings['eael_svg_pause_on_hover'] ? esc_attr( $settings['eael_svg_pause_on_hover'] ) : 'no',
+			'direction'    => esc_attr( $settings['eael_svg_animation_direction'] ),
+			'excludeStyle' => esc_attr( $settings['eael_svg_exclude_style'] )
+		];
 
-        $this->add_render_attribute('eael-svg-drow-wrapper', [
-            'data-settings' => json_encode($svg_options)
-        ]);
+		$this->add_render_attribute( 'eael-svg-drow-wrapper', [
+			'data-settings' => json_encode( $svg_options )
+		] );
 
-        if ( ! empty( $settings['eael_svg_link']['url'] ) ) {
-            $this->add_link_attributes( 'eael_svg_link', $settings['eael_svg_link'] );
-            echo '<a ' . $this->get_render_attribute_string( 'eael_svg_link' ) . '>';
-        }
+		if ( ! empty( $settings['eael_svg_link']['url'] ) ) {
+			$this->add_link_attributes( 'eael_svg_link', $settings['eael_svg_link'] );
+			echo '<a ' . $this->get_render_attribute_string( 'eael_svg_link' ) . '>';
+		}
 
-        echo '<div ' . $this->get_render_attribute_string('eael-svg-drow-wrapper') . '>';
+		echo '<div ' . $this->get_render_attribute_string( 'eael-svg-drow-wrapper' ) . '>';
 
-        if ( $settings['eael_svg_src'] === 'icon' ):
+		if ( $settings['eael_svg_src'] === 'icon' ):
 
-	        if ( $settings['eael_svg_icon']['library'] === 'svg' ) {
-		        if ( empty( $settings['eael_svg_icon']['value']['id'] ) ) {
-			        echo $this->default_custom_svg();
-		        }
+			if ( $settings['eael_svg_icon']['library'] === 'svg' ) {
+				if ( empty( $settings['eael_svg_icon']['value']['id'] ) ) {
+					echo $this->default_custom_svg();
+				}
 
-		        Icons_Manager::render_icon( $settings['eael_svg_icon'], [ 'aria-hidden' => 'true', 'class' => [ 'eael-svg-drow-wrapper' ] ] );
-	        } else {
-		        echo Helper::get_svg_by_icon( $settings['eael_svg_icon'] );
-	        }
+				Icons_Manager::render_icon( $settings['eael_svg_icon'], [ 'aria-hidden' => 'true', 'class' => [ 'eael-svg-drow-wrapper' ] ] );
+			} else {
+				echo Helper::get_svg_by_icon( $settings['eael_svg_icon'] );
+			}
 
-        else:
-            echo $svg_html;
-        endif;
+		else:
+			echo $svg_html;
+		endif;
 
-        echo ' </div>';
+		echo ' </div>';
 
-        if ( ! empty( $settings['eael_svg_link']['url'] ) ) {
-            echo "</a>";
-        }
+		if ( ! empty( $settings['eael_svg_link']['url'] ) ) {
+			echo "</a>";
+		}
 
-    }
+	}
 }
