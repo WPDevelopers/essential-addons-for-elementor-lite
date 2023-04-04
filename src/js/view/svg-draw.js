@@ -15,13 +15,13 @@ var SVGDraw = function ($scope, $) {
         lines = $('path, circle, rect, polygon', svg_icon),
         max = $doc.height() - $win.height();
 
-    if ( settings.excludeStyle === 'yes' ){
+    if (settings.excludeStyle === 'yes') {
         lines.attr('style', '');
     }
 
-    function dashArrayReset(){
+    function dashArrayReset() {
         let largestDashArray = 0, largestPath = '';
-        $('path', svg_icon).each(function() {
+        $('path', svg_icon).each(function () {
             let dashArray = $(this).css('stroke-dasharray');
             let dashArrayValue = parseInt(dashArray);
             if (dashArrayValue > largestDashArray) {
@@ -30,11 +30,11 @@ var SVGDraw = function ($scope, $) {
             }
         });
 
-        if ( largestDashArray < 3999 && largestDashArray/2 > 600 && settings.fill === 'fill-svg' ){
+        if (largestDashArray < 3999 && largestDashArray / 2 > 600 && settings.fill === 'fill-svg') {
             let offset = largestPath.css('stroke-dashoffset');
             offset = parseInt(offset);
 
-            if ( offset < largestDashArray/2 ){
+            if (offset < largestDashArray / 2) {
                 wrapper.addClass(settings.fill);
             }
         }
@@ -46,16 +46,14 @@ var SVGDraw = function ($scope, $) {
             stepCount += 0.01;
             if (stepCount >= 1) {
                 addOrSubtract = false;
-                if ( settings.fill === 'fill-svg' ){
+                if (settings.fill === 'fill-svg') {
                     wrapper.removeClass('fillout-svg').addClass(settings.fill);
                 }
             }
-        }
-        else if ( direction === 'restart' ){
+        } else if (direction === 'restart') {
             stepCount = 0;
             addOrSubtract = true;
-        }
-        else {
+        } else {
             stepCount -= 0.01;
             if (stepCount <= 0) {
                 addOrSubtract = true;
@@ -65,51 +63,49 @@ var SVGDraw = function ($scope, $) {
         return stepCount;
     }
 
-    if (svg_icon.parent().hasClass('page-scroll')){
-        $win.on('scroll', function() {
-            let step =( ($win.scrollTop()-offset) / max );
+    if (svg_icon.parent().hasClass('page-scroll')) {
+        $win.on('scroll', function () {
+            let step = (($win.scrollTop() - offset) / max);
             let offsetTop = svg_icon.offset().top,
                 viewPort = $win.innerHeight(),
-                offsetBottom = offsetTop-viewPort;
+                offsetBottom = offsetTop - viewPort;
 
-            if (offsetTop > $win.scrollTop() && offsetBottom < $win.scrollTop()){
-                step = (($win.scrollTop()-offset)-offsetBottom)/viewPort;
+            if (offsetTop > $win.scrollTop() && offsetBottom < $win.scrollTop()) {
+                step = (($win.scrollTop() - offset) - offsetBottom) / viewPort;
                 svg_icon.drawsvg('progress', step);
             }
             dashArrayReset();
         });
-    }
-    else if ( svg_icon.parent().hasClass('page-load') ){
+    } else if (svg_icon.parent().hasClass('page-load')) {
         let lastSvg = '';
-        let  drawSvg = setInterval(function() {
+        let drawSvg = setInterval(function () {
             let currentSvg = svg_icon.html();
             svg_icon.drawsvg('progress', stepManager());
 
-            if (  currentSvg === lastSvg && is_repeat === 'no'){
-                wrapper.addClass( settings.fill );
+            if (currentSvg === lastSvg && is_repeat === 'no') {
+                wrapper.addClass(settings.fill);
                 clearInterval(drawSvg);
             }
             lastSvg = currentSvg;
         }, speed);
-    }
-    else if ( svg_icon.parent().hasClass('hover') ){
+    } else if (svg_icon.parent().hasClass('hover')) {
         let lastSvg = '';
-        svg_icon.hover(function (){
-            if ( pauseOnHover === 'yes' || typeof draw_interval === 'undefined' ) {
-                draw_interval = window.setInterval(function (){
+        svg_icon.hover(function () {
+            if (pauseOnHover === 'yes' || typeof draw_interval === 'undefined') {
+                draw_interval = window.setInterval(function () {
                     let currentSvg = svg_icon.html();
                     svg_icon.drawsvg('progress', stepManager());
 
-                    if (  currentSvg === lastSvg && is_repeat === 'no' ){
-                        wrapper.addClass( settings.fill );
+                    if (currentSvg === lastSvg && is_repeat === 'no') {
+                        wrapper.addClass(settings.fill);
                         window.clearInterval(draw_interval);
                     }
 
                     lastSvg = currentSvg;
                 }, speed);
             }
-        },function (){
-            if ( pauseOnHover === 'yes' ) {
+        }, function () {
+            if (pauseOnHover === 'yes') {
                 window.clearInterval(draw_interval);
             }
         });
