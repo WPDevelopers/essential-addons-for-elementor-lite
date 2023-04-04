@@ -507,7 +507,7 @@ class SVG_Draw extends Widget_Base {
 		];
 
 		$this->add_render_attribute( 'eael-svg-drow-wrapper', [
-			'data-settings' => json_encode( $svg_options )
+			'data-settings' => wp_json_encode( $svg_options )
 		] );
 
 		if ( ! empty( $settings['eael_svg_link']['url'] ) ) {
