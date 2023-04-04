@@ -727,6 +727,11 @@ class WPDeveloper_Setup_Wizard {
 						'title'       => __( 'Interactive Circle', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
 					],
+                    [
+                        'key'         => 'svg-draw',
+                        'title'       => __( 'SVG Draw', 'essential-addons-for-elementor-lite' ),
+                        'preferences' => 'advance',
+                    ],
 				]
 			],
 			'marketing-elements'       => [
