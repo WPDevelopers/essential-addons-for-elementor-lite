@@ -873,6 +873,9 @@ class Login_Register extends Widget_Base {
 			'label'     => esc_html__( 'Remember Me', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::HEADING,
 			'separator' => 'before',
+			'condition' => [
+				'login_show_remember_me' => 'yes',
+			]
 		] );
 
 		$this->add_control( 'login_form_fields_remember_me_checked', [
@@ -881,6 +884,9 @@ class Login_Register extends Widget_Base {
 			'label_off' => __( 'No', 'essential-addons-for-elementor-lite' ),
 			'label_on'  => __( 'Yes', 'essential-addons-for-elementor-lite' ),
 			'default'   => '',
+			'condition' => [
+				'login_show_remember_me' => 'yes',
+			]
 		] );
 
 		/*--Login Fields Button--*/
