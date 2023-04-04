@@ -193,6 +193,14 @@ $theme-preset4: #ec3b75;
             text-align: left;
             margin: 10px;
 
+            &.product-details-none {   
+                background-color: unset;
+
+                .product-details-wrap {
+                    display: none;
+                }
+            }
+
             .image-wrap img, .product-image-wrap {
                 border-radius: 20px 20px 0 0;
             }
@@ -439,6 +447,14 @@ $theme-preset4: #ec3b75;
             background-color: #f5f7fd;
             text-align: left;
             margin: 10px;
+
+            &.product-details-none {   
+                background-color: unset;
+
+                .product-details-wrap {
+                    display: none;
+                }
+            }
 
             .image-wrap img, .product-image-wrap {
                 border-radius: 10px 10px 0 0;
