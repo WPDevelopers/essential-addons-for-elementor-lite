@@ -15,51 +15,44 @@ use Elementor\Icons_Manager;
 use \Elementor\Widget_Base;
 use \Essential_Addons_Elementor\Classes\Helper;
 
-class SVG_Draw Extends Widget_Base
-{
-    public function get_name()
-    {
-        return 'eael-svg-draw';
-    }
+class SVG_Draw extends Widget_Base {
+	public function get_name() {
+		return 'eael-svg-draw';
+	}
 
-    public function get_title()
-    {
-        return esc_html__('SVG Draw', 'essential-addons-for-elementor-lite');
-    }
+	public function get_title() {
+		return esc_html__( 'SVG Draw', 'essential-addons-for-elementor-lite' );
+	}
 
-    public function get_icon()
-    {
-        return 'eaicon-svg-draw';
-    }
+	public function get_icon() {
+		return 'eaicon-svg-draw';
+	}
 
-    public function get_categories()
-    {
-        return ['essential-addons-elementor'];
-    }
+	public function get_categories() {
+		return [ 'essential-addons-elementor' ];
+	}
 
-    public function get_keywords()
-    {
-        return [
-            'svg',
-            'draq',
-            'ea svg',
-            'ea svg draw',
-            'animation',
-            'icon',
-            'icon animation',
-            'svg animation',
-            'ea',
-            'essential addons',
-        ];
-    }
+	public function get_keywords() {
+		return [
+			'svg',
+			'draq',
+			'ea svg',
+			'ea svg draw',
+			'animation',
+			'icon',
+			'icon animation',
+			'svg animation',
+			'ea',
+			'essential addons',
+		];
+	}
 
-    public function get_custom_help_url()
-    {
-        return 'https://essential-addons.com/elementor/docs/ea-svg-draw/';
-    }
+	public function get_custom_help_url() {
+		return 'https://essential-addons.com/elementor/docs/ea-svg-draw/';
+	}
 
-    protected function default_custom_svg(){
-        return '<?xml version="1.0"?>
+	protected function default_custom_svg() {
+		return '<?xml version="1.0"?>
             <svg xmlns="http://www.w3.org/2000/svg" id="Icons" viewBox="0 0 74 74" width="512" height="512">
                 <path d="M65,72H9a3,3,0,0,1-3-3V30a1,1,0,0,1,2,0V69a1,1,0,0,0,1,1H65a1,1,0,0,0,1-1V30a1,1,0,0,1,2,0V69A3,3,0,0,1,65,72Z"/>
                 <path d="M70,31H52.31a1,1,0,0,1,0-2H70V19H4V29H21.69a1,1,0,1,1,0,2H4a2,2,0,0,1-2-2V19a2,2,0,0,1,2-2H70a2,2,0,0,1,2,2V29A2,2,0,0,1,70,31Z"/>
@@ -71,7 +64,7 @@ class SVG_Draw Extends Widget_Base
                 <path d="M27.308,40.563l-.06,0a1,1,0,0,1-.895-.7l-1.74-5.55-5.2,2.344a1,1,0,0,1-1.316-1.335L26.4,17.576a1,1,0,1,1,1.812.848l-7.163,15.3,3.77-1.7a1,1,0,0,1,1.365.613l1.29,4.114L36.088,17.59a1,1,0,0,1,1.824.82L28.22,39.973A1,1,0,0,1,27.308,40.563Z"/>
             </svg>
     ';
-    }
+	}
 
     protected function register_controls()
     {
