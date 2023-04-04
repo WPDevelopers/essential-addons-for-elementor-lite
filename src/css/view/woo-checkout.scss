@@ -834,6 +834,9 @@ $base-font-size: 14px;
 
 	.ea-woo-checkout.layout-multi-steps,
 	.ea-woo-checkout.layout-split{
+		form.woocommerce-checkout{
+			display: grid;
+		}
 		.woocommerce #customer_details.col2-set .col-2{
 			float: right !important;
 		}
