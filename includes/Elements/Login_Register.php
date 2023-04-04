@@ -4027,7 +4027,7 @@ class Login_Register extends Widget_Base {
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
 			'name'     => "eael_rm_label_typography",
-			'selector' => "{{WRAPPER}} .lr-form-wrapper .forget-menot",
+			'selector' => "{{WRAPPER}} .lr-form-wrapper .forget-menot, {{WRAPPER}} .lr-form-wrapper .forget-menot label",
 		] );
 
 		//Forget Password Style
