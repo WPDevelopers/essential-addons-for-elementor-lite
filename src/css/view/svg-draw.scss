@@ -1,25 +1,27 @@
-.eael-svg-draw-container{
-  &.none{
-    path, circle, rect, polygon{
+.eael-svg-draw-container {
+  &.none {
+    path, circle, rect, polygon {
       stroke-dasharray: none;
     }
   }
-  svg{
+
+  svg {
     height: 200px;
     width: 200px;
     overflow: visible;
-    path, circle, rect, polygon{
-       stroke: #c36;
-       stroke-width: 3;
-       fill: transparent;
-       stroke-dasharray: 0,9999px;
-       fill-opacity: 0;
+
+    path, circle, rect, polygon {
+      stroke: #c36;
+      stroke-width: 3;
+      fill: transparent;
+      stroke-dasharray: 0, 9999px;
+      fill-opacity: 0;
     }
   }
 
-  &.fill-svg{
-    svg{
-      path, circle, rect, polygon{
+  &.fill-svg {
+    svg {
+      path, circle, rect, polygon {
         animation-name: FillIn;
         animation-fill-mode: forwards;
       }
@@ -27,8 +29,14 @@
   }
 
   @keyframes FillIn {
-    0% { fill-opacity: 0; }
-    40% { fill-opacity: 1; }
-    100% { fill-opacity: 1; }
+    0% {
+      fill-opacity: 0;
+    }
+    40% {
+      fill-opacity: 1;
+    }
+    100% {
+      fill-opacity: 1;
+    }
   }
 }
