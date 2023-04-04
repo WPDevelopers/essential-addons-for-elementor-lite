@@ -940,7 +940,7 @@ class Filterable_Gallery extends Widget_Base
         $this->start_controls_section(
             'eael_section_fg_control_style_settings',
             [
-                'label' => esc_html__('Control', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Controls', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_fg_caption_style!' => 'layout_3'
@@ -1124,7 +1124,7 @@ class Filterable_Gallery extends Widget_Base
         $this->start_controls_section(
             'eael_section_fg_item_style_settings',
             [
-                'label' => esc_html__('Item', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Items', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1567,7 +1567,15 @@ class Filterable_Gallery extends Widget_Base
                     'unit' => '%',
                     'size' => 100,
                 ],
+                'tablet_extra_default' => [
+                    'unit' => '%',
+                    'size' => 100,
+                ],
                 'mobile_default' => [
+                    'unit' => '%',
+                    'size' => 100,
+                ],
+                'mobile_extra_default' => [
                     'unit' => '%',
                     'size' => 100,
                 ],
@@ -1576,7 +1584,7 @@ class Filterable_Gallery extends Widget_Base
 						'min' => 30,
 					],
 				],
-                'devices' => [ 'widescreen', 'desktop', 'laptop', 'tablet', 'mobile' ],
+                'devices' => [ 'widescreen', 'desktop', 'laptop', 'tablet', 'tablet_extra', 'mobile', 'mobile_extra' ],
                 'selectors' => [
 					'.mfp-container.mfp-iframe-holder .mfp-content' => 'max-width: {{SIZE}}{{UNIT}};',
 				],
