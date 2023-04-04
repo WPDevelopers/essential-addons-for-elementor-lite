@@ -530,7 +530,7 @@ class SVG_Draw extends Widget_Base {
 			}
 
 		else:
-			echo $svg_html;
+			printf( '%s', $svg_html );
 		endif;
 
 		echo ' </div>';
