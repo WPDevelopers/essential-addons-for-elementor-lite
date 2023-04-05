@@ -91,7 +91,7 @@ class Twitter_Feed extends Widget_Base
                 'label' => esc_html__('Account Name', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'dynamic'     => [ 'active' => true ],
-                'default' => '',
+                'default' => '@wpdevteam',
                 'label_block' => false,
                 'description' => esc_html__('Use @ sign with your account name.', 'essential-addons-for-elementor-lite'),
             ]
