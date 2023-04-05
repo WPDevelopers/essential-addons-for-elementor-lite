@@ -3065,7 +3065,7 @@ class Filterable_Gallery extends Widget_Base
         $icon_url = isset($item['play_icon']['url']) ? $item['play_icon']['url'] : '';
         $video_url = isset($item['video_link']) ? $item['video_link'] : '#';
 
-        $html .= '<a href="' . esc_url($video_url) . '" class="video-popup eael-magnific-link active eael-magnific-video-link mfp-iframe">';
+        $html .= '<a aria-label="eael-magnific-video-link" href="' . esc_url($video_url) . '" class="video-popup eael-magnific-link active eael-magnific-video-link mfp-iframe">';
 
         if( $show_video_popup_bg ){
             $html .= '<div class="video-popup-bg"></div>';
@@ -3135,7 +3135,7 @@ class Filterable_Gallery extends Widget_Base
         echo '<div class="gallery-item-buttons">';
         
         if ($item['show_lightbox'] == true) {
-            echo '<a href="' . esc_url($item['image']) . '" class="eael-magnific-link active" data-elementor-open-lightbox="no">';
+            echo '<a aria-label="eael-magnific-link" href="' . esc_url($item['image']) . '" class="eael-magnific-link active" data-elementor-open-lightbox="no">';
             
             echo '<span class="fg-item-icon-inner">';
             if ($zoom_icon_is_new || $zoom_icon_migrated) {
@@ -3156,7 +3156,9 @@ class Filterable_Gallery extends Widget_Base
                 static $ea_link_repeater_index = 0;
 	            $link_key = 'link_' . $ea_link_repeater_index++;
 
-	            $this->add_link_attributes( $link_key, $item['link'] ); ?>
+	            $this->add_link_attributes( $link_key, $item['link'] ); 
+                $this->add_render_attribute( $link_key, 'aria-label', 'eael-item-maybe-link' );
+                ?>
                 <a <?php $this->print_render_attribute_string( $link_key ); ?>> <?php
                 echo '<span class="fg-item-icon-inner">';
                 
