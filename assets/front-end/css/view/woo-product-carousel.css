@@ -97,6 +97,12 @@
 .eael-woo-product-carousel-container.preset-1 .eael-product-carousel.product-details-none {
   background-color: unset;
 }
+.eael-woo-product-carousel-container.preset-1 .eael-product-carousel.product-details-none .image-wrap img, .eael-woo-product-carousel-container.preset-1 .eael-product-carousel.product-details-none .product-image-wrap {
+  border-radius: 20px;
+}
+.eael-woo-product-carousel-container.preset-1 .eael-product-carousel.product-details-none .img-wrap a {
+  line-height: 10px;
+}
 .eael-woo-product-carousel-container.preset-1 .eael-product-carousel.product-details-none .product-details-wrap {
   display: none;
 }
