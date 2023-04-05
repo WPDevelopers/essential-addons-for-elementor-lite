@@ -200,7 +200,7 @@ $theme-preset4: #ec3b75;
                     border-radius: 20px;
                 }
 
-                .img-wrap a {
+                .image-wrap a {
                     line-height: 10px;
                 }
 
@@ -305,6 +305,16 @@ $theme-preset4: #ec3b75;
 
             .image-wrap img, .product-image-wrap {
                 border-radius: 10px 10px 0 0;
+            }
+
+            &.product-details-none-overlay {   
+                .image-wrap img, .product-image-wrap {
+                    border-radius: 20px;
+                }
+
+                .image-wrap a {
+                    line-height: 10px;
+                }
             }
 
             .eael-onsale {
