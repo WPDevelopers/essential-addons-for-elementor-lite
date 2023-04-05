@@ -111,7 +111,7 @@ class Twitter_Feed extends Widget_Base
         $this->add_control(
             'eael_twitter_feed_consumer_key',
             [
-                'label' => esc_html__('Consumer Key', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('API Key', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'label_block' => false,
                 'default' => '',
@@ -122,7 +122,7 @@ class Twitter_Feed extends Widget_Base
         $this->add_control(
             'eael_twitter_feed_consumer_secret',
             [
-                'label' => esc_html__('Consumer Secret', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('API Key Secret', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'label_block' => false,
                 'default' => '',
