@@ -536,7 +536,7 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'eael_event_calendar_default_view',
             [
-                'label' => __('Calendar Default View', 'essential-addons-for-elementor-lite'),
+                'label' => __('Default View', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
                     'timeGridDay' => __('Day', 'essential-addons-for-elementor-lite'),
@@ -548,11 +548,24 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_event_default_date_type',
+            [
+                'label' => __('Default Start Date', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'current' => __('Current Date', 'essential-addons-for-elementor-lite'),
+                    'custom' => __('Custom Date', 'essential-addons-for-elementor-lite'),
+                ],
+                'default' => 'custom',
+            ]
+        );
+
         $default_date = date('Y-m-d');
 	    $this->add_control(
 		    'eael_event_calendar_default_date',
 		    [
-			    'label' => __('Calendar Default Start Date', 'essential-addons-for-elementor-lite'),
+			    'label' => __('', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::DATE_TIME,
 			    'label_block' => true,
 			    'picker_options' => [
@@ -560,6 +573,9 @@ class Event_Calendar extends Widget_Base
 				    'dateFormat' 	=> 'Y-m-d',
 			    ],
 			    'default' => $default_date,
+                'condition' =>[
+                    'eael_event_default_date_type' => 'custom'
+                ]
 		    ]
 	    );
 
@@ -1882,7 +1898,7 @@ class Event_Calendar extends Widget_Base
 
         $local = $settings['eael_event_calendar_language'];
         $default_view = $settings['eael_event_calendar_default_view'];
-        $default_date = $settings['eael_event_calendar_default_date'];
+        $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : date('Y-m-d');
         $time_format = $settings['eael_event_time_format'];
         $event_limit = ! empty( $settings['eael_event_limit'] ) ? intval( $settings['eael_event_limit'] ) : 2;
         $translate_date = [
