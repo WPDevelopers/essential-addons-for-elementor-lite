@@ -370,9 +370,9 @@ trait Elements {
 			}
 
 			if ( $reading_progress_status ) {
-				if( ! empty( $document ) ) {
-                    $this->progress_bar_local_css( $document->get_settings() );                    
-                }
+				if ( ! empty( $document ) && is_object( $document ) ) {
+					$this->progress_bar_local_css( $document->get_settings() );
+				}
 
 				$this->extensions_data = $settings_data;
 				$progress_height       = ! empty( $settings_data['eael_ext_reading_progress_height']['size'] ) ? $settings_data['eael_ext_reading_progress_height']['size'] : '';
