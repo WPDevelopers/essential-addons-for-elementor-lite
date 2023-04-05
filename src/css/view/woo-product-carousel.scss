@@ -468,6 +468,14 @@ $theme-preset4: #ec3b75;
 
             &.product-details-none {   
                 background-color: unset;
+                
+                .image-wrap img, .product-image-wrap {
+                    border-radius: 10px;
+                }
+
+                .image-wrap a {
+                    line-height: 10px;
+                }
 
                 .product-details-wrap {
                     display: none;
