@@ -175,11 +175,11 @@
 .eael-woo-product-carousel-container.preset-2 .eael-product-carousel .image-wrap img, .eael-woo-product-carousel-container.preset-2 .eael-product-carousel .product-image-wrap {
   border-radius: 10px 10px 0 0;
 }
+.eael-woo-product-carousel-container.preset-2 .eael-product-carousel .image-wrap a {
+  line-height: 10px;
+}
 .eael-woo-product-carousel-container.preset-2 .eael-product-carousel.product-details-none-overlay .image-wrap img, .eael-woo-product-carousel-container.preset-2 .eael-product-carousel.product-details-none-overlay .product-image-wrap {
   border-radius: 10px;
-}
-.eael-woo-product-carousel-container.preset-2 .eael-product-carousel.product-details-none-overlay .image-wrap a {
-  line-height: 10px;
 }
 .eael-woo-product-carousel-container.preset-2 .eael-product-carousel .eael-onsale {
   background: #5f3ae0;
@@ -280,6 +280,12 @@
 .eael-woo-product-carousel-container.preset-3 .eael-product-carousel.product-details-none {
   background-color: unset;
 }
+.eael-woo-product-carousel-container.preset-3 .eael-product-carousel.product-details-none .image-wrap img, .eael-woo-product-carousel-container.preset-3 .eael-product-carousel.product-details-none .product-image-wrap {
+  border-radius: 10px;
+}
+.eael-woo-product-carousel-container.preset-3 .eael-product-carousel.product-details-none .image-wrap a {
+  line-height: 10px;
+}
 .eael-woo-product-carousel-container.preset-3 .eael-product-carousel.product-details-none .product-details-wrap {
   display: none;
 }
@@ -334,11 +340,11 @@
 .eael-woo-product-carousel-container.preset-4 .eael-product-carousel .image-wrap img, .eael-woo-product-carousel-container.preset-4 .eael-product-carousel .product-image-wrap {
   border-radius: 10px 10px 0 0;
 }
+.eael-woo-product-carousel-container.preset-4 .eael-product-carousel .image-wrap a {
+  line-height: 10px;
+}
 .eael-woo-product-carousel-container.preset-4 .eael-product-carousel.product-details-none-overlay .image-wrap img, .eael-woo-product-carousel-container.preset-4 .eael-product-carousel.product-details-none-overlay .product-image-wrap {
   border-radius: 10px;
-}
-.eael-woo-product-carousel-container.preset-4 .eael-product-carousel.product-details-none-overlay .image-wrap a {
-  line-height: 10px;
 }
 .eael-woo-product-carousel-container.preset-4 .eael-product-carousel .eael-onsale {
   background: #ec3b75;
