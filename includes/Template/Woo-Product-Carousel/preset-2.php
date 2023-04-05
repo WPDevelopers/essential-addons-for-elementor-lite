@@ -39,7 +39,7 @@ $quick_view_setting = [
 ];
 
 $product_details_wrap_show = ! empty( $settings['eael_product_carousel_show_title'] ) || $should_print_price || $should_print_rating || $should_print_excerpt;
-$product_details_none_class = $product_details_wrap_show ? '' : 'product-details-none-layout-2';
+$product_details_none_class = $product_details_wrap_show ? '' : 'product-details-none-overlay';
 
 if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->is_visible() ) {
     ?>
