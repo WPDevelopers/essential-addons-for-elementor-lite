@@ -315,6 +315,7 @@ $theme-preset4: #ec3b75;
             &:hover {
                 .carousel-overlay  {
                     opacity: 1;
+                    z-index: -1;
                 }
                 .product-overlay-content {
                     bottom: 0;
@@ -565,6 +566,7 @@ $theme-preset4: #ec3b75;
             &:hover {
                 .carousel-overlay  {
                     opacity: 1;
+                    z-index: -1;
                 }
                 .product-overlay-content {
                     bottom: 0;

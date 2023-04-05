@@ -181,6 +181,7 @@
 }
 .eael-woo-product-carousel-container.preset-2 .eael-product-carousel:hover .carousel-overlay {
   opacity: 1;
+  z-index: -1;
 }
 .eael-woo-product-carousel-container.preset-2 .eael-product-carousel:hover .product-overlay-content {
   bottom: 0;
@@ -328,6 +329,7 @@
 }
 .eael-woo-product-carousel-container.preset-4 .eael-product-carousel:hover .carousel-overlay {
   opacity: 1;
+  z-index: -1;
 }
 .eael-woo-product-carousel-container.preset-4 .eael-product-carousel:hover .product-overlay-content {
   bottom: 0;
