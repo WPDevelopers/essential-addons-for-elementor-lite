@@ -648,7 +648,7 @@ class WPDeveloper_Notice {
      * @return void
      */
     protected function get_options_data( $key = ''){
-        $options_data = get_option( 'wpdeveloper_plugins_data' );
+        $options_data = get_option( 'wpdeveloper_plugins_data', [] );
         if( empty( $key ) ) {
             return $options_data;
         }
@@ -656,7 +656,7 @@ class WPDeveloper_Notice {
         if( isset( $options_data[ $this->plugin_name ][ $key ] ) ) {
             return $options_data[ $this->plugin_name ][ $key ];
         }
-        return false;
+        return [];
     }
     /**
      * This will update the options table for plugins.
