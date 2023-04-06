@@ -747,10 +747,16 @@ class Sticky_Video extends Widget_Base
                 }
             }
 
+            $overlay_class = 'eaelsv-overlay';
+            if( 'yes' === $settings['eaelsv_overlay_options'] && empty( $settings['eaelsv_overlay_image']['url'] ) ){
+                $icon = '';
+                $overlay_class = 'eaelsv-overlay-ignore';
+            }
+
             $this->add_render_attribute(
                 'esvp_overlay_wrapper',
                 [
-                    'class' => 'eaelsv-overlay',
+                    'class' => esc_attr( $overlay_class ),
                     'style' => "background-image:url('" . $settings['eaelsv_overlay_image']['url'] . "');",
                 ]
             );
