@@ -647,17 +647,18 @@ class WPDeveloper_Notice {
      * Get all options from database!
      * @return void
      */
-    protected function get_options_data( $key = ''){
-        $options_data = get_option( 'wpdeveloper_plugins_data', [] );
-        if( empty( $key ) ) {
-            return $options_data;
-        }
+	protected function get_options_data( $key = '' ) {
+		$options_data = get_option( 'wpdeveloper_plugins_data', [] );
+		if ( empty( $key ) ) {
+			return $options_data;
+		}
 
-        if( isset( $options_data[ $this->plugin_name ][ $key ] ) ) {
-            return $options_data[ $this->plugin_name ][ $key ];
-        }
-        return [];
-    }
+		if ( isset( $options_data[ $this->plugin_name ][ $key ] ) ) {
+			return $options_data[ $this->plugin_name ][ $key ];
+		}
+
+		return [];
+	}
     /**
      * This will update the options table for plugins.
      *
