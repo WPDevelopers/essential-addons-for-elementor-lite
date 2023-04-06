@@ -161,5 +161,5 @@
 
 .eaelsv-overlay-visibility-transparent .plyr--stopped.plyr__poster-enabled .plyr__poster,
 .eaelsv-overlay-visibility-transparent .plyr--youtube.plyr--full-ui.plyr--video .plyr__control--overlaid {
-  display: none;
+  opacity: 0;
 }
