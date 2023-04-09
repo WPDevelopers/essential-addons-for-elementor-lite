@@ -1922,7 +1922,7 @@ class Woo_Product_Gallery extends Widget_Base {
 		$this->add_control(
 			'eael_product_popup_sale_style',
 			[
-				'label'     => __( 'Sale', 'essential-addons-for-elementor-lite' ),
+				'label'     => __( 'Sale Badge', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -1933,7 +1933,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			[
 				'name'     => 'eael_product_popup_sale_typo',
 				'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
-				'selector' => '.eael-popup-details-render{{WRAPPER}} .eael-onsale',
+				'selector' => '.eael-popup-details-render{{WRAPPER}} .eael-onsale:not(.outofstock)',
 			]
 		);
 
@@ -1943,7 +1943,7 @@ class Woo_Product_Gallery extends Widget_Base {
 				'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'.eael-popup-details-render{{WRAPPER}} .eael-onsale' => 'color: {{VALUE}}!important;',
+					'.eael-popup-details-render{{WRAPPER}} .eael-onsale:not(.outofstock)' => 'color: {{VALUE}}!important;',
 				],
 			]
 		);
@@ -1953,11 +1953,52 @@ class Woo_Product_Gallery extends Widget_Base {
 				'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'.eael-popup-details-render{{WRAPPER}} .eael-onsale'                                      => 'background-color: {{VALUE}}!important;',
+					'.eael-popup-details-render{{WRAPPER}} .eael-onsale:not(.outofstock)'                                      => 'background-color: {{VALUE}}!important;',
 					'.eael-popup-details-render{{WRAPPER}} .eael-onsale:not(.outofstock).sale-preset-4:after' => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}};',
 				],
 			]
 		);
+
+        // Stock out
+        $this->add_control(
+            'eael_product_popup_stockout_style',
+            [
+                'label'     => __( 'Stock Out Badge', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_product_popup_stockout_typo',
+                'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
+                'selector' => '.eael-popup-details-render{{WRAPPER}} .eael-onsale.outofstock',
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_popup_stockout_color',
+            [
+                'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '.eael-popup-details-render{{WRAPPER}} .eael-onsale.outofstock' => 'color: {{VALUE}}!important;',
+                ],
+            ]
+        );
+        $this->add_control(
+            'eael_product_popup_stockout_bg_color',
+            [
+                'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '.eael-popup-details-render{{WRAPPER}} .eael-onsale.outofstock'                                      => 'background-color: {{VALUE}}!important;',
+                    '.eael-popup-details-render{{WRAPPER}} .eael-onsale.outofstock.sale-preset-4:after' => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}};',
+                ],
+            ]
+        );
 
 		// Quantity
 		$this->add_control(
