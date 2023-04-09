@@ -114,8 +114,8 @@ class Twitter_Feed extends Widget_Base
                 'label' => esc_html__('Consumer Key', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'label_block' => false,
-                'default' => 'wwC72W809xRKd9ySwUzXzjkmS',
-                'description' => '<a href="https://apps.twitter.com/app/" target="_blank">Get Consumer Key.</a> Create a new app or select existing app and grab the <b>consumer key.</b>',
+                'default' => '',
+                'description' => '<a href="https://developer.twitter.com/en/portal/dashboard" target="_blank">Get Consumer Key.</a> Create a new app or select existing app and grab the <b>consumer key.</b>',
             ]
         );
 
@@ -125,8 +125,8 @@ class Twitter_Feed extends Widget_Base
                 'label' => esc_html__('Consumer Secret', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'label_block' => false,
-                'default' => 'rn54hBqxjve2CWOtZqwJigT3F5OEvrriK2XAcqoQVohzr2UA8h',
-                'description' => '<a href="https://apps.twitter.com/app/" target="_blank">Get Consumer Secret.</a> Create a new app or select existing app and grab the <b>consumer secret.</b>',
+                'default' => '',
+                'description' => '<a href="https://developer.twitter.com/en/portal/dashboard" target="_blank">Get Consumer Secret.</a> Create a new app or select existing app and grab the <b>consumer secret.</b>',
             ]
         );
 
