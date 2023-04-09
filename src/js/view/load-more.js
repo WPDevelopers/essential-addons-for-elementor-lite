@@ -199,7 +199,7 @@
 					$this.removeClass("button--loading");
 					$LoaderSpan.html($text);
 
-					if ( $data.class == "Essential_Addons_Elementor\\Elements\\Woo_Product_Gallery" ) {
+					if ( $data.class == "Essential_Addons_Elementor\\Elements\\Woo_Product_Gallery" && $('.eael-cat-tab li a.active', $scope).length ) {
 						$('.eael-cat-tab li a.active', $scope).data("page", $gallery_page);
 					} else {
 						$this.data("page", $page);
