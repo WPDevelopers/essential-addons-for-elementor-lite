@@ -581,7 +581,7 @@ trait Login_Registration {
 		if( count( $eael_custom_profile_fields ) ){
 			foreach( $eael_custom_profile_fields as $eael_custom_profile_field_key => $eael_custom_profile_field_value ){
 				if ( ! empty( $user_data[ $eael_custom_profile_field_key ] ) ) {
-					update_user_meta( $user_id, $eael_custom_profile_field_key, $user_data[ $eael_custom_profile_field_key ] );
+					update_user_meta( $user_id, self::$eael_custom_profile_field_prefix . $eael_custom_profile_field_key, $user_data[ $eael_custom_profile_field_key ] );
 				}
 			}
 		}
