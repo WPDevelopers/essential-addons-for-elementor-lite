@@ -55,6 +55,7 @@ module.exports = (env, argv) => {
 			destFile: "languages/essential-addons-for-elementor-lite.pot",
 			domain: "essential-addons-for-elementor-lite",
 			package: "Essential Addons For Elementor Lite",
+			includePOTCreationDate: false,
 			src: "**/*.php",
 		});
 	}

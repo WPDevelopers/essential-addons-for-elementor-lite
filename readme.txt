@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.2
 Requires PHP: 7.0
-Stable tag: 5.6.4
+Stable tag: 5.7.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -95,6 +95,7 @@ We have designed more than 50 of the most useful widgets to enhance your Element
 47. [Interactive Circle](https://essential-addons.com/elementor/interactive-circle/)- Display content with engaging circular layouts
 48. [NFT Gallery](https://essential-addons.com/elementor/nft-gallery/)- Add and showcase NFT collections effortlessly in Elementor
 49. [Business Reviews]( https://essential-addons.com/elementor/business-reviews/)- Display Google Customer Review to increase your online reputation
+50. [SVG Draw](https://essential-addons.com/elementor/svg-draw/)- Display SVG elements in a visually striking and interactive way on your website
 
 Extensions (Free): 
 
@@ -243,6 +244,13 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.7.0 - 05/04/2023 =
+
+- Added: EA SVG Draw Widget
+- Fixed: Fatal Error when BuddyPress is activated
+- Fixed: EA Filterable Gallery | Dynamic Tag missing on images
+- Few minor bug fixes & improvements
 
 = 5.6.4 - 30/03/2023 =
 
