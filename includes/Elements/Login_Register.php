@@ -5439,8 +5439,6 @@ class Login_Register extends Widget_Base {
 								$$dynamic_field_name ++; //NOTE, double $$ intentional. Dynamically update the var check eg. $username_exists++ to prevent user from using the same field twice
 								// is same field repeated?
 								if( isset( $$dynamic_field_name ) ){
-									$$dynamic_field_name ++; //NOTE, double $$ intentional. Dynamically update the var check eg. $username_exists++ to prevent user from using the same field twice
-									// is same field repeated?
 									if ( $$dynamic_field_name > 1 ) {
 										$repeated_f_labels[] = $f_labels[ $field_type ];
 									}
