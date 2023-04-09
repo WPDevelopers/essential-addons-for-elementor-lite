@@ -55,7 +55,7 @@
 			}
 
 			$data.taxonomy = $taxonomy;
-			$data.page = $gallery_page;
+			$data.page = isNaN($gallery_page) ? $page : $gallery_page;
 		}
 
 		if ( $data.class === "Essential_Addons_Elementor\\Pro\\Elements\\Dynamic_Filterable_Gallery" ) {
