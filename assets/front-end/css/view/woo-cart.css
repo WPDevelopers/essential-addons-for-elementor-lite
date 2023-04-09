@@ -82,6 +82,9 @@
   -webkit-box-shadow: none;
           box-shadow: none;
 }
+.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-cart-clear-btn .button {
+  text-align: center;
+}
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table {
   border-collapse: separate;
   border-spacing: 0 13px;
