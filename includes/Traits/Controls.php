@@ -1071,7 +1071,7 @@ trait Controls
 		    );
 
 		    $wb->add_control(
-			    'eael_link_on_image',
+			    'eael_image_linkable',
 			    [
 				    'label'        => __( 'Image Clickable', 'essential-addons-for-elementor-lite' ),
 				    'type'         => Controls_Manager::SWITCHER,
