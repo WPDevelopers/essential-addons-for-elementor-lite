@@ -291,6 +291,16 @@ $theme-preset4: #ec3b75;
                 border-radius: 10px 10px 0 0;
             }
 
+            .image-wrap a {
+                z-index: 3;
+                position: relative;
+                line-height: 10px;
+
+                img {
+                    margin-bottom: 0;
+                }
+            }
+
             .eael-onsale {
                 background: $theme-preset2;
 
@@ -315,11 +325,13 @@ $theme-preset4: #ec3b75;
             &:hover {
                 .carousel-overlay  {
                     opacity: 1;
-                    z-index: -1;
                 }
                 .product-overlay-content {
                     bottom: 0;
                     opacity: 1;
+                }
+                .image-wrap a {
+                    opacity: .2;
                 }
             }
 
@@ -541,6 +553,16 @@ $theme-preset4: #ec3b75;
                 border-radius: 10px 10px 0 0;
             }
 
+            .image-wrap a {
+                z-index: 3;
+                position: relative;
+                line-height: 10px;
+
+                img {
+                    margin-bottom: 0;
+                }
+            }
+
             .eael-onsale {
                 background: $theme-preset4;
 
@@ -566,11 +588,15 @@ $theme-preset4: #ec3b75;
             &:hover {
                 .carousel-overlay  {
                     opacity: 1;
-                    z-index: -1;
                 }
+
                 .product-overlay-content {
                     bottom: 0;
                     opacity: 1;
+                }
+
+                .image-wrap a {
+                    opacity: .2;
                 }
 
                 //// icon
