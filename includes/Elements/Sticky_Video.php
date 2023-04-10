@@ -740,7 +740,7 @@ class Sticky_Video extends Widget_Base
                     if (is_array($iconNew['value'])) {
                         $icon = '<img src="' . $iconNew['value']['url'] .  '" width="100">';
                     } else {
-                        echo $icon = '<i class="' . $iconNew['value'] . '"></i>';
+                        $icon = '<i class="' . $iconNew['value'] . '"></i>';
                     }
                 } else {
                     $icon = '<i class="eicon-play"></i>';
