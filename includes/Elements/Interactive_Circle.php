@@ -185,6 +185,16 @@ class Interactive_Circle extends Widget_Base {
 			]
 		);
 
+		$repeater->add_control( 'eael_interactive_circle_tab_bgtype_classic_notice', [
+			'type'            => Controls_Manager::RAW_HTML,
+			'raw'             => __( 'Reload needed on first change', 'essential-addons-for-elementor-lite' ),
+			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+			'condition' => [
+				'eael_interactive_circle_tab_bgtype_background' => 'classic',
+				'eael_interactive_circle_tab_bgtype_color'      => '',
+			],
+		] );
+
 		$repeater->end_controls_tab();
 		$repeater->end_controls_tabs();
 
