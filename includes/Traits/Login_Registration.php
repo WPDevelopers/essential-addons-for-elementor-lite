@@ -356,8 +356,8 @@ trait Login_Registration {
 						if( ! empty ( $register_field['field_type_custom_image_filesize'] ) ){
 							$field_type_custom_image_filesize 		= intval( $register_field['field_type_custom_image_filesize'] );
 							$field_type_custom_image_filesize 		= $field_type_custom_image_filesize > 512 ? 512 : $field_type_custom_image_filesize;
-							$field_type_custom_image_filesize_kb 	= $field_type_custom_image_filesize * 1000;
-
+							$field_type_custom_image_filesize_kb 	= $field_type_custom_image_filesize * 1000000;
+							
 							if( $custom_field_file_size > $field_type_custom_image_filesize_kb ) {
                                 $errors[ $register_field['field_type'] ] = isset( $settings['field_type_custom_image_filesize_error'] ) ? $settings['field_type_custom_image_filesize_error'] : __( 'File Size Limit Exceeded!', 'essential-addons-for-elementor-lite' );
                             }
@@ -1617,9 +1617,9 @@ trait Login_Registration {
 	public function get_eael_custom_profile_fields( $type = 'text' ){
 		$eael_custom_profile_fields = [];
 		$custom_profile_fields_arr 	= [];
-
-		$eael_custom_profile_field_text_trimmed  	= trim( get_option( 'eael_custom_profile_fields_text' ), ' ,\t\n\r\0\x0B' );
-		$eael_custom_profile_field_image_trimmed 	= trim( get_option( 'eael_custom_profile_fields_img' ), ' ,\t\n\r\0\x0B' );
+		
+		$eael_custom_profile_field_text_trimmed  	= trim( get_option( 'eael_custom_profile_fields_text' ), ' ,\n\r\0\x0B' );
+		$eael_custom_profile_field_image_trimmed 	= trim( get_option( 'eael_custom_profile_fields_img' ), ' ,\n\r\0\x0B' );
 
 		$eael_custom_profile_field_text_trimmed 	= str_replace('eael_profile_field_', '', $eael_custom_profile_field_text_trimmed);
 		$eael_custom_profile_field_image_trimmed 	= str_replace('eael_profile_field_', '', $eael_custom_profile_field_image_trimmed);
