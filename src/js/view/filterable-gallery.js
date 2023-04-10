@@ -154,7 +154,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 			var loaded_on_search = false;
 			input.on("input", function () {
 				var $this = $(this),$items=[];
-				console.log($gallery.data('search-all'))
+
 				if ( ! loaded_on_search && $gallery.data('search-all') === 'yes' ) {
 					for (const [index, item] of fg_items.entries()) {
 						$items.push($(item)[0]);
@@ -165,6 +165,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 					$isotope_gallery.imagesLoaded().progress(function () {
 						$isotope_gallery.isotope("layout");
 					});
+					$(".eael-gallery-load-more",$scope).hide();
 					loaded_on_search = true;
 				}
 
@@ -183,6 +184,12 @@ jQuery(window).on("elementor/frontend/init", function () {
 			// layout gal, on click tabs
 			$isotope_gallery.on("arrangeComplete", function () {
 				$isotope_gallery.isotope("layout");
+
+				if (!$isotope_gallery.data('isotope').filteredItems.length) {
+					$('#eael-fg-no-items-found').show();
+				} else {
+					$('#eael-fg-no-items-found').hide();
+				}
 			});
 
 			// layout gal, after window loaded
