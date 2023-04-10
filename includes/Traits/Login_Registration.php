@@ -354,10 +354,11 @@ trait Login_Registration {
 						}
 
 						if( ! empty ( $register_field['field_type_custom_image_filesize'] ) ){
-							$field_type_custom_image_filesize 		= intval( $register_field['field_type_custom_image_extensions'] );
+							$field_type_custom_image_filesize 		= intval( $register_field['field_type_custom_image_filesize'] );
+							$field_type_custom_image_filesize 		= $field_type_custom_image_filesize > 512 ? 512 : $field_type_custom_image_filesize;
 							$field_type_custom_image_filesize_kb 	= $field_type_custom_image_filesize * 1000;
 
-							if( $custom_field_file_size > $field_type_custom_image_filesize_kb || $custom_field_file_size < 512000 ) {
+							if( $custom_field_file_size > $field_type_custom_image_filesize_kb ) {
                                 $errors[ $register_field['field_type'] ] = isset( $settings['field_type_custom_image_filesize_error'] ) ? $settings['field_type_custom_image_filesize_error'] : __( 'File Size Limit Exceeded!', 'essential-addons-for-elementor-lite' );
                             }
 						}
