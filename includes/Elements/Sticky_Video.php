@@ -434,6 +434,12 @@ class Sticky_Video extends Widget_Base
             ]
         );
 
+        $this->add_control( 'eaelsv_icon_new_notice', [
+			'type'            => Controls_Manager::RAW_HTML,
+			'raw'             => __( 'Play icon appears on top of overlay image', 'essential-addons-for-elementor-lite' ),
+			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+		] );
+
         $this->end_controls_section();
 
         /**
