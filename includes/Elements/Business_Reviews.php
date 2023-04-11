@@ -16,6 +16,18 @@ use \Elementor\Widget_Base;
 
 class Business_Reviews extends Widget_Base {
 
+	/**
+	 * Elementor Display Settings
+	 * @return mixed An array of all settings, or a single value if `$setting` was specified.
+	 */
+	protected $settings_data;
+
+	/**
+	 * Business Reviews Settings
+	 * @return array
+	 */
+	protected $business_reviews_data;
+
 	public function get_name() {
 		return 'eael-business-reviews';
 	}
@@ -148,6 +160,18 @@ class Business_Reviews extends Widget_Base {
 				'min'         => 0,
 				'default'     => 0,
 				'description' => __( 'Cache expiration time (in Minutes), 0 or empty sets 1 day.', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_localbusiness_schema',
+			[
+				'label'        => __( 'LocalBusiness Schema', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => '',
 			]
 		);
 
@@ -2633,8 +2657,8 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	public function print_business_reviews( $business_reviews_items ) {
-		$settings         = $this->get_settings();
-		$business_reviews = $this->get_business_reviews_settings();
+		$settings 			= $this->settings_data         = $this->get_settings();
+		$business_reviews 	= $this->business_reviews_data = $this->get_business_reviews_settings();
 
 		ob_start();
 
@@ -3202,8 +3226,13 @@ class Business_Reviews extends Widget_Base {
 		return true;
 	}
 
+	public function print_localbusiness_schema( $business_reviews_items ){
+		// LocalBusiness Schema
+	}
+
 	protected function render() {
 		$business_reviews_items = $this->fetch_business_reviews_from_api();
 		$this->print_business_reviews( $business_reviews_items );
+		$this->print_localbusiness_schema( $business_reviews_items );
 	}
 }
