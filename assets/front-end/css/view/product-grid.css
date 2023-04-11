@@ -738,7 +738,6 @@
 .eael-post-grid.eael-product-simple .woocommerce ul.products li.product .add-to-whishlist .yith-wcwl-add-to-wishlist,
 .eael-post-grid.eael-product-reveal .woocommerce ul.products li.product .add-to-whishlist .yith-wcwl-add-to-wishlist {
   margin: 0 15px 15px 15px;
-  padding: 7px;
   color: #fff;
   background-color: #333;
 }
@@ -777,7 +776,8 @@
   display: inline-block;
   color: inherit;
   margin: 0;
-  line-height: 14px;
+  line-height: 38px;
+  width: 100%;
 }
 .eael-product-grid.eael-product-simple .woocommerce ul.products li.product .add-to-whishlist a i, .eael-product-grid.eael-product-reveal .woocommerce ul.products li.product .add-to-whishlist a i,
 .eael-post-grid.eael-product-simple .woocommerce ul.products li.product .add-to-whishlist a i,
