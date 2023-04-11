@@ -316,10 +316,11 @@
                         }
 
                         a {
-                            font-size: 0;
                             vertical-align: middle;
                             display: inline-block;
                             color: inherit;
+                            margin: 0;
+                            line-height: 14px;
 
                             i {
                                 display: none;

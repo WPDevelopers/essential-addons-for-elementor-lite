@@ -4474,7 +4474,7 @@ msgstr ""
 msgid "Background Shape"
 msgstr ""
 
-#: ../includes/Elements/Info_Box.php:1159
+#: ../includes/Elements/Info_Box.php:1159, ../includes/Elements/Product_Grid.php:1491
 msgid "Button Styles"
 msgstr ""
 
@@ -6806,10 +6806,6 @@ msgstr ""
 msgid "Stock Out Badge Background"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:1491, ../includes/Elements/Woo_Product_Gallery.php:971
-msgid "Add to Cart Button Styles"
-msgstr ""
-
 #: ../includes/Elements/Product_Grid.php:1552, ../includes/Elements/Product_Grid.php:1628, ../includes/Elements/Woo_Product_Gallery.php:1028, ../includes/Elements/Woo_Product_Gallery.php:1101
 msgid "Button Color"
 msgstr ""
@@ -8481,6 +8477,10 @@ msgstr ""
 
 #: ../includes/Elements/Woo_Product_Gallery.php:492
 msgid "Enable to show a secondary image from the product gallery on hover."
+msgstr ""
+
+#: ../includes/Elements/Woo_Product_Gallery.php:971
+msgid "Add to Cart Button Styles"
 msgstr ""
 
 #: ../includes/Elements/Woo_Product_Gallery.php:1168
