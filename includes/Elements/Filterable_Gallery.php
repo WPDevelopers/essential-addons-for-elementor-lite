@@ -214,6 +214,9 @@ class Filterable_Gallery extends Widget_Base
 				'type' => Controls_Manager::TEXT,
 				'default' => esc_html__( 'No Items Found', 'essential-addons-for-elementor-lite' ),
 				'placeholder' => esc_html__( 'Not Found Text', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+                        'eael_fg_caption_style' =>  'layout_3'
+                ]
 			]
 		);
 
@@ -2573,7 +2576,7 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#fff',
+                'default' => '#858e9a',
                 'selectors' => [
                     '{{WRAPPER}} #eael-fg-no-items-found' => 'color: {{VALUE}};',
                 ],
@@ -3600,12 +3603,14 @@ class Filterable_Gallery extends Widget_Base
                             echo $this->render_gallery_items()[$i];
                     }
                 }
+                if ( $settings['eael_fg_caption_style'] === 'layout_3' ):
                 ?>
                 <div id="eael-fg-no-items-found" style="display:none;">
                     <?php
                        echo Helper::eael_wp_kses( $settings['eael_fg_not_found_text'] );
                     ?>
                 </div>
+                <?php endif; ?>
             </div>
             
             <?php
