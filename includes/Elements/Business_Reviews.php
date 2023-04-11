@@ -13,6 +13,7 @@ use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
 use Elementor\Icons_Manager;
 use \Elementor\Widget_Base;
+use Essential_Addons_Elementor\Classes\Helper;
 
 class Business_Reviews extends Widget_Base {
 
@@ -3229,20 +3230,47 @@ class Business_Reviews extends Widget_Base {
 
 	public function print_localbusiness_schema( $business_reviews_items ){
 		// EA LocalBusiness Schema
-		// FAQ Schema
-		if ( !empty( $settings['eael_adv_accordion_faq_schema_show'] ) && 'yes' === $settings['eael_adv_accordion_faq_schema_show'] ) {
-			foreach ( $settings['eael_adv_accordion_tab'] as $index => $tab ) {
-				$faq = [
-					'@type' => 'Question',
-					'name' => Helper::eael_wp_kses( $tab['eael_adv_accordion_tab_title'] ),
-					'acceptedAnswer' => [
-						'@type' => 'Answer',
-						'text' => ('content' === $tab['eael_adv_accordion_text_type']) ? do_shortcode( $tab['eael_adv_accordion_tab_content'] ) : '',
+		if ( empty( $business_reviews_items_reivews = $business_reviews_items['reviews'] ) ) {
+			return;
+		}
+
+		if ( ! empty( $business_reviews['localbusiness_schema'] ) ) {
+			$reviews = [];
+			foreach ( $business_reviews_items_reivews as $business_reviews_items_reivew ) {
+				$reviews[] = [
+					"@type" => "Review",
+					"reviewRating" => [
+						"@type" => "Rating",
+						"ratingValue" => ! empty( $business_reviews_items_reivew['rating'] ) ? $business_reviews_items_reivew['rating'] : '',
+					],
+					"author" => [
+						"@type" => "Person",
+						"name" => ! empty( $business_reviews_items_reivew['author_name'] ) ? $business_reviews_items_reivew['author_name'] : '',
 					],
 				];
-
-				Helper::set_eael_advanced_accordion_faq($faq);
-			}	
+			}
+			
+			$full_schema_array = [
+				"@context" => "https://schema.org",
+				"@type" => "LocalBusiness",
+				"name" => "here",
+				"address" => [
+					'@type' => "PostalAddress",
+					'streetAddress' => "here",
+					'addressLocality' => "here",
+					'addressRegion' => "here",
+					'postalCode' => "here",
+					'addressCountry' => "here",
+				],
+				"review" => $reviews,
+				"aggregateRating" => [
+					"@type" => "AggregateRating",
+					"ratingValue" => "here",
+					"ratingCount" => "here",
+				],
+				"url" => "here",
+				"telephone" => "here",
+			];
 		}
 	}
 
