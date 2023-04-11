@@ -3229,13 +3229,13 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	public function print_localbusiness_schema( $business_reviews_items ){
-		if ( empty( $business_reviews_items_reivews = $business_reviews_items['reviews'] ) ) {
+		if ( empty( $business_reviews_items['reviews'] ) ) {
 			return;
 		}
 
-		if ( ! empty( $business_reviews['localbusiness_schema'] ) ) {
+		if ( ! empty( $this->business_reviews_data['localbusiness_schema'] ) ) {
 			$reviews = [];
-			foreach ( $business_reviews_items_reivews as $business_reviews_items_reivew ) {
+			foreach ( $business_reviews_items['reviews'] as $business_reviews_items_reivew ) {
 				$reviews[] = [
 					"@type" => "Review",
 					"reviewRating" => [
