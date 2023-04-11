@@ -1488,7 +1488,7 @@ class Product_Grid extends Widget_Base
         $this->start_controls_section(
             'eael_section_product_grid_add_to_cart_styles',
             [
-                'label' => esc_html__('Add to Cart Button Styles', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Button Styles', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_product_grid_style_preset!' => [

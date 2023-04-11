@@ -773,10 +773,11 @@
 .eael-product-grid.eael-product-simple .woocommerce ul.products li.product .add-to-whishlist a, .eael-product-grid.eael-product-reveal .woocommerce ul.products li.product .add-to-whishlist a,
 .eael-post-grid.eael-product-simple .woocommerce ul.products li.product .add-to-whishlist a,
 .eael-post-grid.eael-product-reveal .woocommerce ul.products li.product .add-to-whishlist a {
-  font-size: 0;
   vertical-align: middle;
   display: inline-block;
   color: inherit;
+  margin: 0;
+  line-height: 14px;
 }
 .eael-product-grid.eael-product-simple .woocommerce ul.products li.product .add-to-whishlist a i, .eael-product-grid.eael-product-reveal .woocommerce ul.products li.product .add-to-whishlist a i,
 .eael-post-grid.eael-product-simple .woocommerce ul.products li.product .add-to-whishlist a i,
