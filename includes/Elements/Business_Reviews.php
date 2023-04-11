@@ -3229,7 +3229,6 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	public function print_localbusiness_schema( $business_reviews_items ){
-		// EA LocalBusiness Schema
 		if ( empty( $business_reviews_items_reivews = $business_reviews_items['reviews'] ) ) {
 			return;
 		}
@@ -3271,6 +3270,13 @@ class Business_Reviews extends Widget_Base {
 				"url" => "here",
 				"telephone" => "here",
 			];
+			?> 
+			<!-- EA LocalBusiness Schema : Starts-->
+            <script type="application/ld+json">
+                <?php echo json_encode( $full_schema_array ); ?>
+            </script>
+            <!-- EA LocalBusiness Schema : Ends-->
+			<?php
 		}
 	}
 
