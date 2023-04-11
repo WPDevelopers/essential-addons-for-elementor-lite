@@ -1078,6 +1078,49 @@ $config = [
                 ],
             ],
         ],
+        'business-reviews' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Business_Reviews',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/business-reviews.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+                'js' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/business-reviews.min.js',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
+        'svg-draw' => [
+            'class' => '\Essential_Addons_Elementor\Elements\SVG_Draw',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/svg-draw.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+                'js' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/drawsvg/drawsvg.min.js',
+                        'type' => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/svg-draw.min.js',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
     ],
     'extensions' => [
         'promotion' => [

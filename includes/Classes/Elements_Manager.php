@@ -74,41 +74,44 @@ class Elements_Manager {
 	public function get_widget_list( $data ) {
 		$widget_list = [];
 		$replace     = $this->replace_widget_name();
-		Plugin::$instance->db->iterate_data( $data, function ( $element ) use ( &$widget_list, $replace ) {
 
-			if ( empty( $element['widgetType'] ) ) {
-				$type = $element['elType'];
-			} else {
-				$type = $element['widgetType'];
-			}
+		if ( is_object( Plugin::$instance->db ) ) {
+			Plugin::$instance->db->iterate_data( $data, function ( $element ) use ( &$widget_list, $replace ) {
 
-			if ( ! empty( $element['widgetType'] ) && $element['widgetType'] === 'global' ) {
-				$document = Plugin::$instance->documents->get( $element['templateID'] );
-				$type     = is_object( $document ) ? current( $this->get_widget_list( $document->get_elements_data() ) ) : $type;
-
-				if ( ! empty( $type ) ) {
-					$type = 'eael-' . $type;
-				}
-			}
-
-			if ( ! empty( $type ) && ! is_array( $type ) ) {
-
-				if ( isset( $replace[ $type ] ) ) {
-					$type = $replace[ $type ];
+				if ( empty( $element['widgetType'] ) ) {
+					$type = $element['elType'];
+				} else {
+					$type = $element['widgetType'];
 				}
 
-				if ( strpos( $type, 'eael-' ) !== false ) {
+				if ( ! empty( $element['widgetType'] ) && $element['widgetType'] === 'global' ) {
+					$document = Plugin::$instance->documents->get( $element['templateID'] );
+					$type     = is_object( $document ) ? current( $this->get_widget_list( $document->get_elements_data() ) ) : $type;
 
-					$type = str_replace( 'eael-', '', $type );
-					if ( ! isset( $widget_list[ $type ] ) ) {
-						$widget_list[ $type ] = $type;
+					if ( ! empty( $type ) ) {
+						$type = 'eael-' . $type;
 					}
 				}
 
-				$widget_list += $this->get_extension_list( $element );
-			}
+				if ( ! empty( $type ) && ! is_array( $type ) ) {
 
-		} );
+					if ( isset( $replace[ $type ] ) ) {
+						$type = $replace[ $type ];
+					}
+
+					if ( strpos( $type, 'eael-' ) !== false ) {
+
+						$type = str_replace( 'eael-', '', $type );
+						if ( ! isset( $widget_list[ $type ] ) ) {
+							$widget_list[ $type ] = $type;
+						}
+					}
+
+					$widget_list += $this->get_extension_list( $element );
+				}
+
+			} );
+		}
 
 		return $widget_list;
 	}
@@ -130,11 +133,10 @@ class Elements_Manager {
 			return false;
 		}
 
-		$document  = is_object( Plugin::$instance->documents ) ? Plugin::$instance->documents->get( $post_id ) : [];
-		$data      = is_object( $document ) ? $document->get_elements_data() : [];
-		$data      = $this->get_widget_list( $data );
-		$custom_js = is_object( $document ) ? $document->get_settings( 'eael_custom_js' ) : '';
-		$this->save_widgets_list( $post_id, $data, $custom_js );
+		$document = is_object( Plugin::$instance->documents ) ? Plugin::$instance->documents->get( $post_id ) : [];
+		$data     = is_object( $document ) ? $document->get_elements_data() : [];
+		$data     = $this->get_widget_list( $data );
+		$this->save_widgets_list( $post_id, $data, false );
 
 		return true;
 	}
@@ -171,7 +173,7 @@ class Elements_Manager {
 	 * replace_widget_name
 	 * Added backward compatibility
 	 */
-	public function replace_widget_name() {
+	public static function replace_widget_name() {
 		return [
 			'eicon-woocommerce'               => 'eael-product-grid',
 			'eael-countdown'                  => 'eael-count-down',
@@ -189,6 +191,7 @@ class Elements_Manager {
 			'eael-dynamic-filterable-gallery' => 'eael-dynamic-filter-gallery',
 			'eael-google-map'                 => 'eael-adv-google-map',
 			'eael-instafeed'                  => 'eael-instagram-gallery',
+			'eael-ninja'                      => 'eael-ninja-form',
 		];
 	}
 
@@ -209,7 +212,7 @@ class Elements_Manager {
 
 		$documents = Plugin::$instance->documents->get( $post_id );
 
-		if ( get_post_status( $post_id ) !== 'publish' || ( is_object( $documents ) && ! $documents->is_built_with_elementor() ) ) {
+		if ( ! in_array( get_post_status( $post_id ), [ 'publish', 'private' ] ) || ( is_object( $documents ) && ! $documents->is_built_with_elementor() ) ) {
 			return false;
 		}
 
@@ -217,7 +220,9 @@ class Elements_Manager {
 			return false;
 		}
 
-		update_post_meta( $post_id, '_eael_custom_js', $custom_js );
+		if ( $custom_js !== false ) {
+			update_post_meta( $post_id, '_eael_custom_js', $custom_js );
+		}
 
 		if ( md5( implode( '', (array) $list ) ) == md5( implode( '', (array) get_post_meta( $post_id, self::ELEMENT_KEY, true ) ) ) ) {
 			return false;
@@ -304,18 +309,23 @@ class Elements_Manager {
 		} else if ( $type == 'css' && ! $this->is_edit_mode() ) {
 			$self['view'][] = EAEL_PLUGIN_PATH . "assets/front-end/css/view/general.min.css";
 		}
+
 		foreach ( $elements as $element ) {
 
 			if ( isset( $this->registered_elements[ $element ] ) ) {
 				if ( ! empty( $this->registered_elements[ $element ]['dependency'][ $type ] ) ) {
 					foreach ( $this->registered_elements[ $element ]['dependency'][ $type ] as $file ) {
-						${$file['type']}[ $file['context'] ][] = $file['file'];
+						if ( ! empty( $file['type'] ) && ! empty( $file['context'] ) && ! empty( $file['file'] ) ) {
+							${$file['type']}[ $file['context'] ][] = $file['file'];
+						}
 					}
 				}
 			} elseif ( isset( $this->registered_extensions[ $element ] ) ) {
 				if ( ! empty( $this->registered_extensions[ $element ]['dependency'][ $type ] ) ) {
 					foreach ( $this->registered_extensions[ $element ]['dependency'][ $type ] as $file ) {
-						${$file['type']}[ $file['context'] ][] = $file['file'];
+						if ( ! empty( $file['type'] ) && ! empty( $file['context'] ) && ! empty( $file['file'] ) ) {
+							${$file['type']}[ $file['context'] ][] = $file['file'];
+						}
 					}
 				}
 			}
