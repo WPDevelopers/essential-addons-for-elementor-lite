@@ -1,0 +1,212 @@
+.eael-business-reviews-wrapper .eael-business-reviews-items {
+  padding: 0 15px;
+}
+.eael-business-reviews-wrapper .preset-2 .preset-content-wrap {
+  border: 1px solid #f5f5f5;
+  border-radius: 10px;
+  padding: 30px;
+  margin: 5px;
+  -webkit-box-shadow: 0px 0 5px rgba(19, 26, 64, 0.1);
+          box-shadow: 0px 0 5px rgba(19, 26, 64, 0.1);
+}
+.eael-business-reviews-wrapper .preset-2 .preset-content-footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-column-gap: 20px;
+     -moz-column-gap: 20px;
+          column-gap: 20px;
+  margin-top: 35px;
+  padding-top: 20px;
+  border-top: 1px solid #f5f5f5;
+}
+.eael-business-reviews-wrapper .preset-2 .preset-content-footer-rating {
+  margin-left: auto;
+}
+.eael-business-reviews-wrapper .preset-2 .eael-google-review-text,
+.eael-business-reviews-wrapper .preset-2 .eael-google-review-reviewer-name,
+.eael-business-reviews-wrapper .preset-2 .eael-google-review-time {
+  text-align: left;
+}
+.eael-business-reviews-wrapper .preset-3 .preset-content-body {
+  border-radius: 10px;
+  padding: 10px;
+  margin: 5px;
+  -webkit-box-shadow: 0px 0px 5px rgba(19, 26, 64, 0.1);
+          box-shadow: 0px 0px 5px rgba(19, 26, 64, 0.1);
+  position: relative;
+}
+.eael-business-reviews-wrapper .preset-3 .preset-extra-shadow {
+  position: absolute;
+  bottom: -68px;
+  left: 0;
+}
+.eael-business-reviews-wrapper .preset-3 .eael-google-review-rating,
+.eael-business-reviews-wrapper .preset-3 .eael-google-review-text,
+.eael-business-reviews-wrapper .preset-3 .eael-google-review-reviewer-name,
+.eael-business-reviews-wrapper .preset-3 .eael-google-review-time {
+  text-align: left;
+}
+.eael-business-reviews-wrapper .preset-3 .preset-content-footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-column-gap: 20px;
+     -moz-column-gap: 20px;
+          column-gap: 20px;
+  margin-top: 40px;
+}
+.eael-business-reviews-wrapper .eael-google-reviews-slider-header,
+.eael-business-reviews-wrapper .eael-google-reviews-grid-header {
+  text-align: center;
+  margin-bottom: 40px;
+  cursor: pointer;
+}
+.eael-business-reviews-wrapper .eael-google-reviews-slider-header .eael-google-reviews-business-name,
+.eael-business-reviews-wrapper .eael-google-reviews-slider-header .eael-google-reviews-business-name a,
+.eael-business-reviews-wrapper .eael-google-reviews-grid-header .eael-google-reviews-business-name,
+.eael-business-reviews-wrapper .eael-google-reviews-grid-header .eael-google-reviews-business-name a {
+  color: #292844;
+  font-size: 36px;
+  line-height: 1.5em;
+}
+.eael-business-reviews-wrapper .eael-google-reviews-slider-header .eael-google-reviews-business-rating,
+.eael-business-reviews-wrapper .eael-google-reviews-slider-header .eael-google-reviews-business-rating a,
+.eael-business-reviews-wrapper .eael-google-reviews-grid-header .eael-google-reviews-business-rating,
+.eael-business-reviews-wrapper .eael-google-reviews-grid-header .eael-google-reviews-business-rating a {
+  color: #8A8EAA;
+  font-size: 12px;
+}
+.eael-business-reviews-wrapper .eael-google-reviews-slider-header .eael-google-reviews-business-address,
+.eael-business-reviews-wrapper .eael-google-reviews-slider-header .eael-google-reviews-business-address a,
+.eael-business-reviews-wrapper .eael-google-reviews-grid-header .eael-google-reviews-business-address,
+.eael-business-reviews-wrapper .eael-google-reviews-grid-header .eael-google-reviews-business-address a {
+  color: #8A8EAA;
+  font-size: 13px;
+}
+.eael-business-reviews-wrapper .eael-google-reviews-slider-header .eael-google-reviews-business-address p,
+.eael-business-reviews-wrapper .eael-google-reviews-slider-header .eael-google-reviews-business-rating p,
+.eael-business-reviews-wrapper .eael-google-reviews-grid-header .eael-google-reviews-business-address p,
+.eael-business-reviews-wrapper .eael-google-reviews-grid-header .eael-google-reviews-business-rating p {
+  margin: 5px 0 0;
+}
+.eael-business-reviews-wrapper .eael-google-reviews-slider-header .eael-google-reviews-business-address,
+.eael-business-reviews-wrapper .eael-google-reviews-grid-header .eael-google-reviews-business-address {
+  margin-top: 10px;
+}
+.eael-business-reviews-wrapper .eael-google-reviews-business-rating {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-column-gap: 5px;
+     -moz-column-gap: 5px;
+          column-gap: 5px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.eael-business-reviews-wrapper .eael-google-review-reviewer-photo {
+  text-align: center;
+}
+.eael-business-reviews-wrapper .eael-google-review-reviewer-name,
+.eael-business-reviews-wrapper .eael-google-review-reviewer-name a {
+  color: #292844;
+  font-size: 16px;
+  text-align: center;
+  font-weight: 500;
+}
+.eael-business-reviews-wrapper .eael-google-review-time {
+  color: #8A8EAA;
+  font-size: 12px;
+  text-align: center;
+  font-weight: 400;
+}
+.eael-business-reviews-wrapper .eael-google-review-text {
+  color: #000000;
+  font-size: 14px;
+  text-align: center;
+  font-weight: 400;
+  margin-top: 10px;
+}
+.eael-business-reviews-wrapper .eael-google-review-rating {
+  text-align: center;
+  margin-top: 20px;
+}
+.eael-business-reviews-wrapper .swiper-container-wrap-dots-outside .swiper-pagination {
+  position: static;
+}
+.eael-business-reviews-wrapper .swiper-button-prev,
+.eael-business-reviews-wrapper .swiper-button-next {
+  background-image: none !important;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.eael-business-reviews-wrapper .swiper-button-prev {
+  left: -40px;
+  right: auto;
+}
+.eael-business-reviews-wrapper .swiper-button-next {
+  right: -40px;
+  left: auto;
+}
+.eael-business-reviews-wrapper .swiper-button-prev:focus,
+.eael-business-reviews-wrapper .swiper-button-next:focus {
+  outline: none;
+}
+.eael-business-reviews-wrapper .swiper-pagination {
+  cursor: pointer;
+}
+.eael-business-reviews-wrapper .eael-google-reviews-grid-body {
+  display: grid;
+}
+.eael-business-reviews-wrapper .eael-google-reviews-grid-body.eael-column-1 {
+  grid-template-columns: auto;
+}
+.eael-business-reviews-wrapper .eael-google-reviews-grid-body.eael-column-2 {
+  grid-template-columns: auto auto;
+}
+.eael-business-reviews-wrapper .eael-google-reviews-grid-body.eael-column-3 {
+  grid-template-columns: auto auto auto;
+}
+.eael-business-reviews-wrapper .eael-google-reviews-grid-body.eael-column-4 {
+  grid-template-columns: auto auto auto auto;
+}
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .eael-business-reviews-wrapper .eael-google-reviews-grid-body.eael-column-tablet-1 {
+    grid-template-columns: auto;
+  }
+  .eael-business-reviews-wrapper .eael-google-reviews-grid-body.eael-column-tablet-2 {
+    grid-template-columns: auto auto;
+  }
+  .eael-business-reviews-wrapper .eael-google-reviews-grid-body.eael-column-tablet-3 {
+    grid-template-columns: auto auto auto;
+  }
+  .eael-business-reviews-wrapper .eael-google-reviews-grid-body.eael-column-tablet-4 {
+    grid-template-columns: auto auto auto auto;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .eael-business-reviews-wrapper .eael-google-reviews-grid-body.eael-column-mobile-1 {
+    grid-template-columns: auto;
+  }
+  .eael-business-reviews-wrapper .eael-google-reviews-grid-body.eael-column-mobile-2 {
+    grid-template-columns: auto auto;
+  }
+  .eael-business-reviews-wrapper .eael-google-reviews-grid-body.eael-column-mobile-3 {
+    grid-template-columns: auto auto auto;
+  }
+  .eael-business-reviews-wrapper .eael-google-reviews-grid-body.eael-column-mobile-4 {
+    grid-template-columns: auto auto auto auto;
+  }
+}

@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'eaicon';
-	src:  url('../fonts/eaicon.eot?1j5w9r');
-	src:  url('../fonts/eaicon.eot?1j5w9r#iefix') format('embedded-opentype'),
-	url('../fonts/eaicon.ttf?1j5w9r') format('truetype'),
-	url('../fonts/eaicon.woff?1j5w9r') format('woff'),
-	url('../fonts/eaicon.svg?1j5w9r#eaicon') format('svg');
+	src:  url('../fonts/eaicon.eot?o5l1u9');
+	src:  url('../fonts/eaicon.eot?o5l1u9#iefix') format('embedded-opentype'),
+	url('../fonts/eaicon.ttf?o5l1u9') format('truetype'),
+	url('../fonts/eaicon.woff?o5l1u9') format('woff'),
+	url('../fonts/eaicon.svg?o5l1u9#eaicon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 	font-display: block;
@@ -379,4 +379,10 @@
 }
 .eaicon-nft-gallery:before {
 	content: "\e96e";
+}
+.eaicon-business-reviews:before {
+	content: "\e96f";
+}
+.eaicon-svg-draw:before {
+	content: "\e970";
 }

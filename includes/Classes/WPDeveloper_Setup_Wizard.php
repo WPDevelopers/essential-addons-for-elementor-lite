@@ -283,7 +283,7 @@ class WPDeveloper_Setup_Wizard {
                          alt="<?php _e( 'Go Pro Logo', 'essential-addons-for-elementor-lite' ); ?>">
                 </div>
                 <h2 class="eael-quick-setup-title">
-					<?php _e( 'Unlock 30+ Advanced PRO Elements to Enhance Your Elementor Site Building Experience', 'essential-addons-for-elementor-lite' ); ?>
+					<?php _e( 'Enhance Your Elementor Experience By Unlocking 30+ Advanced PRO Elements', 'essential-addons-for-elementor-lite' ); ?>
                 </h2>
             </div>
             <div class="eael-quick-setup-input-group">
@@ -327,12 +327,10 @@ class WPDeveloper_Setup_Wizard {
                      alt="<?php _e( 'Logo', 'essential-addons-for-elementor-lite' ) ?>">
             </div>
             <div class="eael-quick-setup-title">
-				<?php printf( __( '%s <span class="eael-quick-setup-highlighted-red">%s</span> %s', 'essential-addons-for-elementor-lite' ), 'Unlock', '3000+', 'Ready Templates Built With Elementor & Essential Addons From
-                    Templately.' ); ?>
+				<?php printf( __( '%s <span class="eael-quick-setup-highlighted-red">%s</span> %s', 'essential-addons-for-elementor-lite' ), 'Get access to', '3000+', 'Elementor Templates with Templately! 🚀' ); ?>
             </div>
             <div class="eael-quick-setup-text">
-				<?php _e( 'Get Access to amazing features and boost your Elementor page
-                    building experience with Templately 👇', 'essential-addons-for-elementor-lite' ); ?>
+				<?php _e( 'Want to create websites faster than ever? Check out Templately, the ultimate templates cloud that comes with thousands of ready Elementor templates for every niche!', 'essential-addons-for-elementor-lite' ); ?>
             </div>
             <ul class="eael-quick-setup-list">
                 <li class="eael-quick-setup-list-item">
@@ -690,6 +688,10 @@ class WPDeveloper_Setup_Wizard {
 						'title'       => __( 'NFT Gallery', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
 					],
+					[
+						'key'         => 'business-reviews',
+						'title'       => __( 'Business Reviews', 'essential-addons-for-elementor-lite' ),
+					],
 				]
 			],
 			'creative-elements'        => [
@@ -725,6 +727,11 @@ class WPDeveloper_Setup_Wizard {
 						'title'       => __( 'Interactive Circle', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
 					],
+                    [
+                        'key'         => 'svg-draw',
+                        'title'       => __( 'SVG Draw', 'essential-addons-for-elementor-lite' ),
+                        'preferences' => 'advance',
+                    ],
 				]
 			],
 			'marketing-elements'       => [

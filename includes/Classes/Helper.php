@@ -1227,6 +1227,49 @@ class Helper
 	            'id'    => [],
 	            'style' => [],
             ],
+            'table' => [
+	            'class' => [],
+	            'id'    => [],
+	            'style' => [],
+                'dir'   => [],
+                'align' => [],
+            ],
+            'thead' => [
+	            'class' => [],
+	            'id'    => [],
+	            'style' => [],
+                'align' => [],
+            ],
+            'tbody' => [
+	            'class' => [],
+	            'id'    => [],
+	            'style' => [],
+                'align' => [],
+            ],
+            'tfoot' => [
+	            'class' => [],
+	            'id'    => [],
+	            'style' => [],
+                'align' => [],
+            ],
+            'th' => [
+	            'class' => [],
+	            'id'    => [],
+	            'style' => [],
+                'align' => [],
+            ],
+            'tr' => [
+	            'class' => [],
+	            'id'    => [],
+	            'style' => [],
+                'align' => [],
+            ],
+            'td' => [
+	            'class' => [],
+	            'id'    => [],
+	            'style' => [],
+                'align' => [],
+            ],
         ];
     }
 
@@ -1279,6 +1322,36 @@ class Helper
 
 		return $output;
 	}
+
+    /**
+     * Get SVG html by Icon
+     *
+     * Used to get svg attributes from Icon class for SVG Drawing widget
+     * @param string $icon             Icon
+     *
+     * @return string
+     */
+    public static function get_svg_by_icon( $icon ) {
+        if ( empty( $icon ) || empty( $icon['value'] ) || empty( $icon['library'] ) ) return '';
+
+        $svg_html = "";
+
+        $icon_name  = str_replace( [ 'fas fa-', 'fab fa-', 'far fa-' ], '', $icon['value'] );
+        $library    = str_replace( 'fa-', '', $icon['library'] );
+        $svg_object = file_get_contents( EAEL_PLUGIN_PATH . "assets/front-end/js/lib-view/icons/{$library}.json" );
+        $svg_object = json_decode( $svg_object, true );
+        $i_class    = str_replace(' ', '-', $icon['value']);
+
+        if ( empty( $svg_object['icons'][$icon_name] ) ) return $svg_html;
+
+        $icon       = $svg_object['icons'][$icon_name];
+        $view_box   = "0 0 {$icon[0]} {$icon[1]}";
+        $svg_html  .= "<svg class='svg-inline--". $i_class ."  eael-svg-icon' aria-hidden='true' data-icon='store' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='{$view_box}' >";
+        $svg_html  .= "<path d='{$icon[4]}'></path>";
+        $svg_html  .= "</svg>";
+
+        return $svg_html;
+    }
     
     /**
      * Get product image src and Product gallery's first image src

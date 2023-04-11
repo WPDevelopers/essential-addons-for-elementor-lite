@@ -138,8 +138,6 @@ trait Ajax_Handler {
 			wp_send_json_error( [ 'message' => __( 'Widget settings are not found. Did you save the widget before using load more??', 'essential-addons-for-elementor-lite' ) ] );
 		}
 
-        $settings['read_more_button_text'] = get_transient('eael_post_grid_read_more_button_text_'. $widget_id);
-        $settings['excerpt_expanison_indicator'] = get_transient('eael_post_grid_excerpt_expanison_indicator_'. $widget_id);
 		$settings['eael_widget_id'] = $widget_id;
 		$settings['eael_page_id']   = $page_id;
 		$html                       = '';
@@ -152,9 +150,14 @@ trait Ajax_Handler {
 			];
 		}
 
-		if ( $class == '\Essential_Addons_Elementor\Elements\Post_Grid' && $settings['orderby'] === 'rand' ) {
-			$args['post__not_in'] = array_map( 'intval', array_unique( $_REQUEST['post__not_in'] ) );
-			unset( $args['offset'] );
+		if ( $class == '\Essential_Addons_Elementor\Elements\Post_Grid' ) {
+			$settings['read_more_button_text']       = get_transient( 'eael_post_grid_read_more_button_text_' . $widget_id );
+			$settings['excerpt_expanison_indicator'] = get_transient( 'eael_post_grid_excerpt_expanison_indicator_' . $widget_id );
+
+			if ( $settings['orderby'] === 'rand' ) {
+				$args['post__not_in'] = array_map( 'intval', array_unique( $_REQUEST['post__not_in'] ) );
+				unset( $args['offset'] );
+			}
 		}
 
 		// ensure control name compatibility to old code if it is post block
@@ -902,6 +905,11 @@ trait Ajax_Handler {
 		}
 		if ( isset( $settings['lr_fb_app_secret'] ) ) {
 			update_option( 'eael_fb_app_secret', sanitize_text_field( $settings['lr_fb_app_secret'] ) );
+		}
+
+		// Business Reviews : Saving Google Place Api Key
+		if ( isset( $settings['br_google_place_api_key'] ) ) {
+			update_option( 'eael_br_google_place_api_key', sanitize_text_field( $settings['br_google_place_api_key'] ) );
 		}
 
 		// Saving Google Map Api Key

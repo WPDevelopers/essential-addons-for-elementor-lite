@@ -279,9 +279,6 @@ class Simple_Menu extends Widget_Base
             [
                 'label' => __('Hamburger Menu', 'essential-addons-for-elementor-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
-                'condition' => [
-	                'eael_simple_menu_layout' => ['horizontal'],
-                ],
             ]
         );
 	    $this->add_responsive_control(
@@ -1440,7 +1437,8 @@ class Simple_Menu extends Widget_Base
             );
         }
 
-        $dropdown_options['none'] = esc_html__( 'None', 'essential-addons-for-elementor-lite' );
+        $dropdown_options['desktop']    = esc_html__( 'Desktop (> 2400px)', 'essential-addons-for-elementor-lite' );
+        $dropdown_options['none']       = esc_html__( 'None', 'essential-addons-for-elementor-lite' );
         
         return $dropdown_options;
     }

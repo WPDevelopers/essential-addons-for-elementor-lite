@@ -28,6 +28,24 @@ class advancedDataTable {
 
       // woocommerce
       this.initWooFeatures(table);
+
+      let isEscapedHtmlString = function (str) {
+        return /&[a-zA-Z]+;/.test(str);
+      }, decodeEscapedHtmlString = function (str) {
+        const textarea = document.createElement('textarea');
+        textarea.innerHTML = str;
+        return textarea.value;
+      };
+
+      if ($(table).hasClass('ea-advanced-data-table-static')) {
+        $(table).find('th, td').each(function () {
+          let text = $(this)[0].innerHTML;
+          if (isEscapedHtmlString(text)) {
+            text = decodeEscapedHtmlString(text);
+            $(this).html(text.replace("<script>", "").replace("</script>", "").replace("<script", ""));
+          }
+        });
+      }
     }
   }
 

@@ -472,5 +472,14 @@
                 <field type="NFT Gallery: Label | Ends In" editor_type="LINE">eael_nft_gallery_content_ends_in_label</field>
             </fields>
         </widget>
+        <widget name="eael-business-reviews">
+            <conditions>
+                <condition key="widgetType">eael-business-reviews</condition>
+            </conditions>
+            <fields>
+                <field type="Business Reviews: Label | Business Name" editor_type="LINE">eael_business_reviews_business_name_label</field>
+                <field type="Business Reviews: Label | Google Reviews Text" editor_type="LINE">eael_business_reviews_google_reviews_label</field>
+            </fields>
+        </widget>
     </elementor-widgets>
 </wpml-config>

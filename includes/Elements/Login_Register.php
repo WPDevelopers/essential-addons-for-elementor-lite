@@ -59,6 +59,11 @@ class Login_Register extends Widget_Base {
 	 */
 	protected $should_print_resetpassword_form;
 	/**
+	 * Should reset password form be printed in editor?
+	 * @var bool
+	 */
+	protected $should_print_resetpassword_form_editor;
+	/**
 	 * It contains an array of settings for the display
 	 * @var array
 	 */
@@ -67,6 +72,14 @@ class Login_Register extends Widget_Base {
 	 * @var bool|false|int
 	 */
 	protected $page_id;
+	/**
+	 * @var bool|false|int
+	 */
+	protected $page_id_for_popup;
+	/**
+	 * @var string
+	 */
+	protected $resetpassword_in_popup_selector;
 	/**
 	 * @var bool|string
 	 */
@@ -1384,7 +1397,7 @@ class Login_Register extends Widget_Base {
 	protected function social_login_promo() {
 
 		$this->start_controls_section( 'section_content_social_login', [
-			'label'      => __( 'Social Login', 'essential-addons-elementor' ),
+			'label'      => __( 'Social Login', 'essential-addons-for-elementor-lite' ),
 			'conditions' => $this->get_form_controls_display_condition( 'login' ),
 		] );
 
@@ -2127,6 +2140,31 @@ class Login_Register extends Widget_Base {
 			'default'     => __( 'Click here to reset your password', 'essential-addons-for-elementor-lite'),
 			'label_block' => false,
 			'render_type' => 'none',
+		] );
+
+		$this->add_control( 'lostpassword_email_message_reset_link_in_popup', [
+			'label'        => __( 'Reset Link in Popup', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+			'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'yes',
+			'default'      => '',
+		] );
+
+		$this->add_control( 'lostpassword_email_message_reset_link_in_popup_warning', [
+			'type'            => Controls_Manager::RAW_HTML,
+			'raw'             => __( 'Enable "Reset Link in Popup" feature if your form is displayed in a popup.', 'essential-addons-for-elementor-lite' ),
+			'content_classes' => 'eael-warning',
+		] );
+
+		$this->add_control( 'lostpassword_email_message_reset_link_popup_selector', [
+			'label'       => __( 'Popup Button Selector', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXT,
+			'placeholder' => '.parent .child',
+			'description' => __( 'Specify the class for the popup button that can be automatically triggered upon the page\'s loading.', 'essential-addons-for-elementor-lite' ),
+			'condition'       => [
+				'lostpassword_email_message_reset_link_in_popup' => 'yes',
+			],
 		] );
 
 		$this->add_control( 'lostpassword_email_content_type', [
@@ -4887,6 +4925,8 @@ class Login_Register extends Widget_Base {
 			$this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
 		}
 
+		$this->page_id_for_popup = get_queried_object_id();
+
 		//handle form illustration
 		$form_image_id               = ! empty( $this->ds['lr_form_image']['id'] ) ? $this->ds['lr_form_image']['id'] : '';
 		$this->form_illustration_pos = ! empty( $this->ds['lr_form_image_position'] ) ? $this->ds['lr_form_image_position'] : 'left';
@@ -4897,12 +4937,17 @@ class Login_Register extends Widget_Base {
 		$this->form_logo_pos = ! empty( $this->ds['lr_form_logo_position'] ) ? $this->ds['lr_form_logo_position'] : 'inline';
 		$login_redirect_url = '';
 		$resetpassword_redirect_url = '';
+
 		if ( ! empty( $this->ds['redirect_after_login'] ) && 'yes' === $this->ds['redirect_after_login'] ) {
 			$login_redirect_url = !empty( $this->ds[ 'redirect_url' ][ 'url' ] ) ? esc_url( $this->ds[ 'redirect_url' ][ 'url' ] ) : '';
 		}
 		
 		if ( ! empty( $this->ds['redirect_after_resetpassword'] ) && 'yes' === $this->ds['redirect_after_resetpassword'] ) {
 			$resetpassword_redirect_url = !empty( $this->ds[ 'redirect_url_resetpassword' ][ 'url' ] ) ? esc_url( $this->ds[ 'redirect_url_resetpassword' ][ 'url' ] ) : '';
+		}
+
+		if ( ! empty( $this->ds['lostpassword_email_message_reset_link_in_popup'] ) && 'yes' === $this->ds['lostpassword_email_message_reset_link_in_popup'] ) {
+			$this->resetpassword_in_popup_selector = ! empty( $this->ds[ 'lostpassword_email_message_reset_link_popup_selector' ] ) ? sanitize_text_field( $this->ds[ 'lostpassword_email_message_reset_link_popup_selector' ] ) : '';
 		}
 
 		$login_recaptcha_version = $register_recaptcha_version = ! empty( $this->ds['login_register_recaptcha_version'] ) ? $this->ds['login_register_recaptcha_version'] : 'v2';
@@ -5581,7 +5626,7 @@ class Login_Register extends Widget_Base {
 	protected function print_resetpassword_form(){
 		$default_hide_class = ( 'register' === $this->default_form || 'login' === $this->default_form || 'lostpassword' === $this->default_form || isset($_GET['eael-register']) || isset($_GET['eael-lostpassword']) ) && !isset($_GET['eael-resetpassword']) ? 'eael-lr-d-none' : '';
 		$default_hide_class = $this->should_print_resetpassword_form_editor ? '' : $default_hide_class;
-		$rp_page_url = get_permalink( $this->page_id ); 
+		$rp_page_url = ! empty( $this->page_id_for_popup ) ? get_permalink( $this->page_id_for_popup ) : get_permalink( $this->page_id ); 
 
 		if ( $this->should_print_resetpassword_form_editor || ( ! empty( $_GET['eael-resetpassword'] ) ) ) {
 			$rp_data = get_option('eael_resetpassword_rp_data_' . $this->get_id());
@@ -5605,6 +5650,10 @@ class Login_Register extends Widget_Base {
 					update_option( 'eael_lostpassword_error_' . esc_attr( $this->get_id() ), $rp_err_msg, false );
 		
 					$resetpassword_redirect_url = esc_url_raw( $rp_page_url . '?eael-lostpassword=1&error=expiredkey' );
+					
+					if( ! empty( $this->resetpassword_in_popup_selector ) ){
+						$resetpassword_redirect_url = esc_url_raw( $rp_page_url . '?eael-lostpassword=1&error=expiredkey&popup-selector=' . $this->resetpassword_in_popup_selector );
+					}
 					?>
 					<script type="text/javascript">
 						document.location.href = <?php echo json_encode( $resetpassword_redirect_url ); ?>;
@@ -5790,7 +5839,7 @@ class Login_Register extends Widget_Base {
 	 */
 	protected function print_form_header( $form_type = 'login' ) {
 		$title    = ! empty( $this->ds["{$form_type}_form_title"] ) ?  esc_html__( wp_strip_all_tags( $this->ds["{$form_type}_form_title"] ), 'essential-addons-for-elementor-lite' )  : '';
-		$subtitle = ! empty( $this->ds["{$form_type}_form_subtitle"] ) ? esc_html__( wp_strip_all_tags( $this->ds["{$form_type}_form_subtitle"] ), 'essential-addons-for-elementor-lite' ) : '';
+		$subtitle = ! empty( $this->ds["{$form_type}_form_subtitle"] ) ? HelperCLass::eael_wp_kses( $this->ds["{$form_type}_form_subtitle"] ) : '';
 		
 		$show_form_logo_class = '';
 		if( 'lostpassword' === $form_type || 'resetpassword' === $form_type ){
@@ -5853,6 +5902,12 @@ class Login_Register extends Widget_Base {
         <input type="hidden"
                name="page_id"
                value="<?php echo esc_attr( $this->page_id ); ?>">
+		<input type="hidden"
+               name="page_id_for_popup"
+               value="<?php echo esc_attr( ! empty( $this->page_id_for_popup ) ? $this->page_id_for_popup : $this->page_id ); ?>">	   
+		<input type="hidden"
+               name="resetpassword_in_popup_selector"
+               value="<?php echo esc_attr( ! empty( $this->resetpassword_in_popup_selector ) ? $this->resetpassword_in_popup_selector : '' ); ?>">
         <input type="hidden"
                name="widget_id"
                value="<?php echo esc_attr( $this->get_id() ); ?>">
