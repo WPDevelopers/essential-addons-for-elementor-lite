@@ -22,7 +22,7 @@ ea.hooks.addAction("init", "ea", () => {
         const $lostpasswordLinkAction = $scope.find('#eael-lr-lostpassword-toggle');
         const $lostpasswordLoginLinkAction = $scope.find('#eael-lr-login-toggle-lostpassword');
         const $passField = $loginFormWrapper.find('#eael-user-password');
-        const $passFieldRegister = $loginFormWrapper.find('#form-field-password');
+        const $passFieldRegister = $regFormWrapper.find('#form-field-password');
         const $pass1Field = $resetpasswordFormWrapper.find('#eael-pass1');
         const $pass2Field = $resetpasswordFormWrapper.find('#eael-pass2');
         const recaptchaAvailable = (typeof grecaptcha !== 'undefined' && grecaptcha !== null);
