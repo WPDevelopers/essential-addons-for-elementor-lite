@@ -3265,31 +3265,31 @@ class Business_Reviews extends Widget_Base {
 			}
 
 			// Address
-			$address_components = ! empty( $business_reviews_items_reivew->address_components ) ? $business_reviews_items_reivew->address_components : '';
-			
+			$address_components = ! empty( $business_reviews_items_obj->address_components ) ? $business_reviews_items_obj->address_components : [];
+
 			foreach ($address_components as $component) {
-				if (in_array('street_number', $component['types'])) {
-					$street_number = $component['long_name'];
+				if (in_array('street_number', $component->types)) {
+					$street_number = $component->long_name;
 				}
 				
-				if (in_array('route', $component['types'])) {
-					$street_name = $component['long_name'];
+				if (in_array('route', $component->types)) {
+					$street_name = $component->long_name;
 				}
 
-				if (in_array('locality', $component['types'])) {
-					$locality_city = $component['long_name'];
+				if (in_array('locality', $component->types)) {
+					$locality_city = $component->long_name;
 				}
 
-				if (in_array('administrative_area_level_1', $component['types'])) {
-					$region_state = $component['short_name'];
+				if (in_array('administrative_area_level_1', $component->types)) {
+					$region_state = $component->short_name;
 				}
 				
-				if (in_array('postal_code', $component['types'])) {
-					$postal_code = $component['long_name'];
+				if (in_array('postal_code', $component->types)) {
+					$postal_code = $component->long_name;
 				}
 
-				if (in_array('country', $component['types'])) {
-					$country = $component['short_name'];
+				if (in_array('country', $component->types)) {
+					$country = $component->short_name;
 				}
 			}
 
@@ -3305,16 +3305,16 @@ class Business_Reviews extends Widget_Base {
 			$full_schema_array = [
 				"@context" => "https://schema.org",
 				"@type" => "LocalBusiness",
-				"name" => ! empty( $business_reviews_items_reivew->name ) ? $business_reviews_items_reivew->name : '',
+				"name" => ! empty( $business_reviews_items_obj->name ) ? $business_reviews_items_obj->name : '',
 				"address" => $address,
 				"review" => $reviews,
 				"aggregateRating" => [
 					"@type" => "AggregateRating",
-					"ratingValue" => ! empty( $business_reviews_items_reivew->rating ) ? $business_reviews_items_reivew->rating : 0,
-					"ratingCount" => ! empty( $business_reviews_items_reivew->user_ratings_total ) ? $business_reviews_items_reivew->user_ratings_total : 0,
+					"ratingValue" => ! empty( $business_reviews_items_obj->rating ) ? $business_reviews_items_obj->rating : 0,
+					"ratingCount" => ! empty( $business_reviews_items_obj->user_ratings_total ) ? $business_reviews_items_obj->user_ratings_total : 0,
 				],
-				"url" => ! empty( $business_reviews_items_reivew->url ) ? $business_reviews_items_reivew->url : '',
-				"telephone" => ! empty( $business_reviews_items_reivew->international_phone_number ) ? $business_reviews_items_reivew->international_phone_number : '',
+				"url" => ! empty( $business_reviews_items_obj->url ) ? $business_reviews_items_obj->url : '',
+				"telephone" => ! empty( $business_reviews_items_obj->international_phone_number ) ? $business_reviews_items_obj->international_phone_number : '',
 			];
 
 			ob_start();
