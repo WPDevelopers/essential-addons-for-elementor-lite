@@ -66,6 +66,12 @@ ea.hooks.addAction("init", "ea", () => {
 			});
 		};
 
+        if ($wrap.hasClass('masonry')) {
+            $doc.ajaxComplete(function () {
+                $(window).trigger('resize');
+            });
+        }
+
 		$doc.on("click", ".eael-wc-compare", function (e) {
 			e.preventDefault();
 			e.stopImmediatePropagation();
@@ -105,7 +111,7 @@ ea.hooks.addAction("init", "ea", () => {
 			overlayNode.style.visibility = "hidden";
 			overlayNode.style.opacity = "0";
 		});
-		
+
 		$doc.on("click", ".eael-wc-remove", function (e) {
 			e.preventDefault();
 			e.stopImmediatePropagation();
@@ -250,7 +256,7 @@ ea.hooks.addAction("init", "ea", () => {
 				},
 			});
 		});
-		
+
 		ea.hooks.doAction("quickViewPopupViewInit",$scope,$);
 
 		if (isEditMode) {
