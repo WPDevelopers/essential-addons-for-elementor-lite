@@ -3800,7 +3800,7 @@ class Login_Register extends Widget_Base {
 				],
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .eael-lr-form-wrapper.eael-login-form-wrapper .eael-lr-form-group .dashicons" => 'font-size: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
+				"{{WRAPPER}} .eael-lr-form-wrapper.eael-register-form-wrapper .eael-lr-form-group .dashicons" => 'font-size: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
 			],
 			'condition'  => [
 				'lpv_po_toggle_register' => 'yes',
@@ -3810,7 +3810,7 @@ class Login_Register extends Widget_Base {
 			'label'     => __( 'Open Eye Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .eael-lr-form-wrapper.eael-login-form-wrapper .eael-lr-form-group .dashicons-visibility" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .eael-lr-form-wrapper.eael-register-form-wrapper .eael-lr-form-group .dashicons-visibility" => 'color: {{VALUE}};',
 			],
 			'condition' => [
 				'lpv_po_toggle_register' => 'yes',
@@ -3820,7 +3820,7 @@ class Login_Register extends Widget_Base {
 			'label'     => __( 'Close Eye Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .eael-lr-form-wrapper.eael-login-form-wrapper .eael-lr-form-group .dashicons-hidden" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .eael-lr-form-wrapper.eael-register-form-wrapper .eael-lr-form-group .dashicons-hidden" => 'color: {{VALUE}};',
 			],
 			'condition' => [
 				'lpv_po_toggle_register' => 'yes',
@@ -3842,7 +3842,7 @@ class Login_Register extends Widget_Base {
 				'size' => 0.73,
 			],
 			'selectors' => [
-				"{{WRAPPER}} .eael-lr-form-wrapper.eael-login-form-wrapper .eael-lr-form-group .wp-hide-pw" => 'top: {{SIZE}}px;',
+				"{{WRAPPER}} .eael-lr-form-wrapper.eael-register-form-wrapper .eael-lr-form-group .wp-hide-pw" => 'top: {{SIZE}}px;',
 			],
 			'condition' => [
 				'lpv_po_toggle_register' => 'yes',
@@ -3863,7 +3863,7 @@ class Login_Register extends Widget_Base {
 				'size' => - 27,
 			],
 			'selectors' => [
-				"{{WRAPPER}} .eael-lr-form-wrapper.eael-login-form-wrapper .eael-lr-form-group .wp-hide-pw" => 'right: {{SIZE}}px;',
+				"{{WRAPPER}} .eael-lr-form-wrapper.eael-register-form-wrapper .eael-lr-form-group .wp-hide-pw" => 'right: {{SIZE}}px;',
 			],
 			'condition' => [
 				'lpv_po_toggle_register' => 'yes',
@@ -5522,15 +5522,8 @@ class Login_Register extends Widget_Base {
 										echo '<label ' . $this->get_render_attribute_string( $label_key ) . '>' . HelperCLass::eael_wp_kses( $field['field_label'] ) . '</label>';
 									}
 									echo '<input ' . $this->get_render_attribute_string( $input_key ) . '>';
-									if ( $show_icon && ! empty( $field['icon'] ) ) {
-										Icons_Manager::render_icon( $field['icon'], [ 'aria-hidden' => 'true' ] );
-									}
-									?>
-                                </div>
-
-								<?php
-								if ( 'password' === $field['field_type'] ) {
-									if ( $show_pv_icon ) { ?>
+									
+									if ( 'password' === $field['field_type'] && $show_pv_icon ) { ?>
 										<button type="button"
 												id="wp-hide-pw-register"
 												class="wp-hide-pw hide-if-no-js"
@@ -5540,6 +5533,14 @@ class Login_Register extends Widget_Base {
 										</button>
 									<?php }
 
+									if ( $show_icon && ! empty( $field['icon'] ) ) {
+										Icons_Manager::render_icon( $field['icon'], [ 'aria-hidden' => 'true' ] );
+									}
+									?>
+                                </div>
+
+								<?php
+								if ( 'password' === $field['field_type'] ) {
 									do_action( 'eael/login-register/after-password-field', $this );
 								}
 							endforeach;
