@@ -3775,6 +3775,103 @@ class Login_Register extends Widget_Base {
 
 		$this->end_popover();
 
+		$this->add_control( 'lpv_po_toggle_register', [
+			'label'     => __( 'Register Password Visibility Style', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::POPOVER_TOGGLE,
+			'condition' => [
+				'reg_password_toggle' => 'yes',
+			],
+		] );
+		$this->start_popover();
+
+		$this->add_responsive_control( "lpv_size_register", [
+			'label'      => esc_html__( 'Icon Size', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'rem',
+				'%',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 50,
+					'step' => 1,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .eael-lr-form-wrapper.eael-login-form-wrapper .eael-lr-form-group .dashicons" => 'font-size: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
+			],
+			'condition'  => [
+				'lpv_po_toggle_register' => 'yes',
+			],
+		] );
+		$this->add_control( "lvp_open_color_register", [
+			'label'     => __( 'Open Eye Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .eael-lr-form-wrapper.eael-login-form-wrapper .eael-lr-form-group .dashicons-visibility" => 'color: {{VALUE}};',
+			],
+			'condition' => [
+				'lpv_po_toggle_register' => 'yes',
+			],
+		] );
+		$this->add_control( "lvp_close_color_register", [
+			'label'     => __( 'Close Eye Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .eael-lr-form-wrapper.eael-login-form-wrapper .eael-lr-form-group .dashicons-hidden" => 'color: {{VALUE}};',
+			],
+			'condition' => [
+				'lpv_po_toggle_register' => 'yes',
+			],
+		] );
+
+		$this->add_responsive_control( "lpv_valign_register", [
+			'label'     => esc_html__( 'Vertical Alignment', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::SLIDER,
+			'range'     => [
+				'px' => [
+					'min'  => - 50,
+					'max'  => 50,
+					'step' => 1,
+				],
+			],
+			'default'   => [
+				'unit' => 'px',
+				'size' => 0.73,
+			],
+			'selectors' => [
+				"{{WRAPPER}} .eael-lr-form-wrapper.eael-login-form-wrapper .eael-lr-form-group .wp-hide-pw" => 'top: {{SIZE}}px;',
+			],
+			'condition' => [
+				'lpv_po_toggle_register' => 'yes',
+			],
+		] );
+		$this->add_responsive_control( "lpv_halign_register", [
+			'label'     => esc_html__( 'Horizontal Alignment', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::SLIDER,
+			'range'     => [
+				'px' => [
+					'min'  => - 50,
+					'max'  => 50,
+					'step' => 1,
+				],
+			],
+			'default'   => [
+				'unit' => 'px',
+				'size' => - 27,
+			],
+			'selectors' => [
+				"{{WRAPPER}} .eael-lr-form-wrapper.eael-login-form-wrapper .eael-lr-form-group .wp-hide-pw" => 'right: {{SIZE}}px;',
+			],
+			'condition' => [
+				'lpv_po_toggle_register' => 'yes',
+			],
+		] );
+
+		$this->end_popover();
+
 		$this->add_control( 'lpv_po_toggle_resetpassword', [
 			'label'     => __( 'Reset Password Visibility Style', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::POPOVER_TOGGLE,
