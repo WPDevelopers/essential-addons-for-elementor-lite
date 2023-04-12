@@ -3767,6 +3767,10 @@ class Filterable_Gallery extends Widget_Base
                     // layout gal, on click tabs
                     $isotope_gallery.on("arrangeComplete", function () {
                         $isotope_gallery.isotope("layout");
+                        let notFoundDiv = $('#eael-fg-no-items-found', $scope),
+					        height = parseFloat(notFoundDiv.css('margin-top')) + parseFloat(notFoundDiv.css('margin-bottom')) + parseFloat(notFoundDiv.css('padding-top')) + parseFloat(notFoundDiv.css('padding-bottom'));
+
+				        $('.eael-filter-gallery-container', $scope).css('min-height', height+20);
                         if (!$isotope_gallery.data('isotope').filteredItems.length) {
                             $('#eael-fg-no-items-found').show();
                         } else {
