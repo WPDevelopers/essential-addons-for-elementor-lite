@@ -1801,7 +1801,7 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 
-		$this->add_control( 'reg_password_toggle', [
+		$this->add_control( 'password_toggle_register', [
 			'label'     => __( 'Password Visibility Icon', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::SWITCHER,
 			'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
@@ -3779,7 +3779,7 @@ class Login_Register extends Widget_Base {
 			'label'     => __( 'Register Password Visibility Style', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::POPOVER_TOGGLE,
 			'condition' => [
-				'reg_password_toggle' => 'yes',
+				'password_toggle_register' => 'yes',
 			],
 		] );
 		$this->start_popover();
@@ -5360,6 +5360,7 @@ class Login_Register extends Widget_Base {
 			$lgn_url              = $lgn_atts = '';
 
 			$show_register_spinner  = !empty( $this->ds['register_btn_show_spinner'] ) ? $this->ds['register_btn_show_spinner'] : '';
+			$show_pv_icon     		= ( ! empty( $this->ds['password_toggle_register'] ) && 'yes' === $this->ds['password_toggle_register'] );
 
 			switch ( $lgn_link_action ) {
 				case 'custom':
@@ -5529,6 +5530,16 @@ class Login_Register extends Widget_Base {
 
 								<?php
 								if ( 'password' === $field['field_type'] ) {
+									if ( $show_pv_icon ) { ?>
+										<button type="button"
+												id="wp-hide-pw-register"
+												class="wp-hide-pw hide-if-no-js"
+												aria-label="Show password">
+											<span class="dashicons dashicons-visibility"
+												  aria-hidden="true"></span>
+										</button>
+									<?php }
+
 									do_action( 'eael/login-register/after-password-field', $this );
 								}
 							endforeach;
