@@ -2572,11 +2572,14 @@ class Business_Reviews extends Widget_Base {
 		$param         = array();
 		$error_message = '';
 
+		$api_fields = 'formatted_address,international_phone_number,name,rating,reviews,url,user_ratings_total,website,photos';
+		$api_fields = $business_reviews['localbusiness_schema'] ? 'address_components,' . $api_fields : $api_fields;
+		
 		$args = array(
 			'key'     => sanitize_text_field( $business_reviews['api_key'] ),
 			'placeid' => sanitize_text_field( $business_reviews['place_id'] ),
 			'reviews_no_translations' => intval( $business_reviews['review_text_translation'] ) ? false : true,
-			'fields'  => sanitize_text_field( 'formatted_address,international_phone_number,name,rating,reviews,url,user_ratings_total,website,photos' ),
+			'fields'  => sanitize_text_field( $api_fields ),
 		);
 
 		if ( ! empty( $business_reviews['reviews_sort'] ) ) {
@@ -3234,7 +3237,9 @@ class Business_Reviews extends Widget_Base {
 		if ( ! is_object( $business_reviews_items_obj ) ) {
 			return;
 		}
-		
+		echo "<pre>";
+		print_r($business_reviews_items_obj);
+		wp_die('ok');
 		$business_reviews_items_reviews = ! empty( $business_reviews_items_obj->reviews ) ? $business_reviews_items_obj->reviews : []; 
 		
 		if ( ! empty( $this->business_reviews_data['localbusiness_schema'] ) && count( $business_reviews_items_reviews ) ) {
@@ -3268,11 +3273,11 @@ class Business_Reviews extends Widget_Base {
 				"review" => $reviews,
 				"aggregateRating" => [
 					"@type" => "AggregateRating",
-					"ratingValue" => "here",
-					"ratingCount" => "here",
+					"ratingValue" => ! empty( $business_reviews_items_reivew->rating ) ? $business_reviews_items_reivew->rating : 0,
+					"ratingCount" => ! empty( $business_reviews_items_reivew->user_ratings_total ) ? $business_reviews_items_reivew->user_ratings_total : 0,
 				],
-				"url" => "here",
-				"telephone" => "here",
+				"url" => ! empty( $business_reviews_items_reivew->url ) ? $business_reviews_items_reivew->url : '',
+				"telephone" => ! empty( $business_reviews_items_reivew->international_phone_number ) ? $business_reviews_items_reivew->international_phone_number : '',
 			];
 
 			ob_start();
