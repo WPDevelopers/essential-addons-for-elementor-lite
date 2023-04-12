@@ -3305,7 +3305,7 @@ class Business_Reviews extends Widget_Base {
 			$full_schema_array = [
 				"@context" => "https://schema.org",
 				"@type" => "LocalBusiness",
-				"name" => "here",
+				"name" => ! empty( $business_reviews_items_reivew->name ) ? $business_reviews_items_reivew->name : '',
 				"address" => $address,
 				"review" => $reviews,
 				"aggregateRating" => [
