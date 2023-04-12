@@ -1800,6 +1800,15 @@ class Login_Register extends Widget_Base {
 				'show_labels' => 'yes',
 			],
 		] );
+
+		$this->add_control( 'reg_password_toggle', [
+			'label'     => __( 'Password Visibility Icon', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::SWITCHER,
+			'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+			'label_on'  => __( 'Show', 'essential-addons-for-elementor-lite' ),
+			'default'   => 'yes',
+		] );
+
 		do_action( 'eael/login-register/after-register-options-controls', $this );
 
 		/*--Register Fields Button--*/
