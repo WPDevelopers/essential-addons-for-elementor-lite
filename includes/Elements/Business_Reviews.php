@@ -3237,13 +3237,19 @@ class Business_Reviews extends Widget_Base {
 		if ( ! is_object( $business_reviews_items_obj ) ) {
 			return;
 		}
-		echo "<pre>";
-		print_r($business_reviews_items_obj);
-		wp_die('ok');
+
 		$business_reviews_items_reviews = ! empty( $business_reviews_items_obj->reviews ) ? $business_reviews_items_obj->reviews : []; 
 		
 		if ( ! empty( $this->business_reviews_data['localbusiness_schema'] ) && count( $business_reviews_items_reviews ) ) {
 			$reviews = [];
+			$street_number = 
+			$street_name = 
+			$locality_city = 
+			$region_state = 
+			$postal_code =  
+			$country = '';
+
+			// Reviews
 			foreach ( $business_reviews_items_reviews as $business_reviews_items_reivew ) {
 				$reviews[] = [
 					"@type" => "Review",
@@ -3257,19 +3263,50 @@ class Business_Reviews extends Widget_Base {
 					],
 				];
 			}
+
+			// Address
+			$address_components = ! empty( $business_reviews_items_reivew->address_components ) ? $business_reviews_items_reivew->address_components : '';
+			
+			foreach ($address_components as $component) {
+				if (in_array('street_number', $component['types'])) {
+					$street_number = $component['long_name'];
+				}
+				
+				if (in_array('route', $component['types'])) {
+					$street_name = $component['long_name'];
+				}
+
+				if (in_array('locality', $component['types'])) {
+					$locality_city = $component['long_name'];
+				}
+
+				if (in_array('administrative_area_level_1', $component['types'])) {
+					$region_state = $component['short_name'];
+				}
+				
+				if (in_array('postal_code', $component['types'])) {
+					$postal_code = $component['long_name'];
+				}
+
+				if (in_array('country', $component['types'])) {
+					$country = $component['short_name'];
+				}
+			}
+
+			$address = [
+				'@type' => 'PostalAddress',
+				'streetAddress' => "{$street_number} {$street_name}",
+				'addressLocality' => $locality_city,
+				'addressRegion' => $region_state,
+				'postalCode' => $postal_code,
+				'addressCountry' => $country
+			];
 			
 			$full_schema_array = [
 				"@context" => "https://schema.org",
 				"@type" => "LocalBusiness",
 				"name" => "here",
-				"address" => [
-					'@type' => "PostalAddress",
-					'streetAddress' => "here",
-					'addressLocality' => "here",
-					'addressRegion' => "here",
-					'postalCode' => "here",
-					'addressCountry' => "here",
-				],
+				"address" => $address,
 				"review" => $reviews,
 				"aggregateRating" => [
 					"@type" => "AggregateRating",
