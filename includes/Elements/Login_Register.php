@@ -5521,20 +5521,30 @@ class Login_Register extends Widget_Base {
 									if ( 'yes' === $this->ds['show_labels'] && ! empty( $field['field_label'] ) ) {
 										echo '<label ' . $this->get_render_attribute_string( $label_key ) . '>' . HelperCLass::eael_wp_kses( $field['field_label'] ) . '</label>';
 									}
-									echo '<input ' . $this->get_render_attribute_string( $input_key ) . '>';
-									
-									if ( 'password' === $field['field_type'] && $show_pv_icon ) { ?>
-										<button type="button"
-												id="wp-hide-pw-register"
-												class="wp-hide-pw hide-if-no-js"
-												aria-label="Show password">
-											<span class="dashicons dashicons-visibility"
-												  aria-hidden="true"></span>
-										</button>
-									<?php }
+									if( 'password' === $field['field_type'] ){
+										echo '<div class="eael-lr-password-wrapper-register">';
+											echo '<input ' . $this->get_render_attribute_string( $input_key ) . '>';
+											
+											if ( $show_pv_icon ) { ?>
+												<button type="button"
+														id="wp-hide-pw-register"
+														class="wp-hide-pw hide-if-no-js"
+														aria-label="Show password">
+													<span class="dashicons dashicons-visibility"
+														aria-hidden="true"></span>
+												</button>
+											<?php }
 
-									if ( $show_icon && ! empty( $field['icon'] ) ) {
-										Icons_Manager::render_icon( $field['icon'], [ 'aria-hidden' => 'true' ] );
+											if ( $show_icon && ! empty( $field['icon'] ) ) {
+												Icons_Manager::render_icon( $field['icon'], [ 'aria-hidden' => 'true' ] );
+											}
+										echo '</div>';
+									} else {
+										echo '<input ' . $this->get_render_attribute_string( $input_key ) . '>';
+
+										if ( $show_icon && ! empty( $field['icon'] ) ) {
+											Icons_Manager::render_icon( $field['icon'], [ 'aria-hidden' => 'true' ] );
+										}
 									}
 									?>
                                 </div>
