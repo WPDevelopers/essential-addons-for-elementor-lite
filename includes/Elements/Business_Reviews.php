@@ -3229,22 +3229,26 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	public function print_localbusiness_schema( $business_reviews_items ){
-		if ( empty( $business_reviews_items['reviews'] ) ) {
+		$business_reviews_items_obj = isset( $business_reviews_items['items'] ) ? $business_reviews_items['items'] : false;
+		
+		if ( ! is_object( $business_reviews_items_obj ) ) {
 			return;
 		}
-
-		if ( ! empty( $this->business_reviews_data['localbusiness_schema'] ) ) {
+		
+		$business_reviews_items_reviews = ! empty( $business_reviews_items_obj->reviews ) ? $business_reviews_items_obj->reviews : []; 
+		
+		if ( ! empty( $this->business_reviews_data['localbusiness_schema'] ) && count( $business_reviews_items_reviews ) ) {
 			$reviews = [];
-			foreach ( $business_reviews_items['reviews'] as $business_reviews_items_reivew ) {
+			foreach ( $business_reviews_items_reviews as $business_reviews_items_reivew ) {
 				$reviews[] = [
 					"@type" => "Review",
 					"reviewRating" => [
 						"@type" => "Rating",
-						"ratingValue" => ! empty( $business_reviews_items_reivew['rating'] ) ? $business_reviews_items_reivew['rating'] : '',
+						"ratingValue" => ! empty( $business_reviews_items_reivew->rating ) ? $business_reviews_items_reivew->rating : '',
 					],
 					"author" => [
 						"@type" => "Person",
-						"name" => ! empty( $business_reviews_items_reivew['author_name'] ) ? $business_reviews_items_reivew['author_name'] : '',
+						"name" => ! empty( $business_reviews_items_reivew->author_name ) ? $business_reviews_items_reivew->author_name : '',
 					],
 				];
 			}
@@ -3270,13 +3274,16 @@ class Business_Reviews extends Widget_Base {
 				"url" => "here",
 				"telephone" => "here",
 			];
+
+			ob_start();
 			?> 
 			<!-- EA LocalBusiness Schema : Starts-->
-            <script type="application/ld+json">
-                <?php echo json_encode( $full_schema_array ); ?>
-            </script>
-            <!-- EA LocalBusiness Schema : Ends-->
+			<script type="application/ld+json">
+				<?php echo json_encode( $full_schema_array ); ?>
+			</script>
+			<!-- EA LocalBusiness Schema : Ends-->
 			<?php
+			echo ob_get_clean();
 		}
 	}
 
