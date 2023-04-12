@@ -4658,7 +4658,7 @@ msgstr ""
 msgid "Default Form Type"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:306, ../includes/Elements/Login_Register.php:4648, ../includes/Elements/Login_Register.php:4673, ../includes/Elements/Login_Register.php:5353, ../includes/Elements/Login_Register.php:5615, ../includes/Elements/Woo_Checkout.php:418, ../includes/Elements/Woo_Checkout.php:1298, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:342, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:342
+#: ../includes/Elements/Login_Register.php:306, ../includes/Elements/Login_Register.php:4648, ../includes/Elements/Login_Register.php:4673, ../includes/Elements/Login_Register.php:5353, ../includes/Elements/Login_Register.php:5626, ../includes/Elements/Woo_Checkout.php:418, ../includes/Elements/Woo_Checkout.php:1298, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:342, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:342
 msgid "Login"
 msgstr ""
 
@@ -4879,7 +4879,7 @@ msgstr ""
 msgid "Username Label"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:790, ../includes/Elements/Login_Register.php:791, ../includes/Elements/Login_Register.php:817, ../includes/Elements/Login_Register.php:818, ../includes/Elements/Login_Register.php:942, ../includes/Elements/Login_Register.php:943, ../includes/Elements/Login_Register.php:959, ../includes/Elements/Login_Register.php:960, ../includes/Elements/Login_Register.php:5134, ../includes/Elements/Login_Register.php:5646
+#: ../includes/Elements/Login_Register.php:790, ../includes/Elements/Login_Register.php:791, ../includes/Elements/Login_Register.php:817, ../includes/Elements/Login_Register.php:818, ../includes/Elements/Login_Register.php:942, ../includes/Elements/Login_Register.php:943, ../includes/Elements/Login_Register.php:959, ../includes/Elements/Login_Register.php:960, ../includes/Elements/Login_Register.php:5134, ../includes/Elements/Login_Register.php:5657
 msgid "Username or Email Address"
 msgstr ""
 
@@ -4939,7 +4939,7 @@ msgstr ""
 msgid "Reset Password Form Fields"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:1063, ../includes/Elements/Login_Register.php:1064, ../includes/Elements/Login_Register.php:1090, ../includes/Elements/Login_Register.php:1091, ../includes/Elements/Login_Register.php:5801, ../includes/Elements/Login_Register.php:5804
+#: ../includes/Elements/Login_Register.php:1063, ../includes/Elements/Login_Register.php:1064, ../includes/Elements/Login_Register.php:1090, ../includes/Elements/Login_Register.php:1091, ../includes/Elements/Login_Register.php:5812, ../includes/Elements/Login_Register.php:5815
 msgid "New Password"
 msgstr ""
 
@@ -4947,7 +4947,7 @@ msgstr ""
 msgid "Confirm Password Label"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:1073, ../includes/Elements/Login_Register.php:1074, ../includes/Elements/Login_Register.php:1100, ../includes/Elements/Login_Register.php:1101, ../includes/Elements/Login_Register.php:5802, ../includes/Elements/Login_Register.php:5805
+#: ../includes/Elements/Login_Register.php:1073, ../includes/Elements/Login_Register.php:1074, ../includes/Elements/Login_Register.php:1100, ../includes/Elements/Login_Register.php:1101, ../includes/Elements/Login_Register.php:5813, ../includes/Elements/Login_Register.php:5816
 msgid "Confirm New Password"
 msgstr ""
 
@@ -5238,7 +5238,7 @@ msgstr ""
 msgid "Eg. Your password reset link appears to be invalid. Please request a new link."
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:1576, ../includes/Elements/Login_Register.php:5766, ../includes/Traits/Login_Registration.php:990
+#: ../includes/Elements/Login_Register.php:1576, ../includes/Elements/Login_Register.php:5777, ../includes/Traits/Login_Registration.php:990
 msgid "Your password reset link appears to be invalid. Please request a new link."
 msgstr ""
 
@@ -5855,26 +5855,26 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:5975
+#: ../includes/Elements/Login_Register.php:5986
 msgid "Form Logo Image"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:6109
+#: ../includes/Elements/Login_Register.php:6120
 msgid "Hey Your password reset link appears to be invalid. Please request a new link."
 msgstr ""
 
 #. translators: %s: Error fields
-#: ../includes/Elements/Login_Register.php:6185
+#: ../includes/Elements/Login_Register.php:6196
 msgid "Error! you seem to have added %s field in the form more than once."
 msgstr ""
 
 #. translators: %s: Error String
-#: ../includes/Elements/Login_Register.php:6201
+#: ../includes/Elements/Login_Register.php:6212
 msgid "Error! It is required to use %s field."
 msgstr ""
 
 #. translators: %s: Error String
-#: ../includes/Elements/Login_Register.php:6225
+#: ../includes/Elements/Login_Register.php:6236
 msgid "Error! It is required to use %s field with %s Field."
 msgstr ""
 
