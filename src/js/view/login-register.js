@@ -22,6 +22,7 @@ ea.hooks.addAction("init", "ea", () => {
         const $lostpasswordLinkAction = $scope.find('#eael-lr-lostpassword-toggle');
         const $lostpasswordLoginLinkAction = $scope.find('#eael-lr-login-toggle-lostpassword');
         const $passField = $loginFormWrapper.find('#eael-user-password');
+        const $passFieldRegister = $loginFormWrapper.find('#form-field-password');
         const $pass1Field = $resetpasswordFormWrapper.find('#eael-pass1');
         const $pass2Field = $resetpasswordFormWrapper.find('#eael-pass2');
         const recaptchaAvailable = (typeof grecaptcha !== 'undefined' && grecaptcha !== null);
@@ -90,7 +91,7 @@ ea.hooks.addAction("init", "ea", () => {
         }
 
         // Password Visibility Toggle
-        $(document).on('click', '#wp-hide-pw, #wp-hide-pw1, #wp-hide-pw2', function (e) {
+        $(document).on('click', '#wp-hide-pw, #wp-hide-pw1, #wp-hide-pw2, #wp-hide-pw-register', function (e) {
             let $buttonId = $(this).attr('id');
 
             switch ($buttonId) {
@@ -100,6 +101,9 @@ ea.hooks.addAction("init", "ea", () => {
                     break;
                 case 'wp-hide-pw2':
                     togglePasswordVisibility( $pass2Field );
+                    break;
+                case 'wp-hide-pw-register':
+                    togglePasswordVisibility( $passFieldRegister );
                     break;
                 default :
                     togglePasswordVisibility( $passField );
