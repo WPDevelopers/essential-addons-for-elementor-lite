@@ -367,7 +367,7 @@ trait Login_Registration {
 							$field_type_custom_image_filename_length	= intval( $register_field['field_type_custom_image_filename_length'] );
 
 							if( strlen( $custom_field_file_name ) > $field_type_custom_image_filename_length ) {
-                                $errors[ $register_field['field_type'] ] = isset( $settings['field_type_custom_image_filename_length_error'] ) ? $settings['field_type_custom_image_filename_length_error'] : __( 'Filename Max Length Exceeded!', 'essential-addons-for-elementor-lite' );
+                                $errors[ $register_field['field_type'] ] = isset( $settings['field_type_custom_image_filename_length_error'] ) ? $settings['field_type_custom_image_filename_length_error'] : __( 'Filename length exceeded. Maximum length is ' . intval( $field_type_custom_image_filename_length ), 'essential-addons-for-elementor-lite' );
                             }
 						}
 					}
