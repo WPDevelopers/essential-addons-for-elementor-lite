@@ -344,7 +344,7 @@ trait Login_Registration {
 						$custom_field_file_extension 	= end( ( explode( ".", $custom_field_file_name ) ) ); # extra () to prevent notice
 						$custom_field_file_size 		= intval( $_FILES[ $register_field['field_type'] ]["size"] );
 
-						if( ! empty ( $register_field['field_type_custom_image_extensions'] ) ){
+						if( ! empty ( $register_field['field_type_custom_image_extensions'] ) || 'svg' === $custom_field_file_extension ){
 							$field_type_custom_image_extensions_trimmed = trim( sanitize_text_field( $register_field['field_type_custom_image_extensions'] ), ' ,\n\r\0\x0B' );
 							$field_type_custom_image_extensions_array 	= array_unique( explode( ',', $field_type_custom_image_extensions_trimmed ) );	
 
