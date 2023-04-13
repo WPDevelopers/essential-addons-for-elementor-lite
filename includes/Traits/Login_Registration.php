@@ -352,7 +352,9 @@ trait Login_Registration {
 								$errors[ $register_field['field_type'] ] = isset( $settings['field_type_custom_image_extensions_error'] ) ? $settings['field_type_custom_image_extensions_error'] : __( 'Sorry, you are not allowed to upload this file type.', 'essential-addons-for-elementor-lite' );
 							}
 						}
-
+						$register_field['field_type_custom_image_filesize'] 		= empty ( $register_field['field_type_custom_image_filesize'] ) 		? 5 : $register_field['field_type_custom_image_filesize'];
+						$register_field['field_type_custom_image_filename_length'] 	= empty ( $register_field['field_type_custom_image_filename_length'] ) 	? 128 : $register_field['field_type_custom_image_filename_length'];
+						
 						if( ! empty ( $register_field['field_type_custom_image_filesize'] ) ){
 							$field_type_custom_image_filesize 		= intval( $register_field['field_type_custom_image_filesize'] );
 							$field_type_custom_image_filesize 		= $field_type_custom_image_filesize > 512 ? 512 : $field_type_custom_image_filesize;
