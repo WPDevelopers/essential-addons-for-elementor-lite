@@ -646,6 +646,9 @@ trait Woo_Cart_Helper {
                         <button type="submit" class="button" name="update_cart" value="<?php echo esc_attr( $update_text ); ?>"><?php echo esc_html( $update_text ); ?></button>
 						<?php
 					}
+					else if ( ! $settings['eael_woo_cart_components_cart_update_button'] && $settings['eael_woo_cart_auto_cart_update'] === 'yes' ){
+						echo '<button type="submit" class="button" name="update_cart" style="display:none;"></button>';
+					}
 
 					do_action( 'woocommerce_cart_actions' );
 					wp_nonce_field( 'woocommerce-cart', 'woocommerce-cart-nonce' );
