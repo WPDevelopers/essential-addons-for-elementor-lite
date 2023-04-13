@@ -1779,8 +1779,8 @@ class Login_Register extends Widget_Base {
 		$repeater->add_control(
             'field_type_custom_image_filesize',
             [
-                'label' 		=> __('Max Filesize (MB)', 'essential-addons-for-elementor-lite'),
-                'description'	=> __('Set max filesize up to 512 MB', 'essential-addons-for-elementor-lite'),
+                'label' 		=> __('Max File Size (MB)', 'essential-addons-for-elementor-lite'),
+                'description'	=> __('Set max file size up to 512 MB.', 'essential-addons-for-elementor-lite'),
                 'type' 			=> Controls_Manager::NUMBER,
                 'placeholder' 	=> '5',
                 'default' 		=> '5',
