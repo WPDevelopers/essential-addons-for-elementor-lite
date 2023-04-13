@@ -1764,11 +1764,12 @@ class Login_Register extends Widget_Base {
 		$repeater->add_control(
             'field_type_custom_image_filename_length',
             [
-                'label' 	=> __('Max Filename Length', 'essential-addons-for-elementor-lite'),
-                'type' 		=> Controls_Manager::NUMBER,
-                'default' 	=> '128',
-				'min' 		=> '1',
-				'max' 		=> '128',
+                'label' 		=> __('Max Filename Length', 'essential-addons-for-elementor-lite'),
+                'type' 			=> Controls_Manager::NUMBER,
+                'placeholder'	=> '128',
+                'default' 		=> '128',
+				'min' 			=> '1',
+				'max' 			=> '128',
                 'condition' => [
 					'field_type' => $custom_fields_image,
 				],
@@ -1781,6 +1782,7 @@ class Login_Register extends Widget_Base {
                 'label' 		=> __('Max Filesize (MB)', 'essential-addons-for-elementor-lite'),
                 'description'	=> __('Set max filesize up to 512 MB', 'essential-addons-for-elementor-lite'),
                 'type' 			=> Controls_Manager::NUMBER,
+                'placeholder' 	=> '5',
                 'default' 		=> '5',
 				'Min'			=> '1',
 				'Max'			=> '512',
