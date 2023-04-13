@@ -1732,7 +1732,7 @@ class Login_Register extends Widget_Base {
 
 		$repeater->add_control( 'field_type_custom_image_note', [
 			'type'            	=> Controls_Manager::RAW_HTML,
-			'raw'             	=> __( 'File upload works with Non AJAX submission only.', 'essential-addons-for-elementor-lite' ),
+			'raw'             	=> __( 'Image upload will not work if AJAX submission is enabled.', 'essential-addons-for-elementor-lite' ),
 			'condition'       	=> [
 				'field_type' 	=> array_keys( $this->get_eael_custom_profile_fields( 'image' ) ),
 			],
