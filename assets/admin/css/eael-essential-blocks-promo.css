@@ -206,7 +206,8 @@
 .eael-gb-eb-popup .--page-1 .eael-gb-eb-footer button.eael-gb-eb-prev,
 .eael-gb-eb-popup .--page-5 .eael-gb-eb-footer button.eael-gb-eb-prev,
 .eael-gb-eb-popup .--page-5 .eael-gb-eb-footer button.eael-gb-eb-next,
-.eael-gb-eb-popup .eael-gb-eb-footer button.eael-gb-eb-never-show {
+.eael-gb-eb-popup .eael-gb-eb-footer button.eael-gb-eb-never-show,
+.eael-gb-eb-popup .--page-1.hide-eael-gb-eb-never-show-button .eael-gb-eb-footer button.eael-gb-eb-never-show {
     display: none;
 }
 
