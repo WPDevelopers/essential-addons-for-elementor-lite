@@ -6724,6 +6724,10 @@
             .eael-circle-item {
                 &:nth-child(8n+1) {
                     .eael-circle-icon-shapes {
+                        &.classic {
+                            background: unset;
+                        }
+
                         transform: rotate(-45deg);
                         background: radial-gradient(
                                         94.25% 92.56% at 48.86% 49.71%,
@@ -6739,6 +6743,10 @@
                 }
                 &:nth-child(8n+2) {
                     .eael-circle-icon-shapes {
+                        &.classic {
+                            background: unset;
+                        }
+
                         transform: rotate(-90deg);
                         background: linear-gradient(
                                         144.3deg,
@@ -6754,6 +6762,10 @@
                 }
                 &:nth-child(8n+3) {
                     .eael-circle-icon-shapes {
+                        &.classic {
+                            background: unset;
+                        }
+
                         transform: rotate(-135deg);
                         background: radial-gradient(
                                         64.96% 65.32% at 52.18% 47.01%,
@@ -6770,6 +6782,10 @@
                 }
                 &:nth-child(8n+4) {
                     .eael-circle-icon-shapes {
+                        &.classic {
+                            background: unset;
+                        }
+
                         transform: rotate(-180deg);
                         background: radial-gradient(
                                         101.16% 101.7% at 47.77% 50.74%,
@@ -6787,6 +6803,10 @@
                 }
                 &:nth-child(8n+5) {
                     .eael-circle-icon-shapes {
+                        &.classic {
+                            background: unset;
+                        }
+
                         transform: rotate(135deg);
                         background: radial-gradient(
                                         65.76% 66.29% at 48.95% 49.57%,
@@ -6803,6 +6823,10 @@
                 }
                 &:nth-child(8n+6) {
                     .eael-circle-icon-shapes {
+                        &.classic {
+                            background: unset;
+                        }
+
                         transform: rotate(90deg);
                         background: radial-gradient(
                                         73.69% 72.33% at 51.12% 47.67%,
@@ -6822,6 +6846,10 @@
                 }
                 &:nth-child(8n+7) {
                     .eael-circle-icon-shapes {
+                        &.classic {
+                            background: unset;
+                        }
+
                         transform: rotate(45deg);
                         background: radial-gradient(
                                         94.25% 92.56% at 48.86% 49.71%,
@@ -6838,6 +6866,10 @@
                 }
                 &:nth-child(8n+8) {
                     .eael-circle-icon-shapes {
+                        &.classic {
+                            background: unset;
+                        }
+                        
                         background: radial-gradient(
                                         73.69% 72.33% at 51.12% 47.67%,
                                         #2b3894 3.76%,
