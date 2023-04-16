@@ -828,7 +828,7 @@ class Interactive_Circle extends Widget_Base {
 								?>
                                 <div class="eael-circle-item elementor-repeater-item-<?php echo $item['_id']; ?>">
                                     <div class="eael-circle-btn" id="eael-circle-item-<?php echo $item_count; ?>">
-                                        <div class="eael-circle-icon-shapes">
+                                        <div class="eael-circle-icon-shapes <?php echo esc_attr( $item_style_classic ); ?>">
                                             <div class="eael-shape-1"></div>
                                             <div class="eael-shape-2"></div>
                                         </div>
