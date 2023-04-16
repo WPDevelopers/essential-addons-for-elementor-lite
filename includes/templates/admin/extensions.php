@@ -83,6 +83,13 @@ $extensions = [
 				'is_pro'    => true,
 				'promotion' => 'new'
 			],
+			[
+				'key'       => 'ai-recommended-widgets',
+				'title'     => __( 'AI Recommended Widgets', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/ai-recommended-widgets/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/ai-recommended-widgets/',
+				'promotion' => 'new'
+			],
 		]
 	]
 ];
