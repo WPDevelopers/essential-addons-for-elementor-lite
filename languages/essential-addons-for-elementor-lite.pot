@@ -145,11 +145,11 @@ msgstr ""
 msgid "Go Pro Logo"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:149, ../includes/Traits/Helper.php:562
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:149, ../includes/Traits/Helper.php:563
 msgid "Previous"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:152, ../includes/Traits/Helper.php:563
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:152, ../includes/Traits/Helper.php:564
 msgid "Next"
 msgstr ""
 
@@ -9387,48 +9387,48 @@ msgstr ""
 msgid "Close dialog"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:556, ../includes/Traits/Helper.php:575
+#: ../includes/Traits/Helper.php:556, ../includes/Traits/Helper.php:576
 msgid "Supercharge Your Gutenberg Experience With Essential Blocks"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:557, ../includes/Traits/Helper.php:576
+#: ../includes/Traits/Helper.php:557, ../includes/Traits/Helper.php:577
 msgid "If you like Essential Addons for Elementor, check out Essential Blocks, the ultimate block library for Gutenberg that is trusted by more than 60,000+ web creators."
 msgstr ""
 
-#: ../includes/Traits/Helper.php:588
-msgid "40+ Amazing Gutenberg Blocks"
+#: ../includes/Traits/Helper.php:562, ../includes/Traits/Helper.php:631
+msgid "Never Show Again"
 msgstr ""
 
 #: ../includes/Traits/Helper.php:589
+msgid "40+ Amazing Gutenberg Blocks"
+msgstr ""
+
+#: ../includes/Traits/Helper.php:590
 msgid "Create & design your WordPress websites just the way you want with more than 40 amazing, ready blocks from Essential Blocks for Gutenberg."
 msgstr ""
 
-#: ../includes/Traits/Helper.php:601
+#: ../includes/Traits/Helper.php:602
 msgid "Useful Block Control Option"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:602
+#: ../includes/Traits/Helper.php:603
 msgid "Get the fastest loading time and smoothest experience on your web page by enabling and disabling individual blocks as per your requirements."
 msgstr ""
 
-#: ../includes/Traits/Helper.php:614
+#: ../includes/Traits/Helper.php:615
 msgid "Access To Thousands Of Ready Gutenberg Templates"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:615
+#: ../includes/Traits/Helper.php:616
 msgid "Design unique websites using ready Gutenberg templates from Templately with absolute ease and instantly grab attention."
 msgstr ""
 
-#: ../includes/Traits/Helper.php:627
+#: ../includes/Traits/Helper.php:628
 msgid "Try Essential Blocks Today!"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:628
+#: ../includes/Traits/Helper.php:629
 msgid "Want to get started with Essential Blocks now? Check out %scomplete guides for each blocks%s to learn more about this ultimate block library for Gutenberg."
-msgstr ""
-
-#: ../includes/Traits/Helper.php:630
-msgid "Never Show Again"
 msgstr ""
 
 #: ../includes/Traits/Login_Registration.php:138, ../includes/Traits/Login_Registration.php:339
