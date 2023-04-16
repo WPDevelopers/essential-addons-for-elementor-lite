@@ -38,6 +38,39 @@ trait Elements {
 				'title' => __( 'Essential Addons', 'essential-addons-for-elementor-lite' ),
 				'icon'  => 'font',
 			], 1 );
+		
+		$ea_elements_extensions = get_option( 'eael_save_settings' );
+
+		if( ! empty( $ea_elements_extensions['ai-recommended-widgets'] ) ){
+			$recommended_widgets_category = 'essential-addons-elementor-recommended';
+
+			$elements_manager->add_category(
+				$recommended_widgets_category,
+				[
+					'title' => __( '<i class="eaicon-logo"></i> AI Recommended Widgets', 'essential-addons-for-elementor-lite' ),
+					'icon'  => 'font',
+				], 1 );
+
+			$reorder_categories = function() use( $recommended_widgets_category ) {
+				uksort( $this->categories, function( $keyOne, $keyTwo ) use( $recommended_widgets_category ) {
+					if( strpos( $keyOne, 'favorites' ) !== false || strpos( $keyTwo, 'favorites' ) !== false ){
+						return 0;
+					}
+
+					if( strpos( $keyOne, $recommended_widgets_category ) !== false ){
+						return -1;
+					}
+
+					if( strpos( $keyTwo, $recommended_widgets_category ) !== false ){
+						return 1;
+					}
+
+					return 0;
+				});
+			};
+
+			$reorder_categories->call($elements_manager);
+		}
 	}
 
 	/**
