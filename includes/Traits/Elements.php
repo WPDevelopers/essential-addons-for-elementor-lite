@@ -47,7 +47,7 @@ trait Elements {
 			$elements_manager->add_category(
 				$recommended_widgets_category,
 				[
-					'title' => __( '<i class="eaicon-logo"></i> AI Recommended Widgets', 'essential-addons-for-elementor-lite' ),
+					'title' => __( '<i class="eaicon-logo"></i> AI Recommended', 'essential-addons-for-elementor-lite' ),
 					'icon'  => 'font',
 				], 1 );
 
