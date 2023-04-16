@@ -1187,6 +1187,9 @@ $config = [
                 ],
             ],
         ],
+        'ai-recommended-widgets' => [
+            'class' => '\Essential_Addons_Elementor\Extensions\AI_Recommended_Widgets',
+        ],
     ],
 ];
 
