@@ -1415,7 +1415,7 @@ class Helper
 
         if ( isset( $matches[0] ) ) {
             foreach ( $matches[0] as $match ) {
-                $headings[] = $match;
+                $headings[] = esc_html( $match );
             }
         }
 

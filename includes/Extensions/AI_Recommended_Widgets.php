@@ -62,7 +62,6 @@ class AI_Recommended_Widgets
 
     public function get_ai_recommended_widgets() {
         $get_data_args = $this->get_data_args();
-
         $ai_recommended_widgets = $this->get_ai_recommended_widgets_from_api( $get_data_args );
 
         if ( is_array( $ai_recommended_widgets ) && count( $ai_recommended_widgets ) > 0 ) {
