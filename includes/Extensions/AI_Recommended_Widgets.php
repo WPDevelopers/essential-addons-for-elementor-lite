@@ -45,24 +45,68 @@ class AI_Recommended_Widgets
         $data = [
             'page_title' => $page_title,
             'current_post_type' => $current_post_type,
-            'page_content_headings' => $page_content_headings,
+            // 'page_content_headings' => $page_content_headings,
+            'page_content_heading_tags' => $page_content_headings,
             'site_title' => $site_title,
-            'site_tagline' => $site_tageline,
+            // 'site_tagline' => $site_tageline,
+            'site_tag_line' => $site_tageline,
             'plugin_list' => $plugin_list,
             'theme_name' => $theme_name,
-            'all_post_types' => $all_post_types,
+            // 'all_post_types' => $all_post_types,
+            'list_of_post_type' => $all_post_types,
         ];
 
         return $data;
     }
 
     public function get_ai_recommended_widgets_from_api( $args ){
+		$url            = "http://192.168.68.59:8000/recommend_widgets";
+		$error_message  = '';
         
+        $cache_key      = 'eael_ai_recommended_widgets_' . get_the_ID();
+        $items          = get_transient( $cache_key );
+
+		if ( false === $items ) {
+
+			$response = wp_remote_post(
+                $url,
+                [
+                    'method' => 'POST',
+                    'headers' => [
+                        'Content-Type' => 'application/json',
+                    ],
+                    'body' => json_encode($args),
+                ]
+            );
+            
+            print_r($response);
+            wp_die('ok');
+
+            // $response = 'OK' === $body->status ? $body->result : false;
+    
+            // if ( ! empty( $response ) ) {
+            //     set_transient( $cache_key,  $response, 86400);
+            // } else {
+            //     $error_message = __( 'Sorry, we could not get any recommendations.', 'essential-addons-elementor' );
+            // }
+		}
+
+		$response = $items ? $items : $response;
+
+		$data = [
+			'items'         => $response,
+			'error_message' => $error_message,
+		];
+
+		return $data;
     }
 
     public function get_ai_recommended_widgets() {
         $get_data_args = $this->get_data_args();
         $ai_recommended_widgets = $this->get_ai_recommended_widgets_from_api( $get_data_args );
+        echo "<pre>";
+        print_r($ai_recommended_widgets);
+        wp_die('ok');
 
         if ( is_array( $ai_recommended_widgets ) && count( $ai_recommended_widgets ) > 0 ) {
             return $ai_recommended_widgets;
