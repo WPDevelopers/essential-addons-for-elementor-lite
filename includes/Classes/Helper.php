@@ -1395,4 +1395,31 @@ class Helper
 			return 'AND';
 		}
 	}
+
+    /**
+	 * Get headings from content
+	 *
+	 * @param string $content Raw content.
+     * 
+	 * @return array
+	 * @since 5.7.0
+	 */
+    public static function get_headings_from_content( $content ) {
+        $headings = [];
+        $pattern = '/<h([1-6])[^>]*>(.*?)<\/h\1>/i';
+        
+        preg_match_all( $pattern, $content, $matches );
+        if ( empty( $matches ) ) { 
+            return $headings;
+        }
+
+        if ( isset( $matches[0] ) ) {
+            foreach ( $matches[0] as $match ) {
+                $headings[] = $match;
+            }
+        }
+
+        return $headings;
+    }                   
+
 }
