@@ -44,9 +44,15 @@ class AI_Recommended_Widgets
         $page_content = get_the_content();
         $page_content_headings = Helper::get_headings_from_content( $page_content );
         
-        $page_content_headings_string = '';
+        $page_content_headings_string   = '';
+        $all_post_types_string          = '';
+        
         if( is_array( $page_content_headings ) && count( $page_content_headings ) ){
             $page_content_headings_string = implode(',', $page_content_headings);
+        }
+
+        if( is_array( $all_post_types ) && count( $all_post_types ) ){
+            $all_post_types_string = implode(',', $all_post_types);
         }
         
         $data = [
@@ -66,15 +72,15 @@ class AI_Recommended_Widgets
         $data = [
             'page_title' => $page_title,
             'current_post_type' => $current_post_type,
-            // 'page_content_headings' => $page_content_headings,
-            'page_content_heading_tags' => 'Example Page Content Heading Tags',
+            // 'page_content_headings' => $page_content_headings_string,
+            'page_content_heading_tags' => $page_content_headings_string,
             'site_title' => $site_title,
             // 'site_tagline' => $site_tageline,
             'site_tag_line' => $site_tageline,
             'plugin_list' => '',
             'theme_name' => $theme_name,
-            // 'all_post_types' => $all_post_types,
-            'list_of_post_type' => 'Example List of Post Type',
+            // 'all_post_types' => $all_post_types_string,
+            'list_of_post_type' => $all_post_types_string,
         ];
 
         return $data;
