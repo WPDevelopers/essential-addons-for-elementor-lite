@@ -31,6 +31,39 @@ class AI_Recommended_Widgets
         }
     }
 
+    public function data_array_to_string( $items, $type = '' ){
+        $items_label = '';
+        $items_formatted = [];
+
+        if( is_array( $items ) && count( $items ) ){
+            foreach( $items as $item ){
+                switch( $type ){
+                    case 'current_post_type':
+                    case 'all_post_types':
+                        $items_formatted[] = isset( $item->labels ) ? $item->labels->singular_name : $item->label;
+                        break;
+
+                    case 'plugin_list':
+                        $plugin_data = get_plugin_data( WP_PLUGIN_DIR . '/' . $item );
+                        $items_formatted[] = ! empty( $plugin_data['Name'] ) ? $plugin_data['Name'] : '';
+                        break;
+
+                    default:
+                        $items_formatted[] = $item;
+                        break;
+                }
+            }
+
+            if( count( $items_formatted ) > 1 ){
+                $items_label = implode(', ', $items_formatted);
+            } else {
+                $items_label = implode('', $items_formatted);
+            }
+        }
+
+        return $items_label;
+    }
+
     public function get_data_args() {
         // $data = [
         //     'page_title' => $page_title,
@@ -43,11 +76,8 @@ class AI_Recommended_Widgets
         //     'all_post_types' => $all_post_types_labels_string,
         // ];
 
-        $page_title         = get_the_title();
-        $current_post_type  = get_post_type();
-        
-        $cache_key      = 'eael_ai_recommended_widgets_data_global';
-        $data_global          = get_transient( $cache_key );
+        $cache_key          = 'eael_ai_recommended_widgets_data_global';
+        $data_global        = get_transient( $cache_key );
 
 		if ( false === $data_global ) {
             $site_title         = get_bloginfo();
@@ -55,68 +85,43 @@ class AI_Recommended_Widgets
             $plugin_list        = get_option('active_plugins');
             $theme_name_obj     = wp_get_theme();
             $theme_name         = is_object( $theme_name_obj ) ? $theme_name_obj->get( 'Name' ) : '';
-            
-            $all_post_types = get_post_types([], 'objects');
-            $all_post_types_labels = [];
-            $plugin_list_names = [];
+            $all_post_types     = get_post_types([], 'objects');
 
-            if( is_array( $all_post_types ) && count( $all_post_types ) ){
-                foreach( $all_post_types as $all_post_type ){
-                    $all_post_types_labels[] = isset( $all_post_type->labels ) ? $all_post_type->labels->singular_name : $all_post_type->label;
-                }
-            }
-
-            if( is_array( $all_post_types ) && count( $all_post_types ) ){
-                foreach ($plugin_list as $plugin_file) {
-                    $plugin_data = get_plugin_data( WP_PLUGIN_DIR . '/' . $plugin_file );
-                    $plugin_list_names[] = ! empty( $plugin_data['Name'] ) ? $plugin_data['Name'] : '';
-                }
-            }
-
-            $all_post_types_labels_string   = '';
-            $plugin_list_names_string       = '';
-
-            if( is_array( $all_post_types_labels ) && count( $all_post_types_labels ) ){
-                $all_post_types_labels_string = implode(', ', $all_post_types_labels);
-            }
-            
-            if( is_array( $plugin_list_names ) && count( $plugin_list_names ) ){
-                $plugin_list_names_string = implode(', ', $plugin_list_names);
-            }
+            $plugin_list_string     = $this->data_array_to_string( $plugin_list, 'plugin_list' );
+            $all_post_types_string  = $this->data_array_to_string( $all_post_types, 'all_post_types' );
 
             $data_global_fresh = [
                 'site_title' => $site_title,
                 'site_tag_line' => $site_tageline,
-                'plugin_list' => $plugin_list_names_string,
+                'plugin_list' => $plugin_list_string,
                 'theme_name' => $theme_name,
-                'list_of_post_type' => $all_post_types_labels_string,
+                'list_of_post_type' => $all_post_types_string,
             ];
 		}
 
 		$data_global = $data_global ? $data_global : $data_global_fresh;
-        
-        $page_content = get_the_content();
-        $page_content_headings = Helper::get_headings_from_content( $page_content );
 
-        $current_post_type_label        = '';
+        $page_title             = get_the_title();
+        $current_post_type      = get_post_type();
+        $page_content           = get_the_content();
+        $page_content_headings  = Helper::get_headings_from_content( $page_content );
+
+        $current_post_type_string       = '';
         $page_content_headings_string   = '';
-        
         
         if( $current_post_type ){
             $current_post_type_obj = get_post_type_object( $current_post_type );
             
             if( is_object( $current_post_type_obj ) ){
-                $current_post_type_label = isset( $current_post_type_obj->labels ) ? $current_post_type_obj->labels->singular_name : $current_post_type_obj->label;
+                $current_post_type_string = $this->data_array_to_string( [ $current_post_type_obj ], 'current_post_type' );
             }
         }
 
-        if( is_array( $page_content_headings ) && count( $page_content_headings ) ){
-            $page_content_headings_string = implode(', ', $page_content_headings);
-        }
+        $page_content_headings_string = $this->data_array_to_string( $page_content_headings );
 
         $data = [
             'page_title' => $page_title,
-            'current_post_type' => $current_post_type_label,
+            'current_post_type' => $current_post_type_string,
             'page_content_heading_tags' => $page_content_headings_string,
         ];
 
@@ -162,14 +167,6 @@ class AI_Recommended_Widgets
 		];
 
 		return $data;
-    }
-
-    public function get_eael_elements() {
-
-    }
-
-    public function get_element_slug() {
-
     }
 
     public function get_ai_recommended_widgets() {
