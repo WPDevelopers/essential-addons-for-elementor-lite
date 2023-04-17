@@ -44,11 +44,16 @@ class AI_Recommended_Widgets
         $page_content = get_the_content();
         $page_content_headings = Helper::get_headings_from_content( $page_content );
         
+        $page_content_headings_string = '';
+        if( is_array( $page_content_headings ) && count( $page_content_headings ) ){
+            $page_content_headings_string = implode(',', $page_content_headings);
+        }
+        
         $data = [
             'page_title' => $page_title,
             'current_post_type' => $current_post_type,
             // 'page_content_headings' => $page_content_headings,
-            'page_content_heading_tags' => $page_content_headings,
+            'page_content_heading_tags' => $page_content_headings_string,
             'site_title' => $site_title,
             // 'site_tagline' => $site_tageline,
             'site_tag_line' => $site_tageline,
@@ -127,6 +132,8 @@ class AI_Recommended_Widgets
         $ai_recommended_widgets = $this->get_ai_recommended_widgets_from_api( $get_data_args );
         $ai_recommended_widgets = isset( $ai_recommended_widgets['items'] ) ? $ai_recommended_widgets['items'] : [];
 
+        print_r($ai_recommended_widgets);
+        wp_die('ok');
         if ( is_array( $ai_recommended_widgets ) && count( $ai_recommended_widgets ) > 0 ) {
             return $ai_recommended_widgets;
         }
