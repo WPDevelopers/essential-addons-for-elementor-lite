@@ -21,11 +21,13 @@ class AI_Recommended_Widgets
     {
         $ai_recommended_widgets = $this->get_ai_recommended_widgets();
 
-        foreach( $ai_recommended_widgets as $ai_recommended_widget ){
-            add_filter('eael/elements/categories/' . $ai_recommended_widget, function( $categories ){
-                $categories[] = 'essential-addons-elementor-recommended';
-                return $categories;
-            });
+        if( is_array( $ai_recommended_widgets ) && count( $ai_recommended_widgets ) ){
+            foreach( $ai_recommended_widgets as $ai_recommended_widget ){
+                add_filter('eael/elements/categories/' . $ai_recommended_widget, function( $categories ){
+                    $categories[] = 'essential-addons-elementor-recommended';
+                    return $categories;
+                });
+            }
         }
     }
 
@@ -55,6 +57,20 @@ class AI_Recommended_Widgets
             // 'all_post_types' => $all_post_types,
             'list_of_post_type' => $all_post_types,
         ];
+        
+        $data = [
+            'page_title' => 'Example Page Title',
+            'current_post_type' => '',
+            // 'page_content_headings' => $page_content_headings,
+            'page_content_heading_tags' => 'Example Page Content Heading Tags',
+            'site_title' => 'Example Site Title',
+            // 'site_tagline' => $site_tageline,
+            'site_tag_line' => 'Example Site Tag Line',
+            'plugin_list' => '',
+            'theme_name' => 'Example Theme Name',
+            // 'all_post_types' => $all_post_types,
+            'list_of_post_type' => 'Example List of Post Type',
+        ];
 
         return $data;
     }
@@ -78,17 +94,14 @@ class AI_Recommended_Widgets
                     'body' => json_encode($args),
                 ]
             );
-            
-            print_r($response);
-            wp_die('ok');
 
-            // $response = 'OK' === $body->status ? $body->result : false;
-    
-            // if ( ! empty( $response ) ) {
-            //     set_transient( $cache_key,  $response, 86400);
-            // } else {
-            //     $error_message = __( 'Sorry, we could not get any recommendations.', 'essential-addons-elementor' );
-            // }
+			$response     = json_decode( wp_remote_retrieve_body( $response ) );
+
+            if ( ! empty( $response ) ) {
+                set_transient( $cache_key,  $response, 86400);
+            } else {
+                $error_message = __( 'Sorry, we could not get any recommendations.', 'essential-addons-elementor' );
+            }
 		}
 
 		$response = $items ? $items : $response;
@@ -101,12 +114,18 @@ class AI_Recommended_Widgets
 		return $data;
     }
 
+    public function get_eael_elements() {
+
+    }
+
+    public function get_element_slug() {
+
+    }
+
     public function get_ai_recommended_widgets() {
         $get_data_args = $this->get_data_args();
         $ai_recommended_widgets = $this->get_ai_recommended_widgets_from_api( $get_data_args );
-        echo "<pre>";
-        print_r($ai_recommended_widgets);
-        wp_die('ok');
+        $ai_recommended_widgets = isset( $ai_recommended_widgets['items'] ) ? $ai_recommended_widgets['items'] : [];
 
         if ( is_array( $ai_recommended_widgets ) && count( $ai_recommended_widgets ) > 0 ) {
             return $ai_recommended_widgets;
