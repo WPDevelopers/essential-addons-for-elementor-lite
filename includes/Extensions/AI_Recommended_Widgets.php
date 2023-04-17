@@ -174,8 +174,6 @@ class AI_Recommended_Widgets
         $ai_recommended_widgets = $this->get_ai_recommended_widgets_from_api( $get_data_args );
         $ai_recommended_widgets = isset( $ai_recommended_widgets['items'] ) ? $ai_recommended_widgets['items'] : [];
 
-        print_r($ai_recommended_widgets);
-        wp_die('ok');
         if ( is_array( $ai_recommended_widgets ) && count( $ai_recommended_widgets ) > 0 ) {
             return $ai_recommended_widgets;
         }
