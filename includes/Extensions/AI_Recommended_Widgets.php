@@ -65,20 +65,10 @@ class AI_Recommended_Widgets
     }
 
     public function get_data_args() {
-        // $data = [
-        //     'page_title' => $page_title,
-        //     'current_post_type' => $current_post_type_label,
-        //     'page_content_headings' => $page_content_headings_string,
-        //     'site_title' => $site_title,
-        //     'site_tagline' => $site_tageline,
-        //     'plugin_list' => $plugin_list_names_string,
-        //     'theme_name' => $theme_name,
-        //     'all_post_types' => $all_post_types_labels_string,
-        // ];
-
         $cache_key          = 'eael_ai_recommended_widgets_data_global';
         $data_global        = get_transient( $cache_key );
 
+        $data_global = false;
 		if ( false === $data_global ) {
             $site_title         = get_bloginfo();
             $site_tageline      = get_bloginfo('description');
@@ -92,10 +82,10 @@ class AI_Recommended_Widgets
 
             $data_global_fresh = [
                 'site_title' => $site_title,
-                'site_tag_line' => $site_tageline,
+                'site_tagline' => $site_tageline,
                 'plugin_list' => $plugin_list_string,
                 'theme_name' => $theme_name,
-                'list_of_post_type' => $all_post_types_string,
+                'all_post_types' => $all_post_types_string,
             ];
 		}
 
@@ -122,7 +112,7 @@ class AI_Recommended_Widgets
         $data = [
             'page_title' => $page_title,
             'current_post_type' => $current_post_type_string,
-            'page_content_heading_tags' => $page_content_headings_string,
+            'page_content_headings' => $page_content_headings_string,
         ];
 
         $data = array_merge($data_global, $data);
@@ -136,7 +126,7 @@ class AI_Recommended_Widgets
         
         $cache_key      = 'eael_ai_recommended_widgets_' . get_the_ID();
         $items          = get_transient( $cache_key );
-
+        $items = false;
 		if ( false === $items ) {
 
 			$response = wp_remote_post(
@@ -174,6 +164,8 @@ class AI_Recommended_Widgets
         $ai_recommended_widgets = $this->get_ai_recommended_widgets_from_api( $get_data_args );
         $ai_recommended_widgets = isset( $ai_recommended_widgets['items'] ) ? $ai_recommended_widgets['items'] : [];
 
+        print_r($ai_recommended_widgets);
+        wp_die('ok');
         if ( is_array( $ai_recommended_widgets ) && count( $ai_recommended_widgets ) > 0 ) {
             return $ai_recommended_widgets;
         }
