@@ -59,15 +59,15 @@ class AI_Recommended_Widgets
         ];
         
         $data = [
-            'page_title' => 'Example Page Title',
-            'current_post_type' => '',
+            'page_title' => $page_title,
+            'current_post_type' => $current_post_type,
             // 'page_content_headings' => $page_content_headings,
             'page_content_heading_tags' => 'Example Page Content Heading Tags',
-            'site_title' => 'Example Site Title',
+            'site_title' => $site_title,
             // 'site_tagline' => $site_tageline,
-            'site_tag_line' => 'Example Site Tag Line',
+            'site_tag_line' => $site_tageline,
             'plugin_list' => '',
-            'theme_name' => 'Example Theme Name',
+            'theme_name' => $theme_name,
             // 'all_post_types' => $all_post_types,
             'list_of_post_type' => 'Example List of Post Type',
         ];
