@@ -68,8 +68,7 @@ class AI_Recommended_Widgets
         $cache_key          = 'eael_ai_recommended_widgets_data_global';
         $data_global        = get_transient( $cache_key );
 
-        $data_global = false;
-		if ( false === $data_global ) {
+        if ( false === $data_global ) {
             $site_title         = get_bloginfo();
             $site_tageline      = get_bloginfo('description');
             $plugin_list        = get_option('active_plugins');
@@ -126,8 +125,8 @@ class AI_Recommended_Widgets
         
         $cache_key      = 'eael_ai_recommended_widgets_' . get_the_ID();
         $items          = get_transient( $cache_key );
-        $items = false;
-		if ( false === $items ) {
+        
+        if ( false === $items ) {
 
 			$response = wp_remote_post(
                 $url,
@@ -164,8 +163,6 @@ class AI_Recommended_Widgets
         $ai_recommended_widgets = $this->get_ai_recommended_widgets_from_api( $get_data_args );
         $ai_recommended_widgets = isset( $ai_recommended_widgets['items'] ) ? $ai_recommended_widgets['items'] : [];
 
-        print_r($ai_recommended_widgets);
-        wp_die('ok');
         if ( is_array( $ai_recommended_widgets ) && count( $ai_recommended_widgets ) > 0 ) {
             return $ai_recommended_widgets;
         }
