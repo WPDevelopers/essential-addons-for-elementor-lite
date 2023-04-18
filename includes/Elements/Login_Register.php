@@ -1806,7 +1806,7 @@ class Login_Register extends Widget_Base {
 			'type'      => Controls_Manager::SWITCHER,
 			'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
 			'label_on'  => __( 'Show', 'essential-addons-for-elementor-lite' ),
-			'default'   => 'yes',
+			'default'   => '',
 		] );
 
 		do_action( 'eael/login-register/after-register-options-controls', $this );
