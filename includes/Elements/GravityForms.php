@@ -1961,7 +1961,8 @@ class GravityForms extends Widget_Base {
 				],
 				'default'               => '',
 				'selectors'             => [
-					'{{WRAPPER}} .eael-gravity-form .gform_footer'   => 'text-align: {{VALUE}};',
+                    '{{WRAPPER}} .eael-gravity-form .gform_footer'   => 'text-align: {{VALUE}};justify-content: {{VALUE}};',
+                    '{{WRAPPER}} .eael-gravity-form .gfield--type-submit'   => 'text-align: {{VALUE}};justify-content: {{VALUE}};',
                     '{{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]' => 'display:inline-block;'
 				],
                 'condition'             => [
