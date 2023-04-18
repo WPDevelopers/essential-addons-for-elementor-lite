@@ -105,7 +105,9 @@ ea.hooks.addAction("init", "ea", () => {
                     break;
                 case 'wp-hide-pw-register':
                     togglePasswordVisibility( $passFieldRegister );
-                    togglePasswordVisibility( $passConfirmFieldRegister );
+                    if($passConfirmFieldRegister){
+                        togglePasswordVisibility( $passConfirmFieldRegister );
+                    }
                     break;
                 default :
                     togglePasswordVisibility( $passField );
