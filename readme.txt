@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.2
 Requires PHP: 7.0
-Stable tag: 5.7.0
+Stable tag: 5.7.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -244,6 +244,19 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.7.1 - 17/04/2023 =
+
+- Improved: EA Post Timeline | Improved Card Layout
+- Improved: EA Login/Register Form | Remember me field Styling
+- Fixed: Deprecated Warnings on PHP 8.1
+- Fixed: EA Interactive Circle | Classic Background Styling issue
+- Fixed: EA Scroll to Top | Missing in Theme Builder Archive Page
+- Fixed: EA Gravity Form | Fixed Submit Button Alignment issue
+- Fixed: EA Filterable Gallery | Page Speed Issue
+- Fixed: EA Woo Product Gallery | Load more button Duplication issue
+- Fixed: EA Event Calendar | Fixed Day and Time Styling issue
+- Few minor bug fixes & improvements
 
 = 5.7.0 - 05/04/2023 =
 
