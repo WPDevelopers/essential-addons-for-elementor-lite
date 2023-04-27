@@ -339,7 +339,8 @@ trait Login_Registration {
 				}
 
 				if( isset( $register_field['field_type'] ) && in_array( $register_field['field_type'], $eael_custom_profile_fields_image_keys )	){
-					if ( ! empty( $_FILES[ $register_field['field_type'] ] ) ) {
+
+					if ( ! empty( $_FILES[ $register_field['field_type'] ] ) && 4 !== $_FILES[ $register_field['field_type'] ]["error"] ) {
 						$custom_field_file_name 		= sanitize_text_field( $_FILES[ $register_field['field_type'] ]["name"] );
 						$custom_field_file_extension 	= end( ( explode( ".", $custom_field_file_name ) ) ); # extra () to prevent notice
 						$custom_field_file_size 		= floatval( $_FILES[ $register_field['field_type'] ]["size"] );
