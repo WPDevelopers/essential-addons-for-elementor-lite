@@ -113,7 +113,7 @@ trait Facebook_Feed {
                             </div>';
 
 				if ( $settings['eael_facebook_feed_date'] ) {
-					$html .= '<a href="' . esc_url( $item['permalink_url'] ) . '" target="' . ( $settings['eael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '" class="eael-facebook-feed-post-time"><i class="far fa-clock" aria-hidden="true"></i> ' . date( get_option('date_format'), strtotime( $item['created_time'] ) ) . '</a>';
+					$html .= '<a href="' . esc_url( $item['permalink_url'] ) . '" target="' . ( $settings['eael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '" class="eael-facebook-feed-post-time"><i class="far fa-clock" aria-hidden="true"></i> ' . date_i18n( get_option('date_format'), strtotime( $item['created_time'] ) ) . '</a>';
 				}
 				$html .= '</header>';
 
