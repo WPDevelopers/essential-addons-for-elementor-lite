@@ -1769,6 +1769,7 @@ class Login_Register extends Widget_Base {
 
 		$repeater->add_control( 'field_type_custom_image_extensions', [
 			'label'   		=> __( 'File Extensions', 'essential-addons-for-elementor-lite' ),
+			'description'	=> __('Only extensions that is permitted on WordPress.', 'essential-addons-for-elementor-lite'),
 			'type'    		=> Controls_Manager::TEXT,
 			'default'		=> '',
 			'placeholder' 	=> '.png, .jpg, .jpeg',
