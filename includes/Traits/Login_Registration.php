@@ -1564,9 +1564,11 @@ trait Login_Registration {
 				<td>
 					<input type="text" name="<?php echo esc_attr( $eael_custom_profile_field_image_key ); ?>" id="<?php echo esc_attr( $eael_custom_profile_field_image_key ); ?>" value="<?php echo esc_attr( $user_meta_attachment_id ); ?>" class="regular-text" /><br />
 					<p class="description"><?php printf( __( "Above, input the %s of the attachment.", 'essential-addons-for-elementor-lite'), esc_html( 'ID' )); ?></p>
-					<?php if( ! empty( $user_meta_attachment_id ) ): ?>
-					<p><img src="<?php echo esc_attr( wp_get_attachment_image_url( $user_meta_attachment_id ) ); ?>" alt="Image"></p>
-					<?php endif; ?>
+					<?php 
+					if( ! empty( $user_meta_attachment_id ) ){
+						echo wp_get_attachment_image($user_meta_attachment_id, 'thumbnail', 1);
+					} 
+					?>
 				</td>
 			</tr>
 		<?php 
