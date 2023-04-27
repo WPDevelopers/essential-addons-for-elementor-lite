@@ -1566,7 +1566,7 @@ trait Login_Registration {
 					<p class="description"><?php printf( __( "Above, input the %s of the attachment.", 'essential-addons-for-elementor-lite'), esc_html( 'ID' )); ?></p>
 					<?php 
 					if( ! empty( $user_meta_attachment_id ) ){
-						echo wp_get_attachment_image($user_meta_attachment_id, 'thumbnail', 1);
+						echo Helper::eael_wp_kses( wp_get_attachment_image($user_meta_attachment_id, 'thumbnail', 1) );
 					} 
 					?>
 				</td>
