@@ -20,7 +20,7 @@ trait Login_Registration {
 	public static $send_custom_email = false;
 	public static $send_custom_email_admin = false;
 	public static $send_custom_email_lostpassword = false;
-	public static $eael_custom_profile_field_prefix = 'eael_profile_field_';
+	public static $eael_custom_profile_field_prefix = 'eael_custom_profile_field_';
 
 	/**
 	 * It will contain all email related options like email subject, content, email content type etc.
@@ -1630,9 +1630,8 @@ trait Login_Registration {
 		
 		$eael_custom_profile_field_text_trimmed  	= trim( get_option( 'eael_custom_profile_fields_text' ), ' ,\n\r\0\x0B' );
 		$eael_custom_profile_field_image_trimmed 	= trim( get_option( 'eael_custom_profile_fields_img' ), ' ,\n\r\0\x0B' );
-
-		$eael_custom_profile_field_text_trimmed 	= str_replace('eael_profile_field_', '', $eael_custom_profile_field_text_trimmed);
-		$eael_custom_profile_field_image_trimmed 	= str_replace('eael_profile_field_', '', $eael_custom_profile_field_image_trimmed);
+		$eael_custom_profile_field_text_trimmed 	= str_replace(self::$eael_custom_profile_field_prefix, '', $eael_custom_profile_field_text_trimmed);
+		$eael_custom_profile_field_image_trimmed 	= str_replace(self::$eael_custom_profile_field_prefix, '', $eael_custom_profile_field_image_trimmed);
 
 		$custom_profile_fields_text_arr 			= ! empty ( $eael_custom_profile_field_text_trimmed ) ? array_unique( explode( ',', $eael_custom_profile_field_text_trimmed ) ) 	: [];
 		$custom_profile_fields_img_arr  			= ! empty( $eael_custom_profile_field_image_trimmed ) ? array_unique( explode( ',', $eael_custom_profile_field_image_trimmed ) ) 	: [];
