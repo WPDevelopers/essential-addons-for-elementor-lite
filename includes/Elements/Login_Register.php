@@ -1755,7 +1755,7 @@ class Login_Register extends Widget_Base {
 			'condition'       	=> [
 				'field_type' 	=> array_keys( $this->get_eael_custom_profile_fields( 'image' ) ),
 			],
-			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+			'content_classes' => 'eael-warning',
 		] );
 
 		$repeater->add_control( 'field_label', [
