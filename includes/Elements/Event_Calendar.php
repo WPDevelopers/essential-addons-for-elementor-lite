@@ -1980,7 +1980,7 @@ class Event_Calendar extends Widget_Base
 		            'borderColor'       => ! empty( $settings_eael_event_global_popup_ribbon_color ) ? $settings_eael_event_global_popup_ribbon_color : '#10ecab',
 		            'textColor'         => $settings_eael_event_global_text_color,
 		            'color'             => $settings_eael_event_global_bg_color,
-                    'hide_details_link' => $settings['eael_event_details_link_hide'],
+                    'hide_details_link' => $settings['eael_event_details_link_hide'] ? $settings['eael_event_details_link_hide'] : 'no',
                     'url'               => esc_url_raw( $event["eael_event_link"]["url"] ),
 		            'allDay'            => $event['eael_event_all_day'],
 		            'external'          => $event['eael_event_link']['is_external'],

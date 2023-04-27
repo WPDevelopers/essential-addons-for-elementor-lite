@@ -203,7 +203,8 @@ var EventCalendar = function ($scope, $) {
 							$(".eaelec-modal-body").css("height", "300px");
 						}
 
-						if (event.extendedProps.hide_details_link !== 'yes' ){
+						console.log(event.extendedProps.hide_details_link )
+						if (event.extendedProps.hide_details_link === 'no'){
 							modalFooterLink.attr("href", event.url).css("display", "block");
 						}else {
 							modalFooterLink.css("display", "none");
