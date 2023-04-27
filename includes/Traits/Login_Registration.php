@@ -342,7 +342,7 @@ trait Login_Registration {
 					if ( ! empty( $_FILES[ $register_field['field_type'] ] ) ) {
 						$custom_field_file_name 		= sanitize_text_field( $_FILES[ $register_field['field_type'] ]["name"] );
 						$custom_field_file_extension 	= end( ( explode( ".", $custom_field_file_name ) ) ); # extra () to prevent notice
-						$custom_field_file_size 		= intval( $_FILES[ $register_field['field_type'] ]["size"] );
+						$custom_field_file_size 		= floatval( $_FILES[ $register_field['field_type'] ]["size"] );
 
 						$unsupported_extensions = ['svg', 'php', 'js'];
 						if( ! empty ( $register_field['field_type_custom_image_extensions'] ) ||  in_array($custom_field_file_extension, $unsupported_extensions) ){
@@ -357,12 +357,12 @@ trait Login_Registration {
 						$register_field['field_type_custom_image_filename_length'] 	= empty ( $register_field['field_type_custom_image_filename_length'] ) 	? 128 : $register_field['field_type_custom_image_filename_length'];
 						
 						if( ! empty ( $register_field['field_type_custom_image_filesize'] ) ){
-							$field_type_custom_image_filesize 		= intval( $register_field['field_type_custom_image_filesize'] );
+							$field_type_custom_image_filesize 		= floatval( $register_field['field_type_custom_image_filesize'] );
 							$field_type_custom_image_filesize 		= $field_type_custom_image_filesize > 512 ? 512 : $field_type_custom_image_filesize;
 							$field_type_custom_image_filesize_kb 	= $field_type_custom_image_filesize * 1000000;
 							
 							if( $custom_field_file_size > $field_type_custom_image_filesize_kb ) {
-                                $errors[ $register_field['field_type'] ] = isset( $settings['field_type_custom_image_filesize_error'] ) ? $settings['field_type_custom_image_filesize_error'] : __( 'File size exceeded. Maximum size is ' . intval( $field_type_custom_image_filesize ) . 'MB' , 'essential-addons-for-elementor-lite' );
+                                $errors[ $register_field['field_type'] ] = isset( $settings['field_type_custom_image_filesize_error'] ) ? $settings['field_type_custom_image_filesize_error'] : __( 'File size exceeded. Maximum size is ' . floatval( $field_type_custom_image_filesize ) . 'MB' , 'essential-addons-for-elementor-lite' );
                             }
 						}
 
