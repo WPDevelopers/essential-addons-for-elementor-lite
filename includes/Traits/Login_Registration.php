@@ -303,7 +303,7 @@ trait Login_Registration {
 					array(
 						'registration'      => 'disabled',
 					),
-					wp_login_url()
+					esc_url_raw( $this->eael_wp_login_url() )
 				)
 			);
 			exit();
@@ -525,7 +525,7 @@ trait Login_Registration {
 																	'key'		=> $key,
 																	'login'		=> rawurlencode( $user->user_login ),
 																),
-																wp_login_url()
+																esc_url_raw( $this->eael_wp_login_url() )
 															);
 				self::$email_options['password_reset_link'] = self::$email_options['password_reset_link'] . "\r\n\r\n";
 			}
@@ -1042,7 +1042,7 @@ trait Login_Registration {
 						'key'					=> $key,
 						'login'					=> rawurlencode( $user_login ),
 					),
-					wp_login_url()
+					esc_url_raw( $this->eael_wp_login_url() )
 				);
 				self::$email_options_lostpassword['password_reset_link'] = self::$email_options_lostpassword['password_reset_link'] . '&page_id='. $page_id . '&widget_id='. $widget_id .'&wp_lang=' . $locale . "\r\n\r\n";
 
@@ -1058,7 +1058,7 @@ trait Login_Registration {
 							'popup-selector'		=> $resetpassword_in_popup_selector,
 							'wp_lang'				=> $locale,
 						),
-						wp_login_url()
+						esc_url_raw( $this->eael_wp_login_url() )
 					);
 				}
 			}
@@ -1211,7 +1211,7 @@ trait Login_Registration {
 							'key'					=> $key,
 							'login'					=> rawurlencode( $user->user_login ),
 						),
-						wp_login_url()
+						esc_url_raw( $this->eael_wp_login_url() )
 					);
 					self::$email_options['password_reset_link'] = self::$email_options['password_reset_link'] . "\r\n\r\n";
 				}
@@ -1290,7 +1290,7 @@ trait Login_Registration {
 			self::$email_options['firstname'],
 			self::$email_options['lastname'],
 			self::$email_options['website'],
-			wp_login_url(),
+			esc_url_raw( $this->eael_wp_login_url() ),
 			get_option( 'blogname' ),
 		];
 
@@ -1339,7 +1339,7 @@ trait Login_Registration {
 			$firstname,
 			$lastname,
 			$website,
-			wp_login_url(),
+			esc_url_raw( $this->eael_wp_login_url() ),
 			get_option( 'blogname' ),
 		];
 
