@@ -1449,4 +1449,8 @@ trait Login_Registration {
 		return true;
 	}
 
+	public function eael_wp_login_url(){
+		return apply_filters( 'eael/login-register/wp-login-url', wp_login_url() );
+	}
+
 }
