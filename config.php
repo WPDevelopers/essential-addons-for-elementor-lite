@@ -1187,6 +1187,9 @@ $config = [
                 ],
             ],
         ],
+        'wrapper-link' => [
+            'class' => '\Essential_Addons_Elementor\Extensions\Wrapper_Link',
+        ],
     ],
 ];
 
