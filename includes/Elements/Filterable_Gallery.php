@@ -237,6 +237,18 @@ class Filterable_Gallery extends Widget_Base
         );
 
         $this->add_control(
+            'eael_title_clickable',
+            [
+                'label' => __('Item Title Clickable?', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default' => ''
+            ]
+        );
+
+        $this->add_control(
             'eael_section_fg_full_image_clickable',
             [
                 'label' => __('Full Image Clickable?', 'essential-addons-for-elementor-lite'),
@@ -656,7 +668,6 @@ class Filterable_Gallery extends Widget_Base
                 'show_external' => true,
                 'condition' => [
                     'fg_video_gallery_switch!' => 'true',
-                    'eael_fg_gallery_link' => 'true',
                 ],
             ]
         );
@@ -3100,7 +3111,19 @@ class Filterable_Gallery extends Widget_Base
         $html .= '<div class="gallery-item-caption-over">';
         if (isset($item['title']) && !empty($item['title']) || isset($item['content']) && !empty($item['content'])) {
             if (!empty($item['title'])) {
-                $html .= '<' . Helper::eael_validate_html_tag($settings['title_tag']) . ' class="fg-item-title">' . $item['title'] . '</' . Helper::eael_validate_html_tag($settings['title_tag']) . '>';
+                $title_link_open = $title_link_close = '';
+                if ( $settings['eael_title_clickable'] === 'yes' ){
+                    static $ea_link_repeater_index = 0;
+	                $link_key = 'link_' . $ea_link_repeater_index++;
+                    if ( empty( $this->get_render_attribute_string( $link_key ) ) ){
+	                    $link_key = 'eael_link_' . $ea_link_repeater_index++;
+                        $this->add_link_attributes( $link_key, $item['link'] );
+                    }
+                    $title_link_open = '<a '. $this->get_render_attribute_string( $link_key ) . '>';
+                    $title_link_close = '</a>';
+                }
+
+                $html .= $title_link_open . '<' . Helper::eael_validate_html_tag($settings['title_tag']) . ' class="fg-item-title">' . $item['title'] . '</' . Helper::eael_validate_html_tag($settings['title_tag']) . '>' . $title_link_close;
             }
 
             if (!empty($item['content'])) {
@@ -3233,8 +3256,19 @@ class Filterable_Gallery extends Widget_Base
             if (isset($item['category_switch']) && $item['category_switch'] == 'true') {
                 $html .= '<div class="fg-item-category"><span>' . $item['category'] . '</span></div>';
             }
+            $title_link_open = $title_link_close = '';
+            if ( $settings['eael_title_clickable'] === 'yes' ){
+                static $ea_link_repeater_index = 0;
+                $link_key = 'link_' . $ea_link_repeater_index++;
+                if ( empty( $this->get_render_attribute_string( $link_key ) ) ){
+                    $link_key = 'eael_link_' . $ea_link_repeater_index++;
+                    $this->add_link_attributes( $link_key, $item['link'] );
+                }
+                $title_link_open = '<a '. $this->get_render_attribute_string( $link_key ) . '>';
+                $title_link_close = '</a>';
+            }
             
-            $html .= '<' . Helper::eael_validate_html_tag($settings['title_tag']) . ' class="fg-item-title">' . $item['title'] . '</' . Helper::eael_validate_html_tag($settings['title_tag']) . '>';
+            $html .= $title_link_open . '<' . Helper::eael_validate_html_tag($settings['title_tag']) . ' class="fg-item-title">' . $item['title'] . '</' . Helper::eael_validate_html_tag($settings['title_tag']) . '>' . $title_link_close;
             $html .= '<div class="fg-item-content">' . wpautop($item['content']) . '</div>';
             $html .= '</div>';
             
