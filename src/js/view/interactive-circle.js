@@ -26,9 +26,6 @@ ea.hooks.addAction( "init", "ea", () => {
 		var $tabLinks    = $circleWrap.find( ".eael-circle-btn" );
 		var $tabContents = $circleWrap.find( ".eael-circle-btn-content" );
 		
-		$tabLinks.first().addClass( "active" );
-		$tabContents.first().addClass( "active" );
-		
 		$tabLinks.each( function ( element ) {
 			$( this ).on( $eventType, handleEvent( element ) );
 		} );
