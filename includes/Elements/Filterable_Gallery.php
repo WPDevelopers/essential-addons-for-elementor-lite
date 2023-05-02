@@ -239,10 +239,10 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'eael_title_clickable',
             [
-                'label' => __('Item Title Clickable?', 'essential-addons-for-elementor-lite'),
+                'label' => __('Title Clickable?', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                'label_on' => __('Enable', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('Disable', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default' => ''
             ]
@@ -251,10 +251,10 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'eael_section_fg_full_image_clickable',
             [
-                'label' => __('Full Image Clickable?', 'essential-addons-for-elementor-lite'),
+                'label' => __('Image Clickable?', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                'label_on' => __('Enable', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('Disable', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default' => ''
             ]
