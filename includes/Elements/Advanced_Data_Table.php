@@ -1344,6 +1344,9 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'label' => __('Button', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'ea_adv_data_table_source' => 'ninja'
+                ]
             ]
         );
 
