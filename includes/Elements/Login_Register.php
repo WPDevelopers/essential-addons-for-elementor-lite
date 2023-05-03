@@ -200,7 +200,7 @@ class Login_Register extends Widget_Base {
 	 * @inheritDoc
 	 */
 	public function get_categories() {
-		return [ 'essential-addons-elementor' ];
+		return apply_filters('eael/elements/categories/' . $this->get_name() , ['essential-addons-elementor']);
 	}
 
 	/**

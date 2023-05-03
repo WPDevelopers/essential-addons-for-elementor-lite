@@ -28,7 +28,7 @@ class Crowdfundly_All_Campaign extends Widget_Base {
 	}
 
 	public function get_categories() {
-		return [ 'essential-addons-elementor' ];
+		return apply_filters('eael/elements/categories/' . $this->get_name() , ['essential-addons-elementor']);
 	}
 
 	protected function register_controls() {

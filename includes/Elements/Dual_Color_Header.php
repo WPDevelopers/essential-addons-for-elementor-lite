@@ -35,7 +35,7 @@ class Dual_Color_Header extends Widget_Base
 
 	public function get_categories()
 	{
-		return ['essential-addons-elementor'];
+		return apply_filters('eael/elements/categories/' . $this->get_name() , ['essential-addons-elementor']);
 	}
 
 	public function get_keywords()
