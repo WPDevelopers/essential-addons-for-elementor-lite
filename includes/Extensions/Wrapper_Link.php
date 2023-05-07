@@ -49,6 +49,8 @@ class Wrapper_Link {
 		$wrapper_link_settings = $element->get_settings_for_display( 'wrapper_link' );
 
 		if ( ! empty( $wrapper_link_settings['url'] ) ) {
+			unset( $wrapper_link_settings['custom_attributes'] );
+
 			$element->add_render_attribute( '_wrapper',
 				[ 'data-wrapper-link' => wp_json_encode( $wrapper_link_settings ) ]
 			);
