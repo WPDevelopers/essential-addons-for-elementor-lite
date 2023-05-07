@@ -44,4 +44,14 @@ class Wrapper_Link {
 		$element->end_controls_section();
 	}
 
+	public function before_render( $element ) {
+		$wrapper_link_settings = $element->get_settings_for_display( 'wrapper_link' );
+
+		if ( ! empty( $wrapper_link_settings['url'] ) ) {
+			$element->add_render_attribute( '_wrapper',
+				[ 'data-wrapper-link' => wp_json_encode( $wrapper_link_settings ) ]
+			);
+		}
+	}
+
 }
