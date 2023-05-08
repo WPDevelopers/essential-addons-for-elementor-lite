@@ -32,12 +32,23 @@ class Wrapper_Link {
 		);
 
 		$element->add_control(
+			'eael_wrapper_link_switch',
+			[
+				'label' => __( 'Enable Wrapper Link', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::SWITCHER
+			]
+		);
+
+		$element->add_control(
 			'eael_wrapper_link',
 			[
-				'label'   => __( 'Link', 'essential-addons-for-elementor-lite' ),
-				'type'    => Controls_Manager::URL,
-				'dynamic' => [
+				'label'     => __( 'Link', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::URL,
+				'dynamic'   => [
 					'active' => true,
+				],
+				'condition' => [
+					'eael_wrapper_link_switch!' => ''
 				]
 			]
 		);
