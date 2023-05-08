@@ -345,7 +345,7 @@ trait Login_Registration {
 						$custom_field_file_extension 	= end( ( explode( ".", $custom_field_file_name ) ) ); # extra () to prevent notice
 						$custom_field_file_size 		= floatval( $_FILES[ $register_field['field_type'] ]["size"] );
 
-						$unsupported_extensions = ['svg', 'php', 'js', 'aiff', 'psd', 'exr', 'wma'];
+						$unsupported_extensions = ['svg', 'php', 'js', 'aiff', 'psd', 'exr', 'wma', 'sql', 'm2v', 'swf', 'py', 'java', 'json', 'html', 'yaml', 'css', 'rb', 'cpp', 'c', 'cs', 'swift', 'kt', 'go', 'ts'];
 						
 						if( ! empty ( $register_field['field_type_custom_image_extensions'] ) ||  in_array($custom_field_file_extension, $unsupported_extensions) ){
 							$field_type_custom_image_extensions_trimmed = trim( sanitize_text_field( $register_field['field_type_custom_image_extensions'] ), ' ,\n\r\0\x0B' );
