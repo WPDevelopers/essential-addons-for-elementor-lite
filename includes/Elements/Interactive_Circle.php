@@ -132,7 +132,7 @@ class Interactive_Circle extends Widget_Base {
 		$repeater->add_control(
 			'eael_interactive_circle_default_active',
 			[
-				'label'        => esc_html__( 'Active as default', 'essential-addons-for-elementor-lite' ),
+				'label'        => esc_html__( 'Active as Default', 'essential-addons-for-elementor-lite' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
