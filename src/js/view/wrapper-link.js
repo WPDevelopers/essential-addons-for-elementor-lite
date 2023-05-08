@@ -1,11 +1,17 @@
 let EaelWrapperLink = function ($scope, $) {
     if ($scope.data("eael-wrapper-link") !== undefined) {
         let wrapperData = $scope.data("eael-wrapper-link"),
-            url = wrapperData.url,
-            target = wrapperData.is_external,
-            nofollow = wrapperData.nofollow;
+            target = wrapperData.is_external === 'on' ? '_blank' : '_self',
+            anchor = document.createElement('a');
 
-        console.log('URL:'+url, 'Target:'+target, 'NoFollow:'+nofollow);
+        anchor.href = wrapperData.url;
+        anchor.target = target;
+        if (wrapperData.nofollow === 'on') {
+            anchor.rel = 'nofollow';
+        }
+
+        //anchor.click();
+        console.log(anchor);
     }
 };
 jQuery(window).on('elementor/frontend/init', function () {
