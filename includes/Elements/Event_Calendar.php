@@ -87,20 +87,34 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'eael_event_calendar_type',
-            [
-                'label' => __('Source', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'options' => apply_filters('eael/controls/event-calendar/source', [
-                    'manual' => __('Manual', 'essential-addons-for-elementor-lite'),
-                    'google' => __('Google', 'essential-addons-for-elementor-lite'),
-                    'the_events_calendar' => __('The Events Calendar', 'essential-addons-for-elementor-lite'),
+	    $this->add_control(
+		    'eael_event_calendar_type',
+		    [
+			    'label' => __('Source', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::SELECT,
+			    'options' => apply_filters('eael/controls/event-calendar/source', [
+				    'manual' => __('Manual', 'essential-addons-for-elementor-lite'),
+				    'google' => __('Google', 'essential-addons-for-elementor-lite'),
+				    'the_events_calendar' => __('The Events Calendar', 'essential-addons-for-elementor-lite'),
 
-                ]),
-                'default' => 'manual',
-            ]
-        );
+			    ]),
+			    'default' => 'manual',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_event_display_layout',
+		    [
+			    'label' => __('Layout', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::SELECT,
+			    'options' =>  [
+				    'calendar' => __('Calendar', 'essential-addons-for-elementor-lite'),
+				    'table' => __('Table', 'essential-addons-for-elementor-lite'),
+
+			    ],
+			    'default' => 'calendar',
+		    ]
+	    );
 
         if (!apply_filters('eael/is_plugin_active', 'the-events-calendar/the-events-calendar.php')) {
             $this->add_control(
@@ -453,6 +467,9 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Calendar', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_CONTENT,
+                'condition' =>[
+                    'eael_event_display_layout' => 'calendar'
+                ]
             ]
         );
 
@@ -779,6 +796,230 @@ class Event_Calendar extends Widget_Base
 
         $this->end_controls_section();
 
+        /**
+         * Table Layout content
+         */
+        $this->start_controls_section(
+            'eael_event_calendar_table_layout_section',
+            [
+                'label' => __('Calendar', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_CONTENT,
+                'condition' =>[
+                    'eael_event_display_layout' => 'table'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_ec_show_title',
+            [
+                'label' => esc_html__( 'Show Title', 'essential-addons-for-elementor-lite' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+                'label_off' => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+                'return_value' => 'yes',
+                'default' => 'yes',
+            ]
+        );
+
+        $this->add_control(
+            'eael_ec_title_label',
+            [
+                'label' => esc_html__( 'Title Label', 'essential-addons-for-elementor-lite' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
+                'condition' =>[
+                    'eael_ec_show_title' => 'yes'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_ec_show_description',
+            [
+                'label' => esc_html__( 'Show Description', 'essential-addons-for-elementor-lite' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+                'label_off' => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+                'return_value' => 'yes',
+                'default' => 'yes',
+                'separator' => 'before'
+            ]
+        );
+
+        $this->add_control(
+            'eael_ec_desc_label',
+            [
+                'label' => esc_html__( 'Description Label', 'essential-addons-for-elementor-lite' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => esc_html__( 'Description', 'essential-addons-for-elementor-lite' ),
+                'condition' =>[
+                    'eael_ec_show_description' => 'yes'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_ec_show_date',
+            [
+                'label' => esc_html__( 'Show Date', 'essential-addons-for-elementor-lite' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+                'label_off' => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+                'return_value' => 'yes',
+                'default' => 'yes',
+                'separator' => 'before'
+            ]
+        );
+
+        $this->add_control(
+            'eael_ec_date_label',
+            [
+                'label' => esc_html__( 'Date Label', 'essential-addons-for-elementor-lite' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => esc_html__( 'Date', 'essential-addons-for-elementor-lite' ),
+                'condition' =>[
+                    'eael_ec_show_date' => 'yes'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_ec_date_time_format_heading',
+            [
+                'label' => esc_html__( 'Format', 'textdomain' ),
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'separator' => 'before',
+                'condition' =>[
+                    'eael_ec_show_date' => 'yes'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_ec_date_time_format',
+            [
+                'label' => esc_html__( 'Date Time', 'textdomain' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'date',
+                'options' => [
+                    'date-time' => esc_html__( 'Date Time', 'textdomain' ),
+                    'time-date' => esc_html__( 'Time Date', 'textdomain' ),
+                    'date'  => esc_html__( 'Only Date', 'textdomain' ),
+                    'time' => esc_html__( 'Only Time', 'textdomain' ),
+                ],
+                'condition' =>[
+                    'eael_ec_show_date' => 'yes'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_ec_date_time_separator',
+            [
+                'label' => esc_html__( 'Date Time Separator', 'essential-addons-for-elementor-lite' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => esc_html__( ', ', 'essential-addons-for-elementor-lite' ),
+                'condition' =>[
+                    'eael_ec_show_date' => 'yes',
+                    'eael_ec_date_time_format!' => [ 'date', 'time' ]
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_ec_date_to_date_separator',
+            [
+                'label' => esc_html__( 'Start and End Separator', 'essential-addons-for-elementor-lite' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => esc_html__( '-', 'essential-addons-for-elementor-lite' ),
+                'condition' =>[
+                    'eael_ec_show_date' => 'yes',
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_ec_date_format',
+            [
+                'label' => esc_html__( 'Date Format', 'essential-addons-for-elementor-lite' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'jS F Y',
+                'options' => [
+                    'F j, Y' => date('F j, Y'),                   // January 1, 2022
+                    'Y-m-d' => date('Y-m-d'),
+                    "d-m-Y" => date("d-m-y"),
+                    "m-d-Y" => date("m-d-y"),
+                    'm/d/Y' => date('m/d/Y'),                    // 01/01/2022
+                    'd/m/Y' => date('d/m/Y'),                    // 01/01/2022
+                    'Y/m/d' => date('Y/m/d'),                    // 2022/01/01
+                    'M j, Y' => date('M j, Y'),                   // Jan 1, 2022
+                    'jS F Y' => date('jS F Y'),                   // 1st January 2022
+                    'D, M j, Y' => date('D, M j, Y'),                // Sat, Jan 1, 2022
+                    'l, F j, Y' => date('l, F j, Y'),                // Saturday, January 1, 2022
+                    'j F, Y' => date('j F, Y'),                   // 1 January, 2022
+                    'l, j F, Y' => date('l, j F, Y'),                // Saturday, 1 January, 2022
+                    'D, d M Y' => date('D, d M Y'),                 // Sat, 01 Jan 2022
+                    'l, d-M-Y' => date('l, d-M-Y'),                 // Saturday, 01-Jan-2022
+                    'custom' => esc_html__('Custom', 'essential-addons-for-elementor-lite')
+                ],
+                'condition' =>[
+                    'eael_ec_show_date' => 'yes',
+                    'eael_ec_date_time_format!' => 'time'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_ec_date_format_custom',
+            [
+                'label' => esc_html__( 'Custom Date Format', 'essential-addons-for-elementor-lite' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => 'M j, Y',
+                'condition' =>[
+                    'eael_ec_show_date' => 'yes',
+                    'eael_ec_date_format' => 'custom',
+                    'eael_ec_date_time_format!' => 'time'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_ec_time_format',
+            [
+                'label' => esc_html__( 'Time Format', 'essential-addons-for-elementor-lite' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'g:i A',
+                'options' => [
+                    'H:i' => date('H:i'),              // 00:00
+                    'g:i a' => date('g:i a'),            // 12:00 am/pm
+                    'g:i A' => date('g:i A'),            // 12:00 AM/PM
+                    'H:i:s' => date('H:i:s'),            // 00:00:00
+                    'custom' => esc_html__('Custom', 'essential-addons-for-elementor-lite')
+                ],
+                'condition' =>[
+                    'eael_ec_show_date' => 'yes',
+                    'eael_ec_date_time_format!' => 'date'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_ec_time_format_custom',
+            [
+                'label' => esc_html__( 'Custom Time Format', 'essential-addons-for-elementor-lite' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => 'h:i:s A',
+                'condition' =>[
+                    'eael_ec_show_date' => 'yes',
+                    'eael_ec_time_format' => 'custom',
+                    'eael_ec_date_time_format!' => 'date'
+                ]
+            ]
+        );
+
+        $this->end_controls_section();
+
 
 	    /**
 	     * Data cache setting
@@ -814,6 +1055,9 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Calendar', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
+                'condition' =>[
+                    'eael_event_display_layout' => 'calendar'
+                ]
             ]
         );
 
@@ -1129,6 +1373,9 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Day', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
+                'condition' =>[
+                    'eael_event_display_layout' => 'calendar'
+                ]
             ]
         );
 
@@ -1204,6 +1451,9 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Time', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
+                'condition' =>[
+                    'eael_event_display_layout' => 'calendar'
+                ]
             ]
         );
 
@@ -1235,6 +1485,9 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Date', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
+                'condition' =>[
+                    'eael_event_display_layout' => 'calendar'
+                ]
             ]
         );
 
@@ -1389,6 +1642,9 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('List view', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
+                'condition' =>[
+                    'eael_event_display_layout' => 'calendar'
+                ]
             ]
         );
 
@@ -1475,6 +1731,9 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Events', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
+                'condition' =>[
+                    'eael_event_display_layout' => 'calendar'
+                ]
             ]
         );
 
@@ -1530,6 +1789,9 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Event Popup', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
+                'condition' =>[
+                    'eael_event_display_layout' => 'calendar'
+                ]
             ]
         );
 
@@ -1890,21 +2152,93 @@ class Event_Calendar extends Widget_Base
             'tomorrow' => __('Tomorrow', 'essential-addons-for-elementor-lite'),
         ];
 
-        echo '<div class="eael-event-calendar-wrapper">';
+        echo '<div class="eael-event-calendar-wrapper layout-'. esc_attr( $settings['eael_event_display_layout'] ) .'">';
 
-        echo '<div id="eael-event-calendar-' . $this->get_id() . '" class="eael-event-calendar-cls"
+		if ( $settings['eael_event_display_layout'] === 'calendar' ) {
+
+			echo '<div id="eael-event-calendar-' . $this->get_id() . '" class="eael-event-calendar-cls"
             data-cal_id = "' . $this->get_id() . '"
             data-locale = "' . $local . '"
-            data-translate = "' . htmlspecialchars(json_encode($translate_date), ENT_QUOTES, 'UTF-8') . '"
+            data-translate = "' . htmlspecialchars( json_encode( $translate_date ), ENT_QUOTES, 'UTF-8' ) . '"
             data-defaultview = "' . $default_view . '"
             data-defaultdate = "' . $default_date . '"
             data-time_format = "' . $time_format . '"
             data-event_limit = "' . $event_limit . '"
-            data-events="' . htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8') . '"
-            data-first_day="' . $settings['eael_event_calendar_first_day'] . '"></div>
-            ' . $this->eaelec_load_event_details() . '
-        </div>';
+            data-events="' . htmlspecialchars( json_encode( $data ), ENT_QUOTES, 'UTF-8' ) . '"
+            data-first_day="' . $settings['eael_event_calendar_first_day'] . '"></div>';
+
+		}
+		else{
+			$this->eaelec_display_table( $data, $settings );
+		}
+        echo $this->eaelec_load_event_details() . '</div>';
     }
+
+	public function eaelec_display_table($data, $settings){
+		?>
+        <div class="ea-ec-search-wrap ea-ec-search-right">
+            <input type="search" placeholder="Search" class="eael-event-calendar-table-search">
+        </div>
+		<table class="eael-event-calendar-table ea-ec-table-paginated ea-ec-table-sortable" data-items-per-page="10">
+			<thead>
+			<tr style="display: table-row;">
+                <?php
+                if ( $settings['eael_ec_show_title'] === 'yes' ) {
+                    echo '<th>' . Helper::eael_wp_kses( $settings['eael_ec_title_label'] ) . '</th>';
+                }
+                if ( $settings['eael_ec_show_description'] === 'yes' ) {
+                    echo '<th>' . Helper::eael_wp_kses( $settings['eael_ec_desc_label'] ) . '</th>';
+                }
+                if ( $settings['eael_ec_show_date'] === 'yes' ) {
+                    echo '<th>' . Helper::eael_wp_kses( $settings['eael_ec_date_label'] ) . '</th>';
+                }
+                ?>
+			</tr>
+			</thead>
+			<tbody>
+				<?php
+                $item_count  = 1;
+                $date_format = $settings['eael_ec_date_format'] != 'custom' ? $settings['eael_ec_date_format'] : $settings['eael_ec_date_format_custom'];
+                $time_format = $settings['eael_ec_time_format'] != 'custom' ? $settings['eael_ec_time_format'] : $settings['eael_ec_time_format_custom'];
+
+
+                if ( $settings['eael_ec_date_time_format'] === 'date-time' ){
+
+                    $date_format = $date_format . $settings['eael_ec_date_time_separator'] . $time_format;
+                }
+                elseif ( $settings['eael_ec_date_time_format'] === 'time-date' ){
+                    $date_format = $time_format . $settings['eael_ec_date_time_separator'] . $date_format;
+                }
+                elseif ( $settings['eael_ec_date_time_format'] === 'time' ){
+                    $date_format = $time_format;
+                }
+
+                foreach ( $data as $event ) {
+                    $style = $item_count <= 10 ? 'display: table-row;' : 'display: none;';
+                    $item_count ++;
+                    echo "<tr style='" . $style . "'>";
+                    if ( $settings['eael_ec_show_title'] === 'yes' ) {
+                        echo '<td>' . Helper::eael_wp_kses( $event['title'] ) . '</td>';
+                    }
+                    if ( $settings['eael_ec_show_description'] === 'yes' ) {
+                        echo '<td>' . Helper::eael_wp_kses( $event['description'] ) . '</td>';
+                    }
+                    if ( $settings['eael_ec_show_date'] === 'yes' ) {
+                        $start = date( $date_format, strtotime( $event['start'] ) );
+                        $end   = date( $date_format, strtotime( $event['end'] ) );
+                        $separator = $settings['eael_ec_date_to_date_separator'];
+                        $date  = sprintf( '%s %s %s', $start,$separator, $end );
+                        echo '<td>' . Helper::eael_wp_kses( $date ) . '</td>';
+                    }
+                    echo "</tr>";
+                }
+				?>
+			</tbody>
+		</table>
+        <div class="eael-event-calendar-pagination ea-ec-pagination-button"></div>
+        <?php
+//		echo_pre($data);
+	}
 
     protected function eaelec_load_event_details()
     {
