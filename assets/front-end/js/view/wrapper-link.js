@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("console.log('wrapper link');\n\n//# sourceURL=webpack:///./src/js/view/wrapper-link.js?");
+eval("var EaelWrapperLink = function EaelWrapperLink($scope, $) {\n  if ($scope.data(\"eael-wrapper-link\") !== undefined) {\n    var wrapperData = $scope.data(\"eael-wrapper-link\"),\n      target = wrapperData.is_external === 'on' ? '_blank' : '_self';\n    $scope.on('click', function () {\n      var anchor = document.createElement('a');\n      anchor.href = wrapperData.url;\n      anchor.target = target;\n      if (wrapperData.nofollow === 'on') {\n        anchor.rel = 'nofollow';\n      }\n      anchor.click();\n    });\n  }\n};\njQuery(window).on('elementor/frontend/init', function () {\n  elementorFrontend.hooks.addAction('frontend/element_ready/global', EaelWrapperLink);\n});\n\n//# sourceURL=webpack:///./src/js/view/wrapper-link.js?");
 
 /***/ })
 
