@@ -226,6 +226,11 @@
 }
 .eael-event-calendar-wrapper.layout-table .eael-event-calendar-pagination a {
   display: inline-block;
+  border: 1px solid #eee;
+  margin: 2px;
+  padding: 3px 8px;
+  font-size: 14px;
+  border-radius: 4px;
 }
 .elementor-page .entry-content .eael-event-calendar-wrapper a {
   text-decoration: none;
