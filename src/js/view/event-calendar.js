@@ -431,7 +431,7 @@ var EventCalendar = function ($scope, $) {
 						)
 							? "button"
 							: "select";
-						console.log(pagination.classList)
+
 						currentPage =
 							paginationType == "button"
 								? pagination.querySelector(
