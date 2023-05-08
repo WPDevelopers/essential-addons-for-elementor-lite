@@ -166,6 +166,10 @@ class Elements_Manager {
 			}
 		}
 
+		if ( ! empty( $element['settings']['eael_wrapper_link'] ) ) {
+			$list['wrapper-link'] = 'wrapper-link';
+		}
+
 		return $list;
 	}
 
