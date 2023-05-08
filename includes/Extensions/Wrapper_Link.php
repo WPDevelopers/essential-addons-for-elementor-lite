@@ -59,11 +59,11 @@ class Wrapper_Link {
 	public function before_render( $element ) {
 		$wrapper_link_settings = $element->get_settings_for_display( 'eael_wrapper_link' );
 
-		if ( ! empty( $wrapper_link_settings['url'] ) ) {
+		if ( ! empty( $element->get_settings_for_display( 'eael_wrapper_link_switch' ) ) && ! empty( $wrapper_link_settings['url'] ) ) {
 			unset( $wrapper_link_settings['custom_attributes'] );
 
 			$element->add_render_attribute( '_wrapper',
-				[ 'data-eael-wrapper-link' => wp_json_encode( $wrapper_link_settings ) ]
+				[ 'data-eael-wrapper-link' => wp_json_encode( $wrapper_link_settings ), 'linkon' => 'meghla' ],
 			);
 		}
 	}
