@@ -2201,6 +2201,23 @@ class Pricing_Table extends Widget_Base
 	    $settings['eael_pricing_table_onsale_price'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_onsale_price']);
 	    $settings['eael_pricing_table_price_cur'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_price_cur']);
 	    $settings['eael_pricing_table_btn'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_btn']);
+        
+        $this->add_render_attribute('eael_pricing_button', [
+            'class' => [ 'eael-pricing-button' ],
+        ]);
+
+        if ( ! empty( $settings['eael_pricing_table_btn_link']['url'] ) ) {
+            $this->add_link_attributes( 'eael_pricing_button', $settings['eael_pricing_table_btn_link'] );
+        }
+        
+        if ( ! empty( $settings['eael_pricing_table_btn_link']['is_external'] ) ) {
+            $this->add_render_attribute('eael_pricing_button', 'target', '_blank');
+        }
+
+        if ( ! empty( $settings['eael_pricing_table_btn_link']['nofollow'] ) ) {
+            $this->add_render_attribute('eael_pricing_button', 'rel', 'nofollow');
+        }
+        
         if ('yes' === $settings['eael_pricing_table_onsale']) {
             if ($settings['eael_pricing_table_price_cur_placement'] == 'left') {
                 $pricing = '<del class="original-price">
@@ -2256,7 +2273,7 @@ class Pricing_Table extends Widget_Base
                     </div>
 	                <?php if($settings['eael_pricing_table_button_show']=='yes'): ?>
                     <div class="footer">
-                        <a href="<?php echo esc_url(isset($table_btn_link['url'])?$table_btn_link['url']:''); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> class="eael-pricing-button">
+                        <a <?php echo $this->get_render_attribute_string('eael_pricing_button'); ?> >
                             <?php if ('left' == $icon_position) : ?>
                                 <?php if (empty($settings['eael_pricing_table_button_icon']) || isset($settings['__fa4_migrated']['eael_pricing_table_button_icon_new'])) {
                                     Icons_Manager::render_icon( $settings['eael_pricing_table_button_icon_new'], [ 'class' => 'fa-icon-left' ] );
@@ -2304,7 +2321,7 @@ class Pricing_Table extends Widget_Base
                     </div>
 	                <?php if($settings['eael_pricing_table_button_show']=='yes'): ?>
                     <div class="footer">
-                        <a href="<?php echo esc_url($settings['eael_pricing_table_btn_link']['url']); ?>" <?php echo $target; ?> <?php echo $nofollow; ?> class="eael-pricing-button">
+                        <a <?php echo $this->get_render_attribute_string('eael_pricing_button'); ?> >
                             <?php if ('left' == $icon_position) : ?>
                                 <?php if (empty($settings['eael_pricing_table_button_icon']) || isset($settings['__fa4_migrated']['eael_pricing_table_button_icon_new'])) {
                                     Icons_Manager::render_icon( $settings['eael_pricing_table_button_icon_new'], [ 'class' => 'fa-icon-left'] );
