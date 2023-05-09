@@ -103,11 +103,9 @@ class Asset_Builder {
 		add_action( 'after_delete_post', [ $this, 'delete_cache_data' ] );
 
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_asset_load' ], 100 );
-        if ( did_action('wp_enqueue_scripts') ){
-            add_action( 'elementor/frontend/before_enqueue_styles', [ $this, 'ea_before_enqueue_styles' ] );
-            add_action( 'elementor/theme/register_locations', [ $this, 'load_asset_per_location' ], 20 );
-            add_filter( 'elementor/files/file_name', [ $this, 'load_asset_per_file' ] );
-        }
+		add_action( 'elementor/frontend/before_enqueue_styles', [ $this, 'ea_before_enqueue_styles' ] );
+		add_action( 'elementor/theme/register_locations', [ $this, 'load_asset_per_location' ], 20 );
+		add_filter( 'elementor/files/file_name', [ $this, 'load_asset_per_file' ] );
 	}
 
 	/**
