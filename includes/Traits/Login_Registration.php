@@ -797,13 +797,6 @@ trait Login_Registration {
 			$err_msg = esc_html__( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
 		}
 
-		$rp_data = [
-			'rp_key' => ! empty( $_POST['rp_key'] ) ? sanitize_text_field( $_POST['rp_key'] ) : '',
-			'rp_login' => ! empty( $_POST['rp_login'] ) ? sanitize_text_field( $_POST['rp_login'] ) : '',
-		];
-
-		update_option( 'eael_resetpassword_rp_data_' . esc_attr( $widget_id ), maybe_serialize( $rp_data ), false );
-
 		update_option( 'eael_show_reset_password_on_form_submit_' . $widget_id, true, false );
 
 		if (!empty( $err_msg )){
@@ -885,8 +878,17 @@ trait Login_Registration {
 		}
 
 		if ( ( ! count( $errors ) ) && isset( $_POST['eael-pass1'] ) && ! empty( $_POST['eael-pass1'] ) ) {
-			$rp_login = isset( $_POST['rp_login']) ? sanitize_text_field( $_POST['rp_login'] ) : '';
-			$user = get_user_by( 'login', $rp_login );
+			$rp_data_db = get_option('eael_resetpassword_rp_data_' . $this->get_id());
+			$rp_data_db = !empty( $rp_data ) ? maybe_unserialize($rp_data) : [];
+			
+			$rp_data_db['rp_key'] = ! empty( $rp_data_db['rp_key'] ) ? $rp_data_db['rp_key'] : '';
+			$rp_data_db['rp_login'] = ! empty( $rp_data_db['rp_login'] ) ? $rp_data_db['rp_login'] : '';
+			
+			$user = check_password_reset_key( $rp_data_db['rp_key'], $rp_data_db['rp_login'] );
+
+			if ( isset( $_POST['pass1'] ) && ! hash_equals( $rp_data_db['rp_key'], $_POST['rp_key'] ) ) {
+				$user = false;
+			}
 			
 			if( $user || ! is_wp_error( $user ) ){
 				reset_password( $user, sanitize_text_field( $_POST['eael-pass1'] ) );
@@ -913,6 +915,8 @@ trait Login_Registration {
 				}
 
 			} else {
+				delete_option('eael_resetpassword_rp_data_' . esc_attr( $this->get_id() ) );
+				
 				$data['message'] = isset( $settings['error_resetpassword'] ) ? __( Helper::eael_wp_kses( $settings['error_resetpassword'] ), 'essential-addons-for-elementor-lite' ) : esc_html__( 'Invalid user name found!', 'essential-addons-for-elementor-lite' );
 				
 				$success_key = 'eael_resetpassword_success_' . esc_attr( $widget_id );
