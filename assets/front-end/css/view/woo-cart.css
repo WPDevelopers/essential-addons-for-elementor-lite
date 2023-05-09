@@ -734,6 +734,13 @@ body.theme-woodmart.eael-woo-cart .eael-woo-cart-wrapper .cart-totals-inner {
   padding: 0;
   border: none;
 }
+.theme-blocksy .eael-woo-cart-table .product-quantity .ct-increase,
+.theme-blocksy .eael-woo-cart-table .product-quantity .ct-decrease {
+  display: none;
+}
+.theme-blocksy .eael-woo-cart-table .product-quantity .quantity input[type=number] {
+  padding: 10px !important;
+}
 @media (max-width: 1024px) {
   .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr {
     display: table-row;
