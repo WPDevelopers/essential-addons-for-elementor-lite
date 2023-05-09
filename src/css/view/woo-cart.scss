@@ -108,6 +108,13 @@ $thumb-bg-1: #E5F6FC;
             box-shadow: none;
         }
 
+        .eael-cart-clear-btn {
+            .button {
+                // margin-bottom: 15px;
+                text-align: center;
+            }
+        }
+
         .eael-woo-cart-table {
             border-collapse: separate;
             border-spacing: 0 13px;
@@ -327,7 +334,8 @@ $thumb-bg-1: #E5F6FC;
         }
     }
 
-    .eael-cart-coupon-and-collaterals {
+    .eael-cart-coupon-and-collaterals,
+    .eael-cart-clear-btn {
         &::before,
         &::after {
             content: '';
@@ -741,7 +749,8 @@ $thumb-bg-1: #E5F6FC;
             }
         }
 
-        .eael-cart-coupon-and-collaterals {
+        .eael-cart-coupon-and-collaterals,
+        .eael-cart-clear-btn {
             button,
             .button,
             button:not(:hover):not(:active),
@@ -953,7 +962,8 @@ body.theme-woodmart.eael-woo-cart .eael-woo-cart-wrapper {
             }
         }
 
-        .eael-cart-coupon-and-collaterals {
+        .eael-cart-coupon-and-collaterals,
+        .eael-cart-clear-btn {
             .eael-cart-coupon-wrapper,
             .cart-collaterals {
                 width: 100%;
@@ -1071,6 +1081,12 @@ body.theme-woodmart.eael-woo-cart .eael-woo-cart-wrapper {
                     padding-left: 15px;
                     padding-right: 15px;
                 }
+            }
+
+            .eael-cart-clear-btn {
+                width: 100% !important;
+                padding-left: 15px;
+                padding-right: 15px;
             }
         }
     }

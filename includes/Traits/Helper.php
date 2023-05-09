@@ -220,6 +220,15 @@ trait Helper
 		return $html;
 	}
 
+    public function eael_woo_cart_empty_action() {
+        if ( isset( $_GET['empty_cart'] ) && 'yes' === esc_html( $_GET['empty_cart'] ) ) {
+            WC()->cart->empty_cart();
+
+            $referer  = wp_get_referer() ? esc_url( remove_query_arg( 'empty_cart' ) ) : wc_get_cart_url();
+            wp_safe_redirect( $referer );
+        }
+    }
+
     /**
 	 * Update Checkout Cart Quantity via ajax call.
 	 */
