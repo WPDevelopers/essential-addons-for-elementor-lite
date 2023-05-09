@@ -146,6 +146,8 @@ trait Ajax_Handler {
 			$args['tax_query'] = [
 				$this->sanitize_taxonomy_data( $_REQUEST['taxonomy'] ),
 			];
+
+			$args['tax_query'] = $this->eael_terms_query_multiple( $args['tax_query'] );
 		}
 
 		if ( $class == '\Essential_Addons_Elementor\Elements\Post_Grid' ) {
@@ -641,8 +643,10 @@ trait Ajax_Handler {
 			$args['tax_query'] = [
 				$this->sanitize_taxonomy_data( $_REQUEST['taxonomy'] ),
 			];
-		}
 
+			$args['tax_query'] = $this->eael_terms_query_multiple( $args['tax_query'] );
+		}
+		
 		$template_info = $this->eael_sanitize_template_param( $_REQUEST['template_info'] );
 
 		if ( $template_info ) {
@@ -683,6 +687,47 @@ trait Ajax_Handler {
 			}
 		}
 		wp_die();
+	}
+
+	public function eael_terms_query_multiple( $args_tax_query = [] ){
+		if ( strpos($args_tax_query[0]['taxonomy'], '|') !== false ) {
+			$args_tax_query_item = $args_tax_query[0];
+			
+			//Query for category and tag
+			$args_multiple['tax_query'] = [];
+
+			if( isset( $args_tax_query_item['terms'] ) ){
+				$args_multiple['tax_query'][] = [
+					'taxonomy' => 'product_cat',
+					'field' => 'term_id',
+					'terms' => $args_tax_query_item['terms'],
+				];
+			}
+			
+			if( isset( $args_tax_query_item['terms_tag'] ) ){
+				$args_multiple['tax_query'][] = [
+					'taxonomy' => 'product_tag',
+					'field' => 'term_id',
+					'terms' => $args_tax_query_item['terms_tag'],
+				];
+			}
+			
+
+			if ( count( $args_multiple['tax_query'] ) ) {
+				$args_multiple['tax_query']['relation'] = 'OR';
+			}
+
+			$args_tax_query = $args_multiple['tax_query'];
+		}
+		
+		if( isset( $args_tax_query[0]['terms_tag'] ) ){
+			if( 'product_tag' === $args_tax_query[0]['taxonomy'] ){
+				$args_tax_query[0]['terms'] = $args_tax_query[0]['terms_tag'];
+			}
+			unset($args_tax_query[0]['terms_tag']);
+		}
+
+		return $args_tax_query;
 	}
 
 	/**
