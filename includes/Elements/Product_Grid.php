@@ -1488,7 +1488,7 @@ class Product_Grid extends Widget_Base
         $this->start_controls_section(
             'eael_section_product_grid_add_to_cart_styles',
             [
-                'label' => esc_html__('Add to Cart Button Styles', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Button Styles', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_product_grid_style_preset!' => [
@@ -1512,6 +1512,7 @@ class Product_Grid extends Widget_Base
                     '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button,
                     {{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button,
                     {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link,
+                    {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .add_to_wishlist,
                     {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
@@ -1527,6 +1528,7 @@ class Product_Grid extends Widget_Base
 	                '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button,
                     {{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button,
                     {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link,
+                    {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .add_to_wishlist,
                     {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
@@ -1557,6 +1559,7 @@ class Product_Grid extends Widget_Base
                     {{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .add_to_wishlist' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -1570,6 +1573,7 @@ class Product_Grid extends Widget_Base
                 'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button,
                 {{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button,
                 {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link,
+                {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .add_to_wishlist,
                 {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart',
                 'condition' => [
                     'eael_product_grid_add_to_cart_is_gradient_bg' => 'yes'
@@ -1588,6 +1592,7 @@ class Product_Grid extends Widget_Base
                     {{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button' => 'background-color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link' => 'background-color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .add_to_wishlist' => 'background-color: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_product_grid_add_to_cart_is_gradient_bg' => ''
@@ -1602,6 +1607,7 @@ class Product_Grid extends Widget_Base
                 'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button, 
                 {{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button, 
                 {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link, 
+                {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .add_to_wishlist, 
                 {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart',
             ]
         );
@@ -1633,6 +1639,7 @@ class Product_Grid extends Widget_Base
                     {{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button:hover' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link:hover' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .add_to_wishlist:hover' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -1645,6 +1652,7 @@ class Product_Grid extends Widget_Base
                 'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button:hover,
                 {{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button:hover,
                 {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link:hover,
+                {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .add_to_wishlist:hover,
                 {{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart:hover',
                 'condition' => [
                     'eael_product_grid_add_to_cart_is_gradient_bg' => 'yes'
@@ -1662,6 +1670,7 @@ class Product_Grid extends Widget_Base
                     {{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button:hover' => 'background-color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link:hover' => 'background-color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart:hover' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .add_to_wishlist:hover' => 'background-color: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_product_grid_add_to_cart_is_gradient_bg' => '',
@@ -1680,6 +1689,7 @@ class Product_Grid extends Widget_Base
                     {{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button:hover' => 'border-color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .product-link:hover' => 'border-color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .added_to_cart:hover' => 'border-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-grid.eael-product-overlay .woocommerce ul.products li.product .overlay .add_to_wishlist:hover' => 'border-color: {{VALUE}};',
                 ],
             ]
         );
