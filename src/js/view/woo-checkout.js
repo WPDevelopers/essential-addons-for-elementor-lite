@@ -144,7 +144,7 @@ let change_button_text = function (){
 		}
 	}, 500);
 }
-jQuery(document.body).on('update_checkout payment_method_selected', function(event) {
+jQuery(document.body).on('update_checkout payment_method_selected updated_checkout', function(event) {
 	change_button_text();
 }).on('click', '.woocommerce-checkout-payment li label', function (){
 	change_button_text();
