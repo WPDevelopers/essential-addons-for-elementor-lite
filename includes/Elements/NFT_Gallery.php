@@ -57,7 +57,7 @@ class NFT_Gallery extends Widget_Base {
 	}
 
 	public function get_custom_help_url() {
-		return 'https://essential-addons.com/elementor/docs/nft-gallery/';
+		return 'https://essential-addons.com/elementor/docs/ea-nft-gallery/';
 	}
 
 	protected function register_controls() {
