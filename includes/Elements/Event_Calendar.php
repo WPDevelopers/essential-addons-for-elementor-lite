@@ -1934,6 +1934,8 @@ class Event_Calendar extends Widget_Base
             data-defaultdate = "' . $default_date . '"
             data-time_format = "' . $time_format . '"
             data-event_limit = "' . $event_limit . '"
+            data-hideDetailsLink= "' . $settings['eael_event_details_link_hide'] . '"
+            data-detailsButtonText = "' . Helper::eael_wp_kses( $settings['eael_event_details_text'] ) . '"
             data-events="' . htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8') . '"
             data-first_day="' . $settings['eael_event_calendar_first_day'] . '"></div>
             ' . $this->eaelec_load_event_details() . '
@@ -2014,7 +2016,6 @@ class Event_Calendar extends Widget_Base
 		            'borderColor'       => ! empty( $settings_eael_event_global_popup_ribbon_color ) ? $settings_eael_event_global_popup_ribbon_color : '#10ecab',
 		            'textColor'         => $settings_eael_event_global_text_color,
 		            'color'             => $settings_eael_event_global_bg_color,
-                    'hide_details_link' => $settings['eael_event_details_link_hide'],
                     'url'               => esc_url_raw( $event["eael_event_link"]["url"] ),
 		            'allDay'            => $event['eael_event_all_day'],
 		            'external'          => $event['eael_event_link']['is_external'],
