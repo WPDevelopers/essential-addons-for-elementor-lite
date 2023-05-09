@@ -177,7 +177,49 @@ class Filterable_Gallery extends Widget_Base
                 ],
             ]
         );
-        
+
+        $this->add_control(
+            'eael_search_among_all',
+            [
+                'label' => __('Search Full Gallery ?', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default' => '',
+                'condition' => [
+                      'eael_fg_caption_style' =>  'layout_3'
+                ]
+            ]
+        );
+
+        $this->add_control(
+			'eael_search_among_note',
+			[
+				'label' => esc_html__( '', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::RAW_HTML,
+				'raw' => esc_html__( 'Enabling this will load all prior items up to the one you searched for.', 'essential-addons-for-elementor-lite' ),
+				'content_classes' => 'eael-warning',
+				'condition' => [
+                        'eael_search_among_all' => 'yes',
+                        'eael_fg_caption_style' =>  'layout_3'
+                ]
+			]
+		);
+
+        $this->add_control(
+			'eael_fg_not_found_text',
+			[
+				'label' => esc_html__( 'Not Found Text', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => esc_html__( 'No Items Found', 'essential-addons-for-elementor-lite' ),
+				'placeholder' => esc_html__( 'Not Found Text', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+                        'eael_fg_caption_style' =>  'layout_3'
+                ]
+			]
+		);
+
         $this->add_control(
             'eael_fg_grid_hover_style',
             [
@@ -941,7 +983,7 @@ class Filterable_Gallery extends Widget_Base
         $this->start_controls_section(
             'eael_section_fg_control_style_settings',
             [
-                'label' => esc_html__('Controls', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Control', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_fg_caption_style!' => 'layout_3'
@@ -1125,7 +1167,7 @@ class Filterable_Gallery extends Widget_Base
         $this->start_controls_section(
             'eael_section_fg_item_style_settings',
             [
-                'label' => esc_html__('Items', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Item', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1356,7 +1398,7 @@ class Filterable_Gallery extends Widget_Base
         $this->start_controls_section(
             'fg_item_thumb_style',
             [
-                'label' => esc_html__('Thumbnail Style', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Thumbnail', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_fg_caption_style' => 'layout_3'
@@ -1594,7 +1636,7 @@ class Filterable_Gallery extends Widget_Base
                 ]
 			]
 		);
-        
+
         $this->end_controls_section();
         
         /**
@@ -2048,7 +2090,7 @@ class Filterable_Gallery extends Widget_Base
         $this->start_controls_section(
             'fg_item_price_style',
             [
-                'label' => esc_html__('Price Style', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Price', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_fg_caption_style' => 'layout_3'
@@ -2084,7 +2126,7 @@ class Filterable_Gallery extends Widget_Base
         $this->start_controls_section(
             'fg_item_ratings_style',
             [
-                'label' => esc_html__('Ratings Style', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Ratings', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_fg_caption_style' => 'layout_3'
@@ -2131,7 +2173,7 @@ class Filterable_Gallery extends Widget_Base
         $this->start_controls_section(
             'fg_item_category_style',
             [
-                'label' => esc_html__('Category Style', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Category', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_fg_caption_style' => 'layout_3'
@@ -2190,7 +2232,7 @@ class Filterable_Gallery extends Widget_Base
         $this->start_controls_section(
             'fg_search_form_style',
             [
-                'label' => esc_html__('Search Form Style', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Search Form', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_fg_caption_style' => 'layout_3'
@@ -2409,11 +2451,13 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label' => __('Placeholder Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
+                'default' => '#858e9a',
                 'selectors' => [
                     '{{WRAPPER}} .fg-layout-3-search-box input[type="text"]::-webkit-input-placeholder' => 'color: {{VALUE}}',
                     '{{WRAPPER}} .fg-layout-3-search-box input[type="text"]::-moz-placeholder'  => 'color: {{VALUE}}',
                     '{{WRAPPER}} .fg-layout-3-search-box input[type="text"]:-ms-input-placeholder' => 'color: {{VALUE}}',
-                    '{{WRAPPER}} .fg-layout-3-search-box input[type="text"]:-moz-placeholder'   => 'color: {{VALUE}}'
+                    '{{WRAPPER}} .fg-layout-3-search-box input[type="text"]:-moz-placeholder'   => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .fg-layout-3-search-box input'   => 'color: {{VALUE}}'
                 ]
             ]
         );
@@ -2549,7 +2593,137 @@ class Filterable_Gallery extends Widget_Base
         );
         
         $this->end_controls_section();
-        
+
+        /**
+         * Style Tab: Not found text
+         * -------------------------------------------------
+         */
+        $this->start_controls_section(
+            'eael_not_found_text_style',
+            [
+                'label' => esc_html__('Not found text', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'eael_fg_not_found_text_typography',
+				'selector' => '{{WRAPPER}} #eael-fg-no-items-found',
+			]
+		);
+
+        $this->add_control(
+			'eael_fg_not_found_text_align',
+			[
+				'label' => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
+				'type' => \Elementor\Controls_Manager::CHOOSE,
+				'options' => [
+					'left' => [
+						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-text-align-center',
+					],
+					'right' => [
+						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-text-align-right',
+					],
+				],
+				'default' => 'center',
+				'toggle' => true,
+				'selectors' => [
+					'{{WRAPPER}} #eael-fg-no-items-found' => 'text-align: {{VALUE}};',
+				],
+			]
+		);
+
+        $this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'eael_fg_not_found_text_bg_color',
+				'types' => [ 'classic', 'gradient', 'video' ],
+				'selector' => '{{WRAPPER}} #eael-fg-no-items-found',
+			]
+		);
+
+        $this->add_control(
+            'eael_fg_not_found_text_color',
+            [
+                'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#858e9a',
+                'selectors' => [
+                    '{{WRAPPER}} #eael-fg-no-items-found' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_not_found_text_padding',
+            [
+                'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} #eael-fg-no-items-found' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_not_found_text_margin',
+            [
+                'label' => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} #eael-fg-no-items-found' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'eael_not_found_text_border',
+                'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} #eael-fg-no-items-found',
+            ]
+        );
+
+        $this->add_control(
+            'eael_not_found_text_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'default' => [
+                    'size' => 0,
+                ],
+                'range' => [
+                    'px' => [
+                        'max' => 500,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} #eael-fg-no-items-found' => 'border-radius: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'eael_not_found_text_shadow',
+                'selector' => '{{WRAPPER}} #eael-fg-no-items-found',
+            ]
+        );
+
+        $this->end_controls_section();
+
         /**
          * Style Tab: Load More Button
          * -------------------------------------------------
@@ -3236,7 +3410,7 @@ class Filterable_Gallery extends Widget_Base
                 static $ea_link_repeater_index = 0;
 	            $link_key = 'link_' . $ea_link_repeater_index++;
 
-	            $this->add_link_attributes( $link_key, $item['link'] ); 
+	            $this->add_link_attributes( $link_key, $item['link'] );
                 $this->add_render_attribute( $link_key, 'aria-label', 'eael-item-maybe-link' );
                 ?>
                 <a <?php $this->print_render_attribute_string( $link_key ); ?>> <?php
@@ -3478,8 +3652,9 @@ class Filterable_Gallery extends Widget_Base
             'data-total-gallery-items' => count($settings['eael_fg_gallery_items']),
             'data-nomore-item-text' => $no_more_items_text,
         ]);
-        
+
         $this->add_render_attribute('gallery-items-wrap', 'data-settings', wp_json_encode($gallery_settings));
+        $this->add_render_attribute('gallery-items-wrap', 'data-search-all', esc_attr( $settings['eael_search_among_all'] ));
         if ('layout_3' == $settings['eael_fg_caption_style']) {
             $this->add_render_attribute( 'gallery-items-wrap', 'data-gallery-items', wp_json_encode( $this->render_layout_3_gallery_items(), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE ) );
         } else {
@@ -3509,7 +3684,14 @@ class Filterable_Gallery extends Widget_Base
                             echo $this->render_gallery_items()[$i];
                     }
                 }
+                if ( $settings['eael_fg_caption_style'] === 'layout_3' ):
                 ?>
+                <div id="eael-fg-no-items-found" style="display:none;">
+                    <?php
+                       echo Helper::eael_wp_kses( $settings['eael_fg_not_found_text'] );
+                    ?>
+                </div>
+                <?php endif; ?>
             </div>
             
             <?php
@@ -3657,6 +3839,24 @@ class Filterable_Gallery extends Widget_Base
                     // not necessary, just in case
                     $isotope_gallery.imagesLoaded().progress(function() {
                         $isotope_gallery.isotope('layout');
+                    });
+
+                    $(window).on("load", function () {
+                        $isotope_gallery.isotope("layout");
+                    });
+
+                    // layout gal, on click tabs
+                    $isotope_gallery.on("arrangeComplete", function () {
+                        $isotope_gallery.isotope("layout");
+                        let notFoundDiv = $('#eael-fg-no-items-found', $scope),
+					        height = parseFloat(notFoundDiv.css('margin-top')) + parseFloat(notFoundDiv.css('margin-bottom')) + parseFloat(notFoundDiv.css('padding-top')) + parseFloat(notFoundDiv.css('padding-bottom'));
+
+				        $('.eael-filter-gallery-container', $scope).css('min-height', height+20);
+                        if (!$isotope_gallery.data('isotope').filteredItems.length) {
+                            $('#eael-fg-no-items-found').show();
+                        } else {
+                            $('#eael-fg-no-items-found').hide();
+                        }
                     });
 
                     // resize
