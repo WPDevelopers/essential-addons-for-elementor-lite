@@ -2098,7 +2098,7 @@ class Event_Calendar extends Widget_Base
 
             foreach ($data->items as $key => $item) {
                 if ($item->status !== 'confirmed') {
-                    continue;
+//                    continue;
                 }
                 $all_day = '';
                 if (isset($item->start->date)) {
