@@ -42,7 +42,7 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
     ?>
     <li <?php post_class( ['product', 'swiper-slide'] ); ?>>
         <div class="eael-product-carousel">
-            <div class="carousel-overlay"></div>
+            <div class="carousel-overlay <?php echo $should_print_image_clickable ? esc_attr( 'eael-img-clickable' ) : ''; ?>"></div>
             <div class="product-image-wrap">
                 <div class="image-wrap">
 		            <?php
