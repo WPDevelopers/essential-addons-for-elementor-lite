@@ -13,8 +13,21 @@ use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
 use Elementor\Icons_Manager;
 use \Elementor\Widget_Base;
+use Essential_Addons_Elementor\Classes\Helper;
 
 class Business_Reviews extends Widget_Base {
+
+	/**
+	 * Elementor Display Settings
+	 * @return mixed An array of all settings, or a single value if `$setting` was specified.
+	 */
+	protected $settings_data;
+
+	/**
+	 * Business Reviews Settings
+	 * @return array
+	 */
+	protected $business_reviews_data;
 
 	public function get_name() {
 		return 'eael-business-reviews';
@@ -148,6 +161,18 @@ class Business_Reviews extends Widget_Base {
 				'min'         => 0,
 				'default'     => 0,
 				'description' => __( 'Cache expiration time (in Minutes), 0 or empty sets 1 day.', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_localbusiness_schema',
+			[
+				'label'        => __( 'Local Business Schema', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Enable', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'Disable', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => '',
 			]
 		);
 
@@ -2431,75 +2456,76 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	public function get_business_reviews_settings() {
-		$settings                                     = $this->get_settings();
-		$settings['eael_business_reviews_source_key'] = get_option( 'eael_br_google_place_api_key' );
+		$settings                                     		= $this->get_settings();
+		$settings['eael_business_reviews_source_key'] 		= get_option( 'eael_br_google_place_api_key' );
 
-		$business_reviews                            = [];
-		$business_reviews['source']                  = ! empty( $settings['eael_business_reviews_sources'] ) ? esc_html( $settings['eael_business_reviews_sources'] ) : 'google-reviews';
-		$business_reviews['place_id']                = ! empty( $settings['eael_business_reviews_business_place_id'] ) ? esc_html( $settings['eael_business_reviews_business_place_id'] ) : 'ChIJj61dQgK6j4AR4GeTYWZsKWw';
-		$business_reviews['api_key']                 = ! empty( $settings['eael_business_reviews_source_key'] ) ? esc_html( $settings['eael_business_reviews_source_key'] ) : '';
-		$business_reviews['reviews_sort']            = ! empty( $settings['eael_business_reviews_sort_by'] ) ? esc_html( $settings['eael_business_reviews_sort_by'] ) : 'most_relevant';
-		$business_reviews['review_text_translation'] = ! empty( $settings['eael_business_reviews_review_text_translation'] ) && 'yes' === $settings['eael_business_reviews_review_text_translation'] ? 1 : 0;
+		$business_reviews                            		= [];
+		$business_reviews['source']                  		= ! empty( $settings['eael_business_reviews_sources'] ) ? esc_html( $settings['eael_business_reviews_sources'] ) : 'google-reviews';
+		$business_reviews['place_id']                		= ! empty( $settings['eael_business_reviews_business_place_id'] ) ? esc_html( $settings['eael_business_reviews_business_place_id'] ) : 'ChIJj61dQgK6j4AR4GeTYWZsKWw';
+		$business_reviews['api_key']                 		= ! empty( $settings['eael_business_reviews_source_key'] ) ? esc_html( $settings['eael_business_reviews_source_key'] ) : '';
+		$business_reviews['reviews_sort']            		= ! empty( $settings['eael_business_reviews_sort_by'] ) ? esc_html( $settings['eael_business_reviews_sort_by'] ) : 'most_relevant';
+		$business_reviews['review_text_translation'] 		= ! empty( $settings['eael_business_reviews_review_text_translation'] ) && 'yes' === $settings['eael_business_reviews_review_text_translation'] ? 1 : 0;
 
-		$business_reviews['expiration'] = ! empty( $settings['eael_business_reviews_data_cache_time'] ) ? absint( $settings['eael_business_reviews_data_cache_time'] ) * MINUTE_IN_SECONDS : DAY_IN_SECONDS;
-		$business_reviews['md5']        = md5( $business_reviews['api_key'] . $business_reviews['reviews_sort'] . $business_reviews['review_text_translation'] . $this->get_id() );
-		$business_reviews['cache_key']  = "eael_{$business_reviews['source']}_{$business_reviews['place_id']}_{$business_reviews['expiration']}_{$business_reviews['md5']}_brev_cache";
+		$business_reviews['expiration'] 					= ! empty( $settings['eael_business_reviews_data_cache_time'] ) ? absint( $settings['eael_business_reviews_data_cache_time'] ) * MINUTE_IN_SECONDS : DAY_IN_SECONDS;
+		$business_reviews['md5']        					= md5( $business_reviews['api_key'] . $business_reviews['reviews_sort'] . $business_reviews['review_text_translation'] . $this->get_id() );
+		$business_reviews['cache_key']  					= "eael_{$business_reviews['source']}_{$business_reviews['place_id']}_{$business_reviews['expiration']}_{$business_reviews['md5']}_brev_cache";
 
-		$business_reviews['layout'] = ! empty( $settings['eael_business_reviews_items_layout'] ) ? $settings['eael_business_reviews_items_layout'] : 'slider';
-		$business_reviews['preset'] = ! empty( $settings['eael_business_reviews_style_preset_slider'] ) && 'slider' === $business_reviews['layout'] ? $settings['eael_business_reviews_style_preset_slider'] : 'preset-1';
-		$business_reviews['preset'] = ! empty( $settings['eael_business_reviews_style_preset_grid'] ) && 'grid' === $business_reviews['layout'] ? $settings['eael_business_reviews_style_preset_grid'] : $business_reviews['preset'];
+		$business_reviews['layout'] 						= ! empty( $settings['eael_business_reviews_items_layout'] ) ? $settings['eael_business_reviews_items_layout'] : 'slider';
+		$business_reviews['preset'] 						= ! empty( $settings['eael_business_reviews_style_preset_slider'] ) && 'slider' === $business_reviews['layout'] ? $settings['eael_business_reviews_style_preset_slider'] : 'preset-1';
+		$business_reviews['preset'] 						= ! empty( $settings['eael_business_reviews_style_preset_grid'] ) && 'grid' === $business_reviews['layout'] ? $settings['eael_business_reviews_style_preset_grid'] : $business_reviews['preset'];
 
-		$business_reviews['columns']        = ! empty( $settings['eael_business_reviews_column'] ) ? $settings['eael_business_reviews_column'] : 3;
-		$business_reviews['columns_tablet'] = ! empty( $settings['eael_business_reviews_column_tablet'] ) ? $settings['eael_business_reviews_column_tablet'] : 3;
-		$business_reviews['columns_mobile'] = ! empty( $settings['eael_business_reviews_column_mobile'] ) ? $settings['eael_business_reviews_column_mobile'] : 3;
+		$business_reviews['columns']        				= ! empty( $settings['eael_business_reviews_column'] ) ? $settings['eael_business_reviews_column'] : 3;
+		$business_reviews['columns_tablet'] 				= ! empty( $settings['eael_business_reviews_column_tablet'] ) ? $settings['eael_business_reviews_column_tablet'] : 3;
+		$business_reviews['columns_mobile'] 				= ! empty( $settings['eael_business_reviews_column_mobile'] ) ? $settings['eael_business_reviews_column_mobile'] : 3;
 
-		$business_reviews['loop']              = ! empty( $settings['eael_business_reviews_loop'] ) && 'yes' === $settings['eael_business_reviews_loop'] ? 1 : 0;
-		$business_reviews['arrows']            = ! empty( $settings['eael_business_reviews_arrows'] ) && 'yes' === $settings['eael_business_reviews_arrows'] ? 1 : 0;
-		$business_reviews['dots']              = ! empty( $settings['eael_business_reviews_dots'] ) && 'yes' === $settings['eael_business_reviews_dots'] ? 1 : 0;
-		$business_reviews['effect']            = ! empty( $settings['eael_business_reviews_transition_effect'] ) ? $settings['eael_business_reviews_transition_effect'] : 'slide';
-		$business_reviews['item_gap']          = ! empty( $settings['eael_business_reviews_item_gap']['size'] ) ? $settings['eael_business_reviews_item_gap']['size'] : 30;
-		$business_reviews['autoplay']          = ! empty( $settings['eael_business_reviews_autoplay'] ) && 'yes' === $settings['eael_business_reviews_autoplay'] ? 1 : 0;
-		$business_reviews['autoplay_delay']    = ! empty( $settings['eael_business_reviews_autoplay_delay']['size'] ) ? $settings['eael_business_reviews_autoplay_delay']['size'] : 3000;
-		$business_reviews['pause_on_hover']    = ! empty( $settings['eael_business_reviews_pause_on_hover'] ) && 'yes' === $settings['eael_business_reviews_pause_on_hover'] ? 1 : 0;
-		$business_reviews['grab_cursor']       = ! empty( $settings['eael_business_reviews_grab_cursor'] ) && 'yes' === $settings['eael_business_reviews_grab_cursor'] ? 1 : 0;
-		$business_reviews['speed']             = ! empty( $settings['eael_business_reviews_slider_speed']['size'] ) ? $settings['eael_business_reviews_slider_speed']['size'] : 1000;
-		$business_reviews['business_logo']     = ! empty( $settings['eael_business_reviews_business_logo'] ) && 'yes' === $settings['eael_business_reviews_business_logo'] ? 1 : 0;
-		$business_reviews['business_name']     = ! empty( $settings['eael_business_reviews_business_name'] ) && 'yes' === $settings['eael_business_reviews_business_name'] ? 1 : 0;
-		$business_reviews['business_rating']   = ! empty( $settings['eael_business_reviews_business_rating'] ) && 'yes' === $settings['eael_business_reviews_business_rating'] ? 1 : 0;
-		$business_reviews['business_address']  = ! empty( $settings['eael_business_reviews_business_address'] ) && 'yes' === $settings['eael_business_reviews_business_address'] ? 1 : 0;
-		$business_reviews['reviewer_photo']    = ! empty( $settings['eael_business_reviews_reviewer_photo'] ) && 'yes' === $settings['eael_business_reviews_reviewer_photo'] ? 1 : 0;
-		$business_reviews['reviewer_name']     = ! empty( $settings['eael_business_reviews_reviewer_name'] ) && 'yes' === $settings['eael_business_reviews_reviewer_name'] ? 1 : 0;
-		$business_reviews['review_time']       = ! empty( $settings['eael_business_reviews_review_time'] ) && 'yes' === $settings['eael_business_reviews_review_time'] ? 1 : 0;
-		$business_reviews['review_text']       = ! empty( $settings['eael_business_reviews_review_text'] ) && 'yes' === $settings['eael_business_reviews_review_text'] ? 1 : 0;
-		$business_reviews['review_rating']     = ! empty( $settings['eael_business_reviews_review_rating'] ) && 'yes' === $settings['eael_business_reviews_review_rating'] ? 1 : 0;
-		$business_reviews['review_1_star']     = empty( $settings['eael_business_reviews_review_1_star_hide'] ) ? 1 : 0;
-		$business_reviews['reviews_max_count'] = ! empty( $settings['eael_business_reviews_max_reviews'] ) ? intval( $settings['eael_business_reviews_max_reviews'] ) : 5;
+		$business_reviews['loop']              				= ! empty( $settings['eael_business_reviews_loop'] ) && 'yes' === $settings['eael_business_reviews_loop'] ? 1 : 0;
+		$business_reviews['arrows']            				= ! empty( $settings['eael_business_reviews_arrows'] ) && 'yes' === $settings['eael_business_reviews_arrows'] ? 1 : 0;
+		$business_reviews['dots']              				= ! empty( $settings['eael_business_reviews_dots'] ) && 'yes' === $settings['eael_business_reviews_dots'] ? 1 : 0;
+		$business_reviews['effect']            				= ! empty( $settings['eael_business_reviews_transition_effect'] ) ? $settings['eael_business_reviews_transition_effect'] : 'slide';
+		$business_reviews['item_gap']          				= ! empty( $settings['eael_business_reviews_item_gap']['size'] ) ? $settings['eael_business_reviews_item_gap']['size'] : 30;
+		$business_reviews['autoplay']          				= ! empty( $settings['eael_business_reviews_autoplay'] ) && 'yes' === $settings['eael_business_reviews_autoplay'] ? 1 : 0;
+		$business_reviews['autoplay_delay']    				= ! empty( $settings['eael_business_reviews_autoplay_delay']['size'] ) ? $settings['eael_business_reviews_autoplay_delay']['size'] : 3000;
+		$business_reviews['pause_on_hover']    				= ! empty( $settings['eael_business_reviews_pause_on_hover'] ) && 'yes' === $settings['eael_business_reviews_pause_on_hover'] ? 1 : 0;
+		$business_reviews['grab_cursor']       				= ! empty( $settings['eael_business_reviews_grab_cursor'] ) && 'yes' === $settings['eael_business_reviews_grab_cursor'] ? 1 : 0;
+		$business_reviews['speed']             				= ! empty( $settings['eael_business_reviews_slider_speed']['size'] ) ? $settings['eael_business_reviews_slider_speed']['size'] : 1000;
+		$business_reviews['business_logo']     				= ! empty( $settings['eael_business_reviews_business_logo'] ) && 'yes' === $settings['eael_business_reviews_business_logo'] ? 1 : 0;
+		$business_reviews['business_name']     				= ! empty( $settings['eael_business_reviews_business_name'] ) && 'yes' === $settings['eael_business_reviews_business_name'] ? 1 : 0;
+		$business_reviews['business_rating']   				= ! empty( $settings['eael_business_reviews_business_rating'] ) && 'yes' === $settings['eael_business_reviews_business_rating'] ? 1 : 0;
+		$business_reviews['business_address']  				= ! empty( $settings['eael_business_reviews_business_address'] ) && 'yes' === $settings['eael_business_reviews_business_address'] ? 1 : 0;
+		$business_reviews['reviewer_photo']    				= ! empty( $settings['eael_business_reviews_reviewer_photo'] ) && 'yes' === $settings['eael_business_reviews_reviewer_photo'] ? 1 : 0;
+		$business_reviews['reviewer_name']     				= ! empty( $settings['eael_business_reviews_reviewer_name'] ) && 'yes' === $settings['eael_business_reviews_reviewer_name'] ? 1 : 0;
+		$business_reviews['review_time']       				= ! empty( $settings['eael_business_reviews_review_time'] ) && 'yes' === $settings['eael_business_reviews_review_time'] ? 1 : 0;
+		$business_reviews['review_text']       				= ! empty( $settings['eael_business_reviews_review_text'] ) && 'yes' === $settings['eael_business_reviews_review_text'] ? 1 : 0;
+		$business_reviews['review_rating']     				= ! empty( $settings['eael_business_reviews_review_rating'] ) && 'yes' === $settings['eael_business_reviews_review_rating'] ? 1 : 0;
+		$business_reviews['review_1_star']     				= empty( $settings['eael_business_reviews_review_1_star_hide'] ) ? 1 : 0;
+		$business_reviews['reviews_max_count'] 				= ! empty( $settings['eael_business_reviews_max_reviews'] ) ? intval( $settings['eael_business_reviews_max_reviews'] ) : 5;
 
-		$business_reviews['business_logo_icon_migrated'] = isset( $settings['__fa4_migrated']['eael_business_reviews_business_logo_icon_new'] );
-		$business_reviews['business_logo_icon_new']      = empty( $settings['eael_business_reviews_business_logo_icon'] );
-		$business_reviews['business_logo_icon_new_data'] = ! empty( $settings['eael_business_reviews_business_logo_icon_new'] ) ? $settings['eael_business_reviews_business_logo_icon_new'] : [];
-		$business_reviews['business_logo_icon_data']     = ! empty( $settings['eael_business_reviews_business_logo_icon'] ) ? $settings['eael_business_reviews_business_logo_icon'] : [];
-		$business_reviews['business_name_label']         = ! empty( $settings['eael_business_reviews_business_name_label'] ) ? $settings['eael_business_reviews_business_name_label'] : '';
-		$business_reviews['google_reviews_label']        = ! empty( $settings['eael_business_reviews_google_reviews_label'] ) ? $settings['eael_business_reviews_google_reviews_label'] : '';
-		$business_reviews['arrows_type']                 = ! empty( $settings['eael_business_reviews_arrows_type'] ) ? $settings['eael_business_reviews_arrows_type'] : 'fa fa-angle-right';
+		$business_reviews['business_logo_icon_migrated']	= isset( $settings['__fa4_migrated']['eael_business_reviews_business_logo_icon_new'] );
+		$business_reviews['business_logo_icon_new']      	= empty( $settings['eael_business_reviews_business_logo_icon'] );
+		$business_reviews['business_logo_icon_new_data'] 	= ! empty( $settings['eael_business_reviews_business_logo_icon_new'] ) ? $settings['eael_business_reviews_business_logo_icon_new'] : [];
+		$business_reviews['business_logo_icon_data']     	= ! empty( $settings['eael_business_reviews_business_logo_icon'] ) ? $settings['eael_business_reviews_business_logo_icon'] : [];
+		$business_reviews['business_name_label']         	= ! empty( $settings['eael_business_reviews_business_name_label'] ) ? $settings['eael_business_reviews_business_name_label'] : '';
+		$business_reviews['google_reviews_label']        	= ! empty( $settings['eael_business_reviews_google_reviews_label'] ) ? $settings['eael_business_reviews_google_reviews_label'] : '';
+		$business_reviews['arrows_type']                 	= ! empty( $settings['eael_business_reviews_arrows_type'] ) ? $settings['eael_business_reviews_arrows_type'] : 'fa fa-angle-right';
+		$business_reviews['localbusiness_schema']       	= ! empty( $settings['eael_business_reviews_localbusiness_schema'] ) && 'yes' === $settings['eael_business_reviews_localbusiness_schema'] ? 1 : 0;
 
 		if ( 'grid' === $business_reviews['layout'] ) {
-			$business_reviews['columns']              = ! empty( $settings['eael_business_reviews_column_grid'] ) ? $settings['eael_business_reviews_column_grid'] : 3;
-			$business_reviews['columns_tablet']       = ! empty( $settings['eael_business_reviews_column_grid_tablet'] ) ? $settings['eael_business_reviews_column_grid_tablet'] : 2;
-			$business_reviews['columns_mobile']       = ! empty( $settings['eael_business_reviews_column_grid_mobile'] ) ? $settings['eael_business_reviews_column_grid_mobile'] : 1;
-			$business_reviews['columns_class']        = ! empty( $settings['eael_business_reviews_column_grid'] ) ? 'eael-column-' . $business_reviews['columns'] : 'eael-column-3';
-			$business_reviews['columns_tablet_class'] = ! empty( $settings['eael_business_reviews_column_grid_tablet'] ) ? 'eael-column-tablet-' . $business_reviews['columns_tablet'] : 'eael-column-tablet-2';
-			$business_reviews['columns_mobile_class'] = ! empty( $settings['eael_business_reviews_column_grid_mobile'] ) ? 'eael-column-mobile-' . $business_reviews['columns_mobile'] : 'eael-column-mobile-1';
+			$business_reviews['columns']              		= ! empty( $settings['eael_business_reviews_column_grid'] ) ? $settings['eael_business_reviews_column_grid'] : 3;
+			$business_reviews['columns_tablet']       		= ! empty( $settings['eael_business_reviews_column_grid_tablet'] ) ? $settings['eael_business_reviews_column_grid_tablet'] : 2;
+			$business_reviews['columns_mobile']       		= ! empty( $settings['eael_business_reviews_column_grid_mobile'] ) ? $settings['eael_business_reviews_column_grid_mobile'] : 1;
+			$business_reviews['columns_class']        		= ! empty( $settings['eael_business_reviews_column_grid'] ) ? 'eael-column-' . $business_reviews['columns'] : 'eael-column-3';
+			$business_reviews['columns_tablet_class'] 		= ! empty( $settings['eael_business_reviews_column_grid_tablet'] ) ? 'eael-column-tablet-' . $business_reviews['columns_tablet'] : 'eael-column-tablet-2';
+			$business_reviews['columns_mobile_class'] 		= ! empty( $settings['eael_business_reviews_column_grid_mobile'] ) ? 'eael-column-mobile-' . $business_reviews['columns_mobile'] : 'eael-column-mobile-1';
 		}
 
 		if ( 'slider' === $business_reviews['layout'] && 'preset-2' === $business_reviews['preset'] ) {
-			$business_reviews['columns']        = ! empty( $settings['eael_business_reviews_column_preset_2'] ) ? $settings['eael_business_reviews_column_preset_2'] : $business_reviews['columns'];
-			$business_reviews['columns_tablet'] = ! empty( $settings['eael_business_reviews_column_preset_2_tablet'] ) ? $settings['eael_business_reviews_column_preset_2_tablet'] : $business_reviews['columns'];
-			$business_reviews['columns_mobile'] = ! empty( $settings['eael_business_reviews_column_preset_2_mobile'] ) ? $settings['eael_business_reviews_column_preset_2_mobile'] : $business_reviews['columns'];
+			$business_reviews['columns']        			= ! empty( $settings['eael_business_reviews_column_preset_2'] ) ? $settings['eael_business_reviews_column_preset_2'] : $business_reviews['columns'];
+			$business_reviews['columns_tablet'] 			= ! empty( $settings['eael_business_reviews_column_preset_2_tablet'] ) ? $settings['eael_business_reviews_column_preset_2_tablet'] : $business_reviews['columns'];
+			$business_reviews['columns_mobile'] 			= ! empty( $settings['eael_business_reviews_column_preset_2_mobile'] ) ? $settings['eael_business_reviews_column_preset_2_mobile'] : $business_reviews['columns'];
 		}
 
 		if ( 'coverflow' === $business_reviews['effect'] ) {
-			$business_reviews['columns'] = 3;
+			$business_reviews['columns'] 					= 3;
 		}
 
 		return $business_reviews;
@@ -2546,11 +2572,14 @@ class Business_Reviews extends Widget_Base {
 		$param         = array();
 		$error_message = '';
 
+		$api_fields = 'formatted_address,international_phone_number,name,rating,reviews,url,user_ratings_total,website,photos';
+		$api_fields = $business_reviews['localbusiness_schema'] ? 'address_components,' . $api_fields : $api_fields;
+		
 		$args = array(
 			'key'     => sanitize_text_field( $business_reviews['api_key'] ),
 			'placeid' => sanitize_text_field( $business_reviews['place_id'] ),
 			'reviews_no_translations' => intval( $business_reviews['review_text_translation'] ) ? false : true,
-			'fields'  => sanitize_text_field( 'formatted_address,international_phone_number,name,rating,reviews,url,user_ratings_total,website,photos' ),
+			'fields'  => sanitize_text_field( $api_fields ),
 		);
 
 		if ( ! empty( $business_reviews['reviews_sort'] ) ) {
@@ -2633,8 +2662,8 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	public function print_business_reviews( $business_reviews_items ) {
-		$settings         = $this->get_settings();
-		$business_reviews = $this->get_business_reviews_settings();
+		$settings 			= $this->settings_data         = $this->get_settings();
+		$business_reviews 	= $this->business_reviews_data = $this->get_business_reviews_settings();
 
 		ob_start();
 
@@ -3202,8 +3231,107 @@ class Business_Reviews extends Widget_Base {
 		return true;
 	}
 
+	public function print_localbusiness_schema( $business_reviews_items ){
+		$business_reviews_items_obj = isset( $business_reviews_items['items'] ) ? $business_reviews_items['items'] : false;
+		
+		if ( ! is_object( $business_reviews_items_obj ) ) {
+			return;
+		}
+
+		$business_reviews_items_reviews = ! empty( $business_reviews_items_obj->reviews ) ? $business_reviews_items_obj->reviews : []; 
+		
+		if ( ! empty( $this->business_reviews_data['localbusiness_schema'] ) && count( $business_reviews_items_reviews ) ) {
+			$reviews = [];
+			$street_number = 
+			$street_name = 
+			$locality_city = 
+			$region_state = 
+			$postal_code =  
+			$country = '';
+
+			// Reviews
+			foreach ( $business_reviews_items_reviews as $business_reviews_items_reivew ) {
+				$reviews[] = [
+					"@type" => "Review",
+					"reviewRating" => [
+						"@type" => "Rating",
+						"ratingValue" => ! empty( $business_reviews_items_reivew->rating ) ? $business_reviews_items_reivew->rating : '',
+					],
+					"author" => [
+						"@type" => "Person",
+						"name" => ! empty( $business_reviews_items_reivew->author_name ) ? $business_reviews_items_reivew->author_name : '',
+					],
+				];
+			}
+
+			// Address
+			$address_components = ! empty( $business_reviews_items_obj->address_components ) ? $business_reviews_items_obj->address_components : [];
+
+			foreach ($address_components as $component) {
+				if (in_array('street_number', $component->types)) {
+					$street_number = $component->long_name;
+				}
+				
+				if (in_array('route', $component->types)) {
+					$street_name = $component->long_name;
+				}
+
+				if (in_array('locality', $component->types)) {
+					$locality_city = $component->long_name;
+				}
+
+				if (in_array('administrative_area_level_1', $component->types)) {
+					$region_state = $component->short_name;
+				}
+				
+				if (in_array('postal_code', $component->types)) {
+					$postal_code = $component->long_name;
+				}
+
+				if (in_array('country', $component->types)) {
+					$country = $component->short_name;
+				}
+			}
+
+			$address = [
+				'@type' => 'PostalAddress',
+				'streetAddress' => "{$street_number} {$street_name}",
+				'addressLocality' => $locality_city,
+				'addressRegion' => $region_state,
+				'postalCode' => $postal_code,
+				'addressCountry' => $country
+			];
+			
+			$full_schema_array = [
+				"@context" => "https://schema.org",
+				"@type" => "LocalBusiness",
+				"name" => ! empty( $business_reviews_items_obj->name ) ? $business_reviews_items_obj->name : '',
+				"address" => $address,
+				"review" => $reviews,
+				"aggregateRating" => [
+					"@type" => "AggregateRating",
+					"ratingValue" => ! empty( $business_reviews_items_obj->rating ) ? $business_reviews_items_obj->rating : 0,
+					"ratingCount" => ! empty( $business_reviews_items_obj->user_ratings_total ) ? $business_reviews_items_obj->user_ratings_total : 0,
+				],
+				"url" => ! empty( $business_reviews_items_obj->url ) ? $business_reviews_items_obj->url : '',
+				"telephone" => ! empty( $business_reviews_items_obj->international_phone_number ) ? $business_reviews_items_obj->international_phone_number : '',
+			];
+
+			ob_start();
+			?> 
+			<!-- EA LocalBusiness Schema : Starts-->
+			<script type="application/ld+json">
+				<?php echo json_encode( $full_schema_array ); ?>
+			</script>
+			<!-- EA LocalBusiness Schema : Ends-->
+			<?php
+			echo ob_get_clean();
+		}
+	}
+
 	protected function render() {
 		$business_reviews_items = $this->fetch_business_reviews_from_api();
 		$this->print_business_reviews( $business_reviews_items );
+		$this->print_localbusiness_schema( $business_reviews_items );
 	}
 }
