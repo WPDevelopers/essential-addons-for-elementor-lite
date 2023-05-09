@@ -13,35 +13,35 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../includes/Classes/Asset_Builder.php:380
+#: ../includes/Classes/Asset_Builder.php:378
 msgid "Added "
 msgstr ""
 
-#: ../includes/Classes/Asset_Builder.php:381, ../includes/Traits/Woo_Product_Comparable.php:2113
+#: ../includes/Classes/Asset_Builder.php:379, ../includes/Traits/Woo_Product_Comparable.php:2113
 msgid "Compare"
 msgstr ""
 
-#: ../includes/Classes/Asset_Builder.php:382
+#: ../includes/Classes/Asset_Builder.php:380
 msgid "Loading..."
 msgstr ""
 
-#: ../includes/Classes/Asset_Builder.php:385
+#: ../includes/Classes/Asset_Builder.php:383
 msgid "is a required field"
 msgstr ""
 
-#: ../includes/Classes/Asset_Builder.php:386
+#: ../includes/Classes/Asset_Builder.php:384
 msgid "Invalid"
 msgstr ""
 
-#: ../includes/Classes/Asset_Builder.php:387, ../includes/Elements/Woo_Checkout.php:568
+#: ../includes/Classes/Asset_Builder.php:385, ../includes/Elements/Woo_Checkout.php:568
 msgid "Billing"
 msgstr ""
 
-#: ../includes/Classes/Asset_Builder.php:388, ../includes/Elements/Woo_Cart.php:1076, ../includes/Elements/Woo_Checkout.php:266, ../includes/Elements/Woo_Checkout.php:630, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:272
+#: ../includes/Classes/Asset_Builder.php:386, ../includes/Elements/Woo_Cart.php:1076, ../includes/Elements/Woo_Checkout.php:266, ../includes/Elements/Woo_Checkout.php:630, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:272
 msgid "Shipping"
 msgstr ""
 
-#: ../includes/Classes/Asset_Builder.php:389
+#: ../includes/Classes/Asset_Builder.php:387
 msgid "of"
 msgstr ""
 
