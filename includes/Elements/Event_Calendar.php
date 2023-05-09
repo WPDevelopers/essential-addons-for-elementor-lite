@@ -1523,6 +1523,24 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_more_event',
+            [
+                'label' => esc_html__( 'More Event Text', 'textdomain' ),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'eael_more_event_typography',
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .fc-daygrid-day-bottom .fc-daygrid-more-link',
+            ]
+        );
+
         $this->end_controls_section();
 
         $this->start_controls_section(
