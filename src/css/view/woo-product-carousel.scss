@@ -68,11 +68,21 @@ $theme-preset4: #ec3b75;
         }
     }
 
-    .eael-woo-product-carousel{
+    .eael-woo-product-carousel.swiper-8 {
+        &:not(.swiper-initialized) .eael-product-carousel {
+            width: 350px;
+            height: 450px
+        }
+    }
+
+    .eael-woo-product-carousel.swiper-8-lower {
         &:not(.swiper-container-initialized) .eael-product-carousel {
             width: 350px;
             height: 450px
         }
+    }
+    
+    .eael-woo-product-carousel{
         .eael-product-carousel {
             direction: ltr;
         }
