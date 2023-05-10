@@ -81,7 +81,8 @@ var EventCalendar = function ($scope, $) {
 							timeFormate = time_format ? "H:mm" : "h:mm A",
 							endDate = event.end,
 							startSelector = $("span.eaelec-event-date-start"),
-							endSelector = $("span.eaelec-event-date-end");
+							endSelector = $("span.eaelec-event-date-end"),
+							modalFooterLink = $(".eaelec-modal-footer a");
 
 						if (event.allDay) {
 							var newEnd = moment(endDate).subtract(1, "days");
@@ -202,23 +203,22 @@ var EventCalendar = function ($scope, $) {
 							$(".eaelec-modal-body").css("height", "300px");
 						}
 
-						$(".eaelec-modal-footer a").attr("href", event.url);
+						if (event.extendedProps.hide_details_link !== 'yes' ){
+							modalFooterLink.attr("href", event.url).css("display", "block");
+						}else {
+							modalFooterLink.css("display", "none");
+						}
 
 						if (event.extendedProps.external === "on") {
-							$(".eaelec-modal-footer a").attr("target", "_blank");
+							modalFooterLink.attr("target", "_blank");
 						}
 						if (event.extendedProps.nofollow === "on") {
-							$(".eaelec-modal-footer a").attr("rel", "nofollow");
+							modalFooterLink.attr("rel", "nofollow");
 						}
 						if (event.extendedProps.custom_attributes != '' ) {
 							$.each(event.extendedProps.custom_attributes, function(index,item){
-								$(".eaelec-modal-footer a").attr(item.key, item.value);
+								modalFooterLink.attr(item.key, item.value);
 							});
-						}
-						if (event.url == "") {
-							$(".eaelec-modal-footer a").css("display", "none");
-						} else {
-							$(".eaelec-modal-footer a").css("display", "block");
 						}
 
 						// Popup color
@@ -238,11 +238,19 @@ var EventCalendar = function ($scope, $) {
 			eventWillUnmount: function(arg) {}
 		});
 
+	function refreshPopUpDetailsLink(){
+		var modalFooter = $(".eaelec-modal-footer"),
+			modalFooterClass = modalFooter.find('a').attr('class'),
+			modalFooterText = modalFooter.find('a').text();
+		modalFooter.html('<a class="'+modalFooterClass+'">'+modalFooterText+'</a>');
+	}
+
 	CloseButton.on("click", function (event) {
 		event.stopPropagation();
 		ecModal
 		.addClass("eael-ec-modal-removing")
 		.removeClass("eael-ec-popup-ready");
+		refreshPopUpDetailsLink();
 	});
 	
 	$(document).on("click", function (event) {
@@ -251,6 +259,7 @@ var EventCalendar = function ($scope, $) {
 			ecModal
 			.addClass("eael-ec-modal-removing")
 			.removeClass("eael-ec-popup-ready");
+			refreshPopUpDetailsLink();
 		}
 	});
 	

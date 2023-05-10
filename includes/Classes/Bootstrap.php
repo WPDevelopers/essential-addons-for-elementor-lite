@@ -72,8 +72,8 @@ class Bootstrap
     protected $installer;
 
 
-    const EAEL_PROMOTION_FLAG = 4;
-    const EAEL_ADMIN_MENU_FLAG = 4;
+    const EAEL_PROMOTION_FLAG = 5;
+    const EAEL_ADMIN_MENU_FLAG = 5;
     /**
      * Singleton instance
      *
@@ -110,10 +110,10 @@ class Bootstrap
         // extensions classmap
         $this->registered_extensions = apply_filters('eael/registered_extensions', $GLOBALS['eael_config']['extensions']);
 
-        // start plugin tracking
-        if (!$this->pro_enabled) {
-            // $this->start_plugin_tracking();
-        }
+	    // start plugin tracking
+	    if ( ! $this->pro_enabled ) {
+		    $this->start_plugin_tracking();
+	    }
 
         // register extensions
         $this->register_extensions();
