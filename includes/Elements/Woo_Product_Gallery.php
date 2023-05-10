@@ -440,6 +440,17 @@ class Woo_Product_Gallery extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_product_gallery_tags', [
+				'label'       => __( 'Product Tags', 'essential-addons-for-elementor-lite' ),
+				'type'        => 'eael-select2',
+				'source_name' => 'taxonomy',
+				'source_type' => 'product_tag',
+				'label_block' => true,
+				'multiple'    => true,
+			]
+		);
+
+		$this->add_control(
 			'eael_product_gallery_dynamic_template',
 			[
 				'label'   => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
@@ -2500,6 +2511,10 @@ class Woo_Product_Gallery extends Widget_Base {
 	public function build_product_query( $settings ) {
 		$get_product_cats = $settings[ 'eael_product_gallery_categories' ];
 		$product_cats     = str_replace( ' ', '', $get_product_cats );
+
+		$get_product_tags = $settings[ 'eael_product_gallery_tags' ];
+		$product_tags_items = str_replace( ' ', '', $get_product_tags );
+
 		// Category retrieve
 		$cat_args            = array(
 			'order'      => 'ASC',
@@ -2509,6 +2524,15 @@ class Woo_Product_Gallery extends Widget_Base {
 		);
 		$product_categories = get_terms( 'product_cat', $cat_args );
 
+		// Tag retrieve
+		$tag_args            = array(
+			'order'      => 'ASC',
+			'hide_empty' => false,
+			'include'    => $product_tags_items,
+			'orderby'    => 'include',
+		);
+		$product_tags = get_terms( 'product_tag', $tag_args );
+		
 		$args = [
 			'post_type'      => 'product',
 			'post_status'    => array( 'publish', 'pending', 'future' ),
@@ -2614,6 +2638,14 @@ class Woo_Product_Gallery extends Widget_Base {
 					'taxonomy' => 'product_cat',
 					'field'    => 'term_id',
 					'terms'    => $settings[ 'eael_product_gallery_categories' ],
+				];
+			}
+
+			if ( $settings[ 'eael_product_gallery_tags' ] ) {
+				$args[ 'tax_query' ][] = [
+					'taxonomy' => 'product_tag',
+					'field'    => 'term_id',
+					'terms'    => $settings[ 'eael_product_gallery_tags' ],
 				];
 			}
 		} else if ( $settings[ 'eael_product_gallery_product_filter' ] == 'best-selling-products' ) {
