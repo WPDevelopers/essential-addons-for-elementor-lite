@@ -169,11 +169,11 @@ class Flip_Box extends Widget_Base
 	    $this->add_control(
 		    'eael_flipbox_front_content_type',
 		    [
-			    'label'                 => __( 'Content Type', 'essential-addons-elementor' ),
+			    'label'                 => __( 'Content Type', 'essential-addons-for-elementor-lite' ),
 			    'type'                  => Controls_Manager::SELECT,
 			    'options'               => [
-				    'content'       => __( 'Content', 'essential-addons-elementor' ),
-				    'template'      => __( 'Saved Templates', 'essential-addons-elementor' ),
+				    'content'       => __( 'Content', 'essential-addons-for-elementor-lite' ),
+				    'template'      => __( 'Saved Templates', 'essential-addons-for-elementor-lite' ),
 			    ],
 			    'default'               => 'content',
 		    ]
@@ -182,7 +182,7 @@ class Flip_Box extends Widget_Base
 	    $this->add_control(
 		    'eael_flipbox_front_templates',
 		    [
-			    'label'       => __( 'Choose Template', 'essential-addons-elementor' ),
+			    'label'       => __( 'Choose Template', 'essential-addons-for-elementor-lite' ),
 			    'type'        => 'eael-select2',
 			    'source_name' => 'post_type',
 			    'source_type' => 'elementor_library',
@@ -402,11 +402,11 @@ class Flip_Box extends Widget_Base
 	    $this->add_control(
 		    'eael_flipbox_back_content_type',
 		    [
-			    'label'                 => __( 'Content Type', 'essential-addons-elementor' ),
+			    'label'                 => __( 'Content Type', 'essential-addons-for-elementor-lite' ),
 			    'type'                  => Controls_Manager::SELECT,
 			    'options'               => [
-				    'content'       => __( 'Content', 'essential-addons-elementor' ),
-				    'template'      => __( 'Saved Templates', 'essential-addons-elementor' ),
+				    'content'       => __( 'Content', 'essential-addons-for-elementor-lite' ),
+				    'template'      => __( 'Saved Templates', 'essential-addons-for-elementor-lite' ),
 			    ],
 			    'default'               => 'content',
 		    ]
@@ -415,7 +415,7 @@ class Flip_Box extends Widget_Base
 	    $this->add_control(
 		    'eael_flipbox_back_templates',
 		    [
-			    'label'       => __( 'Choose Template', 'essential-addons-elementor' ),
+			    'label'       => __( 'Choose Template', 'essential-addons-for-elementor-lite' ),
 			    'type'        => 'eael-select2',
 			    'source_name' => 'post_type',
 			    'source_type' => 'elementor_library',

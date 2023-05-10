@@ -120,20 +120,20 @@ $elements = [
 			],
 			[
 				'key'       => 'event-calendar',
-				'title'     => __( 'Event Calendar', 'essential-addons-elementor' ),
+				'title'     => __( 'Event Calendar', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/event-calendar/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/event-calendar/',
 				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'simple-menu',
-				'title'     => __( 'Simple Menu', 'essential-addons-elementor' ),
+				'title'     => __( 'Simple Menu', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/simple-menu/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/simple-menu/',
 			],
 			[
 				'key'   => 'advanced-search',
-				'title' => __( 'Advanced Search', 'essential-addons-elementor' ),
+				'title' => __( 'Advanced Search', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/advanced-search/',
 				'doc_link' => 'https://essential-addons.com/elementor/docs/advanced-search/',
 				'is_pro' => true,
@@ -370,7 +370,14 @@ $elements = [
 				'demo_link' => 'https://essential-addons.com/elementor/interactive-circle/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/interactive-circle/',
 				'promotion' => 'new'
-			]
+			],
+            [
+                'key'       => 'svg-draw',
+                'title'     => __( 'SVG Draw', 'essential-addons-for-elementor-lite' ),
+                'demo_link' => 'https://essential-addons.com/elementor/svg-draw/',
+                'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-svg-draw/',
+                'promotion' => 'new'
+            ]
 		]
 	],
 	'marketing-elements'       => [
@@ -473,7 +480,7 @@ $elements = [
 			],
 			[
 				'key'       => 'login-register',
-				'title'     => __( 'Login | Register Form', 'essential-addons-elementor' ),
+				'title'     => __( 'Login | Register Form', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/login-register-form',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/login-register-form/',
 				'setting'   => [ 'id' => 'eael-login-register-setting' ],

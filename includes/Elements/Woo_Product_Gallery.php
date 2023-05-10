@@ -2491,7 +2491,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			'orderby'    => 'include',
 		);
 		$product_tags = get_terms( 'product_tag', $tag_args );
-
+		
 		$args = [
 			'post_type'      => 'product',
 			'post_status'    => array( 'publish', 'pending', 'future' ),

@@ -237,7 +237,7 @@ trait Helper
 			WC()->cart->set_quantity( $cart_item_key, $cart_item_quantity, true );
 			wp_send_json_success(
                 array(
-                    'message' => __( 'Quantity updated successfully.', 'essential-addons-elementor' ),
+                    'message' => __( 'Quantity updated successfully.', 'essential-addons-for-elementor-lite' ),
                     // 'cart_item_key' => $cart_item_key,
                     'cart_item_quantity' => $cart_item_quantity,
                     'cart_item_subtotal' => WC()->cart->get_product_subtotal( $cart_item['data'], $cart_item_quantity ),
@@ -248,7 +248,7 @@ trait Helper
 		} else {
     		wp_send_json_error(
                 array(
-                    'message' => __( 'Quantity update failed.', 'essential-addons-elementor' ),
+                    'message' => __( 'Quantity update failed.', 'essential-addons-for-elementor-lite' ),
                 )
             );
         }
@@ -463,7 +463,7 @@ trait Helper
 		?>
         <div id="eael-admin-promotion-message" class="eael-admin-promotion-message">
             <i class="e-notice__dismiss eael-admin-promotion-close" role="button" aria-label="Dismiss" tabindex="0"></i>
-			<?php printf( __( "<p> <i>📣</i> NEW: Essential Addons 5.6 is here, with new '<a target='_blank' href='%s'>Business Reviews</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/business-reviews/' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) ); ?>
+			<?php printf( __( "<p> <i>📣</i> NEW: Essential Addons 5.7 is here, with new '<a target='_blank' href='%s'>SVG Draw</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/svg-draw/' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) ); ?>
         </div>
 		<?php
 	}
@@ -488,7 +488,7 @@ trait Helper
 
 			/*Added admin notice which is basically uses for display new promotion message*/
 			if ( get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG ) {
-				add_action( 'eael_admin_notices', array( $this, 'promotion_message_on_admin_screen' ) );
+				add_action( 'eael_admin_notices', array( $this, 'promotion_message_on_admin_screen' ), 1 );
 			}
 		}
 	}
@@ -559,6 +559,7 @@ trait Helper
                         </div>
                     </div>
                     <div class="eael-gb-eb-footer">
+	                    <button class="eael-gb-eb-never-show" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php esc_html_e( 'Never Show Again', 'essential-addons-for-elementor-lite' ); ?></button>
                         <button class="eael-gb-eb-prev"><?php esc_html_e( 'Previous', 'essential-addons-for-elementor-lite' ); ?></button>
                         <button class="eael-gb-eb-next"><?php esc_html_e( 'Next', 'essential-addons-for-elementor-lite' ); ?></button>
                     </div>
