@@ -212,7 +212,7 @@ class Elements_Manager {
 
 		$documents = Plugin::$instance->documents->get( $post_id );
 
-		if ( get_post_status( $post_id ) !== 'publish' || ( is_object( $documents ) && ! $documents->is_built_with_elementor() ) ) {
+		if ( ! in_array( get_post_status( $post_id ), [ 'publish', 'private' ] ) || ( is_object( $documents ) && ! $documents->is_built_with_elementor() ) ) {
 			return false;
 		}
 
