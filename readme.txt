@@ -2,9 +2,9 @@
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk
 Tags: elementor, elements, addons, elementor addons, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
 Requires at least: 5.0
-Tested up to: 6.1
+Tested up to: 6.2
 Requires PHP: 7.0
-Stable tag: 5.6.2
+Stable tag: 5.7.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -95,6 +95,7 @@ We have designed more than 50 of the most useful widgets to enhance your Element
 47. [Interactive Circle](https://essential-addons.com/elementor/interactive-circle/)- Display content with engaging circular layouts
 48. [NFT Gallery](https://essential-addons.com/elementor/nft-gallery/)- Add and showcase NFT collections effortlessly in Elementor
 49. [Business Reviews]( https://essential-addons.com/elementor/business-reviews/)- Display Google Customer Review to increase your online reputation
+50. [SVG Draw](https://essential-addons.com/elementor/svg-draw/)- Display SVG elements in a visually striking and interactive way on your website
 
 Extensions (Free): 
 
@@ -244,14 +245,47 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+= 5.7.1 - 17/04/2023 =
+
+- Improved: EA Post Timeline | Improved Card Layout
+- Improved: EA Login/Register Form | Remember me field Styling
+- Fixed: Deprecated Warnings on PHP 8.1
+- Fixed: EA Interactive Circle | Classic Background Styling issue
+- Fixed: EA Scroll to Top | Missing in Theme Builder Archive Page
+- Fixed: EA Gravity Form | Fixed Submit Button Alignment issue
+- Fixed: EA Filterable Gallery | Page Speed Issue
+- Fixed: EA Woo Product Gallery | Load more button Duplication issue
+- Fixed: EA Event Calendar | Fixed Day and Time Styling issue
+- Few minor bug fixes & improvements
+
+= 5.7.0 - 05/04/2023 =
+
+- Added: EA SVG Draw Widget
+- Fixed: Fatal Error when BuddyPress is activated
+- Fixed: EA Filterable Gallery | Dynamic Tag missing on images
+- Few minor bug fixes & improvements
+
+= 5.6.4 - 30/03/2023 =
+
+- Added: Compatibility with Elementor 3.12.0
+- Fixed: Assets not generating in private pages
+- Few minor bug fixes & improvements
+
+= 5.6.3 - 27/03/2023 =
+
+- Fixed: EA Advanced Data Table | Inline Editor HTML not working
+- Fixed: EA Filterable Gallery | Mobile layout showing wrong item count
+- Fixed: EA Image Accordion | Default active tab not working
+- Few minor bug fixes & improvements
+
 = 5.6.2 - 22/03/2023 =
 
-- Fixed: Improved : EA Login/Register Form | Added support for HTML tag in the title & subtitles
-- Improved : EA Filterable Gallery | Improved translation support
-- Fixed: EA Creative Buttons | Gradient colour issue on hover
+- Improved: EA Login/Register Form | Added support for HTML tag in the title & subtitles
+- Improved: EA Filterable Gallery | Improved translation support
+- Fixed: EA Creative Buttons | Gradient color issue on hover
 - Fixed: EA Interactive Circle | Circle ordering system
 - Fixed: EA Simple Menu | Hamburger menu style option not showing for vertical layout
-= Fixed: EA  Advanced Data Table | Added filter hook for "No Content Found" text
+- Fixed: EA Advanced Data Table | Added filter hook for "No Content Found" text
 - Fixed: EA Filterable Gallery | Added XStore theme compatibility
 - Few minor bug fixes & improvements
 
@@ -1167,7 +1201,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Added: WPML translation support for URL in Team Member
 - Added: <span> as tag support in Tooltip
 - Added: Option to change heading tag in CTA
-- Fixed: Expansion indicator disappearence bug in Post Grid
+- Fixed: Expansion indicator disappearance bug in Post Grid
 - Fixed: Polish letters displaying bug for Filterable Gallery
 - Few minor bugfix and improvements
 
@@ -1377,7 +1411,7 @@ Your existing elements/content will work with premium version. So you won't lose
 = 3.0.2 - 29/05/2019 =
 - Fixed : Notice style breaking issue
 - Fixed : Pricing Table tooltip issue
-- Enhanced : ALT tag for all images thourghout the elements
+- Enhanced : ALT tag for all images throughout the elements
 - Few minor bugfix and improvements
 
 = 3.0.1 - 27/05/2019 =

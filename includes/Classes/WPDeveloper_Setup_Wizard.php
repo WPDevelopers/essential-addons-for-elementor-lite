@@ -64,7 +64,7 @@ class WPDeveloper_Setup_Wizard {
 	public function admin_menu() {
 
 		add_submenu_page(
-			null,
+			'',
 			__( 'Essential Addons ', 'essential-addons-for-elementor-lite' ),
 			__( 'Essential Addons ', 'essential-addons-for-elementor-lite' ),
 			'manage_options',
@@ -727,6 +727,11 @@ class WPDeveloper_Setup_Wizard {
 						'title'       => __( 'Interactive Circle', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
 					],
+                    [
+                        'key'         => 'svg-draw',
+                        'title'       => __( 'SVG Draw', 'essential-addons-for-elementor-lite' ),
+                        'preferences' => 'advance',
+                    ],
 				]
 			],
 			'marketing-elements'       => [
