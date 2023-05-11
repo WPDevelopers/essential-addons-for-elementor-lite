@@ -885,7 +885,7 @@ trait Login_Registration {
 			
 			$user = check_password_reset_key( $rp_data_db['rp_key'], $rp_data_db['rp_login'] );
 
-			$rp_key       = empty( $_POST['rp_key'] ) ? '' : $_POST['rp_key'];
+			$rp_key       = empty( $_POST['rp_key'] ) ? '' : sanitize_text_field( $_POST['rp_key'] );
 			$is_user_null = isset( $_POST['eael-pass1'] ) && ! hash_equals( $rp_data_db['rp_key'], $rp_key );
 			
 			if ( $is_user_null ) {
