@@ -82,6 +82,9 @@
   -webkit-box-shadow: none;
           box-shadow: none;
 }
+.eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-cart-clear-btn .button {
+  text-align: center;
+}
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table {
   border-collapse: separate;
   border-spacing: 0 13px;
@@ -268,7 +271,9 @@
   color: inherit;
   font-size: inherit;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals::before, .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals::after {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals::before, .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals::after,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn::before,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn::after {
   content: "";
   display: block;
   clear: both;
@@ -276,7 +281,11 @@
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals button,
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .button,
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals button:not(:hover):not(:active),
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .button:not(:hover):not(:active) {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .button:not(:hover):not(:active),
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn button,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .button,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn button:not(:hover):not(:active),
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .button:not(:hover):not(:active) {
   background: #6557FF;
   -webkit-box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
           box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
@@ -295,17 +304,23 @@
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals button:hover,
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .button:hover,
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals button:not(:hover):not(:active):hover,
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .button:not(:hover):not(:active):hover {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .button:not(:hover):not(:active):hover,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn button:hover,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .button:hover,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn button:not(:hover):not(:active):hover,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .button:not(:hover):not(:active):hover {
   color: #fff;
   background: #6557FF;
   border-color: inherit;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .eael-cart-coupon-wrapper {
   width: 50%;
   float: left;
   min-height: 1px;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .eael-cart-coupon-wrapper .coupon {
   border: 1px solid #D7DFEF;
   border-radius: 5px;
   max-width: 400px;
@@ -314,7 +329,8 @@
   display: -ms-flexbox;
   display: flex;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon input {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon input,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .eael-cart-coupon-wrapper .coupon input {
   background: transparent;
   border: none;
   -webkit-box-shadow: none;
@@ -323,39 +339,46 @@
   line-height: 30px;
   width: 100%;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon button {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon button,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .eael-cart-coupon-wrapper .coupon button {
   white-space: nowrap;
   -webkit-box-shadow: 0 8px 18px rgba(56, 51, 117, 0.1);
           box-shadow: 0 8px 18px rgba(56, 51, 117, 0.1);
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop {
   font-size: 16px;
   font-weight: 500;
   color: #202B46;
   margin-top: 25px;
   display: inline-block;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals {
   width: 50%;
   float: left;
   text-align: right;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .eael-cart-update-btn {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .eael-cart-update-btn,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .eael-cart-update-btn {
   display: inline-block;
   text-align: center;
   max-width: 400px;
   width: 100%;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .eael-cart-update-btn button {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .eael-cart-update-btn button,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .eael-cart-update-btn button {
   width: 100%;
   margin-bottom: 13px;
   display: inline-block;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .eael-cart-update-btn button[disabled] {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .eael-cart-update-btn button[disabled],
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .eael-cart-update-btn button[disabled] {
   opacity: 0.5;
   cursor: not-allowed;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .cart_totals {
   max-width: 400px;
   width: 100%;
   padding: 0 0 10px 0;
@@ -363,24 +386,29 @@
   float: right;
   border: none;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .cart_totals table {
   border-collapse: separate;
   border-spacing: 0 13px;
   margin: -13px 0;
   border: none;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table td,
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table th {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table th,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .cart_totals table td,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .cart_totals table th {
   background: transparent;
   border: none;
   font-size: 18px;
   padding: 18px;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .cart_totals table tr {
   position: relative;
   z-index: 2;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr::after {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr::after,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .cart_totals table tr::after {
   position: absolute;
   content: "";
   background: #fff;
@@ -393,61 +421,78 @@
           box-shadow: 0 8px 18px 0 rgba(0, 1, 35, 0.05);
   border-radius: 5px;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr th {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr th,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .cart_totals table tr th {
   color: #737373;
   font-weight: 500;
   text-align: left;
   width: 40%;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.shipping td {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.shipping td,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .cart_totals table tr.shipping td {
   color: #737373;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.shipping td a {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.shipping td a,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .cart_totals table tr.shipping td a {
   display: inline-block;
   margin-top: 9px;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.shipping td .select2-container .select2-selection--single {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.shipping td .select2-container .select2-selection--single,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .cart_totals table tr.shipping td .select2-container .select2-selection--single {
   padding: 0;
   background: transparent;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.shipping td input {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.shipping td input,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .cart_totals table tr.shipping td input {
   background: transparent;
   vertical-align: middle;
   margin-right: 5px;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.shipping td ul {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.shipping td ul,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .cart_totals table tr.shipping td ul {
   list-style: none;
   padding: 0;
   margin: 0 0 10px;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr td {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr td,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .cart_totals table tr td {
   border-spacing: 0;
   text-align: right;
   color: #202B46;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr td a {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr td a,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .cart_totals table tr td a {
   color: #202B46;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr td .button {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr td .button,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .cart_totals table tr td .button {
   width: 100%;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.cart-subtotal td, .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.order-total td {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.cart-subtotal td, .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.order-total td,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .cart_totals table tr.cart-subtotal td,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .cart_totals table tr.order-total td {
   font-size: 20px;
   font-weight: 500;
   color: #202B46;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.cart-subtotal td strong, .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.order-total td strong {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.cart-subtotal td strong, .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr.order-total td strong,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .cart_totals table tr.cart-subtotal td strong,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .cart_totals table tr.order-total td strong {
   font-weight: 500;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table + .wc-proceed-to-checkout {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table + .wc-proceed-to-checkout,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .cart_totals table + .wc-proceed-to-checkout {
   margin-top: 13px;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals .wc-proceed-to-checkout {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals .wc-proceed-to-checkout,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .cart_totals .wc-proceed-to-checkout {
   padding: 0;
   text-align: center;
 }
 .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals .wc-proceed-to-checkout .button,
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals .wc-proceed-to-checkout .button:not(:hover):not(:active) {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals .wc-proceed-to-checkout .button:not(:hover):not(:active),
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .cart_totals .wc-proceed-to-checkout .button,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .cart_totals .wc-proceed-to-checkout .button:not(:hover):not(:active) {
   font-size: 20px;
   padding: 18px 0;
   margin: 0;
@@ -455,7 +500,8 @@
   text-align: center;
   width: 100%;
 }
-.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals h2 {
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals h2,
+.eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals .cart_totals h2 {
   display: none;
 }
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 {
@@ -633,45 +679,60 @@
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals button,
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .button,
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals button:not(:hover):not(:active),
-.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .button:not(:hover):not(:active) {
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .button:not(:hover):not(:active),
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-clear-btn button,
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-clear-btn .button,
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-clear-btn button:not(:hover):not(:active),
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-clear-btn .button:not(:hover):not(:active) {
   background: #312F4B;
   font-size: 15px;
   font-weight: 600;
   padding: 7px 40px;
 }
-.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper {
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper,
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-clear-btn .eael-cart-coupon-wrapper {
   width: 45%;
   padding-left: 50px;
 }
-.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon {
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon,
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-clear-btn .eael-cart-coupon-wrapper .coupon {
   padding: 3px;
   border-color: #CCD4E9;
 }
-.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon input {
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .coupon input,
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-clear-btn .eael-cart-coupon-wrapper .coupon input {
   font-size: 15px;
 }
-.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals {
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals,
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-clear-btn .cart-collaterals {
   width: 55%;
   padding-right: 50px;
 }
-.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals {
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals,
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-clear-btn .cart-collaterals .cart_totals {
   padding-bottom: 30px;
 }
-.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table {
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table,
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-clear-btn .cart-collaterals .cart_totals table {
   border-spacing: initial;
   border-collapse: collapse;
 }
-.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr {
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr,
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-clear-btn .cart-collaterals .cart_totals table tr {
   border-bottom: 1px solid #EFF2F7;
 }
-.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr:last-child {
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr:last-child,
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-clear-btn .cart-collaterals .cart_totals table tr:last-child {
   border-bottom: none;
 }
-.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr::after {
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr::after,
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-clear-btn .cart-collaterals .cart_totals table tr::after {
   content: none;
 }
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr th,
-.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr td {
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr td,
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-clear-btn .cart-collaterals .cart_totals table tr th,
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-clear-btn .cart-collaterals .cart_totals table tr td {
   padding: 20px 0;
 }
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2:not(.has-table-left-content) form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right {
@@ -734,6 +795,13 @@ body.theme-woodmart.eael-woo-cart .eael-woo-cart-wrapper .cart-totals-inner {
   padding: 0;
   border: none;
 }
+.theme-blocksy .eael-woo-cart-table .product-quantity .ct-increase,
+.theme-blocksy .eael-woo-cart-table .product-quantity .ct-decrease {
+  display: none;
+}
+.theme-blocksy .eael-woo-cart-table .product-quantity .quantity input[type=number] {
+  padding: 10px !important;
+}
 @media (max-width: 1024px) {
   .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals .cart_totals table tr {
     display: table-row;
@@ -758,20 +826,28 @@ body.theme-woodmart.eael-woo-cart .eael-woo-cart-wrapper .cart-totals-inner {
     width: 700px;
   }
   .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper,
-  .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals {
+  .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .cart-collaterals,
+  .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .eael-cart-coupon-wrapper,
+  .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .cart-collaterals {
     width: 100%;
     float: none;
   }
-  .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop {
+  .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop,
+  .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .eael-cart-coupon-wrapper .eael-woo-cart-back-to-shop {
     margin-bottom: 25px;
   }
-  .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .coupon input {
+  .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .coupon input,
+  .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .coupon input {
     padding-left: 5px;
   }
   .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals button,
   .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .button,
   .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals button:not(:hover):not(:active),
-  .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .button:not(:hover):not(:active) {
+  .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-coupon-and-collaterals .button:not(:hover):not(:active),
+  .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn button,
+  .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .button,
+  .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn button:not(:hover):not(:active),
+  .eael-woo-cart .eael-woo-cart-wrapper .eael-cart-clear-btn .button:not(:hover):not(:active) {
     padding: 10px 20px;
   }
   .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2.has-table-left-content.has-table-right-content {
@@ -856,6 +932,11 @@ body.theme-woodmart.eael-woo-cart .eael-woo-cart-wrapper .cart-totals-inner {
   }
   .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .eael-cart-coupon-wrapper,
   .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-coupon-and-collaterals .cart-collaterals {
+    width: 100% !important;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 .eael-cart-clear-btn {
     width: 100% !important;
     padding-left: 15px;
     padding-right: 15px;
