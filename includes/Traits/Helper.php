@@ -220,18 +220,15 @@ trait Helper
 		return $html;
 	}
 
-    public function eael_woo_cart_empty_action() {
-        if ( ! function_exists( 'WC' ) ) {
+	public function eael_woo_cart_empty_action() {
+		if ( ! function_exists( 'WC' ) ) {
 			return;
 		}
 
-        if ( isset( $_GET['empty_cart'] ) && 'yes' === esc_html( $_GET['empty_cart'] ) ) {
-            WC()->cart->empty_cart();
-
-            // $referer  = wp_get_referer() ? esc_url( remove_query_arg( 'empty_cart' ) ) : wc_get_cart_url();
-            // wp_safe_redirect( $referer );
-        }
-    }
+		if ( isset( $_GET['empty_cart'] ) && 'yes' === esc_html( $_GET['empty_cart'] ) ) {
+			WC()->cart->empty_cart();
+		}
+	}
 
     /**
 	 * Update Checkout Cart Quantity via ajax call.
