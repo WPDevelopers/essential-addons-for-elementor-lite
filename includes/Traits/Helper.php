@@ -221,11 +221,15 @@ trait Helper
 	}
 
     public function eael_woo_cart_empty_action() {
+        if ( ! function_exists( 'WC' ) ) {
+			return;
+		}
+
         if ( isset( $_GET['empty_cart'] ) && 'yes' === esc_html( $_GET['empty_cart'] ) ) {
             WC()->cart->empty_cart();
 
-            $referer  = wp_get_referer() ? esc_url( remove_query_arg( 'empty_cart' ) ) : wc_get_cart_url();
-            wp_safe_redirect( $referer );
+            // $referer  = wp_get_referer() ? esc_url( remove_query_arg( 'empty_cart' ) ) : wc_get_cart_url();
+            // wp_safe_redirect( $referer );
         }
     }
 
