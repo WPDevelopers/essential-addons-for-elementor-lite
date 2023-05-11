@@ -41,7 +41,7 @@ trait Woo_Cart_Helper {
 			<div class="eael-cart-clear-btn mt10">
 				<?php if ( ! empty( $settings['eael_woo_cart_components_cart_clear_button'] ) && $settings['eael_woo_cart_components_cart_clear_button'] === 'yes' ) {
 					$clear_text = apply_filters( 'eael_woo_cart_clear_button_text', $settings['eael_woo_cart_components_cart_clear_button_text'] );
-					echo '<a href="' . esc_url( add_query_arg( 'empty_cart', 'yes' ) ) . '" class="button" title="' . esc_attr( $clear_text, 'essential-addons-for-elementor-lite' ) . '">' . esc_html( $clear_text, 'essential-addons-for-elementor-lite' ) . '</a>';
+					echo '<a href="' . esc_url( add_query_arg( 'empty_cart', 'yes' ) ) . '" class="button" title="' . esc_attr( $clear_text ) . '">' . esc_html( $clear_text ) . '</a>';
 				}
 				?>
             </div>
@@ -381,7 +381,7 @@ trait Woo_Cart_Helper {
 			<div class="eael-cart-clear-btn mt10">
 				<?php if ( ! empty( $settings['eael_woo_cart_components_cart_clear_button'] ) && $settings['eael_woo_cart_components_cart_clear_button'] === 'yes' ) {
 					$clear_text = apply_filters( 'eael_woo_cart_clear_button_text', $settings['eael_woo_cart_components_cart_clear_button_text'] );
-					echo '<a href="' . esc_url( add_query_arg( 'empty_cart', 'yes' ) ) . '" class="button" title="' . esc_attr( $clear_text, 'essential-addons-for-elementor-lite' ) . '">' . esc_html( $clear_text, 'essential-addons-for-elementor-lite' ) . '</a>';
+					echo '<a href="' . esc_url( add_query_arg( 'empty_cart', 'yes' ) ) . '" class="button" title="' . esc_attr( $clear_text ) . '">' . esc_html( $clear_text ) . '</a>';
 				}
 				?>
             </div>
