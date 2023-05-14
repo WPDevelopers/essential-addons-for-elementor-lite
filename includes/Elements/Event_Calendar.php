@@ -1147,7 +1147,7 @@ class Event_Calendar extends Widget_Base
                 'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .fc-col-header-cell a' => 'col-cellor: {{VALUE}};',
+                    '{{WRAPPER}} .fc-col-header-cell a' => 'color: {{VALUE}};',
 
                 ],
             ]

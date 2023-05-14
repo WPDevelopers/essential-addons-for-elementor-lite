@@ -26,6 +26,7 @@
             page_id = $this.data('page'),
             page_content = $(`#eael-gb-eb-button-template-page-${page_id}`).html();
 
+        $('.eael-gb-eb-popup-content.--page-1').addClass('hide-eael-gb-eb-never-show-button');
         $this.addClass('active').siblings().removeClass('active').closest('.eael-gb-eb-popup-content')
             .removeClass('--page-1 --page-2 --page-3 --page-4 --page-5').addClass(`--page-${page_id}`);
         $('.eael-gb-eb-popup .eael-gb-eb-content-image').html($(page_content).find('.eael-gb-eb-content-image').html());

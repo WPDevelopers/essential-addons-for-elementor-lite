@@ -31,7 +31,7 @@ echo '<article class="eael-timeline-post">
 
 				if ( $settings['eael_show_title'] ) {
 					echo '<div class="eael-timeline-post-title">
-		                    <'.$title_tag.'>' . get_the_title() . '</'.$title_tag.'>
+		                    <' . $title_tag . ' class="' . esc_attr( 'eael-timeline-post-title-text-card' ) . '" >' . get_the_title() . '</'.$title_tag.'>
 		                </div>';
 				}
 				if ( $settings['eael_show_excerpt'] ) {
