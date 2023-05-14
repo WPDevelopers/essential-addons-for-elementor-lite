@@ -66,7 +66,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 
 			// Popup
 			$($scope).magnificPopup({
-				delegate: ".eael-magnific-link.active",
+				delegate: ".eael-filterable-gallery-item-wrap:not([style*='display: none']) .eael-magnific-link.active",
 				type: "image",
 				gallery: {
 					enabled: $gallery_enabled,
