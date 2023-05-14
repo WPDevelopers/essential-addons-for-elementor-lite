@@ -2959,6 +2959,9 @@ class Woo_Product_Carousel extends Widget_Base {
 	    if ( $settings['direction'] == 'right' ) {
 		    $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'dir', 'rtl' );
 	    }
+	    if ( $settings['eael_product_carousel_image_clickable'] === 'yes' ){
+		    $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'class', 'eael-image-clickable' );
+	    }
 	    $settings['eael_product_carousel_title_tag'] = HelperClass::eael_validate_html_tag($settings['eael_product_carousel_title_tag']);
 	    $settings['eael_product_carousel_sale_text'] = HelperClass::eael_wp_kses($settings['eael_product_carousel_sale_text']);
 	    $settings['eael_product_carousel_stockout_text'] = HelperClass::eael_wp_kses($settings['eael_product_carousel_stockout_text']);

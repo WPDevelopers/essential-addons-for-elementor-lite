@@ -10,6 +10,14 @@ $theme-preset4: #ec3b75;
         background: transparent;
     }
 
+    .eael-image-clickable{
+        .eael-product-carousel{
+            .carousel-overlay{
+                pointer-events: none;
+            }
+        }
+    }
+
     .woocommerce {
         ul.products {
             //display: grid;

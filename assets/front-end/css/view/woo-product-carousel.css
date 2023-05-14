@@ -1,6 +1,9 @@
 .eael-woo-product-carousel-container ins {
   background: transparent;
 }
+.eael-woo-product-carousel-container .eael-image-clickable .eael-product-carousel .carousel-overlay {
+  pointer-events: none;
+}
 .eael-woo-product-carousel-container .woocommerce ul.products {
   padding: 0 !important;
 }
