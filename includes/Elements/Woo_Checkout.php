@@ -86,6 +86,10 @@ class Woo_Checkout extends Widget_Base {
 	}
 
 	protected function register_controls() {
+		if ( is_admin() && ! empty( $_GET['elementor_updater'] ) ) {
+			return;
+		}
+
 	    if( !class_exists( 'woocommerce' ) ) {
 		    $this->start_controls_section(
 			    'eael_global_warning',
