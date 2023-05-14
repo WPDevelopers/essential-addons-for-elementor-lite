@@ -73,10 +73,11 @@ ea.hooks.addAction("init", "ea", () => {
 			});
 
 			// If hashTag is not null then scroll to that hashTag smoothly
-			if( typeof hashTag !== 'undefined' && hashTag ){
-				let $customIdOffsetVal = $customIdOffset ? parseFloat($customIdOffset) : 0;
+			if (typeof hashTag !== 'undefined' && hashTag) {
+				let $customIdOffset = $('#' + hashTag).closest('.eael-adv-accordion').data("custom-id-offset"),
+					$customIdOffsetVal = $customIdOffset ? parseFloat($customIdOffset) : 0;
 				$('html, body').animate({
-					scrollTop: $("#"+hashTag).offset().top - $customIdOffsetVal,
+					scrollTop: $("#" + hashTag).offset().top - $customIdOffsetVal,
 				}, 300);
 			}
 		}
