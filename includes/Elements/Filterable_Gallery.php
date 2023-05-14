@@ -3496,7 +3496,7 @@ class Filterable_Gallery extends Widget_Base
 
                     // Popup
                     $($scope).magnificPopup({
-                        delegate: ".eael-magnific-link.active",
+                        delegate: ".eael-filterable-gallery-item-wrap:not([style*='display: none']) .eael-magnific-link.active",
                         type: "image",
                         gallery: {
                             enabled: $gallery_enabled
