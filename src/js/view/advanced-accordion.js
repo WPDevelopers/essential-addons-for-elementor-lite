@@ -75,6 +75,7 @@ ea.hooks.addAction("init", "ea", () => {
 			if (typeof hashTag !== 'undefined' && hashTag) {
 				let $customIdOffset = $('#' + hashTag).closest('.eael-adv-accordion').data("custom-id-offset"),
 					$customIdOffsetVal = $customIdOffset ? parseFloat($customIdOffset) : 0;
+
 				$('html, body').animate({
 					scrollTop: $("#" + hashTag).offset().top - $customIdOffsetVal,
 				}, 300);
