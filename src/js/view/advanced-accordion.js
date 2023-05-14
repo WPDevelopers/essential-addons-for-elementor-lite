@@ -8,8 +8,7 @@ ea.hooks.addAction("init", "ea", () => {
 			var $advanceAccordion = $scope.find(".eael-adv-accordion"),
 				$accordionHeader = $scope.find(".eael-accordion-header"),
 				$accordionType = $advanceAccordion.data("accordion-type"),
-				$accordionSpeed = $advanceAccordion.data("toogle-speed"),
-				$customIdOffset = $advanceAccordion.data("custom-id-offset");
+				$accordionSpeed = $advanceAccordion.data("toogle-speed");
 
 			// Open default actived tab
 			if (hashTag) {
