@@ -158,6 +158,7 @@ class Product_Grid extends Widget_Base
             'best-selling-products' => esc_html__('Best Selling Products', 'essential-addons-for-elementor-lite'),
             'sale-products' => esc_html__('Sale Products', 'essential-addons-for-elementor-lite'),
             'top-products' => esc_html__('Top Rated Products', 'essential-addons-for-elementor-lite'),
+            'manual' => esc_html__('Manual Selection', 'essential-addons-for-elementor-lite'),
         ]);
     }
 
@@ -401,12 +402,18 @@ class Product_Grid extends Widget_Base
             'min' => 1,
             'max' => 1000,
             'step' => 1,
+            'condition' => [
+                'eael_product_grid_product_filter!' => 'manual'
+            ]
         ]);
 
         $this->add_control('product_offset', [
             'label' => __('Offset', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::NUMBER,
             'default' => 0,
+            'condition' => [
+                'eael_product_grid_product_filter!' => 'manual'
+            ]
         ]);
 
         $this->add_control(
@@ -418,6 +425,9 @@ class Product_Grid extends Widget_Base
                 'multiple' => true,
                 'default' => [ 'publish', 'pending', 'future' ],
                 'options' => $this->eael_get_product_statuses(),
+                'condition' => [
+                    'eael_product_grid_product_filter!' => 'manual'
+                ]
             ]
         );
 
@@ -429,6 +439,20 @@ class Product_Grid extends Widget_Base
             'options' => HelperClass::get_terms_list('product_cat', 'slug'),
             'condition'   => [
               'post_type!' => 'source_dynamic',
+              'eael_product_grid_product_filter!' => 'manual'
+            ],
+        ]);
+
+        $this->add_control('eael_product_grid_products_in', [
+            'label' => esc_html__('Select Products', 'essential-addons-for-elementor-lite'),
+            'type'        => 'eael-select2',
+            'label_block' => true,
+            'multiple' => true,
+            'source_name' => 'post_type',
+            'source_type' => 'product',
+            'condition'   => [
+                'post_type!' => 'source_dynamic',
+                'eael_product_grid_product_filter' => 'manual'
             ],
         ]);
 
@@ -3208,17 +3232,24 @@ class Product_Grid extends Widget_Base
                     'terms' => $settings['eael_product_grid_categories'],
                 ];
             }
-        } else if ($settings['eael_product_grid_product_filter'] == 'best-selling-products') {
+        }
+        else if ($settings['eael_product_grid_product_filter'] == 'best-selling-products') {
             $args['meta_key'] = 'total_sales';
             $args['orderby'] = 'meta_value_num';
             $args['order'] = 'DESC';
-        } else if ($settings['eael_product_grid_product_filter'] == 'sale-products') {
+        }
+        else if ($settings['eael_product_grid_product_filter'] == 'sale-products') {
             $args['post__in']  = array_merge( array( 0 ), wc_get_product_ids_on_sale() );
-        } else if ($settings['eael_product_grid_product_filter'] == 'top-products') {
+        }
+        else if ($settings['eael_product_grid_product_filter'] == 'top-products') {
             $args['meta_key'] = '_wc_average_rating';
             $args['orderby'] = 'meta_value_num';
             $args['order'] = 'DESC';
         }
+        else if( $settings['eael_product_grid_product_filter'] == 'manual' ){
+            $args['post__in']  = array_merge( array( 0 ), $settings['eael_product_grid_products_in'] );
+        }
+
         return $args;
     }
 
