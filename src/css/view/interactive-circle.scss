@@ -5665,28 +5665,52 @@
                 .eael-circle-item {
 
                     &:nth-child(8n+1) .eael-circle-btn-icon {
-                        background-image: radial-gradient(81.89% 82.54% at 48.96% 49.88%, #0956C6 3.76%, #07A9F0 55.38%, #93DCFC 100%);
+                        &.classic {
+                            background: unset;
+                        }
+                        background: radial-gradient(81.89% 82.54% at 48.96% 49.88%, #0956C6 3.76%, #07A9F0 55.38%, #93DCFC 100%);
                     }
                     &:nth-child(8n+2) .eael-circle-btn-icon {
-                        background-image: radial-gradient(64.96% 65.32% at 52.18% 47.01%, #6F00FF 3.76%, #533FFF 55.38%, #B9AAFF 100%);
+                        &.classic {
+                            background: unset;
+                        }
+                        background: radial-gradient(64.96% 65.32% at 52.18% 47.01%, #6F00FF 3.76%, #533FFF 55.38%, #B9AAFF 100%);
                     }
                     &:nth-child(8n+3) .eael-circle-btn-icon {
-                        background-image: radial-gradient(101.16% 101.7% at 47.77% 50.74%, #FF9100 3.76%, #FFB655 56.99%, #FFF04A 100%);
+                        &.classic {
+                            background: unset;
+                        }
+                        background: radial-gradient(101.16% 101.7% at 47.77% 50.74%, #FF9100 3.76%, #FFB655 56.99%, #FFF04A 100%);
                     }
                     &:nth-child(8n+4) .eael-circle-btn-icon {
-                        background-image: radial-gradient(65.76% 66.29% at 48.95% 49.57%, #B40042 3.76%, #C50048 48.92%, #FF5E93 100%);
+                        &.classic {
+                            background: unset;
+                        }
+                        background: radial-gradient(65.76% 66.29% at 48.95% 49.57%, #B40042 3.76%, #C50048 48.92%, #FF5E93 100%);
                     }
                     &:nth-child(8n+5) .eael-circle-btn-icon {
-                        background-image: radial-gradient(73.69% 72.33% at 51.12% 47.67%, #2B3894 3.76%, #364099 14.18%, #5356A8 32.43%, #8078BF 55.38%, #D2A8D1 100%);
+                        &.classic {
+                            background: unset;
+                        }
+                        background: radial-gradient(73.69% 72.33% at 51.12% 47.67%, #2B3894 3.76%, #364099 14.18%, #5356A8 32.43%, #8078BF 55.38%, #D2A8D1 100%);
                     }
                     &:nth-child(8n+6) .eael-circle-btn-icon {
-                        background-image: radial-gradient(94.25% 92.56% at 48.86% 49.71%, #199A8E 3.76%, #7AF4AB 55.38%);
+                        &.classic {
+                            background: unset;
+                        }
+                        background: radial-gradient(94.25% 92.56% at 48.86% 49.71%, #199A8E 3.76%, #7AF4AB 55.38%);
                     }
                     &:nth-child(8n+7) .eael-circle-btn-icon {
-                        background-image: radial-gradient(73.69% 72.33% at 51.12% 47.67%, #2B3894 3.76%, #364099 14.18%, #5356A8 32.43%, #8078BF 55.38%, #D2A8D1 100%);
+                        &.classic {
+                            background: unset;
+                        }
+                        background: radial-gradient(73.69% 72.33% at 51.12% 47.67%, #2B3894 3.76%, #364099 14.18%, #5356A8 32.43%, #8078BF 55.38%, #D2A8D1 100%);
                     }
                     &:nth-child(8n+8) .eael-circle-btn-icon {
-                        background-image: radial-gradient(94.25% 92.56% at 48.86% 49.71%, #199A8E 3.76%, #7AF4AB 55.38%);
+                        &.classic {
+                            background: unset;
+                        }
+                        background: radial-gradient(94.25% 92.56% at 48.86% 49.71%, #199A8E 3.76%, #7AF4AB 55.38%);
                     }
 
                     #eael-circle-item-1 {
@@ -6700,6 +6724,9 @@
             .eael-circle-item {
                 &:nth-child(8n+1) {
                     .eael-circle-icon-shapes {
+                        &.classic {
+                            background: unset;
+                        }
                         transform: rotate(-45deg);
                         background: radial-gradient(
                                         94.25% 92.56% at 48.86% 49.71%,
@@ -6715,6 +6742,9 @@
                 }
                 &:nth-child(8n+2) {
                     .eael-circle-icon-shapes {
+                        &.classic {
+                            background: unset;
+                        }
                         transform: rotate(-90deg);
                         background: linear-gradient(
                                         144.3deg,
@@ -6730,6 +6760,9 @@
                 }
                 &:nth-child(8n+3) {
                     .eael-circle-icon-shapes {
+                        &.classic {
+                            background: unset;
+                        }
                         transform: rotate(-135deg);
                         background: radial-gradient(
                                         64.96% 65.32% at 52.18% 47.01%,
@@ -6746,6 +6779,9 @@
                 }
                 &:nth-child(8n+4) {
                     .eael-circle-icon-shapes {
+                        &.classic {
+                            background: unset;
+                        }
                         transform: rotate(-180deg);
                         background: radial-gradient(
                                         101.16% 101.7% at 47.77% 50.74%,
@@ -6763,6 +6799,9 @@
                 }
                 &:nth-child(8n+5) {
                     .eael-circle-icon-shapes {
+                        &.classic {
+                            background: unset;
+                        }
                         transform: rotate(135deg);
                         background: radial-gradient(
                                         65.76% 66.29% at 48.95% 49.57%,
@@ -6779,6 +6818,9 @@
                 }
                 &:nth-child(8n+6) {
                     .eael-circle-icon-shapes {
+                        &.classic {
+                            background: unset;
+                        }
                         transform: rotate(90deg);
                         background: radial-gradient(
                                         73.69% 72.33% at 51.12% 47.67%,
@@ -6798,6 +6840,9 @@
                 }
                 &:nth-child(8n+7) {
                     .eael-circle-icon-shapes {
+                        &.classic {
+                            background: unset;
+                        }
                         transform: rotate(45deg);
                         background: radial-gradient(
                                         94.25% 92.56% at 48.86% 49.71%,
@@ -6814,6 +6859,9 @@
                 }
                 &:nth-child(8n+8) {
                     .eael-circle-icon-shapes {
+                        &.classic {
+                            background: unset;
+                        }
                         background: radial-gradient(
                                         73.69% 72.33% at 51.12% 47.67%,
                                         #2b3894 3.76%,

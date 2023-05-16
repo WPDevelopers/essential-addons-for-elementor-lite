@@ -6,6 +6,10 @@ jQuery(document).ready(function () {
 		var height =
 			document.documentElement.scrollHeight -
 			document.documentElement.clientHeight;
+
+		if( height === 0 ) {
+			height = document.documentElement.scrollHeight;
+		}
 		var scrolled = (winScroll / height) * 100;
 
 		jQuery(".eael-reading-progress-fill").css({
