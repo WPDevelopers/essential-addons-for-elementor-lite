@@ -2530,8 +2530,8 @@ class Woo_Product_Gallery extends Widget_Base {
 		}
 
 		$args[ 'meta_query' ] = [ 'relation' => 'AND' ];
-
 		$show_stock_out_products = isset( $settings['eael_product_out_of_stock_show'] ) ? $settings['eael_product_out_of_stock_show'] : 'yes';
+
 		if ( get_option( 'woocommerce_hide_out_of_stock_items' ) == 'yes' || 'yes' !== $show_stock_out_products  ) {
 			$args[ 'meta_query' ][] = [
 				'key'   => '_stock_status',
