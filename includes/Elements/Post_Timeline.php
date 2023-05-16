@@ -153,6 +153,7 @@ class Post_Timeline extends Widget_Base
             [
                 'label'       => __('Background Color', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::COLOR,
+				'default'	  => '#3DB1C0',
                 'selectors'   => [
                     '{{WRAPPER}} .eael-timeline-post-inner' => 'background: {{VALUE}}',
                 ],
@@ -302,6 +303,7 @@ class Post_Timeline extends Widget_Base
                 'default'   => '#fff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-timeline-post-title .eael-timeline-post-title-text' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .timeline-layout-card .eael-timeline-post-title .eael-timeline-post-title-text-card' => 'color: {{VALUE}};',
                 ],
 
             ]
@@ -440,6 +442,7 @@ class Post_Timeline extends Widget_Base
             [
                 'label'     => __('Arrow Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
+				'default'	=> '#3DB1C0',
                 'selectors' => [
                     '{{WRAPPER}} .eael-timeline-post-inner'                                          => 'border-color: {{VALUE}};',
                     '{{WRAPPER}} .eael-timeline-post-inner::after'                                   => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}}',
