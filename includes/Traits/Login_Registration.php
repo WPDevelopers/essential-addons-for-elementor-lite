@@ -445,7 +445,7 @@ trait Login_Registration {
 			$register_actions    	= ! empty( $settings['register_action'] ) ? (array) $settings['register_action'] : [];
 			$custom_redirect_url 	= ! empty( $settings['register_redirect_url']['url'] ) ? esc_url_raw( $settings['register_redirect_url']['url'] ) : '/';
 			
-			$previous_page_url 		= ! empty( $_POST['redirect_to_prev_page'] ) ? esc_url_raw( $_POST['redirect_to_prev_page'] ) : '/';
+			$previous_page_url 		= ! empty( $_POST['redirect_to_prev_page'] ) ? sanitize_url( $_POST['redirect_to_prev_page'] ) : '/';
 			$custom_redirect_url 	= ! empty( $settings['register_redirect_url_prev_page'] ) && $settings['register_redirect_url_prev_page'] === 'yes' ? $previous_page_url : $custom_redirect_url;
 			
 			if ( ! empty( $settings['register_user_role'] ) ) {
