@@ -5927,6 +5927,16 @@ class Login_Register extends Widget_Base {
 			<?php }
 		}
 
+		if ( 'register' === $form_type ) {
+			if ( ! empty( $this->ds['register_redirect_url_prev_page'] ) && 'yes' === $this->ds['register_redirect_url_prev_page'] ) {
+				$register_redirect_url_prev_page = ! empty( $_SERVER['HTTP_REFERER'] ) ? esc_url_raw( $_SERVER['HTTP_REFERER'] ) : '';
+				?>
+                <input type="hidden"
+                       name="redirect_to_prev_page"
+                       value="<?php echo esc_attr( $register_redirect_url_prev_page ); ?>">
+			<?php }
+		}
+
 		if ( 'resetpassword' === $form_type ) {
 			if ( ! empty( $this->ds['redirect_after_resetpassword'] ) && 'yes' === $this->ds['redirect_after_resetpassword'] ) {
 				$resetpassword_redirect_url = ! empty( $this->ds['redirect_url_resetpassword']['url'] ) ? esc_url( $this->ds['redirect_url_resetpassword']['url'] ) : '';
@@ -5940,6 +5950,7 @@ class Login_Register extends Widget_Base {
 		// add login security nonce
 		wp_nonce_field( "eael-{$form_type}-action", "eael-{$form_type}-nonce" );
 		?>
+		<input type="text" value="<?php print_r($_SERVER['HTTP_REFERER']); ?>">
         <input type="hidden"
                name="page_id"
                value="<?php echo esc_attr( $this->page_id ); ?>">
