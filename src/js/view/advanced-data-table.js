@@ -289,7 +289,13 @@ class advancedDataTable {
             let cssClass = i <= 6 || i === maxPages ? 'ea-adtp-show' : 'ea-adtp-hide';
             paginationHTML += `<a href="#" data-page="${i}" class="${cssClass}">${i}</a>`;
           }
-          paginationHTML += `<a class="dots-last">...</a><a href="#" data-page="${maxPages}" class="ea-adtp-hide">${maxPages}</a>`;
+
+          let dots2 = '', cssClass = 'ea-adtp-show';
+          if (maxPages > 7) {
+            dots2 = `<a class="dots-last">...</a>`;
+            cssClass = 'ea-adtp-hide';
+          }
+          paginationHTML += dots2 + `<a href="#" data-page="${maxPages}" class="${cssClass}">${maxPages}</a>`;
 
           pagination.insertAdjacentHTML(
               "beforeend",
@@ -325,40 +331,43 @@ class advancedDataTable {
 
           if (e.target.tagName.toLowerCase() == "a") {
             currentPage = e.target.dataset.page;
-            offset =
-              table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
-            startIndex =
-              (currentPage - 1) * table.dataset.itemsPerPage + offset;
+            offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
+            startIndex = (currentPage - 1) * table.dataset.itemsPerPage + offset;
             endIndex = currentPage * table.dataset.itemsPerPage;
 
-            let countFrom = 1, countTo = 6;
-            $('a.ea-adtp-current', pagination).removeClass('ea-adtp-current');
+            if (maxPages > 7) {
+              let countFrom = 1, countTo = 6;
+              $('a.ea-adtp-current', pagination).removeClass('ea-adtp-current');
 
-            if (currentPage > maxPages - 5) {
-              countFrom = maxPages - 5;
-              countTo = maxPages;
-            } else if (currentPage > 5) {
-              countFrom = currentPage - 2;
-              countTo = parseInt(currentPage) + 2;
-            }
+              if (currentPage > maxPages - 5) {
+                countFrom = maxPages - 5;
+                countTo = maxPages;
+              } else if (currentPage > 5) {
+                countFrom = currentPage - 2;
+                countTo = parseInt(currentPage) + 2;
+              }
 
-            $('a.ea-adtp-show', pagination).removeClass('ea-adtp-show').addClass('ea-adtp-hide');
-            for (let page = countFrom; page <= countTo; page++) {
-              $(`a[data-page="${page}"]:not(.ea-adtp-1st,.ea-adtp-last)`, pagination).removeClass('ea-adtp-hide').addClass('ea-adtp-show');
-            }
+              $('a.ea-adtp-show', pagination).removeClass('ea-adtp-show').addClass('ea-adtp-hide');
+              for (let page = countFrom; page <= countTo; page++) {
+                $(`a[data-page="${page}"]:not(.ea-adtp-1st,.ea-adtp-last)`, pagination).removeClass('ea-adtp-hide').addClass('ea-adtp-show');
+              }
 
-            $(`a[data-page="${currentPage}"]`, pagination).addClass('ea-adtp-current');
+              $(`a[data-page="${currentPage}"]`, pagination).addClass('ea-adtp-current');
 
-            if ($(`a[data-page="2"]`, pagination).hasClass('ea-adtp-hide')) {
-              $(`a.dots-1st`, pagination).removeClass('ea-adtp-hide').addClass('ea-adtp-show');
+              if ($(`a[data-page="2"]`, pagination).hasClass('ea-adtp-hide')) {
+                $(`a.dots-1st`, pagination).removeClass('ea-adtp-hide').addClass('ea-adtp-show');
+              } else {
+                $(`a.dots-1st`, pagination).removeClass('ea-adtp-show').addClass('ea-adtp-hide');
+              }
+
+              if ($(`a[data-page="${maxPages - 1}"]`, pagination).hasClass('ea-adtp-hide')) {
+                $(`a.dots-last`, pagination).removeClass('ea-adtp-hide').addClass('ea-adtp-show');
+              } else {
+                $(`a.dots-last`, pagination).removeClass('ea-adtp-show').addClass('ea-adtp-hide');
+              }
             } else {
-              $(`a.dots-1st`, pagination).removeClass('ea-adtp-show').addClass('ea-adtp-hide');
-            }
-
-            if ($(`a[data-page="${maxPages - 1}"]`, pagination).hasClass('ea-adtp-hide')) {
-              $(`a.dots-last`, pagination).removeClass('ea-adtp-hide').addClass('ea-adtp-show');
-            } else {
-              $(`a.dots-last`, pagination).removeClass('ea-adtp-show').addClass('ea-adtp-hide');
+              $('a.ea-adtp-current', pagination).removeClass('ea-adtp-current');
+              $(`a[data-page="${currentPage}"]`, pagination).addClass('ea-adtp-current');
             }
 
             for (let i = offset; i <= table.rows.length - 1; i++) {
