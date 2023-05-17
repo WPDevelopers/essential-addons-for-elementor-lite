@@ -950,6 +950,7 @@ class Simple_Menu extends Widget_Base
 			    ],
 			    'selectors' => [
 				    '{{WRAPPER}} .eael-simple-menu li a span, {{WRAPPER}} .eael-simple-menu li span.eael-simple-menu-indicator' => 'font-size: {{SIZE}}{{UNIT}};',
+				    '{{WRAPPER}} .eael-simple-menu li button.eael-simple-menu-indicator' => 'font-size: {{SIZE}}{{UNIT}};',
 				    '{{WRAPPER}} .eael-simple-menu li span.eael-simple-menu-indicator svg, {{WRAPPER}} .indicator-svg svg'	=> 'width: {{SIZE}}{{UNIT}};',
 			    ],
 		    ]
@@ -1259,6 +1260,7 @@ class Simple_Menu extends Widget_Base
 			    ],
 			    'selectors' => [
 				    '{{WRAPPER}} .eael-simple-menu li ul li a span, {{WRAPPER}} .eael-simple-menu li ul li span.eael-simple-menu-indicator' => 'font-size: {{SIZE}}{{UNIT}};',
+				    '{{WRAPPER}} .eael-simple-menu li ul li button.eael-simple-menu-indicator' => 'font-size: {{SIZE}}{{UNIT}};',
 				    '{{WRAPPER}} .eael-simple-menu li ul li .eael-simple-menu-indicator svg, {{WRAPPER}} .eael-simple-menu li ul li a .indicator-svg svg'	=> 'width: {{SIZE}}{{UNIT}};',
 			    ],
 		    ]

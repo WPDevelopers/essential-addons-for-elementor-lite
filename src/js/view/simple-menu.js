@@ -236,9 +236,9 @@ var SimpleMenu = function ($scope, $) {
             } else {
                 var $height = parseInt($('a', this).css('line-height')) / 2
                 $(this).append(
-                    '<span class="eael-simple-menu-indicator ' +
+                    '<button class="eael-simple-menu-indicator ' +
                     $indicator_class +
-                    '"></span>'
+                    '"></button>'
                 )
             }
 
@@ -260,9 +260,9 @@ var SimpleMenu = function ($scope, $) {
             } else {
                 var $height = parseInt($('a', this).css('line-height')) / 2
                 $(this).append(
-                    '<span class="eael-simple-menu-indicator ' +
+                    '<button class="eael-simple-menu-indicator ' +
                     $dropdown_indicator_class +
-                    '"></span>'
+                    '"></button>'
                 )
             }
 
