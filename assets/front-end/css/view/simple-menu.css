@@ -46,16 +46,37 @@
   display: block;
   text-align: inherit;
 }
-.elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a span, .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a span,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a span,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a button, .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a span,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a button,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a span,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a button,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a span,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a button,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a span,
+.elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a button,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a span,
+.elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a button,
 .elementor-widget-eael-simple-menu.eael-hamburger--desktop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a span,
+.elementor-widget-eael-simple-menu.eael-hamburger--desktop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a button,
 .elementor-widget-eael-simple-menu.eael-hamburger--desktop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a span,
+.elementor-widget-eael-simple-menu.eael-hamburger--desktop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a button,
 .elementor-widget-eael-simple-menu.eael-hamburger--widescreen.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a span,
-.elementor-widget-eael-simple-menu.eael-hamburger--widescreen.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a span {
+.elementor-widget-eael-simple-menu.eael-hamburger--widescreen.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a button,
+.elementor-widget-eael-simple-menu.eael-hamburger--widescreen.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a span,
+.elementor-widget-eael-simple-menu.eael-hamburger--widescreen.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a button {
   display: none;
+}
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a button, .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a button,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a button,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a button,
+.elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a button,
+.elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a button,
+.elementor-widget-eael-simple-menu.eael-hamburger--desktop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a button,
+.elementor-widget-eael-simple-menu.eael-hamburger--desktop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a button,
+.elementor-widget-eael-simple-menu.eael-hamburger--widescreen.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a button,
+.elementor-widget-eael-simple-menu.eael-hamburger--widescreen.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a button {
+  padding: 0;
 }
 .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul, .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul,
@@ -442,9 +463,13 @@
 .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a {
   display: inline-block;
 }
-.eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a span {
+.eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a span,
+.eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a button {
   position: relative;
   margin-left: 5px;
+}
+.eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a button {
+  padding: 0;
 }
 .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul {
   position: absolute;
@@ -466,10 +491,14 @@
 .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li a {
   display: block;
 }
-.eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li a span {
+.eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li a span,
+.eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li a button {
   -webkit-transform: rotate(-90deg);
       -ms-transform: rotate(-90deg);
           transform: rotate(-90deg);
+}
+.eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li a button {
+  padding: 0;
 }
 .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li:last-child > a {
   border-bottom-width: 0;

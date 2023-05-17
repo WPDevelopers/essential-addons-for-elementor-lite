@@ -25,8 +25,13 @@
                         display: block;
                         text-align: inherit;
 
-                        span {
+                        span, 
+                        button {
                             display: none;
+                        }
+
+                        button {
+                            padding: 0;
                         }
                     }
 
@@ -399,9 +404,14 @@
                     display: inline-block;
 
                     // indicator
-                    span {
+                    span,
+                    button {
                         position: relative;
                         margin-left: 5px;
+                    }
+
+                    button {
+                        padding: 0;
                     }
                 }
 
@@ -425,8 +435,13 @@
                             display: block;
 
                             // indicator
-                            span {
+                            span,
+                            button {
                                 transform: rotate(-90deg);
+                            }
+
+                            button {
+                                padding: 0;
                             }
                         }
 
