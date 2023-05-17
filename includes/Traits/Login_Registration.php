@@ -445,7 +445,7 @@ trait Login_Registration {
 			$register_actions    	= ! empty( $settings['register_action'] ) ? (array) $settings['register_action'] : [];
 			$custom_redirect_url 	= ! empty( $settings['register_redirect_url']['url'] ) ? esc_url_raw( $settings['register_redirect_url']['url'] ) : '/';
 			
-			$previous_page_url 		= ! empty( $_POST['redirect_to_prev_page'] ) ? sanitize_url( $_POST['redirect_to_prev_page'] ) : '/';
+			$previous_page_url 		= ! empty( $_POST['redirect_to_prev_page'] ) ? sanitize_url( $_POST['redirect_to_prev_page'] ) : '';
 			$custom_redirect_url 	= ! empty( $settings['register_redirect_url_prev_page'] ) && $settings['register_redirect_url_prev_page'] === 'yes' ? $previous_page_url : $custom_redirect_url;
 			
 			if ( ! empty( $settings['register_user_role'] ) ) {
@@ -570,7 +570,7 @@ trait Login_Registration {
             $this->delete_registration_options($widget_id);
 
 			if ( $ajax ) {
-				if ( in_array( 'redirect', $register_actions ) ) {
+				if ( in_array( 'redirect', $register_actions ) && ! empty( $custom_redirect_url ) ) {
 					$data['redirect_to'] = $custom_redirect_url;
 				}
 				wp_send_json_success( $data );
@@ -585,13 +585,13 @@ trait Login_Registration {
 
 		// custom redirect?
 		if ( $ajax ) {
-			if ( in_array( 'redirect', $register_actions ) ) {
+			if ( in_array( 'redirect', $register_actions ) && ! empty( $custom_redirect_url ) ) {
 				$data['redirect_to'] = $custom_redirect_url;
 			}
 			wp_send_json_success( $data );
 		}
 
-		if ( in_array( 'redirect', $register_actions ) ) {
+		if ( in_array( 'redirect', $register_actions ) && ! empty( $custom_redirect_url ) ) {
 			wp_safe_redirect( $custom_redirect_url );
 			exit();
 		}

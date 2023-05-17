@@ -5950,7 +5950,6 @@ class Login_Register extends Widget_Base {
 		// add login security nonce
 		wp_nonce_field( "eael-{$form_type}-action", "eael-{$form_type}-nonce" );
 		?>
-		<input type="text" value="<?php print_r($_SERVER['HTTP_REFERER']); ?>">
         <input type="hidden"
                name="page_id"
                value="<?php echo esc_attr( $this->page_id ); ?>">
