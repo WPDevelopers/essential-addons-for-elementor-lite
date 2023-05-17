@@ -1882,6 +1882,9 @@ class Login_Register extends Widget_Base {
 			'description'   => __( 'Redirect to the last visited page before registration.', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::SWITCHER,
 			'default' => '',
+			'condition'     => [
+				'register_action' => 'redirect',
+			],
 		] );
 
 		if(current_user_can('create_users')){
