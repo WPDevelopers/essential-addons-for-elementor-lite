@@ -1873,7 +1873,15 @@ class Login_Register extends Widget_Base {
 			],
 			'condition'     => [
 				'register_action' => 'redirect',
+				'register_redirect_url_prev_page!' => 'yes'
 			],
+		] );
+
+		$this->add_control( 'register_redirect_url_prev_page', [
+			'label'   => __( 'Redirect to Previous Page', 'essential-addons-for-elementor-lite' ),
+			'description'   => __( 'Redirect to the last visited page before registration.', 'essential-addons-for-elementor-lite' ),
+			'type'    => Controls_Manager::SWITCHER,
+			'default' => '',
 		] );
 
 		if(current_user_can('create_users')){
