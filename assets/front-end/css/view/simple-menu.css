@@ -425,6 +425,9 @@
 .eael-simple-menu-container .eael-simple-menu li:hover > a, .eael-simple-menu-container .eael-simple-menu li.current-menu-item > a {
   color: #ffffff;
 }
+.eael-simple-menu-container .eael-simple-menu button.eael-simple-menu-indicator {
+  padding: 0;
+}
 .eael-simple-menu-container .eael-simple-menu .eael-simple-menu-indicator {
   position: absolute;
   top: 10px;
