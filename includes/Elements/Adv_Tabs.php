@@ -150,6 +150,19 @@ class Adv_Tabs extends Widget_Base
         );
 
         $this->add_control(
+            'eael_adv_tabs_toggle_tab',
+            [
+                'label' => esc_html__('Toggle Tab', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'description' => esc_html__('Allows user to open and collapse.', 'essential-addons-for-elementor-lite'),
+                'default' => 'yes',
+                'return_value' => 'yes',
+                'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+
+        $this->add_control(
             'eael_adv_tabs_custom_id_offset',
             [
                 'label'       => esc_html__('Custom ID offset', 'essential-addons-for-elementor-lite'),
@@ -952,12 +965,14 @@ class Adv_Tabs extends Widget_Base
         $tab_icon_migrated = isset($settings['__fa4_migrated']['eael_adv_tabs_tab_title_icon_new']);
         $tab_icon_is_new = empty($settings['eael_adv_tabs_tab_title_icon']);
         $tab_auto_active =  'yes' === $settings['eael_adv_tabs_default_active_tab'] ? esc_attr('eael-tab-auto-active') : '';
+        $tab_tpggle = 'yes' === $settings['eael_adv_tabs_toggle_tab'] ? esc_attr( 'eael-tab-toggle' ) : '';
+
 
         $this->add_render_attribute(
             'eael_tab_wrapper',
             [
                 'id' => "eael-advance-tabs-{$this->get_id()}",
-                'class' => ['eael-advance-tabs', $settings['eael_adv_tab_layout'], $tab_auto_active],
+                'class' => ['eael-advance-tabs', $settings['eael_adv_tab_layout'], $tab_auto_active, $tab_tpggle],
                 'data-tabid' => $this->get_id(),
             ]
         );
