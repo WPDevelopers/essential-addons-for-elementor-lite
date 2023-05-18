@@ -81,20 +81,24 @@ ea.hooks.addAction("init", "ea", () => {
 				var tabsContent = $(tabsContainer)
 				.children(".eael-tabs-content")
 				.children("div");
-				
-				$(this).parent("li").addClass("active");
-				
-				$(tabsNav).removeClass("active active-default").addClass("inactive").attr('aria-selected', 'false').attr('aria-expanded', 'false');
-				$(this).addClass("active").removeClass("inactive");
-				$(this).attr("aria-selected", 'true').attr("aria-expanded", 'true');
-				
-				$(tabsContent).removeClass("active").addClass("inactive");
-				$(tabsContent)
-				.eq(currentTabIndex)
-				.addClass("active")
-				.removeClass("inactive");
 
-                ea.hooks.doAction("ea-advanced-tabs-triggered", $(tabsContent).eq(currentTabIndex));
+				if ($currentTab.hasClass('eael-tab-toggle')) {
+					$(this).toggleClass('active inactive');
+					$(tabsNav).not(this).removeClass("active active-default").addClass("inactive").attr('aria-selected', 'false').attr('aria-expanded', 'false');
+					$(this).attr("aria-selected", 'true').attr("aria-expanded", 'true');
+
+					$(tabsContent).not(':eq(' + currentTabIndex + ')').removeClass("active").addClass("inactive");
+					$(tabsContent).eq(currentTabIndex).toggleClass('active inactive');
+				} else {
+					$(this).parent("li").addClass("active");
+					$(tabsNav).removeClass("active active-default").addClass("inactive").attr('aria-selected', 'false').attr('aria-expanded', 'false');
+					$(this).addClass("active").removeClass("inactive");
+					$(this).attr("aria-selected", 'true').attr("aria-expanded", 'true');
+
+					$(tabsContent).removeClass("active").addClass("inactive");
+					$(tabsContent).eq(currentTabIndex).addClass("active").removeClass("inactive");
+				}
+				ea.hooks.doAction("ea-advanced-tabs-triggered", $(tabsContent).eq(currentTabIndex));
 				
 				$(tabsContent).each(function (index) {
 					$(this).removeClass("active-default");
