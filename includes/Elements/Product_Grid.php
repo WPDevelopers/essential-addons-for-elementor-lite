@@ -402,9 +402,6 @@ class Product_Grid extends Widget_Base
             'min' => 1,
             'max' => 1000,
             'step' => 1,
-            'condition' => [
-                'eael_product_grid_product_filter!' => 'manual'
-            ]
         ]);
 
         $this->add_control('product_offset', [
@@ -3247,7 +3244,7 @@ class Product_Grid extends Widget_Base
             $args['order'] = 'DESC';
         }
         else if( $settings['eael_product_grid_product_filter'] == 'manual' ){
-            $args['post__in']  = array_merge( array( 0 ), $settings['eael_product_grid_products_in'] );
+            $args['post__in'] = $settings['eael_product_grid_products_in'] ? $settings['eael_product_grid_products_in'] : [ 0 ];
         }
 
         return $args;
