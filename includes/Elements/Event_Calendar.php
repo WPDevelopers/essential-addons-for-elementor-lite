@@ -811,6 +811,47 @@ class Event_Calendar extends Widget_Base
         );
 
         $this->add_control(
+            'eael_table_ec_default_date_type',
+            [
+                'label' => esc_html__( 'Default Date Type', 'essential-addons-for-elementor-lite' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'current',
+                'options' => [
+                    'current' => esc_html__( 'Current Day', 'essential-addons-for-elementor-lite' ),
+                    'custom'  => esc_html__( 'Custom Date', 'essential-addons-for-elementor-lite' ),
+                ],
+            ]
+        );
+
+        $default_date = date('Y-m-d');
+        $this->add_control(
+            'eael_table_event_calendar_default_date',
+            [
+                'label' => __('', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DATE_TIME,
+                'label_block' => true,
+                'picker_options' => [
+                    'enableTime'	=> false,
+                    'dateFormat' 	=> 'Y-m-d',
+                ],
+                'default' => $default_date,
+                'condition' => [
+                    'eael_table_ec_default_date_type' => 'custom'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_table_old_events_hide',
+            [
+                'label' => __('Hide Old Events', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_block' => false,
+                'return_value' => 'yes',
+            ]
+        );
+
+        $this->add_control(
             'eael_ec_show_search',
             [
                 'label' => esc_html__( 'Show Search', 'essential-addons-for-elementor-lite' ),
@@ -819,6 +860,7 @@ class Event_Calendar extends Widget_Base
                 'label_off' => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
                 'return_value' => 'yes',
                 'default' => 'yes',
+                'separator' => 'before'
             ]
         );
 
@@ -2732,9 +2774,9 @@ class Event_Calendar extends Widget_Base
                 }
 
                 foreach ( $data as $event ) {
-                    $style = $item_count <= $item_per_page ? 'display: table-row;' : 'display: none;';
+                    $style = $item_count >= $item_per_page ? 'style="display: none;"' : '';
                     $item_count ++;
-                    echo "<tr style='" . $style . "'>";
+                    echo '<tr ' . $style . ' >';
                     if ( $settings['eael_ec_show_title'] === 'yes' ) {
                         echo '<td>' . Helper::eael_wp_kses( $event['title'] ) . '</td>';
                     }
@@ -2758,7 +2800,6 @@ class Event_Calendar extends Widget_Base
         if ( $settings['eael_ec_show_pagination'] ){
            echo '<div class="eael-event-calendar-pagination ea-ec-pagination-button"></div>';
         }
-//		echo_pre($data);
 	}
 
     protected function eaelec_load_event_details()
@@ -2799,7 +2840,9 @@ class Event_Calendar extends Widget_Base
                     $end = date('Y-m-d H:i', strtotime($event["eael_event_end_date"])) . ":01";
                 }
 
-                if( !empty( $settings['eael_old_events_hide'] ) && 'yes' === $settings['eael_old_events_hide'] ){
+                $layout = $settings['eael_event_display_layout'] === 'calender' ? '' : '_'.$settings['eael_event_display_layout'];
+
+                if( !empty( $settings["eael{$layout}_old_events_hide"] ) && 'yes' === $settings["eael{$layout}_old_events_hide"] ){
                     $is_old_event = $this->is_old_event($start);
                     if($is_old_event) {
                         continue;
@@ -2942,9 +2985,11 @@ class Event_Calendar extends Widget_Base
                     $settings_eael_event_global_text_color = $this->fetch_color_or_global_color($settings, 'eael_event_global_text_color');
                 }
                 
-                $settings_eael_event_global_popup_ribbon_color = $this->fetch_color_or_global_color($settings, 'eael_event_global_popup_ribbon_color');                  
+                $settings_eael_event_global_popup_ribbon_color = $this->fetch_color_or_global_color($settings, 'eael_event_global_popup_ribbon_color');
 
-                if( !empty( $settings['eael_old_events_hide'] ) && 'yes' === $settings['eael_old_events_hide'] ){
+                $layout = $settings['eael_event_display_layout'] === 'calender' ? '' : '_'.$settings['eael_event_display_layout'];
+
+                if( !empty( $settings["eael{$layout}_old_events_hide"] ) && 'yes' === $settings["eael{$layout}_old_events_hide"] ){
                     $is_old_event = $this->is_old_event($ev_start_date);
                     if($is_old_event) {
                         continue;
@@ -3037,7 +3082,9 @@ class Event_Calendar extends Widget_Base
 
             $start = tribe_get_start_date($event->ID, true, $date_format);
 
-            if( !empty( $settings['eael_old_events_hide'] ) && 'yes' === $settings['eael_old_events_hide'] ){
+            $layout = $settings['eael_event_display_layout'] === 'calender' ? '' : '_'.$settings['eael_event_display_layout'];
+
+            if( !empty( $settings["eael{$layout}_old_events_hide"] ) && 'yes' === $settings["eael{$layout}_old_events_hide"] ){
                 $is_old_event = $this->is_old_event($start);
                 if($is_old_event) {
                     continue;
