@@ -57,7 +57,7 @@ class NFT_Gallery extends Widget_Base {
 	}
 
 	public function get_custom_help_url() {
-		return 'https://essential-addons.com/elementor/docs/nft-gallery/';
+		return 'https://essential-addons.com/elementor/docs/ea-nft-gallery/';
 	}
 
 	protected function register_controls() {
@@ -2715,7 +2715,7 @@ class NFT_Gallery extends Widget_Base {
 		$nft_gallery['item_limit']       = ! empty( $settings['eael_nft_gallery_opensea_item_limit'] ) ? esc_html( $settings['eael_nft_gallery_opensea_item_limit'] ) : 9;
 
 		$expiration = ! empty( $settings['eael_nft_gallery_opensea_data_cache_time'] ) ? absint( $settings['eael_nft_gallery_opensea_data_cache_time'] ) * MINUTE_IN_SECONDS : DAY_IN_SECONDS;
-		$md5        = md5( $nft_gallery['api_key'] . $nft_gallery['opensea_type'] . $nft_gallery['opensea_filterby'] . $settings['eael_nft_gallery_opensea_filterby_slug'] . $settings['eael_nft_gallery_opensea_filterby_wallet'] . $nft_gallery['item_limit'] . $nft_gallery['order'] . $this->get_id() );
+		$md5        = md5( $nft_gallery['opensea_type'] . $nft_gallery['opensea_filterby'] . $settings['eael_nft_gallery_opensea_filterby_slug'] . $settings['eael_nft_gallery_opensea_filterby_wallet'] . $nft_gallery['item_limit'] . $nft_gallery['order'] . $this->get_id() );
 		$cache_key  = "{$nft_gallery['source']}_{$expiration}_{$md5}_nftg_cache";
 		$items      = get_transient( $cache_key );
 

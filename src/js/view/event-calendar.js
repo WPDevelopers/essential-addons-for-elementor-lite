@@ -203,7 +203,7 @@ var EventCalendar = function ($scope, $) {
 							$(".eaelec-modal-body").css("height", "300px");
 						}
 
-						if (event.extendedProps.hide_details_link !== 'yes' ){
+						if ( $(".eael-event-calendar-cls", $scope).data('hidedetailslink') !== 'yes'){
 							modalFooterLink.attr("href", event.url).css("display", "block");
 						}else {
 							modalFooterLink.css("display", "none");
@@ -241,7 +241,7 @@ var EventCalendar = function ($scope, $) {
 	function refreshPopUpDetailsLink(){
 		var modalFooter = $(".eaelec-modal-footer"),
 			modalFooterClass = modalFooter.find('a').attr('class'),
-			modalFooterText = modalFooter.find('a').text();
+			modalFooterText = $(".eael-event-calendar-cls", $scope).attr( 'data-detailsButtonText' );
 		modalFooter.html('<a class="'+modalFooterClass+'">'+modalFooterText+'</a>');
 	}
 

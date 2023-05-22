@@ -12,8 +12,8 @@ var BusinessReviewsHandler = function ($scope, $) {
 				arrowPrev		= businessReviewsSlider.attr('data-arrow-prev'),
 				effect 			= businessReviewsSlider.attr('data-effect'),
 				items 			= businessReviewsSlider.attr('data-items'),
-				itemsTablet 			= businessReviewsSlider.attr('data-items_tablet'),
-				itemsMobile 			= businessReviewsSlider.attr('data-items_mobile'),
+				itemsTablet 	= businessReviewsSlider.attr('data-items_tablet'),
+				itemsMobile 	= businessReviewsSlider.attr('data-items_mobile'),
 				itemGap 		= businessReviewsSlider.attr('data-item_gap'),
 				loop 			= businessReviewsSlider.attr('data-loop'),
 				speed 			= businessReviewsSlider.attr('data-speed'),
@@ -89,7 +89,7 @@ var BusinessReviewsHandler = function ($scope, $) {
 };
 
 const swiperLoader = (swiperElement, swiperConfig) => {
-	if ( 'undefined' === typeof Swiper ) {
+	if ( 'undefined' === typeof Swiper || 'function' === typeof Swiper ) {
 		const asyncSwiper = elementorFrontend.utils.swiper;
 		return new asyncSwiper( swiperElement, swiperConfig ).then( ( newSwiperInstance ) => {
 			return  newSwiperInstance;
