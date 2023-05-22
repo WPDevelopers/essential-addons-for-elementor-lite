@@ -1458,6 +1458,9 @@ class Login_Register extends Widget_Base {
 				'toggle' => __( 'Toggle', 'essential-addons-for-elementor-lite' ),
 				'checkbox'  => __( 'Checkbox', 'essential-addons-for-elementor-lite' ),
 			],
+			'condition'   => [
+				'show_terms_conditions' => 'yes',
+			],
 		] );
 
 		$this->add_control( 'acceptance_label', [
