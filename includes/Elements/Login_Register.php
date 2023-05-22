@@ -1450,6 +1450,17 @@ class Login_Register extends Widget_Base {
 			'return_value' => 'yes',
 		] );
 
+		$this->add_control( 'eael_terms_conditions_field_type', [
+			'label'       => __( 'Field Type', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::SELECT,
+			'default'     => 'toggle',
+			'render_type' => 'none',
+			'options'     => [
+				'toggle' => __( 'Toggle', 'essential-addons-for-elementor-lite' ),
+				'checkbox'  => __( 'Checkbox', 'essential-addons-for-elementor-lite' ),
+			],
+		] );
+
 		$this->add_control( 'acceptance_label', [
 			'label'       => __( 'Acceptance Label', 'essential-addons-for-elementor-lite' ),
 			'description' => __( 'Eg. I accept the terms & conditions. Note: First line is checkbox label & Last line will be used as link text.', 'essential-addons-for-elementor-lite' ),
