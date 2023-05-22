@@ -2669,12 +2669,12 @@ class Event_Calendar extends Widget_Base
             data-event_limit = "' . $event_limit . '"
             data-events="' . htmlspecialchars( json_encode( $data ), ENT_QUOTES, 'UTF-8' ) . '"
             data-first_day="' . $settings['eael_event_calendar_first_day'] . '"></div>';
-
+            $this->eaelec_load_event_details();
 		}
 		else{
 			$this->eaelec_display_table( $data, $settings );
 		}
-        echo $this->eaelec_load_event_details() . '</div>';
+        echo '</div>';
     }
 
 	public function eaelec_display_table($data, $settings){
@@ -2685,9 +2685,11 @@ class Event_Calendar extends Widget_Base
             </div>
             <?php
         }
-        $item_per_page = $settings['eael_ec_show_pagination'] === 'yes' ? $settings['eael_ec_item_per_page'] : 1000;
+        $is_paginated = $settings['eael_ec_show_pagination'] === 'yes';
+        $item_per_page = $is_paginated ? $settings['eael_ec_item_per_page'] : 0;
+
         ?>
-		<table class="eael-event-calendar-table ea-ec-table-paginated ea-ec-table-sortable" data-items-per-page="<?php esc_attr_e( $item_per_page );?>">
+		<table class="eael-event-calendar-table <?php  echo $is_paginated ? 'ea-ec-table-paginated' : '' ?> ea-ec-table-sortable" data-items-per-page="<?php esc_attr_e( $item_per_page );?>">
 			<thead>
 			<tr style="display: table-row;">
                 <?php
