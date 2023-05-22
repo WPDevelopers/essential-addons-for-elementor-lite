@@ -907,30 +907,34 @@ trait Login_Registration {
 				}
 			}
 
-			if( $user || ! is_wp_error( $user ) ){
-				reset_password( $user, sanitize_text_field( $_POST['eael-pass1'] ) );
-				$data['message'] = isset( $settings['success_resetpassword'] ) ? __( Helper::eael_wp_kses( $settings['success_resetpassword'] ), 'essential-addons-for-elementor-lite' ) : esc_html__( 'Your password has been reset.', 'essential-addons-for-elementor-lite' );
-
-				$error_key = 'eael_resetpassword_error_' . esc_attr( $widget_id );
-				delete_option( $error_key );				
-				delete_option( 'eael_show_reset_password_on_form_submit_' . $widget_id );
-
-				if($ajax){
-					// $custom_redirect_url = ! empty( $settings['resetpassword_redirect_url']['url'] ) ? $settings['resetpassword_redirect_url']['url'] : '/';
-					if( ! empty( $_POST['resetpassword_redirect_to'] ) ){
-						$data['redirect_to'] = esc_url_raw( $_POST['resetpassword_redirect_to'] );
+			if( $user && ! is_wp_error( $user ) ){
+				try {
+					reset_password( $user, sanitize_text_field( $_POST['eael-pass1'] ) );
+					$data['message'] = isset( $settings['success_resetpassword'] ) ? __( Helper::eael_wp_kses( $settings['success_resetpassword'] ), 'essential-addons-for-elementor-lite' ) : esc_html__( 'Your password has been reset.', 'essential-addons-for-elementor-lite' );
+	
+					$error_key = 'eael_resetpassword_error_' . esc_attr( $widget_id );
+					delete_option( $error_key );				
+					delete_option( 'eael_show_reset_password_on_form_submit_' . $widget_id );
+	
+					if($ajax){
+						// $custom_redirect_url = ! empty( $settings['resetpassword_redirect_url']['url'] ) ? $settings['resetpassword_redirect_url']['url'] : '/';
+						if( ! empty( $_POST['resetpassword_redirect_to'] ) ){
+							$data['redirect_to'] = esc_url_raw( $_POST['resetpassword_redirect_to'] );
+						}
+	
+						wp_send_json_success( $data );
+					} else {
+						update_option( 'eael_resetpassword_success_' . $widget_id, $data['message'], false );
 					}
-
-					wp_send_json_success( $data );
-				} else {
-					update_option( 'eael_resetpassword_success_' . $widget_id, $data['message'], false );
+	
+					if ( ! empty( $_POST['resetpassword_redirect_to'] ) ) {
+						wp_safe_redirect( esc_url_raw( $_POST['resetpassword_redirect_to'] ) );
+						exit();
+					}
+				} catch( \Exception $e){
+					// Do nothing.
+					unset( $e );
 				}
-
-				if ( ! empty( $_POST['resetpassword_redirect_to'] ) ) {
-					wp_safe_redirect( esc_url_raw( $_POST['resetpassword_redirect_to'] ) );
-					exit();
-				}
-
 			}
 
 			if (isset($_SERVER['HTTP_REFERER'])) {
