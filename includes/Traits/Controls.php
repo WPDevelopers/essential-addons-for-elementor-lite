@@ -1069,12 +1069,28 @@ trait Controls
 				    ],
 			    ]
 		    );
+
+		    $wb->add_control(
+			    'eael_image_linkable',
+			    [
+				    'label'        => __( 'Image Clickable', 'essential-addons-for-elementor-lite' ),
+				    'type'         => Controls_Manager::SWITCHER,
+				    'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				    'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+				    'return_value' => 'yes',
+				    'default'      => '',
+				    'condition'    => [
+					    'eael_show_image'              => 'yes',
+					    'eael_content_timeline_choose' => 'dynamic',
+				    ],
+			    ]
+		    );
 	    }
 
         $wb->add_control(
             'eael_show_excerpt',
             [
-                'label' => __('Show excerpt', 'essential-addons-for-elementor-lite'),
+                'label' => __('Show Excerpt', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
                 'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),

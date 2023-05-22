@@ -147,6 +147,11 @@
         align-items: center;
     }
 
+    .swiper-button-next:after, .swiper-rtl .swiper-button-prev:after,
+    .swiper-button-prev:after, .swiper-rtl .swiper-button-next:after {
+        content: '';
+    }
+
     .swiper-button-prev {
         left: -40px;
         right: auto;

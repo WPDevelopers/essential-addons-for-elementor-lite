@@ -113,6 +113,9 @@ jQuery(document.body).on('country_to_state_changing', function(event, country, w
 		_wrapper = typeof _wrapper !== 'undefined' ? _wrapper : wrapper;
 		$.each(checkout_keys[type], function (field_key, form_class){
 			let $fieldHtml = _wrapper.find(`#${field_key}_field`);
+			if ( $fieldHtml.length === 0 ){
+				 $fieldHtml = _wrapper.find(`input[name='${field_key}']`).closest('p');
+			}
 			$fieldHtml.removeClass('form-row-first form-row-last form-row-wide').addClass(form_class);
 			$(`#eael-wc-${type}-reordered-fields .eael-woo-${type}-fields`).append($fieldHtml);
 		});
@@ -141,7 +144,7 @@ let change_button_text = function (){
 		}
 	}, 500);
 }
-jQuery(document.body).on('update_checkout payment_method_selected', function(event) {
+jQuery(document.body).on('update_checkout payment_method_selected updated_checkout', function(event) {
 	change_button_text();
 }).on('click', '.woocommerce-checkout-payment li label', function (){
 	change_button_text();

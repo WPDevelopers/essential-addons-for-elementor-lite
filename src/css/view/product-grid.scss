@@ -284,7 +284,6 @@
 
                         .yith-wcwl-add-to-wishlist {
                             margin: 0 15px 15px 15px;
-                            padding: 7px;
                             color: #fff;
                             background-color: #333;
 
@@ -316,10 +315,12 @@
                         }
 
                         a {
-                            font-size: 0;
                             vertical-align: middle;
                             display: inline-block;
                             color: inherit;
+                            margin: 0;
+                            line-height: 38px;
+                            width: 100%;
 
                             i {
                                 display: none;
@@ -815,7 +816,7 @@
                 margin: 15px;
                 padding: 7px;
                 color: #fff;
-                background-color: #333;
+                background-color: transparent;
 
                 &.exists {
                     span {
