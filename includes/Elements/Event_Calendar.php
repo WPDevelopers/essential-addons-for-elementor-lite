@@ -2708,16 +2708,24 @@ class Event_Calendar extends Widget_Base
 			<tbody>
 				<?php
                 $item_count  = 1;
+
                 $date_format = $settings['eael_ec_date_format'] != 'custom' ? $settings['eael_ec_date_format'] : $settings['eael_ec_date_format_custom'];
                 $time_format = $settings['eael_ec_time_format'] != 'custom' ? $settings['eael_ec_time_format'] : $settings['eael_ec_time_format_custom'];
 
+                $time_separator = '';
+                if ( $settings['eael_ec_date_time_separator'] ){
+                    $letters = str_split($settings['eael_ec_date_time_separator']);
+                    $lettersWithBackslashes = array_map(function($letter) {
+                        return '\\' . $letter;
+                    }, $letters);
+                    $time_separator = implode('', $lettersWithBackslashes);
+                }
 
                 if ( $settings['eael_ec_date_time_format'] === 'date-time' ){
-
-                    $date_format = $date_format . $settings['eael_ec_date_time_separator'] . $time_format;
+                    $date_format = $date_format . $time_separator . $time_format;
                 }
                 elseif ( $settings['eael_ec_date_time_format'] === 'time-date' ){
-                    $date_format = $time_format . $settings['eael_ec_date_time_separator'] . $date_format;
+                    $date_format = $time_format . $time_separator . $date_format;
                 }
                 elseif ( $settings['eael_ec_date_time_format'] === 'time' ){
                     $date_format = $time_format;
