@@ -224,6 +224,11 @@
 .eael-event-calendar-wrapper.layout-table .ea-advanced-data-table-search-right {
   text-align: right;
 }
+.eael-event-calendar-wrapper.layout-table .eael-event-calendar-pagination {
+  border: none !important;
+  padding: 0;
+}
+.eael-event-calendar-wrapper.layout-table .eael-event-calendar-pagination span,
 .eael-event-calendar-wrapper.layout-table .eael-event-calendar-pagination a {
   display: inline-block;
   border: 1px solid #eee;
@@ -231,6 +236,9 @@
   padding: 3px 8px;
   font-size: 14px;
   border-radius: 4px;
+}
+.eael-event-calendar-wrapper.layout-table .eael-event-calendar-pagination a {
+  cursor: pointer;
 }
 .elementor-page .entry-content .eael-event-calendar-wrapper a {
   text-decoration: none;

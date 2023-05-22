@@ -242,6 +242,9 @@
 			text-align: right;
 		}
 		.eael-event-calendar-pagination{
+			border: none !important;
+			padding: 0;
+			span,
 			a{
 				display: inline-block;
 				border: 1px solid #eee;
@@ -249,6 +252,9 @@
 				padding: 3px 8px;
 				font-size: 14px;
 				border-radius: 4px;
+			}
+			a{
+				cursor: pointer;
 			}
 		}
 	}
