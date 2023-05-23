@@ -813,7 +813,7 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'eael_table_ec_default_date_type',
             [
-                'label' => esc_html__( 'Default Date Type', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'Default Start Date', 'essential-addons-for-elementor-lite' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'current',
                 'options' => [
@@ -842,19 +842,9 @@ class Event_Calendar extends Widget_Base
         );
 
         $this->add_control(
-            'eael_table_old_events_hide',
-            [
-                'label' => __('Hide Old Events', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'label_block' => false,
-                'return_value' => 'yes',
-            ]
-        );
-
-        $this->add_control(
             'eael_ec_show_search',
             [
-                'label' => esc_html__( 'Show Search', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'Search', 'essential-addons-for-elementor-lite' ),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'label_on' => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
                 'label_off' => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
@@ -879,19 +869,19 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'eael_ec_search_align',
             [
-                'label' => esc_html__( 'Alignment', 'textdomain' ),
+                'label' => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
                 'type' => \Elementor\Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => esc_html__( 'Left', 'textdomain' ),
+                        'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
                         'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => esc_html__( 'Center', 'textdomain' ),
+                        'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
                         'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
-                        'title' => esc_html__( 'Right', 'textdomain' ),
+                        'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
                         'icon' => 'eicon-text-align-right',
                     ],
                 ],
@@ -909,7 +899,7 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'eael_ec_show_title',
             [
-                'label' => esc_html__( 'Show Title', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'label_on' => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
                 'label_off' => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
@@ -922,7 +912,7 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'eael_ec_title_label',
             [
-                'label' => esc_html__( 'Title Label', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'Label', 'essential-addons-for-elementor-lite' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
                 'condition' =>[
@@ -934,7 +924,7 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'eael_ec_show_description',
             [
-                'label' => esc_html__( 'Show Description', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'Description', 'essential-addons-for-elementor-lite' ),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'label_on' => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
                 'label_off' => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
@@ -947,7 +937,7 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'eael_ec_desc_label',
             [
-                'label' => esc_html__( 'Description Label', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'Label', 'essential-addons-for-elementor-lite' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => esc_html__( 'Description', 'essential-addons-for-elementor-lite' ),
                 'condition' =>[
@@ -959,7 +949,7 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'eael_ec_show_date',
             [
-                'label' => esc_html__( 'Show Date', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'Date', 'essential-addons-for-elementor-lite' ),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'label_on' => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
                 'label_off' => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
@@ -972,7 +962,7 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'eael_ec_date_label',
             [
-                'label' => esc_html__( 'Date Label', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'Label', 'essential-addons-for-elementor-lite' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => esc_html__( 'Date', 'essential-addons-for-elementor-lite' ),
                 'condition' =>[
@@ -982,21 +972,9 @@ class Event_Calendar extends Widget_Base
         );
 
         $this->add_control(
-            'eael_ec_date_time_format_heading',
-            [
-                'label' => esc_html__( 'Format', 'essential-addons-for-elementor-lite' ),
-                'type' => \Elementor\Controls_Manager::HEADING,
-                'separator' => 'before',
-                'condition' =>[
-                    'eael_ec_show_date' => 'yes'
-                ]
-            ]
-        );
-
-        $this->add_control(
             'eael_ec_date_time_format',
             [
-                'label' => esc_html__( 'Date Time', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'Visibility', 'essential-addons-for-elementor-lite' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'date',
                 'options' => [
@@ -1027,7 +1005,7 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'eael_ec_date_to_date_separator',
             [
-                'label' => esc_html__( 'Start and End Separator', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'Event Time Separator', 'essential-addons-for-elementor-lite' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => esc_html__( '-', 'essential-addons-for-elementor-lite' ),
                 'condition' =>[
@@ -1088,10 +1066,10 @@ class Event_Calendar extends Widget_Base
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'g:i A',
                 'options' => [
-                    'H:i' => date('H:i'),              // 00:00
+                    'H:i' => date('H:i') . esc_html__( ' (24 Hours)', 'essential-addons-for-elementor-lite' ),              // 00:00
                     'g:i a' => date('g:i a'),            // 12:00 am/pm
                     'g:i A' => date('g:i A'),            // 12:00 AM/PM
-                    'H:i:s' => date('H:i:s'),            // 00:00:00
+                    'H:i:s' => date('H:i:s') . esc_html__( ' (24 Hours)', 'essential-addons-for-elementor-lite' ),            // 00:00:00
                     'custom' => esc_html__('Custom', 'essential-addons-for-elementor-lite')
                 ],
                 'condition' =>[
@@ -1118,7 +1096,7 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'eael_ec_show_pagination',
             [
-                'label' => esc_html__( 'Show Pagination', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'Pagination', 'essential-addons-for-elementor-lite' ),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'label_on' => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
                 'label_off' => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
@@ -1143,19 +1121,19 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'eael_ec_pagination_align',
             [
-                'label' => esc_html__( 'Alignment', 'textdomain' ),
+                'label' => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
                 'type' => \Elementor\Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => esc_html__( 'Left', 'textdomain' ),
+                        'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
                         'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => esc_html__( 'Center', 'textdomain' ),
+                        'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
                         'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
-                        'title' => esc_html__( 'Right', 'textdomain' ),
+                        'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
                         'icon' => 'eicon-text-align-right',
                     ],
                 ],
@@ -1217,7 +1195,7 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'eael_event_calendar_search_width',
             [
-                'label' => esc_html__( 'Width', 'textdomain' ),
+                'label' => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => [ 'px', '%', 'em' ],
                 'range' => [
@@ -1252,7 +1230,7 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'eael_event_calendar_search_text_color',
             [
-                'label' => esc_html__( 'Text Color', 'textdomain' ),
+                'label' => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .ea-ec-search-wrap input' => 'color: {{VALUE}}',
@@ -1280,7 +1258,7 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'eael_event_calendar_search_padding',
             [
-                'label' => esc_html__( 'Padding', 'textdomain' ),
+                'label' => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -1292,7 +1270,7 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'eael_event_calendar_search_margin',
             [
-                'label' => esc_html__( 'Margin', 'textdomain' ),
+                'label' => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -1538,13 +1516,49 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
+        $this->add_group_control(
+            \Elementor\Group_Control_Border::get_type(),
+            [
+                'name' => 'eael_event_calendar_table_pagination_border',
+                'selector' => '{{WRAPPER}} .eael-event-calendar-pagination a, {{WRAPPER}} .eael-event-calendar-pagination span',
+                'exclude' => ['color']
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_table_pagination_border_radius',
+            [
+                'label' => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em', 'rem' ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-event-calendar-pagination a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-event-calendar-pagination span' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_event_calendar_table_pagination_border_border!' => [ 'none', 'default' ]
+                ]
+            ]
+        );
+
+        $this->start_controls_tabs(
+            'eael_event_calendar_table_pagination_styles_tabs'
+        );
+
+        $this->start_controls_tab(
+            'eael_event_calendar_table_pagination_style_normal_tab',
+            [
+                'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite' ),
+            ]
+        );
         $this->add_control(
             'eael_event_calendar_table_pagination_color',
             [
-                'label' => esc_html__( 'Text Color', 'textdomain' ),
+                'label' => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-event-calendar-pagination a' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-event-calendar-pagination span' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -1554,9 +1568,118 @@ class Event_Calendar extends Widget_Base
             [
                 'name' => 'eael_event_calendar_table_pagination_background',
                 'types' => [ 'classic', 'gradient' ],
-                'selector' => '{{WRAPPER}} .eael-event-calendar-pagination a',
+                'exclude' => [ 'image' ],
+                'selector' => '{{WRAPPER}} .eael-event-calendar-pagination a, {{WRAPPER}} .eael-event-calendar-pagination span',
             ]
         );
+
+        $this->add_control(
+            'eael_event_calendar_table_pagination_border_color',
+            [
+                'label' => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-event-calendar-pagination a' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-event-calendar-pagination span' => 'border-color: {{VALUE}}',
+                ],
+                'condition' => [
+                    'eael_event_calendar_table_pagination_border_border!' => [ 'none', 'default' ]
+                ]
+            ]
+        );
+
+        $this->end_controls_tab();
+
+
+        $this->start_controls_tab(
+            'eael_event_calendar_table_pagination_style_hover_tab',
+            [
+                'label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ),
+            ]
+        );
+        $this->add_control(
+            'eael_event_calendar_table_pagination_color_hover',
+            [
+                'label' => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-event-calendar-pagination a:hover' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name' => 'eael_event_calendar_table_pagination_background_hover',
+                'types' => [ 'classic', 'gradient' ],
+                'exclude' => [ 'image' ],
+                'selector' => '{{WRAPPER}} .eael-event-calendar-pagination a:hover',
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_table_pagination_border_color_hover',
+            [
+                'label' => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-event-calendar-pagination a:hover' => 'border-color: {{VALUE}}',
+                ],
+                'condition' => [
+                    'eael_event_calendar_table_pagination_border_border!' => [ 'none', 'default' ]
+                ]
+            ]
+        );
+
+        $this->end_controls_tab();
+
+
+        $this->start_controls_tab(
+            'eael_event_calendar_table_pagination_style_active_tab',
+            [
+                'label' => esc_html__( 'Active', 'essential-addons-for-elementor-lite' ),
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_table_pagination_color_active',
+            [
+                'label' => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-event-calendar-pagination a.active' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name' => 'eael_event_calendar_table_pagination_background_active',
+                'types' => [ 'classic', 'gradient' ],
+                'exclude' => [ 'image' ],
+                'selector' => '{{WRAPPER}} .eael-event-calendar-pagination a.active',
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_calendar_table_pagination_border_color_active',
+            [
+                'label' => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-event-calendar-pagination a.active' => 'border-color: {{VALUE}}',
+                ],
+                'condition' => [
+                    'eael_event_calendar_table_pagination_border_border!' => [ 'none', 'default' ]
+                ]
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
 
         $this->add_control(
             'eael_event_calendar_table_pagination_padding',
@@ -1567,6 +1690,7 @@ class Event_Calendar extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-event-calendar-pagination a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
+                'separator' => 'before'
             ]
         );
 
@@ -1583,10 +1707,10 @@ class Event_Calendar extends Widget_Base
         );
 
         $this->add_group_control(
-            \Elementor\Group_Control_Border::get_type(),
+            Group_Control_Box_Shadow::get_type(),
             [
-                'name' => 'eael_event_calendar_table_pagination_border',
-                'selector' => '{{WRAPPER}} .eael-event-calendar-pagination a',
+                'name' => 'box_shadow',
+                'selector' => '{{WRAPPER}} .eael-event-calendar-pagination a, {{WRAPPER}} .eael-event-calendar-pagination span',
             ]
         );
 
@@ -2774,6 +2898,21 @@ class Event_Calendar extends Widget_Base
                 }
 
                 foreach ( $data as $event ) {
+                    $start        = date( 'Y-m-d', strtotime( $event['start'] ) );
+                    $is_old_event = false;
+                    if ( 'today' === $settings["eael_table_ec_default_date_type"] ) {
+                        $is_old_event = $this->is_old_event( $start );
+                    }
+                    else if ( 'custom' === $settings["eael_table_ec_default_date_type"] ) {
+                        $custom_date          = strtotime( $settings['eael_table_event_calendar_default_date'] );
+                        $start_date_timestamp = strtotime( $start );
+                        $is_old_event         = $start_date_timestamp < $custom_date;
+                    }
+
+                    if ( $is_old_event ) {
+                        continue;
+                    }
+
                     $style = $item_count >= $item_per_page ? 'style="display: none;"' : '';
                     $item_count ++;
                     echo '<tr ' . $style . ' >';
@@ -2787,7 +2926,7 @@ class Event_Calendar extends Widget_Base
                         $start = date( $date_format, strtotime( $event['start'] ) );
                         $end   = date( $date_format, strtotime( $event['end'] ) );
                         $separator = $settings['eael_ec_date_to_date_separator'];
-                        $date  = sprintf( '%s %s %s', $start,$separator, $end );
+                        $date = sprintf( '<span class="hide">%s</span> %s %s %s', strtotime( $event['start'] ), $start, $separator, $end );
                         echo '<td>' . Helper::eael_wp_kses( $date ) . '</td>';
                     }
                     echo "</tr>";
@@ -2840,9 +2979,7 @@ class Event_Calendar extends Widget_Base
                     $end = date('Y-m-d H:i', strtotime($event["eael_event_end_date"])) . ":01";
                 }
 
-                $layout = $settings['eael_event_display_layout'] === 'calender' ? '' : '_'.$settings['eael_event_display_layout'];
-
-                if( !empty( $settings["eael{$layout}_old_events_hide"] ) && 'yes' === $settings["eael{$layout}_old_events_hide"] ){
+                if( !empty( $settings["eael_old_events_hide"] ) && 'yes' === $settings["eael_old_events_hide"] ){
                     $is_old_event = $this->is_old_event($start);
                     if($is_old_event) {
                         continue;
@@ -2987,9 +3124,7 @@ class Event_Calendar extends Widget_Base
                 
                 $settings_eael_event_global_popup_ribbon_color = $this->fetch_color_or_global_color($settings, 'eael_event_global_popup_ribbon_color');
 
-                $layout = $settings['eael_event_display_layout'] === 'calender' ? '' : '_'.$settings['eael_event_display_layout'];
-
-                if( !empty( $settings["eael{$layout}_old_events_hide"] ) && 'yes' === $settings["eael{$layout}_old_events_hide"] ){
+                if( !empty( $settings["eael_old_events_hide"] ) && 'yes' === $settings["eael_old_events_hide"] ){
                     $is_old_event = $this->is_old_event($ev_start_date);
                     if($is_old_event) {
                         continue;
@@ -3082,9 +3217,7 @@ class Event_Calendar extends Widget_Base
 
             $start = tribe_get_start_date($event->ID, true, $date_format);
 
-            $layout = $settings['eael_event_display_layout'] === 'calender' ? '' : '_'.$settings['eael_event_display_layout'];
-
-            if( !empty( $settings["eael{$layout}_old_events_hide"] ) && 'yes' === $settings["eael{$layout}_old_events_hide"] ){
+            if( !empty( $settings["eael_old_events_hide"] ) && 'yes' === $settings["eael_old_events_hide"] ){
                 $is_old_event = $this->is_old_event($start);
                 if($is_old_event) {
                     continue;
