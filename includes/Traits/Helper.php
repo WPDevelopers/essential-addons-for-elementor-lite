@@ -220,6 +220,16 @@ trait Helper
 		return $html;
 	}
 
+	public function eael_woo_cart_empty_action() {
+		if ( ! function_exists( 'WC' ) ) {
+			return;
+		}
+
+		if ( isset( $_GET['empty_cart'] ) && 'yes' === esc_html( $_GET['empty_cart'] ) ) {
+			WC()->cart->empty_cart();
+		}
+	}
+
     /**
 	 * Update Checkout Cart Quantity via ajax call.
 	 */

@@ -2114,7 +2114,7 @@ trait Woo_Product_Comparable {
         if ('icon' === $btn_type) {
             printf( '<a class="eael-wc-compare eael-wc-compare-icon" data-product-id="%1$d" rel="nofollow" title="Compare">%2$s %3$s</a>', intval( $id ), $loader, $fa_icon );
         }else{
-            printf( '<button class="eael-wc-compare button" data-product-id="%1$d" rel="nofollow" title="Compare">%2$s %3$s</button>', intval( $id ), $loader, $btn_content );
+            printf( '<a class="eael-wc-compare button" data-product-id="%1$d" rel="nofollow" title="Compare">%2$s %3$s</a>', intval( $id ), $loader, $btn_content );
         }
 	}
 
