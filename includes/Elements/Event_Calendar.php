@@ -859,6 +859,7 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => esc_html__( 'Placeholder', 'essential-addons-for-elementor-lite' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
+                'placeholder' => esc_html__( 'Search', 'essential-addons-for-elementor-lite' ),
                 'default' => esc_html__( 'Search', 'essential-addons-for-elementor-lite' ),
                 'condition' =>[
                     'eael_ec_show_search' => 'yes'
@@ -914,12 +915,28 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => esc_html__( 'Label', 'essential-addons-for-elementor-lite' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
+                'placeholder' => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
                 'default' => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
                 'condition' =>[
                     'eael_ec_show_title' => 'yes'
                 ]
             ]
         );
+
+	    $this->add_control(
+		    'eael_ec_title_clickable',
+		    [
+			    'label' => esc_html__( 'Clickable', 'essential-addons-for-elementor-lite' ),
+			    'type' => \Elementor\Controls_Manager::SWITCHER,
+			    'label_on' => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+			    'label_off' => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+			    'return_value' => 'yes',
+			    'default' => '',
+			    'condition' =>[
+				    'eael_ec_show_title' => 'yes'
+			    ]
+		    ]
+	    );
 
         $this->add_control(
             'eael_ec_show_description',
@@ -934,17 +951,77 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'eael_ec_desc_label',
-            [
-                'label' => esc_html__( 'Label', 'essential-addons-for-elementor-lite' ),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => esc_html__( 'Description', 'essential-addons-for-elementor-lite' ),
-                'condition' =>[
-                    'eael_ec_show_description' => 'yes'
-                ]
-            ]
-        );
+	    $this->add_control(
+		    'eael_ec_desc_label',
+		    [
+			    'label' => esc_html__( 'Label', 'essential-addons-for-elementor-lite' ),
+			    'type' => \Elementor\Controls_Manager::TEXT,
+			    'placeholder' => esc_html__( 'Description', 'essential-addons-for-elementor-lite' ),
+			    'default' => esc_html__( 'Description', 'essential-addons-for-elementor-lite' ),
+			    'condition' =>[
+				    'eael_ec_show_description' => 'yes'
+			    ]
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_ec_description_trim',
+		    [
+			    'label' => esc_html__( 'Trim Description', 'essential-addons-for-elementor-lite' ),
+			    'type' => \Elementor\Controls_Manager::SWITCHER,
+			    'label_on' => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+			    'label_off' => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+			    'return_value' => 'yes',
+			    'default' => 'yes',
+			    'condition' =>[
+				    'eael_ec_show_description' => 'yes'
+			    ]
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_ec_description_limit',
+		    [
+			    'label' => esc_html__( 'Word Count', 'essential-addons-for-elementor-lite' ),
+			    'type' => \Elementor\Controls_Manager::NUMBER,
+			    'placeholder' => 20,
+			    'default' => 20,
+			    'condition' =>[
+				    'eael_ec_show_description' => 'yes',
+                    'eael_ec_description_trim' => 'yes',
+			    ]
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_ec_desc_see_more',
+		    [
+			    'label' => esc_html__( 'Seer More Placeholder', 'essential-addons-for-elementor-lite' ),
+			    'type' => \Elementor\Controls_Manager::TEXT,
+			    'placeholder' => esc_html__( '...', 'essential-addons-for-elementor-lite' ),
+			    'default' => esc_html__( '...', 'essential-addons-for-elementor-lite' ),
+			    'condition' =>[
+				    'eael_ec_show_description' => 'yes',
+				    'eael_ec_description_trim' => 'yes',
+			    ]
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_ec_desc_see_more_link',
+		    [
+			    'label' => esc_html__( 'Linked', 'essential-addons-for-elementor-lite' ),
+			    'type' => \Elementor\Controls_Manager::SWITCHER,
+			    'label_on' => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+			    'label_off' => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+			    'return_value' => 'yes',
+			    'default' => 'yes',
+			    'condition' =>[
+				    'eael_ec_show_description' => 'yes',
+				    'eael_ec_description_trim' => 'yes',
+			    ]
+		    ]
+	    );
 
         $this->add_control(
             'eael_ec_show_date',
@@ -964,6 +1041,7 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => esc_html__( 'Label', 'essential-addons-for-elementor-lite' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
+                'placeholder' => esc_html__( 'Date', 'essential-addons-for-elementor-lite' ),
                 'default' => esc_html__( 'Date', 'essential-addons-for-elementor-lite' ),
                 'condition' =>[
                     'eael_ec_show_date' => 'yes'
@@ -1490,6 +1568,37 @@ class Event_Calendar extends Widget_Base
                 'selector' => '{{WRAPPER}} .eael-event-calendar-table tbody tr td',
             ]
         );
+
+	    $this->add_control(
+		    'eael_ec_table_body_see_more',
+		    [
+			    'label' => esc_html__( 'See More Text', 'essential-addons-for-elementor-lite' ),
+			    'type' => \Elementor\Controls_Manager::HEADING,
+			    'separator' => 'before',
+                'condition' => [
+                        'eael_ec_description_trim' => 'yes'
+                ]
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    \Elementor\Group_Control_Typography::get_type(),
+		    [
+			    'name' => 'eael_ec_table_body_see_more_typography',
+			    'selector' => '{{WRAPPER}} .eael-event-calendar-table tbody tr td .eael-see-more',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_ec_table_body_see_more_color',
+		    [
+			    'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+			    'type' => \Elementor\Controls_Manager::COLOR,
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-event-calendar-table tbody tr td .eael-see-more' => 'color: {{VALUE}}',
+			    ],
+		    ]
+	    );
 
         $this->end_controls_section();
 
@@ -2914,14 +3023,27 @@ class Event_Calendar extends Widget_Base
                     }
 
                     $style = $item_count >= $item_per_page ? 'style="display: none;"' : '';
+
                     $item_count ++;
                     echo '<tr ' . $style . ' >';
                     if ( $settings['eael_ec_show_title'] === 'yes' ) {
+	                    if ( $settings['eael_ec_title_clickable'] === 'yes' && $event['url'] ){
+		                    $event['title'] = sprintf( "<a href='%s'>%s</a>", esc_url( $event['url'] ), $event['title'] );
+	                    }
                         echo '<td>' . Helper::eael_wp_kses( $event['title'] ) . '</td>';
                     }
-                    if ( $settings['eael_ec_show_description'] === 'yes' ) {
-                        echo '<td>' . Helper::eael_wp_kses( $event['description'] ) . '</td>';
-                    }
+	                if ( $settings['eael_ec_show_description'] === 'yes' ) {
+		                if ( $settings['eael_ec_description_trim'] === 'yes' ) {
+                            $link = '';
+			                if ( $settings['eael_ec_desc_see_more_link'] === 'yes' && $event['url'] ) {
+				                $link = sprintf( " href='%s'", esc_url( $event['url'] ) );
+			                }
+			                $see_more = sprintf( " <a %s class='eael-see-more'>%s</a>", $link, Helper::eael_wp_kses( $settings['eael_ec_desc_see_more'] ) );
+
+			                $event['description'] = wp_trim_words( $event['description'], $settings['eael_ec_description_limit'], $see_more );
+		                }
+		                echo '<td>' . Helper::eael_wp_kses( $event['description'] ) . '</td>';
+	                }
                     if ( $settings['eael_ec_show_date'] === 'yes' ) {
                         $start = date( $date_format, strtotime( $event['start'] ) );
                         $end   = date( $date_format, strtotime( $event['end'] ) );
