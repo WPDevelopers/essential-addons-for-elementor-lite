@@ -235,6 +235,17 @@
 	}
 
 	&.layout-table{
+		table{
+			tbody{
+				tr{
+					td{
+						.hide{
+							display: none !important;
+						}
+					}
+				}
+			}
+		}
 		.ea-advanced-data-table-search-left {
 			text-align: left;
 		}
