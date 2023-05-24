@@ -5660,13 +5660,7 @@ class Login_Register extends Widget_Base {
 					</script>
 					<?php
 					exit;
-				}
-				
-				delete_option('eael_resetpassword_rp_data_' . esc_attr( $this->get_id() ) );
-			}
-
-			if( $show_resetpassword_on_form_submit ){
-				delete_option('eael_resetpassword_rp_data_' . esc_attr( $this->get_id() ) );
+				}	
 			}
 			
 			delete_option('eael_show_reset_password_on_form_submit_' . $this->get_id());

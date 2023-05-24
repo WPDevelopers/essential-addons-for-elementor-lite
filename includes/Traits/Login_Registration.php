@@ -753,7 +753,7 @@ trait Login_Registration {
 			}
 			update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
 		} else {
-			$lostpassword_success_message = ! empty( $settings['success_lostpassword'] ) ? Helper::eael_wp_kses( $settings['success_lostpassword'] ) : Helper::eael_wp_kses( 'Check your email for the confirmation link.' ); 
+			$lostpassword_success_message = ! empty( $settings['success_lostpassword'] ) ? Helper::eael_wp_kses( $settings['success_lostpassword'] ) : Helper::eael_wp_kses( 'Check your email for the confirmation link.' );
 			$data = [
 				'message' => esc_html__( $lostpassword_success_message, 'essential-addons-for-elementor-lite' ),
 			];
@@ -796,13 +796,6 @@ trait Login_Registration {
 		} else {
 			$err_msg = esc_html__( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
 		}
-
-		$rp_data = [
-			'rp_key' => ! empty( $_POST['rp_key'] ) ? sanitize_text_field( $_POST['rp_key'] ) : '',
-			'rp_login' => ! empty( $_POST['rp_login'] ) ? sanitize_text_field( $_POST['rp_login'] ) : '',
-		];
-
-		update_option( 'eael_resetpassword_rp_data_' . esc_attr( $widget_id ), maybe_serialize( $rp_data ), false );
 
 		update_option( 'eael_show_reset_password_on_form_submit_' . $widget_id, true, false );
 
@@ -860,7 +853,6 @@ trait Login_Registration {
 		do_action( 'eael/login-register/before-resetpassword-email' );
 
 		$widget_id = ! empty( $_POST['widget_id'] ) ? sanitize_text_field( $_POST['widget_id'] ) : '';
-
 		// Check if password is one or all empty spaces.
 		$errors = [];
 		if ( ! empty( $_POST['eael-pass1'] ) ) {
@@ -885,9 +877,36 @@ trait Login_Registration {
 		}
 
 		if ( ( ! count( $errors ) ) && isset( $_POST['eael-pass1'] ) && ! empty( $_POST['eael-pass1'] ) ) {
-			$rp_login = isset( $_POST['rp_login']) ? sanitize_text_field( $_POST['rp_login'] ) : '';
-			$user = get_user_by( 'login', $rp_login );
-			
+			$rp_data_db = get_option('eael_resetpassword_rp_data_' . $widget_id);
+			$rp_data_db = !empty( $rp_data_db ) ? maybe_unserialize($rp_data_db) : [];
+
+			$rp_data_db['rp_key'] = ! empty( $rp_data_db['rp_key'] ) ? $rp_data_db['rp_key'] : '';
+			$rp_data_db['rp_login'] = ! empty( $rp_data_db['rp_login'] ) ? $rp_data_db['rp_login'] : '';
+
+			$user = check_password_reset_key( $rp_data_db['rp_key'], $rp_data_db['rp_login'] );
+
+			$rp_key       = empty( $_POST['rp_key'] ) ? '' : sanitize_text_field( $_POST['rp_key'] );
+			$is_user_null = isset( $_POST['eael-pass1'] ) && ! hash_equals( $rp_data_db['rp_key'], $rp_key );
+
+			if ( $is_user_null ) {
+				$user = false;
+			}
+
+			if( is_wp_error( $user ) || ! $user ){
+				delete_option('eael_resetpassword_rp_data_' . esc_attr( $widget_id ) );
+
+				$data['message'] = isset( $settings['error_resetpassword'] ) ? __( Helper::eael_wp_kses( $settings['error_resetpassword'] ), 'essential-addons-for-elementor-lite' ) : esc_html__( 'Invalid user name found!', 'essential-addons-for-elementor-lite' );
+
+				$success_key = 'eael_resetpassword_success_' . esc_attr( $widget_id );
+				delete_option( $success_key );
+
+				if($ajax){
+					wp_send_json_error( $data );
+				}else {
+					update_option( 'eael_resetpassword_error_' . $widget_id, $data['message'], false );
+				}
+			}
+
 			if( $user || ! is_wp_error( $user ) ){
 				reset_password( $user, sanitize_text_field( $_POST['eael-pass1'] ) );
 				$data['message'] = isset( $settings['success_resetpassword'] ) ? __( Helper::eael_wp_kses( $settings['success_resetpassword'] ), 'essential-addons-for-elementor-lite' ) : esc_html__( 'Your password has been reset.', 'essential-addons-for-elementor-lite' );
@@ -912,17 +931,6 @@ trait Login_Registration {
 					exit();
 				}
 
-			} else {
-				$data['message'] = isset( $settings['error_resetpassword'] ) ? __( Helper::eael_wp_kses( $settings['error_resetpassword'] ), 'essential-addons-for-elementor-lite' ) : esc_html__( 'Invalid user name found!', 'essential-addons-for-elementor-lite' );
-				
-				$success_key = 'eael_resetpassword_success_' . esc_attr( $widget_id );
-				delete_option( $success_key );
-
-				if($ajax){
-					wp_send_json_error( $data );
-				}else {
-					update_option( 'eael_resetpassword_error_' . $widget_id, $data['message'], false );
-				}
 			}
 
 			if (isset($_SERVER['HTTP_REFERER'])) {
