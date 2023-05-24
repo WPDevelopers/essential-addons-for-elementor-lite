@@ -1038,7 +1038,7 @@ trait Login_Registration {
 
 		$page_id = self::$email_options_lostpassword['page_id'] ? self::$email_options_lostpassword['page_id'] : 0;
 		$widget_id = self::$email_options_lostpassword['widget_id'] ? self::$email_options_lostpassword['widget_id'] : '';
-		$resetpassword_in_popup_selector = self::$email_options_lostpassword['resetpassword_in_popup_selector'] ? str_replace(' ', '_', self::$email_options_lostpassword['resetpassword_in_popup_selector']) : '';
+		$resetpassword_in_popup_selector = ! empty( self::$email_options_lostpassword['resetpassword_in_popup_selector'] ) ? str_replace(' ', '_', self::$email_options_lostpassword['resetpassword_in_popup_selector'] ) : '';
 
 		if ( ! empty( self::$email_options_lostpassword['message'] ) ) {
 			if ( ! empty( $key ) ) {
