@@ -205,11 +205,11 @@ var EventCalendar = function ($scope, $) {
 								$(".eaelec-modal-body").css("height", "300px");
 							}
 
-							if (event.extendedProps.hide_details_link !== 'yes' ){
-								modalFooterLink.attr("href", event.url).css("display", "block");
-							}else {
-								modalFooterLink.css("display", "none");
-							}
+						if ( $(".eael-event-calendar-cls", $scope).data('hidedetailslink') !== 'yes'){
+							modalFooterLink.attr("href", event.url).css("display", "block");
+						}else {
+							modalFooterLink.css("display", "none");
+						}
 
 							if (event.extendedProps.external === "on") {
 								modalFooterLink.attr("target", "_blank");
@@ -240,12 +240,12 @@ var EventCalendar = function ($scope, $) {
 				eventWillUnmount: function(arg) {}
 			});
 
-		function refreshPopUpDetailsLink(){
-			var modalFooter = $(".eaelec-modal-footer"),
-				modalFooterClass = modalFooter.find('a').attr('class'),
-				modalFooterText = modalFooter.find('a').text();
-			modalFooter.html('<a class="'+modalFooterClass+'">'+modalFooterText+'</a>');
-		}
+	function refreshPopUpDetailsLink(){
+		var modalFooter = $(".eaelec-modal-footer"),
+			modalFooterClass = modalFooter.find('a').attr('class'),
+			modalFooterText = $(".eael-event-calendar-cls", $scope).attr( 'data-detailsButtonText' );
+		modalFooter.html('<a class="'+modalFooterClass+'">'+modalFooterText+'</a>');
+	}
 
 		CloseButton.on("click", function (event) {
 			event.stopPropagation();
