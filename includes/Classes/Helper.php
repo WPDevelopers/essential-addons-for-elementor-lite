@@ -1041,7 +1041,8 @@ class Helper
                 'class' => [],
                 'rel' => [],
                 'id' => [],
-                'style' => []
+                'style' => [],
+                'target' => []
             ],
             'q' => [
                 'cite' => [],
