@@ -37,10 +37,13 @@ $quick_view_setting = [
 	'page_id' => $settings['eael_page_id'],
 ];
 
+$product_details_wrap_show = ! empty( $settings['eael_product_carousel_show_title'] ) || $should_print_price || $should_print_rating || $should_print_excerpt;
+$product_details_none_class = $product_details_wrap_show ? '' : 'product-details-none';
+
 if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->is_visible() ) {
     ?>
     <li <?php post_class( ['product', 'swiper-slide'] ); ?>>
-        <div class="eael-product-carousel">
+        <div class="eael-product-carousel <?php echo esc_attr( $product_details_none_class ); ?>">
             <div class="product-image-wrap">
                 <div class="image-wrap">
                     <?php

@@ -1044,7 +1044,7 @@ class Post_Grid extends Widget_Base
         $args = HelperClass::get_dynamic_args($settings, $args);
 
 	    if ( ! in_array( $settings['post_type'], [ 'post', 'page', 'product', 'by_id', 'source_dynamic' ] ) ) {
-		    $settings['eael_post_terms'] = $settings["eael_{$settings['post_type']}_terms"];
+		    $settings['eael_post_terms'] = empty( $settings["eael_{$settings['post_type']}_terms"] ) ? '' : $settings["eael_{$settings['post_type']}_terms"];
 	    } elseif ( $settings['post_type'] === 'product' ) {
 		    $settings['eael_post_terms'] = $settings['eael_post_terms'] === 'category' ? 'product_cat' : ( $settings['eael_post_terms'] === 'tags' ? 'product_tag' : $settings['eael_post_terms'] );
 	    }
