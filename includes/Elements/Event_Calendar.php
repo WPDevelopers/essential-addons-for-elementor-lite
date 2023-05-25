@@ -1205,6 +1205,7 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => esc_html__( 'Item Per Page', 'essential-addons-for-elementor-lite' ),
                 'type' => \Elementor\Controls_Manager::NUMBER,
+                'min' => 1,
                 'default' => 10,
                 'condition' =>[
                     'eael_ec_show_pagination' => 'yes'
@@ -1637,7 +1638,7 @@ class Event_Calendar extends Widget_Base
             \Elementor\Group_Control_Typography::get_type(),
             [
                 'name' => 'eael_event_calendar_table_pagination_typography',
-                'selector' => '{{WRAPPER}} .eael-event-calendar-pagination a',
+                'selector' => '{{WRAPPER}} .eael-event-calendar-pagination a,{{WRAPPER}} .eael-event-calendar-pagination span',
             ]
         );
 
@@ -1813,7 +1814,8 @@ class Event_Calendar extends Widget_Base
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em', 'rem' ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-event-calendar-pagination a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	                '{{WRAPPER}} .eael-event-calendar-pagination a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	                '{{WRAPPER}} .eael-event-calendar-pagination span' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'separator' => 'before'
             ]
@@ -1826,7 +1828,8 @@ class Event_Calendar extends Widget_Base
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em', 'rem' ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-event-calendar-pagination a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	                '{{WRAPPER}} .eael-event-calendar-pagination a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	                '{{WRAPPER}} .eael-event-calendar-pagination span' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -3016,12 +3019,13 @@ class Event_Calendar extends Widget_Base
 			</thead>
 			<tbody>
 			<?php
+
 			$item_count  = 1;
 
 			$date_format = $settings['eael_ec_date_format'] != 'custom' ? $settings['eael_ec_date_format'] : $settings['eael_ec_date_format_custom'];
 			$time_format = $settings['eael_ec_time_format'] != 'custom' ? $settings['eael_ec_time_format'] : $settings['eael_ec_time_format_custom'];
-
 			$time_separator = '';
+
 			if ( $settings['eael_ec_date_time_separator'] ){
 				$letters = str_split($settings['eael_ec_date_time_separator']);
 				$lettersWithBackslashes = array_map(function($letter) {
@@ -3043,7 +3047,7 @@ class Event_Calendar extends Widget_Base
 			foreach ( $data as $event ) {
 				$start        = date( 'Y-m-d', strtotime( $event['start'] ) );
 				$is_old_event = false;
-				if ( 'today' === $settings["eael_table_ec_default_date_type"] ) {
+				if ( 'current' === $settings["eael_table_ec_default_date_type"] ) {
 					$is_old_event = $this->is_old_event( $start );
 				}
 				else if ( 'custom' === $settings["eael_table_ec_default_date_type"] ) {
@@ -3064,7 +3068,7 @@ class Event_Calendar extends Widget_Base
 					if ( $settings['eael_ec_title_clickable'] === 'yes' && $event['url'] ){
 						$event['title'] = sprintf( "<a href='%s'>%s</a>", esc_url( $event['url'] ), $event['title'] );
 					}
-					echo '<td>' . Helper::eael_wp_kses( $event['title'] ) . '</td>';
+					echo '<td class="eael-ec-event-title">' . Helper::eael_wp_kses( $event['title'] ) . '</td>';
 				}
 				if ( $settings['eael_ec_show_description'] === 'yes' ) {
 					if ( $settings['eael_ec_description_trim'] === 'yes' ) {
@@ -3076,14 +3080,14 @@ class Event_Calendar extends Widget_Base
 
 						$event['description'] = wp_trim_words( $event['description'], $settings['eael_ec_description_limit'], $see_more );
 					}
-					echo '<td>' . Helper::eael_wp_kses( $event['description'] ) . '</td>';
+					echo '<td class="eael-ec-event-description">' . Helper::eael_wp_kses( $event['description'] ) . '</td>';
 				}
 				if ( $settings['eael_ec_show_date'] === 'yes' ) {
 					$start = date( $date_format, strtotime( $event['start'] ) );
 					$end   = date( $date_format, strtotime( $event['end'] ) );
 					$separator = $settings['eael_ec_date_to_date_separator'];
 					$date = sprintf( '<span class="hide">%s</span> %s %s %s', strtotime( $event['start'] ), $start, $separator, $end );
-					echo '<td>' . Helper::eael_wp_kses( $date ) . '</td>';
+					echo '<td class="eael-ec-event-date">' . Helper::eael_wp_kses( $date ) . '</td>';
 				}
 				echo "</tr>";
 			}

@@ -283,14 +283,16 @@ var EventCalendar = function ($scope, $) {
 	else{
 		let table = $('.eael-event-calendar-table', wrapper),
 			pagination = table.hasClass('ea-ec-table-paginated'),
-			itemPerPage = pagination ? table.data('items-per-page') : 10;
+			itemPerPage = pagination ? table.data('items-per-page') : 10,
+			sortColumn = $('.eael-ec-event-date', table).index();
 
 		$(".eael-event-calendar-table", wrapper).fancyTable({
-			sortColumn:0,
+			sortColumn: sortColumn >=0 ? sortColumn : 0,
 			pagination: pagination,
 			perPage:itemPerPage,
 			globalSearch:true,
-			searchInput:$(".ea-ec-search-wrap", wrapper)
+			searchInput:$(".ea-ec-search-wrap", wrapper),
+			paginationElement:$(".eael-event-calendar-pagination", wrapper),
 		});
 	}
 };

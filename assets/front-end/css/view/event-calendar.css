@@ -218,6 +218,9 @@
 .eael-event-calendar-wrapper .fc-toolbar.fc-header-toolbar .fc-left .fc-button .fc-icon {
   font-size: 13px;
 }
+.eael-event-calendar-wrapper.layout-table table {
+  margin-bottom: 0;
+}
 .eael-event-calendar-wrapper.layout-table table tbody tr td .hide {
   display: none !important;
 }
