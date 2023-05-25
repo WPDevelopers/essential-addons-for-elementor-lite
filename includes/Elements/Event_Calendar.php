@@ -2998,7 +2998,7 @@ class Event_Calendar extends Widget_Base
 			<?php
 		}
 		$is_paginated = $settings['eael_ec_show_pagination'] === 'yes';
-		$item_per_page = $is_paginated ? $settings['eael_ec_item_per_page'] : 0;
+		$item_per_page = $is_paginated && !empty( $settings['eael_ec_item_per_page'] ) ? intval( $settings['eael_ec_item_per_page'] ) : 1;
 
 		?>
 		<table class="eael-event-calendar-table <?php  echo $is_paginated ? 'ea-ec-table-paginated' : '' ?> ea-ec-table-sortable" data-items-per-page="<?php esc_attr_e( $item_per_page );?>">
