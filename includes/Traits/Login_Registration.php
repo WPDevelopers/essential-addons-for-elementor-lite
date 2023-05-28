@@ -877,7 +877,7 @@ trait Login_Registration {
 		}
 
 		if ( ( ! count( $errors ) ) && isset( $_POST['eael-pass1'] ) && ! empty( $_POST['eael-pass1'] ) ) {
-			$rp_data_db = get_option('eael_resetpassword_rp_data_' . $widget_id);
+			$rp_data_db = get_transient('eael_resetpassword_rp_data_' . $widget_id);
 			$rp_data_db = !empty( $rp_data_db ) ? maybe_unserialize($rp_data_db) : [];
 			
 			$rp_data_db['rp_key'] = ! empty( $rp_data_db['rp_key'] ) ? $rp_data_db['rp_key'] : '';
@@ -893,7 +893,7 @@ trait Login_Registration {
 			}
 
 			if( is_wp_error( $user ) || ! $user ){
-				delete_option('eael_resetpassword_rp_data_' . esc_attr( $widget_id ) );
+				delete_transient('eael_resetpassword_rp_data_' . esc_attr( $widget_id ) );
 
 				$data['message'] = isset( $settings['error_resetpassword'] ) ? __( Helper::eael_wp_kses( $settings['error_resetpassword'] ), 'essential-addons-for-elementor-lite' ) : esc_html__( 'Invalid user name found!', 'essential-addons-for-elementor-lite' );
 				
@@ -1015,7 +1015,7 @@ trait Login_Registration {
 			'user' => $user,
 		];
 
-		update_option( 'eael_resetpassword_rp_data_' . esc_attr( $this->widget_id ), maybe_serialize( $rp_data ), false );
+		set_transient( 'eael_resetpassword_rp_data_' . esc_attr( $this->widget_id ), maybe_serialize( $rp_data ), 3 * MINUTE_IN_SECONDS );
 		setcookie( $rp_cookie, ' ', time() - YEAR_IN_SECONDS, $rp_path, COOKIE_DOMAIN, is_ssl(), true );
 
 		if( $this->resetpassword_in_popup_selector ){

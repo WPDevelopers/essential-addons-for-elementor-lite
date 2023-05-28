@@ -5796,7 +5796,7 @@ class Login_Register extends Widget_Base {
 		$rp_page_url = ! empty( $this->page_id_for_popup ) ? get_permalink( $this->page_id_for_popup ) : get_permalink( $this->page_id ); 
 
 		if ( $this->should_print_resetpassword_form_editor || ( ! empty( $_GET['eael-resetpassword'] ) ) ) {
-			$rp_data = get_option('eael_resetpassword_rp_data_' . $this->get_id());
+			$rp_data = get_transient('eael_resetpassword_rp_data_' . $this->get_id());
 			$show_resetpassword_on_form_submit = get_option('eael_show_reset_password_on_form_submit_' . $this->get_id());
 			
 			$validation_required = true;
