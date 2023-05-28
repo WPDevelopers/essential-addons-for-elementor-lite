@@ -896,18 +896,20 @@ trait Login_Registration {
 				delete_transient('eael_resetpassword_rp_data_' . esc_attr( $widget_id ) );
 
 				$data['message'] = isset( $settings['error_resetpassword'] ) ? __( Helper::eael_wp_kses( $settings['error_resetpassword'] ), 'essential-addons-for-elementor-lite' ) : esc_html__( 'Invalid user name found!', 'essential-addons-for-elementor-lite' );
-				
+				if( false === $rp_data_db ){
+					$data['message'] = esc_html__( 'Token expired after 3 mins of inactivity!', 'essential-addons-for-elementor-lite' );
+				}
 				$success_key = 'eael_resetpassword_success_' . esc_attr( $widget_id );
 				delete_option( $success_key );
 
 				if($ajax){
-					wp_send_json_error( $data );
+					wp_send_json_error( $data['message'] );
 				}else {
 					update_option( 'eael_resetpassword_error_' . $widget_id, $data['message'], false );
 				}
 			}
 
-			if( $user || ! is_wp_error( $user ) ){
+			if( $user && ! is_wp_error( $user ) ){
 				reset_password( $user, sanitize_text_field( $_POST['eael-pass1'] ) );
 				$data['message'] = isset( $settings['success_resetpassword'] ) ? __( Helper::eael_wp_kses( $settings['success_resetpassword'] ), 'essential-addons-for-elementor-lite' ) : esc_html__( 'Your password has been reset.', 'essential-addons-for-elementor-lite' );
 
