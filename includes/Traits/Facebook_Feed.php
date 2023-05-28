@@ -67,7 +67,7 @@ trait Facebook_Feed {
 		$facebook_data = get_transient( $key );
 
 		if ( $facebook_data == false ) {
-			$facebook_data = wp_remote_retrieve_body( wp_remote_get( $this->get_url($page_id, $token, $source, $display_comment), [
+			$facebook_data = wp_remote_retrieve_body( wp_remote_get( $this->get_url($page_id, $token, $source), [
 				'timeout' => 70,
 			] ) );
 			$facebook_data = json_decode( $facebook_data, true );
@@ -280,12 +280,11 @@ trait Facebook_Feed {
 	 *
 	 * @return string
 	 */
-	public function get_url( $page_id = '', $token = '', $source = 'posts', $display_comment = '' ) {
-        $comment_count = $display_comment == 'yes' ? ',comments.summary(total_count)' : '';
+	public function get_url( $page_id = '', $token = '', $source = 'posts' ) {
         $post_limit =  apply_filters( 'eael_facebook_feed_post_limit', 99 );
-		$post_url = "https://graph.facebook.com/v8.0/{$page_id}/posts?fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url,media}{$comment_count},reactions.summary(total_count)&limit={$post_limit}&access_token={$token}";
-		$feed_url = "https://graph.facebook.com/v8.0/{$page_id}/feed?fields=id,message,full_picture,status_type,created_time,attachments{title,description,type,url,media},from,permalink_url,shares,call_to_action{$comment_count},reactions.summary(total_count),privacy&access_token={$token}&limit={$post_limit}&locale=en_US";
-
+		$post_url = "https://graph.facebook.com/v17.0/{$page_id}/posts?fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url,media},reactions.summary(total_count)&limit={$post_limit}&access_token={$token}";
+		$feed_url = "https://graph.facebook.com/v17.0/{$page_id}/feed?fields=id,message,full_picture,status_type,created_time,attachments{title,description,type,url,media},from,permalink_url,shares,call_to_action,reactions.summary(total_count),privacy&access_token={$token}&limit={$post_limit}&locale=en_US";
+echo_pre($post_url);
 		if ( 'posts' === $source ) {
 			return $post_url;
 		}
