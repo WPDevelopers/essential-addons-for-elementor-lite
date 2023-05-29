@@ -392,7 +392,7 @@ class Image_Accordion extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'default'   => 'rgba(0, 0, 0, .3)',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-img-accordion .eael-image-accordion-hover:before' => 'background-color: {{VALUE}};',
+	                '{{WRAPPER}} .eael-img-accordion .eael-image-accordion-hover:before' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -406,6 +406,7 @@ class Image_Accordion extends Widget_Base {
                 'selectors' => [
                     '{{WRAPPER}} .eael-img-accordion .eael-image-accordion-hover:hover::before'         => 'background-color: {{VALUE}};',
                     '{{WRAPPER}} .eael-img-accordion .eael-image-accordion-hover.overlay-active:hover::before' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-img-accordion .eael-image-accordion-hover.overlay-active:before' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
