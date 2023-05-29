@@ -877,11 +877,8 @@ trait Login_Registration {
 		}
 
 		if ( ( ! count( $errors ) ) && isset( $_POST['eael-pass1'] ) && ! empty( $_POST['eael-pass1'] ) ) {
-			$rp_data_db_transient = get_transient('eael_resetpassword_rp_data_' . $widget_id);
-			$rp_data_db = !empty( $rp_data_db_transient ) ? maybe_unserialize($rp_data_db_transient) : [];
-			
-			$rp_data_db['rp_key'] = ! empty( $rp_data_db['rp_key'] ) ? $rp_data_db['rp_key'] : '';
-			$rp_data_db['rp_login'] = ! empty( $rp_data_db['rp_login'] ) ? $rp_data_db['rp_login'] : '';
+			$rp_data_db['rp_key'] = ! empty( $_POST['rp_key'] ) ? sanitize_text_field($_POST['rp_key']) : '';
+			$rp_data_db['rp_login'] = ! empty( $_POST['rp_login'] ) ? sanitize_text_field($_POST['rp_login']) : '';
 			
 			$user = check_password_reset_key( $rp_data_db['rp_key'], $rp_data_db['rp_login'] );
 
