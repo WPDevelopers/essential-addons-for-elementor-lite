@@ -1197,7 +1197,10 @@ trait Controls
                     'options' => array(
                         'scrollbar' => esc_html__( 'Scrollbar', 'essential-addons-elementor' ),
                         'arrows' => esc_html__( 'Arrows', 'essential-addons-elementor' ),
-                    )
+                    ),
+                    'condition' => [
+                        'eael_dynamic_template_Layout' => 'horizontal',
+                    ],
                 )
             );
         }
