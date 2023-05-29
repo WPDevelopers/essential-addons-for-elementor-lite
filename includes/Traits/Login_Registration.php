@@ -977,7 +977,7 @@ trait Login_Registration {
 		$this->resetpassword_in_popup_selector = isset( $_GET['popup-selector'] ) ? sanitize_text_field( $_GET['popup-selector'] ) : '';
 		$rp_page_url = get_permalink( $this->page_id );
 		
-		list( $rp_path ) = explode( '?', wp_unslash( $_SERVER['REQUEST_URI'] ) );
+		$rp_path = '/';
 		$rp_cookie       = 'wp-resetpass-' . COOKIEHASH;
 
 		if ( isset( $_GET['key'] ) && isset( $_GET['login'] ) ) {
