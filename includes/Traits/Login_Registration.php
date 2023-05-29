@@ -1015,16 +1015,6 @@ trait Login_Registration {
 			exit;
 		}
 
-		$rp_data = [
-			'rp_key' => !empty( $rp_key ) ? $rp_key : '',
-			'rp_login' => $rp_login,
-			'rp_path' => $rp_path,
-			'rp_cookie' => $rp_cookie,
-			'user' => $user,
-		];
-
-		set_transient( 'eael_resetpassword_rp_data_' . esc_attr( $this->widget_id ), maybe_serialize( $rp_data ), 3 * MINUTE_IN_SECONDS );
-
 		if( $this->resetpassword_in_popup_selector ){
 			wp_redirect( $rp_page_url . '?eael-resetpassword=1&popup-selector=' . $this->resetpassword_in_popup_selector );
 		} else {
