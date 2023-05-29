@@ -1024,7 +1024,6 @@ trait Login_Registration {
 		];
 
 		set_transient( 'eael_resetpassword_rp_data_' . esc_attr( $this->widget_id ), maybe_serialize( $rp_data ), 3 * MINUTE_IN_SECONDS );
-		setcookie( $rp_cookie, ' ', time() - YEAR_IN_SECONDS, $rp_path, COOKIE_DOMAIN, is_ssl(), true );
 
 		if( $this->resetpassword_in_popup_selector ){
 			wp_redirect( $rp_page_url . '?eael-resetpassword=1&popup-selector=' . $this->resetpassword_in_popup_selector );
