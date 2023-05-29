@@ -877,17 +877,10 @@ trait Login_Registration {
 		}
 
 		if ( ( ! count( $errors ) ) && isset( $_POST['eael-pass1'] ) && ! empty( $_POST['eael-pass1'] ) ) {
-			$rp_data_db['rp_key'] = ! empty( $_POST['rp_key'] ) ? sanitize_text_field($_POST['rp_key']) : '';
-			$rp_data_db['rp_login'] = ! empty( $_POST['rp_login'] ) ? sanitize_text_field($_POST['rp_login']) : '';
+			$rp_data_db['rp_key']   = ! empty( $_POST['rp_key'] ) ? sanitize_text_field( $_POST['rp_key'] ) : '';
+			$rp_data_db['rp_login'] = ! empty( $_POST['rp_login'] ) ? sanitize_text_field( $_POST['rp_login'] ) : '';
 			
 			$user = check_password_reset_key( $rp_data_db['rp_key'], $rp_data_db['rp_login'] );
-
-			$rp_key       = empty( $_POST['rp_key'] ) ? '' : sanitize_text_field( $_POST['rp_key'] );
-			$is_user_null = isset( $_POST['eael-pass1'] ) && ! hash_equals( $rp_data_db['rp_key'], $rp_key );
-			
-			if ( $is_user_null ) {
-				$user = false;
-			}
 
 			if( is_wp_error( $user ) || ! $user ){
 				$data['message'] = isset( $settings['error_resetpassword'] ) ? __( Helper::eael_wp_kses( $settings['error_resetpassword'] ), 'essential-addons-for-elementor-lite' ) : esc_html__( 'Invalid user name found!', 'essential-addons-for-elementor-lite' );
