@@ -1228,14 +1228,14 @@ trait Controls
                 )
             );
 
-            $content_timeline_slide_range = range( 1, 6 );
+            $content_timeline_range = range( 1, 6 );
             $wb->add_responsive_control(
                 'eael_content_timeline_slides_to_scroll',
                 array(
                     'label'     => esc_html__( 'Slides to Scroll', 'essential-addons-elementor' ),
                     'type'      => Controls_Manager::SELECT,
                     'default'   => '1',
-                    'options'   => array_combine( $content_timeline_slide_range, $content_timeline_slide_range ),
+                    'options'   => array_combine( $content_timeline_range, $content_timeline_range ),
                     'condition' => [
                         'eael_dynamic_template_Layout' => 'horizontal',
                         'eael_content_timeline_navigation_type' => 'arrows',
