@@ -5806,7 +5806,7 @@ class Login_Register extends Widget_Base {
 
 			$rp_cookie = 'wp-resetpass-' . COOKIEHASH;
 			if ( ! empty( $rp_data[ $rp_cookie ] ) ) {
-				list( $rp_data['rp_login'], $rp_data['rp_key'] ) = explode( ':', $rp_data[ $rp_cookie ] );
+				list( $rp_data['rp_login'], $rp_data['rp_key'] ) = explode( ':', sanitize_text_field( $rp_data[ $rp_cookie ] ) );
 			}
 			
 			if( $validation_required ){
