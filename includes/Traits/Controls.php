@@ -1186,6 +1186,23 @@ trait Controls
         );
 
         if (
+            'eael-content-timeline' === $wb->get_name()
+        ) {
+            $wb->add_control(
+                'eael_content_timeline_navigation_type',
+                array(
+                    'label'   => esc_html__( 'Navigation Type', 'essential-addons-elementor' ),
+                    'type'    => Controls_Manager::SELECT,
+                    'default' => 'scroll-bar',
+                    'options' => array(
+                        'scroll-bar' => esc_html__( 'Scroll Bar', 'essential-addons-elementor' ),
+                        'arrows' => esc_html__( 'Arrows', 'essential-addons-elementor' ),
+                    )
+                )
+            );
+        }
+
+        if (
             'eael-post-grid' === $wb->get_name()
             || 'eael-post-block' === $wb->get_name()
             || 'eael-post-carousel' === $wb->get_name()
