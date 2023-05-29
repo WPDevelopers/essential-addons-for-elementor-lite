@@ -1193,9 +1193,9 @@ trait Controls
                 array(
                     'label'   => esc_html__( 'Navigation Type', 'essential-addons-elementor' ),
                     'type'    => Controls_Manager::SELECT,
-                    'default' => 'scroll-bar',
+                    'default' => 'scrollbar',
                     'options' => array(
-                        'scroll-bar' => esc_html__( 'Scroll Bar', 'essential-addons-elementor' ),
+                        'scrollbar' => esc_html__( 'Scrollbar', 'essential-addons-elementor' ),
                         'arrows' => esc_html__( 'Arrows', 'essential-addons-elementor' ),
                     )
                 )
