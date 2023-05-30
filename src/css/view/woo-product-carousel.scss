@@ -68,11 +68,21 @@ $theme-preset4: #ec3b75;
         }
     }
 
-    .eael-woo-product-carousel{
+    .eael-woo-product-carousel.swiper-8 {
+        &:not(.swiper-initialized) .eael-product-carousel {
+            width: 350px;
+            height: 450px
+        }
+    }
+
+    .eael-woo-product-carousel.swiper-8-lower {
         &:not(.swiper-container-initialized) .eael-product-carousel {
             width: 350px;
             height: 450px
         }
+    }
+    
+    .eael-woo-product-carousel{
         .eael-product-carousel {
             direction: ltr;
         }
@@ -193,6 +203,22 @@ $theme-preset4: #ec3b75;
             text-align: left;
             margin: 10px;
 
+            &.product-details-none {
+                background-color: unset;
+
+                .image-wrap img, .product-image-wrap {
+                    border-radius: 20px;
+                }
+
+                .image-wrap a {
+                    line-height: 10px;
+                }
+
+                .product-details-wrap {
+                    display: none;
+                }
+            }
+
             .image-wrap img, .product-image-wrap {
                 border-radius: 20px 20px 0 0;
             }
@@ -291,6 +317,22 @@ $theme-preset4: #ec3b75;
                 border-radius: 10px 10px 0 0;
             }
 
+            .image-wrap a {
+                z-index: 3;
+                position: relative;
+                line-height: 10px;
+
+                img {
+                    margin-bottom: 0;
+                }
+            }
+
+            &.product-details-none-overlay {
+                .image-wrap img, .product-image-wrap {
+                    border-radius: 10px;
+                }
+            }
+
             .eael-onsale {
                 background: $theme-preset2;
 
@@ -319,6 +361,9 @@ $theme-preset4: #ec3b75;
                 .product-overlay-content {
                     bottom: 0;
                     opacity: 1;
+                }
+                .image-wrap a {
+                    opacity: .2;
                 }
             }
 
@@ -440,6 +485,22 @@ $theme-preset4: #ec3b75;
             text-align: left;
             margin: 10px;
 
+            &.product-details-none {
+                background-color: unset;
+
+                .image-wrap img, .product-image-wrap {
+                    border-radius: 10px;
+                }
+
+                .image-wrap a {
+                    line-height: 10px;
+                }
+
+                .product-details-wrap {
+                    display: none;
+                }
+            }
+
             .image-wrap img, .product-image-wrap {
                 border-radius: 10px 10px 0 0;
             }
@@ -540,6 +601,22 @@ $theme-preset4: #ec3b75;
                 border-radius: 10px 10px 0 0;
             }
 
+            .image-wrap a {
+                z-index: 3;
+                position: relative;
+                line-height: 10px;
+
+                img {
+                    margin-bottom: 0;
+                }
+            }
+
+            &.product-details-none-overlay {
+                .image-wrap img, .product-image-wrap {
+                    border-radius: 10px;
+                }
+            }
+
             .eael-onsale {
                 background: $theme-preset4;
 
@@ -566,9 +643,14 @@ $theme-preset4: #ec3b75;
                 .carousel-overlay  {
                     opacity: 1;
                 }
+
                 .product-overlay-content {
                     bottom: 0;
                     opacity: 1;
+                }
+
+                .image-wrap a {
+                    opacity: .2;
                 }
 
                 //// icon
