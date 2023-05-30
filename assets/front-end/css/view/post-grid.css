@@ -144,6 +144,11 @@
   padding-right: 7px;
 }
 
+.eael-post-grid .eael-entry-wrapper > .eael-entry-header-after.style-two .eael-entry-meta span.eael-posted-on::before {
+  content: "";
+  padding-right: 0;
+}
+
 /*--- Post Grid Thumbnail Hover Effects ---*/
 
 .eael-entry-media {
