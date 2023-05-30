@@ -82,6 +82,11 @@
   border-radius: 50%;
 }
 
+.eael-entry-header-after.style-two {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
 .eael-post-grid .eael-entry-footer .eael-entry-meta {
   text-align: left;
 }
