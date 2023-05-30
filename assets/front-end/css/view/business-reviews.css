@@ -152,6 +152,10 @@
       -ms-flex-align: center;
           align-items: center;
 }
+.eael-business-reviews-wrapper .swiper-button-next:after, .eael-business-reviews-wrapper .swiper-rtl .swiper-button-prev:after,
+.eael-business-reviews-wrapper .swiper-button-prev:after, .eael-business-reviews-wrapper .swiper-rtl .swiper-button-next:after {
+  content: "";
+}
 .eael-business-reviews-wrapper .swiper-button-prev {
   left: -40px;
   right: auto;
