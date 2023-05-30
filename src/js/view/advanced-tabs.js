@@ -68,8 +68,8 @@ ea.hooks.addAction("init", "ea", () => {
 					}
 				}
 			});
-			
-			$($currentTabId + ' .eael-tabs-nav ul li', $scope).on("click", function (e) {
+
+			$($currentTabId + ' > .eael-tabs-nav ul li', $scope).on("click", function (e) {
 				e.preventDefault();
 				
 				var currentTabIndex = $(this).index();
@@ -82,7 +82,7 @@ ea.hooks.addAction("init", "ea", () => {
 				.children(".eael-tabs-content")
 				.children("div");
 
-				if ($currentTab.hasClass('eael-tab-toggle')) {
+				if ($($currentTabId).hasClass('eael-tab-toggle')) {
 					$(this).toggleClass('active inactive');
 					$(tabsNav).not(this).removeClass("active active-default").addClass("inactive").attr('aria-selected', 'false').attr('aria-expanded', 'false');
 					$(this).attr("aria-selected", 'true').attr("aria-expanded", 'true');
