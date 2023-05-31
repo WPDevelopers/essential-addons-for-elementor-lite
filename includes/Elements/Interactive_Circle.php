@@ -299,6 +299,36 @@ class Interactive_Circle extends Widget_Base {
 				],
 			]
 		);
+
+		$this->add_control(
+			'eael_interactive_circle_autoplay',
+			[
+				'label'        => esc_html__( 'Autoplay', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'default'      => '',
+				'return_value' => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'eael_interactive_circle_autoplay_interval',
+			[
+				'label'        => esc_html__( 'Interval (Miliseconds)', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range'      => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 10000,
+						'step' => 500,
+					],
+				],
+				'condition'	=> [
+					'eael_interactive_circle_autoplay' => 'yes',
+				]
+			]
+		);
+
 		$this->end_controls_section();
 	}
 
@@ -807,6 +837,8 @@ class Interactive_Circle extends Widget_Base {
 		);
 
 		$this->add_render_attribute( 'eael_circle_wrapper', 'data-animation', $settings['eael_interactive_circle_animation'] );
+		$this->add_render_attribute( 'eael_circle_wrapper', 'data-autoplay', esc_attr( 'yes' === $settings['eael_interactive_circle_autoplay'] ? 1 : 0 ) );
+		$this->add_render_attribute( 'eael_circle_wrapper', 'data-autoplay-interval', esc_attr( ! empty( $settings['eael_interactive_circle_autoplay_interval']['size'] ) ? intval( $settings['eael_interactive_circle_autoplay_interval']['size'] ) : 2000 ) );
 
 		$item_count     = count( $settings['eael_interactive_circle_item'] );
 		$show_btn_icon  = isset( $settings['eael_interactive_circle_btn_icon_show'] ) && 'yes' === $settings['eael_interactive_circle_btn_icon_show'];
