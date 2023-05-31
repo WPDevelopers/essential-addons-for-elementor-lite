@@ -1363,13 +1363,15 @@ class Data_Table extends Widget_Base {
 										?>
 									   <?php if(  $table_td[$j]['content_type'] == 'icon' ) : ?>
 											<td <?php echo $this->get_render_attribute_string('table_inside_td'.$i.$j); ?>>
-												<div class="td-content-wrapper">
+												<div class="td-content-wrapper sss">
 													<?php if ( $table_td[$j]['icon_is_new'] || $table_td[$j]['icon_migrated']) { ?>
-                                                        <span class="eael-datatable-icon">
+                                                        <div class="eael-datatable-icon td-content">
                                                         <?php Icons_Manager::render_icon( $table_td[$j]['icon_content_new'] );?>
-                                                        </span>
+                                                        </div>
                                                    <?php } else { ?>
-                                                        <span class="<?php echo $table_td[$j]['icon_content'] ?>" aria-hidden="true"></span>
+                                                        <div class="td-content">
+                                                            <span class="<?php echo $table_td[ $j ]['icon_content'] ?>" aria-hidden="true"></span>
+                                                        </div>
                                                     <?php } ?>
 												</div>
 											</td>
