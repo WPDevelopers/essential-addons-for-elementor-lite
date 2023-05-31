@@ -50,7 +50,9 @@ ea.hooks.addAction( "init", "ea", () => {
 					activeIndex = activeIndex >= $tabLinks.length ? 0 : activeIndex;
 				}
 			} );
-			$( $tabLinks[ activeIndex ] ).trigger( 'click' );
+			setTimeout(function(){
+				$( $tabLinks[ activeIndex ] ).trigger( 'click' );
+			}, 300);
 		}
 
 		function handleEvent( element ) {
