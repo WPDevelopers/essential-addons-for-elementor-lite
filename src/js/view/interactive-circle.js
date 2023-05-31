@@ -47,6 +47,7 @@ ea.hooks.addAction( "init", "ea", () => {
 			$tabLinks.each( function ( index ) {
 				if( $(this).hasClass('active') ) {
 					activeIndex = index + 1;
+					activeIndex = activeIndex >= $tabLinks.length ? 0 : activeIndex;
 				}
 			} );
 			$( $tabLinks[ activeIndex ] ).trigger( 'click' );
