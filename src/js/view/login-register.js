@@ -60,7 +60,9 @@ ea.hooks.addAction("init", "ea", () => {
                 window.history.replaceState({}, '', `${location.pathname}?${params}`);
                 e.preventDefault();
                 $regFormWrapper.hide();
-                $lostpasswordFormWrapper.hide();
+                $regFormWrapper.find('.eael-form-validation-container').html('');
+                $regFormWrapper.find('form').trigger('reset');
+                $lostpasswordFormWrapper.hide();                
                 $loginFormWrapper.fadeIn();
             });
         }
