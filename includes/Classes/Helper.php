@@ -945,14 +945,16 @@ class Helper
 
 		$sale_badge_align  = isset( $settings['eael_product_sale_badge_alignment'] ) ? $settings['eael_product_sale_badge_alignment'] : '';
 		$sale_badge_preset = isset( $settings['eael_product_sale_badge_preset'] ) ? $settings['eael_product_sale_badge_preset'] : '';
-		$sale_text         = ! empty( $settings['eael_product_carousel_sale_text'] ) ? $settings['eael_product_carousel_sale_text'] : (! empty( $settings['eael_product_sale_text'] ) ? $settings['eael_product_sale_text'] :'Sale!');
-		$stockout_text     = ! empty( $settings['eael_product_carousel_stockout_text'] ) ? $settings['eael_product_carousel_stockout_text'] : (! empty( $settings['eael_product_stockout_text'] ) ? $settings['eael_product_stockout_text'] :'Stock Out');
-		$tag               = ! empty( $settings['eael_product_quick_view_title_tag'] ) ? self::eael_validate_html_tag( $settings['eael_product_quick_view_title_tag'] ) : 'h1';
+		$sale_text         = ! empty( $settings['eael_product_carousel_sale_text'] ) ? $settings['eael_product_carousel_sale_text'] : (! empty( $settings['eael_product_sale_text'] ) ? $settings['eael_product_sale_text'] :( !empty( $settings['eael_product_gallery_sale_text'] ) ? $settings['eael_product_gallery_sale_text'] : 'Sale!' ));
+		$stockout_text     = ! empty( $settings['eael_product_carousel_stockout_text'] ) ? $settings['eael_product_carousel_stockout_text'] : (! empty( $settings['eael_product_stockout_text'] ) ? $settings['eael_product_stockout_text'] : ( !empty($settings['eael_product_gallery_stockout_text']) ? $settings['eael_product_gallery_stockout_text'] : 'Stock Out' ));
+        $tag               = ! empty( $settings['eael_product_quick_view_title_tag'] ) ? self::eael_validate_html_tag( $settings['eael_product_quick_view_title_tag'] ) : 'h1';
         
         remove_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_title', 5 );
         add_action( 'eael_woo_single_product_summary', function () use ( $tag ) {
             printf('<%1$s class="eael-product-quick-view-title product_title entry-title">%2$s</%1$s>',$tag,Helper::eael_wp_kses( get_the_title() ));
         }, 5 );
+
+        echo_pre([$widget_id, $settings]);
 
 	    ?>
 
@@ -963,7 +965,7 @@ class Helper
 				<div id="product-<?php esc_attr( get_the_ID() ); ?>" <?php post_class( 'product' ); ?>>
 					<div class="eael-product-image-wrap">
 						<?php
-						echo ( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.esc_attr( $sale_badge_preset ).' '.esc_attr( $sale_badge_align ).'">'. esc_html( $stockout_text ) .'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.esc_attr( $sale_badge_preset ).' '.esc_attr( $sale_badge_align ).'">' . esc_html( $sale_text ) . '</span>' : '') );
+						echo ( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.esc_attr( $sale_badge_preset ).' '.esc_attr( $sale_badge_align ).'">'. Helper::eael_wp_kses( $stockout_text ) .'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.esc_attr( $sale_badge_preset ).' '.esc_attr( $sale_badge_align ).'">' . Helper::eael_wp_kses( $sale_text ) . '</span>' : '') );
 						do_action( 'eael_woo_single_product_image' );
 						?>
 					</div>
