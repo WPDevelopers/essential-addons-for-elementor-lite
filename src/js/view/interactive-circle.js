@@ -4,6 +4,8 @@ ea.hooks.addAction( "init", "ea", () => {
 		var $circleWrap = $scope.find( ".eael-circle-wrapper" );
 		var $eventType  = "mouseenter";
 		var $animation  = $circleWrap.data('animation');
+		var $autoplay  	= $circleWrap.data('autoplay');
+		var $autoplayInterval  = parseInt( $circleWrap.data('autoplay-interval') );
 
 		if ( $animation != 'eael-interactive-circle-animation-0' ) {
 			var $circleContent = $scope.find( ".eael-circle-content" );
@@ -31,8 +33,25 @@ ea.hooks.addAction( "init", "ea", () => {
 		
 		$tabLinks.each( function ( element ) {
 			$( this ).on( $eventType, handleEvent( element ) );
+
 		} );
 		
+		if( $autoplay ){
+			setInterval(function () {
+				autoplayInteractiveCircle();
+			}, $autoplayInterval);
+		}
+
+		function autoplayInteractiveCircle(){
+			let activeIndex = 0;
+			$tabLinks.each( function ( index ) {
+				if( $(this).hasClass('active') ) {
+					activeIndex = index + 1;
+				}
+			} );
+			$( $tabLinks[ activeIndex ] ).trigger( 'click' );
+		}
+
 		function handleEvent( element ) {
 			return function () {
 				var $element   = $( this );
