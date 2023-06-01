@@ -536,7 +536,7 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'eael_event_calendar_default_view',
             [
-                'label' => __('Calendar Default View', 'essential-addons-for-elementor-lite'),
+                'label' => __('Default View', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
                     'timeGridDay' => __('Day', 'essential-addons-for-elementor-lite'),
@@ -548,11 +548,24 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_event_default_date_type',
+            [
+                'label' => __('Default Start Date', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'current' => __('Current Date', 'essential-addons-for-elementor-lite'),
+                    'custom' => __('Custom Date', 'essential-addons-for-elementor-lite'),
+                ],
+                'default' => 'custom',
+            ]
+        );
+
         $default_date = date('Y-m-d');
 	    $this->add_control(
 		    'eael_event_calendar_default_date',
 		    [
-			    'label' => __('Calendar Default Start Date', 'essential-addons-for-elementor-lite'),
+			    'label' => __('', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::DATE_TIME,
 			    'label_block' => true,
 			    'picker_options' => [
@@ -560,6 +573,9 @@ class Event_Calendar extends Widget_Base
 				    'dateFormat' 	=> 'Y-m-d',
 			    ],
 			    'default' => $default_date,
+                'condition' =>[
+                    'eael_event_default_date_type' => 'custom'
+                ]
 		    ]
 	    );
 
@@ -1523,6 +1539,24 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_more_event',
+            [
+                'label' => esc_html__( 'More Event Text', 'textdomain' ),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'eael_more_event_typography',
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .fc-daygrid-day-bottom .fc-daygrid-more-link',
+            ]
+        );
+
         $this->end_controls_section();
 
         $this->start_controls_section(
@@ -1882,7 +1916,7 @@ class Event_Calendar extends Widget_Base
 
         $local = $settings['eael_event_calendar_language'];
         $default_view = $settings['eael_event_calendar_default_view'];
-        $default_date = $settings['eael_event_calendar_default_date'];
+        $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : date('Y-m-d');
         $time_format = $settings['eael_event_time_format'];
         $event_limit = ! empty( $settings['eael_event_limit'] ) ? intval( $settings['eael_event_limit'] ) : 2;
         $translate_date = [
@@ -1900,6 +1934,8 @@ class Event_Calendar extends Widget_Base
             data-defaultdate = "' . $default_date . '"
             data-time_format = "' . $time_format . '"
             data-event_limit = "' . $event_limit . '"
+            data-hideDetailsLink= "' . $settings['eael_event_details_link_hide'] . '"
+            data-detailsButtonText = "' . Helper::eael_wp_kses( $settings['eael_event_details_text'] ) . '"
             data-events="' . htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8') . '"
             data-first_day="' . $settings['eael_event_calendar_first_day'] . '"></div>
             ' . $this->eaelec_load_event_details() . '
@@ -1980,7 +2016,6 @@ class Event_Calendar extends Widget_Base
 		            'borderColor'       => ! empty( $settings_eael_event_global_popup_ribbon_color ) ? $settings_eael_event_global_popup_ribbon_color : '#10ecab',
 		            'textColor'         => $settings_eael_event_global_text_color,
 		            'color'             => $settings_eael_event_global_bg_color,
-                    'hide_details_link' => $settings['eael_event_details_link_hide'],
                     'url'               => esc_url_raw( $event["eael_event_link"]["url"] ),
 		            'allDay'            => $event['eael_event_all_day'],
 		            'external'          => $event['eael_event_link']['is_external'],
@@ -2064,7 +2099,7 @@ class Event_Calendar extends Widget_Base
 
             foreach ($data->items as $key => $item) {
                 if ($item->status !== 'confirmed') {
-                    continue;
+//                    continue;
                 }
                 $all_day = '';
                 if (isset($item->start->date)) {

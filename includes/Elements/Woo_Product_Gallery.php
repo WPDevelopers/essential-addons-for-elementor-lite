@@ -268,13 +268,13 @@ class Woo_Product_Gallery extends Widget_Base {
 		$this->add_control(
 			'eael_woo_product_gallery_terms_thumb',
 			[
-				'label'        => __( 'Show Category Thumbnail', 'essential-addons-for-elementor-lite' ),
+				'label'        => __( 'Show Terms Thumbnail', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'default'      => 'no',
 				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
-				'description'  => __( 'Display thumbnail if a category has a thumbnail.', 'essential-addons-for-elementor-lite' ),
+				'description'  => __( 'Display thumbnail if a term (Category/Tag) has a thumbnail.', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 
@@ -434,6 +434,17 @@ class Woo_Product_Gallery extends Widget_Base {
 				'type'        => 'eael-select2',
 				'source_name' => 'taxonomy',
 				'source_type' => 'product_cat',
+				'label_block' => true,
+				'multiple'    => true,
+			]
+		);
+
+		$this->add_control(
+			'eael_product_gallery_tags', [
+				'label'       => __( 'Product Tags', 'essential-addons-for-elementor-lite' ),
+				'type'        => 'eael-select2',
+				'source_name' => 'taxonomy',
+				'source_type' => 'product_tag',
 				'label_block' => true,
 				'multiple'    => true,
 			]
@@ -1932,7 +1943,7 @@ class Woo_Product_Gallery extends Widget_Base {
 		$this->add_control(
 			'eael_product_popup_sale_style',
 			[
-				'label'     => __( 'Sale', 'essential-addons-for-elementor-lite' ),
+				'label'     => __( 'Sale Badge', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -1943,7 +1954,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			[
 				'name'     => 'eael_product_popup_sale_typo',
 				'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
-				'selector' => '.eael-popup-details-render{{WRAPPER}} .eael-onsale',
+				'selector' => '.eael-popup-details-render{{WRAPPER}} .eael-onsale:not(.outofstock)',
 			]
 		);
 
@@ -1953,7 +1964,7 @@ class Woo_Product_Gallery extends Widget_Base {
 				'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'.eael-popup-details-render{{WRAPPER}} .eael-onsale' => 'color: {{VALUE}}!important;',
+					'.eael-popup-details-render{{WRAPPER}} .eael-onsale:not(.outofstock)' => 'color: {{VALUE}}!important;',
 				],
 			]
 		);
@@ -1963,11 +1974,52 @@ class Woo_Product_Gallery extends Widget_Base {
 				'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'.eael-popup-details-render{{WRAPPER}} .eael-onsale'                                      => 'background-color: {{VALUE}}!important;',
+					'.eael-popup-details-render{{WRAPPER}} .eael-onsale:not(.outofstock)'                                      => 'background-color: {{VALUE}}!important;',
 					'.eael-popup-details-render{{WRAPPER}} .eael-onsale:not(.outofstock).sale-preset-4:after' => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}};',
 				],
 			]
 		);
+
+        // Stock out
+        $this->add_control(
+            'eael_product_popup_stockout_style',
+            [
+                'label'     => __( 'Stock Out Badge', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_product_popup_stockout_typo',
+                'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
+                'selector' => '.eael-popup-details-render{{WRAPPER}} .eael-onsale.outofstock',
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_popup_stockout_color',
+            [
+                'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '.eael-popup-details-render{{WRAPPER}} .eael-onsale.outofstock' => 'color: {{VALUE}}!important;',
+                ],
+            ]
+        );
+        $this->add_control(
+            'eael_product_popup_stockout_bg_color',
+            [
+                'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '.eael-popup-details-render{{WRAPPER}} .eael-onsale.outofstock'                                      => 'background-color: {{VALUE}}!important;',
+                    '.eael-popup-details-render{{WRAPPER}} .eael-onsale.outofstock.sale-preset-4:after' => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}};',
+                ],
+            ]
+        );
 
 		// Quantity
 		$this->add_control(
@@ -2469,6 +2521,10 @@ class Woo_Product_Gallery extends Widget_Base {
 	public function build_product_query( $settings ) {
 		$get_product_cats = $settings[ 'eael_product_gallery_categories' ];
 		$product_cats     = str_replace( ' ', '', $get_product_cats );
+
+		$get_product_tags = $settings[ 'eael_product_gallery_tags' ];
+		$product_tags_items = str_replace( ' ', '', $get_product_tags );
+
 		// Category retrieve
 		$cat_args            = array(
 			'order'      => 'ASC',
@@ -2478,6 +2534,15 @@ class Woo_Product_Gallery extends Widget_Base {
 		);
 		$product_categories = get_terms( 'product_cat', $cat_args );
 
+		// Tag retrieve
+		$tag_args            = array(
+			'order'      => 'ASC',
+			'hide_empty' => false,
+			'include'    => $product_tags_items,
+			'orderby'    => 'include',
+		);
+		$product_tags = get_terms( 'product_tag', $tag_args );
+		
 		$args = [
 			'post_type'      => 'product',
 			'post_status'    => array( 'publish', 'pending', 'future' ),
@@ -2506,27 +2571,51 @@ class Woo_Product_Gallery extends Widget_Base {
 		}
 
 		if ( !empty( $settings[ 'eael_product_gallery_categories' ] ) ) {
+			$args_tax_query_combined['relation'] = 'OR';
+
 			if ( $settings[ 'eael_woo_product_gallery_terms_show_all' ] == '' ) {
 				if ( !empty( $product_cats ) && count( $product_categories ) > 0 ) {
-					$args[ 'tax_query' ] = [
-						[
-							'taxonomy' => 'product_cat',
-							'field'    => 'term_id',
-							'terms'    => $product_categories[ 0 ]->term_id,
-							'operator' => 'IN',
-						],
+					$args_tax_query_combined[] = [
+						'taxonomy' => 'product_cat',
+						'field'    => 'term_id',
+						'terms'    => $product_categories[ 0 ]->term_id,
+						'operator' => 'IN',
 					];
 				}
 			} else {
-				$args[ 'tax_query' ] = [
-					[
-						'taxonomy' => 'product_cat',
-						'field'    => 'term_id',
-						'terms'    => $settings[ 'eael_product_gallery_categories' ],
-						'operator' => 'IN',
-					],
+				$args_tax_query_combined[] = [
+					'taxonomy' => 'product_cat',
+					'field'    => 'term_id',
+					'terms'    => $settings[ 'eael_product_gallery_categories' ],
+					'operator' => 'IN',
 				];
 			}
+		}
+
+		if ( ! empty( $settings[ 'eael_product_gallery_tags' ] ) ) {
+			$args_tax_query_combined['relation'] = 'OR';
+
+			if ( $settings[ 'eael_woo_product_gallery_terms_show_all' ] == '' ) {
+				if ( ! empty( $product_tags_items ) && count( $product_tags ) > 0 ) {
+					$args_tax_query_combined[] = [
+						'taxonomy' => 'product_tag',
+						'field'    => 'term_id',
+						'terms'    => $product_tags[ 0 ]->term_id,
+						'operator' => 'IN',
+					];
+				}
+			} else {
+				$args_tax_query_combined[] = [
+					'taxonomy' => 'product_tag',
+					'field'    => 'term_id',
+					'terms'    => $settings[ 'eael_product_gallery_tags' ],
+					'operator' => 'IN',
+				];
+			}
+		}
+
+		if( isset( $args_tax_query_combined ) ){
+			$args[ 'tax_query' ][] = $args_tax_query_combined;
 		}
 
 		$args[ 'meta_query' ] = [ 'relation' => 'AND' ];
@@ -2562,6 +2651,14 @@ class Woo_Product_Gallery extends Widget_Base {
 					'terms'    => $settings[ 'eael_product_gallery_categories' ],
 				];
 			}
+
+			if ( $settings[ 'eael_product_gallery_tags' ] ) {
+				$args[ 'tax_query' ][] = [
+					'taxonomy' => 'product_tag',
+					'field'    => 'term_id',
+					'terms'    => $settings[ 'eael_product_gallery_tags' ],
+				];
+			}
 		} else if ( $settings[ 'eael_product_gallery_product_filter' ] == 'best-selling-products' ) {
 			$args[ 'meta_key' ] = 'total_sales';
 			$args[ 'orderby' ]  = 'meta_value_num';
@@ -2573,6 +2670,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			$args[ 'orderby' ]  = 'meta_value_num';
 			$args[ 'order' ]    = 'DESC';
 		}
+
 		return $args;
 	}
 
@@ -2602,7 +2700,10 @@ class Woo_Product_Gallery extends Widget_Base {
 		$get_product_cats = $settings[ 'eael_product_gallery_categories' ];
 		$product_cats     = str_replace( ' ', '', $get_product_cats );
 
-		if ( $settings[ 'eael_woo_product_gallery_terms_show_all' ] == '' && empty( $get_product_cats ) ) {
+		$get_product_tags = $settings[ 'eael_product_gallery_tags' ];
+		$product_tags_items = str_replace( ' ', '', $get_product_tags );
+
+		if ( $settings[ 'eael_woo_product_gallery_terms_show_all' ] == '' && empty( $get_product_cats ) && empty( $get_product_tags ) ) {
 			return;
 		}
 
@@ -2614,10 +2715,13 @@ class Woo_Product_Gallery extends Widget_Base {
 				$this->get_filename_only( $template ), 'name'                                                                                        => $this->process_directory_name() ], 1 ) . '  data-nonce="' . wp_create_nonce( 'eael_product_gallery' ) . '" data-page-id="' . $this->page_id . '" data-widget-id="' . $this->get_id() . '" data-widget="' . $this->get_id() . '" data-class="' . get_class( $this ) . '" data-args="' . http_build_query( $args ) . '" data-page="1">';
 
 		if ( $settings[ 'eael_woo_product_gallery_terms_show_all' ] == 'yes' ) {
-			if ( empty( $product_cats ) ) {
-				$all_taxonomy = 'all';
-			} else {
+			$all_taxonomy = 'all';
+			if ( ! empty( $product_cats ) && ! empty( $product_tags_items ) ) {
+				$all_taxonomy = 'product_cat|product_tag';
+			} else if ( ! empty( $product_cats ) ) {
 				$all_taxonomy = 'product_cat';
+			} else if ( ! empty( $product_tags_items ) ) {
+				$all_taxonomy = 'product_tag';
 			}
 
 			if ( $show_cat_thumb && !empty($settings['eael_all_tab_thumb']['url'])) {
@@ -2626,36 +2730,70 @@ class Woo_Product_Gallery extends Widget_Base {
 				$show_all_cat_thumb = '';
 			}
 
+			$product_cats_data = ! empty( $product_cats ) ? json_encode( $product_cats ) : '';
+			$product_tags_items_data = ! empty( $product_tags_items ) ? json_encode( $product_tags_items ) : '';
 
-			echo '<li><a href="javascript:;" data-taxonomy="' . $all_taxonomy . '" data-page="1" data-id=' . json_encode( $product_cats ) .
-			     ' class="active post-list-filter-item post-list-cat-'
+			echo '<li><a href="javascript:;" data-taxonomy="' . esc_attr( $all_taxonomy ) . '" data-page="1" data-tagid="' . esc_attr( $product_tags_items_data ) . '" data-id="' . esc_attr( $product_cats_data ) .
+			     '" class="active post-list-filter-item post-list-cat-'
 			     . $this->get_id() . '">' .$show_all_cat_thumb. '' . __( $settings[ 'eael_woo_product_gallery_terms_all_text' ], 'essential-addons-for-elementor-lite' ) . '</a></li>';
 		}
 
-		// Category retrieve
-		$catargs            = array(
-			'order'      => 'ASC',
-			'hide_empty' => false,
-			'include'    => $product_cats,
-			'orderby'    => 'include',
-		);
-		$product_categories = get_terms( 'product_cat', $catargs );
+		// Category and tag retrieve
+		$product_categories = $product_tags = [];
 
-		if ( !empty( $product_cats ) && count( $product_categories ) > 0 ) {
-			foreach ( $product_categories as $category ) {
-				$thumbnail_id = get_term_meta( $category->term_id, 'thumbnail_id', true );
-				$image_url    = wp_get_attachment_url( $thumbnail_id );
+		if ( ! empty( $product_cats ) ) {
+			$catargs	= array(
+				'order'      => 'ASC',
+				'hide_empty' => false,
+				'include'    => $product_cats,
+				'orderby'    => 'include',
+			);
+			$product_categories = get_terms( 'product_cat', $catargs );
 
-				if ( $show_cat_thumb && $image_url ) {
-					$show_cat_thumb_tag = '<img src="' . $image_url . '" />';
-				} else {
-					$show_cat_thumb_tag = '';
+			if ( count( $product_categories ) > 0 ) {
+				foreach ( $product_categories as $category ) {
+					$thumbnail_id = get_term_meta( $category->term_id, 'thumbnail_id', true );
+					$image_url    = wp_get_attachment_url( $thumbnail_id );
+
+					if ( $show_cat_thumb && $image_url ) {
+						$show_cat_thumb_tag = '<img src="' . $image_url . '" />';
+					} else {
+						$show_cat_thumb_tag = '';
+					}
+
+					echo '<li><a href="javascript:;" data-page="1" data-taxonomy="product_cat" data-terms='
+						 . json_encode
+						 ( [ $category->slug ] ) . ' data-id="'
+						 . $category->term_id . '" class="post-list-filter-item ">' . $show_cat_thumb_tag . '' . $category->name . '</a></li>';
 				}
+			}
+		}
 
-				echo '<li><a href="javascript:;" data-page="1" data-taxonomy="product_cat" data-terms='
-				     . json_encode
-				     ( [ $category->slug ] ) . ' data-id="'
-				     . $category->term_id . '" class="post-list-filter-item ">' . $show_cat_thumb_tag . '' . $category->name . '</a></li>';
+		if ( ! empty( $product_tags_items ) ) {
+			$tagargs	= array(
+				'order'      => 'ASC',
+				'hide_empty' => false,
+				'include'    => $product_tags_items,
+				'orderby'    => 'include',
+			);
+			$product_tags = get_terms( 'product_tag', $tagargs );
+
+			if ( count( $product_tags ) > 0 ) {
+				foreach ( $product_tags as $product_tag ) {
+					$thumbnail_id = get_term_meta( $product_tag->term_id, 'thumbnail_id', true );
+					$image_url    = wp_get_attachment_url( $thumbnail_id );
+
+					if ( $show_cat_thumb && $image_url ) {
+						$show_cat_thumb_tag = '<img src="' . $image_url . '" />';
+					} else {
+						$show_cat_thumb_tag = '';
+					}
+
+					echo '<li><a href="javascript:;" data-page="1" data-taxonomy="product_tag" data-terms='
+						 . json_encode
+						 ( [ $product_tag->slug ] ) . ' data-id="'
+						 . $product_tag->term_id . '" class="post-list-filter-item ">' . $show_cat_thumb_tag . '' . $product_tag->name . '</a></li>';
+				}
 			}
 		}
 
