@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.2
 Requires PHP: 7.0
-Stable tag: 5.7.2
+Stable tag: 5.7.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -244,6 +244,49 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.7.4 - 01/06/2023 =
+
+- Improved: EA Woo Product Grid | Added support for manual Product selection option
+- Improved: EA Advanced Tab | Added collapsible features for the Tabs
+- Fixed: EA Advanced Accordion | Hashlink (#link) mechanism support for multiple Accordions on same page 
+- Few minor bug fixes & improvements
+
+= 5.7.3 - 22/05/2023 =
+
+- Improved: EA Woo Checkout | Field Sorting Mechanism
+- Improved: EA Filterable Gallery | Search and Filtering process Mechanism
+- Improved: EA NFT Gallery | Internal code structure 
+- Improved: Added support for Swiper JS 8
+- Improved: EA Filterable Gallery | Accessibility Improvements
+- Improved: EA Filterable Gallery | Title Hyperlink Support
+- Improved: EA Event Calendar | Added Control for Automatic month switching 
+- Improved: EA Pricing Table | Added Dynamic Attribute support for Button
+- Improved: EA Simple Menu | Added Active Tab style support 
+- Improved: EA Event Calendar | Added Typography support for "Show more events" 
+- Improved: EA Business Review | Added Business Schema Support 
+- Improved: EA Content Timeline | Anchor link Support for Dynamic Post's Feature Image 
+- Improved: EA Filterable Gallery | Custom Width supports for Video content
+- Improved: EA Login/Register Form | Added Password visibility icon support for the Registration Form
+- Improved: EA Progress Bar | Added Support for String value as a Dynamic Tag in Progress Bar.
+- Fixed: EA Event Calendar | Hide event link on Google Calendar
+- Fixed: EA Sticky Video | Transparent button overly issue
+- Fixed: EA Advanced Tab | Added layout support for Saved Template Video/Slide content
+- Fixed: EA Event Calendar | Duplicate event details issue
+- Fixed: EA Interactive Circle | Individual items styling issue 
+- Fixed: EA Product Carousel | Image clickable option for Preset 2 & 4
+- Fixed: EA Woo Cart | Conflicts with "Blocksy" theme
+- Fixed: EA Woo Product Carousel | Image click support for Preset 2 
+- Fixed: EA Woo Product Gallery | Stock badge Style options in Quick view
+- Fixed: EA Reading Progress Bar | Reading Progress Bar visibility on the Single Product Template 
+- Fixed: EA Reading Progress Bar | Reading Progress Bar styling issue on the Single Post Template
+- Fixed: EA Woo Product Carousel | Spacing issue after hiding the Title, Price, Rating
+- Fixed: EA Woo Product Grid | Conflict with the YITH WooCommerce Wishlist Plugin
+- Fixed: EA Woo Checkout | Compatibility issue with "The7" theme
+- Fixed: EA Countdown | Conflicts with the ShopLentor Plugin
+- Fixed: Uncaught Error during Elementor Data Updater
+- Fixed: EA Advanced Data Table | Styling on Even Odd rows
+- Few minor bug fixes & improvements
 
 = 5.7.2 - 11/05/2023 =
 

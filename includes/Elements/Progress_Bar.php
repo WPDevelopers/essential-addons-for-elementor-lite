@@ -150,6 +150,37 @@ class Progress_Bar extends Widget_Base
             ]
         );
 
+        $style_condition = apply_filters('eael_progressbar_general_style_condition', ['line']);
+
+        $this->add_control(
+            'progress_bar_title_inner_show',
+            [
+                'label' => esc_html__('Inner Title', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'return_value' => 'yes',
+                'default' => '',
+                'condition' => [
+                    'progress_bar_layout' => $style_condition,
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'progress_bar_title_inner',
+            [
+                'label' => __('Inner Title', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
+                'default' => __('Progress Bar', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                    'progress_bar_layout' => $style_condition,
+                    'progress_bar_title_inner_show' => 'yes',
+                ],
+            ]
+        );
+
         $this->add_control(
             'progress_bar_value_type',
             [
@@ -159,6 +190,7 @@ class Progress_Bar extends Widget_Base
                     'static' => __('Static', 'essential-addons-for-elementor-lite'),
                     'dynamic' => __('Dynamic', 'essential-addons-for-elementor-lite'),
                 ],
+                'separator' => 'before',
                 'default' => 'static',
             ]
         );
@@ -298,7 +330,6 @@ class Progress_Bar extends Widget_Base
         /**
          * Style Tab: General(Line)
          */
-        $style_condition = apply_filters('eael_progressbar_general_style_condition', ['line']);
 
         $this->start_controls_section(
             'progress_bar_section_style_general_line',
@@ -398,6 +429,35 @@ class Progress_Bar extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-progressbar-line' => 'height: {{SIZE}}{{UNIT}}',
                 ],
+                'condition' => [
+                    'progress_bar_title_inner_show!' => 'yes',
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'progress_bar_line_height_inner_title',
+            [
+                'label' => __('Height', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 24,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-progressbar-line' => 'height: {{SIZE}}{{UNIT}}',
+                ],
+                'condition' => [
+                    'progress_bar_title_inner_show' => 'yes',
+                ]
             ]
         );
 
@@ -450,6 +510,35 @@ class Progress_Bar extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-progressbar-line-fill' => 'height: {{SIZE}}{{UNIT}}',
                 ],
+                'condition' => [
+                    'progress_bar_title_inner_show!' => 'yes',
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'progress_bar_line_fill_height_inner_title',
+            [
+                'label' => __('Height', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 24,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-progressbar-line-fill' => 'height: {{SIZE}}{{UNIT}}',
+                ],
+                'condition' => [
+                    'progress_bar_title_inner_show' => 'yes',
+                ]
             ]
         );
 
@@ -700,6 +789,41 @@ class Progress_Bar extends Widget_Base
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
+                'name' => 'progress_bar_inner_title_typography',
+                'label' => __('Inner Title', 'essential-addons-for-elementor-lite'),
+                'scheme' => Typography::TYPOGRAPHY_1,
+                'selector' => '{{WRAPPER}} .eael-progressbar-line-fill.eael-has-inner-title',
+            ]
+        );
+
+        $this->add_control(
+            'progress_bar_inner_title_color',
+            [
+                'label' => __('Inner Title Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#fff',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-progressbar-line-fill.eael-has-inner-title' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'progress_bar_inner_title_padding',
+            [
+                'label'      => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-progressbar-line-fill.eael-has-inner-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'separator' => 'after',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
                 'name' => 'progress_bar_count_typography',
                 'label' => __('Counter', 'essential-addons-for-elementor-lite'),
                 'scheme' => Typography::TYPOGRAPHY_1,
@@ -757,7 +881,12 @@ class Progress_Bar extends Widget_Base
         $settings = $this->get_settings_for_display();
         $wrap_classes = ['eael-progressbar'];
         $circle_wrapper = [];
-	    $settings['progress_bar_title'] = Helper::eael_wp_kses($settings['progress_bar_title']);
+	    $settings['progress_bar_title']         = Helper::eael_wp_kses($settings['progress_bar_title']);
+        
+        $has_inner_title                        = ! empty( $settings['progress_bar_title_inner_show'] ) && ! empty( $settings['progress_bar_title_inner'] );
+        $has_inner_title_class                  = $has_inner_title ? 'eael-has-inner-title' : '';
+	    $settings['progress_bar_title_inner']   = $has_inner_title ? Helper::eael_wp_kses( $settings['progress_bar_title_inner'] ) : '';
+        
         if (!apply_filters('eael/pro_enabled', false)) {
             if (in_array($settings['progress_bar_layout'], ['line', 'line_rainbow', 'circle_fill', 'half_circle_fill', 'box'])) {
                 $settings['progress_bar_layout'] = 'line';
@@ -786,7 +915,7 @@ class Progress_Bar extends Widget_Base
             ]);
 
             $this->add_render_attribute('eael-progressbar-line-fill', [
-                'class' => 'eael-progressbar-line-fill',
+                'class' => 'eael-progressbar-line-fill ' . esc_attr( $has_inner_title_class ),
                 'style' => '-webkit-transition-duration:' . $settings['progress_bar_animation_duration']['size'] . 'ms;-o-transition-duration:' . $settings['progress_bar_animation_duration']['size'] . 'ms;transition-duration:' . $settings['progress_bar_animation_duration']['size'] . 'ms;',
             ]);
 
@@ -795,7 +924,7 @@ class Progress_Bar extends Widget_Base
 
                 <div ' . $this->get_render_attribute_string('eael-progressbar-line') . '>
                     ' . ($settings['progress_bar_show_count'] === 'yes' ? '<span class="eael-progressbar-count-wrap"><span class="eael-progressbar-count">0</span><span class="postfix">' . __('%', 'essential-addons-for-elementor-lite') . '</span></span>' : '') . '
-                    <span ' . $this->get_render_attribute_string('eael-progressbar-line-fill') . '></span>
+                    <span ' . $this->get_render_attribute_string('eael-progressbar-line-fill') . '>' . Helper::eael_wp_kses( $settings['progress_bar_title_inner'] ) . '</span>
                 </div>
             </div>';
         }
