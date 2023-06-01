@@ -59,6 +59,7 @@ var WooCheckout = function ($scope, $) {
         let item_quantity = $( this ).val();
         let currentVal = parseFloat(item_quantity);
 		$this = $(this);
+		$( document.body ).trigger( 'update_checkout' );
         $.ajax({
 			type: 'POST',
 			url: localize.ajaxurl,
@@ -68,34 +69,7 @@ var WooCheckout = function ($scope, $) {
 				cart_item_key: cart_item_key,
 				quantity: currentVal
 			},
-			beforeSend: function() {
-				$this.attr('disabled', 'disabled');
-				$this.closest('.ea-woo-checkout').css('opacity', '0.5'); 
-			}, 
-			success: function(response) {
-				if(response.success) {
-					if(typeof response.data.cart_item_subtotal !== 'undefined') {
-						$this.closest('.cart_item').find('.eael-checkout-cart-item-total').html(response.data.cart_item_subtotal);
-					}
-					
-					if(typeof response.data.cart_subtotal !== 'undefined') {
-						$this.closest('.ea-checkout-review-order-table').find('.eael-checkout-cart-subtotal').html(response.data.cart_subtotal);
-					}
-					
-					if(typeof response.data.cart_total !== 'undefined') {
-						$this.closest('.ea-checkout-review-order-table').find('.eael-checkout-cart-total').html(response.data.cart_total);
-					}
-				}
-				$this.closest('.ea-woo-checkout').css('opacity', '1');
-				$('.eael-checkout-cart-qty-input').attr('disabled', false);
-			},
-			error: function(error) {
-				console.log(error);
-				$('.eael-checkout-cart-qty-input').attr('disabled', false);
-				$this.closest('.ea-woo-checkout').css('opacity', '1');
-			}
-		}); 
-
+		});
     });
 
 };
