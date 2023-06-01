@@ -2742,7 +2742,7 @@ msgstr ""
 msgid "Cell Text"
 msgstr ""
 
-#: ../includes/Elements/Data_Table.php:396, ../includes/Elements/Feature_List.php:202, ../includes/Elements/Filterable_Gallery.php:359, ../includes/Elements/Flip_Box.php:640, ../includes/Elements/Flip_Box.php:665, ../includes/Elements/NFT_Gallery.php:1472, ../includes/Elements/NFT_Gallery.php:1725, ../includes/Elements/Sticky_Video.php:158, ../includes/Elements/Sticky_Video.php:173, ../includes/Elements/Sticky_Video.php:188, ../includes/Elements/Sticky_Video.php:233, ../includes/Elements/SVG_Draw.php:210, ../includes/Elements/Team_Member.php:180
+#: ../includes/Elements/Data_Table.php:396, ../includes/Elements/Feature_List.php:202, ../includes/Elements/Filterable_Gallery.php:359, ../includes/Elements/Flip_Box.php:640, ../includes/Elements/Flip_Box.php:665, ../includes/Elements/NFT_Gallery.php:1472, ../includes/Elements/NFT_Gallery.php:1725, ../includes/Elements/Sticky_Video.php:158, ../includes/Elements/Sticky_Video.php:173, ../includes/Elements/Sticky_Video.php:188, ../includes/Elements/Sticky_Video.php:233, ../includes/Elements/SVG_Draw.php:210, ../includes/Elements/Team_Member.php:180, ../includes/Extensions/Wrapper_Link.php:45
 msgid "Link"
 msgstr ""
 
@@ -8855,6 +8855,14 @@ msgstr ""
 msgid "Sub Item Space"
 msgstr ""
 
+#: ../includes/Extensions/Wrapper_Link.php:29
+msgid "<i class=\"eaicon-logo\"></i> Wrapper Link"
+msgstr ""
+
+#: ../includes/Extensions/Wrapper_Link.php:37
+msgid "Enable Wrapper Link"
+msgstr ""
+
 #: ../includes/Traits/Admin.php:25
 msgid "Essential Addons a"
 msgstr ""
@@ -10019,7 +10027,7 @@ msgstr ""
 msgid "LearnDash Elements"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:628, ../includes/templates/admin/extensions.php:96
+#: ../includes/templates/admin/elements.php:628, ../includes/templates/admin/extensions.php:103
 msgid "Global Control"
 msgstr ""
 
@@ -10027,27 +10035,27 @@ msgstr ""
 msgid "Use the Toggle Button to Activate or Deactivate all the Elements of Essential Addons at once."
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:636, ../includes/templates/admin/extensions.php:104
+#: ../includes/templates/admin/elements.php:636, ../includes/templates/admin/extensions.php:111
 msgid "Enable All"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:637, ../includes/templates/admin/extensions.php:105
+#: ../includes/templates/admin/elements.php:637, ../includes/templates/admin/extensions.php:112
 msgid "Disable All"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:640, ../includes/templates/admin/elements.php:701, ../includes/templates/admin/extensions.php:108, ../includes/templates/admin/extensions.php:163, ../includes/templates/admin/tools.php:71
+#: ../includes/templates/admin/elements.php:640, ../includes/templates/admin/elements.php:701, ../includes/templates/admin/extensions.php:115, ../includes/templates/admin/extensions.php:170, ../includes/templates/admin/tools.php:71
 msgid "Save Settings"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:662, ../includes/templates/admin/extensions.php:132
+#: ../includes/templates/admin/elements.php:662, ../includes/templates/admin/extensions.php:139
 msgid "Setting"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:667, ../includes/templates/admin/extensions.php:137
+#: ../includes/templates/admin/elements.php:667, ../includes/templates/admin/extensions.php:144
 msgid "Documentation"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:671, ../includes/templates/admin/extensions.php:141
+#: ../includes/templates/admin/elements.php:671, ../includes/templates/admin/extensions.php:148
 msgid "Demo"
 msgstr ""
 
@@ -10091,7 +10099,11 @@ msgstr ""
 msgid "Conditional Display"
 msgstr ""
 
-#: ../includes/templates/admin/extensions.php:97
+#: ../includes/templates/admin/extensions.php:88
+msgid "Wrapper Link"
+msgstr ""
+
+#: ../includes/templates/admin/extensions.php:104
 msgid "Use the Toggle Button to Activate or Deactivate all the Extensions of Essential Addons at once."
 msgstr ""
 
