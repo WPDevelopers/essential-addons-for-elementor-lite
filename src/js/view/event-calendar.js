@@ -89,7 +89,7 @@ var EventCalendar = function ($scope, $) {
 							endDate = newEnd._d;
 							timeFormate = " ";
 						}
-
+						moment.locale(locale);
 						var startYear = moment(startDate).format("YYYY"),
 							endYear = moment(endDate).format("YYYY"),
 							yearDiff = endYear > startYear,
