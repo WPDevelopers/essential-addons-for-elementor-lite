@@ -43,6 +43,7 @@
 				taxonomy: $('.eael-cat-tab li a.active', $scope).data('taxonomy'),
 				field: 'term_id',
 				terms: $('.eael-cat-tab li a.active', $scope).data('id'),
+				terms_tag: $('.eael-cat-tab li a.active', $scope).data('tagid'),
 			};
 			const eael_cat_tab = localStorage.getItem('eael-cat-tab');
 
