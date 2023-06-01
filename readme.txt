@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.2
 Requires PHP: 7.0
-Stable tag: 5.7.3
+Stable tag: 5.7.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -244,6 +244,13 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.7.4 - 01/06/2023 =
+
+- Improved: EA Woo Product Grid | Added support for manual Product selection option
+- Improved: EA Advanced Tab | Added collapsible features for the Tabs
+- Fixed: EA Advanced Accordion | Hashlink (#link) mechanism support for multiple Accordions on same page 
+- Few minor bug fixes & improvements
 
 = 5.7.3 - 22/05/2023 =
 
