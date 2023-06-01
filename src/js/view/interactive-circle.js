@@ -27,6 +27,7 @@ ea.hooks.addAction( "init", "ea", () => {
 		
 		var $tabLinks    = $circleWrap.find( ".eael-circle-btn" );
 		var $tabContents = $circleWrap.find( ".eael-circle-btn-content" );
+		var triggerType = $eventType === 'click' ? 'click' : 'mouseenter';
 		
 		$tabLinks.first().addClass( "active" );
 		$tabContents.first().addClass( "active" );
@@ -51,7 +52,7 @@ ea.hooks.addAction( "init", "ea", () => {
 				}
 			} );
 			setTimeout(function(){
-				$( $tabLinks[ activeIndex ] ).trigger( 'click' );
+				$( $tabLinks[ activeIndex ] ).trigger( triggerType );
 			}, 300);
 		}
 
