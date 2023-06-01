@@ -281,6 +281,9 @@ class Interactive_Circle extends Widget_Base {
 					'eael-interactive-circle-event-click' => esc_html__( 'Click', 'essential-addons-for-elementor-lite' ),
 					'eael-interactive-circle-event-hover' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ),
 				],
+				'condition' => [
+					'eael_interactive_circle_autoplay!' => 'yes',
+				]
 			]
 		);
 
@@ -297,6 +300,9 @@ class Interactive_Circle extends Widget_Base {
 					'eael-interactive-circle-animation-2' => esc_html__( 'Rotate', 'essential-addons-for-elementor-lite' ),
 					'eael-interactive-circle-animation-3' => esc_html__( 'Spinning', 'essential-addons-for-elementor-lite' ),
 				],
+				'condition' => [
+					'eael_interactive_circle_autoplay!' => 'yes',
+				]
 			]
 		);
 
@@ -831,7 +837,7 @@ class Interactive_Circle extends Widget_Base {
 				'class' => [
 					'eael-circle-wrapper',
 					$settings['eael_interactive_circle_preset'],
-					$settings['eael_interactive_circle_event']
+					! empty( $settings['eael_interactive_circle_event'] ) ? $settings['eael_interactive_circle_event'] : 'eael-interactive-circle-event-click'
 				],
 			]
 		);
