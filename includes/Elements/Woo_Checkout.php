@@ -3001,6 +3001,7 @@ class Woo_Checkout extends Widget_Base {
 			'ea_woo_checkout_table_subtotal_text' => $settings['ea_woo_checkout_table_subtotal_text'],
 			'ea_woo_checkout_table_shipping_text' => $settings['ea_woo_checkout_table_shipping_text'],
 			'ea_woo_checkout_table_total_text'    => $settings['ea_woo_checkout_table_total_text'],
+			'ea_woo_checkout_cart_update_enable'  => $settings['ea_woo_checkout_cart_update_enable'],
 		];
         $this->ea_woo_checkout_add_actions($settings);
 
