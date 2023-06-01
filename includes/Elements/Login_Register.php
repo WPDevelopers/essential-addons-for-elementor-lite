@@ -5219,7 +5219,8 @@ class Login_Register extends Widget_Base {
 					<?php
 					if ( $show_logout_link && is_user_logged_in() && ! $this->in_editor ) {
 						/* translators: %s user display name */
-						$logged_in_msg = sprintf( __( 'You are already logged in as %s. ', 'essential-addons-for-elementor-lite' ), wp_get_current_user()->display_name );
+						$err_loggedin_msg = ! empty( $this->ds['err_loggedin'] ) ? $this->ds['err_loggedin'] : 'You are already logged in as';
+						$logged_in_msg = sprintf( __( '%s %s. ', 'essential-addons-for-elementor-lite' ), esc_html( $err_loggedin_msg ), wp_get_current_user()->display_name );
 						printf( '%1$s   (<a href="%2$s">%3$s</a>)', esc_html( $logged_in_msg ), esc_url( wp_logout_url() ), __( 'Logout', 'essential-addons-for-elementor-lite' ) );
 					} else {
 						if ( 'left' === $this->form_illustration_pos ) {
