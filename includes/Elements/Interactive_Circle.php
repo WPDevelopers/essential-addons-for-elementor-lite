@@ -300,9 +300,6 @@ class Interactive_Circle extends Widget_Base {
 					'eael-interactive-circle-animation-2' => esc_html__( 'Rotate', 'essential-addons-for-elementor-lite' ),
 					'eael-interactive-circle-animation-3' => esc_html__( 'Spinning', 'essential-addons-for-elementor-lite' ),
 				],
-				'condition' => [
-					'eael_interactive_circle_autoplay!' => 'yes',
-				]
 			]
 		);
 
