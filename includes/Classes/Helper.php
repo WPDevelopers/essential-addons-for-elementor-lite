@@ -1253,10 +1253,12 @@ class Helper
                 'align' => [],
             ],
             'th' => [
-	            'class' => [],
-	            'id'    => [],
-	            'style' => [],
-                'align' => [],
+	            'class'   => [],
+	            'id'      => [],
+	            'style'   => [],
+	            'align'   => [],
+	            'colspan' => [],
+	            'rowspan' => [],
             ],
             'tr' => [
 	            'class' => [],
@@ -1265,10 +1267,12 @@ class Helper
                 'align' => [],
             ],
             'td' => [
-	            'class' => [],
-	            'id'    => [],
-	            'style' => [],
-                'align' => [],
+	            'class'   => [],
+	            'id'      => [],
+	            'style'   => [],
+	            'align'   => [],
+	            'colspan' => [],
+	            'rowspan' => [],
             ],
         ];
     }
