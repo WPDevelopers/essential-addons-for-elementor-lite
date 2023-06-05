@@ -478,6 +478,14 @@ class Filterable_Gallery extends Widget_Base
                             'eael_fg_custom_label' => 'yes',
                         ],
                     ],
+                    [
+                        'name' => 'eael_fg_control_active_as_default',
+                        'label' => __('Active as Default', 'essential-addons-for-elementor-lite'),
+                        'type' => Controls_Manager::SWITCHER,
+                        'dynamic' => ['active' => true],
+                        'return' => 'yes',
+                        'default' => '',
+                    ],
                 ],
                 'title_field' => '{{eael_fg_control}}',
             ]
@@ -3096,13 +3104,24 @@ class Filterable_Gallery extends Widget_Base
                     if ($settings['eael_fg_all_label_text']) {
                         ?><li data-load-more-status="0" data-first-init="1" class="control all-control active" data-filter="*"><?php echo $all_text; ?></li><?php
                     }
+                    $default_control_key = 0;
+
+                    foreach ( $settings['eael_fg_controls'] as $key_default => $control_default ) :
+                        if ( ! empty( $control_default['eael_fg_control_active_as_default'] ) && 'yes' === $control_default['eael_fg_control_active_as_default'] ) {
+                            $default_control_key = $key_default;  
+                        }
+                    endforeach;
 
                     foreach ($settings['eael_fg_controls'] as $key => $control) :
                         $sorter_filter = $this->sorter_class($control['eael_fg_control']);
                         $sorter_label  = $control['eael_fg_control_label'] != '' ? $control['eael_fg_control_label'] : $control['eael_fg_control'];
-                    ?><li <?php if( ! empty( $control['eael_fg_control_custom_id'] ) ) : ?> id="<?php echo esc_attr( $control['eael_fg_control_custom_id'] ); ?>" <?php endif; ?> data-load-more-status="0" data-first-init="0" class="control <?php if ($key == 0 && empty($settings['eael_fg_all_label_text'])) {
+                    ?><li <?php if( ! empty( $control['eael_fg_control_custom_id'] ) ) : ?> id="<?php echo esc_attr( $control['eael_fg_control_custom_id'] ); ?>" <?php endif; ?> data-load-more-status="0" data-first-init="0" 
+                        class="control 
+                        <?php if ( $default_control_key == $key && empty($settings['eael_fg_all_label_text'])) {
                             echo 'active';
-                        } ?>" data-filter=".eael-cf-<?php echo esc_attr($sorter_filter); ?>"><?php echo esc_html( $sorter_label ); ?></li><?php
+                        } ?>
+                        " 
+                        data-filter=".eael-cf-<?php echo esc_attr($sorter_filter); ?>"><?php echo esc_html( $sorter_label ); ?></li><?php
                     endforeach;
                 ?></ul>
             </div>
