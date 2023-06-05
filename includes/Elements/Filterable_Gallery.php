@@ -3117,8 +3117,12 @@ class Filterable_Gallery extends Widget_Base
                         $sorter_filter = $this->sorter_class($control['eael_fg_control']);
                         $sorter_label  = $control['eael_fg_control_label'] != '' ? $control['eael_fg_control_label'] : $control['eael_fg_control'];
                     ?><li <?php if( ! empty( $control['eael_fg_control_custom_id'] ) ) : ?> id="<?php echo esc_attr( $control['eael_fg_control_custom_id'] ); ?>" <?php endif; ?> data-load-more-status="0" data-first-init="0" 
-                        class="control <?php if ( $default_control_key == $key ) {
-                            echo 'active';
+                        class="control <?php if ( $default_control_key === $key ) {
+                            if ( 0 === $default_control_key && empty( $settings['eael_fg_all_label_text'] ) ){
+                                echo 'active';
+                            } else if ( 0 !== $default_control_key ){
+                                echo 'active';
+                            }
                         } ?>" data-filter=".eael-cf-<?php echo esc_attr($sorter_filter); ?>"><?php echo esc_html( $sorter_label ); ?></li><?php
                     endforeach;
                 ?></ul>
@@ -3175,7 +3179,11 @@ class Filterable_Gallery extends Widget_Base
                         <?php foreach ($settings['eael_fg_controls'] as $key => $control) :
                             $sorter_filter = $this->sorter_class($control['eael_fg_control']); ?>
                             <li class="control <?php if ( $default_control_key === $key ) {
-                                echo 'active';
+                                if ( 0 === $default_control_key && empty( $settings['eael_fg_all_label_text'] ) ){
+                                    echo 'active';
+                                } else if ( 0 !== $default_control_key ){
+                                    echo 'active';
+                                }
                             } ?>" data-filter=".eael-cf-<?php echo esc_attr($sorter_filter); ?>"><?php echo esc_html__($control['eael_fg_control']); ?></li>
                         <?php endforeach; ?>
                     </ul>
