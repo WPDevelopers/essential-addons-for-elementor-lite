@@ -1257,6 +1257,8 @@ class Helper
 	            'id'    => [],
 	            'style' => [],
                 'align' => [],
+	  	'colspan' => [],
+		'rowspan' => [],
             ],
             'tr' => [
 	            'class' => [],
@@ -1269,6 +1271,8 @@ class Helper
 	            'id'    => [],
 	            'style' => [],
                 'align' => [],
+		'colspan' => [],
+		'rowspan' => [],    
             ],
         ];
     }
