@@ -149,7 +149,7 @@ class WPDeveloper_Notice {
                  */
                 wp_safe_redirect( $this->redirect_to() );
             }
-            $return_notice = $this->next_notice();
+            $return_notice = (array) $this->next_notice();
             $current_notice = current( $return_notice );
             $next_notice = next( $return_notice );
 
