@@ -3797,6 +3797,12 @@ class Filterable_Gallery extends Widget_Base
                     var layoutMode = $('.eael-filter-gallery-wrapper').data('layout-mode');
                     var mfpCaption = $('.eael-filter-gallery-wrapper').data('mfp_caption');
 
+                    let $galleryWrap = $(".eael-filter-gallery-wrapper", $scope);
+                    var custom_default_control 	= $galleryWrap.data('custom_default_control');
+                    var default_control_key 	= $galleryWrap.data('default_control_key');
+                    custom_default_control 		= typeof(custom_default_control) 	!== 'undefined' ? parseInt( custom_default_control ) 	: 0; 
+                    default_control_key 		= typeof(default_control_key) 		!== 'undefined' ? parseInt( default_control_key ) 		: 0; 
+                    
                     var $isotope_gallery = $gallery.isotope({
                         itemSelector: '.eael-filterable-gallery-item-wrap',
                         layoutMode: $layout_mode,
@@ -3985,6 +3991,11 @@ class Filterable_Gallery extends Widget_Base
 						$isotope_gallery.imagesLoaded().progress(function () {
 							$isotope_gallery.isotope("layout");
 						});
+
+                        if( custom_default_control ) {
+                            default_control_key = default_control_key + 1;
+                            jQuery(`.eael-filter-gallery-control li:nth-child(${default_control_key})` ).trigger('click');
+                        }
 					});
                 });
             });
