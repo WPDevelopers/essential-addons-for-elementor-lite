@@ -10,6 +10,12 @@ jQuery(window).on("elementor/frontend/init", function () {
 			fg_mfp_counter_text = localize.eael_translate_text.fg_mfp_counter_text;
 			fg_mfp_counter_text = fg_mfp_counter_text ? '%curr% '+fg_mfp_counter_text+' %total%' : '%curr% of %total%';
 
+		let $galleryWrap = $(".eael-filter-gallery-wrapper", $scope);
+		var custom_default_control 	= $galleryWrap.data('custom_default_control');
+		var default_control_key 	= $galleryWrap.data('default_control_key');
+		custom_default_control 		= typeof(custom_default_control) 	!== 'undefined' ? parseInt( custom_default_control ) 	: 0; 
+		default_control_key 		= typeof(default_control_key) 		!== 'undefined' ? parseInt( default_control_key ) 		: 0; 
+		
 		if (form.length) {
 			form.on("submit", function (e) {
 				e.preventDefault();
@@ -270,6 +276,9 @@ jQuery(window).on("elementor/frontend/init", function () {
 			$( document ).ready(function() {
 				if( window.location.hash ) {
 					jQuery('#' + window.location.hash.substring(1) ).trigger('click');
+				} else if( custom_default_control ) {
+					default_control_key = default_control_key + 1;
+					jQuery(`.eael-filter-gallery-control li:nth-child(${default_control_key})` ).trigger('click');
 				}
 			});
 		}

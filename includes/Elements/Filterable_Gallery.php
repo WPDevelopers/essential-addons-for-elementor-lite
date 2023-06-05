@@ -23,6 +23,8 @@ use \Essential_Addons_Elementor\Classes\Helper;
 class Filterable_Gallery extends Widget_Base
 {
     private $popup_status = false;
+    private $default_control_key = 0;
+    private $custom_default_control = false;
 
     public function get_name()
     {
@@ -3101,26 +3103,16 @@ class Filterable_Gallery extends Widget_Base
             ?>
             <div class="eael-filter-gallery-control">
                 <ul><?php
-                    $default_control_key = 0;
-                    $custom_default_control = empty( $settings['eael_fg_all_label_text'] ) ? true : false;
-
-                    foreach ( $settings['eael_fg_controls'] as $key_default => $control_default ) :
-                        if ( ! empty( $control_default['eael_fg_control_active_as_default'] ) && 'yes' === $control_default['eael_fg_control_active_as_default'] ) {
-                            $default_control_key = $key_default;  
-                            $custom_default_control = true;
-                        }
-                    endforeach;
-
                     if ($settings['eael_fg_all_label_text']) {
-                        ?><li data-load-more-status="0" data-first-init="1" class="control all-control <?php if( ! $custom_default_control ) : ?> active <?php endif; ?>" data-filter="*"><?php echo $all_text; ?></li><?php
+                        ?><li data-load-more-status="0" data-first-init="1" class="control all-control <?php if( ! $this->custom_default_control ) : ?> active <?php endif; ?>" data-filter="*"><?php echo $all_text; ?></li><?php
                     }
 
                     foreach ($settings['eael_fg_controls'] as $key => $control) :
                         $sorter_filter = $this->sorter_class($control['eael_fg_control']);
                         $sorter_label  = $control['eael_fg_control_label'] != '' ? $control['eael_fg_control_label'] : $control['eael_fg_control'];
                     ?><li <?php if( ! empty( $control['eael_fg_control_custom_id'] ) ) : ?> id="<?php echo esc_attr( $control['eael_fg_control_custom_id'] ); ?>" <?php endif; ?> data-load-more-status="0" data-first-init="0" 
-                        class="control <?php if ( $custom_default_control ) {
-                            if ( $default_control_key === $key ){
+                        class="control <?php if ( $this->custom_default_control ) {
+                            if ( $this->default_control_key === $key ){
                                 echo 'active';
                             }
                         } ?>" data-filter=".eael-cf-<?php echo esc_attr($sorter_filter); ?>"><?php echo esc_html( $sorter_label ); ?></li><?php
@@ -3162,26 +3154,14 @@ class Filterable_Gallery extends Widget_Base
 
                     </button>
                     <ul class="fg-layout-3-filter-controls">
-                        <?php 
-                        $default_control_key = 0;
-                        $custom_default_control = empty( $settings['eael_fg_all_label_text'] ) ? true : false;
-
-                        foreach ( $settings['eael_fg_controls'] as $key_default => $control_default ) :
-                            if ( ! empty( $control_default['eael_fg_control_active_as_default'] ) && 'yes' === $control_default['eael_fg_control_active_as_default'] ) {
-                                $default_control_key = $key_default;
-                                $custom_default_control = true;
-                            }
-                        endforeach;
-                        ?>
-
                         <?php if ($settings['eael_fg_all_label_text']) { ?>
-                            <li class="control <?php if( ! $custom_default_control ) : ?> active <?php endif; ?>" data-filter="*"><?php echo Helper::eael_wp_kses($settings['eael_fg_all_label_text']); ?></li>
+                            <li class="control <?php if( ! $this->custom_default_control ) : ?> active <?php endif; ?>" data-filter="*"><?php echo Helper::eael_wp_kses($settings['eael_fg_all_label_text']); ?></li>
                         <?php } ?>
                         
                         <?php foreach ($settings['eael_fg_controls'] as $key => $control) :
                             $sorter_filter = $this->sorter_class($control['eael_fg_control']); ?>
-                            <li class="control <?php if ( $custom_default_control ) {
-                                if ( $default_control_key === $key ){
+                            <li class="control <?php if ( $this->custom_default_control ) {
+                                if ( $this->default_control_key === $key ){
                                     echo 'active';
                                 }
                             } ?>" data-filter=".eael-cf-<?php echo esc_attr($sorter_filter); ?>"><?php echo esc_html__($control['eael_fg_control']); ?></li>
@@ -3731,6 +3711,18 @@ class Filterable_Gallery extends Widget_Base
         }
         $this->add_render_attribute('gallery-items-wrap', 'data-init-show', esc_attr($settings['eael_fg_items_to_show']));
         $this->render_media_query( $settings );
+
+        $this->custom_default_control = empty( $settings['eael_fg_all_label_text'] ) ? true : false;
+
+        foreach ( $settings['eael_fg_controls'] as $key_default => $control_default ) :
+            if ( ! empty( $control_default['eael_fg_control_active_as_default'] ) && 'yes' === $control_default['eael_fg_control_active_as_default'] ) {
+                $this->default_control_key = $key_default;  
+                $this->custom_default_control = true;
+            }
+        endforeach;
+
+        $this->add_render_attribute('gallery', 'data-default_control_key', esc_attr( $this->default_control_key ) );
+        $this->add_render_attribute('gallery', 'data-custom_default_control', esc_attr( $this->custom_default_control ) );
         ?>
         <div <?php echo $this->get_render_attribute_string('gallery'); ?>>
             
