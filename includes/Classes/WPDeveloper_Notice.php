@@ -149,7 +149,7 @@ class WPDeveloper_Notice {
                  */
                 wp_safe_redirect( $this->redirect_to() );
             }
-            $return_notice = (array) $this->next_notice();
+            $return_notice = $this->next_notice();
             $current_notice = current( $return_notice );
             $next_notice = next( $return_notice );
 
@@ -496,24 +496,24 @@ class WPDeveloper_Notice {
     }
     /**
      * Detect which notice will show @ next.
-     * @return void
+     * @return array
      */
-    protected function next_notice(){
-        $options_data = $this->get_options_data();
-        if( ! $options_data ) {
-            $args = $this->get_args();
-            $return_notice = $args['notice_will_show'];
-        } else {
-            $return_notice = $options_data[ $this->plugin_name ]['notice_will_show'];
-        }
+	protected function next_notice() {
+		$options_data = $this->get_options_data();
+		if ( ! $options_data ) {
+			$args          = $this->get_args();
+			$return_notice = $args['notice_will_show'];
+		} else {
+			$return_notice = $options_data[ $this->plugin_name ]['notice_will_show'];
+		}
 
-        if( is_array( $return_notice ) ) {
-            $return_notice = array_flip( $return_notice );
-            ksort( $return_notice );
-        }
+		if ( is_array( $return_notice ) ) {
+			$return_notice = array_flip( $return_notice );
+			ksort( $return_notice );
+		}
 
-        return $return_notice;
-    }
+		return (array) $return_notice;
+	}
     /**
      * Which notice is deserve to show in next slot.
      * @param string $notice
