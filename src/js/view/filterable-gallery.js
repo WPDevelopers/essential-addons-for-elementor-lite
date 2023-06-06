@@ -277,7 +277,8 @@ jQuery(window).on("elementor/frontend/init", function () {
 				if( window.location.hash ) {
 					jQuery('#' + window.location.hash.substring(1) ).trigger('click');
 				} else if( custom_default_control ) {
-					default_control_key = default_control_key + 1;
+					let increment = $settings.control_all_text ? 2 : 1;
+					default_control_key = default_control_key + increment;
 					jQuery(`.eael-filter-gallery-control li:nth-child(${default_control_key})` ).trigger('click');
 				}
 			});

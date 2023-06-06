@@ -3675,6 +3675,7 @@ class Filterable_Gallery extends Widget_Base
             'popup' => $settings['eael_fg_show_popup'],
             'duration' => $filter_duration,
             'gallery_enabled' => $settings['photo_gallery'],
+            'control_all_text' => $settings['eael_fg_all_label_text'],
         ];
         
         if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
@@ -3993,7 +3994,8 @@ class Filterable_Gallery extends Widget_Base
 						});
 
                         if( custom_default_control ) {
-                            default_control_key = default_control_key + 1;
+    					let increment = $settings.control_all_text ? 2 : 1;
+                            default_control_key = default_control_key + increment;
                             jQuery(`.eael-filter-gallery-control li:nth-child(${default_control_key})` ).trigger('click');
                         }
 					});
