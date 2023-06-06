@@ -5796,7 +5796,7 @@ class Login_Register extends Widget_Base {
 		$rp_page_url = ! empty( $this->page_id_for_popup ) ? get_permalink( $this->page_id_for_popup ) : get_permalink( $this->page_id ); 
 
 		if ( $this->should_print_resetpassword_form_editor || ( ! empty( $_GET['eael-resetpassword'] ) ) ) {
-			$rp_data = get_option('eael_resetpassword_rp_data_' . $this->get_id());
+			$rp_data = $_COOKIE;
 			$show_resetpassword_on_form_submit = get_option('eael_show_reset_password_on_form_submit_' . $this->get_id());
 			
 			$validation_required = true;
@@ -5804,7 +5804,10 @@ class Login_Register extends Widget_Base {
 				$validation_required = false;
 			}
 
-			$rp_data = !empty( $rp_data ) ? maybe_unserialize($rp_data) : [];
+			$rp_cookie = 'wp-resetpass-' . COOKIEHASH;
+			if ( ! empty( $rp_data[ $rp_cookie ] ) ) {
+				list( $rp_data['rp_login'], $rp_data['rp_key'] ) = explode( ':', sanitize_text_field( $rp_data[ $rp_cookie ] ) );
+			}
 			
 			if( $validation_required ){
 				$rp_data['rp_key'] = ! empty( $rp_data['rp_key'] ) ? $rp_data['rp_key'] : '';
