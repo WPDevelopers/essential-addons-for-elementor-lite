@@ -1555,7 +1555,7 @@ class Advanced_Data_Table extends Widget_Base
             }
 
             echo '<div class="ea-advanced-data-table-wrap-inner">
-                <table ' . $this->get_render_attribute_string('ea-adv-data-table') . '>' . $content . '</table>
+                <table ' . $this->get_render_attribute_string('ea-adv-data-table') . '>' . Helper::eael_wp_kses( $content ) . '</table>
             </div>';
 
             if ($settings['ea_adv_data_table_pagination'] == 'yes') {
