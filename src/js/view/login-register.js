@@ -61,7 +61,6 @@ ea.hooks.addAction("init", "ea", () => {
                 e.preventDefault();
                 $regFormWrapper.hide();
                 $regFormWrapper.find('.eael-form-validation-container').html('');
-                $regFormWrapper.find('form').trigger('reset');
                 $lostpasswordFormWrapper.hide();                
                 $loginFormWrapper.fadeIn();
             });
@@ -88,7 +87,6 @@ ea.hooks.addAction("init", "ea", () => {
                 }
                 window.history.replaceState({}, '', `${location.pathname}?${params}`);
                 $lostpasswordFormWrapper.find('.eael-form-validation-container').html('');
-                $lostpasswordFormWrapper.find('form').trigger('reset');
                 $lostpasswordFormWrapper.find(".eael-lr-form-group").css("display", 'bloock').removeClass('eael-d-none');
                 $lostpasswordFormWrapper.find("#eael-lostpassword-submit").css("display", 'bloock').removeClass('eael-d-none');
                 
