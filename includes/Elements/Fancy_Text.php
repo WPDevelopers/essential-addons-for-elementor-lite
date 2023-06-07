@@ -466,7 +466,7 @@ class Fancy_Text extends Widget_Base {
 				'label' => esc_html__( 'Typing Cursor Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .typed-cursor' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-fancy-text-strings::after' => 'color: {{VALUE}};',
 				],
 				'condition' => [
 					'eael_fancy_text_cursor' => 'yes',
