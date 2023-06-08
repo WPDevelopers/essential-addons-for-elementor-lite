@@ -6,7 +6,8 @@ ea.hooks.addAction( "init", "ea", () => {
 		var $animation  = $circleWrap.data('animation');
 		var $autoplay  	= $circleWrap.data('autoplay');
 		var $autoplayInterval  = parseInt( $circleWrap.data('autoplay-interval') );
-
+		var $autoplayPause = 0;
+	
 		if ( $animation != 'eael-interactive-circle-animation-0' ) {
 			var $circleContent = $scope.find( ".eael-circle-content" );
 
@@ -38,7 +39,13 @@ ea.hooks.addAction( "init", "ea", () => {
 		
 		if( $autoplay ){
 			setInterval(function () {
-				autoplayInteractiveCircle();
+				if( $autoplayPause ){
+					setTimeout(function(){
+						autoplayInteractiveCircle();
+					}, 5000);
+				} else {
+					autoplayInteractiveCircle();
+				}
 			}, $autoplayInterval);
 		}
 
@@ -56,7 +63,7 @@ ea.hooks.addAction( "init", "ea", () => {
 		}
 
 		function handleEvent( element ) {
-			return function () {
+			return function (event) {
 				var $element   = $( this );
 				var $activeTab = $( this ).hasClass( "active" );
 				if ( $activeTab == false ) {
@@ -73,6 +80,7 @@ ea.hooks.addAction( "init", "ea", () => {
 						}
 					} );
 				}
+				$autoplayPause = event.originalEvent ? 1 : 0;
 			};
 		}
 	};
