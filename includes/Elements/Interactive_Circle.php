@@ -281,9 +281,26 @@ class Interactive_Circle extends Widget_Base {
 					'eael-interactive-circle-event-click' => esc_html__( 'Click', 'essential-addons-for-elementor-lite' ),
 					'eael-interactive-circle-event-hover' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ),
 				],
-				'condition' => [
-					'eael_interactive_circle_autoplay!' => 'yes',
-				]
+				'conditions' => [
+                    'relation' => 'or',
+                    'terms' => [
+                       [
+                          'name' => 'eael_interactive_circle_autoplay',
+                          'operator' => '!=',
+                          'value' => 'yes',
+                       ],
+					   [
+						'name' => 'eael_interactive_circle_preset',
+						'operator' => '==',
+						'value' => 'eael-interactive-circle-preset-3',
+					   ],
+					   [
+						'name' => 'eael_interactive_circle_preset',
+						'operator' => '==',
+						'value' => 'eael-interactive-circle-preset-4',
+					   ],
+                    ],
+                ],
 			]
 		);
 
@@ -310,6 +327,9 @@ class Interactive_Circle extends Widget_Base {
 				'type'         => Controls_Manager::SWITCHER,
 				'default'      => '',
 				'return_value' => 'yes',
+				'condition' => [
+					'eael_interactive_circle_preset' => [ 'eael-interactive-circle-preset-1', 'eael-interactive-circle-preset-2' ]
+				],
 			]
 		);
 
