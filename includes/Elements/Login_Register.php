@@ -5659,7 +5659,6 @@ class Login_Register extends Widget_Base {
 			$form_not_enabled = ! ( 'lostpassword' === $this->default_form || ( 'yes' === $this->get_settings_for_display( 'show_lost_password' ) && 'form' === $this->get_settings_for_display( 'lost_password_link_type' ) ) );
 
 			if( $form_not_enabled ){
-				$current_page_url = ! empty( $this->page_id_for_popup ) ? get_permalink( $this->page_id_for_popup ) : get_permalink( $this->page_id ); 
 				return false;
 			}
 
