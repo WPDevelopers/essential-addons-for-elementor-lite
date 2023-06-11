@@ -1131,9 +1131,8 @@ class Adv_Accordion extends Widget_Base
             $this->add_render_attribute($tab_title_setting_key, [
                 'id'            => $tab_id,
                 'class'         => $tab_title_class,
-                'tabindex'      => $id_int . $tab_count,
+                'tabindex'      => 0,
                 'data-tab'      => $tab_count,
-//                'role'          => 'tab',
                 'aria-controls' => 'elementor-tab-content-' . $id_int . $tab_count,
             ]);
 
