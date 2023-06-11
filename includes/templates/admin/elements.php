@@ -603,6 +603,13 @@ $elements = [
 				'promotion' => 'new'
 			],
 			[
+				'key'       => 'woo-cross-sells',
+				'title'     => __( 'Woo Cross Sells', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/woo-cross-sells/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/woocommerce-cross-sells/',
+				'promotion' => 'new'
+			],
+			[
 				'key'       => 'woo-product-compare',
 				'title'     => __( 'Woo Product Compare', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/woo-product-compare/',

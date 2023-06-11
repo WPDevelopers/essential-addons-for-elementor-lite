@@ -846,6 +846,10 @@ class WPDeveloper_Setup_Wizard {
 						'title' => __( 'Woo Cart', 'essential-addons-for-elementor-lite' ),
 					],
 					[
+						'key'   => 'woo-cross-sells',
+						'title' => __( 'Woo Cross Sells', 'essential-addons-for-elementor-lite' ),
+					],
+					[
 						'key'         => 'woo-product-compare',
 						'title'       => __( 'Woo Product Compare', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
