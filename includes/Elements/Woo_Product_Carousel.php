@@ -2871,9 +2871,8 @@ class Woo_Product_Carousel extends Widget_Base {
             [
                 'class'           => [
                     'woocommerce',
-                    'swiper',
+                    esc_attr( $swiper_class ),
                     esc_attr( $swiper_version_class ),
-                    'swiper-container',
                     'eael-woo-product-carousel',
                     'swiper-container-' . esc_attr( $this->get_id() ),
                     'eael-product-appender-' . esc_attr( $this->get_id() ),
