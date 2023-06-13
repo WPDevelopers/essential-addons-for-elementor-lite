@@ -63,7 +63,8 @@ class Wrapper_Link {
 			unset( $wrapper_link_settings['custom_attributes'] );
 
 			$element->add_render_attribute( '_wrapper',
-				[ 'data-eael-wrapper-link' => wp_json_encode( $wrapper_link_settings ), 'linkon' => 'meghla' ],
+				'data-eael-wrapper-link',
+				wp_json_encode( $wrapper_link_settings )
 			);
 		}
 	}
