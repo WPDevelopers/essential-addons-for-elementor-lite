@@ -41,7 +41,6 @@ class Woo_Cross_Sells extends Widget_Base {
 	 * Retrieve the list of keywords the widget belongs to.
 	 *
 	 * @return array Widget keywords.
-	 * @since  3.5.2
 	 * @access public
 	 *
 	 */
@@ -63,7 +62,7 @@ class Woo_Cross_Sells extends Widget_Base {
 		return 'https://essential-addons.com/elementor/docs/woo-cross-sells/';
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 		if ( ! class_exists( 'woocommerce' ) ) {
 			$this->start_controls_section(
 				'eael_global_warning',
@@ -113,6 +112,41 @@ class Woo_Cross_Sells extends Widget_Base {
 			]
 		);
 
+		$this->add_control( 'orderby', [
+			'label'   => __( 'Order By', 'essential-addons-for-elementor-lite' ),
+			'type'    => Controls_Manager::SELECT,
+			'options' => [
+				'none'       => __( 'None', 'essential-addons-for-elementor-lite' ),
+				'title'      => __( 'Title', 'essential-addons-for-elementor-lite' ),
+				'id'         => __( 'ID', 'essential-addons-for-elementor-lite' ),
+				'date'       => __( 'Date', 'essential-addons-for-elementor-lite' ),
+				'modified'   => __( 'Modified', 'essential-addons-for-elementor-lite' ),
+				'menu_order' => __( 'Menu Order', 'essential-addons-for-elementor-lite' ),
+				'price'      => __( 'Price', 'essential-addons-for-elementor-lite' ),
+			],
+			'default' => 'none',
+
+		] );
+
+		$this->add_control( 'order', [
+			'label'   => __( 'Order', 'essential-addons-for-elementor-lite' ),
+			'type'    => Controls_Manager::SELECT,
+			'options' => [
+				'asc'  => __( 'Ascending', 'essential-addons-for-elementor-lite' ),
+				'desc' => __( 'Descending', 'essential-addons-for-elementor-lite' ),
+			],
+			'default' => 'desc',
+		] );
+
+		$this->add_control( 'products_count', [
+			'label'   => __( 'Products Count', 'essential-addons-for-elementor-lite' ),
+			'type'    => Controls_Manager::NUMBER,
+			'default' => 4,
+			'min'     => 1,
+			'max'     => 100,
+			'step'    => 1,
+		] );
+
 		$this->end_controls_section();
 
 		/**
@@ -146,6 +180,22 @@ class Woo_Cross_Sells extends Widget_Base {
 		if ( ! class_exists( 'woocommerce' ) ) {
 			return;
 		}
-	}
 
+		$settings = $this->get_settings_for_display();
+		$orderby  = $settings['orderby'];
+		$order    = $settings['order'];
+		$limit    = $settings['products_count'];
+
+		// Handle product query.
+		$cross_sells = array_filter( array_map( 'wc_get_product', WC()->cart->get_cross_sells() ), 'wc_products_array_filter_visible' );
+		$cross_sells = wc_products_array_orderby( $cross_sells, $orderby, $order );
+		$cross_sells = $limit > 0 ? array_slice( $cross_sells, 0, $limit ) : $cross_sells;
+
+		foreach ( $cross_sells as $cross_sell ) {
+			echo $cross_sell->get_title();
+			echo $cross_sell->get_price();
+			echo '<br>';
+		}
+
+	}
 }
