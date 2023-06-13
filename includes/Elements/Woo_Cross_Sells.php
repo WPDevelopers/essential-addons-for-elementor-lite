@@ -18,7 +18,7 @@ use \Elementor\Icons_Manager;
 use Essential_Addons_Elementor\Traits\Helper;
 
 class Woo_Cross_Sells extends Widget_Base {
-
+	use Helper;
 	public function get_name() {
 		return 'eael-woo-cross-sells';
 	}
@@ -97,18 +97,12 @@ class Woo_Cross_Sells extends Widget_Base {
 		);
 
 		$this->add_control(
-			'ea_woo_cross_sells_layout',
+			'eael_dynamic_template_layout',
 			[
-				'label'       => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
-				'type'        => Controls_Manager::SELECT,
-				'default'     => 'style-1',
-				'label_block' => false,
-				'options'     => apply_filters( 'eael/woo-cart/layout', [
-					'style-1' => esc_html__( 'Style 1', 'essential-addons-for-elementor-lite' ),
-					'style-2' => esc_html__( 'Style 2', 'essential-addons-for-elementor-lite' ),
-					'style-3' => esc_html__( 'Style 3', 'essential-addons-for-elementor-lite' ),
-					'style-4' => esc_html__( 'Style 4', 'essential-addons-for-elementor-lite' ),
-				] ),
+				'label'   => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'preset-1',
+				'options' => $this->get_template_list_for_dropdown(true),
 			]
 		);
 
@@ -193,6 +187,7 @@ class Woo_Cross_Sells extends Widget_Base {
 
 		foreach ( $cross_sells as $cross_sell ) {
 			echo $cross_sell->get_title();
+//			echo $cross_sell->get_ID();
 			echo $cross_sell->get_price();
 			echo '<br>';
 		}
