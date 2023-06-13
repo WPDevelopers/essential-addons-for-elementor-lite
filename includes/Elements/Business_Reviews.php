@@ -2752,7 +2752,7 @@ class Business_Reviews extends Widget_Base {
 			'id'    => 'eael-google-reviews-' . esc_attr( $this->get_id() ),
 		] );
 
-		$swiper_version_class = '';
+		$swiper_class = $swiper_version_class = '';
         if ( class_exists( 'Elementor\Plugin' ) ) {
             $swiper_class           = \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_swiper_latest' ) ? 'swiper' : 'swiper-container';
             $swiper_version_class   = 'swiper' === $swiper_class ? 'swiper-8' : 'swiper-8-lower';
