@@ -87,7 +87,7 @@ $extensions = [
 				'key'       => 'wrapper-link',
 				'title'     => __( 'Wrapper Link', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/wrapper-link/',
-				'doc_link'  => 'https://essential-addons.com/elementor/docs/wrapper-link/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-wrapper-link/',
 				'promotion' => 'new'
 			],
 		]
