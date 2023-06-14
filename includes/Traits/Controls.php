@@ -1228,7 +1228,7 @@ trait Controls
                 )
             );
 
-            $content_timeline_range = range( 1, 6 );
+            $content_timeline_range = range( 1, 3 );
             $wb->add_responsive_control(
                 'eael_content_timeline_slides_to_scroll',
                 array(
