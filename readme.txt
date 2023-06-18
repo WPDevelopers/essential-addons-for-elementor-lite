@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.2
 Requires PHP: 7.0
-Stable tag: 5.7.4
+Stable tag: 5.8.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -28,7 +28,7 @@ No extra resources or messy codes to slow down your website. Optimized for super
 Enable and disable individual elements to make your page loading faster and smoother. You can deactivate unnecessary widgets to keep the site lite.
 
 
-### 3000+ Ready Blocks and Templates through **Templately**
+### 4000+ Ready Blocks and Templates through **Templately**
 Use pre-made templates and sections which come with Essential Addons and design your website to stand out from the crowd.
 
 [Install Templately to get the premade blocks and templates](https://wordpress.org/plugins/templately/)
@@ -103,7 +103,8 @@ Extensions (Free):
 2. [Duplicator](https://essential-addons.com/elementor/post-duplicator/) - Duplicate any page or post in a single click
 3. [Table of Contents](https://essential-addons.com/elementor/table-of-content/) - Display Table of Contents anywhere you want (https://www.youtube.com/watch?v=W6woRX7Ud7I )
 4. [Custom JS](https://essential-addons.com/elementor/docs/custom-js/) - Add custom JavaScript in Elementor with a few clicks
-5. [Scroll to Top](https://essential-addons.com/elementor/scroll-to-top)- Let visitors quickly navigate to the top of your page 
+5. [Scroll to Top](https://essential-addons.com/elementor/scroll-to-top)- Let visitors quickly navigate to the top of your page
+6. [Wrapper Link](https://essential-addons.com/elementor/wrapper-link)- Add custom links into any section, column, or even flexbox 
 
 ### More elements (35+) on [Premium Version](https://wpdeveloper.com/in/upgrade-essential-addons-elementor)
 
@@ -244,6 +245,14 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.8.0 - 14/06/2023 =
+
+- Added: New Extension | EA Wrapper Link
+- Fixed: EA Woo Product Carousel | Carousel not showing in order by SKU
+- Fixed: EA Login/Register Form | Password visibility icon not working on nested elements 
+- Improved: EA Woo Product Grid | Added option to show/hide Sale/Stock Out badge 
+- Few minor bug fixes & improvements
 
 = 5.7.4 - 01/06/2023 =
 
