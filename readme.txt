@@ -84,7 +84,8 @@ We have designed more than 50 of the most useful widgets to enhance your Element
 36. [Advanced Data Table](https://essential-addons.com/elementor/advanced-data-table) - Design large data tables without coding
 37. [Event Calendar](https://essential-addons.com/elementor/event-calendar) - Create customized event pages in Elementor
 38. [Formstack](https://essential-addons.com/elementor/formstack/) - Design your Formstack forms within Elementor 
-39. [Woo Checkout](https://essential-addons.com/elementor/woo-checkout/) -  Build attractive WooCommerce Checkout pages (https://www.youtube.com/watch?v=l3GNAJHza5c)
+39. [Woo Checkout](https://essential-addons.com/elementor/woo-checkout/) -  Build attractive WooCommerce Checkout pages
+[youtube https://www.youtube.com/watch?v=l3GNAJHza5c]
 40. [Typeform](https://essential-addons.com/elementor/typeform/) - Embed & design your Typeform forms in Elementor
 41. [Login | Register Form](https://essential-addons.com/elementor/login-register-form/) - Create amazing login/registration forms
 42. [Woo Product Compare](https://essential-addons.com/elementor/woo-product-compare/) - Design stunning product compare tables
