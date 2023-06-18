@@ -3079,7 +3079,7 @@ class Filterable_Gallery extends Widget_Base
 		$sorter_class = str_replace( '{', 'curlybracket', $sorter_class );
 		$sorter_class = str_replace( '}', 'curlybracket', $sorter_class );
 		$sorter_class = str_replace( '?', 'questionmark', $sorter_class );
-		$sorter_class = utf8_encode( $sorter_class );
+		$sorter_class = mb_convert_encoding( $sorter_class, 'UTF-8' );
 
 		return $sorter_class;
 	}
