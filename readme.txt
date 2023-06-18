@@ -130,7 +130,7 @@ Extensions (Free):
 20. [Image Hotspots](https://essential-addons.com/elementor/image-hotspots/) - Add hotspot icons with tooltips in an image
 21. [Fancy Divider](https://essential-addons.com/elementor/divider/) - Separate your section with fancy divider
 22. [Counter](https://essential-addons.com/elementor/counter/) - Highlight important data using the Counter element
-23. [Team Member Carousel](https://essential-addons.com/elementor/team-member-carousel/) - Display team members in a carousel
+23. [Team Member Carousel](https://essential-addons.com/elementor/team-members-carousel/) - Display team members in a carousel
 24. [Post Carousel](https://essential-addons.com/elementor/post-carousel/) - Use a carousel to display multiple posts
 25. [Logo Carousel](https://essential-addons.com/elementor/logo-carousel/) - Highlight brands or product logos in a carousel
 26. [Protected Content](https://essential-addons.com/elementor/protected-content/) -  Lock your content with password protection
