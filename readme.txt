@@ -46,7 +46,7 @@ We have extra-ordinary support team ready to help you. Ask your questions in the
 
 We have designed more than 50 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
 
-1. [Post Grid](https://essential-addons.com/elementor/post-grid/) - Showcase your blog posts in 4 unique styles 
+1. [Post Grid](https://essential-addons.com/elementor/post-grid/) - Showcase your blog posts in 3 unique styles
 2. [Post Timeline](https://essential-addons.com/elementor/post-timeline/) - Create stunning timeline for your posts & pages 
 3. [Fancy Text](https://essential-addons.com/elementor/fancy-text/ ) - Design pages using animated texts in 8 different styles
 4. [Creative Buttons](https://essential-addons.com/elementor/creative-buttons/) - Quickly add modern buttons with hover effects
