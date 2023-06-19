@@ -5,8 +5,37 @@
 }
 .eael-cs-products-container.style-1 .eael-cs-single-product {
   float: left;
+}
+.eael-cs-products-container.eael-cross-sales-column-1 .eael-cs-single-product {
+  float: none;
+}
+.eael-cs-products-container.eael-cross-sales-column-2 .eael-cs-single-product {
+  width: 50%;
+}
+.eael-cs-products-container.eael-cross-sales-column-2 .eael-cs-single-product:nth-child(2n+1) {
+  clear: left;
+}
+.eael-cs-products-container.eael-cross-sales-column-3 .eael-cs-single-product {
+  width: 33.3333%;
+}
+.eael-cs-products-container.eael-cross-sales-column-3 .eael-cs-single-product:nth-child(3n+1) {
+  clear: left;
+}
+.eael-cs-products-container.eael-cross-sales-column-4 .eael-cs-single-product {
   width: 25%;
 }
-.eael-cs-products-container.style-1 .eael-cs-single-product:nth-child(4n+1) {
+.eael-cs-products-container.eael-cross-sales-column-4 .eael-cs-single-product:nth-child(4n+1) {
+  clear: left;
+}
+.eael-cs-products-container.eael-cross-sales-column-5 .eael-cs-single-product {
+  width: 20%;
+}
+.eael-cs-products-container.eael-cross-sales-column-5 .eael-cs-single-product:nth-child(5n+1) {
+  clear: left;
+}
+.eael-cs-products-container.eael-cross-sales-column-6 .eael-cs-single-product {
+  width: 16.6666%;
+}
+.eael-cs-products-container.eael-cross-sales-column-6 .eael-cs-single-product:nth-child(6n+1) {
   clear: left;
 }
