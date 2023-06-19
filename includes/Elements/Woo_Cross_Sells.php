@@ -15,10 +15,12 @@ use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Widget_Base;
 use \Elementor\Icons_Manager;
+use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 use Essential_Addons_Elementor\Traits\Helper;
 
 class Woo_Cross_Sells extends Widget_Base {
 	use Helper;
+
 	public function get_name() {
 		return 'eael-woo-cross-sells';
 	}
@@ -101,8 +103,8 @@ class Woo_Cross_Sells extends Widget_Base {
 			[
 				'label'   => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::SELECT,
-				'default' => 'preset-1',
-				'options' => $this->get_template_list_for_dropdown(true),
+				'default' => 'style-1',
+				'options' => $this->get_template_list_for_dropdown( true ),
 			]
 		);
 
@@ -185,11 +187,13 @@ class Woo_Cross_Sells extends Widget_Base {
 		$cross_sells = wc_products_array_orderby( $cross_sells, $orderby, $order );
 		$cross_sells = $limit > 0 ? array_slice( $cross_sells, 0, $limit ) : $cross_sells;
 
-		foreach ( $cross_sells as $cross_sell ) {
-			echo $cross_sell->get_title();
-//			echo $cross_sell->get_ID();
-			echo $cross_sell->get_price();
-			echo '<br>';
+		$template = $this->get_template( $settings['eael_dynamic_template_layout'] );
+		if ( file_exists( $template ) ) {
+			foreach ( $cross_sells as $cs_product ) {
+				include( $template );
+			}
+		} else {
+			_e( '<p class="eael-no-layout-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
 		}
 
 	}
