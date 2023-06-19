@@ -1,1 +1,12 @@
-
+.eael-cs-products-container.style-1::before, .eael-cs-products-container.style-1::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.eael-cs-products-container.style-1 .eael-cs-single-product {
+  float: left;
+  width: 25%;
+}
+.eael-cs-products-container.style-1 .eael-cs-single-product:nth-child(4n+1) {
+  clear: left;
+}
