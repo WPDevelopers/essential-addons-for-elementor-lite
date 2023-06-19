@@ -1,4 +1,22 @@
 .eael-cs-products-container {
+    &.eael-cross-sales-column-1 {
+        .eael-cs-single-product {
+            float: none;
+            width: 100%;
+            clear: both;
+        }
+    }
+    &.eael-cross-sales-column-2 {
+        .eael-cs-single-product {
+            width: 50%;
+        }
+    }
+    &.eael-cross-sales-column-3 {
+        .eael-cs-single-product {
+            width: 33.33%;
+        }
+    }
+
     &.style-1 {
         &::before, &::after {
             content: "";
