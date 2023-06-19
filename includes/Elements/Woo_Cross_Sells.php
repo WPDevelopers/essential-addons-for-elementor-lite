@@ -187,14 +187,24 @@ class Woo_Cross_Sells extends Widget_Base {
 		$cross_sells = wc_products_array_orderby( $cross_sells, $orderby, $order );
 		$cross_sells = $limit > 0 ? array_slice( $cross_sells, 0, $limit ) : $cross_sells;
 
-		$template = $this->get_template( $settings['eael_dynamic_template_layout'] );
-		if ( file_exists( $template ) ) {
-			foreach ( $cross_sells as $cs_product ) {
-				include( $template );
-			}
-		} else {
-			_e( '<p class="eael-no-layout-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
-		}
+		$this->add_render_attribute( 'container', [
+			'class' => [
+				'eael-cs-products-container',
+				$settings['eael_dynamic_template_layout'],
+			]
+		] );
 
+		$template = $this->get_template( $settings['eael_dynamic_template_layout'] ); ?>
+        <div <?php $this->print_render_attribute_string( 'container' ); ?>>
+			<?php
+			if ( file_exists( $template ) ) {
+				foreach ( $cross_sells as $cs_product ) {
+					include( $template );
+				}
+			} else {
+				_e( '<p class="eael-no-layout-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
+			} ?>
+        </div>
+		<?php
 	}
 }
