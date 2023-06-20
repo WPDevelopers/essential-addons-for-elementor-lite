@@ -3,6 +3,7 @@
  * Template Name: Style 1
  *
  * @var $cs_product
+ * @var $image_size
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -11,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 <div class="eael-cs-single-product">
     <div class="eael-cs-product-image">
-		<?php echo $cs_product->get_image( 'medium' ); ?>
+		<?php echo $cs_product->get_image( $image_size ); ?>
     </div>
     <div class="eael-cs-product-info">
         <div class="eael-cs-product-title-price">

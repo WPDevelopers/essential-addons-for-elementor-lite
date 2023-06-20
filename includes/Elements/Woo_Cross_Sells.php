@@ -12,6 +12,7 @@ use \Elementor\Frontend;
 use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
+use Elementor\Group_Control_Image_Size;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Widget_Base;
 use \Elementor\Icons_Manager;
@@ -128,6 +129,16 @@ class Woo_Cross_Sells extends Widget_Base {
 			]
 		);
 
+		$this->add_group_control(
+			Group_Control_Image_Size::get_type(),
+			[
+				'name'        => 'eael_cross_sales_image_size',
+				'exclude'     => [ 'custom' ],
+				'default'     => 'medium',
+				'label_block' => true,
+			]
+		);
+
 		$this->add_control( 'orderby', [
 			'label'   => __( 'Order By', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::SELECT,
@@ -216,7 +227,8 @@ class Woo_Cross_Sells extends Widget_Base {
 			]
 		] );
 
-		$template = $this->get_template( $settings['eael_dynamic_template_layout'] ); ?>
+		$image_size = $settings['eael_cross_sales_image_size_size'];
+		$template   = $this->get_template( $settings['eael_dynamic_template_layout'] ); ?>
         <div <?php $this->print_render_attribute_string( 'container' ); ?>>
 			<?php
 			if ( file_exists( $template ) ) {
