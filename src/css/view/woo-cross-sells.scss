@@ -20,6 +20,52 @@
                 width: 100%;
                 z-index: 2;
                 transition: .3s;
+
+                .eael-cs-product-title-price {
+                    color: #FFFFFF;
+                    text-align: center;
+                    padding: 13px 0;
+
+                    .eael-cs-product-title {
+                        font-size: 16px;
+                        font-weight: 500;
+                        line-height: 18px;
+                    }
+
+                    .eael-cs-product-price {
+                        font-size: 18px;
+                        font-weight: 600;
+                        line-height: 22px;
+                        margin-top: 10px;
+                    }
+                }
+
+                .eael-cs-product-buttons {
+                    position: relative;
+                    border-top: 1px solid rgba(255, 255, 255, 0.5);
+                    overflow: hidden;
+
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        left: 50%;
+                        height: 100%;
+                        width: 1px;
+                        background: rgba(255, 255, 255, 0.5);
+                    }
+
+                    button {
+                        border: none;
+                        float: left;
+                        width: 50%;
+                        text-align: center;
+                        background: transparent;
+                        line-height: 60px;
+                        color: #FFFFFF;
+                        padding: 0;
+                    }
+                }
             }
 
             &:hover .eael-cs-product-info {
