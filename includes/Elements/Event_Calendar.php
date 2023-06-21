@@ -189,7 +189,7 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('Start Date', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DATE_TIME,
-                'default' => date('Y-m-d H:i', current_time('timestamp', 0)),
+//                'default' => date('Y-m-d H:i', current_time('timestamp', 0)),
                 'condition' => [
                     'eael_event_all_day' => '',
                 ],
@@ -201,7 +201,7 @@ class Event_Calendar extends Widget_Base
             [
                 'label' => __('End Date', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DATE_TIME,
-                'default' => date('Y-m-d H:i', strtotime("+59 minute", current_time('timestamp', 0))),
+//                'default' => date('Y-m-d H:i', strtotime("+59 minute", current_time('timestamp', 0))),
                 'condition' => [
                     'eael_event_all_day' => '',
                 ],
@@ -214,7 +214,7 @@ class Event_Calendar extends Widget_Base
                 'label' => __('Start Date', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DATE_TIME,
                 'picker_options' => ['enableTime' => false],
-                'default' => date('Y-m-d', current_time('timestamp', 0)),
+//                'default' => date('Y-m-d', current_time('timestamp', 0)),
                 'condition' => [
                     'eael_event_all_day' => 'yes',
                 ],
@@ -227,7 +227,7 @@ class Event_Calendar extends Widget_Base
                 'label' => __('End Date', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DATE_TIME,
                 'picker_options' => ['enableTime' => false],
-                'default' => date('Y-m-d', current_time('timestamp', 0)),
+//                'default' => date('Y-m-d', current_time('timestamp', 0)),
                 'condition' => [
                     'eael_event_all_day' => 'yes',
                 ],
@@ -1973,11 +1973,13 @@ class Event_Calendar extends Widget_Base
             foreach ($events as $event) {
 
                 if ($event['eael_event_all_day'] == 'yes') {
-                    $start = $event["eael_event_start_date_allday"];
-                    $end = date('Y-m-d', strtotime("+1 days", strtotime($event["eael_event_end_date_allday"])));
+                    $start = !empty( $event["eael_event_start_date_allday"] ) ? $event["eael_event_start_date_allday"] : date('Y-m-d', current_time('timestamp', 0));
+					$_end  = !empty( $event["eael_event_end_date_allday"] ) ? $event["eael_event_end_date_allday"] : date('Y-m-d', current_time('timestamp', 0));
+                    $end = date('Y-m-d', strtotime("+1 days", strtotime($_end)));
                 } else {
-                    $start = $event["eael_event_start_date"];
-                    $end = date('Y-m-d H:i', strtotime($event["eael_event_end_date"])) . ":01";
+                    $start = !empty( $event["eael_event_start_date"] ) ? $event["eael_event_start_date"] : date('Y-m-d', current_time('timestamp', 0));
+					$_end  = !empty( $event["eael_event_start_date"] ) ? $event["eael_event_start_date"] : date('Y-m-d', strtotime("+59 minute", current_time('timestamp', 0)) );
+                    $end = date('Y-m-d H:i', strtotime($_end))  . ":01";
                 }
 
                 if( !empty( $settings['eael_old_events_hide'] ) && 'yes' === $settings['eael_old_events_hide'] ){
