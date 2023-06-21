@@ -1978,7 +1978,7 @@ class Event_Calendar extends Widget_Base
                     $end = date('Y-m-d', strtotime("+1 days", strtotime($_end)));
                 } else {
                     $start = !empty( $event["eael_event_start_date"] ) ? $event["eael_event_start_date"] : date('Y-m-d', current_time('timestamp', 0));
-					$_end  = !empty( $event["eael_event_start_date"] ) ? $event["eael_event_start_date"] : date('Y-m-d', strtotime("+59 minute", current_time('timestamp', 0)) );
+					$_end  = !empty( $event["eael_event_end_date"] ) ? $event["eael_event_end_date"] : date('Y-m-d', strtotime("+59 minute", current_time('timestamp', 0)) );
                     $end = date('Y-m-d H:i', strtotime($_end))  . ":01";
                 }
 
