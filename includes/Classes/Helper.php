@@ -954,8 +954,6 @@ class Helper
             printf('<%1$s class="eael-product-quick-view-title product_title entry-title">%2$s</%1$s>',$tag,Helper::eael_wp_kses( get_the_title() ));
         }, 5 );
 
-        echo_pre([$widget_id, $settings]);
-
 	    ?>
 
 		<div id="eaproduct<?php echo esc_attr( $widget_id . $product->get_id() ); ?>" class="eael-product-popup
