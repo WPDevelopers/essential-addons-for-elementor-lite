@@ -55,7 +55,7 @@
                         background: rgba(255, 255, 255, 0.5);
                     }
 
-                    button {
+                    a {
                         border: none;
                         float: left;
                         width: 50%;
@@ -64,6 +64,15 @@
                         line-height: 60px;
                         color: #FFFFFF;
                         padding: 0;
+                        font-size: 12px;
+
+                        i {
+                            margin-right: 6px;
+                        }
+
+                        &.added {
+                            display: none;
+                        }
                     }
                 }
             }

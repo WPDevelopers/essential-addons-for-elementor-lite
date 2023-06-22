@@ -20,12 +20,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php echo esc_html( $cs_product->get_title() ); ?>
             </div>
             <div class="eael-cs-product-price">
-				<?php echo esc_html( $cs_product->get_price() ); ?>
+				<?php echo $cs_product->get_price_html(); ?>
             </div>
         </div>
         <div class="eael-cs-product-buttons">
-            <button><i class="far fa-eye"></i> <?php esc_html_e( 'View Product', 'essential-addons-for-elementor-lite' ); ?></button>
-            <button><i class="fas fa-shopping-cart"></i><?php esc_html_e( 'Add to Cart', 'essential-addons-for-elementor-lite' ); ?></button>
+            <a href="<?php echo esc_url( $cs_product->get_permalink() ); ?>"><i
+                        class="fas fa-eye"></i> <?php esc_html_e( 'View Product', 'essential-addons-for-elementor-lite' ); ?></a>
+			<?php if ( $cs_product->is_purchasable() ) { ?>
+                <a href="<?php echo esc_url( $cs_product->add_to_cart_url() ); ?>" class="add_to_cart_button ajax_add_to_cart"
+                   data-product_id="<?php echo esc_html( $cs_product->get_ID() ); ?>" data-quantity="1"><i
+                            class="fas fa-shopping-cart"></i><?php esc_html_e( 'Add to Cart', 'essential-addons-for-elementor-lite' ); ?></a>
+			<?php } ?>
         </div>
     </div>
 </div>
