@@ -1036,9 +1036,12 @@ class Data_Table extends Widget_Base {
 						'icon' => 'eicon-text-align-right',
 					],
 				],
-				'toggle' => true,
+//				'toggle' => true,
 				'default' => 'left',
-				'prefix_class' => 'eael-dt-td-align%s-',
+                'selectors' => [
+                        '{{WRAPPER}} .eael-data-table tbody .td-content-wrapper' => 'text-align: {{VALUE}};'
+                ],
+//				'prefix_class' => 'eael-dt-td-align%s-',
 			]
 		);
 
@@ -1363,7 +1366,7 @@ class Data_Table extends Widget_Base {
 										?>
 									   <?php if(  $table_td[$j]['content_type'] == 'icon' ) : ?>
 											<td <?php echo $this->get_render_attribute_string('table_inside_td'.$i.$j); ?>>
-												<div class="td-content-wrapper sss">
+												<div class="td-content-wrapper">
 													<?php if ( $table_td[$j]['icon_is_new'] || $table_td[$j]['icon_migrated']) { ?>
                                                         <div class="eael-datatable-icon td-content">
                                                         <?php Icons_Manager::render_icon( $table_td[$j]['icon_content_new'] );?>
