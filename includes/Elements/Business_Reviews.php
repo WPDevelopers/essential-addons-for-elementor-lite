@@ -125,7 +125,10 @@ class Business_Reviews extends Widget_Base {
 			'default'     => '',
 			'condition'   => [
 				'eael_business_reviews_sources' => 'google-reviews',
-			]
+			],
+			'ai' => [
+				'active' => false,
+			],
 		] );
 
 		$this->add_control(
@@ -593,7 +596,10 @@ class Business_Reviews extends Widget_Base {
 			'default'     => '',
 			'condition'   => [
 				'eael_business_reviews_business_name' => 'yes'
-			]
+			],
+			'ai' => [
+				'active' => false,
+			],
 		] );
 
 		$this->add_control(
@@ -617,6 +623,9 @@ class Business_Reviews extends Widget_Base {
 			'condition'   => [
 				'eael_business_reviews_sources'         => 'google-reviews',
 				'eael_business_reviews_business_rating' => 'yes'
+			],
+			'ai' => [
+				'active' => false,
 			],
 		] );
 
