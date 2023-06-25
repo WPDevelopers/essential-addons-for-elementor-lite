@@ -307,7 +307,10 @@ class Tooltip extends Widget_Base {
 		            '{{WRAPPER}} .eael-tooltip:hover .eael-tooltip-text.eael-tooltip-left' => 'animation-duration: {{SIZE}}ms;',
 		            '{{WRAPPER}} .eael-tooltip:hover .eael-tooltip-text.eael-tooltip-bottom' => 'animation-duration: {{SIZE}}ms;',
 		            '{{WRAPPER}} .eael-tooltip:hover .eael-tooltip-text.eael-tooltip-right' => 'animation-duration: {{SIZE}}ms;',
-		        ]
+		        ],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
   		$this->end_controls_section();
