@@ -233,6 +233,7 @@ class Woo_Cross_Sells extends Widget_Base {
 			<?php
 			if ( file_exists( $template ) ) {
 				foreach ( $cross_sells as $cs_product ) {
+					$is_purchasable = $cs_product->is_purchasable();
 					include( $template );
 				}
 			} else {

@@ -8435,7 +8435,7 @@ msgstr ""
 msgid "Descending"
 msgstr ""
 
-#: ../includes/Elements/Woo_Cross_Sells.php:239
+#: ../includes/Elements/Woo_Cross_Sells.php:240
 msgid "<p class=\"eael-no-layout-found\">No layout found!</p>"
 msgstr ""
 
@@ -10043,11 +10043,11 @@ msgstr ""
 msgid "Out"
 msgstr ""
 
-#: ../includes/Template/Woo-Cross-Sells/style-1.php:28
+#: ../includes/Template/Woo-Cross-Sells/style-1.php:29
 msgid "View Product"
 msgstr ""
 
-#: ../includes/Template/Woo-Cross-Sells/style-1.php:32
+#: ../includes/Template/Woo-Cross-Sells/style-1.php:33
 msgid "Add to Cart"
 msgstr ""
 
