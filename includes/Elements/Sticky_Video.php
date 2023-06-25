@@ -164,6 +164,9 @@ class Sticky_Video extends Widget_Base
                 'condition' => [
                     'eael_video_source' => 'youtube',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -179,6 +182,9 @@ class Sticky_Video extends Widget_Base
                 'condition' => [
                     'eael_video_source' => 'vimeo',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -193,6 +199,9 @@ class Sticky_Video extends Widget_Base
                 'condition' => [
                     'eael_video_source' => 'dailymotion',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -240,6 +249,9 @@ class Sticky_Video extends Widget_Base
                     'eael_video_source' => 'self_hosted',
                     'eaelsv_link_external' => 'yes',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
