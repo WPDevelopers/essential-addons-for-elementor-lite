@@ -6482,7 +6482,7 @@ msgstr ""
 msgid "Ribbon Style"
 msgstr ""
 
-#: ../includes/Elements/Pricing_Table.php:654, ../includes/Elements/Woo_Cart.php:152
+#: ../includes/Elements/Pricing_Table.php:654, ../includes/Elements/Woo_Cart.php:152, ../includes/Template/Woo-Cross-Sells/style-2.php:3
 msgid "Style 2"
 msgstr ""
 
