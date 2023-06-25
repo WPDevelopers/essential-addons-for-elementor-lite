@@ -5,6 +5,74 @@
 }
 .eael-cs-products-container.style-1 .eael-cs-single-product {
   float: left;
+  position: relative;
+  overflow: hidden;
+}
+.eael-cs-products-container.style-1 .eael-cs-single-product .eael-cs-product-info {
+  background: rgba(10, 22, 61, 0.9);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  -webkit-transform: translateY(100%);
+      -ms-transform: translateY(100%);
+          transform: translateY(100%);
+  width: 100%;
+  z-index: 2;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+.eael-cs-products-container.style-1 .eael-cs-single-product .eael-cs-product-info .eael-cs-product-title-price {
+  color: #FFFFFF;
+  text-align: center;
+  padding: 13px 0;
+}
+.eael-cs-products-container.style-1 .eael-cs-single-product .eael-cs-product-info .eael-cs-product-title-price .eael-cs-product-title {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 18px;
+}
+.eael-cs-products-container.style-1 .eael-cs-single-product .eael-cs-product-info .eael-cs-product-title-price .eael-cs-product-price {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 22px;
+  margin-top: 10px;
+}
+.eael-cs-products-container.style-1 .eael-cs-single-product .eael-cs-product-info .eael-cs-product-buttons {
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+}
+.eael-cs-products-container.style-1 .eael-cs-single-product .eael-cs-product-info .eael-cs-product-buttons::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.5);
+}
+.eael-cs-products-container.style-1 .eael-cs-single-product .eael-cs-product-info .eael-cs-product-buttons a {
+  border: none;
+  float: left;
+  width: 50%;
+  text-align: center;
+  background: transparent;
+  line-height: 60px;
+  color: #FFFFFF;
+  padding: 0;
+  font-size: 12px;
+}
+.eael-cs-products-container.style-1 .eael-cs-single-product .eael-cs-product-info .eael-cs-product-buttons a i {
+  margin-right: 6px;
+}
+.eael-cs-products-container.style-1 .eael-cs-single-product .eael-cs-product-info .eael-cs-product-buttons a.added {
+  display: none;
+}
+.eael-cs-products-container.style-1 .eael-cs-single-product:hover .eael-cs-product-info {
+  -webkit-transform: translateY(0);
+      -ms-transform: translateY(0);
+          transform: translateY(0);
 }
 .eael-cs-products-container.eael-cross-sales-column-1 .eael-cs-single-product {
   float: none;

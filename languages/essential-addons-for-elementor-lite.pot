@@ -10043,11 +10043,11 @@ msgstr ""
 msgid "Out"
 msgstr ""
 
-#: ../includes/Template/Woo-Cross-Sells/style-1.php:27
+#: ../includes/Template/Woo-Cross-Sells/style-1.php:28
 msgid "View Product"
 msgstr ""
 
-#: ../includes/Template/Woo-Cross-Sells/style-1.php:28
+#: ../includes/Template/Woo-Cross-Sells/style-1.php:32
 msgid "Add to Cart"
 msgstr ""
 

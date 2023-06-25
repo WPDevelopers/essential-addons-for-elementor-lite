@@ -1,13 +1,14 @@
 .eael-cs-products-container {
     &.style-1 {
-        &::before, &::after {
-            content: "";
-            display: block;
-            clear: both;
-        }
+        display: grid;
+        //&::before, &::after {
+        //    content: "";
+        //    display: block;
+        //    clear: both;
+        //}
 
         .eael-cs-single-product {
-            float: left;
+            //float: left;
             position: relative;
             overflow: hidden;
 
@@ -84,58 +85,26 @@
     }
 
     &.eael-cross-sales-column-1 {
-        .eael-cs-single-product {
-            float: none;
-        }
+        grid-template-columns: auto;
     }
 
     &.eael-cross-sales-column-2 {
-        .eael-cs-single-product {
-            width: 50%;
-
-            &:nth-child(2n + 1) {
-                clear: left;
-            }
-        }
+        grid-template-columns: 50% 50%;
     }
 
     &.eael-cross-sales-column-3 {
-        .eael-cs-single-product {
-            width: 33.3333%;
-
-            &:nth-child(3n + 1) {
-                clear: left;
-            }
-        }
+        grid-template-columns: calc(100% / 3) calc(100% / 3) calc(100% / 3);
     }
 
     &.eael-cross-sales-column-4 {
-        .eael-cs-single-product {
-            width: 25%;
-
-            &:nth-child(4n + 1) {
-                clear: left;
-            }
-        }
+        grid-template-columns: 25% 25% 25% 25%;
     }
 
     &.eael-cross-sales-column-5 {
-        .eael-cs-single-product {
-            width: 20%;
-
-            &:nth-child(5n + 1) {
-                clear: left;
-            }
-        }
+        grid-template-columns: 20% 20% 20% 20% 20%;
     }
 
     &.eael-cross-sales-column-6 {
-        .eael-cs-single-product {
-            width: 16.6666%;
-
-            &:nth-child(6n + 1) {
-                clear: left;
-            }
-        }
+        grid-template-columns: calc(100% / 6) calc(100% / 6) calc(100% / 6) calc(100% / 6) calc(100% / 6) calc(100% / 6);
     }
 }
