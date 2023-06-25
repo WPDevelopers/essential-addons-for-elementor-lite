@@ -1023,9 +1023,9 @@ class Helper
 	 * @param $text
 	 * @return string
 	 */
-    public static function eael_wp_kses($text){
-        return wp_kses($text,self::eael_allowed_tags());
-    }
+	public static function eael_wp_kses( $text ) {
+		return wp_kses( $text, self::eael_allowed_tags(), array_merge( wp_allowed_protocols(), [ 'data' ] ) );
+	}
 
 	/**
      * List of allowed html tag for wp_kses
