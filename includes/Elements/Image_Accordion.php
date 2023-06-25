@@ -199,6 +199,9 @@ class Image_Accordion extends Widget_Base {
                 'label_block' => true,
                 'default'     => esc_html__( 'Accordion item title', 'essential-addons-for-elementor-lite' ),
                 'dynamic'     => [ 'active' => true ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -308,6 +311,9 @@ class Image_Accordion extends Widget_Base {
                 'selectors'   => [
                     '{{WRAPPER}} .eael-img-accordion ' => 'height: {{VALUE}}px;',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
