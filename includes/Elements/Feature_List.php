@@ -183,6 +183,9 @@ class Feature_List extends Widget_Base {
                 'type'    => Controls_Manager::TEXT,
                 'default' => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
                 'dynamic' => ['active' => true],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
