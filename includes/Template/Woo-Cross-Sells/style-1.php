@@ -4,6 +4,7 @@
  *
  * @var $cs_product
  * @var $image_size
+ * @var $is_purchasable
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -23,10 +24,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php echo $cs_product->get_price_html(); ?>
             </div>
         </div>
-        <div class="eael-cs-product-buttons">
+        <div class="eael-cs-product-buttons <?php echo $is_purchasable ? 'eael-cs-purchasable' : ''; ?>">
             <a href="<?php echo esc_url( $cs_product->get_permalink() ); ?>"><i
                         class="fas fa-eye"></i> <?php esc_html_e( 'View Product', 'essential-addons-for-elementor-lite' ); ?></a>
-			<?php if ( $cs_product->is_purchasable() ) { ?>
+			<?php if ( $is_purchasable ) { ?>
                 <a href="<?php echo esc_url( $cs_product->add_to_cart_url() ); ?>" class="add_to_cart_button ajax_add_to_cart"
                    data-product_id="<?php echo esc_html( $cs_product->get_ID() ); ?>" data-quantity="1"><i
                             class="fas fa-shopping-cart"></i><?php esc_html_e( 'Add to Cart', 'essential-addons-for-elementor-lite' ); ?></a>

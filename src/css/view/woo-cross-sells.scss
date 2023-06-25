@@ -1,14 +1,33 @@
 .eael-cs-products-container {
-    &.style-1 {
-        display: grid;
-        //&::before, &::after {
-        //    content: "";
-        //    display: block;
-        //    clear: both;
-        //}
+    display: grid;
+    gap: 20px;
 
+    &.eael-cross-sales-column-1 {
+        grid-template-columns: auto;
+    }
+
+    &.eael-cross-sales-column-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    &.eael-cross-sales-column-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    &.eael-cross-sales-column-4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    &.eael-cross-sales-column-5 {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    &.eael-cross-sales-column-6 {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    &.style-1 {
         .eael-cs-single-product {
-            //float: left;
             position: relative;
             overflow: hidden;
 
@@ -42,24 +61,28 @@
                 }
 
                 .eael-cs-product-buttons {
+                    display: grid;
+                    grid-template-columns: auto;
                     position: relative;
                     border-top: 1px solid rgba(255, 255, 255, 0.5);
                     overflow: hidden;
 
-                    &::after {
-                        content: "";
-                        position: absolute;
-                        top: 0;
-                        left: 50%;
-                        height: 100%;
-                        width: 1px;
-                        background: rgba(255, 255, 255, 0.5);
+                    &.eael-cs-purchasable {
+                        grid-template-columns: repeat(2, 1fr);
+
+                        &::after {
+                            content: "";
+                            position: absolute;
+                            top: 0;
+                            left: 50%;
+                            height: 100%;
+                            width: 1px;
+                            background: rgba(255, 255, 255, 0.5);
+                        }
                     }
 
                     a {
                         border: none;
-                        float: left;
-                        width: 50%;
                         text-align: center;
                         background: transparent;
                         line-height: 60px;
@@ -82,29 +105,5 @@
                 transform: translateY(0);
             }
         }
-    }
-
-    &.eael-cross-sales-column-1 {
-        grid-template-columns: auto;
-    }
-
-    &.eael-cross-sales-column-2 {
-        grid-template-columns: 50% 50%;
-    }
-
-    &.eael-cross-sales-column-3 {
-        grid-template-columns: calc(100% / 3) calc(100% / 3) calc(100% / 3);
-    }
-
-    &.eael-cross-sales-column-4 {
-        grid-template-columns: 25% 25% 25% 25%;
-    }
-
-    &.eael-cross-sales-column-5 {
-        grid-template-columns: 20% 20% 20% 20% 20%;
-    }
-
-    &.eael-cross-sales-column-6 {
-        grid-template-columns: calc(100% / 6) calc(100% / 6) calc(100% / 6) calc(100% / 6) calc(100% / 6) calc(100% / 6);
     }
 }
