@@ -34,6 +34,13 @@ class Woo_Cross_Sells extends Widget_Base {
 		return 'eaicon-woo-cross-sells';
 	}
 
+	public function get_style_depends() {
+		return [
+			'font-awesome-5-all',
+			'font-awesome-4-shim',
+		];
+	}
+
 	public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
