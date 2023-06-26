@@ -131,7 +131,7 @@ class Woo_Cross_Sells extends Widget_Base {
 					'6' => esc_html__( '6', 'essential-addons-for-elementor-lite' ),
 				],
 				'condition' => [
-					'eael_dynamic_template_layout' => 'style-1',
+					'eael_dynamic_template_layout' => [ 'style-1', 'style-2' ],
 				],
 			]
 		);
@@ -224,13 +224,13 @@ class Woo_Cross_Sells extends Widget_Base {
 		$cross_sells = array_filter( array_map( 'wc_get_product', WC()->cart->get_cross_sells() ), 'wc_products_array_filter_visible' );
 		$cross_sells = wc_products_array_orderby( $cross_sells, $orderby, $order );
 		$cross_sells = $limit > 0 ? array_slice( $cross_sells, 0, $limit ) : $cross_sells;
-		$column      = empty( $settings['eael_cross_sales_column'] ) ? 4 : $settings['eael_cross_sales_column'];
+		$column      = empty( $settings['eael_cross_sales_column'] ) ? '' : "eael-cross-sales-column-{$settings['eael_cross_sales_column']}";
 
 		$this->add_render_attribute( 'container', [
 			'class' => [
 				'eael-cs-products-container',
 				$settings['eael_dynamic_template_layout'],
-				"eael-cross-sales-column-{$column}"
+				$column
 			]
 		] );
 
