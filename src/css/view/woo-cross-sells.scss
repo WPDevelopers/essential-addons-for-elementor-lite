@@ -208,4 +208,65 @@
             }
         }
     }
+
+    &.style-3 {
+        gap: 30px;
+
+        .eael-cs-single-product {
+            display: grid;
+            gap: 50px;
+            grid-template-columns: auto auto;
+
+            .eael-cs-product-image {
+                border: 1px solid #CDD0DA;
+            }
+
+            .eael-cs-product-info {
+                padding: 10px 0;
+
+                .eael-cs-product-title {
+                    font-size: 20px;
+                    font-weight: 500;
+                    line-height: 22px;
+                }
+
+                .eael-cs-product-price {
+                    font-size: 20px;
+                    font-weight: 700;
+                    line-height: 24px;
+                    margin-top: 15px;
+                }
+
+                .eael-cs-product-excerpt {
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 22px;
+                    margin-top: 15px;
+                }
+
+                .eael-cs-product-buttons {
+                    margin-top: 20px;
+
+                    a {
+                        display: inline-block;
+                        background: #6345EA;
+                        font-size: 14px;
+                        font-weight: 600;
+                        color: #FFFFFF;
+                        line-height: 38px;
+                        border-radius: 3px;
+                        padding: 0 25px;
+
+                        i {
+                            margin-right: 10px;
+                        }
+
+                        &.added {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

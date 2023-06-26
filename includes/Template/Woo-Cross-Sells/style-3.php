@@ -26,10 +26,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php echo $cs_product->get_short_description(); ?>
         </div>
         <div class="eael-cs-product-buttons <?php echo $is_purchasable ? 'eael-cs-purchasable' : ''; ?>">
-            <a href="<?php echo esc_url( $cs_product->get_permalink() ); ?>"><i class="fas fa-eye"></i></a>
 			<?php if ( $is_purchasable ) { ?>
                 <a href="<?php echo esc_url( $cs_product->add_to_cart_url() ); ?>" class="add_to_cart_button ajax_add_to_cart"
-                   data-product_id="<?php echo esc_html( $cs_product->get_ID() ); ?>" data-quantity="1"></a>
+                   data-product_id="<?php echo esc_html( $cs_product->get_ID() ); ?>" data-quantity="1"><i
+                            class="fas fa-shopping-cart"></i><?php esc_html_e( 'Add to Cart', 'essential-addons-for-elementor-lite' ); ?></a>
+			<?php } else { ?>
+                <a href="<?php echo esc_url( $cs_product->get_permalink() ); ?>"><i
+                            class="fas fa-eye"></i><?php esc_html_e( 'View Product', 'essential-addons-for-elementor-lite' ); ?></a>
 			<?php } ?>
         </div>
     </div>
