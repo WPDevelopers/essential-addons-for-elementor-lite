@@ -133,6 +133,7 @@
                     transition: .3s;
 
                     a {
+                        font-size: 16px;
                         display: inline-block;
                         background: #FFFFFF;
                         width: 38px;
@@ -147,8 +148,33 @@
                             margin-left: 8px;
                         }
 
+                        &.add_to_cart_button {
+                            &.added {
+                                display: none;
+                            }
+
+                            &::before {
+                                content: "\f07a";
+                                font-family: "Font Awesome 5 Free";
+                                font-weight: 900;
+                            }
+                        }
+
+                        &.added_to_cart {
+                            font-size: 0;
+
+                            &::before {
+                                font-size: 16px;
+                                content: "\f217";
+                                font-family: "Font Awesome 5 Free";
+                                font-weight: 900;
+                            }
+                        }
+
                         &:hover {
                             color: #6345EA;
+                            box-shadow: 0 8px 16px -2px rgba(23, 28, 58, 0.45);
+
                         }
                     }
                 }
