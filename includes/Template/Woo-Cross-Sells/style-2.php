@@ -16,10 +16,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php echo $cs_product->get_image( $image_size ); ?>
         <div class="eael-cs-product-buttons <?php echo $is_purchasable ? 'eael-cs-purchasable' : ''; ?>">
             <a href="<?php echo esc_url( $cs_product->get_permalink() ); ?>"><i class="fas fa-eye"></i></a>
-		    <?php if ( $is_purchasable ) { ?>
+			<?php if ( $is_purchasable ) { ?>
                 <a href="<?php echo esc_url( $cs_product->add_to_cart_url() ); ?>" class="add_to_cart_button ajax_add_to_cart"
-                   data-product_id="<?php echo esc_html( $cs_product->get_ID() ); ?>" data-quantity="1"><i class="fas fa-shopping-cart"></i></a>
-		    <?php } ?>
+                   data-product_id="<?php echo esc_html( $cs_product->get_ID() ); ?>" data-quantity="1"></a>
+			<?php } ?>
         </div>
     </div>
     <div class="eael-cs-product-info">
