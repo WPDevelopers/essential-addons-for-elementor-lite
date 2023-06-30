@@ -1321,6 +1321,30 @@ trait Login_Registration {
 		return preg_replace( $placeholders, $replacement, $message );
 	}
 
+	/**
+	 * It replaces placeholders with dynamic value and returns it.
+	 *
+	 * @param        $text
+	 * @param string $receiver
+	 *
+	 * @return null|string|string[]
+	 */
+	public function replace_placeholders_logout_link_text( $text ) {
+		$current_user   = wp_get_current_user()->display_name;
+		$logout_link 	= sprintf( '<a href="%1$s">%2$s</a>', esc_url( wp_logout_url() ), __( 'Logout', 'essential-addons-for-elementor-lite' ) );
+
+		$placeholders = [
+			'/\[username\]/',
+			'/\[logout_link\]/',
+		];
+		$replacement  = [
+			$current_user,
+			$logout_link,
+		];
+
+		return preg_replace( $placeholders, $replacement, $text );
+	}
+
 	public function lr_validate_recaptcha($version = 'v2') {
 		if ( ! isset( $_REQUEST['g-recaptcha-response'] ) ) {
 			return false;

@@ -400,6 +400,18 @@ class Login_Register extends Widget_Base {
 			'type'    => Controls_Manager::SWITCHER,
 			'default' => 'yes',
 		] );
+		$this->add_control( 'log_out_link_text', [
+			'label'       => __( 'Logout Link Text', 'essential-addons-for-elementor-lite' ),
+			'label_block' => true,
+			'type'        => Controls_Manager::TEXT,
+			'dynamic'     => [
+				'active' => true,
+			],
+			'default'     => __( 'You are already logged in as [username]. ([logout_link])', 'essential-addons-for-elementor-lite' ),
+			'condition'   => [
+				'show_log_out_message' => 'yes',
+			],
+		] );
 		$this->add_control( 'show_lost_password', [
 			'label'   => __( 'Show Lost your password?', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::SWITCHER,
@@ -5219,9 +5231,9 @@ class Login_Register extends Widget_Base {
 					<?php
 					if ( $show_logout_link && is_user_logged_in() && ! $this->in_editor ) {
 						/* translators: %s user display name */
-						$err_loggedin_msg = ! empty( $this->ds['err_loggedin'] ) ? $this->ds['err_loggedin'] : 'You are already logged in as';
-						$logged_in_msg = sprintf( __( '%s %s. ', 'essential-addons-for-elementor-lite' ), esc_html( $err_loggedin_msg ), wp_get_current_user()->display_name );
-						printf( '%1$s   (<a href="%2$s">%3$s</a>)', esc_html( $logged_in_msg ), esc_url( wp_logout_url() ), __( 'Logout', 'essential-addons-for-elementor-lite' ) );
+						$logout_link_text = ! empty( $this->ds['log_out_link_text'] ) ? $this->ds['log_out_link_text'] : 'You are already logged in as [username]. ([logout_link])';
+						$logout_link_text = $this->replace_placeholders_logout_link_text($logout_link_text);
+						printf( '%s', HelperCLass::eael_wp_kses( $logout_link_text ) );
 					} else {
 						if ( 'left' === $this->form_illustration_pos ) {
 							$this->print_form_illustration();
