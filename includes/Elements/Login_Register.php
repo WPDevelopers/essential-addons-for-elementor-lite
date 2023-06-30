@@ -5233,7 +5233,7 @@ class Login_Register extends Widget_Base {
 						/* translators: %s user display name */
 						$logout_link_text = ! empty( $this->ds['log_out_link_text'] ) ? $this->ds['log_out_link_text'] : 'You are already logged in as [username]. ([logout_link])';
 						$logout_link_text = $this->replace_placeholders_logout_link_text($logout_link_text);
-						printf( '%s', HelperCLass::eael_wp_kses( $logout_link_text ) );
+						printf( '%s', __( HelperCLass::eael_wp_kses( $logout_link_text ), 'essential-addons-for-elementor-lite' ) );
 					} else {
 						if ( 'left' === $this->form_illustration_pos ) {
 							$this->print_form_illustration();
