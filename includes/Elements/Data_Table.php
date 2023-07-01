@@ -102,6 +102,16 @@ class Data_Table extends Widget_Base {
             );
         }
 
+		$this->add_control(
+			'eael_section_data_table_vertical_header', [
+			'label'        => sprintf( __( 'Enable Vertical Header', 'essential-addons-for-elementor-lite' ) ),
+			'type'         => Controls_Manager::SWITCHER,
+			'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+			'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'true',
+			'default' => '',
+		] );
+
         $repeater = new Repeater();
 
         $repeater->add_control(
