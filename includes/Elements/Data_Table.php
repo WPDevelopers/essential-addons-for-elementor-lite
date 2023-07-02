@@ -607,6 +607,10 @@ class Data_Table extends Widget_Base {
 					'{{WRAPPER}} .eael-data-table thead tr th:last-child' => 'border-radius: 0px {{SIZE}}px 0px 0px;',
                     '.rtl {{WRAPPER}} .eael-data-table thead tr th:first-child' => 'border-radius: 0px {{SIZE}}px 0px 0px;',
                     '.rtl {{WRAPPER}} .eael-data-table thead tr th:last-child' => 'border-radius: {{SIZE}}px 0px 0px 0px;',
+					'{{WRAPPER}} .eael-data-table tbody tr:first-child th:first-child' => 'border-radius: {{SIZE}}px 0px 0px 0px;',
+					'{{WRAPPER}} .eael-data-table tbody tr:last-child th:first-child' => 'border-radius: 0px {{SIZE}}px 0px 0px;',
+                    '.rtl {{WRAPPER}} .eael-data-table tbody tr:first-child th:first-child' => 'border-radius: 0px {{SIZE}}px 0px 0px;',
+                    '.rtl {{WRAPPER}} .eael-data-table tbody tr:last-child th:first-child' => 'border-radius: {{SIZE}}px 0px 0px 0px;',
 				],
 			]
 		);
