@@ -662,7 +662,7 @@ class Data_Table extends Widget_Base {
 						[
 							'name' => 'eael_data_table_header_border',
 							'label' => esc_html__( 'Border', 'essential-addons-for-elementor-lite'),
-							'selector' => '{{WRAPPER}} .eael-data-table thead tr th'
+							'selector' => '{{WRAPPER}} .eael-data-table thead tr th, {{WRAPPER}} .eael-data-table tbody tr th:first-child'
 						]
 				);
 
@@ -678,6 +678,7 @@ class Data_Table extends Widget_Base {
 						'default' => '#fff',
 						'selectors' => [
 							'{{WRAPPER}} .eael-data-table thead tr th:hover' => 'color: {{VALUE}};',
+							'{{WRAPPER}} .eael-data-table tbody tr th:first-child:hover' => 'color: {{VALUE}};',
 							'{{WRAPPER}} table.dataTable thead .sorting:after:hover' => 'color: {{VALUE}};',
 							'{{WRAPPER}} table.dataTable thead .sorting_asc:after:hover' => 'color: {{VALUE}};',
 							'{{WRAPPER}} table.dataTable thead .sorting_desc:after:hover' => 'color: {{VALUE}};',
