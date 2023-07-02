@@ -779,7 +779,8 @@ class Data_Table extends Widget_Base {
                     ],
 				],
                 'selectors'             => [
-					'{{WRAPPER}} .eael-data-table thead tr th i, {{WRAPPER}} .eael-data-table thead tr th img' => 'margin-right: {{SIZE}}{{UNIT}};'
+					'{{WRAPPER}} .eael-data-table thead tr th i, {{WRAPPER}} .eael-data-table thead tr th img' => 'margin-right: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-data-table tbody tr th:first-child i, {{WRAPPER}} .eael-data-table tbody tr th:first-child img' => 'margin-right: {{SIZE}}{{UNIT}};'
 				]
             ]
 		);
