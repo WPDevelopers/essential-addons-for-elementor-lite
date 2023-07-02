@@ -636,6 +636,7 @@ class Data_Table extends Widget_Base {
 						'default' => '#fff',
 						'selectors' => [
 							'{{WRAPPER}} .eael-data-table thead tr th' => 'color: {{VALUE}};',
+							'{{WRAPPER}} .eael-data-table tbody tr th:first-child' => 'color: {{VALUE}};',
 							'{{WRAPPER}} table.dataTable thead .sorting:after' => 'color: {{VALUE}};',
 							'{{WRAPPER}} table.dataTable thead .sorting_asc:after' => 'color: {{VALUE}};',
 							'{{WRAPPER}} table.dataTable thead .sorting_desc:after' => 'color: {{VALUE}};',
@@ -650,7 +651,8 @@ class Data_Table extends Widget_Base {
 						'type' => Controls_Manager::COLOR,
 						'default' => '#4a4893',
 						'selectors' => [
-							'{{WRAPPER}} .eael-data-table thead tr th' => 'background-color: {{VALUE}};'
+							'{{WRAPPER}} .eael-data-table thead tr th' => 'background-color: {{VALUE}};',
+							'{{WRAPPER}} .eael-data-table tbody tr th:first-child' => 'background-color: {{VALUE}};'
 						],
 					]
 				);
@@ -1244,11 +1246,57 @@ class Data_Table extends Widget_Base {
 		];
 	}
 
+	protected function print_table_header( $settings, $index ){
+		$header_title = ! empty( $settings['eael_data_table_header_cols_data'][$index] ) ? $settings['eael_data_table_header_cols_data'][$index] : '';
+		$i = $index;
+
+		if( ! $header_title ){
+			return;
+		}
+		
+		$this->add_render_attribute('th_class'.$i, [
+			'class'		=> [ $header_title['eael_data_table_header_css_class'] ],
+			'id'		=> $header_title['eael_data_table_header_css_id'],
+			'colspan'	=> $header_title['eael_data_table_header_col_span']
+		]);
+
+		if(apply_filters('eael/pro_enabled', false)) {
+			$this->add_render_attribute('th_class'.$i, 'class', 'sorting' );
+		}
+		?>
+		
+		<th <?php echo $this->get_render_attribute_string('th_class'.$i); ?>>
+			<?php if( $header_title['eael_data_table_header_col_icon_enabled'] == 'true' && $header_title['eael_data_table_header_icon_type'] == 'icon' ) : ?>
+				<?php if (empty($header_title['eael_data_table_header_col_icon']) || isset($header_title['__fa4_migrated']['eael_data_table_header_col_icon_new'])) { ?>
+					<?php if( isset($header_title['eael_data_table_header_col_icon_new']['value']['url']) ) : ?>
+						<img class="data-header-icon data-table-header-svg-icon" src="<?php echo $header_title['eael_data_table_header_col_icon_new']['value']['url'] ?>" alt="<?php echo esc_attr(get_post_meta($header_title['eael_data_table_header_col_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+					<?php else : ?>
+						<i class="<?php echo $header_title['eael_data_table_header_col_icon_new']['value'] ?> data-header-icon"></i>
+					<?php endif; ?>
+				<?php } else { ?>
+					<i class="<?php echo $header_title['eael_data_table_header_col_icon'] ?> data-header-icon"></i>
+				<?php } ?>
+			<?php endif; ?>
+			<?php
+				if( $header_title['eael_data_table_header_col_icon_enabled'] == 'true' && $header_title['eael_data_table_header_icon_type'] == 'image' ) :
+					$this->add_render_attribute('data_table_th_img'.$i, [
+						'src'	=> esc_url( $header_title['eael_data_table_header_col_img']['url'] ),
+						'class'	=> 'eael-data-table-th-img',
+						'style'	=> "width:{$header_title['eael_data_table_header_col_img_size']}px;",
+						'alt'	=> esc_attr(get_post_meta($header_title['eael_data_table_header_col_img']['id'], '_wp_attachment_image_alt', true))
+					]);
+			?><img <?php echo $this->get_render_attribute_string('data_table_th_img'.$i); ?>><?php endif; ?>
+			<span class="data-table-header-text"><?php echo __( Helper::eael_wp_kses($header_title['eael_data_table_header_col']), 'essential-addons-for-elementor-lite'); ?></span>
+		</th>
+		<?php 
+	}
+
 	protected function render( ) {
 
         $settings = $this->get_settings_for_display();
 
         $table_tr = [];
+		$table_th = [];
 		$table_td = [];
 
 	  	// Storing Data table content values
@@ -1319,46 +1367,24 @@ class Data_Table extends Widget_Base {
 		<div <?php echo $this->get_render_attribute_string('eael_data_table_wrap'); ?>>
 			<table <?php echo $this->get_render_attribute_string('eael_data_table'); ?>>
 			    <thead>
-			        <tr class="table-header">
-						<?php $i = 0; foreach( $settings['eael_data_table_header_cols_data'] as $header_title ) :
-							$this->add_render_attribute('th_class'.$i, [
-								'class'		=> [ $header_title['eael_data_table_header_css_class'] ],
-								'id'		=> $header_title['eael_data_table_header_css_id'],
-								'colspan'	=> $header_title['eael_data_table_header_col_span']
-							]);
-
-							if(apply_filters('eael/pro_enabled', false)) {
-								$this->add_render_attribute('th_class'.$i, 'class', 'sorting' );
+					<?php if( empty( $settings['eael_section_data_table_vertical_header'] ) ) : ?>
+						<tr class="table-header">
+							<?php 
+							foreach( $settings['eael_data_table_header_cols_data'] as $index => $header_title ){
+								$this->print_table_header( $settings, $index );	
 							}
-						?>
-			            <th <?php echo $this->get_render_attribute_string('th_class'.$i); ?>>
-							<?php if( $header_title['eael_data_table_header_col_icon_enabled'] == 'true' && $header_title['eael_data_table_header_icon_type'] == 'icon' ) : ?>
-								<?php if (empty($header_title['eael_data_table_header_col_icon']) || isset($header_title['__fa4_migrated']['eael_data_table_header_col_icon_new'])) { ?>
-									<?php if( isset($header_title['eael_data_table_header_col_icon_new']['value']['url']) ) : ?>
-										<img class="data-header-icon data-table-header-svg-icon" src="<?php echo $header_title['eael_data_table_header_col_icon_new']['value']['url'] ?>" alt="<?php echo esc_attr(get_post_meta($header_title['eael_data_table_header_col_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
-									<?php else : ?>
-										<i class="<?php echo $header_title['eael_data_table_header_col_icon_new']['value'] ?> data-header-icon"></i>
-									<?php endif; ?>
-								<?php } else { ?>
-									<i class="<?php echo $header_title['eael_data_table_header_col_icon'] ?> data-header-icon"></i>
-								<?php } ?>
-			            	<?php endif; ?>
-							<?php
-								if( $header_title['eael_data_table_header_col_icon_enabled'] == 'true' && $header_title['eael_data_table_header_icon_type'] == 'image' ) :
-									$this->add_render_attribute('data_table_th_img'.$i, [
-										'src'	=> esc_url( $header_title['eael_data_table_header_col_img']['url'] ),
-										'class'	=> 'eael-data-table-th-img',
-										'style'	=> "width:{$header_title['eael_data_table_header_col_img_size']}px;",
-										'alt'	=> esc_attr(get_post_meta($header_title['eael_data_table_header_col_img']['id'], '_wp_attachment_image_alt', true))
-									]);
-							?><img <?php echo $this->get_render_attribute_string('data_table_th_img'.$i); ?>><?php endif; ?><span class="data-table-header-text"><?php echo __( Helper::eael_wp_kses($header_title['eael_data_table_header_col']), 'essential-addons-for-elementor-lite'); ?></span></th>
-			        	<?php $i++; endforeach; ?>
-			        </tr>
+							?>
+						</tr>
+					<?php endif; ?>
 			    </thead>
 			  	<tbody>
 					<?php for( $i = 0; $i < count( $table_tr ); $i++ ) : ?>
 						<tr>
 							<?php
+								if( ! empty( $settings['eael_section_data_table_vertical_header'] ) ) :
+									$this->print_table_header( $settings, $i );	
+								endif;
+								
 								for( $j = 0; $j < count( $table_td ); $j++ ) {
 									if( $table_tr[$i]['id'] == $table_td[$j]['row_id'] ) {
 
