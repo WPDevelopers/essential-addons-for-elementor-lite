@@ -719,7 +719,7 @@ class Data_Table extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
              	'name' => 'eael_data_table_header_title_typography',
-				'selector' => '{{WRAPPER}} .eael-data-table thead > tr th .data-table-header-text',
+				'selector' => '{{WRAPPER}} .eael-data-table thead > tr th .data-table-header-text, {{WRAPPER}} .eael-data-table tbody tr > th:first-chilf .data-table-header-text',
 			]
 		);
 
