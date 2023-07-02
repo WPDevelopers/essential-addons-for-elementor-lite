@@ -693,6 +693,7 @@ class Data_Table extends Widget_Base {
 						'type' => Controls_Manager::COLOR,
 						'selectors' => [
 							'{{WRAPPER}} .eael-data-table thead tr th:hover' => 'background-color: {{VALUE}};',
+							'{{WRAPPER}} .eael-data-table tbody tr th:first-child:hover' => 'background-color: {{VALUE}};',
 						],
 					]
 				);
@@ -702,7 +703,7 @@ class Data_Table extends Widget_Base {
 						[
 							'name' => 'eael_data_table_header_hover_border',
 							'label' => esc_html__( 'Border', 'essential-addons-for-elementor-lite'),
-							'selector' => '{{WRAPPER}} .eael-data-table thead tr th:hover',
+							'selector' => '{{WRAPPER}} .eael-data-table thead tr th:hover, {{WRAPPER}} .eael-data-table tbody tr th:first-child:hover',
 						]
 				);
 
@@ -736,6 +737,8 @@ class Data_Table extends Widget_Base {
                 'selectors'  => [
                     '{{WRAPPER}} .eael-data-table thead tr th i'                           => 'font-size: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .eael-data-table thead tr th .data-table-header-svg-icon' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-data-table tbody tr th:first-child i'               => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-data-table tbody tr th:first-child .data-table-header-svg-icon' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -758,6 +761,7 @@ class Data_Table extends Widget_Base {
                 ],
                 'selectors'  => [
                     '{{WRAPPER}} .eael-data-table thead tr th .data-header-icon' => 'top: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-data-table tbody tr th:first-child .data-header-icon' => 'top: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
