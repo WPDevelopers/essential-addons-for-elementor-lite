@@ -15,6 +15,10 @@
   width: auto;
 }
 
+.eael-contact-form-7 label {
+  display: block;
+}
+
 .eael-contact-form-7 textarea,
 .eael-contact-form-7 input[type=text],
 .eael-contact-form-7 input[type=password],
@@ -37,6 +41,8 @@
   -o-transition: border linear 0.2s, box-shadow linear 0.2s;
   transition: border linear 0.2s, box-shadow linear 0.2s;
   transition: border linear 0.2s, box-shadow linear 0.2s, -webkit-box-shadow linear 0.2s;
+  width: auto;
+  max-width: 100%;
 }
 
 .eael-contact-form-7 .wpcf7-form::before,
