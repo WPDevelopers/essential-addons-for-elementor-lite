@@ -1384,7 +1384,14 @@ class Data_Table extends Widget_Base {
 										<td <?php echo $this->get_render_attribute_string('table_inside_td'.$i.$j); ?>>
 											<div class="td-content-wrapper">
 												<div <?php echo $this->get_render_attribute_string('td_content'); ?>>
-													<?php echo Plugin::$instance->frontend->get_builder_content(intval($table_td[$j]['template']), true); ?>
+													<?php
+													// WPML Compatibility
+													if ( ! is_array( $table_td[ $j ]['template'] ) ) {
+														$table_td[ $j ]['template'] = apply_filters( 'wpml_object_id', $table_td[ $j ]['template'], 'wp_template', true );
+													}
+
+													echo Plugin::$instance->frontend->get_builder_content( intval( $table_td[ $j ]['template'] ), true );
+													?>
 												</div>
 											</div>
 										</td>
