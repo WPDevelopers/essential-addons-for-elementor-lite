@@ -1389,7 +1389,6 @@ class Data_Table extends Widget_Base {
 													if ( ! is_array( $table_td[ $j ]['template'] ) ) {
 														$table_td[ $j ]['template'] = apply_filters( 'wpml_object_id', $table_td[ $j ]['template'], 'wp_template', true );
 													}
-
 													echo Plugin::$instance->frontend->get_builder_content( intval( $table_td[ $j ]['template'] ), true );
 													?>
 												</div>
