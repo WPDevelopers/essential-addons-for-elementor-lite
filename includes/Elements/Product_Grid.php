@@ -321,6 +321,18 @@ class Product_Grid extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_show_product_sale_badge',
+            [
+                'label' => esc_html__( 'Show Badge ?', 'essential-addons-for-elementor-lite' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+                'label_off' => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+                'return_value' => 'yes',
+                'default' => 'yes',
+            ]
+        );
+
         $this->end_controls_section();
     }
 
@@ -1422,6 +1434,9 @@ class Product_Grid extends Widget_Base
 		    [
 			    'label' => esc_html__('Sale Badge Style', 'essential-addons-for-elementor-lite'),
 			    'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_show_product_sale_badge' => 'yes'
+                ]
 		    ]
 	    );
 
@@ -1728,8 +1743,12 @@ class Product_Grid extends Widget_Base
             'eael_section_product_badges',
             [
                 'label' => esc_html__('Sale / Stock Out Badge', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                    'eael_show_product_sale_badge' => 'yes'
+                ]
             ]
         );
+
         $this->add_control(
             'eael_product_sale_badge_preset',
             [
