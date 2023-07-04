@@ -2,30 +2,6 @@
     display: grid;
     gap: 20px;
 
-    &.eael-cross-sales-column-1 {
-        grid-template-columns: auto;
-    }
-
-    &.eael-cross-sales-column-2 {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    &.eael-cross-sales-column-3 {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    &.eael-cross-sales-column-4 {
-        grid-template-columns: repeat(4, 1fr);
-    }
-
-    &.eael-cross-sales-column-5 {
-        grid-template-columns: repeat(5, 1fr);
-    }
-
-    &.eael-cross-sales-column-6 {
-        grid-template-columns: repeat(6, 1fr);
-    }
-
     img {
         display: block;
     }
@@ -210,6 +186,7 @@
     }
 
     &.style-3 {
+        grid-template-columns: 100%;
         gap: 30px;
 
         .eael-cs-single-product {
