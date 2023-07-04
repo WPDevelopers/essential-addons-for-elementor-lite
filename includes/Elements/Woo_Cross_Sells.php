@@ -188,6 +188,36 @@ class Woo_Cross_Sells extends Widget_Base {
 			'step'    => 1,
 		] );
 
+		$this->add_control(
+			'eael_cross_sales_custom_size_img',
+			[
+				'label'        => esc_html__('Custom Size Image?', 'essential-addons-for-elementor-lite'),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'      => '',
+			]
+		);
+
+		$this->add_control(
+			'eael_cross_sales_force_square_type',
+			[
+				'label'     => esc_html__( 'Image Render Type', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'fill',
+				'options'   => [
+					'contain'  => esc_html__( 'Stretched', 'essential-addons-for-elementor-lite' ),
+					'fill'  => esc_html__( 'Stretched', 'essential-addons-for-elementor-lite' ),
+					'cover' => esc_html__( 'Cropped', 'essential-addons-for-elementor-lite' ),
+				],
+				'selectors' => [
+					'{{WRAPPER}} img' => 'object-fit: {{VALUE}};',
+				],
+				'condition' => [
+					'eael_cross_sales_custom_size_img' => 'yes',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 
 		/**
