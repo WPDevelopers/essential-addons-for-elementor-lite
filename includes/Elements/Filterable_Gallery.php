@@ -3136,7 +3136,7 @@ class Filterable_Gallery extends Widget_Base
 		$sorter_class = str_replace( '{', 'curlybracket', $sorter_class );
 		$sorter_class = str_replace( '}', 'curlybracket', $sorter_class );
 		$sorter_class = str_replace( '?', 'questionmark', $sorter_class );
-		$sorter_class = utf8_encode( $sorter_class );
+		$sorter_class = mb_convert_encoding( $sorter_class, 'UTF-8' );
 
 		return $sorter_class;
 	}
@@ -3284,7 +3284,8 @@ class Filterable_Gallery extends Widget_Base
             $gallery_store[$counter]['link'] = $gallery['eael_fg_gallery_img_link'];
             
             $gallery_store[$counter]['video_gallery_switch'] = $gallery['fg_video_gallery_switch'];
-            
+
+            $gallery['eael_fg_gallery_item_video_link'] = empty( $gallery['eael_fg_gallery_item_video_link'] ) ? '' : $gallery['eael_fg_gallery_item_video_link'];
             if (strpos($gallery['eael_fg_gallery_item_video_link'], 'youtu.be') != false) {
                 preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/', $gallery['eael_fg_gallery_item_video_link'], $matches);
                 $video_link = !empty($matches) ? sprintf('https://www.youtube.com/watch?v=%s', $matches[1]) : '';
