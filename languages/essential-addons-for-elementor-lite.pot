@@ -8527,7 +8527,7 @@ msgstr ""
 msgid "Image Size"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Carousel.php:3000
+#: ../includes/Elements/Woo_Product_Carousel.php:2999
 msgid "<p class=\"eael-no-posts-found\">No layout found!</p>"
 msgstr ""
 
@@ -9464,7 +9464,7 @@ msgid "Submit"
 msgstr ""
 
 #: ../includes/Traits/Helper.php:476
-msgid "<p> <i>📣</i> NEW: Essential Addons 5.7 is here, with new '<a target='_blank' href='%s'>SVG Draw</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>"
+msgid "<p> <i>📣</i> NEW: Essential Addons 5.8 is here, with new '<a target='_blank' href='%s'>Wrapper Link</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>"
 msgstr ""
 
 #: ../includes/Traits/Helper.php:538
