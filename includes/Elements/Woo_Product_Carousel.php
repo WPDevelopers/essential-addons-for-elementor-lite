@@ -3143,7 +3143,7 @@ class Woo_Product_Carousel extends Widget_Base {
 	    ];
 
 	    if ( $order_by == '_price' || $order_by == '_sku' ) {
-		    $args[ 'orderby' ]  = 'meta_value_num';
+		    $args[ 'orderby' ]  = 'meta_value meta_value_num';
 		    $args[ 'meta_key' ] = $order_by;
 	    } else {
 		    $args[ 'orderby' ] = $order_by;
