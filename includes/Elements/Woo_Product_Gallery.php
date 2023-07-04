@@ -262,6 +262,9 @@ class Woo_Product_Gallery extends Widget_Base {
 				'condition'   => [
 					'eael_woo_product_gallery_terms_show_all' => 'yes',
 				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -551,6 +554,9 @@ class Woo_Product_Gallery extends Widget_Base {
 			'default'     => esc_html__( 'Load More', 'essential-addons-for-elementor-lite' ),
 			'condition'   => [
 				'show_load_more' => [ 'yes', '1', 'true' ],
+			],
+			'ai' => [
+				'active' => false,
 			],
 		] );
 
@@ -1568,6 +1574,9 @@ class Woo_Product_Gallery extends Widget_Base {
 				'label'     => esc_html__( 'Sale Text', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::TEXT,
 				'separator' => 'before',
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 		$this->add_control(
@@ -1575,6 +1584,9 @@ class Woo_Product_Gallery extends Widget_Base {
 			[
 				'label' => esc_html__( 'Stock Out Text', 'essential-addons-for-elementor-lite' ),
 				'type'  => Controls_Manager::TEXT,
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
