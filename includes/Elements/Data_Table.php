@@ -112,6 +112,9 @@ class Data_Table extends Widget_Base {
                 'type' => Controls_Manager::TEXT,
                 'dynamic'   => ['active' => true],
                 'label_block' => false,
+				'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -123,6 +126,9 @@ class Data_Table extends Widget_Base {
                 'type' => Controls_Manager::TEXT,
                 'dynamic'   => ['active' => true],
                 'label_block' => false,
+				'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -216,6 +222,9 @@ class Data_Table extends Widget_Base {
 				'type'			=> Controls_Manager::TEXT,
                 'dynamic'     => [ 'active' => true ],
 				'label_block' 	=> false,
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -226,6 +235,9 @@ class Data_Table extends Widget_Base {
 				'type'			=> Controls_Manager::TEXT,
                 'dynamic'     => [ 'active' => true ],
 				'label_block'	=> false,
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -419,7 +431,10 @@ class Data_Table extends Widget_Base {
 				'label_block'	=> false,
 				'condition' 	=> [
 					'eael_data_table_content_row_type' => 'col'
-				]
+				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -432,7 +447,10 @@ class Data_Table extends Widget_Base {
 				'label_block'	=> false,
 				'condition' 	=> [
 					'eael_data_table_content_row_type' => 'col'
-				]
+				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
