@@ -692,6 +692,9 @@ class Filterable_Gallery extends Widget_Base
                 'default' => [
                     'url' => EAEL_PLUGIN_URL . '/assets/front-end/img/flexia-preview.jpg',
                 ],
+                'ai' => [
+                    'active' => false,
+                ],
             ]
         );
         
@@ -705,6 +708,9 @@ class Filterable_Gallery extends Widget_Base
                 ],
                 'condition' => [
                     'fg_video_gallery_switch' => 'true',
+                ],
+                'ai' => [
+                    'active' => false,
                 ],
             ]
         );

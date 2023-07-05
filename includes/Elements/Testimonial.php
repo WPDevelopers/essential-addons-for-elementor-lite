@@ -103,6 +103,9 @@ class Testimonial extends Widget_Base {
 				'condition' => [
 					'eael_testimonial_enable_avatar' => 'yes',
 				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 

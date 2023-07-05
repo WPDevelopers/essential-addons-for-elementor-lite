@@ -164,6 +164,9 @@ class Info_Box extends Widget_Base
                 'condition' => [
                     'eael_infobox_img_or_icon' => 'img',
                 ],
+                'ai' => [
+                    'active' => false,
+                ],
             ]
         );
 
