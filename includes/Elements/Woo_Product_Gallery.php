@@ -296,6 +296,9 @@ class Woo_Product_Gallery extends Widget_Base {
 					'eael_woo_product_gallery_terms_show_all' => 'yes',
 					'eael_woo_product_gallery_terms_thumb' => 'yes',
 				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 

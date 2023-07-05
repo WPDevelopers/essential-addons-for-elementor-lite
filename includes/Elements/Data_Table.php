@@ -198,7 +198,10 @@ class Data_Table extends Widget_Base {
 				],
 				'condition' => [
 					'eael_data_table_header_icon_type'	=> 'image'
-				]
+				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 

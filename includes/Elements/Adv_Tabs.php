@@ -249,6 +249,9 @@ class Adv_Tabs extends Widget_Base
                 'condition' => [
                     'eael_adv_tabs_icon_type' => 'image',
                 ],
+                'ai' => [
+                    'active' => false,
+                ],
             ]
         );
 

@@ -188,6 +188,9 @@ class Image_Accordion extends Widget_Base {
                 'default'     => [
                     'url' => EAEL_PLUGIN_URL . '/assets/front-end/img/accordion.png',
                 ],
+                'ai' => [
+                    'active' => false,
+                ],
             ]
         );
 

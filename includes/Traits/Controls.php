@@ -601,7 +601,10 @@ trait Controls
 			        'type'              => Controls_Manager::MEDIA,
 			        'condition'         => [
 				        'eael_show_fallback_img'    => 'yes'
-			        ]
+                    ],
+                    'ai' => [
+                        'active' => false,
+                    ],
 		        ]
 	        );
         }
@@ -905,6 +908,9 @@ trait Controls
                     ],
                     'condition' => [
                         'eael_show_image_or_icon' => 'img',
+                    ],
+                    'ai' => [
+                        'active' => false,
                     ],
                 ]
             );
