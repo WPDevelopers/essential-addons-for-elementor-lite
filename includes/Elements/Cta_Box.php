@@ -159,6 +159,9 @@ class Cta_Box extends Widget_Base
                 'condition' => [
                     'eael_cta_color_type' => ['cta-bg-img', 'cta-bg-img-fixed'],
                 ],
+                'ai' => [
+                    'active' => false,
+                ],
             ]
         );
 

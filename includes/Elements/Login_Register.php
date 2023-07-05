@@ -1270,6 +1270,9 @@ class Login_Register extends Widget_Base {
 			'default' => [
 				'url' => Utils::get_placeholder_image_src(),
 			],
+			'ai' => [
+				'active' => false,
+			],
 		] );
 
 		$this->add_group_control( Group_Control_Image_Size::get_type(), [
@@ -1323,6 +1326,9 @@ class Login_Register extends Widget_Base {
 			],
 			'default' => [
 				'url' => Utils::get_placeholder_image_src(),
+			],
+			'ai' => [
+				'active' => false,
 			],
 		] );
 

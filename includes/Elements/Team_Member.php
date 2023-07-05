@@ -76,6 +76,9 @@ class Team_Member extends Widget_Base {
 				'default' => [
 					'url' => Utils::get_placeholder_image_src(),
 				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 

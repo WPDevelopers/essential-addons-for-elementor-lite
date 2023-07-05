@@ -233,6 +233,9 @@ class Sticky_Video extends Widget_Base
                     'eael_video_source' => 'self_hosted',
                     'eaelsv_link_external' => '',
                 ],
+                'ai' => [
+                    'active' => false,
+                ],
             ]
         );
 
@@ -264,6 +267,9 @@ class Sticky_Video extends Widget_Base
                 'condition' => [
                     'eael_video_source' => 'self_hosted',
                     'eael_video_source_external' => '',
+                ],
+                'ai' => [
+                    'active' => false,
                 ],
             ]
         );
@@ -405,6 +411,9 @@ class Sticky_Video extends Widget_Base
                 ],
                 'default' => [
                     'url' => \Elementor\Utils::get_placeholder_image_src(),
+                ],
+                'ai' => [
+                    'active' => false,
                 ],
             ]
         );

@@ -223,6 +223,9 @@ class Flip_Box extends Widget_Base
 			    'condition' => [
 				    'eael_flipbox_img_or_icon' => 'img',
 			    ],
+                'ai' => [
+                    'active' => false,
+                ],
 		    ]
 	    );
 
@@ -457,6 +460,9 @@ class Flip_Box extends Widget_Base
 			    'condition' => [
 				    'eael_flipbox_img_or_icon_back' => 'img',
 			    ],
+                'ai' => [
+                    'active' => false,
+                ],
 		    ]
 	    );
 
