@@ -184,7 +184,10 @@ class Tooltip extends Widget_Base {
 				],
 				'condition' => [
 					'eael_tooltip_type' => [ 'image' ]
-				]
+				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 

@@ -173,6 +173,9 @@ class Feature_List extends Widget_Base {
                 'condition' => [
                     'eael_feature_list_icon_type' => 'image',
                 ],
+                'ai' => [
+                    'active' => false,
+                ],
             ]
         );
 
