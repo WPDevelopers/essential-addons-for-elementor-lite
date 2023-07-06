@@ -2604,10 +2604,6 @@ class Woo_Product_Gallery extends Widget_Base {
 			}
 		}
 
-		if( isset( $args_tax_query_combined ) ){
-			$args[ 'tax_query' ][] = $args_tax_query_combined;
-		}
-
 		$args[ 'meta_query' ] = [ 'relation' => 'AND' ];
 
 		if ( get_option( 'woocommerce_hide_out_of_stock_items' ) == 'yes' ) {
@@ -2658,6 +2654,10 @@ class Woo_Product_Gallery extends Widget_Base {
 			$args[ 'meta_key' ] = '_wc_average_rating';
 			$args[ 'orderby' ]  = 'meta_value_num';
 			$args[ 'order' ]    = 'DESC';
+		}
+
+		if( isset( $args_tax_query_combined ) ){
+			$args[ 'tax_query' ][] = $args_tax_query_combined;
 		}
 
 		return $args;
