@@ -218,7 +218,10 @@ class Betterdocs_Category_Box extends Widget_Base {
                     'condition' => [
                         'show_count' => 'true',
                         'layout_template' => 'default'
-                    ]
+                    ],
+                    'ai' => [
+                        'active' => false,
+                    ],
                 ]
             );
 

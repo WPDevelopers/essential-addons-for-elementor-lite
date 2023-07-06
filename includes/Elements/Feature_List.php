@@ -173,6 +173,9 @@ class Feature_List extends Widget_Base {
                 'condition' => [
                     'eael_feature_list_icon_type' => 'image',
                 ],
+                'ai' => [
+                    'active' => false,
+                ],
             ]
         );
 
@@ -183,6 +186,9 @@ class Feature_List extends Widget_Base {
                 'type'    => Controls_Manager::TEXT,
                 'default' => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
                 'dynamic' => ['active' => true],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
