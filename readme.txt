@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.2
 Requires PHP: 7.0
-Stable tag: 5.8.0
+Stable tag: 5.8.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -249,6 +249,14 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.8.1 - 06/07/2023 =
+
+- Improved: Added PHP 8.2 Compatibility Support
+- Fixed: EA Login/Register Form | Added Filter support for redirecting URL
+- Fixed: Swiper JS issue with All the Carousel Widgets
+- Fixed: EA Table of Contents | TOC icon removing issue
+- Few minor bug fixes & improvements
 
 = 5.8.0 - 14/06/2023 =
 
