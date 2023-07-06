@@ -2628,22 +2628,6 @@ class Woo_Product_Gallery extends Widget_Base {
 					'operator' => 'NOT IN',
 				],
 			];
-
-			if ( $settings[ 'eael_product_gallery_categories' ] ) {
-				$args[ 'tax_query' ][] = [
-					'taxonomy' => 'product_cat',
-					'field'    => 'term_id',
-					'terms'    => $settings[ 'eael_product_gallery_categories' ],
-				];
-			}
-
-			if ( $settings[ 'eael_product_gallery_tags' ] ) {
-				$args[ 'tax_query' ][] = [
-					'taxonomy' => 'product_tag',
-					'field'    => 'term_id',
-					'terms'    => $settings[ 'eael_product_gallery_tags' ],
-				];
-			}
 		} else if ( $settings[ 'eael_product_gallery_product_filter' ] == 'best-selling-products' ) {
 			$args[ 'meta_key' ] = 'total_sales';
 			$args[ 'orderby' ]  = 'meta_value_num';
