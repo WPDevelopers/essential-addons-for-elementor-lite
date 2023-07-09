@@ -326,7 +326,7 @@ trait Elements {
 			[
 				'name'       => 'eael-woo-thank-you',
 				'title'      => __( 'Woo Thank You', 'essential-addons-for-elementor-lite' ),
-				'icon'       => 'eicon-nerd-chuckle',
+				'icon'       => 'eaicon-thank-you',
 				'categories' => '["essential-addons-elementor"]',
 			],
 		] );

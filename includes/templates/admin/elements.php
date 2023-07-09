@@ -605,8 +605,8 @@ $elements = [
 			[
 				'key'       => 'woo-thank-you',
 				'title'     => __( 'Woo Thank You', 'essential-addons-for-elementor-lite' ),
-				'demo_link' => 'https://essential-addons.com/elementor/woo-cart/',
-				'doc_link'  => 'https://essential-addons.com/elementor/docs/woocommerce-cart/',
+				'demo_link' => 'https://essential-addons.com/elementor/woo-thankyou/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/woocommerce-thankyou/',
 				'promotion' => 'new',
                 'is_pro'    => true
 			],
