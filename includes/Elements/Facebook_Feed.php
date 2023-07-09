@@ -99,6 +99,9 @@ class Facebook_Feed extends Widget_Base
                 'dynamic' => ['active' => true],
                 'label_block' => true,
                 'default' => '',
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -111,6 +114,9 @@ class Facebook_Feed extends Widget_Base
                 'default' => '',
                 'separator' => 'after',
                 'description' => __('<a href="https://app.essential-addons.com/facebook/" class="eael-btn" target="_blank">Get Credentials</a>', 'essential-addons-for-elementor-lite'),
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -481,6 +487,9 @@ class Facebook_Feed extends Widget_Base
                 'condition' => [
                     'show_load_more' => ['yes', '1', 'true'],
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
