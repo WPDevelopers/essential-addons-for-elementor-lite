@@ -224,6 +224,10 @@ class Woo_Cross_Sells extends Widget_Base {
 				'label'      => __( 'Height', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
+				'default'    => [
+					'size' => 100,
+					'unit' => '%',
+				],
 				'range'      => [
 					'px' => [
 						'min'  => 0,
@@ -237,8 +241,12 @@ class Woo_Cross_Sells extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .eael-cs-products-container .eael-cs-product-image'    => 'height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-cs-products-container .eael-cs-product-image'         => 'height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-cs-products-container.style-2 .eael-cs-product-image' => 'max-height: calc(100% - 78px);',
 				],
+				'condition'  => [
+					'eael_cross_sales_custom_size_img' => 'yes',
+				]
 			]
 		);
 
