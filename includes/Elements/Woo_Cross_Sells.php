@@ -199,7 +199,7 @@ class Woo_Cross_Sells extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_cross_sales_force_square_type',
+			'eael_cross_sales_img_render_type',
 			[
 				'label'     => esc_html__( 'Image Render Type', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::SELECT,
@@ -210,10 +210,34 @@ class Woo_Cross_Sells extends Widget_Base {
 					'cover'   => esc_html__( 'Cropped', 'essential-addons-for-elementor-lite' ),
 				],
 				'selectors' => [
-					'{{WRAPPER}} img' => 'object-fit: {{VALUE}};',
+					'{{WRAPPER}} .eael-cs-product-image img' => 'height: 100%; width: 100%; object-fit: {{VALUE}};',
 				],
 				'condition' => [
 					'eael_cross_sales_custom_size_img' => 'yes',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_cross_sales_custom_height',
+			[
+				'label'      => __( 'Height', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range'      => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 500,
+						'step' => 1,
+					],
+					'%'  => [
+						'min'  => 0,
+						'max'  => 100,
+						'step' => 1,
+					],
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-cs-products-container .eael-cs-product-image'    => 'height: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
