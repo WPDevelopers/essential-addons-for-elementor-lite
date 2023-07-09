@@ -292,6 +292,36 @@ class Woo_Cross_Sells extends Widget_Base {
 		] );
 
 		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'ea_section_woo_cross_sells_product_details_style',
+			[
+				'label' => esc_html__( 'Product Details', 'essential-addons-for-elementor-lite' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name'     => 'eael_woo_cross_sells_product_details_bg',
+				'types'    => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .eael-cs-product-info',
+			]
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'ea_section_woo_cross_sells_button_style',
+			[
+				'label' => esc_html__( 'Buttons', 'essential-addons-for-elementor-lite' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+
+		$this->end_controls_section();
 	}
 
 	protected function render() {
