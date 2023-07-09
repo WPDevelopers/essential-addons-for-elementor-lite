@@ -258,23 +258,38 @@ class Woo_Cross_Sells extends Widget_Base {
 		 * -------------------------------------------
 		 */
 		$this->start_controls_section(
-			'ea_section_woo_cart_general_style',
+			'ea_section_woo_cross_sells_thumbnail_style',
 			[
-				'label' => esc_html__( 'General', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Thumbnail Area', 'essential-addons-for-elementor-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
 
-		$this->add_control(
-			'ea_woo_cart_bg_color',
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
 			[
-				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .ea-woo-cart' => 'background-color: {{VALUE}};',
-				],
+				'name'     => 'eael_woo_cross_sells_thumbnail_bg',
+				'types'    => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .eael-cs-product-image',
 			]
 		);
+
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "eael_woo_cross_sells_thumnbail_border",
+			'selector' => '{{WRAPPER}} .eael-cs-product-image',
+		] );
+
+		$this->add_control( "eael_woo_cross_sells_thumnbail_border_radius", [
+			'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .eael-cs-product-image' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
 
 		$this->end_controls_section();
 	}

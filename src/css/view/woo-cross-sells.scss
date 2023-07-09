@@ -6,6 +6,10 @@
         display: block;
     }
 
+    .eael-cs-product-image {
+        overflow: hidden;
+    }
+
     &.style-1 {
         .eael-cs-single-product {
             position: relative;
@@ -97,7 +101,6 @@
 
             .eael-cs-product-image {
                 position: relative;
-                overflow: hidden;
 
                 .eael-cs-product-buttons {
                     position: absolute;
