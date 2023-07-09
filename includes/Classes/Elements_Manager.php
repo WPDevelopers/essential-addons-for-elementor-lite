@@ -22,6 +22,9 @@ class Elements_Manager {
 	 */
 	const JS_KEY = '_eael_custom_js';
 
+	public $css_print_method;
+	public $js_print_method;
+
 	/**
 	 * Post id
 	 * @var string

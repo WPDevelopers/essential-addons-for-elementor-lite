@@ -128,7 +128,10 @@ class Business_Reviews extends Widget_Base {
 			],
 			'condition'   => [
 				'eael_business_reviews_sources' => 'google-reviews',
-			]
+			],
+			'ai' => [
+				'active' => false,
+			],
 		] );
 
 		$this->add_control(
@@ -596,7 +599,10 @@ class Business_Reviews extends Widget_Base {
 			'default'     => '',
 			'condition'   => [
 				'eael_business_reviews_business_name' => 'yes'
-			]
+			],
+			'ai' => [
+				'active' => false,
+			],
 		] );
 
 		$this->add_control(
@@ -620,6 +626,9 @@ class Business_Reviews extends Widget_Base {
 			'condition'   => [
 				'eael_business_reviews_sources'         => 'google-reviews',
 				'eael_business_reviews_business_rating' => 'yes'
+			],
+			'ai' => [
+				'active' => false,
 			],
 		] );
 
@@ -2755,8 +2764,14 @@ class Business_Reviews extends Widget_Base {
 			'id'    => 'eael-google-reviews-' . esc_attr( $this->get_id() ),
 		] );
 
+		$swiper_class = $swiper_version_class = '';
+        if ( class_exists( 'Elementor\Plugin' ) ) {
+            $swiper_class           = \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_swiper_latest' ) ? 'swiper' : 'swiper-container';
+            $swiper_version_class   = 'swiper' === $swiper_class ? 'swiper-8' : 'swiper-8-lower';
+        }
+
 		$this->add_render_attribute( 'eael-google-reviews-content', [
-			'class'               => [ 'eael-google-reviews-content', 'swiper', 'swiper-container', 'swiper-container-' . esc_attr( $this->get_id() ) ],
+			'class'               => [ 'eael-google-reviews-content', esc_attr( $swiper_class ), esc_attr( $swiper_version_class ), 'swiper-container-' . esc_attr( $this->get_id() ) ],
 			'data-pagination'     => '.swiper-pagination-' . esc_attr( $this->get_id() ),
 			'data-arrow-next'     => '.swiper-button-next-' . esc_attr( $this->get_id() ),
 			'data-arrow-prev'     => '.swiper-button-prev-' . esc_attr( $this->get_id() ),
