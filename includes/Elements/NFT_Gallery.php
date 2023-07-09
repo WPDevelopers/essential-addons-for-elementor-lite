@@ -92,6 +92,9 @@ class NFT_Gallery extends Widget_Base {
 				'placeholder' => 'Enter API key',
 				'description' => sprintf( __( 'Get your API key from <a href="https://docs.opensea.io/reference/request-an-api-key" class="eael-btn" target="_blank">%s</a>',
 					'essential-addons-for-elementor-lite' ), esc_html( 'here' ) ),
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -138,6 +141,9 @@ class NFT_Gallery extends Widget_Base {
 					'eael_nft_gallery_opensea_type'     => 'assets',
 					'eael_nft_gallery_opensea_filterby' => 'collection-slug',
 				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -175,6 +181,9 @@ class NFT_Gallery extends Widget_Base {
 						],
 
 					],
+				],
+				'ai' => [
+					'active' => false,
 				],
 			]
 		);
@@ -535,6 +544,9 @@ class NFT_Gallery extends Widget_Base {
 			'condition'   => [
 				'eael_nft_gallery_show_owner' => 'yes'
 			],
+			'ai' => [
+				'active' => false,
+			],
 		] );
 
 		$this->add_control( 'eael_nft_gallery_content_created_by_label', [
@@ -545,6 +557,9 @@ class NFT_Gallery extends Widget_Base {
 			'condition'   => [
 				'eael_nft_gallery_show_creator' => 'yes'
 			],
+			'ai' => [
+				'active' => false,
+			],
 		] );
 
 		$this->add_control( 'eael_nft_gallery_content_view_details_label', [
@@ -552,6 +567,9 @@ class NFT_Gallery extends Widget_Base {
 			'type'        => Controls_Manager::TEXT,
 			'label_block' => false,
 			'default'     => esc_html__( 'View Details', 'essential-addons-for-elementor-lite' ),
+			'ai' => [
+				'active' => false,
+			],
 		] );
 
 		$this->add_control( 'eael_nft_gallery_content_no_items_label', [
@@ -559,6 +577,9 @@ class NFT_Gallery extends Widget_Base {
 			'type'        => Controls_Manager::TEXT,
 			'label_block' => false,
 			'default'     => esc_html__( 'No Items Found!', 'essential-addons-for-elementor-lite' ),
+			'ai' => [
+				'active' => false,
+			],
 		] );
 
 		$this->add_control( 'eael_nft_gallery_content_last_sale_label', [
@@ -566,6 +587,9 @@ class NFT_Gallery extends Widget_Base {
 			'type'        => Controls_Manager::TEXT,
 			'label_block' => false,
 			'default'     => esc_html__( 'Last sale:', 'essential-addons-for-elementor-lite' ),
+			'ai' => [
+				'active' => false,
+			],
 		] );
 
 		$this->add_control( 'eael_nft_gallery_content_ends_in_label', [
@@ -573,6 +597,9 @@ class NFT_Gallery extends Widget_Base {
 			'type'        => Controls_Manager::TEXT,
 			'label_block' => false,
 			'default'     => esc_html__( 'Ends in:', 'essential-addons-for-elementor-lite' ),
+			'ai' => [
+				'active' => false,
+			],
 		] );
 
 		$this->end_controls_section();
@@ -607,6 +634,9 @@ class NFT_Gallery extends Widget_Base {
 				'condition'   => [
 					'eael_nft_gallery_pagination' => 'yes',
 				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -620,6 +650,9 @@ class NFT_Gallery extends Widget_Base {
 				'condition' => [
 					'eael_nft_gallery_pagination' => 'yes',
 				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -632,6 +665,9 @@ class NFT_Gallery extends Widget_Base {
 				'default'   => __( 'No more items!', 'essential-addons-for-elementor-lite' ),
 				'condition' => [
 					'eael_nft_gallery_pagination' => 'yes',
+				],
+				'ai' => [
+					'active' => false,
 				],
 			]
 		);
