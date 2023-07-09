@@ -86,6 +86,9 @@ class Creative_Button extends Widget_Base
                     'default'     => 'Click Me!',
                     'placeholder' => __('Enter button text', 'essential-addons-for-elementor-lite'),
                     'title'       => __('Enter button text here', 'essential-addons-for-elementor-lite'),
+                    'ai' => [
+                        'active' => false,
+                    ],
                 ]
             );
 
@@ -101,6 +104,9 @@ class Creative_Button extends Widget_Base
                     'default'     => 'Go!',
                     'placeholder' => __('Enter button secondary text', 'essential-addons-for-elementor-lite'),
                     'title'       => __('Enter button secondary text here', 'essential-addons-for-elementor-lite'),
+                    'ai' => [
+                        'active' => false,
+                    ],
                 ]
             );
 

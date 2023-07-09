@@ -315,6 +315,9 @@ class Woo_Product_Carousel extends Widget_Base {
                 'condition'   => [
                     'eael_product_carousel_excerpt' => 'yes',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         
@@ -462,7 +465,10 @@ class Woo_Product_Carousel extends Widget_Base {
                 'label'     => __( 'Not Found Message', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::TEXT,
                 'default'   => __( 'Products Not Found', 'essential-addons-for-elementor-lite' ),
-                'separator' => 'before'
+                'separator' => 'before',
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -896,6 +902,9 @@ class Woo_Product_Carousel extends Widget_Base {
 			    'label'       => esc_html__( 'Sale Text', 'essential-addons-for-elementor-lite' ),
 			    'type'        => Controls_Manager::TEXT,
                 'separator' => 'before',
+                'ai' => [
+					'active' => false,
+				],
 		    ]
 	    );
 	    $this->add_control(
@@ -903,6 +912,9 @@ class Woo_Product_Carousel extends Widget_Base {
 		    [
 			    'label'       => esc_html__( 'Stock Out Text', 'essential-addons-for-elementor-lite' ),
 			    'type'        => Controls_Manager::TEXT,
+                'ai' => [
+					'active' => false,
+				],
 		    ]
 	    );
         
@@ -2860,7 +2872,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 'swiper-container-wrap-dots-' . $settings[ 'dots_position' ] );
         }
         
-        $swiper_version_class = '';
+        $swiper_class = $swiper_version_class = '';
         if ( class_exists( 'Elementor\Plugin' ) ) {
             $swiper_class           = \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_swiper_latest' ) ? 'swiper' : 'swiper-container';
             $swiper_version_class   = 'swiper' === $swiper_class ? 'swiper-8' : 'swiper-8-lower';
@@ -2871,9 +2883,8 @@ class Woo_Product_Carousel extends Widget_Base {
             [
                 'class'           => [
                     'woocommerce',
-                    'swiper',
+                    esc_attr( $swiper_class ),
                     esc_attr( $swiper_version_class ),
-                    'swiper-container',
                     'eael-woo-product-carousel',
                     'swiper-container-' . esc_attr( $this->get_id() ),
                     'eael-product-appender-' . esc_attr( $this->get_id() ),
