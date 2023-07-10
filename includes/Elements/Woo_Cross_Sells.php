@@ -408,6 +408,17 @@ class Woo_Cross_Sells extends Widget_Base {
 			]
 		);
 
+		$this->start_controls_tabs(
+			'eael_woo_cross_sells_style_tabs'
+		);
+
+		$this->start_controls_tab(
+			'style_normal_tab',
+			[
+				'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
 		$this->add_control(
 			'eael_woo_cross_sells_button_color',
 			[
@@ -421,20 +432,20 @@ class Woo_Cross_Sells extends Widget_Base {
 		);
 
 		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-				'name'     => 'eael_woo_cross_sells_button_typography',
-				'selector' => '{{WRAPPER}} .eael-cs-products-container .eael-cs-single-product .eael-cs-product-buttons a,
-				{{WRAPPER}} .eael-cs-products-container .eael-cs-single-product .eael-cs-product-buttons a i',
-			]
-		);
-
-		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
 				'name'     => 'eael_woo_cross_sells_button_bg',
 				'types'    => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .eael-cs-products-container .eael-cs-single-product .eael-cs-product-buttons a',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'eael_woo_cross_sells_button_typography',
+				'selector' => '{{WRAPPER}} .eael-cs-products-container .eael-cs-single-product .eael-cs-product-buttons a,
+				{{WRAPPER}} .eael-cs-products-container .eael-cs-single-product .eael-cs-product-buttons a i',
 			]
 		);
 
@@ -462,6 +473,65 @@ class Woo_Cross_Sells extends Widget_Base {
 				'selector' => '{{WRAPPER}} .eael-cs-products-container .eael-cs-single-product .eael-cs-product-buttons a',
 			]
 		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'style_hover_tab',
+			[
+				'label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cross_sells_button_color_hover',
+			[
+				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-cs-products-container .eael-cs-single-product .eael-cs-product-buttons a:hover,
+				{{WRAPPER}} .eael-cs-products-container .eael-cs-single-product .eael-cs-product-buttons a:hover i' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name'     => 'eael_woo_cross_sells_button_bg_hover',
+				'types'    => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .eael-cs-products-container .eael-cs-single-product .eael-cs-product-buttons a:hover',
+			]
+		);
+
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "eael_woo_cross_sells_button_border_hover",
+			'selector' => '{{WRAPPER}} .eael-cs-products-container .eael-cs-single-product .eael-cs-product-buttons a:hover',
+		] );
+
+		$this->add_control( "eael_woo_cross_sells_button_border_radius_hover", [
+			'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .eael-cs-products-container .eael-cs-single-product .eael-cs-product-buttons a:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'eael_woo_cross_sells_button_box_shadow_hover',
+				'selector' => '{{WRAPPER}} .eael-cs-products-container .eael-cs-single-product .eael-cs-product-buttons a:hover',
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
 
 		$this->end_controls_section();
 	}
