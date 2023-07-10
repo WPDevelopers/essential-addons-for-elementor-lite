@@ -504,6 +504,21 @@ class Woo_Cross_Sells extends Widget_Base {
 			]
 		);
 
+		$this->add_control( "eael_woo_cross_sells_button_padding", [
+			'label'      => __( 'Padding', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .eael-cs-products-container.style-3 .eael-cs-single-product .eael-cs-product-buttons a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+			'condition'  => [
+				'eael_dynamic_template_layout' => 'style-3'
+			]
+		] );
+
 		$this->start_controls_tabs(
 			'eael_woo_cross_sells_style_tabs'
 		);
