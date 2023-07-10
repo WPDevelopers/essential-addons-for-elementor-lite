@@ -7,6 +7,7 @@
 
 namespace Essential_Addons_Elementor\Traits;
 
+use Automattic\WooCommerce\Utilities\OrderUtil;
 use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 use Essential_Addons_Elementor\Template\Woocommerce\Checkout\Woo_Checkout_Helper;
 use Essential_Addons_Elementor\Traits\Template_Query;
@@ -560,7 +561,7 @@ trait Ajax_Handler {
 
 		global $post, $product;
 		$product = wc_get_product( $product_id );
-		$post    = get_post( $product_id );
+		$order 	= OrderUtil::custom_orders_table_usage_is_enabled() ? wc_get_order( $product_id ) : get_post( $product_id );
 		setup_postdata( $post );
 
 		$settings = $this->eael_get_widget_settings( $page_id, $widget_id );
