@@ -254,9 +254,68 @@ class Woo_Cross_Sells extends Widget_Base {
 
 		/**
 		 * -------------------------------------------
-		 * Tab Style General Style
+		 * Tab Style
 		 * -------------------------------------------
 		 */
+		$this->start_controls_section(
+			'ea_section_woo_cross_sells_general_style',
+			[
+				'label' => esc_html__( 'General', 'essential-addons-for-elementor-lite' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_cross_sales_column_gap',
+			[
+				'label'      => __( 'Horizontal Gap', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range'      => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 200,
+						'step' => 1,
+					],
+					'%'  => [
+						'min'  => 0,
+						'max'  => 100,
+						'step' => 1,
+					],
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-cs-products-container:not(.style-3),
+					{{WRAPPER}} .eael-cs-products-container.style-3 .eael-cs-single-product' => 'column-gap: {{SIZE}}{{UNIT}};',
+				]
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_cross_sales_row_gap',
+			[
+				'label'      => __( 'Vertical Gap', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range'      => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 200,
+						'step' => 1,
+					],
+					'%'  => [
+						'min'  => 0,
+						'max'  => 100,
+						'step' => 1,
+					],
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-cs-products-container' => 'row-gap: {{SIZE}}{{UNIT}};',
+				]
+			]
+		);
+
+		$this->end_controls_section();
+
 		$this->start_controls_section(
 			'ea_section_woo_cross_sells_thumbnail_style',
 			[
