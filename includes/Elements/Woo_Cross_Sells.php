@@ -327,6 +327,62 @@ class Woo_Cross_Sells extends Widget_Base {
 			],
 		] );
 
+		$this->add_control(
+			'eael_woo_cross_sells_title_heading',
+			[
+				'type'      => Controls_Manager::HEADING,
+				'label'     => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cross_sells_title_color',
+			[
+				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-cs-product-info .eael-cs-product-title' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'eael_woo_cross_sells_title_typography',
+				'selector' => '{{WRAPPER}} .eael-cs-products-container .eael-cs-product-info .eael-cs-product-title',
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cross_sells_price_heading',
+			[
+				'type'      => Controls_Manager::HEADING,
+				'label'     => esc_html__( 'Price', 'essential-addons-for-elementor-lite' ),
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cross_sells_price_color',
+			[
+				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-cs-product-info .eael-cs-product-price' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'eael_woo_cross_sells_price_typography',
+				'selector' => '{{WRAPPER}} .eael-cs-products-container .eael-cs-product-info .eael-cs-product-price',
+			]
+		);
+
 		$this->end_controls_section();
 
 		$this->start_controls_section(
