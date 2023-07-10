@@ -219,7 +219,7 @@ function PlayerPlay(a, b) {
   a.on("play", function (event) {
     eaelsvDomHeight = GetDomElementHeight(b);
     jQuery(".eael-sticky-video-player2").removeAttr("id");
-    jQuery(".eael-sticky-video-player2").removeClass("out");
+    jQuery(".eael-sticky-video-player2:not(.out)").removeClass("out");
     b.attr("id", "videobox");
 
     videoIsActive = "on";
