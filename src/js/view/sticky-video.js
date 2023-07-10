@@ -149,25 +149,43 @@ jQuery(window).on("elementor/frontend/init", function () {
 });
 
 jQuery(window).scroll(function () {
-  var scrollTop = jQuery(window).scrollTop();
-  var scrollBottom = jQuery(document).height() - scrollTop;
-  if (scrollBottom > jQuery(window).height() + 400) {
-    if (scrollTop >= eaelsvDomHeight) {
-      if (videoIsActive == "on") {
-        jQuery("#videobox")
-          .find(".eaelsv-sticky-player-close")
-          .css("display", "block");
-        jQuery("#videobox").removeClass("in").addClass("out");
-        PositionStickyPlayer(eaelsvPosition, eaelsvHeight, eaelsvWidth);
-      }
-    } else {
-      jQuery(".eaelsv-sticky-player-close").hide();
-      jQuery("#videobox").removeClass("out").addClass("in");
-      jQuery(".eael-sticky-video-player2").removeAttr("style");
+    var scrollTop = jQuery(window).scrollTop();
+    var scrollBottom = jQuery(document).height() - scrollTop;
+    if (scrollBottom > jQuery(window).height() + 400) {
+
+        if (videoIsActive == "on") {
+            let wrapper = jQuery('.eael-sticky-video-wrapper'),
+                height = GetHeightFromStyle(wrapper.attr('style'));
+            wrapper.attr('style','height:'+ height+'px !important;');
+        }
+
+        if (scrollTop >= eaelsvDomHeight) {
+            if (videoIsActive == "on") {
+                jQuery("#videobox")
+                    .find(".eaelsv-sticky-player-close")
+                    .css("display", "block");
+                jQuery("#videobox").removeClass("in").addClass("out");
+                PositionStickyPlayer(eaelsvPosition, eaelsvHeight, eaelsvWidth);
+            }
+        } else {
+            jQuery(".eaelsv-sticky-player-close").hide();
+            jQuery("#videobox").removeClass("out").addClass("in");
+            jQuery(".eael-sticky-video-player2").removeAttr("style");
+        }
     }
-  }
 });
 
+function GetHeightFromStyle(style) {
+    if (!style) return 0;
+    var cssPairs = style.split(";");
+    for (var i = 0; i < cssPairs.length; i++) {
+        var pair = cssPairs[i].trim(); // Trim any leading/trailing whitespace
+        if (pair.indexOf("height") !== -1) {
+            return parseFloat(pair.match(/\d+(\.\d+)?/)[0]);
+            break;
+        }
+    }
+}
 function GetDomElementHeight(elem) {
   var contentHeight = jQuery(elem).parent().height();
   var expHeight = (scrollHeight * contentHeight) / 100;
