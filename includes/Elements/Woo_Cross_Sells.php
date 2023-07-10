@@ -310,6 +310,23 @@ class Woo_Cross_Sells extends Widget_Base {
 			]
 		);
 
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "eael_woo_cross_sells_product_details_border",
+			'selector' => '{{WRAPPER}} .eael-cs-product-info',
+		] );
+
+		$this->add_control( "eael_woo_cross_sells_product_details_border_radius", [
+			'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .eael-cs-product-info' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+
 		$this->end_controls_section();
 
 		$this->start_controls_section(
