@@ -607,7 +607,8 @@ $elements = [
 				'title'     => __( 'Woo Cross Sells', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/woo-cross-sells/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/woocommerce-cross-sells/',
-				'promotion' => 'new'
+				'promotion' => 'new',
+				'is_pro'    => true
 			],
 			[
 				'key'       => 'woo-product-compare',
