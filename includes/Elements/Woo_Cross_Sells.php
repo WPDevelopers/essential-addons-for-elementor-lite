@@ -350,6 +350,32 @@ class Woo_Cross_Sells extends Widget_Base {
 			],
 		] );
 
+		$this->add_responsive_control(
+			'eael_cross_sales_thumbnail_width',
+			[
+				'label'      => __( 'Thumbnail Width', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ '%' ],
+				'default'    => [
+					'size' => 25,
+					'unit' => '%',
+				],
+				'range'      => [
+					'%' => [
+						'min'  => 0,
+						'max'  => 100,
+						'step' => 1,
+					],
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-cs-products-container.style-3 .eael-cs-single-product' => 'grid-template-columns: {{SIZE}}% auto;',
+				],
+				'condition'  => [
+					'eael_dynamic_template_layout' => 'style-3'
+				]
+			]
+		);
+
 		$this->end_controls_section();
 
 		$this->start_controls_section(
