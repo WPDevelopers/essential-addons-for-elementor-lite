@@ -73,7 +73,10 @@ class Fancy_Text extends Widget_Base {
 				'placeholder' => esc_html__( 'Place your prefix text', 'essential-addons-for-elementor-lite'),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => esc_html__( 'This is the ', 'essential-addons-for-elementor-lite'),
-				'dynamic'     => [ 'active' => true ]
+				'dynamic'     => [ 'active' => true ],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -85,7 +88,10 @@ class Fancy_Text extends Widget_Base {
 				'label'			=> esc_html__( 'Fancy String', 'essential-addons-for-elementor-lite'),
 				'type'			=> Controls_Manager::TEXT,
 				'label_block'	=> true,
-				'dynamic'		=> [ 'active' => true ]
+				'dynamic'		=> [ 'active' => true ],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -118,7 +124,10 @@ class Fancy_Text extends Widget_Base {
 				'placeholder' => esc_html__( 'Place your suffix text', 'essential-addons-for-elementor-lite'),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => esc_html__( ' of the sentence.', 'essential-addons-for-elementor-lite'),
-				'dynamic'     => [ 'active' => true ]
+				'dynamic'     => [ 'active' => true ],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
