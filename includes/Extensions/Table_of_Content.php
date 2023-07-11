@@ -115,6 +115,9 @@ class Table_of_Content
                 'condition' => [
                     'eael_ext_table_of_content' => 'yes',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -169,6 +172,9 @@ class Table_of_Content
                 'condition' => [
                     'eael_ext_table_of_content' => 'yes',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -195,6 +201,9 @@ class Table_of_Content
                 'condition' => [
                     'eael_ext_table_of_content' => 'yes',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 

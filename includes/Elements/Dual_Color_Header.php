@@ -156,6 +156,9 @@ class Dual_Color_Header extends Widget_Base
 				'label_block' => true,
 				'default' => esc_html__('Dual Heading', 'essential-addons-for-elementor-lite'),
 				'dynamic' => ['action' => true],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -167,6 +170,9 @@ class Dual_Color_Header extends Widget_Base
 				'label_block' => true,
 				'default' => esc_html__('Example', 'essential-addons-for-elementor-lite'),
 				'dynamic' => ['action' => true],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
