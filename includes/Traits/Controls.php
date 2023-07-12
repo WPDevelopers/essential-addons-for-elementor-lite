@@ -538,7 +538,7 @@ trait Controls
                 [
                     'label' => esc_html__('Item Style', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT,
-                    'default' => 'Cards',
+                    'default' => 'eael-cards',
                     'options' => [
                         'eael-hoverer' => esc_html__('Hoverer', 'essential-addons-for-elementor-lite'),
                         'eael-cards' => esc_html__('Cards', 'essential-addons-for-elementor-lite'),
