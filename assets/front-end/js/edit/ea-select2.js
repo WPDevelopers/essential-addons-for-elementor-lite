@@ -5,8 +5,9 @@
             var IDSelect2 = $(ID).select2({
                 minimumInputLength: 3,
                 ajax: {
+                    method: "POST",
                     url: eael_select2_localize.ajaxurl + "?action=eael_select2_search_post&post_type=" + obj.data.source_type + '&source_name=' + obj.data.source_name,
-                    dataType: 'json'
+                    dataType: 'json',
                 },
                 initSelection: function (element, callback) {
                     if (!obj.multiple) {
