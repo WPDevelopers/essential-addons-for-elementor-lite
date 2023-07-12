@@ -348,7 +348,9 @@ class Caldera_Forms extends Widget_Base
             [
                 'name' => 'form_description_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Global_Typography::TYPOGRAPHY_ACCENT,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_ACCENT,
+                ],
                 'selector' => '{{WRAPPER}} .eael-contact-form-description',
                 'condition' => [
                     'custom_title_description' => 'yes',
