@@ -532,6 +532,21 @@ trait Controls
             ]
         );
 
+        if ('eael-post-carousel' === $wb->get_name()) {
+            $wb->add_control(
+                'eael_post_carousel_item_style',
+                [
+                    'label' => esc_html__('Item Style', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SELECT,
+                    'default' => 'Cards',
+                    'options' => [
+                        'eael-hoverer' => esc_html__('Hoverer', 'essential-addons-for-elementor-lite'),
+                        'eael-cards' => esc_html__('Cards', 'essential-addons-for-elementor-lite'),
+                    ],
+                ]
+            );
+        }
+
         if ('eael-post-grid' === $wb->get_name()) {
             $wb->add_responsive_control(
                 'eael_post_grid_columns',
