@@ -14,7 +14,7 @@ use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use Elementor\Icons_Manager;
 use Elementor\Modules\DynamicTags\Module as TagsModule;
-use \Elementor\Core\Schemes\Typography;
+use \Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use \Elementor\Widget_Base;
 use Essential_Addons_Elementor\Classes\Helper;
 
@@ -497,7 +497,7 @@ class Creative_Button extends Widget_Base
                 Group_Control_Typography::get_type(),
                 [
                     'name'     => 'eael_creative_button_typography',
-                    'scheme'   => Typography::TYPOGRAPHY_1,
+                    'scheme'   => Global_Typography::TYPOGRAPHY_PRIMARY,
                     'selector' => '{{WRAPPER}} .eael-creative-button .cretive-button-text, {{WRAPPER}} .eael-creative-button--winona::after, {{WRAPPER}} .eael-creative-button--rayen::before, {{WRAPPER}} .eael-creative-button--tamaya::after, {{WRAPPER}} .eael-creative-button--tamaya::before',
                 ]
             );
