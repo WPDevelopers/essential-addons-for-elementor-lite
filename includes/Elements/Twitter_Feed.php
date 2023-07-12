@@ -9,6 +9,7 @@ if (!defined('ABSPATH')) {
 
 use \Elementor\Controls_Manager;
 use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
@@ -1161,9 +1162,8 @@ class Twitter_Feed extends Widget_Base
             [
                 'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => \Elementor\Controls_Manager::COLOR,
-                'scheme' => [
-                    'type' => \Elementor\Core\Schemes\Color::get_type(),
-                    'value' => \Elementor\Core\Schemes\Color::COLOR_1,
+                'global' => [
+	                'default' => Global_Colors::COLOR_PRIMARY
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-twitter-feed-item .eael-twitter-feed-item-icon' => 'color: {{VALUE}}',
