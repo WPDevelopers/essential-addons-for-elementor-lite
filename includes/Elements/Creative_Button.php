@@ -497,7 +497,9 @@ class Creative_Button extends Widget_Base
                 Group_Control_Typography::get_type(),
                 [
                     'name'     => 'eael_creative_button_typography',
-                    'scheme'   => Global_Typography::TYPOGRAPHY_PRIMARY,
+                    'global' => [
+	                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                    ],
                     'selector' => '{{WRAPPER}} .eael-creative-button .cretive-button-text, {{WRAPPER}} .eael-creative-button--winona::after, {{WRAPPER}} .eael-creative-button--rayen::before, {{WRAPPER}} .eael-creative-button--tamaya::after, {{WRAPPER}} .eael-creative-button--tamaya::before',
                 ]
             );
