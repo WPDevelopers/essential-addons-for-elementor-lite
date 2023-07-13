@@ -17,7 +17,7 @@
                         <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-logo.svg' ); ?>"
                              alt="">
                     </div>
-                    <h2>Unlock <span class="color__secondary">3000+</span> <?php _e('Ready Templates Built With Elementor &
+                    <h2>Unlock <span class="color__secondary">4000+</span> <?php _e('Ready Templates Built With Elementor &
                         Essential
                         Addons From Templately.','essential-addons-for-elementor-lite'); ?></h2>
                     <p><?php _e('Get Access to amazing features and boost your Elementor page building experience with Templately','essential-addons-for-elementor-lite'); ?>
