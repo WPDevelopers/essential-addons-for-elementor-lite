@@ -129,6 +129,9 @@ class Content_Ticker extends Widget_Base
                 ],
                 'label_block' => false,
                 'default'     => esc_html__('Trending Today', 'essential-addons-for-elementor-lite'),
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 

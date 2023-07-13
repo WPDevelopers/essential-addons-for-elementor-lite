@@ -153,6 +153,9 @@ class WpForms extends Widget_Base {
                     'condition'             => [
                         'custom_title_description'   => 'yes',
                     ],
+                    'ai' => [
+                        'active' => false,
+                    ],
                 ]
             );
 
