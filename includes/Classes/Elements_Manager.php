@@ -22,6 +22,9 @@ class Elements_Manager {
 	 */
 	const JS_KEY = '_eael_custom_js';
 
+	public $css_print_method;
+	public $js_print_method;
+
 	/**
 	 * Post id
 	 * @var string
@@ -164,6 +167,10 @@ class Elements_Manager {
 			if ( ! empty( $element['settings']['eael_ext_content_protection'] ) ) {
 				$list['content-protection'] = 'content-protection';
 			}
+		}
+
+		if ( ! empty( $element['settings']['eael_wrapper_link_switch'] ) ) {
+			$list['wrapper-link'] = 'wrapper-link';
 		}
 
 		return $list;

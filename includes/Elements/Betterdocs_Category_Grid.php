@@ -288,6 +288,9 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'condition' => [
                         'show_button' => 'true',
                     ],
+                    'ai' => [
+                        'active' => false,
+                    ],
                 ]
             );
 

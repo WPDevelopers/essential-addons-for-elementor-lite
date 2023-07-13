@@ -302,7 +302,7 @@ trait Helper
                             <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/templately/logo.svg' ); ?>" alt="">
                         </div>
                         <ul class="eael-promo-temp__feature__list">
-                            <li><?php _e('3,000+ Stunning Templates','essential-addons-for-elementor-lite'); ?></li>
+                            <li><?php _e('4,000+ Stunning Templates','essential-addons-for-elementor-lite'); ?></li>
                             <li><?php _e('Supports Elementor & Gutenberg','essential-addons-for-elementor-lite'); ?></li>
                             <li><?php _e('Powering up 200,000+ Websites','essential-addons-for-elementor-lite'); ?></li>
                             <li><?php _e('Cloud Collaboration with Team','essential-addons-for-elementor-lite'); ?></li>
@@ -473,7 +473,7 @@ trait Helper
 		?>
         <div id="eael-admin-promotion-message" class="eael-admin-promotion-message">
             <i class="e-notice__dismiss eael-admin-promotion-close" role="button" aria-label="Dismiss" tabindex="0"></i>
-			<?php printf( __( "<p> <i>📣</i> NEW: Essential Addons 5.7 is here, with new '<a target='_blank' href='%s'>SVG Draw</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/svg-draw/' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) ); ?>
+			<?php printf( __( "<p> <i>📣</i> NEW: Essential Addons 5.8 is here, with new '<a target='_blank' href='%s'>Wrapper Link</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/wrapper-link/' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) ); ?>
         </div>
 		<?php
 	}
