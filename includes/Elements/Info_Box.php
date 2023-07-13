@@ -164,6 +164,9 @@ class Info_Box extends Widget_Base
                 'condition' => [
                     'eael_infobox_img_or_icon' => 'img',
                 ],
+                'ai' => [
+                    'active' => false,
+                ],
             ]
         );
 
@@ -198,6 +201,9 @@ class Info_Box extends Widget_Base
                 'condition' => [
                     'eael_infobox_img_or_icon' => 'number',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -222,6 +228,9 @@ class Info_Box extends Widget_Base
                     'active' => true,
                 ],
                 'default' => esc_html__('This is an icon box', 'essential-addons-for-elementor-lite'),
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         $this->add_control(
@@ -413,6 +422,9 @@ class Info_Box extends Widget_Base
                 'condition' => [
                     'eael_show_infobox_button' => 'yes',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
