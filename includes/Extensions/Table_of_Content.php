@@ -9,7 +9,7 @@ use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
-use \Elementor\Core\Schemes\Typography;
+use \Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use \Essential_Addons_Elementor\Classes\Helper;
 
 class Table_of_Content
@@ -115,6 +115,9 @@ class Table_of_Content
                 'condition' => [
                     'eael_ext_table_of_content' => 'yes',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -169,6 +172,9 @@ class Table_of_Content
                 'condition' => [
                     'eael_ext_table_of_content' => 'yes',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -195,6 +201,9 @@ class Table_of_Content
                 'condition' => [
                     'eael_ext_table_of_content' => 'yes',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -670,7 +679,9 @@ class Table_of_Content
             [
                 'name' => 'eael_ext_table_of_content_header_typography',
                 'selector' => '{{WRAPPER}} .eael-toc-header .eael-toc-title,{{WRAPPER}} .eael-toc.collapsed .eael-toc-button',
-                'scheme' => Typography::TYPOGRAPHY_2,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_SECONDARY
+                ],
             ]
         );
 
@@ -955,7 +966,9 @@ class Table_of_Content
             [
                 'name' => 'eael_ext_table_of_content_list_typography_normal',
                 'selector' => '{{WRAPPER}} .eael-toc .eael-toc-body .eael-toc-list',
-                'scheme' => Typography::TYPOGRAPHY_2,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_SECONDARY
+                ],
             ]
         );
 

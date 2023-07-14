@@ -47,6 +47,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 		 * @var Plugin_Usage_Tracker
 		 */
 		private static $_instance = null;
+
+		private $disabled_wp_cron;
+		private $enable_self_cron;
+		private $require_optin;
+		private $include_goodbye_form;
+		private $marketing;
+		private $options;
+		private $item_id;
+		private $notice_options;
+
 		/**
 		 * Get Instance of Plugin_Usage_Tracker
 		 * @return Plugin_Usage_Tracker
