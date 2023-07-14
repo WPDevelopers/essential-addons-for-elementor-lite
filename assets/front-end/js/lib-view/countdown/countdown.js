@@ -263,7 +263,7 @@
     $.fn.eacountdown.setDefaults = Countdown.setDefaults;
 
     $(function () {
-        $("[countdown]").countdown();
+        $("[countdown]").eacountdown();
     });
 
 });

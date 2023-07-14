@@ -158,6 +158,7 @@ class Product_Grid extends Widget_Base
             'best-selling-products' => esc_html__('Best Selling Products', 'essential-addons-for-elementor-lite'),
             'sale-products' => esc_html__('Sale Products', 'essential-addons-for-elementor-lite'),
             'top-products' => esc_html__('Top Rated Products', 'essential-addons-for-elementor-lite'),
+            'manual' => esc_html__('Manual Selection', 'essential-addons-for-elementor-lite'),
         ]);
     }
 
@@ -320,6 +321,18 @@ class Product_Grid extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_show_product_sale_badge',
+            [
+                'label' => esc_html__( 'Show Badge ?', 'essential-addons-for-elementor-lite' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+                'label_off' => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+                'return_value' => 'yes',
+                'default' => 'yes',
+            ]
+        );
+
         $this->end_controls_section();
     }
 
@@ -407,6 +420,9 @@ class Product_Grid extends Widget_Base
             'label' => __('Offset', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::NUMBER,
             'default' => 0,
+            'condition' => [
+                'eael_product_grid_product_filter!' => 'manual'
+            ]
         ]);
 
         $this->add_control(
@@ -418,6 +434,9 @@ class Product_Grid extends Widget_Base
                 'multiple' => true,
                 'default' => [ 'publish', 'pending', 'future' ],
                 'options' => $this->eael_get_product_statuses(),
+                'condition' => [
+                    'eael_product_grid_product_filter!' => 'manual'
+                ]
             ]
         );
 
@@ -429,6 +448,20 @@ class Product_Grid extends Widget_Base
             'options' => HelperClass::get_terms_list('product_cat', 'slug'),
             'condition'   => [
               'post_type!' => 'source_dynamic',
+              'eael_product_grid_product_filter!' => 'manual'
+            ],
+        ]);
+
+        $this->add_control('eael_product_grid_products_in', [
+            'label' => esc_html__('Select Products', 'essential-addons-for-elementor-lite'),
+            'type'        => 'eael-select2',
+            'label_block' => true,
+            'multiple' => true,
+            'source_name' => 'post_type',
+            'source_type' => 'product',
+            'condition'   => [
+                'post_type!' => 'source_dynamic',
+                'eael_product_grid_product_filter' => 'manual'
             ],
         ]);
 
@@ -524,6 +557,9 @@ class Product_Grid extends Widget_Base
                     'eael_product_grid_excerpt' => 'yes',
                     'eael_product_grid_layout' => 'list',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -610,6 +646,9 @@ class Product_Grid extends Widget_Base
                 'condition' => [
                     'show_add_to_cart_custom_text' => 'true',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         $this->add_control(
@@ -623,6 +662,9 @@ class Product_Grid extends Widget_Base
                 'condition' => [
                     'show_add_to_cart_custom_text' => 'true',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         $this->add_control(
@@ -636,6 +678,9 @@ class Product_Grid extends Widget_Base
                 'condition' => [
                     'show_add_to_cart_custom_text' => 'true',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         $this->add_control(
@@ -649,6 +694,9 @@ class Product_Grid extends Widget_Base
                 'condition' => [
                     'show_add_to_cart_custom_text' => 'true',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         $this->add_control(
@@ -662,6 +710,9 @@ class Product_Grid extends Widget_Base
                 'condition' => [
                     'show_add_to_cart_custom_text' => 'true',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -707,6 +758,9 @@ class Product_Grid extends Widget_Base
             'default' => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
             'condition' => [
                 'show_load_more' => ['yes', '1', 'true'],
+            ],
+            'ai' => [
+                'active' => false,
             ],
         ]);
 
@@ -1401,6 +1455,9 @@ class Product_Grid extends Widget_Base
 		    [
 			    'label' => esc_html__('Sale Badge Style', 'essential-addons-for-elementor-lite'),
 			    'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_show_product_sale_badge' => 'yes'
+                ]
 		    ]
 	    );
 
@@ -1707,8 +1764,12 @@ class Product_Grid extends Widget_Base
             'eael_section_product_badges',
             [
                 'label' => esc_html__('Sale / Stock Out Badge', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                    'eael_show_product_sale_badge' => 'yes'
+                ]
             ]
         );
+
         $this->add_control(
             'eael_product_sale_badge_preset',
             [
@@ -1753,6 +1814,9 @@ class Product_Grid extends Widget_Base
 			    'label'       => esc_html__( 'Sale Text', 'essential-addons-for-elementor-lite' ),
 			    'type'        => Controls_Manager::TEXT,
 			    'separator' => 'before',
+                'ai' => [
+					'active' => false,
+				],
 		    ]
 	    );
 
@@ -1761,6 +1825,9 @@ class Product_Grid extends Widget_Base
 		    [
 			    'label'       => esc_html__( 'Stock Out Text', 'essential-addons-for-elementor-lite' ),
 			    'type'        => Controls_Manager::TEXT,
+                'ai' => [
+					'active' => false,
+				],
 		    ]
 	    );
 
@@ -3218,17 +3285,24 @@ class Product_Grid extends Widget_Base
                     'terms' => $settings['eael_product_grid_categories'],
                 ];
             }
-        } else if ($settings['eael_product_grid_product_filter'] == 'best-selling-products') {
+        }
+        else if ($settings['eael_product_grid_product_filter'] == 'best-selling-products') {
             $args['meta_key'] = 'total_sales';
             $args['orderby'] = 'meta_value_num';
             $args['order'] = 'DESC';
-        } else if ($settings['eael_product_grid_product_filter'] == 'sale-products') {
+        }
+        else if ($settings['eael_product_grid_product_filter'] == 'sale-products') {
             $args['post__in']  = array_merge( array( 0 ), wc_get_product_ids_on_sale() );
-        } else if ($settings['eael_product_grid_product_filter'] == 'top-products') {
+        }
+        else if ($settings['eael_product_grid_product_filter'] == 'top-products') {
             $args['meta_key'] = '_wc_average_rating';
             $args['orderby'] = 'meta_value_num';
             $args['order'] = 'DESC';
         }
+        else if( $settings['eael_product_grid_product_filter'] == 'manual' ){
+            $args['post__in'] = $settings['eael_product_grid_products_in'] ? $settings['eael_product_grid_products_in'] : [ 0 ];
+        }
+
         return $args;
     }
 
