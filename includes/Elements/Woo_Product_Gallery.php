@@ -2465,9 +2465,10 @@ class Woo_Product_Gallery extends Widget_Base {
 					$settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
 					$query = new \WP_Query( $args );
 					if ( $query->have_posts() ) {
-						$found_posts      = $query->found_posts;
-						$max_page         = ceil( $found_posts / absint( $args['posts_per_page'] ) );
-						$args['max_page'] = $max_page;
+						$found_posts         = $query->found_posts;
+						$max_page            = ceil( $found_posts / absint( $args['posts_per_page'] ) );
+						$args['max_page']    = $max_page;
+						$args['found_posts'] = $query->found_posts;
 						
 						$show_secondary_image = isset( $settings['eael_product_gallery_show_secondary_image'] ) && 'yes' === $settings['eael_product_gallery_show_secondary_image'];
 
@@ -2485,9 +2486,7 @@ class Woo_Product_Gallery extends Widget_Base {
 					_e( '<p class="no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
 				}
 
-				if ( $found_posts > $args['posts_per_page'] ) {
-					$this->print_load_more_button( $settings, $args, $dir_name );
-				}
+				$this->print_load_more_button( $settings, $args, $dir_name );
 				?>
             </div>
         </div>
