@@ -154,7 +154,10 @@ class Betterdocs_Search_Form extends Widget_Base
                 [
                     'label'   => __('Placeholder', 'essential-addons-for-elementor-lite'),
                     'type'    => Controls_Manager::TEXT,
-                    'default' => esc_html__('Search', 'essential-addons-for-elementor-lite')
+                    'default' => esc_html__('Search', 'essential-addons-for-elementor-lite'),
+                    'ai' => [
+                        'active' => false,
+                    ],
                 ]
             );
 

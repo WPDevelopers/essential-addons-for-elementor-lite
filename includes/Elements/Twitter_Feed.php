@@ -9,6 +9,7 @@ if (!defined('ABSPATH')) {
 
 use \Elementor\Controls_Manager;
 use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
@@ -94,6 +95,9 @@ class Twitter_Feed extends Widget_Base
                 'default' => '@wpdevteam',
                 'label_block' => false,
                 'description' => esc_html__('Use @ sign with your account name.', 'essential-addons-for-elementor-lite'),
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -105,6 +109,9 @@ class Twitter_Feed extends Widget_Base
                 'dynamic'     => [ 'active' => true ],
                 'label_block' => false,
                 'description' => esc_html__('Remove # sign from your hashtag name.', 'essential-addons-for-elementor-lite'),
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -116,6 +123,9 @@ class Twitter_Feed extends Widget_Base
                 'label_block' => false,
                 'default' => '',
                 'description' => '<a href="https://developer.twitter.com/en/portal/dashboard" target="_blank">Get Consumer Key.</a> Create a new app or select existing app and grab the <b>consumer key.</b>',
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -127,6 +137,9 @@ class Twitter_Feed extends Widget_Base
                 'label_block' => false,
                 'default' => '',
                 'description' => '<a href="https://developer.twitter.com/en/portal/dashboard" target="_blank">Get Consumer Secret.</a> Create a new app or select existing app and grab the <b>consumer secret.</b>',
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -314,7 +327,10 @@ class Twitter_Feed extends Widget_Base
                 'default' => __('Read More', 'essential-addons-for-elementor-lite'),
 	            'condition' => [
 	            	'eael_twitter_feed_show_read_more' => 'true',
-	            ]
+                ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -407,6 +423,9 @@ class Twitter_Feed extends Widget_Base
                 'condition' => [
                     'pagination' => 'yes',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         
@@ -420,6 +439,9 @@ class Twitter_Feed extends Widget_Base
                 'condition' => [
                     'pagination' => 'yes',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         
@@ -433,6 +455,9 @@ class Twitter_Feed extends Widget_Base
                 'condition' => [
                     'pagination' => 'yes',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         
@@ -1137,9 +1162,8 @@ class Twitter_Feed extends Widget_Base
             [
                 'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => \Elementor\Controls_Manager::COLOR,
-                'scheme' => [
-                    'type' => \Elementor\Core\Schemes\Color::get_type(),
-                    'value' => \Elementor\Core\Schemes\Color::COLOR_1,
+                'global' => [
+	                'default' => Global_Colors::COLOR_PRIMARY
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-twitter-feed-item .eael-twitter-feed-item-icon' => 'color: {{VALUE}}',
