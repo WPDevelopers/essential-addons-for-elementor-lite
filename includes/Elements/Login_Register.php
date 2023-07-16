@@ -1513,6 +1513,19 @@ class Login_Register extends Widget_Base {
 			'return_value' => 'yes',
 		] );
 
+		$this->add_control( 'eael_terms_conditions_field_type', [
+			'label'       => __( 'Field Type', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::SELECT,
+			'default'     => 'toggle',
+			'options'     => [
+				'toggle' => __( 'Toggle', 'essential-addons-for-elementor-lite' ),
+				'checkbox'  => __( 'Checkbox', 'essential-addons-for-elementor-lite' ),
+			],
+			'condition'   => [
+				'show_terms_conditions' => 'yes',
+			],
+		] );
+
 		$this->add_control( 'acceptance_label', [
 			'label'       => __( 'Acceptance Label', 'essential-addons-for-elementor-lite' ),
 			'description' => __( 'Eg. I accept the terms & conditions. Note: First line is checkbox label & Last line will be used as link text.', 'essential-addons-for-elementor-lite' ),
@@ -6230,7 +6243,7 @@ class Login_Register extends Widget_Base {
 			$tc_atts .= ! empty( $this->ds['acceptance_text_url']['nofollow'] ) ? ' rel="nofollow"' : '';
 			$tc_link = sprintf( '<a href="%1$s" id="eael-lr-tnc-link" class="eael-lr-tnc-link" %2$s>%3$s</a>', esc_attr( $tc_url ), $tc_atts, $link_text );
 		}
-
+		$lrtoggle = ! empty( $this->ds['eael_terms_conditions_field_type'] ) && 'toggle' === $this->ds['eael_terms_conditions_field_type'] ? 'lr-toggle' : '';
 		?>
         <div class="eael_accept_tnc_wrap">
             <input type="hidden"
@@ -6238,7 +6251,7 @@ class Login_Register extends Widget_Base {
                    value="1">
             <input type="checkbox"
                    name="eael_accept_tnc"
-                   class="eael_accept_tnc lr-toggle"
+                   class="eael_accept_tnc <?php echo esc_attr($lrtoggle); ?>"
                    value="1"
                    id="eael_accept_tnc">
             <label for="eael_accept_tnc"
