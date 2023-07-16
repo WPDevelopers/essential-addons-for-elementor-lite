@@ -14,6 +14,7 @@ use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use Elementor\Icons_Manager;
 use \Elementor\Widget_Base;
+use \Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 
 use \Essential_Addons_Elementor\Classes\Helper;
 class Dual_Color_Header extends Widget_Base
@@ -156,6 +157,9 @@ class Dual_Color_Header extends Widget_Base
 				'label_block' => true,
 				'default' => esc_html__('Dual Heading', 'essential-addons-for-elementor-lite'),
 				'dynamic' => ['action' => true],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -167,6 +171,9 @@ class Dual_Color_Header extends Widget_Base
 				'label_block' => true,
 				'default' => esc_html__('Example', 'essential-addons-for-elementor-lite'),
 				'dynamic' => ['action' => true],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -712,9 +719,8 @@ class Dual_Color_Header extends Widget_Base
 			[
 				'label' => __('Color', 'essential-addons-for-elementor-lite'),
 				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
+				'global' => [
+					'default' => Global_Colors::COLOR_PRIMARY
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-dch-separator-wrap i' => 'color: {{VALUE}}',
