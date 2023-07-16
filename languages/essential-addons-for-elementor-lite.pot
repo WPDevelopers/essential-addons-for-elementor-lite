@@ -9472,7 +9472,7 @@ msgid "Submit"
 msgstr ""
 
 #: ../includes/Traits/Helper.php:476
-msgid "<p> <i>📣</i> NEW: Essential Addons 5.8 is here, with new '<a target='_blank' href='%s'>Wrapper Link</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>"
+msgid "<p> <i>📣</i> NEW: Essential Addons 5.5 Pro is here, with new '<a target='_blank' href='%s'>Woo Thank You</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>"
 msgstr ""
 
 #: ../includes/Traits/Helper.php:538
