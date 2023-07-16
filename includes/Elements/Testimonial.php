@@ -103,6 +103,9 @@ class Testimonial extends Widget_Base {
 				'condition' => [
 					'eael_testimonial_enable_avatar' => 'yes',
 				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -135,7 +138,10 @@ class Testimonial extends Widget_Base {
 				'label' => esc_html__( 'User Name', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXT,
 				'default' => esc_html__( 'John Doe', 'essential-addons-for-elementor-lite'),
-				'dynamic' => [ 'active' => true ]
+				'dynamic' => [ 'active' => true ],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -145,7 +151,10 @@ class Testimonial extends Widget_Base {
 				'label' => esc_html__( 'Company Name', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXT,
 				'default' => esc_html__( 'Codetic', 'essential-addons-for-elementor-lite'),
-				'dynamic' => [ 'active' => true ]
+				'dynamic' => [ 'active' => true ],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
