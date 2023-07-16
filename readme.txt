@@ -144,6 +144,7 @@ Extensions (Free):
 30. [Woo Product Collections](https://essential-addons.com/elementor/woocommerce-product-collections/)- Show product collections beautifully 
 31. [LearnDash Course List](https://essential-addons.com/elementor/learndash-course-list/)- Share LearnDash course list in Elementor
 32. [Advanced Search](https://essential-addons.com/elementor/advanced-search/)- Add a customizable, dynamic search bar
+33. [Woo Thank You](https://essential-addons.com/elementor/woo-thank-you)- Design a personalized thank you message on the WooCommerce order confirmation page
 
 Extensions (Pro): 
 
