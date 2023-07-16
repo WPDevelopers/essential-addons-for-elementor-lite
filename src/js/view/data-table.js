@@ -9,7 +9,8 @@ var dataTable = function($scope, $) {
 	}
 
 	var responsive = $_this.data("custom_responsive");
-	if (true == responsive) {
+	var verticalHeader = $_this.data("vertical_header");
+	if (true == responsive && ! verticalHeader) {
 		var $th = $scope.find(".eael-data-table").find("th");
 		var $tbody = $scope.find(".eael-data-table").find("tbody");
 

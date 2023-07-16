@@ -1355,7 +1355,8 @@ class Data_Table extends Widget_Base {
 		$this->add_render_attribute('eael_data_table_wrap', [
 			'class'                  => 'eael-data-table-wrap',
 			'data-table_id'          => esc_attr($this->get_id()),
-			'data-custom_responsive' => $settings['eael_enable_responsive_header_styles'] ? 'true' : 'false'
+			'data-custom_responsive' => $settings['eael_enable_responsive_header_styles'] ? 'true' : 'false',
+			'data-vertical_header' => $settings['eael_section_data_table_vertical_header'] ? 'true' : 'false'
 		]);
 		if(isset($settings['eael_section_data_table_enabled']) && $settings['eael_section_data_table_enabled']){
 			$this->add_render_attribute('eael_data_table_wrap', 'data-table_enabled', 'true');
