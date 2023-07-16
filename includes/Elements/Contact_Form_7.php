@@ -12,7 +12,7 @@ use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
-use \Elementor\Core\Schemes\Typography;
+use \Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use \Elementor\Widget_Base;
 
 use \Essential_Addons_Elementor\Classes\Helper;
@@ -488,7 +488,9 @@ class Contact_Form_7 extends Widget_Base
             [
                 'name' => 'title_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Typography::TYPOGRAPHY_4,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_ACCENT
+                ],
                 'selector' => '{{WRAPPER}} .eael-contact-form-7 .eael-contact-form-7-title',
             ]
         );
@@ -519,7 +521,9 @@ class Contact_Form_7 extends Widget_Base
             [
                 'name' => 'description_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Typography::TYPOGRAPHY_4,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_ACCENT
+                ],
                 'selector' => '{{WRAPPER}} .eael-contact-form-7 .eael-contact-form-7-description',
             ]
         );
@@ -736,7 +740,9 @@ class Contact_Form_7 extends Widget_Base
             [
                 'name' => 'field_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Typography::TYPOGRAPHY_4,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_ACCENT
+                ],
                 'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-text, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-quiz, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-quiz, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-textarea, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control.wpcf7-select',
                 'separator' => 'before',
             ]
@@ -884,7 +890,9 @@ class Contact_Form_7 extends Widget_Base
             [
                 'name' => 'typography_label',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Typography::TYPOGRAPHY_4,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_ACCENT
+                ],
                 'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form label, {{WRAPPER}} .eael-contact-form-7 .wpcf7-form .wpcf7-quiz-label',
                 'condition' => [
                     'labels_switch' => 'yes',
@@ -936,7 +944,9 @@ class Contact_Form_7 extends Widget_Base
             [
                 'name' => 'typography_placeholder',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Typography::TYPOGRAPHY_4,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_ACCENT
+                ],
                 'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form-control::-webkit-input-placeholder',
                 'condition' => [
                     'placeholder_switch' => 'yes',
@@ -1309,7 +1319,9 @@ class Contact_Form_7 extends Widget_Base
             [
                 'name' => 'button_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Typography::TYPOGRAPHY_4,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_ACCENT
+                ],
                 'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-form input[type="submit"]',
                 'separator' => 'before',
             ]
@@ -1444,7 +1456,9 @@ class Contact_Form_7 extends Widget_Base
             [
                 'name' => 'error_alert_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Typography::TYPOGRAPHY_4,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_ACCENT
+                ],
                 'selector' => '{{WRAPPER}} .eael-contact-form-7 .wpcf7-not-valid-tip',
                 'separator' => 'before',
                 'condition' => [
