@@ -10,7 +10,7 @@ use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
-use \Elementor\Core\Schemes\Typography;
+use \Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use \Elementor\Widget_Base;
 
 use \Essential_Addons_Elementor\Classes\Helper;
@@ -126,6 +126,9 @@ class Progress_Bar extends Widget_Base
                 ],
                 'default' => __('Progress Bar', 'essential-addons-for-elementor-lite'),
                 'separator' => 'before',
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -178,6 +181,9 @@ class Progress_Bar extends Widget_Base
                     'progress_bar_layout' => $style_condition,
                     'progress_bar_title_inner_show' => 'yes',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -277,6 +283,9 @@ class Progress_Bar extends Widget_Base
                     'progress_bar_layout' => 'half_circle',
                 ],
                 'separator' => 'before',
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -291,6 +300,9 @@ class Progress_Bar extends Widget_Base
                     'progress_bar_layout' => 'half_circle',
                 ],
                 'separator' => 'before',
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -768,7 +780,9 @@ class Progress_Bar extends Widget_Base
             [
                 'name' => 'progress_bar_title_typography',
                 'label' => __('Title', 'essential-addons-for-elementor-lite'),
-                'scheme' => Typography::TYPOGRAPHY_1,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_PRIMARY
+                ],
                 'selector' => '{{WRAPPER}} .eael-progressbar-title',
             ]
         );
@@ -791,7 +805,9 @@ class Progress_Bar extends Widget_Base
             [
                 'name' => 'progress_bar_inner_title_typography',
                 'label' => __('Inner Title', 'essential-addons-for-elementor-lite'),
-                'scheme' => Typography::TYPOGRAPHY_1,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_PRIMARY
+                ],
                 'selector' => '{{WRAPPER}} .eael-progressbar-line-fill.eael-has-inner-title',
             ]
         );
@@ -826,7 +842,9 @@ class Progress_Bar extends Widget_Base
             [
                 'name' => 'progress_bar_count_typography',
                 'label' => __('Counter', 'essential-addons-for-elementor-lite'),
-                'scheme' => Typography::TYPOGRAPHY_1,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_PRIMARY
+                ],
                 'selector' => '{{WRAPPER}} .eael-progressbar-count-wrap',
             ]
         );
@@ -849,7 +867,9 @@ class Progress_Bar extends Widget_Base
             [
                 'name' => 'progress_bar_after_typography',
                 'label' => __('Prefix/Postfix', 'essential-addons-for-elementor-lite'),
-                'scheme' => Typography::TYPOGRAPHY_1,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_PRIMARY
+                ],
                 'selector' => '{{WRAPPER}} .eael-progressbar-half-circle-after span',
                 'condition' => [
                     'progress_bar_layout' => 'half_circle',

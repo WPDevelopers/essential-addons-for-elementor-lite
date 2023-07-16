@@ -303,7 +303,7 @@ trait Login_Registration {
 					array(
 						'registration'      => 'disabled',
 					),
-					wp_login_url()
+					esc_url_raw( $this->eael_wp_login_url() )
 				)
 			);
 			exit();
@@ -525,7 +525,7 @@ trait Login_Registration {
 																	'key'		=> $key,
 																	'login'		=> rawurlencode( $user->user_login ),
 																),
-																wp_login_url()
+																esc_url_raw( $this->eael_wp_login_url() )
 															);
 				self::$email_options['password_reset_link'] = self::$email_options['password_reset_link'] . "\r\n\r\n";
 			}
@@ -1029,12 +1029,24 @@ trait Login_Registration {
 						'key'					=> $key,
 						'login'					=> rawurlencode( $user_login ),
 					),
-					wp_login_url()
+					esc_url_raw( $this->eael_wp_login_url() )
 				);
 				self::$email_options_lostpassword['password_reset_link'] = self::$email_options_lostpassword['password_reset_link'] . '&page_id='. $page_id . '&widget_id='. $widget_id .'&wp_lang=' . $locale . "\r\n\r\n";
 
                 if( ! empty( $resetpassword_in_popup_selector ) ){
-					self::$email_options_lostpassword['password_reset_link'] = network_site_url( "wp-login.php?action=rp&eael-resetpassword=1&key=$key&login=" . rawurlencode( $user_login ), 'login' ) . '&page_id='. $page_id . '&widget_id='. $widget_id . '&popup-selector=' . $resetpassword_in_popup_selector . '&wp_lang=' . $locale . "\r\n\r\n";
+					self::$email_options_lostpassword['password_reset_link'] = add_query_arg(
+						array(
+							'action'				=> 'rp',
+							'eael-resetpassword'	=> '1',
+							'key'					=> $key,
+							'login'					=> rawurlencode( $user_login ),
+							'page_id'				=> $page_id,
+							'widget_id'				=> $widget_id,
+							'popup-selector'		=> $resetpassword_in_popup_selector,
+							'wp_lang'				=> $locale,
+						),
+						esc_url_raw( $this->eael_wp_login_url() )
+					);
 				}
 			}
 
@@ -1186,7 +1198,7 @@ trait Login_Registration {
 							'key'					=> $key,
 							'login'					=> rawurlencode( $user->user_login ),
 						),
-						wp_login_url()
+						esc_url_raw( $this->eael_wp_login_url() )
 					);
 					self::$email_options['password_reset_link'] = self::$email_options['password_reset_link'] . "\r\n\r\n";
 				}
@@ -1265,7 +1277,7 @@ trait Login_Registration {
 			self::$email_options['firstname'],
 			self::$email_options['lastname'],
 			self::$email_options['website'],
-			wp_login_url(),
+			esc_url_raw( $this->eael_wp_login_url() ),
 			get_option( 'blogname' ),
 		];
 
@@ -1314,7 +1326,7 @@ trait Login_Registration {
 			$firstname,
 			$lastname,
 			$website,
-			wp_login_url(),
+			esc_url_raw( $this->eael_wp_login_url() ),
 			get_option( 'blogname' ),
 		];
 
@@ -1422,6 +1434,10 @@ trait Login_Registration {
 		}
 
 		return true;
+	}
+
+	public function eael_wp_login_url(){
+		return apply_filters( 'eael/login-register/wp-login-url', wp_login_url() );
 	}
 
 }
