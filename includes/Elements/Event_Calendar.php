@@ -149,6 +149,9 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::TEXT,
                 'dynamic'     => [ 'active' => true ],
                 'label_block' => true,
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -325,6 +328,9 @@ class Event_Calendar extends Widget_Base
                 'label_block' => true,
                 'description' => sprintf(__('<a href="https://essential-addons.com/elementor/docs/google-api-key/" class="eael-btn" target="_blank">%s</a>',
                     'essential-addons-for-elementor-lite'), 'Get API Key'),
+                'ai' => [
+                    'active' => false,
+                ],
             ]
         );
 
@@ -336,6 +342,9 @@ class Event_Calendar extends Widget_Base
                 'label_block' => true,
                 'description' => sprintf(__('<a href="https://essential-addons.com/elementor/docs/google-calendar-id/" class="eael-btn" target="_blank">%s</a>',
                     'essential-addons-for-elementor-lite'), 'Get google calendar ID'),
+                'ai' => [
+                    'active' => false,
+                ],
             ]
         );
 
@@ -627,6 +636,9 @@ class Event_Calendar extends Widget_Base
 			    'condition' => [
 				    'eael_event_details_link_hide!' => 'yes',
 			    ],
+                'ai' => [
+					'active' => false,
+				],
 		    ]
 	    );
 
