@@ -1012,6 +1012,36 @@ trait Controls
                     ],
                 ]
             );
+            $wb->add_control(
+                'eael_show_fallback_img',
+                [
+                    'label' => __('Fallback Image', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SWITCHER,
+                    'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
+                    'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                    'return_value' => 'yes',
+                    'default' => '',
+                    'condition' => [
+                        'eael_show_image' => 'yes',
+                        'eael_post_carousel_item_style' => 'eael-overlay',
+                    ],
+                ]
+            );
+            $wb->add_control(
+                'eael_post_block_fallback_img',
+                [
+                    'label'             => __( 'Image', 'essential-addons-for-elementor-lite' ),
+                    'type'              => Controls_Manager::MEDIA,
+                    'condition'         => [
+                        'eael_show_fallback_img'    => 'yes',
+                        'eael_show_image' => 'yes',
+                        'eael_post_carousel_item_style' => 'eael-overlay',
+                    ],
+                    'ai' => [
+                        'active' => false,
+                    ],
+                ]
+            );
         }
 
         $wb->add_control(
