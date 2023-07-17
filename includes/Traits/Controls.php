@@ -1023,7 +1023,6 @@ trait Controls
                     'default' => '',
                     'condition' => [
                         'eael_show_image' => 'yes',
-                        'eael_post_carousel_item_style' => 'eael-overlay',
                     ],
                 ]
             );
@@ -1035,7 +1034,6 @@ trait Controls
                     'condition'         => [
                         'eael_show_fallback_img'    => 'yes',
                         'eael_show_image' => 'yes',
-                        'eael_post_carousel_item_style' => 'eael-overlay',
                     ],
                     'ai' => [
                         'active' => false,
