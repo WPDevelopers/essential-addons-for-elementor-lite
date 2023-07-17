@@ -1742,29 +1742,62 @@ trait Controls
                 ]
             );
 
-            $wb->add_control(
-                'eael_post_read_more_btn_hover_color',
-                [
-                    'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::COLOR,
-                    'selectors' => [
-                        '{{WRAPPER}} .eael-post-elements-readmore-btn:hover' => 'color: {{VALUE}};',
-                    ],
-                ]
-            );
-
-            $wb->add_group_control(
-                Group_Control_Background::get_type(),
-                [
-                    'name' => 'read_more_btn_hover_background',
-                    'label' => __('Background', 'essential-addons-for-elementor-lite'),
-                    'types' => ['classic', 'gradient'],
-                    'selector' => '{{WRAPPER}} .eael-post-elements-readmore-btn:hover',
-                    'exclude' => [
-                        'image',
-                    ],
-                ]
-            );
+            if ( 'eael-post-carousel' === $wb->get_name() ) {
+                $wb->add_control(
+                    'eael_post_read_more_btn_hover_color',
+                    [
+                        'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
+                        'type' => Controls_Manager::COLOR,
+                        'selectors' => [
+                            '{{WRAPPER}} .eael-post-elements-readmore-btn:hover' => 'color: {{VALUE}};',
+                        ],
+                        'condition' => [
+                            'eael_post_carousel_item_style!' => 'eael-overlay',
+                        ],
+                    ]
+                );
+    
+                $wb->add_group_control(
+                    Group_Control_Background::get_type(),
+                    [
+                        'name' => 'read_more_btn_hover_background',
+                        'label' => __('Background', 'essential-addons-for-elementor-lite'),
+                        'types' => ['classic', 'gradient'],
+                        'selector' => '{{WRAPPER}} .eael-post-elements-readmore-btn:hover',
+                        'exclude' => [
+                            'image',
+                        ],
+                        'condition' => [
+                            'eael_post_carousel_item_style!' => 'eael-overlay',
+                        ],
+                    ]
+                );
+            } else {
+                $wb->add_control(
+                    'eael_post_read_more_btn_hover_color',
+                    [
+                        'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
+                        'type' => Controls_Manager::COLOR,
+                        'selectors' => [
+                            '{{WRAPPER}} .eael-post-elements-readmore-btn:hover' => 'color: {{VALUE}};',
+                        ],
+                    ]
+                );
+    
+                $wb->add_group_control(
+                    Group_Control_Background::get_type(),
+                    [
+                        'name' => 'read_more_btn_hover_background',
+                        'label' => __('Background', 'essential-addons-for-elementor-lite'),
+                        'types' => ['classic', 'gradient'],
+                        'selector' => '{{WRAPPER}} .eael-post-elements-readmore-btn:hover',
+                        'exclude' => [
+                            'image',
+                        ],
+                    ]
+                );
+            }
+            
 
             $wb->add_group_control(
                 Group_Control_Border::get_type(),
