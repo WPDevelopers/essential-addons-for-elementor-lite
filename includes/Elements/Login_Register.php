@@ -4440,7 +4440,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-wrapper .eael-forever-forget" => $this->apply_dim( 'margin' ),
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap" => $this->apply_dim( 'margin' ),
 			],
 			'condition'  => [
 				'terms_conditions_style_pot' => 'yes',
@@ -4455,7 +4455,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-wrapper .eael-forever-forget" => $this->apply_dim( 'padding' ),
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap" => $this->apply_dim( 'padding' ),
 			],
 			'condition'  => [
 				'terms_conditions_style_pot' => 'yes',
@@ -4470,7 +4470,8 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-wrapper .forget-menot label" => $this->apply_dim( 'margin' ),
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap label" => $this->apply_dim( 'margin' ),
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap a" => $this->apply_dim( 'margin' ),
 			],
 			'condition'  => [
 				'terms_conditions_style_pot' => 'yes',
@@ -4485,7 +4486,8 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-wrapper .forget-menot" => $this->apply_dim( 'padding' ),
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap label" => $this->apply_dim( 'padding' ),
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap a" => $this->apply_dim( 'padding' ),
 			],
 			'condition'  => [
 				'terms_conditions_style_pot' => 'yes',
@@ -4501,7 +4503,7 @@ class Login_Register extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .lr-form-wrapper .forget-menot input" => $this->apply_dim( 'margin' ),
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap input" => $this->apply_dim( 'margin' ),
 			],
 			'condition'  => [
 				'terms_conditions_style_pot' => 'yes',
@@ -4512,7 +4514,7 @@ class Login_Register extends Widget_Base {
 			'label'     => __( 'Text Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .lr-form-wrapper .forget-menot" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap" => 'color: {{VALUE}};',
 			],
 			'condition' => [
 				'terms_conditions_style_pot' => 'yes',
@@ -4523,7 +4525,7 @@ class Login_Register extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'default'   => '#ffffff',
 			'selectors' => [
-				"{{WRAPPER}} .lr-form-wrapper .forget-menot" => 'background-color: {{VALUE}};',
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap" => 'background-color: {{VALUE}};',
 			],
 			'condition' => [
 				'terms_conditions_style_pot' => 'yes',
@@ -4533,8 +4535,8 @@ class Login_Register extends Widget_Base {
 			'label'     => __( 'Checkbox | Toggle Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .lr-form-wrapper .forget-menot  input[type=checkbox]:checked" => 'border-color: {{VALUE}};background: {{VALUE}};',
-				"{{WRAPPER}} .lr-form-wrapper input[type=checkbox]:hover:not(:checked):not(:disabled)" => 'border-color: {{VALUE}};',
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap  input[type=checkbox]:checked" => 'border-color: {{VALUE}};background: {{VALUE}};',
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap input[type=checkbox]:hover:not(:checked):not(:disabled)" => 'border-color: {{VALUE}};',
 			],
 			'condition' => [
 				'terms_conditions_style_pot' => 'yes',
@@ -4544,7 +4546,7 @@ class Login_Register extends Widget_Base {
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
 			'name'     => "eael_terms_label_typography",
-			'selector' => "{{WRAPPER}} .lr-form-wrapper .forget-menot, {{WRAPPER}} .lr-form-wrapper .forget-menot label",
+			'selector' => "{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap, {{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap label",
 		] );
 
 		$this->end_controls_section();
