@@ -4412,6 +4412,141 @@ class Login_Register extends Widget_Base {
 			'name'     => "eael_forget_pass_label_typography",
 			'selector' => "{{WRAPPER}} .lr-form-wrapper .forget-pass a",
 		] );
+
+		//Terms & Conditions Style
+		$this->add_control( 'eael_form_terms_fields_heading', [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Terms & Conditions', 'essential-addons-for-elementor-lite' ),
+			'separator' => 'before',
+		] );
+		$this->add_control( 'terms_conditions_style_pot', [
+			'label'        => __( 'Style', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Default', 'essential-addons-for-elementor-lite' ),
+			'label_on'     => __( 'Custom', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'yes',
+			'condition'    => [
+				'show_terms_conditions' => 'yes',
+			],
+		] );
+
+		$this->start_popover();
+		$this->add_responsive_control( "eael_form_terms_field_margin", [
+			'label'      => __( 'Container Margin', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .eael-forever-forget" => $this->apply_dim( 'margin' ),
+			],
+			'condition'  => [
+				'terms_conditions_style_pot' => 'yes',
+			],
+		] );
+		$this->add_responsive_control( "eael_form_terms_field_padding", [
+			'label'      => __( 'Container Padding', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .eael-forever-forget" => $this->apply_dim( 'padding' ),
+			],
+			'condition'  => [
+				'terms_conditions_style_pot' => 'yes',
+			],
+		] );
+		$this->add_responsive_control( "eael_form_terms_lbl_margin", [
+			'label'      => __( 'Label Margin', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .forget-menot label" => $this->apply_dim( 'margin' ),
+			],
+			'condition'  => [
+				'terms_conditions_style_pot' => 'yes',
+			],
+		] );
+		$this->add_responsive_control( "eael_form_terms_lbl_padding", [
+			'label'      => __( 'Label Padding', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .forget-menot" => $this->apply_dim( 'padding' ),
+			],
+			'condition'  => [
+				'terms_conditions_style_pot' => 'yes',
+			],
+		] );
+
+		$this->add_responsive_control( "eael_form_terms_checkbox_margin", [
+			'label'      => __( 'Checkbox Margin', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .forget-menot input" => $this->apply_dim( 'margin' ),
+			],
+			'condition'  => [
+				'terms_conditions_style_pot' => 'yes',
+			],
+		] );
+
+		$this->add_control( 'eael_terms_label_color', [
+			'label'     => __( 'Text Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .lr-form-wrapper .forget-menot" => 'color: {{VALUE}};',
+			],
+			'condition' => [
+				'terms_conditions_style_pot' => 'yes',
+			],
+		] );
+		$this->add_control( 'eael_terms_label_bg_color', [
+			'label'     => __( 'Text Background', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#ffffff',
+			'selectors' => [
+				"{{WRAPPER}} .lr-form-wrapper .forget-menot" => 'background-color: {{VALUE}};',
+			],
+			'condition' => [
+				'terms_conditions_style_pot' => 'yes',
+			],
+		] );
+		$this->add_control( 'eael_terms_checkbox_color', [
+			'label'     => __( 'Checkbox | Toggle Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .lr-form-wrapper .forget-menot  input[type=checkbox]:checked" => 'border-color: {{VALUE}};background: {{VALUE}};',
+				"{{WRAPPER}} .lr-form-wrapper input[type=checkbox]:hover:not(:checked):not(:disabled)" => 'border-color: {{VALUE}};',
+			],
+			'condition' => [
+				'terms_conditions_style_pot' => 'yes',
+			],
+		] );
+		$this->end_popover();
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
+			'name'     => "eael_terms_label_typography",
+			'selector' => "{{WRAPPER}} .lr-form-wrapper .forget-menot, {{WRAPPER}} .lr-form-wrapper .forget-menot label",
+		] );
+
 		$this->end_controls_section();
 	}
 
