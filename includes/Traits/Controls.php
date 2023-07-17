@@ -540,7 +540,7 @@ trait Controls
                     'type' => Controls_Manager::SELECT,
                     'default' => 'eael-cards',
                     'options' => [
-                        'eael-hoverer' => esc_html__('Overlay', 'essential-addons-for-elementor-lite'),
+                        'eael-overlay' => esc_html__('Overlay', 'essential-addons-for-elementor-lite'),
                         'eael-cards' => esc_html__('Cards', 'essential-addons-for-elementor-lite'),
                     ],
                 ]
