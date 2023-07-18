@@ -11,7 +11,7 @@ use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
-use \Elementor\Core\Schemes\Typography;
+use \Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use \Elementor\Widget_Base;
 
 use \Essential_Addons_Elementor\Classes\Helper;
@@ -152,6 +152,9 @@ class WpForms extends Widget_Base {
                     'default'               => '',
                     'condition'             => [
                         'custom_title_description'   => 'yes',
+                    ],
+                    'ai' => [
+                        'active' => false,
                     ],
                 ]
             );
@@ -479,7 +482,9 @@ class WpForms extends Widget_Base {
             [
                 'name'                  => 'form_description_typography',
                 'label'                 => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme'                => Typography::TYPOGRAPHY_4,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_ACCENT
+                ],
                 'selector'              => '{{WRAPPER}} .eael-contact-form-description, {{WRAPPER}} .wpforms-description',
             ]
         );
@@ -543,7 +548,9 @@ class WpForms extends Widget_Base {
             [
                 'name'              => 'typography_label',
                 'label'             => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme'            => Typography::TYPOGRAPHY_4,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_ACCENT
+                ],
                 'selector'          => '{{WRAPPER}} .eael-wpforms .wpforms-field label',
             ]
         );
@@ -783,7 +790,9 @@ class WpForms extends Widget_Base {
             [
                 'name'              => 'field_typography',
                 'label'             => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme'            => Typography::TYPOGRAPHY_4,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_ACCENT
+                ],
                 'selector'          => '{{WRAPPER}} .eael-wpforms .wpforms-field input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-wpforms .wpforms-field textarea, {{WRAPPER}} .eael-wpforms .wpforms-field select',
                 'separator'         => 'before',
             ]
@@ -1285,7 +1294,9 @@ class WpForms extends Widget_Base {
             [
                 'name'              => 'button_typography',
                 'label'             => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme'            => Typography::TYPOGRAPHY_4,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_ACCENT
+                ],
                 'selector'          => '{{WRAPPER}} .eael-wpforms .wpforms-submit-container .wpforms-submit',
                 'separator'         => 'before',
             ]

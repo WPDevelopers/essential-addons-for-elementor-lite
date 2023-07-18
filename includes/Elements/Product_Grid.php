@@ -321,6 +321,18 @@ class Product_Grid extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_show_product_sale_badge',
+            [
+                'label' => esc_html__( 'Show Badge ?', 'essential-addons-for-elementor-lite' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+                'label_off' => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+                'return_value' => 'yes',
+                'default' => 'yes',
+            ]
+        );
+
         $this->end_controls_section();
     }
 
@@ -545,6 +557,9 @@ class Product_Grid extends Widget_Base
                     'eael_product_grid_excerpt' => 'yes',
                     'eael_product_grid_layout' => 'list',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -631,6 +646,9 @@ class Product_Grid extends Widget_Base
                 'condition' => [
                     'show_add_to_cart_custom_text' => 'true',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         $this->add_control(
@@ -644,6 +662,9 @@ class Product_Grid extends Widget_Base
                 'condition' => [
                     'show_add_to_cart_custom_text' => 'true',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         $this->add_control(
@@ -657,6 +678,9 @@ class Product_Grid extends Widget_Base
                 'condition' => [
                     'show_add_to_cart_custom_text' => 'true',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         $this->add_control(
@@ -670,6 +694,9 @@ class Product_Grid extends Widget_Base
                 'condition' => [
                     'show_add_to_cart_custom_text' => 'true',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         $this->add_control(
@@ -683,6 +710,9 @@ class Product_Grid extends Widget_Base
                 'condition' => [
                     'show_add_to_cart_custom_text' => 'true',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -728,6 +758,9 @@ class Product_Grid extends Widget_Base
             'default' => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
             'condition' => [
                 'show_load_more' => ['yes', '1', 'true'],
+            ],
+            'ai' => [
+                'active' => false,
             ],
         ]);
 
@@ -1422,6 +1455,9 @@ class Product_Grid extends Widget_Base
 		    [
 			    'label' => esc_html__('Sale Badge Style', 'essential-addons-for-elementor-lite'),
 			    'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_show_product_sale_badge' => 'yes'
+                ]
 		    ]
 	    );
 
@@ -1728,8 +1764,12 @@ class Product_Grid extends Widget_Base
             'eael_section_product_badges',
             [
                 'label' => esc_html__('Sale / Stock Out Badge', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                    'eael_show_product_sale_badge' => 'yes'
+                ]
             ]
         );
+
         $this->add_control(
             'eael_product_sale_badge_preset',
             [
@@ -1774,6 +1814,9 @@ class Product_Grid extends Widget_Base
 			    'label'       => esc_html__( 'Sale Text', 'essential-addons-for-elementor-lite' ),
 			    'type'        => Controls_Manager::TEXT,
 			    'separator' => 'before',
+                'ai' => [
+					'active' => false,
+				],
 		    ]
 	    );
 
@@ -1782,6 +1825,9 @@ class Product_Grid extends Widget_Base
 		    [
 			    'label'       => esc_html__( 'Stock Out Text', 'essential-addons-for-elementor-lite' ),
 			    'type'        => Controls_Manager::TEXT,
+                'ai' => [
+					'active' => false,
+				],
 		    ]
 	    );
 
