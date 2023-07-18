@@ -1800,6 +1800,33 @@ trait Controls
                         ],
                     ]
                 );
+
+                $wb->add_group_control(
+                    Group_Control_Border::get_type(),
+                    [
+                        'name' => 'read_more_btn_hover_border',
+                        'label' => __('Border', 'essential-addons-for-elementor-lite'),
+                        'selector' => '{{WRAPPER}} .eael-post-elements-readmore-btn:hover',
+                        'condition' => [
+                            'eael_post_carousel_item_style!' => 'eael-overlay',
+                        ],
+                    ]
+                );
+    
+                $wb->add_responsive_control(
+                    'read_more_btn_border_hover_radius',
+                    [
+                        'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                        'type' => Controls_Manager::DIMENSIONS,
+                        'size_units' => ['px', 'em', '%'],
+                        'selectors' => [
+                            '{{WRAPPER}} .eael-post-elements-readmore-btn:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        ],
+                        'condition' => [
+                            'eael_post_carousel_item_style!' => 'eael-overlay',
+                        ],
+                    ]
+                );
             } else {
                 $wb->add_control(
                     'eael_post_read_more_btn_hover_color',
@@ -1824,29 +1851,28 @@ trait Controls
                         ],
                     ]
                 );
+
+                $wb->add_group_control(
+                    Group_Control_Border::get_type(),
+                    [
+                        'name' => 'read_more_btn_hover_border',
+                        'label' => __('Border', 'essential-addons-for-elementor-lite'),
+                        'selector' => '{{WRAPPER}} .eael-post-elements-readmore-btn:hover',
+                    ]
+                );
+    
+                $wb->add_responsive_control(
+                    'read_more_btn_border_hover_radius',
+                    [
+                        'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                        'type' => Controls_Manager::DIMENSIONS,
+                        'size_units' => ['px', 'em', '%'],
+                        'selectors' => [
+                            '{{WRAPPER}} .eael-post-elements-readmore-btn:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        ],
+                    ]
+                );
             }
-            
-
-            $wb->add_group_control(
-                Group_Control_Border::get_type(),
-                [
-                    'name' => 'read_more_btn_hover_border',
-                    'label' => __('Border', 'essential-addons-for-elementor-lite'),
-                    'selector' => '{{WRAPPER}} .eael-post-elements-readmore-btn:hover',
-                ]
-            );
-
-            $wb->add_responsive_control(
-                'read_more_btn_border_hover_radius',
-                [
-                    'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::DIMENSIONS,
-                    'size_units' => ['px', 'em', '%'],
-                    'selectors' => [
-                        '{{WRAPPER}} .eael-post-elements-readmore-btn:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    ],
-                ]
-            );
 
             $wb->end_controls_tab();
 
