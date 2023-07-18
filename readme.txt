@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.2
 Requires PHP: 7.0
-Stable tag: 5.7.4
+Stable tag: 5.8.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -28,7 +28,7 @@ No extra resources or messy codes to slow down your website. Optimized for super
 Enable and disable individual elements to make your page loading faster and smoother. You can deactivate unnecessary widgets to keep the site lite.
 
 
-### 3000+ Ready Blocks and Templates through **Templately**
+### 4000+ Ready Blocks and Templates through **Templately**
 Use pre-made templates and sections which come with Essential Addons and design your website to stand out from the crowd.
 
 [Install Templately to get the premade blocks and templates](https://wordpress.org/plugins/templately/)
@@ -46,7 +46,7 @@ We have extra-ordinary support team ready to help you. Ask your questions in the
 
 We have designed more than 50 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
 
-1. [Post Grid](https://essential-addons.com/elementor/post-grid/) - Showcase your blog posts in 4 unique styles 
+1. [Post Grid](https://essential-addons.com/elementor/post-grid/) - Showcase your blog posts in 3 unique styles
 2. [Post Timeline](https://essential-addons.com/elementor/post-timeline/) - Create stunning timeline for your posts & pages 
 3. [Fancy Text](https://essential-addons.com/elementor/fancy-text/ ) - Design pages using animated texts in 8 different styles
 4. [Creative Buttons](https://essential-addons.com/elementor/creative-buttons/) - Quickly add modern buttons with hover effects
@@ -84,7 +84,8 @@ We have designed more than 50 of the most useful widgets to enhance your Element
 36. [Advanced Data Table](https://essential-addons.com/elementor/advanced-data-table) - Design large data tables without coding
 37. [Event Calendar](https://essential-addons.com/elementor/event-calendar) - Create customized event pages in Elementor
 38. [Formstack](https://essential-addons.com/elementor/formstack/) - Design your Formstack forms within Elementor 
-39. [Woo Checkout](https://essential-addons.com/elementor/woo-checkout/) -  Build attractive WooCommerce Checkout pages (https://www.youtube.com/watch?v=l3GNAJHza5c)
+39. [Woo Checkout](https://essential-addons.com/elementor/woo-checkout/) -  Build attractive WooCommerce Checkout pages
+[youtube https://www.youtube.com/watch?v=l3GNAJHza5c]
 40. [Typeform](https://essential-addons.com/elementor/typeform/) - Embed & design your Typeform forms in Elementor
 41. [Login | Register Form](https://essential-addons.com/elementor/login-register-form/) - Create amazing login/registration forms
 42. [Woo Product Compare](https://essential-addons.com/elementor/woo-product-compare/) - Design stunning product compare tables
@@ -99,11 +100,14 @@ We have designed more than 50 of the most useful widgets to enhance your Element
 
 Extensions (Free): 
 
-1. [Reading Progress Bar](https://essential-addons.com/elementor/reading-progress/) - Add progress bar to show reading position (https://www.youtube.com/watch?v=3Teo4kSWJPA)
-2. [Duplicator](https://essential-addons.com/elementor/post-duplicator/) - Duplicate any page or post in a single click
-3. [Table of Contents](https://essential-addons.com/elementor/table-of-content/) - Display Table of Contents anywhere you want (https://www.youtube.com/watch?v=W6woRX7Ud7I )
+1. [Reading Progress Bar](https://essential-addons.com/elementor/reading-progress/) - Add progress bar to show reading position
+[youtube https://www.youtube.com/watch?v=3Teo4kSWJPA]
+2. [Duplicator](https://essential-addons.com/elementor/duplicator/) - Duplicate any page or post in a single click
+3. [Table of Contents](https://essential-addons.com/elementor/table-of-content/) - Display Table of Contents anywhere you want
+[youtube https://www.youtube.com/watch?v=W6woRX7Ud7I]
 4. [Custom JS](https://essential-addons.com/elementor/docs/custom-js/) - Add custom JavaScript in Elementor with a few clicks
-5. [Scroll to Top](https://essential-addons.com/elementor/scroll-to-top)- Let visitors quickly navigate to the top of your page 
+5. [Scroll to Top](https://essential-addons.com/elementor/scroll-to-top)- Let visitors quickly navigate to the top of your page
+6. [Wrapper Link](https://essential-addons.com/elementor/wrapper-link)- Add custom links into any section, column, or even flexbox 
 
 ### More elements (35+) on [Premium Version](https://wpdeveloper.com/in/upgrade-essential-addons-elementor)
 
@@ -113,7 +117,8 @@ Extensions (Free):
 4. [Image Comparison](https://essential-addons.com/elementor/image-comparison/) - Let your viewers compare between two images 
 5. [Interactive Promo](https://essential-addons.com/elementor/interactive-promo/ ) - Display content with attractive animations
 6. [Instagram Feed](https://essential-addons.com/elementor/instagram-feed/) - Display Instagram posts beautifully in Elementor
-7. [Advanced Google Map](https://essential-addons.com/elementor/advanced-google-map/) - Create maps with unlimited themes (https://www.youtube.com/watch?v=kLx9O8ZoBv0)
+7. [Advanced Google Map](https://essential-addons.com/elementor/advanced-google-map/) - Create maps with unlimited themes
+[youtube https://www.youtube.com/watch?v=kLx9O8ZoBv0]
 8. [Static Product](https://essential-addons.com/elementor/static-product/) - Present your static product just the way you want
 9. [Flip Carousel](https://essential-addons.com/elementor/flip-carousel/) - Feature your content using a unique carousel style
 10. [Interactive Cards](https://essential-addons.com/elementor/interactive-cards/) - Create fascinating effects for your content
@@ -127,9 +132,9 @@ Extensions (Free):
 18. [One Page Navigation](https://essential-addons.com/elementor/one-page-nav/) - Create one page websites in Elementor
 19. [Price Menu](https://essential-addons.com/elementor/price-menu/) - Make a beautiful pricing menu for your brands 
 20. [Image Hotspots](https://essential-addons.com/elementor/image-hotspots/) - Add hotspot icons with tooltips in an image
-21. [Fancy Divider](https://essential-addons.com/elementor/divider/) - Separate your section with fancy divider
+21. [Divider](https://essential-addons.com/elementor/divider/) - Separate your section with fancy divider
 22. [Counter](https://essential-addons.com/elementor/counter/) - Highlight important data using the Counter element
-23. [Team Member Carousel](https://essential-addons.com/elementor/team-member-carousel/) - Display team members in a carousel
+23. [Team Member Carousel](https://essential-addons.com/elementor/team-members-carousel/) - Display team members in a carousel
 24. [Post Carousel](https://essential-addons.com/elementor/post-carousel/) - Use a carousel to display multiple posts
 25. [Logo Carousel](https://essential-addons.com/elementor/logo-carousel/) - Highlight brands or product logos in a carousel
 26. [Protected Content](https://essential-addons.com/elementor/protected-content/) -  Lock your content with password protection
@@ -139,6 +144,7 @@ Extensions (Free):
 30. [Woo Product Collections](https://essential-addons.com/elementor/woocommerce-product-collections/)- Show product collections beautifully 
 31. [LearnDash Course List](https://essential-addons.com/elementor/learndash-course-list/)- Share LearnDash course list in Elementor
 32. [Advanced Search](https://essential-addons.com/elementor/advanced-search/)- Add a customizable, dynamic search bar
+33. [Woo Thank You](https://essential-addons.com/elementor/woo-thank-you)- Design a personalized thank you message on the WooCommerce order confirmation page
 
 Extensions (Pro): 
 
@@ -244,6 +250,33 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.8.3 - 16/07/2023 =
+
+- Improved: EA Login/Register Form | Added Check-box feature for 'Terms & Conditions'
+- Fixed: EA Filterable Gallery | Throwing Critical Error in PHP 8.2
+- Few minor bug fixes & improvements
+
+= 5.8.2 - 13/07/2023 =
+
+- Added: Compatibility with Elementor 3.15
+- Few minor bug fixes & improvements
+
+= 5.8.1 - 06/07/2023 =
+
+- Improved: Added PHP 8.2 Compatibility Support
+- Fixed: EA Login/Register Form | Added Filter support for redirecting URL
+- Fixed: Swiper JS issue with All the Carousel Widgets
+- Fixed: EA Table of Contents | TOC icon removing issue
+- Few minor bug fixes & improvements
+
+= 5.8.0 - 14/06/2023 =
+
+- Added: New Extension | EA Wrapper Link
+- Fixed: EA Woo Product Carousel | Carousel not showing in order by SKU
+- Fixed: EA Login/Register Form | Password visibility icon not working on nested elements 
+- Improved: EA Woo Product Grid | Added option to show/hide Sale/Stock Out badge 
+- Few minor bug fixes & improvements
 
 = 5.7.4 - 01/06/2023 =
 

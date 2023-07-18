@@ -1,4 +1,8 @@
 ea.hooks.addAction("init", "ea", () => {
+    if (ea.elementStatusCheck('eaelLoginRegister')) {
+        return false;
+    }
+
     const EALoginRegister = function ($scope, $) {
 
         const $wrap = $scope.find('.eael-login-registration-wrapper');// cache wrapper

@@ -1,9 +1,7 @@
 <?php
-
 namespace Essential_Addons_Elementor\Elements;
-
 use Elementor\Controls_Manager;
-use Elementor\Core\Schemes\Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
@@ -869,7 +867,9 @@ class Simple_Menu extends Widget_Base
             [
                 'name'     => 'eael_simple_menu_item_typography',
                 'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme'   => Typography::TYPOGRAPHY_1,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_PRIMARY
+                ],
                 'selector' => '{{WRAPPER}} .eael-simple-menu >li > a, .eael-simple-menu-container .eael-simple-menu-toggle-text',
             ]
         );
@@ -1265,7 +1265,9 @@ class Simple_Menu extends Widget_Base
             [
                 'name'     => 'eael_simple_menu_dropdown_item_typography',
                 'label'    => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme'   => Typography::TYPOGRAPHY_1,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_PRIMARY
+                ],
                 'selector' => '{{WRAPPER}} .eael-simple-menu li ul li > a',
             ]
         );
