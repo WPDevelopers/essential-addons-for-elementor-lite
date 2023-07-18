@@ -1564,6 +1564,7 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 
+		$terms_conditions_url = get_the_permalink( get_option( 'wp_page_for_privacy_policy' ) );
 
 		$this->add_control( 'acceptance_text_url', [
 			'label'       => __( 'Terms & Conditions URL', 'essential-addons-for-elementor-lite' ),
@@ -1573,7 +1574,7 @@ class Login_Register extends Widget_Base {
 				'active' => true,
 			],
 			'default'     => [
-				'url'         => get_the_permalink( get_option( 'wp_page_for_privacy_policy' ) ),
+				'url'         => ! empty( $terms_conditions_url ) && 'false' !== $terms_conditions_url ? $terms_conditions_url : '',
 				'is_external' => true,
 				'nofollow'    => true,
 			],
@@ -4511,7 +4512,7 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$this->add_control( 'eael_terms_label_color', [
-			'label'     => __( 'Text Color', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap" => 'color: {{VALUE}};',
@@ -4521,7 +4522,7 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 		$this->add_control( 'eael_terms_label_bg_color', [
-			'label'     => __( 'Text Background', 'essential-addons-for-elementor-lite' ),
+			'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'default'   => '#ffffff',
 			'selectors' => [
