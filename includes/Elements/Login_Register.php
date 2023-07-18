@@ -4521,6 +4521,18 @@ class Login_Register extends Widget_Base {
 				'terms_conditions_style_pot' => 'yes',
 			],
 		] );
+		
+		$this->add_control( 'eael_terms_label_link_color', [
+			'label'     => __( 'Link Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap a" => 'color: {{VALUE}};',
+			],
+			'condition' => [
+				'terms_conditions_style_pot' => 'yes',
+			],
+		] );
+
 		$this->add_control( 'eael_terms_label_bg_color', [
 			'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
