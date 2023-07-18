@@ -755,10 +755,7 @@ class Filterable_Gallery extends Widget_Base
                     'url' => '#',
                     'is_external' => '',
                 ],
-                'show_external' => true,
-                'condition' => [
-                    'fg_video_gallery_switch!' => 'true',
-                ],
+                'show_external' => true
             ]
         );
         
