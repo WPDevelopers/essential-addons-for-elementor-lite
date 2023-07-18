@@ -106,6 +106,9 @@ class Filterable_Gallery extends Widget_Base
                 'dynamic'     => [ 'active' => true ],
                 'label_block' => false,
                 'default' => 6,
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         
@@ -116,6 +119,9 @@ class Filterable_Gallery extends Widget_Base
                 'type' => Controls_Manager::TEXT,
                 'label_block' => false,
                 'default' => 500,
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         
@@ -163,6 +169,9 @@ class Filterable_Gallery extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item .gallery-item-thumbnail-wrap' => 'height: {{VALUE}}px;',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         
@@ -218,7 +227,10 @@ class Filterable_Gallery extends Widget_Base
 				'placeholder' => esc_html__( 'Not Found Text', 'essential-addons-for-elementor-lite' ),
 				'condition' => [
                         'eael_fg_caption_style' =>  'layout_3'
-                ]
+                ],
+                'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -397,6 +409,9 @@ class Filterable_Gallery extends Widget_Base
                 'condition' => [
                     'filter_enable' => 'yes',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         
@@ -452,6 +467,9 @@ class Filterable_Gallery extends Widget_Base
                         'dynamic' => ['active' => true],
                         'label_block' => true,
                         'default' => esc_html__('Gallery Item', 'essential-addons-for-elementor-lite'),
+                        'ai' => [
+                            'active' => false,
+                        ],
                     ],
                     [
                         'name' => 'eael_fg_control_custom_id',
@@ -461,6 +479,9 @@ class Filterable_Gallery extends Widget_Base
                         'dynamic' => ['active' => true],
                         'label_block' => true,
                         'default' => esc_html__('', 'essential-addons-for-elementor-lite'),
+                        'ai' => [
+                            'active' => false,
+                        ],
                     ],
                     [
                         'name' => 'eael_fg_custom_label',
@@ -478,6 +499,9 @@ class Filterable_Gallery extends Widget_Base
                         'label_block' => true,
                         'condition' => [
                             'eael_fg_custom_label' => 'yes',
+                        ],
+                        'ai' => [
+                            'active' => false,
                         ],
                     ],
                     [
@@ -539,6 +563,9 @@ class Filterable_Gallery extends Widget_Base
                 'condition' => [
                     'fg_video_gallery_switch' => 'true',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         
@@ -551,6 +578,9 @@ class Filterable_Gallery extends Widget_Base
                 'label_block' => true,
                 'default' => '',
                 'description' => __('Use the gallery control name from Control Settings. Separate multiple items with comma (e.g. <strong>Gallery Item, Gallery Item 2</strong>)', 'essential-addons-for-elementor-lite'),
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         
@@ -562,6 +592,9 @@ class Filterable_Gallery extends Widget_Base
                 'dynamic' => ['active' => true],
                 'label_block' => true,
                 'default' => esc_html__('Gallery item name', 'essential-addons-for-elementor-lite'),
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         
@@ -587,7 +620,10 @@ class Filterable_Gallery extends Widget_Base
                 'default' => esc_html__('$20.00', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'fg_item_price_switch' => 'true'
-                ]
+                ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         
@@ -612,7 +648,10 @@ class Filterable_Gallery extends Widget_Base
                 'default' => esc_html__('5', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'fg_item_ratings_switch' => 'true'
-                ]
+                ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         
@@ -637,7 +676,10 @@ class Filterable_Gallery extends Widget_Base
                 'default' => esc_html__('Essential Addons', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'fg_item_cat_switch' => 'true'
-                ]
+                ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         
@@ -660,6 +702,9 @@ class Filterable_Gallery extends Widget_Base
                 'default' => [
                     'url' => EAEL_PLUGIN_URL . '/assets/front-end/img/flexia-preview.jpg',
                 ],
+                'ai' => [
+                    'active' => false,
+                ],
             ]
         );
         
@@ -673,6 +718,9 @@ class Filterable_Gallery extends Widget_Base
                 ],
                 'condition' => [
                     'fg_video_gallery_switch' => 'true',
+                ],
+                'ai' => [
+                    'active' => false,
                 ],
             ]
         );
@@ -717,10 +765,7 @@ class Filterable_Gallery extends Widget_Base
                     'url' => '#',
                     'is_external' => '',
                 ],
-                'show_external' => true,
-                'condition' => [
-                    'fg_video_gallery_switch!' => 'true',
-                ],
+                'show_external' => true
             ]
         );
         
@@ -774,6 +819,9 @@ class Filterable_Gallery extends Widget_Base
                 'condition' => [
                     'pagination' => 'yes',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         
@@ -787,6 +835,9 @@ class Filterable_Gallery extends Widget_Base
                 'condition' => [
                     'pagination' => 'yes',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         
@@ -800,6 +851,9 @@ class Filterable_Gallery extends Widget_Base
                 'condition' => [
                     'pagination' => 'yes',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         
@@ -1575,6 +1629,9 @@ class Filterable_Gallery extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .video-popup:hover > img' => 'transform: scale({{VALUE}});',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         
@@ -2464,6 +2521,9 @@ class Filterable_Gallery extends Widget_Base
                 'label' => esc_html__('Placeholder', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'default'   => __('Search Gallery Item...', 'essential-addons-for-elementor-lite'),
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         
@@ -3089,7 +3149,7 @@ class Filterable_Gallery extends Widget_Base
 		$sorter_class = str_replace( '{', 'curlybracket', $sorter_class );
 		$sorter_class = str_replace( '}', 'curlybracket', $sorter_class );
 		$sorter_class = str_replace( '?', 'questionmark', $sorter_class );
-		$sorter_class = utf8_encode( $sorter_class );
+		$sorter_class = mb_convert_encoding( $sorter_class, 'UTF-8' );
 
 		return $sorter_class;
 	}
@@ -3242,7 +3302,8 @@ class Filterable_Gallery extends Widget_Base
             $gallery_store[$counter]['link'] = $gallery['eael_fg_gallery_img_link'];
             
             $gallery_store[$counter]['video_gallery_switch'] = $gallery['fg_video_gallery_switch'];
-            
+
+            $gallery['eael_fg_gallery_item_video_link'] = empty( $gallery['eael_fg_gallery_item_video_link'] ) ? '' : $gallery['eael_fg_gallery_item_video_link'];
             if (strpos($gallery['eael_fg_gallery_item_video_link'], 'youtu.be') != false) {
                 preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/', $gallery['eael_fg_gallery_item_video_link'], $matches);
                 $video_link = !empty($matches) ? sprintf('https://www.youtube.com/watch?v=%s', $matches[1]) : '';

@@ -5,6 +5,11 @@ $theme-preset3: #5f3ae0;
 $theme-preset4: #ec3b75;
 
 .eael-woo-product-carousel-container {
+    .swiper-button-next:after, .swiper-rtl .swiper-button-prev:after,
+    .swiper-button-prev:after, .swiper-rtl .swiper-button-next:after {
+        content: '';
+    }
+
     //theme
     ins {
         background: transparent;

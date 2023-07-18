@@ -1,3 +1,7 @@
+.eael-woo-product-carousel-container .swiper-button-next:after, .eael-woo-product-carousel-container .swiper-rtl .swiper-button-prev:after,
+.eael-woo-product-carousel-container .swiper-button-prev:after, .eael-woo-product-carousel-container .swiper-rtl .swiper-button-next:after {
+  content: "";
+}
 .eael-woo-product-carousel-container ins {
   background: transparent;
 }

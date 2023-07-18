@@ -21,6 +21,7 @@ trait Elements {
 	public function register_controls( $controls_manager ) {
 		if ( version_compare( ELEMENTOR_VERSION, '3.5.0', '>=' ) ) {
 			$controls_manager->register( new \Essential_Addons_Elementor\Controls\Select2() );
+			$controls_manager->add_group_control( 'eael-background', new \Essential_Addons_Elementor\Controls\EAEL_Background() );
 		} else {
 			$controls_manager->register_control( 'eael-select2', new \Essential_Addons_Elementor\Controls\Select2() );
 		}
@@ -322,6 +323,12 @@ trait Elements {
 				'icon'       => 'eaicon-advanced-search',
 				'categories' => '["essential-addons-elementor"]',
 			],
+			[
+				'name'       => 'eael-woo-thank-you',
+				'title'      => __( 'Woo Thank You', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eaicon-thank-you',
+				'categories' => '["essential-addons-elementor"]',
+			],
 		] );
 
 		$config['promotionWidgets'] = $combine_array;
@@ -516,10 +523,7 @@ trait Elements {
 				$toc_style_class .= ( $auto_highlight == 'yes' ) ? ' eael-toc-auto-highlight' : ' ';
 				$toc_style_class .= ( $auto_highlight == 'yes' && $auto_highlight_single_item_only == 'yes' ) ? ' eael-toc-highlight-single-item' : ' ';
 				$title_url       = ( $title_to_url == 'yes' ) ? 'true' : 'false';
-
-				if ( ! empty( $icon_check['value'] ) ) {
-					$icon = $icon_check['value'];
-				}
+				$icon_html       = ! empty( $icon_check['value'] ) ? "<i class='" . esc_attr( $icon_check['value'] ) . "'></i>" : '';
 
 				$table_of_content_html = "<div data-eaelTocTag='" . esc_attr( $support_tag ) . "' data-contentSelector='" . esc_attr( $content_selector ) . "' data-excludeSelector='" . esc_attr( $exclude_selector ) . "' data-stickyScroll='" . esc_attr( $sticky_scroll['size'] ) . "' data-titleUrl='" . esc_attr( $title_url ) . "' data-page_offset='" . esc_attr( $page_offset ) . "' id='eael-toc' class='" . esc_attr( $el_class ) . " '>
                     <div class='eael-toc-header'>
@@ -529,7 +533,7 @@ trait Elements {
                     <div class='eael-toc-body'>
                         <ul id='eael-toc-list' class='eael-toc-list " . esc_attr( $toc_style_class ) . "'></ul>
                     </div>
-                    <button class='eael-toc-button'><i class='" . esc_attr( $icon ) . "'></i><span>{$toc_title}</span></button>
+                    <button class='eael-toc-button'>" . wp_kses( $icon_html, [ 'i' => [ 'class' => [] ] ] ) . "<span>{$toc_title}</span></button>
                 </div>";
 
 				if ( $this->get_extensions_value( 'eael_ext_table_of_content' ) != 'yes' ) {
