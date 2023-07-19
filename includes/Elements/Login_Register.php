@@ -5729,12 +5729,12 @@ class Login_Register extends Widget_Base {
 										}
 									}
 									?>
-                                </div>
 
 								<?php
 								if ( 'password' === $field['field_type'] ) {
 									do_action( 'eael/login-register/after-password-field', $this );
 								}
+                                echo "</div>";
 							endforeach;
 							$this->print_necessary_hidden_fields( 'register' );
 							$this->print_terms_condition_notice();
