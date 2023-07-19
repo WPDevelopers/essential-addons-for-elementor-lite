@@ -5,7 +5,14 @@
             var IDSelect2 = $(ID).select2({
                 minimumInputLength: 3,
                 ajax: {
-                    url: eael_select2_localize.ajaxurl + "?action=eael_select2_search_post&post_type=" + obj.data.source_type + '&source_name=' + obj.data.source_name,
+                    method: 'POST',
+                    // url: eael_select2_localize.ajaxurl + "?action=eael_select2_search_post&post_type=" + obj.data.source_type + '&source_name=' + obj.data.source_name,
+                    url: eael_select2_localize.ajaxurl,
+                    data: {
+                        action: 'eael_select2_search_post',
+                        post_type: obj.data.source_type,
+                        source_name: obj.data.source_name
+                    },
                     dataType: 'json'
                 },
                 initSelection: function (element, callback) {
@@ -28,8 +35,14 @@
                         label.after('<span class="elementor-control-spinner">&nbsp;<i class="eicon-spinner eicon-animation-spin"></i>&nbsp;</span>');
                         $.ajax({
                             method: "POST",
-                            url: eael_select2_localize.ajaxurl + "?action=eael_select2_get_title",
-                            data: {post_type: obj.data.source_type, source_name: obj.data.source_name, id: ids}
+                            // url: eael_select2_localize.ajaxurl + "?action=eael_select2_get_title",
+                            url: eael_select2_localize.ajaxurl,
+                            data: {
+                                action: 'eael_select2_get_title',
+                                post_type: obj.data.source_type, 
+                                source_name: obj.data.source_name, 
+                                id: ids
+                            }
                         }).done(function (response) {
                             if (response.success && typeof response.data.results != 'undefined') {
                                 let eaelSelect2Options = '';
