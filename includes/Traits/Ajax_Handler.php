@@ -793,12 +793,7 @@ trait Ajax_Handler {
 			}
 		}
 
-		
-		wp_send_json( 
-			[ 
-				'results' => $results
-			] 
-		);
+		wp_send_json( [ 'results' => $results ] );
 	}
 
 	/**

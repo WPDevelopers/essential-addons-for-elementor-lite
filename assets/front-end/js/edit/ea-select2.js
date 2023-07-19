@@ -45,7 +45,6 @@
                                 id: ids
                             }
                         }).done(function (response) {
-                            // console.log(response);
                             if (response.success && typeof response.data.results != 'undefined') {
                                 let eaelSelect2Options = '';
                                 ids.forEach(function (item, index){
