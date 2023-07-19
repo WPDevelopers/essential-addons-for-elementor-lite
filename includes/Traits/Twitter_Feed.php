@@ -67,7 +67,16 @@ trait Twitter_Feed
             if ( $twitter_v2 ){
                 $user_id = '716304854';
                 $token = ! empty( $settings['eael_twitter_feed_bearer_token'] ) ? $settings['eael_twitter_feed_bearer_token'] : '';
-                $api_endpoint = "https://api.twitter.com/2/users/$user_id/tweets?max_results=100";
+                
+                $tweet_fields = [
+                    'entities', 
+                    'public_metrics', 
+                    'in_reply_to_user_id',
+                    'attachments',
+                ];
+                $tweet_fields_params = implode(',', $tweet_fields);
+
+                $api_endpoint = "https://api.twitter.com/2/users/$user_id/tweets?max_results=100&tweet.fields=$tweet_fields_params";
             }
             
             $response = wp_remote_get($api_endpoint, [
@@ -76,18 +85,16 @@ trait Twitter_Feed
                     'Authorization' => "Bearer $token",
                 ],
             ]);
-
-            // echo "<pre>";
-            // print_r($response);
-            // wp_die('ok');
             
 	        if ( is_wp_error( $response ) ) {
 		        return $html;
 	        }
 
 	        if ( ! empty( $response['response'] ) && $response['response']['code'] == 200 ) {
-		        $items      = json_decode( wp_remote_retrieve_body( $response ), true );
-		        set_transient( $cache_key, $items, $expiration );
+		        $items  = json_decode( wp_remote_retrieve_body( $response ), true );
+                $items  = $twitter_v2 && ! empty( $items['data'] ) ? $items['data'] : $items; 
+		        
+                set_transient( $cache_key, $items, $expiration );
 	        }
         }
 
@@ -95,12 +102,13 @@ trait Twitter_Feed
 		    return $html;
 	    }
 
-        if ($settings['eael_twitter_feed_hashtag_name']) {
+        if ( $settings['eael_twitter_feed_hashtag_name'] ) {
             foreach ($items as $key => $item) {
                 $match = false;
 
                 if ($item['entities']['hashtags']) {
                     foreach ($item['entities']['hashtags'] as $tag) {
+                        $tag['text'] = $twitter_v2 ? $tag['tag'] : $tag['text'];
                         if (strcasecmp($tag['text'], $settings['eael_twitter_feed_hashtag_name']) == 0) {
                             $match = true;
                         }
@@ -118,7 +126,7 @@ trait Twitter_Feed
         $counter = 0;
         $current_page = 1;
         self::$twitter_feed_fetched_count = count($items);
-            
+
         foreach ($items as $item) {
             $counter++;
             if ($post_per_page > 0) {
@@ -132,13 +140,17 @@ trait Twitter_Feed
                 continue;
             }
 
+            $item['full_text'] = $twitter_v2 ? $item['text'] : $item['full_text'];
             $delimeter = strlen($item['full_text']) > $settings['eael_twitter_feed_content_length'] ? '...' : '';
 
 	        $media = isset( $item['extended_entities']['media'] ) ? $item['extended_entities']['media'] :
 		        ( isset( $item['retweeted_status']['entities']['media'] ) ? $item['retweeted_status']['entities']['media'] :
 			        ( isset( $item['quoted_status']['entities']['media'] ) ? $item['quoted_status']['entities']['media'] :
 				        [] ) );
-
+            
+            // if( $twitter_v2 ){
+            //     $media = $item['attachments'];
+            // }
             $show_pagination = ! empty($settings['pagination']) && 'yes' === $settings['pagination'] ? true : false;
             
             if($show_pagination){
@@ -152,6 +164,7 @@ trait Twitter_Feed
                 $pagination_class .= ' eael-last-twitter-feed-item';
             }
 
+            // ToDo: need to find user
             $html .= '<div class="eael-twitter-feed-item ' . esc_attr( $class ) . ' ' . esc_attr( $pagination_class ) . ' ">
 				<div class="eael-twitter-feed-item-inner">
 				    <div class="eael-twitter-feed-item-header clearfix">';
