@@ -792,7 +792,13 @@ trait Ajax_Handler {
 				$results[] = [ 'text' => $item, 'id' => $key ];
 			}
 		}
-		wp_send_json( [ 'results' => $results ] );
+
+		
+		wp_send_json( 
+			[ 
+				'results' => $results
+			] 
+		);
 	}
 
 	/**

@@ -5,14 +5,17 @@
             var IDSelect2 = $(ID).select2({
                 minimumInputLength: 3,
                 ajax: {
-                    method: 'POST',
+                    type: 'POST',
                     url: eael_select2_localize.ajaxurl,
-                    data: {
-                        action: 'eael_select2_search_post',
-                        post_type: obj.data.source_type,
-                        source_name: obj.data.source_name
+                    dataType: 'json',
+                    data: function ( params ) {
+                        return {
+                            action: 'eael_select2_search_post',
+                            post_type: obj.data.source_type,
+                            source_name: obj.data.source_name,
+                            term: params.term,
+                        }
                     },
-                    dataType: 'json'
                 },
                 initSelection: function (element, callback) {
                     if (!obj.multiple) {
@@ -42,6 +45,7 @@
                                 id: ids
                             }
                         }).done(function (response) {
+                            // console.log(response);
                             if (response.success && typeof response.data.results != 'undefined') {
                                 let eaelSelect2Options = '';
                                 ids.forEach(function (item, index){
