@@ -173,6 +173,9 @@ class Woo_Checkout extends Widget_Base {
 				'dynamic' => [
 					'active' => true,
 				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -212,6 +215,9 @@ class Woo_Checkout extends Widget_Base {
 				'condition' => [
 					'ea_woo_checkout_table_header_text' => 'yes',
 				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 		$this->add_control(
@@ -228,6 +234,9 @@ class Woo_Checkout extends Widget_Base {
 				],
 				'condition' => [
 					'ea_woo_checkout_table_header_text' => 'yes',
+				],
+				'ai' => [
+					'active' => false,
 				],
 			]
 		);
@@ -246,6 +255,9 @@ class Woo_Checkout extends Widget_Base {
 				'condition' => [
 					'ea_woo_checkout_table_header_text' => 'yes',
 				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 		$this->add_control(
@@ -260,6 +272,9 @@ class Woo_Checkout extends Widget_Base {
                 'condition' => [
                     'ea_woo_checkout_table_header_text' => 'yes',
                 ],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 		$this->add_control(
@@ -274,6 +289,9 @@ class Woo_Checkout extends Widget_Base {
                 'condition' => [
                     'ea_woo_checkout_table_header_text' => 'yes',
                 ],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 		$this->add_control(
@@ -288,6 +306,9 @@ class Woo_Checkout extends Widget_Base {
                 'condition' => [
                     'ea_woo_checkout_table_header_text' => 'yes',
                 ],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -315,6 +336,9 @@ class Woo_Checkout extends Widget_Base {
 				],
 				'condition' => [
 					'ea_woo_checkout_shop_link' => 'yes',
+				],
+				'ai' => [
+					'active' => false,
 				],
 			]
 		);
@@ -360,6 +384,9 @@ class Woo_Checkout extends Widget_Base {
 				'dynamic' => [
 					'active' => true,
 				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 		$this->add_control(
@@ -370,6 +397,9 @@ class Woo_Checkout extends Widget_Base {
 				'default' => __( 'Click here to enter your code', 'essential-addons-for-elementor-lite' ),
 				'dynamic' => [
 					'active' => true,
+				],
+				'ai' => [
+					'active' => false,
 				],
 			]
 		);
@@ -395,6 +425,9 @@ class Woo_Checkout extends Widget_Base {
 				'dynamic' => [
 					'active' => true,
 				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -406,6 +439,9 @@ class Woo_Checkout extends Widget_Base {
 				'default' => __( 'Apply Coupon', 'essential-addons-for-elementor-lite' ),
 				'dynamic' => [
 					'active' => true,
+				],
+				'ai' => [
+					'active' => false,
 				],
 			]
 		);
@@ -470,6 +506,9 @@ class Woo_Checkout extends Widget_Base {
 				'dynamic' => [
 					'active' => true,
 				],
+				'ai' => [
+					'active' => false,
+				],
 			]
     );
     
@@ -493,6 +532,9 @@ class Woo_Checkout extends Widget_Base {
 				'default' => __( 'Click here to login', 'essential-addons-for-elementor-lite' ),
 				'dynamic' => [
 					'active' => true,
+				],
+				'ai' => [
+					'active' => false,
 				],
 			]
 		);
@@ -518,6 +560,9 @@ class Woo_Checkout extends Widget_Base {
 				'dynamic' => [
 					'active' => true,
 				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 		$this->add_control(
@@ -529,6 +574,9 @@ class Woo_Checkout extends Widget_Base {
 				'dynamic' => [
 					'active' => true,
 				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 		$this->add_control(
@@ -539,6 +587,9 @@ class Woo_Checkout extends Widget_Base {
 				'default' => __( 'Additional Information', 'essential-addons-for-elementor-lite' ),
 				'dynamic' => [
 					'active' => true,
+				],
+				'ai' => [
+					'active' => false,
 				],
 			]
 		);
@@ -627,6 +678,9 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::TEXT,
 				'default' => esc_html__( 'List Title' , 'essential-addons-for-elementor-lite' ),
 				'label_block' => true,
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -715,6 +769,9 @@ class Woo_Checkout extends Widget_Base {
 				'dynamic' => [
 					'active' => true,
 				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 		$this->add_control(
@@ -725,6 +782,9 @@ class Woo_Checkout extends Widget_Base {
 				'default' => __( 'Place Order', 'essential-addons-for-elementor-lite' ),
 				'dynamic' => [
 					'active' => true,
+				],
+				'ai' => [
+					'active' => false,
 				],
 			]
 		);
