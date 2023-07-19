@@ -603,6 +603,14 @@ $elements = [
 				'promotion' => 'new'
 			],
 			[
+				'key'       => 'woo-thank-you',
+				'title'     => __( 'Woo Thank You', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/woo-thank-you',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-woo-thank-you',
+				'promotion' => 'new',
+                'is_pro'    => true
+			],
+			[
 				'key'       => 'woo-product-compare',
 				'title'     => __( 'Woo Product Compare', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/woo-product-compare/',
