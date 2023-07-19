@@ -746,15 +746,15 @@ trait Ajax_Handler {
 		$post_type   = 'post';
 		$source_name = 'post_type';
 
-		if ( ! empty( $_GET['post_type'] ) ) {
-			$post_type = sanitize_text_field( $_GET['post_type'] );
+		if ( ! empty( $_POST['post_type'] ) ) {
+			$post_type = sanitize_text_field( $_POST['post_type'] );
 		}
 
-		if ( ! empty( $_GET['source_name'] ) ) {
-			$source_name = sanitize_text_field( $_GET['source_name'] );
+		if ( ! empty( $_POST['source_name'] ) ) {
+			$source_name = sanitize_text_field( $_POST['source_name'] );
 		}
 
-		$search  = ! empty( $_GET['term'] ) ? sanitize_text_field( $_GET['term'] ) : '';
+		$search  = ! empty( $_POST['term'] ) ? sanitize_text_field( $_POST['term'] ) : '';
 		$results = $post_list = [];
 		switch ( $source_name ) {
 			case 'taxonomy':
