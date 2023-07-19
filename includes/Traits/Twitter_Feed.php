@@ -24,12 +24,19 @@ trait Twitter_Feed
         $items = get_transient( $cache_key );
         $html = '';
 
-        if (empty($settings['eael_twitter_feed_consumer_key']) || empty($settings['eael_twitter_feed_consumer_secret'])) {
+        // $twitter_v2 = eael_twitter_feed_bearer_token
+        $twitter_v2 = ! empty( $settings['eael_twitter_api_v2'] ) && 'yes' === $settings['eael_twitter_api_v2'] ? true : false;
+        
+        if ( ! $twitter_v2 && ( empty($settings['eael_twitter_feed_consumer_key']) || empty($settings['eael_twitter_feed_consumer_secret']) ) ) {
+            return;
+        }
+
+        if ( $twitter_v2 && empty( $settings['eael_twitter_feed_bearer_token'] ) ) {
             return;
         }
 
         if ($items === false) {
-            if (empty($token)) {
+            if ( ! $twitter_v2 && empty( $token ) ) {
                 $credentials = base64_encode($settings['eael_twitter_feed_consumer_key'] . ':' . $settings['eael_twitter_feed_consumer_secret']);
 
                 add_filter('https_ssl_verify', '__return_false');
@@ -55,14 +62,25 @@ trait Twitter_Feed
 
             add_filter('https_ssl_verify', '__return_false');
 
-            $response = wp_remote_get('https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=' . $settings['eael_twitter_feed_ac_name'] . '&count=999&tweet_mode=extended', [
-                'httpversion' => '1.1',
+            $api_endpoint = 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=' . $settings['eael_twitter_feed_ac_name'] . '&count=999&tweet_mode=extended';
+
+            if ( $twitter_v2 ){
+                $user_id = '716304854';
+                $token = ! empty( $settings['eael_twitter_feed_bearer_token'] ) ? $settings['eael_twitter_feed_bearer_token'] : '';
+                $api_endpoint = "https://api.twitter.com/2/users/$user_id/tweets?max_results=100";
+            }
+            
+            $response = wp_remote_get($api_endpoint, [
                 'blocking' => true,
                 'headers' => [
                     'Authorization' => "Bearer $token",
                 ],
             ]);
 
+            // echo "<pre>";
+            // print_r($response);
+            // wp_die('ok');
+            
 	        if ( is_wp_error( $response ) ) {
 		        return $html;
 	        }
