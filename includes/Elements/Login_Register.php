@@ -873,7 +873,8 @@ class Login_Register extends Widget_Base {
 				'size' => 100,
 			],
 			'selectors'  => [
-				'{{WRAPPER}} .eael-login-form input:not(.eael-lr-btn)' => 'width: {{SIZE}}{{UNIT}};',
+				'{{WRAPPER}} .eael-login-form .eael-user-login' => 'width: {{SIZE}}{{UNIT}};',
+				'{{WRAPPER}} .eael-login-form .eael-user-password' => 'width: {{SIZE}}{{UNIT}};',
 			],
 			'separator'  => 'before',
 		] );
@@ -5383,7 +5384,7 @@ class Login_Register extends Widget_Base {
                                   id="eael-login-form"
                                   method="post">
 								<?php do_action( 'eael/login-register/after-login-form-open', $this ); ?>
-                                <div class="eael-lr-form-group">
+                                <div class="eael-lr-form-group eael-user-login">
 									<?php if ( $display_label && $u_label ) {
 										printf( '<label for="eael-user-login" class="eael-field-label">%s</label>', HelperCLass::eael_wp_kses( $u_label ) );
 									} ?>
@@ -5401,7 +5402,7 @@ class Login_Register extends Widget_Base {
 										echo '<i class="fas fa-user"></i>';
 									} ?>
                                 </div>
-                                <div class="eael-lr-form-group">
+                                <div class="eael-lr-form-group eael-user-password">
 									<?php if ( $display_label && $p_label ) {
 										printf( '<label for="eael-user-password" class="eael-field-label">%s</label>', $p_label );
 									} ?>
