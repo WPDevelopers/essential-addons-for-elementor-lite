@@ -19,14 +19,16 @@ trait Twitter_Feed
     public function twitter_feed_render_items($id, $settings, $class = '')
     {
         $token = get_option($id . '_' . $settings['eael_twitter_feed_ac_name'] . '_tf_token');
-	    $expiration = ! empty( $settings['eael_auto_clear_cache'] ) && ! empty( $settings['eael_twitter_feed_cache_limit'] ) ? absint( $settings['eael_twitter_feed_cache_limit'] ) * MINUTE_IN_SECONDS : DAY_IN_SECONDS;
+        $user_object = get_option($id . '_' . $settings['eael_twitter_feed_ac_name'] . '_tf_user_object');
+	    
+        $expiration = ! empty( $settings['eael_auto_clear_cache'] ) && ! empty( $settings['eael_twitter_feed_cache_limit'] ) ? absint( $settings['eael_twitter_feed_cache_limit'] ) * MINUTE_IN_SECONDS : DAY_IN_SECONDS;
 	    $cache_key = $settings['eael_twitter_feed_ac_name'] . '_' . $expiration . '_' . md5( $settings['eael_twitter_feed_hashtag_name'] . $settings['eael_twitter_feed_consumer_key'] . $settings['eael_twitter_feed_consumer_secret'] ) . '_tf_cache';
         $items = get_transient( $cache_key );
         $html = '';
 
-        // $twitter_v2 = eael_twitter_feed_bearer_token
         $twitter_v2 = ! empty( $settings['eael_twitter_api_v2'] ) && 'yes' === $settings['eael_twitter_api_v2'] ? true : false;
-        
+        $account_name = sanitize_text_field( str_replace('@', '', $settings['eael_twitter_feed_ac_name']) );
+                
         if ( ! $twitter_v2 && ( empty($settings['eael_twitter_feed_consumer_key']) || empty($settings['eael_twitter_feed_consumer_secret']) ) ) {
             return;
         }
@@ -65,16 +67,34 @@ trait Twitter_Feed
             $api_endpoint = 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=' . $settings['eael_twitter_feed_ac_name'] . '&count=999&tweet_mode=extended';
 
             if ( $twitter_v2 ){
-                $user_id = '716304854';
                 $token = ! empty( $settings['eael_twitter_feed_bearer_token'] ) ? $settings['eael_twitter_feed_bearer_token'] : '';
-                
-                $tweet_fields = [
-                    'entities', 
-                    'public_metrics', 
-                    'in_reply_to_user_id',
-                    'attachments',
-                ];
+                $tweet_fields = [ 'entities', 'public_metrics', 'in_reply_to_user_id', 'attachments', 'created_at' ];
                 $tweet_fields_params = implode(',', $tweet_fields);
+                
+                if ( empty( $user_object ) ){
+                    $api_endpoint_user = "https://api.twitter.com/2/users/by/username/$account_name?user.fields=profile_image_url";
+
+                    $response_user = wp_remote_get($api_endpoint_user, [
+                        'blocking' => true,
+                        'headers' => [
+                            'Authorization' => "Bearer $token",
+                        ],
+                    ]);
+    
+                    $body_user = json_decode(wp_remote_retrieve_body($response_user));
+    
+                    if ($body_user) {
+                        $user_object = $body_user;
+                        update_option($id . '_' . $settings['eael_twitter_feed_ac_name'] . '_tf_user_object', $user_object);
+                        
+                        $user_id = $user_object->id;
+                        $user_profile_image_url = $user_object->profile_image_url;
+                    }
+                }
+
+                if( empty( $user_id ) ){
+                    return $html;
+                }
 
                 $api_endpoint = "https://api.twitter.com/2/users/$user_id/tweets?max_results=100&tweet.fields=$tweet_fields_params";
             }
@@ -133,7 +153,12 @@ trait Twitter_Feed
                 $current_page = ceil($counter / $post_per_page);
             }
 
-            $is_reply = !empty($item['in_reply_to_status_id']) ? true : false;
+            $is_reply = ! empty($item['in_reply_to_status_id']) ? true : false;
+            
+            if( $twitter_v2 ){
+                $is_reply = !empty($item['in_reply_to_user_id']) ? true : false;
+            }
+
             $show_reply = ( !empty($settings['eael_twitter_feed_show_replies']) && 'true' === $settings['eael_twitter_feed_show_replies'] ) ? true : false;
 
             if($is_reply && !$show_reply){
@@ -148,6 +173,7 @@ trait Twitter_Feed
 			        ( isset( $item['quoted_status']['entities']['media'] ) ? $item['quoted_status']['entities']['media'] :
 				        [] ) );
             
+            #ToDo media
             // if( $twitter_v2 ){
             //     $media = $item['attachments'];
             // }
@@ -165,6 +191,8 @@ trait Twitter_Feed
             }
 
             // ToDo: need to find user
+            // https://api.twitter.com/2/users/by/username/:username?user.fields=profile_image_url
+            // user.profile_image_url, user.name
             $html .= '<div class="eael-twitter-feed-item ' . esc_attr( $class ) . ' ' . esc_attr( $pagination_class ) . ' ">
 				<div class="eael-twitter-feed-item-inner">
 				    <div class="eael-twitter-feed-item-header clearfix">';
@@ -192,12 +220,18 @@ trait Twitter_Feed
                             if ( ! empty( $settings['eael_twitter_feed_hash_linked'] ) && $settings['eael_twitter_feed_hash_linked'] === 'yes' && $item['entities']['hashtags'] ) {
                                 $hashtags = [];
                                 foreach ( $item['entities']['hashtags'] as $hashtag ){
+                                    $hashtag['text'] = $twitter_v2 ? $hashtag['tag'] : $hashtag['text'];
+                                    
                                     if ( $hashtag['text'] ){
                                         $hashtags['#'.$hashtag['text']] = "<a href='https://twitter.com/hashtag/{$hashtag['text']}?src=hashtag_click' target='_blank'>#{$hashtag['text']}</a>";
                                     }
                                 }
                                 $content = str_replace( array_keys($hashtags), $hashtags, $content );
                             }
+                            #ToDo user mentions
+                            // $item['entities']['user_mentions']
+                            // $item['user']['screen_name']
+                            // $item['id_str']
                             if ( ! empty( $settings['eael_twitter_feed_mention_linked'] ) && $settings['eael_twitter_feed_mention_linked'] === 'yes' && $item['entities']['user_mentions'] ) {
                                 $mentions = [];
                                 foreach ( $item['entities']['user_mentions'] as $mention ){
