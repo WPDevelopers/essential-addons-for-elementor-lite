@@ -1190,7 +1190,7 @@ class Login_Register extends Widget_Base {
 				'size' => 100,
 			],
 			'selectors'  => [
-				'{{WRAPPER}} .eael-resetpassword-form input:not(.eael-lr-btn)' => 'width: {{SIZE}}{{UNIT}};',
+				'{{WRAPPER}} .eael-resetpassword-form .eael-lr-form-group ' => 'width: {{SIZE}}{{UNIT}};',
 			],
 			'separator'  => 'before',
 		] );
