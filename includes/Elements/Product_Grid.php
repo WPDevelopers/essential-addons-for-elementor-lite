@@ -138,14 +138,14 @@ class Product_Grid extends Widget_Base
     protected function eael_get_product_orderby_options()
     {
         return apply_filters('eael/product-grid/orderby-options', [
-            'ID' => __('Product ID', 'essential-addons-for-elementor-lite'),
-            'title' => __('Product Title', 'essential-addons-for-elementor-lite'),
-            '_price' => __('Price', 'essential-addons-for-elementor-lite'),
-            '_sku' => __('SKU', 'essential-addons-for-elementor-lite'),
-            'date' => __('Date', 'essential-addons-for-elementor-lite'),
-            'modified' => __('Last Modified Date', 'essential-addons-for-elementor-lite'),
-            'parent' => __('Parent Id', 'essential-addons-for-elementor-lite'),
-            'rand' => __('Random', 'essential-addons-for-elementor-lite'),
+            'ID'         => __('Product ID', 'essential-addons-for-elementor-lite'),
+            'title'      => __('Product Title', 'essential-addons-for-elementor-lite'),
+            '_price'     => __('Price', 'essential-addons-for-elementor-lite'),
+            '_sku'       => __('SKU', 'essential-addons-for-elementor-lite'),
+            'date'       => __('Date', 'essential-addons-for-elementor-lite'),
+            'modified'   => __('Last Modified Date', 'essential-addons-for-elementor-lite'),
+            'parent'     => __('Parent Id', 'essential-addons-for-elementor-lite'),
+            'rand'       => __('Random', 'essential-addons-for-elementor-lite'),
             'menu_order' => __('Menu Order', 'essential-addons-for-elementor-lite'),
         ]);
     }
@@ -153,12 +153,13 @@ class Product_Grid extends Widget_Base
     protected function eael_get_product_filterby_options()
     {
         return apply_filters('eael/product-grid/filterby-options', [
-            'recent-products' => esc_html__('Recent Products', 'essential-addons-for-elementor-lite'),
-            'featured-products' => esc_html__('Featured Products', 'essential-addons-for-elementor-lite'),
+            'recent-products'       => esc_html__('Recent Products', 'essential-addons-for-elementor-lite'),
+            'featured-products'     => esc_html__('Featured Products', 'essential-addons-for-elementor-lite'),
             'best-selling-products' => esc_html__('Best Selling Products', 'essential-addons-for-elementor-lite'),
-            'sale-products' => esc_html__('Sale Products', 'essential-addons-for-elementor-lite'),
-            'top-products' => esc_html__('Top Rated Products', 'essential-addons-for-elementor-lite'),
-            'manual' => esc_html__('Manual Selection', 'essential-addons-for-elementor-lite'),
+            'sale-products'         => esc_html__('Sale Products', 'essential-addons-for-elementor-lite'),
+            'top-products'          => esc_html__('Top Rated Products', 'essential-addons-for-elementor-lite'),
+            'related-products'      => esc_html__('Related Products', 'essential-addons-for-elementor-lite'),
+            'manual'                => esc_html__('Manual Selection', 'essential-addons-for-elementor-lite'),
         ]);
     }
 
@@ -3298,6 +3299,27 @@ class Product_Grid extends Widget_Base
             $args['meta_key'] = '_wc_average_rating';
             $args['orderby'] = 'meta_value_num';
             $args['order'] = 'DESC';
+        }
+        else if ( $settings['eael_product_grid_product_filter'] == 'related-products' ) {
+            $current_product_id = get_the_ID();
+            $product_categories = wp_get_post_terms( $current_product_id, 'product_cat', array( 'fields' => 'ids' ) );
+            $product_tags       = wp_get_post_terms( $current_product_id, 'product_tag', array( 'fields' => 'names' ) );
+            $args['tax_query'] = array(
+                'relation' => 'OR',
+                array(
+                    'taxonomy' => 'product_cat',
+                    'field'    => 'term_id',
+                    'terms'    => $product_categories,
+                    'operator' => 'IN',
+                ),
+                array(
+                    'taxonomy' => 'product_tag',
+                    'field'    => 'name',
+                    'terms'    => $product_tags,
+                    'operator' => 'IN',
+                ),
+            );
+
         }
         else if( $settings['eael_product_grid_product_filter'] == 'manual' ){
             $args['post__in'] = $settings['eael_product_grid_products_in'] ? $settings['eael_product_grid_products_in'] : [ 0 ];
