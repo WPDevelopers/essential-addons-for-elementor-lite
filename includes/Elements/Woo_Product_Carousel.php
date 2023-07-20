@@ -138,6 +138,7 @@ class Woo_Product_Carousel extends Widget_Base {
             'best-selling-products' => esc_html__( 'Best Selling Products', 'essential-addons-for-elementor-lite' ),
             'sale-products'         => esc_html__( 'Sale Products', 'essential-addons-for-elementor-lite' ),
             'top-products'          => esc_html__( 'Top Rated Products', 'essential-addons-for-elementor-lite' ),
+            'related-products'      => esc_html__('Related Products', 'essential-addons-for-elementor-lite'),
         ] );
     }
 
@@ -3180,6 +3181,27 @@ class Woo_Product_Carousel extends Widget_Base {
 		    $args[ 'meta_key' ] = '_wc_average_rating';
 		    $args[ 'orderby' ]  = 'meta_value_num';
 		    $args[ 'order' ]    = 'DESC';
+	    }
+
+        if ( $filter == 'related-products' ) {
+		    $current_product_id = get_the_ID();
+            $product_categories = wp_get_post_terms( $current_product_id, 'product_cat', array( 'fields' => 'ids' ) );
+            $product_tags       = wp_get_post_terms( $current_product_id, 'product_tag', array('fields' => 'names' ) );
+            $args['tax_query'] = array(
+                'relation' => 'OR',
+                array(
+                    'taxonomy' => 'product_cat',
+                    'field'    => 'term_id',
+                    'terms'    => $product_categories,
+                    'operator' => 'IN',
+                ),
+                array(
+                    'taxonomy' => 'product_tag',
+                    'field'    => 'name',
+                    'terms'    => $product_tags,
+                    'operator' => 'IN',
+                ),
+            );
 	    }
 
 	    if ( get_option( 'woocommerce_hide_out_of_stock_items' ) == 'yes' ) {
