@@ -100,7 +100,7 @@ trait Twitter_Feed
                     }
                 }
 
-                if( empty( $user_id ) ){
+                if ( empty( $user_id ) ){
                     return $html;
                 }
 
@@ -180,11 +180,7 @@ trait Twitter_Feed
 		        ( isset( $item['retweeted_status']['entities']['media'] ) ? $item['retweeted_status']['entities']['media'] :
 			        ( isset( $item['quoted_status']['entities']['media'] ) ? $item['quoted_status']['entities']['media'] :
 				        [] ) );
-            
-            #ToDo media
-            // if( $twitter_v2 ){
-            //     $media = $item['attachments'];
-            // }
+
             $show_pagination = ! empty($settings['pagination']) && 'yes' === $settings['pagination'] ? true : false;
             
             if($show_pagination){
