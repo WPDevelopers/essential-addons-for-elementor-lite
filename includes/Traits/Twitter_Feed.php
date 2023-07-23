@@ -20,7 +20,6 @@ trait Twitter_Feed
     {
         $token = get_option($id . '_' . $settings['eael_twitter_feed_ac_name'] . '_tf_token');
         $user_object = get_option($id . '_' . $settings['eael_twitter_feed_ac_name'] . '_tf_user_object');
-	    
         $expiration = ! empty( $settings['eael_auto_clear_cache'] ) && ! empty( $settings['eael_twitter_feed_cache_limit'] ) ? absint( $settings['eael_twitter_feed_cache_limit'] ) * MINUTE_IN_SECONDS : DAY_IN_SECONDS;
 	    $cache_key = $settings['eael_twitter_feed_ac_name'] . '_' . $expiration . '_' . md5( $settings['eael_twitter_feed_hashtag_name'] . $settings['eael_twitter_feed_consumer_key'] . $settings['eael_twitter_feed_consumer_secret'] ) . '_tf_cache';
         $items = get_transient( $cache_key );
@@ -35,6 +34,13 @@ trait Twitter_Feed
 
         if ( $twitter_v2 && empty( $settings['eael_twitter_feed_bearer_token'] ) ) {
             return;
+        }
+
+        if( $user_object ){
+            $user_id = $user_object->id;
+            $user_profile_image_url = $user_object->profile_image_url;
+            $user_username = $user_object->username;
+            $user_name = $user_object->name; 
         }
 
         if ($items === false) {
@@ -65,12 +71,12 @@ trait Twitter_Feed
             add_filter('https_ssl_verify', '__return_false');
 
             $api_endpoint = 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=' . $settings['eael_twitter_feed_ac_name'] . '&count=999&tweet_mode=extended';
-
+            
             if ( $twitter_v2 ){
                 $token = ! empty( $settings['eael_twitter_feed_bearer_token'] ) ? $settings['eael_twitter_feed_bearer_token'] : '';
                 $tweet_fields = [ 'entities', 'public_metrics', 'in_reply_to_user_id', 'attachments', 'created_at' ];
                 $tweet_fields_params = implode(',', $tweet_fields);
-                
+
                 if ( empty( $user_object ) ){
                     $api_endpoint_user = "https://api.twitter.com/2/users/by/username/$account_name?user.fields=profile_image_url";
 
@@ -119,7 +125,7 @@ trait Twitter_Feed
                 set_transient( $cache_key, $items, $expiration );
 	        }
         }
-
+        
 	    if ( empty( $items ) ) {
 		    return $html;
 	    }
@@ -128,7 +134,7 @@ trait Twitter_Feed
             foreach ($items as $key => $item) {
                 $match = false;
 
-                if ($item['entities']['hashtags']) {
+                if ( ! empty( $item['entities']['hashtags'] ) ) {
                     foreach ($item['entities']['hashtags'] as $tag) {
                         $tag['text'] = $twitter_v2 ? $tag['tag'] : $tag['text'];
                         if (strcasecmp($tag['text'], $settings['eael_twitter_feed_hashtag_name']) == 0) {
@@ -148,7 +154,7 @@ trait Twitter_Feed
         $counter = 0;
         $current_page = 1;
         self::$twitter_feed_fetched_count = count($items);
-
+        
         foreach ($items as $item) {
             $counter++;
             if ($post_per_page > 0) {
@@ -191,7 +197,9 @@ trait Twitter_Feed
             if ($counter == count($items)) {
                 $pagination_class .= ' eael-last-twitter-feed-item';
             }
-
+            
+            $user_name_full = '';
+            
             $html .= '<div class="eael-twitter-feed-item ' . esc_attr( $class ) . ' ' . esc_attr( $pagination_class ) . ' ">
 				<div class="eael-twitter-feed-item-inner">
 				    <div class="eael-twitter-feed-item-header clearfix">';
@@ -214,7 +222,6 @@ trait Twitter_Feed
                             $html .= '<span class="eael-twitter-feed-item-author">' . $user_name_full . '</span>
                         </a>';
 
-                        #ToDo Craeted at Formatting
                         if ($settings['eael_twitter_feed_show_date'] == 'true') {
                             $html .= '<span class="eael-twitter-feed-item-date">' . sprintf(__('%s ago', 'essential-addons-for-elementor-lite'), human_time_diff(strtotime($item['created_at']))) . '</span>';
                         }
@@ -237,7 +244,7 @@ trait Twitter_Feed
                             
                             if( $twitter_v2 ) {
                                 $item['id_str'] = $item['id'];
-                                $item['entities']['user_mentions'] = $item['entities']['mentions'];
+                                $item['entities']['user_mentions'] = ! empty( $item['entities']['mentions'] ) ? $item['entities']['mentions'] : [];
                             }
                             
                             if ( ! empty( $settings['eael_twitter_feed_mention_linked'] ) && $settings['eael_twitter_feed_mention_linked'] === 'yes' && $item['entities']['user_mentions'] ) {
