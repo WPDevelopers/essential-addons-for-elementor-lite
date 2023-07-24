@@ -2463,27 +2463,28 @@ class Woo_Product_Gallery extends Widget_Base {
 
 				if ( file_exists( $template ) ) {
 					$settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
-					$query = new \WP_Query( $args );
+					$query                    = new \WP_Query( $args );
+					$show_secondary_image     = isset( $settings['eael_product_gallery_show_secondary_image'] ) && 'yes' === $settings['eael_product_gallery_show_secondary_image'];
+
+					echo '<ul class="products eael-post-appender eael-post-appender-' . $this->get_id() . '" data-layout-mode="' . $settings["eael_product_gallery_items_layout"] . '" data-show-secondary-image="' . intval( $show_secondary_image ) . '" >';
 					if ( $query->have_posts() ) {
 						$found_posts         = $query->found_posts;
 						$max_page            = ceil( $found_posts / absint( $args['posts_per_page'] ) );
 						$args['max_page']    = $max_page;
 						$args['found_posts'] = $query->found_posts;
-						
-						$show_secondary_image = isset( $settings['eael_product_gallery_show_secondary_image'] ) && 'yes' === $settings['eael_product_gallery_show_secondary_image'];
 
-						echo '<ul class="products eael-post-appender eael-post-appender-' . $this->get_id() . '" data-layout-mode="' . $settings[ "eael_product_gallery_items_layout" ] . '" data-show-secondary-image="' . intval($show_secondary_image) . '" >';
 						while ( $query->have_posts() ) {
 							$query->the_post();
 							include( $template );
 						}
 						wp_reset_postdata();
-						echo '</ul>';
 					} else {
-						_e( '<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite' );
+						echo '<h2 class="eael-product-not-found">' . __( 'No Product Found', 'essential-addons-for-elementor-lite' ) . '</h2>';
 					}
+					echo '</ul>';
+
 				} else {
-					_e( '<p class="no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
+					echo '<h2 class="eael-product-not-found">' . __( 'No Layout Found', 'essential-addons-for-elementor-lite' ) . '</h2>';
 				}
 
 				$this->print_load_more_button( $settings, $args, $dir_name );
