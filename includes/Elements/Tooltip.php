@@ -347,8 +347,12 @@ class Tooltip extends Widget_Base {
 		            ],
 		        ],
 		        'size_units' => [ 'px', '%' ],
+				'default' => [
+					'unit' => 'px',
+					'size' => 100,
+				],
 		        'selectors' => [
-		            '{{WRAPPER}} .eael-tooltip' => 'max-width: {{SIZE}}{{UNIT}};',
+		            '{{WRAPPER}} .eael-tooltip' => 'width: {{SIZE}}{{UNIT}};',
 		        ]
 		    ]
 		);
