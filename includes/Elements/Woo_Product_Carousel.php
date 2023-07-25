@@ -779,6 +779,18 @@ class Woo_Product_Carousel extends Widget_Base {
             'default' => 'recent-products',
             'options' => $this->eael_get_product_filterby_options(),
         ] );
+
+        $this->add_control(
+            'eael_global_related_products_warning_text',
+            [
+                'type'            => Controls_Manager::RAW_HTML,
+                'raw'             => __( 'This filter will only affect in <strong>Single Product</strong> page of <strong>Elementor Theme Builder</strong> dynamically.', 'essential-addons-for-elementor-lite' ),
+                'content_classes' => 'eael-warning',
+                'condition'       => [
+                    'eael_product_carousel_product_filter' => 'related-products',
+                ],
+            ]
+        );
         
         $this->add_control( 'orderby', [
             'label'   => __( 'Order By', 'essential-addons-for-elementor-lite' ),
@@ -840,6 +852,9 @@ class Woo_Product_Carousel extends Widget_Base {
 				    'multiple' => true,
 				    'object_type' => $taxonomy,
 				    'options' => wp_list_pluck(get_terms($taxonomy), 'name', 'term_id'),
+                    'condition'       => [
+                        'eael_product_carousel_product_filter!' => 'related-products',
+                    ],
 			    ]
 		    );
 	    }
