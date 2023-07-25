@@ -389,6 +389,18 @@ class Product_Grid extends Widget_Base
             ],
         ]);
 
+        $this->add_control(
+            'eael_global_related_products_warning_text',
+            [
+                'type'            => Controls_Manager::RAW_HTML,
+                'raw'             => __( 'This filter will only affect in <strong>Single Product</strong> page of <strong>Elementor Theme Builder</strong> dynamically.', 'essential-addons-for-elementor-lite' ),
+                'content_classes' => 'eael-warning',
+                'condition'       => [
+                    'eael_product_grid_product_filter' => 'related-products',
+                ],
+            ]
+        );
+
         $this->add_control('orderby', [
             'label' => __('Order By', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::SELECT,
