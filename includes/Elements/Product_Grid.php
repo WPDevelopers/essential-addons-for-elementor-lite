@@ -449,7 +449,8 @@ class Product_Grid extends Widget_Base
             'options' => HelperClass::get_terms_list('product_cat', 'slug'),
             'condition'   => [
               'post_type!' => 'source_dynamic',
-              'eael_product_grid_product_filter!' => 'manual'
+              'eael_product_grid_product_filter!' => 'manual',
+              'eael_product_grid_product_filter!' => 'related-products'
             ],
         ]);
 
