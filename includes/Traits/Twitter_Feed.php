@@ -37,10 +37,10 @@ trait Twitter_Feed
         }
 
         if( $user_object ){
-            $user_id = ! empty( $user_object->id ) ? $user_object->id : '';
+            $user_id                = ! empty( $user_object->id ) ? $user_object->id : '';
             $user_profile_image_url = ! empty( $user_object->profile_image_url ) ? $user_object->profile_image_url : '';
-            $user_username = ! empty( $user_object->username ) ? $user_object->username : '';
-            $user_name = ! empty( $user_object->name ) ? $user_object->name : ''; 
+            $user_username          = ! empty( $user_object->username ) ? $user_object->username : '';
+            $user_name              = ! empty( $user_object->name ) ? $user_object->name : ''; 
         }
 
         if ($items === false) {
@@ -93,10 +93,10 @@ trait Twitter_Feed
                         $user_object = $body_user;
                         update_option($id . '_' . $settings['eael_twitter_feed_ac_name'] . '_tf_user_object', $user_object);
                         
-                        $user_id = $user_object->id;
-                        $user_profile_image_url = $user_object->profile_image_url;
-                        $user_username = $user_object->username;
-                        $user_name = $user_object->name;
+                        $user_id                = ! empty( $user_object->id ) ? $user_object->id : '';
+                        $user_profile_image_url = ! empty( $user_object->profile_image_url ) ? $user_object->profile_image_url : '';
+                        $user_username          = ! empty( $user_object->username ) ? $user_object->username : '';
+                        $user_name              = ! empty( $user_object->name ) ? $user_object->name : '';
                     }
                 }
 
