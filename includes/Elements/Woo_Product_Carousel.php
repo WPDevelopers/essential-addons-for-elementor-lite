@@ -3158,6 +3158,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		    'posts_per_page' => $settings[ 'eael_product_carousel_products_count' ] ?: 4,
 		    'order'          => $settings[ 'order' ],
 		    'offset'         => $settings[ 'product_offset' ],
+            'post__not_in'   => array( get_the_ID() ),
 		    'tax_query'      => [
 			    'relation' => 'AND',
 			    [
