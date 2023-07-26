@@ -95,18 +95,6 @@ class Filterable_Gallery extends Widget_Base
                 'label' => esc_html__('Settings', 'essential-addons-for-elementor-lite'),
             ]
         );
-
-        $this->add_control(
-            'eael_item_randomize',
-            [
-                'label' => __('Randomize Item', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Enable', 'essential-addons-for-elementor-lite'),
-                'label_off' => __('Disable', 'essential-addons-for-elementor-lite'),
-                'return_value' => 'yes',
-                'default' => ''
-            ]
-        );
         
         $this->add_control(
             'eael_fg_items_to_show',
@@ -538,6 +526,19 @@ class Filterable_Gallery extends Widget_Base
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'frontend_available' => true,
+            ]
+        );
+
+         $this->add_control(
+            'eael_item_randomize',
+            [
+                'label' => __('Randomize Item', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('YES', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('NO', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default' => '',
+                'description' => __( 'The items will be displayed in a random order.', 'essential-addons-for-elementor-lite' )
             ]
         );
         
