@@ -538,7 +538,7 @@ class Filterable_Gallery extends Widget_Base
                 'label_off' => __('NO', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default' => '',
-                'description' => __( 'The items will be displayed in a random order.', 'essential-addons-for-elementor-lite' )
+                'description' => __( 'Items will be displayed in a random order.', 'essential-addons-for-elementor-lite' )
             ]
         );
         

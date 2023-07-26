@@ -3839,7 +3839,7 @@ msgid "NO"
 msgstr ""
 
 #: ../includes/Elements/Filterable_Gallery.php:541
-msgid "The items will be displayed in a random order."
+msgid "Items will be displayed in a random order."
 msgstr ""
 
 #: ../includes/Elements/Filterable_Gallery.php:550
