@@ -39,6 +39,8 @@ var TwitterFeedHandler = function($scope, $) {
                         data: {
                             action: "eael_clear_widget_cache_data",
                             security: localize.nonce,
+                            page_permalink: localize.page_permalink,
+                            widget_id: model.attributes.id,
                             ac_name: model.attributes.settings.attributes.eael_twitter_feed_ac_name,
                             hastag: model.attributes.settings.attributes.eael_twitter_feed_hashtag_name,
                             c_key: model.attributes.settings.attributes.eael_twitter_feed_consumer_key,
