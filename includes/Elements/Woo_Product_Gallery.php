@@ -127,7 +127,6 @@ class Woo_Product_Gallery extends Widget_Base {
 			'best-selling-products' => esc_html__( 'Best Selling Products', 'essential-addons-for-elementor-lite' ),
 			'sale-products'         => esc_html__( 'Sale Products', 'essential-addons-for-elementor-lite' ),
 			'top-products'          => esc_html__( 'Top Rated Products', 'essential-addons-for-elementor-lite' ),
-			'related-products' 		=> esc_html__('Related Products', 'essential-addons-for-elementor-lite'),
 		] );
 	}
 
