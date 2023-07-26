@@ -6118,7 +6118,7 @@ msgstr ""
 msgid "Target Blank"
 msgstr ""
 
-#: ../includes/Elements/Post_Grid.php:203, ../includes/Elements/Product_Grid.php:709, ../includes/Elements/Twitter_Feed.php:362, ../includes/Traits/Controls.php:1186, ../includes/Traits/Controls.php:1217, ../includes/Traits/Twitter_Feed.php:263
+#: ../includes/Elements/Post_Grid.php:203, ../includes/Elements/Product_Grid.php:709, ../includes/Elements/Twitter_Feed.php:362, ../includes/Traits/Controls.php:1186, ../includes/Traits/Controls.php:1217, ../includes/Traits/Twitter_Feed.php:264
 msgid "Read More"
 msgstr ""
 
@@ -9603,7 +9603,7 @@ msgstr ""
 msgid "Invalid user name found!"
 msgstr ""
 
-#: ../includes/Traits/Twitter_Feed.php:222
+#: ../includes/Traits/Twitter_Feed.php:223
 msgid "%s ago"
 msgstr ""
 
