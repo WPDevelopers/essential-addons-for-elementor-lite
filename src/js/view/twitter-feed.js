@@ -49,7 +49,6 @@ var TwitterFeedHandler = function($scope, $) {
                         success(response) {
                             if (response.success) {
                                 button.innerHTML = "Clear";
-
                             } else {
                                 button.innerHTML = "Failed";
                             }
