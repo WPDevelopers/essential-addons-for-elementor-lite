@@ -227,7 +227,7 @@ trait Twitter_Feed
                     <div class="eael-twitter-feed-item-content">';
                             $content = isset($item['entities']['urls'][0]['url'])?str_replace($item['entities']['urls'][0]['url'], '', $item['full_text']):$item['full_text'];
                             $content = substr( $content, 0, $settings['eael_twitter_feed_content_length']) . $delimeter;
-                            if ( ! empty( $settings['eael_twitter_feed_hash_linked'] ) && $settings['eael_twitter_feed_hash_linked'] === 'yes' && $item['entities']['hashtags'] ) {
+                            if ( ! empty( $settings['eael_twitter_feed_hash_linked'] ) && $settings['eael_twitter_feed_hash_linked'] === 'yes' && ! empty( $item['entities']['hashtags'] ) ) {
                                 $hashtags = [];
                                 foreach ( $item['entities']['hashtags'] as $hashtag ){
                                     $hashtag['text'] = $twitter_v2 ? $hashtag['tag'] : $hashtag['text'];
@@ -247,7 +247,7 @@ trait Twitter_Feed
                             if ( ! empty( $settings['eael_twitter_feed_mention_linked'] ) && $settings['eael_twitter_feed_mention_linked'] === 'yes' && $item['entities']['user_mentions'] ) {
                                 $mentions = [];
                                 foreach ( $item['entities']['user_mentions'] as $mention ){
-                                    $mention['screen_name'] = $twitter_v2 ? $mention['tag'] : $mention['screen_name'];
+                                    $mention['screen_name'] = $twitter_v2 ? ( ! empty( $mention['tag'] ) ? $mention['tag'] : '' ) : $mention['screen_name'];
 
                                     if ( $mention['screen_name'] ){
                                         $mentions['@'.$mention['screen_name']] = "<a href='https://twitter.com/{$mention['screen_name']}' target='_blank'>@{$mention['screen_name']}</a>";
