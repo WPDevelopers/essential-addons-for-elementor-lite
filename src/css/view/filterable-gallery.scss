@@ -41,10 +41,16 @@
 .eael-filter-gallery-container {
 	text-align: justify;
 	font-size: 0.1px;
-	overflow: inherit;
+	overflow: hidden;
 
 	#eael-fg-no-items-found{
 		font-size: 14px;
+	}
+}
+
+.elementor-editor-active{
+	.eael-filter-gallery-container{
+		overflow: initial;
 	}
 }
 
