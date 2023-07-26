@@ -5,7 +5,6 @@ Docs & License: https://fullcalendar.io/
 */
 var FullCalendar = (function (exports) {
     'use strict';
-
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
 
@@ -77,14 +76,14 @@ var FullCalendar = (function (exports) {
             Fragment: y,
             createContext: createContext$1,
             createPortal: I,
-            flushSync: flushSync$1,
+            flushSync: flushSync2,
             unmountComponentAtNode: unmountComponentAtNode$1,
         };
     }
     // HACKS...
     // TODO: lock version
     // TODO: link gh issues
-    function flushSync$1(runBeforeFlush) {
+    function flushSync2(runBeforeFlush) {
         runBeforeFlush();
         var oldDebounceRendering = n.debounceRendering; // orig
         var callbackQ = [];
@@ -9322,8 +9321,7 @@ var FullCalendar = (function (exports) {
                 ref: chunkConfig.elRef,
                 role: 'presentation',
             }, createElement("div", { className: "fc-scroller-harness" + (isLiquid ? ' fc-scroller-harness-liquid' : '') },
-                createElement(Scroller, { ref: this.scrollerRefs.createRef(sectionKey), elRef: this.scrollerElRefs.createRef(sectionKey), overflowY: overflowY, overflowX: !props.liquid ? 'visible' : 'hidden' /* natural height? */, maxHeight: sectionConfig.maxHeight, liquid: isLiquid, liquidIsAbsolute // because its within a harness
-        : true }, content)));
+                createElement(Scroller, { ref: this.scrollerRefs.createRef(sectionKey), elRef: this.scrollerElRefs.createRef(sectionKey), overflowY: overflowY, overflowX: !props.liquid ? 'visible' : 'hidden' /* natural height? */, maxHeight: sectionConfig.maxHeight, liquid: isLiquid, liquidIsAbsolute : true }, content)));
         };
         SimpleScrollGrid.prototype._handleScrollerEl = function (scrollerEl, key) {
             var section = getSectionByKey(this.props.sections, key);
@@ -9839,7 +9837,7 @@ var FullCalendar = (function (exports) {
                 if (_this.isRendering) {
                     _this.isRendered = true;
                     var currentData_1 = _this.currentData;
-                    flushSync(function () {
+                    flushSync2(function () {
                         render(createElement(CalendarRoot, { options: currentData_1.calendarOptions, theme: currentData_1.theme, emitter: currentData_1.emitter }, function (classNames, height, isHeightAuto, forPrint) {
                             _this.setClassNames(classNames);
                             _this.setHeight(height);
@@ -9892,7 +9890,7 @@ var FullCalendar = (function (exports) {
         };
         Calendar.prototype.updateSize = function () {
             var _this = this;
-            flushSync(function () {
+            flushSync2(function () {
                 _super.prototype.updateSize.call(_this);
             });
         };
@@ -14909,7 +14907,7 @@ var FullCalendar = (function (exports) {
     exports.findDirectChildren = findDirectChildren;
     exports.findElements = findElements;
     exports.flexibleCompare = flexibleCompare;
-    exports.flushSync = flushSync;
+    exports.flushSync = flushSync2;
     exports.formatDate = formatDate;
     exports.formatDayString = formatDayString;
     exports.formatIsoTimeString = formatIsoTimeString;
