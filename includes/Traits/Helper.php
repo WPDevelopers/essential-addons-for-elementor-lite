@@ -453,7 +453,19 @@ trait Helper
 		$hastag      = sanitize_text_field( $_POST['hastag'] );
 		$c_key       = sanitize_text_field( $_POST['c_key'] );
 		$c_secret    = sanitize_text_field( $_POST['c_secret'] );
+		$widget_id   = sanitize_text_field( $_POST['widget_id'] );
+		$permalink   = sanitize_text_field( $_POST['page_permalink'] );
+        $page_id     = url_to_postid($permalink);
+        
+        $settings = $this->eael_get_widget_settings($page_id, $widget_id);
+        $twitter_v2 = ! empty( $settings['eael_twitter_api_v2'] ) && 'yes' === $settings['eael_twitter_api_v2'] ? true : false;
+
 		$key_pattern = '_transient_' . $ac_name . '%' . md5( $hastag . $c_key . $c_secret ) . '_tf_cache';
+        
+        if( $twitter_v2 ){
+            $bearer_token = $settings['eael_twitter_feed_bearer_token'];
+            $key_pattern = '_transient_' . $ac_name . '%' . md5( $hastag . $c_key . $c_secret . $bearer_token ) . '_tf_cache';
+        }
 
 		$sql     = "SELECT `option_name` AS `name`
             FROM  $wpdb->options
