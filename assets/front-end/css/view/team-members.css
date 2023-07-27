@@ -61,7 +61,6 @@
   padding: 10px;
   margin-bottom: 0;
   -webkit-transition: 0.5s;
-  -o-transition: 0.5s;
   transition: 0.5s;
 }
 
@@ -119,13 +118,11 @@
   padding-top: 15%;
   opacity: 0;
   overflow: hidden;
-  -o-text-overflow: ellipsis;
-     text-overflow: ellipsis;
+  text-overflow: ellipsis;
   position: absolute;
   right: 10px;
   top: 10px;
   -webkit-transition: all 0.615s cubic-bezier(0.19, 1, 0.22, 1) 0s;
-  -o-transition: all 0.615s cubic-bezier(0.19, 1, 0.22, 1) 0s;
   transition: all 0.615s cubic-bezier(0.19, 1, 0.22, 1) 0s;
 }
 
@@ -138,7 +135,6 @@
   display: inline-block;
   text-align: center;
   -webkit-transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1) 0s;
-  -o-transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1) 0s;
   transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1) 0s;
 }
 
