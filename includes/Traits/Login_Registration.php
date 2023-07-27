@@ -192,19 +192,24 @@ trait Login_Registration {
 			wp_set_current_user( $user_data->ID, $user_login );
 			do_action( 'wp_login', $user_data->user_login, $user_data );
 			do_action( 'eael/login-register/after-login', $user_data->user_login, $user_data );
-			if ( $ajax ) {
 
+			$custom_redirect_url 	= ! empty( $_POST['redirect_to'] ) ? sanitize_url( $_POST['redirect_to'] ) : '';
+			$previous_page_url 		= ! empty( $_POST['redirect_to_prev_page_login'] ) ? sanitize_url( $_POST['redirect_to_prev_page_login'] ) : '';
+			$custom_redirect_url 	= ! empty( $settings['login_redirect_url_prev_page'] ) && $settings['login_redirect_url_prev_page'] === 'yes' ? $previous_page_url : $custom_redirect_url;
+
+			if ( $ajax ) {
 				$data = [
 					'message' => isset( $settings['success_login'] ) ? Helper::eael_wp_kses( $settings['success_login'] ) : __( 'You are logged in successfully', 'essential-addons-for-elementor-lite' ),
 				];
-				if ( ! empty( $_POST['redirect_to'] ) ) {
-					$data['redirect_to'] = esc_url_raw( $_POST['redirect_to'] );
+
+				if ( ! empty( $custom_redirect_url ) ) {
+					$data['redirect_to'] = esc_url_raw( $custom_redirect_url );
 				}
 				wp_send_json_success( $data );
 			}
 
-			if ( ! empty( $_POST['redirect_to'] ) ) {
-				wp_safe_redirect( esc_url_raw( $_POST['redirect_to'] ) );
+			if ( ! empty( $custom_redirect_url ) ) {
+				wp_safe_redirect( esc_url_raw( $custom_redirect_url ) );
 				exit();
 			}
 		}
