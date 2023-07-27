@@ -6218,6 +6218,14 @@ class Login_Register extends Widget_Base {
                        name="redirect_to"
                        value="<?php echo esc_attr( $login_redirect_url ); ?>">
 			<?php }
+
+			if ( ! empty( $this->ds['login_redirect_url_prev_page'] ) && 'yes' === $this->ds['login_redirect_url_prev_page'] ) {
+				$login_redirect_url_prev_page = ! empty( $_SERVER['HTTP_REFERER'] ) ? esc_url_raw( $_SERVER['HTTP_REFERER'] ) : '';
+				?>
+				<input type="hidden"
+					name="redirect_to_prev_page_login"
+					value="<?php echo esc_attr( $login_redirect_url_prev_page ); ?>">
+			<?php }
 		}
 
 		if ( 'register' === $form_type ) {
