@@ -1464,6 +1464,7 @@ class Login_Register extends Widget_Base {
 			'description'   => __( 'Please note that only your current domain is allowed here to keep your site secure.', 'essential-addons-for-elementor-lite' ),
 			'condition'     => [
 				'redirect_after_login' => 'yes',
+				'login_redirect_url_prev_page!' => 'yes',
 			],
 			'default'       => [
 				'url'         => admin_url(),
@@ -1471,6 +1472,16 @@ class Login_Register extends Widget_Base {
 				'nofollow'    => true,
 			],
 			'separator'     => 'after',
+		] );
+
+		$this->add_control( 'login_redirect_url_prev_page', [
+			'label'   => __( 'Redirect to Previous Page', 'essential-addons-for-elementor-lite' ),
+			'description'   => __( 'Redirect to the last visited page before login.', 'essential-addons-for-elementor-lite' ),
+			'type'    => Controls_Manager::SWITCHER,
+			'default' => '',
+			'condition'     => [
+				'redirect_after_login' => 'yes',
+			],
 		] );
 
 		$this->end_controls_section();
