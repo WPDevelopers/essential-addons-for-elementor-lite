@@ -164,6 +164,9 @@ class Sticky_Video extends Widget_Base
                 'condition' => [
                     'eael_video_source' => 'youtube',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -179,6 +182,9 @@ class Sticky_Video extends Widget_Base
                 'condition' => [
                     'eael_video_source' => 'vimeo',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -193,6 +199,9 @@ class Sticky_Video extends Widget_Base
                 'condition' => [
                     'eael_video_source' => 'dailymotion',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -224,6 +233,9 @@ class Sticky_Video extends Widget_Base
                     'eael_video_source' => 'self_hosted',
                     'eaelsv_link_external' => '',
                 ],
+                'ai' => [
+                    'active' => false,
+                ],
             ]
         );
 
@@ -240,6 +252,9 @@ class Sticky_Video extends Widget_Base
                     'eael_video_source' => 'self_hosted',
                     'eaelsv_link_external' => 'yes',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -252,6 +267,9 @@ class Sticky_Video extends Widget_Base
                 'condition' => [
                     'eael_video_source' => 'self_hosted',
                     'eael_video_source_external' => '',
+                ],
+                'ai' => [
+                    'active' => false,
                 ],
             ]
         );
@@ -394,6 +412,9 @@ class Sticky_Video extends Widget_Base
                 'default' => [
                     'url' => \Elementor\Utils::get_placeholder_image_src(),
                 ],
+                'ai' => [
+                    'active' => false,
+                ],
             ]
         );
         $this->add_group_control(
@@ -433,6 +454,15 @@ class Sticky_Video extends Widget_Base
                 ],
             ]
         );
+
+        $this->add_control( 'eaelsv_icon_new_notice', [
+			'type'            => Controls_Manager::RAW_HTML,
+			'raw'             => __( 'Play icon appears on top of overlay image.', 'essential-addons-for-elementor-lite' ),
+			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+            'condition' => [
+                'eaelsv_overlay_options' => 'yes',
+            ],
+		] );
 
         $this->end_controls_section();
 
@@ -740,17 +770,23 @@ class Sticky_Video extends Widget_Base
                     if (is_array($iconNew['value'])) {
                         $icon = '<img src="' . $iconNew['value']['url'] .  '" width="100">';
                     } else {
-                        echo $icon = '<i class="' . $iconNew['value'] . '"></i>';
+                        $icon = '<i class="' . $iconNew['value'] . '"></i>';
                     }
                 } else {
                     $icon = '<i class="eicon-play"></i>';
                 }
             }
 
+            $overlay_class = 'eaelsv-overlay';
+            if( 'yes' === $settings['eaelsv_overlay_options'] && empty( $settings['eaelsv_overlay_image']['url'] ) ){
+                $icon = '';
+                $overlay_class = 'eaelsv-overlay-ignore';
+            }
+
             $this->add_render_attribute(
                 'esvp_overlay_wrapper',
                 [
-                    'class' => 'eaelsv-overlay',
+                    'class' => esc_attr( $overlay_class ),
                     'style' => "background-image:url('" . $settings['eaelsv_overlay_image']['url'] . "');",
                 ]
             );

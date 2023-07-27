@@ -72,8 +72,8 @@ class Bootstrap
     protected $installer;
 
 
-    const EAEL_PROMOTION_FLAG = 5;
-    const EAEL_ADMIN_MENU_FLAG = 5;
+    const EAEL_PROMOTION_FLAG = 7;
+    const EAEL_ADMIN_MENU_FLAG = 7;
     /**
      * Singleton instance
      *
@@ -240,6 +240,8 @@ class Bootstrap
 
             add_action('wp_ajax_eael_checkout_cart_qty_update', [$this, 'eael_checkout_cart_qty_update'] );
     		add_action('wp_ajax_nopriv_eael_checkout_cart_qty_update', [$this, 'eael_checkout_cart_qty_update'] );
+
+		    add_action( 'wp_loaded', [ $this, 'eael_woo_cart_empty_action' ], 20 );
 	    }
 
 

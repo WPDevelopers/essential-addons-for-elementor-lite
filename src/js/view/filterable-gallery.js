@@ -97,6 +97,10 @@ jQuery(window).on("elementor/frontend/init", function () {
 					let item_found = initData;
 					let index_list = $items =  [];
 
+					if (typeof $images_per_page === 'string'){
+						$images_per_page = $init_show_setting;
+					}
+
 					if (item_found < $images_per_page) {
 						for (const [index, item] of fg_items.entries()) {
 							if (buttonFilter !== '' && buttonFilter !== '*') {
@@ -147,8 +151,23 @@ jQuery(window).on("elementor/frontend/init", function () {
 			});
 
 			//quick search
+			var loaded_on_search = false;
 			input.on("input", function () {
-				var $this = $(this);
+				var $this = $(this),$items=[];
+
+				if ( ! loaded_on_search && $gallery.data('search-all') === 'yes' ) {
+					for (const [index, item] of fg_items.entries()) {
+						$items.push($(item)[0]);
+					}
+					$isotope_gallery.isotope();
+					$gallery.append($items);
+					$isotope_gallery.isotope('appended', $items);
+					$isotope_gallery.imagesLoaded().progress(function () {
+						$isotope_gallery.isotope("layout");
+					});
+					$(".eael-gallery-load-more",$scope).hide();
+					loaded_on_search = true;
+				}
 
 				clearTimeout(timer);
 				timer = setTimeout(function () {
@@ -165,6 +184,16 @@ jQuery(window).on("elementor/frontend/init", function () {
 			// layout gal, on click tabs
 			$isotope_gallery.on("arrangeComplete", function () {
 				$isotope_gallery.isotope("layout");
+				let notFoundDiv = $('#eael-fg-no-items-found', $scope),
+					minHeight = notFoundDiv.css('font-size');
+
+				$('.eael-filter-gallery-container', $scope).css('min-height', parseInt(minHeight)*2+'px');
+
+				if (!$isotope_gallery.data('isotope').filteredItems.length) {
+					$('#eael-fg-no-items-found', $scope).show();
+				} else {
+					$('#eael-fg-no-items-found', $scope).hide();
+				}
 			});
 
 			// layout gal, after window loaded
