@@ -5,7 +5,6 @@
   text-align: center;
   margin: 7.5px;
   -webkit-transition: 300ms;
-  -o-transition: 300ms;
   transition: 300ms;
 }
 .eael-better-docs-category-box-post .eael-bd-cb-inner:hover {
