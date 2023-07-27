@@ -171,6 +171,9 @@ class Advanced_Data_Table extends Widget_Base
                 'condition' => [
                     'ea_adv_data_table_search' => 'yes',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -793,6 +796,7 @@ class Advanced_Data_Table extends Widget_Base
                 'default' => '#444444',
                 'selectors' => [
                     '{{WRAPPER}} tbody tr:nth-child(even)' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} tbody tr:nth-child(even) td' => 'color: {{VALUE}}',
                 ],
                 'condition' => [
                     'ea_adv_data_table_body_highlight' => 'e-row',
@@ -824,6 +828,7 @@ class Advanced_Data_Table extends Widget_Base
                 'default' => '#444444',
                 'selectors' => [
                     '{{WRAPPER}} tbody tr:nth-child(odd)' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} tbody tr:nth-child(odd) td' => 'color: {{VALUE}}',
                 ],
                 'condition' => [
                     'ea_adv_data_table_body_highlight' => 'o-row',
@@ -1344,6 +1349,9 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'label' => __('Button', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'ea_adv_data_table_source' => 'ninja'
+                ]
             ]
         );
 
@@ -1550,7 +1558,7 @@ class Advanced_Data_Table extends Widget_Base
             }
 
             echo '<div class="ea-advanced-data-table-wrap-inner">
-                <table ' . $this->get_render_attribute_string('ea-adv-data-table') . '>' . $content . '</table>
+                <table ' . $this->get_render_attribute_string('ea-adv-data-table') . '>' . Helper::eael_wp_kses( $content ) . '</table>
             </div>';
 
             if ($settings['ea_adv_data_table_pagination'] == 'yes') {
