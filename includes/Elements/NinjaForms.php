@@ -10,7 +10,7 @@ use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
-use \Elementor\Core\Schemes\Typography;
+use \Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use \Elementor\Widget_Base;
 use \Essential_Addons_Elementor\Classes\Helper;
 use \Ninja_Forms;
@@ -145,6 +145,9 @@ class NinjaForms extends Widget_Base
                     'default'               => '',
                     'condition'             => [
                         'custom_title_description'   => 'yes',
+                    ],
+                    'ai' => [
+                        'active' => false,
                     ],
                 ]
             );
@@ -512,7 +515,9 @@ class NinjaForms extends Widget_Base
             [
                 'name' => 'form_description_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Typography::TYPOGRAPHY_4,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_ACCENT
+                ],
                 'selector' => '{{WRAPPER}} .eael-ninja-form .eael-contact-form-description',
             ]
         );
@@ -1508,7 +1513,9 @@ class NinjaForms extends Widget_Base
             [
                 'name' => 'button_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Typography::TYPOGRAPHY_4,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_ACCENT
+                ],
                 'selector' => '{{WRAPPER}} .eael-ninja-form .submit-container input[type="button"],{{WRAPPER}} .eael-ninja-form .submit-container input[type="submit"]',
                 'separator' => 'before',
             ]
@@ -1607,7 +1614,9 @@ class NinjaForms extends Widget_Base
             [
                 'name' => 'required_notice_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Typography::TYPOGRAPHY_4,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_ACCENT
+                ],
                 'selector' => '{{WRAPPER}} .eael-ninja-form .nf-form-fields-required',
             ]
         );

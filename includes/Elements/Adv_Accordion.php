@@ -326,6 +326,9 @@ class Adv_Accordion extends Widget_Base
                 'default' => esc_html__('Tab Title', 'essential-addons-for-elementor-lite'),
                 'dynamic' => ['active' => true],
                 'separator' => 'before',
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -379,6 +382,9 @@ class Adv_Accordion extends Widget_Base
 			    'type' => Controls_Manager::TEXT,
 			    'description' => esc_html__( 'Custom ID will be added as an anchor tag. For example, if you add ‘test’ as your custom ID, the link will become like the following: https://www.example.com/#test and it will open the respective tab directly.', 'essential-addons-for-elementor-lite' ),
 			    'default' => '',
+                'ai' => [
+					'active' => false,
+				],
 		    ]
 	    );
 
@@ -1195,10 +1201,14 @@ class Adv_Accordion extends Widget_Base
 
             echo '<div ' . $this->get_render_attribute_string($tab_content_setting_key) . '>';
             if ('content' == $tab['eael_adv_accordion_text_type']) {
-                echo '<p>' . do_shortcode($tab['eael_adv_accordion_tab_content']) . '</p>';
+                echo '<p>' . $this->parse_text_editor( $tab['eael_adv_accordion_tab_content'] ) . '</p>';
             } elseif ('template' == $tab['eael_adv_accordion_text_type']) {
-                if (!empty($tab['eael_primary_templates'])) {
-                    echo Plugin::$instance->frontend->get_builder_content($tab['eael_primary_templates'], true);
+                if ( ! empty( $tab['eael_primary_templates'] ) ) {
+                    // WPML Compatibility
+                    if ( ! is_array( $tab['eael_primary_templates'] ) ) {
+                        $tab['eael_primary_templates'] = apply_filters( 'wpml_object_id', $tab['eael_primary_templates'], 'wp_template', true );
+                    }
+                    echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'], true );
                 }
             }
             echo '</div>
