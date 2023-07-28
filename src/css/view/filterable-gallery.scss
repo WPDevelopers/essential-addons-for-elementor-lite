@@ -48,6 +48,12 @@
 	}
 }
 
+.elementor-editor-active{
+	.eael-filter-gallery-container{
+		overflow: initial;
+	}
+}
+
 .eael-filter-gallery-container:after {
 	content: '';
 	display: inline-block;

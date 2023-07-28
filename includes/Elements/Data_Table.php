@@ -112,6 +112,9 @@ class Data_Table extends Widget_Base {
                 'type' => Controls_Manager::TEXT,
                 'dynamic'   => ['active' => true],
                 'label_block' => false,
+				'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -123,6 +126,9 @@ class Data_Table extends Widget_Base {
                 'type' => Controls_Manager::TEXT,
                 'dynamic'   => ['active' => true],
                 'label_block' => false,
+				'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -192,7 +198,10 @@ class Data_Table extends Widget_Base {
 				],
 				'condition' => [
 					'eael_data_table_header_icon_type'	=> 'image'
-				]
+				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -216,6 +225,9 @@ class Data_Table extends Widget_Base {
 				'type'			=> Controls_Manager::TEXT,
                 'dynamic'     => [ 'active' => true ],
 				'label_block' 	=> false,
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -226,6 +238,9 @@ class Data_Table extends Widget_Base {
 				'type'			=> Controls_Manager::TEXT,
                 'dynamic'     => [ 'active' => true ],
 				'label_block'	=> false,
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -419,7 +434,10 @@ class Data_Table extends Widget_Base {
 				'label_block'	=> false,
 				'condition' 	=> [
 					'eael_data_table_content_row_type' => 'col'
-				]
+				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -432,7 +450,10 @@ class Data_Table extends Widget_Base {
 				'label_block'	=> false,
 				'condition' 	=> [
 					'eael_data_table_content_row_type' => 'col'
-				]
+				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -1384,7 +1405,13 @@ class Data_Table extends Widget_Base {
 										<td <?php echo $this->get_render_attribute_string('table_inside_td'.$i.$j); ?>>
 											<div class="td-content-wrapper">
 												<div <?php echo $this->get_render_attribute_string('td_content'); ?>>
-													<?php echo Plugin::$instance->frontend->get_builder_content(intval($table_td[$j]['template']), true); ?>
+													<?php
+													// WPML Compatibility
+													if ( ! is_array( $table_td[ $j ]['template'] ) ) {
+														$table_td[ $j ]['template'] = apply_filters( 'wpml_object_id', $table_td[ $j ]['template'], 'wp_template', true );
+													}
+													echo Plugin::$instance->frontend->get_builder_content( intval( $table_td[ $j ]['template'] ), true );
+													?>
 												</div>
 											</div>
 										</td>

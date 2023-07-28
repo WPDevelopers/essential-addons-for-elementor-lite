@@ -249,6 +249,9 @@ class Adv_Tabs extends Widget_Base
                 'condition' => [
                     'eael_adv_tabs_icon_type' => 'image',
                 ],
+                'ai' => [
+                    'active' => false,
+                ],
             ]
         );
 
@@ -260,6 +263,9 @@ class Adv_Tabs extends Widget_Base
                 'type' => Controls_Manager::TEXT,
                 'default' => esc_html__('Tab Title', 'essential-addons-for-elementor-lite'),
                 'dynamic' => ['active' => true],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -332,6 +338,9 @@ class Adv_Tabs extends Widget_Base
                 'type' => Controls_Manager::TEXT,
                 'description' => esc_html__( 'Custom ID will be added as an anchor tag. For example, if you add ‘test’ as your custom ID, the link will become like the following: https://www.example.com/#test and it will open the respective tab directly.', 'essential-addons-for-elementor-lite' ),
                 'default' => '',
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -1084,9 +1093,13 @@ class Adv_Tabs extends Widget_Base
 				        <?php if ('content' == $tab['eael_adv_tabs_text_type']) : ?>
 					        <?php echo do_shortcode($tab['eael_adv_tabs_tab_content']); ?>
 				        <?php elseif ('template' == $tab['eael_adv_tabs_text_type']) : ?>
-					        <?php if ( ! empty( $tab['eael_primary_templates'] ) ) {
-						        echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'] );
-					        } ?>
+                            <?php if ( ! empty( $tab['eael_primary_templates'] ) ) {
+                                // WPML Compatibility
+                                if ( ! is_array( $tab['eael_primary_templates'] ) ) {
+                                    $tab['eael_primary_templates'] = apply_filters( 'wpml_object_id', $tab['eael_primary_templates'], 'wp_template', true );
+                                }
+                                echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'] );
+                            } ?>
 				        <?php endif; ?>
                     </div>
 		        <?php endforeach; ?>

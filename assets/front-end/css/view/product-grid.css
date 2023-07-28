@@ -816,7 +816,6 @@
 .eael-post-grid.eael-product-reveal .woocommerce ul.products li.product .add-to-whishlist {
   visibility: hidden;
   -webkit-transition: none;
-  -o-transition: none;
   transition: none;
 }
 .eael-product-grid.eael-product-reveal .woocommerce ul.products li.product:hover,
@@ -932,7 +931,6 @@
   opacity: 0;
   -webkit-transition: opacity 300ms, -webkit-transform 200ms;
   transition: opacity 300ms, -webkit-transform 200ms;
-  -o-transition: transform 200ms, opacity 300ms;
   transition: transform 200ms, opacity 300ms;
   transition: transform 200ms, opacity 300ms, -webkit-transform 200ms;
 }
@@ -1389,7 +1387,6 @@
   visibility: hidden;
   opacity: 0;
   -webkit-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
 .close-modal {
@@ -1409,7 +1406,6 @@
           box-shadow: -1px 0px 3px 0 #000;
   -webkit-transition: -webkit-transform 300ms ease;
   transition: -webkit-transform 300ms ease;
-  -o-transition: transform 300ms ease;
   transition: transform 300ms ease;
   transition: transform 300ms ease, -webkit-transform 300ms ease;
 }
@@ -1417,7 +1413,6 @@
 .eael-wcpc-wrapper.custom .eael-wc-remove {
   cursor: pointer;
   -webkit-transition: all 400ms ease;
-  -o-transition: all 400ms ease;
   transition: all 400ms ease;
 }
 .eael-wcpc-wrapper .eael-wc-remove.disable,
@@ -1721,7 +1716,6 @@
   transform-origin: center center;
   margin: 0 auto;
   -webkit-transition: all ease 0.4s;
-  -o-transition: all ease 0.4s;
   transition: all ease 0.4s;
 }
 .eael-product-grid.grid .eael-product-wrap .icons-wrap.block-style, .eael-product-grid.masonry .eael-product-wrap .icons-wrap.block-style {
@@ -2234,7 +2228,6 @@
   height: 100%;
   text-align: center;
   -webkit-transition: all ease 0.4s;
-  -o-transition: all ease 0.4s;
   transition: all ease 0.4s;
 }
 .eael-product-grid.grid .eael-product-wrap .icons-wrap li a:hover, .eael-product-grid.masonry .eael-product-wrap .icons-wrap li a:hover {
@@ -2363,7 +2356,6 @@
   margin: 0;
   list-style: none;
   -webkit-transition: all ease 0.4s;
-  -o-transition: all ease 0.4s;
   transition: all ease 0.4s;
 }
 .eael-product-grid.list .eael-product-wrap .icons-wrap.block-style {
@@ -2484,7 +2476,6 @@
   color: #000;
   text-align: center;
   -webkit-transition: all ease 0.4s;
-  -o-transition: all ease 0.4s;
   transition: all ease 0.4s;
   background: blanchedalmond;
   padding: 9px 10px;
@@ -2720,7 +2711,6 @@
   left: 48%;
   top: 40%;
   -webkit-transition: all 0.2s;
-  -o-transition: all 0.2s;
   transition: all 0.2s;
 }
 .theme-flexia .woocommerce ul.products li.product .woocommerce-LoopProduct-link {

@@ -102,7 +102,6 @@ table.eael-data-table thead .sorting:after {
   margin-right: 2px;
   cursor: pointer;
   -webkit-transition: all 0.3s;
-  -o-transition: all 0.3s;
   transition: all 0.3s;
 }
 
@@ -165,7 +164,6 @@ table.eael-data-table thead .sorting:after {
 
 .eael-data-table tbody tr.even {
   -webkit-transition: background 0.4s ease-in-out;
-  -o-transition: background 0.4s ease-in-out;
   transition: background 0.4s ease-in-out;
 }
 
@@ -180,7 +178,6 @@ table.eael-data-table thead .sorting:after {
 .eael-data-table tbody tr.odd {
   background: rgba(242, 242, 242, 0.5);
   -webkit-transition: background 0.2s ease-in-out;
-  -o-transition: background 0.2s ease-in-out;
   transition: background 0.2s ease-in-out;
 }
 
