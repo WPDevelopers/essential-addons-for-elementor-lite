@@ -622,6 +622,12 @@ $elements = [
 				'demo_link' => 'https://essential-addons.com/elementor/woo-product-gallery/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/woo-product-gallery/'
 			],
+			[
+				'key'       => 'woo-account-dashboard',
+				'title'     => __( 'Woo Account Dashboard', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/woo-account-dashboard/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/woo-account-dashboard/'
+			],
 		]
 	]
 ];

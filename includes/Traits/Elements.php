@@ -329,6 +329,12 @@ trait Elements {
 				'icon'       => 'eaicon-thank-you',
 				'categories' => '["essential-addons-elementor"]',
 			],
+			[
+				'name'       => 'eaicon-woo-account-dashboard',
+				'title'      => __( 'Woo Account Dashboard', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eaicon-woo-account-dashboard',
+				'categories' => '["essential-addons-elementor"]',
+			],
 		] );
 
 		$config['promotionWidgets'] = $combine_array;
