@@ -626,7 +626,9 @@ $elements = [
 				'key'       => 'woo-account-dashboard',
 				'title'     => __( 'Woo Account Dashboard', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/woo-account-dashboard/',
-				'doc_link'  => 'https://essential-addons.com/elementor/docs/woo-account-dashboard/'
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/woo-account-dashboard/',
+				'promotion' => 'new',
+                'is_pro'    => true
 			],
 		]
 	]
