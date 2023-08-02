@@ -453,7 +453,19 @@ trait Helper
 		$hastag      = sanitize_text_field( $_POST['hastag'] );
 		$c_key       = sanitize_text_field( $_POST['c_key'] );
 		$c_secret    = sanitize_text_field( $_POST['c_secret'] );
+		$widget_id   = sanitize_text_field( $_POST['widget_id'] );
+		$permalink   = sanitize_text_field( $_POST['page_permalink'] );
+        $page_id     = url_to_postid($permalink);
+        
+        $settings = $this->eael_get_widget_settings($page_id, $widget_id);
+        $twitter_v2 = ! empty( $settings['eael_twitter_api_v2'] ) && 'yes' === $settings['eael_twitter_api_v2'] ? true : false;
+
 		$key_pattern = '_transient_' . $ac_name . '%' . md5( $hastag . $c_key . $c_secret ) . '_tf_cache';
+        
+        if( $twitter_v2 ){
+            $bearer_token = $settings['eael_twitter_feed_bearer_token'];
+            $key_pattern = '_transient_' . $ac_name . '%' . md5( $hastag . $c_key . $c_secret . $bearer_token ) . '_tf_cache';
+        }
 
 		$sql     = "SELECT `option_name` AS `name`
             FROM  $wpdb->options
@@ -473,7 +485,7 @@ trait Helper
 		?>
         <div id="eael-admin-promotion-message" class="eael-admin-promotion-message">
             <i class="e-notice__dismiss eael-admin-promotion-close" role="button" aria-label="Dismiss" tabindex="0"></i>
-			<?php printf( __( "<p> <i>📣</i> NEW: Essential Addons 5.8 is here, with new '<a target='_blank' href='%s'>Wrapper Link</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/wrapper-link/' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) ); ?>
+			<?php printf( __( "<p> <i>📣</i> NEW: Essential Addons Pro 5.5 is here, with new '<a target='_blank' href='%s'>Woo Thank You</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/woo-thank-you' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) ); ?>
         </div>
 		<?php
 	}

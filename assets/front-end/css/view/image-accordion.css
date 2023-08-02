@@ -23,7 +23,6 @@
   background-repeat: no-repeat;
   -webkit-transition: -webkit-box-flex 0.4s;
   transition: -webkit-box-flex 0.4s;
-  -o-transition: flex 0.4s;
   transition: flex 0.4s;
   transition: flex 0.4s, -webkit-box-flex 0.4s, -ms-flex 0.4s;
   overflow: hidden;
@@ -51,7 +50,6 @@
   bottom: 0;
   left: 0;
   -webkit-transition: background-color 0.4s;
-  -o-transition: background-color 0.4s;
   transition: background-color 0.4s;
   opacity: 1;
   visibility: visible;
@@ -104,7 +102,6 @@
   bottom: 0px;
   right: 0px;
   -webkit-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 .eael-img-accordion .eael-image-accordion-hover:before {
@@ -138,7 +135,6 @@
       -ms-transform: none !important;
           transform: none !important;
   -webkit-transition: all 0.3s 0.3s;
-  -o-transition: all 0.3s 0.3s;
   transition: all 0.3s 0.3s;
 }
 @media screen and (max-width: 800px) {

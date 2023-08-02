@@ -9,6 +9,7 @@ if (!defined('ABSPATH')) {
 
 use \Elementor\Controls_Manager;
 use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
@@ -86,6 +87,18 @@ class Twitter_Feed extends Widget_Base
         );
 
         $this->add_control(
+		    'eael_twitter_api_v2',
+		    [
+			    'label'        => esc_html__( 'Twitter API V2', 'essential-addons-for-elementor-lite' ),
+			    'type'         => Controls_Manager::SWITCHER,
+			    'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+			    'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+			    'default'      => '',
+			    'return_value' => 'yes',
+		    ]
+	    );
+
+        $this->add_control(
             'eael_twitter_feed_ac_name',
             [
                 'label' => esc_html__('Account Name', 'essential-addons-for-elementor-lite'),
@@ -125,6 +138,9 @@ class Twitter_Feed extends Widget_Base
                 'ai' => [
 					'active' => false,
 				],
+                'condition'   => [
+				    'eael_twitter_api_v2' => ''
+			    ]
             ]
         );
 
@@ -139,6 +155,26 @@ class Twitter_Feed extends Widget_Base
                 'ai' => [
 					'active' => false,
 				],
+                'condition'   => [
+				    'eael_twitter_api_v2' => ''
+			    ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_twitter_feed_bearer_token',
+            [
+                'label' => esc_html__('Bearer Token', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'label_block' => false,
+                'default' => '',
+                'description' => '<a href="https://developer.twitter.com/en/portal/dashboard" target="_blank">Get Bearer Token.</a> Create a new app or select existing app within a project and grab the <b>bearer token.</b>',
+                'ai' => [
+					'active' => false,
+				],
+                'condition'   => [
+				    'eael_twitter_api_v2' => 'yes'
+			    ]
             ]
         );
 
@@ -1161,9 +1197,8 @@ class Twitter_Feed extends Widget_Base
             [
                 'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => \Elementor\Controls_Manager::COLOR,
-                'scheme' => [
-                    'type' => \Elementor\Core\Schemes\Color::get_type(),
-                    'value' => \Elementor\Core\Schemes\Color::COLOR_1,
+                'global' => [
+	                'default' => Global_Colors::COLOR_PRIMARY
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-twitter-feed-item .eael-twitter-feed-item-icon' => 'color: {{VALUE}}',

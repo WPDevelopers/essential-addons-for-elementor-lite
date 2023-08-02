@@ -11,7 +11,7 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Plugin;
-use \Elementor\Core\Schemes\Typography;
+use \Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use \Elementor\Widget_Base;
 
 use \Essential_Addons_Elementor\Classes\Helper;
@@ -470,7 +470,9 @@ class Countdown extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'      => 'eael_countdown_separator_typography',
-                'scheme'    => Typography::TYPOGRAPHY_2,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_SECONDARY
+                ],
                 'selector'  => '{{WRAPPER}} .eael-countdown-digits::after',
                 'condition' => [
                     'eael_countdown_separator' => 'eael-countdown-show-separator',
@@ -773,7 +775,9 @@ class Countdown extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'eael_countdown_digit_typography',
-                'scheme'   => Typography::TYPOGRAPHY_2,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_SECONDARY
+                ],
                 'selector' => '{{WRAPPER}} .eael-countdown-digits',
             ]
         );
@@ -802,7 +806,9 @@ class Countdown extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'eael_countdown_label_typography',
-                'scheme'   => Typography::TYPOGRAPHY_2,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_SECONDARY
+                ],
                 'selector' => '{{WRAPPER}} .eael-countdown-label',
             ]
         );
@@ -1173,7 +1179,9 @@ class Countdown extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'      => 'eael_countdown_expire_title_typography',
-                'scheme'   => Typography::TYPOGRAPHY_2,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_SECONDARY
+                ],
                 'selector'  => '{{WRAPPER}} .eael-countdown-finish-message .expiry-title',
                 'condition' => [
                     'countdown_expire_type' => 'text',
@@ -1221,7 +1229,9 @@ class Countdown extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'      => 'eael_countdown_expire_message_typography',
-                'scheme'    => Typography::TYPOGRAPHY_2,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_SECONDARY
+                ],
                 'selector'  => '.eael-countdown-finish-text',
                 'condition' => [
                     'countdown_expire_type' => 'text',
@@ -1318,6 +1328,10 @@ class Countdown extends Widget_Base {
 					<?php
 					if ( 'template' == $settings['countdown_expire_type'] ) {
 						if ( ! empty( $settings['countdown_expiry_templates'] ) ) {
+							// WPML Compatibility
+							if ( ! is_array( $settings['countdown_expiry_templates'] ) ) {
+								$settings['countdown_expiry_templates'] = apply_filters( 'wpml_object_id', $settings['countdown_expiry_templates'], 'wp_template', true );
+							}
 							echo Plugin::$instance->frontend->get_builder_content( $settings['countdown_expiry_templates'], true );
 						}
 					}

@@ -10,10 +10,10 @@ use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
-use \Elementor\Core\Schemes\Typography;
+use \Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use \Elementor\Widget_Base;
 use \Elementor\Group_Control_Background;
-use \Elementor\Core\Schemes\Color;
+use \Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 
 use \Essential_Addons_Elementor\Classes\Helper;
 
@@ -383,7 +383,9 @@ class FluentForm extends Widget_Base
             [
                 'name' => 'form_description_typography',
                 'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'scheme' => Typography::TYPOGRAPHY_4,
+                'global' => [
+	                'default' => Global_Typography::TYPOGRAPHY_ACCENT
+                ],
                 'selector' => '{{WRAPPER}} .eael-fluentform-description',
                 'condition' => [
                     'custom_title_description' => 'yes',
@@ -1771,9 +1773,8 @@ class FluentForm extends Widget_Base
                     [
                         'label'     => __( 'Label Color', 'essential-addons-for-elementor-lite' ),
                         'type'      => Controls_Manager::COLOR,
-                        'scheme'    => [
-                            'type'  => Color::get_type(),
-                            'value' => Color::COLOR_1,
+                        'global' => [
+	                        'default' => Global_Colors::COLOR_PRIMARY
                         ],
                         'selectors' => [
                             '{{WRAPPER}} .ff-el-progress-status' => 'color: {{VALUE}}',
@@ -1789,7 +1790,9 @@ class FluentForm extends Widget_Base
                     [
                         'name' => 'label_typography',
                         'label' => __( 'Typography', 'essential-addons-for-elementor-lite' ),
-                        'scheme' => Typography::TYPOGRAPHY_1,
+                        'global' => [
+	                        'default' => Global_Typography::TYPOGRAPHY_PRIMARY
+                        ],
                         'selector' => '{{WRAPPER}} .ff-el-progress-status',
                         'condition' => [
                             'show_label'    => 'yes'
@@ -1861,9 +1864,8 @@ class FluentForm extends Widget_Base
                     [
                         'label' => __( 'Title Color', 'essential-addons-for-elementor-lite' ),
                         'type'  =>   Controls_Manager::COLOR,
-                        'scheme' => [
-                            'type' =>   Color::get_type(),
-                            'value' =>  Color::COLOR_1,
+                        'global' => [
+	                        'default' => Global_Colors::COLOR_PRIMARY
                         ],
                         'selectors' => [
                             '{{WRAPPER}} .ff-el-progress-bar span' => 'color: {{VALUE}};',
@@ -1986,7 +1988,9 @@ class FluentForm extends Widget_Base
                     [
                         'name' => 'pagination_button_typography',
                         'label' => __( 'Typography', 'essential-addons-for-elementor-lite' ),
-                        'scheme' => Typography::TYPOGRAPHY_1,
+                        'global' => [
+	                        'default' => Global_Typography::TYPOGRAPHY_PRIMARY
+                        ],
                         'selector' => '{{WRAPPER}} .step-nav button',
                     ]
                 );

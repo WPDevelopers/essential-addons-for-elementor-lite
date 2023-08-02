@@ -13,7 +13,6 @@
 .eael-elements-flip-box-container .flipbox-button {
   display: inline-block;
   -webkit-transition: all 400ms;
-  -o-transition: all 400ms;
   transition: all 400ms;
   padding: 14px 18px;
   border-radius: 3px;
@@ -146,13 +145,10 @@
 .eael-elements-flip-box-front-container,
 .eael-elements-flip-box-rear-container {
   -webkit-transition-duration: 500ms;
-       -o-transition-duration: 500ms;
           transition-duration: 500ms;
   -webkit-transition-property: all;
-  -o-transition-property: all;
   transition-property: all;
   -webkit-transition-timing-function: ease;
-       -o-transition-timing-function: ease;
           transition-timing-function: ease;
 }
 .eael-elements-flip-box-flip-card {
@@ -161,7 +157,6 @@
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
   -webkit-transition: all 500ms ease;
-  -o-transition: all 500ms ease;
   transition: all 500ms ease;
 }
 .eael-elements-flip-box-rear-container,
@@ -330,7 +325,6 @@
   -webkit-perspective: 1000px;
           perspective: 1000px;
   -webkit-transition: all 0.6s ease-in-out;
-  -o-transition: all 0.6s ease-in-out;
   transition: all 0.6s ease-in-out;
 }
 .eael-animate-fade-in.eael-elements-flip-box-container:hover .eael-elements-flip-box-front-container {
@@ -342,7 +336,6 @@
 }
 .eael-animate-fade-in.eael-elements-flip-box-container .eael-elements-flip-box-front-container, .eael-animate-fade-in.eael-elements-flip-box-container .eael-elements-flip-box-rear-container {
   -webkit-transition: all 0.6s ease-in-out !important;
-  -o-transition: all 0.6s ease-in-out !important;
   transition: all 0.6s ease-in-out !important;
 }
 .eael-animate-fade-in.eael-elements-flip-box-container .eael-elements-flip-box-rear-container {
