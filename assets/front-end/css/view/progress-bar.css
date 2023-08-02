@@ -72,7 +72,6 @@
       -ms-transform: translateY(-50%);
           transform: translateY(-50%);
   -webkit-transition: width 1500ms linear;
-  -o-transition: width 1500ms linear;
   transition: width 1500ms linear;
   overflow: hidden;
 }
@@ -163,7 +162,6 @@
           transform: rotate(0deg);
   -webkit-transition: -webkit-transform 1500ms linear;
   transition: -webkit-transform 1500ms linear;
-  -o-transition: transform 1500ms linear;
   transition: transform 1500ms linear;
   transition: transform 1500ms linear, -webkit-transform 1500ms linear;
 }
@@ -198,7 +196,6 @@
   left: -35px;
   width: calc(100% + 70px);
   height: 100%;
-  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-size: 35px 35px;
 }

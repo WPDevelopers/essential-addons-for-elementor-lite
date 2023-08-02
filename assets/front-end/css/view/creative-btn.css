@@ -36,11 +36,9 @@
   overflow: hidden;
   padding: 0 !important;
   -webkit-transition: border-color 0.3s, background-color 0.3s;
-  -o-transition: border-color 0.3s, background-color 0.3s;
   transition: border-color 0.3s, background-color 0.3s;
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-  -o-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-     transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
 
 .eael-creative-button--winona::after {
@@ -70,12 +68,10 @@
   -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
   -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
   transition: opacity 0.3s, -webkit-transform 0.3s;
-  -o-transition: transform 0.3s, opacity 0.3s;
   transition: transform 0.3s, opacity 0.3s;
   transition: transform 0.3s, opacity 0.3s, -webkit-transform 0.3s;
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-  -o-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-     transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
 
 .eael-creative-button--winona:hover::after {
@@ -102,7 +98,6 @@
 
 .eael-creative-button--ujarak {
   -webkit-transition: border-color 0.4s, color 0.4s;
-  -o-transition: border-color 0.4s, color 0.4s;
   transition: border-color 0.4s, color 0.4s;
 }
 
@@ -120,19 +115,16 @@
   -webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
   -webkit-transition: opacity 0.4s, -webkit-transform 0.4s;
   transition: opacity 0.4s, -webkit-transform 0.4s;
-  -o-transition: transform 0.4s, opacity 0.4s;
   transition: transform 0.4s, opacity 0.4s;
   transition: transform 0.4s, opacity 0.4s, -webkit-transform 0.4s;
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-  -o-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-     transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
 
 .eael-creative-button--ujarak,
 .eael-creative-button--ujarak::before {
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-  -o-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-     transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
 
 .eael-creative-button--ujarak:hover::before {
@@ -146,11 +138,9 @@
 .eael-creative-button--wayra {
   overflow: hidden;
   -webkit-transition: border-color 0.3s, color 0.3s;
-  -o-transition: border-color 0.3s, color 0.3s;
   transition: border-color 0.3s, color 0.3s;
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-  -o-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-     transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
 
 .eael-creative-button--wayra::before {
@@ -169,7 +159,6 @@
   -webkit-transition: -webkit-transform 0.3s, opacity 0.3s, background-color 0.3s;
   -webkit-transition: opacity 0.3s, background-color 0.3s, -webkit-transform 0.3s;
   transition: opacity 0.3s, background-color 0.3s, -webkit-transform 0.3s;
-  -o-transition: transform 0.3s, opacity 0.3s, background-color 0.3s;
   transition: transform 0.3s, opacity 0.3s, background-color 0.3s;
   transition: transform 0.3s, opacity 0.3s, background-color 0.3s, -webkit-transform 0.3s;
 }
@@ -179,8 +168,7 @@
   -webkit-transform: rotate3d(0, 0, 1, 0deg);
   transform: rotate3d(0, 0, 1, 0deg);
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-  -o-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-     transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
 
 /* Tamaya */
@@ -220,7 +208,6 @@
   overflow: hidden;
   -webkit-transition: -webkit-transform 0.3s;
   transition: -webkit-transform 0.3s;
-  -o-transition: transform 0.3s;
   transition: transform 0.3s;
   transition: transform 0.3s, -webkit-transform 0.3s;
 }
@@ -262,11 +249,9 @@
   opacity: 0;
   -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
   transition: opacity 0.3s, -webkit-transform 0.3s;
-  -o-transition: transform 0.3s, opacity 0.3s;
   transition: transform 0.3s, opacity 0.3s;
   transition: transform 0.3s, opacity 0.3s, -webkit-transform 0.3s;
   -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-       -o-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
           transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
 
@@ -312,11 +297,9 @@
   padding: 1em 2em;
   -webkit-transition: -webkit-transform 0.3s;
   transition: -webkit-transform 0.3s;
-  -o-transition: transform 0.3s;
   transition: transform 0.3s;
   transition: transform 0.3s, -webkit-transform 0.3s;
   -webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
-       -o-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
           transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
 }
 
@@ -341,11 +324,9 @@
   padding: 0;
   -webkit-transition: -webkit-transform 0.3s;
   transition: -webkit-transform 0.3s;
-  -o-transition: transform 0.3s;
   transition: transform 0.3s;
   transition: transform 0.3s, -webkit-transform 0.3s;
   -webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
-       -o-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
           transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
 }
 
