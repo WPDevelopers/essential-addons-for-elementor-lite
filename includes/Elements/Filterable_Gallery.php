@@ -3152,7 +3152,12 @@ class Filterable_Gallery extends Widget_Base
 		$sorter_class = str_replace( '{', 'curlybracket', $sorter_class );
 		$sorter_class = str_replace( '}', 'curlybracket', $sorter_class );
 		$sorter_class = str_replace( '?', 'questionmark', $sorter_class );
-		$sorter_class = mb_convert_encoding( $sorter_class, 'UTF-8' );
+
+        if ( function_exists('mb_convert_encoding') ) {
+            $sorter_class = mb_convert_encoding( $sorter_class, 'UTF-8' );
+        } else {
+            $sorter_class = utf8_encode( $sorter_class );
+        }
 
 		return $sorter_class;
 	}
