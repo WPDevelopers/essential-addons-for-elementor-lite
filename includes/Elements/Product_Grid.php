@@ -333,6 +333,8 @@ class Product_Grid extends Widget_Base
             ]
         );
 
+	    do_action( 'eael/product_grid/layout/controls', $this );
+
         $this->end_controls_section();
     }
 

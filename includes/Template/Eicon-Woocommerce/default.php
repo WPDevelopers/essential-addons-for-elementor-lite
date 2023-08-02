@@ -60,25 +60,34 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
     <li class="product">
         <div class="eael-product-wrap">
             <?php
+            $product_data = [
+	            'id'     => $product->get_id(),
+	            'title'  => '<div class="eael-product-title">
+                                <a href="' . esc_url( $product->get_permalink() ) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">' .
+	                        sprintf( '<%1$s class="woocommerce-loop-product__title">%2$s</%1$s>', $title_tag, $product->get_title() )
+	                        . '</a></div>',
+	            'ratings' => $should_print_rating ? wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) : '',
+	            'price'  => $should_print_price ? '<div class="eael-product-price">' . $product->get_price_html() . '</div>' : ''
+            ];
 
-            if( $should_print_image_clickable ) {
+            if ( $should_print_image_clickable ) {
 	            echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
-            }?>
+            } ?>
             <?php echo wp_kses_post( $product->get_image( $settings['eael_product_grid_image_size_size'], [ 'loading' => 'eager' ] ) );
             if ( $should_print_image_clickable ) {
 	            echo '</a>';
             }
-            
-            // printf('<%1$s class="woocommerce-loop-product__title"><a href="%3$s" class="woocommerce-LoopProduct-link woocommerce-loop-product__link woocommerce-loop-product__title_link woocommerce-loop-product__title_link_simple woocommerce-loop-product__title_link_reveal">%2$s</a></%1$s>', $title_tag, $product->get_title(), $product->get_permalink());
-            echo '<div class="eael-product-title">
-            <a href="' . esc_url( $product->get_permalink() ) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
-            printf('<%1$s class="woocommerce-loop-product__title">%2$s</%1$s>', $title_tag, Helper::eael_wp_kses( $product->get_title() ));
-            echo '</a>
-            </div>';
 
-            if ( $should_print_rating ) {
-                echo wp_kses_post( wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) );
+            $product_data = apply_filters( 'eael/product-grid/content/reordering', $product_data, $settings );
+            if ( ! empty( $product_data ) ) {
+                unset( $product_data['id'] );
+	            foreach ( $product_data as $content ) {
+		            if ( ! empty( $content ) ) {
+			            echo  $content;
+		            }
+	            }
             }
+
             if ( $is_show_badge ){
                 if ( ! $product->is_in_stock() ) {
                     printf( '<span class="outofstock-badge">%s</span>', $stock_out_badge_text );
@@ -87,10 +96,6 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                 }
             }
 
-
-            if ( $should_print_price ) {
-              echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
-            }
             ?>
             <?php
             woocommerce_template_loop_add_to_cart();
