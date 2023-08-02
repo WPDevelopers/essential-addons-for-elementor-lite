@@ -517,7 +517,6 @@ class Product_Grid extends Widget_Base
             'default' => 'yes',
             'condition' => [
                 'eael_product_grid_style_preset!' => ['eael-product-preset-8'],
-                'enable_eael_layout_custom_ordering!' => 'yes'
             ],
 
         ]);
@@ -531,7 +530,6 @@ class Product_Grid extends Widget_Base
                 'default' => 'yes',
                 'condition' => [
                     'eael_product_grid_style_preset!' => 'eael-product-default',
-                    'enable_eael_layout_custom_ordering!' => 'yes'
                 ],
             ]
         );

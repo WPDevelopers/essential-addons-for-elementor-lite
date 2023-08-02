@@ -57,9 +57,6 @@ $quick_view_setting = [
 	'page_id' => $settings['eael_page_id'],
 ];
 
-if ( isset( $settings['enable_eael_layout_custom_ordering'] ) && $settings['enable_eael_layout_custom_ordering'] === 'yes' ) {
-	$should_print_price = $should_print_rating = $should_print_excerpt = true;
-}
 $product_data = [
 	'id'     => $product->get_id(),
 	'title'  => '<div class="eael-product-title">
