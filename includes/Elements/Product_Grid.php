@@ -335,6 +335,16 @@ class Product_Grid extends Widget_Base
 
 	    do_action( 'eael/product_grid/layout/controls', $this );
 
+        if ( apply_filters( 'eael/pro_enabled', false ) ){
+	        $this->add_control(
+		        'enable_eael_layout_custom_ordering',
+		        [
+			        'type' => \Elementor\Controls_Manager::HIDDEN,
+                    'default' => ''
+		        ]
+	        );
+        }
+
         $this->end_controls_section();
     }
 
@@ -507,6 +517,7 @@ class Product_Grid extends Widget_Base
             'default' => 'yes',
             'condition' => [
                 'eael_product_grid_style_preset!' => ['eael-product-preset-8'],
+                'enable_eael_layout_custom_ordering!' => 'yes'
             ],
 
         ]);
@@ -520,6 +531,7 @@ class Product_Grid extends Widget_Base
                 'default' => 'yes',
                 'condition' => [
                     'eael_product_grid_style_preset!' => 'eael-product-default',
+                    'enable_eael_layout_custom_ordering!' => 'yes'
                 ],
             ]
         );
