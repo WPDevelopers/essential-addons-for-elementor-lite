@@ -90,13 +90,15 @@
 
 .eael-tooltip .eael-tooltip-text.eael-tooltip-top {
   bottom: 100%;
-  left: 0;
-  right: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
   margin: 0 auto 10px auto;
 }
 
 .eael-tooltip .eael-tooltip-text.eael-tooltip-top::after {
-  margin-top: 0px;
+  margin-top: 0;
   top: 100%;
   left: calc(50% - 5px);
   border-color: black transparent transparent transparent;
@@ -111,13 +113,15 @@
 
 .eael-tooltip .eael-tooltip-text.eael-tooltip-bottom {
   top: 100%;
-  left: 0;
-  right: 0;
-  margin: 10px auto 0px auto;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
+  margin: 10px auto 0 auto;
 }
 
 .eael-tooltip .eael-tooltip-text.eael-tooltip-bottom::after {
-  margin-top: 0px;
+  margin-top: 0;
   bottom: 100%;
   left: calc(50% - 5px);
   border-color: transparent transparent black transparent;
