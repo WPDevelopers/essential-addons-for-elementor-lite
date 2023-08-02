@@ -521,7 +521,9 @@ class Product_Grid extends Widget_Base
 
         ]);
 
-        $this->add_control(
+	    do_action( 'eael/product_grid/product_settings/control/after_rating', $this );
+
+	    $this->add_control(
             'eael_product_grid_price',
             [
                 'label' => esc_html__('Show Product Price?', 'essential-addons-for-elementor-lite'),
@@ -533,7 +535,10 @@ class Product_Grid extends Widget_Base
                 ],
             ]
         );
-        $this->add_control(
+
+	    do_action( 'eael/product_grid/product_settings/control/after_price', $this );
+
+	    $this->add_control(
             'eael_product_grid_excerpt',
             [
                 'label' => esc_html__('Short Description?', 'essential-addons-for-elementor-lite'),
