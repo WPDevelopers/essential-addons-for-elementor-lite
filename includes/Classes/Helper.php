@@ -1033,245 +1033,249 @@ class Helper
 	 * eael_allowed_tags
 	 * @return array
 	 */
-    public static function eael_allowed_tags(){
-        return [
-            'a' => [
-                'href' => [],
-                'title' => [],
-                'class' => [],
-                'rel' => [],
-                'id' => [],
-                'style' => []
-            ],
-            'q' => [
-                'cite' => [],
-                'class' => [],
-                'id' => [],
-            ],
-            'img' => [
-                'src' => [],
-                'alt' => [],
-                'height' => [],
-                'width' => [],
-                'class' => [],
-                'id' => [],
-                'style' => []
-            ],
-            'span' => [
-                'class' => [],
-                'id' => [],
-                'style' => []
-            ],
-            'dfn' => [
-                'class' => [],
-                'id' => [],
-                'style' => []
-            ],
-            'time' => [
-                'datetime' => [],
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'cite' => [
-                'title' => [],
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'hr' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'b' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'p' => [
-                'class' => [],
-                'id' => [],
-                'style' => []
-            ],
-            'i' => [
-                'class' => [],
-                'id' => [],
-                'style' => []
-            ],
-            'u' => [
-                'class' => [],
-                'id' => [],
-                'style' => []
-            ],
-            's' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'br' => [],
-            'em' => [
-                'class' => [],
-                'id' => [],
-                'style' => []
-            ],
-            'code' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'mark' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'small' => [
-                'class' => [],
-                'id' => [],
-                'style' => []
-            ],
-            'abbr' => [
-                'title' => [],
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'strong' => [
-                'class' => [],
-                'id' => [],
-                'style' => []
-            ],
-            'del' => [
-                'class' => [],
-                'id' => [],
-                'style' => []
-            ],
-            'ins' => [
-                'class' => [],
-                'id' => [],
-                'style' => []
-            ],
-            'sub' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'sup' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'div' => [
-                'class' => [],
-                'id' => [],
-                'style' => []
-            ],
-            'strike' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'acronym' => [],
-            'h1' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'h2' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'h3' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'h4' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'h5' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'h6' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'button' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'center' => [
-	            'class' => [],
-	            'id'    => [],
-	            'style' => [],
-            ],
-            'ul' => [
-	            'class' => [],
-	            'id'    => [],
-	            'style' => [],
-            ],
-            'ol' => [
-	            'class' => [],
-	            'id'    => [],
-	            'style' => [],
-            ],
-            'li' => [
-	            'class' => [],
-	            'id'    => [],
-	            'style' => [],
-            ],
-            'table' => [
-	            'class' => [],
-	            'id'    => [],
-	            'style' => [],
-                'dir'   => [],
-                'align' => [],
-            ],
-            'thead' => [
-	            'class' => [],
-	            'id'    => [],
-	            'style' => [],
-                'align' => [],
-            ],
-            'tbody' => [
-	            'class' => [],
-	            'id'    => [],
-	            'style' => [],
-                'align' => [],
-            ],
-            'tfoot' => [
-	            'class' => [],
-	            'id'    => [],
-	            'style' => [],
-                'align' => [],
-            ],
-            'th' => [
-	            'class' => [],
-	            'id'    => [],
-	            'style' => [],
-                'align' => [],
-            ],
-            'tr' => [
-	            'class' => [],
-	            'id'    => [],
-	            'style' => [],
-                'align' => [],
-            ],
-            'td' => [
-	            'class' => [],
-	            'id'    => [],
-	            'style' => [],
-                'align' => [],
-            ],
-        ];
-    }
+	public static function eael_allowed_tags() {
+		return [
+			'a'       => [
+				'href'  => [],
+				'title' => [],
+				'class' => [],
+				'rel'   => [],
+				'id'    => [],
+				'style' => []
+			],
+			'q'       => [
+				'cite'  => [],
+				'class' => [],
+				'id'    => [],
+			],
+			'img'     => [
+				'src'    => [],
+				'alt'    => [],
+				'height' => [],
+				'width'  => [],
+				'class'  => [],
+				'id'     => [],
+				'style'  => []
+			],
+			'span'    => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+			'dfn'     => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+			'time'    => [
+				'datetime' => [],
+				'class'    => [],
+				'id'       => [],
+				'style'    => [],
+			],
+			'cite'    => [
+				'title' => [],
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'hr'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'b'       => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'p'       => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+			'i'       => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+			'u'       => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+			's'       => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'br'      => [],
+			'em'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+			'code'    => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'mark'    => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'small'   => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+			'abbr'    => [
+				'title' => [],
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'strong'  => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+			'del'     => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+			'ins'     => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+			'sub'     => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'sup'     => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'div'     => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+			'strike'  => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'acronym' => [],
+			'h1'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'h2'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'h3'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'h4'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'h5'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'h6'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'button'  => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'center'  => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'ul'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'ol'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'li'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'table'   => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+				'dir'   => [],
+				'align' => [],
+			],
+			'thead'   => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+				'align' => [],
+			],
+			'tbody'   => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+				'align' => [],
+			],
+			'tfoot'   => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+				'align' => [],
+			],
+			'th'      => [
+				'class'   => [],
+				'id'      => [],
+				'style'   => [],
+				'align'   => [],
+				'colspan' => [],
+				'rowspan' => [],
+			],
+			'tr'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+				'align' => [],
+			],
+			'td'      => [
+				'class'   => [],
+				'id'      => [],
+				'style'   => [],
+				'align'   => [],
+				'colspan' => [],
+				'rowspan' => [],
+			],
+		];
+	}
 
     public static function eael_fetch_color_or_global_color($settings, $control_name=''){
         if( !isset($settings[$control_name])) {
