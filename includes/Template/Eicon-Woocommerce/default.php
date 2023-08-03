@@ -83,7 +83,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
             if ( ! empty( $product_data ) ) {
 	            foreach ( $product_data as $content ) {
 		            if ( ! empty( $content ) ) {
-			            echo  $content;
+			            echo Helper::eael_wp_kses( $content );
 		            }
 	            }
             }

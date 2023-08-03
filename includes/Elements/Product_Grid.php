@@ -1463,7 +1463,9 @@ class Product_Grid extends Widget_Base
             ]
         );
 
-        $this->end_controls_section();
+	    do_action( 'eael/product_grid/product_settings/control/after_color_typography', $this );
+
+	    $this->end_controls_section();
     }
 
     protected function sale_badge_style(){
