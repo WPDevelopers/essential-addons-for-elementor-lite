@@ -58,7 +58,6 @@ $quick_view_setting = [
 ];
 
 $product_data = [
-	'id'     => $product->get_id(),
 	'title'  => '<div class="eael-product-title">
                                 <a href="' . esc_url( $product->get_permalink() ) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">' .
 	            sprintf( '<%1$s class="woocommerce-loop-product__title">%2$s</%1$s>', $title_tag, $product->get_title() )
@@ -80,9 +79,8 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 	            echo '</a>';
             }
 
-            $product_data = apply_filters( 'eael/product-grid/content/reordering', $product_data, $settings );
+            $product_data = apply_filters( 'eael/product-grid/content/reordering', $product_data, $settings, $product );
             if ( ! empty( $product_data ) ) {
-                unset( $product_data['id'] );
 	            foreach ( $product_data as $content ) {
 		            if ( ! empty( $content ) ) {
 			            echo  $content;
@@ -147,9 +145,8 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
         </div>
         <?php
 
-        $product_data = apply_filters( 'eael/product-grid/content/reordering', $product_data, $settings );
+        $product_data = apply_filters( 'eael/product-grid/content/reordering', $product_data, $settings, $product );
         if ( ! empty( $product_data ) ) {
-	        unset( $product_data['id'] );
 	        foreach ( $product_data as $content ) {
 		        if ( ! empty( $content ) ) {
 			        echo Helper::eael_wp_kses( $content );
@@ -296,9 +293,8 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 	                    $_product_data['price'] = '<div class="eael-product-price">'.$product->get_price_html().'</div>';
                     }
 
-                    $product_data = apply_filters( 'eael/product-grid/content/reordering', $_product_data, $settings );
+                    $product_data = apply_filters( 'eael/product-grid/content/reordering', $_product_data, $settings, $product );
                     if ( ! empty( $product_data ) ) {
-	                    unset( $product_data['id'] );
 	                    foreach ( $product_data as $content ) {
 		                    if ( ! empty( $content ) ) {
 			                    echo Helper::eael_wp_kses( $content );
@@ -373,9 +369,8 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                     }
 
                     $_product_data['title'] = $product_data['title'];
-                    $product_data = apply_filters( 'eael/product-grid/content/reordering', $_product_data, $settings );
+                    $product_data = apply_filters( 'eael/product-grid/content/reordering', $_product_data, $settings, $product );
                     if ( ! empty( $product_data ) ) {
-	                    unset( $product_data['id'] );
 	                    foreach ( $product_data as $content ) {
 		                    if ( ! empty( $content ) ) {
 			                    echo Helper::eael_wp_kses( $content );
@@ -474,9 +469,8 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 	                    $_product_data['description'] = $should_print_excerpt ? '<div class="eael-product-excerpt">
                             <p>' . wp_trim_words( strip_shortcodes( get_the_excerpt() ), $settings['eael_product_grid_excerpt_length'], $settings['eael_product_grid_excerpt_expanison_indicator'] ) . '</p></div>' : '';
                     }
-                    $product_data = apply_filters( 'eael/product-grid/content/reordering', $_product_data, $settings );
+                    $product_data = apply_filters( 'eael/product-grid/content/reordering', $_product_data, $settings, $product );
                     if ( ! empty( $product_data ) ) {
-	                    unset( $product_data['id'] );
 	                    foreach ( $product_data as $content ) {
 		                    if ( ! empty( $content ) ) {
 			                    echo Helper::eael_wp_kses( $content );
