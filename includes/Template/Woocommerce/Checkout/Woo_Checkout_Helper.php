@@ -386,6 +386,7 @@ trait Woo_Checkout_Helper {
 	 * Show the order review.
 	 */
 	public static function checkout_order_review_default($settings) {
+		WC()->cart->calculate_totals();
 		?>
 
 		<div class="ea-checkout-review-order-table">
@@ -493,7 +494,6 @@ trait Woo_Checkout_Helper {
 						<?php do_action( 'woocommerce_review_order_before_shipping' ); ?>
 						<div class="shipping-area">
 							<?php
-							WC()->cart->calculate_totals();
 							wc_cart_totals_shipping_html();
 							?>
 						</div>
