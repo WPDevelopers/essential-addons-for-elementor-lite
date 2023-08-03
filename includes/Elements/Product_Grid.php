@@ -1353,6 +1353,7 @@ class Product_Grid extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-product-grid .woocommerce .star-rating::before' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-grid .woocommerce .star-rating span::before' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-grid .woocommerce .eael-star-rating' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -1361,7 +1362,7 @@ class Product_Grid extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'eael_product_grid_product_rating_typography',
-                'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product .star-rating',
+                'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product .star-rating,{{WRAPPER}} .eael-product-grid .woocommerce .eael-star-rating',
                 'conditions' => [
                     'relation' => 'or',
                     'terms' => [
