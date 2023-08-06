@@ -122,7 +122,6 @@
           transform: scale(0.8);
   opacity: 0;
   -webkit-transition: all 200ms;
-  -o-transition: all 200ms;
   transition: all 200ms;
 }
 .eael-facebook-feed-overlay .eael-facebook-feed-item .eael-facebook-feed-item-overlay .eael-facebook-feed-item-overlay-inner {
@@ -145,7 +144,6 @@
 }
 .eael-facebook-feed-card .eael-facebook-feed-item .eael-facebook-feed-item-inner {
   -webkit-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
   margin: 10px;
   overflow: hidden;

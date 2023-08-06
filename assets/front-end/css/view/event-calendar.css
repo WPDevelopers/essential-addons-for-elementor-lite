@@ -85,7 +85,6 @@
   background: #000000;
   opacity: 0;
   -webkit-transition: all 0.3s ease-out;
-  -o-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
 }
 .eael-event-calendar-wrapper .eaelec-modal.eael-ec-popup-ready {
@@ -391,8 +390,7 @@ span.fc-day-number {
 .fc-unthemed .fc-time-grid .fc-event .fc-content .fc-title {
   white-space: nowrap;
   overflow: hidden;
-  -o-text-overflow: ellipsis;
-     text-overflow: ellipsis;
+  text-overflow: ellipsis;
 }
 .fc-unthemed .fc-event:hover {
   color: #707070;
@@ -400,14 +398,12 @@ span.fc-day-number {
 .eaelec-modal.eael-zoom-in {
   opacity: 0;
   -webkit-transition: all 0.3s ease-out;
-  -o-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
   display: none;
 }
 .eaelec-modal.eael-zoom-in .eaelec-modal-content {
   opacity: 0;
   -webkit-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
   -webkit-transform: scale(0.5);
       -ms-transform: scale(0.5);

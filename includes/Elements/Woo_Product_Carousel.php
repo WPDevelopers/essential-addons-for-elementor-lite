@@ -315,6 +315,9 @@ class Woo_Product_Carousel extends Widget_Base {
                 'condition'   => [
                     'eael_product_carousel_excerpt' => 'yes',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         
@@ -462,7 +465,10 @@ class Woo_Product_Carousel extends Widget_Base {
                 'label'     => __( 'Not Found Message', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::TEXT,
                 'default'   => __( 'Products Not Found', 'essential-addons-for-elementor-lite' ),
-                'separator' => 'before'
+                'separator' => 'before',
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -896,6 +902,9 @@ class Woo_Product_Carousel extends Widget_Base {
 			    'label'       => esc_html__( 'Sale Text', 'essential-addons-for-elementor-lite' ),
 			    'type'        => Controls_Manager::TEXT,
                 'separator' => 'before',
+                'ai' => [
+					'active' => false,
+				],
 		    ]
 	    );
 	    $this->add_control(
@@ -903,6 +912,9 @@ class Woo_Product_Carousel extends Widget_Base {
 		    [
 			    'label'       => esc_html__( 'Stock Out Text', 'essential-addons-for-elementor-lite' ),
 			    'type'        => Controls_Manager::TEXT,
+                'ai' => [
+					'active' => false,
+				],
 		    ]
 	    );
         
@@ -1070,6 +1082,10 @@ class Woo_Product_Carousel extends Widget_Base {
                     '{{WRAPPER}} .eael-product-carousel' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
                     '{{WRAPPER}} .eael-product-carousel .image-wrap img, {{WRAPPER}} .eael-product-carousel > .product-image-wrap'
                                                          => 'border-radius: {{TOP}}px {{RIGHT}}px 0 0;',
+                    '{{WRAPPER}} .eael-product-carousel.product-details-none .image-wrap img, {{WRAPPER}} .eael-product-carousel > .product-image-wrap'
+                                                         => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
+                    '{{WRAPPER}} .eael-product-carousel.product-details-none-overlay .image-wrap img, {{WRAPPER}} .eael-product-carousel > .product-image-wrap'
+                                                         => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
                 ],
             ]
         );
@@ -2855,13 +2871,20 @@ class Woo_Product_Carousel extends Widget_Base {
             $this->add_render_attribute( 'container', 'class',
                 'swiper-container-wrap-dots-' . $settings[ 'dots_position' ] );
         }
+        
+        $swiper_class = $swiper_version_class = '';
+        if ( class_exists( 'Elementor\Plugin' ) ) {
+            $swiper_class           = \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_swiper_latest' ) ? 'swiper' : 'swiper-container';
+            $swiper_version_class   = 'swiper' === $swiper_class ? 'swiper-8' : 'swiper-8-lower';
+        }
 
         $this->add_render_attribute(
             'eael-woo-product-carousel-wrap',
             [
                 'class'           => [
                     'woocommerce',
-                    'swiper-container',
+                    esc_attr( $swiper_class ),
+                    esc_attr( $swiper_version_class ),
                     'eael-woo-product-carousel',
                     'swiper-container-' . esc_attr( $this->get_id() ),
                     'eael-product-appender-' . esc_attr( $this->get_id() ),
@@ -3036,7 +3059,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		}
 
 		$this->add_render_attribute('eael_gallery_pagination_wrapper', [
-			'class' => ['swiper-container eael-woo-product-carousel-gallary-pagination', $visibility]
+			'class' => ['swiper swiper-container eael-woo-product-carousel-gallary-pagination', $visibility]
 		]);
 
 		if ( $settings['direction'] == 'right' ) {
@@ -3131,7 +3154,7 @@ class Woo_Product_Carousel extends Widget_Base {
 	    ];
 
 	    if ( $order_by == '_price' || $order_by == '_sku' ) {
-		    $args[ 'orderby' ]  = 'meta_value_num';
+		    $args[ 'orderby' ]  = 'meta_value meta_value_num';
 		    $args[ 'meta_key' ] = $order_by;
 	    } else {
 		    $args[ 'orderby' ] = $order_by;
