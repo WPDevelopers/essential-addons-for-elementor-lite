@@ -335,16 +335,6 @@ class Product_Grid extends Widget_Base
 
 	    do_action( 'eael/product_grid/layout/controls', $this );
 
-        if ( apply_filters( 'eael/pro_enabled', false ) ){
-	        $this->add_control(
-		        'enable_eael_layout_custom_ordering',
-		        [
-			        'type' => \Elementor\Controls_Manager::HIDDEN,
-                    'default' => ''
-		        ]
-	        );
-        }
-
         $this->end_controls_section();
     }
 
