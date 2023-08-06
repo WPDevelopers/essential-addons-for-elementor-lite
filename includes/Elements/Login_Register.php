@@ -1564,6 +1564,7 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 
+		$terms_conditions_url = get_the_permalink( get_option( 'wp_page_for_privacy_policy' ) );
 
 		$this->add_control( 'acceptance_text_url', [
 			'label'       => __( 'Terms & Conditions URL', 'essential-addons-for-elementor-lite' ),
@@ -1573,7 +1574,7 @@ class Login_Register extends Widget_Base {
 				'active' => true,
 			],
 			'default'     => [
-				'url'         => get_the_permalink( get_option( 'wp_page_for_privacy_policy' ) ),
+				'url'         => ! empty( $terms_conditions_url ) && 'false' !== $terms_conditions_url ? $terms_conditions_url : '',
 				'is_external' => true,
 				'nofollow'    => true,
 			],
@@ -4412,6 +4413,155 @@ class Login_Register extends Widget_Base {
 			'name'     => "eael_forget_pass_label_typography",
 			'selector' => "{{WRAPPER}} .lr-form-wrapper .forget-pass a",
 		] );
+
+		//Terms & Conditions Style
+		$this->add_control( 'eael_form_terms_fields_heading', [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Terms & Conditions', 'essential-addons-for-elementor-lite' ),
+			'separator' => 'before',
+		] );
+		$this->add_control( 'terms_conditions_style_pot', [
+			'label'        => __( 'Style', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::POPOVER_TOGGLE,
+			'label_off'    => __( 'Default', 'essential-addons-for-elementor-lite' ),
+			'label_on'     => __( 'Custom', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'yes',
+			'condition'    => [
+				'show_terms_conditions' => 'yes',
+			],
+		] );
+
+		$this->start_popover();
+		$this->add_responsive_control( "eael_form_terms_field_margin", [
+			'label'      => __( 'Container Margin', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap" => $this->apply_dim( 'margin' ),
+			],
+			'condition'  => [
+				'terms_conditions_style_pot' => 'yes',
+			],
+		] );
+		$this->add_responsive_control( "eael_form_terms_field_padding", [
+			'label'      => __( 'Container Padding', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap" => $this->apply_dim( 'padding' ),
+			],
+			'condition'  => [
+				'terms_conditions_style_pot' => 'yes',
+			],
+		] );
+		$this->add_responsive_control( "eael_form_terms_lbl_margin", [
+			'label'      => __( 'Label Margin', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap label" => $this->apply_dim( 'margin' ),
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap a" => $this->apply_dim( 'margin' ),
+			],
+			'condition'  => [
+				'terms_conditions_style_pot' => 'yes',
+			],
+		] );
+		$this->add_responsive_control( "eael_form_terms_lbl_padding", [
+			'label'      => __( 'Label Padding', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap label" => $this->apply_dim( 'padding' ),
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap a" => $this->apply_dim( 'padding' ),
+			],
+			'condition'  => [
+				'terms_conditions_style_pot' => 'yes',
+			],
+		] );
+
+		$this->add_responsive_control( "eael_form_terms_checkbox_margin", [
+			'label'      => __( 'Checkbox Margin', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap input" => $this->apply_dim( 'margin' ),
+			],
+			'condition'  => [
+				'terms_conditions_style_pot' => 'yes',
+			],
+		] );
+
+		$this->add_control( 'eael_terms_label_color', [
+			'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap" => 'color: {{VALUE}};',
+			],
+			'condition' => [
+				'terms_conditions_style_pot' => 'yes',
+			],
+		] );
+		
+		$this->add_control( 'eael_terms_label_link_color', [
+			'label'     => __( 'Link Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap a" => 'color: {{VALUE}};',
+			],
+			'condition' => [
+				'terms_conditions_style_pot' => 'yes',
+			],
+		] );
+
+		$this->add_control( 'eael_terms_label_bg_color', [
+			'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#ffffff',
+			'selectors' => [
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap" => 'background-color: {{VALUE}};',
+			],
+			'condition' => [
+				'terms_conditions_style_pot' => 'yes',
+			],
+		] );
+		$this->add_control( 'eael_terms_checkbox_color', [
+			'label'     => __( 'Checkbox | Toggle Color', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap  input[type=checkbox]:checked" => 'border-color: {{VALUE}};background: {{VALUE}};',
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap input[type=checkbox]:hover:not(:checked):not(:disabled)" => 'border-color: {{VALUE}};',
+			],
+			'condition' => [
+				'terms_conditions_style_pot' => 'yes',
+			],
+		] );
+		$this->end_popover();
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
+			'name'     => "eael_terms_label_typography",
+			'selector' => "{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap, {{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap label",
+		] );
+
 		$this->end_controls_section();
 	}
 
