@@ -3320,10 +3320,17 @@ class Event_Calendar extends Widget_Base
         $arg = [
             'posts_per_page' => $settings['eael_the_events_calendar_max_result'],
         ];
-        if ($settings['eael_the_events_calendar_fetch'] == 'date_range') {
-            $arg['start_date'] = $settings['eael_the_events_calendar_start_date'];
-            $arg['end_date'] = $settings['eael_the_events_calendar_end_date'];
-        }
+	    if ( $settings['eael_the_events_calendar_fetch'] == 'date_range' ) {
+		    $arg['start_date'] = $settings['eael_the_events_calendar_start_date'];
+		    $arg['end_date']   = $settings['eael_the_events_calendar_end_date'];
+	    }
+		else if ( $settings['eael_event_default_date_type'] === 'custom' ) {
+		    $arg['start_date'] = $settings['eael_event_calendar_default_date'];
+	    }
+		else {
+		    $arg['start_date'] = date( 'Y-m-d' );
+	    }
+
         if (!empty($settings['eael_the_events_calendar_category'])) {
             $arg['tax_query'] = [
                 [
