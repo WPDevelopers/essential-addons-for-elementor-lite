@@ -1168,6 +1168,20 @@ class Data_Table extends Widget_Base {
 		  	]
 		);
 
+	    $this->add_control(
+		    'eael_data_table_responsive_breakpoint',
+		    [
+			    'label' => esc_html__( 'Custom Breakpoint', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::NUMBER,
+			    'default' => 767,
+                'min' => 100,
+			    'description'	=> esc_html__( 'Responsive styles working till this screen size.', 'essential-addons-for-elementor-lite'),
+			    'condition'	=> [
+				    'eael_enable_responsive_header_styles'	=> 'yes'
+			    ]
+		    ]
+	    );
+
 		$this->add_responsive_control(
             'mobile_table_header_width',
             [
@@ -1311,6 +1325,7 @@ class Data_Table extends Widget_Base {
 		$this->add_render_attribute('eael_data_table_wrap', [
 			'class'                  => 'eael-data-table-wrap',
 			'data-table_id'          => esc_attr($this->get_id()),
+            'id'                     => 'eael-data-table-'.esc_attr($this->get_id()),
 			'data-custom_responsive' => $settings['eael_enable_responsive_header_styles'] ? 'true' : 'false'
 		]);
 		if(isset($settings['eael_section_data_table_enabled']) && $settings['eael_section_data_table_enabled']){
@@ -1327,8 +1342,24 @@ class Data_Table extends Widget_Base {
 
 		if('yes' == $settings['eael_enable_responsive_header_styles']) {
 			$this->add_render_attribute('eael_data_table_wrap', 'class', 'custom-responsive-option-enable');
+			$break_point = $settings['eael_data_table_responsive_breakpoint'] ? $settings['eael_data_table_responsive_breakpoint'] : 767;
+			$section_id  = $this->get_id();
+			echo '<style>
+			@media (max-width: ' . intval( $break_point ) . 'px) {
+			   #eael-data-table-' . esc_html( $section_id ) . '.custom-responsive-option-enable .eael-data-table thead {
+                    display: none;
+                }
+               #eael-data-table-' . esc_html( $section_id ) . '.custom-responsive-option-enable .eael-data-table tbody tr td {
+                    float: none;
+                    clear: left;
+                    width: 100%;
+                    text-align: left;
+                    display: flex;
+                    align-items: center;
+                }
+			}
+			</style>';
 		}
-
 	  	?>
 		<div <?php echo $this->get_render_attribute_string('eael_data_table_wrap'); ?>>
 			<table <?php echo $this->get_render_attribute_string('eael_data_table'); ?>>
