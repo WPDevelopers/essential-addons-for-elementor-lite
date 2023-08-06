@@ -23,6 +23,8 @@ use \Essential_Addons_Elementor\Classes\Helper;
 class Filterable_Gallery extends Widget_Base
 {
     private $popup_status = false;
+    private $default_control_key = 0;
+    private $custom_default_control = false;
 
     public function get_name()
     {
@@ -501,6 +503,14 @@ class Filterable_Gallery extends Widget_Base
                         'ai' => [
                             'active' => false,
                         ],
+                    ],
+                    [
+                        'name' => 'eael_fg_control_active_as_default',
+                        'label' => __('Active as Default', 'essential-addons-for-elementor-lite'),
+                        'type' => Controls_Manager::SWITCHER,
+                        'dynamic' => ['active' => true],
+                        'return' => 'yes',
+                        'default' => '',
                     ],
                 ],
                 'title_field' => '{{eael_fg_control}}',
@@ -3172,14 +3182,17 @@ class Filterable_Gallery extends Widget_Base
             <div class="eael-filter-gallery-control">
                 <ul><?php
                     if ($settings['eael_fg_all_label_text']) {
-                        ?><li data-load-more-status="0" data-first-init="1" class="control all-control active" data-filter="*"><?php echo $all_text; ?></li><?php
+                        ?><li data-load-more-status="0" data-first-init="1" class="control all-control <?php if( ! $this->custom_default_control ) : ?> active <?php endif; ?>" data-filter="*"><?php echo $all_text; ?></li><?php
                     }
 
                     foreach ($settings['eael_fg_controls'] as $key => $control) :
                         $sorter_filter = $this->sorter_class($control['eael_fg_control']);
                         $sorter_label  = $control['eael_fg_control_label'] != '' ? $control['eael_fg_control_label'] : $control['eael_fg_control'];
-                    ?><li <?php if( ! empty( $control['eael_fg_control_custom_id'] ) ) : ?> id="<?php echo esc_attr( $control['eael_fg_control_custom_id'] ); ?>" <?php endif; ?> data-load-more-status="0" data-first-init="0" class="control <?php if ($key == 0 && empty($settings['eael_fg_all_label_text'])) {
-                            echo 'active';
+                    ?><li <?php if( ! empty( $control['eael_fg_control_custom_id'] ) ) : ?> id="<?php echo esc_attr( $control['eael_fg_control_custom_id'] ); ?>" <?php endif; ?> data-load-more-status="0" data-first-init="0" 
+                        class="control <?php if ( $this->custom_default_control ) {
+                            if ( $this->default_control_key === $key ){
+                                echo 'active';
+                            }
                         } ?>" data-filter=".eael-cf-<?php echo esc_attr($sorter_filter); ?>"><?php echo esc_html( $sorter_label ); ?></li><?php
                     endforeach;
                 ?></ul>
@@ -3220,13 +3233,15 @@ class Filterable_Gallery extends Widget_Base
                     </button>
                     <ul class="fg-layout-3-filter-controls">
                         <?php if ($settings['eael_fg_all_label_text']) { ?>
-                            <li class="control active" data-filter="*"><?php echo Helper::eael_wp_kses($settings['eael_fg_all_label_text']); ?></li>
+                            <li class="control <?php if( ! $this->custom_default_control ) : ?> active <?php endif; ?>" data-filter="*"><?php echo Helper::eael_wp_kses($settings['eael_fg_all_label_text']); ?></li>
                         <?php } ?>
                         
                         <?php foreach ($settings['eael_fg_controls'] as $key => $control) :
                             $sorter_filter = $this->sorter_class($control['eael_fg_control']); ?>
-                            <li class="control <?php if ($key == 0 && empty($settings['eael_fg_all_label_text'])) {
-                                echo 'active';
+                            <li class="control <?php if ( $this->custom_default_control ) {
+                                if ( $this->default_control_key === $key ){
+                                    echo 'active';
+                                }
                             } ?>" data-filter=".eael-cf-<?php echo esc_attr($sorter_filter); ?>"><?php echo esc_html__($control['eael_fg_control']); ?></li>
                         <?php endforeach; ?>
                     </ul>
@@ -3739,6 +3754,7 @@ class Filterable_Gallery extends Widget_Base
             'popup' => $settings['eael_fg_show_popup'],
             'duration' => $filter_duration,
             'gallery_enabled' => $settings['photo_gallery'],
+            'control_all_text' => $settings['eael_fg_all_label_text'],
         ];
         
         if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
@@ -3782,6 +3798,18 @@ class Filterable_Gallery extends Widget_Base
         $this->add_render_attribute( 'gallery-items-wrap', 'data-gallery-items', wp_json_encode( $gallery_items, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE ) );
         $this->add_render_attribute('gallery-items-wrap', 'data-init-show', esc_attr($settings['eael_fg_items_to_show']));
         $this->render_media_query( $settings );
+
+        $this->custom_default_control = empty( $settings['eael_fg_all_label_text'] ) ? true : false;
+
+        foreach ( $settings['eael_fg_controls'] as $key_default => $control_default ) :
+            if ( ! empty( $control_default['eael_fg_control_active_as_default'] ) && 'yes' === $control_default['eael_fg_control_active_as_default'] ) {
+                $this->default_control_key = $key_default;  
+                $this->custom_default_control = true;
+            }
+        endforeach;
+
+        $this->add_render_attribute('gallery', 'data-default_control_key', esc_attr( $this->default_control_key ) );
+        $this->add_render_attribute('gallery', 'data-custom_default_control', esc_attr( $this->custom_default_control ) );
         ?>
         <div <?php echo $this->get_render_attribute_string('gallery'); ?>>
             
@@ -3854,6 +3882,12 @@ class Filterable_Gallery extends Widget_Base
                     var layoutMode = $('.eael-filter-gallery-wrapper').data('layout-mode');
                     var mfpCaption = $('.eael-filter-gallery-wrapper').data('mfp_caption');
 
+                    let $galleryWrap = $(".eael-filter-gallery-wrapper", $scope);
+                    var custom_default_control 	= $galleryWrap.data('custom_default_control');
+                    var default_control_key 	= $galleryWrap.data('default_control_key');
+                    custom_default_control 		= typeof(custom_default_control) 	!== 'undefined' ? parseInt( custom_default_control ) 	: 0; 
+                    default_control_key 		= typeof(default_control_key) 		!== 'undefined' ? parseInt( default_control_key ) 		: 0; 
+                    
                     var $isotope_gallery = $gallery.isotope({
                         itemSelector: '.eael-filterable-gallery-item-wrap',
                         layoutMode: $layout_mode,
@@ -4051,6 +4085,12 @@ class Filterable_Gallery extends Widget_Base
 						$isotope_gallery.imagesLoaded().progress(function () {
 							$isotope_gallery.isotope("layout");
 						});
+
+                        if( custom_default_control ) {
+    					let increment = $settings.control_all_text ? 2 : 1;
+                            default_control_key = default_control_key + increment;
+                            jQuery(`.eael-filter-gallery-control li:nth-child(${default_control_key})` ).trigger('click');
+                        }
 					});
                 });
             });
