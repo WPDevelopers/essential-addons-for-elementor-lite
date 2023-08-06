@@ -893,7 +893,8 @@ class Login_Register extends Widget_Base {
 				'size' => 100,
 			],
 			'selectors'  => [
-				'{{WRAPPER}} .eael-login-form input:not(.eael-lr-btn)' => 'width: {{SIZE}}{{UNIT}};',
+				'{{WRAPPER}} .eael-login-form .eael-user-login' => 'width: {{SIZE}}{{UNIT}};',
+				'{{WRAPPER}} .eael-login-form .eael-user-password' => 'width: {{SIZE}}{{UNIT}};',
 			],
 			'separator'  => 'before',
 		] );
@@ -1053,7 +1054,7 @@ class Login_Register extends Widget_Base {
 				'size' => 100,
 			],
 			'selectors'  => [
-				'{{WRAPPER}} .eael-lostpassword-form input:not(.eael-lr-btn)' => 'width: {{SIZE}}{{UNIT}};',
+				'{{WRAPPER}} .eael-lostpassword-form .eael-lr-form-group' => 'width: {{SIZE}}{{UNIT}};',
 			],
 			'separator'  => 'before',
 		] );
@@ -1209,7 +1210,7 @@ class Login_Register extends Widget_Base {
 				'size' => 100,
 			],
 			'selectors'  => [
-				'{{WRAPPER}} .eael-resetpassword-form input:not(.eael-lr-btn)' => 'width: {{SIZE}}{{UNIT}};',
+				'{{WRAPPER}} .eael-resetpassword-form .eael-lr-form-group ' => 'width: {{SIZE}}{{UNIT}};',
 			],
 			'separator'  => 'before',
 		] );
@@ -1996,21 +1997,26 @@ class Login_Register extends Widget_Base {
 
 		$repeater->add_responsive_control( 'width', [
 			'label'   => __( 'Field Width', 'essential-addons-for-elementor-lite' ),
-			'type'    => Controls_Manager::SELECT,
-			'options' => [
-				''    => __( 'Default', 'essential-addons-for-elementor-lite' ),
-				'100' => '100%',
-				'80'  => '80%',
-				'75'  => '75%',
-				'66'  => '66%',
-				'60'  => '60%',
-				'50'  => '50%',
-				'40'  => '40%',
-				'33'  => '33%',
-				'25'  => '25%',
-				'20'  => '20%',
+			'type'    => Controls_Manager::SLIDER,
+			'size_units' => [ 'px', '%' ],
+			'range' => [
+				'px' => [
+					'min' => 0,
+					'max' => 1000,
+					'step' => 5,
+				],
+				'%' => [
+					'min' => 0,
+					'max' => 100,
+				],
 			],
-			'default' => '100',
+			'default' => [
+				'unit' => '%',
+				'size' => 100,
+			],
+			'selectors' => [
+				'{{WRAPPER}} {{CURRENT_ITEM}}' => 'width: {{SIZE}}{{UNIT}};',
+			],
 		] );
 		apply_filters( 'eael/login-register/register-repeater', $repeater );
 		$rf = [
@@ -2022,21 +2028,18 @@ class Login_Register extends Widget_Base {
 					'field_type'  => 'user_name',
 					'field_label' => __( 'Username', 'essential-addons-for-elementor-lite' ),
 					'placeholder' => __( 'Username', 'essential-addons-for-elementor-lite' ),
-					'width'       => '100',
 				],
 				[
 					'field_type'  => 'email',
 					'field_label' => __( 'Email', 'essential-addons-for-elementor-lite' ),
 					'placeholder' => __( 'Email', 'essential-addons-for-elementor-lite' ),
 					'required'    => 'yes',
-					'width'       => '100',
 				],
 				[
 					'field_type'  => 'password',
 					'field_label' => __( 'Password', 'essential-addons-for-elementor-lite' ),
 					'placeholder' => __( 'Password', 'essential-addons-for-elementor-lite' ),
 					'required'    => 'yes',
-					'width'       => '100',
 				],
 			] ),
 			'title_field' => '{{ field_label }}',
@@ -5646,7 +5649,7 @@ class Login_Register extends Widget_Base {
                                   id="eael-login-form"
                                   method="post">
 								<?php do_action( 'eael/login-register/after-login-form-open', $this ); ?>
-                                <div class="eael-lr-form-group">
+                                <div class="eael-lr-form-group eael-user-login">
 									<?php if ( $display_label && $u_label ) {
 										printf( '<label for="eael-user-login" class="eael-field-label">%s</label>', HelperCLass::eael_wp_kses( $u_label ) );
 									} ?>
@@ -5664,7 +5667,7 @@ class Login_Register extends Widget_Base {
 										echo '<i class="fas fa-user"></i>';
 									} ?>
                                 </div>
-                                <div class="eael-lr-form-group">
+                                <div class="eael-lr-form-group eael-user-password">
 									<?php if ( $display_label && $p_label ) {
 										printf( '<label for="eael-user-password" class="eael-field-label">%s</label>', $p_label );
 									} ?>
@@ -5989,19 +5992,11 @@ class Login_Register extends Widget_Base {
 									$field_group_key => [
 										'class' => [
 											'eael-lr-form-group',
+                                            'elementor-repeater-item-'.$field['_id'],
 											'eael-field-type-' . $field_type,
-											'eael-w-' . $field['width'],
 										],
 									],
 								] );
-
-								if ( ! empty( $field['width_tablet'] ) ) {
-									$this->add_render_attribute( $field_group_key, 'class', 'elementor-md-' . $field['width_tablet'] );
-								}
-
-								if ( ! empty( $field['width_mobile'] ) ) {
-									$this->add_render_attribute( $field_group_key, 'class', 'elementor-sm-' . $field['width_mobile'] );
-								}
 
 								?>
                                 <div <?php $this->print_render_attribute_string( $field_group_key ) ?>>
@@ -6035,12 +6030,12 @@ class Login_Register extends Widget_Base {
 										}
 									}
 									?>
-                                </div>
 
 								<?php
 								if ( 'password' === $field['field_type'] ) {
 									do_action( 'eael/login-register/after-password-field', $this );
 								}
+                                echo "</div>";
 							endforeach;
 							$this->print_necessary_hidden_fields( 'register' );
 							$this->print_terms_condition_notice();
