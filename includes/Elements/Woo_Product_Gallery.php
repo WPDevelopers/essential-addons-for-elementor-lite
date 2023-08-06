@@ -488,17 +488,6 @@ class Woo_Product_Gallery extends Widget_Base {
 			]
 		);
 
-		$this->add_control( 'eael_product_gallery_rating', [
-			'label'        => esc_html__( 'Show Product Rating?', 'essential-addons-for-elementor-lite' ),
-			'type'         => Controls_Manager::SWITCHER,
-			'return_value' => 'yes',
-			'default'      => 'yes',
-			'condition'    => [
-				'eael_product_gallery_style_preset!' => [ 'eael-product-preset-1' ],
-			],
-
-		] );
-
 		$this->add_control(
 			'eael_product_gallery_show_secondary_image',
 			[
@@ -512,6 +501,20 @@ class Woo_Product_Gallery extends Widget_Base {
 			]
 		);
 
+		$this->add_control( 'eael_product_gallery_rating', [
+			'label'        => esc_html__( 'Show Product Rating?', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'return_value' => 'yes',
+			'default'      => 'yes',
+			'condition'    => [
+				'eael_product_gallery_style_preset!' => [ 'eael-product-preset-1' ],
+			],
+
+		] );
+
+		do_action( 'eael/product_gallery/product_settings/control/after_rating', $this );
+
+
 		$this->add_control(
 			'eael_product_gallery_price',
 			[
@@ -524,6 +527,8 @@ class Woo_Product_Gallery extends Widget_Base {
 				],
 			]
 		);
+
+		do_action( 'eael/product_gallery/product_settings/control/after_pricing', $this );
 
 		$this->add_group_control(
 			Group_Control_Image_Size::get_type(),
