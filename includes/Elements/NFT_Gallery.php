@@ -90,7 +90,7 @@ class NFT_Gallery extends Widget_Base {
 				'label'       => __( 'API Key', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'placeholder' => 'Enter API key',
-				'description' => sprintf( __( 'Get your API key from <a href="https://docs.opensea.io/reference/request-an-api-key" class="eael-btn" target="_blank">%s</a>',
+				'description' => sprintf( __( 'Get your API key from <a href="https://docs.opensea.io/reference/api-keys" class="eael-btn" target="_blank">%s</a>',
 					'essential-addons-for-elementor-lite' ), esc_html( 'here' ) ),
 				'ai' => [
 					'active' => false,
