@@ -51,7 +51,7 @@
 .eael-filter-gallery-container {
   text-align: justify;
   font-size: 0.1px;
-  overflow: hidden;
+  overflow: inherit;
 }
 
 .eael-filter-gallery-container #eael-fg-no-items-found {
