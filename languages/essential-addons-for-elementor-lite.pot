@@ -666,6 +666,10 @@ msgstr ""
 msgid "Dynamic Field"
 msgstr ""
 
+#: ../includes/Controls/Select2.php:40
+msgid "Query String"
+msgstr ""
+
 #: ../includes/Elements/Advanced_Data_Table.php:73
 msgid "Data Source"
 msgstr ""
