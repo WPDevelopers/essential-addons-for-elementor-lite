@@ -1464,7 +1464,7 @@ class Product_Grid extends Widget_Base
             ]
         );
 
-	    do_action( 'eael/product_grid/product_settings/control/after_color_typography', $this );
+	    do_action( 'eael/product_grid/style_settings/control/after_color_typography', $this );
 
 	    $this->end_controls_section();
     }
