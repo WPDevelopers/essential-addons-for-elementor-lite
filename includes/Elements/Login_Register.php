@@ -6085,6 +6085,13 @@ class Login_Register extends Widget_Base {
 
 	protected function print_lostpassword_form(){
 		if ( $this->should_print_lostpassword_form ) {
+			$form_not_enabled = ! ( 'lostpassword' === $this->default_form || ( 'yes' === $this->get_settings_for_display( 'show_lost_password' ) && 'form' === $this->get_settings_for_display( 'lost_password_link_type' ) ) );
+
+			if( $form_not_enabled && isset( $_GET['eael-lostpassword'] ) ){
+				wp_safe_redirect( remove_query_arg( array( 'eael-lostpassword' ) ) );
+				exit;
+			}
+
 			// prepare all lostpassword form related vars
 			$default_hide_class = ( 'register' === $this->default_form || 'login' === $this->default_form || $this->should_print_resetpassword_form_editor || isset($_GET['eael-register']) || isset($_GET['eael-resetpassword']) ) && !isset($_GET['eael-lostpassword']) ? 'eael-lr-d-none' : '';
 
