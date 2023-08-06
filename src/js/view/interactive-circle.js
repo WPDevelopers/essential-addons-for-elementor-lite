@@ -4,7 +4,10 @@ ea.hooks.addAction( "init", "ea", () => {
 		var $circleWrap = $scope.find( ".eael-circle-wrapper" );
 		var $eventType  = "mouseenter";
 		var $animation  = $circleWrap.data('animation');
-
+		var $autoplay  	= $circleWrap.data('autoplay');
+		var $autoplayInterval  = parseInt( $circleWrap.data('autoplay-interval') );
+		var $autoplayPause = 0;
+	
 		if ( $animation != 'eael-interactive-circle-animation-0' ) {
 			var $circleContent = $scope.find( ".eael-circle-content" );
 
@@ -31,10 +34,36 @@ ea.hooks.addAction( "init", "ea", () => {
 		
 		$tabLinks.each( function ( element ) {
 			$( this ).on( $eventType, handleEvent( element ) );
+
 		} );
 		
+		if( $autoplay ){
+			setInterval(function () {
+				if( $autoplayPause ){
+					setTimeout(function(){
+						autoplayInteractiveCircle();
+					}, 5000);
+				} else {
+					autoplayInteractiveCircle();
+				}
+			}, $autoplayInterval);
+		}
+
+		function autoplayInteractiveCircle(){
+			let activeIndex = 0;
+			$tabLinks.each( function ( index ) {
+				if( $(this).hasClass('active') ) {
+					activeIndex = index + 1;
+					activeIndex = activeIndex >= $tabLinks.length ? 0 : activeIndex;
+				}
+			} );
+			setTimeout(function(){
+				$( $tabLinks[ activeIndex ] ).trigger( $eventType );
+			}, 300);
+		}
+
 		function handleEvent( element ) {
-			return function () {
+			return function (event) {
 				var $element   = $( this );
 				var $activeTab = $( this ).hasClass( "active" );
 				if ( $activeTab == false ) {
@@ -51,6 +80,7 @@ ea.hooks.addAction( "init", "ea", () => {
 						}
 					} );
 				}
+				$autoplayPause = event.originalEvent ? 1 : 0;
 			};
 		}
 	};
