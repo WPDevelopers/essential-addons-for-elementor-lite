@@ -323,10 +323,14 @@ var SimpleMenu = function ($scope, $) {
 		elementor.channels.editor.on( 'change', function( view ) {
 			let changed = view.elementSettingsModel.changed;
 			if ( changed.eael_simple_menu_dropdown ) {
-                let updated_max_width = getHamburgerMaxWidth( $hamburger_breakpoints, changed.eael_simple_menu_dropdown );
-				eael_menu_resize( updated_max_width );
+                elementor.saver.update.apply().then(function () {
+                    elementor.reloadPreview();
+                });
 
-                $hamburger_max_width = updated_max_width;
+                // let updated_max_width = getHamburgerMaxWidth( $hamburger_breakpoints, changed.eael_simple_menu_dropdown );
+				// eael_menu_resize( updated_max_width );
+
+                // $hamburger_max_width = updated_max_width;
 			}
 		});
 	}
