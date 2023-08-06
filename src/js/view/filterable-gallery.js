@@ -148,6 +148,14 @@ jQuery(window).on("elementor/frontend/init", function () {
 				} else {
 					$isotope_gallery.isotope();
 				}
+
+				if($this.hasClass('all-control')){
+					//All items are active
+					$('.eael-filterable-gallery-item-wrap .eael-magnific-link-clone').removeClass('active').addClass('active');
+				}else {
+					$('.eael-filterable-gallery-item-wrap .eael-magnific-link-clone').removeClass('active');
+					$(buttonFilter + ' .eael-magnific-link').addClass('active');
+				}
 			});
 
 			//quick search
