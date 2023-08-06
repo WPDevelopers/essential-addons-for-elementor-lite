@@ -1036,12 +1036,13 @@ class Helper
 	public static function eael_allowed_tags() {
 		return [
 			'a'       => [
-				'href'  => [],
-				'title' => [],
-				'class' => [],
-				'rel'   => [],
-				'id'    => [],
-				'style' => []
+				'href'   => [],
+				'title'  => [],
+				'class'  => [],
+				'rel'    => [],
+				'id'     => [],
+				'style'  => [],
+				'target' => [],
 			],
 			'q'       => [
 				'cite'  => [],
