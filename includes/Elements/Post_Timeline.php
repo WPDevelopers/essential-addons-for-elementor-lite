@@ -18,6 +18,9 @@ use Essential_Addons_Elementor\Traits\Helper;
 class Post_Timeline extends Widget_Base
 {
     use Helper;
+
+	protected $page_id;
+
     public function get_name()
     {
         return 'eael-post-timeline';

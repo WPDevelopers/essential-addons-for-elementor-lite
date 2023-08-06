@@ -184,7 +184,10 @@ class Tooltip extends Widget_Base {
 				],
 				'condition' => [
 					'eael_tooltip_type' => [ 'image' ]
-				]
+				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -307,7 +310,10 @@ class Tooltip extends Widget_Base {
 		            '{{WRAPPER}} .eael-tooltip:hover .eael-tooltip-text.eael-tooltip-left' => 'animation-duration: {{SIZE}}ms;',
 		            '{{WRAPPER}} .eael-tooltip:hover .eael-tooltip-text.eael-tooltip-bottom' => 'animation-duration: {{SIZE}}ms;',
 		            '{{WRAPPER}} .eael-tooltip:hover .eael-tooltip-text.eael-tooltip-right' => 'animation-duration: {{SIZE}}ms;',
-		        ]
+		        ],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
   		$this->end_controls_section();
@@ -333,7 +339,7 @@ class Tooltip extends Widget_Base {
 		            'px' => [
 		                'min' => 0,
 		                'max' => 1000,
-		                'step' => 5,
+		                'step' => 1,
 		            ],
 		            '%' => [
 		                'min' => 0,
@@ -341,8 +347,12 @@ class Tooltip extends Widget_Base {
 		            ],
 		        ],
 		        'size_units' => [ 'px', '%' ],
+				'default' => [
+					'unit' => 'px',
+					'size' => 100,
+				],
 		        'selectors' => [
-		            '{{WRAPPER}} .eael-tooltip' => 'max-width: {{SIZE}}{{UNIT}};',
+		            '{{WRAPPER}} .eael-tooltip' => 'width: {{SIZE}}{{UNIT}};',
 		        ]
 		    ]
 		);
