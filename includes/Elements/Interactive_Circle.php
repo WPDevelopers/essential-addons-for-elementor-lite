@@ -284,6 +284,26 @@ class Interactive_Circle extends Widget_Base {
 					'eael-interactive-circle-event-click' => esc_html__( 'Click', 'essential-addons-for-elementor-lite' ),
 					'eael-interactive-circle-event-hover' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ),
 				],
+				'conditions' => [
+                    'relation' => 'or',
+                    'terms' => [
+                       [
+                          'name' => 'eael_interactive_circle_autoplay',
+                          'operator' => '!=',
+                          'value' => 'yes',
+                       ],
+					   [
+						'name' => 'eael_interactive_circle_preset',
+						'operator' => '==',
+						'value' => 'eael-interactive-circle-preset-3',
+					   ],
+					   [
+						'name' => 'eael_interactive_circle_preset',
+						'operator' => '==',
+						'value' => 'eael-interactive-circle-preset-4',
+					   ],
+                    ],
+                ],
 			]
 		);
 
@@ -302,6 +322,39 @@ class Interactive_Circle extends Widget_Base {
 				],
 			]
 		);
+
+		$this->add_control(
+			'eael_interactive_circle_autoplay',
+			[
+				'label'        => esc_html__( 'Autoplay', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'default'      => '',
+				'return_value' => 'yes',
+				'condition' => [
+					'eael_interactive_circle_preset' => [ 'eael-interactive-circle-preset-1', 'eael-interactive-circle-preset-2' ]
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_interactive_circle_autoplay_interval',
+			[
+				'label'        => esc_html__( 'Interval (Miliseconds)', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range'      => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 10000,
+						'step' => 500,
+					],
+				],
+				'condition'	=> [
+					'eael_interactive_circle_autoplay' => 'yes',
+				]
+			]
+		);
+
 		$this->end_controls_section();
 	}
 
@@ -804,12 +857,14 @@ class Interactive_Circle extends Widget_Base {
 				'class' => [
 					'eael-circle-wrapper',
 					$settings['eael_interactive_circle_preset'],
-					$settings['eael_interactive_circle_event']
+					! empty( $settings['eael_interactive_circle_event'] ) ? $settings['eael_interactive_circle_event'] : 'eael-interactive-circle-event-click'
 				],
 			]
 		);
 
 		$this->add_render_attribute( 'eael_circle_wrapper', 'data-animation', $settings['eael_interactive_circle_animation'] );
+		$this->add_render_attribute( 'eael_circle_wrapper', 'data-autoplay', esc_attr( 'yes' === $settings['eael_interactive_circle_autoplay'] ? 1 : 0 ) );
+		$this->add_render_attribute( 'eael_circle_wrapper', 'data-autoplay-interval', esc_attr( ! empty( $settings['eael_interactive_circle_autoplay_interval']['size'] ) ? intval( $settings['eael_interactive_circle_autoplay_interval']['size'] ) : 2000 ) );
 
 		$item_count     = count( $settings['eael_interactive_circle_item'] );
 		$show_btn_icon  = isset( $settings['eael_interactive_circle_btn_icon_show'] ) && 'yes' === $settings['eael_interactive_circle_btn_icon_show'];
