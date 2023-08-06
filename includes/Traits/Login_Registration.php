@@ -551,6 +551,8 @@ trait Login_Registration {
 			}
 		}
 
+		$custom_redirect_url = apply_filters( 'eael/login-register/register-redirect-url', $custom_redirect_url, $this );
+
 		$user_data = apply_filters( 'eael/login-register/new-user-data', $user_data );
 
 		do_action( 'eael/login-register/before-insert-user', $user_data );

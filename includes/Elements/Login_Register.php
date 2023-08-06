@@ -35,6 +35,11 @@ class Login_Register extends Widget_Base {
 	 */
 	protected $user_can_register;
 	/**
+	 * Login custom redirect url
+	 * @var bool
+	 */
+	protected $login_custom_redirect_url;
+	/**
 	 * Are you currently in Elementor Editor Screen?
 	 * @var bool
 	 */
@@ -5488,6 +5493,8 @@ class Login_Register extends Widget_Base {
 			$login_redirect_url = !empty( $this->ds[ 'redirect_url' ][ 'url' ] ) ? esc_url( $this->ds[ 'redirect_url' ][ 'url' ] ) : '';
 		}
 		
+		$this->login_custom_redirect_url = apply_filters( 'eael/login-register/login-redirect-url', $login_redirect_url, $this );
+
 		if ( ! empty( $this->ds['redirect_after_resetpassword'] ) && 'yes' === $this->ds['redirect_after_resetpassword'] ) {
 			$resetpassword_redirect_url = !empty( $this->ds[ 'redirect_url_resetpassword' ][ 'url' ] ) ? esc_url( $this->ds[ 'redirect_url_resetpassword' ][ 'url' ] ) : '';
 		}
@@ -5522,7 +5529,7 @@ class Login_Register extends Widget_Base {
 			 data-recaptcha-sitekey-v3="<?php echo esc_attr( get_option( 'eael_recaptcha_sitekey_v3' ) ); ?>"
 			 data-login-recaptcha-version="<?php echo esc_attr( $login_recaptcha_version ); ?>"
 			 data-register-recaptcha-version="<?php echo esc_attr( $register_recaptcha_version ); ?>"
-             data-redirect-to="<?php echo esc_attr( $login_redirect_url ); ?>"
+             data-redirect-to="<?php echo esc_attr( $this->login_custom_redirect_url ); ?>"
              data-resetpassword-redirect-to="<?php echo esc_attr( $resetpassword_redirect_url ); ?>"
         >
 			<?php
@@ -6491,11 +6498,10 @@ class Login_Register extends Widget_Base {
 	protected function print_necessary_hidden_fields( $form_type = 'login' ) {
 		if ( 'login' === $form_type ) {
 			if ( ! empty( $this->ds['redirect_after_login'] ) && 'yes' === $this->ds['redirect_after_login'] ) {
-				$login_redirect_url = ! empty( $this->ds['redirect_url']['url'] ) ? esc_url( $this->ds['redirect_url']['url'] ) : '';
 				?>
                 <input type="hidden"
                        name="redirect_to"
-                       value="<?php echo esc_attr( $login_redirect_url ); ?>">
+                       value="<?php echo esc_attr( $this->login_custom_redirect_url ); ?>">
 			<?php }
 
 			if ( ! empty( $this->ds['redirect_based_on_roles'] ) && 'yes' === $this->ds['redirect_based_on_roles'] ) {
