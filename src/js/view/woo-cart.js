@@ -30,6 +30,15 @@ var qtyIncDecButton = function ($scope) {
                 }
             }
         });
+
+
+        let wrapper = jQuery('.eael-woo-cart-wrapper');
+
+        if (wrapper.hasClass('eael-auto-update')) {
+            jQuery($scope, document).on('change', '.quantity input[type="number"]', function () {
+                jQuery('button[name="update_cart"]').attr('aria-disabled', 'false').removeAttr('disabled').click();
+            })
+        }
     };
 
 jQuery(document).on('updated_wc_div', qtyIncDecButton);
