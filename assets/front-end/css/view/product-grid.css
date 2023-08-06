@@ -433,14 +433,14 @@
   margin: 0;
   padding: 0;
 }
-.eael-product-grid .woocommerce ul.products .product .eael-pg-sold-count-progress-bar-wrapper,
-.eael-post-grid .woocommerce ul.products .product .eael-pg-sold-count-progress-bar-wrapper {
+.eael-product-grid .woocommerce ul.products .product .eael-product-sold-count-progress-bar-wrapper,
+.eael-post-grid .woocommerce ul.products .product .eael-product-sold-count-progress-bar-wrapper {
   background-color: #f1f1f1;
   border-radius: 0 10px 10px 0;
   overflow: hidden;
 }
-.eael-product-grid .woocommerce ul.products .product .eael-pg-sold-count-progress-bar,
-.eael-post-grid .woocommerce ul.products .product .eael-pg-sold-count-progress-bar {
+.eael-product-grid .woocommerce ul.products .product .eael-product-sold-count-progress-bar,
+.eael-post-grid .woocommerce ul.products .product .eael-product-sold-count-progress-bar {
   background-color: #2196F3;
   height: 10px;
   border-radius: 0 10px 10px 0;
