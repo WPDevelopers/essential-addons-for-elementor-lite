@@ -64,7 +64,8 @@ ea.hooks.addAction("init", "ea", () => {
                 window.history.replaceState({}, '', `${location.pathname}?${params}`);
                 e.preventDefault();
                 $regFormWrapper.hide();
-                $lostpasswordFormWrapper.hide();
+                $regFormWrapper.find('.eael-form-validation-container').html('');
+                $lostpasswordFormWrapper.hide();                
                 $loginFormWrapper.fadeIn();
             });
         }
@@ -89,6 +90,10 @@ ea.hooks.addAction("init", "ea", () => {
                     params.append('eael-lostpassword',1);
                 }
                 window.history.replaceState({}, '', `${location.pathname}?${params}`);
+                $lostpasswordFormWrapper.find('.eael-form-validation-container').html('');
+                $lostpasswordFormWrapper.find(".eael-lr-form-group").css("display", 'bloock').removeClass('eael-d-none');
+                $lostpasswordFormWrapper.find("#eael-lostpassword-submit").css("display", 'bloock').removeClass('eael-d-none');
+                
                 $regFormWrapper.hide();
                 $loginFormWrapper.hide();
                 $lostpasswordFormWrapper.fadeIn();
