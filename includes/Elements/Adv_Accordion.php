@@ -1201,10 +1201,14 @@ class Adv_Accordion extends Widget_Base
 
             echo '<div ' . $this->get_render_attribute_string($tab_content_setting_key) . '>';
             if ('content' == $tab['eael_adv_accordion_text_type']) {
-                echo '<p>' . do_shortcode($tab['eael_adv_accordion_tab_content']) . '</p>';
+                echo '<p>' . $this->parse_text_editor( $tab['eael_adv_accordion_tab_content'] ) . '</p>';
             } elseif ('template' == $tab['eael_adv_accordion_text_type']) {
-                if (!empty($tab['eael_primary_templates'])) {
-                    echo Plugin::$instance->frontend->get_builder_content($tab['eael_primary_templates'], true);
+                if ( ! empty( $tab['eael_primary_templates'] ) ) {
+                    // WPML Compatibility
+                    if ( ! is_array( $tab['eael_primary_templates'] ) ) {
+                        $tab['eael_primary_templates'] = apply_filters( 'wpml_object_id', $tab['eael_primary_templates'], 'wp_template', true );
+                    }
+                    echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'], true );
                 }
             }
             echo '</div>

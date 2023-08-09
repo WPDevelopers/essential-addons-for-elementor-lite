@@ -1,7 +1,6 @@
 .eael-nft-gallery-wrapper {
   padding: 15px 0;
   -webkit-transition: 0.5s;
-  -o-transition: 0.5s;
   transition: 0.5s;
   overflow: hidden;
   position: relative;
@@ -45,13 +44,11 @@
           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.09);
   overflow: hidden;
   -webkit-transition: 0.5s ease-in-out;
-  -o-transition: 0.5s ease-in-out;
   transition: 0.5s ease-in-out;
 }
 .eael-nft-gallery-wrapper .eael-nft-item .eael-nft-chain {
   opacity: 0;
   -webkit-transition: opacity 0.4s ease-in-out 0s;
-  -o-transition: opacity 0.4s ease-in-out 0s;
   transition: opacity 0.4s ease-in-out 0s;
   text-align: center;
   -webkit-box-align: center;
@@ -79,7 +76,6 @@
   visibility: visible;
   opacity: 1;
   -webkit-transition: visibility 0s ease 0s, opacity 0.4s ease-in-out 0s;
-  -o-transition: visibility 0s ease 0s, opacity 0.4s ease-in-out 0s;
   transition: visibility 0s ease 0s, opacity 0.4s ease-in-out 0s;
   background: transparent;
   display: -webkit-inline-box;
@@ -206,7 +202,6 @@
   font-size: 14px;
   padding: 12px 15px;
   -webkit-transition: 0.5s;
-  -o-transition: 0.5s;
   transition: 0.5s;
   text-align: center;
 }
@@ -236,7 +231,6 @@
       -ms-transform: translateY(30px);
           transform: translateY(30px);
   -webkit-transition: 0.3s ease-in-out;
-  -o-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
   visibility: hidden;
   width: 100%;
@@ -246,7 +240,6 @@
 }
 .eael-nft-gallery-wrapper .preset-1 .eael-nft-thumbnail img {
   -webkit-transition-duration: 0.4s;
-       -o-transition-duration: 0.4s;
           transition-duration: 0.4s;
 }
 .eael-nft-gallery-wrapper .preset-1 .eael-nft-item:hover .eael-nft-button {
@@ -279,7 +272,6 @@
 }
 .eael-nft-gallery-wrapper .preset-2 .eael-nft-item .eael-nft-thumbnail img {
   -webkit-transition-duration: 0.4s;
-       -o-transition-duration: 0.4s;
           transition-duration: 0.4s;
 }
 .eael-nft-gallery-wrapper .preset-2 .eael-nft-item .eael-nft-thumbnail::before {
@@ -301,7 +293,6 @@
   height: 100%;
   padding: 15px;
   -webkit-transition: 0.3s ease-in-out;
-  -o-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
   z-index: 999;
   display: -webkit-box;

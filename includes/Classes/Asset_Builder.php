@@ -184,7 +184,7 @@ class Asset_Builder {
 	 */
 	public function load_asset_per_location( $instance ) {
 
-		if( is_admin() ){
+		if ( is_admin() || ! ( class_exists( 'ElementorPro\Modules\ThemeBuilder\Module' ) ) ) {
 			return false;
 		}
 

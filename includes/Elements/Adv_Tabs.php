@@ -1093,9 +1093,13 @@ class Adv_Tabs extends Widget_Base
 				        <?php if ('content' == $tab['eael_adv_tabs_text_type']) : ?>
 					        <?php echo do_shortcode($tab['eael_adv_tabs_tab_content']); ?>
 				        <?php elseif ('template' == $tab['eael_adv_tabs_text_type']) : ?>
-					        <?php if ( ! empty( $tab['eael_primary_templates'] ) ) {
-						        echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'] );
-					        } ?>
+                            <?php if ( ! empty( $tab['eael_primary_templates'] ) ) {
+                                // WPML Compatibility
+                                if ( ! is_array( $tab['eael_primary_templates'] ) ) {
+                                    $tab['eael_primary_templates'] = apply_filters( 'wpml_object_id', $tab['eael_primary_templates'], 'wp_template', true );
+                                }
+                                echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'] );
+                            } ?>
 				        <?php endif; ?>
                     </div>
 		        <?php endforeach; ?>
