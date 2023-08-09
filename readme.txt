@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.2
 Requires PHP: 7.0
-Stable tag: 5.8.3
+Stable tag: 5.8.5
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -250,6 +250,26 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.8.5 - 03/08/2023 =
+
+- Fixed: EA Advanced Data Table | Merged columns in Google Sheets not displaying properly
+- Fixed: EA Event Calendar | Manual Source not working (date changes automatically)
+- Fixed: EA Simple Menu | Hamburger menu's dropdown items icon style not working
+- Fixed: EA Contact form 7 | Input fields width not working
+- Fixed: EA Advanced Data Table | Ninja Table - Not showing 0 value
+- Fixed: EA Woo Checkout | Not updating the shipping costs
+- Few minor bug fixes & improvements
+
+= 5.8.4 - 27/07/2023 =
+
+- Improved: Added Twitter API v2 Support
+- Improved: EA Filterable Gallery | Added option to randomize image order
+- Fixed: Translation issue with WPML for saved templates
+- Fixed: EA Advanced Accordion | Media files not appearing
+- Fixed: EA Post Grid | The results for category not loading in the Query
+- Fixed: EA Filterable Gallery | Images not appearing after reloading inside Elementor Editor in some cases
+- Few minor bug fixes & improvements
 
 = 5.8.3 - 16/07/2023 =
 

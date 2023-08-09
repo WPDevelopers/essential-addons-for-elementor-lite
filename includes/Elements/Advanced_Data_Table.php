@@ -1655,7 +1655,7 @@ class Advanced_Data_Table extends Widget_Base
                     } elseif ($th['data_type'] == 'button') {
                         $html .= '<td>' . (!empty($tr[$th['key']]) ? '<a href="' . $tr[$th['key']] . '" class="button" target="' . $th['link_target'] . '">' . $th['button_text'] . '</a>' : '') . '</td>';
                     } else {
-                        $html .= '<td>' . (!empty($tr[$th['key']]) ? $tr[$th['key']] : '') . '</td>';
+	                    $html .= '<td>' . ( isset( $tr[ $th['key'] ] ) ? $tr[ $th['key'] ] : '' ) . '</td>';
                     }
                 }
                 $html .= '</tr>';

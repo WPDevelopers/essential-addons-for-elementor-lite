@@ -266,8 +266,7 @@ html {
   display: block;
   white-space: nowrap;
   overflow: hidden;
-  -o-text-overflow: ellipsis;
-     text-overflow: ellipsis;
+  text-overflow: ellipsis;
 }
 
 @media only screen and (max-width: 767px) {

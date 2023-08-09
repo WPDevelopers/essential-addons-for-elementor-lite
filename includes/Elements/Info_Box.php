@@ -1668,9 +1668,13 @@ class Info_Box extends Widget_Base
                     <?php endif;?>
                     <?php $this->render_infobox_button();?>
                 <?php elseif ('template' === $settings['eael_infobox_text_type']):
-            if (!empty($settings['eael_primary_templates'])) {
-                echo Plugin::$instance->frontend->get_builder_content($settings['eael_primary_templates'], true);
-            }
+                    if ( ! empty( $settings['eael_primary_templates'] ) ) {
+                        // WPML Compatibility
+                        if ( ! is_array( $settings['eael_primary_templates'] ) ) {
+                            $settings['eael_primary_templates'] = apply_filters( 'wpml_object_id', $settings['eael_primary_templates'], 'wp_template', true );
+                        }
+                        echo Plugin::$instance->frontend->get_builder_content( $settings['eael_primary_templates'], true );
+                    }
         endif;?>
             <?php endif;?>
         </div>
