@@ -107,7 +107,7 @@
 .eael-img-accordion .eael-image-accordion-hover:before {
   background-color: rgba(0, 0, 0, 0.3);
 }
-.eael-img-accordion .eael-image-accordion-hover:hover::before {
+.eael-img-accordion .eael-image-accordion-hover.overlay-active::before, .eael-img-accordion .eael-image-accordion-hover:hover::before {
   background-color: rgba(0, 0, 0, 0.5);
 }
 .eael-img-accordion .overlay-inner * {

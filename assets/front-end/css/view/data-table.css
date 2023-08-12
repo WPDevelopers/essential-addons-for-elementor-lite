@@ -253,21 +253,6 @@ table.eael-data-table thead .sorting:after {
         -ms-flex-pack: center;
             justify-content: center;
   }
-  .custom-responsive-option-enable .eael-data-table thead {
-    display: none;
-  }
-  .custom-responsive-option-enable .eael-data-table tbody tr td {
-    float: none;
-    clear: left;
-    width: 100%;
-    text-align: left;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-  }
   .eael-data-table .td-content {
     -webkit-box-align: center;
         -ms-flex-align: center;
