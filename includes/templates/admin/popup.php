@@ -238,6 +238,24 @@
                             </div>
                         </div>
                     </div>
+
+                    <?php $custom_field_wrap_class = 'on' !== get_option( 'eael_custom_profile_fields' ) ? 'eael-d-none' : ''; ?>
+                    <div class="lr_custom_profile_fields_child modal__content1 ml30 mr30 mt15 <?php echo esc_attr($custom_field_wrap_class); ?>">
+                        <div class="eael-login__setup">
+                            <div class="eael-input__inline mb15">
+                                <label><i class="eicon-plus-circle-o mr10"></i><?php _e( 'Text Type Fields:', 'essential-addons-for-elementor-lite' ); ?></label>
+                                <input name="lr_custom_profile_fields_text" id="lr_custom_profile_fields_text"
+                                        value="<?php echo esc_attr( get_option( 'eael_custom_profile_fields_text' ) ); ?>"
+                                        class="eael-form__control" type="text" placeholder="Field 1, Field 2 ...">
+                            </div>
+                            <div class="eael-input__inline mb15">
+                                <label><i class="eicon-plus-circle-o mr10"></i><?php _e( 'File Type Fields:', 'essential-addons-for-elementor-lite' ); ?></label>
+                                <input name="lr_custom_profile_fields_img" id="lr_custom_profile_fields_img"
+                                        value="<?php echo esc_attr( get_option( 'eael_custom_profile_fields_img' ) ); ?>"
+                                        class="eael-form__control" type="text" placeholder="Field 1, Field 2 ...">
+                            </div>
+                        </div>
+                    </div>
                     
                     <!-- <div class="border__line"><span></span></div> -->
                     <div class="modal__content">
