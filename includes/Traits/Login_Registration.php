@@ -395,7 +395,7 @@ trait Login_Registration {
 			$errors['terms_conditions'] =  isset( $settings['err_tc'] ) ? Helper::eael_wp_kses( $settings['err_tc'] ) : __( 'You did not accept the Terms and Conditions. Please accept it and try again.', 'essential-addons-for-elementor-lite' );
 		}
 		//v2 or v3 
-		if ( isset( $_POST['g-recaptcha-enabled'] ) ) {
+		if ( 'yes' === $settings[ "enable_register_recaptcha" ] || 'v3' === $settings["login_register_recaptcha_version"] ) {
 			$ld_recaptcha_version = ( isset( $settings['login_register_recaptcha_version'] ) && 'v3' === $settings['login_register_recaptcha_version'] ) ? 'v3' : 'v2';
 			
 			if( ! $this->lr_validate_recaptcha($ld_recaptcha_version) ) {
