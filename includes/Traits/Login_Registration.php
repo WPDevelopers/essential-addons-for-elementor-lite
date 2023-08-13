@@ -1509,7 +1509,7 @@ trait Login_Registration {
 			if('v3' === $version ) {
 				$action = self::$recaptcha_v3_default_action;
 				$action_ok = ! isset( $res['action'] ) ? true : $action === $res['action'];
-				return $action_ok && ( $res['score'] > self::get_recaptcha_threshold() );
+				return $action_ok && isset( $res['score'] ) && ( $res['score'] > self::get_recaptcha_threshold() );
 			}else {
 				return $res['success'];				
 			}
