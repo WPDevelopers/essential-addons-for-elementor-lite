@@ -8,45 +8,29 @@ var ImageAccordion = function ($scope, $) {
             $imageAccordion.data("img-accordion-type") !== undefined
                 ? $imageAccordion.data("img-accordion-type")
                 : "";
-    var $clickCount = 0;
+
+    function hoverAction(event, element) {
+        if (element.hasClass("overlay-active") === false) {
+            event.preventDefault();
+        }
+        let imageAccordion = $(".eael-image-accordion-hover", $scope);
+
+        imageAccordion.removeClass("overlay-active");
+        imageAccordion.css("flex", "1");
+        element.find(".overlay").parent(".eael-image-accordion-hover").addClass("overlay-active");
+        imageAccordion.find(".overlay-inner").removeClass("overlay-inner-show");
+        element.find(".overlay-inner").addClass("overlay-inner-show");
+        element.css("flex", "3");
+    }
+
     if ("on-click" === $type) {
-        $("#eael-img-accordion-" + $id + " .eael-image-accordion-hover").on("click", function (e) {
-            if ($(this).hasClass("overlay-active") == false) {
-                e.preventDefault();
-            }
-            $("#eael-img-accordion-" + $id + " .eael-image-accordion-hover",$scope).removeClass("overlay-active");
-            if ($clickCount == 0) {
-                if ($("#eael-img-accordion-" + $id + " .eael-image-accordion-hover")
-                    .hasClass('overlay-active')) {
-                    $("#eael-img-accordion-" + $id + " .eael-image-accordion-hover")
-                        .removeClass("overlay-active");
-                }
-                $clickCount += 1;
-            }
-
-            $("#eael-img-accordion-" + $id + " .eael-image-accordion-hover").css("flex", "1");
-
-            $(this)
-                .find(".overlay")
-                .parent(".eael-image-accordion-hover")
-                .addClass("overlay-active");
-            $("#eael-img-accordion-" + $id + " .eael-image-accordion-hover")
-                .find(".overlay-inner")
-                .removeClass("overlay-inner-show");
-            $(this)
-                .find(".overlay-inner")
-                .addClass("overlay-inner-show");
-            $(this).css("flex", "3");
+        $(".eael-image-accordion-hover", $scope).on("click", function (e) {
+            hoverAction(e, $(this));
         });
 
     } else {
-        $("#eael-img-accordion-" + $id + " .eael-image-accordion-hover").on('hover', function () {
-            if ($("#eael-img-accordion-" + $id + " .eael-image-accordion-hover")
-                .hasClass('overlay-active')) {
-                $("#eael-img-accordion-" + $id + " .eael-image-accordion-hover.overlay-active").css("flex", "1");
-                $("#eael-img-accordion-" + $id + " .eael-image-accordion-hover").removeClass("overlay-active");
-                $("#eael-img-accordion-" + $id + " .eael-image-accordion-hover .overlay .overlay-inner").removeClass('overlay-inner-show');
-            }
+        $(".eael-image-accordion-hover", $scope).hover(function (e) {
+            hoverAction(e, $(this));
         });
     }
 };

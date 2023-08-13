@@ -110,3 +110,9 @@
 .ea-advanced-data-table-wrap .ea-advanced-data-table-pagination a {
   display: inline-block;
 }
+.ea-advanced-data-table-wrap .ea-advanced-data-table-pagination a.ea-adtp-show {
+  display: inline-block;
+}
+.ea-advanced-data-table-wrap .ea-advanced-data-table-pagination a.ea-adtp-hide {
+  display: none;
+}
