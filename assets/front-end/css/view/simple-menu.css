@@ -1,5 +1,7 @@
 .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container,
 .elementor-widget-eael-simple-menu.eael-hamburger--desktop.eael-hamburger--responsive .eael-simple-menu-container,
 .elementor-widget-eael-simple-menu.eael-hamburger--widescreen.eael-hamburger--responsive .eael-simple-menu-container {
@@ -7,8 +9,12 @@
   overflow: visible;
 }
 .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal, .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical,
 .elementor-widget-eael-simple-menu.eael-hamburger--desktop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal,
@@ -23,8 +29,12 @@
   display: none;
 }
 .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li, .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li,
 .elementor-widget-eael-simple-menu.eael-hamburger--desktop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li,
@@ -35,8 +45,12 @@
   display: block;
 }
 .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a, .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a,
 .elementor-widget-eael-simple-menu.eael-hamburger--desktop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a,
@@ -47,8 +61,12 @@
   text-align: inherit;
 }
 .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a span, .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a span,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a span,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a span,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a span,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a span,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a span,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a span,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a span,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li a span,
 .elementor-widget-eael-simple-menu.eael-hamburger--desktop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li a span,
@@ -58,8 +76,12 @@
   display: none;
 }
 .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul, .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul,
 .elementor-widget-eael-simple-menu.eael-hamburger--desktop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul,
@@ -77,8 +99,12 @@
   display: none;
 }
 .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li, .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li,
 .elementor-widget-eael-simple-menu.eael-hamburger--desktop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li,
@@ -89,8 +115,12 @@
   display: block;
 }
 .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li .eael-simple-menu-indicator, .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li .eael-simple-menu-indicator,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li .eael-simple-menu-indicator,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li .eael-simple-menu-indicator,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li .eael-simple-menu-indicator,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li .eael-simple-menu-indicator,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li .eael-simple-menu-indicator,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li .eael-simple-menu-indicator,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li .eael-simple-menu-indicator,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li .eael-simple-menu-indicator,
 .elementor-widget-eael-simple-menu.eael-hamburger--desktop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li .eael-simple-menu-indicator,
@@ -100,8 +130,12 @@
   border: 1px solid rgba(0, 0, 0, 0.5019607843);
 }
 .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li ul, .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li ul,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li ul,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li ul,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li ul,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li ul,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li ul,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li ul,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li ul,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li ul,
 .elementor-widget-eael-simple-menu.eael-hamburger--desktop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li ul,
@@ -114,8 +148,12 @@
   left: unset;
 }
 .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li ul li:last-child > a, .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li ul li:last-child > a,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li ul li:last-child > a,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li ul li:last-child > a,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li ul li:last-child > a,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li ul li:last-child > a,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li ul li:last-child > a,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li ul li:last-child > a,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li ul li:last-child > a,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li ul li:last-child > a,
 .elementor-widget-eael-simple-menu.eael-hamburger--desktop.eael-hamburger--responsive .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-horizontal li ul li ul li:last-child > a,
@@ -125,22 +163,30 @@
   border-bottom-width: 1px;
 }
 .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container.eael-simple-menu-align-center .eael-simple-menu > li > a,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container.eael-simple-menu-align-center .eael-simple-menu > li > a,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container.eael-simple-menu-align-center .eael-simple-menu > li > a,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container.eael-simple-menu-align-center .eael-simple-menu > li > a,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container.eael-simple-menu-align-center .eael-simple-menu > li > a,
 .elementor-widget-eael-simple-menu.eael-hamburger--desktop.eael-hamburger--responsive .eael-simple-menu-container.eael-simple-menu-align-center .eael-simple-menu > li > a,
 .elementor-widget-eael-simple-menu.eael-hamburger--widescreen.eael-hamburger--responsive .eael-simple-menu-container.eael-simple-menu-align-center .eael-simple-menu > li > a {
   text-align: center;
 }
 .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container.eael-simple-menu-align-right .eael-simple-menu.eael-simple-menu-horizontal > li > a,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container.eael-simple-menu-align-right .eael-simple-menu.eael-simple-menu-horizontal > li > a,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container.eael-simple-menu-align-right .eael-simple-menu.eael-simple-menu-horizontal > li > a,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container.eael-simple-menu-align-right .eael-simple-menu.eael-simple-menu-horizontal > li > a,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container.eael-simple-menu-align-right .eael-simple-menu.eael-simple-menu-horizontal > li > a,
 .elementor-widget-eael-simple-menu.eael-hamburger--desktop.eael-hamburger--responsive .eael-simple-menu-container.eael-simple-menu-align-right .eael-simple-menu.eael-simple-menu-horizontal > li > a,
 .elementor-widget-eael-simple-menu.eael-hamburger--widescreen.eael-hamburger--responsive .eael-simple-menu-container.eael-simple-menu-align-right .eael-simple-menu.eael-simple-menu-horizontal > li > a {
   text-align: right;
 }
 .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container.preset-1 .eael-simple-menu.eael-simple-menu-horizontal, .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container.preset-1 .eael-simple-menu.eael-simple-menu-vertical,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container.preset-1 .eael-simple-menu.eael-simple-menu-horizontal,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container.preset-1 .eael-simple-menu.eael-simple-menu-vertical,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container.preset-1 .eael-simple-menu.eael-simple-menu-horizontal,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container.preset-1 .eael-simple-menu.eael-simple-menu-vertical,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container.preset-1 .eael-simple-menu.eael-simple-menu-horizontal,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container.preset-1 .eael-simple-menu.eael-simple-menu-vertical,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container.preset-1 .eael-simple-menu.eael-simple-menu-horizontal,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container.preset-1 .eael-simple-menu.eael-simple-menu-vertical,
 .elementor-widget-eael-simple-menu.eael-hamburger--desktop.eael-hamburger--responsive .eael-simple-menu-container.preset-1 .eael-simple-menu.eael-simple-menu-horizontal,
@@ -150,8 +196,12 @@
   background-color: #4E36A3;
 }
 .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container.preset-3 .eael-simple-menu.eael-simple-menu-horizontal, .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container.preset-3 .eael-simple-menu.eael-simple-menu-vertical,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container.preset-3 .eael-simple-menu.eael-simple-menu-horizontal,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container.preset-3 .eael-simple-menu.eael-simple-menu-vertical,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container.preset-3 .eael-simple-menu.eael-simple-menu-horizontal,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container.preset-3 .eael-simple-menu.eael-simple-menu-vertical,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container.preset-3 .eael-simple-menu.eael-simple-menu-horizontal,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container.preset-3 .eael-simple-menu.eael-simple-menu-vertical,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container.preset-3 .eael-simple-menu.eael-simple-menu-horizontal,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container.preset-3 .eael-simple-menu.eael-simple-menu-vertical,
 .elementor-widget-eael-simple-menu.eael-hamburger--desktop.eael-hamburger--responsive .eael-simple-menu-container.preset-3 .eael-simple-menu.eael-simple-menu-horizontal,
@@ -161,8 +211,12 @@
   background-color: #15DBD5;
 }
 .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-horizontal, .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-vertical,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-horizontal,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-vertical,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-horizontal,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-vertical,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-horizontal,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-vertical,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-horizontal,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-vertical,
 .elementor-widget-eael-simple-menu.eael-hamburger--desktop.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-horizontal,
@@ -176,12 +230,24 @@
 .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-horizontal li.current-menu-item > a.eael-item-active, .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-vertical li.current-menu-ancestor > a.eael-item-active,
 .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-vertical li:hover > a,
 .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-vertical li.current-menu-item > a.eael-item-active,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-horizontal li.current-menu-ancestor > a.eael-item-active,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-horizontal li:hover > a,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-horizontal li.current-menu-item > a.eael-item-active,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-vertical li.current-menu-ancestor > a.eael-item-active,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-vertical li:hover > a,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-vertical li.current-menu-item > a.eael-item-active,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-horizontal li.current-menu-ancestor > a.eael-item-active,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-horizontal li:hover > a,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-horizontal li.current-menu-item > a.eael-item-active,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-vertical li.current-menu-ancestor > a.eael-item-active,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-vertical li:hover > a,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-vertical li.current-menu-item > a.eael-item-active,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-horizontal li.current-menu-ancestor > a.eael-item-active,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-horizontal li:hover > a,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-horizontal li.current-menu-item > a.eael-item-active,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-vertical li.current-menu-ancestor > a.eael-item-active,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-vertical li:hover > a,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-vertical li.current-menu-item > a.eael-item-active,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-horizontal li.current-menu-ancestor > a.eael-item-active,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-horizontal li:hover > a,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-container.preset-2 .eael-simple-menu.eael-simple-menu-horizontal li.current-menu-item > a.eael-item-active,
@@ -203,14 +269,18 @@
   color: #fff;
 }
 .eael_simple_menu_hamburger_disable_selected_menu_hide.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-toggle-text,
+.eael_simple_menu_hamburger_disable_selected_menu_hide.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-toggle-text,
 .eael_simple_menu_hamburger_disable_selected_menu_hide.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-toggle-text,
+.eael_simple_menu_hamburger_disable_selected_menu_hide.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-toggle-text,
 .eael_simple_menu_hamburger_disable_selected_menu_hide.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-toggle-text,
 .eael_simple_menu_hamburger_disable_selected_menu_hide.eael-hamburger--desktop.eael-hamburger--responsive .eael-simple-menu-toggle-text,
 .eael_simple_menu_hamburger_disable_selected_menu_hide.eael-hamburger--widescreen.eael-hamburger--responsive .eael-simple-menu-toggle-text {
   display: none !important;
 }
 .eael-simple-menu-hamburger-align-left.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-toggle,
+.eael-simple-menu-hamburger-align-left.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-toggle,
 .eael-simple-menu-hamburger-align-left.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-toggle,
+.eael-simple-menu-hamburger-align-left.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-toggle,
 .eael-simple-menu-hamburger-align-left.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-toggle,
 .eael-simple-menu-hamburger-align-left.eael-hamburger--desktop.eael-hamburger--responsive .eael-simple-menu-toggle,
 .eael-simple-menu-hamburger-align-left.eael-hamburger--widescreen.eael-hamburger--responsive .eael-simple-menu-toggle {
@@ -219,7 +289,9 @@
   right: auto;
 }
 .eael-simple-menu-hamburger-align-center.eael-hamburger--mobile.eael-hamburger--responsive .eael-simple-menu-toggle,
+.eael-simple-menu-hamburger-align-center.eael-hamburger--mobile_extra.eael-hamburger--responsive .eael-simple-menu-toggle,
 .eael-simple-menu-hamburger-align-center.eael-hamburger--tablet.eael-hamburger--responsive .eael-simple-menu-toggle,
+.eael-simple-menu-hamburger-align-center.eael-hamburger--tablet_extra.eael-hamburger--responsive .eael-simple-menu-toggle,
 .eael-simple-menu-hamburger-align-center.eael-hamburger--laptop.eael-hamburger--responsive .eael-simple-menu-toggle,
 .eael-simple-menu-hamburger-align-center.eael-hamburger--desktop.eael-hamburger--responsive .eael-simple-menu-toggle,
 .eael-simple-menu-hamburger-align-center.eael-hamburger--widescreen.eael-hamburger--responsive .eael-simple-menu-toggle {

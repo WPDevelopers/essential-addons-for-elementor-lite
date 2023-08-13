@@ -3,7 +3,7 @@ $integrations = [
 	[
 		'slug'     => 'betterdocs',
 		'basename' => 'betterdocs/betterdocs.php',
-		'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/bd.svg',
+		'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/bd-new.svg',
 		'title'    => __( 'BetterDocs', 'essential-addons-for-elementor-lite' ),
 		'desc'     => __( 'BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ),
 	],
