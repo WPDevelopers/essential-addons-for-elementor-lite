@@ -1192,6 +1192,65 @@ trait Controls
         );
 
         if (
+            'eael-content-timeline' === $wb->get_name()
+        ) {
+            $wb->add_control(
+                'eael_content_timeline_navigation_type',
+                array(
+                    'label'   => esc_html__( 'Navigation Type', 'essential-addons-elementor' ),
+                    'type'    => Controls_Manager::SELECT,
+                    'default' => 'scrollbar',
+                    'options' => array(
+                        'scrollbar' => esc_html__( 'Scrollbar', 'essential-addons-elementor' ),
+                        'arrows' => esc_html__( 'Arrows', 'essential-addons-elementor' ),
+                    ),
+                    'condition' => [
+                        'eael_dynamic_template_Layout' => 'horizontal',
+                    ],
+                )
+            );
+
+            $wb->add_control(
+                'eael_content_timeline_arrow_type',
+                array(
+                    'label'   => esc_html__( 'Arrow Type', 'essential-addons-elementor' ),
+                    'type'    => Controls_Manager::SELECT,
+                    'default' => 'fa fa-angle-left',
+                    'options' => array(
+                                    'fa fa-angle-left'          => __( 'Angle', 'essential-addons-for-elementor-lite' ),
+                                    'fa fa-chevron-left'        => __( 'Chevron', 'essential-addons-for-elementor-lite' ),
+                                    'fa fa-angle-double-left'   => __( 'Angle Double', 'essential-addons-for-elementor-lite' ),
+                                    'fa fa-arrow-left'          => __( 'Arrow', 'essential-addons-for-elementor-lite' ),
+                                    'fa fa-caret-left'          => __( 'Caret', 'essential-addons-for-elementor-lite' ),
+                                    'fa fa-long-arrow-alt-left' => __( 'Long Arrow', 'essential-addons-for-elementor-lite' ),
+                                    'fa fa-arrow-circle-left'   => __( 'Arrow Circle', 'essential-addons-for-elementor-lite' ),
+                                    'fa fa-chevron-circle-left' => __( 'Chevron Circle', 'essential-addons-for-elementor-lite' ),
+                                    'fa fa-caret-square-left'   => __( 'Caret Square', 'essential-addons-for-elementor-lite' ),
+                                ),
+                    'condition' => [
+                        'eael_dynamic_template_Layout' => 'horizontal',
+                        'eael_content_timeline_navigation_type' => 'arrows',
+                    ],
+                )
+            );
+
+            $content_timeline_range = range( 1, 3 );
+            $wb->add_responsive_control(
+                'eael_content_timeline_slides_to_scroll',
+                array(
+                    'label'     => esc_html__( 'Slides to Scroll', 'essential-addons-elementor' ),
+                    'type'      => Controls_Manager::SELECT,
+                    'default'   => '1',
+                    'options'   => array_combine( $content_timeline_range, $content_timeline_range ),
+                    'condition' => [
+                        'eael_dynamic_template_Layout' => 'horizontal',
+                        'eael_content_timeline_navigation_type' => 'arrows',
+                    ],
+                )
+            );
+        }
+
+        if (
             'eael-post-grid' === $wb->get_name()
             || 'eael-post-block' === $wb->get_name()
             || 'eael-post-carousel' === $wb->get_name()
