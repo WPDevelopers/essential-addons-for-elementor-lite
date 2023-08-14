@@ -1277,7 +1277,7 @@ class Advanced_Data_Table extends Widget_Base
                 'default' => '#666666',
                 'selectors' => [
                     '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .ea-advanced-data-table-pagination a.ea-advanced-data-table-pagination-current' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination a.ea-adtp-current' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .ea-advanced-data-table-pagination select:hover' => 'color: {{VALUE}};',
                 ],
             ]
@@ -1291,7 +1291,7 @@ class Advanced_Data_Table extends Widget_Base
                 'default' => '#fafafa',
                 'selectors' => [
                     '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover' => 'background-color: {{VALUE}};',
-                    '{{WRAPPER}} .ea-advanced-data-table-pagination a.ea-advanced-data-table-pagination-current' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination a.ea-adtp-current' => 'background-color: {{VALUE}};',
                     '{{WRAPPER}} .ea-advanced-data-table-pagination select:hover' => 'background-color: {{VALUE}};',
                 ],
             ]
@@ -1320,7 +1320,7 @@ class Advanced_Data_Table extends Widget_Base
                         'default' => '#eeeeee',
                     ],
                 ],
-                'selector' => '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover, {{WRAPPER}} .ea-advanced-data-table-pagination a.ea-advanced-data-table-pagination-current, {{WRAPPER}} .ea-advanced-data-table-pagination select:hover',
+                'selector' => '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover, {{WRAPPER}} .ea-advanced-data-table-pagination a.ea-adtp-current, {{WRAPPER}} .ea-advanced-data-table-pagination select:hover',
             ]
         );
 
@@ -1332,7 +1332,7 @@ class Advanced_Data_Table extends Widget_Base
                 'size_units' => ['px'],
                 'selectors' => [
                     '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    '{{WRAPPER}} .ea-advanced-data-table-pagination a.ea-advanced-data-table-pagination-current' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination a.ea-adtp-current' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     '{{WRAPPER}} .ea-advanced-data-table-pagination select' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
@@ -1655,7 +1655,7 @@ class Advanced_Data_Table extends Widget_Base
                     } elseif ($th['data_type'] == 'button') {
                         $html .= '<td>' . (!empty($tr[$th['key']]) ? '<a href="' . $tr[$th['key']] . '" class="button" target="' . $th['link_target'] . '">' . $th['button_text'] . '</a>' : '') . '</td>';
                     } else {
-                        $html .= '<td>' . (!empty($tr[$th['key']]) ? $tr[$th['key']] : '') . '</td>';
+	                    $html .= '<td>' . ( isset( $tr[ $th['key'] ] ) ? $tr[ $th['key'] ] : '' ) . '</td>';
                     }
                 }
                 $html .= '</tr>';
