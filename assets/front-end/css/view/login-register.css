@@ -123,6 +123,8 @@
 }
 .eael-lr-form-wrapper .eael-lr-form-group {
   margin-bottom: 1rem;
+  display: inline-block;
+  vertical-align: top;
 }
 .eael-lr-form-wrapper .eael-lr-form-group label {
   display: inline-block;
