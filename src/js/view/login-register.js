@@ -136,7 +136,7 @@ ea.hooks.addAction("init", "ea", () => {
             }
         }
         
-        $('form input[type="submit"]', $scope).on('click', function (e) {
+        // $('form input[type="submit"]', $scope).on('click', function (e) {
             if(!isProAndAjaxEnabled){
                 let isRecaptchaVersion3 = false;
                 isRecaptchaVersion3 = loginRecaptchaVersion === 'v3' || registerRecaptchaVersion === 'v3' ;
@@ -153,7 +153,7 @@ ea.hooks.addAction("init", "ea", () => {
                     });
                 }
             }
-        });
+        // });
 
         $(document).ready(function () {
             let eaelGetTokenPromise = new Promise(function (eaelGetTokenResolve, eaelGetTokenReject) {

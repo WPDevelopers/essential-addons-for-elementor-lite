@@ -394,7 +394,7 @@ trait Login_Registration {
 		if ( isset( $_POST['eael_tnc_active'] ) && empty( $_POST['eael_accept_tnc'] ) ) {
 			$errors['terms_conditions'] =  isset( $settings['err_tc'] ) ? Helper::eael_wp_kses( $settings['err_tc'] ) : __( 'You did not accept the Terms and Conditions. Please accept it and try again.', 'essential-addons-for-elementor-lite' );
 		}
-		//v2 or v3 
+		//v2 or v3
 		$is_version_3 = isset( $settings['login_register_recaptcha_version'] ) && 'v3' === $settings['login_register_recaptcha_version'];
 		if ( 'yes' === $settings[ "enable_register_recaptcha" ] || $is_version_3 ) {
 			$ld_recaptcha_version = $is_version_3 ? 'v3' : 'v2';
@@ -1495,6 +1495,8 @@ trait Login_Registration {
 	}
 
 	public function lr_validate_recaptcha($version = 'v2') {
+		// print_r($_REQUEST);
+		// wp_die('okk');
 		if ( ! isset( $_REQUEST['g-recaptcha-response'] ) ) {
 			return false;
 		}
