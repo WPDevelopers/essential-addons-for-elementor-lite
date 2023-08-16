@@ -3348,6 +3348,10 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	protected function render() {
+		$business_reviews = $this->get_business_reviews_settings();
+		if( ! $business_reviews['api_key'] ) {
+			return false;
+		}
 		$business_reviews_items = $this->fetch_business_reviews_from_api();
 		$this->print_business_reviews( $business_reviews_items );
 		$this->print_localbusiness_schema( $business_reviews_items );
