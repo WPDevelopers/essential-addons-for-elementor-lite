@@ -6684,6 +6684,10 @@ class Login_Register extends Widget_Base {
 		if ( 'yes' === $this->get_settings_for_display( "enable_{$form_type}_recaptcha" ) || 'v3' === $this->ds["login_register_recaptcha_version"] ) {
 			$id = "{$form_type}-recaptcha-node-" . $this->get_id();
 			echo "<input type='hidden' name='g-recaptcha-enabled' value='1'/><div id='{$id}' class='eael-recaptcha-wrapper'></div>";
+
+			if( 'v3' === $this->ds["login_register_recaptcha_version"] && ( ! $this->ds[ 'enable_ajax' ] ) ){
+				echo "<input type='hidden' name='action' value='eael_login_register_form'/>";
+			}
 		}
 	}
 
