@@ -136,24 +136,22 @@ ea.hooks.addAction("init", "ea", () => {
             }
         }
         
-        // $('form input[type="submit"]', $scope).on('click', function (e) {
-            if(!isProAndAjaxEnabled){
-                let isRecaptchaVersion3 = false;
-                isRecaptchaVersion3 = loginRecaptchaVersion === 'v3' || registerRecaptchaVersion === 'v3' ;
-                
-                if (recaptchaAvailable && isRecaptchaVersion3) {
-                    grecaptcha.execute(recaptchaSiteKeyV3, { 
-                        action: 'eael_login_register_form' 
-                    }).then(function (token) {
-                        if ($('form input[name="g-recaptcha-response"]', $scope).length === 0) {
-                            $('form', $scope).append('<input type="hidden" name="g-recaptcha-response" value="' + token + '">');
-                        } else {
-                            $('form input[name="g-recaptcha-response"]', $scope).val(token);
-                        }
-                    });
-                }
+        if(!isProAndAjaxEnabled){
+            let isRecaptchaVersion3 = false;
+            isRecaptchaVersion3 = loginRecaptchaVersion === 'v3' || registerRecaptchaVersion === 'v3' ;
+            
+            if (recaptchaAvailable && isRecaptchaVersion3) {
+                grecaptcha.execute(recaptchaSiteKeyV3, { 
+                    action: 'eael_login_register_form' 
+                }).then(function (token) {
+                    if ($('form input[name="g-recaptcha-response"]', $scope).length === 0) {
+                        $('form', $scope).append('<input type="hidden" name="g-recaptcha-response" value="' + token + '">');
+                    } else {
+                        $('form input[name="g-recaptcha-response"]', $scope).val(token);
+                    }
+                });
             }
-        // });
+        }
 
         $(document).ready(function () {
             let eaelGetTokenPromise = new Promise(function (eaelGetTokenResolve, eaelGetTokenReject) {
