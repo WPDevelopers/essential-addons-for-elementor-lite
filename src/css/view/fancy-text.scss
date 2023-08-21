@@ -1,5 +1,18 @@
-.eael-fancy-text-container p {
-	margin: 0;
+.eael-fancy-text-container {
+	p {
+		margin: 0;
+	}
+
+	&[data-fancy-text-cursor="yes"] .eael-fancy-text-strings {
+		&::after {
+			content: "|";
+			animation: blink_cursor .7s infinite;
+		}
+	}
+
+	.typed-cursor {
+		display: none;
+	}
 }
 
 .eael-fancy-text-strings {
@@ -14,38 +27,7 @@
 	display: inline-block;
 }
 
-.typed-cursor {
-	opacity: 1;
-	-webkit-animation: blink_cursor 0.7s infinite;
-	-moz-animation: blink_cursor 0.7s infinite;
-	animation: blink_cursor 0.7s infinite;
-}
-
 @keyframes blink_cursor {
-	0% {
-		opacity: 1;
-	}
-	50% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
-}
-
-@-webkit-keyframes blink_cursor {
-	0% {
-		opacity: 1;
-	}
-	50% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
-}
-
-@-moz-keyframes blink_cursor {
 	0% {
 		opacity: 1;
 	}

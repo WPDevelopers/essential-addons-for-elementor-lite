@@ -129,6 +129,18 @@ class Interactive_Circle extends Widget_Base {
 
 		$repeater = new Repeater();
 
+		$repeater->add_control(
+			'eael_interactive_circle_default_active',
+			[
+				'label'        => esc_html__( 'Active as Default', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => '',
+			]
+		);
+
 		$repeater->start_controls_tabs( 'interactive_circle_tabs' );
 
 		$repeater->start_controls_tab( 'interactive_circle_btn_tab', [ 'label' => __( 'Button', 'essential-addons-for-elementor-lite' ) ] );
@@ -212,6 +224,7 @@ class Interactive_Circle extends Widget_Base {
 							'value'   => 'fas fa-leaf',
 							'library' => 'fa-solid',
 						],
+						'eael_interactive_circle_default_active'      => 'yes',
 						'eael_interactive_circle_btn_title'           => esc_html__( 'Item 1', 'essential-addons-for-elementor-lite' ),
 						'eael_interactive_circle_item_default_active' => __( 'active', 'essential-addons-for-elementor-lite' ),
 						'eael_interactive_circle_item_content'        => esc_html__( 'Present your content in an attractive Circle layout item 1. You can highlight key information with click or hover effects and style it as per your preference.', 'essential-addons-for-elementor-lite' ),
@@ -284,6 +297,26 @@ class Interactive_Circle extends Widget_Base {
 					'eael-interactive-circle-event-click' => esc_html__( 'Click', 'essential-addons-for-elementor-lite' ),
 					'eael-interactive-circle-event-hover' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ),
 				],
+				'conditions' => [
+                    'relation' => 'or',
+                    'terms' => [
+                       [
+                          'name' => 'eael_interactive_circle_autoplay',
+                          'operator' => '!=',
+                          'value' => 'yes',
+                       ],
+					   [
+						'name' => 'eael_interactive_circle_preset',
+						'operator' => '==',
+						'value' => 'eael-interactive-circle-preset-3',
+					   ],
+					   [
+						'name' => 'eael_interactive_circle_preset',
+						'operator' => '==',
+						'value' => 'eael-interactive-circle-preset-4',
+					   ],
+                    ],
+                ],
 			]
 		);
 
@@ -302,6 +335,39 @@ class Interactive_Circle extends Widget_Base {
 				],
 			]
 		);
+
+		$this->add_control(
+			'eael_interactive_circle_autoplay',
+			[
+				'label'        => esc_html__( 'Autoplay', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'default'      => '',
+				'return_value' => 'yes',
+				'condition' => [
+					'eael_interactive_circle_preset' => [ 'eael-interactive-circle-preset-1', 'eael-interactive-circle-preset-2' ]
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_interactive_circle_autoplay_interval',
+			[
+				'label'        => esc_html__( 'Interval (Miliseconds)', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range'      => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 10000,
+						'step' => 500,
+					],
+				],
+				'condition'	=> [
+					'eael_interactive_circle_autoplay' => 'yes',
+				]
+			]
+		);
+
 		$this->end_controls_section();
 	}
 
@@ -804,12 +870,14 @@ class Interactive_Circle extends Widget_Base {
 				'class' => [
 					'eael-circle-wrapper',
 					$settings['eael_interactive_circle_preset'],
-					$settings['eael_interactive_circle_event']
+					! empty( $settings['eael_interactive_circle_event'] ) ? $settings['eael_interactive_circle_event'] : 'eael-interactive-circle-event-click'
 				],
 			]
 		);
 
 		$this->add_render_attribute( 'eael_circle_wrapper', 'data-animation', $settings['eael_interactive_circle_animation'] );
+		$this->add_render_attribute( 'eael_circle_wrapper', 'data-autoplay', esc_attr( 'yes' === $settings['eael_interactive_circle_autoplay'] ? 1 : 0 ) );
+		$this->add_render_attribute( 'eael_circle_wrapper', 'data-autoplay-interval', esc_attr( ! empty( $settings['eael_interactive_circle_autoplay_interval']['size'] ) ? intval( $settings['eael_interactive_circle_autoplay_interval']['size'] ) : 2000 ) );
 
 		$item_count     = count( $settings['eael_interactive_circle_item'] );
 		$show_btn_icon  = isset( $settings['eael_interactive_circle_btn_icon_show'] ) && 'yes' === $settings['eael_interactive_circle_btn_icon_show'];
@@ -825,12 +893,15 @@ class Interactive_Circle extends Widget_Base {
                 <div <?php echo $this->get_render_attribute_string( 'eael_circle_wrapper' ); ?>>
                     <div class="eael-circle-info" data-items="<?php echo $item_count; ?>">
                         <div class="eael-circle-inner">
-							<?php foreach ( $settings['eael_interactive_circle_item'] as $index => $item ) :
+							<?php
+							$is_active      = '';
+							foreach ( $settings['eael_interactive_circle_item'] as $index => $item ) :
 								$item_style_classic = ! empty( $item['eael_interactive_circle_tab_bgtype_background'] ) && 'classic' === $item['eael_interactive_circle_tab_bgtype_background'] ? 'classic' : '';
 								$item_count = $index + 1;
+								$is_active  = ! $is_active && $item['eael_interactive_circle_default_active'] === 'yes' ? 'active' : '';
 								?>
                                 <div class="eael-circle-item elementor-repeater-item-<?php echo $item['_id']; ?>">
-                                    <div class="eael-circle-btn" id="eael-circle-item-<?php echo $item_count; ?>">
+                                    <div class="eael-circle-btn <?php echo $is_active; ?>" id="eael-circle-item-<?php echo $item_count; ?>">
                                         <div class="eael-circle-icon-shapes <?php echo esc_attr( $item_style_classic ); ?>">
                                             <div class="eael-shape-1"></div>
                                             <div class="eael-shape-2"></div>
@@ -848,7 +919,7 @@ class Interactive_Circle extends Widget_Base {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="eael-circle-btn-content eael-circle-item-<?php echo $item_count; ?>">
+                                    <div class="eael-circle-btn-content eael-circle-item-<?php echo $item_count . ' ' . $is_active; ?>">
                                         <div class="eael-circle-content">
 											<?php echo $item['eael_interactive_circle_item_content'] ?>
                                         </div>
@@ -866,11 +937,14 @@ class Interactive_Circle extends Widget_Base {
                 <div <?php echo $this->get_render_attribute_string( 'eael_circle_wrapper' ); ?>>
                     <div class="eael-circle-info">
                         <div class="eael-circle-inner" data-items="<?php echo $item_count; ?>">
-							<?php foreach ( $settings['eael_interactive_circle_item'] as $index => $item ) :
+							<?php
+							$is_active     = '';
+							foreach ( $settings['eael_interactive_circle_item'] as $index => $item ) :
 								$item_count = $index + 1;
+								$is_active = ! $is_active && $item['eael_interactive_circle_default_active'] === 'yes' ? 'active' : '';
 								?>
                                 <div class="eael-circle-item elementor-repeater-item-<?php echo $item['_id']; ?>">
-                                    <div class="eael-circle-btn" id="eael-circle-item-<?php echo $item_count; ?>">
+                                    <div class="eael-circle-btn <?php echo $is_active; ?>" id="eael-circle-item-<?php echo $item_count; ?>">
                                         <div class="eael-circle-icon-shapes">
                                             <div class="eael-shape-1"></div>
                                             <div class="eael-shape-2"></div>
@@ -888,7 +962,7 @@ class Interactive_Circle extends Widget_Base {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="eael-circle-btn-content eael-circle-item-<?php echo $item_count; ?>">
+                                    <div class="eael-circle-btn-content eael-circle-item-<?php echo $item_count . ' ' . $is_active; ?>">
                                         <div class="eael-circle-content">
 											<?php echo $item['eael_interactive_circle_item_content'] ?>
                                         </div>

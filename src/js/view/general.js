@@ -125,6 +125,14 @@ jQuery(window).on("elementor/frontend/init", function () {
 		try {
 			if (isStartWithHash && ($(hashURL).hasClass('eael-tab-item-trigger') || $(hashURL).hasClass('eael-accordion-header'))) {
 				$(hashURL).trigger('click');
+
+				if (typeof hashURL !== 'undefined' && hashURL) {
+					let idOffset = $(hashURL).closest('.eael-advance-tabs').data('custom-id-offset');
+					idOffset = idOffset ? parseFloat(idOffset) : 0;
+					$('html, body').animate({
+						scrollTop: $(hashURL).offset().top - idOffset,
+					}, 300);
+				}
 			}
 		} catch (err) {
 			// nothing to do

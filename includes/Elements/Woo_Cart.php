@@ -913,6 +913,30 @@ class Woo_Cart extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_woo_cart_auto_cart_update',
+			[
+				'label'        => esc_html__( 'Automatically Cart Update', 'essential-addons-for-elementor-lite' ),
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cart_auto_cart_update_notice',
+			[
+				'type' => Controls_Manager::RAW_HTML,
+				'raw' => __('Note: By Enabling this the cart is automatically updated when quantity will updated.', 'essential-addons-for-elementor-lite'),
+				'content_classes' => 'eael-warning',
+				'condition' => [
+					'eael_woo_cart_auto_cart_update' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
 			'eael_woo_cart_components_cart_clear_button',
 			[
 				'label'        => esc_html__( 'Cart Clear Button', 'essential-addons-for-elementor-lite' ),
