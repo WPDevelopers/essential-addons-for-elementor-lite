@@ -348,7 +348,7 @@ class Cta_Box extends Widget_Base
                 'dynamic' => ['active' => true],
                 'label_block' => true,
                 'default' => [
-                    'url' => 'http://',
+                    'url' => '#',
                     'is_external' => '',
                 ],
                 'show_external' => true,
