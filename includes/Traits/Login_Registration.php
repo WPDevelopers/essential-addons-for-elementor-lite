@@ -132,9 +132,11 @@ trait Login_Registration {
 		do_action( 'eael/login-register/before-login', $_POST, $settings, $this );
 
 		$widget_id = ! empty( $_POST['widget_id'] ) ? sanitize_text_field( $_POST['widget_id'] ) : '';
+		
 		//v2 or v3 
-		if ( isset( $_POST['g-recaptcha-enabled'] ) ) {
-			$ld_recaptcha_version = ( isset( $settings['login_recaptcha_version'] ) && 'v3' === $settings['login_recaptcha_version'] ) ? 'v3' : 'v2';
+		$is_version_3 = isset( $settings['login_register_recaptcha_version'] ) && 'v3' === $settings['login_register_recaptcha_version'];
+		if ( 'yes' === $settings[ "enable_register_recaptcha" ] || $is_version_3 ) {
+			$ld_recaptcha_version = $is_version_3 ? 'v3' : 'v2';
 			
 			if( ! $this->lr_validate_recaptcha($ld_recaptcha_version) ) {
 				$err_msg = isset( $settings['err_recaptcha'] ) ? Helper::eael_wp_kses( $settings['err_recaptcha'] ) : __( 'You did not pass recaptcha challenge.', 'essential-addons-for-elementor-lite' );
