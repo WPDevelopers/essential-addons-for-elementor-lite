@@ -488,6 +488,17 @@
 		}
 	});
 	
+	$(document).on('change', '#lr_custom_profile_fields', function (e) {
+		let $this = $(this),
+		    custom_profile_fields = $this.prop('checked');
+
+		if( custom_profile_fields ){
+			$(document).find('.lr_custom_profile_fields_child').removeClass('eael-d-none');
+		} else {
+			$(document).find('.lr_custom_profile_fields_child').addClass('eael-d-none');
+		}
+	});
+
 	$(document).on('click', '.eael-setup-wizard-save', function (e) {
 		e.preventDefault();
 		var $this = $(this);

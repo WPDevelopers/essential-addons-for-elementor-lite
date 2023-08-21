@@ -159,6 +159,12 @@
 	.ea-advanced-data-table-pagination {
 		a {
 			display: inline-block;
+			&.ea-adtp-show{
+				display: inline-block;
+			}
+			&.ea-adtp-hide{
+				display: none;
+			}
 		}
 	}
 }
