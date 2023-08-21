@@ -283,7 +283,7 @@ class Cta_Box extends Widget_Base
                 'label' => esc_html__('Content', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::WYSIWYG,
                 'label_block' => true,
-                'default' => esc_html__('Add a strong one liner supporting the heading above and giving users a reason to click on the button below.', 'essential-addons-for-elementor-lite'),
+                'default' => __('<p>Add a strong one liner supporting the heading above and giving users a reason to click on the button below.</p>', 'essential-addons-for-elementor-lite'),
                 'separator' => 'after',
                 'condition' => [
                     'eael_cta_title_content_type' => 'content',
@@ -1466,7 +1466,7 @@ class Cta_Box extends Widget_Base
         // content markup
         $contentMarkup = '';
         if ('content' == $settings['eael_cta_title_content_type']) {
-            $contentMarkup .='<p>'.$settings['eael_cta_content'].'</p>';
+            $contentMarkup .= $settings['eael_cta_content'];
         }else if ('template' == $settings['eael_cta_title_content_type']){
             if (!empty($settings['eael_primary_templates'])) {
                 $eael_template_id = $settings['eael_primary_templates'];
