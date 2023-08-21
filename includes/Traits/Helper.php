@@ -180,8 +180,8 @@ trait Helper
             ?>
             <div class="eael-load-more-button-wrap<?php echo "eael-dynamic-filterable-gallery" == $this->get_name() ? " dynamic-filter-gallery-loadmore" : ""; echo esc_attr( $show_or_hide ); ?>">
                 <button <?php $this->print_render_attribute_string( 'load-more' ); ?>>
-                    <div class="eael-btn-loader button__loader"></div>
-                    <span><?php echo esc_html($settings['show_load_more_text']) ?></span>
+                    <span class="eael-btn-loader button__loader"></span>
+                    <span class="eael_load_more_text"><?php echo esc_html($settings['show_load_more_text']) ?></span>
                 </button>
             </div>
         <?php }

@@ -6,7 +6,7 @@
 		e.stopPropagation();
 		e.stopImmediatePropagation();
 		var $this = $(this),
-			$LoaderSpan = $("span", $this),
+			$LoaderSpan = $(".eael_load_more_text", $this),
 			$text = $LoaderSpan.html(),
 			$widget_id = $this.data("widget"),
 			$page_id = $this.data("page-id"),
