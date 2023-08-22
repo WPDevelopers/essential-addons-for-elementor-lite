@@ -93,7 +93,7 @@ msgstr ""
 msgid "Install Now!"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:151, ../includes/Classes/WPDeveloper_Plugin_Installer.php:169, ../includes/Classes/WPDeveloper_Plugin_Installer.php:188, ../includes/Classes/WPDeveloper_Setup_Wizard.php:522, ../includes/Classes/WPDeveloper_Setup_Wizard.php:548, ../includes/Traits/Ajax_Handler.php:872, ../includes/Traits/Ajax_Handler.php:1028, ../includes/Traits/Ajax_Handler.php:1058, ../includes/Traits/Ajax_Handler.php:1075, ../includes/Traits/Helper.php:347
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:151, ../includes/Classes/WPDeveloper_Plugin_Installer.php:169, ../includes/Classes/WPDeveloper_Plugin_Installer.php:188, ../includes/Classes/WPDeveloper_Setup_Wizard.php:522, ../includes/Classes/WPDeveloper_Setup_Wizard.php:548, ../includes/Traits/Ajax_Handler.php:891, ../includes/Traits/Ajax_Handler.php:1047, ../includes/Traits/Ajax_Handler.php:1077, ../includes/Traits/Ajax_Handler.php:1094, ../includes/Traits/Helper.php:352
 msgid "you are not allowed to do this action"
 msgstr ""
 
@@ -145,11 +145,11 @@ msgstr ""
 msgid "Go Pro Logo"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:149, ../includes/Traits/Helper.php:585
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:149, ../includes/Traits/Helper.php:590
 msgid "Previous"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:152, ../includes/Traits/Helper.php:586
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:152, ../includes/Traits/Helper.php:591
 msgid "Next"
 msgstr ""
 
@@ -229,7 +229,7 @@ msgstr ""
 msgid "Upgrade to PRO"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:324, ../includes/Traits/Helper.php:323, ../includes/templates/admin/general.php:31
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:324, ../includes/Traits/Helper.php:328, ../includes/templates/admin/general.php:31
 msgid "Install Templately"
 msgstr ""
 
@@ -257,7 +257,7 @@ msgstr ""
 msgid "Add Team Members & Collaborate On Cloud With Templately WorkSpace"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:378, ../includes/Traits/Admin.php:285, ../includes/Traits/Admin.php:420, ../includes/Traits/Helper.php:550, ../includes/templates/admin/integrations.php:83
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:378, ../includes/Traits/Admin.php:285, ../includes/Traits/Admin.php:420, ../includes/Traits/Helper.php:555, ../includes/templates/admin/integrations.php:83
 msgid "Activate"
 msgstr ""
 
@@ -346,7 +346,7 @@ msgstr ""
 msgid "Best Link Shortening tool to create, shorten and manage any URL to help you cross-promote your brands & products. Gather analytics reports, run successfully marketing campaigns easily & many more."
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:483, ../includes/Traits/Helper.php:555, ../includes/templates/admin/integrations.php:56
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:483, ../includes/Traits/Helper.php:560, ../includes/templates/admin/integrations.php:56
 msgid "Essential Blocks"
 msgstr ""
 
@@ -1334,7 +1334,7 @@ msgstr ""
 msgid "File Not Found"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Category_Box.php:1188, ../includes/Elements/Betterdocs_Category_Box.php:1153, ../includes/Elements/Betterdocs_Category_Grid.php:1690, ../includes/Elements/Betterdocs_Category_Grid.php:1657, ../includes/Elements/Post_Grid.php:1125, ../includes/Elements/Post_Timeline.php:788, ../includes/Elements/Product_Grid.php:3160, ../includes/Elements/Woo_Product_Gallery.php:2492, ../includes/Traits/Ajax_Handler.php:263
+#: ../includes/Elements/Betterdocs_Category_Box.php:1188, ../includes/Elements/Betterdocs_Category_Box.php:1153, ../includes/Elements/Betterdocs_Category_Grid.php:1690, ../includes/Elements/Betterdocs_Category_Grid.php:1657, ../includes/Elements/Post_Grid.php:1125, ../includes/Elements/Post_Timeline.php:788, ../includes/Elements/Product_Grid.php:3160, ../includes/Traits/Ajax_Handler.php:263
 msgid "<p class=\"no-posts-found\">No posts found!</p>"
 msgstr ""
 
@@ -6465,7 +6465,7 @@ msgstr ""
 msgid "Timeline Vertical Line Color"
 msgstr ""
 
-#: ../includes/Elements/Post_Timeline.php:792, ../includes/Elements/Product_Grid.php:3164, ../includes/Elements/Woo_Product_Gallery.php:2495
+#: ../includes/Elements/Post_Timeline.php:792, ../includes/Elements/Product_Grid.php:3164
 msgid "<p class=\"no-posts-found\">No layout found!</p>"
 msgstr ""
 
@@ -8774,6 +8774,14 @@ msgstr ""
 msgid "Show Link?"
 msgstr ""
 
+#: ../includes/Elements/Woo_Product_Gallery.php:2497
+msgid "No Layout Found"
+msgstr ""
+
+#: ../includes/Elements/Woo_Product_Gallery.php:2492
+msgid "No Product Found"
+msgstr ""
+
 #: ../includes/Elements/WpForms.php:77
 msgid "<strong>WPForms</strong> is not installed/activated on your site. Please install and activate <strong>WPForms</strong> first."
 msgstr ""
@@ -9238,7 +9246,7 @@ msgstr ""
 msgid "Widget settings are not found. Did you save the widget before using load more??"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:915
+#: ../includes/Traits/Ajax_Handler.php:934
 msgid "Login | Register Settings updated"
 msgstr ""
 
@@ -9618,99 +9626,99 @@ msgstr ""
 msgid "Essential Addons for Elementor"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:261
+#: ../includes/Traits/Helper.php:266
 msgid "Quantity update failed."
 msgstr ""
 
-#: ../includes/Traits/Helper.php:250
+#: ../includes/Traits/Helper.php:255
 msgid "Quantity updated successfully."
 msgstr ""
 
-#: ../includes/Traits/Helper.php:305
+#: ../includes/Traits/Helper.php:310
 msgid "4,000+ Stunning Templates"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:306
+#: ../includes/Traits/Helper.php:311
 msgid "Supports Elementor & Gutenberg"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:307
+#: ../includes/Traits/Helper.php:312
 msgid "Powering up 200,000+ Websites"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:308
+#: ../includes/Traits/Helper.php:313
 msgid "Cloud Collaboration with Team"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:317
+#: ../includes/Traits/Helper.php:322
 msgid "Don’t Show This Again"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:329
+#: ../includes/Traits/Helper.php:334
 msgid "Activate Templately"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:326
+#: ../includes/Traits/Helper.php:331
 msgid "Activated Templately"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:332, ../includes/templates/admin/popup.php:293
+#: ../includes/Traits/Helper.php:337, ../includes/templates/admin/popup.php:293
 msgid "Submit"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:488
+#: ../includes/Traits/Helper.php:493
 msgid "<p> <i>📣</i> NEW: Essential Addons Pro 5.5 is here, with new '<a target='_blank' href='%s'>Woo Thank You</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:550
+#: ../includes/Traits/Helper.php:555
 msgid "Try Essential Blocks"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:563
+#: ../includes/Traits/Helper.php:568
 msgid "Close dialog"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:578, ../includes/Traits/Helper.php:598
+#: ../includes/Traits/Helper.php:583, ../includes/Traits/Helper.php:603
 msgid "Supercharge Your Gutenberg Experience With Essential Blocks"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:579, ../includes/Traits/Helper.php:599
+#: ../includes/Traits/Helper.php:584, ../includes/Traits/Helper.php:604
 msgid "If you like Essential Addons for Elementor, check out Essential Blocks, the ultimate block library for Gutenberg that is trusted by more than 60,000+ web creators."
 msgstr ""
 
-#: ../includes/Traits/Helper.php:584, ../includes/Traits/Helper.php:653
+#: ../includes/Traits/Helper.php:589, ../includes/Traits/Helper.php:658
 msgid "Never Show Again"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:611
+#: ../includes/Traits/Helper.php:616
 msgid "40+ Amazing Gutenberg Blocks"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:612
+#: ../includes/Traits/Helper.php:617
 msgid "Create & design your WordPress websites just the way you want with more than 40 amazing, ready blocks from Essential Blocks for Gutenberg."
 msgstr ""
 
-#: ../includes/Traits/Helper.php:624
+#: ../includes/Traits/Helper.php:629
 msgid "Useful Block Control Option"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:625
+#: ../includes/Traits/Helper.php:630
 msgid "Get the fastest loading time and smoothest experience on your web page by enabling and disabling individual blocks as per your requirements."
 msgstr ""
 
-#: ../includes/Traits/Helper.php:637
+#: ../includes/Traits/Helper.php:642
 msgid "Access To Thousands Of Ready Gutenberg Templates"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:638
+#: ../includes/Traits/Helper.php:643
 msgid "Design unique websites using ready Gutenberg templates from Templately with absolute ease and instantly grab attention."
 msgstr ""
 
-#: ../includes/Traits/Helper.php:650
+#: ../includes/Traits/Helper.php:655
 msgid "Try Essential Blocks Today!"
 msgstr ""
 
-#: ../includes/Traits/Helper.php:651
+#: ../includes/Traits/Helper.php:656
 msgid "Want to get started with Essential Blocks now? Check out %scomplete guides for each blocks%s to learn more about this ultimate block library for Gutenberg."
 msgstr ""
 
