@@ -1044,6 +1044,8 @@ class Cta_Box extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-call-to-action.cta-preset-1:not(.cta-preset-2) .cta-button:after:not(.cta-secondary-button)' => 'background: {{VALUE}};',
                     '{{WRAPPER}} .eael-call-to-action.cta-preset-1:not(.cta-preset-2) .cta-button:hover:not(.cta-secondary-button)' => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .eael-call-to-action .cta-button.effect-1:after' => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .eael-call-to-action .cta-button.effect-2:after' => 'background: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_cta_btn_is_used_gradient_bg' => '',
