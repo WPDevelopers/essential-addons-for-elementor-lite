@@ -3087,6 +3087,9 @@ class Woo_Checkout extends Widget_Base {
 			$checkout_field_keys['billing'] = wp_list_pluck( $settings[ 'ea_billing_fields_list' ], 'field_class', 'field_key' );
 			$checkout_field_keys['shipping'] = wp_list_pluck( $settings[ 'ea_shipping_fields_list' ], 'field_class', 'field_key' );
 
+			$checkout_field_labels['billing'] = wp_list_pluck( $settings[ 'ea_billing_fields_list' ], 'field_label', 'field_key' );
+			$checkout_field_labels['shipping'] = wp_list_pluck( $settings[ 'ea_shipping_fields_list' ], 'field_label', 'field_key' );
+
 
 			$extra_billing_fields = array_diff( array_keys($fields['billing']), array_keys($checkout_field_keys['billing']) );
 			if ( count($extra_billing_fields) > 0 ){
@@ -3117,6 +3120,7 @@ class Woo_Checkout extends Widget_Base {
 			}
 
 			$this->add_render_attribute( 'container', 'data-checkout_ids', json_encode($checkout_field_keys) );
+			$this->add_render_attribute( 'container', 'data-checkout_labels', json_encode($checkout_field_labels) );
 		}
 
 		$button_texts = [

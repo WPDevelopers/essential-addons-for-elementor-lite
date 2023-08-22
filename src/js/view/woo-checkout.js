@@ -81,6 +81,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 if ( jQuery('.ea-woo-checkout').hasClass('checkout-reorder-enabled') ) {
 	jQuery(document.body).on('country_to_state_changing', function (event, country, wrapper) {
 		let $ = jQuery, checkout_keys = $('.ea-woo-checkout').data('checkout_ids'),
+			checkout_labels = $('.ea-woo-checkout').data('checkout_labels'),
 			field_wrapper = $('.ea-woo-checkout .woocommerce-billing-fields__field-wrapper, .ea-woo-checkout .woocommerce-shipping-fields__field-wrapper');
 		field_wrapper.addClass('eael-reordering');
 		let reorder_fields = function (type, _wrapper) {
@@ -91,6 +92,8 @@ if ( jQuery('.ea-woo-checkout').hasClass('checkout-reorder-enabled') ) {
 				if ($fieldHtml.length === 0) {
 					$fieldHtml = _wrapper.find(`input[name='${field_key}']`).closest('p');
 				}
+				let extTetxt = $fieldHtml.find('label').find('.required, .optional');
+				$fieldHtml.find('label').text( checkout_labels[type][field_key] ).append( extTetxt[0] );
 				$fieldHtml.removeClass('form-row-first form-row-last form-row-wide').addClass(form_class);
 				$(`#eael-wc-${type}-reordered-fields .eael-woo-${type}-fields`).append($fieldHtml);
 			});
