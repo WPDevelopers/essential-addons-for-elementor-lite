@@ -2971,7 +2971,7 @@ msgid "Event Link"
 msgstr ""
 
 #: ../includes/Elements/Event_Calendar.php:178
-msgid "https://sample-domain.com"
+msgid "https://example.com"
 msgstr ""
 
 #: ../includes/Elements/Event_Calendar.php:186
