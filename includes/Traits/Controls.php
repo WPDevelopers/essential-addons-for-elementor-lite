@@ -1320,11 +1320,14 @@ trait Controls
 	        $post_types_tax = [];
 
 	        foreach ( $taxonomies as $taxonomy => $object ) {
-		        if ( ! isset( $object->object_type[0] ) || ! in_array( $object->object_type[0], array_keys( $post_types ) ) ) {
-			        continue;
-		        }
-
-		        $post_types_tax[ $object->object_type[0] ][ $taxonomy ] = $object->label;
+                if( isset( $object->object_type ) && is_array( $object->object_type ) && count( $object->object_type ) ){
+                    foreach( $object->object_type as $object_type ){
+                        if ( ! in_array( $object_type, array_keys( $post_types ) ) ) { 
+                            continue;
+                        }
+                        $post_types_tax[ $object_type ][ $taxonomy ] = $object->label;
+                    }
+                }
 	        }
 
 	        foreach ( $post_types as $post_type => $post_taxonomies ) {
