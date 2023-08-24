@@ -43,7 +43,7 @@ ea.hooks.addAction("init", "ea", () => {
 				//
 				setTimeout(() => {
 					$('html, body').animate({
-						scrollTop: $this.offset().top
+						scrollTop: $this.offset().top - $customIdOffset
 					}, 500);
 				}, 500);
 
