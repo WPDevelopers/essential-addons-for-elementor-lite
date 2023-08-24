@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.3
 Requires PHP: 7.0
-Stable tag: 5.8.6
+Stable tag: 5.8.7
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -250,6 +250,16 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.8.7 - 24/08/2023 =
+
+- Fixed: EA BetterDocs Category Box/List | Missing BetterDocs Category Icon
+- Fixed: EA Call to Action | Primary Button Style Effect BG Color not working
+- Fixed: EA Woo Product Gallery | filtering not working properly
+- Fixed: EA Business Reviews | Throwing JS console errors 
+- Fixed: EA Advanced Data Table | Missing Media Preview
+- Fixed: EA WPForms | Color & typography not changing on "Name" label
+- Few minor bug fixes & improvements
 
 = 5.8.6 - 10/08/2023 =
 
