@@ -17,7 +17,7 @@ echo '<article class="eael-better-docs-category-grid-post" data-id="' . get_the_
                         if ($cat_icon_id) {
                             $cat_icon = wp_get_attachment_image($cat_icon_id, 'thumbnail', ['alt' => esc_attr(get_post_meta($cat_icon_id, '_wp_attachment_image_alt', true))]);
                         } else {
-                            $cat_icon = '<img src="' . BETTERDOCS_ADMIN_URL . 'assets/img/betterdocs-cat-icon.svg" alt="betterdocs-category-grid-icon">';
+                            $cat_icon = '<img src="' . EAEL_PLUGIN_URL . 'assets/front-end/img/betterdocs-cat-icon.svg" alt="betterdocs-category-grid-icon">';
                         }
 
                         echo '<div class="eael-docs-cat-icon">' . $cat_icon . '</div>';
