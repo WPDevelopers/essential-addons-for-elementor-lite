@@ -69,7 +69,7 @@ class Migration
 	}
 
 
-	public function reduce_options_data( ) {
+	public function reduce_options_data() {
 		$status = get_transient( 'eael_reduce_op_table_data' );
 		if ( $status ) {
 			return false;
@@ -95,5 +95,6 @@ class Migration
 		}
 
 		set_transient( 'eael_reduce_op_table_data', 1, DAY_IN_SECONDS );
+		wp_clear_scheduled_hook( 'eael_remove_unused_options_data' );
 	}
 }
