@@ -528,7 +528,7 @@ class WpForms extends Widget_Base {
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-wpforms .wpforms-field label' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-wpforms .wpforms-field label, {{WRAPPER}} .eael-wpforms .wpforms-field legend' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -538,7 +538,7 @@ class WpForms extends Widget_Base {
                 'label'             => __('Text Color', 'essential-addons-for-elementor-lite'),
                 'type'              => Controls_Manager::COLOR,
                 'selectors'         => [
-                    '{{WRAPPER}} .eael-wpforms .wpforms-field label' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-wpforms .wpforms-field label, {{WRAPPER}} .eael-wpforms .wpforms-field legend' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -551,7 +551,7 @@ class WpForms extends Widget_Base {
                 'global' => [
 	                'default' => Global_Typography::TYPOGRAPHY_ACCENT
                 ],
-                'selector'          => '{{WRAPPER}} .eael-wpforms .wpforms-field label',
+                'selector'          => '{{WRAPPER}} .eael-wpforms .wpforms-field label, {{WRAPPER}} .eael-wpforms .wpforms-field legend',
             ]
         );
 
