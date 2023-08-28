@@ -1136,7 +1136,7 @@ $config = [
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PRO_PLUGIN_PATH . 'assets/front-end/js/view/chart.min.js',
+                        'file'    => EAEL_PRO_PLUGIN_PATH . 'assets/front-end/js/view/fancy-chart.min.js',
                         'type'    => 'self',
                         'context' => 'view',
                     ],
