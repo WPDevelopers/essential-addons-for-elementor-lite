@@ -75,7 +75,7 @@ class Woo_Product_Carousel extends Widget_Base {
     }
 
 	public function get_categories() {
-		return [ 'essential-addons-elementor', 'woocommerce-elements-single' ];
+		return [ 'essential-addons-elementor', 'woocommerce-elements' ];
 	}
 
 	/**
