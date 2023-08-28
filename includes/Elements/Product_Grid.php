@@ -66,10 +66,9 @@ class Product_Grid extends Widget_Base
         return 'eaicon-product-grid';
     }
 
-    public function get_categories()
-    {
-        return ['essential-addons-elementor'];
-    }
+	public function get_categories() {
+		return [ 'essential-addons-elementor', 'woocommerce-elements-single' ];
+	}
 
     public function get_keywords()
     {
