@@ -1497,8 +1497,6 @@ trait Login_Registration {
 	}
 
 	public function lr_validate_recaptcha($version = 'v2') {
-		// print_r($_REQUEST);
-		// wp_die('okk');
 		if ( ! isset( $_REQUEST['g-recaptcha-response'] ) ) {
 			return false;
 		}
