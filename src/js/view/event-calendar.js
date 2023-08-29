@@ -11,7 +11,7 @@ var EventCalendar = function ($scope, $) {
 		translate = element.data("translate"),
 		defaultView = element.data("defaultview"),
 		defaultDate = element.data("defaultdate"),
-		multiDaysEventDayCount = typeof element.data("multiDaysEventDayCount") !== 'undefined' ? element.data("multiDaysEventDayCount") : 0,
+		multiDaysEventDayCount = typeof element.data("multidays_event_day_count") !== 'undefined' ? element.data("multidays_event_day_count") : 0,
 		eventLimit = element.data("event_limit"),
 		time_format = element.data("time_format") == "yes" ? true : false;
 
