@@ -158,23 +158,23 @@ trait Helper
 	        unset( $args['found_posts'] );
         }
 
-        $this->add_render_attribute('load-more', [
-            'class'          => "eael-load-more-button",
-            'id'             => "eael-load-more-btn-" . $this->get_id(),
-            'data-widget-id' => $this->get_id(),
-            'data-widget' => $this->get_id(),
-            'data-page-id'   => $this->page_id,
-            'data-nonce'     => wp_create_nonce( 'load_more' ),
-            'data-template'  => json_encode([
-                'dir'   => $plugin_type,
-                'file_name' => $settings['loadable_file_name'],
-                'name' => $this->process_directory_name() ],
-                1),
-            'data-class'    => get_class( $this ),
-            'data-layout'   => isset($settings['layout_mode']) ? $settings['layout_mode'] : "",
-            'data-page'     => 1,
-            'data-args'     => http_build_query( $args ),
-        ]);
+	    $this->add_render_attribute( 'load-more', [
+		    'class'          => "eael-load-more-button",
+		    'id'             => "eael-load-more-btn-" . $this->get_id(),
+		    'data-widget-id' => $this->get_id(),
+		    'data-widget'    => $this->get_id(),
+		    'data-page-id'   => $this->page_id,
+		    'data-template'  => json_encode( [
+			    'dir'       => $plugin_type,
+			    'file_name' => $settings['loadable_file_name'],
+			    'name'      => $this->process_directory_name()
+		    ],
+			    1 ),
+		    'data-class'     => get_class( $this ),
+		    'data-layout'    => isset( $settings['layout_mode'] ) ? $settings['layout_mode'] : "",
+		    'data-page'      => 1,
+		    'data-args'      => http_build_query( $args ),
+	    ] );
 
 	    if ( $max_page ) {
 		    $this->add_render_attribute( 'load-more', [ 'data-max-page' => $max_page ] );
