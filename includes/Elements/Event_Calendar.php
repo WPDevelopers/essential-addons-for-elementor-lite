@@ -644,6 +644,21 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_event_multi_days_event_day_count',
+            [
+                'label' => __('Multi-Days Event Day Count', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_block' => false,
+                'return_value' => 'yes',
+                'description' => __('Extra text "Day Count/Event Total Days" will be added in the event title', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                    'eael_event_calendar_default_view' => 'listMonth',
+                    'eael_event_calendar_type' => 'google',
+                ]
+            ]
+        );
+
 	    $this->add_control(
 		    'eael_event_details_text',
 		    [
