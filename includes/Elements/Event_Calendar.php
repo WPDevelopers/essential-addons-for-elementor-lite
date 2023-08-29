@@ -2986,6 +2986,7 @@ class Event_Calendar extends Widget_Base
             data-defaultdate = "' . $default_date . '"
             data-time_format = "' . $time_format . '"
             data-event_limit = "' . $event_limit . '"
+            data-multiDaysEventDayCount= "' . ! empty( $settings['eael_event_multi_days_event_day_count'] ) && 'yes' === $settings['eael_event_multi_days_event_day_count'] ? 1 : 0 . '"
             data-hideDetailsLink= "' . $settings['eael_event_details_link_hide'] . '"
             data-detailsButtonText = "' . Helper::eael_wp_kses( $settings['eael_event_details_text'] ) . '"
             data-events="' . htmlspecialchars( json_encode( $data ), ENT_QUOTES, 'UTF-8' ) . '"
