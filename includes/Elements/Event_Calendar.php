@@ -3249,7 +3249,6 @@ class Event_Calendar extends Widget_Base
         $random_color_index = 0;
 
         if (isset($data->items)) {
-
             foreach ($data->items as $key => $item) {
                 if ($item->status !== 'confirmed') {
 //                    continue;
