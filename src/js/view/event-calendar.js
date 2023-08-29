@@ -44,7 +44,7 @@ var EventCalendar = function ($scope, $) {
 						event = info.event;
 					moment.locale(locale);
 
-					if(event.endStr > event.startStr){
+					if(multiDaysEventDayCount && event.endStr > event.startStr){
 						let startDate 	= typeof event.startStr !== 'undefined' ? new Date(event.startStr) : '';
 						let endDate 	= typeof event.endStr 	!== 'undefined' ? new Date(event.endStr) : '';
 						
