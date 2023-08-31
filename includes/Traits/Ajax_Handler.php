@@ -66,6 +66,7 @@ trait Ajax_Handler {
 
 		add_action( 'wp_ajax_eael_get_token', [ $this, 'eael_get_token' ] );
 		add_action( 'wp_ajax_nopriv_eael_get_token', [ $this, 'eael_get_token' ] );
+		add_action( 'wp_ajax_nopriv_eael_get_login_error', [ $this, 'eael_get_login_error' ] );
 
 		add_action( 'eael_before_woo_pagination_product_ajax_start', [ $this, 'eael_yith_wcwl_ajax_disable' ] );
 		add_action( 'eael_before_ajax_load_more', [ $this, 'eael_yith_wcwl_ajax_disable' ] );
@@ -1098,5 +1099,18 @@ trait Ajax_Handler {
 		add_filter( 'option_yith_wcwl_ajax_enable', function ( $data ) {
 			return 'no';
 		} );
+	}
+
+	public function eael_get_login_error() {
+		if ( wp_verify_nonce( $_POST['nonce'], 'essential-addons-elementor' ) ) {
+			if ( empty( $_POST['widget_id'] ) ) {
+				return;
+			}
+
+			$option_name = 'eael_login_error_' . sanitize_text_field( $_POST['widget_id'] );
+			$message     = get_option( $option_name );
+			delete_option( $option_name );
+			wp_send_json( $message );
+		}
 	}
 }

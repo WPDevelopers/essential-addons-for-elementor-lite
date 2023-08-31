@@ -170,6 +170,21 @@ ea.hooks.addAction("init", "ea", () => {
             eaelGetTokenPromise.then(function (updatedNonce) {
                 $('#eael-login-nonce, #eael-register-nonce, #eael-lostpassword-nonce, #eael-resetpassword-nonce').val(updatedNonce);
             });
+
+            $.ajax({
+                url: localize.ajaxurl,
+                type: "post",
+                data: {
+                    action: "eael_get_login_error",
+                    nonce: localize.nonce,
+                    widget_id: widgetId
+                },
+                success: function (response) {
+                    if (response) {
+                        $('.eael-form-validation-container', $scope).html(`<p class="eael-form-msg invalid">${response}</p>`);
+                    }
+                }
+            });
         });
 
         // reCAPTCHA
