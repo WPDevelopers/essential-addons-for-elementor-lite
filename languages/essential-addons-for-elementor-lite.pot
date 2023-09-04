@@ -9802,7 +9802,7 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:1597
+#: ../includes/Traits/Login_Registration.php:1595
 msgid "Above, input the %s of the attachment."
 msgstr ""
 
