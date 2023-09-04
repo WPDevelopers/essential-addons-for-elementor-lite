@@ -561,7 +561,7 @@ trait Ajax_Handler {
 
 		global $post, $product;
 		$product = wc_get_product( $product_id );
-		$order 	= OrderUtil::custom_orders_table_usage_is_enabled() ? wc_get_order( $product_id ) : get_post( $product_id );
+		$post    = get_post( $product_id );
 		setup_postdata( $post );
 
 		$settings = $this->eael_get_widget_settings( $page_id, $widget_id );
