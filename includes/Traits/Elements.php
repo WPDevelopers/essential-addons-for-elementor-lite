@@ -329,6 +329,12 @@ trait Elements {
 				'icon'       => 'eaicon-thank-you',
 				'categories' => '["essential-addons-elementor"]',
 			],
+			[
+				'name'       => 'eael-woo-cross-sells',
+				'title'      => __( 'Woo Cross Sells', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eaicon-woo-cross-sells',
+				'categories' => '["essential-addons-elementor"]',
+			],
 		] );
 
 		$config['promotionWidgets'] = $combine_array;
