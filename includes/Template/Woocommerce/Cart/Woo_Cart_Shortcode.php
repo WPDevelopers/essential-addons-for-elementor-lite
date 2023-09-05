@@ -44,10 +44,10 @@ if ( class_exists( '\WC_Shortcode_Cart' ) ) {
 
 			// Calc totals.
 			WC()->cart->calculate_totals();
-
+			$auto_update = $settings['eael_woo_cart_auto_cart_update'] === 'yes' ? 'eael-auto-update' : '';
 			if ( WC()->cart->is_empty() ) { ?>
-                <div class="eael-woo-cart-wrapper eael-woo-cart-empty <?php echo esc_attr( "eael-woo-{$settings['ea_woo_cart_layout']}" ); ?>">
-					<?php wc_get_template( 'cart/cart-empty.php' ); ?>
+				<div class="eael-woo-cart-wrapper eael-woo-cart-empty <?php echo esc_attr( printf( '%s %s', "eael-woo-{$settings['ea_woo_cart_layout']}", $auto_update ) ); ?>">
+				<?php wc_get_template( 'cart/cart-empty.php' ); ?>
                 </div>
 				<?php
 			} else {
@@ -67,7 +67,7 @@ if ( class_exists( '\WC_Shortcode_Cart' ) ) {
 					}
 				}
 				?>
-                <div class="eael-woo-cart-wrapper <?php echo esc_attr( "eael-woo-{$settings['ea_woo_cart_layout']} {$style_two_wrapper_class}" ); ?>">
+                <div class="eael-woo-cart-wrapper <?php echo esc_attr( printf( '%s %s %s', "eael-woo-{$settings['ea_woo_cart_layout']}", $auto_update, $style_two_wrapper_class ) ); ?>">
 					<?php
 					do_action( 'woocommerce_before_cart' );
 
