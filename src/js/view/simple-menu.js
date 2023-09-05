@@ -293,26 +293,12 @@ var SimpleMenu = function ($scope, $) {
         })
     })
 
-    // menu dropdown toggle
-    $('.eael-simple-menu', $scope).on(
-        'click',
-        '.eael-simple-menu-indicator',
-        function (e) {
-            e.preventDefault()
-            $(this).toggleClass('eael-simple-menu-indicator-open')
-            $(this).hasClass('eael-simple-menu-indicator-open')
-                ? $(this).siblings('ul').slideDown(300)
-                : $(this).siblings('ul').slideUp(300)
-        }
-    )
     // main menu toggle
     $('.eael-simple-menu-container', $scope).on(
         'click',
-        '.eael-simple-menu-responsive li a',
+        '.eael-simple-menu-responsive li a:not([href="#"])',
         function (e) {
-            if ($(this).attr('href') !== '#') {
-                $(this).parents( selectorByType ).slideUp(300);
-            }
+            $(this).parents(selectorByType).slideUp(300)
         }
     )
 
@@ -321,14 +307,30 @@ var SimpleMenu = function ($scope, $) {
         $(this).siblings('.eael-simple-menu-indicator').click();
     });
 
+
+    // menu dropdown toggle
+    $('.eael-simple-menu', $scope).on('click', '.eael-simple-menu-indicator', function (e) {
+            e.preventDefault();
+            $(this).toggleClass('eael-simple-menu-indicator-open')
+            $(this).hasClass('eael-simple-menu-indicator-open')
+                ? $(this).siblings('ul').slideDown(300)
+                : $(this).siblings('ul').slideUp(300)
+            $('.eael-simple-menu-indicator-open').not($(this).parents('.menu-item-has-children').children('span')).removeClass('eael-simple-menu-indicator-open').siblings('ul').slideUp(300);
+        }
+    );
+
     if ( elementorFrontend.isEditMode() ) {
 		elementor.channels.editor.on( 'change', function( view ) {
 			let changed = view.elementSettingsModel.changed;
 			if ( changed.eael_simple_menu_dropdown ) {
-                let updated_max_width = getHamburgerMaxWidth( $hamburger_breakpoints, changed.eael_simple_menu_dropdown );
-				eael_menu_resize( updated_max_width );
+                elementor.saver.update.apply().then(function () {
+                    elementor.reloadPreview();
+                });
 
-                $hamburger_max_width = updated_max_width;
+                // let updated_max_width = getHamburgerMaxWidth( $hamburger_breakpoints, changed.eael_simple_menu_dropdown );
+				// eael_menu_resize( updated_max_width );
+
+                // $hamburger_max_width = updated_max_width;
 			}
 		});
 	}

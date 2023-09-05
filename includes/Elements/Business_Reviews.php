@@ -123,6 +123,9 @@ class Business_Reviews extends Widget_Base {
 			'placeholder' => esc_html__( 'Place ID', 'essential-addons-for-elementor-lite' ),
 			'label_block' => false,
 			'default'     => '',
+			'dynamic' => [
+				'active' => true,
+			],
 			'condition'   => [
 				'eael_business_reviews_sources' => 'google-reviews',
 			],
@@ -2465,7 +2468,7 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	public function get_business_reviews_settings() {
-		$settings                                     		= $this->get_settings();
+		$settings                                     		= $this->get_settings_for_display();
 		$settings['eael_business_reviews_source_key'] 		= get_option( 'eael_br_google_place_api_key' );
 
 		$business_reviews                            		= [];
@@ -2544,7 +2547,7 @@ class Business_Reviews extends Widget_Base {
 	 * API Call to Get Business Reviews
 	 */
 	public function fetch_business_reviews_from_api() {
-		$settings      = $this->get_settings();
+		$settings      = $this->get_settings_for_display();
 		$response      = [];
 		$error_message = '';
 
@@ -2671,7 +2674,7 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	public function print_business_reviews( $business_reviews_items ) {
-		$settings 			= $this->settings_data         = $this->get_settings();
+		$settings 			= $this->settings_data         = $this->get_settings_for_display();
 		$business_reviews 	= $this->business_reviews_data = $this->get_business_reviews_settings();
 
 		ob_start();
@@ -2719,7 +2722,7 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	public function print_business_reviews_google( $business_reviews_items ) {
-		$settings         = $this->get_settings();
+		$settings         = $this->get_settings_for_display();
 		$business_reviews = $this->get_business_reviews_settings();
 
 		$google_reviews_data = [];
@@ -3345,6 +3348,10 @@ class Business_Reviews extends Widget_Base {
 	}
 
 	protected function render() {
+		$business_reviews = $this->get_business_reviews_settings();
+		if( ! $business_reviews['api_key'] ) {
+			return false;
+		}
 		$business_reviews_items = $this->fetch_business_reviews_from_api();
 		$this->print_business_reviews( $business_reviews_items );
 		$this->print_localbusiness_schema( $business_reviews_items );

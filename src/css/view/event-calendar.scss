@@ -233,6 +233,43 @@
 			}
 		}
 	}
+
+	&.layout-table{
+		table{
+			margin-bottom: 0;
+			tbody{
+				tr{
+					td{
+						.hide{
+							display: none !important;
+						}
+					}
+				}
+			}
+		}
+		.ea-advanced-data-table-search-left {
+			text-align: left;
+		}
+		.ea-advanced-data-table-search-right {
+			text-align: right;
+		}
+		.eael-event-calendar-pagination{
+			border: none !important;
+			padding: 0;
+			span,
+			a{
+				display: inline-block;
+				border: 1px solid #eee;
+				margin: 2px;
+				padding: 3px 8px;
+				font-size: 14px;
+				border-radius: 4px;
+			}
+			a{
+				cursor: pointer;
+			}
+		}
+	}
 }
 .elementor-page .entry-content .eael-event-calendar-wrapper a{
 	text-decoration: none;
