@@ -543,7 +543,7 @@ trait Helper
 	}
 
 	public function essential_blocks_promo_admin_js_template() {
-		$eb_logo          = EAEL_PLUGIN_URL . 'assets/admin/images/eb.svg';
+		$eb_logo          = EAEL_PLUGIN_URL . 'assets/admin/images/eb-new.svg';
 		$eb_promo_cross   = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/cross.svg';
 		$eb_promo_img1    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img1.gif';
 		$eb_promo_img2    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img2.gif';
