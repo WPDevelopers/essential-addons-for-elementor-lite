@@ -252,7 +252,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 5.8.8 - 07/08/2023 =
+= 5.8.8 - 07/09/2023 =
 
 - Fixed: EA Woo Product Grid | Load More button not working properly on responsive devices
 - Few minor bug fixes & improvements
