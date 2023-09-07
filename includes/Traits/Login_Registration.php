@@ -254,9 +254,12 @@ trait Login_Registration {
             }
 		}
 		$page_id = $widget_id = 0;
-        if ( ! empty( $_POST['page_id'] ) ) {
-            $page_id = intval( $_POST['page_id'] );
-        } else {
+		if ( ! empty( $_POST['page_id'] ) ) {
+			$page_id = intval( $_POST['page_id'] );
+			if ( in_array( get_post_status( $page_id ), [ 'future', 'draft', 'pending' ] ) ) {
+				$err_msg = __( 'You have to publish the page first.', 'essential-addons-for-elementor-lite' );
+			}
+		} else {
             $err_msg = __( 'Page ID is missing', 'essential-addons-for-elementor-lite' );
         }
         if ( ! empty( $_POST['widget_id'] ) ) {
