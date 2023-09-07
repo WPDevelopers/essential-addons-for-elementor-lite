@@ -827,6 +827,46 @@ class Interactive_Circle extends Widget_Base {
 				'selector' => '{{WRAPPER}} .eael-circle-content',
 			]
 		);
+
+		$this->add_responsive_control(
+			'eael_interactive_circle_content_icon_size',
+			[
+				'label'      => __( 'Icon Size', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'default'    => [
+					'size' => 50,
+					'unit' => 'px',
+				],
+				'size_units' => [ 'px' ],
+				'range'      => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 500,
+						'step' => 1,
+					],
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-circle-content-icon i'   => 'font-size: {{SIZE}}{{UNIT}}!important;',
+					'{{WRAPPER}} .eael-circle-content-icon svg' => 'width: {{SIZE}}{{UNIT}}!important; height: {{SIZE}}{{UNIT}}!important; min-width: {{SIZE}}{{UNIT}}!important; min-height: {{SIZE}}{{UNIT}}!important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_interactive_circle_content_icon_color',
+			[
+				'label'     => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-content .eael-circle-content-icon i'   => 'color: {{VALUE}}!important;',
+					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-content .eael-circle-content-icon svg' => 'fill: {{VALUE}}!important;',
+				],
+				'condition' => [
+					'eael_interactive_circle_content_icon_show' => 'yes'
+				],
+			]
+		);
+
 		$this->add_responsive_control(
 			'eael_interactive_circle_content_padding',
 			[
@@ -999,13 +1039,13 @@ class Interactive_Circle extends Widget_Base {
                                     </div>
                                     <div class="eael-circle-btn-content eael-circle-item-<?php echo $item_count . ' ' . $is_active; ?>">
                                         <div class="eael-circle-content">
-											<?php 
-											if ( $show_content_icon ) {
-												Icons_Manager::render_icon( $item['eael_interactive_circle_content_icon'] );
-											}
+											<?php if ( $show_content_icon ) : ?>
+												<div class="eael-circle-content-icon">
+													<?php Icons_Manager::render_icon( $item['eael_interactive_circle_content_icon'] ); ?>
+												</div>
+											<?php endif; ?>
 
-											echo $item['eael_interactive_circle_item_content'] 
-											?>
+											<?php echo $item['eael_interactive_circle_item_content'] ?>
                                         </div>
                                     </div>
                                 </div>
