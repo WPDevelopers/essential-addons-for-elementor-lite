@@ -124,7 +124,7 @@ class Interactive_Circle extends Widget_Base {
 			[
 				'label'        => esc_html__( 'Show Icon', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'default'      => 'yes',
+				'default'      => '',
 				'return_value' => 'yes',
 				'condition' => [
 					'eael_interactive_circle_preset'      => 'eael-interactive-circle-preset-2',
@@ -199,6 +199,15 @@ class Interactive_Circle extends Widget_Base {
 		$repeater->end_controls_tab();
 
 		$repeater->start_controls_tab( 'interactive_circle_content_tab', [ 'label' => __( 'Content', 'essential-addons-for-elementor-lite' ) ] );
+
+		$repeater->add_control(
+			'eael_interactive_circle_content_icon',
+			[
+				'name'    => 'eael_interactive_circle_content_icon',
+				'label'   => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::ICONS,
+			]
+		);
 
 		$repeater->add_control(
 			'eael_interactive_circle_item_content',
@@ -908,6 +917,7 @@ class Interactive_Circle extends Widget_Base {
 		$show_btn_icon  = isset( $settings['eael_interactive_circle_btn_icon_show'] ) && 'yes' === $settings['eael_interactive_circle_btn_icon_show'];
 		$show_btn_title = isset( $settings['eael_interactive_circle_btn_text_show'] ) && 'yes' === $settings['eael_interactive_circle_btn_text_show'];
 		$mobile_view 	= isset( $settings['eael_interactive_circle_desktop_view'] ) && 'yes' === $settings['eael_interactive_circle_desktop_view'] ? 'eael-circle-desktop-view' : 'eael-circle-responsive-view';
+		$show_content_icon  = isset( $settings['eael_interactive_circle_content_icon_show'] ) && 'yes' === $settings['eael_interactive_circle_content_icon_show'];
 
 		$this->add_render_attribute( 'eael_circle_wrapper', 'class', $mobile_view );
 
@@ -989,7 +999,13 @@ class Interactive_Circle extends Widget_Base {
                                     </div>
                                     <div class="eael-circle-btn-content eael-circle-item-<?php echo $item_count . ' ' . $is_active; ?>">
                                         <div class="eael-circle-content">
-											<?php echo $item['eael_interactive_circle_item_content'] ?>
+											<?php 
+											if ( $show_content_icon ) {
+												Icons_Manager::render_icon( $item['eael_interactive_circle_content_icon'] );
+											}
+
+											echo $item['eael_interactive_circle_item_content'] 
+											?>
                                         </div>
                                     </div>
                                 </div>
