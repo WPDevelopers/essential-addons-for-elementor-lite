@@ -107,6 +107,31 @@ class Interactive_Circle extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'eael_interactive_circle_content_settings',
+			[
+				'label'     => esc_html__( 'Content', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+				'condition' => [
+					'eael_interactive_circle_preset'      => 'eael-interactive-circle-preset-2',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_interactive_circle_content_icon_show',
+			[
+				'label'        => esc_html__( 'Show Icon', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'default'      => 'yes',
+				'return_value' => 'yes',
+				'condition' => [
+					'eael_interactive_circle_preset'      => 'eael-interactive-circle-preset-2',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 	}
 
