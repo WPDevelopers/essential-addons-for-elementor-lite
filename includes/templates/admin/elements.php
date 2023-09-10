@@ -619,6 +619,14 @@ $elements = [
                 'is_pro'    => true
 			],
 			[
+				'key'       => 'woo-cross-sells',
+				'title'     => __( 'Woo Cross Sells', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/woo-cross-sells/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-woo-cross-sells/',
+				'promotion' => 'new',
+				'is_pro'    => true
+			],
+			[
 				'key'       => 'woo-product-compare',
 				'title'     => __( 'Woo Product Compare', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/woo-product-compare/',
