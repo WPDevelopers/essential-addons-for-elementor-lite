@@ -890,8 +890,8 @@ trait Elements {
 		$eael_stt_button_icon_size_unit     = isset( $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_size']['unit'] ) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_size']['unit'] : 'px';
 		$eael_stt_button_icon_svg_size_size = isset( $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_svg_size']['size'] ) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_svg_size']['size'] : 32;
 		$eael_stt_button_icon_svg_size_unit = isset( $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_svg_size']['unit'] ) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_svg_size']['unit'] : 'px';
-		$eael_stt_button_icon_color         = $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_color'];
-		$eael_stt_button_bg_color           = $eael_scroll_to_top['eael_ext_scroll_to_top_button_bg_color'];
+		$eael_stt_button_icon_color         = isset($eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_color']) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_color'] : '#ffffff';
+		$eael_stt_button_bg_color           = isset($eael_scroll_to_top['eael_ext_scroll_to_top_button_bg_color']) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_bg_color'] : '#000000';
 		$eael_stt_button_border_radius_size = isset( $eael_scroll_to_top['eael_ext_scroll_to_top_button_border_radius']['size'] ) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_border_radius']['size'] : 5;
 		$eael_stt_button_border_radius_unit = isset( $eael_scroll_to_top['eael_ext_scroll_to_top_button_border_radius']['unit'] ) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_border_radius']['unit'] : 'px';
 
