@@ -330,6 +330,12 @@ trait Elements {
 				'categories' => '["essential-addons-elementor"]',
 			],
 			[
+				'name'       => 'eael-woo-cross-sells',
+				'title'      => __( 'Woo Cross Sells', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eaicon-woo-cross-sells',
+				'categories' => '["essential-addons-elementor"]',
+			],
+			[
                 'name'       => 'fancy-chart',
                 'title'      => __( 'Fancy Chart', 'essential-addons-for-elementor-lite' ),
                 'icon'       => 'eicon-elementor-circle',

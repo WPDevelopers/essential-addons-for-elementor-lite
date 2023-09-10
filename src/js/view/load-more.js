@@ -1,6 +1,8 @@
 (function ($) {
 	"use strict";
 
+	ea.getToken();
+
 	$(document).on("click", ".eael-load-more-button", function (e) {
 		e.preventDefault();
 		e.stopPropagation();
@@ -10,7 +12,7 @@
 			$text = $LoaderSpan.html(),
 			$widget_id = $this.data("widget"),
 			$page_id = $this.data("page-id"),
-			$nonce = $this.data("nonce"),
+			$nonce = localize.nonce,
 			$scope = $(".elementor-element-" + $widget_id),
 			$class = $this.data("class"),
 			$args = $this.data("args"),
