@@ -171,7 +171,7 @@ class Bootstrap
         // Elements
         add_action('elementor/elements/categories_registered', array($this, 'register_widget_categories'));
         add_filter('elementor/editor/localize_settings', [$this, 'promote_pro_elements']);
-        add_action('wp_enqueue_scripts', [$this, 'render_global_html_inline_css']);
+        add_action('wp_head', [$this, 'render_global_html_inline_css']);
         add_action('wp_footer', [$this, 'render_global_html']);
         add_action('wp_footer', [$this, 'render_advanced_accordion_global_faq']);
 
