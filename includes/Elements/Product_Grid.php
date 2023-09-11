@@ -465,6 +465,19 @@ class Product_Grid extends Widget_Base
             ],
         ]);
 
+        $this->add_control('product_type_logged_users', [
+            'label' => __('Product Type', 'essential-addons-for-elementor-lite'),
+            'type' => Controls_Manager::SELECT,
+            'description' => __('For logged in users only!', 'essential-addons-for-elementor-lite'),
+            'options' => [
+                'both' => __('Both', 'essential-addons-for-elementor-lite'),
+                'purchased' => __('Purchased Only', 'essential-addons-for-elementor-lite'),
+                'not-purchased' => __('Not Purchased Only', 'essential-addons-for-elementor-lite'),
+            ],
+            'default' => 'both',
+
+        ]);
+
         $this->add_control(
             'eael_dynamic_template_Layout',
             [
