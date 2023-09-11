@@ -144,6 +144,7 @@ jQuery(window).on("elementor/frontend/init", function () {
       $(window).resize(function () {
         element.parent().css("height", element.height() + "px");
       });
+      $(window).trigger('scroll');
     }
   );
 });
