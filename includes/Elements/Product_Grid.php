@@ -470,11 +470,11 @@ class Product_Grid extends Widget_Base
             'type' => Controls_Manager::SELECT,
             'description' => __('For logged in users only!', 'essential-addons-for-elementor-lite'),
             'options' => [
-                'both' => __('Both', 'essential-addons-for-elementor-lite'),
+                '' => __('-', 'essential-addons-for-elementor-lite'),
                 'purchased' => __('Purchased Only', 'essential-addons-for-elementor-lite'),
                 'not-purchased' => __('Not Purchased Only', 'essential-addons-for-elementor-lite'),
             ],
-            'default' => 'both',
+            'default' => '',
 
         ]);
 
@@ -3163,6 +3163,23 @@ class Product_Grid extends Widget_Base
 
                             while ( $query->have_posts() ) {
                                 $query->the_post();
+                                
+                                if ( is_user_logged_in() ) {
+                                    $product_purchase_type = ! empty( $settings['product_type_logged_users'] ) ? sanitize_text_field( $settings['product_type_logged_users'] ) : '';
+
+                                    if (  in_array( $product_purchase_type, ['purchased', 'not-purchased'] ) ) {
+                                        $is_purchased = wc_customer_bought_product( wp_get_current_user()->user_email, get_current_user_id(), get_the_ID() );
+                                        
+                                        if ( 'purchased' === $product_purchase_type && 0 === $is_purchased ){
+                                            continue;
+                                        }
+
+                                        if ( 'not-purchased' === $product_purchase_type && 1 === $is_purchased ){
+                                            continue;
+                                        }
+                                    }
+                                }
+
                                 include( realpath( $template ) );
                             }
                             wp_reset_postdata();
