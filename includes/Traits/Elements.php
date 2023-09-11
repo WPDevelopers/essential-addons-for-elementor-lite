@@ -377,6 +377,21 @@ trait Elements {
 	}
 
 	/**
+	 * Inject global extension html css.
+	 *
+	 * @since v5.8.9
+	 */
+	public function render_global_html_inline_css() {
+		if ( $this->get_settings( 'scroll-to-top' ) == true ) {
+			$global_settings = get_option( 'eael_global_settings' );
+
+			if ( isset( $global_settings['eael_ext_scroll_to_top']['enabled'] ) && $global_settings['eael_ext_scroll_to_top']['enabled'] ) {
+				$this->scroll_to_top_global_css( $global_settings );
+			}
+		}
+	}
+
+	/**
 	 * Inject global extension html.
 	 *
 	 * @since v3.1.4
