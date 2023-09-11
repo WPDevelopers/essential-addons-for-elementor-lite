@@ -470,7 +470,7 @@ class Product_Grid extends Widget_Base
             'type' => Controls_Manager::SELECT,
             'description' => __('For logged in users only!', 'essential-addons-for-elementor-lite'),
             'options' => [
-                '' => __('-', 'essential-addons-for-elementor-lite'),
+                '' => __('Select', 'essential-addons-for-elementor-lite'),
                 'purchased' => __('Purchased Only', 'essential-addons-for-elementor-lite'),
                 'not-purchased' => __('Not Purchased Only', 'essential-addons-for-elementor-lite'),
             ],
@@ -3111,6 +3111,22 @@ class Product_Grid extends Widget_Base
 		    $args = $this->build_product_query( $settings );
 	    }
 
+        if ( is_user_logged_in() ) {
+            $product_purchase_type = ! empty( $settings['product_type_logged_users'] ) ? sanitize_text_field( $settings['product_type_logged_users'] ) : '';
+            
+            if (  in_array( $product_purchase_type, ['purchased', 'not-purchased'] ) ) {
+                $user_ordered_products = HelperClass::eael_get_all_products_ordered_by_user();
+
+                if ( ! empty( $user_ordered_products ) && 'purchased' === $product_purchase_type ){
+                    $args['post__in'] = $user_ordered_products;
+                }
+
+                if ( ! empty( $user_ordered_products ) && 'not-purchased' === $product_purchase_type ){
+                    $args['post__not_in'] = $user_ordered_products;
+                }
+            }
+        }
+
 	    $this->is_show_custom_add_to_cart       = boolval( $settings['show_add_to_cart_custom_text'] );
 	    $this->simple_add_to_cart_button_text   = $settings['add_to_cart_simple_product_button_text'];
 	    $this->variable_add_to_cart_button_text = $settings['add_to_cart_variable_product_button_text'];
@@ -3163,23 +3179,6 @@ class Product_Grid extends Widget_Base
 
                             while ( $query->have_posts() ) {
                                 $query->the_post();
-                                
-                                if ( is_user_logged_in() ) {
-                                    $product_purchase_type = ! empty( $settings['product_type_logged_users'] ) ? sanitize_text_field( $settings['product_type_logged_users'] ) : '';
-
-                                    if (  in_array( $product_purchase_type, ['purchased', 'not-purchased'] ) ) {
-                                        $is_purchased = wc_customer_bought_product( wp_get_current_user()->user_email, get_current_user_id(), get_the_ID() );
-                                        
-                                        if ( 'purchased' === $product_purchase_type && 0 === $is_purchased ){
-                                            continue;
-                                        }
-
-                                        if ( 'not-purchased' === $product_purchase_type && 1 === $is_purchased ){
-                                            continue;
-                                        }
-                                    }
-                                }
-
                                 include( realpath( $template ) );
                             }
                             wp_reset_postdata();
