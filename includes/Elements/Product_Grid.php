@@ -3111,12 +3111,15 @@ class Product_Grid extends Widget_Base
 		    $args = $this->build_product_query( $settings );
 	    }
 
+        $no_products_found = 0;
+
         if ( is_user_logged_in() ) {
             $product_purchase_type = ! empty( $settings['product_type_logged_users'] ) ? sanitize_text_field( $settings['product_type_logged_users'] ) : '';
-            
+
             if (  in_array( $product_purchase_type, ['purchased', 'not-purchased'] ) ) {
                 $user_ordered_products = HelperClass::eael_get_all_products_ordered_by_user();
-
+                $no_products_found = empty( $user_ordered_products ) && 'purchased' === $product_purchase_type ? 1 : 0;
+ 
                 if ( ! empty( $user_ordered_products ) && 'purchased' === $product_purchase_type ){
                     $args['post__in'] = $user_ordered_products;
                 }
@@ -3169,7 +3172,7 @@ class Product_Grid extends Widget_Base
                 if ( file_exists( $template ) ) {
 	                $settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
 	                $query                    = new \WP_Query( $args );
-	                if ( $query->have_posts() ) {
+	                if ( $query->have_posts() && ! $no_products_found ) {
 		                $found_posts        = $query->found_posts;
 		                $max_page           = ceil( $found_posts / absint( $args['posts_per_page'] ) );
 		                $args['max_page']   = $max_page;
