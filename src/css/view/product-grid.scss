@@ -566,32 +566,6 @@
                         padding: 0;
                     }
 
-                    // onsale
-                    .onsale {
-                        display: block;
-                        line-height: 170px;
-                        font-size: 13px;
-                        text-align: center;
-                        letter-spacing: 0;
-                        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.6);
-                        text-transform: uppercase;
-                        color: #fff;
-                        background-color: #ff2a13;
-                        border-radius: 0;
-                        border: none;
-                        box-shadow: none;
-                        position: absolute;
-                        height: 100px;
-                        width: 200px;
-                        z-index: 1;
-                        left: -100px;
-                        top: -50px;
-                        right: auto;
-                        margin: 0;
-                        padding: 0;
-                        transform: rotate(-45deg);
-                    }
-
                     .price {
                         font-size: 14px;
                         margin-bottom: 0;
@@ -777,7 +751,7 @@
 
             .onsale {
                 padding: 5px 10px;
-                font-size: 13px;
+                font-size: 12px;
                 font-weight: 500;
                 position: absolute;
                 text-align: center;
