@@ -144,7 +144,6 @@ jQuery(window).on("elementor/frontend/init", function () {
       $(window).resize(function () {
         element.parent().css("height", element.height() + "px");
       });
-      $(window).trigger('scroll');
     }
   );
 });
@@ -174,6 +173,10 @@ jQuery(window).scroll(function () {
             jQuery(".eael-sticky-video-player2").removeAttr("style");
         }
     }
+});
+
+jQuery(window).on('load', function () {
+    jQuery(window).trigger('scroll');
 });
 
 function GetHeightFromStyle(style) {
