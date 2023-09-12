@@ -1783,7 +1783,10 @@ class Product_Grid extends Widget_Base
                     'sale-preset-4' => esc_html__('Preset 4', 'essential-addons-for-elementor-lite'),
                     'sale-preset-5' => esc_html__('Preset 5', 'essential-addons-for-elementor-lite'),
 
-                ]
+                ],
+                'condition' => [
+                    'eael_product_grid_style_preset!' => 'eael-product-default',
+                ],
             ]
         );
 
@@ -1804,6 +1807,7 @@ class Product_Grid extends Widget_Base
                 ],
                 'condition' => [
                     'eael_product_grid_layout!' => 'list',
+                    'eael_product_grid_style_preset!' => 'eael-product-default',
                 ],
             ]
         );
