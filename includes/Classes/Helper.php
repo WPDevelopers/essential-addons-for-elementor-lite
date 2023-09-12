@@ -1412,56 +1412,33 @@ class Helper
 	}
 
     /**
-     * Get all products ordered by the user
-     * @return bool|array false | array of product ids
-     * @since 5.8.9
-     */
-    public static function eael_get_all_products_ordered_by_user() {
-        $order_ids = self::eael_get_all_user_orders( get_current_user_id(), 'completed' );
-        
-        if( empty( $order_ids ) ) {
-            return false;
-        }
-
-        $order_list = '(' . join(',', $order_ids) . ')';
-        
-        global $wpdb;
-        $query_select_order_items = esc_sql( "SELECT order_item_id as id FROM {$wpdb->prefix}woocommerce_order_items WHERE order_id IN {$order_list}" );
-        $query_select_product_ids = esc_sql( "SELECT meta_value as product_id FROM {$wpdb->prefix}woocommerce_order_itemmeta WHERE meta_key=%s AND order_item_id IN ($query_select_order_items)" );
-        $products = $wpdb->get_col( $wpdb->prepare( $query_select_product_ids, '_product_id' ) );
-
-        return $products;
-    }
-
-    /**
-     * Get all orders made by the user
-     * @param int $user_id
-     * @param string $status
+     * Get all ordered products by the user
      * @return boolean|array order ids
      * @since 5.8.9
      */
-    public static function eael_get_all_user_orders($user_id, $status = 'completed') {
+    public static function eael_get_all_user_ordered_products() {
+        $user_id = get_current_user_id();
+
         if( ! $user_id ) {
             return false;
         }
 
         $args = array(
-            'numberposts' => -1,
-            'meta_key' => '_customer_user',
-            'meta_value' => $user_id,
-            'post_type' => 'shop_order',
-            'post_status' => 'publish',
-            'tax_query' => array(
-                array(
-                    'taxonomy' => 'shop_order_status',
-                    'field' => 'slug',
-                    'terms' => $status
-                )
-            )
+            'customer_id' => $user_id,
+            'limit' => -1,
         );
 
-        $posts = get_posts($args);
+        $orders = wc_get_orders($args);
+        $product_ids = [];
 
-        return wp_list_pluck($posts, 'ID');
+        foreach( $orders as $order ){
+            $items = $order->get_items();
+            
+            foreach($items as $item){
+                $product_ids[] = $item->get_product_id();
+            }
+        }
+
+        return $product_ids;
     }
 }

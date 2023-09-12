@@ -3117,7 +3117,7 @@ class Product_Grid extends Widget_Base
             $product_purchase_type = ! empty( $settings['product_type_logged_users'] ) ? sanitize_text_field( $settings['product_type_logged_users'] ) : '';
 
             if (  in_array( $product_purchase_type, ['purchased', 'not-purchased'] ) ) {
-                $user_ordered_products = HelperClass::eael_get_all_products_ordered_by_user();
+                $user_ordered_products = HelperClass::eael_get_all_user_ordered_products();
                 $no_products_found = empty( $user_ordered_products ) && 'purchased' === $product_purchase_type ? 1 : 0;
  
                 if ( ! empty( $user_ordered_products ) && 'purchased' === $product_purchase_type ){
