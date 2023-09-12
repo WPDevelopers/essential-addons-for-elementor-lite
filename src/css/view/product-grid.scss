@@ -814,6 +814,25 @@
                 justify-content: center;
                 align-items: center;
             }
+
+            .outofstock-badge {
+                min-height: 3.746em;
+                min-width: 3.746em;
+                padding: .502em;
+                font-size: 13px;
+                font-weight: 700;
+                position: absolute;
+                text-align: center;
+                line-height: 1.25;
+                top: -0.5em;
+                left: -0.5em;
+                margin: 0;
+                border-radius: 50%;
+                background-color: #ff2a13;
+                color: #fff;
+                font-size: 0.857em;
+                z-index: 9;
+            }
         }
 
         .button.add_to_cart_button {
