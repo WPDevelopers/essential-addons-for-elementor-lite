@@ -151,34 +151,6 @@
                         transform: rotate(-45deg);
                     }
 
-                    // out of stock
-                    .outofstock-badge {
-                        line-height: 16px;
-                        font-size: 13px;
-                        font-weight: 600;
-                        display: flex;
-                        justify-content: center;
-                        align-items: flex-end;
-                        letter-spacing: 0;
-                        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.6);
-                        text-transform: uppercase;
-                        color: #fff;
-                        background-color: #ff2a13;
-                        border-radius: 0;
-                        border: none;
-                        box-shadow: none;
-                        position: absolute;
-                        height: 100px;
-                        width: 200px;
-                        z-index: 1;
-                        left: -95px;
-                        top: -45px;
-                        right: auto;
-                        margin: 0;
-                        padding: 0;
-                        transform: rotate(-45deg);
-                    }
-
                     .price {
                         font-size: 14px;
                         margin-bottom: 0;
@@ -646,33 +618,6 @@
                         transform: rotate(-45deg);
                     }
 
-                    .outofstock-badge {
-                        line-height: 16px;
-                        font-size: 13px;
-                        font-weight: 600;
-                        display: flex;
-                        justify-content: center;
-                        align-items: flex-end;
-                        letter-spacing: 0;
-                        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.6);
-                        text-transform: uppercase;
-                        color: #fff;
-                        background-color: #ff2a13;
-                        border-radius: 0;
-                        border: none;
-                        box-shadow: none;
-                        position: absolute;
-                        height: 100px;
-                        width: 200px;
-                        z-index: 9;
-                        left: -95px;
-                        top: -45px;
-                        right: auto;
-                        margin: 0;
-                        padding: 0;
-                        transform: rotate(-45deg);
-                    }
-
                     .price {
                         font-size: 14px;
                         margin-bottom: 0;
@@ -725,6 +670,136 @@
                 //margin-left: 10px !important;
                 //margin-right: 10px !important;
             }
+
+            .outofstock-badge {
+                padding: 5px 10px;
+                font-size: 12px;
+                font-weight: 500;
+                position: absolute;
+                text-align: center;
+                line-height: 1.2em;
+                top: 30px;
+                left: 0;
+                margin: 0;
+                background-color: #ff7a80;
+                color: #fff;
+                z-index: 9;
+
+                &.sale-preset-1 {
+
+                    br {
+                        display: none;
+                    }
+
+                    &.right {
+                        left: auto;
+                        right: 0;
+                    }
+                }
+
+                &.sale-preset-2 {
+                    padding: 0;
+                    top: 5px;
+                    left: 5px;
+                    display: inline-table;
+                    min-width: 50px;
+                    min-height: 50px;
+                    line-height: 50px;
+                    border-radius: 100%;
+                    -webkit-font-smoothing: antialiased;
+
+                    line-height: normal;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    &.right {
+                        left: auto;
+                        right: 5px;
+                    }
+                }
+
+                &.sale-preset-3 {
+                    border-radius: 50px;
+                    left: 15px;
+                    top: 15px;
+
+                    br {
+                        display: none;
+                    }
+
+                    &.right {
+                        left: auto;
+                        right: 15px;
+                    }
+                }
+
+                &.sale-preset-4 {
+                    left: 0;
+                    top: 15px;
+
+                    br {
+                        display: none;
+                    }
+
+                    &:after {
+                        position: absolute;
+                        right: -15px;
+                        bottom: 0px;
+                        width: 15px;
+                        height: 24px;
+                        border-top: 12px solid transparent;
+                        border-bottom: 12px solid transparent;
+                        border-left: 10px solid #23a454;
+                        content: '';
+                        border-right-color: #ff2a13;
+                        border-left-color: #ff2a13;
+                    }
+
+                    &.right {
+                        left: auto;
+                        right: 0;
+
+                        &:after {
+                            right: auto;
+                            left: -15px;
+                            border-left: 0;
+                            border-right: 10px solid #23a454;
+                            border-right-color: #ff2a13;
+                            border-left-color: #ff2a13;
+                        }
+                    }
+                }
+
+                &.sale-preset-5 {
+                    display: block;
+                    line-height: 74px;
+                    height: 60px;
+                    width: 120px;
+                    left: -39px;
+                    top: -10px;
+                    right: auto;
+                    padding: 0;
+                    transform: rotate(-45deg);
+
+                    line-height: normal;
+                    padding-top: 12px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    br {
+                        display: none;
+                    }
+
+                    &.right {
+                        left: auto;
+                        right: -35px;
+                        transform: rotate(45deg);
+                    }
+                }
+
+            }
         }
     }
 
@@ -738,24 +813,6 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-            }
-            .outofstock-badge {
-                min-height: 3.746em;
-                min-width: 3.746em;
-                padding: .502em;
-                font-size: 13px;
-                font-weight: 700;
-                position: absolute;
-                text-align: center;
-                line-height: 1.25;
-                top: -0.5em;
-                left: -0.5em;
-                margin: 0;
-                border-radius: 50%;
-                background-color: #ff2a13;
-                color: #fff;
-                font-size: 0.857em;
-                z-index: 9;
             }
         }
 
