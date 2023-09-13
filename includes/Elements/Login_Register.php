@@ -2135,8 +2135,7 @@ class Login_Register extends Widget_Base {
 			$user_role = $this->get_user_roles();
 		} else {
 			$user_role = [
-				''                           => __( 'Default', 'essential-addons-for-elementor-lite' ),
-				get_option( 'default_role' ) => ucfirst( get_option( 'default_role' ) )
+				'' => __( 'Default', 'essential-addons-for-elementor-lite' ),
 			];
 		}
 
