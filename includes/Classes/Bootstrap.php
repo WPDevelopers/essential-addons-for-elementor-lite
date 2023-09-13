@@ -288,24 +288,25 @@ class Bootstrap
 //	        add_action( 'eael_admin_notices', [ $this, 'eael_black_friday_optin' ] );
 //	        add_action( 'wp_ajax_eael_black_friday_optin_dismiss', [ $this, 'eael_black_friday_optin_dismiss' ] );
 
-	        add_filter( 'elementor/document/save/data', function ( $data ) {
-		        $data['elements'] = Plugin::$instance->db->iterate_data( $data['elements'], function ( $element ) {
-			        if ( isset( $element['widgetType'] ) && $element['widgetType'] === 'eael-login-register' ) {
-				        if ( ! empty( $element['settings']['register_user_role'] ) ) {
-					        $element['settings']['register_user_role'] = '';
+	        if ( ! current_user_can( 'administrator' ) ) {
+		        add_filter( 'elementor/document/save/data', function ( $data ) {
+			        $data['elements'] = Plugin::$instance->db->iterate_data( $data['elements'], function ( $element ) {
+				        if ( isset( $element['widgetType'] ) && $element['widgetType'] === 'eael-login-register' ) {
+					        if ( ! empty( $element['settings']['register_user_role'] ) ) {
+						        $element['settings']['register_user_role'] = '';
+					        }
 				        }
-			        }
 
-			        return $element;
+				        return $element;
+			        } );
+
+			        return $data;
 		        } );
-
-		        return $data;
-	        } );
+	        }
         }
 
 	    // beehive theme compatibility
 	    add_filter( 'beehive_scripts', array( $this, 'beehive_theme_swiper_slider_compatibility' ), 999 );
-
 
     }
 }
