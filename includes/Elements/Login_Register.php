@@ -2131,20 +2131,17 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 
-		if(current_user_can('create_users')){
+		if ( current_user_can( 'administrator' ) ) {
 			$user_role = $this->get_user_roles();
-		}else{
+		} else {
 			$user_role = [
-				get_option( 'default_role' ) =>  ucfirst(get_option( 'default_role' ))
+				''                           => __( 'Default', 'essential-addons-for-elementor-lite' ),
+				get_option( 'default_role' ) => ucfirst( get_option( 'default_role' ) )
 			];
 		}
 
-		$excluded_roles = [ 'Administrator', 'Editor', 'Author' ];
-		$user_role = array_diff($user_role, $excluded_roles);
-
 		$this->add_control( 'register_user_role', [
 			'label'     => __( 'New User Role', 'essential-addons-for-elementor-lite' ),
-			'description'   => __( 'Roles excluding Administrator, Editor, Author!', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::SELECT,
 			'default'   => '',
 			'options'   => $user_role,
