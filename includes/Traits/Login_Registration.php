@@ -525,19 +525,19 @@ trait Login_Registration {
 				$user_data['role'] = strtolower( sanitize_text_field( $settings['register_user_role'] ) );
 			}
 
-			$excluded_roles = [ 'administrator' ];
-			if ( ! empty( $user_data['role'] ) && in_array( $user_data['role'], $excluded_roles ) ) {
+			if ( ! empty( $user_data['role'] ) && $user_data['role'] === 'administrator' ) {
 				$err_msg = __( 'Invalid Role!', 'essential-addons-for-elementor-lite' );
-				
+
 				if ( $ajax ) {
 					wp_send_json_error( $err_msg );
 				}
 				update_option( 'eael_register_errors_' . $widget_id, $err_msg, false );
-	
-				if (isset($_SERVER['HTTP_REFERER'])) {
-					wp_safe_redirect($_SERVER['HTTP_REFERER']);
+
+				if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+					wp_safe_redirect( $_SERVER['HTTP_REFERER'] );
 					exit();
 				}
+
 				return false;
 			}
 
