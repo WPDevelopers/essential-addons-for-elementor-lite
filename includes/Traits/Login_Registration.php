@@ -283,8 +283,6 @@ trait Login_Registration {
             return false;
         }
 
-
-
 		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
 
 		if ( is_user_logged_in() ) {
