@@ -525,7 +525,7 @@ trait Login_Registration {
 				$user_data['role'] = strtolower( sanitize_text_field( $settings['register_user_role'] ) );
 			}
 
-			$excluded_roles = [ 'administrator', 'editor', 'author' ];
+			$excluded_roles = [ 'administrator', ];
 			if ( ! empty( $user_data['role'] ) && in_array( $user_data['role'], $excluded_roles ) ) {
 				$err_msg = __( 'Invalid Role!', 'essential-addons-for-elementor-lite' );
 				
@@ -1262,10 +1262,14 @@ trait Login_Registration {
 			if ( ! empty( $roles ) && is_array( $roles ) ) {
 
 				foreach ( $wp_roles as $role_key => $role ) {
+					if ( $role_key === 'administrator' ) {
+						continue;
+					}
 					$user_roles[ $role_key ] = $role['name'];
 				}
 			}
 		}
+
 		return apply_filters( 'eael/login-register/new-user-roles', $user_roles );
 	}
 
