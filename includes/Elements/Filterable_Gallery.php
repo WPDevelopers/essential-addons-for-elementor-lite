@@ -3344,11 +3344,11 @@ class Filterable_Gallery extends Widget_Base
             }
             
             if ( $video_gallery_yt_privacy ){
-                if ( true === strpos( $gallery_store[$counter]['video_link'], 'youtube' ) ) {
-                    $gallery_store[$counter]['video_link'] = str_replace('youtube', 'youtube-nocookie', $gallery_store[$counter]['video_link']);
+                if ( strpos( $gallery_store[$counter]['video_link'], 'youtube' ) != false ) {
+                    $gallery_store[$counter]['video_link'] = str_replace('youtube.com/watch?v=', 'youtube-nocookie.com/embed/', $gallery_store[$counter]['video_link']);
                 }
 
-                if ( true === strpos( $gallery_store[$counter]['video_link'], 'vimeo' ) ) {
+                if ( strpos( $gallery_store[$counter]['video_link'], 'vimeo' ) != false ) {
                     $gallery_store[$counter]['video_link'] = add_query_arg( [ 'dnt' => 1 ], $gallery_store[$counter]['video_link'] );
                 }
             }
