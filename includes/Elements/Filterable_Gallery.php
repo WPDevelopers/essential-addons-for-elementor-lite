@@ -3320,6 +3320,7 @@ class Filterable_Gallery extends Widget_Base
         $gallery_items = $settings['eael_fg_gallery_items'];
         $gallery_store = [];
         $counter = 0;
+        $video_gallery_yt_privacy = ! empty( $settings['video_gallery_yt_privacy'] ) && 'yes' === $settings['video_gallery_yt_privacy'] ? 1 : 0;
         
         foreach ($gallery_items as $gallery) {
             $gallery_store[$counter]['title'] = Helper::eael_wp_kses($gallery['eael_fg_gallery_item_name']);
@@ -3342,6 +3343,16 @@ class Filterable_Gallery extends Widget_Base
                 $gallery_store[$counter]['video_link'] = $gallery['eael_fg_gallery_item_video_link'];
             }
             
+            if ( $video_gallery_yt_privacy ){
+                if ( true === strpos( $gallery_store[$counter]['video_link'], 'youtube' ) ) {
+                    $gallery_store[$counter]['video_link'] = str_replace('youtube', 'youtube-nocookie', $gallery_store[$counter]['video_link']);
+                }
+
+                if ( true === strpos( $gallery_store[$counter]['video_link'], 'vimeo' ) ) {
+                    $gallery_store[$counter]['video_link'] = add_query_arg( [ 'dnt' => 1 ], $gallery_store[$counter]['video_link'] );
+                }
+            }
+
             $gallery_store[$counter]['show_lightbox'] = $gallery['eael_fg_gallery_lightbox'];
             $gallery_store[$counter]['play_icon'] = $gallery['fg_video_gallery_play_icon'];
             $gallery_store[$counter]['controls'] = $this->sorter_class($gallery['eael_fg_gallery_control_name']);
@@ -3766,6 +3777,7 @@ class Filterable_Gallery extends Widget_Base
             'popup' => $settings['eael_fg_show_popup'],
             'duration' => $filter_duration,
             'gallery_enabled' => $settings['photo_gallery'],
+            'video_gallery_yt_privacy' => $settings['video_gallery_yt_privacy'],
             'control_all_text' => $settings['eael_fg_all_label_text'],
         ];
         
