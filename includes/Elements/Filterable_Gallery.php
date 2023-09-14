@@ -539,6 +539,18 @@ class Filterable_Gallery extends Widget_Base
             ]
         );
 
+        // YouTube.
+		$this->add_control(
+			'video_gallery_yt_privacy',
+			[
+				'label' => esc_html__( 'Video Privacy Mode', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SWITCHER,
+				'description' => esc_html__( 'If enabled, YouTube/Vimeo won\'t store information about visitors unless they play the video.', 'essential-addons-for-elementor-lite' ),
+				'frontend_available' => true,
+                'default' => '',
+			]
+		);
+
          $this->add_control(
             'eael_item_randomize',
             [
