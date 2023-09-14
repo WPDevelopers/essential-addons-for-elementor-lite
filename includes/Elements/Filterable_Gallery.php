@@ -545,7 +545,7 @@ class Filterable_Gallery extends Widget_Base
 			[
 				'label' => esc_html__( 'Video Privacy Mode', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::SWITCHER,
-				'description' => esc_html__( 'If enabled, YouTube/Vimeo won\'t store information about visitors unless they play the video.', 'essential-addons-for-elementor-lite' ),
+				'description' => esc_html__( 'If enabled, YouTube won\'t store information about visitors unless they play the video.', 'essential-addons-for-elementor-lite' ),
 				'frontend_available' => true,
                 'default' => '',
 			]
@@ -3349,7 +3349,7 @@ class Filterable_Gallery extends Widget_Base
                 }
 
                 if ( strpos( $gallery_store[$counter]['video_link'], 'vimeo' ) != false ) {
-                    $gallery_store[$counter]['video_link'] = add_query_arg( [ 'dnt' => 1 ], $gallery_store[$counter]['video_link'] );
+                    $gallery_store[$counter]['video_link'] = esc_url( add_query_arg( [ 'dnt' => 1 ], $gallery_store[$counter]['video_link'] ) );
                 }
             }
 
