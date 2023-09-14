@@ -64,6 +64,8 @@ $image_sources = [
             ?>
             <div class="eael-product-wrap" data-src="<?php echo esc_attr( $image_sources['src'] ) ?>" data-src-hover="<?php echo esc_attr( $image_sources['src_hover'] ) ?>" >
 	        <?php
+	        do_action( 'woocommerce_before_shop_loop_item' );
+
 	        echo ( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'. Helper::eael_wp_kses($stockout_text) .'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . Helper::eael_wp_kses($sale_text) . '</span>' : '') );
 
 	        if( $should_print_image_clickable ) {
@@ -87,7 +89,9 @@ $image_sources = [
             <?php
 	        if ( $should_print_addtocart ) {
 		        woocommerce_template_loop_add_to_cart();
-	        } ?>
+	        }
+	        do_action( 'woocommerce_after_shop_loop_item' );
+	        ?>
             </div>
         </li>
         <?php
@@ -100,8 +104,9 @@ $image_sources = [
             }
             
             ?>
-            <div class="eael-product-wrap" data-src="<?php echo esc_attr( $image_sources['src'] ) ?>" data-src-hover="<?php echo esc_attr( $image_sources['src_hover'] ) ?>" >    
-            <div class="product-image-wrap">
+            <div class="eael-product-wrap" data-src="<?php echo esc_attr( $image_sources['src'] ) ?>" data-src-hover="<?php echo esc_attr( $image_sources['src_hover'] ) ?>" >
+	            <?php do_action( 'woocommerce_before_shop_loop_item' ); ?>
+                <div class="product-image-wrap">
                     <div class="image-wrap">
 	                    <?php if( $should_print_image_clickable ) {
 		                    echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
@@ -174,6 +179,7 @@ $image_sources = [
                         echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
                     }?>
                 </div>
+	            <?php do_action( 'woocommerce_after_shop_loop_item' ); ?>
             </div>
         </li>
         <?php
@@ -187,6 +193,7 @@ $image_sources = [
             }
             ?>
             <div class="eael-product-wrap" data-src="<?php echo esc_attr( $image_sources['src'] ) ?>" data-src-hover="<?php echo esc_attr( $image_sources['src_hover'] ) ?>" >
+                <?php do_action( 'woocommerce_before_shop_loop_item' ); ?>
                 <div class="product-image-wrap">
                     <div class="image-wrap">
                         <?php if( $should_print_image_clickable ) {
@@ -235,9 +242,10 @@ $image_sources = [
                         ?>
                     </div>
                 </div>
+
+	            <?php do_action( 'woocommerce_after_shop_loop_item' ); ?>
             </div>
         </li>
         <?php
-
     }
 //}
