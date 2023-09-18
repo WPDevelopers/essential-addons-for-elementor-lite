@@ -142,6 +142,7 @@ class Bootstrap
         // Enqueue
         add_action('eael/before_enqueue_styles', [$this, 'before_enqueue_styles']);
         add_action('elementor/editor/before_enqueue_scripts', [$this, 'editor_enqueue_scripts']);
+        add_action('elementor/frontend/before_register_scripts', [$this, 'frontend_enqueue_scripts']);
 
         // Generator
 
