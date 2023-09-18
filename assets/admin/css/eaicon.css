@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'eaicon';
-	src:  url('../fonts/eaicon.eot?bakcpa');
-	src:  url('../fonts/eaicon.eot?bakcpa#iefix') format('embedded-opentype'),
-	url('../fonts/eaicon.ttf?bakcpa') format('truetype'),
-	url('../fonts/eaicon.woff?bakcpa') format('woff'),
-	url('../fonts/eaicon.svg?bakcpa#eaicon') format('svg');
+	src:  url('../fonts/eaicon.eot?13lzm6');
+	src:  url('../fonts/eaicon.eot?13lzm6#iefix') format('embedded-opentype'),
+	url('../fonts/eaicon.ttf?13lzm6') format('truetype'),
+	url('../fonts/eaicon.woff?13lzm6') format('woff'),
+	url('../fonts/eaicon.svg?13lzm6#eaicon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 	font-display: block;
@@ -427,4 +427,8 @@
 }
 .eaicon-orders:before {
 	content: "\e97e";
+}
+.eaicon-woo-account-dashboard:before {
+	content: "\e97f";
+	color: #556068;
 }
