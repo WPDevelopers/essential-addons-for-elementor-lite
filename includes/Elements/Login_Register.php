@@ -2131,11 +2131,11 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 
-		if(current_user_can('create_users')){
+		if ( current_user_can( 'administrator' ) ) {
 			$user_role = $this->get_user_roles();
-		}else{
+		} else {
 			$user_role = [
-				get_option( 'default_role' ) =>  ucfirst(get_option( 'default_role' ))
+				'' => __( 'Default', 'essential-addons-for-elementor-lite' ),
 			];
 		}
 

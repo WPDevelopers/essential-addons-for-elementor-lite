@@ -84,6 +84,10 @@
   transition: all 0.3s ease;
 }
 
+.eael-ticker-wrap .swiper-button-next:before, .eael-ticker-wrap .swiper-button-next:after, .eael-ticker-wrap .swiper-button-prev:before, .eael-ticker-wrap .swiper-button-prev:after {
+  display: none;
+}
+
 .rtl .eael-ticker-wrap .eael-content-ticker.swiper-container .swiper-slide {
   text-align: right;
 }
