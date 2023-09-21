@@ -4,14 +4,14 @@
  * Description: The Essential plugin you install after Elementor! Packed with 40+ stunning free elements including Advanced Data Table, Event Calendar, Filterable Gallery, WooCommerce, and many more.
  * Plugin URI: https://essential-addons.com/elementor/
  * Author: WPDeveloper
- * Version: 5.8.8
+ * Version: 5.8.9
  * Author URI: https://wpdeveloper.com/
  * Text Domain: essential-addons-for-elementor-lite
  * Domain Path: /languages
  *
- * WC tested up to: 8.0.3
- * Elementor tested up to: 3.15.3
- * Elementor Pro tested up to: 3.15.1
+ * WC tested up to: 8.1.0
+ * Elementor tested up to: 3.16.2
+ * Elementor Pro tested up to: 3.16.0
  */
 
 if (!defined('ABSPATH')) {
@@ -27,7 +27,7 @@ define('EAEL_PLUGIN_FILE', __FILE__);
 define('EAEL_PLUGIN_BASENAME', plugin_basename(__FILE__));
 define('EAEL_PLUGIN_PATH', trailingslashit(plugin_dir_path(__FILE__)));
 define('EAEL_PLUGIN_URL', trailingslashit(plugins_url('/', __FILE__)));
-define('EAEL_PLUGIN_VERSION', '5.8.8');
+define('EAEL_PLUGIN_VERSION', '5.8.9');
 define('EAEL_ASSET_PATH', wp_upload_dir()['basedir'] . '/essential-addons-elementor');
 define('EAEL_ASSET_URL', wp_upload_dir()['baseurl'] . '/essential-addons-elementor');
 /**
@@ -104,3 +104,13 @@ add_action( 'wp_loaded', function () {
     }
 } );
 
+/**
+ * WooCommerce HPOS Support
+ * 
+ * @since v5.8.2
+ */
+add_action( 'before_woocommerce_init', function() {
+	if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+	}
+} );

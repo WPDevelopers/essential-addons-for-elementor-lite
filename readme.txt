@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.3
 Requires PHP: 7.0
-Stable tag: 5.8.8
+Stable tag: 5.8.9
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -251,6 +251,12 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.8.9 - 14/09/2023 =
+
+- Improved: Security Enhancement
+- Added: WooCommerce HPOS Support
+- Few minor bug fixes & improvements
 
 = 5.8.8 - 07/09/2023 =
 

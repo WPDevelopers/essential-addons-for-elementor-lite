@@ -256,9 +256,12 @@ trait Login_Registration {
             }
 		}
 		$page_id = $widget_id = 0;
-        if ( ! empty( $_POST['page_id'] ) ) {
-            $page_id = intval( $_POST['page_id'] );
-        } else {
+		if ( ! empty( $_POST['page_id'] ) ) {
+			$page_id = intval( $_POST['page_id'] );
+			if ( in_array( get_post_status( $page_id ), [ 'future', 'draft', 'pending' ] ) ) {
+				$err_msg = __( 'You have to publish the page first.', 'essential-addons-for-elementor-lite' );
+			}
+		} else {
             $err_msg = __( 'Page ID is missing', 'essential-addons-for-elementor-lite' );
         }
         if ( ! empty( $_POST['widget_id'] ) ) {
@@ -279,8 +282,6 @@ trait Login_Registration {
             }
             return false;
         }
-
-
 
 		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
 
@@ -521,9 +522,24 @@ trait Login_Registration {
 			$register_actions    = ! empty( $settings['register_action'] ) ? (array) $settings['register_action'] : [];
 			$custom_redirect_url = ! empty( $settings['register_redirect_url']['url'] ) ? esc_url_raw( $settings['register_redirect_url']['url'] ) : '/';
 			if ( ! empty( $settings['register_user_role'] ) ) {
-				$user_data['role'] = sanitize_text_field( $settings['register_user_role'] );
+				$user_data['role'] = strtolower( sanitize_text_field( $settings['register_user_role'] ) );
 			}
 
+			if ( ! empty( $user_data['role'] ) && $user_data['role'] === 'administrator' ) {
+				$err_msg = __( 'Invalid Role!', 'essential-addons-for-elementor-lite' );
+
+				if ( $ajax ) {
+					wp_send_json_error( $err_msg );
+				}
+				update_option( 'eael_register_errors_' . $widget_id, $err_msg, false );
+
+				if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+					wp_safe_redirect( $_SERVER['HTTP_REFERER'] );
+					exit();
+				}
+
+				return false;
+			}
 
 			// set email related stuff
 			/*------User Mail Related Stuff------*/
@@ -561,13 +577,9 @@ trait Login_Registration {
 		do_action( 'eael/login-register/before-insert-user', $user_data );
 		$user_default_role = get_option( 'default_role' );
 
-        if(!empty($user_default_role) && empty($user_data['role'])){
-            $user_data['role'] = $user_default_role;
-        }
-
-        if ('administrator' == strtolower($user_data['role'])) {
-            $user_data['role'] = !empty($settings['register_user_role']) ? wp_strip_all_tags( $settings['register_user_role'] ) : get_option('default_role');
-        }
+		if ( ! empty( $user_default_role ) && empty( $user_data['role'] ) ) {
+			$user_data['role'] = $user_default_role;
+		}
 
 		$user_id = wp_insert_user( $user_data );
 
@@ -1246,10 +1258,14 @@ trait Login_Registration {
 			if ( ! empty( $roles ) && is_array( $roles ) ) {
 
 				foreach ( $wp_roles as $role_key => $role ) {
+					if ( $role_key === 'administrator' ) {
+						continue;
+					}
 					$user_roles[ $role_key ] = $role['name'];
 				}
 			}
 		}
+
 		return apply_filters( 'eael/login-register/new-user-roles', $user_roles );
 	}
 
