@@ -13,6 +13,11 @@ window.ea = {
 		return false;
 	}
 };
+var eael_screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+let expirationDate = new Date();
+expirationDate.setDate(expirationDate.getDate() + 30);
+document.cookie = "eael_screen=" + eael_screenWidth + ";expires=" + expirationDate.toUTCString() + ";path=/";
+
 ea.hooks.addAction("widgets.reinit", "ea", ($content) => {
 	let filterGallery = jQuery(".eael-filter-gallery-container", $content);
 	let postGridGallery = jQuery(

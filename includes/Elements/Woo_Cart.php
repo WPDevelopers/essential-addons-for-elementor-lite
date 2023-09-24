@@ -13,6 +13,7 @@ use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
+use Elementor\Plugin;
 use Elementor\Repeater;
 use \Elementor\Widget_Base;
 use \Elementor\Icons_Manager;
@@ -2669,9 +2670,56 @@ class Woo_Cart extends Widget_Base {
 		if ( ! class_exists( 'woocommerce' ) ) {
 			return;
 		}
-
 		$settings = $this->get_settings_for_display();
 		$this->ea_woo_cart_add_actions( $settings );
+
+        if ( isset( $_COOKIE['eael_screen'] ) && ! empty( $breakpoints = Plugin::$instance->breakpoints->get_breakpoints_config() ) ){
+	        $breakpoints = array_filter($breakpoints, function ( $breakpoint ){
+                return $breakpoint['is_enabled'];
+            });
+	        if ( ! empty( $settings["hide_desktop"] ) ) {
+		        $desk_br_point = $breakpoints['tablet']['value'] + 1;
+		        if ( isset( $breakpoints['laptop'] ) ) {
+			        $desk_br_point = $breakpoints['laptop']['value'] + 1;
+		        } else if ( isset( $breakpoints['tablet_extra'] ) ) {
+			        $desk_br_point = $breakpoints['tablet_extra']['value'] + 1;
+		        }
+
+		        $breakpoints['desktop'] = [
+			        'value' => $desk_br_point
+		        ];
+
+                if ( isset( $breakpoints['widescreen'] ) ){
+                    $widescreen = $breakpoints['widescreen'];
+                    unset($breakpoints['widescreen']);
+                    $breakpoints['widescreen'] = $widescreen;
+                }
+	        }
+            $enabled_screens = [];
+            foreach ( $breakpoints as $device => $breakpoint){
+	            $enabled_screens[] = [
+		            'device' => $device,
+		            'value'  => $breakpoint['value']
+	            ];
+            }
+
+	        $current_screen = intval( $_COOKIE['eael_screen'] );
+            foreach ( $enabled_screens as $key => $screen ){
+                $prev_screen = $enabled_screens[$key-1] ?? false;
+                $next_screen = $enabled_screens[$key+1] ?? false;
+                if ( $prev_screen['value'] < $current_screen && $current_screen >=$screen['value'] ){
+                    echo_pre($screen);
+                }
+	            echo_pre($screen);
+
+	            if ( !empty( $settings["hide_{$screen['device']}"] ) ){
+//                    echo_pre($breakpoint);
+//                    echo_pre($settings["hide_{$device}"]);
+//                    return;
+	            }
+            }
+
+        }
 
 		add_filter( 'wc_empty_cart_message', [ $this, 'wc_empty_cart_message' ] );
 
