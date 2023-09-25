@@ -479,7 +479,7 @@ class WPDeveloper_Setup_Wizard {
 			[
 				'slug'     => 'essential-blocks',
 				'basename' => 'essential-blocks/essential-blocks.php',
-				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/eb.svg',
+				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/eb-new.svg',
 				'title'    => __( 'Essential Blocks', 'essential-addons-for-elementor-lite' ),
 				'desc'     => __( 'Enhance your Gutenberg experience with 40+ unique blocks (more coming soon). Add power to the block editor using our easy-to-use blocks which are designed to make your next WordPress page or posts design easier and prettier than ever before.', 'essential-addons-for-elementor-lite' ),
 			],
@@ -844,6 +844,10 @@ class WPDeveloper_Setup_Wizard {
 					[
 						'key'   => 'woo-cart',
 						'title' => __( 'Woo Cart', 'essential-addons-for-elementor-lite' ),
+					],
+					[
+						'key'   => 'woo-cross-sells',
+						'title' => __( 'Woo Cross Sells', 'essential-addons-for-elementor-lite' ),
 					],
 					[
 						'key'         => 'woo-product-compare',

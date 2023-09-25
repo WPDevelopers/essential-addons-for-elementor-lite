@@ -83,7 +83,29 @@ class Post_Duplicator {
 			return; // Return if post is not there.
 		}
 
-		$current_user        = wp_get_current_user();
+		$current_user	= wp_get_current_user();
+		$allowed_roles	= array('editor', 'administrator', 'author');
+		$redirect_url = admin_url( 'edit.php?post_type=' . $post->post_type );
+
+		if ( ! array_intersect( $allowed_roles, $current_user->roles ) ) {
+			switch ( $post->post_type ) {
+				case 'post':
+					$can_edit_others_posts = current_user_can('edit_others_posts');
+					break;
+				case 'page':
+					$can_edit_others_posts = current_user_can('edit_others_pages');
+					break;
+				default :
+					$can_edit_others_posts = current_user_can('edit_others_posts');
+					break;
+			}
+
+			if ( $current_user->ID !== $post->post_author && ! $can_edit_others_posts ){
+				wp_safe_redirect( $redirect_url );
+				return;
+			}
+		}
+
 		$duplicate_post_args = array(
 			'post_author'    => $current_user->ID,
 			'post_title'     => $post->post_title . ' - Copy',
@@ -142,7 +164,7 @@ class Post_Duplicator {
 				$wpdb->query( $duplicate_insert_query . $insert );
 			}
 		}
-		$redirect_url = admin_url( 'edit.php?post_type=' . $post->post_type );
+
 		wp_safe_redirect( $redirect_url );
 	}
 }
