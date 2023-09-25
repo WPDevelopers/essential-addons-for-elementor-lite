@@ -246,7 +246,7 @@ class Bootstrap
 
 
         // Admin
-        if (is_admin()) {
+	    if ( is_admin() ) {
             // Admin
             if (!$this->pro_enabled) {
                 $this->admin_notice();
@@ -288,10 +288,9 @@ class Bootstrap
 //	        add_action( 'admin_notices', [ $this, 'eael_black_friday_optin' ] );
 //	        add_action( 'eael_admin_notices', [ $this, 'eael_black_friday_optin' ] );
 //	        add_action( 'wp_ajax_eael_black_friday_optin_dismiss', [ $this, 'eael_black_friday_optin_dismiss' ] );
+        } else {
+	        add_action( 'wp', [ $this, 'eael_post_view_count' ] );
         }
-		else{
-			add_action( 'wp', [ $this, 'eael_post_view_count' ] );
-		}
 
 	    // beehive theme compatibility
 	    add_filter( 'beehive_scripts', array( $this, 'beehive_theme_swiper_slider_compatibility' ), 999 );
