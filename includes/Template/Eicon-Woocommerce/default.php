@@ -81,9 +81,9 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
             }
             if ( $is_show_badge ){
                 if ( ! $product->is_in_stock() ) {
-                    printf( '<span class="outofstock-badge">%s</span>', $stock_out_badge_text );
+                    printf( '<span class="outofstock-badge ' . $sale_badge_preset . ' ' . $sale_badge_align . '">%s</span>', $stock_out_badge_text );
                 } elseif ( $product->is_on_sale() ) {
-                    printf( '<span class="onsale">%s</span>', $sale_badge_text );
+                    printf( '<span class="onsale ' . $sale_badge_preset . ' ' . $sale_badge_align . '">%s</span>', $sale_badge_text );
                 }
             }
 
@@ -152,9 +152,9 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 
         if ( $is_show_badge ) {
             if ( ! $product->is_in_stock() ) {
-                printf( '<span class="outofstock-badge">%s</span>', $stock_out_badge_text );
+                printf( '<span class="outofstock-badge ' . $sale_badge_preset . ' ' . $sale_badge_align . '">%s</span>', $stock_out_badge_text );
             } elseif ( $product->is_on_sale() ) {
-                printf( '<span class="onsale">%s</span>', $sale_badge_text );
+                printf( '<span class="onsale ' . $sale_badge_preset . ' ' . $sale_badge_align . '">%s</span>', $sale_badge_text );
             }
         }
 
