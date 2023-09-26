@@ -393,6 +393,9 @@ class Product_Grid extends Widget_Base
             'type' => Controls_Manager::SELECT,
             'options' => $this->eael_get_product_orderby_options(),
             'default' => 'date',
+            'condition' => [
+                'eael_product_grid_product_filter!' => [ 'best-selling-products', 'top-products' ],
+            ]
 
         ]);
 
