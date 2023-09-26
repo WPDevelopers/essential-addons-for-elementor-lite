@@ -23,6 +23,17 @@ var ImageAccordion = function ($scope, $) {
         element.css("flex", "3");
     }
 
+    function hoverOutAction(event, element) {
+        if (element.hasClass("overlay-active") === false) {
+            event.preventDefault();
+        }
+        let imageAccordion = $(".eael-image-accordion-hover", $scope);
+
+        imageAccordion.removeClass("overlay-active");
+        imageAccordion.css("flex", "1");
+        imageAccordion.find(".overlay-inner").removeClass("overlay-inner-show");
+    }
+
     if ("on-click" === $type) {
         $(".eael-image-accordion-hover", $scope).on("click", function (e) {
             hoverAction(e, $(this));
@@ -31,6 +42,11 @@ var ImageAccordion = function ($scope, $) {
     } else {
         $(".eael-image-accordion-hover", $scope).hover(function (e) {
             hoverAction(e, $(this));
+        });
+        
+        $(".eael-image-accordion-hover", $scope).mouseleave(function (e) {
+            console.log('leave');
+            hoverOutAction(e, $(this));
         });
     }
 };
