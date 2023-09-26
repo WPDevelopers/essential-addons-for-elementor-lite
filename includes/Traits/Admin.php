@@ -104,7 +104,7 @@ trait Admin {
                 <div class="eael-container">
                     <div class="eael-main__tab mb45">
                         <ul class="ls-none tab__menu">
-                            <li class="tab__list active"><a class="tab__item" href="#general"><i class="ea-admin-icon icon-gear-alt"></i><?php echo __( 'General', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                            <li class="tab__list active"><a class="tab__item" href="#general"><i class="ea-admin-icon eael-icon-gear-alt"></i><?php echo __( 'General', 'essential-addons-for-elementor-lite' ); ?></a></li>
                             <li class="tab__list"><a class="tab__item" href="#elements"><i class="ea-admin-icon icon-element"></i><?php echo __( 'Elements', 'essential-addons-for-elementor-lite' ); ?></a></li>
                             <li class="tab__list"><a class="tab__item" href="#extensions"><i class="ea-admin-icon icon-extension"></i><?php echo __( 'Extensions', 'essential-addons-for-elementor-lite' ); ?></a></li>
                             <li class="tab__list"><a class="tab__item" href="#tools"><i class="ea-admin-icon icon-tools"></i><?php echo __( 'Tools', 'essential-addons-for-elementor-lite' ); ?></a></li>

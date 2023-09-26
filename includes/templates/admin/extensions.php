@@ -135,7 +135,7 @@ $extensions = [
 		                            $id = !empty( $item[ 'setting' ][ 'id' ] ) ? $item[ 'setting' ][ 'id' ] : '';
 		                            ?>
                                     <a href="<?php echo esc_url( $link ); ?>" id="<?php echo esc_attr( $id ); ?>" class="element__icon">
-                                        <i class="ea-admin-icon icon-gear"></i>
+                                        <i class="ea-admin-icon eael-icon-gear"></i>
                                         <span class="tooltip-text"><?php esc_html_e( 'Setting', 'essential-addons-for-elementor-lite' ); ?></span>
                                     </a>
 	                            <?php endif; ?>

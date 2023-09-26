@@ -34,7 +34,7 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-gear-alt:before {
+.eael-icon-gear-alt:before {
     content: "\e906";
 }
 
@@ -142,7 +142,7 @@
     content: "\e910";
 }
 
-.icon-gear:before {
+.eael-icon-gear:before {
     content: "\e907";
 }
 
