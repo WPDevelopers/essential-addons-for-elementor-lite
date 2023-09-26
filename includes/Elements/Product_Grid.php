@@ -3236,7 +3236,7 @@ class Product_Grid extends Widget_Base
             $args['orderby'] = 'meta_value_num';
             $args['meta_key'] = '_price';
         } else if ($settings['orderby'] == '_sku') {
-            $args['orderby'] = 'meta_value_num';
+            $args['orderby'] = 'meta_value meta_value_num';
             $args['meta_key'] = '_sku';
         } else {
             $args['orderby'] = (isset($settings['orderby']) ? $settings['orderby'] : 'date');
