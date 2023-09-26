@@ -550,6 +550,8 @@ trait Elements {
 						$table_of_content_html = '';
 					} else if ( $toc_global_display_condition == 'posts' && ! is_single() ) {
 						$table_of_content_html = '';
+					}else if ( $toc_global_display_condition !== get_post_type() ){
+						$table_of_content_html = '';
 					}
 				}
 
@@ -560,6 +562,8 @@ trait Elements {
 					if ( $toc_global_display_condition == 'pages' && ! is_page() ) {
 						$table_of_content_html = '';
 					} else if ( $toc_global_display_condition == 'posts' && ! is_single() ) {
+						$table_of_content_html = '';
+					}else if ( $toc_global_display_condition !== get_post_type() ){
 						$table_of_content_html = '';
 					}
 				}

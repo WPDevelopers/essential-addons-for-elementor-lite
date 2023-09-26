@@ -69,33 +69,42 @@ class Table_of_Content
                 ]
             );
         } else {
-            $element->add_control(
-                'eael_ext_toc_global',
-                [
-                    'label' => __('Enable Table of Contents Globally', 'essential-addons-for-elementor-lite'),
-                    'description' => __('Enabling this option will effect on entire site.', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SWITCHER,
-                    'default' => 'no',
-                    'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
-                    'label_off' => __('No', 'essential-addons-for-elementor-lite'),
-                    'return_value' => 'yes',
-                    'condition' => [
-                        'eael_ext_table_of_content' => 'yes',
-                    ],
-                ]
-            );
+	        $element->add_control(
+		        'eael_ext_toc_global',
+		        [
+			        'label'        => __( 'Enable Table of Contents Globally', 'essential-addons-for-elementor-lite' ),
+			        'description'  => __( 'Enabling this option will effect on entire site.', 'essential-addons-for-elementor-lite' ),
+			        'type'         => Controls_Manager::SWITCHER,
+			        'default'      => 'no',
+			        'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+			        'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+			        'return_value' => 'yes',
+			        'condition'    => [
+				        'eael_ext_table_of_content' => 'yes',
+			        ],
+		        ]
+	        );
+	        $supported_posts = get_option( 'elementor_cpt_support' );
+	        $display_on      = [
+		        'posts' => __( 'All Posts', 'essential-addons-for-elementor-lite' ),
+		        'pages' => __( 'All Pages', 'essential-addons-for-elementor-lite' ),
+	        ];
 
-            $element->add_control(
+	        if ( ! empty( $supported_posts ) ) {
+		        foreach ( $supported_posts as $post_type ) {
+			        if ( ! in_array( $post_type, [ 'post', 'page' ] ) ) {
+				        $display_on[ $post_type ] = ucfirst( $post_type );
+			        }
+		        }
+	        }
+	        $display_on['all'] = __( 'All Posts & Pages', 'essential-addons-for-elementor-lite' );
+	        $element->add_control(
                 'eael_ext_toc_global_display_condition',
                 [
                     'label' => __('Display On', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT,
                     'default' => 'all',
-                    'options' => [
-                        'posts' => __('All Posts', 'essential-addons-for-elementor-lite'),
-                        'pages' => __('All Pages', 'essential-addons-for-elementor-lite'),
-                        'all' => __('All Posts & Pages', 'essential-addons-for-elementor-lite'),
-                    ],
+                    'options' => $display_on,
                     'condition' => [
                         'eael_ext_table_of_content' => 'yes',
                         'eael_ext_toc_global' => 'yes',
