@@ -12,11 +12,32 @@ var EventCalendar = function ($scope, $) {
 		defaultView = element.data("defaultview"),
 		defaultDate = element.data("defaultdate"),
 		eventLimit = element.data("event_limit"),
+		monthColumnHeaderFormat = element.data("monthcolumnheaderformat"),
+		weekColumnHeaderFormat = element.data("weekcolumnheaderformat"),
 		time_format = element.data("time_format") == "yes" ? true : false;
 
 	if ( wrapper.hasClass( 'layout-calendar' ) ){
 		var calendar = new Calendar(
 			$scope[0].querySelector(".eael-event-calendar-cls"), {
+				views: {
+					month: { // will produce something like "Tuesday, September 18, 2018"
+						dayHeaderContent: (args) => {
+							console.log('monthColumnHeaderFormat', monthColumnHeaderFormat)
+							if (args.view.type === 'dayGridMonth' && monthColumnHeaderFormat ) {
+								return moment(args.date).format(monthColumnHeaderFormat)
+							}
+						},
+					},
+					week: {
+						dayHeaderContent: (args) => {
+							console.log('weekColumnHeaderFormat', weekColumnHeaderFormat)
+
+							if (weekColumnHeaderFormat) {
+								return moment(args.date).format(weekColumnHeaderFormat);
+							}
+						},
+					},
+				},
 				editable: false,
 				selectable: false,
 				firstDay: firstDay,

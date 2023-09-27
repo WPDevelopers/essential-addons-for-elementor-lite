@@ -822,6 +822,42 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
+	    $this->add_control(
+		    'eael_calendar_column_heading_formats',
+		    [
+			    'label' => __('Calendar Table Heading Date Format', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::HEADING,
+                'separator' => 'before'
+            ]
+	    );
+
+	    $this->add_control(
+		    'eael_calendar_column_heading_month',
+		    [
+			    'label' => esc_html__( 'Month View', 'essential-addons-for-elementor-lite' ),
+			    'type' => Controls_Manager::SELECT,
+			    'options' => [
+				    '' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
+				    'dddd' => esc_html__( 'Full Day Name', 'essential-addons-for-elementor-lite' ),
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_calendar_column_heading_week',
+		    [
+			    'label' => esc_html__( 'Week View', 'essential-addons-for-elementor-lite' ),
+			    'type' => Controls_Manager::SELECT,
+			    'options' => apply_filters( 'eael_calendar_column_heading_week_date_formats', [
+				    '' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
+				    'ddd Do' => date( 'M j' ).'th',
+				    'dddd Do' => date('l j').'th',
+				    'dddd D/Y' => date( 'l j/Y' ),
+				    'ddd D/Y' => date( 'M j/Y' ),
+			    ] ),
+		    ]
+	    );
+
         $this->end_controls_section();
 
         /**
@@ -2962,7 +2998,6 @@ class Event_Calendar extends Widget_Base
 	    echo '<div class="eael-event-calendar-wrapper layout-' . esc_attr( $settings['eael_event_display_layout'] ) . '">';
 
 	    if ( $settings['eael_event_display_layout'] === 'calendar' ) {
-
 		    echo '<div id="eael-event-calendar-' . $this->get_id() . '" class="eael-event-calendar-cls"
             data-cal_id = "' . $this->get_id() . '"
             data-locale = "' . $local . '"
@@ -2971,6 +3006,8 @@ class Event_Calendar extends Widget_Base
             data-defaultdate = "' . $default_date . '"
             data-time_format = "' . $time_format . '"
             data-event_limit = "' . $event_limit . '"
+            data-monthColumnHeaderFormat = "' . esc_attr( $settings['eael_calendar_column_heading_month'] ) . '"
+            data-weekColumnHeaderFormat = "' . esc_attr( $settings['eael_calendar_column_heading_week'] ) . '"
             data-hideDetailsLink= "' . $settings['eael_event_details_link_hide'] . '"
             data-detailsButtonText = "' . Helper::eael_wp_kses( $settings['eael_event_details_text'] ) . '"
             data-events="' . htmlspecialchars( json_encode( $data ), ENT_QUOTES, 'UTF-8' ) . '"
