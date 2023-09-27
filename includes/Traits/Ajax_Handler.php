@@ -7,6 +7,7 @@
 
 namespace Essential_Addons_Elementor\Traits;
 
+use Automattic\WooCommerce\Utilities\OrderUtil;
 use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 use Essential_Addons_Elementor\Template\Woocommerce\Checkout\Woo_Checkout_Helper;
 use Essential_Addons_Elementor\Traits\Template_Query;
@@ -649,6 +650,25 @@ trait Ajax_Handler {
 			];
 
 			$args['tax_query'] = $this->eael_terms_query_multiple( $args['tax_query'] );
+
+			if ( $settings[ 'eael_product_gallery_product_filter' ] == 'featured-products' ) {
+				$args[ 'tax_query' ][] = [
+					'relation' => 'AND',
+					[
+						'taxonomy' => 'product_visibility',
+						'field'    => 'name',
+						'terms'    => 'featured',
+					],
+					[
+						'taxonomy' => 'product_visibility',
+						'field'    => 'name',
+						'terms'    => [ 'exclude-from-search', 'exclude-from-catalog' ],
+						'operator' => 'NOT IN',
+					],
+				];
+			}
+
+
 		}
 		
 		$template_info = $this->eael_sanitize_template_param( $_REQUEST['template_info'] );
@@ -899,7 +919,7 @@ trait Ajax_Handler {
 			}
 			if ( isset( $settings['recaptchaLanguageV3'] ) ) {
 				update_option( 'eael_recaptcha_language_v3', sanitize_text_field( $settings['recaptchaLanguageV3'] ) );
-			}
+			}	
 
 			//pro settings
 			if ( isset( $settings['gClientId'] ) ) {
@@ -940,6 +960,18 @@ trait Ajax_Handler {
 			update_option( 'eael_custom_profile_fields', sanitize_text_field( $settings['lr_custom_profile_fields'] ) );
 		} else {
 			update_option( 'eael_custom_profile_fields', '' );
+		}
+
+		if ( isset( $settings['lr_custom_profile_fields_text'] ) ) {
+			update_option( 'eael_custom_profile_fields_text', sanitize_text_field( $settings['lr_custom_profile_fields_text'] ) );
+		} else {
+			update_option( 'eael_custom_profile_fields_text', '' );
+		}
+
+		if ( isset( $settings['lr_custom_profile_fields_img'] ) ) {
+			update_option( 'eael_custom_profile_fields_img', sanitize_text_field( $settings['lr_custom_profile_fields_img'] ) );
+		} else {
+			update_option( 'eael_custom_profile_fields_img', '' );
 		}
 
 		//pro settings

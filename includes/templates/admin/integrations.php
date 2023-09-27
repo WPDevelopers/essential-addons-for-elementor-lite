@@ -3,7 +3,7 @@ $integrations = [
 	[
 		'slug'     => 'betterdocs',
 		'basename' => 'betterdocs/betterdocs.php',
-		'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/bd.svg',
+		'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/bd-new.svg',
 		'title'    => __( 'BetterDocs', 'essential-addons-for-elementor-lite' ),
 		'desc'     => __( 'BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ),
 	],
@@ -52,7 +52,7 @@ $integrations = [
 	[
 		'slug'     => 'essential-blocks',
 		'basename' => 'essential-blocks/essential-blocks.php',
-		'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/eb.svg',
+		'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/eb-new.svg',
 		'title'    => __( 'Essential Blocks', 'essential-addons-for-elementor-lite' ),
 		'desc'     => __( 'Enhance your Gutenberg experience with 40+ unique blocks (more coming soon). Add power to the block editor using our easy-to-use blocks which are designed to make your next WordPress page or posts design easier and prettier than ever before.', 'essential-addons-for-elementor-lite' ),
 	],

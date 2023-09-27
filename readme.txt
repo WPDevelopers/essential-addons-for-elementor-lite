@@ -2,9 +2,9 @@
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk
 Tags: elementor, elements, addons, elementor addons, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
 Requires at least: 5.0
-Tested up to: 6.2
+Tested up to: 6.3
 Requires PHP: 7.0
-Stable tag: 5.8.5
+Stable tag: 5.8.9
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -145,6 +145,7 @@ Extensions (Free):
 31. [LearnDash Course List](https://essential-addons.com/elementor/learndash-course-list/)- Share LearnDash course list in Elementor
 32. [Advanced Search](https://essential-addons.com/elementor/advanced-search/)- Add a customizable, dynamic search bar
 33. [Woo Thank You](https://essential-addons.com/elementor/woo-thank-you)- Design a personalized thank you message on the WooCommerce order confirmation page
+34. [Woo Cross Sells](https://essential-addons.com/elementor/woo-cross-sells/)- Customize the display of cross-sell products to boost your sales potential 
 
 Extensions (Pro): 
 
@@ -250,6 +251,55 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.8.9 - 14/09/2023 =
+
+- Improved: Security Enhancement
+- Added: WooCommerce HPOS Support
+- Few minor bug fixes & improvements
+
+= 5.8.8 - 07/09/2023 =
+
+- Fixed: EA Woo Product Grid | Load More button not working properly on responsive devices
+- Few minor bug fixes & improvements
+
+= 5.8.7 - 24/08/2023 =
+
+- Fixed: EA BetterDocs Category Box/List | Missing BetterDocs Category Icon
+- Fixed: EA Call to Action | Primary Button Style Effect BG Color not working
+- Fixed: EA Woo Product Gallery | filtering not working properly
+- Fixed: EA Business Reviews | Throwing JS console errors 
+- Fixed: EA Advanced Data Table | Missing Media Preview
+- Fixed: EA WPForms | Color & typography not changing on "Name" label
+- Few minor bug fixes & improvements
+
+= 5.8.6 - 10/08/2023 =
+
+- Improved: EA Content Timeline | Added Scrollbar styling support for Horizontal layout
+- Improved: EA Event Calendar | Added visibility support for all the available events in the List View
+- Improved: EA Login Registration Form | Added Column Width support for all the fields
+- Improved: EA Filterable Gallery | Added option to select a Default category on page load
+- Improved: EA Login Registration Form | Added Filter option for Redirect after Login
+- Improved: EA Login Registration Form | Added Custom HTML/CSS support for the Welcome email
+- Improved: EA Login Registration Form | Added Shortcode controller support for user Login Notice
+- Improved: EA Login Registration Form | Added support for multiple redirect URLs based on user role 
+- Improved: EA Login Registration Form | Added support for Custom File Upload
+- Improved: EA Interactive Circle | Added Active as Default options for content items
+- Improved: EA Interactive Circle | Added Auto Trigger functionality on page load
+- Improved: EA Woo Cart | Added support to update Cart Automatically
+- Improved: EA Advanced Data Table | Added Pagination style support
+- Improved: EA Data Table | Added Custom Breakpoint controller for Responsive support 
+- Improved: EA Advanced Accordion | Accessibility improvements
+- Improved: EA Woo Product Gallery | Added option to show/hide sold-out products
+- Improved: EA Image Accordion | Added background overlay color support on Hover
+- Improved: EA Business Review | Added Dynamic Tag Support on Place ID 
+- Fixed: EA Woo Product Gallery | Quick view sales / stock out badge text customisation issue
+- Fixed: EA Sticky Video | Flickering issue
+- Fixed: EA Filterable Gallery | Image Filtering issue in Light Box mode
+- Fixed: EA Advanced Menu | Breakpoint and Responsive issues for the Layouts
+- Fixed: EA Advanced Tab | Custom ID Offset issue
+- Few minor bug fixes & improvements
+
 
 = 5.8.5 - 03/08/2023 =
 

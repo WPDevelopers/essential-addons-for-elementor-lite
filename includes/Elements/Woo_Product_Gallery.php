@@ -489,6 +489,16 @@ class Woo_Product_Gallery extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_product_out_of_stock_show',
+			[
+				'label'        => esc_html__( 'Show Stock Out Products?', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
+
+		$this->add_control(
 			'eael_product_gallery_show_secondary_image',
 			[
 				'label'        => __( 'Show Secondary Image on Hover', 'essential-addons-for-elementor-lite' ),
@@ -2475,31 +2485,31 @@ class Woo_Product_Gallery extends Widget_Base {
 
 				if ( file_exists( $template ) ) {
 					$settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
-					$query = new \WP_Query( $args );
-					if ( $query->have_posts() ) {
-						$found_posts      = $query->found_posts;
-						$max_page         = ceil( $found_posts / absint( $args['posts_per_page'] ) );
-						$args['max_page'] = $max_page;
-						
-						$show_secondary_image = isset( $settings['eael_product_gallery_show_secondary_image'] ) && 'yes' === $settings['eael_product_gallery_show_secondary_image'];
+					$query                    = new \WP_Query( $args );
+					$show_secondary_image     = isset( $settings['eael_product_gallery_show_secondary_image'] ) && 'yes' === $settings['eael_product_gallery_show_secondary_image'];
 
-						echo '<ul class="products eael-post-appender eael-post-appender-' . $this->get_id() . '" data-layout-mode="' . $settings[ "eael_product_gallery_items_layout" ] . '" data-show-secondary-image="' . intval($show_secondary_image) . '" >';
+					echo '<ul class="products eael-post-appender eael-post-appender-' . $this->get_id() . '" data-layout-mode="' . $settings["eael_product_gallery_items_layout"] . '" data-show-secondary-image="' . intval( $show_secondary_image ) . '" >';
+					if ( $query->have_posts() ) {
+						$found_posts         = $query->found_posts;
+						$max_page            = ceil( $found_posts / absint( $args['posts_per_page'] ) );
+						$args['max_page']    = $max_page;
+						$args['found_posts'] = $query->found_posts;
+
 						while ( $query->have_posts() ) {
 							$query->the_post();
 							include( $template );
 						}
 						wp_reset_postdata();
-						echo '</ul>';
 					} else {
-						_e( '<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite' );
+						echo '<h2 class="eael-product-not-found">' . __( 'No Product Found', 'essential-addons-for-elementor-lite' ) . '</h2>';
 					}
+					echo '</ul>';
+
 				} else {
-					_e( '<p class="no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
+					echo '<h2 class="eael-product-not-found">' . __( 'No Layout Found', 'essential-addons-for-elementor-lite' ) . '</h2>';
 				}
 
-				if ( $found_posts > $args['posts_per_page'] ) {
-					$this->print_load_more_button( $settings, $args, $dir_name );
-				}
+				$this->print_load_more_button( $settings, $args, $dir_name );
 				?>
             </div>
         </div>
@@ -2631,13 +2641,10 @@ class Woo_Product_Gallery extends Widget_Base {
 			}
 		}
 
-		if( isset( $args_tax_query_combined ) ){
-			$args[ 'tax_query' ][] = $args_tax_query_combined;
-		}
-
 		$args[ 'meta_query' ] = [ 'relation' => 'AND' ];
+		$show_stock_out_products = isset( $settings['eael_product_out_of_stock_show'] ) ? $settings['eael_product_out_of_stock_show'] : 'yes';
 
-		if ( get_option( 'woocommerce_hide_out_of_stock_items' ) == 'yes' ) {
+		if ( get_option( 'woocommerce_hide_out_of_stock_items' ) == 'yes' || 'yes' !== $show_stock_out_products  ) {
 			$args[ 'meta_query' ][] = [
 				'key'   => '_stock_status',
 				'value' => 'instock'
@@ -2659,22 +2666,6 @@ class Woo_Product_Gallery extends Widget_Base {
 					'operator' => 'NOT IN',
 				],
 			];
-
-			if ( $settings[ 'eael_product_gallery_categories' ] ) {
-				$args[ 'tax_query' ][] = [
-					'taxonomy' => 'product_cat',
-					'field'    => 'term_id',
-					'terms'    => $settings[ 'eael_product_gallery_categories' ],
-				];
-			}
-
-			if ( $settings[ 'eael_product_gallery_tags' ] ) {
-				$args[ 'tax_query' ][] = [
-					'taxonomy' => 'product_tag',
-					'field'    => 'term_id',
-					'terms'    => $settings[ 'eael_product_gallery_tags' ],
-				];
-			}
 		} else if ( $settings[ 'eael_product_gallery_product_filter' ] == 'best-selling-products' ) {
 			$args[ 'meta_key' ] = 'total_sales';
 			$args[ 'orderby' ]  = 'meta_value_num';
@@ -2685,6 +2676,10 @@ class Woo_Product_Gallery extends Widget_Base {
 			$args[ 'meta_key' ] = '_wc_average_rating';
 			$args[ 'orderby' ]  = 'meta_value_num';
 			$args[ 'order' ]    = 'DESC';
+		}
+
+		if( isset( $args_tax_query_combined ) ){
+			$args[ 'tax_query' ][] = $args_tax_query_combined;
 		}
 
 		return $args;
