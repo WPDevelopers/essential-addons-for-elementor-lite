@@ -53,7 +53,7 @@ class Woo_Product_List extends Widget_Base
 
     public function get_name()
     {
-        return 'eicon-woocommerce';
+        return 'woo-product-list';
     }
 
     public function get_title()
