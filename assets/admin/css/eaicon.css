@@ -215,6 +215,9 @@
 .eaicon-product-grid:before {
 	content: "\e93d";
 }
+.eaicon-woo-product-list:before {
+	content: "\e93d";
+}
 .eaicon-progress-bar:before {
 	content: "\e93e";
 }
