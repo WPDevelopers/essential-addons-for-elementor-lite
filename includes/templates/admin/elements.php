@@ -568,6 +568,13 @@ $elements = [
 				'promotion' => 'popular'
 			],
 			[
+				'key'       => 'woo-product-list',
+				'title'     => __( 'Woo Product List', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/woo-product-list/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/woo-product-list/',
+				'promotion' => 'new'
+			],
+			[
 				'key'       => 'woo-collections',
 				'title'     => __( 'Woo Product Collections', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/woocommerce-product-collections/',
