@@ -110,7 +110,7 @@ trait Admin {
                             <li class="tab__list"><a class="tab__item" href="#tools"><i class="ea-admin-icon eael-icon-tools"></i><?php echo __( 'Tools', 'essential-addons-for-elementor-lite' ); ?></a></li>
                             <li class="tab__list"><a class="tab__item" href="#integrations"><i class="ea-admin-icon eael-icon-plug"></i><?php echo __( 'Integrations', 'essential-addons-for-elementor-lite' ); ?></a></li>
                             <?php  if ( !$this->pro_enabled ) { ?>
-                                <li class="tab__list"><a class="tab__item" href="#go-pro"><i class="ea-admin-icon icon-lock-alt"></i><?php echo __( 'Go Premium', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                                <li class="tab__list"><a class="tab__item" href="#go-pro"><i class="ea-admin-icon eael-icon-lock-alt"></i><?php echo __( 'Go Premium', 'essential-addons-for-elementor-lite' ); ?></a></li>
                              <?php } ?>
                         </ul>
                     </div>
