@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.3
 Requires PHP: 7.0
-Stable tag: 5.8.7
+Stable tag: 5.8.10
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -145,6 +145,7 @@ Extensions (Free):
 31. [LearnDash Course List](https://essential-addons.com/elementor/learndash-course-list/)- Share LearnDash course list in Elementor
 32. [Advanced Search](https://essential-addons.com/elementor/advanced-search/)- Add a customizable, dynamic search bar
 33. [Woo Thank You](https://essential-addons.com/elementor/woo-thank-you)- Design a personalized thank you message on the WooCommerce order confirmation page
+34. [Woo Cross Sells](https://essential-addons.com/elementor/woo-cross-sells/)- Customize the display of cross-sell products to boost your sales potential 
 
 Extensions (Pro): 
 
@@ -250,6 +251,30 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.8.10 - 02/10/2023 =
+
+- Fixed: EA Filterable Gallery | Custom ID not working in Search and Filter Layout
+- Fixed: EA Product Grid & Product Carousel | SKU order not working 
+- Fixed: EA Product Grid | Sale/ Stock out badge style preset not working
+- Fixed: EA Image Accordion | On hover style items not collapsing when exiting the viewport
+- Fixed: EA Login/Register Form | Throwing Undefined Error
+- Fixed: EA Creative Buttons | Text color not changing for Tamaya effect
+- Improved: EA Filterable Gallery  | Added cookie acknowledgement  support
+- Improved: EA Event Calendar | Added option to show Google Calendar Display for Multi-Day Events in List View
+- Improved: EA Advanced Tabs | Accessibility WCAG guidelines
+- Few minor bug fixes & improvements
+
+= 5.8.9 - 14/09/2023 =
+
+- Improved: Security Enhancement
+- Added: WooCommerce HPOS Support
+- Few minor bug fixes & improvements
+
+= 5.8.8 - 07/09/2023 =
+
+- Fixed: EA Woo Product Grid | Load More button not working properly on responsive devices
+- Few minor bug fixes & improvements
 
 = 5.8.7 - 24/08/2023 =
 

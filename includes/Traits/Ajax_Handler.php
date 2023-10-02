@@ -7,6 +7,7 @@
 
 namespace Essential_Addons_Elementor\Traits;
 
+use Automattic\WooCommerce\Utilities\OrderUtil;
 use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 use Essential_Addons_Elementor\Template\Woocommerce\Checkout\Woo_Checkout_Helper;
 use Essential_Addons_Elementor\Traits\Template_Query;
