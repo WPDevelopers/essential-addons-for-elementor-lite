@@ -157,7 +157,7 @@ $extensions = [
 
                                     <span class="switch__box <?php echo esc_attr( $disabled ); ?>"></span>
                                 </label>
-	                            <?php printf( "%s", ( $disabled == 'disabled') ? '<i class="ea-admin-icon icon-lock-alt eael-lock-style"></i>' : '' ); ?>
+	                            <?php printf( "%s", ( $disabled == 'disabled') ? '<i class="ea-admin-icon eael-icon-lock-alt eael-lock-style"></i>' : '' ); ?>
                             </div>
                         </div>
                     </div>

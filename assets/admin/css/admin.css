@@ -50,7 +50,7 @@
     content: "\e905";
 }
 
-.icon-lock-alt:before {
+.eael-icon-lock-alt:before {
     content: "\e908";
 }
 
@@ -62,7 +62,7 @@
     content: "\e903";
 }
 
-.icon-play-alt:before {
+.eael-icon-play-alt:before {
     content: "\e90b";
 }
 
@@ -78,59 +78,59 @@
     content: "\e90a";
 }
 
-.icon-calendar:before {
+.eael-icon-calendar:before {
     content: "\e912";
 }
 
-.icon-course:before {
+.eael-icon-course:before {
     content: "\e913";
 }
 
-.icon-form:before {
+.eael-icon-form:before {
     content: "\e914";
 }
 
-.icon-gallery:before {
+.eael-icon-gallery:before {
     content: "\e915";
 }
 
-.icon-image-hotspot:before {
+.eael-icon-image-hotspot:before {
     content: "\e916";
 }
 
-.icon-instagram:before {
+.eael-icon-instagram:before {
     content: "\e917";
 }
 
-.icon-marker:before {
+.eael-icon-marker:before {
     content: "\e918";
 }
 
-.icon-modal:before {
+.eael-icon-modal:before {
     content: "\e919";
 }
 
-.icon-parallax:before {
+.eael-icon-parallax:before {
     content: "\e91a";
 }
 
-.icon-particel:before {
+.eael-icon-particel:before {
     content: "\e91b";
 }
 
-.icon-toggle:before {
+.eael-icon-toggle:before {
     content: "\e91c";
 }
 
-.icon-tooltip:before {
+.eael-icon-tooltip:before {
     content: "\e91d";
 }
 
-.icon-angle-down:before {
+.eael-icon-angle-down:before {
     content: "\e900";
 }
 
-.icon-angle-right:before {
+.eael-icon-angle-right:before {
     content: "\e901";
 }
 
@@ -138,7 +138,7 @@
     content: "\e902";
 }
 
-.icon-times:before {
+.eael-icon-times:before {
     content: "\e910";
 }
 
@@ -146,27 +146,27 @@
     content: "\e907";
 }
 
-.icon-long-arrow-right:before {
+.eael-icon-long-arrow-right:before {
     content: "\e909";
 }
 .eael-icon-community:before {
     content: "\e91e";
 }
-.icon-contribute:before {
+.eael-icon-contribute:before {
     content: "\e91f";
 }
 
-.icon-settings-loader:before {
+.eael-icon-settings-loader:before {
     content: "\e920";
 }
 
-.icon-settings-loader:before {
+.eael-icon-settings-loader:before {
     content: "\e920";
 }
-.icon-style-lock:before {
+.eael-icon-style-lock:before {
     content: "\e92a";
 }
-.icon-lock:before {
+.eael-icon-lock:before {
     content: "\e92a";
 }
 /* Start Setup Wizard */
