@@ -1126,23 +1126,6 @@ $config = [
                 ],
             ],
         ],
-        'fancy-chart' => [
-            'class' => '\Essential_Addons_Elementor\Pro\Elements\Fancy_Chart',
-            'dependency' => [
-                'js'  => [
-                    [
-                        'file'    => EAEL_PRO_PLUGIN_PATH . 'assets/front-end/js/lib-view/chart/chart.js',
-                        'type'    => 'lib',
-                        'context' => 'view',
-                    ],
-                    [
-                        'file'    => EAEL_PRO_PLUGIN_PATH . 'assets/front-end/js/view/fancy-chart.min.js',
-                        'type'    => 'self',
-                        'context' => 'view',
-                    ],
-                ],
-            ],
-        ],
     ],
     'extensions' => [
         'promotion' => [
