@@ -198,6 +198,16 @@ class Adv_Accordion extends Widget_Base
             ]
         );
 
+	    $this->add_control(
+		    'eael_adv_accordion_scroll_onclick',
+		    [
+			    'label'        => esc_html__('Scroll on Click', 'essential-addons-for-elementor-lite'),
+			    'type'         => Controls_Manager::SWITCHER,
+			    'default'      => 'no',
+			    'return_value' => 'yes',
+		    ]
+	    );
+
         $this->add_control(
             'eael_adv_accordion_faq_schema_show',
             [
@@ -1109,7 +1119,8 @@ class Adv_Accordion extends Widget_Base
 
         $this->add_render_attribute('eael-adv-accordion', 'class', 'eael-adv-accordion');
         $this->add_render_attribute('eael-adv-accordion', 'id', 'eael-adv-accordion-' . esc_attr($this->get_id()));
-        
+        $this->add_render_attribute('eael-adv-accordion', 'data-scroll-on-click', esc_attr( $settings['eael_adv_accordion_scroll_onclick'] ));
+
         if( !empty($settings['eael_adv_accordion_custom_id_offset']) ){
             $this->add_render_attribute('eael-adv-accordion', 'data-custom-id-offset', esc_attr( $settings['eael_adv_accordion_custom_id_offset'] ) );
         }
