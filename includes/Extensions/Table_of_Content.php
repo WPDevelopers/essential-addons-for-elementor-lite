@@ -152,6 +152,9 @@ class Table_of_Content
 					    'icon' => 'eicon-editor-h6',
 				    ],
 			    ],
+			    'condition' => [
+				    'eael_ext_table_of_content' => 'yes',
+			    ],
 			    'default' => 'h2',
 		    ]
 	    );
