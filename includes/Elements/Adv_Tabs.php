@@ -997,7 +997,9 @@ class Adv_Tabs extends Widget_Base
             $this->add_render_attribute('eael_tab_wrapper', 'data-custom-id-offset', esc_attr( $settings['eael_adv_tabs_custom_id_offset'] ) );
         }
 
-        $this->add_render_attribute('eael_tab_icon_position', 'class', esc_attr($settings['eael_adv_tab_icon_position'])); ?>
+        $this->add_render_attribute('eael_tab_icon_position', 'class', esc_attr($settings['eael_adv_tab_icon_position']));
+        $this->add_render_attribute('eael_tab_icon_position', 'role', 'tablist'); 
+        ?>
         <div <?php echo $this->get_render_attribute_string('eael_tab_wrapper'); ?>>
             <div class="eael-tabs-nav">
                 <ul <?php echo $this->get_render_attribute_string('eael_tab_icon_position'); ?>>
