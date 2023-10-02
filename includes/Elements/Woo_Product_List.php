@@ -162,62 +162,62 @@ class Woo_Product_List extends Widget_Base
     //     ]);
     // }
 
-    protected function register_controls()
-    {
-        $this->init_content_wc_notice_controls();
-        if (!function_exists('WC')) {
-            return;
-        }
-        // Content Controls
-        $this->init_content_layout_controls();
-        $this->init_content_product_settings_controls();
-        $this->eael_product_badges();
-        $this->init_content_addtocart_controls();
-        $this->init_content_load_more_controls();
-        $this->eael_product_pagination();
-        // Product Compare
-        $this->init_content_product_compare_controls();
-        $this->init_content_table_settings_controls();
+    // protected function register_controls()
+    // {
+        // $this->init_content_wc_notice_controls();
+        // if (!function_exists('WC')) {
+        //     return;
+        // }
+        // // Content Controls
+        // $this->init_content_layout_controls();
+        // $this->init_content_product_settings_controls();
+        // $this->eael_product_badges();
+        // $this->init_content_addtocart_controls();
+        // $this->init_content_load_more_controls();
+        // $this->eael_product_pagination();
+        // // Product Compare
+        // $this->init_content_product_compare_controls();
+        // $this->init_content_table_settings_controls();
 
-        // Style Controls---------------
-        $this->init_style_product_controls();
-        $this->init_style_color_typography_controls();
-        $this->init_style_addtocart_controls();
-        $this->sale_badge_style();
-        $this->eael_product_action_buttons();
-        $this->eael_product_action_buttons_style();
-        /**
-         * Load More Button Style Controls!
-         */
-        do_action('eael/controls/load_more_button_style', $this);
-        /**
-         * Pagination Style Controls!
-         */
-        $this->eael_product_pagination_style();
+        // // Style Controls---------------
+        // $this->init_style_product_controls();
+        // $this->init_style_color_typography_controls();
+        // $this->init_style_addtocart_controls();
+        // $this->sale_badge_style();
+        // $this->eael_product_action_buttons();
+        // $this->eael_product_action_buttons_style();
+        // /**
+        //  * Load More Button Style Controls!
+        //  */
+        // do_action('eael/controls/load_more_button_style', $this);
+        // /**
+        //  * Pagination Style Controls!
+        //  */
+        // $this->eael_product_pagination_style();
 
-        /**
-         * Pagination Style Controls!
-         */
-        $this->eael_product_view_popup_style();
-        // Product Compare Table Style
-        $container_class = '.eael-wcpc-modal';
-        $table = ".eael-wcpc-modal .eael-wcpc-wrapper table";
-        $table_title = ".eael-wcpc-modal .eael-wcpc-wrapper .wcpc-title";
-        $table_title_wrap = ".eael-wcpc-modal .eael-wcpc-wrapper .first-th";
-        $compare_btn_condition = [
-            'eael_woo_product_list_style_preset!' => [
-                'eael-product-preset-5',
-                'eael-product-preset-6',
-                'eael-product-preset-7',
-                'eael-product-preset-8',
-            ],
-            'eael_woo_product_list_layout!' => 'list',
-        ];
-        $this->init_style_compare_button_controls($compare_btn_condition);
-        $this->init_style_content_controls(compact('container_class'));
-        $this->init_style_table_controls(compact('table', 'table_title', 'table_title_wrap'));
-        $this->init_style_close_button_controls();
-    }
+        // /**
+        //  * Pagination Style Controls!
+        //  */
+        // $this->eael_product_view_popup_style();
+        // // Product Compare Table Style
+        // $container_class = '.eael-wcpc-modal';
+        // $table = ".eael-wcpc-modal .eael-wcpc-wrapper table";
+        // $table_title = ".eael-wcpc-modal .eael-wcpc-wrapper .wcpc-title";
+        // $table_title_wrap = ".eael-wcpc-modal .eael-wcpc-wrapper .first-th";
+        // $compare_btn_condition = [
+        //     'eael_woo_product_list_style_preset!' => [
+        //         'eael-product-preset-5',
+        //         'eael-product-preset-6',
+        //         'eael-product-preset-7',
+        //         'eael-product-preset-8',
+        //     ],
+        //     'eael_woo_product_list_layout!' => 'list',
+        // ];
+        // $this->init_style_compare_button_controls($compare_btn_condition);
+        // $this->init_style_content_controls(compact('container_class'));
+        // $this->init_style_table_controls(compact('table', 'table_title', 'table_title_wrap'));
+        // $this->init_style_close_button_controls();
+    // }
 
     // protected function init_content_layout_controls()
     // {
