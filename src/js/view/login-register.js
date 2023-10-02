@@ -136,6 +136,27 @@ ea.hooks.addAction("init", "ea", () => {
             }
         }
 
+        function getCookie(cname) {
+            const name = cname + "=",
+                decodedCookie = decodeURIComponent(document.cookie),
+                ca = decodedCookie.split(';');
+
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function removeCookie(cname) {
+            document.cookie = cname + "=;Max-Age=0;";
+        }
+
         $(document).ready(function () {
             let eaelGetTokenPromise = new Promise(function (eaelGetTokenResolve, eaelGetTokenReject) {
                 ea.getToken();
@@ -171,29 +192,7 @@ ea.hooks.addAction("init", "ea", () => {
                 }
             }
 
-            function getCookie(cname) {
-                const name = cname + "=",
-                    decodedCookie = decodeURIComponent(document.cookie),
-                    ca = decodedCookie.split(';');
-
-                for (let i = 0; i < ca.length; i++) {
-                    let c = ca[i];
-                    while (c.charAt(0) == ' ') {
-                        c = c.substring(1);
-                    }
-                    if (c.indexOf(name) == 0) {
-                        return c.substring(name.length, c.length);
-                    }
-                }
-                return "";
-            }
-
-            function removeCookie(cname) {
-                document.cookie = cname + "=;Max-Age=0;";
-            }
-
             const errormessage = getCookie('eael_login_error_' + widgetId);
-
             if (errormessage) {
                 $('.eael-form-validation-container', $scope).html(`<p class="eael-form-msg invalid">${errormessage}</p>`);
                 removeCookie('eael_login_error_' + widgetId);
