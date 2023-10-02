@@ -144,7 +144,7 @@ $extensions = [
                                     <span class="tooltip-text"><?php esc_html_e( 'Documentation', 'essential-addons-for-elementor-lite' ); ?></span>
                                 </a>
                                 <a target="_blank" href="<?php echo esc_url( $item[ 'demo_link' ] ); ?>" class="element__icon">
-                                    <i class="ea-admin-icon icon-monitor"></i>
+                                    <i class="ea-admin-icon eael-icon-monitor"></i>
                                     <span class="tooltip-text"><?php esc_html_e( 'Demo', 'essential-addons-for-elementor-lite' ); ?></span>
                                 </a>
                                 <label class="eael-switch">
