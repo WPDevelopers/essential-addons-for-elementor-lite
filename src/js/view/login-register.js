@@ -171,20 +171,33 @@ ea.hooks.addAction("init", "ea", () => {
                 }
             }
 
-            $.ajax({
-                url: localize.ajaxurl,
-                type: "post",
-                data: {
-                    action: "eael_get_login_error",
-                    nonce: localize.nonce,
-                    widget_id: widgetId
-                },
-                success: function (response) {
-                    if (response) {
-                        $('.eael-form-validation-container', $scope).html(`<p class="eael-form-msg invalid">${response}</p>`);
+            function getCookie(cname) {
+                const name = cname + "=",
+                    decodedCookie = decodeURIComponent(document.cookie),
+                    ca = decodedCookie.split(';');
+
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
                     }
                 }
-            });
+                return "";
+            }
+
+            function removeCookie(cname) {
+                document.cookie = cname + "=;Max-Age=0;";
+            }
+
+            const errormessage = getCookie('eael_login_error_' + widgetId);
+
+            if (errormessage) {
+                $('.eael-form-validation-container', $scope).html(`<p class="eael-form-msg invalid">${errormessage}</p>`);
+                removeCookie('eael_login_error_' + widgetId);
+            }
         });
 
         // reCAPTCHA

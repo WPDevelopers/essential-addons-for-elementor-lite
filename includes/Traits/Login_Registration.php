@@ -81,7 +81,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_login_error_' . $widget_id, $err_msg, false );
+			setcookie( 'eael_login_error_' . $widget_id, $err_msg );
 
             if (isset($_SERVER['HTTP_REFERER'])) {
                 wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -95,7 +95,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_login_error_' . $widget_id, $err_msg, false );
+			setcookie( 'eael_login_error_' . $widget_id, $err_msg );
 
             if (isset($_SERVER['HTTP_REFERER'])) {
                 wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -107,7 +107,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_login_error_' . $widget_id, $err_msg, false );
+			setcookie( 'eael_login_error_' . $widget_id, $err_msg );
 
             if (isset($_SERVER['HTTP_REFERER'])) {
                 wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -121,7 +121,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_login_error_' . $widget_id, $err_msg, false );
+			setcookie( 'eael_login_error_' . $widget_id, $err_msg );
 
             if (isset($_SERVER['HTTP_REFERER'])) {
                 wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -144,7 +144,7 @@ trait Login_Registration {
 				if ( $ajax ) {
 					wp_send_json_error( $err_msg );
 				}
-				update_option( 'eael_login_error_' . $widget_id, $err_msg, false );
+				setcookie( 'eael_login_error_' . $widget_id, $err_msg );
 
 				if (isset($_SERVER['HTTP_REFERER'])) {
 					wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -192,7 +192,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_login_error_' . $widget_id, $err_msg, false );
+			setcookie( 'eael_login_error_' . $widget_id, $err_msg );
 		} else {
 			wp_set_current_user( $user_data->ID, $user_login );
 			$current_user_role = ! empty( $user_data->roles[0] ) ? $user_data->roles[0] : '';
