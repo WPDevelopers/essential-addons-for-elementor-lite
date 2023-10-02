@@ -38,15 +38,15 @@
     content: "\e906";
 }
 
-.icon-tools:before {
+.eael-icon-tools:before {
     content: "\e911";
 }
 
-.icon-element:before {
+.eael-icon-element:before {
     content: "\e904";
 }
 
-.icon-extension:before {
+.eael-icon-extension:before {
     content: "\e905";
 }
 
@@ -54,11 +54,11 @@
     content: "\e908";
 }
 
-.icon-plug:before {
+.eael-icon-plug:before {
     content: "\e90c";
 }
 
-.icon-edit:before {
+.eael-icon-edit:before {
     content: "\e903";
 }
 
@@ -66,11 +66,11 @@
     content: "\e90b";
 }
 
-.icon-star:before {
+.eael-icon-star:before {
     content: "\e90e";
 }
 
-.icon-support:before {
+.eael-icon-support:before {
     content: "\e90f";
 }
 
@@ -149,7 +149,7 @@
 .icon-long-arrow-right:before {
     content: "\e909";
 }
-.icon-community:before {
+.eael-icon-community:before {
     content: "\e91e";
 }
 .icon-contribute:before {
