@@ -246,7 +246,7 @@ class Bootstrap
 
 
         // Admin
-        if (is_admin()) {
+	    if ( is_admin() ) {
             // Admin
             if (!$this->pro_enabled) {
                 $this->admin_notice();
@@ -304,6 +304,8 @@ class Bootstrap
 			        return $data;
 		        } );
 	        }
+        } else {
+	        add_action( 'wp', [ $this, 'eael_post_view_count' ] );
         }
 
 	    // beehive theme compatibility

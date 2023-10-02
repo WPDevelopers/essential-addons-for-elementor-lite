@@ -661,5 +661,13 @@ trait Helper
         </script>
 		<?php
 	}
+
+	public function eael_post_view_count() {
+		if ( is_single() ) {
+			$post_id    = get_the_ID();
+			$view_count = absint( get_post_meta( $post_id, '_eael_post_view_count', true ) );
+			update_post_meta( $post_id, '_eael_post_view_count', ++ $view_count );
+		}
+	}
 }
 
