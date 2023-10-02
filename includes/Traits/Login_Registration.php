@@ -134,8 +134,9 @@ trait Login_Registration {
 		$widget_id = ! empty( $_POST['widget_id'] ) ? sanitize_text_field( $_POST['widget_id'] ) : '';
 		
 		//v2 or v3 
+		$is_version_2 = isset( $settings['enable_register_recaptcha'] ) && 'yes' === $settings['enable_register_recaptcha'];
 		$is_version_3 = isset( $settings['login_register_recaptcha_version'] ) && 'v3' === $settings['login_register_recaptcha_version'];
-		if ( 'yes' === $settings[ "enable_register_recaptcha" ] || $is_version_3 ) {
+		if ( $is_version_2 || $is_version_3 ) {
 			$ld_recaptcha_version = $is_version_3 ? 'v3' : 'v2';
 			
 			if( ! $this->lr_validate_recaptcha($ld_recaptcha_version) ) {
@@ -398,8 +399,9 @@ trait Login_Registration {
 			$errors['terms_conditions'] =  isset( $settings['err_tc'] ) ? Helper::eael_wp_kses( $settings['err_tc'] ) : __( 'You did not accept the Terms and Conditions. Please accept it and try again.', 'essential-addons-for-elementor-lite' );
 		}
 		//v2 or v3
+		$is_version_2 = isset( $settings['enable_register_recaptcha'] ) && 'yes' === $settings['enable_register_recaptcha'];
 		$is_version_3 = isset( $settings['login_register_recaptcha_version'] ) && 'v3' === $settings['login_register_recaptcha_version'];
-		if ( 'yes' === $settings[ "enable_register_recaptcha" ] || $is_version_3 ) {
+		if ( $is_version_2 || $is_version_3 ) {
 			$ld_recaptcha_version = $is_version_3 ? 'v3' : 'v2';
 			
 			if( ! $this->lr_validate_recaptcha($ld_recaptcha_version) ) {
