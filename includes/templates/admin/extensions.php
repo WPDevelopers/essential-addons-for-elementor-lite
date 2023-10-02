@@ -140,7 +140,7 @@ $extensions = [
                                     </a>
 	                            <?php endif; ?>
                                 <a target="_blank" href="<?php echo esc_url( $item[ 'doc_link' ] ); ?>" class="element__icon">
-                                    <i class="ea-admin-icon icon-doc"></i>
+                                    <i class="ea-admin-icon eael-icon-doc"></i>
                                     <span class="tooltip-text"><?php esc_html_e( 'Documentation', 'essential-addons-for-elementor-lite' ); ?></span>
                                 </a>
                                 <a target="_blank" href="<?php echo esc_url( $item[ 'demo_link' ] ); ?>" class="element__icon">
