@@ -16,7 +16,7 @@ class advancedDataTable {
     );
     let classCollection = {};
 
-    if (!ea.isEditMode && table !== null) {
+    if (!eael.isEditMode && table !== null) {
       // search
       this.initTableSearch(table, search, pagination);
 
@@ -441,8 +441,8 @@ class advancedDataTable {
   }
 }
 
-ea.hooks.addAction("init", "ea", () => {
-  if (ea.elementStatusCheck('eaelAdvancedDataTable')) {
+eael.hooks.addAction("init", "ea", () => {
+  if (eael.elementStatusCheck('eaelAdvancedDataTable')) {
     return false;
   }
   new advancedDataTable();
