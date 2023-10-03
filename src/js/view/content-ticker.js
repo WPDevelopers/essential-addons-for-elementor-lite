@@ -1,4 +1,4 @@
-ea.hooks.addAction("init", "ea", () => {
+eael.hooks.addAction("init", "ea", () => {
     var ContentTicker = function($scope, $) {
         var $contentTicker = $scope.find(".eael-content-ticker").eq(0),
             $items =
