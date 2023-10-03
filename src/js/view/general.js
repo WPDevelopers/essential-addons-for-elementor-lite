@@ -1,7 +1,7 @@
 import { createHooks } from "@wordpress/hooks";
 
 window.isEditMode = false;
-window.ea = {
+window.eael = {
 	hooks: createHooks(),
 	isEditMode: false,
 	elementStatusCheck:function(name){
@@ -13,7 +13,7 @@ window.ea = {
 		return false;
 	}
 };
-ea.hooks.addAction("widgets.reinit", "ea", ($content) => {
+eael.hooks.addAction("widgets.reinit", "ea", ($content) => {
 	let filterGallery = jQuery(".eael-filter-gallery-container", $content);
 	let postGridGallery = jQuery(
 		".eael-post-grid:not(.eael-post-carousel)",
@@ -53,46 +53,46 @@ ea.hooks.addAction("widgets.reinit", "ea", ($content) => {
 	}
 
 	if (eventCalendar.length) {
-		ea.hooks.doAction("eventCalendar.reinit");
+		eael.hooks.doAction("eventCalendar.reinit");
 	}
 
 	if (testimonialSlider.length) {
-		ea.hooks.doAction("testimonialSlider.reinit");
+		eael.hooks.doAction("testimonialSlider.reinit");
 	}
 
 	if (teamMemberCarousel.length) {
-		ea.hooks.doAction("teamMemberCarousel.reinit");
+		eael.hooks.doAction("teamMemberCarousel.reinit");
 	}
 
 	if (postCarousel.length) {
-		ea.hooks.doAction("postCarousel.reinit");
+		eael.hooks.doAction("postCarousel.reinit");
 	}
 
 	if (logoCarousel.length) {
-		ea.hooks.doAction("logoCarousel.reinit");
+		eael.hooks.doAction("logoCarousel.reinit");
 	}
 
 	if (twitterCarousel.length) {
-		ea.hooks.doAction("twitterCarousel.reinit");
+		eael.hooks.doAction("twitterCarousel.reinit");
 	}
 });
 
 jQuery(window).on("elementor/frontend/init", function () {
 	window.isEditMode = elementorFrontend.isEditMode();
-	window.ea.isEditMode = elementorFrontend.isEditMode();
+	window.eael.isEditMode = elementorFrontend.isEditMode();
 
 	// hooks
-	ea.hooks.doAction("init");
+	eael.hooks.doAction("init");
 
 	// init edit mode hook
-	if (ea.isEditMode) {
-		ea.hooks.doAction("editMode.init");
+	if (eael.isEditMode) {
+		eael.hooks.doAction("editMode.init");
 	}
 });
 
 (function ($) {
-	ea.getToken = () => {
-		if (localize.nonce && !ea.noncegenerated) {
+	eael.getToken = () => {
+		if (localize.nonce && !eael.noncegenerated) {
 			$.ajax({
 				url: localize.ajaxurl,
 				type: "post",
@@ -102,7 +102,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 				success: function (response) {
 					if (response.success) {
 						localize.nonce = response.data.nonce
-						ea.noncegenerated = true;
+						eael.noncegenerated = true;
 					}
 				}
 			});
