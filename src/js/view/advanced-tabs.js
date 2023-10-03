@@ -1,5 +1,5 @@
-ea.hooks.addAction("init", "ea", () => {
-	if (ea.elementStatusCheck('eaelAdvancedTabs')) {
+eael.hooks.addAction("init", "ea", () => {
+	if (eael.elementStatusCheck('eaelAdvancedTabs')) {
 		return false;
 	}
 	elementorFrontend.hooks.addAction(
@@ -98,7 +98,7 @@ ea.hooks.addAction("init", "ea", () => {
 					$(tabsContent).removeClass("active").addClass("inactive");
 					$(tabsContent).eq(currentTabIndex).addClass("active").removeClass("inactive");
 				}
-				ea.hooks.doAction("ea-advanced-tabs-triggered", $(tabsContent).eq(currentTabIndex));
+				eael.hooks.doAction("ea-advanced-tabs-triggered", $(tabsContent).eq(currentTabIndex));
 				
 				$(tabsContent).each(function (index) {
 					$(this).removeClass("active-default");
@@ -144,7 +144,7 @@ ea.hooks.addAction("init", "ea", () => {
 				}
 				
 				if ($evCalendar.length) {
-					ea.hooks.doAction("eventCalendar.reinit");
+					eael.hooks.doAction("eventCalendar.reinit");
 				}
 
 				setTimeout(function () {
@@ -153,7 +153,7 @@ ea.hooks.addAction("init", "ea", () => {
 			});
 
 			// If hashTag is not null then scroll to that hashTag smoothly
-			if( typeof hashTag !== 'undefined' && hashTag && !ea.elementStatusCheck('eaelAdvancedTabScroll')){
+			if( typeof hashTag !== 'undefined' && hashTag && !eael.elementStatusCheck('eaelAdvancedTabScroll')){
 				let $customIdOffsetValTab = $customIdOffsetTab ? parseFloat($customIdOffsetTab) : 0;
 					$('html, body').animate({
 						scrollTop: $("#"+hashTag).offset().top - $customIdOffsetValTab,
