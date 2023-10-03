@@ -1,4 +1,4 @@
-ea.hooks.addAction("init", "ea", () => {
+eael.hooks.addAction("init", "ea", () => {
 	elementorFrontend.hooks.addAction(
 		"frontend/element_ready/eael-adv-accordion.default",
 		function ($scope, $) {
@@ -68,8 +68,8 @@ ea.hooks.addAction("init", "ea", () => {
 						$this.next().slideDown($accordionSpeed);
 					}
 				}
-				ea.hooks.doAction("widgets.reinit",$this.parent());
-				ea.hooks.doAction("ea-advanced-accordion-triggered", $this.next());
+				eael.hooks.doAction("widgets.reinit",$this.parent());
+				eael.hooks.doAction("ea-advanced-accordion-triggered", $this.next());
 			});
 
 			$scope.on('keydown', '.eael-accordion-header', function (e) {
@@ -79,7 +79,7 @@ ea.hooks.addAction("init", "ea", () => {
 			});
 
 			// If hashTag is not null then scroll to that hashTag smoothly
-			if( typeof hashTag !== 'undefined' && hashTag && !ea.elementStatusCheck('eaelAdvancedAccordionScroll') ){
+			if( typeof hashTag !== 'undefined' && hashTag && !eael.elementStatusCheck('eaelAdvancedAccordionScroll') ){
 				let $customIdOffsetVal = $customIdOffset ? parseFloat($customIdOffset) : 0;
 				$('html, body').animate({
 					scrollTop: $("#"+hashTag).offset().top - $customIdOffsetVal,
