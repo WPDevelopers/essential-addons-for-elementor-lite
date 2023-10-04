@@ -1,6 +1,6 @@
-ea.hooks.addAction("init", "ea", () => {
+eael.hooks.addAction("init", "ea", () => {
 	const productGrid = function ($scope, $) {
-		ea.hooks.doAction("quickViewAddMarkup",$scope,$);
+		eael.hooks.doAction("quickViewAddMarkup",$scope,$);
 		const $wrap = $scope.find("#eael-product-grid"); // cache wrapper
 		const widgetId = $wrap.data("widget-id");
 		const pageId = $wrap.data("page-id");
@@ -257,7 +257,7 @@ ea.hooks.addAction("init", "ea", () => {
 			});
 		});
 
-		ea.hooks.doAction("quickViewPopupViewInit",$scope,$);
+		eael.hooks.doAction("quickViewPopupViewInit",$scope,$);
 
 		if (isEditMode) {
 			$(".eael-product-image-wrap .woocommerce-product-gallery").css(
