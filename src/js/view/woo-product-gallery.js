@@ -1,9 +1,9 @@
-ea.hooks.addAction("init", "ea", () => {
+eael.hooks.addAction("init", "ea", () => {
 
 	const wooProductGallery = function ($scope, $) {
 		let showSecondaryImageOnHover = $scope.find(".products.eael-post-appender").data("show-secondary-image");
 		// category
-		ea.hooks.doAction("quickViewAddMarkup",$scope,$);
+		eael.hooks.doAction("quickViewAddMarkup",$scope,$);
 		const $post_cat_wrap = $('.eael-cat-tab', $scope)
 
 		$('.eael-cat-tab li:first a', $scope).addClass('active');
@@ -105,7 +105,7 @@ ea.hooks.addAction("init", "ea", () => {
 			});
 		});
 		
-		ea.hooks.doAction("quickViewPopupViewInit",$scope,$);
+		eael.hooks.doAction("quickViewPopupViewInit",$scope,$);
 		
 		if (isEditMode) {
 			$(".eael-product-image-wrap .woocommerce-product-gallery").css(
@@ -142,7 +142,7 @@ ea.hooks.addAction("init", "ea", () => {
 		}
 	};
 
-    if (ea.elementStatusCheck('productGalleryLoad')) {
+    if (eael.elementStatusCheck('productGalleryLoad')) {
         return false;
     }
 
