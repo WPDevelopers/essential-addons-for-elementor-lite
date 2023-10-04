@@ -395,6 +395,9 @@ class Product_Grid extends Widget_Base
             'type' => Controls_Manager::SELECT,
             'options' => $this->eael_get_product_orderby_options(),
             'default' => 'date',
+            'condition' => [
+                'eael_product_grid_product_filter!' => [ 'best-selling-products', 'top-products' ],
+            ]
 
         ]);
 
@@ -1793,7 +1796,10 @@ class Product_Grid extends Widget_Base
                     'sale-preset-4' => esc_html__('Preset 4', 'essential-addons-for-elementor-lite'),
                     'sale-preset-5' => esc_html__('Preset 5', 'essential-addons-for-elementor-lite'),
 
-                ]
+                ],
+                'condition' => [
+                    'eael_product_grid_style_preset!' => 'eael-product-default',
+                ],
             ]
         );
 
@@ -1814,6 +1820,7 @@ class Product_Grid extends Widget_Base
                 ],
                 'condition' => [
                     'eael_product_grid_layout!' => 'list',
+                    'eael_product_grid_style_preset!' => 'eael-product-default',
                 ],
             ]
         );
@@ -3246,7 +3253,7 @@ class Product_Grid extends Widget_Base
             $args['orderby'] = 'meta_value_num';
             $args['meta_key'] = '_price';
         } else if ($settings['orderby'] == '_sku') {
-            $args['orderby'] = 'meta_value_num';
+            $args['orderby'] = 'meta_value meta_value_num';
             $args['meta_key'] = '_sku';
         } else {
             $args['orderby'] = (isset($settings['orderby']) ? $settings['orderby'] : 'date');
