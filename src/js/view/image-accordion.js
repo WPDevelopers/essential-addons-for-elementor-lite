@@ -50,7 +50,7 @@ var ImageAccordion = function ($scope, $) {
         });
     }
 };
-ea.hooks.addAction("init", "ea", () => {
+eael.hooks.addAction("init", "ea", () => {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-image-accordion.default",
         ImageAccordion
