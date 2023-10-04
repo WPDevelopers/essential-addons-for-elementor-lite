@@ -1,4 +1,4 @@
-ea.hooks.addAction( "init", "ea", () => {
+eael.hooks.addAction( "init", "ea", () => {
 	const interactiveCircle = function ( $scope, $ ) {
 		
 		var $circleWrap = $scope.find( ".eael-circle-wrapper" );
