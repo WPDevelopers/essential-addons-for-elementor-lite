@@ -293,7 +293,7 @@ var EventCalendar = function ($scope, $) {
 		});
 		observer.observe(element[0]);
 
-		ea.hooks.addAction("eventCalendar.reinit", "ea", () => {
+		eael.hooks.addAction("eventCalendar.reinit", "ea", () => {
 			calendar.today();
 		});
 	}
@@ -316,7 +316,7 @@ var EventCalendar = function ($scope, $) {
 
 jQuery(window).on("elementor/frontend/init", function () {
 
-	if (ea.elementStatusCheck('eaelEventCalendar')) {
+	if (eael.elementStatusCheck('eaelEventCalendar')) {
 		return false;
 	}
 
