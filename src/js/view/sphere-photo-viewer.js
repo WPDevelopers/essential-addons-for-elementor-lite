@@ -1,4 +1,5 @@
 const SherePhotoViewer = function ($scope, $) {
+    console.log('started');
     const viewer = new PhotoSphereViewer.Viewer({
         container: document.querySelector('#sphere-photo'),
         panorama: 'https://photo-sphere-viewer-data.netlify.app/assets/sphere.jpg',
