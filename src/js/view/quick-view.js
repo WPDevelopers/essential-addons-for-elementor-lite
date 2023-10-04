@@ -173,12 +173,12 @@ const QuickView = {
 	},
 }
 
-if (!ea.elementStatusCheck('eaelQuickView')) {
-	ea.hooks.addAction('quickViewAddMarkup', 'ea', QuickView.quickViewAddMarkup, 10);
-	ea.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.openPopup, 10);
-	ea.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.closePopup, 10);
-	ea.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.singlePageAddToCartButton, 10);
-	ea.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.preventStringInNumberField, 10);
+if (!eael.elementStatusCheck('eaelQuickView')) {
+	eael.hooks.addAction('quickViewAddMarkup', 'ea', QuickView.quickViewAddMarkup, 10);
+	eael.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.openPopup, 10);
+	eael.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.closePopup, 10);
+	eael.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.singlePageAddToCartButton, 10);
+	eael.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.preventStringInNumberField, 10);
 }
 
 
