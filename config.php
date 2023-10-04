@@ -1126,6 +1126,25 @@ $config = [
                 ],
             ],
         ],
+        'sphere-photo-viewer' => [
+	        'class'      => '\Essential_Addons_Elementor\Elements\Sphere_Photo_Viewer',
+	        'dependency' => [
+		        'css' => [
+			        [
+				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/sphere-photo-viewer.min.css',
+				        'type'    => 'self',
+				        'context' => 'view',
+			        ],
+		        ],
+		        'js'  => [
+			        [
+				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/sphere-photo-viewer.min.js',
+				        'type'    => 'self',
+				        'context' => 'view',
+			        ],
+		        ],
+	        ],
+        ],
     ],
     'extensions' => [
         'promotion' => [
