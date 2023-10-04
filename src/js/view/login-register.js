@@ -1,5 +1,5 @@
-ea.hooks.addAction("init", "ea", () => {
-    if (ea.elementStatusCheck('eaelLoginRegister')) {
+eael.hooks.addAction("init", "ea", () => {
+    if (eael.elementStatusCheck('eaelLoginRegister')) {
         return false;
     }
 
@@ -138,10 +138,10 @@ ea.hooks.addAction("init", "ea", () => {
 
         $(document).ready(function () {
             let eaelGetTokenPromise = new Promise(function (eaelGetTokenResolve, eaelGetTokenReject) {
-                ea.getToken();
+                eael.getToken();
 
                 let interval = setInterval(function () {
-                    if (ea.noncegenerated === true && typeof localize.nonce !== 'undefined') {
+                    if (eael.noncegenerated === true && typeof localize.nonce !== 'undefined') {
                         eaelGetTokenResolve(localize.nonce);
                         clearInterval(interval);
                     }
