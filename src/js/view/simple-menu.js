@@ -338,7 +338,7 @@ var SimpleMenu = function ($scope, $) {
 
 jQuery(window).on('elementor/frontend/init', function () {
 
-    if (ea.elementStatusCheck('eaelSimpleMenu')) {
+    if (eael.elementStatusCheck('eaelSimpleMenu')) {
         return false;
     }
 
