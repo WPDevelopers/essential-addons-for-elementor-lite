@@ -293,7 +293,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 		}
 	};
 
-	if (ea.elementStatusCheck('eaelFilterableGallery')) {
+	if (eael.elementStatusCheck('eaelFilterableGallery')) {
 		return false;
 	}
 
