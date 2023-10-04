@@ -120,6 +120,7 @@ class Sphere_Photo_Viewer extends Widget_Base {
 	}
 
 	protected function render() {
-
+		$settings = $this->get_settings_for_display();
+		echo '<div id="sphere-photo"></div>';
 	}
 }
