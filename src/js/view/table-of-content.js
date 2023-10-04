@@ -371,7 +371,7 @@
 		}
 
 
-		if (typeof ea !== 'undefined' && ea.isEditMode){
+		if (typeof eael !== 'undefined' && eael.isEditMode){
 			elementorFrontend.hooks.addAction(
 				"frontend/element_ready/widget",
 				function ($scope, jQuery) {
