@@ -75,18 +75,30 @@ class Sphere_Photo_Viewer extends Widget_Base {
 		);
 
 		$this->add_control(
-			'ea_spv_layout',
+			'ea_spv_caption',
 			[
-				'label'       => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
-				'type'        => Controls_Manager::SELECT,
-				'default'     => 'style-1',
-				'label_block' => false,
-				'options'     => apply_filters( 'eael/woo-cart/layout', [
-					'style-1' => esc_html__( 'Style 1', 'essential-addons-for-elementor-lite' ),
-					'style-2' => esc_html__( 'Style 2', 'essential-addons-for-elementor-lite' ),
-					'style-3' => esc_html__( 'Style 3', 'essential-addons-for-elementor-lite' ),
-					'style-4' => esc_html__( 'Style 4', 'essential-addons-for-elementor-lite' ),
-				] ),
+				'label'       => __( 'Caption', 'photo-sphere-viewer' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => __( 'Parc national du Mercantour <b>&copy; Damien Sorel</b>', 'essential-addons-for-elementor-lite' ),
+				'placeholder' => __( 'Type your title here', 'essential-addons-for-elementor-lite' ),
+				'ai'          => [
+					'active' => false
+				]
+			]
+		);
+
+		$this->add_control(
+			'ea_spv_image',
+			[
+				'label'   => __( 'Image', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::MEDIA,
+				'default' => [
+					'url' => 'https://photo-sphere-viewer-data.netlify.app/assets/sphere.jpg',
+
+				],
+				'ai'      => [
+					'active' => false
+				]
 			]
 		);
 
@@ -120,7 +132,22 @@ class Sphere_Photo_Viewer extends Widget_Base {
 	}
 
 	protected function render() {
-		$settings = $this->get_settings_for_display();
-		echo '<div id="sphere-photo" style="height: 500px;"></div>';
+		$settings        = $this->get_settings_for_display();
+		$container_id    = "eael-psv-{$this->get_id()}";
+		$sphere_settings = json_encode( [
+			'caption'   => $settings['ea_spv_caption'],
+			'panorama'  => $settings['ea_spv_image']['url'],
+			'container' => $container_id
+		] );
+		$this->add_render_attribute( [
+			'sphere-wrapper' => [
+				'data-settings' => $sphere_settings
+			]
+		] )
+		?>
+		<div class="eael-sphere-photo-wrapper" <?php $this->print_render_attribute_string( 'sphere-wrapper' ) ?>>
+			<div id="<?php echo esc_attr( $container_id ); ?>" style="height: 500px;"></div>
+		</div>
+		<?php
 	}
 }

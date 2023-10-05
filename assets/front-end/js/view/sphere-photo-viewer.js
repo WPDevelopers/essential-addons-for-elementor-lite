@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("var SherePhotoViewer = function SherePhotoViewer($scope, $) {\n  var viewer = new PhotoSphereViewer.Viewer({\n    container: document.querySelector('#sphere-photo'),\n    panorama: 'https://photo-sphere-viewer-data.netlify.app/assets/sphere.jpg'\n  });\n};\njQuery(window).on(\"elementor/frontend/init\", function () {\n  elementorFrontend.hooks.addAction(\"frontend/element_ready/eael-sphere-photo-viewer.default\", SherePhotoViewer);\n});\n\n//# sourceURL=webpack:///./src/js/view/sphere-photo-viewer.js?");
+eval("var SherePhotoViewer = function SherePhotoViewer($scope, $) {\n  console.log('started');\n  var sphereData = $scope.find('.eael-sphere-photo-wrapper').data('settings');\n  var viewer = new PhotoSphereViewer.Viewer(sphereData);\n};\njQuery(window).on(\"elementor/frontend/init\", function () {\n  elementorFrontend.hooks.addAction(\"frontend/element_ready/eael-sphere-photo-viewer.default\", SherePhotoViewer);\n});\n\n//# sourceURL=webpack:///./src/js/view/sphere-photo-viewer.js?");
 
 /***/ })
 
