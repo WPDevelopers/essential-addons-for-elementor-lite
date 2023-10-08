@@ -15,15 +15,15 @@ use Elementor\Controls_Manager;
 // use Elementor\Group_Control_Typography;
 // use Elementor\Plugin;
 use Elementor\Widget_Base;
-// use Essential_Addons_Elementor\Classes\Helper as HelperClass;
+use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 // use Essential_Addons_Elementor\Template\Content\Woo_Product_List as Woo_Product_List_Trait;
-// use Essential_Addons_Elementor\Traits\Helper;
-// use Essential_Addons_Elementor\Traits\Woo_Product_Comparable;
+use Essential_Addons_Elementor\Traits\Woo_Product_Comparable;
+use Essential_Addons_Elementor\Traits\Helper;
 
 class Woo_Product_List extends Widget_Base
 {
     // use Woo_Product_Comparable;
-    // use Helper;
+    use Helper;
     // use Woo_Product_List_Trait;
 
     // private $is_show_custom_add_to_cart = false;
@@ -165,12 +165,14 @@ class Woo_Product_List extends Widget_Base
     protected function register_controls()
     {
         // $this->init_content_wc_notice_controls();
-        // if (!function_exists('WC')) {
-        //     return;
-        // }
+        
+        if ( ! function_exists( 'WC' ) ) {
+            return;
+        }
+
         // Content Controls
         $this->init_content_layout_controls();
-        // $this->init_content_product_settings_controls();
+        $this->init_content_product_settings_controls();
         // $this->eael_product_badges();
         // $this->init_content_addtocart_controls();
         // $this->init_content_load_more_controls();
@@ -221,12 +223,12 @@ class Woo_Product_List extends Widget_Base
 
     protected function init_content_layout_controls()
     {
-        $this->start_controls_section(
-            'eael_section_woo_product_list_layouts',
-            [
-                'label' => esc_html__('Layouts', 'essential-addons-for-elementor-lite'),
-            ]
-        );
+        // $this->start_controls_section(
+        //     'eael_section_woo_product_list_layouts',
+        //     [
+        //         'label' => esc_html__('Layouts', 'essential-addons-for-elementor-lite'),
+        //     ]
+        // );
         // $this->add_control(
         //     'eael_woo_product_list_layout',
         //     [
@@ -263,23 +265,23 @@ class Woo_Product_List extends Widget_Base
         //     ]
         // );
 
-        $this->add_control(
-            'eael_product_list_style_preset',
-            [
-                'label' => esc_html__('Style Preset', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'default' => 'eael-product-list-preset-1',
-                'options' => [
-                    'eael-product-list-preset-1' => esc_html__('Preset 1', 'essential-addons-for-elementor-lite'),
-                    'eael-product-list-preset-2' => esc_html__('Preset 2', 'essential-addons-for-elementor-lite'),
-                    'eael-product-list-preset-3' => esc_html__('Preset 3', 'essential-addons-for-elementor-lite'),
-                    'eael-product-list-preset-4' => esc_html__('Preset 4', 'essential-addons-for-elementor-lite'),
-                ],
-                // 'condition' => [
-                //     'eael_woo_product_list_layout' => ['list'],
-                // ],
-            ]
-        );
+        // $this->add_control(
+        //     'eael_product_list_style_preset',
+        //     [
+        //         'label' => esc_html__('Style Preset', 'essential-addons-for-elementor-lite'),
+        //         'type' => Controls_Manager::SELECT,
+        //         'default' => 'eael-product-list-preset-1',
+        //         'options' => [
+        //             'eael-product-list-preset-1' => esc_html__('Preset 1', 'essential-addons-for-elementor-lite'),
+        //             'eael-product-list-preset-2' => esc_html__('Preset 2', 'essential-addons-for-elementor-lite'),
+        //             'eael-product-list-preset-3' => esc_html__('Preset 3', 'essential-addons-for-elementor-lite'),
+        //             'eael-product-list-preset-4' => esc_html__('Preset 4', 'essential-addons-for-elementor-lite'),
+        //         ],
+        //         // 'condition' => [
+        //         //     'eael_woo_product_list_layout' => ['list'],
+        //         // ],
+        //     ]
+        // );
 
         // $this->add_responsive_control(
         //     'eael_woo_product_list_column',
@@ -321,298 +323,298 @@ class Woo_Product_List extends Widget_Base
         //     ]
         // );
 
-        $this->add_control(
-            'eael_show_product_sale_badge',
-            [
-                'label' => esc_html__( 'Show Badge?', 'essential-addons-for-elementor-lite' ),
-                'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
-                'label_off' => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
-                'return_value' => 'yes',
-                'default' => 'yes',
-            ]
-        );
+        // $this->add_control(
+        //     'eael_show_product_sale_badge',
+        //     [
+        //         'label' => esc_html__( 'Show Badge?', 'essential-addons-for-elementor-lite' ),
+        //         'type' => \Elementor\Controls_Manager::SWITCHER,
+        //         'label_on' => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+        //         'label_off' => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+        //         'return_value' => 'yes',
+        //         'default' => 'yes',
+        //     ]
+        // );
 
-        $this->end_controls_section();
+        // $this->end_controls_section();
     }
 
-    // protected function init_content_product_settings_controls()
-    // {
-    //     $this->start_controls_section('eael_section_woo_product_list_settings', [
-    //         'label' => esc_html__('Product Settings', 'essential-addons-for-elementor-lite'),
-    //     ]);
+    protected function init_content_product_settings_controls()
+    {
+        // $this->start_controls_section('eael_section_woo_product_list_settings', [
+        //     'label' => esc_html__('Product Settings', 'essential-addons-for-elementor-lite'),
+        // ]);
 
-    //     $this->add_control(
-    //         'post_type',
-    //         [
-    //             'label'   => __( 'Source', 'essential-addons-for-elementor-lite' ),
-    //             'type'    => Controls_Manager::SELECT,
-    //             'default' => 'product',
-    //             'options' => [
-    //                 'product'        => esc_html__( 'Products', 'essential-addons-for-elementor-lite' ),
-    //                 'source_dynamic' => esc_html__( 'Dynamic', 'essential-addons-for-elementor-lite' ),
-    //             ],
-    //         ]
-    //     );
+        // $this->add_control(
+        //     'post_type',
+        //     [
+        //         'label'   => __( 'Source', 'essential-addons-for-elementor-lite' ),
+        //         'type'    => Controls_Manager::SELECT,
+        //         'default' => 'product',
+        //         'options' => [
+        //             'product'        => esc_html__( 'Products', 'essential-addons-for-elementor-lite' ),
+        //             'source_dynamic' => esc_html__( 'Dynamic', 'essential-addons-for-elementor-lite' ),
+        //         ],
+        //     ]
+        // );
 
-    //     $this->add_control(
-    //         'eael_global_dynamic_source_warning_text',
-    //         [
-    //             'type'            => Controls_Manager::RAW_HTML,
-    //             'raw'             => __( 'This option will only affect in <strong>Archive page of Elementor Theme Builder</strong> dynamically.', 'essential-addons-for-elementor-lite' ),
-    //             'content_classes' => 'eael-warning',
-    //             'condition'       => [
-    //                 'post_type' => 'source_dynamic',
-    //             ],
-    //         ]
-    //     );
+        // $this->add_control(
+        //     'eael_global_dynamic_source_warning_text',
+        //     [
+        //         'type'            => Controls_Manager::RAW_HTML,
+        //         'raw'             => __( 'This option will only affect in <strong>Archive page of Elementor Theme Builder</strong> dynamically.', 'essential-addons-for-elementor-lite' ),
+        //         'content_classes' => 'eael-warning',
+        //         'condition'       => [
+        //             'post_type' => 'source_dynamic',
+        //         ],
+        //     ]
+        // );
 
-    //     if ( !apply_filters( 'eael/is_plugin_active', 'woocommerce/woocommerce.php' ) ) {
-    //         $this->add_control(
-    //             'ea_woo_product_list_woo_required',
-    //             [
-    //                 'type'            => Controls_Manager::RAW_HTML,
-    //                 'raw'             => __( '<strong>WooCommerce</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=woocommerce&tab=search&type=term" target="_blank">WooCommerce</a> first.', 'essential-addons-for-elementor-lite' ),
-    //                 'content_classes' => 'eael-warning',
-    //             ]
-    //         );
-    //     }
+        // if ( ! apply_filters( 'eael/is_plugin_active', 'woocommerce/woocommerce.php' ) ) {
+        //     $this->add_control(
+        //         'ea_woo_product_list_woo_required',
+        //         [
+        //             'type'            => Controls_Manager::RAW_HTML,
+        //             'raw'             => __( '<strong>WooCommerce</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=woocommerce&tab=search&type=term" target="_blank">WooCommerce</a> first.', 'essential-addons-for-elementor-lite' ),
+        //             'content_classes' => 'eael-warning',
+        //         ]
+        //     );
+        // }
 
-    //     $this->add_control('eael_woo_product_list_product_filter', [
-    //         'label' => esc_html__('Filter By', 'essential-addons-for-elementor-lite'),
-    //         'type' => Controls_Manager::SELECT,
-    //         'default' => 'recent-products',
-    //         'options' => $this->eael_get_product_filterby_options(),
-    //         'condition' => [
-    //           'post_type!' => 'source_dynamic',
-    //         ],
-    //     ]);
+        // $this->add_control('eael_woo_product_list_product_filter', [
+        //     'label' => esc_html__('Filter By', 'essential-addons-for-elementor-lite'),
+        //     'type' => Controls_Manager::SELECT,
+        //     'default' => 'recent-products',
+        //     'options' => $this->eael_get_product_filterby_options(),
+        //     'condition' => [
+        //       'post_type!' => 'source_dynamic',
+        //     ],
+        // ]);
 
-    //     $this->add_control('orderby', [
-    //         'label' => __('Order By', 'essential-addons-for-elementor-lite'),
-    //         'type' => Controls_Manager::SELECT,
-    //         'options' => $this->eael_get_product_orderby_options(),
-    //         'default' => 'date',
+        // $this->add_control('orderby', [
+        //     'label' => __('Order By', 'essential-addons-for-elementor-lite'),
+        //     'type' => Controls_Manager::SELECT,
+        //     'options' => $this->eael_get_product_orderby_options(),
+        //     'default' => 'date',
 
-    //     ]);
+        // ]);
 
-    //     $this->add_control('order', [
-    //         'label' => __('Order', 'essential-addons-for-elementor-lite'),
-    //         'type' => Controls_Manager::SELECT,
-    //         'options' => [
-    //             'asc' => 'Ascending',
-    //             'desc' => 'Descending',
-    //         ],
-    //         'default' => 'desc',
+        // $this->add_control('order', [
+        //     'label' => __('Order', 'essential-addons-for-elementor-lite'),
+        //     'type' => Controls_Manager::SELECT,
+        //     'options' => [
+        //         'asc' => 'Ascending',
+        //         'desc' => 'Descending',
+        //     ],
+        //     'default' => 'desc',
 
-    //     ]);
+        // ]);
 
-    //     $this->add_control('eael_woo_product_list_products_count', [
-    //         'label' => __('Products Count', 'essential-addons-for-elementor-lite'),
-    //         'type' => Controls_Manager::NUMBER,
-    //         'default' => 4,
-    //         'min' => 1,
-    //         'max' => 1000,
-    //         'step' => 1,
-    //     ]);
+        // $this->add_control('eael_woo_product_list_products_count', [
+        //     'label' => __('Products Count', 'essential-addons-for-elementor-lite'),
+        //     'type' => Controls_Manager::NUMBER,
+        //     'default' => 4,
+        //     'min' => 1,
+        //     'max' => 1000,
+        //     'step' => 1,
+        // ]);
 
-    //     $this->add_control('product_offset', [
-    //         'label' => __('Offset', 'essential-addons-for-elementor-lite'),
-    //         'type' => Controls_Manager::NUMBER,
-    //         'default' => 0,
-    //         'condition' => [
-    //             'eael_woo_product_list_product_filter!' => 'manual'
-    //         ]
-    //     ]);
+        // $this->add_control('product_offset', [
+        //     'label' => __('Offset', 'essential-addons-for-elementor-lite'),
+        //     'type' => Controls_Manager::NUMBER,
+        //     'default' => 0,
+        //     'condition' => [
+        //         'eael_woo_product_list_product_filter!' => 'manual'
+        //     ]
+        // ]);
 
-    //     $this->add_control(
-    //         'eael_woo_product_list_products_status',
-    //         [
-    //             'label' => __( 'Product Status', 'essential-addons-for-elementor-lite' ),
-    //             'type' => Controls_Manager::SELECT2,
-    //             'label_block' => true,
-    //             'multiple' => true,
-    //             'default' => [ 'publish', 'pending', 'future' ],
-    //             'options' => $this->eael_get_product_statuses(),
-    //             'condition' => [
-    //                 'eael_woo_product_list_product_filter!' => 'manual'
-    //             ]
-    //         ]
-    //     );
+        // $this->add_control(
+        //     'eael_woo_product_list_products_status',
+        //     [
+        //         'label' => __( 'Product Status', 'essential-addons-for-elementor-lite' ),
+        //         'type' => Controls_Manager::SELECT2,
+        //         'label_block' => true,
+        //         'multiple' => true,
+        //         'default' => [ 'publish', 'pending', 'future' ],
+        //         'options' => $this->eael_get_product_statuses(),
+        //         'condition' => [
+        //             'eael_woo_product_list_product_filter!' => 'manual'
+        //         ]
+        //     ]
+        // );
 
-    //     $this->add_control('eael_woo_product_list_categories', [
-    //         'label' => esc_html__('Product Categories', 'essential-addons-for-elementor-lite'),
-    //         'type' => Controls_Manager::SELECT2,
-    //         'label_block' => true,
-    //         'multiple' => true,
-    //         'options' => HelperClass::get_terms_list('product_cat', 'slug'),
-    //         'condition'   => [
-    //           'post_type!' => 'source_dynamic',
-    //           'eael_woo_product_list_product_filter!' => 'manual'
-    //         ],
-    //     ]);
+        // $this->add_control('eael_woo_product_list_categories', [
+        //     'label' => esc_html__('Product Categories', 'essential-addons-for-elementor-lite'),
+        //     'type' => Controls_Manager::SELECT2,
+        //     'label_block' => true,
+        //     'multiple' => true,
+        //     'options' => HelperClass::get_terms_list('product_cat', 'slug'),
+        //     'condition'   => [
+        //       'post_type!' => 'source_dynamic',
+        //       'eael_woo_product_list_product_filter!' => 'manual'
+        //     ],
+        // ]);
 
-    //     $this->add_control('eael_woo_product_list_products_in', [
-    //         'label' => esc_html__('Select Products', 'essential-addons-for-elementor-lite'),
-    //         'type'        => 'eael-select2',
-    //         'label_block' => true,
-    //         'multiple' => true,
-    //         'source_name' => 'post_type',
-    //         'source_type' => 'product',
-    //         'condition'   => [
-    //             'post_type!' => 'source_dynamic',
-    //             'eael_woo_product_list_product_filter' => 'manual'
-    //         ],
-    //     ]);
+        // $this->add_control('eael_woo_product_list_products_in', [
+        //     'label' => esc_html__('Select Products', 'essential-addons-for-elementor-lite'),
+        //     'type'        => 'eael-select2',
+        //     'label_block' => true,
+        //     'multiple' => true,
+        //     'source_name' => 'post_type',
+        //     'source_type' => 'product',
+        //     'condition'   => [
+        //         'post_type!' => 'source_dynamic',
+        //         'eael_woo_product_list_product_filter' => 'manual'
+        //     ],
+        // ]);
 
-    //     $this->add_control(
-    //         'eael_dynamic_template_Layout',
-    //         [
-    //             'label' => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
-    //             'type' => Controls_Manager::SELECT,
-    //             'default' => 'default',
-    //             'options' => $this->get_template_list_for_dropdown(),
-    //         ]
-    //     );
+        // $this->add_control(
+        //     'eael_dynamic_template_Layout',
+        //     [
+        //         'label' => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
+        //         'type' => Controls_Manager::SELECT,
+        //         'default' => 'default',
+        //         'options' => $this->get_template_list_for_dropdown(),
+        //     ]
+        // );
 
-    //     $this->add_control(
-    //         'eael_woo_product_list_title_html_tag',
-    //         [
-    //             'label'   => __( 'Title HTML Tag', 'essential-addons-for-elementor-lite' ),
-    //             'type'    => Controls_Manager::SELECT,
-    //             'default' => 'h2',
-    //             'options' => [
-    //                 'h1'   => __( 'H1', 'essential-addons-for-elementor-lite' ),
-    //                 'h2'   => __( 'H2', 'essential-addons-for-elementor-lite' ),
-    //                 'h3'   => __( 'H3', 'essential-addons-for-elementor-lite' ),
-    //                 'h4'   => __( 'H4', 'essential-addons-for-elementor-lite' ),
-    //                 'h5'   => __( 'H5', 'essential-addons-for-elementor-lite' ),
-    //                 'h6'   => __( 'H6', 'essential-addons-for-elementor-lite' ),
-    //                 'div'  => __( 'div', 'essential-addons-for-elementor-lite' ),
-    //                 'span' => __( 'span', 'essential-addons-for-elementor-lite' ),
-    //                 'p'    => __( 'p', 'essential-addons-for-elementor-lite' ),
-    //             ],
-    //             'condition'=> [
-    //                 'eael_woo_product_list_style_preset!' => 'eael-product-default'
-    //             ]
-    //         ]
-    //     );
+        // $this->add_control(
+        //     'eael_woo_product_list_title_html_tag',
+        //     [
+        //         'label'   => __( 'Title HTML Tag', 'essential-addons-for-elementor-lite' ),
+        //         'type'    => Controls_Manager::SELECT,
+        //         'default' => 'h2',
+        //         'options' => [
+        //             'h1'   => __( 'H1', 'essential-addons-for-elementor-lite' ),
+        //             'h2'   => __( 'H2', 'essential-addons-for-elementor-lite' ),
+        //             'h3'   => __( 'H3', 'essential-addons-for-elementor-lite' ),
+        //             'h4'   => __( 'H4', 'essential-addons-for-elementor-lite' ),
+        //             'h5'   => __( 'H5', 'essential-addons-for-elementor-lite' ),
+        //             'h6'   => __( 'H6', 'essential-addons-for-elementor-lite' ),
+        //             'div'  => __( 'div', 'essential-addons-for-elementor-lite' ),
+        //             'span' => __( 'span', 'essential-addons-for-elementor-lite' ),
+        //             'p'    => __( 'p', 'essential-addons-for-elementor-lite' ),
+        //         ],
+        //         'condition'=> [
+        //             'eael_woo_product_list_style_preset!' => 'eael-product-default'
+        //         ]
+        //     ]
+        // );
 
-    //     $this->add_control('eael_woo_product_list_rating', [
-    //         'label' => esc_html__('Show Product Rating?', 'essential-addons-for-elementor-lite'),
-    //         'type' => Controls_Manager::SWITCHER,
-    //         'return_value' => 'yes',
-    //         'default' => 'yes',
-    //         'condition' => [
-    //             'eael_woo_product_list_style_preset!' => ['eael-product-preset-8'],
-    //         ],
+        // $this->add_control('eael_woo_product_list_rating', [
+        //     'label' => esc_html__('Show Product Rating?', 'essential-addons-for-elementor-lite'),
+        //     'type' => Controls_Manager::SWITCHER,
+        //     'return_value' => 'yes',
+        //     'default' => 'yes',
+        //     'condition' => [
+        //         'eael_woo_product_list_style_preset!' => ['eael-product-preset-8'],
+        //     ],
 
-    //     ]);
+        // ]);
 
-    //     $this->add_control(
-    //         'eael_woo_product_list_price',
-    //         [
-    //             'label' => esc_html__('Show Product Price?', 'essential-addons-for-elementor-lite'),
-    //             'type' => Controls_Manager::SWITCHER,
-    //             'return_value' => 'yes',
-    //             'default' => 'yes',
-    //             'condition' => [
-    //                 'eael_woo_product_list_style_preset!' => 'eael-product-default',
-    //             ],
-    //         ]
-    //     );
-    //     $this->add_control(
-    //         'eael_woo_product_list_excerpt',
-    //         [
-    //             'label' => esc_html__('Short Description?', 'essential-addons-for-elementor-lite'),
-    //             'type' => Controls_Manager::SWITCHER,
-    //             'return_value' => 'yes',
-    //             'default' => 'yes',
-    //             'condition' => [
-    //                 'eael_woo_product_list_layout' => 'list',
-    //             ],
-    //         ]
-    //     );
-    //     $this->add_control(
-    //         'eael_woo_product_list_excerpt_length',
-    //         [
-    //             'label' => __('Excerpt Words', 'essential-addons-for-elementor-lite'),
-    //             'type' => Controls_Manager::NUMBER,
-    //             'default' => '10',
-    //             'condition' => [
-    //                 'eael_woo_product_list_excerpt' => 'yes',
-    //                 'eael_woo_product_list_layout' => 'list',
-    //             ],
-    //         ]
-    //     );
+        // $this->add_control(
+        //     'eael_woo_product_list_price',
+        //     [
+        //         'label' => esc_html__('Show Product Price?', 'essential-addons-for-elementor-lite'),
+        //         'type' => Controls_Manager::SWITCHER,
+        //         'return_value' => 'yes',
+        //         'default' => 'yes',
+        //         'condition' => [
+        //             'eael_woo_product_list_style_preset!' => 'eael-product-default',
+        //         ],
+        //     ]
+        // );
+        // $this->add_control(
+        //     'eael_woo_product_list_excerpt',
+        //     [
+        //         'label' => esc_html__('Short Description?', 'essential-addons-for-elementor-lite'),
+        //         'type' => Controls_Manager::SWITCHER,
+        //         'return_value' => 'yes',
+        //         'default' => 'yes',
+        //         'condition' => [
+        //             'eael_woo_product_list_layout' => 'list',
+        //         ],
+        //     ]
+        // );
+        // $this->add_control(
+        //     'eael_woo_product_list_excerpt_length',
+        //     [
+        //         'label' => __('Excerpt Words', 'essential-addons-for-elementor-lite'),
+        //         'type' => Controls_Manager::NUMBER,
+        //         'default' => '10',
+        //         'condition' => [
+        //             'eael_woo_product_list_excerpt' => 'yes',
+        //             'eael_woo_product_list_layout' => 'list',
+        //         ],
+        //     ]
+        // );
 
-    //     $this->add_control(
-    //         'eael_woo_product_list_excerpt_expanison_indicator',
-    //         [
-    //             'label' => esc_html__('Expansion Indicator', 'essential-addons-for-elementor-lite'),
-    //             'type' => Controls_Manager::TEXT,
-    //             'label_block' => false,
-    //             'default' => '...',
-    //             'condition' => [
-    //                 'eael_woo_product_list_excerpt' => 'yes',
-    //                 'eael_woo_product_list_layout' => 'list',
-    //             ],
-    //             'ai' => [
-	// 				'active' => false,
-	// 			],
-    //         ]
-    //     );
+        // $this->add_control(
+        //     'eael_woo_product_list_excerpt_expanison_indicator',
+        //     [
+        //         'label' => esc_html__('Expansion Indicator', 'essential-addons-for-elementor-lite'),
+        //         'type' => Controls_Manager::TEXT,
+        //         'label_block' => false,
+        //         'default' => '...',
+        //         'condition' => [
+        //             'eael_woo_product_list_excerpt' => 'yes',
+        //             'eael_woo_product_list_layout' => 'list',
+        //         ],
+        //         'ai' => [
+		// 			'active' => false,
+		// 		],
+        //     ]
+        // );
 
-    //     $this->add_group_control(
-    //         Group_Control_Image_Size::get_type(),
-    //         [
-    //             'name' => 'eael_woo_product_list_image_size',
-    //             'exclude' => ['custom'],
-    //             'default' => 'medium',
-    //             'label_block' => true,
-    //         ]
-    //     );
+        // $this->add_group_control(
+        //     Group_Control_Image_Size::get_type(),
+        //     [
+        //         'name' => 'eael_woo_product_list_image_size',
+        //         'exclude' => ['custom'],
+        //         'default' => 'medium',
+        //         'label_block' => true,
+        //     ]
+        // );
 
-    //     $this->add_control('show_compare', [
-    //         'label' => esc_html__('Show Product Compare?', 'essential-addons-for-elementor-lite'),
-    //         'type' => Controls_Manager::SWITCHER,
-    //     ]);
+        // $this->add_control('show_compare', [
+        //     'label' => esc_html__('Show Product Compare?', 'essential-addons-for-elementor-lite'),
+        //     'type' => Controls_Manager::SWITCHER,
+        // ]);
 
-	//     $this->add_control(
-	// 	    'eael_woo_product_list_image_clickable',
-	// 	    [
-	// 		    'label' => esc_html__('Image Clickable?', 'essential-addons-for-elementor-lite'),
-	// 		    'type' => Controls_Manager::SWITCHER,
-	// 		    'return_value' => 'yes',
-	// 		    'default' => 'no',
-	// 	    ]
-	//     );
+	    // $this->add_control(
+		//     'eael_woo_product_list_image_clickable',
+		//     [
+		// 	    'label' => esc_html__('Image Clickable?', 'essential-addons-for-elementor-lite'),
+		// 	    'type' => Controls_Manager::SWITCHER,
+		// 	    'return_value' => 'yes',
+		// 	    'default' => 'no',
+		//     ]
+	    // );
 
-	//     $this->add_control(
-	// 	    'eael_woo_product_list_wishlist',
-	// 	    [
-	// 		    'label' => esc_html__('Show Wishlist?', 'essential-addons-for-elementor-lite'),
-	// 		    'type' => Controls_Manager::SWITCHER,
-	// 		    'return_value' => 'yes',
-	// 		    'default' => 'no',
-	// 	    ]
-	//     );
+	    // $this->add_control(
+		//     'eael_woo_product_list_wishlist',
+		//     [
+		// 	    'label' => esc_html__('Show Wishlist?', 'essential-addons-for-elementor-lite'),
+		// 	    'type' => Controls_Manager::SWITCHER,
+		// 	    'return_value' => 'yes',
+		// 	    'default' => 'no',
+		//     ]
+	    // );
 
-	//     if ( ! function_exists( 'YITH_WCWL' ) ) {
-	// 	    $this->add_control( 'eael_wishlist_warning_text',
-	// 		    [
-	// 			    'type'            => Controls_Manager::RAW_HTML,
-	// 			    'raw'             => __( '<strong>YITH WOOCOMMERCE WISHLIST</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=yith-woocommerce-wishlist&tab=search&type=term" target="_blank">YITH WOOCOMMERCE WISHLIST</a> first.', 'essential-addons-for-elementor-lite' ),
-	// 			    'content_classes' => 'eael-warning',
-	// 			    'condition'       => [
-	// 				    'eael_woo_product_list_wishlist' => 'yes'
-	// 			    ],
-	// 		    ]
-	// 	    );
-	//     }
+	    // if ( ! function_exists( 'YITH_WCWL' ) ) {
+		//     $this->add_control( 'eael_wishlist_warning_text',
+		// 	    [
+		// 		    'type'            => Controls_Manager::RAW_HTML,
+		// 		    'raw'             => __( '<strong>YITH WOOCOMMERCE WISHLIST</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=yith-woocommerce-wishlist&tab=search&type=term" target="_blank">YITH WOOCOMMERCE WISHLIST</a> first.', 'essential-addons-for-elementor-lite' ),
+		// 		    'content_classes' => 'eael-warning',
+		// 		    'condition'       => [
+		// 			    'eael_woo_product_list_wishlist' => 'yes'
+		// 		    ],
+		// 	    ]
+		//     );
+	    // }
 
-    //     $this->end_controls_section();
-    // }
+        // $this->end_controls_section();
+    }
 
     // protected function init_content_addtocart_controls()
     // {
@@ -3076,139 +3078,6 @@ class Woo_Product_List extends Widget_Base
 	// 	return $settings['eael_woo_product_list_image_size_size'];
 	// }
 
-    protected function render()
-    {
-        if (!function_exists('WC')) {
-            return;
-        }
-
-        // $settings = $this->get_settings_for_display();
-
-        // // normalize for load more fix
-	    // $settings['layout_mode']    = $settings["eael_woo_product_list_layout"];
-	    // $widget_id                  = $this->get_id();
-	    // $settings['eael_widget_id'] = $widget_id;
-
-	    // if ( $settings['post_type'] === 'source_dynamic' && is_archive() || ! empty( $_REQUEST['post_type'] ) ) {
-		//     $settings['posts_per_page'] = $settings['eael_woo_product_list_products_count'] ?: 4;
-		//     $settings['offset']         = $settings['product_offset'];
-		//     $args                       = HelperClass::get_query_args( $settings );
-		//     $args                       = HelperClass::get_dynamic_args( $settings, $args );
-	    // } else {
-		//     $args = $this->build_product_query( $settings );
-	    // }
-
-	    // $this->is_show_custom_add_to_cart       = boolval( $settings['show_add_to_cart_custom_text'] );
-	    // $this->simple_add_to_cart_button_text   = $settings['add_to_cart_simple_product_button_text'];
-	    // $this->variable_add_to_cart_button_text = $settings['add_to_cart_variable_product_button_text'];
-	    // $this->grouped_add_to_cart_button_text  = $settings['add_to_cart_grouped_product_button_text'];
-	    // $this->external_add_to_cart_button_text = $settings['add_to_cart_external_product_button_text'];
-	    // $this->default_add_to_cart_button_text  = $settings['add_to_cart_default_product_button_text'];
-
-	    // if ( Plugin::$instance->documents->get_current() ) {
-		//     $this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
-	    // }
-        // render dom
-	    // $this->add_render_attribute( 'wrap', [
-		//     'class'          => [
-		// 	    "eael-woo-product-list",
-		// 	    $settings['eael_woo_product_list_style_preset'],
-		// 	    $settings['eael_woo_product_list_layout']
-		//     ],
-		//     'id'             => 'eael-woo-product-list',
-		//     'data-widget-id' => $widget_id,
-		//     'data-page-id'   => $this->page_id,
-		//     'data-nonce'     => wp_create_nonce( 'eael_woo_product_list' ),
-	    // ] );
-
-	    // add_filter( 'woocommerce_product_add_to_cart_text', [
-		//     $this,
-		//     'add_to_cart_button_custom_text',
-	    // ] );
-        ?>
-
-        <div <?php //$this->print_render_attribute_string('wrap'); ?> >
-            <div class="woocommerce">
-                <?php
-                // do_action( 'eael_woo_before_product_loop' );
-
-                // $template                       = $this->get_template( $settings['eael_dynamic_template_Layout'] );
-                // $settings['loadable_file_name']  = $this->get_filename_only( $template );
-                // $dir_name                       = $this->get_temp_dir_name( $settings['loadable_file_name'] );
-                // $found_posts                    = 0;
-
-                // if ( file_exists( $template ) ) {
-	            //     $settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
-	            //     $query                    = new \WP_Query( $args );
-	            //     if ( $query->have_posts() ) {
-		        //         $found_posts        = $query->found_posts;
-		        //         $max_page           = ceil( $found_posts / absint( $args['posts_per_page'] ) );
-		        //         $args['max_page']   = $max_page;
-		        //         $args['total_post'] = $found_posts;
-
-		        //         printf( '<ul class="products" data-layout-mode="%s">', esc_attr( $settings["eael_woo_product_list_layout"] ) );
-
-                //             while ( $query->have_posts() ) {
-                //                 $query->the_post();
-                //                 include( realpath( $template ) );
-                //             }
-                //             wp_reset_postdata();
-
-		        //         echo '</ul>';
-
-	            //     } else {
-		        //         _e( '<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite' );
-	            //     }
-
-                // } else {
-	            //     _e( '<p class="no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
-                // }
-
-                // if ( 'true' == $settings['show_pagination'] ) {
-	            //     $settings['eael_widget_name'] = $this->get_name();
-	            //     echo HelperClass::eael_pagination( $args, $settings );
-                // }
-
-                // if ( $found_posts > $args['posts_per_page'] ) {
-	            //     $this->print_load_more_button( $settings, $args, $dir_name );
-                // }
-
-                ?>
-            </div>
-        </div>
-
-        <script type="text/javascript">
-            // jQuery(document).ready(function($) {
-            //     var $scope = jQuery(".elementor-element-<?php //echo $this->get_id(); ?>");
-            //     var $products = $('.products', $scope);
-            //     var $layout_mode = $products.data('layout-mode');
-                
-            //     if ( $layout_mode === 'masonry' ) {
-            //         // init isotope
-            //         var $isotope_products = $products.isotope({
-            //             itemSelector: "li.product",
-            //             layoutMode: $layout_mode,
-            //             percentPosition: true
-            //         });
-
-            //         $isotope_products.imagesLoaded().progress( function() {
-            //             $isotope_products.isotope('layout');
-            //         })
-
-            //         $(window).on('resize', function() {
-            //             $isotope_products.isotope('layout');
-            //         });
-            //     }
-            // });
-        </script>
-        <?php
-        // remove_filter('woocommerce_product_add_to_cart_text', [
-        //     $this,
-        //     'add_to_cart_button_custom_text',
-        // ]);
-	    // remove_filter( 'single_product_archive_thumbnail_size', [ $this, 'eael_customize_woo_prod_thumbnail_size' ] );
-    }
-
     /**
      * build_product_query
      * @param $settings
@@ -3335,5 +3204,161 @@ class Woo_Product_List extends Widget_Base
 			    wp_enqueue_script( 'wc-single-product' );
 		    }
 	    });
+    }
+
+    protected function get_woo_product_list_settings() {
+		$settings 											= $this->get_settings_for_display();
+		
+		$woo_product_list 									= [];
+		$woo_product_list['layout'] 						= ! empty( $settings['eael_dynamic_template_layout'] ) ? $settings['eael_dynamic_template_layout'] : 'preset-1';
+
+		return $woo_product_list;
+	}
+
+    protected function render() {
+		if ( !function_exists( 'WC' ) ) {
+            return;
+        }
+
+        $settings 	= $this->get_settings_for_display();
+
+		$woo_product_list = $this->get_woo_product_list_settings();
+        ?>
+
+        <div>
+            <?php
+			$template = $this->get_template( $woo_product_list[ 'layout' ] );
+			if ( file_exists( $template ) ):
+				include( $template );
+			else:
+				_e( '<p class="eael-no-posts-found">No layout found!</p>', 'essential-addons-elementor' );
+			endif; 
+			?>
+        </div>
+
+		<?php
+        // // normalize for load more fix
+	    // $settings['layout_mode']    = $settings["eael_woo_product_list_layout"];
+	    // $widget_id                  = $this->get_id();
+	    // $settings['eael_widget_id'] = $widget_id;
+
+	    // if ( $settings['post_type'] === 'source_dynamic' && is_archive() || ! empty( $_REQUEST['post_type'] ) ) {
+		//     $settings['posts_per_page'] = $settings['eael_woo_product_list_products_count'] ?: 4;
+		//     $settings['offset']         = $settings['product_offset'];
+		//     $args                       = HelperClass::get_query_args( $settings );
+		//     $args                       = HelperClass::get_dynamic_args( $settings, $args );
+	    // } else {
+		//     $args = $this->build_product_query( $settings );
+	    // }
+
+	    // $this->is_show_custom_add_to_cart       = boolval( $settings['show_add_to_cart_custom_text'] );
+	    // $this->simple_add_to_cart_button_text   = $settings['add_to_cart_simple_product_button_text'];
+	    // $this->variable_add_to_cart_button_text = $settings['add_to_cart_variable_product_button_text'];
+	    // $this->grouped_add_to_cart_button_text  = $settings['add_to_cart_grouped_product_button_text'];
+	    // $this->external_add_to_cart_button_text = $settings['add_to_cart_external_product_button_text'];
+	    // $this->default_add_to_cart_button_text  = $settings['add_to_cart_default_product_button_text'];
+
+	    // if ( Plugin::$instance->documents->get_current() ) {
+		//     $this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
+	    // }
+        // render dom
+	    // $this->add_render_attribute( 'wrap', [
+		//     'class'          => [
+		// 	    "eael-woo-product-list",
+		// 	    $settings['eael_woo_product_list_style_preset'],
+		// 	    $settings['eael_woo_product_list_layout']
+		//     ],
+		//     'id'             => 'eael-woo-product-list',
+		//     'data-widget-id' => $widget_id,
+		//     'data-page-id'   => $this->page_id,
+		//     'data-nonce'     => wp_create_nonce( 'eael_woo_product_list' ),
+	    // ] );
+
+	    // add_filter( 'woocommerce_product_add_to_cart_text', [
+		//     $this,
+		//     'add_to_cart_button_custom_text',
+	    // ] );
+        ?>
+
+        <div <?php //$this->print_render_attribute_string('wrap'); ?> >
+            <div class="woocommerce">
+                <?php
+                // do_action( 'eael_woo_before_product_loop' );
+
+                // $template                       = $this->get_template( $settings['eael_dynamic_template_Layout'] );
+                // $settings['loadable_file_name']  = $this->get_filename_only( $template );
+                // $dir_name                       = $this->get_temp_dir_name( $settings['loadable_file_name'] );
+                // $found_posts                    = 0;
+
+                // if ( file_exists( $template ) ) {
+	            //     $settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
+	            //     $query                    = new \WP_Query( $args );
+	            //     if ( $query->have_posts() ) {
+		        //         $found_posts        = $query->found_posts;
+		        //         $max_page           = ceil( $found_posts / absint( $args['posts_per_page'] ) );
+		        //         $args['max_page']   = $max_page;
+		        //         $args['total_post'] = $found_posts;
+
+		        //         printf( '<ul class="products" data-layout-mode="%s">', esc_attr( $settings["eael_woo_product_list_layout"] ) );
+
+                //             while ( $query->have_posts() ) {
+                //                 $query->the_post();
+                //                 include( realpath( $template ) );
+                //             }
+                //             wp_reset_postdata();
+
+		        //         echo '</ul>';
+
+	            //     } else {
+		        //         _e( '<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite' );
+	            //     }
+
+                // } else {
+	            //     _e( '<p class="no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
+                // }
+
+                // if ( 'true' == $settings['show_pagination'] ) {
+	            //     $settings['eael_widget_name'] = $this->get_name();
+	            //     echo HelperClass::eael_pagination( $args, $settings );
+                // }
+
+                // if ( $found_posts > $args['posts_per_page'] ) {
+	            //     $this->print_load_more_button( $settings, $args, $dir_name );
+                // }
+
+                ?>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            // jQuery(document).ready(function($) {
+            //     var $scope = jQuery(".elementor-element-<?php //echo $this->get_id(); ?>");
+            //     var $products = $('.products', $scope);
+            //     var $layout_mode = $products.data('layout-mode');
+                
+            //     if ( $layout_mode === 'masonry' ) {
+            //         // init isotope
+            //         var $isotope_products = $products.isotope({
+            //             itemSelector: "li.product",
+            //             layoutMode: $layout_mode,
+            //             percentPosition: true
+            //         });
+
+            //         $isotope_products.imagesLoaded().progress( function() {
+            //             $isotope_products.isotope('layout');
+            //         })
+
+            //         $(window).on('resize', function() {
+            //             $isotope_products.isotope('layout');
+            //         });
+            //     }
+            // });
+        </script>
+        <?php
+        // remove_filter('woocommerce_product_add_to_cart_text', [
+        //     $this,
+        //     'add_to_cart_button_custom_text',
+        // ]);
+	    // remove_filter( 'single_product_archive_thumbnail_size', [ $this, 'eael_customize_woo_prod_thumbnail_size' ] );
     }
 }
