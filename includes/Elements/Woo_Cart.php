@@ -8,16 +8,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use \Elementor\Controls_Manager;
-use \Elementor\Frontend;
 use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
-use Elementor\Plugin;
 use Elementor\Repeater;
 use \Elementor\Widget_Base;
-use \Elementor\Icons_Manager;
-use Essential_Addons_Elementor\Traits\Helper;
+use \Essential_Addons_Elementor\Classes\Helper;
 
 class Woo_Cart extends Widget_Base {
 
@@ -2666,31 +2663,6 @@ class Woo_Cart extends Widget_Base {
 		return $classes;
 	}
 
-	public function get_current_device_by_screen() {
-		if ( isset( $_COOKIE['eael_screen'] ) && ! empty( $breakpoints = Plugin::$instance->breakpoints->get_breakpoints_config() ) ) {
-			$breakpoints = array_filter( $breakpoints, function ( $breakpoint ) {
-				return $breakpoint['is_enabled'];
-			} );
-
-			if ( isset( $breakpoints['widescreen'] ) ) {
-				$widescreen = $breakpoints['widescreen'];
-				unset( $breakpoints['widescreen'] );
-				$breakpoints['desktop'] = $widescreen;
-			}
-
-			$current_screen = intval( $_COOKIE['eael_screen'] );
-			foreach ( $breakpoints as $device => $screen ) {
-				if ( $current_screen <= $screen['value'] ) {
-					return $device;
-				}
-			}
-
-			return "widescreen";
-		}
-
-		// If no match is found, you can return a default value or handle it as needed.
-		return "unknown";
-	}
 	protected function render() {
 		if ( ! class_exists( 'woocommerce' ) ) {
 			return;
@@ -2698,7 +2670,7 @@ class Woo_Cart extends Widget_Base {
 		$settings = $this->get_settings_for_display();
 		$this->ea_woo_cart_add_actions( $settings );
 
-		$deviceName = $this->get_current_device_by_screen();
+		$deviceName = Helper::eael_get_current_device_by_screen();
 		if ( ! \Elementor\Plugin::$instance->editor->is_edit_mode() && ! empty( $settings["hide_{$deviceName}"] ) ) {
             echo "<!-- This content is hidden on {$deviceName} devices -->";
 			return;
