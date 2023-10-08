@@ -7,6 +7,7 @@
 
 namespace Essential_Addons_Elementor\Traits;
 
+use Automattic\WooCommerce\Utilities\OrderUtil;
 use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 use Essential_Addons_Elementor\Template\Woocommerce\Checkout\Woo_Checkout_Helper;
 use Essential_Addons_Elementor\Traits\Template_Query;
@@ -649,6 +650,25 @@ trait Ajax_Handler {
 			];
 
 			$args['tax_query'] = $this->eael_terms_query_multiple( $args['tax_query'] );
+
+			if ( $settings[ 'eael_product_gallery_product_filter' ] == 'featured-products' ) {
+				$args[ 'tax_query' ][] = [
+					'relation' => 'AND',
+					[
+						'taxonomy' => 'product_visibility',
+						'field'    => 'name',
+						'terms'    => 'featured',
+					],
+					[
+						'taxonomy' => 'product_visibility',
+						'field'    => 'name',
+						'terms'    => [ 'exclude-from-search', 'exclude-from-catalog' ],
+						'operator' => 'NOT IN',
+					],
+				];
+			}
+
+
 		}
 		
 		$template_info = $this->eael_sanitize_template_param( $_REQUEST['template_info'] );

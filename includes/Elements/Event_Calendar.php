@@ -175,7 +175,7 @@ class Event_Calendar extends Widget_Base
                 'label'         => __('Event Link', 'essential-addons-for-elementor-lite'),
                 'type'          => Controls_Manager::URL,
                 'dynamic'   => ['active' => true],
-                'placeholder'   => __('https://sample-domain.com', 'essential-addons-for-elementor-lite'),
+                'placeholder'   => __('https://example.com', 'essential-addons-for-elementor-lite'),
                 'show_external' => true,
             ]
         );
@@ -641,6 +641,21 @@ class Event_Calendar extends Widget_Base
                 'type' => Controls_Manager::SWITCHER,
                 'label_block' => false,
                 'return_value' => 'yes',
+            ]
+        );
+
+        $this->add_control(
+            'eael_event_multi_days_event_day_count',
+            [
+                'label' => __('Multi-Days Event Day Count', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_block' => false,
+                'return_value' => 'yes',
+                'description' => __('Extra text "Day Count/Event Total Days" will be added in the event title', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                    'eael_event_calendar_default_view' => 'listMonth',
+                    'eael_event_calendar_type' => 'google',
+                ]
             ]
         );
 
@@ -2954,6 +2969,8 @@ class Event_Calendar extends Widget_Base
 	    $default_date   = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : date( 'Y-m-d' );
 	    $time_format    = $settings['eael_event_time_format'];
 	    $event_limit    = ! empty( $settings['eael_event_limit'] ) ? intval( $settings['eael_event_limit'] ) : 2;
+	    $multi_days_event_day_count = ! empty( $settings['eael_event_multi_days_event_day_count'] ) && 'yes' ===  $settings['eael_event_multi_days_event_day_count'] ? 1 : 0;
+        
 	    $translate_date = [
 		    'today'    => __( 'Today', 'essential-addons-for-elementor-lite' ),
 		    'tomorrow' => __( 'Tomorrow', 'essential-addons-for-elementor-lite' ),
@@ -2971,6 +2988,7 @@ class Event_Calendar extends Widget_Base
             data-defaultdate = "' . $default_date . '"
             data-time_format = "' . $time_format . '"
             data-event_limit = "' . $event_limit . '"
+            data-multidays_event_day_count= "' . $multi_days_event_day_count . '"
             data-hideDetailsLink= "' . $settings['eael_event_details_link_hide'] . '"
             data-detailsButtonText = "' . Helper::eael_wp_kses( $settings['eael_event_details_text'] ) . '"
             data-events="' . htmlspecialchars( json_encode( $data ), ENT_QUOTES, 'UTF-8' ) . '"
@@ -3249,7 +3267,6 @@ class Event_Calendar extends Widget_Base
         $random_color_index = 0;
 
         if (isset($data->items)) {
-
             foreach ($data->items as $key => $item) {
                 if ($item->status !== 'confirmed') {
 //                    continue;
