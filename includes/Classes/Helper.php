@@ -1410,4 +1410,38 @@ class Helper
 			return 'AND';
 		}
 	}
+
+	/**
+	 * Get current device by screen size
+	 *
+	 *
+	 * @return string device name.
+	 * @since 5.9.1
+	 *
+	 */
+	public static function eael_get_current_device_by_screen() {
+		if ( isset( $_COOKIE['eael_screen'] ) && ! empty( $breakpoints = Plugin::$instance->breakpoints->get_breakpoints_config() ) ) {
+			$breakpoints = array_filter( $breakpoints, function ( $breakpoint ) {
+				return $breakpoint['is_enabled'];
+			} );
+
+			if ( isset( $breakpoints['widescreen'] ) ) {
+				$widescreen = $breakpoints['widescreen'];
+				unset( $breakpoints['widescreen'] );
+				$breakpoints['desktop'] = $widescreen;
+			}
+
+			$current_screen = intval( $_COOKIE['eael_screen'] );
+			foreach ( $breakpoints as $device => $screen ) {
+				if ( $current_screen <= $screen['value'] ) {
+					return $device;
+				}
+			}
+
+			return "widescreen";
+		}
+
+		// If no match is found, you can return a default value or handle it as needed.
+		return "unknown";
+	}
 }
