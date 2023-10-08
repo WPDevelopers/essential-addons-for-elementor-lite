@@ -2,7 +2,7 @@
 
 
 /**
- * Template Name: Default
+ * Template Name: Preset 3
  */
 
 use \Essential_Addons_Elementor\Classes\Helper;
