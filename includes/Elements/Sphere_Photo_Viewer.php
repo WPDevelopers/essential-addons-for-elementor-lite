@@ -102,6 +102,32 @@ class Sphere_Photo_Viewer extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'ea_spv_description_switch',
+			[
+				'label'        => esc_html__( 'Description', 'textdomain' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'textdomain' ),
+				'label_off'    => esc_html__( 'Hide', 'textdomain' ),
+				'return_value' => 'yes'
+			]
+		);
+
+		$this->add_control(
+			'ea_spv_description',
+			[
+				'label'       => esc_html__( 'Content', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::WYSIWYG,
+				'label_block' => true,
+				'default'     => esc_html__( 'Hover Me!', 'essential-addons-for-elementor-lite' ),
+				'ai'          => [ 'active' => false ],
+				'dynamic'     => [ 'active' => true ],
+				'condition'   => [
+					'ea_spv_description_switch' => 'yes'
+				]
+			]
+		);
+
 		$this->end_controls_section();
 
 		/**
@@ -135,9 +161,11 @@ class Sphere_Photo_Viewer extends Widget_Base {
 		$settings        = $this->get_settings_for_display();
 		$container_id    = "eael-psv-{$this->get_id()}";
 		$sphere_settings = json_encode( [
-			'caption'   => $settings['ea_spv_caption'],
-			'panorama'  => $settings['ea_spv_image']['url'],
-			'container' => $container_id
+			'caption'         => $settings['ea_spv_caption'],
+			'panorama'        => $settings['ea_spv_image']['url'],
+			'container'       => $container_id,
+			'description'     => $settings['ea_spv_description'],
+			'autorotateDelay' => 100
 		] );
 		$this->add_render_attribute( [
 			'sphere-wrapper' => [
