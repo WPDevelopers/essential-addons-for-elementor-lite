@@ -18,7 +18,7 @@
                         <p><span>30%</span> Off</p>
                     </div>
                     <a href="#">
-                        <img src="image/product-image-1.png" alt="Saguaro with Wooden stand">
+                        <img src="//essential-addons-dev.test/wp-content/uploads/2023/10/product-image-1.png" alt="Saguaro with Wooden stand">
                     </a>
                     <ul class="eael-product-list-links">
                         <li><a href="#"><i class="fa-regular fa-heart"></i></a></li>
