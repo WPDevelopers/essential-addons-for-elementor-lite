@@ -8,6 +8,8 @@ if (!defined('ABSPATH')) {
 }
 
 use Elementor\Controls_Manager;
+use Elementor\Group_Control_Border;
+use Elementor\Group_Control_Box_Shadow;
 // use Elementor\Group_Control_Background;
 // use Elementor\Group_Control_Border;
 // use Elementor\Group_Control_Box_Shadow;
@@ -164,14 +166,35 @@ class Woo_Product_List extends Widget_Base
 
     protected function register_controls() {
         $this->init_content_wc_notice_controls();
-        
-        if ( ! function_exists( 'WC' ) ) {
+
+        if ( !function_exists( 'WC' ) ) {
             return;
         }
 
-        // Content Controls
-        $this->init_content_layout_controls();
-        $this->init_content_product_settings_controls();
+		// Content Controls
+        $this->eael_product_list_layout();
+
+        // $this->eael_product_list_tabs();
+
+        // $this->eael_product_list_content();
+
+        $this->eael_product_list_container_style();
+
+       	// $this->eael_product_list_tabs_style();
+
+        // $this->eael_product_list_content_style();
+
+		// $this->eael_product_list_table_style();
+
+		// $this->eael_product_list_form_style();
+
+		// $this->eael_product_list_pages_style();
+
+
+
+
+        // $this->init_content_product_settings_controls();
+
         // $this->eael_product_badges();
         // $this->init_content_addtocart_controls();
         // $this->init_content_load_more_controls();
@@ -236,8 +259,7 @@ class Woo_Product_List extends Widget_Base
 		}
 	}
 
-    protected function init_content_layout_controls()
-    {
+    protected function eael_product_list_layout() {
         $this->start_controls_section(
             'eael_section_woo_product_list_layouts',
             [
@@ -322,6 +344,90 @@ class Woo_Product_List extends Widget_Base
         // );
 
         $this->end_controls_section();
+    }
+
+    protected function eael_product_list_container_style() {
+
+	    $this->start_controls_section(
+			'eael_section_product_list_container_style',
+			[
+				'label' => esc_html__( 'Container', 'essential-addons-elementor' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_product_list_container_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-container' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_product_list_container_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-container' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_product_list_container_border_radius',
+			[
+				'label'     => esc_html__( 'Border Radius', 'essential-addons-elementor' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => [
+					'px' => [
+						'max' => 100,
+					],
+				],
+				'default'   => [
+					'size' => 10,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-container' => 'border-radius: {{SIZE}}px;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_product_list_container_normal_background_color',
+			[
+				'label'     => esc_html__( 'Background Color', 'essential-addons-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'	=> '#F4F5F7',
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-container' => 'background: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'     => 'eael_product_list_container_normal_border',
+				'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-container',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'eael_product_list_container_normal_box_shadow',
+				'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-container',
+			]
+		);
+
+		$this->end_controls_section();
     }
 
     protected function init_content_product_settings_controls()
