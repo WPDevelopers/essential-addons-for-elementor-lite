@@ -1126,7 +1126,7 @@ msgstr ""
 msgid "Caret Color"
 msgstr ""
 
-#: ../includes/Elements/Adv_Tabs.php:80, ../includes/Elements/Business_Reviews.php:193, ../includes/Elements/Countdown.php:232, ../includes/Elements/Event_Calendar.php:108, ../includes/Elements/Facebook_Feed.php:259, ../includes/Elements/Filterable_Gallery.php:181, ../includes/Elements/NFT_Gallery.php:234, ../includes/Elements/Product_Grid.php:233, ../includes/Elements/Product_Grid.php:471, ../includes/Elements/Progress_Bar.php:75, ../includes/Elements/Progress_Bar.php:101, ../includes/Elements/Simple_Menu.php:153, ../includes/Elements/Woo_Cart.php:146, ../includes/Elements/Woo_Checkout.php:128, ../includes/Elements/Woo_Product_Carousel.php:218, ../includes/Elements/Woo_Product_Gallery.php:316, ../includes/Elements/Woo_Product_Gallery.php:462, ../includes/Traits/Controls.php:431, ../includes/Traits/Controls.php:560
+#: ../includes/Elements/Adv_Tabs.php:80, ../includes/Elements/Business_Reviews.php:193, ../includes/Elements/Countdown.php:232, ../includes/Elements/Event_Calendar.php:108, ../includes/Elements/Facebook_Feed.php:259, ../includes/Elements/Filterable_Gallery.php:181, ../includes/Elements/NFT_Gallery.php:234, ../includes/Elements/Product_Grid.php:233, ../includes/Elements/Product_Grid.php:471, ../includes/Elements/Progress_Bar.php:75, ../includes/Elements/Progress_Bar.php:101, ../includes/Elements/Simple_Menu.php:153, ../includes/Elements/Woo_Cart.php:146, ../includes/Elements/Woo_Checkout.php:128, ../includes/Elements/Woo_Product_Carousel.php:218, ../includes/Elements/Woo_Product_Gallery.php:316, ../includes/Elements/Woo_Product_Gallery.php:462, ../includes/Elements/Woo_Product_List.php:244, ../includes/Traits/Controls.php:431, ../includes/Traits/Controls.php:560
 msgid "Layout"
 msgstr ""
 
@@ -1562,15 +1562,15 @@ msgstr ""
 msgid "Style Preset"
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:217, ../includes/Elements/Business_Reviews.php:234, ../includes/Elements/Cta_Box.php:100, ../includes/Elements/Cta_Box.php:303, ../includes/Elements/Interactive_Circle.php:73, ../includes/Elements/NFT_Gallery.php:258, ../includes/Elements/Product_Grid.php:273, ../includes/Elements/Product_Grid.php:1780, ../includes/Elements/Product_Grid.php:1907, ../includes/Elements/Simple_Menu.php:143, ../includes/Elements/Woo_Product_Carousel.php:868, ../includes/Elements/Woo_Product_Carousel.php:2186, ../includes/Elements/Woo_Product_Gallery.php:333, ../includes/Elements/Woo_Product_Gallery.php:1556, ../includes/Traits/Controls.php:448, ../includes/Template/Woo-Product-Carousel/preset-1.php:4
+#: ../includes/Elements/Business_Reviews.php:217, ../includes/Elements/Business_Reviews.php:234, ../includes/Elements/Cta_Box.php:100, ../includes/Elements/Cta_Box.php:303, ../includes/Elements/Interactive_Circle.php:73, ../includes/Elements/NFT_Gallery.php:258, ../includes/Elements/Product_Grid.php:273, ../includes/Elements/Product_Grid.php:1780, ../includes/Elements/Product_Grid.php:1907, ../includes/Elements/Simple_Menu.php:143, ../includes/Elements/Woo_Product_Carousel.php:868, ../includes/Elements/Woo_Product_Carousel.php:2186, ../includes/Elements/Woo_Product_Gallery.php:333, ../includes/Elements/Woo_Product_Gallery.php:1556, ../includes/Traits/Controls.php:448, ../includes/Template/Woo-Product-Carousel/preset-1.php:4, ../includes/Template/Woo-Product-List/preset-1.php:3
 msgid "Preset 1"
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:218, ../includes/Elements/Business_Reviews.php:235, ../includes/Elements/Cta_Box.php:101, ../includes/Elements/Cta_Box.php:304, ../includes/Elements/Interactive_Circle.php:74, ../includes/Elements/NFT_Gallery.php:259, ../includes/Elements/Product_Grid.php:274, ../includes/Elements/Product_Grid.php:1781, ../includes/Elements/Product_Grid.php:1908, ../includes/Elements/Simple_Menu.php:144, ../includes/Elements/Woo_Product_Carousel.php:869, ../includes/Elements/Woo_Product_Carousel.php:2187, ../includes/Elements/Woo_Product_Gallery.php:334, ../includes/Elements/Woo_Product_Gallery.php:1557, ../includes/Traits/Controls.php:449, ../includes/Template/Woo-Product-Carousel/preset-2.php:4
+#: ../includes/Elements/Business_Reviews.php:218, ../includes/Elements/Business_Reviews.php:235, ../includes/Elements/Cta_Box.php:101, ../includes/Elements/Cta_Box.php:304, ../includes/Elements/Interactive_Circle.php:74, ../includes/Elements/NFT_Gallery.php:259, ../includes/Elements/Product_Grid.php:274, ../includes/Elements/Product_Grid.php:1781, ../includes/Elements/Product_Grid.php:1908, ../includes/Elements/Simple_Menu.php:144, ../includes/Elements/Woo_Product_Carousel.php:869, ../includes/Elements/Woo_Product_Carousel.php:2187, ../includes/Elements/Woo_Product_Gallery.php:334, ../includes/Elements/Woo_Product_Gallery.php:1557, ../includes/Traits/Controls.php:449, ../includes/Template/Woo-Product-Carousel/preset-2.php:4, ../includes/Template/Woo-Product-List/preset-2.php:3
 msgid "Preset 2"
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:219, ../includes/Elements/Business_Reviews.php:236, ../includes/Elements/Interactive_Circle.php:75, ../includes/Elements/Product_Grid.php:275, ../includes/Elements/Product_Grid.php:1782, ../includes/Elements/Simple_Menu.php:145, ../includes/Elements/Woo_Product_Carousel.php:870, ../includes/Elements/Woo_Product_Carousel.php:2188, ../includes/Elements/Woo_Product_Gallery.php:335, ../includes/Elements/Woo_Product_Gallery.php:1558, ../includes/Traits/Controls.php:450, ../includes/Template/Woo-Product-Carousel/preset-3.php:4
+#: ../includes/Elements/Business_Reviews.php:219, ../includes/Elements/Business_Reviews.php:236, ../includes/Elements/Interactive_Circle.php:75, ../includes/Elements/Product_Grid.php:275, ../includes/Elements/Product_Grid.php:1782, ../includes/Elements/Simple_Menu.php:145, ../includes/Elements/Woo_Product_Carousel.php:870, ../includes/Elements/Woo_Product_Carousel.php:2188, ../includes/Elements/Woo_Product_Gallery.php:335, ../includes/Elements/Woo_Product_Gallery.php:1558, ../includes/Traits/Controls.php:450, ../includes/Template/Woo-Product-Carousel/preset-3.php:4, ../includes/Template/Woo-Product-List/preset-3.php:3
 msgid "Preset 3"
 msgstr ""
 
@@ -1910,7 +1910,7 @@ msgstr ""
 msgid "Form Alignment"
 msgstr ""
 
-#: ../includes/Elements/Caldera_Forms.php:416, ../includes/Elements/Contact_Form_7.php:330, ../includes/Elements/Contact_Form_7.php:837, ../includes/Elements/Countdown.php:73, ../includes/Elements/Creative_Button.php:233, ../includes/Elements/Cta_Box.php:750, ../includes/Elements/Cta_Box.php:1175, ../includes/Elements/Dual_Color_Header.php:82, ../includes/Elements/Flip_Box.php:893, ../includes/Elements/FluentForm.php:463, ../includes/Elements/Formstack.php:333, ../includes/Elements/GravityForms.php:346, ../includes/Elements/Login_Register.php:568, ../includes/Elements/Login_Register.php:799, ../includes/Elements/Login_Register.php:986, ../includes/Elements/Login_Register.php:1117, ../includes/Elements/Login_Register.php:2138, ../includes/Elements/Login_Register.php:2485, ../includes/Elements/Login_Register.php:2667, ../includes/Elements/Login_Register.php:2928, ../includes/Elements/Login_Register.php:3072, ../includes/Elements/Login_Register.php:3222, ../includes/Elements/Login_Register.php:3365, ../includes/Elements/Login_Register.php:3456, ../includes/Elements/Login_Register.php:3554, ../includes/Elements/Login_Register.php:3756, ../includes/Elements/Login_Register.php:3801, ../includes/Elements/Login_Register.php:3833, ../includes/Elements/Login_Register.php:4264, ../includes/Elements/Login_Register.php:4412, ../includes/Elements/Login_Register.php:4541, ../includes/Elements/Login_Register.php:4801, ../includes/Elements/Login_Register.php:5129, ../includes/Elements/NinjaForms.php:281, ../includes/Elements/Post_Grid.php:257, ../includes/Elements/Pricing_Table.php:87, ../includes/Elements/Pricing_Table.php:511, ../includes/Elements/Product_Grid.php:251, ../includes/Elements/Simple_Menu.php:394, ../includes/Elements/Simple_Menu.php:520, ../includes/Elements/Simple_Menu.php:882, ../includes/Elements/Simple_Menu.php:1280, ../includes/Elements/Sticky_Video.php:395, ../includes/Elements/Team_Member.php:412, ../includes/Elements/Testimonial.php:262, ../includes/Elements/Testimonial.php:319, ../includes/Elements/TypeForm.php:195, ../includes/Elements/WeForms.php:161, ../includes/Elements/WeForms.php:631, ../includes/Elements/Woo_Checkout.php:133, ../includes/Elements/WpForms.php:270, ../includes/Traits/Controls.php:580, ../includes/Traits/Controls.php:2078, ../includes/Traits/Login_Registration.php:1254, ../includes/Traits/Woo_Product_Comparable.php:419, ../includes/Traits/Woo_Product_Comparable.php:533, ../includes/Traits/Woo_Product_Comparable.php:624, ../includes/Traits/Woo_Product_Comparable.php:693, ../includes/Template/Betterdocs-Category-Box/Layout_Default.php:4, ../includes/Template/Betterdocs-Category-Grid/Layout_Default.php:4, ../includes/Template/Content-Ticker/default.php:3, ../includes/Template/Eicon-Woocommerce/default.php:3, ../includes/Template/Post-Grid/default.php:5, ../includes/Template/Post-Timeline/default.php:4, ../includes/Template/Woo-Product-Gallery/default.php:3, ../includes/Template/Woo-Product-List/preset-1.php:3, ../includes/Template/Woo-Product-List/preset-2.php:3, ../includes/Template/Woo-Product-List/preset-3.php:3
+#: ../includes/Elements/Caldera_Forms.php:416, ../includes/Elements/Contact_Form_7.php:330, ../includes/Elements/Contact_Form_7.php:837, ../includes/Elements/Countdown.php:73, ../includes/Elements/Creative_Button.php:233, ../includes/Elements/Cta_Box.php:750, ../includes/Elements/Cta_Box.php:1175, ../includes/Elements/Dual_Color_Header.php:82, ../includes/Elements/Flip_Box.php:893, ../includes/Elements/FluentForm.php:463, ../includes/Elements/Formstack.php:333, ../includes/Elements/GravityForms.php:346, ../includes/Elements/Login_Register.php:568, ../includes/Elements/Login_Register.php:799, ../includes/Elements/Login_Register.php:986, ../includes/Elements/Login_Register.php:1117, ../includes/Elements/Login_Register.php:2138, ../includes/Elements/Login_Register.php:2485, ../includes/Elements/Login_Register.php:2667, ../includes/Elements/Login_Register.php:2928, ../includes/Elements/Login_Register.php:3072, ../includes/Elements/Login_Register.php:3222, ../includes/Elements/Login_Register.php:3365, ../includes/Elements/Login_Register.php:3456, ../includes/Elements/Login_Register.php:3554, ../includes/Elements/Login_Register.php:3756, ../includes/Elements/Login_Register.php:3801, ../includes/Elements/Login_Register.php:3833, ../includes/Elements/Login_Register.php:4264, ../includes/Elements/Login_Register.php:4412, ../includes/Elements/Login_Register.php:4541, ../includes/Elements/Login_Register.php:4801, ../includes/Elements/Login_Register.php:5129, ../includes/Elements/NinjaForms.php:281, ../includes/Elements/Post_Grid.php:257, ../includes/Elements/Pricing_Table.php:87, ../includes/Elements/Pricing_Table.php:511, ../includes/Elements/Product_Grid.php:251, ../includes/Elements/Simple_Menu.php:394, ../includes/Elements/Simple_Menu.php:520, ../includes/Elements/Simple_Menu.php:882, ../includes/Elements/Simple_Menu.php:1280, ../includes/Elements/Sticky_Video.php:395, ../includes/Elements/Team_Member.php:412, ../includes/Elements/Testimonial.php:262, ../includes/Elements/Testimonial.php:319, ../includes/Elements/TypeForm.php:195, ../includes/Elements/WeForms.php:161, ../includes/Elements/WeForms.php:631, ../includes/Elements/Woo_Checkout.php:133, ../includes/Elements/WpForms.php:270, ../includes/Traits/Controls.php:580, ../includes/Traits/Controls.php:2078, ../includes/Traits/Login_Registration.php:1254, ../includes/Traits/Woo_Product_Comparable.php:419, ../includes/Traits/Woo_Product_Comparable.php:533, ../includes/Traits/Woo_Product_Comparable.php:624, ../includes/Traits/Woo_Product_Comparable.php:693, ../includes/Template/Betterdocs-Category-Box/Layout_Default.php:4, ../includes/Template/Betterdocs-Category-Grid/Layout_Default.php:4, ../includes/Template/Content-Ticker/default.php:3, ../includes/Template/Eicon-Woocommerce/default.php:3, ../includes/Template/Post-Grid/default.php:5, ../includes/Template/Post-Timeline/default.php:4, ../includes/Template/Woo-Product-Gallery/default.php:3
 msgid "Default"
 msgstr ""
 
@@ -7109,19 +7109,19 @@ msgstr ""
 msgid "Cart Button"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:3311, ../includes/Elements/Woo_Product_Carousel.php:146, ../includes/Elements/Woo_Product_List.php:3180
+#: ../includes/Elements/Product_Grid.php:3311, ../includes/Elements/Woo_Product_Carousel.php:146, ../includes/Elements/Woo_Product_List.php:3166
 msgid "Publish"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:3312, ../includes/Elements/Woo_Product_Carousel.php:147, ../includes/Elements/Woo_Product_List.php:3181
+#: ../includes/Elements/Product_Grid.php:3312, ../includes/Elements/Woo_Product_Carousel.php:147, ../includes/Elements/Woo_Product_List.php:3167
 msgid "Draft"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:3313, ../includes/Elements/Woo_Product_Carousel.php:148, ../includes/Elements/Woo_Product_List.php:3182
+#: ../includes/Elements/Product_Grid.php:3313, ../includes/Elements/Woo_Product_Carousel.php:148, ../includes/Elements/Woo_Product_List.php:3168
 msgid "Pending Review"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:3314, ../includes/Elements/Woo_Product_Carousel.php:149, ../includes/Elements/Woo_Product_List.php:3183
+#: ../includes/Elements/Product_Grid.php:3314, ../includes/Elements/Woo_Product_Carousel.php:149, ../includes/Elements/Woo_Product_List.php:3169
 msgid "Schedule"
 msgstr ""
 
@@ -10238,19 +10238,19 @@ msgstr ""
 msgid "No products found!"
 msgstr ""
 
-#: ../includes/Template/Content/Product_Grid.php:63, ../includes/Template/Content/Product_Grid.php:29, ../includes/Template/Content/Woo_Product_List.php:63, ../includes/Template/Content/Woo_Product_List.php:29, ../includes/Template/Eicon-Woocommerce/default.php:50, ../includes/Template/Woo-Product-List/preset-1.php:50, ../includes/Template/Woo-Product-List/preset-2.php:50, ../includes/Template/Woo-Product-List/preset-3.php:50
+#: ../includes/Template/Content/Product_Grid.php:63, ../includes/Template/Content/Product_Grid.php:29, ../includes/Template/Content/Woo_Product_List.php:63, ../includes/Template/Content/Woo_Product_List.php:29, ../includes/Template/Eicon-Woocommerce/default.php:50, ../includes/Template/Woo-Product-List/preset-2.php:50, ../includes/Template/Woo-Product-List/preset-3.php:50
 msgid "Sale!"
 msgstr ""
 
-#: ../includes/Template/Content/Product_Grid.php:27, ../includes/Template/Content/Woo_Product_List.php:27, ../includes/Template/Eicon-Woocommerce/default.php:51, ../includes/Template/Woo-Product-List/preset-1.php:51, ../includes/Template/Woo-Product-List/preset-2.php:51, ../includes/Template/Woo-Product-List/preset-3.php:51
+#: ../includes/Template/Content/Product_Grid.php:27, ../includes/Template/Content/Woo_Product_List.php:27, ../includes/Template/Eicon-Woocommerce/default.php:51, ../includes/Template/Woo-Product-List/preset-2.php:51, ../includes/Template/Woo-Product-List/preset-3.php:51
 msgid "Stock <br/> Out"
 msgstr ""
 
-#: ../includes/Template/Eicon-Woocommerce/default.php:539, ../includes/Template/Woo-Product-List/preset-1.php:539, ../includes/Template/Woo-Product-List/preset-2.php:539, ../includes/Template/Woo-Product-List/preset-3.php:539
+#: ../includes/Template/Eicon-Woocommerce/default.php:539, ../includes/Template/Woo-Product-List/preset-2.php:539, ../includes/Template/Woo-Product-List/preset-3.php:539
 msgid "Stock "
 msgstr ""
 
-#: ../includes/Template/Eicon-Woocommerce/default.php:539, ../includes/Template/Woo-Product-List/preset-1.php:539, ../includes/Template/Woo-Product-List/preset-2.php:539, ../includes/Template/Woo-Product-List/preset-3.php:539
+#: ../includes/Template/Eicon-Woocommerce/default.php:539, ../includes/Template/Woo-Product-List/preset-2.php:539, ../includes/Template/Woo-Product-List/preset-3.php:539
 msgid "Out"
 msgstr ""
 

@@ -3214,11 +3214,11 @@ class Woo_Product_List extends Widget_Base
         <div>
             <?php
 			$template = $this->get_template( $woo_product_list[ 'layout' ] );
-			if ( file_exists( $template ) ):
-				include( $template );
-			else:
+			if ( file_exists( $template ) ) {
+                include( $template );
+            } else {
 				_e( '<p class="eael-no-posts-found">No layout found!</p>', 'essential-addons-elementor' );
-			endif; 
+            }
 			?>
         </div>
 
