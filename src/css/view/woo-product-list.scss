@@ -7,14 +7,9 @@
         
         .eael-product-list-item {
             width: 100%;
-            background-color: #ffffff;
-            padding: 64px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            &:not(:last-child) {
-                margin-bottom: 15px;
-            }
         }
 
         .eael-product-list-image-wrap {
