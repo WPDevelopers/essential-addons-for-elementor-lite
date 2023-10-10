@@ -3355,158 +3355,146 @@ class Woo_Product_List extends Widget_Base
     }
 
     protected function get_woo_product_list_settings() {
-		$settings 											= $this->get_settings_for_display();
+		$settings 							= $this->get_settings_for_display();
 		
-		$woo_product_list 									= [];
-		$woo_product_list['layout'] 						= ! empty( $settings['eael_dynamic_template_layout'] ) ? $settings['eael_dynamic_template_layout'] : 'preset-1';
-
-		return $woo_product_list;
+		$woo_product_list 					= [];
+		$woo_product_list['layout'] 		= ! empty( $settings['eael_dynamic_template_layout'] ) ? $settings['eael_dynamic_template_layout'] : 'preset-1';
+		$woo_product_list['posts_per_page'] = ! empty( $settings['eael_woo_product_list_products_count'] ) ? intval( $settings['eael_woo_product_list_products_count'] ) : 4;
+		
+        return $woo_product_list;
 	}
 
+    /**
+     * Prepare product query
+     * @param $settings
+     * @return array
+     */
+    public function eael_prepare_product_query( $settings ) {
+        $args = [
+            'post_type'         => 'product',
+            'post_status'       => ! empty( $settings['products_status'] ) ? $settings['products_status'] : [ 'publish', 'pending', 'future' ],
+            'posts_per_page'    => ! empty( $settings['posts_per_page'] )  ? intval( $settings['posts_per_page'] ) : 4,
+            'order'             => ! empty( $settings['order'] )  ? sanitize_text_field( $settings['order'] ) : 'DESC',
+            'offset'            => ! empty( $settings['product_offset'] )  ? intval( $settings['product_offset'] ) : 0,
+            'tax_query' => [
+                'relation' => 'AND',
+                [
+                    'taxonomy' => 'product_visibility',
+                    'field' => 'name',
+                    'terms' => ['exclude-from-search', 'exclude-from-catalog'],
+                    'operator' => 'NOT IN',
+                ],
+            ],
+        ];
+        
+        // // price & sku filter
+        // if ($settings['orderby'] == '_price') {
+        //     $args['orderby'] = 'meta_value_num';
+        //     $args['meta_key'] = '_price';
+        // } else if ($settings['orderby'] == '_sku') {
+        //     $args['orderby'] = 'meta_value meta_value_num';
+        //     $args['meta_key'] = '_sku';
+        // } else {
+        //     $args['orderby'] = (isset($settings['orderby']) ? $settings['orderby'] : 'date');
+        // }
+
+        // if (!empty($settings['eael_product_grid_categories'])) {
+        //     $args['tax_query'] = [
+        //         [
+        //             'taxonomy' => 'product_cat',
+        //             'field' => 'slug',
+        //             'terms' => $settings['eael_product_grid_categories'],
+        //             'operator' => 'IN',
+        //         ],
+        //     ];
+        // }
+
+        // $args['meta_query'] = ['relation' => 'AND'];
+
+        // if (get_option('woocommerce_hide_out_of_stock_items') == 'yes') {
+        //     $args['meta_query'][] = [
+        //         'key' => '_stock_status',
+        //         'value' => 'instock'
+        //     ];
+        // }
+
+        // if ($settings['eael_product_grid_product_filter'] == 'featured-products') {
+        //     $args['tax_query'] = [
+        //         'relation' => 'AND',
+        //         [
+        //             'taxonomy' => 'product_visibility',
+        //             'field' => 'name',
+        //             'terms' => 'featured',
+        //         ],
+        //         [
+        //             'taxonomy' => 'product_visibility',
+        //             'field' => 'name',
+        //             'terms' => ['exclude-from-search', 'exclude-from-catalog'],
+        //             'operator' => 'NOT IN',
+        //         ],
+        //     ];
+
+        //     if ($settings['eael_product_grid_categories']) {
+        //         $args['tax_query'][] = [
+        //             'taxonomy' => 'product_cat',
+        //             'field' => 'slug',
+        //             'terms' => $settings['eael_product_grid_categories'],
+        //         ];
+        //     }
+        // }
+        // else if ($settings['eael_product_grid_product_filter'] == 'best-selling-products') {
+        //     $args['meta_key'] = 'total_sales';
+        //     $args['orderby'] = 'meta_value_num';
+        //     $args['order'] = 'DESC';
+        // }
+        // else if ($settings['eael_product_grid_product_filter'] == 'sale-products') {
+        //     $args['post__in']  = array_merge( array( 0 ), wc_get_product_ids_on_sale() );
+        // }
+        // else if ($settings['eael_product_grid_product_filter'] == 'top-products') {
+        //     $args['meta_key'] = '_wc_average_rating';
+        //     $args['orderby'] = 'meta_value_num';
+        //     $args['order'] = 'DESC';
+        // }
+        // else if( $settings['eael_product_grid_product_filter'] == 'manual' ){
+        //     $args['post__in'] = $settings['eael_product_grid_products_in'] ? $settings['eael_product_grid_products_in'] : [ 0 ];
+        // }
+
+        return $args;
+    }
+
     protected function render() {
-		if ( !function_exists( 'WC' ) ) {
+		if ( ! function_exists( 'WC' ) ) {
             return;
         }
 
         $settings 	= $this->get_settings_for_display();
-
 		$woo_product_list = $this->get_woo_product_list_settings();
+        $args = $this->eael_prepare_product_query( $settings );
         ?>
 
-        <div>
+        <div class="woocommerce">
             <?php
-			$template = $this->get_template( $woo_product_list[ 'layout' ] );
+            do_action( 'eael/woo-product-list/before-product-loop' );
+
+			$template                       = $this->get_template( $woo_product_list[ 'layout' ] );
+            $settings['loadable_file_name'] = $this->get_filename_only( $template );
+
 			if ( file_exists( $template ) ) {
-                include( $template );
+                $query  = new \WP_Query( $args );
+
+                if ( $query->have_posts() ) {
+                    include( realpath( $template ) );
+                } else {
+                    _e( '<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite' );
+                }
             } else {
 				_e( '<p class="eael-no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
             }
+
+            do_action( 'eael/woo-product-list/after-product-loop' );
 			?>
         </div>
 
 		<?php
-        // // normalize for load more fix
-	    // $settings['layout_mode']    = $settings["eael_woo_product_list_layout"];
-	    // $widget_id                  = $this->get_id();
-	    // $settings['eael_widget_id'] = $widget_id;
-
-	    // if ( $settings['post_type'] === 'source_dynamic' && is_archive() || ! empty( $_REQUEST['post_type'] ) ) {
-		//     $settings['posts_per_page'] = $settings['eael_woo_product_list_products_count'] ?: 4;
-		//     $settings['offset']         = $settings['product_offset'];
-		//     $args                       = HelperClass::get_query_args( $settings );
-		//     $args                       = HelperClass::get_dynamic_args( $settings, $args );
-	    // } else {
-		//     $args = $this->build_product_query( $settings );
-	    // }
-
-	    // $this->is_show_custom_add_to_cart       = boolval( $settings['show_add_to_cart_custom_text'] );
-	    // $this->simple_add_to_cart_button_text   = $settings['add_to_cart_simple_product_button_text'];
-	    // $this->variable_add_to_cart_button_text = $settings['add_to_cart_variable_product_button_text'];
-	    // $this->grouped_add_to_cart_button_text  = $settings['add_to_cart_grouped_product_button_text'];
-	    // $this->external_add_to_cart_button_text = $settings['add_to_cart_external_product_button_text'];
-	    // $this->default_add_to_cart_button_text  = $settings['add_to_cart_default_product_button_text'];
-
-	    // if ( Plugin::$instance->documents->get_current() ) {
-		//     $this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
-	    // }
-        // render dom
-	    // $this->add_render_attribute( 'wrap', [
-		//     'class'          => [
-		// 	    "eael-woo-product-list",
-		// 	    $settings['eael_woo_product_list_style_preset'],
-		// 	    $settings['eael_woo_product_list_layout']
-		//     ],
-		//     'id'             => 'eael-woo-product-list',
-		//     'data-widget-id' => $widget_id,
-		//     'data-page-id'   => $this->page_id,
-		//     'data-nonce'     => wp_create_nonce( 'eael_woo_product_list' ),
-	    // ] );
-
-	    // add_filter( 'woocommerce_product_add_to_cart_text', [
-		//     $this,
-		//     'add_to_cart_button_custom_text',
-	    // ] );
-        ?>
-
-        <div <?php //$this->print_render_attribute_string('wrap'); ?> >
-            <div class="woocommerce">
-                <?php
-                // do_action( 'eael_woo_before_product_loop' );
-
-                // $template                       = $this->get_template( $settings['eael_dynamic_template_Layout'] );
-                // $settings['loadable_file_name']  = $this->get_filename_only( $template );
-                // $dir_name                       = $this->get_temp_dir_name( $settings['loadable_file_name'] );
-                // $found_posts                    = 0;
-
-                // if ( file_exists( $template ) ) {
-	            //     $settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
-	            //     $query                    = new \WP_Query( $args );
-	            //     if ( $query->have_posts() ) {
-		        //         $found_posts        = $query->found_posts;
-		        //         $max_page           = ceil( $found_posts / absint( $args['posts_per_page'] ) );
-		        //         $args['max_page']   = $max_page;
-		        //         $args['total_post'] = $found_posts;
-
-		        //         printf( '<ul class="products" data-layout-mode="%s">', esc_attr( $settings["eael_woo_product_list_layout"] ) );
-
-                //             while ( $query->have_posts() ) {
-                //                 $query->the_post();
-                //                 include( realpath( $template ) );
-                //             }
-                //             wp_reset_postdata();
-
-		        //         echo '</ul>';
-
-	            //     } else {
-		        //         _e( '<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite' );
-	            //     }
-
-                // } else {
-	            //     _e( '<p class="no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
-                // }
-
-                // if ( 'true' == $settings['show_pagination'] ) {
-	            //     $settings['eael_widget_name'] = $this->get_name();
-	            //     echo HelperClass::eael_pagination( $args, $settings );
-                // }
-
-                // if ( $found_posts > $args['posts_per_page'] ) {
-	            //     $this->print_load_more_button( $settings, $args, $dir_name );
-                // }
-
-                ?>
-            </div>
-        </div>
-
-        <script type="text/javascript">
-            // jQuery(document).ready(function($) {
-            //     var $scope = jQuery(".elementor-element-<?php //echo $this->get_id(); ?>");
-            //     var $products = $('.products', $scope);
-            //     var $layout_mode = $products.data('layout-mode');
-                
-            //     if ( $layout_mode === 'masonry' ) {
-            //         // init isotope
-            //         var $isotope_products = $products.isotope({
-            //             itemSelector: "li.product",
-            //             layoutMode: $layout_mode,
-            //             percentPosition: true
-            //         });
-
-            //         $isotope_products.imagesLoaded().progress( function() {
-            //             $isotope_products.isotope('layout');
-            //         })
-
-            //         $(window).on('resize', function() {
-            //             $isotope_products.isotope('layout');
-            //         });
-            //     }
-            // });
-        </script>
-        <?php
-        // remove_filter('woocommerce_product_add_to_cart_text', [
-        //     $this,
-        //     'add_to_cart_button_custom_text',
-        // ]);
-	    // remove_filter( 'single_product_archive_thumbnail_size', [ $this, 'eael_customize_woo_prod_thumbnail_size' ] );
     }
 }
