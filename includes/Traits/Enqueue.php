@@ -79,6 +79,18 @@ trait Enqueue
 	        EAEL_PLUGIN_VERSION
         );
     }
+    
+    // frontend styles
+    public function frontend_enqueue_scripts()
+    {
+        // ea icon font
+        wp_register_style(
+            'ea-icon-frontend',
+            $this->safe_url(EAEL_PLUGIN_URL . 'assets/admin/css/eaicon.css'),
+            false,
+	        EAEL_PLUGIN_VERSION
+        );
+    }
 
     // templately promo enqueue scripts
     public function templately_promo_enqueue_scripts(){
