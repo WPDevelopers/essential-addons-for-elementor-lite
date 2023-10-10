@@ -670,12 +670,11 @@ class Woo_Product_List extends Widget_Base
 					],
 				],
 				'default'    => [
-					'top'      => '15',
-					'right'    => '15',
-					'bottom'   => '15',
-					'left'     => '15',
+					'top'      => 0,
+					'right'    => 0,
+					'bottom'   => 15,
+					'left'     => 0,
 					'unit'     => 'px',
-					'isLinked' => true,
 				],
 				'selectors'  => [
 					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item:not(:last-child)' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -3472,7 +3471,7 @@ class Woo_Product_List extends Widget_Base
         $args = $this->eael_prepare_product_query( $settings );
         ?>
 
-        <div class="woocommerce">
+        <div>
             <?php
             do_action( 'eael/woo-product-list/before-product-loop' );
 
