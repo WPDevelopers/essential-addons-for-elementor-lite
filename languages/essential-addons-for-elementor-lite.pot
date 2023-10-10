@@ -474,7 +474,7 @@ msgstr ""
 msgid "SVG Draw"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:737, ../includes/Traits/Elements.php:340, ../includes/templates/admin/elements.php:383
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:737, ../includes/Traits/Elements.php:346, ../includes/templates/admin/elements.php:383
 msgid "Fancy Chart"
 msgstr ""
 
@@ -9642,7 +9642,7 @@ msgstr ""
 msgid "Woo Thank You"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:340, ../includes/templates/admin/elements.php:635
+#: ../includes/Traits/Elements.php:340, ../includes/templates/admin/elements.php:643
 msgid "Woo Account Dashboard"
 msgstr ""
 
@@ -10294,35 +10294,35 @@ msgstr ""
 msgid "LearnDash Elements"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:652, ../includes/templates/admin/extensions.php:103
+#: ../includes/templates/admin/elements.php:660, ../includes/templates/admin/extensions.php:103
 msgid "Global Control"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:653
+#: ../includes/templates/admin/elements.php:661
 msgid "Use the Toggle Button to Activate or Deactivate all the Elements of Essential Addons at once."
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:660, ../includes/templates/admin/extensions.php:111
+#: ../includes/templates/admin/elements.php:668, ../includes/templates/admin/extensions.php:111
 msgid "Enable All"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:661, ../includes/templates/admin/extensions.php:112
+#: ../includes/templates/admin/elements.php:669, ../includes/templates/admin/extensions.php:112
 msgid "Disable All"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:664, ../includes/templates/admin/elements.php:725, ../includes/templates/admin/extensions.php:115, ../includes/templates/admin/extensions.php:170, ../includes/templates/admin/tools.php:71
+#: ../includes/templates/admin/elements.php:672, ../includes/templates/admin/elements.php:733, ../includes/templates/admin/extensions.php:115, ../includes/templates/admin/extensions.php:170, ../includes/templates/admin/tools.php:71
 msgid "Save Settings"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:686, ../includes/templates/admin/extensions.php:139
+#: ../includes/templates/admin/elements.php:694, ../includes/templates/admin/extensions.php:139
 msgid "Setting"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:691, ../includes/templates/admin/extensions.php:144
+#: ../includes/templates/admin/elements.php:699, ../includes/templates/admin/extensions.php:144
 msgid "Documentation"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:695, ../includes/templates/admin/extensions.php:148
+#: ../includes/templates/admin/elements.php:703, ../includes/templates/admin/extensions.php:148
 msgid "Demo"
 msgstr ""
 
