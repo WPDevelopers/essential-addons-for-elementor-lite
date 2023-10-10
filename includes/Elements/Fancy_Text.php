@@ -51,6 +51,12 @@ class Fancy_Text extends Widget_Base {
 		];
     }
 
+	public function get_style_depends() {
+        return [
+            'e-animations',
+        ];
+    }
+
     public function get_custom_help_url() {
         return 'https://essential-addons.com/elementor/docs/fancy-text/';
     }
