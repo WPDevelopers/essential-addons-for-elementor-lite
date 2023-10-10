@@ -182,6 +182,7 @@ trait Helper
 
         if ( $args['posts_per_page'] != '-1' ) {
             $show_or_hide = ('true' == $settings['show_load_more'] || 1 == $settings['show_load_more'] || 'yes' == $settings['show_load_more']) ? '' : ' eael-force-hide';
+            do_action( 'eael/global/load_more_button_before', $settings, $args, $plugin_type );
             ?>
             <div class="eael-load-more-button-wrap<?php echo "eael-dynamic-filterable-gallery" == $this->get_name() ? " dynamic-filter-gallery-loadmore" : ""; echo esc_attr( $show_or_hide ); ?>">
                 <button <?php $this->print_render_attribute_string( 'load-more' ); ?>>
@@ -189,7 +190,9 @@ trait Helper
                     <span><?php echo esc_html($settings['show_load_more_text']) ?></span>
                 </button>
             </div>
-        <?php }
+        <?php 
+        do_action( 'eael/global/load_more_button_after', $settings, $args, $plugin_type );
+        }
     }
 
     public function eael_product_grid_script(){
