@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.3
 Requires PHP: 7.0
-Stable tag: 5.8.10
+Stable tag: 5.8.11
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -145,7 +145,9 @@ Extensions (Free):
 31. [LearnDash Course List](https://essential-addons.com/elementor/learndash-course-list/)- Share LearnDash course list in Elementor
 32. [Advanced Search](https://essential-addons.com/elementor/advanced-search/)- Add a customizable, dynamic search bar
 33. [Woo Thank You](https://essential-addons.com/elementor/woo-thank-you)- Design a personalized thank you message on the WooCommerce order confirmation page
-34. [Woo Cross Sells](https://essential-addons.com/elementor/woo-cross-sells/)- Customize the display of cross-sell products to boost your sales potential 
+34. [Woo Cross Sells](https://essential-addons.com/elementor/woo-cross-sells/)- Customize the display of cross-sell products to boost your sales potential
+35. [Woo Account Dashboard](https://essential-addons.com/elementor/woo-account-dashboard/)- Design a personalized WooCommerce Customer Account Dashboard 
+
 
 Extensions (Pro): 
 
@@ -251,6 +253,11 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.8.11 - 09/10/2023 =
+
+- Fixed: EA Fancy Text | Animation Type option not working
+- Few minor bug fixes & improvements
 
 = 5.8.10 - 02/10/2023 =
 
