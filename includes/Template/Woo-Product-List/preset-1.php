@@ -31,7 +31,7 @@
                             <li><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
                         </ul>
                     </div>
-                    <div class="eael-product-list-details-wrap">
+                    <div class="eael-product-list-content-wrap">
                         <div class="eael-product-list-info">
                             <div class="eael-product-list-rating">
                                 <ul class="eael-product-list-rating-list">
