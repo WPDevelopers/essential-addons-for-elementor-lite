@@ -43,6 +43,7 @@ class Woo_Product_Gallery extends Widget_Base {
         add_action( 'eael_woo_before_product_loop', function (){
             remove_action('woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open');
             remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close');
+            remove_action('woocommerce_after_shop_loop_item', 'astra_woo_woocommerce_shop_product_content');
         } );
 	}
 
