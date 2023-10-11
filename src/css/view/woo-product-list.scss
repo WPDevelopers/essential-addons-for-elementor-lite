@@ -9,6 +9,38 @@
             display: flex;
             flex-wrap: wrap;
             align-items: center;
+
+            .eael-product-list-rating .star-rating {
+                // margin: 0 auto 5px;
+                // display: inline-block;
+                // float: none;
+                height: 1em;
+                width: 5.6em;
+                // font-size: 1em;
+                line-height: 1em;
+
+                display: block;
+                float: none;
+                font-size: 14px;
+                margin: 10px auto;
+
+                &:before {
+                    content: '\f005\f005\f005\f005\f005';
+                    font-family: "Font Awesome 5 Free";
+                    font-weight: 400;
+                    opacity: 1;
+                }
+
+                span {
+                    display: inline-block;
+
+                    &:before {
+                        content: '\f005 \f005 \f005 \f005 \f005';
+                        font-family: "Font Awesome 5 Free";
+                        font-weight: 900;
+                    }
+                }
+            }
         }
 
         .eael-product-list-image-wrap {
@@ -102,12 +134,14 @@
         .eael-product-list-content-wrap {
             width: 70%;
             padding-left: 70px;
-            .eael-product-list-info {
+
+            .eael-product-list-content-header {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
                 margin-bottom: 16px;
             }
+
             .eael-product-list-rating {
                 .eael-product-list-rating-list {
                     padding: 0;
@@ -144,7 +178,8 @@
             .eael-product-list-notice.eael-product-list-notice-shiping-free p {
                 color: #758F4D;
             }
-            .eael-product-list-details {
+
+            .eael-product-list-content-body {
                 .eael-product-list-title {
                     margin-bottom: 15px;
                 }
@@ -250,6 +285,9 @@
                         text-decoration-line: strikethrough;
                     }
                 }
+            }
+
+            .eael-product-list-content-footer {
                 .eael-product-list-buttons {
                     & a {
                         display: inline-block;

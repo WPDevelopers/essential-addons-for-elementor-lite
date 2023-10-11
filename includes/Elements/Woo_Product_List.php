@@ -11,8 +11,6 @@ use Elementor\Controls_Manager;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Widget_Base;
-use Essential_Addons_Elementor\Classes\Helper as HelperClass;
-use Essential_Addons_Elementor\Traits\Woo_Product_Comparable;
 use Essential_Addons_Elementor\Traits\Helper;
 
 class Woo_Product_List extends Widget_Base
@@ -427,7 +425,7 @@ class Woo_Product_List extends Widget_Base
     protected function eael_product_list_item_image_style() {
 
 	    $this->start_controls_section(
-			'eael_section_product_list_item_style',
+			'eael_section_product_list_item_image_style',
 			[
 				'label' => esc_html__( 'Image', 'essential-addons-for-elementor-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
@@ -440,7 +438,7 @@ class Woo_Product_List extends Widget_Base
     protected function eael_product_list_item_content_style() {
 
 	    $this->start_controls_section(
-			'eael_section_product_list_item_style',
+			'eael_section_product_list_item_content_style',
 			[
 				'label' => esc_html__( 'Content', 'essential-addons-for-elementor-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,

@@ -2,14 +2,24 @@
 /**
  * Template Name: Preset 1
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+} // Exit if accessed directly
 ?>
 
 <div class="eael-product-list-wrapper preset-1">
-    <div class="eael-product-list-body">
+    <div class="eael-product-list-body woocommerce">
         <div class="eael-product-list-container">
             <?php
             while ( $query->have_posts() ) {
                 $query->the_post();
+
+                $product = wc_get_product( get_the_ID() );
+                if ( ! $product ) {
+                    error_log( '$product not found in ' . __FILE__ );
+                    return;
+                }
                 ?>
                 <div class="eael-product-list-item">
                     <div class="eael-product-list-image-wrap">
@@ -32,22 +42,15 @@
                         </ul>
                     </div>
                     <div class="eael-product-list-content-wrap">
-                        <div class="eael-product-list-info">
+                        <div class="eael-product-list-content-header">
                             <div class="eael-product-list-rating">
-                                <ul class="eael-product-list-rating-list">
-                                <li><i class="fa-solid fa-star"></i></li>
-                                <li><i class="fa-solid fa-star"></i></li>
-                                <li><i class="fa-solid fa-star"></i></li>
-                                <li><i class="fa-solid fa-star"></i></li>
-                                <li><i class="fa-regular fa-star-half-stroke"></i></li>
-                                <li class="eael-product-list-rating-count">(2.3k)</li>
-                                </ul>
+                                <?php echo wp_kses_post( wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) ); ?>
                             </div>
                             <div class="eael-product-list-notice eael-product-list-notice-shiping-free">
                                 <p><i class="fa-solid fa-box"></i> Free Shipping</p>
                             </div>
                         </div>
-                        <div class="eael-product-list-details">
+                        <div class="eael-product-list-content-body">
                             <h2 class="eael-product-list-title">
                                 <a href="#">Saguaro with Wooden stand</a>
                             </h2>
@@ -75,6 +78,8 @@
                                 <span class="eael-product-list-sale-price">$200.00</span>
                                 <span class="eael-product-list-main-price">$287.00</span>
                             </h4>
+                        </div>
+                        <div class="eael-product-list-content-footer">
                             <div class="eael-product-list-buttons">
                                 <a href="#" class="eael-product-list-action-cart"><i class="fa-solid fa-cart-shopping"></i>Add To Cart</a>
                                 <a href="#" class="eael-product-list-action-view">View Product</a>
