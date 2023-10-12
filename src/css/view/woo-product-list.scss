@@ -11,19 +11,14 @@
             align-items: center;
 
             .eael-product-list-rating .star-rating {
-                // margin: 0 auto 5px;
-                // display: inline-block;
-                // float: none;
+                width: 5.4em;
                 height: 1em;
-                width: 5.6em;
-                // font-size: 1em;
                 line-height: 1em;
 
                 display: block;
                 float: none;
-                font-size: 14px;
                 margin: 10px auto;
-
+                
                 &:before {
                     content: '\f005\f005\f005\f005\f005';
                     font-family: "Font Awesome 5 Free";
