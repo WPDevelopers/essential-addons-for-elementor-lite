@@ -10,6 +10,7 @@ if (!defined('ABSPATH')) {
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
+use Elementor\Group_Control_Typography;
 use Elementor\Widget_Base;
 use Essential_Addons_Elementor\Traits\Helper;
 
@@ -48,7 +49,7 @@ class Woo_Product_List extends Widget_Base
 
     public function get_categories()
     {
-        return ['essential-addons-for-elementor-lite'];
+        return ['essential-addons-elementor'];
     }
 
     public function get_keywords()
@@ -128,6 +129,7 @@ class Woo_Product_List extends Widget_Base
         $this->eael_product_list_item_style();
         $this->eael_product_list_item_image_style();
         $this->eael_product_list_item_content_style();
+        $this->eael_product_list_color_typography_style();
     }
 
     protected function init_content_wc_notice_controls() {
@@ -163,6 +165,15 @@ class Woo_Product_List extends Widget_Base
 			    'options' => $this->get_template_list_for_dropdown(true),
 		    ]
 	    );
+
+		$this->add_control('eael_woo_product_list_rating', [
+            'label' => esc_html__('Rating', 'essential-addons-for-elementor-lite'),
+            'type' => Controls_Manager::SWITCHER,
+			'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+			'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+            'return_value' => 'yes',
+            'default' => 'yes',
+        ]);
 
         $this->end_controls_section();
     }
@@ -448,6 +459,60 @@ class Woo_Product_List extends Widget_Base
 		$this->end_controls_section();
     }
 
+	protected function eael_product_list_color_typography_style() {
+
+        $this->start_controls_section(
+            'eael_section_product_list_typography',
+            [
+                'label' => esc_html__('Color &amp; Typography', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_rating_heading',
+            [
+                'label' => __('Star Rating', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_rating_color',
+            [
+                'label' => esc_html__('Rating Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#FF9900',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .star-rating::before' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .star-rating span::before' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_product_list_rating_size',
+            [
+                'label' => esc_html__('Icon Size', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'max' => 50,
+                    ],
+                ],
+                'default' => [
+                    'size' => 15,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .star-rating::before' => 'font-size: {{SIZE}}px!important;',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .star-rating span::before' => 'font-size: {{SIZE}}px!important;',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
     protected function eael_get_product_statuses() {
         return apply_filters( 'eael/woo-woo-product-list/product-statuses', [
             'publish'       => esc_html__( 'Publish', 'essential-addons-for-elementor-lite' ),
@@ -485,6 +550,7 @@ class Woo_Product_List extends Widget_Base
 		$woo_product_list 					= [];
 		$woo_product_list['layout'] 		= ! empty( $settings['eael_dynamic_template_layout'] ) ? $settings['eael_dynamic_template_layout'] : 'preset-1';
 		$woo_product_list['posts_per_page'] = ! empty( $settings['eael_woo_product_list_products_count'] ) ? intval( $settings['eael_woo_product_list_products_count'] ) : 4;
+		$woo_product_list['rating_show'] = ! empty( $settings['eael_woo_product_list_rating'] ) && 'yes' === $settings['eael_woo_product_list_rating'] ? 1 : 0;
 		
         return $woo_product_list;
 	}
