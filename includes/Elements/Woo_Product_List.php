@@ -34,7 +34,7 @@ class Woo_Product_List extends Widget_Base
 
     public function get_name()
     {
-        return 'woo-product-list';
+        return 'eael-woo-product-list';
     }
 
     public function get_title()
