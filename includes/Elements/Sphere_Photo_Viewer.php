@@ -176,6 +176,33 @@ class Sphere_Photo_Viewer extends Widget_Base {
 		<div class="eael-sphere-photo-wrapper" <?php $this->print_render_attribute_string( 'sphere-wrapper' ) ?>>
 			<div id="<?php echo esc_attr( $container_id ); ?>" style="height: 500px;"></div>
 		</div>
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "https://cdn.jsdelivr.net/npm/three/build/three.module.js",
+					"@photo-sphere-viewer/core": "https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core@5/index.module.js",
+					"@photo-sphere-viewer/autorotate-plugin": "https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/autorotate-plugin@5/index.module.js"
+				}
+			}
+		</script>
+		<script type="module">
+            import {Viewer} from '@photo-sphere-viewer/core';
+            import {AutorotatePlugin} from '@photo-sphere-viewer/autorotate-plugin';
+
+            const viewer = new Viewer({
+                "caption": "Parc national du Mercantour <b>&copy; Damien Sorel<\/b>",
+                "panorama": "https:\/\/photo-sphere-viewer-data.netlify.app\/assets\/sphere.jpg",
+                "container": "eael-psv-454a061",
+                "description": null,
+                "autorotateDelay": 100,
+                "plugins": [
+                    [AutorotatePlugin, {
+                        autostartDelay: 1000,
+                        autorotatePitch: '5deg',
+                    }],
+                ]
+            });
+		</script>
 		<?php
 	}
 }
