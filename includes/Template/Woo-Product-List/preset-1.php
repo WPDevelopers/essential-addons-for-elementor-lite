@@ -42,7 +42,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         </ul>
                     </div>
                     <div class="eael-product-list-content-wrap">
-                        <div class="eael-product-list-content-header">
+                        <div <?php $this->print_render_attribute_string('eael-product-list-content-header'); ?> >
                             <?php if ( $woo_product_list['rating_show'] ) : ?>
                             <div class="eael-product-list-rating">
                                 <?php echo wp_kses_post( wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) ); ?>
