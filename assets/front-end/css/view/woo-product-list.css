@@ -1,3 +1,6 @@
+.eael-product-list-wrapper .eael-direction-rtl {
+  direction: rtl;
+}
 .eael-product-list-wrapper.preset-1 .eael-product-list-container {
   padding: 60px;
 }
@@ -13,12 +16,12 @@
           align-items: center;
 }
 .eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-rating .star-rating {
-  width: 5.4em;
-  height: 1em;
-  line-height: 1em;
+  margin: 0;
   display: block;
   float: none;
-  margin: 10px auto;
+  height: 1em;
+  width: 5.6em;
+  line-height: 1em;
 }
 .eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-rating .star-rating:before {
   content: "\f005\f005\f005\f005\f005";
