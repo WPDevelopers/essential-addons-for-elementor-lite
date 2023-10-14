@@ -57,26 +57,17 @@ if ( ! defined( 'ABSPATH' ) ) {
                             <h2 class="eael-product-list-title">
                                 <a href="#">Saguaro with Wooden stand</a>
                             </h2>
-                            <div class="eael-product-list-rating-count">
-                                <i class="fa-solid fa-star"></i>
-                                <span class="rating">4.7</span>
-                                <span class="count">(100+ Review)</span>
-                            </div>
-                            <ul class="eael-product-list-features-list">
-                                <li>Through mechanical movements, without the use of batteries or electronics.</li>
-                                <li>Through mechanical movements, without the use of batteries or electronics.</li>
-                                <li>Perfect craftsmanship, precision, and timeless appeal. Timepiece that operates
-                                    purely</li>
-                            </ul>
-                            <p class="eael-product-list-features">
+
+                            <div class="eael-product-list-excerpt">
                                 Perfect craftsmanship, precision, and timeless appeal. Timepiece that operates purely
-                            </p>
-                            <div class="eael-product-list-progress">
+                            </div>
+                            
+                            <!-- <div class="eael-product-list-progress">
                                 <h4 class="eael-product-list-progress-count">Total Sold: 300 Item</h4>
                                 <div class="eael-product-list-progress-bar-outer">
                                     <div style="width: 80%;" class="eael-product-list-progress-bar-inner"></div>
                                 </div>
-                            </div>
+                            </div> -->
                             <h4 class="eael-product-list-price">
                                 <span class="eael-product-list-sale-price">$200.00</span>
                                 <span class="eael-product-list-main-price">$287.00</span>
