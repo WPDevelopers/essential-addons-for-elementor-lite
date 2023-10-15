@@ -42,12 +42,28 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <a href="#">
                             <img src="//essential-addons-dev.test/wp-content/uploads/2023/10/product-image-1.png" alt="Saguaro with Wooden stand">
                         </a>
-                        <ul class="eael-product-list-links">
-                            <li><a href="#"><i class="fa-regular fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa-solid fa-code-compare"></i></a></li>
-                            <li><a href="#"><i class="fa-solid fa-eye"></i></a></li>
-                            <li><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
-                        </ul>
+
+                        <div class="eael-product-list-image-hover-wrap">
+                            <ul class="eael-product-list-buttons-on-hover">
+                                <?php if ( $woo_product_list['add_to_cart_button_show'] ) : ?>
+                                <p class="eael-product-list-add-to-cart-button eael-m-0">
+                                    <?php woocommerce_template_loop_add_to_cart(); ?>
+                                </p>
+                                <?php endif; ?>
+
+                                <?php if ( $woo_product_list['quick_view_button_show'] ) : ?>
+                                <p class="eael-product-list-quick-view-button eael-m-0">
+                                    <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars( json_encode( $quick_view_setting ), ENT_QUOTES ); ?>" class="open-popup-link"><i class="fas fa-eye"></i></a>
+                                </p>
+                                <?php endif; ?>
+
+                                <?php if ( $woo_product_list['link_button_show'] ) : ?>
+                                <p class="eael-product-list-link-button eael-m-0">
+                                    <a href="<?php echo esc_url( $product->get_permalink() ); ?>"><i class="fas fa-link"></i></a>
+                                </p>
+                                <?php endif; ?>
+                            </ul>
+                        </div>
                     </div>
                     <div class="eael-product-list-content-wrap">
                         <div <?php $this->print_render_attribute_string('eael-product-list-content-header'); ?> >
@@ -82,8 +98,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                             <?php if ( $woo_product_list['price_show'] ) : ?>
                             <h4 class="eael-product-list-price">
-                                <!-- <span class="eael-product-list-sale-price">$200.00</span> -->
-                                <!-- <span class="eael-product-list-main-price">$287.00</span> -->
                                 <?php echo wp_kses_post( $product->get_price_html() ); ?>
                             </h4>
                             <?php endif; ?>
