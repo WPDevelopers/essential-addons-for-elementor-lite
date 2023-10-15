@@ -1,3 +1,8 @@
+$theme-preset1: #597dfc;
+// $theme-preset2: #5f3ae0;
+// $theme-preset3: #5f3ae0;
+// $theme-preset4: #ec3b75;
+
 .eael-product-list-wrapper {
     .eael-direction-rtl {
         direction: rtl;
@@ -40,6 +45,41 @@
                         content: '\f005 \f005 \f005 \f005 \f005';
                         font-family: "Font Awesome 5 Free";
                         font-weight: 900;
+                    }
+                }
+            }
+
+            .eael-product-list-buttons-on-hover {
+                .eael-product-list-add-to-cart-button a {
+                    padding: 0 !important;
+                    margin: 3px;
+                    font-size: 0px;
+                    display: block;
+                    border: none;
+                    // color: $theme-preset1;
+                    background-color: #fff;
+    
+                    &:before {
+                        content: "\f07a";
+                        display: block;
+                        font-family: "Font Awesome 5 Free";
+                        font-size: 16px;
+                        font-weight: 900;
+                        transform: translate(-50%, -50%);
+                        top: 50%;
+                        left: 50%;
+                        position: absolute;
+                    }
+    
+                    &:hover {
+                        color: #fff;
+                        // background-color: $theme-preset1;
+                    }
+    
+                    &.product_type_variable {
+                        &:before {
+                            content: "\f00c";
+                        }
                     }
                 }
             }
@@ -97,7 +137,7 @@
                     object-fit: contain;
                 }
             }
-            .eael-product-list-links {
+            .eael-product-list-buttons-on-hover {
                 width: 100%;
                 padding: 0;
                 margin: 0;
@@ -127,7 +167,7 @@
                     }
                 }
             }
-            &:hover .eael-product-list-links {
+            &:hover .eael-product-list-buttons-on-hover {
                 opacity: 1;
                 visibility: visible;
                 transform: translateY(0);
@@ -294,7 +334,7 @@
                 .eael-product-list-buttons {
                     display: flex;
                     align-items: center;
-                    
+
                     & a {
                         display: inline-block;
                     }
