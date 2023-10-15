@@ -11,6 +11,7 @@ use Elementor\Controls_Manager;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
+use Elementor\Plugin;
 use Elementor\Widget_Base;
 use Essential_Addons_Elementor\Classes\Helper as ClassesHelper;
 use Essential_Addons_Elementor\Traits\Helper;
@@ -18,6 +19,11 @@ use Essential_Addons_Elementor\Traits\Helper;
 class Woo_Product_List extends Widget_Base
 {
     use Helper;
+
+    /**
+     * @var int
+     */
+    protected $page_id;
 
 	public function __construct( $data = [], $args = null ) {
 		parent::__construct( $data, $args );
@@ -490,8 +496,8 @@ class Woo_Product_List extends Widget_Base
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'static',
                 'options' => [
-                    'static'        => esc_html__( 'Static', 'essential-addons-for-elementor-lite' ),
-                    'on-hover' => esc_html__( 'On Hover', 'essential-addons-for-elementor-lite' ),
+                    'static'    => esc_html__( 'Static', 'essential-addons-for-elementor-lite' ),
+                    'on-hover'  => esc_html__( 'On Hover', 'essential-addons-for-elementor-lite' ),
                 ],
             ]
         );
@@ -980,9 +986,16 @@ class Woo_Product_List extends Widget_Base
 		$woo_product_list 					= [];
 		$woo_product_list['layout'] 		= ! empty( $settings['eael_dynamic_template_layout'] ) ? $settings['eael_dynamic_template_layout'] : 'preset-1';
 		$woo_product_list['posts_per_page'] = ! empty( $settings['eael_woo_product_list_products_count'] ) ? intval( $settings['eael_woo_product_list_products_count'] ) : 4;
-		$woo_product_list['rating_show']    = ! empty( $settings['eael_woo_product_list_rating_show'] ) && 'yes' === $settings['eael_woo_product_list_rating_show'] ? 1 : 0;
+		
+        $woo_product_list['rating_show']    = ! empty( $settings['eael_woo_product_list_rating_show'] ) && 'yes' === $settings['eael_woo_product_list_rating_show'] ? 1 : 0;
 		$woo_product_list['title_show']     = ! empty( $settings['eael_woo_product_list_title_show'] ) && 'yes' === $settings['eael_woo_product_list_title_show'] ? 1 : 0;
 		$woo_product_list['excerpt_show']   = ! empty( $settings['eael_woo_product_list_excerpt_show'] ) && 'yes' === $settings['eael_woo_product_list_excerpt_show'] ? 1 : 0;
+		$woo_product_list['price_show']     = ! empty( $settings['eael_woo_product_list_price_show'] ) && 'yes' === $settings['eael_woo_product_list_price_show'] ? 1 : 0;
+		$woo_product_list['add_to_cart_button_show']        = ! empty( $settings['eael_woo_product_list_add_to_cart_button_show'] ) && 'yes' === $settings['eael_woo_product_list_add_to_cart_button_show'] ? 1 : 0;
+		$woo_product_list['quick_view_button_show']         = ! empty( $settings['eael_woo_product_list_quick_view_button_show'] ) && 'yes' === $settings['eael_woo_product_list_quick_view_button_show'] ? 1 : 0;
+		$woo_product_list['link_button_show']               = ! empty( $settings['eael_woo_product_list_link_button_show'] ) && 'yes' === $settings['eael_woo_product_list_link_button_show'] ? 1 : 0;
+		
+        $woo_product_list['button_position_static']         = ! empty( $settings['eael_product_list_content_general_button_position'] ) && 'static' === $settings['eael_product_list_content_general_button_position'] ? 1 : 0;
 		$woo_product_list['content_header_direction_rtl']   = ! empty( $settings['eael_product_list_content_header_direction'] ) && 'rtl' === $settings['eael_product_list_content_header_direction'] ? 1 : 0;
 		$woo_product_list['title_tag']                      = ! empty( $settings['eael_product_list_content_body_title_tag'] ) ? ClassesHelper::eael_validate_html_tag( $settings['eael_product_list_content_body_title_tag'] ) : 'div';
 		$woo_product_list['title_clickable']                = ! empty( $settings['eael_product_list_content_body_title_clickable'] ) && 'yes' === $settings['eael_product_list_content_body_title_clickable'] ? 1 : 0;
@@ -1026,6 +1039,12 @@ class Woo_Product_List extends Widget_Base
         $settings 	= $this->get_settings_for_display();
 		$woo_product_list = $this->get_woo_product_list_settings();
         $args = $this->eael_prepare_product_query( $settings );
+        
+        $widget_id = $this->get_id();
+        $settings[ 'eael_widget_id' ] = $widget_id;
+        if ( Plugin::$instance->documents->get_current() ) {
+            $this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
+        }
 
         $this->add_render_attribute( 'eael-product-list-content-header', [
 			'class' => [
@@ -1046,6 +1065,8 @@ class Woo_Product_List extends Widget_Base
                 $query  = new \WP_Query( $args );
 
                 if ( $query->have_posts() ) {
+                    $settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
+
                     include( realpath( $template ) );
                 } else {
                     _e( '<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite' );

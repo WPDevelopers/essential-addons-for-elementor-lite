@@ -2,6 +2,10 @@
     .eael-direction-rtl {
         direction: rtl;
     }
+
+    .eael-m-0 {
+        margin: 0;
+    }
     
     &.preset-1 {
         .eael-product-list-container {
@@ -264,33 +268,37 @@
                     display: flex;
                     align-items: center;
                     margin: 0 0 30px;
-                    .eael-product-list-sale-price {
-                        color: #343434;
-                        font-family: Sora;
-                        font-size: 28px;
-                        font-style: normal;
-                        font-weight: 600;
-                        line-height: 1.2;
-                        margin-right: 16px;
-                    }
-                    .eael-product-list-main-price {
-                        color: #757C86;
-                        font-family: Sora;
-                        font-size: 20px;
-                        font-style: normal;
-                        font-weight: 400;
-                        line-height: 1.2;
-                        text-decoration-line: strikethrough;
-                    }
+
+                    // .eael-product-list-sale-price {
+                    //     color: #343434;
+                    //     font-family: Sora;
+                    //     font-size: 28px;
+                    //     font-style: normal;
+                    //     font-weight: 600;
+                    //     line-height: 1.2;
+                    //     margin-right: 16px;
+                    // }
+                    // .eael-product-list-main-price {
+                    //     color: #757C86;
+                    //     font-family: Sora;
+                    //     font-size: 20px;
+                    //     font-style: normal;
+                    //     font-weight: 400;
+                    //     line-height: 1.2;
+                    //     text-decoration-line: strikethrough;
+                    // }
                 }
             }
 
             .eael-product-list-content-footer {
                 .eael-product-list-buttons {
+                    display: flex;
+                    align-items: center;
+                    
                     & a {
                         display: inline-block;
                     }
-                    .eael-product-list-action-cart {
+                    .eael-product-list-add-to-cart-button a {
                         color: #FFF;
                         font-family: Sora;
                         font-size: 14px;
@@ -310,7 +318,7 @@
                             background: #000;
                         }
                     }
-                    .eael-product-list-action-view {
+                    .eael-product-list-quick-view-button a {
                         color: #515151;
                         font-family: Sora;
                         font-size: 16px;
