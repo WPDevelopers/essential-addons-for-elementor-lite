@@ -22,6 +22,12 @@ if ( ! defined( 'ABSPATH' ) ) {
                     error_log( '$product not found in ' . __FILE__ );
                     return;
                 }
+
+                $quick_view_setting = [
+                    'widget_id'     => $widget_id,
+                    'product_id'    => $product->get_id(),
+                    'page_id'       => $settings['eael_page_id'],
+                ];
                 ?>
                 <div class="eael-product-list-item">
                     <div class="eael-product-list-image-wrap">
@@ -74,16 +80,30 @@ if ( ! defined( 'ABSPATH' ) ) {
                             </div>
                             <?php endif; ?>
 
+                            <?php if ( $woo_product_list['price_show'] ) : ?>
                             <h4 class="eael-product-list-price">
-                                <span class="eael-product-list-sale-price">$200.00</span>
-                                <span class="eael-product-list-main-price">$287.00</span>
+                                <!-- <span class="eael-product-list-sale-price">$200.00</span> -->
+                                <!-- <span class="eael-product-list-main-price">$287.00</span> -->
+                                <?php echo wp_kses_post( $product->get_price_html() ); ?>
                             </h4>
+                            <?php endif; ?>
                         </div>
                         <div class="eael-product-list-content-footer">
+                            <?php if ( $woo_product_list['button_position_static'] ) : ?>
                             <div class="eael-product-list-buttons">
-                                <a href="#" class="eael-product-list-action-cart"><i class="fa-solid fa-cart-shopping"></i>Add To Cart</a>
-                                <a href="#" class="eael-product-list-action-view">View Product</a>
+                                <?php if ( $woo_product_list['add_to_cart_button_show'] ) : ?>
+                                <p class="eael-product-list-add-to-cart-button eael-m-0"><?php woocommerce_template_loop_add_to_cart(); ?></p>
+                                <?php endif; ?>
+
+                                <?php if ( $woo_product_list['quick_view_button_show'] ) : ?>
+                                <p class="eael-product-list-quick-view-button eael-m-0">
+                                    <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars( json_encode( $quick_view_setting ), ENT_QUOTES ); ?>" class="open-popup-link">
+                                       <?php _e('View Product', 'essential-addons-for-elementor-lite'); ?>
+                                    </a>
+                                </p>
+                                <?php endif; ?>
                             </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
