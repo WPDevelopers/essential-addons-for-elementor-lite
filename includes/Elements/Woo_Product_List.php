@@ -12,6 +12,7 @@ use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
 use Elementor\Widget_Base;
+use Essential_Addons_Elementor\Classes\Helper as ClassesHelper;
 use Essential_Addons_Elementor\Traits\Helper;
 
 class Woo_Product_List extends Widget_Base
@@ -540,6 +541,49 @@ class Woo_Product_List extends Widget_Base
         );
 
         $this->add_control(
+            'eael_product_list_content_body_title_heading',
+            [
+                'label' => __('Title', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_control(
+		    'eael_product_list_content_body_title_tag',
+		    [
+			    'label' => __('Tag', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::SELECT,
+			    'default' => 'h2',
+			    'options' => [
+				    'h1' => __('H1', 'essential-addons-for-elementor-lite'),
+				    'h2' => __('H2', 'essential-addons-for-elementor-lite'),
+				    'h3' => __('H3', 'essential-addons-for-elementor-lite'),
+				    'h4' => __('H4', 'essential-addons-for-elementor-lite'),
+				    'h5' => __('H5', 'essential-addons-for-elementor-lite'),
+				    'h6' => __('H6', 'essential-addons-for-elementor-lite'),
+				    'p' => __('P', 'essential-addons-for-elementor-lite'),
+				    'div' => __('Div', 'essential-addons-for-elementor-lite'),
+			    ],
+			    'condition' => [
+				    'eael_woo_product_list_title_show' => 'yes',
+			    ],
+		    ]
+	    );
+
+        $this->add_control(
+            'eael_product_list_content_body_title_clickable',
+            [
+                'label' => esc_html__('Clickable', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'return_value' => 'yes',
+                'default' => 'yes',
+                'condition' => [
+				    'eael_woo_product_list_title_show' => 'yes',
+			    ],
+            ]
+        );
+
+        $this->add_control(
             'eael_product_list_content_body_excerpt_heading',
             [
                 'label' => __('Excerpt', 'essential-addons-for-elementor-lite'),
@@ -937,8 +981,11 @@ class Woo_Product_List extends Widget_Base
 		$woo_product_list['layout'] 		= ! empty( $settings['eael_dynamic_template_layout'] ) ? $settings['eael_dynamic_template_layout'] : 'preset-1';
 		$woo_product_list['posts_per_page'] = ! empty( $settings['eael_woo_product_list_products_count'] ) ? intval( $settings['eael_woo_product_list_products_count'] ) : 4;
 		$woo_product_list['rating_show']    = ! empty( $settings['eael_woo_product_list_rating_show'] ) && 'yes' === $settings['eael_woo_product_list_rating_show'] ? 1 : 0;
+		$woo_product_list['title_show']     = ! empty( $settings['eael_woo_product_list_title_show'] ) && 'yes' === $settings['eael_woo_product_list_title_show'] ? 1 : 0;
 		$woo_product_list['excerpt_show']   = ! empty( $settings['eael_woo_product_list_excerpt_show'] ) && 'yes' === $settings['eael_woo_product_list_excerpt_show'] ? 1 : 0;
 		$woo_product_list['content_header_direction_rtl']   = ! empty( $settings['eael_product_list_content_header_direction'] ) && 'rtl' === $settings['eael_product_list_content_header_direction'] ? 1 : 0;
+		$woo_product_list['title_tag']                      = ! empty( $settings['eael_product_list_content_body_title_tag'] ) ? ClassesHelper::eael_validate_html_tag( $settings['eael_product_list_content_body_title_tag'] ) : 'div';
+		$woo_product_list['title_clickable']                = ! empty( $settings['eael_product_list_content_body_title_clickable'] ) && 'yes' === $settings['eael_product_list_content_body_title_clickable'] ? 1 : 0;
 		$woo_product_list['excerpt_words_count']            = ! empty( $settings['eael_product_list_content_body_excerpt_words_count'] ) ? intval( $settings['eael_product_list_content_body_excerpt_words_count'] ) : 30;
 		$woo_product_list['excerpt_expanison_indicator']    = ! empty( $settings['eael_product_list_content_body_excerpt_expanison_indicator'] ) ? esc_html( $settings['eael_product_list_content_body_excerpt_expanison_indicator'] ) : esc_html('...');
 		

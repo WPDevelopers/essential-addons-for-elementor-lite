@@ -3,6 +3,8 @@
  * Template Name: Preset 1
  */
 
+use Essential_Addons_Elementor\Classes\Helper;
+
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 } // Exit if accessed directly
@@ -54,22 +56,24 @@ if ( ! defined( 'ABSPATH' ) ) {
                             </div>
                         </div>
                         <div class="eael-product-list-content-body">
-                            <h2 class="eael-product-list-title">
-                                <a href="#">Saguaro with Wooden stand</a>
-                            </h2>
+                            <?php if ( $woo_product_list['title_show'] ) : ?>
+                            <<?php echo $woo_product_list['title_tag'];  ?> class="eael-product-list-title">
+                                <?php if ( $woo_product_list['title_clickable'] ) : ?>
+                                <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link" target="_blank">
+                                    <?php echo Helper::eael_wp_kses( $product->get_title() ); ?>
+                                </a>
+                                <?php else : ?>
+                                    <?php echo Helper::eael_wp_kses( $product->get_title() ); ?>
+                                <?php endif; ?>
+                            </<?php echo $woo_product_list['title_tag'];  ?>>
+                            <?php endif; ?>
 
                             <?php if ( $woo_product_list['excerpt_show'] ) : ?>
                             <div class="eael-product-list-excerpt">
                                 <?php echo wp_trim_words( strip_shortcodes( get_the_excerpt() ), $woo_product_list['excerpt_words_count'], $woo_product_list['excerpt_expanison_indicator'] ); ?>
                             </div>
                             <?php endif; ?>
-                            
-                            <!-- <div class="eael-product-list-progress">
-                                <h4 class="eael-product-list-progress-count">Total Sold: 300 Item</h4>
-                                <div class="eael-product-list-progress-bar-outer">
-                                    <div style="width: 80%;" class="eael-product-list-progress-bar-inner"></div>
-                                </div>
-                            </div> -->
+
                             <h4 class="eael-product-list-price">
                                 <span class="eael-product-list-sale-price">$200.00</span>
                                 <span class="eael-product-list-main-price">$287.00</span>
