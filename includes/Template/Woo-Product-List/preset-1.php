@@ -58,9 +58,11 @@ if ( ! defined( 'ABSPATH' ) ) {
                                 <a href="#">Saguaro with Wooden stand</a>
                             </h2>
 
+                            <?php if ( $woo_product_list['excerpt_show'] ) : ?>
                             <div class="eael-product-list-excerpt">
-                                Perfect craftsmanship, precision, and timeless appeal. Timepiece that operates purely
+                                <?php echo wp_trim_words( strip_shortcodes( get_the_excerpt() ), $woo_product_list['excerpt_words_count'], $woo_product_list['excerpt_expanison_indicator'] ); ?>
                             </div>
+                            <?php endif; ?>
                             
                             <!-- <div class="eael-product-list-progress">
                                 <h4 class="eael-product-list-progress-count">Total Sold: 300 Item</h4>

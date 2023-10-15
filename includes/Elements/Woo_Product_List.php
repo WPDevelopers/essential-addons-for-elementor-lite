@@ -500,6 +500,7 @@ class Woo_Product_List extends Widget_Base
             [
                 'label' => __('Content Header', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
             ]
         );
 
@@ -534,14 +535,52 @@ class Woo_Product_List extends Widget_Base
             [
                 'label' => __('Content Body', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_content_body_excerpt_heading',
+            [
+                'label' => __('Excerpt', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_content_body_excerpt_words_count',
+            [
+                'label'     => __( 'Words Count', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::NUMBER,
+                'default'   => '30',
+                'condition' => [
+                    'eael_woo_product_list_excerpt_show' => 'yes',
+                ],
+            ]
+        );
+        
+        $this->add_control(
+            'eael_product_list_content_body_excerpt_expanison_indicator',
+            [
+                'label'       => esc_html__( 'Expansion Indicator', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::TEXT,
+                'label_block' => false,
+                'default'     => '...',
+                'condition'   => [
+                    'eael_woo_product_list_excerpt_show' => 'yes',
+                ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
         $this->add_control(
             'eael_product_list_content_footer_heading',
             [
-                'label' => __('Content Header', 'essential-addons-for-elementor-lite'),
+                'label' => __('Content Footer', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
             ]
         );
 
@@ -898,7 +937,10 @@ class Woo_Product_List extends Widget_Base
 		$woo_product_list['layout'] 		= ! empty( $settings['eael_dynamic_template_layout'] ) ? $settings['eael_dynamic_template_layout'] : 'preset-1';
 		$woo_product_list['posts_per_page'] = ! empty( $settings['eael_woo_product_list_products_count'] ) ? intval( $settings['eael_woo_product_list_products_count'] ) : 4;
 		$woo_product_list['rating_show']    = ! empty( $settings['eael_woo_product_list_rating_show'] ) && 'yes' === $settings['eael_woo_product_list_rating_show'] ? 1 : 0;
-		$woo_product_list['content_header_direction_rtl'] = ! empty( $settings['eael_product_list_content_header_direction'] ) && 'rtl' === $settings['eael_product_list_content_header_direction'] ? 1 : 0;
+		$woo_product_list['excerpt_show']   = ! empty( $settings['eael_woo_product_list_excerpt_show'] ) && 'yes' === $settings['eael_woo_product_list_excerpt_show'] ? 1 : 0;
+		$woo_product_list['content_header_direction_rtl']   = ! empty( $settings['eael_product_list_content_header_direction'] ) && 'rtl' === $settings['eael_product_list_content_header_direction'] ? 1 : 0;
+		$woo_product_list['excerpt_words_count']            = ! empty( $settings['eael_product_list_content_body_excerpt_words_count'] ) ? intval( $settings['eael_product_list_content_body_excerpt_words_count'] ) : 30;
+		$woo_product_list['excerpt_expanison_indicator']    = ! empty( $settings['eael_product_list_content_body_excerpt_expanison_indicator'] ) ? esc_html( $settings['eael_product_list_content_body_excerpt_expanison_indicator'] ) : esc_html('...');
 		
         return $woo_product_list;
 	}
@@ -913,7 +955,7 @@ class Woo_Product_List extends Widget_Base
             'post_type'         => 'product',
             'post_status'       => ! empty( $settings['products_status'] ) ? $settings['products_status'] : [ 'publish', 'pending', 'future' ],
             'posts_per_page'    => ! empty( $settings['posts_per_page'] )  ? intval( $settings['posts_per_page'] ) : 4,
-            'order'             => ! empty( $settings['order'] )  ? sanitize_text_field( $settings['order'] ) : 'DESC',
+            'order'             => ! empty( $settings['order'] )  ? sanitize_text_field( $settings['order'] ) : 'ASC',
             'offset'            => ! empty( $settings['product_offset'] )  ? intval( $settings['product_offset'] ) : 0,
             'tax_query' => [
                 'relation' => 'AND',
