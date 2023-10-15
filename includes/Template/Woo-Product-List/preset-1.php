@@ -31,40 +31,46 @@ if ( ! defined( 'ABSPATH' ) ) {
                 ?>
                 <div class="eael-product-list-item">
                     <div class="eael-product-list-image-wrap">
-                        <div class="eael-product-list-sale-badge">
+                        <!-- <div class="eael-product-list-sale-badge">
                             <div class="eael-product-list-sale-badge-bg">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" fill="none">
                                     <path d="M50 0L59.861 13.1982L75 6.69873L76.9408 23.0592L93.3013 25L86.8018 40.139L100 50L86.8018 59.861L93.3013 75L76.9408 76.9408L75 93.3013L59.861 86.8018L50 100L40.139 86.8018L25 93.3013L23.0592 76.9408L6.69873 75L13.1982 59.861L0 50L13.1982 40.139L6.69873 25L23.0592 23.0592L25 6.69873L40.139 13.1982L50 0Z" fill="#DBEC73"/>
                                     </svg>
                             </div>
                             <p><span>30%</span> Off</p>
-                        </div>
-                        <a href="#">
-                            <img src="//essential-addons-dev.test/wp-content/uploads/2023/10/product-image-1.png" alt="Saguaro with Wooden stand">
+                        </div> -->
+
+                        <?php if ( $woo_product_list['image_clickable'] ) : ?>                                
+                        <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link" >
+                        <?php endif; ?>
+
+                            <?php echo wp_kses_post( $product->get_image( $woo_product_list['image_size'], ['loading' => 'eager'] ) ); ?>
+                        
+                        <?php if ( $woo_product_list['image_clickable'] ) : ?>                   
                         </a>
+                        <?php endif; ?>
 
-                        <div class="eael-product-list-image-hover-wrap">
-                            <ul class="eael-product-list-buttons-on-hover">
-                                <?php if ( $woo_product_list['add_to_cart_button_show'] ) : ?>
-                                <p class="eael-product-list-add-to-cart-button eael-m-0">
-                                    <?php woocommerce_template_loop_add_to_cart(); ?>
-                                </p>
-                                <?php endif; ?>
+                        <ul class="eael-product-list-buttons-on-hover">
+                            <?php if ( $woo_product_list['add_to_cart_button_show'] ) : ?>
+                            <p class="eael-product-list-add-to-cart-button eael-m-0">
+                                <?php woocommerce_template_loop_add_to_cart(); ?>
+                            </p>
+                            <?php endif; ?>
 
-                                <?php if ( $woo_product_list['quick_view_button_show'] ) : ?>
-                                <p class="eael-product-list-quick-view-button eael-m-0">
-                                    <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars( json_encode( $quick_view_setting ), ENT_QUOTES ); ?>" class="open-popup-link"><i class="fas fa-eye"></i></a>
-                                </p>
-                                <?php endif; ?>
+                            <?php if ( $woo_product_list['quick_view_button_show'] ) : ?>
+                            <p class="eael-product-list-quick-view-button eael-m-0">
+                                <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars( json_encode( $quick_view_setting ), ENT_QUOTES ); ?>" class="open-popup-link"><i class="fas fa-eye"></i></a>
+                            </p>
+                            <?php endif; ?>
 
-                                <?php if ( $woo_product_list['link_button_show'] ) : ?>
-                                <p class="eael-product-list-link-button eael-m-0">
-                                    <a href="<?php echo esc_url( $product->get_permalink() ); ?>"><i class="fas fa-link"></i></a>
-                                </p>
-                                <?php endif; ?>
-                            </ul>
-                        </div>
+                            <?php if ( $woo_product_list['link_button_show'] ) : ?>
+                            <p class="eael-product-list-link-button eael-m-0">
+                                <a href="<?php echo esc_url( $product->get_permalink() ); ?>"><i class="fas fa-link"></i></a>
+                            </p>
+                            <?php endif; ?>
+                        </ul>
                     </div>
+
                     <div class="eael-product-list-content-wrap">
                         <div <?php $this->print_render_attribute_string('eael-product-list-content-header'); ?> >
                             <?php if ( $woo_product_list['rating_show'] ) : ?>

@@ -10,6 +10,7 @@ if (!defined('ABSPATH')) {
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
+use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Typography;
 use Elementor\Plugin;
 use Elementor\Widget_Base;
@@ -186,15 +187,6 @@ class Woo_Product_List extends Widget_Base
                 'separator' => 'before',
             ]
         );
-
-		$this->add_control('eael_woo_product_list_image_show', [
-            'label' => esc_html__('Image', 'essential-addons-for-elementor-lite'),
-            'type' => Controls_Manager::SWITCHER,
-			'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
-			'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
-            'return_value' => 'yes',
-            'default' => 'yes',
-        ]);
 
         $this->add_control('eael_woo_product_list_badge_show', [
             'label' => esc_html__('Badge', 'essential-addons-for-elementor-lite'),
@@ -472,6 +464,38 @@ class Woo_Product_List extends Widget_Base
         $this->start_controls_section('eael_section_woo_product_list_image', [
             'label' => esc_html__('Image', 'essential-addons-for-elementor-lite'),
         ]);
+
+        $this->add_group_control(
+            Group_Control_Image_Size::get_type(),
+            [
+                'name'        => 'eael_product_list_image_size',
+                'exclude'     => ['custom'],
+                'default'     => 'medium',
+                'label_block' => true,
+            ]
+        );
+        
+        $this->add_control(
+            'eael_product_list_image_stretch',
+            [
+                'label'        => __( 'Stretch', 'essential-addons-for-elementor-lite' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+                'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+                'return_value' => 'yes',
+                'default'      => '',
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_image_clickable',
+            [
+                'label' => esc_html__('Clickable', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'return_value' => 'yes',
+                'default' => '',
+            ]
+        );
 
         $this->end_controls_section();
     }
@@ -995,6 +1019,7 @@ class Woo_Product_List extends Widget_Base
 		$woo_product_list['quick_view_button_show']         = ! empty( $settings['eael_woo_product_list_quick_view_button_show'] ) && 'yes' === $settings['eael_woo_product_list_quick_view_button_show'] ? 1 : 0;
 		$woo_product_list['link_button_show']               = ! empty( $settings['eael_woo_product_list_link_button_show'] ) && 'yes' === $settings['eael_woo_product_list_link_button_show'] ? 1 : 0;
 		
+		$woo_product_list['image_clickable']                = ! empty( $settings['eael_product_list_image_clickable'] ) && 'yes' === $settings['eael_product_list_image_clickable'] ? 1 : 0;
         $woo_product_list['button_position_static']         = ! empty( $settings['eael_product_list_content_general_button_position'] ) && 'static' === $settings['eael_product_list_content_general_button_position'] ? 1 : 0;
 		$woo_product_list['content_header_direction_rtl']   = ! empty( $settings['eael_product_list_content_header_direction'] ) && 'rtl' === $settings['eael_product_list_content_header_direction'] ? 1 : 0;
 		$woo_product_list['title_tag']                      = ! empty( $settings['eael_product_list_content_body_title_tag'] ) ? ClassesHelper::eael_validate_html_tag( $settings['eael_product_list_content_body_title_tag'] ) : 'div';
