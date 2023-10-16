@@ -44,7 +44,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link" >
                         <?php endif; ?>
 
-                            <?php echo wp_kses_post( $product->get_image( $woo_product_list['image_size'], ['loading' => 'eager'] ) ); ?>
+                            <?php echo ( $product->get_image( $woo_product_list['image_size'], ['loading' => 'eager'] ) ); ?>
                         
                         <?php if ( $woo_product_list['image_clickable'] ) : ?>                   
                         </a>
@@ -52,21 +52,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                         <ul class="eael-product-list-buttons-on-hover">
                             <?php if ( $woo_product_list['add_to_cart_button_show'] ) : ?>
-                            <p class="eael-product-list-add-to-cart-button eael-m-0">
+                            <li class="eael-product-list-add-to-cart-button eael-m-0">
                                 <?php woocommerce_template_loop_add_to_cart(); ?>
-                            </p>
+                            </li>
                             <?php endif; ?>
 
                             <?php if ( $woo_product_list['quick_view_button_show'] ) : ?>
-                            <p class="eael-product-list-quick-view-button eael-m-0">
+                            <li class="eael-product-list-quick-view-button eael-m-0">
                                 <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars( json_encode( $quick_view_setting ), ENT_QUOTES ); ?>" class="open-popup-link"><i class="fas fa-eye"></i></a>
-                            </p>
+                            </li>
                             <?php endif; ?>
 
                             <?php if ( $woo_product_list['link_button_show'] ) : ?>
-                            <p class="eael-product-list-link-button eael-m-0">
+                            <li class="eael-product-list-link-button eael-m-0">
                                 <a href="<?php echo esc_url( $product->get_permalink() ); ?>"><i class="fas fa-link"></i></a>
-                            </p>
+                            </li>
                             <?php endif; ?>
                         </ul>
                     </div>
