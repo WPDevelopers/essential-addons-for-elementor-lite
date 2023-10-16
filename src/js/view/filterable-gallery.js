@@ -86,15 +86,17 @@ jQuery(window).on("elementor/frontend/init", function () {
 					}
 				},
 				iframe: {
-					markup: '<div class="mfp-iframe-scaler">'+
-								'<div class="mfp-close"></div>'+
-								'<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>'+
-								'<div class="mfp-title"></div>'+
-							'</div>'
+					markup: `<div class="mfp-iframe-scaler">
+								<div class="mfp-close"></div>
+								<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>
+								<div class="mfp-title eale-privacy-message"></div>
+							</div>`
 				},
 				callbacks: {
 					markupParse: function(template, values, item) {
-						values.title = item.el.attr('title');
+						if( item.el.attr('title') !== "" ) {
+							values.title = item.el.attr('title');
+						}
 					}
 				}
 			});
