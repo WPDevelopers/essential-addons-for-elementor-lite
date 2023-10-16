@@ -562,7 +562,7 @@ $elements = [
 		'elements' => [
 			[
 				'key'       => 'product-grid',
-				'title'     => __( 'Product Grid', 'essential-addons-for-elementor-lite' ),
+				'title'     => __( 'Woo Product Grid', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/woo-product-grid/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/woocommerce-product-grid/',
 				'promotion' => 'popular'
