@@ -1041,7 +1041,7 @@ class Woo_Product_List extends Widget_Base
             'post_type'         => 'product',
             'post_status'       => ! empty( $settings['products_status'] ) ? $settings['products_status'] : [ 'publish', 'pending', 'future' ],
             'posts_per_page'    => ! empty( $settings['posts_per_page'] )  ? intval( $settings['posts_per_page'] ) : 4,
-            'order'             => ! empty( $settings['order'] )  ? sanitize_text_field( $settings['order'] ) : 'ASC',
+            'order'             => ! empty( $settings['order'] )  ? sanitize_text_field( $settings['order'] ) : 'DESC',
             'offset'            => ! empty( $settings['product_offset'] )  ? intval( $settings['product_offset'] ) : 0,
             'tax_query' => [
                 'relation' => 'AND',

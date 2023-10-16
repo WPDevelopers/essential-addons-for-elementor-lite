@@ -1,7 +1,4 @@
 $theme-preset1: #758F4D;
-// $theme-preset2: #5f3ae0;
-// $theme-preset3: #5f3ae0;
-// $theme-preset4: #ec3b75;
 
 .eael-product-list-wrapper {
     .eael-direction-rtl {
@@ -29,54 +26,11 @@ $theme-preset1: #758F4D;
                 width: 30%;
                 position: relative;
 
-                // .eael-product-list-sale-badge {
-                //     height: 100px;
-                //     width: 100px;
-                //     padding: 10px;
-                //     display: flex;
-                //     align-items: center;
-                //     justify-content: center;
-                //     position: absolute;
-                //     top: -30px;
-                //     left: 0;
-                //     .eael-product-list-sale-badge-bg {
-                //         height: 100%;
-                //         width: 100%;
-                //         position: absolute;
-                //         top: 0;
-                //         left: 0;
-                //         & svg path {
-                //             fill:#DBEC73;
-                //         }
-                //     }
-                //     & p {
-                //         color: #292929;
-                //         font-family: Sora;
-                //         font-size: 16px;
-                //         font-style: normal;
-                //         font-weight: 400;
-                //         line-height: 1.2;
-                //         text-transform: capitalize;
-                //         text-align: center;
-                //         margin: 0;
-                //         position: relative;
-                //         z-index: 1;
-                //         & span {
-                //             font-size: 21px;
-                //             font-weight: 600;
-                //             display: block;
-                //         }
-                //     }
-                // }
-                & a {
-                    display: inline-block;
-                    
-                    & img {
-                        max-width: 100%;
-                        width: 100%;
-                        max-height: 300px;
-                        object-fit: contain;
-                    }
+                img {
+                    max-width: 100%;
+                    width: 100%;
+                    max-height: 350px;
+                    object-fit: contain;
                 }
 
                 .eael-product-list-buttons-on-hover {
