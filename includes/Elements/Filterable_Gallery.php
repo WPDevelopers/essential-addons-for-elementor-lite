@@ -568,7 +568,7 @@ class Filterable_Gallery extends Widget_Base
 				'label'       => esc_html__( 'Privacy Notice', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::TEXT,
                 'ai'          => [ 'active' => false, ],
-                // 'condition'   => ['eael_privacy_notice_control' => 'yes' ]
+                'condition'   => ['eael_privacy_notice_control' => 'yes' ]
 			]
 		);
 
@@ -3454,7 +3454,7 @@ class Filterable_Gallery extends Widget_Base
         }
 
         if (isset($item['video_gallery_switch']) && ($item['video_gallery_switch'] === 'true')) {
-            $html .= $this->video_gallery_switch_content($item, true, $settings);
+            $html .= $this->video_gallery_switch_content( $item, true, $settings );
         }
 
         return $html;
@@ -3468,7 +3468,7 @@ class Filterable_Gallery extends Widget_Base
      * @param boolean $show_video_popup_bg
      * @return string : Html markup
      */
-    protected function video_gallery_switch_content( $item, $show_video_popup_bg=true, $settings ) {
+    protected function video_gallery_switch_content( $item, $show_video_popup_bg=true, $settings = null ) {
         $html = '';
 
         $icon_url = isset($item['play_icon']['url']) ? $item['play_icon']['url'] : '';
@@ -3638,7 +3638,7 @@ class Filterable_Gallery extends Widget_Base
             $html .= '</div>';
 
             if (isset($item['video_gallery_switch']) && ($item['video_gallery_switch'] === 'true')) {
-                $html .= $this->video_gallery_switch_content( $item, false, $settings );
+                $html .= $this->video_gallery_switch_content( $item, false );
             } else {
                 if (empty($settings['eael_section_fg_full_image_clickable'])) {
                     $html .= $this->render_fg_buttons($settings, $item);
