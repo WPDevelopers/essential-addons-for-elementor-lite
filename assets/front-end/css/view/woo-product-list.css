@@ -1,6 +1,9 @@
 .eael-product-list-wrapper .eael-direction-rtl {
   direction: rtl;
 }
+.eael-product-list-wrapper .eael-m-0 {
+  margin: 0;
+}
 .eael-product-list-wrapper.preset-1 .eael-product-list-container {
   padding: 60px;
 }
@@ -36,6 +39,33 @@
   content: "\f005\f005\f005\f005\f005";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
+}
+.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-buttons-on-hover .eael-product-list-add-to-cart-button a {
+  padding: 0 !important;
+  margin: 3px;
+  font-size: 0px;
+  display: block;
+  border: none;
+  background-color: #fff;
+}
+.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-buttons-on-hover .eael-product-list-add-to-cart-button a:before {
+  content: "\f07a";
+  display: block;
+  font-family: "Font Awesome 5 Free";
+  font-size: 16px;
+  font-weight: 900;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  position: absolute;
+}
+.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-buttons-on-hover .eael-product-list-add-to-cart-button a:hover {
+  color: #fff;
+}
+.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-buttons-on-hover .eael-product-list-add-to-cart-button a.product_type_variable:before {
+  content: "\f00c";
 }
 .eael-product-list-wrapper.preset-1 .eael-product-list-image-wrap {
   text-align: center;
@@ -97,7 +127,7 @@
   -o-object-fit: contain;
      object-fit: contain;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-image-wrap .eael-product-list-links {
+.eael-product-list-wrapper.preset-1 .eael-product-list-image-wrap .eael-product-list-buttons-on-hover {
   width: 100%;
   padding: 0;
   margin: 0;
@@ -114,11 +144,11 @@
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-image-wrap .eael-product-list-links li {
+.eael-product-list-wrapper.preset-1 .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li {
   display: inline-block;
   padding: 0 4px;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-image-wrap .eael-product-list-links li a {
+.eael-product-list-wrapper.preset-1 .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li a {
   background: #fff;
   color: #343434;
   font-size: 20px;
@@ -129,10 +159,10 @@
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-image-wrap .eael-product-list-links li a:hover {
+.eael-product-list-wrapper.preset-1 .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li a:hover {
   color: #758F4D;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-image-wrap:hover .eael-product-list-links {
+.eael-product-list-wrapper.preset-1 .eael-product-list-image-wrap:hover .eael-product-list-buttons-on-hover {
   opacity: 1;
   visibility: visible;
   -webkit-transform: translateY(0);
@@ -266,29 +296,18 @@
           align-items: center;
   margin: 0 0 30px;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-content-wrap .eael-product-list-content-body .eael-product-list-price .eael-product-list-sale-price {
-  color: #343434;
-  font-family: Sora;
-  font-size: 28px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 1.2;
-  margin-right: 16px;
-}
-.eael-product-list-wrapper.preset-1 .eael-product-list-content-wrap .eael-product-list-content-body .eael-product-list-price .eael-product-list-main-price {
-  color: #757C86;
-  font-family: Sora;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.2;
-  -webkit-text-decoration-line: strikethrough;
-          text-decoration-line: strikethrough;
+.eael-product-list-wrapper.preset-1 .eael-product-list-content-wrap .eael-product-list-content-footer .eael-product-list-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 .eael-product-list-wrapper.preset-1 .eael-product-list-content-wrap .eael-product-list-content-footer .eael-product-list-buttons a {
   display: inline-block;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-content-wrap .eael-product-list-content-footer .eael-product-list-buttons .eael-product-list-action-cart {
+.eael-product-list-wrapper.preset-1 .eael-product-list-content-wrap .eael-product-list-content-footer .eael-product-list-buttons .eael-product-list-add-to-cart-button a {
   color: #FFF;
   font-family: Sora;
   font-size: 14px;
@@ -303,13 +322,13 @@
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-content-wrap .eael-product-list-content-footer .eael-product-list-buttons .eael-product-list-action-cart i {
+.eael-product-list-wrapper.preset-1 .eael-product-list-content-wrap .eael-product-list-content-footer .eael-product-list-buttons .eael-product-list-add-to-cart-button a i {
   margin-right: 6px;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-content-wrap .eael-product-list-content-footer .eael-product-list-buttons .eael-product-list-action-cart:hover {
+.eael-product-list-wrapper.preset-1 .eael-product-list-content-wrap .eael-product-list-content-footer .eael-product-list-buttons .eael-product-list-add-to-cart-button a:hover {
   background: #000;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-content-wrap .eael-product-list-content-footer .eael-product-list-buttons .eael-product-list-action-view {
+.eael-product-list-wrapper.preset-1 .eael-product-list-content-wrap .eael-product-list-content-footer .eael-product-list-buttons .eael-product-list-quick-view-button a {
   color: #515151;
   font-family: Sora;
   font-size: 16px;
@@ -321,6 +340,6 @@
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-content-wrap .eael-product-list-content-footer .eael-product-list-buttons .eael-product-list-action-view:hover {
+.eael-product-list-wrapper.preset-1 .eael-product-list-content-wrap .eael-product-list-content-footer .eael-product-list-buttons .eael-product-list-quick-view-button a:hover {
   color: #758F4D;
 }
