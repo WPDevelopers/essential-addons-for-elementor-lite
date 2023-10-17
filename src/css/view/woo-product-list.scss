@@ -52,7 +52,7 @@ $spacer-lg: $spacing5;
                     list-style: none;
                     opacity: 0;
                     visibility: hidden;
-                    transform: translateY(50px);
+                    transform: translateY(0);
                     transition: all 0.4s;
                     width: 100%;
                     display: flex;
@@ -129,7 +129,7 @@ $spacer-lg: $spacing5;
                 &:hover .eael-product-list-buttons-on-hover {
                     opacity: 1;
                     visibility: visible;
-                    transform: translateY(0);
+                    transform: translateY(-50px);
                 }
             }
 
