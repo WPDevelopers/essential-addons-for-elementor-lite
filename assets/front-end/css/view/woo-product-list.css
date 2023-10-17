@@ -23,13 +23,10 @@
   width: 30%;
   position: relative;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-image-wrap a {
-  display: inline-block;
-}
-.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-image-wrap a img {
+.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-image-wrap img {
   max-width: 100%;
   width: 100%;
-  max-height: 300px;
+  max-height: 350px;
   -o-object-fit: contain;
      object-fit: contain;
 }

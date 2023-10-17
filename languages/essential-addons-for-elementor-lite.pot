@@ -10338,7 +10338,7 @@ msgstr ""
 msgid "Out"
 msgstr ""
 
-#: ../includes/Template/Woo-Product-List/preset-1.php:121
+#: ../includes/Template/Woo-Product-List/preset-1.php:112
 msgid "View Product"
 msgstr ""
 
