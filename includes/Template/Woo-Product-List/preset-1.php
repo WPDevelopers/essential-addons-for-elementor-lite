@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link" >
                         <?php endif; ?>
 
-                            <?php echo ( $product->get_image( $woo_product_list['image_size'], ['loading' => 'eager'] ) ); ?>
+                            <?php echo wp_kses_post( $product->get_image( $woo_product_list['image_size'], ['loading' => 'eager'] ) ); ?>
                         
                         <?php if ( $woo_product_list['image_clickable'] ) : ?>                   
                         </a>
