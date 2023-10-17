@@ -6,6 +6,10 @@ $spacing4: 20px;
 $spacing5: 25px;
 $spacing6: 30px;
 
+$spacer-sm: $spacing3;
+$spacer-md: $spacing4;
+$spacer-lg: $spacing5;
+
 .eael-product-list-wrapper {
     .eael-direction-rtl {
         direction: rtl;
@@ -134,6 +138,7 @@ $spacing6: 30px;
                 width: 70%;
                 padding-left: 70px;
     
+                // Content Header
                 .eael-product-list-content-header {
                     display: flex;
                     align-items: center;
@@ -141,7 +146,6 @@ $spacing6: 30px;
                     margin-bottom: $spacing3;
                 }
 
-                // Star Rating 
                 .eael-product-list-rating .star-rating {
                     margin: 0;
                     display: block;
@@ -167,10 +171,11 @@ $spacing6: 30px;
                         }
                     }
                 }
-    
+
+                // Content Body
                 .eael-product-list-content-body {
                     .eael-product-list-title {
-                        margin: 0 0 $spacing4;
+                        margin: 0 0 $spacer-md;
                     }
 
                     .eael-product-list-title,
@@ -193,33 +198,35 @@ $spacing6: 30px;
                         color: #5F6368;
                         font-size: 16px;
                         font-weight: 400;
-                        margin: 0 0 $spacing4;
+                        margin: 0 0 $spacer-md;
                     }
 
                     .eael-product-list-price {
                         display: flex;
                         align-items: center;
-                        margin: 0 0 $spacing4;
+                        margin: 0 0 $spacer-md;
+                        gap: $spacing3;
     
-                        // .eael-product-list-sale-price {
-                        //     color: #343434;
-                        //     font-size: 28px;
-                        //     font-style: normal;
-                        //     font-weight: 600;
-                        //     line-height: 1.2;
-                        //     margin-right: 16px;
-                        // }
-                        // .eael-product-list-main-price {
-                        //     color: #757C86;
-                        //     font-size: 20px;
-                        //     font-style: normal;
-                        //     font-weight: 400;
-                        //     line-height: 1.2;
-                        //     text-decoration-line: strikethrough;
-                        // }
+                        del {
+                            order: 1;
+                            color: #757C86;
+                            font-size: 20px;
+                            font-weight: 400;
+                            line-height: 1.2;
+                            text-decoration: strikethrough;
+                        }
+
+                        ins {
+                            color: #343434;
+                            font-size: 28px;
+                            font-weight: 600;
+                            line-height: 1.2;
+                            text-decoration: none;
+                        }
                     }
                 }
-    
+
+                // Content Footer
                 .eael-product-list-content-footer {
                     .eael-product-list-buttons {
                         display: flex;
