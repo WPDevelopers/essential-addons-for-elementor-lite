@@ -448,6 +448,16 @@ class Woo_Product_List extends Widget_Base
             );
         }
 
+        $this->add_control( 'order', [
+            'label'   => __( 'Order', 'essential-addons-for-elementor-lite' ),
+            'type'    => Controls_Manager::SELECT,
+            'options' => [
+                'asc'  => 'Ascending',
+                'desc' => 'Descending',
+            ],
+            'default' => 'desc',
+        ]);
+
         $this->add_control('eael_woo_product_list_products_count', [
             'label' => __('Products Count', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::NUMBER,
