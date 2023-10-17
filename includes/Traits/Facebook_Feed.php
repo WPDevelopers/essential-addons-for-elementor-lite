@@ -283,8 +283,8 @@ trait Facebook_Feed {
 	public function get_url( $page_id = '', $token = '', $source = 'posts', $display_comment = '' ) {
         $comment_count = $display_comment == 'yes' ? ',comments.summary(total_count)' : '';
         $post_limit =  apply_filters( 'eael_facebook_feed_post_limit', 99 );
-		$post_url = "https://graph.facebook.com/v8.0/{$page_id}/posts?fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url,media}{$comment_count},reactions.summary(total_count)&limit={$post_limit}&access_token={$token}";
-		$feed_url = "https://graph.facebook.com/v8.0/{$page_id}/feed?fields=id,message,full_picture,status_type,created_time,attachments{title,description,type,url,media},from,permalink_url,shares,call_to_action{$comment_count},reactions.summary(total_count),privacy&access_token={$token}&limit={$post_limit}&locale=en_US";
+		$post_url = "https://graph.facebook.com/v18.0/{$page_id}/posts?fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url,media}{$comment_count},reactions.summary(total_count)&limit={$post_limit}&access_token={$token}";
+		$feed_url = "https://graph.facebook.com/v18.0/{$page_id}/feed?fields=id,message,full_picture,status_type,created_time,attachments{title,description,type,url,media},from,permalink_url,shares,call_to_action{$comment_count},reactions.summary(total_count),privacy&access_token={$token}&limit={$post_limit}&locale=en_US";
 
 		if ( 'posts' === $source ) {
 			return $post_url;
