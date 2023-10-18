@@ -939,7 +939,24 @@ class Woo_Product_List extends Widget_Base
         );
 
         $this->add_control(
-            'eael_product_list_rating_heading',
+            'eael_product_list_color_typography_general_heading',
+            [
+                'label' => __('General', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_color_typography_content_header_heading',
+            [
+                'label' => __('Content Header', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_color_typography_rating_heading',
             [
                 'label' => __('Star Rating', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
@@ -977,6 +994,172 @@ class Woo_Product_List extends Widget_Base
                     '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .star-rating::before' => 'font-size: {{SIZE}}px !important;',
                     '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .star-rating span::before' => 'font-size: {{SIZE}}px !important;',
                 ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_color_typography_content_body_heading',
+            [
+                'label' => __('Content Body', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_color_typography_title_heading',
+            [
+                'label' => __('Title', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'condition' => [
+                    'eael_woo_product_list_title_show' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_color_typography_title_color',
+            [
+                'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '',
+                'selectors' => [
+                    // '{{WRAPPER}} .eael-product-carousel .woocommerce-loop-product__title, {{WRAPPER}} .eael-product-carousel .eael-product-title *' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_woo_product_list_title_show' => 'yes',
+                ],
+            ]
+        );
+        
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_product_list_color_typography_title_typography',
+                // 'selector' => '{{WRAPPER}} .eael-product-carousel .woocommerce-loop-product__title, {{WRAPPER}} .eael-product-carousel .eael-product-title *',
+                'condition' => [
+                    'eael_woo_product_list_title_show' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_color_typography_excerpt_heading',
+            [
+                'label' => __('Excerpt', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'condition' => [
+                    'eael_woo_product_list_excerpt_show' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_color_typography_excerpt_color',
+            [
+                'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '',
+                'selectors' => [
+                    // '{{WRAPPER}} .eael-product-carousel .woocommerce-loop-product__title, {{WRAPPER}} .eael-product-carousel .eael-product-title *' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_woo_product_list_excerpt_show' => 'yes',
+                ],
+            ]
+        );
+        
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_product_list_color_typography_excerpt_typography',
+                // 'selector' => '{{WRAPPER}} .eael-product-carousel .woocommerce-loop-product__title, {{WRAPPER}} .eael-product-carousel .eael-product-title *',
+                'condition' => [
+                    'eael_woo_product_list_excerpt_show' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_color_typography_regular_price_heading',
+            [
+                'label' => __( 'Regular Price', 'essential-addons-for-elementor-lite' ),
+                'type'  => Controls_Manager::HEADING,
+                'condition' => [
+                    'eael_woo_product_list_price_show' => 'yes',
+                ],
+            ]
+        );
+        
+        $this->add_control(
+            'eael_product_list_color_typography_regular_price_color',
+            [
+                'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '',
+                'selectors' => [
+                    // '{{WRAPPER}} .eael-product-carousel .price, {{WRAPPER}} .eael-product-carousel .eael-product-price .amount' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_woo_product_list_price_show' => 'yes',
+                ],
+            ]
+        );
+        
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_product_list_color_typography_regular_price_typography',
+                // 'selector' => '{{WRAPPER}} .eael-product-carousel .eael-product-price',
+                'condition' => [
+                    'eael_woo_product_list_price_show' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_color_typography_sale_price_heading',
+            [
+                'label' => __( 'Sale Price', 'essential-addons-for-elementor-lite' ),
+                'type'  => Controls_Manager::HEADING,
+                'condition' => [
+                    'eael_woo_product_list_price_show' => 'yes',
+                ],
+            ]
+        );
+        
+        $this->add_control(
+            'eael_product_list_color_typography_sale_price_color',
+            [
+                'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '',
+                'selectors' => [
+                    // '{{WRAPPER}} .eael-product-carousel .price, {{WRAPPER}} .eael-product-carousel .eael-product-price .amount' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_woo_product_list_price_show' => 'yes',
+                ],
+            ]
+        );
+        
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_product_list_color_typography_sale_price_typography',
+                // 'selector' => '{{WRAPPER}} .eael-product-carousel .eael-product-price',
+                'condition' => [
+                    'eael_woo_product_list_price_show' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_color_typography_content_footer_heading',
+            [
+                'label' => __('Content Footer', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
             ]
         );
 
