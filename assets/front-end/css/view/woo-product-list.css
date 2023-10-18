@@ -192,6 +192,11 @@
   margin: 0 0 20px;
   gap: 15px;
 }
+.eael-product-list-wrapper .eael-product-list-content-body .eael-product-list-price > .amount {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.2;
+}
 .eael-product-list-wrapper .eael-product-list-content-body .eael-product-list-price del {
   -webkit-box-ordinal-group: 2;
       -ms-flex-order: 1;
