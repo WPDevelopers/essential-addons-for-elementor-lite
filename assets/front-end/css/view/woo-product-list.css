@@ -129,7 +129,7 @@
   width: 70%;
   padding-left: 70px;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-content-wrap .eael-product-list-content-header {
+.eael-product-list-wrapper .eael-product-list-content-header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -141,7 +141,7 @@
           justify-content: space-between;
   margin-bottom: 15px;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-content-wrap .eael-product-list-rating .star-rating {
+.eael-product-list-wrapper .eael-product-list-rating .star-rating {
   margin: 0;
   display: block;
   float: none;
@@ -149,26 +149,25 @@
   width: 5.6em;
   line-height: 1em;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-content-wrap .eael-product-list-rating .star-rating:before {
+.eael-product-list-wrapper .eael-product-list-rating .star-rating:before {
   content: "\f005\f005\f005\f005\f005";
   font-family: "Font Awesome 5 Free";
   font-weight: 400;
   opacity: 1;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-content-wrap .eael-product-list-rating .star-rating span {
+.eael-product-list-wrapper .eael-product-list-rating .star-rating span {
   display: inline-block;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-content-wrap .eael-product-list-rating .star-rating span:before {
+.eael-product-list-wrapper .eael-product-list-rating .star-rating span:before {
   content: "\f005\f005\f005\f005\f005";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-content-wrap .eael-product-list-content-body .eael-product-list-title {
+.eael-product-list-wrapper .eael-product-list-content-body .eael-product-list-title {
   margin: 0 0 20px;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-content-wrap .eael-product-list-content-body .eael-product-list-title,
-.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-content-wrap .eael-product-list-content-body .eael-product-list-title a {
-  color: #343434;
+.eael-product-list-wrapper .eael-product-list-content-body .eael-product-list-title,
+.eael-product-list-wrapper .eael-product-list-content-body .eael-product-list-title a {
   font-size: 28px;
   font-style: normal;
   font-weight: 500;
@@ -178,16 +177,12 @@
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-content-wrap .eael-product-list-content-body .eael-product-list-title a:hover {
-  color: #758F4D;
-}
-.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-content-wrap .eael-product-list-content-body .eael-product-list-excerpt {
-  color: #5F6368;
+.eael-product-list-wrapper .eael-product-list-content-body .eael-product-list-excerpt {
   font-size: 16px;
   font-weight: 400;
   margin: 0 0 20px;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-content-wrap .eael-product-list-content-body .eael-product-list-price {
+.eael-product-list-wrapper .eael-product-list-content-body .eael-product-list-price {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -197,25 +192,23 @@
   margin: 0 0 20px;
   gap: 15px;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-content-wrap .eael-product-list-content-body .eael-product-list-price del {
+.eael-product-list-wrapper .eael-product-list-content-body .eael-product-list-price del {
   -webkit-box-ordinal-group: 2;
       -ms-flex-order: 1;
           order: 1;
-  color: #757C86;
   font-size: 20px;
   font-weight: 400;
   line-height: 1.2;
   -webkit-text-decoration: strikethrough;
           text-decoration: strikethrough;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-content-wrap .eael-product-list-content-body .eael-product-list-price ins {
-  color: #343434;
+.eael-product-list-wrapper .eael-product-list-content-body .eael-product-list-price ins {
   font-size: 28px;
   font-weight: 600;
   line-height: 1.2;
   text-decoration: none;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-content-wrap .eael-product-list-content-footer .eael-product-list-buttons {
+.eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-buttons {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -223,10 +216,10 @@
       -ms-flex-align: center;
           align-items: center;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-content-wrap .eael-product-list-content-footer .eael-product-list-buttons a {
+.eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-buttons a {
   display: inline-block;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-content-wrap .eael-product-list-content-footer .eael-product-list-buttons .eael-product-list-add-to-cart-button a {
+.eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-buttons .eael-product-list-add-to-cart-button a {
   color: #FFF;
   font-size: 14px;
   font-weight: 600;
@@ -239,10 +232,10 @@
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-content-wrap .eael-product-list-content-footer .eael-product-list-buttons .eael-product-list-add-to-cart-button a:hover {
+.eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-buttons .eael-product-list-add-to-cart-button a:hover {
   background: #000;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-content-wrap .eael-product-list-content-footer .eael-product-list-buttons .eael-product-list-quick-view-button a {
+.eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-buttons .eael-product-list-quick-view-button a {
   color: #515151;
   font-size: 16px;
   font-weight: 500;
@@ -252,6 +245,6 @@
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
 }
-.eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-content-wrap .eael-product-list-content-footer .eael-product-list-buttons .eael-product-list-quick-view-button a:hover {
+.eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-buttons .eael-product-list-quick-view-button a:hover {
   color: #758F4D;
 }
