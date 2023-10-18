@@ -204,6 +204,12 @@ $spacer-lg: $spacing5;
             margin: 0 0 $spacer-md;
             gap: $spacing3;
 
+            > .amount {
+                font-size: 20px;
+                font-weight: 400;
+                line-height: 1.2;
+            }
+
             del {
                 order: 1;
                 font-size: 20px;
