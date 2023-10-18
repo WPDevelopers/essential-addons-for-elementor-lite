@@ -1319,7 +1319,7 @@ class Woo_Product_List extends Widget_Base
             [
                 'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '#758F4D',
+                'default'   => '#fff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-content-footer .eael-product-list-add-to-cart-button a:hover' => 'color: {{VALUE}};',
                 ],
