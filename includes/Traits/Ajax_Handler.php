@@ -345,6 +345,17 @@ trait Ajax_Handler {
 		ob_start();
 		$query = new \WP_Query( $args );
 		if ( $query->have_posts() ) {
+			if ( isset( $template_info['name'] ) && $template_info['name'] === 'eicon-woocommerce' && boolval( $settings['show_add_to_cart_custom_text'] ) ){
+				$add_to_cart_text = [
+					'add_to_cart_simple_product_button_text'   => $settings['add_to_cart_simple_product_button_text'],
+					'add_to_cart_variable_product_button_text' => $settings['add_to_cart_variable_product_button_text'],
+					'add_to_cart_grouped_product_button_text'  => $settings['add_to_cart_grouped_product_button_text'],
+					'add_to_cart_external_product_button_text' => $settings['add_to_cart_external_product_button_text'],
+					'add_to_cart_default_product_button_text'  => $settings['add_to_cart_default_product_button_text'],
+				];
+				$this->change_add_woo_checkout_update_order_reviewto_cart_text( $add_to_cart_text );
+			}
+
 			while ( $query->have_posts() ) {
 				$query->the_post();
 				include( $template );
