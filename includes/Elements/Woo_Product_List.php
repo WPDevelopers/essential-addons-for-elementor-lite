@@ -1105,9 +1105,9 @@ class Woo_Product_List extends Widget_Base
             [
                 'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '',
+                'default'   => '#5F6368',
                 'selectors' => [
-                    // '{{WRAPPER}} .eael-product-carousel .woocommerce-loop-product__title, {{WRAPPER}} .eael-product-carousel .eael-product-title *' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-content-body .eael-product-list-excerpt' => 'color: {{SIZE}};',
                 ],
                 'condition' => [
                     'eael_woo_product_list_excerpt_show' => 'yes',
@@ -1119,7 +1119,7 @@ class Woo_Product_List extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'eael_product_list_color_typography_excerpt_typography',
-                // 'selector' => '{{WRAPPER}} .eael-product-carousel .woocommerce-loop-product__title, {{WRAPPER}} .eael-product-carousel .eael-product-title *',
+                'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-content-body .eael-product-list-excerpt',
                 'condition' => [
                     'eael_woo_product_list_excerpt_show' => 'yes',
                 ],
@@ -1142,9 +1142,9 @@ class Woo_Product_List extends Widget_Base
             [
                 'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '',
+                'default'   => '#757C86',
                 'selectors' => [
-                    // '{{WRAPPER}} .eael-product-carousel .price, {{WRAPPER}} .eael-product-carousel .eael-product-price .amount' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-content-body .eael-product-list-price del' => 'color: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_woo_product_list_price_show' => 'yes',
@@ -1156,7 +1156,7 @@ class Woo_Product_List extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'eael_product_list_color_typography_regular_price_typography',
-                // 'selector' => '{{WRAPPER}} .eael-product-carousel .eael-product-price',
+                'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-content-body .eael-product-list-price del',
                 'condition' => [
                     'eael_woo_product_list_price_show' => 'yes',
                 ],
@@ -1179,9 +1179,9 @@ class Woo_Product_List extends Widget_Base
             [
                 'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '',
+                'default'   => '#343434',
                 'selectors' => [
-                    // '{{WRAPPER}} .eael-product-carousel .price, {{WRAPPER}} .eael-product-carousel .eael-product-price .amount' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-content-body .eael-product-list-price ins' => 'color: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_woo_product_list_price_show' => 'yes',
@@ -1193,7 +1193,7 @@ class Woo_Product_List extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'eael_product_list_color_typography_sale_price_typography',
-                // 'selector' => '{{WRAPPER}} .eael-product-carousel .eael-product-price',
+                'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-content-body .eael-product-list-price ins',
                 'condition' => [
                     'eael_woo_product_list_price_show' => 'yes',
                 ],
