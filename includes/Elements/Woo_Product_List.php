@@ -528,7 +528,7 @@ class Woo_Product_List extends Widget_Base
             [
                 'label'   => __( 'Buttons', 'essential-addons-for-elementor-lite' ),
                 'type'    => Controls_Manager::SELECT,
-                'default' => 'static',
+                'default' => 'both',
                 'options' => [
                     'both'    => esc_html__( 'Both', 'essential-addons-for-elementor-lite' ),
                     'static'    => esc_html__( 'Static', 'essential-addons-for-elementor-lite' ),
@@ -1504,7 +1504,7 @@ class Woo_Product_List extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#343434',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li a' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li a' => 'color: {{VALUE}};',
                 ],
                 'conditions' => $this->on_hover_buttons_conditions(),
             ]
@@ -1517,7 +1517,7 @@ class Woo_Product_List extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#fff',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li a' => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li a' => 'background: {{VALUE}};',
                 ],
                 'conditions' => $this->on_hover_buttons_conditions(),
             ]
@@ -1540,7 +1540,7 @@ class Woo_Product_List extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#758F4D',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li a:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li a:hover' => 'color: {{VALUE}};',
                 ],
                 'conditions' => $this->on_hover_buttons_conditions(),
             ]
@@ -1552,7 +1552,7 @@ class Woo_Product_List extends Widget_Base
                 'label'     => esc_html__( 'Background', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li a:hover' => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li a:hover' => 'background: {{VALUE}};',
                 ],
                 'conditions' => $this->on_hover_buttons_conditions(),
             ]
@@ -1566,7 +1566,7 @@ class Woo_Product_List extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'eael_product_list_color_typography_on_hover_buttons_typography',
-                'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li a:not(.add_to_cart_button), {{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li .add_to_cart_button::before',
+                'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li a:not(.add_to_cart_button), {{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li .add_to_cart_button::before',
                 'conditions' => $this->on_hover_buttons_conditions(),
             ]
         );
