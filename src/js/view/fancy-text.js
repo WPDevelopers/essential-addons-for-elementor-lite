@@ -5,8 +5,8 @@ var FancyText = function ($scope, $) {
 		$transition_type = $fancyText.data("fancy-text-transition-type") !== undefined ? $fancyText.data("fancy-text-transition-type") : "",
 		$fancy_text_speed = $fancyText.data("fancy-text-speed") !== undefined ? $fancyText.data("fancy-text-speed") : "",
 		$fancy_text_delay = $fancyText.data("fancy-text-delay") !== undefined ? $fancyText.data("fancy-text-delay") : "",
-		$fancy_text_cursor = $fancyText.data("fancy-text-cursor") === "yes" ? true : false,
-		$fancy_text_loop = $fancyText.data("fancy-text-loop") !== undefined ? ($fancyText.data("fancy-text-loop") == "yes" ? true : false) : false;
+		$fancy_text_cursor = $fancyText.data("fancy-text-cursor") === "yes",
+		$fancy_text_loop = $fancyText.data("fancy-text-loop") !== undefined ? ($fancyText.data("fancy-text-loop") === "yes") : false;
 	$fancy_text = $fancy_text.split("|");
 
 	if ($transition_type === "typing") {
