@@ -1379,61 +1379,22 @@ class Woo_Product_List extends Widget_Base
             [
                 'label' => __('On Hover Buttons', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
-                'conditions' => [
-                    'relation' => 'and',
-                    'terms' => [
-                        [
-                            'name' => 'eael_product_list_content_general_button_position',
-                            'operator' => '!==',
-                            'value' => 'static',
-                        ],
-                        [
-                          'relation' => 'or',
-                          'terms' => [
-                                [
-                                    'name' => 'eael_woo_product_list_add_to_cart_button_show',
-                                    'operator' => '===',
-                                    'value' => 'yes',
-                                ],
-                                [
-                                    'name' => 'eael_woo_product_list_quick_view_button_show',
-                                    'operator' => '===',
-                                    'value' => 'yes',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
+                'conditions' => $this->on_hover_buttons_conditions(),
             ]
         );
 
-        $this->add_control(
-            'eael_product_list_color_typography_on_hover_buttons_add_to_cart_heading',
-            [
-                'label' => __('Add to Cart', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
-                'condition' => [
-                    'eael_product_list_content_general_button_position!' => 'static',
-                    'eael_woo_product_list_add_to_cart_button_show' => 'yes',
-                ],
-            ]
-        );
-
-        $this->start_controls_tabs( 'eael_product_list_color_typography_on_hover_add_to_cart_color_tabs' );
+        $this->start_controls_tabs( 'eael_product_list_color_typography_on_hover_buttons_color_tabs' );
         
         $this->start_controls_tab( 
-            'eael_product_list_color_typography_on_hover_add_to_cart_color_tabs_normal',
+            'eael_product_list_color_typography_on_hover_buttons_color_tabs_normal',
             [
                 'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite' ),
-                'condition' => [
-                    'eael_product_list_content_general_button_position!' => 'static',
-                    'eael_woo_product_list_add_to_cart_button_show' => 'yes',
-                ],
+                'conditions' => $this->on_hover_buttons_conditions(),
             ] 
         );
 
         $this->add_control(
-            'eael_product_list_color_typography_on_hover_add_to_cart_color_normal',
+            'eael_product_list_color_typography_on_hover_buttons_color_normal',
             [
                 'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
@@ -1441,15 +1402,12 @@ class Woo_Product_List extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li a' => 'color: {{VALUE}};',
                 ],
-                'condition' => [
-                    'eael_product_list_content_general_button_position!' => 'static',
-                    'eael_woo_product_list_add_to_cart_button_show' => 'yes',
-                ],
+                'conditions' => $this->on_hover_buttons_conditions(),
             ]
         );
         
         $this->add_control(
-            'eael_product_list_color_typography_on_hover_add_to_cart_bg_color_normal',
+            'eael_product_list_color_typography_on_hover_buttons_bg_color_normal',
             [
                 'label'     => esc_html__( 'Background', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
@@ -1457,28 +1415,22 @@ class Woo_Product_List extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li a' => 'background: {{VALUE}};',
                 ],
-                'condition' => [
-                    'eael_product_list_content_general_button_position!' => 'static',
-                    'eael_woo_product_list_add_to_cart_button_show' => 'yes',
-                ],
+                'conditions' => $this->on_hover_buttons_conditions(),
             ]
         );
 
         $this->end_controls_tab();
 
         $this->start_controls_tab( 
-            'eael_product_list_color_typography_on_hover_add_to_cart_color_tabs_hover',
+            'eael_product_list_color_typography_on_hover_buttons_color_tabs_hover',
             [
                 'label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ),
-                'condition' => [
-                    'eael_product_list_content_general_button_position!' => 'static',
-                    'eael_woo_product_list_add_to_cart_button_show' => 'yes',
-                ],
+                'conditions' => $this->on_hover_buttons_conditions(),
             ] 
         );
 
         $this->add_control(
-            'eael_product_list_color_typography_on_hover_add_to_cart_color_hover',
+            'eael_product_list_color_typography_on_hover_buttons_color_hover',
             [
                 'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
@@ -1486,25 +1438,19 @@ class Woo_Product_List extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li a:hover' => 'color: {{VALUE}};',
                 ],
-                'condition' => [
-                    'eael_product_list_content_general_button_position!' => 'static',
-                    'eael_woo_product_list_add_to_cart_button_show' => 'yes',
-                ],
+                'conditions' => $this->on_hover_buttons_conditions(),
             ]
         );
 
         $this->add_control(
-            'eael_product_list_color_typography_on_hover_add_to_cart_bg_color_hover',
+            'eael_product_list_color_typography_on_hover_buttons_bg_color_hover',
             [
                 'label'     => esc_html__( 'Background', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li a:hover' => 'background: {{VALUE}};',
                 ],
-                'condition' => [
-                    'eael_product_list_content_general_button_position!' => 'static',
-                    'eael_woo_product_list_add_to_cart_button_show' => 'yes',
-                ],
+                'conditions' => $this->on_hover_buttons_conditions(),
             ]
         );
         
@@ -1515,40 +1461,49 @@ class Woo_Product_List extends Widget_Base
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'name'     => 'eael_product_list_color_typography_on_hover_add_to_cart_typography',
+                'name'     => 'eael_product_list_color_typography_on_hover_buttons_typography',
                 'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li a',
-                'condition' => [
-                    'eael_product_list_content_general_button_position!' => 'static',
-                    'eael_woo_product_list_add_to_cart_button_show' => 'yes',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_product_list_color_typography_on_hover_buttons_quick_view_heading',
-            [
-                'label' => __('Quick View', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
-                'condition' => [
-                    'eael_product_list_content_general_button_position!' => 'static',
-                    'eael_woo_product_list_quick_view_button_show' => 'yes',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_product_list_color_typography_on_hover_buttons_link_heading',
-            [
-                'label' => __('Link', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
-                'condition' => [
-                    'eael_product_list_content_general_button_position!' => 'static',
-                    'eael_woo_product_list_link_button_show' => 'yes',
-                ],
+                'conditions' => $this->on_hover_buttons_conditions(),
             ]
         );
 
         $this->end_controls_section();
+    }
+
+    protected function on_hover_buttons_conditions(){
+        $conditions =   
+        [
+            'relation' => 'and',
+            'terms' => [
+                [
+                    'name' => 'eael_product_list_content_general_button_position',
+                    'operator' => '!==',
+                    'value' => 'static',
+                ],
+                [
+                'relation' => 'or',
+                'terms' => [
+                        [
+                            'name' => 'eael_woo_product_list_add_to_cart_button_show',
+                            'operator' => '===',
+                            'value' => 'yes',
+                        ],
+                        [
+                            'name' => 'eael_woo_product_list_quick_view_button_show',
+                            'operator' => '===',
+                            'value' => 'yes',
+                        ],
+                        [
+                            'name' => 'eael_woo_product_list_link_button_show',
+                            'operator' => '===',
+                            'value' => 'yes',
+                        ],
+                    ],
+                ],
+            ],
+        ];
+        
+        return $conditions;
     }
 
     protected function eael_get_product_statuses() {
