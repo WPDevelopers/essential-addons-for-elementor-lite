@@ -139,7 +139,6 @@ class Woo_Product_List extends Widget_Base
 
         $this->eael_product_list_container_style();
         $this->eael_product_list_item_style();
-        $this->eael_product_list_item_image_style();
         $this->eael_product_list_item_content_style();
         $this->eael_product_list_modal_style();
         $this->eael_product_list_color_typography_style();
@@ -890,19 +889,6 @@ class Woo_Product_List extends Widget_Base
 		$this->end_controls_section();
     }
 
-    protected function eael_product_list_item_image_style() {
-
-	    $this->start_controls_section(
-			'eael_section_product_list_item_image_style',
-			[
-				'label' => esc_html__( 'Image', 'essential-addons-for-elementor-lite' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			]
-		);
-
-		$this->end_controls_section();
-    }
-
     protected function eael_product_list_item_content_style() {
 
 	    $this->start_controls_section(
@@ -1192,6 +1178,7 @@ class Woo_Product_List extends Widget_Base
             [
                 'label' => __('On Hover Buttons', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
+                'conditions' => $this->on_hover_buttons_conditions(),
             ]
         );
 
@@ -1204,6 +1191,7 @@ class Woo_Product_List extends Widget_Base
 				'selectors'  => [
 					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
+                'conditions' => $this->on_hover_buttons_conditions(),
 			]
 		);
 
@@ -1216,6 +1204,7 @@ class Woo_Product_List extends Widget_Base
 				'selectors'  => [
 					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
+                'conditions' => $this->on_hover_buttons_conditions(),
 			]
 		);
 
@@ -1232,6 +1221,7 @@ class Woo_Product_List extends Widget_Base
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li a' => 'border-radius: {{SIZE}}px;',
 				],
+                'conditions' => $this->on_hover_buttons_conditions(),
 			]
 		);
 
@@ -1240,6 +1230,7 @@ class Woo_Product_List extends Widget_Base
 			[
 				'name'     => 'eael_product_list_content_footer_on_hover_buttons_normal_border',
 				'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li a',
+                'conditions' => $this->on_hover_buttons_conditions(),
 			]
 		);
 
@@ -1248,6 +1239,7 @@ class Woo_Product_List extends Widget_Base
 			[
 				'name'     => 'eael_product_list_content_footer_on_hover_buttons_normal_box_shadow',
 				'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li a',
+                'conditions' => $this->on_hover_buttons_conditions(),
 			]
 		);
 
