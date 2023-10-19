@@ -11,6 +11,12 @@ ea.hooks.addAction("init", "ea", () => {
 				$accordionSpeed = $advanceAccordion.data("toogle-speed"),
 				$customIdOffset = $advanceAccordion.data("custom-id-offset");
 
+			window.addEventListener('hashchange', function () {
+				hashTag = window.location.hash.substr(1);
+				if (hashTag !== 'undefined' && hashTag) {
+					jQuery('#' + hashTag).trigger('click');
+				}
+			});
 			// Open default actived tab
 			if (hashTag) {
 				$accordionHeader.each(function () {
@@ -82,7 +88,7 @@ ea.hooks.addAction("init", "ea", () => {
 			if( typeof hashTag !== 'undefined' && hashTag && !ea.elementStatusCheck('eaelAdvancedAccordionScroll') ){
 				let $customIdOffsetVal = $customIdOffset ? parseFloat($customIdOffset) : 0;
 				$('html, body').animate({
-					scrollTop: $("#"+hashTag).offset().top - $customIdOffsetVal,
+					// scrollTop: $("#"+hashTag).offset().top - $customIdOffsetVal,
 				}, 300);
 			}
 		}
