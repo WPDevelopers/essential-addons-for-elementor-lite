@@ -27,7 +27,7 @@ var FancyText = function ($scope, $) {
 			separator: ", ",
 			speed: $fancy_text_delay,
 			complete: function () {
-				if (($(this)[0].index + 1) === $(this)[0].phrases.length) {
+				if (!$fancy_text_loop && ($(this)[0].index + 1) === $(this)[0].phrases.length) {
 					$(this)[0].stop();
 				}
 			}
