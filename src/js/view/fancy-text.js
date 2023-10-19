@@ -9,7 +9,7 @@ var FancyText = function ($scope, $) {
 		$fancy_text_loop = $fancyText.data("fancy-text-loop") !== undefined ? ($fancyText.data("fancy-text-loop") == "yes" ? true : false) : false;
 	$fancy_text = $fancy_text.split("|");
 
-	if ($transition_type == "typing") {
+	if ($transition_type === "typing") {
 		new Typed("#eael-fancy-text-" + $id, {
 			strings: $fancy_text,
 			typeSpeed: $fancy_text_speed,
@@ -21,7 +21,7 @@ var FancyText = function ($scope, $) {
 		});
 	}
 
-	if ($transition_type != "typing") {
+	if ($transition_type !== "typing") {
 		$("#eael-fancy-text-" + $id).Morphext({
 			animation: $transition_type,
 			separator: ", ",
