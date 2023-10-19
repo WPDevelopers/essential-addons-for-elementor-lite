@@ -1050,6 +1050,143 @@ class Woo_Product_List extends Widget_Base
 			]
 		);
 
+        $this->add_control(
+            'eael_product_list_content_footer_heading_style',
+            [
+                'label' => __('Content Footer', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_content_footer_add_to_cart_heading_style',
+            [
+                'label' => __('Add to Cart', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+		$this->add_responsive_control(
+			'eael_product_list_content_footer_add_to_cart_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-add-to-cart-button a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_product_list_content_footer_add_to_cart_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-add-to-cart-button a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+        $this->add_control(
+			'eael_product_list_content_footer_add_to_cart_border_radius',
+			[
+				'label'     => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => [
+					'px' => [
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-add-to-cart-button a' => 'border-radius: {{SIZE}}px;',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'     => 'eael_product_list_content_footer_add_to_cart_normal_border',
+				'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-add-to-cart-button a',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'eael_product_list_content_footer_add_to_cart_normal_box_shadow',
+				'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-add-to-cart-button a',
+			]
+		);
+
+        $this->add_control(
+            'eael_product_list_content_footer_quick_view_heading_style',
+            [
+                'label' => __('Quick View', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+		$this->add_responsive_control(
+			'eael_product_list_content_footer_quick_view_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-quick-view-button a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_product_list_content_footer_quick_view_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-quick-view-button a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+        $this->add_control(
+			'eael_product_list_content_footer_quick_view_border_radius',
+			[
+				'label'     => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => [
+					'px' => [
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-quick-view-button a' => 'border-radius: {{SIZE}}px;',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'     => 'eael_product_list_content_footer_quick_view_normal_border',
+				'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-quick-view-button a',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'eael_product_list_content_footer_quick_view_normal_box_shadow',
+				'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-quick-view-button a',
+			]
+		);
+
 		$this->end_controls_section();
     }
 
@@ -1073,14 +1210,6 @@ class Woo_Product_List extends Widget_Base
             [
                 'label' => esc_html__('Color &amp; Typography', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
-            ]
-        );
-
-        $this->add_control(
-            'eael_product_list_color_typography_general_heading',
-            [
-                'label' => __('General', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
             ]
         );
 
@@ -1349,40 +1478,7 @@ class Woo_Product_List extends Widget_Base
         );
 
         $this->add_control(
-            'eael_product_list_color_typography_static_buttons_heading',
-            [
-                'label' => __('Static Buttons', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
-                'conditions' => [
-                    'relation' => 'and',
-                    'terms' => [
-                        [
-                            'name' => 'eael_product_list_content_general_button_position',
-                            'operator' => '!==',
-                            'value' => 'on-hover',
-                        ],
-                        [
-                          'relation' => 'or',
-                          'terms' => [
-                                [
-                                    'name' => 'eael_woo_product_list_add_to_cart_button_show',
-                                    'operator' => '===',
-                                    'value' => 'yes',
-                                ],
-                                [
-                                    'name' => 'eael_woo_product_list_quick_view_button_show',
-                                    'operator' => '===',
-                                    'value' => 'yes',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_product_list_color_typography_static_buttons_add_to_cart_heading',
+            'eael_product_list_color_typography_add_to_cart_heading',
             [
                 'label' => __('Add to Cart', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
@@ -1393,10 +1489,10 @@ class Woo_Product_List extends Widget_Base
             ]
         );
 
-        $this->start_controls_tabs( 'eael_product_list_color_typography_static_add_to_cart_color_tabs' );
+        $this->start_controls_tabs( 'eael_product_list_color_typography_add_to_cart_color_tabs' );
         
         $this->start_controls_tab( 
-            'eael_product_list_color_typography_static_add_to_cart_color_tabs_normal',
+            'eael_product_list_color_typography_add_to_cart_color_tabs_normal',
             [
                 'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite' ),
                 'condition' => [
@@ -1407,7 +1503,7 @@ class Woo_Product_List extends Widget_Base
         );
 
         $this->add_control(
-            'eael_product_list_color_typography_static_add_to_cart_color_normal',
+            'eael_product_list_color_typography_add_to_cart_color_normal',
             [
                 'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
@@ -1423,7 +1519,7 @@ class Woo_Product_List extends Widget_Base
         );
         
         $this->add_control(
-            'eael_product_list_color_typography_static_add_to_cart_bg_color_normal',
+            'eael_product_list_color_typography_add_to_cart_bg_color_normal',
             [
                 'label'     => esc_html__( 'Background', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
@@ -1441,7 +1537,7 @@ class Woo_Product_List extends Widget_Base
         $this->end_controls_tab();
 
         $this->start_controls_tab( 
-            'eael_product_list_color_typography_static_add_to_cart_color_tabs_hover',
+            'eael_product_list_color_typography_add_to_cart_color_tabs_hover',
             [
                 'label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ),
                 'condition' => [
@@ -1452,7 +1548,7 @@ class Woo_Product_List extends Widget_Base
         );
 
         $this->add_control(
-            'eael_product_list_color_typography_static_add_to_cart_color_hover',
+            'eael_product_list_color_typography_add_to_cart_color_hover',
             [
                 'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
@@ -1468,7 +1564,7 @@ class Woo_Product_List extends Widget_Base
         );
 
         $this->add_control(
-            'eael_product_list_color_typography_static_add_to_cart_bg_color_hover',
+            'eael_product_list_color_typography_add_to_cart_bg_color_hover',
             [
                 'label'     => esc_html__( 'Background', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
@@ -1490,7 +1586,7 @@ class Woo_Product_List extends Widget_Base
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'name'     => 'eael_product_list_color_typography_static_add_to_cart_typography',
+                'name'     => 'eael_product_list_color_typography_add_to_cart_typography',
                 'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-content-footer .eael-product-list-add-to-cart-button a',
                 'condition' => [
                     'eael_product_list_content_general_button_position!' => 'on-hover',
@@ -1500,7 +1596,7 @@ class Woo_Product_List extends Widget_Base
         );
 
         $this->add_control(
-            'eael_product_list_color_typography_static_buttons_quick_view_heading',
+            'eael_product_list_color_typography_buttons_quick_view_heading',
             [
                 'label' => __('Quick View', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
@@ -1511,10 +1607,10 @@ class Woo_Product_List extends Widget_Base
             ]
         );
 
-        $this->start_controls_tabs( 'eael_product_list_color_typography_static_quick_view_color_tabs' );
+        $this->start_controls_tabs( 'eael_product_list_color_typography_quick_view_color_tabs' );
         
         $this->start_controls_tab( 
-            'eael_product_list_color_typography_static_quick_view_color_tabs_normal',
+            'eael_product_list_color_typography_quick_view_color_tabs_normal',
             [
                 'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite' ),
                 'condition' => [
@@ -1525,7 +1621,7 @@ class Woo_Product_List extends Widget_Base
         );
 
         $this->add_control(
-            'eael_product_list_color_typography_static_quick_view_color_normal',
+            'eael_product_list_color_typography_quick_view_color_normal',
             [
                 'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
@@ -1541,7 +1637,7 @@ class Woo_Product_List extends Widget_Base
         );
         
         $this->add_control(
-            'eael_product_list_color_typography_static_quick_view_bg_color_normal',
+            'eael_product_list_color_typography_quick_view_bg_color_normal',
             [
                 'label'     => esc_html__( 'Background', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
@@ -1558,7 +1654,7 @@ class Woo_Product_List extends Widget_Base
         $this->end_controls_tab();
 
         $this->start_controls_tab( 
-            'eael_product_list_color_typography_static_quick_view_color_tabs_hover',
+            'eael_product_list_color_typography_quick_view_color_tabs_hover',
             [
                 'label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ),
                 'condition' => [
@@ -1569,7 +1665,7 @@ class Woo_Product_List extends Widget_Base
         );
 
         $this->add_control(
-            'eael_product_list_color_typography_static_quick_view_color_hover',
+            'eael_product_list_color_typography_quick_view_color_hover',
             [
                 'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
@@ -1585,7 +1681,7 @@ class Woo_Product_List extends Widget_Base
         );
 
         $this->add_control(
-            'eael_product_list_color_typography_static_quick_view_bg_color_hover',
+            'eael_product_list_color_typography_quick_view_bg_color_hover',
             [
                 'label'     => esc_html__( 'Background', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
@@ -1606,7 +1702,7 @@ class Woo_Product_List extends Widget_Base
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'name'     => 'eael_product_list_color_typography_static_quick_view_typography',
+                'name'     => 'eael_product_list_color_typography_quick_view_typography',
                 'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-content-footer .eael-product-list-quick-view-button a',
                 'condition' => [
                     'eael_product_list_content_general_button_position!' => 'on-hover',
