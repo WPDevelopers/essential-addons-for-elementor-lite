@@ -1,4 +1,6 @@
 $theme-preset1: #758F4D;
+$theme-preset2: #BC5C5C;
+$theme-preset3: #A66C46;
 $spacing1: 5px;
 $spacing2: 10px;
 $spacing3: 15px;
@@ -19,7 +21,9 @@ $spacer-lg: $spacing5;
         margin: 0;
     }
     
-    &.preset-1 {
+    &.preset-1,
+    &.preset-2,
+    &.preset-3 {
         .eael-product-list-container {
             padding: 60px;
         }
@@ -34,6 +38,87 @@ $spacer-lg: $spacing5;
             .eael-product-list-content-wrap {
                 width: 70%;
                 padding-left: 70px;
+            }
+        }
+    }
+
+    &.preset-1 {
+        .eael-product-list-item {
+            background: #fff;
+        }
+
+        .eael-product-list-add-to-cart-button a {
+            background: $theme-preset1;
+            border-radius: 8px;
+        }
+        
+        .eael-product-list-quick-view-button a {
+            color: #515151;
+
+            &:hover {
+                color: $theme-preset1;
+            }
+        }
+
+        .eael-product-list-buttons-on-hover li a {
+            color: #343434;
+
+            &:hover {
+                color: $theme-preset1;
+            }
+        }
+    }
+
+    &.preset-2 {
+        .eael-product-list-item {
+            background: #FAF8F8;
+        }
+
+        .eael-product-list-add-to-cart-button a {
+            background: $theme-preset2;
+            border-radius: 8px;
+        }
+
+        .eael-product-list-quick-view-button a {
+            color: #515151;
+
+            &:hover {
+                color: $theme-preset2;
+            }
+        }
+
+        .eael-product-list-buttons-on-hover li a {
+            color: #343434;
+
+            &:hover {
+                color: $theme-preset2;
+            }
+        }
+    }
+
+    &.preset-3 {
+        .eael-product-list-item {
+            background: #fff;
+        }
+
+        .eael-product-list-add-to-cart-button a {
+            background: $theme-preset3;
+            border-radius: 100px;
+        }
+
+        .eael-product-list-quick-view-button a {
+            color: #515151;
+
+            &:hover {
+                color: $theme-preset3;
+            }
+        }
+
+        .eael-product-list-buttons-on-hover li a {
+            color: #343434;
+
+            &:hover {
+                color: $theme-preset3;
             }
         }
     }
@@ -169,6 +254,28 @@ $spacer-lg: $spacing5;
         }
     }
 
+    .eael-product-list-notice p {
+        color: #515151; //
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.2;
+        margin: 0;
+
+        & i {
+            color: #758F4D; //
+            margin-right: 4px;
+        }
+    }
+
+    .eael-product-list-notice.eael-product-list-notice-category p {
+        color: #897474;
+
+        & i {
+            color: #897474;
+        }
+    }
+
     // Content Body
     .eael-product-list-content-body {
         .eael-product-list-title {
@@ -223,6 +330,46 @@ $spacer-lg: $spacing5;
 
     // Content Footer
     .eael-product-list-content-footer {
+        .eael-product-list-progress {
+            margin-bottom: $spacer-md;
+
+            .eael-product-list-progress-info {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding-bottom: 5px;
+
+                .eael-product-list-progress-count,
+                .eael-product-list-progress-remaining {
+                    color: #515151;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 1.4;
+                    margin: 0;
+
+                    & span {
+                        color: #343434;
+                        font-weight: 500;
+                    }
+                }
+            }
+
+            .eael-product-list-progress-bar-outer {
+                width: 100%;
+                height: 3px;
+                background: #EFE4E4;
+                border-radius: 100px;
+
+                .eael-product-list-progress-bar-inner {
+                    height: 3px;
+                    background: #C29F9D;
+                    border-radius: 100px;
+                }
+            }
+        }
+
         .eael-product-list-buttons {
             display: flex;
             align-items: center;
@@ -237,7 +384,6 @@ $spacer-lg: $spacing5;
                 line-height: 1.2;
                 text-decoration: none;
                 padding: 12px 16px;
-                border-radius: 8px;
                 margin: 0 15px 0 0;
                 transition: all 0.4s;
             }
