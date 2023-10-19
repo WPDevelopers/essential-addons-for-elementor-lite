@@ -27,8 +27,10 @@ var FancyText = function ($scope, $) {
 			separator: ", ",
 			speed: $fancy_text_delay,
 			complete: function () {
-				// Overrides default empty function
-			},
+				if (($(this)[0].index + 1) === $(this)[0].phrases.length) {
+					$(this)[0].stop();
+				}
+			}
 		});
 	}
 	jQuery(document).ready(function() {
