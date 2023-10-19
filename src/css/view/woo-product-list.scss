@@ -243,16 +243,11 @@ $spacer-lg: $spacing5;
             }
 
             .eael-product-list-quick-view-button a {
-                color: #515151;
                 font-size: 16px;
                 font-weight: 500;
                 line-height: 1.2;
                 text-decoration-line: underline;
                 transition: all 0.4s;
-
-                &:hover {
-                    color: $theme-preset1;
-                }
             }
         }
     }
