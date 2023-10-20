@@ -99,6 +99,18 @@ if ( ! defined( 'ABSPATH' ) ) {
                             <?php endif; ?>
                         </div>
                         <div class="eael-product-list-content-footer">
+                            <?php if ( $woo_product_list['total_sold_show'] ) : ?>
+                            <div class="eael-product-list-progress">
+                                <div class="eael-product-list-progress-info">
+                                    <h4 class="eael-product-list-progress-count">Total Sold: <span>50</span></h4>
+                                    <h4 class="eael-product-list-progress-remaining">Remaining: <span>08</span></h4>
+                                </div>
+                                <div class="eael-product-list-progress-bar-outer">
+                                    <div style="width: 80%;" class="eael-product-list-progress-bar-inner"></div>
+                                </div>
+                            </div>
+                            <?php endif; ?>
+
                             <?php if ( $woo_product_list['button_position_static'] ) : ?>
                             <div class="eael-product-list-buttons">
                                 <?php if ( $woo_product_list['add_to_cart_button_show'] ) : ?>

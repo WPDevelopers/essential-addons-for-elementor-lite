@@ -73,10 +73,6 @@ if ( ! defined( 'ABSPATH' ) ) {
                                 <?php echo wp_kses_post( wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) ); ?>
                             </div>
                             <?php endif; ?>
-                            
-                            <div class="eael-product-list-notice eael-product-list-notice-shiping-free">
-                                <p><i class="fa-solid fa-box"></i> Free Shipping</p>
-                            </div>
                         </div>
                         <div class="eael-product-list-content-body">
                             <?php
@@ -104,13 +100,20 @@ if ( ! defined( 'ABSPATH' ) ) {
                                 <p class="eael-product-list-add-to-cart-button eael-m-0"><?php woocommerce_template_loop_add_to_cart(); ?></p>
                                 <?php endif; ?>
 
-                                <?php if ( $woo_product_list['quick_view_button_show'] ) : ?>
-                                <p class="eael-product-list-quick-view-button eael-m-0">
-                                    <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars( json_encode( $quick_view_setting ), ENT_QUOTES ); ?>" class="open-popup-link">
-                                       <?php _e('View Product', 'essential-addons-for-elementor-lite'); ?>
-                                    </a>
-                                </p>
+                                <?php if ( $woo_product_list['total_sold_show'] ) : ?>
+                                <div class="eael-product-list-progress">
+                                    <div class="eael-product-list-progress-info">
+                                        <h4 class="eael-product-list-progress-count">Total Sold: <span>50</span></h4>
+                                    </div>
+                                    <div class="eael-product-list-progress-bar-outer">
+                                        <div style="width: 80%;" class="eael-product-list-progress-bar-inner"></div>
+                                    </div>
+                                </div>
                                 <?php endif; ?>
+
+                                <div class="eael-product-list-notice eael-product-list-notice-shiping-free">
+                                    <p class="eael-m-0"><i class="fa-solid fa-box"></i> Free Shipping</p>
+                                </div>
                             </div>
                             <?php endif; ?>
                         </div>

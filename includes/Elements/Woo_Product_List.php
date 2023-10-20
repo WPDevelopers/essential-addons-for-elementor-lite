@@ -319,30 +319,6 @@ class Woo_Product_List extends Widget_Base
             'default' => 'yes',
         ]);
 
-        $this->add_control('eael_woo_product_list_total_sold_show', [
-            'label' => esc_html__('Total Sold', 'essential-addons-for-elementor-lite'),
-            'type' => Controls_Manager::SWITCHER,
-			'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
-			'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
-            'return_value' => 'yes',
-            'default' => '',
-            'condition'     => [
-                'eael_dynamic_template_layout' => 'preset-1',
-            ]
-        ]);
-
-        $this->add_control('eael_woo_product_list_total_sold_preset_2_3_show', [
-            'label' => esc_html__('Total Sold', 'essential-addons-for-elementor-lite'),
-            'type' => Controls_Manager::SWITCHER,
-			'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
-			'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
-            'return_value' => 'yes',
-            'default' => 'yes',
-            'condition'     => [
-                'eael_dynamic_template_layout!' => 'preset-1',
-            ]
-        ]);
-
         $this->add_control('eael_woo_product_list_size_show', [
             'label' => esc_html__('Size', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::SWITCHER,
@@ -375,6 +351,30 @@ class Woo_Product_List extends Widget_Base
                 'separator' => 'before',
             ]
         );
+
+        $this->add_control('eael_woo_product_list_total_sold_show', [
+            'label' => esc_html__('Total Sold', 'essential-addons-for-elementor-lite'),
+            'type' => Controls_Manager::SWITCHER,
+			'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+			'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+            'return_value' => 'yes',
+            'default' => '',
+            'condition'     => [
+                'eael_dynamic_template_layout' => 'preset-1',
+            ]
+        ]);
+
+        $this->add_control('eael_woo_product_list_total_sold_preset_2_3_show', [
+            'label' => esc_html__('Total Sold', 'essential-addons-for-elementor-lite'),
+            'type' => Controls_Manager::SWITCHER,
+			'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+			'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+            'return_value' => 'yes',
+            'default' => 'yes',
+            'condition'     => [
+                'eael_dynamic_template_layout!' => 'preset-1',
+            ]
+        ]);
 
         $this->add_control('eael_woo_product_list_add_to_cart_button_show', [
             'label' => esc_html__('Add to Cart', 'essential-addons-for-elementor-lite'),
@@ -1969,6 +1969,7 @@ class Woo_Product_List extends Widget_Base
 		$woo_product_list['title_show']     = ! empty( $settings['eael_woo_product_list_title_show'] ) && 'yes' === $settings['eael_woo_product_list_title_show'] ? 1 : 0;
 		$woo_product_list['excerpt_show']   = ! empty( $settings['eael_woo_product_list_excerpt_show'] ) && 'yes' === $settings['eael_woo_product_list_excerpt_show'] ? 1 : 0;
 		$woo_product_list['price_show']     = ! empty( $settings['eael_woo_product_list_price_show'] ) && 'yes' === $settings['eael_woo_product_list_price_show'] ? 1 : 0;
+		$woo_product_list['total_sold_show']                = ! empty( $settings['eael_woo_product_list_total_sold_show'] ) && 'yes' === $settings['eael_woo_product_list_total_sold_show'] ? 1 : 0;
 		$woo_product_list['add_to_cart_button_show']        = ! empty( $settings['eael_woo_product_list_add_to_cart_button_show'] ) && 'yes' === $settings['eael_woo_product_list_add_to_cart_button_show'] ? 1 : 0;
 		$woo_product_list['quick_view_button_show']         = ! empty( $settings['eael_woo_product_list_quick_view_button_show'] ) && 'yes' === $settings['eael_woo_product_list_quick_view_button_show'] ? 1 : 0;
 		$woo_product_list['link_button_show']               = ! empty( $settings['eael_woo_product_list_link_button_show'] ) && 'yes' === $settings['eael_woo_product_list_link_button_show'] ? 1 : 0;
@@ -1985,6 +1986,10 @@ class Woo_Product_List extends Widget_Base
 		
         if( 'preset-3' === $woo_product_list['layout'] ){
             $woo_product_list['content_header_position']    = ! empty( $settings['eael_product_list_content_header_position_preset_3'] ) ? esc_html( $settings['eael_product_list_content_header_position_preset_3'] ) : esc_html( 'after-title' );
+        }
+        
+        if( 'preset-2' === $woo_product_list['layout'] || 'preset-3' === $woo_product_list['layout'] ){
+            $woo_product_list['total_sold_show']    = ! empty( $settings['eael_woo_product_list_total_sold_preset_2_3_show'] ) && 'yes' === esc_html( $settings['eael_woo_product_list_total_sold_preset_2_3_show'] ) ? 1 : 0;
         }
 
         return $woo_product_list;
