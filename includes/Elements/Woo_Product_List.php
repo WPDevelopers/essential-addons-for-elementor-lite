@@ -555,6 +555,25 @@ class Woo_Product_List extends Widget_Base
                     'before-title'        => esc_html__( 'Before Title', 'essential-addons-for-elementor-lite' ),
                     'after-title' => esc_html__( 'After Title', 'essential-addons-for-elementor-lite' ),
                 ],
+                'condition' => [
+				    'eael_dynamic_template_layout!' => 'preset-3',
+			    ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_content_header_position_preset_3',
+            [
+                'label'   => __( 'Position', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'after-title',
+                'options' => [
+                    'before-title'        => esc_html__( 'Before Title', 'essential-addons-for-elementor-lite' ),
+                    'after-title' => esc_html__( 'After Title', 'essential-addons-for-elementor-lite' ),
+                ],
+                'condition' => [
+				    'eael_dynamic_template_layout' => 'preset-3',
+			    ],
             ]
         );
 
@@ -1924,6 +1943,21 @@ class Woo_Product_List extends Widget_Base
 	    });
     }
 
+    protected function eael_get_product_title_html( $woo_product_list, $product ){
+        if ( $woo_product_list['title_show'] ) : ?>
+            <<?php echo $woo_product_list['title_tag'];  ?> class="eael-product-list-title">
+                <?php if ( $woo_product_list['title_clickable'] ) : ?>
+                <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link" target="_blank">
+                    <?php echo ClassesHelper::eael_wp_kses( $product->get_title() ); ?>
+                </a>
+                <?php else : ?>
+                    <?php echo ClassesHelper::eael_wp_kses( $product->get_title() ); ?>
+                <?php endif; ?>
+            </<?php echo $woo_product_list['title_tag'];  ?>>
+        <?php 
+        endif;
+    }
+
     protected function get_woo_product_list_settings() {
 		$settings 							= $this->get_settings_for_display();
 		
@@ -1942,12 +1976,17 @@ class Woo_Product_List extends Widget_Base
 		$woo_product_list['image_size']                     = ! empty( $settings['eael_product_list_image_size_size'] ) ? esc_html( $settings['eael_product_list_image_size_size'] ) : esc_html( 'medium' );
 		$woo_product_list['image_clickable']                = ! empty( $settings['eael_product_list_image_clickable'] ) && 'yes' === $settings['eael_product_list_image_clickable'] ? 1 : 0;
         $woo_product_list['button_position_static']         = ! empty( $settings['eael_product_list_content_general_button_position'] ) && 'on-hover' !== $settings['eael_product_list_content_general_button_position'] ? 1 : 0;
+        $woo_product_list['content_header_position']        = ! empty( $settings['eael_product_list_content_header_position'] ) ? esc_html( $settings['eael_product_list_content_header_position'] ) : esc_html( 'before-title' );
 		$woo_product_list['content_header_direction_rtl']   = ! empty( $settings['eael_product_list_content_header_direction'] ) && 'rtl' === $settings['eael_product_list_content_header_direction'] ? 1 : 0;
 		$woo_product_list['title_tag']                      = ! empty( $settings['eael_product_list_content_body_title_tag'] ) ? ClassesHelper::eael_validate_html_tag( $settings['eael_product_list_content_body_title_tag'] ) : 'div';
 		$woo_product_list['title_clickable']                = ! empty( $settings['eael_product_list_content_body_title_clickable'] ) && 'yes' === $settings['eael_product_list_content_body_title_clickable'] ? 1 : 0;
 		$woo_product_list['excerpt_words_count']            = ! empty( $settings['eael_product_list_content_body_excerpt_words_count'] ) ? intval( $settings['eael_product_list_content_body_excerpt_words_count'] ) : 30;
 		$woo_product_list['excerpt_expanison_indicator']    = ! empty( $settings['eael_product_list_content_body_excerpt_expanison_indicator'] ) ? esc_html( $settings['eael_product_list_content_body_excerpt_expanison_indicator'] ) : esc_html('...');
 		
+        if( 'preset-3' === $woo_product_list['layout'] ){
+            $woo_product_list['content_header_position']    = ! empty( $settings['eael_product_list_content_header_position_preset_3'] ) ? esc_html( $settings['eael_product_list_content_header_position_preset_3'] ) : esc_html( 'after-title' );
+        }
+
         return $woo_product_list;
 	}
 
