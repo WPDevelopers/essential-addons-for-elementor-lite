@@ -40,29 +40,47 @@ $spacer-lg: $spacing5;
                 padding-left: 70px;
             }
         }
+
+        .eael-product-list-quick-view-button a {
+            color: #515151;
+        }
+
+        .eael-product-list-buttons-on-hover li a {
+            color: #343434;
+        }
     }
 
-    &.preset-1 {
+    &.preset-1,
+    &.preset-2 {
+        .eael-product-list-content-header {
+            margin-bottom: $spacing3;
+        }
+
+        .eael-product-list-title {
+            margin: 0 0 $spacer-md;
+        }
+    }
+
+    &.preset-1,
+    &.preset-3 {
         .eael-product-list-item {
             background: #fff;
         }
+    }
 
+    &.preset-1 {
         .eael-product-list-add-to-cart-button a {
             background: $theme-preset1;
             border-radius: 8px;
         }
         
         .eael-product-list-quick-view-button a {
-            color: #515151;
-
             &:hover {
                 color: $theme-preset1;
             }
         }
 
         .eael-product-list-buttons-on-hover li a {
-            color: #343434;
-
             &:hover {
                 color: $theme-preset1;
             }
@@ -80,16 +98,12 @@ $spacer-lg: $spacing5;
         }
 
         .eael-product-list-quick-view-button a {
-            color: #515151;
-
             &:hover {
                 color: $theme-preset2;
             }
         }
 
         .eael-product-list-buttons-on-hover li a {
-            color: #343434;
-
             &:hover {
                 color: $theme-preset2;
             }
@@ -97,8 +111,12 @@ $spacer-lg: $spacing5;
     }
 
     &.preset-3 {
-        .eael-product-list-item {
-            background: #fff;
+        .eael-product-list-content-header {
+            margin-bottom: $spacing4;
+        }
+
+        .eael-product-list-title {
+            margin: 0 0 $spacing3;
         }
 
         .eael-product-list-add-to-cart-button a {
@@ -107,16 +125,12 @@ $spacer-lg: $spacing5;
         }
 
         .eael-product-list-quick-view-button a {
-            color: #515151;
-
             &:hover {
                 color: $theme-preset3;
             }
         }
 
         .eael-product-list-buttons-on-hover li a {
-            color: #343434;
-
             &:hover {
                 color: $theme-preset3;
             }
@@ -225,7 +239,7 @@ $spacer-lg: $spacing5;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: $spacing3;
+        flex-wrap: wrap;
     }
 
     .eael-product-list-rating .star-rating {
@@ -277,22 +291,22 @@ $spacer-lg: $spacing5;
     }
 
     // Content Body
+    .eael-product-list-title {
+        width: 100%;
+    }
+
+    .eael-product-list-title,
+    .eael-product-list-title a {
+        font-size: 28px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.2;
+        text-transform: capitalize;
+        text-decoration: none;
+        transition: all 0.4s;
+    }
+
     .eael-product-list-content-body {
-        .eael-product-list-title {
-            margin: 0 0 $spacer-md;
-        }
-
-        .eael-product-list-title,
-        .eael-product-list-title a {
-            font-size: 28px;
-            font-style: normal;
-            font-weight: 500;
-            line-height: 1.2;
-            text-transform: capitalize;
-            text-decoration: none;
-            transition: all 0.4s;
-        }
-
         .eael-product-list-excerpt {
             font-size: 16px;
             font-weight: 400;

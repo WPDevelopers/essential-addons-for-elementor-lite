@@ -3,8 +3,6 @@
  * Template Name: Preset 2
  */
 
-use Essential_Addons_Elementor\Classes\Helper;
-
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 } // Exit if accessed directly
@@ -64,6 +62,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                     <div class="eael-product-list-content-wrap">
                         <div <?php $this->print_render_attribute_string('eael-product-list-content-header'); ?> >
+                            <?php
+                            if ( 'after-title' === $woo_product_list['content_header_position'] ) :
+                                $this->eael_get_product_title_html( $woo_product_list, $product );
+                            endif; 
+                            ?>
                             <?php if ( $woo_product_list['rating_show'] ) : ?>
                             <div class="eael-product-list-rating">
                                 <?php echo wp_kses_post( wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) ); ?>
@@ -75,17 +78,11 @@ if ( ! defined( 'ABSPATH' ) ) {
                             </div>
                         </div>
                         <div class="eael-product-list-content-body">
-                            <?php if ( $woo_product_list['title_show'] ) : ?>
-                            <<?php echo $woo_product_list['title_tag'];  ?> class="eael-product-list-title">
-                                <?php if ( $woo_product_list['title_clickable'] ) : ?>
-                                <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link" target="_blank">
-                                    <?php echo Helper::eael_wp_kses( $product->get_title() ); ?>
-                                </a>
-                                <?php else : ?>
-                                    <?php echo Helper::eael_wp_kses( $product->get_title() ); ?>
-                                <?php endif; ?>
-                            </<?php echo $woo_product_list['title_tag'];  ?>>
-                            <?php endif; ?>
+                            <?php
+                            if ( 'before-title' === $woo_product_list['content_header_position'] ) :
+                                $this->eael_get_product_title_html( $woo_product_list, $product );
+                            endif; 
+                            ?>
 
                             <?php if ( $woo_product_list['excerpt_show'] ) : ?>
                             <div class="eael-product-list-excerpt">
