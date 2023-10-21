@@ -447,15 +447,15 @@ class Woo_Product_List extends Widget_Base
             );
         }
 
-        // $this->add_control('orderby', [
-        //     'label' => __('Order By', 'essential-addons-for-elementor-lite'),
-        //     'type' => Controls_Manager::SELECT,
-        //     'options' => $this->eael_get_product_orderby_options(),
-        //     'default' => 'date',
-        //     'condition' => [
-        //         'eael_product_grid_product_filter!' => [ 'best-selling-products', 'top-products' ],
-        //     ]
-        // ]);
+        $this->add_control('orderby', [
+            'label' => __('Order By', 'essential-addons-for-elementor-lite'),
+            'type' => Controls_Manager::SELECT,
+            'options' => $this->eael_get_product_orderby_options(),
+            'default' => 'date',
+            'condition' => [
+                // 'eael_product_grid_product_filter!' => [ 'best-selling-products', 'top-products' ],
+            ]
+        ]);
 
         $this->add_control( 'order', [
             'label'   => __( 'Order', 'essential-addons-for-elementor-lite' ),
@@ -2396,12 +2396,35 @@ class Woo_Product_List extends Widget_Base
             ],
         ];
 
+        // order by
+        if ( '_price' === $settings['orderby'] ) {
+            $args['orderby'] = 'meta_value_num';
+            $args['meta_key'] = '_price';
+        } else if ( '_sku' === $settings['orderby'] ) {
+            $args['orderby'] = 'meta_value meta_value_num';
+            $args['meta_key'] = '_sku';
+        } else {
+            $args['orderby'] = ! empty( $settings['orderby'] ) ? sanitize_text_field( $settings['orderby'] ) : 'date';
+        }
+
+        // categories
         if ( ! empty( $settings['eael_product_list_categories'] ) && is_array( $settings['eael_product_list_categories'] ) ) {
             $args['tax_query'][] = [
                 'taxonomy' => 'product_cat',
                 'field' => 'slug',
                 'terms' => $settings['eael_product_list_categories'],
                 'operator' => 'IN',
+            ];
+        }
+
+        $args['meta_query'] = [
+            'relation' => 'AND',
+        ];
+
+        if ( 'yes' === get_option( 'woocommerce_hide_out_of_stock_items' ) ) {
+            $args['meta_query'][] = [
+                'key' => '_stock_status',
+                'value' => 'instock'
             ];
         }
 
