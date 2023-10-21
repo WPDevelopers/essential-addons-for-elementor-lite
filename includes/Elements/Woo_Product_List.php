@@ -447,6 +447,16 @@ class Woo_Product_List extends Widget_Base
             );
         }
 
+        // $this->add_control('orderby', [
+        //     'label' => __('Order By', 'essential-addons-for-elementor-lite'),
+        //     'type' => Controls_Manager::SELECT,
+        //     'options' => $this->eael_get_product_orderby_options(),
+        //     'default' => 'date',
+        //     'condition' => [
+        //         'eael_product_grid_product_filter!' => [ 'best-selling-products', 'top-products' ],
+        //     ]
+        // ]);
+
         $this->add_control( 'order', [
             'label'   => __( 'Order', 'essential-addons-for-elementor-lite' ),
             'type'    => Controls_Manager::SELECT,
@@ -458,12 +468,50 @@ class Woo_Product_List extends Widget_Base
         ]);
 
         $this->add_control('eael_woo_product_list_products_count', [
-            'label' => __('Products Count', 'essential-addons-for-elementor-lite'),
+            'label' => __('Count', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::NUMBER,
             'default' => 4,
             'min' => 1,
             'max' => 1000,
             'step' => 1,
+            'separator' => 'before',
+        ]);
+
+        $this->add_control('product_offset', [
+            'label' => __('Offset', 'essential-addons-for-elementor-lite'),
+            'type' => Controls_Manager::NUMBER,
+            'default' => 0,
+            'condition' => [
+                // 'eael_product_grid_product_filter!' => 'manual'
+            ],
+        ]);
+
+        $this->add_control(
+            'eael_product_list_products_status',
+            [
+                'label' => __( 'Status', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SELECT2,
+                'label_block' => true,
+                'multiple' => true,
+                'default' => [ 'publish', 'pending', 'future' ],
+                'options' => $this->eael_get_product_statuses(),
+                // 'condition' => [
+                //     'eael_product_grid_product_filter!' => 'manual'
+                // ],
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control('eael_product_list_categories', [
+            'label' => esc_html__('Categories', 'essential-addons-for-elementor-lite'),
+            'type' => Controls_Manager::SELECT2,
+            'label_block' => true,
+            'multiple' => true,
+            'options' => ClassesHelper::get_terms_list('product_cat', 'slug'),
+            'condition'   => [
+              'post_type!' => 'source_dynamic',
+            //   'eael_product_grid_product_filter!' => 'manual'
+            ],
         ]);
 
         $this->end_controls_section();
@@ -2293,7 +2341,6 @@ class Woo_Product_List extends Widget_Base
 		
 		$woo_product_list 					= [];
 		$woo_product_list['layout'] 		= ! empty( $settings['eael_dynamic_template_layout'] ) ? $settings['eael_dynamic_template_layout'] : 'preset-1';
-		$woo_product_list['posts_per_page'] = ! empty( $settings['eael_woo_product_list_products_count'] ) ? intval( $settings['eael_woo_product_list_products_count'] ) : 4;
 		
         $woo_product_list['rating_show']    = ! empty( $settings['eael_woo_product_list_rating_show'] ) && 'yes' === $settings['eael_woo_product_list_rating_show'] ? 1 : 0;
 		$woo_product_list['countdown_show'] = ! empty( $settings['eael_woo_product_list_countdown_show'] ) && 'yes' === $settings['eael_woo_product_list_countdown_show'] ? 1 : 0;
@@ -2334,9 +2381,9 @@ class Woo_Product_List extends Widget_Base
     public function eael_prepare_product_query( $settings ) {
         $args = [
             'post_type'         => 'product',
-            'post_status'       => ! empty( $settings['products_status'] ) ? $settings['products_status'] : [ 'publish', 'pending', 'future' ],
-            'posts_per_page'    => ! empty( $settings['posts_per_page'] )  ? intval( $settings['posts_per_page'] ) : 4,
-            'order'             => ! empty( $settings['order'] )  ? sanitize_text_field( $settings['order'] ) : 'DESC',
+            'order'             => ! empty( $settings['order'] )  ? sanitize_text_field( $settings['order'] ) : 'desc',
+            'post_status'       => ! empty( $settings['eael_product_list_products_status'] ) ? $settings['eael_product_list_products_status'] : [ 'publish', 'pending', 'future' ],
+            'posts_per_page'    => ! empty( $settings['eael_woo_product_list_products_count'] )  ? intval( $settings['eael_woo_product_list_products_count'] ) : 4,
             'offset'            => ! empty( $settings['product_offset'] )  ? intval( $settings['product_offset'] ) : 0,
             'tax_query' => [
                 'relation' => 'AND',
@@ -2348,6 +2395,15 @@ class Woo_Product_List extends Widget_Base
                 ],
             ],
         ];
+
+        if ( ! empty( $settings['eael_product_list_categories'] ) && is_array( $settings['eael_product_list_categories'] ) ) {
+            $args['tax_query'][] = [
+                'taxonomy' => 'product_cat',
+                'field' => 'slug',
+                'terms' => $settings['eael_product_list_categories'],
+                'operator' => 'IN',
+            ];
+        }
 
         return $args;
     }
