@@ -447,13 +447,23 @@ class Woo_Product_List extends Widget_Base
             );
         }
 
+        $this->add_control('eael_product_list_product_filter', [
+            'label' => esc_html__('Filter By', 'essential-addons-for-elementor-lite'),
+            'type' => Controls_Manager::SELECT,
+            'default' => 'recent-products',
+            'options' => $this->eael_get_product_filterby_options(),
+            'condition' => [
+              'post_type!' => 'source_dynamic',
+            ],
+        ]);
+
         $this->add_control('orderby', [
             'label' => __('Order By', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::SELECT,
             'options' => $this->eael_get_product_orderby_options(),
             'default' => 'date',
             'condition' => [
-                // 'eael_product_grid_product_filter!' => [ 'best-selling-products', 'top-products' ],
+                'eael_product_list_product_filter!' => [ 'best-selling-products', 'top-products' ],
             ]
         ]);
 
@@ -465,6 +475,9 @@ class Woo_Product_List extends Widget_Base
                 'desc' => 'Descending',
             ],
             'default' => 'desc',
+            'condition' => [
+                'eael_product_list_product_filter!' => [ 'best-selling-products' ],
+            ]
         ]);
 
         $this->add_control('eael_woo_product_list_products_count', [
@@ -482,7 +495,7 @@ class Woo_Product_List extends Widget_Base
             'type' => Controls_Manager::NUMBER,
             'default' => 0,
             'condition' => [
-                // 'eael_product_grid_product_filter!' => 'manual'
+                'eael_product_list_product_filter!' => 'manual'
             ],
         ]);
 
@@ -495,9 +508,9 @@ class Woo_Product_List extends Widget_Base
                 'multiple' => true,
                 'default' => [ 'publish', 'pending', 'future' ],
                 'options' => $this->eael_get_product_statuses(),
-                // 'condition' => [
-                //     'eael_product_grid_product_filter!' => 'manual'
-                // ],
+                'condition' => [
+                    'eael_product_list_product_filter!' => 'manual'
+                ],
                 'separator' => 'before',
             ]
         );
@@ -510,7 +523,7 @@ class Woo_Product_List extends Widget_Base
             'options' => ClassesHelper::get_terms_list('product_cat', 'slug'),
             'condition'   => [
               'post_type!' => 'source_dynamic',
-            //   'eael_product_grid_product_filter!' => 'manual'
+              'eael_product_list_product_filter!' => 'manual'
             ],
         ]);
 
@@ -2421,11 +2434,46 @@ class Woo_Product_List extends Widget_Base
             'relation' => 'AND',
         ];
 
+        // stock settings
         if ( 'yes' === get_option( 'woocommerce_hide_out_of_stock_items' ) ) {
             $args['meta_query'][] = [
                 'key' => '_stock_status',
                 'value' => 'instock'
             ];
+        }
+
+        // filter by
+        switch( $settings['eael_product_list_product_filter'] ){
+            case 'featured-products':
+                $args['tax_query'][] = [
+                    'taxonomy' => 'product_visibility',
+                    'field' => 'name',
+                    'terms' => 'featured',
+                ];
+                break;
+
+            case 'best-selling-products':
+                $args['meta_key'] = 'total_sales';
+                $args['orderby'] = 'meta_value_num';
+                $args['order'] = 'desc';
+                break;
+                
+            case 'sale-products':
+                $args['post__in']  = array_merge( array( 0 ), wc_get_product_ids_on_sale() );
+                break;
+                
+            case 'top-products':
+                $args['meta_key'] = '_wc_average_rating';
+                $args['orderby'] = 'meta_value_num';
+                $args['order'] = 'desc';
+                break;
+            
+            case 'manual':
+                $args['post__in'] = ! empty( $settings['eael_product_list_products_in'] ) ? $settings['eael_product_list_products_in'] : [ 0 ];
+                break;
+
+            default:
+                break;
         }
 
         return $args;
