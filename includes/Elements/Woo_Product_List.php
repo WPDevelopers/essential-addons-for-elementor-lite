@@ -925,6 +925,14 @@ class Woo_Product_List extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_product_list_content_header_general_heading_style',
+            [
+                'label' => __('General', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
 		$this->add_responsive_control(
 			'eael_product_list_content_header_margin',
 			[
@@ -946,6 +954,70 @@ class Woo_Product_List extends Widget_Base
 				'selectors'  => [
 					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-content-header' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
+			]
+		);
+
+        $this->add_control(
+            'eael_product_list_content_header_countdown_heading_style',
+            [
+                'label' => __('Countdown', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+		$this->add_responsive_control(
+			'eael_product_list_content_header_countdown_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-countdown .eael-product-list-countdown-items' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_product_list_content_header_countdown_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-countdown .eael-product-list-countdown-items' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+        $this->add_control(
+			'eael_product_list_content_header_countdown_border_radius',
+			[
+				'label'     => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => [
+					'px' => [
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-countdown .eael-product-list-countdown-items' => 'border-radius: {{SIZE}}px;',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'     => 'eael_product_list_content_header_countdown_normal_border',
+				'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-countdown .eael-product-list-countdown-items',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'eael_product_list_content_header_countdown_normal_box_shadow',
+				'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-countdown .eael-product-list-countdown-items',
 			]
 		);
 
@@ -1062,6 +1134,34 @@ class Woo_Product_List extends Widget_Base
                 'separator' => 'before',
             ]
         );
+
+        $this->add_control(
+            'eael_product_list_content_footer_total_sold_heading_style',
+            [
+                'label' => __('Total Sold', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_control(
+			'eael_product_list_content_footer_total_sold_border_radius',
+			[
+				'label'     => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => [
+					'px' => [
+						'max' => 100,
+					],
+				],
+                'default'   => [
+					'size' => 100,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-progress .eael-product-list-progress-bar-outer' => 'border-radius: {{SIZE}}px;',
+					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-progress .eael-product-list-progress-bar-outer .eael-product-list-progress-bar-inner' => 'border-radius: {{SIZE}}px;',
+				],
+			]
+		);
 
         $this->add_control(
             'eael_product_list_content_footer_add_to_cart_heading_style',

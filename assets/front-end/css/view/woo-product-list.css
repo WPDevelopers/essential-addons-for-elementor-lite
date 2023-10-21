@@ -238,6 +238,35 @@
 .eael-product-list-wrapper .eael-product-list-notice.eael-product-list-notice-category p i {
   color: #897474;
 }
+.eael-product-list-wrapper .eael-product-list-countdown .eael-product-list-countdown-items {
+  margin: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px 14px;
+  border-radius: 4px;
+  list-style: none;
+}
+.eael-product-list-wrapper .eael-product-list-countdown .eael-product-list-countdown-items .eael-product-list-countdown-item:not(:last-child)::after {
+  content: ":";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  padding: 0 2px;
+  margin-right: 4px;
+}
+.eael-product-list-wrapper .eael-product-list-countdown .eael-product-list-countdown-items .eael-product-list-countdown-item .eael-product-list-countdown-number {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+}
+.eael-product-list-wrapper .eael-product-list-countdown .eael-product-list-countdown-items .eael-product-list-countdown-item .eael-product-list-countdown-title {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+}
 .eael-product-list-wrapper .eael-product-list-title {
   width: 100%;
 }
@@ -299,7 +328,6 @@
 }
 .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-progress .eael-product-list-progress-info .eael-product-list-progress-count,
 .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-progress .eael-product-list-progress-info .eael-product-list-progress-remaining {
-  color: #515151;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -308,18 +336,15 @@
 }
 .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-progress .eael-product-list-progress-info .eael-product-list-progress-count span,
 .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-progress .eael-product-list-progress-info .eael-product-list-progress-remaining span {
-  color: #343434;
   font-weight: 500;
 }
 .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-progress .eael-product-list-progress-bar-outer {
   width: 100%;
   height: 3px;
-  background: #EFE4E4;
   border-radius: 100px;
 }
 .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-progress .eael-product-list-progress-bar-outer .eael-product-list-progress-bar-inner {
   height: 3px;
-  background: #C29F9D;
   border-radius: 100px;
 }
 .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-buttons {
