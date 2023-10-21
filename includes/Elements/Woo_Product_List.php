@@ -277,7 +277,7 @@ class Woo_Product_List extends Widget_Base
 			'label_on'      => __( 'Show', 'essential-addons-for-elementor-lite' ),
 			'label_off'     => __( 'Hide', 'essential-addons-for-elementor-lite' ),
             'return_value'  => 'yes',
-            'default'       => 'yes',
+            'default'       => '',
             'condition'     => [
                 'eael_dynamic_template_layout' => 'preset-3',
             ]
@@ -1331,9 +1331,9 @@ class Woo_Product_List extends Widget_Base
                     'size' => 15,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .star-rating' => 'font-size: {{SIZE}}px !important;',
-                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .star-rating::before' => 'font-size: {{SIZE}}px !important;',
-                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .star-rating span::before' => 'font-size: {{SIZE}}px !important;',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .star-rating' => 'font-size: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .star-rating::before' => 'font-size: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .star-rating span::before' => 'font-size: {{SIZE}}px;',
                 ],
             ]
         );
@@ -1548,6 +1548,147 @@ class Woo_Product_List extends Widget_Base
                 'label' => __('Content Footer', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_color_typography_total_sold_heading',
+            [
+                'label' => __('Total Sold', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'conditions' => $this->total_sold_conditions(),
+            ]
+        );
+
+        $this->start_controls_tabs( 'eael_product_list_color_typography_total_sold_text_tabs' );
+        
+        $this->start_controls_tab( 
+            'eael_product_list_color_typography_total_sold_text',
+            [
+                'label' => esc_html__( 'Total Sold', 'essential-addons-for-elementor-lite' ),
+                'conditions' => $this->total_sold_conditions(),
+            ] 
+        );
+
+        $this->add_control(
+            'eael_product_list_color_typography_total_sold_color',
+            [
+                'label'     => esc_html__( 'Text', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#515151',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-progress .eael-product-list-progress-info .eael-product-list-progress-count' => 'color: {{VALUE}};',
+                ],
+                'conditions' => $this->total_sold_conditions(),
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_color_typography_total_sold_count_color',
+            [
+                'label'     => esc_html__( 'Count', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#343434',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-progress .eael-product-list-progress-info .eael-product-list-progress-count span' => 'color: {{VALUE}};',
+                ],
+                'conditions' => $this->total_sold_conditions(),
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->start_controls_tab( 
+            'eael_product_list_color_typography_total_sold_remaining_text',
+            [
+                'label' => esc_html__( 'Remaining', 'essential-addons-for-elementor-lite' ),
+                'conditions' => $this->total_sold_conditions(),
+            ] 
+        );
+
+        $this->add_control(
+            'eael_product_list_color_typography_total_sold_remaining_color',
+            [
+                'label'     => esc_html__( 'Text', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#515151',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-progress .eael-product-list-progress-info .eael-product-list-progress-remaining' => 'color: {{VALUE}};',
+                ],
+                'conditions' => $this->total_sold_conditions(),
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_color_typography_total_sold_remaining_count_color',
+            [
+                'label'     => esc_html__( 'Count', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#343434',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-progress .eael-product-list-progress-info .eael-product-list-progress-remaining span' => 'color: {{VALUE}};',
+                ],
+                'conditions' => $this->total_sold_conditions(),
+            ]
+        );
+        
+        $this->end_controls_tab();
+        
+        $this->end_controls_tabs();
+
+        $this->add_control(
+            'eael_product_list_color_typography_total_sold_progress_color',
+            [
+                'label'     => esc_html__( 'Progress Outer', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#EFE4E4',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-progress .eael-product-list-progress-bar-outer' => 'background: {{VALUE}};',
+                ],
+                'conditions' => $this->total_sold_conditions(),
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_color_typography_total_sold_progress_inner_color',
+            [
+                'label'     => esc_html__( 'Progress Inner', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#C29F9D',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-progress .eael-product-list-progress-bar-outer .eael-product-list-progress-bar-inner' => 'background: {{VALUE}};',
+                ],
+                'conditions' => $this->total_sold_conditions(),
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_product_list_color_typography_total_sold_progress_height',
+            [
+                'label' => esc_html__('Progress Height', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'max' => 50,
+                    ],
+                ],
+                'default' => [
+                    'size' => 3,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-progress .eael-product-list-progress-bar-outer' => 'height: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-progress .eael-product-list-progress-bar-outer .eael-product-list-progress-bar-inner' => 'height: {{SIZE}}px;',
+                ],
+                'conditions' => $this->total_sold_conditions(),
+            ]
+        );
+        
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_product_list_color_typography_total_sold_typography',
+                'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-progress .eael-product-list-progress-info .eael-product-list-progress-count, {{WRAPPER}} .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-progress .eael-product-list-progress-info .eael-product-list-progress-remaining',
+                'conditions' => $this->total_sold_conditions(),
             ]
         );
 
@@ -1911,6 +2052,27 @@ class Woo_Product_List extends Widget_Base
         
         return $conditions;
     }
+    
+    protected function total_sold_conditions(){
+        $conditions =   
+        [
+            'relation' => 'or',
+            'terms' => [
+                [
+                    'name' => 'eael_woo_product_list_total_sold_show',
+                    'operator' => '===',
+                    'value' => 'yes',
+                ],
+                [
+                    'name' => 'eael_woo_product_list_total_sold_preset_2_3_show',
+                    'operator' => '===',
+                    'value' => 'yes',
+                ],
+            ],
+        ];
+        
+        return $conditions;
+    }
 
     protected function eael_get_product_statuses() {
         return apply_filters( 'eael/woo-woo-product-list/product-statuses', [
@@ -1966,6 +2128,7 @@ class Woo_Product_List extends Widget_Base
 		$woo_product_list['posts_per_page'] = ! empty( $settings['eael_woo_product_list_products_count'] ) ? intval( $settings['eael_woo_product_list_products_count'] ) : 4;
 		
         $woo_product_list['rating_show']    = ! empty( $settings['eael_woo_product_list_rating_show'] ) && 'yes' === $settings['eael_woo_product_list_rating_show'] ? 1 : 0;
+		$woo_product_list['countdown_show'] = ! empty( $settings['eael_woo_product_list_countdown_show'] ) && 'yes' === $settings['eael_woo_product_list_countdown_show'] ? 1 : 0;
 		$woo_product_list['title_show']     = ! empty( $settings['eael_woo_product_list_title_show'] ) && 'yes' === $settings['eael_woo_product_list_title_show'] ? 1 : 0;
 		$woo_product_list['excerpt_show']   = ! empty( $settings['eael_woo_product_list_excerpt_show'] ) && 'yes' === $settings['eael_woo_product_list_excerpt_show'] ? 1 : 0;
 		$woo_product_list['price_show']     = ! empty( $settings['eael_woo_product_list_price_show'] ) && 'yes' === $settings['eael_woo_product_list_price_show'] ? 1 : 0;
