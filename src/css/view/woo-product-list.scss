@@ -299,6 +299,45 @@ $spacer-lg: $spacing5;
         }
     }
 
+    .eael-product-list-countdown {
+        .eael-product-list-countdown-items {
+            margin: 0;
+            display: flex;
+            padding: 10px 14px;
+            background: #FB812E;
+            border-radius: 4px;
+            list-style: none;
+
+            .eael-product-list-countdown-item {
+                &:not(:last-child)::after {
+                    content: ":";
+                    color: #FFEBCE;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 1;
+                    padding: 0 2px;
+                    margin-right: 4px;
+                }
+
+                .eael-product-list-countdown-number {
+                    color: #fff;
+                    font-size: 18px;
+                    font-weight: 600;
+                    line-height: 1;
+                }
+
+                .eael-product-list-countdown-title {
+                    color: #FFEBCE;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 1;
+                }
+            }
+        }
+    }
+
     // Content Body
     .eael-product-list-title {
         width: 100%;
@@ -358,7 +397,6 @@ $spacer-lg: $spacing5;
 
                 .eael-product-list-progress-count,
                 .eael-product-list-progress-remaining {
-                    color: #515151;
                     font-size: 16px;
                     font-style: normal;
                     font-weight: 400;
@@ -366,7 +404,6 @@ $spacer-lg: $spacing5;
                     margin: 0;
 
                     & span {
-                        color: #343434;
                         font-weight: 500;
                     }
                 }
@@ -375,12 +412,10 @@ $spacer-lg: $spacing5;
             .eael-product-list-progress-bar-outer {
                 width: 100%;
                 height: 3px;
-                background: #EFE4E4;
                 border-radius: 100px;
 
                 .eael-product-list-progress-bar-inner {
                     height: 3px;
-                    background: #C29F9D;
                     border-radius: 100px;
                 }
             }
