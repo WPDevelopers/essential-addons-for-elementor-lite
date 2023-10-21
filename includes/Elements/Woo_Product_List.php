@@ -527,6 +527,19 @@ class Woo_Product_List extends Widget_Base
             ],
         ]);
 
+        $this->add_control('eael_product_list_products_in', [
+            'label' => esc_html__('Select Products', 'essential-addons-for-elementor-lite'),
+            'type'        => 'eael-select2',
+            'label_block' => true,
+            'multiple' => true,
+            'source_name' => 'post_type',
+            'source_type' => 'product',
+            'condition'   => [
+                'post_type!' => 'source_dynamic',
+                'eael_product_list_product_filter' => 'manual'
+            ],
+        ]);
+
         $this->end_controls_section();
     }
 
