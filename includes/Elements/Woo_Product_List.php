@@ -135,8 +135,8 @@ class Woo_Product_List extends Widget_Base
         $this->eael_product_list_query();
         $this->eael_product_list_image();
         $this->eael_product_list_content();
-        $this->eael_product_list_popup();
-        $this->eael_product_list_carousel();
+        // $this->eael_product_list_popup();
+        // $this->eael_product_list_carousel();
 
         $this->eael_product_list_container_style();
         $this->eael_product_list_item_style();
