@@ -1518,6 +1518,20 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
+	    $this->add_control(
+		    'eael_ec_table_body_style_notice',
+		    [
+			    'label'     => '',
+			    'type'      => \Elementor\Controls_Manager::RAW_HTML,
+			    'raw'       => esc_html__( 'Note: Please reset colors from the Event section before applying styles here. ', 'essential-addons-for-elementor-lite' ),
+			    'separator' => 'before',
+                'content_classes' => 'eael-warning',
+			    'condition' => [
+				    'eael_event_calendar_type'  => 'manual'
+			    ]
+		    ]
+	    );
+
         $this->start_controls_tabs(
             'eael_ec_table_body_style_tabs'
         );
