@@ -376,4 +376,5 @@
           text-decoration-line: underline;
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
+  cursor: pointer;
 }
