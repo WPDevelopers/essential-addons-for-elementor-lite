@@ -481,7 +481,7 @@ class WPDeveloper_Setup_Wizard {
 				'basename' => 'better-payment/better-payment.php',
 				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/bp.svg',
 				'title'    => __( 'Better Payment', 'essential-addons-for-elementor-lite' ),
-				'desc'     => __( 'Make instant payment with one click through Better Payment. It offers seamless integrations with Elementor and allows you to get payment through PayPal and Stripe.', 'essential-addons-for-elementor-lite' ),
+				'desc'     => __( 'Better Payment streamlines transactions in Elementor, integrating PayPal, Stripe, advanced analytics, validation, and Elementor forms for the most secure & efficient payments.', 'essential-addons-for-elementor-lite' ),
 			],
 		];
 	}
