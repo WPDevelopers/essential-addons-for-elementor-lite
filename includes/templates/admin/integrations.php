@@ -49,6 +49,13 @@ $integrations = [
 		'title'    => __( 'Essential Blocks', 'essential-addons-for-elementor-lite' ),
 		'desc'     => __( 'Enhance your Gutenberg experience with 40+ unique blocks (more coming soon). Add power to the block editor using our easy-to-use blocks which are designed to make your next WordPress page or posts design easier and prettier than ever before.', 'essential-addons-for-elementor-lite' ),
 	],
+	[
+		'slug'     => 'better-payment',
+		'basename' => 'better-payment/better-payment.php',
+		'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/bp.svg',
+		'title'    => __( 'Better Payment', 'essential-addons-for-elementor-lite' ),
+		'desc'     => __( 'Make instant payment with one click through Better Payment. It offers seamless integrations with Elementor and allows you to get payment through PayPal and Stripe.', 'essential-addons-for-elementor-lite' ),
+	],
 ];
 ?>
 
