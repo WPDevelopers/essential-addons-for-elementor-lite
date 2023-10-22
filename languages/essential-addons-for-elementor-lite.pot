@@ -307,51 +307,51 @@ msgid "EmbedPress lets you embed videos, images, posts, audio, maps and upload P
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:448, ../includes/templates/admin/integrations.php:21
-msgid "ReviewX"
-msgstr ""
-
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:449, ../includes/templates/admin/integrations.php:22
-msgid "ReviewX lets you get instant customer ratings and multi criteria reviews to add credibility to your WooCommerce Store and increase conversion rates."
-msgstr ""
-
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:455, ../includes/templates/admin/integrations.php:28
 msgid "NotificationX"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:456, ../includes/templates/admin/integrations.php:29
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:449, ../includes/templates/admin/integrations.php:22
 msgid "Best FOMO Social Proof Plugin to boost your sales conversion. Create stunning Sales Popup & Notification Bar With Elementor Support."
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:462, ../includes/templates/admin/integrations.php:35
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:455, ../includes/templates/admin/integrations.php:28
 msgid "easy.jobs"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:463, ../includes/templates/admin/integrations.php:36
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:456, ../includes/templates/admin/integrations.php:29
 msgid "Easy solution for the job recruitment to attract, manage & hire right talent faster. The Best Talent Recruitment Suite which lets you manage jobs & career page in Elementor."
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:469, ../includes/templates/admin/integrations.php:42
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:462, ../includes/templates/admin/integrations.php:35
 msgid "SchedulePress"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:470, ../includes/templates/admin/integrations.php:43
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:463, ../includes/templates/admin/integrations.php:36
 msgid "Best Content Marketing Tool For WordPress – Schedule, Organize, & Auto Share Blog Posts. Take a quick glance at your content planning with Schedule Calendar, Auto & Manual Scheduler and  more."
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:476, ../includes/templates/admin/integrations.php:49
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:469, ../includes/templates/admin/integrations.php:42
 msgid "BetterLinks"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:477, ../includes/templates/admin/integrations.php:50
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:470, ../includes/templates/admin/integrations.php:43
 msgid "Best Link Shortening tool to create, shorten and manage any URL to help you cross-promote your brands & products. Gather analytics reports, run successfully marketing campaigns easily & many more."
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:483, ../includes/Traits/Helper.php:560, ../includes/templates/admin/integrations.php:56
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:476, ../includes/Traits/Helper.php:560, ../includes/templates/admin/integrations.php:49
 msgid "Essential Blocks"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:484, ../includes/templates/admin/integrations.php:57
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:477, ../includes/templates/admin/integrations.php:50
 msgid "Enhance your Gutenberg experience with 40+ unique blocks (more coming soon). Add power to the block editor using our easy-to-use blocks which are designed to make your next WordPress page or posts design easier and prettier than ever before."
+msgstr ""
+
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:483, ../includes/Elements/Better_Payment.php:19, ../includes/templates/admin/integrations.php:56
+msgid "Better Payment"
+msgstr ""
+
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:484, ../includes/templates/admin/integrations.php:57
+msgid "Better Payment streamlines transactions in Elementor, integrating PayPal, Stripe, advanced analytics, validation, and Elementor forms for the most secure & efficient payments."
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:590, ../includes/templates/admin/elements.php:5
@@ -1488,10 +1488,6 @@ msgstr ""
 
 #: ../includes/Elements/Betterdocs_Search_Form.php:423, ../includes/Elements/Betterdocs_Search_Form.php:472, ../includes/Elements/Betterdocs_Search_Form.php:533, ../includes/Elements/Betterdocs_Search_Form.php:562
 msgid "Item Color"
-msgstr ""
-
-#: ../includes/Elements/Better_Payment.php:19
-msgid "Better Payment"
 msgstr ""
 
 #: ../includes/Elements/Better_Payment.php:52
