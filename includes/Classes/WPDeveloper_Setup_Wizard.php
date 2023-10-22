@@ -283,7 +283,7 @@ class WPDeveloper_Setup_Wizard {
                          alt="<?php _e( 'Go Pro Logo', 'essential-addons-for-elementor-lite' ); ?>">
                 </div>
                 <h2 class="eael-quick-setup-title">
-					<?php _e( 'Enhance Your Elementor Experience By Unlocking 30+ Advanced PRO Elements', 'essential-addons-for-elementor-lite' ); ?>
+					<?php _e( 'Enhance Your Elementor Experience By Unlocking 35+ Advanced PRO Elements', 'essential-addons-for-elementor-lite' ); ?>
                 </h2>
             </div>
             <div class="eael-quick-setup-input-group">
