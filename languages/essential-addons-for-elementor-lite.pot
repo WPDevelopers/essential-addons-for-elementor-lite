@@ -222,7 +222,7 @@ msgid "View All"
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:286, ../includes/templates/admin/go-pro.php:8
-msgid "Enhance Your Elementor Experience By Unlocking 30+ Advanced PRO Elements"
+msgid "Enhance Your Elementor Experience By Unlocking 35+ Advanced PRO Elements"
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:305, ../includes/templates/admin/go-pro.php:161
