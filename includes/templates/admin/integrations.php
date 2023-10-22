@@ -15,13 +15,6 @@ $integrations = [
 		'desc'     => __( 'EmbedPress lets you embed videos, images, posts, audio, maps and upload PDF, DOC, PPT & all other types of content into your WordPress site. ', 'essential-addons-for-elementor-lite' ),
 	],
 	[
-		'slug'     => 'reviewx',
-		'basename' => 'reviewx/reviewx.php',
-		'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/rx.svg',
-		'title'    => __( 'ReviewX', 'essential-addons-for-elementor-lite' ),
-		'desc'     => __( 'ReviewX lets you get instant customer ratings and multi criteria reviews to add credibility to your WooCommerce Store and increase conversion rates.', 'essential-addons-for-elementor-lite' ),
-	],
-	[
 		'slug'     => 'notificationx',
 		'basename' => 'notificationx/notificationx.php',
 		'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/nx.svg',
