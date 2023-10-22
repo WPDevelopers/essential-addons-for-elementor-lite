@@ -382,7 +382,7 @@ $elements = [
 				'key'       => 'fancy-chart',
 				'title'     => __( 'Fancy Chart', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/fancy-chart/',
-				'doc_link'  => 'https://essential-addons.com/elementor/docs/fancy-chart/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-fancy-chart/',
 				'promotion' => 'new',
 				'is_pro'    => true
 			]
