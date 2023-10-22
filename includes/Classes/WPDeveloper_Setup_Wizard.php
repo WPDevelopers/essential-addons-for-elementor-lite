@@ -733,10 +733,10 @@ class WPDeveloper_Setup_Wizard {
                         'preferences' => 'advance',
                     ],
 					[
-                        'key'         => 'fancy-chart',
-                        'title'       => __( 'Fancy Chart', 'essential-addons-for-elementor-lite' ),
-                        'preferences' => 'advance',
-                    ],
+						'key'         => 'fancy-chart',
+						'title'       => __( 'Fancy Chart', 'essential-addons-for-elementor-lite' ),
+						'preferences' => 'advance',
+					],
 				]
 			],
 			'marketing-elements'       => [
