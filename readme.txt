@@ -253,6 +253,10 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+= 5.8.12 - 22/10/2023 =
+
+- Few minor bug fixes & improvements
+
 = 5.8.11 - 09/10/2023 =
 
 - Fixed: EA Fancy Text | Animation Type option not working
