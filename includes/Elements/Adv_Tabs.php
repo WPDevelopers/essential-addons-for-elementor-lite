@@ -1001,7 +1001,7 @@ class Adv_Tabs extends Widget_Base
         $this->add_render_attribute('eael_tab_icon_position', 'role', 'tablist'); 
         ?>
         <div <?php echo $this->get_render_attribute_string('eael_tab_wrapper'); ?>>
-            <div class="eael-tabs-nav">
+            <div class="eael-tabs-nav" role="tablist">
                 <ul <?php echo $this->get_render_attribute_string('eael_tab_icon_position'); ?>>
                     <?php foreach ($settings['eael_adv_tabs_tab'] as $index => $tab) :
 	                    $tab_id = $tab['eael_adv_tabs_tab_id'] ? $tab['eael_adv_tabs_tab_id'] : Helper::str_to_css_id( $tab['eael_adv_tabs_tab_title'] );
