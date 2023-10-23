@@ -9,6 +9,10 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 } // Exit if accessed directly
 
+if ( empty( $woo_product_list ) ) {
+    $woo_product_list = Woo_Product_List::get_woo_product_list_settings( $settings );
+}
+
 $product = wc_get_product( get_the_ID() );
 if ( ! $product ) {
     error_log( '$product not found in ' . __FILE__ );
@@ -16,7 +20,7 @@ if ( ! $product ) {
 }
 
 $quick_view_setting = [
-    'widget_id'     => $widget_id,
+    'widget_id'     => $settings['eael_widget_id'],
     'product_id'    => $product->get_id(),
     'page_id'       => $settings['eael_page_id'],
 ];
