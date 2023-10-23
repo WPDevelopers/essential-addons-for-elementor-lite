@@ -137,11 +137,13 @@ class Woo_Product_List extends Widget_Base
         $this->eael_product_list_content();
         // $this->eael_product_list_popup();
         // $this->eael_product_list_carousel();
+        $this->eael_product_list_load_more();
 
         $this->eael_product_list_container_style();
         $this->eael_product_list_item_style();
         $this->eael_product_list_item_content_style();
         $this->eael_product_list_popup_style();
+        do_action('eael/controls/load_more_button_style', $this);
         $this->eael_product_list_color_typography_style();
     }
 
@@ -783,6 +785,36 @@ class Woo_Product_List extends Widget_Base
     protected function eael_product_list_carousel() {
         $this->start_controls_section('eael_section_woo_product_list_carousel', [
             'label' => esc_html__('Carousel', 'essential-addons-for-elementor-lite'),
+        ]);
+
+        $this->end_controls_section();
+    }
+    
+    protected function eael_product_list_load_more() {
+        $this->start_controls_section('eael_section_woo_product_list_load_more', [
+            'label' => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
+        ]);
+
+        $this->add_control('show_load_more', [
+            'label' => __('Show Load More', 'essential-addons-for-elementor-lite'),
+            'type' => Controls_Manager::SWITCHER,
+            'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
+            'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+            'return_value' => 'true',
+            'default' => '',
+        ]);
+
+        $this->add_control('show_load_more_text', [
+            'label' => esc_html__('Label Text', 'essential-addons-for-elementor-lite'),
+            'type' => Controls_Manager::TEXT,
+            'label_block' => false,
+            'default' => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
+            'condition' => [
+                'show_load_more' => 'true',
+            ],
+            'ai' => [
+                'active' => false,
+            ],
         ]);
 
         $this->end_controls_section();
@@ -2687,7 +2719,7 @@ class Woo_Product_List extends Widget_Base
 	    });
     }
 
-    protected function eael_get_product_title_html( $woo_product_list, $product ){
+    public static function eael_get_product_title_html( $woo_product_list, $product ){
         if ( $woo_product_list['title_show'] ) : ?>
             <<?php echo $woo_product_list['title_tag'];  ?> class="eael-product-list-title">
                 <?php if ( $woo_product_list['title_clickable'] ) : ?>
@@ -2702,7 +2734,7 @@ class Woo_Product_List extends Widget_Base
         endif;
     }
 
-    protected function get_product_category_name( $product_id ){
+    public static function eael_get_product_category_name( $product_id ){
         $terms = get_the_terms( $product_id, 'product_cat' );
         if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
             return 'uncategorized' !== $terms[0]->slug ? $terms[0]->name : '';
@@ -2770,7 +2802,7 @@ class Woo_Product_List extends Widget_Base
             ],
         ];
 
-        // order by
+        // Order by
         if ( '_price' === $settings['orderby'] ) {
             $args['orderby'] = 'meta_value_num';
             $args['meta_key'] = '_price';
@@ -2781,7 +2813,7 @@ class Woo_Product_List extends Widget_Base
             $args['orderby'] = ! empty( $settings['orderby'] ) ? sanitize_text_field( $settings['orderby'] ) : 'date';
         }
 
-        // categories
+        // Categories
         if ( ! empty( $settings['eael_product_list_categories'] ) && is_array( $settings['eael_product_list_categories'] ) ) {
             $args['tax_query'][] = [
                 'taxonomy' => 'product_cat',
@@ -2795,7 +2827,7 @@ class Woo_Product_List extends Widget_Base
             'relation' => 'AND',
         ];
 
-        // stock settings
+        // Stock settings
         if ( 'yes' === get_option( 'woocommerce_hide_out_of_stock_items' ) ) {
             $args['meta_query'][] = [
                 'key' => '_stock_status',
@@ -2803,7 +2835,7 @@ class Woo_Product_List extends Widget_Base
             ];
         }
 
-        // filter by
+        // Filter by
         switch( $settings['eael_product_list_product_filter'] ){
             case 'featured-products':
                 $args['tax_query'][] = [
@@ -2854,38 +2886,50 @@ class Woo_Product_List extends Widget_Base
         if ( Plugin::$instance->documents->get_current() ) {
             $this->page_id = Plugin::$instance->documents->get_current()->get_main_id();
         }
-
-        $this->add_render_attribute( 'eael-product-list-content-header', [
-			'class' => [
-				'eael-product-list-content-header',
-				$woo_product_list['content_header_direction_rtl'] ? 'eael-direction-rtl' : '',
-			],
-		] );
         ?>
 
-        <div>
-            <?php
-            do_action( 'eael/woo-product-list/before-product-loop' );
+        <div class="eael-product-list-wrapper <?php echo esc_attr( $woo_product_list['layout'] ) ?>">
+            <div class="eael-product-list-body woocommerce">
+                <div class="eael-product-list-container">
+                    <?php
+                    do_action( 'eael/woo-product-list/before-product-loop' );
 
-			$template                       = $this->get_template( $woo_product_list[ 'layout' ] );
-            $settings['loadable_file_name'] = $this->get_filename_only( $template );
+                    $template                       = $this->get_template( $woo_product_list['layout'] );
+                    $settings['loadable_file_name'] = $this->get_filename_only( $template );
+                    $dir_name                       = $this->get_temp_dir_name( $settings['loadable_file_name'] );
+                    $found_posts                    = 0;
 
-			if ( file_exists( $template ) ) {
-                $query  = new \WP_Query( $args );
+                    if ( file_exists( $template ) ) {
+                        $query  = new \WP_Query( $args );
 
-                if ( $query->have_posts() ) {
-                    $settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
+                        if ( $query->have_posts() ) {
+                            $settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
+                            $found_posts    = $query->found_posts;
+                            $max_page           = ceil( $found_posts / absint( $args['posts_per_page'] ) );
+                            $args['max_page']   = $max_page;
+                            $args['total_post'] = $found_posts;
 
-                    include( realpath( $template ) );
-                } else {
-                    _e( '<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite' );
-                }
-            } else {
-				_e( '<p class="eael-no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
-            }
+                            while ( $query->have_posts() ) {
+                                $query->the_post();
+                                include( realpath( $template ) );
+                            }
+                            wp_reset_postdata();
+                        } else {
+                            _e( '<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite' );
+                        }
+                    } else {
+                        _e( '<p class="eael-no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
+                    }
 
-            do_action( 'eael/woo-product-list/after-product-loop' );
-			?>
+                    do_action( 'eael/woo-product-list/after-product-loop' );
+
+                    if ( ! empty( $args['posts_per_page'] ) && $found_posts > $args['posts_per_page'] ) {
+                        $this->print_load_more_button( $settings, $args, $dir_name );
+                    }
+
+                    ?>
+                </div>
+            </div>
         </div>
 
 		<?php
