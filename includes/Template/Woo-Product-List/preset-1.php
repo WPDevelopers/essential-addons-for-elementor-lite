@@ -61,14 +61,13 @@ if ( ! defined( 'ABSPATH' ) ) {
                     </div>
 
                     <div class="eael-product-list-content-wrap">
-                        <div <?php $this->print_render_attribute_string('eael-product-list-content-header'); ?> >
-                            
-                            <?php 
-                            if ( 'after-title' === $woo_product_list['content_header_position'] ) :
-                                $this->eael_get_product_title_html( $woo_product_list, $product );
-                            endif; 
-                            ?>
+                        <?php 
+                        if ( 'after-title' === $woo_product_list['content_header_position'] ) :
+                            $this->eael_get_product_title_html( $woo_product_list, $product );
+                        endif; 
+                        ?>
 
+                        <div <?php $this->print_render_attribute_string('eael-product-list-content-header'); ?> >
                             <?php if ( $woo_product_list['rating_show'] ) : ?>
                             <div class="eael-product-list-rating">
                                 <?php echo wp_kses_post( wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) ); ?>
@@ -76,7 +75,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                             <?php endif; ?>
                             
                             <div class="eael-product-list-notice eael-product-list-notice-shiping-free">
-                                <p><i class="fa-solid fa-box"></i> Free Shipping</p>
+                                <p><?php echo esc_html( $this->get_product_category_name( $product->get_id() ) ); ?></p>
                             </div>
                         </div>
                         <div class="eael-product-list-content-body">
