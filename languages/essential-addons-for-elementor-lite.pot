@@ -2583,7 +2583,7 @@ msgid "Sample Call to Action Heading"
 msgstr ""
 
 #: ../includes/Elements/Cta_Box.php:286
-msgid "Add a strong one liner supporting the heading above and giving users a reason to click on the button below."
+msgid "<p>Add a strong one liner supporting the heading above and giving users a reason to click on the button below.</p>"
 msgstr ""
 
 #: ../includes/Elements/Cta_Box.php:298
