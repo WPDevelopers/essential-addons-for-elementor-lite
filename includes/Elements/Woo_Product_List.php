@@ -183,13 +183,13 @@ class Woo_Product_List extends Widget_Base
             ]
         );
 
-        $this->add_control('eael_woo_product_list_load_more_show', [
+        $this->add_control('show_load_more', [
             'label' => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::SWITCHER,
 			'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
 			'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
             'return_value' => 'yes',
-            'default' => 'yes',
+            'default' => '',
         ]);
         
         $this->add_control(
@@ -781,17 +781,17 @@ class Woo_Product_List extends Widget_Base
         $this->start_controls_section('eael_section_woo_product_list_load_more', [
             'label' => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
             'condition' => [
-                'eael_woo_product_list_load_more_show' => 'yes',
+                'show_load_more' => 'yes',
             ],
         ]);
 
-        $this->add_control('load_more_button_text', [
+        $this->add_control('show_load_more_text', [
             'label' => esc_html__('Button Text', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::TEXT,
             'label_block' => false,
             'default' => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
             'condition' => [
-                'eael_woo_product_list_load_more_show' => 'yes',
+                'show_load_more' => 'yes',
             ],
             'ai' => [
                 'active' => false,
@@ -2735,7 +2735,7 @@ class Woo_Product_List extends Widget_Base
 		$woo_product_list['add_to_cart_button_show']        = ! empty( $settings['eael_woo_product_list_add_to_cart_button_show'] ) && 'yes' === $settings['eael_woo_product_list_add_to_cart_button_show'] ? 1 : 0;
 		$woo_product_list['quick_view_button_show']         = ! empty( $settings['eael_woo_product_list_quick_view_button_show'] ) && 'yes' === $settings['eael_woo_product_list_quick_view_button_show'] ? 1 : 0;
 		$woo_product_list['link_button_show']               = ! empty( $settings['eael_woo_product_list_link_button_show'] ) && 'yes' === $settings['eael_woo_product_list_link_button_show'] ? 1 : 0;
-		$woo_product_list['load_more_show']                 = ! empty( $settings['eael_woo_product_list_load_more_show'] ) && 'yes' === $settings['eael_woo_product_list_load_more_show'] ? 1 : 0;
+		$woo_product_list['show_load_more']                 = ! empty( $settings['show_load_more'] ) && 'yes' === $settings['show_load_more'] ? 1 : 0;
 		
 		$woo_product_list['image_size']                     = ! empty( $settings['eael_product_list_image_size_size'] ) ? esc_html( $settings['eael_product_list_image_size_size'] ) : esc_html( 'medium' );
 		$woo_product_list['image_clickable']                = ! empty( $settings['eael_product_list_image_clickable'] ) && 'yes' === $settings['eael_product_list_image_clickable'] ? 1 : 0;
@@ -2746,8 +2746,7 @@ class Woo_Product_List extends Widget_Base
 		$woo_product_list['title_clickable']                = ! empty( $settings['eael_product_list_content_body_title_clickable'] ) && 'yes' === $settings['eael_product_list_content_body_title_clickable'] ? 1 : 0;
 		$woo_product_list['excerpt_words_count']            = ! empty( $settings['eael_product_list_content_body_excerpt_words_count'] ) ? intval( $settings['eael_product_list_content_body_excerpt_words_count'] ) : 30;
 		$woo_product_list['excerpt_expanison_indicator']    = ! empty( $settings['eael_product_list_content_body_excerpt_expanison_indicator'] ) ? esc_html( $settings['eael_product_list_content_body_excerpt_expanison_indicator'] ) : esc_html('...');
-		$woo_product_list['load_more_button_text']          = ! empty( $settings['load_more_button_text'] ) ? esc_html( $settings['load_more_button_text'] ) : esc_html__('Load More', 'essential-addons-for-elementor-lite');
-
+		
         if( 'preset-2' === $woo_product_list['layout'] ){
 		    $woo_product_list['content_header_direction_rtl']   = ! empty( $settings['eael_product_list_content_header_direction_preset_2'] ) && 'rtl' === $settings['eael_product_list_content_header_direction_preset_2'] ? 1 : 0;
         }
@@ -2873,8 +2872,6 @@ class Woo_Product_List extends Widget_Base
                     $settings['eael_widget_id']  = $this->get_id();
                     $settings['eael_page_id']    = Plugin::$instance->documents->get_current() ? Plugin::$instance->documents->get_current()->get_main_id() : get_the_ID();
                     $settings['layout_mode']            = $woo_product_list['layout'];
-                    $settings['show_load_more']         = $woo_product_list['load_more_show'];
-                    $settings['show_load_more_text']    = $woo_product_list['load_more_button_text'];
                     $template                           = $this->get_template( $settings['layout_mode'] );
                     $settings['loadable_file_name']     = $this->get_filename_only( $template );
                     $dir_name                           = $this->get_temp_dir_name( $settings['loadable_file_name'] );
@@ -2904,14 +2901,12 @@ class Woo_Product_List extends Widget_Base
                     }
 
                     do_action( 'eael/woo-product-list/after-product-loop' );
+
+                    if ( ! empty( $args['posts_per_page'] ) && $found_posts > $args['posts_per_page'] ) {
+                        $this->print_load_more_button( $settings, $args, $dir_name );
+                    }
                     ?>
                 </div>
-
-                <?php 
-                if ( ! empty( $args['posts_per_page'] ) && $found_posts > $args['posts_per_page'] ) {
-                    $this->print_load_more_button( $settings, $args, $dir_name );
-                }
-                ?>
             </div>
         </div>
 
