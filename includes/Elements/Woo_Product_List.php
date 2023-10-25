@@ -639,25 +639,6 @@ class Woo_Product_List extends Widget_Base
                     'ltr'        => esc_html__( 'Left to Right', 'essential-addons-for-elementor-lite' ),
                     'rtl' => esc_html__( 'Right to Left', 'essential-addons-for-elementor-lite' ),
                 ],
-                'condition' => [
-				    'eael_dynamic_template_layout!' => 'preset-2',
-			    ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_product_list_content_header_direction_preset_2',
-            [
-                'label'   => __( 'Direction', 'essential-addons-for-elementor-lite' ),
-                'type'    => Controls_Manager::SELECT,
-                'default' => 'rtl',
-                'options' => [
-                    'ltr'        => esc_html__( 'Left to Right', 'essential-addons-for-elementor-lite' ),
-                    'rtl' => esc_html__( 'Right to Left', 'essential-addons-for-elementor-lite' ),
-                ],
-                'condition' => [
-				    'eael_dynamic_template_layout' => 'preset-2',
-			    ],
             ]
         );
 
@@ -755,6 +736,70 @@ class Woo_Product_List extends Widget_Base
                 'label' => __('Content Footer', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_content_footer_total_sold_heading',
+            [
+                'label'         => __('Total Sold', 'essential-addons-for-elementor-lite'),
+                'type'          => Controls_Manager::HEADING,
+                'conditions'    => $this->total_sold_conditions(),
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_content_footer_total_sold_text', 
+            [
+                'label'         => esc_html__('Total Sold Text', 'essential-addons-for-elementor-lite'),
+                'type'          => Controls_Manager::TEXT,
+                'label_block'   => false,
+                'default'       => esc_html__('Total Sold:', 'essential-addons-for-elementor-lite'),
+                'conditions'    => $this->total_sold_conditions(),
+                'ai'            => [
+                    'active' => false,
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_content_footer_total_sold_remaining_text', 
+            [
+                'label'         => esc_html__('Remaining Text', 'essential-addons-for-elementor-lite'),
+                'type'          => Controls_Manager::TEXT,
+                'label_block'   => false,
+                'default'       => esc_html__('Remaining:', 'essential-addons-for-elementor-lite'),
+                'conditions'    => $this->total_sold_conditions(),
+                'ai'            => [
+                    'active' => false,
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_content_footer_quick_view_heading',
+            [
+                'label'         => __('Quick View', 'essential-addons-for-elementor-lite'),
+                'type'          => Controls_Manager::HEADING,
+                'condition'     => [
+                    'eael_woo_product_list_quick_view_button_show' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_content_footer_quick_view_text', 
+            [
+                'label'         => esc_html__('Quick View Text', 'essential-addons-for-elementor-lite'),
+                'type'          => Controls_Manager::TEXT,
+                'label_block'   => false,
+                'default'       => esc_html__('View Product', 'essential-addons-for-elementor-lite'),
+                'condition'     => [
+                    'eael_woo_product_list_quick_view_button_show' => 'yes',
+                ],
+                'ai'            => [
+                    'active' => false,
+                ],
             ]
         );
 
@@ -2746,10 +2791,9 @@ class Woo_Product_List extends Widget_Base
 		$woo_product_list['title_clickable']                = ! empty( $settings['eael_product_list_content_body_title_clickable'] ) && 'yes' === $settings['eael_product_list_content_body_title_clickable'] ? 1 : 0;
 		$woo_product_list['excerpt_words_count']            = ! empty( $settings['eael_product_list_content_body_excerpt_words_count'] ) ? intval( $settings['eael_product_list_content_body_excerpt_words_count'] ) : 30;
 		$woo_product_list['excerpt_expanison_indicator']    = ! empty( $settings['eael_product_list_content_body_excerpt_expanison_indicator'] ) ? esc_html( $settings['eael_product_list_content_body_excerpt_expanison_indicator'] ) : esc_html('...');
-		
-        if( 'preset-2' === $woo_product_list['layout'] ){
-		    $woo_product_list['content_header_direction_rtl']   = ! empty( $settings['eael_product_list_content_header_direction_preset_2'] ) && 'rtl' === $settings['eael_product_list_content_header_direction_preset_2'] ? 1 : 0;
-        }
+		$woo_product_list['total_sold_text']                = ! empty( $settings['eael_product_list_content_footer_total_sold_text'] ) ? esc_html( $settings['eael_product_list_content_footer_total_sold_text'] ) : esc_html('Total Sold:');
+		$woo_product_list['total_sold_remaining_text']      = ! empty( $settings['eael_product_list_content_footer_total_sold_remaining_text'] ) ? esc_html( $settings['eael_product_list_content_footer_total_sold_remaining_text'] ) : esc_html('Remaining:');
+		$woo_product_list['quick_view_text']                = ! empty( $settings['eael_product_list_content_footer_quick_view_text'] ) ? esc_html( $settings['eael_product_list_content_footer_quick_view_text'] ) : esc_html('View Product');
         
         if( 'preset-2' === $woo_product_list['layout'] || 'preset-3' === $woo_product_list['layout'] ){
             $woo_product_list['content_header_position']    = ! empty( $settings['eael_product_list_content_header_position_preset_3'] ) ? esc_html( $settings['eael_product_list_content_header_position_preset_3'] ) : esc_html( 'after-title' );

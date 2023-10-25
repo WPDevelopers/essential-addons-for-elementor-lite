@@ -26,6 +26,8 @@ $quick_view_setting = [
 ];
 
 $direction_rtl_class = $woo_product_list['content_header_direction_rtl'] ? 'eael-direction-rtl' : '';
+$total_sales_count      = get_post_meta( $product->get_id(), 'total_sales', true );
+$stock_quantity_count   = $product->get_stock_quantity();
 ?>
 <div class="eael-product-list-item">
     <div class="eael-product-list-image-wrap">
@@ -126,7 +128,7 @@ $direction_rtl_class = $woo_product_list['content_header_direction_rtl'] ? 'eael
                 <?php if ( $woo_product_list['total_sold_show'] ) : ?>
                 <div class="eael-product-list-progress">
                     <div class="eael-product-list-progress-info">
-                        <h4 class="eael-product-list-progress-count">Total Sold: <span>50</span></h4>
+                        <h4 class="eael-product-list-progress-count"><?php esc_html_e( $woo_product_list['total_sold_text'], 'essential-addons-for-elementor-lite' ); ?> <span><?php echo esc_html( $total_sales_count ); ?></span></h4>
                     </div>
                     <div class="eael-product-list-progress-bar-outer">
                         <div style="width: 80%;" class="eael-product-list-progress-bar-inner"></div>
