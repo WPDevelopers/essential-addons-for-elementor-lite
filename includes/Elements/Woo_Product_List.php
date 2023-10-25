@@ -249,18 +249,6 @@ class Woo_Product_List extends Widget_Base
             ]
         ]);
 
-        $this->add_control('eael_woo_product_list_countdown_show', [
-            'label' => esc_html__('Countdown', 'essential-addons-for-elementor-lite'),
-            'type' => Controls_Manager::SWITCHER,
-			'label_on'      => __( 'Show', 'essential-addons-for-elementor-lite' ),
-			'label_off'     => __( 'Hide', 'essential-addons-for-elementor-lite' ),
-            'return_value'  => 'yes',
-            'default'       => '',
-            'condition'     => [
-                'eael_dynamic_template_layout' => 'preset-3',
-            ]
-        ]);
-
         $this->add_control(
             'eael_product_list_layout_content_body_heading',
             [
@@ -1098,70 +1086,6 @@ class Woo_Product_List extends Widget_Base
 		);
 
         $this->add_control(
-            'eael_product_list_content_header_countdown_heading_style',
-            [
-                'label' => __('Countdown', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
-            ]
-        );
-
-		$this->add_responsive_control(
-			'eael_product_list_content_header_countdown_margin',
-			[
-				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em' ],
-				'selectors'  => [
-					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-countdown .eael-product-list-countdown-items' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			'eael_product_list_content_header_countdown_padding',
-			[
-				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em' ],
-				'selectors'  => [
-					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-countdown .eael-product-list-countdown-items' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-        $this->add_control(
-			'eael_product_list_content_header_countdown_border_radius',
-			[
-				'label'     => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-					'px' => [
-						'max' => 100,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-countdown .eael-product-list-countdown-items' => 'border-radius: {{SIZE}}px;',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-			[
-				'name'     => 'eael_product_list_content_header_countdown_normal_border',
-				'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-countdown .eael-product-list-countdown-items',
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name'     => 'eael_product_list_content_header_countdown_normal_box_shadow',
-				'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-countdown .eael-product-list-countdown-items',
-			]
-		);
-
-        $this->add_control(
             'eael_product_list_content_body_heading_style',
             [
                 'label' => __('Content Body', 'essential-addons-for-elementor-lite'),
@@ -1899,74 +1823,6 @@ class Woo_Product_List extends Widget_Base
                     '.eael-popup-details-render{{WRAPPER}} div.product .star-rating::before' => 'font-size: {{SIZE}}px;',
                     '.eael-popup-details-render{{WRAPPER}} div.product .star-rating span::before' => 'font-size: {{SIZE}}px;',
                 ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_product_list_color_typography_countdown_heading',
-            [
-                'label' => __('Countdown', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
-                'condition'     => [
-                    'eael_woo_product_list_countdown_show' => 'yes',
-                ]
-            ]
-        );
-
-        $this->add_control(
-            'eael_product_list_color_typography_countdown_text_color',
-            [
-                'label'     => esc_html__( 'Text', 'essential-addons-for-elementor-lite' ),
-                'type'      => Controls_Manager::COLOR,
-                'default'   => '#FFEBCE',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-countdown .eael-product-list-countdown-items .eael-product-list-countdown-item .eael-product-list-countdown-title' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-countdown .eael-product-list-countdown-items .eael-product-list-countdown-item:not(:last-child)::after' => 'color: {{VALUE}};',
-                ],
-                'condition'     => [
-                    'eael_woo_product_list_countdown_show' => 'yes',
-                ]
-            ]
-        );
-        
-        $this->add_control(
-            'eael_product_list_color_typography_countdown_number_color',
-            [
-                'label'     => esc_html__( 'Number', 'essential-addons-for-elementor-lite' ),
-                'type'      => Controls_Manager::COLOR,
-                'default'   => '#fff',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-countdown .eael-product-list-countdown-items .eael-product-list-countdown-item .eael-product-list-countdown-number' => 'color: {{VALUE}};',
-                ],
-                'condition'     => [
-                    'eael_woo_product_list_countdown_show' => 'yes',
-                ]
-            ]
-        );
-
-        $this->add_control(
-            'eael_product_list_color_typography_countdown_bg_color',
-            [
-                'label'     => esc_html__( 'Background', 'essential-addons-for-elementor-lite' ),
-                'type'      => Controls_Manager::COLOR,
-                'default'   => '#FB812E',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-countdown .eael-product-list-countdown-items' => 'background: {{VALUE}};',
-                ],
-                'condition'     => [
-                    'eael_woo_product_list_countdown_show' => 'yes',
-                ]
-            ]
-        );
-        
-        $this->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name'     => 'eael_product_list_color_typography_countdown_typography',
-                'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-countdown .eael-product-list-countdown-items .eael-product-list-countdown-item *',
-                'condition'     => [
-                    'eael_woo_product_list_countdown_show' => 'yes',
-                ]
             ]
         );
 
@@ -2772,7 +2628,6 @@ class Woo_Product_List extends Widget_Base
 		$woo_product_list['layout'] 		= ! empty( $settings['eael_dynamic_template_layout'] ) ? $settings['eael_dynamic_template_layout'] : 'preset-1';
 		
         $woo_product_list['rating_show']    = ! empty( $settings['eael_woo_product_list_rating_show'] ) && 'yes' === $settings['eael_woo_product_list_rating_show'] ? 1 : 0;
-		$woo_product_list['countdown_show'] = ! empty( $settings['eael_woo_product_list_countdown_show'] ) && 'yes' === $settings['eael_woo_product_list_countdown_show'] ? 1 : 0;
 		$woo_product_list['title_show']     = ! empty( $settings['eael_woo_product_list_title_show'] ) && 'yes' === $settings['eael_woo_product_list_title_show'] ? 1 : 0;
 		$woo_product_list['excerpt_show']   = ! empty( $settings['eael_woo_product_list_excerpt_show'] ) && 'yes' === $settings['eael_woo_product_list_excerpt_show'] ? 1 : 0;
 		$woo_product_list['price_show']     = ! empty( $settings['eael_woo_product_list_price_show'] ) && 'yes' === $settings['eael_woo_product_list_price_show'] ? 1 : 0;
