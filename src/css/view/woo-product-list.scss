@@ -146,6 +146,15 @@ $spacer-lg: $spacing5;
         }
     }
 
+    // Stock out
+    .product.outofstock {
+        .eael-product-list-buttons-on-hover {
+            .eael-product-list-add-to-cart-button a {
+                display: none;
+            }
+        }
+    }
+
     // Image Wrap
     .eael-product-list-image-wrap {
         text-align: center;
@@ -251,6 +260,11 @@ $spacer-lg: $spacing5;
         flex-wrap: wrap;
     }
 
+    .eael-product-list-rating {
+        display: flex;
+        align-items: center;
+    }
+
     .eael-product-list-rating .star-rating {
         margin: 0;
         display: inline-block;
@@ -278,7 +292,7 @@ $spacer-lg: $spacing5;
     }
 
     .eael-product-list-review-count {
-        vertical-align: bottom;
+        font-size: 15px;
     }
 
     .eael-product-list-notice p {
@@ -300,41 +314,6 @@ $spacer-lg: $spacing5;
 
         & i {
             color: #897474;
-        }
-    }
-
-    .eael-product-list-countdown {
-        .eael-product-list-countdown-items {
-            margin: 0;
-            display: flex;
-            padding: 10px 14px;
-            border-radius: 4px;
-            list-style: none;
-
-            .eael-product-list-countdown-item {
-                &:not(:last-child)::after {
-                    content: ":";
-                    font-size: 18px;
-                    font-style: normal;
-                    font-weight: 400;
-                    line-height: 1;
-                    padding: 0 2px;
-                    margin-right: 4px;
-                }
-
-                .eael-product-list-countdown-number {
-                    font-size: 18px;
-                    font-weight: 600;
-                    line-height: 1;
-                }
-
-                .eael-product-list-countdown-title {
-                    font-size: 16px;
-                    font-style: normal;
-                    font-weight: 400;
-                    line-height: 1;
-                }
-            }
         }
     }
 

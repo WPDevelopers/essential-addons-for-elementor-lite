@@ -21,108 +21,110 @@ if ( ! $product ) {
 
 $woo_product_list_loop = Woo_Product_List::get_woo_product_list_loop_settings( $product, $settings, $woo_product_list ); // static method as the template is used by read more feature too
 ?>
-<div class="eael-product-list-item">
-    <div class="eael-product-list-image-wrap">
-        <?php if ( $woo_product_list['image_clickable'] ) : ?>                                
-        <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link" >
-        <?php endif; ?>
-
-            <?php echo wp_kses_post( $product->get_image( $woo_product_list['image_size'], ['loading' => 'eager'] ) ); ?>
-        
-        <?php if ( $woo_product_list['image_clickable'] ) : ?>                   
-        </a>
-        <?php endif; ?>
-
-        <ul class="eael-product-list-buttons-on-hover">
-            <?php if ( $woo_product_list['add_to_cart_button_show'] ) : ?>
-            <li class="eael-product-list-add-to-cart-button eael-m-0">
-                <?php woocommerce_template_loop_add_to_cart(); ?>
-            </li>
+<div <?php post_class( 'product' ); ?>>
+    <div class="eael-product-list-item">
+        <div class="eael-product-list-image-wrap">
+            <?php if ( $woo_product_list['image_clickable'] ) : ?>                                
+            <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link" >
             <?php endif; ?>
 
-            <?php if ( $woo_product_list['quick_view_button_show'] ) : ?>
-            <li class="eael-product-list-quick-view-button eael-m-0">
-                <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars( json_encode( $woo_product_list_loop['quick_view_setting'] ), ENT_QUOTES ); ?>" class="open-popup-link"><i class="fas fa-eye"></i></a>
-            </li>
-            <?php endif; ?>
-
-            <?php if ( $woo_product_list['link_button_show'] ) : ?>
-            <li class="eael-product-list-link-button eael-m-0">
-                <a href="<?php echo esc_url( $product->get_permalink() ); ?>"><i class="fas fa-link"></i></a>
-            </li>
-            <?php endif; ?>
-        </ul>
-    </div>
-
-    <div class="eael-product-list-content-wrap">
-        <?php
-        if ( 'after-title' === $woo_product_list['content_header_position'] ) :
-            Woo_Product_List::eael_get_product_title_html( $woo_product_list, $product );
-        endif; 
-        ?>
-
-        <div class="eael-product-list-content-header <?php echo esc_attr( $woo_product_list_loop['direction_rtl_class'] ) ?>" >
-            <?php if ( $woo_product_list['rating_show'] ) : ?>
-            <div class="eael-product-list-rating">
-                <?php echo wp_kses_post( wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) ); ?>
-                
-                <?php if ( $woo_product_list['review_count_show'] && $woo_product_list_loop['review_count'] > 0 ) : ?>
-                    <a href="<?php echo esc_url( get_permalink() ) ?>#reviews" class="woocommerce-review-link eael-product-list-review-count" rel="nofollow">(<?php printf( '%s', __( $woo_product_list_loop['review_count'], 'essential-addons-for-elementor-lite' ) ); ?>)</a>
-                <?php endif; ?>
-            </div>
-            <?php endif; ?>
+                <?php echo wp_kses_post( $product->get_image( $woo_product_list['image_size'], ['loading' => 'eager'] ) ); ?>
             
-            <div class="eael-product-list-notice eael-product-list-notice-category">
-                <p><?php echo esc_html( Woo_Product_List::eael_get_product_category_name( $product->get_id() ) ); ?></p>
-            </div>
+            <?php if ( $woo_product_list['image_clickable'] ) : ?>                   
+            </a>
+            <?php endif; ?>
+
+            <ul class="eael-product-list-buttons-on-hover">
+                <?php if ( $woo_product_list['add_to_cart_button_show'] ) : ?>
+                <li class="eael-product-list-add-to-cart-button eael-m-0">
+                    <?php woocommerce_template_loop_add_to_cart(); ?>
+                </li>
+                <?php endif; ?>
+
+                <?php if ( $woo_product_list['quick_view_button_show'] ) : ?>
+                <li class="eael-product-list-quick-view-button eael-m-0">
+                    <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars( json_encode( $woo_product_list_loop['quick_view_setting'] ), ENT_QUOTES ); ?>" class="open-popup-link"><i class="fas fa-eye"></i></a>
+                </li>
+                <?php endif; ?>
+
+                <?php if ( $woo_product_list['link_button_show'] ) : ?>
+                <li class="eael-product-list-link-button eael-m-0">
+                    <a href="<?php echo esc_url( $product->get_permalink() ); ?>"><i class="fas fa-link"></i></a>
+                </li>
+                <?php endif; ?>
+            </ul>
         </div>
-        <div class="eael-product-list-content-body">
+
+        <div class="eael-product-list-content-wrap">
             <?php
-            if ( 'before-title' === $woo_product_list['content_header_position'] ) :
+            if ( 'after-title' === $woo_product_list['content_header_position'] ) :
                 Woo_Product_List::eael_get_product_title_html( $woo_product_list, $product );
             endif; 
             ?>
 
-            <?php if ( $woo_product_list['excerpt_show'] ) : ?>
-            <div class="eael-product-list-excerpt">
-                <?php echo wp_trim_words( strip_shortcodes( get_the_excerpt() ), $woo_product_list['excerpt_words_count'], $woo_product_list['excerpt_expanison_indicator'] ); ?>
-            </div>
-            <?php endif; ?>
-
-            <?php if ( $woo_product_list['price_show'] ) : ?>
-            <h4 class="eael-product-list-price">
-                <?php echo wp_kses_post( $product->get_price_html() ); ?>
-            </h4>
-            <?php endif; ?>
-        </div>
-        <div class="eael-product-list-content-footer">
-            <?php if ( $woo_product_list['total_sold_show'] ) : ?>
-            <div class="eael-product-list-progress">
-                <div class="eael-product-list-progress-info">
-                    <h4 class="eael-product-list-progress-count"><?php esc_html_e( $woo_product_list['total_sold_text'], 'essential-addons-for-elementor-lite' ); ?> <span><?php echo esc_html( $woo_product_list_loop['total_sales_count'] ); ?></span></h4>
-                    <h4 class="eael-product-list-progress-remaining"><?php esc_html_e( $woo_product_list['total_sold_remaining_text'], 'essential-addons-for-elementor-lite' ); ?> <span><?php echo esc_html( $woo_product_list_loop['stock_quantity_count'] ); ?></span></h4>
+            <div class="eael-product-list-content-header <?php echo esc_attr( $woo_product_list_loop['direction_rtl_class'] ) ?>" >
+                <?php if ( $woo_product_list['rating_show'] ) : ?>
+                <div class="eael-product-list-rating">
+                    <?php echo wp_kses_post( wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) ); ?>
+                    
+                    <?php if ( $woo_product_list['review_count_show'] && $woo_product_list_loop['review_count'] > 0 ) : ?>
+                        <a href="<?php echo esc_url( get_permalink() ) ?>#reviews" class="woocommerce-review-link eael-product-list-review-count" rel="nofollow">(<?php printf( '%s', __( $woo_product_list_loop['review_count'], 'essential-addons-for-elementor-lite' ) ); ?>)</a>
+                    <?php endif; ?>
                 </div>
-                <div class="eael-product-list-progress-bar-outer">
-                    <div style="width: <?php echo esc_attr( $woo_product_list_loop['total_sold_progress_percentage'] ); ?>%;" class="eael-product-list-progress-bar-inner"></div>
+                <?php endif; ?>
+                
+                <div class="eael-product-list-notice eael-product-list-notice-category">
+                    <p><?php echo esc_html( Woo_Product_List::eael_get_product_category_name( $product->get_id() ) ); ?></p>
                 </div>
             </div>
-            <?php endif; ?>
+            <div class="eael-product-list-content-body">
+                <?php
+                if ( 'before-title' === $woo_product_list['content_header_position'] ) :
+                    Woo_Product_List::eael_get_product_title_html( $woo_product_list, $product );
+                endif; 
+                ?>
 
-            <?php if ( $woo_product_list['button_position_static'] ) : ?>
-            <div class="eael-product-list-buttons">
-                <?php if ( $woo_product_list['add_to_cart_button_show'] ) : ?>
-                <p class="eael-product-list-add-to-cart-button eael-m-0"><?php woocommerce_template_loop_add_to_cart(); ?></p>
+                <?php if ( $woo_product_list['excerpt_show'] ) : ?>
+                <div class="eael-product-list-excerpt">
+                    <?php echo wp_trim_words( strip_shortcodes( get_the_excerpt() ), $woo_product_list['excerpt_words_count'], $woo_product_list['excerpt_expanison_indicator'] ); ?>
+                </div>
                 <?php endif; ?>
 
-                <?php if ( $woo_product_list['quick_view_button_show'] ) : ?>
-                <p class="eael-product-list-quick-view-button eael-m-0">
-                    <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars( json_encode( $woo_product_list_loop['quick_view_setting'] ), ENT_QUOTES ); ?>" class="open-popup-link">
-                        <?php esc_html_e( $woo_product_list['quick_view_text'], 'essential-addons-for-elementor-lite' ); ?>
-                    </a>
-                </p>
+                <?php if ( $woo_product_list['price_show'] ) : ?>
+                <h4 class="eael-product-list-price">
+                    <?php echo wp_kses_post( $product->get_price_html() ); ?>
+                </h4>
                 <?php endif; ?>
             </div>
-            <?php endif; ?>
+            <div class="eael-product-list-content-footer">
+                <?php if ( $woo_product_list['total_sold_show'] ) : ?>
+                <div class="eael-product-list-progress">
+                    <div class="eael-product-list-progress-info">
+                        <h4 class="eael-product-list-progress-count"><?php esc_html_e( $woo_product_list['total_sold_text'], 'essential-addons-for-elementor-lite' ); ?> <span><?php echo esc_html( $woo_product_list_loop['total_sales_count'] ); ?></span></h4>
+                        <h4 class="eael-product-list-progress-remaining"><?php esc_html_e( $woo_product_list['total_sold_remaining_text'], 'essential-addons-for-elementor-lite' ); ?> <span><?php echo esc_html( $woo_product_list_loop['stock_quantity_count'] ); ?></span></h4>
+                    </div>
+                    <div class="eael-product-list-progress-bar-outer">
+                        <div style="width: <?php echo esc_attr( $woo_product_list_loop['total_sold_progress_percentage'] ); ?>%;" class="eael-product-list-progress-bar-inner"></div>
+                    </div>
+                </div>
+                <?php endif; ?>
+
+                <?php if ( $woo_product_list['button_position_static'] ) : ?>
+                <div class="eael-product-list-buttons">
+                    <?php if ( $woo_product_list['add_to_cart_button_show'] ) : ?>
+                    <p class="eael-product-list-add-to-cart-button eael-m-0"><?php woocommerce_template_loop_add_to_cart(); ?></p>
+                    <?php endif; ?>
+
+                    <?php if ( $woo_product_list['quick_view_button_show'] ) : ?>
+                    <p class="eael-product-list-quick-view-button eael-m-0">
+                        <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars( json_encode( $woo_product_list_loop['quick_view_setting'] ), ENT_QUOTES ); ?>" class="open-popup-link">
+                            <?php esc_html_e( $woo_product_list['quick_view_text'], 'essential-addons-for-elementor-lite' ); ?>
+                        </a>
+                    </p>
+                    <?php endif; ?>
+                </div>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
 </div>
