@@ -75,29 +75,6 @@ $stock_quantity_count   = $product->get_stock_quantity();
                 <?php echo wp_kses_post( wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) ); ?>
             </div>
             <?php endif; ?>
-
-            <?php if ( $woo_product_list['countdown_show'] ) : ?>
-            <div class="eael-product-list-countdown">
-                <ul class="eael-product-list-countdown-items">
-                    <li class="eael-product-list-countdown-item eael-product-list-countdown-days">
-                        <span class="eael-product-list-countdown-number">2</span>
-                        <span class="eael-product-list-countdown-title">Days</span>
-                    </li>
-                    <li class="eael-product-list-countdown-item eael-product-list-countdown-hours">
-                        <span class="eael-product-list-countdown-number">14</span>
-                        <span class="eael-product-list-countdown-title">Hours</span>
-                    </li>
-                    <li class="eael-product-list-countdown-item eael-product-list-countdown-minutes">
-                        <span class="eael-product-list-countdown-number">32</span>
-                        <span class="eael-product-list-countdown-title">Minutes</span>
-                    </li>
-                    <li class="eael-product-list-countdown-item eael-product-list-countdown-seconds">
-                        <span class="eael-product-list-countdown-number">14</span>
-                        <span class="eael-product-list-countdown-title">Seconds</span>
-                    </li>
-                </ul>
-            </div>
-            <?php endif; ?>
         </div>
         <div class="eael-product-list-content-body">
             <?php
