@@ -253,7 +253,7 @@ $spacer-lg: $spacing5;
 
     .eael-product-list-rating .star-rating {
         margin: 0;
-        display: block;
+        display: inline-block;
         float: none;
         height: 1em;
         width: 5.6em;
@@ -275,6 +275,10 @@ $spacer-lg: $spacing5;
                 font-weight: 900;
             }
         }
+    }
+
+    .eael-product-list-review-count {
+        vertical-align: bottom;
     }
 
     .eael-product-list-notice p {
