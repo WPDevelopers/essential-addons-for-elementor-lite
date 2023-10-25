@@ -523,18 +523,6 @@ class Woo_Product_List extends Widget_Base
                 'label_block' => true,
             ]
         );
-        
-        $this->add_control(
-            'eael_product_list_image_stretch',
-            [
-                'label'        => __( 'Stretch', 'essential-addons-for-elementor-lite' ),
-                'type'         => Controls_Manager::SWITCHER,
-                'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
-                'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
-                'return_value' => 'yes',
-                'default'      => '',
-            ]
-        );
 
         $this->add_control(
             'eael_product_list_image_clickable',
@@ -782,6 +770,33 @@ class Woo_Product_List extends Widget_Base
                 'type'          => Controls_Manager::TEXT,
                 'label_block'   => false,
                 'default'       => esc_html__('View Product', 'essential-addons-for-elementor-lite'),
+                'condition'     => [
+                    'eael_woo_product_list_quick_view_button_show' => 'yes',
+                ],
+                'ai'            => [
+                    'active' => false,
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_content_footer_not_found_heading',
+            [
+                'label'         => __('Not Found', 'essential-addons-for-elementor-lite'),
+                'type'          => Controls_Manager::HEADING,
+                'condition'     => [
+                    'eael_woo_product_list_quick_view_button_show' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_content_footer_not_found_text', 
+            [
+                'label'         => esc_html__('Products Not Found', 'essential-addons-for-elementor-lite'),
+                'type'          => Controls_Manager::TEXT,
+                'label_block'   => false,
+                'default'       => esc_html__('No products found!', 'essential-addons-for-elementor-lite'),
                 'condition'     => [
                     'eael_woo_product_list_quick_view_button_show' => 'yes',
                 ],
@@ -1819,7 +1834,6 @@ class Woo_Product_List extends Widget_Base
                     '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .star-rating' => 'font-size: {{SIZE}}px;',
                     '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .star-rating::before' => 'font-size: {{SIZE}}px;',
                     '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .star-rating span::before' => 'font-size: {{SIZE}}px;',
-                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-review-count' => 'font-size: {{SIZE}}px;',
                     '.eael-popup-details-render{{WRAPPER}} div.product .star-rating' => 'font-size: {{SIZE}}px; width: 100%;',
                     '.eael-popup-details-render{{WRAPPER}} div.product .star-rating::before' => 'font-size: {{SIZE}}px;',
                     '.eael-popup-details-render{{WRAPPER}} div.product .star-rating span::before' => 'font-size: {{SIZE}}px;',
@@ -2710,6 +2724,7 @@ class Woo_Product_List extends Widget_Base
 		$woo_product_list['total_sold_text']                = ! empty( $settings['eael_product_list_content_footer_total_sold_text'] ) ? esc_html( $settings['eael_product_list_content_footer_total_sold_text'] ) : esc_html('Total Sold:');
 		$woo_product_list['total_sold_remaining_text']      = ! empty( $settings['eael_product_list_content_footer_total_sold_remaining_text'] ) ? esc_html( $settings['eael_product_list_content_footer_total_sold_remaining_text'] ) : esc_html('Remaining:');
 		$woo_product_list['quick_view_text']                = ! empty( $settings['eael_product_list_content_footer_quick_view_text'] ) ? esc_html( $settings['eael_product_list_content_footer_quick_view_text'] ) : esc_html('View Product');
+		$woo_product_list['products_not_found_text']        = ! empty( $settings['eael_product_list_content_footer_not_found_text'] ) ? esc_html( $settings['eael_product_list_content_footer_not_found_text'] ) : esc_html('No products found!');
         
         if( 'preset-2' === $woo_product_list['layout'] || 'preset-3' === $woo_product_list['layout'] ){
             $woo_product_list['content_header_position']    = ! empty( $settings['eael_product_list_content_header_position_preset_3'] ) ? esc_html( $settings['eael_product_list_content_header_position_preset_3'] ) : esc_html( 'after-title' );
@@ -2819,7 +2834,15 @@ class Woo_Product_List extends Widget_Base
 
         $settings 	= $this->get_settings_for_display();
 		$woo_product_list = self::get_woo_product_list_settings( $settings );
-        $args = $this->eael_prepare_product_query( $settings );
+
+        if ( $settings['post_type'] === 'source_dynamic' && is_archive() || ! empty( $_REQUEST['post_type'] ) ) {
+		    $settings['posts_per_page'] = ! empty( $settings['eael_woo_product_list_products_count'] )  ? intval( $settings['eael_woo_product_list_products_count'] ) : 4;
+		    $settings['offset']         = ! empty( $settings['product_offset'] )  ? intval( $settings['product_offset'] ) : 0;
+		    $args                       = ClassesHelper::get_query_args( $settings );
+		    $args                       = ClassesHelper::get_dynamic_args( $settings, $args );
+	    } else {
+            $args = $this->eael_prepare_product_query( $settings );
+	    }
         ?>
 
         <div class="eael-product-list-wrapper <?php echo esc_attr( $woo_product_list['layout'] ) ?>">
@@ -2829,8 +2852,8 @@ class Woo_Product_List extends Widget_Base
                     do_action( 'eael/woo-product-list/before-product-loop' );
 
                     // Load more data
-                    $settings['eael_widget_id']  = $this->get_id();
-                    $settings['eael_page_id']    = Plugin::$instance->documents->get_current() ? Plugin::$instance->documents->get_current()->get_main_id() : get_the_ID();
+                    $settings['eael_widget_id']         = $this->get_id();
+                    $settings['eael_page_id']           = Plugin::$instance->documents->get_current() ? Plugin::$instance->documents->get_current()->get_main_id() : get_the_ID();
                     $settings['layout_mode']            = $woo_product_list['layout'];
                     $template                           = $this->get_template( $settings['layout_mode'] );
                     $settings['loadable_file_name']     = $this->get_filename_only( $template );
@@ -2854,7 +2877,7 @@ class Woo_Product_List extends Widget_Base
                             }
                             wp_reset_postdata();
                         } else {
-                            _e( '<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite' );
+                            printf( '<p class="no-posts-found">%s</p>', __( $woo_product_list['products_not_found_text'], 'essential-addons-for-elementor-lite' ) );
                         }
                     } else {
                         _e( '<p class="eael-no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
