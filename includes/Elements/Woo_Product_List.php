@@ -228,8 +228,8 @@ class Woo_Product_List extends Widget_Base
             'default' => 'yes',
         ]);
 
-        $this->add_control('eael_woo_product_list_rating_count_show', [
-            'label' => esc_html__('Rating Count', 'essential-addons-for-elementor-lite'),
+        $this->add_control('eael_woo_product_list_review_count_show', [
+            'label' => esc_html__('Review Count', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::SWITCHER,
 			'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
 			'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
@@ -1819,9 +1819,47 @@ class Woo_Product_List extends Widget_Base
                     '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .star-rating' => 'font-size: {{SIZE}}px;',
                     '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .star-rating::before' => 'font-size: {{SIZE}}px;',
                     '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .star-rating span::before' => 'font-size: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-review-count' => 'font-size: {{SIZE}}px;',
                     '.eael-popup-details-render{{WRAPPER}} div.product .star-rating' => 'font-size: {{SIZE}}px; width: 100%;',
                     '.eael-popup-details-render{{WRAPPER}} div.product .star-rating::before' => 'font-size: {{SIZE}}px;',
                     '.eael-popup-details-render{{WRAPPER}} div.product .star-rating span::before' => 'font-size: {{SIZE}}px;',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_color_typography_review_count_heading',
+            [
+                'label' => __('Review Count', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'condition' => [
+                    'eael_woo_product_list_review_count_show' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_review_count_color',
+            [
+                'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#5F6368',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-review-count' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_woo_product_list_review_count_show' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_product_list_color_typography_review_count_typography',
+                'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-review-count',
+                'condition' => [
+                    'eael_woo_product_list_review_count_show' => 'yes',
                 ],
             ]
         );
@@ -2623,14 +2661,37 @@ class Woo_Product_List extends Widget_Base
         }
     }
 
+    public static function get_woo_product_list_loop_settings( $product, $settings, $woo_product_list ) {
+		$woo_product_list_loop  = [];
+
+        $woo_product_list_loop['quick_view_setting'] = [
+            'widget_id'     => $settings['eael_widget_id'],
+            'product_id'    => $product->get_id(),
+            'page_id'       => $settings['eael_page_id'],
+        ];
+        
+        $woo_product_list_loop['direction_rtl_class']            = $woo_product_list['content_header_direction_rtl'] ? 'eael-direction-rtl' : '';
+        
+        $woo_product_list_loop['total_sales_count']              = intval( get_post_meta( $product->get_id(), 'total_sales', true ) );
+        $woo_product_list_loop['stock_quantity_count']           = intval( $product->get_stock_quantity() );
+        
+        $woo_product_list_loop['progress_cent_percentage']       = $woo_product_list_loop['total_sales_count'] + $woo_product_list_loop['stock_quantity_count'];
+        $woo_product_list_loop['total_sold_progress_percentage'] = $woo_product_list_loop['progress_cent_percentage'] > 0 ? intval( ( $woo_product_list_loop['total_sales_count'] / $woo_product_list_loop['progress_cent_percentage'] ) * 100 ) : 100; // in percentage
+        
+        $woo_product_list_loop['review_count']                   = intval( $product->get_review_count() );
+
+        return $woo_product_list_loop;
+	}
+
     public static function get_woo_product_list_settings( $settings ) {
-		$woo_product_list 					= [];
-		$woo_product_list['layout'] 		= ! empty( $settings['eael_dynamic_template_layout'] ) ? $settings['eael_dynamic_template_layout'] : 'preset-1';
+		$woo_product_list 					        = [];
+		$woo_product_list['layout'] 		        = ! empty( $settings['eael_dynamic_template_layout'] ) ? $settings['eael_dynamic_template_layout'] : 'preset-1';
 		
-        $woo_product_list['rating_show']    = ! empty( $settings['eael_woo_product_list_rating_show'] ) && 'yes' === $settings['eael_woo_product_list_rating_show'] ? 1 : 0;
-		$woo_product_list['title_show']     = ! empty( $settings['eael_woo_product_list_title_show'] ) && 'yes' === $settings['eael_woo_product_list_title_show'] ? 1 : 0;
-		$woo_product_list['excerpt_show']   = ! empty( $settings['eael_woo_product_list_excerpt_show'] ) && 'yes' === $settings['eael_woo_product_list_excerpt_show'] ? 1 : 0;
-		$woo_product_list['price_show']     = ! empty( $settings['eael_woo_product_list_price_show'] ) && 'yes' === $settings['eael_woo_product_list_price_show'] ? 1 : 0;
+        $woo_product_list['rating_show']            = ! empty( $settings['eael_woo_product_list_rating_show'] ) && 'yes' === $settings['eael_woo_product_list_rating_show'] ? 1 : 0;
+        $woo_product_list['review_count_show']      = ! empty( $settings['eael_woo_product_list_review_count_show'] ) && 'yes' === $settings['eael_woo_product_list_review_count_show'] ? 1 : 0;
+		$woo_product_list['title_show']             = ! empty( $settings['eael_woo_product_list_title_show'] ) && 'yes' === $settings['eael_woo_product_list_title_show'] ? 1 : 0;
+		$woo_product_list['excerpt_show']           = ! empty( $settings['eael_woo_product_list_excerpt_show'] ) && 'yes' === $settings['eael_woo_product_list_excerpt_show'] ? 1 : 0;
+		$woo_product_list['price_show']             = ! empty( $settings['eael_woo_product_list_price_show'] ) && 'yes' === $settings['eael_woo_product_list_price_show'] ? 1 : 0;
 		$woo_product_list['total_sold_show']                = ! empty( $settings['eael_woo_product_list_total_sold_show'] ) && 'yes' === $settings['eael_woo_product_list_total_sold_show'] ? 1 : 0;
 		$woo_product_list['add_to_cart_button_show']        = ! empty( $settings['eael_woo_product_list_add_to_cart_button_show'] ) && 'yes' === $settings['eael_woo_product_list_add_to_cart_button_show'] ? 1 : 0;
 		$woo_product_list['quick_view_button_show']         = ! empty( $settings['eael_woo_product_list_quick_view_button_show'] ) && 'yes' === $settings['eael_woo_product_list_quick_view_button_show'] ? 1 : 0;

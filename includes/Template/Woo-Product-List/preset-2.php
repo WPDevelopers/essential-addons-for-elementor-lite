@@ -19,15 +19,7 @@ if ( ! $product ) {
     return;
 }
 
-$quick_view_setting = [
-    'widget_id'     => $settings['eael_widget_id'],
-    'product_id'    => $product->get_id(),
-    'page_id'       => $settings['eael_page_id'],
-];
-
-$direction_rtl_class = $woo_product_list['content_header_direction_rtl'] ? 'eael-direction-rtl' : '';
-$total_sales_count      = get_post_meta( $product->get_id(), 'total_sales', true );
-$stock_quantity_count   = $product->get_stock_quantity();
+$woo_product_list_loop = Woo_Product_List::get_woo_product_list_loop_settings( $product, $settings, $woo_product_list ); // static method as the template is used by read more feature too
 ?>
 <div class="eael-product-list-item">
     <div class="eael-product-list-image-wrap">
@@ -50,7 +42,7 @@ $stock_quantity_count   = $product->get_stock_quantity();
 
             <?php if ( $woo_product_list['quick_view_button_show'] ) : ?>
             <li class="eael-product-list-quick-view-button eael-m-0">
-                <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars( json_encode( $quick_view_setting ), ENT_QUOTES ); ?>" class="open-popup-link"><i class="fas fa-eye"></i></a>
+                <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars( json_encode( $woo_product_list_loop['quick_view_setting'] ), ENT_QUOTES ); ?>" class="open-popup-link"><i class="fas fa-eye"></i></a>
             </li>
             <?php endif; ?>
 
@@ -69,10 +61,14 @@ $stock_quantity_count   = $product->get_stock_quantity();
         endif; 
         ?>
 
-        <div class="eael-product-list-content-header <?php echo esc_attr( $direction_rtl_class ) ?>" >
+        <div class="eael-product-list-content-header <?php echo esc_attr( $woo_product_list_loop['direction_rtl_class'] ) ?>" >
             <?php if ( $woo_product_list['rating_show'] ) : ?>
             <div class="eael-product-list-rating">
                 <?php echo wp_kses_post( wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) ); ?>
+                
+                <?php if ( $woo_product_list['review_count_show'] && $woo_product_list_loop['review_count'] > 0 ) : ?>
+                    <a href="<?php echo esc_url( get_permalink() ) ?>#reviews" class="woocommerce-review-link eael-product-list-review-count" rel="nofollow">(<?php printf( '%s', __( $woo_product_list_loop['review_count'], 'essential-addons-for-elementor-lite' ) ); ?>)</a>
+                <?php endif; ?>
             </div>
             <?php endif; ?>
             
@@ -103,11 +99,11 @@ $stock_quantity_count   = $product->get_stock_quantity();
             <?php if ( $woo_product_list['total_sold_show'] ) : ?>
             <div class="eael-product-list-progress">
                 <div class="eael-product-list-progress-info">
-                    <h4 class="eael-product-list-progress-count"><?php esc_html_e( $woo_product_list['total_sold_text'], 'essential-addons-for-elementor-lite' ); ?> <span><?php echo esc_html( $total_sales_count ); ?></span></h4>
-                    <h4 class="eael-product-list-progress-remaining"><?php esc_html_e( $woo_product_list['total_sold_remaining_text'], 'essential-addons-for-elementor-lite' ); ?> <span><?php echo esc_html( $stock_quantity_count ); ?></span></h4>
+                    <h4 class="eael-product-list-progress-count"><?php esc_html_e( $woo_product_list['total_sold_text'], 'essential-addons-for-elementor-lite' ); ?> <span><?php echo esc_html( $woo_product_list_loop['total_sales_count'] ); ?></span></h4>
+                    <h4 class="eael-product-list-progress-remaining"><?php esc_html_e( $woo_product_list['total_sold_remaining_text'], 'essential-addons-for-elementor-lite' ); ?> <span><?php echo esc_html( $woo_product_list_loop['stock_quantity_count'] ); ?></span></h4>
                 </div>
                 <div class="eael-product-list-progress-bar-outer">
-                    <div style="width: 80%;" class="eael-product-list-progress-bar-inner"></div>
+                    <div style="width: <?php echo esc_attr( $woo_product_list_loop['total_sold_progress_percentage'] ); ?>%;" class="eael-product-list-progress-bar-inner"></div>
                 </div>
             </div>
             <?php endif; ?>
@@ -120,7 +116,7 @@ $stock_quantity_count   = $product->get_stock_quantity();
 
                 <?php if ( $woo_product_list['quick_view_button_show'] ) : ?>
                 <p class="eael-product-list-quick-view-button eael-m-0">
-                    <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars( json_encode( $quick_view_setting ), ENT_QUOTES ); ?>" class="open-popup-link">
+                    <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars( json_encode( $woo_product_list_loop['quick_view_setting'] ), ENT_QUOTES ); ?>" class="open-popup-link">
                         <?php esc_html_e( $woo_product_list['quick_view_text'], 'essential-addons-for-elementor-lite' ); ?>
                     </a>
                 </p>
