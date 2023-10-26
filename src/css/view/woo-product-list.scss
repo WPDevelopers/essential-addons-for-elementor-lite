@@ -246,6 +246,27 @@ $spacer-lg: $spacing5;
         }
     }
 
+    .eael-product-list-badge-wrap.badge-preset-3 {
+        max-width: 150px;
+        background: #FF4545;
+        padding: 8px 24px;
+        border-radius: 100px;
+        display: block;
+        overflow: hidden;
+        position: absolute;
+        top: 24px;
+        left: 24px;
+
+        p {
+            color: #fff;
+            text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 1.2;
+            margin: 0;
+        }
+    }
+
     // Image Wrap
     .eael-product-list-image-wrap {
         text-align: center;
