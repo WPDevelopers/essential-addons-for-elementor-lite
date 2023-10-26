@@ -164,8 +164,15 @@ $spacer-lg: $spacing5;
         justify-content: center;
         position: absolute;
         top: -30px;
-        left: 0;
 
+        &.badge-alignment-left {
+            left: 0;
+        }
+        
+        &.badge-alignment-right {
+            right: 0;
+        }
+        
         .eael-product-list-badge-bg {
             height: 100%;
             width: 100%;
@@ -203,7 +210,41 @@ $spacer-lg: $spacing5;
         overflow: hidden;
         position: absolute;
         top: -10px;
-        left: -10px;
+
+        &.badge-alignment-left {
+            left: -10px;
+
+            &::before {
+                right: 0;
+            }
+    
+            &::after {
+                left: 0;
+                border-right: 10px solid #734040;
+            }
+
+            p {
+                transform: rotate(-45deg);
+            }
+        }
+        
+        &.badge-alignment-right {
+            right: -10px;
+
+            &::before {
+                left: 0;
+            }
+    
+            &::after {
+                right: 0;
+                border-left: 10px solid #734040;
+            }
+            
+            p {
+                transform: rotate(45deg);
+            }
+        }
+
         &::before,
         &::after {
             content: "";
@@ -212,21 +253,21 @@ $spacer-lg: $spacing5;
             border: 0 solid transparent;
             position: absolute;
         }
+
         &::before {
             top: 0;
-            right: 0;
             border-right-width: 10px;
             border-left-width: 10px;
             border-bottom: 10px solid #734040;
         }
+
         &::after {
-            left: 0;
             bottom: 0;
             border-top-width: 10px;
             border-bottom-width: 10px;
-            border-right: 10px solid #734040;
         }
-        & p {
+
+        p {
             color: #fff;
             background: #A76060;
             font-size: 17px;
@@ -237,7 +278,6 @@ $spacer-lg: $spacing5;
             text-align: center;
             text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
             padding: 10px 20px 10px 10px;
-            transform: rotate(-45deg);
             transform-origin: bottom;
             width: calc(100% + 100px);
             position: absolute;
@@ -255,7 +295,14 @@ $spacer-lg: $spacing5;
         overflow: hidden;
         position: absolute;
         top: 24px;
-        left: 24px;
+
+        &.badge-alignment-left {
+            left: 24px;
+        }
+        
+        &.badge-alignment-right {
+            right: 24px;
+        }
 
         p {
             color: #fff;

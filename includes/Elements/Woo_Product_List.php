@@ -688,6 +688,50 @@ class Woo_Product_List extends Widget_Base
         );
 
         $this->add_control(
+            'eael_product_list_content_header_badge_alignment',
+            [
+                'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'badge-alignment-left' => [
+                        'title' => __('Left', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-text-align-left',
+                    ],
+                    'badge-alignment-right' => [
+                        'title' => __('Right', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-text-align-right',
+                    ],
+                ],
+                'condition' => [
+                    'eael_woo_product_list_badge_show' => 'yes',
+                ],
+            ]
+        );
+
+	    // $this->add_control(
+		//     'eael_product_sale_text',
+		//     [
+		// 	    'label'       => esc_html__( 'Sale Text', 'essential-addons-for-elementor-lite' ),
+		// 	    'type'        => Controls_Manager::TEXT,
+		// 	    'separator' => 'before',
+        //         'ai' => [
+		// 			'active' => false,
+		// 		],
+		//     ]
+	    // );
+
+	    // $this->add_control(
+		//     'eael_product_stockout_text',
+		//     [
+		// 	    'label'       => esc_html__( 'Stock Out Text', 'essential-addons-for-elementor-lite' ),
+		// 	    'type'        => Controls_Manager::TEXT,
+        //         'ai' => [
+		// 			'active' => false,
+		// 		],
+		//     ]
+	    // );
+
+        $this->add_control(
             'eael_product_list_content_body_heading',
             [
                 'label' => __('Content Body', 'essential-addons-for-elementor-lite'),
@@ -2919,11 +2963,12 @@ class Woo_Product_List extends Widget_Base
     }
 
     public static function eael_print_produt_badge_html( $woo_product_list ){
-        if ( $woo_product_list['badge_show'] ) : 
+        if ( $woo_product_list['badge_show'] ) :
+            
             switch( $woo_product_list['badge_preset'] ){
                 case 'badge-preset-1':
                     ?>
-                    <div class="eael-product-list-badge-wrap badge-preset-1">
+                    <div class="eael-product-list-badge-wrap badge-preset-1 <?php echo esc_attr( $woo_product_list['badge_alignment_class'] ) ?> ">
                         <div class="eael-product-list-badge-bg">
                             <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" fill="none">
                                 <path d="M50 0L59.861 13.1982L75 6.69873L76.9408 23.0592L93.3013 25L86.8018 40.139L100 50L86.8018 59.861L93.3013 75L76.9408 76.9408L75 93.3013L59.861 86.8018L50 100L40.139 86.8018L25 93.3013L23.0592 76.9408L6.69873 75L13.1982 59.861L0 50L13.1982 40.139L6.69873 25L23.0592 23.0592L25 6.69873L40.139 13.1982L50 0Z" fill="#DBEC73"/>
@@ -2936,7 +2981,7 @@ class Woo_Product_List extends Widget_Base
 
                 case 'badge-preset-2':
                     ?>
-                    <div class="eael-product-list-badge-wrap badge-preset-2">
+                    <div class="eael-product-list-badge-wrap badge-preset-2 <?php echo esc_attr( $woo_product_list['badge_alignment_class'] ) ?> ">
                         <p>Sale</p>
                     </div>
                     <?php
@@ -2944,7 +2989,7 @@ class Woo_Product_List extends Widget_Base
 
                 case 'badge-preset-3':
                     ?>
-                    <div class="eael-product-list-badge-wrap badge-preset-3">
+                    <div class="eael-product-list-badge-wrap badge-preset-3 <?php echo esc_attr( $woo_product_list['badge_alignment_class'] ) ?> ">
                         <p><span>50%</span> Off</p>
                     </div>
                     <?php
@@ -3027,7 +3072,8 @@ class Woo_Product_List extends Widget_Base
 		$woo_product_list['link_button_show']               = ! empty( $settings['eael_woo_product_list_link_button_show'] ) && 'yes' === $settings['eael_woo_product_list_link_button_show'] ? 1 : 0;
 		$woo_product_list['show_load_more']                 = ! empty( $settings['show_load_more'] ) && 'yes' === $settings['show_load_more'] ? 1 : 0;
 		
-		$woo_product_list['badge_preset']                   = ! empty( $settings['eael_product_list_content_header_badge_preset'] ) ? esc_html( $settings['eael_product_list_content_header_badge_preset'] ) : esc_html( 'badge-preset-1' );
+		$woo_product_list['badge_preset']                   = ! empty( $settings['eael_product_list_content_header_badge_preset'] ) ? esc_html( $settings['eael_product_list_content_header_badge_preset'] ) : esc_html('badge-preset-1');
+		$woo_product_list['badge_alignment_class']          = ! empty( $settings['eael_product_list_content_header_badge_alignment'] ) ? esc_html( $settings['eael_product_list_content_header_badge_alignment'] ) : esc_html('badge-alignment-left');
 		$woo_product_list['image_size']                     = ! empty( $settings['eael_product_list_image_size_size'] ) ? esc_html( $settings['eael_product_list_image_size_size'] ) : esc_html( 'medium' );
 		$woo_product_list['image_clickable']                = ! empty( $settings['eael_product_list_image_clickable'] ) && 'yes' === $settings['eael_product_list_image_clickable'] ? 1 : 0;
         $woo_product_list['button_position_static']         = ! empty( $settings['eael_product_list_content_general_button_position'] ) && 'on-hover' !== $settings['eael_product_list_content_general_button_position'] ? 1 : 0;
@@ -3157,8 +3203,8 @@ class Woo_Product_List extends Widget_Base
 
         $settings           = $this->settings                   = $this->get_settings_for_display();
 		$woo_product_list   = $this->woo_product_list_settings  = self::get_woo_product_list_settings( $settings );
-
-        if ( $settings['post_type'] === 'source_dynamic' && is_archive() || ! empty( $_REQUEST['post_type'] ) ) {
+        
+        if ( 'source_dynamic' === $settings['post_type'] && is_archive() || ! empty( $_REQUEST['post_type'] ) ) {
 		    $settings['posts_per_page'] = ! empty( $settings['eael_woo_product_list_products_count'] )  ? intval( $settings['eael_woo_product_list_products_count'] ) : 4;
 		    $settings['offset']         = ! empty( $settings['product_offset'] )  ? intval( $settings['product_offset'] ) : 0;
 		    $args                       = ClassesHelper::get_query_args( $settings );
