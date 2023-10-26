@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.3
 Requires PHP: 7.0
-Stable tag: 5.8.12
+Stable tag: 5.8.13
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -252,6 +252,12 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.8.13 - 26/10/2023 =
+
+- Fixed: Element style not allowed as child of element div in this context
+- Fixed: EA SVG Draw not working on Mozilla Firefox
+- Few minor bug fixes & improvements
 
 = 5.8.12 - 22/10/2023 =
 
