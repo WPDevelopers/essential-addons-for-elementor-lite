@@ -10,7 +10,8 @@ ea.hooks.addAction("init", "ea", () => {
 				$accordionType = $advanceAccordion.data("accordion-type"),
 				$accordionSpeed = $advanceAccordion.data("toogle-speed"),
 				$customIdOffset = $advanceAccordion.data("custom-id-offset"),
-				$scrollOnClick = $advanceAccordion.data("scroll-on-click");
+				$scrollOnClick = $advanceAccordion.data("scroll-on-click"),
+				$srollSpeed = $advanceAccordion.data("scroll-speed");
 
 			if (hashTag || $scrollOnClick === 'yes') {
 				$accordionHeader.each(function () {
@@ -77,7 +78,7 @@ ea.hooks.addAction("init", "ea", () => {
 					let $customIdOffsetVal = $customIdOffset ? parseFloat($customIdOffset) : 0;
 					$('html, body').animate({
 						scrollTop: $(this).data('scroll') - $customIdOffsetVal,
-					}, 300);
+					}, $srollSpeed);
 				}
 				ea.hooks.doAction("widgets.reinit",$this.parent());
 				ea.hooks.doAction("ea-advanced-accordion-triggered", $this.next());
@@ -94,7 +95,7 @@ ea.hooks.addAction("init", "ea", () => {
 				let $customIdOffsetVal = $customIdOffset ? parseFloat($customIdOffset) : 0;
 				$('html, body').animate({
 					scrollTop: $("#"+hashTag).offset().top - $customIdOffsetVal,
-				}, 300);
+				}, $srollSpeed);
 			}
 		}
 	);
