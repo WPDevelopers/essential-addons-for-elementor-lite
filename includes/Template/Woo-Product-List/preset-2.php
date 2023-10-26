@@ -23,6 +23,10 @@ $woo_product_list_loop = Woo_Product_List::get_woo_product_list_loop_settings( $
 ?>
 <div <?php post_class( 'product' ); ?>>
     <div class="eael-product-list-item">
+        <div class="eael-product-list-badge-wrap badge-preset-2">
+            <p>Sale</p>
+        </div>
+        
         <div class="eael-product-list-image-wrap">
             <?php if ( $woo_product_list['image_clickable'] ) : ?>                                
             <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link" >
