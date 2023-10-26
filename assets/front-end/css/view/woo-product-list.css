@@ -83,6 +83,54 @@
   margin-right: 15px;
   margin-bottom: 0;
 }
+.eael-product-list-wrapper .product.outofstock .eael-product-list-buttons-on-hover .eael-product-list-add-to-cart-button a {
+  display: none;
+}
+.eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-1 {
+  height: 100px;
+  width: 100px;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: absolute;
+  top: -30px;
+  left: 0;
+}
+.eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-1 .eael-product-list-badge-bg {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-1 .eael-product-list-badge-bg svg path {
+  fill: #DBEC73;
+}
+.eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-1 p {
+  color: #292929;
+  font-family: Sora;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.2;
+  text-transform: capitalize;
+  text-align: center;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+.eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-1 p span {
+  font-size: 21px;
+  font-weight: 600;
+  display: block;
+}
 .eael-product-list-wrapper .eael-product-list-image-wrap {
   text-align: center;
   width: 30%;
@@ -198,9 +246,17 @@
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
+.eael-product-list-wrapper .eael-product-list-rating {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
 .eael-product-list-wrapper .eael-product-list-rating .star-rating {
   margin: 0;
-  display: block;
+  display: inline-block;
   float: none;
   height: 1em;
   width: 5.6em;
@@ -220,6 +276,9 @@
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
+.eael-product-list-wrapper .eael-product-list-review-count {
+  font-size: 15px;
+}
 .eael-product-list-wrapper .eael-product-list-notice p {
   color: #515151;
   font-size: 16px;
@@ -237,35 +296,6 @@
 }
 .eael-product-list-wrapper .eael-product-list-notice.eael-product-list-notice-category p i {
   color: #897474;
-}
-.eael-product-list-wrapper .eael-product-list-countdown .eael-product-list-countdown-items {
-  margin: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  padding: 10px 14px;
-  border-radius: 4px;
-  list-style: none;
-}
-.eael-product-list-wrapper .eael-product-list-countdown .eael-product-list-countdown-items .eael-product-list-countdown-item:not(:last-child)::after {
-  content: ":";
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1;
-  padding: 0 2px;
-  margin-right: 4px;
-}
-.eael-product-list-wrapper .eael-product-list-countdown .eael-product-list-countdown-items .eael-product-list-countdown-item .eael-product-list-countdown-number {
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1;
-}
-.eael-product-list-wrapper .eael-product-list-countdown .eael-product-list-countdown-items .eael-product-list-countdown-item .eael-product-list-countdown-title {
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1;
 }
 .eael-product-list-wrapper .eael-product-list-title {
   width: 100%;
