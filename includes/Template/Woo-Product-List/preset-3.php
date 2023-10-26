@@ -24,12 +24,12 @@ $woo_product_list_loop = Woo_Product_List::get_woo_product_list_loop_settings( $
 <div <?php post_class( 'product' ); ?>>
     <div class="eael-product-list-item">
         <?php if( 'badge-preset-2' === $woo_product_list['badge_preset'] ) : ?>
-            <?php Woo_Product_List::eael_print_produt_badge_html( $woo_product_list ); ?>
+            <?php Woo_Product_List::eael_print_produt_badge_html( $woo_product_list, $product ); ?>
         <?php endif; ?>
 
         <div class="eael-product-list-image-wrap">
             <?php if( 'badge-preset-2' !== $woo_product_list['badge_preset'] ) : ?>
-                <?php Woo_Product_List::eael_print_produt_badge_html( $woo_product_list ); ?>
+                <?php Woo_Product_List::eael_print_produt_badge_html( $woo_product_list, $product ); ?>
             <?php endif; ?>
             
             <?php if ( $woo_product_list['image_clickable'] ) : ?>                                

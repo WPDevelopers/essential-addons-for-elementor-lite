@@ -235,11 +235,11 @@ class Woo_Product_List extends Widget_Base
             'return_value' => 'yes',
             'default' => '',
         ]);
-        
+
         $this->add_control(
-            'eael_product_list_layout_image_heading',
+            'eael_product_list_layout_content_header_heading',
             [
-                'label' => __('Image', 'essential-addons-for-elementor-lite'),
+                'label' => __('Content Header', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -253,15 +253,6 @@ class Woo_Product_List extends Widget_Base
             'return_value' => 'yes',
             'default' => 'yes',
         ]);
-
-        $this->add_control(
-            'eael_product_list_layout_content_header_heading',
-            [
-                'label' => __('Content Header', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
-                'separator' => 'before',
-            ]
-        );
 
         $this->add_control('eael_woo_product_list_rating_show', [
             'label' => esc_html__('Rating', 'essential-addons-for-elementor-lite'),
@@ -598,6 +589,7 @@ class Woo_Product_List extends Widget_Base
             'eael_product_list_content_general_button_position',
             [
                 'label'   => __( 'Buttons', 'essential-addons-for-elementor-lite' ),
+                'description'   => __( 'Add to Cart, Quick View and Link buttons/icons', 'essential-addons-for-elementor-lite' ),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'both',
                 'options' => [
@@ -667,6 +659,9 @@ class Woo_Product_List extends Widget_Base
             [
                 'label' => __('Badge', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
+                'condition'     => [
+                    'eael_woo_product_list_badge_show' => 'yes',
+                ]
             ]
         );
 
@@ -708,28 +703,35 @@ class Woo_Product_List extends Widget_Base
             ]
         );
 
-	    // $this->add_control(
-		//     'eael_product_sale_text',
-		//     [
-		// 	    'label'       => esc_html__( 'Sale Text', 'essential-addons-for-elementor-lite' ),
-		// 	    'type'        => Controls_Manager::TEXT,
-		// 	    'separator' => 'before',
-        //         'ai' => [
-		// 			'active' => false,
-		// 		],
-		//     ]
-	    // );
+	    $this->add_control(
+		    'eael_product_list_content_header_badge_sale_text',
+		    [
+			    'label'       => esc_html__( 'Sale Text', 'essential-addons-for-elementor-lite' ),
+			    'default'     => esc_html__( 'Sale', 'essential-addons-for-elementor-lite' ),
+			    'type'        => Controls_Manager::TEXT,
+                'ai' => [
+					'active' => false,
+				],
+                'condition'     => [
+                    'eael_woo_product_list_badge_show' => 'yes',
+                ]
+		    ]
+	    );
 
-	    // $this->add_control(
-		//     'eael_product_stockout_text',
-		//     [
-		// 	    'label'       => esc_html__( 'Stock Out Text', 'essential-addons-for-elementor-lite' ),
-		// 	    'type'        => Controls_Manager::TEXT,
-        //         'ai' => [
-		// 			'active' => false,
-		// 		],
-		//     ]
-	    // );
+	    $this->add_control(
+		    'eael_product_list_content_header_badge_stock_out_text',
+		    [
+			    'label'       => esc_html__( 'Stock Out Text', 'essential-addons-for-elementor-lite' ),
+			    'default'     => esc_html__( 'Stock Out', 'essential-addons-for-elementor-lite' ),
+			    'type'        => Controls_Manager::TEXT,
+                'ai' => [
+					'active' => false,
+				],
+                'condition'     => [
+                    'eael_woo_product_list_badge_show' => 'yes',
+                ]
+		    ]
+	    );
 
         $this->add_control(
             'eael_product_list_content_body_heading',
@@ -1690,6 +1692,132 @@ class Woo_Product_List extends Widget_Base
                 'separator' => 'before',
             ]
         );
+
+        $this->add_control(
+            'eael_product_list_color_typography_badge_heading',
+            [
+                'label' => __('Badge', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'condition' => [
+                    'eael_woo_product_list_badge_show' => 'yes',
+                ],
+            ]
+        );
+
+        $this->start_controls_tabs( 'eael_product_list_color_typography_badge_color_tabs' );
+        
+        $this->start_controls_tab( 
+            'eael_product_list_color_typography_badge_color_tabs_sale',
+            [
+                'label' => esc_html__( 'Sale', 'essential-addons-for-elementor-lite' ),
+                'condition' => [
+                    'eael_woo_product_list_badge_show' => 'yes',
+                ],
+            ] 
+        );
+
+        $this->add_control(
+            'eael_product_list_color_typography_badge_color_sale',
+            [
+                'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-badge-wrap.is-on-sale p' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-badge-wrap.is-on-sale.badge-preset-3' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_woo_product_list_badge_show' => 'yes',
+                ],
+            ]
+        );
+        
+        $this->add_control(
+            'eael_product_list_color_typography_badge_bg_color_sale',
+            [
+                'label'     => esc_html__( 'Background', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-2.is-on-sale p'  => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-3.is-on-sale'    => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-badge-wrap.is-on-sale svg path'          => 'fill: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-2.is-on-sale.badge-alignment-left::after'    => 'border-right: 10px solid {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-2.is-on-sale::before'                        => 'border-bottom: 10px solid {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-2.is-on-sale.badge-alignment-right::after'   => 'border-left: 10px solid {{VALUE}}',
+                ],
+                'condition' => [
+                    'eael_woo_product_list_badge_show' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_product_list_color_typography_badge_typography_sale',
+                'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-badge-wrap.is-on-sale p',
+                'condition' => [
+                    'eael_woo_product_list_badge_show' => 'yes',
+                    'eael_product_list_content_header_badge_preset!' => 'badge-preset-2',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->start_controls_tab( 
+            'eael_product_list_color_typography_badge_color_tabs_stock_out',
+            [
+                'label' => esc_html__( 'Stock Out', 'essential-addons-for-elementor-lite' ),
+                'condition' => [
+                    'eael_woo_product_list_badge_show' => 'yes',
+                ],
+            ] 
+        );
+
+        $this->add_control(
+            'eael_product_list_color_typography_badge_color_stock_out',
+            [
+                'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-badge-wrap.stock-out p' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_woo_product_list_badge_show' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_color_typography_badge_bg_color_stock_out',
+            [
+                'label'     => esc_html__( 'Background', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-2.stock-out' => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-3.stock-out' => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-badge-wrap.stock-out svg path'       => 'fill: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_woo_product_list_badge_show' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_product_list_color_typography_badge_typography_stock_out',
+                'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-badge-wrap.stock-out p',
+                'condition' => [
+                    'eael_woo_product_list_badge_show' => 'yes',
+                ],
+            ]
+        );
+        
+        $this->end_controls_tab();
+        
+        $this->end_controls_tabs();
 
         $this->add_control(
             'eael_product_list_color_typography_rating_heading',
@@ -2962,48 +3090,60 @@ class Woo_Product_List extends Widget_Base
 	    });
     }
 
-    public static function eael_print_produt_badge_html( $woo_product_list ){
-        if ( $woo_product_list['badge_show'] ) :
+    public static function eael_print_produt_badge_html( $woo_product_list, $product ){
+        $badge_text = ''; 
+        $stock_onsale_class = '';
+        
+        if ( ! $product->is_in_stock() ) {
+            $badge_text = $woo_product_list['stock_out_text']; 
+            $stock_onsale_class = esc_html('stock-out'); 
+
+        } elseif ( $product->is_on_sale() ) {
+            $badge_text = $woo_product_list['sale_text'];
+            $stock_onsale_class = esc_html('is-on-sale'); 
+        }
+
+        if ( $woo_product_list['badge_show'] && ! empty( $badge_text ) ) :
             
             switch( $woo_product_list['badge_preset'] ){
                 case 'badge-preset-1':
                     ?>
-                    <div class="eael-product-list-badge-wrap badge-preset-1 <?php echo esc_attr( $woo_product_list['badge_alignment_class'] ) ?> ">
+                    <div class="eael-product-list-badge-wrap badge-preset-1 <?php echo esc_attr( $woo_product_list['badge_alignment_class'] ) ?> <?php echo esc_attr( $stock_onsale_class ) ?>">
                         <div class="eael-product-list-badge-bg">
                             <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" fill="none">
                                 <path d="M50 0L59.861 13.1982L75 6.69873L76.9408 23.0592L93.3013 25L86.8018 40.139L100 50L86.8018 59.861L93.3013 75L76.9408 76.9408L75 93.3013L59.861 86.8018L50 100L40.139 86.8018L25 93.3013L23.0592 76.9408L6.69873 75L13.1982 59.861L0 50L13.1982 40.139L6.69873 25L23.0592 23.0592L25 6.69873L40.139 13.1982L50 0Z" fill="#DBEC73"/>
                                 </svg>
                         </div>
-                        <p><span>30%</span> Off</p>
+                        <p><strong><?php echo esc_html( $badge_text ); ?></strong></p>
                     </div>
                     <?php
                     break;
 
                 case 'badge-preset-2':
                     ?>
-                    <div class="eael-product-list-badge-wrap badge-preset-2 <?php echo esc_attr( $woo_product_list['badge_alignment_class'] ) ?> ">
-                        <p>Sale</p>
+                    <div class="eael-product-list-badge-wrap badge-preset-2 <?php echo esc_attr( $woo_product_list['badge_alignment_class'] ) ?> <?php echo esc_attr( $stock_onsale_class ) ?> ">
+                        <p><?php echo esc_html( $badge_text ); ?></p>
                     </div>
                     <?php
                     break;
 
                 case 'badge-preset-3':
                     ?>
-                    <div class="eael-product-list-badge-wrap badge-preset-3 <?php echo esc_attr( $woo_product_list['badge_alignment_class'] ) ?> ">
-                        <p><span>50%</span> Off</p>
+                    <div class="eael-product-list-badge-wrap badge-preset-3 <?php echo esc_attr( $woo_product_list['badge_alignment_class'] ) ?> <?php echo esc_attr( $stock_onsale_class ) ?> ">
+                        <p><?php echo esc_html( $badge_text ); ?></p>
                     </div>
                     <?php
                     break;
                     
                 default:
                     ?>
-                    <div class="eael-product-list-badge-wrap badge-preset-1">
+                    <div class="eael-product-list-badge-wrap badge-preset-1 <?php echo esc_attr( $woo_product_list['badge_alignment_class'] ) ?> <?php echo esc_attr( $stock_onsale_class ) ?> ">
                         <div class="eael-product-list-badge-bg">
                             <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" fill="none">
                                 <path d="M50 0L59.861 13.1982L75 6.69873L76.9408 23.0592L93.3013 25L86.8018 40.139L100 50L86.8018 59.861L93.3013 75L76.9408 76.9408L75 93.3013L59.861 86.8018L50 100L40.139 86.8018L25 93.3013L23.0592 76.9408L6.69873 75L13.1982 59.861L0 50L13.1982 40.139L6.69873 25L23.0592 23.0592L25 6.69873L40.139 13.1982L50 0Z" fill="#DBEC73"/>
                                 </svg>
                         </div>
-                        <p><span>30%</span> Off</p>
+                        <p><strong><?php echo esc_html($badge_text); ?></strong></p>
                     </div>
                     <?php
                     break;
@@ -3074,6 +3214,8 @@ class Woo_Product_List extends Widget_Base
 		
 		$woo_product_list['badge_preset']                   = ! empty( $settings['eael_product_list_content_header_badge_preset'] ) ? esc_html( $settings['eael_product_list_content_header_badge_preset'] ) : esc_html('badge-preset-1');
 		$woo_product_list['badge_alignment_class']          = ! empty( $settings['eael_product_list_content_header_badge_alignment'] ) ? esc_html( $settings['eael_product_list_content_header_badge_alignment'] ) : esc_html('badge-alignment-left');
+		$woo_product_list['sale_text']                      = ! empty( $settings['eael_product_list_content_header_badge_sale_text'] ) ? esc_html( $settings['eael_product_list_content_header_badge_sale_text'] ) : esc_html__( 'Sale', 'essential-addons-for-elementor-lite' );
+		$woo_product_list['stock_out_text']                 = ! empty( $settings['eael_product_list_content_header_badge_stock_out_text'] ) ? esc_html( $settings['eael_product_list_content_header_badge_stock_out_text'] ) : esc_html__( 'Stock Out', 'essential-addons-for-elementor-lite' );
 		$woo_product_list['image_size']                     = ! empty( $settings['eael_product_list_image_size_size'] ) ? esc_html( $settings['eael_product_list_image_size_size'] ) : esc_html( 'medium' );
 		$woo_product_list['image_clickable']                = ! empty( $settings['eael_product_list_image_clickable'] ) && 'yes' === $settings['eael_product_list_image_clickable'] ? 1 : 0;
         $woo_product_list['button_position_static']         = ! empty( $settings['eael_product_list_content_general_button_position'] ) && 'on-hover' !== $settings['eael_product_list_content_general_button_position'] ? 1 : 0;
