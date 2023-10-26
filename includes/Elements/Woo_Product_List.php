@@ -1121,14 +1121,14 @@ class Woo_Product_List extends Widget_Base
 					],
 				],
 				'default'    => [
-					'top'      => 0,
+					'top'      => 15,
 					'right'    => 0,
-					'bottom'   => 15,
+					'bottom'   => 0,
 					'left'     => 0,
 					'unit'     => 'px',
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item:not(:last-child)' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-product-list-wrapper .product:not(:first-child)' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
