@@ -146,11 +146,50 @@ $spacer-lg: $spacing5;
         }
     }
 
-    // Stock out
     .product.outofstock {
         .eael-product-list-buttons-on-hover {
             .eael-product-list-add-to-cart-button a {
                 display: none;
+            }
+        }
+    }
+
+    // Badge
+    .eael-product-list-badge-wrap.badge-preset-1 {
+        height: 100px;
+        width: 100px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: -30px;
+        left: 0;
+
+        .eael-product-list-badge-bg {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            svg path {
+                fill:#DBEC73;
+            }
+        }
+
+        p {
+            color: #292929;
+            font-size: 16px;
+            line-height: 1.2;
+            text-transform: capitalize;
+            text-align: center;
+            margin: 0;
+            position: relative;
+
+            span {
+                font-size: 21px;
+                font-weight: 600;
+                display: block;
             }
         }
     }
@@ -249,48 +288,6 @@ $spacer-lg: $spacing5;
             opacity: 1;
             visibility: visible;
             transform: translateY(-50px);
-        }
-    }
-
-    .eael-product-list-badge-wrap.badge-preset-1 {
-        height: 100px;
-        width: 100px;
-        padding: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        top: -30px;
-        left: 0;
-
-        .eael-product-list-badge-bg {
-            height: 100%;
-            width: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            & svg path {
-                fill:#DBEC73;
-            }
-        }
-
-        & p {
-            color: #292929;
-            font-family: Sora;
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 1.2;
-            text-transform: capitalize;
-            text-align: center;
-            margin: 0;
-            position: relative;
-            z-index: 1;
-            & span {
-                font-size: 21px;
-                font-weight: 600;
-                display: block;
-            }
         }
     }
 
