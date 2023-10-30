@@ -42,6 +42,7 @@ $woo_product_list_loop = Woo_Product_List::get_woo_product_list_loop_settings( $
             </a>
             <?php endif; ?>
 
+            <?php if ( $woo_product_list['button_position_on_hover'] ) : ?>
             <ul class="eael-product-list-buttons-on-hover">
                 <?php if ( $woo_product_list['add_to_cart_button_show'] ) : ?>
                 <li class="eael-product-list-add-to-cart-button eael-m-0">
@@ -61,6 +62,7 @@ $woo_product_list_loop = Woo_Product_List::get_woo_product_list_loop_settings( $
                 </li>
                 <?php endif; ?>
             </ul>
+            <?php endif; ?>
         </div>
 
         <div class="eael-product-list-content-wrap">

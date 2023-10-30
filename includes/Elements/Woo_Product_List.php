@@ -320,18 +320,6 @@ class Woo_Product_List extends Widget_Base
             'default' => 'yes',
         ]);
 
-        $this->add_control('eael_woo_product_list_size_show', [
-            'label' => esc_html__('Size', 'essential-addons-for-elementor-lite'),
-            'type' => Controls_Manager::SWITCHER,
-			'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
-			'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
-            'return_value' => 'yes',
-            'default' => '',
-            'condition'     => [
-                'eael_dynamic_template_layout!' => 'preset-3',
-            ]
-        ]);
-
         $this->add_control('eael_woo_product_list_size_preset_3_show', [
             'label' => esc_html__('Size', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::SWITCHER,
@@ -589,7 +577,7 @@ class Woo_Product_List extends Widget_Base
             'eael_product_list_content_general_button_position',
             [
                 'label'   => __( 'Buttons', 'essential-addons-for-elementor-lite' ),
-                'description'   => __( 'Add to Cart, Quick View and Link buttons/icons', 'essential-addons-for-elementor-lite' ),
+                'description'   => __( 'Add to Cart, Quick View, Link buttons/icons on content footer or on image hover or in both positions', 'essential-addons-for-elementor-lite' ),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'both',
                 'options' => [
@@ -613,6 +601,7 @@ class Woo_Product_List extends Widget_Base
             'eael_product_list_content_header_position',
             [
                 'label'   => __( 'Position', 'essential-addons-for-elementor-lite' ),
+                'description'   => __( 'Whether to show content header before or after the title', 'essential-addons-for-elementor-lite' ),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'before-title',
                 'options' => [
@@ -629,6 +618,7 @@ class Woo_Product_List extends Widget_Base
             'eael_product_list_content_header_position_preset_2_3',
             [
                 'label'   => __( 'Position', 'essential-addons-for-elementor-lite' ),
+                'description'   => __( 'Content header items before or after the title', 'essential-addons-for-elementor-lite' ),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'after-title',
                 'options' => [
@@ -645,6 +635,7 @@ class Woo_Product_List extends Widget_Base
             'eael_product_list_content_header_direction',
             [
                 'label'   => __( 'Direction', 'essential-addons-for-elementor-lite' ),
+                'description'   => __( 'Content header items alignment', 'essential-addons-for-elementor-lite' ),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'ltr',
                 'options' => [
@@ -1299,14 +1290,6 @@ class Woo_Product_List extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'eael_product_list_content_header_general_heading_style',
-            [
-                'label' => __('General', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
-            ]
-        );
-
         $this->add_control('eael_product_list_content_header_general_custom_spacing', [
             'label' => esc_html__('Custom Spacing', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::SWITCHER,
@@ -1315,6 +1298,19 @@ class Woo_Product_List extends Widget_Base
             'return_value' => 'yes',
             'default' => '',
         ]);
+
+        $this->add_control( 'eael_product_list_content_body_title_style_info', [
+            'type'            => Controls_Manager::RAW_HTML,
+            'raw'             => __( 'Title spacing can be added from Style => Content => Content Body => Title ', 'essential-addons-for-elementor-lite' ),
+            'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+            'conditions' => $this->content_header_position_conditions(
+                [
+                'name'     => 'eael_product_list_content_header_general_custom_spacing',
+                'operator' => '===',
+                'value'    => 'yes',
+                ]
+            ),
+        ] );
 
 		$this->add_responsive_control(
 			'eael_product_list_content_header_margin',
@@ -1531,14 +1527,23 @@ class Woo_Product_List extends Widget_Base
 		);
 
         $this->add_control(
-            'eael_product_list_content_footer_add_to_cart_heading_style',
+            'eael_product_list_content_footer_static_buttons_heading_style',
             [
-                'label' => __('Add to Cart', 'essential-addons-for-elementor-lite'),
+                'label' => __('Static Buttons', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
 
-		$this->add_responsive_control(
+        $this->start_controls_tabs( 'eael_product_list_content_footer_static_buttons_tabs' );
+        
+        $this->start_controls_tab( 
+            'eael_product_list_content_footer_static_buttons_tabs_add_to_cart',
+            [
+                'label' => esc_html__( 'Add to Cart', 'essential-addons-for-elementor-lite' ),
+            ] 
+        );
+
+        $this->add_responsive_control(
 			'eael_product_list_content_footer_add_to_cart_margin',
 			[
 				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
@@ -1594,15 +1599,16 @@ class Woo_Product_List extends Widget_Base
 			]
 		);
 
-        $this->add_control(
-            'eael_product_list_content_footer_quick_view_heading_style',
+        $this->end_controls_tab();
+
+        $this->start_controls_tab( 
+            'eael_product_list_content_footer_static_buttons_tabs_view_product',
             [
-                'label' => __('Quick View', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
-            ]
+                'label' => esc_html__( 'View Product', 'essential-addons-for-elementor-lite' ),
+            ] 
         );
 
-		$this->add_responsive_control(
+        $this->add_responsive_control(
 			'eael_product_list_content_footer_quick_view_margin',
 			[
 				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
@@ -1657,6 +1663,10 @@ class Woo_Product_List extends Widget_Base
 				'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-quick-view-button a',
 			]
 		);
+
+        $this->end_controls_tab();
+        
+        $this->end_controls_tabs();
 
         $this->add_control(
             'eael_product_list_content_footer_on_hover_buttons_heading_style',
@@ -3114,6 +3124,54 @@ class Woo_Product_List extends Widget_Base
         
         return $conditions;
     }
+    
+    protected function content_header_position_conditions( $extra_conditions = [] ){
+        $conditions_wrap = [];
+        $conditions =
+        [
+            'relation' => 'or',
+            'terms' => [
+                [
+                    'relation' => 'and',
+                    'terms'    => [
+                        [
+                            'name'     => 'eael_product_list_content_header_position',
+                            'operator' => '===',
+                            'value'    => 'after-title',
+                        ],
+                        [
+                            'name'     => 'eael_dynamic_template_layout',
+                            'operator' => '==',
+                            'value'    => 'preset-1',
+                        ],
+                    ]
+                ],
+                [
+                    'relation' => 'and',
+                    'terms'    => [
+                        [
+                            'name'     => 'eael_product_list_content_header_position_preset_2_3',
+                            'operator' => '===',
+                            'value'    => 'after-title',
+                        ],
+                        [
+                            'name'     => 'eael_dynamic_template_layout',
+                            'operator' => '!==',
+                            'value'    => 'preset-1',
+                        ],
+                    ]
+                ],
+            ],
+        ];
+
+        if ( is_array( $extra_conditions ) && count( $extra_conditions ) ) {
+            $conditions_wrap['relation'] = 'and';
+            $conditions_wrap['terms'][] = $conditions;
+            $conditions_wrap['terms'][] = $extra_conditions;
+        }
+        
+        return ! empty( $conditions_wrap ) ? $conditions_wrap : $conditions;
+    }
 
     protected function eael_get_product_statuses() {
         return apply_filters( 'eael/woo-woo-product-list/product-statuses', [
@@ -3275,6 +3333,7 @@ class Woo_Product_List extends Widget_Base
 		$woo_product_list['image_size']                     = ! empty( $settings['eael_product_list_image_size_size'] ) ? esc_html( $settings['eael_product_list_image_size_size'] ) : esc_html( 'medium' );
 		$woo_product_list['image_clickable']                = ! empty( $settings['eael_product_list_image_clickable'] ) && 'yes' === $settings['eael_product_list_image_clickable'] ? 1 : 0;
         $woo_product_list['button_position_static']         = ! empty( $settings['eael_product_list_content_general_button_position'] ) && 'on-hover' !== $settings['eael_product_list_content_general_button_position'] ? 1 : 0;
+        $woo_product_list['button_position_on_hover']       = ! empty( $settings['eael_product_list_content_general_button_position'] ) && 'static' !== $settings['eael_product_list_content_general_button_position'] ? 1 : 0;
         $woo_product_list['content_header_position']        = ! empty( $settings['eael_product_list_content_header_position'] ) ? esc_html( $settings['eael_product_list_content_header_position'] ) : esc_html( 'before-title' );
 		$woo_product_list['content_header_direction_rtl']   = ! empty( $settings['eael_product_list_content_header_direction'] ) && 'rtl' === $settings['eael_product_list_content_header_direction'] ? 1 : 0;
 		$woo_product_list['title_tag']                      = ! empty( $settings['eael_product_list_content_body_title_tag'] ) ? ClassesHelper::eael_validate_html_tag( $settings['eael_product_list_content_body_title_tag'] ) : 'div';
