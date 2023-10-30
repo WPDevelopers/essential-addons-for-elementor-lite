@@ -158,23 +158,23 @@ trait Helper
 	        unset( $args['found_posts'] );
         }
 
-        $this->add_render_attribute('load-more', [
-            'class'          => "eael-load-more-button",
-            'id'             => "eael-load-more-btn-" . $this->get_id(),
-            'data-widget-id' => $this->get_id(),
-            'data-widget' => $this->get_id(),
-            'data-page-id'   => $this->page_id,
-            'data-nonce'     => wp_create_nonce( 'load_more' ),
-            'data-template'  => json_encode([
-                'dir'   => $plugin_type,
-                'file_name' => $settings['loadable_file_name'],
-                'name' => $this->process_directory_name() ],
-                1),
-            'data-class'    => get_class( $this ),
-            'data-layout'   => isset($settings['layout_mode']) ? $settings['layout_mode'] : "",
-            'data-page'     => 1,
-            'data-args'     => http_build_query( $args ),
-        ]);
+	    $this->add_render_attribute( 'load-more', [
+		    'class'          => "eael-load-more-button",
+		    'id'             => "eael-load-more-btn-" . $this->get_id(),
+		    'data-widget-id' => $this->get_id(),
+		    'data-widget'    => $this->get_id(),
+		    'data-page-id'   => $this->page_id,
+		    'data-template'  => json_encode( [
+			    'dir'       => $plugin_type,
+			    'file_name' => $settings['loadable_file_name'],
+			    'name'      => $this->process_directory_name()
+		    ],
+			    1 ),
+		    'data-class'     => get_class( $this ),
+		    'data-layout'    => isset( $settings['layout_mode'] ) ? $settings['layout_mode'] : "",
+		    'data-page'      => 1,
+		    'data-args'      => http_build_query( $args ),
+	    ] );
 
 	    if ( $max_page ) {
 		    $this->add_render_attribute( 'load-more', [ 'data-max-page' => $max_page ] );
@@ -185,8 +185,8 @@ trait Helper
             ?>
             <div class="eael-load-more-button-wrap<?php echo "eael-dynamic-filterable-gallery" == $this->get_name() ? " dynamic-filter-gallery-loadmore" : ""; echo esc_attr( $show_or_hide ); ?>">
                 <button <?php $this->print_render_attribute_string( 'load-more' ); ?>>
-                    <div class="eael-btn-loader button__loader"></div>
-                    <span><?php echo esc_html($settings['show_load_more_text']) ?></span>
+                    <span class="eael-btn-loader button__loader"></span>
+                    <span class="eael_load_more_text"><?php echo esc_html($settings['show_load_more_text']) ?></span>
                 </button>
             </div>
         <?php }
@@ -490,7 +490,7 @@ trait Helper
 		?>
         <div id="eael-admin-promotion-message" class="eael-admin-promotion-message">
             <i class="e-notice__dismiss eael-admin-promotion-close" role="button" aria-label="Dismiss" tabindex="0"></i>
-			<?php printf( __( "<p> <i>📣</i> NEW: Essential Addons Pro 5.5 is here, with new '<a target='_blank' href='%s'>Woo Thank You</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/woo-thank-you' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) ); ?>
+			<?php printf( __( "<p> <i>📣</i> NEW: Essential Addons Pro 5.8 is here, with new '<a target='_blank' href='%s'>Fancy Chart</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/fancy-chart/' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) ); ?>
         </div>
 		<?php
 	}
@@ -543,7 +543,7 @@ trait Helper
 	}
 
 	public function essential_blocks_promo_admin_js_template() {
-		$eb_logo          = EAEL_PLUGIN_URL . 'assets/admin/images/eb.svg';
+		$eb_logo          = EAEL_PLUGIN_URL . 'assets/admin/images/eb-new.svg';
 		$eb_promo_cross   = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/cross.svg';
 		$eb_promo_img1    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img1.gif';
 		$eb_promo_img2    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img2.gif';
@@ -660,6 +660,14 @@ trait Helper
             </div>
         </script>
 		<?php
+	}
+
+	public function eael_post_view_count() {
+		if ( is_single() ) {
+			$post_id    = get_the_ID();
+			$view_count = absint( get_post_meta( $post_id, '_eael_post_view_count', true ) );
+			update_post_meta( $post_id, '_eael_post_view_count', ++ $view_count );
+		}
 	}
 }
 

@@ -467,7 +467,7 @@ trait Admin {
         <div class="wpnotice-wrapper notice  notice-info is-dismissible eael-eb-special-optin-notice">
             <div class="wpnotice-content-wrapper">
                 <div class="eael-eb-optin-logo">
-                    <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/eb.svg' ); ?>" alt="">
+                    <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/eb-new.svg' ); ?>" alt="">
                 </div>
                 <div class="eael-eb-optin">
                     <h3><?php esc_html_e( 'Using Gutenberg? Check out Essential Blocks!', 'essential-addons-for-elementor-lite' ); ?></h3>

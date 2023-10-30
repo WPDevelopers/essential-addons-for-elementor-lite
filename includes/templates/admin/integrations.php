@@ -15,13 +15,6 @@ $integrations = [
 		'desc'     => __( 'EmbedPress lets you embed videos, images, posts, audio, maps and upload PDF, DOC, PPT & all other types of content into your WordPress site. ', 'essential-addons-for-elementor-lite' ),
 	],
 	[
-		'slug'     => 'reviewx',
-		'basename' => 'reviewx/reviewx.php',
-		'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/rx.svg',
-		'title'    => __( 'ReviewX', 'essential-addons-for-elementor-lite' ),
-		'desc'     => __( 'ReviewX lets you get instant customer ratings and multi criteria reviews to add credibility to your WooCommerce Store and increase conversion rates.', 'essential-addons-for-elementor-lite' ),
-	],
-	[
 		'slug'     => 'notificationx',
 		'basename' => 'notificationx/notificationx.php',
 		'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/nx.svg',
@@ -52,9 +45,16 @@ $integrations = [
 	[
 		'slug'     => 'essential-blocks',
 		'basename' => 'essential-blocks/essential-blocks.php',
-		'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/eb.svg',
+		'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/eb-new.svg',
 		'title'    => __( 'Essential Blocks', 'essential-addons-for-elementor-lite' ),
 		'desc'     => __( 'Enhance your Gutenberg experience with 40+ unique blocks (more coming soon). Add power to the block editor using our easy-to-use blocks which are designed to make your next WordPress page or posts design easier and prettier than ever before.', 'essential-addons-for-elementor-lite' ),
+	],
+	[
+		'slug'     => 'better-payment',
+		'basename' => 'better-payment/better-payment.php',
+		'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/bp.svg',
+		'title'    => __( 'Better Payment', 'essential-addons-for-elementor-lite' ),
+		'desc'     => __( 'Better Payment streamlines transactions in Elementor, integrating PayPal, Stripe, advanced analytics, validation, and Elementor forms for the most secure & efficient payments.', 'essential-addons-for-elementor-lite' ),
 	],
 ];
 ?>

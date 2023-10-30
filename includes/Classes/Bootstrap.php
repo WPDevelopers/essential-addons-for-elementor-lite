@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
+use Elementor\Plugin;
 use Essential_Addons_Elementor\Traits\Admin;
 use Essential_Addons_Elementor\Traits\Core;
 use Essential_Addons_Elementor\Traits\Elements;
@@ -72,8 +73,8 @@ class Bootstrap
     protected $installer;
 
 
-    const EAEL_PROMOTION_FLAG = 7;
-    const EAEL_ADMIN_MENU_FLAG = 7;
+    const EAEL_PROMOTION_FLAG = 10;
+    const EAEL_ADMIN_MENU_FLAG = 10;
     /**
      * Singleton instance
      *
@@ -125,8 +126,6 @@ class Bootstrap
 		    new Asset_Builder( $this->registered_elements, $this->registered_extensions );
 	    }
 
-
-
     }
 
     protected function register_hooks()
@@ -143,6 +142,7 @@ class Bootstrap
         // Enqueue
         add_action('eael/before_enqueue_styles', [$this, 'before_enqueue_styles']);
         add_action('elementor/editor/before_enqueue_scripts', [$this, 'editor_enqueue_scripts']);
+        add_action('elementor/frontend/before_register_scripts', [$this, 'frontend_enqueue_scripts']);
 
         // Generator
 
@@ -246,7 +246,7 @@ class Bootstrap
 
 
         // Admin
-        if (is_admin()) {
+	    if ( is_admin() ) {
             // Admin
             if (!$this->pro_enabled) {
                 $this->admin_notice();
@@ -288,11 +288,28 @@ class Bootstrap
 //	        add_action( 'admin_notices', [ $this, 'eael_black_friday_optin' ] );
 //	        add_action( 'eael_admin_notices', [ $this, 'eael_black_friday_optin' ] );
 //	        add_action( 'wp_ajax_eael_black_friday_optin_dismiss', [ $this, 'eael_black_friday_optin_dismiss' ] );
+
+	        if ( ! current_user_can( 'administrator' ) ) {
+		        add_filter( 'elementor/document/save/data', function ( $data ) {
+			        $data['elements'] = Plugin::$instance->db->iterate_data( $data['elements'], function ( $element ) {
+				        if ( isset( $element['widgetType'] ) && $element['widgetType'] === 'eael-login-register' ) {
+					        if ( ! empty( $element['settings']['register_user_role'] ) ) {
+						        $element['settings']['register_user_role'] = '';
+					        }
+				        }
+
+				        return $element;
+			        } );
+
+			        return $data;
+		        } );
+	        }
+        } else {
+	        add_action( 'wp', [ $this, 'eael_post_view_count' ] );
         }
 
 	    // beehive theme compatibility
 	    add_filter( 'beehive_scripts', array( $this, 'beehive_theme_swiper_slider_compatibility' ), 999 );
-
 
     }
 }
