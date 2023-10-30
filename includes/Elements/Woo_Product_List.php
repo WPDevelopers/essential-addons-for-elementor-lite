@@ -669,6 +669,25 @@ class Woo_Product_List extends Widget_Base
                 ],
                 'condition' => [
 				    'eael_woo_product_list_badge_show' => 'yes',
+				    'eael_dynamic_template_layout!' => 'preset-2',
+			    ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_content_header_badge_preset_2',
+            [
+                'label'   => __( 'Preset', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'badge-preset-2',
+                'options' => [
+                    'badge-preset-1'  => esc_html__( 'Preset 1', 'essential-addons-for-elementor-lite' ),
+                    'badge-preset-2'  => esc_html__( 'Preset 2', 'essential-addons-for-elementor-lite' ),
+                    'badge-preset-3'  => esc_html__( 'Preset 3', 'essential-addons-for-elementor-lite' ),
+                ],
+                'condition' => [
+				    'eael_woo_product_list_badge_show' => 'yes',
+				    'eael_dynamic_template_layout' => 'preset-2',
 			    ],
             ]
         );
@@ -3355,6 +3374,10 @@ class Woo_Product_List extends Widget_Base
         if( 'preset-2' === $woo_product_list['layout'] || 'preset-3' === $woo_product_list['layout'] ){
             $woo_product_list['content_header_position']    = ! empty( $settings['eael_product_list_content_header_position_preset_3'] ) ? esc_html( $settings['eael_product_list_content_header_position_preset_3'] ) : esc_html( 'after-title' );
             $woo_product_list['total_sold_show']    = ! empty( $settings['eael_woo_product_list_total_sold_preset_2_3_show'] ) && 'yes' === esc_html( $settings['eael_woo_product_list_total_sold_preset_2_3_show'] ) ? 1 : 0;
+        }
+
+        if( 'preset-2' === $woo_product_list['layout'] ){
+		    $woo_product_list['badge_preset']   = ! empty( $settings['eael_product_list_content_header_badge_preset_2'] ) ? esc_html( $settings['eael_product_list_content_header_badge_preset_2'] ) : esc_html('badge-preset-2');
         }
 
         return $woo_product_list;
