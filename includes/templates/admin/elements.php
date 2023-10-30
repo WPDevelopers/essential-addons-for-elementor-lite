@@ -377,7 +377,15 @@ $elements = [
                 'demo_link' => 'https://essential-addons.com/elementor/svg-draw/',
                 'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-svg-draw/',
                 'promotion' => 'new'
-            ]
+			],
+			[
+				'key'       => 'fancy-chart',
+				'title'     => __( 'Fancy Chart', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/fancy-chart/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-fancy-chart/',
+				'promotion' => 'new',
+				'is_pro'    => true
+			]
 		]
 	],
 	'marketing-elements'       => [
@@ -611,6 +619,14 @@ $elements = [
                 'is_pro'    => true
 			],
 			[
+				'key'       => 'woo-cross-sells',
+				'title'     => __( 'Woo Cross Sells', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/woo-cross-sells/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-woo-cross-sells/',
+				'promotion' => 'new',
+				'is_pro'    => true
+			],
+			[
 				'key'       => 'woo-product-compare',
 				'title'     => __( 'Woo Product Compare', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/woo-product-compare/',
@@ -621,6 +637,14 @@ $elements = [
 				'title'     => __( 'Woo Product Gallery', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/woo-product-gallery/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/woo-product-gallery/'
+			],
+			[
+				'key'       => 'woo-account-dashboard',
+				'title'     => __( 'Woo Account Dashboard', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/woo-account-dashboard/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-woo-account-dashboard/',
+				'promotion' => 'new',
+                'is_pro'    => true
 			],
 		]
 	]
