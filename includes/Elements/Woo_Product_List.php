@@ -1905,6 +1905,26 @@ class Woo_Product_List extends Widget_Base
         
         $this->end_controls_tabs();
 
+        $this->add_responsive_control(
+            'eael_product_list_badge_size',
+            [
+                'label'     => esc_html__('Badge Size', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::SLIDER,
+                'range'     => [
+                    'px' => [
+                        'max' => 500,
+                    ],
+                ],
+                'default'   => [
+                    'size' => 100,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-1 .eael-product-list-badge-bg svg' => 'width: {{SIZE}}px; height: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-1' => 'width: {{SIZE}}px; height: {{SIZE}}px;',
+                ],
+            ]
+        );
+
         $this->add_control(
             'eael_product_list_color_typography_rating_heading',
             [
@@ -3498,48 +3518,53 @@ class Woo_Product_List extends Widget_Base
 
         <div class="eael-product-list-wrapper <?php echo esc_attr( $woo_product_list['layout'] ) ?>">
             <div class="eael-product-list-body woocommerce">
-                <div class="eael-product-list-container eael-post-appender">
-                    <?php
-                    do_action( 'eael/woo-product-list/before-product-loop' );
+                <div class="eael-product-list-container">
+                    <div class="eael-post-appender">
+                        <?php
+                        do_action( 'eael/woo-product-list/before-product-loop' );
 
-                    // Load more data
-                    $settings['eael_widget_id']         = $this->get_id();
-                    $settings['eael_page_id']           = Plugin::$instance->documents->get_current() ? Plugin::$instance->documents->get_current()->get_main_id() : get_the_ID();
-                    $settings['layout_mode']            = $woo_product_list['layout'];
-                    $template                           = $this->get_template( $settings['layout_mode'] );
-                    $settings['loadable_file_name']     = $this->get_filename_only( $template );
-                    $dir_name                           = $this->get_temp_dir_name( $settings['loadable_file_name'] );
-                    $found_posts                        = 0;
-                    
+                        // Load more data
+                        $settings['eael_widget_id']         = $this->get_id();
+                        $settings['eael_page_id']           = Plugin::$instance->documents->get_current() ? Plugin::$instance->documents->get_current()->get_main_id() : get_the_ID();
+                        $settings['layout_mode']            = $woo_product_list['layout'];
+                        $template                           = $this->get_template( $settings['layout_mode'] );
+                        $settings['loadable_file_name']     = $this->get_filename_only( $template );
+                        $dir_name                           = $this->get_temp_dir_name( $settings['loadable_file_name'] );
+                        $found_posts                        = 0;
+                        
 
-                    if ( file_exists( $template ) ) {
-                        $query  = new \WP_Query( $args );
+                        if ( file_exists( $template ) ) {
+                            $query  = new \WP_Query( $args );
 
-                        if ( $query->have_posts() ) {
-                            // Load more data
-                            $found_posts                        = $query->found_posts;
-                            $max_page                           = ceil( $found_posts / absint( $args['posts_per_page'] ) );
-                            $args['max_page']                   = $max_page;
-                            $args['total_post']                 = $found_posts;
+                            if ( $query->have_posts() ) {
+                                // Load more data
+                                $found_posts                        = $query->found_posts;
+                                $max_page                           = ceil( $found_posts / absint( $args['posts_per_page'] ) );
+                                $args['max_page']                   = $max_page;
+                                $args['total_post']                 = $found_posts;
 
-                            while ( $query->have_posts() ) {
-                                $query->the_post();
-                                include( realpath( $template ) );
+                                while ( $query->have_posts() ) {
+                                    $query->the_post();
+                                    include( realpath( $template ) );
+                                }
+                                wp_reset_postdata();
+                            } else {
+                                printf( '<p class="no-posts-found">%s</p>', __( $woo_product_list['products_not_found_text'], 'essential-addons-for-elementor-lite' ) );
                             }
-                            wp_reset_postdata();
                         } else {
-                            printf( '<p class="no-posts-found">%s</p>', __( $woo_product_list['products_not_found_text'], 'essential-addons-for-elementor-lite' ) );
+                            _e( '<p class="eael-no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
                         }
-                    } else {
-                        _e( '<p class="eael-no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
-                    }
 
-                    do_action( 'eael/woo-product-list/after-product-loop' );
+                        do_action( 'eael/woo-product-list/after-product-loop' );
+                        ?>
+                    </div>
 
+                    <?php 
                     if ( ! empty( $args['posts_per_page'] ) && $found_posts > $args['posts_per_page'] ) {
                         $this->print_load_more_button( $settings, $args, $dir_name );
                     }
                     ?>
+
                 </div>
             </div>
         </div>

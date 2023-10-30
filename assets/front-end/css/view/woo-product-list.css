@@ -387,6 +387,7 @@
 }
 .eael-product-list-wrapper .eael-product-list-review-count {
   font-size: 15px;
+  margin-left: 5px;
 }
 .eael-product-list-wrapper .eael-product-list-notice p {
   color: #515151;
@@ -516,4 +517,7 @@
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
   cursor: pointer;
+}
+.eael-product-list-wrapper .eael-load-more-button-wrap button {
+  margin-top: 20px;
 }
