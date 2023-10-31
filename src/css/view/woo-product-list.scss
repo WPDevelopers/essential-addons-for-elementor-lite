@@ -363,29 +363,6 @@ $spacer-lg: $spacing5;
                     justify-content: center;
                     align-items: center;
                 }
-
-                .add_to_cart_button {
-                    font-size: 0px;
-                    border: none;
-
-                    &:before {
-                        content: "\f07a";
-                        display: block;
-                        font-family: "Font Awesome 5 Free";
-                        font-size: 16px;
-                        font-weight: 900;
-                        transform: translate(-50%, -50%);
-                        top: 50%;
-                        left: 50%;
-                        position: absolute;
-                    }
-
-                    &.product_type_variable {
-                        &:before {
-                            content: "\f00c";
-                        }
-                    }
-                }
                 
                 .add_to_cart_button.added {
                     display: none;
@@ -404,6 +381,29 @@ $spacer-lg: $spacing5;
                         vertical-align: middle;
                         margin: 0;
                         padding: 0;
+                    }
+                }
+            }
+
+            .eael-product-list-add-to-cart-button a {
+                font-size: 0px;
+                border: none;
+
+                &:before {
+                    content: "\f07a";
+                    display: block;
+                    font-family: "Font Awesome 5 Free";
+                    font-size: 16px;
+                    font-weight: 900;
+                    transform: translate(-50%, -50%);
+                    top: 50%;
+                    left: 50%;
+                    position: absolute;
+                }
+
+                &.product_type_variable {
+                    &:before {
+                        content: "\f00c";
                     }
                 }
             }

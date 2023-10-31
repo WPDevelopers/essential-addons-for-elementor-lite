@@ -298,11 +298,13 @@
       -ms-flex-align: center;
           align-items: center;
 }
-.eael-product-list-wrapper .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li .add_to_cart_button {
+.eael-product-list-wrapper .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li .add_to_cart_button,
+.eael-product-list-wrapper .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li .eael-product-list-add-to-cart-button a {
   font-size: 0px;
   border: none;
 }
-.eael-product-list-wrapper .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li .add_to_cart_button:before {
+.eael-product-list-wrapper .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li .add_to_cart_button:before,
+.eael-product-list-wrapper .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li .eael-product-list-add-to-cart-button a:before {
   content: "\f07a";
   display: block;
   font-family: "Font Awesome 5 Free";
@@ -315,7 +317,8 @@
   left: 50%;
   position: absolute;
 }
-.eael-product-list-wrapper .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li .add_to_cart_button.product_type_variable:before {
+.eael-product-list-wrapper .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li .add_to_cart_button.product_type_variable:before,
+.eael-product-list-wrapper .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li .eael-product-list-add-to-cart-button a.product_type_variable:before {
   content: "\f00c";
 }
 .eael-product-list-wrapper .eael-product-list-image-wrap .eael-product-list-buttons-on-hover li .add_to_cart_button.added {
@@ -507,6 +510,9 @@
   margin: 0 15px 0 0;
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
+}
+.eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-buttons .eael-product-list-add-to-cart-button a.added_to_cart {
+  margin-top: 10px;
 }
 .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-buttons .eael-product-list-quick-view-button a {
   font-size: 16px;
