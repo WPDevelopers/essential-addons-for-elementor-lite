@@ -126,6 +126,15 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                                 if ($settings['eael_post_terms'] === 'tags') {
                                     $terms = get_the_tags();
                                 }
+
+                                //For custom post type
+                                $get_custom_post_type = get_post_type( get_the_ID() );
+                                $get_custom_taxonomy  = $settings["eael_{$get_custom_post_type}_terms"];
+
+                                if ( $settings[ 'eael_post_terms' ] === $get_custom_taxonomy ) {
+                                    $terms = wp_get_post_terms( get_the_ID(), $get_custom_taxonomy );
+                                }
+
                                 if (!empty($terms)) {
                                     $html = '<ul class="post-meta-categories">';
                                     $count = 0;
