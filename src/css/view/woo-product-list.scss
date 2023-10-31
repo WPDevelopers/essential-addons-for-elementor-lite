@@ -33,6 +33,7 @@ $spacer-lg: $spacing5;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
+            position: relative;
 
             // Content Wrap
             .eael-product-list-content-wrap {
@@ -608,8 +609,13 @@ $spacer-lg: $spacing5;
 .eael-popup-details-render .woocommerce-product-rating {
     display: flex;
     align-items: center;
-    
+
     .star-rating {
         margin-top: 0;
+        margin-right: 5px;
     }
+}
+
+.eael-product-popup.woocommerce div.product form.cart div.quantity {
+    margin-bottom: 0;
 }
