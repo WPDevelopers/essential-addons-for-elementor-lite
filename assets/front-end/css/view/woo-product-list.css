@@ -17,6 +17,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  position: relative;
 }
 .eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-content-wrap, .eael-product-list-wrapper.preset-2 .eael-product-list-item .eael-product-list-content-wrap, .eael-product-list-wrapper.preset-3 .eael-product-list-item .eael-product-list-content-wrap {
   width: 70%;
@@ -534,4 +535,8 @@
 }
 .eael-popup-details-render .woocommerce-product-rating .star-rating {
   margin-top: 0;
+  margin-right: 5px;
+}
+.eael-product-popup.woocommerce div.product form.cart div.quantity {
+  margin-bottom: 0;
 }
