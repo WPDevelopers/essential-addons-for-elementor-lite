@@ -320,18 +320,6 @@ class Woo_Product_List extends Widget_Base
             'default'       => 'yes',
         ]);
 
-        $this->add_control('eael_woo_product_list_size_preset_3_show', [
-            'label'         => esc_html__('Size', 'essential-addons-for-elementor-lite'),
-            'type'          => Controls_Manager::SWITCHER,
-			'label_on'      => __( 'Show', 'essential-addons-for-elementor-lite' ),
-			'label_off'     => __( 'Hide', 'essential-addons-for-elementor-lite' ),
-            'return_value'  => 'yes',
-            'default'       => 'yes',
-            'condition'     => [
-                'eael_dynamic_template_layout' => 'preset-3',
-            ]
-        ]);
-
         $this->add_control(
             'eael_product_list_layout_content_footer_heading',
             [
