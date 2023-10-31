@@ -3392,7 +3392,7 @@ class Woo_Product_List extends Widget_Base
 	    $woo_product_list['add_to_cart_default_text']       = ! empty( $settings['eael_product_list_content_footer_add_to_cart_default_text'] ) ? esc_html( $settings['eael_product_list_content_footer_add_to_cart_default_text'] ) : esc_html('Buy Now');
 
         if( 'preset-2' === $woo_product_list['layout'] || 'preset-3' === $woo_product_list['layout'] ){
-            $woo_product_list['content_header_position']    = ! empty( $settings['eael_product_list_content_header_position_preset_3'] ) ? esc_html( $settings['eael_product_list_content_header_position_preset_3'] ) : esc_html( 'after-title' );
+            $woo_product_list['content_header_position']    = ! empty( $settings['eael_product_list_content_header_position_preset_2_3'] ) ? esc_html( $settings['eael_product_list_content_header_position_preset_2_3'] ) : esc_html( 'after-title' );
             $woo_product_list['total_sold_show']    = ! empty( $settings['eael_woo_product_list_total_sold_preset_2_3_show'] ) && 'yes' === esc_html( $settings['eael_woo_product_list_total_sold_preset_2_3_show'] ) ? 1 : 0;
         }
 
