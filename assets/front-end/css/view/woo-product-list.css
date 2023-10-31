@@ -540,6 +540,12 @@
   margin-top: 0;
   margin-right: 5px;
 }
-.theme-twentytwentythree .eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-2.is-on-sale p {
+.theme-twentytwentythree .eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-2.is-on-sale p,
+.theme-flexia .eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-2.is-on-sale p {
   top: -8px;
+}
+.theme-twentytwentythree ins, .theme-twentytwentythree mark,
+.theme-flexia ins,
+.theme-flexia mark {
+  background: unset;
 }
