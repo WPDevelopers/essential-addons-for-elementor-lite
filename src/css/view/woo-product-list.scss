@@ -603,3 +603,13 @@ $spacer-lg: $spacing5;
         margin-top: 20px;
     }
 }
+
+// Popup
+.eael-popup-details-render .woocommerce-product-rating {
+    display: flex;
+    align-items: center;
+    
+    .star-rating {
+        margin-top: 0;
+    }
+}
