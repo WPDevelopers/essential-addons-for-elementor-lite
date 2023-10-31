@@ -286,7 +286,7 @@ $spacer-lg: $spacing5;
             transform-origin: bottom;
             width: calc(100% + 100px);
             position: absolute;
-            top: -8px;
+            top: 9px;
             left: -50px;
         }
     }
@@ -606,16 +606,21 @@ $spacer-lg: $spacing5;
 }
 
 // Popup
-.eael-popup-details-render .woocommerce-product-rating {
+.eael-product-popup.woocommerce div.product form.cart div.quantity {
+    margin-bottom: 0;
+}
+
+.eael-product-popup.woocommerce div.product .woocommerce-product-rating {
     display: flex;
     align-items: center;
 
     .star-rating {
         margin-top: 0;
         margin-right: 5px;
-    }
+    }    
 }
 
-.eael-product-popup.woocommerce div.product form.cart div.quantity {
-    margin-bottom: 0;
+// Theme Compatibility
+.theme-twentytwentythree .eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-2.is-on-sale p {
+    top: -8px;
 }
