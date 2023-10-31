@@ -1286,7 +1286,10 @@ trait Controls
             || 'eael-post-block' === $wb->get_name()
             ) {
 
-	        $eael_show_post_terms_condition = ['eael_show_image' => 'yes']; //Applicable for both elements: Post Carousel and Post Grid
+	        $eael_show_post_terms_condition = [
+                'eael_show_image'             => 'yes',
+                'eael_post_grid_preset_style' => 'two',
+            ]; //Applicable for both elements: Post Carousel and Post Grid
 
             if( 'eael-post-block' === $wb->get_name() ){
                 $eael_show_post_terms_condition = [];
@@ -1304,7 +1307,11 @@ trait Controls
                 ]
             );
 
-            $eael_show_post_terms_child_condition = ['eael_show_image' => 'yes', 'eael_show_post_terms' => 'yes'];
+            $eael_show_post_terms_child_condition = [
+                'eael_show_image'             => 'yes', 
+                'eael_show_post_terms'        => 'yes',
+                'eael_post_grid_preset_style' => 'two',
+            ];
 
             if( 'eael-post-block' === $wb->get_name() ){
                 $eael_show_post_terms_child_condition = [ 'eael_show_post_terms' => 'yes' ];
@@ -1339,9 +1346,10 @@ trait Controls
 				        'options'   => isset( $post_types_tax[ $post_type ] ) ? $post_types_tax[ $post_type ] : [],
 				        'default'   => isset( $post_types_tax[ $post_type ] ) ? key( $post_types_tax[ $post_type ] ) : '',
 				        'condition' => [
-					        'eael_show_image'      => 'yes',
-					        'eael_show_post_terms' => 'yes',
-					        'post_type'            => $post_type
+					        'eael_show_image'             => 'yes',
+					        'eael_show_post_terms'        => 'yes',
+					        'post_type'                   => $post_type,
+					        'eael_post_grid_preset_style' =>  'two',
 				        ],
 			        ]
 		        );
@@ -1389,7 +1397,8 @@ trait Controls
                         'label_block' => false,
                         'default' => esc_html__('', 'essential-addons-for-elementor-lite'),
                         'condition' => [
-                            'eael_show_post_terms' => 'yes',
+                            'eael_show_post_terms'        => 'yes',
+                            'eael_post_grid_preset_style' =>  'two',
                         ],
                     ]
                 );
