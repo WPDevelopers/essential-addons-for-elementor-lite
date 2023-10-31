@@ -3988,7 +3988,12 @@ class Filterable_Gallery extends Widget_Base
                                 if( item.el.attr('title') !== "" ) {
                                     values.title = item.el.attr('title');
                                 }
-                            }
+                            },
+                            open: function() {
+                                setTimeout(() => {
+                                    $(".eael-privacy-message").remove();
+                                }, 5000);
+                            },
                         }
                     });
 
