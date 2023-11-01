@@ -218,9 +218,9 @@ ea.hooks.addAction("init", "ea", () => {
 				productCarousels.each(function () {
 					if ($(this)[0].swiper) {
 						$(this)[0].swiper.destroy(true, true);
+						swiperLoader($(this)[0], $carouselOptions);
 					}
 				});
-				swiperLoader($wooProductCarousel, $carouselOptions);
 			}
 		}
 
