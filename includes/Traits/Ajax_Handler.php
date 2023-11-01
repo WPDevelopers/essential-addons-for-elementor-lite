@@ -790,7 +790,7 @@ trait Ajax_Handler {
 				$post_list = wp_list_pluck( get_terms( $args ), 'name', 'term_id' );
 				break;
 			case 'user':
-				if ( ! current_user_can( 'administrator' ) ) {
+				if ( ! current_user_can( 'list_users' ) ) {
 					$post_list = [];
 					break;
 				}
