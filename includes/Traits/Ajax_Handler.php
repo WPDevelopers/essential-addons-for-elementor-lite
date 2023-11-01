@@ -54,10 +54,7 @@ trait Ajax_Handler {
 		add_action( 'wp_ajax_eael_product_gallery', [ $this, 'ajax_eael_product_gallery' ] );
 
 		add_action( 'wp_ajax_eael_select2_search_post', [ $this, 'select2_ajax_posts_filter_autocomplete' ] );
-		add_action( 'wp_ajax_nopriv_eael_select2_search_post', [ $this, 'select2_ajax_posts_filter_autocomplete' ] );
-
 		add_action( 'wp_ajax_eael_select2_get_title', [ $this, 'select2_ajax_get_posts_value_titles' ] );
-		add_action( 'wp_ajax_nopriv_eael_select2_get_title', [ $this, 'select2_ajax_get_posts_value_titles' ] );
 
 		if ( is_admin() ) {
 			add_action( 'wp_ajax_save_settings_with_ajax', array( $this, 'save_settings' ) );
