@@ -1125,6 +1125,7 @@ trait Controls
                     'label' => esc_html__('Expansion Indicator', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::TEXT,
                     'dynamic'     => [ 'active' => true ],
+                    'ai' => [ 'active' => false ],
                     'label_block' => false,
                     'default' => esc_html__('...', 'essential-addons-for-elementor-lite'),
                     'condition' => [
@@ -1149,12 +1150,13 @@ trait Controls
             $wb->add_control(
                 'excerpt_expanison_indicator',
                 [
-                    'label' => esc_html__('Expansion Indicator', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::TEXT,
-                    'dynamic'     => [ 'active' => true ],
+                    'label'       => esc_html__('Expansion Indicator', 'essential-addons-for-elementor-lite'),
+                    'type'        => Controls_Manager::TEXT,
+                    'dynamic'     => [ 'active'      =>true ],
+                    'ai'          => [ 'active'      =>false ],
                     'label_block' => false,
-                    'default' => esc_html__('...', 'essential-addons-for-elementor-lite'),
-                    'condition' => [
+                    'default'     => esc_html__('...', 'essential-addons-for-elementor-lite'),
+                    'condition'   => [
                         'eael_show_excerpt' => 'yes',
                     ],
                 ]
@@ -1258,22 +1260,23 @@ trait Controls
             $wb->add_control(
                 'eael_show_read_more_button',
                 [
-                    'label' => __('Show Read More Button', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SWITCHER,
-                    'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                    'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                    'label'        => __('Show Read More Button', 'essential-addons-for-elementor-lite'),
+                    'type'         => Controls_Manager::SWITCHER,
+                    'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                    'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
                     'return_value' => 'yes',
-                    'default' => 'yes',
+                    'default'      => 'yes',
                 ]
             );
 
             $wb->add_control(
                 'read_more_button_text',
                 [
-                    'label' => __('Button Text', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::TEXT,
-                    'dynamic'     => [ 'active' => true ],
-                    'default' => __('Read More', 'essential-addons-for-elementor-lite'),
+                    'label'     => __('Button Text', 'essential-addons-for-elementor-lite'),
+                    'type'      => Controls_Manager::TEXT,
+                    'dynamic'   => [ 'active'      =>true ],
+                    'ai'        => ['active'       =>false],
+                    'default'   => __('Read More', 'essential-addons-for-elementor-lite'),
                     'condition' => [
                         'eael_show_read_more_button' => 'yes',
                     ],
