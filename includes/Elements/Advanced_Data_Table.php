@@ -1536,7 +1536,7 @@ class Advanced_Data_Table extends Widget_Base
         if ($settings['ea_adv_data_table_pagination'] == 'yes') {
             $this->add_render_attribute('ea-adv-data-table', [
                 'class' => "ea-advanced-data-table-paginated",
-                'data-items-per-page' => $settings['ea_adv_data_table_items_per_page'],
+                'data-items-per-page' => ! empty( $settings['ea_adv_data_table_items_per_page'] ) ? $settings['ea_adv_data_table_items_per_page'] : 10,
             ]);
         }
 
