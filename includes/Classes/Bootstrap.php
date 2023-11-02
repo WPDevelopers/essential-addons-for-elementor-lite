@@ -289,21 +289,25 @@ class Bootstrap
 //	        add_action( 'eael_admin_notices', [ $this, 'eael_black_friday_optin' ] );
 //	        add_action( 'wp_ajax_eael_black_friday_optin_dismiss', [ $this, 'eael_black_friday_optin_dismiss' ] );
 
-	        if ( ! current_user_can( 'administrator' ) ) {
-		        add_filter( 'elementor/document/save/data', function ( $data ) {
-			        $data['elements'] = Plugin::$instance->db->iterate_data( $data['elements'], function ( $element ) {
-				        if ( isset( $element['widgetType'] ) && $element['widgetType'] === 'eael-login-register' ) {
-					        if ( ! empty( $element['settings']['register_user_role'] ) ) {
-						        $element['settings']['register_user_role'] = '';
-					        }
-				        }
+		    if ( ! current_user_can( 'administrator' ) ) {
+			    add_filter( 'elementor/document/save/data', function ( $data ) {
+				    if ( empty( $data['elements'] ) ) {
+					    return $data;
+				    }
 
-				        return $element;
-			        } );
+				    $data['elements'] = Plugin::$instance->db->iterate_data( $data['elements'], function ( $element ) {
+					    if ( isset( $element['widgetType'] ) && $element['widgetType'] === 'eael-login-register' ) {
+						    if ( ! empty( $element['settings']['register_user_role'] ) ) {
+							    $element['settings']['register_user_role'] = '';
+						    }
+					    }
 
-			        return $data;
-		        } );
-	        }
+					    return $element;
+				    } );
+
+				    return $data;
+			    } );
+		    }
         } else {
 	        add_action( 'wp', [ $this, 'eael_post_view_count' ] );
         }
