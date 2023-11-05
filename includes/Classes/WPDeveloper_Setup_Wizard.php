@@ -835,7 +835,7 @@ class WPDeveloper_Setup_Wizard {
 				'elements' => [
 					[
 						'key'         => 'product-grid',
-						'title'       => __( 'Product Grid', 'essential-addons-for-elementor-lite' ),
+						'title'       => __( 'Woo Product Grid', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
 					],
 					[
