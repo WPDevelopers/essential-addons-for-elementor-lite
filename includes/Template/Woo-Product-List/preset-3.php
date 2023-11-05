@@ -112,7 +112,7 @@ $woo_product_list_loop = Woo_Product_List::get_woo_product_list_loop_settings( $
                     <?php if ( $woo_product_list['total_sold_show'] ) : ?>
                     <div class="eael-product-list-progress">
                         <div class="eael-product-list-progress-info">
-                            <h4 class="eael-product-list-progress-count"><?php esc_html_e( $woo_product_list['total_sold_text'], 'essential-addons-for-elementor-lite' ); ?> <span><?php echo esc_html( $woo_product_list_loop['total_sales_count'] ); ?></span></h4>
+                            <h4 class="eael-product-list-progress-count"><?php esc_html_e( $woo_product_list['total_sold_text'], 'essential-addons-for-elementor-lite' ); ?> <span><?php echo esc_html( $woo_product_list_loop['total_sales_count'] ); ?></span> <?php _e('Item', 'essential-addons-for-elementor-lite'); ?></h4>
                         </div>
                         <div class="eael-product-list-progress-bar-outer">
                             <div style="width: <?php echo esc_attr( $woo_product_list_loop['total_sold_progress_percentage'] ); ?>%;" class="eael-product-list-progress-bar-inner"></div>
@@ -121,7 +121,12 @@ $woo_product_list_loop = Woo_Product_List::get_woo_product_list_loop_settings( $
                     <?php endif; ?>
 
                     <div class="eael-product-list-notice eael-product-list-notice-shiping-free">
-                        <p><?php echo esc_html( Woo_Product_List::eael_get_product_category_name( $product->get_id() ) ); ?></p>
+                        <?php if ( $woo_product_list_loop['has_terms'] ) : ?> 
+                        <p>
+                            <i class="fas fa-box"></i>
+                            <?php echo esc_html( Woo_Product_List::eael_get_product_category_name( $woo_product_list_loop['terms'] ) ); ?>
+                        </p>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <?php endif; ?>
