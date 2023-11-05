@@ -2033,7 +2033,6 @@ class Woo_Product_List extends Widget_Base
             [
                 'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '#343434',
                 'selectors' => [
                     '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-title' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-title a' => 'color: {{VALUE}};',
@@ -2063,7 +2062,6 @@ class Woo_Product_List extends Widget_Base
             [
                 'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '#758F4D',
                 'selectors' => [
                     '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-title a:hover' => 'color: {{VALUE}};',
                 ],
@@ -3308,31 +3306,41 @@ class Woo_Product_List extends Widget_Base
         endif;
     }
 
-    public static function eael_get_product_category_name( $product_id ){
-        $terms = get_the_terms( $product_id, 'product_cat' );
+    public static function eael_get_product_category_name( $terms ){
+        $category_name = '';
+
         if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
-            return 'uncategorized' !== $terms[0]->slug ? $terms[0]->name : '';
+            $category_name = 'uncategorized' !== $terms[0]->slug ? $terms[0]->name : '';
         }
+
+        return $category_name;
     }
 
     public static function get_woo_product_list_loop_settings( $product, $settings, $woo_product_list ) {
 		$woo_product_list_loop  = [];
+        $product_id             = $product->get_id();
 
         $woo_product_list_loop['quick_view_setting'] = [
             'widget_id'     => $settings['eael_widget_id'],
-            'product_id'    => $product->get_id(),
+            'product_id'    => $product_id,
             'page_id'       => $settings['eael_page_id'],
         ];
         
         $woo_product_list_loop['direction_rtl_class']            = $woo_product_list['content_header_direction_rtl'] ? 'eael-direction-rtl' : '';
         
-        $woo_product_list_loop['total_sales_count']              = intval( get_post_meta( $product->get_id(), 'total_sales', true ) );
+        $woo_product_list_loop['total_sales_count']              = intval( get_post_meta( $product_id, 'total_sales', true ) );
         $woo_product_list_loop['stock_quantity_count']           = intval( $product->get_stock_quantity() );
         
         $woo_product_list_loop['progress_cent_percentage']       = $woo_product_list_loop['total_sales_count'] + $woo_product_list_loop['stock_quantity_count'];
         $woo_product_list_loop['total_sold_progress_percentage'] = $woo_product_list_loop['progress_cent_percentage'] > 0 ? intval( ( $woo_product_list_loop['total_sales_count'] / $woo_product_list_loop['progress_cent_percentage'] ) * 100 ) : 100; // in percentage
         
         $woo_product_list_loop['review_count']                   = intval( $product->get_review_count() );
+        
+        $woo_product_list_loop['terms']         = get_the_terms( $product_id, 'product_cat' ); 
+        $woo_product_list_loop['has_terms']     = 0;
+        if ( ! empty( $woo_product_list_loop['terms'] ) && ! is_wp_error( $woo_product_list_loop['terms'] ) ) {
+            $woo_product_list_loop['has_terms'] = 'uncategorized' !== $woo_product_list_loop['terms'][0]->slug ? 1 : 0;
+        }
 
         return $woo_product_list_loop;
 	}
