@@ -228,6 +228,25 @@ trait Helper
 		return $html;
 	}
 
+	public function eael_product_wrapper_class( $classes, $product_id, $widget_name ) {
+
+		if ( ! is_plugin_active( 'woo-variation-swatches-pro/woo-variation-swatches-pro.php' ) ) {
+			return $classes;
+		}
+
+		$product = wc_get_product( $product_id );
+
+		if ( ! $product ) {
+			return $classes;
+		}
+
+		if ( $product->is_type( 'variable' ) ) {
+			$classes[] = 'wvs-archive-product-wrapper';
+		}
+
+		return $classes;
+	}
+
 	public function eael_woo_cart_empty_action() {
 		if ( ! function_exists( 'WC' ) ) {
 			return;
