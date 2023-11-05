@@ -100,8 +100,10 @@ $spacer-lg: $spacing5;
         }
 
         .eael-product-list-notice p {
+            color: $theme-preset1;
+
             & i {
-                color: #758F4D;
+                color: $theme-preset1;
             }
         }
     }
@@ -128,6 +130,14 @@ $spacer-lg: $spacing5;
 
         .eael-product-list-buttons-on-hover li a {
             &:hover {
+                color: $theme-preset2;
+            }
+        }
+
+        .eael-product-list-notice p {
+            color: $theme-preset2;
+
+            & i {
                 color: $theme-preset2;
             }
         }
@@ -164,11 +174,14 @@ $spacer-lg: $spacing5;
         }
 
         .eael-product-list-progress {
-            margin-right: 15px;
+            margin-right: 30px;
             margin-bottom: 0;
+            margin-left: 10px;
         }
 
         .eael-product-list-notice p {
+            color: #515151;
+
             i {
                 color: #515151;
             }
@@ -490,7 +503,6 @@ $spacer-lg: $spacing5;
     }
 
     .eael-product-list-notice p {
-        color: #515151; //
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
@@ -499,14 +511,6 @@ $spacer-lg: $spacing5;
 
         & i {
             margin-right: 4px;
-        }
-    }
-
-    .eael-product-list-notice.eael-product-list-notice-category p {
-        color: #897474;
-
-        i {
-            color: #897474;
         }
     }
 
