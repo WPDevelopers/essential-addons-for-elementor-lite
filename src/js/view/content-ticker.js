@@ -113,6 +113,21 @@ ea.hooks.addAction("init", "ea", () => {
                 });
             }
         });
+        let ContentTickerLoader = function (element) {
+            let productCarousels = $(element).find('.eael-content-ticker');
+            if (productCarousels.length) {
+                productCarousels.each(function () {
+                    if ($(this)[0].swiper) {
+                        $(this)[0].swiper.destroy(true, true);
+                        swiperLoader($(this)[0], $sliderOptions);
+                    }
+                });
+            }
+        }
+
+        ea.hooks.addAction("ea-lightbox-triggered", "ea", ContentTickerLoader);
+        ea.hooks.addAction("ea-advanced-tabs-triggered", "ea", ContentTickerLoader);
+        ea.hooks.addAction("ea-advanced-accordion-triggered", "ea", ContentTickerLoader);
     };
 
     const swiperLoader = (swiperElement, swiperConfig) => {
