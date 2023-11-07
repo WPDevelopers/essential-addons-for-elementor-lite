@@ -341,6 +341,12 @@ trait Elements {
 				'icon'       => 'eaicon-woo-account-dashboard',
 				'categories' => '["essential-addons-elementor"]',
 			],
+			[
+				'name'       => 'fancy-chart',
+				'title'      => __( 'Fancy Chart', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eicon-elementor-circle',
+				'categories' => '["essential-addons-elementor"]',
+			],
 		] );
 
 		$config['promotionWidgets'] = $combine_array;

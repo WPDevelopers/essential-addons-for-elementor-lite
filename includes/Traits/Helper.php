@@ -182,14 +182,17 @@ trait Helper
 
         if ( $args['posts_per_page'] != '-1' ) {
             $show_or_hide = ('true' == $settings['show_load_more'] || 1 == $settings['show_load_more'] || 'yes' == $settings['show_load_more']) ? '' : ' eael-force-hide';
+            do_action( 'eael/global/before-load-more-button', $settings, $args, $plugin_type );
             ?>
             <div class="eael-load-more-button-wrap<?php echo "eael-dynamic-filterable-gallery" == $this->get_name() ? " dynamic-filter-gallery-loadmore" : ""; echo esc_attr( $show_or_hide ); ?>">
                 <button <?php $this->print_render_attribute_string( 'load-more' ); ?>>
-                    <div class="eael-btn-loader button__loader"></div>
-                    <span><?php echo esc_html($settings['show_load_more_text']) ?></span>
+                    <span class="eael-btn-loader button__loader"></span>
+                    <span class="eael_load_more_text"><?php echo esc_html($settings['show_load_more_text']) ?></span>
                 </button>
             </div>
-        <?php }
+            <?php 
+            do_action( 'eael/global/after-load-more-button', $settings, $args, $plugin_type );
+        }
     }
 
     public function eael_product_grid_script(){
@@ -223,6 +226,25 @@ trait Helper
 			$html .= '</div>';
 		}
 		return $html;
+	}
+
+	public function eael_product_wrapper_class( $classes, $product_id, $widget_name ) {
+
+		if ( ! is_plugin_active( 'woo-variation-swatches-pro/woo-variation-swatches-pro.php' ) ) {
+			return $classes;
+		}
+
+		$product = wc_get_product( $product_id );
+
+		if ( ! $product ) {
+			return $classes;
+		}
+
+		if ( $product->is_type( 'variable' ) ) {
+			$classes[] = 'wvs-archive-product-wrapper';
+		}
+
+		return $classes;
 	}
 
 	public function eael_woo_cart_empty_action() {
@@ -490,7 +512,7 @@ trait Helper
 		?>
         <div id="eael-admin-promotion-message" class="eael-admin-promotion-message">
             <i class="e-notice__dismiss eael-admin-promotion-close" role="button" aria-label="Dismiss" tabindex="0"></i>
-			<?php printf( __( "<p> <i>📣</i> NEW: Essential Addons Pro 5.7 is here, with new '<a target='_blank' href='%s'>Woo Account Dashboard</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/woo-account-dashboard' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) ); ?>
+			<?php printf( __( "<p> <i>📣</i> NEW: Essential Addons Pro 5.8 is here, with new '<a target='_blank' href='%s'>Fancy Chart</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/fancy-chart/' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) ); ?>
         </div>
 		<?php
 	}

@@ -1,10 +1,10 @@
 === Essential Addons for Elementor ===
-Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk
+Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk, himadree12
 Tags: elementor, elements, addons, elementor addons, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
 Requires at least: 5.0
-Tested up to: 6.3
+Tested up to: 6.4
 Requires PHP: 7.0
-Stable tag: 5.8.11
+Stable tag: 5.8.14
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -146,7 +146,8 @@ Extensions (Free):
 32. [Advanced Search](https://essential-addons.com/elementor/advanced-search/)- Add a customizable, dynamic search bar
 33. [Woo Thank You](https://essential-addons.com/elementor/woo-thank-you)- Design a personalized thank you message on the WooCommerce order confirmation page
 34. [Woo Cross Sells](https://essential-addons.com/elementor/woo-cross-sells/)- Customize the display of cross-sell products to boost your sales potential
-35. [Woo Account Dashboard](https://essential-addons.com/elementor/woo-account-dashboard/)- Design a personalized WooCommerce Customer Account Dashboard 
+35. [Woo Account Dashboard](https://essential-addons.com/elementor/woo-account-dashboard/)- Design a personalized WooCommerce Customer Account Dashboard
+36. [Fancy Chart](https://essential-addons.com/elementor/fancy-chart/)- Visualize important data with interactive charts and graphs on your website 
 
 
 Extensions (Pro): 
@@ -201,8 +202,6 @@ If you like Essential Addons, then consider checking out our other WordPress Plu
 
 ⏰ **[SchedulePress](https://wordpress.org/plugins/wp-scheduled-posts/)**  – Complete solution for managing WordPress content scheduling through an editorial calendar & Social Share
 
-⭐ **[ReviewX](https://wordpress.org/plugins/reviewx/)**  – Advanced multi criteria Rating & Reviews for WooCommerce that is seamlessly compatible with Elementor
-
 🔗 **[EmbedPress](https://wordpress.org/plugins/embedpress/)** - Easiest WordPress solution for embedding videos, images, posts, audio, maps and PDF, DOC, PPT & all other types of content into your website using Elementor, Gutenberg and more. 
 
 🔎 **[Easy.Jobs](https://wordpress.org/plugins/easyjobs/)** -  Smart and easy recruitment and talent sourcing solution for hiring remotely with AI-powered screening system, question sets, remote interviews, and designing branded career pages with Elementor.
@@ -253,6 +252,33 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.8.14 - 07/11/2023 =
+
+- Fixed: EA Advanced Data Table | Sorting is not working for date format
+- Fixed: EA Product Gallery | Variation Swatches for WooCommerce Integration with EA Product Gallery  
+- Fixed: EA Event Calendar | Calendar isn't responsive for mobile mode.
+- Fixed: EA Advanced Tabs | In nested tab styling is applied to all the Saved Templates tabs as well
+- Fixed: EA Post timeline | Target blank isn't working for Card layout
+- Fixed: EA Data table | Table sorting is not working
+- Fixed: EA Team Member | Overlay style automatically triggers a button click and redirects to social pages
+- Improved: EA Post Timeline | Custom Template Support for Post Loop
+- Improved: EA Post Carousel | Post Carousel Overlay option
+- Improved: EA Advanced Tabs | Add a % in unit of Tab's Title
+- Improved: EA Sticky Video | Update JS library file for Sticky Video
+- Improved: EA Event Calendar | Hide full date format for same-day event end time
+- Added: All EA WooCommerce Related Products inside Elementor Theme Builder Archive & Single Product Templates
+- Few minor bug fixes & improvements
+
+= 5.8.13 - 26/10/2023 =
+
+- Fixed: Element style not allowed as child of element div in this context
+- Fixed: EA SVG Draw not working on Mozilla Firefox
+- Few minor bug fixes & improvements
+
+= 5.8.12 - 22/10/2023 =
+
+- Few minor bug fixes & improvements
 
 = 5.8.11 - 09/10/2023 =
 
