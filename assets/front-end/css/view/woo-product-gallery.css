@@ -137,6 +137,9 @@
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
+.eael-product-gallery .woocommerce ul.products .product .ast-on-card-button.ast-onsale-card {
+  display: none !important;
+}
 .eael-product-gallery .woocommerce ul.products li.product {
   width: 100%;
 }
