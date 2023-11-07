@@ -227,13 +227,13 @@ class advancedDataTable {
           );
 
           if (data.match(regex)) {
-            dataString = data.split(/[\.\-\/\*]/);
+            let dataString = data.split(/[\.\-\/\*]/), date = '';
             if (dataString[0].length == 4) {
-              data = dataString[0] + "-" + dataString[1] + "-" + dataString[2];
+              date = dataString[0] + "-" + dataString[1] + "-" + dataString[2];
             } else {
-              data = dataString[2] + "-" + dataString[1] + "-" + dataString[0];
+              date = dataString[2] + "-" + dataString[1] + "-" + dataString[0];
             }
-            value = Date.parse(data);
+            value = Date.parse(date);
           } else if (isNaN(parseInt(data))) {
             value = data.toLowerCase();
           } else {

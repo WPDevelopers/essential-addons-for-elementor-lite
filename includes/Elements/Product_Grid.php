@@ -58,7 +58,7 @@ class Product_Grid extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('Product Grid', 'essential-addons-for-elementor-lite');
+        return esc_html__('Woo Product Grid', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
@@ -66,10 +66,9 @@ class Product_Grid extends Widget_Base
         return 'eaicon-product-grid';
     }
 
-    public function get_categories()
-    {
-        return ['essential-addons-elementor'];
-    }
+	public function get_categories() {
+		return [ 'essential-addons-elementor', 'woocommerce-elements' ];
+	}
 
     public function get_keywords()
     {
@@ -591,25 +590,14 @@ class Product_Grid extends Widget_Base
 		    ]
 	    );
 
-	    $this->add_control(
-		    'eael_product_grid_wishlist',
-		    [
-			    'label' => esc_html__('Show Wishlist?', 'essential-addons-for-elementor-lite'),
-			    'type' => Controls_Manager::SWITCHER,
-			    'return_value' => 'yes',
-			    'default' => 'no',
-		    ]
-	    );
-
-	    if ( ! function_exists( 'YITH_WCWL' ) ) {
-		    $this->add_control( 'eael_wishlist_warning_text',
+	    if ( function_exists( 'YITH_WCWL' ) ) {
+		    $this->add_control(
+			    'eael_product_grid_wishlist',
 			    [
-				    'type'            => Controls_Manager::RAW_HTML,
-				    'raw'             => __( '<strong>YITH WOOCOMMERCE WISHLIST</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=yith-woocommerce-wishlist&tab=search&type=term" target="_blank">YITH WOOCOMMERCE WISHLIST</a> first.', 'essential-addons-for-elementor-lite' ),
-				    'content_classes' => 'eael-warning',
-				    'condition'       => [
-					    'eael_product_grid_wishlist' => 'yes'
-				    ],
+				    'label'        => esc_html__( 'Show Wishlist?', 'essential-addons-for-elementor-lite' ),
+				    'type'         => Controls_Manager::SWITCHER,
+				    'return_value' => 'yes',
+				    'default'      => 'no',
 			    ]
 		    );
 	    }

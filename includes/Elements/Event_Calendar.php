@@ -3093,10 +3093,15 @@ class Event_Calendar extends Widget_Base
 					echo '<td class="eael-ec-event-description">' . Helper::eael_wp_kses( $event_description ) . '</td>';
 				}
 				if ( $settings['eael_ec_show_date'] === 'yes' ) {
-					$start = date( $date_format, strtotime( $event['start'] ) );
-					$end   = date( $date_format, strtotime( $event['end'] ) );
-					$separator = $settings['eael_ec_date_to_date_separator'];
-					$date = sprintf( '<span class="hide">%s</span> %s %s %s', strtotime( $event['start'] ), $start, $separator, $end );
+					$start_time = strtotime( $event['start'] );
+					$end_time   = strtotime( $event['end'] );
+					$start      = date( $date_format, $start_time );
+					$end        = date( $date_format, $end_time );
+					if ( date( 'Ymd', $start_time ) === date( 'Ymd', $end_time ) ) {
+						$end = date( $time_format, $end_time );
+					}
+					$separator = $end ? $settings['eael_ec_date_to_date_separator'] : '';
+					$date      = sprintf( '<span class="hide">%s</span> %s %s %s', strtotime( $event['start'] ), $start, $separator, $end );
 					echo '<td class="eael-ec-event-date">' . Helper::eael_wp_kses( $date ) . '</td>';
 				}
 				echo "</tr>";
