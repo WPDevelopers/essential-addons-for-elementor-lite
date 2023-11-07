@@ -182,6 +182,7 @@ trait Helper
 
         if ( $args['posts_per_page'] != '-1' ) {
             $show_or_hide = ('true' == $settings['show_load_more'] || 1 == $settings['show_load_more'] || 'yes' == $settings['show_load_more']) ? '' : ' eael-force-hide';
+            do_action( 'eael/global/before-load-more-button', $settings, $args, $plugin_type );
             ?>
             <div class="eael-load-more-button-wrap<?php echo "eael-dynamic-filterable-gallery" == $this->get_name() ? " dynamic-filter-gallery-loadmore" : ""; echo esc_attr( $show_or_hide ); ?>">
                 <button <?php $this->print_render_attribute_string( 'load-more' ); ?>>
@@ -189,7 +190,9 @@ trait Helper
                     <span class="eael_load_more_text"><?php echo esc_html($settings['show_load_more_text']) ?></span>
                 </button>
             </div>
-        <?php }
+            <?php 
+            do_action( 'eael/global/after-load-more-button', $settings, $args, $plugin_type );
+        }
     }
 
     public function eael_product_grid_script(){
@@ -223,6 +226,25 @@ trait Helper
 			$html .= '</div>';
 		}
 		return $html;
+	}
+
+	public function eael_product_wrapper_class( $classes, $product_id, $widget_name ) {
+
+		if ( ! is_plugin_active( 'woo-variation-swatches-pro/woo-variation-swatches-pro.php' ) ) {
+			return $classes;
+		}
+
+		$product = wc_get_product( $product_id );
+
+		if ( ! $product ) {
+			return $classes;
+		}
+
+		if ( $product->is_type( 'variable' ) ) {
+			$classes[] = 'wvs-archive-product-wrapper';
+		}
+
+		return $classes;
 	}
 
 	public function eael_woo_cart_empty_action() {
