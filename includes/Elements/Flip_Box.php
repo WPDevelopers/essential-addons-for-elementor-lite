@@ -331,6 +331,9 @@ class Flip_Box extends Widget_Base
 	            'condition'             => [
 		            'eael_flipbox_front_content_type'      => 'content',
 	            ],
+                'ai' => [
+                    'active' => false,
+                ],
             ]
         );
 
@@ -568,6 +571,9 @@ class Flip_Box extends Widget_Base
 	            'condition'             => [
 		            'eael_flipbox_back_content_type'      => 'content',
 	            ],
+                'ai' => [
+                    'active' => false,
+                ],
             ]
         );
 
