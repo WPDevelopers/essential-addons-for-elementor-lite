@@ -22,7 +22,11 @@ class Post_Grid extends Widget_Base
     use Helper;
 
 	protected $page_id;
+	public function __construct( $data = [], $args = null ) {
+		parent::__construct( $data, $args );
 
+        remove_action( 'woocommerce_after_shop_loop_item','woocommerce_template_loop_add_to_cart' );
+	}
     public function get_name()
     {
         return 'eael-post-grid';
