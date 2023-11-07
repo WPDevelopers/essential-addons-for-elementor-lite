@@ -285,6 +285,9 @@ class Info_Box extends Widget_Base
                 'dynamic' => [
                     'active' => true,
                 ],
+                'ai' => [
+                    'active' => false,
+                ],
                 'default' => __('<p>Write a short description, that will describe the title or something informational and useful.</p>', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'eael_infobox_text_type' => 'content',
