@@ -60,7 +60,12 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
 
 if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-product-reveal' ) { ?>
     <li class="product <?php echo esc_attr( $product_wrapper_classes ); ?>">
-		<?php do_action( 'woocommerce_before_shop_loop_item' ); ?>
+		<?php
+		if ( $settings['eael_wc_loop_hooks'] === 'yes' ) {
+			do_action( 'woocommerce_before_shop_loop_item' );
+		}
+        do_action( 'eael_woocommerce_before_shop_loop_item' );
+        ?>
         <div class="eael-product-wrap">
 			<?php
 
@@ -110,7 +115,10 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 				echo '</div>';
 			}
 
-			do_action( 'woocommerce_after_shop_loop_item' );
+			if ( $settings['eael_wc_loop_hooks'] === 'yes' ) {
+				do_action( 'woocommerce_after_shop_loop_item' );
+			}
+			do_action( 'eael_woocommerce_after_shop_loop_item' );
 			?>
 
         </div>
@@ -120,7 +128,11 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 } else if ( $grid_style_preset == 'eael-product-overlay' ) {
 	?>
     <li <?php post_class( "product {$product_wrapper_classes}" ); ?>>
-		<?php do_action( 'woocommerce_before_shop_loop_item' ); ?>
+		<?php
+		if ( $settings['eael_wc_loop_hooks'] === 'yes' ) {
+			do_action( 'woocommerce_before_shop_loop_item' );
+		}
+        do_action( 'eael_woocommerce_before_shop_loop_item' ); ?>
         <div class="overlay">
 			<?php
 			if( $should_print_image_clickable ) {
@@ -171,7 +183,11 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 		if ( $should_print_price ) {
 			echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
 		}
-		do_action( 'woocommerce_after_shop_loop_item' ); ?>
+		if ( $settings['eael_wc_loop_hooks'] === 'yes' ) {
+			do_action( 'woocommerce_after_shop_loop_item' );
+		}
+		do_action( 'eael_woocommerce_after_shop_loop_item' );
+        ?>
 
     </li>
 	<?php
@@ -314,7 +330,12 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 					}?>
                 </div>
             </div>
-			<?php do_action( 'woocommerce_after_shop_loop_item' ); ?>
+			<?php
+			if ( $settings['eael_wc_loop_hooks'] === 'yes' ) {
+				do_action( 'woocommerce_after_shop_loop_item' );
+			}
+            do_action( 'eael_woocommerce_after_shop_loop_item' );
+            ?>
         </li>
 		<?php
 	}
@@ -416,7 +437,10 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                 </div>
                 <div class="product-details-wrap">
 	                <?php
-                    do_action( 'woocommerce_before_shop_loop_item' );
+	                if ( $settings['eael_wc_loop_hooks'] === 'yes' ) {
+		                do_action( 'woocommerce_before_shop_loop_item' );
+	                }
+                    do_action( 'eael_woocommerce_before_shop_loop_item' );
 
 					if ($list_style_preset == 'eael-product-list-preset-2') {
 						echo '<div class="eael-product-title">
@@ -536,7 +560,12 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                             </li>
 						<?php } ?>
                     </ul>
-	                <?php do_action( 'woocommerce_after_shop_loop_item' ); ?>
+	                <?php
+	                if ( $settings['eael_wc_loop_hooks'] === 'yes' ) {
+		                do_action( 'woocommerce_after_shop_loop_item' );
+	                }
+                    do_action( 'eael_woocommerce_after_shop_loop_item' );
+                    ?>
                 </div>
             </div>
         </li>
