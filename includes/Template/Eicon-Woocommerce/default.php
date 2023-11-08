@@ -56,7 +56,7 @@ $quick_view_setting = [
 	'product_id' => $product->get_id(),
 	'page_id' => $settings['eael_page_id'],
 ];
-$product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_class', [], $product->get_id(), $this->get_name() ) );
+$product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_class', [], $product->get_id(), 'eicon-woocommerce' ) );
 
 if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-product-reveal' ) { ?>
     <li class="product <?php echo esc_attr( $product_wrapper_classes ); ?>">
