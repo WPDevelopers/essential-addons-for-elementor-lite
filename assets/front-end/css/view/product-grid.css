@@ -485,6 +485,10 @@
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
+.eael-product-grid .woocommerce ul.products .ast-on-card-button.ast-onsale-card,
+.eael-post-grid .woocommerce ul.products .ast-on-card-button.ast-onsale-card {
+  display: none !important;
+}
 .eael-product-grid .woocommerce ul.products li.product,
 .eael-post-grid .woocommerce ul.products li.product {
   width: 100%;
