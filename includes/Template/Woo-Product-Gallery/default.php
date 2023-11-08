@@ -54,7 +54,7 @@ $image_sources = [
     'src_hover' => ''
 ];
 //if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->is_visible() ) {
-$product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_class', [], $product->get_id(), $this->get_name() ) );
+$product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_class', [], $product->get_id(), 'eael-woo-product-gallery' ) );
 
     if ( $gallery_style_preset == 'eael-product-preset-4' ) { ?>
         <li class="product <?php echo esc_attr( $product_wrapper_classes ) ?>">
@@ -62,6 +62,7 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
             if($show_secondary_image){
                 $image_sources = Helper::eael_get_woo_product_gallery_image_srcs( $product, $settings['eael_product_gallery_image_size_size'] );
             }
+
             ?>
             <div class="eael-product-wrap" data-src="<?php echo esc_attr( $image_sources['src'] ) ?>" data-src-hover="<?php echo esc_attr( $image_sources['src_hover'] ) ?>" >
 	        <?php
