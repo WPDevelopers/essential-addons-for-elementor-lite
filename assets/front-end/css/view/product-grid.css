@@ -2554,7 +2554,7 @@
 .eael-product-grid.masonry.eael-product-preset-6 .icons-wrap .button.product_type_external, .eael-product-grid.masonry.eael-product-preset-7 .icons-wrap .button.product_type_grouped,
 .eael-product-grid.masonry.eael-product-preset-7 .icons-wrap .button.product_type_external, .eael-product-grid.masonry.eael-product-preset-8 .icons-wrap .button.product_type_grouped,
 .eael-product-grid.masonry.eael-product-preset-8 .icons-wrap .button.product_type_external {
-  display: none;
+  display: none !important;
 }
 .eael-product-grid.list .woocommerce ul.products li.product {
   overflow: hidden;
