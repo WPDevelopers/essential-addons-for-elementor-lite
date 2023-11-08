@@ -366,14 +366,14 @@ class Woo_Product_Gallery extends Widget_Base {
 		$this->add_control(
 			'eael_wc_loop_hooks',
 			[
-				'label'        => esc_html__( 'Woocommerce Loop Hooks', 'essential-addons-for-elementor-lite' ),
+				'label'        => esc_html__( 'WooCommerce Loop Hooks', 'essential-addons-for-elementor-lite' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'ON', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'OFF', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 				'separator'    => 'before',
 				'default'      => '',
-				'description'  => __( 'This will enable woocommerce loop before/after hooks. its may break your layout.', 'essential-addons-for-elementor-lite' )
+				'description'  => __( 'This will enable WooCommerce loop Before and After hooks. It may break your layout.', 'essential-addons-for-elementor-lite' )
 			]
 		);
 
