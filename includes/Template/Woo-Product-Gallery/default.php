@@ -66,10 +66,10 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
             ?>
             <div class="eael-product-wrap" data-src="<?php echo esc_attr( $image_sources['src'] ) ?>" data-src-hover="<?php echo esc_attr( $image_sources['src_hover'] ) ?>" >
 	        <?php
-            if ( $settings['eael_wc_loop_hooks'] === 'yes' ){
+	        do_action( 'eael_woocommerce_before_shop_loop_item' );
+	        if ( $settings['eael_wc_loop_hooks'] === 'yes' ){
 	            do_action( 'woocommerce_before_shop_loop_item' );
             }
-	        do_action( 'eael_woocommerce_before_shop_loop_item' );
 
 	        echo ( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'. Helper::eael_wp_kses($stockout_text) .'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . Helper::eael_wp_kses($sale_text) . '</span>' : '') );
 
@@ -113,10 +113,10 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
             ?>
             <div class="eael-product-wrap" data-src="<?php echo esc_attr( $image_sources['src'] ) ?>" data-src-hover="<?php echo esc_attr( $image_sources['src_hover'] ) ?>" >
 	            <?php
+	            do_action( 'eael_woocommerce_before_shop_loop_item' );
 	            if ( $settings['eael_wc_loop_hooks'] === 'yes' ) {
 		            do_action( 'woocommerce_before_shop_loop_item' );
 	            }
-	            do_action( 'eael_woocommerce_before_shop_loop_item' );
                 ?>
                 <div class="product-image-wrap">
                     <div class="image-wrap">
@@ -212,10 +212,10 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
             ?>
             <div class="eael-product-wrap" data-src="<?php echo esc_attr( $image_sources['src'] ) ?>" data-src-hover="<?php echo esc_attr( $image_sources['src_hover'] ) ?>" >
 	            <?php
+	            do_action( 'eael_woocommerce_before_shop_loop_item' );
 	            if ( $settings['eael_wc_loop_hooks'] === 'yes' ) {
 		            do_action( 'woocommerce_before_shop_loop_item' );
 	            }
-	            do_action( 'eael_woocommerce_before_shop_loop_item' );
 	            ?>
                 <div class="product-image-wrap">
                     <div class="image-wrap">
