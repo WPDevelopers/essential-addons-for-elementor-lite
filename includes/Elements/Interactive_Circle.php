@@ -894,11 +894,10 @@ class Interactive_Circle extends Widget_Base {
                     <div class="eael-circle-info" data-items="<?php echo $item_count; ?>">
                         <div class="eael-circle-inner">
 							<?php
-							$is_active      = '';
 							foreach ( $settings['eael_interactive_circle_item'] as $index => $item ) :
 								$item_style_classic = ! empty( $item['eael_interactive_circle_tab_bgtype_background'] ) && 'classic' === $item['eael_interactive_circle_tab_bgtype_background'] ? 'classic' : '';
 								$item_count = $index + 1;
-								$is_active  = ! $is_active && $item['eael_interactive_circle_default_active'] === 'yes' ? 'active' : '';
+								$is_active  = $item['eael_interactive_circle_default_active'] === 'yes' ? 'active' : '';
 								?>
                                 <div class="eael-circle-item elementor-repeater-item-<?php echo $item['_id']; ?>">
                                     <div class="eael-circle-btn <?php echo $is_active; ?>" id="eael-circle-item-<?php echo $item_count; ?>">
@@ -938,10 +937,9 @@ class Interactive_Circle extends Widget_Base {
                     <div class="eael-circle-info">
                         <div class="eael-circle-inner" data-items="<?php echo $item_count; ?>">
 							<?php
-							$is_active     = '';
 							foreach ( $settings['eael_interactive_circle_item'] as $index => $item ) :
 								$item_count = $index + 1;
-								$is_active = ! $is_active && $item['eael_interactive_circle_default_active'] === 'yes' ? 'active' : '';
+								$is_active  = $item['eael_interactive_circle_default_active'] === 'yes' ? 'active' : '';
 								?>
                                 <div class="eael-circle-item elementor-repeater-item-<?php echo $item['_id']; ?>">
                                     <div class="eael-circle-btn <?php echo $is_active; ?>" id="eael-circle-item-<?php echo $item_count; ?>">
