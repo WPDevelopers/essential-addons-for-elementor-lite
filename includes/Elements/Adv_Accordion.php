@@ -202,6 +202,7 @@ class Adv_Accordion extends Widget_Base
             'eael_adv_accordion_faq_schema_show',
             [
                 'label'        => esc_html__('Enable FAQ Schema', 'essential-addons-for-elementor-lite'),
+                'description'  => esc_html__('For saved template, FAQ Schema Text can be added manually on each tab.', 'essential-addons-for-elementor-lite'),
                 'type'         => Controls_Manager::SWITCHER,
                 'default'      => 'no',
                 'return_value' => 'yes',
@@ -387,6 +388,23 @@ class Adv_Accordion extends Widget_Base
 				],
 		    ]
 	    );
+
+        $repeater->add_control(
+            'eael_adv_accordion_tab_faq_schema_text',
+            [
+                'label' => esc_html__('FAQ Schema Text', 'essential-addons-for-elementor-lite'),
+                'label_block' => true,
+                'type' => Controls_Manager::TEXT,
+                'dynamic' => ['active' => true],
+                'separator' => 'before',
+                'ai' => [
+					'active' => false,
+				],
+                'condition' => [
+                    'eael_adv_accordion_text_type' => 'template',
+                ],
+            ]
+        );
 
         $this->add_control(
             'eael_adv_accordion_tab',
@@ -1218,12 +1236,14 @@ class Adv_Accordion extends Widget_Base
         // FAQ Schema
         if ( !empty( $settings['eael_adv_accordion_faq_schema_show'] ) && 'yes' === $settings['eael_adv_accordion_faq_schema_show'] ) {
             foreach ( $settings['eael_adv_accordion_tab'] as $index => $tab ) {
+                $faq_schema_text = ! empty( $tab['eael_adv_accordion_tab_faq_schema_text'] ) ? $tab['eael_adv_accordion_tab_faq_schema_text'] : '';
+                
                 $faq = [
                     '@type' => 'Question',
                     'name' => Helper::eael_wp_kses( $tab['eael_adv_accordion_tab_title'] ),
                     'acceptedAnswer' => [
                         '@type' => 'Answer',
-                        'text' => ('content' === $tab['eael_adv_accordion_text_type']) ? do_shortcode( $tab['eael_adv_accordion_tab_content'] ) : '',
+                        'text' => ('content' === $tab['eael_adv_accordion_text_type']) ? do_shortcode( $tab['eael_adv_accordion_tab_content'] ) : Helper::eael_wp_kses( $faq_schema_text ),
                     ],
                 ];
 
