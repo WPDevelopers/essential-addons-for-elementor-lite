@@ -1044,7 +1044,7 @@ class Helper
 	 * @return array
 	 */
 	public static function eael_allowed_tags() {
-		return [
+		return apply_filters( 'eael_allowed_tags', [
 			'a'       => [
 				'href'   => [],
 				'title'  => [],
@@ -1285,7 +1285,7 @@ class Helper
 				'colspan' => [],
 				'rowspan' => [],
 			],
-		];
+		] );
 	}
 
     public static function eael_fetch_color_or_global_color($settings, $control_name=''){
