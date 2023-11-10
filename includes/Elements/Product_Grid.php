@@ -49,6 +49,12 @@ class Product_Grid extends Widget_Base
 		if ( $is_type_instance && class_exists('woocommerce')) {
 		    $this->load_quick_view_asset();
 		}
+
+		add_action( 'eael_woo_before_product_loop', function (){
+			remove_action('woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open');
+			remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close');
+			remove_action('woocommerce_after_shop_loop_item', 'astra_woo_woocommerce_shop_product_content');
+		} );
 	}
 
     public function get_name()
@@ -331,6 +337,20 @@ class Product_Grid extends Widget_Base
                 'default' => 'yes',
             ]
         );
+
+	    $this->add_control(
+		    'eael_wc_loop_hooks',
+		    [
+			    'label'        => esc_html__( 'WooCommerce Loop Hooks', 'essential-addons-for-elementor-lite' ),
+			    'type'         => \Elementor\Controls_Manager::SWITCHER,
+			    'label_on'     => esc_html__( 'ON', 'essential-addons-for-elementor-lite' ),
+			    'label_off'    => esc_html__( 'OFF', 'essential-addons-for-elementor-lite' ),
+			    'return_value' => 'yes',
+			    'separator'    => 'before',
+			    'default'      => '',
+			    'description'  => __( 'This will enable WooCommerce loop Before and After hooks. It may break your layout.', 'essential-addons-for-elementor-lite' )
+		    ]
+	    );
 
         $this->end_controls_section();
     }

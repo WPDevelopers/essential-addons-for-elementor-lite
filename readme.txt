@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.4
 Requires PHP: 7.0
-Stable tag: 5.8.14
+Stable tag: 5.8.15
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -175,8 +175,6 @@ https://www.youtube.com/watch?v=K9BssSV-KC8
 
 ### LOOKING FOR THE MOST FLEXIBLE THEME?
 
-Check [Flexia](https://wordpress.org/themes/flexia/), the best friend of Elementor and Essential Addons. A modern lightweight and versatile theme for WordPress with endless customization options. **And fully Free.** 
-
 ### BACKED BY A TRUSTED TEAM
 Essential Addons for Elementor is brought to you by [WPDeveloper](https://wpdeveloper.com/), a dedicated WordPress product company, trusted by 5 million+ happy users.
 
@@ -252,6 +250,11 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.8.15 - 08/11/2023 =
+
+- Fixed: EA Woo Product Grid and Woo Product Gallery style being broken in some themes
+- Few minor bug fixes & improvements
 
 = 5.8.14 - 07/11/2023 =
 
