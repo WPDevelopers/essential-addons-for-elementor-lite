@@ -9667,7 +9667,7 @@ msgid "Quantity updated successfully."
 msgstr ""
 
 #: ../includes/Traits/Helper.php:332
-msgid "4,000+ Stunning Templates"
+msgid "5,000+ Stunning Templates"
 msgstr ""
 
 #: ../includes/Traits/Helper.php:333
