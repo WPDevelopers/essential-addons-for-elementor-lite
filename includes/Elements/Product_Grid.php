@@ -3139,7 +3139,7 @@ class Product_Grid extends Widget_Base
         <div <?php $this->print_render_attribute_string('wrap'); ?> >
             <div class="woocommerce">
                 <?php
-                do_action( 'eael_woo_before_product_loop' );
+                do_action( 'eael_woo_before_product_loop', $settings['eael_product_grid_style_preset'] );
 
                 $template                       = $this->get_template( $settings['eael_dynamic_template_Layout'] );
                 $settings['loadable_file_name']  = $this->get_filename_only( $template );
