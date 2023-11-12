@@ -3,7 +3,7 @@
         <div class="eael-col-xl-8">
             <div class="eael-block px45 py25">
                 <div class="eael-basic__card  align__center justify__between eael__flex justify__between">
-                    <p><i class="ea-admin-icon icon-edit"></i>
+                    <p><i class="ea-admin-icon eael-icon-edit"></i>
                         <?php _e('Check out the changes & features we have added with our
                         new updates','essential-addons-for-elementor-lite'); ?>
                     </p>
@@ -17,7 +17,7 @@
                         <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-logo.svg' ); ?>"
                              alt="">
                     </div>
-                    <h2>Unlock <span class="color__secondary">4000+</span> <?php _e('Ready Templates Built With Elementor &
+                    <h2>Unlock <span class="color__secondary">5000+</span> <?php _e('Ready Templates Built With Elementor &
                         Essential
                         Addons From Templately.','essential-addons-for-elementor-lite'); ?></h2>
                     <p><?php _e('Get Access to amazing features and boost your Elementor page building experience with Templately','essential-addons-for-elementor-lite'); ?>
@@ -93,21 +93,21 @@
             </div>
             <a target="_blank" href="https://essential-addons.com/elementor/docs/"
                class="eael-info__box eael-block px30 py25">
-                <h6><i class="ea-admin-icon icon-edit"></i> <?php _e('View Knowledgebase','essential-addons-for-elementor-lite'); ?></h6>
+                <h6><i class="ea-admin-icon eael-icon-edit"></i> <?php _e('View Knowledgebase','essential-addons-for-elementor-lite'); ?></h6>
                 <p><?php _e('Get started by spending some time with the documentation to get familiar with Essential Addons.','essential-addons-for-elementor-lite'); ?></p>
             </a>
             <a target="_blank" href="https://wpdeveloper.com/review-essential-addons-elementor"
                class="eael-info__box eael-block px30 py25">
-                <h6><i class="ea-admin-icon icon-star"></i> <?php _e('Show Your Love','essential-addons-for-elementor-lite'); ?></h6>
+                <h6><i class="ea-admin-icon eael-icon-star"></i> <?php _e('Show Your Love','essential-addons-for-elementor-lite'); ?></h6>
                 <p><?php _e('Take your 2 minutes to review the plugin and spread the love to encourage us to keep it going.','essential-addons-for-elementor-lite'); ?></p>
             </a>
             <a target="_blank" href="https://wpdeveloper.com/support" class="eael-info__box eael-block px30 py25">
-                <h6><i class="ea-admin-icon icon-support"></i><?php _e(' Need Help?','essential-addons-for-elementor-lite'); ?></h6>
+                <h6><i class="ea-admin-icon eael-icon-support"></i><?php _e(' Need Help?','essential-addons-for-elementor-lite'); ?></h6>
                 <p><?php _e('Stuck with something? Get help from live chat or submit a support ticket.','essential-addons-for-elementor-lite'); ?></p>
             </a>
             <a target="_blank" href="https://www.facebook.com/groups/essentialaddons"
                class="eael-info__box eael-block px30 py25">
-                <h6><i class="ea-admin-icon icon-community"></i><?php  _e('Join the Community','essential-addons-for-elementor-lite'); ?></h6>
+                <h6><i class="ea-admin-icon eael-icon-community"></i><?php  _e('Join the Community','essential-addons-for-elementor-lite'); ?></h6>
                 <p><?php _e('Join the Facebook community and discuss with fellow developers & users.','essential-addons-for-elementor-lite'); ?></p>
             </a>
         </div>

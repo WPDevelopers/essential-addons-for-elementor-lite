@@ -327,7 +327,7 @@ class WPDeveloper_Setup_Wizard {
                      alt="<?php _e( 'Logo', 'essential-addons-for-elementor-lite' ) ?>">
             </div>
             <div class="eael-quick-setup-title">
-				<?php printf( __( '%s <span class="eael-quick-setup-highlighted-red">%s</span> %s', 'essential-addons-for-elementor-lite' ), 'Get access to', '4000+', 'Elementor Templates with Templately! 🚀' ); ?>
+				<?php printf( __( '%s <span class="eael-quick-setup-highlighted-red">%s</span> %s', 'essential-addons-for-elementor-lite' ), 'Get access to', '5000+', 'Elementor Templates with Templately! 🚀' ); ?>
             </div>
             <div class="eael-quick-setup-text">
 				<?php _e( 'Want to create websites faster than ever? Check out Templately, the ultimate templates cloud that comes with thousands of ready Elementor templates for every niche!', 'essential-addons-for-elementor-lite' ); ?>
@@ -835,7 +835,7 @@ class WPDeveloper_Setup_Wizard {
 				'elements' => [
 					[
 						'key'         => 'product-grid',
-						'title'       => __( 'Product Grid', 'essential-addons-for-elementor-lite' ),
+						'title'       => __( 'Woo Product Grid', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
 					],
 					[
