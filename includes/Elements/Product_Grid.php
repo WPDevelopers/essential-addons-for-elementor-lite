@@ -49,12 +49,6 @@ class Product_Grid extends Widget_Base
 		if ( $is_type_instance && class_exists('woocommerce')) {
 		    $this->load_quick_view_asset();
 		}
-
-		add_action( 'eael_woo_before_product_loop', function (){
-			remove_action('woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open');
-			remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close');
-			remove_action('woocommerce_after_shop_loop_item', 'astra_woo_woocommerce_shop_product_content');
-		} );
 	}
 
     public function get_name()
@@ -3145,7 +3139,7 @@ class Product_Grid extends Widget_Base
         <div <?php $this->print_render_attribute_string('wrap'); ?> >
             <div class="woocommerce">
                 <?php
-                do_action( 'eael_woo_before_product_loop' );
+                do_action( 'eael_woo_before_product_loop', $settings['eael_product_grid_style_preset'] );
 
                 $template                       = $this->get_template( $settings['eael_dynamic_template_Layout'] );
                 $settings['loadable_file_name']  = $this->get_filename_only( $template );
