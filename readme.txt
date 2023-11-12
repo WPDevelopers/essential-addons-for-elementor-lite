@@ -2,9 +2,9 @@
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk, himadree12
 Tags: elementor, elements, addons, elementor addons, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
 Requires at least: 5.0
-Tested up to: 6.3
+Tested up to: 6.4
 Requires PHP: 7.0
-Stable tag: 5.8.13
+Stable tag: 5.8.16
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -173,10 +173,6 @@ More features and improvements are coming on regular updates. Want to unlock the
 https://www.youtube.com/watch?v=K9BssSV-KC8
 
 
-### LOOKING FOR THE MOST FLEXIBLE THEME?
-
-Check [Flexia](https://wordpress.org/themes/flexia/), the best friend of Elementor and Essential Addons. A modern lightweight and versatile theme for WordPress with endless customization options. **And fully Free.** 
-
 ### BACKED BY A TRUSTED TEAM
 Essential Addons for Elementor is brought to you by [WPDeveloper](https://wpdeveloper.com/), a dedicated WordPress product company, trusted by 5 million+ happy users.
 
@@ -252,6 +248,35 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.8.16 - 11/11/2023 =
+
+- Fixed: Product info not showing on the default layout of EA Woo Product Grid
+- Fixed: Add to Cart button not showing on the several themes
+- Few minor bug fixes & improvements
+
+
+= 5.8.15 - 08/11/2023 =
+
+- Fixed: EA Woo Product Grid and Woo Product Gallery style being broken in some themes
+- Few minor bug fixes & improvements
+
+= 5.8.14 - 07/11/2023 =
+
+- Fixed: EA Advanced Data Table | Sorting is not working for date format
+- Fixed: EA Product Gallery | Variation Swatches for WooCommerce Integration with EA Product Gallery  
+- Fixed: EA Event Calendar | Calendar isn't responsive for mobile mode.
+- Fixed: EA Advanced Tabs | In nested tab styling is applied to all the Saved Templates tabs as well
+- Fixed: EA Post timeline | Target blank isn't working for Card layout
+- Fixed: EA Data table | Table sorting is not working
+- Fixed: EA Team Member | Overlay style automatically triggers a button click and redirects to social pages
+- Improved: EA Post Timeline | Custom Template Support for Post Loop
+- Improved: EA Post Carousel | Post Carousel Overlay option
+- Improved: EA Advanced Tabs | Add a % in unit of Tab's Title
+- Improved: EA Sticky Video | Update JS library file for Sticky Video
+- Improved: EA Event Calendar | Hide full date format for same-day event end time
+- Added: All EA WooCommerce Related Products inside Elementor Theme Builder Archive & Single Product Templates
+- Few minor bug fixes & improvements
 
 = 5.8.13 - 26/10/2023 =
 
