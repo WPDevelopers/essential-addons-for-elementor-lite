@@ -770,6 +770,26 @@ class Login_Register extends Widget_Base {
 			] );
 		}
 
+		$this->add_control( 'enable_login_recaptcha_v3_score_threshold', [
+			'label'       => esc_html__( 'Score Threshold', 'essential-addons-for-elementor-lite' ),
+			'description' => esc_html__( 'reCaptcha v3 score threshold. 1 is very likely a good interaction, 0 is very likely a bot.', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'%',
+			],
+			'range'      => [
+				'%' => [
+					'min'  => 0,
+					'max'  => 1,
+					'step' => 0.1,
+				],
+			],
+			'default'    => [
+				'unit' => '%',
+				'size' => 0.5,
+			],
+		] );
+
 		do_action( 'eael/login-register/after-general-controls', $this );
 
 		if ( !$this->pro_enabled ) {
