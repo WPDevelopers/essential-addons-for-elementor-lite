@@ -33,7 +33,6 @@
   z-index: 2;
   -webkit-transition: opacity 0.2s ease-in-out, -webkit-transform 0.25s cubic-bezier(0.19, 1, 0.22, 1);
   transition: opacity 0.2s ease-in-out, -webkit-transform 0.25s cubic-bezier(0.19, 1, 0.22, 1);
-  -o-transition: opacity 0.2s ease-in-out, transform 0.25s cubic-bezier(0.19, 1, 0.22, 1);
   transition: opacity 0.2s ease-in-out, transform 0.25s cubic-bezier(0.19, 1, 0.22, 1);
   transition: opacity 0.2s ease-in-out, transform 0.25s cubic-bezier(0.19, 1, 0.22, 1), -webkit-transform 0.25s cubic-bezier(0.19, 1, 0.22, 1);
 }
@@ -80,6 +79,11 @@
 .eael-entry-footer .eael-author-avatar .avatar,
 .eael-entry-header-after .eael-author-avatar .avatar {
   border-radius: 50%;
+}
+
+.eael-entry-header-after.style-two {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .eael-post-grid .eael-entry-footer .eael-entry-meta {
@@ -139,6 +143,11 @@
   padding-right: 7px;
 }
 
+.eael-post-grid .eael-entry-wrapper > .eael-entry-header-after.style-two .eael-entry-meta span.eael-posted-on::before {
+  content: "";
+  padding-right: 0;
+}
+
 /*--- Post Grid Thumbnail Hover Effects ---*/
 
 .eael-entry-media {
@@ -167,7 +176,6 @@
   visibility: hidden;
   opacity: 0;
   -webkit-transition: 300ms;
-  -o-transition: 300ms;
   transition: 300ms;
 }
 
@@ -192,7 +200,6 @@
   visibility: hidden;
   opacity: 0;
   -webkit-transition: 300ms;
-  -o-transition: 300ms;
   transition: 300ms;
 }
 
@@ -213,7 +220,6 @@
   visibility: hidden;
   opacity: 0;
   -webkit-transition: 300ms;
-  -o-transition: 300ms;
   transition: 300ms;
 }
 
@@ -272,10 +278,8 @@
       -ms-transform: translateY(-100px);
           transform: translateY(-100px);
   -webkit-transition-delay: 100ms;
-       -o-transition-delay: 100ms;
           transition-delay: 100ms;
   -webkit-transition-duration: 300ms;
-       -o-transition-duration: 300ms;
           transition-duration: 300ms;
 }
 
@@ -304,10 +308,8 @@
       -ms-transform: translateY(100px);
           transform: translateY(100px);
   -webkit-transition-delay: 100ms;
-       -o-transition-delay: 100ms;
           transition-delay: 100ms;
   -webkit-transition-duration: 300ms;
-       -o-transition-duration: 300ms;
           transition-duration: 300ms;
 }
 
@@ -594,7 +596,6 @@
   visibility: hidden;
   opacity: 0;
   -webkit-transition: 300ms;
-  -o-transition: 300ms;
   transition: 300ms;
 }
 

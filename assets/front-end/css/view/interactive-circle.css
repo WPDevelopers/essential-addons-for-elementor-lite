@@ -32,7 +32,6 @@
 .eael-circle-wrapper .eael-circle-btn {
   cursor: pointer;
   -webkit-transition: all 0.2ms;
-  -o-transition: all 0.2ms;
   transition: all 0.2ms;
 }
 .eael-circle-wrapper .eael-circle-btn-txt {
@@ -237,14 +236,14 @@
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-info[data-items="4"] .eael-circle-item #eael-circle-item-3 {
   top: 85.35%;
-  left: 14.65%;
+  left: 85.35%;
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-info[data-items="4"] .eael-circle-item #eael-circle-item-4 {
   top: 85.35%;
-  left: 85.35%;
+  left: 14.65%;
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
@@ -265,14 +264,14 @@
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-info[data-items="5"] .eael-circle-item #eael-circle-item-3 {
   top: 90%;
-  left: 20%;
+  left: 80%;
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-info[data-items="5"] .eael-circle-item #eael-circle-item-4 {
   top: 90%;
-  left: 80%;
+  left: 20%;
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
@@ -718,7 +717,7 @@
   }
   100% {
     top: 90%;
-    left: 20%;
+    left: 80%;
   }
 }
 @keyframes eael-1-a1p1di5-item-3-btn-animation {
@@ -728,7 +727,7 @@
   }
   100% {
     top: 90%;
-    left: 20%;
+    left: 80%;
   }
 }
 @-webkit-keyframes eael-1-a1p1di5-item-4-btn-animation {
@@ -738,7 +737,7 @@
   }
   100% {
     top: 90%;
-    left: 80%;
+    left: 20%;
   }
 }
 @keyframes eael-1-a1p1di5-item-4-btn-animation {
@@ -748,7 +747,7 @@
   }
   100% {
     top: 90%;
-    left: 80%;
+    left: 20%;
   }
 }
 @-webkit-keyframes eael-1-a1p1di5-item-5-btn-animation {
@@ -8528,36 +8527,52 @@
   visibility: visible;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item:nth-child(8n+1) .eael-circle-btn-icon {
-  background-image: -o-radial-gradient(48.96% 49.88%, 81.89% 82.54%, #0956C6 3.76%, #07A9F0 55.38%, #93DCFC 100%);
-  background-image: radial-gradient(81.89% 82.54% at 48.96% 49.88%, #0956C6 3.76%, #07A9F0 55.38%, #93DCFC 100%);
+  background: radial-gradient(81.89% 82.54% at 48.96% 49.88%, #0956C6 3.76%, #07A9F0 55.38%, #93DCFC 100%);
+}
+.eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item:nth-child(8n+1) .eael-circle-btn-icon.classic {
+  background: unset;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item:nth-child(8n+2) .eael-circle-btn-icon {
-  background-image: -o-radial-gradient(52.18% 47.01%, 64.96% 65.32%, #6F00FF 3.76%, #533FFF 55.38%, #B9AAFF 100%);
-  background-image: radial-gradient(64.96% 65.32% at 52.18% 47.01%, #6F00FF 3.76%, #533FFF 55.38%, #B9AAFF 100%);
+  background: radial-gradient(64.96% 65.32% at 52.18% 47.01%, #6F00FF 3.76%, #533FFF 55.38%, #B9AAFF 100%);
+}
+.eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item:nth-child(8n+2) .eael-circle-btn-icon.classic {
+  background: unset;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item:nth-child(8n+3) .eael-circle-btn-icon {
-  background-image: -o-radial-gradient(47.77% 50.74%, 101.16% 101.7%, #FF9100 3.76%, #FFB655 56.99%, #FFF04A 100%);
-  background-image: radial-gradient(101.16% 101.7% at 47.77% 50.74%, #FF9100 3.76%, #FFB655 56.99%, #FFF04A 100%);
+  background: radial-gradient(101.16% 101.7% at 47.77% 50.74%, #FF9100 3.76%, #FFB655 56.99%, #FFF04A 100%);
+}
+.eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item:nth-child(8n+3) .eael-circle-btn-icon.classic {
+  background: unset;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item:nth-child(8n+4) .eael-circle-btn-icon {
-  background-image: -o-radial-gradient(48.95% 49.57%, 65.76% 66.29%, #B40042 3.76%, #C50048 48.92%, #FF5E93 100%);
-  background-image: radial-gradient(65.76% 66.29% at 48.95% 49.57%, #B40042 3.76%, #C50048 48.92%, #FF5E93 100%);
+  background: radial-gradient(65.76% 66.29% at 48.95% 49.57%, #B40042 3.76%, #C50048 48.92%, #FF5E93 100%);
+}
+.eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item:nth-child(8n+4) .eael-circle-btn-icon.classic {
+  background: unset;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item:nth-child(8n+5) .eael-circle-btn-icon {
-  background-image: -o-radial-gradient(51.12% 47.67%, 73.69% 72.33%, #2B3894 3.76%, #364099 14.18%, #5356A8 32.43%, #8078BF 55.38%, #D2A8D1 100%);
-  background-image: radial-gradient(73.69% 72.33% at 51.12% 47.67%, #2B3894 3.76%, #364099 14.18%, #5356A8 32.43%, #8078BF 55.38%, #D2A8D1 100%);
+  background: radial-gradient(73.69% 72.33% at 51.12% 47.67%, #2B3894 3.76%, #364099 14.18%, #5356A8 32.43%, #8078BF 55.38%, #D2A8D1 100%);
+}
+.eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item:nth-child(8n+5) .eael-circle-btn-icon.classic {
+  background: unset;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item:nth-child(8n+6) .eael-circle-btn-icon {
-  background-image: -o-radial-gradient(48.86% 49.71%, 94.25% 92.56%, #199A8E 3.76%, #7AF4AB 55.38%);
-  background-image: radial-gradient(94.25% 92.56% at 48.86% 49.71%, #199A8E 3.76%, #7AF4AB 55.38%);
+  background: radial-gradient(94.25% 92.56% at 48.86% 49.71%, #199A8E 3.76%, #7AF4AB 55.38%);
+}
+.eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item:nth-child(8n+6) .eael-circle-btn-icon.classic {
+  background: unset;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item:nth-child(8n+7) .eael-circle-btn-icon {
-  background-image: -o-radial-gradient(51.12% 47.67%, 73.69% 72.33%, #2B3894 3.76%, #364099 14.18%, #5356A8 32.43%, #8078BF 55.38%, #D2A8D1 100%);
-  background-image: radial-gradient(73.69% 72.33% at 51.12% 47.67%, #2B3894 3.76%, #364099 14.18%, #5356A8 32.43%, #8078BF 55.38%, #D2A8D1 100%);
+  background: radial-gradient(73.69% 72.33% at 51.12% 47.67%, #2B3894 3.76%, #364099 14.18%, #5356A8 32.43%, #8078BF 55.38%, #D2A8D1 100%);
+}
+.eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item:nth-child(8n+7) .eael-circle-btn-icon.classic {
+  background: unset;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item:nth-child(8n+8) .eael-circle-btn-icon {
-  background-image: -o-radial-gradient(48.86% 49.71%, 94.25% 92.56%, #199A8E 3.76%, #7AF4AB 55.38%);
-  background-image: radial-gradient(94.25% 92.56% at 48.86% 49.71%, #199A8E 3.76%, #7AF4AB 55.38%);
+  background: radial-gradient(94.25% 92.56% at 48.86% 49.71%, #199A8E 3.76%, #7AF4AB 55.38%);
+}
+.eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item:nth-child(8n+8) .eael-circle-btn-icon.classic {
+  background: unset;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-3 .eael-circle-info .eael-circle-inner .eael-circle-item #eael-circle-item-1 {
   top: 14.6%;
@@ -9929,8 +9944,10 @@
   -webkit-transform: rotate(-45deg);
       -ms-transform: rotate(-45deg);
           transform: rotate(-45deg);
-  background: -o-radial-gradient(48.86% 49.71%, 94.25% 92.56%, #199a8e 3.76%, #7af4ab 55.38%);
   background: radial-gradient(94.25% 92.56% at 48.86% 49.71%, #199a8e 3.76%, #7af4ab 55.38%);
+}
+.eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-info .eael-circle-item:nth-child(8n+1) .eael-circle-icon-shapes.classic {
+  background: unset;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-info .eael-circle-item:nth-child(8n+1) .eael-circle-btn-icon svg {
   fill: #199a8e;
@@ -9939,8 +9956,10 @@
   -webkit-transform: rotate(-90deg);
       -ms-transform: rotate(-90deg);
           transform: rotate(-90deg);
-  background: -o-linear-gradient(305.7deg, #476df8 15.07%, #6a8aff 97.18%);
   background: linear-gradient(144.3deg, #476df8 15.07%, #6a8aff 97.18%);
+}
+.eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-info .eael-circle-item:nth-child(8n+2) .eael-circle-icon-shapes.classic {
+  background: unset;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-info .eael-circle-item:nth-child(8n+2) .eael-circle-btn-icon svg {
   fill: #07a9f0;
@@ -9949,8 +9968,10 @@
   -webkit-transform: rotate(-135deg);
       -ms-transform: rotate(-135deg);
           transform: rotate(-135deg);
-  background: -o-radial-gradient(52.18% 47.01%, 64.96% 65.32%, #6f00ff 3.76%, #533fff 55.38%, #b9aaff 100%);
   background: radial-gradient(64.96% 65.32% at 52.18% 47.01%, #6f00ff 3.76%, #533fff 55.38%, #b9aaff 100%);
+}
+.eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-info .eael-circle-item:nth-child(8n+3) .eael-circle-icon-shapes.classic {
+  background: unset;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-info .eael-circle-item:nth-child(8n+3) .eael-circle-btn-icon svg {
   fill: #715eff;
@@ -9959,8 +9980,10 @@
   -webkit-transform: rotate(-180deg);
       -ms-transform: rotate(-180deg);
           transform: rotate(-180deg);
-  background: -o-radial-gradient(47.77% 50.74%, 101.16% 101.7%, #ff9100 3.76%, #ffb655 56.99%, #fff04a 100%);
   background: radial-gradient(101.16% 101.7% at 47.77% 50.74%, #ff9100 3.76%, #ffb655 56.99%, #fff04a 100%);
+}
+.eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-info .eael-circle-item:nth-child(8n+4) .eael-circle-icon-shapes.classic {
+  background: unset;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-info .eael-circle-item:nth-child(8n+4) .eael-circle-btn-icon svg {
   fill: #ffae42;
@@ -9969,8 +9992,10 @@
   -webkit-transform: rotate(135deg);
       -ms-transform: rotate(135deg);
           transform: rotate(135deg);
-  background: -o-radial-gradient(48.95% 49.57%, 65.76% 66.29%, #b40042 3.76%, #c50048 48.92%, #ff5e93 100%);
   background: radial-gradient(65.76% 66.29% at 48.95% 49.57%, #b40042 3.76%, #c50048 48.92%, #ff5e93 100%);
+}
+.eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-info .eael-circle-item:nth-child(8n+5) .eael-circle-icon-shapes.classic {
+  background: unset;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-info .eael-circle-item:nth-child(8n+5) .eael-circle-btn-icon svg {
   fill: #b40042;
@@ -9979,8 +10004,10 @@
   -webkit-transform: rotate(90deg);
       -ms-transform: rotate(90deg);
           transform: rotate(90deg);
-  background: -o-radial-gradient(51.12% 47.67%, 73.69% 72.33%, #2b3894 3.76%, #364099 14.18%, #5356a8 32.43%, #8078bf 55.38%, #d2a8d1 100%);
   background: radial-gradient(73.69% 72.33% at 51.12% 47.67%, #2b3894 3.76%, #364099 14.18%, #5356a8 32.43%, #8078bf 55.38%, #d2a8d1 100%);
+}
+.eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-info .eael-circle-item:nth-child(8n+6) .eael-circle-icon-shapes.classic {
+  background: unset;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-info .eael-circle-item:nth-child(8n+6) .eael-circle-btn-icon svg {
   fill: #2b3894;
@@ -9989,15 +10016,19 @@
   -webkit-transform: rotate(45deg);
       -ms-transform: rotate(45deg);
           transform: rotate(45deg);
-  background: -o-radial-gradient(48.86% 49.71%, 94.25% 92.56%, #199a8e 3.76%, #7af4ab 55.38%);
   background: radial-gradient(94.25% 92.56% at 48.86% 49.71%, #199a8e 3.76%, #7af4ab 55.38%);
+}
+.eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-info .eael-circle-item:nth-child(8n+7) .eael-circle-icon-shapes.classic {
+  background: unset;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-info .eael-circle-item:nth-child(8n+7) .eael-circle-btn-icon svg {
   fill: #199a8e;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-info .eael-circle-item:nth-child(8n+8) .eael-circle-icon-shapes {
-  background: -o-radial-gradient(51.12% 47.67%, 73.69% 72.33%, #2b3894 3.76%, #364099 14.18%, #5356a8 32.43%, #8078bf 55.38%, #d2a8d1 100%);
   background: radial-gradient(73.69% 72.33% at 51.12% 47.67%, #2b3894 3.76%, #364099 14.18%, #5356a8 32.43%, #8078bf 55.38%, #d2a8d1 100%);
+}
+.eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-info .eael-circle-item:nth-child(8n+8) .eael-circle-icon-shapes.classic {
+  background: unset;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-4 .eael-circle-info .eael-circle-item:nth-child(8n+8) .eael-circle-btn-icon svg {
   fill: #2b3894;

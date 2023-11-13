@@ -164,6 +164,9 @@ class Info_Box extends Widget_Base
                 'condition' => [
                     'eael_infobox_img_or_icon' => 'img',
                 ],
+                'ai' => [
+                    'active' => false,
+                ],
             ]
         );
 
@@ -198,6 +201,9 @@ class Info_Box extends Widget_Base
                 'condition' => [
                     'eael_infobox_img_or_icon' => 'number',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -222,6 +228,9 @@ class Info_Box extends Widget_Base
                     'active' => true,
                 ],
                 'default' => esc_html__('This is an icon box', 'essential-addons-for-elementor-lite'),
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         $this->add_control(
@@ -413,6 +422,9 @@ class Info_Box extends Widget_Base
                 'condition' => [
                     'eael_show_infobox_button' => 'yes',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -1656,9 +1668,13 @@ class Info_Box extends Widget_Base
                     <?php endif;?>
                     <?php $this->render_infobox_button();?>
                 <?php elseif ('template' === $settings['eael_infobox_text_type']):
-            if (!empty($settings['eael_primary_templates'])) {
-                echo Plugin::$instance->frontend->get_builder_content($settings['eael_primary_templates'], true);
-            }
+                    if ( ! empty( $settings['eael_primary_templates'] ) ) {
+                        // WPML Compatibility
+                        if ( ! is_array( $settings['eael_primary_templates'] ) ) {
+                            $settings['eael_primary_templates'] = apply_filters( 'wpml_object_id', $settings['eael_primary_templates'], 'wp_template', true );
+                        }
+                        echo Plugin::$instance->frontend->get_builder_content( $settings['eael_primary_templates'], true );
+                    }
         endif;?>
             <?php endif;?>
         </div>

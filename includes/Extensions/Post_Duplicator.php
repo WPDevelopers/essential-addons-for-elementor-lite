@@ -83,7 +83,29 @@ class Post_Duplicator {
 			return; // Return if post is not there.
 		}
 
-		$current_user        = wp_get_current_user();
+		$current_user	= wp_get_current_user();
+		$allowed_roles	= array('editor', 'administrator', 'author');
+		$redirect_url = admin_url( 'edit.php?post_type=' . $post->post_type );
+
+		if ( ! array_intersect( $allowed_roles, $current_user->roles ) ) {
+			switch ( $post->post_type ) {
+				case 'post':
+					$can_edit_others_posts = current_user_can('edit_others_posts');
+					break;
+				case 'page':
+					$can_edit_others_posts = current_user_can('edit_others_pages');
+					break;
+				default :
+					$can_edit_others_posts = current_user_can('edit_others_posts');
+					break;
+			}
+
+			if ( $current_user->ID !== $post->post_author && ! $can_edit_others_posts ){
+				wp_safe_redirect( $redirect_url );
+				return;
+			}
+		}
+
 		$duplicate_post_args = array(
 			'post_author'    => $current_user->ID,
 			'post_title'     => $post->post_title . ' - Copy',
@@ -121,6 +143,12 @@ class Post_Duplicator {
 
 					$meta_key      = sanitize_text_field( $meta_info->meta_key );
 					$meta_value    =  $meta_info->meta_value;
+					
+					$exclude_meta_keys = [ '_wc_average_rating', '_wc_review_count', '_wc_rating_count' ];
+					
+					if( in_array($meta_key, $exclude_meta_keys) ){
+						continue;
+					}
 
 					if ( $meta_key === '_elementor_template_type' ) {
 						delete_post_meta( $duplicated_id, '_elementor_template_type' );
@@ -136,7 +164,7 @@ class Post_Duplicator {
 				$wpdb->query( $duplicate_insert_query . $insert );
 			}
 		}
-		$redirect_url = admin_url( 'edit.php?post_type=' . $post->post_type );
+
 		wp_safe_redirect( $redirect_url );
 	}
 }

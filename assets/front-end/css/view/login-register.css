@@ -123,6 +123,8 @@
 }
 .eael-lr-form-wrapper .eael-lr-form-group {
   margin-bottom: 1rem;
+  display: inline-block;
+  vertical-align: top;
 }
 .eael-lr-form-wrapper .eael-lr-form-group label {
   display: inline-block;
@@ -152,7 +154,6 @@
   border-radius: 3px;
   -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-  -o-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   outline: none;
@@ -183,10 +184,12 @@
 .eael-lr-form-wrapper .eael-forever-forget .forget-pass {
   text-align: right;
 }
-.eael-lr-form-wrapper .eael-lr-password-wrapper {
+.eael-lr-form-wrapper .eael-lr-password-wrapper,
+.eael-lr-form-wrapper .eael-lr-password-wrapper-register {
   position: relative;
 }
-.eael-lr-form-wrapper .eael-lr-password-wrapper button {
+.eael-lr-form-wrapper .eael-lr-password-wrapper button,
+.eael-lr-form-wrapper .eael-lr-password-wrapper-register button {
   position: absolute;
   top: 0;
   right: 0;
@@ -205,7 +208,6 @@
   text-decoration: none;
   border: none;
   -webkit-transition: all 0.2s;
-  -o-transition: all 0.2s;
   transition: all 0.2s;
   padding: 15px;
   width: 130px;
@@ -328,7 +330,6 @@
     background: var(--b, var(--background));
     -webkit-transition: background 0.3s, border-color 0.3s, -webkit-box-shadow 0.2s;
     transition: background 0.3s, border-color 0.3s, -webkit-box-shadow 0.2s;
-    -o-transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
     transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
     transition: background 0.3s, border-color 0.3s, box-shadow 0.2s, -webkit-box-shadow 0.2s;
   }
@@ -340,7 +341,6 @@
     position: absolute;
     -webkit-transition: opacity var(--d-o, 0.2s), -webkit-transform var(--d-t, 0.3s) var(--d-t-e, ease);
     transition: opacity var(--d-o, 0.2s), -webkit-transform var(--d-t, 0.3s) var(--d-t-e, ease);
-    -o-transition: transform var(--d-t, 0.3s) var(--d-t-e, ease), opacity var(--d-o, 0.2s);
     transition: transform var(--d-t, 0.3s) var(--d-t-e, ease), opacity var(--d-o, 0.2s);
     transition: transform var(--d-t, 0.3s) var(--d-t-e, ease), opacity var(--d-o, 0.2s), -webkit-transform var(--d-t, 0.3s) var(--d-t-e, ease);
   }

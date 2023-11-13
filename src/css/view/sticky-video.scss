@@ -29,12 +29,12 @@
 .eael-sticky-video-wrapper {
 	position: relative;
 	width: 100%;
-	min-height: 200px;
 	margin: 0px;
 	padding: 0px;
 	transition: 0.5s;
 	text-align: left;
 	overflow: hidden;
+	height: auto !important;
 
 	/* Plyr CSS Started  */
 	.plyr__controls button {
@@ -144,7 +144,8 @@
 .eaelsv-overlay-visibility-transparent {
 	.plyr--stopped.plyr__poster-enabled .plyr__poster,
 	.plyr--youtube.plyr--full-ui.plyr--video .plyr__control--overlaid {
-		display: none;
+		// display: none;
+		opacity: 0;
 	}
 }
 

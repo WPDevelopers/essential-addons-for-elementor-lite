@@ -796,11 +796,16 @@ $config = [
                         'type' => 'lib',
                         'context' => 'view',
                     ],
-                    [
-                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/moment/moment.min.js',
-                        'type' => 'lib',
-                        'context' => 'view',
-                    ],
+	                [
+		                'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/moment/moment.min.js',
+		                'type' => 'lib',
+		                'context' => 'view',
+	                ],
+	                [
+		                'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/fancy-table/fancy-table.min.js',
+		                'type' => 'lib',
+		                'context' => 'view',
+	                ],
                     [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/event-calendar.min.js',
                         'type' => 'self',
@@ -1097,6 +1102,30 @@ $config = [
                 ],
             ],
         ],
+        'svg-draw' => [
+            'class' => '\Essential_Addons_Elementor\Elements\SVG_Draw',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/svg-draw.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+                'js' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/drawsvg/drawsvg.min.js',
+                        'type' => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/svg-draw.min.js',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
     ],
     'extensions' => [
         'promotion' => [
@@ -1162,6 +1191,25 @@ $config = [
                     ],
                 ],
             ],
+        ],
+        'wrapper-link' => [
+	        'class'      => '\Essential_Addons_Elementor\Extensions\Wrapper_Link',
+	        'dependency' => [
+		        'css' => [
+			        [
+				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/wrapper-link.min.css',
+				        'type'    => 'self',
+				        'context' => 'view',
+			        ],
+		        ],
+		        'js'  => [
+			        [
+				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/wrapper-link.min.js',
+				        'type'    => 'self',
+				        'context' => 'view',
+			        ],
+		        ],
+	        ],
         ],
     ],
 ];

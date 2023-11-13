@@ -1,4 +1,8 @@
 ea.hooks.addAction("init", "ea", () => {
+    if (ea.elementStatusCheck('eaelLoginRegister')) {
+        return false;
+    }
+
     const EALoginRegister = function ($scope, $) {
 
         const $wrap = $scope.find('.eael-login-registration-wrapper');// cache wrapper
@@ -22,6 +26,8 @@ ea.hooks.addAction("init", "ea", () => {
         const $lostpasswordLinkAction = $scope.find('#eael-lr-lostpassword-toggle');
         const $lostpasswordLoginLinkAction = $scope.find('#eael-lr-login-toggle-lostpassword');
         const $passField = $loginFormWrapper.find('#eael-user-password');
+        const $passFieldRegister = $regFormWrapper.find('#form-field-password');
+        const $passConfirmFieldRegister = $regFormWrapper.find('#form-field-confirm_pass');
         const $pass1Field = $resetpasswordFormWrapper.find('#eael-pass1');
         const $pass2Field = $resetpasswordFormWrapper.find('#eael-pass2');
         const recaptchaAvailable = (typeof grecaptcha !== 'undefined' && grecaptcha !== null);
@@ -58,7 +64,8 @@ ea.hooks.addAction("init", "ea", () => {
                 window.history.replaceState({}, '', `${location.pathname}?${params}`);
                 e.preventDefault();
                 $regFormWrapper.hide();
-                $lostpasswordFormWrapper.hide();
+                $regFormWrapper.find('.eael-form-validation-container').html('');
+                $lostpasswordFormWrapper.hide();                
                 $loginFormWrapper.fadeIn();
             });
         }
@@ -83,6 +90,10 @@ ea.hooks.addAction("init", "ea", () => {
                     params.append('eael-lostpassword',1);
                 }
                 window.history.replaceState({}, '', `${location.pathname}?${params}`);
+                $lostpasswordFormWrapper.find('.eael-form-validation-container').html('');
+                $lostpasswordFormWrapper.find(".eael-lr-form-group").css("display", 'bloock').removeClass('eael-d-none');
+                $lostpasswordFormWrapper.find("#eael-lostpassword-submit").css("display", 'bloock').removeClass('eael-d-none');
+                
                 $regFormWrapper.hide();
                 $loginFormWrapper.hide();
                 $lostpasswordFormWrapper.fadeIn();
@@ -90,7 +101,7 @@ ea.hooks.addAction("init", "ea", () => {
         }
 
         // Password Visibility Toggle
-        $(document).on('click', '#wp-hide-pw, #wp-hide-pw1, #wp-hide-pw2', function (e) {
+        $(document).on('click', '#wp-hide-pw, #wp-hide-pw1, #wp-hide-pw2, #wp-hide-pw-register', function (e) {
             let $buttonId = $(this).attr('id');
 
             switch ($buttonId) {
@@ -100,6 +111,12 @@ ea.hooks.addAction("init", "ea", () => {
                     break;
                 case 'wp-hide-pw2':
                     togglePasswordVisibility( $pass2Field );
+                    break;
+                case 'wp-hide-pw-register':
+                    togglePasswordVisibility( $passFieldRegister );
+                    if($passConfirmFieldRegister){
+                        togglePasswordVisibility( $passConfirmFieldRegister );
+                    }
                     break;
                 default :
                     togglePasswordVisibility( $passField );
@@ -118,25 +135,6 @@ ea.hooks.addAction("init", "ea", () => {
                 $icon.removeClass('dashicons-visibility').addClass('dashicons-hidden');
             }
         }
-        
-        $('form input[type="submit"]', $scope).on('click', function (e) {
-            if(!isProAndAjaxEnabled){
-                let isRecaptchaVersion3 = false;
-                isRecaptchaVersion3 = loginRecaptchaVersion === 'v3' || registerRecaptchaVersion === 'v3' ;
-                
-                if (recaptchaAvailable && isRecaptchaVersion3) {
-                    grecaptcha.execute(recaptchaSiteKeyV3, { 
-                        action: 'eael_login_register_form' 
-                    }).then(function (token) {
-                        if ($('form input[name="g-recaptcha-response"]', $scope).length === 0) {
-                            $('form', $scope).append('<input type="hidden" name="g-recaptcha-response" value="' + token + '">');
-                        } else {
-                            $('form input[name="g-recaptcha-response"]', $scope).val(token);
-                        }
-                    });
-                }
-            }
-        });
 
         $(document).ready(function () {
             let eaelGetTokenPromise = new Promise(function (eaelGetTokenResolve, eaelGetTokenReject) {
@@ -153,6 +151,25 @@ ea.hooks.addAction("init", "ea", () => {
             eaelGetTokenPromise.then(function (updatedNonce) {
                 $('#eael-login-nonce, #eael-register-nonce, #eael-lostpassword-nonce, #eael-resetpassword-nonce').val(updatedNonce);
             });
+
+            if(!isProAndAjaxEnabled){
+                let isRecaptchaVersion3 = false;
+                isRecaptchaVersion3 = loginRecaptchaVersion === 'v3' || registerRecaptchaVersion === 'v3' ;
+                
+                if (recaptchaAvailable && isRecaptchaVersion3) {
+                    grecaptcha.ready(function() {
+                        grecaptcha.execute(recaptchaSiteKeyV3, { 
+                            action: 'eael_login_register_form' 
+                        }).then(function (token) {
+                            if ($('form input[name="g-recaptcha-response"]', $scope).length === 0) {
+                                $('form', $scope).append('<input type="hidden" name="g-recaptcha-response" value="' + token + '">');
+                            } else {
+                                $('form input[name="g-recaptcha-response"]', $scope).val(token);
+                            }
+                        });
+                    });
+                }
+            }
         });
 
         // reCAPTCHA

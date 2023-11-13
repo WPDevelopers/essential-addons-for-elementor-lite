@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'eaicon';
-	src:  url('../fonts/eaicon.eot?j23bub');
-	src:  url('../fonts/eaicon.eot?j23bub#iefix') format('embedded-opentype'),
-	url('../fonts/eaicon.ttf?j23bub') format('truetype'),
-	url('../fonts/eaicon.woff?j23bub') format('woff'),
-	url('../fonts/eaicon.svg?j23bub#eaicon') format('svg');
+	src:  url('../fonts/eaicon.eot?a0uokq');
+	src:  url('../fonts/eaicon.eot?a0uokq#iefix') format('embedded-opentype'),
+	url('../fonts/eaicon.ttf?a0uokq') format('truetype'),
+	url('../fonts/eaicon.woff?a0uokq') format('woff'),
+	url('../fonts/eaicon.svg?a0uokq#eaicon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 	font-display: block;
@@ -382,4 +382,55 @@
 }
 .eaicon-business-reviews:before {
 	content: "\e96f";
+}
+.eaicon-svg-draw:before {
+	content: "\e970";
+}
+.eaicon-thank-you:before {
+	content: "\e971";
+}
+.eaicon-woo-cross-sells:before {
+	content: "\e972";
+}
+.eaicon-account:before {
+	content: "\e973";
+}
+.eaicon-dashboard-fill:before {
+	content: "\e974";
+}
+.eaicon-checkbox-circle:before {
+	content: "\e975";
+}
+.eaicon-download-fill:before {
+	content: "\e976";
+}
+.eaicon-download:before {
+	content: "\e977";
+}
+.eaicon-edit-fill:before {
+	content: "\e978";
+}
+.eaicon-eye-line:before {
+	content: "\e979";
+}
+.eaicon-infinity-line:before {
+	content: "\e97a";
+}
+.eaicon-login-box:before {
+	content: "\e97b";
+}
+.eaicon-map-2:before {
+	content: "\e97c";
+}
+.eaicon-not-alowed:before {
+	content: "\e97d";
+}
+.eaicon-orders:before {
+	content: "\e97e";
+}
+.eaicon-woo-account-dashboard:before {
+	content: "\e97f";
+}
+.eaicon-fancy-chart:before {
+	content: "\e980";
 }

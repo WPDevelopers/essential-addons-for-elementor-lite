@@ -21,6 +21,7 @@ trait Elements {
 	public function register_controls( $controls_manager ) {
 		if ( version_compare( ELEMENTOR_VERSION, '3.5.0', '>=' ) ) {
 			$controls_manager->register( new \Essential_Addons_Elementor\Controls\Select2() );
+			$controls_manager->add_group_control( 'eael-background', new \Essential_Addons_Elementor\Controls\EAEL_Background() );
 		} else {
 			$controls_manager->register_control( 'eael-select2', new \Essential_Addons_Elementor\Controls\Select2() );
 		}
@@ -322,11 +323,69 @@ trait Elements {
 				'icon'       => 'eaicon-advanced-search',
 				'categories' => '["essential-addons-elementor"]',
 			],
+			[
+				'name'       => 'eael-woo-thank-you',
+				'title'      => __( 'Woo Thank You', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eaicon-thank-you',
+				'categories' => '["essential-addons-elementor"]',
+			],
+			[
+				'name'       => 'eael-woo-cross-sells',
+				'title'      => __( 'Woo Cross Sells', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eaicon-woo-cross-sells',
+				'categories' => '["essential-addons-elementor"]',
+			],
+			[
+				'name'       => 'eael-woo-account-dashboard',
+				'title'      => __( 'Woo Account Dashboard', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eaicon-woo-account-dashboard',
+				'categories' => '["essential-addons-elementor"]',
+			],
+			[
+				'name'       => 'fancy-chart',
+				'title'      => __( 'Fancy Chart', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eicon-elementor-circle',
+				'categories' => '["essential-addons-elementor"]',
+			],
 		] );
 
 		$config['promotionWidgets'] = $combine_array;
 
 		return $config;
+	}
+
+	public function eael_is_theme_builder_archive_template( $type = 'archive' ){
+		$is_archive_template = false;
+
+		if ( class_exists( 'ElementorPro\Modules\ThemeBuilder\Module' ) ) {
+			$conditions_manager = \ElementorPro\Plugin::instance()->modules_manager->get_modules( 'theme-builder' )->get_conditions_manager();
+		
+			if( ! empty( $conditions_manager->get_documents_for_location( 'archive') ) || ! empty( $conditions_manager->get_documents_for_location( 'single') ) ) {
+				$is_archive_template = true;
+			}
+		}
+
+		return $is_archive_template;
+	}
+
+	public function eael_get_theme_builder_archive_template_id(){
+		$template_id = 0;
+
+		if ( class_exists( 'ElementorPro\Modules\ThemeBuilder\Module' ) ) {
+			if ( $this->eael_is_theme_builder_archive_template() ) {
+				$page_body_classes = get_body_class();
+
+				if( is_array( $page_body_classes ) && count( $page_body_classes ) ){
+					foreach( $page_body_classes as $page_body_class){
+						if ( strpos( $page_body_class, 'elementor-page-' ) !== FALSE ) {
+							$template_id = intval( str_replace('elementor-page-', '', $page_body_class) );
+						} 
+					}
+				}
+			}
+		}
+
+		return $template_id;
 	}
 
 	/**
@@ -345,12 +404,22 @@ trait Elements {
 
 		$post_id         = get_the_ID();
 		$html            = '';
-		$global_settings = $setting_data = $document = [];
+		$global_settings = $settings_data = $document = [];
 
 		if ( $this->get_settings( 'reading-progress' ) || $this->get_settings( 'table-of-content' ) || $this->get_settings( 'scroll-to-top' ) ) {
 			$html            = '';
 			$global_settings = get_option( 'eael_global_settings' );
-			$document        = Plugin::$instance->documents->get( $post_id, false );
+
+			$is_archive_template = $this->eael_is_theme_builder_archive_template();
+			if( ! empty ( $is_archive_template ) ){
+				$template_id = $this->eael_get_theme_builder_archive_template_id();
+
+				if ( ! empty( $template_id ) ) {
+					$post_id = $template_id;
+				}
+			}
+
+			$document = Plugin::$instance->documents->get( $post_id, false );
 
 			if ( is_object( $document ) ) {
 				$settings_data = $document->get_settings();
@@ -370,11 +439,15 @@ trait Elements {
 			}
 
 			if ( $reading_progress_status ) {
+				if ( ! empty( $document ) && is_object( $document ) ) {
+					$this->progress_bar_local_css( $document->get_settings() );
+				}
+
 				$this->extensions_data = $settings_data;
 				$progress_height       = ! empty( $settings_data['eael_ext_reading_progress_height']['size'] ) ? $settings_data['eael_ext_reading_progress_height']['size'] : '';
 				$animation_speed       = ! empty( $settings_data['eael_ext_reading_progress_animation_speed']['size'] ) ? $settings_data['eael_ext_reading_progress_animation_speed']['size'] : '';
 
-				$reading_progress_html = '<div class="eael-reading-progress-wrap eael-reading-progress-wrap-' . ( $this->get_extensions_value( 'eael_ext_reading_progress' ) == 'yes' ? 'local' : 'global' ) . '">';
+				$reading_progress_html = '<div id="eael-reading-progress-'. get_the_ID() .'" class="eael-reading-progress-wrap eael-reading-progress-wrap-' . ( $this->get_extensions_value( 'eael_ext_reading_progress' ) == 'yes' ? 'local' : 'global' ) . '">';
 
 				if ( $global_reading_progress ) {
 					$reading_progress_html .= '<div class="eael-reading-progress eael-reading-progress-global eael-reading-progress-' . $this->get_extensions_value( 'eael_ext_reading_progress_position' ) . '" style="height: ' . $progress_height . 'px;background-color: ' . $this->get_extensions_value( 'eael_ext_reading_progress_bg_color' ) . ';">
@@ -410,7 +483,8 @@ trait Elements {
 
 		// Table of Contents
 		if ( $this->get_settings( 'table-of-content' ) ) {
-			$toc_status = false;
+			$toc_status 		= false;
+			$toc_status_global 	= false;
 
 			if ( is_object( $document ) ) {
 				$settings_data = $document->get_settings();
@@ -419,9 +493,11 @@ trait Elements {
 			if ( isset( $settings_data['eael_ext_table_of_content'] ) && $settings_data['eael_ext_table_of_content'] == 'yes' ) {
 				$toc_status = true;
 			} elseif ( isset( $global_settings['eael_ext_table_of_content']['enabled'] ) && $global_settings['eael_ext_table_of_content']['enabled'] ) {
-				$toc_status    = true;
-				$settings_data = $global_settings['eael_ext_table_of_content'];
+				$toc_status    	= true;
+				$settings_data 	= $global_settings['eael_ext_table_of_content'];
 			}
+
+			$toc_status_global = isset( $global_settings['eael_ext_table_of_content']['enabled'] ) && $global_settings['eael_ext_table_of_content']['enabled'];
 
 			if ( $toc_status ) {
 				$this->extensions_data = $settings_data;
@@ -465,10 +541,7 @@ trait Elements {
 				$toc_style_class .= ( $auto_highlight == 'yes' ) ? ' eael-toc-auto-highlight' : ' ';
 				$toc_style_class .= ( $auto_highlight == 'yes' && $auto_highlight_single_item_only == 'yes' ) ? ' eael-toc-highlight-single-item' : ' ';
 				$title_url       = ( $title_to_url == 'yes' ) ? 'true' : 'false';
-
-				if ( ! empty( $icon_check['value'] ) ) {
-					$icon = $icon_check['value'];
-				}
+				$icon_html       = ! empty( $icon_check['value'] ) ? "<i class='" . esc_attr( $icon_check['value'] ) . "'></i>" : '';
 
 				$table_of_content_html = "<div data-eaelTocTag='" . esc_attr( $support_tag ) . "' data-contentSelector='" . esc_attr( $content_selector ) . "' data-excludeSelector='" . esc_attr( $exclude_selector ) . "' data-stickyScroll='" . esc_attr( $sticky_scroll['size'] ) . "' data-titleUrl='" . esc_attr( $title_url ) . "' data-page_offset='" . esc_attr( $page_offset ) . "' id='eael-toc' class='" . esc_attr( $el_class ) . " '>
                     <div class='eael-toc-header'>
@@ -478,7 +551,7 @@ trait Elements {
                     <div class='eael-toc-body'>
                         <ul id='eael-toc-list' class='eael-toc-list " . esc_attr( $toc_style_class ) . "'></ul>
                     </div>
-                    <button class='eael-toc-button'><i class='" . esc_attr( $icon ) . "'></i><span>{$toc_title}</span></button>
+                    <button class='eael-toc-button'>" . wp_kses( $icon_html, [ 'i' => [ 'class' => [] ] ] ) . "<span>{$toc_title}</span></button>
                 </div>";
 
 				if ( $this->get_extensions_value( 'eael_ext_table_of_content' ) != 'yes' ) {
@@ -486,6 +559,17 @@ trait Elements {
 					if ( get_post_status( $this->get_extensions_value( 'post_id' ) ) != 'publish' ) {
 						$table_of_content_html = '';
 					} else if ( $toc_global_display_condition == 'pages' && ! is_page() ) {
+						$table_of_content_html = '';
+					} else if ( $toc_global_display_condition == 'posts' && ! is_single() ) {
+						$table_of_content_html = '';
+					}
+				}
+
+				// Exclude TOC configured page / post based on display condition
+				if ( $toc_status && $toc_status_global ) {
+					$toc_global_display_condition = $this->get_extensions_value( 'eael_ext_toc_global_display_condition' );
+					
+					if ( $toc_global_display_condition == 'pages' && ! is_page() ) {
 						$table_of_content_html = '';
 					} else if ( $toc_global_display_condition == 'posts' && ! is_single() ) {
 						$table_of_content_html = '';
@@ -763,6 +847,26 @@ trait Elements {
 		}
 
 		wp_add_inline_style( 'eael-table-of-content', $toc_global_css );
+	}
+	
+	/**
+	 * @param $document_settings
+	 *
+	 * @return string|void
+	 */
+	public function progress_bar_local_css( $document_settings ) {
+		$eael_reading_progress_fill_color = isset( $document_settings['eael_ext_reading_progress_fill_color'] ) ? $document_settings['eael_ext_reading_progress_fill_color'] : '';
+
+		$reading_progress_local_css = '';
+		$eael_reading_progress_id_selector = '#eael-reading-progress-' . get_the_ID();
+		if( ! empty( $eael_reading_progress_fill_color ) ){
+			$reading_progress_local_css .= "
+				{$eael_reading_progress_id_selector} .eael-reading-progress .eael-reading-progress-fill {
+					background-color: {$eael_reading_progress_fill_color};	
+				}
+			";
+		}
+		wp_add_inline_style( 'eael-reading-progress', $reading_progress_local_css );
 	}
 
 	/**

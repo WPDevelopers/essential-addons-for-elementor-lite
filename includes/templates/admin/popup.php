@@ -3,7 +3,7 @@
         <div class="eael-modal">
             <div class="modal__body">
                 <a href="#" id="eael-admin-popup-close" class="modal__close eael-admin-popup-close"><i
-                            class="ea-admin-icon icon-times"></i></a>
+                            class="ea-admin-icon eael-icon-times"></i></a>
                 <div id="eael-pro-popup" class="modal__content modal__content__popup">
                     <div class="modal__card">
                         <div class="icon">
@@ -30,7 +30,7 @@
                                    value="<?php echo esc_attr( get_option( 'eael_save_google_map_api' ) ); ?>" type="text"
                                    class="eael-form__control" placeholder="Set API key">
                             <button type="button" class="eael-button button__themeColor eael-save-trigger eael-admin-popup-close"><i
-                                        class="ea-admin-icon icon-long-arrow-right"></i></button>
+                                        class="ea-admin-icon eael-icon-long-arrow-right"></i></button>
                         </div>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
                                    value="<?php echo esc_attr( get_option( 'eael_save_mailchimp_api' ) ); ?>"
                                    placeholder="Set API key">
                             <button class="eael-button button__themeColor eael-save-trigger eael-admin-popup-close"><i
-                                        class="ea-admin-icon icon-long-arrow-right"></i></button>
+                                        class="ea-admin-icon eael-icon-long-arrow-right"></i></button>
                         </div>
 
                     </div>
@@ -235,6 +235,24 @@
                                         <input name="lr_custom_profile_fields" id="lr_custom_profile_fields" <?php if( 'on' === get_option( 'eael_custom_profile_fields' ) ) : ?> checked <?php endif; ?> class="eael-form__control eael-elements-list" type="checkbox">  <span class="switch__box "></span>
                                     </label>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <?php $custom_field_wrap_class = 'on' !== get_option( 'eael_custom_profile_fields' ) ? 'eael-d-none' : ''; ?>
+                    <div class="lr_custom_profile_fields_child modal__content1 ml30 mr30 mt15 <?php echo esc_attr($custom_field_wrap_class); ?>">
+                        <div class="eael-login__setup">
+                            <div class="eael-input__inline mb15">
+                                <label><i class="eicon-plus-circle-o mr10"></i><?php _e( 'Text Type Fields:', 'essential-addons-for-elementor-lite' ); ?></label>
+                                <input name="lr_custom_profile_fields_text" id="lr_custom_profile_fields_text"
+                                        value="<?php echo esc_attr( get_option( 'eael_custom_profile_fields_text' ) ); ?>"
+                                        class="eael-form__control" type="text" placeholder="Field 1, Field 2 ...">
+                            </div>
+                            <div class="eael-input__inline mb15">
+                                <label><i class="eicon-plus-circle-o mr10"></i><?php _e( 'File Type Fields:', 'essential-addons-for-elementor-lite' ); ?></label>
+                                <input name="lr_custom_profile_fields_img" id="lr_custom_profile_fields_img"
+                                        value="<?php echo esc_attr( get_option( 'eael_custom_profile_fields_img' ) ); ?>"
+                                        class="eael-form__control" type="text" placeholder="Field 1, Field 2 ...">
                             </div>
                         </div>
                     </div>

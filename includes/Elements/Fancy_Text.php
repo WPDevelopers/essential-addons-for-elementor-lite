@@ -10,7 +10,7 @@ use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Typography;
-use \Elementor\Core\Schemes\Typography;
+use \Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use \Elementor\Widget_Base;
 use \Elementor\Repeater;
 use Essential_Addons_Elementor\Classes\Helper as HelperClass;
@@ -51,6 +51,12 @@ class Fancy_Text extends Widget_Base {
 		];
     }
 
+	public function get_style_depends() {
+        return [
+            'e-animations',
+        ];
+    }
+
     public function get_custom_help_url() {
         return 'https://essential-addons.com/elementor/docs/fancy-text/';
     }
@@ -73,7 +79,10 @@ class Fancy_Text extends Widget_Base {
 				'placeholder' => esc_html__( 'Place your prefix text', 'essential-addons-for-elementor-lite'),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => esc_html__( 'This is the ', 'essential-addons-for-elementor-lite'),
-				'dynamic'     => [ 'active' => true ]
+				'dynamic'     => [ 'active' => true ],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -85,7 +94,10 @@ class Fancy_Text extends Widget_Base {
 				'label'			=> esc_html__( 'Fancy String', 'essential-addons-for-elementor-lite'),
 				'type'			=> Controls_Manager::TEXT,
 				'label_block'	=> true,
-				'dynamic'		=> [ 'active' => true ]
+				'dynamic'		=> [ 'active' => true ],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -118,7 +130,10 @@ class Fancy_Text extends Widget_Base {
 				'placeholder' => esc_html__( 'Place your suffix text', 'essential-addons-for-elementor-lite'),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => esc_html__( ' of the sentence.', 'essential-addons-for-elementor-lite'),
-				'dynamic'     => [ 'active' => true ]
+				'dynamic'     => [ 'active' => true ],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -313,7 +328,9 @@ class Fancy_Text extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
              'name' => 'typography',
-				'scheme' => Typography::TYPOGRAPHY_1,
+             'global' => [
+	             'default' => Global_Typography::TYPOGRAPHY_PRIMARY
+             ],
 				'fields_options' => [
 					'typography' => ['default' => 'yes'],
 					'font_size' => ['default' => ['size' => 22]],
@@ -420,7 +437,9 @@ class Fancy_Text extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
             'name' => 'eael_fancy_text_strings_typography',
-				'scheme' => Typography::TYPOGRAPHY_1,
+            'global' => [
+	            'default' => Global_Typography::TYPOGRAPHY_PRIMARY
+            ],
 				'fields_options' => [
 					'typography' => ['default' => 'yes'],
 					'font_size' => ['default' => ['size' => 22]],
@@ -466,7 +485,7 @@ class Fancy_Text extends Widget_Base {
 				'label' => esc_html__( 'Typing Cursor Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .typed-cursor' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-fancy-text-strings::after' => 'color: {{VALUE}};',
 				],
 				'condition' => [
 					'eael_fancy_text_cursor' => 'yes',
@@ -554,7 +573,9 @@ class Fancy_Text extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
              'name' => 'ending_typography',
-				'scheme' => Typography::TYPOGRAPHY_1,
+             'global' => [
+	             'default' => Global_Typography::TYPOGRAPHY_PRIMARY
+             ],
 				'fields_options' => [
 					'typography' => ['default' => 'yes'],
 					'font_size' => ['default' => ['size' => 22]],

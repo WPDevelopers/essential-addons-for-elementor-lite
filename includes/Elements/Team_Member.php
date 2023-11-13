@@ -76,6 +76,9 @@ class Team_Member extends Widget_Base {
 				'default' => [
 					'url' => Utils::get_placeholder_image_src(),
 				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -111,6 +114,9 @@ class Team_Member extends Widget_Base {
                     'active' => true,
                 ],
 				'default' => esc_html__( 'John Doe', 'essential-addons-for-elementor-lite'),
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -123,6 +129,9 @@ class Team_Member extends Widget_Base {
                     'active' => true,
                 ],
 				'default' => esc_html__( 'Software Engineer', 'essential-addons-for-elementor-lite'),
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -327,10 +336,6 @@ class Team_Member extends Widget_Base {
 						'min'	=> 0,
 						'max'	=> 200
 					]
-				],
-				'default'	=> [
-					'unit'	=> 'px',
-					'size'	=> 'auto'
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-team-item .eael-team-content' => 'min-height: {{SIZE}}{{UNIT}};',

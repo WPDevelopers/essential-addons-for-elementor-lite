@@ -72,8 +72,14 @@ ea.hooks.addAction("init", "ea", () => {
 				ea.hooks.doAction("ea-advanced-accordion-triggered", $this.next());
 			});
 
+			$scope.on('keydown', '.eael-accordion-header', function (e) {
+				if (e.which === 13 || e.which === 32) {
+					$(this).trigger('click');
+				}
+			});
+
 			// If hashTag is not null then scroll to that hashTag smoothly
-			if( typeof hashTag !== 'undefined' && hashTag ){
+			if( typeof hashTag !== 'undefined' && hashTag && !ea.elementStatusCheck('eaelAdvancedAccordionScroll') ){
 				let $customIdOffsetVal = $customIdOffset ? parseFloat($customIdOffset) : 0;
 				$('html, body').animate({
 					scrollTop: $("#"+hashTag).offset().top - $customIdOffsetVal,

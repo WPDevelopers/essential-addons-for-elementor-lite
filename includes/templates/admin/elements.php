@@ -120,20 +120,20 @@ $elements = [
 			],
 			[
 				'key'       => 'event-calendar',
-				'title'     => __( 'Event Calendar', 'essential-addons-elementor' ),
+				'title'     => __( 'Event Calendar', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/event-calendar/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/event-calendar/',
 				'promotion' => 'popular'
 			],
 			[
 				'key'       => 'simple-menu',
-				'title'     => __( 'Simple Menu', 'essential-addons-elementor' ),
+				'title'     => __( 'Simple Menu', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/simple-menu/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/simple-menu/',
 			],
 			[
 				'key'   => 'advanced-search',
-				'title' => __( 'Advanced Search', 'essential-addons-elementor' ),
+				'title' => __( 'Advanced Search', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/advanced-search/',
 				'doc_link' => 'https://essential-addons.com/elementor/docs/advanced-search/',
 				'is_pro' => true,
@@ -370,6 +370,21 @@ $elements = [
 				'demo_link' => 'https://essential-addons.com/elementor/interactive-circle/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/interactive-circle/',
 				'promotion' => 'new'
+			],
+            [
+                'key'       => 'svg-draw',
+                'title'     => __( 'SVG Draw', 'essential-addons-for-elementor-lite' ),
+                'demo_link' => 'https://essential-addons.com/elementor/svg-draw/',
+                'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-svg-draw/',
+                'promotion' => 'new'
+			],
+			[
+				'key'       => 'fancy-chart',
+				'title'     => __( 'Fancy Chart', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/fancy-chart/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-fancy-chart/',
+				'promotion' => 'new',
+				'is_pro'    => true
 			]
 		]
 	],
@@ -473,7 +488,7 @@ $elements = [
 			],
 			[
 				'key'       => 'login-register',
-				'title'     => __( 'Login | Register Form', 'essential-addons-elementor' ),
+				'title'     => __( 'Login | Register Form', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/login-register-form',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/login-register-form/',
 				'setting'   => [ 'id' => 'eael-login-register-setting' ],
@@ -555,7 +570,7 @@ $elements = [
 		'elements' => [
 			[
 				'key'       => 'product-grid',
-				'title'     => __( 'Product Grid', 'essential-addons-for-elementor-lite' ),
+				'title'     => __( 'Woo Product Grid', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/woo-product-grid/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/woocommerce-product-grid/',
 				'promotion' => 'popular'
@@ -596,6 +611,22 @@ $elements = [
 				'promotion' => 'new'
 			],
 			[
+				'key'       => 'woo-thank-you',
+				'title'     => __( 'Woo Thank You', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/woo-thank-you',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-woo-thank-you',
+				'promotion' => 'new',
+                'is_pro'    => true
+			],
+			[
+				'key'       => 'woo-cross-sells',
+				'title'     => __( 'Woo Cross Sells', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/woo-cross-sells/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-woo-cross-sells/',
+				'promotion' => 'new',
+				'is_pro'    => true
+			],
+			[
 				'key'       => 'woo-product-compare',
 				'title'     => __( 'Woo Product Compare', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/woo-product-compare/',
@@ -606,6 +637,14 @@ $elements = [
 				'title'     => __( 'Woo Product Gallery', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/woo-product-gallery/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/woo-product-gallery/'
+			],
+			[
+				'key'       => 'woo-account-dashboard',
+				'title'     => __( 'Woo Account Dashboard', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/woo-account-dashboard/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-woo-account-dashboard/',
+				'promotion' => 'new',
+                'is_pro'    => true
 			],
 		]
 	]
@@ -651,16 +690,16 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
 									$id = !empty( $item[ 'setting' ][ 'id' ] ) ? $item[ 'setting' ][ 'id' ] : '';
 									?>
                                     <a target="_blank" href="<?php echo esc_url( $link ); ?>" id="<?php echo esc_attr( $id ); ?>" class="element__icon">
-                                        <i class="ea-admin-icon icon-gear"></i>
+                                        <i class="ea-admin-icon eael-icon-gear"></i>
                                         <span class="tooltip-text"><?php esc_html_e( 'Setting', 'essential-addons-for-elementor-lite' ); ?></span>
                                     </a>
 								<?php endif; ?>
                                 <a target="_blank" href="<?php echo esc_url( $item[ 'doc_link' ] ); ?>" class="element__icon">
-                                    <i class="ea-admin-icon icon-doc"></i>
+                                    <i class="ea-admin-icon eael-icon-doc"></i>
                                     <span class="tooltip-text"><?php esc_html_e( 'Documentation', 'essential-addons-for-elementor-lite' ); ?></span>
                                 </a>
                                 <a target="_blank" href="<?php echo esc_url( $item[ 'demo_link' ] ); ?>" class="element__icon">
-                                    <i class="ea-admin-icon icon-monitor"></i>
+                                    <i class="ea-admin-icon eael-icon-monitor"></i>
                                     <span class="tooltip-text"><?php esc_html_e( 'Demo', 'essential-addons-for-elementor-lite' ); ?></span>
                                 </a>
                                 <label class="eael-switch">
@@ -672,7 +711,7 @@ $elements = apply_filters( 'add_eael_elementor_addons', $elements );
 									?>
                                     <span class="switch__box <?php echo $disabled; ?>"></span>
                                 </label>
-                                <?php printf( "%s", ( $disabled == 'disabled') ? '<i class="ea-admin-icon icon-lock eael-lock-style"></i>' : '' ); ?>
+                                <?php printf( "%s", ( $disabled == 'disabled') ? '<i class="ea-admin-icon eael-icon-lock eael-lock-style"></i>' : '' ); ?>
                             </div>
                         </div>
                     </div>

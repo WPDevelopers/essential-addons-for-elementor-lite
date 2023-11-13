@@ -104,13 +104,13 @@ trait Admin {
                 <div class="eael-container">
                     <div class="eael-main__tab mb45">
                         <ul class="ls-none tab__menu">
-                            <li class="tab__list active"><a class="tab__item" href="#general"><i class="ea-admin-icon icon-gear-alt"></i><?php echo __( 'General', 'essential-addons-for-elementor-lite' ); ?></a></li>
-                            <li class="tab__list"><a class="tab__item" href="#elements"><i class="ea-admin-icon icon-element"></i><?php echo __( 'Elements', 'essential-addons-for-elementor-lite' ); ?></a></li>
-                            <li class="tab__list"><a class="tab__item" href="#extensions"><i class="ea-admin-icon icon-extension"></i><?php echo __( 'Extensions', 'essential-addons-for-elementor-lite' ); ?></a></li>
-                            <li class="tab__list"><a class="tab__item" href="#tools"><i class="ea-admin-icon icon-tools"></i><?php echo __( 'Tools', 'essential-addons-for-elementor-lite' ); ?></a></li>
-                            <li class="tab__list"><a class="tab__item" href="#integrations"><i class="ea-admin-icon icon-plug"></i><?php echo __( 'Integrations', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                            <li class="tab__list active"><a class="tab__item" href="#general"><i class="ea-admin-icon eael-icon-gear-alt"></i><?php echo __( 'General', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                            <li class="tab__list"><a class="tab__item" href="#elements"><i class="ea-admin-icon eael-icon-element"></i><?php echo __( 'Elements', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                            <li class="tab__list"><a class="tab__item" href="#extensions"><i class="ea-admin-icon eael-icon-extension"></i><?php echo __( 'Extensions', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                            <li class="tab__list"><a class="tab__item" href="#tools"><i class="ea-admin-icon eael-icon-tools"></i><?php echo __( 'Tools', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                            <li class="tab__list"><a class="tab__item" href="#integrations"><i class="ea-admin-icon eael-icon-plug"></i><?php echo __( 'Integrations', 'essential-addons-for-elementor-lite' ); ?></a></li>
                             <?php  if ( !$this->pro_enabled ) { ?>
-                                <li class="tab__list"><a class="tab__item" href="#go-pro"><i class="ea-admin-icon icon-lock-alt"></i><?php echo __( 'Go Premium', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                                <li class="tab__list"><a class="tab__item" href="#go-pro"><i class="ea-admin-icon eael-icon-lock-alt"></i><?php echo __( 'Go Premium', 'essential-addons-for-elementor-lite' ); ?></a></li>
                              <?php } ?>
                         </ul>
                     </div>
@@ -216,12 +216,12 @@ trait Admin {
         }
 
 
-        $notice->options_args = array(
-            'notice_will_show' => [
-                // 'opt_in' => $notice->timestamp,
-                'review' => $notice->makeTime( $notice->timestamp, '7 Day' ), // after 3 days
-            ],
-        );
+	    $notice->options_args = array(
+		    'notice_will_show' => [
+			    'opt_in' => $notice->makeTime( $notice->timestamp, '3 Day' ), // after 3 days
+			    'review' => $notice->makeTime( $notice->timestamp, '7 Day' ), // after 7 days
+		    ],
+	    );
         if ( $this->pro_enabled && \version_compare( EAEL_PRO_PLUGIN_VERSION, '4.0.0', '<' ) ) {
             $notice->options_args[ 'notice_will_show' ][ 'update' ] = $notice->timestamp;
         }
@@ -467,7 +467,7 @@ trait Admin {
         <div class="wpnotice-wrapper notice  notice-info is-dismissible eael-eb-special-optin-notice">
             <div class="wpnotice-content-wrapper">
                 <div class="eael-eb-optin-logo">
-                    <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/eb.svg' ); ?>" alt="">
+                    <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/eb-new.svg' ); ?>" alt="">
                 </div>
                 <div class="eael-eb-optin">
                     <h3><?php esc_html_e( 'Using Gutenberg? Check out Essential Blocks!', 'essential-addons-for-elementor-lite' ); ?></h3>

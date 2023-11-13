@@ -45,7 +45,7 @@ class Migration
      * @since 3.0.0
      */
 	public function plugin_upgrade_hook( $upgrader_object, $options ) {
-		if ( $options['action'] === 'update' && $options['type'] === 'plugin' ) {
+		if ( isset( $options['action'], $options['type'] ) && $options['action'] === 'update' && $options['type'] === 'plugin' ) {
 			if ( ( isset( $options['plugins'] ) && in_array( EAEL_PLUGIN_BASENAME, $options['plugins'] ) ) || ( isset( $options['plugin'] ) && $options['plugin'] === EAEL_PLUGIN_BASENAME ) ) {
 				// remove old cache files
 				$this->empty_dir( EAEL_ASSET_PATH );
@@ -69,7 +69,7 @@ class Migration
 	}
 
 
-	public function reduce_options_data( ) {
+	public function reduce_options_data() {
 		$status = get_transient( 'eael_reduce_op_table_data' );
 		if ( $status ) {
 			return false;
@@ -95,5 +95,6 @@ class Migration
 		}
 
 		set_transient( 'eael_reduce_op_table_data', 1, DAY_IN_SECONDS );
+		wp_clear_scheduled_hook( 'eael_remove_unused_options_data' );
 	}
 }

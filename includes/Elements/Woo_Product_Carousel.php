@@ -73,10 +73,10 @@ class Woo_Product_Carousel extends Widget_Base {
     public function get_icon() {
         return 'eaicon-product-carousel';
     }
-    
-    public function get_categories() {
-        return ['essential-addons-elementor'];
-    }
+
+	public function get_categories() {
+		return [ 'essential-addons-elementor', 'woocommerce-elements' ];
+	}
 
 	/**
 	 * get widget keywords
@@ -315,6 +315,9 @@ class Woo_Product_Carousel extends Widget_Base {
                 'condition'   => [
                     'eael_product_carousel_excerpt' => 'yes',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         
@@ -373,20 +376,38 @@ class Woo_Product_Carousel extends Widget_Base {
             ]
         );
 
-	    $this->add_control(
-		    'eael_product_carousel_not_found_msg',
-		    [
-			    'label'     => __( 'Not Found Message', 'essential-addons-for-elementor-lite' ),
-			    'type'      => Controls_Manager::TEXT,
-			    'default'   => __( 'Products Not Found', 'essential-addons-for-elementor-lite' ),
-			    'separator' => 'before'
-		    ]
-	    );
+        $this->add_control(
+            'eael_product_button_appearance',
+            [
+                'label' => __('Button Appears', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'hover',
+                'separator' => 'before',
+                'options' => [
+                    'hover' => __('On Hover', 'essential-addons-for-elementor-lite'),
+                    'static' => __('Static', 'essential-addons-for-elementor-lite'),
+                    'hide' => __('No Buttons', 'essential-addons-for-elementor-lite'),
+                ],
+            ]
+        );
+        $this->add_control(
+            'eael_product_button_appearance_note_for_preset_4',
+            [
+                'label' => '',
+                'type' => \Elementor\Controls_Manager::RAW_HTML,
+                'raw' => esc_html__( 'Static option will not work for Preset 4.', 'essential-addons-for-elementor-lite' ),
+                'content_classes' => 'eael-warning',
+                'condition' => [
+                    'eael_dynamic_template_layout' => 'preset-4',
+                    'eael_product_button_appearance' => 'static',
+                ],
+            ]
+        );
 
 	    $this->add_control(
 		    'eael_product_carousel_quick_view',
 		    [
-			    'label'        => esc_html__( 'Show Quick view?', 'essential-addons-for-elementor-lite' ),
+			    'label'        => esc_html__( 'Show Quick View?', 'essential-addons-for-elementor-lite' ),
 			    'type'         => Controls_Manager::SWITCHER,
 			    'return_value' => 'yes',
 			    'default'      => 'yes',
@@ -396,10 +417,9 @@ class Woo_Product_Carousel extends Widget_Base {
         $this->add_control(
             'eael_product_quick_view_title_tag',
             [
-                'label' => __('Quick view Title Tag', 'essential-addons-for-elementor-lite'),
+                'label' => __('Quick View Title Tag', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'h1',
-                'separator' => 'after',
                 'options' => [
                     'h1' => __('H1', 'essential-addons-for-elementor-lite'),
                     'h2' => __('H2', 'essential-addons-for-elementor-lite'),
@@ -424,6 +444,7 @@ class Woo_Product_Carousel extends Widget_Base {
 			    'type' => Controls_Manager::SWITCHER,
 			    'return_value' => 'yes',
 			    'default' => 'no',
+                'separator' => 'before',
 		    ]
 	    );
 
@@ -435,6 +456,19 @@ class Woo_Product_Carousel extends Widget_Base {
                 'type' => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default' => 'no',
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_carousel_not_found_msg',
+            [
+                'label'     => __( 'Not Found Message', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::TEXT,
+                'default'   => __( 'Products Not Found', 'essential-addons-for-elementor-lite' ),
+                'separator' => 'before',
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -868,6 +902,9 @@ class Woo_Product_Carousel extends Widget_Base {
 			    'label'       => esc_html__( 'Sale Text', 'essential-addons-for-elementor-lite' ),
 			    'type'        => Controls_Manager::TEXT,
                 'separator' => 'before',
+                'ai' => [
+					'active' => false,
+				],
 		    ]
 	    );
 	    $this->add_control(
@@ -875,6 +912,9 @@ class Woo_Product_Carousel extends Widget_Base {
 		    [
 			    'label'       => esc_html__( 'Stock Out Text', 'essential-addons-for-elementor-lite' ),
 			    'type'        => Controls_Manager::TEXT,
+                'ai' => [
+					'active' => false,
+				],
 		    ]
 	    );
         
@@ -1042,6 +1082,10 @@ class Woo_Product_Carousel extends Widget_Base {
                     '{{WRAPPER}} .eael-product-carousel' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
                     '{{WRAPPER}} .eael-product-carousel .image-wrap img, {{WRAPPER}} .eael-product-carousel > .product-image-wrap'
                                                          => 'border-radius: {{TOP}}px {{RIGHT}}px 0 0;',
+                    '{{WRAPPER}} .eael-product-carousel.product-details-none .image-wrap img, {{WRAPPER}} .eael-product-carousel > .product-image-wrap'
+                                                         => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
+                    '{{WRAPPER}} .eael-product-carousel.product-details-none-overlay .image-wrap img, {{WRAPPER}} .eael-product-carousel > .product-image-wrap'
+                                                         => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
                 ],
             ]
         );
@@ -1138,11 +1182,23 @@ class Woo_Product_Carousel extends Widget_Base {
         $this->add_control(
             'eael_product_carousel_price_color',
             [
-                'label'     => esc_html__( 'Product Price Color', 'essential-addons-for-elementor-lite' ),
+                'label'     => esc_html__( 'Regular Price Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-product-carousel .price, {{WRAPPER}} .eael-product-carousel .eael-product-price' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-carousel .price, {{WRAPPER}} .eael-product-carousel .eael-product-price .amount' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_carousel_sale_price_color',
+            [
+                'label'     => esc_html__( 'Sale Price Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-carousel .price del, {{WRAPPER}} .eael-product-carousel .eael-product-price del .amount' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -2815,16 +2871,24 @@ class Woo_Product_Carousel extends Widget_Base {
             $this->add_render_attribute( 'container', 'class',
                 'swiper-container-wrap-dots-' . $settings[ 'dots_position' ] );
         }
+        
+        $swiper_class = $swiper_version_class = '';
+        if ( class_exists( 'Elementor\Plugin' ) ) {
+            $swiper_class           = \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_swiper_latest' ) ? 'swiper' : 'swiper-container';
+            $swiper_version_class   = 'swiper' === $swiper_class ? 'swiper-8' : 'swiper-8-lower';
+        }
 
         $this->add_render_attribute(
             'eael-woo-product-carousel-wrap',
             [
                 'class'           => [
                     'woocommerce',
-                    'swiper-container',
+                    esc_attr( $swiper_class ),
+                    esc_attr( $swiper_version_class ),
                     'eael-woo-product-carousel',
                     'swiper-container-' . esc_attr( $this->get_id() ),
                     'eael-product-appender-' . esc_attr( $this->get_id() ),
+                    $settings['eael_product_button_appearance'] ? 'eael-'.esc_attr( $settings['eael_product_button_appearance'] ).'-buttons' : ''
                 ],
                 'data-pagination' => '.swiper-pagination-' . esc_attr( $this->get_id() ),
                 'data-arrow-next' => '.swiper-button-next-' . esc_attr( $this->get_id() ),
@@ -2995,7 +3059,7 @@ class Woo_Product_Carousel extends Widget_Base {
 		}
 
 		$this->add_render_attribute('eael_gallery_pagination_wrapper', [
-			'class' => ['swiper-container eael-woo-product-carousel-gallary-pagination', $visibility]
+			'class' => ['swiper swiper-container eael-woo-product-carousel-gallary-pagination', $visibility]
 		]);
 
 		if ( $settings['direction'] == 'right' ) {
@@ -3090,7 +3154,7 @@ class Woo_Product_Carousel extends Widget_Base {
 	    ];
 
 	    if ( $order_by == '_price' || $order_by == '_sku' ) {
-		    $args[ 'orderby' ]  = 'meta_value_num';
+		    $args[ 'orderby' ]  = 'meta_value meta_value_num';
 		    $args[ 'meta_key' ] = $order_by;
 	    } else {
 		    $args[ 'orderby' ] = $order_by;

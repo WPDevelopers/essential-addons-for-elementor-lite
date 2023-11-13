@@ -79,6 +79,18 @@ trait Enqueue
 	        EAEL_PLUGIN_VERSION
         );
     }
+    
+    // frontend styles
+    public function frontend_enqueue_scripts()
+    {
+        // ea icon font
+        wp_register_style(
+            'ea-icon-frontend',
+            $this->safe_url(EAEL_PLUGIN_URL . 'assets/admin/css/eaicon.css'),
+            false,
+	        EAEL_PLUGIN_VERSION
+        );
+    }
 
     // templately promo enqueue scripts
     public function templately_promo_enqueue_scripts(){
@@ -113,9 +125,15 @@ trait Enqueue
             background-image: url({$src});
             background-repeat: no-repeat;
             background-position: center center;
-            margin-left: 5px;
             position: relative;
-            bottom: 5px;
+        }
+        
+		.elementor-add-new-section .elementor-add-templately-promo-button > i{
+            height: 12px;
+        }
+        
+        body .elementor-add-new-section .elementor-add-section-area-button {
+            margin-left: 0;
         }";
         wp_add_inline_style( 'elementor-icons', $css );
     }

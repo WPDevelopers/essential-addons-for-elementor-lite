@@ -288,6 +288,9 @@ class Betterdocs_Category_Grid extends Widget_Base
                     'condition' => [
                         'show_button' => 'true',
                     ],
+                    'ai' => [
+                        'active' => false,
+                    ],
                 ]
             );
 
@@ -875,7 +878,7 @@ class Betterdocs_Category_Grid extends Widget_Base
             $this->add_control(
                 'count_transition',
                 [
-                    'label'                 => __( 'Transition', 'essential-addons-elementor' ),
+                    'label'                 => __( 'Transition', 'essential-addons-for-elementor-lite' ),
                     'type'                  => Controls_Manager::SLIDER,
                     'default'               => [
                         'size'      => '300',
@@ -1435,7 +1438,7 @@ class Betterdocs_Category_Grid extends Widget_Base
             $this->add_control(
                 'button_transition',
                 [
-                    'label'                 => __( 'Transition', 'essential-addons-elementor' ),
+                    'label'                 => __( 'Transition', 'essential-addons-for-elementor-lite' ),
                     'type'                  => Controls_Manager::SLIDER,
                     'default'               => [
                         'size'      => '300',

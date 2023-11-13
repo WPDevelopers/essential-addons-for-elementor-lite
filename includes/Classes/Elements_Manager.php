@@ -22,6 +22,9 @@ class Elements_Manager {
 	 */
 	const JS_KEY = '_eael_custom_js';
 
+	public $css_print_method;
+	public $js_print_method;
+
 	/**
 	 * Post id
 	 * @var string
@@ -133,11 +136,10 @@ class Elements_Manager {
 			return false;
 		}
 
-		$document  = is_object( Plugin::$instance->documents ) ? Plugin::$instance->documents->get( $post_id ) : [];
-		$data      = is_object( $document ) ? $document->get_elements_data() : [];
-		$data      = $this->get_widget_list( $data );
-		$custom_js = is_object( $document ) ? $document->get_settings( 'eael_custom_js' ) : '';
-		$this->save_widgets_list( $post_id, $data, $custom_js );
+		$document = is_object( Plugin::$instance->documents ) ? Plugin::$instance->documents->get( $post_id ) : [];
+		$data     = is_object( $document ) ? $document->get_elements_data() : [];
+		$data     = $this->get_widget_list( $data );
+		$this->save_widgets_list( $post_id, $data, false );
 
 		return true;
 	}
@@ -167,6 +169,10 @@ class Elements_Manager {
 			}
 		}
 
+		if ( ! empty( $element['settings']['eael_wrapper_link_switch'] ) ) {
+			$list['wrapper-link'] = 'wrapper-link';
+		}
+
 		return $list;
 	}
 
@@ -174,7 +180,7 @@ class Elements_Manager {
 	 * replace_widget_name
 	 * Added backward compatibility
 	 */
-	public function replace_widget_name() {
+	public static function replace_widget_name() {
 		return [
 			'eicon-woocommerce'               => 'eael-product-grid',
 			'eael-countdown'                  => 'eael-count-down',
@@ -192,6 +198,7 @@ class Elements_Manager {
 			'eael-dynamic-filterable-gallery' => 'eael-dynamic-filter-gallery',
 			'eael-google-map'                 => 'eael-adv-google-map',
 			'eael-instafeed'                  => 'eael-instagram-gallery',
+			'eael-ninja'                      => 'eael-ninja-form',
 		];
 	}
 
@@ -210,9 +217,9 @@ class Elements_Manager {
 			return $post_id;
 		}
 
-		$documents = Plugin::$instance->documents->get( $post_id );
+		$documents = is_object( Plugin::$instance->documents ) ? Plugin::$instance->documents->get( $post_id ) : [];
 
-		if ( get_post_status( $post_id ) !== 'publish' || ( is_object( $documents ) && ! $documents->is_built_with_elementor() ) ) {
+		if ( ! in_array( get_post_status( $post_id ), [ 'publish', 'private' ] ) || ( is_object( $documents ) && ! $documents->is_built_with_elementor() ) ) {
 			return false;
 		}
 
@@ -220,7 +227,9 @@ class Elements_Manager {
 			return false;
 		}
 
-		update_post_meta( $post_id, '_eael_custom_js', $custom_js );
+		if ( $custom_js !== false ) {
+			update_post_meta( $post_id, '_eael_custom_js', $custom_js );
+		}
 
 		if ( md5( implode( '', (array) $list ) ) == md5( implode( '', (array) get_post_meta( $post_id, self::ELEMENT_KEY, true ) ) ) ) {
 			return false;
