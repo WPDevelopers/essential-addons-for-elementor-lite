@@ -1,7 +1,7 @@
 jQuery(window).on("elementor/frontend/init", function () {
     let FacebookFeed = function ($scope, $) {
         if (!isEditMode) {
-            let $facebook_gallery = $(".eael-facebook-feed", $scope).isotope({
+            var $facebook_gallery = $(".eael-facebook-feed", $scope).isotope({
                 itemSelector: ".eael-facebook-feed-item",
                 percentPosition: true,
                 columnWidth: ".eael-facebook-feed-item"
@@ -62,6 +62,17 @@ jQuery(window).on("elementor/frontend/init", function () {
                 }
             });
         });
+
+        var FacebookGallery = function ($src) {
+            $facebook_gallery.imagesLoaded().progress(function () {
+                $facebook_gallery.isotope("layout");
+            });
+        }
+
+        ea.hooks.addAction("ea-lightbox-triggered", "ea", FacebookGallery);
+        ea.hooks.addAction("ea-advanced-tabs-triggered", "ea", FacebookGallery);
+        ea.hooks.addAction("ea-advanced-accordion-triggered", "ea", FacebookGallery);
+        ea.hooks.addAction("ea-toogle-triggered", "ea", FacebookGallery);
     };
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-facebook-feed.default",
