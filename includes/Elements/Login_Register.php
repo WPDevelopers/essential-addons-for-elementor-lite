@@ -788,6 +788,10 @@ class Login_Register extends Widget_Base {
 				'unit' => '%',
 				'size' => 0.5,
 			],
+			'condition'       => [
+				'enable_login_register_recaptcha' => 'yes',
+				'login_register_recaptcha_version' => 'v3',
+			],
 		] );
 
 		do_action( 'eael/login-register/after-general-controls', $this );
