@@ -138,6 +138,14 @@ jQuery(window).on("elementor/frontend/init", function () {
 		try {
 			if (isStartWithHash && ($(hashURL).hasClass('eael-tab-item-trigger') || $(hashURL).hasClass('eael-accordion-header'))) {
 				$(hashURL).trigger('click');
+
+				if (typeof hashURL !== 'undefined' && hashURL) {
+					let idOffset = $(hashURL).closest('.eael-advance-tabs').data('custom-id-offset');
+					idOffset = idOffset ? parseFloat(idOffset) : 0;
+					$('html, body').animate({
+						scrollTop: $(hashURL).offset().top - idOffset,
+					}, 300);
+				}
 			}
 		} catch (err) {
 			// nothing to do
@@ -188,4 +196,18 @@ jQuery(window).on("elementor/frontend/init", function () {
 		var viewportHalf = viewportTop + $(window).height() / 2;
 		return elementBottom > viewportTop && elementTop < viewportHalf;
 	};
+
+	$(document).ready(function(){ 
+		let resetPasswordParams = new URLSearchParams(location.search);
+	
+		if ( resetPasswordParams.has('popup-selector') && ( resetPasswordParams.has('eael-lostpassword') || resetPasswordParams.has('eael-resetpassword') ) ){
+			let popupSelector = resetPasswordParams.get('popup-selector');
+			if(popupSelector.length){
+				popupSelector = popupSelector.replace(/_/g," ");
+				setTimeout(function(){
+					jQuery(popupSelector).trigger('click');
+				}, 300);
+			}
+		}
+	});
 })(jQuery);

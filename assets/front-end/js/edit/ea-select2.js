@@ -5,8 +5,17 @@
             var IDSelect2 = $(ID).select2({
                 minimumInputLength: 3,
                 ajax: {
-                    url: eael_select2_localize.ajaxurl + "?action=eael_select2_search_post&post_type=" + obj.data.source_type + '&source_name=' + obj.data.source_name,
-                    dataType: 'json'
+                    type: 'POST',
+                    url: eael_select2_localize.ajaxurl,
+                    dataType: 'json',
+                    data: function ( params ) {
+                        return {
+                            action: 'eael_select2_search_post',
+                            post_type: obj.data.source_type,
+                            source_name: obj.data.source_name,
+                            term: params.term,
+                        }
+                    },
                 },
                 initSelection: function (element, callback) {
                     if (!obj.multiple) {
@@ -28,8 +37,13 @@
                         label.after('<span class="elementor-control-spinner">&nbsp;<i class="eicon-spinner eicon-animation-spin"></i>&nbsp;</span>');
                         $.ajax({
                             method: "POST",
-                            url: eael_select2_localize.ajaxurl + "?action=eael_select2_get_title",
-                            data: {post_type: obj.data.source_type, source_name: obj.data.source_name, id: ids}
+                            url: eael_select2_localize.ajaxurl,
+                            data: {
+                                action: 'eael_select2_get_title',
+                                post_type: obj.data.source_type, 
+                                source_name: obj.data.source_name, 
+                                id: ids
+                            }
                         }).done(function (response) {
                             if (response.success && typeof response.data.results != 'undefined') {
                                 let eaelSelect2Options = '';
@@ -103,7 +117,8 @@ function ea_conditional_logic_type_title(value) {
         dynamic: eael_select2_localize.cl_dynamic,
         browser: eael_select2_localize.cl_browser,
         date_time: eael_select2_localize.cl_date_time,
-        recurring_day: eael_select2_localize.cl_recurring_day
+        recurring_day: eael_select2_localize.cl_recurring_day,
+        query_string: eael_select2_localize.cl_query_string
     };
 
     return labelValues[value] ? labelValues[value] : '';

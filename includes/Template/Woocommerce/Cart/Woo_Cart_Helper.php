@@ -37,6 +37,15 @@ trait Woo_Cart_Helper {
 	public static function woo_cart_style_one( $settings ) { ?>
         <form class="woocommerce-cart-form eael-woo-cart-form woocommerce" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
 			<?php do_action( 'woocommerce_before_cart_table' ); ?>
+			
+			<div class="eael-cart-clear-btn mt10">
+				<?php if ( ! empty( $settings['eael_woo_cart_components_cart_clear_button'] ) && $settings['eael_woo_cart_components_cart_clear_button'] === 'yes' ) {
+					$clear_text = apply_filters( 'eael_woo_cart_clear_button_text', $settings['eael_woo_cart_components_cart_clear_button_text'] );
+					echo '<a href="' . esc_url( add_query_arg( 'empty_cart', 'yes' ) ) . '" class="button" title="' . esc_attr( $clear_text ) . '">' . esc_html( $clear_text ) . '</a>';
+				}
+				?>
+            </div>
+
             <div class="eael-woo-cart-table-warp">
                 <table class="shop_table cart woocommerce-cart-form__contents eael-woo-cart-table">
                     <thead>
@@ -369,6 +378,14 @@ trait Woo_Cart_Helper {
         <form class="woocommerce-cart-form eael-woo-cart-form woocommerce" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
 			<?php do_action( 'woocommerce_before_cart_table' ); ?>
 
+			<div class="eael-cart-clear-btn mt10">
+				<?php if ( ! empty( $settings['eael_woo_cart_components_cart_clear_button'] ) && $settings['eael_woo_cart_components_cart_clear_button'] === 'yes' ) {
+					$clear_text = apply_filters( 'eael_woo_cart_clear_button_text', $settings['eael_woo_cart_components_cart_clear_button_text'] );
+					echo '<a href="' . esc_url( add_query_arg( 'empty_cart', 'yes' ) ) . '" class="button" title="' . esc_attr( $clear_text ) . '">' . esc_html( $clear_text ) . '</a>';
+				}
+				?>
+            </div>
+				
             <div class="shop_table cart woocommerce-cart-form__contents eael-woo-cart-table">
 				<?php
 				$has_table_left_components  = $settings['eael_woo_cart_table_components_thumbnail'] === 'yes' ? true : false;
@@ -623,7 +640,7 @@ trait Woo_Cart_Helper {
 			            <?php do_action( 'woocommerce_cart_coupon' ); ?>
                     </div>
 		            <?php
-	            }
+	            } 
 
 				if ( $settings['eael_woo_cart_components_continue_shopping'] === 'yes' ) {
 					$continue_shopping_text = apply_filters( 'eael_woo_cart_continue_shopping_text', $settings['eael_woo_cart_components_continue_shopping_text'] );
@@ -645,6 +662,9 @@ trait Woo_Cart_Helper {
 						?>
                         <button type="submit" class="button" name="update_cart" value="<?php echo esc_attr( $update_text ); ?>"><?php echo esc_html( $update_text ); ?></button>
 						<?php
+					}
+					else if ( ! $settings['eael_woo_cart_components_cart_update_button'] && $settings['eael_woo_cart_auto_cart_update'] === 'yes' ){
+						echo '<button type="submit" class="button" name="update_cart" style="display:none;"></button>';
 					}
 
 					do_action( 'woocommerce_cart_actions' );

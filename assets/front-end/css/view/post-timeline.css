@@ -61,7 +61,6 @@
 }
 
 .eael-timeline-post-inner {
-  background: -o-linear-gradient(45deg, #3f3f46 0%, #05abe0 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
   background: linear-gradient(45deg, #3f3f46 0%, #05abe0 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
   border: 8px solid #e5eaed;
   -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
@@ -122,7 +121,6 @@
   position: relative;
   opacity: 1;
   -webkit-transition: all 0.3s;
-  -o-transition: all 0.3s;
   transition: all 0.3s;
 }
 
@@ -152,7 +150,6 @@
   left: 0;
   right: 0;
   -webkit-transition: all 0.3s;
-  -o-transition: all 0.3s;
   transition: all 0.3s;
 }
 
@@ -186,7 +183,6 @@
   top: 50px;
   z-index: 4;
   -webkit-transition: all 0.5s;
-  -o-transition: all 0.5s;
   transition: all 0.5s;
 }
 
@@ -261,9 +257,9 @@
     margin-left: 0;
   }
   .eael-timeline-bullet,
-.eael-timeline-post:after,
-.eael-timeline-post:before,
-.eael-timeline-post-inner:after {
+  .eael-timeline-post:after,
+  .eael-timeline-post:before,
+  .eael-timeline-post-inner:after {
     display: none;
   }
   .eael-timeline-post {
@@ -298,7 +294,7 @@
     opacity: 0.3;
   }
   .eael-timeline-post time,
-.eael-timeline-post:nth-child(2n) time {
+  .eael-timeline-post:nth-child(2n) time {
     background-color: #fff;
     border-radius: 0;
     color: #444;
@@ -323,7 +319,7 @@
     width: 100% !important;
   }
   .eael-timeline-post .eael-timeline-post-inner,
-.eael-timeline-post:nth-child(2n) .eael-timeline-post-inner {
+  .eael-timeline-post:nth-child(2n) .eael-timeline-post-inner {
     display: block;
     float: none;
     margin: 0 auto;
@@ -332,13 +328,13 @@
 
 @media only screen and (max-width: 479px) {
   .eael-timeline-post .eael-timeline-post-inner,
-.eael-timeline-post:nth-child(2n) .eael-timeline-post-inner {
+  .eael-timeline-post:nth-child(2n) .eael-timeline-post-inner {
     height: 250px;
     margin: 0 auto;
     width: 95%;
   }
   .eael-timeline-post time,
-.eael-timeline-post:nth-child(2n) time {
+  .eael-timeline-post:nth-child(2n) time {
     top: 205px;
   }
 }
@@ -370,7 +366,7 @@
     margin: 0;
   }
   .eael-post-timeline.timeline-layout-card .eael-timeline-post .eael-timeline-bullet, .eael-post-timeline.timeline-layout-card .eael-timeline-post:after, .eael-post-timeline.timeline-layout-card .eael-timeline-post:before,
-.eael-post-timeline.timeline-layout-card .eael-timeline-post .eael-timeline-post-inner:after {
+  .eael-post-timeline.timeline-layout-card .eael-timeline-post .eael-timeline-post-inner:after {
     display: block;
   }
   .eael-post-timeline.timeline-layout-card .eael-timeline-post:after {

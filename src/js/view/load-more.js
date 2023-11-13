@@ -1,16 +1,18 @@
 (function ($) {
 	"use strict";
 
+	ea.getToken();
+
 	$(document).on("click", ".eael-load-more-button", function (e) {
 		e.preventDefault();
 		e.stopPropagation();
 		e.stopImmediatePropagation();
 		var $this = $(this),
-			$LoaderSpan = $("span", $this),
+			$LoaderSpan = $(".eael_load_more_text", $this),
 			$text = $LoaderSpan.html(),
 			$widget_id = $this.data("widget"),
 			$page_id = $this.data("page-id"),
-			$nonce = $this.data("nonce"),
+			$nonce = localize.nonce,
 			$scope = $(".elementor-element-" + $widget_id),
 			$class = $this.data("class"),
 			$args = $this.data("args"),
@@ -37,25 +39,26 @@
 			template_info: $template_info,
 		};
 
-		if ( $data.class == "Essential_Addons_Elementor\\Elements\\Woo_Product_Gallery" ) {
+		if ($data.class == "Essential_Addons_Elementor\\Elements\\Woo_Product_Gallery") {
 
 			const $taxonomy = {
 				taxonomy: $('.eael-cat-tab li a.active', $scope).data('taxonomy'),
 				field: 'term_id',
 				terms: $('.eael-cat-tab li a.active', $scope).data('id'),
+				terms_tag: $('.eael-cat-tab li a.active', $scope).data('tagid'),
 			};
 			const eael_cat_tab = localStorage.getItem('eael-cat-tab');
 
-			if( eael_cat_tab == 'true') {
+			if (eael_cat_tab == 'true') {
 				localStorage.removeItem('eael-cat-tab');
-				 var $gallery_page = 1 + 1;
+				var $gallery_page = 1 + 1;
 
 			} else {
-				 var $gallery_page = parseInt($('.eael-cat-tab li a.active', $scope).data("page")) + 1;
+				var $gallery_page = parseInt($('.eael-cat-tab li a.active', $scope).data("page")) + 1;
 			}
 
 			$data.taxonomy = $taxonomy;
-			$data.page = $gallery_page;
+			$data.page = isNaN($gallery_page) ? $page : $gallery_page;
 		}
 
 		if ( $data.class === "Essential_Addons_Elementor\\Pro\\Elements\\Dynamic_Filterable_Gallery" ) {
@@ -199,7 +202,7 @@
 					$this.removeClass("button--loading");
 					$LoaderSpan.html($text);
 
-					if ( $data.class == "Essential_Addons_Elementor\\Elements\\Woo_Product_Gallery" ) {
+					if ($data.class == "Essential_Addons_Elementor\\Elements\\Woo_Product_Gallery" && $('.eael-cat-tab li a.active', $scope).length) {
 						$('.eael-cat-tab li a.active', $scope).data("page", $gallery_page);
 					} else {
 						$this.data("page", $page);

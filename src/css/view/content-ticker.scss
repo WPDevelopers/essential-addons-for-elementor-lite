@@ -55,16 +55,21 @@
 }
 
 .eael-ticker-wrap {
-	.swiper-button-next, .swiper-button-prev {
-		background-image: none;
-		outline: none;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		-webkit-transition: all .3s ease;
-		-moz-transition: all .3s ease;
-		transition: all .3s ease;
-	}
+    .swiper-button-next, .swiper-button-prev {
+        background-image: none;
+        outline: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-transition: all .3s ease;
+        -moz-transition: all .3s ease;
+        transition: all .3s ease;
+
+        &:before,
+        &:after {
+            display: none;
+        }
+    }
 }
 
 .rtl {

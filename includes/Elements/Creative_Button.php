@@ -14,7 +14,7 @@ use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use Elementor\Icons_Manager;
 use Elementor\Modules\DynamicTags\Module as TagsModule;
-use \Elementor\Core\Schemes\Typography;
+use \Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use \Elementor\Widget_Base;
 use Essential_Addons_Elementor\Classes\Helper;
 
@@ -86,6 +86,9 @@ class Creative_Button extends Widget_Base
                     'default'     => 'Click Me!',
                     'placeholder' => __('Enter button text', 'essential-addons-for-elementor-lite'),
                     'title'       => __('Enter button text here', 'essential-addons-for-elementor-lite'),
+                    'ai' => [
+                        'active' => false,
+                    ],
                 ]
             );
 
@@ -101,6 +104,9 @@ class Creative_Button extends Widget_Base
                     'default'     => 'Go!',
                     'placeholder' => __('Enter button secondary text', 'essential-addons-for-elementor-lite'),
                     'title'       => __('Enter button secondary text here', 'essential-addons-for-elementor-lite'),
+                    'ai' => [
+                        'active' => false,
+                    ],
                 ]
             );
 
@@ -261,7 +267,7 @@ class Creative_Button extends Widget_Base
 
 	        $this->add_control('eael_creative_button_icon_color',
                 [
-                    'label' => esc_html__('Icon Color', 'essential-addons-elementor'),
+                    'label' => esc_html__('Icon Color', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::COLOR,
                     'default' => '#ffffff',
                     'selectors' => [
@@ -271,20 +277,19 @@ class Creative_Button extends Widget_Base
                 ]
             );
 
-            $this->add_control(
-                'eael_creative_button_text_color',
-                [
-                    'label'     => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
-                    'type'      => Controls_Manager::COLOR,
-                    'default'   => '#ffffff',
-                    'selectors' => [
-                        '{{WRAPPER}} .eael-creative-button'                                      => 'color: {{VALUE}};',
-                        '{{WRAPPER}} .eael-creative-button svg'                             => 'fill: {{VALUE}};',
-                        '{{WRAPPER}} .eael-creative-button.eael-creative-button--tamaya::before' => 'color: {{VALUE}};',
-                        '{{WRAPPER}} .eael-creative-button.eael-creative-button--tamaya::after'  => 'color: {{VALUE}};',
-                    ],
-                ]
-            );
+	        $this->add_control(
+		        'eael_creative_button_text_color',
+		        [
+			        'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+			        'type'      => Controls_Manager::COLOR,
+			        'default'   => '#ffffff',
+			        'selectors' => [
+				        '{{WRAPPER}} .eael-creative-button'                                         => 'color: {{VALUE}};',
+				        '{{WRAPPER}} .eael-creative-button svg'                                     => 'fill: {{VALUE}};',
+				        '{{WRAPPER}} .eael-creative-button .eael-creative-button--tamaya-secondary' => 'color: {{VALUE}};',
+			        ],
+		        ]
+	        );
             $this->add_control(
                 'eael_creative_button_background_color',
                 [
@@ -354,7 +359,7 @@ class Creative_Button extends Widget_Base
 
 	        $this->add_control('eael_creative_button_hover_icon_color',
                 [
-                    'label' => esc_html__('Icon Color', 'essential-addons-elementor'),
+                    'label' => esc_html__('Icon Color', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::COLOR,
                     'default' => '#ffffff',
                     'selectors' => [
@@ -408,7 +413,7 @@ class Creative_Button extends Widget_Base
 						{{WRAPPER}} .eael-creative-button.eael-creative-button--ujarak::before,
 						{{WRAPPER}} .eael-creative-button.eael-creative-button--wayra:hover::before,
 						{{WRAPPER}} .eael-creative-button.eael-creative-button--tamaya:hover,
-						{{WRAPPER}} .eael-creative-button.eael-creative-button--rayen::before
+						{{WRAPPER}} .eael-creative-button.eael-creative-button--rayen::before,
                         {{WRAPPER}} .eael-creative-button.eael-creative-button--rayen:hover::before
 					',
                     'condition' => [
@@ -491,7 +496,9 @@ class Creative_Button extends Widget_Base
                 Group_Control_Typography::get_type(),
                 [
                     'name'     => 'eael_creative_button_typography',
-                    'scheme'   => Typography::TYPOGRAPHY_1,
+                    'global' => [
+	                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                    ],
                     'selector' => '{{WRAPPER}} .eael-creative-button .cretive-button-text, {{WRAPPER}} .eael-creative-button--winona::after, {{WRAPPER}} .eael-creative-button--rayen::before, {{WRAPPER}} .eael-creative-button--tamaya::after, {{WRAPPER}} .eael-creative-button--tamaya::before',
                 ]
             );

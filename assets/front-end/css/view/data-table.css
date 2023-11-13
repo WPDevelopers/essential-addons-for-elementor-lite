@@ -102,7 +102,6 @@ table.eael-data-table thead .sorting:after {
   margin-right: 2px;
   cursor: pointer;
   -webkit-transition: all 0.3s;
-  -o-transition: all 0.3s;
   transition: all 0.3s;
 }
 
@@ -165,7 +164,6 @@ table.eael-data-table thead .sorting:after {
 
 .eael-data-table tbody tr.even {
   -webkit-transition: background 0.4s ease-in-out;
-  -o-transition: background 0.4s ease-in-out;
   transition: background 0.4s ease-in-out;
 }
 
@@ -180,7 +178,6 @@ table.eael-data-table thead .sorting:after {
 .eael-data-table tbody tr.odd {
   background: rgba(242, 242, 242, 0.5);
   -webkit-transition: background 0.2s ease-in-out;
-  -o-transition: background 0.2s ease-in-out;
   transition: background 0.2s ease-in-out;
 }
 
@@ -255,21 +252,6 @@ table.eael-data-table thead .sorting:after {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
-  }
-  .custom-responsive-option-enable .eael-data-table thead {
-    display: none;
-  }
-  .custom-responsive-option-enable .eael-data-table tbody tr td {
-    float: none;
-    clear: left;
-    width: 100%;
-    text-align: left;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
   }
   .eael-data-table .td-content {
     -webkit-box-align: center;

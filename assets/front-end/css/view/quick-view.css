@@ -55,13 +55,11 @@
 .eael-product-popup.eael-product-zoom-in {
   opacity: 0;
   -webkit-transition: all 0.3s ease-out;
-  -o-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
 }
 .eael-product-popup.eael-product-zoom-in .eael-product-popup-details {
   opacity: 0;
   -webkit-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
   -webkit-transform: scale(0.5);
       -ms-transform: scale(0.5);
@@ -94,7 +92,6 @@
   background: #000000;
   opacity: 0;
   -webkit-transition: all 0.3s ease-out;
-  -o-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
 }
 .eael-product-popup .eael-product-popup-details {
@@ -529,7 +526,7 @@
     width: 50%;
   }
   .theme-oceanwp .eael-product-popup.woocommerce div.product form.cart div.quantity .minus,
-.theme-oceanwp .eael-product-popup.woocommerce div.product form.cart div.quantity .plus {
+  .theme-oceanwp .eael-product-popup.woocommerce div.product form.cart div.quantity .plus {
     width: 20%;
   }
   .theme-oceanwp .eael-product-popup.woocommerce div.product form.cart div.quantity .qty {

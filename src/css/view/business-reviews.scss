@@ -58,7 +58,8 @@
         }
     }
 
-    .eael-google-reviews-slider-header {
+    .eael-google-reviews-slider-header,
+    .eael-google-reviews-grid-header {
         text-align: center;
         margin-bottom: 40px;
         cursor: pointer;
@@ -146,6 +147,11 @@
         align-items: center;
     }
 
+    .swiper-button-next:after, .swiper-rtl .swiper-button-prev:after,
+    .swiper-button-prev:after, .swiper-rtl .swiper-button-next:after {
+        content: '';
+    }
+
     .swiper-button-prev {
         left: -40px;
         right: auto;
@@ -163,5 +169,71 @@
 
     .swiper-pagination {
         cursor: pointer;
+    }
+
+    .eael-google-reviews-grid-body {
+        display: grid;
+
+        &.eael-column {
+            &-1 {
+                grid-template-columns: auto;
+            }
+    
+            &-2 {
+                grid-template-columns: auto auto;
+            }
+    
+            &-3 {
+                grid-template-columns: auto auto auto;
+            }
+    
+            &-4 {
+                grid-template-columns: auto auto auto auto;
+            }
+        }
+    }
+
+    @media only screen and (min-width: 768px) and (max-width: 1023px) {
+        .eael-google-reviews-grid-body {
+            &.eael-column-tablet {
+                &-1 {
+                    grid-template-columns: auto;
+                }
+        
+                &-2 {
+                    grid-template-columns: auto auto;
+                }
+        
+                &-3 {
+                    grid-template-columns: auto auto auto;
+                }
+        
+                &-4 {
+                    grid-template-columns: auto auto auto auto;
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 767px) {
+        .eael-google-reviews-grid-body {
+            &.eael-column-mobile {
+                &-1 {
+                    grid-template-columns: auto;
+                }
+        
+                &-2 {
+                    grid-template-columns: auto auto;
+                }
+        
+                &-3 {
+                    grid-template-columns: auto auto auto;
+                }
+        
+                &-4 {
+                    grid-template-columns: auto auto auto auto;
+                }
+            }
+        }
     }
 }

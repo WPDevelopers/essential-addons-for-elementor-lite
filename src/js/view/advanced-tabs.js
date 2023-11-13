@@ -68,8 +68,8 @@ ea.hooks.addAction("init", "ea", () => {
 					}
 				}
 			});
-			
-			$($currentTabId + ' .eael-tabs-nav ul li', $scope).on("click", function (e) {
+
+			$($currentTabId + ' > .eael-tabs-nav ul li', $scope).on("click", function (e) {
 				e.preventDefault();
 				
 				var currentTabIndex = $(this).index();
@@ -81,20 +81,24 @@ ea.hooks.addAction("init", "ea", () => {
 				var tabsContent = $(tabsContainer)
 				.children(".eael-tabs-content")
 				.children("div");
-				
-				$(this).parent("li").addClass("active");
-				
-				$(tabsNav).removeClass("active active-default").addClass("inactive").attr('aria-selected', 'false').attr('aria-expanded', 'false');
-				$(this).addClass("active").removeClass("inactive");
-				$(this).attr("aria-selected", 'true').attr("aria-expanded", 'true');
-				
-				$(tabsContent).removeClass("active").addClass("inactive");
-				$(tabsContent)
-				.eq(currentTabIndex)
-				.addClass("active")
-				.removeClass("inactive");
 
-                ea.hooks.doAction("ea-advanced-tabs-triggered", $(tabsContent).eq(currentTabIndex));
+				if ($($currentTabId).hasClass('eael-tab-toggle')) {
+					$(this).toggleClass('active inactive');
+					$(tabsNav).not(this).removeClass("active active-default").addClass("inactive").attr('aria-selected', 'false').attr('aria-expanded', 'false');
+					$(this).attr("aria-selected", 'true').attr("aria-expanded", 'true');
+
+					$(tabsContent).not(':eq(' + currentTabIndex + ')').removeClass("active").addClass("inactive");
+					$(tabsContent).eq(currentTabIndex).toggleClass('active inactive');
+				} else {
+					$(this).parent("li").addClass("active");
+					$(tabsNav).removeClass("active active-default").addClass("inactive").attr('aria-selected', 'false').attr('aria-expanded', 'false');
+					$(this).addClass("active").removeClass("inactive");
+					$(this).attr("aria-selected", 'true').attr("aria-expanded", 'true');
+
+					$(tabsContent).removeClass("active").addClass("inactive");
+					$(tabsContent).eq(currentTabIndex).addClass("active").removeClass("inactive");
+				}
+				ea.hooks.doAction("ea-advanced-tabs-triggered", $(tabsContent).eq(currentTabIndex));
 				
 				$(tabsContent).each(function (index) {
 					$(this).removeClass("active-default");
@@ -142,6 +146,10 @@ ea.hooks.addAction("init", "ea", () => {
 				if ($evCalendar.length) {
 					ea.hooks.doAction("eventCalendar.reinit");
 				}
+
+				setTimeout(function () {
+					window.dispatchEvent(new Event('resize'));
+				}, 100);
 			});
 
 			// If hashTag is not null then scroll to that hashTag smoothly

@@ -159,6 +159,9 @@ class Cta_Box extends Widget_Base
                 'condition' => [
                     'eael_cta_color_type' => ['cta-bg-img', 'cta-bg-img-fixed'],
                 ],
+                'ai' => [
+                    'active' => false,
+                ],
             ]
         );
 
@@ -211,6 +214,9 @@ class Cta_Box extends Widget_Base
                         TagsModule::TEXT_CATEGORY,
                     ],
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
         $this->add_control(
@@ -221,6 +227,9 @@ class Cta_Box extends Widget_Base
                 'label_block' => true,
                 'default' => esc_html__('Sample Call to Action Heading', 'essential-addons-for-elementor-lite'),
                 'dynamic' => ['active' => true],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -274,7 +283,7 @@ class Cta_Box extends Widget_Base
                 'label' => esc_html__('Content', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::WYSIWYG,
                 'label_block' => true,
-                'default' => esc_html__('Add a strong one liner supporting the heading above and giving users a reason to click on the button below.', 'essential-addons-for-elementor-lite'),
+                'default' => __('<p>Add a strong one liner supporting the heading above and giving users a reason to click on the button below.</p>', 'essential-addons-for-elementor-lite'),
                 'separator' => 'after',
                 'condition' => [
                     'eael_cta_title_content_type' => 'content',
@@ -325,6 +334,9 @@ class Cta_Box extends Widget_Base
                 'dynamic' => ['active' => true],
                 'label_block' => true,
                 'default' => esc_html__('Click Here', 'essential-addons-for-elementor-lite'),
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -336,7 +348,7 @@ class Cta_Box extends Widget_Base
                 'dynamic' => ['active' => true],
                 'label_block' => true,
                 'default' => [
-                    'url' => 'http://',
+                    'url' => '#',
                     'is_external' => '',
                 ],
                 'show_external' => true,
@@ -365,7 +377,10 @@ class Cta_Box extends Widget_Base
                 'default' => esc_html__('Click Now', 'essential-addons-for-elementor-lite'),
                 'condition' => array(
                     'eael_cta_secondary_btn_is_show' => 'yes'
-                )
+                ),
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -1029,6 +1044,8 @@ class Cta_Box extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-call-to-action.cta-preset-1:not(.cta-preset-2) .cta-button:after:not(.cta-secondary-button)' => 'background: {{VALUE}};',
                     '{{WRAPPER}} .eael-call-to-action.cta-preset-1:not(.cta-preset-2) .cta-button:hover:not(.cta-secondary-button)' => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .eael-call-to-action .cta-button.effect-1:after' => 'background: {{VALUE}};',
+                    '{{WRAPPER}} .eael-call-to-action .cta-button.effect-2:after' => 'background: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_cta_btn_is_used_gradient_bg' => '',
@@ -1451,7 +1468,7 @@ class Cta_Box extends Widget_Base
         // content markup
         $contentMarkup = '';
         if ('content' == $settings['eael_cta_title_content_type']) {
-            $contentMarkup .='<p>'.$settings['eael_cta_content'].'</p>';
+            $contentMarkup .= $settings['eael_cta_content'];
         }else if ('template' == $settings['eael_cta_title_content_type']){
             if (!empty($settings['eael_primary_templates'])) {
                 $eael_template_id = $settings['eael_primary_templates'];

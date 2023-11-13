@@ -47,6 +47,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 		 * @var Plugin_Usage_Tracker
 		 */
 		private static $_instance = null;
+
+		private $disabled_wp_cron;
+		private $enable_self_cron;
+		private $require_optin;
+		private $include_goodbye_form;
+		private $marketing;
+		private $options;
+		private $item_id;
+		private $notice_options;
+
 		/**
 		 * Get Instance of Plugin_Usage_Tracker
 		 * @return Plugin_Usage_Tracker
@@ -404,6 +414,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 			if( $theme->Version ) {
 				$body['theme_version'] = sanitize_text_field( $theme->Version );
 			}
+
+			if ( ! empty( $this->get_used_elements_count() ) ) {
+				$body['optional_data'] = $this->get_used_elements_count();
+			}
+
 			return $body;
 		}
 
@@ -602,6 +617,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 				'plugin_action'	=> 'no'
 			) );
 
+			$url_yes = wp_nonce_url( $url_yes, '_wpnonce_optin_' . $this->plugin_name );
+			$url_no  = wp_nonce_url( $url_no, '_wpnonce_optin_' . $this->plugin_name );
+
 			// Decide on notice text
 			$notice_text = $this->notice_options['notice'] . ' <a href="#" class="wpinsights-'. esc_attr( $this->plugin_name ) .'-collect">'. $this->notice_options['consent_button_text'] .'</a>';
 			$extra_notice_text = $this->notice_options['extra_notice'];
@@ -642,7 +660,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 		 * @return void
 		 */
 		public function clicked(){
-			if( isset( $_GET['plugin'] ) && trim($_GET['plugin']) === $this->plugin_name && isset( $_GET['plugin_action'] ) ) {
+			if ( isset( $_GET['_wpnonce'] ) && isset( $_GET['plugin'] ) && trim( $_GET['plugin'] ) === $this->plugin_name && isset( $_GET['plugin_action'] ) ) {
+				if ( ! wp_verify_nonce( $_GET['_wpnonce'], '_wpnonce_optin_' . $this->plugin_name ) ) {
+					return;
+				}
+
 				if( isset( $_GET['tab'] ) && $_GET['tab'] === 'plugin-information' ) {
                     return;
                 }
@@ -819,7 +841,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-footer { padding: 8px 18px; margin-bottom: 15px; }';
 				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-footer > .wpinsights-goodbye-form-buttons { display: flex; align-items: center; justify-content: space-between; }';
 				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-footer .wpinsights-submit-btn {';
-					$styles .= 'background-color: #d30c5c; -webkit-border-radius: 3px; border-radius: 3px; color: #fff; line-height: 1; padding: 15px 20px; font-size: 13px;';
+					$styles .= 'background-color: #f3bafd; -webkit-border-radius: 3px; border-radius: 3px; color: #0c0d0e; line-height: 1; padding: 10px 20px; font-size: 13px; font-weight: 500; text-transform: uppercase; transition: .3s;';
+				$styles .= '}';
+                $styles .= $wrapper_class . ' .wpinsights-goodbye-form-footer .wpinsights-submit-btn:hover {';
+					$styles .= 'background-color: #f5d0fe;';
 				$styles .= '}';
 				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-footer .wpinsights-deactivate-btn {';
 					$styles .= 'font-size: 13px; color: #a4afb7; background: none; float: right; padding-right: 10px; width: auto; text-decoration: underline;';
@@ -891,4 +916,67 @@ if ( ! defined( 'ABSPATH' ) ) {
 				});
 			</script>
 		<?php }
+
+		/**
+         * Get Used Elements Count
+         * Get eael all used elements from all pages
+		 * @return array
+         *
+         * @since 3.7.0
+		 */
+		public static function get_used_elements_count() {
+			global $wpdb;
+
+			$sql           = "SELECT `post_id`
+            FROM  $wpdb->postmeta
+            WHERE `meta_key` = '_eael_widget_elements'";
+			$post_ids      = $wpdb->get_col( $sql );
+			$used_elements = [];
+
+			foreach ( $post_ids as $post_id ) {
+				$ea_elements = get_post_meta( (int) $post_id, '_eael_widget_elements', true );
+				$el_controls = get_post_meta( (int) $post_id, '_elementor_controls_usage', true );
+				if ( empty( $ea_elements ) || empty( $el_controls ) || ! is_array( $ea_elements ) || ! is_array( $el_controls ) ) {
+					continue;
+				}
+
+				foreach ( $ea_elements as $element ) {
+					$element_name        = "eael-{$element}";
+					$replace_widget_name = array_flip( Elements_Manager::replace_widget_name() );
+					$count               = 0;
+
+					if ( isset( $replace_widget_name[ $element_name ] ) ) {
+						$element_name = $replace_widget_name[ $element_name ];
+					}
+
+					if ( ! empty( $el_controls[ $element_name ] ) && is_array( $el_controls[ $element_name ] ) ) {
+						$count = $el_controls[ $element_name ]['count'];
+					}
+
+					$used_elements[ $element_name ] = isset( $used_elements[ $element_name ] ) ? $used_elements[ $element_name ] + $count : $count;
+				}
+
+				array_walk_recursive( $el_controls, function ( $value, $key ) use ( &$used_elements ) {
+					$element_name = '';
+
+					if ( $key === 'eael_particle_switch' ) {
+						$element_name = 'eael-section-particles';
+					} elseif ( $key === 'eael_parallax_switcher' ) {
+						$element_name = 'eael-section-parallax';
+					} elseif ( $key === 'eael_tooltip_section_enable' ) {
+						$element_name = 'eael-tooltip-section';
+					} elseif ( $key === 'eael_ext_content_protection' ) {
+						$element_name = 'eael-content-protection';
+					} elseif ( $key === 'eael_cl_enable' ) {
+						$element_name = 'eael-conditional-display';
+					}
+
+					if ( ! empty( $element_name ) ) {
+						$used_elements[ $element_name ] = isset( $used_elements[ $element_name ] ) ? $used_elements[ $element_name ] + $value : $value;
+					}
+				} );
+			}
+
+			return $used_elements;
+		}
 	}

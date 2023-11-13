@@ -171,6 +171,9 @@ class Advanced_Data_Table extends Widget_Base
                 'condition' => [
                     'ea_adv_data_table_search' => 'yes',
                 ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
@@ -793,6 +796,7 @@ class Advanced_Data_Table extends Widget_Base
                 'default' => '#444444',
                 'selectors' => [
                     '{{WRAPPER}} tbody tr:nth-child(even)' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} tbody tr:nth-child(even) td' => 'color: {{VALUE}}',
                 ],
                 'condition' => [
                     'ea_adv_data_table_body_highlight' => 'e-row',
@@ -824,6 +828,7 @@ class Advanced_Data_Table extends Widget_Base
                 'default' => '#444444',
                 'selectors' => [
                     '{{WRAPPER}} tbody tr:nth-child(odd)' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} tbody tr:nth-child(odd) td' => 'color: {{VALUE}}',
                 ],
                 'condition' => [
                     'ea_adv_data_table_body_highlight' => 'o-row',
@@ -1272,7 +1277,7 @@ class Advanced_Data_Table extends Widget_Base
                 'default' => '#666666',
                 'selectors' => [
                     '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .ea-advanced-data-table-pagination a.ea-advanced-data-table-pagination-current' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination a.ea-adtp-current' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .ea-advanced-data-table-pagination select:hover' => 'color: {{VALUE}};',
                 ],
             ]
@@ -1286,7 +1291,7 @@ class Advanced_Data_Table extends Widget_Base
                 'default' => '#fafafa',
                 'selectors' => [
                     '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover' => 'background-color: {{VALUE}};',
-                    '{{WRAPPER}} .ea-advanced-data-table-pagination a.ea-advanced-data-table-pagination-current' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination a.ea-adtp-current' => 'background-color: {{VALUE}};',
                     '{{WRAPPER}} .ea-advanced-data-table-pagination select:hover' => 'background-color: {{VALUE}};',
                 ],
             ]
@@ -1315,7 +1320,7 @@ class Advanced_Data_Table extends Widget_Base
                         'default' => '#eeeeee',
                     ],
                 ],
-                'selector' => '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover, {{WRAPPER}} .ea-advanced-data-table-pagination a.ea-advanced-data-table-pagination-current, {{WRAPPER}} .ea-advanced-data-table-pagination select:hover',
+                'selector' => '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover, {{WRAPPER}} .ea-advanced-data-table-pagination a.ea-adtp-current, {{WRAPPER}} .ea-advanced-data-table-pagination select:hover',
             ]
         );
 
@@ -1327,7 +1332,7 @@ class Advanced_Data_Table extends Widget_Base
                 'size_units' => ['px'],
                 'selectors' => [
                     '{{WRAPPER}} .ea-advanced-data-table-pagination a:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    '{{WRAPPER}} .ea-advanced-data-table-pagination a.ea-advanced-data-table-pagination-current' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-pagination a.ea-adtp-current' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     '{{WRAPPER}} .ea-advanced-data-table-pagination select' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
@@ -1344,6 +1349,9 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'label' => __('Button', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'ea_adv_data_table_source' => 'ninja'
+                ]
             ]
         );
 
@@ -1550,7 +1558,7 @@ class Advanced_Data_Table extends Widget_Base
             }
 
             echo '<div class="ea-advanced-data-table-wrap-inner">
-                <table ' . $this->get_render_attribute_string('ea-adv-data-table') . '>' . $content . '</table>
+                <table ' . $this->get_render_attribute_string('ea-adv-data-table') . '>' . Helper::eael_wp_kses( $content ) . '</table>
             </div>';
 
             if ($settings['ea_adv_data_table_pagination'] == 'yes') {
@@ -1575,7 +1583,8 @@ class Advanced_Data_Table extends Widget_Base
                 }
             }
         } else {
-            _e('No content found', 'essential-addons-for-elementor-lite');
+	        $no_content = apply_filters( 'eael/advanced-data-table/no-content-found-text', __( 'No content found', 'essential-addons-for-elementor-lite' ) );
+	        echo esc_html( $no_content );
         }
 
         echo '</div>';
@@ -1646,7 +1655,7 @@ class Advanced_Data_Table extends Widget_Base
                     } elseif ($th['data_type'] == 'button') {
                         $html .= '<td>' . (!empty($tr[$th['key']]) ? '<a href="' . $tr[$th['key']] . '" class="button" target="' . $th['link_target'] . '">' . $th['button_text'] . '</a>' : '') . '</td>';
                     } else {
-                        $html .= '<td>' . (!empty($tr[$th['key']]) ? $tr[$th['key']] : '') . '</td>';
+	                    $html .= '<td>' . ( isset( $tr[ $th['key'] ] ) ? $tr[ $th['key'] ] : '' ) . '</td>';
                     }
                 }
                 $html .= '</tr>';

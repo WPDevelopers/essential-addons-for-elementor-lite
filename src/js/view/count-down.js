@@ -69,7 +69,7 @@ var CountDown = function ($scope, $) {
 			eael_countdown_options.date = new Date(parseInt($date));
 		}
 
-		countDown.countdown(eael_countdown_options);
+		countDown.eacountdown(eael_countdown_options);
 	});
 };
 jQuery(window).on("elementor/frontend/init", function () {

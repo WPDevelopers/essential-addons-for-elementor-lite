@@ -7,6 +7,7 @@
 
 namespace Essential_Addons_Elementor\Traits;
 
+use Automattic\WooCommerce\Utilities\OrderUtil;
 use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 use Essential_Addons_Elementor\Template\Woocommerce\Checkout\Woo_Checkout_Helper;
 use Essential_Addons_Elementor\Traits\Template_Query;
@@ -35,10 +36,7 @@ trait Ajax_Handler {
 		add_action( 'wp_ajax_nopriv_load_more', array( $this, 'ajax_load_more' ) );
 
 		add_action( 'wp_ajax_woo_product_pagination_product', array( $this, 'eael_woo_pagination_product_ajax' ) );
-		add_action( 'wp_ajax_nopriv_woo_product_pagination_product', array(
-			$this,
-			'eael_woo_pagination_product_ajax'
-		) );
+		add_action( 'wp_ajax_nopriv_woo_product_pagination_product', array( $this, 'eael_woo_pagination_product_ajax' ) );
 
 		add_action( 'wp_ajax_woo_product_pagination', array( $this, 'eael_woo_pagination_ajax' ) );
 		add_action( 'wp_ajax_nopriv_woo_product_pagination', array( $this, 'eael_woo_pagination_ajax' ) );
@@ -56,10 +54,7 @@ trait Ajax_Handler {
 		add_action( 'wp_ajax_eael_product_gallery', [ $this, 'ajax_eael_product_gallery' ] );
 
 		add_action( 'wp_ajax_eael_select2_search_post', [ $this, 'select2_ajax_posts_filter_autocomplete' ] );
-		add_action( 'wp_ajax_nopriv_eael_select2_search_post', [ $this, 'select2_ajax_posts_filter_autocomplete' ] );
-
 		add_action( 'wp_ajax_eael_select2_get_title', [ $this, 'select2_ajax_get_posts_value_titles' ] );
-		add_action( 'wp_ajax_nopriv_eael_select2_get_title', [ $this, 'select2_ajax_get_posts_value_titles' ] );
 
 		if ( is_admin() ) {
 			add_action( 'wp_ajax_save_settings_with_ajax', array( $this, 'save_settings' ) );
@@ -69,6 +64,9 @@ trait Ajax_Handler {
 
 		add_action( 'wp_ajax_eael_get_token', [ $this, 'eael_get_token' ] );
 		add_action( 'wp_ajax_nopriv_eael_get_token', [ $this, 'eael_get_token' ] );
+
+		add_action( 'eael_before_woo_pagination_product_ajax_start', [ $this, 'eael_yith_wcwl_ajax_disable' ] );
+		add_action( 'eael_before_ajax_load_more', [ $this, 'eael_yith_wcwl_ajax_disable' ] );
 	}
 
 	/**
@@ -83,6 +81,8 @@ trait Ajax_Handler {
 	 */
 	public function ajax_load_more() {
 		$ajax = wp_doing_ajax();
+
+		do_action( 'eael_before_ajax_load_more', $_REQUEST );
 
 		wp_parse_str( $_POST['args'], $args );
 
@@ -146,6 +146,8 @@ trait Ajax_Handler {
 			$args['tax_query'] = [
 				$this->sanitize_taxonomy_data( $_REQUEST['taxonomy'] ),
 			];
+
+			$args['tax_query'] = $this->eael_terms_query_multiple( $args['tax_query'] );
 		}
 
 		if ( $class == '\Essential_Addons_Elementor\Elements\Post_Grid' ) {
@@ -157,7 +159,9 @@ trait Ajax_Handler {
 				unset( $args['offset'] );
 			}
 		}
-
+		if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' ) {
+			do_action( 'eael_woo_before_product_loop', $settings['eael_product_grid_style_preset'] );
+		}
 		// ensure control name compatibility to old code if it is post block
 		if ( $class === '\Essential_Addons_Elementor\Pro\Elements\Post_Block' ) {
 			$settings ['post_block_hover_animation']    = $settings['eael_post_block_hover_animation'];
@@ -290,6 +294,8 @@ trait Ajax_Handler {
 	public function eael_woo_pagination_product_ajax() {
 
 		check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+		do_action( 'eael_before_woo_pagination_product_ajax_start', $_REQUEST );
 
 		if ( ! empty( $_POST['page_id'] ) ) {
 			$page_id = intval( $_POST['page_id'], 10 );
@@ -641,8 +647,29 @@ trait Ajax_Handler {
 			$args['tax_query'] = [
 				$this->sanitize_taxonomy_data( $_REQUEST['taxonomy'] ),
 			];
-		}
 
+			$args['tax_query'] = $this->eael_terms_query_multiple( $args['tax_query'] );
+
+			if ( $settings[ 'eael_product_gallery_product_filter' ] == 'featured-products' ) {
+				$args[ 'tax_query' ][] = [
+					'relation' => 'AND',
+					[
+						'taxonomy' => 'product_visibility',
+						'field'    => 'name',
+						'terms'    => 'featured',
+					],
+					[
+						'taxonomy' => 'product_visibility',
+						'field'    => 'name',
+						'terms'    => [ 'exclude-from-search', 'exclude-from-catalog' ],
+						'operator' => 'NOT IN',
+					],
+				];
+			}
+
+
+		}
+		
 		$template_info = $this->eael_sanitize_template_param( $_REQUEST['template_info'] );
 
 		if ( $template_info ) {
@@ -685,6 +712,47 @@ trait Ajax_Handler {
 		wp_die();
 	}
 
+	public function eael_terms_query_multiple( $args_tax_query = [] ){
+		if ( strpos($args_tax_query[0]['taxonomy'], '|') !== false ) {
+			$args_tax_query_item = $args_tax_query[0];
+			
+			//Query for category and tag
+			$args_multiple['tax_query'] = [];
+
+			if( isset( $args_tax_query_item['terms'] ) ){
+				$args_multiple['tax_query'][] = [
+					'taxonomy' => 'product_cat',
+					'field' => 'term_id',
+					'terms' => $args_tax_query_item['terms'],
+				];
+			}
+			
+			if( isset( $args_tax_query_item['terms_tag'] ) ){
+				$args_multiple['tax_query'][] = [
+					'taxonomy' => 'product_tag',
+					'field' => 'term_id',
+					'terms' => $args_tax_query_item['terms_tag'],
+				];
+			}
+			
+
+			if ( count( $args_multiple['tax_query'] ) ) {
+				$args_multiple['tax_query']['relation'] = 'OR';
+			}
+
+			$args_tax_query = $args_multiple['tax_query'];
+		}
+		
+		if( isset( $args_tax_query[0]['terms_tag'] ) ){
+			if( 'product_tag' === $args_tax_query[0]['taxonomy'] ){
+				$args_tax_query[0]['terms'] = $args_tax_query[0]['terms_tag'];
+			}
+			unset($args_tax_query[0]['terms_tag']);
+		}
+
+		return $args_tax_query;
+	}
+
 	/**
 	 * Select2 Ajax Posts Filter Autocomplete
 	 * Fetch post/taxonomy data and render in Elementor control select2 ajax search box
@@ -697,15 +765,15 @@ trait Ajax_Handler {
 		$post_type   = 'post';
 		$source_name = 'post_type';
 
-		if ( ! empty( $_GET['post_type'] ) ) {
-			$post_type = sanitize_text_field( $_GET['post_type'] );
+		if ( ! empty( $_POST['post_type'] ) ) {
+			$post_type = sanitize_text_field( $_POST['post_type'] );
 		}
 
-		if ( ! empty( $_GET['source_name'] ) ) {
-			$source_name = sanitize_text_field( $_GET['source_name'] );
+		if ( ! empty( $_POST['source_name'] ) ) {
+			$source_name = sanitize_text_field( $_POST['source_name'] );
 		}
 
-		$search  = ! empty( $_GET['term'] ) ? sanitize_text_field( $_GET['term'] ) : '';
+		$search  = ! empty( $_POST['term'] ) ? sanitize_text_field( $_POST['term'] ) : '';
 		$results = $post_list = [];
 		switch ( $source_name ) {
 			case 'taxonomy':
@@ -724,6 +792,11 @@ trait Ajax_Handler {
 				$post_list = wp_list_pluck( get_terms( $args ), 'name', 'term_id' );
 				break;
 			case 'user':
+				if ( ! current_user_can( 'list_users' ) ) {
+					$post_list = [];
+					break;
+				}
+
 				$users = [];
 
 				foreach ( get_users( [ 'search' => "*{$search}*" ] ) as $user ) {
@@ -743,6 +816,7 @@ trait Ajax_Handler {
 				$results[] = [ 'text' => $item, 'id' => $key ];
 			}
 		}
+
 		wp_send_json( [ 'results' => $results ] );
 	}
 
@@ -849,7 +923,7 @@ trait Ajax_Handler {
 			}
 			if ( isset( $settings['recaptchaLanguageV3'] ) ) {
 				update_option( 'eael_recaptcha_language_v3', sanitize_text_field( $settings['recaptchaLanguageV3'] ) );
-			}
+			}	
 
 			//pro settings
 			if ( isset( $settings['gClientId'] ) ) {
@@ -890,6 +964,18 @@ trait Ajax_Handler {
 			update_option( 'eael_custom_profile_fields', sanitize_text_field( $settings['lr_custom_profile_fields'] ) );
 		} else {
 			update_option( 'eael_custom_profile_fields', '' );
+		}
+
+		if ( isset( $settings['lr_custom_profile_fields_text'] ) ) {
+			update_option( 'eael_custom_profile_fields_text', sanitize_text_field( $settings['lr_custom_profile_fields_text'] ) );
+		} else {
+			update_option( 'eael_custom_profile_fields_text', '' );
+		}
+
+		if ( isset( $settings['lr_custom_profile_fields_img'] ) ) {
+			update_option( 'eael_custom_profile_fields_img', sanitize_text_field( $settings['lr_custom_profile_fields_img'] ) );
+		} else {
+			update_option( 'eael_custom_profile_fields_img', '' );
 		}
 
 		//pro settings
@@ -1011,5 +1097,11 @@ trait Ajax_Handler {
 			wp_send_json_success( [ 'nonce' => $nonce ] );
 		}
 		wp_send_json_error( __( 'you are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
+	}
+
+	public function eael_yith_wcwl_ajax_disable( $request ) {
+		add_filter( 'option_yith_wcwl_ajax_enable', function ( $data ) {
+			return 'no';
+		} );
 	}
 }

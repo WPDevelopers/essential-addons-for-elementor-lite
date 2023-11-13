@@ -120,7 +120,7 @@
 				        },
 				        beforeSend: function () {
 					        _this.html(
-						        '<i id="eael-spinner" class="ea-admin-icon icon-settings-loader"></i><span>Saving Data...</span>'
+						        '<i id="eael-spinner" class="ea-admin-icon eael-icon-settings-loader"></i><span>Saving Data...</span>'
 					        );
 				        },
 				        success: function ( response ) {
@@ -161,7 +161,7 @@
 			        },
 			        beforeSend: function () {
 				        _this.html(
-					        '<i id="eael-spinner" class="ea-admin-icon icon-settings-loader"></i><span>Generating...</span>'
+					        '<i id="eael-spinner" class="ea-admin-icon eael-icon-settings-loader"></i><span>Generating...</span>'
 				        );
 			        },
 			        success: function ( response ) {
@@ -488,6 +488,17 @@
 		}
 	});
 	
+	$(document).on('change', '#lr_custom_profile_fields', function (e) {
+		let $this = $(this),
+		    custom_profile_fields = $this.prop('checked');
+
+		if( custom_profile_fields ){
+			$(document).find('.lr_custom_profile_fields_child').removeClass('eael-d-none');
+		} else {
+			$(document).find('.lr_custom_profile_fields_child').addClass('eael-d-none');
+		}
+	});
+
 	$(document).on('click', '.eael-setup-wizard-save', function (e) {
 		e.preventDefault();
 		var $this = $(this);

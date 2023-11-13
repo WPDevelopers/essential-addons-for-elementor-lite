@@ -27,7 +27,6 @@
   text-transform: uppercase;
   text-decoration: none;
   -webkit-transition: 0.3s;
-  -o-transition: 0.3s;
   transition: 0.3s;
   border-radius: 4px;
 }
@@ -70,7 +69,6 @@
   padding: 30px;
   border-radius: 5px;
   -webkit-transition: 0.5s;
-  -o-transition: 0.5s;
   transition: 0.5s;
 }
 
@@ -78,7 +76,6 @@
   -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   -webkit-transition: 0.5s;
-  -o-transition: 0.5s;
   transition: 0.5s;
 }
 
@@ -346,7 +343,6 @@
   border-radius: 50%;
   margin-bottom: 30px;
   -webkit-transition: 0.5s;
-  -o-transition: 0.5s;
   transition: 0.5s;
   overflow: hidden;
 }
@@ -368,7 +364,6 @@
   font-size: 30px;
   color: #fff;
   -webkit-transition: 0.5s;
-  -o-transition: 0.5s;
   transition: 0.5s;
 }
 
@@ -480,8 +475,8 @@
     display: block;
   }
   .eael-pricing .eael-pricing-item,
-.eael-pricing.style-2 .eael-pricing-item,
-.eael-pricing.style-4 .eael-pricing-item {
+  .eael-pricing.style-2 .eael-pricing-item,
+  .eael-pricing.style-4 .eael-pricing-item {
     width: 100%;
     margin: 0 auto 30px auto;
   }
@@ -495,8 +490,8 @@
     width: 100%;
   }
   .eael-pricing .eael-pricing-item,
-.eael-pricing.style-2 .eael-pricing-item,
-.eael-pricing.style-4 .eael-pricing-item {
+  .eael-pricing.style-2 .eael-pricing-item,
+  .eael-pricing.style-4 .eael-pricing-item {
     margin: 0 auto 30px auto;
   }
 }

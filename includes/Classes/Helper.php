@@ -109,11 +109,11 @@ class Helper
             'single',
             'post',
             'page',
-            'archive',
+            // 'archive',
             'search-results',
             'error-404',
-            'product',
-            'product-archive',
+            // 'product',
+            // 'product-archive',
             'section',
         ];
 
@@ -758,6 +758,16 @@ class Helper
             if (!empty($args['tax_query'])) {
                 $args['tax_query']['relation'] = 'AND';
             }
+
+            $args[ 'meta_query' ] = [ 'relation' => 'AND' ];
+            $show_stock_out_products = isset( $settings['eael_product_out_of_stock_show'] ) ? $settings['eael_product_out_of_stock_show'] : 'yes';
+
+            if ( get_option( 'woocommerce_hide_out_of_stock_items' ) == 'yes' || 'yes' !== $show_stock_out_products  ) {
+                $args[ 'meta_query' ][] = [
+                    'key'   => '_stock_status',
+                    'value' => 'instock'
+                ];
+            }
         }
 
         return $args;
@@ -945,9 +955,9 @@ class Helper
 
 		$sale_badge_align  = isset( $settings['eael_product_sale_badge_alignment'] ) ? $settings['eael_product_sale_badge_alignment'] : '';
 		$sale_badge_preset = isset( $settings['eael_product_sale_badge_preset'] ) ? $settings['eael_product_sale_badge_preset'] : '';
-		$sale_text         = ! empty( $settings['eael_product_carousel_sale_text'] ) ? $settings['eael_product_carousel_sale_text'] : (! empty( $settings['eael_product_sale_text'] ) ? $settings['eael_product_sale_text'] :'Sale!');
-		$stockout_text     = ! empty( $settings['eael_product_carousel_stockout_text'] ) ? $settings['eael_product_carousel_stockout_text'] : (! empty( $settings['eael_product_stockout_text'] ) ? $settings['eael_product_stockout_text'] :'Stock Out');
-		$tag               = ! empty( $settings['eael_product_quick_view_title_tag'] ) ? self::eael_validate_html_tag( $settings['eael_product_quick_view_title_tag'] ) : 'h1';
+		$sale_text         = ! empty( $settings['eael_product_carousel_sale_text'] ) ? $settings['eael_product_carousel_sale_text'] : (! empty( $settings['eael_product_sale_text'] ) ? $settings['eael_product_sale_text'] :( !empty( $settings['eael_product_gallery_sale_text'] ) ? $settings['eael_product_gallery_sale_text'] : 'Sale!' ));
+		$stockout_text     = ! empty( $settings['eael_product_carousel_stockout_text'] ) ? $settings['eael_product_carousel_stockout_text'] : (! empty( $settings['eael_product_stockout_text'] ) ? $settings['eael_product_stockout_text'] : ( !empty($settings['eael_product_gallery_stockout_text']) ? $settings['eael_product_gallery_stockout_text'] : 'Stock Out' ));
+        $tag               = ! empty( $settings['eael_product_quick_view_title_tag'] ) ? self::eael_validate_html_tag( $settings['eael_product_quick_view_title_tag'] ) : 'h1';
         
         remove_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_title', 5 );
         add_action( 'eael_woo_single_product_summary', function () use ( $tag ) {
@@ -963,7 +973,7 @@ class Helper
 				<div id="product-<?php esc_attr( get_the_ID() ); ?>" <?php post_class( 'product' ); ?>>
 					<div class="eael-product-image-wrap">
 						<?php
-						echo ( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.esc_attr( $sale_badge_preset ).' '.esc_attr( $sale_badge_align ).'">'. esc_html( $stockout_text ) .'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.esc_attr( $sale_badge_preset ).' '.esc_attr( $sale_badge_align ).'">' . esc_html( $sale_text ) . '</span>' : '') );
+						echo ( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.esc_attr( $sale_badge_preset ).' '.esc_attr( $sale_badge_align ).'">'. Helper::eael_wp_kses( $stockout_text ) .'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.esc_attr( $sale_badge_preset ).' '.esc_attr( $sale_badge_align ).'">' . Helper::eael_wp_kses( $sale_text ) . '</span>' : '') );
 						do_action( 'eael_woo_single_product_image' );
 						?>
 					</div>
@@ -1023,9 +1033,9 @@ class Helper
 	 * @param $text
 	 * @return string
 	 */
-    public static function eael_wp_kses($text){
-        return wp_kses($text,self::eael_allowed_tags());
-    }
+	public static function eael_wp_kses( $text ) {
+		return wp_kses( $text, self::eael_allowed_tags(), array_merge( wp_allowed_protocols(), [ 'data' ] ) );
+	}
 
 	/**
      * List of allowed html tag for wp_kses
@@ -1033,202 +1043,250 @@ class Helper
 	 * eael_allowed_tags
 	 * @return array
 	 */
-    public static function eael_allowed_tags(){
-        return [
-            'a' => [
-                'href' => [],
-                'title' => [],
-                'class' => [],
-                'rel' => [],
-                'id' => [],
-                'style' => []
-            ],
-            'q' => [
-                'cite' => [],
-                'class' => [],
-                'id' => [],
-            ],
-            'img' => [
-                'src' => [],
-                'alt' => [],
-                'height' => [],
-                'width' => [],
-                'class' => [],
-                'id' => [],
-                'style' => []
-            ],
-            'span' => [
-                'class' => [],
-                'id' => [],
-                'style' => []
-            ],
-            'dfn' => [
-                'class' => [],
-                'id' => [],
-                'style' => []
-            ],
-            'time' => [
-                'datetime' => [],
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'cite' => [
-                'title' => [],
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'hr' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'b' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'p' => [
-                'class' => [],
-                'id' => [],
-                'style' => []
-            ],
-            'i' => [
-                'class' => [],
-                'id' => [],
-                'style' => []
-            ],
-            'u' => [
-                'class' => [],
-                'id' => [],
-                'style' => []
-            ],
-            's' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'br' => [],
-            'em' => [
-                'class' => [],
-                'id' => [],
-                'style' => []
-            ],
-            'code' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'mark' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'small' => [
-                'class' => [],
-                'id' => [],
-                'style' => []
-            ],
-            'abbr' => [
-                'title' => [],
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'strong' => [
-                'class' => [],
-                'id' => [],
-                'style' => []
-            ],
-            'del' => [
-                'class' => [],
-                'id' => [],
-                'style' => []
-            ],
-            'ins' => [
-                'class' => [],
-                'id' => [],
-                'style' => []
-            ],
-            'sub' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'sup' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'div' => [
-                'class' => [],
-                'id' => [],
-                'style' => []
-            ],
-            'strike' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'acronym' => [],
-            'h1' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'h2' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'h3' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'h4' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'h5' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'h6' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'button' => [
-                'class' => [],
-                'id' => [],
-                'style' => [],
-            ],
-            'center' => [
-	            'class' => [],
-	            'id'    => [],
-	            'style' => [],
-            ],
-            'ul' => [
-	            'class' => [],
-	            'id'    => [],
-	            'style' => [],
-            ],
-            'ol' => [
-	            'class' => [],
-	            'id'    => [],
-	            'style' => [],
-            ],
-            'li' => [
-	            'class' => [],
-	            'id'    => [],
-	            'style' => [],
-            ],
-        ];
-    }
+	public static function eael_allowed_tags() {
+		return [
+			'a'       => [
+				'href'   => [],
+				'title'  => [],
+				'class'  => [],
+				'rel'    => [],
+				'id'     => [],
+				'style'  => [],
+				'target' => [],
+			],
+			'q'       => [
+				'cite'  => [],
+				'class' => [],
+				'id'    => [],
+			],
+			'img'     => [
+				'src'    => [],
+				'alt'    => [],
+				'height' => [],
+				'width'  => [],
+				'class'  => [],
+				'id'     => [],
+				'style'  => []
+			],
+			'span'    => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+			'dfn'     => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+			'time'    => [
+				'datetime' => [],
+				'class'    => [],
+				'id'       => [],
+				'style'    => [],
+			],
+			'cite'    => [
+				'title' => [],
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'hr'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'b'       => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'p'       => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+			'i'       => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+			'u'       => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+			's'       => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'br'      => [],
+			'em'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+			'code'    => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'mark'    => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'small'   => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+			'abbr'    => [
+				'title' => [],
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'strong'  => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+			'del'     => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+			'ins'     => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+			'sub'     => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'sup'     => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'div'     => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+			'strike'  => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'acronym' => [],
+			'h1'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'h2'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'h3'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'h4'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'h5'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'h6'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'button'  => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'center'  => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'ul'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'ol'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'li'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'table'   => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+				'dir'   => [],
+				'align' => [],
+			],
+			'thead'   => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+				'align' => [],
+			],
+			'tbody'   => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+				'align' => [],
+			],
+			'tfoot'   => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+				'align' => [],
+			],
+			'th'      => [
+				'class'   => [],
+				'id'      => [],
+				'style'   => [],
+				'align'   => [],
+				'colspan' => [],
+				'rowspan' => [],
+			],
+			'tr'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+				'align' => [],
+			],
+			'td'      => [
+				'class'   => [],
+				'id'      => [],
+				'style'   => [],
+				'align'   => [],
+				'colspan' => [],
+				'rowspan' => [],
+			],
+		];
+	}
 
     public static function eael_fetch_color_or_global_color($settings, $control_name=''){
         if( !isset($settings[$control_name])) {
@@ -1279,6 +1337,36 @@ class Helper
 
 		return $output;
 	}
+
+    /**
+     * Get SVG html by Icon
+     *
+     * Used to get svg attributes from Icon class for SVG Drawing widget
+     * @param string $icon             Icon
+     *
+     * @return string
+     */
+    public static function get_svg_by_icon( $icon ) {
+        if ( empty( $icon ) || empty( $icon['value'] ) || empty( $icon['library'] ) ) return '';
+
+        $svg_html = "";
+
+        $icon_name  = str_replace( [ 'fas fa-', 'fab fa-', 'far fa-' ], '', $icon['value'] );
+        $library    = str_replace( 'fa-', '', $icon['library'] );
+        $svg_object = file_get_contents( EAEL_PLUGIN_PATH . "assets/front-end/js/lib-view/icons/{$library}.json" );
+        $svg_object = json_decode( $svg_object, true );
+        $i_class    = str_replace(' ', '-', $icon['value']);
+
+        if ( empty( $svg_object['icons'][$icon_name] ) ) return $svg_html;
+
+        $icon       = $svg_object['icons'][$icon_name];
+        $view_box   = "0 0 {$icon[0]} {$icon[1]}";
+        $svg_html  .= "<svg class='svg-inline--". $i_class ."  eael-svg-icon' aria-hidden='true' data-icon='store' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='{$view_box}' >";
+        $svg_html  .= "<path d='{$icon[4]}'></path>";
+        $svg_html  .= "</svg>";
+
+        return $svg_html;
+    }
     
     /**
      * Get product image src and Product gallery's first image src

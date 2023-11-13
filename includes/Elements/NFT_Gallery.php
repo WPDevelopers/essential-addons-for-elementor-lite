@@ -57,7 +57,7 @@ class NFT_Gallery extends Widget_Base {
 	}
 
 	public function get_custom_help_url() {
-		return 'https://essential-addons.com/elementor/docs/nft-gallery/';
+		return 'https://essential-addons.com/elementor/docs/ea-nft-gallery/';
 	}
 
 	protected function register_controls() {
@@ -90,8 +90,11 @@ class NFT_Gallery extends Widget_Base {
 				'label'       => __( 'API Key', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'placeholder' => 'Enter API key',
-				'description' => sprintf( __( 'Get your API key from <a href="https://docs.opensea.io/reference/request-an-api-key" class="eael-btn" target="_blank">%s</a>',
+				'description' => sprintf( __( 'Get your API key from <a href="https://docs.opensea.io/reference/api-keys" class="eael-btn" target="_blank">%s</a>',
 					'essential-addons-for-elementor-lite' ), esc_html( 'here' ) ),
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -138,6 +141,9 @@ class NFT_Gallery extends Widget_Base {
 					'eael_nft_gallery_opensea_type'     => 'assets',
 					'eael_nft_gallery_opensea_filterby' => 'collection-slug',
 				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -175,6 +181,9 @@ class NFT_Gallery extends Widget_Base {
 						],
 
 					],
+				],
+				'ai' => [
+					'active' => false,
 				],
 			]
 		);
@@ -535,6 +544,9 @@ class NFT_Gallery extends Widget_Base {
 			'condition'   => [
 				'eael_nft_gallery_show_owner' => 'yes'
 			],
+			'ai' => [
+				'active' => false,
+			],
 		] );
 
 		$this->add_control( 'eael_nft_gallery_content_created_by_label', [
@@ -545,6 +557,9 @@ class NFT_Gallery extends Widget_Base {
 			'condition'   => [
 				'eael_nft_gallery_show_creator' => 'yes'
 			],
+			'ai' => [
+				'active' => false,
+			],
 		] );
 
 		$this->add_control( 'eael_nft_gallery_content_view_details_label', [
@@ -552,6 +567,9 @@ class NFT_Gallery extends Widget_Base {
 			'type'        => Controls_Manager::TEXT,
 			'label_block' => false,
 			'default'     => esc_html__( 'View Details', 'essential-addons-for-elementor-lite' ),
+			'ai' => [
+				'active' => false,
+			],
 		] );
 
 		$this->add_control( 'eael_nft_gallery_content_no_items_label', [
@@ -559,6 +577,9 @@ class NFT_Gallery extends Widget_Base {
 			'type'        => Controls_Manager::TEXT,
 			'label_block' => false,
 			'default'     => esc_html__( 'No Items Found!', 'essential-addons-for-elementor-lite' ),
+			'ai' => [
+				'active' => false,
+			],
 		] );
 
 		$this->add_control( 'eael_nft_gallery_content_last_sale_label', [
@@ -566,6 +587,9 @@ class NFT_Gallery extends Widget_Base {
 			'type'        => Controls_Manager::TEXT,
 			'label_block' => false,
 			'default'     => esc_html__( 'Last sale:', 'essential-addons-for-elementor-lite' ),
+			'ai' => [
+				'active' => false,
+			],
 		] );
 
 		$this->add_control( 'eael_nft_gallery_content_ends_in_label', [
@@ -573,6 +597,9 @@ class NFT_Gallery extends Widget_Base {
 			'type'        => Controls_Manager::TEXT,
 			'label_block' => false,
 			'default'     => esc_html__( 'Ends in:', 'essential-addons-for-elementor-lite' ),
+			'ai' => [
+				'active' => false,
+			],
 		] );
 
 		$this->end_controls_section();
@@ -607,6 +634,9 @@ class NFT_Gallery extends Widget_Base {
 				'condition'   => [
 					'eael_nft_gallery_pagination' => 'yes',
 				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -620,6 +650,9 @@ class NFT_Gallery extends Widget_Base {
 				'condition' => [
 					'eael_nft_gallery_pagination' => 'yes',
 				],
+				'ai' => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -632,6 +665,9 @@ class NFT_Gallery extends Widget_Base {
 				'default'   => __( 'No more items!', 'essential-addons-for-elementor-lite' ),
 				'condition' => [
 					'eael_nft_gallery_pagination' => 'yes',
+				],
+				'ai' => [
+					'active' => false,
 				],
 			]
 		);
@@ -2715,7 +2751,7 @@ class NFT_Gallery extends Widget_Base {
 		$nft_gallery['item_limit']       = ! empty( $settings['eael_nft_gallery_opensea_item_limit'] ) ? esc_html( $settings['eael_nft_gallery_opensea_item_limit'] ) : 9;
 
 		$expiration = ! empty( $settings['eael_nft_gallery_opensea_data_cache_time'] ) ? absint( $settings['eael_nft_gallery_opensea_data_cache_time'] ) * MINUTE_IN_SECONDS : DAY_IN_SECONDS;
-		$md5        = md5( $nft_gallery['api_key'] . $nft_gallery['opensea_type'] . $nft_gallery['opensea_filterby'] . $settings['eael_nft_gallery_opensea_filterby_slug'] . $settings['eael_nft_gallery_opensea_filterby_wallet'] . $nft_gallery['item_limit'] . $nft_gallery['order'] . $this->get_id() );
+		$md5        = md5( $nft_gallery['opensea_type'] . $nft_gallery['opensea_filterby'] . $settings['eael_nft_gallery_opensea_filterby_slug'] . $settings['eael_nft_gallery_opensea_filterby_wallet'] . $nft_gallery['item_limit'] . $nft_gallery['order'] . $this->get_id() );
 		$cache_key  = "{$nft_gallery['source']}_{$expiration}_{$md5}_nftg_cache";
 		$items      = get_transient( $cache_key );
 

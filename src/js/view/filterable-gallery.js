@@ -6,8 +6,16 @@ jQuery(window).on("elementor/frontend/init", function () {
 			input         = $scope.find("#fg-search-box-input"),
 			searchRegex,
 			buttonFilter,
-			timer;
+			timer,
+			fg_mfp_counter_text = localize.eael_translate_text.fg_mfp_counter_text;
+			fg_mfp_counter_text = fg_mfp_counter_text ? '%curr% '+fg_mfp_counter_text+' %total%' : '%curr% of %total%';
 
+		let $galleryWrap = $(".eael-filter-gallery-wrapper", $scope);
+		var custom_default_control 	= $galleryWrap.data('custom_default_control');
+		var default_control_key 	= $galleryWrap.data('default_control_key');
+		custom_default_control 		= typeof(custom_default_control) 	!== 'undefined' ? parseInt( custom_default_control ) 	: 0; 
+		default_control_key 		= typeof(default_control_key) 		!== 'undefined' ? parseInt( default_control_key ) 		: 0; 
+		
 		if (form.length) {
 			form.on("submit", function (e) {
 				e.preventDefault();
@@ -64,10 +72,11 @@ jQuery(window).on("elementor/frontend/init", function () {
 
 			// Popup
 			$($scope).magnificPopup({
-				delegate: ".eael-magnific-link.active",
+				delegate: ".eael-filterable-gallery-item-wrap:not([style*='display: none']) .eael-magnific-link.active",
 				type: "image",
 				gallery: {
-					enabled: $gallery_enabled
+					enabled: $gallery_enabled,
+					tCounter: fg_mfp_counter_text,
 				},
 				image: {
 					titleSrc: function (item) {
@@ -93,6 +102,10 @@ jQuery(window).on("elementor/frontend/init", function () {
 					$this.data('first-init', 1);
 					let item_found = initData;
 					let index_list = $items =  [];
+
+					if (typeof $images_per_page === 'string'){
+						$images_per_page = $init_show_setting;
+					}
 
 					if (item_found < $images_per_page) {
 						for (const [index, item] of fg_items.entries()) {
@@ -141,11 +154,34 @@ jQuery(window).on("elementor/frontend/init", function () {
 				} else {
 					$isotope_gallery.isotope();
 				}
+
+				if($this.hasClass('all-control')){
+					//All items are active
+					$('.eael-filterable-gallery-item-wrap .eael-magnific-link-clone').removeClass('active').addClass('active');
+				}else {
+					$('.eael-filterable-gallery-item-wrap .eael-magnific-link-clone').removeClass('active');
+					$(buttonFilter + ' .eael-magnific-link').addClass('active');
+				}
 			});
 
 			//quick search
+			var loaded_on_search = false;
 			input.on("input", function () {
-				var $this = $(this);
+				var $this = $(this),$items=[];
+
+				if ( ! loaded_on_search && $gallery.data('search-all') === 'yes' ) {
+					for (const [index, item] of fg_items.entries()) {
+						$items.push($(item)[0]);
+					}
+					$isotope_gallery.isotope();
+					$gallery.append($items);
+					$isotope_gallery.isotope('appended', $items);
+					$isotope_gallery.imagesLoaded().progress(function () {
+						$isotope_gallery.isotope("layout");
+					});
+					$(".eael-gallery-load-more",$scope).hide();
+					loaded_on_search = true;
+				}
 
 				clearTimeout(timer);
 				timer = setTimeout(function () {
@@ -162,6 +198,16 @@ jQuery(window).on("elementor/frontend/init", function () {
 			// layout gal, on click tabs
 			$isotope_gallery.on("arrangeComplete", function () {
 				$isotope_gallery.isotope("layout");
+				let notFoundDiv = $('#eael-fg-no-items-found', $scope),
+					minHeight = notFoundDiv.css('font-size');
+
+				$('.eael-filter-gallery-container', $scope).css('min-height', parseInt(minHeight)*2+'px');
+
+				if (!$isotope_gallery.data('isotope').filteredItems.length) {
+					$('#eael-fg-no-items-found', $scope).show();
+				} else {
+					$('#eael-fg-no-items-found', $scope).hide();
+				}
 			});
 
 			// layout gal, after window loaded
@@ -232,6 +278,16 @@ jQuery(window).on("elementor/frontend/init", function () {
 			$(document).on('mouseup', function(e){
 				if(!filterTrigger.is(e.target) && filterTrigger.has(e.target).length === 0){
 					filterControls.removeClass("open-filters");
+				}
+			});
+
+			$( document ).ready(function() {
+				if( window.location.hash ) {
+					jQuery('#' + window.location.hash.substring(1) ).trigger('click');
+				} else if( custom_default_control ) {
+					let increment = $settings.control_all_text ? 2 : 1;
+					default_control_key = default_control_key + increment;
+					jQuery(`.eael-filter-gallery-control li:nth-child(${default_control_key})` ).trigger('click');
 				}
 			});
 		}
