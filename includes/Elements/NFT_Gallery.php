@@ -2922,6 +2922,14 @@ class NFT_Gallery extends Widget_Base {
 
 	protected function render() {
 		$nft_gallery_items = $this->fetch_nft_gallery_from_api();
+		if( empty ( $nft_gallery_items['items'] ) ) {
+			?>
+			<p class="eael-nft-gallery-error-message">
+				<?php esc_html_e( 'Please insert correct API Key', 'essential-addons-for-elementor-lite' ); ?>
+			</p>
+			<?php
+			return;
+		}
 		$this->print_nft_gallery( $nft_gallery_items );
 	}
 }
