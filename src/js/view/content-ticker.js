@@ -1,10 +1,9 @@
 ea.hooks.addAction("init", "ea", () => {
-    var ContentTicker = function($scope, $) {
-        var $contentTicker = $scope.find(".eael-content-ticker").eq(0),
-            $items =
-                $contentTicker.data("items") !== undefined
-                    ? $contentTicker.data("items")
-                    : 1,
+    function get_configurations($contentTicker) {
+        let $items =
+            $contentTicker.data("items") !== undefined
+                ? $contentTicker.data("items")
+                : 1,
             $items_tablet =
                 $contentTicker.data("items-tablet") !== undefined
                     ? $contentTicker.data("items-tablet")
@@ -56,46 +55,51 @@ ea.hooks.addAction("init", "ea", () => {
             $arrow_prev =
                 $contentTicker.data("arrow-prev") !== undefined
                     ? $contentTicker.data("arrow-prev")
-                    : ".swiper-button-prev",
+                    : ".swiper-button-prev";
+
+        return {
+            direction: "horizontal",
+            loop: $loop,
+            speed: $speed,
+            effect: $effect,
+            slidesPerView: $items,
+            spaceBetween: $margin,
+            grabCursor: $grab_cursor,
+            paginationClickable: true,
+            autoHeight: true,
+            autoplay: {
+                delay: $autoplay,
+                disableOnInteraction: false
+            },
+            pagination: {
+                el: $pagination,
+                clickable: true
+            },
+            navigation: {
+                nextEl: $arrow_next,
+                prevEl: $arrow_prev
+            },
+            breakpoints: {
+                // when window width is <= 480px
+                480: {
+                    slidesPerView: $items_mobile,
+                    spaceBetween: $margin_mobile
+                },
+                // when window width is <= 640px
+                768: {
+                    slidesPerView: $items_tablet,
+                    spaceBetween: $margin_tablet
+                }
+            }
+        };
+    }
+    var ContentTicker = function($scope, $) {
+        var $contentTicker = $scope.find(".eael-content-ticker").eq(0),
+            $contentTickerOptions = get_configurations($contentTicker),
             $pause_on_hover =
                 $contentTicker.data("pause-on-hover") !== undefined
                     ? $contentTicker.data("pause-on-hover")
-                    : "",
-            $contentTickerOptions = {
-                direction: "horizontal",
-                loop: $loop,
-                speed: $speed,
-                effect: $effect,
-                slidesPerView: $items,
-                spaceBetween: $margin,
-                grabCursor: $grab_cursor,
-                paginationClickable: true,
-                autoHeight: true,
-                autoplay: {
-                    delay: $autoplay,
-                    disableOnInteraction: false
-                },
-                pagination: {
-                    el: $pagination,
-                    clickable: true
-                },
-                navigation: {
-                    nextEl: $arrow_next,
-                    prevEl: $arrow_prev
-                },
-                breakpoints: {
-                    // when window width is <= 480px
-                    480: {
-                        slidesPerView: $items_mobile,
-                        spaceBetween: $margin_mobile
-                    },
-                    // when window width is <= 640px
-                    768: {
-                        slidesPerView: $items_tablet,
-                        spaceBetween: $margin_tablet
-                    }
-                }
-            };
+                    : "";
 
         swiperLoader(
             $contentTicker,
