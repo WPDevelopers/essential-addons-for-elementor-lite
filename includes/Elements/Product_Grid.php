@@ -332,6 +332,20 @@ class Product_Grid extends Widget_Base
             ]
         );
 
+	    $this->add_control(
+		    'eael_wc_loop_hooks',
+		    [
+			    'label'        => esc_html__( 'WooCommerce Loop Hooks', 'essential-addons-for-elementor-lite' ),
+			    'type'         => \Elementor\Controls_Manager::SWITCHER,
+			    'label_on'     => esc_html__( 'ON', 'essential-addons-for-elementor-lite' ),
+			    'label_off'    => esc_html__( 'OFF', 'essential-addons-for-elementor-lite' ),
+			    'return_value' => 'yes',
+			    'separator'    => 'before',
+			    'default'      => '',
+			    'description'  => __( 'This will enable WooCommerce loop Before and After hooks. It may break your layout.', 'essential-addons-for-elementor-lite' )
+		    ]
+	    );
+
         $this->end_controls_section();
     }
 
@@ -3125,7 +3139,7 @@ class Product_Grid extends Widget_Base
         <div <?php $this->print_render_attribute_string('wrap'); ?> >
             <div class="woocommerce">
                 <?php
-                do_action( 'eael_woo_before_product_loop' );
+                do_action( 'eael_woo_before_product_loop', $settings['eael_product_grid_style_preset'] );
 
                 $template                       = $this->get_template( $settings['eael_dynamic_template_Layout'] );
                 $settings['loadable_file_name']  = $this->get_filename_only( $template );
