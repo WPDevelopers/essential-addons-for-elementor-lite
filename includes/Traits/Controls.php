@@ -1395,11 +1395,12 @@ trait Controls
                 $wb->add_control(
                     'eael_post_terms_separator',
                     [
-                        'label' => esc_html__('Terms Separator', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::TEXT,
+                        'label'       => esc_html__( 'Terms Separator', 'essential-addons-for-elementor-lite' ),
+                        'type'        => Controls_Manager::TEXT,
                         'label_block' => false,
-                        'default' => esc_html__('', 'essential-addons-for-elementor-lite'),
-                        'condition' => [
+                        'ai'          => [ 'active' => false ],
+                        'default'     => esc_html__( '', 'essential-addons-for-elementor-lite' ),
+                        'condition'   => [
                             'eael_show_post_terms'        => 'yes',
                             'eael_post_grid_preset_style' =>  'two',
                         ],
