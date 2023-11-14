@@ -793,20 +793,6 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 
-		// $this->add_control( 'login_register_recaptcha_v3_branding_show', [
-		// 	'label'       	=> esc_html__('reCaptcha Branding', 'essential-addons-for-elementor-lite'),
-		// 	'description' 	=> __( sprintf('<a href="%s" target="_blank">Documentation</a> on how to hide the branding', esc_url('//developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed')), 'essential-addons-for-elementor-lite' ),
-		// 	'type'         	=> Controls_Manager::SWITCHER,
-		// 	'label_on'     	=> __( 'Yes', 'essential-addons-for-elementor-lite' ),
-		// 	'label_off'    	=> __( 'No', 'essential-addons-for-elementor-lite' ),
-		// 	'return_value' 	=> 'yes',
-		// 	'default' 		=> 'yes',
-		// 	'condition'     => [
-		// 		'enable_login_register_recaptcha' => 'yes',
-		// 		'login_register_recaptcha_version' => 'v3',
-		// 	],
-		// ] );
-
 		do_action( 'eael/login-register/after-general-controls', $this );
 
 		if ( !$this->pro_enabled ) {
