@@ -960,6 +960,12 @@ trait Ajax_Handler {
 			update_option( 'eael_recaptcha_language_v3', sanitize_text_field( $settings['lr_recaptcha_language_v3'] ) );
 		}
 
+		if ( isset( $settings['lr_recaptcha_badge_hide'] ) ) {
+			update_option( 'eael_recaptcha_badge_hide', sanitize_text_field( $settings['lr_recaptcha_badge_hide'] ) );
+		} else {
+			update_option( 'eael_recaptcha_badge_hide', '' );
+		}
+
 		if ( isset( $settings['lr_custom_profile_fields'] ) ) {
 			update_option( 'eael_custom_profile_fields', sanitize_text_field( $settings['lr_custom_profile_fields'] ) );
 		} else {
