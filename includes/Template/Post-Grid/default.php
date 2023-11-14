@@ -154,7 +154,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                                         $link = ($settings['eael_post_terms'] === 'category') ? get_category_link($term->term_id) : get_tag_link($term->term_id);
                                         $html .= '<li>';
                                         $html .= '<a href="' . esc_url($link) . '">';
-                                        $html .= $term->name . esc_html( $eael_post_terms_separator );
+                                        $html .= $term->name . " " . esc_html( $eael_post_terms_separator );
                                         $html .= '</a>';
                                         $html .= '</li>';
                                         $count++;
