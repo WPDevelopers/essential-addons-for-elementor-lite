@@ -73,8 +73,8 @@ class Bootstrap
     protected $installer;
 
 
-    const EAEL_PROMOTION_FLAG = 9;
-    const EAEL_ADMIN_MENU_FLAG = 9;
+    const EAEL_PROMOTION_FLAG = 10;
+    const EAEL_ADMIN_MENU_FLAG = 10;
     /**
      * Singleton instance
      *
@@ -237,11 +237,23 @@ class Bootstrap
 		    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_meta', 30 );
 
 		    add_filter( 'woocommerce_product_get_rating_html', [ $this, 'eael_rating_markup' ], 10, 3 );
+		    add_filter( 'eael_product_wrapper_class', [ $this, 'eael_product_wrapper_class' ], 10, 3 );
 
             add_action('wp_ajax_eael_checkout_cart_qty_update', [$this, 'eael_checkout_cart_qty_update'] );
     		add_action('wp_ajax_nopriv_eael_checkout_cart_qty_update', [$this, 'eael_checkout_cart_qty_update'] );
 
 		    add_action( 'wp_loaded', [ $this, 'eael_woo_cart_empty_action' ], 20 );
+
+		    add_action( 'eael_woo_before_product_loop', function ( $layout ) {
+			    if ( $layout === 'eael-product-default' ) {
+				    return;
+			    }
+
+			    remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open' );
+			    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close' );
+			    remove_action( 'woocommerce_after_shop_loop_item', 'astra_woo_woocommerce_shop_product_content' );
+			    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
+		    } );
 	    }
 
 
