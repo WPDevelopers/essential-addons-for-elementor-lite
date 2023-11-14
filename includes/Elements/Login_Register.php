@@ -138,7 +138,6 @@ class Login_Register extends Widget_Base {
 		$this->recaptcha_sitekey_v3 = get_option( 'eael_recaptcha_sitekey_v3' );
 		$this->in_editor         = Plugin::instance()->editor->is_edit_mode();
 		$this->pro_enabled       = apply_filters( 'eael/pro_enabled', false );
-
 	}
 
 	/**
@@ -770,7 +769,7 @@ class Login_Register extends Widget_Base {
 			] );
 		}
 
-		$this->add_control( 'enable_login_recaptcha_v3_score_threshold', [
+		$this->add_control( 'login_register_recaptcha_v3_score_threshold', [
 			'label'       => esc_html__( 'Score Threshold', 'essential-addons-for-elementor-lite' ),
 			'description' => esc_html__( 'reCaptcha v3 score threshold. 1 is very likely a good interaction, 0 is very likely a bot.', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::SLIDER,

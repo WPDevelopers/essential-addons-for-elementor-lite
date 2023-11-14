@@ -38,7 +38,7 @@ trait Login_Registration {
 	public static $recaptcha_v3_default_action = 'eael_login_register_form';
 
 	public static function get_recaptcha_threshold( $settings = [] ) {
-		$score_threshold = isset( $settings['enable_login_recaptcha_v3_score_threshold']['size'] ) ? floatval( $settings['enable_login_recaptcha_v3_score_threshold']['size'] ) : 0.5;
+		$score_threshold = isset( $settings['login_register_recaptcha_v3_score_threshold']['size'] ) ? floatval( $settings['login_register_recaptcha_v3_score_threshold']['size'] ) : 0.5;
 		$score_threshold = $score_threshold >= 0 && $score_threshold <= 1 ? $score_threshold : 0.5;
 		return apply_filters( 'eael_recaptcha_threshold', $score_threshold );
 	}
