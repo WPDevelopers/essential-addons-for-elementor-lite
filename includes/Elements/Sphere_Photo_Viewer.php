@@ -130,6 +130,25 @@ class Sphere_Photo_Viewer extends Widget_Base {
 
 		$this->end_controls_section();
 
+		$this->start_controls_section(
+			'ea_section_spv_options_settings',
+			[
+				'label' => esc_html__( 'Options', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+		$this->add_control(
+			'ea_spv_autorotate_switch',
+			[
+				'label'        => esc_html__( 'Autorotate', 'textdomain' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'On', 'textdomain' ),
+				'label_off'    => esc_html__( 'Off', 'textdomain' ),
+				'return_value' => 'yes',
+				'default'      => 'yes'
+			]
+		);
+		$this->end_controls_section();
+
 		/**
 		 * -------------------------------------------
 		 * Tab Style General Style
@@ -160,13 +179,23 @@ class Sphere_Photo_Viewer extends Widget_Base {
 	protected function render() {
 		$settings        = $this->get_settings_for_display();
 		$container_id    = "eael-psv-{$this->get_id()}";
-		$sphere_settings = json_encode( [
+		$sphere_settings = [
 			'caption'         => $settings['ea_spv_caption'],
 			'panorama'        => $settings['ea_spv_image']['url'],
 			'container'       => $container_id,
 			'description'     => $settings['ea_spv_description'],
-			'autorotateDelay' => 100
-		] );
+			'autorotateDelay' => 100,
+		];
+
+		if ( $settings['ea_spv_autorotate_switch'] === 'yes' ) {
+			$sphere_settings['plugins'][0][0] = [
+				'autostartDelay'  => 1000,
+				'autorotatePitch' => '5deg'
+			];
+		}
+
+		$sphere_settings = json_encode( $sphere_settings );
+
 		$this->add_render_attribute( [
 			'sphere-wrapper' => [
 				'data-settings' => $sphere_settings
