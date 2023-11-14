@@ -5561,6 +5561,14 @@ class Login_Register extends Widget_Base {
 			wp_dequeue_script('eael-recaptcha');
         }
 
+		$recaptcha_branding_show = 1;
+		if ( isset( $this->ds['login_register_recaptcha_v3_branding_show'] ) ) {
+			$recaptcha_branding_show = 'yes' === $this->ds['login_register_recaptcha_v3_branding_show'];
+
+			if ( ! $recaptcha_branding_show ) {
+				wp_add_inline_style('eael-login-register-inline-style', '.grecaptcha-badge { visibility: hidden; }');
+			}
+		}
 		?>
         <div class="eael-login-registration-wrapper <?php echo empty( $form_image_id ) ? '' : esc_attr( 'has-illustration' ); ?>"
              data-is-ajax="<?php echo esc_attr( $this->get_settings_for_display( 'enable_ajax' ) ); ?>"
@@ -5577,6 +5585,18 @@ class Login_Register extends Widget_Base {
 			$this->print_login_form();
 			$this->print_register_form();
 			$this->print_lostpassword_form(); //request for a new password.
+			
+			if( ! $recaptcha_branding_show ) {
+				?>
+				<div class="eael-recaptcha-no-branding-wrapper">
+					<small>
+					This site is protected by reCAPTCHA and the Google
+					<a href="https://policies.google.com/privacy">Privacy Policy</a> and
+					<a href="https://policies.google.com/terms">Terms of Service</a> apply.
+					</small>
+				</div>
+				<?php
+			}
 			?>
         </div>
 
