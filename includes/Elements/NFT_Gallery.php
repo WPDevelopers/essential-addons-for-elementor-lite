@@ -2744,7 +2744,7 @@ class NFT_Gallery extends Widget_Base {
 		$response                        = [];
 		$nft_gallery                     = [];
 		$nft_gallery['source']           = ! empty( $settings['eael_nft_gallery_sources'] ) ? esc_html( $settings['eael_nft_gallery_sources'] ) : 'opensea';
-		$nft_gallery['api_key']          = ! empty( $settings['eael_nft_gallery_source_key'] ) ? esc_html( $settings['eael_nft_gallery_source_key'] ) : '8debfdbad76743e39ef136579fe15718';
+		$nft_gallery['api_key']          = ! empty( $settings['eael_nft_gallery_source_key'] ) ? esc_html( $settings['eael_nft_gallery_source_key'] ) : '';
 		$nft_gallery['opensea_type']     = ! empty( $settings['eael_nft_gallery_opensea_type'] ) ? esc_html( $settings['eael_nft_gallery_opensea_type'] ) : 'assets';
 		$nft_gallery['opensea_filterby'] = ! empty( $settings['eael_nft_gallery_opensea_filterby'] ) ? esc_html( $settings['eael_nft_gallery_opensea_filterby'] ) : 'none';
 		$nft_gallery['order']            = ! empty( $settings['eael_nft_gallery_opensea_order'] ) ? esc_html( $settings['eael_nft_gallery_opensea_order'] ) : 'desc';
@@ -2925,7 +2925,7 @@ class NFT_Gallery extends Widget_Base {
 		if( empty ( $nft_gallery_items['items'] ) ) {
 			?>
 			<p class="eael-nft-gallery-error-message">
-				<?php esc_html_e( 'Please insert correct API Key', 'essential-addons-for-elementor-lite' ); ?>
+				<?php esc_html_e( 'Please insert a valid API Key', 'essential-addons-for-elementor-lite' ); ?>
 			</p>
 			<?php
 			return;
