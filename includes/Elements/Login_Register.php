@@ -793,19 +793,19 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 
-		$this->add_control( 'login_register_recaptcha_v3_branding_show', [
-			'label'       	=> esc_html__('reCaptcha Branding', 'essential-addons-for-elementor-lite'),
-			'description' 	=> __( sprintf('<a href="%s" target="_blank">Documentation</a> on how to hide the branding', esc_url('//developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed')), 'essential-addons-for-elementor-lite' ),
-			'type'         	=> Controls_Manager::SWITCHER,
-			'label_on'     	=> __( 'Yes', 'essential-addons-for-elementor-lite' ),
-			'label_off'    	=> __( 'No', 'essential-addons-for-elementor-lite' ),
-			'return_value' 	=> 'yes',
-			'default' 		=> 'yes',
-			'condition'     => [
-				'enable_login_register_recaptcha' => 'yes',
-				'login_register_recaptcha_version' => 'v3',
-			],
-		] );
+		// $this->add_control( 'login_register_recaptcha_v3_branding_show', [
+		// 	'label'       	=> esc_html__('reCaptcha Branding', 'essential-addons-for-elementor-lite'),
+		// 	'description' 	=> __( sprintf('<a href="%s" target="_blank">Documentation</a> on how to hide the branding', esc_url('//developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed')), 'essential-addons-for-elementor-lite' ),
+		// 	'type'         	=> Controls_Manager::SWITCHER,
+		// 	'label_on'     	=> __( 'Yes', 'essential-addons-for-elementor-lite' ),
+		// 	'label_off'    	=> __( 'No', 'essential-addons-for-elementor-lite' ),
+		// 	'return_value' 	=> 'yes',
+		// 	'default' 		=> 'yes',
+		// 	'condition'     => [
+		// 		'enable_login_register_recaptcha' => 'yes',
+		// 		'login_register_recaptcha_version' => 'v3',
+		// 	],
+		// ] );
 
 		do_action( 'eael/login-register/after-general-controls', $this );
 
@@ -5561,14 +5561,14 @@ class Login_Register extends Widget_Base {
 			wp_dequeue_script('eael-recaptcha');
         }
 
-		$recaptcha_branding_show = 1;
-		if ( isset( $this->ds['login_register_recaptcha_v3_branding_show'] ) ) {
-			$recaptcha_branding_show = 'yes' === $this->ds['login_register_recaptcha_v3_branding_show'];
+		// $recaptcha_branding_show = 1;
+		// if ( isset( $this->ds['login_register_recaptcha_v3_branding_show'] ) ) {
+		// 	$recaptcha_branding_show = 'yes' === $this->ds['login_register_recaptcha_v3_branding_show'];
 
-			if ( ! $recaptcha_branding_show ) {
-				wp_add_inline_style('eael-login-register-inline-style', '.grecaptcha-badge { visibility: hidden; }');
-			}
-		}
+		// 	if ( ! $recaptcha_branding_show ) {
+		// 		wp_add_inline_style('eael-login-register-inline-style', '.grecaptcha-badge { visibility: hidden; }');
+		// 	}
+		// }
 		?>
         <div class="eael-login-registration-wrapper <?php echo empty( $form_image_id ) ? '' : esc_attr( 'has-illustration' ); ?>"
              data-is-ajax="<?php echo esc_attr( $this->get_settings_for_display( 'enable_ajax' ) ); ?>"
