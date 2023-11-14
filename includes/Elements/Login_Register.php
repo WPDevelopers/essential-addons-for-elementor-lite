@@ -120,6 +120,12 @@ class Login_Register extends Widget_Base {
 	 * @var string|false
 	 */
 	protected $recaptcha_sitekey_v3;
+	
+	/**
+	 * Google reCAPTCHA v3 badge hide flag
+	 * @var string|false
+	 */
+	protected $recaptcha_badge_hide;
 
 	/**
 	 * @var mixed|void
@@ -136,8 +142,13 @@ class Login_Register extends Widget_Base {
 		$this->user_can_register = get_option( 'users_can_register' );
 		$this->recaptcha_sitekey = get_option( 'eael_recaptcha_sitekey' );
 		$this->recaptcha_sitekey_v3 = get_option( 'eael_recaptcha_sitekey_v3' );
+		$this->recaptcha_badge_hide = get_option('eael_recaptcha_badge_hide');
 		$this->in_editor         = Plugin::instance()->editor->is_edit_mode();
 		$this->pro_enabled       = apply_filters( 'eael/pro_enabled', false );
+
+		if ( $this->recaptcha_badge_hide ) {
+			add_filter( 'body_class', [ $this, 'add_login_register_body_class' ] );
+		}
 	}
 
 	/**
@@ -5475,6 +5486,12 @@ class Login_Register extends Widget_Base {
 		return $terms_relation_conditions;
 	}
 
+	public function add_login_register_body_class( $classes ) {
+		$classes[] = 'eael-login-register-page-body';
+
+		return $classes;
+	}
+
 	protected function render() {
 
 		if ( ! current_user_can( 'manage_options' ) && 'yes' === $this->get_settings_for_display( 'redirect_for_logged_in_user' ) && is_user_logged_in() ) {
@@ -5546,15 +5563,6 @@ class Login_Register extends Widget_Base {
 			wp_enqueue_script('eael-recaptcha-v3');
 			wp_dequeue_script('eael-recaptcha');
         }
-
-		// $recaptcha_branding_show = 1;
-		// if ( isset( $this->ds['login_register_recaptcha_v3_branding_show'] ) ) {
-		// 	$recaptcha_branding_show = 'yes' === $this->ds['login_register_recaptcha_v3_branding_show'];
-
-		// 	if ( ! $recaptcha_branding_show ) {
-		// 		wp_add_inline_style('eael-login-register-inline-style', '.grecaptcha-badge { visibility: hidden; }');
-		// 	}
-		// }
 		?>
         <div class="eael-login-registration-wrapper <?php echo empty( $form_image_id ) ? '' : esc_attr( 'has-illustration' ); ?>"
              data-is-ajax="<?php echo esc_attr( $this->get_settings_for_display( 'enable_ajax' ) ); ?>"
@@ -5572,8 +5580,8 @@ class Login_Register extends Widget_Base {
 			$this->print_register_form();
 			$this->print_lostpassword_form(); //request for a new password.
 			
-			if( ! $recaptcha_branding_show ) {
-				?>
+			if ( $this->recaptcha_badge_hide ) {
+			?>
 				<div class="eael-recaptcha-no-branding-wrapper">
 					<small>
 					This site is protected by reCAPTCHA and the Google
@@ -5581,7 +5589,7 @@ class Login_Register extends Widget_Base {
 					<a href="https://policies.google.com/terms">Terms of Service</a> apply.
 					</small>
 				</div>
-				<?php
+			<?php
 			}
 			?>
         </div>
