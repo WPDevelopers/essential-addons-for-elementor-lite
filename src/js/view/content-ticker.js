@@ -99,16 +99,16 @@ ea.hooks.addAction("init", "ea", () => {
         };
     }
 
-    function autoPlayManager(element, contentTicker, options){
+    function autoPlayManager( element, options, event ){
         if (options.autoplay.delay === 0) {
-            contentTicker.autoplay.stop();
+            event?.autoplay?.stop();
         }
         if (options.pauseOnHover && options.autoplay.delay !== 0) {
             element.on("mouseenter", function() {
-                contentTicker.autoplay.stop();
+                event?.autoplay?.pause();
             });
             element.on("mouseleave", function() {
-                contentTicker.autoplay.start();
+                event?.autoplay?.run();
             });
         }
     }
@@ -119,11 +119,11 @@ ea.hooks.addAction("init", "ea", () => {
         swiperLoader(
             $contentTicker,
             contentOptions
-        ).then((contentTicker) => {
-            autoPlayManager($contentTicker, contentTicker, contentOptions);
+        ).then((event) => {
+            autoPlayManager($contentTicker, event, contentOptions);
         });
 
-        var ContentTickerSliderr = function (element) {
+        var ContentTickerSlider = function (element) {
             let contentTickerElements = $(element).find('.eael-content-ticker');
             if (contentTickerElements.length) {
                 contentTickerElements.each(function () {
@@ -131,16 +131,18 @@ ea.hooks.addAction("init", "ea", () => {
                     if ($this[0].swiper) {
                         $this[0].swiper.destroy(true, true);
                         let options = get_configurations($this);
-                        swiperLoader($this[0], options);
+                        swiperLoader($this[0], options).then((event) => {
+                            autoPlayManager($this, event, options);
+                        });
                     }
                 });
             }
         }
 
-        ea.hooks.addAction("ea-toggle-triggered", "ea", ContentTickerSliderr);
-        ea.hooks.addAction("ea-lightbox-triggered", "ea", ContentTickerSliderr);
-        ea.hooks.addAction("ea-advanced-tabs-triggered", "ea", ContentTickerSliderr);
-        ea.hooks.addAction("ea-advanced-accordion-triggered", "ea", ContentTickerSliderr);
+        ea.hooks.addAction("ea-toggle-triggered", "ea", ContentTickerSlider);
+        ea.hooks.addAction("ea-lightbox-triggered", "ea", ContentTickerSlider);
+        ea.hooks.addAction("ea-advanced-tabs-triggered", "ea", ContentTickerSlider);
+        ea.hooks.addAction("ea-advanced-accordion-triggered", "ea", ContentTickerSlider);
     };
 
     const swiperLoader = (swiperElement, swiperConfig) => {
@@ -161,5 +163,5 @@ ea.hooks.addAction("init", "ea", () => {
         });
     }
 
-    elementorFrontend.hooks.addAction("frontend/element_ready/eael-content-ticker.default", m_ContentTicker);
+    elementorFrontend.hooks.addAction("frontend/element_ready/eael-content-ticker.default", ContentTicker);
 });
