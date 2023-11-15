@@ -55,9 +55,14 @@ ea.hooks.addAction("init", "ea", () => {
             $arrow_prev =
                 $contentTicker.data("arrow-prev") !== undefined
                     ? $contentTicker.data("arrow-prev")
-                    : ".swiper-button-prev";
+                    : ".swiper-button-prev",
+            $pause_on_hover =
+                $contentTicker.data("pause-on-hover") !== undefined
+                    ? $contentTicker.data("pause-on-hover")
+                    : "";
 
         return {
+            pauseOnHover: $pause_on_hover,
             direction: "horizontal",
             loop: $loop,
             speed: $speed,
@@ -93,30 +98,49 @@ ea.hooks.addAction("init", "ea", () => {
             }
         };
     }
+
+    function autoPlayManager(element, contentTicker, options){
+        if (options.autoplay.delay === 0) {
+            contentTicker.autoplay.stop();
+        }
+        if (options.pauseOnHover && options.autoplay.delay !== 0) {
+            element.on("mouseenter", function() {
+                contentTicker.autoplay.stop();
+            });
+            element.on("mouseleave", function() {
+                contentTicker.autoplay.start();
+            });
+        }
+    }
     var ContentTicker = function($scope, $) {
         var $contentTicker = $scope.find(".eael-content-ticker").eq(0),
-            $contentTickerOptions = get_configurations($contentTicker),
-            $pause_on_hover =
-                $contentTicker.data("pause-on-hover") !== undefined
-                    ? $contentTicker.data("pause-on-hover")
-                    : "";
+            contentOptions = get_configurations($contentTicker);
 
         swiperLoader(
             $contentTicker,
-            $contentTickerOptions
-        ).then(($contentTickerSlider) => {
-            if ($autoplay === 0) {
-                $contentTickerSlider.autoplay.stop();
-            }
-            if ($pause_on_hover && $autoplay !== 0) {
-                $contentTicker.on("mouseenter", function() {
-                    $contentTickerSlider.autoplay.stop();
-                });
-                $contentTicker.on("mouseleave", function() {
-                    $contentTickerSlider.autoplay.start();
-                });
-            }
+            contentOptions
+        ).then((contentTicker) => {
+            autoPlayManager($contentTicker, contentTicker, contentOptions);
         });
+
+        var ContentTickerSliderr = function (element) {
+            let contentTickerElements = $(element).find('.eael-content-ticker');
+            if (contentTickerElements.length) {
+                contentTickerElements.each(function () {
+                    let $this = $(this);
+                    if ($this[0].swiper) {
+                        $this[0].swiper.destroy(true, true);
+                        let options = get_configurations($this);
+                        swiperLoader($this[0], options);
+                    }
+                });
+            }
+        }
+
+        ea.hooks.addAction("ea-toogle-triggered", "ea", ContentTickerSliderr);
+        ea.hooks.addAction("ea-lightbox-triggered", "ea", ContentTickerSliderr);
+        ea.hooks.addAction("ea-advanced-tabs-triggered", "ea", ContentTickerSliderr);
+        ea.hooks.addAction("ea-advanced-accordion-triggered", "ea", ContentTickerSliderr);
     };
 
     const swiperLoader = (swiperElement, swiperConfig) => {
@@ -137,5 +161,5 @@ ea.hooks.addAction("init", "ea", () => {
         });
     }
 
-    elementorFrontend.hooks.addAction("frontend/element_ready/eael-content-ticker.default", ContentTicker);
+    elementorFrontend.hooks.addAction("frontend/element_ready/eael-content-ticker.default", m_ContentTicker);
 });
