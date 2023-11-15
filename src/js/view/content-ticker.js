@@ -137,7 +137,7 @@ ea.hooks.addAction("init", "ea", () => {
             }
         }
 
-        ea.hooks.addAction("ea-toogle-triggered", "ea", ContentTickerSliderr);
+        ea.hooks.addAction("ea-toggle-triggered", "ea", ContentTickerSliderr);
         ea.hooks.addAction("ea-lightbox-triggered", "ea", ContentTickerSliderr);
         ea.hooks.addAction("ea-advanced-tabs-triggered", "ea", ContentTickerSliderr);
         ea.hooks.addAction("ea-advanced-accordion-triggered", "ea", ContentTickerSliderr);

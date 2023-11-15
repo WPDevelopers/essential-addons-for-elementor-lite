@@ -72,7 +72,7 @@ jQuery(window).on("elementor/frontend/init", function () {
         ea.hooks.addAction("ea-lightbox-triggered", "ea", FacebookGallery);
         ea.hooks.addAction("ea-advanced-tabs-triggered", "ea", FacebookGallery);
         ea.hooks.addAction("ea-advanced-accordion-triggered", "ea", FacebookGallery);
-        ea.hooks.addAction("ea-toogle-triggered", "ea", FacebookGallery);
+        ea.hooks.addAction("ea-toggle-triggered", "ea", FacebookGallery);
     };
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-facebook-feed.default",
