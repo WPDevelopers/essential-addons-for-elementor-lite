@@ -77,7 +77,7 @@ class Sphere_Photo_Viewer extends Widget_Base {
 		$this->add_control(
 			'ea_spv_caption',
 			[
-				'label'       => __( 'Caption', 'photo-sphere-viewer' ),
+				'label'       => __( 'Caption', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => __( 'Parc national du Mercantour <b>&copy; Damien Sorel</b>', 'essential-addons-for-elementor-lite' ),
 				'placeholder' => __( 'Type your title here', 'essential-addons-for-elementor-lite' ),
@@ -134,6 +134,18 @@ class Sphere_Photo_Viewer extends Widget_Base {
 			'ea_section_spv_options_settings',
 			[
 				'label' => esc_html__( 'Options', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_control(
+			'ea_spv_fisheye',
+			[
+				'label'        => __( 'Fisheye', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
 			]
 		);
 
@@ -249,6 +261,7 @@ class Sphere_Photo_Viewer extends Widget_Base {
 			'panorama'    => $settings['ea_spv_image']['url'],
 			'container'   => $container_id,
 			'description' => $settings['ea_spv_description'],
+			'fisheye'     => $settings['ea_spv_fisheye'] === 'yes',
 		];
 
 		if ( $settings['ea_spv_autorotate_switch'] === 'yes' ) {
