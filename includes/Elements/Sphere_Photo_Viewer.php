@@ -138,6 +138,24 @@ class Sphere_Photo_Viewer extends Widget_Base {
 		);
 
 		$this->add_control(
+			'ea_spv_zoom_lvl',
+			[
+				'label'     => esc_html__( 'Zoom Level', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+				'default'   => [
+					'size' => 20
+				],
+				'range'     => [
+					'px' => [
+						'min'  => 1,
+						'max'  => 100,
+						'step' => 1
+					],
+				],
+			]
+		);
+
+		$this->add_control(
 			'ea_spv_fisheye',
 			[
 				'label'        => __( 'Fisheye', 'essential-addons-for-elementor-lite' ),
@@ -257,11 +275,12 @@ class Sphere_Photo_Viewer extends Widget_Base {
 		$settings        = $this->get_settings_for_display();
 		$container_id    = "eael-psv-{$this->get_id()}";
 		$sphere_settings = [
-			'caption'     => $settings['ea_spv_caption'],
-			'panorama'    => $settings['ea_spv_image']['url'],
-			'container'   => $container_id,
-			'description' => $settings['ea_spv_description'],
-			'fisheye'     => $settings['ea_spv_fisheye'] === 'yes',
+			'caption'        => $settings['ea_spv_caption'],
+			'panorama'       => $settings['ea_spv_image']['url'],
+			'container'      => $container_id,
+			'description'    => $settings['ea_spv_description'],
+			'defaultZoomLvl' => empty( $settings['ea_spv_zoom_lvl']['size'] ) ? 20 : $settings['ea_spv_zoom_lvl']['size'],
+			'fisheye'        => $settings['ea_spv_fisheye'] === 'yes',
 		];
 
 		if ( $settings['ea_spv_autorotate_switch'] === 'yes' ) {
