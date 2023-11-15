@@ -297,7 +297,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 				});
 			}
 
-			ea.hooks.addAction("ea-toogle-triggered", "ea", FilterableGallery);
+			ea.hooks.addAction("ea-toggle-triggered", "ea", FilterableGallery);
 			ea.hooks.addAction("ea-lightbox-triggered", "ea", FilterableGallery);
 			ea.hooks.addAction("ea-advanced-tabs-triggered", "ea", FilterableGallery);
 			ea.hooks.addAction("ea-advanced-accordion-triggered", "ea", FilterableGallery);
