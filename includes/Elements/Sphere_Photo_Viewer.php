@@ -136,17 +136,82 @@ class Sphere_Photo_Viewer extends Widget_Base {
 				'label' => esc_html__( 'Options', 'essential-addons-for-elementor-lite' ),
 			]
 		);
+
 		$this->add_control(
 			'ea_spv_autorotate_switch',
 			[
-				'label'        => esc_html__( 'Autorotate', 'textdomain' ),
+				'label'        => esc_html__( 'Autorotate', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'On', 'textdomain' ),
-				'label_off'    => esc_html__( 'Off', 'textdomain' ),
+				'label_on'     => esc_html__( 'On', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Off', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 				'default'      => 'yes'
 			]
 		);
+
+		$this->add_control(
+			'ea_spv_autorotate_delay',
+			[
+				'label'     => esc_html__( 'Auto Rotate Delay', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+				'default'   => [
+					'size' => 100
+				],
+				'range'     => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 5000,
+						'step' => 100
+					],
+				],
+				'condition' => [
+					'ea_spv_autorotate_switch' => 'yes'
+				]
+			]
+		);
+
+		$this->add_control(
+			'ea_spv_autorotate_speed',
+			[
+				'label'     => esc_html__( 'Auto Rotate Speed', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+				'default'   => [
+					'size' => .2
+				],
+				'range'     => [
+					'px' => [
+						'min'  => .01,
+						'max'  => 2,
+						'step' => .01
+					],
+				],
+				'condition' => [
+					'ea_spv_autorotate_switch' => 'yes'
+				]
+			]
+		);
+
+		$this->add_control(
+			'ea_spv_autorotate_pitch',
+			[
+				'label'     => esc_html__( 'Auto Rotate Pitch', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+				'default'   => [
+					'size' => 0
+				],
+				'range'     => [
+					'px' => [
+						'min'  => - 90,
+						'max'  => 90,
+						'step' => 1
+					],
+				],
+				'condition' => [
+					'ea_spv_autorotate_switch' => 'yes'
+				]
+			]
+		);
+
 		$this->end_controls_section();
 
 		/**
@@ -180,17 +245,17 @@ class Sphere_Photo_Viewer extends Widget_Base {
 		$settings        = $this->get_settings_for_display();
 		$container_id    = "eael-psv-{$this->get_id()}";
 		$sphere_settings = [
-			'caption'         => $settings['ea_spv_caption'],
-			'panorama'        => $settings['ea_spv_image']['url'],
-			'container'       => $container_id,
-			'description'     => $settings['ea_spv_description'],
-			'autorotateDelay' => 100,
+			'caption'     => $settings['ea_spv_caption'],
+			'panorama'    => $settings['ea_spv_image']['url'],
+			'container'   => $container_id,
+			'description' => $settings['ea_spv_description'],
 		];
 
 		if ( $settings['ea_spv_autorotate_switch'] === 'yes' ) {
 			$sphere_settings['plugins'][0][0] = [
-				'autostartDelay'  => 1000,
-				'autorotatePitch' => '5deg'
+				'autostartDelay'  => empty( $settings['ea_spv_autorotate_delay']['size'] ) ? 100 : $settings['ea_spv_autorotate_delay']['size'],
+				'autorotatePitch' => empty( $settings['ea_spv_autorotate_pitch']['size'] ) ? '5deg' : $settings['ea_spv_autorotate_pitch']['size'] . 'deg',
+				'autorotateSpeed' => empty( $settings['ea_spv_autorotate_speed']['size'] ) ? .2 : $settings['ea_spv_autorotate_speed']['size']
 			];
 		}
 
