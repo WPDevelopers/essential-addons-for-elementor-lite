@@ -6277,6 +6277,10 @@ msgstr ""
 msgid "Please provide a valid wallet address!"
 msgstr ""
 
+#: ../includes/Elements/NFT_Gallery.php:2928
+msgid "Please insert correct API Key"
+msgstr ""
+
 #: ../includes/Elements/NinjaForms.php:27, ../includes/Elements/NinjaForms.php:94
 msgid "Ninja Forms"
 msgstr ""
