@@ -84,6 +84,25 @@ jQuery(window).on("elementor/frontend/init", function () {
 							return item.el.parents('.gallery-item-caption-over').find('.fg-item-title').html() || item.el.parents('.gallery-item-caption-wrap').find('.fg-item-title').html() || item.el.parents('.eael-filterable-gallery-item-wrap').find('.fg-item-title').html();
 						}
 					}
+				},
+				iframe: {
+					markup: `<div class="mfp-iframe-scaler">
+								<div class="mfp-close"></div>
+								<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>
+								<div class="mfp-title eael-privacy-message"></div>
+							</div>`
+				},
+				callbacks: {
+					markupParse: function(template, values, item) {
+						if( item.el.attr('title') !== "" ) {
+							values.title = item.el.attr('title');
+						}
+					},
+					open: function() {
+						setTimeout(() => {
+							$(".eael-privacy-message").remove();
+						}, 5000);
+					},
 				}
 			});
 
