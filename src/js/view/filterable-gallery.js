@@ -197,7 +197,6 @@ jQuery(window).on("elementor/frontend/init", function () {
 
 			// layout gal, on click tabs
 			$isotope_gallery.on("arrangeComplete", function () {
-				$isotope_gallery.isotope("layout");
 				let notFoundDiv = $('#eael-fg-no-items-found', $scope),
 					minHeight = notFoundDiv.css('font-size');
 
