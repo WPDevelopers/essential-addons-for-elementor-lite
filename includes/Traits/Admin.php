@@ -153,6 +153,7 @@ trait Admin {
         self::$cache_bank = CacheBank::get_instance();
 
         NoticeRemover::get_instance('1.0.0');
+        NoticeRemover::get_instance('1.0.0', '\WPDeveloper\BetterDocs\Dependencies\PriyoMukul\WPNotice\Notices');
 
         $notices = new Notices( [
 			'id'             => 'essential-addons-for-elementor',
