@@ -1,4 +1,20 @@
 /* review notice */
+
+#wpnotice-essential-addons-for-elementor-black_friday_notice {
+    display: flex !important;
+}
+
+#wpnotice-essential-addons-for-elementor-black_friday_notice .wpnotice-content-wrapper {
+    padding: 0 !important;
+}
+#wpnotice-essential-addons-for-elementor-black_friday_notice .wpnotice-content-wrapper p {
+    margin-bottom: 0;
+}
+
+.wpnotice-content-wrapper .button {
+    text-transform: capitalize;
+}
+
 .wpdeveloper-review-notice {
     padding: 10px;
     background-color: #fff;
