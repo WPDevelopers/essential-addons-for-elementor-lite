@@ -103,7 +103,7 @@ class Notice extends Base {
 		$links = $this->get_links();
 
 		// Print the notice.
-		printf( '<div style="display: flex; flex-wrap: wrap; align-items: center;" id="%1$s" class="%2$s">%3$s<div class="wpnotice-content-wrapper">%4$s%5$s</div></div>', 'wpnotice-' . esc_attr( $this->app->app ) . '-' . esc_attr( $this->id ), // The ID.
+		printf( '<div style="display: flex; flex-wrap: nowrap; gap: 15px; align-items: center;" id="%1$s" class="%2$s">%3$s<div class="wpnotice-content-wrapper">%4$s%5$s</div></div>', 'wpnotice-' . esc_attr( $this->app->app ) . '-' . esc_attr( $this->id ), // The ID.
 			esc_attr( $this->get_classes() ), // The classes.
 			! empty( $content['thumbnail'] ) ? $this->get_thumbnail( $content['thumbnail'] ) : '', ! empty( $content['html'] ) ? $content['html'] : $content, ! empty( $links ) ? $this->links( $links ) : '' );
 	}

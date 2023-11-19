@@ -12,6 +12,7 @@ use PriyoMukul\WPNotice\Utils\Helper;
  * @property $notices []
  * @property $queue []
  * @property $id string
+ * @property $stylesheet_url string
  */
 final class Notices extends Base {
 	use Helper;
@@ -100,6 +101,7 @@ final class Notices extends Base {
 			}
 
 			$this->options = wp_parse_args( $args, $this->options );
+			$this->scripts = $this->stylesheet_url;
 		}
 
 		$this->system_id = ! empty( $args['id'] ) ? $args['id'] . '-notice-system' : 'wpnotice_system';
