@@ -54,10 +54,7 @@ trait Ajax_Handler {
 		add_action( 'wp_ajax_eael_product_gallery', [ $this, 'ajax_eael_product_gallery' ] );
 
 		add_action( 'wp_ajax_eael_select2_search_post', [ $this, 'select2_ajax_posts_filter_autocomplete' ] );
-		add_action( 'wp_ajax_nopriv_eael_select2_search_post', [ $this, 'select2_ajax_posts_filter_autocomplete' ] );
-
 		add_action( 'wp_ajax_eael_select2_get_title', [ $this, 'select2_ajax_get_posts_value_titles' ] );
-		add_action( 'wp_ajax_nopriv_eael_select2_get_title', [ $this, 'select2_ajax_get_posts_value_titles' ] );
 
 		if ( is_admin() ) {
 			add_action( 'wp_ajax_save_settings_with_ajax', array( $this, 'save_settings' ) );
@@ -162,7 +159,9 @@ trait Ajax_Handler {
 				unset( $args['offset'] );
 			}
 		}
-
+		if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' ) {
+			do_action( 'eael_woo_before_product_loop', $settings['eael_product_grid_style_preset'] );
+		}
 		// ensure control name compatibility to old code if it is post block
 		if ( $class === '\Essential_Addons_Elementor\Pro\Elements\Post_Block' ) {
 			$settings ['post_block_hover_animation']    = $settings['eael_post_block_hover_animation'];
@@ -793,6 +792,11 @@ trait Ajax_Handler {
 				$post_list = wp_list_pluck( get_terms( $args ), 'name', 'term_id' );
 				break;
 			case 'user':
+				if ( ! current_user_can( 'list_users' ) ) {
+					$post_list = [];
+					break;
+				}
+
 				$users = [];
 
 				foreach ( get_users( [ 'search' => "*{$search}*" ] ) as $user ) {
