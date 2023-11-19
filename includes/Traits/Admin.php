@@ -289,7 +289,7 @@ trait Admin {
 			]
 		);
 
-		$b_message            = '<p style="margin-top: 0; margin-bottom: 10px;">Black Friday Sale: Unlock access to <strong>90+ advanced Elementor widgets</strong> with up to 40% discounts 🎁</p><p><a class="button button-primary" href="https://wpdeveloper.com/upgrade/eae-bfcm" target="_blank">Upgrade to pro</a> <button data-dismiss="true" class="dismiss-btn button button-link">I don’t want to save money</button></p>';
+		$b_message            = '<p style="margin-top: 0; margin-bottom: 10px;">Black Friday Sale: Unlock access to <strong>90+ advanced Elementor widgets</strong> with up to 40% discounts 🎁</p><p><a class="button button-primary" href="https://wpdeveloper.com/upgrade/ea-bfcm" target="_blank">Upgrade to pro</a> <button data-dismiss="true" class="dismiss-btn button button-link">I don’t want to save money</button></p>';
 		$_black_friday_notice = [
 			'thumbnail' => plugins_url( 'assets/admin/images/full-logo.svg', EAEL_PLUGIN_BASENAME ),
 			'html'      => $b_message,
