@@ -192,3 +192,8 @@ span.coupon-code {
 .notice-essential-addons-for-elementor-black_friday_notice .button {
     margin-right: 10px;
 }
+
+.notice-essential-addons-for-elementor-black_friday_notice .gift-icon {
+    font-size: 20px;
+    vertical-align: middle;
+}
