@@ -7,7 +7,7 @@ use function property_exists;
 class Storage extends Base {
 	private $id          = 'wpnotice';
 	private $type        = 'options';
-	private $version     = '1.0.0';
+	private $version     = '1.1.0';
 	private $storage_key = 'notices';
 
 	public function __construct( $args ) {

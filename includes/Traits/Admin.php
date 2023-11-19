@@ -234,7 +234,7 @@ trait Admin {
 			'id'             => 'essential-addons-for-elementor',
 			'storage_key'    => 'notices',
 			'lifetime'       => 3,
-			'stylesheet_url' => '',
+			'stylesheet_url' => esc_url_raw( EAEL_PLUGIN_URL . 'assets/admin/css/notice.css' ),
 			'priority'       => 1
 		] );
 
@@ -244,7 +244,7 @@ trait Admin {
 			'html'      => '<p>' . $review_notice . '</p>',
 			'links'     => [
 				'later'            => array(
-					'link'       => 'https://wordpress.org/plugins/essential-addons-for-elementor-lite/#reviews',
+					'link'       => 'https://wpdeveloper.com/review-essential-addons-elementor',
 					'target'     => '_blank',
 					'label'      => __( 'Ok, you deserve it!', 'essential-addons-for-elementor-lite' ),
 					'icon_class' => 'dashicons dashicons-external',
@@ -282,14 +282,14 @@ trait Admin {
 			'review',
 			$_review_notice,
 			[
-				'start'       => $notices->strtotime( '+20 day' ),
+				'start'       => $notices->strtotime( '+7 day' ),
 				'recurrence'  => 30,
 				'refresh'     => EAEL_PLUGIN_VERSION,
 				'dismissible' => true,
 			]
 		);
 
-		$b_message            = '<p style="margin-top: 0; margin-bottom: 10px;">Black Friday Sale: Unlock access to <strong>90+ advanced Elementor widgets</strong> with up to 40% discounts 🎁</p><a class="button button-primary" href="https://wpdeveloper.com/upgrade/eae-bfcm" target="_blank">Upgrade to pro</a> <button data-dismiss="true" class="dismiss-btn button button-link">I don’t want to save money</button>';
+		$b_message            = '<p style="margin-top: 0; margin-bottom: 10px;">Black Friday Sale: Unlock access to <strong>90+ advanced Elementor widgets</strong> with up to 40% discounts 🎁</p><p><a class="button button-primary" href="https://wpdeveloper.com/upgrade/eae-bfcm" target="_blank">Upgrade to pro</a> <button data-dismiss="true" class="dismiss-btn button button-link">I don’t want to save money</button></p>';
 		$_black_friday_notice = [
 			'thumbnail' => plugins_url( 'assets/admin/images/full-logo.svg', EAEL_PLUGIN_BASENAME ),
 			'html'      => $b_message,
@@ -304,7 +304,7 @@ trait Admin {
 				'dismissible' => true,
 				'refresh'     => EAEL_PLUGIN_VERSION,
 				"expire"      => strtotime( '11:59:59pm 2nd December, 2023' ),
-				'display_if'  => ! is_plugin_active( 'essential-addons-elementor/essential_adons_elementor.php' )
+				'display_if'  => ! $this->pro_enabled,
 			]
 		);
 
