@@ -170,4 +170,9 @@ span.coupon-code {
 
 .notice-essential-addons-for-elementor-black_friday_notice {
     border-left-color: #3557FF;
+    padding: 10px;
+}
+
+.notice-essential-addons-for-elementor-black_friday_notice.button {
+    margin-right: 10px;
 }
