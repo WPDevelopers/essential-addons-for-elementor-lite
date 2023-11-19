@@ -44,3 +44,8 @@ src
 build
 postcss.config.js
 .wordpress-org
+
+vendor/priyomukul/wp-notice/.editorconfig
+vendor/priyomukul/wp-notice/.gitignore
+vendor/priyomukul/wp-notice/composer.json
+vendor/priyomukul/wp-notice/README.md
