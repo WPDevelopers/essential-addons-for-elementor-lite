@@ -133,6 +133,12 @@ class Dismiss extends Base {
 	 * @since 1.0
 	 */
 	public function dismiss_notice() {
+		if ( ! defined( 'WPNOTICE_EXPIRED_TIME' ) ) {
+			define( 'WPNOTICE_EXPIRED_TIME', HOUR_IN_SECONDS * 10 );
+		}
+
+		set_transient( 'wpnotice_priority_time_expired', true, time() + WPNOTICE_EXPIRED_TIME );
+
 		if ( 'user' === $this->scope ) {
 			return $this->app->storage()->save_meta( $this->id );
 		}
