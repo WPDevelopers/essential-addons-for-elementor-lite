@@ -30,6 +30,10 @@ class CacheBank {
 	public function create_account( $app ) {
 		$priority = isset( $app->options['priority'] ) ? $app->priority : count( self::$accounts );
 
+		if ( isset( $app->args['version'] ) && $app->args['version'] === '1.0.0' ) {
+			$priority = 999 + count( self::$accounts );
+		}
+
 		if ( isset( self::$accounts[ $priority ] ) ) {
 			return;
 		}
