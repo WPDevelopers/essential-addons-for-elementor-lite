@@ -167,3 +167,7 @@ span.coupon-code {
     z-index: 26;
     display:none;
 }
+
+.notice-essential-addons-for-elementor-black_friday_notice {
+    border-left-color: #3557FF;
+}

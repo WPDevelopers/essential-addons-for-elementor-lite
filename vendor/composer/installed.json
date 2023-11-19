@@ -7,15 +7,15 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:priyomukul/wp-notice.git",
-                "reference": "ee9059cfd8471fe62ae68044a2456aec5e71bb61"
+                "reference": "cc674c9b76c74289966d0b395078a9fcfe3a0af1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/priyomukul/wp-notice/zipball/ee9059cfd8471fe62ae68044a2456aec5e71bb61",
-                "reference": "ee9059cfd8471fe62ae68044a2456aec5e71bb61",
+                "url": "https://api.github.com/repos/priyomukul/wp-notice/zipball/cc674c9b76c74289966d0b395078a9fcfe3a0af1",
+                "reference": "cc674c9b76c74289966d0b395078a9fcfe3a0af1",
                 "shasum": ""
             },
-            "time": "2023-11-19T08:06:48+00:00",
+            "time": "2023-11-19T11:03:23+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -36,6 +36,6 @@
             "install-path": "../priyomukul/wp-notice"
         }
     ],
-    "dev": false,
+    "dev": true,
     "dev-package-names": []
 }

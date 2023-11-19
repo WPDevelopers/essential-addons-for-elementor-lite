@@ -11,6 +11,8 @@ class CacheBank {
 
 	private static $notices = [];
 
+	private $priority_key = 'wpnotice_priority_time_expired';
+
 	public static function get_instance() {
 		if ( self::$instance === null ) {
 			self::$instance = new self();
@@ -24,8 +26,14 @@ class CacheBank {
 		add_action( 'admin_footer', [ $this, 'scripts' ] );
 	}
 
+
 	public function create_account( $app ) {
-		$priority                    = isset( $app->priority ) ? $app->priority : count( self::$accounts );
+		$priority = isset( $app->options['priority'] ) ? $app->priority : count( self::$accounts );
+
+		if ( isset( self::$accounts[ $priority ] ) ) {
+			return;
+		}
+
 		self::$accounts[ $priority ] = $app;
 
 		ksort( self::$accounts );
@@ -79,6 +87,10 @@ class CacheBank {
 	}
 
 	public function notices() {
+		if ( get_transient( $this->priority_key ) ) {
+			return;
+		}
+
 		$notice = $this->get();
 
 		if ( $notice instanceof Notices ) {
@@ -87,6 +99,10 @@ class CacheBank {
 	}
 
 	public function scripts() {
+		if ( get_transient( $this->priority_key ) ) {
+			return;
+		}
+
 		$notice = $this->get();
 
 		if ( $notice instanceof Notices ) {
@@ -121,4 +137,6 @@ class CacheBank {
 
 		return $_sorted_queue;
 	}
+
+
 }
