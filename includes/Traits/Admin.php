@@ -154,82 +154,6 @@ trait Admin {
 
         NoticeRemover::get_instance('1.0.0');
 
-
-        // $notice = new WPDeveloper_Notice( EAEL_PLUGIN_BASENAME, EAEL_PLUGIN_VERSION );
-        /**
-         * Current Notice End Time.
-         * Notice will dismiss in 3 days if user does nothing.
-         */
-        // $notice->cne_time = '3 Day';
-        /**
-         * Current Notice Maybe Later Time.
-         * Notice will show again in 7 days
-         */
-        // $notice->maybe_later_time = '21 Day';
-
-        // $scheme        = ( parse_url( $_SERVER[ 'REQUEST_URI' ], PHP_URL_QUERY ) ) ? '&' : '?';
-        // $url           = $_SERVER[ 'REQUEST_URI' ] . $scheme;
-        // $notice->links = [
-        //     'review' => array(
-        //         'later'            => array(
-        //             'link'       => 'https://wpdeveloper.com/review-essential-addons-elementor',
-        //             'target'     => '_blank',
-        //             'label'      => __( 'Ok, you deserve it!', 'essential-addons-for-elementor-lite' ),
-        //             'icon_class' => 'dashicons dashicons-external',
-        //         ),
-        //         'allready'         => array(
-        //             'link'       => esc_url( $url ),
-        //             'label'      => __( 'I already did', 'essential-addons-for-elementor-lite' ),
-        //             'icon_class' => 'dashicons dashicons-smiley',
-        //             'data_args'  => [
-        //                 'dismiss' => true,
-        //             ],
-        //         ),
-        //         'maybe_later'      => array(
-        //             'link'       => esc_url( $url ),
-        //             'label'      => __( 'Maybe Later', 'essential-addons-for-elementor-lite' ),
-        //             'icon_class' => 'dashicons dashicons-calendar-alt',
-        //             'data_args'  => [
-        //                 'later' => true,
-        //             ],
-        //         ),
-        //         'support'          => array(
-        //             'link'       => 'https://wpdeveloper.com/support',
-        //             'label'      => __( 'I need help', 'essential-addons-for-elementor-lite' ),
-        //             'icon_class' => 'dashicons dashicons-sos',
-        //         ),
-        //         'never_show_again' => array(
-        //             'link'       => esc_url( $url ),
-        //             'label'      => __( 'Never show again', 'essential-addons-for-elementor-lite' ),
-        //             'icon_class' => 'dashicons dashicons-dismiss',
-        //             'data_args'  => [
-        //                 'dismiss' => true,
-        //             ],
-        //         ),
-        //     ),
-        // ];
-
-        /**
-         * This is review message and thumbnail.
-         */
-        // $notice->message( 'review', '<p>' .  . '</p>' );
-        // $notice->thumbnail( 'review', plugins_url( 'assets/admin/images/icon-ea-logo.svg', EAEL_PLUGIN_BASENAME ) );
-        /**
-         * This is upsale notice settings
-         * classes for wrapper,
-         * Message message for showing.
-         */
-
-        // Update Notice For PRO Version
-        // if ( $this->pro_enabled && \version_compare( EAEL_PRO_PLUGIN_VERSION, '4.0.0', '<' ) ) {
-        //     $notice->classes( 'update', 'notice is-dismissible ' );
-        //     $notice->message( 'update', '<p>' . __( 'You are using an incompatible version of Essential Addons PRO. Please update to v4.0.0+. If you do not see automatic update, <a href="https://essential-addons.com/elementor/docs/manually-update-essential-addons-pro/" target="_blank">Follow manual update guide.</a>', 'essential-addons-for-elementor-lite' ) . '</p>' );
-        //     $notice->thumbnail( 'update', plugins_url( 'assets/admin/images/icon-ea-logo.svg', EAEL_PLUGIN_BASENAME ) );
-        // }
-
-
-        // $notice->init();
-
         $notices = new Notices( [
 			'id'             => 'essential-addons-for-elementor',
 			'storage_key'    => 'notices',
@@ -289,7 +213,7 @@ trait Admin {
 			]
 		);
 
-		$b_message            = '<p style="margin-top: 0; margin-bottom: 10px;">Black Friday Sale: Unlock access to <strong>90+ advanced Elementor widgets</strong> with up to 40% discounts 🎁</p><p><a class="button button-primary" href="https://wpdeveloper.com/upgrade/ea-bfcm" target="_blank">Upgrade to pro</a> <button data-dismiss="true" class="dismiss-btn button button-link">I don’t want to save money</button></p>';
+		$b_message            = '<p style="margin: 0;">Black Friday Sale: Unlock access to <strong>90+ advanced Elementor widgets</strong> with up to 40% discounts <span class="gift-icon">🎁</span></p><p><a class="button button-primary" href="https://wpdeveloper.com/upgrade/ea-bfcm" target="_blank">Upgrade to pro</a> <button data-dismiss="true" class="dismiss-btn button button-link">I don’t want to save money</button></p>';
 		$_black_friday_notice = [
 			'thumbnail' => plugins_url( 'assets/admin/images/full-logo.svg', EAEL_PLUGIN_BASENAME ),
 			'html'      => $b_message,
