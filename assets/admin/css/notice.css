@@ -193,3 +193,13 @@ span.coupon-code {
     font-size: 20px;
     vertical-align: middle;
 }
+
+#wpnotice-essential-addons-for-elementor-review {
+    display: grid !important;
+    grid-template-columns: 80px 1fr !important;
+    padding: 10px;
+}
+
+#wpnotice-essential-addons-for-elementor-review a {
+    text-decoration: none;
+}
