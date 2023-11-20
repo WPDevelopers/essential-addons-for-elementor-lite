@@ -160,6 +160,7 @@ trait Admin {
 			'storage_key'    => 'notices',
 			'lifetime'       => 3,
 			'stylesheet_url' => esc_url_raw( EAEL_PLUGIN_URL . 'assets/admin/css/notice.css' ),
+			'styles' => esc_url_raw( EAEL_PLUGIN_URL . 'assets/admin/css/notice.css' ),
 			'priority'       => 1
 		] );
 
