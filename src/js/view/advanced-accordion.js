@@ -68,8 +68,11 @@ ea.hooks.addAction("init", "ea", () => {
 						$this.next().slideDown($accordionSpeed);
 					}
 				}
-				ea.hooks.doAction("widgets.reinit",$this.parent());
-				ea.hooks.doAction("ea-advanced-accordion-triggered", $this.next());
+				
+				setTimeout(function(){
+					ea.hooks.doAction("widgets.reinit",$this.parent());
+					ea.hooks.doAction("ea-advanced-accordion-triggered", $this.next());
+				},50);
 			});
 
 			$scope.on('keydown', '.eael-accordion-header', function (e) {
