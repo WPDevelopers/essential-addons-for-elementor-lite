@@ -159,7 +159,9 @@ trait Ajax_Handler {
 				unset( $args['offset'] );
 			}
 		}
-
+		if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' ) {
+			do_action( 'eael_woo_before_product_loop', $settings['eael_product_grid_style_preset'] );
+		}
 		// ensure control name compatibility to old code if it is post block
 		if ( $class === '\Essential_Addons_Elementor\Pro\Elements\Post_Block' ) {
 			$settings ['post_block_hover_animation']    = $settings['eael_post_block_hover_animation'];
