@@ -4,6 +4,7 @@ namespace PriyoMukul\WPNotice\Utils;
 
 use function property_exists;
 
+#[\AllowDynamicProperties]
 class Storage extends Base {
 	private $id          = 'wpnotice';
 	private $type        = 'options';

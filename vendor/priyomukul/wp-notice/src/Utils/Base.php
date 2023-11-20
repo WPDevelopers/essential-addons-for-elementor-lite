@@ -2,6 +2,7 @@
 
 namespace PriyoMukul\WPNotice\Utils;
 
+#[\AllowDynamicProperties]
 abstract class Base {
 	/**
 	 * Holds the plugin instance.
@@ -17,17 +18,17 @@ abstract class Base {
 	/**
 	 * Sets up a single instance of the plugin.
 	 *
+	 * @return static An instance of the class.
 	 * @since 1.0.0
 	 * @access public
 	 * @static
 	 *
-	 * @return static An instance of the class.
 	 */
 	public static function get_instance( ...$args ) {
-		$module = get_called_class();
+		$module    = get_called_class();
 		$module_id = $module;
 
-		if( $module === 'PriyoMukul\WPNotice\Notice' || $module === 'PriyoMukul\WPNotice\Dismiss' ) {
+		if ( $module === 'PriyoMukul\WPNotice\Notice' || $module === 'PriyoMukul\WPNotice\Dismiss' ) {
 			$module_id = $module . '::' . $args[0];
 		}
 
@@ -38,7 +39,7 @@ abstract class Base {
 		return self::$instances[ $module_id ];
 	}
 
-	protected function database( $args = null ){
+	protected function database( $args = null ) {
 		return new Storage( $args );
 	}
 }
