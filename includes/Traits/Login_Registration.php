@@ -524,7 +524,7 @@ trait Login_Registration {
 			$register_actions    = ! empty( $settings['register_action'] ) ? (array) $settings['register_action'] : [];
 			$custom_redirect_url = ! empty( $settings['register_redirect_url']['url'] ) ? esc_url_raw( $settings['register_redirect_url']['url'] ) : '/';
 			if ( ! empty( $settings['register_user_role'] ) ) {
-				$user_data['role'] = strtolower( sanitize_text_field( $settings['register_user_role'] ) );
+				$user_data['role'] = sanitize_text_field( $settings['register_user_role'] );
 			}
 
 			if ( ! empty( $user_data['role'] ) && $user_data['role'] === 'administrator' ) {
