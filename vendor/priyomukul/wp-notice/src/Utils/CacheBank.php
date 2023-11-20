@@ -4,6 +4,7 @@ namespace PriyoMukul\WPNotice\Utils;
 
 use PriyoMukul\WPNotice\Notices;
 
+#[\AllowDynamicProperties]
 class CacheBank {
 	private static $instance;
 

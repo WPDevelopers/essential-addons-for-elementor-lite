@@ -14,6 +14,7 @@ use PriyoMukul\WPNotice\Utils\Helper;
  * @property $id string
  * @property $stylesheet_url string
  */
+#[\AllowDynamicProperties]
 final class Notices extends Base {
 	use Helper;
 

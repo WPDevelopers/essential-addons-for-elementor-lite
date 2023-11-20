@@ -7,6 +7,7 @@ use PriyoMukul\WPNotice\Utils\Helper;
 use WP_Screen;
 use function property_exists;
 
+#[\AllowDynamicProperties]
 class Notice extends Base {
 	use Helper;
 
