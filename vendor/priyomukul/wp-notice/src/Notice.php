@@ -247,11 +247,6 @@ class Notice extends Base {
 	 * @since 1.0
 	 */
 	private function is_screen() {
-		// If screen is empty we want this shown on all screens.
-		if ( empty( $this->options['screens'] ) ) {
-			return true;
-		}
-
 		// Make sure the get_current_screen function exists.
 		if ( ! function_exists( 'get_current_screen' ) ) {
 			require_once ABSPATH . 'wp-admin/includes/screen.php';
@@ -259,6 +254,15 @@ class Notice extends Base {
 
 		/** @var WP_Screen $current_screen */
 		$current_screen = get_current_screen();
+
+		if ( $current_screen->id === 'update' ) {
+			return false;
+		}
+
+		// If screen is empty we want this shown on all screens.
+		if ( empty( $this->options['screens'] ) ) {
+			return true;
+		}
 
 		return ( in_array( $current_screen->id, $this->options['screens'], true ) );
 	}
