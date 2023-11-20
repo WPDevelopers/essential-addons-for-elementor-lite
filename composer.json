@@ -1,0 +1,18 @@
+{
+    "name": "mukul/essential-addons-for-elementor-lite",
+    "authors": [
+        {
+            "name": "Priyo Mukul",
+            "email": "17237437+priyomukul@users.noreply.github.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/priyomukul/wp-notice"
+        }
+    ],
+    "require": {
+        "priyomukul/wp-notice": "v2.x-dev"
+    }
+}
