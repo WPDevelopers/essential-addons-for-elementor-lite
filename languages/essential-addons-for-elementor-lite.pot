@@ -257,7 +257,7 @@ msgstr ""
 msgid "Add Team Members & Collaborate On Cloud With Templately WorkSpace"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:378, ../includes/Traits/Admin.php:368, ../includes/Traits/Admin.php:503, ../includes/Traits/Helper.php:577, ../includes/templates/admin/integrations.php:83
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:378, ../includes/Traits/Admin.php:294, ../includes/Traits/Admin.php:429, ../includes/Traits/Helper.php:577, ../includes/templates/admin/integrations.php:83
 msgid "Activate"
 msgstr ""
 
@@ -9194,55 +9194,55 @@ msgstr ""
 msgid "Go Premium"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:241
+#: ../includes/Traits/Admin.php:167
 msgid "We hope you're enjoying Essential Addons for Elementor! Could you please do us a BIG favor and give it a 5-star rating on WordPress to help us spread the word and boost our motivation?"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:249
+#: ../includes/Traits/Admin.php:175
 msgid "Ok, you deserve it!"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:253
+#: ../includes/Traits/Admin.php:179
 msgid "I already did"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:260
+#: ../includes/Traits/Admin.php:186
 msgid "Maybe Later"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:268
+#: ../includes/Traits/Admin.php:194
 msgid "I need help"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:272
+#: ../includes/Traits/Admin.php:198
 msgid "Never show again"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:368, ../includes/Traits/Admin.php:503
+#: ../includes/Traits/Admin.php:294, ../includes/Traits/Admin.php:429
 msgid "Install Essential Blocks"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:377, ../includes/Traits/Admin.php:556
+#: ../includes/Traits/Admin.php:303, ../includes/Traits/Admin.php:482
 msgid "Using Gutenberg? Check out Essential Blocks!"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:378, ../includes/Traits/Admin.php:557
+#: ../includes/Traits/Admin.php:304, ../includes/Traits/Admin.php:483
 msgid "Are you using the Gutenberg Editor for your website? Then try out Essential Blocks for Gutenberg, and explore 40+ unique blocks to make your web design experience in WordPress even more powerful. 🚀"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:379, ../includes/Traits/Admin.php:558
+#: ../includes/Traits/Admin.php:305, ../includes/Traits/Admin.php:484
 msgid "For more information, <a href=\"https://essential-blocks.com/demo/\" target=\"_blank\">check out the demo here</a>."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:677, ../includes/Traits/Admin.php:688
+#: ../includes/Traits/Admin.php:603, ../includes/Traits/Admin.php:614
 msgid "You are not allowed to do this action"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:738
+#: ../includes/Traits/Admin.php:664
 msgid "<strong>🎉 Black Friday Exclusive:</strong> SAVE up to 40% & access to Essential Addons Pro features."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:740
+#: ../includes/Traits/Admin.php:666
 msgid "Grab The Offer"
 msgstr ""
 
