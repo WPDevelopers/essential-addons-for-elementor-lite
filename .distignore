@@ -40,7 +40,7 @@ node_modules
 *.sql
 *.tar.gz
 *.zip
-src
+/src
 build
 postcss.config.js
 .wordpress-org
