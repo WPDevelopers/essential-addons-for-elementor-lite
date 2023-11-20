@@ -3,7 +3,7 @@
         'name' => 'mukul/essential-addons-for-elementor-lite',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'b497476b9fc845093168e6fd876fb94f544d0666',
+        'reference' => '8d12f8f8bff2dfee009ac667951a26ca2363d730',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'mukul/essential-addons-for-elementor-lite' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'b497476b9fc845093168e6fd876fb94f544d0666',
+            'reference' => '8d12f8f8bff2dfee009ac667951a26ca2363d730',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -22,7 +22,7 @@
         'priyomukul/wp-notice' => array(
             'pretty_version' => 'v2.x-dev',
             'version' => '2.9999999.9999999.9999999-dev',
-            'reference' => '900b707c690b44b5f799fcc11b93099851da0afa',
+            'reference' => '565a03535acedd33d51b55e3155308405030c938',
             'type' => 'library',
             'install_path' => __DIR__ . '/../priyomukul/wp-notice',
             'aliases' => array(),
