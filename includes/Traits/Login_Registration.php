@@ -527,7 +527,7 @@ trait Login_Registration {
 				$user_data['role'] = sanitize_text_field( $settings['register_user_role'] );
 			}
 
-			if ( ! empty( $user_data['role'] ) && $user_data['role'] === 'administrator' ) {
+			if ( ! empty( $user_data['role'] ) && strtolower( $user_data['role'] ) === 'administrator' ) {
 				$err_msg = __( 'Invalid Role!', 'essential-addons-for-elementor-lite' );
 
 				if ( $ajax ) {
