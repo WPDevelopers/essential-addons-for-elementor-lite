@@ -475,7 +475,7 @@ class Adv_Tabs extends Widget_Base
             [
                 'label' => __('Title Min Width', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
-                'size_units' => ['px', 'em'],
+                'size_units' => ['px', 'em', '%'],
                 'range' => [
                     'px' => [
                         'min' => 0,
@@ -487,9 +487,13 @@ class Adv_Tabs extends Widget_Base
                         'max' => 50,
                         'step' => 1,
                     ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-advance-tabs.eael-tabs-vertical > .eael-tabs-nav > ul' => 'min-width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-advance-tabs.eael-tabs-vertical > .eael-tabs-nav' => 'min-width: {{SIZE}}{{UNIT}};',
                 ],
                 'condition' => [
                     'eael_adv_tab_layout' => 'eael-tabs-vertical',
@@ -552,7 +556,7 @@ class Adv_Tabs extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} > .elementor-widget-container > .eael-advance-tabs > .eael-tabs-nav ul li' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -563,7 +567,7 @@ class Adv_Tabs extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} > .elementor-widget-container > .eael-advance-tabs > .eael-tabs-nav ul li' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -926,7 +930,7 @@ class Adv_Tabs extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#444',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-advance-tabs:not(.eael-tabs-vertical) .eael-tabs-nav > ul li:after' => 'border-top-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-advance-tabs:not(.eael-tabs-vertical) > .eael-tabs-nav > ul li:after' => 'border-top-color: {{VALUE}};',
                     '{{WRAPPER}} .eael-advance-tabs.eael-tabs-vertical > .eael-tabs-nav > ul li:after' => 'border-left-color: {{VALUE}};',
                 ],
                 'condition' => [
@@ -1001,7 +1005,7 @@ class Adv_Tabs extends Widget_Base
         $this->add_render_attribute('eael_tab_icon_position', 'role', 'tablist'); 
         ?>
         <div <?php echo $this->get_render_attribute_string('eael_tab_wrapper'); ?>>
-            <div class="eael-tabs-nav">
+            <div class="eael-tabs-nav" role="tablist">
                 <ul <?php echo $this->get_render_attribute_string('eael_tab_icon_position'); ?>>
                     <?php foreach ($settings['eael_adv_tabs_tab'] as $index => $tab) :
 	                    $tab_id = $tab['eael_adv_tabs_tab_id'] ? $tab['eael_adv_tabs_tab_id'] : Helper::str_to_css_id( $tab['eael_adv_tabs_tab_title'] );

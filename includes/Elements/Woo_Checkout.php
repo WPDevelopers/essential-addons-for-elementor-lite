@@ -57,7 +57,7 @@ class Woo_Checkout extends Widget_Base {
 	}
 
 	public function get_categories() {
-		return [ 'essential-addons-elementor' ];
+		return [ 'essential-addons-elementor', 'woocommerce-elements' ];
 	}
 
 	/**
