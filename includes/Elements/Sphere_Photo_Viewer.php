@@ -140,12 +140,12 @@ class Sphere_Photo_Viewer extends Widget_Base {
 		$this->add_control(
 			'ea_spv_zoom_lvl',
 			[
-				'label'     => esc_html__( 'Zoom Level', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'default'   => [
+				'label'   => esc_html__( 'Zoom Level', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::SLIDER,
+				'default' => [
 					'size' => 20
 				],
-				'range'     => [
+				'range'   => [
 					'px' => [
 						'min'  => 1,
 						'max'  => 100,
@@ -164,6 +164,60 @@ class Sphere_Photo_Viewer extends Widget_Base {
 				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'ea_spv_autorotate_pan',
+			[
+				'label'   => esc_html__( 'Pan Correction', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::SLIDER,
+				'default' => [
+					'size' => 0
+				],
+				'range'   => [
+					'px' => [
+						'min'  => - 1,
+						'max'  => 1,
+						'step' => 0.01
+					],
+				],
+			]
+		);
+
+		$this->add_control(
+			'ea_spv_autorotate_tilt',
+			[
+				'label'   => esc_html__( 'Tilt Correction', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::SLIDER,
+				'default' => [
+					'size' => 0
+				],
+				'range'   => [
+					'px' => [
+						'min'  => - 1,
+						'max'  => 1,
+						'step' => 0.01
+					],
+				],
+			]
+		);
+
+		$this->add_control(
+			'ea_spv_autorotate_roll',
+			[
+				'label'   => esc_html__( 'Roll Correction', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::SLIDER,
+				'default' => [
+					'size' => 0
+				],
+				'range'   => [
+					'px' => [
+						'min'  => - 1,
+						'max'  => 1,
+						'step' => 0.01
+					],
+				],
 			]
 		);
 
@@ -275,12 +329,17 @@ class Sphere_Photo_Viewer extends Widget_Base {
 		$settings        = $this->get_settings_for_display();
 		$container_id    = "eael-psv-{$this->get_id()}";
 		$sphere_settings = [
-			'caption'        => $settings['ea_spv_caption'],
-			'panorama'       => $settings['ea_spv_image']['url'],
-			'container'      => $container_id,
-			'description'    => $settings['ea_spv_description'],
-			'defaultZoomLvl' => empty( $settings['ea_spv_zoom_lvl']['size'] ) ? 20 : $settings['ea_spv_zoom_lvl']['size'],
-			'fisheye'        => $settings['ea_spv_fisheye'] === 'yes',
+			'caption'          => $settings['ea_spv_caption'],
+			'panorama'         => $settings['ea_spv_image']['url'],
+			'container'        => $container_id,
+			'description'      => $settings['ea_spv_description'],
+			'defaultZoomLvl'   => empty( $settings['ea_spv_zoom_lvl']['size'] ) ? 20 : $settings['ea_spv_zoom_lvl']['size'],
+			'fisheye'          => $settings['ea_spv_fisheye'] === 'yes',
+			'sphereCorrection' => [
+				'pan'  => floatval( $settings['ea_spv_autorotate_pan']['size'] ) * pi(),
+				'tilt' => floatval( $settings['ea_spv_autorotate_tilt']['size'] ) * pi() / 2,
+				'roll' => floatval( $settings['ea_spv_autorotate_roll']['size'] ) * pi()
+			]
 		];
 
 		if ( $settings['ea_spv_autorotate_switch'] === 'yes' ) {
