@@ -168,60 +168,6 @@ class Sphere_Photo_Viewer extends Widget_Base {
 		);
 
 		$this->add_control(
-			'ea_spv_autorotate_pan',
-			[
-				'label'   => esc_html__( 'Pan Correction', 'essential-addons-for-elementor-lite' ),
-				'type'    => Controls_Manager::SLIDER,
-				'default' => [
-					'size' => 0
-				],
-				'range'   => [
-					'px' => [
-						'min'  => - 1,
-						'max'  => 1,
-						'step' => 0.01
-					],
-				],
-			]
-		);
-
-		$this->add_control(
-			'ea_spv_autorotate_tilt',
-			[
-				'label'   => esc_html__( 'Tilt Correction', 'essential-addons-for-elementor-lite' ),
-				'type'    => Controls_Manager::SLIDER,
-				'default' => [
-					'size' => 0
-				],
-				'range'   => [
-					'px' => [
-						'min'  => - 1,
-						'max'  => 1,
-						'step' => 0.01
-					],
-				],
-			]
-		);
-
-		$this->add_control(
-			'ea_spv_autorotate_roll',
-			[
-				'label'   => esc_html__( 'Roll Correction', 'essential-addons-for-elementor-lite' ),
-				'type'    => Controls_Manager::SLIDER,
-				'default' => [
-					'size' => 0
-				],
-				'range'   => [
-					'px' => [
-						'min'  => - 1,
-						'max'  => 1,
-						'step' => 0.01
-					],
-				],
-			]
-		);
-
-		$this->add_control(
 			'ea_spv_autorotate_switch',
 			[
 				'label'        => esc_html__( 'Autorotate', 'essential-addons-for-elementor-lite' ),
@@ -229,7 +175,8 @@ class Sphere_Photo_Viewer extends Widget_Base {
 				'label_on'     => esc_html__( 'On', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Off', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
-				'default'      => 'yes'
+				'default'      => 'yes',
+				'separator'    => 'before'
 			]
 		);
 
@@ -293,6 +240,61 @@ class Sphere_Photo_Viewer extends Widget_Base {
 				'condition' => [
 					'ea_spv_autorotate_switch' => 'yes'
 				]
+			]
+		);
+
+		$this->add_control(
+			'ea_spv_autorotate_pan',
+			[
+				'label'     => esc_html__( 'Pan Correction', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+				'default'   => [
+					'size' => 0
+				],
+				'range'     => [
+					'px' => [
+						'min'  => - 1,
+						'max'  => 1,
+						'step' => 0.01
+					],
+				],
+				'separator' => 'before'
+			]
+		);
+
+		$this->add_control(
+			'ea_spv_autorotate_tilt',
+			[
+				'label'   => esc_html__( 'Tilt Correction', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::SLIDER,
+				'default' => [
+					'size' => 0
+				],
+				'range'   => [
+					'px' => [
+						'min'  => - 1,
+						'max'  => 1,
+						'step' => 0.01
+					],
+				],
+			]
+		);
+
+		$this->add_control(
+			'ea_spv_autorotate_roll',
+			[
+				'label'   => esc_html__( 'Roll Correction', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::SLIDER,
+				'default' => [
+					'size' => 0
+				],
+				'range'   => [
+					'px' => [
+						'min'  => - 1,
+						'max'  => 1,
+						'step' => 0.01
+					],
+				],
 			]
 		);
 
