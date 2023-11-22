@@ -441,7 +441,7 @@ class Image_Accordion extends Widget_Base {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors'  => [
-                    '{{WRAPPER}} .eael-img-accordion a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-img-accordion .eael-image-accordion-item' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -452,7 +452,7 @@ class Image_Accordion extends Widget_Base {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors'  => [
-                    '{{WRAPPER}} .eael-img-accordion a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-img-accordion .eael-image-accordion-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -463,7 +463,7 @@ class Image_Accordion extends Widget_Base {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors'  => [
-                    '{{WRAPPER}} .eael-img-accordion a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
+                    '{{WRAPPER}} .eael-img-accordion .eael-image-accordion-item' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
                 ],
             ]
         );
@@ -472,7 +472,7 @@ class Image_Accordion extends Widget_Base {
             [
                 'name'     => 'eael_image_accordion_thumbnail_border',
                 'label'    => __( 'Border', 'essential-addons-for-elementor-lite' ),
-                'selector' => '{{WRAPPER}} .eael-img-accordion a',
+                'selector' => '{{WRAPPER}} .eael-img-accordion .eael-image-accordion-item',
             ]
         );
 
@@ -586,7 +586,7 @@ class Image_Accordion extends Widget_Base {
 	        $this->add_render_attribute(
 		        'eael-image-accordion-item-wrapper-' . $key,
 		        [
-			        'class' => 'eael-image-accordion-hover',
+			        'class' => 'eael-image-accordion-hover eael-image-accordion-item',
 			        'style' => "background-image: url(" . esc_url( $img_accordion['eael_accordion_bg']['url'] ) . ");" . $activeCSS,
 		        ]
 	        );
