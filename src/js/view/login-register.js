@@ -144,7 +144,9 @@ ea.hooks.addAction("init", "ea", () => {
             var eael_get_login_status = localStorage.getItem( 'eael-is-login-form' );
             if( eael_get_login_status === 'true' ) {
                 localStorage.removeItem( 'eael-is-login-form' );
-                $( '#eael-lr-login-toggle' ).trigger( 'click' );
+                setTimeout(function() {
+                    $( '#eael-lr-login-toggle' ).trigger( 'click' );
+                },100);
             }
 
             //
