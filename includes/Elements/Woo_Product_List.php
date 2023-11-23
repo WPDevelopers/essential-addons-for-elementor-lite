@@ -857,6 +857,19 @@ class Woo_Product_List extends Widget_Base
         );
 
         $this->add_control(
+            'eael_product_list_content_footer_total_sold_remaining_show',
+            [
+                'label'         => __('Remaining', 'essential-addons-for-elementor-lite'),
+                'type'          => Controls_Manager::SWITCHER,
+                'label_on'      => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'     => __('Hide', 'essential-addons-for-elementor-lite'),
+                'return_value'  => 'yes',
+                'default'       => 'yes',
+                'conditions'    => $this->total_sold_conditions(),
+            ]
+        );
+
+        $this->add_control(
             'eael_product_list_content_footer_total_sold_text', 
             [
                 'label'         => esc_html__('Total Sold Text', 'essential-addons-for-elementor-lite'),
@@ -3459,6 +3472,7 @@ class Woo_Product_List extends Widget_Base
 		$woo_product_list['title_clickable']                = ! empty( $settings['eael_product_list_content_body_title_clickable'] ) && 'yes' === $settings['eael_product_list_content_body_title_clickable'] ? 1 : 0;
 		$woo_product_list['excerpt_words_count']            = ! empty( $settings['eael_product_list_content_body_excerpt_words_count'] ) ? intval( $settings['eael_product_list_content_body_excerpt_words_count'] ) : 30;
 		$woo_product_list['excerpt_expanison_indicator']    = ! empty( $settings['eael_product_list_content_body_excerpt_expanison_indicator'] ) ? esc_html( $settings['eael_product_list_content_body_excerpt_expanison_indicator'] ) : esc_html('...');
+		$woo_product_list['total_sold_remaining_show']      = ! empty( $settings['eael_product_list_content_footer_total_sold_remaining_show'] ) && 'yes' === $settings['eael_product_list_content_footer_total_sold_remaining_show'] ? 1 : 0;
 		$woo_product_list['total_sold_text']                = ! empty( $settings['eael_product_list_content_footer_total_sold_text'] ) ? esc_html( $settings['eael_product_list_content_footer_total_sold_text'] ) : esc_html('Total Sold:');
 		$woo_product_list['total_sold_remaining_text']      = ! empty( $settings['eael_product_list_content_footer_total_sold_remaining_text'] ) ? esc_html( $settings['eael_product_list_content_footer_total_sold_remaining_text'] ) : esc_html('Remaining:');
 		$woo_product_list['quick_view_text']                = ! empty( $settings['eael_product_list_content_footer_quick_view_text'] ) ? esc_html( $settings['eael_product_list_content_footer_quick_view_text'] ) : esc_html('View Product');
