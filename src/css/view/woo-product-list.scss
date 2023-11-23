@@ -62,6 +62,10 @@ $spacer-lg: $spacing5;
         .eael-product-list-buttons-on-hover li a {
             color: #343434;
         }
+
+        .eael-product-list-notice.eael-product-list-notice-shiping-free {
+            direction: ltr;
+        }
     }
 
     &.preset-1,
