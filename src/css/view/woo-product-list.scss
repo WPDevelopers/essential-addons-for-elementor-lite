@@ -35,6 +35,15 @@ $spacer-lg: $spacing5;
             align-items: center;
             position: relative;
 
+            &.image-alignment-right {
+                flex-direction: row-reverse;
+
+                .eael-product-list-content-wrap {
+                    padding-left: 0;
+                    padding-right: 70px;
+                }
+            }
+
             // Content Wrap
             .eael-product-list-content-wrap {
                 width: 70%;

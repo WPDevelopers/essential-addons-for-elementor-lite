@@ -545,6 +545,24 @@ class Woo_Product_List extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_product_list_image_alignment',
+            [
+                'label'     => __('Alignment', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::CHOOSE,
+                'options'   => [
+                    'image-alignment-left' => [
+                        'title' => __('Left', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-text-align-left',
+                    ],
+                    'image-alignment-right' => [
+                        'title' => __('Right', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-text-align-right',
+                    ],
+                ],
+            ]
+        );
+
         $this->end_controls_section();
     }
 
@@ -3367,6 +3385,7 @@ class Woo_Product_List extends Widget_Base
 		$woo_product_list['stock_out_text']                 = ! empty( $settings['eael_product_list_content_header_badge_stock_out_text'] ) ? esc_html( $settings['eael_product_list_content_header_badge_stock_out_text'] ) : esc_html__( 'Stock Out', 'essential-addons-for-elementor-lite' );
 		$woo_product_list['image_size']                     = ! empty( $settings['eael_product_list_image_size_size'] ) ? esc_html( $settings['eael_product_list_image_size_size'] ) : esc_html( 'medium' );
 		$woo_product_list['image_clickable']                = ! empty( $settings['eael_product_list_image_clickable'] ) && 'yes' === $settings['eael_product_list_image_clickable'] ? 1 : 0;
+		$woo_product_list['image_alignment']                = ! empty( $settings['eael_product_list_image_alignment'] ) ? esc_html( $settings['eael_product_list_image_alignment'] ) : '';
         $woo_product_list['button_position_static']         = ! empty( $settings['eael_product_list_content_general_button_position'] ) && 'on-hover' !== $settings['eael_product_list_content_general_button_position'] ? 1 : 0;
         $woo_product_list['button_position_on_hover']       = ! empty( $settings['eael_product_list_content_general_button_position'] ) && 'static' !== $settings['eael_product_list_content_general_button_position'] ? 1 : 0;
         $woo_product_list['content_header_position']        = ! empty( $settings['eael_product_list_content_header_position'] ) ? esc_html( $settings['eael_product_list_content_header_position'] ) : esc_html( 'before-title' );

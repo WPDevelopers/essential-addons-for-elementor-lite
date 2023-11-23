@@ -22,7 +22,7 @@ if ( ! $product ) {
 $woo_product_list_loop = Woo_Product_List::get_woo_product_list_loop_settings( $product, $settings, $woo_product_list ); // static method as the template is used by read more feature too
 ?>
 <div <?php post_class( 'product' ); ?>>
-    <div class="eael-product-list-item">
+    <div class="eael-product-list-item <?php echo esc_attr( $woo_product_list['image_alignment'] ); ?>">
         <?php if( 'badge-preset-2' === $woo_product_list['badge_preset'] ) : ?>
             <?php Woo_Product_List::eael_print_produt_badge_html( $woo_product_list, $product ); ?>
         <?php endif; ?>
