@@ -178,6 +178,7 @@ class Woo_Product_List extends Widget_Base
 
         $this->eael_product_list_container_style();
         $this->eael_product_list_item_style();
+        $this->eael_product_list_item_image_style();
         $this->eael_product_list_item_content_style();
         do_action('eael/controls/load_more_button_style', $this);
         $this->eael_product_list_color_typography_style();
@@ -1291,6 +1292,70 @@ class Woo_Product_List extends Widget_Base
 			[
 				'name'     => 'eael_product_list_item_normal_box_shadow',
 				'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item',
+			]
+		);
+
+		$this->end_controls_section();
+    }
+
+    protected function eael_product_list_item_image_style() {
+
+	    $this->start_controls_section(
+			'eael_section_product_list_item_image_style',
+			[
+				'label' => esc_html__( 'Image', 'essential-addons-for-elementor-lite' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+        $this->add_control(
+			'eael_product_list_item_image_normal_overlay_color',
+			[
+				'label'     => esc_html__( 'Background', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-image-wrap' => 'background: {{VALUE}};',
+				],
+			]
+		);
+
+        $this->add_responsive_control(
+			'eael_product_list_item_image_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+                'range'      => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 100,
+						'step' => 1,
+					],
+					'%'  => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-image-wrap' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_product_list_item_image_border_radius',
+			[
+				'label'     => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => [
+					'px' => [
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-image-wrap' => 'border-radius: {{SIZE}}px;',
+					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-image-wrap img' => 'border-radius: {{SIZE}}px;',
+				],
 			]
 		);
 
