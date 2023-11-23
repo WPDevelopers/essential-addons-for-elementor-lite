@@ -2090,6 +2090,43 @@ class Woo_Product_List extends Widget_Base
         );
 
         $this->add_control(
+            'eael_product_list_color_typography_category_heading',
+            [
+                'label'     => __('Category', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::HEADING,
+                'condition' => [
+                    'eael_woo_product_list_category_show' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_list_category_color',
+            [
+                'label'     => esc_html__('Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-notice p' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-notice p i' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_woo_product_list_category_show' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_product_list_color_typography_category_typography',
+                'selector' => '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-notice p',
+                'condition' => [
+                    'eael_woo_product_list_category_show' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'eael_product_list_color_typography_content_body_heading',
             [
                 'label' => __('Content Body', 'essential-addons-for-elementor-lite'),
