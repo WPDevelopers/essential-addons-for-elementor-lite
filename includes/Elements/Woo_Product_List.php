@@ -280,9 +280,6 @@ class Woo_Product_List extends Widget_Base
 			'label_off'     => __( 'Hide', 'essential-addons-for-elementor-lite' ),
             'return_value'  => 'yes',
             'default'       => 'yes',
-            'condition'     => [
-                'eael_dynamic_template_layout' => 'preset-2',
-            ]
         ]);
 
         $this->add_control(
@@ -3448,6 +3445,7 @@ class Woo_Product_List extends Widget_Base
         $woo_product_list['badge_show']             = ! empty( $settings['eael_woo_product_list_badge_show'] ) && 'yes' === $settings['eael_woo_product_list_badge_show'] ? 1 : 0;
         $woo_product_list['rating_show']            = ! empty( $settings['eael_woo_product_list_rating_show'] ) && 'yes' === $settings['eael_woo_product_list_rating_show'] ? 1 : 0;
         $woo_product_list['review_count_show']      = ! empty( $settings['eael_woo_product_list_review_count_show'] ) && 'yes' === $settings['eael_woo_product_list_review_count_show'] ? 1 : 0;
+        $woo_product_list['category_show']          = ! empty( $settings['eael_woo_product_list_category_show'] ) && 'yes' === $settings['eael_woo_product_list_category_show'] ? 1 : 0;
 		$woo_product_list['title_show']             = ! empty( $settings['eael_woo_product_list_title_show'] ) && 'yes' === $settings['eael_woo_product_list_title_show'] ? 1 : 0;
 		$woo_product_list['excerpt_show']           = ! empty( $settings['eael_woo_product_list_excerpt_show'] ) && 'yes' === $settings['eael_woo_product_list_excerpt_show'] ? 1 : 0;
 		$woo_product_list['price_show']             = ! empty( $settings['eael_woo_product_list_price_show'] ) && 'yes' === $settings['eael_woo_product_list_price_show'] ? 1 : 0;
