@@ -18,7 +18,7 @@ jQuery(window).on("elementor/frontend/init", function () {
             e.stopImmediatePropagation();
 
             let $this = $(this),
-                $LoaderSpan = $("span", $this),
+                $LoaderSpan = $(".eael_fb_load_more_text", $this),
                 $text = $LoaderSpan.html(),
                 $widget_id = $this.data("widget-id"),
                 $post_id = $this.data("post-id"),

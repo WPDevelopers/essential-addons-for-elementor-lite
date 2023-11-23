@@ -644,6 +644,21 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_event_multi_days_event_day_count',
+            [
+                'label' => __('Multi-Days Event Day Count', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_block' => false,
+                'return_value' => 'yes',
+                'description' => __('Extra text "Day Count/Event Total Days" will be added in the event title', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                    'eael_event_calendar_default_view' => 'listMonth',
+                    'eael_event_calendar_type' => 'google',
+                ]
+            ]
+        );
+
 	    $this->add_control(
 		    'eael_event_details_text',
 		    [
@@ -2954,6 +2969,8 @@ class Event_Calendar extends Widget_Base
 	    $default_date   = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : date( 'Y-m-d' );
 	    $time_format    = $settings['eael_event_time_format'];
 	    $event_limit    = ! empty( $settings['eael_event_limit'] ) ? intval( $settings['eael_event_limit'] ) : 2;
+	    $multi_days_event_day_count = ! empty( $settings['eael_event_multi_days_event_day_count'] ) && 'yes' ===  $settings['eael_event_multi_days_event_day_count'] ? 1 : 0;
+        
 	    $translate_date = [
 		    'today'    => __( 'Today', 'essential-addons-for-elementor-lite' ),
 		    'tomorrow' => __( 'Tomorrow', 'essential-addons-for-elementor-lite' ),
@@ -2971,6 +2988,7 @@ class Event_Calendar extends Widget_Base
             data-defaultdate = "' . $default_date . '"
             data-time_format = "' . $time_format . '"
             data-event_limit = "' . $event_limit . '"
+            data-multidays_event_day_count= "' . $multi_days_event_day_count . '"
             data-hideDetailsLink= "' . $settings['eael_event_details_link_hide'] . '"
             data-detailsButtonText = "' . Helper::eael_wp_kses( $settings['eael_event_details_text'] ) . '"
             data-events="' . htmlspecialchars( json_encode( $data ), ENT_QUOTES, 'UTF-8' ) . '"
@@ -3075,10 +3093,15 @@ class Event_Calendar extends Widget_Base
 					echo '<td class="eael-ec-event-description">' . Helper::eael_wp_kses( $event_description ) . '</td>';
 				}
 				if ( $settings['eael_ec_show_date'] === 'yes' ) {
-					$start = date( $date_format, strtotime( $event['start'] ) );
-					$end   = date( $date_format, strtotime( $event['end'] ) );
-					$separator = $settings['eael_ec_date_to_date_separator'];
-					$date = sprintf( '<span class="hide">%s</span> %s %s %s', strtotime( $event['start'] ), $start, $separator, $end );
+					$start_time = strtotime( $event['start'] );
+					$end_time   = strtotime( $event['end'] );
+					$start      = date( $date_format, $start_time );
+					$end        = date( $date_format, $end_time );
+					if ( date( 'Ymd', $start_time ) === date( 'Ymd', $end_time ) ) {
+						$end = date( $time_format, $end_time );
+					}
+					$separator = $end ? $settings['eael_ec_date_to_date_separator'] : '';
+					$date      = sprintf( '<span class="hide">%s</span> %s %s %s', strtotime( $event['start'] ), $start, $separator, $end );
 					echo '<td class="eael-ec-event-date">' . Helper::eael_wp_kses( $date ) . '</td>';
 				}
 				echo "</tr>";
@@ -3249,7 +3272,6 @@ class Event_Calendar extends Widget_Base
         $random_color_index = 0;
 
         if (isset($data->items)) {
-
             foreach ($data->items as $key => $item) {
                 if ($item->status !== 'confirmed') {
 //                    continue;

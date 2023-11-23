@@ -283,7 +283,7 @@ class WPDeveloper_Setup_Wizard {
                          alt="<?php _e( 'Go Pro Logo', 'essential-addons-for-elementor-lite' ); ?>">
                 </div>
                 <h2 class="eael-quick-setup-title">
-					<?php _e( 'Enhance Your Elementor Experience By Unlocking 30+ Advanced PRO Elements', 'essential-addons-for-elementor-lite' ); ?>
+					<?php _e( 'Enhance Your Elementor Experience By Unlocking 35+ Advanced PRO Elements', 'essential-addons-for-elementor-lite' ); ?>
                 </h2>
             </div>
             <div class="eael-quick-setup-input-group">
@@ -327,7 +327,7 @@ class WPDeveloper_Setup_Wizard {
                      alt="<?php _e( 'Logo', 'essential-addons-for-elementor-lite' ) ?>">
             </div>
             <div class="eael-quick-setup-title">
-				<?php printf( __( '%s <span class="eael-quick-setup-highlighted-red">%s</span> %s', 'essential-addons-for-elementor-lite' ), 'Get access to', '4000+', 'Elementor Templates with Templately! 🚀' ); ?>
+				<?php printf( __( '%s <span class="eael-quick-setup-highlighted-red">%s</span> %s', 'essential-addons-for-elementor-lite' ), 'Get access to', '5000+', 'Elementor Templates with Templately! 🚀' ); ?>
             </div>
             <div class="eael-quick-setup-text">
 				<?php _e( 'Want to create websites faster than ever? Check out Templately, the ultimate templates cloud that comes with thousands of ready Elementor templates for every niche!', 'essential-addons-for-elementor-lite' ); ?>
@@ -442,13 +442,6 @@ class WPDeveloper_Setup_Wizard {
 				'desc'     => __( 'EmbedPress lets you embed videos, images, posts, audio, maps and upload PDF, DOC, PPT & all other types of content into your WordPress site. ', 'essential-addons-for-elementor-lite' ),
 			],
 			[
-				'slug'     => 'reviewx',
-				'basename' => 'reviewx/reviewx.php',
-				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/review-logo.svg',
-				'title'    => __( 'ReviewX', 'essential-addons-for-elementor-lite' ),
-				'desc'     => __( 'ReviewX lets you get instant customer ratings and multi criteria reviews to add credibility to your WooCommerce Store and increase conversion rates.', 'essential-addons-for-elementor-lite' ),
-			],
-			[
 				'slug'     => 'notificationx',
 				'basename' => 'notificationx/notificationx.php',
 				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/nx-logo.svg',
@@ -479,9 +472,16 @@ class WPDeveloper_Setup_Wizard {
 			[
 				'slug'     => 'essential-blocks',
 				'basename' => 'essential-blocks/essential-blocks.php',
-				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/eb.svg',
+				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/eb-new.svg',
 				'title'    => __( 'Essential Blocks', 'essential-addons-for-elementor-lite' ),
 				'desc'     => __( 'Enhance your Gutenberg experience with 40+ unique blocks (more coming soon). Add power to the block editor using our easy-to-use blocks which are designed to make your next WordPress page or posts design easier and prettier than ever before.', 'essential-addons-for-elementor-lite' ),
+			],
+			[
+				'slug'     => 'better-payment',
+				'basename' => 'better-payment/better-payment.php',
+				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/bp.svg',
+				'title'    => __( 'Better Payment', 'essential-addons-for-elementor-lite' ),
+				'desc'     => __( 'Better Payment streamlines transactions in Elementor, integrating PayPal, Stripe, advanced analytics, validation, and Elementor forms for the most secure & efficient payments.', 'essential-addons-for-elementor-lite' ),
 			],
 		];
 	}
@@ -732,6 +732,11 @@ class WPDeveloper_Setup_Wizard {
                         'title'       => __( 'SVG Draw', 'essential-addons-for-elementor-lite' ),
                         'preferences' => 'advance',
                     ],
+					[
+						'key'         => 'fancy-chart',
+						'title'       => __( 'Fancy Chart', 'essential-addons-for-elementor-lite' ),
+						'preferences' => 'advance',
+					],
 				]
 			],
 			'marketing-elements'       => [
@@ -830,7 +835,7 @@ class WPDeveloper_Setup_Wizard {
 				'elements' => [
 					[
 						'key'         => 'product-grid',
-						'title'       => __( 'Product Grid', 'essential-addons-for-elementor-lite' ),
+						'title'       => __( 'Woo Product Grid', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
 					],
 					[
@@ -844,6 +849,10 @@ class WPDeveloper_Setup_Wizard {
 					[
 						'key'   => 'woo-cart',
 						'title' => __( 'Woo Cart', 'essential-addons-for-elementor-lite' ),
+					],
+					[
+						'key'   => 'woo-cross-sells',
+						'title' => __( 'Woo Cross Sells', 'essential-addons-for-elementor-lite' ),
 					],
 					[
 						'key'         => 'woo-product-compare',

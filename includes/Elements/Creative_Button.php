@@ -277,20 +277,19 @@ class Creative_Button extends Widget_Base
                 ]
             );
 
-            $this->add_control(
-                'eael_creative_button_text_color',
-                [
-                    'label'     => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
-                    'type'      => Controls_Manager::COLOR,
-                    'default'   => '#ffffff',
-                    'selectors' => [
-                        '{{WRAPPER}} .eael-creative-button'                                      => 'color: {{VALUE}};',
-                        '{{WRAPPER}} .eael-creative-button svg'                             => 'fill: {{VALUE}};',
-                        '{{WRAPPER}} .eael-creative-button.eael-creative-button--tamaya::before' => 'color: {{VALUE}};',
-                        '{{WRAPPER}} .eael-creative-button.eael-creative-button--tamaya::after'  => 'color: {{VALUE}};',
-                    ],
-                ]
-            );
+	        $this->add_control(
+		        'eael_creative_button_text_color',
+		        [
+			        'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+			        'type'      => Controls_Manager::COLOR,
+			        'default'   => '#ffffff',
+			        'selectors' => [
+				        '{{WRAPPER}} .eael-creative-button'                                         => 'color: {{VALUE}};',
+				        '{{WRAPPER}} .eael-creative-button svg'                                     => 'fill: {{VALUE}};',
+				        '{{WRAPPER}} .eael-creative-button .eael-creative-button--tamaya-secondary' => 'color: {{VALUE}};',
+			        ],
+		        ]
+	        );
             $this->add_control(
                 'eael_creative_button_background_color',
                 [
