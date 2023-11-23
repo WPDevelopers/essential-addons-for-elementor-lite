@@ -22,8 +22,8 @@ class Woocommerce_Review extends Widget_Base {
 		return 'eaicon-reviewx';
 	}
 
-   	public function get_categories() {
-		return [ 'essential-addons-elementor' ];
+	public function get_categories() {
+		return [ 'essential-addons-elementor', 'woocommerce-elements' ];
 	}
     
     public function get_keywords() {

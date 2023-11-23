@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
+use Elementor\Plugin;
 use Essential_Addons_Elementor\Traits\Admin;
 use Essential_Addons_Elementor\Traits\Core;
 use Essential_Addons_Elementor\Traits\Elements;
@@ -72,8 +73,8 @@ class Bootstrap
     protected $installer;
 
 
-    const EAEL_PROMOTION_FLAG = 7;
-    const EAEL_ADMIN_MENU_FLAG = 7;
+    const EAEL_PROMOTION_FLAG = 10;
+    const EAEL_ADMIN_MENU_FLAG = 10;
     /**
      * Singleton instance
      *
@@ -125,8 +126,6 @@ class Bootstrap
 		    new Asset_Builder( $this->registered_elements, $this->registered_extensions );
 	    }
 
-
-
     }
 
     protected function register_hooks()
@@ -143,6 +142,7 @@ class Bootstrap
         // Enqueue
         add_action('eael/before_enqueue_styles', [$this, 'before_enqueue_styles']);
         add_action('elementor/editor/before_enqueue_scripts', [$this, 'editor_enqueue_scripts']);
+        add_action('elementor/frontend/before_register_scripts', [$this, 'frontend_enqueue_scripts']);
 
         // Generator
 
@@ -237,16 +237,28 @@ class Bootstrap
 		    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_meta', 30 );
 
 		    add_filter( 'woocommerce_product_get_rating_html', [ $this, 'eael_rating_markup' ], 10, 3 );
+		    add_filter( 'eael_product_wrapper_class', [ $this, 'eael_product_wrapper_class' ], 10, 3 );
 
             add_action('wp_ajax_eael_checkout_cart_qty_update', [$this, 'eael_checkout_cart_qty_update'] );
     		add_action('wp_ajax_nopriv_eael_checkout_cart_qty_update', [$this, 'eael_checkout_cart_qty_update'] );
 
 		    add_action( 'wp_loaded', [ $this, 'eael_woo_cart_empty_action' ], 20 );
+
+		    add_action( 'eael_woo_before_product_loop', function ( $layout ) {
+			    if ( $layout === 'eael-product-default' ) {
+				    return;
+			    }
+
+			    remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open' );
+			    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close' );
+			    remove_action( 'woocommerce_after_shop_loop_item', 'astra_woo_woocommerce_shop_product_content' );
+			    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
+		    } );
 	    }
 
 
         // Admin
-        if (is_admin()) {
+	    if ( is_admin() ) {
             // Admin
             if (!$this->pro_enabled) {
                 $this->admin_notice();
@@ -288,11 +300,28 @@ class Bootstrap
 //	        add_action( 'admin_notices', [ $this, 'eael_black_friday_optin' ] );
 //	        add_action( 'eael_admin_notices', [ $this, 'eael_black_friday_optin' ] );
 //	        add_action( 'wp_ajax_eael_black_friday_optin_dismiss', [ $this, 'eael_black_friday_optin_dismiss' ] );
+
+	        if ( ! current_user_can( 'administrator' ) ) {
+		        add_filter( 'elementor/document/save/data', function ( $data ) {
+			        $data['elements'] = Plugin::$instance->db->iterate_data( $data['elements'], function ( $element ) {
+				        if ( isset( $element['widgetType'] ) && $element['widgetType'] === 'eael-login-register' ) {
+					        if ( ! empty( $element['settings']['register_user_role'] ) ) {
+						        $element['settings']['register_user_role'] = '';
+					        }
+				        }
+
+				        return $element;
+			        } );
+
+			        return $data;
+		        } );
+	        }
+        } else {
+	        add_action( 'wp', [ $this, 'eael_post_view_count' ] );
         }
 
 	    // beehive theme compatibility
 	    add_filter( 'beehive_scripts', array( $this, 'beehive_theme_swiper_slider_compatibility' ), 999 );
-
 
     }
 }

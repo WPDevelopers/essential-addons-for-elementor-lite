@@ -2131,11 +2131,11 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 
-		if(current_user_can('create_users')){
+		if ( current_user_can( 'administrator' ) ) {
 			$user_role = $this->get_user_roles();
-		}else{
+		} else {
 			$user_role = [
-				get_option( 'default_role' ) =>  ucfirst(get_option( 'default_role' ))
+				'' => __( 'Default', 'essential-addons-for-elementor-lite' ),
 			];
 		}
 
@@ -6681,9 +6681,13 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_recaptcha_node( $form_type = 'login' ) {
-		if ( 'yes' === $this->get_settings_for_display( "enable_{$form_type}_recaptcha" ) && 'v3' !== $this->ds["login_register_recaptcha_version"] ) {
+		if ( 'yes' === $this->get_settings_for_display( "enable_{$form_type}_recaptcha" ) || 'v3' === $this->ds["login_register_recaptcha_version"] ) {
 			$id = "{$form_type}-recaptcha-node-" . $this->get_id();
 			echo "<input type='hidden' name='g-recaptcha-enabled' value='1'/><div id='{$id}' class='eael-recaptcha-wrapper'></div>";
+
+			if( 'v3' === $this->ds["login_register_recaptcha_version"] && ( ! $this->ds[ 'enable_ajax' ] ) ){
+				echo "<input type='hidden' name='action' value='eael_login_register_form'/>";
+			}
 		}
 	}
 
