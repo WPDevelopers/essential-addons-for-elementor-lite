@@ -84,7 +84,7 @@ $woo_product_list_loop = Woo_Product_List::get_woo_product_list_loop_settings( $
                 <?php endif; ?>
                 
                 <div class="eael-product-list-notice eael-product-list-notice-category">
-                    <?php if ( $woo_product_list_loop['has_terms'] ) : ?> 
+                    <?php if ( $woo_product_list['category_show'] && $woo_product_list_loop['has_terms'] ) : ?> 
                     <p>
                         <i class="fas fa-box"></i>
                         <?php echo esc_html( Woo_Product_List::eael_get_product_category_name( $woo_product_list_loop['terms'] ) ); ?>
