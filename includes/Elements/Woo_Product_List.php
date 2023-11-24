@@ -1319,6 +1319,31 @@ class Woo_Product_List extends Widget_Base
 		);
 
         $this->add_control(
+            'eael_product_list_item_image_wrapper_heading_style',
+            [
+                'label' => __('Image Wrapper', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_responsive_control(
+		    'eael_product_list_item_image_wrapper_width',
+		    [
+			    'label'      => __( 'Width', 'essential-addons-for-elementor-lite' ),
+			    'type'       => Controls_Manager::SLIDER,
+			    'range'      => [
+				    '%'  => [
+					    'min' => 0,
+					    'max' => 100,
+				    ],
+			    ],
+			    'selectors'  => [
+				    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-image-wrap' => 'width: {{SIZE}}%;',
+			    ],
+		    ]
+	    );
+
+        $this->add_control(
 			'eael_product_list_item_image_normal_overlay_color',
 			[
 				'label'     => esc_html__( 'Background', 'essential-addons-for-elementor-lite' ),
@@ -1352,6 +1377,14 @@ class Woo_Product_List extends Widget_Base
 			]
 		);
 
+        $this->add_control(
+            'eael_product_list_item_image_heading_style',
+            [
+                'label' => __('Image', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
 		$this->add_control(
 			'eael_product_list_item_image_border_radius',
 			[
@@ -1379,6 +1412,43 @@ class Woo_Product_List extends Widget_Base
 			[
 				'label' => esc_html__( 'Content', 'essential-addons-for-elementor-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+        $this->add_control(
+            'eael_product_list_content_wrapper_heading_style',
+            [
+                'label' => __('Content Wrapper', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_responsive_control(
+		    'eael_product_list_content_wrapper_width',
+		    [
+			    'label'      => __( 'Width', 'essential-addons-for-elementor-lite' ),
+			    'type'       => Controls_Manager::SLIDER,
+			    'range'      => [
+				    '%'  => [
+					    'min' => 0,
+					    'max' => 100,
+				    ],
+			    ],
+			    'selectors'  => [
+				    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-content-wrap' => 'width: {{SIZE}}%;',
+			    ],
+		    ]
+	    );
+
+        $this->add_responsive_control(
+			'eael_product_list_content_wrapper_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item .eael-product-list-content-wrap' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
 			]
 		);
 
