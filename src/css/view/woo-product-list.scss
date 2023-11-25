@@ -628,10 +628,6 @@ $spacer-lg: $spacing5;
                 transition: all 0.4s;
                 position: relative;
 
-                &.added_to_cart {
-                    margin-top: 10px;
-                }
-
                 &:before {
                     content: "\f07a";
                     display: block;
@@ -681,6 +677,45 @@ $spacer-lg: $spacing5;
         margin-top: 0;
         margin-right: 5px;
     }    
+}
+
+@media only screen and (max-width: 767px) {
+    .eael-product-list-wrapper {
+        &.preset-1,
+        &.preset-2,
+        &.preset-3 {
+            .eael-product-list-item {
+                .eael-product-list-image-wrap,
+                .eael-product-list-content-wrap {
+                    width: 100%;
+                }
+                
+                .eael-product-list-content-wrap {
+                    padding: 70px 0 0;
+                }
+
+                &.image-alignment-right {
+                    flex-direction: column-reverse;
+        
+                    .eael-product-list-content-wrap {
+                        padding: 0 0 70px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .eael-product-list-wrapper {
+        .eael-product-list-content-footer {
+            .eael-product-list-buttons {
+                .eael-product-list-add-to-cart-button a.added_to_cart {
+                    margin-top: 10px;
+                }
+            }
+        }
+    }
 }
 
 // Theme Compatibility
