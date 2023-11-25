@@ -1248,14 +1248,6 @@ class Woo_Product_List extends Widget_Base
 						'max' => 100,
 					],
 				],
-				'default'    => [
-					'top'      => '64',
-					'right'    => '64',
-					'bottom'   => '64',
-					'left'     => '64',
-					'unit'     => 'px',
-					'isLinked' => true,
-				],
 				'selectors'  => [
 					'{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],

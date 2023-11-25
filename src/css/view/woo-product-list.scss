@@ -24,10 +24,6 @@ $spacer-lg: $spacing5;
     &.preset-1,
     &.preset-2,
     &.preset-3 {
-        .eael-product-list-container {
-            padding: 60px;
-        }
-        
         .eael-product-list-item {
             width: 100%;
             display: flex;
@@ -199,6 +195,14 @@ $spacer-lg: $spacing5;
                 color: #515151;
             }
         }
+    }
+
+    .eael-product-list-container {
+        padding: 60px;
+    }
+
+    .eael-product-list-item {
+        padding: 64px;
     }
 
     .product.outofstock {
@@ -703,17 +707,25 @@ $spacer-lg: $spacing5;
                 }
             }
         }
-    }
-}
 
-@media only screen and (max-width: 991px) {
-    .eael-product-list-wrapper {
+        .eael-product-list-container {
+            padding: 15px;
+        }
+
+        .eael-product-list-item {
+            padding: 15px;
+        }
+
         .eael-product-list-content-footer {
             .eael-product-list-buttons {
                 .eael-product-list-add-to-cart-button a.added_to_cart {
                     margin-top: 10px;
                 }
             }
+        }
+
+        .eael-product-list-image-wrap {
+            margin: auto;
         }
     }
 }
