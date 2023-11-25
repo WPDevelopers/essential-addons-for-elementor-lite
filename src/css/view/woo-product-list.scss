@@ -283,7 +283,8 @@ $spacer-lg: $spacing5;
     
             &::after {
                 left: 0;
-                border-right: 10px solid #734040;
+                border-right: 10px solid #a76060;
+                filter: brightness(0.7);
             }
 
             p {
@@ -300,7 +301,8 @@ $spacer-lg: $spacing5;
     
             &::after {
                 right: 0;
-                border-left: 10px solid #734040;
+                border-left: 10px solid #a76060;
+                filter: brightness(0.7);
             }
             
             p {
@@ -321,7 +323,8 @@ $spacer-lg: $spacing5;
             top: 0;
             border-right-width: 10px;
             border-left-width: 10px;
-            border-bottom: 10px solid #734040;
+            border-bottom: 10px solid #a76060;
+            filter: brightness(0.7);
         }
 
         &::after {
