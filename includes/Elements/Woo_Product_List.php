@@ -1969,9 +1969,9 @@ class Woo_Product_List extends Widget_Base
                     '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-2.is-on-sale p'  => 'background: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-3.is-on-sale'    => 'background: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-badge-wrap.is-on-sale svg path'          => 'fill: {{VALUE}};',
-                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-2.is-on-sale.badge-alignment-left::after'    => 'border-right: 10px solid {{VALUE}};',
-                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-2.is-on-sale::before'                        => 'border-bottom: 10px solid {{VALUE}};',
-                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-2.is-on-sale.badge-alignment-right::after'   => 'border-left: 10px solid {{VALUE}}',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-2.is-on-sale.badge-alignment-left::after'    => 'border-right: 10px solid {{VALUE}}; filter: brightness(0.7);',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-2.is-on-sale::before'                        => 'border-bottom: 10px solid {{VALUE}}; filter: brightness(0.7);',
+                    '{{WRAPPER}} .eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-2.is-on-sale.badge-alignment-right::after'   => 'border-left: 10px solid {{VALUE}}; filter: brightness(0.7);',
                 ],
                 'condition' => [
                     'eael_woo_product_list_badge_show' => 'yes',
