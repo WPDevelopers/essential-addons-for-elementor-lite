@@ -489,6 +489,7 @@ $spacer-lg: $spacing5;
     .eael-product-list-rating {
         display: flex;
         align-items: center;
+        direction: ltr;
     }
 
     .eael-product-list-rating .star-rating {
