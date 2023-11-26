@@ -631,6 +631,18 @@
     margin: auto;
   }
 }
+@media only screen and (max-width: 991px) {
+  .eael-product-list-wrapper .eael-product-list-content-footer .eael-product-list-buttons {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    gap: 15px;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .eael-product-list-wrapper.preset-1 .eael-product-list-item .eael-product-list-content-wrap, .eael-product-list-wrapper.preset-2 .eael-product-list-item .eael-product-list-content-wrap, .eael-product-list-wrapper.preset-3 .eael-product-list-item .eael-product-list-content-wrap {
+    padding-left: 20px;
+  }
+}
 .theme-twentytwentythree .eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-2.is-on-sale p,
 .theme-flexia .eael-product-list-wrapper .eael-product-list-badge-wrap.badge-preset-2.is-on-sale p {
   top: -8px;
