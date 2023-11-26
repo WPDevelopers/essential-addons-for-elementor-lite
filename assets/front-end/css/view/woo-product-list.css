@@ -416,6 +416,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  direction: ltr;
 }
 .eael-product-list-wrapper .eael-product-list-rating .star-rating {
   margin: 0;
