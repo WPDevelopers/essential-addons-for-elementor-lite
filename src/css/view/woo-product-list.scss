@@ -698,14 +698,14 @@ $spacer-lg: $spacing5;
                 }
                 
                 .eael-product-list-content-wrap {
-                    padding: 70px 0 0;
+                    padding: 20px 0 0;
                 }
 
                 &.image-alignment-right {
                     flex-direction: column-reverse;
         
                     .eael-product-list-content-wrap {
-                        padding: 0 0 70px;
+                        padding: 0 0 20px;
                     }
                 }
             }
