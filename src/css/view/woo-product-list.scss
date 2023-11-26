@@ -733,6 +733,29 @@ $spacer-lg: $spacing5;
     }
 }
 
+@media only screen and (max-width: 991px) {
+    .eael-product-list-wrapper {
+        .eael-product-list-content-footer .eael-product-list-buttons {
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .eael-product-list-wrapper {
+        &.preset-1,
+        &.preset-2,
+        &.preset-3 {
+            .eael-product-list-item {
+                .eael-product-list-content-wrap {
+                    padding-left: 20px;
+                }
+            }
+        }
+    }
+}
+
 // Theme Compatibility
 .theme-twentytwentythree,
 .theme-flexia {
