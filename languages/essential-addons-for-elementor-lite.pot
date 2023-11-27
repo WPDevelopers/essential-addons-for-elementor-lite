@@ -9875,7 +9875,7 @@ msgid "Submit"
 msgstr ""
 
 #: ../includes/Traits/Helper.php:515
-msgid "<p> <i>📣</i> NEW: Essential Addons Pro 5.8 is here, with new '<a target='_blank' href='%s'>Fancy Chart</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>"
+msgid "<p> <i>📣</i> NEW: Essential Addons 5.9 is here, with new '<a target='_blank' href='%s'>Woo Product List</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>"
 msgstr ""
 
 #: ../includes/Traits/Helper.php:577
