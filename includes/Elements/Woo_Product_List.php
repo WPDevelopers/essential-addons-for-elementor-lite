@@ -77,7 +77,7 @@ class Woo_Product_List extends Widget_Base
 
     public function get_custom_help_url()
     {
-        return 'https://essential-addons.com/elementor/docs/woo-product-list/';
+        return 'https://essential-addons.com/elementor/docs/ea-woo-product-list/';
     }
 
     public function get_style_depends()
