@@ -339,20 +339,17 @@ class Scroll_to_Top
         );
 
         $element->add_control(
-            'eael_ext_scroll_to_top_button_icon_image',
-            [
-                'label' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::ICONS,
-                'default' => [
-                    'value' => 'fas fa-chevron-up',
-                    'library' => 'fa-solid',
-                ],
+			'eael_ext_scroll_to_top_button_icon_image',
+			[
+				'label'       => esc_html__( 'Upload SVG Icon', 'essential-addons-for-elementor-lite' ),
+				'type'        => \Elementor\Controls_Manager::MEDIA,
+				'media_types' => [ 'svg' ],
                 'separator' => 'before',
                 'condition' => [
                     'eael_ext_scroll_to_top' => 'yes',
                 ],
-            ]
-        );
+			]
+		);
 
         $element->add_control(
             'eael_ext_scroll_to_top_button_icon_size',
