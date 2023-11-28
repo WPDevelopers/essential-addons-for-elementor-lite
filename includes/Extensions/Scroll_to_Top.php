@@ -344,8 +344,8 @@ class Scroll_to_Top
 				'label'       => esc_html__( 'Upload SVG Icon', 'essential-addons-for-elementor-lite' ),
 				'type'        => \Elementor\Controls_Manager::MEDIA,
 				'media_types' => [ 'svg' ],
-                'separator' => 'before',
-                'condition' => [
+                'separator'   => 'before',
+                'condition'   => [
                     'eael_ext_scroll_to_top' => 'yes',
                 ],
 			]
