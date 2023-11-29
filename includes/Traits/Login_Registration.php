@@ -1518,7 +1518,7 @@ trait Login_Registration {
 		if ( ! isset( $_REQUEST['g-recaptcha-response'] ) ) {
 			return false;
 		}
-		$endpoint = 'https://www.google.com/recaptcha/api/siteverify';
+		$endpoint = 'https://www.recaptcha.net/recaptcha/api/siteverify';
 		$data     = [
 			'secret'   => 'v3' === $version ? get_option( 'eael_recaptcha_secret_v3' ) : get_option( 'eael_recaptcha_secret' ),
 			'response' => sanitize_text_field( $_REQUEST['g-recaptcha-response'] ),

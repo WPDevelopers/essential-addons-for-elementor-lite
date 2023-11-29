@@ -56,7 +56,7 @@ trait Enqueue
 	        }
 	        $recaptcha_api_args = apply_filters( 'eael_lr_recaptcha_api_args', $recaptcha_api_args );
 	        $recaptcha_api_args = http_build_query( $recaptcha_api_args );
-            wp_register_script('eael-recaptcha', "https://www.google.com/recaptcha/api.js?{$recaptcha_api_args}", false, EAEL_PLUGIN_VERSION, false);
+            wp_register_script('eael-recaptcha', "https://www.recaptcha.net/recaptcha/api.js?{$recaptcha_api_args}", false, EAEL_PLUGIN_VERSION, false);
         }
     }
 
