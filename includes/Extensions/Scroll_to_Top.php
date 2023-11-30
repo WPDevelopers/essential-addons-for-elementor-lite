@@ -379,22 +379,6 @@ class Scroll_to_Top
         );
 
         $element->add_control(
-            'eael_ext_scroll_to_top_button_icon_color',
-            [
-                'label' => __('Icon Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#ffffff',
-                'selectors' => [
-                    '.eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button i' => 'color: {{VALUE}}',
-                    '.eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button svg' => 'fill: {{VALUE}}',
-                ],
-                'condition' => [
-                    'eael_ext_scroll_to_top' => 'yes',
-                ],
-            ]
-        );
-
-        $element->add_control(
             'eael_ext_scroll_to_top_button_bg_color',
             [
                 'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
