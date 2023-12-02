@@ -1034,6 +1034,9 @@ class Helper
 	 * @return string
 	 */
 	public static function eael_wp_kses( $text ) {
+        if ( empty( $text ) ) {
+            return '';
+        }
 		return wp_kses( $text, self::eael_allowed_tags(), array_merge( wp_allowed_protocols(), [ 'data' ] ) );
 	}
 

@@ -570,6 +570,55 @@ $config = [
                 ],
             ],
         ],
+        'woo-product-list' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_List',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/load-more.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+	                [
+		                'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/quick-view.min.css',
+		                'type' => 'self',
+		                'context' => 'view',
+	                ],
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-product-list.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+                'js'  => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js',
+                        'type' => 'lib',
+                        'context' => 'view',
+                    ],
+	                [
+		                'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/isotope/isotope.pkgd.min.js',
+		                'type'    => 'lib',
+		                'context' => 'view',
+	                ],
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/load-more.min.js',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                    [
+	                    'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/quick-view.min.js',
+	                    'type' => 'self',
+	                    'context' => 'view',
+                    ],
+	                [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/woo-product-list.min.js',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
         'contact-form-7' => [
             'class' => '\Essential_Addons_Elementor\Elements\Contact_Form_7',
             'dependency' => [

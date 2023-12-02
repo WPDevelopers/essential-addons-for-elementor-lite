@@ -551,7 +551,28 @@ class Filterable_Gallery extends Widget_Base
 			]
 		);
 
-         $this->add_control(
+        //Youtube video privacy notice
+        $this->add_control(
+			'eael_privacy_notice_control',
+			[
+				'label'        => esc_html__( 'Display Consent Notice', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+                'description'  => esc_html__( 'If enabled, The consent motice will appear before playing the video.', 'essential-addons-for-elementor-lite' ),
+				'default'      => '',
+			]
+		);
+
+        $this->add_control(
+			'eael_privacy_notice',
+			[
+				'label'       => esc_html__( 'Privacy Notice', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::TEXT,
+                'ai'          => [ 'active' => false, ],
+                'condition'   => ['eael_privacy_notice_control' => 'yes' ]
+			]
+		);
+
+        $this->add_control(
             'eael_item_randomize',
             [
                 'label' => __('Randomize Item', 'essential-addons-for-elementor-lite'),
@@ -3418,6 +3439,8 @@ class Filterable_Gallery extends Widget_Base
      * @return string : Html markup
      */
     protected function gallery_item_thumbnail_content($settings, $item){
+        
+
         $html = '<img src="' . $item['image'] . '" data-lazy-src="'.$item['image'].'" alt="' . esc_attr(get_post_meta($item['image_id'], '_wp_attachment_image_alt', true)) . '" class="gallery-item-thumbnail">';
 
         if ( empty($settings['eael_section_fg_full_image_clickable']) && $item['video_gallery_switch'] !== 'true' ) {
@@ -3431,7 +3454,7 @@ class Filterable_Gallery extends Widget_Base
         }
 
         if (isset($item['video_gallery_switch']) && ($item['video_gallery_switch'] === 'true')) {
-            $html .= $this->video_gallery_switch_content($item);
+            $html .= $this->video_gallery_switch_content( $item, true, $settings );
         }
 
         return $html;
@@ -3445,13 +3468,14 @@ class Filterable_Gallery extends Widget_Base
      * @param boolean $show_video_popup_bg
      * @return string : Html markup
      */
-    protected function video_gallery_switch_content($item, $show_video_popup_bg=true){
+    protected function video_gallery_switch_content( $item, $show_video_popup_bg=true, $settings = null ) {
         $html = '';
 
         $icon_url = isset($item['play_icon']['url']) ? $item['play_icon']['url'] : '';
         $video_url = isset($item['video_link']) ? $item['video_link'] : '#';
+        $eael_privacy_notice = isset( $settings['eael_privacy_notice'] ) ? $settings['eael_privacy_notice'] : '';
 
-        $html .= '<a aria-label="eael-magnific-video-link" href="' . esc_url($video_url) . '" class="video-popup eael-magnific-link eael-magnific-link-clone active eael-magnific-video-link mfp-iframe">';
+        $html .= '<a title="'.esc_attr( $eael_privacy_notice ).'" aria-label="eael-magnific-video-link" href="' . esc_url($video_url) . '" class="video-popup eael-magnific-link eael-magnific-link-clone active eael-magnific-video-link mfp-iframe">';
 
         if( $show_video_popup_bg ){
             $html .= '<div class="video-popup-bg"></div>';
@@ -3614,7 +3638,7 @@ class Filterable_Gallery extends Widget_Base
             $html .= '</div>';
 
             if (isset($item['video_gallery_switch']) && ($item['video_gallery_switch'] === 'true')) {
-                $html .= $this->video_gallery_switch_content($item, false);
+                $html .= $this->video_gallery_switch_content( $item, false );
             } else {
                 if (empty($settings['eael_section_fg_full_image_clickable'])) {
                     $html .= $this->render_fg_buttons($settings, $item);
@@ -3951,6 +3975,25 @@ class Filterable_Gallery extends Widget_Base
 
                                 }
                             }
+                        },
+                        iframe: {
+                            markup: `<div class="mfp-iframe-scaler">
+                                        <div class="mfp-close"></div>
+                                        <iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>
+                                        <div class="mfp-title eael-privacy-message"></div>
+                                    </div>`
+                        },
+                        callbacks: {
+                            markupParse: function(template, values, item) {
+                                if( item.el.attr('title') !== "" ) {
+                                    values.title = item.el.attr('title');
+                                }
+                            },
+                            open: function() {
+                                setTimeout(() => {
+                                    $(".eael-privacy-message").remove();
+                                }, 5000);
+                            },
                         }
                     });
 
