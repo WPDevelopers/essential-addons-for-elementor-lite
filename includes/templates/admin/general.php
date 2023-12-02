@@ -17,7 +17,7 @@
                         <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-logo.svg' ); ?>"
                              alt="">
                     </div>
-                    <h2>Unlock <span class="color__secondary">4000+</span> <?php _e('Ready Templates Built With Elementor &
+                    <h2>Unlock <span class="color__secondary">5000+</span> <?php _e('Ready Templates Built With Elementor &
                         Essential
                         Addons From Templately.','essential-addons-for-elementor-lite'); ?></h2>
                     <p><?php _e('Get Access to amazing features and boost your Elementor page building experience with Templately','essential-addons-for-elementor-lite'); ?>
@@ -44,10 +44,10 @@
                         <div class="eael-col-md-6">
                             <div class="eael-video__block">
                                 <div class="thumb">
-                                    <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/youtube-promo.jpg' ) ?>"
+                                    <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/youtube-promo.png' ) ?>"
                                          alt="">
                                 </div>
-                                <a target="_blank" href="https://www.youtube.com/watch?v=KIrB_-0gZXI" class="play__btn">
+                                <a target="_blank" href="https://www.youtube.com/watch?v=ZISSbnHo0rE" class="play__btn">
                                     <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/play-btn.png' ); ?>"
                                          alt="">
                                 </a>
