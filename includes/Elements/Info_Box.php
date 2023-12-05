@@ -1668,7 +1668,6 @@ class Info_Box extends Widget_Base
                 <?php if ('content' === $settings['eael_infobox_text_type']): ?>
                     <?php if (!empty($settings['eael_infobox_text'])): ?>
                         <?php $tagsPresent = preg_match('/<(h[1-6]|p|pre)>.*<\/(h[1-6]|p|pre)>/i', $settings['eael_infobox_text']); ?>
-                        
                         <?php echo $tagsPresent ? $settings['eael_infobox_text'] : '<p>' . $settings['eael_infobox_text'] . '</p>'; ?>
                     <?php endif;?>
                     <?php $this->render_infobox_button();?>
