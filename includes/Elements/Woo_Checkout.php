@@ -3053,6 +3053,13 @@ class Woo_Checkout extends Widget_Base {
 	        return;
         }
 
+		$settings = $this->get_settings_for_display();
+		$deviceName = \Essential_Addons_Elementor\Classes\Helper::eael_get_current_device_by_screen();
+		if ( ! \Elementor\Plugin::$instance->editor->is_edit_mode() && ! empty( $settings["hide_{$deviceName}"] ) ) {
+			echo "<!-- This content is hidden on {$deviceName} devices -->";
+			return;
+		}
+
 		/**
 		 * Remove WC Coupon Action From  Neve Theme
 		 */
@@ -3065,7 +3072,6 @@ class Woo_Checkout extends Widget_Base {
 			add_action( 'eael_wc_multistep_checkout_after_shipping', [ $wca, 'add_carrier_agent_field_before_payment' ], 10, 0 );
 		}
 
-        $settings = $this->get_settings_for_display();
         add_filter( 'woocommerce_checkout_fields', [ $this, 'ea_checkout_fields' ], 99999 );
 		do_action( 'eael_woo_checkout_before_render', $settings );
 
