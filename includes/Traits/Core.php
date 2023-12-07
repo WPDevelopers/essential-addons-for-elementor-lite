@@ -215,6 +215,7 @@ trait Core
                 'enabled' => ($document->get_settings('eael_ext_toc_global') == 'yes'),
                 'eael_ext_toc_global_display_condition' => $document->get_settings('eael_ext_toc_global_display_condition'),
                 'eael_ext_toc_title' => $document->get_settings('eael_ext_toc_title'),
+                'eael_ext_toc_title_tag' => $document->get_settings('eael_ext_toc_title_tag'),
                 'eael_ext_toc_position' => $document->get_settings('eael_ext_toc_position'),
                 'eael_ext_toc_supported_heading_tag' => $document->get_settings('eael_ext_toc_supported_heading_tag'),
                 'eael_ext_toc_content_selector' => $document->get_settings('eael_ext_toc_content_selector'),
