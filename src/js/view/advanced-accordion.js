@@ -53,6 +53,14 @@ ea.hooks.addAction("init", "ea", () => {
 				e.preventDefault();
 
 				var $this = $(this);
+
+				//
+				setTimeout(() => {
+					$('html, body').animate({
+						scrollTop: $this.offset().top - $customIdOffset
+					}, 500);
+				}, 500);
+
 				if ($accordionType === "accordion") {
 					if ($this.hasClass("show")) {
 						$this.removeClass("show active");
