@@ -1599,7 +1599,7 @@ class Flip_Box extends Widget_Base
                                         <?php endif; ?>
                                     </div>
                                     <?php if ( !empty( $settings['eael_flipbox_front_title'] ) ): ?>
-                                    <<?php echo Helper::eael_validate_html_tag($settings['eael_flipbox_front_title_tag']); ?> class="eael-elements-flip-box-heading"><?php echo esc_html__($settings['eael_flipbox_front_title'], 'essential-addons-for-elementor-lite'); ?></<?php echo Helper::eael_validate_html_tag($settings['eael_flipbox_front_title_tag']); ?>>
+                                    <<?php echo Helper::eael_validate_html_tag($settings['eael_flipbox_front_title_tag']); ?> class="eael-elements-flip-box-heading"><?php echo Helper::eael_wp_kses( $settings['eael_flipbox_front_title'] ); ?></<?php echo Helper::eael_validate_html_tag($settings['eael_flipbox_front_title_tag']); ?>>
                                     <?php endif; ?>
                                     <div class="eael-elements-flip-box-content">
                                         <?php echo $settings['eael_flipbox_front_text']; ?>
@@ -1635,7 +1635,7 @@ class Flip_Box extends Widget_Base
                                         </div>
                                     <?php } ?>
                                     <?php if ( !empty( $settings['eael_flipbox_back_title'] ) ): ?>
-                                    <<?php echo $flipbox_if_html_title_tag, ' ', $this->get_render_attribute_string('flipbox-title-container'); ?>><?php echo esc_html__($settings['eael_flipbox_back_title'], 'essential-addons-for-elementor-lite'); ?></<?php echo $flipbox_if_html_title_tag; ?>>
+                                    <<?php echo $flipbox_if_html_title_tag, ' ', $this->get_render_attribute_string('flipbox-title-container'); ?>><?php echo Helper::eael_wp_kses( $settings['eael_flipbox_back_title'] ); ?></<?php echo $flipbox_if_html_title_tag; ?>>
                                     <?php endif; ?>
                                     <div class="eael-elements-flip-box-content">
                                         <?php echo $settings['eael_flipbox_back_text']; ?>
