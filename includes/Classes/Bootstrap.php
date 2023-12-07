@@ -243,6 +243,7 @@ class Bootstrap
     		add_action('wp_ajax_nopriv_eael_checkout_cart_qty_update', [$this, 'eael_checkout_cart_qty_update'] );
 
 		    add_action( 'wp_loaded', [ $this, 'eael_woo_cart_empty_action' ], 20 );
+		    add_filter( 'woocommerce_checkout_fields', [ $this, 'eael_customize_woo_checkout_fields' ] );
 
 		    add_action( 'eael_woo_before_product_loop', function ( $layout ) {
 			    if ( $layout === 'eael-product-default' ) {
