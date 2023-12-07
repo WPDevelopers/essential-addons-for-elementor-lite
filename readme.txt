@@ -33,7 +33,7 @@ Grab access to 5,000 pre-made templates templates from the ultimate templates cl
 
 [Templately: Most Popular Templates Cloud For Elementor](https://www.youtube.com/watch?v=Z73muoczARc)
 
-Each of these Elementor templates is completely customizable and responsive, and also seamlessly compatible with Essential Addons. You can add Elementor addons, change font or color  and personalize them effortlessly. 
+Each of these Elementor templates is completely customizable and responsive, and also seamlessly compatible with Essential Addons. You can add Elementor addons, change font or color  and personalize them effortlessly.
 
 Templately also offers advanced features and facilities to saving your Elementor templates to cloud. Save all your ready and customized designs with Templately & deploy in hundreds of websites with 1-click. Increase productivity and power up your whole team to build websites faster than ever before.
 
@@ -175,7 +175,7 @@ More features and improvements are coming on regular updates. Want to unlock the
 
 ### Elementor WooCommerce Widgets From Essential Addons
 
-With Essential Addons, we bring you seamless compatibility with WooCommerce, enhancing your ability to showcase products, categories, and filters with ease. There are 11+ beautiful **Elementor WooCommerce widgets** for your every need: 
+With Essential Addons, we bring you seamless compatibility with WooCommerce, enhancing your ability to showcase products, categories, and filters with ease. There are 11+ beautiful **Elementor WooCommerce widgets** for your every need:
 
 [EA Woo Product Carousel](https://essential-addons.com/elementor/docs/woo-product-carousel/): Display your store’s products interactively with this Elementor WooCommerce widget and implement various styling options and ready-made layouts to create an interactive product showcase on your WordPress website.
 
