@@ -1118,7 +1118,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 = 4.7.1 - 07/06/2021 =
 
-- Removed: Elementor  deprecation methods
+- Removed: Elementor  deprecation methods
 - Added: Compatibility with PHP 8.0
 - Added: EA Login/Register Form | Added permission check for security enhancement
 - Fixed: EA Gravity Form | Styles being applied to input fields
@@ -2047,5 +2047,4 @@ Initial stable release
 
 
 == Upgrade Notice ==
-
 
