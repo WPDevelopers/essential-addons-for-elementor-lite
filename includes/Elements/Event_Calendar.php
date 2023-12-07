@@ -3224,6 +3224,13 @@ class Event_Calendar extends Widget_Base
                     }
                 }
 
+	            $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : date( 'Y-m-d' );
+	            $should_show  = $this->is_old_event( $start, $default_date );
+
+	            if ( $should_show ) {
+		            continue;
+	            }
+
 	            $data[] = [
 		            'id'                => $i,
 		            'title'             => ! empty( $event["eael_event_title"] ) ? $event["eael_event_title"] : 'No Title',
@@ -3348,6 +3355,13 @@ class Event_Calendar extends Widget_Base
                     }
                 }
 
+	            $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : date( 'Y-m-d' );
+	            $should_show  = $this->is_old_event( $ev_start_date, $default_date );
+
+	            if ( $should_show ) {
+		            continue;
+	            }
+
                 $calendar_data[] = [
                     'id' => ++$key,
                     'title' => !empty($item->summary) ? $item->summary : 'No Title',
@@ -3469,14 +3483,16 @@ class Event_Calendar extends Widget_Base
         return $calendar_data;
     }
 
-    public function is_old_event($start_date){
-        $today    = strtotime(current_time( 'Y-m-d' ));
-        $start_date_timestamp = strtotime($start_date);
+    public function is_old_event($start_date, $date_to_comp = '' ){
+	    $date_to_comp         = $date_to_comp === '' ? current_time( 'Y-m-d' ) : $date_to_comp;
+	    $date_to_comp         = strtotime( $date_to_comp );
+	    $start_date_timestamp = strtotime( $start_date );
 
-        if($start_date_timestamp < $today){
-            return true;
-        }
-        return false;
+	    if ( $start_date_timestamp < $date_to_comp ) {
+		    return true;
+	    }
+
+	    return false;
     }
 
     public function fetch_color_or_global_color($settings, $control_name=''){
