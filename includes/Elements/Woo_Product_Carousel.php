@@ -1180,25 +1180,25 @@ class Woo_Product_Carousel extends Widget_Base {
         );
         
         $this->add_control(
-            'eael_product_carousel_price_color',
+            'eael_product_carousel_sale_price_color',
             [
                 'label'     => esc_html__( 'Regular Price Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-product-carousel .price, {{WRAPPER}} .eael-product-carousel .eael-product-price .amount' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-carousel .price del, {{WRAPPER}} .eael-product-carousel .eael-product-price del .amount' => 'color: {{VALUE}};',
                 ],
             ]
         );
-
+        
         $this->add_control(
-            'eael_product_carousel_sale_price_color',
+            'eael_product_carousel_price_color',
             [
                 'label'     => esc_html__( 'Sale Price Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-product-carousel .price del, {{WRAPPER}} .eael-product-carousel .eael-product-price del .amount' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-carousel .price, {{WRAPPER}} .eael-product-carousel .eael-product-price .amount' => 'color: {{VALUE}};',
                 ],
             ]
         );
