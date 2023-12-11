@@ -10,6 +10,12 @@ ea.hooks.addAction( "init", "ea", () => {
 	
 		if ( $animation != 'eael-interactive-circle-animation-0' ) {
 			var $circleContent = $scope.find( ".eael-circle-content" );
+			
+			$('body').scroll(function () {
+				if($circleWrap.isInViewport()){
+					$(window).trigger('resize');
+				}
+			});
 
 			$($circleContent).waypoint(
 				function() {
