@@ -1190,28 +1190,28 @@ $config = [
 //				        'context' => 'view',
 //			        ],
 		        ],
-		        'js'  => [
-			        [
-				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/three/three.min.js',
-				        'type'    => 'lib',
-				        'context' => 'view',
-			        ],
-			        [
-				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/photo-sphere-viewer/core.min.js',
-				        'type'    => 'lib',
-				        'context' => 'view',
-			        ],
-			        [
-				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/photo-sphere-viewer/autorotate.min.js',
-				        'type'    => 'lib',
-				        'context' => 'view',
-			        ],
-			        [
-				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/sphere-photo-viewer.min.js',
-				        'type'    => 'self',
-				        'context' => 'view',
-			        ],
-		        ],
+//		        'js'  => [
+//			        [
+//				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/three/three.min.js',
+//				        'type'    => 'lib',
+//				        'context' => 'view',
+//			        ],
+//			        [
+//				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/photo-sphere-viewer/core.min.js',
+//				        'type'    => 'lib',
+//				        'context' => 'view',
+//			        ],
+//			        [
+//				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/photo-sphere-viewer/autorotate.min.js',
+//				        'type'    => 'lib',
+//				        'context' => 'view',
+//			        ],
+//			        [
+//				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/sphere-photo-viewer.min.js',
+//				        'type'    => 'self',
+//				        'context' => 'view',
+//			        ],
+//		        ],
 	        ],
         ],
     ],
