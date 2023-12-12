@@ -18,7 +18,6 @@ function EAELsetScreenSize(){
 	let expirationDate = new Date();
 	expirationDate.setDate(expirationDate.getDate() + 30);
 	document.cookie = "eael_screen=" + eael_screenWidth + ";expires=" + expirationDate.toUTCString() + ";path=/";
-	console.log('resized',eael_screenWidth);
 }
 EAELsetScreenSize();
 window.addEventListener('resize', EAELsetScreenSize);
