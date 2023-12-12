@@ -1602,7 +1602,7 @@ class Flip_Box extends Widget_Base
                                     <<?php echo Helper::eael_validate_html_tag($settings['eael_flipbox_front_title_tag']); ?> class="eael-elements-flip-box-heading"><?php echo Helper::eael_wp_kses( $settings['eael_flipbox_front_title'] ); ?></<?php echo Helper::eael_validate_html_tag($settings['eael_flipbox_front_title_tag']); ?>>
                                     <?php endif; ?>
                                     <div class="eael-elements-flip-box-content">
-                                        <?php $tagsPresent = preg_match('/<(h[1-6]|p|pre)>.*<\/(h[1-6]|p|pre)>/i', $settings['eael_infobox_text']); ?>
+	                                    <?php $tagsPresent = preg_match( '/<(h[1-6]|p|pre)>.*<\/(h[1-6]|p|pre)>/i', $settings['eael_flipbox_front_text'] ); ?>
                                         <?php echo $tagsPresent ? $settings['eael_flipbox_front_text'] : '<p>' . $settings['eael_flipbox_front_text'] . '</p>'; ?>
                                     </div>
                                 </div>
