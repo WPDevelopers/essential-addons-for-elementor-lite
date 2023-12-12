@@ -30,9 +30,9 @@ ea.hooks.addAction( "init", "ea", () => {
 		var $tabContents = $circleWrap.find( ".eael-circle-btn-content" );
 
 		//Support for Keyboard accessibility
-		$scope.on( 'keydown', '.eael-circle-btn', function ( e ) {
-			if ( e.which === 13 || e.which === 32 ) {
-				$( this ).trigger( 'click' );
+		$scope.on( 'keyup', '.eael-circle-btn', function ( e ) {
+			if ( e.which === 9 || e.which === 32 ) {
+				$( this ).trigger( $eventType );
 			}
 		});
 		
