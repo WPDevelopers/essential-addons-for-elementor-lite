@@ -3003,6 +3003,7 @@ class Woo_Product_Carousel extends Widget_Base {
                             }
                             wp_reset_postdata();
                             echo '</ul>';
+                            do_action( 'eael_woo_after_product_loop' );
                         echo '</div>';
                     else:
 	                    echo '<p class="eael-no-posts-found">'.HelperClass::eael_wp_kses($settings['eael_product_carousel_not_found_msg']).'</p>';
