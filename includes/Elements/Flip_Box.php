@@ -1639,7 +1639,8 @@ class Flip_Box extends Widget_Base
                                     <<?php echo $flipbox_if_html_title_tag, ' ', $this->get_render_attribute_string('flipbox-title-container'); ?>><?php echo Helper::eael_wp_kses( $settings['eael_flipbox_back_title'] ); ?></<?php echo $flipbox_if_html_title_tag; ?>>
                                     <?php endif; ?>
                                     <div class="eael-elements-flip-box-content">
-                                        <?php echo $settings['eael_flipbox_back_text']; ?>
+                                        <?php $tagsPresent = preg_match( '/<(h[1-6]|p|pre)>.*<\/(h[1-6]|p|pre)>/i', $settings['eael_flipbox_back_text'] ); ?>
+                                        <?php echo $tagsPresent ? $settings['eael_flipbox_back_text'] : '<p>' . $settings['eael_flipbox_back_text'] . '</p>'; ?>
                                     </div>
 
                                     <?php if ($settings['flipbox_link_type'] == 'button' && !empty($settings['flipbox_button_text'])) : ?>
