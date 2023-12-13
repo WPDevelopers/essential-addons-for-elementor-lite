@@ -54,28 +54,13 @@ ea.hooks.addAction("init", "ea", () => {
 
 				var $this = $(this);
 
-				//
-				setTimeout(() => {
-					$('html, body').animate({
-						scrollTop: $this.offset().top - $customIdOffset
-					}, 500);
-				}, 500);
-
 				if ($accordionType === "accordion") {
 					if ($this.hasClass("show")) {
 						$this.removeClass("show active");
 						$this.next().slideUp($accordionSpeed);
 					} else {
-						$this
-						.parent()
-						.parent()
-						.find(".eael-accordion-header")
-						.removeClass("show active");
-						$this
-						.parent()
-						.parent()
-						.find(".eael-accordion-content")
-						.slideUp($accordionSpeed);
+						$this.parent().parent().find(".eael-accordion-header").removeClass("show active");
+						$this.parent().parent().find(".eael-accordion-content").slideUp($accordionSpeed);
 						$this.toggleClass("show active");
 						$this.next().slideToggle($accordionSpeed);
 					}
