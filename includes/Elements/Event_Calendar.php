@@ -685,7 +685,23 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
-
+        $this->add_control(
+			'eael_event_popup_date_formate',
+			[
+				'label' => esc_html__( 'Popup Date Formate', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'MMM Do',
+				'options' => [
+					'MMM Do'      => date('M jS'),
+					'MMMM Do'     => date('F jS'),
+					'Do MMM'      => date('jS M'),
+					'Do MMMM'     => date('jS F'),
+					'MM-DD-YYYY'  => date('m-d-Y'),
+					'YYYY-DD-MM'  => date('Y-d-m'),
+					'YYYY-MM-DD'  => date('Y-m-d'),
+				],
+			]
+		);
 
         if (apply_filters('eael/is_plugin_active', 'eventON/eventon.php') && apply_filters('eael/pro_enabled', false)) {
             $this->add_control(
@@ -2988,6 +3004,7 @@ class Event_Calendar extends Widget_Base
             data-defaultdate = "' . $default_date . '"
             data-time_format = "' . $time_format . '"
             data-event_limit = "' . $event_limit . '"
+            data-popup_date_formate = "' . esc_attr( $settings['eael_event_popup_date_formate'] ) . '"
             data-multidays_event_day_count= "' . $multi_days_event_day_count . '"
             data-hideDetailsLink= "' . $settings['eael_event_details_link_hide'] . '"
             data-detailsButtonText = "' . Helper::eael_wp_kses( $settings['eael_event_details_text'] ) . '"
