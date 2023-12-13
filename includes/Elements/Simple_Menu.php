@@ -1605,9 +1605,14 @@ class Simple_Menu extends Widget_Base
                 'container'   => false,
                 'echo'        => false,
             ];
-
-            echo '<div ' . $this->get_render_attribute_string('eael-simple-menu') . '>' . wp_nav_menu($args) . '</div>';
-
+            ?>
+            <div <?php echo $this->get_render_attribute_string('eael-simple-menu'); ?>>
+                <?php echo wp_nav_menu( $args ); ?>
+                <button class="eael-simple-menu-toggle">
+                    <?php Icons_Manager::render_icon( $settings['eael_simple_menu_hamburger_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+                </button>
+            </div>
+            <?php
         }
     }
 
