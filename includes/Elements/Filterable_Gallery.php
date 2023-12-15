@@ -3421,6 +3421,17 @@ class Filterable_Gallery extends Widget_Base
             }
         }
 
+		if ( $settings['eael_section_fg_full_image_action'] === 'link' ) {
+            static $ea_link_repeater_index = 0;
+            $link_key = 'link_' . $ea_link_repeater_index++;
+
+            if ( ! empty( $item['link'] ) && is_array( $item['link'] ) ) {
+                $this->add_link_attributes( $link_key, $item['link'] );
+            }
+
+            $html .= '<a ' . $this->get_render_attribute_string( $link_key ) . '>';
+        }
+
         return $html;
     }
 
