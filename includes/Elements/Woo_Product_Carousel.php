@@ -3015,6 +3015,8 @@ class Woo_Product_Carousel extends Widget_Base {
 	    $settings['eael_product_carousel_sale_text'] = HelperClass::eael_wp_kses($settings['eael_product_carousel_sale_text']);
 	    $settings['eael_product_carousel_stockout_text'] = HelperClass::eael_wp_kses($settings['eael_product_carousel_stockout_text']);
 
+        $no_products_found = 0;
+
         if ( is_user_logged_in() ) {
             $product_purchase_type = ! empty( $settings['product_type_logged_users'] ) ? sanitize_text_field( $settings['product_type_logged_users'] ) : '';
 
