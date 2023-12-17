@@ -285,7 +285,10 @@ class Info_Box extends Widget_Base
                 'dynamic' => [
                     'active' => true,
                 ],
-                'default' => esc_html__('Write a short description, that will describe the title or something informational and useful.', 'essential-addons-for-elementor-lite'),
+                'ai' => [
+                    'active' => false,
+                ],
+                'default' => __('<p>Write a short description, that will describe the title or something informational and useful.</p>', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'eael_infobox_text_type' => 'content',
                 ],
@@ -1664,7 +1667,8 @@ class Info_Box extends Widget_Base
             if ('yes' == $settings['eael_show_infobox_content']): ?>
                 <?php if ('content' === $settings['eael_infobox_text_type']): ?>
                     <?php if (!empty($settings['eael_infobox_text'])): ?>
-                        <p><?php echo $settings['eael_infobox_text']; ?></p>
+                        <?php $tagsPresent = preg_match('/<(h[1-6]|p|pre)>.*<\/(h[1-6]|p|pre)>/i', $settings['eael_infobox_text']); ?>
+                        <?php echo $tagsPresent ? $settings['eael_infobox_text'] : '<p>' . $settings['eael_infobox_text'] . '</p>'; ?>
                     <?php endif;?>
                     <?php $this->render_infobox_button();?>
                 <?php elseif ('template' === $settings['eael_infobox_text_type']):
