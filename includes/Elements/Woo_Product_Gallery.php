@@ -54,7 +54,7 @@ class Woo_Product_Gallery extends Widget_Base {
 	}
 
 	public function get_categories() {
-		return [ 'essential-addons-elementor' ];
+		return [ 'essential-addons-elementor', 'woocommerce-elements' ];
 	}
 
 	public function get_keywords() {
@@ -354,6 +354,20 @@ class Woo_Product_Gallery extends Widget_Base {
 				],
 				'toggle'       => true,
 				'prefix_class' => 'eael-product-gallery-column%s-',
+			]
+		);
+
+		$this->add_control(
+			'eael_wc_loop_hooks',
+			[
+				'label'        => esc_html__( 'WooCommerce Loop Hooks', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'ON', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'OFF', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'separator'    => 'before',
+				'default'      => '',
+				'description'  => __( 'This will enable WooCommerce loop Before and After hooks. It may break your layout.', 'essential-addons-for-elementor-lite' )
 			]
 		);
 
@@ -2664,7 +2678,26 @@ class Woo_Product_Gallery extends Widget_Base {
 			$args[ 'meta_key' ] = '_wc_average_rating';
 			$args[ 'orderby' ]  = 'meta_value_num';
 			$args[ 'order' ]    = 'DESC';
-		}
+		} else if ( $settings[ 'eael_product_gallery_product_filter' ] == 'related-products' ) {
+		    $current_product_id = get_the_ID();
+            $product_categories = wp_get_post_terms( $current_product_id, 'product_cat', array( 'fields' => 'ids' ) );
+            $product_tags       = wp_get_post_terms( $current_product_id, 'product_tag', array( 'fields' => 'names' ) );
+            $args['tax_query'] = array(
+                'relation' => 'OR',
+                array(
+                    'taxonomy' => 'product_cat',
+                    'field'    => 'term_id',
+                    'terms'    => $product_categories,
+                    'operator' => 'IN',
+                ),
+                array(
+                    'taxonomy' => 'product_tag',
+                    'field'    => 'name',
+                    'terms'    => $product_tags,
+                    'operator' => 'IN',
+                ),
+            );
+	    }
 
 		if( isset( $args_tax_query_combined ) ){
 			$args[ 'tax_query' ][] = $args_tax_query_combined;
