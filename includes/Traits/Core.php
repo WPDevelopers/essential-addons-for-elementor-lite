@@ -176,7 +176,8 @@ trait Core
 
         $document = Plugin::$instance->documents->get($post_id, false);
         $global_settings = get_option('eael_global_settings');
-
+        $global_settings = ! empty( $global_settings ) ? $global_settings : [];
+         
         if ($document->get_settings('eael_ext_reading_progress_global') == 'yes' && $document->get_settings('eael_ext_reading_progress') == 'yes') {
             $global_settings['reading_progress'] = [
                 'post_id' => $post_id,
