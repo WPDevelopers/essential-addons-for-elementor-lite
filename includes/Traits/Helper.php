@@ -263,6 +263,11 @@ trait Helper
 	 */
 	public function eael_customize_woo_checkout_fields( $fields ) {
 		global $post;
+        
+        if ( ! is_object( $post ) || is_null( $post ) ) {
+            return $fields;
+        }
+
 		$widgets    = get_post_meta( $post->ID, '_elementor_controls_usage', true );
 		$widget_key = 'eael-woo-checkout';
 		if ( ! $widgets ) {
