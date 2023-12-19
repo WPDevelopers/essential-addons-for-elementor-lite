@@ -1,0 +1,41 @@
+{
+    "packages": [
+        {
+            "name": "priyomukul/wp-notice",
+            "version": "v2.x-dev",
+            "version_normalized": "2.9999999.9999999.9999999-dev",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:priyomukul/wp-notice.git",
+                "reference": "f3d02f6e772cb459e9b89d77605e02646f9c5d65"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/priyomukul/wp-notice/zipball/f3d02f6e772cb459e9b89d77605e02646f9c5d65",
+                "reference": "f3d02f6e772cb459e9b89d77605e02646f9c5d65",
+                "shasum": ""
+            },
+            "time": "2023-11-20T08:03:13+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "PriyoMukul\\WPNotice\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Priyo Mukul",
+                    "email": "17237437+priyomukul@users.noreply.github.com"
+                }
+            ],
+            "support": {
+                "source": "https://github.com/priyomukul/wp-notice/tree/v2",
+                "issues": "https://github.com/priyomukul/wp-notice/issues"
+            },
+            "install-path": "../priyomukul/wp-notice"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}
