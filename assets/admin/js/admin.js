@@ -120,7 +120,7 @@
 				        },
 				        beforeSend: function () {
 					        _this.html(
-						        '<i id="eael-spinner" class="ea-admin-icon icon-settings-loader"></i><span>Saving Data...</span>'
+						        '<i id="eael-spinner" class="ea-admin-icon eael-icon-settings-loader"></i><span>Saving Data...</span>'
 					        );
 				        },
 				        success: function ( response ) {
@@ -161,7 +161,7 @@
 			        },
 			        beforeSend: function () {
 				        _this.html(
-					        '<i id="eael-spinner" class="ea-admin-icon icon-settings-loader"></i><span>Generating...</span>'
+					        '<i id="eael-spinner" class="ea-admin-icon eael-icon-settings-loader"></i><span>Generating...</span>'
 				        );
 			        },
 			        success: function ( response ) {

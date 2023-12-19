@@ -1,6 +1,7 @@
 .eael-img-accordion {
 	display: flex;
 	height: 50vh;
+	overflow: hidden;
 
 	&.accordion-direction-vertical {
 		flex-direction: column;
