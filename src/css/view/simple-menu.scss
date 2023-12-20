@@ -32,7 +32,9 @@
                         text-align: inherit;
 
                         span {
-                            display: none;
+                            &.eael-simple-menu-indicator{
+                                display: none;
+                            }
                         }
                     }
 
