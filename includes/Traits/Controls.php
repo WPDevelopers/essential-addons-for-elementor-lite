@@ -193,6 +193,20 @@ trait Controls
             ]
         );
 
+        if( $wb-> get_name() === 'eael-post-list' ) {
+            $wb->add_control(
+                'eael_fecth_all_posts',
+                [
+                    'label' => esc_html__( 'Fetch All Posts', 'essential-addons-for-elementor-lite' ),
+                    'type' => Controls_Manager::SWITCHER,
+                    'label_on' => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+                    'label_off' => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+                    'return_value' => 'yes',
+                    'description' => esc_html__( 'By Enabling this option all posts will be fetch for "All" tab except exclude.', 'essential-addons-for-elementor-lite' ),
+                ]
+            );
+        }
+
         $wb->add_control(
             'orderby',
             [
