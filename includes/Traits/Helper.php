@@ -9,6 +9,7 @@ if ( !defined( 'ABSPATH' ) ) {
 use Elementor\Plugin;
 use \Essential_Addons_Elementor\Classes\Helper as HelperClass;
 use \Essential_Addons_Elementor\Elements\Woo_Checkout;
+use function Crontrol\Event\get;
 
 trait Helper
 {
@@ -255,6 +256,45 @@ trait Helper
 		if ( isset( $_GET['empty_cart'] ) && 'yes' === esc_html( $_GET['empty_cart'] ) ) {
 			WC()->cart->empty_cart();
 		}
+	}
+
+	/**
+	 * Customize checkout fields.
+	 */
+	public function eael_customize_woo_checkout_fields( $fields ) {
+		global $post;
+        
+        if ( ! is_object( $post ) || is_null( $post ) ) {
+            return $fields;
+        }
+
+		$widgets    = get_post_meta( $post->ID, '_elementor_controls_usage', true );
+		$widget_key = 'eael-woo-checkout';
+		if ( ! $widgets ) {
+			$widget_key = 'woo-checkout';
+			$widgets    = get_post_meta( $post->ID, '_eael_widget_elements', true );
+		}
+
+		$eael_fields = get_post_meta( $post->ID, '_eael_checkout_fields_settings', true );
+
+		if ( ! isset( $widgets[ $widget_key ] ) || empty( $eael_fields ) ) {
+			return $fields;
+		}
+
+		$eael_fields = get_post_meta( $post->ID, '_eael_checkout_fields_settings', true );
+
+		foreach ( $fields as $type => $field_sets ) {
+			foreach ( $field_sets as $key => $field_set ) {
+				if ( isset( $eael_fields[ $type ][ $key ]['label'] ) ) {
+					$fields[ $type ][ $key ]['label'] = $eael_fields[ $type ][ $key ]['label'];
+				}
+				if ( isset( $eael_fields[ $type ][ $key ]['placeholder'] ) ) {
+					$fields[ $type ][ $key ]['placeholder'] = $eael_fields[ $type ][ $key ]['placeholder'];
+				}
+			}
+		}
+
+		return $fields;
 	}
 
     /**
