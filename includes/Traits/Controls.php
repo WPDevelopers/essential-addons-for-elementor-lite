@@ -193,7 +193,7 @@ trait Controls
             ]
         );
 
-        if( $wb-> get_name() === 'eael-post-list' ) {
+        if( $wb->get_name() === 'eael-post-list' ) {
             $wb->add_control(
                 'eael_fecth_all_posts',
                 [
