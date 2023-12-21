@@ -38,6 +38,7 @@ class Select2 extends Base_Data_Control
 				'cl_recurring_day'=> __( 'Recurring Day', 'essential-addons-for-elementor-lite' ),
 				'cl_dynamic'      => __( 'Dynamic Field', 'essential-addons-for-elementor-lite' ),
 				'cl_query_string' => __( 'Query String', 'essential-addons-for-elementor-lite' ),
+				'cl_visit_count'  => __( 'Visit Count', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 		wp_enqueue_script( 'eael-select2' );
