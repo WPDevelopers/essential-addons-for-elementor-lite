@@ -1095,7 +1095,7 @@ class Adv_Tabs extends Widget_Base
 			        $tab_id = $tab['eael_adv_tabs_tab_id'] ? $tab['eael_adv_tabs_tab_id'] : Helper::str_to_css_id( $tab['eael_adv_tabs_tab_title'] );
 			        $tab_id = $tab_id === 'safari' ? 'eael-safari-tab' : $tab_id . '-tab'; ?>
 
-                    <div id="<?php echo $tab_id; ?>" class="clearfix eael-tab-content-item <?php echo esc_attr($tab['eael_adv_tabs_tab_show_as_default']); ?>" data-title-link="<?php echo $tab_id; ?>">
+                    <div id="<?php echo esc_attr( $tab_id ); ?>" class="clearfix eael-tab-content-item <?php echo esc_attr($tab['eael_adv_tabs_tab_show_as_default']); ?>" data-title-link="<?php echo esc_attr( $tab_id ); ?>">
 				        <?php if ('content' == $tab['eael_adv_tabs_text_type']) : ?>
 					        <?php echo do_shortcode($tab['eael_adv_tabs_tab_content']); ?>
 				        <?php elseif ('template' == $tab['eael_adv_tabs_text_type']) : ?>
