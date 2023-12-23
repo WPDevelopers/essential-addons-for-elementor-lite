@@ -1026,7 +1026,7 @@ class Adv_Tabs extends Widget_Base
                             'aria-expanded' => 'false',
                         ] );
 
-                        $repeater_html_tag = !empty($tab['eael_adv_tabs_tab_title_html_tag']) ? $tab['eael_adv_tabs_tab_title_html_tag'] : 'span';
+	                    $repeater_html_tag = ! empty( $tab['eael_adv_tabs_tab_title_html_tag'] ) ? Helper::eael_validate_html_tag( $tab['eael_adv_tabs_tab_title_html_tag'] ) : 'span';
                         $repeater_tab_title = Helper::eael_wp_kses($tab['eael_adv_tabs_tab_title']);
                                 
                         ?>
