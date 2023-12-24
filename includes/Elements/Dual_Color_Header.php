@@ -938,7 +938,7 @@ class Dual_Color_Header extends Widget_Base
 		<<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?> class="title"><span <?php echo $gradient_style;  ?> class="lead <?php echo esc_attr( $settings['eael_dch_dual_color_selector'] ); ?>"><?php esc_html_e
 			($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?>>
 		<?php echo ($settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
-		<span class="subtext"><?php echo $settings['eael_dch_subtext']; ?></span>
+		<span class="subtext"><?php echo Helper::eael_wp_kses( $settings['eael_dch_subtext'] ); ?></span>
 		<?php if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
 			<?php if ($icon_is_new || $icon_migrated) {
 				echo '<span class="eael-dch-svg-icon">';
