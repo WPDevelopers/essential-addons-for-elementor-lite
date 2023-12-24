@@ -2342,8 +2342,8 @@ class Pricing_Table extends Widget_Base
                         </span>
                     </div>
                     <div class="header">
-                        <h2 class="title"><?php echo $settings['eael_pricing_table_title']; ?></h2>
-                        <span class="subtitle"><?php echo $settings['eael_pricing_table_sub_title']; ?></span>
+                        <h2 class="title"><?php echo HelperClass::eael_wp_kses( $settings['eael_pricing_table_title'] ); ?></h2>
+                        <span class="subtitle"><?php echo HelperClass::eael_wp_kses( $settings['eael_pricing_table_sub_title'] ); ?></span>
                     </div>
                     <div class="eael-pricing-tag">
                         <span class="price-tag"><?php echo $pricing; ?></span>
