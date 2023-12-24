@@ -539,7 +539,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 					}
 					?>
 
-                    <ul class="icons-wrap <?php echo $settings['eael_product_action_buttons_preset'] ;?>">
+                    <ul class="icons-wrap <?php echo esc_attr( $settings['eael_product_action_buttons_preset'] ); ?>">
 						<?php
 						if ( $should_print_compare_btn ) {
 							echo '<li class="add-to-compare">';
