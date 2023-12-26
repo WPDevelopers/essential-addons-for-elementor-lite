@@ -614,6 +614,22 @@ class Testimonial extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_testimonial_rating_item_color',
+			[
+				'label'     => esc_html__( 'Rating Color', 'essential-addons-for-elementor-lite'),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#f2b01e',
+				'selectors' => [
+					'{{WRAPPER}} .rating-five .testimonial-star-rating li i' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .rating-one .testimonial-star-rating li:first-child i' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .rating-two .testimonial-star-rating li:nth-child(1) i, {{WRAPPER}} .rating-two .testimonial-star-rating li:nth-child(2) i' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .rating-three .testimonial-star-rating li:nth-child(1) i, {{WRAPPER}} .rating-three .testimonial-star-rating li:nth-child(2) i, {{WRAPPER}} .rating-three .testimonial-star-rating li:nth-child(3) i' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .rating-four .testimonial-star-rating li:nth-child(1) i, {{WRAPPER}} .rating-four .testimonial-star-rating li:nth-child(2) i, {{WRAPPER}} .rating-four .testimonial-star-rating li:nth-child(3) i, {{WRAPPER}} .rating-four .testimonial-star-rating li:nth-child(4) i' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
 			'eael_testimonial_rating_item_distance',
 			[
 				'label' => esc_html__( 'Distance Between Rating Item', 'essential-addons-for-elementor-lite'),
