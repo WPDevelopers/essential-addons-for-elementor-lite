@@ -1168,6 +1168,7 @@ trait Controls
                     'label' => esc_html__('Expansion Indicator', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::TEXT,
                     'dynamic'     => [ 'active' => true ],
+                    'ai' => [ 'active' => false ],
                     'label_block' => false,
                     'default' => esc_html__('...', 'essential-addons-for-elementor-lite'),
                     'condition' => [
@@ -1192,12 +1193,13 @@ trait Controls
             $wb->add_control(
                 'excerpt_expanison_indicator',
                 [
-                    'label' => esc_html__('Expansion Indicator', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::TEXT,
-                    'dynamic'     => [ 'active' => true ],
+                    'label'       => esc_html__('Expansion Indicator', 'essential-addons-for-elementor-lite'),
+                    'type'        => Controls_Manager::TEXT,
+                    'dynamic'     => [ 'active'      =>true ],
+                    'ai'          => [ 'active'      =>false ],
                     'label_block' => false,
-                    'default' => esc_html__('...', 'essential-addons-for-elementor-lite'),
-                    'condition' => [
+                    'default'     => esc_html__('...', 'essential-addons-for-elementor-lite'),
+                    'condition'   => [
                         'eael_show_excerpt' => 'yes',
                     ],
                 ]
@@ -1301,22 +1303,23 @@ trait Controls
             $wb->add_control(
                 'eael_show_read_more_button',
                 [
-                    'label' => __('Show Read More Button', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SWITCHER,
-                    'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                    'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                    'label'        => __('Show Read More Button', 'essential-addons-for-elementor-lite'),
+                    'type'         => Controls_Manager::SWITCHER,
+                    'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                    'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
                     'return_value' => 'yes',
-                    'default' => 'yes',
+                    'default'      => 'yes',
                 ]
             );
 
             $wb->add_control(
                 'read_more_button_text',
                 [
-                    'label' => __('Button Text', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::TEXT,
-                    'dynamic'     => [ 'active' => true ],
-                    'default' => __('Read More', 'essential-addons-for-elementor-lite'),
+                    'label'     => __('Button Text', 'essential-addons-for-elementor-lite'),
+                    'type'      => Controls_Manager::TEXT,
+                    'dynamic'   => [ 'active'      =>true ],
+                    'ai'        => ['active'       =>false],
+                    'default'   => __('Read More', 'essential-addons-for-elementor-lite'),
                     'condition' => [
                         'eael_show_read_more_button' => 'yes',
                     ],
@@ -1329,7 +1332,10 @@ trait Controls
             || 'eael-post-block' === $wb->get_name()
             ) {
 
-	        $eael_show_post_terms_condition = ['eael_show_image' => 'yes']; //Applicable for both elements: Post Carousel and Post Grid
+	        $eael_show_post_terms_condition = [
+                'eael_show_image'             => 'yes',
+                'eael_post_grid_preset_style' => 'two',
+            ]; //Applicable for both elements: Post Carousel and Post Grid
 
             if( 'eael-post-block' === $wb->get_name() ){
                 $eael_show_post_terms_condition = [];
@@ -1347,7 +1353,11 @@ trait Controls
                 ]
             );
 
-            $eael_show_post_terms_child_condition = ['eael_show_image' => 'yes', 'eael_show_post_terms' => 'yes'];
+            $eael_show_post_terms_child_condition = [
+                'eael_show_image'             => 'yes', 
+                'eael_show_post_terms'        => 'yes',
+                'eael_post_grid_preset_style' => 'two',
+            ];
 
             if( 'eael-post-block' === $wb->get_name() ){
                 $eael_show_post_terms_child_condition = [ 'eael_show_post_terms' => 'yes' ];
@@ -1363,11 +1373,14 @@ trait Controls
 	        $post_types_tax = [];
 
 	        foreach ( $taxonomies as $taxonomy => $object ) {
-		        if ( ! isset( $object->object_type[0] ) || ! in_array( $object->object_type[0], array_keys( $post_types ) ) ) {
-			        continue;
-		        }
-
-		        $post_types_tax[ $object->object_type[0] ][ $taxonomy ] = $object->label;
+                if( isset( $object->object_type ) && is_array( $object->object_type ) && count( $object->object_type ) ){
+                    foreach( $object->object_type as $object_type ){
+                        if ( ! in_array( $object_type, array_keys( $post_types ) ) ) { 
+                            continue;
+                        }
+                        $post_types_tax[ $object_type ][ $taxonomy ] = $object->label;
+                    }
+                }
 	        }
 
 	        foreach ( $post_types as $post_type => $post_taxonomies ) {
@@ -1379,9 +1392,10 @@ trait Controls
 				        'options'   => isset( $post_types_tax[ $post_type ] ) ? $post_types_tax[ $post_type ] : [],
 				        'default'   => isset( $post_types_tax[ $post_type ] ) ? key( $post_types_tax[ $post_type ] ) : '',
 				        'condition' => [
-					        'eael_show_image'      => 'yes',
-					        'eael_show_post_terms' => 'yes',
-					        'post_type'            => $post_type
+					        'eael_show_image'             => 'yes',
+					        'eael_show_post_terms'        => 'yes',
+					        'post_type'                   => $post_type,
+					        'eael_post_grid_preset_style' =>  'two',
 				        ],
 			        ]
 		        );
@@ -1424,12 +1438,14 @@ trait Controls
                 $wb->add_control(
                     'eael_post_terms_separator',
                     [
-                        'label' => esc_html__('Terms Separator', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::TEXT,
+                        'label'       => esc_html__( 'Terms Separator', 'essential-addons-for-elementor-lite' ),
+                        'type'        => Controls_Manager::TEXT,
                         'label_block' => false,
-                        'default' => esc_html__('', 'essential-addons-for-elementor-lite'),
-                        'condition' => [
-                            'eael_show_post_terms' => 'yes',
+                        'ai'          => [ 'active' => false ],
+                        'default'     => esc_html__( '', 'essential-addons-for-elementor-lite' ),
+                        'condition'   => [
+                            'eael_show_post_terms'        => 'yes',
+                            'eael_post_grid_preset_style' =>  'two',
                         ],
                     ]
                 );
