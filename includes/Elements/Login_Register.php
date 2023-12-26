@@ -1950,16 +1950,21 @@ class Login_Register extends Widget_Base {
             ]
         );
 
+		$max_file_size = wp_max_upload_size();
+		if( $max_file_size ){
+			$max_file_size = $max_file_size / 1048576; //(1024x1024=1048576)
+		}
+
 		$repeater->add_control(
             'field_type_custom_image_filesize',
             [
                 'label' 		=> __('Max File Size (MB)', 'essential-addons-for-elementor-lite'),
-                'description'	=> __('Set max file size up to 512 MB.', 'essential-addons-for-elementor-lite'),
+                'description'	=> sprintf( __('Set max file size up to %s MB.', 'essential-addons-for-elementor-lite'), $max_file_size ),
                 'type' 			=> Controls_Manager::NUMBER,
                 'placeholder' 	=> '5',
                 'default' 		=> '5',
 				'Min'			=> '1',
-				'Max'			=> '512',
+				'Max'			=> $max_file_size,
                 'condition' 	=> [
 					'field_type' => $custom_fields_image,
 				],
