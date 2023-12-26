@@ -630,6 +630,18 @@ class Testimonial extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_testimonial_rating_item_size',
+			[
+				'label'      => esc_html__( 'Rating Size', 'essential-addons-for-elementor-lite'),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-testimonial-content .testimonial-star-rating li i' => 'font-size: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
 			'eael_testimonial_rating_item_distance',
 			[
 				'label' => esc_html__( 'Distance Between Rating Item', 'essential-addons-for-elementor-lite'),
