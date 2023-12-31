@@ -73,8 +73,8 @@ class Bootstrap
     protected $installer;
 
 
-    const EAEL_PROMOTION_FLAG = 10;
-    const EAEL_ADMIN_MENU_FLAG = 10;
+    const EAEL_PROMOTION_FLAG = 11;
+    const EAEL_ADMIN_MENU_FLAG = 11;
     /**
      * Singleton instance
      *
@@ -243,6 +243,7 @@ class Bootstrap
     		add_action('wp_ajax_nopriv_eael_checkout_cart_qty_update', [$this, 'eael_checkout_cart_qty_update'] );
 
 		    add_action( 'wp_loaded', [ $this, 'eael_woo_cart_empty_action' ], 20 );
+		    add_filter( 'woocommerce_checkout_fields', [ $this, 'eael_customize_woo_checkout_fields' ] );
 
 		    add_action( 'eael_woo_before_product_loop', function ( $layout ) {
 			    if ( $layout === 'eael-product-default' ) {
@@ -301,21 +302,25 @@ class Bootstrap
 //	        add_action( 'eael_admin_notices', [ $this, 'eael_black_friday_optin' ] );
 //	        add_action( 'wp_ajax_eael_black_friday_optin_dismiss', [ $this, 'eael_black_friday_optin_dismiss' ] );
 
-	        if ( ! current_user_can( 'administrator' ) ) {
-		        add_filter( 'elementor/document/save/data', function ( $data ) {
-			        $data['elements'] = Plugin::$instance->db->iterate_data( $data['elements'], function ( $element ) {
-				        if ( isset( $element['widgetType'] ) && $element['widgetType'] === 'eael-login-register' ) {
-					        if ( ! empty( $element['settings']['register_user_role'] ) ) {
-						        $element['settings']['register_user_role'] = '';
-					        }
-				        }
+		    if ( ! current_user_can( 'administrator' ) ) {
+			    add_filter( 'elementor/document/save/data', function ( $data ) {
+				    if ( empty( $data['elements'] ) ) {
+					    return $data;
+				    }
 
-				        return $element;
-			        } );
+				    $data['elements'] = Plugin::$instance->db->iterate_data( $data['elements'], function ( $element ) {
+					    if ( isset( $element['widgetType'] ) && $element['widgetType'] === 'eael-login-register' ) {
+						    if ( ! empty( $element['settings']['register_user_role'] ) ) {
+							    $element['settings']['register_user_role'] = '';
+						    }
+					    }
 
-			        return $data;
-		        } );
-	        }
+					    return $element;
+				    } );
+
+				    return $data;
+			    } );
+		    }
         } else {
 	        add_action( 'wp', [ $this, 'eael_post_view_count' ] );
         }
