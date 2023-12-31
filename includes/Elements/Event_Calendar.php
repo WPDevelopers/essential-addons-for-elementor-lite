@@ -3138,9 +3138,14 @@ class Event_Calendar extends Widget_Base
 					$end_time   = strtotime( $event['end'] );
 					$start      = date( $date_format, $start_time );
 					$end        = date( $date_format, $end_time );
-					if ( date( 'Ymd', $start_time ) === date( 'Ymd', $end_time ) ) {
+                    $same_day   = date( 'Ymd', $start_time ) === date( 'Ymd', $end_time );
+                    
+					if ( $time_format && $same_day ) {
 						$end = date( $time_format, $end_time );
-					}
+					}else if( ! $time_format && $same_day ){
+                        $end = '';
+                    }
+
 					$separator = $end ? $settings['eael_ec_date_to_date_separator'] : '';
 					$date      = sprintf( '<span class="hide">%s</span> %s %s %s', strtotime( $event['start'] ), $start, $separator, $end );
 					echo '<td class="eael-ec-event-date" ' . esc_attr( $row_style ) . '>' . Helper::eael_wp_kses( $date ) . '</td>';
