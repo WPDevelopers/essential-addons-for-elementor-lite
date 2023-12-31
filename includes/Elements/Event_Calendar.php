@@ -634,9 +634,14 @@ class Event_Calendar extends Widget_Base
             'eael_old_events_hide',
             [
                 'label' => __('Hide Old Events', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
+                'type' => Controls_Manager::SELECT,
                 'label_block' => false,
-                'return_value' => 'yes',
+                'default' => '',
+                'options' => [
+					'' => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+					'yes' => esc_html__( 'Till Current Date', 'essential-addons-for-elementor-lite' ),
+					'start'  => esc_html__( 'Till Start Date', 'essential-addons-for-elementor-lite' ),
+				],
             ]
         );
 
@@ -3360,12 +3365,14 @@ class Event_Calendar extends Widget_Base
                     }
                 }
 
-	            $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : date( 'Y-m-d' );
-	            $should_show  = $this->is_old_event( $ev_start_date, $default_date );
+	            if( $settings['eael_old_events_hide'] === 'start' ){
+                    $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : date( 'Y-m-d' );
+                    $should_show  = $this->is_old_event( $ev_start_date, $default_date );
 
-	            if ( $should_show ) {
-		            continue;
-	            }
+                    if ( $should_show ) {
+                        continue;
+                    }
+                }
 
                 $calendar_data[] = [
                     'id' => ++$key,
