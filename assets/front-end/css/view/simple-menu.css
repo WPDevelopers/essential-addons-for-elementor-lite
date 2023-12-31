@@ -466,13 +466,21 @@
   right: 10px;
   width: 28px;
   height: 28px;
-  display: block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   border: 1px solid rgba(255, 255, 255, 0.5019607843);
   border-radius: 2px;
   text-align: center;
   cursor: pointer;
 }
-.eael-simple-menu-container .eael-simple-menu .eael-simple-menu-indicator:before {
+.eael-simple-menu-container .eael-simple-menu .eael-simple-menu-indicator:before, .eael-simple-menu-container .eael-simple-menu .eael-simple-menu-indicator svg, .eael-simple-menu-container .eael-simple-menu .eael-simple-menu-indicator i {
   display: block;
   font-weight: 900;
   line-height: 26px;
@@ -482,7 +490,7 @@
   transition: transform 300ms;
   transition: transform 300ms, -webkit-transform 300ms;
 }
-.eael-simple-menu-container .eael-simple-menu .eael-simple-menu-indicator.eael-simple-menu-indicator-open:before {
+.eael-simple-menu-container .eael-simple-menu .eael-simple-menu-indicator.eael-simple-menu-indicator-open:before, .eael-simple-menu-container .eael-simple-menu .eael-simple-menu-indicator.eael-simple-menu-indicator-open svg, .eael-simple-menu-container .eael-simple-menu .eael-simple-menu-indicator.eael-simple-menu-indicator-open i {
   -webkit-transform: rotate(180deg);
       -ms-transform: rotate(180deg);
           transform: rotate(180deg);
@@ -562,8 +570,9 @@
 .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li .eael-simple-menu-indicator {
   border: 1px solid rgba(0, 0, 0, 0.5019607843);
 }
-.eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li .eael-simple-menu-indicator:before {
+.eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li .eael-simple-menu-indicator:before, .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li .eael-simple-menu-indicator svg, .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li .eael-simple-menu-indicator i {
   color: #000000;
+  fill: #000000;
 }
 .eael-simple-menu-container .eael-simple-menu.eael-simple-menu-vertical li ul li ul li:last-child > a {
   border-bottom-width: 1px;
