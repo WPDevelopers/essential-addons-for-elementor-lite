@@ -54,6 +54,14 @@ ea.hooks.addAction("init", "ea", () => {
 
 				var $this = $(this);
 
+				setTimeout(function(e) {
+					$('.eael-accordion-header').removeClass('triggered');
+				},70);
+
+				if( $this.hasClass('triggered') ){
+					return;
+				}
+
 				if ($accordionType === "accordion") {
 					if ($this.hasClass("show")) {
 						$this.removeClass("show active");
@@ -80,6 +88,8 @@ ea.hooks.addAction("init", "ea", () => {
 						scrollTop: $(this).data('scroll') - $customIdOffsetVal,
 					}, $srollSpeed);
 				}
+
+				$this.addClass('triggered');
 				ea.hooks.doAction("widgets.reinit",$this.parent());
 				ea.hooks.doAction("ea-advanced-accordion-triggered", $this.next());
 			});
