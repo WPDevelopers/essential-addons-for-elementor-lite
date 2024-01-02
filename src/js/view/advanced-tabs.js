@@ -9,6 +9,7 @@ ea.hooks.addAction("init", "ea", () => {
 
 			var $advanceTab = $scope.find(".eael-advance-tabs"),
 			$scrollOnClick = $advanceTab.data("scroll-on-click");
+			$scrollSpeed = $advanceTab.data("scroll-speed");
 			
 			let $customIdOffsetTab = $currentTab.data('custom-id-offset');
 			if ( !$currentTab.attr( 'id' ) ) {
@@ -111,7 +112,7 @@ ea.hooks.addAction("init", "ea", () => {
 						let $customIdOffsetVal = $customIdOffsetTab ? parseFloat($customIdOffsetTab) : 0;
 						$('html, body').animate({
 							scrollTop: $(this).data('scroll') - $customIdOffsetVal,
-						}, 500);
+						}, $scrollSpeed);
 					}
 				} else {
 					$(this).parent("li").addClass("active");
@@ -131,7 +132,7 @@ ea.hooks.addAction("init", "ea", () => {
 						let $customIdOffsetVal = $customIdOffsetTab ? parseFloat($customIdOffsetTab) : 0;
 						$('html, body').animate({
 							scrollTop: $(this).data('scroll') - $customIdOffsetVal,
-						}, 500);
+						}, $scrollSpeed);
 					}
 				}
 				ea.hooks.doAction("ea-advanced-tabs-triggered", $(tabsContent).eq(currentTabIndex));
