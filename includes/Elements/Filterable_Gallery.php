@@ -3285,7 +3285,7 @@ class Filterable_Gallery extends Widget_Base
                 </div>
 
                 <form class="fg-layout-3-search-box" id="fg-layout-3-search-box" autocomplete="off">
-                    <input type="text" id="fg-search-box-input" name="fg-frontend-search" placeholder="<?php echo $settings['fg_sf_placeholder']; ?>" />
+                    <input type="text" id="fg-search-box-input" name="fg-frontend-search" placeholder="<?php echo esc_attr( $settings['fg_sf_placeholder'] ); ?>" />
                 </form>
 
             </div>
