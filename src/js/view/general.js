@@ -135,11 +135,14 @@ jQuery(window).on("elementor/frontend/init", function () {
 				$(hashURL).trigger('click');
 
 				if (typeof hashURL !== 'undefined' && hashURL) {
-					let idOffset = $(hashURL).closest('.eael-advance-tabs').data('custom-id-offset');
-					idOffset = idOffset ? parseFloat(idOffset) : 0;
-					$('html, body').animate({
-						scrollTop: $(hashURL).offset().top - idOffset,
-					}, 300);
+					let tabs = $(hashURL).closest('.eael-advance-tabs');
+					if( tabs.length > 0 ){
+						let idOffset = tab.data('custom-id-offset');
+						idOffset = idOffset ? parseFloat(idOffset) : 0;
+						$('html, body').animate({
+							scrollTop: $(hashURL).offset().top - idOffset,
+						}, 300);
+					}
 				}
 			}
 		} catch (err) {
