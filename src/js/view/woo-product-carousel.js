@@ -110,20 +110,61 @@ ea.hooks.addAction("init", "ea", () => {
 		};
 
 		if ($effect === 'slide') {
-
-			$carouselOptions.breakpoints = {
-				1024: {
-					slidesPerView: $items,
-					spaceBetween: $margin
-				},
-				768: {
-					slidesPerView: $items_tablet,
-					spaceBetween: $margin_tablet
-				},
-				320: {
-					slidesPerView: $items_mobile,
-					spaceBetween: $margin_mobile
+			if (typeof (localize.el_breakpoints) === 'string') {
+				$carouselOptions.breakpoints = {
+					1024: {
+						slidesPerView: $items,
+						spaceBetween: $margin
+					},
+					768: {
+						slidesPerView: $items_tablet,
+						spaceBetween: $margin_tablet
+					},
+					320: {
+						slidesPerView: $items_mobile,
+						spaceBetween: $margin_mobile
+					}
+				};
+			} else {
+				let el_breakpoints = {}, breakpoints = {}, bp_index = 0,
+					desktopBreakPoint = localize.el_breakpoints.widescreen.is_enabled ? localize.el_breakpoints.widescreen.value - 1 : 4800;
+				el_breakpoints[bp_index] = {
+					breakpoint: 0,
+					slidesPerView: 0,
+					spaceBetween: 0
 				}
+				bp_index++;
+				localize.el_breakpoints.desktop = {
+					is_enabled: true,
+					value: desktopBreakPoint
+				}
+				$.each(['mobile', 'mobile_extra', 'tablet', 'tablet_extra', 'laptop', 'desktop', 'widescreen'], function (index, device) {
+					let breakpoint = localize.el_breakpoints[device];
+					if (breakpoint.is_enabled) {
+						let _items = $wooProductCarousel.data('items-' + device),
+							_margin = $wooProductCarousel.data('margin-' + device);
+						$margin = _margin !== undefined ? _margin : (device === 'desktop' ? $margin : 10);
+						$items = _items !== undefined && _items !== "" ? _items : (device === 'desktop' ? $items : 3);
+						el_breakpoints[bp_index] = {
+							breakpoint: breakpoint.value,
+							slidesPerView: $items,
+							spaceBetween: $margin
+						}
+						bp_index++;
+					}
+				});
+	
+				$.each(el_breakpoints, function (index, breakpoint) {
+					let _index = parseInt(index);
+					if (typeof el_breakpoints[_index + 1] !== 'undefined') {
+						breakpoints[breakpoint.breakpoint] = {
+							slidesPerView: el_breakpoints[_index + 1].slidesPerView,
+							spaceBetween: el_breakpoints[_index + 1].spaceBetween
+						}
+					}
+				});
+				
+				$carouselOptions.breakpoints = breakpoints;
 			}
 		}
 

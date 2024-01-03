@@ -2929,15 +2929,20 @@ class Woo_Product_Carousel extends Widget_Base {
 		    if ( !empty( $settings[ 'items' ] ) ) {
 			    $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-items', $settings[ 'items' ] );
 		    }
-		    if ( !empty( $settings[ 'items_tablet' ] ) ) {
-			    $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-items-tablet',
-				    $settings[ 'items_tablet' ] );
-		    }
-		    if ( !empty( $settings[ 'items_mobile' ] ) ) {
-			    $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-items-mobile',
-				    $settings[ 'items_mobile' ] );
-		    }
 	    }
+
+        if ( method_exists( Plugin::$instance->breakpoints, 'get_breakpoints_config' ) && ! empty( $breakpoints = Plugin::$instance->breakpoints->get_breakpoints_config() ) ) {
+            foreach ( $breakpoints as $key => $breakpoint ){
+                if ($breakpoint['is_enabled']) {
+                    if ( $settings['carousel_effect'] == 'slide' && !empty($settings['items_'.$key]) ) {
+                        $this->add_render_attribute('eael-woo-product-carousel-wrap', 'data-items-'.$key, $settings['items_'.$key]);
+                    }
+                    if (!empty($settings['margin_'.$key]['size'])) {
+                        $this->add_render_attribute('eael-woo-product-carousel-wrap', 'data-margin-'.$key, $settings['margin_'.$key]['size']);
+                    }
+                }
+            }
+        }
 
 	    if($settings['carousel_effect'] == 'coverflow') {
 		    if ( !empty( $settings[ 'carousel_depth' ][ 'size' ] ) ) {
@@ -2956,14 +2961,6 @@ class Woo_Product_Carousel extends Widget_Base {
         if ( !empty( $settings[ 'margin' ][ 'size' ] ) ) {
             $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-margin',
                 $settings[ 'margin' ][ 'size' ] );
-        }
-        if ( !empty( $settings[ 'margin_tablet' ][ 'size' ] ) ) {
-            $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-margin-tablet',
-                $settings[ 'margin_tablet' ][ 'size' ] );
-        }
-        if ( !empty( $settings[ 'margin_mobile' ][ 'size' ] ) ) {
-            $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-margin-mobile',
-                $settings[ 'margin_mobile' ][ 'size' ] );
         }
 
         if ( !empty( $settings[ 'slider_speed' ][ 'size' ] ) ) {
