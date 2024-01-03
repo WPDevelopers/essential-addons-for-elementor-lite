@@ -1,4 +1,4 @@
-# Copyright (C) 2023 Essential Addons For Elementor Lite
+# Copyright (C) 2024 Essential Addons For Elementor Lite
 # This file is distributed under the same license as the Essential Addons For Elementor Lite package.
 msgid ""
 msgstr ""
