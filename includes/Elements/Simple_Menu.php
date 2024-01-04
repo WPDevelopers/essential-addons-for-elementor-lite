@@ -1110,6 +1110,7 @@ class Simple_Menu extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
 //                'default' => '#ffffff',
                 'selectors' => [
+                    '{{WRAPPER}} .eael-simple-menu li > a.eael-item-active'     => 'color: {{VALUE}}',
                     '{{WRAPPER}} .eael-simple-menu li.current-menu-item > a > span svg'           => 'fill: {{VALUE}}',
                     '{{WRAPPER}} .eael-simple-menu li.current-menu-item > a.eael-item-active'     => 'color: {{VALUE}}',
                     '{{WRAPPER}} .eael-simple-menu li.current-menu-ancestor > a.eael-item-active' => 'color: {{VALUE}}',
@@ -1124,6 +1125,7 @@ class Simple_Menu extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
 //                'default' => '#ee355f',
                 'selectors' => [
+                    '{{WRAPPER}} .eael-simple-menu li > a.eael-item-active'     => 'background-color: {{VALUE}}',
                     '{{WRAPPER}} .eael-simple-menu li.current-menu-item > a.eael-item-active'     => 'background-color: {{VALUE}}',
                     '{{WRAPPER}} .eael-simple-menu li.current-menu-ancestor > a.eael-item-active' => 'background-color: {{VALUE}}',
                 ],
