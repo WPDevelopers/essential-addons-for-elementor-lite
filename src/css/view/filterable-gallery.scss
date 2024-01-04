@@ -1030,3 +1030,18 @@ button.mfp-close:not(.toggle),
 button.mfp-arrow:not(.toggle) {
 	background: transparent;
 }
+
+.eael-privacy-message:empty {
+	display: none;
+}
+
+.eael-privacy-message {
+	position:absolute;
+	top: -10%;
+    background-color: #f8d7da;
+    padding: 15px;
+    border: 1px solid #f1aeb5;
+    border-radius: 5px;
+    color: #58151c;
+	width: calc( 100% - 30px );
+}

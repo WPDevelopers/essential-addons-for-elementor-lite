@@ -9,6 +9,7 @@ if ( !defined( 'ABSPATH' ) ) {
 use Elementor\Plugin;
 use \Essential_Addons_Elementor\Classes\Helper as HelperClass;
 use \Essential_Addons_Elementor\Elements\Woo_Checkout;
+use function Crontrol\Event\get;
 
 trait Helper
 {
@@ -255,6 +256,45 @@ trait Helper
 		if ( isset( $_GET['empty_cart'] ) && 'yes' === esc_html( $_GET['empty_cart'] ) ) {
 			WC()->cart->empty_cart();
 		}
+	}
+
+	/**
+	 * Customize checkout fields.
+	 */
+	public function eael_customize_woo_checkout_fields( $fields ) {
+		global $post;
+        
+        if ( ! is_object( $post ) || is_null( $post ) ) {
+            return $fields;
+        }
+
+		$widgets    = get_post_meta( $post->ID, '_elementor_controls_usage', true );
+		$widget_key = 'eael-woo-checkout';
+		if ( ! $widgets ) {
+			$widget_key = 'woo-checkout';
+			$widgets    = get_post_meta( $post->ID, '_eael_widget_elements', true );
+		}
+
+		$eael_fields = get_post_meta( $post->ID, '_eael_checkout_fields_settings', true );
+
+		if ( ! isset( $widgets[ $widget_key ] ) || empty( $eael_fields ) ) {
+			return $fields;
+		}
+
+		$eael_fields = get_post_meta( $post->ID, '_eael_checkout_fields_settings', true );
+
+		foreach ( $fields as $type => $field_sets ) {
+			foreach ( $field_sets as $key => $field_set ) {
+				if ( isset( $eael_fields[ $type ][ $key ]['label'] ) ) {
+					$fields[ $type ][ $key ]['label'] = $eael_fields[ $type ][ $key ]['label'];
+				}
+				if ( isset( $eael_fields[ $type ][ $key ]['placeholder'] ) ) {
+					$fields[ $type ][ $key ]['placeholder'] = $eael_fields[ $type ][ $key ]['placeholder'];
+				}
+			}
+		}
+
+		return $fields;
 	}
 
     /**
@@ -512,7 +552,7 @@ trait Helper
 		?>
         <div id="eael-admin-promotion-message" class="eael-admin-promotion-message">
             <i class="e-notice__dismiss eael-admin-promotion-close" role="button" aria-label="Dismiss" tabindex="0"></i>
-			<?php printf( __( "<p> <i>📣</i> NEW: Essential Addons Pro 5.8 is here, with new '<a target='_blank' href='%s'>Fancy Chart</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/fancy-chart/' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) ); ?>
+			<?php printf( __( "<p> <i>📣</i> NEW: Essential Addons 5.9 is here, with new '<a target='_blank' href='%s'>Woo Product List</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/woo-product-list/' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) ); ?>
         </div>
 		<?php
 	}
