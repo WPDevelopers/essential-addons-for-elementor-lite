@@ -213,8 +213,14 @@ eael.hooks.addAction("init", "ea", () => {
 		}
 
 		var WooProductCarouselLoader = function ($src) {
-			if ($($src).find('.eael-woo-product-carousel').length) {
-				swiperLoader($wooProductCarousel, $carouselOptions);
+			let productCarousels = $($src).find('.eael-woo-product-carousel');
+			if (productCarousels.length) {
+				productCarousels.each(function () {
+					if ($(this)[0].swiper) {
+						$(this)[0].swiper.destroy(true, true);
+						swiperLoader($(this)[0], $carouselOptions);
+					}
+				});
 			}
 		}
 

@@ -137,6 +137,19 @@ eael.hooks.addAction("init", "ea", () => {
         }
 
         $(document).ready(function () {
+            //Validation error message is not show when the Registration page is selected
+            $( "[name='eael-login-submit']" ).on( 'click', function() {
+                localStorage.setItem( 'eael-is-login-form', 'true' );
+            } );
+            var eael_get_login_status = localStorage.getItem( 'eael-is-login-form' );
+            if( eael_get_login_status === 'true' ) {
+                localStorage.removeItem( 'eael-is-login-form' );
+                setTimeout(function() {
+                    $( '#eael-lr-login-toggle' ).trigger( 'click' );
+                },100);
+            }
+
+            //
             let eaelGetTokenPromise = new Promise(function (eaelGetTokenResolve, eaelGetTokenReject) {
                 eael.getToken();
 
