@@ -3214,6 +3214,15 @@ class Event_Calendar extends Widget_Base
                     }
                 }
 
+                if( $settings['eael_old_events_hide'] === 'start' ){
+                    $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : date( 'Y-m-d' );
+                    $should_show  = $this->is_old_event( $start, $default_date );
+
+                    if ( $should_show ) {
+                        continue;
+                    }
+                }
+
                 $settings_eael_event_global_bg_color = $this->fetch_color_or_global_color($event, 'eael_event_bg_color');
                 $settings_eael_event_global_text_color = $this->fetch_color_or_global_color($event, 'eael_event_text_color');
                 $settings_eael_event_global_popup_ribbon_color = $this->fetch_color_or_global_color($event, 'eael_event_border_color');
@@ -3233,13 +3242,6 @@ class Event_Calendar extends Widget_Base
                         }
                     }
                 }
-
-	            $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : date( 'Y-m-d' );
-	            $should_show  = $this->is_old_event( $start, $default_date );
-
-	            if ( $should_show ) {
-		            continue;
-	            }
 
 	            $data[] = [
 		            'id'                => $i,
