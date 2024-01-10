@@ -1262,6 +1262,15 @@ $config = [
         ],
         'special-hover-effect' => [
             'class'      => '\Essential_Addons_Elementor\Extensions\Hover_Effect',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/hover-effect.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
         ],
     ],
 ];
