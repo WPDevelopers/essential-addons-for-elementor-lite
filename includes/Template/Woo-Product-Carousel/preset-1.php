@@ -100,8 +100,7 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
                     ?>
 
                     <?php if ($should_print_rating) {
-	                    echo wc_get_rating_html
-	                    ($product->get_average_rating(), $product->get_rating_count());
+	                    echo wc_get_rating_html($product->get_average_rating(), $product->get_rating_count());
                     }
                     if ( $should_print_excerpt ) {
 	                    echo '<div class="eael-product-excerpt">';
