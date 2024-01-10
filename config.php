@@ -1260,6 +1260,9 @@ $config = [
 		        ],
 	        ],
         ],
+        'special-hover-effect' => [
+            'class'      => '\Essential_Addons_Elementor\Extensions\Hover_Effect',
+        ],
     ],
 ];
 
