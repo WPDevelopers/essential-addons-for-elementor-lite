@@ -83,7 +83,8 @@ class Migration
                            or (option_name like '%\_eael_updated_at' and LENGTH(option_name) = 25)
                            or (option_name = 'eael_reduce_op_table_data')
                            or (option_name = 'eael_remove_old_cache')
-                           or (option_name = 'eael_editor_updated_at'))
+                           or (option_name = 'eael_editor_updated_at')
+                           or (option_name like 'eael_login_error_%'))
                   ) AS options_tb2 
                     ON options_tb2.option_id = options_tb.option_id";
 		$selection_sql = "select count(options_tb.option_id) as total " . $sql;
