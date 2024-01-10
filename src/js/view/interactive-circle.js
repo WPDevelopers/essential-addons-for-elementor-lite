@@ -28,6 +28,13 @@ ea.hooks.addAction( "init", "ea", () => {
 		
 		var $tabLinks    = $circleWrap.find( ".eael-circle-btn" );
 		var $tabContents = $circleWrap.find( ".eael-circle-btn-content" );
+
+		//Support for Keyboard accessibility
+		$scope.on( 'keyup', '.eael-circle-btn', function ( e ) {
+			if ( e.which === 9 || e.which === 32 ) {
+				$( this ).trigger( $eventType );
+			}
+		});
 		
 		$tabLinks.each( function ( element ) {
 			$( this ).on( $eventType, handleEvent( element ) );
