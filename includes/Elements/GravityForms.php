@@ -898,7 +898,12 @@ class GravityForms extends Widget_Base {
 				'type'                  => Controls_Manager::DIMENSIONS,
 				'size_units'            => [ 'px', 'em', '%' ],
 				'selectors'             => [
-					'{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], {{WRAPPER}} .eael-gravity-form .gfield input[type="email"], {{WRAPPER}} .eael-gravity-form .gfield input[type="tel"], {{WRAPPER}} .eael-gravity-form .gfield input[type="number"], {{WRAPPER}} .eael-gravity-form .gfield textarea' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-gravity-form .gfield input[type="text"], 
+                    {{WRAPPER}} .eael-gravity-form .gfield input[type="email"], 
+                    {{WRAPPER}} .eael-gravity-form .gfield input[type="tel"], 
+                    {{WRAPPER}} .eael-gravity-form .gfield input[type="number"], 
+                    {{WRAPPER}} .eael-gravity-form .gfield textarea, 
+                    {{WRAPPER}} .eael-gravity-form .gfield select' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
