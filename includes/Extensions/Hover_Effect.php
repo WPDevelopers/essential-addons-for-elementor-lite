@@ -300,6 +300,72 @@ class Hover_Effect {
             ]
         );
         $element->end_popover();
+
+        //Offset
+        $element->add_control(
+			'eael_hover_effect_offset_popover',
+			[
+				'label'              => __( 'Offset', 'essential-addons-for-elementor-lite' ), 
+                'type'               => Controls_Manager::POPOVER_TOGGLE, 
+                'return_value'       => 'yes', 
+                'frontend_available' => true,
+			]
+		);
+        $element->start_popover();
+        $element->add_control(
+            'eael_hover_effect_offset_top',
+            [
+                'label'              => __( 'Offset Top', 'essential-addons-for-elementor-lite' ),
+                'type'               => Controls_Manager::SLIDER, 
+                'frontend_available' => true, 
+                'size_units'         => ['px', '%'],
+                'default' => [
+					'unit' => 'px',
+					'size' => 0,
+				],
+                'range' => [
+                    'px' => [
+                        'max'  => 1000,
+                        'step' => 1,
+                    ],
+                    '%' => [
+                        'max'  => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'selectors' => [
+					'{{WRAPPER}} .elementor-widget-container' => 'top: {{SIZE}}{{UNIT}};',
+				],
+            ]
+        );
+
+        $element->add_control(
+            'eael_hover_effect_offset_left',
+            [
+                'label'              => __( 'Offset Left', 'essential-addons-for-elementor-lite' ),
+                'type'               => Controls_Manager::SLIDER, 
+                'frontend_available' => true, 
+                'size_units'         => ['px', '%'],
+                'default' => [
+					'unit' => 'px',
+					'size' => 0,
+				],
+                'range' => [
+                    'px' => [
+                        'max'  => 1000,
+                        'step' => 1,
+                    ],
+                    '%' => [
+                        'max'  => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'selectors' => [
+					'{{WRAPPER}} .elementor-widget-container' => 'left: {{SIZE}}{{UNIT}};',
+				],
+            ]
+        );
+        $element->end_popover();
         $element->end_controls_tab();
 
         //Hover Tab
