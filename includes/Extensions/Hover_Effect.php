@@ -78,6 +78,225 @@ class Hover_Effect {
                         'step' => 0.01,
                     ],
                 ],
+                'selectors' => [
+					'{{WRAPPER}} .elementor-widget-container' => 'opacity: {{SIZE}};',
+				],
+            ]
+        );
+        $element->end_popover();
+
+        //Filter
+        $element->add_control(
+			'eael_hover_effect_filter_popover',
+			[
+				'label'              => __( 'Filter', 'essential-addons-for-elementor-lite' ), 
+                'type'               => Controls_Manager::POPOVER_TOGGLE, 
+                'return_value'       => 'yes', 
+                'frontend_available' => true,
+			]
+		);
+
+        $element->start_popover();
+        $element->add_control(
+			'eael_hover_effect_blur_is_on',
+			[
+				'label' => __( 'Blur', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::SWITCHER
+			]
+		);
+
+        $element->add_control(
+            'eael_hover_effect_blur',
+            [
+                'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
+                'type'               => Controls_Manager::SLIDER, 
+                'frontend_available' => true, 
+                'size_units'         => ['px'],
+                'default' => [
+                    'size' => 0,
+                ],
+                'range' => [
+                    'px' => [
+                        'max'  => 10,
+                        'step' => 0.5,
+                    ],
+                ],
+                'selectors' => [
+					'{{WRAPPER}} .elementor-widget-container' => 'filter: blur({{SIZE}}{{UNIT}});',
+				],
+                'condition' => [
+					'eael_hover_effect_blur_is_on' => 'yes', 
+				],
+            ]
+        );
+
+        $element->add_control(
+			'eael_hover_effect_contrast_is_on',
+			[
+				'label' => __( 'Contrast', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::SWITCHER
+			]
+		);
+
+        $element->add_control(
+            'eael_hover_effect_contrast',
+            [
+                'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
+                'type'               => Controls_Manager::SLIDER, 
+                'frontend_available' => true, 
+                'size_units'         => ['%'],
+                'default' => [
+					'unit' => '%',
+					'size' => 100,
+				],
+                'range' => [
+                    '%' => [
+                        'max'  => 1000,
+                        'step' => 10,
+                    ],
+                ],
+                'selectors' => [
+					'{{WRAPPER}} .elementor-widget-container' => 'filter: contrast({{SIZE}}{{UNIT}});',
+				],
+                'condition' => [
+					'eael_hover_effect_contrast_is_on' => 'yes', 
+				],
+            ]
+        );
+
+        $element->add_control(
+			'eael_hover_effect_grayscale_is_on',
+			[
+				'label' => __( 'Grayscale', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::SWITCHER
+			]
+		);
+
+        $element->add_control(
+            'eael_hover_effect_grayscal',
+            [
+                'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
+                'type'               => Controls_Manager::SLIDER, 
+                'frontend_available' => true, 
+                'size_units'         => ['%'],
+                'default' => [
+					'unit' => '%',
+					'size' => 0,
+				],
+                'range' => [
+                    '%' => [
+                        'max'  => 100,
+                        'step' => 10,
+                    ],
+                ],
+                'selectors' => [
+					'{{WRAPPER}} .elementor-widget-container' => 'filter: grayscale({{SIZE}}{{UNIT}});',
+				],
+                'condition' => [
+					'eael_hover_effect_grayscale_is_on' => 'yes', 
+				],
+            ]
+        );
+
+        $element->add_control(
+			'eael_hover_effect_invert_is_on',
+			[
+				'label' => __( 'Invert', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::SWITCHER
+			]
+		);
+
+        $element->add_control(
+            'eael_hover_effect_invert',
+            [
+                'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
+                'type'               => Controls_Manager::SLIDER, 
+                'frontend_available' => true, 
+                'size_units'         => ['%'],
+                'default' => [
+					'unit' => '%',
+					'size' => 0,
+				],
+                'range' => [
+                    '%' => [
+                        'max'  => 100,
+                        'step' => 10,
+                    ],
+                ],
+                'selectors' => [
+					'{{WRAPPER}} .elementor-widget-container' => 'filter: invert({{SIZE}}{{UNIT}});',
+				],
+                'condition' => [
+					'eael_hover_effect_invert_is_on' => 'yes', 
+				],
+            ]
+        );
+
+        $element->add_control(
+			'eael_hover_effect_saturate_is_on',
+			[
+				'label' => __( 'Saturate', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::SWITCHER
+			]
+		);
+
+        $element->add_control(
+            'eael_hover_effect_saturate',
+            [
+                'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
+                'type'               => Controls_Manager::SLIDER, 
+                'frontend_available' => true, 
+                'size_units'         => ['%'],
+                'default' => [
+					'unit' => '%',
+					'size' => 100,
+				],
+                'range' => [
+                    '%' => [
+                        'max'  => 1000,
+                        'step' => 10,
+                    ],
+                ],
+                'selectors' => [
+					'{{WRAPPER}} .elementor-widget-container' => 'filter: saturate({{SIZE}}{{UNIT}});',
+				],
+                'condition' => [
+					'eael_hover_effect_saturate_is_on' => 'yes', 
+				],
+            ]
+        );
+
+        $element->add_control(
+			'eael_hover_effect_sepia_is_on',
+			[
+				'label' => __( 'Sepia', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::SWITCHER
+			]
+		);
+
+        $element->add_control(
+            'eael_hover_effect_sepia',
+            [
+                'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
+                'type'               => Controls_Manager::SLIDER, 
+                'frontend_available' => true, 
+                'size_units'         => ['%'],
+                'default' => [
+					'unit' => '%',
+					'size' => 0,
+				],
+                'range' => [
+                    '%' => [
+                        'max'  => 100,
+                        'step' => 10,
+                    ],
+                ],
+                'selectors' => [
+					'{{WRAPPER}} .elementor-widget-container' => 'filter: sepia({{SIZE}}{{UNIT}});',
+				],
+                'condition' => [
+					'eael_hover_effect_sepia_is_on' => 'yes', 
+				],
             ]
         );
         $element->end_popover();
