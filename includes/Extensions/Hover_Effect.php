@@ -378,85 +378,102 @@ class Hover_Effect {
 			]
 		);
         $element->start_popover();
+        $element->add_control(
+			'eael_hover_effect_rotate_is_on',
+			[
+				'label' => __( 'Rotate', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::SWITCHER
+			]
+		);
+
         $element->add_responsive_control(
 			'eael_hover_effect_transform_rotatex',
-			array(
-				'label'     => __( 'Rotate X', 'essential-addons-for-elementor-lite' ),
+			[
+                'label'     => __( 'Rotate X', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::SLIDER,
-				'default'   => array(
-					'sizes' => array(
-						'from' => 0,
+				'default'   => [
+                    'sizes' => [
+                        'from' => 0,
 						'to'   => 45,
-					),
+                    ],
 					'unit'  => 'deg',
-				),
-				'range'     => array(
-					'deg' => array(
-						'min' => -180,
+                ],
+				'range'     => [
+                    'deg' => [
+                        'min' => -180,
 						'max' => 180,
-					),
-				),
-				'labels'    => array(
-					__( 'From', 'essential-addons-for-elementor-lite' ),
+                    ],
+                ],
+				'labels'    => [
+                    __( 'From', 'essential-addons-for-elementor-lite' ),
 					__( 'To', 'essential-addons-for-elementor-lite' ),
-				),
+                ],
 				'scales'    => 1,
 				'handles'   => 'range',
-			)
+                'condition' => [
+					'eael_hover_effect_rotate_is_on' => 'yes', 
+				],
+            ]
 		);
 
         $element->add_responsive_control(
 			'eael_hover_effect_transform_rotatey',
-			array(
-				'label'     => __( 'Rotate Y', 'essential-addons-for-elementor-lite' ),
+			[
+                'label'     => __( 'Rotate Y', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::SLIDER,
-				'default'   => array(
-					'sizes' => array(
-						'from' => 0,
+				'default'   => [
+                    'sizes' => [
+                        'from' => 0,
 						'to'   => 45,
-					),
+                    ],
 					'unit'  => 'deg',
-				),
-				'range'     => array(
-					'deg' => array(
-						'min' => -180,
+                ],
+				'range'     => [
+                    'deg' => [
+                        'min' => -180,
 						'max' => 180,
-					),
-				),
-				'labels'    => array(
-					__( 'From', 'essential-addons-for-elementor-lite' ),
+                    ],
+                ],
+				'labels'    => [
+                    __( 'From', 'essential-addons-for-elementor-lite' ),
 					__( 'To', 'essential-addons-for-elementor-lite' ),
-				),
+                ],
 				'scales'    => 1,
 				'handles'   => 'range',
-			)
+                'condition' => [
+					'eael_hover_effect_rotate_is_on' => 'yes', 
+				],
+            ]
 		);
 
         $element->add_responsive_control(
 			'eael_hover_effect_transform_rotatez',
-			array(
-				'label'     => __( 'Rotate Z', 'essential-addons-for-elementor-lite' ),
+			[
+                'label'     => __( 'Rotate Z', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::SLIDER,
-				'default'   => array(
-					'sizes' => array(
-						'from' => 0,
+				'default'   => [
+                    'sizes' => [
+                        'from' => 0,
 						'to'   => 45,
-					),
+                    ],
 					'unit'  => 'deg',
-				),
-				'range'     => array(
-					'deg' => array(
-						'min' => -180,
+                ],
+				'range'     => [
+                    'deg' => [
+                        'min' => -180,
 						'max' => 180,
-					),
-				),
-				'labels'    => array(
-					__( 'From', 'essential-addons-for-elementor-lite' ),
+                    ],
+                ],
+				'labels'    => [
+                    __( 'From', 'essential-addons-for-elementor-lite' ),
 					__( 'To', 'essential-addons-for-elementor-lite' ),
-				),
+                ],
 				'scales'    => 1,
 				'handles'   => 'range',
-			)
+                'condition' => [
+					'eael_hover_effect_rotate_is_on' => 'yes', 
+				],
+            ]
 		);
 
         $element->end_popover();
