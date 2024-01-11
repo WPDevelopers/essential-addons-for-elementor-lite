@@ -5541,7 +5541,7 @@ class Login_Register extends Widget_Base {
             
 	        $recaptcha_api_args1 = apply_filters( 'eael_lr_recaptcha_api_args_v3', $recaptcha_api_args1 );
 	        $recaptcha_api_args1 = http_build_query( $recaptcha_api_args1 );
-            wp_register_script('eael-recaptcha-v3', "https://www.google.com/recaptcha/api.js?{$recaptcha_api_args1}", false, EAEL_PLUGIN_VERSION, false);
+            wp_register_script('eael-recaptcha-v3', "https://www.recaptcha.net/recaptcha/api.js?{$recaptcha_api_args1}", false, EAEL_PLUGIN_VERSION, false);
 			wp_enqueue_script('eael-recaptcha-v3');
 			wp_dequeue_script('eael-recaptcha');
         }
