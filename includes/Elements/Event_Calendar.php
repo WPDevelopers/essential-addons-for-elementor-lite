@@ -3225,9 +3225,9 @@ class Event_Calendar extends Widget_Base
                 }
 
 	            $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : date( 'Y-m-d' );
-	            $should_show  = $this->is_old_event( $start, $default_date );
+	            $should_hide  = $this->is_old_event( $start, $default_date );
 
-	            if ( $should_show ) {
+	            if ( $should_hide ) {
 		            continue;
 	            }
 
@@ -3356,9 +3356,9 @@ class Event_Calendar extends Widget_Base
                 }
 
 	            $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : date( 'Y-m-d' );
-	            $should_show  = $this->is_old_event( $ev_start_date, $default_date );
+	            $should_hide  = $this->is_old_event( $ev_start_date, $default_date );
 
-	            if ( $should_show ) {
+	            if ( $should_hide ) {
 		            continue;
 	            }
 
