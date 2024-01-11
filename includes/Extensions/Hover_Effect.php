@@ -377,12 +377,14 @@ class Hover_Effect {
                 'frontend_available' => true,
 			]
 		);
+        
+        //Rotate
         $element->start_popover();
         $element->add_control(
 			'eael_hover_effect_rotate_is_on',
 			[
 				'label' => __( 'Rotate', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SWITCHER
+				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
 
@@ -476,6 +478,145 @@ class Hover_Effect {
             ]
 		);
 
+        //Scale
+        $element->add_control(
+			'eael_hover_effect_scale_is_on',
+			[
+				'label' => __( 'Scale', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::SWITCHER,
+			]
+		);
+
+        $element->add_responsive_control(
+			'eael_hover_effect_transform_scalex',
+			[
+                'label'     => __( 'Scale X', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+                'separator' => 'after',
+				'default'   => [
+                    'sizes' => [
+                        'from' => 0,
+						'to'   => 45,
+                    ],
+					'unit'  => 'deg',
+                ],
+				'range'     => [
+                    'deg' => [
+                        'min' => -180,
+						'max' => 180,
+                    ],
+                ],
+				'labels'    => [
+                    __( 'From', 'essential-addons-for-elementor-lite' ),
+					__( 'To', 'essential-addons-for-elementor-lite' ),
+                ],
+				'scales'    => 1,
+				'handles'   => 'range',
+                'condition' => [
+					'eael_hover_effect_scale_is_on' => 'yes', 
+				],
+            ]
+		);
+
+        $element->add_responsive_control(
+			'eael_hover_effect_transform_scaley',
+			[
+                'label'     => __( 'Scale Y', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+				'default'   => [
+                    'sizes' => [
+                        'from' => 0,
+						'to'   => 45,
+                    ],
+					'unit'  => 'deg',
+                ],
+				'range'     => [
+                    'deg' => [
+                        'min' => -180,
+						'max' => 180,
+                    ],
+                ],
+				'labels'    => [
+                    __( 'From', 'essential-addons-for-elementor-lite' ),
+					__( 'To', 'essential-addons-for-elementor-lite' ),
+                ],
+				'scales'    => 1,
+				'handles'   => 'range',
+                'condition' => [
+					'eael_hover_effect_scale_is_on' => 'yes', 
+				],
+            ]
+		);
+
+        //Skew
+        $element->add_control(
+			'eael_hover_effect_skew_is_on',
+			[
+				'label' => __( 'Skew', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::SWITCHER
+			]
+		);
+
+        $element->add_responsive_control(
+			'eael_hover_effect_transform_skewx',
+			[
+                'label'     => __( 'Skew X', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+                'separator' => 'before',
+				'default'   => [
+                    'sizes' => [
+                        'from' => 0,
+						'to'   => 45,
+                    ],
+					'unit'  => 'deg',
+                ],
+				'range'     => [
+                    'deg' => [
+                        'min' => -180,
+						'max' => 180,
+                    ],
+                ],
+				'labels'    => [
+                    __( 'From', 'essential-addons-for-elementor-lite' ),
+					__( 'To', 'essential-addons-for-elementor-lite' ),
+                ],
+				'scales'    => 1,
+				'handles'   => 'range',
+                'condition' => [
+					'eael_hover_effect_skew_is_on' => 'yes', 
+				],
+            ]
+		);
+
+        $element->add_responsive_control(
+			'eael_hover_effect_transform_skewy',
+			[
+                'label'     => __( 'Skew Y', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+				'default'   => [
+                    'sizes' => [
+                        'from' => 0,
+						'to'   => 45,
+                    ],
+					'unit'  => 'deg',
+                ],
+				'range'     => [
+                    'deg' => [
+                        'min' => -180,
+						'max' => 180,
+                    ],
+                ],
+				'labels'    => [
+                    __( 'From', 'essential-addons-for-elementor-lite' ),
+					__( 'To', 'essential-addons-for-elementor-lite' ),
+                ],
+				'scales'    => 1,
+				'handles'   => 'range',
+                'condition' => [
+					'eael_hover_effect_skew_is_on' => 'yes', 
+				],
+            ]
+		);
         $element->end_popover();
 
         $element->end_controls_tab();
