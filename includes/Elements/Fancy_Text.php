@@ -51,6 +51,12 @@ class Fancy_Text extends Widget_Base {
 		];
     }
 
+	public function get_style_depends() {
+        return [
+            'e-animations',
+        ];
+    }
+
     public function get_custom_help_url() {
         return 'https://essential-addons.com/elementor/docs/fancy-text/';
     }
@@ -244,13 +250,10 @@ class Fancy_Text extends Widget_Base {
 		$this->add_control(
 			'eael_fancy_text_loop',
 			[
-				'label' => esc_html__( 'Loop the Typing', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Loop the animation', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
-				'default' => 'yes',
-				'condition' => [
-					'eael_fancy_text_transition_type' => 'typing',
-				],
+				'default' => 'yes'
 			]
 		);
 
@@ -619,11 +622,11 @@ class Fancy_Text extends Widget_Base {
 
 		<?php if ( $settings['eael_fancy_text_transition_type']  == 'fancy' ) : ?>
 			<span id="eael-fancy-text-<?php echo esc_attr($this->get_id()); ?>" class="eael-fancy-text-strings
-			<?php echo $settings['eael_fancy_text_color_selector']?>"></span>
+			<?php echo esc_attr( $settings['eael_fancy_text_color_selector'] ) ?>"></span>
 		<?php endif; ?>
 
 		<?php if ( $settings['eael_fancy_text_transition_type']  != 'fancy' ) : ?>
-			<span id="eael-fancy-text-<?php echo esc_attr($this->get_id()); ?>" class="eael-fancy-text-strings <?php echo $settings['eael_fancy_text_color_selector']?>">
+			<span id="eael-fancy-text-<?php echo esc_attr($this->get_id()); ?>" class="eael-fancy-text-strings <?php echo esc_attr( $settings['eael_fancy_text_color_selector'] ); ?>">
 				<noscript>
 					<?php
 						$eael_fancy_text_strings_list = "";
