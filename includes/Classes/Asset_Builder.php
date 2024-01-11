@@ -283,9 +283,9 @@ class Asset_Builder {
 		$css_deps = [ 'elementor-frontend' ];
         $js_deps  = [ 'jquery' ];
 		$theme    = wp_get_theme(); // gets the current theme
-		if ( in_array( 'Hello Elementor', [ $theme->name, $theme->parent_theme ] ) ) {
+		if ( in_array( 'Hello Elementor', [ $theme->name, $theme->parent_theme ] ) && wp_style_is( 'hello-elementor-theme-style', 'registered' ) ) {
 			array_unshift( $css_deps, 'hello-elementor-theme-style' );
-		} elseif ( in_array( 'Astra', [ $theme->name, $theme->parent_theme ] ) ) {
+		} elseif ( in_array( 'Astra', [ $theme->name, $theme->parent_theme ] ) && wp_style_is( 'astra-theme-css', 'registered' ) ) {
 			array_unshift( $css_deps, 'astra-theme-css' );
 		} elseif ( in_array( 'XStore', [ $theme->name, $theme->parent_theme ] ) ) {
 			$js_deps[] = 'etheme';
