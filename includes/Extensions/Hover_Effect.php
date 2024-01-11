@@ -366,6 +366,101 @@ class Hover_Effect {
             ]
         );
         $element->end_popover();
+
+        //Transform
+        $element->add_control(
+			'eael_hover_effect_transform_popover',
+			[
+				'label'              => __( 'Transform', 'essential-addons-for-elementor-lite' ), 
+                'type'               => Controls_Manager::POPOVER_TOGGLE, 
+                'return_value'       => 'yes', 
+                'frontend_available' => true,
+			]
+		);
+        $element->start_popover();
+        $element->add_responsive_control(
+			'eael_hover_effect_transform_rotatex',
+			array(
+				'label'     => __( 'Rotate X', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+				'default'   => array(
+					'sizes' => array(
+						'from' => 0,
+						'to'   => 45,
+					),
+					'unit'  => 'deg',
+				),
+				'range'     => array(
+					'deg' => array(
+						'min' => -180,
+						'max' => 180,
+					),
+				),
+				'labels'    => array(
+					__( 'From', 'essential-addons-for-elementor-lite' ),
+					__( 'To', 'essential-addons-for-elementor-lite' ),
+				),
+				'scales'    => 1,
+				'handles'   => 'range',
+			)
+		);
+
+        $element->add_responsive_control(
+			'eael_hover_effect_transform_rotatey',
+			array(
+				'label'     => __( 'Rotate Y', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+				'default'   => array(
+					'sizes' => array(
+						'from' => 0,
+						'to'   => 45,
+					),
+					'unit'  => 'deg',
+				),
+				'range'     => array(
+					'deg' => array(
+						'min' => -180,
+						'max' => 180,
+					),
+				),
+				'labels'    => array(
+					__( 'From', 'essential-addons-for-elementor-lite' ),
+					__( 'To', 'essential-addons-for-elementor-lite' ),
+				),
+				'scales'    => 1,
+				'handles'   => 'range',
+			)
+		);
+
+        $element->add_responsive_control(
+			'eael_hover_effect_transform_rotatez',
+			array(
+				'label'     => __( 'Rotate Z', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+				'default'   => array(
+					'sizes' => array(
+						'from' => 0,
+						'to'   => 45,
+					),
+					'unit'  => 'deg',
+				),
+				'range'     => array(
+					'deg' => array(
+						'min' => -180,
+						'max' => 180,
+					),
+				),
+				'labels'    => array(
+					__( 'From', 'essential-addons-for-elementor-lite' ),
+					__( 'To', 'essential-addons-for-elementor-lite' ),
+				),
+				'scales'    => 1,
+				'handles'   => 'range',
+			)
+		);
+
+        $element->end_popover();
+
         $element->end_controls_tab();
 
         //Hover Tab
