@@ -3202,6 +3202,13 @@ class Event_Calendar extends Widget_Base
                     if($is_old_event) {
                         continue;
                     }
+
+                    $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : date( 'Y-m-d' );
+                    $should_hide  = $this->is_old_event( $start, $default_date );
+
+                    if ( $should_hide ) {
+                        continue;
+                    }
                 }
 
                 $settings_eael_event_global_bg_color = $this->fetch_color_or_global_color($event, 'eael_event_bg_color');
@@ -3223,13 +3230,6 @@ class Event_Calendar extends Widget_Base
                         }
                     }
                 }
-
-	            $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : date( 'Y-m-d' );
-	            $should_hide  = $this->is_old_event( $start, $default_date );
-
-	            if ( $should_hide ) {
-		            continue;
-	            }
 
 	            $data[] = [
 		            'id'                => $i,
@@ -3353,14 +3353,14 @@ class Event_Calendar extends Widget_Base
                     if($is_old_event) {
                         continue;
                     }
+
+                    $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : date( 'Y-m-d' );
+                    $should_hide  = $this->is_old_event( $ev_start_date, $default_date );
+
+                    if ( $should_hide ) {
+                        continue;
+                    }
                 }
-
-	            $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : date( 'Y-m-d' );
-	            $should_hide  = $this->is_old_event( $ev_start_date, $default_date );
-
-	            if ( $should_hide ) {
-		            continue;
-	            }
 
                 $calendar_data[] = [
                     'id' => ++$key,
