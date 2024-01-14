@@ -872,15 +872,6 @@ $config = [
             ],
         ],
 
-        'crowdfundly-single-campaign' => [
-	        'class' => '\Essential_Addons_Elementor\Elements\Crowdfundly_Single_Campaign',
-	        'condition' => [
-		        'defined',
-		        'CROWDFUNDLY_VERSION',
-		        true,
-	        ],
-        ],
-
         'woo-checkout' => [
             'class' => '\Essential_Addons_Elementor\Elements\Woo_Checkout',
             'dependency' => [
