@@ -872,15 +872,6 @@ $config = [
             ],
         ],
 
-        'crowdfundly-organization' => [
-	        'class' => '\Essential_Addons_Elementor\Elements\Crowdfundly_Organization',
-	        'condition' => [
-		        'defined',
-		        'CROWDFUNDLY_VERSION',
-		        true,
-	        ],
-        ],
-
         'crowdfundly-single-campaign' => [
 	        'class' => '\Essential_Addons_Elementor\Elements\Crowdfundly_Single_Campaign',
 	        'condition' => [
