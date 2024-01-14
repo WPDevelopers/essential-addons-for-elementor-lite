@@ -871,7 +871,6 @@ $config = [
                 true,
             ],
         ],
-
         'woo-checkout' => [
             'class' => '\Essential_Addons_Elementor\Elements\Woo_Checkout',
             'dependency' => [
@@ -927,14 +926,6 @@ $config = [
                         'context' => 'view',
                     ],
                 ],
-            ],
-        ],
-        'woocommerce-review' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Woocommerce_Review',
-            'condition' => [
-                'function_exists',
-                'run_reviewx',
-                true,
             ],
         ],
         'career-page' => [
