@@ -1386,7 +1386,7 @@ msgstr ""
 msgid "Count"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Category_Box.php:87, ../includes/Elements/Betterdocs_Category_Grid.php:90, ../includes/Elements/Betterdocs_Search_Form.php:83, ../includes/Elements/Better_Payment.php:44, ../includes/Elements/Caldera_Forms.php:67, ../includes/Elements/Career_Page.php:49, ../includes/Elements/Contact_Form_7.php:109, ../includes/Elements/Crowdfundly_All_Campaign.php:38, ../includes/Elements/Crowdfundly_Organization.php:38, ../includes/Elements/Crowdfundly_Single_Campaign.php:38, ../includes/Elements/EmbedPress.php:54, ../includes/Elements/FluentForm.php:107, ../includes/Elements/Formstack.php:75, ../includes/Elements/Formstack.php:96, ../includes/Elements/Formstack.php:117, ../includes/Elements/GravityForms.php:107, ../includes/Elements/NinjaForms.php:72, ../includes/Elements/TypeForm.php:98, ../includes/Elements/WeForms.php:70, ../includes/Elements/Woocommerce_Review.php:52, ../includes/Elements/Woo_Cart.php:112, ../includes/Elements/Woo_Checkout.php:97, ../includes/Elements/Woo_Product_Carousel.php:190, ../includes/Elements/Woo_Product_Gallery.php:95, ../includes/Elements/Woo_Product_List.php:191, ../includes/Elements/WpForms.php:69, ../includes/Traits/Woo_Product_Comparable.php:131
+#: ../includes/Elements/Betterdocs_Category_Box.php:87, ../includes/Elements/Betterdocs_Category_Grid.php:90, ../includes/Elements/Betterdocs_Search_Form.php:83, ../includes/Elements/Better_Payment.php:44, ../includes/Elements/Caldera_Forms.php:67, ../includes/Elements/Career_Page.php:49, ../includes/Elements/Contact_Form_7.php:109, ../includes/Elements/EmbedPress.php:54, ../includes/Elements/FluentForm.php:107, ../includes/Elements/Formstack.php:75, ../includes/Elements/Formstack.php:96, ../includes/Elements/Formstack.php:117, ../includes/Elements/GravityForms.php:107, ../includes/Elements/NinjaForms.php:72, ../includes/Elements/TypeForm.php:98, ../includes/Elements/WeForms.php:70, ../includes/Elements/Woo_Cart.php:112, ../includes/Elements/Woo_Checkout.php:97, ../includes/Elements/Woo_Product_Carousel.php:190, ../includes/Elements/Woo_Product_Gallery.php:95, ../includes/Elements/Woo_Product_List.php:191, ../includes/Elements/WpForms.php:69, ../includes/Traits/Woo_Product_Comparable.php:131
 msgid "Warning!"
 msgstr ""
 
@@ -2588,10 +2588,6 @@ msgstr ""
 
 #: ../includes/Elements/Creative_Button.php:537, ../includes/Elements/Info_Box.php:1218, ../includes/Elements/NFT_Gallery.php:1917
 msgid "Button Padding"
-msgstr ""
-
-#: ../includes/Elements/Crowdfundly_All_Campaign.php:46, ../includes/Elements/Crowdfundly_Organization.php:46, ../includes/Elements/Crowdfundly_Single_Campaign.php:46
-msgid "<strong>Crowdfundly</strong> is not installed/activated on your site. Please install and activate <a href=\"plugin-install.php?s=crowdfundly&tab=search&type=term\" target=\"_blank\">Crowdfundly</a> first."
 msgstr ""
 
 #: ../includes/Elements/Cta_Box.php:32
@@ -8268,14 +8264,6 @@ msgstr ""
 
 #: ../includes/Elements/WeForms.php:604
 msgid "Button Width"
-msgstr ""
-
-#: ../includes/Elements/Woocommerce_Review.php:18
-msgid "ReviewX Woo Review"
-msgstr ""
-
-#: ../includes/Elements/Woocommerce_Review.php:60
-msgid "<strong>ReviewX</strong> is not installed/activated on your site. Please install and activate <a href=\"plugin-install.php?s=reviewx&tab=search&type=term\" target=\"_blank\">ReviewX</a> first."
 msgstr ""
 
 #: ../includes/Elements/Woo_Cart.php:177
