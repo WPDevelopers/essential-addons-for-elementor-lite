@@ -757,7 +757,8 @@ class GravityForms extends Widget_Base {
 			    'global'   => [
 				    'default' => Global_Typography::TYPOGRAPHY_ACCENT
 			    ],
-			    'selector' => '{{WRAPPER}} .eael-gravity-form .gf_progressbar_wrapper .gf_progressbar .gf_progressbar_percentage',
+			    'selector' => '{{WRAPPER}} .eael-gravity-form .gf_progressbar_wrapper .gf_progressbar .gf_progressbar_percentage,
+                {{WRAPPER}} .eael-gravity-form .gf_progressbar_wrapper .gf_progressbar .gf_progressbar_percentage span',
 		    ]
 	    );
 
@@ -765,7 +766,7 @@ class GravityForms extends Widget_Base {
 		    'eael_gform_progressbar_percentage_text_align',
 		    [
 			    'label'     => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
-			    'type'      => \Elementor\Controls_Manager::CHOOSE,
+			    'type'      => Controls_Manager::CHOOSE,
 			    'options'   => [
 				    'start'  => [
 					    'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
