@@ -1115,4 +1115,5 @@ trait Ajax_Handler {
 			return 'no';
 		} );
 	}
+
 }

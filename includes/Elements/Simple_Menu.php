@@ -1602,8 +1602,35 @@ class Simple_Menu extends Widget_Base
                 'echo'        => false,
             ];
 
-            echo '<div ' . $this->get_render_attribute_string('eael-simple-menu') . '>' . wp_nav_menu($args) . '</div>';
-
+            //Check breakpoint form hamburger options
+            if( ! empty( $hamburger_device ) ) {
+                if( 'none' !== $hamburger_device ) {
+                    $eael_get_breakpoint_from_option = Plugin::$instance->breakpoints->get_breakpoints( $hamburger_device )->get_value();
+                    echo "<style>
+                        @media screen and (max-width: {$eael_get_breakpoint_from_option}px) {
+                            .eael-hamburger--{$hamburger_device} {
+                                .eael-simple-menu-horizontal,
+                                .eael-simple-menu-vertical {
+                                    display: none;
+                                }
+                            }
+                            .eael-hamburger--{$hamburger_device} {
+                                .eael-simple-menu-container .eael-simple-menu-toggle {
+                                    display: block;
+                                }
+                            }
+                        }
+                    </style>";
+                }
+            }
+            ?>
+            <div <?php echo $this->get_render_attribute_string('eael-simple-menu'); ?>>
+                <?php echo wp_nav_menu( $args ); ?>
+                <button class="eael-simple-menu-toggle">
+                    <?php Icons_Manager::render_icon( $settings['eael_simple_menu_hamburger_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+                </button>
+            </div>
+            <?php
         }
     }
 
