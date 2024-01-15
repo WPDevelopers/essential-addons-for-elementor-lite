@@ -617,6 +617,77 @@ class Hover_Effect {
 				],
             ]
 		);
+
+        //Translate
+        $element->add_control(
+			'eael_hover_effect_translate_is_on',
+			[
+				'label' => __( 'Translate', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::SWITCHER
+			]
+		);
+
+        $element->add_responsive_control(
+			'eael_hover_effect_transform_translatex',
+			[
+                'label'     => __( 'Translate X', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+                'separator' => 'before',
+				'default'   => [
+                    'sizes' => [
+                        'from' => 0,
+						'to'   => 45,
+                    ],
+					'unit'  => 'deg',
+                ],
+				'range'     => [
+                    'deg' => [
+                        'min' => -180,
+						'max' => 180,
+                    ],
+                ],
+				'labels'    => [
+                    __( 'From', 'essential-addons-for-elementor-lite' ),
+					__( 'To', 'essential-addons-for-elementor-lite' ),
+                ],
+				'scales'    => 1,
+				'handles'   => 'range',
+                'condition' => [
+					'eael_hover_effect_translate_is_on' => 'yes', 
+				],
+            ]
+		);
+
+        $element->add_responsive_control(
+			'eael_hover_effect_transform_translatey',
+			[
+                'label'     => __( 'Translate Y', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+				'default'   => [
+                    'sizes' => [
+                        'from' => 0,
+						'to'   => 45,
+                    ],
+					'unit'  => 'deg',
+                ],
+				'range'     => [
+                    'deg' => [
+                        'min' => -180,
+						'max' => 180,
+                    ],
+                ],
+				'labels'    => [
+                    __( 'From', 'essential-addons-for-elementor-lite' ),
+					__( 'To', 'essential-addons-for-elementor-lite' ),
+                ],
+				'scales'    => 1,
+				'handles'   => 'range',
+                'condition' => [
+					'eael_hover_effect_translate_is_on' => 'yes', 
+				],
+            ]
+		);
+
         $element->end_popover();
 
         $element->end_controls_tab();
