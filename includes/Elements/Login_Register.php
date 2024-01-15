@@ -5541,7 +5541,7 @@ class Login_Register extends Widget_Base {
             
 	        $recaptcha_api_args1 = apply_filters( 'eael_lr_recaptcha_api_args_v3', $recaptcha_api_args1 );
 	        $recaptcha_api_args1 = http_build_query( $recaptcha_api_args1 );
-            wp_register_script('eael-recaptcha-v3', "https://www.google.com/recaptcha/api.js?{$recaptcha_api_args1}", false, EAEL_PLUGIN_VERSION, false);
+            wp_register_script('eael-recaptcha-v3', "https://www.recaptcha.net/recaptcha/api.js?{$recaptcha_api_args1}", false, EAEL_PLUGIN_VERSION, false);
 			wp_enqueue_script('eael-recaptcha-v3');
 			wp_dequeue_script('eael-recaptcha');
         }
@@ -5775,8 +5775,6 @@ class Login_Register extends Widget_Base {
                                 </div>
 								<?php
 								$this->print_necessary_hidden_fields( 'login' );
-
-								$this->print_login_validation_errors();
 
 								do_action( 'eael/login-register/before-login-form-close', $this );
 								?>
@@ -6643,21 +6641,10 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_login_validation_errors() {
-		$error_key = 'eael_login_error_' . $this->get_id();
 		$resetpassword_success_key = 'eael_resetpassword_success_' . $this->get_id();
-		$resetpassword_success = apply_filters( 'eael/login-register/resetpassword-success-message', get_option( $resetpassword_success_key ) );
+		$resetpassword_success     = apply_filters( 'eael/login-register/resetpassword-success-message', get_option( $resetpassword_success_key ) );
 
-		if ( $login_error = apply_filters( 'eael/login-register/login-error-message', get_option( $error_key ) ) ) {
-			do_action( 'eael/login-register/before-showing-login-error', $login_error, $this );
-			?>
-            <p class="eael-form-msg invalid">
-				<?php echo HelperCLass::eael_wp_kses( $login_error ); ?>
-            </p>
-			<?php
-			do_action( 'eael/login-register/after-showing-login-error', $login_error, $this );
-
-			delete_option( $error_key );
-		} else if( ! empty( $resetpassword_success ) && 'register' !== $this->ds['default_form_type'] ){
+		if ( ! empty( $resetpassword_success ) && 'register' !== $this->ds['default_form_type'] ) {
 			$this->print_resetpassword_success_message( $resetpassword_success );
 		}
 	}
