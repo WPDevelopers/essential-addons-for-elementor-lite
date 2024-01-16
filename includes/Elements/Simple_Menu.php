@@ -1603,7 +1603,7 @@ class Simple_Menu extends Widget_Base
             ];
 
 	        //Check breakpoint form hamburger options
-	        if ( ! empty( $hamburger_device && 'none' !== $hamburger_device ) ) {
+	        if ( ! empty( $hamburger_device ) && 'none' !== $hamburger_device ) {
 		        if ( 'desktop' === $hamburger_device ) {
 			        $breakpoints                     = method_exists( Plugin::$instance->breakpoints, 'get_breakpoints_config' ) ? Plugin::$instance->breakpoints->get_breakpoints_config() : [];
 			        $eael_get_breakpoint_from_option = isset( $breakpoints['widescreen'] ) ? $breakpoints['widescreen']['value'] - 1 : 2400;
