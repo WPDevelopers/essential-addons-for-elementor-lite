@@ -187,6 +187,8 @@ class Bootstrap
         add_filter('eael/controls/event-calendar/source', [$this, 'event_calendar_source']);
         add_action('eael/controls/advanced-data-table/source', [$this, 'advanced_data_table_source']);
 
+	    add_action( 'init', [ $this, 'eael_session_start' ] );
+
         // Login | Register
         add_action('init', [$this, 'login_or_register_user']);
         add_filter('wp_new_user_notification_email', array($this, 'new_user_notification_email'), 10, 3);
@@ -207,7 +209,6 @@ class Bootstrap
 //        if(defined('WPML_TM_VERSION')){
 //	        add_filter( 'elementor/documents/get/post_id',[$this, 'eael_wpml_template_translation']);
 //        }
-
 
         //templately plugin support
         if( !class_exists('Templately\Plugin') && !get_option('eael_templately_promo_hide') ) {
@@ -256,7 +257,6 @@ class Bootstrap
 			    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
 		    } );
 	    }
-
 
         // Admin
 	    if ( is_admin() ) {
