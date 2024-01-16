@@ -51,6 +51,16 @@ class Hover_Effect {
 			]
 		);
 
+        //Background
+        $element->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'name'     => 'eael_hover_effect_background',
+				'types'    => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .elementor-widget-container',
+			]
+		);
+
         //Opacity
         $element->add_control(
 			'eael_hover_effect_opacity_popover',
@@ -867,6 +877,16 @@ class Hover_Effect {
 			'eael_hover_effect_hover_tab',
 			[
 				'label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+         //Background Hover
+        $element->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'name'     => 'eael_hover_effect_background_hover',
+				'types'    => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .your-class',
 			]
 		);
 
@@ -2205,8 +2225,7 @@ class Hover_Effect {
 	}
 
 	public function before_render( $element ) {
-		$wrapper_link_settings = $element->get_settings_for_display( 'eael_hover_effect' );
-
+		$settings = $element->get_settings_for_display();
 	}
 
 }
