@@ -1602,11 +1602,16 @@ class Simple_Menu extends Widget_Base
                 'echo'        => false,
             ];
 
-            //Check breakpoint form hamburger options
-            if( ! empty( $hamburger_device ) ) {
-                if( 'none' !== $hamburger_device ) {
-                    $eael_get_breakpoint_from_option = Plugin::$instance->breakpoints->get_breakpoints( $hamburger_device )->get_value();
-                    echo "<style>
+	        //Check breakpoint form hamburger options
+	        if ( ! empty( $hamburger_device && 'none' !== $hamburger_device ) ) {
+		        if ( 'desktop' === $hamburger_device ) {
+			        $breakpoints                     = method_exists( Plugin::$instance->breakpoints, 'get_breakpoints_config' ) ? Plugin::$instance->breakpoints->get_breakpoints_config() : [];
+			        $eael_get_breakpoint_from_option = isset( $breakpoints['widescreen'] ) ? $breakpoints['widescreen']['value'] - 1 : 2400;
+		        } else {
+			        $eael_get_breakpoint_from_option = Plugin::$instance->breakpoints->get_breakpoints( $hamburger_device )->get_value();
+		        }
+
+		        echo "<style>
                         @media screen and (max-width: {$eael_get_breakpoint_from_option}px) {
                             .eael-hamburger--{$hamburger_device} {
                                 .eael-simple-menu-horizontal,
@@ -1621,8 +1626,7 @@ class Simple_Menu extends Widget_Base
                             }
                         }
                     </style>";
-                }
-            }
+	        }
             ?>
             <div <?php echo $this->get_render_attribute_string('eael-simple-menu'); ?>>
                 <?php echo wp_nav_menu( $args ); ?>
