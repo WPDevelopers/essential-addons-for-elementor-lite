@@ -283,7 +283,7 @@ class Asset_Builder {
 		$css_deps = [ 'elementor-frontend' ];
         $js_deps  = [ 'jquery' ];
 		$theme    = wp_get_theme(); // gets the current theme
-		if ( in_array( 'Hello Elementor', [ $theme->name, $theme->parent_theme ] ) ) {
+		if ( in_array( 'Hello Elementor', [ $theme->name, $theme->parent_theme ] ) && version_compare( $theme->Version, '2.1.0', '>=' ) ) {
 			array_unshift( $css_deps, 'hello-elementor-theme-style' );
 		} elseif ( in_array( 'Astra', [ $theme->name, $theme->parent_theme ] ) ) {
 			array_unshift( $css_deps, 'astra-theme-css' );

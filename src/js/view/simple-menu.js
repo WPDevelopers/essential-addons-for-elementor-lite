@@ -66,11 +66,7 @@ var SimpleMenu = function ($scope, $) {
     }
 
     // insert responsive menu toggle, text
-    $(selectorByType, $scope)
-        .before('<span class="eael-simple-menu-toggle-text"></span>')
-        .after(
-            '<button class="eael-simple-menu-toggle">' + $hamburger_icon + '<span class="eael-simple-menu-toggle-text"></span></button>'
-        )
+    $(selectorByType, $scope).before('<span class="eael-simple-menu-toggle-text"></span>')
     eael_menu_resize( $hamburger_max_width );
     
     // responsive menu slide
