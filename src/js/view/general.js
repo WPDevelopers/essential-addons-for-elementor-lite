@@ -26,7 +26,11 @@ function EAELsetScreenSize() {
 }
 
 EAELsetScreenSize();
-window.addEventListener('resize', EAELsetScreenSize);
+let debunce_time = false;
+window.addEventListener('resize', function () {
+	clearTimeout(debunce_time);
+	debunce_time = setTimeout(EAELsetScreenSize, 250);
+});
 
 ea.hooks.addAction("widgets.reinit", "ea", ($content) => {
 	let filterGallery = jQuery(".eael-filter-gallery-container", $content);
