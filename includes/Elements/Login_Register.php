@@ -5614,7 +5614,7 @@ class Login_Register extends Widget_Base {
 			}
 
 
-			$btn_text         = ! empty( $this->ds['login_button_text'] ) ? $this->ds['login_button_text'] : '';
+			$btn_text         = ! empty( $this->ds['login_button_text'] ) ? sanitize_text_field( $this->ds['login_button_text'] ) : '';
 			$show_logout_link = ( ! empty( $this->ds['show_log_out_message'] ) && 'yes' === $this->ds['show_log_out_message'] );
 			$show_rememberme  = ( ! empty( $this->ds['login_show_remember_me'] ) && 'yes' === $this->ds['login_show_remember_me'] );
 			$remember_text    = isset( $this->ds['remember_text'] ) ? $this->ds['remember_text'] : esc_html__( 'Remember Me', 'essential-addons-for-elementor-lite');
@@ -6342,7 +6342,7 @@ class Login_Register extends Widget_Base {
 				$confirm_password_placeholder = isset( $this->ds['resetpassword_confirm_password_placeholder'] ) ? __( $this->ds['resetpassword_confirm_password_placeholder'], 'essential-addons-for-elementor-lite' ) : '';
 			}
 
-			$btn_text         = ! empty( $this->ds['resetpassword_button_text'] ) ? __( $this->ds['resetpassword_button_text'], 'essential-addons-for-elementor-lite' ) : '';
+			$btn_text         = ! empty( $this->ds['resetpassword_button_text'] ) ? __( sanitize_text_field( $this->ds['resetpassword_button_text'] ), 'essential-addons-for-elementor-lite' ) : '';
 
 			// btn alignment
 			$btn_align = isset( $this->ds['resetpassword_btn_align'] ) ? esc_html( $this->ds['resetpassword_btn_align'] ) : '';
@@ -6439,7 +6439,7 @@ class Login_Register extends Widget_Base {
 									   name="eael-resetpassword-submit"
 									   id="eael-resetpassword-submit"
 									   class="eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?> <?php echo esc_attr( $hide_class_after_submission ); ?>"
-									   value="<?php echo esc_html( wp_strip_all_tags( $btn_text ) ); ?>"/>
+									   value="<?php echo esc_attr( $btn_text ); ?>"/>
 							</div>
 							<?php do_action( 'eael/login-register/after-resetpassword-footer', $this );
 							?>
