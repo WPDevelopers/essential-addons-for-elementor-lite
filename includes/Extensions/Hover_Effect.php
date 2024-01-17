@@ -57,7 +57,7 @@ class Hover_Effect {
 			[
 				'name'     => 'eael_hover_effect_background',
 				'types'    => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}}.eael_hover_effect > .elementor-widget-container',
+				'selector' => '{{WRAPPER}} .elementor-widget-container',
 			]
 		);
 
@@ -89,7 +89,7 @@ class Hover_Effect {
                     ],
                 ],
                 'selectors' => [
-					'{{WRAPPER}}.eael_hover_effect > .elementor-widget-container' => 'opacity: {{SIZE}};',
+					'{{WRAPPER}} .elementor-widget-container' => 'opacity: {{SIZE}};',
 				],
             ]
         );
@@ -398,136 +398,79 @@ class Hover_Effect {
 			]
 		);
 
-        $element->add_responsive_control(
+        $element->add_control(
 			'eael_hover_effect_transform_rotatex',
 			[
-                'label'     => __( 'Rotate X', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'default'   => [
-                    'sizes' => [
-                        'from' => 0,
-						'to'   => 45,
-                    ],
-					'unit'  => 'deg',
-                ],
-				'range'     => [
+				'label' => esc_html__( 'RotateX', 'essential-addons-for-elementor-lite' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'deg' ],
+				'range' => [
                     'deg' => [
-                        'min' => -180,
+						'min' => 0,
 						'max' => 180,
-                    ],
-                ],
-				'labels'    => [
-                    __( 'From', 'essential-addons-for-elementor-lite' ),
-					__( 'To', 'essential-addons-for-elementor-lite' ),
-                ],
-				'scales'    => 1,
-				'handles'   => 'range',
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'size' => 0,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .elementor-widget-container' => 'transform: rotateX({{SIZE}}deg) rotateY({{eael_hover_effect_transform_rotatey.SIZE}}deg) rotateZ({{eael_hover_effect_transform_rotatez.SIZE}}deg);',
+				],
                 'condition' => [
 					'eael_hover_effect_rotate_is_on' => 'yes', 
 				],
-            ]
+			]
 		);
 
-        $element->add_responsive_control(
+        $element->add_control(
 			'eael_hover_effect_transform_rotatey',
 			[
-                'label'     => __( 'Rotate Y', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'default'   => [
-                    'sizes' => [
-                        'from' => 0,
-						'to'   => 45,
-                    ],
-					'unit'  => 'deg',
-                ],
-				'range'     => [
+				'label' => esc_html__( 'RotateY', 'essential-addons-for-elementor-lite' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'deg' ],
+				'range' => [
                     'deg' => [
-                        'min' => -180,
+						'min' => -180,
 						'max' => 180,
-                    ],
-                ],
-				'labels'    => [
-                    __( 'From', 'essential-addons-for-elementor-lite' ),
-					__( 'To', 'essential-addons-for-elementor-lite' ),
-                ],
-				'scales'    => 1,
-				'handles'   => 'range',
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'size' => 0,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .elementor-widget-container' => 'transform: rotateX({{eael_hover_effect_transform_rotatex.SIZE}}deg) rotateY({{SIZE}}deg) rotateZ({{eael_hover_effect_transform_rotatez.SIZE}}deg);',
+				],
                 'condition' => [
 					'eael_hover_effect_rotate_is_on' => 'yes', 
 				],
-            ]
+			]
 		);
 
-        $element->add_responsive_control(
+        $element->add_control(
 			'eael_hover_effect_transform_rotatez',
 			[
-                'label'     => __( 'Rotate Z', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'default'   => [
-                    'sizes' => [
-                        'from' => 0,
-						'to'   => 45,
-                    ],
-					'unit'  => 'deg',
-                ],
-				'range'     => [
+				'label' => esc_html__( 'RotateZ', 'essential-addons-for-elementor-lite' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'deg' ],
+				'range' => [
                     'deg' => [
-                        'min' => -180,
+						'min' => -180,
 						'max' => 180,
-                    ],
-                ],
-				'labels'    => [
-                    __( 'From', 'essential-addons-for-elementor-lite' ),
-					__( 'To', 'essential-addons-for-elementor-lite' ),
-                ],
-				'scales'    => 1,
-				'handles'   => 'range',
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'size' => 0,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .elementor-widget-container' => 'transform: rotateX({{eael_hover_effect_transform_rotatex.SIZE}}deg) rotateY({{eael_hover_effect_transform_rotatey.SIZE}}deg) rotateZ({{SIZE}}deg);',
+				],
                 'condition' => [
 					'eael_hover_effect_rotate_is_on' => 'yes', 
 				],
-            ]
-		);
-
-        //Duration
-        $element->add_control(
-			'eael_hover_effect_rotate_duration',
-			[
-                'label'     => __( 'Duration (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'default'   => [
-                    'unit' => 'px',
-					'size' => 1000,
-                ],
-				'condition' => [
-					'eael_hover_effect_rotate_is_on' => 'yes', 
-				],
-            ]
-		);
-
-        //Delay
-		$element->add_control(
-			'eael_hover_effect_rotate_delay',
-			[
-                'label'     => __( 'Delay (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'condition' => [
-					'eael_hover_effect_rotate_is_on' => 'yes', 
-				],
-            ]
+			]
 		);
 
         //Scale
@@ -539,108 +482,72 @@ class Hover_Effect {
 			]
 		);
 
-        $element->add_responsive_control(
+        $element->add_control(
 			'eael_hover_effect_transform_scalex',
 			[
-                'label'     => __( 'Scale X', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-                'separator' => 'after',
-				'default'   => [
-                    'sizes' => [
-                        'from' => 0,
-						'to'   => 45,
+				'label' => esc_html__( 'ScaleX', 'essential-addons-for-elementor-lite' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'range' => [
+                    'px' => [
+                        'max'  => 5,
+                        'step' => 0.1,
                     ],
-					'unit'  => 'deg',
-                ],
-				'range'     => [
-                    'deg' => [
-                        'min' => -180,
-						'max' => 180,
-                    ],
-                ],
-				'labels'    => [
-                    __( 'From', 'essential-addons-for-elementor-lite' ),
-					__( 'To', 'essential-addons-for-elementor-lite' ),
-                ],
-				'scales'    => 1,
-				'handles'   => 'range',
+				],
+                'default' => [
+					'size' => 1,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .elementor-widget-container' => 'transform: scaleX({{SIZE}}) scaleY({{eael_hover_effect_transform_scaley.SIZE}}) scaleZ({{eael_hover_effect_transform_scalez.SIZE}});',
+				],
                 'condition' => [
 					'eael_hover_effect_scale_is_on' => 'yes', 
 				],
-            ]
+			]
 		);
 
-        $element->add_responsive_control(
+        $element->add_control(
 			'eael_hover_effect_transform_scaley',
 			[
-                'label'     => __( 'Scale Y', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'default'   => [
-                    'sizes' => [
-                        'from' => 0,
-						'to'   => 45,
-                    ],
-					'unit'  => 'deg',
-                ],
-				'range'     => [
-                    'deg' => [
-                        'min' => -180,
-						'max' => 180,
-                    ],
-                ],
-				'labels'    => [
-                    __( 'From', 'essential-addons-for-elementor-lite' ),
-					__( 'To', 'essential-addons-for-elementor-lite' ),
-                ],
-				'scales'    => 1,
-				'handles'   => 'range',
+				'label' => esc_html__( 'ScaleY', 'essential-addons-for-elementor-lite' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'range' => [
+                    'min' => 1,
+                    'max' => 5,
+                    'step' => 1,
+				],
+                'default' => [
+					'size' => 1,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .elementor-widget-container' => 'transform: scaleX({{eael_hover_effect_transform_scalex.SIZE}}) scaleY({{SIZE}}) scaleZ({{eael_hover_effect_transform_scalez.SIZE}});',
+				],
                 'condition' => [
 					'eael_hover_effect_scale_is_on' => 'yes', 
 				],
-            ]
+			]
 		);
 
-        //Duration
         $element->add_control(
-			'eael_hover_effect_scale_duration',
+			'eael_hover_effect_transform_scalez',
 			[
-                'label'     => __( 'Duration (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'default'   => [
-                    'unit' => 'px',
-					'size' => 1000,
-                ],
-				'condition' => [
+				'label' => esc_html__( 'ScaleZ', 'essential-addons-for-elementor-lite' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'range' => [
+                    'min' => 1,
+                    'max' => 5,
+                    'step' => 1,
+				],
+                'default' => [
+					'size' => 1,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .elementor-widget-container' => 'transform: scaleX({{eael_hover_effect_transform_scalex.SIZE}}) scaleY({{eael_hover_effect_transform_scaley.SIZE}}) scaleZ({{SIZE}});',
+				],
+                'condition' => [
 					'eael_hover_effect_scale_is_on' => 'yes', 
 				],
-            ]
+			]
 		);
-
-        //Delay
-		$element->add_control(
-			'eael_hover_effect_scale_delay',
-			[
-                'label'     => __( 'Delay (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'condition' => [
-					'eael_hover_effect_scale_is_on' => 'yes', 
-				],
-            ]
-        );
 
         //Skew
         $element->add_control(
@@ -651,107 +558,54 @@ class Hover_Effect {
 			]
 		);
 
-        $element->add_responsive_control(
+        $element->add_control(
 			'eael_hover_effect_transform_skewx',
 			[
-                'label'     => __( 'Skew X', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-                'separator' => 'before',
-				'default'   => [
-                    'sizes' => [
-                        'from' => 0,
-						'to'   => 45,
-                    ],
-					'unit'  => 'deg',
-                ],
-				'range'     => [
+				'label' => esc_html__( 'SkewX', 'essential-addons-for-elementor-lite' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'deg' ],
+				'range' => [
                     'deg' => [
-                        'min' => -180,
+						'min' => 0,
 						'max' => 180,
-                    ],
-                ],
-				'labels'    => [
-                    __( 'From', 'essential-addons-for-elementor-lite' ),
-					__( 'To', 'essential-addons-for-elementor-lite' ),
-                ],
-				'scales'    => 1,
-				'handles'   => 'range',
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'size' => 0,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .elementor-widget-container' => 'transform: skewX({{SIZE}}deg) skewY({{eael_hover_effect_transform_skewy.SIZE}}deg);',
+				],
                 'condition' => [
 					'eael_hover_effect_skew_is_on' => 'yes', 
 				],
-            ]
+			]
 		);
 
-        $element->add_responsive_control(
+        $element->add_control(
 			'eael_hover_effect_transform_skewy',
 			[
-                'label'     => __( 'Skew Y', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'default'   => [
-                    'sizes' => [
-                        'from' => 0,
-						'to'   => 45,
-                    ],
-					'unit'  => 'deg',
-                ],
-				'range'     => [
+				'label' => esc_html__( 'SkewY', 'essential-addons-for-elementor-lite' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'deg' ],
+				'range' => [
                     'deg' => [
-                        'min' => -180,
+						'min' => 0,
 						'max' => 180,
-                    ],
-                ],
-				'labels'    => [
-                    __( 'From', 'essential-addons-for-elementor-lite' ),
-					__( 'To', 'essential-addons-for-elementor-lite' ),
-                ],
-				'scales'    => 1,
-				'handles'   => 'range',
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'size' => 0,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .elementor-widget-container' => 'transform: skewX({{eael_hover_effect_transform_skewx.SIZE}}deg) skewY({{SIZE}}deg);',
+				],
                 'condition' => [
 					'eael_hover_effect_skew_is_on' => 'yes', 
 				],
-            ]
-		);
-
-        //Duration
-        $element->add_control(
-			'eael_hover_effect_skew_duration',
-			[
-                'label'     => __( 'Duration (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'default'   => [
-                    'unit' => 'px',
-					'size' => 1000,
-                ],
-				'condition' => [
-					'eael_hover_effect_skew_is_on' => 'yes', 
-				],
-            ]
-		);
-
-        //Delay
-		$element->add_control(
-			'eael_hover_effect_skew_delay',
-			[
-                'label'     => __( 'Delay (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'condition' => [
-					'eael_hover_effect_skew_is_on' => 'yes', 
-				],
-            ]
+			]
 		);
 
         //Translate
