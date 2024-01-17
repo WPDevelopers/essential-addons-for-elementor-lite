@@ -1435,8 +1435,12 @@ class Helper
 				$widescreen = $breakpoints['widescreen'];
 				unset( $breakpoints['widescreen'] );
 				$breakpoints['desktop'] = $widescreen;
-			}
-
+			}else{
+                $breakpoints['desktop'] = [
+                    'value' => 2400
+                ];
+            }
+            
 			$current_screen = intval( $_SESSION['eael_screen'] );
 			foreach ( $breakpoints as $device => $screen ) {
 				if ( $current_screen <= $screen['value'] ) {
