@@ -1,3 +1,4 @@
-.elementor-widget-container {
+.eael_hover_effect .elementor-widget-container {
   position: relative;
+  background-color: rgb(12, 120, 4);
 }

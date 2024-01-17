@@ -57,7 +57,7 @@ class Hover_Effect {
 			[
 				'name'     => 'eael_hover_effect_background',
 				'types'    => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .elementor-widget-container',
+				'selector' => '{{WRAPPER}}.eael_hover_effect > .elementor-widget-container',
 			]
 		);
 
@@ -89,7 +89,7 @@ class Hover_Effect {
                     ],
                 ],
                 'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'opacity: {{SIZE}};',
+					'{{WRAPPER}}.eael_hover_effect > .elementor-widget-container' => 'opacity: {{SIZE}};',
 				],
             ]
         );
@@ -2225,7 +2225,9 @@ class Hover_Effect {
 	}
 
 	public function before_render( $element ) {
-		$settings = $element->get_settings_for_display();
+		// $settings = $element->get_settings_for_display();
+
+        $element->add_render_attribute( '_wrapper', 'class', 'eael_hover_effect' );
 	}
 
 }
