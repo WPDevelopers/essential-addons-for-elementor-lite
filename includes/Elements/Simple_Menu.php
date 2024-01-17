@@ -48,10 +48,9 @@ class Simple_Menu extends Widget_Base
         return ['elementor-icons'];
     }
 
-    public function get_categories()
-    {
-        return ['essential-addons-for-elementor-lite'];
-    }
+	public function get_categories() {
+		return [ 'essential-addons-elementor' ];
+	}
 
     public function get_keywords()
     {
