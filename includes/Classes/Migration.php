@@ -46,7 +46,13 @@ class Migration
      */
 	public function plugin_upgrade_hook( $upgrader_object, $options ) {
 		if ( isset( $options['action'], $options['type'] ) && $options['action'] === 'update' && $options['type'] === 'plugin' ) {
-			if ( ( isset( $options['plugins'] ) && in_array( EAEL_PLUGIN_BASENAME, $options['plugins'] ) ) || ( isset( $options['plugin'] ) && $options['plugin'] === EAEL_PLUGIN_BASENAME ) ) {
+			if ( ( isset( $options['plugins'] ) &&
+			       ( in_array( EAEL_PLUGIN_BASENAME, $options['plugins'] ) ||
+			         in_array( 'essential-addons-elementor/essential_adons_elementor.php', $options['plugins'] ) )
+			     ) || ( isset( $options['plugin'] ) &&
+			            ( $options['plugin'] === EAEL_PLUGIN_BASENAME || $options['plugin'] === 'essential-addons-elementor/essential_adons_elementor.php' )
+			     )
+			) {
 				// remove old cache files
 				$this->empty_dir( EAEL_ASSET_PATH );
 			}
