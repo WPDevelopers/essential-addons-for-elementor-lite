@@ -1426,6 +1426,12 @@ class Helper
 	 *
 	 */
 	public static function eael_get_current_device_by_screen() {
+		if ( ! session_id() ) {
+			session_start( [
+				'read_and_close' => true,
+			] );
+		}
+
 		if ( isset( $_SESSION['eael_screen'] ) && ! empty( $breakpoints = Plugin::$instance->breakpoints->get_breakpoints_config() ) ) {
 			$breakpoints = array_filter( $breakpoints, function ( $breakpoint ) {
 				return $breakpoint['is_enabled'];

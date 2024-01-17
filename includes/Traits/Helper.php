@@ -731,11 +731,5 @@ trait Helper
 			update_post_meta( $post_id, '_eael_post_view_count', ++ $view_count );
 		}
 	}
-
-	public function eael_session_start() {
-		if ( ! session_id() ) {
-			session_start();
-		}
-	}
 }
 
