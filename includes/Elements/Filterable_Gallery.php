@@ -3221,9 +3221,9 @@ class Filterable_Gallery extends Widget_Base
                     foreach ($settings['eael_fg_controls'] as $key => $control) :
                         $sorter_filter = $this->sorter_class($control['eael_fg_control']);
                         $sorter_label  = $control['eael_fg_control_label'] != '' ? $control['eael_fg_control_label'] : $control['eael_fg_control'];
-                        $custom_id = $control['eael_fg_control_custom_id'] ?? "";
+                        $custom_id = sanitize_text_field( $control['eael_fg_control_custom_id'] ) ?? "";
 
-                    ?><li <?php echo $custom_id ? "id=".esc_attr( $custom_id ) : '' ?> data-load-more-status="0" data-first-init="0"
+                    ?><li <?php if ( $custom_id ) : ?> id="<?php echo esc_attr( $custom_id ); ?>" <?php endif; ?> data-load-more-status="0" data-first-init="0"
                         class="control <?php if ( $this->custom_default_control ) {
                             if ( $this->default_control_key === $key ){
                                 echo 'active';
@@ -3273,9 +3273,9 @@ class Filterable_Gallery extends Widget_Base
                         
                         <?php foreach ($settings['eael_fg_controls'] as $key => $control) :
                             $sorter_filter = $this->sorter_class($control['eael_fg_control']);
-                            $custom_id = $control['eael_fg_control_custom_id'] ?? "";
+                            $custom_id = sanitize_text_field( $control['eael_fg_control_custom_id'] ) ?? "";
                         ?>
-                            <li <?php echo $custom_id ? "id=".esc_attr( $custom_id ) : '' ?>  class="control <?php if ( $this->custom_default_control ) {
+                            <li <?php if ( $custom_id ) : ?> id="<?php echo esc_attr( $custom_id ); ?>" <?php endif; ?> class="control <?php if ( $this->custom_default_control ) {
                                 if ( $this->default_control_key === $key ){
                                     echo 'active';
                                 }
@@ -3352,7 +3352,7 @@ class Filterable_Gallery extends Widget_Base
             $gallery_store[$counter]['content'] = $gallery['eael_fg_gallery_item_content'];
             $gallery_store[$counter]['id'] = $gallery['_id'];
             $gallery_store[$counter]['image'] = $gallery['eael_fg_gallery_img'];
-            $gallery_store[$counter]['image'] = $gallery['eael_fg_gallery_img']['url'];
+            $gallery_store[$counter]['image'] = sanitize_url( $gallery['eael_fg_gallery_img']['url'] );
             $gallery_store[$counter]['image_id'] = $gallery['eael_fg_gallery_img']['id'];
             $gallery_store[$counter]['maybe_link'] = $gallery['eael_fg_gallery_link'];
             $gallery_store[$counter]['link'] = $gallery['eael_fg_gallery_img_link'];
