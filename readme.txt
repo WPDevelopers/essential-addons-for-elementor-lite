@@ -300,7 +300,7 @@ Your existing elements/content will work with premium version. So you won't lose
 = 5.9.5 - 17/01/2024 =
 
 - Improved: Security Enhancement
-- Fixed: EA Simple Menu | Throwing Fatal error when Hamburger option is enabled
+- Fixed: EA Simple Menu | Throwing Fatal error when Hamburger option is enabled for Desktop device
 - Fixed: EA Woo Cart | Breakpoint on different devices not working properly
 - Few minor bug fixes & improvements
 
