@@ -3223,7 +3223,7 @@ class Filterable_Gallery extends Widget_Base
                         $sorter_label  = $control['eael_fg_control_label'] != '' ? $control['eael_fg_control_label'] : $control['eael_fg_control'];
                         $custom_id = $control['eael_fg_control_custom_id'] ?? "";
 
-                    ?><li <?php echo $custom_id ? "id=".esc_attr( $custom_id ) : '' ?> data-load-more-status="0" data-first-init="0"
+                    ?><li <?php echo $custom_id ? "id='".esc_attr( $custom_id )."'" : '' ?> data-load-more-status="0" data-first-init="0"
                         class="control <?php if ( $this->custom_default_control ) {
                             if ( $this->default_control_key === $key ){
                                 echo 'active';
@@ -3275,7 +3275,7 @@ class Filterable_Gallery extends Widget_Base
                             $sorter_filter = $this->sorter_class($control['eael_fg_control']);
                             $custom_id = $control['eael_fg_control_custom_id'] ?? "";
                         ?>
-                            <li <?php echo $custom_id ? "id=".esc_attr( $custom_id ) : '' ?>  class="control <?php if ( $this->custom_default_control ) {
+                            <li <?php echo $custom_id ? "id='".esc_attr( $custom_id )."'" : '' ?>  class="control <?php if ( $this->custom_default_control ) {
                                 if ( $this->default_control_key === $key ){
                                     echo 'active';
                                 }
