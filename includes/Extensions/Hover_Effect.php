@@ -67,8 +67,7 @@ class Hover_Effect {
 			[
 				'label'              => __( 'Opacity', 'essential-addons-for-elementor-lite' ), 
                 'type'               => Controls_Manager::POPOVER_TOGGLE, 
-                'return_value'       => 'yes', 
-                'frontend_available' => true,
+                'return_value'       => 'yes',
 			]
 		);
 
@@ -77,8 +76,7 @@ class Hover_Effect {
             'eael_hover_effect_opacity',
             [
                 'label'              => __( 'Opacity', 'essential-addons-for-elementor-lite' ),
-                'type'               => Controls_Manager::SLIDER, 
-                'frontend_available' => true, 
+                'type'               => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 1,
                 ],
@@ -101,8 +99,7 @@ class Hover_Effect {
 			[
 				'label'              => __( 'Filter', 'essential-addons-for-elementor-lite' ), 
                 'type'               => Controls_Manager::POPOVER_TOGGLE, 
-                'return_value'       => 'yes', 
-                'frontend_available' => true,
+                'return_value'       => 'yes',
 			]
 		);
 
@@ -119,9 +116,7 @@ class Hover_Effect {
             'eael_hover_effect_blur',
             [
                 'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
-                'type'               => Controls_Manager::SLIDER, 
-                'frontend_available' => true, 
-                'size_units'         => ['px'],
+                'type'               => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 0,
                 ],
@@ -132,7 +127,7 @@ class Hover_Effect {
                     ],
                 ],
                 'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'filter: blur({{SIZE}}{{UNIT}});',
+					'{{WRAPPER}} .elementor-widget-container' => 'filter: blur({{SIZE}}px);',
 				],
                 'condition' => [
 					'eael_hover_effect_blur_is_on' => 'yes', 
@@ -152,11 +147,8 @@ class Hover_Effect {
             'eael_hover_effect_contrast',
             [
                 'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
-                'type'               => Controls_Manager::SLIDER, 
-                'frontend_available' => true, 
-                'size_units'         => ['%'],
+                'type'               => Controls_Manager::SLIDER,
                 'default' => [
-					'unit' => '%',
 					'size' => 100,
 				],
                 'range' => [
@@ -166,7 +158,7 @@ class Hover_Effect {
                     ],
                 ],
                 'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'filter: contrast({{SIZE}}{{UNIT}});',
+					'{{WRAPPER}} .elementor-widget-container' => 'filter: blur({{eael_hover_effect_blur.SIZE}}px) contrast({{SIZE}}%);',
 				],
                 'condition' => [
 					'eael_hover_effect_contrast_is_on' => 'yes', 
@@ -186,11 +178,8 @@ class Hover_Effect {
             'eael_hover_effect_grayscal',
             [
                 'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
-                'type'               => Controls_Manager::SLIDER, 
-                'frontend_available' => true, 
-                'size_units'         => ['%'],
+                'type'               => Controls_Manager::SLIDER,
                 'default' => [
-					'unit' => '%',
 					'size' => 0,
 				],
                 'range' => [
@@ -200,7 +189,7 @@ class Hover_Effect {
                     ],
                 ],
                 'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'filter: grayscale({{SIZE}}{{UNIT}});',
+					'{{WRAPPER}} .elementor-widget-container' => 'filter: blur({{eael_hover_effect_blur.SIZE}}px) contrast({{eael_hover_effect_contrast.SIZE}}%) grayscale({{SIZE}}%);',
 				],
                 'condition' => [
 					'eael_hover_effect_grayscale_is_on' => 'yes', 
@@ -220,11 +209,8 @@ class Hover_Effect {
             'eael_hover_effect_invert',
             [
                 'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
-                'type'               => Controls_Manager::SLIDER, 
-                'frontend_available' => true, 
-                'size_units'         => ['%'],
+                'type'               => Controls_Manager::SLIDER,
                 'default' => [
-					'unit' => '%',
 					'size' => 0,
 				],
                 'range' => [
@@ -233,8 +219,8 @@ class Hover_Effect {
                         'step' => 10,
                     ],
                 ],
-                'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'filter: invert({{SIZE}}{{UNIT}});',
+				'selectors' => [
+					'{{WRAPPER}} .elementor-widget-container' => 'filter: blur({{eael_hover_effect_blur.SIZE}}px) contrast({{eael_hover_effect_contrast.SIZE}}%) grayscale({{eael_hover_effect_grayscal.SIZE}}%) invert({{SIZE}}%);',
 				],
                 'condition' => [
 					'eael_hover_effect_invert_is_on' => 'yes', 
@@ -254,11 +240,8 @@ class Hover_Effect {
             'eael_hover_effect_saturate',
             [
                 'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
-                'type'               => Controls_Manager::SLIDER, 
-                'frontend_available' => true, 
-                'size_units'         => ['%'],
+                'type'               => Controls_Manager::SLIDER,
                 'default' => [
-					'unit' => '%',
 					'size' => 100,
 				],
                 'range' => [
@@ -267,8 +250,8 @@ class Hover_Effect {
                         'step' => 10,
                     ],
                 ],
-                'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'filter: saturate({{SIZE}}{{UNIT}});',
+				'selectors' => [
+					'{{WRAPPER}} .elementor-widget-container' => 'filter: blur({{eael_hover_effect_blur.SIZE}}px) contrast({{eael_hover_effect_contrast.SIZE}}%) grayscale({{eael_hover_effect_grayscal.SIZE}}%) invert({{eael_hover_effect_invert.SIZE}}%) saturate({{SIZE}}%);',
 				],
                 'condition' => [
 					'eael_hover_effect_saturate_is_on' => 'yes', 
@@ -288,11 +271,8 @@ class Hover_Effect {
             'eael_hover_effect_sepia',
             [
                 'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
-                'type'               => Controls_Manager::SLIDER, 
-                'frontend_available' => true, 
-                'size_units'         => ['%'],
+                'type'               => Controls_Manager::SLIDER,
                 'default' => [
-					'unit' => '%',
 					'size' => 0,
 				],
                 'range' => [
@@ -301,8 +281,8 @@ class Hover_Effect {
                         'step' => 10,
                     ],
                 ],
-                'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'filter: sepia({{SIZE}}{{UNIT}});',
+				'selectors' => [
+					'{{WRAPPER}} .elementor-widget-container' => 'filter: blur({{eael_hover_effect_blur.SIZE}}px) contrast({{eael_hover_effect_contrast.SIZE}}%) grayscale({{eael_hover_effect_grayscal.SIZE}}%) invert({{eael_hover_effect_invert.SIZE}}%) saturate({{eael_hover_effect_saturate.SIZE}}%) sepia({{SIZE}}%);',
 				],
                 'condition' => [
 					'eael_hover_effect_sepia_is_on' => 'yes', 
@@ -403,10 +383,9 @@ class Hover_Effect {
 			[
 				'label' => esc_html__( 'RotateX', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
-				'size_units' => [ 'deg' ],
 				'range' => [
-                    'deg' => [
-						'min' => 0,
+                    'px' => [
+						'min' => -180,
 						'max' => 180,
 						'step' => 1,
 					],
@@ -415,7 +394,7 @@ class Hover_Effect {
 					'size' => 0,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'transform: rotateX({{SIZE}}deg) rotateY({{eael_hover_effect_transform_rotatey.SIZE}}deg) rotateZ({{eael_hover_effect_transform_rotatez.SIZE}}deg);',
+					'{{WRAPPER}} .elementor-widget-container' => 'transform: rotateX({{SIZE}}deg);',
 				],
                 'condition' => [
 					'eael_hover_effect_rotate_is_on' => 'yes', 
@@ -428,9 +407,8 @@ class Hover_Effect {
 			[
 				'label' => esc_html__( 'RotateY', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
-				'size_units' => [ 'deg' ],
 				'range' => [
-                    'deg' => [
+                    'px' => [
 						'min' => -180,
 						'max' => 180,
 						'step' => 1,
@@ -440,7 +418,7 @@ class Hover_Effect {
 					'size' => 0,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'transform: rotateX({{eael_hover_effect_transform_rotatex.SIZE}}deg) rotateY({{SIZE}}deg) rotateZ({{eael_hover_effect_transform_rotatez.SIZE}}deg);',
+					'{{WRAPPER}} .elementor-widget-container' => 'transform: rotateX({{eael_hover_effect_transform_rotatex.SIZE}}deg) rotateY({{SIZE}}deg);',
 				],
                 'condition' => [
 					'eael_hover_effect_rotate_is_on' => 'yes', 
@@ -453,9 +431,8 @@ class Hover_Effect {
 			[
 				'label' => esc_html__( 'RotateZ', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
-				'size_units' => [ 'deg' ],
 				'range' => [
-                    'deg' => [
+                    'px' => [
 						'min' => -180,
 						'max' => 180,
 						'step' => 1,
@@ -489,7 +466,7 @@ class Hover_Effect {
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'range' => [
                     'px' => [
-                        'max'  => 5,
+                        'max'  => 3,
                         'step' => 0.1,
                     ],
 				],
@@ -497,7 +474,7 @@ class Hover_Effect {
 					'size' => 1,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'transform: scaleX({{SIZE}}) scaleY({{eael_hover_effect_transform_scaley.SIZE}}) scaleZ({{eael_hover_effect_transform_scalez.SIZE}});',
+					'{{WRAPPER}} .elementor-widget-container' => 'transform: rotateX({{eael_hover_effect_transform_rotatex.SIZE}}deg) rotateY({{eael_hover_effect_transform_rotatey.SIZE}}deg) rotateZ({{eael_hover_effect_transform_rotatez.SIZE}}deg) scaleX({{SIZE}});',
 				],
                 'condition' => [
 					'eael_hover_effect_scale_is_on' => 'yes', 
@@ -511,37 +488,16 @@ class Hover_Effect {
 				'label' => esc_html__( 'ScaleY', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'range' => [
-                    'min' => 1,
-                    'max' => 5,
-                    'step' => 1,
+                    'px' => [
+                        'max'  => 3,
+                        'step' => 0.1,
+                    ],
 				],
                 'default' => [
 					'size' => 1,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'transform: scaleX({{eael_hover_effect_transform_scalex.SIZE}}) scaleY({{SIZE}}) scaleZ({{eael_hover_effect_transform_scalez.SIZE}});',
-				],
-                'condition' => [
-					'eael_hover_effect_scale_is_on' => 'yes', 
-				],
-			]
-		);
-
-        $element->add_control(
-			'eael_hover_effect_transform_scalez',
-			[
-				'label' => esc_html__( 'ScaleZ', 'essential-addons-for-elementor-lite' ),
-				'type' => \Elementor\Controls_Manager::SLIDER,
-				'range' => [
-                    'min' => 1,
-                    'max' => 5,
-                    'step' => 1,
-				],
-                'default' => [
-					'size' => 1,
-				],
-				'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'transform: scaleX({{eael_hover_effect_transform_scalex.SIZE}}) scaleY({{eael_hover_effect_transform_scaley.SIZE}}) scaleZ({{SIZE}});',
+					'{{WRAPPER}} .elementor-widget-container' => 'transform: rotateX({{eael_hover_effect_transform_rotatex.SIZE}}deg) rotateY({{eael_hover_effect_transform_rotatey.SIZE}}deg) rotateZ({{eael_hover_effect_transform_rotatez.SIZE}}deg) scaleX({{eael_hover_effect_transform_scalex.SIZE}}) scaleY({{SIZE}});',
 				],
                 'condition' => [
 					'eael_hover_effect_scale_is_on' => 'yes', 
@@ -563,9 +519,8 @@ class Hover_Effect {
 			[
 				'label' => esc_html__( 'SkewX', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
-				'size_units' => [ 'deg' ],
 				'range' => [
-                    'deg' => [
+                    'px' => [
 						'min' => 0,
 						'max' => 180,
 						'step' => 1,
@@ -575,7 +530,7 @@ class Hover_Effect {
 					'size' => 0,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'transform: skewX({{SIZE}}deg) skewY({{eael_hover_effect_transform_skewy.SIZE}}deg);',
+					'{{WRAPPER}} .elementor-widget-container' => 'transform: rotateX({{eael_hover_effect_transform_rotatex.SIZE}}deg) rotateY({{eael_hover_effect_transform_rotatey.SIZE}}deg) rotateZ({{eael_hover_effect_transform_rotatez.SIZE}}deg) scaleX({{eael_hover_effect_transform_scalex.SIZE}}) scaleY({{SIZE}}) skewX({{SIZE}}deg);',
 				],
                 'condition' => [
 					'eael_hover_effect_skew_is_on' => 'yes', 
@@ -588,9 +543,8 @@ class Hover_Effect {
 			[
 				'label' => esc_html__( 'SkewY', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
-				'size_units' => [ 'deg' ],
 				'range' => [
-                    'deg' => [
+                    'px' => [
 						'min' => 0,
 						'max' => 180,
 						'step' => 1,
@@ -606,118 +560,6 @@ class Hover_Effect {
 					'eael_hover_effect_skew_is_on' => 'yes', 
 				],
 			]
-		);
-
-        //Translate
-        $element->add_control(
-			'eael_hover_effect_translate_is_on',
-			[
-				'label' => __( 'Translate', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SWITCHER
-			]
-		);
-
-        $element->add_responsive_control(
-			'eael_hover_effect_transform_translatex',
-			[
-                'label'     => __( 'Translate X', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-                'separator' => 'before',
-				'default'   => [
-                    'sizes' => [
-                        'from' => 0,
-						'to'   => 45,
-                    ],
-					'unit'  => 'deg',
-                ],
-				'range'     => [
-                    'deg' => [
-                        'min' => -180,
-						'max' => 180,
-                    ],
-                ],
-				'labels'    => [
-                    __( 'From', 'essential-addons-for-elementor-lite' ),
-					__( 'To', 'essential-addons-for-elementor-lite' ),
-                ],
-				'scales'    => 1,
-				'handles'   => 'range',
-                'condition' => [
-					'eael_hover_effect_translate_is_on' => 'yes', 
-				],
-            ]
-		);
-
-        $element->add_responsive_control(
-			'eael_hover_effect_transform_translatey',
-			[
-                'label'     => __( 'Translate Y', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'default'   => [
-                    'sizes' => [
-                        'from' => 0,
-						'to'   => 45,
-                    ],
-					'unit'  => 'deg',
-                ],
-				'range'     => [
-                    'deg' => [
-                        'min' => -180,
-						'max' => 180,
-                    ],
-                ],
-				'labels'    => [
-                    __( 'From', 'essential-addons-for-elementor-lite' ),
-					__( 'To', 'essential-addons-for-elementor-lite' ),
-                ],
-				'scales'    => 1,
-				'handles'   => 'range',
-                'condition' => [
-					'eael_hover_effect_translate_is_on' => 'yes', 
-				],
-            ]
-		);
-
-        //Duration
-        $element->add_control(
-			'eael_hover_effect_transform_duration',
-			[
-                'label'     => __( 'Duration (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'default'   => [
-                    'unit' => 'px',
-					'size' => 1000,
-                ],
-				'condition' => [
-					'eael_hover_effect_translate_is_on' => 'yes', 
-				],
-            ]
-		);
-
-        //Delay
-		$element->add_control(
-			'eael_hover_effect_transform_delay',
-			[
-                'label'     => __( 'Delay (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'condition' => [
-					'eael_hover_effect_translate_is_on' => 'yes', 
-				],
-            ]
 		);
 
         $element->end_popover();
@@ -834,8 +676,7 @@ class Hover_Effect {
 			[
 				'label'              => __( 'Filter', 'essential-addons-for-elementor-lite' ), 
                 'type'               => Controls_Manager::POPOVER_TOGGLE, 
-                'return_value'       => 'yes', 
-                'frontend_available' => true,
+                'return_value'       => 'yes',
 			]
 		);
 
@@ -1049,8 +890,7 @@ class Hover_Effect {
             'eael_hover_effect_grayscal_hover',
             [
                 'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
-                'type'               => Controls_Manager::SLIDER, 
-                'frontend_available' => true, 
+                'type'               => Controls_Manager::SLIDER,
                 'size_units'         => ['%'],
                 'default' => [
 					'unit' => '%',
