@@ -48,9 +48,10 @@ class Migration
 		if ( isset( $options['action'], $options['type'] ) && $options['action'] === 'update' && $options['type'] === 'plugin' ) {
 			if ( ( isset( $options['plugins'] ) &&
 			       ( in_array( EAEL_PLUGIN_BASENAME, $options['plugins'] ) ||
-			         in_array( 'essential-addons-elementor/essential_adons_elementor.php', $options['plugins'] ) )
+			         in_array( 'essential-addons-elementor/essential_adons_elementor.php', $options['plugins'] )
+			       )
 			     ) || ( isset( $options['plugin'] ) &&
-			            ( $options['plugin'] === EAEL_PLUGIN_BASENAME || $options['plugin'] === 'essential-addons-elementor/essential_adons_elementor.php' )
+			            in_array( $options['plugin'], [ EAEL_PLUGIN_BASENAME, 'essential-addons-elementor/essential_adons_elementor.php' ] )
 			     )
 			) {
 				// remove old cache files
