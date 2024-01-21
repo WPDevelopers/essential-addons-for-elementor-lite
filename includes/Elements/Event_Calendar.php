@@ -546,6 +546,17 @@ class Event_Calendar extends Widget_Base
         );
 
         $this->add_control(
+            'eael_event_timezone',
+            [
+                'label'       => __('Timezone', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::SELECT2,
+                'label_block' => false,
+                'options'     => $this->timezone_identifiers_list(),
+                'default'     => 'local'
+            ]
+        );
+
+        $this->add_control(
             'eael_event_time_format',
             [
                 'label' => __('24-Hour Time Format', 'essential-addons-for-elementor-lite'),
@@ -3011,6 +3022,7 @@ class Event_Calendar extends Widget_Base
 		    $data = $this->get_manual_calendar_events( $settings );
 	    }
 
+	    $timezone       = $settings['eael_event_timezone'] ? $settings['eael_event_timezone'] : 'local';
 	    $local          = $settings['eael_event_calendar_language'];
 	    $default_view   = $settings['eael_event_calendar_default_view'];
 	    $default_date   = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : date( 'Y-m-d' );
@@ -3030,6 +3042,7 @@ class Event_Calendar extends Widget_Base
 		    echo '<div id="eael-event-calendar-' . $this->get_id() . '" class="eael-event-calendar-cls"
             data-cal_id = "' . $this->get_id() . '"
             data-locale = "' . $local . '"
+            data-timezone = "' . esc_attr( $timezone ) . '"
             data-translate = "' . htmlspecialchars( json_encode( $translate_date ), ENT_QUOTES, 'UTF-8' ) . '"
             data-defaultview = "' . $default_view . '"
             data-defaultdate = "' . $default_date . '"
@@ -3551,5 +3564,24 @@ class Event_Calendar extends Widget_Base
         $colors = [ '#F43E3E', '#F46C3E', '#F4993E', '#F4C63E', '#F4F43E', '#C6F43E', '#99F43E', '#3EF43E', '#3EF499', '#3EF4C6', '#3EF4F4', '#3EC6F4', '#3E99F4', '#3E3EF4', '#6C3EF4', '#993EF4', '#C63EF4', '#F43EF4', '#F43E99', '#F43E6C', '#F43E3E'];
 
         return $colors;
+    }
+
+    private function timezone_identifiers_list(){
+        $timezone = [ 'local' => __('Default', 'essential-addons-for-elementor-lite') ];
+
+        foreach( timezone_identifiers_list() as $zone ){
+            $timezone[ $zone ] = $zone;
+        }
+
+        unset( $timezone['UTC'] );
+        $utc = [ 'UTC' => 'UTC' ];
+
+        for ($time=-12; $time < 12; $time++) {
+            $sign = $time < 0 ? '' : '+';
+            $utc[ 'UTC' . $sign . $time ] = 'UTC' . $sign . $time;
+            $utc[ 'UTC' . $sign . $time . '.30' ] = 'UTC' . $sign . $time . ':30';
+        }
+
+        return $timezone + $utc;
     }
 }
