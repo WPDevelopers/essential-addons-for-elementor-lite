@@ -871,34 +871,6 @@ $config = [
                 true,
             ],
         ],
-
-        'crowdfundly-organization' => [
-	        'class' => '\Essential_Addons_Elementor\Elements\Crowdfundly_Organization',
-	        'condition' => [
-		        'defined',
-		        'CROWDFUNDLY_VERSION',
-		        true,
-	        ],
-        ],
-
-        'crowdfundly-all-campaign' => [
-	        'class' => '\Essential_Addons_Elementor\Elements\Crowdfundly_All_Campaign',
-	        'condition' => [
-		        'defined',
-		        'CROWDFUNDLY_VERSION',
-		        true,
-	        ],
-        ],
-
-        'crowdfundly-single-campaign' => [
-	        'class' => '\Essential_Addons_Elementor\Elements\Crowdfundly_Single_Campaign',
-	        'condition' => [
-		        'defined',
-		        'CROWDFUNDLY_VERSION',
-		        true,
-	        ],
-        ],
-
         'woo-checkout' => [
             'class' => '\Essential_Addons_Elementor\Elements\Woo_Checkout',
             'dependency' => [
@@ -954,14 +926,6 @@ $config = [
                         'context' => 'view',
                     ],
                 ],
-            ],
-        ],
-        'woocommerce-review' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Woocommerce_Review',
-            'condition' => [
-                'function_exists',
-                'run_reviewx',
-                true,
             ],
         ],
         'career-page' => [

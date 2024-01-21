@@ -1,10 +1,10 @@
-=== Essential Addons for Elementor - Best Elementor Widgets With Kits, Templates & WooCommerce Builders ===
+=== Essential Addons for Elementor - Best Elementor Templates, Widgets, Kits & WooCommerce Builders ===
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk, himadree12
 Tags: elementor, elements, addons, elementor addons, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
 Requires at least: 5.0
 Tested up to: 6.4
 Requires PHP: 7.0
-Stable tag: 5.9
+Stable tag: 5.9.7
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -33,7 +33,7 @@ Grab access to 5,000 pre-made templates templates from the ultimate templates cl
 
 [Templately: Most Popular Templates Cloud For Elementor](https://www.youtube.com/watch?v=Z73muoczARc)
 
-Each of these Elementor templates is completely customizable and responsive, and also seamlessly compatible with Essential Addons. You can add Elementor addons, change font or color  and personalize them effortlessly. 
+Each of these Elementor templates is completely customizable and responsive, and also seamlessly compatible with Essential Addons. You can add Elementor addons, change font or color  and personalize them effortlessly.
 
 Templately also offers advanced features and facilities to saving your Elementor templates to cloud. Save all your ready and customized designs with Templately & deploy in hundreds of websites with 1-click. Increase productivity and power up your whole team to build websites faster than ever before.
 
@@ -175,7 +175,7 @@ More features and improvements are coming on regular updates. Want to unlock the
 
 ### Elementor WooCommerce Widgets From Essential Addons
 
-With Essential Addons, we bring you seamless compatibility with WooCommerce, enhancing your ability to showcase products, categories, and filters with ease. There are 11+ beautiful **Elementor WooCommerce widgets** for your every need: 
+With Essential Addons, we bring you seamless compatibility with WooCommerce, enhancing your ability to showcase products, categories, and filters with ease. There are 11+ beautiful **Elementor WooCommerce widgets** for your every need:
 
 [EA Woo Product Carousel](https://essential-addons.com/elementor/docs/woo-product-carousel/): Display your store’s products interactively with this Elementor WooCommerce widget and implement various styling options and ready-made layouts to create an interactive product showcase on your WordPress website.
 
@@ -296,6 +296,82 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.9.7 - 18/01/2024 =
+
+- Improved: Site Health Status
+- Improved: Asset auto generate after update the plugin
+- Few minor bug fixes & improvements
+
+= 5.9.6 - 17/01/2024 =
+
+- Few minor bug fixes & improvements
+
+= 5.9.5 - 17/01/2024 =
+
+- Improved: Security Enhancement
+- Fixed: EA Simple Menu | Throwing Fatal error when Hamburger option is enabled for Desktop device
+- Fixed: EA Woo Cart | Breakpoint on different devices not working properly
+- Few minor bug fixes & improvements
+
+= 5.9.4 - 14/01/2024 =
+
+- Fixed: EA Filterable Gallery | Image Caption issue under the lightbox 
+- Fixed: EA Testimonial Slider | Added Compatibility Support for Older version of Hello Elementor theme
+- Fixed: EA Gravity Form | Form styling issue
+- Fixed: EA Event Calendar | Old events visibility issue for Current Date & Custom Date
+- Improved: EA Login Register Form | Added Global support for reCaptcha 
+- Improved: EA Interactive Circle | Added Support for Keyboard Accessibility
+- Improved: EA Login Register Form | Updated Error Notice mechanism for Caching Plugins
+- Improved: EA Event Calendar | Added Date formatting option for Event popup
+- Few minor bug fixes & improvements
+
+= 5.9.3 - 24/12/2023 =
+
+- Improved: Security Enhancement
+- Few minor bug fixes & improvements
+
+= 5.9.2 - 18/12/2023 =
+
+- Fixed: EA Filterable Gallery | Full Image link not working properly
+- Fixed: PHP Warnings in logs after v5.9.1 update
+- Fixed: EA Scroll to Top | Deprecated Notices
+- Few minor bug fixes & improvements
+
+= 5.9.1 - 14/12/2023 =
+
+- Fixed: EA Advanced Accordion | Added support for FAQ schema for saved template
+- Fixed: EA Event Calendar | Style and Layout related issues 
+- Fixed: EA Advanced Accordion | Spacing Issue with content's Paragraph
+- Fixed: EA Simple Menu | Dropdown Indicator Icon Issue
+- Fixed: EA Sticky Video | On mobile the video section is underlapping
+- Fixed: EA Event Calendar | Starting date does not update the Calender in List View.
+- Fixed: EA Call to Action | Background color is not properly changing for Preset-1 & 2
+- Fixed: EA Woo Cart | Repeated design appears after "EA Woo Cart" is used twice on the same page for both desktop and mobile versions
+- Fixed: EA Gravity Forms | Border radius in dropdown element doesn't work
+- Fixed: EA Filterable Gallery | Automatically turn on the lightbox after performing the filter
+- Fixed: EA Advanced Data Table | Disabling the header does not work in Tablepress
+- Fixed: EA Post Grid | Post terms are not displaying in custom post type
+- Fixed: EA Woo Product Carousel | Saved templates are not working as expected on the Toggle, Advanced Tabs, Advanced Accordion & Lightbox widgets
+- Fixed: EA Post Grid | Read More button alignment not working
+- Fixed: EA Woo Checkout | Field name is not getting changed
+- Fixed: EA Advanced Accordion | Menu anchoring Issue with custom offset
+- Fixed: EA Product Grid | Add To Cart button text changes don't affect the 2nd page.
+- Fixed: EA Image Accordion | Anchor link is not working
+- Fixed: EA Login/Register Form | When "Submit form via Ajax" is disabled, the validation message doesn't show on the popup
+- Fixed: Uncaught TypeError: in_array() with the latest version plugin
+- Fixed: EA Flip Box | HTML tag is not working in EA Flip Box Title
+- Fixed: EA Woo Product Gallery | Add to cart button adds a product even when product variation hasn't been selected
+- Fixed: EA Info Box | Adding Red Color in <a> tag after the update and design broken
+- Improved: EA Fancy Text | Loop stop option for animation type
+- Improved: EA Advanced Accordion | Scroll to the accordion title on click
+- Improved: EA Login/Register Form | Validation error message is not visible when the Registration page is selected as the Default form
+- Improved: EA Woo Checkout | Add option for placeholder on checkout fields
+- Improved: EA Woocommerce Product widgets | Filtering option for the "Related Products"
+- Improved: EA Login/Register Form | Redirect the users to the previous page after registration
+- Improved: EA Interactive Circle | Option to set an icon/image for each Circle Item on top of the bottom text content and under the semi circle
+- Improved: EA Table of Contents | TOC title heading options
+- Few minor bug fixes & improvements
 
 = 5.9.0 - 27/11/2023 =
 
@@ -1118,7 +1194,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 = 4.7.1 - 07/06/2021 =
 
-- Removed: Elementor  deprecation methods
+- Removed: Elementor  deprecation methods
 - Added: Compatibility with PHP 8.0
 - Added: EA Login/Register Form | Added permission check for security enhancement
 - Fixed: EA Gravity Form | Styles being applied to input fields
@@ -2047,5 +2123,4 @@ Initial stable release
 
 
 == Upgrade Notice ==
-
 

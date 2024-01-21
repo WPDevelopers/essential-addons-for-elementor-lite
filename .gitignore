@@ -7,4 +7,3 @@ pnpm-lock.yaml
 composer.lock
 /node_modules
 .idea/*
-pnpm-lock.yaml
