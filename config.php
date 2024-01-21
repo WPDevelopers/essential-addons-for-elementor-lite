@@ -1234,6 +1234,13 @@ $config = [
                         'context' => 'view',
                     ],
                 ],
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/hover-effect.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                ],
             ],
         ],
     ],

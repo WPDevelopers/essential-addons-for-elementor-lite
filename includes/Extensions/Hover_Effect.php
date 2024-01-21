@@ -1717,8 +1717,34 @@ class Hover_Effect {
 	}
 
 	public function before_render( $element ) {
-		// $settings = $element->get_settings_for_display();
+		$settings = $element->get_settings_for_display();
+		
 
+		if( 'yes' == $settings['eael_hover_effect_rotate_is_on'] ) {
+			$rotate_settings = [
+				'rotate_x' => $settings['eael_hover_effect_transform_rotatex']['size'],
+				'rotate_y' => $settings['eael_hover_effect_transform_rotatey']['size'],
+				'rotate_z' => $settings['eael_hover_effect_transform_rotatez']['size'],
+			];
+			$element->add_render_attribute( '_wrapper', 'data-rotate_effect', wp_json_encode( $rotate_settings ) );
+		}
+
+		if( 'yes' == $settings['eael_hover_effect_scale_is_on'] ) {
+			$scale_settings = [
+				'scale_x' => $settings['eael_hover_effect_transform_scalex']['size'],
+				'scale_y' => $settings['eael_hover_effect_transform_scaley']['size'],
+			];
+			$element->add_render_attribute( '_wrapper', 'data-scale_effect', wp_json_encode( $scale_settings ) );
+		}
+
+		if( 'yes' == $settings['eael_hover_effect_skew_is_on'] ) {
+			$skew_settings = [
+				'skew_x' => $settings['eael_hover_effect_transform_skewx']['size'],
+				'skew_y' => $settings['eael_hover_effect_transform_skewy']['size'],
+			];
+			$element->add_render_attribute( '_wrapper', 'data-skew_effect', wp_json_encode( $skew_settings ) );
+		}
+		
         $element->add_render_attribute( '_wrapper', 'class', 'eael_hover_effect' );
 	}
 
