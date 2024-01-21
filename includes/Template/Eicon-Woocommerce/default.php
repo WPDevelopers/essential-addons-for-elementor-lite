@@ -37,8 +37,8 @@ if ( function_exists( 'YITH_WCWL' ) ) {
 // Improvement
 $grid_style_preset = isset($settings['eael_product_grid_style_preset']) ? $settings['eael_product_grid_style_preset'] : '';
 $list_style_preset = isset($settings['eael_product_list_style_preset']) ? $settings['eael_product_list_style_preset'] : '';
-$sale_badge_align = isset( $settings['eael_product_sale_badge_alignment'] ) ? $settings['eael_product_sale_badge_alignment'] : '';
-$sale_badge_preset = isset($settings['eael_product_sale_badge_preset']) ? $settings['eael_product_sale_badge_preset'] : '';
+$sale_badge_align  = isset( $settings['eael_product_sale_badge_alignment'] ) ? esc_attr( $settings['eael_product_sale_badge_alignment'] ) : '';
+$sale_badge_preset = isset( $settings['eael_product_sale_badge_preset'] ) ? esc_attr( $settings['eael_product_sale_badge_preset'] ) : '';
 // should print vars
 $should_print_rating = isset( $settings['eael_product_grid_rating'] ) && 'yes' === $settings['eael_product_grid_rating'];
 $should_print_quick_view = isset( $settings['eael_product_grid_quick_view'] ) && 'yes' === $settings['eael_product_grid_quick_view'];
@@ -539,7 +539,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 					}
 					?>
 
-                    <ul class="icons-wrap <?php echo $settings['eael_product_action_buttons_preset'] ;?>">
+                    <ul class="icons-wrap <?php echo esc_attr( $settings['eael_product_action_buttons_preset'] ); ?>">
 						<?php
 						if ( $should_print_compare_btn ) {
 							echo '<li class="add-to-compare">';
