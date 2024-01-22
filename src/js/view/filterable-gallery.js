@@ -42,7 +42,6 @@ jQuery(window).on("elementor/frontend/init", function () {
 			// init isotope
 			let gwrap = $(".eael-filter-gallery-wrapper");
 			var layoutMode       = gwrap.data("layout-mode");
-			var mfpCaption       = gwrap.data("mfp_caption");
 			var $isotope_gallery = $gallery.isotope({
 				itemSelector: ".eael-filterable-gallery-item-wrap",
 				layoutMode: $layout_mode,
@@ -77,13 +76,6 @@ jQuery(window).on("elementor/frontend/init", function () {
 				gallery: {
 					enabled: $gallery_enabled,
 					tCounter: fg_mfp_counter_text,
-				},
-				image: {
-					titleSrc: function (item) {
-						if (mfpCaption === "yes") {
-							return item.el.parents('.gallery-item-caption-over').find('.fg-item-title').html() || item.el.parents('.gallery-item-caption-wrap').find('.fg-item-title').html() || item.el.parents('.eael-filterable-gallery-item-wrap').find('.fg-item-title').html();
-						}
-					}
 				},
 				iframe: {
 					markup: `<div class="mfp-iframe-scaler">
