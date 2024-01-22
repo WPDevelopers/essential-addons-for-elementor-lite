@@ -1,3 +1,7 @@
+.eael-simple-menu-container {
+    min-height: 50px;
+}
+
 .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive,
 .elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive,
@@ -28,7 +32,9 @@
                         text-align: inherit;
 
                         span {
-                            display: none;
+                            &.eael-simple-menu-indicator{
+                                display: none;
+                            }
                         }
                     }
 
@@ -48,10 +54,6 @@
 
                             .eael-simple-menu-indicator {
                                 border: 1px solid #00000080;
-
-                                &:before {
-                                    //color: #c36;
-                                }
                             }
 
                             ul {
@@ -373,14 +375,16 @@
             right: 10px;
             width: 28px;
             height: 28px;
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border: 1px solid #ffffff80;
             border-radius: 2px;
             text-align: center;
             //transform: translateY(-50%);
             cursor: pointer;
 
-            &:before {
+            &:before, svg, i {
                 display: block;
                 font-weight: 900;
                 line-height: 26px;
@@ -389,7 +393,7 @@
             }
 
             &.eael-simple-menu-indicator-open {
-                &:before {
+                &:before, svg, i {
                     transform: rotate(180deg);
                 }
             }
@@ -492,8 +496,9 @@
                         .eael-simple-menu-indicator {
                             border: 1px solid #00000080;
 
-                            &:before {
+                            &:before, svg, i {
                                 color: #000000;
+                                fill: #000000;
                             }
                         }
 
@@ -757,3 +762,6 @@
     }
 }
 
+.eael-simple-menu-container .eael-simple-menu-toggle {
+    display: none;
+}

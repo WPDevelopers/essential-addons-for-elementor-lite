@@ -67,7 +67,7 @@ if ( class_exists( '\WC_Shortcode_Cart' ) ) {
 					}
 				}
 				?>
-                <div class="eael-woo-cart-wrapper <?php echo esc_attr( printf( '%s %s %s', "eael-woo-{$settings['ea_woo_cart_layout']}", $auto_update, $style_two_wrapper_class ) ); ?>">
+                <div class="eael-woo-cart-wrapper <?php echo esc_attr( sprintf( '%s %s %s', "eael-woo-{$settings['ea_woo_cart_layout']}", $auto_update, $style_two_wrapper_class ) ); ?>">
 					<?php
 					do_action( 'woocommerce_before_cart' );
 
