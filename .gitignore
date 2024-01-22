@@ -3,7 +3,7 @@
 .phpintel
 ./gulpfile.js
 package-lock.json
+pnpm-lock.yaml
 composer.lock
 /node_modules
-/vendor
 .idea/*

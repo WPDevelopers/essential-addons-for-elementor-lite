@@ -11,7 +11,9 @@ var EventCalendar = function ($scope, $) {
 		translate = element.data("translate"),
 		defaultView = element.data("defaultview"),
 		defaultDate = element.data("defaultdate"),
+		multiDaysEventDayCount = typeof element.data("multidays_event_day_count") !== 'undefined' ? element.data("multidays_event_day_count") : 0,
 		eventLimit = element.data("event_limit"),
+		popupDateFormate = element.data("popup_date_formate"),
 		monthColumnHeaderFormat = element.data("monthcolumnheaderformat"),
 		weekColumnHeaderFormat = element.data("weekcolumnheaderformat"),
 		time_format = element.data("time_format") == "yes" ? true : false;
@@ -63,6 +65,22 @@ var EventCalendar = function ($scope, $) {
 					var element = $(info.el),
 						event = info.event;
 					moment.locale(locale);
+
+					if(multiDaysEventDayCount && event.endStr > event.startStr){
+						let startDate 	= typeof event.startStr !== 'undefined' ? new Date(event.startStr) : '';
+						let endDate 	= typeof event.endStr 	!== 'undefined' ? new Date(event.endStr) : '';
+
+						let oneDay = 24 * 60 * 60 * 1000;
+						let totalDays = (endDate - startDate ) / oneDay;
+
+						let currentCellDate = $(element).prevAll('tr.fc-list-day:first')?.data('date');
+							currentCellDate	= typeof currentCellDate !== 'undefined' ? new Date(currentCellDate) : '';
+
+						let eventDayCount 	= startDate && currentCellDate ? Math.ceil((currentCellDate - startDate) / oneDay) + 1 : '';
+						let eventTitle = `${event.title} (Day ${eventDayCount}/${totalDays} )`;
+						element.find(".fc-list-event-title a").text(eventTitle);
+					}
+
 					// when event is finished event text are cross
 					if ( element.hasClass("fc-event-past") ) {
 						element.find(".fc-event-title").addClass("eael-event-completed");
@@ -160,7 +178,7 @@ var EventCalendar = function ($scope, $) {
 									moment(startDate).format("MM-DD-YYYY") >
 									moment(new Date()).add(1, "days").format("MM-DD-YYYY")
 								) {
-									startView = moment(event.start).format("MMM Do " + timeFormate);
+									startView = moment(event.start).format(popupDateFormate + " " + timeFormate);
 								}
 
 								startView = yearDiff ? startYear + " " + startView : startView;
@@ -195,7 +213,7 @@ var EventCalendar = function ($scope, $) {
 									moment(endDate).diff(moment(startDate), "days") > 0 &&
 									endSelector.text().trim().length < 1
 								) {
-									endView = moment(endDate).format("MMM Do " + timeFormate);
+									endView = moment(endDate).format(popupDateFormate + " " + timeFormate);
 								}
 
 								if (
