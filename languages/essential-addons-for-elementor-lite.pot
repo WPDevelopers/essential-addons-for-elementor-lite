@@ -718,6 +718,10 @@ msgstr ""
 msgid "Query String"
 msgstr ""
 
+#: ../includes/Controls/Select2.php:41
+msgid "Visit Count"
+msgstr ""
+
 #: ../includes/Elements/Advanced_Data_Table.php:73
 msgid "Data Source"
 msgstr ""
