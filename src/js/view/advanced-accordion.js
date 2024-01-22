@@ -91,16 +91,14 @@ ea.hooks.addAction("init", "ea", () => {
 			});
 
 			// If hashTag is not null then scroll to that hashTag smoothly
-			if( hashURL.startsWith( '#!' ) ){
-				var replace_with_hash = hashURL.replace( '#!', '#' );
-				$( replace_with_hash ).trigger( 'click' );
-			} else {
-				if( typeof hashTag !== 'undefined' && hashTag && !ea.elementStatusCheck('eaelAdvancedAccordionScroll') ){
-					let $customIdOffsetVal = $customIdOffset ? parseFloat($customIdOffset) : 0;
-					$('html, body').animate({
-						scrollTop: $("#"+hashTag).offset().top - $customIdOffsetVal,
-					}, $srollSpeed);
-				}
+			if (hashURL.startsWith('#!')) {
+				var replace_with_hash = hashURL.replace('#!', '#');
+				$(replace_with_hash).trigger('click');
+			} else if (typeof hashTag !== 'undefined' && hashTag && !ea.elementStatusCheck('eaelAdvancedAccordionScroll')) {
+				let $customIdOffsetVal = $customIdOffset ? parseFloat($customIdOffset) : 0;
+				$('html, body').animate({
+					scrollTop: $("#" + hashTag).offset().top - $customIdOffsetVal,
+				}, $srollSpeed);
 			}
 		}
 	);
