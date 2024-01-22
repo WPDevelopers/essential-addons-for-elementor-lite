@@ -1,0 +1,16 @@
+{
+    "name": "priyomukul/wp-notice",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "PriyoMukul\\WPNotice\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Priyo Mukul",
+            "email": "17237437+priyomukul@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}
