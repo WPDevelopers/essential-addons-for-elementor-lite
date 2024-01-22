@@ -622,11 +622,11 @@ class Fancy_Text extends Widget_Base {
 
 		<?php if ( $settings['eael_fancy_text_transition_type']  == 'fancy' ) : ?>
 			<span id="eael-fancy-text-<?php echo esc_attr($this->get_id()); ?>" class="eael-fancy-text-strings
-			<?php echo $settings['eael_fancy_text_color_selector']?>"></span>
+			<?php echo esc_attr( $settings['eael_fancy_text_color_selector'] ) ?>"></span>
 		<?php endif; ?>
 
 		<?php if ( $settings['eael_fancy_text_transition_type']  != 'fancy' ) : ?>
-			<span id="eael-fancy-text-<?php echo esc_attr($this->get_id()); ?>" class="eael-fancy-text-strings <?php echo $settings['eael_fancy_text_color_selector']?>">
+			<span id="eael-fancy-text-<?php echo esc_attr($this->get_id()); ?>" class="eael-fancy-text-strings <?php echo esc_attr( $settings['eael_fancy_text_color_selector'] ); ?>">
 				<noscript>
 					<?php
 						$eael_fancy_text_strings_list = "";
