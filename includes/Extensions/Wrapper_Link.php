@@ -60,11 +60,13 @@ class Wrapper_Link {
 		$wrapper_link_settings = $element->get_settings_for_display( 'eael_wrapper_link' );
 
 		if ( ! empty( $element->get_settings_for_display( 'eael_wrapper_link_switch' ) ) && ! empty( $wrapper_link_settings['url'] ) ) {
-			unset( $wrapper_link_settings['custom_attributes'] );
-
 			$element->add_render_attribute( '_wrapper',
 				'data-eael-wrapper-link',
-				wp_json_encode( $wrapper_link_settings )
+				wp_json_encode( [
+					'url'         => esc_url( $wrapper_link_settings['url'] ),
+					'is_external' => esc_attr( $wrapper_link_settings['is_external'] ),
+					'nofollow'    => esc_attr( $wrapper_link_settings['nofollow'] )
+				] )
 			);
 		}
 	}

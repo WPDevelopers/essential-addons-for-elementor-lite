@@ -80,7 +80,7 @@ const QuickView = {
 	singlePageAddToCartButton: ($scope, $) => {
 		$(document).on(
 			"click",
-			".eael-woo-slider-popup .single_add_to_cart_button",
+			".eael-woo-slider-popup .single_add_to_cart_button:not(.wc-variation-selection-needed)",
 			function (e) {
 				e.preventDefault();
 				e.stopImmediatePropagation();
