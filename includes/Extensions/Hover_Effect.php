@@ -378,6 +378,7 @@ class Hover_Effect {
 			]
 		);
 
+		//RotateX
         $element->add_control(
 			'eael_hover_effect_transform_rotatex',
 			[
@@ -393,15 +394,13 @@ class Hover_Effect {
 				'default' => [
 					'size' => 0,
 				],
-				'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'transform: rotateX({{SIZE}}deg);',
-				],
                 'condition' => [
 					'eael_hover_effect_rotate_is_on' => 'yes', 
 				],
 			]
 		);
 
+		//RotateY
         $element->add_control(
 			'eael_hover_effect_transform_rotatey',
 			[
@@ -417,15 +416,13 @@ class Hover_Effect {
 				'default' => [
 					'size' => 0,
 				],
-				'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'transform: rotateX({{eael_hover_effect_transform_rotatex.SIZE}}deg) rotateY({{SIZE}}deg);',
-				],
                 'condition' => [
 					'eael_hover_effect_rotate_is_on' => 'yes', 
 				],
 			]
 		);
 
+		//RotateZ
         $element->add_control(
 			'eael_hover_effect_transform_rotatez',
 			[
@@ -440,9 +437,6 @@ class Hover_Effect {
 				],
 				'default' => [
 					'size' => 0,
-				],
-				'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'transform: rotateX({{eael_hover_effect_transform_rotatex.SIZE}}deg) rotateY({{eael_hover_effect_transform_rotatey.SIZE}}deg) rotateZ({{SIZE}}deg);',
 				],
                 'condition' => [
 					'eael_hover_effect_rotate_is_on' => 'yes', 
@@ -459,6 +453,7 @@ class Hover_Effect {
 			]
 		);
 
+		//ScaleX
         $element->add_control(
 			'eael_hover_effect_transform_scalex',
 			[
@@ -473,15 +468,13 @@ class Hover_Effect {
                 'default' => [
 					'size' => 1,
 				],
-				'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'transform: rotateX({{eael_hover_effect_transform_rotatex.SIZE}}deg) rotateY({{eael_hover_effect_transform_rotatey.SIZE}}deg) rotateZ({{eael_hover_effect_transform_rotatez.SIZE}}deg) scaleX({{SIZE}});',
-				],
                 'condition' => [
 					'eael_hover_effect_scale_is_on' => 'yes', 
 				],
 			]
 		);
 
+		//ScaleY
         $element->add_control(
 			'eael_hover_effect_transform_scaley',
 			[
@@ -495,9 +488,6 @@ class Hover_Effect {
 				],
                 'default' => [
 					'size' => 1,
-				],
-				'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'transform: rotateX({{eael_hover_effect_transform_rotatex.SIZE}}deg) rotateY({{eael_hover_effect_transform_rotatey.SIZE}}deg) rotateZ({{eael_hover_effect_transform_rotatez.SIZE}}deg) scaleX({{eael_hover_effect_transform_scalex.SIZE}}) scaleY({{SIZE}});',
 				],
                 'condition' => [
 					'eael_hover_effect_scale_is_on' => 'yes', 
@@ -514,6 +504,7 @@ class Hover_Effect {
 			]
 		);
 
+		//SkewX
         $element->add_control(
 			'eael_hover_effect_transform_skewx',
 			[
@@ -529,15 +520,13 @@ class Hover_Effect {
 				'default' => [
 					'size' => 0,
 				],
-				'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'transform: rotateX({{eael_hover_effect_transform_rotatex.SIZE}}deg) rotateY({{eael_hover_effect_transform_rotatey.SIZE}}deg) rotateZ({{eael_hover_effect_transform_rotatez.SIZE}}deg) scaleX({{eael_hover_effect_transform_scalex.SIZE}}) scaleY({{SIZE}}) skewX({{SIZE}}deg);',
-				],
                 'condition' => [
 					'eael_hover_effect_skew_is_on' => 'yes', 
 				],
 			]
 		);
 
+		//SkewY
         $element->add_control(
 			'eael_hover_effect_transform_skewy',
 			[
@@ -552,9 +541,6 @@ class Hover_Effect {
 				],
 				'default' => [
 					'size' => 0,
-				],
-				'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'transform: skewX({{eael_hover_effect_transform_skewx.SIZE}}deg) skewY({{SIZE}}deg);',
 				],
                 'condition' => [
 					'eael_hover_effect_skew_is_on' => 'yes', 
@@ -1719,30 +1705,32 @@ class Hover_Effect {
 	public function before_render( $element ) {
 		$settings = $element->get_settings_for_display();
 		
-
+		//Rotate Effect
 		if( 'yes' == $settings['eael_hover_effect_rotate_is_on'] ) {
 			$rotate_settings = [
 				'rotate_x' => $settings['eael_hover_effect_transform_rotatex']['size'],
 				'rotate_y' => $settings['eael_hover_effect_transform_rotatey']['size'],
 				'rotate_z' => $settings['eael_hover_effect_transform_rotatez']['size'],
 			];
-			$element->add_render_attribute( '_wrapper', 'data-rotate_effect', wp_json_encode( $rotate_settings ) );
+			$element->add_render_attribute( '_wrapper', 'data-eael_rotate_effect', wp_json_encode( $rotate_settings ) );
 		}
 
+		//Scale Effect
 		if( 'yes' == $settings['eael_hover_effect_scale_is_on'] ) {
 			$scale_settings = [
 				'scale_x' => $settings['eael_hover_effect_transform_scalex']['size'],
 				'scale_y' => $settings['eael_hover_effect_transform_scaley']['size'],
 			];
-			$element->add_render_attribute( '_wrapper', 'data-scale_effect', wp_json_encode( $scale_settings ) );
+			$element->add_render_attribute( '_wrapper', 'data-eael_scale_effect', wp_json_encode( $scale_settings ) );
 		}
 
+		//Skew Effect
 		if( 'yes' == $settings['eael_hover_effect_skew_is_on'] ) {
 			$skew_settings = [
 				'skew_x' => $settings['eael_hover_effect_transform_skewx']['size'],
 				'skew_y' => $settings['eael_hover_effect_transform_skewy']['size'],
 			];
-			$element->add_render_attribute( '_wrapper', 'data-skew_effect', wp_json_encode( $skew_settings ) );
+			$element->add_render_attribute( '_wrapper', 'data-eael_skew_effect', wp_json_encode( $skew_settings ) );
 		}
 		
         $element->add_render_attribute( '_wrapper', 'class', 'eael_hover_effect' );
