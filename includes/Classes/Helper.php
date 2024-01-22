@@ -1457,7 +1457,13 @@ class Helper
 	 *
 	 */
 	public static function eael_get_current_device_by_screen() {
-		if ( isset( $_COOKIE['eael_screen'] ) && ! empty( $breakpoints = Plugin::$instance->breakpoints->get_breakpoints_config() ) ) {
+		if ( ! session_id() ) {
+			session_start( [
+				'read_and_close' => true,
+			] );
+		}
+
+		if ( isset( $_SESSION['eael_screen'] ) && ! empty( $breakpoints = Plugin::$instance->breakpoints->get_breakpoints_config() ) ) {
 			$breakpoints = array_filter( $breakpoints, function ( $breakpoint ) {
 				return $breakpoint['is_enabled'];
 			} );
@@ -1466,9 +1472,13 @@ class Helper
 				$widescreen = $breakpoints['widescreen'];
 				unset( $breakpoints['widescreen'] );
 				$breakpoints['desktop'] = $widescreen;
-			}
-
-			$current_screen = intval( $_COOKIE['eael_screen'] );
+			}else{
+                $breakpoints['desktop'] = [
+                    'value' => 2400
+                ];
+            }
+            
+			$current_screen = intval( $_SESSION['eael_screen'] );
 			foreach ( $breakpoints as $device => $screen ) {
 				if ( $current_screen <= $screen['value'] ) {
 					return $device;
