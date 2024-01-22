@@ -8810,7 +8810,7 @@ msgstr ""
 msgid "Image Size"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Carousel.php:3027, ../includes/Elements/Woo_Product_List.php:3746
+#: ../includes/Elements/Woo_Product_Carousel.php:3028, ../includes/Elements/Woo_Product_List.php:3746
 msgid "<p class=\"eael-no-posts-found\">No layout found!</p>"
 msgstr ""
 
