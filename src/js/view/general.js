@@ -13,14 +13,25 @@ window.ea = {
 		return false;
 	}
 };
-function EAELsetScreenSize(){
-	var eael_screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-	let expirationDate = new Date();
-	expirationDate.setDate(expirationDate.getDate() + 30);
-	document.cookie = "eael_screen=" + eael_screenWidth + ";expires=" + expirationDate.toUTCString() + ";path=/";
+
+function EAELsetScreenSize() {
+	jQuery.ajax({
+		url: localize.ajaxurl,
+		type: "post",
+		data: {
+			action: "eael_set_screen_width",
+			screen_width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+		}
+	});
 }
+
 EAELsetScreenSize();
-window.addEventListener('resize', EAELsetScreenSize);
+let debunce_time = false;
+window.addEventListener('resize', function () {
+	clearTimeout(debunce_time);
+	debunce_time = setTimeout(EAELsetScreenSize, 250);
+});
+
 ea.hooks.addAction("widgets.reinit", "ea", ($content) => {
 	let filterGallery = jQuery(".eael-filter-gallery-container", $content);
 	let postGridGallery = jQuery(
