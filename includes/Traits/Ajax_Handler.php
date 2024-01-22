@@ -1114,11 +1114,11 @@ trait Ajax_Handler {
 	}
 
 	public function eael_set_screen_width() {
-		if ( ! session_id() ) {
-			session_start();
-		}
-		$_SESSION['eael_screen'] = absint( $_POST['screen_width'] );
-		session_write_close();
+//		if ( ! session_id() ) {
+//			session_start();
+//		}
+//		$_SESSION['eael_screen'] = absint( $_POST['screen_width'] );
+//		session_write_close();
 	}
 
 	public function eael_yith_wcwl_ajax_disable( $request ) {
