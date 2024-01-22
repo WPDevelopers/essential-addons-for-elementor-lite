@@ -13,6 +13,7 @@ var EventCalendar = function ($scope, $) {
 		defaultDate = element.data("defaultdate"),
 		multiDaysEventDayCount = typeof element.data("multidays_event_day_count") !== 'undefined' ? element.data("multidays_event_day_count") : 0,
 		eventLimit = element.data("event_limit"),
+		popupDateFormate = element.data("popup_date_formate"),
 		time_format = element.data("time_format") == "yes" ? true : false;
 
 	if ( wrapper.hasClass( 'layout-calendar' ) ){
@@ -156,7 +157,7 @@ var EventCalendar = function ($scope, $) {
 									moment(startDate).format("MM-DD-YYYY") >
 									moment(new Date()).add(1, "days").format("MM-DD-YYYY")
 								) {
-									startView = moment(event.start).format("MMM Do " + timeFormate);
+									startView = moment(event.start).format(popupDateFormate + " " + timeFormate);
 								}
 
 								startView = yearDiff ? startYear + " " + startView : startView;
@@ -191,7 +192,7 @@ var EventCalendar = function ($scope, $) {
 									moment(endDate).diff(moment(startDate), "days") > 0 &&
 									endSelector.text().trim().length < 1
 								) {
-									endView = moment(endDate).format("MMM Do " + timeFormate);
+									endView = moment(endDate).format(popupDateFormate + " " + timeFormate);
 								}
 
 								if (

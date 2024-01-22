@@ -976,7 +976,7 @@ class Interactive_Circle extends Widget_Base {
 								$is_active  = ! $is_active && $item['eael_interactive_circle_default_active'] === 'yes' ? 'active' : '';
 								?>
                                 <div class="eael-circle-item elementor-repeater-item-<?php echo $item['_id']; ?>">
-                                    <div class="eael-circle-btn <?php echo $is_active; ?>" id="eael-circle-item-<?php echo $item_count; ?>">
+                                    <div aria-controls="eael-interactive-<?php echo esc_html( $item_count ); ?>" tabindex="0" class="eael-circle-btn <?php echo $is_active; ?>" id="eael-circle-item-<?php echo $item_count; ?>">
                                         <div class="eael-circle-icon-shapes <?php echo esc_attr( $item_style_classic ); ?>">
                                             <div class="eael-shape-1"></div>
                                             <div class="eael-shape-2"></div>
@@ -994,7 +994,7 @@ class Interactive_Circle extends Widget_Base {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="eael-circle-btn-content eael-circle-item-<?php echo $item_count . ' ' . $is_active; ?>">
+                                    <div id="eael-interactive-<?php echo esc_html( $item_count ); ?>" aria-labelledby="eael-circle-item-<?php echo esc_html( $item_count ); ?>" class="eael-circle-btn-content eael-circle-item-<?php echo $item_count . ' ' . $is_active; ?>">
                                         <div class="eael-circle-content">
 											<?php echo $item['eael_interactive_circle_item_content'] ?>
                                         </div>
@@ -1019,7 +1019,7 @@ class Interactive_Circle extends Widget_Base {
 								$is_active = ! $is_active && $item['eael_interactive_circle_default_active'] === 'yes' ? 'active' : '';
 								?>
                                 <div class="eael-circle-item elementor-repeater-item-<?php echo $item['_id']; ?>">
-                                    <div class="eael-circle-btn <?php echo $is_active; ?>" id="eael-circle-item-<?php echo $item_count; ?>">
+                                    <div aria-controls="eael-interactive-<?php echo esc_html( $item_count ); ?>" tabindex="0" class="eael-circle-btn <?php echo $is_active; ?>" id="eael-circle-item-<?php echo $item_count; ?>">
                                         <div class="eael-circle-icon-shapes">
                                             <div class="eael-shape-1"></div>
                                             <div class="eael-shape-2"></div>
@@ -1038,13 +1038,12 @@ class Interactive_Circle extends Widget_Base {
                                         </div>
                                     </div>
                                     <div class="eael-circle-btn-content eael-circle-item-<?php echo $item_count . ' ' . $is_active; ?>">
-                                        <div class="eael-circle-content">
+                                        <div id="eael-interactive<?php echo esc_html( $item_count ); ?>" aria-labelledby="eael-circle-item-<?php echo esc_html( $item_count ); ?>" class="eael-circle-content">
 											<?php if ( $show_content_icon ) : ?>
 												<div class="eael-circle-content-icon">
 													<?php Icons_Manager::render_icon( $item['eael_interactive_circle_content_icon'] ); ?>
 												</div>
 											<?php endif; ?>
-
 											<?php echo $item['eael_interactive_circle_item_content'] ?>
                                         </div>
                                     </div>
