@@ -1026,7 +1026,7 @@ class Adv_Tabs extends Widget_Base
                             'aria-expanded' => 'false',
                         ] );
 
-                        $repeater_html_tag = !empty($tab['eael_adv_tabs_tab_title_html_tag']) ? $tab['eael_adv_tabs_tab_title_html_tag'] : 'span';
+	                    $repeater_html_tag = ! empty( $tab['eael_adv_tabs_tab_title_html_tag'] ) ? Helper::eael_validate_html_tag( $tab['eael_adv_tabs_tab_title_html_tag'] ) : 'span';
                         $repeater_tab_title = Helper::eael_wp_kses($tab['eael_adv_tabs_tab_title']);
                                 
                         ?>
@@ -1095,7 +1095,7 @@ class Adv_Tabs extends Widget_Base
 			        $tab_id = $tab['eael_adv_tabs_tab_id'] ? $tab['eael_adv_tabs_tab_id'] : Helper::str_to_css_id( $tab['eael_adv_tabs_tab_title'] );
 			        $tab_id = $tab_id === 'safari' ? 'eael-safari-tab' : $tab_id . '-tab'; ?>
 
-                    <div id="<?php echo $tab_id; ?>" class="clearfix eael-tab-content-item <?php echo esc_attr($tab['eael_adv_tabs_tab_show_as_default']); ?>" data-title-link="<?php echo $tab_id; ?>">
+                    <div id="<?php echo esc_attr( $tab_id ); ?>" class="clearfix eael-tab-content-item <?php echo esc_attr($tab['eael_adv_tabs_tab_show_as_default']); ?>" data-title-link="<?php echo esc_attr( $tab_id ); ?>">
 				        <?php if ('content' == $tab['eael_adv_tabs_text_type']) : ?>
 					        <?php echo do_shortcode($tab['eael_adv_tabs_tab_content']); ?>
 				        <?php elseif ('template' == $tab['eael_adv_tabs_text_type']) : ?>
