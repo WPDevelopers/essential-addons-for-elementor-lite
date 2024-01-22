@@ -208,7 +208,6 @@ class Bootstrap
 //	        add_filter( 'elementor/documents/get/post_id',[$this, 'eael_wpml_template_translation']);
 //        }
 
-
         //templately plugin support
         if( !class_exists('Templately\Plugin') && !get_option('eael_templately_promo_hide') ) {
             add_action( 'elementor/editor/before_enqueue_scripts', [$this, 'templately_promo_enqueue_scripts'] );
@@ -243,6 +242,7 @@ class Bootstrap
     		add_action('wp_ajax_nopriv_eael_checkout_cart_qty_update', [$this, 'eael_checkout_cart_qty_update'] );
 
 		    add_action( 'wp_loaded', [ $this, 'eael_woo_cart_empty_action' ], 20 );
+		    add_filter( 'woocommerce_checkout_fields', [ $this, 'eael_customize_woo_checkout_fields' ] );
 
 		    add_action( 'eael_woo_before_product_loop', function ( $layout ) {
 			    if ( $layout === 'eael-product-default' ) {
@@ -255,7 +255,6 @@ class Bootstrap
 			    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
 		    } );
 	    }
-
 
         // Admin
 	    if ( is_admin() ) {
