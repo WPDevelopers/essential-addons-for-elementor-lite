@@ -327,10 +327,13 @@ class Flip_Box extends Widget_Base
                 'label'       => esc_html__('Front Content', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::WYSIWYG,
                 'label_block' => true,
-                'default'     => __('This is front side content.', 'essential-addons-for-elementor-lite'),
+                'default'     => __('<p>This is front side content.</p>', 'essential-addons-for-elementor-lite'),
 	            'condition'             => [
 		            'eael_flipbox_front_content_type'      => 'content',
 	            ],
+                'ai' => [
+                    'active' => false,
+                ],
             ]
         );
 
@@ -564,10 +567,13 @@ class Flip_Box extends Widget_Base
                 'label'       => esc_html__('Back Content', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::WYSIWYG,
                 'label_block' => true,
-                'default'     => __('This is back side content.', 'essential-addons-for-elementor-lite'),
+                'default'     => __('<p>This is back side content.</p>', 'essential-addons-for-elementor-lite'),
 	            'condition'             => [
 		            'eael_flipbox_back_content_type'      => 'content',
 	            ],
+                'ai' => [
+                    'active' => false,
+                ],
             ]
         );
 
@@ -1593,10 +1599,11 @@ class Flip_Box extends Widget_Base
                                         <?php endif; ?>
                                     </div>
                                     <?php if ( !empty( $settings['eael_flipbox_front_title'] ) ): ?>
-                                    <<?php echo Helper::eael_validate_html_tag($settings['eael_flipbox_front_title_tag']); ?> class="eael-elements-flip-box-heading"><?php echo esc_html__($settings['eael_flipbox_front_title'], 'essential-addons-for-elementor-lite'); ?></<?php echo Helper::eael_validate_html_tag($settings['eael_flipbox_front_title_tag']); ?>>
+                                    <<?php echo Helper::eael_validate_html_tag($settings['eael_flipbox_front_title_tag']); ?> class="eael-elements-flip-box-heading"><?php echo Helper::eael_wp_kses( $settings['eael_flipbox_front_title'] ); ?></<?php echo Helper::eael_validate_html_tag($settings['eael_flipbox_front_title_tag']); ?>>
                                     <?php endif; ?>
                                     <div class="eael-elements-flip-box-content">
-                                        <p><?php echo __($settings['eael_flipbox_front_text'], 'essential-addons-for-elementor-lite'); ?></p>
+	                                    <?php $tagsPresent = preg_match( '/<(h[1-6]|p|pre)>.*<\/(h[1-6]|p|pre)>/i', $settings['eael_flipbox_front_text'] ); ?>
+                                        <?php echo $tagsPresent ? $settings['eael_flipbox_front_text'] : '<p>' . $settings['eael_flipbox_front_text'] . '</p>'; ?>
                                     </div>
                                 </div>
                             </div>
@@ -1629,10 +1636,11 @@ class Flip_Box extends Widget_Base
                                         </div>
                                     <?php } ?>
                                     <?php if ( !empty( $settings['eael_flipbox_back_title'] ) ): ?>
-                                    <<?php echo $flipbox_if_html_title_tag, ' ', $this->get_render_attribute_string('flipbox-title-container'); ?>><?php echo esc_html__($settings['eael_flipbox_back_title'], 'essential-addons-for-elementor-lite'); ?></<?php echo $flipbox_if_html_title_tag; ?>>
+                                    <<?php echo $flipbox_if_html_title_tag, ' ', $this->get_render_attribute_string('flipbox-title-container'); ?>><?php echo Helper::eael_wp_kses( $settings['eael_flipbox_back_title'] ); ?></<?php echo $flipbox_if_html_title_tag; ?>>
                                     <?php endif; ?>
                                     <div class="eael-elements-flip-box-content">
-                                        <p><?php echo __($settings['eael_flipbox_back_text'], 'essential-addons-for-elementor-lite'); ?></p>
+                                        <?php $tagsPresent = preg_match( '/<(h[1-6]|p|pre)>.*<\/(h[1-6]|p|pre)>/i', $settings['eael_flipbox_back_text'] ); ?>
+                                        <?php echo $tagsPresent ? $settings['eael_flipbox_back_text'] : '<p>' . $settings['eael_flipbox_back_text'] . '</p>'; ?>
                                     </div>
 
                                     <?php if ($settings['flipbox_link_type'] == 'button' && !empty($settings['flipbox_button_text'])) : ?>
