@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.4
 Requires PHP: 7.0
-Stable tag: 5.9.2
+Stable tag: 5.9.7
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -296,6 +296,40 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.9.7 - 18/01/2024 =
+
+- Improved: Site Health Status
+- Improved: Asset auto generate after update the plugin
+- Few minor bug fixes & improvements
+
+= 5.9.6 - 17/01/2024 =
+
+- Few minor bug fixes & improvements
+
+= 5.9.5 - 17/01/2024 =
+
+- Improved: Security Enhancement
+- Fixed: EA Simple Menu | Throwing Fatal error when Hamburger option is enabled for Desktop device
+- Fixed: EA Woo Cart | Breakpoint on different devices not working properly
+- Few minor bug fixes & improvements
+
+= 5.9.4 - 14/01/2024 =
+
+- Fixed: EA Filterable Gallery | Image Caption issue under the lightbox 
+- Fixed: EA Testimonial Slider | Added Compatibility Support for Older version of Hello Elementor theme
+- Fixed: EA Gravity Form | Form styling issue
+- Fixed: EA Event Calendar | Old events visibility issue for Current Date & Custom Date
+- Improved: EA Login Register Form | Added Global support for reCaptcha 
+- Improved: EA Interactive Circle | Added Support for Keyboard Accessibility
+- Improved: EA Login Register Form | Updated Error Notice mechanism for Caching Plugins
+- Improved: EA Event Calendar | Added Date formatting option for Event popup
+- Few minor bug fixes & improvements
+
+= 5.9.3 - 24/12/2023 =
+
+- Improved: Security Enhancement
+- Few minor bug fixes & improvements
 
 = 5.9.2 - 18/12/2023 =
 
