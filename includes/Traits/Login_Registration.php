@@ -81,7 +81,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_login_error_' . $widget_id, $err_msg, false );
+			setcookie( 'eael_login_error_' . $widget_id, $err_msg );
 
             if (isset($_SERVER['HTTP_REFERER'])) {
                 wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -95,7 +95,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_login_error_' . $widget_id, $err_msg, false );
+			setcookie( 'eael_login_error_' . $widget_id, $err_msg );
 
             if (isset($_SERVER['HTTP_REFERER'])) {
                 wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -107,7 +107,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_login_error_' . $widget_id, $err_msg, false );
+			setcookie( 'eael_login_error_' . $widget_id, $err_msg );
 
             if (isset($_SERVER['HTTP_REFERER'])) {
                 wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -121,7 +121,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_login_error_' . $widget_id, $err_msg, false );
+			setcookie( 'eael_login_error_' . $widget_id, $err_msg );
 
             if (isset($_SERVER['HTTP_REFERER'])) {
                 wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -132,16 +132,19 @@ trait Login_Registration {
 		do_action( 'eael/login-register/before-login', $_POST, $settings, $this );
 
 		$widget_id = ! empty( $_POST['widget_id'] ) ? sanitize_text_field( $_POST['widget_id'] ) : '';
-		//v2 or v3 
-		if ( isset( $_POST['g-recaptcha-enabled'] ) ) {
-			$ld_recaptcha_version = ( isset( $settings['login_recaptcha_version'] ) && 'v3' === $settings['login_recaptcha_version'] ) ? 'v3' : 'v2';
+
+		//v2 or v3
+		$is_version_2 = isset( $settings['enable_register_recaptcha'] ) && 'yes' === $settings['enable_register_recaptcha'];
+		$is_version_3 = isset( $settings['login_register_recaptcha_version'] ) && 'v3' === $settings['login_register_recaptcha_version'];
+		if ( $is_version_2 || $is_version_3 ) {
+			$ld_recaptcha_version = $is_version_3 ? 'v3' : 'v2';
 			
 			if( ! $this->lr_validate_recaptcha($ld_recaptcha_version) ) {
 				$err_msg = isset( $settings['err_recaptcha'] ) ? Helper::eael_wp_kses( $settings['err_recaptcha'] ) : __( 'You did not pass recaptcha challenge.', 'essential-addons-for-elementor-lite' );
 				if ( $ajax ) {
 					wp_send_json_error( $err_msg );
 				}
-				update_option( 'eael_login_error_' . $widget_id, $err_msg, false );
+				setcookie( 'eael_login_error_' . $widget_id, $err_msg );
 
 				if (isset($_SERVER['HTTP_REFERER'])) {
 					wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -189,7 +192,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_login_error_' . $widget_id, $err_msg, false );
+			setcookie( 'eael_login_error_' . $widget_id, $err_msg );
 		} else {
 			wp_set_current_user( $user_data->ID, $user_login );
 			$current_user_role = ! empty( $user_data->roles[0] ) ? $user_data->roles[0] : '';
@@ -204,19 +207,24 @@ trait Login_Registration {
 
 			do_action( 'wp_login', $user_data->user_login, $user_data );
 			do_action( 'eael/login-register/after-login', $user_data->user_login, $user_data );
-			if ( $ajax ) {
 
+			$custom_redirect_url 	= ! empty( $_POST['redirect_to'] ) ? sanitize_url( $_POST['redirect_to'] ) : '';
+			$previous_page_url 		= ! empty( $_POST['redirect_to_prev_page_login'] ) ? sanitize_url( $_POST['redirect_to_prev_page_login'] ) : '';
+			$custom_redirect_url 	= ! empty( $settings['login_redirect_url_prev_page'] ) && $settings['login_redirect_url_prev_page'] === 'yes' ? $previous_page_url : $custom_redirect_url;
+
+			if ( $ajax ) {
 				$data = [
 					'message' => isset( $settings['success_login'] ) ? Helper::eael_wp_kses( $settings['success_login'] ) : __( 'You are logged in successfully', 'essential-addons-for-elementor-lite' ),
 				];
-				if ( ! empty( $redirect_to ) ) {
-					$data['redirect_to'] = esc_url_raw( $redirect_to );
+
+				if ( ! empty( $custom_redirect_url ) ) {
+					$data['redirect_to'] = esc_url_raw( $custom_redirect_url );
 				}
 				wp_send_json_success( $data );
 			}
 
-			if ( ! empty( $redirect_to ) ) {
-				wp_safe_redirect( esc_url_raw( $redirect_to ) );
+			if ( ! empty( $custom_redirect_url ) ) {
+				wp_safe_redirect( esc_url_raw( $custom_redirect_url ) );
 				exit();
 			}
 		}
@@ -254,9 +262,12 @@ trait Login_Registration {
             }
 		}
 		$page_id = $widget_id = 0;
-        if ( ! empty( $_POST['page_id'] ) ) {
-            $page_id = intval( $_POST['page_id'] );
-        } else {
+		if ( ! empty( $_POST['page_id'] ) ) {
+			$page_id = intval( $_POST['page_id'] );
+			if ( in_array( get_post_status( $page_id ), [ 'future', 'draft', 'pending' ] ) ) {
+				$err_msg = __( 'You have to publish the page first.', 'essential-addons-for-elementor-lite' );
+			}
+		} else {
             $err_msg = __( 'Page ID is missing', 'essential-addons-for-elementor-lite' );
         }
         if ( ! empty( $_POST['widget_id'] ) ) {
@@ -277,8 +288,6 @@ trait Login_Registration {
             }
             return false;
         }
-
-
 
 		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
 
@@ -394,9 +403,11 @@ trait Login_Registration {
 		if ( isset( $_POST['eael_tnc_active'] ) && empty( $_POST['eael_accept_tnc'] ) ) {
 			$errors['terms_conditions'] =  isset( $settings['err_tc'] ) ? Helper::eael_wp_kses( $settings['err_tc'] ) : __( 'You did not accept the Terms and Conditions. Please accept it and try again.', 'essential-addons-for-elementor-lite' );
 		}
-		//v2 or v3 
-		if ( isset( $_POST['g-recaptcha-enabled'] ) ) {
-			$ld_recaptcha_version = ( isset( $settings['register_recaptcha_version'] ) && 'v3' === $settings['register_recaptcha_version'] ) ? 'v3' : 'v2';
+		//v2 or v3
+		$is_version_2 = isset( $settings['enable_register_recaptcha'] ) && 'yes' === $settings['enable_register_recaptcha'];
+		$is_version_3 = isset( $settings['login_register_recaptcha_version'] ) && 'v3' === $settings['login_register_recaptcha_version'];
+		if ( $is_version_2 || $is_version_3 ) {
+			$ld_recaptcha_version = $is_version_3 ? 'v3' : 'v2';
 			
 			if( ! $this->lr_validate_recaptcha($ld_recaptcha_version) ) {
 				$errors['recaptcha'] = isset( $settings['err_recaptcha'] ) ? Helper::eael_wp_kses( $settings['err_recaptcha'] ) : __( 'You did not pass recaptcha challenge.', 'essential-addons-for-elementor-lite' );
@@ -515,12 +526,31 @@ trait Login_Registration {
 		$register_actions    = [];
 		$custom_redirect_url = '';
 		if ( !empty( $settings) ) {
-			$register_actions    = ! empty( $settings['register_action'] ) ? (array) $settings['register_action'] : [];
-			$custom_redirect_url = ! empty( $settings['register_redirect_url']['url'] ) ? esc_url_raw( $settings['register_redirect_url']['url'] ) : '/';
+			$register_actions    	= ! empty( $settings['register_action'] ) ? (array) $settings['register_action'] : [];
+			$custom_redirect_url 	= ! empty( $settings['register_redirect_url']['url'] ) ? esc_url_raw( $settings['register_redirect_url']['url'] ) : '/';
+
+			$previous_page_url 		= ! empty( $_POST['redirect_to_prev_page'] ) ? sanitize_url( $_POST['redirect_to_prev_page'] ) : '';
+			$custom_redirect_url 	= ! empty( $settings['register_redirect_url_prev_page'] ) && $settings['register_redirect_url_prev_page'] === 'yes' ? $previous_page_url : $custom_redirect_url;
+
 			if ( ! empty( $settings['register_user_role'] ) ) {
-				$user_data['role'] = sanitize_text_field( $settings['register_user_role'] );
+				$user_data['role'] 	= strtolower( sanitize_text_field( $settings['register_user_role'] ) );
 			}
 
+			if ( ! empty( $user_data['role'] ) && $user_data['role'] === 'administrator' ) {
+				$err_msg = __( 'Invalid Role!', 'essential-addons-for-elementor-lite' );
+
+				if ( $ajax ) {
+					wp_send_json_error( $err_msg );
+				}
+				update_option( 'eael_register_errors_' . $widget_id, $err_msg, false );
+
+				if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+					wp_safe_redirect( $_SERVER['HTTP_REFERER'] );
+					exit();
+				}
+
+				return false;
+			}
 
 			// set email related stuff
 			/*------User Mail Related Stuff------*/
@@ -558,13 +588,9 @@ trait Login_Registration {
 		do_action( 'eael/login-register/before-insert-user', $user_data );
 		$user_default_role = get_option( 'default_role' );
 
-        if(!empty($user_default_role) && empty($user_data['role'])){
-            $user_data['role'] = $user_default_role;
-        }
-
-        if ('administrator' == strtolower($user_data['role'])) {
-            $user_data['role'] = !empty($settings['register_user_role']) ? wp_strip_all_tags( $settings['register_user_role'] ) : get_option('default_role');
-        }
+		if ( ! empty( $user_default_role ) && empty( $user_data['role'] ) ) {
+			$user_data['role'] = $user_default_role;
+		}
 
 		$user_id = wp_insert_user( $user_data );
 
@@ -666,7 +692,7 @@ trait Login_Registration {
             $this->delete_registration_options($widget_id);
 
 			if ( $ajax ) {
-				if ( in_array( 'redirect', $register_actions ) ) {
+				if ( in_array( 'redirect', $register_actions ) && ! empty( $custom_redirect_url ) ) {
 					$data['redirect_to'] = $custom_redirect_url;
 				}
 				wp_send_json_success( $data );
@@ -681,13 +707,13 @@ trait Login_Registration {
 
 		// custom redirect?
 		if ( $ajax ) {
-			if ( in_array( 'redirect', $register_actions ) ) {
+			if ( in_array( 'redirect', $register_actions ) && ! empty( $custom_redirect_url ) ) {
 				$data['redirect_to'] = $custom_redirect_url;
 			}
 			wp_send_json_success( $data );
 		}
 
-		if ( in_array( 'redirect', $register_actions ) ) {
+		if ( in_array( 'redirect', $register_actions ) && ! empty( $custom_redirect_url ) ) {
 			wp_safe_redirect( $custom_redirect_url );
 			exit();
 		}
@@ -1243,10 +1269,14 @@ trait Login_Registration {
 			if ( ! empty( $roles ) && is_array( $roles ) ) {
 
 				foreach ( $wp_roles as $role_key => $role ) {
+					if ( $role_key === 'administrator' ) {
+						continue;
+					}
 					$user_roles[ $role_key ] = $role['name'];
 				}
 			}
 		}
+
 		return apply_filters( 'eael/login-register/new-user-roles', $user_roles );
 	}
 
@@ -1497,7 +1527,7 @@ trait Login_Registration {
 		if ( ! isset( $_REQUEST['g-recaptcha-response'] ) ) {
 			return false;
 		}
-		$endpoint = 'https://www.google.com/recaptcha/api/siteverify';
+		$endpoint = 'https://www.recaptcha.net/recaptcha/api/siteverify';
 		$data     = [
 			'secret'   => 'v3' === $version ? get_option( 'eael_recaptcha_secret_v3' ) : get_option( 'eael_recaptcha_secret' ),
 			'response' => sanitize_text_field( $_REQUEST['g-recaptcha-response'] ),
@@ -1509,7 +1539,7 @@ trait Login_Registration {
 			if('v3' === $version ) {
 				$action = self::$recaptcha_v3_default_action;
 				$action_ok = ! isset( $res['action'] ) ? true : $action === $res['action'];
-				return $action_ok && ( $res['score'] > self::get_recaptcha_threshold() );
+				return $action_ok && isset( $res['score'] ) && ( $res['score'] > self::get_recaptcha_threshold() );
 			}else {
 				return $res['success'];				
 			}

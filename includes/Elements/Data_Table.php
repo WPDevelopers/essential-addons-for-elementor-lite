@@ -1325,7 +1325,7 @@ class Data_Table extends Widget_Base {
 		$this->add_render_attribute('eael_data_table_wrap', [
 			'class'                  => 'eael-data-table-wrap',
 			'data-table_id'          => esc_attr($this->get_id()),
-            'id'                     => 'eael-data-table-'.esc_attr($this->get_id()),
+            'id'                     => 'eael-data-table-wrapper-'.esc_attr($this->get_id()),
 			'data-custom_responsive' => $settings['eael_enable_responsive_header_styles'] ? 'true' : 'false'
 		]);
 		if(isset($settings['eael_section_data_table_enabled']) && $settings['eael_section_data_table_enabled']){
@@ -1346,10 +1346,10 @@ class Data_Table extends Widget_Base {
 			$section_id  = $this->get_id();
 			echo '<style>
 			@media (max-width: ' . intval( $break_point ) . 'px) {
-			   #eael-data-table-' . esc_html( $section_id ) . '.custom-responsive-option-enable .eael-data-table thead {
+			   #eael-data-table-wrapper-' . esc_html( $section_id ) . '.custom-responsive-option-enable .eael-data-table thead {
                     display: none;
-                }
-               #eael-data-table-' . esc_html( $section_id ) . '.custom-responsive-option-enable .eael-data-table tbody tr td {
+               }
+               #eael-data-table-wrapper-' . esc_html( $section_id ) . '.custom-responsive-option-enable .eael-data-table tbody tr td {
                     float: none;
                     clear: left;
                     width: 100%;
