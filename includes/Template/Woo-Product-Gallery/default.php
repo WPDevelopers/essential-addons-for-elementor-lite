@@ -77,7 +77,7 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
 		        echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
 	        }?>
                 <?php
-                 echo wp_kses_post( $product->get_image( $settings['eael_product_gallery_image_size_size'], ['loading' => 'eager'] ) );
+                echo $product->get_image( $settings['eael_product_gallery_image_size_size'], ['loading' => 'eager'] );
                 if ( $should_print_image_clickable ) {
 	                echo '</a>';
                 }
