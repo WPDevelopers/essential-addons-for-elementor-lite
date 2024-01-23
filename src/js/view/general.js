@@ -142,7 +142,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 
 		// we will try and catch the error but not show anything just do it if possible
 		try {
-			//
+			// If hashTag is not null then scroll to that hashTag smoothly
 			if( hashURL.startsWith( '#!' ) ){
 				var replace_with_hash = hashURL.replace( '#!', '#' );
 				$( replace_with_hash ).trigger( 'click' );
