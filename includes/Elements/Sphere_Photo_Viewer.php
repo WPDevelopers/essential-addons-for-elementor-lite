@@ -363,27 +363,6 @@ class Sphere_Photo_Viewer extends Widget_Base {
 		<div class="eael-sphere-photo-wrapper" <?php $this->print_render_attribute_string( 'sphere-wrapper' ) ?>>
 			<div id="<?php echo esc_attr( $container_id ); ?>" style="height: 500px;"></div>
 		</div>
-		<script type="importmap">
-			{
-				"imports": {
-					"three": "https://ea.test/photo-sphere-viewer-5.5.0/three.module.min.js",
-					"@photo-sphere-viewer/core": "https://ea.test/photo-sphere-viewer-5.5.0/core/index.module.js",
-					"@photo-sphere-viewer/autorotate-plugin": "https://ea.test/photo-sphere-viewer-5.5.0/autorotate-plugin/index.module.js"
-				}
-			}
-		</script>
-		<script type="module">
-            import { Viewer } from '@photo-sphere-viewer/core';
-            import { AutorotatePlugin } from '@photo-sphere-viewer/autorotate-plugin';
-            let $scope = jQuery('#<?php echo $container_id; ?>').closest('[data-widget_type="eael-sphere-photo-viewer.default"]');
-            let sphereData = $scope.find('.eael-sphere-photo-wrapper').data('settings');
-
-            if (sphereData.plugins !== undefined) {
-                sphereData.plugins[0].unshift(AutorotatePlugin);
-            }
-
-            const viewer = new Viewer(sphereData);
-		</script>
 		<?php
 	}
 }
