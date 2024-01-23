@@ -175,6 +175,10 @@ jQuery(window).scroll(function () {
     }
 });
 
+jQuery(window).on('load', function () {
+    jQuery(window).trigger('scroll');
+});
+
 function GetHeightFromStyle(style) {
     if (!style) return 0;
     var cssPairs = style.split(";");
