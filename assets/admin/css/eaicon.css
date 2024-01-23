@@ -1,14 +1,14 @@
 @font-face {
 	font-family: 'eaicon';
-	src:  url('../fonts/eaicon.eot?pbdto8');
-	src:  url('../fonts/eaicon.eot?pbdto8#iefix') format('embedded-opentype'),
-	url('../fonts/eaicon.ttf?pbdto8') format('truetype'),
-	url('../fonts/eaicon.woff?pbdto8') format('woff'),
-	url('../fonts/eaicon.svg?pbdto8#eaicon') format('svg');
+	src:  url('../fonts/eaicon.eot?jbjw5b');
+	src:  url('../fonts/eaicon.eot?jbjw5b#iefix') format('embedded-opentype'),
+	  url('../fonts/eaicon.ttf?jbjw5b') format('truetype'),
+	  url('../fonts/eaicon.woff?jbjw5b') format('woff'),
+	  url('../fonts/eaicon.svg?jbjw5b#eaicon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 	font-display: block;
-}
+  }
 
 [class^="eaicon-"],
 [class*=" eaicon-"] {
