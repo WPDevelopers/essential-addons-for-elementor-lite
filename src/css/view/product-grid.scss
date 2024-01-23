@@ -71,7 +71,9 @@
                     }
                 }
             }
-
+            .ast-on-card-button.ast-onsale-card{
+                display: none !important;
+            }
             li.product {
                 width: 100%;
             }
@@ -2644,7 +2646,7 @@
         .icons-wrap {
             .button.product_type_grouped,
             .button.product_type_external {
-                display: none;
+                display: none !important;
             }
         }
     }
