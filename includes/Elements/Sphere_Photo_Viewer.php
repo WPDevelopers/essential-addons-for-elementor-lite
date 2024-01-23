@@ -28,7 +28,7 @@ class Sphere_Photo_Viewer extends Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'eaicon-woo-cross-sells';
+		return 'eaicon-photo-sphere';
 	}
 
 	public function get_categories() {
