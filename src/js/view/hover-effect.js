@@ -9,6 +9,8 @@ let HoverEffectHandler = function ($scope, $) {
     $eaelInvertEffect     = $scope.data('eael_invert_effect'),
     $eaelSaturateEffect   = $scope.data('eael_saturate_effect'),
     $eaelSepiaEffect      = $scope.data('eael_sepia_effect'),
+    $eaelbBurHoverEffect      = $scope.data('eael_blur_hover_effect'),
+    $scopeId      = $scope.data('id'),
     $eaelContainer        = $('.elementor-widget-container', $scope);
 
     //Opacity
@@ -21,6 +23,9 @@ let HoverEffectHandler = function ($scope, $) {
     let $invert    = $eaelInvertEffect?.invert ? `invert(${$eaelInvertEffect.invert}%)`               : '';
     let $saturate  = $eaelSaturateEffect?.saturate ? `saturate(${$eaelSaturateEffect.saturate}%)`     : '';
     let $sepia     = $eaelSepiaEffect?.sepia ? `sepia(${$eaelSepiaEffect.sepia}%)` : '';
+    
+    //Filter Hover
+    let $blurHover      = $eaelbBurHoverEffect?.blur ? `blur(${$eaelbBurHoverEffect.blur}px)` : '';
 
     //Rotate
     let $rotateX = $eaelRotateEffect?.rotate_x ? `rotateX(${$eaelRotateEffect.rotate_x}deg)` : '';
@@ -35,14 +40,34 @@ let HoverEffectHandler = function ($scope, $) {
     let $skewX = $eaelSkewEffect?.skew_x ? `skewX(${$eaelSkewEffect.skew_x}deg)` : '';
     let $skewY = $eaelSkewEffect?.skew_y ? `skewY(${$eaelSkewEffect.skew_y}deg)` : '';
 
-    //
-    $eaelContainer.css(
-        {
-            "transform": `${$rotateX} ${$rotateY} ${$rotateZ} ${$scaleX} ${$scaleY} ${$skewX} ${$skewY}`,
-            "opacity": $opacityVal,
-            "filter": `${$blur} ${$contrast} ${$grayscale} ${$invert} ${$saturate} ${$sepia}`
+    let hoverSelector = `body [data-id="${$scopeId}"] > .elementor-widget-container`;
+    
+    //Normal
+    let normalStyles = {
+        "transform": `${$rotateX} ${$rotateY} ${$rotateZ} ${$scaleX} ${$scaleY} ${$skewX} ${$skewY}`,
+        "opacity": $opacityVal,
+        "filter": `${$blur} ${$contrast} ${$grayscale} ${$invert} ${$saturate} ${$sepia}`,
+        "transition": `1s`
+    }
+
+    //Hover
+    let hoverStyles = {
+        'opacity': '.5',
+        'filter': $blurHover,
+        "transition": `.5s`
+    };
+
+    $(hoverSelector).hover(
+        function() {
+            $(this).css(hoverStyles);
+        },
+        function() {
+        $(this).css(normalStyles);
         }
-    );
+    );  
+
+    //
+    $eaelContainer.css(normalStyles);
 }
 
 jQuery(window).on("elementor/frontend/init", function () {

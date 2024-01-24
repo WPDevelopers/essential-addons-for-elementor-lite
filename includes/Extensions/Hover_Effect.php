@@ -679,9 +679,6 @@ class Hover_Effect {
                         'step' => 0.5,
                     ],
                 ],
-                'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'filter: blur({{SIZE}}{{UNIT}});',
-				],
                 'condition' => [
 					'eael_hover_effect_blur_hover_is_on' => 'yes', 
 				],
@@ -1773,6 +1770,14 @@ class Hover_Effect {
 				'skew_y' => $settings['eael_hover_effect_transform_skewy']['size'],
 			];
 			$element->add_render_attribute( '_wrapper', 'data-eael_skew_effect', wp_json_encode( $skew_settings ) );
+		}
+
+		//For Hover
+		if( 'yes' == $settings['eael_hover_effect_blur_hover_is_on'] ) {
+			$blur_settings = [
+				'blur' => $settings['eael_hover_effect_blur_hover']['size']
+			];
+			$element->add_render_attribute( '_wrapper', 'data-eael_blur_hover_effect', wp_json_encode( $blur_settings ) );
 		}
 		
         $element->add_render_attribute( '_wrapper', 'class', 'eael_hover_effect' );
