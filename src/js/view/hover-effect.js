@@ -2,7 +2,10 @@ let HoverEffectHandler = function ($scope, $) {
     let $eaelRotateEffect = $scope.data('eael_rotate_effect'),
     $eaelScaleEffect = $scope.data('eael_scale_effect'),
     $eaelSkewEffect = $scope.data('eael_skew_effect'),
+    $Opacity = $scope.data('eael_opacity'),
     $eaelContainer = $('.elementor-widget-container', $scope);
+
+    let $opacityVal = $Opacity ? $Opacity?.opacity : '1';
 
     //Rotate
     let $rotateX = $eaelRotateEffect?.rotate_x ? `rotateX(${$eaelRotateEffect.rotate_x}deg)` : '';
@@ -18,7 +21,8 @@ let HoverEffectHandler = function ($scope, $) {
 
     $eaelContainer.css(
         {
-            "transform": `${$rotateX} ${$rotateY} ${$rotateZ} ${$scaleX} ${$scaleY} ${$skewX} ${$skewY}`
+            "transform": `${$rotateX} ${$rotateY} ${$rotateZ} ${$scaleX} ${$scaleY} ${$skewX} ${$skewY}`,
+            "opacity": $opacityVal
         }
     );
 }

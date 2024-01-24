@@ -86,9 +86,6 @@ class Hover_Effect {
                         'step' => 0.01,
                     ],
                 ],
-                'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'opacity: {{SIZE}};',
-				],
             ]
         );
         $element->end_popover();
@@ -1704,6 +1701,14 @@ class Hover_Effect {
 
 	public function before_render( $element ) {
 		$settings = $element->get_settings_for_display();
+
+		//Opacity
+		if( !empty( $settings['eael_hover_effect_opacity']['size'] ) ) {
+			$opacity_settings = [
+				'opacity' => $settings['eael_hover_effect_opacity']['size'],
+			];
+			$element->add_render_attribute( '_wrapper', 'data-eael_opacity', wp_json_encode( $opacity_settings ) );
+		}
 		
 		//Rotate Effect
 		if( 'yes' == $settings['eael_hover_effect_rotate_is_on'] ) {
