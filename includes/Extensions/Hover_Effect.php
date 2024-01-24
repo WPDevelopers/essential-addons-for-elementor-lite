@@ -101,6 +101,8 @@ class Hover_Effect {
 		);
 
         $element->start_popover();
+
+		//Blur
         $element->add_control(
 			'eael_hover_effect_blur_is_on',
 			[
@@ -123,15 +125,13 @@ class Hover_Effect {
                         'step' => 0.5,
                     ],
                 ],
-                'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'filter: blur({{SIZE}}px);',
-				],
                 'condition' => [
 					'eael_hover_effect_blur_is_on' => 'yes', 
 				],
             ]
         );
 
+		//Contrast
         $element->add_control(
 			'eael_hover_effect_contrast_is_on',
 			[
@@ -154,15 +154,13 @@ class Hover_Effect {
                         'step' => 10,
                     ],
                 ],
-                'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'filter: blur({{eael_hover_effect_blur.SIZE}}px) contrast({{SIZE}}%);',
-				],
                 'condition' => [
 					'eael_hover_effect_contrast_is_on' => 'yes', 
 				],
             ]
         );
 
+		//Grayscal
         $element->add_control(
 			'eael_hover_effect_grayscale_is_on',
 			[
@@ -185,15 +183,13 @@ class Hover_Effect {
                         'step' => 10,
                     ],
                 ],
-                'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'filter: blur({{eael_hover_effect_blur.SIZE}}px) contrast({{eael_hover_effect_contrast.SIZE}}%) grayscale({{SIZE}}%);',
-				],
                 'condition' => [
 					'eael_hover_effect_grayscale_is_on' => 'yes', 
 				],
             ]
         );
 
+		//Invert
         $element->add_control(
 			'eael_hover_effect_invert_is_on',
 			[
@@ -216,15 +212,13 @@ class Hover_Effect {
                         'step' => 10,
                     ],
                 ],
-				'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'filter: blur({{eael_hover_effect_blur.SIZE}}px) contrast({{eael_hover_effect_contrast.SIZE}}%) grayscale({{eael_hover_effect_grayscal.SIZE}}%) invert({{SIZE}}%);',
-				],
                 'condition' => [
 					'eael_hover_effect_invert_is_on' => 'yes', 
 				],
             ]
         );
 
+		//Saturate
         $element->add_control(
 			'eael_hover_effect_saturate_is_on',
 			[
@@ -247,15 +241,13 @@ class Hover_Effect {
                         'step' => 10,
                     ],
                 ],
-				'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'filter: blur({{eael_hover_effect_blur.SIZE}}px) contrast({{eael_hover_effect_contrast.SIZE}}%) grayscale({{eael_hover_effect_grayscal.SIZE}}%) invert({{eael_hover_effect_invert.SIZE}}%) saturate({{SIZE}}%);',
-				],
                 'condition' => [
 					'eael_hover_effect_saturate_is_on' => 'yes', 
 				],
             ]
         );
 
+		//Sepia
         $element->add_control(
 			'eael_hover_effect_sepia_is_on',
 			[
@@ -278,9 +270,6 @@ class Hover_Effect {
                         'step' => 10,
                     ],
                 ],
-				'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'filter: blur({{eael_hover_effect_blur.SIZE}}px) contrast({{eael_hover_effect_contrast.SIZE}}%) grayscale({{eael_hover_effect_grayscal.SIZE}}%) invert({{eael_hover_effect_invert.SIZE}}%) saturate({{eael_hover_effect_saturate.SIZE}}%) sepia({{SIZE}}%);',
-				],
                 'condition' => [
 					'eael_hover_effect_sepia_is_on' => 'yes', 
 				],
@@ -1708,6 +1697,54 @@ class Hover_Effect {
 				'opacity' => $settings['eael_hover_effect_opacity']['size'],
 			];
 			$element->add_render_attribute( '_wrapper', 'data-eael_opacity', wp_json_encode( $opacity_settings ) );
+		}
+
+		//Blur Effect
+		if( 'yes' == $settings['eael_hover_effect_blur_is_on'] ) {
+			$rotate_settings = [
+				'blur' => $settings['eael_hover_effect_blur']['size']
+			];
+			$element->add_render_attribute( '_wrapper', 'data-eael_blur_effect', wp_json_encode( $rotate_settings ) );
+		}
+
+		//Contrast Effect
+		if( 'yes' == $settings['eael_hover_effect_contrast_is_on'] ) {
+			$contrast_settings = [
+				'contrast' => $settings['eael_hover_effect_contrast']['size']
+			];
+			$element->add_render_attribute( '_wrapper', 'data-eael_contrast_effect', wp_json_encode( $contrast_settings ) );
+		}
+
+		//Grayscale Effect
+		if( 'yes' == $settings['eael_hover_effect_grayscale_is_on'] ) {
+			$grayscale_settings = [
+				'grayscale' => $settings['eael_hover_effect_grayscal']['size']
+			];
+			$element->add_render_attribute( '_wrapper', 'data-eael_grayscale_effect', wp_json_encode( $grayscale_settings ) );
+		}
+
+		//Invert Effect
+		if( 'yes' == $settings['eael_hover_effect_invert_is_on'] ) {
+			$invert_settings = [
+				'invert' => $settings['eael_hover_effect_invert']['size']
+			];
+			$element->add_render_attribute( '_wrapper', 'data-eael_invert_effect', wp_json_encode( $invert_settings ) );
+		}
+
+		//Saturate Effect
+		if( 'yes' == $settings['eael_hover_effect_saturate_is_on'] ) {
+			$saturate_settings = [
+				'saturate' => $settings['eael_hover_effect_saturate']['size']
+			];
+			$element->add_render_attribute( '_wrapper', 'data-eael_saturate_effect', wp_json_encode( $saturate_settings ) );
+		}
+
+		//Sepia Effect
+		if( 'yes' == $settings['eael_hover_effect_sepia_is_on'] ) {
+			$sepia_settings = [
+				'sepia' => $settings['eael_hover_effect_sepia']['size']
+			];
+			$element->add_render_attribute( '_wrapper', 'data-eael_sepia_effect', wp_json_encode( $sepia_settings ) );
 		}
 		
 		//Rotate Effect
