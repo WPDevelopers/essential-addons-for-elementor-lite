@@ -969,7 +969,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 						$element_name = 'eael-content-protection';
 					} elseif ( $key === 'eael_cl_enable' ) {
 						$element_name = 'eael-conditional-display';
-					}
+					} elseif ( $key === 'eael_ext_advanced_dynamic_tags' ) {
+						$element_name = 'eael-advanced-dynamic-tags';
+					} 
 
 					if ( ! empty( $element_name ) ) {
 						$used_elements[ $element_name ] = isset( $used_elements[ $element_name ] ) ? $used_elements[ $element_name ] + $value : $value;

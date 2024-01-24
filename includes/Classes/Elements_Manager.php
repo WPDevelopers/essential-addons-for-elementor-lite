@@ -172,6 +172,10 @@ class Elements_Manager {
 		if ( ! empty( $element['settings']['eael_wrapper_link_switch'] ) ) {
 			$list['wrapper-link'] = 'wrapper-link';
 		}
+		
+		if ( ! empty( $element['settings']['eael_ext_advanced_dynamic_tags'] ) ) {
+			$list['advanced-dynamic-tags'] = 'advanced-dynamic-tags';
+		}
 
 		return $list;
 	}
