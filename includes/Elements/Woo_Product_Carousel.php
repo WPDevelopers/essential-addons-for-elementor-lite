@@ -3005,12 +3005,13 @@ class Woo_Product_Carousel extends Widget_Base {
 
         <div <?php $this->print_render_attribute_string( 'container' ); ?> >
             <?php
+                do_action( 'eael_woo_before_product_loop' );
+
                 $template = $this->get_template( $settings[ 'eael_dynamic_template_layout' ] );
                 if ( file_exists( $template ) ):
 	                $query = new \WP_Query( $args );
 	                if ( $query->have_posts() ):
                         echo '<div '.$this->get_render_attribute_string( 'eael-woo-product-carousel-wrap' ).'>';
-                            do_action( 'eael_woo_before_product_loop' );
 		                    $settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
                             echo '<ul class="swiper-wrapper products">';
                             while ( $query->have_posts() ) {
@@ -3037,6 +3038,7 @@ class Woo_Product_Carousel extends Widget_Base {
             }
 
 
+            do_action( 'eael_woo_after_product_loop' );
             /**
              * Render Slider Navigations!
              */
