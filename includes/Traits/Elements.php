@@ -329,6 +329,24 @@ trait Elements {
 				'icon'       => 'eaicon-thank-you',
 				'categories' => '["essential-addons-elementor"]',
 			],
+			[
+				'name'       => 'eael-woo-cross-sells',
+				'title'      => __( 'Woo Cross Sells', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eaicon-woo-cross-sells',
+				'categories' => '["essential-addons-elementor"]',
+			],
+			[
+				'name'       => 'eael-woo-account-dashboard',
+				'title'      => __( 'Woo Account Dashboard', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eaicon-woo-account-dashboard',
+				'categories' => '["essential-addons-elementor"]',
+			],
+			[
+				'name'       => 'fancy-chart',
+				'title'      => __( 'Fancy Chart', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eicon-elementor-circle',
+				'categories' => '["essential-addons-elementor"]',
+			],
 		] );
 
 		$config['promotionWidgets'] = $combine_array;
@@ -505,6 +523,7 @@ trait Elements {
 				$toc_collapse                    = $settings_data['eael_ext_toc_collapse_sub_heading'];
 				$list_icon                       = $settings_data['eael_ext_toc_list_icon'];
 				$toc_title                       = $settings_data['eael_ext_toc_title'];
+				$toc_title_tag                   = $settings_data['eael_ext_toc_title_tag'];
 				$icon_check                      = $settings_data['eael_ext_table_of_content_header_icon'];
 				$sticky_scroll                   = $settings_data['eael_ext_toc_sticky_scroll'];
 				$hide_mobile                     = $settings_data['eael_ext_toc_hide_in_mobile'];
@@ -528,7 +547,7 @@ trait Elements {
 				$table_of_content_html = "<div data-eaelTocTag='" . esc_attr( $support_tag ) . "' data-contentSelector='" . esc_attr( $content_selector ) . "' data-excludeSelector='" . esc_attr( $exclude_selector ) . "' data-stickyScroll='" . esc_attr( $sticky_scroll['size'] ) . "' data-titleUrl='" . esc_attr( $title_url ) . "' data-page_offset='" . esc_attr( $page_offset ) . "' id='eael-toc' class='" . esc_attr( $el_class ) . " '>
                     <div class='eael-toc-header'>
                             <span class='eael-toc-close'>×</span>
-                            <h2 class='eael-toc-title'>{$toc_title}</h2>
+                            <{$toc_title_tag} class='eael-toc-title'>{$toc_title}</{$toc_title_tag}>
                     </div>
                     <div class='eael-toc-body'>
                         <ul id='eael-toc-list' class='eael-toc-list " . esc_attr( $toc_style_class ) . "'></ul>
@@ -592,7 +611,7 @@ trait Elements {
 				$scroll_to_top_icon_image = ! empty( $settings_data_scroll_to_top['eael_ext_scroll_to_top_button_icon_image'] )
 					? $settings_data_scroll_to_top['eael_ext_scroll_to_top_button_icon_image']['value'] : '';
 
-				$scroll_to_top_icon_html = \Essential_Addons_Elementor\Classes\Helper::get_render_icon( $settings_data_scroll_to_top['eael_ext_scroll_to_top_button_icon_image'] );
+				$scroll_to_top_icon_html = \Essential_Addons_Elementor\Classes\Helper::get_render_icon( $settings_data_scroll_to_top['eael_ext_scroll_to_top_button_icon_image'] ?? '' );
 
 				$scroll_to_top_html = "<div class='eael-ext-scroll-to-top-wrap scroll-to-top-hide'><span class='eael-ext-scroll-to-top-button'>$scroll_to_top_icon_html</span></div>";
 

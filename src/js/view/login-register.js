@@ -64,7 +64,8 @@ ea.hooks.addAction("init", "ea", () => {
                 window.history.replaceState({}, '', `${location.pathname}?${params}`);
                 e.preventDefault();
                 $regFormWrapper.hide();
-                $lostpasswordFormWrapper.hide();
+                $regFormWrapper.find('.eael-form-validation-container').html('');
+                $lostpasswordFormWrapper.hide();                
                 $loginFormWrapper.fadeIn();
             });
         }
@@ -89,6 +90,10 @@ ea.hooks.addAction("init", "ea", () => {
                     params.append('eael-lostpassword',1);
                 }
                 window.history.replaceState({}, '', `${location.pathname}?${params}`);
+                $lostpasswordFormWrapper.find('.eael-form-validation-container').html('');
+                $lostpasswordFormWrapper.find(".eael-lr-form-group").css("display", 'bloock').removeClass('eael-d-none');
+                $lostpasswordFormWrapper.find("#eael-lostpassword-submit").css("display", 'bloock').removeClass('eael-d-none');
+                
                 $regFormWrapper.hide();
                 $loginFormWrapper.hide();
                 $lostpasswordFormWrapper.fadeIn();
@@ -130,27 +135,42 @@ ea.hooks.addAction("init", "ea", () => {
                 $icon.removeClass('dashicons-visibility').addClass('dashicons-hidden');
             }
         }
-        
-        $('form input[type="submit"]', $scope).on('click', function (e) {
-            if(!isProAndAjaxEnabled){
-                let isRecaptchaVersion3 = false;
-                isRecaptchaVersion3 = loginRecaptchaVersion === 'v3' || registerRecaptchaVersion === 'v3' ;
-                
-                if (recaptchaAvailable && isRecaptchaVersion3) {
-                    grecaptcha.execute(recaptchaSiteKeyV3, { 
-                        action: 'eael_login_register_form' 
-                    }).then(function (token) {
-                        if ($('form input[name="g-recaptcha-response"]', $scope).length === 0) {
-                            $('form', $scope).append('<input type="hidden" name="g-recaptcha-response" value="' + token + '">');
-                        } else {
-                            $('form input[name="g-recaptcha-response"]', $scope).val(token);
-                        }
-                    });
+
+        function getCookie(cname) {
+            const name = cname + "=",
+                decodedCookie = decodeURIComponent(document.cookie),
+                ca = decodedCookie.split(';');
+
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
                 }
             }
-        });
+            return "";
+        }
+
+        function removeCookie(cname) {
+            document.cookie = cname + "=;Max-Age=0;";
+        }
 
         $(document).ready(function () {
+            //Validation error message is not show when the Registration page is selected
+            $( "[name='eael-login-submit']" ).on( 'click', function() {
+                localStorage.setItem( 'eael-is-login-form', 'true' );
+            } );
+            var eael_get_login_status = localStorage.getItem( 'eael-is-login-form' );
+            if( eael_get_login_status === 'true' ) {
+                localStorage.removeItem( 'eael-is-login-form' );
+                setTimeout(function() {
+                    $( '#eael-lr-login-toggle' ).trigger( 'click' );
+                },100);
+            }
+
+            //
             let eaelGetTokenPromise = new Promise(function (eaelGetTokenResolve, eaelGetTokenReject) {
                 ea.getToken();
 
@@ -165,6 +185,31 @@ ea.hooks.addAction("init", "ea", () => {
             eaelGetTokenPromise.then(function (updatedNonce) {
                 $('#eael-login-nonce, #eael-register-nonce, #eael-lostpassword-nonce, #eael-resetpassword-nonce').val(updatedNonce);
             });
+
+            if(!isProAndAjaxEnabled){
+                let isRecaptchaVersion3 = false;
+                isRecaptchaVersion3 = loginRecaptchaVersion === 'v3' || registerRecaptchaVersion === 'v3' ;
+                
+                if (recaptchaAvailable && isRecaptchaVersion3) {
+                    grecaptcha.ready(function() {
+                        grecaptcha.execute(recaptchaSiteKeyV3, {
+                            action: 'eael_login_register_form'
+                        }).then(function (token) {
+                            if ($('form input[name="g-recaptcha-response"]', $scope).length === 0) {
+                                $('form', $scope).append('<input type="hidden" name="g-recaptcha-response" value="' + token + '">');
+                            } else {
+                                $('form input[name="g-recaptcha-response"]', $scope).val(token);
+                            }
+                        });
+                    });
+                }
+            }
+
+            const errormessage = getCookie('eael_login_error_' + widgetId);
+            if (errormessage) {
+                $('.eael-form-validation-container', $scope).html(`<p class="eael-form-msg invalid">${errormessage}</p>`);
+                removeCookie('eael_login_error_' + widgetId);
+            }
         });
 
         // reCAPTCHA

@@ -7,6 +7,7 @@
 
 namespace Essential_Addons_Elementor\Traits;
 
+use Automattic\WooCommerce\Utilities\OrderUtil;
 use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 use Essential_Addons_Elementor\Template\Woocommerce\Checkout\Woo_Checkout_Helper;
 use Essential_Addons_Elementor\Traits\Template_Query;
@@ -53,10 +54,7 @@ trait Ajax_Handler {
 		add_action( 'wp_ajax_eael_product_gallery', [ $this, 'ajax_eael_product_gallery' ] );
 
 		add_action( 'wp_ajax_eael_select2_search_post', [ $this, 'select2_ajax_posts_filter_autocomplete' ] );
-		add_action( 'wp_ajax_nopriv_eael_select2_search_post', [ $this, 'select2_ajax_posts_filter_autocomplete' ] );
-
 		add_action( 'wp_ajax_eael_select2_get_title', [ $this, 'select2_ajax_get_posts_value_titles' ] );
-		add_action( 'wp_ajax_nopriv_eael_select2_get_title', [ $this, 'select2_ajax_get_posts_value_titles' ] );
 
 		if ( is_admin() ) {
 			add_action( 'wp_ajax_save_settings_with_ajax', array( $this, 'save_settings' ) );
@@ -66,6 +64,9 @@ trait Ajax_Handler {
 
 		add_action( 'wp_ajax_eael_get_token', [ $this, 'eael_get_token' ] );
 		add_action( 'wp_ajax_nopriv_eael_get_token', [ $this, 'eael_get_token' ] );
+
+		add_action( 'wp_ajax_eael_set_screen_width', [ $this, 'eael_set_screen_width' ] );
+		add_action( 'wp_ajax_nopriv_eael_set_screen_width', [ $this, 'eael_set_screen_width' ] );
 
 		add_action( 'eael_before_woo_pagination_product_ajax_start', [ $this, 'eael_yith_wcwl_ajax_disable' ] );
 		add_action( 'eael_before_ajax_load_more', [ $this, 'eael_yith_wcwl_ajax_disable' ] );
@@ -161,7 +162,9 @@ trait Ajax_Handler {
 				unset( $args['offset'] );
 			}
 		}
-
+		if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' ) {
+			do_action( 'eael_woo_before_product_loop', $settings['eael_product_grid_style_preset'] );
+		}
 		// ensure control name compatibility to old code if it is post block
 		if ( $class === '\Essential_Addons_Elementor\Pro\Elements\Post_Block' ) {
 			$settings ['post_block_hover_animation']    = $settings['eael_post_block_hover_animation'];
@@ -344,6 +347,17 @@ trait Ajax_Handler {
 		ob_start();
 		$query = new \WP_Query( $args );
 		if ( $query->have_posts() ) {
+			if ( isset( $template_info['name'] ) && $template_info['name'] === 'eicon-woocommerce' && boolval( $settings['show_add_to_cart_custom_text'] ) ){
+				$add_to_cart_text = [
+					'add_to_cart_simple_product_button_text'   => $settings['add_to_cart_simple_product_button_text'],
+					'add_to_cart_variable_product_button_text' => $settings['add_to_cart_variable_product_button_text'],
+					'add_to_cart_grouped_product_button_text'  => $settings['add_to_cart_grouped_product_button_text'],
+					'add_to_cart_external_product_button_text' => $settings['add_to_cart_external_product_button_text'],
+					'add_to_cart_default_product_button_text'  => $settings['add_to_cart_default_product_button_text'],
+				];
+				$this->change_add_woo_checkout_update_order_reviewto_cart_text( $add_to_cart_text );
+			}
+
 			while ( $query->have_posts() ) {
 				$query->the_post();
 				include( $template );
@@ -649,6 +663,25 @@ trait Ajax_Handler {
 			];
 
 			$args['tax_query'] = $this->eael_terms_query_multiple( $args['tax_query'] );
+
+			if ( $settings[ 'eael_product_gallery_product_filter' ] == 'featured-products' ) {
+				$args[ 'tax_query' ][] = [
+					'relation' => 'AND',
+					[
+						'taxonomy' => 'product_visibility',
+						'field'    => 'name',
+						'terms'    => 'featured',
+					],
+					[
+						'taxonomy' => 'product_visibility',
+						'field'    => 'name',
+						'terms'    => [ 'exclude-from-search', 'exclude-from-catalog' ],
+						'operator' => 'NOT IN',
+					],
+				];
+			}
+
+
 		}
 		
 		$template_info = $this->eael_sanitize_template_param( $_REQUEST['template_info'] );
@@ -773,6 +806,11 @@ trait Ajax_Handler {
 				$post_list = wp_list_pluck( get_terms( $args ), 'name', 'term_id' );
 				break;
 			case 'user':
+				if ( ! current_user_can( 'list_users' ) ) {
+					$post_list = [];
+					break;
+				}
+
 				$users = [];
 
 				foreach ( get_users( [ 'search' => "*{$search}*" ] ) as $user ) {
@@ -1075,9 +1113,18 @@ trait Ajax_Handler {
 		wp_send_json_error( __( 'you are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
 	}
 
+	public function eael_set_screen_width() {
+		if ( ! session_id() ) {
+			session_start();
+		}
+		$_SESSION['eael_screen'] = absint( $_POST['screen_width'] );
+		session_write_close();
+	}
+
 	public function eael_yith_wcwl_ajax_disable( $request ) {
 		add_filter( 'option_yith_wcwl_ajax_enable', function ( $data ) {
 			return 'no';
 		} );
 	}
+
 }

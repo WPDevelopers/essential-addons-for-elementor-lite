@@ -1,5 +1,11 @@
+.eael-simple-menu-container {
+    min-height: 50px;
+}
+
 .elementor-widget-eael-simple-menu.eael-hamburger--mobile.eael-hamburger--responsive,
+.elementor-widget-eael-simple-menu.eael-hamburger--mobile_extra.eael-hamburger--responsive,
 .elementor-widget-eael-simple-menu.eael-hamburger--tablet.eael-hamburger--responsive,
+.elementor-widget-eael-simple-menu.eael-hamburger--tablet_extra.eael-hamburger--responsive,
 .elementor-widget-eael-simple-menu.eael-hamburger--laptop.eael-hamburger--responsive,
 .elementor-widget-eael-simple-menu.eael-hamburger--desktop.eael-hamburger--responsive,
 .elementor-widget-eael-simple-menu.eael-hamburger--widescreen.eael-hamburger--responsive {
@@ -26,7 +32,9 @@
                         text-align: inherit;
 
                         span {
-                            display: none;
+                            &.eael-simple-menu-indicator{
+                                display: none;
+                            }
                         }
                     }
 
@@ -46,10 +54,6 @@
 
                             .eael-simple-menu-indicator {
                                 border: 1px solid #00000080;
-
-                                &:before {
-                                    //color: #c36;
-                                }
                             }
 
                             ul {
@@ -131,7 +135,9 @@
 }
 
 .eael_simple_menu_hamburger_disable_selected_menu_hide.eael-hamburger--mobile.eael-hamburger--responsive,
+.eael_simple_menu_hamburger_disable_selected_menu_hide.eael-hamburger--mobile_extra.eael-hamburger--responsive,
 .eael_simple_menu_hamburger_disable_selected_menu_hide.eael-hamburger--tablet.eael-hamburger--responsive,
+.eael_simple_menu_hamburger_disable_selected_menu_hide.eael-hamburger--tablet_extra.eael-hamburger--responsive,
 .eael_simple_menu_hamburger_disable_selected_menu_hide.eael-hamburger--laptop.eael-hamburger--responsive,
 .eael_simple_menu_hamburger_disable_selected_menu_hide.eael-hamburger--desktop.eael-hamburger--responsive,
 .eael_simple_menu_hamburger_disable_selected_menu_hide.eael-hamburger--widescreen.eael-hamburger--responsive {
@@ -141,7 +147,9 @@
 }
 
 .eael-simple-menu-hamburger-align-left.eael-hamburger--mobile.eael-hamburger--responsive,
+.eael-simple-menu-hamburger-align-left.eael-hamburger--mobile_extra.eael-hamburger--responsive,
 .eael-simple-menu-hamburger-align-left.eael-hamburger--tablet.eael-hamburger--responsive,
+.eael-simple-menu-hamburger-align-left.eael-hamburger--tablet_extra.eael-hamburger--responsive,
 .eael-simple-menu-hamburger-align-left.eael-hamburger--laptop.eael-hamburger--responsive,
 .eael-simple-menu-hamburger-align-left.eael-hamburger--desktop.eael-hamburger--responsive,
 .eael-simple-menu-hamburger-align-left.eael-hamburger--widescreen.eael-hamburger--responsive {
@@ -153,7 +161,9 @@
 }
 
 .eael-simple-menu-hamburger-align-center.eael-hamburger--mobile.eael-hamburger--responsive,
+.eael-simple-menu-hamburger-align-center.eael-hamburger--mobile_extra.eael-hamburger--responsive,
 .eael-simple-menu-hamburger-align-center.eael-hamburger--tablet.eael-hamburger--responsive,
+.eael-simple-menu-hamburger-align-center.eael-hamburger--tablet_extra.eael-hamburger--responsive,
 .eael-simple-menu-hamburger-align-center.eael-hamburger--laptop.eael-hamburger--responsive,
 .eael-simple-menu-hamburger-align-center.eael-hamburger--desktop.eael-hamburger--responsive,
 .eael-simple-menu-hamburger-align-center.eael-hamburger--widescreen.eael-hamburger--responsive {
@@ -365,14 +375,16 @@
             right: 10px;
             width: 28px;
             height: 28px;
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border: 1px solid #ffffff80;
             border-radius: 2px;
             text-align: center;
             //transform: translateY(-50%);
             cursor: pointer;
 
-            &:before {
+            &:before, svg, i {
                 display: block;
                 font-weight: 900;
                 line-height: 26px;
@@ -381,7 +393,7 @@
             }
 
             &.eael-simple-menu-indicator-open {
-                &:before {
+                &:before, svg, i {
                     transform: rotate(180deg);
                 }
             }
@@ -484,8 +496,9 @@
                         .eael-simple-menu-indicator {
                             border: 1px solid #00000080;
 
-                            &:before {
+                            &:before, svg, i {
                                 color: #000000;
+                                fill: #000000;
                             }
                         }
 
@@ -749,3 +762,6 @@
     }
 }
 
+.eael-simple-menu-container .eael-simple-menu-toggle {
+    display: none;
+}
