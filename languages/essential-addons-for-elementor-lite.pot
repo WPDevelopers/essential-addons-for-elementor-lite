@@ -5814,7 +5814,7 @@ msgid "Default template uses WordPress Default Admin email template. You can cus
 msgstr ""
 
 #: ../includes/Elements/Login_Register.php:2370
-msgid "<strong>Note:</strong> You can use dynamic content in the email body like [fieldname]. For example [username] will be replaced by user-typed username. Available tags are: [username], [email], [firstname],[lastname], [website], [loginurl] and [sitetitle]. <br>For custom profile fields use slug of the field name e.x. [my_custom_field_1]"
+msgid "<strong>Note:</strong> You can use dynamic content in the email body like [fieldname]. For example [username] will be replaced by user-typed username. Available tags are: [username], [email], [firstname],[lastname], [website], [loginurl], [eael_phone_number] and [sitetitle]. <br>For custom profile fields use slug of the field name e.x. [my_custom_field_1]"
 msgstr ""
 
 #. translators: %s: Site Name
