@@ -13,6 +13,25 @@ window.ea = {
 		return false;
 	}
 };
+
+function EAELsetScreenSize() {
+	jQuery.ajax({
+		url: localize.ajaxurl,
+		type: "post",
+		data: {
+			action: "eael_set_screen_width",
+			screen_width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+		}
+	});
+}
+
+EAELsetScreenSize();
+let debunce_time = false;
+window.addEventListener('resize', function () {
+	clearTimeout(debunce_time);
+	debunce_time = setTimeout(EAELsetScreenSize, 250);
+});
+
 ea.hooks.addAction("widgets.reinit", "ea", ($content) => {
 	let filterGallery = jQuery(".eael-filter-gallery-container", $content);
 	let postGridGallery = jQuery(
@@ -125,6 +144,14 @@ jQuery(window).on("elementor/frontend/init", function () {
 		try {
 			if (isStartWithHash && ($(hashURL).hasClass('eael-tab-item-trigger') || $(hashURL).hasClass('eael-accordion-header'))) {
 				$(hashURL).trigger('click');
+
+				if (typeof hashURL !== 'undefined' && hashURL) {
+					let idOffset = $(hashURL).closest('.eael-advance-tabs').data('custom-id-offset');
+					idOffset = idOffset ? parseFloat(idOffset) : 0;
+					$('html, body').animate({
+						scrollTop: $(hashURL).offset().top - idOffset,
+					}, 300);
+				}
 			}
 		} catch (err) {
 			// nothing to do

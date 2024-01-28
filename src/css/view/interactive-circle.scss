@@ -94,7 +94,7 @@
                         background: $nav-item-initial-background;
                         border: $nav-item-border-width solid $nav-item-border-color;
                         box-shadow: $nav-item-box-shadow;
-                        z-index: 99;
+                        z-index: 0;
                         .eael-circle-icon-shapes {
                             display: none;
                         }
@@ -574,7 +574,7 @@
                         }
                         100%{
                             top: 90%;
-                            left: 20%;
+                            left: 80%;
                         }
                     }
                     @keyframes eael-1-a1p1di5-item-4-btn-animation {
@@ -584,7 +584,7 @@
                         }
                         100%{
                             top: 90%;
-                            left: 80%;
+                            left: 20%;
                         }
                     }
                     @keyframes eael-1-a1p1di5-item-5-btn-animation {

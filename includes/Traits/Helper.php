@@ -9,6 +9,7 @@ if ( !defined( 'ABSPATH' ) ) {
 use Elementor\Plugin;
 use \Essential_Addons_Elementor\Classes\Helper as HelperClass;
 use \Essential_Addons_Elementor\Elements\Woo_Checkout;
+use function Crontrol\Event\get;
 
 trait Helper
 {
@@ -153,23 +154,28 @@ trait Helper
 	    $max_page = empty( $args['max_page'] ) ? false : $args['max_page'];
 	    unset( $args['max_page'] );
 
-        $this->add_render_attribute('load-more', [
-            'class'          => "eael-load-more-button",
-            'id'             => "eael-load-more-btn-" . $this->get_id(),
-            'data-widget-id' => $this->get_id(),
-            'data-widget' => $this->get_id(),
-            'data-page-id'   => $this->page_id,
-            'data-nonce'     => wp_create_nonce( 'load_more' ),
-            'data-template'  => json_encode([
-                'dir'   => $plugin_type,
-                'file_name' => $settings['loadable_file_name'],
-                'name' => $this->process_directory_name() ],
-                1),
-            'data-class'    => get_class( $this ),
-            'data-layout'   => isset($settings['layout_mode']) ? $settings['layout_mode'] : "",
-            'data-page'     => 1,
-            'data-args'     => http_build_query( $args ),
-        ]);
+        if ( isset( $args['found_posts'] ) && $args['found_posts'] <= $args['posts_per_page'] ){
+	        $this->add_render_attribute( 'load-more', [ 'class' => 'hide-load-more' ] );
+	        unset( $args['found_posts'] );
+        }
+
+	    $this->add_render_attribute( 'load-more', [
+		    'class'          => "eael-load-more-button",
+		    'id'             => "eael-load-more-btn-" . $this->get_id(),
+		    'data-widget-id' => $this->get_id(),
+		    'data-widget'    => $this->get_id(),
+		    'data-page-id'   => $this->page_id,
+		    'data-template'  => json_encode( [
+			    'dir'       => $plugin_type,
+			    'file_name' => $settings['loadable_file_name'],
+			    'name'      => $this->process_directory_name()
+		    ],
+			    1 ),
+		    'data-class'     => get_class( $this ),
+		    'data-layout'    => isset( $settings['layout_mode'] ) ? $settings['layout_mode'] : "",
+		    'data-page'      => 1,
+		    'data-args'      => http_build_query( $args ),
+	    ] );
 
 	    if ( $max_page ) {
 		    $this->add_render_attribute( 'load-more', [ 'data-max-page' => $max_page ] );
@@ -177,14 +183,17 @@ trait Helper
 
         if ( $args['posts_per_page'] != '-1' ) {
             $show_or_hide = ('true' == $settings['show_load_more'] || 1 == $settings['show_load_more'] || 'yes' == $settings['show_load_more']) ? '' : ' eael-force-hide';
+            do_action( 'eael/global/before-load-more-button', $settings, $args, $plugin_type );
             ?>
             <div class="eael-load-more-button-wrap<?php echo "eael-dynamic-filterable-gallery" == $this->get_name() ? " dynamic-filter-gallery-loadmore" : ""; echo esc_attr( $show_or_hide ); ?>">
                 <button <?php $this->print_render_attribute_string( 'load-more' ); ?>>
-                    <div class="eael-btn-loader button__loader"></div>
-                    <span><?php echo esc_html($settings['show_load_more_text']) ?></span>
+                    <span class="eael-btn-loader button__loader"></span>
+                    <span class="eael_load_more_text"><?php echo esc_html($settings['show_load_more_text']) ?></span>
                 </button>
             </div>
-        <?php }
+            <?php 
+            do_action( 'eael/global/after-load-more-button', $settings, $args, $plugin_type );
+        }
     }
 
     public function eael_product_grid_script(){
@@ -220,6 +229,25 @@ trait Helper
 		return $html;
 	}
 
+	public function eael_product_wrapper_class( $classes, $product_id, $widget_name ) {
+
+		if ( ! is_plugin_active( 'woo-variation-swatches-pro/woo-variation-swatches-pro.php' ) ) {
+			return $classes;
+		}
+
+		$product = wc_get_product( $product_id );
+
+		if ( ! $product ) {
+			return $classes;
+		}
+
+		if ( $product->is_type( 'variable' ) ) {
+			$classes[] = 'wvs-archive-product-wrapper';
+		}
+
+		return $classes;
+	}
+
 	public function eael_woo_cart_empty_action() {
 		if ( ! function_exists( 'WC' ) ) {
 			return;
@@ -228,6 +256,45 @@ trait Helper
 		if ( isset( $_GET['empty_cart'] ) && 'yes' === esc_html( $_GET['empty_cart'] ) ) {
 			WC()->cart->empty_cart();
 		}
+	}
+
+	/**
+	 * Customize checkout fields.
+	 */
+	public function eael_customize_woo_checkout_fields( $fields ) {
+		global $post;
+        
+        if ( ! is_object( $post ) || is_null( $post ) ) {
+            return $fields;
+        }
+
+		$widgets    = get_post_meta( $post->ID, '_elementor_controls_usage', true );
+		$widget_key = 'eael-woo-checkout';
+		if ( ! $widgets ) {
+			$widget_key = 'woo-checkout';
+			$widgets    = get_post_meta( $post->ID, '_eael_widget_elements', true );
+		}
+
+		$eael_fields = get_post_meta( $post->ID, '_eael_checkout_fields_settings', true );
+
+		if ( ! isset( $widgets[ $widget_key ] ) || empty( $eael_fields ) ) {
+			return $fields;
+		}
+
+		$eael_fields = get_post_meta( $post->ID, '_eael_checkout_fields_settings', true );
+
+		foreach ( $fields as $type => $field_sets ) {
+			foreach ( $field_sets as $key => $field_set ) {
+				if ( isset( $eael_fields[ $type ][ $key ]['label'] ) ) {
+					$fields[ $type ][ $key ]['label'] = $eael_fields[ $type ][ $key ]['label'];
+				}
+				if ( isset( $eael_fields[ $type ][ $key ]['placeholder'] ) ) {
+					$fields[ $type ][ $key ]['placeholder'] = $eael_fields[ $type ][ $key ]['placeholder'];
+				}
+			}
+		}
+
+		return $fields;
 	}
 
     /**
@@ -302,7 +369,7 @@ trait Helper
                             <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/templately/logo.svg' ); ?>" alt="">
                         </div>
                         <ul class="eael-promo-temp__feature__list">
-                            <li><?php _e('4,000+ Stunning Templates','essential-addons-for-elementor-lite'); ?></li>
+                            <li><?php _e('5,000+ Stunning Templates','essential-addons-for-elementor-lite'); ?></li>
                             <li><?php _e('Supports Elementor & Gutenberg','essential-addons-for-elementor-lite'); ?></li>
                             <li><?php _e('Powering up 200,000+ Websites','essential-addons-for-elementor-lite'); ?></li>
                             <li><?php _e('Cloud Collaboration with Team','essential-addons-for-elementor-lite'); ?></li>
@@ -485,7 +552,7 @@ trait Helper
 		?>
         <div id="eael-admin-promotion-message" class="eael-admin-promotion-message">
             <i class="e-notice__dismiss eael-admin-promotion-close" role="button" aria-label="Dismiss" tabindex="0"></i>
-			<?php printf( __( "<p> <i>📣</i> NEW: Essential Addons Pro 5.5 is here, with new '<a target='_blank' href='%s'>Woo Thank You</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/woo-thank-you' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) ); ?>
+			<?php printf( __( "<p> <i>📣</i> NEW: Essential Addons 5.9 is here, with new '<a target='_blank' href='%s'>Woo Product List</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/woo-product-list/' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) ); ?>
         </div>
 		<?php
 	}
@@ -538,7 +605,7 @@ trait Helper
 	}
 
 	public function essential_blocks_promo_admin_js_template() {
-		$eb_logo          = EAEL_PLUGIN_URL . 'assets/admin/images/eb.svg';
+		$eb_logo          = EAEL_PLUGIN_URL . 'assets/admin/images/eb-new.svg';
 		$eb_promo_cross   = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/cross.svg';
 		$eb_promo_img1    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img1.gif';
 		$eb_promo_img2    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img2.gif';
@@ -655,6 +722,14 @@ trait Helper
             </div>
         </script>
 		<?php
+	}
+
+	public function eael_post_view_count() {
+		if ( is_single() ) {
+			$post_id    = get_the_ID();
+			$view_count = absint( get_post_meta( $post_id, '_eael_post_view_count', true ) );
+			update_post_meta( $post_id, '_eael_post_view_count', ++ $view_count );
+		}
 	}
 }
 

@@ -88,10 +88,6 @@
   transition: all 0.3s ease-in-out;
 }
 
-.eael-adv-accordion .eael-accordion-list .eael-accordion-header:focus {
-  outline: unset;
-}
-
 .fa-accordion-icon {
   display: inline-block;
   margin-right: 10px;
@@ -105,10 +101,6 @@
           box-sizing: border-box;
   font-size: 1rem;
   line-height: 1.7;
-}
-
-.eael-adv-accordion .eael-accordion-list .eael-accordion-content p {
-  margin: 0;
 }
 
 .eael-adv-accordion .eael-accordion-list .eael-accordion-content.active {

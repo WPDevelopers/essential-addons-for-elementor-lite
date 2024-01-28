@@ -10,8 +10,14 @@ if ( !defined( 'ABSPATH' ) ) {
 
 use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 use Essential_Addons_Elementor\Classes\WPDeveloper_Notice;
+use PriyoMukul\WPNotice\Notices;
+use PriyoMukul\WPNotice\Utils\CacheBank;
+use PriyoMukul\WPNotice\Utils\NoticeRemover;
 
 trait Admin {
+
+    private static $cache_bank = null;
+
     /**
      * Create an admin menu.
      *
@@ -104,13 +110,13 @@ trait Admin {
                 <div class="eael-container">
                     <div class="eael-main__tab mb45">
                         <ul class="ls-none tab__menu">
-                            <li class="tab__list active"><a class="tab__item" href="#general"><i class="ea-admin-icon icon-gear-alt"></i><?php echo __( 'General', 'essential-addons-for-elementor-lite' ); ?></a></li>
-                            <li class="tab__list"><a class="tab__item" href="#elements"><i class="ea-admin-icon icon-element"></i><?php echo __( 'Elements', 'essential-addons-for-elementor-lite' ); ?></a></li>
-                            <li class="tab__list"><a class="tab__item" href="#extensions"><i class="ea-admin-icon icon-extension"></i><?php echo __( 'Extensions', 'essential-addons-for-elementor-lite' ); ?></a></li>
-                            <li class="tab__list"><a class="tab__item" href="#tools"><i class="ea-admin-icon icon-tools"></i><?php echo __( 'Tools', 'essential-addons-for-elementor-lite' ); ?></a></li>
-                            <li class="tab__list"><a class="tab__item" href="#integrations"><i class="ea-admin-icon icon-plug"></i><?php echo __( 'Integrations', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                            <li class="tab__list active"><a class="tab__item" href="#general"><i class="ea-admin-icon eael-icon-gear-alt"></i><?php echo __( 'General', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                            <li class="tab__list"><a class="tab__item" href="#elements"><i class="ea-admin-icon eael-icon-element"></i><?php echo __( 'Elements', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                            <li class="tab__list"><a class="tab__item" href="#extensions"><i class="ea-admin-icon eael-icon-extension"></i><?php echo __( 'Extensions', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                            <li class="tab__list"><a class="tab__item" href="#tools"><i class="ea-admin-icon eael-icon-tools"></i><?php echo __( 'Tools', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                            <li class="tab__list"><a class="tab__item" href="#integrations"><i class="ea-admin-icon eael-icon-plug"></i><?php echo __( 'Integrations', 'essential-addons-for-elementor-lite' ); ?></a></li>
                             <?php  if ( !$this->pro_enabled ) { ?>
-                                <li class="tab__list"><a class="tab__item" href="#go-pro"><i class="ea-admin-icon icon-lock-alt"></i><?php echo __( 'Go Premium', 'essential-addons-for-elementor-lite' ); ?></a></li>
+                                <li class="tab__list"><a class="tab__item" href="#go-pro"><i class="ea-admin-icon eael-icon-lock-alt"></i><?php echo __( 'Go Premium', 'essential-addons-for-elementor-lite' ); ?></a></li>
                              <?php } ?>
                         </ul>
                     </div>
@@ -137,96 +143,99 @@ trait Admin {
     /**
      * Saving data with ajax request
      * @param
-     * @return  array
      * @since 1.1.2
      */
 
 
     public function admin_notice() {
-        $notice = new WPDeveloper_Notice( EAEL_PLUGIN_BASENAME, EAEL_PLUGIN_VERSION );
-        /**
-         * Current Notice End Time.
-         * Notice will dismiss in 3 days if user does nothing.
-         */
-        $notice->cne_time = '3 Day';
-        /**
-         * Current Notice Maybe Later Time.
-         * Notice will show again in 7 days
-         */
-        $notice->maybe_later_time = '21 Day';
+        require_once EAEL_PLUGIN_PATH . 'vendor/autoload.php';
 
-        $scheme        = ( parse_url( $_SERVER[ 'REQUEST_URI' ], PHP_URL_QUERY ) ) ? '&' : '?';
-        $url           = $_SERVER[ 'REQUEST_URI' ] . $scheme;
-        $notice->links = [
-            'review' => array(
-                'later'            => array(
-                    'link'       => 'https://wpdeveloper.com/review-essential-addons-elementor',
-                    'target'     => '_blank',
-                    'label'      => __( 'Ok, you deserve it!', 'essential-addons-for-elementor-lite' ),
-                    'icon_class' => 'dashicons dashicons-external',
-                ),
-                'allready'         => array(
-                    'link'       => esc_url( $url ),
-                    'label'      => __( 'I already did', 'essential-addons-for-elementor-lite' ),
-                    'icon_class' => 'dashicons dashicons-smiley',
-                    'data_args'  => [
-                        'dismiss' => true,
-                    ],
-                ),
-                'maybe_later'      => array(
-                    'link'       => esc_url( $url ),
-                    'label'      => __( 'Maybe Later', 'essential-addons-for-elementor-lite' ),
-                    'icon_class' => 'dashicons dashicons-calendar-alt',
-                    'data_args'  => [
-                        'later' => true,
-                    ],
-                ),
-                'support'          => array(
-                    'link'       => 'https://wpdeveloper.com/support',
-                    'label'      => __( 'I need help', 'essential-addons-for-elementor-lite' ),
-                    'icon_class' => 'dashicons dashicons-sos',
-                ),
-                'never_show_again' => array(
-                    'link'       => esc_url( $url ),
-                    'label'      => __( 'Never show again', 'essential-addons-for-elementor-lite' ),
-                    'icon_class' => 'dashicons dashicons-dismiss',
-                    'data_args'  => [
-                        'dismiss' => true,
-                    ],
-                ),
-            ),
-        ];
+        self::$cache_bank = CacheBank::get_instance();
 
-        /**
-         * This is review message and thumbnail.
-         */
-        $notice->message( 'review', '<p>' . __( 'We hope you\'re enjoying Essential Addons for Elementor! Could you please do us a BIG favor and give it a 5-star rating on WordPress to help us spread the word and boost our motivation?', 'essential-addons-for-elementor-lite' ) . '</p>' );
-        $notice->thumbnail( 'review', plugins_url( 'assets/admin/images/icon-ea-logo.svg', EAEL_PLUGIN_BASENAME ) );
-        /**
-         * This is upsale notice settings
-         * classes for wrapper,
-         * Message message for showing.
-         */
+        NoticeRemover::get_instance('1.0.0');
+        NoticeRemover::get_instance('1.0.0', '\WPDeveloper\BetterDocs\Dependencies\PriyoMukul\WPNotice\Notices');
 
-        // Update Notice For PRO Version
-        if ( $this->pro_enabled && \version_compare( EAEL_PRO_PLUGIN_VERSION, '4.0.0', '<' ) ) {
-            $notice->classes( 'update', 'notice is-dismissible ' );
-            $notice->message( 'update', '<p>' . __( 'You are using an incompatible version of Essential Addons PRO. Please update to v4.0.0+. If you do not see automatic update, <a href="https://essential-addons.com/elementor/docs/manually-update-essential-addons-pro/" target="_blank">Follow manual update guide.</a>', 'essential-addons-for-elementor-lite' ) . '</p>' );
-            $notice->thumbnail( 'update', plugins_url( 'assets/admin/images/icon-ea-logo.svg', EAEL_PLUGIN_BASENAME ) );
-        }
+        $notices = new Notices( [
+			'id'             => 'essential-addons-for-elementor',
+			'storage_key'    => 'notices',
+			'lifetime'       => 3,
+			'stylesheet_url' => esc_url_raw( EAEL_PLUGIN_URL . 'assets/admin/css/notice.css' ),
+			'styles' => esc_url_raw( EAEL_PLUGIN_URL . 'assets/admin/css/notice.css' ),
+			'priority'       => 1
+		] );
 
+        $review_notice = __( 'We hope you\'re enjoying Essential Addons for Elementor! Could you please do us a BIG favor and give it a 5-star rating on WordPress to help us spread the word and boost our motivation?', 'essential-addons-for-elementor-lite' );
+		$_review_notice = [
+			'thumbnail' => plugins_url( 'assets/admin/images/icon-ea-logo.svg', EAEL_PLUGIN_BASENAME ),
+			'html'      => '<p>' . $review_notice . '</p>',
+			'links'     => [
+				'later'            => array(
+					'link'       => 'https://wpdeveloper.com/review-essential-addons-elementor',
+					'target'     => '_blank',
+					'label'      => __( 'Ok, you deserve it!', 'essential-addons-for-elementor-lite' ),
+					'icon_class' => 'dashicons dashicons-external',
+				),
+				'allready'         => array(
+					'label'      => __( 'I already did', 'essential-addons-for-elementor-lite' ),
+					'icon_class' => 'dashicons dashicons-smiley',
+					'attributes' => [
+						'data-dismiss' => true
+					],
+				),
+				'maybe_later'      => array(
+					'label'      => __( 'Maybe Later', 'essential-addons-for-elementor-lite' ),
+					'icon_class' => 'dashicons dashicons-calendar-alt',
+					'attributes' => [
+						'data-later' => true
+					],
+				),
+				'support'          => array(
+					'link'       => 'https://wpdeveloper.com/support',
+					'label'      => __( 'I need help', 'essential-addons-for-elementor-lite' ),
+					'icon_class' => 'dashicons dashicons-sos',
+				),
+				'never_show_again' => array(
+					'label'      => __( 'Never show again', 'essential-addons-for-elementor-lite' ),
+					'icon_class' => 'dashicons dashicons-dismiss',
+					'attributes' => [
+						'data-dismiss' => true
+					],
+				)
+			]
+		];
 
-	    $notice->options_args = array(
-		    'notice_will_show' => [
-			    'opt_in' => $notice->makeTime( $notice->timestamp, '3 Day' ), // after 3 days
-			    'review' => $notice->makeTime( $notice->timestamp, '7 Day' ), // after 7 days
-		    ],
-	    );
-        if ( $this->pro_enabled && \version_compare( EAEL_PRO_PLUGIN_VERSION, '4.0.0', '<' ) ) {
-            $notice->options_args[ 'notice_will_show' ][ 'update' ] = $notice->timestamp;
-        }
+	    $notices->add(
+			'review',
+			$_review_notice,
+			[
+				'start'       => $notices->strtotime( '+7 day' ),
+				'recurrence'  => 30,
+				'refresh'     => EAEL_PLUGIN_VERSION,
+				'dismissible' => true,
+			]
+		);
 
-        $notice->init();
+		$b_message            = '<p>Black Friday Sale: Unlock access to <strong>90+ advanced Elementor widgets</strong> with up to 40% discounts <span class="gift-icon">🎁</span></p><p><a class="button button-primary" href="https://wpdeveloper.com/upgrade/ea-bfcm" target="_blank">Upgrade to pro</a> <button data-dismiss="true" class="dismiss-btn button button-link">I don’t want to save money</button></p>';
+		$_black_friday_notice = [
+			'thumbnail' => plugins_url( 'assets/admin/images/full-logo.svg', EAEL_PLUGIN_BASENAME ),
+			'html'      => $b_message,
+		];
+
+	    $notices->add(
+			'black_friday_notice',
+			$_black_friday_notice,
+			[
+				'start'       => $notices->time(),
+				'recurrence'  => false,
+				'dismissible' => true,
+				'refresh'     => EAEL_PLUGIN_VERSION,
+				"expire"      => strtotime( '11:59:59pm 2nd December, 2023' ),
+				'display_if'  => ! $this->pro_enabled,
+			]
+		);
+
+	    self::$cache_bank->create_account( $notices );
+	    self::$cache_bank->calculate_deposits( $notices );
     }
 
 	/**
@@ -467,7 +476,7 @@ trait Admin {
         <div class="wpnotice-wrapper notice  notice-info is-dismissible eael-eb-special-optin-notice">
             <div class="wpnotice-content-wrapper">
                 <div class="eael-eb-optin-logo">
-                    <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/eb.svg' ); ?>" alt="">
+                    <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/eb-new.svg' ); ?>" alt="">
                 </div>
                 <div class="eael-eb-optin">
                     <h3><?php esc_html_e( 'Using Gutenberg? Check out Essential Blocks!', 'essential-addons-for-elementor-lite' ); ?></h3>

@@ -114,7 +114,7 @@ class Asset_Builder {
 	 * @return false|void
 	 */
 	public function frontend_asset_load() {
-		$handle        = 'eael';
+		$handle        = 'eael-general';
 		$this->post_id = get_the_ID();
 
 		$this->elements_manager->get_element_list( $this->post_id );
@@ -124,7 +124,6 @@ class Asset_Builder {
 		if ( ! $this->is_edit() ) {
 			wp_enqueue_script( 'eael-general' );
 			wp_enqueue_style( 'eael-general' );
-			$handle = 'eael-general';
 			$this->load_custom_js( $this->post_id );
 		} else {
 			$elements = $this->get_settings();
@@ -283,7 +282,7 @@ class Asset_Builder {
 		$css_deps = [ 'elementor-frontend' ];
         $js_deps  = [ 'jquery' ];
 		$theme    = wp_get_theme(); // gets the current theme
-		if ( in_array( 'Hello Elementor', [ $theme->name, $theme->parent_theme ] ) ) {
+		if ( in_array( 'Hello Elementor', [ $theme->name, $theme->parent_theme ] ) && version_compare( $theme->Version, '2.1.0', '>=' ) ) {
 			array_unshift( $css_deps, 'hello-elementor-theme-style' );
 		} elseif ( in_array( 'Astra', [ $theme->name, $theme->parent_theme ] ) ) {
 			array_unshift( $css_deps, 'astra-theme-css' );
