@@ -13,6 +13,8 @@ use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
+use Elementor\Repeater;
+use Elementor\Utils;
 use \Elementor\Widget_Base;
 use \Elementor\Icons_Manager;
 use Essential_Addons_Elementor\Traits\Helper;
@@ -131,6 +133,110 @@ class Sphere_Photo_Viewer extends Widget_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section(
+			'ea_section_spv_markers_settings',
+			[
+				'label'     => esc_html__( 'Markers', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'ea_spv_markers_switch' => 'yes'
+				]
+			]
+		);
+
+		$repeater = new Repeater();
+
+		$repeater->add_control(
+			'left_position',
+			[
+				'label'   => __( 'Left Position', 'essential-addons-elementor' ),
+				'type'    => Controls_Manager::SLIDER,
+				'range'   => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 360,
+						'step' => 0.1,
+					],
+				],
+				'default' => 0
+			]
+		);
+
+		$repeater->add_control(
+			'top_position',
+			[
+				'label'   => __( 'Top Position', 'essential-addons-elementor' ),
+				'type'    => Controls_Manager::SLIDER,
+				'range'   => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 180,
+						'step' => 0.1,
+					],
+				],
+				'default' => 0
+			]
+		);
+
+		$repeater->add_control(
+			'ea_spv_markers_img',
+			[
+				'label'   => esc_html__( 'Image', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::MEDIA,
+				'default' => [
+					'url' => Utils::get_placeholder_image_src(),
+				],
+				'ai'      => [
+					'active' => false,
+				],
+			]
+		);
+
+		$repeater->add_control(
+			'ea_spv_markers_tooltip',
+			[
+				'label'   => esc_html__( 'Tooltip', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::TEXT,
+				'default' => esc_html__( 'This is title', 'essential-addons-for-elementor-lite' ),
+				'dynamic' => [ 'active' => true ],
+				'ai'      => [
+					'active' => false,
+				],
+			]
+		);
+
+		$repeater->add_control(
+			'ea_spv_markers_content',
+			[
+				'label'   => esc_html__( 'Content', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::TEXTAREA,
+				'default' => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, neque qui velit. Magni dolorum quidem ipsam eligendi, totam, facilis laudantium cum accusamus ullam voluptatibus commodi numquam, error, est. Ea, consequatur.', 'essential-addons-for-elementor-lite' ),
+				'dynamic' => [ 'active' => true ],
+			]
+		);
+
+		$this->add_control(
+			'ea_spv_markers_list',
+			[
+				'label'       => esc_html__( 'Feature Item', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::REPEATER,
+				'seperator'   => 'before',
+				'default'     => [
+					[
+						'ea_spv_markers_tooltip' => esc_html__( 'Feature Item 1', 'essential-addons-for-elementor-lite' ),
+						'ea_spv_markers_content' => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipisi cing elit, sed do eiusmod tempor incididunt ut abore et dolore magna', 'essential-addons-for-elementor-lite' ),
+					],
+					[
+						'ea_spv_markers_tooltip' => esc_html__( 'Feature Item 2', 'essential-addons-for-elementor-lite' ),
+						'ea_spv_markers_content' => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipisi cing elit, sed do eiusmod tempor incididunt ut abore et dolore magna', 'essential-addons-for-elementor-lite' ),
+					],
+				],
+				'fields'      => $repeater->get_controls(),
+				'title_field' => '{{ ea_spv_markers_tooltip }}',
+			]
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
 			'ea_section_spv_options_settings',
 			[
 				'label' => esc_html__( 'Options', 'essential-addons-for-elementor-lite' ),
@@ -164,6 +270,19 @@ class Sphere_Photo_Viewer extends Widget_Base {
 				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'ea_spv_markers_switch',
+			[
+				'label'        => esc_html__( 'Markers', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'On', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Off', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => '',
+				'separator'    => 'before'
 			]
 		);
 
@@ -352,29 +471,25 @@ class Sphere_Photo_Viewer extends Widget_Base {
 			];
 		}
 
-		$sphere_settings['plugins'][][0] = [
-			'markers' => [
-				[
-					'id'       => 'image345',
-					'position' => [ 'yaw' => 0.32, 'pitch' => 0.11 ],
-					'image'    => 'https://photo-sphere-viewer-data.netlify.app/assets/pictos/pin-blue.png',
+		if ( $settings['ea_spv_markers_switch'] === 'yes' ) {
+			$markers = [];
+			$uid     = wp_rand();
+			foreach ( $settings['ea_spv_markers_list'] as $key => $marker ) {
+				$markers[] = [
+					'id'       => "{$uid}_{$key}",
+					'position' => [ 'yaw' => $marker['left_position']['size'] . 'deg', 'pitch' => $marker['top_position']['size'] . 'deg' ],
 					'size'     => [ 'width' => 32, 'height' => 32 ],
 					'anchor'   => 'bottom center',
-					'zoomLvl'  => 100,
-					'tooltip'  => 'A image marker. <b>Click me!</b>',
-					'content'  => 'This is <b>Bold text</b>'
-				],
-				[
-					'id'         => 'imageLayer123',
-					'imageLayer' => 'https://photo-sphere-viewer-data.netlify.app/assets/pictos/tent.png',
-					'size'       => [ 'width' => 120, 'height' => 94 ],
-					'position'   => [ 'yaw' => - 0.45, 'pitch' => - 0.1 ],
-					'tooltip'    => 'Image embedded in the scene',
-					'content'  => 'This is <b>Bold text</b>',
-					'anchor'   => 'bottom center',
-				]
-			]
-		];
+					'image'    => empty( $marker['ea_spv_markers_img']['url'] ) ? '' : $marker['ea_spv_markers_img']['url'],
+					'tooltip'  => $marker['ea_spv_markers_tooltip'],
+					'content'  => $marker['ea_spv_markers_content']
+				];
+			}
+
+			$sphere_settings['plugins'][][0] = [
+				'markers' => $markers
+			];
+		}
 
 		$sphere_settings = json_encode( $sphere_settings );
 
