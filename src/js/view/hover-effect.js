@@ -16,6 +16,9 @@ let HoverEffectHandler = function ($scope, $) {
     $eaelInvertHoverEffect = $scope.data('eael_invert_hover_effect'),
     $eaelSaturateHoverEffect = $scope.data('eael_saturate_hover_effect'),
     $eaelSepiaHoverEffect = $scope.data('eael_sepia_hover_effect'),
+    $eaelRotateHoverEffect = $scope.data('eael_rotate_hover_effect'),
+    $eaelScaleHoverEffect = $scope.data('eael_scale_hover_effect'),
+    $eaelSkewHoverEffect = $scope.data('eael_skew_hover_effect'),
     $eaelContainer        = $('.elementor-widget-container', $scope);
 
     let hoverSelector = `body [data-id="${$scopeId}"] > .elementor-widget-container`;
@@ -45,6 +48,18 @@ let HoverEffectHandler = function ($scope, $) {
     let $skewY = $eaelSkewEffect?.skew_y ? `skewY(${$eaelSkewEffect.skew_y}deg)` : '';
 
     //Hover
+    //Rotate
+    let $rotateXHover = $eaelRotateHoverEffect?.rotate_x ? `rotateX(${$eaelRotateHoverEffect.rotate_x}deg)` : '';
+    let $rotateYHover = $eaelRotateHoverEffect?.rotate_y ? `rotateY(${$eaelRotateHoverEffect.rotate_y}deg)` : '';
+    let $rotateZHover = $eaelRotateHoverEffect?.rotate_z ? `rotateZ(${$eaelRotateHoverEffect.rotate_z}deg)` : '';
+
+    //Scale
+    let $scaleXHover = $eaelScaleHoverEffect?.scale_x ? `scaleX(${$eaelScaleHoverEffect.scale_x})` : '';
+    let $scaleYHover = $eaelScaleHoverEffect?.scale_y ? `scaleY(${$eaelScaleHoverEffect.scale_y})` : '';
+    
+    //Skew
+    let $skewXHover = $eaelSkewHoverEffect?.skew_x ? `skewX(${$eaelSkewHoverEffect.skew_x}deg)` : '';
+    let $skewYHover = $eaelSkewHoverEffect?.skew_y ? `skewY(${$eaelSkewHoverEffect.skew_y}deg)` : '';
     
     //Filter Hover
     let $blurHover      = $eaelBurHoverEffect?.blur ? `blur(${$eaelBurHoverEffect.blur}px)` : '';
@@ -66,6 +81,7 @@ let HoverEffectHandler = function ($scope, $) {
     let hoverStyles = {
         'opacity': '.5',
         'filter': `${$blurHover} ${$contrastHover} ${$grayscaleHover} ${$invertHover} ${$saturateHover} ${$sepiaHover}`,
+        "transform": `${$rotateXHover} ${$rotateYHover} ${$rotateZHover} ${$scaleXHover} ${$scaleYHover} ${$skewXHover} ${$skewYHover}`,
         "transition": `.5s`
     };
 
