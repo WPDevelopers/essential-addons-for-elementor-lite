@@ -1,7 +1,7 @@
 /*!
- * PhotoSphereViewer 5.4.3
+ * PhotoSphereViewer 5.6.0
  * @copyright 2014-2015 Jérémy Heleine
- * @copyright 2023 Damien "Mistic" Sorel
+ * @copyright 2024 Damien "Mistic" Sorel
  * @licence MIT (https://opensource.org/licenses/MIT)
  */
 /* src/styles/index.scss */
@@ -118,6 +118,10 @@
 .psv-custom-button {
   width: auto;
   min-width: 20px;
+}
+.psv-custom-button--no-padding {
+  padding: 0;
+  height: 100%;
 }
 .psv-caption {
   flex: 1 1 100%;
@@ -284,51 +288,51 @@
   width: 1px;
   height: 1px;
   box-shadow:
-    1px 0 #fff,
-    3px 0px #fff,
-    5px 0px #fff,
-    1px 2px #fff,
-    3px 2px #fff,
-    5px 2px #fff,
-    1px 4px #fff,
-    3px 4px #fff,
-    5px 4px #fff,
-    1px 6px #fff,
-    3px 6px #fff,
-    5px 6px #fff,
-    1px 8px #fff,
-    3px 8px #fff,
-    5px 8px #fff,
-    1px 10px #fff,
-    3px 10px #fff,
-    5px 10px #fff,
-    1px 12px #fff,
-    3px 12px #fff,
-    5px 12px #fff,
-    1px 14px #fff,
-    3px 14px #fff,
-    5px 14px #fff,
-    1px 16px #fff,
-    3px 16px #fff,
-    5px 16px #fff,
-    1px 18px #fff,
-    3px 18px #fff,
-    5px 18px #fff,
-    1px 20px #fff,
-    3px 20px #fff,
-    5px 20px #fff,
-    1px 22px #fff,
-    3px 22px #fff,
-    5px 22px #fff,
-    1px 24px #fff,
-    3px 24px #fff,
-    5px 24px #fff,
-    1px 26px #fff,
-    3px 26px #fff,
-    5px 26px #fff,
-    1px 28px #fff,
-    3px 28px #fff,
-    5px 28px #fff;
+          1px 0 #fff,
+          3px 0px #fff,
+          5px 0px #fff,
+          1px 2px #fff,
+          3px 2px #fff,
+          5px 2px #fff,
+          1px 4px #fff,
+          3px 4px #fff,
+          5px 4px #fff,
+          1px 6px #fff,
+          3px 6px #fff,
+          5px 6px #fff,
+          1px 8px #fff,
+          3px 8px #fff,
+          5px 8px #fff,
+          1px 10px #fff,
+          3px 10px #fff,
+          5px 10px #fff,
+          1px 12px #fff,
+          3px 12px #fff,
+          5px 12px #fff,
+          1px 14px #fff,
+          3px 14px #fff,
+          5px 14px #fff,
+          1px 16px #fff,
+          3px 16px #fff,
+          5px 16px #fff,
+          1px 18px #fff,
+          3px 18px #fff,
+          5px 18px #fff,
+          1px 20px #fff,
+          3px 20px #fff,
+          5px 20px #fff,
+          1px 22px #fff,
+          3px 22px #fff,
+          5px 22px #fff,
+          1px 24px #fff,
+          3px 24px #fff,
+          5px 24px #fff,
+          1px 26px #fff,
+          3px 26px #fff,
+          5px 26px #fff,
+          1px 28px #fff,
+          3px 28px #fff,
+          5px 28px #fff;
   background: transparent;
 }
 .psv-panel-content {
@@ -440,7 +444,6 @@
   max-width: 200px;
   background: rgba(61, 61, 61, 0.8);
   border-radius: 4px;
-  padding: 0.5em 1em;
   opacity: 0;
   transition-property: opacity, transform;
   transition-timing-function: ease-in-out;
@@ -451,6 +454,7 @@
   color: rgb(255, 255, 255);
   font: 14px sans-serif;
   text-shadow: 0 1px #000;
+  padding: 0.5em 1em;
 }
 .psv-tooltip-arrow {
   position: absolute;
