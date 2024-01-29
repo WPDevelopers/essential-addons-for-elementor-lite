@@ -67,25 +67,25 @@ let HoverEffectHandler = function ($scope, $) {
     //Hover
     let $opacityHoverVal = $opacityHover ? $opacityHover?.opacity : '1';
     //Rotate
-    let $rotateXHover = $eaelRotateHoverEffect?.rotate_x ? `rotateX(${$eaelRotateHoverEffect.rotate_x}deg)` : '';
-    let $rotateYHover = $eaelRotateHoverEffect?.rotate_y ? `rotateY(${$eaelRotateHoverEffect.rotate_y}deg)` : '';
-    let $rotateZHover = $eaelRotateHoverEffect?.rotate_z ? `rotateZ(${$eaelRotateHoverEffect.rotate_z}deg)` : '';
+    let $rotateXHover = $eaelRotateHoverEffect?.rotate_x ? `rotateX(${$eaelRotateHoverEffect.rotate_x}deg)` : 'rotateX(0)';
+    let $rotateYHover = $eaelRotateHoverEffect?.rotate_y ? `rotateY(${$eaelRotateHoverEffect.rotate_y}deg)` : 'rotateY(0)';
+    let $rotateZHover = $eaelRotateHoverEffect?.rotate_z ? `rotateZ(${$eaelRotateHoverEffect.rotate_z}deg)` : 'rotateZ(0)';
 
     //Scale
-    let $scaleXHover = $eaelScaleHoverEffect?.scale_x ? `scaleX(${$eaelScaleHoverEffect.scale_x})` : '';
-    let $scaleYHover = $eaelScaleHoverEffect?.scale_y ? `scaleY(${$eaelScaleHoverEffect.scale_y})` : '';
+    let $scaleXHover = $eaelScaleHoverEffect?.scale_x ? `scaleX(${$eaelScaleHoverEffect.scale_x})` : 'scaleX(1)';
+    let $scaleYHover = $eaelScaleHoverEffect?.scale_y ? `scaleY(${$eaelScaleHoverEffect.scale_y})` : 'scaleY(1)';
     
     //Skew
-    let $skewXHover = $eaelSkewHoverEffect?.skew_x ? `skewX(${$eaelSkewHoverEffect.skew_x}deg)` : '';
-    let $skewYHover = $eaelSkewHoverEffect?.skew_y ? `skewY(${$eaelSkewHoverEffect.skew_y}deg)` : '';
+    let $skewXHover = $eaelSkewHoverEffect?.skew_x ? `skewX(${$eaelSkewHoverEffect.skew_x}deg)` : 'skewX(0)';
+    let $skewYHover = $eaelSkewHoverEffect?.skew_y ? `skewY(${$eaelSkewHoverEffect.skew_y}deg)` : 'skewY(0)';
     
     //Filter Hover
-    let $blurHover      = $eaelBurHoverEffect?.blur ? `blur(${$eaelBurHoverEffect.blur}px)` : '';
-    let $contrastHover      = $eaelContrastHoverEffect?.contrast ? `contrast(${$eaelContrastHoverEffect.contrast}%)` : '';
-    let $grayscaleHover      = $eaelGrayscalHoverEffect?.grayscale ? `grayscale(${$eaelGrayscalHoverEffect.grayscale}%)` : '';
-    let $invertHover      = $eaelInvertHoverEffect?.invert ? `invert(${$eaelInvertHoverEffect.invert}%)` : '';
-    let $saturateHover      = $eaelSaturateHoverEffect?.saturate ? `saturate(${$eaelSaturateHoverEffect.saturate}%)` : '';
-    let $sepiaHover      = $eaelSepiaHoverEffect?.sepia ? `sepia(${$eaelSepiaHoverEffect.sepia}%)` : '';
+    let $blurHover      = $eaelBurHoverEffect?.blur ? `blur(${$eaelBurHoverEffect.blur}px)` : 'blur(0px)';
+    let $contrastHover      = $eaelContrastHoverEffect?.contrast ? `contrast(${$eaelContrastHoverEffect.contrast}%)` : 'contrast(100%)';
+    let $grayscaleHover      = $eaelGrayscalHoverEffect?.grayscale ? `grayscale(${$eaelGrayscalHoverEffect.grayscale}%)` : 'grayscale(0%)';
+    let $invertHover      = $eaelInvertHoverEffect?.invert ? `invert(${$eaelInvertHoverEffect.invert}%)` : 'invert(0%)';
+    let $saturateHover      = $eaelSaturateHoverEffect?.saturate ? `saturate(${$eaelSaturateHoverEffect.saturate}%)` : 'saturate(100%)';
+    let $sepiaHover      = $eaelSepiaHoverEffect?.sepia ? `sepia(${$eaelSepiaHoverEffect.sepia}%)` : 'sepia(0%)';
     
     //Normal
     let normalStyles = {
