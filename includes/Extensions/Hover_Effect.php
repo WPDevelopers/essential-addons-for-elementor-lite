@@ -1355,25 +1355,25 @@ class Hover_Effect {
 		}
 
 		//Transition Duration
-		if( !empty( $settings['eael_hover_effect_sepia_hover_duration']['size'] ) ) {
+		if( !empty( $settings['eael_hover_effect_general_settings_duration']['size'] ) ) {
 			$opacity_settings = [
-				'transitionDuration' => $settings['eael_hover_effect_sepia_hover_duration']['size'],
+				'transitionDuration' => $settings['eael_hover_effect_general_settings_duration']['size'],
 			];
 			$element->add_render_attribute( '_wrapper', 'data-eael_hover_duration', wp_json_encode( $opacity_settings ) );
 		}
 
 		//Transition Delay
-		if( !empty( $settings['eael_hover_effect_sepia_hover_delay']['size'] ) ) {
+		if( !empty( $settings['eael_hover_effect_general_settings_delay']['size'] ) ) {
 			$opacity_settings = [
-				'transitionDelay' => $settings['eael_hover_effect_sepia_hover_delay']['size'],
+				'transitionDelay' => $settings['eael_hover_effect_general_settings_delay']['size'],
 			];
 			$element->add_render_attribute( '_wrapper', 'data-eael_hover_delay', wp_json_encode( $opacity_settings ) );
 		}
 
 		//Transition
-		if( !empty( $settings['eael_hover_effect_sepia_hover_easing'] ) ) {
+		if( !empty( $settings['eael_hover_effect_general_settings_easing'] ) ) {
 			$opacity_settings = [
-				'transitionEasing' => $settings['eael_hover_effect_sepia_hover_easing'],
+				'transitionEasing' => $settings['eael_hover_effect_general_settings_easing'],
 			];
 			$element->add_render_attribute( '_wrapper', 'data-eael_hover_easing', wp_json_encode( $opacity_settings ) );
 		}
