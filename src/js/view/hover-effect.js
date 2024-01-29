@@ -9,9 +9,16 @@ let HoverEffectHandler = function ($scope, $) {
     $eaelInvertEffect     = $scope.data('eael_invert_effect'),
     $eaelSaturateEffect   = $scope.data('eael_saturate_effect'),
     $eaelSepiaEffect      = $scope.data('eael_sepia_effect'),
-    $eaelbBurHoverEffect      = $scope.data('eael_blur_hover_effect'),
-    $scopeId      = $scope.data('id'),
+    $scopeId = $scope.data('id'),
+    $eaelBurHoverEffect = $scope.data('eael_blur_hover_effect'),
+    $eaelContrastHoverEffect = $scope.data('eael_contrast_hover_effect'),
+    $eaelGrayscalHoverEffect = $scope.data('eael_grayscal_hover_effect'),
+    $eaelInvertHoverEffect = $scope.data('eael_invert_hover_effect'),
+    $eaelSaturateHoverEffect = $scope.data('eael_saturate_hover_effect'),
+    $eaelSepiaHoverEffect = $scope.data('eael_sepia_hover_effect'),
     $eaelContainer        = $('.elementor-widget-container', $scope);
+
+    let hoverSelector = `body [data-id="${$scopeId}"] > .elementor-widget-container`;
 
     //Opacity
     let $opacityVal = $Opacity ? $Opacity?.opacity : '1';
@@ -23,9 +30,6 @@ let HoverEffectHandler = function ($scope, $) {
     let $invert    = $eaelInvertEffect?.invert ? `invert(${$eaelInvertEffect.invert}%)`               : '';
     let $saturate  = $eaelSaturateEffect?.saturate ? `saturate(${$eaelSaturateEffect.saturate}%)`     : '';
     let $sepia     = $eaelSepiaEffect?.sepia ? `sepia(${$eaelSepiaEffect.sepia}%)` : '';
-    
-    //Filter Hover
-    let $blurHover      = $eaelbBurHoverEffect?.blur ? `blur(${$eaelbBurHoverEffect.blur}px)` : '';
 
     //Rotate
     let $rotateX = $eaelRotateEffect?.rotate_x ? `rotateX(${$eaelRotateEffect.rotate_x}deg)` : '';
@@ -40,7 +44,15 @@ let HoverEffectHandler = function ($scope, $) {
     let $skewX = $eaelSkewEffect?.skew_x ? `skewX(${$eaelSkewEffect.skew_x}deg)` : '';
     let $skewY = $eaelSkewEffect?.skew_y ? `skewY(${$eaelSkewEffect.skew_y}deg)` : '';
 
-    let hoverSelector = `body [data-id="${$scopeId}"] > .elementor-widget-container`;
+    //Hover
+    
+    //Filter Hover
+    let $blurHover      = $eaelBurHoverEffect?.blur ? `blur(${$eaelBurHoverEffect.blur}px)` : '';
+    let $contrastHover      = $eaelContrastHoverEffect?.contrast ? `contrast(${$eaelContrastHoverEffect.contrast}%)` : '';
+    let $grayscaleHover      = $eaelGrayscalHoverEffect?.grayscale ? `grayscale(${$eaelGrayscalHoverEffect.grayscale}%)` : '';
+    let $invertHover      = $eaelInvertHoverEffect?.invert ? `invert(${$eaelInvertHoverEffect.invert}%)` : '';
+    let $saturateHover      = $eaelSaturateHoverEffect?.saturate ? `saturate(${$eaelSaturateHoverEffect.saturate}%)` : '';
+    let $sepiaHover      = $eaelSepiaHoverEffect?.sepia ? `sepia(${$eaelSepiaHoverEffect.sepia}%)` : '';
     
     //Normal
     let normalStyles = {
@@ -53,7 +65,7 @@ let HoverEffectHandler = function ($scope, $) {
     //Hover
     let hoverStyles = {
         'opacity': '.5',
-        'filter': $blurHover,
+        'filter': `${$blurHover} ${$contrastHover} ${$grayscaleHover} ${$invertHover} ${$saturateHover} ${$sepiaHover}`,
         "transition": `.5s`
     };
 
