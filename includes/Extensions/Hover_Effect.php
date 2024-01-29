@@ -681,59 +681,6 @@ class Hover_Effect {
                 ],
             ]
         );
-
-        $element->add_control(
-            'eael_hover_effect_opacity_delay',
-            [
-                'label'              => __( 'Opacity Delay', 'essential-addons-for-elementor-lite' ),
-                'type'               => Controls_Manager::SLIDER, 
-                'frontend_available' => true, 
-                'default' => [
-                    'size' => 0,
-                ],
-                'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 1000,
-					],
-                ],
-            ]
-        );
-
-        $element->add_control(
-            'eael_hover_effect_opacity_hover_duration',
-            [
-                'label'              => __( 'Opacity Duration', 'essential-addons-for-elementor-lite' ),
-                'type'               => Controls_Manager::SLIDER, 
-                'frontend_available' => true, 
-                'default' => [
-                    'size' => 0,
-                ],
-                'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 1000,
-					],
-                ],
-            ]
-        );
-
-        $element->add_control(
-			'eael_hover_effect_opacity_hover_easing',
-			[
-				'label'                 => __( 'Easing', 'essential-addons-for-elementor-lite' ),
-				'type'                  => Controls_Manager::SELECT,
-				'default'               => 'ease',
-				'frontend_available'    => true, 
-                'separator'             => 'before', 
-				'options'               => [
-					'ease'        => __( 'Default', 'essential-addons-for-elementor-lite' ), 
-					'ease-in'     => __( 'Ease-in', 'essential-addons-for-elementor-lite' ), 
-                    'ease-out'    => __( 'Ease-out', 'essential-addons-for-elementor-lite' ), 
-                    'ease-in-out' => __( 'Ease-in-out', 'essential-addons-for-elementor-lite' ), 
-                ],
-			]
-        );
         $element->end_popover();
 
         //Filter Hover Start
@@ -781,68 +728,6 @@ class Hover_Effect {
 				],
             ]
         );
-
-        //Duration
-        $element->add_control(
-			'eael_hover_effect_blur_hover_duration',
-			[
-                'label'     => __( 'Duration (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'default'   => [
-                    'unit' => 'px',
-					'size' => 1000,
-                ],
-				'condition' => [
-					'eael_hover_effect_blur_hover_is_on' => 'yes', 
-				],
-            ]
-		);
-
-        //Delay
-		$element->add_control(
-			'eael_hover_effect_blur_hover_delay',
-			[
-                'label'     => __( 'Delay (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'condition' => [
-					'eael_hover_effect_blur_hover_is_on' => 'yes', 
-				],
-            ]
-		);
-
-        $element->add_control(
-			'eael_hover_effect_blur_hover_easing',
-			[
-				'label'                 => __( 'Easing', 'essential-addons-for-elementor-lite' ),
-				'type'                  => Controls_Manager::SELECT,
-				'default'               => 'ease',
-				'frontend_available'    => true, 
-                'separator'             => 'before', 
-				'options'               => [
-					'ease'        => __( 'Default', 'essential-addons-for-elementor-lite' ), 
-					'ease-in'     => __( 'Ease-in', 'essential-addons-for-elementor-lite' ), 
-                    'ease-out'    => __( 'Ease-out', 'essential-addons-for-elementor-lite' ), 
-                    'ease-in-out' => __( 'Ease-in-out', 'essential-addons-for-elementor-lite' ), 
-                ],
-                'condition' => [
-					'eael_hover_effect_blur_hover_is_on' => 'yes', 
-				],
-			]
-        );
         //Blur End
 
         //Contrast Start
@@ -876,68 +761,6 @@ class Hover_Effect {
 				],
             ]
         );
-
-        //Duration
-        $element->add_control(
-			'eael_hover_effect_contrast_hover_duration',
-			[
-                'label'     => __( 'Duration (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'default'   => [
-                    'unit' => 'px',
-					'size' => 1000,
-                ],
-				'condition' => [
-					'eael_hover_effect_contrast_hover_is_on' => 'yes', 
-				],
-            ]
-		);
-
-        //Delay
-		$element->add_control(
-			'eael_hover_effect_contrast_hover_delay',
-			[
-                'label'     => __( 'Delay (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'condition' => [
-					'eael_hover_effect_contrast_hover_is_on' => 'yes', 
-				],
-            ]
-		);
-
-        $element->add_control(
-			'eael_hover_effect_contrast_hover_easing',
-			[
-				'label'                 => __( 'Easing', 'essential-addons-for-elementor-lite' ),
-				'type'                  => Controls_Manager::SELECT,
-				'default'               => 'ease',
-				'frontend_available'    => true, 
-                'separator'             => 'before', 
-				'options'               => [
-					'ease'        => __( 'Default', 'essential-addons-for-elementor-lite' ), 
-					'ease-in'     => __( 'Ease-in', 'essential-addons-for-elementor-lite' ), 
-                    'ease-out'    => __( 'Ease-out', 'essential-addons-for-elementor-lite' ), 
-                    'ease-in-out' => __( 'Ease-in-out', 'essential-addons-for-elementor-lite' ), 
-                ],
-                'condition' => [
-					'eael_hover_effect_contrast_hover_is_on' => 'yes', 
-				],
-			]
-        );
         //Contrast End
 
         //Grayscale Start
@@ -969,68 +792,6 @@ class Hover_Effect {
 					'eael_hover_effect_grayscale_hover_is_on' => 'yes', 
 				],
             ]
-        );
-        
-        //Duration
-        $element->add_control(
-			'eael_hover_effect_grayscale_hover_duration',
-			[
-                'label'     => __( 'Duration (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'default'   => [
-                    'unit' => 'px',
-					'size' => 1000,
-                ],
-				'condition' => [
-					'eael_hover_effect_grayscale_hover_is_on' => 'yes', 
-				],
-            ]
-		);
-
-        //Delay
-		$element->add_control(
-			'eael_hover_effect_grayscale_hover_delay',
-			[
-                'label'     => __( 'Delay (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'condition' => [
-					'eael_hover_effect_grayscale_hover_is_on' => 'yes', 
-				],
-            ]
-		);
-
-        $element->add_control(
-			'eael_hover_effect_grayscale_hover_easing',
-			[
-				'label'                 => __( 'Easing', 'essential-addons-for-elementor-lite' ),
-				'type'                  => Controls_Manager::SELECT,
-				'default'               => 'ease',
-				'frontend_available'    => true, 
-                'separator'             => 'before', 
-				'options'               => [
-					'ease'        => __( 'Default', 'essential-addons-for-elementor-lite' ), 
-					'ease-in'     => __( 'Ease-in', 'essential-addons-for-elementor-lite' ), 
-                    'ease-out'    => __( 'Ease-out', 'essential-addons-for-elementor-lite' ), 
-                    'ease-in-out' => __( 'Ease-in-out', 'essential-addons-for-elementor-lite' ), 
-                ],
-                'condition' => [
-					'eael_hover_effect_grayscale_hover_is_on' => 'yes', 
-				],
-			]
         );
         //Grayscale End
 
@@ -1065,68 +826,6 @@ class Hover_Effect {
 				],
             ]
         );
-
-        //Duration
-        $element->add_control(
-			'eael_hover_effect_invert_hover_duration',
-			[
-                'label'     => __( 'Duration (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'default'   => [
-                    'unit' => 'px',
-					'size' => 1000,
-                ],
-				'condition' => [
-					'eael_hover_effect_invert_hover_is_on' => 'yes', 
-				],
-            ]
-		);
-
-        //Delay
-		$element->add_control(
-			'eael_hover_effect_invert_hover_delay',
-			[
-                'label'     => __( 'Delay (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'condition' => [
-					'eael_hover_effect_invert_hover_is_on' => 'yes', 
-				],
-            ]
-		);
-
-        $element->add_control(
-			'eael_hover_effect_invert_hover_easing',
-			[
-				'label'                 => __( 'Easing', 'essential-addons-for-elementor-lite' ),
-				'type'                  => Controls_Manager::SELECT,
-				'default'               => 'ease',
-				'frontend_available'    => true, 
-                'separator'             => 'before', 
-				'options'               => [
-					'ease'        => __( 'Default', 'essential-addons-for-elementor-lite' ), 
-					'ease-in'     => __( 'Ease-in', 'essential-addons-for-elementor-lite' ), 
-                    'ease-out'    => __( 'Ease-out', 'essential-addons-for-elementor-lite' ), 
-                    'ease-in-out' => __( 'Ease-in-out', 'essential-addons-for-elementor-lite' ), 
-                ],
-                'condition' => [
-					'eael_hover_effect_invert_hover_is_on' => 'yes', 
-				],
-			]
-        );
         //Invert End
 
         //Saturate Start
@@ -1160,68 +859,6 @@ class Hover_Effect {
 				],
             ]
         );
-
-        //Duration
-        $element->add_control(
-			'eael_hover_effect_saturate_hover_duration',
-			[
-                'label'     => __( 'Duration (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'default'   => [
-                    'unit' => 'px',
-					'size' => 1000,
-                ],
-				'condition' => [
-					'eael_hover_effect_saturate_hover_is_on' => 'yes', 
-				],
-            ]
-		);
-
-        //Delay
-		$element->add_control(
-			'eael_hover_effect_saturate_hover_delay',
-			[
-                'label'     => __( 'Delay (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'condition' => [
-					'eael_hover_effect_saturate_hover_is_on' => 'yes', 
-				],
-            ]
-		);
-
-        $element->add_control(
-			'eael_hover_effect_saturate_hover_easing',
-			[
-				'label'                 => __( 'Easing', 'essential-addons-for-elementor-lite' ),
-				'type'                  => Controls_Manager::SELECT,
-				'default'               => 'ease',
-				'frontend_available'    => true, 
-                'separator'             => 'before', 
-				'options'               => [
-					'ease'        => __( 'Default', 'essential-addons-for-elementor-lite' ), 
-					'ease-in'     => __( 'Ease-in', 'essential-addons-for-elementor-lite' ), 
-                    'ease-out'    => __( 'Ease-out', 'essential-addons-for-elementor-lite' ), 
-                    'ease-in-out' => __( 'Ease-in-out', 'essential-addons-for-elementor-lite' ), 
-                ],
-                'condition' => [
-					'eael_hover_effect_saturate_hover_is_on' => 'yes', 
-				],
-			]
-        );
         //Saturate End
 
         //Sepia Start
@@ -1252,68 +889,6 @@ class Hover_Effect {
 					'eael_hover_effect_sepia_hover_is_on' => 'yes', 
 				],
             ]
-        );
-
-        //Duration
-        $element->add_control(
-			'eael_hover_effect_sepia_hover_duration',
-			[
-                'label'     => __( 'Duration (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'default'   => [
-                    'unit' => 'px',
-					'size' => 1000,
-                ],
-				'condition' => [
-					'eael_hover_effect_sepia_hover_is_on' => 'yes', 
-				],
-            ]
-		);
-
-        //Delay
-		$element->add_control(
-			'eael_hover_effect_sepia_hover_delay',
-			[
-                'label'     => __( 'Delay (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'condition' => [
-					'eael_hover_effect_sepia_hover_is_on' => 'yes', 
-				],
-            ]
-		);
-
-        $element->add_control(
-			'eael_hover_effect_sepia_hover_easing',
-			[
-				'label'                 => __( 'Easing', 'essential-addons-for-elementor-lite' ),
-				'type'                  => Controls_Manager::SELECT,
-				'default'               => 'ease',
-				'frontend_available'    => true, 
-                'separator'             => 'before', 
-				'options'               => [
-					'ease'        => __( 'Default', 'essential-addons-for-elementor-lite' ), 
-					'ease-in'     => __( 'Ease-in', 'essential-addons-for-elementor-lite' ), 
-                    'ease-out'    => __( 'Ease-out', 'essential-addons-for-elementor-lite' ), 
-                    'ease-in-out' => __( 'Ease-in-out', 'essential-addons-for-elementor-lite' ), 
-                ],
-                'condition' => [
-					'eael_hover_effect_sepia_hover_is_on' => 'yes', 
-				],
-			]
         );
         //Sepia End
         $element->end_popover();
@@ -1475,68 +1050,6 @@ class Hover_Effect {
 				],
             ]
 		);
-
-        //Duration
-        $element->add_control(
-			'eael_hover_effect_rotate_hover_duration',
-			[
-                'label'     => __( 'Duration (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'default'   => [
-                    'unit' => 'px',
-					'size' => 1000,
-                ],
-				'condition' => [
-					'eael_hover_effect_rotate_hover_is_on' => 'yes', 
-				],
-            ]
-		);
-
-        //Delay
-		$element->add_control(
-			'eael_hover_effect_rotate_hover_delay',
-			[
-                'label'     => __( 'Delay (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'condition' => [
-					'eael_hover_effect_rotate_hover_is_on' => 'yes', 
-				],
-            ]
-		);
-
-        $element->add_control(
-			'eael_hover_effect_rotate_hover_easing',
-			[
-				'label'                 => __( 'Easing', 'essential-addons-for-elementor-lite' ),
-				'type'                  => Controls_Manager::SELECT,
-				'default'               => 'ease',
-				'frontend_available'    => true, 
-                'separator'             => 'before', 
-				'options'               => [
-					'ease'        => __( 'Default', 'essential-addons-for-elementor-lite' ), 
-					'ease-in'     => __( 'Ease-in', 'essential-addons-for-elementor-lite' ), 
-                    'ease-out'    => __( 'Ease-out', 'essential-addons-for-elementor-lite' ), 
-                    'ease-in-out' => __( 'Ease-in-out', 'essential-addons-for-elementor-lite' ), 
-                ],
-                'condition' => [
-					'eael_hover_effect_rotate_hover_is_on' => 'yes', 
-				],
-			]
-        );
         //Rotate End
 
         //Scale Start
@@ -1580,75 +1093,13 @@ class Hover_Effect {
                     ],
 				],
                 'default' => [
-					'size' => 1,
+					'size' => 0,
 				],
                 'condition' => [
 					'eael_hover_effect_scale_hover_is_on' => 'yes', 
 				],
             ]
 		);
-
-        //Duration
-        $element->add_control(
-			'eael_hover_effect_scale_hover_duration',
-			[
-                'label'     => __( 'Duration (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'default'   => [
-                    'unit' => 'px',
-					'size' => 1000,
-                ],
-				'condition' => [
-					'eael_hover_effect_scale_hover_is_on' => 'yes', 
-				],
-            ]
-		);
-
-        //Delay
-		$element->add_control(
-			'eael_hover_effect_scale_hover_delay',
-			[
-                'label'     => __( 'Delay (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'condition' => [
-					'eael_hover_effect_scale_hover_is_on' => 'yes', 
-				],
-            ]
-        );
-
-        $element->add_control(
-			'eael_hover_effect_scale_hover_easing',
-			[
-				'label'                 => __( 'Easing', 'essential-addons-for-elementor-lite' ),
-				'type'                  => Controls_Manager::SELECT,
-				'default'               => 'ease',
-				'frontend_available'    => true, 
-                'separator'             => 'before', 
-				'options'               => [
-					'ease'        => __( 'Default', 'essential-addons-for-elementor-lite' ), 
-					'ease-in'     => __( 'Ease-in', 'essential-addons-for-elementor-lite' ), 
-                    'ease-out'    => __( 'Ease-out', 'essential-addons-for-elementor-lite' ), 
-                    'ease-in-out' => __( 'Ease-in-out', 'essential-addons-for-elementor-lite' ), 
-                ],
-                'condition' => [
-					'eael_hover_effect_scale_hover_is_on' => 'yes', 
-				],
-			]
-        );
         //Scale End
 
         //Skew
@@ -1701,68 +1152,6 @@ class Hover_Effect {
 				],
             ]
 		);
-
-        //Duration
-        $element->add_control(
-			'eael_hover_effect_skew_hover_duration',
-			[
-                'label'     => __( 'Duration (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'default'   => [
-                    'unit' => 'px',
-					'size' => 1000,
-                ],
-				'condition' => [
-					'eael_hover_effect_skew_hover_is_on' => 'yes', 
-				],
-            ]
-		);
-
-        //Delay
-		$element->add_control(
-			'eael_hover_effect_skew_hover_delay',
-			[
-                'label'     => __( 'Delay (ms)', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-                    'px' => [
-                        'min'  => 0,
-						'max'  => 10000,
-						'step' => 100,
-                    ],
-                ],
-				'condition' => [
-					'eael_hover_effect_skew_hover_is_on' => 'yes', 
-				],
-            ]
-		);
-
-        $element->add_control(
-			'eael_hover_effect_skew_hover_easing',
-			[
-				'label'                 => __( 'Easing', 'essential-addons-for-elementor-lite' ),
-				'type'                  => Controls_Manager::SELECT,
-				'default'               => 'ease',
-				'frontend_available'    => true, 
-                'separator'             => 'before', 
-				'options'               => [
-					'ease'        => __( 'Default', 'essential-addons-for-elementor-lite' ), 
-					'ease-in'     => __( 'Ease-in', 'essential-addons-for-elementor-lite' ), 
-                    'ease-out'    => __( 'Ease-out', 'essential-addons-for-elementor-lite' ), 
-                    'ease-in-out' => __( 'Ease-in-out', 'essential-addons-for-elementor-lite' ), 
-                ],
-                'condition' => [
-					'eael_hover_effect_skew_hover_is_on' => 'yes', 
-				],
-			]
-        );
         //Skew End
         $element->end_popover();
 
