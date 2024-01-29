@@ -23,6 +23,9 @@ let HoverEffectHandler = function ($scope, $) {
     $eaelDuration              = $scope.data('eael_duration'),
     $eaelDelay              = $scope.data('eael_delay'),
     $eaelEasing              = $scope.data('eael_easing'),
+    $eaelHoverDuration              = $scope.data('eael_hover_duration'),
+    $eaelHoverDelay              = $scope.data('eael_hover_delay'),
+    $eaelHoverEasing              = $scope.data('eael_hover_easing'),
     $eaelContainer        = $('.elementor-widget-container', $scope);
 
     let hoverSelector = `body [data-id="${$scopeId}"] > .elementor-widget-container`;
@@ -34,6 +37,11 @@ let HoverEffectHandler = function ($scope, $) {
     let $eaelDurationVal = $eaelDuration ? $eaelDuration?.transitionDuration : '0';
     let $eaelDelayVal = $eaelDelay ? $eaelDelay?.transitionDelay : '0';
     let $eaelEasingVal = $eaelEasing ? $eaelEasing?.transitionEasing : '0';
+
+    //Transitions Hover
+    let $eaelDurationHoverVal = $eaelHoverDuration ? $eaelHoverDuration?.transitionDuration : '0';
+    let $eaelDelayHoverVal = $eaelHoverDelay ? $eaelHoverDelay?.transitionDelay : '0';
+    let $eaelEasingHoverVal = $eaelHoverEasing ? $eaelHoverEasing?.transitionEasing : '0';
 
     //Filter
     let $blur      = $eaelBlurEffect?.blur ? `blur(${$eaelBlurEffect.blur}px)`                        : 'blur(0px)';
@@ -96,9 +104,9 @@ let HoverEffectHandler = function ($scope, $) {
         'filter': `${$blurHover} ${$contrastHover} ${$grayscaleHover} ${$invertHover} ${$saturateHover} ${$sepiaHover}`,
         "transform": `${$rotateXHover} ${$rotateYHover} ${$rotateZHover} ${$scaleXHover} ${$scaleYHover} ${$skewXHover} ${$skewYHover}`,
         "transition-property": 'all',
-        "transition-duration": `1000ms`,
-        "transition-delay": '2s',
-        "transition-timing-function": 'ease-in-out',
+        "transition-duration": `${$eaelDurationHoverVal}ms`,
+        "transition-delay": `${$eaelDelayHoverVal}ms`,
+        "transition-timing-function": $eaelEasingHoverVal,
     };
 
     $(hoverSelector).hover(
