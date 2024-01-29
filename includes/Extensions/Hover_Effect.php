@@ -48,18 +48,21 @@ class Hover_Effect {
 			'eael_hover_effect_normal_tab',
 			[
 				'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'eael_hover_effect_switch' => 'yes',
+				]
 			]
 		);
 
         //Background
-        $element->add_group_control(
-			\Elementor\Group_Control_Background::get_type(),
-			[
-				'name'     => 'eael_hover_effect_background',
-				'types'    => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .elementor-widget-container',
-			]
-		);
+        // $element->add_group_control(
+		// 	\Elementor\Group_Control_Background::get_type(),
+		// 	[
+		// 		'name'     => 'eael_hover_effect_background',
+		// 		'types'    => [ 'classic', 'gradient' ],
+		// 		'selector' => '{{WRAPPER}} .elementor-widget-container',
+		// 	]
+		// );
 
         //Opacity
         $element->add_control(
@@ -68,6 +71,9 @@ class Hover_Effect {
 				'label'              => __( 'Opacity', 'essential-addons-for-elementor-lite' ), 
                 'type'               => Controls_Manager::POPOVER_TOGGLE, 
                 'return_value'       => 'yes',
+				'condition' => [
+					'eael_hover_effect_switch' => 'yes',
+				]
 			]
 		);
 
@@ -97,6 +103,9 @@ class Hover_Effect {
 				'label'              => __( 'Filter', 'essential-addons-for-elementor-lite' ), 
                 'type'               => Controls_Manager::POPOVER_TOGGLE, 
                 'return_value'       => 'yes',
+				'condition' => [
+					'eael_hover_effect_switch' => 'yes',
+				]
 			]
 		);
 
@@ -262,7 +271,7 @@ class Hover_Effect {
                 'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
                 'type'               => Controls_Manager::SLIDER,
                 'default' => [
-					'size' => 1,
+					'size' => 0,
 				],
                 'range' => [
                     '%' => [
@@ -285,6 +294,9 @@ class Hover_Effect {
                 'type'               => Controls_Manager::POPOVER_TOGGLE, 
                 'return_value'       => 'yes', 
                 'frontend_available' => true,
+				'condition' => [
+					'eael_hover_effect_switch' => 'yes',
+				]
 			]
 		);
         $element->start_popover();
@@ -351,6 +363,9 @@ class Hover_Effect {
                 'type'               => Controls_Manager::POPOVER_TOGGLE, 
                 'return_value'       => 'yes', 
                 'frontend_available' => true,
+				'condition' => [
+					'eael_hover_effect_switch' => 'yes',
+				]
 			]
 		);
         
@@ -452,7 +467,7 @@ class Hover_Effect {
                     ],
 				],
                 'default' => [
-					'size' => 1,
+					'size' => 0,
 				],
                 'condition' => [
 					'eael_hover_effect_scale_is_on' => 'yes', 
@@ -473,7 +488,7 @@ class Hover_Effect {
                     ],
 				],
                 'default' => [
-					'size' => 1,
+					'size' => 0,
 				],
                 'condition' => [
 					'eael_hover_effect_scale_is_on' => 'yes', 
@@ -536,6 +551,79 @@ class Hover_Effect {
 
         $element->end_popover();
 
+		// General Settings
+		$element->add_control(
+			'eael_hover_effect_general_settings_heading',
+			[
+				'label'     => __( 'General Settings', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+				'condition' => [
+					'eael_hover_effect_switch' => 'yes',
+				]
+			]
+		);
+
+		//Duration
+        $element->add_control(
+			'eael_hover_effect_general_settings_duration',
+			[
+                'label'     => __( 'Duration (ms)', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => [
+                    'px' => [
+                        'min'  => 0,
+						'max'  => 10000,
+						'step' => 100,
+                    ],
+                ],
+				'default'   => [
+					'size' => 1000,
+                ],
+				'condition' => [
+					'eael_hover_effect_switch' => 'yes',
+				]
+            ]
+		);
+
+        //Delay
+		$element->add_control(
+			'eael_hover_effect_general_settings_delay',
+			[
+                'label'     => __( 'Delay (ms)', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => [
+                    'px' => [
+                        'min'  => 0,
+						'max'  => 10000,
+						'step' => 100,
+                    ],
+                ],
+				'condition' => [
+					'eael_hover_effect_switch' => 'yes',
+				]
+            ]
+		);
+
+        $element->add_control(
+			'eael_hover_effect_general_settings_easing',
+			[
+				'label'                 => __( 'Easing', 'essential-addons-for-elementor-lite' ),
+				'type'                  => Controls_Manager::SELECT,
+				'default'               => 'ease',
+				'frontend_available'    => true,
+				'options'               => [
+					'ease'        => __( 'Default', 'essential-addons-for-elementor-lite' ), 
+					'ease-in'     => __( 'Ease-in', 'essential-addons-for-elementor-lite' ), 
+                    'ease-out'    => __( 'Ease-out', 'essential-addons-for-elementor-lite' ), 
+                    'ease-in-out' => __( 'Ease-in-out', 'essential-addons-for-elementor-lite' ), 
+                ],
+				'condition' => [
+					'eael_hover_effect_switch' => 'yes',
+				]
+			]
+        );
+
         $element->end_controls_tab();
 
         /**
@@ -545,18 +633,21 @@ class Hover_Effect {
 			'eael_hover_effect_hover_tab',
 			[
 				'label' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'eael_hover_effect_switch' => 'yes',
+				]
 			]
 		);
 
          //Background Hover
-        $element->add_group_control(
-			\Elementor\Group_Control_Background::get_type(),
-			[
-				'name'     => 'eael_hover_effect_background_hover',
-				'types'    => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .your-class',
-			]
-		);
+        // $element->add_group_control(
+		// 	\Elementor\Group_Control_Background::get_type(),
+		// 	[
+		// 		'name'     => 'eael_hover_effect_background_hover',
+		// 		'types'    => [ 'classic', 'gradient' ],
+		// 		'selector' => '{{WRAPPER}} .your-class',
+		// 	]
+		// );
 
         //Opacity Hover
         $element->add_control(
@@ -566,6 +657,9 @@ class Hover_Effect {
                 'type'               => Controls_Manager::POPOVER_TOGGLE, 
                 'return_value'       => 'yes', 
                 'frontend_available' => true,
+				'condition' => [
+					'eael_hover_effect_switch' => 'yes',
+				]
 			]
 		);
 
@@ -649,6 +743,9 @@ class Hover_Effect {
 				'label'              => __( 'Filter', 'essential-addons-for-elementor-lite' ), 
                 'type'               => Controls_Manager::POPOVER_TOGGLE, 
                 'return_value'       => 'yes',
+				'condition' => [
+					'eael_hover_effect_switch' => 'yes',
+				]
 			]
 		);
 
@@ -1230,6 +1327,9 @@ class Hover_Effect {
                 'type'               => Controls_Manager::POPOVER_TOGGLE, 
                 'return_value'       => 'yes', 
                 'frontend_available' => true,
+				'condition' => [
+					'eael_hover_effect_switch' => 'yes',
+				]
 			]
 		);
         $element->start_popover();
@@ -1297,6 +1397,9 @@ class Hover_Effect {
                 'type'               => Controls_Manager::POPOVER_TOGGLE, 
                 'return_value'       => 'yes', 
                 'frontend_available' => true,
+				'condition' => [
+					'eael_hover_effect_switch' => 'yes',
+				]
 			]
 		);
         
@@ -1663,6 +1766,80 @@ class Hover_Effect {
         //Skew End
         $element->end_popover();
 
+		// General Settings
+		$element->add_control(
+			'eael_hover_effect_general_settings_hover_heading',
+			[
+				'label'     => __( 'General Settings', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+				'condition' => [
+					'eael_hover_effect_switch' => 'yes',
+				]
+			]
+		);
+
+		//Duration
+        $element->add_control(
+			'eael_hover_effect_general_settings_hover_duration',
+			[
+                'label'     => __( 'Duration (ms)', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => [
+                    'px' => [
+                        'min'  => 0,
+						'max'  => 10000,
+						'step' => 100,
+                    ],
+                ],
+				'default'   => [
+                    'unit' => 'px',
+					'size' => 1000,
+                ],
+				'condition' => [
+					'eael_hover_effect_switch' => 'yes',
+				]
+            ]
+		);
+
+        //Delay
+		$element->add_control(
+			'eael_hover_effect_general_settings_hover_delay',
+			[
+                'label'     => __( 'Delay (ms)', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => [
+                    'px' => [
+                        'min'  => 0,
+						'max'  => 10000,
+						'step' => 100,
+                    ],
+                ],
+				'condition' => [
+					'eael_hover_effect_switch' => 'yes',
+				]
+            ]
+		);
+
+        $element->add_control(
+			'eael_hover_effect_general_settings_hover_easing',
+			[
+				'label'                 => __( 'Easing', 'essential-addons-for-elementor-lite' ),
+				'type'                  => Controls_Manager::SELECT,
+				'default'               => 'ease',
+				'frontend_available'    => true,
+				'options'               => [
+					'ease'        => __( 'Default', 'essential-addons-for-elementor-lite' ), 
+					'ease-in'     => __( 'Ease-in', 'essential-addons-for-elementor-lite' ), 
+                    'ease-out'    => __( 'Ease-out', 'essential-addons-for-elementor-lite' ), 
+                    'ease-in-out' => __( 'Ease-in-out', 'essential-addons-for-elementor-lite' ), 
+                ],
+				'condition' => [
+					'eael_hover_effect_switch' => 'yes',
+				]
+			]
+        );
+
         $element->end_controls_tab();
         $element->end_controls_tabs();
 		$element->end_controls_section();
@@ -1677,6 +1854,30 @@ class Hover_Effect {
 				'opacity' => $settings['eael_hover_effect_opacity']['size'],
 			];
 			$element->add_render_attribute( '_wrapper', 'data-eael_opacity', wp_json_encode( $opacity_settings ) );
+		}
+
+		//Transition Duration
+		if( !empty( $settings['eael_hover_effect_general_settings_duration']['size'] ) ) {
+			$opacity_settings = [
+				'transitionDuration' => $settings['eael_hover_effect_general_settings_duration']['size'],
+			];
+			$element->add_render_attribute( '_wrapper', 'data-eael_duration', wp_json_encode( $opacity_settings ) );
+		}
+
+		//Transition Delay
+		if( !empty( $settings['eael_hover_effect_general_settings_delay']['size'] ) ) {
+			$opacity_settings = [
+				'transitionDelay' => $settings['eael_hover_effect_general_settings_delay']['size'],
+			];
+			$element->add_render_attribute( '_wrapper', 'data-eael_delay', wp_json_encode( $opacity_settings ) );
+		}
+
+		//Transition
+		if( !empty( $settings['eael_hover_effect_general_settings_easing'] ) ) {
+			$opacity_settings = [
+				'transitionEasing' => $settings['eael_hover_effect_general_settings_easing'],
+			];
+			$element->add_render_attribute( '_wrapper', 'data-eael_easing', wp_json_encode( $opacity_settings ) );
 		}
 
 		//Blur Effect
@@ -1756,6 +1957,14 @@ class Hover_Effect {
 		}
 
 		//For Hover
+		//Opacity
+		if( !empty( $settings['eael_hover_effect_opacity_hover']['size'] ) ) {
+			$opacity_settings = [
+				'opacity' => $settings['eael_hover_effect_opacity_hover']['size'],
+			];
+			$element->add_render_attribute( '_wrapper', 'data-eael_opacity_hover', wp_json_encode( $opacity_settings ) );
+		}
+
 		//blur
 		if( 'yes' == $settings['eael_hover_effect_blur_hover_is_on'] ) {
 			$blur_settings = [

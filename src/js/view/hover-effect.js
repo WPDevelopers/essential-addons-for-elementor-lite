@@ -19,35 +19,45 @@ let HoverEffectHandler = function ($scope, $) {
     $eaelRotateHoverEffect = $scope.data('eael_rotate_hover_effect'),
     $eaelScaleHoverEffect = $scope.data('eael_scale_hover_effect'),
     $eaelSkewHoverEffect = $scope.data('eael_skew_hover_effect'),
+    $opacityHover              = $scope.data('eael_opacity_hover'),
+    $eaelDuration              = $scope.data('eael_duration'),
+    $eaelDelay              = $scope.data('eael_delay'),
+    $eaelEasing              = $scope.data('eael_easing'),
     $eaelContainer        = $('.elementor-widget-container', $scope);
 
     let hoverSelector = `body [data-id="${$scopeId}"] > .elementor-widget-container`;
 
     //Opacity
     let $opacityVal = $Opacity ? $Opacity?.opacity : '1';
+    
+    //Transitions
+    let $eaelDurationVal = $eaelDuration ? $eaelDuration?.transitionDuration : '0';
+    let $eaelDelayVal = $eaelDelay ? $eaelDelay?.transitionDelay : '0';
+    let $eaelEasingVal = $eaelEasing ? $eaelEasing?.transitionEasing : '0';
 
     //Filter
-    let $blur      = $eaelBlurEffect?.blur ? `blur(${$eaelBlurEffect.blur}px)`                        : '';
-    let $contrast  = $eaelContrastEffect?.contrast ? `contrast(${$eaelContrastEffect.contrast}%)`     : '';
-    let $grayscale = $eaelGrayscaleEffect?.grayscale ? `grayscale(${$eaelGrayscaleEffect.grayscale}%)`: '';
-    let $invert    = $eaelInvertEffect?.invert ? `invert(${$eaelInvertEffect.invert}%)`               : '';
-    let $saturate  = $eaelSaturateEffect?.saturate ? `saturate(${$eaelSaturateEffect.saturate}%)`     : '';
-    let $sepia     = $eaelSepiaEffect?.sepia ? `sepia(${$eaelSepiaEffect.sepia}%)` : '';
+    let $blur      = $eaelBlurEffect?.blur ? `blur(${$eaelBlurEffect.blur}px)`                        : 'blur(0px)';
+    let $contrast  = $eaelContrastEffect?.contrast ? `contrast(${$eaelContrastEffect.contrast}%)`     : 'contrast(100%)';
+    let $grayscale = $eaelGrayscaleEffect?.grayscale ? `grayscale(${$eaelGrayscaleEffect.grayscale}%)`: 'grayscale(0%)';
+    let $invert    = $eaelInvertEffect?.invert ? `invert(${$eaelInvertEffect.invert}%)`               : 'invert(0%)';
+    let $saturate  = $eaelSaturateEffect?.saturate ? `saturate(${$eaelSaturateEffect.saturate}%)`     : 'saturate(100%)';
+    let $sepia     = $eaelSepiaEffect?.sepia ? `sepia(${$eaelSepiaEffect.sepia}%)` : 'sepia(0%)';
 
     //Rotate
-    let $rotateX = $eaelRotateEffect?.rotate_x ? `rotateX(${$eaelRotateEffect.rotate_x}deg)` : '';
-    let $rotateY = $eaelRotateEffect?.rotate_y ? `rotateY(${$eaelRotateEffect.rotate_y}deg)` : '';
-    let $rotateZ = $eaelRotateEffect?.rotate_z ? `rotateZ(${$eaelRotateEffect.rotate_z}deg)` : '';
+    let $rotateX = $eaelRotateEffect?.rotate_x ? `rotateX(${$eaelRotateEffect.rotate_x}deg)` : 'rotateX(0)';
+    let $rotateY = $eaelRotateEffect?.rotate_y ? `rotateY(${$eaelRotateEffect.rotate_y}deg)` : 'rotateY(0)';
+    let $rotateZ = $eaelRotateEffect?.rotate_z ? `rotateZ(${$eaelRotateEffect.rotate_z}deg)` : 'rotateZ(0)';
 
     //Scale
-    let $scaleX = $eaelScaleEffect?.scale_x ? `scaleX(${$eaelScaleEffect.scale_x})` : '';
-    let $scaleY = $eaelScaleEffect?.scale_y ? `scaleY(${$eaelScaleEffect.scale_y})` : '';
+    let $scaleX = $eaelScaleEffect?.scale_x ? `scaleX(${$eaelScaleEffect.scale_x})` : 'scaleX(1)';
+    let $scaleY = $eaelScaleEffect?.scale_y ? `scaleY(${$eaelScaleEffect.scale_y})` : 'scaleY(1)';
     
     //Skew
-    let $skewX = $eaelSkewEffect?.skew_x ? `skewX(${$eaelSkewEffect.skew_x}deg)` : '';
-    let $skewY = $eaelSkewEffect?.skew_y ? `skewY(${$eaelSkewEffect.skew_y}deg)` : '';
+    let $skewX = $eaelSkewEffect?.skew_x ? `skewX(${$eaelSkewEffect.skew_x}deg)` : 'skewX(0deg)';
+    let $skewY = $eaelSkewEffect?.skew_y ? `skewY(${$eaelSkewEffect.skew_y}deg)` : 'skewY(0deg)';
 
     //Hover
+    let $opacityHoverVal = $opacityHover ? $opacityHover?.opacity : '1';
     //Rotate
     let $rotateXHover = $eaelRotateHoverEffect?.rotate_x ? `rotateX(${$eaelRotateHoverEffect.rotate_x}deg)` : '';
     let $rotateYHover = $eaelRotateHoverEffect?.rotate_y ? `rotateY(${$eaelRotateHoverEffect.rotate_y}deg)` : '';
@@ -74,15 +84,21 @@ let HoverEffectHandler = function ($scope, $) {
         "transform": `${$rotateX} ${$rotateY} ${$rotateZ} ${$scaleX} ${$scaleY} ${$skewX} ${$skewY}`,
         "opacity": $opacityVal,
         "filter": `${$blur} ${$contrast} ${$grayscale} ${$invert} ${$saturate} ${$sepia}`,
-        "transition": `1s`
+        "transition-property": 'all',
+        "transition-duration": `${$eaelDurationVal}ms`,
+        "transition-delay": `${$eaelDelayVal}ms`,
+        "transition-timing-function": $eaelEasingVal,
     }
 
     //Hover
     let hoverStyles = {
-        'opacity': '.5',
+        'opacity': $opacityHoverVal,
         'filter': `${$blurHover} ${$contrastHover} ${$grayscaleHover} ${$invertHover} ${$saturateHover} ${$sepiaHover}`,
         "transform": `${$rotateXHover} ${$rotateYHover} ${$rotateZHover} ${$scaleXHover} ${$scaleYHover} ${$skewXHover} ${$skewYHover}`,
-        "transition": `.5s`
+        "transition-property": 'all',
+        "transition-duration": `1000ms`,
+        "transition-delay": '2s',
+        "transition-timing-function": 'ease-in-out',
     };
 
     $(hoverSelector).hover(
