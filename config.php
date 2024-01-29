@@ -1148,6 +1148,11 @@ $config = [
 				        'type'    => 'lib',
 				        'context' => 'view',
 			        ],
+			        [
+				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/photo-sphere-viewer/markers.min.css',
+				        'type'    => 'lib',
+				        'context' => 'view',
+			        ],
 //			        [
 //				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/sphere-photo-viewer.min.css',
 //				        'type'    => 'self',
@@ -1167,6 +1172,11 @@ $config = [
 			        ],
 			        [
 				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/photo-sphere-viewer/autorotate.min.js',
+				        'type'    => 'lib',
+				        'context' => 'view',
+			        ],
+			        [
+				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/photo-sphere-viewer/markers.min.js',
 				        'type'    => 'lib',
 				        'context' => 'view',
 			        ],
