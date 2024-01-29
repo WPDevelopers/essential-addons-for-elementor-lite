@@ -5,9 +5,9 @@
 })(this, (function (exports, THREE) {
 
     /*!
- * PhotoSphereViewer 5.4.4
+ * PhotoSphereViewer 5.6.0
  * @copyright 2014-2015 Jérémy Heleine
- * @copyright 2023 Damien "Mistic" Sorel
+ * @copyright 2024 Damien "Mistic" Sorel
  * @licence MIT (https://opensource.org/licenses/MIT)
  */
     "use strict";
@@ -45,12 +45,13 @@
         PSVError: () => PSVError,
         SYSTEM: () => SYSTEM,
         TypedEvent: () => TypedEvent,
+        VERSION: () => VERSION,
         Viewer: () => Viewer,
         events: () => events_exports,
         registerButton: () => registerButton,
         utils: () => utils_exports
     });
-    var import_three13 = require_three();
+    var import_three12 = require_three();
 
     // src/data/constants.ts
     var constants_exports = {};
@@ -192,6 +193,7 @@
         angle: () => angle,
         applyEulerInverse: () => applyEulerInverse,
         checkStylesheet: () => checkStylesheet,
+        checkVersion: () => checkVersion,
         cleanCssPosition: () => cleanCssPosition,
         clone: () => clone,
         createTexture: () => createTexture,
@@ -209,7 +211,6 @@
         getElement: () => getElement,
         getPosition: () => getPosition,
         getShortestArc: () => getShortestArc,
-        getStyle: () => getStyle,
         getStyleProperty: () => getStyleProperty,
         getTouchData: () => getTouchData,
         getXMPValue: () => getXMPValue,
@@ -339,9 +340,6 @@
             test = test.offsetParent;
         }
         return { x, y };
-    }
-    function getStyle(elt, prop) {
-        return window.getComputedStyle(elt, null)[prop];
     }
     function getStyleProperty(elt, varname) {
         return window.getComputedStyle(elt).getPropertyValue(varname);
@@ -735,6 +733,11 @@
     function checkStylesheet(element, name) {
         if (getStyleProperty(element, `--psv-${name}-loaded`) !== "true") {
             console.error(`PhotoSphereViewer: stylesheet "@photo-sphere-viewer/${name}/index.css" is not loaded`);
+        }
+    }
+    function checkVersion(name, version, coreVersion) {
+        if (version && version !== coreVersion) {
+            console.error(`PhotoSphereViewer: @photo-sphere-viewer/${name} is in version ${version} but @photo-sphere-viewer/core is in version ${coreVersion}`);
         }
     }
 
@@ -1244,6 +1247,7 @@
         ObjectHoverEvent: () => ObjectHoverEvent,
         ObjectLeaveEvent: () => ObjectLeaveEvent,
         PanoramaErrorEvent: () => PanoramaErrorEvent,
+        PanoramaLoadEvent: () => PanoramaLoadEvent,
         PanoramaLoadedEvent: () => PanoramaLoadedEvent,
         PositionUpdatedEvent: () => PositionUpdatedEvent,
         ReadyEvent: () => ReadyEvent,
@@ -1412,6 +1416,15 @@
     };
     _LoadProgressEvent.type = "load-progress";
     var LoadProgressEvent = _LoadProgressEvent;
+    var _PanoramaLoadEvent = class _PanoramaLoadEvent extends ViewerEvent {
+        /** @internal */
+        constructor(panorama) {
+            super(_PanoramaLoadEvent.type);
+            this.panorama = panorama;
+        }
+    };
+    _PanoramaLoadEvent.type = "panorama-load";
+    var PanoramaLoadEvent = _PanoramaLoadEvent;
     var _PanoramaLoadedEvent = class _PanoramaLoadedEvent extends ViewerEvent {
         /** @internal */
         constructor(data) {
@@ -1555,8 +1568,7 @@
     var ObjectHoverEvent = _ObjectHoverEvent;
 
     // src/adapters/AbstractAdapter.ts
-    var import_three3 = require_three();
-    var _AbstractAdapter = class _AbstractAdapter {
+    var AbstractAdapter = class {
         constructor(viewer) {
             this.viewer = viewer;
         }
@@ -1575,7 +1587,7 @@
         /**
          * Indicates if the adapter supports transitions between panoramas
          */
-        // @ts-ignore unused paramater
+        // @ts-ignore unused parameter
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         supportsTransition(panorama) {
             return false;
@@ -1583,74 +1595,39 @@
         /**
          * Indicates if the adapter supports preload of a panorama
          */
-        // @ts-ignore unused paramater
+        // @ts-ignore unused parameter
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         supportsPreload(panorama) {
             return false;
         }
         /**
-         * @internal
+         * Converts pixel texture coordinates to spherical radians coordinates
+         * @throws {@link PSVError} when the current adapter does not support texture coordinates
          */
-        static createOverlayMaterial({
-                                         additionalUniforms,
-                                         overrideVertexShader
-                                     } = {}) {
-            return new import_three3.ShaderMaterial({
-                uniforms: {
-                    ...additionalUniforms,
-                    [_AbstractAdapter.OVERLAY_UNIFORMS.panorama]: { value: null },
-                    [_AbstractAdapter.OVERLAY_UNIFORMS.overlay]: { value: null },
-                    [_AbstractAdapter.OVERLAY_UNIFORMS.globalOpacity]: { value: 1 },
-                    [_AbstractAdapter.OVERLAY_UNIFORMS.overlayOpacity]: { value: 0 }
-                },
-                vertexShader: overrideVertexShader || `
-varying vec2 vUv;
-
-void main() {
-  vUv = uv;
-  gl_Position = projectionMatrix *  modelViewMatrix * vec4( position, 1.0 );
-}`,
-                fragmentShader: `
-uniform sampler2D ${_AbstractAdapter.OVERLAY_UNIFORMS.panorama};
-uniform sampler2D ${_AbstractAdapter.OVERLAY_UNIFORMS.overlay};
-uniform float ${_AbstractAdapter.OVERLAY_UNIFORMS.globalOpacity};
-uniform float ${_AbstractAdapter.OVERLAY_UNIFORMS.overlayOpacity};
-
-varying vec2 vUv;
-
-void main() {
-  vec4 tColor1 = texture2D( ${_AbstractAdapter.OVERLAY_UNIFORMS.panorama}, vUv );
-  vec4 tColor2 = texture2D( ${_AbstractAdapter.OVERLAY_UNIFORMS.overlay}, vUv );
-  gl_FragColor = vec4(
-    mix( tColor1.rgb, tColor2.rgb, tColor2.a * ${_AbstractAdapter.OVERLAY_UNIFORMS.overlayOpacity} ),
-    ${_AbstractAdapter.OVERLAY_UNIFORMS.globalOpacity}
-  );
-}`
-            });
+        // @ts-ignore unused parameter
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        textureCoordsToSphericalCoords(point, data) {
+            throw new PSVError("Current adapter does not support texture coordinates.");
+        }
+        /**
+         * Converts spherical radians coordinates to pixel texture coordinates
+         * @throws {@link PSVError} when the current adapter does not support texture coordinates
+         */
+        // @ts-ignore unused parameter
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        sphericalCoordsToTextureCoords(position, data) {
+            throw new PSVError("Current adapter does not support texture coordinates.");
         }
     };
     /**
      * Indicates if the adapter supports panorama download natively
      */
-    _AbstractAdapter.supportsDownload = false;
-    /**
-     * Indicates if the adapter can display an additional transparent image above the panorama
-     */
-    _AbstractAdapter.supportsOverlay = false;
-    /**
-     * @internal
-     */
-    _AbstractAdapter.OVERLAY_UNIFORMS = {
-        panorama: "panorama",
-        overlay: "overlay",
-        globalOpacity: "globalOpacity",
-        overlayOpacity: "overlayOpacity"
-    };
-    var AbstractAdapter = _AbstractAdapter;
+    AbstractAdapter.supportsDownload = false;
     function adapterInterop(adapter) {
         if (adapter) {
             for (const [, p] of [["_", adapter], ...Object.entries(adapter)]) {
                 if (p.prototype instanceof AbstractAdapter) {
+                    checkVersion(p.id, p.VERSION, "5.6.0");
                     return p;
                 }
             }
@@ -1659,7 +1636,7 @@ void main() {
     }
 
     // src/adapters/EquirectangularAdapter.ts
-    var import_three4 = require_three();
+    var import_three3 = require_three();
 
     // src/data/system.ts
     var LOCALSTORAGE_TOUCH_SUPPORT = `${VIEWER_DATA}_touchSupport`;
@@ -2007,7 +1984,7 @@ void main() {
         },
         {
             resolution: (resolution) => {
-                if (!resolution || !import_three4.MathUtils.isPowerOfTwo(resolution)) {
+                if (!resolution || !import_three3.MathUtils.isPowerOfTwo(resolution)) {
                     throw new PSVError("EquirectangularAdapter resolution must be power of two");
                 }
                 return resolution;
@@ -2018,12 +1995,6 @@ void main() {
         constructor(viewer, config) {
             super(viewer);
             this.config = getConfig(config);
-            if (!isNil(this.viewer.config.useXmpData)) {
-                this.config.useXmpData = this.viewer.config.useXmpData;
-            }
-            if (!isNil(this.viewer.config.canvasBackground)) {
-                this.config.backgroundColor = this.viewer.config.canvasBackground;
-            }
             if (this.config.interpolateBackground) {
                 if (!window.Worker) {
                     logWarn("Web Worker API not available");
@@ -2045,11 +2016,36 @@ void main() {
             this.interpolationWorker?.terminate();
             super.destroy();
         }
-        async loadTexture(panorama, newPanoData, useXmpPanoData = this.config.useXmpData) {
+        textureCoordsToSphericalCoords(point, data) {
+            if (isNil(point.textureX) || isNil(point.textureY)) {
+                throw new PSVError(`Texture position is missing 'textureX' or 'textureY'`);
+            }
+            const relativeX = (point.textureX + data.croppedX) / data.fullWidth * Math.PI * 2;
+            const relativeY = (point.textureY + data.croppedY) / data.fullHeight * Math.PI;
+            return {
+                yaw: relativeX >= Math.PI ? relativeX - Math.PI : relativeX + Math.PI,
+                pitch: Math.PI / 2 - relativeY
+            };
+        }
+        sphericalCoordsToTextureCoords(position, data) {
+            const relativeLong = position.yaw / Math.PI / 2 * data.fullWidth;
+            const relativeLat = position.pitch / Math.PI * data.fullHeight;
+            return {
+                textureX: Math.round(
+                    position.yaw < Math.PI ? relativeLong + data.fullWidth / 2 : relativeLong - data.fullWidth / 2
+                ) - data.croppedX,
+                textureY: Math.round(data.fullHeight / 2 - relativeLat) - data.croppedY
+            };
+        }
+        async loadTexture(panorama, loader = true, newPanoData, useXmpPanoData = this.config.useXmpData) {
             if (typeof panorama !== "string") {
                 return Promise.reject(new PSVError("Invalid panorama url, are you using the right adapter?"));
             }
-            const blob = await this.viewer.textureLoader.loadFile(panorama, (p) => this.viewer.loader.setProgress(p), panorama);
+            const blob = await this.viewer.textureLoader.loadFile(
+                panorama,
+                loader ? (p) => this.viewer.loader.setProgress(p) : null,
+                panorama
+            );
             const xmpPanoData = useXmpPanoData ? await this.loadXMP(blob) : null;
             const img = await this.viewer.textureLoader.blobToImage(blob);
             if (typeof newPanoData === "function") {
@@ -2059,6 +2055,7 @@ void main() {
                 newPanoData = this.__defaultPanoData(img);
             }
             const panoData = {
+                isEquirectangular: true,
                 fullWidth: firstNonNull(newPanoData?.fullWidth, xmpPanoData?.fullWidth, img.width),
                 fullHeight: firstNonNull(newPanoData?.fullHeight, xmpPanoData?.fullHeight, img.height),
                 croppedWidth: firstNonNull(newPanoData?.croppedWidth, xmpPanoData?.croppedWidth, img.width),
@@ -2103,6 +2100,7 @@ void main() {
             const data = binary.substring(a, b);
             if (a !== -1 && b !== -1 && data.includes("GPano:")) {
                 return {
+                    isEquirectangular: true,
                     fullWidth: getXMPValue(data, "FullPanoWidthPixels"),
                     fullHeight: getXMPValue(data, "FullPanoHeightPixels"),
                     croppedWidth: getXMPValue(data, "CroppedAreaImageWidthPixels"),
@@ -2181,35 +2179,23 @@ void main() {
             return createTexture(img);
         }
         createMesh(scale = 1) {
-            const geometry = new import_three4.SphereGeometry(
+            const geometry = new import_three3.SphereGeometry(
                 SPHERE_RADIUS * scale,
                 this.SPHERE_SEGMENTS,
                 this.SPHERE_HORIZONTAL_SEGMENTS,
                 -Math.PI / 2
             ).scale(-1, 1, 1);
-            const material = AbstractAdapter.createOverlayMaterial();
-            return new import_three4.Mesh(geometry, material);
+            return new import_three3.Mesh(geometry, new import_three3.MeshBasicMaterial());
         }
         setTexture(mesh, textureData) {
-            this.__setUniform(mesh, AbstractAdapter.OVERLAY_UNIFORMS.panorama, textureData.texture);
-        }
-        setOverlay(mesh, textureData, opacity) {
-            this.__setUniform(mesh, AbstractAdapter.OVERLAY_UNIFORMS.overlayOpacity, opacity);
-            if (!textureData) {
-                this.__setUniform(mesh, AbstractAdapter.OVERLAY_UNIFORMS.overlay, null);
-            } else {
-                this.__setUniform(mesh, AbstractAdapter.OVERLAY_UNIFORMS.overlay, textureData.texture);
-            }
+            mesh.material.map = textureData.texture;
         }
         setTextureOpacity(mesh, opacity) {
-            this.__setUniform(mesh, AbstractAdapter.OVERLAY_UNIFORMS.globalOpacity, opacity);
+            mesh.material.opacity = opacity;
             mesh.material.transparent = opacity < 1;
         }
         disposeTexture(textureData) {
             textureData.texture?.dispose();
-        }
-        __setUniform(mesh, uniform, value) {
-            mesh.material.uniforms[uniform].value = value;
         }
         __defaultPanoData(img) {
             const fullWidth = Math.max(img.width, img.height * 2);
@@ -2217,6 +2203,7 @@ void main() {
             const croppedX = Math.round((fullWidth - img.width) / 2);
             const croppedY = Math.round((fullHeight - img.height) / 2);
             return {
+                isEquirectangular: true,
                 fullWidth,
                 fullHeight,
                 croppedWidth: img.width,
@@ -2227,8 +2214,8 @@ void main() {
         }
     };
     EquirectangularAdapter.id = "equirectangular";
+    EquirectangularAdapter.VERSION = "5.6.0";
     EquirectangularAdapter.supportsDownload = true;
-    EquirectangularAdapter.supportsOverlay = true;
 
     // src/components/AbstractComponent.ts
     var AbstractComponent = class _AbstractComponent {
@@ -2486,7 +2473,14 @@ void main() {
                 this.config.id = "psvButton-" + Math.random().toString(36).substring(2);
             }
             if (config.content) {
-                this.container.innerHTML = config.content;
+                if (typeof config.content === "string") {
+                    this.container.innerHTML = config.content;
+                } else {
+                    this.container.classList.add("psv-custom-button--no-padding");
+                    config.content.style.height = "100%";
+                    config.content.attachViewer?.(this.viewer);
+                    this.container.appendChild(config.content);
+                }
             }
             this.state.width = this.container.offsetWidth;
             if (config.disabled) {
@@ -3040,7 +3034,7 @@ void main() {
     ZoomRangeButton.groupId = "zoom";
 
     // src/data/config.ts
-    var import_three5 = require_three();
+    var import_three4 = require_three();
 
     // src/plugins/AbstractPlugin.ts
     var AbstractPlugin = class extends TypedEventTarget {
@@ -3108,6 +3102,7 @@ void main() {
         if (plugin) {
             for (const [, p] of [["_", plugin], ...Object.entries(plugin)]) {
                 if (p.prototype instanceof AbstractPlugin) {
+                    checkVersion(p.id, p.VERSION, "5.6.0");
                     return p;
                 }
             }
@@ -3118,8 +3113,6 @@ void main() {
     // src/data/config.ts
     var DEFAULTS = {
         panorama: null,
-        overlay: null,
-        overlayOpacity: 1,
         container: null,
         adapter: [EquirectangularAdapter, null],
         plugins: [],
@@ -3144,10 +3137,8 @@ void main() {
         mousemove: true,
         mousewheelCtrlKey: false,
         touchmoveTwoFingers: false,
-        useXmpData: null,
         panoData: null,
         requestHeaders: null,
-        canvasBackground: null,
         rendererParameters: { alpha: true, antialias: true },
         withCredentials: false,
         // prettier-ignore
@@ -3190,8 +3181,6 @@ void main() {
     var READONLY_OPTIONS = {
         panorama: "Use setPanorama method to change the panorama",
         panoData: "Use setPanorama method to change the panorama",
-        overlay: "Use setOverlay method to changer the overlay",
-        overlayOpacity: "Use setOverlay method to changer the overlay",
         container: "Cannot change viewer container",
         adapter: "Cannot change adapter",
         plugins: "Cannot change plugins"
@@ -3219,9 +3208,6 @@ void main() {
             }
             return adapter;
         },
-        overlayOpacity: (overlayOpacity) => {
-            return import_three5.MathUtils.clamp(overlayOpacity, 0, 1);
-        },
         defaultYaw: (defaultYaw) => {
             return parseAngle(defaultYaw);
         },
@@ -3229,20 +3215,20 @@ void main() {
             return parseAngle(defaultPitch, true);
         },
         defaultZoomLvl: (defaultZoomLvl) => {
-            return import_three5.MathUtils.clamp(defaultZoomLvl, 0, 100);
+            return import_three4.MathUtils.clamp(defaultZoomLvl, 0, 100);
         },
         minFov: (minFov, { rawConfig }) => {
             if (rawConfig.maxFov < minFov) {
                 logWarn("maxFov cannot be lower than minFov");
                 minFov = rawConfig.maxFov;
             }
-            return import_three5.MathUtils.clamp(minFov, 1, 179);
+            return import_three4.MathUtils.clamp(minFov, 1, 179);
         },
         maxFov: (maxFov, { rawConfig }) => {
             if (maxFov < rawConfig.minFov) {
                 maxFov = rawConfig.minFov;
             }
-            return import_three5.MathUtils.clamp(maxFov, 1, 179);
+            return import_three4.MathUtils.clamp(maxFov, 1, 179);
         },
         lang: (lang) => {
             if (Array.isArray(lang.twoFingers)) {
@@ -3318,18 +3304,6 @@ void main() {
                 return navbar.split(/[ ,]/);
             }
             return navbar;
-        },
-        useXmpData: (useXmpData) => {
-            if (useXmpData !== null) {
-                logWarn(`Global useXmpData is deprecated, it is now configured on the adapter.`);
-            }
-            return useXmpData;
-        },
-        canvasBackground: (canvasBackground) => {
-            if (canvasBackground !== null) {
-                logWarn(`Global canvasBackground is deprecated, it is now configured on the adapter.`);
-            }
-            return canvasBackground;
         }
     };
     var getViewerConfig = getConfigParser(DEFAULTS, CONFIG_PARSERS);
@@ -4116,6 +4090,7 @@ void main() {
             this.state.arrow = parseInt(getStyleProperty(this.arrow, "border-top-width"), 10);
             this.state.border = parseInt(getStyleProperty(this.container, "border-top-left-radius"), 10);
             this.move(config ?? this.state.config);
+            this.__waitImages();
         }
         /**
          * Moves the tooltip to a new position
@@ -4293,27 +4268,31 @@ void main() {
             if (images.length > 0) {
                 const promises = [];
                 images.forEach((image) => {
-                    promises.push(
-                        new Promise((resolve) => {
-                            image.onload = resolve;
-                            image.onerror = resolve;
-                        })
-                    );
-                });
-                Promise.all(promises).then(() => {
-                    if (this.state.state === 1 /* SHOWING */ || this.state.state === 3 /* READY */) {
-                        const rect = this.container.getBoundingClientRect();
-                        this.state.width = rect.right - rect.left;
-                        this.state.height = rect.bottom - rect.top;
-                        this.move(this.state.config);
+                    if (!image.complete) {
+                        promises.push(
+                            new Promise((resolve) => {
+                                image.onload = resolve;
+                                image.onerror = resolve;
+                            })
+                        );
                     }
                 });
+                if (promises.length) {
+                    Promise.all(promises).then(() => {
+                        if (this.state.state === 1 /* SHOWING */ || this.state.state === 3 /* READY */) {
+                            const rect = this.container.getBoundingClientRect();
+                            this.state.width = rect.right - rect.left;
+                            this.state.height = rect.bottom - rect.top;
+                            this.move(this.state.config);
+                        }
+                    });
+                }
             }
         }
     };
 
     // src/data/cache.ts
-    var import_three6 = require_three();
+    var import_three5 = require_three();
     var Cache = {
         enabled: true,
         maxItems: 10,
@@ -4321,9 +4300,9 @@ void main() {
         items: {},
         purgeInterval: null,
         init() {
-            if (import_three6.Cache.enabled) {
+            if (import_three5.Cache.enabled) {
                 logWarn("ThreeJS cache should be disabled");
-                import_three6.Cache.enabled = false;
+                import_three5.Cache.enabled = false;
             }
             if (!this.purgeInterval && this.enabled) {
                 this.purgeInterval = setInterval(() => this.purge(), 60 * 1e3);
@@ -4365,7 +4344,7 @@ void main() {
     var error_default = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="15 15 70 70"><path fill="currentColor" d="M50,16.2c-18.6,0-33.8,15.1-33.8,33.8S31.4,83.7,50,83.7S83.8,68.6,83.8,50S68.6,16.2,50,16.2z M50,80.2c-16.7,0-30.2-13.6-30.2-30.2S33.3,19.7,50,19.7S80.3,33.3,80.3,50S66.7,80.2,50,80.2z"/><rect fill="currentColor" x="48" y="31.7" width="4" height="28"/><rect fill="currentColor" x="48" y="63.2" width="4" height="5"/><!--Created by Shastry from the Noun Project--></svg>\n';
 
     // src/services/DataHelper.ts
-    var import_three7 = require_three();
+    var import_three6 = require_three();
 
     // src/services/AbstractService.ts
     var AbstractService = class {
@@ -4387,8 +4366,8 @@ void main() {
     };
 
     // src/services/DataHelper.ts
-    var vector3 = new import_three7.Vector3();
-    var EULER_ZERO = new import_three7.Euler(0, 0, 0, "ZXY");
+    var vector3 = new import_three6.Vector3();
+    var EULER_ZERO = new import_three6.Euler(0, 0, 0, "ZXY");
     var DataHelper = class extends AbstractService {
         /**
          * @internal
@@ -4413,7 +4392,7 @@ void main() {
          * Converts vertical FOV to horizontal FOV
          */
         vFovToHFov(vFov) {
-            return import_three7.MathUtils.radToDeg(2 * Math.atan(Math.tan(import_three7.MathUtils.degToRad(vFov) / 2) * this.state.aspect));
+            return import_three6.MathUtils.radToDeg(2 * Math.atan(Math.tan(import_three6.MathUtils.degToRad(vFov) / 2) * this.state.aspect));
         }
         /**
          * @internal
@@ -4422,7 +4401,7 @@ void main() {
             const positionProvided = !isNil(targetPosition);
             const zoomProvided = !isNil(targetZoom);
             const properties = {};
-            let duration;
+            let duration = null;
             if (positionProvided) {
                 const currentPosition = this.viewer.getPosition();
                 const dYaw = getShortestArc(currentPosition.yaw, targetPosition.yaw);
@@ -4434,11 +4413,19 @@ void main() {
                 const currentZoom = this.viewer.getZoomLevel();
                 const dZoom = Math.abs(targetZoom - currentZoom);
                 properties.zoom = { start: currentZoom, end: targetZoom };
-                if (!duration) {
+                if (duration === null) {
                     duration = speedToDuration(speed, Math.PI / 4 * dZoom / 100);
                 }
             }
-            duration = Math.max(ANIMATION_MIN_DURATION, duration);
+            if (duration === null) {
+                if (typeof speed === "number") {
+                    duration = speed;
+                } else {
+                    duration = ANIMATION_MIN_DURATION;
+                }
+            } else {
+                duration = Math.max(ANIMATION_MIN_DURATION, duration);
+            }
             return { duration, properties };
         }
         /**
@@ -4446,16 +4433,10 @@ void main() {
          * @throws {@link PSVError} when the current adapter does not support texture coordinates
          */
         textureCoordsToSphericalCoords(point) {
-            const panoData = this.state.panoData;
-            if (!panoData) {
-                throw new PSVError("Current adapter does not support texture coordinates.");
+            if (!this.state.textureData?.panoData) {
+                throw new PSVError("Current adapter does not support texture coordinates or no texture has been loaded");
             }
-            const relativeX = (point.textureX + panoData.croppedX) / panoData.fullWidth * Math.PI * 2;
-            const relativeY = (point.textureY + panoData.croppedY) / panoData.fullHeight * Math.PI;
-            const result = {
-                yaw: relativeX >= Math.PI ? relativeX - Math.PI : relativeX + Math.PI,
-                pitch: Math.PI / 2 - relativeY
-            };
+            const result = this.viewer.adapter.textureCoordsToSphericalCoords(point, this.state.textureData.panoData);
             if (!EULER_ZERO.equals(this.viewer.renderer.panoramaPose) || !EULER_ZERO.equals(this.viewer.renderer.sphereCorrection)) {
                 this.sphericalCoordsToVector3(result, vector3);
                 vector3.applyEuler(this.viewer.renderer.panoramaPose);
@@ -4470,9 +4451,8 @@ void main() {
          * @throws {@link PSVError} when the current adapter does not support texture coordinates
          */
         sphericalCoordsToTextureCoords(position) {
-            const panoData = this.state.panoData;
-            if (!panoData) {
-                throw new PSVError("Current adapter does not support texture coordinates.");
+            if (!this.state.textureData?.panoData) {
+                throw new PSVError("Current adapter does not support texture coordinates or no texture has been loaded");
             }
             if (!EULER_ZERO.equals(this.viewer.renderer.panoramaPose) || !EULER_ZERO.equals(this.viewer.renderer.sphereCorrection)) {
                 this.sphericalCoordsToVector3(position, vector3);
@@ -4480,21 +4460,14 @@ void main() {
                 applyEulerInverse(vector3, this.viewer.renderer.panoramaPose);
                 position = this.vector3ToSphericalCoords(vector3);
             }
-            const relativeLong = position.yaw / Math.PI / 2 * panoData.fullWidth;
-            const relativeLat = position.pitch / Math.PI * panoData.fullHeight;
-            return {
-                textureX: Math.round(
-                    position.yaw < Math.PI ? relativeLong + panoData.fullWidth / 2 : relativeLong - panoData.fullWidth / 2
-                ) - panoData.croppedX,
-                textureY: Math.round(panoData.fullHeight / 2 - relativeLat) - panoData.croppedY
-            };
+            return this.viewer.adapter.sphericalCoordsToTextureCoords(position, this.state.textureData.panoData);
         }
         /**
          * Converts spherical radians coordinates to a Vector3
          */
         sphericalCoordsToVector3(position, vector, distance2 = SPHERE_RADIUS) {
             if (!vector) {
-                vector = new import_three7.Vector3();
+                vector = new import_three6.Vector3();
             }
             vector.x = distance2 * -Math.cos(position.pitch) * Math.sin(position.yaw);
             vector.y = distance2 * Math.sin(position.pitch);
@@ -4554,7 +4527,7 @@ void main() {
         isPointVisible(point) {
             let vector;
             let viewerPoint;
-            if (point instanceof import_three7.Vector3) {
+            if (point instanceof import_three6.Vector3) {
                 vector = point;
                 viewerPoint = this.vector3ToViewerCoords(point);
             } else if (isExtendedPosition(point)) {
@@ -4569,13 +4542,14 @@ void main() {
          * Converts pixel position to angles if present and ensure boundaries
          */
         cleanPosition(position) {
-            if (position.textureX !== void 0 && position.textureY !== void 0) {
+            if ("yaw" in position && "pitch" in position) {
+                return {
+                    yaw: parseAngle(position.yaw),
+                    pitch: parseAngle(position.pitch, !this.state.littlePlanet)
+                };
+            } else {
                 return this.textureCoordsToSphericalCoords(position);
             }
-            return {
-                yaw: parseAngle(position.yaw),
-                pitch: parseAngle(position.pitch, !this.state.littlePlanet)
-            };
         }
         /**
          * Ensure a SphereCorrection object is valid
@@ -4592,15 +4566,15 @@ void main() {
          */
         cleanPanoramaPose(panoData) {
             return {
-                pan: import_three7.MathUtils.degToRad(panoData?.poseHeading || 0),
-                tilt: import_three7.MathUtils.degToRad(panoData?.posePitch || 0),
-                roll: import_three7.MathUtils.degToRad(panoData?.poseRoll || 0)
+                pan: import_three6.MathUtils.degToRad(panoData?.poseHeading || 0),
+                tilt: import_three6.MathUtils.degToRad(panoData?.posePitch || 0),
+                roll: import_three6.MathUtils.degToRad(panoData?.poseRoll || 0)
             };
         }
     };
 
     // src/services/EventsHandler.ts
-    var import_three8 = require_three();
+    var import_three7 = require_three();
 
     // src/icons/gesture.svg
     var gesture_default = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="currentColor" d="M33.38 33.2a1.96 1.96 0 0 0 1.5-3.23 10.61 10.61 0 0 1 7.18-17.51c.7-.06 1.31-.49 1.61-1.12a13.02 13.02 0 0 1 11.74-7.43c7.14 0 12.96 5.8 12.96 12.9 0 3.07-1.1 6.05-3.1 8.38-.7.82-.61 2.05.21 2.76.83.7 2.07.6 2.78-.22a16.77 16.77 0 0 0 4.04-10.91C72.3 7.54 64.72 0 55.4 0a16.98 16.98 0 0 0-14.79 8.7 14.6 14.6 0 0 0-12.23 14.36c0 3.46 1.25 6.82 3.5 9.45.4.45.94.69 1.5.69m45.74 43.55a22.13 22.13 0 0 1-5.23 12.4c-4 4.55-9.53 6.86-16.42 6.86-12.6 0-20.1-10.8-20.17-10.91a1.82 1.82 0 0 0-.08-.1c-5.3-6.83-14.55-23.82-17.27-28.87-.05-.1 0-.21.02-.23a6.3 6.3 0 0 1 8.24 1.85l9.38 12.59a1.97 1.97 0 0 0 3.54-1.17V25.34a4 4 0 0 1 1.19-2.87 3.32 3.32 0 0 1 2.4-.95c1.88.05 3.4 1.82 3.4 3.94v24.32a1.96 1.96 0 0 0 3.93 0v-33.1a3.5 3.5 0 0 1 7 0v35.39a1.96 1.96 0 0 0 3.93 0v-.44c.05-2.05 1.6-3.7 3.49-3.7 1.93 0 3.5 1.7 3.5 3.82v5.63c0 .24.04.48.13.71l.1.26a1.97 1.97 0 0 0 3.76-.37c.33-1.78 1.77-3.07 3.43-3.07 1.9 0 3.45 1.67 3.5 3.74l-1.77 18.1zM77.39 51c-1.25 0-2.45.32-3.5.9v-.15c0-4.27-3.33-7.74-7.42-7.74-1.26 0-2.45.33-3.5.9V16.69a7.42 7.42 0 0 0-14.85 0v1.86a7 7 0 0 0-3.28-.94 7.21 7.21 0 0 0-5.26 2.07 7.92 7.92 0 0 0-2.38 5.67v37.9l-5.83-7.82a10.2 10.2 0 0 0-13.35-2.92 4.1 4.1 0 0 0-1.53 5.48C20 64.52 28.74 80.45 34.07 87.34c.72 1.04 9.02 12.59 23.4 12.59 7.96 0 14.66-2.84 19.38-8.2a26.06 26.06 0 0 0 6.18-14.6l1.78-18.2v-.2c0-4.26-3.32-7.73-7.42-7.73z"/><!--Created by AomAm from the Noun Project--></svg>\n';
@@ -5007,7 +4981,7 @@ void main() {
          * Performs an animation to simulate inertia when the movement stops
          */
         __stopMoveInertia(clientX, clientY) {
-            const curve = new import_three8.SplineCurve(this.data.mouseHistory.map(([, x, y]) => new import_three8.Vector2(x, y)));
+            const curve = new import_three7.SplineCurve(this.data.mouseHistory.map(([, x, y]) => new import_three7.Vector2(x, y)));
             const direction = curve.getTangent(1);
             const speed = this.data.mouseHistory.reduce(({ total, prev }, curr) => ({
                 total: !prev ? 0 : total + distance({ x: prev[1], y: prev[2] }, { x: curr[1], y: curr[2] }) / (curr[0] - prev[0]),
@@ -5068,11 +5042,8 @@ void main() {
                 };
                 try {
                     const textureCoords = this.viewer.dataHelper.sphericalCoordsToTextureCoords(data);
-                    data.textureX = textureCoords.textureX;
-                    data.textureY = textureCoords.textureY;
+                    Object.assign(data, textureCoords);
                 } catch (e) {
-                    data.textureX = NaN;
-                    data.textureY = NaN;
                 }
                 if (!this.data.dblclickTimeout) {
                     this.viewer.dispatchEvent(new ClickEvent(data));
@@ -5152,8 +5123,8 @@ void main() {
          */
         __applyMove(clientX, clientY) {
             const rotation = {
-                yaw: this.config.moveSpeed * ((clientX - this.data.mouseX) / this.state.size.width) * import_three8.MathUtils.degToRad(this.state.littlePlanet ? 90 : this.state.hFov),
-                pitch: this.config.moveSpeed * ((clientY - this.data.mouseY) / this.state.size.height) * import_three8.MathUtils.degToRad(this.state.littlePlanet ? 90 : this.state.vFov)
+                yaw: this.config.moveSpeed * ((clientX - this.data.mouseX) / this.state.size.width) * import_three7.MathUtils.degToRad(this.state.littlePlanet ? 90 : this.state.hFov),
+                pitch: this.config.moveSpeed * ((clientY - this.data.mouseY) / this.state.size.height) * import_three7.MathUtils.degToRad(this.state.littlePlanet ? 90 : this.state.vFov)
             };
             const currentPosition = this.viewer.getPosition();
             this.viewer.rotate({
@@ -5209,27 +5180,31 @@ void main() {
     };
 
     // src/services/Renderer.ts
-    var import_three9 = require_three();
-    var vector2 = new import_three9.Vector2();
+    var import_three8 = require_three();
+    var vector2 = new import_three8.Vector2();
+    var matrix4 = new import_three8.Matrix4();
+    var box3 = new import_three8.Box3();
     var Renderer = class extends AbstractService {
         /**
          * @internal
          */
         constructor(viewer) {
             super(viewer);
-            this.renderer = new import_three9.WebGLRenderer(this.config.rendererParameters);
+            this.frustumNeedsUpdate = true;
+            this.renderer = new import_three8.WebGLRenderer(this.config.rendererParameters);
             this.renderer.setPixelRatio(SYSTEM.pixelRatio);
-            this.renderer.outputColorSpace = import_three9.LinearSRGBColorSpace;
+            this.renderer.outputColorSpace = import_three8.LinearSRGBColorSpace;
             this.renderer.domElement.className = "psv-canvas";
-            this.scene = new import_three9.Scene();
-            this.camera = new import_three9.PerspectiveCamera(50, 16 / 9, 0.1, 2 * SPHERE_RADIUS);
+            this.scene = new import_three8.Scene();
+            this.camera = new import_three8.PerspectiveCamera(50, 16 / 9, 0.1, 2 * SPHERE_RADIUS);
             this.camera.matrixWorldAutoUpdate = false;
             this.mesh = this.viewer.adapter.createMesh();
             this.mesh.userData = { [VIEWER_DATA]: true };
-            this.meshContainer = new import_three9.Group();
+            this.meshContainer = new import_three8.Group();
             this.meshContainer.add(this.mesh);
             this.scene.add(this.meshContainer);
-            this.raycaster = new import_three9.Raycaster();
+            this.raycaster = new import_three8.Raycaster();
+            this.frustum = new import_three8.Frustum();
             this.container = document.createElement("div");
             this.container.className = "psv-canvas-container";
             this.container.appendChild(this.renderer.domElement);
@@ -5284,9 +5259,6 @@ void main() {
                     if (e.containsOptions("fisheye")) {
                         this.__onPositionUpdated();
                     }
-                    if (e.containsOptions("canvasBackground")) {
-                        this.container.style.background = this.config.canvasBackground;
-                    }
                     break;
             }
         }
@@ -5321,6 +5293,7 @@ void main() {
             this.camera.aspect = this.state.aspect;
             this.camera.updateProjectionMatrix();
             this.viewer.needsUpdate();
+            this.frustumNeedsUpdate = true;
         }
         /**
          * Updates the fov of the camera
@@ -5329,6 +5302,7 @@ void main() {
             this.camera.fov = this.state.vFov;
             this.camera.updateProjectionMatrix();
             this.viewer.needsUpdate();
+            this.frustumNeedsUpdate = true;
         }
         /**
          * Updates the position of the camera
@@ -5341,6 +5315,7 @@ void main() {
             }
             this.camera.updateMatrixWorld();
             this.viewer.needsUpdate();
+            this.frustumNeedsUpdate = true;
         }
         /**
          * Main event loop, performs a render if `state.needsUpdate` is true
@@ -5361,27 +5336,11 @@ void main() {
          * @internal
          */
         setTexture(textureData) {
-            if (this.viewer.adapter.constructor.supportsOverlay) {
-                this.setOverlay(null, 0);
-            }
             if (this.state.textureData) {
                 this.viewer.adapter.disposeTexture(this.state.textureData);
             }
             this.state.textureData = textureData;
-            this.state.panoData = textureData.panoData;
             this.viewer.adapter.setTexture(this.mesh, textureData);
-            this.viewer.needsUpdate();
-        }
-        /**
-         * Applies the overlay to the mesh
-         * @internal
-         */
-        setOverlay(textureData, opacity) {
-            if (this.state.overlayData) {
-                this.viewer.adapter.disposeTexture(this.state.overlayData);
-            }
-            this.state.overlayData = textureData;
-            this.viewer.adapter.setOverlay(this.mesh, textureData, opacity);
             this.viewer.needsUpdate();
         }
         /**
@@ -5412,7 +5371,7 @@ void main() {
                 options.zoom
             );
             this.viewer.dispatchEvent(e);
-            const group = new import_three9.Group();
+            const group = new import_three8.Group();
             const mesh = this.viewer.adapter.createMesh(0.5);
             this.viewer.adapter.setTexture(mesh, textureData, true);
             this.viewer.adapter.setTextureOpacity(mesh, 0);
@@ -5420,18 +5379,18 @@ void main() {
             this.setSphereCorrection(options.sphereCorrection, group);
             if (positionProvided && options.transition === "fade-only") {
                 const currentPosition = this.viewer.getPosition();
-                const verticalAxis = new import_three9.Vector3(0, 1, 0);
+                const verticalAxis = new import_three8.Vector3(0, 1, 0);
                 group.rotateOnWorldAxis(verticalAxis, e.position.yaw - currentPosition.yaw);
-                const horizontalAxis = new import_three9.Vector3(0, 1, 0).cross(this.camera.getWorldDirection(new import_three9.Vector3())).normalize();
+                const horizontalAxis = new import_three8.Vector3(0, 1, 0).cross(this.camera.getWorldDirection(new import_three8.Vector3())).normalize();
                 group.rotateOnWorldAxis(horizontalAxis, e.position.pitch - currentPosition.pitch);
             }
             group.add(mesh);
             this.scene.add(group);
-            this.renderer.setRenderTarget(new import_three9.WebGLRenderTarget());
+            this.renderer.setRenderTarget(new import_three8.WebGLRenderTarget());
             this.renderer.render(this.scene, this.camera);
             this.renderer.setRenderTarget(null);
             const { duration, properties } = this.viewer.dataHelper.getAnimationProperties(
-                options.transition,
+                options.speed,
                 options.transition === true ? e.position : null,
                 e.zoomLevel
             );
@@ -5488,6 +5447,33 @@ void main() {
             return intersections;
         }
         /**
+         * Checks if an object/point is currently visible
+         */
+        isObjectVisible(value) {
+            if (!value) {
+                return false;
+            }
+            if (this.frustumNeedsUpdate) {
+                matrix4.multiplyMatrices(this.camera.projectionMatrix, this.camera.matrixWorldInverse);
+                this.frustum.setFromProjectionMatrix(matrix4);
+                this.frustumNeedsUpdate = false;
+            }
+            if (value.isVector3) {
+                return this.frustum.containsPoint(value);
+            } else if (value.isMesh && value.geometry) {
+                const mesh = value;
+                if (!mesh.geometry.boundingBox) {
+                    mesh.geometry.computeBoundingBox();
+                }
+                box3.copy(mesh.geometry.boundingBox).applyMatrix4(mesh.matrixWorld);
+                return this.frustum.intersectsBox(box3);
+            } else if (value.isObject3D) {
+                return this.frustum.intersectsObject(value);
+            } else {
+                return false;
+            }
+        }
+        /**
          * Adds an object to the THREE scene
          */
         addObject(object) {
@@ -5504,27 +5490,28 @@ void main() {
          * @internal
          */
         cleanScene(object) {
-            object.traverse((item) => {
-                if (item.geometry) {
-                    item.geometry.dispose();
+            const disposeMaterial = (material) => {
+                material.map?.dispose();
+                if (material.uniforms) {
+                    Object.values(material.uniforms).forEach((uniform) => {
+                        uniform.value?.dispose?.();
+                    });
                 }
+                material.dispose();
+            };
+            object.traverse((item) => {
+                item.geometry?.dispose();
                 if (item.material) {
                     if (Array.isArray(item.material)) {
                         item.material.forEach((material) => {
-                            if (material.map) {
-                                material.map.dispose();
-                            }
-                            material.dispose();
+                            disposeMaterial(material);
                         });
                     } else {
-                        if (item.material.map) {
-                            item.material.map.dispose();
-                        }
-                        item.material.dispose();
+                        disposeMaterial(item.material);
                     }
                 }
-                if (item.dispose && !(item instanceof import_three9.Scene)) {
-                    item.dispose();
+                if (!(item instanceof import_three8.Scene)) {
+                    item.dispose?.();
                 }
                 if (item !== object) {
                     this.cleanScene(item);
@@ -5534,16 +5521,16 @@ void main() {
     };
 
     // src/services/TextureLoader.ts
-    var import_three10 = require_three();
+    var import_three9 = require_three();
     var TextureLoader = class extends AbstractService {
         /**
          * @internal
          */
         constructor(viewer) {
             super(viewer);
-            this.fileLoader = new import_three10.FileLoader();
+            this.fileLoader = new import_three9.FileLoader();
             this.fileLoader.setResponseType("blob");
-            this.imageLoader = new import_three10.ImageLoader();
+            this.imageLoader = new import_three9.ImageLoader();
             if (this.config.withCredentials) {
                 this.fileLoader.setWithCredentials(true);
                 this.imageLoader.setCrossOrigin("use-credentials");
@@ -5653,7 +5640,7 @@ void main() {
     };
 
     // src/services/ViewerDynamics.ts
-    var import_three11 = require_three();
+    var import_three10 = require_three();
     var ViewerDynamics = class extends AbstractService {
         /**
          * @internal
@@ -5700,7 +5687,7 @@ void main() {
          */
         updateSpeeds() {
             this.zoom.setSpeed(this.config.zoomSpeed * 50);
-            this.position.setSpeed(import_three11.MathUtils.degToRad(this.config.moveSpeed * 50));
+            this.position.setSpeed(import_three10.MathUtils.degToRad(this.config.moveSpeed * 50));
         }
         /**
          * @internal
@@ -5712,7 +5699,7 @@ void main() {
     };
 
     // src/services/ViewerState.ts
-    var import_three12 = require_three();
+    var import_three11 = require_three();
     var ViewerState = class {
         /**
          * @internal
@@ -5738,7 +5725,7 @@ void main() {
             /**
              * direction of the camera
              */
-            this.direction = new import_three12.Vector3(0, 0, SPHERE_RADIUS);
+            this.direction = new import_three11.Vector3(0, 0, SPHERE_RADIUS);
             /**
              * vertical FOV
              */
@@ -5781,20 +5768,6 @@ void main() {
             this.size = {
                 width: 0,
                 height: 0
-            };
-            /**
-             * panorama metadata, if supported
-             */
-            this.panoData = {
-                fullWidth: 0,
-                fullHeight: 0,
-                croppedWidth: 0,
-                croppedHeight: 0,
-                croppedX: 0,
-                croppedY: 0,
-                poseHeading: 0,
-                posePitch: 0,
-                poseRoll: 0
             };
         }
     };
@@ -5984,20 +5957,11 @@ void main() {
             this.textureLoader.abortLoading();
             this.state.transitionAnimation?.cancel();
             if (!this.state.ready) {
-                ["sphereCorrection", "panoData", "overlay", "overlayOpacity"].forEach((opt) => {
+                ["sphereCorrection", "panoData"].forEach((opt) => {
                     if (!(opt in options)) {
                         options[opt] = this.config[opt];
                     }
                 });
-            }
-            if (isExtendedPosition(options)) {
-                logWarn(`PanoramaOptions.yaw and PanoramaOptions.pitch are deprecated, use PanoramaOptions.position instead`);
-                options.position = this.dataHelper.cleanPosition(options);
-            }
-            if (typeof options.transition === "number") {
-                logWarn(`Use PanoramaOptions.speed to define the speed/duration of the transition`);
-                options.speed = options.transition;
-                options.transition = true;
             }
             if (options.transition === void 0) {
                 options.transition = true;
@@ -6039,7 +6003,6 @@ void main() {
                     this.dispatchEvent(new PanoramaErrorEvent(path, err));
                     throw err;
                 } else {
-                    this.setOverlay(options.overlay, options.overlayOpacity);
                     this.navbar.setCaption(this.config.caption);
                     return true;
                 }
@@ -6048,7 +6011,8 @@ void main() {
             if (options.showLoader || !this.state.ready) {
                 this.loader.show();
             }
-            const loadingPromise = this.adapter.loadTexture(this.config.panorama, options.panoData).then((textureData) => {
+            this.dispatchEvent(new PanoramaLoadEvent(path));
+            const loadingPromise = this.adapter.loadTexture(this.config.panorama, true, options.panoData).then((textureData) => {
                 if (textureData.panorama !== this.config.panorama) {
                     this.adapter.disposeTexture(textureData);
                     throw getAbortError();
@@ -6092,40 +6056,6 @@ void main() {
                 );
             }
             return this.state.loadingPromise;
-        }
-        /**
-         * Loads a new overlay
-         */
-        setOverlay(path, opacity = this.config.overlayOpacity) {
-            const supportsOverlay = this.adapter.constructor.supportsOverlay;
-            if (!path) {
-                if (supportsOverlay) {
-                    this.renderer.setOverlay(null, 0);
-                }
-                return Promise.resolve();
-            } else {
-                if (!supportsOverlay) {
-                    return Promise.reject(new PSVError(`Current adapter does not supports overlay`));
-                }
-                return this.adapter.loadTexture(
-                    path,
-                    (image) => {
-                        const p = this.state.panoData;
-                        const r = image.width / p.croppedWidth;
-                        return {
-                            fullWidth: r * p.fullWidth,
-                            fullHeight: r * p.fullHeight,
-                            croppedWidth: r * p.croppedWidth,
-                            croppedHeight: r * p.croppedHeight,
-                            croppedX: r * p.croppedX,
-                            croppedY: r * p.croppedY
-                        };
-                    },
-                    false
-                ).then((textureData) => {
-                    this.renderer.setOverlay(textureData, opacity);
-                });
-            }
         }
         /**
          * Update options
@@ -6405,8 +6335,9 @@ void main() {
     };
 
     // src/index.ts
-    import_three13.Cache.enabled = false;
-    import_three13.ColorManagement.enabled = false;
+    import_three12.Cache.enabled = false;
+    import_three12.ColorManagement.enabled = false;
+    var VERSION = "5.6.0";
     __copyProps(__defProp(exports, "__esModule", { value: true }), src_exports);
 
 }));//# sourceMappingURL=index.js.map
