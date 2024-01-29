@@ -345,12 +345,36 @@ class Sphere_Photo_Viewer extends Widget_Base {
 		];
 
 		if ( $settings['ea_spv_autorotate_switch'] === 'yes' ) {
-			$sphere_settings['plugins'][0][0] = [
+			$sphere_settings['plugins'][][0] = [
 				'autostartDelay'  => empty( $settings['ea_spv_autorotate_delay']['size'] ) ? 100 : $settings['ea_spv_autorotate_delay']['size'],
 				'autorotatePitch' => empty( $settings['ea_spv_autorotate_pitch']['size'] ) ? '5deg' : $settings['ea_spv_autorotate_pitch']['size'] . 'deg',
 				'autorotateSpeed' => empty( $settings['ea_spv_autorotate_speed']['size'] ) ? .2 : $settings['ea_spv_autorotate_speed']['size']
 			];
 		}
+
+		$sphere_settings['plugins'][][0] = [
+			'markers' => [
+				[
+					'id'       => 'image345',
+					'position' => [ 'yaw' => 0.32, 'pitch' => 0.11 ],
+					'image'    => 'https://photo-sphere-viewer-data.netlify.app/assets/pictos/pin-blue.png',
+					'size'     => [ 'width' => 32, 'height' => 32 ],
+					'anchor'   => 'bottom center',
+					'zoomLvl'  => 100,
+					'tooltip'  => 'A image marker. <b>Click me!</b>',
+					'content'  => 'This is <b>Bold text</b>'
+				],
+				[
+					'id'         => 'imageLayer123',
+					'imageLayer' => 'https://photo-sphere-viewer-data.netlify.app/assets/pictos/tent.png',
+					'size'       => [ 'width' => 120, 'height' => 94 ],
+					'position'   => [ 'yaw' => - 0.45, 'pitch' => - 0.1 ],
+					'tooltip'    => 'Image embedded in the scene',
+					'content'  => 'This is <b>Bold text</b>',
+					'anchor'   => 'bottom center',
+				]
+			]
+		];
 
 		$sphere_settings = json_encode( $sphere_settings );
 
