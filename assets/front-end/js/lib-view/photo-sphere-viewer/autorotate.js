@@ -1,15 +1,15 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('three'), require('@photo-sphere-viewer/core')) :
-    typeof define === 'function' && define.amd ? define(['exports', 'three', '@photo-sphere-viewer/core'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.PhotoSphereViewer = global.PhotoSphereViewer || {}, global.PhotoSphereViewer.AutorotatePlugin = {}), global.THREE, global.PhotoSphereViewer));
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('three'), require('@photo-sphere-viewer/core')) :
+      typeof define === 'function' && define.amd ? define(['exports', 'three', '@photo-sphere-viewer/core'], factory) :
+          (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.PhotoSphereViewer = global.PhotoSphereViewer || {}, global.PhotoSphereViewer.AutorotatePlugin = {}), global.THREE, global.PhotoSphereViewer));
 })(this, (function (exports, THREE, PhotoSphereViewer) {
 
-/*!
- * PhotoSphereViewer.AutorotatePlugin 5.4.4
- * @copyright 2023 Damien "Mistic" Sorel
- * @licence MIT (https://opensource.org/licenses/MIT)
- */
-"use strict";
+  /*!
+   * PhotoSphereViewer.AutorotatePlugin 5.6.0
+   * @copyright 2024 Damien "Mistic" Sorel
+   * @licence MIT (https://opensource.org/licenses/MIT)
+   */
+  "use strict";
   var __defProp = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
   var __getOwnPropNames = Object.getOwnPropertyNames;
@@ -105,39 +105,39 @@
   var import_core3 = require_core();
   var import_three = require_three();
   var getConfig = import_core3.utils.getConfigParser(
-    {
-      autostartDelay: 2e3,
-      autostartOnIdle: true,
-      autorotateSpeed: import_core3.utils.parseSpeed("2rpm"),
-      autorotatePitch: null,
-      autorotateZoomLvl: null,
-      keypoints: null,
-      startFromClosest: true
-    },
-    {
-      autostartOnIdle: (autostartOnIdle, { rawConfig }) => {
-        if (autostartOnIdle && import_core3.utils.isNil(rawConfig.autostartDelay)) {
-          import_core3.utils.logWarn("autostartOnIdle requires a non null autostartDelay");
-          return false;
-        }
-        return autostartOnIdle;
+      {
+        autostartDelay: 2e3,
+        autostartOnIdle: true,
+        autorotateSpeed: import_core3.utils.parseSpeed("2rpm"),
+        autorotatePitch: null,
+        autorotateZoomLvl: null,
+        keypoints: null,
+        startFromClosest: true
       },
-      autorotateSpeed: (autorotateSpeed) => {
-        return import_core3.utils.parseSpeed(autorotateSpeed);
-      },
-      autorotatePitch: (autorotatePitch) => {
-        if (!import_core3.utils.isNil(autorotatePitch)) {
-          return import_core3.utils.parseAngle(autorotatePitch, true);
+      {
+        autostartOnIdle: (autostartOnIdle, { rawConfig }) => {
+          if (autostartOnIdle && import_core3.utils.isNil(rawConfig.autostartDelay)) {
+            import_core3.utils.logWarn("autostartOnIdle requires a non null autostartDelay");
+            return false;
+          }
+          return autostartOnIdle;
+        },
+        autorotateSpeed: (autorotateSpeed) => {
+          return import_core3.utils.parseSpeed(autorotateSpeed);
+        },
+        autorotatePitch: (autorotatePitch) => {
+          if (!import_core3.utils.isNil(autorotatePitch)) {
+            return import_core3.utils.parseAngle(autorotatePitch, true);
+          }
+          return null;
+        },
+        autorotateZoomLvl: (autorotateZoomLvl) => {
+          if (!import_core3.utils.isNil(autorotateZoomLvl)) {
+            return import_three.MathUtils.clamp(autorotateZoomLvl, 0, 100);
+          }
+          return null;
         }
-        return null;
-      },
-      autorotateZoomLvl: (autorotateZoomLvl) => {
-        if (!import_core3.utils.isNil(autorotateZoomLvl)) {
-          return import_three.MathUtils.clamp(autorotateZoomLvl, 0, 100);
-        }
-        return null;
       }
-    }
   );
   var NUM_STEPS = 16;
   function serializePt(position) {
@@ -346,16 +346,16 @@
       p.then((done) => {
         if (done) {
           this.viewer.dynamics.position.roll(
-            {
-              yaw: this.config.autorotateSpeed < 0
-            },
-            Math.abs(this.config.autorotateSpeed / this.viewer.config.moveSpeed)
+              {
+                yaw: this.config.autorotateSpeed < 0
+              },
+              Math.abs(this.config.autorotateSpeed / this.viewer.config.moveSpeed)
           );
           this.viewer.dynamics.position.goto(
-            {
-              pitch: this.config.autorotatePitch ?? this.viewer.config.defaultPitch
-            },
-            Math.abs(this.config.autorotateSpeed / this.viewer.config.moveSpeed)
+              {
+                pitch: this.config.autorotatePitch ?? this.viewer.config.defaultPitch
+              },
+              Math.abs(this.config.autorotateSpeed / this.viewer.config.moveSpeed)
           );
         }
       });
@@ -438,10 +438,10 @@
       if (this.state.idx === -1) {
         const currentPosition = serializePt(this.viewer.getPosition());
         workPoints.push(
-          currentPosition,
-          currentPosition,
-          this.keypoints[0].position,
-          this.keypoints[1].position
+            currentPosition,
+            currentPosition,
+            this.keypoints[0].position,
+            this.keypoints[1].position
         );
       } else {
         for (let i = -1; i < 3; i++) {
@@ -528,6 +528,7 @@
     }
   };
   AutorotatePlugin.id = "autorotate";
+  AutorotatePlugin.VERSION = "5.6.0";
   AutorotatePlugin.configParser = getConfig;
   AutorotatePlugin.readonlyOptions = ["keypoints"];
 
@@ -536,4 +537,4 @@
   import_core4.DEFAULTS.lang[AutorotateButton.id] = "Automatic rotation";
   __copyProps(__defProp(exports, "__esModule", { value: true }), src_exports);
 
-}));
+}));//# sourceMappingURL=index.js.map
