@@ -156,7 +156,10 @@ class Sphere_Photo_Viewer extends Widget_Base {
 						'step' => 0.1,
 					],
 				],
-				'default' => 0
+				'default' => [
+					'unit' => 'px',
+					'size' => 0,
+				],
 			]
 		);
 
@@ -172,7 +175,10 @@ class Sphere_Photo_Viewer extends Widget_Base {
 						'step' => 0.1,
 					],
 				],
-				'default' => 0
+				'default' => [
+					'unit' => 'px',
+					'size' => 0,
+				],
 			]
 		);
 
