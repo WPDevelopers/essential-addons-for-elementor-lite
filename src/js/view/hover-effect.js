@@ -26,12 +26,24 @@ let HoverEffectHandler = function ($scope, $) {
     $eaelHoverDuration              = $scope.data('eael_hover_duration'),
     $eaelHoverDelay              = $scope.data('eael_hover_delay'),
     $eaelHoverEasing              = $scope.data('eael_hover_easing'),
+    $eaelOffsetTop              = $scope.data('eael_offset_top'),
+    $eaelOffsetLeft              = $scope.data('eael_offset_left'),
+    $eaelOffsetHoverTop              = $scope.data('eael_offset_hover_top'),
+    $eaelOffsetHoverLeft              = $scope.data('eael_offset_hover_left'),
     $eaelContainer        = $('.elementor-widget-container', $scope);
 
     let hoverSelector = `body [data-id="${$scopeId}"] > .elementor-widget-container`;
 
     //Opacity
     let $opacityVal = $Opacity ? $Opacity?.opacity : '1';
+
+    //Offset
+    let $offsetX = $eaelOffsetTop?.size ? `translateX(${$eaelOffsetTop.size}${$eaelOffsetTop.unit})` : 'translateX(0)';
+    let $offsetY = $eaelOffsetLeft?.size ? `translateX(${$eaelOffsetLeft.size}${$eaelOffsetLeft.unit})` : 'translateX(0)';
+
+    //Offset Hover
+    let $offsetHoverX = $eaelOffsetHoverTop?.size ? `translateX(${$eaelOffsetHoverTop.size}${$eaelOffsetHoverTop.unit})` : 'translateX(0)';
+    let $offsetHoverY = $eaelOffsetHoverLeft?.size ? `translateX(${$eaelOffsetHoverLeft.size}${$eaelOffsetHoverLeft.unit})` : 'translateX(0)';
     
     //Transitions
     let $eaelDurationVal = $eaelDuration ? $eaelDuration?.transitionDuration : '0';
@@ -89,7 +101,7 @@ let HoverEffectHandler = function ($scope, $) {
     
     //Normal
     let normalStyles = {
-        "transform": `${$rotateX} ${$rotateY} ${$rotateZ} ${$scaleX} ${$scaleY} ${$skewX} ${$skewY}`,
+        "transform": `${$rotateX} ${$rotateY} ${$rotateZ} ${$scaleX} ${$scaleY} ${$skewX} ${$skewY} ${$offsetX} ${$offsetY}`,
         "opacity": $opacityVal,
         "filter": `${$blur} ${$contrast} ${$grayscale} ${$invert} ${$saturate} ${$sepia}`,
         "transition-property": 'all',
@@ -102,7 +114,7 @@ let HoverEffectHandler = function ($scope, $) {
     let hoverStyles = {
         'opacity': $opacityHoverVal,
         'filter': `${$blurHover} ${$contrastHover} ${$grayscaleHover} ${$invertHover} ${$saturateHover} ${$sepiaHover}`,
-        "transform": `${$rotateXHover} ${$rotateYHover} ${$rotateZHover} ${$scaleXHover} ${$scaleYHover} ${$skewXHover} ${$skewYHover}`,
+        "transform": `${$rotateXHover} ${$rotateYHover} ${$rotateZHover} ${$scaleXHover} ${$scaleYHover} ${$skewXHover} ${$skewYHover} ${$offsetHoverX} ${$offsetHoverY}`,
         "transition-property": 'all',
         "transition-duration": `${$eaelDurationHoverVal}ms`,
         "transition-delay": `${$eaelDelayHoverVal}ms`,

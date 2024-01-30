@@ -313,17 +313,16 @@ class Hover_Effect {
 				],
                 'range' => [
                     'px' => [
-                        'max'  => 1000,
+                        'max'  => 500,
+						'min'  => -500,
                         'step' => 1,
                     ],
                     '%' => [
                         'max'  => 100,
+						'min' => -100,
                         'step' => 1,
                     ],
                 ],
-                'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'top: {{SIZE}}{{UNIT}};',
-				],
             ]
         );
 
@@ -340,17 +339,16 @@ class Hover_Effect {
 				],
                 'range' => [
                     'px' => [
-                        'max'  => 1000,
+                        'max'  => 500,
+						'min'  => -500,
                         'step' => 1,
                     ],
                     '%' => [
                         'max'  => 100,
+						'min'  => -100,
                         'step' => 1,
                     ],
                 ],
-                'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'left: {{SIZE}}{{UNIT}};',
-				],
             ]
         );
         $element->end_popover();
@@ -921,17 +919,16 @@ class Hover_Effect {
 				],
                 'range' => [
                     'px' => [
-                        'max'  => 1000,
+                        'max'  => 500,
+                        'min'  => -500,
                         'step' => 1,
                     ],
                     '%' => [
                         'max'  => 100,
+                        'min'  => -100,
                         'step' => 1,
                     ],
                 ],
-                'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'top: {{SIZE}}{{UNIT}};',
-				],
             ]
         );
 
@@ -948,17 +945,16 @@ class Hover_Effect {
 				],
                 'range' => [
                     'px' => [
-                        'max'  => 1000,
+                        'max'  => 500,
+                        'min'  => -500,
                         'step' => 1,
                     ],
                     '%' => [
                         'max'  => 100,
+                        'min'  => -100,
                         'step' => 1,
                     ],
                 ],
-                'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'left: {{SIZE}}{{UNIT}};',
-				],
             ]
         );
         $element->end_popover();
@@ -1345,6 +1341,24 @@ class Hover_Effect {
 			$element->add_render_attribute( '_wrapper', 'data-eael_skew_effect', wp_json_encode( $skew_settings ) );
 		}
 
+		//Offset Top
+		if( !empty( $settings['eael_hover_effect_offset_top']['size'] ) ) {
+			$opacity_settings = [
+				'size' => $settings['eael_hover_effect_offset_top']['size'],
+				'unit' => $settings['eael_hover_effect_offset_top']['unit'],
+			];
+			$element->add_render_attribute( '_wrapper', 'data-eael_offset_top', wp_json_encode( $opacity_settings ) );
+		}
+
+		//Offset Left
+		if( !empty( $settings['eael_hover_effect_offset_left']['size'] ) ) {
+			$opacity_settings = [
+				'size' => $settings['eael_hover_effect_offset_left']['size'],
+				'unit' => $settings['eael_hover_effect_offset_left']['unit'],
+			];
+			$element->add_render_attribute( '_wrapper', 'data-eael_offset_left', wp_json_encode( $opacity_settings ) );
+		}
+
 		//For Hover
 		//Opacity
 		if( !empty( $settings['eael_hover_effect_opacity_hover']['size'] ) ) {
@@ -1452,6 +1466,24 @@ class Hover_Effect {
 				'skew_y' => $settings['eael_hover_effect_transform_hover_skewy']['size'],
 			];
 			$element->add_render_attribute( '_wrapper', 'data-eael_skew_hover_effect', wp_json_encode( $skew_settings ) );
+		}
+
+		//Offset Top
+		if( !empty( $settings['eael_hover_effect_offset_hover_top']['size'] ) ) {
+			$opacity_settings = [
+				'size' => $settings['eael_hover_effect_offset_hover_top']['size'],
+				'unit' => $settings['eael_hover_effect_offset_hover_top']['unit'],
+			];
+			$element->add_render_attribute( '_wrapper', 'data-eael_offset_hover_top', wp_json_encode( $opacity_settings ) );
+		}
+
+		//Offset Left
+		if( !empty( $settings['eael_hover_effect_offset_hover_left']['size'] ) ) {
+			$opacity_settings = [
+				'size' => $settings['eael_hover_effect_offset_hover_left']['size'],
+				'unit' => $settings['eael_hover_effect_offset_hover_left']['unit'],
+			];
+			$element->add_render_attribute( '_wrapper', 'data-eael_offset_hover_left', wp_json_encode( $opacity_settings ) );
 		}
 		
         $element->add_render_attribute( '_wrapper', 'class', 'eael_hover_effect' );
