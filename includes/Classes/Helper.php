@@ -1294,6 +1294,47 @@ class Helper
 		];
 	}
 
+    /**
+     * List of allowed icon/svg tags for wp_kses
+     *
+	 * eael_allowed_icon_tags
+	 * @return array
+	 */
+    public static function eael_allowed_icon_tags(){
+        return [
+            'svg'   => [
+                'class'           => [],
+                'aria-hidden'     => [],
+                'aria-labelledby' => [],
+                'role'            => [],
+                'xmlns'           => [],
+                'width'           => [],
+                'height'          => [],
+                'viewbox'         => []
+            ],
+            'g'     => [ 'fill'  => [] ],
+            'title' => [ 'title' => [] ],
+            'path'     => [
+                'd'    => [], 
+                'fill' => [] 
+            ],
+			'i'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+            'img'     => [
+				'src'    => [],
+				'alt'    => [],
+				'height' => [],
+				'width'  => [],
+				'class'  => [],
+				'id'     => [],
+				'style'  => []
+			],
+        ];
+    }
+
     public static function eael_fetch_color_or_global_color($settings, $control_name=''){
         if( !isset($settings[$control_name])) {
             return '';
