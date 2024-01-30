@@ -32,6 +32,34 @@ let HoverEffectHandler = function ($scope, $) {
     $eaelOffsetHoverLeft              = $scope.data('eael_offset_hover_left'),
     $eaelContainer        = $('.elementor-widget-container', $scope);
 
+    if(window.isRunFirstTime === undefined && window.isEditMode || 1) {
+        window.isRunFirstTime = true;
+        var EAdata = [];
+
+        function getSettingsVal($el) {
+            $.each($el, function (i, el) {
+                if (el.attributes.elType === 'widget') {
+                    if (el.attributes.settings.attributes['eael_hover_effect_switch'] === 'yes') {
+                        EAdata[el.attributes.id] = el.attributes.settings.attributes;
+                    }
+                }
+
+                if (el.attributes.elType === 'container') {
+                    getSettingsVal(el.attributes.elements.models);
+                }
+            });
+        }
+
+        getSettingsVal(window.elementor.elements.models);
+    }
+
+    for (let key in EAdata) {
+        // console.log($(`[data-id="${key}"]`), EAdata?.[key]?.['eael_hover_effect_opacity']);
+        if($scopeId === key){
+            $Opacity = {'opacity': EAdata?.[key]?.['eael_hover_effect_opacity']?.['size']};
+        }
+    }
+
     let hoverSelector = `body [data-id="${$scopeId}"] > .elementor-widget-container`;
 
     //Opacity
