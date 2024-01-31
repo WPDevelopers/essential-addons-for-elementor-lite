@@ -151,8 +151,8 @@ class Sphere_Photo_Viewer extends Widget_Base {
 				'type'    => Controls_Manager::SLIDER,
 				'range'   => [
 					'px' => [
-						'min'  => 0,
-						'max'  => 360,
+						'min'  => -180,
+						'max'  => 180,
 						'step' => 0.1,
 					],
 				],
@@ -170,8 +170,8 @@ class Sphere_Photo_Viewer extends Widget_Base {
 				'type'    => Controls_Manager::SLIDER,
 				'range'   => [
 					'px' => [
-						'min'  => 0,
-						'max'  => 180,
+						'min'  => -90,
+						'max'  => 90,
 						'step' => 0.1,
 					],
 				],
