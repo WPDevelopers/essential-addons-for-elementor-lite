@@ -9170,6 +9170,10 @@ msgstr ""
 msgid "Ease-in-out"
 msgstr ""
 
+#: ../includes/Extensions/Hover_Effect.php:1234
+msgid "Enable Live Changes"
+msgstr ""
+
 #: ../includes/Extensions/Post_Duplicator.php:35, ../includes/Extensions/Post_Duplicator.php:56
 msgid "EA Duplicator"
 msgstr ""
