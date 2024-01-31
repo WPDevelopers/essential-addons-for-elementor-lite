@@ -1227,6 +1227,18 @@ class Hover_Effect {
 
         $element->end_controls_tab();
         $element->end_controls_tabs();
+		
+		$element->add_control(
+			'eael_hover_effect_enable_live_changes',
+			[
+				'label'     => __( 'Enable Live Changes', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'separator' => 'before',
+				'condition' => [
+					'eael_hover_effect_switch' => 'yes',
+				]
+			]
+		);
 		$element->end_controls_section();
 	}
 

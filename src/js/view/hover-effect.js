@@ -32,31 +32,36 @@ let HoverEffectHandler = function ($scope, $) {
     $eaelOffsetHoverLeft              = $scope.data('eael_offset_hover_left'),
     $eaelContainer        = $('.elementor-widget-container', $scope);
 
-    if(window.isRunFirstTime === undefined && window.isEditMode || 1) {
-        window.isRunFirstTime = true;
-        var EAdata = [];
-
-        function getSettingsVal($el) {
-            $.each($el, function (i, el) {
-                if (el.attributes.elType === 'widget') {
-                    if (el.attributes.settings.attributes['eael_hover_effect_switch'] === 'yes') {
-                        EAdata[el.attributes.id] = el.attributes.settings.attributes;
+    /**
+     * For editor page
+     */
+    if( window.isEditMode ) {
+        if(window.isRunFirstTime === undefined && window.isEditMode || 1) {
+            window.isRunFirstTime = true;
+            var EAdata = [];
+    
+            function getSettingsVal($el) {
+                $.each($el, function (i, el) {
+                    let $getSettings = el.attributes.settings.attributes;
+                    if (el.attributes.elType === 'widget') {
+                        if ( $getSettings['eael_hover_effect_switch'] === 'yes' && $getSettings['eael_hover_effect_enable_live_changes'] == 'yes' ) {
+                            EAdata[el.attributes.id] = el.attributes.settings.attributes;
+                        }
                     }
-                }
-
-                if (el.attributes.elType === 'container') {
-                    getSettingsVal(el.attributes.elements.models);
-                }
-            });
+    
+                    if (el.attributes.elType === 'container') {
+                        getSettingsVal(el.attributes.elements.models);
+                    }
+                });
+            }
+    
+            getSettingsVal(window.elementor.elements.models);
         }
-
-        getSettingsVal(window.elementor.elements.models);
-    }
-
-    for (let key in EAdata) {
-        // console.log($(`[data-id="${key}"]`), EAdata?.[key]?.['eael_hover_effect_opacity']);
-        if($scopeId === key){
-            $Opacity = {'opacity': EAdata?.[key]?.['eael_hover_effect_opacity']?.['size']};
+    
+        for (let key in EAdata) {
+            if($scopeId === key){
+                $Opacity = {'opacity': EAdata?.[key]?.['eael_hover_effect_opacity']?.['size']};
+            }
         }
     }
 
