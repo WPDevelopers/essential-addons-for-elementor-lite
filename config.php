@@ -1153,11 +1153,6 @@ $config = [
 				        'type'    => 'lib',
 				        'context' => 'view',
 			        ],
-//			        [
-//				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/sphere-photo-viewer.min.css',
-//				        'type'    => 'self',
-//				        'context' => 'view',
-//			        ],
 		        ],
 		        'js'  => [
 			        [
