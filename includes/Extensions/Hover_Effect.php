@@ -669,7 +669,7 @@ class Hover_Effect {
                 'type'               => Controls_Manager::SLIDER, 
                 'frontend_available' => true, 
                 'default' => [
-                    'size' => 0,
+                    'size' => 1,
                 ],
                 'range' => [
                     'px' => [
