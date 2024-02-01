@@ -61,6 +61,7 @@ let HoverEffectHandler = function ($scope, $) {
         for ( let key in eaelEditModeSettings ) {
             if( $scopeId === key ) {
                 $Opacity = {'opacity': eaelEditModeSettings?.[key]?.['eael_hover_effect_opacity']?.['size']};
+                $opacityHover = {'opacity': eaelEditModeSettings?.[key]?.['eael_hover_effect_opacity_hover']?.['size']};
                 //FIlter
                 $eaelBlurEffect = {'blur': eaelEditModeSettings?.[key]?.['eael_hover_effect_blur']?.['size']};
                 $eaelContrastEffect = {'contrast': eaelEditModeSettings?.[key]?.['eael_hover_effect_contrast']?.['size']};
@@ -68,6 +69,15 @@ let HoverEffectHandler = function ($scope, $) {
                 $eaelInvertEffect = {'invert': eaelEditModeSettings?.[key]?.['eael_hover_effect_invert']?.['size']};
                 $eaelSaturateEffect = {'saturate': eaelEditModeSettings?.[key]?.['eael_hover_effect_saturate']?.['size']};
                 $eaelSepiaEffect = {'sepia': eaelEditModeSettings?.[key]?.['eael_hover_effect_sepia']?.['size']};
+
+                //Filter Hover
+                $eaelBurHoverEffect = {'blur': eaelEditModeSettings?.[key]?.['eael_hover_effect_blur_hover']?.['size']};
+                $eaelContrastHoverEffect = {'contrast': eaelEditModeSettings?.[key]?.['eael_hover_effect_contrast_hover']?.['size']};
+                $eaelGrayscalHoverEffect = {'grayscale': eaelEditModeSettings?.[key]?.['eael_hover_effect_grayscal_hover']?.['size']};
+                $eaelInvertHoverEffect = {'invert': eaelEditModeSettings?.[key]?.['eael_hover_effect_invert_hover']?.['size']};
+                $eaelSaturateHoverEffect = {'saturate': eaelEditModeSettings?.[key]?.['eael_hover_effect_saturate_hover']?.['size']};
+                $eaelSepiaHoverEffect = {'sepia': eaelEditModeSettings?.[key]?.['eael_hover_effect_sepia_hover']?.['size']};
+
                 //Offset
                 $eaelOffsetTop = {
                     'size': eaelEditModeSettings?.[key]?.['eael_hover_effect_offset_top']?.['size'],
@@ -77,6 +87,17 @@ let HoverEffectHandler = function ($scope, $) {
                     'size': eaelEditModeSettings?.[key]?.['eael_hover_effect_offset_left']?.['size'],
                     'unit': eaelEditModeSettings?.[key]?.['eael_hover_effect_offset_left']?.['unit']
                 };
+
+                //Offset Hover
+                $eaelOffsetHoverTop = {
+                    'size': eaelEditModeSettings?.[key]?.['eael_hover_effect_offset_hover_top']?.['size'],
+                    'unit': eaelEditModeSettings?.[key]?.['eael_hover_effect_offset_hover_top']?.['unit']
+                };
+                $eaelOffsetHoverLeft = {
+                    'size': eaelEditModeSettings?.[key]?.['eael_hover_effect_offset_hover_left']?.['size'],
+                    'unit': eaelEditModeSettings?.[key]?.['eael_hover_effect_offset_hover_left']?.['unit']
+                };
+
                 //Tranform
                 $eaelRotateEffect = {
                     'rotate_x': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_rotatex']?.['size'],
@@ -91,10 +112,30 @@ let HoverEffectHandler = function ($scope, $) {
                     'skew_x': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_skewx']?.['size'],
                     'skew_y': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_skewy']?.['size']
                 };
+
+                //Tranform Hover
+                $eaelRotateHoverEffect = {
+                    'rotate_x': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_hover_rotatex']?.['size'],
+                    'rotate_y': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_hover_rotatey']?.['size'],
+                    'rotate_z': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_hover_rotatez']?.['size']
+                };
+                $eaelScaleHoverEffect = {
+                    'scale_x': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_hover_scalex']?.['size'],
+                    'scale_y': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_hover_scaley']?.['size']
+                };
+                $eaelSkewHoverEffect = {
+                    'skew_x': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_hover_skewx']?.['size'],
+                    'skew_y': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_hover_skewy']?.['size']
+                };
                 //Transition
                 $eaelDuration = {'transitionDuration': eaelEditModeSettings?.[key]?.['eael_hover_effect_general_settings_duration']?.['size']};
                 $eaelDelay = {'transitionDelay': eaelEditModeSettings?.[key]?.['eael_hover_effect_general_settings_delay']?.['size']};
                 $eaelEasing = {'transitionEasing': eaelEditModeSettings?.[key]?.['eael_hover_effect_general_settings_easing']};
+
+                //Transition Hover
+                $eaelHoverDuration = {'transitionDuration': eaelEditModeSettings?.[key]?.['eael_hover_effect_general_settings_duration']?.['size']};
+                $eaelHoverDelay = {'transitionDelay': eaelEditModeSettings?.[key]?.['eael_hover_effect_general_settings_delay']?.['size']};
+                $eaelHoverEasing = {'transitionEasing': eaelEditModeSettings?.[key]?.['eael_hover_effect_general_settings_easing']};
             }
         }
     }
