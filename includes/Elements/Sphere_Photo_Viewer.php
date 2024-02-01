@@ -454,10 +454,9 @@ class Sphere_Photo_Viewer extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
-				'name'      => 'ea_spv_nav_background',
-				'types'     => [ 'classic', 'gradient' ],
-				'separator' => 'after',
-				'selector'  => '{{WRAPPER}} .psv-navbar',
+				'name'     => 'ea_spv_nav_background',
+				'types'    => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .psv-navbar',
 			]
 		);
 
@@ -466,9 +465,18 @@ class Sphere_Photo_Viewer extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Title Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
+				'separator' => 'before',
 				'selectors' => [
 					'{{WRAPPER}} .psv-navbar .psv-caption-content' => 'color: {{VALUE}}',
 				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'content_typography',
+				'selector' => '{{WRAPPER}} .psv-navbar .psv-caption-content',
 			]
 		);
 
