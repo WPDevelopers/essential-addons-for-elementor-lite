@@ -446,18 +446,41 @@ class Sphere_Photo_Viewer extends Widget_Base {
 		$this->start_controls_section(
 			'ea_section_spv_general_style',
 			[
-				'label' => esc_html__( 'General', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Navigation Bar', 'essential-addons-for-elementor-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
 
-		$this->add_control(
-			'ea_spv_color',
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
 			[
-				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'name'      => 'ea_spv_nav_background',
+				'types'     => [ 'classic', 'gradient' ],
+				'separator' => 'after',
+				'selector'  => '{{WRAPPER}} .psv-navbar',
+			]
+		);
+
+		$this->add_control(
+			'ea_spv_nav_title_color',
+			[
+				'label'     => esc_html__( 'Title Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .ea-woo-cart' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .psv-navbar .psv-caption-content' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_control(
+			'ea_spv_nav_icon_color',
+			[
+				'label'     => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .psv-navbar .psv-button svg path' => 'fill: {{VALUE}}',
+					'{{WRAPPER}} .psv-navbar .psv-button .psv-zoom-range-handle, 
+					{{WRAPPER}} .psv-navbar .psv-button .psv-zoom-range-line' => 'background: {{VALUE}}',
 				],
 			]
 		);
