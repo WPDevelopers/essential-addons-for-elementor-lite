@@ -1,36 +1,36 @@
 let HoverEffectHandler = function ($scope, $) {
-    let $eaelRotateEffect = $scope.data('eael_rotate_effect'),
-    $eaelScaleEffect      = $scope.data('eael_scale_effect'),
-    $eaelSkewEffect       = $scope.data('eael_skew_effect'),
-    $Opacity              = $scope.data('eael_opacity'),
-    $eaelBlurEffect       = $scope.data('eael_blur_effect'),
-    $eaelContrastEffect   = $scope.data('eael_contrast_effect'),
-    $eaelGrayscaleEffect  = $scope.data('eael_grayscale_effect'),
-    $eaelInvertEffect     = $scope.data('eael_invert_effect'),
-    $eaelSaturateEffect   = $scope.data('eael_saturate_effect'),
-    $eaelSepiaEffect      = $scope.data('eael_sepia_effect'),
-    $scopeId = $scope.data('id'),
-    $eaelBurHoverEffect = $scope.data('eael_blur_hover_effect'),
+    let $eaelRotateEffect    = $scope.data('eael_rotate_effect'),
+    $eaelScaleEffect         = $scope.data('eael_scale_effect'),
+    $eaelSkewEffect          = $scope.data('eael_skew_effect'),
+    $Opacity                 = $scope.data('eael_opacity'),
+    $eaelBlurEffect          = $scope.data('eael_blur_effect'),
+    $eaelContrastEffect      = $scope.data('eael_contrast_effect'),
+    $eaelGrayscaleEffect     = $scope.data('eael_grayscale_effect'),
+    $eaelInvertEffect        = $scope.data('eael_invert_effect'),
+    $eaelSaturateEffect      = $scope.data('eael_saturate_effect'),
+    $eaelSepiaEffect         = $scope.data('eael_sepia_effect'),
+    $scopeId                 = $scope.data('id'),
+    $eaelBurHoverEffect      = $scope.data('eael_blur_hover_effect'),
     $eaelContrastHoverEffect = $scope.data('eael_contrast_hover_effect'),
     $eaelGrayscalHoverEffect = $scope.data('eael_grayscal_hover_effect'),
-    $eaelInvertHoverEffect = $scope.data('eael_invert_hover_effect'),
+    $eaelInvertHoverEffect   = $scope.data('eael_invert_hover_effect'),
     $eaelSaturateHoverEffect = $scope.data('eael_saturate_hover_effect'),
-    $eaelSepiaHoverEffect = $scope.data('eael_sepia_hover_effect'),
-    $eaelRotateHoverEffect = $scope.data('eael_rotate_hover_effect'),
-    $eaelScaleHoverEffect = $scope.data('eael_scale_hover_effect'),
-    $eaelSkewHoverEffect = $scope.data('eael_skew_hover_effect'),
-    $opacityHover              = $scope.data('eael_opacity_hover'),
-    $eaelDuration              = $scope.data('eael_duration'),
-    $eaelDelay              = $scope.data('eael_delay'),
+    $eaelSepiaHoverEffect    = $scope.data('eael_sepia_hover_effect'),
+    $eaelRotateHoverEffect   = $scope.data('eael_rotate_hover_effect'),
+    $eaelScaleHoverEffect    = $scope.data('eael_scale_hover_effect'),
+    $eaelSkewHoverEffect     = $scope.data('eael_skew_hover_effect'),
+    $opacityHover            = $scope.data('eael_opacity_hover'),
+    $eaelDuration            = $scope.data('eael_duration'),
+    $eaelDelay               = $scope.data('eael_delay'),
     $eaelEasing              = $scope.data('eael_easing'),
-    $eaelHoverDuration              = $scope.data('eael_hover_duration'),
-    $eaelHoverDelay              = $scope.data('eael_hover_delay'),
-    $eaelHoverEasing              = $scope.data('eael_hover_easing'),
-    $eaelOffsetTop              = $scope.data('eael_offset_top'),
-    $eaelOffsetLeft              = $scope.data('eael_offset_left'),
-    $eaelOffsetHoverTop              = $scope.data('eael_offset_hover_top'),
-    $eaelOffsetHoverLeft              = $scope.data('eael_offset_hover_left'),
-    $eaelContainer        = $('.elementor-widget-container', $scope);
+    $eaelHoverDuration       = $scope.data('eael_hover_duration'),
+    $eaelHoverDelay          = $scope.data('eael_hover_delay'),
+    $eaelHoverEasing         = $scope.data('eael_hover_easing'),
+    $eaelOffsetTop           = $scope.data('eael_offset_top'),
+    $eaelOffsetLeft          = $scope.data('eael_offset_left'),
+    $eaelOffsetHoverTop      = $scope.data('eael_offset_hover_top'),
+    $eaelOffsetHoverLeft     = $scope.data('eael_offset_hover_left'),
+    $eaelContainer           = $('.elementor-widget-container', $scope);
 
     /**
      * For editor page
@@ -55,7 +55,7 @@ let HoverEffectHandler = function ($scope, $) {
                 });
             }
     
-            getSettingsVal(window.elementor.elements.models);
+            getSettingsVal( window.elementor.elements.models );
         }
     
         for ( let key in eaelEditModeSettings ) {
