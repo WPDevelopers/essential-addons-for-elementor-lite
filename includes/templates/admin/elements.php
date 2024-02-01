@@ -391,7 +391,8 @@ $elements = [
                 'title'     => __( '360 Sphere Photo Viewer', 'essential-addons-for-elementor-lite' ),
                 'demo_link' => 'https://essential-addons.com/elementor/sphere-photo-viewer/',
                 'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-sphere-photo-viewer/',
-                'promotion' => 'new'
+                'promotion' => 'new',
+				'is_pro'	=> true
             ]
 		]
 	],

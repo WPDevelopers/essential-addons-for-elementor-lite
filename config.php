@@ -1139,50 +1139,6 @@ $config = [
                 ],
             ],
         ],
-        'sphere-photo-viewer' => [
-	        'class'      => '\Essential_Addons_Elementor\Elements\Sphere_Photo_Viewer',
-	        'dependency' => [
-		        'css' => [
-			        [
-				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/photo-sphere-viewer/core.min.css',
-				        'type'    => 'lib',
-				        'context' => 'view',
-			        ],
-			        [
-				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/photo-sphere-viewer/markers.min.css',
-				        'type'    => 'lib',
-				        'context' => 'view',
-			        ],
-		        ],
-		        'js'  => [
-			        [
-				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/three/three.min.js',
-				        'type'    => 'lib',
-				        'context' => 'view',
-			        ],
-			        [
-				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/photo-sphere-viewer/core.min.js',
-				        'type'    => 'lib',
-				        'context' => 'view',
-			        ],
-			        [
-				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/photo-sphere-viewer/autorotate.min.js',
-				        'type'    => 'lib',
-				        'context' => 'view',
-			        ],
-			        [
-				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/photo-sphere-viewer/markers.min.js',
-				        'type'    => 'lib',
-				        'context' => 'view',
-			        ],
-			        [
-				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/sphere-photo-viewer.min.js',
-				        'type'    => 'self',
-				        'context' => 'view',
-			        ],
-		        ],
-	        ],
-        ],
     ],
     'extensions' => [
         'promotion' => [
