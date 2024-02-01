@@ -2670,11 +2670,12 @@ class Woo_Cart extends Widget_Base {
 		$settings = $this->get_settings_for_display();
 		$this->ea_woo_cart_add_actions( $settings );
 
-		$deviceName = Helper::eael_get_current_device_by_screen();
-		if ( ! \Elementor\Plugin::$instance->editor->is_edit_mode() && ! empty( $settings["hide_{$deviceName}"] ) ) {
-            echo "<!-- This content is hidden on {$deviceName} devices -->";
-			return;
-		}
+		// Please don't print anything above this line otherwise session will not work properly.
+//		$deviceName = Helper::eael_get_current_device_by_screen();
+//		if ( ! \Elementor\Plugin::$instance->editor->is_edit_mode() && ! empty( $settings["hide_{$deviceName}"] ) ) {
+//            echo "<!-- This content is hidden on {$deviceName} devices -->";
+//			return;
+//		}
 
 		add_filter( 'wc_empty_cart_message', [ $this, 'wc_empty_cart_message' ] );
 
