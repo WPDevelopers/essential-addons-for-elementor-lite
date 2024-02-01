@@ -151,7 +151,7 @@ class Sphere_Photo_Viewer extends Widget_Base {
 				'type'    => Controls_Manager::SLIDER,
 				'range'   => [
 					'px' => [
-						'min'  => -180,
+						'min'  => - 180,
 						'max'  => 180,
 						'step' => 0.1,
 					],
@@ -170,7 +170,7 @@ class Sphere_Photo_Viewer extends Widget_Base {
 				'type'    => Controls_Manager::SLIDER,
 				'range'   => [
 					'px' => [
-						'min'  => -90,
+						'min'  => - 90,
 						'max'  => 90,
 						'step' => 0.1,
 					],
@@ -192,6 +192,19 @@ class Sphere_Photo_Viewer extends Widget_Base {
 				],
 				'ai'      => [
 					'active' => false,
+				],
+			]
+		);
+
+		$repeater->add_control(
+			'custom_dimension',
+			[
+				'label'       => esc_html__( 'Image Dimension', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::IMAGE_DIMENSIONS,
+				'description' => esc_html__( 'Crop the original image size to any custom size. Set custom width or height to keep the original size ratio.', 'essential-addons-for-elementor-lite' ),
+				'default'     => [
+					'width'  => '32',
+					'height' => '32',
 				],
 			]
 		);
@@ -484,7 +497,7 @@ class Sphere_Photo_Viewer extends Widget_Base {
 				$markers[] = [
 					'id'       => "{$uid}_{$key}",
 					'position' => [ 'yaw' => $marker['left_position']['size'] . 'deg', 'pitch' => $marker['top_position']['size'] . 'deg' ],
-					'size'     => [ 'width' => 32, 'height' => 32 ],
+					'size'     => [ 'width' => $marker['custom_dimension']['width'], 'height' => $marker['custom_dimension']['height'] ],
 					'anchor'   => 'bottom center',
 					'image'    => empty( $marker['ea_spv_markers_img']['url'] ) ? '' : $marker['ea_spv_markers_img']['url'],
 					'tooltip'  => $marker['ea_spv_markers_tooltip'],
