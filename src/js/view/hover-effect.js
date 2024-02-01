@@ -147,11 +147,11 @@ let HoverEffectHandler = function ($scope, $) {
 
     //Offset
     let $offsetX = $eaelOffsetTop?.size ? `translateX(${$eaelOffsetTop.size}${$eaelOffsetTop.unit})` : 'translateX(0)';
-    let $offsetY = $eaelOffsetLeft?.size ? `translateX(${$eaelOffsetLeft.size}${$eaelOffsetLeft.unit})` : 'translateX(0)';
+    let $offsetY = $eaelOffsetLeft?.size ? `translateY(${$eaelOffsetLeft.size}${$eaelOffsetLeft.unit})` : 'translateY(0)';
 
     //Offset Hover
     let $offsetHoverX = $eaelOffsetHoverTop?.size ? `translateX(${$eaelOffsetHoverTop.size}${$eaelOffsetHoverTop.unit})` : 'translateX(0)';
-    let $offsetHoverY = $eaelOffsetHoverLeft?.size ? `translateX(${$eaelOffsetHoverLeft.size}${$eaelOffsetHoverLeft.unit})` : 'translateX(0)';
+    let $offsetHoverY = $eaelOffsetHoverLeft?.size ? `translateY(${$eaelOffsetHoverLeft.size}${$eaelOffsetHoverLeft.unit})` : 'translateY(0)';
     
     //Transitions
     let $eaelDurationVal = $eaelDuration ? $eaelDuration?.transitionDuration : '0';
