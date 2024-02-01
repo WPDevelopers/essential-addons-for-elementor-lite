@@ -227,7 +227,7 @@ class Sphere_Photo_Viewer extends Widget_Base {
 		$repeater->add_control(
 			'left_position',
 			[
-				'label'   => __( 'Left Position', 'essential-addons-elementor' ),
+				'label'   => __( 'Left Position', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::SLIDER,
 				'range'   => [
 					'px' => [
@@ -246,7 +246,7 @@ class Sphere_Photo_Viewer extends Widget_Base {
 		$repeater->add_control(
 			'top_position',
 			[
-				'label'   => __( 'Top Position', 'essential-addons-elementor' ),
+				'label'   => __( 'Top Position', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::SLIDER,
 				'range'   => [
 					'px' => [
