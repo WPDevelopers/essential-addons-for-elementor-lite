@@ -541,12 +541,12 @@ class Sphere_Photo_Viewer extends Widget_Base {
 						'title' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eaicon-eye-slash-solid',
 					],
-					'block' => [
+					'flex' => [
 						'title' => __( 'Show', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eaicon-eye-solid',
 					],
 				],
-				'default'   => 'block',
+				'default'   => 'flex',
 				'toggle'    => false,
 				'selectors' => [
 					'{{WRAPPER}} .psv-navbar' => 'display: {{VALUE}};',
@@ -561,7 +561,7 @@ class Sphere_Photo_Viewer extends Widget_Base {
 				'types'     => [ 'classic', 'gradient' ],
 				'selector'  => '{{WRAPPER}} .psv-navbar',
 				'condition' => [
-					'ea_spv_navbar_visibility' => 'block'
+					'ea_spv_navbar_visibility!' => 'none'
 				]
 			]
 		);
@@ -576,7 +576,7 @@ class Sphere_Photo_Viewer extends Widget_Base {
 					'{{WRAPPER}} .psv-navbar .psv-caption-content' => 'color: {{VALUE}}',
 				],
 				'condition' => [
-					'ea_spv_navbar_visibility' => 'block'
+					'ea_spv_navbar_visibility!' => 'none'
 				]
 			]
 		);
@@ -587,7 +587,7 @@ class Sphere_Photo_Viewer extends Widget_Base {
 				'name'      => 'content_typography',
 				'selector'  => '{{WRAPPER}} .psv-navbar .psv-caption-content',
 				'condition' => [
-					'ea_spv_navbar_visibility' => 'block'
+					'ea_spv_navbar_visibility!' => 'none'
 				]
 			]
 		);
@@ -603,7 +603,7 @@ class Sphere_Photo_Viewer extends Widget_Base {
 					{{WRAPPER}} .psv-navbar .psv-button .psv-zoom-range-line' => 'background: {{VALUE}}',
 				],
 				'condition' => [
-					'ea_spv_navbar_visibility' => 'block'
+					'ea_spv_navbar_visibility!' => 'none'
 				]
 			]
 		);
