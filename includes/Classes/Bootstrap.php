@@ -187,8 +187,6 @@ class Bootstrap
         add_filter('eael/controls/event-calendar/source', [$this, 'event_calendar_source']);
         add_action('eael/controls/advanced-data-table/source', [$this, 'advanced_data_table_source']);
 
-	    add_action( 'init', [ $this, 'eael_session_start' ] );
-
         // Login | Register
         add_action('init', [$this, 'login_or_register_user']);
         add_filter('wp_new_user_notification_email', array($this, 'new_user_notification_email'), 10, 3);

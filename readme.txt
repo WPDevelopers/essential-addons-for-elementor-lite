@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.4
 Requires PHP: 7.0
-Stable tag: 5.9.5
+Stable tag: 5.9.8
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -296,6 +296,22 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.9.8 - 01/02/2024 =
+
+- Improved: Security Enhancement
+- Fixed: Minor styling issue on Hello Elementor child theme
+- Few minor bug fixes & improvements
+
+= 5.9.7 - 18/01/2024 =
+
+- Improved: Site Health Status
+- Improved: Asset auto generate after update the plugin
+- Few minor bug fixes & improvements
+
+= 5.9.6 - 17/01/2024 =
+
+- Few minor bug fixes & improvements
 
 = 5.9.5 - 17/01/2024 =
 
