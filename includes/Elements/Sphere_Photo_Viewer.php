@@ -315,16 +315,12 @@ class Sphere_Photo_Viewer extends Widget_Base {
 		$this->add_control(
 			'ea_spv_markers_list',
 			[
-				'label'       => esc_html__( 'Feature Item', 'essential-addons-for-elementor-lite' ),
+				'label'       => esc_html__( 'Marker Pointers', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::REPEATER,
 				'seperator'   => 'before',
 				'default'     => [
 					[
-						'ea_spv_markers_tooltip' => esc_html__( 'Feature Item 1', 'essential-addons-for-elementor-lite' ),
-						'ea_spv_markers_content' => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipisi cing elit, sed do eiusmod tempor incididunt ut abore et dolore magna', 'essential-addons-for-elementor-lite' ),
-					],
-					[
-						'ea_spv_markers_tooltip' => esc_html__( 'Feature Item 2', 'essential-addons-for-elementor-lite' ),
+						'ea_spv_markers_tooltip' => esc_html__( 'Pointer 1', 'essential-addons-for-elementor-lite' ),
 						'ea_spv_markers_content' => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipisi cing elit, sed do eiusmod tempor incididunt ut abore et dolore magna', 'essential-addons-for-elementor-lite' ),
 					],
 				],
