@@ -107,10 +107,10 @@ class Sphere_Photo_Viewer extends Widget_Base {
 		$this->add_control(
 			'ea_spv_description_switch',
 			[
-				'label'        => esc_html__( 'Description', 'textdomain' ),
+				'label'        => esc_html__( 'Description', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Show', 'textdomain' ),
-				'label_off'    => esc_html__( 'Hide', 'textdomain' ),
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes'
 			]
 		);
@@ -531,12 +531,38 @@ class Sphere_Photo_Viewer extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'ea_spv_navbar_visibility',
+			[
+				'label'     => __( 'Navbar Visibility', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => [
+					'none'  => [
+						'title' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eaicon-eye-slash-solid',
+					],
+					'block' => [
+						'title' => __( 'Show', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eaicon-eye-solid',
+					],
+				],
+				'default'   => 'block',
+				'toggle'    => false,
+				'selectors' => [
+					'{{WRAPPER}} .psv-navbar' => 'display: {{VALUE}};',
+				],
+			]
+		);
+
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
-				'name'     => 'ea_spv_nav_background',
-				'types'    => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .psv-navbar',
+				'name'      => 'ea_spv_nav_background',
+				'types'     => [ 'classic', 'gradient' ],
+				'selector'  => '{{WRAPPER}} .psv-navbar',
+				'condition' => [
+					'ea_spv_navbar_visibility' => 'block'
+				]
 			]
 		);
 
@@ -549,14 +575,20 @@ class Sphere_Photo_Viewer extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .psv-navbar .psv-caption-content' => 'color: {{VALUE}}',
 				],
+				'condition' => [
+					'ea_spv_navbar_visibility' => 'block'
+				]
 			]
 		);
 
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name'     => 'content_typography',
-				'selector' => '{{WRAPPER}} .psv-navbar .psv-caption-content',
+				'name'      => 'content_typography',
+				'selector'  => '{{WRAPPER}} .psv-navbar .psv-caption-content',
+				'condition' => [
+					'ea_spv_navbar_visibility' => 'block'
+				]
 			]
 		);
 
@@ -570,6 +602,9 @@ class Sphere_Photo_Viewer extends Widget_Base {
 					'{{WRAPPER}} .psv-navbar .psv-button .psv-zoom-range-handle, 
 					{{WRAPPER}} .psv-navbar .psv-button .psv-zoom-range-line' => 'background: {{VALUE}}',
 				],
+				'condition' => [
+					'ea_spv_navbar_visibility' => 'block'
+				]
 			]
 		);
 
