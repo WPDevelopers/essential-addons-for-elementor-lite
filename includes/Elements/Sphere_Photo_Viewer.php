@@ -133,6 +133,86 @@ class Sphere_Photo_Viewer extends Widget_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section(
+			'ea_section_spv_navbar_settings',
+			[
+				'label' => esc_html__( 'Navbar', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_control(
+			'ea_spv_nav_items',
+			[
+				'label'   => esc_html__( 'Navigation Items', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'auto',
+				'options' => [
+					'auto'   => esc_html__( 'Auto', 'essential-addons-for-elementor-lite' ),
+					'custom' => esc_html__( 'Custom', 'essential-addons-for-elementor-lite' )
+				],
+			]
+		);
+
+		$repeater = new Repeater();
+
+		$repeater->add_control(
+			'type',
+			[
+				'label'   => esc_html__( 'Navigator type', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => '',
+				'options' => [
+					''            => esc_html__( 'Select Type', 'essential-addons-for-elementor-lite' ),
+					'autorotate'  => esc_html__( 'autorotate', 'essential-addons-for-elementor-lite' ),
+					'zoomOut'     => esc_html__( 'zoomOut', 'essential-addons-for-elementor-lite' ),
+					'zoomRange'   => esc_html__( 'zoomRange', 'essential-addons-for-elementor-lite' ),
+					'zoomIn'      => esc_html__( 'zoomIn', 'essential-addons-for-elementor-lite' ),
+					'zoom'        => esc_html__( 'zoom', 'essential-addons-for-elementor-lite' ),
+					'moveLeft'    => esc_html__( 'moveLeft', 'essential-addons-for-elementor-lite' ),
+					'moveRight'   => esc_html__( 'moveRight', 'essential-addons-for-elementor-lite' ),
+					'moveTop'     => esc_html__( 'moveTop', 'essential-addons-for-elementor-lite' ),
+					'moveDown'    => esc_html__( 'moveDown', 'essential-addons-for-elementor-lite' ),
+					'move'        => esc_html__( 'move', 'essential-addons-for-elementor-lite' ),
+					'download'    => esc_html__( 'download', 'essential-addons-for-elementor-lite' ),
+					'description' => esc_html__( 'description', 'essential-addons-for-elementor-lite' ),
+					'caption'     => esc_html__( 'caption', 'essential-addons-for-elementor-lite' ),
+					'fullscreen'  => esc_html__( 'fullscreen', 'essential-addons-for-elementor-lite' ),
+					'markers'     => esc_html__( 'markers', 'essential-addons-for-elementor-lite' ),
+					'markersList' => esc_html__( 'markersList', 'essential-addons-for-elementor-lite' ),
+				],
+			]
+		);
+
+		$this->add_control(
+			'ea_spv_navbar',
+			[
+				'label'       => esc_html__( 'Items', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::REPEATER,
+				'seperator'   => 'before',
+				'default'     => [
+					[
+						'type' => 'autorotate',
+					],
+					[
+						'type' => 'zoom',
+					],
+					[
+						'type' => 'caption',
+					],
+					[
+						'type' => 'fullscreen',
+					],
+				],
+				'fields'      => $repeater->get_controls(),
+				'title_field' => '{{ type }}',
+				'condition'   => [
+					'ea_spv_nav_items' => 'custom'
+				]
+			]
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
 			'ea_section_spv_markers_settings',
 			[
 				'label'     => esc_html__( 'Markers', 'essential-addons-for-elementor-lite' ),
@@ -486,7 +566,7 @@ class Sphere_Photo_Viewer extends Widget_Base {
 				'label'     => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .psv-navbar .psv-button svg path' => 'fill: {{VALUE}}',
+					'{{WRAPPER}} .psv-navbar .psv-button svg path'                                => 'fill: {{VALUE}}',
 					'{{WRAPPER}} .psv-navbar .psv-button .psv-zoom-range-handle, 
 					{{WRAPPER}} .psv-navbar .psv-button .psv-zoom-range-line' => 'background: {{VALUE}}',
 				],
@@ -539,6 +619,14 @@ class Sphere_Photo_Viewer extends Widget_Base {
 			$sphere_settings['plugins'][][0] = [
 				'markers' => $markers
 			];
+		}
+
+		if ( $settings['ea_spv_nav_items'] === 'custom' ) {
+			$nav_items = [];
+			foreach ( $settings['ea_spv_navbar'] as $key => $nav ) {
+				$nav_items[] = $nav['type'];
+			}
+			$sphere_settings['navbar'] = $nav_items;
 		}
 
 		$sphere_settings = json_encode( $sphere_settings );
