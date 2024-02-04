@@ -3067,11 +3067,11 @@ class Woo_Checkout extends Widget_Base {
 
 		$settings = $this->get_settings_for_display();
 		// Please don't print anything above this line otherwise session will not work properly.
-		$deviceName = \Essential_Addons_Elementor\Classes\Helper::eael_get_current_device_by_screen();
-		if ( ! \Elementor\Plugin::$instance->editor->is_edit_mode() && ! empty( $settings["hide_{$deviceName}"] ) ) {
-			echo "<!-- This content is hidden on {$deviceName} devices -->";
-			return;
-		}
+//		$deviceName = \Essential_Addons_Elementor\Classes\Helper::eael_get_current_device_by_screen();
+//		if ( ! \Elementor\Plugin::$instance->editor->is_edit_mode() && ! empty( $settings["hide_{$deviceName}"] ) ) {
+//			echo "<!-- This content is hidden on {$deviceName} devices -->";
+//			return;
+//		}
 
 		/**
 		 * Remove WC Coupon Action From  Neve Theme
