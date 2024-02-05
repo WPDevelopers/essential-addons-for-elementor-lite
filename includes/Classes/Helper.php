@@ -908,7 +908,7 @@ class Helper
 	 */
 	public static function eael_pagination ($args, $settings) {
 
-		$pagination_Count          = intval( $args['total_post'] );
+		$pagination_Count          = intval( $args['total_post'] ?? 0 );
 		$paginationLimit           = intval( $settings['eael_product_grid_products_count'] ) ?: 4;
 		$pagination_Paginationlist = ceil( $pagination_Count / $paginationLimit );
 		$widget_id                 = sanitize_key( $settings['eael_widget_id'] );
