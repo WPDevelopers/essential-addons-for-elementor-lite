@@ -88,10 +88,12 @@ register_deactivation_hook(__FILE__, function () {
  *
  * @since v3.0.0
  */
-add_action('upgrader_process_complete', function ($upgrader_object, $options) {
-    $migration = new \Essential_Addons_Elementor\Classes\Migration;
-    $migration->plugin_upgrade_hook($upgrader_object, $options);
-}, 10, 2);
+add_action( 'upgrader_process_complete', function ( $upgrader_object, $options ) {
+	if ( class_exists( '\Essential_Addons_Elementor\Classes\Migration' ) ) {
+		$migration = new \Essential_Addons_Elementor\Classes\Migration;
+		$migration->plugin_upgrade_hook( $upgrader_object, $options );
+	}
+}, 10, 2 );
 
 add_action( 'wp_loaded', function () {
     $setup_wizard = get_option( 'eael_setup_wizard' );
