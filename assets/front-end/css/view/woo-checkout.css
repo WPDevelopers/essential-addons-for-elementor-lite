@@ -718,3 +718,12 @@
 .theme-dt-the7 .ea-woo-checkout-btn-next {
   border: none;
 }
+body.eael-woo-checkout .astra-pro-wc-module-activated.ea-woo-checkout .woocommerce form .form-row label {
+  opacity: 1 !important;
+  position: relative !important;
+  font-weight: 700 !important;
+  font-size: 0.9rem !important;
+}
+body.eael-woo-checkout .astra-pro-wc-module-activated.ea-woo-checkout .woocommerce form .form-row input, body.eael-woo-checkout .astra-pro-wc-module-activated.ea-woo-checkout .woocommerce form .form-row select, body.eael-woo-checkout .astra-pro-wc-module-activated.ea-woo-checkout .woocommerce form .form-row textarea {
+  padding: 0.9em 0.8em !important;
+}
