@@ -1,10 +1,9 @@
 ea.hooks.addAction("init", "ea", () => {
-    var ContentTicker = function($scope, $) {
-        var $contentTicker = $scope.find(".eael-content-ticker").eq(0),
-            $items =
-                $contentTicker.data("items") !== undefined
-                    ? $contentTicker.data("items")
-                    : 1,
+    function get_configurations($contentTicker) {
+        let $items =
+            $contentTicker.data("items") !== undefined
+                ? $contentTicker.data("items")
+                : 1,
             $items_tablet =
                 $contentTicker.data("items-tablet") !== undefined
                     ? $contentTicker.data("items-tablet")
@@ -60,59 +59,90 @@ ea.hooks.addAction("init", "ea", () => {
             $pause_on_hover =
                 $contentTicker.data("pause-on-hover") !== undefined
                     ? $contentTicker.data("pause-on-hover")
-                    : "",
-            $contentTickerOptions = {
-                direction: "horizontal",
-                loop: $loop,
-                speed: $speed,
-                effect: $effect,
-                slidesPerView: $items,
-                spaceBetween: $margin,
-                grabCursor: $grab_cursor,
-                paginationClickable: true,
-                autoHeight: true,
-                autoplay: {
-                    delay: $autoplay,
-                    disableOnInteraction: false
+                    : "";
+
+        return {
+            pauseOnHover: $pause_on_hover,
+            direction: "horizontal",
+            loop: $loop,
+            speed: $speed,
+            effect: $effect,
+            slidesPerView: $items,
+            spaceBetween: $margin,
+            grabCursor: $grab_cursor,
+            paginationClickable: true,
+            autoHeight: true,
+            autoplay: {
+                delay: $autoplay,
+                disableOnInteraction: false
+            },
+            pagination: {
+                el: $pagination,
+                clickable: true
+            },
+            navigation: {
+                nextEl: $arrow_next,
+                prevEl: $arrow_prev
+            },
+            breakpoints: {
+                // when window width is <= 480px
+                480: {
+                    slidesPerView: $items_mobile,
+                    spaceBetween: $margin_mobile
                 },
-                pagination: {
-                    el: $pagination,
-                    clickable: true
-                },
-                navigation: {
-                    nextEl: $arrow_next,
-                    prevEl: $arrow_prev
-                },
-                breakpoints: {
-                    // when window width is <= 480px
-                    480: {
-                        slidesPerView: $items_mobile,
-                        spaceBetween: $margin_mobile
-                    },
-                    // when window width is <= 640px
-                    768: {
-                        slidesPerView: $items_tablet,
-                        spaceBetween: $margin_tablet
-                    }
+                // when window width is <= 640px
+                768: {
+                    slidesPerView: $items_tablet,
+                    spaceBetween: $margin_tablet
                 }
-            };
+            }
+        };
+    }
+
+    function autoPlayManager( element, options, event ){
+        if (options.autoplay.delay === 0) {
+            event?.autoplay?.stop();
+        }
+        if (options.pauseOnHover && options.autoplay.delay !== 0) {
+            element.on("mouseenter", function() {
+                event?.autoplay?.pause();
+            });
+            element.on("mouseleave", function() {
+                event?.autoplay?.run();
+            });
+        }
+    }
+    var ContentTicker = function($scope, $) {
+        var $contentTicker = $scope.find(".eael-content-ticker").eq(0),
+            contentOptions = get_configurations($contentTicker);
 
         swiperLoader(
             $contentTicker,
-            $contentTickerOptions
-        ).then(($contentTickerSlider) => {
-            if ($autoplay === 0) {
-                $contentTickerSlider.autoplay.stop();
-            }
-            if ($pause_on_hover && $autoplay !== 0) {
-                $contentTicker.on("mouseenter", function() {
-                    $contentTickerSlider.autoplay.stop();
-                });
-                $contentTicker.on("mouseleave", function() {
-                    $contentTickerSlider.autoplay.start();
-                });
-            }
+            contentOptions
+        ).then((event) => {
+            autoPlayManager($contentTicker, event, contentOptions);
         });
+
+        var ContentTickerSlider = function (element) {
+            let contentTickerElements = $(element).find('.eael-content-ticker');
+            if (contentTickerElements.length) {
+                contentTickerElements.each(function () {
+                    let $this = $(this);
+                    if ($this[0].swiper) {
+                        $this[0].swiper.destroy(true, true);
+                        let options = get_configurations($this);
+                        swiperLoader($this[0], options).then((event) => {
+                            autoPlayManager($this, event, options);
+                        });
+                    }
+                });
+            }
+        }
+
+        ea.hooks.addAction("ea-toggle-triggered", "ea", ContentTickerSlider);
+        ea.hooks.addAction("ea-lightbox-triggered", "ea", ContentTickerSlider);
+        ea.hooks.addAction("ea-advanced-tabs-triggered", "ea", ContentTickerSlider);
+        ea.hooks.addAction("ea-advanced-accordion-triggered", "ea", ContentTickerSlider);
     };
 
     const swiperLoader = (swiperElement, swiperConfig) => {
