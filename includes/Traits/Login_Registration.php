@@ -1415,10 +1415,10 @@ trait Login_Registration {
 
 		if ( 'user' !== $receiver ) {
 			// remove password from admin mail, because admin should not see user's plain password
-			unset( $placeholders[0] );
 			unset( $placeholders[1] );
-			unset( $replacement[0] );
+			unset( $placeholders[2] );
 			unset( $replacement[1] );
+			unset( $replacement[2] );
 		}
 
 		$message = preg_replace( $placeholders, $replacement, $message );
@@ -1723,5 +1723,4 @@ trait Login_Registration {
 
 		return $eael_custom_profile_fields;
 	}
-
 }
