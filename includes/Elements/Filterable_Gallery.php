@@ -3256,9 +3256,9 @@ class Filterable_Gallery extends Widget_Base
                         <?php
                         if (isset($settings['fg_all_label_icon']) && !empty($settings['fg_all_label_icon'])) {
                             if (isset($settings['fg_all_label_icon']['value']['url'])) {
-                                echo '<img src="' . $settings['fg_all_label_icon']['value']['url'] . '" alt="' . esc_attr(get_post_meta($settings['fg_all_label_icon']['value']['id'], '_wp_attachment_image_alt', true)) . '" />';
+                                echo '<img src="' . esc_url( $settings['fg_all_label_icon']['value']['url'] ) . '" alt="' . esc_attr(get_post_meta($settings['fg_all_label_icon']['value']['id'], '_wp_attachment_image_alt', true)) . '" />';
                             } else {
-                                echo '<i class="' . $settings['fg_all_label_icon']['value'] . '"></i>';
+                                echo '<i class="' . esc_attr( $settings['fg_all_label_icon']['value'] ) . '"></i>';
                             }
                         } else {
                             echo '<i class="fas fa-angle-down"></i>';
@@ -3451,7 +3451,7 @@ class Filterable_Gallery extends Widget_Base
     protected function gallery_item_thumbnail_content($settings, $item){
         
 
-        $html = '<img src="' . $item['image'] . '" data-lazy-src="'.$item['image'].'" alt="' . esc_attr(get_post_meta($item['image_id'], '_wp_attachment_image_alt', true)) . '" class="gallery-item-thumbnail">';
+        $html = '<img src="' . esc_url( $item['image'] ) . '" data-lazy-src="' . esc_url( $item['image'] ) . '" alt="' . esc_attr( get_post_meta( $item['image_id'], '_wp_attachment_image_alt', true ) ) . '" class="gallery-item-thumbnail">';
 
         if ( empty($settings['eael_section_fg_full_image_clickable']) && $item['video_gallery_switch'] !== 'true' ) {
             if ($settings['eael_fg_show_popup'] == 'buttons' && $settings['eael_fg_caption_style'] === 'card') {
@@ -3577,12 +3577,12 @@ class Filterable_Gallery extends Widget_Base
             echo '<span class="fg-item-icon-inner">';
             if ($zoom_icon_is_new || $zoom_icon_migrated) {
                 if (isset($settings['eael_section_fg_zoom_icon_new']['value']['url'])) {
-                    echo '<img src="' . $settings['eael_section_fg_zoom_icon_new']['value']['url'] . '" alt="' . esc_attr(get_post_meta($settings['eael_section_fg_zoom_icon_new']['value']['id'], '_wp_attachment_image_alt', true)) . '" />';
+                    echo '<img src="' . esc_url( $settings['eael_section_fg_zoom_icon_new']['value']['url'] ) . '" alt="' . esc_attr(get_post_meta($settings['eael_section_fg_zoom_icon_new']['value']['id'], '_wp_attachment_image_alt', true)) . '" />';
                 } else if (isset($settings['eael_section_fg_zoom_icon_new']['value'])) {
-                    echo '<i class="' . $settings['eael_section_fg_zoom_icon_new']['value'] . '" aria-hidden="true"></i>';
+                    echo '<i class="' . esc_attr( $settings['eael_section_fg_zoom_icon_new']['value'] ) . '" aria-hidden="true"></i>';
                 }
             } else {
-                echo '<i class="' . $settings['eael_section_fg_zoom_icon'] . '" aria-hidden="true"></i>';
+                echo '<i class="' . esc_attr( $settings['eael_section_fg_zoom_icon'] ) . '" aria-hidden="true"></i>';
             }
             echo '</span>
             </a>';
@@ -3601,12 +3601,12 @@ class Filterable_Gallery extends Widget_Base
                 
                 if ($link_icon_is_new || $link_icon_migrated) {
                     if (isset($settings['eael_section_fg_link_icon_new']['value']['url'])) {
-                        echo '<img src="' . $settings['eael_section_fg_link_icon_new']['value']['url'] . '" alt="' . esc_attr(get_post_meta($settings['eael_section_fg_link_icon_new']['value']['id'], '_wp_attachment_image_alt', true)) . '" />';
+                        echo '<img src="' . esc_url( $settings['eael_section_fg_link_icon_new']['value']['url'] ) . '" alt="' . esc_attr(get_post_meta($settings['eael_section_fg_link_icon_new']['value']['id'], '_wp_attachment_image_alt', true)) . '" />';
                     } else {
-                        echo '<i class="' . $settings['eael_section_fg_link_icon_new']['value'] . '" aria-hidden="true"></i>';
+                        echo '<i class="' . esc_attr( $settings['eael_section_fg_link_icon_new']['value'] ) . '" aria-hidden="true"></i>';
                     }
                 } else {
-                    echo '<i class="' . $settings['eael_section_fg_link_icon'] . '" aria-hidden="true"></i>';
+                    echo '<i class="' . esc_attr( $settings['eael_section_fg_link_icon'] ) . '" aria-hidden="true"></i>';
                 }
                 
                 echo '</span>';
@@ -3640,7 +3640,7 @@ class Filterable_Gallery extends Widget_Base
                 $html .= '<div class="gallery-item-thumbnail-wrap fg-layout-3-item-thumb">';
             }
             
-            $html .= '<img src="' . $item['image'] . '" data-lazy-src="' . $item['image'] . '" alt="' . esc_attr(get_post_meta($item['image_id'], '_wp_attachment_image_alt', true)) . '" class="gallery-item-thumbnail">';
+            $html .= '<img src="' . esc_url( $item['image'] ) . '" data-lazy-src="' . esc_url( $item['image'] ) . '" alt="' . esc_attr(get_post_meta($item['image_id'], '_wp_attachment_image_alt', true)) . '" class="gallery-item-thumbnail">';
             
             $html .= '<div class="gallery-item-caption-wrap card-hover-bg caption-style-hoverer">';
             $html .= '<div class="fg-caption-head">';
