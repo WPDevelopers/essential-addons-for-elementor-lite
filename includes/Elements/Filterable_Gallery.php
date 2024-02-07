@@ -3451,7 +3451,7 @@ class Filterable_Gallery extends Widget_Base
     protected function gallery_item_thumbnail_content($settings, $item){
         
 
-        $html = '<img src="' . $item['image'] . '" data-lazy-src="'.$item['image'].'" alt="' . esc_attr(get_post_meta($item['image_id'], '_wp_attachment_image_alt', true)) . '" class="gallery-item-thumbnail">';
+        $html = '<img src="' . esc_url( $item['image'] ) . '" data-lazy-src="' . esc_url( $item['image'] ) . '" alt="' . esc_attr( get_post_meta( $item['image_id'], '_wp_attachment_image_alt', true ) ) . '" class="gallery-item-thumbnail">';
 
         if ( empty($settings['eael_section_fg_full_image_clickable']) && $item['video_gallery_switch'] !== 'true' ) {
             if ($settings['eael_fg_show_popup'] == 'buttons' && $settings['eael_fg_caption_style'] === 'card') {
@@ -3640,7 +3640,7 @@ class Filterable_Gallery extends Widget_Base
                 $html .= '<div class="gallery-item-thumbnail-wrap fg-layout-3-item-thumb">';
             }
             
-            $html .= '<img src="' . $item['image'] . '" data-lazy-src="' . $item['image'] . '" alt="' . esc_attr(get_post_meta($item['image_id'], '_wp_attachment_image_alt', true)) . '" class="gallery-item-thumbnail">';
+            $html .= '<img src="' . esc_url( $item['image'] ) . '" data-lazy-src="' . esc_url( $item['image'] ) . '" alt="' . esc_attr(get_post_meta($item['image_id'], '_wp_attachment_image_alt', true)) . '" class="gallery-item-thumbnail">';
             
             $html .= '<div class="gallery-item-caption-wrap card-hover-bg caption-style-hoverer">';
             $html .= '<div class="fg-caption-head">';
