@@ -812,7 +812,7 @@ class Content_Ticker extends Widget_Base
             if (isset($settings['__fa4_migrated']['arrow_new']) || empty($settings['arrow'])) {
                 $arrow = Helper::get_render_icon( $settings['arrow_new'] );
             } else {
-                $arrow = '<i class="' . $settings['arrow'] . '"></i>';
+                $arrow = '<i class="' . esc_attr( $settings['arrow'] ) . '"></i>';
             }
 
             $html = '<div class="content-ticker-pagination">';
