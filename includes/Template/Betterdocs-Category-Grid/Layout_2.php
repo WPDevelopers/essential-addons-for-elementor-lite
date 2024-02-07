@@ -50,7 +50,7 @@ echo '<article class="eael-better-docs-category-grid-post layout-2" data-id="' .
                     if (isset($settings['list_icon']['value']['url']) && !empty($settings['list_icon']['value']['url'])) {
                         echo '<img class="eael-bd-cg-post-list-icon" src="' . $settings['list_icon']['value']['url'] . '" />';
                     } else {
-                        echo '<i class="' . $settings['list_icon']['value'] . ' eael-bd-cg-post-list-icon"></i>';
+                        echo '<i class="' . esc_attr( $settings['list_icon']['value'] ) . ' eael-bd-cg-post-list-icon"></i>';
                     }
                     echo '<a ' . implode(' ', $attr) . '>' . get_the_title() . '</a>
                                 </li>';
@@ -79,13 +79,13 @@ echo '<article class="eael-better-docs-category-grid-post layout-2" data-id="' .
                         if (isset($settings['nested_list_title_closed_icon']['value']['url']) && !empty($settings['nested_list_title_closed_icon']['value']['url'])) {
                             echo '<img class="toggle-arrow arrow-right" src="' . esc_url( $settings['nested_list_title_closed_icon']['value']['url'] ) . '" />';
                         } else {
-                            echo '<i class="' . $settings['nested_list_title_closed_icon']['value'] . ' toggle-arrow arrow-right"></i>';
+                            echo '<i class="' . esc_attr( $settings['nested_list_title_closed_icon']['value'] ) . ' toggle-arrow arrow-right"></i>';
                         }
 
                         if (isset($settings['nested_list_title_open_icon']['value']['url']) && !empty($settings['nested_list_title_open_icon']['value']['url'])) {
                             echo '<img class="toggle-arrow arrow-down" src="' . esc_url( $settings['nested_list_title_open_icon']['value']['url'] ) . '" />';
                         } else {
-                            echo '<i class="' . $settings['nested_list_title_open_icon']['value'] . ' toggle-arrow arrow-down"></i>';
+                            echo '<i class="' . esc_attr( $settings['nested_list_title_open_icon']['value'] ) . ' toggle-arrow arrow-down"></i>';
                         }
 
                         echo '<a href="#">' . $sub_category->name . '</a></span>';
@@ -113,7 +113,7 @@ echo '<article class="eael-better-docs-category-grid-post layout-2" data-id="' .
                                 if (isset($settings['list_icon']['value']['url']) && !empty($settings['list_icon']['value']['url'])) {
                                     echo '<img class="eael-bd-cg-post-list-icon" src="' . esc_url( $settings['list_icon']['value']['url'] ) . '" />';
                                 } else {
-                                    echo '<i class="' . $settings['list_icon']['value'] . ' eael-bd-cg-post-list-icon"></i>';
+                                    echo '<i class="' . esc_attr( $settings['list_icon']['value'] ) . ' eael-bd-cg-post-list-icon"></i>';
                                 }
                                 echo '<a ' . implode(' ', $sub_attr) . '>' . get_the_title() . '</a></li>';
                             endwhile;
@@ -149,7 +149,7 @@ echo '<article class="eael-better-docs-category-grid-post layout-2" data-id="' .
                     if (isset($settings['button_icon']['value']['url']) && !empty($settings['button_icon']['value']['url'])) {
                         echo '<img class="eael-bd-cg-button-icon eael-bd-cg-button-icon-left" src="' . esc_url( $settings['button_icon']['value']['url'] ) . '" />';
                     } else {
-                        echo '<i class="' . $settings['button_icon']['value'] . ' eael-bd-cg-button-icon eael-bd-cg-button-icon-left"></i>';
+                        echo '<i class="' . esc_attr( $settings['button_icon']['value'] ) . ' eael-bd-cg-button-icon eael-bd-cg-button-icon-left"></i>';
                     }
                 }
 
@@ -159,7 +159,7 @@ echo '<article class="eael-better-docs-category-grid-post layout-2" data-id="' .
                     if (isset($settings['button_icon']['value']['url']) && !empty($settings['button_icon']['value']['url'])) {
                         echo '<img class="eael-bd-cg-button-icon eael-bd-cg-button-icon-right" src="' . esc_url( $settings['button_icon']['value']['url'] ) . '" />';
                     } else {
-                        echo '<i class="' . $settings['button_icon']['value'] . ' eael-bd-cg-button-icon eael-bd-cg-button-icon-right"></i>';
+                        echo '<i class="' . esc_attr( $settings['button_icon']['value'] ) . ' eael-bd-cg-button-icon eael-bd-cg-button-icon-right"></i>';
                     }
                 }
 
