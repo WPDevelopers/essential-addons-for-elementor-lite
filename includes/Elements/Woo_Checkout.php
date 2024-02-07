@@ -1811,6 +1811,26 @@ class Woo_Checkout extends Widget_Base {
                 ],
             ]
         );
+
+		$this->add_responsive_control(
+			'ea_woo_checkout_coupon_icon_position',
+			[
+				'label'              => esc_html__( 'Icon Position', 'essential-addons-for-elementor-lite' ),
+				'type'               => Controls_Manager::DIMENSIONS,
+				'size_units'         => [ 'px', 'em', '%' ],
+				'allowed_dimensions' => [ 'top', 'left' ],
+				'default' 			 => [
+					'top'      => 56,
+					'left'     => 35,
+					'unit'     => 'px',
+					'isLinked' =>  false,
+				],
+				'selectors'          => [
+					'{{WRAPPER}} .ea-woo-checkout .ea-coupon-icon' => 'top: {{TOP}}{{UNIT}}; left: {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		
 		$this->add_control(
 			'ea_woo_checkout_coupon_links_color',
 			[
@@ -1886,7 +1906,6 @@ class Woo_Checkout extends Widget_Base {
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
 					'{{WRAPPER}} .woo-checkout-coupon' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-					'{{WRAPPER}} .ea-woo-checkout .ea-coupon-icon' => 'top: {{TOP}}{{UNIT}}; left: {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
