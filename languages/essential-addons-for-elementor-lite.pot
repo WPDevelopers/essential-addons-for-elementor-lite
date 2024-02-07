@@ -686,7 +686,7 @@ msgstr ""
 msgid "Quantity"
 msgstr ""
 
-#: ../includes/Controls/Select2.php:33, ../includes/Elements/Woo_Cart.php:198, ../includes/Elements/Woo_Cart.php:718, ../includes/Elements/Woo_Cart.php:733, ../includes/Elements/Woo_Checkout.php:268, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:241, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:480
+#: ../includes/Controls/Select2.php:33, ../includes/Elements/Woo_Cart.php:198, ../includes/Elements/Woo_Cart.php:718, ../includes/Elements/Woo_Cart.php:733, ../includes/Elements/Woo_Checkout.php:268, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:241, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:485
 msgid "Subtotal"
 msgstr ""
 
@@ -4906,7 +4906,7 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:220, ../includes/Elements/Login_Register.php:829, ../includes/Elements/Login_Register.php:830, ../includes/Elements/Login_Register.php:862, ../includes/Elements/Login_Register.php:863, ../includes/Elements/Login_Register.php:2051, ../includes/Elements/Login_Register.php:2052, ../includes/Elements/Login_Register.php:5607, ../includes/Elements/Login_Register.php:5825, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:329
+#: ../includes/Elements/Login_Register.php:220, ../includes/Elements/Login_Register.php:829, ../includes/Elements/Login_Register.php:830, ../includes/Elements/Login_Register.php:862, ../includes/Elements/Login_Register.php:863, ../includes/Elements/Login_Register.php:2051, ../includes/Elements/Login_Register.php:2052, ../includes/Elements/Login_Register.php:5607, ../includes/Elements/Login_Register.php:5825, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:334
 msgid "Password"
 msgstr ""
 
@@ -4938,7 +4938,7 @@ msgstr ""
 msgid "Default Form Type"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:314, ../includes/Elements/Login_Register.php:5118, ../includes/Elements/Login_Register.php:5143, ../includes/Elements/Login_Register.php:5850, ../includes/Elements/Login_Register.php:6147, ../includes/Elements/Woo_Checkout.php:458, ../includes/Elements/Woo_Checkout.php:1411, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:342, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:342
+#: ../includes/Elements/Login_Register.php:314, ../includes/Elements/Login_Register.php:5118, ../includes/Elements/Login_Register.php:5143, ../includes/Elements/Login_Register.php:5850, ../includes/Elements/Login_Register.php:6147, ../includes/Elements/Woo_Checkout.php:458, ../includes/Elements/Woo_Checkout.php:1411, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:347, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:347
 msgid "Login"
 msgstr ""
 
@@ -8306,7 +8306,7 @@ msgstr ""
 msgid "Product"
 msgstr ""
 
-#: ../includes/Elements/Woo_Cart.php:405, ../includes/Elements/Woo_Cart.php:1173, ../includes/Elements/Woo_Checkout.php:302, ../includes/Elements/Woo_Checkout.php:1292, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:329, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:535
+#: ../includes/Elements/Woo_Cart.php:405, ../includes/Elements/Woo_Cart.php:1173, ../includes/Elements/Woo_Checkout.php:302, ../includes/Elements/Woo_Checkout.php:1292, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:329, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:540
 msgid "Total"
 msgstr ""
 
@@ -10913,26 +10913,26 @@ msgstr ""
 msgid "Pay for order"
 msgstr ""
 
-#: ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:325
+#: ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:330
 msgid "Username or email"
 msgstr ""
 
-#: ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:338
+#: ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:343
 msgid "Remember me"
 msgstr ""
 
-#: ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:345
+#: ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:350
 msgid "Lost your password?"
 msgstr ""
 
-#: ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:564
+#: ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:569
 msgid "You must be logged in to checkout."
 msgstr ""
 
-#: ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:610
+#: ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:615
 msgid "Billing &amp; Shipping"
 msgstr ""
 
-#: ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:639
+#: ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:644
 msgid "Create an account?"
 msgstr ""
