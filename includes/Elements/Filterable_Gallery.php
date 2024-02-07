@@ -3258,7 +3258,7 @@ class Filterable_Gallery extends Widget_Base
                             if (isset($settings['fg_all_label_icon']['value']['url'])) {
                                 echo '<img src="' . $settings['fg_all_label_icon']['value']['url'] . '" alt="' . esc_attr(get_post_meta($settings['fg_all_label_icon']['value']['id'], '_wp_attachment_image_alt', true)) . '" />';
                             } else {
-                                echo '<i class="' . $settings['fg_all_label_icon']['value'] . '"></i>';
+                                echo '<i class="' . esc_attr( $settings['fg_all_label_icon']['value'] ) . '"></i>';
                             }
                         } else {
                             echo '<i class="fas fa-angle-down"></i>';
@@ -3579,10 +3579,10 @@ class Filterable_Gallery extends Widget_Base
                 if (isset($settings['eael_section_fg_zoom_icon_new']['value']['url'])) {
                     echo '<img src="' . $settings['eael_section_fg_zoom_icon_new']['value']['url'] . '" alt="' . esc_attr(get_post_meta($settings['eael_section_fg_zoom_icon_new']['value']['id'], '_wp_attachment_image_alt', true)) . '" />';
                 } else if (isset($settings['eael_section_fg_zoom_icon_new']['value'])) {
-                    echo '<i class="' . $settings['eael_section_fg_zoom_icon_new']['value'] . '" aria-hidden="true"></i>';
+                    echo '<i class="' . esc_attr( $settings['eael_section_fg_zoom_icon_new']['value'] ) . '" aria-hidden="true"></i>';
                 }
             } else {
-                echo '<i class="' . $settings['eael_section_fg_zoom_icon'] . '" aria-hidden="true"></i>';
+                echo '<i class="' . esc_attr( $settings['eael_section_fg_zoom_icon'] ) . '" aria-hidden="true"></i>';
             }
             echo '</span>
             </a>';
@@ -3603,10 +3603,10 @@ class Filterable_Gallery extends Widget_Base
                     if (isset($settings['eael_section_fg_link_icon_new']['value']['url'])) {
                         echo '<img src="' . $settings['eael_section_fg_link_icon_new']['value']['url'] . '" alt="' . esc_attr(get_post_meta($settings['eael_section_fg_link_icon_new']['value']['id'], '_wp_attachment_image_alt', true)) . '" />';
                     } else {
-                        echo '<i class="' . $settings['eael_section_fg_link_icon_new']['value'] . '" aria-hidden="true"></i>';
+                        echo '<i class="' . esc_attr( $settings['eael_section_fg_link_icon_new']['value'] ) . '" aria-hidden="true"></i>';
                     }
                 } else {
-                    echo '<i class="' . $settings['eael_section_fg_link_icon'] . '" aria-hidden="true"></i>';
+                    echo '<i class="' . esc_attr( $settings['eael_section_fg_link_icon'] ) . '" aria-hidden="true"></i>';
                 }
                 
                 echo '</span>';
