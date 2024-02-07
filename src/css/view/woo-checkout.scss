@@ -527,6 +527,14 @@ $base-font-size: 14px;
 				display: none;
 			}
 			.woocommerce-form-login-toggle {
+				.wc-block-components-notice-banner {
+					svg {
+						display: none;
+					}
+					.wc-block-components-notice-banner__content {
+						margin-left: 25px;
+					}
+				}
 				.woocommerce-error, .woocommerce-info, .woocommerce-message {
 					background-color: transparent!important;
 					padding: 0 0 0 40px!important;
