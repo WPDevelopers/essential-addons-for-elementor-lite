@@ -236,3 +236,18 @@
 .elementor-control-unit-2[data-setting="eael_evergreen_counter_recurring_restart_after"] {
 	width: 70px;
 }
+
+/* EAEL Image Choose CSS */
+.elementor-control-type-eael-image-choose .eael-image-choices{
+	height: 150px;
+	display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+.elementor-control-type-eael-image-choose .eael-image-choices .elementor-choices-label{
+	border: none;
+	border-radius: 4px;
+}
+.elementor-control-type-eael-image-choose .eael-image-choices .elementor-choices-label:hover,
+.elementor-control-type-eael-image-choose .elementor-choices input:checked+.elementor-choices-label{
+	background: #333538;
+}

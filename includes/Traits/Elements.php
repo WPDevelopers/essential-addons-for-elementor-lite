@@ -22,6 +22,7 @@ trait Elements {
 		if ( version_compare( ELEMENTOR_VERSION, '3.5.0', '>=' ) ) {
 			$controls_manager->register( new \Essential_Addons_Elementor\Controls\Select2() );
 			$controls_manager->add_group_control( 'eael-background', new \Essential_Addons_Elementor\Controls\EAEL_Background() );
+			$controls_manager->register( new \Essential_Addons_Elementor\Controls\EAEL_Image_Choose() );
 		} else {
 			$controls_manager->register_control( 'eael-select2', new \Essential_Addons_Elementor\Controls\Select2() );
 		}
