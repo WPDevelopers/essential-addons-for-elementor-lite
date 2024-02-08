@@ -1,6 +1,6 @@
 <?php
 namespace Essential_Addons_Elementor\Controls;
-use Elementor\Base_Data_Control;
+use Elementor\Control_Choose;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 5.6.0
  */
-class EAEL_Image_Choose extends Base_Data_Control {
+class EAEL_Image_Choose extends Control_Choose {
 
 	/**
 	 * Get choose control type.
@@ -26,9 +26,9 @@ class EAEL_Image_Choose extends Base_Data_Control {
 	 *
 	 * @return string Control type.
 	 */
-	public function get_type() {
-		return 'eael-image-choose';
-	}
+	// public function get_type() {
+	// 	return 'eael-image-choose';
+	// }
 
 	/**
 	 * Render choose control output in the editor.
@@ -46,11 +46,19 @@ class EAEL_Image_Choose extends Base_Data_Control {
 		<div class="elementor-control-field">
 			<label class="elementor-control-title">{{{ data.label }}}</label>
 			<div class="elementor-control-input-wrapper">
+				<# if( data.image_choose ){ #>
 				<div class="elementor-choices eael-image-choices">
+				<# }else{ #>
+				<div class="elementor-choices">
+				<# } #>
 					<# _.each( data.options, function( options, value ) { #>
 					<input id="<?php $this->print_control_uid( $control_uid_input_type ); ?>" type="radio" name="elementor-choose-{{ data.name }}-{{ data._cid }}" value="{{ value }}">
 					<label class="elementor-choices-label elementor-control-unit-1 tooltip-target" for="<?php $this->print_control_uid( $control_uid_input_type ); ?>" data-tooltip="{{ options.title }}" title="{{ options.title }}">
-						<img class="eael-image-option" src="{{ options.image }}" alt="{{ options.title }}" />
+						<# if( options.image ){ #>
+							<img class="eael-image-option" src="{{ options.image }}" alt="{{ options.title }}" />
+						<# } else{ #>
+							<i class="{{ options.icon }}" aria-hidden="true"></i>
+						<# } #>
 						<span class="elementor-screen-only">{{{ options.title }}}</span>
 					</label>
 					<# } ); #>
@@ -79,6 +87,7 @@ class EAEL_Image_Choose extends Base_Data_Control {
 		return [
 			'options' => [],
 			'toggle' => true,
+			'image_choose' => false
 		];
 	}
 }
