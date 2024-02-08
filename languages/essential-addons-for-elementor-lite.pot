@@ -10526,7 +10526,7 @@ msgstr ""
 msgid "LearnDash Elements"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:667, ../includes/templates/admin/extensions.php:103
+#: ../includes/templates/admin/elements.php:667, ../includes/templates/admin/extensions.php:111
 msgid "Global Control"
 msgstr ""
 
@@ -10534,27 +10534,27 @@ msgstr ""
 msgid "Use the Toggle Button to Activate or Deactivate all the Elements of Essential Addons at once."
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:675, ../includes/templates/admin/extensions.php:111
+#: ../includes/templates/admin/elements.php:675, ../includes/templates/admin/extensions.php:119
 msgid "Enable All"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:676, ../includes/templates/admin/extensions.php:112
+#: ../includes/templates/admin/elements.php:676, ../includes/templates/admin/extensions.php:120
 msgid "Disable All"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:679, ../includes/templates/admin/elements.php:740, ../includes/templates/admin/extensions.php:115, ../includes/templates/admin/extensions.php:170, ../includes/templates/admin/tools.php:71
+#: ../includes/templates/admin/elements.php:679, ../includes/templates/admin/elements.php:740, ../includes/templates/admin/extensions.php:123, ../includes/templates/admin/extensions.php:178, ../includes/templates/admin/tools.php:71
 msgid "Save Settings"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:701, ../includes/templates/admin/extensions.php:139
+#: ../includes/templates/admin/elements.php:701, ../includes/templates/admin/extensions.php:147
 msgid "Setting"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:706, ../includes/templates/admin/extensions.php:144
+#: ../includes/templates/admin/elements.php:706, ../includes/templates/admin/extensions.php:152
 msgid "Documentation"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:710, ../includes/templates/admin/extensions.php:148
+#: ../includes/templates/admin/elements.php:710, ../includes/templates/admin/extensions.php:156
 msgid "Demo"
 msgstr ""
 
@@ -10602,7 +10602,11 @@ msgstr ""
 msgid "Wrapper Link"
 msgstr ""
 
-#: ../includes/templates/admin/extensions.php:104
+#: ../includes/templates/admin/extensions.php:95
+msgid "Advanced Dynamic Tags"
+msgstr ""
+
+#: ../includes/templates/admin/extensions.php:112
 msgid "Use the Toggle Button to Activate or Deactivate all the Extensions of Essential Addons at once."
 msgstr ""
 
