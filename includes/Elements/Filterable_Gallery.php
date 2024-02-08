@@ -3455,11 +3455,11 @@ class Filterable_Gallery extends Widget_Base
 
         if ( empty($settings['eael_section_fg_full_image_clickable']) && $item['video_gallery_switch'] !== 'true' ) {
             if ($settings['eael_fg_show_popup'] == 'buttons' && $settings['eael_fg_caption_style'] === 'card') {
-                $html .= '<div class="gallery-item-caption-wrap card-hover-bg caption-style-hoverer ' . $settings['eael_fg_grid_hover_style'] . '">
+                $html .= '<div class="gallery-item-caption-wrap card-hover-bg caption-style-hoverer ' . esc_attr( $settings['eael_fg_grid_hover_style'] ) . '">
                             ' . $this->render_fg_buttons($settings, $item) . '
                         </div>';
             } elseif ( $settings['eael_fg_show_popup'] === 'media' && $settings['eael_fg_caption_style'] === 'card' ) {
-                $html .= '<div class="gallery-item-caption-wrap card-hover-bg caption-style-hoverer ' . $settings['eael_fg_grid_hover_style'] . '"></div>';
+                $html .= '<div class="gallery-item-caption-wrap card-hover-bg caption-style-hoverer ' . esc_attr( $settings['eael_fg_grid_hover_style'] ) . '"></div>';
             }
         }
 
@@ -3510,7 +3510,7 @@ class Filterable_Gallery extends Widget_Base
      * @return string : Html markup
      */
     protected function gallery_item_caption_content($settings, $item, $caption_style){
-        $html = '<div class="gallery-item-caption-wrap ' . $caption_style . ' ' . $settings['eael_fg_grid_hover_style'] . '">';
+        $html = '<div class="gallery-item-caption-wrap ' . esc_attr( $caption_style . ' ' . $settings['eael_fg_grid_hover_style'] ) . '">';
 
         if ('hoverer' == $settings['eael_fg_caption_style']) {
             $html .= '<div class="gallery-item-hoverer-bg"></div>';
