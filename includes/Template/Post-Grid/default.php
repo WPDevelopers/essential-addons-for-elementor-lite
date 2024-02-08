@@ -32,7 +32,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                             echo Helper::get_terms_as_list($settings['eael_post_terms'], $settings['eael_post_terms_max_length']);
                         }
 
-                        echo '<div class="eael-entry-overlay ' . $settings['eael_post_grid_hover_animation'] . '">';
+                        echo '<div class="eael-entry-overlay ' . esc_attr( $settings['eael_post_grid_hover_animation'] ) . '">';
                             if (isset($settings['eael_post_grid_bg_hover_icon_new']['url'])) {
                                 echo '<img src="' . esc_url($settings['eael_post_grid_bg_hover_icon_new']['url']) . '" alt="' . esc_attr(get_post_meta($settings['eael_post_grid_bg_hover_icon_new']['id'], '_wp_attachment_image_alt', true)) . '" />';
                             } else {
@@ -183,7 +183,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
             echo Helper::get_terms_as_list($settings['eael_post_terms'], $settings['eael_post_terms_max_length']);
         }
 
-        echo '<div class="eael-entry-overlay ' . $settings['eael_post_grid_hover_animation'] . '">';
+        echo '<div class="eael-entry-overlay ' . esc_attr( $settings['eael_post_grid_hover_animation'] ) . '">';
 
         if (isset($settings['eael_post_grid_bg_hover_icon_new']['url'])) {
             echo '<img src="' . esc_url($settings['eael_post_grid_bg_hover_icon_new']['url']) . '" alt="' . esc_attr(get_post_meta($settings['eael_post_grid_bg_hover_icon_new']['id'], '_wp_attachment_image_alt', true)) . '" />';
@@ -274,7 +274,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
             echo Helper::get_terms_as_list($settings['eael_post_terms'], $settings['eael_post_terms_max_length']);
         }
 
-        echo '<div class="eael-entry-overlay ' . $settings['eael_post_grid_hover_animation'] . '">';
+        echo '<div class="eael-entry-overlay ' . esc_attr( $settings['eael_post_grid_hover_animation'] ) . '">';
 
         if (isset($settings['eael_post_grid_bg_hover_icon_new']['url'])) {
             echo '<img src="' . esc_url($settings['eael_post_grid_bg_hover_icon_new']['url']) . '" alt="' . esc_attr(get_post_meta($settings['eael_post_grid_bg_hover_icon_new']['id'], '_wp_attachment_image_alt', true)) . '" />';
