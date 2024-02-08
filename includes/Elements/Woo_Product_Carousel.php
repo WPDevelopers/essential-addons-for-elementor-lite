@@ -3052,7 +3052,7 @@ class Woo_Product_Carousel extends Widget_Base {
 
         if ( $settings[ 'dots' ] == 'yes' ) { ?>
             <!-- Add Pagination -->
-            <div class="swiper-pagination swiper-pagination-<?php echo esc_attr( $this->get_id() ) .' '. $settings['dots_preset'];
+            <div class="swiper-pagination swiper-pagination-<?php echo esc_attr( $this->get_id() .' '. $settings['dots_preset'] );
             ?>"></div>
         <?php }
     }
