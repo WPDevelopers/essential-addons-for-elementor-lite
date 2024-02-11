@@ -103,6 +103,10 @@
 	height: auto;
 }
 
+body.rtl .gallery-item-caption-over {
+	text-align: right;
+}
+
 a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 	text-decoration: none;
 }
@@ -243,6 +247,13 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 
 .eael-fg-hoverer-content-align-right .eael-filterable-gallery-item-wrap .gallery-item-caption-wrap .gallery-item-caption-over {
 	text-align: right;
+}
+
+body.rtl {
+	.eael-fg-card-content-align-right .eael-filterable-gallery-item-wrap .gallery-item-caption-wrap .gallery-item-caption-over,
+	.eael-fg-hoverer-content-align-right .eael-filterable-gallery-item-wrap .gallery-item-caption-wrap .gallery-item-caption-over {
+		text-align: left;
+	}
 }
 
 
