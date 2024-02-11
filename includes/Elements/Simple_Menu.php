@@ -1630,6 +1630,7 @@ class Simple_Menu extends Widget_Base
             <div <?php echo $this->get_render_attribute_string('eael-simple-menu'); ?>>
                 <?php echo wp_nav_menu( $args ); ?>
                 <button class="eael-simple-menu-toggle">
+                    <span class="sr-only "><?php esc_html_e( 'Humberger Toggle Menu', 'essential-addons-for-elementor-lite' ); ?></span>
                     <?php Icons_Manager::render_icon( $settings['eael_simple_menu_hamburger_icon'], [ 'aria-hidden' => 'true' ] ); ?>
                 </button>
             </div>
