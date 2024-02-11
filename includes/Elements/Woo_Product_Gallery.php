@@ -323,18 +323,34 @@ class Woo_Product_Gallery extends Widget_Base {
 			]
 		);
 
+		$image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/woo-product-gallery-';
 		$this->add_control(
 			'eael_product_gallery_style_preset',
 			[
-				'label'   => esc_html__( 'Style Preset', 'essential-addons-for-elementor-lite' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'eael-product-preset-1',
-				'options' => [
-					'eael-product-preset-1' => esc_html__( 'Preset 1', 'essential-addons-for-elementor-lite' ),
-					'eael-product-preset-2' => esc_html__( 'Preset 2', 'essential-addons-for-elementor-lite' ),
-					'eael-product-preset-3' => esc_html__( 'Preset 3', 'essential-addons-for-elementor-lite' ),
-					'eael-product-preset-4' => esc_html__( 'Preset 4', 'essential-addons-for-elementor-lite' ),
+				'label'       => esc_html__( 'Style Preset', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => [
+					'eael-product-preset-1' => [
+						'title' => esc_html__( 'Preset 1', 'essential-addons-for-elementor-lite' ),
+						'image' => $image_path . 'preset-1.png'
+					],
+					'eael-product-preset-2' => [
+						'title' => esc_html__( 'Preset 2', 'essential-addons-for-elementor-lite' ),
+						'image' => $image_path . 'preset-2.png'
+					],
+					'eael-product-preset-3' => [
+						'title' => esc_html__( 'Preset 3', 'essential-addons-for-elementor-lite' ),
+						'image' => $image_path . 'preset-3.png'
+					],
+					'eael-product-preset-4' => [
+						'title' => esc_html__( 'Preset 4', 'essential-addons-for-elementor-lite' ),
+						'image' => $image_path . 'preset-4.png'
+					]
 				],
+				'default'     => 'eael-product-preset-1',
+				'label_block' => true,
+                'toggle'      => false,
+                'image_choose'=> true,
 			]
 		);
 
