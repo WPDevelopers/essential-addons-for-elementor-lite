@@ -110,6 +110,19 @@ jQuery(window).on("elementor/frontend/init", function () {
 		}
 	}
 
+	//Add hashchange code form advanced-accordion
+	let  isTriggerOnHashchange = true;
+	window.addEventListener( 'hashchange', function () {
+		if( !isTriggerOnHashchange ) {
+			return;
+		}
+		let hashTag = window.location.hash.substr(1);
+		hashTag = hashTag === 'safari' ? 'eael-safari' : hashTag;
+		if ( hashTag !== 'undefined' && hashTag ) {
+			jQuery( '#' + hashTag ).trigger( 'click' );
+		}
+	});
+
 	$('a').on('click', function (e) {
 		var hashURL = $(this).attr('href'),
 			isStartWithHash;
@@ -120,6 +133,13 @@ jQuery(window).on("elementor/frontend/init", function () {
 		if (!isStartWithHash) {
 			hashURL = hashURL.replace(localize.page_permalink, '');
 			isStartWithHash = hashURL.startsWith('#');
+		}
+
+		if( isStartWithHash ) {
+			isTriggerOnHashchange = false;
+			setTimeout( () => {
+				isTriggerOnHashchange = true;
+			}, 100 );
 		}
 
 		// we will try and catch the error but not show anything just do it if possible
