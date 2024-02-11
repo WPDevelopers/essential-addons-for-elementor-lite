@@ -969,6 +969,11 @@ body.rtl {
 .eael-fg-card-content-align-center .fg-layout-3-item-content { text-align: center; }
 .eael-fg-card-content-align-right .fg-layout-3-item-content { text-align: right; }
 
+body.rtl {
+	.eael-fg-card-content-align-left .fg-layout-3-item-content { text-align: right; }
+	.eael-fg-card-content-align-right .fg-layout-3-item-content { text-align: left; }
+}
+
 .eael-filterable-gallery-item-wrap .fg-layout-3-item.eael-gallery-grid-item {
 	box-shadow: 0px 0px 30px 0px rgba(3, 29, 60, 0.05);
 	border-radius: 5px;
