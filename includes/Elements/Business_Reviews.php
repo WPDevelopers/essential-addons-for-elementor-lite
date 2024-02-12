@@ -1220,6 +1220,7 @@ class Business_Reviews extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
+				'default'   => '#5E5E5E',
 				'selectors' => [
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating'   => 'color: {{VALUE}};',
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-reviews-business-rating a' => 'color: {{VALUE}};',
@@ -1785,6 +1786,7 @@ class Business_Reviews extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
+				'default' 	=> '#4A4B50',
 				'selectors' => [
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-time'   => 'color: {{VALUE}};',
 					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-time a' => 'color: {{VALUE}};',
