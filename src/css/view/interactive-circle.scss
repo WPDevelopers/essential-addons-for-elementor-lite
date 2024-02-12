@@ -45,7 +45,7 @@
 
     .eael-circle-btn-txt {
         //color: $nav-item-initial-color;
-        font-size: 14px;
+        font-size: 13px;
         line-height: 1.5em;
     }
 
@@ -72,8 +72,8 @@
             $nav-item-padding: 18px;
             $nav-item-icon-width: 30px;
             $nav-item-initial-background: #fff;
-            $nav-item-hover-background: #7a5bff;
-            $nav-item-initial-color: #7a5bff;
+            $nav-item-hover-background: #4f31d3;
+            $nav-item-initial-color: #3204ff;
             $nav-item-hover-color: #fff;
 
             margin: 45px 0;
@@ -125,6 +125,7 @@
                                 }
                                 .eael-circle-btn-txt {
                                     color: $nav-item-initial-color;
+                                    font-weight: 600;
                                     //font-size: 14px;
                                     //line-height: 1.5em;
                                 }
