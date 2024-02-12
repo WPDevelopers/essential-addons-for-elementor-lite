@@ -3100,6 +3100,12 @@ class Woo_Checkout extends Widget_Base {
 			$settings['eael_enable_checkout_fields_reorder'] === 'yes' ? 'checkout-reorder-enabled' : ''
 		] );
 
+		$astra_pro = get_option( '_astra_ext_enabled_extensions' );
+
+		if ( !empty( $astra_pro ) && isset( $astra_pro['woocommerce'] ) && $astra_pro['woocommerce'] === 'woocommerce' ) {
+			$this->add_render_attribute( 'container', 'class', 'astra-pro-wc-module-activated' );
+		}
+
 		if ( $settings['eael_enable_checkout_fields_reorder'] === 'yes' ){
 			global $post;
 			$eael_checkout_fields = [];
