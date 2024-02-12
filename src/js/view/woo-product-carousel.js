@@ -225,9 +225,7 @@ ea.hooks.addAction("init", "ea", () => {
 		}
 
 		ea.hooks.addAction("ea-lightbox-triggered", "ea", WooProductCarouselLoader);
-		ea.hooks.addAction("ea-advanced-tabs-triggered", "ea", WooProductCarouselLoader);
-		ea.hooks.addAction("ea-advanced-accordion-triggered", "ea", WooProductCarouselLoader);
-		ea.hooks.addAction("ea-toogle-triggered", "ea", WooProductCarouselLoader);
+		ea.hooks.addAction("ea-toggle-triggered", "ea", WooProductCarouselLoader);
 	};
 
 	const swiperLoader = (swiperElement, swiperConfig) => {
