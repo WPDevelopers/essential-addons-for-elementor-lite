@@ -7438,6 +7438,10 @@ msgstr ""
 msgid "Desktop (> 2400px)"
 msgstr ""
 
+#: ../includes/Elements/Simple_Menu.php:1633
+msgid "Humberger Toggle Menu"
+msgstr ""
+
 #: ../includes/Elements/Sticky_Video.php:92
 msgid "Sticky Options"
 msgstr ""
