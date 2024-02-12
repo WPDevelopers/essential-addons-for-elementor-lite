@@ -3067,11 +3067,11 @@ class Woo_Checkout extends Widget_Base {
 
 		$settings = $this->get_settings_for_display();
 		// Please don't print anything above this line otherwise session will not work properly.
-		$deviceName = \Essential_Addons_Elementor\Classes\Helper::eael_get_current_device_by_screen();
-		if ( ! \Elementor\Plugin::$instance->editor->is_edit_mode() && ! empty( $settings["hide_{$deviceName}"] ) ) {
-			echo "<!-- This content is hidden on {$deviceName} devices -->";
-			return;
-		}
+//		$deviceName = \Essential_Addons_Elementor\Classes\Helper::eael_get_current_device_by_screen();
+//		if ( ! \Elementor\Plugin::$instance->editor->is_edit_mode() && ! empty( $settings["hide_{$deviceName}"] ) ) {
+//			echo "<!-- This content is hidden on {$deviceName} devices -->";
+//			return;
+//		}
 
 		/**
 		 * Remove WC Coupon Action From  Neve Theme
@@ -3099,6 +3099,12 @@ class Woo_Checkout extends Widget_Base {
 			'layout-'. $settings['ea_woo_checkout_layout'],
 			$settings['eael_enable_checkout_fields_reorder'] === 'yes' ? 'checkout-reorder-enabled' : ''
 		] );
+
+		$astra_pro = get_option( '_astra_ext_enabled_extensions' );
+
+		if ( !empty( $astra_pro ) && isset( $astra_pro['woocommerce'] ) && $astra_pro['woocommerce'] === 'woocommerce' ) {
+			$this->add_render_attribute( 'container', 'class', 'astra-pro-wc-module-activated' );
+		}
 
 		if ( $settings['eael_enable_checkout_fields_reorder'] === 'yes' ){
 			global $post;

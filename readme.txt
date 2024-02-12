@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.4
 Requires PHP: 7.0
-Stable tag: 5.9.7
+Stable tag: 5.9.9
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -14,7 +14,7 @@ The Essential plugin you install after Elementor! Packed with 50+ stunning free 
 
 Enhance your [Elementor](https://wordpress.org/plugins/elementor/) page building experience with 90+ creative elements and extensions. Add powers to your website builder using our easy-to-use Elementor widgets and ready template which were designed to make your next WordPress page and posts design easier and prettier than ever before.
 
-##ESSENTIAL ADDONS FOR ELEMENTOR - 90+ BEST ELEMENTOR WIDGETS WITH KITS, 5,000+ READY TEMPLATES & BEST WOOCOMMERCE BUILDER, SERVING 1 MILLION+ ACTIVE USERS##
+##ESSENTIAL ADDONS FOR ELEMENTOR - 90+ BEST ELEMENTOR WIDGETS WITH KITS, 5,000+ READY TEMPLATES & BEST WOOCOMMERCE BUILDER, SERVING 2 MILLION+ ACTIVE USERS##
 
 [Check the Demos](https://essential-addons.com/elementor/demos)
 
@@ -296,6 +296,31 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.9.9 - 11/02/2024 =
+
+- Improved: Security Enhancement
+- Fixed: EA Login Register Form | Add tag for custom field
+- Fixed: EA Creative Button | Button open in a new window issue
+- Fixed: EA Interactive circle | If the new "active as default" feature is not enabled, it displays blank content
+- Fixed: EA Advanced Data Table | "'" making text to next column while importing
+- Fixed: EA Advanced Tabs | Conflicting CSS with Hello theme settings
+- Fixed: EA Woo Product Gallery | Going back to the shop page from the single product page not displaying the images anymore in Safari
+- Fixed: EA Login Register Form | New registrations not getting added to the user
+- Fixed: EA Woo Checkout | Compatibility with Astra pro
+- Fixed: EA Woo Product Carousel | Color control reversing for regular and sale price
+- Fixed: Fatal error: Uncaught Error: Class "Migration" not found
+- Fixed: EA Wrapper Link | Links do not work without the domain name
+- Fixed: EA Woo Product Grid | Undefined index: total_post
+- Fixed: Saved Template Broken issues
+- Improved: EA Testimonial | Add control to resize and change color for stars
+- Few minor bug fixes & improvements
+
+= 5.9.8 - 01/02/2024 =
+
+- Improved: Security Enhancement
+- Fixed: Minor styling issue on Hello Elementor child theme
+- Few minor bug fixes & improvements
 
 = 5.9.7 - 18/01/2024 =
 

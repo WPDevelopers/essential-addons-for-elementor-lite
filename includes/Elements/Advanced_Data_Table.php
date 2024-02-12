@@ -1579,7 +1579,7 @@ class Advanced_Data_Table extends Widget_Base
                         </div>';
                     }
                 } else {
-                    echo '<div class="ea-advanced-data-table-pagination ea-advanced-data-table-pagination-' . $settings['ea_adv_data_table_pagination_type'] . ' clearfix"></div>';
+                    echo '<div class="ea-advanced-data-table-pagination ea-advanced-data-table-pagination-' . esc_attr( $settings['ea_adv_data_table_pagination_type'] ) . ' clearfix"></div>';
                 }
             }
         } else {
