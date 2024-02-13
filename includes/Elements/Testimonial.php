@@ -252,61 +252,87 @@ class Testimonial extends Widget_Base {
 			]
 		);
 
+		$image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/testimonial-';
 		$this->add_control(
 			'eael_testimonial_style',
 			[
-				'label'		=> __( 'Select Style', 'essential-addons-for-elementor-lite'),
-				'type'		=> Controls_Manager::SELECT,
-				'default'	=> 'default-style',
-				'options'	=> [
-					'default-style'						=> __( 'Default', 'essential-addons-for-elementor-lite'),
-					'classic-style'						=> __( 'Classic', 'essential-addons-for-elementor-lite'),
-					'middle-style'						=> __( 'Content | Icon/Image | Bio', 'essential-addons-for-elementor-lite'),
-					'icon-img-left-content'				=> __( 'Icon/Image | Content', 'essential-addons-for-elementor-lite'),
-					'icon-img-right-content'			=> __( 'Content | Icon/Image', 'essential-addons-for-elementor-lite'),
-					'content-top-icon-title-inline'		=> __( 'Content Top | Icon Title Inline', 'essential-addons-for-elementor-lite'),
-					'content-bottom-icon-title-inline'	=> __( 'Content Bottom | Icon Title Inline', 'essential-addons-for-elementor-lite')
+				'label'       => esc_html__( 'Select Style', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => [
+					'default-style' => [
+						'title' => esc_html__('Default', 'essential-addons-for-elementor-lite'),
+						'image' => $image_path . 'default-style.png'
+					],
+					'classic-style' => [
+						'title' => esc_html__('Classic', 'essential-addons-for-elementor-lite'),
+						'image' => $image_path . 'classic-style.png'
+					],
+					'middle-style' => [
+						'title' => esc_html__('Content | Icon/Image | Bio', 'essential-addons-for-elementor-lite'),
+						'image' => $image_path . 'middle-style.png'
+					],
+					'icon-img-left-content' => [
+						'title' => esc_html__('Icon/Image | Content', 'essential-addons-for-elementor-lite'),
+						'image' => $image_path . 'icon-img-left-content.png'
+					],
+					'icon-img-right-content' => [
+						'title' => esc_html__('Content | Icon/Image', 'essential-addons-for-elementor-lite'),
+						'image' => $image_path . 'icon-img-right-content.png'
+					],
+					'content-top-icon-title-inline' => [
+						'title' => esc_html__('Content Top | Icon Title Inline', 'essential-addons-for-elementor-lite'),
+						'image' => $image_path . 'content-top-icon-title-inline.png'
+					],
+					'content-bottom-icon-title-inline' => [
+						'title' => esc_html__('Content Bottom | Icon Title Inline', 'essential-addons-for-elementor-lite'),
+						'image' => $image_path . 'content-bottom-icon-title-inline.png'
+					],
+				],
+				'default'     => 'default-style',
+				'label_block' => true,
+				'toggle'      => false,
+				'image_choose'=> true,
+			]
+		);
+
+		$this->add_control(
+			'eael_testimonial_is_gradient_background',
+			[
+				'label' => __('Use Gradient Background', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
+				'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+				'return_value' => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'eael_testimonial_background',
+			[
+				'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .eael-testimonial-item' => 'background-color: {{VALUE}};',
+				],
+				'condition' => [
+					'eael_testimonial_is_gradient_background' => ''
 				]
 			]
-    );
-    
+		);
 
-    $this->add_control(
-      'eael_testimonial_is_gradient_background',
-      [
-          'label' => __('Use Gradient Background', 'essential-addons-for-elementor-lite'),
-          'type' => Controls_Manager::SWITCHER,
-          'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-          'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
-          'return_value' => 'yes',
-      ]
-    );
-    $this->add_control(
-        'eael_testimonial_background',
-        [
-            'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
-            'type' => Controls_Manager::COLOR,
-            'default' => '',
-            'selectors' => [
-                '{{WRAPPER}} .eael-testimonial-item' => 'background-color: {{VALUE}};',
-            ],
-            'condition' => [
-                'eael_testimonial_is_gradient_background' => ''
-            ]
-        ]
-    );
-    $this->add_group_control(
-        \Elementor\Group_Control_Background::get_type(),
-        [
-            'name' => 'eael_testimonial_gradient_background',
-            'label' => __('Gradient Background', 'essential-addons-for-elementor-lite'),
-            'types' => ['classic', 'gradient'],
-            'selector' => '{{WRAPPER}} .eael-testimonial-item',
-            'condition' => [
-                'eael_testimonial_is_gradient_background' => 'yes'
-            ]
-        ]
-    );
+		$this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'name' => 'eael_testimonial_gradient_background',
+				'label' => __('Gradient Background', 'essential-addons-for-elementor-lite'),
+				'types' => ['classic', 'gradient'],
+				'selector' => '{{WRAPPER}} .eael-testimonial-item',
+				'condition' => [
+					'eael_testimonial_is_gradient_background' => 'yes'
+				]
+			]
+		);
 
 		$this->add_control(
 			'eael_testimonial_alignment',
