@@ -35,7 +35,7 @@
   transition: all 0.2ms;
 }
 .eael-circle-wrapper .eael-circle-btn-txt {
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.5em;
 }
 @media only screen and (max-width: 600px) {
@@ -117,10 +117,11 @@
   fill: #A195DC;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn .eael-circle-btn-icon .eael-circle-icon-inner .eael-circle-btn-txt {
-  color: #7a5bff;
+  color: #3204ff;
+  font-weight: 600;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn:hover .eael-circle-btn-icon, .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn.active .eael-circle-btn-icon {
-  background: #7a5bff;
+  background: #4f31d3;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn:hover .eael-circle-btn-icon i, .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn.active .eael-circle-btn-icon i {
   color: #fff;
