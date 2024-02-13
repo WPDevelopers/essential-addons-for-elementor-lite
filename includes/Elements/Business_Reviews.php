@@ -207,18 +207,33 @@ class Business_Reviews extends Widget_Base {
 			]
 		);
 
+		$image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/business-reviews-';
+		$layout_options = [
+			'preset-1' => [
+				'title' => esc_html__('Preset 1', 'essential-addons-for-elementor-lite'),
+				'image' => $image_path . 'preset-1.png'
+			],
+			'preset-2' => [
+				'title' => esc_html__('Preset 2', 'essential-addons-for-elementor-lite'),
+				'image' => $image_path . 'preset-2.png'
+			],
+			'preset-3' => [
+				'title' => esc_html__('Preset 3', 'essential-addons-for-elementor-lite'),
+				'image' => $image_path . 'preset-3.png'
+			],
+		];
+		
 		$this->add_control(
 			'eael_business_reviews_style_preset_slider',
 			[
-				'label'     => esc_html__( 'Style Preset', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'preset-1',
-				'options'   => [
-					'preset-1' => esc_html__( 'Preset 1', 'essential-addons-for-elementor-lite' ),
-					'preset-2' => esc_html__( 'Preset 2', 'essential-addons-for-elementor-lite' ),
-					'preset-3' => esc_html__( 'Preset 3', 'essential-addons-for-elementor-lite' ),
-				],
-				'condition' => [
+				'label'       => esc_html__( 'Style Preset', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => $layout_options,
+				'default'     => 'preset-1',
+				'label_block' => true,
+				'toggle'      => false,
+				'image_choose'=> true,
+				'condition'   => [
 					'eael_business_reviews_items_layout' => 'slider'
 				],
 			]
@@ -227,15 +242,14 @@ class Business_Reviews extends Widget_Base {
 		$this->add_control(
 			'eael_business_reviews_style_preset_grid',
 			[
-				'label'     => esc_html__( 'Style Preset', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'preset-1',
-				'options'   => [
-					'preset-1' => esc_html__( 'Preset 1', 'essential-addons-for-elementor-lite' ),
-					'preset-2' => esc_html__( 'Preset 2', 'essential-addons-for-elementor-lite' ),
-					'preset-3' => esc_html__( 'Preset 3', 'essential-addons-for-elementor-lite' ),
-				],
-				'condition' => [
+				'label'       => esc_html__( 'Style Preset', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => $layout_options,
+				'default'     => 'preset-1',
+				'label_block' => true,
+				'toggle'      => false,
+				'image_choose'=> true,
+				'condition'   => [
 					'eael_business_reviews_items_layout' => 'grid'
 				],
 			]
