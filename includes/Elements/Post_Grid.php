@@ -248,18 +248,33 @@ class Post_Grid extends Widget_Base
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
-        $this->add_control(
-            'eael_post_grid_preset_style',
-            [
-                'label' => __('Select Style', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'options' => [
-                    '' => __('Default', 'essential-addons-for-elementor-lite'),
-                    'two' => __('Style Two', 'essential-addons-for-elementor-lite'),
-                    'three' => __('Style Three', 'essential-addons-for-elementor-lite'),
-                ],
-            ]
-        );
+
+        $image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/post-grid-';
+		$this->add_control(
+			'eael_post_grid_preset_style',
+			[
+				'label'       => esc_html__( 'Select Style', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => [
+					'one' => [
+						'title' => esc_html__('Default', 'essential-addons-for-elementor-lite'),
+						'image' => $image_path . 'one.png'
+					],
+					'two' => [
+						'title' => esc_html__('Two', 'essential-addons-for-elementor-lite'),
+						'image' => $image_path . 'two.png'
+					],
+					'three' => [
+						'title' => esc_html__('Three', 'essential-addons-for-elementor-lite'),
+						'image' => $image_path . 'three.png'
+					],
+				],
+				'default'     => 'one',
+				'label_block' => true,
+				'toggle'      => false,
+				'image_choose'=> true,
+			]
+		);
 
         $this->add_control(
             'eael_post_grid_style_three_alert',
