@@ -522,15 +522,42 @@ trait Controls
 		    );
 	    }
 
-        $wb->add_control(
-            'eael_dynamic_template_Layout',
-            [
-                'label'   => esc_html__('Template Layout', 'essential-addons-for-elementor-lite'),
-                'type'    => Controls_Manager::SELECT,
-                'default' => 'default',
-                'options' => $wb->get_template_list_for_dropdown(),
-            ]
-        );
+        if( 'eael-post-timeline' === $wb->get_name() ){
+            $template_list = $wb->get_template_list_for_dropdown();
+            $layout_options = [];
+            if( ! empty( $template_list ) ){
+                $image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/post-timeline-';
+                foreach( $template_list as $key => $label ){
+                    $layout_options[ $key ] = [
+                        'title' => $label,
+                        'image' => $image_path . $key . '.png'
+                    ];
+                }
+            }
+
+            $wb->add_control(
+                'eael_dynamic_template_Layout',
+                [
+                    'label'       => esc_html__( 'Template Layout', 'essential-addons-for-elementor-lite' ),
+                    'type'        => Controls_Manager::CHOOSE,
+                    'options'     => $layout_options,
+                    'default'     => 'default',
+                    'label_block' => true,
+                    'toggle'      => false,
+                    'image_choose'=> true,
+                ]
+            );
+        }else{
+            $wb->add_control(
+                'eael_dynamic_template_Layout',
+                [
+                    'label'   => esc_html__('Template Layout', 'essential-addons-for-elementor-lite'),
+                    'type'    => Controls_Manager::SELECT,
+                    'default' => 'default',
+                    'options' => $wb->get_template_list_for_dropdown(),
+                ]
+            );
+        }
 
         if ('eael-post-carousel' === $wb->get_name()) {
             $wb->add_control(
