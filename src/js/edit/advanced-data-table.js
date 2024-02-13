@@ -256,15 +256,16 @@ class advancedDataTableEdit {
 					let row = [];
 					let cols = rows[i].querySelectorAll("th, td");
 
-					if (this.table.classList.contains("ea-advanced-data-table-static")) {
-						for (let j = 0; j < cols.length; j++) {
-							row.push(JSON.stringify(decodeURI(cols[j].dataset.quill)));
-						}
-					} else {
-						for (let j = 0; j < cols.length; j++) {
-							row.push(JSON.stringify(cols[j].innerHTML.replace(/(\r\n|\n|\r)/gm, " ").trim()));
-						}
-					}
+					// if (this.table.classList.contains("ea-advanced-data-table-static")) {
+					// 	for (let j = 0; j < cols.length; j++) {
+					// 		row.push(JSON.stringify(decodeURI(cols[j].dataset.quill)));
+					// 	}
+					// } else {
+					// 	for (let j = 0; j < cols.length; j++) {
+					// 		// row.push(JSON.stringify(cols[j].innerHTML.replace(/(\r\n|\n|\r)/gm, " ").trim()));
+					// 		row.push(JSON.stringify(cols[j].innerHTML.replace( /,"""([^"]+)""",/g, ',"$1",' ).trim()));
+					// 	}
+					// }
 
 					csv.push(row.join(","));
 				}
@@ -293,7 +294,8 @@ class advancedDataTableEdit {
 					body += "<tbody>";
 					csletr.forEach((row, index) => {
 						if (row.length > 0) {
-							cols = row.match(/("(?:[^"\\]|\\.)*"|[^","]+)/gm);
+							let colReplace = row.replace(/,"""([^"]+)""",/g, ',"$1",');
+							cols = colReplace.match(/("(?:[^"\\]|\\.)*"|[^","]+)/gm);
 
 							if (cols.length > 0) {
 								if (enableHeader && index == 0) {
@@ -309,8 +311,8 @@ class advancedDataTableEdit {
 								} else {
 									body += "<tr>";
 									cols.forEach((col) => {
-										if (col.match(/(^"")|(^")|("$)|(""$)/g)) {
-											body += `<td>${JSON.parse(col)}</td>`;
+										if (col.match(/(^"")|(""$)/g)) {
+											body += `<td>${col}</td>`;
 										} else {
 											body += `<td>${col}</td>`;
 										}

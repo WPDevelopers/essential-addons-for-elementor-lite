@@ -2757,7 +2757,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			}
 
 			if ( $show_cat_thumb && !empty($settings['eael_all_tab_thumb']['url'])) {
-				$show_all_cat_thumb = '<img src="' . $settings['eael_all_tab_thumb']['url'] . '" />';
+				$show_all_cat_thumb = '<img src="' . esc_url( $settings['eael_all_tab_thumb']['url'] ) . '" />';
 			} else {
 				$show_all_cat_thumb = '';
 			}
@@ -2788,7 +2788,7 @@ class Woo_Product_Gallery extends Widget_Base {
 					$image_url    = wp_get_attachment_url( $thumbnail_id );
 
 					if ( $show_cat_thumb && $image_url ) {
-						$show_cat_thumb_tag = '<img src="' . $image_url . '" />';
+						$show_cat_thumb_tag = '<img src="' . esc_url( $image_url ) . '" />';
 					} else {
 						$show_cat_thumb_tag = '';
 					}
@@ -2816,7 +2816,7 @@ class Woo_Product_Gallery extends Widget_Base {
 					$image_url    = wp_get_attachment_url( $thumbnail_id );
 
 					if ( $show_cat_thumb && $image_url ) {
-						$show_cat_thumb_tag = '<img src="' . $image_url . '" />';
+						$show_cat_thumb_tag = '<img src="' . esc_url( $image_url ) . '" />';
 					} else {
 						$show_cat_thumb_tag = '';
 					}
