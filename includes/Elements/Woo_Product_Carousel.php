@@ -213,16 +213,6 @@ class Woo_Product_Carousel extends Widget_Base {
 		    ]
 	    );
 
-	    // $this->add_control(
-		//     'eael_dynamic_template_layout',
-		//     [
-		// 	    'label'   => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
-		// 	    'type'    => Controls_Manager::SELECT,
-		// 	    'default' => 'preset-1',
-		// 	    'options' => $this->get_template_list_for_dropdown(true),
-		//     ]
-	    // );
-
         $layout_options = [];
 		$template_list = $this->get_template_list_for_dropdown( true );
 
