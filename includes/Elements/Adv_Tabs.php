@@ -1050,7 +1050,7 @@ class Adv_Tabs extends Widget_Base
                                     <?php if ($tab_icon_is_new || $tab_icon_migrated) {
 		                                Icons_Manager::render_icon( $tab['eael_adv_tabs_tab_title_icon_new'] );
                                     } else {
-                                        echo '<i class="' . $tab['eael_adv_tabs_tab_title_icon'] . '"></i>';
+                                        echo '<i class="' . esc_attr( $tab['eael_adv_tabs_tab_title_icon'] ) . '"></i>';
                                     } ?>
                                 <?php elseif ($tab['eael_adv_tabs_icon_type'] === 'image') : ?>
                                     <img src="<?php echo esc_attr($tab['eael_adv_tabs_tab_title_image']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($tab['eael_adv_tabs_tab_title_image']['id'], '_wp_attachment_image_alt', true)); ?>">
