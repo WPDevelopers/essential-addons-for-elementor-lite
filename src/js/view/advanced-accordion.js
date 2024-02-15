@@ -74,14 +74,18 @@ ea.hooks.addAction("init", "ea", () => {
 						$this.next().slideDown($accordionSpeed);
 					}
 				}
-				if ($scrollOnClick === 'yes' && $this.hasClass("active")) {
-					let $customIdOffsetVal = $customIdOffset ? parseFloat($customIdOffset) : 0;
-					$('html, body').animate({
-						scrollTop: $(this).data('scroll') - $customIdOffsetVal,
-					}, $srollSpeed);
-				}
-				ea.hooks.doAction("widgets.reinit",$this.parent());
-				ea.hooks.doAction("ea-advanced-accordion-triggered", $this.next());
+
+                if ($scrollOnClick === 'yes' && $this.hasClass("active")) {
+                    let $customIdOffsetVal = $customIdOffset ? parseFloat($customIdOffset) : 0;
+                    $('html, body').animate({
+                        scrollTop: $(this).data('scroll') - $customIdOffsetVal,
+                    }, $srollSpeed);
+                }
+
+				setTimeout(function(){
+					ea.hooks.doAction("widgets.reinit",$this.parent());
+					ea.hooks.doAction("ea-advanced-accordion-triggered", $this.next());
+				},50);
 			});
 
 			$scope.on('keydown', '.eael-accordion-header', function (e) {
