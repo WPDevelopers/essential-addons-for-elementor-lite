@@ -133,7 +133,7 @@ msgstr ""
 msgid "Install Now!"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:151, ../includes/Classes/WPDeveloper_Plugin_Installer.php:169, ../includes/Classes/WPDeveloper_Plugin_Installer.php:188, ../includes/Classes/WPDeveloper_Setup_Wizard.php:522, ../includes/Classes/WPDeveloper_Setup_Wizard.php:548, ../includes/Traits/Ajax_Handler.php:907, ../includes/Traits/Ajax_Handler.php:1063, ../includes/Traits/Ajax_Handler.php:1093, ../includes/Traits/Ajax_Handler.php:1110, ../includes/Traits/Helper.php:414
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:151, ../includes/Classes/WPDeveloper_Plugin_Installer.php:169, ../includes/Classes/WPDeveloper_Plugin_Installer.php:188, ../includes/Classes/WPDeveloper_Setup_Wizard.php:522, ../includes/Classes/WPDeveloper_Setup_Wizard.php:548, ../includes/Traits/Ajax_Handler.php:909, ../includes/Traits/Ajax_Handler.php:1065, ../includes/Traits/Ajax_Handler.php:1095, ../includes/Traits/Ajax_Handler.php:1112, ../includes/Traits/Helper.php:414
 msgid "you are not allowed to do this action"
 msgstr ""
 
@@ -7205,19 +7205,19 @@ msgstr ""
 msgid "Cart Button"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:3356, ../includes/Elements/Woo_Product_Carousel.php:147, ../includes/Elements/Woo_Product_List.php:3395
+#: ../includes/Elements/Product_Grid.php:3357, ../includes/Elements/Woo_Product_Carousel.php:147, ../includes/Elements/Woo_Product_List.php:3395
 msgid "Publish"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:3357, ../includes/Elements/Woo_Product_Carousel.php:148, ../includes/Elements/Woo_Product_List.php:3396
+#: ../includes/Elements/Product_Grid.php:3358, ../includes/Elements/Woo_Product_Carousel.php:148, ../includes/Elements/Woo_Product_List.php:3396
 msgid "Draft"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:3358, ../includes/Elements/Woo_Product_Carousel.php:149, ../includes/Elements/Woo_Product_List.php:3397
+#: ../includes/Elements/Product_Grid.php:3359, ../includes/Elements/Woo_Product_Carousel.php:149, ../includes/Elements/Woo_Product_List.php:3397
 msgid "Pending Review"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:3359, ../includes/Elements/Woo_Product_Carousel.php:150, ../includes/Elements/Woo_Product_List.php:3398
+#: ../includes/Elements/Product_Grid.php:3360, ../includes/Elements/Woo_Product_Carousel.php:150, ../includes/Elements/Woo_Product_List.php:3398
 msgid "Schedule"
 msgstr ""
 
@@ -8814,7 +8814,7 @@ msgstr ""
 msgid "Image Size"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Carousel.php:3027, ../includes/Elements/Woo_Product_List.php:3746
+#: ../includes/Elements/Woo_Product_Carousel.php:3028, ../includes/Elements/Woo_Product_List.php:3746
 msgid "<p class=\"eael-no-posts-found\">No layout found!</p>"
 msgstr ""
 
@@ -9486,27 +9486,27 @@ msgstr ""
 msgid "Grab The Offer"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:94, ../includes/Traits/Ajax_Handler.php:605, ../includes/Traits/Login_Registration.php:94, ../includes/Traits/Login_Registration.php:246, ../includes/Traits/Login_Registration.php:766, ../includes/Traits/Login_Registration.php:941
+#: ../includes/Traits/Ajax_Handler.php:94, ../includes/Traits/Ajax_Handler.php:607, ../includes/Traits/Login_Registration.php:94, ../includes/Traits/Login_Registration.php:246, ../includes/Traits/Login_Registration.php:766, ../includes/Traits/Login_Registration.php:941
 msgid "Insecure form submitted without security token"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:103, ../includes/Traits/Ajax_Handler.php:614, ../includes/Traits/Login_Registration.php:106, ../includes/Traits/Login_Registration.php:256, ../includes/Traits/Login_Registration.php:778, ../includes/Traits/Login_Registration.php:953, ../includes/Traits/Woo_Product_Comparable.php:2171
+#: ../includes/Traits/Ajax_Handler.php:103, ../includes/Traits/Ajax_Handler.php:616, ../includes/Traits/Login_Registration.php:106, ../includes/Traits/Login_Registration.php:256, ../includes/Traits/Login_Registration.php:778, ../includes/Traits/Login_Registration.php:953, ../includes/Traits/Woo_Product_Comparable.php:2171
 msgid "Security token did not match"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:114, ../includes/Traits/Ajax_Handler.php:303, ../includes/Traits/Ajax_Handler.php:383, ../includes/Traits/Ajax_Handler.php:625, ../includes/Traits/Login_Registration.php:70, ../includes/Traits/Login_Registration.php:271, ../includes/Traits/Login_Registration.php:742, ../includes/Traits/Login_Registration.php:916, ../includes/Traits/Woo_Product_Comparable.php:2129
+#: ../includes/Traits/Ajax_Handler.php:114, ../includes/Traits/Ajax_Handler.php:305, ../includes/Traits/Ajax_Handler.php:385, ../includes/Traits/Ajax_Handler.php:627, ../includes/Traits/Login_Registration.php:70, ../includes/Traits/Login_Registration.php:271, ../includes/Traits/Login_Registration.php:742, ../includes/Traits/Login_Registration.php:916, ../includes/Traits/Woo_Product_Comparable.php:2129
 msgid "Page ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:125, ../includes/Traits/Ajax_Handler.php:310, ../includes/Traits/Ajax_Handler.php:390, ../includes/Traits/Ajax_Handler.php:636, ../includes/Traits/Facebook_Feed.php:41, ../includes/Traits/Login_Registration.php:77, ../includes/Traits/Login_Registration.php:276, ../includes/Traits/Login_Registration.php:749, ../includes/Traits/Login_Registration.php:923, ../includes/Traits/Woo_Product_Comparable.php:2134
+#: ../includes/Traits/Ajax_Handler.php:125, ../includes/Traits/Ajax_Handler.php:312, ../includes/Traits/Ajax_Handler.php:392, ../includes/Traits/Ajax_Handler.php:638, ../includes/Traits/Facebook_Feed.php:41, ../includes/Traits/Login_Registration.php:77, ../includes/Traits/Login_Registration.php:276, ../includes/Traits/Login_Registration.php:749, ../includes/Traits/Login_Registration.php:923, ../includes/Traits/Woo_Product_Comparable.php:2134
 msgid "Widget ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:136, ../includes/Traits/Ajax_Handler.php:316, ../includes/Traits/Ajax_Handler.php:397, ../includes/Traits/Ajax_Handler.php:646
+#: ../includes/Traits/Ajax_Handler.php:136, ../includes/Traits/Ajax_Handler.php:318, ../includes/Traits/Ajax_Handler.php:399, ../includes/Traits/Ajax_Handler.php:648
 msgid "Widget settings are not found. Did you save the widget before using load more??"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:950
+#: ../includes/Traits/Ajax_Handler.php:952
 msgid "Login | Register Settings updated"
 msgstr ""
 
