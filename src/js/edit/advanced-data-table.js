@@ -256,16 +256,15 @@ class advancedDataTableEdit {
 					let row = [];
 					let cols = rows[i].querySelectorAll("th, td");
 
-					// if (this.table.classList.contains("ea-advanced-data-table-static")) {
-					// 	for (let j = 0; j < cols.length; j++) {
-					// 		row.push(JSON.stringify(decodeURI(cols[j].dataset.quill)));
-					// 	}
-					// } else {
-					// 	for (let j = 0; j < cols.length; j++) {
-					// 		// row.push(JSON.stringify(cols[j].innerHTML.replace(/(\r\n|\n|\r)/gm, " ").trim()));
-					// 		row.push(JSON.stringify(cols[j].innerHTML.replace( /,"""([^"]+)""",/g, ',"$1",' ).trim()));
-					// 	}
-					// }
+					if (this.table.classList.contains("ea-advanced-data-table-static")) {
+						for (let j = 0; j < cols.length; j++) {
+							row.push(JSON.stringify(decodeURI(cols[j].dataset.quill)));
+						}
+					} else {
+						for (let j = 0; j < cols.length; j++) {
+							row.push(JSON.stringify(cols[j].innerHTML.replace( /,"""([^"]+)""",/g, ',"$1",' ).trim()));
+						}
+					}
 
 					csv.push(row.join(","));
 				}
