@@ -48,7 +48,7 @@ echo '<article class="eael-better-docs-category-grid-post layout-2" data-id="' .
 
                     echo '<li>';
                     if (isset($settings['list_icon']['value']['url']) && !empty($settings['list_icon']['value']['url'])) {
-                        echo '<img class="eael-bd-cg-post-list-icon" src="' . $settings['list_icon']['value']['url'] . '" />';
+                        echo '<img class="eael-bd-cg-post-list-icon" src="' . esc_url( $settings['list_icon']['value']['url'] ). '" />';
                     } else {
                         echo '<i class="' . esc_attr( $settings['list_icon']['value'] ) . ' eael-bd-cg-post-list-icon"></i>';
                     }
