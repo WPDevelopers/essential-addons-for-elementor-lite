@@ -2124,10 +2124,10 @@ class Pricing_Table extends Widget_Base
                         <?php Icons_Manager::render_icon( $item['eael_pricing_table_list_icon_new'], [ 'aria-hidden' => 'true' ] ); ?>
 <!--                                    <img src="--><?php //echo $item['eael_pricing_table_list_icon_new']['value']['url']; ?><!--" alt="--><?php //echo esc_attr(get_post_meta($item['eael_pricing_table_list_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?><!--" />-->
                     <?php else : ?>
-                        <i class="<?php echo $item['eael_pricing_table_list_icon_new']['value']; ?>"></i>
+                        <i class="<?php echo esc_attr( $item['eael_pricing_table_list_icon_new']['value'] ); ?>"></i>
                     <?php endif; ?>
                 <?php } else { ?>
-                    <i class="<?php echo $item['eael_pricing_table_list_icon']; ?>"></i>
+                    <i class="<?php echo esc_attr( $item['eael_pricing_table_list_icon'] ); ?>"></i>
                 <?php } ?>
             </span>
 
