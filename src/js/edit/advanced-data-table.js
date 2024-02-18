@@ -311,8 +311,8 @@ class advancedDataTableEdit {
 								} else {
 									body += "<tr>";
 									cols.forEach((col) => {
-										if (col.match(/(^"")|(""$)/g)) {
-											body += `<td>${col}</td>`;
+										if ( col.match(/(^"")|(^")|("$)|(""$)/g) ) {
+											body += `<td>${JSON.parse(col)}</td>`;
 										} else {
 											body += `<td>${col}</td>`;
 										}
