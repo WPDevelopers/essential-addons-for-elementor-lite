@@ -3040,7 +3040,7 @@ class Event_Calendar extends Widget_Base
             data-hideDetailsLink= "' . $settings['eael_event_details_link_hide'] . '"
             data-detailsButtonText = "' . Helper::eael_wp_kses( $settings['eael_event_details_text'] ) . '"
             data-events="' . htmlspecialchars( json_encode( $data ), ENT_QUOTES, 'UTF-8' ) . '"
-            data-first_day="' . $settings['eael_event_calendar_first_day'] . '"></div>
+            data-first_day="' . esc_attr( $settings['eael_event_calendar_first_day'] ) . '"></div>
             ' . $this->eaelec_load_event_details();
 	    } else {
 		    $this->eaelec_display_table( $data, $settings );
