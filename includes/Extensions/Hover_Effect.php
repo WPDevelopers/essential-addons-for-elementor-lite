@@ -1231,7 +1231,7 @@ class Hover_Effect {
 		$element->add_control(
 			'eael_hover_effect_enable_live_changes',
 			[
-				'label'     => __( 'Enable Live Changes', 'essential-addons-for-elementor-lite' ),
+				'label'     => __( 'Enable Editor Preview', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'separator' => 'before',
 				'condition' => [
@@ -1239,6 +1239,20 @@ class Hover_Effect {
 				]
 			]
 		);
+
+		$element->add_control(
+			'eael_hover_effect_enable_live_changes_note',
+			[
+				'type'            => Controls_Manager  :: RAW_HTML,
+				'raw'             => __( 'Please keep it disabled after you are done with the editing.', 'essential-addons-for-elementor-lite' ),
+				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+				'condition'       => [
+					'eael_hover_effect_switch' => 'yes',
+					'eael_hover_effect_enable_live_changes' => 'yes',
+				],
+			]
+		);
+
 		$element->end_controls_section();
 	}
 
