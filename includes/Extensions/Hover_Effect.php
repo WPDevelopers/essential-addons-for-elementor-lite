@@ -92,6 +92,9 @@ class Hover_Effect {
                         'step' => 0.01,
                     ],
                 ],
+				'condition' => [
+					'eael_hover_effect_opacity_popover' => 'yes',
+				],
             ]
         );
         $element->end_popover();
@@ -116,7 +119,10 @@ class Hover_Effect {
 			'eael_hover_effect_blur_is_on',
 			[
 				'label' => __( 'Blur', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SWITCHER
+				'type'  => Controls_Manager::SWITCHER,
+				'condition' => [
+					'eael_hover_effect_filter_popover' => 'yes',
+				],
 			]
 		);
 
@@ -135,7 +141,8 @@ class Hover_Effect {
                     ],
                 ],
                 'condition' => [
-					'eael_hover_effect_blur_is_on' => 'yes', 
+					'eael_hover_effect_blur_is_on'     => 'yes',
+					'eael_hover_effect_filter_popover' => 'yes',
 				],
             ]
         );
@@ -145,7 +152,10 @@ class Hover_Effect {
 			'eael_hover_effect_contrast_is_on',
 			[
 				'label' => __( 'Contrast', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SWITCHER
+				'type'  => Controls_Manager::SWITCHER,
+				'condition' => [ 
+					'eael_hover_effect_filter_popover' => 'yes', 
+				],
 			]
 		);
 
@@ -164,7 +174,8 @@ class Hover_Effect {
                     ],
                 ],
                 'condition' => [
-					'eael_hover_effect_contrast_is_on' => 'yes', 
+					'eael_hover_effect_contrast_is_on' => 'yes',
+					'eael_hover_effect_filter_popover' => 'yes',
 				],
             ]
         );
@@ -174,7 +185,10 @@ class Hover_Effect {
 			'eael_hover_effect_grayscale_is_on',
 			[
 				'label' => __( 'Grayscale', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SWITCHER
+				'type'  => Controls_Manager::SWITCHER,
+				'condition' => [ 
+					'eael_hover_effect_filter_popover' => 'yes',
+				],
 			]
 		);
 
@@ -193,7 +207,8 @@ class Hover_Effect {
                     ],
                 ],
                 'condition' => [
-					'eael_hover_effect_grayscale_is_on' => 'yes', 
+					'eael_hover_effect_grayscale_is_on' => 'yes',
+					'eael_hover_effect_filter_popover'  => 'yes',
 				],
             ]
         );
@@ -203,7 +218,10 @@ class Hover_Effect {
 			'eael_hover_effect_invert_is_on',
 			[
 				'label' => __( 'Invert', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SWITCHER
+				'type'  => Controls_Manager::SWITCHER,
+				'condition' => [ 
+					'eael_hover_effect_filter_popover' => 'yes',
+				],
 			]
 		);
 
@@ -222,7 +240,8 @@ class Hover_Effect {
                     ],
                 ],
                 'condition' => [
-					'eael_hover_effect_invert_is_on' => 'yes', 
+					'eael_hover_effect_invert_is_on'   => 'yes',
+					'eael_hover_effect_filter_popover' => 'yes',
 				],
             ]
         );
@@ -232,7 +251,10 @@ class Hover_Effect {
 			'eael_hover_effect_saturate_is_on',
 			[
 				'label' => __( 'Saturate', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SWITCHER
+				'type'  => Controls_Manager::SWITCHER,
+				'condition' => [ 
+					'eael_hover_effect_filter_popover' => 'yes',
+				],
 			]
 		);
 
@@ -251,7 +273,8 @@ class Hover_Effect {
                     ],
                 ],
                 'condition' => [
-					'eael_hover_effect_saturate_is_on' => 'yes', 
+					'eael_hover_effect_saturate_is_on' => 'yes',
+					'eael_hover_effect_filter_popover' => 'yes',
 				],
             ]
         );
@@ -261,7 +284,10 @@ class Hover_Effect {
 			'eael_hover_effect_sepia_is_on',
 			[
 				'label' => __( 'Sepia', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SWITCHER
+				'type'  => Controls_Manager::SWITCHER,
+				'condition' => [ 
+					'eael_hover_effect_filter_popover' => 'yes',
+				],
 			]
 		);
 
@@ -280,7 +306,8 @@ class Hover_Effect {
                     ],
                 ],
                 'condition' => [
-					'eael_hover_effect_sepia_is_on' => 'yes', 
+					'eael_hover_effect_sepia_is_on'    => 'yes',
+					'eael_hover_effect_filter_popover' => 'yes',
 				],
             ]
         );
@@ -323,6 +350,9 @@ class Hover_Effect {
                         'step' => 1,
                     ],
                 ],
+				'condition' => [
+					'eael_hover_effect_offset_popover' => 'yes',
+				],
             ]
         );
 
@@ -349,6 +379,9 @@ class Hover_Effect {
                         'step' => 1,
                     ],
                 ],
+				'condition' => [
+					'eael_hover_effect_offset_popover' => 'yes',
+				],
             ]
         );
         $element->end_popover();
@@ -374,6 +407,9 @@ class Hover_Effect {
 			[
 				'label' => __( 'Rotate', 'essential-addons-for-elementor-lite' ),
 				'type'  => Controls_Manager::SWITCHER,
+				'condition' => [
+					'eael_hover_effect_transform_popover' => 'yes',
+				],
 			]
 		);
 
@@ -394,7 +430,8 @@ class Hover_Effect {
 					'size' => 0,
 				],
                 'condition' => [
-					'eael_hover_effect_rotate_is_on' => 'yes', 
+					'eael_hover_effect_rotate_is_on'      => 'yes',
+					'eael_hover_effect_transform_popover' => 'yes',
 				],
 			]
 		);
@@ -416,7 +453,8 @@ class Hover_Effect {
 					'size' => 0,
 				],
                 'condition' => [
-					'eael_hover_effect_rotate_is_on' => 'yes', 
+					'eael_hover_effect_rotate_is_on'      => 'yes',
+					'eael_hover_effect_transform_popover' => 'yes',
 				],
 			]
 		);
@@ -438,7 +476,8 @@ class Hover_Effect {
 					'size' => 0,
 				],
                 'condition' => [
-					'eael_hover_effect_rotate_is_on' => 'yes', 
+					'eael_hover_effect_rotate_is_on'      => 'yes',
+					'eael_hover_effect_transform_popover' => 'yes',
 				],
 			]
 		);
@@ -449,6 +488,9 @@ class Hover_Effect {
 			[
 				'label' => __( 'Scale', 'essential-addons-for-elementor-lite' ),
 				'type'  => Controls_Manager::SWITCHER,
+				'condition' => [
+					'eael_hover_effect_transform_popover' => 'yes', 
+				],
 			]
 		);
 
@@ -468,7 +510,8 @@ class Hover_Effect {
 					'size' => 0,
 				],
                 'condition' => [
-					'eael_hover_effect_scale_is_on' => 'yes', 
+					'eael_hover_effect_scale_is_on'       => 'yes',
+					'eael_hover_effect_transform_popover' => 'yes',
 				],
 			]
 		);
@@ -489,7 +532,8 @@ class Hover_Effect {
 					'size' => 0,
 				],
                 'condition' => [
-					'eael_hover_effect_scale_is_on' => 'yes', 
+					'eael_hover_effect_scale_is_on'       => 'yes',
+					'eael_hover_effect_transform_popover' => 'yes',
 				],
 			]
 		);
@@ -499,7 +543,10 @@ class Hover_Effect {
 			'eael_hover_effect_skew_is_on',
 			[
 				'label' => __( 'Skew', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SWITCHER
+				'type'  => Controls_Manager::SWITCHER,
+				'condition' => [
+					'eael_hover_effect_transform_popover' => 'yes', 
+				],
 			]
 		);
 
@@ -520,7 +567,8 @@ class Hover_Effect {
 					'size' => 0,
 				],
                 'condition' => [
-					'eael_hover_effect_skew_is_on' => 'yes', 
+					'eael_hover_effect_skew_is_on'        => 'yes',
+					'eael_hover_effect_transform_popover' =>  'yes',
 				],
 			]
 		);
@@ -542,7 +590,8 @@ class Hover_Effect {
 					'size' => 0,
 				],
                 'condition' => [
-					'eael_hover_effect_skew_is_on' => 'yes', 
+					'eael_hover_effect_skew_is_on'        => 'yes',
+					'eael_hover_effect_transform_popover' =>  'yes',
 				],
 			]
 		);
@@ -677,6 +726,9 @@ class Hover_Effect {
                         'step' => 0.01,
                     ],
                 ],
+				'condition' => [
+					'eael_hover_effect_opacity_popover_hover' => 'yes',
+				],
             ]
         );
         $element->end_popover();
@@ -701,7 +753,10 @@ class Hover_Effect {
 			'eael_hover_effect_blur_hover_is_on',
 			[
 				'label' => __( 'Blur', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SWITCHER
+				'type'  => Controls_Manager::SWITCHER,
+				'condition' => [
+					'eael_hover_effect_filter_hover_popover' => 'yes',
+				]
 			]
 		);
 
@@ -722,7 +777,8 @@ class Hover_Effect {
                     ],
                 ],
                 'condition' => [
-					'eael_hover_effect_blur_hover_is_on' => 'yes', 
+					'eael_hover_effect_blur_hover_is_on'     => 'yes',
+					'eael_hover_effect_filter_hover_popover' => 'yes',
 				],
             ]
         );
@@ -733,7 +789,10 @@ class Hover_Effect {
 			'eael_hover_effect_contrast_hover_is_on',
 			[
 				'label' => __( 'Contrast', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SWITCHER
+				'type'  => Controls_Manager::SWITCHER,
+				'condition' => [
+					'eael_hover_effect_filter_hover_popover' => 'yes', 
+				],
 			]
 		);
 
@@ -755,7 +814,8 @@ class Hover_Effect {
                     ],
                 ],
                 'condition' => [
-					'eael_hover_effect_contrast_hover_is_on' => 'yes', 
+					'eael_hover_effect_contrast_hover_is_on' => 'yes',
+					'eael_hover_effect_filter_hover_popover' => 'yes',
 				],
             ]
         );
@@ -766,7 +826,10 @@ class Hover_Effect {
 			'eael_hover_effect_grayscale_hover_is_on',
 			[
 				'label' => __( 'Grayscale', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SWITCHER
+				'type'  => Controls_Manager::SWITCHER,
+				'condition' => [
+					'eael_hover_effect_filter_hover_popover' => 'yes', 
+				],
 			]
 		);
 
@@ -787,7 +850,8 @@ class Hover_Effect {
                     ],
                 ],
                 'condition' => [
-					'eael_hover_effect_grayscale_hover_is_on' => 'yes', 
+					'eael_hover_effect_grayscale_hover_is_on' => 'yes',
+					'eael_hover_effect_filter_hover_popover'  => 'yes',
 				],
             ]
         );
@@ -798,7 +862,10 @@ class Hover_Effect {
 			'eael_hover_effect_invert_hover_is_on',
 			[
 				'label' => __( 'Invert', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SWITCHER
+				'type'  => Controls_Manager::SWITCHER,
+				'condition' => [
+					'eael_hover_effect_filter_hover_popover' => 'yes', 
+				],
 			]
 		);
 
@@ -820,7 +887,8 @@ class Hover_Effect {
                     ],
                 ],
                 'condition' => [
-					'eael_hover_effect_invert_hover_is_on' => 'yes', 
+					'eael_hover_effect_invert_hover_is_on'   => 'yes',
+					'eael_hover_effect_filter_hover_popover' => 'yes',
 				],
             ]
         );
@@ -831,7 +899,10 @@ class Hover_Effect {
 			'eael_hover_effect_saturate_hover_is_on',
 			[
 				'label' => __( 'Saturate', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SWITCHER
+				'type'  => Controls_Manager::SWITCHER,
+				'condition' => [
+					'eael_hover_effect_filter_hover_popover' => 'yes', 
+				],
 			]
 		);
 
@@ -854,6 +925,7 @@ class Hover_Effect {
                 ],
                 'condition' => [
 					'eael_hover_effect_saturate_hover_is_on' => 'yes', 
+					'eael_hover_effect_filter_hover_popover' => 'yes', 
 				],
             ]
         );
@@ -864,7 +936,10 @@ class Hover_Effect {
 			'eael_hover_effect_sepia_hover_is_on',
 			[
 				'label' => __( 'Sepia', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SWITCHER
+				'type'  => Controls_Manager::SWITCHER,
+				'condition' => [
+					'eael_hover_effect_filter_hover_popover' => 'yes',
+				],
 			]
 		);
 
@@ -884,7 +959,8 @@ class Hover_Effect {
                     ],
                 ],
                 'condition' => [
-					'eael_hover_effect_sepia_hover_is_on' => 'yes', 
+					'eael_hover_effect_sepia_hover_is_on'    => 'yes',
+					'eael_hover_effect_filter_hover_popover' => 'yes',
 				],
             ]
         );
@@ -929,6 +1005,9 @@ class Hover_Effect {
                         'step' => 1,
                     ],
                 ],
+				'condition' => [
+					'eael_hover_effect_offset_hover_popover' => 'yes',
+				],
             ]
         );
 
@@ -955,6 +1034,9 @@ class Hover_Effect {
                         'step' => 1,
                     ],
                 ],
+				'condition' => [
+					'eael_hover_effect_offset_hover_popover' => 'yes',
+				],
             ]
         );
         $element->end_popover();
@@ -981,6 +1063,9 @@ class Hover_Effect {
 			[
 				'label' => __( 'Rotate', 'essential-addons-for-elementor-lite' ),
 				'type'  => Controls_Manager::SWITCHER,
+				'condition' => [
+					'eael_hover_effect_transform_hover_popover' => 'yes',
+				]
 			]
 		);
 
@@ -1000,7 +1085,8 @@ class Hover_Effect {
 					'size' => 0,
 				],
                 'condition' => [
-					'eael_hover_effect_rotate_hover_is_on' => 'yes', 
+					'eael_hover_effect_rotate_hover_is_on'      => 'yes',
+					'eael_hover_effect_transform_hover_popover' => 'yes',
 				],
             ]
 		);
@@ -1021,7 +1107,8 @@ class Hover_Effect {
 					'size' => 0,
 				],
                 'condition' => [
-					'eael_hover_effect_rotate_hover_is_on' => 'yes', 
+					'eael_hover_effect_rotate_hover_is_on'      => 'yes', 
+					'eael_hover_effect_transform_hover_popover' => 'yes',
 				],
             ]
 		);
@@ -1042,7 +1129,8 @@ class Hover_Effect {
 					'size' => 0,
 				],
                 'condition' => [
-					'eael_hover_effect_rotate_hover_is_on' => 'yes', 
+					'eael_hover_effect_rotate_hover_is_on'      => 'yes',
+					'eael_hover_effect_transform_hover_popover' => 'yes',
 				],
             ]
 		);
@@ -1054,6 +1142,9 @@ class Hover_Effect {
 			[
 				'label' => __( 'Scale', 'essential-addons-for-elementor-lite' ),
 				'type'  => Controls_Manager::SWITCHER,
+				'condition' => [
+					'eael_hover_effect_transform_hover_popover' => 'yes', 
+				],
 			]
 		);
 
@@ -1072,7 +1163,8 @@ class Hover_Effect {
 					'size' => 1,
 				],
                 'condition' => [
-					'eael_hover_effect_scale_hover_is_on' => 'yes', 
+					'eael_hover_effect_scale_hover_is_on'       => 'yes', 
+					'eael_hover_effect_transform_hover_popover' => 'yes',
 				],
             ]
 		);
@@ -1092,7 +1184,8 @@ class Hover_Effect {
 					'size' => 0,
 				],
                 'condition' => [
-					'eael_hover_effect_scale_hover_is_on' => 'yes', 
+					'eael_hover_effect_scale_hover_is_on'       => 'yes',
+					'eael_hover_effect_transform_hover_popover' => 'yes',
 				],
             ]
 		);
@@ -1103,7 +1196,10 @@ class Hover_Effect {
 			'eael_hover_effect_skew_hover_is_on',
 			[
 				'label' => __( 'Skew', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SWITCHER
+				'type'  => Controls_Manager::SWITCHER,
+				'condition' => [
+					'eael_hover_effect_transform_hover_popover' => 'yes',
+				],
 			]
 		);
 
@@ -1123,7 +1219,8 @@ class Hover_Effect {
 					'size' => 0,
 				],
                 'condition' => [
-					'eael_hover_effect_skew_hover_is_on' => 'yes', 
+					'eael_hover_effect_skew_hover_is_on'        => 'yes',
+					'eael_hover_effect_transform_hover_popover' => 'yes',
 				],
             ]
 		);
@@ -1144,7 +1241,8 @@ class Hover_Effect {
 					'size' => 0,
 				],
                 'condition' => [
-					'eael_hover_effect_skew_hover_is_on' => 'yes', 
+					'eael_hover_effect_skew_hover_is_on'        => 'yes',
+					'eael_hover_effect_transform_hover_popover' =>  'yes',
 				],
             ]
 		);
