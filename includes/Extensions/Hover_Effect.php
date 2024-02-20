@@ -1304,6 +1304,7 @@ class Hover_Effect {
             ]
 		);
 
+		//Easing
         $element->add_control(
 			'eael_hover_effect_general_settings_hover_easing',
 			[
@@ -1592,25 +1593,25 @@ class Hover_Effect {
 		}
 
 		//Transition Duration
-		if( !empty( $settings['eael_hover_effect_general_settings_duration']['size'] ) ) {
+		if( !empty( $settings['eael_hover_effect_general_settings_hover_duration']['size'] ) ) {
 			$transition_duration_settings = [
-				'transitionDuration' => $settings['eael_hover_effect_general_settings_duration']['size'],
+				'transitionDuration' => $settings['eael_hover_effect_general_settings_hover_duration']['size'],
 			];
 			$element->add_render_attribute( '_wrapper', 'data-eael_hover_duration', wp_json_encode( $transition_duration_settings ) );
 		}
 
 		//Transition Delay
-		if( !empty( $settings['eael_hover_effect_general_settings_delay']['size'] ) ) {
+		if( !empty( $settings['eael_hover_effect_general_settings_hover_delay']['size'] ) ) {
 			$transition_delay_settings = [
-				'transitionDelay' => $settings['eael_hover_effect_general_settings_delay']['size'],
+				'transitionDelay' => $settings['eael_hover_effect_general_settings_hover_delay']['size'],
 			];
 			$element->add_render_attribute( '_wrapper', 'data-eael_hover_delay', wp_json_encode( $transition_delay_settings ) );
 		}
 
 		//Transition Easing
-		if( !empty( $settings['eael_hover_effect_general_settings_easing'] ) ) {
+		if( !empty( $settings['eael_hover_effect_general_settings_hover_easing'] ) ) {
 			$transition_easing_settings = [
-				'transitionEasing' => $settings['eael_hover_effect_general_settings_easing'],
+				'transitionEasing' => $settings['eael_hover_effect_general_settings_hover_easing'],
 			];
 			$element->add_render_attribute( '_wrapper', 'data-eael_hover_easing', wp_json_encode( $transition_easing_settings ) );
 		}
