@@ -327,8 +327,8 @@ class Hover_Effect {
 			]
 		);
         $element->start_popover();
-        $element->add_control(
-            'eael_hover_effect_offset_top',
+		$element->add_control(
+            'eael_hover_effect_offset_left',
             [
                 'label'              => __( 'Offset Top', 'essential-addons-for-elementor-lite' ),
                 'type'               => Controls_Manager::SLIDER, 
@@ -346,7 +346,7 @@ class Hover_Effect {
                     ],
                     '%' => [
                         'max'  => 100,
-						'min' => -100,
+						'min'  => -100,
                         'step' => 1,
                     ],
                 ],
@@ -357,7 +357,7 @@ class Hover_Effect {
         );
 
         $element->add_control(
-            'eael_hover_effect_offset_left',
+            'eael_hover_effect_offset_top',
             [
                 'label'              => __( 'Offset Left', 'essential-addons-for-elementor-lite' ),
                 'type'               => Controls_Manager::SLIDER, 
@@ -982,8 +982,8 @@ class Hover_Effect {
 			]
 		);
         $element->start_popover();
-        $element->add_control(
-            'eael_hover_effect_offset_hover_top',
+		$element->add_control(
+            'eael_hover_effect_offset_hover_left',
             [
                 'label'              => __( 'Offset Top', 'essential-addons-for-elementor-lite' ),
                 'type'               => Controls_Manager::SLIDER, 
@@ -1010,9 +1010,9 @@ class Hover_Effect {
 				],
             ]
         );
-
+		
         $element->add_control(
-            'eael_hover_effect_offset_hover_left',
+            'eael_hover_effect_offset_hover_top',
             [
                 'label'              => __( 'Offset Left', 'essential-addons-for-elementor-lite' ),
                 'type'               => Controls_Manager::SLIDER, 
