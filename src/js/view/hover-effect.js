@@ -42,6 +42,7 @@ let HoverEffectHandler = function ($scope, $) {
     
             function getHoverEffectSettingsVal( $el ) {
                 $.each($el, function (i, el) {
+                    // console.log(el.attributes.settings.attributes);
                     let $getSettings = el.attributes.settings.attributes;
                     if ( el.attributes.elType === 'widget' ) {
                         if ( $getSettings['eael_hover_effect_switch'] === 'yes' && $getSettings['eael_hover_effect_enable_live_changes'] === 'yes' ) {
@@ -68,108 +69,125 @@ let HoverEffectHandler = function ($scope, $) {
     
         for ( let key in eaelEditModeSettings ) {
             if( $scopeId === key ) {
-                $Opacity = {'opacity': eaelEditModeSettings?.[key]?.['eael_hover_effect_opacity']?.['size']};
-                $opacityHover = {'opacity': eaelEditModeSettings?.[key]?.['eael_hover_effect_opacity_hover']?.['size']};
+                //Opacity
+                if( eaelEditModeSettings?.[key]?.['eael_hover_effect_opacity_popover'] === 'yes' ) {
+                    $Opacity = {'opacity': eaelEditModeSettings?.[key]?.['eael_hover_effect_opacity']?.['size']};
+                }
+                if( eaelEditModeSettings?.[key]?.['eael_hover_effect_opacity_popover_hover'] === 'yes' ) {
+                    $opacityHover = {'opacity': eaelEditModeSettings?.[key]?.['eael_hover_effect_opacity_hover']?.['size']};
+                }
                 //Filter
-                if( eaelEditModeSettings?.[key]?.['eael_hover_effect_blur_is_on'] === 'yes' ) {
-                    $eaelBlurEffect = {'blur': eaelEditModeSettings?.[key]?.['eael_hover_effect_blur']?.['size']};
-                }
-                if( eaelEditModeSettings?.[key]?.['eael_hover_effect_contrast_is_on'] === 'yes' ) {
-                    $eaelContrastEffect = {'contrast': eaelEditModeSettings?.[key]?.['eael_hover_effect_contrast']?.['size']};
-                }
-                if( eaelEditModeSettings?.[key]?.['eael_hover_effect_grayscale_is_on'] === 'yes' ) {
-                    $eaelGrayscaleEffect = {'grayscale': eaelEditModeSettings?.[key]?.['eael_hover_effect_grayscal']?.['size']};
-                }
-                if( eaelEditModeSettings?.[key]?.['eael_hover_effect_invert_is_on'] === 'yes' ) {
-                    $eaelInvertEffect = {'invert': eaelEditModeSettings?.[key]?.['eael_hover_effect_invert']?.['size']};
-                }
-                if( eaelEditModeSettings?.[key]?.['eael_hover_effect_saturate_is_on'] === 'yes' ) {
-                    $eaelSaturateEffect = {'saturate': eaelEditModeSettings?.[key]?.['eael_hover_effect_saturate']?.['size']};
-                }
-                if( eaelEditModeSettings?.[key]?.['eael_hover_effect_sepia_is_on'] === 'yes' ) {
-                    $eaelSepiaEffect = {'sepia': eaelEditModeSettings?.[key]?.['eael_hover_effect_sepia']?.['size']};
+                if( 'yes' === eaelEditModeSettings?.[key]?.['eael_hover_effect_filter_popover'] ) {
+                    if( eaelEditModeSettings?.[key]?.['eael_hover_effect_blur_is_on'] === 'yes' ) {
+                        $eaelBlurEffect = {'blur': eaelEditModeSettings?.[key]?.['eael_hover_effect_blur']?.['size']};
+                    }
+                    if( eaelEditModeSettings?.[key]?.['eael_hover_effect_contrast_is_on'] === 'yes' ) {
+                        $eaelContrastEffect = {'contrast': eaelEditModeSettings?.[key]?.['eael_hover_effect_contrast']?.['size']};
+                    }
+                    if( eaelEditModeSettings?.[key]?.['eael_hover_effect_grayscale_is_on'] === 'yes' ) {
+                        $eaelGrayscaleEffect = {'grayscale': eaelEditModeSettings?.[key]?.['eael_hover_effect_grayscal']?.['size']};
+                    }
+                    if( eaelEditModeSettings?.[key]?.['eael_hover_effect_invert_is_on'] === 'yes' ) {
+                        $eaelInvertEffect = {'invert': eaelEditModeSettings?.[key]?.['eael_hover_effect_invert']?.['size']};
+                    }
+                    if( eaelEditModeSettings?.[key]?.['eael_hover_effect_saturate_is_on'] === 'yes' ) {
+                        $eaelSaturateEffect = {'saturate': eaelEditModeSettings?.[key]?.['eael_hover_effect_saturate']?.['size']};
+                    }
+                    if( eaelEditModeSettings?.[key]?.['eael_hover_effect_sepia_is_on'] === 'yes' ) {
+                        $eaelSepiaEffect = {'sepia': eaelEditModeSettings?.[key]?.['eael_hover_effect_sepia']?.['size']};
+                    }
                 }
 
                 //Filter Hover
-                if( eaelEditModeSettings?.[key]?.['eael_hover_effect_blur_hover_is_on'] === 'yes' ) {
-                    $eaelBurHoverEffect = {'blur': eaelEditModeSettings?.[key]?.['eael_hover_effect_blur_hover']?.['size']};
-                }
-                if( eaelEditModeSettings?.[key]?.['eael_hover_effect_contrast_hover_is_on'] === 'yes' ) {
-                    $eaelContrastHoverEffect = {'contrast': eaelEditModeSettings?.[key]?.['eael_hover_effect_contrast_hover']?.['size']};
-                }
-                if( eaelEditModeSettings?.[key]?.['eael_hover_effect_grayscale_hover_is_on'] === 'yes' ) {
-                    $eaelGrayscalHoverEffect = {'grayscale': eaelEditModeSettings?.[key]?.['eael_hover_effect_grayscal_hover']?.['size']};
-                }
-                if( eaelEditModeSettings?.[key]?.['eael_hover_effect_invert_hover_is_on'] === 'yes' ) {
-                    $eaelInvertHoverEffect = {'invert': eaelEditModeSettings?.[key]?.['eael_hover_effect_invert_hover']?.['size']};
-                }
-                if( eaelEditModeSettings?.[key]?.['eael_hover_effect_saturate_hover_is_on'] === 'yes' ) {
-                    $eaelSaturateHoverEffect = {'saturate': eaelEditModeSettings?.[key]?.['eael_hover_effect_saturate_hover']?.['size']};
-                }
-                if( eaelEditModeSettings?.[key]?.['eael_hover_effect_sepia_is_on'] === 'yes' ) {
-                    $eaelSepiaHoverEffect = {'sepia': eaelEditModeSettings?.[key]?.['eael_hover_effect_sepia_hover']?.['size']};
+                if( 'yes' === eaelEditModeSettings?.[key]?.['eael_hover_effect_filter_hover_popover'] ) {
+                    if( eaelEditModeSettings?.[key]?.['eael_hover_effect_blur_hover_is_on'] === 'yes' ) {
+                        $eaelBurHoverEffect = {'blur': eaelEditModeSettings?.[key]?.['eael_hover_effect_blur_hover']?.['size']};
+                    }
+                    if( eaelEditModeSettings?.[key]?.['eael_hover_effect_contrast_hover_is_on'] === 'yes' ) {
+                        $eaelContrastHoverEffect = {'contrast': eaelEditModeSettings?.[key]?.['eael_hover_effect_contrast_hover']?.['size']};
+                    }
+                    if( eaelEditModeSettings?.[key]?.['eael_hover_effect_grayscale_hover_is_on'] === 'yes' ) {
+                        $eaelGrayscalHoverEffect = {'grayscale': eaelEditModeSettings?.[key]?.['eael_hover_effect_grayscal_hover']?.['size']};
+                    }
+                    if( eaelEditModeSettings?.[key]?.['eael_hover_effect_invert_hover_is_on'] === 'yes' ) {
+                        $eaelInvertHoverEffect = {'invert': eaelEditModeSettings?.[key]?.['eael_hover_effect_invert_hover']?.['size']};
+                    }
+                    if( eaelEditModeSettings?.[key]?.['eael_hover_effect_saturate_hover_is_on'] === 'yes' ) {
+                        $eaelSaturateHoverEffect = {'saturate': eaelEditModeSettings?.[key]?.['eael_hover_effect_saturate_hover']?.['size']};
+                    }
+                    if( eaelEditModeSettings?.[key]?.['eael_hover_effect_sepia_is_on'] === 'yes' ) {
+                        $eaelSepiaHoverEffect = {'sepia': eaelEditModeSettings?.[key]?.['eael_hover_effect_sepia_hover']?.['size']};
+                    }
                 }
 
                 //Offset
-                $eaelOffsetTop = {
-                    'size': eaelEditModeSettings?.[key]?.['eael_hover_effect_offset_top']?.['size'],
-                    'unit': eaelEditModeSettings?.[key]?.['eael_hover_effect_offset_top']?.['unit']
-                };
-                $eaelOffsetLeft = {
-                    'size': eaelEditModeSettings?.[key]?.['eael_hover_effect_offset_left']?.['size'],
-                    'unit': eaelEditModeSettings?.[key]?.['eael_hover_effect_offset_left']?.['unit']
-                };
+                if( 'yes' === eaelEditModeSettings?.[key]?.['eael_hover_effect_offset_popover'] ) {
+                    $eaelOffsetTop = {
+                        'size': eaelEditModeSettings?.[key]?.['eael_hover_effect_offset_top']?.['size'],
+                        'unit': eaelEditModeSettings?.[key]?.['eael_hover_effect_offset_top']?.['unit']
+                    };
+                    $eaelOffsetLeft = {
+                        'size': eaelEditModeSettings?.[key]?.['eael_hover_effect_offset_left']?.['size'],
+                        'unit': eaelEditModeSettings?.[key]?.['eael_hover_effect_offset_left']?.['unit']
+                    };
+                }
 
                 //Offset Hover
-                $eaelOffsetHoverTop = {
-                    'size': eaelEditModeSettings?.[key]?.['eael_hover_effect_offset_hover_top']?.['size'],
-                    'unit': eaelEditModeSettings?.[key]?.['eael_hover_effect_offset_hover_top']?.['unit']
-                };
-                $eaelOffsetHoverLeft = {
-                    'size': eaelEditModeSettings?.[key]?.['eael_hover_effect_offset_hover_left']?.['size'],
-                    'unit': eaelEditModeSettings?.[key]?.['eael_hover_effect_offset_hover_left']?.['unit']
-                };
+                if( 'yes' === eaelEditModeSettings?.[key]?.['eael_hover_effect_offset_hover_popover'] ) {
+                    $eaelOffsetHoverTop = {
+                        'size': eaelEditModeSettings?.[key]?.['eael_hover_effect_offset_hover_top']?.['size'],
+                        'unit': eaelEditModeSettings?.[key]?.['eael_hover_effect_offset_hover_top']?.['unit']
+                    };
+                    $eaelOffsetHoverLeft = {
+                        'size': eaelEditModeSettings?.[key]?.['eael_hover_effect_offset_hover_left']?.['size'],
+                        'unit': eaelEditModeSettings?.[key]?.['eael_hover_effect_offset_hover_left']?.['unit']
+                    };
+                }
 
                 //Tranform
-                if( eaelEditModeSettings?.[key]?.['eael_hover_effect_rotate_is_on'] === 'yes' ) {
-                    $eaelRotateEffect = {
-                        'rotate_x': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_rotatex']?.['size'],
-                        'rotate_y': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_rotatey']?.['size'],
-                        'rotate_z': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_rotatez']?.['size']
-                    };
-                }
-                if( eaelEditModeSettings?.[key]?.['eael_hover_effect_scale_is_on'] === 'yes' ) {
-                    $eaelScaleEffect = {
-                        'scale_x': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_scalex']?.['size'],
-                        'scale_y': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_scaley']?.['size']
-                    };
-                }
-                if( eaelEditModeSettings?.[key]?.['eael_hover_effect_skew_is_on'] === 'yes' ) {
-                    $eaelSkewEffect = {
-                        'skew_x': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_skewx']?.['size'],
-                        'skew_y': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_skewy']?.['size']
-                    };
+                if( 'yes' === eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_popover'] ) {
+                    if( eaelEditModeSettings?.[key]?.['eael_hover_effect_rotate_is_on'] === 'yes' ) {
+                        $eaelRotateEffect = {
+                            'rotate_x': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_rotatex']?.['size'],
+                            'rotate_y': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_rotatey']?.['size'],
+                            'rotate_z': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_rotatez']?.['size']
+                        };
+                    }
+                    if( eaelEditModeSettings?.[key]?.['eael_hover_effect_scale_is_on'] === 'yes' ) {
+                        $eaelScaleEffect = {
+                            'scale_x': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_scalex']?.['size'],
+                            'scale_y': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_scaley']?.['size']
+                        };
+                    }
+                    if( eaelEditModeSettings?.[key]?.['eael_hover_effect_skew_is_on'] === 'yes' ) {
+                        $eaelSkewEffect = {
+                            'skew_x': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_skewx']?.['size'],
+                            'skew_y': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_skewy']?.['size']
+                        };
+                    }
                 }
 
                 //Tranform Hover
-                if( eaelEditModeSettings?.[key]?.['eael_hover_effect_rotate_hover_is_on'] === 'yes' ) {
-                    $eaelRotateHoverEffect = {
-                        'rotate_x': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_hover_rotatex']?.['size'],
-                        'rotate_y': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_hover_rotatey']?.['size'],
-                        'rotate_z': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_hover_rotatez']?.['size']
-                    };
-                }
-                if( eaelEditModeSettings?.[key]?.['eael_hover_effect_scale_hover_is_on'] === 'yes' ) {
-                    $eaelScaleHoverEffect = {
-                        'scale_x': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_hover_scalex']?.['size'],
-                        'scale_y': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_hover_scaley']?.['size']
-                    };
-                }
-                if( eaelEditModeSettings?.[key]?.['eael_hover_effect_skew_hover_is_on'] === 'yes' ) {
-                    $eaelSkewHoverEffect = {
-                        'skew_x': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_hover_skewx']?.['size'],
-                        'skew_y': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_hover_skewy']?.['size']
-                    };
+                if( 'yes' === eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_hover_popover'] ) {
+                    if( eaelEditModeSettings?.[key]?.['eael_hover_effect_rotate_hover_is_on'] === 'yes' ) {
+                        $eaelRotateHoverEffect = {
+                            'rotate_x': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_hover_rotatex']?.['size'],
+                            'rotate_y': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_hover_rotatey']?.['size'],
+                            'rotate_z': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_hover_rotatez']?.['size']
+                        };
+                    }
+                    if( eaelEditModeSettings?.[key]?.['eael_hover_effect_scale_hover_is_on'] === 'yes' ) {
+                        $eaelScaleHoverEffect = {
+                            'scale_x': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_hover_scalex']?.['size'],
+                            'scale_y': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_hover_scaley']?.['size']
+                        };
+                    }
+                    if( eaelEditModeSettings?.[key]?.['eael_hover_effect_skew_hover_is_on'] === 'yes' ) {
+                        $eaelSkewHoverEffect = {
+                            'skew_x': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_hover_skewx']?.['size'],
+                            'skew_y': eaelEditModeSettings?.[key]?.['eael_hover_effect_transform_hover_skewy']?.['size']
+                        };
+                    }
                 }
                 
                 //Transition
