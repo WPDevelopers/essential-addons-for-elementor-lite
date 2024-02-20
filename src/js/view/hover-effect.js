@@ -40,22 +40,30 @@ let HoverEffectHandler = function ($scope, $) {
             window.isRunFirstTime = true;
             var eaelEditModeSettings = [];
     
-            function getSettingsVal( $el ) {
+            function getHoverEffectSettingsVal( $el ) {
                 $.each($el, function (i, el) {
                     let $getSettings = el.attributes.settings.attributes;
                     if ( el.attributes.elType === 'widget' ) {
-                        if ( $getSettings['eael_hover_effect_switch'] === 'yes' && $getSettings['eael_hover_effect_enable_live_changes'] == 'yes' ) {
+                        if ( $getSettings['eael_hover_effect_switch'] === 'yes' && $getSettings['eael_hover_effect_enable_live_changes'] === 'yes' ) {
                             eaelEditModeSettings[el.attributes.id] = el.attributes.settings.attributes;
                         }
                     }
     
                     if ( el.attributes.elType === 'container' ) {
-                        getSettingsVal( el.attributes.elements.models );
+                        getHoverEffectSettingsVal( el.attributes.elements.models );
+                    }
+
+                    if ( el.attributes.elType === 'section' ) {
+                        getHoverEffectSettingsVal( el.attributes.elements.models );
+                    }
+
+                    if ( el.attributes.elType === 'column' ) {
+                        getHoverEffectSettingsVal( el.attributes.elements.models );
                     }
                 });
             }
     
-            getSettingsVal( window.elementor.elements.models );
+            getHoverEffectSettingsVal( window.elementor.elements.models );
         }
     
         for ( let key in eaelEditModeSettings ) {
