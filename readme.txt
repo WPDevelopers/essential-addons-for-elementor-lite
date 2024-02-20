@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.4
 Requires PHP: 7.0
-Stable tag: 5.9.9
+Stable tag: 5.9.10
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -296,6 +296,12 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.9.10 - 19/02/2024 =
+
+- Fixed: EA Post Grid | Show post terms not showing from Tags
+- Improved: Security Enhancement
+- Few minor bug fixes & improvements
 
 = 5.9.9 - 11/02/2024 =
 
