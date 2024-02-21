@@ -1,5 +1,5 @@
 # Deploy to WP.org
-name: Deploy to WordPress.org
+name: Deploy to WordPress.org readme.txt and assets only
 
 on:
   push:
