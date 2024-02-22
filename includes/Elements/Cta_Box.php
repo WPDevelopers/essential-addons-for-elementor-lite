@@ -333,10 +333,10 @@ class Cta_Box extends Widget_Base
                 'type' => Controls_Manager::TEXT,
                 'dynamic' => ['active' => true],
                 'label_block' => true,
-                'default' => esc_html__('Click Here', 'essential-addons-for-elementor-lite'),
+                'default' => esc_html__('Explore', 'essential-addons-for-elementor-lite'),
                 'ai' => [
 					'active' => false,
-				],
+				]
             ]
         );
 
@@ -1483,6 +1483,11 @@ class Cta_Box extends Widget_Base
 	    if ( ! empty( $settings['eael_cta_btn_link']['url'] ) ) {
 		    $this->add_link_attributes( 'button', $settings['eael_cta_btn_link'] );
 	    }
+
+        if( $settings['eael_cta_btn_link']['url'] === '#' ){
+            $this->add_render_attribute( 'button', 'role', 'button' );
+        }
+
 	    $this->add_render_attribute( 'button', 'class', "cta-button {$settings['eael_cta_btn_preset']} {$cta_btn_effect}" );
 
         if($settings['eael_cta_btn_preset'] === 'cta-btn-preset-2'){
