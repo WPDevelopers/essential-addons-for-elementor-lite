@@ -64,7 +64,7 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
             }
 
             ?>
-            <div class="eael-product-wrap" data-src="<?php echo esc_attr( $image_sources['src'] ) ?>" data-src-hover="<?php echo esc_attr( $image_sources['src_hover'] ) ?>" >
+            <div class="eael-product-wrap" data-src="<?php echo esc_url( $image_sources['src'] ); ?>" data-src-hover="<?php echo esc_url( $image_sources['src_hover'] ) ?>" >
 	        <?php
 	        do_action( 'eael_woocommerce_before_shop_loop_item' );
 	        if ( $settings['eael_wc_loop_hooks'] === 'yes' ){
@@ -111,7 +111,7 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
             }
             
             ?>
-            <div class="eael-product-wrap" data-src="<?php echo esc_attr( $image_sources['src'] ) ?>" data-src-hover="<?php echo esc_attr( $image_sources['src_hover'] ) ?>" >
+            <div class="eael-product-wrap" data-src="<?php echo esc_url( $image_sources['src'] ); ?>" data-src-hover="<?php echo esc_url( $image_sources['src_hover'] ); ?>" >
 	            <?php
 	            do_action( 'eael_woocommerce_before_shop_loop_item' );
 	            if ( $settings['eael_wc_loop_hooks'] === 'yes' ) {
@@ -210,7 +210,7 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
                 $image_sources = Helper::eael_get_woo_product_gallery_image_srcs( $product, $settings['eael_product_gallery_image_size_size'] );
             }
             ?>
-            <div class="eael-product-wrap" data-src="<?php echo esc_attr( $image_sources['src'] ) ?>" data-src-hover="<?php echo esc_attr( $image_sources['src_hover'] ) ?>" >
+            <div class="eael-product-wrap" data-src="<?php echo esc_url( $image_sources['src'] ); ?>" data-src-hover="<?php echo esc_url( $image_sources['src_hover'] ); ?>" >
 	            <?php
 	            do_action( 'eael_woocommerce_before_shop_loop_item' );
 	            if ( $settings['eael_wc_loop_hooks'] === 'yes' ) {

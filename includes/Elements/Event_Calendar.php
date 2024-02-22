@@ -3029,18 +3029,18 @@ class Event_Calendar extends Widget_Base
 
 		    echo '<div id="eael-event-calendar-' . $this->get_id() . '" class="eael-event-calendar-cls"
             data-cal_id = "' . $this->get_id() . '"
-            data-locale = "' . $local . '"
+            data-locale = "' . esc_attr( $local ) . '"
             data-translate = "' . htmlspecialchars( json_encode( $translate_date ), ENT_QUOTES, 'UTF-8' ) . '"
-            data-defaultview = "' . $default_view . '"
-            data-defaultdate = "' . $default_date . '"
-            data-time_format = "' . $time_format . '"
+            data-defaultview = "' . esc_attr( $default_view ) . '"
+            data-defaultdate = "' . esc_attr( $default_date ) . '"
+            data-time_format = "' . esc_attr( $time_format ) . '"
             data-event_limit = "' . $event_limit . '"
             data-popup_date_formate = "' . esc_attr( $settings['eael_event_popup_date_formate'] ) . '"
             data-multidays_event_day_count= "' . $multi_days_event_day_count . '"
-            data-hideDetailsLink= "' . $settings['eael_event_details_link_hide'] . '"
+            data-hideDetailsLink= "' . esc_attr( $settings['eael_event_details_link_hide'] ) . '"
             data-detailsButtonText = "' . Helper::eael_wp_kses( $settings['eael_event_details_text'] ) . '"
             data-events="' . htmlspecialchars( json_encode( $data ), ENT_QUOTES, 'UTF-8' ) . '"
-            data-first_day="' . $settings['eael_event_calendar_first_day'] . '"></div>
+            data-first_day="' . esc_attr( $settings['eael_event_calendar_first_day'] ) . '"></div>
             ' . $this->eaelec_load_event_details();
 	    } else {
 		    $this->eaelec_display_table( $data, $settings );
@@ -3060,7 +3060,7 @@ class Event_Calendar extends Widget_Base
 		$item_per_page = $is_paginated && !empty( $settings['eael_ec_item_per_page'] ) ? intval( $settings['eael_ec_item_per_page'] ) : 1;
 
 		?>
-		<table class="eael-event-calendar-table <?php  echo $is_paginated ? 'ea-ec-table-paginated' : '' ?> ea-ec-table-sortable" data-items-per-page="<?php esc_attr_e( $item_per_page );?>">
+		<table class="eael-event-calendar-table <?php  echo $is_paginated ? 'ea-ec-table-paginated' : '' ?> ea-ec-table-sortable" data-items-per-page="<?php echo esc_attr( $item_per_page ); ?>">
 			<thead>
 			<tr style="display: table-row;">
 				<?php

@@ -196,7 +196,7 @@ echo '<article class="eael-better-docs-category-grid-post" data-id="' . get_the_
                     $button_link = get_term_link($term->slug, 'doc_category');
                 }
 
-                echo '<a class="eael-bd-cg-button" href="' . $button_link . '">';
+                echo '<a class="eael-bd-cg-button" href="' . esc_url( $button_link ) . '">';
 
                 if ($settings['icon_position'] === 'before') {
                     if (isset($settings['button_icon']['value']['url']) && !empty($settings['button_icon']['value']['url'])) {
