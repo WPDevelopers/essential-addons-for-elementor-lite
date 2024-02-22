@@ -258,7 +258,7 @@ class advancedDataTableEdit {
 
 					if (this.table.classList.contains("ea-advanced-data-table-static")) {
 						for (let j = 0; j < cols.length; j++) {
-							row.push(JSON.stringify(decodeURI(cols[j].dataset.quill)));
+							row.push( decodeURI( cols[j].dataset.quill ) );
 						}
 					} else {
 						for (let j = 0; j < cols.length; j++) {
