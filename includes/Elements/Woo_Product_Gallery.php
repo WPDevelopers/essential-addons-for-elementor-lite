@@ -2490,7 +2490,7 @@ class Woo_Product_Gallery extends Widget_Base {
 					$query                    = new \WP_Query( $args );
 					$show_secondary_image     = isset( $settings['eael_product_gallery_show_secondary_image'] ) && 'yes' === $settings['eael_product_gallery_show_secondary_image'];
 
-					echo '<ul class="products eael-post-appender eael-post-appender-' . $this->get_id() . '" data-layout-mode="' . $settings["eael_product_gallery_items_layout"] . '" data-show-secondary-image="' . intval( $show_secondary_image ) . '" >';
+					echo '<ul class="products eael-post-appender eael-post-appender-' . $this->get_id() . '" data-layout-mode="' . esc_attr( $settings["eael_product_gallery_items_layout"] ) . '" data-show-secondary-image="' . intval( $show_secondary_image ) . '" >';
 					if ( $query->have_posts() ) {
 						$found_posts         = $query->found_posts;
 						$max_page            = ceil( $found_posts / absint( $args['posts_per_page'] ) );
@@ -2743,7 +2743,7 @@ class Woo_Product_Gallery extends Widget_Base {
 		$dir_name       = method_exists( $this, 'get_temp_dir_name' ) ? $this->get_temp_dir_name( $this->get_filename_only( $template ) ) : "pro";
 		$show_cat_thumb = isset( $settings[ 'eael_woo_product_gallery_terms_thumb' ] ) && 'yes' === $settings[ 'eael_woo_product_gallery_terms_thumb' ];
 
-		echo '<ul class="eael-cat-tab" data-layout="' . $settings[ "eael_product_gallery_items_layout" ] . '" data-template=' . json_encode( [ 'dir' => $dir_name, 'file_name' =>
+		echo '<ul class="eael-cat-tab" data-layout="' . esc_attr( $settings[ "eael_product_gallery_items_layout" ] ) . '" data-template=' . json_encode( [ 'dir' => $dir_name, 'file_name' =>
 				$this->get_filename_only( $template ), 'name'                                                                                        => $this->process_directory_name() ], 1 ) . '  data-nonce="' . wp_create_nonce( 'eael_product_gallery' ) . '" data-page-id="' . $this->page_id . '" data-widget-id="' . $this->get_id() . '" data-widget="' . $this->get_id() . '" data-class="' . get_class( $this ) . '" data-args="' . http_build_query( $args ) . '" data-page="1">';
 
 		if ( $settings[ 'eael_woo_product_gallery_terms_show_all' ] == 'yes' ) {
@@ -2757,7 +2757,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			}
 
 			if ( $show_cat_thumb && !empty($settings['eael_all_tab_thumb']['url'])) {
-				$show_all_cat_thumb = '<img src="' . $settings['eael_all_tab_thumb']['url'] . '" />';
+				$show_all_cat_thumb = '<img src="' . esc_url( $settings['eael_all_tab_thumb']['url'] ) . '" />';
 			} else {
 				$show_all_cat_thumb = '';
 			}
@@ -2788,7 +2788,7 @@ class Woo_Product_Gallery extends Widget_Base {
 					$image_url    = wp_get_attachment_url( $thumbnail_id );
 
 					if ( $show_cat_thumb && $image_url ) {
-						$show_cat_thumb_tag = '<img src="' . $image_url . '" />';
+						$show_cat_thumb_tag = '<img src="' . esc_url( $image_url ) . '" />';
 					} else {
 						$show_cat_thumb_tag = '';
 					}
@@ -2816,7 +2816,7 @@ class Woo_Product_Gallery extends Widget_Base {
 					$image_url    = wp_get_attachment_url( $thumbnail_id );
 
 					if ( $show_cat_thumb && $image_url ) {
-						$show_cat_thumb_tag = '<img src="' . $image_url . '" />';
+						$show_cat_thumb_tag = '<img src="' . esc_url( $image_url ) . '" />';
 					} else {
 						$show_cat_thumb_tag = '';
 					}
