@@ -97,6 +97,14 @@ $extensions = [
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-special-hover-effect/',
 				'promotion' => 'new'
 			],
+			[
+				'key'       => 'advanced-dynamic-tags',
+				'title'     => __( 'Advanced Dynamic Tags', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/advanced-dynamic-tags/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-advanced-dynamic-tags/',
+				'is_pro'    => true,
+				'promotion' => 'new'
+			],
 		]
 	]
 ];
