@@ -173,6 +173,11 @@ class Elements_Manager {
 			$list['wrapper-link'] = 'wrapper-link';
 		}
 
+		//Hover Effect
+		if ( ! empty( $element['settings']['eael_hover_effect_switch'] ) ) {
+			$list['special-hover-effect'] = 'special-hover-effect';
+		}
+
 		return $list;
 	}
 
