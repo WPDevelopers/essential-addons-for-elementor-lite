@@ -126,12 +126,12 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                                 if ($settings['eael_post_terms'] === 'tags') {
                                     $terms = get_the_tags();
                                 }
-
+                                
                                 //For custom post type
-                                $get_custom_post_type = get_post_type( get_the_ID() );
-                                $get_custom_taxonomy  = $settings["eael_{$get_custom_post_type}_terms"];
+                                $get_custom_post_type = get_post_type( get_the_ID() ); //post
+                                $get_custom_taxonomy  = $settings["eael_{$get_custom_post_type}_terms"]; //tags
 
-                                if ( $settings[ 'eael_post_terms' ] === $get_custom_taxonomy ) {
+                                if( 'post' !== $get_custom_post_type && $settings[ 'eael_post_terms' ] === $get_custom_taxonomy ) {
                                     $terms = wp_get_post_terms( get_the_ID(), $get_custom_taxonomy );
                                 }
 
@@ -139,7 +139,6 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                                     $html = '<ul class="post-meta-categories">';
                                     $count = 0;
                                     
-                                    $eael_post_terms_separator = ! empty( $settings['eael_post_terms_separator'] ) ? wp_strip_all_tags( $settings['eael_post_terms_separator'] ) : '';
                                     foreach ($terms as $term) {
                                         if ($count === intval($settings['eael_post_terms_max_length'])) {
                                             break;
@@ -147,9 +146,13 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                                         if ($count === 0) {
                                             $html .= '<li class="meta-cat-icon"><i class="far fa-folder-open"></i></li>';
                                         }
-
-                                        $is_last_item = $count + 1 === intval($settings['eael_post_terms_max_length']) || $count + 1 === count($terms);
-                                        $eael_post_terms_separator = $is_last_item  ? '' : $eael_post_terms_separator; 
+                                        
+                                        $is_last_item = $count + 1 === intval($settings['eael_post_terms_max_length']) || $count + 1 === count( (array) $terms);
+                                        
+                                        if (  ! empty( $term->name ) ) {
+                                            $eael_post_terms_separator = ! empty( $settings['eael_post_terms_separator'] ) ? wp_strip_all_tags( $settings['eael_post_terms_separator'] ) : '';
+                                            $eael_post_terms_separator = $is_last_item  ? '' : $eael_post_terms_separator; 
+                                        }
                                     
                                         $link = ($settings['eael_post_terms'] === 'category') ? get_category_link($term->term_id) : get_tag_link($term->term_id);
                                         $html .= '<li>';
