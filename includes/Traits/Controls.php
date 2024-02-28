@@ -1795,7 +1795,7 @@ trait Controls
                 [
                     'label' => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::COLOR,
-                    'default' => '#61ce70',
+                    'default' => '#000BEC',
                     'selectors' => [
                         '{{WRAPPER}} .eael-post-elements-readmore-btn' => 'color: {{VALUE}};',
                     ],
