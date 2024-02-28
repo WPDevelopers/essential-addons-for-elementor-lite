@@ -77,7 +77,7 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
 		        echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
 	        }?>
                 <?php
-                echo $product->get_image( $settings['eael_product_gallery_image_size_size'], ['loading' => 'eager', 'alt' => $product->get_title() ] );
+                echo $product->get_image( $settings['eael_product_gallery_image_size_size'], ['loading' => 'eager', 'alt' => esc_attr( $product->get_title() ) ] );
                 if ( $should_print_image_clickable ) {
 	                echo '</a>';
                 }
@@ -126,7 +126,7 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
 
                         echo ( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'.  Helper::eael_wp_kses( $stockout_text ) .'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' .  Helper::eael_wp_kses($sale_text) . '</span>' : '') );
 
-                        echo $product->get_image( $settings['eael_product_gallery_image_size_size'], ['loading' => 'eager', 'alt' => $product->get_title()] );
+                        echo $product->get_image( $settings['eael_product_gallery_image_size_size'], ['loading' => 'eager', 'alt' => esc_attr( $product->get_title() ) ] );
 
 	                    if( $should_print_image_clickable ) {
 		                    echo '</a>';
@@ -147,8 +147,7 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
                                     </li>
                                 <?php } ?>
 			                    <?php if( $should_print_link ){?>
-                                    <li class="view-details"><?php echo '<a href="' . $product->get_permalink
-                                        () . '" aria-label="View Details about '. esc_attr( $product->get_title() ) .'"><i class="fas fa-link"></i></a>'; ?></li>
+                                    <li class="view-details"><?php echo '<a href="' . $product->get_permalink() . '" aria-label="View Details about ' . esc_attr( $product->get_title() ) . '"><i class="fas fa-link"></i></a>'; ?></li>
 			                    <?php } ?>
                             </ul>
                         <?php } else { ?>
@@ -167,7 +166,7 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
                                 <?php } ?>
 
 			                    <?php if( $should_print_link ){?>
-                                    <li class="view-details" title="Details" aria-label="View Details about '. esc_attr( $product->get_title() ) .'"><?php echo '<a href="' . $product->get_permalink() . '"><i class="fas fa-link"></i></a>'; ?></li>
+                                    <li class="view-details" title="Details" aria-label="View Details about <?php echo esc_attr( $product->get_title() ); ?>"><?php echo '<a href="' . $product->get_permalink() . '"><i class="fas fa-link"></i></a>'; ?></li>
 			                    <?php } ?>
                             </ul>
                         <?php }
@@ -186,7 +185,7 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
                     }
                     ?>
                     <div class="eael-product-title">
-                        <?php printf('<%1$s>%2$s</%1$s>', $title_tag, Helper::eael_wp_kses($product->get_title())); ?>
+                        <?php printf('<%1$s>%2$s</%1$s>', $title_tag, Helper::eael_wp_kses( $product->get_title() ) ); ?>
                     </div>
                     <?php if(($gallery_style_preset != 'eael-product-preset-2') && $should_print_price ){
                         echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
@@ -224,7 +223,7 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
 	                    }
 
 	                    echo( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock ' . $sale_badge_preset . ' ' . $sale_badge_align . '">' . Helper::eael_wp_kses( $stockout_text ) . '</span>' : ( $product->is_on_sale() ? '<span class="eael-onsale ' . $sale_badge_preset . ' ' . $sale_badge_align . '">' . Helper::eael_wp_kses( $sale_text ) . '</span>' : '' ) );
-	                    echo $product->get_image( $settings['eael_product_gallery_image_size_size'], ['loading' => 'eager', 'alt' => $product->get_title()] );
+	                    echo $product->get_image( $settings['eael_product_gallery_image_size_size'], ['loading' => 'eager', 'alt' => esc_attr( $product->get_title() )] );
 
 	                    if ( $should_print_image_clickable ) {
 		                    echo '</a>';
@@ -244,8 +243,7 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
                                 </li>
                             <?php } ?>
 	                        <?php if( $should_print_link ){?>
-                                <li class="view-details"><?php echo '<a href="' . $product->get_permalink
-				                        () . '" aria-label="View Details about '. esc_attr( $product->get_title() ) .'" ><i class="fas fa-link"></i></a>'; ?></li>
+                                <li class="view-details"><?php echo '<a href="' . $product->get_permalink() . '" aria-label="View Details about ' . esc_attr( $product->get_title() ) . '" ><i class="fas fa-link"></i></a>'; ?></li>
 	                        <?php } ?>
                         </ul>
                     </div>
@@ -253,13 +251,13 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
                 <div class="product-details-wrap">
                     <?php
                     if ( $should_print_price ) {
-                        echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
+                        echo '<div class="eael-product-price">' . $product->get_price_html() . '</div>';
                     }
                     ?>
                     <div class="eael-product-title">
                         <?php
                         echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
-                        printf('<%1$s>%2$s</%1$s>', $title_tag, Helper::eael_wp_kses($product->get_title()));
+                        printf('<%1$s>%2$s</%1$s>', $title_tag, Helper::eael_wp_kses( $product->get_title() ) );
                         echo '</a>';
                         ?>
                     </div>
