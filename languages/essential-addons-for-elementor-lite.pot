@@ -1766,7 +1766,7 @@ msgstr ""
 msgid "Hide 1 Star Reviews"
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:723, ../includes/Elements/Business_Reviews.php:2966, ../includes/Elements/Business_Reviews.php:3010, ../includes/Elements/Business_Reviews.php:3081
+#: ../includes/Elements/Business_Reviews.php:723, ../includes/Elements/Business_Reviews.php:2971, ../includes/Elements/Business_Reviews.php:3015, ../includes/Elements/Business_Reviews.php:3086
 msgid "Reviewer"
 msgstr ""
 
@@ -1787,7 +1787,7 @@ msgid "Open in same window"
 msgstr ""
 
 #: ../includes/Elements/Business_Reviews.php:786
-msgid "Recommended to open link in same tab instead on a new tab"
+msgid "Recommended to open link in the same tab instead of a new tab"
 msgstr ""
 
 #: ../includes/Elements/Business_Reviews.php:803, ../includes/Elements/Woo_Product_List.php:1115
@@ -1910,27 +1910,27 @@ msgstr ""
 msgid "Active Color"
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:2690
+#: ../includes/Elements/Business_Reviews.php:2695
 msgid "The referenced location, place_id, was valid but no longer refers to a valid result. This may occur if the establishment is no longer in business."
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:2694
+#: ../includes/Elements/Business_Reviews.php:2699
 msgid "The referenced location, place_id, was not found in the Places database."
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:2698
+#: ../includes/Elements/Business_Reviews.php:2703
 msgid "The API request was malformed."
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:2702
+#: ../includes/Elements/Business_Reviews.php:2707
 msgid "You have exceeded the QPS limits. Or, Billing has not been enabled on your account. Or, The monthly $200 credit, or a self-imposed usage cap, has been exceeded. Or, The provided method of payment is no longer valid (for example, a credit card has expired)."
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:2706
+#: ../includes/Elements/Business_Reviews.php:2711
 msgid "The request is missing an API key. Or, The key parameter is invalid."
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:2710
+#: ../includes/Elements/Business_Reviews.php:2715
 msgid "An unknown error occurred."
 msgstr ""
 
