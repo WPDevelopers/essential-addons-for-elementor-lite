@@ -77,7 +77,7 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
 		        echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
 	        }?>
                 <?php
-                echo $product->get_image( $settings['eael_product_gallery_image_size_size'], ['loading' => 'eager'] );
+                echo $product->get_image( $settings['eael_product_gallery_image_size_size'], ['loading' => 'eager', 'alt' => $product->get_title() ] );
                 if ( $should_print_image_clickable ) {
 	                echo '</a>';
                 }
@@ -126,7 +126,7 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
 
                         echo ( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'.  Helper::eael_wp_kses( $stockout_text ) .'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' .  Helper::eael_wp_kses($sale_text) . '</span>' : '') );
 
-                        echo $product->get_image( $settings['eael_product_gallery_image_size_size'], ['loading' => 'eager'] );
+                        echo $product->get_image( $settings['eael_product_gallery_image_size_size'], ['loading' => 'eager', 'alt' => $product->get_title()] );
 
 	                    if( $should_print_image_clickable ) {
 		                    echo '</a>';
@@ -148,7 +148,7 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
                                 <?php } ?>
 			                    <?php if( $should_print_link ){?>
                                     <li class="view-details"><?php echo '<a href="' . $product->get_permalink
-                                        () . '"><i class="fas fa-link"></i></a>'; ?></li>
+                                        () . '" aria-label="View Details about '. esc_attr( $product->get_title() ) .'"><i class="fas fa-link"></i></a>'; ?></li>
 			                    <?php } ?>
                             </ul>
                         <?php } else { ?>
@@ -167,7 +167,7 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
                                 <?php } ?>
 
 			                    <?php if( $should_print_link ){?>
-                                    <li class="view-details" title="Details"><?php echo '<a href="' . $product->get_permalink() . '"><i class="fas fa-link"></i></a>'; ?></li>
+                                    <li class="view-details" title="Details" aria-label="View Details about '. esc_attr( $product->get_title() ) .'"><?php echo '<a href="' . $product->get_permalink() . '"><i class="fas fa-link"></i></a>'; ?></li>
 			                    <?php } ?>
                             </ul>
                         <?php }
@@ -224,7 +224,7 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
 	                    }
 
 	                    echo( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock ' . $sale_badge_preset . ' ' . $sale_badge_align . '">' . Helper::eael_wp_kses( $stockout_text ) . '</span>' : ( $product->is_on_sale() ? '<span class="eael-onsale ' . $sale_badge_preset . ' ' . $sale_badge_align . '">' . Helper::eael_wp_kses( $sale_text ) . '</span>' : '' ) );
-	                    echo $product->get_image( $settings['eael_product_gallery_image_size_size'], ['loading' => 'eager'] );
+	                    echo $product->get_image( $settings['eael_product_gallery_image_size_size'], ['loading' => 'eager', 'alt' => $product->get_title()] );
 
 	                    if ( $should_print_image_clickable ) {
 		                    echo '</a>';
@@ -245,7 +245,7 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
                             <?php } ?>
 	                        <?php if( $should_print_link ){?>
                                 <li class="view-details"><?php echo '<a href="' . $product->get_permalink
-				                        () . '"><i class="fas fa-link"></i></a>'; ?></li>
+				                        () . '" aria-label="View Details about '. esc_attr( $product->get_title() ) .'" ><i class="fas fa-link"></i></a>'; ?></li>
 	                        <?php } ?>
                         </ul>
                     </div>
