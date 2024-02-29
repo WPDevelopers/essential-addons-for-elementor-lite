@@ -10607,7 +10607,7 @@ msgid "Wrapper Link"
 msgstr ""
 
 #: ../includes/templates/admin/extensions.php:95
-msgid "Advanced Dynamic Tags"
+msgid "EA Dynamic Tags"
 msgstr ""
 
 #: ../includes/templates/admin/extensions.php:112
