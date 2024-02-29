@@ -236,3 +236,10 @@
 .elementor-control-unit-2[data-setting="eael_evergreen_counter_recurring_restart_after"] {
 	width: 70px;
 }
+
+.elementor-control-url_contains_url_type .elementor-choices-label{
+	line-height: 32px;
+}
+.elementor-control-url_contains_url_type .elementor-choices-label i{
+	font-size: 180%;
+}
