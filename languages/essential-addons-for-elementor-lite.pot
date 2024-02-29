@@ -10735,7 +10735,7 @@ msgid "Special Hover Effect"
 msgstr ""
 
 #: ../includes/templates/admin/extensions.php:102
-msgid "Advanced Dynamic Tags"
+msgid "EA Dynamic Tags"
 msgstr ""
 
 #: ../includes/templates/admin/extensions.php:119
