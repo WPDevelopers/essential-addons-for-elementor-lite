@@ -1045,3 +1045,42 @@ button.mfp-arrow:not(.toggle) {
     color: #58151c;
 	width: calc( 100% - 30px );
 }
+
+//Salient theme support
+body.theme-salient.material button.mfp-arrow, 
+body.theme-salient.material button.mfp-close {
+    // background: transparent;
+    border: 0;
+}
+
+body.theme-salient.material .mfp-arrow, 
+body.theme-salient.material .mfp-arrow:hover {
+    background: transparent;
+}
+
+body.theme-salient.material .mfp-arrow-left {
+	left: 0;
+}
+
+body.theme-salient.material .mfp-arrow-right {
+	transition: none;
+}
+
+body.theme-salient.material .mfp-arrow {
+    margin: -55px 0 0;
+    width: 90px;
+    height: 110px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body.theme-salient.material .mfp-arrow-left:after, 
+body.theme-salient.material .mfp-arrow-right:after {
+	transform: none;
+	transition: none;
+	background-color: transparent;
+}
+
+body.theme-salient.material .mfp-arrow-left:before, 
+body.theme-salient.material .mfp-arrow-right:before {
+	transform: none;
+}
