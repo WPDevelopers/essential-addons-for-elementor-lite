@@ -1061,3 +1061,7 @@ button.mfp-arrow:not(.toggle) {
     color: #58151c;
 	width: calc( 100% - 30px );
 }
+
+body.rtl .mfp-counter {
+	direction: ltr;
+}
