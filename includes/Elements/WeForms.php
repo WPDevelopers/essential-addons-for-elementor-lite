@@ -796,7 +796,7 @@ class WeForms extends Widget_Base
 
         if (!empty($settings['wpuf_contact_form'])) {
             echo '<div class="eael-weform-container">
-			' . do_shortcode('[weforms id="' . $settings['wpuf_contact_form'] . '" ]') . '
+			' . do_shortcode('[weforms id="' . esc_attr( $settings['wpuf_contact_form'] ) . '" ]') . '
 		</div>';
         }
     }
