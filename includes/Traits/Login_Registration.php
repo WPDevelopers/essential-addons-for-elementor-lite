@@ -224,7 +224,7 @@ trait Login_Registration {
 			}
 
 			if ( ! empty( $custom_redirect_url ) ) {
-				wp_safe_redirect( esc_url_raw( $custom_redirect_url ) );
+				wp_redirect( esc_url_raw( $custom_redirect_url ) );
 				exit();
 			}
 		}
