@@ -1050,10 +1050,78 @@
 
 .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately {
     background: #fff;
-    padding: 30px;
     box-shadow: 0 1px 1px rgba(51, 62, 119, 0.12);
     border-radius: 5px;
     position: relative;
+    overflow: hidden;
+}
+
+.eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately > div {
+    box-sizing: border-box;
+    padding-left: 65px;
+    width: 65%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately > img {
+    display: inline-block;
+    vertical-align: middle;
+    width: 35%;
+}
+
+.eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-title {
+    font-size: 56px;
+    font-weight: 700;
+    color: #041137;
+    line-height: 70px;
+}
+
+.eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-title .eael-quick-setup-highlighted-red {
+    color: #ff5a72;
+}
+
+.eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-text {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #727272;
+}
+
+.eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 45px;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 16px;
+}
+
+.eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-list .eael-quick-setup-list-item {
+    font-size: 16px;
+    line-height: 50px;
+    font-weight: 400;
+    color: #041137;
+    border-radius: 4px;
+    background: #F7F4FF;
+    margin: 0;
+    padding-left: 17px;
+}
+
+.eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-list .eael-quick-setup-list-item svg {
+    margin-right: 5px;
+}
+
+.eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-list .eael-quick-setup-list-item:nth-child(2) {
+    background: #FFF8F0;
+}
+
+.eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-list .eael-quick-setup-list-item:nth-child(3) {
+    background: #FFFAFA;
+}
+
+.eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-list .eael-quick-setup-list-item:nth-child(4) {
+    background: #F1FAFF;
 }
 
 .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.integrations .eael-quick-setup-admin-block-wrapper {

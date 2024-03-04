@@ -317,6 +317,7 @@ class WPDeveloper_Setup_Wizard {
 
 		?>
 		<div id="templately" class="eael-quick-setup-tab-content templately setup-content" style="">
+			<div>
 			<div class="eael-quick-setup-title">
 				<?php printf( __( '<span class="eael-quick-setup-highlighted-red">%s</span> %s', 'essential-addons-for-elementor-lite' ), '5000+', 'Ready Templates' ); ?>
 			</div>
@@ -384,6 +385,7 @@ class WPDeveloper_Setup_Wizard {
 					<?php _e( 'Cloud With Templately WorkSpace', 'essential-addons-for-elementor-lite' ); ?>
 				</li>
 			</ul>
+			</div><img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-qs-img.png' )?>" alt="">
 		</div>
 		<?php
 	}
