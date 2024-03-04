@@ -316,37 +316,75 @@ class WPDeveloper_Setup_Wizard {
 		}
 
 		?>
-        <div id="templately" class="eael-quick-setup-tab-content templately setup-content"
-             style="display: none;background-image: url('<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/mask-group.png' ) ?>')">
-            <div class="eael-quick-setup-logo">
-                <button data-action="install" data-slug="templately"
-                        class="button eael-quick-setup-templately-button wpdeveloper-plugin-installer">
-					<?php _e( 'Install Templately', 'essential-addons-for-elementor-lite' ); ?>
-                </button>
-                <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-logo.svg' ); ?>"
-                     alt="<?php _e( 'Logo', 'essential-addons-for-elementor-lite' ) ?>">
-            </div>
-            <div class="eael-quick-setup-title">
-				<?php printf( __( '%s <span class="eael-quick-setup-highlighted-red">%s</span> %s', 'essential-addons-for-elementor-lite' ), 'Get access to', '5000+', 'Elementor Templates with Templately! 🚀' ); ?>
-            </div>
-            <div class="eael-quick-setup-text">
-				<?php _e( 'Want to create websites faster than ever? Check out Templately, the ultimate templates cloud that comes with thousands of ready Elementor templates for every niche!', 'essential-addons-for-elementor-lite' ); ?>
-            </div>
-            <ul class="eael-quick-setup-list">
-                <li class="eael-quick-setup-list-item">
-                    <span class="eael-quick-setup-icon">🌟</span>
-					<?php _e( 'Access Thousands Of Stunning, Ready Website Templates', 'essential-addons-for-elementor-lite' ); ?>
-                </li>
-                <li class="eael-quick-setup-list-item">
-                    <span class="eael-quick-setup-icon">🔥</span>
-					<?php _e( 'Save Your Design Anywhere With MyCloud Storage Space', 'essential-addons-for-elementor-lite' ); ?>
-                </li>
-                <li class="eael-quick-setup-list-item">
-                    <span class="eael-quick-setup-icon">🚀</span>
-					<?php _e( 'Add Team Members & Collaborate On Cloud With Templately WorkSpace', 'essential-addons-for-elementor-lite' ); ?>
-                </li>
-            </ul>
-        </div>
+		<div id="templately" class="eael-quick-setup-tab-content templately setup-content" style="">
+			<div class="eael-quick-setup-title">
+				<?php printf( __( '<span class="eael-quick-setup-highlighted-red">%s</span> %s', 'essential-addons-for-elementor-lite' ), '5000+', 'Ready Templates' ); ?>
+			</div>
+			<div class="eael-quick-setup-text">
+				<?php _e( 'Get Access to amazing features and boost your Elementor page building experience with Templately', 'essential-addons-for-elementor-lite' ); ?>
+			</div>
+			<ul class="eael-quick-setup-list">
+				<li class="eael-quick-setup-list-item">
+                    <span class="eael-quick-setup-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.700012 1.60117C0.700012 1.36248 0.794833 1.13356 0.963616 0.964776C1.1324 0.795993 1.36132 0.701172 1.60001 0.701172H12.4C12.6387 0.701172 12.8676 0.795993 13.0364 0.964776C13.2052 1.13356 13.3 1.36248 13.3 1.60117V3.40117C13.3 3.63987 13.2052 3.86878 13.0364 4.03757C12.8676 4.20635 12.6387 4.30117 12.4 4.30117H1.60001C1.36132 4.30117 1.1324 4.20635 0.963616 4.03757C0.794833 3.86878 0.700012 3.63987 0.700012 3.40117V1.60117ZM0.700012 7.00117C0.700012 6.76248 0.794833 6.53356 0.963616 6.36478C1.1324 6.19599 1.36132 6.10117 1.60001 6.10117H7.00001C7.23871 6.10117 7.46763 6.19599 7.63641 6.36478C7.80519 6.53356 7.90001 6.76248 7.90001 7.00117V12.4012C7.90001 12.6399 7.80519 12.8688 7.63641 13.0376C7.46763 13.2064 7.23871 13.3012 7.00001 13.3012H1.60001C1.36132 13.3012 1.1324 13.2064 0.963616 13.0376C0.794833 12.8688 0.700012 12.6399 0.700012 12.4012V7.00117ZM10.6 6.10117C10.3613 6.10117 10.1324 6.19599 9.96362 6.36478C9.79483 6.53356 9.70001 6.76248 9.70001 7.00117V12.4012C9.70001 12.6399 9.79483 12.8688 9.96362 13.0376C10.1324 13.2064 10.3613 13.3012 10.6 13.3012H12.4C12.6387 13.3012 12.8676 13.2064 13.0364 13.0376C13.2052 12.8688 13.3 12.6399 13.3 12.4012V7.00117C13.3 6.76248 13.2052 6.53356 13.0364 6.36478C12.8676 6.19599 12.6387 6.10117 12.4 6.10117H10.6Z"
+	  fill="url(#paint0_linear_810_832)"/>
+<defs>
+<linearGradient id="paint0_linear_810_832" x1="7.00001" y1="0.701172" x2="7.00001" y2="13.3012" gradientUnits="userSpaceOnUse">
+<stop stop-color="#9373FF"/>
+<stop offset="1" stop-color="#7650F6"/>
+</linearGradient>
+</defs>
+</svg>
+					</span>
+					<?php _e( 'Stunning, Ready Website Templates', 'essential-addons-for-elementor-lite' ); ?>
+				</li>
+				<li class="eael-quick-setup-list-item">
+                    <span class="eael-quick-setup-icon">
+						<svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.75 5.125V7.375C13.75 9.23898 10.728 10.75 7 10.75C3.27208 10.75 0.25 9.23898 0.25 7.375V5.125C0.25 6.98898 3.27208 8.5 7 8.5C10.728 8.5 13.75 6.98898 13.75 5.125ZM0.25 8.875C0.25 10.739 3.27208 12.25 7 12.25C10.728 12.25 13.75 10.739 13.75 8.875V11.125C13.75 12.989 10.728 14.5 7 14.5C3.27208 14.5 0.25 12.989 0.25 11.125V8.875ZM7 7C3.27208 7 0.25 5.48896 0.25 3.625C0.25 1.76104 3.27208 0.25 7 0.25C10.728 0.25 13.75 1.76104 13.75 3.625C13.75 5.48896 10.728 7 7 7Z"
+	  fill="url(#paint0_linear_810_852)"/>
+<defs>
+<linearGradient id="paint0_linear_810_852" x1="7" y1="0.25" x2="7" y2="14.5" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FFB45A"/>
+<stop offset="1" stop-color="#F3A342"/>
+</linearGradient>
+</defs>
+</svg>
+					</span>
+					<?php _e( 'Design With MyCloud Storage Space', 'essential-addons-for-elementor-lite' ); ?>
+				</li>
+				<li class="eael-quick-setup-list-item">
+                    <span class="eael-quick-setup-icon">
+						<svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.5 16.5C0.5 13.1863 3.18629 10.5 6.5 10.5C9.81373 10.5 12.5 13.1863 12.5 16.5H0.5ZM6.5 9.75C4.01375 9.75 2 7.73625 2 5.25C2 2.76375 4.01375 0.75 6.5 0.75C8.98625 0.75 11 2.76375 11 5.25C11 7.73625 8.98625 9.75 6.5 9.75ZM12.0221 11.4249C14.3362 12.0163 16.0759 14.0426 16.2377 16.5H14C14 14.5427 13.2502 12.7604 12.0221 11.4249ZM10.5051 9.71767C11.7296 8.61915 12.5 7.02455 12.5 5.25C12.5 4.187 12.2235 3.18856 11.7387 2.32265C13.4565 2.66548 14.75 4.18099 14.75 6C14.75 8.07188 13.0719 9.75 11 9.75C10.8322 9.75 10.667 9.73897 10.5051 9.71767Z"
+	  fill="url(#paint0_linear_810_846)"/>
+<defs>
+<linearGradient id="paint0_linear_810_846" x1="8.36885" y1="0.75" x2="8.36885" y2="16.5" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FFBAC4"/>
+<stop offset="1" stop-color="#FF7B8E"/>
+</linearGradient>
+</defs>
+</svg>
+					</span>
+					<?php _e( 'Add Team Members & Collaborate', 'essential-addons-for-elementor-lite' ); ?>
+				</li>
+				<li class="eael-quick-setup-list-item">
+                    <span class="eael-quick-setup-icon">
+						<svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.75 14.75H5.25C2.76472 14.75 0.75 12.7353 0.75 10.25C0.75 8.28845 2.0051 6.62 3.75603 6.00393C3.75202 5.91979 3.75 5.83513 3.75 5.75C3.75 2.85051 6.10051 0.5 9 0.5C11.8995 0.5 14.25 2.85051 14.25 5.75C14.25 5.83513 14.248 5.91979 14.244 6.00393C15.9949 6.62 17.25 8.28845 17.25 10.25C17.25 12.7353 15.2353 14.75 12.75 14.75Z"
+	  fill="url(#paint0_linear_810_854)"/>
+<defs>
+<linearGradient id="paint0_linear_810_854" x1="9" y1="0.5" x2="9" y2="14.75" gradientUnits="userSpaceOnUse">
+<stop stop-color="#6CC7FF"/>
+<stop offset="1" stop-color="#2FA7F1"/>
+</linearGradient>
+</defs>
+</svg>
+					</span>
+					<?php _e( 'Cloud With Templately WorkSpace', 'essential-addons-for-elementor-lite' ); ?>
+				</li>
+			</ul>
+		</div>
 		<?php
 	}
 
