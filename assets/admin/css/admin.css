@@ -1156,6 +1156,36 @@
     }
 }
 
+@media (min-width: 768px) and (max-width: 991px) {
+    .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately > div {
+        width: calc(100% - 240px);
+        padding-top: 30px;
+    }
+
+    .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately > img {
+        vertical-align: top;
+        width: 230px;
+        margin-left: 10px;
+    }
+
+    .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-title {
+        font-size: 34px;
+    }
+
+    .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-text {
+        max-width: 450px;
+    }
+
+    .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-list {
+        margin-bottom: 20px;
+        width: 630px;
+    }
+
+    .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-list .eael-quick-setup-list-item {
+        font-size: 15px;
+    }
+}
+
 .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.integrations .eael-quick-setup-admin-block-wrapper {
     display: -ms-grid;
     display: grid;
