@@ -1204,6 +1204,11 @@
         line-height: 50px;
     }
 
+    .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-text {
+        max-width: 460px;
+        margin-top: 15px;
+    }
+
     .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-list {
         margin-top: 30px;
         grid-template-columns: auto;
