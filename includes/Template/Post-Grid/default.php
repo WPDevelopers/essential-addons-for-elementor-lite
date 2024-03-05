@@ -32,11 +32,11 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                             echo Helper::get_terms_as_list($settings['eael_post_terms'], $settings['eael_post_terms_max_length']);
                         }
 
-                        echo '<div class="eael-entry-overlay ' . $settings['eael_post_grid_hover_animation'] . '">';
+                        echo '<div class="eael-entry-overlay ' . esc_attr( $settings['eael_post_grid_hover_animation'] ) . '">';
                             if (isset($settings['eael_post_grid_bg_hover_icon_new']['url'])) {
                                 echo '<img src="' . esc_url($settings['eael_post_grid_bg_hover_icon_new']['url']) . '" alt="' . esc_attr(get_post_meta($settings['eael_post_grid_bg_hover_icon_new']['id'], '_wp_attachment_image_alt', true)) . '" />';
                             } else {
-                                echo '<i class="' . $settings['eael_post_grid_bg_hover_icon_new']['value'] . '" aria-hidden="true"></i>';
+                                echo '<i class="' . esc_attr( $settings['eael_post_grid_bg_hover_icon_new']['value'] ) . '" aria-hidden="true"></i>';
                             }
                             
                             echo '<a href="' . get_the_permalink() . '"' . $link_settings['image_link_nofollow'] . '' . $link_settings['image_link_target_blank'] . '></a>';
@@ -126,12 +126,12 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                                 if ($settings['eael_post_terms'] === 'tags') {
                                     $terms = get_the_tags();
                                 }
-
+                                
                                 //For custom post type
-                                $get_custom_post_type = get_post_type( get_the_ID() );
-                                $get_custom_taxonomy  = $settings["eael_{$get_custom_post_type}_terms"];
+                                $get_custom_post_type = get_post_type( get_the_ID() ); //post
+                                $get_custom_taxonomy  = $settings["eael_{$get_custom_post_type}_terms"]; //tags
 
-                                if ( $settings[ 'eael_post_terms' ] === $get_custom_taxonomy ) {
+                                if( 'post' !== $get_custom_post_type && $settings[ 'eael_post_terms' ] === $get_custom_taxonomy ) {
                                     $terms = wp_get_post_terms( get_the_ID(), $get_custom_taxonomy );
                                 }
 
@@ -139,7 +139,6 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                                     $html = '<ul class="post-meta-categories">';
                                     $count = 0;
                                     
-                                    $eael_post_terms_separator = ! empty( $settings['eael_post_terms_separator'] ) ? wp_strip_all_tags( $settings['eael_post_terms_separator'] ) : '';
                                     foreach ($terms as $term) {
                                         if ($count === intval($settings['eael_post_terms_max_length'])) {
                                             break;
@@ -147,9 +146,13 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                                         if ($count === 0) {
                                             $html .= '<li class="meta-cat-icon"><i class="far fa-folder-open"></i></li>';
                                         }
-
-                                        $is_last_item = $count + 1 === intval($settings['eael_post_terms_max_length']) || $count + 1 === count($terms);
-                                        $eael_post_terms_separator = $is_last_item  ? '' : $eael_post_terms_separator; 
+                                        
+                                        $is_last_item = $count + 1 === intval($settings['eael_post_terms_max_length']) || $count + 1 === count( (array) $terms);
+                                        
+                                        if (  ! empty( $term->name ) ) {
+                                            $eael_post_terms_separator = ! empty( $settings['eael_post_terms_separator'] ) ? wp_strip_all_tags( $settings['eael_post_terms_separator'] ) : '';
+                                            $eael_post_terms_separator = $is_last_item  ? '' : $eael_post_terms_separator; 
+                                        }
                                     
                                         $link = ($settings['eael_post_terms'] === 'category') ? get_category_link($term->term_id) : get_tag_link($term->term_id);
                                         $html .= '<li>';
@@ -183,12 +186,12 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
             echo Helper::get_terms_as_list($settings['eael_post_terms'], $settings['eael_post_terms_max_length']);
         }
 
-        echo '<div class="eael-entry-overlay ' . $settings['eael_post_grid_hover_animation'] . '">';
+        echo '<div class="eael-entry-overlay ' . esc_attr( $settings['eael_post_grid_hover_animation'] ) . '">';
 
         if (isset($settings['eael_post_grid_bg_hover_icon_new']['url'])) {
             echo '<img src="' . esc_url($settings['eael_post_grid_bg_hover_icon_new']['url']) . '" alt="' . esc_attr(get_post_meta($settings['eael_post_grid_bg_hover_icon_new']['id'], '_wp_attachment_image_alt', true)) . '" />';
         } else {
-            echo '<i class="' . $settings['eael_post_grid_bg_hover_icon_new']['value'] . '" aria-hidden="true"></i>';
+            echo '<i class="' . esc_attr( $settings['eael_post_grid_bg_hover_icon_new']['value'] ) . '" aria-hidden="true"></i>';
         }
         echo '<a href="' . get_the_permalink() . '"' . $link_settings['image_link_nofollow'] . '' . $link_settings['image_link_target_blank'] . '></a>';
         echo '</div>';
@@ -274,7 +277,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
             echo Helper::get_terms_as_list($settings['eael_post_terms'], $settings['eael_post_terms_max_length']);
         }
 
-        echo '<div class="eael-entry-overlay ' . $settings['eael_post_grid_hover_animation'] . '">';
+        echo '<div class="eael-entry-overlay ' . esc_attr( $settings['eael_post_grid_hover_animation'] ) . '">';
 
         if (isset($settings['eael_post_grid_bg_hover_icon_new']['url'])) {
             echo '<img src="' . esc_url($settings['eael_post_grid_bg_hover_icon_new']['url']) . '" alt="' . esc_attr(get_post_meta($settings['eael_post_grid_bg_hover_icon_new']['id'], '_wp_attachment_image_alt', true)) . '" />';
@@ -282,7 +285,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
             if (($settings['eael_post_grid_bg_hover_icon_new']['library']) == 'svg') {
                 echo '<img src="' . esc_url($settings['eael_post_grid_bg_hover_icon_new']['value']['url']) . '" alt="' . esc_attr(get_post_meta($settings['eael_post_grid_bg_hover_icon_new']['value']['id'], '_wp_attachment_image_alt', true)) . '" />';
             } else {
-                echo '<i class="' . $settings['eael_post_grid_bg_hover_icon_new']['value'] . '" aria-hidden="true"></i>';
+                echo '<i class="' . esc_attr( $settings['eael_post_grid_bg_hover_icon_new']['value'] ) . '" aria-hidden="true"></i>';
             }
         }
         echo '<a href="' . get_the_permalink() . '"' . $link_settings['image_link_nofollow'] . '' . $link_settings['image_link_target_blank'] . '></a>';
