@@ -1236,19 +1236,21 @@
     .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-list {
         margin-top: 30px;
         grid-template-columns: auto;
-        max-width: 300px;
+        max-width: 320px;
     }
+}
 
+@media (max-width: 479px) {
     .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-list .eael-quick-setup-list-item {
-        font-size: 12px;
+        font-size: 11px;
         line-height: 40px;
         padding-left: 5px;
-        position: relative;
     }
 
-    span.eael-quick-setup-icon {
-        position: absolute;
-        top: -15px;
+    .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-list .eael-quick-setup-list-item span.eael-quick-setup-icon svg {
+        width: 10px;
+        transform: translateY(3px);
+        margin-right: 3px;
     }
 }
 
