@@ -316,7 +316,7 @@ class WPDeveloper_Setup_Wizard {
 		}
 
 		?>
-		<div id="templately" class="eael-quick-setup-tab-content templately setup-content" style="">
+		<div id="templately" class="eael-quick-setup-tab-content templately setup-content" style="display: none;">
 			<div>
 			<div class="eael-quick-setup-title">
 				<?php printf( __( '<span class="eael-quick-setup-highlighted-red">%s</span> %s', 'essential-addons-for-elementor-lite' ), '5000+', 'Ready Templates' ); ?>
