@@ -354,7 +354,6 @@
 						        button.text( "Activated" );
 						        button.data( "action", null );
 						        $( "body" ).trigger( 'eael_after_active_plugin', { plugin: basename } );
-								$('#eael-next').trigger('click');
 					        } else {
 						        button.text( "Activate" );
 					        }
