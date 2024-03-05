@@ -39,6 +39,7 @@ class Select2 extends Base_Data_Control
 				'cl_dynamic'      => __( 'Dynamic Field', 'essential-addons-for-elementor-lite' ),
 				'cl_query_string' => __( 'Query String', 'essential-addons-for-elementor-lite' ),
 				'cl_url_contains' => __( 'URL Contains', 'essential-addons-for-elementor-lite' ),
+				'cl_archive'      => __( 'Archive', 'essential-addons-for-elementor-lite' ),
 				'cl_woo_products' => __( 'Woo Products', 'essential-addons-for-elementor-lite' ),
 				'cl_woo_cart'     => __( 'Woo Cart', 'essential-addons-for-elementor-lite' ),
 				'cl_woo_orders'   => __( 'Woo Orders', 'essential-addons-for-elementor-lite' ),
