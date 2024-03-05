@@ -16,7 +16,7 @@ if ($default_multiple_kb) {
     $button_link = get_term_link($term->slug, 'doc_category');
 }
 
-echo '<a href="' . $button_link . '" class="eael-better-docs-category-box-post">
+echo '<a href="' . esc_url( $button_link ) . '" class="eael-better-docs-category-box-post">
     <div class="eael-bd-cb-inner">';
 
     if ($settings['show_icon']) {
