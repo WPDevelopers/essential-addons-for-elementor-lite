@@ -320,6 +320,7 @@
 						        button.text( "Activated" );
 						        button.data( "action", 'completed' );
 						        $( "body" ).trigger( 'eael_after_active_plugin', { plugin: slug } );
+								$('#eael-next').trigger('click');
 					        } else {
 						        button.attr( "disabled", false );
 						        button.text( "Install" );
@@ -345,6 +346,7 @@
 						        button.text( "Activated" );
 						        button.data( "action", null );
 						        $( "body" ).trigger( 'eael_after_active_plugin', { plugin: basename } );
+								$('#eael-next').trigger('click');
 					        } else {
 						        button.text( "Activate" );
 					        }
@@ -445,6 +447,13 @@
 		
 		contents[StepNumber].style.display = "none";
 		StepNumber = (e.target.id == 'eael-prev') ? StepNumber - 1 : StepNumber + 1;
+
+		if (StepNumber === 3) {
+			$('.eael-quick-setup-footer').eq(0).hide().siblings('.eael-quick-setup-footer').show();
+		} else {
+			$('.eael-quick-setup-footer').eq(1).hide().siblings('.eael-quick-setup-footer').show();
+		}
+
 		if (e.target.id == 'eael-next' && StepNumber == 2) {
 			$.ajax({
 				       url: localize.ajaxurl,

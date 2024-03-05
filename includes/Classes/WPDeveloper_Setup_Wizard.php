@@ -155,6 +155,14 @@ class WPDeveloper_Setup_Wizard {
             <button id="eael-save" style="display: none"
                     class="button eael-quick-setup-btn eael-quick-setup-next-button eael-setup-wizard-save"><?php _e( 'Finish', 'essential-addons-for-elementor-lite' ) ?></button>
         </div>
+		<div class="eael-quick-setup-footer" style="display: none;">
+			<button id="eael-next" class="button eael-quick-setup-btn eael-quick-setup-prev-button">
+				<?php _e( 'Skip', 'essential-addons-for-elementor-lite' ) ?>
+			</button>
+			<button class="button eael-quick-setup-btn eael-quick-setup-next-button wpdeveloper-plugin-installer" data-action="install" data-slug="templately"><?php _e( 'Enable Templates', 'essential-addons-for-elementor-lite' ) ?>
+				<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/right-arrow.svg' ); ?>" alt="<?php _e( 'Right', 'essential-addons-for-elementor-lite' ); ?>">
+			</button>
+		</div>
 		<?php
 	}
 
