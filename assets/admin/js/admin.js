@@ -448,7 +448,7 @@
 		contents[StepNumber].style.display = "none";
 		StepNumber = (e.target.id == 'eael-prev') ? StepNumber - 1 : StepNumber + 1;
 
-		if (StepNumber === 3) {
+		if (StepNumber === 3 && contents[3].classList.contains('templately')) {
 			$('.eael-quick-setup-footer').eq(0).hide().siblings('.eael-quick-setup-footer').show();
 		} else {
 			$('.eael-quick-setup-footer').eq(1).hide().siblings('.eael-quick-setup-footer').show();
