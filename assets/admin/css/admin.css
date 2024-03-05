@@ -1125,6 +1125,37 @@
     background: #F1FAFF;
 }
 
+@media (min-width: 992px) and (max-width: 1299px) {
+    .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately > div {
+        width: 60%;
+        vertical-align: middle;
+    }
+
+    .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-title {
+        font-size: 45px;
+        width: 550px;
+    }
+
+    .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-text {
+        font-size: 18px;
+        width: 550px;
+    }
+
+    .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-list {
+        margin-bottom: 20px;
+        grid-template-columns: auto;
+    }
+
+    .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-list .eael-quick-setup-list-item {
+        width: 320px;
+    }
+
+    .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately > img {
+        vertical-align: bottom;
+        width: 40%;
+    }
+}
+
 .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.integrations .eael-quick-setup-admin-block-wrapper {
     display: -ms-grid;
     display: grid;
