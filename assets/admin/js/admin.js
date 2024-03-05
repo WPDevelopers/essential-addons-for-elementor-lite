@@ -305,7 +305,11 @@
 		
 		if ( action == "install" && !$.active ) {
 			button.text( "Installing..." ).attr( "disabled", true );
-			
+			if (pagenow === 'admin_page_eael-setup-wizard' && button.hasClass('eael-quick-setup-next-button')) {
+				button.text("Enabling Templates");
+				$('#eael-next').trigger('click');
+			}
+
 			$.ajax( {
 				        url: localize.ajaxurl,
 				        type: "POST",
@@ -318,9 +322,13 @@
 					        if ( response.success ) {
 						        button.attr( "disabled", true );
 						        button.text( "Activated" );
+
+								if (pagenow === 'admin_page_eael-setup-wizard' && button.hasClass('eael-quick-setup-next-button')) {
+									button.text("Enabled Templates");
+								}
+
 						        button.data( "action", 'completed' );
 						        $( "body" ).trigger( 'eael_after_active_plugin', { plugin: slug } );
-								$('#eael-next').trigger('click');
 					        } else {
 						        button.attr( "disabled", false );
 						        button.text( "Install" );
