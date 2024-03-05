@@ -1058,7 +1058,7 @@
 
 .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately > div {
     box-sizing: border-box;
-    padding-left: 65px;
+    padding-left: 5%;
     width: 65%;
     display: inline-block;
     vertical-align: middle;
@@ -1092,6 +1092,7 @@
     list-style: none;
     padding-left: 0;
     margin-top: 45px;
+    margin-bottom: 20px;
     display: grid;
     grid-template-columns: auto auto;
     gap: 16px;
