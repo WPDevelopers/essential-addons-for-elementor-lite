@@ -249,6 +249,9 @@
 	border-radius: 4px;
 	padding: 10px;
 }
+.elementor-control-type-choose .elementor-choices.eael-image-choices .elementor-choices-label img{
+	image-rendering: pixelated;
+}
 /* .elementor-control-type-eael-image-choose .eael-image-choices .elementor-choices-label:hover,
 .elementor-control-type-eael-image-choose .elementor-choices input:checked+.elementor-choices-label{
 	background: #333538;
