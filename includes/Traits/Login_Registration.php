@@ -208,7 +208,7 @@ trait Login_Registration {
 			do_action( 'wp_login', $user_data->user_login, $user_data );
 			do_action( 'eael/login-register/after-login', $user_data->user_login, $user_data );
 
-			$custom_redirect_url 	= ! empty( $_POST['redirect_to'] ) ? sanitize_url( $_POST['redirect_to'] ) : '';
+			$custom_redirect_url 	= ! empty( $_POST['redirect_to'] ) ? $redirect_to : '';
 			$previous_page_url 		= ! empty( $_POST['redirect_to_prev_page_login'] ) ? sanitize_url( $_POST['redirect_to_prev_page_login'] ) : '';
 			$custom_redirect_url 	= ! empty( $settings['login_redirect_url_prev_page'] ) && $settings['login_redirect_url_prev_page'] === 'yes' ? $previous_page_url : $custom_redirect_url;
 
