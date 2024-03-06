@@ -1095,6 +1095,7 @@
     font-weight: 400;
     line-height: 1.4;
     color: #727272;
+    position: relative;
 }
 
 .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-list {
