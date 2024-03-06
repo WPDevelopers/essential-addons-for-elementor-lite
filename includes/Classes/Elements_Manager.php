@@ -173,6 +173,10 @@ class Elements_Manager {
 			$list['wrapper-link'] = 'wrapper-link';
 		}
 
+		if ( ! empty( $element['settings']['eael_smooth_animation_section'] ) ) {
+			$list['smooth-animation'] = 'smooth-animation';
+		}
+
 		return $list;
 	}
 
