@@ -1517,7 +1517,7 @@ class Cta_Box extends Widget_Base
 	    }
     ?>
 	<?php if ('cta-basic' == $settings['eael_cta_type']): ?>
-	<div class="eael-call-to-action cta-basic <?php echo esc_attr($cta_class). ' ' . $settings['eael_cta_preset']; ?>">
+	<div class="eael-call-to-action cta-basic <?php echo esc_attr( $cta_class . ' ' . $settings['eael_cta_preset'] ); ?>">
         <?php
             print $headingMarkup;
             print $contentMarkup;
@@ -1526,7 +1526,7 @@ class Cta_Box extends Widget_Base
 	</div>
 	<?php endif;?>
 	<?php if ('cta-flex' == $settings['eael_cta_type']): ?>
-	<div class="eael-call-to-action cta-flex <?php echo esc_attr($cta_class). ' ' . $settings['eael_cta_preset']; ?>">
+	<div class="eael-call-to-action cta-flex <?php echo esc_attr( $cta_class . ' ' . $settings['eael_cta_preset'] ); ?>">
 	    <div class="content">
             <?php
                 print $headingMarkup;
@@ -1539,11 +1539,11 @@ class Cta_Box extends Widget_Base
 	</div>
 	<?php endif;?>
 	<?php if ('cta-icon-flex' == $settings['eael_cta_type']): ?>
-	<div class="eael-call-to-action cta-icon-flex <?php echo esc_attr($cta_class). ' ' . $settings['eael_cta_preset']; ?>">
+	<div class="eael-call-to-action cta-icon-flex <?php echo esc_attr( $cta_class . ' ' . $settings['eael_cta_preset'] ); ?>">
 	    <div class="icon">
 			<?php if ($icon_is_new || $icon_migrated) {?>
 				<?php if (isset($settings['eael_cta_flex_grid_icon_new']['value']['url'])): ?>
-					<img src="<?php echo esc_attr($settings['eael_cta_flex_grid_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_cta_flex_grid_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+					<img src="<?php echo esc_url( $settings['eael_cta_flex_grid_icon_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_cta_flex_grid_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
 				<?php else:
                     Icons_Manager::render_icon( $settings['eael_cta_flex_grid_icon_new'] );
 
