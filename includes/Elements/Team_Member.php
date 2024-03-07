@@ -943,7 +943,7 @@ class Team_Member extends Widget_Base {
 										<a <?php $this->print_render_attribute_string( 'social_link_' . $index ); ?>>
 											<?php if ($icon_is_new || $icon_migrated) { ?>
 												<?php if( isset( $item['social_new']['value']['url'] ) ) : ?>
-													<img src="<?php echo esc_attr($item['social_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($item['social_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+													<img src="<?php echo esc_url( $item['social_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($item['social_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
 												<?php else :
                                                     \Elementor\Icons_Manager::render_icon( $item['social_new'], [ 'aria-hidden' => 'true' ] );
                                                 endif; ?>

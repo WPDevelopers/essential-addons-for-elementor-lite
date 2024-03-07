@@ -140,6 +140,18 @@ ea.hooks.addAction("init", "ea", () => {
 				}
 			  });
 		}
+
+		/*
+		Returning to the page using the browser's forward or back buttons 
+		it will reload spatially [Safari] browser
+		*/
+		window.addEventListener( "pageshow", function( evt ) {
+			if( evt.persisted ) {
+				setTimeout( function() {
+					window.location.reload();
+				}, 10 );
+			}
+		}, false );
 	};
 
     if (ea.elementStatusCheck('productGalleryLoad')) {
