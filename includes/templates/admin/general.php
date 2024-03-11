@@ -83,7 +83,7 @@
 								<?php _e( 'Templates Cloud with Workspace', 'essential-addons-for-elementor-lite' ); ?>
 							</li>
 						</ul>
-						<button class="button wpdeveloper-plugin-installer" data-action="install" data-slug="templately">Install Templately</button>
+						<button class="button wpdeveloper-plugin-installer" data-action="install" data-slug="templately"><?php _e('Enable Templates','essential-addons-for-elementor-lite'); ?></button>
 					</div><img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-qs-img.png' ) ?>" alt="">
 				</div>
 			<?php } else { ?>
