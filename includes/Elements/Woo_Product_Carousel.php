@@ -1212,7 +1212,7 @@ class Woo_Product_Carousel extends Widget_Base {
             [
                 'label'     => esc_html__( 'Regular Price Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '',
+                'default'   => '#025492',
                 'selectors' => [
                     '{{WRAPPER}} .eael-product-carousel .eael-product-price del .amount, {{WRAPPER}} .eael-product-carousel .eael-product-price .amount bdi' => 'color: {{VALUE}};',
                 ],
@@ -1344,7 +1344,7 @@ class Woo_Product_Carousel extends Widget_Base {
             [
                 'label'     => esc_html__( 'Sale Badge Background', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '',
+                'default'   => '#0044FC',
                 'selectors' => [
                     '{{WRAPPER}} .eael-product-carousel .onsale, {{WRAPPER}} .eael-product-carousel .eael-onsale' => 'background-color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-carousel .eael-onsale:not(.outofstock).sale-preset-4:after'        => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}};',
