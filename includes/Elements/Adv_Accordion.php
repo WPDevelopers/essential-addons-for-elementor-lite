@@ -1224,8 +1224,8 @@ class Adv_Accordion extends Widget_Base
                     }
 
                 } else {
-                    echo '<span class="eael-advanced-accordion-icon-closed"><i class="' . ( ! empty( $tab['eael_adv_accordion_tab_title_icon'] ) ? $tab['eael_adv_accordion_tab_title_icon'] : '' ) . ' fa-accordion-icon"></i></span>';
-                    echo '<span class="eael-advanced-accordion-icon-opened"><i class="' . ( ! empty( $tab['eael_adv_accordion_tab_title_icon_opened'] ) ? $tab['eael_adv_accordion_tab_title_icon_opened'] : ' fa fa-minus ' ) . ' fa-accordion-icon"></i></span>';
+                    echo '<span class="eael-advanced-accordion-icon-closed"><i class="' . ( ! empty( $tab['eael_adv_accordion_tab_title_icon'] ) ? esc_attr( $tab['eael_adv_accordion_tab_title_icon'] ) : '' ) . ' fa-accordion-icon"></i></span>';
+                    echo '<span class="eael-advanced-accordion-icon-opened"><i class="' . ( ! empty( $tab['eael_adv_accordion_tab_title_icon_opened'] ) ? esc_attr( $tab['eael_adv_accordion_tab_title_icon_opened'] ) : ' fa fa-minus ' ) . ' fa-accordion-icon"></i></span>';
                 }
             }
             // tab title
@@ -1289,7 +1289,7 @@ class Adv_Accordion extends Widget_Base
             }
 
         } else {
-            echo '<i class="' . $settings['eael_adv_accordion_icon'] . ' fa-toggle"></i>';
+	        echo '<i class="' . esc_attr( $settings['eael_adv_accordion_icon'] ) . ' fa-toggle"></i>';
         }
     }
 }
