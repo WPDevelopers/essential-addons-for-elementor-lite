@@ -4204,6 +4204,33 @@ button.button__greyBg:hover:disabled {
     height: 40px;
     border: none;
     padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 1400px) {
+    #templately.template__block.eael-block > div {
+        width: 50%;
+    }
+
+    #templately.template__block.eael-block > img {
+        width: 50%;
+        vertical-align: bottom;
+    }
+
+    #templately.template__block.eael-block .eael-quick-setup-title {
+        font-size: 40px;
+        width: 500px;
+        margin-top: 20px;
+    }
+
+    #templately.template__block.eael-block .eael-quick-setup-text {
+        font-size: 17px;
+        width: 500px;
+    }
+
+    #templately.template__block.eael-block .eael-quick-setup-list {
+        grid-template-columns: auto;
+    }
 }
 
 .eael-integration__card {
