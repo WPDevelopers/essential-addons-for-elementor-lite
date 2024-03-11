@@ -174,6 +174,26 @@ class Adv_Tabs extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_adv_tabs_scroll_speed',
+            [
+                'label'       => esc_html__('Scroll Speed (ms)', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::NUMBER,
+                'label_block' => false,
+                'default'     => 300,
+            ]
+        );
+
+	    $this->add_control(
+		    'eael_adv_tabs_scroll_onclick',
+		    [
+			    'label'        => esc_html__('Scroll on Click', 'essential-addons-for-elementor-lite'),
+			    'type'         => Controls_Manager::SWITCHER,
+			    'default'      => 'no',
+			    'return_value' => 'yes',
+		    ]
+	    );
+
         $this->end_controls_section();
 
         /**
@@ -980,6 +1000,8 @@ class Adv_Tabs extends Widget_Base
         $tab_auto_active =  'yes' === $settings['eael_adv_tabs_default_active_tab'] ? esc_attr('eael-tab-auto-active') : '';
         $tab_tpggle = 'yes' === $settings['eael_adv_tabs_toggle_tab'] ? esc_attr( 'eael-tab-toggle' ) : '';
 
+        $this->add_render_attribute('eael_tab_wrapper', 'data-scroll-on-click', esc_attr( $settings['eael_adv_tabs_scroll_onclick'] ));
+        $this->add_render_attribute('eael_tab_wrapper', 'data-scroll-speed', esc_attr( $settings['eael_adv_tabs_scroll_speed'] ));
 
         $this->add_render_attribute(
             'eael_tab_wrapper',
