@@ -4191,8 +4191,31 @@ button.button__greyBg:hover:disabled {
     content: none;
 }
 
+#templately.template__block.eael-block > div {
+    width: 650px;
+}
+
+#templately.template__block.eael-block > img {
+    width: calc(100% - 650px);
+    max-width: 650px;
+}
+
+#templately.template__block.eael-block .eael-quick-setup-title {
+    font-size: 48px;
+    margin-top: 20px;
+}
+
+#templately.template__block.eael-block .eael-quick-setup-text {
+    font-size: 18px;
+}
+
 #templately.template__block.eael-block .eael-quick-setup-list {
     margin-top: 20px;
+}
+
+#templately.template__block.eael-block .eael-quick-setup-list .eael-quick-setup-list-item {
+    padding-left: 10px;
+    font-size: 15px;
 }
 
 #templately.template__block.eael-block button.wpdeveloper-plugin-installer {
@@ -4205,6 +4228,11 @@ button.button__greyBg:hover:disabled {
     border: none;
     padding: 0 20px;
     margin-bottom: 20px;
+    transition: .3s;
+}
+
+#templately.template__block.eael-block button.wpdeveloper-plugin-installer:hover {
+    box-shadow: 0 5px 30px 0 #00000040;
 }
 
 @media (max-width: 1400px) {
