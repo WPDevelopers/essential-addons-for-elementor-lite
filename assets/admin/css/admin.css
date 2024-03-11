@@ -4187,6 +4187,14 @@ button.button__greyBg:hover:disabled {
     content: '';
 }
 
+#templately.template__block.eael-block::before {
+    content: none;
+}
+
+#templately.template__block.eael-block .eael-quick-setup-list {
+    margin-top: 20px;
+}
+
 #templately.template__block.eael-block button.wpdeveloper-plugin-installer {
     border-radius: 3px;
     background: #FF5A72;
