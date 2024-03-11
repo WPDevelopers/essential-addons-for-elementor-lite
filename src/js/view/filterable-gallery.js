@@ -300,6 +300,17 @@ jQuery(window).on("elementor/frontend/init", function () {
 					jQuery(`.eael-filter-gallery-control li:nth-child(${default_control_key})` ).trigger('click');
 				}
 			});
+
+			var FilterableGallery = function (element) {
+				$isotope_gallery.imagesLoaded().progress(function () {
+					$isotope_gallery.isotope("layout");
+				});
+			}
+
+			ea.hooks.addAction("ea-toggle-triggered", "ea", FilterableGallery);
+			ea.hooks.addAction("ea-lightbox-triggered", "ea", FilterableGallery);
+			ea.hooks.addAction("ea-advanced-tabs-triggered", "ea", FilterableGallery);
+			ea.hooks.addAction("ea-advanced-accordion-triggered", "ea", FilterableGallery);
 		}
 	};
 

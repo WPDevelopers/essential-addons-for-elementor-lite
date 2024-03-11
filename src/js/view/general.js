@@ -14,24 +14,6 @@ window.ea = {
 	}
 };
 
-function EAELsetScreenSize() {
-	jQuery.ajax({
-		url: localize.ajaxurl,
-		type: "post",
-		data: {
-			action: "eael_set_screen_width",
-			screen_width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
-		}
-	});
-}
-
-EAELsetScreenSize();
-let debunce_time = false;
-window.addEventListener('resize', function () {
-	clearTimeout(debunce_time);
-	debunce_time = setTimeout(EAELsetScreenSize, 250);
-});
-
 ea.hooks.addAction("widgets.reinit", "ea", ($content) => {
 	let filterGallery = jQuery(".eael-filter-gallery-container", $content);
 	let postGridGallery = jQuery(
@@ -95,6 +77,19 @@ ea.hooks.addAction("widgets.reinit", "ea", ($content) => {
 		ea.hooks.doAction("twitterCarousel.reinit");
 	}
 });
+
+let ea_swiper_slider_init_inside_template = (content) => {
+	window.dispatchEvent(new Event('resize'));
+
+	content = typeof content === 'object' ? content : jQuery(content);
+	content.find('.swiper-wrapper').each(function () {
+		let transform = jQuery(this).css('transform');
+		jQuery(this).css('transform', transform);
+	});
+}
+
+ea.hooks.addAction("ea-advanced-tabs-triggered", "ea", ea_swiper_slider_init_inside_template);
+ea.hooks.addAction("ea-advanced-accordion-triggered", "ea", ea_swiper_slider_init_inside_template);
 
 jQuery(window).on("elementor/frontend/init", function () {
 	window.isEditMode = elementorFrontend.isEditMode();
