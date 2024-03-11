@@ -62,7 +62,11 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
                 </div>
                 <div class="image-hover-wrap">
                     <ul class="icons-wrap box-style-list">
-                        <li class="add-to-cart"><?php woocommerce_template_loop_add_to_cart(); ?></li>
+						<?php if( $settings[ 'eael_product_carousel_show_add_to_cart' ] ) { ?>
+                            <li class="add-to-cart"><?php woocommerce_template_loop_add_to_cart(); ?></li>
+                        <?php
+                    		}
+                        ?>
 			            <?php if( $should_print_quick_view ){?>
                             <li class="eael-product-quick-view">
                                 <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
