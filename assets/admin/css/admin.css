@@ -4235,7 +4235,7 @@ button.button__greyBg:hover:disabled {
     box-shadow: 0 5px 30px 0 #00000040;
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1399px) {
     #templately.template__block.eael-block > div {
         width: 50%;
     }
@@ -4243,6 +4243,7 @@ button.button__greyBg:hover:disabled {
     #templately.template__block.eael-block > img {
         width: 50%;
         vertical-align: bottom;
+        max-width: 300px;
     }
 
     #templately.template__block.eael-block .eael-quick-setup-title {
@@ -4258,6 +4259,12 @@ button.button__greyBg:hover:disabled {
 
     #templately.template__block.eael-block .eael-quick-setup-list {
         grid-template-columns: auto;
+    }
+
+    #templately.template__block.eael-block .eael-quick-setup-list .eael-quick-setup-list-item {
+        padding-left: 5px;
+        font-size: 12px;
+        line-height: 35px;
     }
 }
 
