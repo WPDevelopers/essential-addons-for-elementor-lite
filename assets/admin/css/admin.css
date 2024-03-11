@@ -1199,6 +1199,7 @@
 
     .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-title {
         font-size: 34px;
+        margin-top: 0;
     }
 
     .eael-quick-setup-body .eael-quick-setup-wizard-form .eael-quick-setup-tab-content.templately .eael-quick-setup-title::before {
@@ -4196,6 +4197,7 @@ button.button__greyBg:hover:disabled {
 
 #templately.template__block.eael-block > div {
     width: 650px;
+    vertical-align: middle;
 }
 
 #templately.template__block.eael-block > img {
@@ -4238,15 +4240,14 @@ button.button__greyBg:hover:disabled {
     box-shadow: 0 5px 30px 0 #00000040;
 }
 
-@media (max-width: 1399px) {
+@media (max-width: 1499px) {
     #templately.template__block.eael-block > div {
-        width: 50%;
+        width: 500px;
     }
 
     #templately.template__block.eael-block > img {
-        width: 50%;
-        vertical-align: bottom;
-        max-width: 300px;
+        width: calc(100% - 500px);
+        vertical-align: middle;
     }
 
     #templately.template__block.eael-block .eael-quick-setup-title {
@@ -4261,13 +4262,26 @@ button.button__greyBg:hover:disabled {
     }
 
     #templately.template__block.eael-block .eael-quick-setup-list {
-        grid-template-columns: auto;
+        gap: 15px;
     }
 
     #templately.template__block.eael-block .eael-quick-setup-list .eael-quick-setup-list-item {
         padding-left: 5px;
         font-size: 12px;
         line-height: 35px;
+    }
+}
+
+@media (max-width: 1279px) {
+    #templately.template__block.eael-block .eael-quick-setup-list {
+        grid-template-columns: auto;
+        width: 250px;
+    }
+    #templately.template__block.eael-block > img {
+        width: 220px;
+        position: absolute;
+        bottom: 70px;
+        right: 0;
     }
 }
 
