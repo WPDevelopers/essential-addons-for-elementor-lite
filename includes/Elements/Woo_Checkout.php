@@ -3014,7 +3014,7 @@ class Woo_Checkout extends Widget_Base {
 		$_fields = [];
 		$classes = [ 'form-row-first', 'form-row-last', 'form-row-wide' ];
 		foreach ( $fields as $key => $field_set ) {
-			$field_set_class = is_array( $field_set['class'] ) ? $field_set['class'] : [];
+			$field_set_class = isset( $field_set['class'] ) && is_array( $field_set['class'] ) ? $field_set['class'] : [];
 			$_fields[]       = [
 				'field_label'       => $field_set['label'],
 				'field_key'         => $key,
