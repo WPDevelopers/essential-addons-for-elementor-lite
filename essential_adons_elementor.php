@@ -49,9 +49,11 @@ $GLOBALS['eael_config'] = require_once EAEL_PLUGIN_PATH . 'config.php';
  *
  * @since 3.0.0
  */
-add_action('plugins_loaded', function () {
-    \Essential_Addons_Elementor\Classes\Bootstrap::instance();
-});
+add_action( 'plugins_loaded', function () {
+	if ( class_exists( '\Essential_Addons_Elementor\Classes\Bootstrap' ) ) {
+		\Essential_Addons_Elementor\Classes\Bootstrap::instance();
+	}
+} );
 
 /**
  * Plugin migrator
