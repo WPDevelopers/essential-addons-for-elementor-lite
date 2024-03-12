@@ -1,4 +1,4 @@
-name: Generate WordPress Archive
+name: Generate Plugin Archive
 on:
   workflow_dispatch
 
