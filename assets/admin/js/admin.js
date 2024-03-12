@@ -308,6 +308,8 @@
 			if (pagenow === 'admin_page_eael-setup-wizard' && button.hasClass('eael-quick-setup-next-button')) {
 				button.text("Enabling Templates");
 				$('#eael-next').trigger('click');
+			} else if (pagenow === 'toplevel_page_eael-settings' && button.hasClass('eael-dashboard-templately-install-btn')) {
+				button.text("Enabling Templates");
 			}
 
 			$.ajax( {
@@ -323,7 +325,7 @@
 						        button.attr( "disabled", true );
 						        button.text( "Activated" );
 
-								if (pagenow === 'admin_page_eael-setup-wizard' && button.hasClass('eael-quick-setup-next-button')) {
+								if ((pagenow === 'admin_page_eael-setup-wizard' && button.hasClass('eael-quick-setup-next-button')) || (pagenow === 'toplevel_page_eael-settings' && button.hasClass('eael-dashboard-templately-install-btn'))) {
 									button.text("Enabled Templates");
 								}
 
