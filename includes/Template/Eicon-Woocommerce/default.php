@@ -584,13 +584,17 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 		remove_action('woocommerce_after_shop_loop_item_title','woocommerce_template_loop_rating',5);
 	}
 
-	add_action('woocommerce_before_shop_loop_item_title',function(){
+	add_action('woocommerce_before_shop_loop_item_title',function() use ( $stock_out_badge_text ){
 		global $product;
 		if ( ! $product->is_in_stock() ) {
 			remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10 );
-			echo '<span class="outofstock-badge">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>';
+			echo '<span class="outofstock-badge">'. $stock_out_badge_text .'</span>';
 		}
 	},9);
+
+	add_filter('woocommerce_sale_flash', function($text, $post, $product) use( $sale_badge_text ) {
+		return '<span class="onsale" data-notification="default">'. $sale_badge_text .'</span>';
+	}, 10, 3);
 
 	if ( $should_print_compare_btn ) {
 		add_action( 'woocommerce_after_shop_loop_item', [
