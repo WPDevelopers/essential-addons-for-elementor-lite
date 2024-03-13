@@ -2018,9 +2018,9 @@ class GravityForms extends Widget_Base {
                 ],
                 'size_units'            => [ 'px', '%' ],
                 'selectors'             => [
-                    'html body {{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]' => 'width: {{SIZE}}{{UNIT}}',
-                    'html body {{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]' => 'width: {{SIZE}}{{UNIT}}',
-                    'html body {{WRAPPER}} .eael-gravity-form .gform_body input[type="submit"].gform-button' => 'width: {{SIZE}}{{UNIT}}'
+                    'html body {{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]' => 'width: {{SIZE}}{{UNIT}} !important',
+                    'html body {{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]' => 'width: {{SIZE}}{{UNIT}} !important;',
+                    'html body {{WRAPPER}} .eael-gravity-form .gform_body input[type="submit"].gform-button' => 'width: {{SIZE}}{{UNIT}} !important;'
                 ],
                 'condition'             => [
                     'button_width_type' => 'custom',
@@ -2044,9 +2044,9 @@ class GravityForms extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    'html body {{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]' => 'background-color: {{VALUE}}',
-                    'html body {{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]' => 'background-color: {{VALUE}}',
-                    'html body {{WRAPPER}} .eael-gravity-form .gform_body input[type="submit"].gform-button' => 'background-color: {{VALUE}}',
+                    'html body {{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]' => 'background-color: {{VALUE}} !important;',
+                    'html body {{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]' => 'background-color: {{VALUE}} !important;',
+                    'html body {{WRAPPER}} .eael-gravity-form .gform_body input[type="submit"].gform-button' => 'background-color: {{VALUE}} !important;',
                 ],
             ]
         );
@@ -2058,9 +2058,9 @@ class GravityForms extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    'html body {{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]' => 'color: {{VALUE}}',
-                    'html body {{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]' => 'color: {{VALUE}}',
-                    'html body {{WRAPPER}} .eael-gravity-form .gform_body input[type="submit"].gform-button' => 'color: {{VALUE}}',
+                    'html body {{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]' => 'color: {{VALUE}} !important;',
+                    'html body {{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]' => 'color: {{VALUE}} !important;',
+                    'html body {{WRAPPER}} .eael-gravity-form .gform_body input[type="submit"].gform-button' => 'color: {{VALUE} !important;}',
                 ],
             ]
         );
@@ -2083,9 +2083,9 @@ class GravityForms extends Widget_Base {
 				'type'                  => Controls_Manager::DIMENSIONS,
 				'size_units'            => [ 'px', 'em', '%' ],
 				'selectors'             => [
-					'html body {{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    'html body {{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    'html body {{WRAPPER}} .eael-gravity-form .gform_body input[type="submit"].gform-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'html body {{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;;',
+                    'html body {{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;;',
+                    'html body {{WRAPPER}} .eael-gravity-form .gform_body input[type="submit"].gform-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;;',
                 ],
 			]
 		);
@@ -2106,9 +2106,9 @@ class GravityForms extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    'html body {{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]:hover' => 'background-color: {{VALUE}}',
-                    'html body {{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]:hover' => 'background-color: {{VALUE}}',
-                    'html body {{WRAPPER}} .eael-gravity-form .gform_body input[type="submit"].gform-button:hover' => 'background-color: {{VALUE}}'
+                    'html body {{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]:hover' => 'background-color: {{VALUE}} !important;',
+                    'html body {{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]:hover' => 'background-color: {{VALUE}} !important;',
+                    'html body {{WRAPPER}} .eael-gravity-form .gform_body input[type="submit"].gform-button:hover' => 'background-color: {{VALUE}} !important;'
                 ],
             ]
         );
@@ -2120,9 +2120,9 @@ class GravityForms extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    'html body {{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]:hover' => 'color: {{VALUE}}',
-                    'html body {{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]:hover' => 'color: {{VALUE}}',
-                    'html body {{WRAPPER}} .eael-gravity-form .gform_body input[type="submit"].gform-button:hover' => 'color: {{VALUE}}'
+                    'html body {{WRAPPER}} .eael-gravity-form .gform_footer input[type="submit"]:hover' => 'color: {{VALUE}} !important;',
+                    'html body {{WRAPPER}} .eael-gravity-form .gform_body .gform_page_footer input[type="submit"]:hover' => 'color: {{VALUE}} !important;',
+                    'html body {{WRAPPER}} .eael-gravity-form .gform_body input[type="submit"].gform-button:hover' => 'color: {{VALUE}} !important;'
                 ],
             ]
         );
