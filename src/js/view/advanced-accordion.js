@@ -13,12 +13,6 @@ ea.hooks.addAction("init", "ea", () => {
 				$scrollOnClick = $advanceAccordion.data("scroll-on-click"),
 				$srollSpeed = $advanceAccordion.data("scroll-speed");
 
-			window.addEventListener('hashchange', function () {
-				hashTag = window.location.hash.substr(1);
-				if (hashTag !== 'undefined' && hashTag) {
-					jQuery('#' + hashTag).trigger('click');
-				}
-			});
 			// Open default actived tab
 			if (hashTag || $scrollOnClick === 'yes') {
 				$accordionHeader.each(function () {
