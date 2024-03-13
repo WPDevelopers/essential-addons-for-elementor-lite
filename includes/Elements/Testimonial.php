@@ -577,7 +577,7 @@ class Testimonial extends Widget_Base {
 			[
 				'label' => esc_html__( 'Testimonial Text Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
-				'default' => '#7a7a7a',
+				'default' => '#292929',
 				'selectors' => [
 					'{{WRAPPER}} .eael-testimonial-content .eael-testimonial-text' => 'color: {{VALUE}};',
 				],
