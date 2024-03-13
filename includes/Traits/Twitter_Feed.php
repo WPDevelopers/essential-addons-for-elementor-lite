@@ -208,7 +208,7 @@ trait Twitter_Feed
                         
                         if ($settings['eael_twitter_feed_show_avatar'] == 'true' && ! empty( $user_profile_image_url_https ) ) {
                             $html .= '<a class="eael-twitter-feed-item-avatar avatar-' . $settings['eael_twitter_feed_avatar_style'] . '" href="//twitter.com/' . $settings['eael_twitter_feed_ac_name'] . '" target="_blank">
-                                <img src="' . $user_profile_image_url_https . '">
+                                <img src="' . esc_url( $user_profile_image_url_https ) . '">
                             </a>';
                         }
 
@@ -262,10 +262,10 @@ trait Twitter_Feed
 
                             if ($settings['eael_twitter_feed_show_read_more'] == 'true' && ! empty( $item_user_screen_name ) ) {
 	                        $read_more = !empty( $settings[ 'eael_twitter_feed_show_read_more_text' ] ) ? $settings[ 'eael_twitter_feed_show_read_more_text' ] : __( 'Read More', 'essential-addons-for-elementor-lite' );
-                            $html .= '<a href="//twitter.com/' . $item_user_screen_name . '/status/' . $item['id_str'] . '" target="_blank" class="read-more-link">'.$read_more.' <i class="fas fa-angle-double-right"></i></a>';
+                            $html .= '<a href="//twitter.com/' . esc_attr( $item_user_screen_name ) . '/status/' . esc_attr( $item['id_str'] ) . '" target="_blank" class="read-more-link">'. esc_html( $read_more ).' <i class="fas fa-angle-double-right"></i></a>';
                         }
                     $html .= '</div>
-                    ' . ( isset( $media[0] ) && $settings['eael_twitter_feed_media'] == 'true' ? ( $media[0]['type'] == 'photo' ? '<img src="' . $media[0]['media_url_https'] . '">' : '' ) : '' ) . '
+                    ' . ( isset( $media[0] ) && $settings['eael_twitter_feed_media'] == 'true' ? ( $media[0]['type'] == 'photo' ? '<img src="' . esc_url( $media[0]['media_url_https'] ) . '">' : '' ) : '' ) . '
                 </div>
 			</div>';
         }

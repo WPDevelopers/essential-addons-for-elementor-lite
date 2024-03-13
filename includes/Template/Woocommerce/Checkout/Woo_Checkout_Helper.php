@@ -366,9 +366,9 @@ trait Woo_Checkout_Helper {
 		$settings = self::ea_get_woo_checkout_settings();
 		?>
 		<?php do_action('woocommerce_checkout_before_order_review_heading'); ?>
-		<h3 id="order_review_heading" class="woo-checkout-section-title">
+		<h2 id="order_review_heading" class="woo-checkout-section-title">
 			<?php echo CheckoutHelperCLass::eael_wp_kses($settings['ea_woo_checkout_order_details_title']); ?>
-        </h3>
+        </h2>
 
 		<?php do_action('woocommerce_checkout_before_order_review'); ?>
 

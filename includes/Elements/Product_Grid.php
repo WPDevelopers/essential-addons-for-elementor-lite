@@ -3195,7 +3195,8 @@ class Product_Grid extends Widget_Base
                 if ( $found_posts > $args['posts_per_page'] ) {
 	                $this->print_load_more_button( $settings, $args, $dir_name );
                 }
-
+                
+                do_action( 'eael_woo_after_product_loop', $settings['eael_product_grid_style_preset'] );
                 ?>
             </div>
         </div>
