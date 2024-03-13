@@ -28,6 +28,11 @@
   margin: 0;
 }
 
+.eael-tooltip .eael-tooltip-text a {
+  -webkit-transition: none;
+  transition: none;
+}
+
 .eael-tooltip .eael-tooltip-text::after {
   content: "";
   position: absolute;
@@ -120,7 +125,7 @@
   -webkit-transform: translateX(-50%);
       -ms-transform: translateX(-50%);
           transform: translateX(-50%);
-  margin: 10px auto 0 auto;
+  margin: 1px auto 0 auto;
 }
 
 .eael-tooltip .eael-tooltip-text.eael-tooltip-bottom::after {
