@@ -3514,17 +3514,17 @@ class Event_Calendar extends Widget_Base
         return $calendar_data;
     }
 
-    public function is_old_event($start_date, $date_to_comp = '' ){
-	    $date_to_comp         = $date_to_comp === '' ? current_time( 'Y-m-d' ) : $date_to_comp;
-	    $date_to_comp         = strtotime( $date_to_comp );
-	    $start_date_timestamp = strtotime( $start_date );
+	public function is_old_event( $start_date, $date_to_comp = '' ) {
+		$date_to_comp         = $date_to_comp === '' ? current_time( 'Y-m-d' ) : $date_to_comp;
+		$date_to_comp         = strtotime( $date_to_comp . wp_timezone_string() );
+		$start_date_timestamp = strtotime( $start_date );
 
-	    if ( $start_date_timestamp < $date_to_comp ) {
-		    return true;
-	    }
+		if ( $start_date_timestamp < $date_to_comp ) {
+			return true;
+		}
 
-	    return false;
-    }
+		return false;
+	}
 
     public function fetch_color_or_global_color($settings, $control_name=''){
         if( !isset($settings[$control_name])) {
