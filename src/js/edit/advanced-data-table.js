@@ -379,13 +379,13 @@ class advancedDataTableEdit {
 			this.tableInnerHTML = origTable.innerHTML;
 			
 			// update table
-			this.updateFromView(
-				this.view,
-				{
-					ea_adv_data_table_static_html: this.tableInnerHTML,
-				},
-				true
-			);
+			// this.updateFromView(
+			// 	this.view,
+			// 	{
+			// 		ea_adv_data_table_static_html: this.tableInnerHTML,
+			// 	},
+			// 	true
+			// );
 		});
 	}
 
