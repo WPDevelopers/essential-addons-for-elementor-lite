@@ -31,23 +31,6 @@ trait Enqueue
             add_filter('caldera_forms_force_enqueue_styles_early', '__return_true');
         }
 
-        // Compatibility: Fluent forms
-        if (in_array('fluentform', $widgets) && defined('FLUENTFORM')) {
-            wp_register_style(
-                'fluent-form-styles',
-                WP_PLUGIN_URL . '/fluentform/public/css/fluent-forms-public.css',
-                false,
-                FLUENTFORM_VERSION
-            );
-
-            wp_register_style(
-                'fluentform-public-default',
-                WP_PLUGIN_URL . '/fluentform/public/css/fluentform-public-default.css',
-                false,
-                FLUENTFORM_VERSION
-            );
-        }
-
         // Compatibility: reCaptcha with login/register
         if (in_array('login-register', $widgets) && $site_key = get_option('eael_recaptcha_sitekey')) {
 	        $recaptcha_api_args['render'] = 'explicit';
