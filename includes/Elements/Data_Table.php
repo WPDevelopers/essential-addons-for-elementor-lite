@@ -845,7 +845,7 @@ class Data_Table extends Widget_Base {
 					[
 						'label' => esc_html__( 'Color ( Odd Row )', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::COLOR,
-						'default' => '#6d7882',
+						'default' => '#000000',
 						'selectors' => [
 							'{{WRAPPER}} .eael-data-table tbody > tr:nth-child(2n) td' => 'color: {{VALUE}};',
 						],
@@ -878,7 +878,7 @@ class Data_Table extends Widget_Base {
 					[
 						'label' => esc_html__( 'Color ( Even Row )', 'essential-addons-for-elementor-lite'),
 						'type' => Controls_Manager::COLOR,
-						'default' => '#6d7882',
+						'default' => '#000000',
 						'selectors' => [
 							'{{WRAPPER}} .eael-data-table tbody > tr:nth-child(2n+1) td' => 'color: {{VALUE}};',
 						],
