@@ -6535,7 +6535,7 @@ class Login_Register extends Widget_Base {
 
 				if( ! empty( $user_roles ) && is_array( $user_roles ) && count( $user_roles ) ){
 					foreach( $user_roles as $user_role_key => $user_role_value ){
-						$login_redirect_url = ! empty( $this->ds['redirect_url_' . esc_html( $user_role_key ) ]['url'] ) ? esc_url( $this->ds['redirect_url_' . esc_html( $user_role_key )]['url'] ) : $login_redirect_url;
+						$login_redirect_url = ! empty( $this->ds['redirect_url_' . esc_html( $user_role_key ) ]['url'] ) ? esc_url( $this->ds['redirect_url_' . esc_html( $user_role_key )]['url'] ) : '';
 						?>
 						<input type="hidden"
 							name="redirect_to_<?php echo esc_html( $user_role_key ); ?>"
