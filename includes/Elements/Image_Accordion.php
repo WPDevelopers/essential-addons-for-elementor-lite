@@ -595,7 +595,7 @@ class Image_Accordion extends Widget_Base {
             }
             ?>
 
-            <div <?php echo $this->get_render_attribute_string( 'eael-image-accordion-item-wrapper-' . $key ); ?>  tabindex="<?php echo $key; ?>">
+            <div <?php echo $this->get_render_attribute_string( 'eael-image-accordion-item-wrapper-' . $key ); ?>  tabindex="0">
                 <div class="overlay">
                     <div class="overlay-inner <?php echo( $active === 'yes' ? ' overlay-inner-show' : '' ); ?>">
                         <?php
