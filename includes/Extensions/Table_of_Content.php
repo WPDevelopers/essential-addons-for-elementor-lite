@@ -93,7 +93,9 @@ class Table_of_Content
 	        if ( ! empty( $supported_posts ) ) {
 		        foreach ( $supported_posts as $post_type ) {
 			        if ( ! in_array( $post_type, [ 'post', 'page' ] ) ) {
-				        $display_on[ $post_type ] = ucfirst( $post_type );
+                        $post_type_labels = get_post_type_labels( get_post_type_object( $post_type ) );
+                        $plural_name      = $post_type_labels->name;
+				        $display_on[ $post_type ]     = sprintf( __( 'All %s', 'essential-addons-for-elementor-lite' ), $plural_name );
 			        }
 		        }
 	        }
