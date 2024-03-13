@@ -103,6 +103,10 @@
 	height: auto;
 }
 
+body.rtl .gallery-item-caption-over {
+	text-align: right;
+}
+
 a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 	text-decoration: none;
 }
@@ -243,6 +247,13 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 
 .eael-fg-hoverer-content-align-right .eael-filterable-gallery-item-wrap .gallery-item-caption-wrap .gallery-item-caption-over {
 	text-align: right;
+}
+
+body.rtl {
+	.eael-fg-card-content-align-right .eael-filterable-gallery-item-wrap .gallery-item-caption-wrap .gallery-item-caption-over,
+	.eael-fg-hoverer-content-align-right .eael-filterable-gallery-item-wrap .gallery-item-caption-wrap .gallery-item-caption-over {
+		text-align: left;
+	}
 }
 
 
@@ -958,6 +969,11 @@ a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
 .eael-fg-card-content-align-center .fg-layout-3-item-content { text-align: center; }
 .eael-fg-card-content-align-right .fg-layout-3-item-content { text-align: right; }
 
+body.rtl {
+	.eael-fg-card-content-align-left .fg-layout-3-item-content { text-align: right; }
+	.eael-fg-card-content-align-right .fg-layout-3-item-content { text-align: left; }
+}
+
 .eael-filterable-gallery-item-wrap .fg-layout-3-item.eael-gallery-grid-item {
 	box-shadow: 0px 0px 30px 0px rgba(3, 29, 60, 0.05);
 	border-radius: 5px;
@@ -1044,4 +1060,8 @@ button.mfp-arrow:not(.toggle) {
     border-radius: 5px;
     color: #58151c;
 	width: calc( 100% - 30px );
+}
+
+body.rtl .mfp-counter {
+	direction: ltr;
 }
