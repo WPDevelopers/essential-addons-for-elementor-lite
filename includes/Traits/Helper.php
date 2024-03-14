@@ -371,7 +371,7 @@ trait Helper
                         <ul class="eael-promo-temp__feature__list">
                             <li><?php _e('5,000+ Stunning Templates','essential-addons-for-elementor-lite'); ?></li>
                             <li><?php _e('Supports Elementor & Gutenberg','essential-addons-for-elementor-lite'); ?></li>
-                            <li><?php _e('Powering up 200,000+ Websites','essential-addons-for-elementor-lite'); ?></li>
+                            <li><?php _e('Powering up 300,000+ Websites','essential-addons-for-elementor-lite'); ?></li>
                             <li><?php _e('Cloud Collaboration with Team','essential-addons-for-elementor-lite'); ?></li>
                         </ul>
                         <form class="eael-promo-temp__form">
