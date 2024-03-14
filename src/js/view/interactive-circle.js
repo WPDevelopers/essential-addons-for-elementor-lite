@@ -49,7 +49,7 @@ ea.hooks.addAction( "init", "ea", () => {
 		
 		$tabLinks.each( function ( element ) {
 			$( this ).on( $eventType, handleEvent( element ) );
-
+			$( this ).on( 'eaelInteractiveCicle', handleEvent( element ) );
 		} );
 		
 		if( $autoplay ){
@@ -73,7 +73,7 @@ ea.hooks.addAction( "init", "ea", () => {
 				}
 			} );
 			setTimeout(function(){
-				$( $tabLinks[ activeIndex ] ).trigger( $eventType );
+				$( $tabLinks[ activeIndex ] ).trigger( 'eaelInteractiveCicle' );
 			}, 300);
 		}
 
