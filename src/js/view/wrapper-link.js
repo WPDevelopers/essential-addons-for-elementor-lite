@@ -1,5 +1,9 @@
 let EaelWrapperLink = function ($scope, $) {
     function sanitizeURL(url) {
+        if (url.startsWith('/') || url.startsWith('#')) {
+            return url;
+        }
+
         try {
             const urlObject = new URL(url);
 

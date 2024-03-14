@@ -2883,7 +2883,7 @@ class Woo_Checkout extends Widget_Base {
 			[
 				'label' => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::COLOR,
-				'default' => '#7866ff',
+				'default' => '#5842FF',
 				'selectors' => [
 					'{{WRAPPER}} #place_order' => 'background-color: {{VALUE}};background: {{VALUE}};',
 				],
@@ -3052,7 +3052,7 @@ class Woo_Checkout extends Widget_Base {
 		$_fields = [];
 		$classes = [ 'form-row-first', 'form-row-last', 'form-row-wide' ];
 		foreach ( $fields as $key => $field_set ) {
-			$field_set_class = is_array( $field_set['class'] ) ? $field_set['class'] : [];
+			$field_set_class = isset( $field_set['class'] ) && is_array( $field_set['class'] ) ? $field_set['class'] : [];
 			$_fields[]       = [
 				'field_label'       => $field_set['label'],
 				'field_key'         => $key,
@@ -3137,6 +3137,12 @@ class Woo_Checkout extends Widget_Base {
 			'layout-'. $settings['ea_woo_checkout_layout'],
 			$settings['eael_enable_checkout_fields_reorder'] === 'yes' ? 'checkout-reorder-enabled' : ''
 		] );
+
+		$astra_pro = get_option( '_astra_ext_enabled_extensions' );
+
+		if ( !empty( $astra_pro ) && isset( $astra_pro['woocommerce'] ) && $astra_pro['woocommerce'] === 'woocommerce' ) {
+			$this->add_render_attribute( 'container', 'class', 'astra-pro-wc-module-activated' );
+		}
 
 		if ( $settings['eael_enable_checkout_fields_reorder'] === 'yes' ){
 			global $post;
