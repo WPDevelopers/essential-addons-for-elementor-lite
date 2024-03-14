@@ -1533,7 +1533,7 @@ class Caldera_Forms extends Widget_Base
                         <?php }?>
                     </div>
                 <?php }?>
-                <?php echo do_shortcode('[caldera_form id="' . $settings['contact_form_list'] . '" ]'); ?>
+                <?php echo do_shortcode('[caldera_form id="' . esc_attr( $settings['contact_form_list'] ) . '" ]'); ?>
             </div>
             <?php
         }
