@@ -86,6 +86,7 @@ class Table_of_Content
 	        );
 	        $supported_posts = get_option( 'elementor_cpt_support' );
 	        $display_on      = [
+		        'all'   => __( 'All', 'essential-addons-for-elementor-lite' ),
 		        'posts' => __( 'All Posts', 'essential-addons-for-elementor-lite' ),
 		        'pages' => __( 'All Pages', 'essential-addons-for-elementor-lite' ),
 	        ];
@@ -99,7 +100,7 @@ class Table_of_Content
 			        }
 		        }
 	        }
-	        $display_on['all'] = __( 'All Posts & Pages', 'essential-addons-for-elementor-lite' );
+            
 	        $element->add_control(
                 'eael_ext_toc_global_display_condition',
                 [
