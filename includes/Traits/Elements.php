@@ -563,7 +563,7 @@ trait Elements {
 						$table_of_content_html = '';
 					} else if ( $toc_global_display_condition == 'posts' && ! is_single() ) {
 						$table_of_content_html = '';
-					}else if ( $toc_global_display_condition !== get_post_type() ){
+					}else if ( $toc_global_display_condition !== get_post_type() && $toc_global_display_condition !== 'all' ){
 						$table_of_content_html = '';
 					}
 				}
@@ -576,7 +576,7 @@ trait Elements {
 						$table_of_content_html = '';
 					} else if ( $toc_global_display_condition == 'posts' && ! is_single() ) {
 						$table_of_content_html = '';
-					}else if ( $toc_global_display_condition !== get_post_type() ){
+					}else if ( $toc_global_display_condition !== get_post_type() && $toc_global_display_condition !== 'all' ){
 						$table_of_content_html = '';
 					}
 				}
