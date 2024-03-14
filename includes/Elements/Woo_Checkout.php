@@ -1839,7 +1839,7 @@ class Woo_Checkout extends Widget_Base {
 				'size_units'         => [ 'px', 'em', '%' ],
 				'allowed_dimensions' => [ 'top', 'left' ],
 				'default' 			 => [
-					'top'      => 56,
+					'top'      => 24,
 					'left'     => 35,
 					'unit'     => 'px',
 					'isLinked' =>  true,
