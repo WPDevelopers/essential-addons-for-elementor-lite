@@ -1212,3 +1212,46 @@ button.mfp-arrow:not(.toggle) {
 body.rtl .mfp-counter {
   direction: ltr;
 }
+
+body.theme-salient.material button.mfp-arrow,
+body.theme-salient.material button.mfp-close {
+  border: 0;
+}
+
+body.theme-salient.material .mfp-arrow,
+body.theme-salient.material .mfp-arrow:hover {
+  background: transparent;
+}
+
+body.theme-salient.material .mfp-arrow-left {
+  left: 0;
+}
+
+body.theme-salient.material .mfp-arrow-right {
+  -webkit-transition: none;
+  transition: none;
+}
+
+body.theme-salient.material .mfp-arrow {
+  margin: -55px 0 0;
+  width: 90px;
+  height: 110px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body.theme-salient.material .mfp-arrow-left:after,
+body.theme-salient.material .mfp-arrow-right:after {
+  -webkit-transform: none;
+      -ms-transform: none;
+          transform: none;
+  -webkit-transition: none;
+  transition: none;
+  background-color: transparent;
+}
+
+body.theme-salient.material .mfp-arrow-left:before,
+body.theme-salient.material .mfp-arrow-right:before {
+  -webkit-transform: none;
+      -ms-transform: none;
+          transform: none;
+}
