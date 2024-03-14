@@ -6278,23 +6278,17 @@ class Login_Register extends Widget_Base {
 		$rp_page_url = ! empty( $this->page_id_for_popup ) ? get_permalink( $this->page_id_for_popup ) : get_permalink( $this->page_id ); 
 
 		if ( $this->should_print_resetpassword_form_editor || ( ! empty( $_GET['eael-resetpassword'] ) ) ) {
-			$rp_data = $_COOKIE;
 			$show_resetpassword_on_form_submit = get_option('eael_show_reset_password_on_form_submit_' . $this->get_id());
-			
+
 			$validation_required = true;
-			if( $this->should_print_resetpassword_form_editor || $show_resetpassword_on_form_submit ){
+			if ( $this->should_print_resetpassword_form_editor || $show_resetpassword_on_form_submit ) {
 				$validation_required = false;
 			}
 
-			$rp_cookie = 'wp-resetpass-' . COOKIEHASH;
-			if ( ! empty( $rp_data[ $rp_cookie ] ) ) {
-				list( $rp_data['rp_login'], $rp_data['rp_key'] ) = explode( ':', sanitize_text_field( $rp_data[ $rp_cookie ] ) );
-			}
+			$rp_data['rp_login'] = $_GET['eael_login'] ?? '';
+			$rp_data['rp_key']   = $_GET['eael_key'] ?? '';
 			
 			if( $validation_required ){
-				$rp_data['rp_key'] = ! empty( $rp_data['rp_key'] ) ? $rp_data['rp_key'] : '';
-				$rp_data['rp_login'] = ! empty( $rp_data['rp_login'] ) ? $rp_data['rp_login'] : '';
-
 				$user = check_password_reset_key( $rp_data['rp_key'], $rp_data['rp_login'] );
 
 				if ( empty( $rp_data['rp_key'] ) || ! $user || is_wp_error( $user ) ) {
