@@ -65,9 +65,6 @@ trait Ajax_Handler {
 		add_action( 'wp_ajax_eael_get_token', [ $this, 'eael_get_token' ] );
 		add_action( 'wp_ajax_nopriv_eael_get_token', [ $this, 'eael_get_token' ] );
 
-		add_action( 'wp_ajax_eael_set_screen_width', [ $this, 'eael_set_screen_width' ] );
-		add_action( 'wp_ajax_nopriv_eael_set_screen_width', [ $this, 'eael_set_screen_width' ] );
-
 		add_action( 'eael_before_woo_pagination_product_ajax_start', [ $this, 'eael_yith_wcwl_ajax_disable' ] );
 		add_action( 'eael_before_ajax_load_more', [ $this, 'eael_yith_wcwl_ajax_disable' ] );
 	}
@@ -268,7 +265,9 @@ trait Ajax_Handler {
 			}
 		}
 
-
+		if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' ) {
+			do_action( 'eael_woo_after_product_loop', $settings['eael_product_grid_style_preset'] );
+		}
 		while ( ob_get_status() ) {
 			ob_end_clean();
 		}
@@ -1111,14 +1110,6 @@ trait Ajax_Handler {
 			wp_send_json_success( [ 'nonce' => $nonce ] );
 		}
 		wp_send_json_error( __( 'you are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
-	}
-
-	public function eael_set_screen_width() {
-		if ( ! session_id() ) {
-			session_start();
-		}
-		$_SESSION['eael_screen'] = absint( $_POST['screen_width'] );
-		session_write_close();
 	}
 
 	public function eael_yith_wcwl_ajax_disable( $request ) {
