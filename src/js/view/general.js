@@ -172,6 +172,10 @@ jQuery(window).on("elementor/frontend/init", function () {
 			// nothing to do
 		}
 	});
+
+	$(document).on('click', '.e-n-tab-title', function () {
+		window.dispatchEvent(new Event('resize'));
+	});
 })(jQuery);
 
 (function ($) {
