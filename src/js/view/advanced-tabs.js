@@ -6,6 +6,11 @@ eael.hooks.addAction("init", "ea", () => {
 		"frontend/element_ready/eael-adv-tabs.default",
 		function ($scope, $) {
 			const $currentTab = $scope.find('.eael-advance-tabs');
+
+			var $advanceTab = $scope.find(".eael-advance-tabs"),
+			$scrollOnClick = $advanceTab.data("scroll-on-click");
+			$scrollSpeed = $advanceTab.data("scroll-speed");
+			
 			let $customIdOffsetTab = $currentTab.data('custom-id-offset');
 			if ( !$currentTab.attr( 'id' ) ) {
 				return false;
@@ -97,6 +102,18 @@ eael.hooks.addAction("init", "ea", () => {
 
 					$(tabsContent).not(':eq(' + currentTabIndex + ')').removeClass("active").addClass("inactive");
 					$(tabsContent).eq(currentTabIndex).toggleClass('active inactive');
+
+					//Scroll on click
+					if ( $scrollOnClick === 'yes' ) {
+						let $eaelContainerSelect = $(this).attr('aria-controls');
+						$(this).attr('data-scroll', $('#'+$eaelContainerSelect).offset().top)
+					}
+					if ($scrollOnClick === 'yes' && $(this).hasClass("active") ) {
+						let $customIdOffsetVal = $customIdOffsetTab ? parseFloat($customIdOffsetTab) : 0;
+						$('html, body').animate({
+							scrollTop: $(this).data('scroll') - $customIdOffsetVal,
+						}, $scrollSpeed);
+					}
 				} else {
 					$(this).parent("li").addClass("active");
 					$(tabsNav).removeClass("active active-default").addClass("inactive").attr('aria-selected', 'false').attr('aria-expanded', 'false');
@@ -105,6 +122,18 @@ eael.hooks.addAction("init", "ea", () => {
 
 					$(tabsContent).removeClass("active").addClass("inactive");
 					$(tabsContent).eq(currentTabIndex).addClass("active").removeClass("inactive");
+
+					//Scroll on click
+					if ($scrollOnClick === 'yes') {
+						let $eaelContainerSelect = $(this).attr('aria-controls');
+						$(this).attr('data-scroll', $('#'+$eaelContainerSelect).offset().top)
+					}
+					if ($scrollOnClick === 'yes' && $(this).hasClass("active")) {
+						let $customIdOffsetVal = $customIdOffsetTab ? parseFloat($customIdOffsetTab) : 0;
+						$('html, body').animate({
+							scrollTop: $(this).data('scroll') - $customIdOffsetVal,
+						}, $scrollSpeed);
+					}
 				}
 				eael.hooks.doAction("ea-advanced-tabs-triggered", $(tabsContent).eq(currentTabIndex));
 				

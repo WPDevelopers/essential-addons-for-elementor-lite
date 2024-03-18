@@ -13,12 +13,6 @@ eael.hooks.addAction("init", "ea", () => {
 				$scrollOnClick = $advanceAccordion.data("scroll-on-click"),
 				$srollSpeed = $advanceAccordion.data("scroll-speed");
 
-			window.addEventListener('hashchange', function () {
-				hashTag = window.location.hash.substr(1);
-				if (hashTag !== 'undefined' && hashTag) {
-					jQuery('#' + hashTag).trigger('click');
-				}
-			});
 			// Open default actived tab
 			if (hashTag || $scrollOnClick === 'yes') {
 				$accordionHeader.each(function () {
@@ -74,14 +68,18 @@ eael.hooks.addAction("init", "ea", () => {
 						$this.next().slideDown($accordionSpeed);
 					}
 				}
-				if ($scrollOnClick === 'yes' && $this.hasClass("active")) {
-					let $customIdOffsetVal = $customIdOffset ? parseFloat($customIdOffset) : 0;
-					$('html, body').animate({
-						scrollTop: $(this).data('scroll') - $customIdOffsetVal,
-					}, $srollSpeed);
-				}
-				eael.hooks.doAction("widgets.reinit",$this.parent());
-				eael.hooks.doAction("ea-advanced-accordion-triggered", $this.next());
+
+                if ($scrollOnClick === 'yes' && $this.hasClass("active")) {
+                    let $customIdOffsetVal = $customIdOffset ? parseFloat($customIdOffset) : 0;
+                    $('html, body').animate({
+                        scrollTop: $(this).data('scroll') - $customIdOffsetVal,
+                    }, $srollSpeed);
+                }
+
+				setTimeout(function(){
+					eael.hooks.doAction("widgets.reinit",$this.parent());
+					eael.hooks.doAction("ea-advanced-accordion-triggered", $this.next());
+				},50);
 			});
 
 			$scope.on('keydown', '.eael-accordion-header', function (e) {

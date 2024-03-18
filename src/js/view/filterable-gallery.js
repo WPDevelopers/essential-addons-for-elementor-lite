@@ -38,7 +38,8 @@ jQuery(window).on("elementor/frontend/init", function () {
 				$gallery_enabled = ($settings.gallery_enabled === "yes"),
 				$images_per_page = $gallery.data("images-per-page"),
 				$init_show_setting     = $gallery.data("init-show");
-				fg_items.splice(0, $init_show_setting)
+				fg_items.splice(0, $init_show_setting),
+				isRTL = $('body').hasClass('rtl');
 			// init isotope
 			let gwrap = $(".eael-filter-gallery-wrapper");
 			var layoutMode       = gwrap.data("layout-mode");
@@ -48,6 +49,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 				percentPosition: true,
 				stagger: 30,
 				transitionDuration: $settings.duration + "ms",
+				isOriginLeft: !isRTL,
 				filter: function () {
 					var $this   = $(this);
 					var $result = searchRegex ? $this.text().match(searchRegex) : true;
@@ -300,6 +302,17 @@ jQuery(window).on("elementor/frontend/init", function () {
 					jQuery(`.eael-filter-gallery-control li:nth-child(${default_control_key})` ).trigger('click');
 				}
 			});
+
+			var FilterableGallery = function (element) {
+				$isotope_gallery.imagesLoaded().progress(function () {
+					$isotope_gallery.isotope("layout");
+				});
+			}
+
+			ea.hooks.addAction("ea-toggle-triggered", "ea", FilterableGallery);
+			ea.hooks.addAction("ea-lightbox-triggered", "ea", FilterableGallery);
+			ea.hooks.addAction("ea-advanced-tabs-triggered", "ea", FilterableGallery);
+			ea.hooks.addAction("ea-advanced-accordion-triggered", "ea", FilterableGallery);
 		}
 	};
 

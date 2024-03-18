@@ -533,10 +533,10 @@ trait Login_Registration {
 			$custom_redirect_url 	= ! empty( $settings['register_redirect_url_prev_page'] ) && $settings['register_redirect_url_prev_page'] === 'yes' ? $previous_page_url : $custom_redirect_url;
 
 			if ( ! empty( $settings['register_user_role'] ) ) {
-				$user_data['role'] 	= strtolower( sanitize_text_field( $settings['register_user_role'] ) );
+				$user_data['role'] 	= sanitize_text_field( $settings['register_user_role'] );
 			}
 
-			if ( ! empty( $user_data['role'] ) && $user_data['role'] === 'administrator' ) {
+			if ( ! empty( $user_data['role'] ) && strtolower( $user_data['role'] ) === 'administrator' ) {
 				$err_msg = __( 'Invalid Role!', 'essential-addons-for-elementor-lite' );
 
 				if ( $ajax ) {
@@ -1415,10 +1415,10 @@ trait Login_Registration {
 
 		if ( 'user' !== $receiver ) {
 			// remove password from admin mail, because admin should not see user's plain password
-			unset( $placeholders[0] );
 			unset( $placeholders[1] );
-			unset( $replacement[0] );
+			unset( $placeholders[2] );
 			unset( $replacement[1] );
+			unset( $replacement[2] );
 		}
 
 		$message = preg_replace( $placeholders, $replacement, $message );
@@ -1723,5 +1723,4 @@ trait Login_Registration {
 
 		return $eael_custom_profile_fields;
 	}
-
 }
