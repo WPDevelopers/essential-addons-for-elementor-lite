@@ -681,7 +681,7 @@ class Helper
 		global $product;
 
 		if ( ! is_a( $product, 'WC_Product' ) ) {
-			return;
+			return ''; 
 		}
 
 		$separator = '';
@@ -908,7 +908,7 @@ class Helper
 	 */
 	public static function eael_pagination ($args, $settings) {
 
-		$pagination_Count          = intval( $args['total_post'] );
+		$pagination_Count          = intval( $args['total_post'] ?? 0 );
 		$paginationLimit           = intval( $settings['eael_product_grid_products_count'] ) ?: 4;
 		$pagination_Paginationlist = ceil( $pagination_Count / $paginationLimit );
 		$widget_id                 = sanitize_key( $settings['eael_widget_id'] );
@@ -1293,6 +1293,47 @@ class Helper
 			],
 		];
 	}
+
+    /**
+     * List of allowed icon/svg tags for wp_kses
+     *
+	 * eael_allowed_icon_tags
+	 * @return array
+	 */
+    public static function eael_allowed_icon_tags(){
+        return [
+            'svg'   => [
+                'class'           => [],
+                'aria-hidden'     => [],
+                'aria-labelledby' => [],
+                'role'            => [],
+                'xmlns'           => [],
+                'width'           => [],
+                'height'          => [],
+                'viewbox'         => []
+            ],
+            'g'     => [ 'fill'  => [] ],
+            'title' => [ 'title' => [] ],
+            'path'     => [
+                'd'    => [], 
+                'fill' => [] 
+            ],
+			'i'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+            'img'     => [
+				'src'    => [],
+				'alt'    => [],
+				'height' => [],
+				'width'  => [],
+				'class'  => [],
+				'id'     => [],
+				'style'  => []
+			],
+        ];
+    }
 
     public static function eael_fetch_color_or_global_color($settings, $control_name=''){
         if( !isset($settings[$control_name])) {
