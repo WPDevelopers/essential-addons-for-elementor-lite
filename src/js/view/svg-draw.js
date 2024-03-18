@@ -81,7 +81,9 @@ var SVGDraw = function ($scope, $) {
         let drawSvg = setInterval(function () {
             let currentSvg = svg_icon.html();
             svg_icon.drawsvg('progress', stepManager());
-
+            if (is_repeat === 'no'){
+                stepManager();
+            }
             if (currentSvg === lastSvg && is_repeat === 'no') {
                 wrapper.addClass(settings.fill);
                 clearInterval(drawSvg);

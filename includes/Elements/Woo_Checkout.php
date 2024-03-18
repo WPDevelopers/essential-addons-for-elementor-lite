@@ -57,7 +57,7 @@ class Woo_Checkout extends Widget_Base {
 	}
 
 	public function get_categories() {
-		return [ 'essential-addons-elementor' ];
+		return [ 'essential-addons-elementor', 'woocommerce-elements' ];
 	}
 
 	/**
@@ -703,6 +703,17 @@ class Woo_Checkout extends Widget_Base {
                     'form-row-wide' => __( 'Full Width', 'essential-addons-for-elementor-lite' )
                 ],
 				'label_block' => true,
+			]
+		);
+
+		$repeater->add_control(
+			'field_placeholder', [
+				'label'       => esc_html__( 'Placeholder', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::TEXT,
+				'label_block' => true,
+				'ai'          => [
+					'active' => false,
+				],
 			]
 		);
 
@@ -2834,7 +2845,7 @@ class Woo_Checkout extends Widget_Base {
 			[
 				'label' => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::COLOR,
-				'default' => '#7866ff',
+				'default' => '#5842FF',
 				'selectors' => [
 					'{{WRAPPER}} #place_order' => 'background-color: {{VALUE}};background: {{VALUE}};',
 				],
@@ -3003,11 +3014,12 @@ class Woo_Checkout extends Widget_Base {
 		$_fields = [];
 		$classes = [ 'form-row-first', 'form-row-last', 'form-row-wide' ];
 		foreach ( $fields as $key => $field_set ) {
-			$field_set_class = is_array( $field_set['class'] ) ? $field_set['class'] : [];
+			$field_set_class = isset( $field_set['class'] ) && is_array( $field_set['class'] ) ? $field_set['class'] : [];
 			$_fields[]       = [
-				'field_label' => $field_set['label'],
-				'field_key'   => $key,
-				'field_class' => implode( '', array_intersect( $classes, $field_set_class ) ),
+				'field_label'       => $field_set['label'],
+				'field_key'         => $key,
+				'field_class'       => implode( '', array_intersect( $classes, $field_set_class ) ),
+				'field_placeholder' => $field_set['placeholder'] ?? ''
 			];
 		}
 
@@ -3053,6 +3065,14 @@ class Woo_Checkout extends Widget_Base {
 	        return;
         }
 
+		$settings = $this->get_settings_for_display();
+		// Please don't print anything above this line otherwise session will not work properly.
+//		$deviceName = \Essential_Addons_Elementor\Classes\Helper::eael_get_current_device_by_screen();
+//		if ( ! \Elementor\Plugin::$instance->editor->is_edit_mode() && ! empty( $settings["hide_{$deviceName}"] ) ) {
+//			echo "<!-- This content is hidden on {$deviceName} devices -->";
+//			return;
+//		}
+
 		/**
 		 * Remove WC Coupon Action From  Neve Theme
 		 */
@@ -3065,7 +3085,6 @@ class Woo_Checkout extends Widget_Base {
 			add_action( 'eael_wc_multistep_checkout_after_shipping', [ $wca, 'add_carrier_agent_field_before_payment' ], 10, 0 );
 		}
 
-        $settings = $this->get_settings_for_display();
         add_filter( 'woocommerce_checkout_fields', [ $this, 'ea_checkout_fields' ], 99999 );
 		do_action( 'eael_woo_checkout_before_render', $settings );
 
@@ -3081,12 +3100,36 @@ class Woo_Checkout extends Widget_Base {
 			$settings['eael_enable_checkout_fields_reorder'] === 'yes' ? 'checkout-reorder-enabled' : ''
 		] );
 
+		$astra_pro = get_option( '_astra_ext_enabled_extensions' );
+
+		if ( !empty( $astra_pro ) && isset( $astra_pro['woocommerce'] ) && $astra_pro['woocommerce'] === 'woocommerce' ) {
+			$this->add_render_attribute( 'container', 'class', 'astra-pro-wc-module-activated' );
+		}
+
 		if ( $settings['eael_enable_checkout_fields_reorder'] === 'yes' ){
+			global $post;
+			$eael_checkout_fields = [];
+			if ( count( $settings['ea_billing_fields_list'] ) > 0 ) {
+				foreach ( $settings['ea_billing_fields_list'] as $item ) {
+					$checkout_field_keys['billing'][ $item['field_key'] ] = $item['field_class'];
+					$eael_checkout_fields['billing'][ $item['field_key'] ] = [
+						'label'       => $item['field_label'],
+						'placeholder' => $item['field_placeholder']
+					];
+				}
+			}
+
+			if ( count( $settings['ea_shipping_fields_list'] ) > 0 ) {
+				foreach ( $settings['ea_shipping_fields_list'] as $item ) {
+					$checkout_field_keys['shipping'][ $item['field_key'] ] = $item['field_class'];
+					$eael_checkout_fields['shipping'][ $item['field_key'] ] = [
+						'label'       => $item['field_label'],
+						'placeholder' => $item['field_placeholder']
+					];
+				}
+			}
+            update_post_meta( $post->ID, '_eael_checkout_fields_settings', $eael_checkout_fields );
 			$fields = WC()->checkout()->get_checkout_fields();
-
-			$checkout_field_keys['billing'] = wp_list_pluck( $settings[ 'ea_billing_fields_list' ], 'field_class', 'field_key' );
-			$checkout_field_keys['shipping'] = wp_list_pluck( $settings[ 'ea_shipping_fields_list' ], 'field_class', 'field_key' );
-
 
 			$extra_billing_fields = array_diff( array_keys($fields['billing']), array_keys($checkout_field_keys['billing']) );
 			if ( count($extra_billing_fields) > 0 ){
@@ -3118,6 +3161,10 @@ class Woo_Checkout extends Widget_Base {
 
 			$this->add_render_attribute( 'container', 'data-checkout_ids', json_encode($checkout_field_keys) );
 		}
+        else{
+	        global $post;
+	        delete_post_meta( $post->ID, '_eael_checkout_fields_settings' );
+        }
 
 		$button_texts = [
 			'place_order' => $settings['ea_woo_checkout_place_order_text']

@@ -114,24 +114,23 @@ trait Template_Query {
      *
      * @return array
      */
-    private function get_template_files()
-    {
-        $templates = [];
+	private function get_template_files() {
+		$templates = [];
 
-        if (is_dir($this->get_template_dir())) {
-            $templates['lite'] = scandir($this->get_template_dir(), 1);
-        }
+		if ( is_dir( $this->get_template_dir() ) ) {
+			$templates['lite'] = scandir( $this->get_template_dir(), 1 );
+		}
 
-        if ($this->theme_templates_dir()) {
-            $templates['theme'] = scandir($this->theme_templates_dir(), 1);
-        }
+		if ( is_dir( $this->get_pro_template_dir() ) ) {
+			$templates['pro'] = scandir( $this->get_pro_template_dir(), 1 );
+		}
 
-        if (is_dir($this->get_pro_template_dir())) {
-            $templates['pro'] = scandir($this->get_pro_template_dir(), 1);
-        }
+		if ( $this->theme_templates_dir() ) {
+			$templates['theme'] = scandir( $this->theme_templates_dir(), 1 );
+		}
 
-        return $templates;
-    }
+		return $templates;
+	}
 
     /**
      * Retrieves template list from template directory.

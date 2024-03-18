@@ -490,6 +490,18 @@ span.fc-day-number {
   .eael-event-calendar-wrapper .fc-dayGridMonth-view .fc-day-grid-event .fc-content {
     font-size: 12px;
   }
+  .eael-event-calendar-wrapper .fc-daygrid.fc-dayGridMonth-view.fc-view {
+    overflow: auto;
+  }
+  .eael-event-calendar-wrapper .fc-daygrid.fc-dayGridMonth-view.fc-view > table.fc-scrollgrid.fc-scrollgrid-liquid {
+    position: relative;
+    height: 600px;
+    width: auto !important;
+  }
+  .eael-event-calendar-wrapper .fc-daygrid.fc-dayGridMonth-view.fc-view .fc-col-header-cell,
+  .eael-event-calendar-wrapper .fc-daygrid.fc-dayGridMonth-view.fc-view td.fc-daygrid-day {
+    width: 160px;
+  }
   .fc .fc-toolbar.fc-header-toolbar {
     margin-bottom: 10px;
   }

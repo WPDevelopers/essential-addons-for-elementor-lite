@@ -103,10 +103,6 @@
   line-height: 1.7;
 }
 
-.eael-adv-accordion .eael-accordion-list .eael-accordion-content p {
-  margin: 0;
-}
-
 .eael-adv-accordion .eael-accordion-list .eael-accordion-content.active {
   display: block;
 }

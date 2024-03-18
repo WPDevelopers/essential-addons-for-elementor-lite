@@ -22,7 +22,7 @@ $title_tag = isset($settings['title_tag']) ? Helper::eael_validate_html_tag($set
 echo '<article class="eael-timeline-post">
     <div class="eael-timeline-bullet"></div>
     <div class="eael-timeline-post-inner">
-        <a class="eael-timeline-post-link" href="' . get_the_permalink() . '" title="' . esc_html(get_the_title()) . '">
+        <a class="eael-timeline-post-link" href="' . get_the_permalink() . '" title="' . esc_html(get_the_title()) . '"' . ($settings['timeline_link_nofollow'] ? 'rel="nofollow"' : '') .'' . ($settings['timeline_link_target_blank'] ? 'target="_blank"' : '') . '>
             <time datetime="' . get_the_date() . '">' . get_the_date() . '</time>
             '. $image;
 

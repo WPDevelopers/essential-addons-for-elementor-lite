@@ -166,6 +166,9 @@
                         }
                     }
                 }
+                .ast-on-card-button.ast-onsale-card{
+                    display: none !important;
+                }
             }
 
             li.product {
@@ -1058,7 +1061,7 @@
         .icons-wrap {
             .button.product_type_grouped,
             .button.product_type_variable {
-                display: none;
+                display: none !important;
             }
         }
     }
@@ -1449,6 +1452,15 @@
                     }
                 }
             }
+        }
+    }
+}
+
+//Kadence theme conflicts
+.theme-kadence{
+    .woocommerce {
+        ul.products:not(.woo-archive-btn-button) li:where(:not(.woo-archive-btn-button) ) .button:not(.kb-button){
+            display: flex;
         }
     }
 }

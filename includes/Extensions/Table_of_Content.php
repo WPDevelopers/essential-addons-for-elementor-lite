@@ -121,6 +121,44 @@ class Table_of_Content
             ]
         );
 
+	    $element->add_control(
+		    'eael_ext_toc_title_tag',
+		    [
+			    'label' => esc_html__( 'HTML Tag', 'essential-addons-for-elementor-lite' ),
+			    'type' => Controls_Manager::CHOOSE,
+			    'options' => [
+				    'h1' => [
+					    'title' => esc_html__( 'H1', 'essential-addons-for-elementor-lite' ),
+					    'icon' => 'eicon-editor-h1',
+				    ],
+				    'h2' => [
+					    'title' => esc_html__( 'H2', 'essential-addons-for-elementor-lite' ),
+					    'icon' => 'eicon-editor-h2',
+				    ],
+				    'h3' => [
+					    'title' => esc_html__( 'H3', 'essential-addons-for-elementor-lite' ),
+					    'icon' => 'eicon-editor-h3',
+				    ],
+				    'h4' => [
+					    'title' => esc_html__( 'H4', 'essential-addons-for-elementor-lite' ),
+					    'icon' => 'eicon-editor-h4',
+				    ],
+				    'h5' => [
+					    'title' => esc_html__( 'H5', 'essential-addons-for-elementor-lite' ),
+					    'icon' => 'eicon-editor-h5',
+				    ],
+				    'h6' => [
+					    'title' => esc_html__( 'H6', 'essential-addons-for-elementor-lite' ),
+					    'icon' => 'eicon-editor-h6',
+				    ],
+			    ],
+			    'condition' => [
+				    'eael_ext_table_of_content' => 'yes',
+			    ],
+			    'default' => 'h2',
+		    ]
+	    );
+
         $element->start_controls_tabs('eael_toc_include_exclude', ['separator' => 'before']);
 
         $element->start_controls_tab('eael_toc_include',

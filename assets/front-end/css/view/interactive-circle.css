@@ -76,7 +76,7 @@
   border: 4px solid #fff;
   -webkit-box-shadow: 0px 5px 40px rgba(131, 100, 196, 0.2);
           box-shadow: 0px 5px 40px rgba(131, 100, 196, 0.2);
-  z-index: 99;
+  z-index: 0;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn .eael-circle-icon-shapes {
   display: none;
@@ -117,10 +117,10 @@
   fill: #A195DC;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn .eael-circle-btn-icon .eael-circle-icon-inner .eael-circle-btn-txt {
-  color: #7a5bff;
+  color: #3204ff;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn:hover .eael-circle-btn-icon, .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn.active .eael-circle-btn-icon {
-  background: #7a5bff;
+  background: #4f31d3;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn:hover .eael-circle-btn-icon i, .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn.active .eael-circle-btn-icon i {
   color: #fff;

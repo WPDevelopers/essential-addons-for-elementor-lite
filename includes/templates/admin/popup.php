@@ -3,7 +3,7 @@
         <div class="eael-modal">
             <div class="modal__body">
                 <a href="#" id="eael-admin-popup-close" class="modal__close eael-admin-popup-close"><i
-                            class="ea-admin-icon icon-times"></i></a>
+                            class="ea-admin-icon eael-icon-times"></i></a>
                 <div id="eael-pro-popup" class="modal__content modal__content__popup">
                     <div class="modal__card">
                         <div class="icon">
@@ -30,7 +30,7 @@
                                    value="<?php echo esc_attr( get_option( 'eael_save_google_map_api' ) ); ?>" type="text"
                                    class="eael-form__control" placeholder="Set API key">
                             <button type="button" class="eael-button button__themeColor eael-save-trigger eael-admin-popup-close"><i
-                                        class="ea-admin-icon icon-long-arrow-right"></i></button>
+                                        class="ea-admin-icon eael-icon-long-arrow-right"></i></button>
                         </div>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
                                    value="<?php echo esc_attr( get_option( 'eael_save_mailchimp_api' ) ); ?>"
                                    placeholder="Set API key">
                             <button class="eael-button button__themeColor eael-save-trigger eael-admin-popup-close"><i
-                                        class="ea-admin-icon icon-long-arrow-right"></i></button>
+                                        class="ea-admin-icon eael-icon-long-arrow-right"></i></button>
                         </div>
 
                     </div>

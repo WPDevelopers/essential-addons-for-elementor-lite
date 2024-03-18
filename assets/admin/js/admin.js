@@ -61,12 +61,20 @@
 		$( "#eael-post-duplicator-popup" ).show();
 	} )
 	
+	// Save Button reacting on any changes
+	var saveButton = $( ".js-eael-settings-save" );
+	
 	$( document ).on( "click", ".eael-save-trigger", function ( event ) {
 		event.preventDefault();
 		saveButton
 		.addClass( "save-now" )
 		.removeAttr( "disabled" )
 		.css( "cursor", "pointer" );
+		
+		if( saveButton.hasClass( "save-now" ) && saveButton.length > 0 ){
+			$(saveButton[0]).trigger('click');
+		}
+
 	} )
 	
 	//close popup
@@ -75,9 +83,6 @@
 		eaelPopupBox.hide();
 		$( ".modal__content__popup" ).hide();
 	} )
-	
-	// Save Button reacting on any changes
-	var saveButton = $( ".js-eael-settings-save" );
 	
 	$( ".eael-widget-item:enabled" ).on( "click", function ( e ) {
 		totalElements();
@@ -120,7 +125,7 @@
 				        },
 				        beforeSend: function () {
 					        _this.html(
-						        '<i id="eael-spinner" class="ea-admin-icon icon-settings-loader"></i><span>Saving Data...</span>'
+						        '<i id="eael-spinner" class="ea-admin-icon eael-icon-settings-loader"></i><span>Saving Data...</span>'
 					        );
 				        },
 				        success: function ( response ) {
@@ -161,7 +166,7 @@
 			        },
 			        beforeSend: function () {
 				        _this.html(
-					        '<i id="eael-spinner" class="ea-admin-icon icon-settings-loader"></i><span>Generating...</span>'
+					        '<i id="eael-spinner" class="ea-admin-icon eael-icon-settings-loader"></i><span>Generating...</span>'
 				        );
 			        },
 			        success: function ( response ) {
@@ -300,7 +305,13 @@
 		
 		if ( action == "install" && !$.active ) {
 			button.text( "Installing..." ).attr( "disabled", true );
-			
+			if (pagenow === 'admin_page_eael-setup-wizard' && button.hasClass('eael-quick-setup-next-button')) {
+				button.text("Enabling Templates");
+				$('#eael-next').trigger('click');
+			} else if (pagenow === 'toplevel_page_eael-settings' && button.hasClass('eael-dashboard-templately-install-btn')) {
+				button.text("Enabling Templates");
+			}
+
 			$.ajax( {
 				        url: localize.ajaxurl,
 				        type: "POST",
@@ -313,6 +324,11 @@
 					        if ( response.success ) {
 						        button.attr( "disabled", true );
 						        button.text( "Activated" );
+
+								if ((pagenow === 'admin_page_eael-setup-wizard' && button.hasClass('eael-quick-setup-next-button')) || (pagenow === 'toplevel_page_eael-settings' && button.hasClass('eael-dashboard-templately-install-btn'))) {
+									button.text("Enabled Templates");
+								}
+
 						        button.data( "action", 'completed' );
 						        $( "body" ).trigger( 'eael_after_active_plugin', { plugin: slug } );
 					        } else {
@@ -440,6 +456,13 @@
 		
 		contents[StepNumber].style.display = "none";
 		StepNumber = (e.target.id == 'eael-prev') ? StepNumber - 1 : StepNumber + 1;
+
+		if (contents[StepNumber].classList.contains('templately')) {
+			$('.eael-quick-setup-footer').eq(0).hide().siblings('.eael-quick-setup-footer').show();
+		} else {
+			$('.eael-quick-setup-footer').eq(1).hide().siblings('.eael-quick-setup-footer').show();
+		}
+
 		if (e.target.id == 'eael-next' && StepNumber == 2) {
 			$.ajax({
 				       url: localize.ajaxurl,

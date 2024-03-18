@@ -13,6 +13,7 @@ window.ea = {
 		return false;
 	}
 };
+
 ea.hooks.addAction("widgets.reinit", "ea", ($content) => {
 	let filterGallery = jQuery(".eael-filter-gallery-container", $content);
 	let postGridGallery = jQuery(
@@ -77,6 +78,19 @@ ea.hooks.addAction("widgets.reinit", "ea", ($content) => {
 	}
 });
 
+let ea_swiper_slider_init_inside_template = (content) => {
+	window.dispatchEvent(new Event('resize'));
+
+	content = typeof content === 'object' ? content : jQuery(content);
+	content.find('.swiper-wrapper').each(function () {
+		let transform = jQuery(this).css('transform');
+		jQuery(this).css('transform', transform);
+	});
+}
+
+ea.hooks.addAction("ea-advanced-tabs-triggered", "ea", ea_swiper_slider_init_inside_template);
+ea.hooks.addAction("ea-advanced-accordion-triggered", "ea", ea_swiper_slider_init_inside_template);
+
 jQuery(window).on("elementor/frontend/init", function () {
 	window.isEditMode = elementorFrontend.isEditMode();
 	window.ea.isEditMode = elementorFrontend.isEditMode();
@@ -109,6 +123,19 @@ jQuery(window).on("elementor/frontend/init", function () {
 		}
 	}
 
+	//Add hashchange code form advanced-accordion
+	let  isTriggerOnHashchange = true;
+	window.addEventListener( 'hashchange', function () {
+		if( !isTriggerOnHashchange ) {
+			return;
+		}
+		let hashTag = window.location.hash.substr(1);
+		hashTag = hashTag === 'safari' ? 'eael-safari' : hashTag;
+		if ( hashTag !== 'undefined' && hashTag ) {
+			jQuery( '#' + hashTag ).trigger( 'click' );
+		}
+	});
+
 	$('a').on('click', function (e) {
 		var hashURL = $(this).attr('href'),
 			isStartWithHash;
@@ -119,6 +146,13 @@ jQuery(window).on("elementor/frontend/init", function () {
 		if (!isStartWithHash) {
 			hashURL = hashURL.replace(localize.page_permalink, '');
 			isStartWithHash = hashURL.startsWith('#');
+		}
+
+		if( isStartWithHash ) {
+			isTriggerOnHashchange = false;
+			setTimeout( () => {
+				isTriggerOnHashchange = true;
+			}, 100 );
 		}
 
 		// we will try and catch the error but not show anything just do it if possible

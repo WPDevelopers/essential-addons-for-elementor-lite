@@ -238,7 +238,7 @@ class Info_Box extends Widget_Base
             [
                 'label' => __('Select Title Tag', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
-                'default' => 'h4',
+                'default' => 'h2',
                 'options' => [
                     'h1' => __('H1', 'essential-addons-for-elementor-lite'),
                     'h2' => __('H2', 'essential-addons-for-elementor-lite'),
@@ -285,7 +285,10 @@ class Info_Box extends Widget_Base
                 'dynamic' => [
                     'active' => true,
                 ],
-                'default' => esc_html__('Write a short description, that will describe the title or something informational and useful.', 'essential-addons-for-elementor-lite'),
+                'ai' => [
+                    'active' => false,
+                ],
+                'default' => __('<p>Write a short description, that will describe the title or something informational and useful.</p>', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'eael_infobox_text_type' => 'content',
                 ],
@@ -1664,7 +1667,8 @@ class Info_Box extends Widget_Base
             if ('yes' == $settings['eael_show_infobox_content']): ?>
                 <?php if ('content' === $settings['eael_infobox_text_type']): ?>
                     <?php if (!empty($settings['eael_infobox_text'])): ?>
-                        <p><?php echo $settings['eael_infobox_text']; ?></p>
+                        <?php $tagsPresent = preg_match('/<(h[1-6]|p|pre)>.*<\/(h[1-6]|p|pre)>/i', $settings['eael_infobox_text']); ?>
+                        <?php echo $tagsPresent ? $settings['eael_infobox_text'] : '<p>' . $settings['eael_infobox_text'] . '</p>'; ?>
                     <?php endif;?>
                     <?php $this->render_infobox_button();?>
                 <?php elseif ('template' === $settings['eael_infobox_text_type']):
@@ -1709,7 +1713,7 @@ class Info_Box extends Widget_Base
                 <?php if ('left' == $settings['eael_infobox_button_icon_alignment']): ?>
                     <?php if ($button_icon_is_new || $button_icon_migrated) {?>
                         <?php if (isset($settings['eael_infobox_button_icon_new']['value']['url'])) {?>
-                            <img class="eael_infobox_button_icon_left" src="<?php echo esc_attr($settings['eael_infobox_button_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_infobox_button_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+                            <img class="eael_infobox_button_icon_left" src="<?php echo esc_url( $settings['eael_infobox_button_icon_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_infobox_button_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
                         <?php } else {
                             Icons_Manager::render_icon( $settings['eael_infobox_button_icon_new'], [ 'aria-hidden' => 'true', 'class' => 'eael_infobox_button_icon_left' ] );
                         }?>
@@ -1721,7 +1725,7 @@ class Info_Box extends Widget_Base
                 <?php if ('right' == $settings['eael_infobox_button_icon_alignment']): ?>
                     <?php if ($button_icon_is_new || $button_icon_migrated) {?>
                         <?php if (isset($settings['eael_infobox_button_icon_new']['value']['url'])) {?>
-                            <img class="eael_infobox_button_icon_right" src="<?php echo esc_attr($settings['eael_infobox_button_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_infobox_button_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+                            <img class="eael_infobox_button_icon_right" src="<?php echo esc_url( $settings['eael_infobox_button_icon_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_infobox_button_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
                         <?php } else {
                             Icons_Manager::render_icon( $settings['eael_infobox_button_icon_new'], [ 'aria-hidden' => 'true', 'class' => 'eael_infobox_button_icon_right' ] );
                         }?>

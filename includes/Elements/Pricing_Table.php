@@ -2124,10 +2124,10 @@ class Pricing_Table extends Widget_Base
                         <?php Icons_Manager::render_icon( $item['eael_pricing_table_list_icon_new'], [ 'aria-hidden' => 'true' ] ); ?>
 <!--                                    <img src="--><?php //echo $item['eael_pricing_table_list_icon_new']['value']['url']; ?><!--" alt="--><?php //echo esc_attr(get_post_meta($item['eael_pricing_table_list_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?><!--" />-->
                     <?php else : ?>
-                        <i class="<?php echo $item['eael_pricing_table_list_icon_new']['value']; ?>"></i>
+                        <i class="<?php echo esc_attr( $item['eael_pricing_table_list_icon_new']['value'] ); ?>"></i>
                     <?php endif; ?>
                 <?php } else { ?>
-                    <i class="<?php echo $item['eael_pricing_table_list_icon']; ?>"></i>
+                    <i class="<?php echo esc_attr( $item['eael_pricing_table_list_icon'] ); ?>"></i>
                 <?php } ?>
             </span>
 
@@ -2230,25 +2230,15 @@ class Pricing_Table extends Widget_Base
         $featured_class .= ($settings['eael_pricing_table_ribbon_alignment'] === 'left' ? ' ribbon-left' : '');
         $inline_style = ($settings['eael_pricing_table_featured_styles'] === 'ribbon-4' && 'yes' === $settings['eael_pricing_table_featured'] ? ' style="overflow: hidden;"' : '');
         $icon_position = $this->get_settings('eael_pricing_table_button_icon_alignment');
-	    $settings['eael_pricing_table_price'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_price']);
+	    $settings['eael_pricing_table_price'] = ( $settings['eael_pricing_table_price'] === '0' ) ? '0' : HelperClass::eael_wp_kses( $settings[ 'eael_pricing_table_price' ] );
 	    $settings['eael_pricing_table_onsale_price'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_onsale_price']);
 	    $settings['eael_pricing_table_price_cur'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_price_cur']);
 	    $settings['eael_pricing_table_btn'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_btn']);
         
-        $this->add_render_attribute('eael_pricing_button', [
-            'class' => [ 'eael-pricing-button' ],
-        ]);
+        $this->add_render_attribute('eael_pricing_button', [ 'class' => [ 'eael-pricing-button' ] ]);
 
         if ( ! empty( $settings['eael_pricing_table_btn_link']['url'] ) ) {
             $this->add_link_attributes( 'eael_pricing_button', $settings['eael_pricing_table_btn_link'] );
-        }
-        
-        if ( ! empty( $settings['eael_pricing_table_btn_link']['is_external'] ) ) {
-            $this->add_render_attribute('eael_pricing_button', 'target', '_blank');
-        }
-
-        if ( ! empty( $settings['eael_pricing_table_btn_link']['nofollow'] ) ) {
-            $this->add_render_attribute('eael_pricing_button', 'rel', 'nofollow');
         }
         
         if ('yes' === $settings['eael_pricing_table_onsale']) {
@@ -2342,8 +2332,8 @@ class Pricing_Table extends Widget_Base
                         </span>
                     </div>
                     <div class="header">
-                        <h2 class="title"><?php echo $settings['eael_pricing_table_title']; ?></h2>
-                        <span class="subtitle"><?php echo $settings['eael_pricing_table_sub_title']; ?></span>
+                        <h2 class="title"><?php echo HelperClass::eael_wp_kses( $settings['eael_pricing_table_title'] ); ?></h2>
+                        <span class="subtitle"><?php echo HelperClass::eael_wp_kses( $settings['eael_pricing_table_sub_title'] ); ?></span>
                     </div>
                     <div class="eael-pricing-tag">
                         <span class="price-tag"><?php echo $pricing; ?></span>
@@ -2377,6 +2367,6 @@ class Pricing_Table extends Widget_Base
             </div>
         <?php endif; ?>
 <?php
-        do_action('add_pricing_table_style_block', $settings, $this, $pricing, $target, $nofollow, $featured_class);
+        do_action('add_pricing_table_style_block', $settings, $this, $pricing, $table_btn_link, $nofollow, $featured_class);
     }
 }

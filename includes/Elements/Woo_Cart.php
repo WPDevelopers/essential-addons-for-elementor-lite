@@ -8,15 +8,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use \Elementor\Controls_Manager;
-use \Elementor\Frontend;
 use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use Elementor\Repeater;
 use \Elementor\Widget_Base;
-use \Elementor\Icons_Manager;
-use Essential_Addons_Elementor\Traits\Helper;
+use \Essential_Addons_Elementor\Classes\Helper;
 
 class Woo_Cart extends Widget_Base {
 
@@ -74,7 +72,7 @@ class Woo_Cart extends Widget_Base {
 	}
 
 	public function get_categories() {
-		return [ 'essential-addons-elementor' ];
+		return [ 'essential-addons-elementor', 'woocommerce-elements' ];
 	}
 
 	/**
@@ -2669,9 +2667,15 @@ class Woo_Cart extends Widget_Base {
 		if ( ! class_exists( 'woocommerce' ) ) {
 			return;
 		}
-
 		$settings = $this->get_settings_for_display();
 		$this->ea_woo_cart_add_actions( $settings );
+
+		// Please don't print anything above this line otherwise session will not work properly.
+//		$deviceName = Helper::eael_get_current_device_by_screen();
+//		if ( ! \Elementor\Plugin::$instance->editor->is_edit_mode() && ! empty( $settings["hide_{$deviceName}"] ) ) {
+//            echo "<!-- This content is hidden on {$deviceName} devices -->";
+//			return;
+//		}
 
 		add_filter( 'wc_empty_cart_message', [ $this, 'wc_empty_cart_message' ] );
 

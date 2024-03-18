@@ -34,7 +34,8 @@
 	border-style: solid;
 }
 
-.eael-tooltip:hover .eael-tooltip-text {
+.eael-tooltip:hover .eael-tooltip-text,
+.eael-tooltip-content:focus + .eael-tooltip-text {
 	visibility: visible;
 }
 
@@ -46,7 +47,8 @@
 	margin-right: 10px;
 }
 
-.eael-tooltip:hover .eael-tooltip-text.eael-tooltip-left {
+.eael-tooltip:hover .eael-tooltip-text.eael-tooltip-left,
+.eael-tooltip-content:focus + .eael-tooltip-text.eael-tooltip-left {
 	animation: tooltipLeftIn 300ms ease-in-out;
 }
 
@@ -65,7 +67,8 @@
 	margin-left: 10px;
 }
 
-.eael-tooltip:hover .eael-tooltip-text.eael-tooltip-right {
+.eael-tooltip:hover .eael-tooltip-text.eael-tooltip-right,
+.eael-tooltip-content:focus + .eael-tooltip-text.eael-tooltip-right {
 	animation: tooltipRightIn 300ms linear;
 }
 
@@ -90,7 +93,8 @@
 	border-color: black transparent transparent transparent;
 }
 
-.eael-tooltip:hover .eael-tooltip-text.eael-tooltip-top {
+.eael-tooltip:hover .eael-tooltip-text.eael-tooltip-top,
+.eael-tooltip-content:focus + .eael-tooltip-text.eael-tooltip-top {
 	animation: tooltipTopIn 300ms linear;
 }
 
@@ -109,7 +113,8 @@
 	border-color: transparent transparent black transparent;
 }
 
-.eael-tooltip:hover .eael-tooltip-text.eael-tooltip-bottom {
+.eael-tooltip:hover .eael-tooltip-text.eael-tooltip-bottom,
+.eael-tooltip-content:focus + .eael-tooltip-text.eael-tooltip-bottom {
 	animation: tooltipBottomIn 300ms linear;
 }
 
