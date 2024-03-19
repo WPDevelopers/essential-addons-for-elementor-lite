@@ -309,10 +309,10 @@ jQuery(window).on("elementor/frontend/init", function () {
 				});
 			}
 
-			ea.hooks.addAction("ea-toggle-triggered", "ea", FilterableGallery);
-			ea.hooks.addAction("ea-lightbox-triggered", "ea", FilterableGallery);
-			ea.hooks.addAction("ea-advanced-tabs-triggered", "ea", FilterableGallery);
-			ea.hooks.addAction("ea-advanced-accordion-triggered", "ea", FilterableGallery);
+			eael.hooks.addAction("ea-toggle-triggered", "ea", FilterableGallery);
+			eael.hooks.addAction("ea-lightbox-triggered", "ea", FilterableGallery);
+			eael.hooks.addAction("ea-advanced-tabs-triggered", "ea", FilterableGallery);
+			eael.hooks.addAction("ea-advanced-accordion-triggered", "ea", FilterableGallery);
 		}
 	};
 
