@@ -87,8 +87,8 @@ class Table_of_Content
 	        $supported_posts = get_option( 'elementor_cpt_support' );
 	        $display_on      = [
 		        'all'   => __( 'All', 'essential-addons-for-elementor-lite' ),
-		        'posts' => __( 'All Posts', 'essential-addons-for-elementor-lite' ),
-		        'pages' => __( 'All Pages', 'essential-addons-for-elementor-lite' ),
+		        'post' => __( 'All Posts', 'essential-addons-for-elementor-lite' ),
+		        'page' => __( 'All Pages', 'essential-addons-for-elementor-lite' ),
 	        ];
 
 	        if ( ! empty( $supported_posts ) ) {
