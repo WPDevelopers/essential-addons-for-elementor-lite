@@ -2,8 +2,8 @@ var CountDown = function ($scope, $) {
 	var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
 		$countdown_id = $coundDown.data("countdown-id") !== undefined ? $coundDown.data("countdown-id") : "",
 		$expire_type = $coundDown.data("expire-type") !== undefined ? $coundDown.data("expire-type") : "",
-		$expiry_text = $coundDown.data("expiry-text") !== undefined ? $coundDown.data("expiry-text") : "",
-		$expiry_title = $coundDown.data("expiry-title") !== undefined ? sanitizeHTML($coundDown.data("expiry-title")) : "",
+		$expiry_text = $coundDown.data("expiry-text") !== undefined ? sanitizeXSSAttributes($coundDown.data("expiry-text")) : "",
+		$expiry_title = $coundDown.data("expiry-title") !== undefined ? sanitizeXSSAttributes($coundDown.data("expiry-title")) : "",
 		$redirect_url = $coundDown.data("redirect-url") !== undefined ? $coundDown.data("redirect-url") : "",
 		$template = $coundDown.data("template") !== undefined ? $coundDown.data("template") : "",
 		$countdown_type = $coundDown.data("countdown-type") !== undefined ? $coundDown.data("countdown-type") : "",
@@ -11,20 +11,15 @@ var CountDown = function ($scope, $) {
 		$recurring = $coundDown.data("evergreen-recurring") !== undefined ? $coundDown.data("evergreen-recurring") : false,
 		$recurring_stop_time = $coundDown.data("evergreen-recurring-stop") !== undefined ? $coundDown.data("evergreen-recurring-stop") : "";
 
-	function sanitizeHTML(html) {
-		// Remove all HTML tags and attributes using a regular expression
-		return html.replace(/<[^>]*>?/gm, '');
-	}
+	function sanitizeXSSAttributes(html) {
+		// Define XSS-related attributes
+		const xssAttributes = ['onerror', 'onload', 'onclick', 'onmouseover', 'onmouseout', 'onfocus', 'onblur', 'onchange', 'onsubmit', 'onreset', 'onselect', 'onkeydown', 'onkeypress', 'onkeyup'];
 
-	function htmlToText(html) {
-		// Sanitize the HTML content
-		const cleanHtml = sanitizeHTML(html);
-		// Create a temporary element
-		const tempElement = document.createElement('div');
-		// Set the inner HTML of the temporary element to the sanitized HTML content
-		tempElement.innerHTML = cleanHtml;
-		// Return the text content of the temporary element
-		return tempElement.textContent || tempElement.innerText || '';
+		// Construct the regular expression pattern dynamically
+		const pattern = new RegExp(`\\s+(${xssAttributes.join('|')})=[^>\\s]+`, 'gi');
+
+		// Remove XSS-related attributes using string manipulation
+		return html.replace(pattern, '');
 	}
 
 	jQuery(document).ready(function ($) {
