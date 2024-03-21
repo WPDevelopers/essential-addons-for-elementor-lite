@@ -389,7 +389,7 @@ class Woo_Product_Gallery extends Widget_Base {
 		$this->add_control(
 			'post_type',
 			[
-				'label'   => __( 'Position', 'essential-addons-for-elementor-lite' ),
+				'label'   => __( 'Source', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'product' => [
@@ -535,16 +535,16 @@ class Woo_Product_Gallery extends Widget_Base {
 						'icon'  => 'eicon-editor-h6',
 					],
 					'div' => [
-						'title' => esc_html__( 'div', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'eicon-editor-code',
+						'title' => esc_html__( 'Div', 'essential-addons-for-elementor-lite' ),
+						'text'  => 'div',
 					],
 					'span' => [
 						'title' => esc_html__( 'Span', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fab fa-stripe-s',
+						'text'  => 'span',
 					],
 					'p' => [
 						'title' => esc_html__( 'P', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fab fa-pinterest-p',
+						'text'  => 'P',
 					],
 				],
 				'default' => 'h2',
@@ -1727,16 +1727,16 @@ class Woo_Product_Gallery extends Widget_Base {
 						'icon'  => 'eicon-editor-h6',
 					],
 					'div' => [
-						'title' => esc_html__( 'div', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'eicon-editor-code',
+						'title' => esc_html__( 'Div', 'essential-addons-for-elementor-lite' ),
+						'text'  => 'div',
 					],
 					'span' => [
 						'title' => esc_html__( 'Span', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fab fa-stripe-s',
+						'text'  => 'span',
 					],
 					'p' => [
 						'title' => esc_html__( 'P', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'fab fa-pinterest-p',
+						'text'  => 'P',
 					],
 				],
 				'default'   => 'h1',
