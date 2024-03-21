@@ -174,12 +174,19 @@ class Woo_Product_Gallery extends Widget_Base {
 			'eael_product_gallery_terms_position',
 			[
 				'label'   => __( 'Position', 'essential-addons-for-elementor-lite' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'eael-terms-layout-horizontal',
+				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
-					'eael-terms-layout-horizontal' => __( 'Horizontal', 'essential-addons-for-elementor-lite' ),
-					'eael-terms-layout-vertical'   => __( 'Vertical', 'essential-addons-for-elementor-lite' ),
+					'eael-terms-layout-horizontal' => [
+						'title' => esc_html__( 'Horizontal', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-justify-start-v',
+					],
+					'eael-terms-layout-vertical' => [
+						'title' => esc_html__( 'Vertical', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-justify-start-h',
+					],
 				],
+				'default' => 'eael-terms-layout-horizontal',
+				'toggle'  => false,
 			]
 		);
 
@@ -382,13 +389,20 @@ class Woo_Product_Gallery extends Widget_Base {
 		$this->add_control(
 			'post_type',
 			[
-				'label'   => __( 'Source', 'essential-addons-for-elementor-lite' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'product',
+				'label'   => __( 'Position', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
-					'product'        => esc_html__( 'Products', 'essential-addons-for-elementor-lite' ),
-					'source_dynamic' => esc_html__( 'Dynamic', 'essential-addons-for-elementor-lite' ),
+					'product' => [
+						'title' => esc_html__( 'Products', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-product-related',
+					],
+					'source_dynamic' => [
+						'title' => esc_html__( 'Dynamic', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-archive',
+					],
 				],
+				'default' => 'product',
+				'toggle'  => false,
 			]
 		);
 
@@ -422,16 +436,25 @@ class Woo_Product_Gallery extends Widget_Base {
 
 		] );
 
-		$this->add_control( 'order', [
-			'label'   => __( 'Order', 'essential-addons-for-elementor-lite' ),
-			'type'    => Controls_Manager::SELECT,
-			'options' => [
-				'asc'  => 'Ascending',
-				'desc' => 'Descending',
-			],
-			'default' => 'desc',
-
-		] );
+		$this->add_control(
+			'order',
+			[
+				'label'   => __( 'Order', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'asc' => [
+						'title' => esc_html__( 'Ascending', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fas fa-sort-amount-up-alt',
+					],
+					'desc' => [
+						'title' => esc_html__( 'Descending', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fas fa-sort-amount-down',
+					],
+				],
+				'default' => 'desc',
+				'toggle'  => false,
+			]
+		);
 
 		$this->add_control( 'eael_product_gallery_products_count', [
 			'label'   => __( 'Products Count', 'essential-addons-for-elementor-lite' ),
@@ -483,20 +506,49 @@ class Woo_Product_Gallery extends Widget_Base {
 		$this->add_control(
 			'eael_product_gallery_title_html_tag',
 			[
-				'label'   => __( 'Title HTML Tag', 'essential-addons-for-elementor-lite' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'h2',
-				'options' => [
-					'h1'   => __( 'H1', 'essential-addons-for-elementor-lite' ),
-					'h2'   => __( 'H2', 'essential-addons-for-elementor-lite' ),
-					'h3'   => __( 'H3', 'essential-addons-for-elementor-lite' ),
-					'h4'   => __( 'H4', 'essential-addons-for-elementor-lite' ),
-					'h5'   => __( 'H5', 'essential-addons-for-elementor-lite' ),
-					'h6'   => __( 'H6', 'essential-addons-for-elementor-lite' ),
-					'div'  => __( 'div', 'essential-addons-for-elementor-lite' ),
-					'span' => __( 'span', 'essential-addons-for-elementor-lite' ),
-					'p'    => __( 'p', 'essential-addons-for-elementor-lite' ),
+				'label'       => __( 'Title HTML Tag', 'essential-addons-for-elementor-lite' ),
+				'label_block' => true,
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => [
+					'h1' => [
+						'title' => esc_html__( 'H1', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h1',
+					],
+					'h2' => [
+						'title' => esc_html__( 'H2', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h2',
+					],
+					'h3' => [
+						'title' => esc_html__( 'H3', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h3',
+					],
+					'h4' => [
+						'title' => esc_html__( 'H4', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h4',
+					],
+					'h5' => [
+						'title' => esc_html__( 'H5', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h5',
+					],
+					'h6' => [
+						'title' => esc_html__( 'H6', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h6',
+					],
+					'div' => [
+						'title' => esc_html__( 'div', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-code',
+					],
+					'span' => [
+						'title' => esc_html__( 'Span', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fab fa-stripe-s',
+					],
+					'p' => [
+						'title' => esc_html__( 'P', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fab fa-pinterest-p',
+					],
 				],
+				'default' => 'h2',
+				'toggle'  => false,
 			]
 		);
 
@@ -1646,21 +1698,50 @@ class Woo_Product_Gallery extends Widget_Base {
 		$this->add_control(
 			'eael_product_quick_view_title_tag',
 			[
-				'label'     => __( 'Quick view Title Tag', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'h1',
-				'separator' => 'after',
-				'options'   => [
-					'h1'   => __( 'H1', 'essential-addons-for-elementor-lite' ),
-					'h2'   => __( 'H2', 'essential-addons-for-elementor-lite' ),
-					'h3'   => __( 'H3', 'essential-addons-for-elementor-lite' ),
-					'h4'   => __( 'H4', 'essential-addons-for-elementor-lite' ),
-					'h5'   => __( 'H5', 'essential-addons-for-elementor-lite' ),
-					'h6'   => __( 'H6', 'essential-addons-for-elementor-lite' ),
-					'span' => __( 'Span', 'essential-addons-for-elementor-lite' ),
-					'p'    => __( 'P', 'essential-addons-for-elementor-lite' ),
-					'div'  => __( 'Div', 'essential-addons-for-elementor-lite' ),
+				'label'       => __( 'Quick view Title Tag', 'essential-addons-for-elementor-lite' ),
+				'label_block' => true,
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => [
+					'h1' => [
+						'title' => esc_html__( 'H1', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h1',
+					],
+					'h2' => [
+						'title' => esc_html__( 'H2', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h2',
+					],
+					'h3' => [
+						'title' => esc_html__( 'H3', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h3',
+					],
+					'h4' => [
+						'title' => esc_html__( 'H4', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h4',
+					],
+					'h5' => [
+						'title' => esc_html__( 'H5', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h5',
+					],
+					'h6' => [
+						'title' => esc_html__( 'H6', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h6',
+					],
+					'div' => [
+						'title' => esc_html__( 'div', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-code',
+					],
+					'span' => [
+						'title' => esc_html__( 'Span', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fab fa-stripe-s',
+					],
+					'p' => [
+						'title' => esc_html__( 'P', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fab fa-pinterest-p',
+					],
 				],
+				'default'   => 'h1',
+				'toggle'    => false,
+				'separator' => 'after',
 				'condition' => [
 					'eael_product_gallery_style_preset!' => [
 						'eael-product-preset-4',
