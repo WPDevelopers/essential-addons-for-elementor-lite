@@ -13,7 +13,7 @@ var CountDown = function ($scope, $) {
 
 	function sanitizeXSSAttributes(html) {
 		// Define XSS-related attributes
-		const xssAttributes = ['onerror', 'onload', 'onclick', 'onmouseover', 'onmouseout', 'onfocus', 'onblur', 'onchange', 'onsubmit', 'onreset', 'onselect', 'onkeydown', 'onkeypress', 'onkeyup'];
+		const xssAttributes = ['onabort', 'onblur', 'onchange', 'onclick', 'oncontextmenu', 'oncopy', 'oncut', 'ondblclick', 'ondrag', 'ondragend', 'ondragenter', 'ondragleave', 'ondragover', 'ondragstart', 'ondrop', 'onerror', 'onfocus', 'oninput', 'onkeydown', 'onkeypress', 'onkeyup', 'onload', 'onmousedown', 'onmouseenter', 'onmouseleave', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'onpaste', 'onreset', 'onresize', 'onscroll', 'onselect', 'onsubmit', 'ontouchcancel', 'ontouchend', 'ontouchmove', 'ontouchstart'];
 
 		// Construct the regular expression pattern dynamically
 		const pattern = new RegExp(`\\s+(${xssAttributes.join('|')})=[^>\\s]+`, 'gi');
