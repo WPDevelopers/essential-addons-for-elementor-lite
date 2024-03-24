@@ -205,18 +205,24 @@ trait Controls
         );
 
         $wb->add_control(
-            'order',
-            [
-                'label' => __('Order', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'options' => [
-                    'asc' => 'Ascending',
-                    'desc' => 'Descending',
-                ],
-                'default' => 'desc',
-
-            ]
-        );
+			'order',
+			[
+				'label'   => __( 'Order', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'asc' => [
+						'title' => esc_html__( 'Ascending', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fas fa-sort-amount-up-alt',
+					],
+					'desc' => [
+						'title' => esc_html__( 'Descending', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fas fa-sort-amount-down',
+					],
+				],
+				'default' => 'desc',
+				'toggle'  => false,
+			]
+		);
 
         $wb->end_controls_section();
     }
