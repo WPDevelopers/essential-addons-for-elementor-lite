@@ -648,14 +648,24 @@ trait Controls
                 $wb->add_control(
                     'content_timeline_layout',
                     [
-                        'label' => esc_html__('Position', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::SELECT,
-                        'default' => 'center',
+                        'label'   => esc_html__( 'Position', 'essential-addons-for-elementor-lite' ),
+                        'type'    => Controls_Manager::CHOOSE,
                         'options' => [
-                            'left' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
-                            'center' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
-                            'right' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
+                            'left' => [
+                                'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+                                'icon'  => 'eicon-h-align-right',
+                            ],
+                            'center' => [
+                                'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
+                                'icon'  => 'eicon-h-align-center',
+                            ],
+                            'right' => [
+                                'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+                                'icon'  => 'eicon-h-align-left',
+                            ],
                         ],
+                        'default'   => 'center',
+                        'toggle'    => false,
                         'condition' => [
                             'eael_dynamic_template_Layout' => 'default',
                         ],
@@ -665,14 +675,24 @@ trait Controls
                 $wb->add_control(
                     'content_timeline_layout_horizontal',
                     [
-                        'label' => esc_html__('Position', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::SELECT,
-                        'default' => 'middle',
+                        'label'   => esc_html__( 'Position', 'essential-addons-for-elementor-lite' ),
+                        'type'    => Controls_Manager::CHOOSE,
                         'options' => [
-                            'top' => esc_html__('Top', 'essential-addons-for-elementor-lite'),
-                            'middle' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
-                            'bottom' => esc_html__('Bottom', 'essential-addons-for-elementor-lite'),
+                            'top' => [
+                                'title' => esc_html__( 'Top', 'essential-addons-for-elementor-lite' ),
+                                'icon'  => 'eicon-v-align-bottom',
+                            ],
+                            'middle' => [
+                                'title' => esc_html__( 'Middle', 'essential-addons-for-elementor-lite' ),
+                                'icon'  => 'eicon-v-align-middle',
+                            ],
+                            'bottom' => [
+                                'title' => esc_html__( 'Bottom', 'essential-addons-for-elementor-lite' ),
+                                'icon'  => 'eicon-v-align-top',
+                            ],
                         ],
+                        'default'   => 'middle',
+                        'toggle'    => false,
                         'condition' => [
                             'eael_dynamic_template_Layout' => 'horizontal',
                         ],
