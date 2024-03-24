@@ -1119,7 +1119,7 @@ class Adv_Tabs extends Widget_Base
 
                     <div id="<?php echo esc_attr( $tab_id ); ?>" class="clearfix eael-tab-content-item <?php echo esc_attr($tab['eael_adv_tabs_tab_show_as_default']); ?>" data-title-link="<?php echo esc_attr( $tab_id ); ?>">
 				        <?php if ('content' == $tab['eael_adv_tabs_text_type']) : ?>
-					        <?php echo do_shortcode($tab['eael_adv_tabs_tab_content']); ?>
+					        <?php echo $this->parse_text_editor( $tab['eael_adv_tabs_tab_content'] ); ?>
 				        <?php elseif ('template' == $tab['eael_adv_tabs_text_type']) : ?>
                             <?php if ( ! empty( $tab['eael_primary_templates'] ) ) {
                                 // WPML Compatibility
