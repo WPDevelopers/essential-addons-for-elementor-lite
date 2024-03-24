@@ -431,18 +431,25 @@ trait Controls
         );
 
 	    if ('eael-post-block' === $wb->get_name()) {
-		    $wb->add_control(
-			    'eael_post_block_layout',
-			    [
-				    'label' => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
-				    'type' => Controls_Manager::SELECT,
-				    'default' => 'post-block-layout-block',
-				    'options' => [
-					    'post-block-layout-block' => esc_html__('Block', 'essential-addons-for-elementor-lite'),
-					    'post-block-layout-tiled' => esc_html__('Tiled', 'essential-addons-for-elementor-lite'),
-				    ],
-			    ]
-		    );
+            $wb->add_control(
+                'eael_post_block_layout',
+                [
+                    'label' => esc_html__( 'Layout', 'textdomain' ),
+                    'type' => Controls_Manager::CHOOSE,
+                    'options' => [
+                        'post-block-layout-block' => [
+                            'title' => esc_html__( 'Block', 'essential-addons-for-elementor-lite' ),
+                            'icon' => 'eicon-gallery-grid',
+                        ],
+                        'post-block-layout-tiled' => [
+                            'title' => esc_html__( 'Tiled', 'essential-addons-for-elementor-lite' ),
+                            'icon' => 'eicon-posts-group',
+                        ],
+                    ],
+                    'default' => 'post-block-layout-block',
+                    'toggle' => false,
+                ]
+            );
 
 		    $wb->add_control(
 			    'eael_post_tiled_preset',
