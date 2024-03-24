@@ -2,8 +2,8 @@ var CountDown = function ($scope, $) {
 	var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
 		$countdown_id = $coundDown.data("countdown-id") !== undefined ? $coundDown.data("countdown-id") : "",
 		$expire_type = $coundDown.data("expire-type") !== undefined ? $coundDown.data("expire-type") : "",
-		$expiry_text = $coundDown.data("expiry-text") !== undefined ? sanitizeXSSAttributes($coundDown.data("expiry-text")) : "",
-		$expiry_title = $coundDown.data("expiry-title") !== undefined ? sanitizeXSSAttributes($coundDown.data("expiry-title")) : "",
+		$expiry_text = $coundDown.data("expiry-text") !== undefined ? sanitizeXSSAttributes(removeScriptTags($coundDown.data("expiry-text"))) : "",
+		$expiry_title = $coundDown.data("expiry-title") !== undefined ? sanitizeXSSAttributes(removeScriptTags($coundDown.data("expiry-title"))) : "",
 		$redirect_url = $coundDown.data("redirect-url") !== undefined ? $coundDown.data("redirect-url") : "",
 		$template = $coundDown.data("template") !== undefined ? $coundDown.data("template") : "",
 		$countdown_type = $coundDown.data("countdown-type") !== undefined ? $coundDown.data("countdown-type") : "",
@@ -20,6 +20,17 @@ var CountDown = function ($scope, $) {
 
 		// Remove XSS-related attributes using string manipulation
 		return html.replace(pattern, '');
+	}
+
+	function removeScriptTags(html) {
+		// Decode HTML entities
+		const decodedHtml = html.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+
+		// Regular expression to match <script> tags and their contents
+		const scriptTagRegex = /<script\b[^>]*>(.*?)<\/script>/gi;
+
+		// Remove <script> tags from the HTML string
+		return decodedHtml.replace(scriptTagRegex, '');
 	}
 
 	jQuery(document).ready(function ($) {
