@@ -1214,25 +1214,33 @@ body.rtl .mfp-counter {
 }
 
 body.theme-salient.material button.mfp-arrow,
-body.theme-salient.material button.mfp-close {
+body.material button.mfp-arrow,
+body.theme-salient.material button.mfp-close,
+body.material button.mfp-close {
   border: 0;
 }
 
 body.theme-salient.material .mfp-arrow,
-body.theme-salient.material .mfp-arrow:hover {
+body.material .mfp-arrow,
+body.theme-salient.material .mfp-arrow:hover,
+body.material .mfp-arrow:hover {
   background: transparent;
 }
 
-body.theme-salient.material .mfp-arrow-left {
+body.theme-salient.material .mfp-arrow-left,
+body.material .mfp-arrow-left {
   left: 0;
+  border: none;
 }
 
-body.theme-salient.material .mfp-arrow-right {
+body.theme-salient.material .mfp-arrow-right,
+body.material .mfp-arrow-right {
   -webkit-transition: none;
   transition: none;
 }
 
-body.theme-salient.material .mfp-arrow {
+body.theme-salient.material .mfp-arrow,
+body.material .mfp-arrow {
   margin: -55px 0 0;
   width: 90px;
   height: 110px;
@@ -1240,7 +1248,9 @@ body.theme-salient.material .mfp-arrow {
 }
 
 body.theme-salient.material .mfp-arrow-left:after,
-body.theme-salient.material .mfp-arrow-right:after {
+body.material .mfp-arrow-left:after,
+body.theme-salient.material .mfp-arrow-right:after,
+body.material .mfp-arrow-right:after {
   -webkit-transform: none;
       -ms-transform: none;
           transform: none;
@@ -1250,7 +1260,9 @@ body.theme-salient.material .mfp-arrow-right:after {
 }
 
 body.theme-salient.material .mfp-arrow-left:before,
-body.theme-salient.material .mfp-arrow-right:before {
+body.material .mfp-arrow-left:before,
+body.theme-salient.material .mfp-arrow-right:before,
+body.material .mfp-arrow-right:before {
   -webkit-transform: none;
       -ms-transform: none;
           transform: none;
