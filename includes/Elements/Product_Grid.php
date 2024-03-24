@@ -227,19 +227,30 @@ class Product_Grid extends Widget_Base
                 'label' => esc_html__('Layouts', 'essential-addons-for-elementor-lite'),
             ]
         );
+
         $this->add_control(
-            'eael_product_grid_layout',
-            [
-                'label' => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'default' => 'masonry',
-                'options' => [
-                    'grid' => esc_html__('Grid', 'essential-addons-for-elementor-lite'),
-                    'list' => esc_html__('List', 'essential-addons-for-elementor-lite'),
-                    'masonry' => esc_html__('Masonry', 'essential-addons-for-elementor-lite'),
-                ]
-            ]
-        );
+			'eael_product_grid_layout',
+			[
+				'label'   => __( 'Layout', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'grid' => [
+						'title' => esc_html__( 'Grid', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-gallery-grid',
+					],
+					'masonry' => [
+						'title' => esc_html__( 'Masonry', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-gallery-masonry',
+					],
+					'list' => [
+						'title' => esc_html__( 'List', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-post-list',
+					],
+				],
+				'default' => 'masonry',
+				'toggle'  => false,
+			]
+		);
 
         $this->add_control(
             'eael_product_grid_style_preset',
