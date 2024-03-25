@@ -555,8 +555,10 @@ trait Elements {
                     <button class='eael-toc-button'>" . wp_kses( $icon_html, [ 'i' => [ 'class' => [] ] ] ) . "<span>{$toc_title}</span></button>
                 </div>";
 
-				$should_render_toc = false;
-				if ( $this->get_extensions_value( 'eael_ext_table_of_content' ) != 'yes' ) {
+				$is_toc_enabled    = $this->get_extensions_value( 'eael_ext_table_of_content' );
+				$should_render_toc = 'yes' === $is_toc_enabled;
+
+				if ( 'yes' !== $is_toc_enabled ) {
 					$toc_global_display_condition = $this->get_extensions_value( 'eael_ext_toc_global_display_condition' );
 					if ( 'page' === $toc_global_display_condition ) {
 						$should_render_toc = is_page();
