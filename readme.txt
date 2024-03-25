@@ -297,6 +297,25 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+= 5.9.12 - 25/03/2024 =
+
+- Fixed: EA Pricing Table | HTML tag is not working for period separator
+- Fixed: EA Advanced Accordion | Accordion is not working properly with anchor tag
+- Fixed: EA Advanced Tabs | YouTube video is not showing inside the tabs
+- Fixed: EA Login Register Form | Redirect based on user role not working
+- Fixed: EA Login Register Form | Showing invalid in password reset link
+- Fixed: EA Login Register Form | Redirect issue with cross-Domain links without AJAX submission
+- Fixed: EA Filterable Gallery | Navigation icon distorts with Salient theme enabled
+- Fixed: EA Filterable Gallery | Not working on Elementor nested tab
+- Fixed: EA Interactive Circle | Animation is not working with scroll snap
+- Fixed: EA Feature List | Conflict with Global Controls
+- Fixed: EA Pricing Table | Regular price and on sale price is overlapping each other
+- Fixed: EA Advanced Data Table | Import csv file returns to old data on immediately click on style tab
+- Improved: EA Table of Contents | Display option available for all the Custom Post Types
+- Improved: EA Gravity Forms | Added progress bar styling options for multi-pages
+- Improved: Security Enhancement
+- Few minor bug fixes & improvements
+
 = 5.9.11 - 13/03/2024 =
 
 - Fixed: EA Woo Checkout | Undefined array key "class"
@@ -315,13 +334,6 @@ Your existing elements/content will work with premium version. So you won't lose
 - Improved: EA Post Grid | Added RTL support
 - Improved: EA Woo Product Carousel | Option to hide and show add to cart button
 - Improved: Accessibility Support
-- Few minor bug fixes & improvements
-
-
-= 5.9.10 - 19/02/2024 =
-
-- Fixed: EA Post Grid | Show post terms not showing from Tags
-- Improved: Security Enhancement
 - Few minor bug fixes & improvements
 
 [See changelog for all versions](https://essential-addons.com/changelog).
