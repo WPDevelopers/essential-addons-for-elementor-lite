@@ -199,18 +199,18 @@ trait Login_Registration {
 
 			$redirect_to = '';
 			if ( ! empty( $_POST['redirect_to'] ) ) {
-				$redirect_to = esc_url_raw( $_POST['redirect_to'] );
-				if( ! empty( $current_user_role ) ){
-					$redirect_to = ! empty( $_POST['redirect_to_' . esc_html( $current_user_role )] ) ? esc_url_raw( $_POST['redirect_to_' . esc_html( $current_user_role )] ) : $redirect_to;
+				$redirect_to = sanitize_url( $_POST['redirect_to'] );
+				if ( ! empty( $current_user_role ) ) {
+					$redirect_to = ! empty( $_POST[ 'redirect_to_' . esc_html( $current_user_role ) ] ) ? sanitize_url( $_POST[ 'redirect_to_' . esc_html( $current_user_role ) ] ) : $redirect_to;
 				}
 			}
 
 			do_action( 'wp_login', $user_data->user_login, $user_data );
 			do_action( 'eael/login-register/after-login', $user_data->user_login, $user_data );
 
-			$custom_redirect_url 	= ! empty( $_POST['redirect_to'] ) ? sanitize_url( $_POST['redirect_to'] ) : '';
-			$previous_page_url 		= ! empty( $_POST['redirect_to_prev_page_login'] ) ? sanitize_url( $_POST['redirect_to_prev_page_login'] ) : '';
-			$custom_redirect_url 	= ! empty( $settings['login_redirect_url_prev_page'] ) && $settings['login_redirect_url_prev_page'] === 'yes' ? $previous_page_url : $custom_redirect_url;
+			$custom_redirect_url = $redirect_to;
+			$previous_page_url   = ! empty( $_POST['redirect_to_prev_page_login'] ) ? sanitize_url( $_POST['redirect_to_prev_page_login'] ) : '';
+			$custom_redirect_url = ! empty( $settings['login_redirect_url_prev_page'] ) && $settings['login_redirect_url_prev_page'] === 'yes' ? $previous_page_url : $custom_redirect_url;
 
 			if ( $ajax ) {
 				$data = [
@@ -224,7 +224,7 @@ trait Login_Registration {
 			}
 
 			if ( ! empty( $custom_redirect_url ) ) {
-				wp_safe_redirect( esc_url_raw( $custom_redirect_url ) );
+				wp_redirect( esc_url_raw( $custom_redirect_url ) );
 				exit();
 			}
 		}
@@ -1086,47 +1086,29 @@ trait Login_Registration {
 		$this->widget_id = isset( $_GET['widget_id'] ) ? sanitize_text_field( $_GET['widget_id'] ) : '';
 		$this->resetpassword_in_popup_selector = isset( $_GET['popup-selector'] ) ? sanitize_text_field( $_GET['popup-selector'] ) : '';
 		$rp_page_url = get_permalink( $this->page_id );
-		
-		$rp_path = '/';
-		$rp_cookie       = 'wp-resetpass-' . COOKIEHASH;
+		$user = false;
 
 		if ( isset( $_GET['key'] ) && isset( $_GET['login'] ) ) {
-			$value = sprintf( '%s:%s', wp_unslash( $_GET['login'] ), wp_unslash( $_GET['key'] ) );
-			setcookie( $rp_cookie, $value, 0, $rp_path, COOKIE_DOMAIN, is_ssl(), true );
-
-			wp_safe_redirect( remove_query_arg( array( 'key', 'login' ) ) );
-			exit;
-		}
-
-		if ( isset( $_COOKIE[ $rp_cookie ] ) && 0 < strpos( $_COOKIE[ $rp_cookie ], ':' ) ) {
-			list( $rp_login, $rp_key ) = explode( ':', wp_unslash( $_COOKIE[ $rp_cookie ] ), 2 );
-
-			$user = check_password_reset_key( $rp_key, $rp_login );
-
-			if ( isset( $_POST['eael-pass1'] ) && isset( $_POST['rp_key'] ) && ! hash_equals( $rp_key, $_POST['rp_key'] ) ) {
-				$user = false;
-			}
-		} else {
-			$user = false;
+			$user        = check_password_reset_key( $_GET['key'], $_GET['login'] );
+			$rp_page_url .= "?eael_key={$_GET['key']}&eael_login={$_GET['login']}";
 		}
 
 		if ( ! $user || is_wp_error( $user ) ) {
-			setcookie( $rp_cookie, ' ', time() - YEAR_IN_SECONDS, $rp_path, COOKIE_DOMAIN, is_ssl(), true );
 			update_option( 'eael_lostpassword_error_' . esc_attr( $this->widget_id ) . '_show', 1, false );
 
 			if ( $user && $user->get_error_code() === 'expired_key' ) {
-				wp_redirect( $rp_page_url . '?eael-lostpassword=1&error=expiredkey' );
+				wp_redirect( $rp_page_url . '&eael-lostpassword=1&error=expiredkey' );
 			} else {
-				wp_redirect( $rp_page_url . '?eael-lostpassword=1&error=expiredkey' );
+				wp_redirect( $rp_page_url . '&eael-lostpassword=1&error=expiredkey' );
 			}
 
 			exit;
 		}
 
 		if( $this->resetpassword_in_popup_selector ){
-			wp_redirect( $rp_page_url . '?eael-resetpassword=1&popup-selector=' . $this->resetpassword_in_popup_selector );
+			wp_redirect( $rp_page_url . '&eael-resetpassword=1&popup-selector=' . $this->resetpassword_in_popup_selector );
 		} else {
-			wp_redirect( $rp_page_url . '?eael-resetpassword=1' );
+			wp_redirect( $rp_page_url . '&eael-resetpassword=1' );
 		}
 
 		exit;

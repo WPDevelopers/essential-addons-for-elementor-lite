@@ -1482,7 +1482,6 @@ class Login_Register extends Widget_Base {
 			'show_label'    => false,
 			'show_external' => false,
 			'placeholder'   => admin_url(),
-			'description'   => __( 'Please note that only your current domain is allowed here to keep your site secure.', 'essential-addons-for-elementor-lite' ),
 			'condition'     => [
 				'redirect_after_login' => 'yes',
 				'login_redirect_url_prev_page!' => 'yes',
@@ -6278,23 +6277,17 @@ class Login_Register extends Widget_Base {
 		$rp_page_url = ! empty( $this->page_id_for_popup ) ? get_permalink( $this->page_id_for_popup ) : get_permalink( $this->page_id ); 
 
 		if ( $this->should_print_resetpassword_form_editor || ( ! empty( $_GET['eael-resetpassword'] ) ) ) {
-			$rp_data = $_COOKIE;
 			$show_resetpassword_on_form_submit = get_option('eael_show_reset_password_on_form_submit_' . $this->get_id());
-			
+
 			$validation_required = true;
-			if( $this->should_print_resetpassword_form_editor || $show_resetpassword_on_form_submit ){
+			if ( $this->should_print_resetpassword_form_editor || $show_resetpassword_on_form_submit ) {
 				$validation_required = false;
 			}
 
-			$rp_cookie = 'wp-resetpass-' . COOKIEHASH;
-			if ( ! empty( $rp_data[ $rp_cookie ] ) ) {
-				list( $rp_data['rp_login'], $rp_data['rp_key'] ) = explode( ':', sanitize_text_field( $rp_data[ $rp_cookie ] ) );
-			}
+			$rp_data['rp_login'] = $_GET['eael_login'] ?? '';
+			$rp_data['rp_key']   = $_GET['eael_key'] ?? '';
 			
 			if( $validation_required ){
-				$rp_data['rp_key'] = ! empty( $rp_data['rp_key'] ) ? $rp_data['rp_key'] : '';
-				$rp_data['rp_login'] = ! empty( $rp_data['rp_login'] ) ? $rp_data['rp_login'] : '';
-
 				$user = check_password_reset_key( $rp_data['rp_key'], $rp_data['rp_login'] );
 
 				if ( empty( $rp_data['rp_key'] ) || ! $user || is_wp_error( $user ) ) {
@@ -6535,7 +6528,7 @@ class Login_Register extends Widget_Base {
 
 				if( ! empty( $user_roles ) && is_array( $user_roles ) && count( $user_roles ) ){
 					foreach( $user_roles as $user_role_key => $user_role_value ){
-						$login_redirect_url = ! empty( $this->ds['redirect_url_' . esc_html( $user_role_key ) ]['url'] ) ? esc_url( $this->ds['redirect_url_' . esc_html( $user_role_key )]['url'] ) : $login_redirect_url;
+						$login_redirect_url = ! empty( $this->ds['redirect_url_' . esc_html( $user_role_key ) ]['url'] ) ? esc_url( $this->ds['redirect_url_' . esc_html( $user_role_key )]['url'] ) : '';
 						?>
 						<input type="hidden"
 							name="redirect_to_<?php echo esc_html( $user_role_key ); ?>"
