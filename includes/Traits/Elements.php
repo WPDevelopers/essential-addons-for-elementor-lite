@@ -481,6 +481,86 @@ trait Elements {
 			}
 		}
 
+		//
+		if ( $this->get_settings( 'smooth-animation' ) ) {
+
+			?>
+			
+			<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/gsap.min.js"></script> -->
+			<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/CSSRulePlugin.min.js"></script>
+			<!-- <script src="https://assets.codepen.io/16327/ScrollSmoother.min.js"></script> -->
+			<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+			<?php
+			
+			if ( is_object( $document ) ) {
+				$settings_data = $document->get_settings();
+			}
+
+			// echo "<pre>";
+			// print_r($settings_data);
+
+			$event_gorups = $settings_data['eael_smooth_animation_group_event'];
+			// echo "<pre>";
+			// print_r($event_gorups);
+			foreach ( $event_gorups as $event_gorup_item ) {
+				
+				$event_title                = $event_gorup_item['eael_smooth_animation_event_title'];
+				$event_function             = $event_gorup_item['eael_smooth_animation_event_function'];
+				$event_tigger               = $event_gorup_item['eael_smooth_animation_event_tigger'];
+				$event_target               = $event_gorup_item['eael_smooth_animation_event_target'];
+				$event_markers              = ! empty( $event_gorup_item['eael_smooth_animation_event_markers'] ) ? $event_gorup_item['eael_smooth_animation_event_markers'] : 'false';
+				$event_canvas_scrub         = ! empty( $event_gorup_item['eael_smooth_animation_event_canvas_scrub'] ) ? $event_gorup_item['eael_smooth_animation_event_canvas_scrub'] : '1';
+				$event_toggle_actions       = $event_gorup_item['eael_smooth_animation_toggleActions'];
+				$event_canvas_setting       = $event_gorup_item['eael_smooth_animation_event_canvas_setting'];
+				$event_canvas_start         = $event_gorup_item['eael_smooth_animation_event_canvas_start'];
+				$event_canvas_end           = $event_gorup_item['eael_smooth_animation_event_canvas_end'];
+				$event_transform_setting    = $event_gorup_item['eael_smooth_animation_event_transform_setting'];
+				$event_transform_translatex = $event_gorup_item['eael_smooth_animation_event_transform_translatex']['size'];
+				$event_transform_translatey = $event_gorup_item['eael_smooth_animation_event_transform_translatey']['size'];
+				$event_transform_opacity    = $event_gorup_item['eael_smooth_animation_event_transform_opacity'];
+				$event_transform_scalex     = $event_gorup_item['eael_smooth_animation_event_transform_scalex'];
+				$event_transform_rotate     = $event_gorup_item['eael_smooth_animation_event_transform_rotate']['size'];
+				$event_transform_scaley     = $event_gorup_item['eael_smooth_animation_event_transform_scaley'];
+				$event_animation_setting    = $event_gorup_item['eael_smooth_animation_event_animation_setting'];
+				$event_animation_easing     = $event_gorup_item['eael_smooth_animation_event_animation_easing'];
+				$event_animation_stagger    = $event_gorup_item['eael_smooth_animation_event_animation_stagger'];
+				$event_pin_setting          = $event_gorup_item['eael_smooth_animation_event_pin_setting'];
+				$event_pin_element          = $event_gorup_item['eael_smooth_animation_event_pin_element'];
+				$event_manual_setting       = $event_gorup_item['eael_smooth_animation_event_manual_setting'];
+				$event_canvas_duration      = $event_gorup_item['eael_smooth_animation_event_canvas_duration']['size'];
+				$event_canvas_dely          = $event_gorup_item['eael_smooth_animation_event_canvas_dely']['size'];
+
+				// print_r($event_transform_translatey);
+				?>
+					<script>
+						gsap.registerPlugin(ScrollTrigger);
+						<?php
+							$eael_smooth_animation_obj =
+							"gsap.{$event_function}('{$event_target}', {
+								scrollTrigger: {
+									trigger: '{$event_target}',
+									toggleActions: '{$event_toggle_actions}',
+									start: '{$event_canvas_start}',
+        							end: '{$event_canvas_end}',
+									scrub: {$event_canvas_scrub},
+									markers: {$event_markers}
+								},
+								rotation: {$event_transform_rotate}, 
+								x: {$event_transform_translatex},
+								y: {$event_transform_translatey},
+								duration: {$event_canvas_duration},
+								delay: {$event_canvas_dely}
+								}
+							);";
+							echo $eael_smooth_animation_obj;
+						?>
+					</script>
+				<?php
+			}
+		}
+
+
 		// Table of Contents
 		if ( $this->get_settings( 'table-of-content' ) ) {
 			$toc_status 		= false;
