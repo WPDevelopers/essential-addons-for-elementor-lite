@@ -229,4 +229,20 @@
 			},
 		});
 	});
+
+	$(window).on('scroll', function(){
+		var scrollElement = $('.eael-infinity-scroll');
+
+		if ( scrollElement.length < 1 ) return false;
+
+		var elementTop    = scrollElement.offset().top;
+		var elementBottom = elementTop + scrollElement.outerHeight() / 1.12;
+		var viewportTop   = $(window).scrollTop();
+		var viewportHalf  = viewportTop + $(window).height() / 1.12;
+		var inView        = elementBottom > viewportTop && elementTop < viewportHalf;
+
+		if( inView ){
+			$(".eael-load-more-button").trigger('click');
+		}
+	});
 })(jQuery);

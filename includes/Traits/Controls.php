@@ -737,12 +737,24 @@ trait Controls
                 $wb->add_control(
                     'show_load_more',
                     [
-                        'label' => __('Show Load More', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::SWITCHER,
-                        'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                        'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
-                        'return_value' => 'yes',
-                        'default' => '',
+                        'label'   => esc_html__( 'Load More', 'essential-addons-for-elementor-lite' ),
+                        'type'    => Controls_Manager::CHOOSE,
+                        'options' => [
+                            'no' => [
+                                'title' => esc_html__( 'No Load More', 'essential-addons-for-elementor-lite' ),
+                                'icon'  => 'eicon-ban',
+                            ],
+                            'yes' => [
+                                'title' => esc_html__( 'Load More Button', 'essential-addons-for-elementor-lite' ),
+                                'icon'  => 'eicon-button',
+                            ],
+                            'infinity' => [
+                                'title' => esc_html__( 'Infinity Scroll', 'essential-addons-for-elementor-lite' ),
+                                'icon'  => 'eicon-image-box',
+                            ],
+                        ],
+                        'default' => 'no',
+                        'toggle'  => false,
                     ]
                 );
 

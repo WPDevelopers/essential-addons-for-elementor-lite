@@ -28,6 +28,15 @@
 .eael-load-more-button-wrap.eael-force-hide {
   display: none !important;
 }
+.eael-button-wrap.eael-infinity-scroll,
+.eael-load-more-button-wrap.eael-infinity-scroll {
+  height: 1px;
+  visibility: hidden;
+}
+.eael-button-wrap.eael-infinity-scroll .eael-load-more-button,
+.eael-load-more-button-wrap.eael-infinity-scroll .eael-load-more-button {
+  height: 1px;
+}
 .eael-button,
 .eael-load-more-button {
   display: -webkit-box !important;
