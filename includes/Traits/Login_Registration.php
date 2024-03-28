@@ -1009,7 +1009,7 @@ trait Login_Registration {
 			$user = check_password_reset_key( $rp_data_db['rp_key'], $rp_data_db['rp_login'] );
 
 			if( is_wp_error( $user ) || ! $user ){
-				$data['message'] = isset( $settings['error_resetpassword'] ) ? Helper::eael_wp_kses( $settings['error_resetpassword'] ) : esc_html__( 'Invalid user name found!', 'essential-addons-for-elementor-lite' );
+				$data['message'] = esc_html__( 'Invalid user name found!', 'essential-addons-for-elementor-lite' );
 
 				$success_key = 'eael_resetpassword_success_' . esc_attr( $widget_id );
 				delete_option( $success_key );
