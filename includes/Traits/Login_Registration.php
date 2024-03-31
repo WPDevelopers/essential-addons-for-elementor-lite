@@ -929,7 +929,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_resetpassword_error_' . $widget_id, $err_msg, false );
+			update_option( 'eael_resetpassword_error_' . $widget_id, wp_json_encode( $err_msg ), false );
 
             if (isset($_SERVER['HTTP_REFERER'])) {
                 wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -942,7 +942,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_resetpassword_error_' . $widget_id, $err_msg, false );
+			update_option( 'eael_resetpassword_error_' . $widget_id, wp_json_encode( $err_msg ), false );
 
             if (isset($_SERVER['HTTP_REFERER'])) {
                 wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -954,7 +954,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_resetpassword_error_' . $widget_id, $err_msg, false );
+			update_option( 'eael_resetpassword_error_' . $widget_id, wp_json_encode( $err_msg ), false );
 
             if (isset($_SERVER['HTTP_REFERER'])) {
                 wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -968,7 +968,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_resetpassword_error_' . $widget_id, $err_msg, false );
+			update_option( 'eael_resetpassword_error_' . $widget_id, wp_json_encode( $err_msg ), false );
 
             if (isset($_SERVER['HTTP_REFERER'])) {
                 wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -1009,7 +1009,7 @@ trait Login_Registration {
 			$user = check_password_reset_key( $rp_data_db['rp_key'], $rp_data_db['rp_login'] );
 
 			if( is_wp_error( $user ) || ! $user ){
-				$data['message'] = isset( $settings['error_resetpassword'] ) ? Helper::eael_wp_kses( $settings['error_resetpassword'] ) : esc_html__( 'Invalid user name found!', 'essential-addons-for-elementor-lite' );
+				$data['message'] = esc_html__( 'Invalid user name found!', 'essential-addons-for-elementor-lite' );
 
 				$success_key = 'eael_resetpassword_success_' . esc_attr( $widget_id );
 				delete_option( $success_key );
@@ -1017,7 +1017,7 @@ trait Login_Registration {
 				if($ajax){
 					wp_send_json_error( $data['message'] );
 				}else {
-					update_option( 'eael_resetpassword_error_' . $widget_id, $data['message'], false );
+					update_option( 'eael_resetpassword_error_' . $widget_id, wp_json_encode( $data['message'] ), false );
 				}
 			}
 
@@ -1038,7 +1038,7 @@ trait Login_Registration {
 
 						wp_send_json_success( $data );
 					} else {
-						update_option( 'eael_resetpassword_success_' . $widget_id, $data['message'], false );
+						update_option( 'eael_resetpassword_success_' . $widget_id, wp_json_encode( $data['message'] ), false );
 					}
 
 					if ( ! empty( $_POST['resetpassword_redirect_to'] ) ) {
@@ -1066,7 +1066,7 @@ trait Login_Registration {
 					$err_msg .= '</ol>';
 					wp_send_json_error( $err_msg );
 				}
-				update_option( 'eael_resetpassword_error_' . $widget_id, maybe_serialize( $errors ), false );
+				update_option( 'eael_resetpassword_error_' . $widget_id, wp_json_encode( $errors ), false );
 
 				if (isset( $_SERVER['HTTP_REFERER'] )) {
 					wp_safe_redirect( $_SERVER['HTTP_REFERER'] );
