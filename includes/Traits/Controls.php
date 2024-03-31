@@ -753,20 +753,38 @@ trait Controls
                                 'icon'  => 'eicon-image-box',
                             ],
                         ],
-                        'default' => 'no',
-                        'toggle'  => false,
+                        'default'   => 'no',
+                        'separator' => 'before',
+                        'toggle'    => false,
+                    ]
+                );
+
+                $wb->add_control(
+                    'load_more_infinityscroll_offset',
+                    [
+                        'label'       => esc_html__('Scroll Offset', 'essential-addons-for-elementor-lite'),
+                        'type'        => Controls_Manager::NUMBER,
+                        'dynamic'     => [ 'active' => false ],
+                        'label_block' => false,
+                        'separator'   => 'after',
+                        'default'     => 10,
+                        'min'         => 1,
+                        'condition'   => [
+                            'show_load_more' => 'infinity',
+                        ],
                     ]
                 );
 
                 $wb->add_control(
                     'show_load_more_text',
                     [
-                        'label' => esc_html__('Label Text', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::TEXT,
+                        'label'       => esc_html__('Label Text', 'essential-addons-for-elementor-lite'),
+                        'type'        => Controls_Manager::TEXT,
                         'dynamic'     => [ 'active' => true ],
                         'label_block' => false,
-                        'default' => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
-                        'condition' => [
+                        'separator'   => 'after',
+                        'default'     => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
+                        'condition'   => [
                             'show_load_more' => ['yes', '1', 'true'],
                         ],
                     ]

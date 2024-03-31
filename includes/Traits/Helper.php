@@ -182,10 +182,22 @@ trait Helper
 	    }
 
         if ( $args['posts_per_page'] != '-1' ) {
-            $show_or_hide = ('true' == $settings['show_load_more'] || 1 == $settings['show_load_more'] || 'yes' == $settings['show_load_more']) ? '' : ( 'infinity' === $settings['show_load_more'] ? ' eael-infinity-scroll' : ' eael-force-hide' );
+            $this->add_render_attribute( 'load-more-wrap', 'class', 'eael-load-more-button-wrap' );
+        
+            if ( "eael-dynamic-filterable-gallery" == $this->get_name() ){
+                $this->add_render_attribute( 'load-more-wrap', 'class', 'dynamic-filter-gallery-loadmore' );
+            }
+            
+            if ( 'infinity' === $settings['show_load_more'] ) {
+                $this->add_render_attribute( 'load-more-wrap', 'class', 'eael-infinity-scroll' );
+                $this->add_render_attribute( 'load-more-wrap', 'data-offset', esc_attr( $settings['load_more_infinityscroll_offset'] ) );
+            } else if ( ! ( 'true' == $settings['show_load_more'] || 1 == $settings['show_load_more'] || 'yes' == $settings['show_load_more'] ) ){
+                $this->add_render_attribute( 'load-more-wrap', 'class', 'eael-force-hide' );
+            }
+
             do_action( 'eael/global/before-load-more-button', $settings, $args, $plugin_type );
             ?>
-            <div class="eael-load-more-button-wrap<?php echo "eael-dynamic-filterable-gallery" == $this->get_name() ? " dynamic-filter-gallery-loadmore" : ""; echo esc_attr( $show_or_hide ); ?>">
+            <div <?php $this->print_render_attribute_string( 'load-more-wrap' ); ?>>
                 <button <?php $this->print_render_attribute_string( 'load-more' ); ?>>
                     <span class="eael-btn-loader button__loader"></span>
                     <?php if( 'infinity' !== $settings['show_load_more'] ){ ?>
