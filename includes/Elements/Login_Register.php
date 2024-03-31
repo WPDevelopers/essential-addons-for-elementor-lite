@@ -6686,7 +6686,7 @@ class Login_Register extends Widget_Base {
 	protected function print_resetpassword_validation_errors() {
 		$error_key = 'eael_resetpassword_error_' . $this->get_id();
 		
-		if ( $resetpassword_error = apply_filters( 'eael/login-register/resetpassword-error-message', maybe_unserialize( get_option( $error_key ) ) ) ) {
+		if ( $resetpassword_error = apply_filters( 'eael/login-register/resetpassword-error-message', json_decode( get_option( $error_key ) ) ) ) {
 			do_action( 'eael/login-register/before-showing-resetpassword-error', $resetpassword_error, $this );
 			?>
             <div class="eael-form-msg invalid">
