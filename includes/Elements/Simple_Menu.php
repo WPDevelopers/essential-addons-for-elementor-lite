@@ -1374,7 +1374,6 @@ class Simple_Menu extends Widget_Base
             [
                 'label'     => __('Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '#f44336',
                 'selectors' => [
                     '{{WRAPPER}} .eael-simple-menu li ul li .eael-simple-menu-indicator:before' => 'color: {{VALUE}} !important',
 	                '{{WRAPPER}} .eael-simple-menu li ul li .eael-simple-menu-indicator svg'    => 'fill: {{VALUE}} !important',
