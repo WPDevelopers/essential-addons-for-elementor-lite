@@ -228,14 +228,44 @@ class Woo_Product_List extends Widget_Base
             ]
         );
 
-        $this->add_control('show_load_more', [
-            'label' => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
-            'type'  => Controls_Manager::SWITCHER,
-			'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
-			'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
-            'return_value' => 'yes',
-            'default' => '',
-        ]);
+        $this->add_control(
+            'show_load_more',
+            [
+                'label'   => esc_html__( 'Load More', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::CHOOSE,
+                'options' => [
+                    'no' => [
+                        'title' => esc_html__( 'No Load More', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-ban',
+                    ],
+                    'yes' => [
+                        'title' => esc_html__( 'Load More Button', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-button',
+                    ],
+                    'infinity' => [
+                        'title' => esc_html__( 'Infinity Scroll', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-image-box',
+                    ],
+                ],
+                'default'   => 'no',
+                'toggle'    => false,
+            ]
+        );
+
+        $this->add_control(
+            'load_more_infinityscroll_offset',
+            [
+                'label'       => esc_html__('Scroll Offset', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::NUMBER,
+                'dynamic'     => [ 'active' => false ],
+                'label_block' => false,
+                'default'     => 10,
+                'min'         => 1,
+                'condition'   => [
+                    'show_load_more' => 'infinity',
+                ],
+            ]
+        );
 
         $this->add_control(
             'eael_product_list_layout_content_header_heading',
