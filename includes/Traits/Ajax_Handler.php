@@ -86,6 +86,10 @@ trait Ajax_Handler {
 
 		wp_parse_str( $_POST['args'], $args );
 
+		if ( isset( $args['post_status'] ) ) {
+			$args['post_status'] = 'publish';
+		}
+
 		if ( isset( $args['date_query']['relation'] ) ) {
 			$args['date_query']['relation'] = HelperClass::eael_sanitize_relation( $args['date_query']['relation'] );
 		}
