@@ -541,9 +541,9 @@ class Content_Ticker extends Widget_Base
                 ],
                 'size_units' => ['px'],
                 'selectors'  => [
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev'         => 'font-size: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next img, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next svg, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; line-height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next, {{WRAPPER}} .eael-ticker .swiper-button-prev'         => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next img, {{WRAPPER}} .eael-ticker .swiper-button-prev img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next svg, {{WRAPPER}} .eael-ticker .swiper-button-prev svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; line-height: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -562,7 +562,7 @@ class Content_Ticker extends Widget_Base
                 ],
                 'size_units' => ['px'],
                 'selectors'  => [
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'right: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-prev' => 'right: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -580,8 +580,12 @@ class Content_Ticker extends Widget_Base
                     ],
                 ],
                 'size_units' => ['px'],
+                'default' => [
+					'unit' => 'px',
+					'size' => 0,
+				],
                 'selectors'  => [
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next' => 'right: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next' => 'right: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -602,7 +606,7 @@ class Content_Ticker extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next, {{WRAPPER}} .eael-ticker .swiper-button-prev' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -614,8 +618,8 @@ class Content_Ticker extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next svg, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev svg' => 'fill: {{VALUE}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next, {{WRAPPER}} .eael-ticker .swiper-button-prev' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next svg, {{WRAPPER}} .eael-ticker .swiper-button-prev svg' => 'fill: {{VALUE}};',
                 ],
             ]
         );
@@ -627,7 +631,7 @@ class Content_Ticker extends Widget_Base
                 'label'       => __('Border', 'essential-addons-for-elementor-lite'),
                 'placeholder' => '1px',
                 'default'     => '1px',
-                'selector'    => '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev',
+                'selector'    => '{{WRAPPER}} .eael-ticker .swiper-button-next, {{WRAPPER}} .eael-ticker .swiper-button-prev',
             ]
         );
 
@@ -638,7 +642,7 @@ class Content_Ticker extends Widget_Base
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors'  => [
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next, {{WRAPPER}} .eael-ticker .swiper-button-prev' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -659,7 +663,7 @@ class Content_Ticker extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next:hover, {{WRAPPER}} .eael-ticker .swiper-button-prev:hover' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -671,8 +675,8 @@ class Content_Ticker extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover svg, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover svg' => 'fill: {{VALUE}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next:hover, {{WRAPPER}} .eael-ticker .swiper-button-prev:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next:hover svg, {{WRAPPER}} .eael-ticker .swiper-button-prev:hover svg' => 'fill: {{VALUE}};',
                 ],
             ]
         );
@@ -684,7 +688,7 @@ class Content_Ticker extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover' => 'border-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next:hover, {{WRAPPER}} .eael-ticker .swiper-button-prev:hover' => 'border-color: {{VALUE}};',
                 ],
             ]
         );
@@ -700,7 +704,7 @@ class Content_Ticker extends Widget_Base
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors'  => [
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next, {{WRAPPER}} .eael-ticker .swiper-button-prev' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'separator'  => 'before',
             ]
