@@ -808,11 +808,11 @@ class Product_Grid extends Widget_Base
                 'type'    => Controls_Manager::CHOOSE,
                 'options' => [
                     'no' => [
-                        'title' => esc_html__( 'No Load More', 'essential-addons-for-elementor-lite' ),
+                        'title' => esc_html__( 'Disable', 'essential-addons-for-elementor-lite' ),
                         'icon'  => 'eicon-ban',
                     ],
                     'true' => [
-                        'title' => esc_html__( 'Load More Button', 'essential-addons-for-elementor-lite' ),
+                        'title' => esc_html__( 'Button', 'essential-addons-for-elementor-lite' ),
                         'icon'  => 'eicon-button',
                     ],
                     'infinity' => [

@@ -235,11 +235,11 @@ class Woo_Product_List extends Widget_Base
                 'type'    => Controls_Manager::CHOOSE,
                 'options' => [
                     'no' => [
-                        'title' => esc_html__( 'No Load More', 'essential-addons-for-elementor-lite' ),
+                        'title' => esc_html__( 'Disable', 'essential-addons-for-elementor-lite' ),
                         'icon'  => 'eicon-ban',
                     ],
                     'yes' => [
-                        'title' => esc_html__( 'Load More Button', 'essential-addons-for-elementor-lite' ),
+                        'title' => esc_html__( 'Button', 'essential-addons-for-elementor-lite' ),
                         'icon'  => 'eicon-button',
                     ],
                     'infinity' => [
