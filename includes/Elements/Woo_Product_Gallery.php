@@ -644,12 +644,12 @@ class Woo_Product_Gallery extends Widget_Base {
         $this->add_control(
             'load_more_infinityscroll_offset',
             [
-                'label'       => esc_html__('Scroll Offset', 'essential-addons-for-elementor-lite'),
+                'label'       => esc_html__('Scroll Offset (px)', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::NUMBER,
                 'dynamic'     => [ 'active' => false ],
                 'label_block' => false,
-                'default'     => 10,
-                'min'         => 1,
+                'default'     => '-200',
+                'description' => esc_html__('Set the position of loading to the viewport before it ends from view', 'essential-addons-for-elementor-lite'),
                 'condition'   => [
                     'show_load_more' => 'infinity',
                 ],

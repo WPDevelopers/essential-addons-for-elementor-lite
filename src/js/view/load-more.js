@@ -239,9 +239,9 @@
 			var scrollElement = $(element);
 			var offset        = scrollElement.data('offset');
 			var elementTop    = scrollElement.offset().top;
-			var elementBottom = elementTop + scrollElement.outerHeight() - offset;
+			var elementBottom = elementTop + scrollElement.outerHeight() - ( offset );
 			var viewportTop   = $(window).scrollTop();
-			var viewportHalf  = viewportTop + $(window).height() - offset;
+			var viewportHalf  = viewportTop + $(window).height() - ( offset );
 			var inView        = elementBottom > viewportTop && elementTop < viewportHalf;
 
 			if( inView ){
