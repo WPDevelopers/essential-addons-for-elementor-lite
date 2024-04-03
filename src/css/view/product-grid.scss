@@ -902,18 +902,15 @@
             }
 
             .outofstock-badge {
-                min-height: 3.746em;
-                min-width: 3.746em;
-                padding: .502em;
+                &:last-child{
+                    display: none !important;
+                }
                 font-size: 13px;
                 font-weight: 700;
                 position: absolute;
                 text-align: center;
-                line-height: 3.25;
-                top: -0.5em;
-                left: -0.5em;
+                top: 1.5em;
                 margin: 0;
-                border-radius: 50%;
                 background-color: #ff2a13;
                 color: #fff;
                 font-size: 0.857em;
@@ -1107,8 +1104,7 @@
 }
 
 .eael-wcpc-wrapper,
-.eael-wcpc-wrapper.custom,
-{
+.eael-wcpc-wrapper.custom {
     .eael-wc-remove {
         cursor: pointer;
         transition: all 400ms ease;
