@@ -200,9 +200,7 @@ trait Helper
             <div <?php $this->print_render_attribute_string( 'load-more-wrap' ); ?>>
                 <button <?php $this->print_render_attribute_string( 'load-more' ); ?>>
                     <span class="eael-btn-loader button__loader"></span>
-                    <?php if( 'infinity' !== $settings['show_load_more'] ){ ?>
-                        <span class="eael_load_more_text"><?php echo esc_html($settings['show_load_more_text']) ?></span>
-                    <?php } ?>
+                    <span class="eael_load_more_text"><?php echo esc_html($settings['show_load_more_text']) ?></span>
                 </button>
             </div>
             <?php 
