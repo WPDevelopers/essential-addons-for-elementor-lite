@@ -1291,6 +1291,11 @@ class Helper
 				'colspan' => [],
 				'rowspan' => [],
 			],
+			'header'      => [
+				'class'   => [],
+				'id'      => [],
+				'style'   => [],
+			],
 		];
 	}
 

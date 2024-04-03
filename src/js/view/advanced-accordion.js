@@ -48,6 +48,14 @@ eael.hooks.addAction("init", "ea", () => {
 
 				var $this = $(this);
 
+				setTimeout(function(e) {
+					$('.eael-accordion-header').removeClass('triggered');
+				},70);
+
+				if( $this.hasClass('triggered') ){
+					return;
+				}
+
 				if ($accordionType === "accordion") {
 					if ($this.hasClass("show")) {
 						$this.removeClass("show active");
@@ -76,10 +84,11 @@ eael.hooks.addAction("init", "ea", () => {
                     }, $srollSpeed);
                 }
 
-				setTimeout(function(){
-					eael.hooks.doAction("widgets.reinit",$this.parent());
-					eael.hooks.doAction("ea-advanced-accordion-triggered", $this.next());
-				},50);
+                setTimeout(function () {
+                    $this.addClass('triggered');
+                    eael.hooks.doAction("widgets.reinit", $this.parent());
+                    eael.hooks.doAction("ea-advanced-accordion-triggered", $this.next());
+                }, 50);
 			});
 
 			$scope.on('keydown', '.eael-accordion-header', function (e) {

@@ -19,6 +19,12 @@ eael.hooks.addAction( "init", "ea", () => {
 				$activeItem = $scope.find('.eael-circle-btn.active');
 			$activeItem.siblings('.eael-circle-btn-content').removeClass('active');
 
+			$('body').scroll(function () {
+				if($circleWrap.isInViewport()){
+					$(window).trigger('resize');
+				}
+			});
+
 			$($circleContent).waypoint(
 				function() {
 					$circleWrap.addClass($animation);
@@ -46,7 +52,7 @@ eael.hooks.addAction( "init", "ea", () => {
 				$( this ).trigger( $eventType );
 			}
 		});
-		
+
 		$tabLinks.each( function ( element ) {
 			$( this ).on( $eventType, handleEvent( element ) );
 			$( this ).on( 'eaelInteractiveCicle', handleEvent( element ) );
