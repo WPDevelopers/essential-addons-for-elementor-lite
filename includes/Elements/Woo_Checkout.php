@@ -2845,7 +2845,7 @@ class Woo_Checkout extends Widget_Base {
 			[
 				'label' => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::COLOR,
-				'default' => '#7866ff',
+				'default' => '#5842FF',
 				'selectors' => [
 					'{{WRAPPER}} #place_order' => 'background-color: {{VALUE}};background: {{VALUE}};',
 				],
@@ -3014,7 +3014,7 @@ class Woo_Checkout extends Widget_Base {
 		$_fields = [];
 		$classes = [ 'form-row-first', 'form-row-last', 'form-row-wide' ];
 		foreach ( $fields as $key => $field_set ) {
-			$field_set_class = is_array( $field_set['class'] ) ? $field_set['class'] : [];
+			$field_set_class = isset( $field_set['class'] ) && is_array( $field_set['class'] ) ? $field_set['class'] : [];
 			$_fields[]       = [
 				'field_label'       => $field_set['label'],
 				'field_key'         => $key,
