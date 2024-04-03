@@ -51,7 +51,7 @@ var CountDown = function ($scope, $) {
 						if (isEditMode) {
 							countDown.html("Your Page will be redirected to given URL (only on Frontend).");
 						} else {
-							window.location.href = ea.sanitizeURL($redirect_url);
+							window.location.href = eael.sanitizeURL($redirect_url);
 						}
 					} else if ($expire_type === "template") {
 						countDown.html($coundDown.find(".eael-countdown-expiry-template").html());

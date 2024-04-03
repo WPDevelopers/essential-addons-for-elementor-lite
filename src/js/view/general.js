@@ -122,7 +122,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 			});
 		}
 	}
-	ea.sanitizeURL = function (url) {
+	eael.sanitizeURL = function (url) {
 		if (url.startsWith('/') || url.startsWith('#')) {
 			return url;
 		}
