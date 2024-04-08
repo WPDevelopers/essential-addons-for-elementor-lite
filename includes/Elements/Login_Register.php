@@ -1887,7 +1887,7 @@ class Login_Register extends Widget_Base {
 		] );
 		$this->add_control( 'register_form_field_note', [
 			'type'            => Controls_Manager::RAW_HTML,
-			'raw'             => __( sprintf( 'Select the type of fields you want to show in the registration form. You can enable custom fields from EA Dashboard » Elements » <a href="%s" target="_blank">Login Register Form Settings</a>.', esc_attr( site_url('/wp-admin/admin.php?page=eael-settings') ) ), 'essential-addons-for-elementor-lite' ),
+			'raw'             => __( sprintf( 'Select the type of fields you want to show in the registration form. You can enable custom fields from EA Dashboard » Elements » <a href="%s" target="_blank">Login Register Form Settings</a>.', esc_url( site_url('/wp-admin/admin.php?page=eael-settings') ) ), 'essential-addons-for-elementor-lite' ),
 			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 		] );
 		$repeater = new Repeater();
@@ -5593,7 +5593,7 @@ class Login_Register extends Widget_Base {
 					break;
 			}
 
-			$reg_link = sprintf( $reg_link_placeholder, $reg_message, esc_attr( $reg_url ), esc_attr( $reg_link_action ), $reg_link_text, $reg_atts );
+			$reg_link = sprintf( $reg_link_placeholder, $reg_message, esc_url( $reg_url ), esc_attr( $reg_link_action ), $reg_link_text, $reg_atts );
 
 
 			// login form fields related
@@ -5624,7 +5624,7 @@ class Login_Register extends Widget_Base {
 			//Loss password
 			$show_lp = ( ! empty( $this->ds['show_lost_password'] ) && 'yes' === $this->ds['show_lost_password'] );
 			$lp_text = ! empty( $this->ds['lost_password_text'] ) ? HelperCLass::eael_wp_kses($this->ds['lost_password_text']) : __( 'Forgot Password?', 'essential-addons-for-elementor-lite' );
-			$lp_link = sprintf( '<a href="%s">%s</a>', esc_attr( wp_lostpassword_url() ), $lp_text );
+			$lp_link = sprintf( '<a href="%s">%s</a>', esc_url( wp_lostpassword_url() ), $lp_text );
 			if ( ! empty( $this->ds['lost_password_link_type'] ) && 'custom' === $this->ds['lost_password_link_type'] ) {
 				$lp_url  = ! empty( $this->ds['lost_password_url']['url'] ) ? $this->ds['lost_password_url']['url'] : wp_lostpassword_url();
 				$lp_atts = ! empty( $this->ds['lost_password_url']['is_external'] ) ? ' target="_blank"' : '';
@@ -5868,7 +5868,7 @@ class Login_Register extends Widget_Base {
 					$lgn_url = wp_login_url();
 					break;
 			}
-			$lgn_link = sprintf( $lgn_link_placeholder, $lgn_message, esc_attr( $lgn_url ), esc_attr( $lgn_link_action ), $lgn_link_text, $lgn_atts );
+			$lgn_link = sprintf( $lgn_link_placeholder, $lgn_message, esc_url( $lgn_url ), esc_attr( $lgn_link_action ), $lgn_link_text, $lgn_atts );
 
 			// btn alignment
 			$btn_align  = isset( $this->ds['register_btn_align'] ) ? esc_html( $this->ds['register_btn_align'] ) : '';
@@ -6166,7 +6166,7 @@ class Login_Register extends Widget_Base {
 					break;
 			}
 
-			$login_link_lostpassword = sprintf( $login_link_placeholder_lostpassword, $login_message_lostpassword, esc_attr( $login_url_lostpassword ), esc_attr( $login_link_action_lostpassword ), $login_link_text_lostpassword, $login_atts_lostpassword, $this->get_render_attribute_string( 'login_button_lostpassword' ) );
+			$login_link_lostpassword = sprintf( $login_link_placeholder_lostpassword, $login_message_lostpassword, esc_url( $login_url_lostpassword ), esc_attr( $login_link_action_lostpassword ), $login_link_text_lostpassword, $login_atts_lostpassword, $this->get_render_attribute_string( 'login_button_lostpassword' ) );
 
 			// lost password form fields related
 			$label_type      = ! empty( $this->ds['lostpassword_label_types'] ) ? esc_html( $this->ds['lostpassword_label_types'] ) : 'default';
@@ -6600,7 +6600,7 @@ class Login_Register extends Widget_Base {
 			$tc_url  = ! empty( $this->ds['acceptance_text_url']['url'] ) ? esc_url( $this->ds['acceptance_text_url']['url'] ) : esc_url( get_the_permalink( get_option( 'wp_page_for_privacy_policy' ) ) );
 			$tc_atts = ! empty( $this->ds['acceptance_text_url']['is_external'] ) ? ' target="_blank"' : '';
 			$tc_atts .= ! empty( $this->ds['acceptance_text_url']['nofollow'] ) ? ' rel="nofollow"' : '';
-			$tc_link = sprintf( '<a href="%1$s" id="eael-lr-tnc-link" class="eael-lr-tnc-link" %2$s>%3$s</a>', esc_attr( $tc_url ), $tc_atts, $link_text );
+			$tc_link = sprintf( '<a href="%1$s" id="eael-lr-tnc-link" class="eael-lr-tnc-link" %2$s>%3$s</a>', esc_url( $tc_url ), $tc_atts, $link_text );
 		}
 		$lrtoggle = ! empty( $this->ds['eael_terms_conditions_field_type'] ) && 'toggle' === $this->ds['eael_terms_conditions_field_type'] ? 'lr-toggle' : '';
 		?>
