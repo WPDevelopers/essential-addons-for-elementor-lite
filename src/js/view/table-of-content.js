@@ -88,7 +88,7 @@
 			for (var i = 0, len = allHeadings.length; i < len; ++i) {
 				var currentHeading  = allHeadings[i],
 					find_main       = $(currentHeading).closest('#main'),
-					exclude_areas   = 'nav, footer, .comments-area, .woocommerce-tabs, .related.products, .blog-author, .post-author',
+					exclude_areas   = 'nav, footer, .comments-area, .woocommerce-tabs, .related.products, .blog-author, .post-author, .post-related-posts',
 					find_exclude    = $(currentHeading).closest( exclude_areas ),
 					in_main_area    = find_main.length > 0,
 					in_exclude_area = find_exclude.length > 0;
