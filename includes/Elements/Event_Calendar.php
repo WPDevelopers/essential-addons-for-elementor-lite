@@ -3156,14 +3156,17 @@ class Event_Calendar extends Widget_Base
 					echo '<td class="eael-ec-event-description" ' . esc_attr( $row_style ) . '>' . Helper::eael_wp_kses( $event_description ) . '</td>';
 				}
 				if ( $settings['eael_ec_show_date'] === 'yes' ) {
+					$start_timezone = isset( $event['start_timezone'] ) && '' !== $event['start_timezone'] ? new \DateTimeZone( $event['start_timezone'] ) : '';
+					$end_timezone   = isset( $event['end_timezone'] ) && '' !== $event['end_timezone']  ? new \DateTimeZone( $event['end_timezone'] ) : $start_timezone;
+
 					$start_time = strtotime( $event['start'] );
 					$end_time   = strtotime( $event['end'] );
-					$start      = date( $date_format, $start_time );
-					$end        = date( $date_format, $end_time );
-                    $same_day   = date( 'Ymd', $start_time ) === date( 'Ymd', $end_time );
+					$start      = wp_date( $date_format, $start_time, $start_timezone );
+					$end        = wp_date( $date_format, $end_time, $end_timezone );
+                    $same_day   = wp_date( 'Ymd', $start_time, $start_timezone ) === wp_date( 'Ymd', $end_time, $end_timezone );
                     
 					if ( $time_format && $same_day ) {
-						$end = date( $time_format, $end_time );
+						$end = wp_date( $time_format, $end_time, $end_timezone );
 					}else if( ! $time_format && $same_day ){
                         $end = '';
                     }
@@ -3355,6 +3358,9 @@ class Event_Calendar extends Widget_Base
 //                    continue;
                 }
                 $all_day = '';
+                $start_timezone = isset( $item->start->timeZone ) ? $item->start->timeZone: '';
+                $end_timezone   = isset( $item->end->timeZone ) ? $item->end->timeZone : $start_timezone;
+
                 if (isset($item->start->date)) {
                     $all_day = 'yes';
                     $ev_start_date = $item->start->date;
@@ -3394,18 +3400,20 @@ class Event_Calendar extends Widget_Base
                 }
 
                 $calendar_data[] = [
-                    'id' => ++$key,
-                    'title' => !empty($item->summary) ? $item->summary : 'No Title',
-                    'description' => isset($item->description) ? $item->description : '',
-                    'start' => $ev_start_date,
-                    'end' => $ev_end_date,
-                    'borderColor' => !empty($settings_eael_event_global_popup_ribbon_color) ? $settings_eael_event_global_popup_ribbon_color : '#10ecab',
-                    'textColor' => $settings_eael_event_global_text_color,
-                    'color' => $settings_eael_event_global_bg_color,
-                    'url' => ($settings['eael_event_details_link_hide'] !== 'yes') ? esc_url( $item->htmlLink ) : '',
-                    'allDay' => $all_day,
-                    'external' => 'on',
-                    'nofollow' => 'on',
+                    'id'             => ++$key,
+                    'title'          => !empty($item->summary) ? $item->summary                                                                : 'No Title',
+                    'description'    => isset($item->description) ? $item->description                                                         : '',
+                    'start'          => $ev_start_date,
+                    'end'            => $ev_end_date,
+                    'start_timezone' => $start_timezone,
+                    'end_timezone'   => $end_timezone,
+                    'borderColor'    => !empty($settings_eael_event_global_popup_ribbon_color) ? $settings_eael_event_global_popup_ribbon_color: '#10ecab',
+                    'textColor'      => $settings_eael_event_global_text_color,
+                    'color'          => $settings_eael_event_global_bg_color,
+                    'url'            => ($settings['eael_event_details_link_hide'] !== 'yes') ? esc_url( $item->htmlLink ): '',
+                    'allDay'         => $all_day,
+                    'external'       => 'on',
+                    'nofollow'       => 'on',
                 ];
             }
 
