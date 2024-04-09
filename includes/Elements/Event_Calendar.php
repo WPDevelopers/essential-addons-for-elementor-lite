@@ -3437,15 +3437,13 @@ class Event_Calendar extends Widget_Base
         $arg = [
             'posts_per_page' => $settings['eael_the_events_calendar_max_result'],
         ];
-	    if ( $settings['eael_the_events_calendar_fetch'] == 'date_range' ) {
+
+	    if ( $settings['eael_the_events_calendar_fetch'] == 'date_range' && 'table' === $settings['eael_event_display_layout'] ) {
 		    $arg['start_date'] = $settings['eael_the_events_calendar_start_date'];
 		    $arg['end_date']   = $settings['eael_the_events_calendar_end_date'];
 	    }
-		else if ( $settings['eael_event_default_date_type'] === 'custom' ) {
+		else if ( $settings['eael_event_default_date_type'] === 'custom' && 'table' === $settings['eael_event_display_layout'] ) {
 		    $arg['start_date'] = $settings['eael_event_calendar_default_date'];
-	    }
-		else {
-		    $arg['start_date'] = date( 'Y-m-d' );
 	    }
 
         if (!empty($settings['eael_the_events_calendar_category'])) {
@@ -3497,6 +3495,15 @@ class Event_Calendar extends Widget_Base
             if( !empty( $settings["eael_old_events_hide"] ) && 'yes' === $settings["eael_old_events_hide"] ){
                 $is_old_event = $this->is_old_event($start);
                 if($is_old_event) {
+                    continue;
+                }
+            }
+
+            if( $settings['eael_old_events_hide'] === 'start' ){
+                $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : date( 'Y-m-d' );
+                $should_show  = $this->is_old_event( $start, $default_date );
+
+                if ( $should_show ) {
                     continue;
                 }
             }
