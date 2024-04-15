@@ -976,10 +976,12 @@ class Interactive_Circle extends Widget_Base {
 								?>
                                 <div class="eael-circle-item elementor-repeater-item-<?php echo $item['_id']; ?>">
                                     <div aria-controls="eael-interactive-<?php echo esc_html( $item_count ); ?>" tabindex="0" class="eael-circle-btn <?php echo $is_active; ?>" id="eael-circle-item-<?php echo $item_count; ?>">
-                                        <div class="eael-circle-icon-shapes <?php echo esc_attr( $item_style_classic ); ?>">
-                                            <div class="eael-shape-1"></div>
-                                            <div class="eael-shape-2"></div>
-                                        </div>
+										<?php if ( ( $settings['eael_interactive_circle_preset'] == 'eael-interactive-circle-preset-4' ) ) { ?>
+										<div class="eael-circle-icon-shapes <?php echo esc_attr( $item_style_classic ); ?>">
+											<div class="eael-shape-1"></div>
+											<div class="eael-shape-2"></div>
+										</div>
+										<?php } ?>
                                         <div class="eael-circle-btn-icon <?php echo esc_attr( $item_style_classic ); ?>">
                                             <div class="eael-circle-icon-inner">
 												<?php
