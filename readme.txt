@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 5.9.14
+Stable tag: 5.9.15
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -297,6 +297,17 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+= 5.9.15 - 09/04/2024 =
+
+- Fixed: EA Content Ticker | Navigation arrow styling is not working
+- Fixed: EA Content Ticker | Not working with Slide animation effect
+- Fixed: EA Woo Product Grid | Default layout doesn't show customized "sale/stock out" badge
+- Fixed: EA Event Calendar | Layout calendar and table showing different times for google calendar
+- Fixed: EA Event Calendar | Old event is not showing for Event Calendar as a source
+- Fixed: EA Login Register Form | Remember me checkbox is not working in the form
+- Improved: Security Enhancement
+- Few minor bug fixes & improvements
+
 = 5.9.14 - 28/03/2024 =
 
 - Improved: Security Enhancement
@@ -324,26 +335,6 @@ Your existing elements/content will work with premium version. So you won't lose
 - Improved: EA Table of Contents | Display option available for all the Custom Post Types
 - Improved: EA Gravity Forms | Added progress bar styling options for multi-pages
 - Improved: Security Enhancement
-- Few minor bug fixes & improvements
-
-= 5.9.11 - 13/03/2024 =
-
-- Fixed: EA Woo Checkout | Undefined array key "class"
-- Fixed: Fatal Error | Class "Essential_Addons_ElementorClassesBootstrap" not found
-- Fixed: Conflict with Fluent Form | ff-hidden CSS class not working as expected
-- Fixed: EA Gravity Forms | Conflict with orbital theme layout
-- Fixed: EA Interactive Circle | Elementor Nav Menu is not working
-- Fixed: EA Advanced Accordion | Anchor tags inside accordions not working properly
-- Fixed: EA Woo Product Grid | Active Woo Product Grid disables product selection in store when JetMenu is enabled
-- Fixed: EA Advanced Data Table | Export is downloading empty csv file
-- Fixed: EA Event Calendar | List view shows previous date first for some time
-- Fixed: EA Advanced Data Table | CSV file import shows " " sign
-- Improved: EA Call to Action | Background image styling option
-- Improved: EA Advanced Tabs | Clicking on the tab takes the user to the top of the content
-- Improved: EA Filterable Gallery | Added RTL support
-- Improved: EA Post Grid | Added RTL support
-- Improved: EA Woo Product Carousel | Option to hide and show add to cart button
-- Improved: Accessibility Support
 - Few minor bug fixes & improvements
 
 [See changelog for all versions](https://essential-addons.com/changelog).
