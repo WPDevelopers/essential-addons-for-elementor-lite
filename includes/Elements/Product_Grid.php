@@ -1846,11 +1846,10 @@ class Product_Grid extends Widget_Base
 	    $this->add_control(
 		    'eael_product_stockout_text',
 		    [
-			    'label'       => esc_html__( 'Stock Out Text', 'essential-addons-for-elementor-lite' ),
-			    'type'        => Controls_Manager::TEXT,
-                'ai' => [
-					'active' => false,
-				],
+			    'label'   => esc_html__( 'Stock Out Text', 'essential-addons-for-elementor-lite' ),
+			    'type'    => Controls_Manager::TEXT,
+                'default' => esc_html__( 'Out of stock', 'essential-addons-for-elementor-lite' ),
+                'ai'      => [ 'active' => false ],
 		    ]
 	    );
 
