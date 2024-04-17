@@ -3906,7 +3906,7 @@ class Filterable_Gallery extends Widget_Base
                 for ($i = 0; $i < $init_show; $i++) {
 
                     if (array_key_exists($i, $gallery_items)) {
-                        echo $gallery_items[$i];
+                        echo wp_kses( $gallery_items[$i], Helper::eael_allowed_tags() );
                     }
                 }
                 if ( $settings['eael_fg_caption_style'] === 'layout_3' ):
