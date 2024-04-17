@@ -1846,11 +1846,10 @@ class Product_Grid extends Widget_Base
 	    $this->add_control(
 		    'eael_product_stockout_text',
 		    [
-			    'label'       => esc_html__( 'Stock Out Text', 'essential-addons-for-elementor-lite' ),
-			    'type'        => Controls_Manager::TEXT,
-                'ai' => [
-					'active' => false,
-				],
+			    'label'   => esc_html__( 'Stock Out Text', 'essential-addons-for-elementor-lite' ),
+			    'type'    => Controls_Manager::TEXT,
+                'default' => esc_html__( 'Out of stock', 'essential-addons-for-elementor-lite' ),
+                'ai'      => [ 'active' => false ],
 		    ]
 	    );
 
@@ -3195,7 +3194,8 @@ class Product_Grid extends Widget_Base
                 if ( $found_posts > $args['posts_per_page'] ) {
 	                $this->print_load_more_button( $settings, $args, $dir_name );
                 }
-
+                
+                do_action( 'eael_woo_after_product_loop', $settings['eael_product_grid_style_preset'] );
                 ?>
             </div>
         </div>
