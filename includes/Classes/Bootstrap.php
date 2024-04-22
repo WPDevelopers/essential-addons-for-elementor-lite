@@ -326,6 +326,12 @@ class Bootstrap
 						    }
 					    }
 
+					    if ( isset( $element['widgetType'] ) && $element['widgetType'] === 'eicon-woocommerce' ) {
+						    if ( ! empty( $element['settings']['eael_product_grid_products_status'] ) ) {
+							    $element['settings']['eael_product_grid_products_status'] = [ 'publish' ];
+						    }
+					    }
+
 					    return $element;
 				    } );
 
