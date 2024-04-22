@@ -3163,7 +3163,6 @@ class Product_Grid extends Widget_Base
 
                 if ( file_exists( $template ) ) {
 	                $settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
-					var_dump($args);
 	                $query                    = new \WP_Query( $args );
 	                if ( $query->have_posts() ) {
 		                $found_posts        = $query->found_posts;
