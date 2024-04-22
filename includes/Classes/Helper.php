@@ -227,6 +227,10 @@ class Helper
 		    $args['post__not_in'] = $settings['post__not_in'];
 	    }
 
+        if( 'product' === $post_type && function_exists('whols_lite') ){
+            $args['meta_query'] = array_filter( apply_filters( 'woocommerce_product_query_meta_query', $args['meta_query'], new \WC_Query() ) );
+        }
+
         return $args;
     }
 
@@ -770,6 +774,9 @@ class Helper
                     'key'   => '_stock_status',
                     'value' => 'instock'
                 ];
+            }
+            if( 'product' === $args['post_type'] && function_exists('whols_lite') ){
+                $args['meta_query'] = array_filter( apply_filters( 'woocommerce_product_query_meta_query', $args['meta_query'], new \WC_Query() ) );
             }
         }
 
