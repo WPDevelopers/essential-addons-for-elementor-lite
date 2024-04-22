@@ -3626,7 +3626,7 @@ class Filterable_Gallery extends Widget_Base
         $gallery_markup = [];
         
         foreach ($gallery as $item) {
-            $html = '<div class="eael-filterable-gallery-item-wrap eael-cf-' . $item['controls'] . '" data-search-key="' . strtolower(str_replace(" ", "-", $item['title'])) . '">';
+            $html = '<div class="eael-filterable-gallery-item-wrap eael-cf-' . esc_attr( $item['controls'] ) . '" data-search-key="' . esc_attr( strtolower(str_replace(" ", "-", $item['title'])) ) . '">';
             $html .= '<div class="fg-layout-3-item eael-gallery-grid-item">';
             
             if ($settings['eael_section_fg_full_image_clickable']) {
@@ -3906,7 +3906,7 @@ class Filterable_Gallery extends Widget_Base
                 for ($i = 0; $i < $init_show; $i++) {
 
                     if (array_key_exists($i, $gallery_items)) {
-                        echo $gallery_items[$i];
+                        echo wp_kses( $gallery_items[$i], Helper::eael_allowed_tags() );
                     }
                 }
                 if ( $settings['eael_fg_caption_style'] === 'layout_3' ):
