@@ -197,38 +197,6 @@ trait Core
             }
         }
 
-        //
-        if ( $document->get_settings('eael_smooth_animation_section') == 'yes') {
-            $global_settings['eael_ext_smooth_animation'] = [
-                'post_id'                                          => $post_id,
-                'eael_smooth_animation_event_title'                => $document->get_settings('eael_smooth_animation_event_title'),
-                'eael_smooth_animation_event_function'             => $document->get_settings('eael_smooth_animation_event_function'),
-                'eael_smooth_animation_event_tigger'               => $document->get_settings('eael_smooth_animation_event_tigger'),
-                'eael_smooth_animation_event_target'               => $document->get_settings('eael_smooth_animation_event_target'),
-                'eael_smooth_animation_event_canvas_scrub'         => $document->get_settings('eael_smooth_animation_event_canvas_scrub'),
-                'eael_smooth_animation_toggleActions'              => $document->get_settings('eael_smooth_animation_toggleActions'),
-                'eael_smooth_animation_event_markers'              => $document->get_settings('eael_smooth_animation_event_markers'),
-                'eael_smooth_animation_event_canvas_setting'       => $document->get_settings('eael_smooth_animation_event_canvas_setting'),
-                'eael_smooth_animation_event_canvas_start'         => $document->get_settings('eael_smooth_animation_event_canvas_start'),
-                'eael_smooth_animation_event_canvas_end'           => $document->get_settings('eael_smooth_animation_event_canvas_end'),
-                'eael_smooth_animation_event_transform_setting'    => $document->get_settings('eael_smooth_animation_event_transform_setting'),
-                'eael_smooth_animation_event_transform_translatex' => $document->get_settings('eael_smooth_animation_event_transform_translatex'),
-                'eael_smooth_animation_event_transform_translatey' => $document->get_settings('eael_smooth_animation_event_transform_translatey'),
-                'eael_smooth_animation_event_transform_opacity'    => $document->get_settings('eael_smooth_animation_event_transform_opacity'),
-                'eael_smooth_animation_event_transform_scalex'     => $document->get_settings('eael_smooth_animation_event_transform_scalex'),
-                'eael_smooth_animation_event_transform_scaley'     => $document->get_settings('eael_smooth_animation_event_transform_scaley'),
-                'eael_smooth_animation_event_transform_rotate'     => $document->get_settings('eael_smooth_animation_event_transform_rotate'),
-                'eael_smooth_animation_event_animation_setting'    => $document->get_settings('eael_smooth_animation_event_animation_setting'),
-                'eael_smooth_animation_event_animation_easing'     => $document->get_settings('eael_smooth_animation_event_animation_easing'),
-                'eael_smooth_animation_event_animation_stagger'    => $document->get_settings('eael_smooth_animation_event_animation_stagger'),
-                'eael_smooth_animation_event_pin_setting'          => $document->get_settings('eael_smooth_animation_event_pin_setting'),
-                'eael_smooth_animation_event_pin_element'          => $document->get_settings('eael_smooth_animation_event_pin_element'),
-                'eael_smooth_animation_event_manual_setting'       => $document->get_settings('eael_smooth_animation_event_manual_setting'),
-                'eael_smooth_animation_event_canvas_duration'      => $document->get_settings('eael_smooth_animation_event_canvas_duration'),
-                'eael_smooth_animation_event_canvas_dely'          => $document->get_settings('eael_smooth_animation_event_canvas_dely'),
-            ];
-        }
-
         //save table of contents global value
         if ($document->get_settings('eael_ext_toc_global') == 'yes' && $document->get_settings('eael_ext_table_of_content') == 'yes') {
             $typography_fields = [
