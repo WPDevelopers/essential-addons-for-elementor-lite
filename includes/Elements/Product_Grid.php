@@ -3286,6 +3286,10 @@ class Product_Grid extends Widget_Base
             ];
         }
 
+        if( function_exists('whols_lite') ){
+            $args['meta_query'] = array_filter( apply_filters( 'woocommerce_product_query_meta_query', $args['meta_query'], new \WC_Query() ) );
+        }
+
         if ($settings['eael_product_grid_product_filter'] == 'featured-products') {
             $args['tax_query'] = [
                 'relation' => 'AND',
