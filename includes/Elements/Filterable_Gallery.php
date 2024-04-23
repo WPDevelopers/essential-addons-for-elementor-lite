@@ -3485,8 +3485,8 @@ class Filterable_Gallery extends Widget_Base
         $icon_url = isset($item['play_icon']['url']) ? $item['play_icon']['url'] : '';
         $video_url = isset($item['video_link']) ? $item['video_link'] : '#';
         $eael_privacy_notice = isset( $settings['eael_privacy_notice'] ) ? $settings['eael_privacy_notice'] : '';
-
-        $html .= '<a title="'.esc_attr( $eael_privacy_notice ).'" aria-label="eael-magnific-video-link" href="' . esc_url($video_url) . '" class="video-popup eael-magnific-link eael-magnific-link-clone active eael-magnific-video-link mfp-iframe">';
+        
+        $html .= '<a title="'.esc_attr( $eael_privacy_notice ) .'" aria-label="eael-magnific-video-link" href="' . esc_url($video_url) . '" class="video-popup eael-magnific-link eael-magnific-link-clone active eael-magnific-video-link mfp-iframe" data-elementor-open-lightbox="yes">';
 
         if( $show_video_popup_bg ){
             $html .= '<div class="video-popup-bg"></div>';
@@ -3916,7 +3916,7 @@ class Filterable_Gallery extends Widget_Base
                 ?>
                 <div id="eael-fg-no-items-found" style="display:none;">
                     <?php
-                       echo Helper::eael_wp_kses( $settings['eael_fg_not_found_text'] );
+                       echo wp_kses( $settings['eael_fg_not_found_text'], Helper::eael_allowed_tags() );
                     ?>
                 </div>
                 <?php endif; ?>
