@@ -9554,12 +9554,20 @@ msgstr ""
 msgid "You are not allowed to do this action"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:664
-msgid "<strong>🎉 Black Friday Exclusive:</strong> SAVE up to 40% & access to Essential Addons Pro features."
+#: ../includes/Traits/Admin.php:673
+msgid "Join us in celebrating 2 MILLION+ happy users and grab up to an exclusive 30% OFF on the most used Elementor addons!"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:666
-msgid "Grab The Offer"
+#: ../includes/Traits/Admin.php:675
+msgid "Upgrade To PRO Now"
+msgstr ""
+
+#: ../includes/Traits/Admin.php:677
+msgid "Give Me LIFETIME access"
+msgstr ""
+
+#: ../includes/Traits/Admin.php:679
+msgid "I don’t want to save money"
 msgstr ""
 
 #: ../includes/Traits/Ajax_Handler.php:95, ../includes/Traits/Ajax_Handler.php:610, ../includes/Traits/Login_Registration.php:94, ../includes/Traits/Login_Registration.php:246, ../includes/Traits/Login_Registration.php:766, ../includes/Traits/Login_Registration.php:941
