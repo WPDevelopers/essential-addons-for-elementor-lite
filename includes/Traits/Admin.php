@@ -655,6 +655,14 @@ trait Admin {
             .eael-black-friday-notice .wpnotice-content-wrapper .eael-black-friday-optin {
                 padding-left: 10px;
             }
+            a.eael-2m-notice-hide {
+                color: #2271b1;
+                text-decoration: underline;
+            }
+            a.eael-2m-notice-hide:hover {
+                color: #135e96;
+                text-decoration: underline;
+            }
         </style>
         <div class="wpnotice-wrapper notice notice-info is-dismissible eael-black-friday-notice">
             <div class="wpnotice-content-wrapper">
