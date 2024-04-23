@@ -670,7 +670,7 @@ trait Admin {
                     <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/icon-ea-logo.svg' ); ?>" width="25" alt="">
                 </div>
                 <div class="eael-black-friday-optin">
-					<p><?php _e( 'Join us in celebrating 2 MILLION+ happy users and grab up to an exclusive 30% OFF on the most used Elementor addons!', 'essential-addons-for-elementor-lite' ); ?></p>
+					<p><?php _e( 'Join us in celebrating <strong>2 MILLION+</strong> happy users and grab up to an exclusive 30% OFF on the most used Elementor addons!', 'essential-addons-for-elementor-lite' ); ?></p>
 					<p><a href="https://essential-addons.com/upgrade-to-ea-pro" target="_blank"
 						  class="button-primary"><?php _e( 'Upgrade To PRO Now', 'essential-addons-for-elementor-lite' ); ?></a>
 						<a href="https://essential-addons.com/ea-lifetime-access" target="_blank"
