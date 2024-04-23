@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 5.9.15
+Stable tag: 5.9.16
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -296,6 +296,17 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.9.16 - 23/04/2024 =
+
+- Improved: Security Enhancement
+- Fixed: EA Event Calendar | Table layout shows +6 hours ahead of events time in manual source 
+- Fixed: EA Woo Product Grid | not compatible with Whols plugin
+- Fixed: EA Woo Cart | Style-2 layout in mobile devices the "close" button style broken
+- Fixed: EA Interactive Circle | not allowing to click on icons sometimes
+- Fixed: EA Filterable Gallery | Images are not getting opened in lightbox
+- Improved: EA Table of Contents | Exclude the page title and the comment/review options
+- Few minor bug fixes & improvements
 
 = 5.9.15 - 09/04/2024 =
 
