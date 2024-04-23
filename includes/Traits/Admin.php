@@ -621,7 +621,8 @@ trait Admin {
 	public function eael_black_friday_optin_dismiss() {
 		check_ajax_referer( 'essential-addons-elementor', 'security' );
 
-		update_option( 'eael_black_friday_optin_hide', true );
+//		update_option( 'eael_black_friday_optin_hide', true );
+		set_transient( 'eael_2M_optin_hide', true, 20 * DAY_IN_SECONDS );
 		wp_send_json_success();
 	}
 
@@ -629,8 +630,8 @@ trait Admin {
 		$time     = time();
 		$ajax_url = admin_url( 'admin-ajax.php' );
 		$nonce    = wp_create_nonce( 'essential-addons-elementor' );
-		if ( $time > 1669852799 || get_option( 'eael_black_friday_optin_hide' ) || defined( 'EAEL_PRO_PLUGIN_VERSION' ) ) {
-			//return;
+		if ( $time > 1715126399 || get_transient( 'eael_2M_optin_hide' ) || defined( 'EAEL_PRO_PLUGIN_VERSION' ) ) {
+			return;
 		}
 		?>
         <style>
