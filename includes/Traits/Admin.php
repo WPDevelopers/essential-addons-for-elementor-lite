@@ -663,12 +663,12 @@ trait Admin {
                 </div>
                 <div class="eael-black-friday-optin">
 					<p><?php _e( 'Join us in celebrating 2 MILLION+ happy users and grab up to an exclusive 30% OFF on the most used Elementor addons!', 'essential-addons-for-elementor-lite' ); ?></p>
-					<p><a href="https://essential-addons.com/elementor/#pricing" target="_blank"
+					<p><a href="https://essential-addons.com/upgrade-to-ea-pro" target="_blank"
 						  class="button-primary"><?php _e( 'Upgrade To PRO Now', 'essential-addons-for-elementor-lite' ); ?></a>
-						<a href="https://essential-addons.com/elementor/#pricing" target="_blank"
+						<a href="https://essential-addons.com/ea-lifetime-access" target="_blank"
 						   class="button-secondary"><?php _e( 'Give Me LIFETIME access', 'essential-addons-for-elementor-lite' ); ?></a>
-						<a href="https://essential-addons.com/elementor/#pricing" target="_blank"
-						   class=""><?php _e( 'I don’t want to save money', 'essential-addons-for-elementor-lite' ); ?></a>
+						<a href="#" target="_blank"
+						   class="eael-2m-notice-hide"><?php _e( 'I don’t want to save money', 'essential-addons-for-elementor-lite' ); ?></a>
 					</p>
                 </div>
             </div>
@@ -676,7 +676,7 @@ trait Admin {
 
         <script>
             (function ($) {
-                $(document).on('click', '.eael-black-friday-notice button.notice-dismiss', function (e) {
+                $(document).on('click', '.eael-black-friday-notice button.notice-dismiss, .eael-2m-notice-hide', function (e) {
                     e.preventDefault();
 
                     var $notice_wrapper = $(this).closest('.eael-black-friday-notice');
