@@ -1066,6 +1066,7 @@ class Helper
 				'id'     => [],
 				'style'  => [],
 				'target' => [],
+				'data-elementor-open-lightbox' => [],
 			],
 			'q'       => [
 				'cite'  => [],
