@@ -648,7 +648,7 @@ trait Admin {
             }
             .eael-black-friday-notice .wpnotice-content-wrapper .eael-black-friday-optin-logo {
                 width: 50px;
-                padding: 10px 0 0;
+                padding: 26px 0 0;
                 text-align: center;
                 background: rgba(98, 0, 238, .1);
             }
