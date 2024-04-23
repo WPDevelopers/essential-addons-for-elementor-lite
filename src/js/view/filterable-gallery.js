@@ -30,6 +30,12 @@ jQuery(window).on("elementor/frontend/init", function () {
 			filterControls.removeClass("open-filters");
 		});
 
+		$('.video-popup.eael-magnific-video-link.playout-verticle', $scope).on('click', function(){
+			setTimeout(function(){
+				$('.mfp-iframe-holder').addClass('eael-gf-verticle-video-popup');
+			}, 1);
+		});
+
 		if (!isEditMode) {
 			var $gallery         = $(".eael-filter-gallery-container", $scope),
 				$settings        = $gallery.data("settings"),
