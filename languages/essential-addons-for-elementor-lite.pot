@@ -9555,7 +9555,7 @@ msgid "You are not allowed to do this action"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:673
-msgid "Join us in celebrating 2 MILLION+ happy users and grab up to an exclusive 30% OFF on the most used Elementor addons!"
+msgid "Join us in celebrating <strong>2 MILLION+</strong> happy users and grab up to an exclusive 30% OFF on the most used Elementor addons!"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:675
