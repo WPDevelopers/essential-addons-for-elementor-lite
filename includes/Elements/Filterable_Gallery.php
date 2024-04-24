@@ -625,8 +625,8 @@ class Filterable_Gallery extends Widget_Base
 						'title' => esc_html__( 'Horizontal', 'essential-addons-for-elementor-lite' ),
 						'icon' => 'eicon-justify-space-around-v',
 					],
-					'verticle' => [
-						'title' => esc_html__( 'Verticle', 'essential-addons-for-elementor-lite' ),
+					'vertical' => [
+						'title' => esc_html__( 'Vertical', 'essential-addons-for-elementor-lite' ),
 						'icon' => 'eicon-justify-space-around-h',
 					],
 				],
