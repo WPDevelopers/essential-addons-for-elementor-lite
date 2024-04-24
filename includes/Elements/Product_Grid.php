@@ -454,20 +454,22 @@ class Product_Grid extends Widget_Base
             ]
         ]);
 
-        $this->add_control(
-            'eael_product_grid_products_status',
-            [
-                'label' => __( 'Product Status', 'essential-addons-for-elementor-lite' ),
-                'type' => Controls_Manager::SELECT2,
-                'label_block' => true,
-                'multiple' => true,
-                'default' => [ 'publish', 'pending', 'future' ],
-                'options' => $this->eael_get_product_statuses(),
-                'condition' => [
-                    'eael_product_grid_product_filter!' => 'manual'
-                ]
-            ]
-        );
+	    if ( current_user_can( 'administrator' ) ) {
+		    $this->add_control(
+			    'eael_product_grid_products_status',
+			    [
+				    'label'       => __( 'Product Status', 'essential-addons-for-elementor-lite' ),
+				    'type'        => Controls_Manager::SELECT2,
+				    'label_block' => true,
+				    'multiple'    => true,
+				    'default'     => [ 'publish', 'pending', 'future' ],
+				    'options'     => $this->eael_get_product_statuses(),
+				    'condition'   => [
+					    'eael_product_grid_product_filter!' => 'manual'
+				    ]
+			    ]
+		    );
+	    }
 
         $this->add_control('eael_product_grid_categories', [
             'label' => esc_html__('Product Categories', 'essential-addons-for-elementor-lite'),
@@ -3284,6 +3286,10 @@ class Product_Grid extends Widget_Base
                 'key' => '_stock_status',
                 'value' => 'instock'
             ];
+        }
+
+        if( function_exists('whols_lite') ){
+            $args['meta_query'] = array_filter( apply_filters( 'woocommerce_product_query_meta_query', $args['meta_query'], new \WC_Query() ) );
         }
 
         if ($settings['eael_product_grid_product_filter'] == 'featured-products') {
