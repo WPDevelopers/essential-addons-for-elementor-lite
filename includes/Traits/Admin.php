@@ -621,7 +621,8 @@ trait Admin {
 	public function eael_black_friday_optin_dismiss() {
 		check_ajax_referer( 'essential-addons-elementor', 'security' );
 
-		update_option( 'eael_black_friday_optin_hide', true );
+//		update_option( 'eael_black_friday_optin_hide', true );
+		set_transient( 'eael_2M_optin_hide', true, 20 * DAY_IN_SECONDS );
 		wp_send_json_success();
 	}
 
@@ -629,7 +630,7 @@ trait Admin {
 		$time     = time();
 		$ajax_url = admin_url( 'admin-ajax.php' );
 		$nonce    = wp_create_nonce( 'essential-addons-elementor' );
-		if ( $time > 1669852799 || get_option( 'eael_black_friday_optin_hide' ) || defined( 'EAEL_PRO_PLUGIN_VERSION' ) ) {
+		if ( $time > 1715126399 || get_transient( 'eael_2M_optin_hide' ) || defined( 'EAEL_PRO_PLUGIN_VERSION' ) ) {
 			return;
 		}
 		?>
@@ -647,12 +648,20 @@ trait Admin {
             }
             .eael-black-friday-notice .wpnotice-content-wrapper .eael-black-friday-optin-logo {
                 width: 50px;
-                padding: 10px 0 0;
+                padding: 26px 0 0;
                 text-align: center;
                 background: rgba(98, 0, 238, .1);
             }
             .eael-black-friday-notice .wpnotice-content-wrapper .eael-black-friday-optin {
                 padding-left: 10px;
+            }
+            a.eael-2m-notice-hide {
+                color: #2271b1;
+                text-decoration: underline;
+            }
+            a.eael-2m-notice-hide:hover {
+                color: #135e96;
+                text-decoration: underline;
             }
         </style>
         <div class="wpnotice-wrapper notice notice-info is-dismissible eael-black-friday-notice">
@@ -661,17 +670,21 @@ trait Admin {
                     <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/icon-ea-logo.svg' ); ?>" width="25" alt="">
                 </div>
                 <div class="eael-black-friday-optin">
-                    <p><?php _e( '<strong>🎉 Black Friday Exclusive:</strong> SAVE up to 40% & access to Essential Addons Pro features.', 'essential-addons-for-elementor-lite' ); ?>
-                        <a href="https://essential-addons.com/elementor/#pricing" target="_blank"
-                           class="button-primary"><?php _e( 'Grab The Offer', 'essential-addons-for-elementor-lite' ); ?></a>
-                    </p>
+					<p><?php _e( 'Join us in celebrating <strong>2 MILLION+</strong> happy users and grab up to an exclusive 30% OFF on the most used Elementor addons!', 'essential-addons-for-elementor-lite' ); ?></p>
+					<p><a href="https://essential-addons.com/upgrade-to-ea-pro" target="_blank"
+						  class="button-primary"><?php _e( 'Upgrade To PRO Now', 'essential-addons-for-elementor-lite' ); ?></a>
+						<a href="https://essential-addons.com/ea-lifetime-access" target="_blank"
+						   class="button-secondary"><?php _e( 'Give Me LIFETIME access', 'essential-addons-for-elementor-lite' ); ?></a>
+						<a href="#" target="_blank"
+						   class="eael-2m-notice-hide"><?php _e( 'I don’t want to save money', 'essential-addons-for-elementor-lite' ); ?></a>
+					</p>
                 </div>
             </div>
         </div>
 
         <script>
             (function ($) {
-                $(document).on('click', '.eael-black-friday-notice button.notice-dismiss', function (e) {
+                $(document).on('click', '.eael-black-friday-notice button.notice-dismiss, .eael-2m-notice-hide', function (e) {
                     e.preventDefault();
 
                     var $notice_wrapper = $(this).closest('.eael-black-friday-notice');

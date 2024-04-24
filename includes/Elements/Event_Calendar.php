@@ -3161,12 +3161,18 @@ class Event_Calendar extends Widget_Base
 
 					$start_time = strtotime( $event['start'] );
 					$end_time   = strtotime( $event['end'] );
-					$start      = wp_date( $date_format, $start_time, $start_timezone );
-					$end        = wp_date( $date_format, $end_time, $end_timezone );
-                    $same_day   = wp_date( 'Ymd', $start_time, $start_timezone ) === wp_date( 'Ymd', $end_time, $end_timezone );
+                    if( '' !== $start_timezone && '' !== $end_timezone  ){
+                        $start    = wp_date( $date_format, $start_time, $start_timezone );
+					    $end      = wp_date( $date_format, $end_time, $end_timezone );
+                        $same_day = wp_date( 'Ymd', $start_time, $start_timezone ) === wp_date( 'Ymd', $end_time, $end_timezone );
+                    } else{
+                        $start    = date( $date_format, $start_time );
+                        $end      = date( $date_format, $end_time );
+                        $same_day = date( 'Ymd', $start_time ) === date( 'Ymd', $end_time );
+                    }
                     
 					if ( $time_format && $same_day ) {
-						$end = wp_date( $time_format, $end_time, $end_timezone );
+						$end = '' !== $start_timezone && '' !== $end_timezone ? wp_date( $time_format, $end_time, $end_timezone ) : date( $time_format, $end_time ) ;
 					}else if( ! $time_format && $same_day ){
                         $end = '';
                     }
