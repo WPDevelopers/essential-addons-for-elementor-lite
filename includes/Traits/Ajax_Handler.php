@@ -85,6 +85,7 @@ trait Ajax_Handler {
 		do_action( 'eael_before_ajax_load_more', $_REQUEST );
 
 		wp_parse_str( $_POST['args'], $args );
+		$args['post_status'] = 'publish';
 
 		if ( isset( $args['date_query']['relation'] ) ) {
 			$args['date_query']['relation'] = HelperClass::eael_sanitize_relation( $args['date_query']['relation'] );
@@ -265,7 +266,9 @@ trait Ajax_Handler {
 			}
 		}
 
-
+		if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' ) {
+			do_action( 'eael_woo_after_product_loop', $settings['eael_product_grid_style_preset'] );
+		}
 		while ( ob_get_status() ) {
 			ob_end_clean();
 		}
@@ -318,6 +321,7 @@ trait Ajax_Handler {
 		$settings['eael_page_id']   = $page_id;
 		$settings['eael_widget_id'] = $widget_id;
 		wp_parse_str( $_REQUEST['args'], $args );
+		$args['post_status'] = array_intersect( $settings['eael_product_grid_products_status'], [ 'publish', 'draft', 'pending', 'future' ] );
 
 		if ( isset( $args['date_query']['relation'] ) ) {
 			$args['date_query']['relation'] = HelperClass::eael_sanitize_relation( $args['date_query']['relation'] );
@@ -596,6 +600,7 @@ trait Ajax_Handler {
 		$ajax = wp_doing_ajax();
 
 		wp_parse_str( $_POST['args'], $args );
+		$args['post_status'] = 'publish';
 
 		if ( isset( $args['date_query']['relation'] ) ) {
 			$args['date_query']['relation'] = HelperClass::eael_sanitize_relation( $args['date_query']['relation'] );
