@@ -227,6 +227,10 @@ class Helper
 		    $args['post__not_in'] = $settings['post__not_in'];
 	    }
 
+        if( 'product' === $post_type && function_exists('whols_lite') ){
+            $args['meta_query'] = array_filter( apply_filters( 'woocommerce_product_query_meta_query', $args['meta_query'], new \WC_Query() ) );
+        }
+
         return $args;
     }
 
@@ -681,7 +685,7 @@ class Helper
 		global $product;
 
 		if ( ! is_a( $product, 'WC_Product' ) ) {
-			return;
+			return ''; 
 		}
 
 		$separator = '';
@@ -770,6 +774,9 @@ class Helper
                     'key'   => '_stock_status',
                     'value' => 'instock'
                 ];
+            }
+            if( 'product' === $args['post_type'] && function_exists('whols_lite') ){
+                $args['meta_query'] = array_filter( apply_filters( 'woocommerce_product_query_meta_query', $args['meta_query'], new \WC_Query() ) );
             }
         }
 
@@ -908,7 +915,7 @@ class Helper
 	 */
 	public static function eael_pagination ($args, $settings) {
 
-		$pagination_Count          = intval( $args['total_post'] );
+		$pagination_Count          = intval( $args['total_post'] ?? 0 );
 		$paginationLimit           = intval( $settings['eael_product_grid_products_count'] ) ?: 4;
 		$pagination_Paginationlist = ceil( $pagination_Count / $paginationLimit );
 		$widget_id                 = sanitize_key( $settings['eael_widget_id'] );
@@ -1059,6 +1066,7 @@ class Helper
 				'id'     => [],
 				'style'  => [],
 				'target' => [],
+				'data-elementor-open-lightbox' => [],
 			],
 			'q'       => [
 				'cite'  => [],
@@ -1291,8 +1299,54 @@ class Helper
 				'colspan' => [],
 				'rowspan' => [],
 			],
+			'header'      => [
+				'class'   => [],
+				'id'      => [],
+				'style'   => [],
+			],
 		];
 	}
+
+    /**
+     * List of allowed icon/svg tags for wp_kses
+     *
+	 * eael_allowed_icon_tags
+	 * @return array
+	 */
+    public static function eael_allowed_icon_tags(){
+        return [
+            'svg'   => [
+                'class'           => [],
+                'aria-hidden'     => [],
+                'aria-labelledby' => [],
+                'role'            => [],
+                'xmlns'           => [],
+                'width'           => [],
+                'height'          => [],
+                'viewbox'         => []
+            ],
+            'g'     => [ 'fill'  => [] ],
+            'title' => [ 'title' => [] ],
+            'path'     => [
+                'd'    => [], 
+                'fill' => [] 
+            ],
+			'i'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+            'img'     => [
+				'src'    => [],
+				'alt'    => [],
+				'height' => [],
+				'width'  => [],
+				'class'  => [],
+				'id'     => [],
+				'style'  => []
+			],
+        ];
+    }
 
     public static function eael_fetch_color_or_global_color($settings, $control_name=''){
         if( !isset($settings[$control_name])) {

@@ -118,7 +118,8 @@ function ea_conditional_logic_type_title(value) {
         browser: eael_select2_localize.cl_browser,
         date_time: eael_select2_localize.cl_date_time,
         recurring_day: eael_select2_localize.cl_recurring_day,
-        query_string: eael_select2_localize.cl_query_string
+        query_string: eael_select2_localize.cl_query_string,
+        visit_count: eael_select2_localize.cl_visit_count,
     };
 
     return labelValues[value] ? labelValues[value] : '';
