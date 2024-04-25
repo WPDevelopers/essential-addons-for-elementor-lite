@@ -27,7 +27,7 @@
   border-bottom: none;
 }
 .ea-woo-checkout .woocommerce .woo-checkout-login a, .ea-woo-checkout .woocommerce .woo-checkout-coupon a {
-  color: #7866ff;
+  color: #432cf9;
 }
 .ea-woo-checkout .woocommerce .woo-checkout-login a :hover, .ea-woo-checkout .woocommerce .woo-checkout-coupon a :hover {
   color: #443D6D;
@@ -717,4 +717,13 @@
 .theme-dt-the7 .ea-woo-checkout-btn-prev,
 .theme-dt-the7 .ea-woo-checkout-btn-next {
   border: none;
+}
+body.eael-woo-checkout .astra-pro-wc-module-activated.ea-woo-checkout .woocommerce form .form-row label {
+  opacity: 1 !important;
+  position: relative !important;
+  font-weight: 700 !important;
+  font-size: 0.9rem !important;
+}
+body.eael-woo-checkout .astra-pro-wc-module-activated.ea-woo-checkout .woocommerce form .form-row input, body.eael-woo-checkout .astra-pro-wc-module-activated.ea-woo-checkout .woocommerce form .form-row select, body.eael-woo-checkout .astra-pro-wc-module-activated.ea-woo-checkout .woocommerce form .form-row textarea {
+  padding: 0.9em 0.8em !important;
 }
