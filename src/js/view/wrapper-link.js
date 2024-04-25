@@ -6,7 +6,7 @@ let EaelWrapperLink = function ($scope, $) {
         $scope.on('click', function () {
             let anchor = document.createElement('a');
 
-            anchor.href = wrapperData.url;
+            anchor.href = ea.sanitizeURL(wrapperData.url);
             anchor.target = target;
 
             if (wrapperData.nofollow === 'on') {
