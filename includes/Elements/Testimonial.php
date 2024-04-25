@@ -577,7 +577,7 @@ class Testimonial extends Widget_Base {
 			[
 				'label' => esc_html__( 'Testimonial Text Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
-				'default' => '#7a7a7a',
+				'default' => '#292929',
 				'selectors' => [
 					'{{WRAPPER}} .eael-testimonial-content .eael-testimonial-text' => 'color: {{VALUE}};',
 				],
@@ -610,6 +610,34 @@ class Testimonial extends Widget_Base {
 				'label' => __( 'Rating', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::HEADING,
 				'separator'	=> 'before'
+			]
+		);
+
+		$this->add_control(
+			'eael_testimonial_rating_item_color',
+			[
+				'label'     => esc_html__( 'Rating Color', 'essential-addons-for-elementor-lite'),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#f2b01e',
+				'selectors' => [
+					'{{WRAPPER}} .rating-five .testimonial-star-rating li i' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .rating-one .testimonial-star-rating li:first-child i' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .rating-two .testimonial-star-rating li:nth-child(1) i, {{WRAPPER}} .rating-two .testimonial-star-rating li:nth-child(2) i' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .rating-three .testimonial-star-rating li:nth-child(1) i, {{WRAPPER}} .rating-three .testimonial-star-rating li:nth-child(2) i, {{WRAPPER}} .rating-three .testimonial-star-rating li:nth-child(3) i' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .rating-four .testimonial-star-rating li:nth-child(1) i, {{WRAPPER}} .rating-four .testimonial-star-rating li:nth-child(2) i, {{WRAPPER}} .rating-four .testimonial-star-rating li:nth-child(3) i, {{WRAPPER}} .rating-four .testimonial-star-rating li:nth-child(4) i' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_testimonial_rating_item_size',
+			[
+				'label'      => esc_html__( 'Rating Size', 'essential-addons-for-elementor-lite'),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-testimonial-content .testimonial-star-rating li i' => 'font-size: {{SIZE}}{{UNIT}};',
+				],
 			]
 		);
 
