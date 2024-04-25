@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("var PostGrid = function PostGrid($scope, $) {\n  var $gallery = $(\".eael-post-appender\", $scope),\n    $layout_mode = $gallery.data('layout-mode');\n  if ($layout_mode === 'masonry') {\n    $gallery.isotope({\n      itemSelector: \".eael-grid-post\",\n      layoutMode: $layout_mode,\n      percentPosition: true\n    });\n\n    // layout gal, while images are loading\n    $gallery.imagesLoaded().progress(function () {\n      $gallery.isotope(\"layout\");\n    });\n  }\n};\njQuery(window).on(\"elementor/frontend/init\", function () {\n  elementorFrontend.hooks.addAction(\"frontend/element_ready/eael-post-grid.default\", PostGrid);\n});\n\n//# sourceURL=webpack:///./src/js/view/post-grid.js?");
+eval("var PostGrid = function PostGrid($scope, $) {\n  var $gallery = $(\".eael-post-appender\", $scope),\n    $layout_mode = $gallery.data('layout-mode'),\n    isRTL = $('body').hasClass('rtl');\n  if ($layout_mode === 'masonry') {\n    $gallery.isotope({\n      itemSelector: \".eael-grid-post\",\n      layoutMode: $layout_mode,\n      percentPosition: true,\n      isOriginLeft: !isRTL\n    });\n\n    // layout gal, while images are loading\n    $gallery.imagesLoaded().progress(function () {\n      $gallery.isotope(\"layout\");\n    });\n  }\n};\njQuery(window).on(\"elementor/frontend/init\", function () {\n  elementorFrontend.hooks.addAction(\"frontend/element_ready/eael-post-grid.default\", PostGrid);\n});\n\n//# sourceURL=webpack:///./src/js/view/post-grid.js?");
 
 /***/ })
 
