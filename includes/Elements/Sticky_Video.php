@@ -768,9 +768,9 @@ class Sticky_Video extends Widget_Base
             if ('yes' === $settings['eaelsv_overlay_play_icon']) {
                 if ($iconNew['value'] != '') {
                     if (is_array($iconNew['value'])) {
-                        $icon = '<img src="' . $iconNew['value']['url'] .  '" width="100">';
+                        $icon = '<img src="' . esc_url( $iconNew['value']['url'] ) .  '" width="100">';
                     } else {
-                        $icon = '<i class="' . $iconNew['value'] . '"></i>';
+                        $icon = '<i class="' . esc_attr( $iconNew['value'] ) . '"></i>';
                     }
                 } else {
                     $icon = '<i class="eicon-play"></i>';

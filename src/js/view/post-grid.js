@@ -1,12 +1,14 @@
 var PostGrid = function($scope, $) {
     var $gallery = $(".eael-post-appender", $scope),
-        $layout_mode = $gallery.data('layout-mode');
+        $layout_mode = $gallery.data('layout-mode'),
+        isRTL = $('body').hasClass('rtl');
         
     if($layout_mode === 'masonry') {
         $gallery.isotope({
             itemSelector: ".eael-grid-post",
             layoutMode: $layout_mode,
-            percentPosition: true
+            percentPosition: true,
+            isOriginLeft: !isRTL
         });
 
         // layout gal, while images are loading

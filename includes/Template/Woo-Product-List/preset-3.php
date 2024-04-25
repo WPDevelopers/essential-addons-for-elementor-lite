@@ -97,9 +97,9 @@ $woo_product_list_loop = Woo_Product_List::get_woo_product_list_loop_settings( $
                 <?php endif; ?>
 
                 <?php if ( $woo_product_list['price_show'] ) : ?>
-                <h4 class="eael-product-list-price">
+                <h3 class="eael-product-list-price">
                     <?php echo wp_kses_post( $product->get_price_html() ); ?>
-                </h4>
+                </h3>
                 <?php endif; ?>
             </div>
             <div class="eael-product-list-content-footer">
