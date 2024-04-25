@@ -939,7 +939,7 @@ class Progress_Bar extends Widget_Base
                 'style' => '-webkit-transition-duration:' . $settings['progress_bar_animation_duration']['size'] . 'ms;-o-transition-duration:' . $settings['progress_bar_animation_duration']['size'] . 'ms;transition-duration:' . $settings['progress_bar_animation_duration']['size'] . 'ms;',
             ]);
 
-            echo '<div class="eael-progressbar-line-container ' . $settings['progress_bar_line_alignment'] . '">
+            echo '<div class="eael-progressbar-line-container ' . esc_attr( $settings['progress_bar_line_alignment'] ) . '">
                 ' . ($settings['progress_bar_title'] ? sprintf('<%1$s class="%2$s">', Helper::eael_validate_html_tag($settings['progress_bar_title_html_tag']), 'eael-progressbar-title') . Helper::eael_wp_kses($settings['progress_bar_title']) . sprintf('</%1$s>', Helper::eael_validate_html_tag($settings['progress_bar_title_html_tag'])) : '') . '
 
                 <div ' . $this->get_render_attribute_string('eael-progressbar-line') . '>
@@ -963,7 +963,7 @@ class Progress_Bar extends Widget_Base
                 ]
             );
 
-            echo '<div class="eael-progressbar-circle-container ' . $settings['progress_bar_circle_alignment'] . '">
+            echo '<div class="eael-progressbar-circle-container ' . esc_attr( $settings['progress_bar_circle_alignment'] ) . '">
                 ' . ($settings['progress_bar_circle_box_shadow_box_shadow'] ? '<div class="eael-progressbar-circle-shadow">' : '') . '
 
                 <div ' . $this->get_render_attribute_string('eael-progressbar-circle') . '>
@@ -1010,7 +1010,7 @@ class Progress_Bar extends Widget_Base
                 ]
             );
 
-            echo '<div class="eael-progressbar-circle-container ' . $settings['progress_bar_circle_alignment'] . '">
+            echo '<div class="eael-progressbar-circle-container ' . esc_attr( $settings['progress_bar_circle_alignment'] ) . '">
                 <div ' . $this->get_render_attribute_string('eael-progressbar-half-circle') . '>
                     <div class="eael-progressbar-circle">
                         <div class="eael-progressbar-circle-pie">
