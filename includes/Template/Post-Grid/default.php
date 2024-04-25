@@ -55,7 +55,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                         echo '<a
                                     class="eael-grid-post-link"
                                     href="' . get_the_permalink() . '"
-                                    title="' . get_the_title() . '"' . $link_settings['title_link_nofollow'] . '' . $link_settings['title_link_target_blank'] . '>';
+                                    title="' . strip_tags( get_the_title() ) . '"' . $link_settings['title_link_nofollow'] . '' . $link_settings['title_link_target_blank'] . '>';
 
                         if (empty($settings['eael_title_length'])) {
                             echo get_the_title();
@@ -213,7 +213,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
             echo '<a
                         class="eael-grid-post-link"
                         href="' . get_the_permalink() . '"
-                        title="' . get_the_title() . '"' . $link_settings['title_link_nofollow'] . '' . $link_settings['title_link_target_blank'] . '>';
+                        title="' . strip_tags( get_the_title() ) . '"' . $link_settings['title_link_nofollow'] . '' . $link_settings['title_link_target_blank'] . '>';
 
             if (empty($settings['eael_title_length'])) {
                 echo get_the_title();
@@ -304,7 +304,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
             echo '<a
                         class="eael-grid-post-link"
                         href="' . get_the_permalink() . '"
-                        title="' . get_the_title() . '"' . $link_settings['title_link_nofollow'] . '' . $link_settings['title_link_target_blank'] . '>';
+                        title="' . strip_tags( get_the_title() ) . '"' . $link_settings['title_link_nofollow'] . '' . $link_settings['title_link_target_blank'] . '>';
 
             if (empty($settings['eael_title_length'])) {
                 echo get_the_title();
