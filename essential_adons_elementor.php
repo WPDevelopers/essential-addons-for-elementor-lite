@@ -3,7 +3,6 @@
  * Plugin Name: Essential Addons for Elementor
  * Description: The Essential plugin you install after Elementor! Packed with 40+ stunning free elements including Advanced Data Table, Event Calendar, Filterable Gallery, WooCommerce, and many more.
  * Plugin URI: https://essential-addons.com/elementor/
- * Requires Plugins: elementor
  * Author: WPDeveloper
  * Version: 5.9.16
  * Author URI: https://wpdeveloper.com/
