@@ -578,7 +578,7 @@ class Creative_Button extends Widget_Base
         }
 
         if ($settings['creative_button_link_url']['is_external']) {
-            $this->add_render_attribute('eael_creative_button', 'target', '_blank');
+            $this->add_render_attribute('eael_creative_button', 'target');
         }
 
         if ($settings['creative_button_link_url']['nofollow']) {
