@@ -94,7 +94,7 @@
                         background: $nav-item-initial-background;
                         border: $nav-item-border-width solid $nav-item-border-color;
                         box-shadow: $nav-item-box-shadow;
-                        z-index: 0;
+                        z-index: 9;
                         .eael-circle-icon-shapes {
                             display: none;
                         }
