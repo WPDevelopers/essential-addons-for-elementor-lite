@@ -125,7 +125,7 @@
   -webkit-transform: translateX(-50%);
       -ms-transform: translateX(-50%);
           transform: translateX(-50%);
-  margin: 1px auto 0 auto;
+  margin: 10px auto 0 auto;
 }
 
 .eael-tooltip .eael-tooltip-text.eael-tooltip-bottom::after {
