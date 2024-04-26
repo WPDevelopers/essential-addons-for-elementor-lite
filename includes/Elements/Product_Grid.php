@@ -454,20 +454,22 @@ class Product_Grid extends Widget_Base
             ]
         ]);
 
-        $this->add_control(
-            'eael_product_grid_products_status',
-            [
-                'label' => __( 'Product Status', 'essential-addons-for-elementor-lite' ),
-                'type' => Controls_Manager::SELECT2,
-                'label_block' => true,
-                'multiple' => true,
-                'default' => [ 'publish', 'pending', 'future' ],
-                'options' => $this->eael_get_product_statuses(),
-                'condition' => [
-                    'eael_product_grid_product_filter!' => 'manual'
-                ]
-            ]
-        );
+	    if ( current_user_can( 'administrator' ) ) {
+		    $this->add_control(
+			    'eael_product_grid_products_status',
+			    [
+				    'label'       => __( 'Product Status', 'essential-addons-for-elementor-lite' ),
+				    'type'        => Controls_Manager::SELECT2,
+				    'label_block' => true,
+				    'multiple'    => true,
+				    'default'     => [ 'publish', 'pending', 'future' ],
+				    'options'     => $this->eael_get_product_statuses(),
+				    'condition'   => [
+					    'eael_product_grid_product_filter!' => 'manual'
+				    ]
+			    ]
+		    );
+	    }
 
         $this->add_control('eael_product_grid_categories', [
             'label' => esc_html__('Product Categories', 'essential-addons-for-elementor-lite'),
@@ -1846,11 +1848,10 @@ class Product_Grid extends Widget_Base
 	    $this->add_control(
 		    'eael_product_stockout_text',
 		    [
-			    'label'       => esc_html__( 'Stock Out Text', 'essential-addons-for-elementor-lite' ),
-			    'type'        => Controls_Manager::TEXT,
-                'ai' => [
-					'active' => false,
-				],
+			    'label'   => esc_html__( 'Stock Out Text', 'essential-addons-for-elementor-lite' ),
+			    'type'    => Controls_Manager::TEXT,
+                'default' => esc_html__( 'Out of stock', 'essential-addons-for-elementor-lite' ),
+                'ai'      => [ 'active' => false ],
 		    ]
 	    );
 
@@ -3196,7 +3197,8 @@ class Product_Grid extends Widget_Base
                 if ( $found_posts > $args['posts_per_page'] ) {
 	                $this->print_load_more_button( $settings, $args, $dir_name );
                 }
-
+                
+                do_action( 'eael_woo_after_product_loop', $settings['eael_product_grid_style_preset'] );
                 ?>
             </div>
         </div>
@@ -3285,6 +3287,10 @@ class Product_Grid extends Widget_Base
                 'key' => '_stock_status',
                 'value' => 'instock'
             ];
+        }
+
+        if( function_exists('whols_lite') ){
+            $args['meta_query'] = array_filter( apply_filters( 'woocommerce_product_query_meta_query', $args['meta_query'], new \WC_Query() ) );
         }
 
         if ($settings['eael_product_grid_product_filter'] == 'featured-products') {
