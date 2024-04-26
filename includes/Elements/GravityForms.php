@@ -571,6 +571,226 @@ class GravityForms extends Widget_Base {
         
         $this->end_controls_section();
 
+	    /**
+	     * Style Tab: Form progress bar
+	     * -------------------------------------------------
+	     */
+	    $this->start_controls_section(
+		    'eael_gform_progressbar_styling',
+		    [
+			    'label' => __( 'Progress Bar', 'essential-addons-for-elementor-lite' ),
+			    'tab'   => Controls_Manager::TAB_STYLE,
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_gform_progressbar_title_heading',
+		    [
+			    'label' => __( 'Title', 'essential-addons-for-elementor-lite' ),
+			    'type'  => Controls_Manager::HEADING,
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_gform_progressbar_title_color',
+		    [
+			    'label'     => __( 'Text Color', 'essential-addons-for-elementor-lite' ),
+			    'type'      => Controls_Manager::COLOR,
+			    'default'   => '',
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-gravity-form .gf_progressbar_wrapper .gf_progressbar_title' => 'color: {{VALUE}}',
+			    ],
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    Group_Control_Typography::get_type(),
+		    [
+			    'name'     => 'eael_gform_progressbar_title_typography',
+			    'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
+			    'global'   => [
+				    'default' => Global_Typography::TYPOGRAPHY_ACCENT
+			    ],
+			    'selector' => '{{WRAPPER}} .eael-gravity-form .gf_progressbar_wrapper .gf_progressbar_title',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_gform_progressbar_title_align',
+		    [
+			    'label'     => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
+			    'type'      => \Elementor\Controls_Manager::CHOOSE,
+			    'options'   => [
+				    'left'   => [
+					    'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+					    'icon'  => 'eicon-text-align-left',
+				    ],
+				    'center' => [
+					    'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
+					    'icon'  => 'eicon-text-align-center',
+				    ],
+				    'right'  => [
+					    'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+					    'icon'  => 'eicon-text-align-right',
+				    ],
+			    ],
+			    'toggle'    => true,
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-gravity-form .gf_progressbar_wrapper .gf_progressbar_title' => 'text-align: {{VALUE}};',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_gform_progressbar_container',
+		    [
+			    'label'     => __( 'Progress Bar', 'essential-addons-for-elementor-lite' ),
+			    'type'      => Controls_Manager::HEADING,
+			    'separator' => 'before',
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    \Elementor\Group_Control_Background::get_type(),
+		    [
+			    'name'           => 'eael_gform_progressbar_color',
+			    'types'          => [ 'classic', 'gradient' ],
+			    'exclude'        => [ 'image' ],
+			    'fields_options' => [
+				    'background' => [
+					    'label' => __( 'Color', 'essential-addons-for-elementor-lite' ),
+				    ]
+			    ],
+			    'selector'       => '{{WRAPPER}} .eael-gravity-form .gf_progressbar_wrapper .gf_progressbar .gf_progressbar_percentage',
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    \Elementor\Group_Control_Background::get_type(),
+		    [
+			    'name'           => 'eael_gform_progressbar_background_color',
+			    'types'          => [ 'classic', 'gradient' ],
+			    'exclude'        => [ 'image' ],
+			    'separator'      => 'before',
+			    'fields_options' => [
+				    'background' => [
+					    'label' => __( 'Background', 'essential-addons-for-elementor-lite' ),
+				    ]
+			    ],
+			    'selector'       => '{{WRAPPER}} .eael-gravity-form .gf_progressbar_wrapper .gf_progressbar',
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    Group_Control_Border::get_type(),
+		    [
+			    'name'     => 'eael_gform_progressbar_border',
+			    'selector' => '{{WRAPPER}} .eael-gravity-form .gf_progressbar_wrapper .gf_progressbar',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_gform_progressbar_border_radius',
+		    [
+			    'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+			    'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+			    'size_units' => [ 'px', '%', 'em' ],
+			    'condition'  => [
+				    'eael_gform_progressbar_border_border!' => 'none'
+			    ],
+			    'selectors'  => [
+				    '{{WRAPPER}} .eael-gravity-form .gf_progressbar_wrapper .gf_progressbar'                            => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				    '{{WRAPPER}} .eael-gravity-form .gf_progressbar_wrapper .gf_progressbar .gf_progressbar_percentage' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_gform_progressbar_height',
+		    [
+			    'label'      => esc_html__( 'Height', 'essential-addons-for-elementor-lite' ),
+			    'type'       => \Elementor\Controls_Manager::SLIDER,
+			    'size_units' => [ 'px', '%', 'em' ],
+			    'range'      => [
+				    'px' => [
+					    'min'  => 0,
+					    'max'  => 1000,
+					    'step' => 5,
+				    ],
+				    '%'  => [
+					    'min' => 0,
+					    'max' => 100,
+				    ],
+			    ],
+			    'selectors'  => [
+				    '{{WRAPPER}} .eael-gravity-form .gf_progressbar_wrapper .gf_progressbar .gf_progressbar_percentage' => 'align-items: center;height: {{SIZE}}{{UNIT}};',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_gform_progressbar_percentage_text',
+		    [
+			    'label'     => __( 'Percentage Text', 'essential-addons-for-elementor-lite' ),
+			    'type'      => Controls_Manager::HEADING,
+			    'separator' => 'before'
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_gform_progressbar_percentage_text_color',
+		    [
+			    'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
+			    'type'      => Controls_Manager::COLOR,
+			    'default'   => '',
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-gravity-form .gf_progressbar_wrapper .gf_progressbar .gf_progressbar_percentage' => 'color: {{VALUE}}',
+			    ],
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    Group_Control_Typography::get_type(),
+		    [
+			    'name'     => 'eael_gform_progressbar_percentage_text_typography',
+			    'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
+			    'global'   => [
+				    'default' => Global_Typography::TYPOGRAPHY_ACCENT
+			    ],
+			    'selector' => '{{WRAPPER}} .eael-gravity-form .gf_progressbar_wrapper .gf_progressbar .gf_progressbar_percentage,
+                {{WRAPPER}} .eael-gravity-form .gf_progressbar_wrapper .gf_progressbar .gf_progressbar_percentage span',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_gform_progressbar_percentage_text_align',
+		    [
+			    'label'     => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
+			    'type'      => Controls_Manager::CHOOSE,
+			    'options'   => [
+				    'start'  => [
+					    'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+					    'icon'  => 'eicon-text-align-left',
+				    ],
+				    'center' => [
+					    'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
+					    'icon'  => 'eicon-text-align-center',
+				    ],
+				    'end'    => [
+					    'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+					    'icon'  => 'eicon-text-align-right',
+				    ],
+			    ],
+			    'default'   => 'end',
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-gravity-form .gf_progressbar_wrapper .gf_progressbar .gf_progressbar_percentage' => 'display: flex;justify-content: {{VALUE}};',
+			    ],
+		    ]
+	    );
+
+
+	    $this->end_controls_section();
+
         /**
          * Style Tab: Labels
          * -------------------------------------------------
