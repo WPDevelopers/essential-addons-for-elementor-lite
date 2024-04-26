@@ -100,8 +100,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  -webkit-clip-path: inset(0 0 0 50%);
-          clip-path: inset(0 0 0 50%);
+  clip-path: inset(0 0 0 50%);
 }
 .eael-progressbar-circle-inner {
   height: 100%;
@@ -121,8 +120,7 @@
   border-style: solid;
   border-color: #000000;
   border-radius: 50%;
-  -webkit-clip-path: inset(0 50% 0 0);
-          clip-path: inset(0 50% 0 0);
+  clip-path: inset(0 50% 0 0);
 }
 .eael-progressbar-circle-half-left {
   -webkit-transform: rotate(0deg);
@@ -151,12 +149,10 @@
   overflow: hidden;
 }
 .eael-progressbar-half-circle .eael-progressbar-circle-pie {
-  -webkit-clip-path: inset(0 0 50% 0);
-          clip-path: inset(0 0 50% 0);
+  clip-path: inset(0 0 50% 0);
 }
 .eael-progressbar-half-circle .eael-progressbar-circle-half {
-  -webkit-clip-path: inset(50% 0 0 0);
-          clip-path: inset(50% 0 0 0);
+  clip-path: inset(50% 0 0 0);
   -webkit-transform: rotate(0deg);
       -ms-transform: rotate(0deg);
           transform: rotate(0deg);
@@ -238,12 +234,10 @@
   right: 0;
 }
 .rtl .eael-progressbar.eael-progressbar-circle .eael-progressbar-circle-pie {
-  -webkit-clip-path: inset(0 50% 0 0);
-          clip-path: inset(0 50% 0 0);
+  clip-path: inset(0 50% 0 0);
 }
 .rtl .eael-progressbar.eael-progressbar-circle .eael-progressbar-circle-half {
-  -webkit-clip-path: inset(0 0 0 50%);
-          clip-path: inset(0 0 0 50%);
+  clip-path: inset(0 0 0 50%);
 }
 .rtl .eael-progressbar-circle-container .eael-progressbar-half-circle-after .eael-progressbar-prefix-label {
   float: left;
