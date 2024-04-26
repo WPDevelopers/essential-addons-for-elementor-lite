@@ -174,6 +174,26 @@ class Adv_Tabs extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_adv_tabs_scroll_speed',
+            [
+                'label'       => esc_html__('Scroll Speed (ms)', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::NUMBER,
+                'label_block' => false,
+                'default'     => 300,
+            ]
+        );
+
+	    $this->add_control(
+		    'eael_adv_tabs_scroll_onclick',
+		    [
+			    'label'        => esc_html__('Scroll on Click', 'essential-addons-for-elementor-lite'),
+			    'type'         => Controls_Manager::SWITCHER,
+			    'default'      => 'no',
+			    'return_value' => 'yes',
+		    ]
+	    );
+
         $this->end_controls_section();
 
         /**
@@ -980,6 +1000,8 @@ class Adv_Tabs extends Widget_Base
         $tab_auto_active =  'yes' === $settings['eael_adv_tabs_default_active_tab'] ? esc_attr('eael-tab-auto-active') : '';
         $tab_tpggle = 'yes' === $settings['eael_adv_tabs_toggle_tab'] ? esc_attr( 'eael-tab-toggle' ) : '';
 
+        $this->add_render_attribute('eael_tab_wrapper', 'data-scroll-on-click', esc_attr( $settings['eael_adv_tabs_scroll_onclick'] ));
+        $this->add_render_attribute('eael_tab_wrapper', 'data-scroll-speed', esc_attr( $settings['eael_adv_tabs_scroll_speed'] ));
 
         $this->add_render_attribute(
             'eael_tab_wrapper',
@@ -1005,7 +1027,7 @@ class Adv_Tabs extends Widget_Base
         $this->add_render_attribute('eael_tab_icon_position', 'role', 'tablist'); 
         ?>
         <div <?php echo $this->get_render_attribute_string('eael_tab_wrapper'); ?>>
-            <div class="eael-tabs-nav" role="tablist">
+            <div class="eael-tabs-nav">
                 <ul <?php echo $this->get_render_attribute_string('eael_tab_icon_position'); ?>>
                     <?php foreach ($settings['eael_adv_tabs_tab'] as $index => $tab) :
 	                    $tab_id = $tab['eael_adv_tabs_tab_id'] ? $tab['eael_adv_tabs_tab_id'] : Helper::str_to_css_id( $tab['eael_adv_tabs_tab_title'] );
@@ -1097,7 +1119,7 @@ class Adv_Tabs extends Widget_Base
 
                     <div id="<?php echo esc_attr( $tab_id ); ?>" class="clearfix eael-tab-content-item <?php echo esc_attr($tab['eael_adv_tabs_tab_show_as_default']); ?>" data-title-link="<?php echo esc_attr( $tab_id ); ?>">
 				        <?php if ('content' == $tab['eael_adv_tabs_text_type']) : ?>
-					        <?php echo do_shortcode($tab['eael_adv_tabs_tab_content']); ?>
+					        <?php echo $this->parse_text_editor( $tab['eael_adv_tabs_tab_content'] ); ?>
 				        <?php elseif ('template' == $tab['eael_adv_tabs_text_type']) : ?>
                             <?php if ( ! empty( $tab['eael_primary_templates'] ) ) {
                                 // WPML Compatibility
