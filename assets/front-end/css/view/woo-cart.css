@@ -640,6 +640,19 @@
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-td a {
   color: #202B46;
 }
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-td a.remove {
+  color: #202B46 !important;
+  position: unset;
+  font-size: 20px;
+  height: 20px;
+  width: 20px;
+  display: inline-block;
+  opacity: 0.5;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-td a.remove:hover {
+  background-color: transparent;
+  opacity: 1;
+}
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-thead .eael-woo-cart-tr .eael-woo-cart-td {
   color: #737373;
   font-size: 16px;
