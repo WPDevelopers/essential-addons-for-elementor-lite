@@ -5800,8 +5800,15 @@ class Login_Register extends Widget_Base {
 					var eael_get_login_status = localStorage.getItem( 'eael-is-login-form' );
 					if( eael_get_login_status === 'true' ) {
 						setTimeout(function() {
-							jQuery('[eael-login="yes"]').trigger('click').addClass('eael-clicked');
-						},100);
+							var button = jQuery('[eael-login="yes"]');
+							if( ! button.hasClass('eael-clicked') ) {
+								button.trigger('click').addClass('eael-clicked');
+							}
+						}, 100);
+
+						setTimeout(function() {
+							jQuery('[eael-login="yes"]').removeClass('eael-clicked')
+						}, 500);
 					}
 				});
 			</script>
