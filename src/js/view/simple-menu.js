@@ -54,7 +54,7 @@ var SimpleMenu = function ($scope, $) {
         $('.eael-simple-menu > li.menu-item-has-children', $scope).each(
             function () {
                 $('> a', $(this)).append(
-                    '<span class="eael-simple-menu-indicator">' + $indicator_icon + '</span>'
+                    `<span> ${$indicator_icon} </span>`
                 )
             }
         )
@@ -62,7 +62,7 @@ var SimpleMenu = function ($scope, $) {
         $('.eael-simple-menu > li ul li.menu-item-has-children', $scope).each(
             function () {
                 $('> a', $(this)).append(
-                    '<span class="eael-simple-menu-indicator">' + $dropdown_indicator_icon + '</span>'
+                    `<span class="eael-simple-menu-dropdown-indicator"> ${$dropdown_indicator_icon} </span>`
                 )
             }
         )
