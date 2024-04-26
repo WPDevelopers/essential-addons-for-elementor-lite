@@ -27,17 +27,20 @@ var SimpleMenu = function ($scope, $) {
 
         if ( hashURL !== '#' && splitURL.length > 1 && localize.page_permalink === splitURL[0] && splitURL[1] ){
             all_ids.push(splitURL[1]);
+        }else if( splitURL[1] && $(hashURL).length > 0 ){
+            all_ids.push(splitURL[1]);
         }
         if ( !isStartWithHash && localize.page_permalink === thisURL ) {
             $this.addClass('eael-item-active');
         }
     });
-
+    
     $(window).on('load resize scroll', function() {
         if ( all_ids.length > 0 ){
             $.each(all_ids,function (index, item){
                 if ($('#'+item).isInViewport()) {
                     $('a[href="'+localize.page_permalink+'#'+item+'"]', $scope).addClass('eael-menu-'+item+' eael-item-active');
+                    $('a[href="#'+item+'"]', $scope).addClass('eael-menu-'+item+' eael-item-active');
                 } else {
                     $('.eael-menu-'+item).removeClass('eael-menu-'+item+' eael-item-active');
                 }
