@@ -305,7 +305,13 @@
 		
 		if ( action == "install" && !$.active ) {
 			button.text( "Installing..." ).attr( "disabled", true );
-			
+			if (pagenow === 'admin_page_eael-setup-wizard' && button.hasClass('eael-quick-setup-next-button')) {
+				button.text("Enabling Templates");
+				$('#eael-next').trigger('click');
+			} else if (pagenow === 'toplevel_page_eael-settings' && button.hasClass('eael-dashboard-templately-install-btn')) {
+				button.text("Enabling Templates");
+			}
+
 			$.ajax( {
 				        url: localize.ajaxurl,
 				        type: "POST",
@@ -318,6 +324,11 @@
 					        if ( response.success ) {
 						        button.attr( "disabled", true );
 						        button.text( "Activated" );
+
+								if ((pagenow === 'admin_page_eael-setup-wizard' && button.hasClass('eael-quick-setup-next-button')) || (pagenow === 'toplevel_page_eael-settings' && button.hasClass('eael-dashboard-templately-install-btn'))) {
+									button.text("Enabled Templates");
+								}
+
 						        button.data( "action", 'completed' );
 						        $( "body" ).trigger( 'eael_after_active_plugin', { plugin: slug } );
 					        } else {
@@ -445,6 +456,13 @@
 		
 		contents[StepNumber].style.display = "none";
 		StepNumber = (e.target.id == 'eael-prev') ? StepNumber - 1 : StepNumber + 1;
+
+		if (contents[StepNumber].classList.contains('templately')) {
+			$('.eael-quick-setup-footer').eq(0).hide().siblings('.eael-quick-setup-footer').show();
+		} else {
+			$('.eael-quick-setup-footer').eq(1).hide().siblings('.eael-quick-setup-footer').show();
+		}
+
 		if (e.target.id == 'eael-next' && StepNumber == 2) {
 			$.ajax({
 				       url: localize.ajaxurl,
