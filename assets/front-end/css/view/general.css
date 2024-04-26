@@ -125,17 +125,23 @@
 .eael-contact-form-align-left,
 .elementor-widget-eael-weform.eael-contact-form-align-left .eael-weform-container {
   margin: 0 auto 0 0;
+  display: inline-block;
+  text-align: left;
 }
 
 .eael-contact-form-align-center,
 .elementor-widget-eael-weform.eael-contact-form-align-center .eael-weform-container {
   float: none;
   margin: 0 auto;
+  display: inline-block;
+  text-align: left;
 }
 
 .eael-contact-form-align-right,
 .elementor-widget-eael-weform.eael-contact-form-align-right .eael-weform-container {
   margin: 0 0 0 auto;
+  display: inline-block;
+  text-align: left;
 }
 
 .eael-force-hide {
