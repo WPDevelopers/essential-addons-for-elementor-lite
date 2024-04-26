@@ -2115,20 +2115,18 @@ class Pricing_Table extends Widget_Base
     }
 
     public function render_pricing_list_icon( $settings, $item ){
-        if ('show' === $settings['eael_pricing_table_icon_enabled']) : ?>
-            <?php $eael_pricing_table_list_icon_color = HelperClass::eael_fetch_color_or_global_color($item, 'eael_pricing_table_list_icon_color'); ?>
+        if ('show' === $settings['eael_pricing_table_icon_enabled']) :
+            $icon_color = HelperClass::eael_fetch_color_or_global_color($item, 'eael_pricing_table_list_icon_color');
+            ?>
 
-            <span class="li-icon" style="color:<?php echo esc_attr($eael_pricing_table_list_icon_color); ?>;fill:<?php echo esc_attr($eael_pricing_table_list_icon_color); ?>;" >
-                <?php if (isset($item['__fa4_migrated']['eael_pricing_table_list_icon_new']) || empty($item['eael_pricing_table_list_icon'])) { ?>
-                    <?php if (isset($item['eael_pricing_table_list_icon_new']['value']['url'])) : ?>
-                        <?php Icons_Manager::render_icon( $item['eael_pricing_table_list_icon_new'], [ 'aria-hidden' => 'true' ] ); ?>
-<!--                                    <img src="--><?php //echo $item['eael_pricing_table_list_icon_new']['value']['url']; ?><!--" alt="--><?php //echo esc_attr(get_post_meta($item['eael_pricing_table_list_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?><!--" />-->
-                    <?php else : ?>
-                        <i class="<?php echo esc_attr( $item['eael_pricing_table_list_icon_new']['value'] ); ?>"></i>
-                    <?php endif; ?>
-                <?php } else { ?>
-                    <i class="<?php echo esc_attr( $item['eael_pricing_table_list_icon'] ); ?>"></i>
-                <?php } ?>
+            <span class="li-icon" style="<?php echo 'color:'. esc_attr( $icon_color ) . ';fill:' . esc_attr( $icon_color ) . ';'; ?>" >
+                <?php
+                if ( isset( $item['__fa4_migrated']['eael_pricing_table_list_icon_new'] ) || empty( $item['eael_pricing_table_list_icon'] ) ) {
+                    Icons_Manager::render_icon( $item['eael_pricing_table_list_icon_new'], [ 'aria-hidden' => 'true' ] );
+                } else {
+                    echo '<i class="'. esc_attr( $item['eael_pricing_table_list_icon'] ) .'"></i>';
+                }
+                ?>
             </span>
 
         <?php endif;
@@ -2240,7 +2238,7 @@ class Pricing_Table extends Widget_Base
         if ( ! empty( $settings['eael_pricing_table_btn_link']['url'] ) ) {
             $this->add_link_attributes( 'eael_pricing_button', $settings['eael_pricing_table_btn_link'] );
         }
-        
+
         if ('yes' === $settings['eael_pricing_table_onsale']) {
             if ($settings['eael_pricing_table_price_cur_placement'] == 'left') {
                 $pricing = '<del class="original-price">
