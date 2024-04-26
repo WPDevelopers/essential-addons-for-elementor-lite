@@ -1065,3 +1065,58 @@ button.mfp-arrow:not(.toggle) {
 body.rtl .mfp-counter {
 	direction: ltr;
 }
+
+//Salient theme support
+body.theme-salient.material button.mfp-arrow,
+body.material button.mfp-arrow,
+body.theme-salient.material button.mfp-close,
+body.material button.mfp-close {
+    // background: transparent;
+    border: 0;
+}
+
+body.theme-salient.material .mfp-arrow,
+body.material .mfp-arrow,
+body.theme-salient.material .mfp-arrow:hover,
+body.material .mfp-arrow:hover {
+    background: transparent;
+}
+
+body.theme-salient.material .mfp-arrow-left,
+body.material .mfp-arrow-left {
+	left: 0;
+	border: none;
+}
+
+// body.material .mfp-arrow-left {
+// 	border: none;
+// }
+
+body.theme-salient.material .mfp-arrow-right,
+body.material .mfp-arrow-right {
+	transition: none;
+}
+
+body.theme-salient.material .mfp-arrow,
+body.material .mfp-arrow {
+    margin: -55px 0 0;
+    width: 90px;
+    height: 110px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body.theme-salient.material .mfp-arrow-left:after,
+body.material .mfp-arrow-left:after,
+body.theme-salient.material .mfp-arrow-right:after,
+body.material .mfp-arrow-right:after {
+	transform: none;
+	transition: none;
+	background-color: transparent;
+}
+
+body.theme-salient.material .mfp-arrow-left:before,
+body.material .mfp-arrow-left:before,
+body.theme-salient.material .mfp-arrow-right:before,
+body.material .mfp-arrow-right:before {
+	transform: none;
+}
