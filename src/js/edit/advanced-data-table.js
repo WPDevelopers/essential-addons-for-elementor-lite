@@ -258,11 +258,11 @@ class advancedDataTableEdit {
 
 					if (this.table.classList.contains("ea-advanced-data-table-static")) {
 						for (let j = 0; j < cols.length; j++) {
-							row.push(JSON.stringify(decodeURI(cols[j].dataset.quill)));
+							row.push( decodeURI( cols[j].dataset.quill ) );
 						}
 					} else {
 						for (let j = 0; j < cols.length; j++) {
-							row.push(JSON.stringify(cols[j].innerHTML.replace(/(\r\n|\n|\r)/gm, " ").trim()));
+							row.push(JSON.stringify(cols[j].innerHTML.replace( /,"""([^"]+)""",/g, ',"$1",' ).trim()));
 						}
 					}
 
@@ -293,7 +293,8 @@ class advancedDataTableEdit {
 					body += "<tbody>";
 					csletr.forEach((row, index) => {
 						if (row.length > 0) {
-							cols = row.match(/("(?:[^"\\]|\\.)*"|[^","]+)/gm);
+							let colReplace = row.replace(/,"""([^"]+)""",/g, ',"$1",');
+							cols = colReplace.match(/("(?:[^"\\]|\\.)*"|[^","]+)/gm);
 
 							if (cols.length > 0) {
 								if (enableHeader && index == 0) {
@@ -309,7 +310,7 @@ class advancedDataTableEdit {
 								} else {
 									body += "<tr>";
 									cols.forEach((col) => {
-										if (col.match(/(^"")|(^")|("$)|(""$)/g)) {
+										if ( col.match(/(^"")|(^")|("$)|(""$)/g) ) {
 											body += `<td>${JSON.parse(col)}</td>`;
 										} else {
 											body += `<td>${col}</td>`;
@@ -377,13 +378,13 @@ class advancedDataTableEdit {
 			this.tableInnerHTML = origTable.innerHTML;
 			
 			// update table
-			this.updateFromView(
-				this.view,
-				{
-					ea_adv_data_table_static_html: this.tableInnerHTML,
-				},
-				true
-			);
+			// this.updateFromView(
+			// 	this.view,
+			// 	{
+			// 		ea_adv_data_table_static_html: this.tableInnerHTML,
+			// 	},
+			// 	true
+			// );
 		});
 	}
 

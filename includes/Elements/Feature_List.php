@@ -266,7 +266,7 @@ class Feature_List extends Widget_Base {
                     'span' => 'span',
                     'p'    => 'p',
                 ],
-                'default'   => 'h3',
+                'default'   => 'h2',
                 'separator' => 'before',
             ]
         );
@@ -965,10 +965,7 @@ class Feature_List extends Widget_Base {
 							</div>
 						</div>
 						<div class="eael-feature-list-content-box">
-							<<?php echo implode( ' ', [
-            $feat_title_tag,
-            $this->get_render_attribute_string( 'eael_feature_list_title' . $index),
-        ] ); ?>
+							<<?php echo implode( ' ', [ $feat_title_tag, $this->get_render_attribute_string( 'eael_feature_list_title' . $index), ] ); ?>
 							><?php echo !empty( $item['eael_feature_list_link']['url'] ) ? "<a {$this->get_render_attribute_string( 'eael_feature_list_title_anchor' . $index)}>" : ''; ?><?php echo Helper::eael_wp_kses($item['eael_feature_list_title']); ?><?php echo !empty( $item['eael_feature_list_link']['url'] ) ? "</a>" : ''; ?></<?php echo $feat_title_tag; ?>
 						>
 						<p <?php echo $this->get_render_attribute_string( 'eael_feature_list_content' . $index); ?>><?php echo Helper::eael_wp_kses($item['eael_feature_list_content']); ?></p>
