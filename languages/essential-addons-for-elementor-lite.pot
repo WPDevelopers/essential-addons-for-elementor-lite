@@ -1410,7 +1410,7 @@ msgstr ""
 msgid "File Not Found"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Category_Box.php:1188, ../includes/Elements/Betterdocs_Category_Box.php:1153, ../includes/Elements/Betterdocs_Category_Grid.php:1690, ../includes/Elements/Betterdocs_Category_Grid.php:1657, ../includes/Elements/Post_Grid.php:1125, ../includes/Elements/Post_Timeline.php:788, ../includes/Elements/Product_Grid.php:3216, ../includes/Traits/Ajax_Handler.php:264
+#: ../includes/Elements/Betterdocs_Category_Box.php:1188, ../includes/Elements/Betterdocs_Category_Box.php:1153, ../includes/Elements/Betterdocs_Category_Grid.php:1690, ../includes/Elements/Betterdocs_Category_Grid.php:1657, ../includes/Elements/Post_Grid.php:1125, ../includes/Elements/Post_Timeline.php:788, ../includes/Elements/Product_Grid.php:3217, ../includes/Traits/Ajax_Handler.php:264
 msgid "<p class=\"no-posts-found\">No posts found!</p>"
 msgstr ""
 
@@ -6661,7 +6661,7 @@ msgstr ""
 msgid "Timeline Vertical Line Color"
 msgstr ""
 
-#: ../includes/Elements/Post_Timeline.php:792, ../includes/Elements/Product_Grid.php:3220
+#: ../includes/Elements/Post_Timeline.php:792, ../includes/Elements/Product_Grid.php:3221
 msgid "<p class=\"no-posts-found\">No layout found!</p>"
 msgstr ""
 
@@ -7313,19 +7313,19 @@ msgstr ""
 msgid "Cart Button"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:3394, ../includes/Elements/Woo_Product_Carousel.php:147, ../includes/Elements/Woo_Product_List.php:3407
+#: ../includes/Elements/Product_Grid.php:3395, ../includes/Elements/Woo_Product_Carousel.php:147, ../includes/Elements/Woo_Product_List.php:3407
 msgid "Publish"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:3395, ../includes/Elements/Woo_Product_Carousel.php:148, ../includes/Elements/Woo_Product_List.php:3408
+#: ../includes/Elements/Product_Grid.php:3396, ../includes/Elements/Woo_Product_Carousel.php:148, ../includes/Elements/Woo_Product_List.php:3408
 msgid "Draft"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:3396, ../includes/Elements/Woo_Product_Carousel.php:149, ../includes/Elements/Woo_Product_List.php:3409
+#: ../includes/Elements/Product_Grid.php:3397, ../includes/Elements/Woo_Product_Carousel.php:149, ../includes/Elements/Woo_Product_List.php:3409
 msgid "Pending Review"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:3397, ../includes/Elements/Woo_Product_Carousel.php:150, ../includes/Elements/Woo_Product_List.php:3410
+#: ../includes/Elements/Product_Grid.php:3398, ../includes/Elements/Woo_Product_Carousel.php:150, ../includes/Elements/Woo_Product_List.php:3410
 msgid "Schedule"
 msgstr ""
 
@@ -8998,7 +8998,7 @@ msgstr ""
 msgid "Show Link?"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Gallery.php:2542
+#: ../includes/Elements/Woo_Product_Gallery.php:2543
 msgid "No Layout Found"
 msgstr ""
 

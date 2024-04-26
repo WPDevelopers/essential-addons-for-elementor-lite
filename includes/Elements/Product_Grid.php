@@ -3211,6 +3211,7 @@ class Product_Grid extends Widget_Base
                             wp_reset_postdata();
 
 		                echo '</ul>';
+                        do_action( 'eael_woo_after_product_loop' );
 
 	                } else {
 		                _e( '<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite' );
