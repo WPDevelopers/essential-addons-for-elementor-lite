@@ -301,7 +301,7 @@ trait Elements {
 			],
 			[
 				'name'       => 'eael-twitter-feed-carousel',
-				'title'      => __( 'Twitter Feed Carousel', 'essential-addons-for-elementor-lite' ),
+				'title'      => __( 'X (Twitter) Feed Carousel', 'essential-addons-for-elementor-lite' ),
 				'icon'       => 'eaicon-twitter-feed-carousel',
 				'categories' => '["essential-addons-elementor"]',
 			],
