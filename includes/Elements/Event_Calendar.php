@@ -3060,7 +3060,7 @@ class Event_Calendar extends Widget_Base
 		$item_per_page = $is_paginated && !empty( $settings['eael_ec_item_per_page'] ) ? intval( $settings['eael_ec_item_per_page'] ) : 1;
 
 		?>
-		<table class="eael-event-calendar-table <?php  echo $is_paginated ? 'ea-ec-table-paginated' : '' ?> ea-ec-table-sortable" data-items-per-page="<?php echo esc_attr( $item_per_page ); ?>">
+		<table class="eael-event-calendar-table <?php echo $is_paginated ? 'ea-ec-table-paginated' : ''; ?> ea-ec-table-sortable" data-items-per-page="<?php echo esc_attr( $item_per_page ); ?>">
 			<thead>
 			<tr style="display: table-row;">
 				<?php
@@ -3128,7 +3128,7 @@ class Event_Calendar extends Widget_Base
 					$row_style .= "color:{$event['textColor']};";
 				}
 
-				$row_style = $row_style !== '' ? "style={$row_style}" : '';
+				$row_style = $row_style !== '' ? "style={" . esc_attr( $row_style ) . "}" : '';
 
 				$item_count ++;
 				echo '<tr ' . $style . ' >';
