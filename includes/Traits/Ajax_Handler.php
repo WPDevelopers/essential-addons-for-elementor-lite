@@ -60,6 +60,7 @@ trait Ajax_Handler {
 			add_action( 'wp_ajax_save_settings_with_ajax', array( $this, 'save_settings' ) );
 			add_action( 'wp_ajax_clear_cache_files_with_ajax', array( $this, 'clear_cache_files' ) );
 			add_action( 'wp_ajax_eael_admin_promotion', array( $this, 'eael_admin_promotion' ) );
+			add_action( 'wp_ajax_eael_admin_dashboard_data', array( $this, 'eael_admin_dashboard_data' ) );
 		}
 
 		add_action( 'wp_ajax_eael_get_token', [ $this, 'eael_get_token' ] );
@@ -1119,6 +1120,30 @@ trait Ajax_Handler {
 		add_filter( 'option_yith_wcwl_ajax_enable', function ( $data ) {
 			return 'no';
 		} );
+	}
+
+	public function eael_admin_dashboard_data () {
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( __( 'you are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
+		}
+
+		$data = [
+			'menu' => [
+				'General' => 'icon',
+				'Elements' => 'icon',
+				'Extensions' => 'icon',
+				'Tools' => 'icon',
+				'Integration' => 'icon',
+				'Go Premium' => 'icon',
+			],
+			'whats_new' => [
+				'heading' => 'What is New on Version?'
+			]
+		];
+
+		wp_send_json( $data );
 	}
 
 }
