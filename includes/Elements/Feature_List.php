@@ -530,7 +530,7 @@ class Feature_List extends Widget_Base {
             [
                 'label'     => esc_html__( 'Secondary Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '#ffffff',
+                'default'   => '#07b4eb',
                 'selectors' => [
                     '{{WRAPPER}} .eael-feature-list-items.framed .eael-feature-list-icon' => 'background-color: {{VALUE}};',
                 ],

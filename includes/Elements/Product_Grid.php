@@ -506,6 +506,19 @@ class Product_Grid extends Widget_Base
             ],
         ]);
 
+        $this->add_control('product_type_logged_users', [
+            'label' => __('Product Type', 'essential-addons-for-elementor-lite'),
+            'type' => Controls_Manager::SELECT,
+            'description' => __('For logged in users only!', 'essential-addons-for-elementor-lite'),
+            'options' => [
+                '' => __('Select', 'essential-addons-for-elementor-lite'),
+                'purchased' => __('Purchased Only', 'essential-addons-for-elementor-lite'),
+                'not-purchased' => __('Not Purchased Only', 'essential-addons-for-elementor-lite'),
+            ],
+            'default' => '',
+
+        ]);
+
         $this->add_control(
             'eael_dynamic_template_Layout',
             [
@@ -3173,6 +3186,25 @@ class Product_Grid extends Widget_Base
 		    $args = $this->build_product_query( $settings );
 	    }
 
+        $no_products_found = 0;
+
+        if ( is_user_logged_in() ) {
+            $product_purchase_type = ! empty( $settings['product_type_logged_users'] ) ? sanitize_text_field( $settings['product_type_logged_users'] ) : '';
+
+            if (  in_array( $product_purchase_type, ['purchased', 'not-purchased'] ) ) {
+                $user_ordered_products = HelperClass::eael_get_all_user_ordered_products();
+                $no_products_found = empty( $user_ordered_products ) && 'purchased' === $product_purchase_type ? 1 : 0;
+
+                if ( ! empty( $user_ordered_products ) && 'purchased' === $product_purchase_type ){
+                    $args['post__in'] = $user_ordered_products;
+                }
+
+                if ( ! empty( $user_ordered_products ) && 'not-purchased' === $product_purchase_type ){
+                    $args['post__not_in'] = $user_ordered_products;
+                }
+            }
+        }
+
 	    $this->is_show_custom_add_to_cart       = boolval( $settings['show_add_to_cart_custom_text'] );
 	    $this->simple_add_to_cart_button_text   = $settings['add_to_cart_simple_product_button_text'];
 	    $this->variable_add_to_cart_button_text = $settings['add_to_cart_variable_product_button_text'];
@@ -3214,7 +3246,7 @@ class Product_Grid extends Widget_Base
 
                 if ( file_exists( $template ) ) {
 	                $settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
-                    
+
                     if( $settings['post_type'] === 'source_archive' && is_archive() && is_post_type_archive( 'product' ) ){
                         global $wp_query;
                         $query = $wp_query;
@@ -3223,7 +3255,7 @@ class Product_Grid extends Widget_Base
 	                    $query = new \WP_Query( $args );
                     }
 
-	                if ( $query->have_posts() ) {
+	                if ( $query->have_posts() && ! $no_products_found ) {
 		                $found_posts        = $query->found_posts;
 		                $max_page           = ceil( $found_posts / absint( $args['posts_per_page'] ) );
 		                $args['max_page']   = $max_page;
@@ -3238,6 +3270,7 @@ class Product_Grid extends Widget_Base
                             wp_reset_postdata();
 
 		                echo '</ul>';
+                        do_action( 'eael_woo_after_product_loop' );
 
 	                } else {
 		                _e( '<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite' );
@@ -3251,7 +3284,7 @@ class Product_Grid extends Widget_Base
 	                $settings['eael_widget_name'] = $this->get_name();
 	                echo HelperClass::eael_pagination( $args, $settings );
                 }
-                
+
                 if( 'source_archive' === $settings['post_type'] ){
                     echo "<div class='eael-product-grid-pagination' >";
                         woocommerce_pagination();
