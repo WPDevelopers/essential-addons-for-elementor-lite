@@ -2537,6 +2537,7 @@ class Woo_Product_Gallery extends Widget_Base {
 						echo '<h2 class="eael-product-not-found">' . __( 'No Product Found', 'essential-addons-for-elementor-lite' ) . '</h2>';
 					}
 					echo '</ul>';
+					do_action( 'eael_woo_after_product_loop' );
 
 				} else {
 					echo '<h2 class="eael-product-not-found">' . __( 'No Layout Found', 'essential-addons-for-elementor-lite' ) . '</h2>';
