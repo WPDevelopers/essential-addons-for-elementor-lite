@@ -3198,7 +3198,6 @@ class Event_Calendar extends Widget_Base
 
 					$start_time = strtotime( $event['start'] );
 					$end_time   = strtotime( $event['end'] );
-
                     if( '' !== $start_timezone && '' !== $end_timezone  ){
                         $start    = wp_date( $date_format, $start_time, $start_timezone );
 					    $end      = wp_date( $date_format, $end_time, $end_timezone );
