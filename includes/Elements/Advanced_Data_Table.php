@@ -1579,7 +1579,7 @@ class Advanced_Data_Table extends Widget_Base
                         </div>';
                     }
                 } else {
-                    echo '<div class="ea-advanced-data-table-pagination ea-advanced-data-table-pagination-' . $settings['ea_adv_data_table_pagination_type'] . ' clearfix"></div>';
+                    echo '<div class="ea-advanced-data-table-pagination ea-advanced-data-table-pagination-' . esc_attr( $settings['ea_adv_data_table_pagination_type'] ) . ' clearfix"></div>';
                 }
             }
         } else {
@@ -1649,11 +1649,11 @@ class Advanced_Data_Table extends Widget_Base
                     }
 
                     if ($th['data_type'] == 'image') {
-                        $html .= '<td>' . (isset($tr[$th['key']]['image_thumb']) ? '<a href="' . $tr[$th['key']]['image_full'] . '"><img src="' . $tr[$th['key']]['image_thumb'] . '"></a>' : '') . '</td>';
+                        $html .= '<td>' . (isset($tr[$th['key']]['image_thumb']) ? '<a href="' . esc_url( $tr[$th['key']]['image_full'] ) . '"><img src="' . esc_url( $tr[$th['key']]['image_thumb'] ) . '"></a>' : '') . '</td>';
                     } elseif ($th['data_type'] == 'selection') {
                         $html .= '<td>' . (!empty($tr[$th['key']]) ? implode((array) $tr[$th['key']], ', ') : '') . '</td>';
                     } elseif ($th['data_type'] == 'button') {
-                        $html .= '<td>' . (!empty($tr[$th['key']]) ? '<a href="' . $tr[$th['key']] . '" class="button" target="' . $th['link_target'] . '">' . $th['button_text'] . '</a>' : '') . '</td>';
+                        $html .= '<td>' . (!empty($tr[$th['key']]) ? '<a href="' . esc_url( $tr[$th['key']] ) . '" class="button" target="' . esc_attr( $th['link_target'] ) . '">' . $th['button_text'] . '</a>' : '') . '</td>';
                     } else {
 	                    $html .= '<td>' . ( isset( $tr[ $th['key'] ] ) ? $tr[ $th['key'] ] : '' ) . '</td>';
                     }

@@ -254,6 +254,19 @@ class Bootstrap
 			    remove_action( 'woocommerce_after_shop_loop_item', 'astra_woo_woocommerce_shop_product_content' );
 			    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
 		    } );
+
+            add_action( 'eael_woo_after_product_loop', function ( $layout ) {
+			    if ( $layout === 'eael-product-default' ) {
+				    return;
+			    }
+
+			    add_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open' );
+			    add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close' );
+			    add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
+                if( function_exists( 'astra_woo_woocommerce_shop_product_content' ) ){
+                    add_action( 'woocommerce_after_shop_loop_item', 'astra_woo_woocommerce_shop_product_content' );
+                }
+		    } );
 	    }
 
         // Admin
@@ -296,9 +309,9 @@ class Bootstrap
 	        add_action( 'eael_admin_page_setting', [ $this, 'eael_show_admin_menu_notice' ] );
 
 	        // Black Friday Optin
-//	        add_action( 'admin_notices', [ $this, 'eael_black_friday_optin' ] );
-//	        add_action( 'eael_admin_notices', [ $this, 'eael_black_friday_optin' ] );
-//	        add_action( 'wp_ajax_eael_black_friday_optin_dismiss', [ $this, 'eael_black_friday_optin_dismiss' ] );
+	        add_action( 'admin_notices', [ $this, 'eael_black_friday_optin' ] );
+	        add_action( 'eael_admin_notices', [ $this, 'eael_black_friday_optin' ] );
+	        add_action( 'wp_ajax_eael_black_friday_optin_dismiss', [ $this, 'eael_black_friday_optin_dismiss' ] );
 
 		    if ( ! current_user_can( 'administrator' ) ) {
 			    add_filter( 'elementor/document/save/data', function ( $data ) {
@@ -310,6 +323,12 @@ class Bootstrap
 					    if ( isset( $element['widgetType'] ) && $element['widgetType'] === 'eael-login-register' ) {
 						    if ( ! empty( $element['settings']['register_user_role'] ) ) {
 							    $element['settings']['register_user_role'] = '';
+						    }
+					    }
+
+					    if ( isset( $element['widgetType'] ) && $element['widgetType'] === 'eicon-woocommerce' ) {
+						    if ( ! empty( $element['settings']['eael_product_grid_products_status'] ) ) {
+							    $element['settings']['eael_product_grid_products_status'] = [ 'publish' ];
 						    }
 					    }
 
