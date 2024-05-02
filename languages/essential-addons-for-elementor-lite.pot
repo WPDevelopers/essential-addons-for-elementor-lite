@@ -3494,7 +3494,7 @@ msgstr ""
 msgid "Tomorrow"
 msgstr ""
 
-#: ../includes/Elements/Event_Calendar.php:3559
+#: ../includes/Elements/Event_Calendar.php:3558
 msgid "No Title"
 msgstr ""
 
@@ -9998,8 +9998,8 @@ msgstr ""
 msgid "Testimonial Slider"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:304, ../includes/templates/admin/elements.php:511
-msgid "Twitter Feed Carousel"
+#: ../includes/Traits/Elements.php:304
+msgid "X (Twitter) Feed Carousel"
 msgstr ""
 
 #: ../includes/Traits/Elements.php:310, ../includes/templates/admin/elements.php:587
@@ -10656,6 +10656,10 @@ msgstr ""
 
 #: ../includes/templates/admin/elements.php:500
 msgid "Social Feed Elements"
+msgstr ""
+
+#: ../includes/templates/admin/elements.php:511
+msgid "Twitter Feed Carousel"
 msgstr ""
 
 #: ../includes/templates/admin/elements.php:534
