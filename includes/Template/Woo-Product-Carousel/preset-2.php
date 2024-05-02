@@ -45,11 +45,11 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
     ?>
     <li <?php post_class( ['product', 'swiper-slide'] ); ?>>
         <div class="eael-product-carousel <?php echo esc_attr( $product_details_none_class ); ?>">
-            <div class="carousel-overlay <?php echo $should_print_image_clickable ? esc_attr( 'eael-img-clickable' ) : ''; ?>"></div>
+            <div class="carousel-overlay <?php echo $should_print_image_clickable ? 'eael-img-clickable' : ''; ?>"></div>
             <div class="product-image-wrap">
                 <div class="image-wrap">
 		            <?php
-		            echo ( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.$sale_badge_preset.' '.$sale_badge_align.'">'. $stockout_text .'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.$sale_badge_preset.' '.$sale_badge_align.'">' . $sale_text . '</span>' : '') );
+		            echo( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock ' . esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) . '">' . esc_html( $stockout_text ) . '</span>' : ( $product->is_on_sale() ? '<span class="eael-onsale ' . esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) . '">' . esc_html( $sale_text ) . '</span>' : '' ) );
 		            if( $should_print_image_clickable ) {
 			            echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
 		            }
@@ -113,8 +113,8 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
 
 		            if ( $should_print_excerpt ) {
 			            echo '<div class="eael-product-excerpt">';
-			            echo '<p>' . wp_trim_words(strip_shortcodes(get_the_excerpt()), $settings['eael_product_carousel_excerpt_length'],
-					            $settings['eael_product_carousel_excerpt_expanison_indicator']) . '</p>';
+			            echo '<p>' . wp_trim_words( strip_shortcodes( get_the_excerpt() ), $settings['eael_product_carousel_excerpt_length'],
+					            esc_html( $settings['eael_product_carousel_excerpt_expanison_indicator'] ) ) . '</p>';
 			            echo '</div>';
 		            }
 		            ?>
