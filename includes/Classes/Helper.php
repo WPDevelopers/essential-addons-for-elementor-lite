@@ -1057,7 +1057,7 @@ class Helper
 	 * @return array
 	 */
 	public static function eael_allowed_tags() {
-		return [
+		return apply_filters( 'eael_allowed_tags', [
 			'a'       => [
 				'href'   => [],
 				'title'  => [],
@@ -1304,7 +1304,7 @@ class Helper
 				'id'      => [],
 				'style'   => [],
 			],
-		];
+		] );
 	}
 
     /**
