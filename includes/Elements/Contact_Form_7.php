@@ -344,6 +344,9 @@ class Contact_Form_7 extends Widget_Base
                     ],
                 ],
                 'default' => 'default',
+                'selectors' => [
+					'{{WRAPPER}} .eael-contact-form-7-wrapper' => 'text-align: {{VALUE}};',
+				],
             ]
         );
 
