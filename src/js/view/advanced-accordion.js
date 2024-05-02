@@ -96,14 +96,6 @@ ea.hooks.addAction("init", "ea", () => {
 					$(this).trigger('click');
 				}
 			});
-
-			// If hashTag is not null then scroll to that hashTag smoothly
-			if( typeof hashTag !== 'undefined' && hashTag && !ea.elementStatusCheck('eaelAdvancedAccordionScroll') ){
-				let $customIdOffsetVal = $customIdOffset ? parseFloat($customIdOffset) : 0;
-				$('html, body').animate({
-					scrollTop: $("#"+hashTag).offset().top - $customIdOffsetVal,
-				}, $srollSpeed);
-			}
 		}
 	);
 });
