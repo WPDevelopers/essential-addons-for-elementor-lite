@@ -3060,7 +3060,7 @@ class Event_Calendar extends Widget_Base
 		$item_per_page = $is_paginated && !empty( $settings['eael_ec_item_per_page'] ) ? intval( $settings['eael_ec_item_per_page'] ) : 1;
 
 		?>
-		<table class="eael-event-calendar-table <?php  echo $is_paginated ? 'ea-ec-table-paginated' : '' ?> ea-ec-table-sortable" data-items-per-page="<?php echo esc_attr( $item_per_page ); ?>">
+		<table class="eael-event-calendar-table <?php echo $is_paginated ? 'ea-ec-table-paginated' : ''; ?> ea-ec-table-sortable" data-items-per-page="<?php echo esc_attr( $item_per_page ); ?>">
 			<thead>
 			<tr style="display: table-row;">
 				<?php
@@ -3128,7 +3128,7 @@ class Event_Calendar extends Widget_Base
 					$row_style .= "color:{$event['textColor']};";
 				}
 
-				$row_style = $row_style !== '' ? "style={$row_style}" : '';
+				$row_style = $row_style !== '' ? "style={" . esc_attr( $row_style ) . "}" : '';
 
 				$item_count ++;
 				echo '<tr ' . $style . ' >';
@@ -3156,14 +3156,23 @@ class Event_Calendar extends Widget_Base
 					echo '<td class="eael-ec-event-description" ' . esc_attr( $row_style ) . '>' . Helper::eael_wp_kses( $event_description ) . '</td>';
 				}
 				if ( $settings['eael_ec_show_date'] === 'yes' ) {
+					$start_timezone = isset( $event['start_timezone'] ) && '' !== $event['start_timezone'] ? new \DateTimeZone( $event['start_timezone'] ) : '';
+					$end_timezone   = isset( $event['end_timezone'] ) && '' !== $event['end_timezone']  ? new \DateTimeZone( $event['end_timezone'] ) : $start_timezone;
+
 					$start_time = strtotime( $event['start'] );
 					$end_time   = strtotime( $event['end'] );
-					$start      = date( $date_format, $start_time );
-					$end        = date( $date_format, $end_time );
-                    $same_day   = date( 'Ymd', $start_time ) === date( 'Ymd', $end_time );
+                    if( '' !== $start_timezone && '' !== $end_timezone  ){
+                        $start    = wp_date( $date_format, $start_time, $start_timezone );
+					    $end      = wp_date( $date_format, $end_time, $end_timezone );
+                        $same_day = wp_date( 'Ymd', $start_time, $start_timezone ) === wp_date( 'Ymd', $end_time, $end_timezone );
+                    } else{
+                        $start    = date( $date_format, $start_time );
+                        $end      = date( $date_format, $end_time );
+                        $same_day = date( 'Ymd', $start_time ) === date( 'Ymd', $end_time );
+                    }
                     
 					if ( $time_format && $same_day ) {
-						$end = date( $time_format, $end_time );
+						$end = '' !== $start_timezone && '' !== $end_timezone ? wp_date( $time_format, $end_time, $end_timezone ) : date( $time_format, $end_time ) ;
 					}else if( ! $time_format && $same_day ){
                         $end = '';
                     }
@@ -3355,6 +3364,9 @@ class Event_Calendar extends Widget_Base
 //                    continue;
                 }
                 $all_day = '';
+                $start_timezone = isset( $item->start->timeZone ) ? $item->start->timeZone: '';
+                $end_timezone   = isset( $item->end->timeZone ) ? $item->end->timeZone : $start_timezone;
+
                 if (isset($item->start->date)) {
                     $all_day = 'yes';
                     $ev_start_date = $item->start->date;
@@ -3394,18 +3406,20 @@ class Event_Calendar extends Widget_Base
                 }
 
                 $calendar_data[] = [
-                    'id' => ++$key,
-                    'title' => !empty($item->summary) ? $item->summary : 'No Title',
-                    'description' => isset($item->description) ? $item->description : '',
-                    'start' => $ev_start_date,
-                    'end' => $ev_end_date,
-                    'borderColor' => !empty($settings_eael_event_global_popup_ribbon_color) ? $settings_eael_event_global_popup_ribbon_color : '#10ecab',
-                    'textColor' => $settings_eael_event_global_text_color,
-                    'color' => $settings_eael_event_global_bg_color,
-                    'url' => ($settings['eael_event_details_link_hide'] !== 'yes') ? esc_url( $item->htmlLink ) : '',
-                    'allDay' => $all_day,
-                    'external' => 'on',
-                    'nofollow' => 'on',
+                    'id'             => ++$key,
+                    'title'          => !empty($item->summary) ? $item->summary                                                                : 'No Title',
+                    'description'    => isset($item->description) ? $item->description                                                         : '',
+                    'start'          => $ev_start_date,
+                    'end'            => $ev_end_date,
+                    'start_timezone' => $start_timezone,
+                    'end_timezone'   => $end_timezone,
+                    'borderColor'    => !empty($settings_eael_event_global_popup_ribbon_color) ? $settings_eael_event_global_popup_ribbon_color: '#10ecab',
+                    'textColor'      => $settings_eael_event_global_text_color,
+                    'color'          => $settings_eael_event_global_bg_color,
+                    'url'            => ($settings['eael_event_details_link_hide'] !== 'yes') ? esc_url( $item->htmlLink ): '',
+                    'allDay'         => $all_day,
+                    'external'       => 'on',
+                    'nofollow'       => 'on',
                 ];
             }
 
@@ -3429,15 +3443,13 @@ class Event_Calendar extends Widget_Base
         $arg = [
             'posts_per_page' => $settings['eael_the_events_calendar_max_result'],
         ];
-	    if ( $settings['eael_the_events_calendar_fetch'] == 'date_range' ) {
+
+	    if ( $settings['eael_the_events_calendar_fetch'] == 'date_range' && 'table' === $settings['eael_event_display_layout'] ) {
 		    $arg['start_date'] = $settings['eael_the_events_calendar_start_date'];
 		    $arg['end_date']   = $settings['eael_the_events_calendar_end_date'];
 	    }
-		else if ( $settings['eael_event_default_date_type'] === 'custom' ) {
+		else if ( $settings['eael_event_default_date_type'] === 'custom' && 'table' === $settings['eael_event_display_layout'] ) {
 		    $arg['start_date'] = $settings['eael_event_calendar_default_date'];
-	    }
-		else {
-		    $arg['start_date'] = date( 'Y-m-d' );
 	    }
 
         if (!empty($settings['eael_the_events_calendar_category'])) {
@@ -3492,6 +3504,15 @@ class Event_Calendar extends Widget_Base
                     continue;
                 }
             }
+
+            if( $settings['eael_old_events_hide'] === 'start' ){
+                $default_date = $settings['eael_event_default_date_type'] === 'custom' ? $settings['eael_event_calendar_default_date'] : date( 'Y-m-d' );
+                $should_show  = $this->is_old_event( $start, $default_date );
+
+                if ( $should_show ) {
+                    continue;
+                }
+            }
             
             $settings_eael_event_global_popup_ribbon_color = $this->fetch_color_or_global_color($settings, 'eael_event_global_popup_ribbon_color');
 
@@ -3514,17 +3535,17 @@ class Event_Calendar extends Widget_Base
         return $calendar_data;
     }
 
-    public function is_old_event($start_date, $date_to_comp = '' ){
-	    $date_to_comp         = $date_to_comp === '' ? current_time( 'Y-m-d' ) : $date_to_comp;
-	    $date_to_comp         = strtotime( $date_to_comp );
-	    $start_date_timestamp = strtotime( $start_date );
+	public function is_old_event( $start_date, $date_to_comp = '' ) {
+		$date_to_comp         = $date_to_comp === '' ? current_time( 'Y-m-d' ) : $date_to_comp;
+		$date_to_comp         = strtotime( $date_to_comp . wp_timezone_string() );
+		$start_date_timestamp = strtotime( $start_date );
 
-	    if ( $start_date_timestamp < $date_to_comp ) {
-		    return true;
-	    }
+		if ( $start_date_timestamp < $date_to_comp ) {
+			return true;
+		}
 
-	    return false;
-    }
+		return false;
+	}
 
     public function fetch_color_or_global_color($settings, $control_name=''){
         if( !isset($settings[$control_name])) {

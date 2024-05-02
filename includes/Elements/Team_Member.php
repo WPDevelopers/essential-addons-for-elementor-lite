@@ -905,7 +905,7 @@ class Team_Member extends Widget_Base {
 	?>
 
 
-	<div id="eael-team-member-<?php echo esc_attr($this->get_id()); ?>" class="eael-team-item <?php echo $team_member_classes; ?>">
+	<div id="eael-team-member-<?php echo esc_attr($this->get_id()); ?>" class="eael-team-item <?php echo esc_attr( $team_member_classes ); ?>">
 		<div class="eael-team-item-inner">
 			<div class="eael-team-image">
 				<figure>
@@ -926,8 +926,8 @@ class Team_Member extends Widget_Base {
 			</div>
 
 			<div class="eael-team-content">
-				<h3 class="eael-team-member-name"><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_name']); ?></h3>
-				<h4 class="eael-team-member-position"><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_job_title']); ?></h4>
+				<h2 class="eael-team-member-name"><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_name']); ?></h2>
+				<h3 class="eael-team-member-position"><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_job_title']); ?></h3>
 
 				<?php if( 'eael-team-members-social-bottom' === $settings['eael_team_members_preset'] ) : ?>
 					<?php do_action( 'eael/team_member_social_botton_markup', $settings, $this ); ?>

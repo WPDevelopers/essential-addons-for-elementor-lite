@@ -555,26 +555,42 @@ trait Elements {
                     <button class='eael-toc-button'>" . wp_kses( $icon_html, [ 'i' => [ 'class' => [] ] ] ) . "<span>{$toc_title}</span></button>
                 </div>";
 
-				if ( $this->get_extensions_value( 'eael_ext_table_of_content' ) != 'yes' ) {
+				$is_toc_enabled    = $this->get_extensions_value( 'eael_ext_table_of_content' );
+				$should_render_toc = 'yes' === $is_toc_enabled;
+
+				if ( 'yes' !== $is_toc_enabled ) {
 					$toc_global_display_condition = $this->get_extensions_value( 'eael_ext_toc_global_display_condition' );
-					if ( get_post_status( $this->get_extensions_value( 'post_id' ) ) != 'publish' ) {
-						$table_of_content_html = '';
-					} else if ( $toc_global_display_condition == 'pages' && ! is_page() ) {
-						$table_of_content_html = '';
-					} else if ( $toc_global_display_condition == 'posts' && ! is_single() ) {
-						$table_of_content_html = '';
+					if ( 'page' === $toc_global_display_condition ) {
+						$should_render_toc = is_page();
+					} else if ( 'post' === $toc_global_display_condition ) {
+						$should_render_toc = is_single();
+					} else if ( 'all' === $toc_global_display_condition ){
+						$should_render_toc = true;
+					} else if ( get_post_type() === $toc_global_display_condition ){
+						$should_render_toc = true;
+					}
+
+					if ( get_post_status( $this->get_extensions_value( 'post_id' ) ) !== 'publish' ) {
+						$should_render_toc = false;
 					}
 				}
 
 				// Exclude TOC configured page / post based on display condition
 				if ( $toc_status && $toc_status_global ) {
 					$toc_global_display_condition = $this->get_extensions_value( 'eael_ext_toc_global_display_condition' );
-					
-					if ( $toc_global_display_condition == 'pages' && ! is_page() ) {
-						$table_of_content_html = '';
-					} else if ( $toc_global_display_condition == 'posts' && ! is_single() ) {
-						$table_of_content_html = '';
+					if ( 'page' === $toc_global_display_condition ) {
+						$should_render_toc = is_page();
+					} else if ( 'post' === $toc_global_display_condition ) {
+						$should_render_toc = is_single();
+					} else if ( 'all' === $toc_global_display_condition ){
+						$should_render_toc = true;
+					} else if ( get_post_type() === $toc_global_display_condition ){
+						$should_render_toc = true;
 					}
+				}
+
+				if( ! $should_render_toc ){
+					$table_of_content_html = '';
 				}
 
 				if ( ! empty( $table_of_content_html ) ) {
