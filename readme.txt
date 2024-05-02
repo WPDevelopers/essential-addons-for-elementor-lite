@@ -2,9 +2,9 @@
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk, himadree12
 Tags: elementor, elements, addons, elementor addons, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
 Requires at least: 5.0
-Tested up to: 6.4
+Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 5.9.11
+Stable tag: 5.9.18
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -297,30 +297,63 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 5.9.11 - 13/03/2024 =
+= 5.9.18 - 30/04/2024 =
 
-- Fixed: EA Woo Checkout | Undefined array key "class"
-- Fixed: Fatal Error | Class "Essential_Addons_ElementorClassesBootstrap" not found
-- Fixed: Conflict with Fluent Form | ff-hidden CSS class not working as expected
-- Fixed: EA Gravity Forms | Conflict with orbital theme layout
-- Fixed: EA Interactive Circle | Elementor Nav Menu is not working
-- Fixed: EA Advanced Accordion | Anchor tags inside accordions not working properly
-- Fixed: EA Woo Product Grid | Active Woo Product Grid disables product selection in store when JetMenu is enabled
-- Fixed: EA Advanced Data Table | Export is downloading empty csv file
-- Fixed: EA Event Calendar | List view shows previous date first for some time
-- Fixed: EA Advanced Data Table | CSV file import shows " " sign
-- Improved: EA Call to Action | Background image styling option
-- Improved: EA Advanced Tabs | Clicking on the tab takes the user to the top of the content
-- Improved: EA Filterable Gallery | Added RTL support
-- Improved: EA Post Grid | Added RTL support
-- Improved: EA Woo Product Carousel | Option to hide and show add to cart button
-- Improved: Accessibility Support
+- Improved: Security Enhancement
 - Few minor bug fixes & improvements
 
+= 5.9.17 - 25/04/2024 =
 
-= 5.9.10 - 19/02/2024 =
+- Few minor bug fixes & improvements
 
-- Fixed: EA Post Grid | Show post terms not showing from Tags
+= 5.9.16 - 23/04/2024 =
+
+- Improved: Security Enhancement
+- Fixed: EA Event Calendar | Table layout shows +6 hours ahead of events time in manual source 
+- Fixed: EA Woo Product Grid | not compatible with Whols plugin
+- Fixed: EA Woo Cart | Style-2 layout in mobile devices the "close" button style broken
+- Fixed: EA Interactive Circle | not allowing to click on icons sometimes
+- Fixed: EA Filterable Gallery | Images are not getting opened in lightbox
+- Improved: EA Table of Contents | Exclude the page title and the comment/review options
+- Few minor bug fixes & improvements
+
+= 5.9.15 - 09/04/2024 =
+
+- Fixed: EA Content Ticker | Navigation arrow styling is not working
+- Fixed: EA Content Ticker | Not working with Slide animation effect
+- Fixed: EA Woo Product Grid | Default layout doesn't show customized "sale/stock out" badge
+- Fixed: EA Event Calendar | Layout calendar and table showing different times for google calendar
+- Fixed: EA Event Calendar | Old event is not showing for Event Calendar as a source
+- Fixed: EA Login Register Form | Remember me checkbox is not working in the form
+- Improved: Security Enhancement
+- Few minor bug fixes & improvements
+
+= 5.9.14 - 28/03/2024 =
+
+- Improved: Security Enhancement
+- Few minor bug fixes & improvements
+
+= 5.9.13 - 25/03/2024 =
+
+- Fixed: EA Table of Contents | Throwing PHP Fatal error if the Display on option is set to Custom Post Types
+- Few minor bug fixes & improvements
+
+= 5.9.12 - 25/03/2024 =
+
+- Fixed: EA Pricing Table | HTML tag is not working for period separator
+- Fixed: EA Advanced Accordion | Accordion is not working properly with anchor tag
+- Fixed: EA Advanced Tabs | YouTube video is not showing inside the tabs
+- Fixed: EA Login Register Form | Redirect based on user role not working
+- Fixed: EA Login Register Form | Showing invalid in password reset link
+- Fixed: EA Login Register Form | Redirect issue with cross-Domain links without AJAX submission
+- Fixed: EA Filterable Gallery | Navigation icon distorts with Salient theme enabled
+- Fixed: EA Filterable Gallery | Not working on Elementor nested tab
+- Fixed: EA Interactive Circle | Animation is not working with scroll snap
+- Fixed: EA Feature List | Conflict with Global Controls
+- Fixed: EA Pricing Table | Regular price and on sale price is overlapping each other
+- Fixed: EA Advanced Data Table | Import csv file returns to old data on immediately click on style tab
+- Improved: EA Table of Contents | Display option available for all the Custom Post Types
+- Improved: EA Gravity Forms | Added progress bar styling options for multi-pages
 - Improved: Security Enhancement
 - Few minor bug fixes & improvements
 
