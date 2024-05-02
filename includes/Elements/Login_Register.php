@@ -6065,6 +6065,11 @@ class Login_Register extends Widget_Base {
 								if ( 'password' === $field['field_type'] ) {
 									do_action( 'eael/login-register/after-password-field', $this );
 								}
+								
+								if ( 'email' === $field['field_type'] ) {
+									do_action( 'eael/login-register/after-email-field' );
+								}
+								
                                 echo "</div>";
 							endforeach;
 							$this->print_necessary_hidden_fields( 'register' );
