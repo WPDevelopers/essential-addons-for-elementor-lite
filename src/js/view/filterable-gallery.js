@@ -96,6 +96,13 @@ jQuery(window).on("elementor/frontend/init", function () {
 						setTimeout(() => {
 							$(".eael-privacy-message").remove();
 						}, 5000);
+
+						setTimeout(() => {
+							var el_lightbox = $('.dialog-type-lightbox.elementor-lightbox');
+							if( el_lightbox.length > 0 ){
+								el_lightbox.remove();
+							}
+						}, 100);
 					},
 				}
 			});
