@@ -79,13 +79,14 @@
   position: absolute;
   top: 20px;
   left: 20px;
-  font-size: 20px;
+  font-size: 16px;
 }
 .ea-woo-checkout .woocommerce .woo-checkout-login .ea-login-icon i, .ea-woo-checkout .woocommerce .woo-checkout-login .ea-login-icon svg {
   width: 1em;
   height: 1em;
   position: relative;
   display: block;
+  font-size: 16px;
 }
 .ea-woo-checkout .woocommerce .woo-checkout-login .form-row-first {
   width: 48.5%;
@@ -500,7 +501,7 @@
 .eael-woo-checkout .woocommerce .woo-checkout-coupon .ea-coupon-icon {
   width: 20px;
   position: absolute;
-  top: 56px;
+  top: 24px;
   left: 35px;
   font-size: 20px;
 }
