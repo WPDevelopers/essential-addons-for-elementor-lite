@@ -2288,8 +2288,11 @@ class Pricing_Table extends Widget_Base
                         <h2 class="title"><?php echo HelperClass::eael_wp_kses($settings['eael_pricing_table_title']); ?></h2>
                     </div>
                     <div class="eael-pricing-tag">
-                        <span class="price-tag"><?php echo $pricing; ?></span>
-                        <span class="price-period"><?php echo HelperClass::eael_wp_kses($settings['eael_pricing_table_period_separator']); ?> <?php echo HelperClass::eael_wp_kses($settings['eael_pricing_table_price_period']); ?></span>
+                        <?php 
+                            $html = '<span class="price-tag">' . $pricing . '</span>';
+                            $html .= '<span class="price-period">' . $settings['eael_pricing_table_period_separator'] . $settings['eael_pricing_table_price_period'] . '</span>';
+                            echo wp_kses( $html, HelperClass::eael_allowed_tags() );
+                        ?>
                     </div>
                     <div class="body">
                         <?php $this->render_feature_list($settings, $this); ?>
@@ -2336,8 +2339,11 @@ class Pricing_Table extends Widget_Base
                         <span class="subtitle"><?php echo HelperClass::eael_wp_kses( $settings['eael_pricing_table_sub_title'] ); ?></span>
                     </div>
                     <div class="eael-pricing-tag">
-                        <span class="price-tag"><?php echo $pricing; ?></span>
-                        <span class="price-period"><?php echo HelperClass::eael_wp_kses($settings['eael_pricing_table_period_separator']); ?> <?php echo HelperClass::eael_wp_kses($settings['eael_pricing_table_price_period']); ?></span>
+                        <?php 
+                            $html = '<span class="price-tag">' . $pricing . '</span>';
+                            $html .= '<span class="price-period">' . $settings['eael_pricing_table_period_separator'] . $settings['eael_pricing_table_price_period'] . '</span>';
+                            echo wp_kses( $html, HelperClass::eael_allowed_tags() );
+                        ?>
                     </div>
                     <div class="body">
                         <?php $this->render_feature_list($settings, $this); ?>
