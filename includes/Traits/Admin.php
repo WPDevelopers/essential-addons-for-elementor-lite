@@ -28,7 +28,7 @@ trait Admin {
 	    $menu_notice = '';
 	    $menu_notice = ( $this->menu_notice_should_show() ) ?'<span class="eael-menu-notice">1</span>':'';
         add_menu_page(
-            __( 'Essential Addons a', 'essential-addons-for-elementor-lite' ),
+            __( 'Essential Addons', 'essential-addons-for-elementor-lite' ),
             sprintf(__( 'Essential Addons %s', 'essential-addons-for-elementor-lite' ), $menu_notice ),
             'manage_options',
             'eael-settings',
