@@ -297,7 +297,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 5.9.19 - 02/05/2024 =
+= 5.9.19 - 05/05/2024 =
 
 - Fixed: EA Sticky Video | Conflicts with the Blocksy theme
 - Fixed: EA Login Register Form | Validation message doesn't show up while using the form in the popup
