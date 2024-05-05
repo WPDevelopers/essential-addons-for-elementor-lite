@@ -849,6 +849,19 @@ class Woo_Product_Carousel extends Widget_Base {
                 'options' => $this->eael_get_product_statuses(),
             ]
         );
+
+        $this->add_control('product_type_logged_users', [
+            'label' => __('Purchase Type', 'essential-addons-for-elementor-lite'),
+            'type' => Controls_Manager::SELECT,
+            'description' => __('For logged in users only!', 'essential-addons-for-elementor-lite'),
+            'options' => [
+                'both' => __('Both', 'essential-addons-for-elementor-lite'),
+                'purchased' => __('Purchased Only', 'essential-addons-for-elementor-lite'),
+                'not-purchased' => __('Not Purchased Only', 'essential-addons-for-elementor-lite'),
+            ],
+            'default' => 'both',
+        ]);
+
 	    $taxonomies = get_taxonomies(['object_type' => ['product']], 'objects');
 	    foreach ($taxonomies as $taxonomy => $object) {
 		    if (!isset($object->object_type[0])) {
@@ -3013,6 +3026,26 @@ class Woo_Product_Carousel extends Widget_Base {
 	    $settings['eael_product_carousel_title_tag'] = HelperClass::eael_validate_html_tag($settings['eael_product_carousel_title_tag']);
 	    $settings['eael_product_carousel_sale_text'] = HelperClass::eael_wp_kses($settings['eael_product_carousel_sale_text']);
 	    $settings['eael_product_carousel_stockout_text'] = HelperClass::eael_wp_kses($settings['eael_product_carousel_stockout_text']);
+
+        $no_products_found = 0;
+
+        if ( is_user_logged_in() ) {
+            $product_purchase_type = ! empty( $settings['product_type_logged_users'] ) ? sanitize_text_field( $settings['product_type_logged_users'] ) : '';
+
+            if (  in_array( $product_purchase_type, ['purchased', 'not-purchased'] ) ) {
+                $user_ordered_products = HelperClass::eael_get_all_user_ordered_products();
+                $no_products_found = empty( $user_ordered_products ) && 'purchased' === $product_purchase_type ? 1 : 0;
+ 
+                if ( ! empty( $user_ordered_products ) && 'purchased' === $product_purchase_type ){
+                    $args['post__in'] = $user_ordered_products;
+                }
+
+                if ( ! empty( $user_ordered_products ) && 'not-purchased' === $product_purchase_type ){
+                    $args['post__not_in'] = $user_ordered_products;
+                }
+            }
+        }
+
         ?>
 
         <div <?php $this->print_render_attribute_string( 'container' ); ?> >
@@ -3032,6 +3065,7 @@ class Woo_Product_Carousel extends Widget_Base {
                             }
                             wp_reset_postdata();
                             echo '</ul>';
+                            do_action( 'eael_woo_after_product_loop' );
                         echo '</div>';
                     else:
 	                    echo '<p class="eael-no-posts-found">'.HelperClass::eael_wp_kses($settings['eael_product_carousel_not_found_msg']).'</p>';
