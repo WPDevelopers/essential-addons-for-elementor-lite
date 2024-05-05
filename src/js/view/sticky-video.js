@@ -201,19 +201,27 @@ function GetDomElementHeight(elem) {
 function PositionStickyPlayer(p, h, w) {
   if (p == "top-left") {
     jQuery(".eael-sticky-video-player2.out").css("top", "40px");
+    jQuery(".eael-sticky-video-player2.out").css("bottom", "auto");
     jQuery(".eael-sticky-video-player2.out").css("left", "40px");
+    jQuery(".eael-sticky-video-player2.out").css("right", "auto");
   }
   if (p == "top-right") {
     jQuery(".eael-sticky-video-player2.out").css("top", "40px");
+    jQuery(".eael-sticky-video-player2.out").css("bottom", "auto");
     jQuery(".eael-sticky-video-player2.out").css("right", "40px");
+    jQuery(".eael-sticky-video-player2.out").css("left", "auto");
   }
   if (p == "bottom-right") {
     jQuery(".eael-sticky-video-player2.out").css("bottom", "40px");
+    jQuery(".eael-sticky-video-player2.out").css("top", "auto");
     jQuery(".eael-sticky-video-player2.out").css("right", "40px");
+    jQuery(".eael-sticky-video-player2.out").css("left", "auto");
   }
   if (p == "bottom-left") {
     jQuery(".eael-sticky-video-player2.out").css("bottom", "40px");
+    jQuery(".eael-sticky-video-player2.out").css("top", "auto");
     jQuery(".eael-sticky-video-player2.out").css("left", "40px");
+    jQuery(".eael-sticky-video-player2.out").css("right", "auto");
   }
   jQuery(".eael-sticky-video-player2.out").css("width", w + "px");
   jQuery(".eael-sticky-video-player2.out").css("height", h + "px");

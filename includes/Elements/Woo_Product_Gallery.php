@@ -470,6 +470,18 @@ class Woo_Product_Gallery extends Widget_Base {
 			]
 		);
 
+		$this->add_control('product_type_logged_users', [
+            'label' => __('Purchase Type', 'essential-addons-for-elementor-lite'),
+            'type' => Controls_Manager::SELECT,
+            'description' => __('For logged in users only!', 'essential-addons-for-elementor-lite'),
+            'options' => [
+                'both' => __('Both', 'essential-addons-for-elementor-lite'),
+                'purchased' => __('Purchased Only', 'essential-addons-for-elementor-lite'),
+                'not-purchased' => __('Not Purchased Only', 'essential-addons-for-elementor-lite'),
+            ],
+            'default' => 'both',
+        ]);
+
 		$this->add_control(
 			'eael_product_gallery_dynamic_template',
 			[
@@ -2468,6 +2480,25 @@ class Woo_Product_Gallery extends Widget_Base {
 
 		$this->add_render_attribute( 'wrap', 'class', $settings[ 'eael_product_gallery_terms_position' ] );
 
+		$no_products_found = 0;
+
+        if ( is_user_logged_in() ) {
+            $product_purchase_type = ! empty( $settings['product_type_logged_users'] ) ? sanitize_text_field( $settings['product_type_logged_users'] ) : '';
+
+            if (  in_array( $product_purchase_type, ['purchased', 'not-purchased'] ) ) {
+                $user_ordered_products = HelperClass::eael_get_all_user_ordered_products();
+                $no_products_found = empty( $user_ordered_products ) && 'purchased' === $product_purchase_type ? 1 : 0;
+ 
+                if ( ! empty( $user_ordered_products ) && 'purchased' === $product_purchase_type ){
+                    $args['post__in'] = $user_ordered_products;
+                }
+
+                if ( ! empty( $user_ordered_products ) && 'not-purchased' === $product_purchase_type ){
+                    $args['post__not_in'] = $user_ordered_products;
+                }
+            }
+        }
+
 		?>
 
         <div <?php $this->print_render_attribute_string( 'wrap' ); ?> >
@@ -2506,6 +2537,7 @@ class Woo_Product_Gallery extends Widget_Base {
 						echo '<h2 class="eael-product-not-found">' . __( 'No Product Found', 'essential-addons-for-elementor-lite' ) . '</h2>';
 					}
 					echo '</ul>';
+					do_action( 'eael_woo_after_product_loop' );
 
 				} else {
 					echo '<h2 class="eael-product-not-found">' . __( 'No Layout Found', 'essential-addons-for-elementor-lite' ) . '</h2>';
