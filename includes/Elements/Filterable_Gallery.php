@@ -3486,7 +3486,7 @@ class Filterable_Gallery extends Widget_Base
         $video_url = isset($item['video_link']) ? $item['video_link'] : '#';
         $eael_privacy_notice = isset( $settings['eael_privacy_notice'] ) ? $settings['eael_privacy_notice'] : '';
         
-        $html .= '<a title="' . esc_attr( esc_html( $eael_privacy_notice ) ) .'" aria-label="eael-magnific-video-link" href="' . esc_url($video_url) . '" class="video-popup eael-magnific-link eael-magnific-link-clone active eael-magnific-video-link mfp-iframe" data-elementor-open-lightbox="yes">';
+        $html .= '<a title="' . esc_attr( strip_tags( $eael_privacy_notice ) ) .'" aria-label="eael-magnific-video-link" href="' . esc_url($video_url) . '" class="video-popup eael-magnific-link eael-magnific-link-clone active eael-magnific-video-link mfp-iframe" data-elementor-open-lightbox="yes">';
 
         if( $show_video_popup_bg ){
             $html .= '<div class="video-popup-bg"></div>';
