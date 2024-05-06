@@ -2889,7 +2889,7 @@ class Woo_Product_Carousel extends Widget_Base {
 
         $settings = $this->get_settings_for_display();
         // normalize for load more fix
-        $widget_id = $this->get_id();
+        $widget_id = esc_attr( $this->get_id() );
         $settings[ 'eael_widget_id' ] = $widget_id;
 
         $args = $this->product_query_builder();
@@ -3196,7 +3196,7 @@ class Woo_Product_Carousel extends Widget_Base {
 	 */
     public function product_query_builder(){
 	    $settings                     = $this->get_settings_for_display();
-	    $widget_id                    = $this->get_id();
+	    $widget_id                    = esc_attr( $this->get_id() );
 	    $settings[ 'eael_widget_id' ] = $widget_id;
 	    $order_by                     = $settings[ 'orderby' ];
 	    $filter                        = $settings[ 'eael_product_carousel_product_filter' ];
