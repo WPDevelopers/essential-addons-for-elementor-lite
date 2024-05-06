@@ -3909,7 +3909,7 @@ class Filterable_Gallery extends Widget_Base
                 for ($i = 0; $i < $init_show; $i++) {
 
                     if (array_key_exists($i, $gallery_items)) {
-                        echo wp_kses( $gallery_items[$i], Helper::eael_allowed_tags() );
+                        echo wp_kses( $gallery_items[$i], Helper::eael_allowed_tags(['data-elementor-lightbox-slideshow'=>[]]) );
                     }
                 }
                 if ( $settings['eael_fg_caption_style'] === 'layout_3' ):
