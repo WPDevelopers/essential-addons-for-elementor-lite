@@ -56,6 +56,10 @@
   text-align: left;
 }
 
+.eael-ticker-wrap .eael-content-ticker.swiper-initialized .swiper-wrapper {
+  overflow: initial;
+}
+
 @media only screen and (max-width: 767px) {
   .eael-ticker-wrap {
     -webkit-box-orient: horizontal;

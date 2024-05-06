@@ -27,7 +27,7 @@ class Twitter_Feed extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('Twitter Feed', 'essential-addons-for-elementor-lite');
+        return esc_html__('X (Twitter) Feed', 'essential-addons-for-elementor-lite');
     }
 
     public function get_icon()
@@ -44,12 +44,18 @@ class Twitter_Feed extends Widget_Base
     {
         return [
             'twitter',
+            'x',
             'ea twitter feed',
+            'ea x feed',
             'ea twitter gallery',
+            'ea x gallery',
             'social media',
             'twitter embed',
+            'x embed',
             'twitter feed',
+            'x feed',
             'twitter marketing',
+            'x marketing',
             'tweet feed',
             'tweet embed',
             'ea',

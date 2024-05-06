@@ -41,9 +41,17 @@
 	opacity: 1 !important;
 }
 
-.eael-ticker-wrap .eael-content-ticker.swiper-container .swiper-slide {
-	text-align: left;
+.eael-ticker-wrap .eael-content-ticker{
+	&.swiper-container .swiper-slide {
+		text-align: left;
+	}
+	&.swiper-initialized{
+		.swiper-wrapper{
+			overflow: initial;
+		}
+	}
 }
+
 
 @media only screen and (max-width: 767px) {
 	.eael-ticker-wrap {
