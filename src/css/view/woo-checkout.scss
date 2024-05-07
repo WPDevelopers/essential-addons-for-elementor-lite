@@ -891,3 +891,49 @@ body{
 	}
 }
 
+.theme-goldish {
+	.checkout.woocommerce-checkout > .col2-set{
+		display: inline-block;
+	}
+	.form-row {
+		overflow: visible;
+
+		&.form-row-first{
+			float: left;
+			width: 47%;
+		}
+		&.form-row-last{
+			float: right;
+			width: 47%;
+		}
+		&.form-row-wide{
+			width: 100%;
+			clear: both;
+		}
+
+		label{
+			display: block;
+		}
+		input,
+		select,
+		textarea{
+			width: 100%;
+		}
+		.woo-checkout-payment{
+			display: block;
+			width: 100%;
+		}
+	}
+	.woocommerce .woo-checkout-payment #payment{
+		.payment_methods .wc_payment_method input[type=radio]{
+			display: none !important;
+		}
+
+		.c-cart__sub-header{
+			display: none !important;
+		}
+		.c-cart__payment-methods-box{
+			padding: 1em;
+		}
+	}
+}

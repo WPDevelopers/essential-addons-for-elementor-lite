@@ -740,3 +740,42 @@ body.eael-woo-checkout .astra-pro-wc-module-activated.ea-woo-checkout .woocommer
 body.eael-woo-checkout .astra-pro-wc-module-activated.ea-woo-checkout .woocommerce form .form-row input, body.eael-woo-checkout .astra-pro-wc-module-activated.ea-woo-checkout .woocommerce form .form-row select, body.eael-woo-checkout .astra-pro-wc-module-activated.ea-woo-checkout .woocommerce form .form-row textarea {
   padding: 0.9em 0.8em !important;
 }
+.theme-goldish .checkout.woocommerce-checkout > .col2-set {
+  display: inline-block;
+}
+.theme-goldish .form-row {
+  overflow: visible;
+}
+.theme-goldish .form-row.form-row-first {
+  float: left;
+  width: 47%;
+}
+.theme-goldish .form-row.form-row-last {
+  float: right;
+  width: 47%;
+}
+.theme-goldish .form-row.form-row-wide {
+  width: 100%;
+  clear: both;
+}
+.theme-goldish .form-row label {
+  display: block;
+}
+.theme-goldish .form-row input,
+.theme-goldish .form-row select,
+.theme-goldish .form-row textarea {
+  width: 100%;
+}
+.theme-goldish .form-row .woo-checkout-payment {
+  display: block;
+  width: 100%;
+}
+.theme-goldish .woocommerce .woo-checkout-payment #payment .payment_methods .wc_payment_method input[type=radio] {
+  display: none !important;
+}
+.theme-goldish .woocommerce .woo-checkout-payment #payment .c-cart__sub-header {
+  display: none !important;
+}
+.theme-goldish .woocommerce .woo-checkout-payment #payment .c-cart__payment-methods-box {
+  padding: 1em;
+}
