@@ -1072,7 +1072,7 @@ trait Controls
         );
 
         $wb->add_control(
-            'eael_post_carousel_fallback_img',
+            'eael_post_carousel_fallback_img_all',
             [
                 'label'             => __( 'Image', 'essential-addons-for-elementor-lite' ),
                 'type'              => Controls_Manager::MEDIA,
