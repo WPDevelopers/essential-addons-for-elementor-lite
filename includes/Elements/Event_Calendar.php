@@ -3062,8 +3062,8 @@ class Event_Calendar extends Widget_Base
 	    echo '<div class="eael-event-calendar-wrapper layout-' . esc_attr( $settings['eael_event_display_layout'] ) . '">';
 
 	    if ( $settings['eael_event_display_layout'] === 'calendar' ) {
-		    echo '<div id="eael-event-calendar-' . $this->get_id() . '" class="eael-event-calendar-cls"
-            data-cal_id = "' . $this->get_id() . '"
+		    echo '<div id="eael-event-calendar-' . esc_attr( $this->get_id() ) . '" class="eael-event-calendar-cls"
+            data-cal_id = "' . esc_attr( $this->get_id() ) . '"
             data-locale = "' . esc_attr( $local ) . '"
             data-translate = "' . htmlspecialchars( json_encode( $translate_date ), ENT_QUOTES, 'UTF-8' ) . '"
             data-defaultview = "' . esc_attr( $default_view ) . '"

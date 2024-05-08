@@ -2451,7 +2451,7 @@ class Woo_Product_Gallery extends Widget_Base {
 
 		// normalize for load more fix
 		$settings[ 'layout_mode' ]    = $settings[ 'eael_product_gallery_items_layout' ];
-		$widget_id                    = $this->get_id();
+		$widget_id                    = esc_attr( $this->get_id() );
 		$settings[ 'eael_widget_id' ] = $widget_id;
 		if ( $settings[ 'post_type' ] === 'source_dynamic' && is_archive() || !empty( $_REQUEST[ 'post_type' ] ) ) {
 			$settings[ 'posts_per_page' ] = $settings[ 'eael_product_gallery_products_count' ] ?: 3;
@@ -2521,7 +2521,7 @@ class Woo_Product_Gallery extends Widget_Base {
 					$query                    = new \WP_Query( $args );
 					$show_secondary_image     = isset( $settings['eael_product_gallery_show_secondary_image'] ) && 'yes' === $settings['eael_product_gallery_show_secondary_image'];
 
-					echo '<ul class="products eael-post-appender eael-post-appender-' . $this->get_id() . '" data-layout-mode="' . esc_attr( $settings["eael_product_gallery_items_layout"] ) . '" data-show-secondary-image="' . intval( $show_secondary_image ) . '" >';
+					echo '<ul class="products eael-post-appender eael-post-appender-' . esc_attr( $this->get_id() ) . '" data-layout-mode="' . esc_attr( $settings["eael_product_gallery_items_layout"] ) . '" data-show-secondary-image="' . intval( $show_secondary_image ) . '" >';
 					if ( $query->have_posts() ) {
 						$found_posts         = $query->found_posts;
 						$max_page            = ceil( $found_posts / absint( $args['posts_per_page'] ) );
@@ -2551,7 +2551,7 @@ class Woo_Product_Gallery extends Widget_Base {
         </div>
         <script type="text/javascript">
 			jQuery(document).ready(function ($) {
-				var $scope = jQuery(".elementor-element-<?php echo $this->get_id(); ?>");
+				var $scope = jQuery(".elementor-element-<?php echo esc_js( $this->get_id() ); ?>");
 				var $products = $('.products', $scope);
 				var $layout_mode = $products.data('layout-mode');
 
@@ -2778,7 +2778,7 @@ class Woo_Product_Gallery extends Widget_Base {
 		$show_cat_thumb = isset( $settings[ 'eael_woo_product_gallery_terms_thumb' ] ) && 'yes' === $settings[ 'eael_woo_product_gallery_terms_thumb' ];
 
 		echo '<ul class="eael-cat-tab" data-layout="' . esc_attr( $settings[ "eael_product_gallery_items_layout" ] ) . '" data-template=' . json_encode( [ 'dir' => $dir_name, 'file_name' =>
-				$this->get_filename_only( $template ), 'name'                                                                                        => $this->process_directory_name() ], 1 ) . '  data-nonce="' . wp_create_nonce( 'eael_product_gallery' ) . '" data-page-id="' . $this->page_id . '" data-widget-id="' . $this->get_id() . '" data-widget="' . $this->get_id() . '" data-class="' . get_class( $this ) . '" data-args="' . http_build_query( $args ) . '" data-page="1">';
+				$this->get_filename_only( $template ), 'name'                                                                                        => $this->process_directory_name() ], 1 ) . '  data-nonce="' . wp_create_nonce( 'eael_product_gallery' ) . '" data-page-id="' . $this->page_id . '" data-widget-id="' . esc_attr( $this->get_id() ) . '" data-widget="' . esc_attr( $this->get_id() ) . '" data-class="' . get_class( $this ) . '" data-args="' . http_build_query( $args ) . '" data-page="1">';
 
 		if ( $settings[ 'eael_woo_product_gallery_terms_show_all' ] == 'yes' ) {
 			$all_taxonomy = 'all';
@@ -2801,7 +2801,7 @@ class Woo_Product_Gallery extends Widget_Base {
 
 			echo '<li><a href="javascript:;" data-taxonomy="' . esc_attr( $all_taxonomy ) . '" data-page="1" data-tagid="' . esc_attr( $product_tags_items_data ) . '" data-id="' . esc_attr( $product_cats_data ) .
 			     '" class="active post-list-filter-item post-list-cat-'
-			     . $this->get_id() . '">' .$show_all_cat_thumb. '' . __( $settings[ 'eael_woo_product_gallery_terms_all_text' ], 'essential-addons-for-elementor-lite' ) . '</a></li>';
+			     . esc_attr( $this->get_id() ) . '">' .$show_all_cat_thumb. '' . __( $settings[ 'eael_woo_product_gallery_terms_all_text' ], 'essential-addons-for-elementor-lite' ) . '</a></li>';
 		}
 
 		// Category and tag retrieve

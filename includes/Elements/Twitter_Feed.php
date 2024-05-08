@@ -1608,24 +1608,24 @@ class Twitter_Feed extends Widget_Base
 
         <?php 
         echo '<style>
-            .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-masonry.eael-twitter-feed-col-2 .eael-twitter-feed-item {
+            .eael-twitter-feed-' . esc_html( $this->get_id() ) . '.eael-twitter-feed-masonry.eael-twitter-feed-col-2 .eael-twitter-feed-item {
                 width: calc(50% - ' . ceil($feedcolumnspacing / 2) . 'px);
             }
-            .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-masonry.eael-twitter-feed-col-3 .eael-twitter-feed-item {
+            .eael-twitter-feed-' . esc_html( $this->get_id() ) . '.eael-twitter-feed-masonry.eael-twitter-feed-col-3 .eael-twitter-feed-item {
                 width: calc(33.33% - ' . ceil($settings['eael_twitter_feed_column_spacing']['size'] * 2 / 3) . 'px);
             }
-            .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-masonry.eael-twitter-feed-col-4 .eael-twitter-feed-item {
+            .eael-twitter-feed-' . esc_html( $this->get_id() ) . '.eael-twitter-feed-masonry.eael-twitter-feed-col-4 .eael-twitter-feed-item {
                 width: calc(25% - ' . ceil($feedcolumnspacing * 3 / 4) . 'px);
             }
 
-            .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-col-2 .eael-twitter-feed-item,
-            .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-col-3 .eael-twitter-feed-item,
-            .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-col-4 .eael-twitter-feed-item {
+            .eael-twitter-feed-' . esc_html( $this->get_id() ) . '.eael-twitter-feed-col-2 .eael-twitter-feed-item,
+            .eael-twitter-feed-' . esc_html( $this->get_id() ) . '.eael-twitter-feed-col-3 .eael-twitter-feed-item,
+            .eael-twitter-feed-' . esc_html( $this->get_id() ) . '.eael-twitter-feed-col-4 .eael-twitter-feed-item {
                 margin-bottom: ' . $settings['eael_twitter_feed_column_spacing']['size'] . 'px;
             }
             @media only screen and (min-width: 768px) and (max-width: 992px) {
-                .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-masonry.eael-twitter-feed-col-3 .eael-twitter-feed-item,
-                .eael-twitter-feed-' . $this->get_id() . '.eael-twitter-feed-masonry.eael-twitter-feed-col-4 .eael-twitter-feed-item {
+                .eael-twitter-feed-' . esc_html( $this->get_id() ) . '.eael-twitter-feed-masonry.eael-twitter-feed-col-3 .eael-twitter-feed-item,
+                .eael-twitter-feed-' . esc_html( $this->get_id() ) . '.eael-twitter-feed-masonry.eael-twitter-feed-col-4 .eael-twitter-feed-item {
                     width: calc(50% - ' . ceil($feedcolumnspacing / 2) . 'px);
                 }
             }
@@ -1634,7 +1634,7 @@ class Twitter_Feed extends Widget_Base
             echo '<script type="text/javascript">
                 jQuery(document).ready(function($) {
                     $(".eael-twitter-feed").each(function() {
-                        var $node_id = "' . $this->get_id() . '",
+                        var $node_id = "' . esc_js( $this->get_id() ) . '",
                         $scope = $(".elementor-element-"+$node_id+""),
                         $gutter = $(".eael-twitter-feed", $scope).data("gutter"),
                         $settings = {
