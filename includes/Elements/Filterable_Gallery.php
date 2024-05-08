@@ -3809,7 +3809,7 @@ class Filterable_Gallery extends Widget_Base
             }
         }
 
-        echo '<style id="eael-fg-inline-css-'. esc_attr( $section_id ) .'">'. __( $media_query ) .'</style>';
+        echo '<style id="eael-fg-inline-css-'. esc_attr( $section_id ) .'">'. $media_query .'</style>';
     }
 
     protected function render() {
