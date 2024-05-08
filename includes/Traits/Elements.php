@@ -929,25 +929,25 @@ trait Elements {
 
 		$scroll_to_top_global_css = "
             .eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button {
-                bottom: {$eael_stt_position_bottom_size}{$eael_stt_position_bottom_unit};
-                {$eael_stt_position_left_right_key}: {$eael_stt_position_left_right_value};
-                width: {$eael_stt_button_width_size}{$eael_stt_button_width_unit};
-                height: {$eael_stt_button_height_size}{$eael_stt_button_height_unit};
-                z-index: {$eael_stt_z_index_size};
-                opacity: {$eael_stt_button_opacity_size};
-                background-color: {$eael_stt_button_bg_color};
-                border-radius: {$eael_stt_button_border_radius_size}{$eael_stt_button_border_radius_unit};
+                bottom: {" . esc_attr( $eael_stt_position_bottom_size ) . "}{" . esc_attr( $eael_stt_position_bottom_unit ) . "};
+                {" . esc_attr( $eael_stt_position_left_right_key ) . "}: {" . esc_attr( $eael_stt_position_left_right_value ) . "};
+                width: {" . esc_attr( $eael_stt_button_width_size ) . "}{" . esc_attr( $eael_stt_button_width_unit ) . "};
+                height: {" . esc_attr( $eael_stt_button_height_size ) . "}{" . esc_attr( $eael_stt_button_height_unit ) . "};
+                z-index: {" . intval( $eael_stt_z_index_size ) . "};
+                opacity: {" . esc_attr( $eael_stt_button_opacity_size ) . "};
+                background-color: {" . esc_attr( $eael_stt_button_bg_color ) . "};
+                border-radius: {" . esc_attr( $eael_stt_button_border_radius_size ) . "}{" . esc_attr( $eael_stt_button_border_radius_unit ) . "};
             }
 
             .eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button i {
-                color: {$eael_stt_button_icon_color};
-                font-size: {$eael_stt_button_icon_size_size}{$eael_stt_button_icon_size_unit};
+                color: {" . esc_attr( $eael_stt_button_icon_color ) . "};
+                font-size: {" . esc_attr( $eael_stt_button_icon_size_size ) . "}{" . esc_attr( $eael_stt_button_icon_size_unit ) . "};
             }
 
             .eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button svg {
-                fill: {$eael_stt_button_icon_color};
-                width: {$eael_stt_button_icon_svg_size_size}{$eael_stt_button_icon_svg_size_unit};
-                height: {$eael_stt_button_icon_svg_size_size}{$eael_stt_button_icon_svg_size_unit};
+                fill: {" . esc_attr( $eael_stt_button_icon_color ) . "};
+                width: {" . esc_attr( $eael_stt_button_icon_svg_size_size ) . "}{" . esc_attr( $eael_stt_button_icon_svg_size_unit ) . "};
+                height: {" . esc_attr( $eael_stt_button_icon_svg_size_size ) . "}{" . esc_attr( $eael_stt_button_icon_svg_size_unit ) . "};
             } 
         ";
 
