@@ -750,7 +750,7 @@ body.eael-woo-checkout .astra-pro-wc-module-activated.ea-woo-checkout .woocommer
   display: block !important;
 }
 .theme-goldish .ea-woo-checkout .woocommerce-form-coupon-toggle {
-  display: inline-block;
+  display: none !important;
 }
 .theme-goldish .ea-woo-checkout .woocommerce-form-coupon-toggle .ea-coupon-icon {
   padding-bottom: 10px;
