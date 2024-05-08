@@ -547,7 +547,7 @@ trait Elements {
 				$table_of_content_html = "<div data-eaelTocTag='" . esc_attr( $support_tag ) . "' data-contentSelector='" . esc_attr( $content_selector ) . "' data-excludeSelector='" . esc_attr( $exclude_selector ) . "' data-stickyScroll='" . esc_attr( $sticky_scroll['size'] ) . "' data-titleUrl='" . esc_attr( $title_url ) . "' data-page_offset='" . esc_attr( $page_offset ) . "' id='eael-toc' class='" . esc_attr( $el_class ) . " '>
                     <div class='eael-toc-header'>
                             <span class='eael-toc-close'>×</span>
-                            <{$toc_title_tag} class='eael-toc-title'>{$toc_title}</{$toc_title_tag}>
+                            <" . Helper::eael_validate_html_tag( $toc_title_tag ) . " class='eael-toc-title'>{$toc_title}</" . Helper::eael_validate_html_tag( $toc_title_tag ) . ">
                     </div>
                     <div class='eael-toc-body'>
                         <ul id='eael-toc-list' class='eael-toc-list " . esc_attr( $toc_style_class ) . "'></ul>
