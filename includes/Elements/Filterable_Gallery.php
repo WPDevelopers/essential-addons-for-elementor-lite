@@ -3784,7 +3784,7 @@ class Filterable_Gallery extends Widget_Base
 
     protected function render_media_query( $settings ){
         $media_query = '';
-        $section_id  = $this->get_id();
+        $section_id  = esc_html( $this->get_id() );
         $breakpoints = method_exists( Plugin::$instance->breakpoints, 'get_breakpoints_config' ) ? Plugin::$instance->breakpoints->get_breakpoints_config() : [];
         $brp_desktop = isset( $breakpoints['widescreen'] ) ? $breakpoints['widescreen']['value'] - 1 : 2400;
 
@@ -3809,7 +3809,7 @@ class Filterable_Gallery extends Widget_Base
             }
         }
 
-        echo '<style id="eael-fg-inline-css-'. $section_id .'">'. __( $media_query ) .'</style>';
+        echo '<style id="eael-fg-inline-css-'. esc_attr( $section_id ) .'">'. __( $media_query ) .'</style>';
     }
 
     protected function render() {
