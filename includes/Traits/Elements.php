@@ -547,12 +547,12 @@ trait Elements {
 				$table_of_content_html = "<div data-eaelTocTag='" . esc_attr( $support_tag ) . "' data-contentSelector='" . esc_attr( $content_selector ) . "' data-excludeSelector='" . esc_attr( $exclude_selector ) . "' data-stickyScroll='" . esc_attr( $sticky_scroll['size'] ) . "' data-titleUrl='" . esc_attr( $title_url ) . "' data-page_offset='" . esc_attr( $page_offset ) . "' id='eael-toc' class='" . esc_attr( $el_class ) . " '>
                     <div class='eael-toc-header'>
                             <span class='eael-toc-close'>×</span>
-                            <" . Helper::eael_validate_html_tag( $toc_title_tag ) . " class='eael-toc-title'>{$toc_title}</" . Helper::eael_validate_html_tag( $toc_title_tag ) . ">
+                            <" . Helper::eael_validate_html_tag( $toc_title_tag ) . " class='eael-toc-title'>" . esc_html( $toc_title ) . "</" . Helper::eael_validate_html_tag( $toc_title_tag ) . ">
                     </div>
                     <div class='eael-toc-body'>
                         <ul id='eael-toc-list' class='eael-toc-list " . esc_attr( $toc_style_class ) . "'></ul>
                     </div>
-                    <button class='eael-toc-button'>" . wp_kses( $icon_html, [ 'i' => [ 'class' => [] ] ] ) . "<span>{$toc_title}</span></button>
+                    <button class='eael-toc-button'>" . wp_kses( $icon_html, [ 'i' => [ 'class' => [] ] ] ) . "<span>" . esc_html( $toc_title ) . "</span></button>
                 </div>";
 
 				$is_toc_enabled    = $this->get_extensions_value( 'eael_ext_table_of_content' );
