@@ -680,85 +680,85 @@ trait Elements {
             .eael-toc-global .eael-toc-header,
             .eael-toc-global.collapsed .eael-toc-button
             {
-                background-color:{" . esc_attr( $eael_toc['eael_ext_table_of_content_header_bg'] ) . "};
+                background-color:{$eael_toc['eael_ext_table_of_content_header_bg']};
             }
 
             .eael-toc-global {
-                width:{" . intval( $eael_toc_width ) . "}px;
-                z-index:{" . intval( $eael_toc['eael_ext_toc_sticky_z_index']['size'] ) . "};
+                width:{$eael_toc_width}px;
+                z-index:{$eael_toc['eael_ext_toc_sticky_z_index']['size']};
             }
 
             .eael-toc-global.eael-sticky {
-                top:{" . intval( $eael_toc['eael_ext_toc_sticky_offset']['size'] ) . "};
+                top:{$eael_toc['eael_ext_toc_sticky_offset']['size']};
             }
             .eael-toc-global .eael-toc-header .eael-toc-title,
             .eael-toc-global.collapsed .eael-toc-button
             {
-                color:{" . esc_attr( $eael_toc['eael_ext_table_of_content_header_text_color'] ) . "};
-                " . esc_attr( $header_typography ) . "
+                color:{$eael_toc['eael_ext_table_of_content_header_text_color']};
+                $header_typography
             }
             .eael-toc-global .eael-toc-header {
-                padding:{" . intval( $header_padding['top'] ) . "}px {" . intval( $header_padding['right'] ) . "}px {" . intval( $header_padding['bottom'] ) . "}px {" . intval( $header_padding['left'] ) . "}px;
+                padding:{$header_padding['top']}px {$header_padding['right']}px {$header_padding['bottom']}px {$header_padding['left']}px;
             }
 
             .eael-toc-global .eael-toc-body {
-                padding:{" . intval( $body_padding['top'] ) . "}px {" . intval( $body_padding['right'] ) . "}px {" . esc_attr( $body_padding['bottom'] ) . "}px {" . intval( $body_padding['left'] ) . "}px;
+                padding:{$body_padding['top']}px {$body_padding['right']}px {$body_padding['bottom']}px {$body_padding['left']}px;
             }
 
             .eael-toc-global .eael-toc-close
             {
-                font-size: {" . intval( $eael_toc['eael_ext_table_of_content_close_button_icon_size']['size'] ) . "}px !important;
-                height: {" . intval( $eael_toc['eael_ext_table_of_content_close_button_size']['size'] ) . "}px !important;
-                width: {" . intval( $eael_toc['eael_ext_table_of_content_close_button_size']['size'] ) . "}px !important;
-                line-height: {" . intval( $eael_toc['eael_ext_table_of_content_close_button_line_height']['size'] ) . "}px !important;
-                color:{" . esc_attr( $eael_toc['eael_ext_table_of_content_close_button_text_color'] ) . "} !important;
-                background-color:{" . esc_attr( $eael_toc['eael_ext_table_of_content_close_button_bg'] ) . "} !important;
-                border-radius: {" . intval( $eael_toc['eael_ext_table_of_content_close_button_border_radius']['size'] ) . "}px !important;
-                box-shadow:{" . intval( $close_bt_box_shadow['horizontal'] ) . "}px {" . intval( $close_bt_box_shadow['vertical'] ) . "}px {" . intval( $close_bt_box_shadow['blur'] ) . "}px {" . intval( $close_bt_box_shadow['spread'] ) . "}px {" . esc_attr( $close_bt_box_shadow['color'] ) . "} !important;
+                font-size: {$eael_toc['eael_ext_table_of_content_close_button_icon_size']['size']}px !important;
+                height: {$eael_toc['eael_ext_table_of_content_close_button_size']['size']}px !important;
+                width: {$eael_toc['eael_ext_table_of_content_close_button_size']['size']}px !important;
+                line-height: {$eael_toc['eael_ext_table_of_content_close_button_line_height']['size']}px !important;
+                color:{$eael_toc['eael_ext_table_of_content_close_button_text_color']} !important;
+                background-color:{$eael_toc['eael_ext_table_of_content_close_button_bg']} !important;
+                border-radius: {$eael_toc['eael_ext_table_of_content_close_button_border_radius']['size']}px !important;
+                box-shadow:{$close_bt_box_shadow['horizontal']}px {$close_bt_box_shadow['vertical']}px {$close_bt_box_shadow['blur']}px {$close_bt_box_shadow['spread']}px {$close_bt_box_shadow['color']} !important;
             }
 
             .eael-toc-global.eael-toc:not(.collapsed)
             {
-                box-shadow:{" . intval( $box_shadow['horizontal'] ) . "}px {" . intval( $box_shadow['vertical'] ) . "}px {" . intval( $box_shadow['blur'] ) . "}px {" . intval( $box_shadow['spread'] ) . "}px {" . esc_attr( $box_shadow['color'] ) . "};
+                box-shadow:{$box_shadow['horizontal']}px {$box_shadow['vertical']}px {$box_shadow['blur']}px {$box_shadow['spread']}px {$box_shadow['color']};
             }
 
             .eael-toc-global .eael-toc-body
             {
-                background-color:{" . esc_attr( $eael_toc['eael_ext_table_of_content_body_bg'] ) . "};
+                background-color:{$eael_toc['eael_ext_table_of_content_body_bg']};
             }
 
             .eael-toc-global .eael-toc-body ul.eael-toc-list.eael-toc-bullet li:before
             {
-                width:{" . intval( $bullet_size ) . "}px;
-                height:{" . intval( $bullet_size ) . "}px;
-                top:{" . intval( $top_position ) . "}px;
+                width:{$bullet_size}px;
+                height:{$bullet_size}px;
+                top:{$top_position}px;
             }
 
             .eael-toc-global .eael-toc-body .eael-toc-list li,
             .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-number li:before,
             .eael-toc-global .eael-toc-body .eael-toc-list li a
             {
-                color:{" . esc_attr( $eael_toc['eael_ext_table_of_content_list_text_color'] ) . "} !important;
+                color:{$eael_toc['eael_ext_table_of_content_list_text_color']} !important;
             }
 
             .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-bullet li:before {
-                background-color:{" . esc_attr( $eael_toc['eael_ext_table_of_content_list_text_color'] ) . "} !important;
+                background-color:{$eael_toc['eael_ext_table_of_content_list_text_color']} !important;
             }
 
             .eael-toc-global .eael-toc-body .eael-toc-list li:hover,
             .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-number li:hover:before,
             .eael-toc-global .eael-toc-body .eael-toc-list li:hover > a
             {
-                color:{" . esc_attr( $eael_toc['eael_ext_table_of_list_hover_color'] ) . "} !important;
+                color:{$eael_toc['eael_ext_table_of_list_hover_color']} !important;
             }
 
             .eael-toc-global .eael-toc-body .eael-toc-list li:hover > a:before {
-                border-bottom-color:{" . esc_attr( $eael_toc['eael_ext_table_of_list_hover_color'] ) . "} !important;
+                border-bottom-color:{$eael_toc['eael_ext_table_of_list_hover_color']} !important;
             }
 
             .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-bullet li:hover:before,
             .eael-toc-global .eael-toc-body .eael-toc-list li:hover > a:after {
-                background-color:{" . esc_attr( $eael_toc['eael_ext_table_of_list_hover_color'] ) . "} !important;
+                background-color:{$eael_toc['eael_ext_table_of_list_hover_color']} !important;
             }
 
             .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-active,
@@ -768,86 +768,86 @@ trait Elements {
             .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-number li.eael-highlight-parent:before,
             .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-parent > a
             {
-                color: " . esc_attr( $toc_list_color_active ) . " !important;
+                color: $toc_list_color_active !important;
             }
 
 
             .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-active > a:before
             {
-                border-bottom-color: " . esc_attr( $toc_list_color_active ) . " !important;
+                border-bottom-color: $toc_list_color_active !important;
             }
 
             .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-bullet li.eael-highlight-active:before,
             .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-active > a:after,
             .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-bullet li.eael-highlight-parent:before
             {
-                background-color: " . esc_attr( $toc_list_color_active ) . " !important;
+                background-color: $toc_list_color_active !important;
             }
 
             .eael-toc-global ul.eael-toc-list > li
             {
-                color:{" . esc_attr( $eael_toc['eael_ext_table_of_content_list_separator_color'] ) . "} !important;
-                " . esc_attr( $list_typography ) . "
+                color:{$eael_toc['eael_ext_table_of_content_list_separator_color']} !important;
+                $list_typography
             }
             .eael-toc.eael-toc-global .eael-toc-body ul.eael-toc-list li:before {
-                " . esc_attr( $list_typography ) . "
+                $list_typography
             }
 
             .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-list-bar li.eael-highlight-active > a:after {
-                height:{" . intval( $indicator_size ) . "}px;
+                height:{$indicator_size}px;
             }
 
             .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-list-arrow li.eael-highlight-active > a:before,
             .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-list-bar li.eael-highlight-active > a:after {
-                margin-top:{" . intval( $indicator_position ) . "}px;
+                margin-top:{$indicator_position}px;
             }
 
 
             .eael-toc:not(.eael-toc-right)
             {
-                border-top-right-radius:{" . intval( $border_radius ) . "}px;
-                border-bottom-right-radius:{" . intval( $border_radius ) . "}px;
+                border-top-right-radius:{$border_radius}px;
+                border-bottom-right-radius:{$border_radius}px;
             }
 
             .eael-toc:not(.eael-toc-right) .eael-toc-header
             {
-                border-top-right-radius:{" . intval( $border_radius ) . "}px;
+                border-top-right-radius:{$border_radius}px;
             }
 
             .eael-toc:not(.eael-toc-right) .eael-toc-body {
-                border-bottom-right-radius:{" . intval( $border_radius ) . "}px;
+                border-bottom-right-radius:{$border_radius}px;
             }
 
             .eael-toc.eael-toc-right {
-                border-top-left-radius:{" . intval( $border_radius ) . "}px;
-                border-bottom-left-radius:{" . intval( $border_radius ) . "}px;
+                border-top-left-radius:{$border_radius}px;
+                border-bottom-left-radius:{$border_radius}px;
             }
 
             .eael-toc.eael-toc-right .eael-toc-header {
-                border-top-left-radius:{" . intval( $border_radius ) . "}px;
+                border-top-left-radius:{$border_radius}px;
             }
 
             .eael-toc.eael-toc-right .eael-toc-body {
-                border-bottom-left-radius:{" . intval( $border_radius ) . "}px;
+                border-bottom-left-radius:{$border_radius}px;
             }
 
 
             #eael-toc.eael-toc-global ul.eael-toc-list > li
             {
-                padding-top:{" . intval( $eael_toc['eael_ext_toc_top_level_space']['size'] ) . "}px;
-                padding-bottom:{" . intval( $eael_toc['eael_ext_toc_top_level_space']['size'] ) . "}px;
+                padding-top:{$eael_toc['eael_ext_toc_top_level_space']['size']}px;
+                padding-bottom:{$eael_toc['eael_ext_toc_top_level_space']['size']}px;
             }
 
             #eael-toc.eael-toc-global ul.eael-toc-list>li ul li
             {
-                padding-top:{" . intval( $eael_toc['eael_ext_toc_subitem_level_space']['size'] ) . "}px;
-                padding-bottom:{" . intval( $eael_toc['eael_ext_toc_subitem_level_space']['size'] ) . "}px;
+                padding-top:{$eael_toc['eael_ext_toc_subitem_level_space']['size']}px;
+                padding-bottom:{$eael_toc['eael_ext_toc_subitem_level_space']['size']}px;
             }
         ";
 		if ( $toc_list_separator_style != 'none' ) {
 			$toc_global_css .= "
             .eael-toc-global ul.eael-toc-list > li
-            {border-top: 0.5px " . esc_attr( $toc_list_separator_style ) . " !important;}
+            {border-top: 0.5px $toc_list_separator_style !important;}
             .eael-toc ul.eael-toc-list>li:first-child
             {border: none !important;}";
 		}
@@ -857,9 +857,9 @@ trait Elements {
 			$toc_global_css .= "
             .eael-toc.eael-toc-global,.eael-toc-global button.eael-toc-button
             {
-                border-style: {" . esc_attr( $eael_toc['eael_ext_toc_border_border'] ) . "};
-                border-width: {" . intval( $border_width['top'] ) . "}px {" . intval( $border_width['right'] ) . "}px {" . intval( $border_width['bottom'] ) . "}px {" . intval( $border_width['left'] ) . "}px;
-                border-color: {" . esc_attr( $eael_toc['eael_ext_toc_border_color'] ) . "};
+                border-style: {$eael_toc['eael_ext_toc_border_border']};
+                border-width: {$border_width['top']}px {$border_width['right']}px {$border_width['bottom']}px {$border_width['left']}px;
+                border-color: {$eael_toc['eael_ext_toc_border_color']};
             }";
 		}
 
@@ -929,25 +929,25 @@ trait Elements {
 
 		$scroll_to_top_global_css = "
             .eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button {
-                bottom: {" . esc_attr( $eael_stt_position_bottom_size ) . "}{" . esc_attr( $eael_stt_position_bottom_unit ) . "};
-                {" . esc_attr( $eael_stt_position_left_right_key ) . "}: {" . esc_attr( $eael_stt_position_left_right_value ) . "};
-                width: {" . esc_attr( $eael_stt_button_width_size ) . "}{" . esc_attr( $eael_stt_button_width_unit ) . "};
-                height: {" . esc_attr( $eael_stt_button_height_size ) . "}{" . esc_attr( $eael_stt_button_height_unit ) . "};
-                z-index: {" . intval( $eael_stt_z_index_size ) . "};
-                opacity: {" . esc_attr( $eael_stt_button_opacity_size ) . "};
-                background-color: {" . esc_attr( $eael_stt_button_bg_color ) . "};
-                border-radius: {" . esc_attr( $eael_stt_button_border_radius_size ) . "}{" . esc_attr( $eael_stt_button_border_radius_unit ) . "};
+                bottom: {$eael_stt_position_bottom_size}{$eael_stt_position_bottom_unit};
+                {$eael_stt_position_left_right_key}: {$eael_stt_position_left_right_value};
+                width: {$eael_stt_button_width_size}{$eael_stt_button_width_unit};
+                height: {$eael_stt_button_height_size}{$eael_stt_button_height_unit};
+                z-index: {$eael_stt_z_index_size};
+                opacity: {$eael_stt_button_opacity_size};
+                background-color: {$eael_stt_button_bg_color};
+                border-radius: {$eael_stt_button_border_radius_size}{$eael_stt_button_border_radius_unit};
             }
 
             .eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button i {
-                color: {" . esc_attr( $eael_stt_button_icon_color ) . "};
-                font-size: {" . esc_attr( $eael_stt_button_icon_size_size ) . "}{" . esc_attr( $eael_stt_button_icon_size_unit ) . "};
+                color: {$eael_stt_button_icon_color};
+                font-size: {$eael_stt_button_icon_size_size}{$eael_stt_button_icon_size_unit};
             }
 
             .eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button svg {
-                fill: {" . esc_attr( $eael_stt_button_icon_color ) . "};
-                width: {" . esc_attr( $eael_stt_button_icon_svg_size_size ) . "}{" . esc_attr( $eael_stt_button_icon_svg_size_unit ) . "};
-                height: {" . esc_attr( $eael_stt_button_icon_svg_size_size ) . "}{" . esc_attr( $eael_stt_button_icon_svg_size_unit ) . "};
+                fill: {$eael_stt_button_icon_color};
+                width: {$eael_stt_button_icon_svg_size_size}{$eael_stt_button_icon_svg_size_unit};
+                height: {$eael_stt_button_icon_svg_size_size}{$eael_stt_button_icon_svg_size_unit};
             } 
         ";
 
