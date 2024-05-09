@@ -2462,6 +2462,22 @@ class Woo_Checkout extends Widget_Base {
 				],
 			]
 		);
+
+		$this->add_control(
+			'ea_woo_checkout_customer_details_field_bg_color',
+			[
+				'label' => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#fff',
+				'selectors' => [
+					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper input' => 'background: {{VALUE}};',
+					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper select' => 'background: {{VALUE}};',
+					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper textarea' => 'background: {{VALUE}};',
+				],
+			]
+		);
+
+
 		$this->start_controls_tabs( 'ea_woo_checkout_customer_details_field_tabs' );
 
 		$this->start_controls_tab( 'ea_woo_checkout_customer_details_field_tab_normal', [ 'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite' ) ] );
