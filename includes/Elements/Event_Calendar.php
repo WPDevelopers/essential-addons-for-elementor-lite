@@ -3062,8 +3062,8 @@ class Event_Calendar extends Widget_Base
 	    echo '<div class="eael-event-calendar-wrapper layout-' . esc_attr( $settings['eael_event_display_layout'] ) . '">';
 
 	    if ( $settings['eael_event_display_layout'] === 'calendar' ) {
-		    echo '<div id="eael-event-calendar-' . $this->get_id() . '" class="eael-event-calendar-cls"
-            data-cal_id = "' . $this->get_id() . '"
+		    echo '<div id="eael-event-calendar-' . esc_attr( $this->get_id() ) . '" class="eael-event-calendar-cls"
+            data-cal_id = "' . esc_attr( $this->get_id() ) . '"
             data-locale = "' . esc_attr( $local ) . '"
             data-translate = "' . htmlspecialchars( json_encode( $translate_date ), ENT_QUOTES, 'UTF-8' ) . '"
             data-defaultview = "' . esc_attr( $default_view ) . '"
@@ -3075,7 +3075,7 @@ class Event_Calendar extends Widget_Base
             data-monthColumnHeaderFormat = "' . esc_attr( $settings['eael_calendar_column_heading_month'] ) . '"
             data-weekColumnHeaderFormat = "' . esc_attr( $settings['eael_calendar_column_heading_week'] ) . '"
             data-hideDetailsLink= "' . esc_attr( $settings['eael_event_details_link_hide'] ) . '"
-            data-detailsButtonText = "' . Helper::eael_wp_kses( $settings['eael_event_details_text'] ) . '"
+            data-detailsButtonText = "' . esc_attr( Helper::eael_wp_kses( $settings['eael_event_details_text'] ) ) . '"
             data-events="' . htmlspecialchars( json_encode( $data ), ENT_QUOTES, 'UTF-8' ) . '"
             data-first_day="' . esc_attr( $settings['eael_event_calendar_first_day'] ) . '"></div>
             ' . $this->eaelec_load_event_details();
