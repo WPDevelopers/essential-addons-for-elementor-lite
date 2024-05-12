@@ -2458,7 +2458,10 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#443e6d',
 				'selectors' => [
-					'{{WRAPPER}} #customer_details input, {{WRAPPER}} #customer_details select, {{WRAPPER}} #customer_details textarea' => 'color: {{VALUE}};',
+					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper input' => 'color: {{VALUE}};', 
+					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper select' => 'color: {{VALUE}};', 
+					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper textarea' => 'color: {{VALUE}};',
+					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper .select2-selection span' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -2473,6 +2476,7 @@ class Woo_Checkout extends Widget_Base {
 					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper input' => 'background: {{VALUE}};',
 					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper select' => 'background: {{VALUE}};',
 					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper textarea' => 'background: {{VALUE}};',
+					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper .select2-selection' => 'background: {{VALUE}};',
 				],
 			]
 		);
