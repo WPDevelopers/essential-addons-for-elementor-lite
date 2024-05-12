@@ -1019,7 +1019,7 @@ class Interactive_Circle extends Widget_Base {
 								$item_count = $index + 1;
 								$is_active  = $item['eael_interactive_circle_default_active'] === 'yes' ? 'active' : '';
 								?>
-                                <div class="eael-circle-item elementor-repeater-item-<?php echo $item['_id']; ?>">
+                                <div class="eael-circle-item elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
                                     <div aria-controls="eael-interactive-<?php echo esc_attr( $item_count ); ?>" tabindex="0" class="eael-circle-btn <?php echo $is_active; ?>" id="eael-circle-item-<?php echo $item_count; ?>">
                                         <div class="eael-circle-icon-shapes">
                                             <div class="eael-shape-1"></div>
