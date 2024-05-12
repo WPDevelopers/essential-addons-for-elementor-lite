@@ -25,6 +25,9 @@
 	p {
 		margin: 0;
 	}
+	a {
+		transition: none;
+	}
 }
 
 .eael-tooltip .eael-tooltip-text::after {

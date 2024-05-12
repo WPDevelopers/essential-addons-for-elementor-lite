@@ -1,3 +1,8 @@
+.eael-contact-form-align-default {
+  display: inline-block;
+  text-align: left;
+}
+
 .eael-contact-form-7.eael-contact-form-btn-align-center input.wpcf7-submit {
   margin-left: auto !important;
   margin-right: auto !important;
