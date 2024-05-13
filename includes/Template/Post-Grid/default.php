@@ -129,7 +129,11 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                                 
                                 //For custom post type
                                 $get_custom_post_type = get_post_type( get_the_ID() ); //post
-                                $get_custom_taxonomy  = $settings["eael_{$get_custom_post_type}_terms"]; //tags
+                                if ( 'product' === $get_custom_post_type ) {
+                                    $get_custom_taxonomy  = $settings['eael_post_terms'] === 'category' ? 'product_cat' : ( $settings['eael_post_terms'] === 'tags' ? 'product_tag' : $settings['eael_post_terms'] );
+                                } else {
+                                    $get_custom_taxonomy  = $settings["eael_{$get_custom_post_type}_terms"]; //tags
+                                }
 
                                 if( 'post' !== $get_custom_post_type && $settings[ 'eael_post_terms' ] === $get_custom_taxonomy ) {
                                     $terms = wp_get_post_terms( get_the_ID(), $get_custom_taxonomy );
