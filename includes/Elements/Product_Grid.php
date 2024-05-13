@@ -479,8 +479,19 @@ class Product_Grid extends Widget_Base
             'options' => HelperClass::get_terms_list('product_cat', 'slug'),
             'condition'   => [
               'post_type!' => 'source_dynamic',
-              'eael_product_grid_product_filter!' => 'manual',
-              'eael_product_grid_product_filter!' => 'related-products'
+              'eael_product_grid_product_filter!' => [ 'manual' , 'related-products' ],
+            ],
+        ]);
+
+        $this->add_control('eael_product_grid_tags', [
+            'label'       => esc_html__('Product Tags', 'essential-addons-for-elementor-lite'),
+            'type'        => Controls_Manager::SELECT2,
+            'label_block' => true,
+            'multiple'    => true,
+            'options'     => HelperClass::get_terms_list('product_tag', 'slug'),
+            'condition'   => [
+              'post_type!' => 'source_dynamic',
+              'eael_product_grid_product_filter!' => [ 'manual' , 'related-products' ],
             ],
         ]);
 
@@ -3301,14 +3312,21 @@ class Product_Grid extends Widget_Base
             $args['orderby'] = (isset($settings['orderby']) ? $settings['orderby'] : 'date');
         }
 
-        if (!empty($settings['eael_product_grid_categories'])) {
-            $args['tax_query'] = [
-                [
-                    'taxonomy' => 'product_cat',
-                    'field' => 'slug',
-                    'terms' => $settings['eael_product_grid_categories'],
-                    'operator' => 'IN',
-                ],
+        if ( ! empty( $settings['eael_product_grid_categories'] ) ) {
+            $args['tax_query'][] = [
+                'taxonomy' => 'product_cat',
+                'field'    => 'slug',
+                'terms'    => $settings['eael_product_grid_categories'],
+                'operator' => 'IN',
+            ];
+        }
+
+        if ( ! empty( $settings['eael_product_grid_tags'] ) ) {
+            $args['tax_query'][] = [
+                'taxonomy' => 'product_tag',
+                'field'    => 'slug',
+                'terms'    => $settings['eael_product_grid_tags'],
+                'operator' => 'IN',
             ];
         }
 
