@@ -6293,10 +6293,6 @@ msgstr ""
 msgid "Get your API key from <a href=\"https://docs.opensea.io/reference/api-keys\" class=\"eael-btn\" target=\"_blank\">%s</a>"
 msgstr ""
 
-#: ../includes/Elements/NFT_Gallery.php:108
-msgid "Assets"
-msgstr ""
-
 #: ../includes/Elements/NFT_Gallery.php:109
 msgid "Collections"
 msgstr ""
