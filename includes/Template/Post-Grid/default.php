@@ -10,7 +10,8 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-if (has_post_thumbnail() && $settings['eael_show_image'] == 'yes') {
+$thumbnail_html = '';
+if ( $settings['eael_show_image'] == 'yes' ) {
 	$settings[ 'eael_image_size_customize' ] = [
 		'id' => get_post_thumbnail_id(),
 	];
@@ -26,7 +27,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
     echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . get_the_ID() . '">
         <div class="eael-grid-post-holder">
             <div class="eael-grid-post-holder-inner">';
-                if (has_post_thumbnail() && $settings['eael_show_image'] == 'yes') {
+                if ( $thumbnail_html && 'yes' === $settings['eael_show_image'] ) {
                     echo '<div class="eael-entry-media">';
                         if ( 'yes' === $settings['eael_show_post_terms'] && 'yes' === $settings['eael_post_terms_on_image_hover'] ) {
                             echo Helper::get_terms_as_list($settings['eael_post_terms'], $settings['eael_post_terms_max_length']);
@@ -179,7 +180,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
         <div class="eael-grid-post-holder">
             <div class="eael-grid-post-holder-inner">';
 
-    if (has_post_thumbnail() && $settings['eael_show_image'] == 'yes') {
+    if ( $thumbnail_html && 'yes' === $settings['eael_show_image'] ) {
 
         echo '<div class="eael-entry-media">';
         if ( 'yes' === $settings['eael_show_post_terms'] && 'yes' === $settings['eael_post_terms_on_image_hover'] ) {
@@ -269,8 +270,8 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
     echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . esc_attr( get_the_ID() ) . '">
         <div class="eael-grid-post-holder">
             <div class="eael-grid-post-holder-inner">';
-
-    if (has_post_thumbnail() && $settings['eael_show_image'] == 'yes') {
+            
+    if ( $thumbnail_html && 'yes' === $settings['eael_show_image'] ) {
 
         echo '<div class="eael-entry-media">';
         if ( 'yes' === $settings['eael_show_post_terms'] && 'yes' === $settings['eael_post_terms_on_image_hover'] ) {
