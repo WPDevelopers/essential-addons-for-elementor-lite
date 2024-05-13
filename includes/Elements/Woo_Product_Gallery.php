@@ -2839,9 +2839,9 @@ class Woo_Product_Gallery extends Widget_Base {
 						$show_cat_thumb_tag = '';
 					}
 
-					echo '<li><a href="javascript:;" data-page="1" data-taxonomy="product_cat" data-terms='
+					echo '<li><a href="javascript:;" data-page="1" data-taxonomy="product_cat" data-terms=\''
 						 . json_encode
-						 ( [ $category->slug ] ) . ' data-id="'
+						 ( [ $category->slug ] ) . '\' data-id="'
 						 . $category->term_id . '" class="post-list-filter-item ">' . $show_cat_thumb_tag . '' . $category->name . '</a></li>';
 				}
 			}
@@ -2867,9 +2867,9 @@ class Woo_Product_Gallery extends Widget_Base {
 						$show_cat_thumb_tag = '';
 					}
 
-					echo '<li><a href="javascript:;" data-page="1" data-taxonomy="product_tag" data-terms='
+					echo '<li><a href="javascript:;" data-page="1" data-taxonomy="product_tag" data-terms=\''
 						 . json_encode
-						 ( [ $product_tag->slug ] ) . ' data-id="'
+						 ( [ $product_tag->slug ] ) . '\' data-id="'
 						 . $product_tag->term_id . '" class="post-list-filter-item ">' . $show_cat_thumb_tag . '' . $product_tag->name . '</a></li>';
 				}
 			}
