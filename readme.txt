@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 5.9.20
+Stable tag: 5.9.21
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -296,6 +296,13 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.9.21 - 13/05/2024 =
+
+- Revamped: NFT Gallery | OpenSea API version
+- Fixed: Filterable Gallery | iframe not working issue
+- Improved: Security Enhancement
+- Few minor bug fixes & improvements
 
 = 5.9.20 - 08/05/2024 =
 
