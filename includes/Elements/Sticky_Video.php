@@ -836,7 +836,7 @@ class Sticky_Video extends Widget_Base
         }
 
         return '<div
-			id="eaelsv-player-' . $this->get_id() . '"
+			id="eaelsv-player-' . esc_attr( $this->get_id() ) . '"
 			data-plyr-provider="youtube"
 			data-plyr-embed-id="' . esc_attr($id) . '"
 			data-plyr-config="{' . esc_attr($am) . ', ' . esc_attr($lp) . '}"
@@ -862,7 +862,7 @@ class Sticky_Video extends Widget_Base
         }
 
         return '<div
-			id="eaelsv-player-' . $this->get_id() . '"
+			id="eaelsv-player-' . esc_attr( $this->get_id() ) . '"
 			data-plyr-provider="vimeo"
 			data-plyr-embed-id="' . esc_attr($id) . '"
 			data-plyr-config="{' . esc_attr($am) . ', ' . esc_attr($lp) . '}"
@@ -891,7 +891,7 @@ class Sticky_Video extends Widget_Base
             $lp = '"loop": {"active": false}';
         }
 
-        return '<video class="eaelsv-player" id="eaelsv-player-' . $this->get_id() . '" playsinline controls data-plyr-config="{' . esc_attr($am) . ', ' . esc_attr($lp) . '}">
+        return '<video class="eaelsv-player" id="eaelsv-player-' . esc_attr( $this->get_id() ) . '" playsinline controls data-plyr-config="{' . esc_attr($am) . ', ' . esc_attr($lp) . '}">
 			<source src="' . esc_attr($video) . '#t=' . esc_attr($startTime) . ',' . esc_attr($endTime) . '" type="video/mp4" />
 		</video>';
     }

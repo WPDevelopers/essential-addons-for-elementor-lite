@@ -1291,7 +1291,7 @@ class Helper
 				'style' => [],
 				'align' => [],
 			],
-			'td'      => [
+			'td'     => [
 				'class'   => [],
 				'id'      => [],
 				'style'   => [],
@@ -1299,11 +1299,20 @@ class Helper
 				'colspan' => [],
 				'rowspan' => [],
 			],
-			'header'      => [
-				'class'   => [],
-				'id'      => [],
-				'style'   => [],
+			'header' => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
 			],
+			'iframe' => [
+				'class'  => [],
+				'id'     => [],
+				'style'  => [],
+				'title'  => [],
+				'width'  => [],
+				'height' => [],
+				'src'    => []
+			]
 		] );
 	}
 

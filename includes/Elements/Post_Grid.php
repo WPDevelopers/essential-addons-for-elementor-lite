@@ -1142,7 +1142,7 @@ class Post_Grid extends Widget_Base
             <script type="text/javascript">
                 jQuery(document).ready(function($) {
                     jQuery(".eael-post-grid").each(function() {
-                        var $scope = jQuery(".elementor-element-<?php echo $this->get_id(); ?>"),
+                        var $scope = jQuery(".elementor-element-<?php echo esc_js( $this->get_id() ); ?>"),
                             $gallery = $(this),
                             $layout_mode = $gallery.data('layout-mode');
 
