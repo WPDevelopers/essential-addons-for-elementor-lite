@@ -60,6 +60,7 @@ trait Admin {
             wp_enqueue_script( 'sweetalert2-core-js', EAEL_PLUGIN_URL . 'assets/admin/vendor/sweetalert2/js/core.js', array( 'jquery' ), EAEL_PLUGIN_VERSION, true );
 
             wp_enqueue_script( 'essential_addons_elementor-admin-js', EAEL_PLUGIN_URL . 'assets/admin/js/admin.js', array( 'jquery' ), EAEL_PLUGIN_VERSION, true );
+	        wp_enqueue_script( 'essential_addons_elementor-admin-dashboard-js', EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/assets/index-Dd8fB1ss.js', array( 'essential_addons_elementor-admin-js' ), EAEL_PLUGIN_VERSION, true );
 
             //Internationalizing JS string translation
             $i18n = [
@@ -86,13 +87,29 @@ trait Admin {
                 ]
             ];
 
-            wp_localize_script( 'essential_addons_elementor-admin-js', 'localize', array(
-                'ajaxurl' => admin_url( 'admin-ajax.php' ),
-                'nonce'   => wp_create_nonce( 'essential-addons-elementor' ),
-                'i18n'    => $i18n,
-                'settings_save' => EAEL_PLUGIN_URL . 'assets/admin/images/settings-save.gif',
-                'assets_regenerated' => EAEL_PLUGIN_URL . 'assets/admin/images/assets-regenerated.gif',
-            ) );
+	        $ea_dashboard = [
+		        'reactPath' => EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/',
+		        'menu'      => [
+			        'General'     => 'icon',
+			        'Elements'    => 'icon',
+			        'Extensions'  => 'icon',
+			        'Tools'       => 'icon',
+			        'Integration' => 'icon',
+			        'Go Premium'  => 'icon',
+		        ],
+		        'whats_new' => [
+			        'heading' => 'What is New on Version?'
+		        ]
+	        ];
+
+	        wp_localize_script( 'essential_addons_elementor-admin-js', 'localize', array(
+		        'ajaxurl'            => admin_url( 'admin-ajax.php' ),
+		        'nonce'              => wp_create_nonce( 'essential-addons-elementor' ),
+		        'i18n'               => $i18n,
+		        'settings_save'      => EAEL_PLUGIN_URL . 'assets/admin/images/settings-save.gif',
+		        'assets_regenerated' => EAEL_PLUGIN_URL . 'assets/admin/images/assets-regenerated.gif',
+		        'eael_dashboard'     => $ea_dashboard
+	        ) );
         }
 
         $this->eael_admin_inline_css();
@@ -107,7 +124,7 @@ trait Admin {
         ?>
 		<link rel="stylesheet" href="<?php echo EAEL_PLUGIN_URL; ?>includes/templates/admin/eael-dashboard/dist/assets/index-_mYVovMl.css">
 		<div id="eael-dashboard"></div>
-		<script type="module" src="<?php echo EAEL_PLUGIN_URL; ?>includes/templates/admin/eael-dashboard/dist/assets/index-DZ65AGgH.js"></script>
+<!--		<script type="module" src="--><?php //echo EAEL_PLUGIN_URL; ?><!--includes/templates/admin/eael-dashboard/dist/assets/index-CFQmoZV5.js"></script>-->
 		<form action="" method="POST" id="eael-settings" name="eael-settings" style="display: none;">
             <div class="template__wrapper background__greyBg px30 py50">
                 <div class="eael-container">

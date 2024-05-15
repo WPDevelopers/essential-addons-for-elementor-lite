@@ -2,14 +2,14 @@ import { useState } from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
       <>
           <section id="ea__dashboard--wrapper" className="ea__dashboard--wrapper">
               <section className="ea__section-header">
                   <div className="ea__section-wrapper ea__header-content">
-                      <img src="/images/logo.png" alt="logo"/>
+                      <img src={localize.eael_dashboard.reactPath + '/images/logo.png'} alt="logo"/>
                       <span className="dark-icon pointer"><i className="eaicon ea-sun"></i></span>
                   </div>
               </section>
@@ -135,7 +135,7 @@ function App() {
                                   </a>
                               </div>
                               <div className="templates-img">
-                                  <img src="/images/img-2.png" alt="img"/>
+                                  <img src={localize.eael_dashboard.reactPath + '/images/img-2.png'} alt="img"/>
                               </div>
 
                           </div>
