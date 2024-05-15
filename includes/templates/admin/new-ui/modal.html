@@ -8,7 +8,7 @@
     <link href="assets/icons/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
         rel="stylesheet">
-    <title>Elements</title>
+    <title>Modal</title>
 </head>
 
 <body>
@@ -866,7 +866,73 @@
                 </div>
             </div>
         </section>
+        <section class="ea__modal-wrapper">
+            <div class="ea__modal-content-wrapper">
+                <div class="ea__modal-header">
+                    <h5>Advanced Google Map</h5>
+                </div>
+                <div class="ea__modal-body">
+                    <div class="flex items-center gap-2">
+                        <img src="assets/images/map.svg" alt="mapLogo">
+                        <h4>Google Map API Key</h4>
+                    </div>
+                    <div>
+                        <label class="mb-2">Set API Key</label>
+                        <input class="input-name" type="text" placeholder="API Key">
+                        <a class="ea__api-link" href="#">To configure the API Keys, check out this doc</a>
+                    </div>
+                    <img class="ea__modal-map-img" src="assets/images/map.png" alt="mapImg">
+                    <div>
+                        <h4 class="mb-4">Google Map API Key</h4>
+                        <div class="select-option-wrapper">
+                            <select name="select" id="select-option" class="form-select">
+                                <option value="">Select team member</option>
+                                <option value="1">All</option>
+                                <option value="2">Post</option>
+                                <option value="3">Page</option>
+                                <option value="2">e-landing-page</option>
+                                <option value="3">Products</option>
+                                <option value="3">Docs</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="ea__api-key-according">
+                        <div class="ea__according-title">
+                            <div class="flex justify-between items-center gap-2 mb-4">
+                                <span class="flex gap-2 items-center">
+                                    <img src="assets/images/recap.svg" alt="icon">
+                                    <h4>reCAPTCHA v2</h4>
+                                </span>
+                                <i class="eaicon ea-dropdown"></i>
+                            </div>
+                        </div>
+                        <div class="ea__according-content flex flex-col gap-2">
+                            <div class="flex gap-4 items-center">
+                                <label>Site Key:</label>
+                                <input class="input-name" type="text" placeholder="Set Api Key">
+                            </div>
+                            <div class="flex gap-4 items-center">
+                                <label>Site Secret:</label>
+                                <input class="input-name" type="text" placeholder="Set Api Key">
+                            </div>
+                            <div class="flex gap-4 items-center">
+                                <label>Language:</label>
+                                <input class="input-name" type="text" placeholder="Set Api Key">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="ea__modal-footer flex flex-end">
+                    <button class="ea__modal-btn">Save API</button>
+                </div>
+                <div class="ea__modal-close-btn">
+                    <i class="eaicon ea-close"></i>
+                </div>
+            </div>
+        </section>
     </section>
+
 
 </body>
 

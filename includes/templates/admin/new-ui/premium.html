@@ -8,6 +8,8 @@
     <link href="assets/icons/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
         rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/swiper@11.1.0/swiper-bundle.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11.1.0/swiper-bundle.min.js"></script>
     <title>Premium</title>
 </head>
 
@@ -109,51 +111,56 @@
                             <div class="features-img">
                                 <img src="assets/images/img-3.png" alt="img">
                             </div>
-
                         </div>
-                        <div class="ea__connect-others-wrapper flex gap-4">
-                            <div class="ea__premium-item">
-                                <div class="ea__premimu-item-header flex gap-2 items-center">
-                                    <img src="assets/images/img-5.png" alt="img">
+                        <div class="ea__slider-connect">
+                            <div class="ea__connect-wrapper flex gap-4">
+                                <div class="ea__premium-item">
+                                    <div class="ea__premimu-item-header flex gap-2 items-center">
+                                        <img src="assets/images/img-5.png" alt="img">
+                                    </div>
+                                    <div class="ea__premium-item-footer">
+                                        <h5>Protected Content </h5>
+                                        <p class="mb-2">Restrict access to important data of your
+                                            website by setting up user
+                                            permissions
+                                        </p>
+                                        <a href="#">
+                                            <button class="underline">View Demo</button>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="ea__premium-item-footer">
-                                    <h5>Protected Content </h5>
-                                    <p class="mb-2">Restrict access to important data of your website by setting up user
-                                        permissions
-                                    </p>
-                                    <a href="#">
-                                        <button class="underline">View Demo</button>
-                                    </a>
+                                <div class="ea__premium-item">
+                                    <div class="ea__premimu-item-header flex gap-2 items-center">
+                                        <img src="assets/images/img-6.png" alt="img">
+                                    </div>
+                                    <div class="ea__premium-item-footer">
+                                        <h5>Smart Post List</h5>
+                                        <p class="mb-2">Restrict access to important data of your
+                                            website by setting up user
+                                            permissions
+                                        </p>
+                                        <a href="#">
+                                            <button class="underline">View Demo</button>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="ea__premium-item">
+                                    <div class="ea__premimu-item-header flex gap-2 items-center">
+                                        <img src="assets/images/img-5.png" alt="img">
+                                    </div>
+                                    <div class="ea__premium-item-footer">
+                                        <h5>Woo Product Slider</h5>
+                                        <p class="mb-2">Restrict access to important data of your
+                                            website by setting up user
+                                            permissions
+                                        </p>
+                                        <a href="#">
+                                            <button class="underline">View Demo</button>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="ea__premium-item">
-                                <div class="ea__premimu-item-header flex gap-2 items-center">
-                                    <img src="assets/images/img-6.png" alt="img">
-                                </div>
-                                <div class="ea__premium-item-footer">
-                                    <h5>Smart Post List</h5>
-                                    <p class="mb-2">Restrict access to important data of your website by setting up user
-                                        permissions
-                                    </p>
-                                    <a href="#">
-                                        <button class="underline">View Demo</button>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="ea__premium-item">
-                                <div class="ea__premimu-item-header flex gap-2 items-center">
-                                    <img src="assets/images/img-5.png" alt="img">
-                                </div>
-                                <div class="ea__premium-item-footer">
-                                    <h5>Woo Product Slider</h5>
-                                    <p class="mb-2">Restrict access to important data of your website by setting up user
-                                        permissions
-                                    </p>
-                                    <a href="#">
-                                        <button class="underline">View Demo</button>
-                                    </a>
-                                </div>
-                            </div>
+
                         </div>
                         <div class="ea__connect-others-wrapper flex gap-4">
                             <div class="ea__connect-others">
@@ -161,7 +168,7 @@
                                     <i class="eaicon ea-support"></i>
                                 </div>
                                 <h5>Automatic Updates & Priority Support</h5>
-                                <p class="mb-2">LoremGet access to automatic updates & keep your website up-to-date with
+                                <p>LoremGet access to automatic updates & keep your website up-to-date with
                                     constantly developing features. Having any trouble?
                                 </p>
                                 <a href="#">
@@ -175,7 +182,7 @@
                                     <i class="eaicon ea-docs"></i>
                                 </div>
                                 <h5>Automatic Updates & Priority Support</h5>
-                                <p class="mb-2">LoremGet access to automatic updates & keep your website up-to-date with
+                                <p>LoremGet access to automatic updates & keep your website up-to-date with
                                     constantly developing features. Having any trouble?
                                 </p>
                                 <a href="#">
@@ -191,6 +198,45 @@
         </div>
     </section>
 
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11.1.0/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var mySwiper = new Swiper('.swiper-container', {
+                direction: 'horizontal', // or 'vertical'
+                loop: true,
+                centeredSlides: true,
+
+                // If we need pagination
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                    dynamicBullets: true,
+                },
+
+                // Navigation arrows
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+
+                // Autoplay
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+
+                // Use slide or fade transition effect
+                speed: 2000,
+                effect: 'fade',
+                fadeEffect: {
+                    crossFade: true,
+                },
+            });
+        });
+    </script>
 </body>
+
+
 
 </html>
