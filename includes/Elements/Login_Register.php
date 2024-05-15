@@ -782,7 +782,7 @@ class Login_Register extends Widget_Base {
 
 		$this->add_control( 'login_register_recaptcha_v3_score_threshold', [
 			'label'       => esc_html__( 'Score Threshold', 'essential-addons-for-elementor-lite' ),
-			'description' => esc_html__( 'reCaptcha v3 score threshold. 1 is very likely a good interaction, 0 is very likely a bot.', 'essential-addons-for-elementor-lite' ),
+			'description' => esc_html__( 'By default, you can use a threshold of 0.5.', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::SLIDER,
 			'size_units' => [
 				'%',
