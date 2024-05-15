@@ -105,7 +105,10 @@ trait Admin {
      */
     public function admin_settings_page() {
         ?>
-        <form action="" method="POST" id="eael-settings" name="eael-settings">
+		<link rel="stylesheet" href="<?php echo EAEL_PLUGIN_URL; ?>includes/templates/admin/eael-dashboard/dist/assets/index-_mYVovMl.css">
+		<div id="eael-dashboard"></div>
+		<script type="module" src="<?php echo EAEL_PLUGIN_URL; ?>includes/templates/admin/eael-dashboard/dist/assets/index-DZ65AGgH.js"></script>
+		<form action="" method="POST" id="eael-settings" name="eael-settings" style="display: none;">
             <div class="template__wrapper background__greyBg px30 py50">
                 <div class="eael-container">
                     <div class="eael-main__tab mb45">
