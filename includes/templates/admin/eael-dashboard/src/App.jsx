@@ -8,59 +8,59 @@ function App() {
       <>
           <section id="ea__dashboard--wrapper" className="ea__dashboard--wrapper">
               <section className="ea__section-header">
-                  <div class="ea__section-wrapper ea__header-content">
-                      <img src="assets/images/logo.png" alt="logo"/>
-                      <span class="dark-icon pointer"><i className="eaicon ea-sun"></i></span>
+                  <div className="ea__section-wrapper ea__header-content">
+                      <img src="/images/logo.png" alt="logo"/>
+                      <span className="dark-icon pointer"><i className="eaicon ea-sun"></i></span>
                   </div>
               </section>
               <section className="ea__section-wrapper ea__main-wrapper flex gap-4">
-                  <div class="ea__sidebar-nav-list">
-                      <div class="nav-sticky">
-                          <div class="ea__sidebar-nav active">
-                        <span class="ea__nav-icon">
+                  <div className="ea__sidebar-nav-list">
+                      <div className="nav-sticky">
+                          <div className="ea__sidebar-nav active">
+                        <span className="ea__nav-icon">
                             <i className="eaicon ea-home"></i>
                         </span>
-                              <span class="ea__nav-text">General</span>
+                              <span className="ea__nav-text">General</span>
                           </div>
-                          <div class="ea__sidebar-nav">
-                        <span class="ea__nav-icon">
+                          <div className="ea__sidebar-nav">
+                        <span className="ea__nav-icon">
                             <i className="eaicon ea-elements"></i>
                         </span>
-                              <span class="ea__nav-text">Elements</span>
+                              <span className="ea__nav-text">Elements</span>
                           </div>
-                          <div class="ea__sidebar-nav">
-                        <span class="ea__nav-icon">
+                          <div className="ea__sidebar-nav">
+                        <span className="ea__nav-icon">
                             <i className="eaicon ea-extensions"></i>
                         </span>
-                              <span class="ea__nav-text">Extensions</span>
+                              <span className="ea__nav-text">Extensions</span>
                           </div>
-                          <div class="ea__sidebar-nav">
-                        <span class="ea__nav-icon">
+                          <div className="ea__sidebar-nav">
+                        <span className="ea__nav-icon">
                             <i className="eaicon ea-tool"></i>
                         </span>
-                              <span class="ea__nav-text">Tools</span>
+                              <span className="ea__nav-text">Tools</span>
                           </div>
-                          <div class="ea__sidebar-nav">
-                        <span class="ea__nav-icon">
+                          <div className="ea__sidebar-nav">
+                        <span className="ea__nav-icon">
                             <i className="eaicon ea-plug"></i>
                         </span>
-                              <span class="ea__nav-text">Integration</span>
+                              <span className="ea__nav-text">Integration</span>
                           </div>
-                          <div class="ea__sidebar-nav">
-                        <span class="ea__nav-icon">
+                          <div className="ea__sidebar-nav">
+                        <span className="ea__nav-icon">
                             <i className="eaicon ea-lock"></i>
                         </span>
-                              <span class="ea__nav-text">Go Premium</span>
+                              <span className="ea__nav-text">Go Premium</span>
                           </div>
                       </div>
                       <div></div>
                   </div>
-                  <div class="ea__main-content-wrapper flex gap-4">
+                  <div className="ea__main-content-wrapper flex gap-4">
                       <div>
-                          <div class="ea__general-content-item relative">
+                          <div className="ea__general-content-item relative">
                               <h3>What is New on Version?</h3>
-                              <div class="mb-6 flex flex-col gap-4">
-                                  <div class="ea__content-details flex gap-2 items-center">
+                              <div className="mb-6 flex flex-col gap-4">
+                                  <div className="ea__content-details flex gap-2 items-center">
                                 <span>
                                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -74,7 +74,7 @@ function App() {
                                 </span>
                                       EA Fancy Chart Symbol display option in the fancy chart
                                   </div>
-                                  <div class="ea__content-details flex gap-2 items-center">
+                                  <div className="ea__content-details flex gap-2 items-center">
                                 <span>
                                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -88,7 +88,7 @@ function App() {
                                 </span>
                                       EA Instagram Feed Feed is getting broken on the front-end view
                                   </div>
-                                  <div class="ea__content-details flex gap-2 items-center">
+                                  <div className="ea__content-details flex gap-2 items-center">
                                 <span>
                                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -110,20 +110,20 @@ function App() {
                                   </button>
                               </a>
                           </div>
-                          <div class="ea__general-content-item templates flex justify-between items-center">
-                              <div class="templates-content">
+                          <div className="ea__general-content-item templates flex justify-between items-center">
+                              <div className="templates-content">
                                   <h2>Unlock 5000+ Ready Templates</h2>
-                                  <div class="mb-6 flex flex-col gap-4">
-                                      <div class="ea__content-details flex gap-2 items-center">
-                                          <span class="check-icon eaicon ea-check"></span>
+                                  <div className="mb-6 flex flex-col gap-4">
+                                      <div className="ea__content-details flex gap-2 items-center">
+                                          <span className="check-icon eaicon ea-check"></span>
                                           Stunning, Ready Website Templates
                                       </div>
-                                      <div class="ea__content-details flex gap-2 items-center">
-                                          <span class="check-icon eaicon ea-check"></span>
+                                      <div className="ea__content-details flex gap-2 items-center">
+                                          <span className="check-icon eaicon ea-check"></span>
                                           Add Team Members & Collaborate
                                       </div>
-                                      <div class="ea__content-details flex gap-2 items-center">
-                                          <span class="check-icon eaicon ea-check"></span>
+                                      <div className="ea__content-details flex gap-2 items-center">
+                                          <span className="check-icon eaicon ea-check"></span>
                                           Cloud With Templately WorkSpace
                                       </div>
                                   </div>
@@ -134,14 +134,14 @@ function App() {
                                       </button>
                                   </a>
                               </div>
-                              <div class="templates-img">
-                                  <img src="assets/images/img-2.png" alt="img"/>
+                              <div className="templates-img">
+                                  <img src="/images/img-2.png" alt="img"/>
                               </div>
 
                           </div>
-                          <div class="ea__connect-others-wrapper flex gap-4">
-                              <div class="ea__connect-others">
-                                  <div class="ea__others-icon eaicon-1">
+                          <div className="ea__connect-others-wrapper flex gap-4">
+                              <div className="ea__connect-others">
+                                  <div className="ea__others-icon eaicon-1">
                                       <i className="eaicon ea-github"></i>
                                   </div>
                                   <h5>GitHub & Support</h5>
@@ -150,13 +150,13 @@ function App() {
                                   </p>
                                   <a href="#">
                                       <button>
-                                          <span class="underline">Create Ticket</span>
+                                          <span className="underline">Create Ticket</span>
                                           <i className="eaicon ea-right-arrow"></i>
                                       </button>
                                   </a>
                               </div>
-                              <div class="ea__connect-others">
-                                  <div class="ea__others-icon eaicon-2">
+                              <div className="ea__connect-others">
+                                  <div className="ea__others-icon eaicon-2">
                                       <i className="eaicon ea-community"></i>
                                   </div>
                                   <h5>Join Community</h5>
@@ -165,26 +165,26 @@ function App() {
                                   </p>
                                   <a href="#">
                                       <button>
-                                          <span class="underline">Join with us</span>
+                                          <span className="underline">Join with us</span>
                                           <i className="eaicon ea-right-arrow"></i>
                                       </button>
                                   </a>
                               </div>
                           </div>
                       </div>
-                      <div class="ea__sidebar-info">
-                          <div class="ea__sidebar-content">
+                      <div className="ea__sidebar-info">
+                          <div className="ea__sidebar-content">
                               <h5>Unlimited Features</h5>
                               <p>Supercharge your content schedule and</p>
-                              <div class="review-wrap">
+                              <div className="review-wrap">
                                   <h6>Review from Real Users</h6>
-                                  <div class="flex items-center gap-1">
+                                  <div className="flex items-center gap-1">
                                       <i className="eaicon ea-star"></i>
                                       <i className="eaicon ea-star"></i>
                                       <i className="eaicon ea-star"></i>
                                       <i className="eaicon ea-star"></i>
                                       <i className="eaicon ea-star"></i>
-                                      <span class="reating-details">5/5</span>
+                                      <span className="reating-details">5/5</span>
                                   </div>
                               </div>
                               <a href="#">
@@ -196,15 +196,15 @@ function App() {
                           </div>
 
                           <div>
-                              <div class="ea__connect-others">
-                                  <div class="ea__others-icon eaicon-3">
+                              <div className="ea__connect-others">
+                                  <div className="ea__others-icon eaicon-3">
                                       <i className="eaicon ea-docs"></i>
                                   </div>
                                   <h5>View knowledgebase</h5>
                                   <p className="mb-6">Get started by spending some time with the documentation</p>
                                   <a href="#">
                                       <button>
-                                          <span class="underline">View Docs</span>
+                                          <span className="underline">View Docs</span>
                                           <i className="eaicon ea-right-arrow"></i>
                                       </button>
                                   </a>
