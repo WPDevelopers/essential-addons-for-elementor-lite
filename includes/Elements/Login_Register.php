@@ -5837,6 +5837,7 @@ class Login_Register extends Widget_Base {
 			$last_name_exists    = 0;
 			$website_exists      = 0;
 			$eael_phone_number_exists = 0;
+			$honeypot_exists = 0;
 			
 			$f_labels            = [
 				'email'            	=> __( 'Email', 'essential-addons-for-elementor-lite' ),
