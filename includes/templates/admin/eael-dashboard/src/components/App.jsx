@@ -5,6 +5,8 @@ import General from './General.jsx'
 import Elements from './Elements.jsx'
 import Extensions from './Extensions.jsx'
 import Tools from './Tools.jsx'
+import Integration from './Integration.jsx'
+import Premium from './Premium.jsx'
 import '../App.css'
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
                     {menu === 'elements' ? <Elements setmenu={setMenu}/> : ''}
                     {menu === 'extensions' ? <Extensions setmenu={setMenu}/> : ''}
                     {menu === 'tools' ? <Tools setmenu={setMenu}/> : ''}
+                    {menu === 'integration' ? <Integration setmenu={setMenu}/> : ''}
+                    {menu === 'go-premium' ? <Premium setmenu={setMenu}/> : ''}
                 </section>
             </section>
         </>
