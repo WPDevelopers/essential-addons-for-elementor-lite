@@ -1,20 +1,28 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Essential Addons Dashboard</title>
-    <link rel="stylesheet" href="https://ea.test/wp-content/plugins/essential-addons-for-elementor-lite/includes/templates/admin/new-ui/assets/icons/style.css">
-  </head>
-  <body>
-    <div id="eael-dashboard"></div>
-    <script>
-      window.localize = {
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>Essential Addons Dashboard</title>
+	<link rel="stylesheet" href="https://ea.test/wp-content/plugins/essential-addons-for-elementor-lite/includes/templates/admin/new-ui/assets/icons/style.css">
+</head>
+<body>
+<div id="eael-dashboard"></div>
+<script>
+    window.localize = {
         eael_dashboard: {
-          reactPath: ''
+            reactPath: '',
+            menu: {
+                'General': 'ea-home',
+                'Elements': 'ea-elements',
+                'Extensions': 'ea-extensions',
+                'Tools': 'ea-tool',
+                'Integration': 'ea-plug',
+                'Go Premium': 'ea-lock',
+            }
         }
-      }
-    </script>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+    }
+</script>
+<script type="module" src="/src/main.jsx"></script>
+</body>
 </html>

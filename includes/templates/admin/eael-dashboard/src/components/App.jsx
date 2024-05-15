@@ -10,7 +10,7 @@ import Premium from './Premium.jsx'
 import '../App.css'
 
 function App() {
-    const [menu, setMenu] = useState('general');
+    const [menu, setMenu] = useState('General');
 
     return (
         <>
@@ -18,12 +18,12 @@ function App() {
                 <Header/>
                 <section className={menu === 'elements' ? 'ea__section-wrapper ea__main-wrapper flex' : 'ea__section-wrapper ea__main-wrapper flex gap-4'}>
                     <Menu setmenu={setMenu} menu={menu}/>
-                    {menu === 'general' ? <General setmenu={setMenu}/> : ''}
-                    {menu === 'elements' ? <Elements setmenu={setMenu}/> : ''}
-                    {menu === 'extensions' ? <Extensions setmenu={setMenu}/> : ''}
-                    {menu === 'tools' ? <Tools setmenu={setMenu}/> : ''}
-                    {menu === 'integration' ? <Integration setmenu={setMenu}/> : ''}
-                    {menu === 'go-premium' ? <Premium setmenu={setMenu}/> : ''}
+                    {menu === 'General' ? <General setmenu={setMenu}/> : ''}
+                    {menu === 'Elements' ? <Elements setmenu={setMenu}/> : ''}
+                    {menu === 'Extensions' ? <Extensions setmenu={setMenu}/> : ''}
+                    {menu === 'Tools' ? <Tools setmenu={setMenu}/> : ''}
+                    {menu === 'Integration' ? <Integration setmenu={setMenu}/> : ''}
+                    {menu === 'Go Premium' ? <Premium setmenu={setMenu}/> : ''}
                 </section>
             </section>
         </>

@@ -90,12 +90,12 @@ trait Admin {
 	        $ea_dashboard = [
 		        'reactPath' => EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/',
 		        'menu'      => [
-			        'General'     => 'icon',
-			        'Elements'    => 'icon',
-			        'Extensions'  => 'icon',
-			        'Tools'       => 'icon',
-			        'Integration' => 'icon',
-			        'Go Premium'  => 'icon',
+			        'General'     => 'ea-home',
+			        'Elements'    => 'ea-elements',
+			        'Extensions'  => 'ea-extensions',
+			        'Tools'       => 'ea-tool',
+			        'Integration' => 'ea-plug',
+			        'Go Premium'  => 'ea-lock',
 		        ],
 		        'whats_new' => [
 			        'heading' => 'What is New on Version?'
