@@ -5847,6 +5847,7 @@ class Login_Register extends Widget_Base {
 				'last_name'        	=> __( 'Last Name', 'essential-addons-for-elementor-lite' ),
 				'website'          	=> __( 'Website', 'essential-addons-for-elementor-lite' ),
 				'eael_phone_number'	=> __( 'Phone', 'essential-addons-for-elementor-lite' ),
+				'honeypot'			=> __( 'Honeypot', 'essential-addons-for-elementor-lite' ),
 			];
 
 			$eael_custom_profile_fields_text = $this->get_eael_custom_profile_fields( 'text' );
@@ -5984,6 +5985,7 @@ class Login_Register extends Widget_Base {
 									case 'user_name':
 									case 'first_name':
 									case 'last_name':
+									case 'honeypot':
 										$field_input_type = 'text';
 										break;
 									case 'confirm_pass':
@@ -6003,6 +6005,9 @@ class Login_Register extends Widget_Base {
 								if( ! empty( $eael_custom_profile_fields_image[ $field_type ] ) ){
 									$field_input_type = 'file';
 								}
+
+								$field_type_honeypot = 'eaelhoneyp' . esc_attr( $this->get_id() );
+								$field_type = 'honeypot' === $field_type ? $field_type_honeypot : $field_type;
 
 								$this->add_render_attribute( [
 									$input_key => [
@@ -6037,14 +6042,21 @@ class Login_Register extends Widget_Base {
 
 
 								// add css classes to the main input field wrapper.
-								$this->add_render_attribute( [
-									$field_group_key => [
-										'class' => [
-											'eael-lr-form-group',
-                                            'elementor-repeater-item-'.$field['_id'],
-											'eael-field-type-' . $field_type,
-										],
+								$field_group_key_array = [
+									'class' => [
+										'eael-lr-form-group',
+										'elementor-repeater-item-'.$field['_id'],
+										'eael-field-type-' . $field_type,
 									],
+								];
+
+								if ( $field_type_honeypot === $field_type ){
+									$field_group_key_array['style'] = 'display:none;';
+									$field['field_label'] = '';
+								}
+
+								$this->add_render_attribute( [
+									$field_group_key => $field_group_key_array,
 								] );
 
 								?>
