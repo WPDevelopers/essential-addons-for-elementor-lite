@@ -4,6 +4,7 @@ import Menu from "./Menu.jsx";
 import General from './General.jsx'
 import Elements from './Elements.jsx'
 import Extensions from './Extensions.jsx'
+import Tools from './Tools.jsx'
 import '../App.css'
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
                     {menu === 'general' ? <General setmenu={setMenu}/> : ''}
                     {menu === 'elements' ? <Elements setmenu={setMenu}/> : ''}
                     {menu === 'extensions' ? <Extensions setmenu={setMenu}/> : ''}
+                    {menu === 'tools' ? <Tools setmenu={setMenu}/> : ''}
                 </section>
             </section>
         </>
