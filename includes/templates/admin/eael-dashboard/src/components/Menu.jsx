@@ -5,7 +5,8 @@ function Menu(props) {
 
     return (
         <>
-            <div className="ea__sidebar-nav-list">
+            <div
+                className={props.menu === 'elements' ? 'ea__sidebar-nav-list ea__elements-nav' : 'ea__sidebar-nav-list'}>
                 <div className="nav-sticky">
                     <div className="ea__sidebar-nav active">
                         <span className="ea__nav-icon">
