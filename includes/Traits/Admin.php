@@ -122,9 +122,9 @@ trait Admin {
      */
     public function admin_settings_page() {
         ?>
+		<link rel="stylesheet" href="<?php echo EAEL_PLUGIN_URL; ?>includes/templates/admin/new-ui/assets/icons/style.css">
 		<link rel="stylesheet" href="<?php echo EAEL_PLUGIN_URL; ?>includes/templates/admin/eael-dashboard/dist/assets/index-_mYVovMl.css">
 		<div id="eael-dashboard"></div>
-<!--		<script type="module" src="--><?php //echo EAEL_PLUGIN_URL; ?><!--includes/templates/admin/eael-dashboard/dist/assets/index-CFQmoZV5.js"></script>-->
 		<form action="" method="POST" id="eael-settings" name="eael-settings" style="display: none;">
             <div class="template__wrapper background__greyBg px30 py50">
                 <div class="eael-container">
