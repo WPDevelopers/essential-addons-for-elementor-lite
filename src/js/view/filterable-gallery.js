@@ -38,17 +38,18 @@ jQuery(window).on("elementor/frontend/init", function () {
 				$gallery_enabled = ($settings.gallery_enabled === "yes"),
 				$images_per_page = $gallery.data("images-per-page"),
 				$init_show_setting     = $gallery.data("init-show");
-				fg_items.splice(0, $init_show_setting)
+				fg_items.splice(0, $init_show_setting),
+				isRTL = $('body').hasClass('rtl');
 			// init isotope
 			let gwrap = $(".eael-filter-gallery-wrapper");
 			var layoutMode       = gwrap.data("layout-mode");
-			var mfpCaption       = gwrap.data("mfp_caption");
 			var $isotope_gallery = $gallery.isotope({
 				itemSelector: ".eael-filterable-gallery-item-wrap",
 				layoutMode: $layout_mode,
 				percentPosition: true,
 				stagger: 30,
 				transitionDuration: $settings.duration + "ms",
+				isOriginLeft: !isRTL,
 				filter: function () {
 					var $this   = $(this);
 					var $result = searchRegex ? $this.text().match(searchRegex) : true;
@@ -78,12 +79,31 @@ jQuery(window).on("elementor/frontend/init", function () {
 					enabled: $gallery_enabled,
 					tCounter: fg_mfp_counter_text,
 				},
-				image: {
-					titleSrc: function (item) {
-						if (mfpCaption === "yes") {
-							return item.el.parents('.gallery-item-caption-over').find('.fg-item-title').html() || item.el.parents('.gallery-item-caption-wrap').find('.fg-item-title').html() || item.el.parents('.eael-filterable-gallery-item-wrap').find('.fg-item-title').html();
+				iframe: {
+					markup: `<div class="mfp-iframe-scaler">
+								<div class="mfp-close"></div>
+								<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>
+								<div class="mfp-title eael-privacy-message"></div>
+							</div>`
+				},
+				callbacks: {
+					markupParse: function(template, values, item) {
+						if( item.el.attr('title') !== "" ) {
+							values.title = item.el.attr('title');
 						}
-					}
+					},
+					open: function() {
+						setTimeout(() => {
+							$(".eael-privacy-message").remove();
+						}, 5000);
+
+						setTimeout(() => {
+							var el_lightbox = $('.dialog-type-lightbox.elementor-lightbox');
+							if( el_lightbox.length > 0 ){
+								el_lightbox.remove();
+							}
+						}, 100);
+					},
 				}
 			});
 
@@ -197,7 +217,6 @@ jQuery(window).on("elementor/frontend/init", function () {
 
 			// layout gal, on click tabs
 			$isotope_gallery.on("arrangeComplete", function () {
-				$isotope_gallery.isotope("layout");
 				let notFoundDiv = $('#eael-fg-no-items-found', $scope),
 					minHeight = notFoundDiv.css('font-size');
 
@@ -290,6 +309,17 @@ jQuery(window).on("elementor/frontend/init", function () {
 					jQuery(`.eael-filter-gallery-control li:nth-child(${default_control_key})` ).trigger('click');
 				}
 			});
+
+			var FilterableGallery = function (element) {
+				$isotope_gallery.imagesLoaded().progress(function () {
+					$isotope_gallery.isotope("layout");
+				});
+			}
+
+			ea.hooks.addAction("ea-toggle-triggered", "ea", FilterableGallery);
+			ea.hooks.addAction("ea-lightbox-triggered", "ea", FilterableGallery);
+			ea.hooks.addAction("ea-advanced-tabs-triggered", "ea", FilterableGallery);
+			ea.hooks.addAction("ea-advanced-accordion-triggered", "ea", FilterableGallery);
 		}
 	};
 

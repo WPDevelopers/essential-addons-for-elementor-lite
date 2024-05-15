@@ -10,16 +10,16 @@ use \Essential_Addons_Elementor\Classes\Helper as EnqueueHelper;
 
 trait Enqueue
 {
-    public function before_enqueue_styles($widgets)
-    {
-        // Compatibility: Gravity forms
-        if (in_array('gravity-form', $widgets) && class_exists('GFCommon')) {
-            foreach (EnqueueHelper::get_gravity_form_list() as $form_id => $form_name) {
-                if ($form_id != '0') {
-                    gravity_form_enqueue_scripts($form_id);
-                }
-            }
-        }
+	public function before_enqueue_styles( $widgets ) {
+		$widgets = (array) $widgets;
+		// Compatibility: Gravity forms
+		if ( in_array( 'gravity-form', $widgets ) && class_exists( 'GFCommon' ) ) {
+			foreach ( EnqueueHelper::get_gravity_form_list() as $form_id => $form_name ) {
+				if ( $form_id != '0' ) {
+					gravity_form_enqueue_scripts( $form_id );
+				}
+			}
+		}
 
         // Compatibility: WPforms
         if (in_array('wpforms', $widgets) && function_exists('wpforms')) {
@@ -31,23 +31,6 @@ trait Enqueue
             add_filter('caldera_forms_force_enqueue_styles_early', '__return_true');
         }
 
-        // Compatibility: Fluent forms
-        if (in_array('fluentform', $widgets) && defined('FLUENTFORM')) {
-            wp_register_style(
-                'fluent-form-styles',
-                WP_PLUGIN_URL . '/fluentform/public/css/fluent-forms-public.css',
-                false,
-                FLUENTFORM_VERSION
-            );
-
-            wp_register_style(
-                'fluentform-public-default',
-                WP_PLUGIN_URL . '/fluentform/public/css/fluentform-public-default.css',
-                false,
-                FLUENTFORM_VERSION
-            );
-        }
-
         // Compatibility: reCaptcha with login/register
         if (in_array('login-register', $widgets) && $site_key = get_option('eael_recaptcha_sitekey')) {
 	        $recaptcha_api_args['render'] = 'explicit';
@@ -56,7 +39,7 @@ trait Enqueue
 	        }
 	        $recaptcha_api_args = apply_filters( 'eael_lr_recaptcha_api_args', $recaptcha_api_args );
 	        $recaptcha_api_args = http_build_query( $recaptcha_api_args );
-            wp_register_script('eael-recaptcha', "https://www.google.com/recaptcha/api.js?{$recaptcha_api_args}", false, EAEL_PLUGIN_VERSION, false);
+            wp_register_script('eael-recaptcha', "https://www.recaptcha.net/recaptcha/api.js?{$recaptcha_api_args}", false, EAEL_PLUGIN_VERSION, false);
         }
     }
 

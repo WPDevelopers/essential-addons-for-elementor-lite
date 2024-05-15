@@ -46,7 +46,14 @@ class Migration
      */
 	public function plugin_upgrade_hook( $upgrader_object, $options ) {
 		if ( isset( $options['action'], $options['type'] ) && $options['action'] === 'update' && $options['type'] === 'plugin' ) {
-			if ( ( isset( $options['plugins'] ) && in_array( EAEL_PLUGIN_BASENAME, $options['plugins'] ) ) || ( isset( $options['plugin'] ) && $options['plugin'] === EAEL_PLUGIN_BASENAME ) ) {
+			if ( ( isset( $options['plugins'] ) &&
+			       ( in_array( EAEL_PLUGIN_BASENAME, $options['plugins'] ) ||
+			         in_array( 'essential-addons-elementor/essential_adons_elementor.php', $options['plugins'] )
+			       )
+			     ) || ( isset( $options['plugin'] ) &&
+			            in_array( $options['plugin'], [ EAEL_PLUGIN_BASENAME, 'essential-addons-elementor/essential_adons_elementor.php' ] )
+			     )
+			) {
 				// remove old cache files
 				$this->empty_dir( EAEL_ASSET_PATH );
 			}
@@ -83,7 +90,8 @@ class Migration
                            or (option_name like '%\_eael_updated_at' and LENGTH(option_name) = 25)
                            or (option_name = 'eael_reduce_op_table_data')
                            or (option_name = 'eael_remove_old_cache')
-                           or (option_name = 'eael_editor_updated_at'))
+                           or (option_name = 'eael_editor_updated_at')
+                           or (option_name like 'eael_login_error_%'))
                   ) AS options_tb2 
                     ON options_tb2.option_id = options_tb.option_id";
 		$selection_sql = "select count(options_tb.option_id) as total " . $sql;

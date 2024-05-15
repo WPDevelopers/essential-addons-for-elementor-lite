@@ -6,6 +6,4 @@ package-lock.json
 pnpm-lock.yaml
 composer.lock
 /node_modules
-/vendor
 .idea/*
-pnpm-lock.yaml

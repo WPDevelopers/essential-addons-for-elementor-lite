@@ -3,6 +3,7 @@
   display: -ms-flexbox;
   display: flex;
   height: 50vh;
+  overflow: hidden;
 }
 .eael-img-accordion.accordion-direction-vertical {
   -webkit-box-orient: vertical;

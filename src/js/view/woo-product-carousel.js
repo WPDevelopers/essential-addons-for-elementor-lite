@@ -213,15 +213,19 @@ ea.hooks.addAction("init", "ea", () => {
 		}
 
 		var WooProductCarouselLoader = function ($src) {
-			if ($($src).find('.eael-woo-product-carousel').length) {
-				swiperLoader($wooProductCarousel, $carouselOptions);
+			let productCarousels = $($src).find('.eael-woo-product-carousel');
+			if (productCarousels.length) {
+				productCarousels.each(function () {
+					if ($(this)[0].swiper) {
+						$(this)[0].swiper.destroy(true, true);
+						swiperLoader($(this)[0], $carouselOptions);
+					}
+				});
 			}
 		}
 
 		ea.hooks.addAction("ea-lightbox-triggered", "ea", WooProductCarouselLoader);
-		ea.hooks.addAction("ea-advanced-tabs-triggered", "ea", WooProductCarouselLoader);
-		ea.hooks.addAction("ea-advanced-accordion-triggered", "ea", WooProductCarouselLoader);
-		ea.hooks.addAction("ea-toogle-triggered", "ea", WooProductCarouselLoader);
+		ea.hooks.addAction("ea-toggle-triggered", "ea", WooProductCarouselLoader);
 	};
 
 	const swiperLoader = (swiperElement, swiperConfig) => {

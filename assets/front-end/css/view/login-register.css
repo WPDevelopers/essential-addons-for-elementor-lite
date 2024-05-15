@@ -335,8 +335,8 @@
     top: 2px;
     margin: 0;
     cursor: pointer;
-    border: 2px solid var(--bc, var(--border));
-    background: var(--b, var(--background));
+    border: 2px solid var(--bc, var(--border)) !important;
+    background: var(--b, var(--background)) !important;
     -webkit-transition: background 0.3s, border-color 0.3s, -webkit-box-shadow 0.2s;
     transition: background 0.3s, border-color 0.3s, -webkit-box-shadow 0.2s;
     transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;

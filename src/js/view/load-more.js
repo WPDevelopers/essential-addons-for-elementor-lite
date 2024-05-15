@@ -23,6 +23,9 @@
 			$exclude_ids = [],
 			$active_term_id = 0,
 			$active_taxonomy = '';
+
+		$this.attr('disabled', true);
+
 		if (typeof $widget_id == "undefined" || typeof $args == "undefined") {
 			return;
 		}
@@ -122,7 +125,7 @@
 			data: $data,
 			success: function (response) {
 				var $content = $(response);
-
+				$this.removeAttr('disabled');
 				if ( $content.hasClass("no-posts-found") || $content.length === 0 ) {
 					if ($data.class == "Essential_Addons_Elementor\\Elements\\Woo_Product_Gallery") {
 						$this.removeClass('button--loading').addClass('hide-load-more');

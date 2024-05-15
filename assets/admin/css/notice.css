@@ -1,4 +1,16 @@
 /* review notice */
+
+#wpnotice-essential-addons-for-elementor-black_friday_notice .wpnotice-content-wrapper {
+    padding: 0 !important;
+}
+#wpnotice-essential-addons-for-elementor-black_friday_notice .wpnotice-content-wrapper p {
+    margin: 0;
+}
+
+.wpnotice-content-wrapper .button {
+    text-transform: capitalize;
+}
+
 .wpdeveloper-review-notice {
     padding: 10px;
     background-color: #fff;
@@ -166,4 +178,28 @@ span.coupon-code {
     text-align: center;
     z-index: 26;
     display:none;
+}
+
+.notice-essential-addons-for-elementor-black_friday_notice {
+    border-left-color: #3557FF;
+    padding: 10px;
+}
+
+.notice-essential-addons-for-elementor-black_friday_notice .button {
+    margin-right: 10px;
+}
+
+.notice-essential-addons-for-elementor-black_friday_notice .gift-icon {
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+#wpnotice-essential-addons-for-elementor-review {
+    display: grid !important;
+    grid-template-columns: 80px 1fr !important;
+    padding: 10px;
+}
+
+#wpnotice-essential-addons-for-elementor-review a {
+    text-decoration: none;
 }

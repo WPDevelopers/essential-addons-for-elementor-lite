@@ -203,18 +203,19 @@ class Advanced_Data_Table extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'ea_adv_data_table_items_per_page',
-            [
-                'label' => esc_html__('Rows Per Page', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::NUMBER,
-                'min' => 1,
-                'default' => 10,
-                'condition' => [
-                    'ea_adv_data_table_pagination' => 'yes',
-                ],
-            ]
-        );
+	    $this->add_control(
+		    'ea_adv_data_table_items_per_page',
+		    [
+			    'label'       => esc_html__( 'Rows Per Page', 'essential-addons-for-elementor-lite' ),
+			    'type'        => Controls_Manager::NUMBER,
+			    'min'         => 1,
+			    'default'     => 10,
+			    'description' => esc_html__( 'If you left blank or 0 it will show 10 items by default.', 'essential-addons-for-elementor-lite' ),
+			    'condition'   => [
+				    'ea_adv_data_table_pagination' => 'yes',
+			    ],
+		    ]
+	    );
 
         $this->add_control(
             'eael_global_warning_text',
@@ -458,9 +459,9 @@ class Advanced_Data_Table extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#444444',
                 'selectors' => [
-                    '{{WRAPPER}} th' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} th:before' => 'border-bottom-color: {{VALUE}};',
-                    '{{WRAPPER}} th:after' => 'border-top-color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th:before' => 'border-bottom-color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th:after' => 'border-top-color: {{VALUE}};',
                 ],
             ]
         );
@@ -1536,7 +1537,7 @@ class Advanced_Data_Table extends Widget_Base
         if ($settings['ea_adv_data_table_pagination'] == 'yes') {
             $this->add_render_attribute('ea-adv-data-table', [
                 'class' => "ea-advanced-data-table-paginated",
-                'data-items-per-page' => $settings['ea_adv_data_table_items_per_page'],
+                'data-items-per-page' => ! empty( $settings['ea_adv_data_table_items_per_page'] ) ? $settings['ea_adv_data_table_items_per_page'] : 10,
             ]);
         }
 
@@ -1554,7 +1555,7 @@ class Advanced_Data_Table extends Widget_Base
 
         if ($content = $this->get_table_content()) {
             if ($settings['ea_adv_data_table_search'] == 'yes') {
-                echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table-search-wrap') . '><input type="search" placeholder="' . Helper::eael_wp_kses($settings['ea_adv_data_table_search_placeholder'] ). '" class="ea-advanced-data-table-search"></div>';
+                echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table-search-wrap') . '><input type="search" placeholder="' . esc_attr( Helper::eael_wp_kses($settings['ea_adv_data_table_search_placeholder'] ) ). '" class="ea-advanced-data-table-search"></div>';
             }
 
             echo '<div class="ea-advanced-data-table-wrap-inner">
@@ -1579,7 +1580,7 @@ class Advanced_Data_Table extends Widget_Base
                         </div>';
                     }
                 } else {
-                    echo '<div class="ea-advanced-data-table-pagination ea-advanced-data-table-pagination-' . $settings['ea_adv_data_table_pagination_type'] . ' clearfix"></div>';
+                    echo '<div class="ea-advanced-data-table-pagination ea-advanced-data-table-pagination-' . esc_attr( $settings['ea_adv_data_table_pagination_type'] ) . ' clearfix"></div>';
                 }
             }
         } else {
@@ -1649,11 +1650,11 @@ class Advanced_Data_Table extends Widget_Base
                     }
 
                     if ($th['data_type'] == 'image') {
-                        $html .= '<td>' . (isset($tr[$th['key']]['image_thumb']) ? '<a href="' . $tr[$th['key']]['image_full'] . '"><img src="' . $tr[$th['key']]['image_thumb'] . '"></a>' : '') . '</td>';
+                        $html .= '<td>' . (isset($tr[$th['key']]['image_thumb']) ? '<a href="' . esc_url( $tr[$th['key']]['image_full'] ) . '"><img src="' . esc_url( $tr[$th['key']]['image_thumb'] ) . '"></a>' : '') . '</td>';
                     } elseif ($th['data_type'] == 'selection') {
                         $html .= '<td>' . (!empty($tr[$th['key']]) ? implode((array) $tr[$th['key']], ', ') : '') . '</td>';
                     } elseif ($th['data_type'] == 'button') {
-                        $html .= '<td>' . (!empty($tr[$th['key']]) ? '<a href="' . $tr[$th['key']] . '" class="button" target="' . $th['link_target'] . '">' . $th['button_text'] . '</a>' : '') . '</td>';
+                        $html .= '<td>' . (!empty($tr[$th['key']]) ? '<a href="' . esc_url( $tr[$th['key']] ) . '" class="button" target="' . esc_attr( $th['link_target'] ) . '">' . $th['button_text'] . '</a>' : '') . '</td>';
                     } else {
 	                    $html .= '<td>' . ( isset( $tr[ $th['key'] ] ) ? $tr[ $th['key'] ] : '' ) . '</td>';
                     }

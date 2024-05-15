@@ -273,16 +273,16 @@ class advancedDataTable {
         ? "button"
         : "select";
       let currentPage = 1;
-      let startIndex =
-        table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
+      let startIndex = table.rows[0].parentNode.tagName.toLowerCase() === "thead" ? 1 : 0;
       let endIndex = currentPage * table.dataset.itemsPerPage;
-      let maxPages = Math.ceil(
-        (table.rows.length - 1) / table.dataset.itemsPerPage
-      );
+      let maxPages = Math.ceil( (table.rows.length - 1) / table.dataset.itemsPerPage );
+      if (!startIndex) {
+        endIndex -= 1;
+      }
       pagination.insertAdjacentHTML(
             "beforeend", '');      // insert pagination
       if (maxPages > 1) {
-        if (paginationType == "button") {
+        if (paginationType === "button") {
 
           paginationHTML += `<a href="#" data-page="1" class="ea-adtp-current ea-adtp-show">1</a><a class="dots-1st ea-adtp-hide">...</a>`;
           for (let i = 2; i < maxPages; i++) {
@@ -323,18 +323,20 @@ class advancedDataTable {
       }
 
       // paginate on click
-      if (paginationType == "button") {
+      if (paginationType === "button") {
 
         let $ = jQuery;
         $( 'a:not(.dots-1st, .dots-last)', pagination ).on("click", (e) => {
           e.preventDefault();
 
-          if (e.target.tagName.toLowerCase() == "a") {
+          if (e.target.tagName.toLowerCase() === "a") {
             currentPage = e.target.dataset.page;
-            offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
+            let offset = table.rows[0].parentNode.tagName.toLowerCase() === "thead" ? 1 : 0;
             startIndex = (currentPage - 1) * table.dataset.itemsPerPage + offset;
             endIndex = currentPage * table.dataset.itemsPerPage;
-
+            if (!offset) {
+              endIndex -= 1;
+            }
             if (maxPages > 7) {
               let countFrom = 1, countTo = 6;
               $('a.ea-adtp-current', pagination).removeClass('ea-adtp-current');

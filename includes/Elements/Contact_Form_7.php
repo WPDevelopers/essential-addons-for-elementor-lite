@@ -344,6 +344,9 @@ class Contact_Form_7 extends Widget_Base
                     ],
                 ],
                 'default' => 'default',
+                'selectors' => [
+					'{{WRAPPER}} .eael-contact-form-7-wrapper' => 'text-align: {{VALUE}};',
+				],
             ]
         );
 
@@ -1752,7 +1755,7 @@ class Contact_Form_7 extends Widget_Base
                 }
                 echo '</div>';
             }
-            echo do_shortcode('[contact-form-7 id="' . $settings['contact_form_list'] . '" ]');
+            echo do_shortcode('[contact-form-7 id="' . esc_attr( $settings['contact_form_list'] ) . '" ]');
             echo '</div>
             </div>';
         }

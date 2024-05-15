@@ -69,33 +69,47 @@ class Table_of_Content
                 ]
             );
         } else {
-            $element->add_control(
-                'eael_ext_toc_global',
-                [
-                    'label' => __('Enable Table of Contents Globally', 'essential-addons-for-elementor-lite'),
-                    'description' => __('Enabling this option will effect on entire site.', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SWITCHER,
-                    'default' => 'no',
-                    'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
-                    'label_off' => __('No', 'essential-addons-for-elementor-lite'),
-                    'return_value' => 'yes',
-                    'condition' => [
-                        'eael_ext_table_of_content' => 'yes',
-                    ],
-                ]
-            );
+	        $element->add_control(
+		        'eael_ext_toc_global',
+		        [
+			        'label'        => __( 'Enable Table of Contents Globally', 'essential-addons-for-elementor-lite' ),
+			        'description'  => __( 'Enabling this option will effect on entire site.', 'essential-addons-for-elementor-lite' ),
+			        'type'         => Controls_Manager::SWITCHER,
+			        'default'      => 'no',
+			        'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+			        'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+			        'return_value' => 'yes',
+			        'condition'    => [
+				        'eael_ext_table_of_content' => 'yes',
+			        ],
+		        ]
+	        );
+	        $supported_posts = get_option( 'elementor_cpt_support' );
+	        $display_on      = [
+		        'all'   => __( 'All', 'essential-addons-for-elementor-lite' ),
+		        'post' => __( 'All Posts', 'essential-addons-for-elementor-lite' ),
+		        'page' => __( 'All Pages', 'essential-addons-for-elementor-lite' ),
+	        ];
 
-            $element->add_control(
+	        if ( ! empty( $supported_posts ) ) {
+		        foreach ( $supported_posts as $post_type ) {
+			        $post_obj = get_post_type_object( $post_type );
+
+			        if ( ! in_array( $post_type, [ 'post', 'page' ] ) && is_a( $post_obj, 'WP_Post_Type' ) && $post_obj->labels ) {
+				        $post_type_labels         = get_post_type_labels( $post_obj );
+				        $plural_name              = $post_type_labels->name;
+				        $display_on[ $post_type ] = sprintf( __( 'All %s', 'essential-addons-for-elementor-lite' ), $plural_name );
+			        }
+		        }
+	        }
+            
+	        $element->add_control(
                 'eael_ext_toc_global_display_condition',
                 [
                     'label' => __('Display On', 'essential-addons-for-elementor-lite'),
                     'type' => Controls_Manager::SELECT,
                     'default' => 'all',
-                    'options' => [
-                        'posts' => __('All Posts', 'essential-addons-for-elementor-lite'),
-                        'pages' => __('All Pages', 'essential-addons-for-elementor-lite'),
-                        'all' => __('All Posts & Pages', 'essential-addons-for-elementor-lite'),
-                    ],
+                    'options' => $display_on,
                     'condition' => [
                         'eael_ext_table_of_content' => 'yes',
                         'eael_ext_toc_global' => 'yes',
@@ -120,6 +134,44 @@ class Table_of_Content
 				],
             ]
         );
+
+	    $element->add_control(
+		    'eael_ext_toc_title_tag',
+		    [
+			    'label' => esc_html__( 'HTML Tag', 'essential-addons-for-elementor-lite' ),
+			    'type' => Controls_Manager::CHOOSE,
+			    'options' => [
+				    'h1' => [
+					    'title' => esc_html__( 'H1', 'essential-addons-for-elementor-lite' ),
+					    'icon' => 'eicon-editor-h1',
+				    ],
+				    'h2' => [
+					    'title' => esc_html__( 'H2', 'essential-addons-for-elementor-lite' ),
+					    'icon' => 'eicon-editor-h2',
+				    ],
+				    'h3' => [
+					    'title' => esc_html__( 'H3', 'essential-addons-for-elementor-lite' ),
+					    'icon' => 'eicon-editor-h3',
+				    ],
+				    'h4' => [
+					    'title' => esc_html__( 'H4', 'essential-addons-for-elementor-lite' ),
+					    'icon' => 'eicon-editor-h4',
+				    ],
+				    'h5' => [
+					    'title' => esc_html__( 'H5', 'essential-addons-for-elementor-lite' ),
+					    'icon' => 'eicon-editor-h5',
+				    ],
+				    'h6' => [
+					    'title' => esc_html__( 'H6', 'essential-addons-for-elementor-lite' ),
+					    'icon' => 'eicon-editor-h6',
+				    ],
+			    ],
+			    'condition' => [
+				    'eael_ext_table_of_content' => 'yes',
+			    ],
+			    'default' => 'h2',
+		    ]
+	    );
 
         $element->start_controls_tabs('eael_toc_include_exclude', ['separator' => 'before']);
 

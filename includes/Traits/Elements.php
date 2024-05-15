@@ -301,7 +301,7 @@ trait Elements {
 			],
 			[
 				'name'       => 'eael-twitter-feed-carousel',
-				'title'      => __( 'Twitter Feed Carousel', 'essential-addons-for-elementor-lite' ),
+				'title'      => __( 'X (Twitter) Feed Carousel', 'essential-addons-for-elementor-lite' ),
 				'icon'       => 'eaicon-twitter-feed-carousel',
 				'categories' => '["essential-addons-elementor"]',
 			],
@@ -450,8 +450,8 @@ trait Elements {
 				$reading_progress_html = '<div id="eael-reading-progress-'. get_the_ID() .'" class="eael-reading-progress-wrap eael-reading-progress-wrap-' . ( $this->get_extensions_value( 'eael_ext_reading_progress' ) == 'yes' ? 'local' : 'global' ) . '">';
 
 				if ( $global_reading_progress ) {
-					$reading_progress_html .= '<div class="eael-reading-progress eael-reading-progress-global eael-reading-progress-' . $this->get_extensions_value( 'eael_ext_reading_progress_position' ) . '" style="height: ' . $progress_height . 'px;background-color: ' . $this->get_extensions_value( 'eael_ext_reading_progress_bg_color' ) . ';">
-                        <div class="eael-reading-progress-fill" style="height: ' . $progress_height . 'px;background-color: ' . $this->get_extensions_value( 'eael_ext_reading_progress_fill_color' ) . ';transition: width ' . $animation_speed . 'ms ease;"></div>
+					$reading_progress_html .= '<div class="eael-reading-progress eael-reading-progress-global eael-reading-progress-' . $this->get_extensions_value( 'eael_ext_reading_progress_position' ) . '" style="height: ' . esc_attr( $progress_height ) . 'px;background-color: ' . $this->get_extensions_value( 'eael_ext_reading_progress_bg_color' ) . ';">
+                        <div class="eael-reading-progress-fill" style="height: ' . esc_attr( $progress_height ) . 'px;background-color: ' . $this->get_extensions_value( 'eael_ext_reading_progress_fill_color' ) . ';transition: width ' . esc_attr( $animation_speed ) . 'ms ease;"></div>
                     </div>';
 				} else {
 					$reading_progress_html .= '<div class="eael-reading-progress eael-reading-progress-local eael-reading-progress-' . $this->get_extensions_value( 'eael_ext_reading_progress_position' ) . '">
@@ -523,6 +523,7 @@ trait Elements {
 				$toc_collapse                    = $settings_data['eael_ext_toc_collapse_sub_heading'];
 				$list_icon                       = $settings_data['eael_ext_toc_list_icon'];
 				$toc_title                       = $settings_data['eael_ext_toc_title'];
+				$toc_title_tag                   = $settings_data['eael_ext_toc_title_tag'];
 				$icon_check                      = $settings_data['eael_ext_table_of_content_header_icon'];
 				$sticky_scroll                   = $settings_data['eael_ext_toc_sticky_scroll'];
 				$hide_mobile                     = $settings_data['eael_ext_toc_hide_in_mobile'];
@@ -546,34 +547,50 @@ trait Elements {
 				$table_of_content_html = "<div data-eaelTocTag='" . esc_attr( $support_tag ) . "' data-contentSelector='" . esc_attr( $content_selector ) . "' data-excludeSelector='" . esc_attr( $exclude_selector ) . "' data-stickyScroll='" . esc_attr( $sticky_scroll['size'] ) . "' data-titleUrl='" . esc_attr( $title_url ) . "' data-page_offset='" . esc_attr( $page_offset ) . "' id='eael-toc' class='" . esc_attr( $el_class ) . " '>
                     <div class='eael-toc-header'>
                             <span class='eael-toc-close'>×</span>
-                            <h2 class='eael-toc-title'>{$toc_title}</h2>
+                            <" . Helper::eael_validate_html_tag( $toc_title_tag ) . " class='eael-toc-title'>" . esc_html( $toc_title ) . "</" . Helper::eael_validate_html_tag( $toc_title_tag ) . ">
                     </div>
                     <div class='eael-toc-body'>
                         <ul id='eael-toc-list' class='eael-toc-list " . esc_attr( $toc_style_class ) . "'></ul>
                     </div>
-                    <button class='eael-toc-button'>" . wp_kses( $icon_html, [ 'i' => [ 'class' => [] ] ] ) . "<span>{$toc_title}</span></button>
+                    <button class='eael-toc-button'>" . wp_kses( $icon_html, [ 'i' => [ 'class' => [] ] ] ) . "<span>" . esc_html( $toc_title ) . "</span></button>
                 </div>";
 
-				if ( $this->get_extensions_value( 'eael_ext_table_of_content' ) != 'yes' ) {
+				$is_toc_enabled    = $this->get_extensions_value( 'eael_ext_table_of_content' );
+				$should_render_toc = 'yes' === $is_toc_enabled;
+
+				if ( 'yes' !== $is_toc_enabled ) {
 					$toc_global_display_condition = $this->get_extensions_value( 'eael_ext_toc_global_display_condition' );
-					if ( get_post_status( $this->get_extensions_value( 'post_id' ) ) != 'publish' ) {
-						$table_of_content_html = '';
-					} else if ( $toc_global_display_condition == 'pages' && ! is_page() ) {
-						$table_of_content_html = '';
-					} else if ( $toc_global_display_condition == 'posts' && ! is_single() ) {
-						$table_of_content_html = '';
+					if ( 'page' === $toc_global_display_condition ) {
+						$should_render_toc = is_page();
+					} else if ( 'post' === $toc_global_display_condition ) {
+						$should_render_toc = is_single();
+					} else if ( 'all' === $toc_global_display_condition ){
+						$should_render_toc = true;
+					} else if ( get_post_type() === $toc_global_display_condition ){
+						$should_render_toc = true;
+					}
+
+					if ( get_post_status( $this->get_extensions_value( 'post_id' ) ) !== 'publish' ) {
+						$should_render_toc = false;
 					}
 				}
 
 				// Exclude TOC configured page / post based on display condition
 				if ( $toc_status && $toc_status_global ) {
 					$toc_global_display_condition = $this->get_extensions_value( 'eael_ext_toc_global_display_condition' );
-					
-					if ( $toc_global_display_condition == 'pages' && ! is_page() ) {
-						$table_of_content_html = '';
-					} else if ( $toc_global_display_condition == 'posts' && ! is_single() ) {
-						$table_of_content_html = '';
+					if ( 'page' === $toc_global_display_condition ) {
+						$should_render_toc = is_page();
+					} else if ( 'post' === $toc_global_display_condition ) {
+						$should_render_toc = is_single();
+					} else if ( 'all' === $toc_global_display_condition ){
+						$should_render_toc = true;
+					} else if ( get_post_type() === $toc_global_display_condition ){
+						$should_render_toc = true;
 					}
+				}
+
+				if( ! $should_render_toc ){
+					$table_of_content_html = '';
 				}
 
 				if ( ! empty( $table_of_content_html ) ) {
@@ -610,7 +627,7 @@ trait Elements {
 				$scroll_to_top_icon_image = ! empty( $settings_data_scroll_to_top['eael_ext_scroll_to_top_button_icon_image'] )
 					? $settings_data_scroll_to_top['eael_ext_scroll_to_top_button_icon_image']['value'] : '';
 
-				$scroll_to_top_icon_html = \Essential_Addons_Elementor\Classes\Helper::get_render_icon( $settings_data_scroll_to_top['eael_ext_scroll_to_top_button_icon_image'] );
+				$scroll_to_top_icon_html = \Essential_Addons_Elementor\Classes\Helper::get_render_icon( $settings_data_scroll_to_top['eael_ext_scroll_to_top_button_icon_image'] ?? '' );
 
 				$scroll_to_top_html = "<div class='eael-ext-scroll-to-top-wrap scroll-to-top-hide'><span class='eael-ext-scroll-to-top-button'>$scroll_to_top_icon_html</span></div>";
 
@@ -751,20 +768,20 @@ trait Elements {
             .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-number li.eael-highlight-parent:before,
             .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-parent > a
             {
-                color:$toc_list_color_active !important;
+                color: $toc_list_color_active !important;
             }
 
 
             .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-active > a:before
             {
-                border-bottom-color:$toc_list_color_active !important;
+                border-bottom-color: $toc_list_color_active !important;
             }
 
             .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-bullet li.eael-highlight-active:before,
             .eael-toc-global .eael-toc-body .eael-toc-list li.eael-highlight-active > a:after,
             .eael-toc-global .eael-toc-body .eael-toc-list.eael-toc-bullet li.eael-highlight-parent:before
             {
-                background-color:$toc_list_color_active !important;
+                background-color: $toc_list_color_active !important;
             }
 
             .eael-toc-global ul.eael-toc-list > li

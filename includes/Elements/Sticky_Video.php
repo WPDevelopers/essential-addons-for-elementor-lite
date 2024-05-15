@@ -768,9 +768,9 @@ class Sticky_Video extends Widget_Base
             if ('yes' === $settings['eaelsv_overlay_play_icon']) {
                 if ($iconNew['value'] != '') {
                     if (is_array($iconNew['value'])) {
-                        $icon = '<img src="' . $iconNew['value']['url'] .  '" width="100">';
+                        $icon = '<img src="' . esc_url( $iconNew['value']['url'] ) .  '" width="100">';
                     } else {
-                        $icon = '<i class="' . $iconNew['value'] . '"></i>';
+                        $icon = '<i class="' . esc_attr( $iconNew['value'] ) . '"></i>';
                     }
                 } else {
                     $icon = '<i class="eicon-play"></i>';
@@ -836,7 +836,7 @@ class Sticky_Video extends Widget_Base
         }
 
         return '<div
-			id="eaelsv-player-' . $this->get_id() . '"
+			id="eaelsv-player-' . esc_attr( $this->get_id() ) . '"
 			data-plyr-provider="youtube"
 			data-plyr-embed-id="' . esc_attr($id) . '"
 			data-plyr-config="{' . esc_attr($am) . ', ' . esc_attr($lp) . '}"
@@ -862,7 +862,7 @@ class Sticky_Video extends Widget_Base
         }
 
         return '<div
-			id="eaelsv-player-' . $this->get_id() . '"
+			id="eaelsv-player-' . esc_attr( $this->get_id() ) . '"
 			data-plyr-provider="vimeo"
 			data-plyr-embed-id="' . esc_attr($id) . '"
 			data-plyr-config="{' . esc_attr($am) . ', ' . esc_attr($lp) . '}"
@@ -891,7 +891,7 @@ class Sticky_Video extends Widget_Base
             $lp = '"loop": {"active": false}';
         }
 
-        return '<video class="eaelsv-player" id="eaelsv-player-' . $this->get_id() . '" playsinline controls data-plyr-config="{' . esc_attr($am) . ', ' . esc_attr($lp) . '}">
+        return '<video class="eaelsv-player" id="eaelsv-player-' . esc_attr( $this->get_id() ) . '" playsinline controls data-plyr-config="{' . esc_attr($am) . ', ' . esc_attr($lp) . '}">
 			<source src="' . esc_attr($video) . '#t=' . esc_attr($startTime) . ',' . esc_attr($endTime) . '" type="video/mp4" />
 		</video>';
     }

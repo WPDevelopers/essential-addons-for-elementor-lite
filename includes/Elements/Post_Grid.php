@@ -1096,7 +1096,7 @@ class Post_Grid extends Widget_Base
         );
 
         echo '<div ' . $this->get_render_attribute_string( 'post_grid_wrapper' ) . '>
-            <div ' . $this->get_render_attribute_string( 'post_grid_container' ) . ' data-layout-mode="' . $settings["layout_mode"] . '">';
+            <div ' . $this->get_render_attribute_string( 'post_grid_container' ) . ' data-layout-mode="' . esc_attr( $settings["layout_mode"] ) . '">';
 
         $template = $this->get_template($settings['eael_dynamic_template_Layout']);
         $settings['loadable_file_name'] = $this->get_filename_only($template);
@@ -1142,7 +1142,7 @@ class Post_Grid extends Widget_Base
             <script type="text/javascript">
                 jQuery(document).ready(function($) {
                     jQuery(".eael-post-grid").each(function() {
-                        var $scope = jQuery(".elementor-element-<?php echo $this->get_id(); ?>"),
+                        var $scope = jQuery(".elementor-element-<?php echo esc_js( $this->get_id() ); ?>"),
                             $gallery = $(this),
                             $layout_mode = $gallery.data('layout-mode');
 

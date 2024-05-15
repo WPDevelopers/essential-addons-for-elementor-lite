@@ -169,60 +169,66 @@ class Helper
 
     public static function get_query_args($settings = [], $post_type = 'post')
     {
-        $settings = wp_parse_args($settings, [
-            'post_type' => $post_type,
-            'posts_ids' => [],
-            'orderby' => 'date',
-            'order' => 'desc',
-            'posts_per_page' => 3,
-            'offset' => 0,
-            'post__not_in' => [],
-        ]);
+	    $settings = wp_parse_args( $settings, [
+		    'post_type'      => $post_type,
+		    'posts_ids'      => [],
+		    'orderby'        => 'date',
+		    'order'          => 'desc',
+		    'posts_per_page' => 3,
+		    'offset'         => 0,
+		    'post__not_in'   => [],
+	    ] );
 
-        $args = [
-            'orderby' => $settings['orderby'],
-            'order' => $settings['order'],
-            'ignore_sticky_posts' => 1,
-            'post_status' => 'publish',
-            'posts_per_page' => $settings['posts_per_page'],
-            'offset' => $settings['offset'],
-        ];
+	    $args = [
+		    'orderby'             => $settings['orderby'],
+		    'order'               => $settings['order'],
+		    'ignore_sticky_posts' => 1,
+		    'post_status'         => 'publish',
+		    'posts_per_page'      => $settings['posts_per_page'],
+		    'offset'              => $settings['offset'],
+	    ];
 
-        if ('by_id' === $settings['post_type']) {
-            $args['post_type'] = 'any';
-            $args['post__in'] = empty($settings['posts_ids']) ? [0] : $settings['posts_ids'];
-        } else {
-            $args['post_type'] = $settings['post_type'];
+	    if ( 'by_id' === $settings['post_type'] ) {
+		    $args['post_type'] = 'any';
+		    $args['post__in']  = empty( $settings['posts_ids'] ) ? [ 0 ] : $settings['posts_ids'];
+	    } else {
+		    $args['post_type'] = $settings['post_type'];
+		    $args['tax_query'] = [];
 
-            //if ($args['post_type'] !== 'page') {
-                $args['tax_query'] = [];
+		    $taxonomies = get_object_taxonomies( $settings['post_type'], 'objects' );
 
-                $taxonomies = get_object_taxonomies($settings['post_type'], 'objects');
+		    foreach ( $taxonomies as $object ) {
+			    $setting_key = $object->name . '_ids';
 
-                foreach ($taxonomies as $object) {
-                    $setting_key = $object->name . '_ids';
+			    if ( ! empty( $settings[ $setting_key ] ) ) {
+				    $args['tax_query'][] = [
+					    'taxonomy' => $object->name,
+					    'field'    => 'term_id',
+					    'terms'    => $settings[ $setting_key ],
+				    ];
+			    }
+		    }
 
-                    if (!empty($settings[$setting_key])) {
-                        $args['tax_query'][] = [
-                            'taxonomy' => $object->name,
-                            'field' => 'term_id',
-                            'terms' => $settings[$setting_key],
-                        ];
-                    }
-                }
+		    if ( ! empty( $args['tax_query'] ) ) {
+			    $args['tax_query']['relation'] = 'AND';
+		    }
+	    }
 
-                if (!empty($args['tax_query'])) {
-                    $args['tax_query']['relation'] = 'AND';
-                }
-            //}
-        }
+	    if ( $args['orderby'] === 'most_viewed' ) {
+		    $args['orderby']  = 'meta_value_num';
+		    $args['meta_key'] = '_eael_post_view_count';
+	    }
 
-        if (!empty($settings['authors'])) {
-            $args['author__in'] = $settings['authors'];
-        }
+	    if ( ! empty( $settings['authors'] ) ) {
+		    $args['author__in'] = $settings['authors'];
+	    }
 
-        if (!empty($settings['post__not_in'])) {
-            $args['post__not_in'] = $settings['post__not_in'];
+	    if ( ! empty( $settings['post__not_in'] ) ) {
+		    $args['post__not_in'] = $settings['post__not_in'];
+	    }
+
+        if( 'product' === $post_type && function_exists('whols_lite') ){
+            $args['meta_query'] = array_filter( apply_filters( 'woocommerce_product_query_meta_query', $args['meta_query'], new \WC_Query() ) );
         }
 
         return $args;
@@ -291,17 +297,18 @@ class Helper
      */
     public static function get_post_orderby_options()
     {
-        $orderby = array(
-            'ID' => 'Post ID',
-            'author' => 'Post Author',
-            'title' => 'Title',
-            'date' => 'Date',
-            'modified' => 'Last Modified Date',
-            'parent' => 'Parent Id',
-            'rand' => 'Random',
-            'comment_count' => 'Comment Count',
-            'menu_order' => 'Menu Order',
-        );
+	    $orderby = array(
+		    'ID'            => __( 'Post ID', 'essential-addons-for-elementor-lite' ),
+		    'author'        => __( 'Post Author', 'essential-addons-for-elementor-lite' ),
+		    'title'         => __( 'Title', 'essential-addons-for-elementor-lite' ),
+		    'date'          => __( 'Date', 'essential-addons-for-elementor-lite' ),
+		    'modified'      => __( 'Last Modified Date', 'essential-addons-for-elementor-lite' ),
+		    'parent'        => __( 'Parent Id', 'essential-addons-for-elementor-lite' ),
+		    'rand'          => __( 'Random', 'essential-addons-for-elementor-lite' ),
+		    'comment_count' => __( 'Comment Count', 'essential-addons-for-elementor-lite' ),
+		    'most_viewed'   => __( 'Most Viewed', 'essential-addons-for-elementor-lite' ),
+		    'menu_order'    => __( 'Menu Order', 'essential-addons-for-elementor-lite' )
+	    );
 
         return $orderby;
     }
@@ -678,7 +685,7 @@ class Helper
 		global $product;
 
 		if ( ! is_a( $product, 'WC_Product' ) ) {
-			return;
+			return ''; 
 		}
 
 		$separator = '';
@@ -767,6 +774,9 @@ class Helper
                     'key'   => '_stock_status',
                     'value' => 'instock'
                 ];
+            }
+            if( 'product' === $args['post_type'] && function_exists('whols_lite') ){
+                $args['meta_query'] = array_filter( apply_filters( 'woocommerce_product_query_meta_query', $args['meta_query'], new \WC_Query() ) );
             }
         }
 
@@ -905,7 +915,7 @@ class Helper
 	 */
 	public static function eael_pagination ($args, $settings) {
 
-		$pagination_Count          = intval( $args['total_post'] );
+		$pagination_Count          = intval( $args['total_post'] ?? 0 );
 		$paginationLimit           = intval( $settings['eael_product_grid_products_count'] ) ?: 4;
 		$pagination_Paginationlist = ceil( $pagination_Count / $paginationLimit );
 		$widget_id                 = sanitize_key( $settings['eael_widget_id'] );
@@ -1034,6 +1044,9 @@ class Helper
 	 * @return string
 	 */
 	public static function eael_wp_kses( $text ) {
+        if ( empty( $text ) ) {
+            return '';
+        }
 		return wp_kses( $text, self::eael_allowed_tags(), array_merge( wp_allowed_protocols(), [ 'data' ] ) );
 	}
 
@@ -1044,7 +1057,7 @@ class Helper
 	 * @return array
 	 */
 	public static function eael_allowed_tags() {
-		return [
+		return apply_filters( 'eael_allowed_tags', [
 			'a'       => [
 				'href'   => [],
 				'title'  => [],
@@ -1053,6 +1066,7 @@ class Helper
 				'id'     => [],
 				'style'  => [],
 				'target' => [],
+				'data-elementor-open-lightbox' => [],
 			],
 			'q'       => [
 				'cite'  => [],
@@ -1277,7 +1291,7 @@ class Helper
 				'style' => [],
 				'align' => [],
 			],
-			'td'      => [
+			'td'     => [
 				'class'   => [],
 				'id'      => [],
 				'style'   => [],
@@ -1285,8 +1299,63 @@ class Helper
 				'colspan' => [],
 				'rowspan' => [],
 			],
-		];
+			'header' => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
+			],
+			'iframe' => [
+				'class'  => [],
+				'id'     => [],
+				'style'  => [],
+				'title'  => [],
+				'width'  => [],
+				'height' => [],
+				'src'    => []
+			]
+		] );
 	}
+
+    /**
+     * List of allowed icon/svg tags for wp_kses
+     *
+	 * eael_allowed_icon_tags
+	 * @return array
+	 */
+    public static function eael_allowed_icon_tags(){
+        return [
+            'svg'   => [
+                'class'           => [],
+                'aria-hidden'     => [],
+                'aria-labelledby' => [],
+                'role'            => [],
+                'xmlns'           => [],
+                'width'           => [],
+                'height'          => [],
+                'viewbox'         => []
+            ],
+            'g'     => [ 'fill'  => [] ],
+            'title' => [ 'title' => [] ],
+            'path'     => [
+                'd'    => [], 
+                'fill' => [] 
+            ],
+			'i'      => [
+				'class' => [],
+				'id'    => [],
+				'style' => []
+			],
+            'img'     => [
+				'src'    => [],
+				'alt'    => [],
+				'height' => [],
+				'width'  => [],
+				'class'  => [],
+				'id'     => [],
+				'style'  => []
+			],
+        ];
+    }
 
     public static function eael_fetch_color_or_global_color($settings, $control_name=''){
         if( !isset($settings[$control_name])) {
@@ -1409,5 +1478,80 @@ class Helper
 		} else {
 			return 'AND';
 		}
+	}
+
+    /**
+     * Get all ordered products by the user
+     * @return boolean|array order ids
+     * @since 5.8.9
+     */
+    public static function eael_get_all_user_ordered_products() {
+        $user_id = get_current_user_id();
+
+        if( ! $user_id ) {
+            return false;
+        }
+
+        $args = array(
+            'customer_id' => $user_id,
+            'limit' => -1,
+        );
+
+        $orders = wc_get_orders($args);
+        $product_ids = [];
+
+        foreach( $orders as $order ){
+            $items = $order->get_items();
+            
+            foreach($items as $item){
+                $product_ids[] = $item->get_product_id();
+            }
+        }
+
+        return $product_ids;
+    }
+
+	/**
+	 * Get current device by screen size
+	 *
+	 *
+	 * @return string device name.
+	 * @since 5.9.1
+	 *
+	 */
+	public static function eael_get_current_device_by_screen() {
+		if ( ! session_id() ) {
+			session_start( [
+				'read_and_close' => true,
+			] );
+		}
+
+		if ( isset( $_SESSION['eael_screen'] ) && ! empty( $breakpoints = Plugin::$instance->breakpoints->get_breakpoints_config() ) ) {
+			$breakpoints = array_filter( $breakpoints, function ( $breakpoint ) {
+				return $breakpoint['is_enabled'];
+			} );
+
+			if ( isset( $breakpoints['widescreen'] ) ) {
+				$widescreen = $breakpoints['widescreen'];
+				unset( $breakpoints['widescreen'] );
+				$breakpoints['desktop'] = $widescreen;
+			}else{
+                $breakpoints['desktop'] = [
+                    'value' => 2400
+                ];
+            }
+            
+			$current_screen = intval( $_SESSION['eael_screen'] );
+			foreach ( $breakpoints as $device => $screen ) {
+				if ( $current_screen <= $screen['value'] ) {
+					return $device;
+				}
+			}
+
+			return "widescreen";
+		}
+
+		// If no match is found, you can return a default value or handle it as needed.
+		return "unknown";
 	}
 }

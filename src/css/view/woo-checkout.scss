@@ -34,7 +34,7 @@ $base-font-size: 14px;
 		.woo-checkout-login, .woo-checkout-coupon {
 
 			a {
-				color: #7866ff;
+				color: #432cf9;
 
 				:hover {
 					color: #443D6D;
@@ -96,13 +96,14 @@ $base-font-size: 14px;
 				position: absolute;
 				top: 20px;
 				left: 20px;
-				font-size: 20px;
+				font-size: 16px;
 
 				i, svg {
 					width: 1em;
 					height: 1em;
 					position: relative;
 					display: block;
+					font-size: 16px;
 				}
 			}
 
@@ -527,6 +528,14 @@ $base-font-size: 14px;
 				display: none;
 			}
 			.woocommerce-form-login-toggle {
+				.wc-block-components-notice-banner {
+					svg {
+						display: none;
+					}
+					.wc-block-components-notice-banner__content {
+						margin-left: 25px;
+					}
+				}
 				.woocommerce-error, .woocommerce-info, .woocommerce-message {
 					background-color: transparent!important;
 					padding: 0 0 0 40px!important;
@@ -573,8 +582,8 @@ $base-font-size: 14px;
 			.ea-coupon-icon {
 				width: 20px;
 				position: absolute;
-				top: 20px;
-				left: 20px;
+				top: 24px;
+				left: 35px;
 				font-size: 20px;
 
 				i, svg {
@@ -606,6 +615,14 @@ $base-font-size: 14px;
 			}
 
 			.woocommerce-form-coupon-toggle {
+				.wc-block-components-notice-banner {
+					svg {
+						display: none;
+					}
+					.wc-block-components-notice-banner__content {
+						margin-left: 25px;
+					}
+				}
 				.woocommerce-error, .woocommerce-info, .woocommerce-message {
 					background-color: transparent!important;
 					padding: 0 0 0 40px!important;
@@ -847,6 +864,30 @@ $base-font-size: 14px;
 	.ea-woo-checkout-btn-prev,
 	.ea-woo-checkout-btn-next{
 		border: none;
+	}
+}
+
+body{
+	&.eael-woo-checkout{
+		.astra-pro-wc-module-activated{
+			&.ea-woo-checkout{
+				.woocommerce{
+					form {
+						.form-row{
+							label{
+								opacity: 1 !important;
+								position: relative !important;
+								font-weight: 700 !important;
+								font-size: .9rem !important;
+							}
+							input, select, textarea{
+								padding: .9em .8em !important;
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 }
 

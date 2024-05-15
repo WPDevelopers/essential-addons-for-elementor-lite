@@ -85,6 +85,7 @@ trait Ajax_Handler {
 		do_action( 'eael_before_ajax_load_more', $_REQUEST );
 
 		wp_parse_str( $_POST['args'], $args );
+		$args['post_status'] = 'publish';
 
 		if ( isset( $args['date_query']['relation'] ) ) {
 			$args['date_query']['relation'] = HelperClass::eael_sanitize_relation( $args['date_query']['relation'] );
@@ -265,7 +266,9 @@ trait Ajax_Handler {
 			}
 		}
 
-
+		if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' ) {
+			do_action( 'eael_woo_after_product_loop', $settings['eael_product_grid_style_preset'] );
+		}
 		while ( ob_get_status() ) {
 			ob_end_clean();
 		}
@@ -318,6 +321,7 @@ trait Ajax_Handler {
 		$settings['eael_page_id']   = $page_id;
 		$settings['eael_widget_id'] = $widget_id;
 		wp_parse_str( $_REQUEST['args'], $args );
+		$args['post_status'] = array_intersect( $settings['eael_product_grid_products_status'], [ 'publish', 'draft', 'pending', 'future' ] );
 
 		if ( isset( $args['date_query']['relation'] ) ) {
 			$args['date_query']['relation'] = HelperClass::eael_sanitize_relation( $args['date_query']['relation'] );
@@ -344,6 +348,17 @@ trait Ajax_Handler {
 		ob_start();
 		$query = new \WP_Query( $args );
 		if ( $query->have_posts() ) {
+			if ( isset( $template_info['name'] ) && $template_info['name'] === 'eicon-woocommerce' && boolval( $settings['show_add_to_cart_custom_text'] ) ){
+				$add_to_cart_text = [
+					'add_to_cart_simple_product_button_text'   => $settings['add_to_cart_simple_product_button_text'],
+					'add_to_cart_variable_product_button_text' => $settings['add_to_cart_variable_product_button_text'],
+					'add_to_cart_grouped_product_button_text'  => $settings['add_to_cart_grouped_product_button_text'],
+					'add_to_cart_external_product_button_text' => $settings['add_to_cart_external_product_button_text'],
+					'add_to_cart_default_product_button_text'  => $settings['add_to_cart_default_product_button_text'],
+				];
+				$this->change_add_woo_checkout_update_order_reviewto_cart_text( $add_to_cart_text );
+			}
+
 			while ( $query->have_posts() ) {
 				$query->the_post();
 				include( $template );
@@ -585,6 +600,7 @@ trait Ajax_Handler {
 		$ajax = wp_doing_ajax();
 
 		wp_parse_str( $_POST['args'], $args );
+		$args['post_status'] = 'publish';
 
 		if ( isset( $args['date_query']['relation'] ) ) {
 			$args['date_query']['relation'] = HelperClass::eael_sanitize_relation( $args['date_query']['relation'] );
@@ -1110,4 +1126,5 @@ trait Ajax_Handler {
 			return 'no';
 		} );
 	}
+
 }

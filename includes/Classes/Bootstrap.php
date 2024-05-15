@@ -73,8 +73,8 @@ class Bootstrap
     protected $installer;
 
 
-    const EAEL_PROMOTION_FLAG = 10;
-    const EAEL_ADMIN_MENU_FLAG = 10;
+    const EAEL_PROMOTION_FLAG = 11;
+    const EAEL_ADMIN_MENU_FLAG = 11;
     /**
      * Singleton instance
      *
@@ -208,7 +208,6 @@ class Bootstrap
 //	        add_filter( 'elementor/documents/get/post_id',[$this, 'eael_wpml_template_translation']);
 //        }
 
-
         //templately plugin support
         if( !class_exists('Templately\Plugin') && !get_option('eael_templately_promo_hide') ) {
             add_action( 'elementor/editor/before_enqueue_scripts', [$this, 'templately_promo_enqueue_scripts'] );
@@ -243,6 +242,7 @@ class Bootstrap
     		add_action('wp_ajax_nopriv_eael_checkout_cart_qty_update', [$this, 'eael_checkout_cart_qty_update'] );
 
 		    add_action( 'wp_loaded', [ $this, 'eael_woo_cart_empty_action' ], 20 );
+		    add_filter( 'woocommerce_checkout_fields', [ $this, 'eael_customize_woo_checkout_fields' ] );
 
 		    add_action( 'eael_woo_before_product_loop', function ( $layout ) {
 			    if ( $layout === 'eael-product-default' ) {
@@ -254,8 +254,20 @@ class Bootstrap
 			    remove_action( 'woocommerce_after_shop_loop_item', 'astra_woo_woocommerce_shop_product_content' );
 			    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
 		    } );
-	    }
 
+            add_action( 'eael_woo_after_product_loop', function ( $layout ) {
+			    if ( $layout === 'eael-product-default' ) {
+				    return;
+			    }
+
+			    add_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open' );
+			    add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close' );
+			    add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
+                if( function_exists( 'astra_woo_woocommerce_shop_product_content' ) ){
+                    add_action( 'woocommerce_after_shop_loop_item', 'astra_woo_woocommerce_shop_product_content' );
+                }
+		    } );
+	    }
 
         // Admin
 	    if ( is_admin() ) {
@@ -297,25 +309,35 @@ class Bootstrap
 	        add_action( 'eael_admin_page_setting', [ $this, 'eael_show_admin_menu_notice' ] );
 
 	        // Black Friday Optin
-//	        add_action( 'admin_notices', [ $this, 'eael_black_friday_optin' ] );
-//	        add_action( 'eael_admin_notices', [ $this, 'eael_black_friday_optin' ] );
-//	        add_action( 'wp_ajax_eael_black_friday_optin_dismiss', [ $this, 'eael_black_friday_optin_dismiss' ] );
+	        add_action( 'admin_notices', [ $this, 'eael_black_friday_optin' ] );
+	        add_action( 'eael_admin_notices', [ $this, 'eael_black_friday_optin' ] );
+	        add_action( 'wp_ajax_eael_black_friday_optin_dismiss', [ $this, 'eael_black_friday_optin_dismiss' ] );
 
-	        if ( ! current_user_can( 'administrator' ) ) {
-		        add_filter( 'elementor/document/save/data', function ( $data ) {
-			        $data['elements'] = Plugin::$instance->db->iterate_data( $data['elements'], function ( $element ) {
-				        if ( isset( $element['widgetType'] ) && $element['widgetType'] === 'eael-login-register' ) {
-					        if ( ! empty( $element['settings']['register_user_role'] ) ) {
-						        $element['settings']['register_user_role'] = '';
-					        }
-				        }
+		    if ( ! current_user_can( 'administrator' ) ) {
+			    add_filter( 'elementor/document/save/data', function ( $data ) {
+				    if ( empty( $data['elements'] ) ) {
+					    return $data;
+				    }
 
-				        return $element;
-			        } );
+				    $data['elements'] = Plugin::$instance->db->iterate_data( $data['elements'], function ( $element ) {
+					    if ( isset( $element['widgetType'] ) && $element['widgetType'] === 'eael-login-register' ) {
+						    if ( ! empty( $element['settings']['register_user_role'] ) ) {
+							    $element['settings']['register_user_role'] = '';
+						    }
+					    }
 
-			        return $data;
-		        } );
-	        }
+					    if ( isset( $element['widgetType'] ) && $element['widgetType'] === 'eicon-woocommerce' ) {
+						    if ( ! empty( $element['settings']['eael_product_grid_products_status'] ) ) {
+							    $element['settings']['eael_product_grid_products_status'] = [ 'publish' ];
+						    }
+					    }
+
+					    return $element;
+				    } );
+
+				    return $data;
+			    } );
+		    }
         } else {
 	        add_action( 'wp', [ $this, 'eael_post_view_count' ] );
         }

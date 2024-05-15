@@ -9,16 +9,24 @@ ea.hooks.addAction("init", "ea", () => {
 				$accordionHeader = $scope.find(".eael-accordion-header"),
 				$accordionType = $advanceAccordion.data("accordion-type"),
 				$accordionSpeed = $advanceAccordion.data("toogle-speed"),
-				$customIdOffset = $advanceAccordion.data("custom-id-offset");
+				$customIdOffset = $advanceAccordion.data("custom-id-offset"),
+				$scrollOnClick = $advanceAccordion.data("scroll-on-click"),
+				$srollSpeed = $advanceAccordion.data("scroll-speed");
 
 			// Open default actived tab
-			if (hashTag) {
+			if (hashTag || $scrollOnClick === 'yes') {
 				$accordionHeader.each(function () {
-					if ($(this).attr("id") == hashTag) {
-						hashTagExists = true;
+					if ($scrollOnClick === 'yes') {
+						$(this).attr('data-scroll', $(this).offset().top)
+					}
 
-						$(this).addClass("show active");
-						$(this).next().slideDown($accordionSpeed);
+					if (hashTag) {
+						if ($(this).attr("id") == hashTag) {
+							hashTagExists = true;
+
+							$(this).addClass("show-this active");
+							$(this).next().slideDown($accordionSpeed);
+						}
 					}
 				});
 			}
@@ -26,7 +34,7 @@ ea.hooks.addAction("init", "ea", () => {
 			if (hashTagExists === false) {
 				$accordionHeader.each(function () {
 					if ($(this).hasClass("active-default")) {
-						$(this).addClass("show active");
+						$(this).addClass("show-this active");
 						$(this).next().slideDown($accordionSpeed);
 					}
 				});
@@ -40,36 +48,47 @@ ea.hooks.addAction("init", "ea", () => {
 
 				var $this = $(this);
 
+				setTimeout(function(e) {
+					$('.eael-accordion-header').removeClass('triggered');
+				},70);
+
+				if( $this.hasClass('triggered') ){
+					return;
+				}
+
 				if ($accordionType === "accordion") {
-					if ($this.hasClass("show")) {
-						$this.removeClass("show active");
+					if ($this.hasClass("show-this")) {
+						$this.removeClass("show-this active");
 						$this.next().slideUp($accordionSpeed);
 					} else {
-						$this
-						.parent()
-						.parent()
-						.find(".eael-accordion-header")
-						.removeClass("show active");
-						$this
-						.parent()
-						.parent()
-						.find(".eael-accordion-content")
-						.slideUp($accordionSpeed);
-						$this.toggleClass("show active");
+						$this.parent().parent().find(".eael-accordion-header").removeClass("show-this active");
+						$this.parent().parent().find(".eael-accordion-content").slideUp($accordionSpeed);
+						$this.toggleClass("show-this active");
 						$this.next().slideToggle($accordionSpeed);
 					}
 				} else {
 					// For acccordion type 'toggle'
-					if ($this.hasClass("show")) {
-						$this.removeClass("show active");
+					if ($this.hasClass("show-this")) {
+						$this.removeClass("show-this active");
 						$this.next().slideUp($accordionSpeed);
 					} else {
-						$this.addClass("show active");
+						$this.addClass("show-this active");
 						$this.next().slideDown($accordionSpeed);
 					}
 				}
-				ea.hooks.doAction("widgets.reinit",$this.parent());
-				ea.hooks.doAction("ea-advanced-accordion-triggered", $this.next());
+
+                if ($scrollOnClick === 'yes' && $this.hasClass("active")) {
+                    let $customIdOffsetVal = $customIdOffset ? parseFloat($customIdOffset) : 0;
+                    $('html, body').animate({
+                        scrollTop: $(this).data('scroll') - $customIdOffsetVal,
+                    }, $srollSpeed);
+                }
+
+                setTimeout(function () {
+                    $this.addClass('triggered');
+                    ea.hooks.doAction("widgets.reinit", $this.parent());
+                    ea.hooks.doAction("ea-advanced-accordion-triggered", $this.next());
+                }, 50);
 			});
 
 			$scope.on('keydown', '.eael-accordion-header', function (e) {
@@ -77,14 +96,6 @@ ea.hooks.addAction("init", "ea", () => {
 					$(this).trigger('click');
 				}
 			});
-
-			// If hashTag is not null then scroll to that hashTag smoothly
-			if( typeof hashTag !== 'undefined' && hashTag && !ea.elementStatusCheck('eaelAdvancedAccordionScroll') ){
-				let $customIdOffsetVal = $customIdOffset ? parseFloat($customIdOffset) : 0;
-				$('html, body').animate({
-					scrollTop: $("#"+hashTag).offset().top - $customIdOffsetVal,
-				}, 300);
-			}
 		}
 	);
 });

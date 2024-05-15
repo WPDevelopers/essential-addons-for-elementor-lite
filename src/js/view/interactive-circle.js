@@ -1,19 +1,36 @@
 ea.hooks.addAction( "init", "ea", () => {
 	const interactiveCircle = function ( $scope, $ ) {
-		
-		var $circleWrap = $scope.find( ".eael-circle-wrapper" );
-		var $eventType  = "mouseenter";
-		var $animation  = $circleWrap.data('animation');
-		var $autoplay  	= $circleWrap.data('autoplay');
-		var $autoplayInterval  = parseInt( $circleWrap.data('autoplay-interval') );
-		var $autoplayPause = 0;
+
+		let $circleWrap = $scope.find(".eael-circle-wrapper"),
+			$eventType = "mouseenter",
+			$animation = $circleWrap.data('animation'),
+			$autoplay = $circleWrap.data('autoplay'),
+			$autoplayInterval = parseInt($circleWrap.data('autoplay-interval')),
+			$autoplayPause = 0,
+			$activeItem = $scope.find('.eael-circle-btn.active');
+
+		if ($activeItem.length > 1 ){
+			$activeItem.not(':last').removeClass('active');
+			$activeItem.siblings('.eael-circle-btn-content').removeClass('active');
+		}
 	
-		if ( $animation != 'eael-interactive-circle-animation-0' ) {
-			var $circleContent = $scope.find( ".eael-circle-content" );
+		if ( $animation !== 'eael-interactive-circle-animation-0' ) {
+			let $circleContent = $scope.find(".eael-circle-content"),
+				$activeItem = $scope.find('.eael-circle-btn.active');
+			$activeItem.siblings('.eael-circle-btn-content').removeClass('active');
+
+			$('body').scroll(function () {
+				if($circleWrap.isInViewport()){
+					$(window).trigger('resize');
+				}
+			});
 
 			$($circleContent).waypoint(
 				function() {
 					$circleWrap.addClass($animation);
+					setTimeout(function (){
+						$activeItem.siblings('.eael-circle-btn-content').addClass('active');
+					},1700);
 				},
 				{
 					offset: "80%",
@@ -28,10 +45,17 @@ ea.hooks.addAction( "init", "ea", () => {
 		
 		var $tabLinks    = $circleWrap.find( ".eael-circle-btn" );
 		var $tabContents = $circleWrap.find( ".eael-circle-btn-content" );
-		
+
+		//Support for Keyboard accessibility
+		$scope.on( 'keyup', '.eael-circle-btn', function ( e ) {
+			if ( e.which === 9 || e.which === 32 ) {
+				$( this ).trigger( $eventType );
+			}
+		});
+
 		$tabLinks.each( function ( element ) {
 			$( this ).on( $eventType, handleEvent( element ) );
-
+			$( this ).on( 'eaelInteractiveCicle', handleEvent( element ) );
 		} );
 		
 		if( $autoplay ){
@@ -55,7 +79,7 @@ ea.hooks.addAction( "init", "ea", () => {
 				}
 			} );
 			setTimeout(function(){
-				$( $tabLinks[ activeIndex ] ).trigger( $eventType );
+				$( $tabLinks[ activeIndex ] ).trigger( 'eaelInteractiveCicle' );
 			}, 300);
 		}
 
