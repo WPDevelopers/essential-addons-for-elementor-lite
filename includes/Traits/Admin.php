@@ -60,7 +60,7 @@ trait Admin {
             wp_enqueue_script( 'sweetalert2-core-js', EAEL_PLUGIN_URL . 'assets/admin/vendor/sweetalert2/js/core.js', array( 'jquery' ), EAEL_PLUGIN_VERSION, true );
 
             wp_enqueue_script( 'essential_addons_elementor-admin-js', EAEL_PLUGIN_URL . 'assets/admin/js/admin.js', array( 'jquery' ), EAEL_PLUGIN_VERSION, true );
-	        wp_enqueue_script( 'essential_addons_elementor-admin-dashboard-js', EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.js', array( 'essential_addons_elementor-admin-js' ), EAEL_PLUGIN_VERSION, true );
+	        wp_enqueue_script( 'essential_addons_elementor-admin-dashboard-js', EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.js', array( 'essential_addons_elementor-admin-js' ), time(), true );
 
             //Internationalizing JS string translation
             $i18n = [
