@@ -322,6 +322,59 @@ class Interactive_Circle extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_interactive_circle_rotation',
+			[
+				'label'        => esc_html__( 'Rotate Animation', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'default'      => '',
+				'return_value' => 'yes',
+				// 'condition' => [
+				// 	'eael_interactive_circle_preset' => [ 'eael-interactive-circle-preset-1', 'eael-interactive-circle-preset-2' ]
+				// ],
+			]
+		);
+
+		$this->add_control(
+			'eael_interactive_circle_rotation_speed',
+			[
+				'label' => esc_html__( 'Rotation Speed', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => 1,
+						'max' => 300,
+						'step' => .5,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 50,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-circle-info.eael-interactive-circle-rotate' => 'animation-duration: {{SIZE}}s;',
+					'{{WRAPPER}} .eael-circle-info.eael-interactive-circle-rotate .eael-circle-btn-icon' => 'animation-duration: {{SIZE}}s;',
+					'{{WRAPPER}} .eael-circle-info.eael-interactive-circle-rotate .eael-circle-content' => 'animation-duration: {{SIZE}}s;',
+				],
+				'condition' => [
+					'eael_interactive_circle_rotation' => 'yes'
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_interactive_circle_rotation_hover',
+			[
+				'label'        => esc_html__( 'Pause on hover', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'default'      => '',
+				'return_value' => 'yes',
+				'condition' => [
+					'eael_interactive_circle_rotation' => 'yes'
+				],
+			]
+		);
+
+		$this->add_control(
 			'eael_interactive_circle_event',
 			[
 				'label'       => esc_html__( 'Mouse Event', 'essential-addons-for-elementor-lite' ),
@@ -962,12 +1015,22 @@ class Interactive_Circle extends Widget_Base {
 
 		$this->add_render_attribute( 'eael_circle_wrapper', 'class', $mobile_view );
 
+		$this->add_render_attribute( 'eael_circle_info', 'class', 'eael-circle-info');
+		$this->add_render_attribute( 'eael_circle_info', 'data-items', $item_count );
+
+		if( 'yes' === $settings['eael_interactive_circle_rotation'] ){
+			$this->add_render_attribute( 'eael_circle_info', 'class', 'eael-interactive-circle-rotate');
+		}
+
+		if( 'yes' === $settings['eael_interactive_circle_rotation_hover'] ){
+			$this->add_render_attribute( 'eael_circle_info', 'class', 'pause-rotate');
+		}
 
 		?>
         <div <?php echo $this->get_render_attribute_string( 'eael_interactive_circle_container' ); ?>>
 			<?php if ( ( $settings['eael_interactive_circle_preset'] != 'eael-interactive-circle-preset-2' ) ) { ?>
                 <div <?php echo $this->get_render_attribute_string( 'eael_circle_wrapper' ); ?>>
-                    <div class="eael-circle-info" data-items="<?php echo $item_count; ?>">
+                    <div <?php echo $this->get_render_attribute_string( 'eael_circle_info' ); ?>>
                         <div class="eael-circle-inner">
 							<?php
 							foreach ( $settings['eael_interactive_circle_item'] as $index => $item ) :

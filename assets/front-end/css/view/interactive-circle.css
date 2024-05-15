@@ -16,6 +16,62 @@
     margin: 0 !important;
   }
 }
+.eael-circle-wrapper .eael-circle-info.eael-interactive-circle-rotate {
+  -webkit-animation: rotation 50s linear infinite;
+          animation: rotation 50s linear infinite;
+}
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes rotation-reverse {
+  from {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+  to {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+@keyframes rotation-reverse {
+  from {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+  to {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+.eael-circle-wrapper .eael-circle-info.eael-interactive-circle-rotate .eael-circle-btn-icon, .eael-circle-wrapper .eael-circle-info.eael-interactive-circle-rotate .eael-circle-content {
+  -webkit-animation: rotation-reverse 50s linear infinite;
+          animation: rotation-reverse 50s linear infinite;
+}
+.eael-circle-wrapper .eael-circle-info.eael-interactive-circle-rotate.pause-rotate:hover {
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
+}
+.eael-circle-wrapper .eael-circle-info.eael-interactive-circle-rotate.pause-rotate:hover .eael-circle-btn-icon, .eael-circle-wrapper .eael-circle-info.eael-interactive-circle-rotate.pause-rotate:hover .eael-circle-content {
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
+}
 .eael-circle-wrapper .eael-circle-inner {
   width: 500px;
   height: 500px;
