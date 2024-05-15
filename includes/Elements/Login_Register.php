@@ -222,6 +222,7 @@ class Login_Register extends Widget_Base {
 			'first_name'   => __( 'First Name', 'essential-addons-for-elementor-lite' ),
 			'last_name'    => __( 'Last Name', 'essential-addons-for-elementor-lite' ),
 			'website'      => __( 'Website', 'essential-addons-for-elementor-lite' ),
+			'honeypot'     => __( 'Honeypot', 'essential-addons-for-elementor-lite' ),
 		];
 
 		if( 'on' === get_option( 'eael_custom_profile_fields' ) ){
@@ -1978,7 +1979,7 @@ class Login_Register extends Widget_Base {
 				'active' => true,
 			],
 			'condition' => [
-				'field_type!' => $custom_fields_image,
+				'field_type!' => array_merge( $custom_fields_image, ['honeypot'] ),
 			],
 			'ai' => [
 				'active' => false,
@@ -1993,6 +1994,7 @@ class Login_Register extends Widget_Base {
 					'email',
 					'password',
 					'confirm_pass',
+					'honeypot'
 				],
 			],
 		] );
@@ -2031,6 +2033,11 @@ class Login_Register extends Widget_Base {
 			],
 			'selectors' => [
 				'{{WRAPPER}} {{CURRENT_ITEM}}' => 'width: {{SIZE}}{{UNIT}};',
+			],
+			'condition'       => [
+				'field_type!' => [
+					'honeypot'
+				],
 			],
 		] );
 		apply_filters( 'eael/login-register/register-repeater', $repeater );
