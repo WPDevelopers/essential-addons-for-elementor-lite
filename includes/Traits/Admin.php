@@ -60,7 +60,7 @@ trait Admin {
             wp_enqueue_script( 'sweetalert2-core-js', EAEL_PLUGIN_URL . 'assets/admin/vendor/sweetalert2/js/core.js', array( 'jquery' ), EAEL_PLUGIN_VERSION, true );
 
             wp_enqueue_script( 'essential_addons_elementor-admin-js', EAEL_PLUGIN_URL . 'assets/admin/js/admin.js', array( 'jquery' ), EAEL_PLUGIN_VERSION, true );
-	        wp_enqueue_script( 'essential_addons_elementor-admin-dashboard-js', EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/assets/index-CqEwux4V.js', array( 'essential_addons_elementor-admin-js' ), EAEL_PLUGIN_VERSION, true );
+	        wp_enqueue_script( 'essential_addons_elementor-admin-dashboard-js', EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.js', array( 'essential_addons_elementor-admin-js' ), EAEL_PLUGIN_VERSION, true );
 
             //Internationalizing JS string translation
             $i18n = [
@@ -123,7 +123,7 @@ trait Admin {
     public function admin_settings_page() {
         ?>
 		<link rel="stylesheet" href="<?php echo EAEL_PLUGIN_URL; ?>includes/templates/admin/new-ui/assets/icons/style.css">
-		<link rel="stylesheet" href="<?php echo EAEL_PLUGIN_URL; ?>includes/templates/admin/eael-dashboard/dist/assets/index-_mYVovMl.css">
+		<link rel="stylesheet" href="<?php echo EAEL_PLUGIN_URL; ?>includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.css">
 		<div id="eael-dashboard"></div>
 		<form action="" method="POST" id="eael-settings" name="eael-settings" style="display: none;">
             <div class="template__wrapper background__greyBg px30 py50">
