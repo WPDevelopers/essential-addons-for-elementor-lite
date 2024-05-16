@@ -1,6 +1,7 @@
 import React from 'react';
 import EnhanceExperience from "./EnhanceExperience.jsx";
 import ExploreProFeatures from "./ExploreProFeatures.jsx";
+import CommunityBox from "./CommunityBox.jsx";
 
 function Premium() {
     return (
@@ -57,37 +58,10 @@ function Premium() {
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div className="ea__connect-others-wrapper flex gap-4">
-                        <div className="ea__connect-others">
-                            <div className="ea__others-icon eaicon-1">
-                                <i className="eaicon ea-support"></i>
-                            </div>
-                            <h5>Automatic Updates & Priority Support</h5>
-                            <p>LoremGet access to automatic updates & keep your website up-to-date with
-                                constantly developing features. Having any trouble?
-                            </p>
-                            <a href="#">
-                                <button className="underline">
-                                    Learn More
-                                </button>
-                            </a>
-                        </div>
-                        <div className="ea__connect-others">
-                            <div className="ea__others-icon eaicon-1">
-                                <i className="eaicon ea-docs"></i>
-                            </div>
-                            <h5>Automatic Updates & Priority Support</h5>
-                            <p>LoremGet access to automatic updates & keep your website up-to-date with
-                                constantly developing features. Having any trouble?
-                            </p>
-                            <a href="#">
-                                <button className="underline">
-                                    Learn More
-                                </button>
-                            </a>
-                        </div>
+                        <CommunityBox index={3}/>
+                        <CommunityBox index={4}/>
                     </div>
                 </div>
             </div>

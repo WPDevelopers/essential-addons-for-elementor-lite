@@ -130,7 +130,8 @@ trait Admin {
 					        'label' => __( 'Create Ticket', 'essential-addons-for-elementor-lite' ),
 					        'url'   => '#'
 				        ],
-				        'icon'    => 'ea-github'
+				        'icon'    => 'ea-github',
+						'icon_color' => 'eaicon-1'
 			        ],
 			        [
 				        'heading' => __( 'Join Community', 'essential-addons-for-elementor-lite' ),
@@ -139,7 +140,8 @@ trait Admin {
 					        'label' => __( 'Join with us', 'essential-addons-for-elementor-lite' ),
 					        'url'   => '#'
 				        ],
-				        'icon'    => 'ea-community'
+				        'icon'    => 'ea-community',
+				        'icon_color' => 'eaicon-2'
 			        ],
 			        [
 				        'heading' => __( 'View knowledgebase', 'essential-addons-for-elementor-lite' ),
@@ -148,7 +150,28 @@ trait Admin {
 					        'label' => __( 'View Docs', 'essential-addons-for-elementor-lite' ),
 					        'url'   => '#'
 				        ],
-				        'icon'    => 'ea-docs'
+				        'icon'    => 'ea-docs',
+				        'icon_color' => 'eaicon-3'
+			        ],
+			        [
+				        'heading' => __( 'Automatic Updates & Priority Support', 'essential-addons-for-elementor-lite' ),
+				        'content' => __( 'LoremGet access to automatic updates & keep your website up-to-date with constantly developing features. Having any trouble?', 'essential-addons-for-elementor-lite' ),
+				        'button'  => [
+					        'label' => __( 'Learn More', 'essential-addons-for-elementor-lite' ),
+					        'url'   => '#'
+				        ],
+				        'icon'    => 'ea-support',
+				        'icon_color' => 'eaicon-1'
+			        ],
+			        [
+				        'heading' => __( 'Automatic Updates & Priority Support', 'essential-addons-for-elementor-lite' ),
+				        'content' => __( 'LoremGet access to automatic updates & keep your website up-to-date with constantly developing features. Having any trouble?', 'essential-addons-for-elementor-lite' ),
+				        'button'  => [
+					        'label' => __( 'Learn More', 'essential-addons-for-elementor-lite' ),
+					        'url'   => '#'
+				        ],
+				        'icon'    => 'ea-docs',
+				        'icon_color' => 'eaicon-1'
 			        ]
 		        ],
 		        'sidebar_box'      => [
