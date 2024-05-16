@@ -90,15 +90,24 @@ trait Admin {
 	        $ea_dashboard = [
 		        'reactPath' => EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/',
 		        'menu'      => [
-			        'General'     => 'ea-home',
-			        'Elements'    => 'ea-elements',
-			        'Extensions'  => 'ea-extensions',
-			        'Tools'       => 'ea-tool',
-			        'Integration' => 'ea-plug',
-			        'Go Premium'  => 'ea-lock',
+			        __( 'General', 'essential-addons-for-elementor-lite' )     => 'ea-home',
+			        __( 'Elements', 'essential-addons-for-elementor-lite' )    => 'ea-elements',
+			        __( 'Extensions', 'essential-addons-for-elementor-lite' )  => 'ea-extensions',
+			        __( 'Tools', 'essential-addons-for-elementor-lite' )       => 'ea-tool',
+			        __( 'Integration', 'essential-addons-for-elementor-lite' ) => 'ea-plug',
+			        __( 'Go Premium', 'essential-addons-for-elementor-lite' )  => 'ea-lock',
 		        ],
 		        'whats_new' => [
-			        'heading' => 'What is New on Version?'
+			        'heading' => 'What is New on Version?',
+			        'list'    => [
+				        __( 'EA Fancy Chart Symbol display option in the fancy chart', 'essential-addons-for-elementor-lite' ),
+				        __( 'EA Instagram Feed Feed is getting broken on the front-end view', 'essential-addons-for-elementor-lite' ),
+				        __( 'EA Woo Product Carouse Option to hide and show add to cart
+', 'essential-addons-for-elementor-lite' ),
+			        ],
+			        'button'  => [
+				        __( 'View Changelog', 'essential-addons-for-elementor-lite' ) => '#'
+			        ]
 		        ]
 	        ];
 
