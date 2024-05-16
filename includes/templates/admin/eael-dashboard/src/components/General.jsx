@@ -1,6 +1,7 @@
 import React from 'react';
 import WhatsNew from './WhatsNew.jsx'
 import TemplatelyPromo from "./TemplatelyPromo.jsx";
+import CommunityBox from "./CommunityBox.jsx";
 
 function General() {
     return (
@@ -10,36 +11,7 @@ function General() {
                     <WhatsNew/>
                     <TemplatelyPromo/>
                     <div className="ea__connect-others-wrapper flex gap-4">
-                        <div className="ea__connect-others">
-                            <div className="ea__others-icon eaicon-1">
-                                <i className="eaicon ea-github"></i>
-                            </div>
-                            <h5>GitHub & Support</h5>
-                            <p className="mb-6">Encountering a problem? Seek assistance through live chat or by
-                                submitting.
-                            </p>
-                            <a href="#">
-                                <button>
-                                    <span className="underline">Create Ticket</span>
-                                    <i className="eaicon ea-right-arrow"></i>
-                                </button>
-                            </a>
-                        </div>
-                        <div className="ea__connect-others">
-                            <div className="ea__others-icon eaicon-2">
-                                <i className="eaicon ea-community"></i>
-                            </div>
-                            <h5>Join Community</h5>
-                            <p className="mb-6">Encountering a problem? Seek assistance through live chat or by
-                                submitting.
-                            </p>
-                            <a href="#">
-                                <button>
-                                    <span className="underline">Join with us</span>
-                                    <i className="eaicon ea-right-arrow"></i>
-                                </button>
-                            </a>
-                        </div>
+                        <CommunityBox/>
                     </div>
                 </div>
                 <div className="ea__sidebar-info">
