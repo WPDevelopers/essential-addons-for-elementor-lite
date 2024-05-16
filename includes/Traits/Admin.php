@@ -149,6 +149,19 @@ trait Admin {
 				        ],
 				        'icon'    => 'ea-docs'
 			        ]
+		        ],
+		        'sidebar_box'      => [
+			        'heading' => __( 'Unlimited Features', 'essential-addons-for-elementor-lite' ),
+			        'content' => __( 'Supercharge your content schedule and', 'essential-addons-for-elementor-lite' ),
+			        'review'  => [
+				        'label' => __( 'Review from Real Users', 'essential-addons-for-elementor-lite' ),
+				        'score' => __( '5/5', 'essential-addons-for-elementor-lite' ),
+			        ],
+			        'button' => [
+				        'label' => __( 'Upgrade to PRO', 'essential-addons-for-elementor-lite' ),
+				        'url'   => '#',
+				        'icon'  => 'ea-crown-1'
+			        ]
 		        ]
 	        ];
 

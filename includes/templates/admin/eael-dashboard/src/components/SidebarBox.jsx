@@ -1,26 +1,28 @@
 import React from 'react';
 
 function SidebarBox() {
+    const eaData = localize.eael_dashboard.sidebar_box;
+
     return (
         <>
             <div className="ea__sidebar-content">
-                <h5>Unlimited Features</h5>
-                <p>Supercharge your content schedule and</p>
+                <h5>{eaData.heading}</h5>
+                <p>{eaData.content}</p>
                 <div className="review-wrap">
-                    <h6>Review from Real Users</h6>
+                    <h6>{eaData.review.label}</h6>
                     <div className="flex items-center gap-1">
                         <i className="eaicon ea-star"></i>
                         <i className="eaicon ea-star"></i>
                         <i className="eaicon ea-star"></i>
                         <i className="eaicon ea-star"></i>
                         <i className="eaicon ea-star"></i>
-                        <span className="reating-details">5/5</span>
+                        <span className="reating-details">{eaData.review.score}</span>
                     </div>
                 </div>
-                <a href="#">
+                <a href={eaData.button.url}>
                     <button className="upgrade-button">
-                        <i className="eaicon ea-crown-1"></i>
-                        Upgrade to PRO
+                        <i className={'eaicon ' + eaData.button.icon}></i>
+                        {eaData.button.label}
                     </button>
                 </a>
             </div>
