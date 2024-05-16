@@ -88,8 +88,8 @@ trait Admin {
             ];
 
 	        $ea_dashboard = [
-		        'reactPath'     => EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/',
-		        'menu'          => [
+		        'reactPath'        => EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/',
+		        'menu'             => [
 			        __( 'General', 'essential-addons-for-elementor-lite' )     => 'ea-home',
 			        __( 'Elements', 'essential-addons-for-elementor-lite' )    => 'ea-elements',
 			        __( 'Extensions', 'essential-addons-for-elementor-lite' )  => 'ea-extensions',
@@ -97,8 +97,8 @@ trait Admin {
 			        __( 'Integration', 'essential-addons-for-elementor-lite' ) => 'ea-plug',
 			        __( 'Go Premium', 'essential-addons-for-elementor-lite' )  => 'ea-lock',
 		        ],
-		        'whats_new'     => [
-			        'heading' => 'What is New on Version?',
+		        'whats_new'        => [
+			        'heading' => __( 'What is New on Version?', 'essential-addons-for-elementor-lite' ),
 			        'list'    => [
 				        __( 'EA Fancy Chart Symbol display option in the fancy chart', 'essential-addons-for-elementor-lite' ),
 				        __( 'EA Instagram Feed Feed is getting broken on the front-end view', 'essential-addons-for-elementor-lite' ),
@@ -109,7 +109,19 @@ trait Admin {
 				        'url'   => '#'
 			        ]
 		        ],
-		        'community_box' => [
+		        'templately_promo' => [
+			        'heading' => __( 'Unlock 5000+ Ready Templates', 'essential-addons-for-elementor-lite' ),
+			        'list'    => [
+				        __( 'Stunning, Ready Website Templates', 'essential-addons-for-elementor-lite' ),
+				        __( 'Add Team Members & Collaborate', 'essential-addons-for-elementor-lite' ),
+				        __( 'Cloud With Templately WorkSpace', 'essential-addons-for-elementor-lite' ),
+			        ],
+			        'button'  => [
+				        'label' => __( 'Install templately', 'essential-addons-for-elementor-lite' ),
+				        'url'   => '#'
+			        ]
+		        ],
+		        'community_box'    => [
 			        [
 				        'heading' => __( 'GitHub & Support', 'essential-addons-for-elementor-lite' ),
 				        'content' => __( 'Encountering a problem? Seek assistance through live chat or by submitting.', 'essential-addons-for-elementor-lite' ),
