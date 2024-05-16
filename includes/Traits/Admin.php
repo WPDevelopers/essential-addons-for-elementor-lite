@@ -60,7 +60,8 @@ trait Admin {
             wp_enqueue_script( 'sweetalert2-core-js', EAEL_PLUGIN_URL . 'assets/admin/vendor/sweetalert2/js/core.js', array( 'jquery' ), EAEL_PLUGIN_VERSION, true );
 
             wp_enqueue_script( 'essential_addons_elementor-admin-js', EAEL_PLUGIN_URL . 'assets/admin/js/admin.js', array( 'jquery' ), EAEL_PLUGIN_VERSION, true );
-	        wp_enqueue_script( 'essential_addons_elementor-admin-dashboard-js', EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.js', array( 'essential_addons_elementor-admin-js' ), time(), true );
+	        wp_enqueue_script( 'essential_addons_elementor-admin-dashboard', EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.js', array( 'essential_addons_elementor-admin-js' ), time(), true );
+	        add_filter( 'wp_script_attributes', [ $this, 'add_type_attribute' ] );
 
             //Internationalizing JS string translation
             $i18n = [
@@ -207,6 +208,14 @@ trait Admin {
 
         $this->eael_admin_inline_css();
     }
+
+	public function add_type_attribute( $attributes ) {
+		if ( isset( $attributes['id'] ) && $attributes['id'] === 'essential_addons_elementor-admin-dashboard-js' ) {
+			$attributes['type'] = 'module';
+		}
+
+		return $attributes;
+	}
 
     /**
      * Create settings page.

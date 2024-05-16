@@ -3,9 +3,8 @@ import React, {useState} from 'react';
 function IntegrationBox(props) {
     const eaData = localize.eael_dashboard.integration_box.list[props.index],
         enableTxt = localize.eael_dashboard.integration_box.enable,
-        disableTxt = localize.eael_dashboard.integration_box.disable;
-
-    const [checked, setChecked] = useState(eaData.status),
+        disableTxt = localize.eael_dashboard.integration_box.disable,
+        [checked, setChecked] = useState(eaData.status),
         integrationHandler = (e) => {
             setChecked(() => {
                 return e.target.checked;
