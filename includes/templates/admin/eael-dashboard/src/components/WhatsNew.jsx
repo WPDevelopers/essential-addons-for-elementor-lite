@@ -1,14 +1,14 @@
 import React from 'react';
 
 function WhatsNew() {
-    const eaData = localize.eael_dashboard;
+    const eaData = localize.eael_dashboard.whats_new;
 
     return (
         <>
             <div className="ea__general-content-item relative">
-                <h3>{eaData.whats_new.heading}</h3>
+                <h3>{eaData.heading}</h3>
                 <div className="mb-6 flex flex-col gap-4">
-                    {eaData.whats_new.list.map((item, index) => {
+                    {eaData.list.map((item, index) => {
                         return <div className="ea__content-details flex gap-2 items-center" key={index}>
                                 <span>
                                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
@@ -25,9 +25,9 @@ function WhatsNew() {
                         </div>;
                     })}
                 </div>
-                <a href={eaData.whats_new.button.url}>
+                <a href={eaData.button.url}>
                     <button className="primary-btn changelog-btn">
-                        {eaData.whats_new.button.label}
+                        {eaData.button.label}
                         <i className="eaicon ea-link"></i>
                     </button>
                 </a>
