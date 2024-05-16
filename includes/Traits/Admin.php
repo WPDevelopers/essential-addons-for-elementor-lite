@@ -157,10 +157,40 @@ trait Admin {
 				        'label' => __( 'Review from Real Users', 'essential-addons-for-elementor-lite' ),
 				        'score' => __( '5/5', 'essential-addons-for-elementor-lite' ),
 			        ],
-			        'button' => [
+			        'button'  => [
 				        'label' => __( 'Upgrade to PRO', 'essential-addons-for-elementor-lite' ),
 				        'url'   => '#',
 				        'icon'  => 'ea-crown-1'
+			        ]
+		        ],
+		        'integration_box'  => [
+			        'enable'  => __( 'Enable Integration', 'essential-addons-for-elementor-lite' ),
+			        'disable' => __( 'Disable Integration', 'essential-addons-for-elementor-lite' ),
+			        'list'    => [
+				        [
+					        'heading' => __( 'BetterDocs', 'essential-addons-for-elementor-lite' ),
+					        'content' => __( 'BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ),
+					        'icon'    => 'images/BD.svg',
+					        'status'  => true
+				        ],
+				        [
+					        'heading' => __( 'Essential Blocks', 'essential-addons-for-elementor-lite' ),
+					        'content' => __( 'BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ),
+					        'icon'    => 'images/EB.svg',
+					        'status'  => false
+				        ],
+				        [
+					        'heading' => __( 'EmbedPress', 'essential-addons-for-elementor-lite' ),
+					        'content' => __( 'BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ),
+					        'icon'    => 'images/EP.svg',
+					        'status'  => true
+				        ],
+				        [
+					        'heading' => __( 'NotificationX', 'essential-addons-for-elementor-lite' ),
+					        'content' => __( 'BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ),
+					        'icon'    => 'images/NX.svg',
+					        'status'  => true
+				        ]
 			        ]
 		        ]
 	        ];
