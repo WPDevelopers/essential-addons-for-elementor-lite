@@ -88,8 +88,8 @@ trait Admin {
             ];
 
 	        $ea_dashboard = [
-		        'reactPath' => EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/',
-		        'menu'      => [
+		        'reactPath'     => EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/',
+		        'menu'          => [
 			        __( 'General', 'essential-addons-for-elementor-lite' )     => 'ea-home',
 			        __( 'Elements', 'essential-addons-for-elementor-lite' )    => 'ea-elements',
 			        __( 'Extensions', 'essential-addons-for-elementor-lite' )  => 'ea-extensions',
@@ -97,7 +97,7 @@ trait Admin {
 			        __( 'Integration', 'essential-addons-for-elementor-lite' ) => 'ea-plug',
 			        __( 'Go Premium', 'essential-addons-for-elementor-lite' )  => 'ea-lock',
 		        ],
-		        'whats_new' => [
+		        'whats_new'     => [
 			        'heading' => 'What is New on Version?',
 			        'list'    => [
 				        __( 'EA Fancy Chart Symbol display option in the fancy chart', 'essential-addons-for-elementor-lite' ),
@@ -107,6 +107,35 @@ trait Admin {
 			        'button'  => [
 				        'label' => __( 'View Changelog', 'essential-addons-for-elementor-lite' ),
 				        'url'   => '#'
+			        ]
+		        ],
+		        'community_box' => [
+			        [
+				        'heading' => __( 'GitHub & Support', 'essential-addons-for-elementor-lite' ),
+				        'content' => __( 'Encountering a problem? Seek assistance through live chat or by submitting.', 'essential-addons-for-elementor-lite' ),
+				        'button'  => [
+					        'label' => __( 'Create Ticket', 'essential-addons-for-elementor-lite' ),
+					        'url'   => '#'
+				        ],
+				        'icon'    => 'ea-github'
+			        ],
+			        [
+				        'heading' => __( 'Join Community', 'essential-addons-for-elementor-lite' ),
+				        'content' => __( 'Encountering a problem? Seek assistance through live chat or by submitting.', 'essential-addons-for-elementor-lite' ),
+				        'button'  => [
+					        'label' => __( 'Join with us', 'essential-addons-for-elementor-lite' ),
+					        'url'   => '#'
+				        ],
+				        'icon'    => 'ea-community'
+			        ],
+			        [
+				        'heading' => __( 'View knowledgebase', 'essential-addons-for-elementor-lite' ),
+				        'content' => __( 'Get started by spending some time with the documentation', 'essential-addons-for-elementor-lite' ),
+				        'button'  => [
+					        'label' => __( 'View Docs', 'essential-addons-for-elementor-lite' ),
+					        'url'   => '#'
+				        ],
+				        'icon'    => 'ea-docs'
 			        ]
 		        ]
 	        ];

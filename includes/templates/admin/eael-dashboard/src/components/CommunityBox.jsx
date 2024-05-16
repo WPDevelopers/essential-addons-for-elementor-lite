@@ -1,34 +1,19 @@
 import React from 'react';
 
 function CommunityBox(props) {
+    const eaData = localize.eael_dashboard.community_box[props.index];
+
     return (
         <>
             <div className="ea__connect-others">
-                <div className="ea__others-icon eaicon-1">
-                    <i className="eaicon ea-github"></i>
+                <div className={'ea__others-icon eaicon-' + (props.index + 1)}>
+                    <i className={eaData.icon + 'eaicon'}></i>
                 </div>
-                <h5>GitHub & Support</h5>
-                <p className="mb-6">Encountering a problem? Seek assistance through live chat or by
-                    submitting.
-                </p>
-                <a href="#">
+                <h5>{eaData.heading}</h5>
+                <p className="mb-6">{eaData.content}</p>
+                <a href={eaData.button.url}>
                     <button>
-                        <span className="underline">Create Ticket</span>
-                        <i className="eaicon ea-right-arrow"></i>
-                    </button>
-                </a>
-            </div>
-            <div className="ea__connect-others">
-                <div className="ea__others-icon eaicon-2">
-                    <i className="eaicon ea-community"></i>
-                </div>
-                <h5>Join Community</h5>
-                <p className="mb-6">Encountering a problem? Seek assistance through live chat or by
-                    submitting.
-                </p>
-                <a href="#">
-                    <button>
-                        <span className="underline">Join with us</span>
+                        <span className="underline">{eaData.button.label}</span>
                         <i className="eaicon ea-right-arrow"></i>
                     </button>
                 </a>

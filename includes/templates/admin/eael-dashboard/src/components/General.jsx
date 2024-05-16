@@ -11,7 +11,8 @@ function General() {
                     <WhatsNew/>
                     <TemplatelyPromo/>
                     <div className="ea__connect-others-wrapper flex gap-4">
-                        <CommunityBox/>
+                        <CommunityBox index={0}/>
+                        <CommunityBox index={1}/>
                     </div>
                 </div>
                 <div className="ea__sidebar-info">
@@ -38,19 +39,7 @@ function General() {
                     </div>
 
                     <div>
-                        <div className="ea__connect-others">
-                            <div className="ea__others-icon eaicon-3">
-                                <i className="eaicon ea-docs"></i>
-                            </div>
-                            <h5>View knowledgebase</h5>
-                            <p className="mb-6">Get started by spending some time with the documentation</p>
-                            <a href="#">
-                                <button>
-                                    <span className="underline">View Docs</span>
-                                    <i className="eaicon ea-right-arrow"></i>
-                                </button>
-                            </a>
-                        </div>
+                        <CommunityBox index={2}/>
                     </div>
                 </div>
             </div>
