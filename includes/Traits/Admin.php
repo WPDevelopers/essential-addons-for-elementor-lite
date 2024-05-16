@@ -102,11 +102,11 @@ trait Admin {
 			        'list'    => [
 				        __( 'EA Fancy Chart Symbol display option in the fancy chart', 'essential-addons-for-elementor-lite' ),
 				        __( 'EA Instagram Feed Feed is getting broken on the front-end view', 'essential-addons-for-elementor-lite' ),
-				        __( 'EA Woo Product Carouse Option to hide and show add to cart
-', 'essential-addons-for-elementor-lite' ),
+				        __( 'EA Woo Product Carouse Option to hide and show add to cart', 'essential-addons-for-elementor-lite' ),
 			        ],
 			        'button'  => [
-				        __( 'View Changelog', 'essential-addons-for-elementor-lite' ) => '#'
+				        'label' => __( 'View Changelog', 'essential-addons-for-elementor-lite' ),
+				        'url'   => '#'
 			        ]
 		        ]
 	        ];
