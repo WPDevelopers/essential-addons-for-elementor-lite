@@ -16,42 +16,43 @@
     display: flex;
     justify-content: center;
 
+    &.eael-interactive-circle-rotate,
+    .eael-interactive-circle-rotate{
+        @keyframes rotation {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes rotation-reverse {
+            from {
+                transform: rotate(360deg);
+            }
+            to {
+                transform: rotate(0deg);
+            }
+        }
+        animation: rotation $rotation-speed linear infinite;
+
+        .eael-circle-btn-icon,.eael-circle-content {
+            animation: rotation-reverse $rotation-speed linear infinite;
+        }
+
+        &.pause-rotate:hover{
+            animation-play-state: paused;
+            .eael-circle-btn-icon,.eael-circle-content {
+                animation-play-state: paused;
+            }
+        }
+    }
+
     .eael-circle-info {
         display: inline-flex;
 
         @media only screen and (max-width: $breakpoint) {
             margin: 0 !important;
-        }
-
-        &.eael-interactive-circle-rotate{
-            @keyframes rotation {
-                from {
-                    transform: rotate(0deg);
-                }
-                to {
-                    transform: rotate(360deg);
-                }
-            }
-            @keyframes rotation-reverse {
-                from {
-                    transform: rotate(360deg);
-                }
-                to {
-                    transform: rotate(0deg);
-                }
-            }
-            animation: rotation $rotation-speed linear infinite;
-
-            .eael-circle-btn-icon,.eael-circle-content {
-                animation: rotation-reverse $rotation-speed linear infinite;
-            }
-
-            &.pause-rotate:hover{
-                animation-play-state: paused;
-                .eael-circle-btn-icon,.eael-circle-content {
-                    animation-play-state: paused;
-                }
-            }
         }
     }
     .eael-circle-inner {

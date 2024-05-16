@@ -6,17 +6,8 @@
       -ms-flex-pack: center;
           justify-content: center;
 }
-.eael-circle-wrapper .eael-circle-info {
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-}
-@media only screen and (max-width: 600px) {
-  .eael-circle-wrapper .eael-circle-info {
-    margin: 0 !important;
-  }
-}
-.eael-circle-wrapper .eael-circle-info.eael-interactive-circle-rotate {
+.eael-circle-wrapper.eael-interactive-circle-rotate,
+.eael-circle-wrapper .eael-interactive-circle-rotate {
   -webkit-animation: rotation 50s linear infinite;
           animation: rotation 50s linear infinite;
 }
@@ -60,17 +51,32 @@
             transform: rotate(0deg);
   }
 }
-.eael-circle-wrapper .eael-circle-info.eael-interactive-circle-rotate .eael-circle-btn-icon, .eael-circle-wrapper .eael-circle-info.eael-interactive-circle-rotate .eael-circle-content {
+.eael-circle-wrapper.eael-interactive-circle-rotate .eael-circle-btn-icon, .eael-circle-wrapper.eael-interactive-circle-rotate .eael-circle-content,
+.eael-circle-wrapper .eael-interactive-circle-rotate .eael-circle-btn-icon,
+.eael-circle-wrapper .eael-interactive-circle-rotate .eael-circle-content {
   -webkit-animation: rotation-reverse 50s linear infinite;
           animation: rotation-reverse 50s linear infinite;
 }
-.eael-circle-wrapper .eael-circle-info.eael-interactive-circle-rotate.pause-rotate:hover {
+.eael-circle-wrapper.eael-interactive-circle-rotate.pause-rotate:hover,
+.eael-circle-wrapper .eael-interactive-circle-rotate.pause-rotate:hover {
   -webkit-animation-play-state: paused;
           animation-play-state: paused;
 }
-.eael-circle-wrapper .eael-circle-info.eael-interactive-circle-rotate.pause-rotate:hover .eael-circle-btn-icon, .eael-circle-wrapper .eael-circle-info.eael-interactive-circle-rotate.pause-rotate:hover .eael-circle-content {
+.eael-circle-wrapper.eael-interactive-circle-rotate.pause-rotate:hover .eael-circle-btn-icon, .eael-circle-wrapper.eael-interactive-circle-rotate.pause-rotate:hover .eael-circle-content,
+.eael-circle-wrapper .eael-interactive-circle-rotate.pause-rotate:hover .eael-circle-btn-icon,
+.eael-circle-wrapper .eael-interactive-circle-rotate.pause-rotate:hover .eael-circle-content {
   -webkit-animation-play-state: paused;
           animation-play-state: paused;
+}
+.eael-circle-wrapper .eael-circle-info {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+@media only screen and (max-width: 600px) {
+  .eael-circle-wrapper .eael-circle-info {
+    margin: 0 !important;
+  }
 }
 .eael-circle-wrapper .eael-circle-inner {
   width: 500px;

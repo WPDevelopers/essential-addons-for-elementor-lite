@@ -328,9 +328,9 @@ class Interactive_Circle extends Widget_Base {
 				'type'         => Controls_Manager::SWITCHER,
 				'default'      => '',
 				'return_value' => 'yes',
-				// 'condition' => [
-				// 	'eael_interactive_circle_preset' => [ 'eael-interactive-circle-preset-1', 'eael-interactive-circle-preset-2' ]
-				// ],
+				'condition' => [
+					'eael_interactive_circle_preset!' => 'eael-interactive-circle-preset-2'
+				],
 			]
 		);
 
@@ -351,9 +351,9 @@ class Interactive_Circle extends Widget_Base {
 					'size' => 50,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-circle-info.eael-interactive-circle-rotate' => 'animation-duration: {{SIZE}}s;',
-					'{{WRAPPER}} .eael-circle-info.eael-interactive-circle-rotate .eael-circle-btn-icon' => 'animation-duration: {{SIZE}}s;',
-					'{{WRAPPER}} .eael-circle-info.eael-interactive-circle-rotate .eael-circle-content' => 'animation-duration: {{SIZE}}s;',
+					'{{WRAPPER}} .eael-interactive-circle-rotate' => 'animation-duration: {{SIZE}}s;',
+					'{{WRAPPER}} .eael-interactive-circle-rotate .eael-circle-btn-icon' => 'animation-duration: {{SIZE}}s;',
+					'{{WRAPPER}} .eael-interactive-circle-rotate .eael-circle-content' => 'animation-duration: {{SIZE}}s;',
 				],
 				'condition' => [
 					'eael_interactive_circle_rotation' => 'yes'
@@ -1019,11 +1019,11 @@ class Interactive_Circle extends Widget_Base {
 		$this->add_render_attribute( 'eael_circle_info', 'data-items', $item_count );
 
 		if( 'yes' === $settings['eael_interactive_circle_rotation'] ){
-			$this->add_render_attribute( 'eael_circle_info', 'class', 'eael-interactive-circle-rotate');
+			$this->add_render_attribute( 'eael_circle_wrapper', 'class', 'eael-interactive-circle-rotate' );
 		}
 
 		if( 'yes' === $settings['eael_interactive_circle_rotation_hover'] ){
-			$this->add_render_attribute( 'eael_circle_info', 'class', 'pause-rotate');
+			$this->add_render_attribute( 'eael_circle_wrapper', 'class', 'pause-rotate');
 		}
 
 		?>
@@ -1040,7 +1040,7 @@ class Interactive_Circle extends Widget_Base {
 								?>
                                 <div class="eael-circle-item elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
                                     <div aria-controls="eael-interactive-<?php echo esc_attr( $item_count ); ?>" tabindex="0" class="eael-circle-btn <?php echo $is_active; ?>" id="eael-circle-item-<?php echo $item_count; ?>">
-										<?php if ( ( $settings['eael_interactive_circle_preset'] == 'eael-interactive-circle-preset-4' ) ) { ?>
+										<?php if ( in_array( $settings['eael_interactive_circle_preset'], [ 'eael-interactive-circle-preset-3', 'eael-interactive-circle-preset-4'] ) ) { ?>
 										<div class="eael-circle-icon-shapes <?php echo esc_attr( $item_style_classic ); ?>">
 											<div class="eael-shape-1"></div>
 											<div class="eael-shape-2"></div>
