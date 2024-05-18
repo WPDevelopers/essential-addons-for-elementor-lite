@@ -124,53 +124,53 @@ trait Admin {
 		        ],
 		        'community_box'    => [
 			        [
-				        'heading' => __( 'GitHub & Support', 'essential-addons-for-elementor-lite' ),
-				        'content' => __( 'Encountering a problem? Seek assistance through live chat or by submitting.', 'essential-addons-for-elementor-lite' ),
-				        'button'  => [
+				        'heading'    => __( 'GitHub & Support', 'essential-addons-for-elementor-lite' ),
+				        'content'    => __( 'Encountering a problem? Seek assistance through live chat or by submitting.', 'essential-addons-for-elementor-lite' ),
+				        'button'     => [
 					        'label' => __( 'Create Ticket', 'essential-addons-for-elementor-lite' ),
 					        'url'   => '#'
 				        ],
-				        'icon'    => 'ea-github',
-						'icon_color' => 'eaicon-1'
-			        ],
-			        [
-				        'heading' => __( 'Join Community', 'essential-addons-for-elementor-lite' ),
-				        'content' => __( 'Encountering a problem? Seek assistance through live chat or by submitting.', 'essential-addons-for-elementor-lite' ),
-				        'button'  => [
-					        'label' => __( 'Join with us', 'essential-addons-for-elementor-lite' ),
-					        'url'   => '#'
-				        ],
-				        'icon'    => 'ea-community',
-				        'icon_color' => 'eaicon-2'
-			        ],
-			        [
-				        'heading' => __( 'View knowledgebase', 'essential-addons-for-elementor-lite' ),
-				        'content' => __( 'Get started by spending some time with the documentation', 'essential-addons-for-elementor-lite' ),
-				        'button'  => [
-					        'label' => __( 'View Docs', 'essential-addons-for-elementor-lite' ),
-					        'url'   => '#'
-				        ],
-				        'icon'    => 'ea-docs',
-				        'icon_color' => 'eaicon-3'
-			        ],
-			        [
-				        'heading' => __( 'Automatic Updates & Priority Support', 'essential-addons-for-elementor-lite' ),
-				        'content' => __( 'LoremGet access to automatic updates & keep your website up-to-date with constantly developing features. Having any trouble?', 'essential-addons-for-elementor-lite' ),
-				        'button'  => [
-					        'label' => __( 'Learn More', 'essential-addons-for-elementor-lite' ),
-					        'url'   => '#'
-				        ],
-				        'icon'    => 'ea-support',
+				        'icon'       => 'ea-github',
 				        'icon_color' => 'eaicon-1'
 			        ],
 			        [
-				        'heading' => __( 'Automatic Updates & Priority Support', 'essential-addons-for-elementor-lite' ),
-				        'content' => __( 'LoremGet access to automatic updates & keep your website up-to-date with constantly developing features. Having any trouble?', 'essential-addons-for-elementor-lite' ),
-				        'button'  => [
+				        'heading'    => __( 'Join Community', 'essential-addons-for-elementor-lite' ),
+				        'content'    => __( 'Encountering a problem? Seek assistance through live chat or by submitting.', 'essential-addons-for-elementor-lite' ),
+				        'button'     => [
+					        'label' => __( 'Join with us', 'essential-addons-for-elementor-lite' ),
+					        'url'   => '#'
+				        ],
+				        'icon'       => 'ea-community',
+				        'icon_color' => 'eaicon-2'
+			        ],
+			        [
+				        'heading'    => __( 'View knowledgebase', 'essential-addons-for-elementor-lite' ),
+				        'content'    => __( 'Get started by spending some time with the documentation', 'essential-addons-for-elementor-lite' ),
+				        'button'     => [
+					        'label' => __( 'View Docs', 'essential-addons-for-elementor-lite' ),
+					        'url'   => '#'
+				        ],
+				        'icon'       => 'ea-docs',
+				        'icon_color' => 'eaicon-3'
+			        ],
+			        [
+				        'heading'    => __( 'Automatic Updates & Priority Support', 'essential-addons-for-elementor-lite' ),
+				        'content'    => __( 'LoremGet access to automatic updates & keep your website up-to-date with constantly developing features. Having any trouble?', 'essential-addons-for-elementor-lite' ),
+				        'button'     => [
 					        'label' => __( 'Learn More', 'essential-addons-for-elementor-lite' ),
 					        'url'   => '#'
 				        ],
-				        'icon'    => 'ea-docs',
+				        'icon'       => 'ea-support',
+				        'icon_color' => 'eaicon-1'
+			        ],
+			        [
+				        'heading'    => __( 'Automatic Updates & Priority Support', 'essential-addons-for-elementor-lite' ),
+				        'content'    => __( 'LoremGet access to automatic updates & keep your website up-to-date with constantly developing features. Having any trouble?', 'essential-addons-for-elementor-lite' ),
+				        'button'     => [
+					        'label' => __( 'Learn More', 'essential-addons-for-elementor-lite' ),
+					        'url'   => '#'
+				        ],
+				        'icon'       => 'ea-docs',
 				        'icon_color' => 'eaicon-1'
 			        ]
 		        ],
@@ -214,6 +214,37 @@ trait Admin {
 					        'content' => __( 'BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ),
 					        'icon'    => 'images/NX.svg',
 					        'status'  => true
+				        ]
+			        ]
+		        ],
+		        'premium_items'    => [
+			        'list' => [
+				        [
+					        'heading' => __( 'Protected Content', 'essential-addons-for-elementor-lite' ),
+					        'content' => __( 'Restrict access to important data of your website by setting up user permissions', 'essential-addons-for-elementor-lite' ),
+					        'button'  => [
+						        'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
+						        'url'   => '#'
+					        ],
+					        'image'   => 'images/img-5.png'
+				        ],
+				        [
+					        'heading' => __( 'Smart Post List', 'essential-addons-for-elementor-lite' ),
+					        'content' => __( 'Restrict access to important data of your website by setting up user permissions', 'essential-addons-for-elementor-lite' ),
+					        'button'  => [
+						        'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
+						        'url'   => '#'
+					        ],
+					        'image'   => 'images/img-6.png'
+				        ],
+				        [
+					        'heading' => __( 'Woo Product Slider', 'essential-addons-for-elementor-lite' ),
+					        'content' => __( 'Restrict access to important data of your website by setting up user permissions', 'essential-addons-for-elementor-lite' ),
+					        'button'  => [
+						        'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
+						        'url'   => '#'
+					        ],
+					        'image'   => 'images/img-5.png'
 				        ]
 			        ]
 		        ]

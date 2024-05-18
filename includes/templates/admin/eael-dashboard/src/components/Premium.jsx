@@ -5,6 +5,8 @@ import CommunityBox from "./CommunityBox.jsx";
 import PremiumItem from "./PremiumItem.jsx";
 
 function Premium() {
+    const eaData = localize.eael_dashboard.premium_items;
+
     return (
         <>
             <div className="ea__elements-nav-content">
@@ -13,37 +15,9 @@ function Premium() {
                     <ExploreProFeatures/>
                     <div className="ea__slider-connect">
                         <div className="ea__connect-wrapper flex gap-4">
-                            <PremiumItem/>
-                            <div className="ea__premium-item">
-                                <div className="ea__premimu-item-header flex gap-2 items-center">
-                                    <img src={localize.eael_dashboard.reactPath + '/images/img-6.png'} alt="img"/>
-                                </div>
-                                <div className="ea__premium-item-footer">
-                                    <h5>Smart Post List</h5>
-                                    <p className="mb-2">Restrict access to important data of your
-                                        website by setting up user
-                                        permissions
-                                    </p>
-                                    <a href="#">
-                                        <button className="underline">View Demo</button>
-                                    </a>
-                                </div>
-                            </div>
-                            <div className="ea__premium-item">
-                                <div className="ea__premimu-item-header flex gap-2 items-center">
-                                    <img src={localize.eael_dashboard.reactPath + '/images/img-5.png'} alt="img"/>
-                                </div>
-                                <div className="ea__premium-item-footer">
-                                    <h5>Woo Product Slider</h5>
-                                    <p className="mb-2">Restrict access to important data of your
-                                        website by setting up user
-                                        permissions
-                                    </p>
-                                    <a href="#">
-                                        <button className="underline">View Demo</button>
-                                    </a>
-                                </div>
-                            </div>
+                            {eaData.list.map((item, index) => {
+                                return <PremiumItem index={index} key={index}/>
+                            })}
                         </div>
                     </div>
                     <div className="ea__connect-others-wrapper flex gap-4">
