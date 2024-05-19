@@ -177,17 +177,22 @@ jQuery(window).on("elementor/frontend/init", function () {
 
 		// we will try and catch the error but not show anything just do it if possible
 		try {
-			if (isStartWithHash && ($(hashURL).hasClass('eael-tab-item-trigger') || $(hashURL).hasClass('eael-accordion-header'))) {
-				$(hashURL).trigger('click');
-
-				if (typeof hashURL !== 'undefined' && hashURL) {
-					let tabs = $(hashURL).closest('.eael-advance-tabs');
-					if( tabs.length > 0 ){
-						let idOffset = tab.data('custom-id-offset');
-						idOffset = idOffset ? parseFloat(idOffset) : 0;
-						$('html, body').animate({
-							scrollTop: $(hashURL).offset().top - idOffset,
-						}, 300);
+			if( hashURL.startsWith( '#!' ) ){
+				var replace_with_hash = hashURL.replace( '#!', '#' );
+				$( replace_with_hash ).trigger( 'click' );
+			} else {
+				if (isStartWithHash && ($(hashURL).hasClass('eael-tab-item-trigger') || $(hashURL).hasClass('eael-accordion-header'))) {
+					$(hashURL).trigger('click');
+	
+					if (typeof hashURL !== 'undefined' && hashURL) {
+						let tabs = $(hashURL).closest('.eael-advance-tabs');
+						if( tabs.length > 0 ){
+							let idOffset = tab.data('custom-id-offset');
+							idOffset = idOffset ? parseFloat(idOffset) : 0;
+							$('html, body').animate({
+								scrollTop: $(hashURL).offset().top - idOffset,
+							}, 300);
+						}
 					}
 				}
 			}

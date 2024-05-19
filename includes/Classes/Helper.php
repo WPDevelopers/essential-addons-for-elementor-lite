@@ -1057,7 +1057,7 @@ class Helper
 	 * @return array
 	 */
 	public static function eael_allowed_tags() {
-		return [
+		return apply_filters( 'eael_allowed_tags', [
 			'a'       => [
 				'href'   => [],
 				'title'  => [],
@@ -1291,7 +1291,7 @@ class Helper
 				'style' => [],
 				'align' => [],
 			],
-			'td'      => [
+			'td'     => [
 				'class'   => [],
 				'id'      => [],
 				'style'   => [],
@@ -1299,12 +1299,21 @@ class Helper
 				'colspan' => [],
 				'rowspan' => [],
 			],
-			'header'      => [
-				'class'   => [],
-				'id'      => [],
-				'style'   => [],
+			'header' => [
+				'class' => [],
+				'id'    => [],
+				'style' => [],
 			],
-		];
+			'iframe' => [
+				'class'  => [],
+				'id'     => [],
+				'style'  => [],
+				'title'  => [],
+				'width'  => [],
+				'height' => [],
+				'src'    => []
+			]
+		] );
 	}
 
     /**
@@ -1470,6 +1479,37 @@ class Helper
 			return 'AND';
 		}
 	}
+
+    /**
+     * Get all ordered products by the user
+     * @return boolean|array order ids
+     * @since 5.8.9
+     */
+    public static function eael_get_all_user_ordered_products() {
+        $user_id = get_current_user_id();
+
+        if( ! $user_id ) {
+            return false;
+        }
+
+        $args = array(
+            'customer_id' => $user_id,
+            'limit' => -1,
+        );
+
+        $orders = wc_get_orders($args);
+        $product_ids = [];
+
+        foreach( $orders as $order ){
+            $items = $order->get_items();
+            
+            foreach($items as $item){
+                $product_ids[] = $item->get_product_id();
+            }
+        }
+
+        return $product_ids;
+    }
 
 	/**
 	 * Get current device by screen size
