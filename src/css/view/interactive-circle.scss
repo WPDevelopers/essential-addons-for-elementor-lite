@@ -40,6 +40,16 @@
             animation: rotation-reverse $rotation-speed linear infinite;
         }
 
+        @media only screen and (max-width: $breakpoint) {
+            &.eael-circle-responsive-view{
+                animation: none !important;
+
+                .eael-circle-btn-icon,.eael-circle-content {
+                    animation: none !important;
+                }
+            }
+        }
+
         &.pause-rotate:hover{
             animation-play-state: paused;
             .eael-circle-btn-icon,.eael-circle-content {

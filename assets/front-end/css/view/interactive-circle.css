@@ -57,6 +57,19 @@
   -webkit-animation: rotation-reverse 50s linear infinite;
           animation: rotation-reverse 50s linear infinite;
 }
+@media only screen and (max-width: 600px) {
+  .eael-circle-wrapper.eael-interactive-circle-rotate.eael-circle-responsive-view,
+  .eael-circle-wrapper .eael-interactive-circle-rotate.eael-circle-responsive-view {
+    -webkit-animation: none !important;
+            animation: none !important;
+  }
+  .eael-circle-wrapper.eael-interactive-circle-rotate.eael-circle-responsive-view .eael-circle-btn-icon, .eael-circle-wrapper.eael-interactive-circle-rotate.eael-circle-responsive-view .eael-circle-content,
+  .eael-circle-wrapper .eael-interactive-circle-rotate.eael-circle-responsive-view .eael-circle-btn-icon,
+  .eael-circle-wrapper .eael-interactive-circle-rotate.eael-circle-responsive-view .eael-circle-content {
+    -webkit-animation: none !important;
+            animation: none !important;
+  }
+}
 .eael-circle-wrapper.eael-interactive-circle-rotate.pause-rotate:hover,
 .eael-circle-wrapper .eael-interactive-circle-rotate.pause-rotate:hover {
   -webkit-animation-play-state: paused;
