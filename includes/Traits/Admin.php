@@ -270,6 +270,33 @@ trait Admin {
 				        'url'   => '#',
 				        'icon'  => 'ea-link'
 			        ]
+		        ],
+		        'tools'                => [
+			        'box_1' => [
+				        'heading' => __( "Regenerate Assets", 'essential-addons-for-elementor-lite' ),
+				        'content' => __( "Essential Addons styles & scripts are saved in Uploads folder. This option will clear all those generated files.", 'essential-addons-for-elementor-lite' ),
+				        'icon'    => 'ea-regenerate',
+				        'button'  => [
+					        'label' => __( 'Regenerate Assets', 'essential-addons-for-elementor-lite' ),
+				        ]
+			        ],
+			        'box_2' => [
+				        'heading' => __( "Assets Embed Method", 'essential-addons-for-elementor-lite' ),
+				        'content' => __( "Configure the Essential Addons assets embed method. Keep it as default (recommended).", 'essential-addons-for-elementor-lite' ),
+				        'icon'    => 'ea-settings',
+				        'button'  => [
+					        'label' => __( 'CSS Print Method', 'essential-addons-for-elementor-lite' ),
+					        'url'   => '#'
+				        ]
+			        ],
+			        'box_3' => [
+				        'heading' => __( "JS Print Method", 'essential-addons-for-elementor-lite' ),
+				        'content' => __( "CSS Print Method is handled by Elementor Settings itself. Use External CSS Files for better performance (recommended).", 'essential-addons-for-elementor-lite' ),
+				        'methods' => [
+					        'external' => __( 'External file', 'essential-addons-for-elementor-lite' ),
+					        'internal' => __( 'Internal Embedding', 'essential-addons-for-elementor-lite' ),
+				        ]
+			        ]
 		        ]
 	        ];
 
