@@ -89,8 +89,8 @@ trait Admin {
             ];
 
 	        $ea_dashboard = [
-		        'reactPath'          => EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/',
-		        'menu'               => [
+		        'reactPath'            => EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/',
+		        'menu'                 => [
 			        __( 'General', 'essential-addons-for-elementor-lite' )     => 'ea-home',
 			        __( 'Elements', 'essential-addons-for-elementor-lite' )    => 'ea-elements',
 			        __( 'Extensions', 'essential-addons-for-elementor-lite' )  => 'ea-extensions',
@@ -98,7 +98,7 @@ trait Admin {
 			        __( 'Integration', 'essential-addons-for-elementor-lite' ) => 'ea-plug',
 			        __( 'Go Premium', 'essential-addons-for-elementor-lite' )  => 'ea-lock',
 		        ],
-		        'whats_new'          => [
+		        'whats_new'            => [
 			        'heading' => __( 'What is New on Version?', 'essential-addons-for-elementor-lite' ),
 			        'list'    => [
 				        __( 'EA Fancy Chart Symbol display option in the fancy chart', 'essential-addons-for-elementor-lite' ),
@@ -110,7 +110,7 @@ trait Admin {
 				        'url'   => '#'
 			        ]
 		        ],
-		        'templately_promo'   => [
+		        'templately_promo'     => [
 			        'heading' => __( 'Unlock 5000+ Ready Templates', 'essential-addons-for-elementor-lite' ),
 			        'list'    => [
 				        __( 'Stunning, Ready Website Templates', 'essential-addons-for-elementor-lite' ),
@@ -122,7 +122,7 @@ trait Admin {
 				        'url'   => '#'
 			        ]
 		        ],
-		        'community_box'      => [
+		        'community_box'        => [
 			        [
 				        'heading'    => __( 'GitHub & Support', 'essential-addons-for-elementor-lite' ),
 				        'content'    => __( 'Encountering a problem? Seek assistance through live chat or by submitting.', 'essential-addons-for-elementor-lite' ),
@@ -174,7 +174,7 @@ trait Admin {
 				        'icon_color' => 'eaicon-1'
 			        ]
 		        ],
-		        'sidebar_box'        => [
+		        'sidebar_box'          => [
 			        'heading' => __( 'Unlimited Features', 'essential-addons-for-elementor-lite' ),
 			        'content' => __( 'Supercharge your content schedule and', 'essential-addons-for-elementor-lite' ),
 			        'review'  => [
@@ -187,7 +187,7 @@ trait Admin {
 				        'icon'  => 'ea-crown-1'
 			        ]
 		        ],
-		        'integration_box'    => [
+		        'integration_box'      => [
 			        'enable'  => __( 'Enable Integration', 'essential-addons-for-elementor-lite' ),
 			        'disable' => __( 'Disable Integration', 'essential-addons-for-elementor-lite' ),
 			        'list'    => [
@@ -217,7 +217,7 @@ trait Admin {
 				        ]
 			        ]
 		        ],
-		        'premium_items'      => [
+		        'premium_items'        => [
 			        'list' => [
 				        [
 					        'heading' => __( 'Protected Content', 'essential-addons-for-elementor-lite' ),
@@ -248,7 +248,7 @@ trait Admin {
 				        ]
 			        ]
 		        ],
-		        'enhance_experience' => [
+		        'enhance_experience'   => [
 			        'heading' => __( "Enhance Your Elementor Experience By <br/> <b>Unlocking</b> <span class='Advance-color'>35+ Advanced PRO</span> <b>Elements</b>", 'essential-addons-for-elementor-lite' ),
 			        'review'  => [
 				        'label' => __( 'Review from Real Users', 'essential-addons-for-elementor-lite' ),
@@ -259,6 +259,16 @@ trait Admin {
 				        'label' => __( 'Upgrade to PRO', 'essential-addons-for-elementor-lite' ),
 				        'url'   => '#',
 				        'icon'  => 'ea-crown-1'
+			        ]
+		        ],
+		        'explore_pro_features' => [
+			        'heading' => __( "Explore Premiere Pro features", 'essential-addons-for-elementor-lite' ),
+			        'content' => __( "Learn all about the tools and techniques you can use to edit videos, animate titles, add effects, mix sound, and more.", 'essential-addons-for-elementor-lite' ),
+			        'image'   => 'images/img-3.png',
+			        'button'  => [
+				        'label' => __( 'View Changelog', 'essential-addons-for-elementor-lite' ),
+				        'url'   => '#',
+				        'icon'  => 'ea-link'
 			        ]
 		        ]
 	        ];
