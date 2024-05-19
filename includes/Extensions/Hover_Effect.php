@@ -106,7 +106,7 @@ class Hover_Effect {
                 'label'              => __( 'Opacity', 'essential-addons-for-elementor-lite' ),
                 'type'               => Controls_Manager::SLIDER,
                 'default' => [
-                    'size' => 1,
+                    'size' => 0.8,
                 ],
                 'range' => [
                     'px' => [
@@ -154,7 +154,7 @@ class Hover_Effect {
                 'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
                 'type'               => Controls_Manager::SLIDER,
                 'default' => [
-                    'size' => 0,
+                    'size' => 1,
                 ],
                 'range' => [
                     'px' => [
@@ -187,7 +187,7 @@ class Hover_Effect {
                 'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
                 'type'               => Controls_Manager::SLIDER,
                 'default' => [
-					'size' => 100,
+					'size' => 80,
 				],
                 'range' => [
                     '%' => [
@@ -220,7 +220,7 @@ class Hover_Effect {
                 'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
                 'type'               => Controls_Manager::SLIDER,
                 'default' => [
-					'size' => 0,
+					'size' => 40,
 				],
                 'range' => [
                     '%' => [
@@ -253,7 +253,7 @@ class Hover_Effect {
                 'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
                 'type'               => Controls_Manager::SLIDER,
                 'default' => [
-					'size' => 0,
+					'size' => 70,
 				],
                 'range' => [
                     '%' => [
@@ -286,7 +286,7 @@ class Hover_Effect {
                 'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
                 'type'               => Controls_Manager::SLIDER,
                 'default' => [
-					'size' => 100,
+					'size' => 50,
 				],
                 'range' => [
                     '%' => [
@@ -319,7 +319,7 @@ class Hover_Effect {
                 'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
                 'type'               => Controls_Manager::SLIDER,
                 'default' => [
-					'size' => 0,
+					'size' => 50,
 				],
                 'range' => [
                     '%' => [
@@ -358,7 +358,7 @@ class Hover_Effect {
                 'size_units'         => ['px', '%'],
                 'default' => [
 					'unit' => 'px',
-					'size' => 0,
+					'size' => 5,
 				],
                 'range' => [
                     'px' => [
@@ -387,7 +387,7 @@ class Hover_Effect {
                 'size_units'         => ['px', '%'],
                 'default' => [
 					'unit' => 'px',
-					'size' => 0,
+					'size' => 5,
 				],
                 'range' => [
                     'px' => [
@@ -495,7 +495,7 @@ class Hover_Effect {
 					],
 				],
 				'default' => [
-					'size' => 0,
+					'size' => 5,
 				],
                 'condition' => [
 					'eael_hover_effect_rotate_is_on'      => 'yes',
@@ -529,7 +529,7 @@ class Hover_Effect {
                     ],
 				],
                 'default' => [
-					'size' => 0,
+					'size' => 0.9,
 				],
                 'condition' => [
 					'eael_hover_effect_scale_is_on'       => 'yes',
@@ -551,7 +551,7 @@ class Hover_Effect {
                     ],
 				],
                 'default' => [
-					'size' => 0,
+					'size' => 0.9,
 				],
                 'condition' => [
 					'eael_hover_effect_scale_is_on'       => 'yes',
@@ -586,7 +586,7 @@ class Hover_Effect {
 					],
 				],
 				'default' => [
-					'size' => 0,
+					'size' => 5,
 				],
                 'condition' => [
 					'eael_hover_effect_skew_is_on'        => 'yes',
@@ -609,7 +609,7 @@ class Hover_Effect {
 					],
 				],
 				'default' => [
-					'size' => 0,
+					'size' => 5,
 				],
                 'condition' => [
 					'eael_hover_effect_skew_is_on'        => 'yes',
