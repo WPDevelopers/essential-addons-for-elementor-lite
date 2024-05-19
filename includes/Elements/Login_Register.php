@@ -1949,16 +1949,21 @@ class Login_Register extends Widget_Base {
             ]
         );
 
+		$max_file_size = wp_max_upload_size();
+		if( $max_file_size ){
+			$max_file_size = $max_file_size / 1048576; //(1024x1024=1048576)
+		}
+
 		$repeater->add_control(
             'field_type_custom_image_filesize',
             [
                 'label' 		=> __('Max File Size (MB)', 'essential-addons-for-elementor-lite'),
-                'description'	=> __('Set max file size up to 512 MB.', 'essential-addons-for-elementor-lite'),
+                'description'	=> sprintf( __('Set max file size up to %s MB.', 'essential-addons-for-elementor-lite'), $max_file_size ),
                 'type' 			=> Controls_Manager::NUMBER,
                 'placeholder' 	=> '5',
                 'default' 		=> '5',
 				'Min'			=> '1',
-				'Max'			=> '512',
+				'Max'			=> $max_file_size,
                 'condition' 	=> [
 					'field_type' => $custom_fields_image,
 				],
@@ -5795,8 +5800,15 @@ class Login_Register extends Widget_Base {
 					var eael_get_login_status = localStorage.getItem( 'eael-is-login-form' );
 					if( eael_get_login_status === 'true' ) {
 						setTimeout(function() {
-							jQuery('[eael-login="yes"]').trigger('click').addClass('eael-clicked');
-						},100);
+							var button = jQuery('[eael-login="yes"]');
+							if( ! button.hasClass('eael-clicked') ) {
+								button.trigger('click').addClass('eael-clicked');
+							}
+						}, 100);
+
+						setTimeout(function() {
+							jQuery('[eael-login="yes"]').removeClass('eael-clicked')
+						}, 500);
 					}
 				});
 			</script>
@@ -6713,7 +6725,7 @@ class Login_Register extends Widget_Base {
 
 	protected function print_recaptcha_node( $form_type = 'login' ) {
 		if ( 'yes' === $this->get_settings_for_display( "enable_{$form_type}_recaptcha" ) || 'v3' === $this->ds["login_register_recaptcha_version"] ) {
-			$id = "{$form_type}-recaptcha-node-" . $this->get_id();
+			$id = "{$form_type}-recaptcha-node-" . esc_attr( $this->get_id() );
 			echo "<input type='hidden' name='g-recaptcha-enabled' value='1'/><div id='{$id}' class='eael-recaptcha-wrapper'></div>";
 
 			if( 'v3' === $this->ds["login_register_recaptcha_version"] && ( ! $this->ds[ 'enable_ajax' ] ) ){

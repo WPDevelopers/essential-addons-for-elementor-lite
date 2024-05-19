@@ -515,6 +515,18 @@ class Woo_Product_List extends Widget_Base
             ],
         ]);
 
+        $this->add_control('product_type_logged_users', [
+            'label' => __('Product Type', 'essential-addons-for-elementor-lite'),
+            'type' => Controls_Manager::SELECT,
+            'description' => __('For logged in users only!', 'essential-addons-for-elementor-lite'),
+            'options' => [
+                'both' => __('Both', 'essential-addons-for-elementor-lite'),
+                'purchased' => __('Purchased Only', 'essential-addons-for-elementor-lite'),
+                'not-purchased' => __('Not Purchased Only', 'essential-addons-for-elementor-lite'),
+            ],
+            'default' => 'both',
+        ]);
+
         $this->end_controls_section();
     }
 
@@ -3704,6 +3716,25 @@ class Woo_Product_List extends Widget_Base
             $args = $this->eael_prepare_product_query( $settings );
 	    }
 
+        $no_products_found = 0;
+
+        if ( is_user_logged_in() ) {
+            $product_purchase_type = ! empty( $settings['product_type_logged_users'] ) ? sanitize_text_field( $settings['product_type_logged_users'] ) : '';
+
+            if (  in_array( $product_purchase_type, ['purchased', 'not-purchased'] ) ) {
+                $user_ordered_products = ClassesHelper::eael_get_all_user_ordered_products();
+                $no_products_found = empty( $user_ordered_products ) && 'purchased' === $product_purchase_type ? 1 : 0;
+ 
+                if ( ! empty( $user_ordered_products ) && 'purchased' === $product_purchase_type ){
+                    $args['post__in'] = $user_ordered_products;
+                }
+
+                if ( ! empty( $user_ordered_products ) && 'not-purchased' === $product_purchase_type ){
+                    $args['post__not_in'] = $user_ordered_products;
+                }
+            }
+        }
+
         add_filter( 'woocommerce_product_add_to_cart_text', [$this, 'add_to_cart_button_custom_text'] );
         ?>
 
@@ -3726,7 +3757,7 @@ class Woo_Product_List extends Widget_Base
 
                         if ( file_exists( $template ) ) {
                             $query  = new \WP_Query( $args );
-
+                            
                             if ( $query->have_posts() ) {
                                 // Load more data
                                 $found_posts                        = $query->found_posts;
