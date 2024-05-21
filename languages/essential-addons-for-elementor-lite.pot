@@ -1606,11 +1606,11 @@ msgstr ""
 msgid "Local Business Schema"
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:178, ../includes/Elements/Filterable_Gallery.php:300, ../includes/Elements/Filterable_Gallery.php:312, ../includes/Elements/Interactive_Circle.php:518, ../includes/Elements/Twitter_Feed.php:416, ../includes/Elements/Twitter_Feed.php:428
+#: ../includes/Elements/Business_Reviews.php:178, ../includes/Elements/Filterable_Gallery.php:300, ../includes/Elements/Filterable_Gallery.php:312, ../includes/Elements/Interactive_Circle.php:518, ../includes/Elements/Twitter_Feed.php:416, ../includes/Elements/Twitter_Feed.php:428, ../includes/Extensions/Hover_Effect.php:1354
 msgid "Enable"
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:179, ../includes/Elements/Filterable_Gallery.php:301, ../includes/Elements/Filterable_Gallery.php:313, ../includes/Elements/Interactive_Circle.php:519, ../includes/Elements/Twitter_Feed.php:417, ../includes/Elements/Twitter_Feed.php:429
+#: ../includes/Elements/Business_Reviews.php:179, ../includes/Elements/Filterable_Gallery.php:301, ../includes/Elements/Filterable_Gallery.php:313, ../includes/Elements/Interactive_Circle.php:519, ../includes/Elements/Twitter_Feed.php:417, ../includes/Elements/Twitter_Feed.php:429, ../includes/Extensions/Hover_Effect.php:1355
 msgid "Disable"
 msgstr ""
 
@@ -9294,6 +9294,13 @@ msgstr ""
 msgid "Ease-in-out"
 msgstr ""
 
+<<<<<<< HEAD
+=======
+#: ../includes/Extensions/Hover_Effect.php:1352
+msgid "Enable Tilt"
+msgstr ""
+
+>>>>>>> 3184_1
 #: ../includes/Extensions/Post_Duplicator.php:35, ../includes/Extensions/Post_Duplicator.php:56
 msgid "EA Duplicator"
 msgstr ""
