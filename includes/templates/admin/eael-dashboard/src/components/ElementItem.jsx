@@ -1,18 +1,21 @@
 import React from 'react';
 
 function ElementItem(props) {
+    const eaData = localize.eael_dashboard.extensions.list[props.index];
+
     return (
         <>
             <div className="ea__content-items">
                 <div className="ea__content-head">
-                    <h5 className="toggle-label">Particles</h5>
+                    <h5 className="toggle-label">{eaData.title}</h5>
                     <label className="toggle-wrap">
                         <input type="checkbox" checked="checked"/>
-                        <span className="slider pro"></span>
+                        <span className={eaData.is_pro ? 'slider pro' : 'slider'}></span>
                     </label>
                 </div>
                 <div className="ea__content-footer">
-                    <span className="content-btn popular">popular</span>
+                    {eaData.promotion ?
+                        <span className={"content-btn " + eaData.promotion}>{eaData.promotion}</span> : ''}
                     <div className="content-icons">
                         <i className="eaicon ea-docs"></i>
                         <i className="eaicon ea-link-2"></i>

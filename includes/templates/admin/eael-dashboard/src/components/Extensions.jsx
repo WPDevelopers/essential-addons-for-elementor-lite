@@ -1,6 +1,9 @@
 import React from 'react';
+import ElementItem from "./ElementItem.jsx";
 
 function Extensions() {
+    const eaData = localize.eael_dashboard.extensions;
+
     return (
         <>
             <div className="ea__elements-nav-content">
@@ -13,172 +16,15 @@ function Extensions() {
                                     <h5>Enable all</h5>
                                     <label className="toggle-wrap">
                                         <input type="checkbox" checked="checked"/>
-                                            <span className="slider"></span>
+                                        <span className="slider"></span>
                                     </label>
                                 </div>
                             </div>
                         </div>
                         <div className="ea__content-wrapper">
-                            <div className="ea__content-items">
-                                <div className="ea__content-head">
-                                    <h5 className="toggle-label">Parallax</h5>
-                                    <label className="toggle-wrap">
-                                        <input type="checkbox" checked="checked"/>
-                                            <span className="slider"></span>
-                                    </label>
-                                </div>
-                                <div className="ea__content-footer">
-                                    <span className="content-btn"></span>
-                                    <div className="content-icons">
-                                        <i className="eaicon ea-docs"></i>
-                                        <i className="eaicon ea-link-2"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="ea__content-items">
-                                <div className="ea__content-head">
-                                    <h5 className="toggle-label">Particles</h5>
-                                    <label className="toggle-wrap">
-                                        <input type="checkbox" checked="checked"/>
-                                            <span className="slider pro"></span>
-                                    </label>
-                                </div>
-                                <div className="ea__content-footer">
-                                    <span className="content-btn popular">popular</span>
-                                    <div className="content-icons">
-                                        <i className="eaicon ea-docs"></i>
-                                        <i className="eaicon ea-link-2"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="ea__content-items">
-                                <div className="ea__content-head">
-                                    <h5 className="toggle-label">Advanced Tooltip</h5>
-                                    <label className="toggle-wrap">
-                                        <input type="checkbox" checked="checked"/>
-                                            <span className="slider"></span>
-                                    </label>
-                                </div>
-                                <div className="ea__content-footer">
-                                    <span className="content-btn"></span>
-                                    <div className="content-icons">
-                                        <i className="eaicon ea-docs"></i>
-                                        <i className="eaicon ea-link-2"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="ea__content-items">
-                                <div className="ea__content-head">
-                                    <h5 className="toggle-label">Content Protection</h5>
-                                    <label className="toggle-wrap">
-                                        <input type="checkbox" checked="checked"/>
-                                            <span className="slider"></span>
-                                    </label>
-                                </div>
-                                <div className="ea__content-footer">
-                                    <span className="content-btn popular">popular</span>
-                                    <div className="content-icons">
-                                        <i className="eaicon ea-docs"></i>
-                                        <i className="eaicon ea-link-2"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="ea__content-items">
-                                <div className="ea__content-head">
-                                    <h5 className="toggle-label">Duplicator</h5>
-                                    <label className="toggle-wrap">
-                                        <input type="checkbox" checked="checked"/>
-                                            <span className="slider pro"></span>
-                                    </label>
-                                </div>
-                                <div className="ea__content-footer">
-                                    <span className="content-btn"></span>
-                                    <div className="content-icons">
-                                        <i className="eaicon ea-docs"></i>
-                                        <i className="eaicon ea-link-2"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="ea__content-items">
-                                <div className="ea__content-head">
-                                    <h5 className="toggle-label">Custom JS</h5>
-                                    <label className="toggle-wrap">
-                                        <input type="checkbox" checked="checked"/>
-                                            <span className="slider pro"></span>
-                                    </label>
-                                </div>
-                                <div className="ea__content-footer">
-                                    <span className="content-btn popular">popular</span>
-                                    <div className="content-icons">
-                                        <i className="eaicon ea-docs"></i>
-                                        <i className="eaicon ea-link-2"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="ea__content-items">
-                                <div className="ea__content-head">
-                                    <h5 className="toggle-label">Cross-Domain Copy Paste</h5>
-                                    <label className="toggle-wrap">
-                                        <input type="checkbox" checked="checked"/>
-                                            <span className="slider"></span>
-                                    </label>
-                                </div>
-                                <div className="ea__content-footer">
-                                    <span className="content-btn new">new</span>
-                                    <div className="content-icons">
-                                        <i className="eaicon ea-docs"></i>
-                                        <i className="eaicon ea-link-2"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="ea__content-items">
-                                <div className="ea__content-head">
-                                    <h5 className="toggle-label">Scroll to Top</h5>
-                                    <label className="toggle-wrap">
-                                        <input type="checkbox" checked="checked"/>
-                                            <span className="slider"></span>
-                                    </label>
-                                </div>
-                                <div className="ea__content-footer">
-                                    <span className="content-btn new">new</span>
-                                    <div className="content-icons">
-                                        <i className="eaicon ea-docs"></i>
-                                        <i className="eaicon ea-link-2"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="ea__content-items">
-                                <div className="ea__content-head">
-                                    <h5 className="toggle-label">Conditional Display</h5>
-                                    <label className="toggle-wrap">
-                                        <input type="checkbox" checked="checked"/>
-                                            <span className="slider"></span>
-                                    </label>
-                                </div>
-                                <div className="ea__content-footer">
-                                    <span className="content-btn new">new</span>
-                                    <div className="content-icons">
-                                        <i className="eaicon ea-docs"></i>
-                                        <i className="eaicon ea-link-2"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="ea__content-items">
-                                <div className="ea__content-head">
-                                    <h5 className="toggle-label">Wrapper Link</h5>
-                                    <label className="toggle-wrap">
-                                        <input type="checkbox" checked="checked"/>
-                                            <span className="slider"></span>
-                                    </label>
-                                </div>
-                                <div className="ea__content-footer">
-                                    <span className="content-btn new">new</span>
-                                    <div className="content-icons">
-                                        <i className="eaicon ea-docs"></i>
-                                        <i className="eaicon ea-link-2"></i>
-                                    </div>
-                                </div>
-                            </div>
+                            {eaData.list.map((item, index) => {
+                                return <ElementItem index={index} key={index}/>
+                            })}
                         </div>
                     </div>
                     <div className="ea__section-wrapper flex flex-end mb-5">
@@ -187,7 +33,7 @@ function Extensions() {
                 </div>
             </div>
         </>
-);
+    );
 }
 
 export default Extensions;
