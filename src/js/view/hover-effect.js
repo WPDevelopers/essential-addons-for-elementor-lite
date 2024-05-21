@@ -30,6 +30,7 @@ let HoverEffectHandler = function ($scope, $) {
     $eaelOffsetLeft          = $scope.data('eael_offset_left'),
     $eaelOffsetHoverTop      = $scope.data('eael_offset_hover_top'),
     $eaelOffsetHoverLeft     = $scope.data('eael_offset_hover_left'),
+    $eaelTilt                = $scope.data('eaeltilt'),
     $eaelContainer           = $('.elementor-widget-container', $scope);
 
     /**
@@ -69,6 +70,12 @@ let HoverEffectHandler = function ($scope, $) {
     
         for ( let key in eaelEditModeSettings ) {
             if( $scopeId === key ) {
+
+                //Tilt
+                if( eaelEditModeSettings?.[key]?.['eael_hover_effect_hover_tilt'] === 'yes' ) {
+                    $eaelTilt = 'eael_tilt';
+                }
+
                 //Opacity
                 if( eaelEditModeSettings?.[key]?.['eael_hover_effect_opacity_popover'] === 'yes' ) {
                     $Opacity = {'opacity': eaelEditModeSettings?.[key]?.['eael_hover_effect_opacity']?.['size']};
@@ -300,6 +307,19 @@ let HoverEffectHandler = function ($scope, $) {
         $(this).css(normalStyles);
         }
     );  
+
+    //Tilt Effect
+    if( $eaelTilt !== undefined ) {
+        $(`.elementor-element-${$scopeId}`).mousemove( function( e ) {
+            var cox = ( e.pageX - $(this).offset().left - $(this).width() / 2 ) / 20;
+            var coy = ( $(this).height() / 2 - ( e.pageY - $(this).offset().top ) ) / 20;
+            $(this).find( '.elementor-widget-container' ).css( 'transform','perspective(500px) rotateY('+cox+'deg) rotateX('+coy+'deg)' );
+        });
+    
+        $(`.elementor-element-${$scopeId}`).mouseleave(function( e ) {
+                $(this).find('.elementor-widget-container').css( 'transform','rotateY(0) rotateX(0)' );
+        });
+    }
 
     //
     $eaelContainer.css(normalStyles);

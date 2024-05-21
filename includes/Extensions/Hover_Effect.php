@@ -706,7 +706,7 @@ class Hover_Effect {
 					'eael_hover_effect_switch' => 'yes',
 				]
 			]
-		);
+				);
 
          //Background Hover
         // $element->add_group_control(
@@ -1346,6 +1346,17 @@ class Hover_Effect {
 			]
         );
 
+		$element->add_control(
+			'eael_hover_effect_hover_tilt',
+			[
+				'label'        => esc_html__( 'Enable Tilt', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Enable', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Disable', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+			]
+		);
+
         $element->end_controls_tab();
         $element->end_controls_tabs();
 
@@ -1614,7 +1625,15 @@ class Hover_Effect {
 				$element->add_render_attribute( '_wrapper', 'data-eael_hover_easing', wp_json_encode( $transition_easing_settings ) );
 			}
 			
+			//Tilt
+			if( !empty( $settings['eael_hover_effect_hover_tilt'] ) ) {
+				$element->add_render_attribute( '_wrapper', 'data-eaeltilt', 'eael_tilt' );
+			}
+			
 			$element->add_render_attribute( '_wrapper', 'class', 'eael_hover_effect' );
+
+			?>
+			<?php
 		}
 	}
 
