@@ -6,7 +6,7 @@ class advancedDataTable {
       this.initFrontend.bind(this)
     );
   }
-
+  
   // init frontend features
   initFrontend($scope, $) {
     let table = $scope[0].querySelector(".ea-advanced-data-table");
@@ -135,130 +135,108 @@ class advancedDataTable {
 
   // frontend - sort
   initTableSort(table, pagination, classCollection) {
-    if (table.classList.contains("ea-advanced-data-table-sortable")) {
-      table.addEventListener("click", (e) => {
-        let target = null;
-
-        if (e.target.tagName.toLowerCase() === "th") {
-          target = e.target;
-        }
-
-        if (e.target.parentNode.tagName.toLowerCase() === "th") {
-          target = e.target.parentNode;
-        }
-
-        if (e.target.parentNode.parentNode.tagName.toLowerCase() === "th") {
-          target = e.target.parentNode.parentNode;
-        }
-
-        if (target === null) {
-          return;
-        }
-
-        let index = target.cellIndex;
-        let currentPage = 1;
-        let startIndex = 1;
-        let endIndex = table.rows.length - 1;
-        let sort = "";
-        let classList = target.classList;
-        let collection = [];
-        let origTable = table.cloneNode(true);
-
-        if (classList.contains("asc")) {
-          target.classList.remove("asc");
-          target.classList.add("desc");
-          sort = "desc";
-        } else if (classList.contains("desc")) {
-          target.classList.remove("desc");
-          target.classList.add("asc");
-          sort = "asc";
+    table = $(table);
+    if(table.hasClass('ea-advanced-data-table-sortable')){
+      table.click(function(e) {
+        var th = $(e.target).closest("th");
+        if (!th.length) return; // click wasn't on a table header
+    
+        var table = th.closest("table");
+        var tbody = table.find("tbody");
+        var rows = tbody.find("tr");
+    
+        var sortOrder = 1;
+        if (th.hasClass("asc")) {
+          sortOrder = -1;
+          th.removeClass("asc").addClass("desc");
         } else {
-          target.classList.add("asc");
-          sort = "asc";
+          th.removeClass("desc").addClass("asc");
         }
+
+        var dateRegexes = [
+          /^\d{1,2}\/\d{1,2}\/\d{4}$/,  // MM/DD/YYYY
+          /^\d{4}-\d{1,2}-\d{1,2}$/,  // YYYY-MM-DD
+          /^\d{1,2}-\d{1,2}-\d{4}$/,  // DD-MM-YYYY (common in Europe)
+          /^\d{4}\/\d{1,2}\/\d{1,2}$/,  // YYYY/MM/DD
+          /^([a-zA-Z]{3,}) (\d{1,2}), (\d{4})$/, // Month Day, Year (e.g., Feb 14, 2024)
+          /^(\d{1,2}) ([a-zA-Z]{3,}) (\d{4})$/, // Day Month Year (e.g., 14 Feb 2024)
+          /^([a-zA-Z]{3,}) (\d{1,2})st, (\d{4})$/,  // Month Dayst, Year
+          /^([a-zA-Z]{3,}) (\d{1,2})nd, (\d{4})$/,  // Month Daynd, Year
+          /^([a-zA-Z]{3,}) (\d{1,2})rd, (\d{4})$/,  // Month Dayrd, Year
+          /^([a-zA-Z]{3,}) (\d{1,2})th, (\d{4})$/   // Month Dayth, Year
+        ];
+
+       function isLikelyDate(value) {
+
+          // Apply regular expressions first
+          for (var i = 0; i < dateRegexes.length; i++) {
+            if (dateRegexes[i].test(value)) {
+              return true;
+            }
+          }
+        
+          // Heuristic checks (if regular expressions don't match)
+          var parts = value.split(/[^\d]+/); // Split by non-digits
+          if (parts.length >= 3) {
+            var year = parseInt(parts.pop());
+            if (year >= 1000 && year <= 9999) { // Basic year range check
+              var month = parseInt(parts.pop());
+              var day = parseInt(parts.pop());
+              if (month >= 1 && month <= 12 && day >= 1 && day <= 31) {
+                return true;
+              }
+            }
+          }
+          return false;
+        }
+    
+        rows.sort(function(a, b) {
+          var colIndex = th.index();
+          var valueA = $(a).children().eq(colIndex).text().toUpperCase();
+          var valueB = $(b).children().eq(colIndex).text().toUpperCase();
+
+          if (isLikelyDate(valueA) && isLikelyDate(valueB)) {
+            // Both are likely dates, sort by parsed date
+            var dateA = new Date(valueA);
+            var dateB = new Date(valueB);
+            return (dateA - dateB) * sortOrder;
+          } else if (isLikelyDate(valueA)) {
+            // Only A is a likely date, sort A before B
+            return -1 * sortOrder;
+          } else if (isLikelyDate(valueB)) {
+            // Only B is a likely date, sort B before A
+            return 1 * sortOrder;
+          } else {
+            // Handle numeric sorting
+            var isNumericA = !isNaN(valueA);
+            var isNumericB = !isNaN(valueB);
+            if (isNumericA && isNumericB) {
+              return (valueA - valueB) * sortOrder;
+            }
+          }
+          
+          // Handle case-insensitive text sorting
+          return (valueA < valueB) ? (-1 * sortOrder) : (valueA > valueB) ? sortOrder : 0;
+        });
 
         if (pagination && pagination.innerHTML.length > 0) {
-          let paginationType = pagination.classList.contains(
-            "ea-advanced-data-table-pagination-button"
-          )
-            ? "button"
-            : "select";
+          let itemsPerPage   = table.data('items-per-page'),
+              paginationType = $(pagination).hasClass( "ea-advanced-data-table-pagination-button" ) ? "button": "select",
+              currentPage    =  startIndex = 1,
+              endIndex       = rows.length;
+          
+          currentPage = paginationType == "button" ? $( '.ea-adtp-current', pagination ).data('page') : $("select", pagination).val();
 
-          currentPage =
-            paginationType == "button"
-              ? pagination.querySelector(
-                  ".ea-adtp-current"
-                ).dataset.page
-              : pagination.querySelector("select").value;
-          startIndex = (currentPage - 1) * table.dataset.itemsPerPage + 1;
-          endIndex =
-            endIndex - (currentPage - 1) * table.dataset.itemsPerPage >=
-            table.dataset.itemsPerPage
-              ? currentPage * table.dataset.itemsPerPage
-              : endIndex;
-        }
+          startIndex = (currentPage - 1) * itemsPerPage;
+          endIndex = endIndex - (currentPage - 1) * itemsPerPage >= itemsPerPage ? currentPage * itemsPerPage : endIndex;
 
-        // collect header class
-        classCollection[currentPage] = [];
-
-        table.querySelectorAll("th").forEach((el) => {
-          if (el.cellIndex != index) {
-            el.classList.remove("asc", "desc");
+          $(rows).removeAttr('style');
+          for (let i = startIndex; i < endIndex; i++) {
+              $(rows[i]).attr('style', 'display: table-row;');
           }
-
-          classCollection[currentPage].push(
-            el.classList.contains("asc")
-              ? "asc"
-              : el.classList.contains("desc")
-              ? "desc"
-              : ""
-          );
-        });
-
-        // collect table cells value
-        for (let i = 1; i <= table.rows.length-1; i++) {
-          let value;
-          let cell = table.rows[i].cells[index];
-
-          const data = cell.innerText;
-
-          var regex = new RegExp(
-            "([0-9]{4}[-./*](0[1-9]|1[0-2])[-./*]([0-2]{1}[0-9]{1}|3[0-1]{1})|([0-2]{1}[0-9]{1}|3[0-1]{1})[-./*](0[1-9]|1[0-2])[-./*][0-9]{4})"
-          );
-
-          if (data.match(regex)) {
-            let dataString = data.split(/[\.\-\/\*]/), date = '';
-            if (dataString[0].length == 4) {
-              date = dataString[0] + "-" + dataString[1] + "-" + dataString[2];
-            } else {
-              date = dataString[2] + "-" + dataString[1] + "-" + dataString[0];
-            }
-            value = Date.parse(date);
-          } else if (isNaN(parseInt(data))) {
-            value = data.toLowerCase();
-          } else {
-            value = parseFloat(data);
-          }
-
-          collection.push({ index: i, value });
         }
 
-        // sort collection array
-        if (sort == "asc") {
-          collection.sort((x, y) => {
-            return x.value > y.value ? 1 : -1;
-          });
-        } else if (sort == "desc") {
-          collection.sort((x, y) => {
-            return x.value < y.value ? 1 : -1;
-          });
-        }
-
-        // sort table
-        collection.forEach((row, index) => {
-          table.rows[1 + index].innerHTML =
-            origTable.rows[row.index].innerHTML;
-        });
+        tbody.empty().append(rows);
       });
     }
   }
