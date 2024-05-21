@@ -23,20 +23,18 @@ trait Admin {
      *
      * @since 1.1.2
      */
-    public function admin_menu() {
-
-	    $menu_notice = '';
-	    $menu_notice = ( $this->menu_notice_should_show() ) ?'<span class="eael-menu-notice">1</span>':'';
-        add_menu_page(
-            __( 'Essential Addons', 'essential-addons-for-elementor-lite' ),
-            sprintf(__( 'Essential Addons %s', 'essential-addons-for-elementor-lite' ), $menu_notice ),
-            'manage_options',
-            'eael-settings',
-            [$this, 'admin_settings_page'],
-            $this->safe_url( EAEL_PLUGIN_URL . 'assets/admin/images/ea-icon-white.svg' ),
-            '58.6'
-        );
-    }
+	public function admin_menu() {
+		$menu_notice = ( $this->menu_notice_should_show() ) ? '<span class="eael-menu-notice">1</span>' : '';
+		add_menu_page(
+			__( 'Essential Addons', 'essential-addons-for-elementor-lite' ),
+			sprintf( __( 'Essential Addons %s', 'essential-addons-for-elementor-lite' ), $menu_notice ),
+			'manage_options',
+			'eael-settings',
+			[ $this, 'admin_settings_page' ],
+			$this->safe_url( EAEL_PLUGIN_URL . 'assets/admin/images/ea-icon-white.svg' ),
+			'58.6'
+		);
+	}
 
     /**
      * Loading all essential scripts
