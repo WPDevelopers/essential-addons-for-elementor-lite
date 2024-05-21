@@ -321,7 +321,7 @@ let HoverEffectHandler = function ($scope, $) {
         });
     }
 
-    //
+    
     $eaelContainer.css(normalStyles);
 }
 
