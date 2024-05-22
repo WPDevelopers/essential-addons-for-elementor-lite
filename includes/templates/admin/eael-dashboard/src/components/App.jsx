@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import {useState} from 'react'
 import Header from "./Header.jsx";
 import Menu from "./Menu.jsx";
 import General from './General.jsx'
@@ -16,7 +16,8 @@ function App() {
         <>
             <section id="ea__dashboard--wrapper" className="ea__dashboard--wrapper">
                 <Header/>
-                <section className={menu === 'elements' ? 'ea__section-wrapper ea__main-wrapper flex' : 'ea__section-wrapper ea__main-wrapper flex gap-4'}>
+                <section
+                    className={menu === 'elements' ? 'ea__section-wrapper ea__main-wrapper flex' : 'ea__section-wrapper ea__main-wrapper flex gap-4'}>
                     <Menu setmenu={setMenu} menu={menu}/>
                     {menu === 'General' ? <General setmenu={setMenu}/> : ''}
                     {menu === 'Elements' ? <Elements setmenu={setMenu}/> : ''}

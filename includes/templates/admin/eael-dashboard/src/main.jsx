@@ -1,10 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './components/App.jsx'
-import './App.css'
+import ContextReducer from "./components/ContextReducer.jsx";
 
 ReactDOM.createRoot(document.getElementById('eael-dashboard')).render(
     <React.StrictMode>
-        <App/>
+        <ContextReducer/>
     </React.StrictMode>,
 )
