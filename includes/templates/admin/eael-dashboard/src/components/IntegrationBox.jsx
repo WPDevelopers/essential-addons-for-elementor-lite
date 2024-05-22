@@ -5,7 +5,7 @@ function IntegrationBox(props) {
         enableTxt = localize.eael_dashboard.integration_box.enable,
         disableTxt = localize.eael_dashboard.integration_box.disable,
         [checked, setChecked] = useState(eaData.status),
-        integrationHandler = (e) => {
+        changeHandler = (e) => {
             setChecked(() => {
                 return e.target.checked;
             });
@@ -23,7 +23,7 @@ function IntegrationBox(props) {
                     <div className="integration-settings flex justify-between items-center">
                         <h5 className="toggle-label">{checked ? disableTxt : enableTxt}</h5>
                         <label className=" toggle-wrap">
-                            <input type="checkbox" checked={checked} onChange={integrationHandler}/>
+                            <input type="checkbox" checked={checked} onChange={changeHandler}/>
                             <span className="slider"></span>
                         </label>
                     </div>
