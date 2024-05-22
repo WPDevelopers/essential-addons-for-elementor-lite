@@ -88,6 +88,7 @@ trait Admin {
 
 	        $ea_dashboard = [
 		        'reactPath'            => EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/',
+		        'is_eapro_activate'    => $this->pro_enabled,
 		        'menu'                 => [
 			        __( 'General', 'essential-addons-for-elementor-lite' )     => 'ea-home',
 			        __( 'Elements', 'essential-addons-for-elementor-lite' )    => 'ea-elements',
@@ -304,90 +305,108 @@ trait Admin {
 			        ],
 			        'list'       => [
 				        [
-					        'key'       => 'section-parallax',
-					        'title'     => __( 'Parallax', 'essential-addons-for-elementor-lite' ),
-					        'demo_link' => 'https://essential-addons.com/elementor/parallax-scrolling/',
-					        'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-parallax/',
-					        'is_pro'    => true
+					        'key'         => 'section-parallax',
+					        'title'       => __( 'Parallax', 'essential-addons-for-elementor-lite' ),
+					        'demo_link'   => 'https://essential-addons.com/elementor/parallax-scrolling/',
+					        'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-parallax/',
+					        'is_pro'      => true,
+					        'is_activate' => absint( $this->get_settings( 'section-parallax' ) )
 				        ],
 				        [
-					        'key'       => 'section-particles',
-					        'title'     => __( 'Particles', 'essential-addons-for-elementor-lite' ),
-					        'demo_link' => 'https://essential-addons.com/elementor/particle-effect/',
-					        'doc_link'  => 'https://essential-addons.com/elementor/docs/particles/',
-					        'is_pro'    => true
+					        'key'         => 'section-particles',
+					        'title'       => __( 'Particles', 'essential-addons-for-elementor-lite' ),
+					        'demo_link'   => 'https://essential-addons.com/elementor/particle-effect/',
+					        'doc_link'    => 'https://essential-addons.com/elementor/docs/particles/',
+					        'is_pro'      => true,
+					        'is_activate' => absint( $this->get_settings( 'section-parallax' ) )
 				        ],
 				        [
-					        'key'       => 'tooltip-section',
-					        'title'     => __( 'Advanced Tooltip', 'essential-addons-for-elementor-lite' ),
-					        'demo_link' => 'https://essential-addons.com/elementor/advanced-tooltip/',
-					        'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-advanced-tooltip/',
-					        'is_pro'    => true
+					        'key'         => 'tooltip-section',
+					        'title'       => __( 'Advanced Tooltip', 'essential-addons-for-elementor-lite' ),
+					        'demo_link'   => 'https://essential-addons.com/elementor/advanced-tooltip/',
+					        'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-advanced-tooltip/',
+					        'is_pro'      => true,
+					        'is_activate' => absint( $this->get_settings( 'tooltip-section' ) )
 				        ],
 				        [
-					        'key'       => 'content-protection',
-					        'title'     => __( 'Content Protection', 'essential-addons-for-elementor-lite' ),
-					        'demo_link' => 'https://essential-addons.com/elementor/content-protection/',
-					        'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-content-protection/',
-					        'is_pro'    => true,
-					        'promotion' => 'popular'
+					        'key'         => 'content-protection',
+					        'title'       => __( 'Content Protection', 'essential-addons-for-elementor-lite' ),
+					        'demo_link'   => 'https://essential-addons.com/elementor/content-protection/',
+					        'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-content-protection/',
+					        'is_pro'      => true,
+					        'promotion'   => 'popular',
+					        'is_activate' => absint( $this->get_settings( 'content-protection' ) )
 				        ],
 				        [
-					        'key'       => 'reading-progress',
-					        'title'     => __( 'Reading Progress Bar', 'essential-addons-for-elementor-lite' ),
-					        'demo_link' => 'https://essential-addons.com/elementor/reading-progress/',
-					        'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-reading-progress-bar/',
+					        'key'         => 'reading-progress',
+					        'title'       => __( 'Reading Progress Bar', 'essential-addons-for-elementor-lite' ),
+					        'demo_link'   => 'https://essential-addons.com/elementor/reading-progress/',
+					        'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-reading-progress-bar/',
+					        'is_pro'      => false,
+					        'is_activate' => absint( $this->get_settings( 'reading-progress' ) )
 				        ],
 				        [
-					        'key'       => 'table-of-content',
-					        'title'     => __( 'Table of Contents', 'essential-addons-for-elementor-lite' ),
-					        'demo_link' => 'https://essential-addons.com/elementor/table-of-content/',
-					        'doc_link'  => 'https://essential-addons.com/elementor/docs/table-of-content',
-					        'promotion' => 'popular'
+					        'key'         => 'table-of-content',
+					        'title'       => __( 'Table of Contents', 'essential-addons-for-elementor-lite' ),
+					        'demo_link'   => 'https://essential-addons.com/elementor/table-of-content/',
+					        'doc_link'    => 'https://essential-addons.com/elementor/docs/table-of-content',
+					        'is_pro'      => false,
+					        'promotion'   => 'popular',
+					        'is_activate' => absint( $this->get_settings( 'table-of-content' ) )
 				        ],
 				        [
-					        'key'       => 'post-duplicator',
-					        'title'     => __( 'Duplicator', 'essential-addons-for-elementor-lite' ),
-					        'demo_link' => 'https://essential-addons.com/elementor/duplicator/',
-					        'doc_link'  => 'https://essential-addons.com/elementor/docs/duplicator/',
-					        'setting'   => [ 'id' => 'eael-post-duplicator-setting' ]
+					        'key'         => 'post-duplicator',
+					        'title'       => __( 'Duplicator', 'essential-addons-for-elementor-lite' ),
+					        'demo_link'   => 'https://essential-addons.com/elementor/duplicator/',
+					        'doc_link'    => 'https://essential-addons.com/elementor/docs/duplicator/',
+					        'is_pro'      => false,
+					        'setting'     => [ 'id' => 'eael-post-duplicator-setting' ],
+					        'is_activate' => absint( $this->get_settings( 'post-duplicator' ) )
 				        ],
 				        [
-					        'key'       => 'custom-js',
-					        'title'     => __( 'Custom JS', 'essential-addons-for-elementor-lite' ),
-					        'demo_link' => 'https://essential-addons.com/elementor/custom-js/',
-					        'doc_link'  => 'https://essential-addons.com/elementor/docs/custom-js/',
-					        'promotion' => 'popular'
+					        'key'         => 'custom-js',
+					        'title'       => __( 'Custom JS', 'essential-addons-for-elementor-lite' ),
+					        'demo_link'   => 'https://essential-addons.com/elementor/custom-js/',
+					        'doc_link'    => 'https://essential-addons.com/elementor/docs/custom-js/',
+					        'is_pro'      => false,
+					        'promotion'   => 'popular',
+					        'is_activate' => absint( $this->get_settings( 'custom-js' ) )
 				        ],
 				        [
-					        'key'       => 'xd-copy',
-					        'title'     => __( 'Cross-Domain Copy Paste', 'essential-addons-for-elementor-lite' ),
-					        'demo_link' => 'https://essential-addons.com/elementor/cross-domain-copy-paste/',
-					        'doc_link'  => 'https://essential-addons.com/elementor/docs/cross-domain-copy-paste/',
-					        'is_pro'    => true,
-					        'promotion' => 'new'
+					        'key'         => 'xd-copy',
+					        'title'       => __( 'Cross-Domain Copy Paste', 'essential-addons-for-elementor-lite' ),
+					        'demo_link'   => 'https://essential-addons.com/elementor/cross-domain-copy-paste/',
+					        'doc_link'    => 'https://essential-addons.com/elementor/docs/cross-domain-copy-paste/',
+					        'is_pro'      => true,
+					        'promotion'   => 'new',
+					        'is_activate' => absint( $this->get_settings( 'xd-copy' ) )
 				        ],
 				        [
-					        'key'       => 'scroll-to-top',
-					        'title'     => __( 'Scroll to Top', 'essential-addons-for-elementor-lite' ),
-					        'demo_link' => 'https://essential-addons.com/elementor/scroll-to-top/',
-					        'doc_link'  => 'https://essential-addons.com/elementor/docs/scroll-to-top/',
-					        'promotion' => 'new'
+					        'key'         => 'scroll-to-top',
+					        'title'       => __( 'Scroll to Top', 'essential-addons-for-elementor-lite' ),
+					        'demo_link'   => 'https://essential-addons.com/elementor/scroll-to-top/',
+					        'doc_link'    => 'https://essential-addons.com/elementor/docs/scroll-to-top/',
+					        'is_pro'      => false,
+					        'promotion'   => 'new',
+					        'is_activate' => absint( $this->get_settings( 'scroll-to-top' ) )
 				        ],
 				        [
-					        'key'       => 'conditional-display',
-					        'title'     => __( 'Conditional Display', 'essential-addons-for-elementor-lite' ),
-					        'demo_link' => 'https://essential-addons.com/elementor/conditional-display/',
-					        'doc_link'  => 'https://essential-addons.com/elementor/docs/conditional-display/',
-					        'is_pro'    => true,
-					        'promotion' => 'new'
+					        'key'         => 'conditional-display',
+					        'title'       => __( 'Conditional Display', 'essential-addons-for-elementor-lite' ),
+					        'demo_link'   => 'https://essential-addons.com/elementor/conditional-display/',
+					        'doc_link'    => 'https://essential-addons.com/elementor/docs/conditional-display/',
+					        'is_pro'      => true,
+					        'promotion'   => 'new',
+					        'is_activate' => absint( $this->get_settings( 'conditional-display' ) )
 				        ],
 				        [
-					        'key'       => 'wrapper-link',
-					        'title'     => __( 'Wrapper Link', 'essential-addons-for-elementor-lite' ),
-					        'demo_link' => 'https://essential-addons.com/elementor/wrapper-link/',
-					        'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-wrapper-link/',
-					        'promotion' => 'new'
+					        'key'         => 'wrapper-link',
+					        'title'       => __( 'Wrapper Link', 'essential-addons-for-elementor-lite' ),
+					        'demo_link'   => 'https://essential-addons.com/elementor/wrapper-link/',
+					        'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-wrapper-link/',
+					        'is_pro'      => false,
+					        'promotion'   => 'new',
+					        'is_activate' => absint( $this->get_settings( 'wrapper-link' ) )
 				        ],
 			        ]
 		        ]
