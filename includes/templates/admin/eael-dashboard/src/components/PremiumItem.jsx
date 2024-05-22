@@ -3,7 +3,6 @@ import React from 'react';
 function PremiumItem(props) {
     const eaData = localize.eael_dashboard.premium_items.list[props.index];
 
-    console.log(props.index, eaData)
     return (
         <>
             <div className="ea__premium-item">
