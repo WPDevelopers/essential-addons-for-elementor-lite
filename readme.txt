@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 5.9.21
+Stable tag: 5.9.22
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -297,6 +297,11 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+= 5.9.22 - 22/05/2024 =
+
+- Improved: Security Enhancement
+- Few minor bug fixes & improvements
+
 = 5.9.21 - 13/05/2024 =
 
 - Revamped: NFT Gallery | OpenSea API version
@@ -330,66 +335,6 @@ Your existing elements/content will work with premium version. So you won't lose
 - Improved: EA Advanced Accordion | Stop auto-scrolling while anchoring tab
 - Improved: EA Login Register Form | File max size description
 - Improved: EA Facebook Feed | Graph API Upgrade
-- Few minor bug fixes & improvements
-
-= 5.9.18 - 30/04/2024 =
-
-- Improved: Security Enhancement
-- Few minor bug fixes & improvements
-
-= 5.9.17 - 25/04/2024 =
-
-- Few minor bug fixes & improvements
-
-= 5.9.16 - 23/04/2024 =
-
-- Improved: Security Enhancement
-- Fixed: EA Event Calendar | Table layout shows +6 hours ahead of events time in manual source 
-- Fixed: EA Woo Product Grid | not compatible with Whols plugin
-- Fixed: EA Woo Cart | Style-2 layout in mobile devices the "close" button style broken
-- Fixed: EA Interactive Circle | not allowing to click on icons sometimes
-- Fixed: EA Filterable Gallery | Images are not getting opened in lightbox
-- Improved: EA Table of Contents | Exclude the page title and the comment/review options
-- Few minor bug fixes & improvements
-
-= 5.9.15 - 09/04/2024 =
-
-- Fixed: EA Content Ticker | Navigation arrow styling is not working
-- Fixed: EA Content Ticker | Not working with Slide animation effect
-- Fixed: EA Woo Product Grid | Default layout doesn't show customized "sale/stock out" badge
-- Fixed: EA Event Calendar | Layout calendar and table showing different times for google calendar
-- Fixed: EA Event Calendar | Old event is not showing for Event Calendar as a source
-- Fixed: EA Login Register Form | Remember me checkbox is not working in the form
-- Improved: Security Enhancement
-- Few minor bug fixes & improvements
-
-= 5.9.14 - 28/03/2024 =
-
-- Improved: Security Enhancement
-- Few minor bug fixes & improvements
-
-= 5.9.13 - 25/03/2024 =
-
-- Fixed: EA Table of Contents | Throwing PHP Fatal error if the Display on option is set to Custom Post Types
-- Few minor bug fixes & improvements
-
-= 5.9.12 - 25/03/2024 =
-
-- Fixed: EA Pricing Table | HTML tag is not working for period separator
-- Fixed: EA Advanced Accordion | Accordion is not working properly with anchor tag
-- Fixed: EA Advanced Tabs | YouTube video is not showing inside the tabs
-- Fixed: EA Login Register Form | Redirect based on user role not working
-- Fixed: EA Login Register Form | Showing invalid in password reset link
-- Fixed: EA Login Register Form | Redirect issue with cross-Domain links without AJAX submission
-- Fixed: EA Filterable Gallery | Navigation icon distorts with Salient theme enabled
-- Fixed: EA Filterable Gallery | Not working on Elementor nested tab
-- Fixed: EA Interactive Circle | Animation is not working with scroll snap
-- Fixed: EA Feature List | Conflict with Global Controls
-- Fixed: EA Pricing Table | Regular price and on sale price is overlapping each other
-- Fixed: EA Advanced Data Table | Import csv file returns to old data on immediately click on style tab
-- Improved: EA Table of Contents | Display option available for all the Custom Post Types
-- Improved: EA Gravity Forms | Added progress bar styling options for multi-pages
-- Improved: Security Enhancement
 - Few minor bug fixes & improvements
 
 [See changelog for all versions](https://essential-addons.com/changelog).
