@@ -4,12 +4,14 @@ import App from "./App.jsx";
 
 function ContextReducer() {
 
-    const initValue = {};
+    const initValue = {
+        menu: 'General'
+    }
 
     const reducer = (state, {type, payload}) => {
         switch (type) {
-            case 'ON_CHANGE':
-                return {...state, ...payload};
+            case 'SET_MENU':
+                return {...state, menu: payload};
         }
     }
 

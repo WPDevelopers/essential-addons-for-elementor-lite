@@ -1,4 +1,3 @@
-import {useState} from 'react'
 import Header from "./Header.jsx";
 import Menu from "./Menu.jsx";
 import General from './General.jsx'
@@ -7,24 +6,25 @@ import Extensions from './Extensions.jsx'
 import Tools from './Tools.jsx'
 import Integration from './Integration.jsx'
 import Premium from './Premium.jsx'
+import consumer from "../context";
 import '../App.css'
 
 function App() {
-    const [menu, setMenu] = useState('General');
+    const {eaState} = consumer();
 
     return (
         <>
             <section id="ea__dashboard--wrapper" className="ea__dashboard--wrapper">
                 <Header/>
                 <section
-                    className={menu === 'elements' ? 'ea__section-wrapper ea__main-wrapper flex' : 'ea__section-wrapper ea__main-wrapper flex gap-4'}>
-                    <Menu setmenu={setMenu} menu={menu}/>
-                    {menu === 'General' ? <General setmenu={setMenu}/> : ''}
-                    {menu === 'Elements' ? <Elements setmenu={setMenu}/> : ''}
-                    {menu === 'Extensions' ? <Extensions setmenu={setMenu}/> : ''}
-                    {menu === 'Tools' ? <Tools setmenu={setMenu}/> : ''}
-                    {menu === 'Integration' ? <Integration setmenu={setMenu}/> : ''}
-                    {menu === 'Go Premium' ? <Premium setmenu={setMenu}/> : ''}
+                    className={eaState.menu === 'Elements' ? 'ea__section-wrapper ea__main-wrapper flex' : 'ea__section-wrapper ea__main-wrapper flex gap-4'}>
+                    <Menu/>
+                    {eaState.menu === 'General' ? <General/> : ''}
+                    {eaState.menu === 'Elements' ? <Elements/> : ''}
+                    {eaState.menu === 'Extensions' ? <Extensions/> : ''}
+                    {eaState.menu === 'Tools' ? <Tools/> : ''}
+                    {eaState.menu === 'Integration' ? <Integration/> : ''}
+                    {eaState.menu === 'Go Premium' ? <Premium/> : ''}
                 </section>
             </section>
         </>

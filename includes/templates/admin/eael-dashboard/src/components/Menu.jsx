@@ -1,15 +1,17 @@
-import React from 'react';
 import MenuItem from './MenuItem.jsx'
+import consumer from "../context";
 
-function Menu(props) {
+function Menu() {
+    const eaData = localize.eael_dashboard.menu,
+        {eaState} = consumer();
 
     return (
         <>
             <div
-                className={props.menu === 'elements' ? 'ea__sidebar-nav-list ea__elements-nav' : 'ea__sidebar-nav-list'}>
+                className={eaState.menu === 'Elements' ? 'ea__sidebar-nav-list ea__elements-nav' : 'ea__sidebar-nav-list'}>
                 <div className="nav-sticky">
-                    {Object.keys(localize.eael_dashboard.menu).map((item) => {
-                        return <MenuItem setmenu={props.setmenu} key={item} item={item} menu={props.menu}/>
+                    {Object.keys(eaData).map((item, index) => {
+                        return <MenuItem key={index} item={item}/>
                     })}
                 </div>
                 <div></div>

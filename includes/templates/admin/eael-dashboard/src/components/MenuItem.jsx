@@ -1,15 +1,20 @@
-import React from 'react';
+import consumer from "../context";
+
 
 function MenuItem(props) {
-    const setMenu = props.setmenu,
-        label = props.item,
-        icon = localize.eael_dashboard.menu[props.item];
+    const label = props.item,
+        icon = localize.eael_dashboard.menu[label],
+        {eaState, eaDispatch} = consumer(),
+        changeHandler = () => {
+            eaDispatch({type: 'SET_MENU', payload: label});
+        };
 
     return (
         <>
-            <div className={props.menu === label ? 'ea__sidebar-nav active' : 'ea__sidebar-nav'} onClick={() => setMenu(label)}>
+            <div className={eaState.menu === label ? 'ea__sidebar-nav active' : 'ea__sidebar-nav'}
+                 onClick={changeHandler}>
                         <span className="ea__nav-icon">
-                            <i className={icon + 'eaicon'}></i>
+                            <i className={icon + ' eaicon'}></i>
                         </span>
                 <span className="ea__nav-text">{label}</span>
             </div>
