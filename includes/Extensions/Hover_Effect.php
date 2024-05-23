@@ -1004,7 +1004,7 @@ class Hover_Effect {
 			]
 		);
         $element->start_popover();
-		$element->add_control(
+		$element->add_responsive_control(
             'eael_hover_effect_offset_hover_left',
             [
                 'label'              => __( 'Offset Top', 'essential-addons-for-elementor-lite' ),
@@ -1033,7 +1033,7 @@ class Hover_Effect {
             ]
         );
 		
-        $element->add_control(
+        $element->add_responsive_control(
             'eael_hover_effect_offset_hover_top',
             [
                 'label'              => __( 'Offset Left', 'essential-addons-for-elementor-lite' ),
