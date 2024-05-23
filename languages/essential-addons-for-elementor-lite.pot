@@ -622,7 +622,7 @@ msgstr ""
 msgid "Woo Checkout"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:904, ../includes/Elements/Woo_Cart.php:67, ../includes/templates/admin/elements.php:615
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:904, ../includes/Controls/Select2.php:42, ../includes/Elements/Woo_Cart.php:67, ../includes/templates/admin/elements.php:615
 msgid "Woo Cart"
 msgstr ""
 
@@ -723,6 +723,10 @@ msgid "Query String"
 msgstr ""
 
 #: ../includes/Controls/Select2.php:41
+msgid "Woo Products"
+msgstr ""
+
+#: ../includes/Controls/Select2.php:43
 msgid "Visit Count"
 msgstr ""
 
