@@ -920,7 +920,7 @@ class Team_Member extends Widget_Base {
 	?>
 
 
-	<div id="eael-team-member-<?php echo esc_attr($this->get_id()); ?>" class="eael-team-item <?php echo $team_member_classes; ?>">
+	<div id="eael-team-member-<?php echo esc_attr($this->get_id()); ?>" class="eael-team-item <?php echo esc_attr( $team_member_classes ); ?>">
 		<div class="eael-team-item-inner">
 			<div class="eael-team-image">
 				<figure>

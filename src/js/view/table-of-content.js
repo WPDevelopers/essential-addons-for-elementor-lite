@@ -86,8 +86,12 @@
 					.classList.remove("eael-toc-disable");
 			}
 			for (var i = 0, len = allHeadings.length; i < len; ++i) {
-				var currentHeading = allHeadings[i];
-				if (eaelTocExclude(excludeArr, currentHeading)) {
+				var currentHeading  = allHeadings[i],
+					exclude_areas   = '.ab-top-menu, .page-header, .site-title, nav, footer, .comments-area, .woocommerce-tabs, .related.products, .blog-author, .post-author, .post-related-posts, .eael-toc-header',
+					find_exclude    = $(currentHeading).closest( exclude_areas ),
+					in_exclude_area = find_exclude.length > 0;
+
+				if ( eaelTocExclude(excludeArr, currentHeading) || in_exclude_area ) {
 					continue;
 				}
 
