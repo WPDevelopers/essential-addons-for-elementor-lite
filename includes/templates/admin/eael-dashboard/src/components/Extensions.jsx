@@ -28,8 +28,8 @@ function Extensions() {
                             </div>
                         </div>
                         <div className="ea__content-wrapper">
-                            {eaData.list.map((item, index) => {
-                                return <ElementItem index={index} key={index}/>
+                            {Object.keys(eaData.list).map((item, index) => {
+                                return <ElementItem index={item} key={index}/>
                             })}
                         </div>
                     </div>
