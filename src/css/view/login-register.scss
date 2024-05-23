@@ -297,8 +297,8 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
             top: 2px;
             margin: 0;
             cursor: pointer;
-            border: 2px solid var(--bc, var(--border));
-            background: var(--b, var(--background));
+            border: 2px solid var(--bc, var(--border)) !important;
+            background: var(--b, var(--background)) !important;
             transition: background .3s, border-color .3s, box-shadow .2s;
 
             &:after {

@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 5.9.14
+Stable tag: 5.9.22
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -297,53 +297,44 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 5.9.14 - 28/03/2024 =
+= 5.9.22 - 22/05/2024 =
 
 - Improved: Security Enhancement
 - Few minor bug fixes & improvements
 
-= 5.9.13 - 25/03/2024 =
+= 5.9.21 - 13/05/2024 =
 
-- Fixed: EA Table of Contents | Throwing PHP Fatal error if the Display on option is set to Custom Post Types
-- Few minor bug fixes & improvements
-
-= 5.9.12 - 25/03/2024 =
-
-- Fixed: EA Pricing Table | HTML tag is not working for period separator
-- Fixed: EA Advanced Accordion | Accordion is not working properly with anchor tag
-- Fixed: EA Advanced Tabs | YouTube video is not showing inside the tabs
-- Fixed: EA Login Register Form | Redirect based on user role not working
-- Fixed: EA Login Register Form | Showing invalid in password reset link
-- Fixed: EA Login Register Form | Redirect issue with cross-Domain links without AJAX submission
-- Fixed: EA Filterable Gallery | Navigation icon distorts with Salient theme enabled
-- Fixed: EA Filterable Gallery | Not working on Elementor nested tab
-- Fixed: EA Interactive Circle | Animation is not working with scroll snap
-- Fixed: EA Feature List | Conflict with Global Controls
-- Fixed: EA Pricing Table | Regular price and on sale price is overlapping each other
-- Fixed: EA Advanced Data Table | Import csv file returns to old data on immediately click on style tab
-- Improved: EA Table of Contents | Display option available for all the Custom Post Types
-- Improved: EA Gravity Forms | Added progress bar styling options for multi-pages
+- Revamped: NFT Gallery | OpenSea API version
+- Fixed: Filterable Gallery | iframe not working issue
 - Improved: Security Enhancement
 - Few minor bug fixes & improvements
 
-= 5.9.11 - 13/03/2024 =
+= 5.9.20 - 08/05/2024 =
 
-- Fixed: EA Woo Checkout | Undefined array key "class"
-- Fixed: Fatal Error | Class "Essential_Addons_ElementorClassesBootstrap" not found
-- Fixed: Conflict with Fluent Form | ff-hidden CSS class not working as expected
-- Fixed: EA Gravity Forms | Conflict with orbital theme layout
-- Fixed: EA Interactive Circle | Elementor Nav Menu is not working
-- Fixed: EA Advanced Accordion | Anchor tags inside accordions not working properly
-- Fixed: EA Woo Product Grid | Active Woo Product Grid disables product selection in store when JetMenu is enabled
-- Fixed: EA Advanced Data Table | Export is downloading empty csv file
-- Fixed: EA Event Calendar | List view shows previous date first for some time
-- Fixed: EA Advanced Data Table | CSV file import shows " " sign
-- Improved: EA Call to Action | Background image styling option
-- Improved: EA Advanced Tabs | Clicking on the tab takes the user to the top of the content
-- Improved: EA Filterable Gallery | Added RTL support
-- Improved: EA Post Grid | Added RTL support
-- Improved: EA Woo Product Carousel | Option to hide and show add to cart button
-- Improved: Accessibility Support
+- Improved: Security Enhancement
+- Few minor bug fixes & improvements
+
+= 5.9.19 - 05/05/2024 =
+
+- Fixed: EA Sticky Video | Conflicts with the Blocksy theme
+- Fixed: EA Login Register Form | Validation message doesn't show up while using the form in the popup
+- Fixed: EA Login Register Form | Showing error message for not required field
+- Fixed: EA Simple Menu | Dropdown icon is not showing on the desktop mode
+- Fixed: EA Tooltip | Displaying the content after the hover is complete
+- Fixed: EA Feature list | Icons don't show when the shape view is set to Framed
+- Fixed: EA Contact Form 7 | Alignment of the container, title & description is not working
+- Fixed: EA Advanced Accordion | Conflicts with the Specia Standard theme
+- Fixed: EA Advanced Data Table | Checkbox is not showing when using TablePress
+- Fixed: EA Advanced Tabs| Switching tabs causes the page to scroll up or down
+- Fixed: EA Woo Checkout | 'User Account' & 'Coupon Percentage' icons are broken on checkout page
+- Fixed: EA Advanced Data Table | Data sorting icons' colors don't change while using table as a template
+- Fixed: EA Simple Menu | Menu item doesn't activate when scrolling the page
+- Fixed: EA Advanced Data Table | Clearing the search values, all table contents appear when the rows per page is left blank
+- Fixed: EA Woo Product Carousel | 'Add to Cart' button disappears from default shop page if EA Woo Carousel widget is present on the same page
+- Improved: EA Event Calendar | Date format change option for week view
+- Improved: EA Advanced Accordion | Stop auto-scrolling while anchoring tab
+- Improved: EA Login Register Form | File max size description
+- Improved: EA Facebook Feed | Graph API Upgrade
 - Few minor bug fixes & improvements
 
 [See changelog for all versions](https://essential-addons.com/changelog).

@@ -1,5 +1,9 @@
 var WooCheckout = function ($scope, $) {
 	$.blockUI.defaults.overlayCSS.cursor = "default";
+	
+	//We added this class in body
+	document.body.classList.add('eael-woo-checkout');
+
 	function render_order_review_template() {
 		var wooCheckout = $(".ea-woo-checkout");
 
