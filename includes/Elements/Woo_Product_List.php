@@ -209,15 +209,31 @@ class Woo_Product_List extends Widget_Base
             ]
         );
 
+        $template_list = $this->get_template_list_for_dropdown(true);
+        $layout_options = [];
+
+        if( ! empty( $template_list ) ){
+            $image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/woo-product-list-';
+            foreach( $template_list as $key => $label ){
+                $layout_options[ $key ] = [
+                    'title' => $label,
+                    'image' => $image_path . $key . '.png'
+                ];
+            }
+        }
+
         $this->add_control(
-		    'eael_dynamic_template_layout',
-		    [
-			    'label'   => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
-			    'type'    => Controls_Manager::SELECT,
-			    'default' => 'preset-1',
-			    'options' => $this->get_template_list_for_dropdown(true),
-		    ]
-	    );
+			'eael_dynamic_template_layout',
+			[
+				'label'       => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => $layout_options,
+				'default'     => 'preset-1',
+				'label_block' => true,
+                'toggle'      => false,
+                'image_choose'=> true,
+			]
+		);
 
         $this->add_control(
             'eael_product_list_layout_general_heading',
