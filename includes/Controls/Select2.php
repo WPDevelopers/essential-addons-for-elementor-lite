@@ -40,6 +40,7 @@ class Select2 extends Base_Data_Control
 				'cl_query_string' => __( 'Query String', 'essential-addons-for-elementor-lite' ),
 				'cl_woo_products' => __( 'Woo Products', 'essential-addons-for-elementor-lite' ),
 				'cl_woo_cart'     => __( 'Woo Cart', 'essential-addons-for-elementor-lite' ),
+				'cl_visit_count'  => __( 'Visit Count', 'essential-addons-for-elementor-lite' ),
 			]
 		);
 		wp_enqueue_script( 'eael-select2' );

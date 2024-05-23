@@ -28,6 +28,11 @@
   margin: 0;
 }
 
+.eael-tooltip .eael-tooltip-text a {
+  -webkit-transition: none;
+  transition: none;
+}
+
 .eael-tooltip .eael-tooltip-text::after {
   content: "";
   position: absolute;

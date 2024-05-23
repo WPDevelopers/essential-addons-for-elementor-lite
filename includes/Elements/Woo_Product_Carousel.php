@@ -235,6 +235,18 @@ class Woo_Product_Carousel extends Widget_Base {
 		    ]
 	    );
 
+        $this->add_control(
+		    'eael_product_carousel_show_add_to_cart',
+		    [
+			    'label'        => __('Add to Cart', 'essential-addons-for-elementor-lite'),
+			    'type'         => Controls_Manager::SWITCHER,
+			    'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+			    'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
+			    'return_value' => 'yes',
+			    'default'      => 'yes',
+		    ]
+	    );
+
 	    $this->add_control(
 		    'eael_product_carousel_title_tag',
 		    [
@@ -837,6 +849,19 @@ class Woo_Product_Carousel extends Widget_Base {
                 'options' => $this->eael_get_product_statuses(),
             ]
         );
+
+        $this->add_control('product_type_logged_users', [
+            'label' => __('Purchase Type', 'essential-addons-for-elementor-lite'),
+            'type' => Controls_Manager::SELECT,
+            'description' => __('For logged in users only!', 'essential-addons-for-elementor-lite'),
+            'options' => [
+                'both' => __('Both', 'essential-addons-for-elementor-lite'),
+                'purchased' => __('Purchased Only', 'essential-addons-for-elementor-lite'),
+                'not-purchased' => __('Not Purchased Only', 'essential-addons-for-elementor-lite'),
+            ],
+            'default' => 'both',
+        ]);
+
 	    $taxonomies = get_taxonomies(['object_type' => ['product']], 'objects');
 	    foreach ($taxonomies as $taxonomy => $object) {
 		    if (!isset($object->object_type[0])) {
@@ -1200,7 +1225,7 @@ class Woo_Product_Carousel extends Widget_Base {
             [
                 'label'     => esc_html__( 'Regular Price Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '',
+                'default'   => '#025492',
                 'selectors' => [
                     '{{WRAPPER}} .eael-product-carousel .eael-product-price del .amount, {{WRAPPER}} .eael-product-carousel .eael-product-price .amount bdi' => 'color: {{VALUE}};',
                 ],
@@ -1332,7 +1357,7 @@ class Woo_Product_Carousel extends Widget_Base {
             [
                 'label'     => esc_html__( 'Sale Badge Background', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '',
+                'default'   => '#0044FC',
                 'selectors' => [
                     '{{WRAPPER}} .eael-product-carousel .onsale, {{WRAPPER}} .eael-product-carousel .eael-onsale' => 'background-color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-carousel .eael-onsale:not(.outofstock).sale-preset-4:after'        => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}};',
@@ -2864,7 +2889,7 @@ class Woo_Product_Carousel extends Widget_Base {
 
         $settings = $this->get_settings_for_display();
         // normalize for load more fix
-        $widget_id = $this->get_id();
+        $widget_id = esc_attr( $this->get_id() );
         $settings[ 'eael_widget_id' ] = $widget_id;
 
         $args = $this->product_query_builder();
@@ -3001,16 +3026,37 @@ class Woo_Product_Carousel extends Widget_Base {
 	    $settings['eael_product_carousel_title_tag'] = HelperClass::eael_validate_html_tag($settings['eael_product_carousel_title_tag']);
 	    $settings['eael_product_carousel_sale_text'] = HelperClass::eael_wp_kses($settings['eael_product_carousel_sale_text']);
 	    $settings['eael_product_carousel_stockout_text'] = HelperClass::eael_wp_kses($settings['eael_product_carousel_stockout_text']);
+
+        $no_products_found = 0;
+
+        if ( is_user_logged_in() ) {
+            $product_purchase_type = ! empty( $settings['product_type_logged_users'] ) ? sanitize_text_field( $settings['product_type_logged_users'] ) : '';
+
+            if (  in_array( $product_purchase_type, ['purchased', 'not-purchased'] ) ) {
+                $user_ordered_products = HelperClass::eael_get_all_user_ordered_products();
+                $no_products_found = empty( $user_ordered_products ) && 'purchased' === $product_purchase_type ? 1 : 0;
+ 
+                if ( ! empty( $user_ordered_products ) && 'purchased' === $product_purchase_type ){
+                    $args['post__in'] = $user_ordered_products;
+                }
+
+                if ( ! empty( $user_ordered_products ) && 'not-purchased' === $product_purchase_type ){
+                    $args['post__not_in'] = $user_ordered_products;
+                }
+            }
+        }
+
         ?>
 
         <div <?php $this->print_render_attribute_string( 'container' ); ?> >
             <?php
+                do_action( 'eael_woo_before_product_loop' );
+
                 $template = $this->get_template( $settings[ 'eael_dynamic_template_layout' ] );
                 if ( file_exists( $template ) ):
 	                $query = new \WP_Query( $args );
 	                if ( $query->have_posts() ):
                         echo '<div '.$this->get_render_attribute_string( 'eael-woo-product-carousel-wrap' ).'>';
-                            do_action( 'eael_woo_before_product_loop' );
 		                    $settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
                             echo '<ul class="swiper-wrapper products">';
                             while ( $query->have_posts() ) {
@@ -3019,6 +3065,7 @@ class Woo_Product_Carousel extends Widget_Base {
                             }
                             wp_reset_postdata();
                             echo '</ul>';
+                            do_action( 'eael_woo_after_product_loop' );
                         echo '</div>';
                     else:
 	                    echo '<p class="eael-no-posts-found">'.HelperClass::eael_wp_kses($settings['eael_product_carousel_not_found_msg']).'</p>';
@@ -3037,6 +3084,7 @@ class Woo_Product_Carousel extends Widget_Base {
             }
 
 
+            do_action( 'eael_woo_after_product_loop' );
             /**
              * Render Slider Navigations!
              */
@@ -3148,7 +3196,7 @@ class Woo_Product_Carousel extends Widget_Base {
 	 */
     public function product_query_builder(){
 	    $settings                     = $this->get_settings_for_display();
-	    $widget_id                    = $this->get_id();
+	    $widget_id                    = esc_attr( $this->get_id() );
 	    $settings[ 'eael_widget_id' ] = $widget_id;
 	    $order_by                     = $settings[ 'orderby' ];
 	    $filter                        = $settings[ 'eael_product_carousel_product_filter' ];

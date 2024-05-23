@@ -38,7 +38,8 @@ jQuery(window).on("elementor/frontend/init", function () {
 				$gallery_enabled = ($settings.gallery_enabled === "yes"),
 				$images_per_page = $gallery.data("images-per-page"),
 				$init_show_setting     = $gallery.data("init-show");
-				fg_items.splice(0, $init_show_setting)
+				fg_items.splice(0, $init_show_setting),
+				isRTL = $('body').hasClass('rtl');
 			// init isotope
 			let gwrap = $(".eael-filter-gallery-wrapper");
 			var layoutMode       = gwrap.data("layout-mode");
@@ -48,6 +49,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 				percentPosition: true,
 				stagger: 30,
 				transitionDuration: $settings.duration + "ms",
+				isOriginLeft: !isRTL,
 				filter: function () {
 					var $this   = $(this);
 					var $result = searchRegex ? $this.text().match(searchRegex) : true;
@@ -94,6 +96,13 @@ jQuery(window).on("elementor/frontend/init", function () {
 						setTimeout(() => {
 							$(".eael-privacy-message").remove();
 						}, 5000);
+
+						setTimeout(() => {
+							var el_lightbox = $('.dialog-type-lightbox.elementor-lightbox');
+							if( el_lightbox.length > 0 ){
+								el_lightbox.remove();
+							}
+						}, 100);
 					},
 				}
 			});
