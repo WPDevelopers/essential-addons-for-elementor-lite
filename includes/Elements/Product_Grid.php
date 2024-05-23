@@ -3123,7 +3123,7 @@ class Product_Grid extends Widget_Base
 
         // normalize for load more fix
 	    $settings['layout_mode']    = $settings["eael_product_grid_layout"];
-	    $widget_id                  = $this->get_id();
+	    $widget_id                  = esc_attr( $this->get_id() );
 	    $settings['eael_widget_id'] = $widget_id;
 
 	    if ( $settings['post_type'] === 'source_dynamic' && is_archive() || ! empty( $_REQUEST['post_type'] ) ) {
@@ -3237,7 +3237,7 @@ class Product_Grid extends Widget_Base
 
         <script type="text/javascript">
             jQuery(document).ready(function($) {
-                var $scope = jQuery(".elementor-element-<?php echo $this->get_id(); ?>");
+                var $scope = jQuery(".elementor-element-<?php echo esc_js( $this->get_id() ); ?>");
                 var $products = $('.products', $scope);
                 var $layout_mode = $products.data('layout-mode');
                 
