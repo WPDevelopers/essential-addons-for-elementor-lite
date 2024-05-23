@@ -1,14 +1,13 @@
-import React, {useState} from 'react';
+import consumer from "../context";
 
 function IntegrationBox(props) {
     const eaData = localize.eael_dashboard.integration_box.list[props.index],
         enableTxt = localize.eael_dashboard.integration_box.enable,
         disableTxt = localize.eael_dashboard.integration_box.disable,
-        [checked, setChecked] = useState(eaData.status),
+        {eaState, eaDispatch} = consumer(),
+        checked = eaState.integrations[props.index],
         changeHandler = (e) => {
-            setChecked(() => {
-                return e.target.checked;
-            });
+            eaDispatch({type: 'ON_CHANGE_INTEGRATION', payload: {key: props.index, value: e.target.checked}});
         };
 
     return (

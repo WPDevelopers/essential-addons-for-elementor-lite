@@ -8,8 +8,8 @@ function Integration() {
         <>
             <div className="ea__elements-nav-content">
                 <div className="ea__integration-content-wrapper">
-                    {eaData.list.map((item, index) => {
-                        return <IntegrationBox index={index} key={index}/>;
+                    {Object.keys(eaData.list).map((item, index) => {
+                        return <IntegrationBox index={item} key={index}/>;
                     })}
                 </div>
             </div>

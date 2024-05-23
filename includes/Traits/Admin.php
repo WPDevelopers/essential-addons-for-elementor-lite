@@ -190,25 +190,25 @@ trait Admin {
 			        'enable'  => __( 'Enable Integration', 'essential-addons-for-elementor-lite' ),
 			        'disable' => __( 'Disable Integration', 'essential-addons-for-elementor-lite' ),
 			        'list'    => [
-				        [
+				        'bd' => [
 					        'heading' => __( 'BetterDocs', 'essential-addons-for-elementor-lite' ),
 					        'content' => __( 'BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ),
 					        'icon'    => 'images/BD.svg',
 					        'status'  => true
 				        ],
-				        [
+				        'eb' => [
 					        'heading' => __( 'Essential Blocks', 'essential-addons-for-elementor-lite' ),
 					        'content' => __( 'BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ),
 					        'icon'    => 'images/EB.svg',
 					        'status'  => false
 				        ],
-				        [
+				        'ep' => [
 					        'heading' => __( 'EmbedPress', 'essential-addons-for-elementor-lite' ),
 					        'content' => __( 'BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ),
 					        'icon'    => 'images/EP.svg',
 					        'status'  => true
 				        ],
-				        [
+				        'nx' => [
 					        'heading' => __( 'NotificationX', 'essential-addons-for-elementor-lite' ),
 					        'content' => __( 'BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ),
 					        'icon'    => 'images/NX.svg',
