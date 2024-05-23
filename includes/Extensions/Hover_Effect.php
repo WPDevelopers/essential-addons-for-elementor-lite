@@ -439,7 +439,7 @@ class Hover_Effect {
         $element->add_control(
 			'eael_hover_effect_transform_rotatex',
 			[
-				'label' => esc_html__( 'RotateX', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'RotateX (deg)', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'range' => [
                     'px' => [
@@ -462,7 +462,7 @@ class Hover_Effect {
         $element->add_control(
 			'eael_hover_effect_transform_rotatey',
 			[
-				'label' => esc_html__( 'RotateY', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'RotateY (deg)', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'range' => [
                     'px' => [
@@ -485,7 +485,7 @@ class Hover_Effect {
         $element->add_control(
 			'eael_hover_effect_transform_rotatez',
 			[
-				'label' => esc_html__( 'RotateZ', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'RotateZ (deg)', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'range' => [
                     'px' => [
@@ -576,7 +576,7 @@ class Hover_Effect {
         $element->add_control(
 			'eael_hover_effect_transform_skewx',
 			[
-				'label' => esc_html__( 'SkewX', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'SkewX (deg)', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'range' => [
                     'px' => [
@@ -599,7 +599,7 @@ class Hover_Effect {
         $element->add_control(
 			'eael_hover_effect_transform_skewy',
 			[
-				'label' => esc_html__( 'SkewY', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'SkewY (deg)', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'range' => [
                     'px' => [
@@ -1094,7 +1094,7 @@ class Hover_Effect {
         $element->add_responsive_control(
 			'eael_hover_effect_transform_hover_rotatex',
 			[
-                'label' => esc_html__( 'RotateX', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'RotateX (deg)', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'range' => [
                     'px' => [
@@ -1116,7 +1116,7 @@ class Hover_Effect {
         $element->add_responsive_control(
 			'eael_hover_effect_transform_hover_rotatey',
 			[
-                'label' => esc_html__( 'RotateY', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'RotateY (deg)', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'range' => [
                     'px' => [
@@ -1138,7 +1138,7 @@ class Hover_Effect {
         $element->add_responsive_control(
 			'eael_hover_effect_transform_hover_rotatez',
 			[
-                'label' => esc_html__( 'RotateZ', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'RotateZ (deg)', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'range' => [
                     'px' => [
@@ -1228,7 +1228,7 @@ class Hover_Effect {
         $element->add_responsive_control(
 			'eael_hover_effect_transform_hover_skewx',
 			[
-                'label' => esc_html__( 'SkewX', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'SkewX (deg)', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'range' => [
                     'px' => [
@@ -1250,7 +1250,7 @@ class Hover_Effect {
         $element->add_responsive_control(
 			'eael_hover_effect_transform_hover_skewy',
 			[
-                'label' => esc_html__( 'SkewY', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'SkewY (deg)', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'range' => [
                     'px' => [
