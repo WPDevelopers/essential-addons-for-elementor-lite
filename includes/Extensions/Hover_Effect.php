@@ -349,7 +349,7 @@ class Hover_Effect {
 			]
 		);
         $element->start_popover();
-		$element->add_control(
+		$element->add_responsive_control(
             'eael_hover_effect_offset_left',
             [
                 'label'              => __( 'Offset Top', 'essential-addons-for-elementor-lite' ),
@@ -378,7 +378,7 @@ class Hover_Effect {
             ]
         );
 
-        $element->add_control(
+        $element->add_responsive_control(
             'eael_hover_effect_offset_top',
             [
                 'label'              => __( 'Offset Left', 'essential-addons-for-elementor-lite' ),
@@ -436,7 +436,7 @@ class Hover_Effect {
 		);
 
 		//RotateX
-        $element->add_control(
+        $element->add_responsive_control(
 			'eael_hover_effect_transform_rotatex',
 			[
 				'label' => esc_html__( 'RotateX (deg)', 'essential-addons-for-elementor-lite' ),
@@ -459,7 +459,7 @@ class Hover_Effect {
 		);
 
 		//RotateY
-        $element->add_control(
+        $element->add_responsive_control(
 			'eael_hover_effect_transform_rotatey',
 			[
 				'label' => esc_html__( 'RotateY (deg)', 'essential-addons-for-elementor-lite' ),
@@ -482,7 +482,7 @@ class Hover_Effect {
 		);
 
 		//RotateZ
-        $element->add_control(
+        $element->add_responsive_control(
 			'eael_hover_effect_transform_rotatez',
 			[
 				'label' => esc_html__( 'RotateZ (deg)', 'essential-addons-for-elementor-lite' ),
@@ -517,7 +517,7 @@ class Hover_Effect {
 		);
 
 		//ScaleX
-        $element->add_control(
+        $element->add_responsive_control(
 			'eael_hover_effect_transform_scalex',
 			[
 				'label' => esc_html__( 'ScaleX', 'essential-addons-for-elementor-lite' ),
@@ -539,7 +539,7 @@ class Hover_Effect {
 		);
 
 		//ScaleY
-        $element->add_control(
+        $element->add_responsive_control(
 			'eael_hover_effect_transform_scaley',
 			[
 				'label' => esc_html__( 'ScaleY', 'essential-addons-for-elementor-lite' ),
@@ -573,7 +573,7 @@ class Hover_Effect {
 		);
 
 		//SkewX
-        $element->add_control(
+        $element->add_responsive_control(
 			'eael_hover_effect_transform_skewx',
 			[
 				'label' => esc_html__( 'SkewX (deg)', 'essential-addons-for-elementor-lite' ),
@@ -596,7 +596,7 @@ class Hover_Effect {
 		);
 
 		//SkewY
-        $element->add_control(
+        $element->add_responsive_control(
 			'eael_hover_effect_transform_skewy',
 			[
 				'label' => esc_html__( 'SkewY (deg)', 'essential-addons-for-elementor-lite' ),
