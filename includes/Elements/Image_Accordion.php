@@ -595,7 +595,7 @@ class Image_Accordion extends Widget_Base {
             }
             ?>
 
-            <div <?php echo $this->get_render_attribute_string( 'eael-image-accordion-item-wrapper-' . $key ); ?>  tabindex="<?php echo $key; ?>">
+            <div <?php echo $this->get_render_attribute_string( 'eael-image-accordion-item-wrapper-' . $key ); ?>  tabindex="0">
                 <div class="overlay">
                     <div class="overlay-inner <?php echo( $active === 'yes' ? ' overlay-inner-show' : '' ); ?>">
                         <?php
@@ -624,10 +624,10 @@ class Image_Accordion extends Widget_Base {
         if ( !empty( $settings[ 'eael_img_accordions' ] ) ) {
             if ( 'on-hover' === $settings[ 'eael_img_accordion_type' ] ) {
                 echo '<style typr="text/css">
-                    #eael-img-accordion-' . $this->get_id() . ' .eael-image-accordion-hover:hover {
+                    #eael-img-accordion-' . esc_html( $this->get_id() ) . ' .eael-image-accordion-hover:hover {
                         flex: 3 1 0% !important;
                     }
-                    #eael-img-accordion-' . $this->get_id() . ' .eael-image-accordion-hover:hover:hover .overlay-inner * {
+                    #eael-img-accordion-' . esc_html( $this->get_id() ) . ' .eael-image-accordion-hover:hover:hover .overlay-inner * {
                         opacity: 1;
                         visibility: visible;
                         transform: none;

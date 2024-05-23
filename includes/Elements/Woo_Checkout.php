@@ -1452,6 +1452,26 @@ class Woo_Checkout extends Widget_Base {
 				],
 			]
 		);
+
+		$this->add_responsive_control(
+			'ea_woo_checkout_login_icon_position',
+			[
+				'label'              => esc_html__( 'Icon Position', 'essential-addons-for-elementor-lite' ),
+				'type'               => Controls_Manager::DIMENSIONS,
+				'size_units'         => [ 'px', 'em', '%' ],
+				'allowed_dimensions' => [ 'top', 'left' ],
+				'default' 			 => [
+					'top'      => 24,
+					'left'     => 35,
+					'unit'     => 'px',
+					'isLinked' =>  true,
+				],
+				'selectors'          => [
+					'{{WRAPPER}} .ea-woo-checkout .ea-login-icon' => 'top: {{TOP}}{{UNIT}}; left: {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
 		$this->add_control(
 			'ea_woo_checkout_login_links_color',
 			[
@@ -1490,7 +1510,6 @@ class Woo_Checkout extends Widget_Base {
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
 					'{{WRAPPER}} .woo-checkout-login' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-					'{{WRAPPER}} .ea-woo-checkout .ea-login-icon' => 'top: {{TOP}}{{UNIT}}; left: {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1811,6 +1830,26 @@ class Woo_Checkout extends Widget_Base {
                 ],
             ]
         );
+
+		$this->add_responsive_control(
+			'ea_woo_checkout_coupon_icon_position',
+			[
+				'label'              => esc_html__( 'Icon Position', 'essential-addons-for-elementor-lite' ),
+				'type'               => Controls_Manager::DIMENSIONS,
+				'size_units'         => [ 'px', 'em', '%' ],
+				'allowed_dimensions' => [ 'top', 'left' ],
+				'default' 			 => [
+					'top'      => 24,
+					'left'     => 35,
+					'unit'     => 'px',
+					'isLinked' =>  true,
+				],
+				'selectors'          => [
+					'{{WRAPPER}} .ea-woo-checkout .ea-coupon-icon' => 'top: {{TOP}}{{UNIT}}; left: {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		
 		$this->add_control(
 			'ea_woo_checkout_coupon_links_color',
 			[
@@ -1886,7 +1925,6 @@ class Woo_Checkout extends Widget_Base {
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
 					'{{WRAPPER}} .woo-checkout-coupon' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-					'{{WRAPPER}} .ea-woo-checkout .ea-coupon-icon' => 'top: {{TOP}}{{UNIT}}; left: {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -2845,7 +2883,7 @@ class Woo_Checkout extends Widget_Base {
 			[
 				'label' => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::COLOR,
-				'default' => '#7866ff',
+				'default' => '#5842FF',
 				'selectors' => [
 					'{{WRAPPER}} #place_order' => 'background-color: {{VALUE}};background: {{VALUE}};',
 				],
@@ -3014,7 +3052,7 @@ class Woo_Checkout extends Widget_Base {
 		$_fields = [];
 		$classes = [ 'form-row-first', 'form-row-last', 'form-row-wide' ];
 		foreach ( $fields as $key => $field_set ) {
-			$field_set_class = is_array( $field_set['class'] ) ? $field_set['class'] : [];
+			$field_set_class = isset( $field_set['class'] ) && is_array( $field_set['class'] ) ? $field_set['class'] : [];
 			$_fields[]       = [
 				'field_label'       => $field_set['label'],
 				'field_key'         => $key,
