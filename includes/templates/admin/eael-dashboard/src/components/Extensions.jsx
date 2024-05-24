@@ -1,13 +1,12 @@
-import React, {useState} from 'react';
 import ElementItem from "./ElementItem.jsx";
+import consumer from "../context";
 
 function Extensions() {
     const eaData = localize.eael_dashboard.extensions,
-        [checked, setChecked] = useState(false),
+        {eaState, eaDispatch} = consumer(),
+        checked = eaState.extensionAll,
         changeHandler = (e) => {
-            setChecked(() => {
-                return e.target.checked;
-            });
+            eaDispatch({type: 'ON_CHANGE_ALL', payload: {key: 'extensionAll', value: e.target.checked}});
         };
 
     return (

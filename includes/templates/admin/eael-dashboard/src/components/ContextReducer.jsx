@@ -8,7 +8,8 @@ function ContextReducer() {
         initValue = {
             menu: 'General',
             integrations: {},
-            extensions: {}
+            extensions: {},
+            extensionAll: false
         }
 
     useEffect(() => {
@@ -31,6 +32,8 @@ function ContextReducer() {
             case 'ON_CHANGE_ELEMENT':
                 const extensions = {...state.extensions, [payload.key]: payload.value};
                 return {...state, extensions};
+            case 'ON_CHANGE_ALL':
+                return {...state, [payload.key]: payload.value};
         }
     }
 
