@@ -97,6 +97,10 @@ trait Admin {
 			        __( 'Integration', 'essential-addons-for-elementor-lite' ) => 'ea-plug',
 			        __( 'Go Premium', 'essential-addons-for-elementor-lite' )  => 'ea-lock',
 		        ],
+		        'i18n'                 => [
+			        'enable_all' => __( 'Enable all', 'essential-addons-for-elementor-lite' ),
+			        'save_settings' => __( 'Save Settings', 'essential-addons-for-elementor-lite' ),
+		        ],
 		        'whats_new'            => [
 			        'heading' => __( 'What is New on Version?', 'essential-addons-for-elementor-lite' ),
 			        'list'    => [
@@ -299,10 +303,6 @@ trait Admin {
 		        ],
 		        'extensions'           => [
 			        'heading'    => __( 'Premium Extensions', 'essential-addons-for-elementor-lite' ),
-			        'enable_all' => [
-				        'label'  => 'Enable all',
-				        'status' => true
-			        ],
 			        'list'       => [
 				        'section-parallax'    => [
 					        'key'         => 'section-parallax',
