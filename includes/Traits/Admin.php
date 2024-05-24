@@ -310,7 +310,7 @@ trait Admin {
 					        'demo_link'   => 'https://essential-addons.com/elementor/parallax-scrolling/',
 					        'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-parallax/',
 					        'is_pro'      => true,
-					        'is_activate' => absint( $this->get_settings( 'section-parallax' ) )
+					        'is_activate' => boolval( $this->get_settings( 'section-parallax' ) )
 				        ],
 				        'section-particles'   => [
 					        'key'         => 'section-particles',
@@ -318,7 +318,7 @@ trait Admin {
 					        'demo_link'   => 'https://essential-addons.com/elementor/particle-effect/',
 					        'doc_link'    => 'https://essential-addons.com/elementor/docs/particles/',
 					        'is_pro'      => true,
-					        'is_activate' => absint( $this->get_settings( 'section-parallax' ) )
+					        'is_activate' => boolval( $this->get_settings( 'section-parallax' ) )
 				        ],
 				        'tooltip-section'     => [
 					        'key'         => 'tooltip-section',
@@ -326,7 +326,7 @@ trait Admin {
 					        'demo_link'   => 'https://essential-addons.com/elementor/advanced-tooltip/',
 					        'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-advanced-tooltip/',
 					        'is_pro'      => true,
-					        'is_activate' => absint( $this->get_settings( 'tooltip-section' ) )
+					        'is_activate' => boolval( $this->get_settings( 'tooltip-section' ) )
 				        ],
 				        'content-protection'  => [
 					        'key'         => 'content-protection',
@@ -335,7 +335,7 @@ trait Admin {
 					        'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-content-protection/',
 					        'is_pro'      => true,
 					        'promotion'   => 'popular',
-					        'is_activate' => absint( $this->get_settings( 'content-protection' ) )
+					        'is_activate' => boolval( $this->get_settings( 'content-protection' ) )
 				        ],
 				        'reading-progress'    => [
 					        'key'         => 'reading-progress',
@@ -343,7 +343,7 @@ trait Admin {
 					        'demo_link'   => 'https://essential-addons.com/elementor/reading-progress/',
 					        'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-reading-progress-bar/',
 					        'is_pro'      => false,
-					        'is_activate' => absint( $this->get_settings( 'reading-progress' ) )
+					        'is_activate' => boolval( $this->get_settings( 'reading-progress' ) )
 				        ],
 				        'table-of-content'    => [
 					        'key'         => 'table-of-content',
@@ -352,7 +352,7 @@ trait Admin {
 					        'doc_link'    => 'https://essential-addons.com/elementor/docs/table-of-content',
 					        'is_pro'      => false,
 					        'promotion'   => 'popular',
-					        'is_activate' => absint( $this->get_settings( 'table-of-content' ) )
+					        'is_activate' => boolval( $this->get_settings( 'table-of-content' ) )
 				        ],
 				        'post-duplicator'     => [
 					        'key'         => 'post-duplicator',
@@ -361,7 +361,7 @@ trait Admin {
 					        'doc_link'    => 'https://essential-addons.com/elementor/docs/duplicator/',
 					        'is_pro'      => false,
 					        'setting'     => [ 'id' => 'eael-post-duplicator-setting' ],
-					        'is_activate' => absint( $this->get_settings( 'post-duplicator' ) )
+					        'is_activate' => boolval( $this->get_settings( 'post-duplicator' ) )
 				        ],
 				        'custom-js'           => [
 					        'key'         => 'custom-js',
@@ -370,7 +370,7 @@ trait Admin {
 					        'doc_link'    => 'https://essential-addons.com/elementor/docs/custom-js/',
 					        'is_pro'      => false,
 					        'promotion'   => 'popular',
-					        'is_activate' => absint( $this->get_settings( 'custom-js' ) )
+					        'is_activate' => boolval( $this->get_settings( 'custom-js' ) )
 				        ],
 				        'xd-copy'             => [
 					        'key'         => 'xd-copy',
@@ -379,7 +379,7 @@ trait Admin {
 					        'doc_link'    => 'https://essential-addons.com/elementor/docs/cross-domain-copy-paste/',
 					        'is_pro'      => true,
 					        'promotion'   => 'new',
-					        'is_activate' => absint( $this->get_settings( 'xd-copy' ) )
+					        'is_activate' => boolval( $this->get_settings( 'xd-copy' ) )
 				        ],
 				        'scroll-to-top'       => [
 					        'key'         => 'scroll-to-top',
@@ -388,7 +388,7 @@ trait Admin {
 					        'doc_link'    => 'https://essential-addons.com/elementor/docs/scroll-to-top/',
 					        'is_pro'      => false,
 					        'promotion'   => 'new',
-					        'is_activate' => absint( $this->get_settings( 'scroll-to-top' ) )
+					        'is_activate' => boolval( $this->get_settings( 'scroll-to-top' ) )
 				        ],
 				        'conditional-display' => [
 					        'key'         => 'conditional-display',
@@ -397,7 +397,7 @@ trait Admin {
 					        'doc_link'    => 'https://essential-addons.com/elementor/docs/conditional-display/',
 					        'is_pro'      => true,
 					        'promotion'   => 'new',
-					        'is_activate' => absint( $this->get_settings( 'conditional-display' ) )
+					        'is_activate' => boolval( $this->get_settings( 'conditional-display' ) )
 				        ],
 				        'wrapper-link'        => [
 					        'key'         => 'wrapper-link',
@@ -406,7 +406,7 @@ trait Admin {
 					        'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-wrapper-link/',
 					        'is_pro'      => false,
 					        'promotion'   => 'new',
-					        'is_activate' => absint( $this->get_settings( 'wrapper-link' ) )
+					        'is_activate' => boolval( $this->get_settings( 'wrapper-link' ) )
 				        ],
 			        ]
 		        ]

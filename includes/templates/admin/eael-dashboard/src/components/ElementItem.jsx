@@ -5,9 +5,9 @@ function ElementItem(props) {
         isProActivated = localize.eael_dashboard.is_eapro_activate,
         isDisabled = eaData.is_pro && !isProActivated,
         {eaState, eaDispatch} = consumer(),
-        checked = (!isDisabled && eaState.extensions[props.index]) === 1,
+        checked = !isDisabled && eaState.extensions[props.index],
         changeHandler = (e) => {
-            eaDispatch({type: 'ON_CHANGE_ELEMENT', payload: {key: props.index, value: e.target.checked | 0}});
+            eaDispatch({type: 'ON_CHANGE_ELEMENT', payload: {key: props.index, value: e.target.checked}});
         };
 
     return (

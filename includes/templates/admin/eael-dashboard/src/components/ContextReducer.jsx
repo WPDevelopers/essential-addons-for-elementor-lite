@@ -25,7 +25,6 @@ function ContextReducer() {
         switch (type) {
             case 'SET_MENU':
                 return {...state, menu: payload};
-                break;
             case 'ON_CHANGE_INTEGRATION':
                 const integrations = {...state.integrations, [payload.key]: payload.value};
                 return {...state, integrations};
@@ -33,6 +32,11 @@ function ContextReducer() {
                 const extensions = {...state.extensions, [payload.key]: payload.value};
                 return {...state, extensions};
             case 'ON_CHANGE_ALL':
+                if (payload.key === 'extensionAll') {
+                    Object.keys(state.extensions).map((item) => {
+                        state.extensions[item] = payload.value;
+                    });
+                }
                 return {...state, [payload.key]: payload.value};
         }
     }
