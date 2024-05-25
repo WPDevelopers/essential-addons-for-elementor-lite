@@ -11,7 +11,8 @@ function ContextReducer() {
             extensions: [],
             widgets: {},
             elements: {},
-            extensionAll: false
+            extensionAll: false,
+            widgetAll: false
         }
 
     useEffect(() => {
@@ -47,6 +48,13 @@ function ContextReducer() {
                 if (payload.key === 'extensionAll') {
                     state.extensions.map((item) => {
                         state.elements[item] = payload.value;
+                    });
+                } else if (payload.key === 'widgetAll') {
+                    Object.keys(state.widgets).map((item) => {
+                        state[item] = payload.value;
+                        state.widgets[item].map((subitem) => {
+                            state.elements[subitem] = payload.value;
+                        });
                     });
                 } else {
                     state.widgets[payload.key].map((item) => {

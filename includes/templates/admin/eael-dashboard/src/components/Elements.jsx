@@ -1,8 +1,14 @@
 import ElementsSubSection from "./ElementsSubSection.jsx";
+import consumer from "../context/index.js";
 
 function Elements() {
     const eaData = localize.eael_dashboard.widgets,
-        i18n = localize.eael_dashboard.i18n;
+        {eaState, eaDispatch} = consumer(),
+        checked = eaState.widgetAll,
+        i18n = localize.eael_dashboard.i18n,
+        changeHandler = (e) => {
+            eaDispatch({type: 'ON_CHANGE_ALL', payload: {key: 'widgetAll', value: e.target.checked}});
+        };
 
     return (
         <>
@@ -27,7 +33,7 @@ function Elements() {
                             <div className="toggle-wrapper flex items-center gap-2">
                                 <h5>Enable all Elements</h5>
                                 <label className="toggle-wrap">
-                                    <input type="checkbox" checked="checked"/>
+                                    <input type="checkbox" checked={checked} onChange={changeHandler}/>
                                     <span className="slider"></span>
                                 </label>
                             </div>
