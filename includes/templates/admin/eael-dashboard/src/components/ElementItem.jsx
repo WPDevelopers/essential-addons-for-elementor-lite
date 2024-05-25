@@ -1,11 +1,11 @@
 import consumer from "../context";
 
 function ElementItem(props) {
-    const eaData = localize.eael_dashboard.extensions.list[props.index],
+    const eaData = props.source[props.index],
         isProActivated = localize.eael_dashboard.is_eapro_activate,
         isDisabled = eaData.is_pro && !isProActivated,
         {eaState, eaDispatch} = consumer(),
-        checked = !isDisabled && eaState.extensions[props.index],
+        checked = !isDisabled && eaState.elements[props.index],
         changeHandler = (e) => {
             eaDispatch({type: 'ON_CHANGE_ELEMENT', payload: {key: props.index, value: e.target.checked}});
         };
