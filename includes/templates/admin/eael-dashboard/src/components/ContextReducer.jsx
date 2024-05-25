@@ -48,6 +48,10 @@ function ContextReducer() {
                     state.extensions.map((item) => {
                         state.elements[item] = payload.value;
                     });
+                } else {
+                    state.widgets[payload.key].map((item) => {
+                        state.elements[item] = payload.value;
+                    });
                 }
                 return {...state, [payload.key]: payload.value};
         }
