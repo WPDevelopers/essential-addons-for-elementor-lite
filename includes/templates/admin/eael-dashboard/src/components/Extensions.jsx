@@ -29,7 +29,7 @@ function Extensions() {
                         </div>
                         <div className="ea__content-wrapper">
                             {Object.keys(eaData.list).map((item, index) => {
-                                return <ElementItem index={item} key={index}/>
+                                return <ElementItem source={eaData.list} index={item} key={index}/>
                             })}
                         </div>
                     </div>
