@@ -18,72 +18,25 @@ function ElementsSubSection(props) {
                     </div>
                 </div>
                 <div className="ea__content-wrapper">
-                    <div className="ea__content-items">
-                        <div className="ea__content-head">
-                            <h5 className="toggle-label">Creative Button</h5>
-                            <label className="toggle-wrap">
-                                <input type="checkbox" checked="checked"/>
-                                <span className="slider"></span>
-                            </label>
-                        </div>
-                        <div className="ea__content-footer">
-                            <span className="content-btn"></span>
-                            <div className="content-icons">
-                                <i className="eaicon ea-docs"></i>
-                                <i className="eaicon ea-link-2"></i>
-                                <i className="eaicon ea-settings"></i>
+                    {Object.keys(eaData.elements).map((item, index)=> {
+                        return <div className="ea__content-items" key={index}>
+                            <div className="ea__content-head">
+                                <h5 className="toggle-label">{eaData.elements[item].title}</h5>
+                                <label className="toggle-wrap">
+                                    <input type="checkbox" checked="checked"/>
+                                    <span className="slider"></span>
+                                </label>
+                            </div>
+                            <div className="ea__content-footer">
+                                <span className={'content-btn ' + eaData.elements[item].promotion}>{eaData.elements[item].promotion}</span>
+                                <div className="content-icons">
+                                    <i className="eaicon ea-docs"></i>
+                                    <i className="eaicon ea-link-2"></i>
+                                    <i className="eaicon ea-settings"></i>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="ea__content-items">
-                        <div className="ea__content-head">
-                            <h5 className="toggle-label">Team Member</h5>
-                            <label className="toggle-wrap">
-                                <input type="checkbox" checked="checked"/>
-                                <span className="slider"></span>
-                            </label>
-                        </div>
-                        <div className="ea__content-footer">
-                            <span className="content-btn update">update</span>
-                            <div className="content-icons">
-                                <i className="eaicon ea-docs"></i>
-                                <i className="eaicon ea-link-2"></i>
-                                <i className="eaicon ea-settings"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="ea__content-items">
-                        <div className="ea__content-head">
-                            <h5 className="toggle-label">Feature List</h5>
-                            <label className="toggle-wrap">
-                                <input type="checkbox" checked="checked"/>
-                                <span className="slider"></span>
-                            </label>
-                        </div>
-                        <div className="ea__content-footer">
-                            <span className="content-btn popular">popular</span>
-                            <div className="content-icons">
-                                <i className="eaicon ea-docs"></i>
-                                <i className="eaicon ea-link-2"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="ea__content-items">
-                        <div className="ea__content-head">
-                            <h5 className="toggle-label">Advanced Menu</h5>
-                            <label className="toggle-wrap">
-                                <input type="checkbox" checked="checked"/>
-                                <span className="slider"></span>
-                            </label>
-                        </div>
-                        <div className="ea__content-footer">
-                            <span className="content-btn new">new</span>
-                            <div className="content-icons">
-                                <i className="eaicon ea-docs"></i>
-                                <i className="eaicon ea-link-2"></i>
-                            </div>
-                        </div>
-                    </div>
+                    })}
                 </div>
             </div>
         </>
