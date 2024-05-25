@@ -413,6 +413,7 @@ trait Admin {
 		        'widgets'              => [
 			        'content-elements'         => [
 				        'title'    => __( 'Content Elements', 'essential-addons-for-elementor-lite' ),
+				        'icon'     => 'ea-content',
 				        'elements' => [
 					        'creative-btn'         => [
 						        'key'         => 'creative-btn',
@@ -573,6 +574,7 @@ trait Admin {
 			        ],
 			        'dynamic-content-elements' => [
 				        'title'    => __( 'Dynamic Content Elements', 'essential-addons-for-elementor-lite' ),
+				        'icon'     => 'ea-notes-2',
 				        'elements' => [
 					        'post-grid'              => [
 						        'key'         => 'post-grid',
@@ -685,6 +687,7 @@ trait Admin {
 			        ],
 			        'creative-elements'        => [
 				        'title'    => __( 'Creative Elements', 'essential-addons-for-elementor-lite' ),
+				        'icon'     => 'ea-light',
 				        'elements' => [
 					        'count-down'          => [
 						        'key'         => 'count-down',
@@ -853,6 +856,7 @@ trait Admin {
 			        ],
 			        'marketing-elements'       => [
 				        'title'    => __( 'Marketing Elements', 'essential-addons-for-elementor-lite' ),
+				        'icon'     => 'ea-marketing',
 				        'elements' => [
 					        'call-to-action' => [
 						        'key'         => 'call-to-action',
@@ -881,6 +885,7 @@ trait Admin {
 			        ],
 			        'form-styler-elements'     => [
 				        'title'    => __( 'Form Styler Elements', 'essential-addons-for-elementor-lite' ),
+				        'icon'     => 'ea-notes',
 				        'elements' => [
 					        'contact-form-7' => [
 						        'key'         => 'contact-form-7',
@@ -975,6 +980,7 @@ trait Admin {
 			        ],
 			        'social-feed-elements'     => [
 				        'title'    => __( 'Social Feed Elements', 'essential-addons-for-elementor-lite' ),
+				        'icon'     => 'ea-share-fill',
 				        'elements' => [
 					        'twitter-feed'          => [
 						        'key'         => 'twitter-feed',
@@ -1013,6 +1019,7 @@ trait Admin {
 			        ],
 			        'learn-dash-elements'      => [
 				        'title'    => __( 'LearnDash Elements', 'essential-addons-for-elementor-lite' ),
+				        'icon'     => 'ea-leardash',
 				        'elements' => [
 					        'learn-dash-course-list' => [
 						        'key'         => 'learn-dash-course-list',
@@ -1026,6 +1033,7 @@ trait Admin {
 			        ],
 			        'documentation-elements'   => [
 				        'title'    => __( 'Documentation Elements', 'essential-addons-for-elementor-lite' ),
+				        'icon'     => 'ea-docs-fill',
 				        'elements' => [
 					        'betterdocs-category-grid' => [
 						        'key'         => 'betterdocs-category-grid',
@@ -1052,6 +1060,7 @@ trait Admin {
 			        ],
 			        'woocommerce-elements'     => [
 				        'title'    => __( 'WooCommerce Elements', 'essential-addons-for-elementor-lite' ),
+				        'icon'     => 'ea-cart',
 				        'elements' => [
 					        'product-grid'          => [
 						        'key'         => 'product-grid',

@@ -1,5 +1,6 @@
 import ElementsSubSection from "./ElementsSubSection.jsx";
 import consumer from "../context/index.js";
+import ElementCategoryBox from "./ElementCategoryBox.jsx";
 
 function Elements() {
     const eaData = localize.eael_dashboard.widgets,
@@ -40,51 +41,9 @@ function Elements() {
                         </div>
                     </div>
                     <div className="ea__content-icon flex">
-                        <a className="ea__icon-wrapper" href="#Content">
-                            <i className="eaicon ea-content">
-                                <span className="ea__tooltip">Content Elements</span>
-                            </i>
-                        </a>
-                        <a className="ea__icon-wrapper" href="#Dynamic">
-                            <i className="eaicon ea-notes-2">
-                                <span className="ea__tooltip">Dynamic Content Elements</span>
-                            </i>
-                        </a>
-                        <a className="ea__icon-wrapper active" href="#Creative">
-                            <i className="eaicon ea-light">
-                                <span className="ea__tooltip">Creative Elements</span>
-                            </i>
-                        </a>
-                        <a className="ea__icon-wrapper" href="#Marketing">
-                            <i className="eaicon ea-marketing">
-                                <span className="ea__tooltip">Marketing Elements</span>
-                            </i>
-                        </a>
-                        <a className="ea__icon-wrapper" href="#Form">
-                            <i className="eaicon ea-notes">
-                                <span className="ea__tooltip">Form Styler Elements</span>
-                            </i>
-                        </a>
-                        <a className="ea__icon-wrapper" href="#Social">
-                            <i className="eaicon ea-share-fill">
-                                <span className="ea__tooltip">Social Feed Elements</span>
-                            </i>
-                        </a>
-                        <a className="ea__icon-wrapper" href="#LearnDash">
-                            <i className="eaicon ea-leardash">
-                                <span className="ea__tooltip">LearnDash Elements</span>
-                            </i>
-                        </a>
-                        <a className="ea__icon-wrapper" href="#Documentation">
-                            <i className="eaicon ea-docs-fill">
-                                <span className="ea__tooltip">Documentation Elements</span>
-                            </i>
-                        </a>
-                        <a className="ea__icon-wrapper" href="#WooCommerce">
-                            <i className="eaicon ea-cart">
-                                <span className="ea__tooltip">WooCommerce Elements</span>
-                            </i>
-                        </a>
+                        {Object.keys(eaData).map((item, index) => {
+                            return <ElementCategoryBox index={item} key={index}/>
+                        })}
                     </div>
                 </div>
                 <div className="ea__content-elements-wrapper">
