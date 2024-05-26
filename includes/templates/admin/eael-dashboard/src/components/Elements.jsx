@@ -13,16 +13,27 @@ function Elements() {
             eaDispatch({type: 'ON_CHANGE_ALL', payload: {key: 'widgetAll', value: e.target.checked}});
         },
         searchParam = useRef(),
+        categoryRef = useRef(),
         onSearch = () => {
             let results = {},
-                searchTerm = searchParam.current.value;
-            Object.keys(eaData).map((item) => {
-                for (const key in eaData[item].elements) {
-                    if (eaData[item].elements[key].title.toLowerCase().includes(searchTerm.toLowerCase())) {
-                        results[key] = eaData[item].elements[key];
+                searchTerm = searchParam.current.value,
+                categoryTerm = categoryRef.current.value;
+
+            if (categoryTerm !== '') {
+                for (const key in eaData[categoryTerm].elements) {
+                    if (eaData[categoryTerm].elements[key].title.toLowerCase().includes(searchTerm.toLowerCase())) {
+                        results[key] = eaData[categoryTerm].elements[key];
                     }
                 }
-            });
+            } else {
+                Object.keys(eaData).map((item) => {
+                    for (const key in eaData[item].elements) {
+                        if (eaData[item].elements[key].title.toLowerCase().includes(searchTerm.toLowerCase())) {
+                            results[key] = eaData[item].elements[key];
+                        }
+                    }
+                });
+            }
 
             eaDispatch({type: 'ON_SEARCH', payload: {value: results}});
         };
@@ -38,11 +49,12 @@ function Elements() {
                                 <input ref={searchParam} onChange={onSearch} className="input-name" type="search"
                                        placeholder="Search by name"/>
                                 <div className="select-option-wrapper">
-                                    <select name="select" id="select-option" className="form-select">
+                                    <select ref={categoryRef} onChange={onSearch} name="select" id="select-option"
+                                            className="form-select">
                                         <option value="">All Widgets</option>
-                                        <option value="1">Employees</option>
-                                        <option value="2">Templates</option>
-                                        <option value="3">Employees</option>
+                                        {Object.keys(eaData).map((item, index) => {
+                                            return <option value={item} key={index}>{eaData[item].title}</option>
+                                        })}
                                     </select>
                                 </div>
                             </div>
