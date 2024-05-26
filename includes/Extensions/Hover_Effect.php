@@ -1351,8 +1351,8 @@ class Hover_Effect {
 			[
 				'label'        => esc_html__( 'Enable Tilt', 'essential-addons-for-elementor-lite' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Enable', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => esc_html__( 'Disable', 'essential-addons-for-elementor-lite' ),
+				'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 			]
 		);
