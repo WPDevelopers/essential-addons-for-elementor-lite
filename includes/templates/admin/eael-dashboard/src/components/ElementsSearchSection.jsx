@@ -1,7 +1,7 @@
 import ElementItem from "./ElementItem.jsx";
 import consumer from "../context";
 
-function ElementsSearchSection() {
+function ElementsSearchSection(props) {
     const {eaState, eaDispatch} = consumer(),
         checked = eaState.searchAll || false,
         i18n = localize.eael_dashboard.i18n,
@@ -13,7 +13,7 @@ function ElementsSearchSection() {
         <>
             <div id="ID-search-section" className="ea__contents">
                 <div className="flex items-center gap-2 justify-between mb-4">
-                    <h3 className="ea__content-title">Search Result</h3>
+                    <h3 className="ea__content-title">{i18n.search_result_for} {props.searchTerm}</h3>
                     <div className="ea__enable-elements">
                         <div className="toggle-wrapper flex items-center gap-2">
                             <h5>{i18n.enable_all}</h5>

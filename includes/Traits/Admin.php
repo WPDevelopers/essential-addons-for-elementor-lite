@@ -100,6 +100,7 @@ trait Admin {
 		        'i18n'                 => [
 			        'enable_all'    => __( 'Enable all', 'essential-addons-for-elementor-lite' ),
 			        'save_settings' => __( 'Save Settings', 'essential-addons-for-elementor-lite' ),
+					'search_result_for' => __( 'Search Results for :', 'essential-addons-for-elementor-lite' ),
 		        ],
 		        'whats_new'            => [
 			        'heading' => __( 'What is New on Version?', 'essential-addons-for-elementor-lite' ),

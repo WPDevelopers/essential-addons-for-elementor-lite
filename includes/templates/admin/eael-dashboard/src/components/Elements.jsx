@@ -67,7 +67,7 @@ function Elements() {
                     {!!searchParam?.current?.value || Object.keys(eaData).map((item, index) => {
                         return <ElementsSubSection index={item} key={index}/>
                     })}
-                    {!!searchParam?.current?.value && <ElementsSearchSection/>}
+                    {!!searchParam?.current?.value && <ElementsSearchSection searchTerm={searchParam.current.value}/>}
                     <div className="flex flex-end mb-6">
                         <button className="primary-btn install-btn">{i18n.save_settings}</button>
                     </div>
