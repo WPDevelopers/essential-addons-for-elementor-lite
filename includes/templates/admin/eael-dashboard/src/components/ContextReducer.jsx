@@ -56,12 +56,18 @@ function ContextReducer() {
                             state.elements[subitem] = payload.value;
                         });
                     });
+                } else if (payload.key === 'searchAll') {
+                    Object.keys(state.search).map((item) => {
+                        state.elements[item] = payload.value;
+                    });
                 } else {
                     state.widgets[payload.key].map((item) => {
                         state.elements[item] = payload.value;
                     });
                 }
                 return {...state, [payload.key]: payload.value};
+            case 'ON_SEARCH':
+                return {...state, search: payload.value};
         }
     }
 
