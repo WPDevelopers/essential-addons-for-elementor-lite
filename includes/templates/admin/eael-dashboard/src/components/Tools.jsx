@@ -1,7 +1,8 @@
 import React from 'react';
 
 function Tools() {
-    const eaData = localize.eael_dashboard.tools;
+    const eaData = localize.eael_dashboard.tools,
+        i18n = localize.eael_dashboard.i18n;
 
     return (
         <>
@@ -45,7 +46,7 @@ function Tools() {
                         </div>
                     </div>
                     <div className="flex flex-end mb-5">
-                        <button className="primary-btn install-btn flex flex-end mb-6">Save Settings</button>
+                        <button className="primary-btn install-btn flex flex-end mb-6">{i18n.save_settings}</button>
                     </div>
                 </div>
             </div>

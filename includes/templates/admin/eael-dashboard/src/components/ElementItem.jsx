@@ -18,7 +18,7 @@ function ElementItem(props) {
                     <label className="toggle-wrap">
                         <input type="checkbox" checked={checked} disabled={isDisabled}
                                onChange={changeHandler}/>
-                        <span className={eaData.is_pro ? 'slider pro' : 'slider'}></span>
+                        <span className={eaData.is_pro && !isProActivated ? 'slider pro' : 'slider'}></span>
                     </label>
                 </div>
                 <div className="ea__content-footer">
