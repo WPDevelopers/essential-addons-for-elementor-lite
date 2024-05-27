@@ -1994,7 +1994,7 @@ msgstr ""
 msgid "Form Alignment"
 msgstr ""
 
-#: ../includes/Elements/Caldera_Forms.php:416, ../includes/Elements/Contact_Form_7.php:330, ../includes/Elements/Contact_Form_7.php:840, ../includes/Elements/Countdown.php:73, ../includes/Elements/Creative_Button.php:233, ../includes/Elements/Cta_Box.php:173, ../includes/Elements/Cta_Box.php:823, ../includes/Elements/Cta_Box.php:1251, ../includes/Elements/Dual_Color_Header.php:82, ../includes/Elements/Event_Calendar.php:872, ../includes/Elements/Event_Calendar.php:884, ../includes/Elements/Flip_Box.php:899, ../includes/Elements/FluentForm.php:463, ../includes/Elements/Formstack.php:333, ../includes/Elements/GravityForms.php:346, ../includes/Elements/Login_Register.php:568, ../includes/Elements/Login_Register.php:799, ../includes/Elements/Login_Register.php:986, ../includes/Elements/Login_Register.php:1117, ../includes/Elements/Login_Register.php:2164, ../includes/Elements/Login_Register.php:2511, ../includes/Elements/Login_Register.php:2693, ../includes/Elements/Login_Register.php:2954, ../includes/Elements/Login_Register.php:3098, ../includes/Elements/Login_Register.php:3248, ../includes/Elements/Login_Register.php:3391, ../includes/Elements/Login_Register.php:3482, ../includes/Elements/Login_Register.php:3580, ../includes/Elements/Login_Register.php:3782, ../includes/Elements/Login_Register.php:3827, ../includes/Elements/Login_Register.php:3859, ../includes/Elements/Login_Register.php:4290, ../includes/Elements/Login_Register.php:4438, ../includes/Elements/Login_Register.php:4567, ../includes/Elements/Login_Register.php:4827, ../includes/Elements/Login_Register.php:5155, ../includes/Elements/NinjaForms.php:281, ../includes/Elements/Post_Grid.php:257, ../includes/Elements/Pricing_Table.php:87, ../includes/Elements/Pricing_Table.php:511, ../includes/Elements/Product_Grid.php:251, ../includes/Elements/Simple_Menu.php:393, ../includes/Elements/Simple_Menu.php:519, ../includes/Elements/Simple_Menu.php:881, ../includes/Elements/Simple_Menu.php:1288, ../includes/Elements/Sticky_Video.php:395, ../includes/Elements/Team_Member.php:408, ../includes/Elements/Testimonial.php:262, ../includes/Elements/Testimonial.php:319, ../includes/Elements/TypeForm.php:195, ../includes/Elements/WeForms.php:161, ../includes/Elements/WeForms.php:631, ../includes/Elements/Woo_Checkout.php:133, ../includes/Elements/WpForms.php:270, ../includes/Traits/Controls.php:609, ../includes/Traits/Controls.php:2240, ../includes/Traits/Login_Registration.php:1247, ../includes/Traits/Woo_Product_Comparable.php:419, ../includes/Traits/Woo_Product_Comparable.php:533, ../includes/Traits/Woo_Product_Comparable.php:624, ../includes/Traits/Woo_Product_Comparable.php:693, ../includes/Template/Betterdocs-Category-Box/Layout_Default.php:4, ../includes/Template/Betterdocs-Category-Grid/Layout_Default.php:4, ../includes/Template/Content-Ticker/default.php:3, ../includes/Template/Eicon-Woocommerce/default.php:3, ../includes/Template/Post-Grid/default.php:5, ../includes/Template/Post-Timeline/default.php:4, ../includes/Template/Woo-Product-Gallery/default.php:3
+#: ../includes/Elements/Caldera_Forms.php:416, ../includes/Elements/Contact_Form_7.php:330, ../includes/Elements/Contact_Form_7.php:840, ../includes/Elements/Countdown.php:73, ../includes/Elements/Creative_Button.php:233, ../includes/Elements/Cta_Box.php:173, ../includes/Elements/Cta_Box.php:823, ../includes/Elements/Cta_Box.php:1251, ../includes/Elements/Dual_Color_Header.php:82, ../includes/Elements/Event_Calendar.php:872, ../includes/Elements/Event_Calendar.php:884, ../includes/Elements/Flip_Box.php:899, ../includes/Elements/FluentForm.php:463, ../includes/Elements/Formstack.php:333, ../includes/Elements/GravityForms.php:346, ../includes/Elements/Login_Register.php:568, ../includes/Elements/Login_Register.php:799, ../includes/Elements/Login_Register.php:986, ../includes/Elements/Login_Register.php:1117, ../includes/Elements/Login_Register.php:2164, ../includes/Elements/Login_Register.php:2511, ../includes/Elements/Login_Register.php:2693, ../includes/Elements/Login_Register.php:2954, ../includes/Elements/Login_Register.php:3098, ../includes/Elements/Login_Register.php:3248, ../includes/Elements/Login_Register.php:3391, ../includes/Elements/Login_Register.php:3482, ../includes/Elements/Login_Register.php:3580, ../includes/Elements/Login_Register.php:3782, ../includes/Elements/Login_Register.php:3827, ../includes/Elements/Login_Register.php:3859, ../includes/Elements/Login_Register.php:4290, ../includes/Elements/Login_Register.php:4438, ../includes/Elements/Login_Register.php:4567, ../includes/Elements/Login_Register.php:4827, ../includes/Elements/Login_Register.php:5155, ../includes/Elements/NinjaForms.php:281, ../includes/Elements/Post_Grid.php:257, ../includes/Elements/Pricing_Table.php:87, ../includes/Elements/Pricing_Table.php:511, ../includes/Elements/Product_Grid.php:251, ../includes/Elements/Simple_Menu.php:393, ../includes/Elements/Simple_Menu.php:519, ../includes/Elements/Simple_Menu.php:881, ../includes/Elements/Simple_Menu.php:1288, ../includes/Elements/Sticky_Video.php:395, ../includes/Elements/Team_Member.php:408, ../includes/Elements/Testimonial.php:262, ../includes/Elements/Testimonial.php:319, ../includes/Elements/TypeForm.php:195, ../includes/Elements/WeForms.php:161, ../includes/Elements/WeForms.php:631, ../includes/Elements/Woo_Checkout.php:133, ../includes/Elements/WpForms.php:270, ../includes/Traits/Controls.php:609, ../includes/Traits/Controls.php:2240, ../includes/Traits/Login_Registration.php:1254, ../includes/Traits/Woo_Product_Comparable.php:419, ../includes/Traits/Woo_Product_Comparable.php:533, ../includes/Traits/Woo_Product_Comparable.php:624, ../includes/Traits/Woo_Product_Comparable.php:693, ../includes/Template/Betterdocs-Category-Box/Layout_Default.php:4, ../includes/Template/Betterdocs-Category-Grid/Layout_Default.php:4, ../includes/Template/Content-Ticker/default.php:3, ../includes/Template/Eicon-Woocommerce/default.php:3, ../includes/Template/Post-Grid/default.php:5, ../includes/Template/Post-Timeline/default.php:4, ../includes/Template/Woo-Product-Gallery/default.php:3
 msgid "Default"
 msgstr ""
 
@@ -5538,7 +5538,7 @@ msgstr ""
 msgid "Eg. Email is missing or Invalid"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:1680, ../includes/Traits/Login_Registration.php:427
+#: ../includes/Elements/Login_Register.php:1680, ../includes/Traits/Login_Registration.php:428
 msgid "Email is missing or Invalid"
 msgstr ""
 
@@ -5550,7 +5550,7 @@ msgstr ""
 msgid "Eg. Your email is already in use.."
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:1690, ../includes/Traits/Login_Registration.php:424
+#: ../includes/Elements/Login_Register.php:1690, ../includes/Traits/Login_Registration.php:425
 msgid "The provided email is already registered with other account. Please login or reset password or use another email."
 msgstr ""
 
@@ -5610,7 +5610,7 @@ msgstr ""
 msgid "Eg. You are already logged in"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:1742, ../includes/Traits/Login_Registration.php:120, ../includes/Traits/Login_Registration.php:793, ../includes/Traits/Login_Registration.php:967
+#: ../includes/Elements/Login_Register.php:1742, ../includes/Traits/Login_Registration.php:120, ../includes/Traits/Login_Registration.php:800, ../includes/Traits/Login_Registration.php:974
 msgid "You are already logged in"
 msgstr ""
 
@@ -5646,7 +5646,7 @@ msgstr ""
 msgid "Eg. You must accept the Terms & Conditions"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:1775, ../includes/Traits/Login_Registration.php:404
+#: ../includes/Elements/Login_Register.php:1775, ../includes/Traits/Login_Registration.php:405
 msgid "You did not accept the Terms and Conditions. Please accept it and try again."
 msgstr ""
 
@@ -5666,7 +5666,7 @@ msgstr ""
 msgid "Phone number is missing"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:1804, ../includes/Elements/Login_Register.php:1807, ../includes/Elements/Login_Register.php:1808, ../includes/Traits/Login_Registration.php:418
+#: ../includes/Elements/Login_Register.php:1804, ../includes/Elements/Login_Register.php:1807, ../includes/Elements/Login_Register.php:1808, ../includes/Traits/Login_Registration.php:419
 msgid "Invalid phone number provided"
 msgstr ""
 
@@ -5714,7 +5714,7 @@ msgstr ""
 msgid "Successful Password Reset"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:1845, ../includes/Traits/Login_Registration.php:1027
+#: ../includes/Elements/Login_Register.php:1845, ../includes/Traits/Login_Registration.php:1034
 msgid "Your password has been reset."
 msgstr ""
 
@@ -5942,7 +5942,7 @@ msgstr ""
 msgid "Enter Reset Link Text"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:2449, ../includes/Traits/Login_Registration.php:1452
+#: ../includes/Elements/Login_Register.php:2449, ../includes/Traits/Login_Registration.php:1459
 msgid "Click here to reset your password"
 msgstr ""
 
@@ -9610,19 +9610,19 @@ msgstr ""
 msgid "I don’t want to save money"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:95, ../includes/Traits/Ajax_Handler.php:610, ../includes/Traits/Login_Registration.php:94, ../includes/Traits/Login_Registration.php:246, ../includes/Traits/Login_Registration.php:766, ../includes/Traits/Login_Registration.php:941
+#: ../includes/Traits/Ajax_Handler.php:95, ../includes/Traits/Ajax_Handler.php:610, ../includes/Traits/Login_Registration.php:94, ../includes/Traits/Login_Registration.php:246, ../includes/Traits/Login_Registration.php:773, ../includes/Traits/Login_Registration.php:948
 msgid "Insecure form submitted without security token"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:104, ../includes/Traits/Ajax_Handler.php:619, ../includes/Traits/Login_Registration.php:106, ../includes/Traits/Login_Registration.php:256, ../includes/Traits/Login_Registration.php:778, ../includes/Traits/Login_Registration.php:953, ../includes/Traits/Woo_Product_Comparable.php:2171
+#: ../includes/Traits/Ajax_Handler.php:104, ../includes/Traits/Ajax_Handler.php:619, ../includes/Traits/Login_Registration.php:106, ../includes/Traits/Login_Registration.php:256, ../includes/Traits/Login_Registration.php:785, ../includes/Traits/Login_Registration.php:960, ../includes/Traits/Woo_Product_Comparable.php:2171
 msgid "Security token did not match"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:115, ../includes/Traits/Ajax_Handler.php:306, ../includes/Traits/Ajax_Handler.php:387, ../includes/Traits/Ajax_Handler.php:630, ../includes/Traits/Login_Registration.php:70, ../includes/Traits/Login_Registration.php:271, ../includes/Traits/Login_Registration.php:742, ../includes/Traits/Login_Registration.php:916, ../includes/Traits/Woo_Product_Comparable.php:2129
+#: ../includes/Traits/Ajax_Handler.php:115, ../includes/Traits/Ajax_Handler.php:306, ../includes/Traits/Ajax_Handler.php:387, ../includes/Traits/Ajax_Handler.php:630, ../includes/Traits/Login_Registration.php:70, ../includes/Traits/Login_Registration.php:271, ../includes/Traits/Login_Registration.php:749, ../includes/Traits/Login_Registration.php:923, ../includes/Traits/Woo_Product_Comparable.php:2129
 msgid "Page ID is missing"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:126, ../includes/Traits/Ajax_Handler.php:313, ../includes/Traits/Ajax_Handler.php:394, ../includes/Traits/Ajax_Handler.php:641, ../includes/Traits/Facebook_Feed.php:41, ../includes/Traits/Login_Registration.php:77, ../includes/Traits/Login_Registration.php:276, ../includes/Traits/Login_Registration.php:749, ../includes/Traits/Login_Registration.php:923, ../includes/Traits/Woo_Product_Comparable.php:2134
+#: ../includes/Traits/Ajax_Handler.php:126, ../includes/Traits/Ajax_Handler.php:313, ../includes/Traits/Ajax_Handler.php:394, ../includes/Traits/Ajax_Handler.php:641, ../includes/Traits/Facebook_Feed.php:41, ../includes/Traits/Login_Registration.php:77, ../includes/Traits/Login_Registration.php:276, ../includes/Traits/Login_Registration.php:756, ../includes/Traits/Login_Registration.php:930, ../includes/Traits/Woo_Product_Comparable.php:2134
 msgid "Widget ID is missing"
 msgstr ""
 
@@ -10126,7 +10126,7 @@ msgstr ""
 msgid "Want to get started with Essential Blocks now? Check out %scomplete guides for each blocks%s to learn more about this ultimate block library for Gutenberg."
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:143, ../includes/Traits/Login_Registration.php:413
+#: ../includes/Traits/Login_Registration.php:143, ../includes/Traits/Login_Registration.php:414
 msgid "You did not pass recaptcha challenge."
 msgstr ""
 
@@ -10146,71 +10146,71 @@ msgstr ""
 msgid "You have to publish the page first."
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:295
+#: ../includes/Traits/Login_Registration.php:296
 msgid "You are already logged in."
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:316
+#: ../includes/Traits/Login_Registration.php:317
 msgid "Registration is closed on this site"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:346
+#: ../includes/Traits/Login_Registration.php:347
 msgid "Phone number is required"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:368
+#: ../includes/Traits/Login_Registration.php:369
 msgid "Sorry, you are not allowed to upload this file type."
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:436
+#: ../includes/Traits/Login_Registration.php:437
 msgid "The username already registered."
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:434
+#: ../includes/Traits/Login_Registration.php:435
 msgid "Invalid username provided."
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:458
+#: ../includes/Traits/Login_Registration.php:459
 msgid "The confirmed password did not match."
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:540
+#: ../includes/Traits/Login_Registration.php:545
 msgid "Invalid Role!"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:631
+#: ../includes/Traits/Login_Registration.php:637
 msgid "Sorry, something went wrong. User could not be registered."
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:683
+#: ../includes/Traits/Login_Registration.php:690
 msgid "Your registration completed successfully."
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:811, ../includes/Traits/Login_Registration.php:874, ../includes/Traits/Login_Registration.php:872
+#: ../includes/Traits/Login_Registration.php:818, ../includes/Traits/Login_Registration.php:881, ../includes/Traits/Login_Registration.php:879
 msgid "There is no account with that username or email address."
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:992, ../includes/Traits/Login_Registration.php:988
+#: ../includes/Traits/Login_Registration.php:999, ../includes/Traits/Login_Registration.php:995
 msgid "The password cannot be a space or all spaces."
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:997
+#: ../includes/Traits/Login_Registration.php:1004
 msgid "The password cannot be empty."
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:1002
+#: ../includes/Traits/Login_Registration.php:1009
 msgid "The passwords do not match."
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:1012
+#: ../includes/Traits/Login_Registration.php:1019
 msgid "Invalid user name found!"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:1494
+#: ../includes/Traits/Login_Registration.php:1501
 msgid "Logout"
 msgstr ""
 
-#: ../includes/Traits/Login_Registration.php:1604
+#: ../includes/Traits/Login_Registration.php:1611
 msgid "Above, input the %s of the attachment."
 msgstr ""
 
