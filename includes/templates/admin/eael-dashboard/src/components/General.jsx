@@ -6,7 +6,10 @@ import SidebarBox from "./SidebarBox.jsx";
 import LicenseSection from "./LicenseSection.jsx";
 
 function General() {
-    const isProActivated = localize.eael_dashboard.is_eapro_activate;
+    const isProActivated = localize.eael_dashboard.is_eapro_activate,
+        licenseData = typeof wpdeveloperLicenseData === 'undefined' ? {} : wpdeveloperLicenseData;
+
+    console.log(licenseData);
 
     return (
         <>
