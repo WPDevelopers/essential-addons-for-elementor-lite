@@ -6,7 +6,7 @@ function Header() {
             <section className="ea__section-header">
                 <div className="ea__section-wrapper ea__header-content">
                     <img src={localize.eael_dashboard.reactPath + '/images/logo.png'} alt="logo"/>
-                    <span className="dark-icon pointer"><i className="eaicon ea-sun"></i></span>
+                    <span className="dark-icon pointer"><i className="ea-dash-icon ea-sun"></i></span>
                 </div>
             </section>
         </>

@@ -12,7 +12,7 @@ function ExploreProFeatures() {
                     <a href={eaData.button.url}>
                         <button className="primary-btn changelog-btn">
                             {eaData.button.label}
-                            <i className={ "eaicon " + eaData.button.icon}></i>
+                            <i className={ "ea-dash-icon " + eaData.button.icon}></i>
                         </button>
                     </a>
                 </div>

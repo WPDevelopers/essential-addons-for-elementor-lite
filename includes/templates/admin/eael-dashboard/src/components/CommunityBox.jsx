@@ -7,14 +7,14 @@ function CommunityBox(props) {
         <>
             <div className="ea__connect-others">
                 <div className={'ea__others-icon ' + eaData.icon_color}>
-                    <i className={eaData.icon + ' eaicon'}></i>
+                    <i className={eaData.icon + ' ea-dash-icon'}></i>
                 </div>
                 <h5>{eaData.heading}</h5>
                 <p className="mb-6">{eaData.content}</p>
                 <a href={eaData.button.url}>
                     <button>
                         <span className="underline">{eaData.button.label}</span>
-                        <i className="eaicon ea-right-arrow"></i>
+                        <i className="ea-dash-icon ea-right-arrow"></i>
                     </button>
                 </a>
             </div>

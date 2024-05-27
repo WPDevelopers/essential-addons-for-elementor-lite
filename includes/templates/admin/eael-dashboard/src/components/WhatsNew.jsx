@@ -28,7 +28,7 @@ function WhatsNew() {
                 <a href={eaData.button.url}>
                     <button className="primary-btn changelog-btn">
                         {eaData.button.label}
-                        <i className="eaicon ea-link"></i>
+                        <i className="ea-dash-icon ea-link"></i>
                     </button>
                 </a>
             </div>

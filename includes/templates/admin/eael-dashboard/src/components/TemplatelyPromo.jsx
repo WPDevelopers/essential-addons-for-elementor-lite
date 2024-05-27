@@ -11,14 +11,14 @@ function TemplatelyPromo() {
                     <div className="mb-6 flex flex-col gap-4">
                         {eaData.list.map((item, index) => {
                             return <div className="ea__content-details flex gap-2 items-center" key={index}>
-                                <span className="check-icon eaicon ea-check"></span>
+                                <span className="check-icon ea-dash-icon ea-check"></span>
                                 {item}
                             </div>;
                         })}
                     </div>
                     <a href={eaData.button.url}>
                         <button className="primary-btn install-btn">
-                            <i className="eaicon ea-install"></i>
+                            <i className="ea-dash-icon ea-install"></i>
                             {eaData.button.label}
                         </button>
                     </a>
