@@ -86,7 +86,7 @@ body {
 
 a {
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
 }
 
 img {
@@ -199,6 +199,10 @@ img {
 
 .pointer {
   cursor: pointer;
+}
+
+.d-none {
+  display: none;
 }
 
 .min-h-538 {
@@ -363,7 +367,7 @@ img {
   color: var(--text-color-100);
   font-size: 14px;
   line-height: 1.5em;
-  width: 140px;
+  min-width: 140px;
   height: 44px;
   border: none;
   padding: 0 16px;
@@ -439,7 +443,7 @@ img {
 
 #ea__dashboard--wrapper .slider.pro:before {
   content: '\e901';
-  font-family: "eaicon";
+  font-family: "ea-dash-icon";
   font-size: 10px;
   color: var(--text-color-100);
   display: flex;
@@ -455,9 +459,19 @@ img {
   transform: translateX(16px);
 }
 
-/*----- Slider -------- */
+/*----- checkbox -------- */
 
+.checkbox-item.checkbox-selected {
+  position: relative;
+  cursor: pointer;
+  display: inline-flex;
+  margin-bottom: 16px;
+}
 
+/* Hide the browser's default checkbox */
+.checkbox-item.checkbox-selected input {
+  display: none;
+}
 
 /*-------- general-nav ------------*/
 
@@ -571,9 +585,9 @@ span.ea__nav-icon svg {
   background: var(--base-background);
   width: auto;
   position: sticky;
-  top: 0;
   left: 0;
   right: 0;
+  top: 0;
   z-index: 9999;
 }
 
@@ -933,7 +947,6 @@ span.ea__tooltip {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  margin-bottom: 8px;
 }
 
 .ea__content-footer {
@@ -941,6 +954,7 @@ span.ea__tooltip {
   justify-content: space-between;
   gap: 8px;
   align-items: center;
+  margin-top: 10px;
 }
 
 .content-btn {
@@ -967,13 +981,14 @@ span.ea__tooltip {
 
 .content-icons {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   align-items: center;
 }
 
 .content-icons i {
   font-size: 10px;
   color: var(--text-icon-400);
+  cursor: pointer;
 }
 
 .ea__extension-main-wrap .ea__section-wrapper.ea__main-wrapper {
@@ -1329,6 +1344,52 @@ section.ea__modal-wrapper {
   cursor: pointer;
 }
 
+.ea__modal-content-wrapper.ea__onboard-modal {
+  padding: 40px;
+  text-align: left;
+}
+
+.ea__modal-content-wrapper.ea__onboard-modal .congrats--wrapper {
+  text-align: center;
+}
+
+.ea__onboard-modal h6 {
+  font-size: 22px;
+  line-height: 1.1em;
+  font-weight: 450;
+  color: var(--text-color-100);
+}
+
+.ea__onboard-modal h5 {
+  font-size: 32px;
+  line-height: 1.1em;
+  font-weight: 450;
+  color: var(--text-color-100);
+  margin-bottom: 32px;
+}
+
+.ea__onboard-modal h4 {
+  font-size: 22px;
+  line-height: 1.2em;
+  font-weight: 450;
+  color: var(--text-color-25);
+}
+
+.ea__onboard-modal h4.congrats--title {
+  font-size: 36px;
+  line-height: 1.3em;
+  font-weight: 450;
+  color: #039855;
+  margin-bottom: 16px;
+}
+
+.ea__onboard-modal p {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-color-100);
+  line-height: 1.5em;
+}
+
 /*-------- Onboard ------------*/
 
 #ea__onboard--wrapper {
@@ -1448,10 +1509,6 @@ section.ea__onboard-main-wrapper {
   cursor: pointer;
 }
 
-.d-none {
-  display: none;
-}
-
 .peer:checked~.peer-checked {
   --tw-border-opacity: 1;
   border-color: rgb(20 122 255 / var(--tw-border-opacity));
@@ -1464,10 +1521,60 @@ section.ea__onboard-main-wrapper {
   padding-bottom: 34px;
 }
 
-.ea__onboard-content-select label {
+.ea__onboard-content-select .checkbox--label .select--wrapper {
+  text-align: left;
   padding: 24px;
   border: 1px solid #F2F4F7;
   border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  cursor: pointer;
+}
+
+.checkbox--label>input:checked+.select--wrapper {
+  border-color: #750EF4;
+}
+
+/* Create a custom checkbox */
+.select--wrapper .check-mark {
+  height: 24px;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  background-color: transparent;
+  border: 1.5px solid #D0D5DD;
+  border-radius: 50%;
+  transition: ease-in-out .35s;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+/* Create the check-mark/indicator (hidden when not checked) */
+.select--wrapper .check-mark:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: 4px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transition: ease-in-out .35s;
+  -webkit-transform: translateY(-50%) translateX(-50%) rotate(46deg);
+  -ms-transform: translateY(-50%) translateX(-50%) rotate(46deg);
+  transform: translateY(-50%) translateX(-50%) rotate(46deg);
+  display: none;
+}
+
+/* When the checkbox is checked, add a blue background*/
+.checkbox--label>input:checked+.select--wrapper .check-mark {
+  background-color: #750EF4;
+  border: 1.5px solid #750EF4;
+}
+
+/* When the checkbox is checked, add a blue background*/
+.checkbox--label>input:checked+.select--wrapper .check-mark:after {
+  display: block;
 }
 
 .ea__onboard-content-wrapper .ea__onboard-content-select h4 {
@@ -1498,10 +1605,6 @@ section.ea__onboard-main-wrapper {
   border-radius: 0;
 }
 
-.ea__onboard-content-wrapper.ea__onboard-elements .ea__content-head {
-  margin-bottom: 0;
-}
-
 #ea__dashboard--wrapper .ea__onboard-content-wrapper.ea__onboard-elements h3.ea__content-title {
   margin-top: 0px;
   margin-bottom: 0px;
@@ -1511,6 +1614,16 @@ section.ea__onboard-main-wrapper {
   font-size: 22px;
   font-weight: 450;
   margin-bottom: 16px;
+}
+
+.ea__onboard-content-wrapper.ea__onboard-pro {
+  padding: 40px;
+}
+
+.ea__onboard-content-wrapper.ea__onboard-pro .ea__connect-others {
+  padding: 0;
+  background: var(--base-background);
+  border-radius: 0;
 }
 
 .ea__onboard-content-wrapper.ea__onboard-templately {
@@ -1657,7 +1770,7 @@ span.title-color-2 {
 
 .ea__license-step-items:not(:last-child):before {
   content: '\e90a';
-  font-family: 'eaicon-v-2';
+  font-family: 'ea-dash-icon';
   position: absolute;
   bottom: -21px;
   left: 20px;
@@ -1739,7 +1852,7 @@ input.input-api {
 }
 
 .ea__license-verify span {
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .ea__license-verify input.input-api {
@@ -2440,10 +2553,23 @@ input.input-api {
   .ea__onboard-content-select {
     gap: 12px;
     padding-bottom: 24px;
+    flex-wrap: wrap;
   }
 
-  .ea__onboard-content-select label {
-    padding: 16px;
+  .ea__onboard-content-select .checkbox--label .select--wrapper {
+    padding: 18px;
+  }
+
+  .select--wrapper .check-mark {
+    height: 18px;
+    margin-bottom: 12px;
+  }
+
+  .select--wrapper .check-mark:after {
+    width: 3px;
+    height: 7px;
+    border-width: 0 1px 1px 0;
+
   }
 
   .ea__onboard-content-wrapper.ea__onboard-elements {

@@ -4,7 +4,7 @@ function LicenseSection() {
             <div className="ea__general-content-item relative">
                 <div className="ea__unlock-license flex gap-4">
                     <div className="ea__others-icon eaicon-1">
-                        <i className="eaicon ea-lock"></i>
+                        <i className="ea-dash-icon ea-lock"></i>
                     </div>
                     <div className="max-w-454">
                         <h4>Unlock With Your License Key</h4>
@@ -14,13 +14,13 @@ function LicenseSection() {
                 </div>
                 <div className="ea__active-license flex gap-4">
                     <div className="ea__others-icon eaicon-active">
-                        <i className="eaicon ea-lock"></i>
+                        <i className="ea-dash-icon ea-lock"></i>
                     </div>
                     <div className="max-w-454">
                         <h4>Enjoy the pro features & Supports!</h4>
                         <p>You have already activated Essential Blocks Pro. You will able to update the plugin
                             right from your WP dashboard.</p>
-                        <span className="activated-btn"><i className="eaicon-v-2 ea-check"></i>Activated</span>
+                        <span className="activated-btn"><i className="ea-dash-icon  ea-check"></i>Activated</span>
                     </div>
                 </div>
                 <div className="ea__license-wrapper">
@@ -28,7 +28,7 @@ function LicenseSection() {
                         <h5>
                             How to get license key?
                         </h5>
-                        <i className="eaicon ea-dropdown"></i>
+                        <i className="ea-dash-icon ea-dropdown"></i>
                     </div>
                     <div className="ea__license-options-wrapper">
                         <div className="ea__license-step">
@@ -54,7 +54,7 @@ function LicenseSection() {
                         </div>
                         <div className="ea__license-key">
                             <div className="license-key-items flex items-center">
-                                <i className="eaicon-v-2 ea-key"></i>
+                                <i className="ea-dash-icon  ea-key"></i>
                                 <input className="input-api" type="text"
                                        placeholder="Place Your License Key and Active"/>
                                 <button className="primary-btn install-btn">Active License</button>
@@ -67,8 +67,7 @@ function LicenseSection() {
                                 and insert it bellow:
                             </p>
                             <div className="license-key-items flex items-center">
-                                <input className="input-api" type="text"
-                                       placeholder="Enter Your Verification Code"/>
+                                <input className="input-api" type="text" placeholder="Enter Your Verification Code"/>
                                 <button className="primary-btn verify-btn">Verify</button>
                             </div>
                             <p className="resend-content">
@@ -76,7 +75,7 @@ function LicenseSection() {
                                 Please <br/>
                                 <span className="resend-text">resend button</span>
                                 your email. copy the code and insert it meanutes.
-                                <i className="eaicon-v-2 ea-info">
+                                <i className="ea-dash-icon  ea-info">
                                             <span className="tooltip-api">
                                                 Check out this <span className="color-ex">guide</span> to verify your
                                                 license key. If you need any
