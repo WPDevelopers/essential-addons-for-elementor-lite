@@ -25,8 +25,9 @@ function ElementItem(props) {
                     {eaData.promotion ?
                         <span className={"content-btn " + eaData.promotion}>{eaData.promotion}</span> : ''}
                     <div className="content-icons">
-                        <i className="ea-dash-icon ea-docs"></i>
-                        <i className="ea-dash-icon ea-link-2"></i>
+                        <a href={eaData.doc_link} target="_blank"><i className="ea-dash-icon ea-docs"></i></a>
+                        <a href={eaData.demo_link} target="_blank"><i className="ea-dash-icon ea-link-2"></i></a>
+                        {eaData.setting ? <i className="ea-dash-icon ea-settings"></i> : ''}
                     </div>
                 </div>
             </div>
