@@ -68,6 +68,8 @@ function ContextReducer() {
                 return {...state, [payload.key]: payload.value};
             case 'ON_SEARCH':
                 return {...state, search: payload.value};
+            case 'OPEN_LICENSE_FORM':
+                return {...state, licenseFormOpen: payload};
         }
     }
 

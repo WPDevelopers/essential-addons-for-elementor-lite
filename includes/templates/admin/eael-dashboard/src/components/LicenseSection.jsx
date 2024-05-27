@@ -1,5 +1,12 @@
+import consumer from "../context";
+
 function LicenseSection() {
-    const licenseData = typeof wpdeveloperLicenseData === 'undefined' ? {} : wpdeveloperLicenseData;
+    const licenseData = typeof wpdeveloperLicenseData === 'undefined' ? {} : wpdeveloperLicenseData,
+        {eaState, eaDispatch} = consumer(),
+        isOpenForm = eaState?.licenseFormOpen === true,
+        clickHandler = () => {
+            eaDispatch({type: 'OPEN_LICENSE_FORM', payload: !isOpenForm});
+        };
 
     return (
         <>
@@ -25,21 +32,27 @@ function LicenseSection() {
                     </div>
                 </div>}
                 <div className="ea__license-wrapper">
-                    {licenseData?.license_status !== 'valid' && <div className="ea__license-content">
-                        <h5>
-                            How to get license key?
-                        </h5>
-                        <i className="ea-dash-icon ea-dropdown"></i>
-                    </div>}
-                    <div className="ea__license-options-wrapper">
-                        {licenseData?.license_status === 'valid' ? <div className="ea__license-key">
-                            <div className="license-key-items flex items-center">
-                                <i className="ea-dash-icon  ea-key"></i>
-                                <input className="input-api" type="text"
-                                       placeholder={licenseData?.hidden_license_key} disabled/>
-                                <button className="primary-btn install-btn deactivated">Deactivate</button>
+                    {licenseData?.license_status !== 'valid' &&
+                        <div className="ea__license-content" onClick={clickHandler}>
+                            <h5>
+                                How to get license key?
+                            </h5>
+                            <i className="ea-dash-icon ea-dropdown"></i>
+                        </div>}
+                    {licenseData?.license_status === 'valid' &&
+                        <div className="ea__license-options-wrapper">
+                            <div className="ea__license-key">
+                                <div className="license-key-items flex items-center">
+                                    <i className="ea-dash-icon  ea-key"></i>
+                                    <input className="input-api" type="text"
+                                           placeholder={licenseData?.hidden_license_key} disabled/>
+                                    <button className="primary-btn install-btn deactivated">Deactivate</button>
+                                </div>
                             </div>
-                        </div> : <>
+                        </div>
+                    }
+                    {(licenseData?.license_status !== 'valid' && isOpenForm) && <>
+                        <div className="ea__license-options-wrapper">
                             <div className="ea__license-step">
                                 <div className="ea__license-step-items flex items-center">
                                     <span className="step-count">1</span>
@@ -95,8 +108,10 @@ function LicenseSection() {
                                     </i>
                                 </p>
                             </div>
-                        </>}
-                    </div>
+                        </div>
+                    </>
+                    }
+
                 </div>
             </div>
         </>
