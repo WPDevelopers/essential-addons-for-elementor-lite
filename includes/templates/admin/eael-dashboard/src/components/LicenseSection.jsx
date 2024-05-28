@@ -1,4 +1,5 @@
 import consumer from "../context";
+import LicenseSteps from "./LicenseSteps.jsx";
 
 function LicenseSection() {
     const licenseData = typeof wpdeveloperLicenseData === 'undefined' ? {} : wpdeveloperLicenseData,
@@ -53,27 +54,7 @@ function LicenseSection() {
                     }
                     {(licenseData?.license_status !== 'valid' && isOpenForm) && <>
                         <div className="ea__license-options-wrapper">
-                            <div className="ea__license-step">
-                                <div className="ea__license-step-items flex items-center">
-                                    <span className="step-count">1</span>
-                                    <p>Log in to <span className="step-details-ex">your account</span> to get your
-                                        license key.</p>
-                                </div>
-                                <div className="ea__license-step-items flex items-center">
-                                    <span className="step-count">2</span>
-                                    <p>If you don't yet have a license key, get <span
-                                        className="step-details-ex">BetterDocs Pro</span>
-                                        now.</p>
-                                </div>
-                                <div className="ea__license-step-items flex items-center">
-                                    <span className="step-count">3</span>
-                                    <p>Copy the license key from your account and paste it below.</p>
-                                </div>
-                                <div className="ea__license-step-items flex items-center">
-                                    <span className="step-count">4</span>
-                                    <p>Click on <span className="step-details-ex">"Activate License"</span> button.</p>
-                                </div>
-                            </div>
+                            <LicenseSteps/>
                             <div className="ea__license-key">
                                 <div className="license-key-items flex items-center">
                                     <i className="ea-dash-icon  ea-key"></i>
