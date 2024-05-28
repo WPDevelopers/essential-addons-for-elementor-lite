@@ -1,5 +1,6 @@
 import consumer from "../context";
 import LicenseSteps from "./LicenseSteps.jsx";
+import LicenseForm from "./LicenseForm.jsx";
 
 function LicenseSection() {
     const licenseData = typeof wpdeveloperLicenseData === 'undefined' ? {} : wpdeveloperLicenseData,
@@ -55,14 +56,7 @@ function LicenseSection() {
                     {(licenseData?.license_status !== 'valid' && isOpenForm) && <>
                         <div className="ea__license-options-wrapper">
                             <LicenseSteps/>
-                            <div className="ea__license-key">
-                                <div className="license-key-items flex items-center">
-                                    <i className="ea-dash-icon  ea-key"></i>
-                                    <input className="input-api" type="text"
-                                           placeholder="Place Your License Key and Active"/>
-                                    <button className="primary-btn install-btn">Active License</button>
-                                </div>
-                            </div>
+                            <LicenseForm/>
                             <div className="ea__license-verify">
                                 <p>Licence Verification Code has been sent to this
                                     <span>emo***@wpdeveloper.com</span> mail. Please check your
