@@ -86,14 +86,9 @@ ea.hooks.addAction("init", "ea", () => {
 				e.preventDefault();
 				
 				var currentTabIndex = $(this).index();
-				var tabsContainer = $(this).closest(".eael-advance-tabs");
-				var tabsNav = $(tabsContainer)
-				.children(".eael-tabs-nav")
-				.children("ul")
-				.children("li");
-				var tabsContent = $(tabsContainer)
-				.children(".eael-tabs-content")
-				.children("div");
+				var tabsContainer   = $(this).closest(".eael-advance-tabs");
+				var tabsNav         = $(tabsContainer).children(".eael-tabs-nav").children("ul").children("li");
+				var tabsContent     = $(tabsContainer).children(".eael-tabs-content").children("div");
 
 				if ($($currentTabId).hasClass('eael-tab-toggle')) {
 					$(this).toggleClass('active inactive');
@@ -140,23 +135,15 @@ ea.hooks.addAction("init", "ea", () => {
 				$(tabsContent).each(function (index) {
 					$(this).removeClass("active-default");
 				});
+				$($currentTabId + ' > .eael-tabs-nav ul li', $scope).attr('tabindex', '-1');
+				$($currentTabId + ' > .eael-tabs-nav ul li.active', $scope).attr('tabindex', '0');
 				
-				let $filterGallery = tabsContent
-					.eq(currentTabIndex)
-					.find(".eael-filter-gallery-container"),
-					$postGridGallery = tabsContent
-					.eq(currentTabIndex)
-					.find(".eael-post-grid.eael-post-appender"),
-					$twitterfeedGallery = tabsContent
-					.eq(currentTabIndex)
-					.find(".eael-twitter-feed-masonry"),
-					$instaGallery = tabsContent
-					.eq(currentTabIndex)
-					.find(".eael-instafeed"),
-					$paGallery = tabsContent
-					.eq(currentTabIndex)
-					.find(".premium-gallery-container"),
-					$evCalendar = $(".eael-event-calendar-cls", tabsContent);
+				let $filterGallery      = tabsContent.eq(currentTabIndex).find(".eael-filter-gallery-container"),
+					$postGridGallery    = tabsContent.eq(currentTabIndex).find(".eael-post-grid.eael-post-appender"),
+					$twitterfeedGallery = tabsContent.eq(currentTabIndex).find(".eael-twitter-feed-masonry"),
+					$instaGallery       = tabsContent.eq(currentTabIndex).find(".eael-instafeed"),
+					$paGallery          = tabsContent.eq(currentTabIndex).find(".premium-gallery-container"),
+					$evCalendar         = $(".eael-event-calendar-cls", tabsContent);
 				
 				if ($postGridGallery.length) {
 					$postGridGallery.isotope("layout");
@@ -185,6 +172,21 @@ ea.hooks.addAction("init", "ea", () => {
 				}
 			});
 
+			$($currentTabId + ' > .eael-tabs-nav ul li.eael-tab-nav-item', $scope).keydown(function(e) {
+                if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                    const tabs 		 = $($currentTabId + ' > .eael-tabs-nav ul li.eael-tab-nav-item', $scope);
+					let currentIndex = $($currentTabId + ' > .eael-tabs-nav ul li.eael-tab-nav-item.active', $scope);
+                    let index 		 = currentIndex < 0 ? tabs.index(this) : tabs.index(currentIndex);
+
+                    if (e.key === 'ArrowRight') index = (index + 1) % tabs.length;
+                    if (e.key === 'ArrowLeft') index = (index - 1 + tabs.length) % tabs.length;
+                    $(tabs[index]).focus().click();
+                }
+            });
+
+			$($currentTabId + ' > .eael-tabs-nav ul li', $scope).attr('tabindex', '-1');
+			$($currentTabId + ' > .eael-tabs-nav ul li.active', $scope).attr('tabindex', '0');
+
 			// If hashTag is not null then scroll to that hashTag smoothly
 			if( typeof hashTag !== 'undefined' && hashTag && !ea.elementStatusCheck('eaelAdvancedTabScroll')){
 				let $customIdOffsetValTab = $customIdOffsetTab ? parseFloat($customIdOffsetTab) : 0;
@@ -192,7 +194,6 @@ ea.hooks.addAction("init", "ea", () => {
 						scrollTop: $("#"+hashTag).offset().top - $customIdOffsetValTab,
 					}, 300);
 			}
-
 		}
 	);
 });
