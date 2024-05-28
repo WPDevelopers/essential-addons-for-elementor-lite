@@ -37,7 +37,7 @@ function LicenseSection() {
                         <div className="ea__license-options-wrapper">
                             <LicenseSteps/>
                             <LicenseForm/>
-                            <LicenseOtpForm/>
+                            {eaState?.otp === true && <LicenseOtpForm/>}
                         </div>
                     }
                 </div>
