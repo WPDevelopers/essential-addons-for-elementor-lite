@@ -79,6 +79,162 @@ class WPDeveloper_Setup_Wizard {
 	 */
 	public function render_wizard() {
 		?>
+		<section id="ea__onboard--wrapper" class="ea__onboard--wrapper">
+        <section class="ea__onboard-main-wrapper">
+            <div class="ea__onboard-nav-list flex justify-between">
+                <div class="ea__onboard-nav active">
+                    <span class="ea__nav-count">
+                        1
+                    </span>
+                    <span class="ea__nav-text">Getting Started</span>
+                </div>
+                <div class="ea__onboard-nav">
+                    <span class="ea__nav-count">
+                        2
+                    </span>
+                    <span class="ea__nav-text">Configuration</span>
+                </div>
+                <div class="ea__onboard-nav">
+                    <span class="ea__nav-count">
+                        3
+                    </span>
+                    <span class="ea__nav-text">Elements</span>
+                </div>
+
+                <div class="ea__onboard-nav">
+                    <span class="ea__nav-count">
+                        4
+                    </span>
+                    <span class="ea__nav-text">Go PRO</span>
+                </div>
+
+                <div class="ea__onboard-nav">
+                    <span class="ea__nav-count">
+                        5
+                    </span>
+                    <span class="ea__nav-text">Templately</span>
+                </div>
+
+                <div class="ea__onboard-nav">
+                    <span class="ea__nav-count">
+                        6
+                    </span>
+                    <span class="ea__nav-text">Integrations</span>
+                </div>
+            </div>
+            <div class="ea__onboard-content-wrapper min-h-538">
+                <div class="ea__onboard-content">
+                    <div class="ea__onboard-content-top">
+                        <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/youtube-promo.png' )?>" alt="youtube-promo">
+                        <h3>Getting Started</h3>
+                        <p>Easily get started with this easy setup wizard and complete setting up your Knowledge Base.
+                        </p>
+                    </div>
+                    <div class="ea__next-step-wrapper" id="ea__dashboard--wrapper">
+                        <p>By clicking this button I am allowing this app to
+                            collect my information. <span class="collect-info">What We Collect?</span></p>
+                        <button class="primary-btn install-btn">
+                            Proceed to Next Step
+                            <i class="ea-dash-icon ea-install"></i>
+                        </button>
+                        <span class="skip-item">Skip This Step</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+	<section id="ea__onboard--wrapper" class="ea__onboard--wrapper">
+        <section class="ea__onboard-main-wrapper">
+            <div class="ea__onboard-nav-list flex justify-between">
+                <div class="ea__onboard-nav">
+                    <span class="ea__nav-count">
+                        1
+                    </span>
+                    <span class="ea__nav-text">Getting Started</span>
+                </div>
+                <div class="ea__onboard-nav active">
+                    <span class="ea__nav-count">
+                        2
+                    </span>
+                    <span class="ea__nav-text">Configuration</span>
+                </div>
+                <div class="ea__onboard-nav">
+                    <span class="ea__nav-count">
+                        3
+                    </span>
+                    <span class="ea__nav-text">Elements</span>
+                </div>
+
+                <div class="ea__onboard-nav">
+                    <span class="ea__nav-count">
+                        4
+                    </span>
+                    <span class="ea__nav-text">Go PRO</span>
+                </div>
+
+                <div class="ea__onboard-nav">
+                    <span class="ea__nav-count">
+                        5
+                    </span>
+                    <span class="ea__nav-text">Templately</span>
+                </div>
+
+                <div class="ea__onboard-nav">
+                    <span class="ea__nav-count">
+                        6
+                    </span>
+                    <span class="ea__nav-text">Integrations</span>
+                </div>
+            </div>
+            <div class="ea__onboard-content-wrapper mb-4 min-h-538">
+                <div class="ea__onboard-content">
+                    <div class="ea__onboard-content-top">
+                        <img src="./assets/images/ea-new- 1.svg" alt="logo">
+                        <h3>Get Started with Essential Addons 🚀</h3>
+                        <p>Enhance your Elementor page building experience with 50+ amazing elements & extensions 🔥</p>
+                    </div>
+                    <div class="ea__onboard-content-select">
+                        <label class="flex-1 checkbox--label">
+                            <input name="choose-provider" id="1" type="radio" checked class="d-none">
+                            <span class="select--wrapper">
+                                <span class="check-mark"></span>
+                                <h4>Basic <span>(Recommended)</span></h4>
+                                <p>For websites where you want to only use the basic features and keep your site
+                                    lightweight. Most basic elements are activated in this option.</p>
+                            </span>
+                        </label>
+                        <label class="flex-1 checkbox--label">
+                            <input name="choose-provider" id="2" type="radio" checked class="d-none">
+                            <span class="select--wrapper">
+                                <span class="check-mark"></span>
+                                <h4>Advanced</h4>
+                                <p>For advanced users who are trying to build complex websites with advanced
+                                    functionalities with Elementor. All the dynamic elements will be activated in this
+                                    option.</p>
+                            </span>
+                        </label>
+                        <label class="flex-1 checkbox--label">
+                            <input name="choose-provider" id="3" type="radio" checked class="d-none">
+                            <span class="select--wrapper">
+                                <span class="check-mark"></span>
+                                <h4>Custom</h4>
+                                <p>Pick this option if you want to configure the elements as per your wish.</p>
+                            </span>
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+            <div id="ea__dashboard--wrapper" class="ea__section-wrapper flex flex-end">
+                <button class="primary-btn install-btn flex gap-2 items-center">
+                    Next
+                    <i class="ea-dash-icon ea-link-2"></i>
+                </button>
+            </div>
+        </section>
+    </section>
+
         <div class="eael-quick-setup-wizard-wrap">
 			<?php
 			$this->change_site_title();
