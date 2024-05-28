@@ -92,7 +92,7 @@ $extensions = [
 			],
 			[
 				'key'       => 'advanced-dynamic-tags',
-				'title'     => __( 'EA Dynamic Tags', 'essential-addons-for-elementor-lite' ),
+				'title'     => __( 'Dynamic Tags', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/advanced-dynamic-tags/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-advanced-dynamic-tags/',
 				'is_pro'    => true,
