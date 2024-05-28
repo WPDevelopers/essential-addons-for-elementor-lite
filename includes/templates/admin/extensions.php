@@ -92,7 +92,7 @@ $extensions = [
 			],
 			[
 				'key'       => 'special-hover-effect',
-				'title'     => __( 'Special Hover Effect', 'essential-addons-for-elementor-lite' ),
+				'title'     => __( 'Hover Interactions', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/special-hover-effect/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-special-hover-effect/',
 				'promotion' => 'new'

@@ -23,7 +23,7 @@ class Hover_Effect {
 		$element->start_controls_section(
 			'eael_hover_effect_section',
 			[
-				'label' => __( '<i class="eaicon-logo"></i> Hover Effect', 'essential-addons-for-elementor-lite' ),
+				'label' => __( '<i class="eaicon-logo"></i> Hover Interactions', 'essential-addons-for-elementor-lite' ),
 				'tab'   => Controls_Manager::TAB_ADVANCED
 			]
 		);
@@ -31,7 +31,7 @@ class Hover_Effect {
 		$element->add_control(
 			'eael_hover_effect_switch',
 			[
-				'label' => __( 'Enable Hover Effect', 'essential-addons-for-elementor-lite' ),
+				'label' => __( 'Enable Hover Interactions', 'essential-addons-for-elementor-lite' ),
 				'type'  => Controls_Manager::SWITCHER
 			]
 		);
@@ -53,7 +53,7 @@ class Hover_Effect {
 			[
 				'type'            => Controls_Manager  :: RAW_HTML,
 				'separator' 	  => 'after',
-				'raw'             => __( 'Enabling this option will let you preview the Hover effect inside the Elementor Editor.', 'essential-addons-for-elementor-lite' ),
+				'raw'             => __( 'Enabling this option will let you preview the Hover Interactions inside the Elementor Editor.', 'essential-addons-for-elementor-lite' ),
 				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 				'condition'       => [
 					'eael_hover_effect_switch' => 'yes',
@@ -1500,7 +1500,7 @@ class Hover_Effect {
 			}
 	
 			/**
-			 * Hover Effect Options
+			 * Hover Interactions Options
 			 */
 			//Opacity
 			if( !empty( $settings['eael_hover_effect_opacity_hover']['size'] ) ) {
