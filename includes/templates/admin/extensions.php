@@ -106,6 +106,13 @@ $extensions = [
 				'is_pro'    => true,
 				'promotion' => 'new'
 			],
+			[
+				'key'       => 'special-hover-effect',
+				'title'     => __( 'Hover Interactions', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/special-hover-effect/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-special-hover-effect/',
+				'promotion' => 'new'
+			],
 		]
 	]
 ];
