@@ -351,7 +351,8 @@ trait Login_Registration {
 
 					if ( ! empty( $_FILES[ $register_field['field_type'] ] ) && 4 !== $_FILES[ $register_field['field_type'] ]["error"] ) {
 						$custom_field_file_name 		= sanitize_text_field( $_FILES[ $register_field['field_type'] ]["name"] );
-						$custom_field_file_extension 	= end( ( explode( ".", $custom_field_file_name ) ) ); # extra () to prevent notice
+						$_custom_field_file_extension 	= explode( ".", $custom_field_file_name );
+						$custom_field_file_extension 	= end( $_custom_field_file_extension ); # extra () to prevent notice
 						$custom_field_file_size 		= floatval( $_FILES[ $register_field['field_type'] ]["size"] );
 
 						$unsupported_extensions = ['svg', 'php', 'js', 'aiff', 'psd', 'exr', 'wma', 'sql', 'm2v', 'swf', 'py', 'java', 'json', 'html', 'yaml', 'css', 'rb', 'cpp', 'c', 'cs', 'swift', 'kt', 'go', 'ts'];
