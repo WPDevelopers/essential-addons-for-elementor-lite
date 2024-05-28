@@ -177,6 +177,11 @@ class Elements_Manager {
 			$list['advanced-dynamic-tags'] = 'advanced-dynamic-tags';
 		}
 
+		//Smooth Animation
+		if ( ! empty( $element['settings']['eael_smooth_animation_section'] ) ) {
+			$list['smooth-animation'] = 'smooth-animation';
+		}
+
 		return $list;
 	}
 

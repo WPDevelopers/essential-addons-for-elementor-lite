@@ -19,6 +19,14 @@ $extensions = [
 				'is_pro'    => true
 			],
 			[
+				'key'       => 'smooth-animation',
+				'title'     => __( 'Smooth Animation', 'essential-addons-for-elementor-lite' ),
+				'demo_link' => 'https://essential-addons.com/elementor/parallax-scrolling/',
+				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-parallax/',
+				'is_pro'    => true,
+				'promotion' => 'new'
+			],
+			[
 				'key'       => 'tooltip-section',
 				'title'     => __( 'Advanced Tooltip', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/advanced-tooltip/',

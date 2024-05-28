@@ -9186,7 +9186,7 @@ msgstr ""
 msgid "<strong>WPForms</strong> is not installed/activated on your site. Please install and activate <strong>WPForms</strong> first."
 msgstr ""
 
-#: ../includes/Extensions/Custom_JS.php:22, ../includes/templates/admin/extensions.php:58
+#: ../includes/Extensions/Custom_JS.php:22, ../includes/templates/admin/extensions.php:66
 msgid "Custom JS"
 msgstr ""
 
@@ -9342,7 +9342,7 @@ msgstr ""
 msgid "All %s"
 msgstr ""
 
-#: ../includes/Extensions/Table_of_Content.php:127, ../includes/templates/admin/extensions.php:44
+#: ../includes/Extensions/Table_of_Content.php:127, ../includes/templates/admin/extensions.php:52
 msgid "Table of Contents"
 msgstr ""
 
@@ -10686,7 +10686,7 @@ msgstr ""
 msgid "LearnDash Elements"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:667, ../includes/templates/admin/extensions.php:111
+#: ../includes/templates/admin/elements.php:667, ../includes/templates/admin/extensions.php:119
 msgid "Global Control"
 msgstr ""
 
@@ -10694,27 +10694,27 @@ msgstr ""
 msgid "Use the Toggle Button to Activate or Deactivate all the Elements of Essential Addons at once."
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:675, ../includes/templates/admin/extensions.php:119
+#: ../includes/templates/admin/elements.php:675, ../includes/templates/admin/extensions.php:127
 msgid "Enable All"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:676, ../includes/templates/admin/extensions.php:120
+#: ../includes/templates/admin/elements.php:676, ../includes/templates/admin/extensions.php:128
 msgid "Disable All"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:679, ../includes/templates/admin/elements.php:740, ../includes/templates/admin/extensions.php:123, ../includes/templates/admin/extensions.php:178, ../includes/templates/admin/tools.php:71
+#: ../includes/templates/admin/elements.php:679, ../includes/templates/admin/elements.php:740, ../includes/templates/admin/extensions.php:131, ../includes/templates/admin/extensions.php:186, ../includes/templates/admin/tools.php:71
 msgid "Save Settings"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:701, ../includes/templates/admin/extensions.php:147
+#: ../includes/templates/admin/elements.php:701, ../includes/templates/admin/extensions.php:155
 msgid "Setting"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:706, ../includes/templates/admin/extensions.php:152
+#: ../includes/templates/admin/elements.php:706, ../includes/templates/admin/extensions.php:160
 msgid "Documentation"
 msgstr ""
 
-#: ../includes/templates/admin/elements.php:710, ../includes/templates/admin/extensions.php:156
+#: ../includes/templates/admin/elements.php:710, ../includes/templates/admin/extensions.php:164
 msgid "Demo"
 msgstr ""
 
@@ -10730,43 +10730,47 @@ msgstr ""
 msgid "Particles"
 msgstr ""
 
-#: ../includes/templates/admin/extensions.php:23, ../includes/templates/admin/go-pro.php:126
+#: ../includes/templates/admin/extensions.php:23
+msgid "Smooth Animation"
+msgstr ""
+
+#: ../includes/templates/admin/extensions.php:31, ../includes/templates/admin/go-pro.php:126
 msgid "Advanced Tooltip"
 msgstr ""
 
-#: ../includes/templates/admin/extensions.php:30
+#: ../includes/templates/admin/extensions.php:38
 msgid "Content Protection"
 msgstr ""
 
-#: ../includes/templates/admin/extensions.php:38
+#: ../includes/templates/admin/extensions.php:46
 msgid "Reading Progress Bar"
 msgstr ""
 
-#: ../includes/templates/admin/extensions.php:51
+#: ../includes/templates/admin/extensions.php:59
 msgid "Duplicator"
 msgstr ""
 
-#: ../includes/templates/admin/extensions.php:65
+#: ../includes/templates/admin/extensions.php:73
 msgid "Cross-Domain Copy Paste"
 msgstr ""
 
-#: ../includes/templates/admin/extensions.php:73
+#: ../includes/templates/admin/extensions.php:81
 msgid "Scroll to Top"
 msgstr ""
 
-#: ../includes/templates/admin/extensions.php:80
+#: ../includes/templates/admin/extensions.php:88
 msgid "Conditional Display"
 msgstr ""
 
-#: ../includes/templates/admin/extensions.php:88
+#: ../includes/templates/admin/extensions.php:96
 msgid "Wrapper Link"
 msgstr ""
 
-#: ../includes/templates/admin/extensions.php:95
+#: ../includes/templates/admin/extensions.php:103
 msgid "EA Dynamic Tags"
 msgstr ""
 
-#: ../includes/templates/admin/extensions.php:112
+#: ../includes/templates/admin/extensions.php:120
 msgid "Use the Toggle Button to Activate or Deactivate all the Extensions of Essential Addons at once."
 msgstr ""
 
