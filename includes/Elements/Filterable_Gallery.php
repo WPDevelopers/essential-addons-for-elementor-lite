@@ -3511,7 +3511,7 @@ class Filterable_Gallery extends Widget_Base
         $privacy_notice = isset( $settings['eael_privacy_notice'] ) ? $settings['eael_privacy_notice'] : '';
         $classes        = "video-popup eael-magnific-link eael-magnific-link-clone active eael-magnific-video-link mfp-iframe playout-" . $item['video_layout'];
         
-        $html .= '<a title="'.esc_attr( $privacy_notice ) .'" aria-label="eael-magnific-video-link" href="' . esc_url($video_url) . '" class="' . esc_attr( $classes ) . '" data-id="'. esc_attr( $item['id'] ) .'" data-elementor-open-lightbox="yes">';
+        $html .= '<a title="' . esc_attr( strip_tags( $privacy_notice ) ) .'" aria-label="eael-magnific-video-link" href="' . esc_url($video_url) . '" class="' . esc_attr( $classes ) . '" data-id="'. esc_attr( $item['id'] ) .'" data-elementor-open-lightbox="yes">';
 
         if( $show_video_popup_bg ){
             $html .= '<div class="video-popup-bg"></div>';
@@ -3809,7 +3809,7 @@ class Filterable_Gallery extends Widget_Base
 
     protected function render_media_query( $settings ){
         $media_query = '';
-        $section_id  = $this->get_id();
+        $section_id  = esc_html( $this->get_id() );
         $breakpoints = method_exists( Plugin::$instance->breakpoints, 'get_breakpoints_config' ) ? Plugin::$instance->breakpoints->get_breakpoints_config() : [];
         $brp_desktop = isset( $breakpoints['widescreen'] ) ? $breakpoints['widescreen']['value'] - 1 : 2400;
 
@@ -3834,7 +3834,7 @@ class Filterable_Gallery extends Widget_Base
             }
         }
 
-        echo '<style id="eael-fg-inline-css-'. $section_id .'">'. __( $media_query ) .'</style>';
+        echo '<style id="eael-fg-inline-css-'. esc_attr( $section_id ) .'">'. $media_query .'</style>';
     }
 
     protected function render() {
