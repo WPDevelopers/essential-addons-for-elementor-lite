@@ -37,6 +37,10 @@ function LicenseSection() {
                         <div className="ea__license-options-wrapper">
                             <LicenseSteps/>
                             <LicenseForm/>
+                            {eaState?.licenseError === true &&
+                                <p className="eael-license-error-msg error-message">Whoops! Your License
+                                    Verification Code is Invalid. Please try again.</p>
+                            }
                             {eaState?.otp === true && <LicenseOtpForm/>}
                         </div>
                     }
