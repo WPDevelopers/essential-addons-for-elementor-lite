@@ -258,7 +258,10 @@ class advancedDataTableEdit {
 
 					if (this.table.classList.contains("ea-advanced-data-table-static")) {
 						for (let j = 0; j < cols.length; j++) {
-							row.push( decodeURI( cols[j].dataset.quill ) );
+							let encodedText = decodeURI( cols[j].dataset.quill );
+							let modifiedString = encodedText.replace(/"/g, '""');
+							modifiedString = `"${modifiedString}"`;
+							row.push( modifiedString );
 						}
 					} else {
 						for (let j = 0; j < cols.length; j++) {
