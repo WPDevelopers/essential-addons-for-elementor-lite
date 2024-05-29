@@ -125,7 +125,9 @@ class WPDeveloper_Setup_Wizard {
             <div class="ea__onboard-content-wrapper min-h-538">
                 <div class="ea__onboard-content">
                     <div class="ea__onboard-content-top">
-                        <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/youtube-promo.png' )?>" alt="youtube-promo">
+						<a href="https://www.youtube.com/watch?v=ZISSbnHo0rE&ab_channel=WPDeveloper" target="_blank">
+							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/youtube-promo.png' )?>" alt="youtube-promo">
+						</a>
                         <h3>Getting Started</h3>
                         <p>Easily get started with this easy setup wizard and complete setting up your Knowledge Base.
                         </p>
@@ -190,13 +192,15 @@ class WPDeveloper_Setup_Wizard {
             <div class="ea__onboard-content-wrapper mb-4 min-h-538">
                 <div class="ea__onboard-content">
                     <div class="ea__onboard-content-top">
-                        <img src="./assets/images/ea-new- 1.svg" alt="logo">
+						<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/ea.svg' ); ?>"
+                         	alt="<?php _e( 'EA Logo', 'essential-addons-for-elementor-lite' ); ?>">
+
                         <h3>Get Started with Essential Addons 🚀</h3>
                         <p>Enhance your Elementor page building experience with 50+ amazing elements & extensions 🔥</p>
                     </div>
                     <div class="ea__onboard-content-select">
                         <label class="flex-1 checkbox--label">
-                            <input name="choose-provider" id="1" type="radio" checked class="d-none">
+                            <input name="choose-provider" id="1" type="radio" checked class="eael-d-none">
                             <span class="select--wrapper">
                                 <span class="check-mark"></span>
                                 <h4>Basic <span>(Recommended)</span></h4>
@@ -205,7 +209,7 @@ class WPDeveloper_Setup_Wizard {
                             </span>
                         </label>
                         <label class="flex-1 checkbox--label">
-                            <input name="choose-provider" id="2" type="radio" checked class="d-none">
+                            <input name="choose-provider" id="2" type="radio" class="eael-d-none">
                             <span class="select--wrapper">
                                 <span class="check-mark"></span>
                                 <h4>Advanced</h4>
@@ -215,7 +219,7 @@ class WPDeveloper_Setup_Wizard {
                             </span>
                         </label>
                         <label class="flex-1 checkbox--label">
-                            <input name="choose-provider" id="3" type="radio" checked class="d-none">
+                            <input name="choose-provider" id="3" type="radio" class="eael-d-none">
                             <span class="select--wrapper">
                                 <span class="check-mark"></span>
                                 <h4>Custom</h4>
@@ -229,7 +233,7 @@ class WPDeveloper_Setup_Wizard {
             <div id="ea__dashboard--wrapper" class="ea__section-wrapper flex flex-end">
                 <button class="primary-btn install-btn flex gap-2 items-center">
                     Next
-                    <i class="ea-dash-icon ea-link-2"></i>
+                    <i class="ea-dash-icon ea-right-arrow-long"></i>
                 </button>
             </div>
         </section>
