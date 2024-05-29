@@ -37,6 +37,8 @@ function ContextReducer() {
 
     const reducer = (state, {type, payload}) => {
         switch (type) {
+            case 'ON_PROCESSING':
+                return {...state, ...payload};
             case 'SET_MENU':
                 return {...state, menu: payload};
             case 'ON_CHANGE_INTEGRATION':
@@ -72,10 +74,11 @@ function ContextReducer() {
             case 'OPEN_LICENSE_FORM':
                 return {...state, licenseFormOpen: payload};
             case 'LICENSE_ACTIVATE':
-                const params = {
+                const licenseManagerConfig = typeof wpdeveloperLicenseManagerConfig === 'undefined' ? {} : wpdeveloperLicenseManagerConfig,
+                    params = {
                         action: 'essential-addons-elementor/license/activate',
                         license_key: payload,
-                        _nonce: wpdeveloperLicenseManagerConfig.nonce
+                        _nonce: licenseManagerConfig?.nonce
                     },
                     response = eaAjax(params);
 
