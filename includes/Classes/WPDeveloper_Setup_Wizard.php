@@ -239,6 +239,235 @@ class WPDeveloper_Setup_Wizard {
         </section>
     </section>
 
+	<section id="ea__dashboard--wrapper" class="ea__onboard--wrapper">
+        <section class="ea__onboard-main-wrapper">
+            <div class="ea__onboard-nav-list flex justify-between">
+                <div class="ea__onboard-nav">
+                    <span class="ea__nav-count">
+                        1
+                    </span>
+                    <span class="ea__nav-text">Getting Started</span>
+                </div>
+                <div class="ea__onboard-nav">
+                    <span class="ea__nav-count">
+                        2
+                    </span>
+                    <span class="ea__nav-text">Configuration</span>
+                </div>
+                <div class="ea__onboard-nav active">
+                    <span class="ea__nav-count">
+                        3
+                    </span>
+                    <span class="ea__nav-text">Elements</span>
+                </div>
+
+                <div class="ea__onboard-nav">
+                    <span class="ea__nav-count">
+                        4
+                    </span>
+                    <span class="ea__nav-text">Go PRO</span>
+                </div>
+
+                <div class="ea__onboard-nav">
+                    <span class="ea__nav-count">
+                        5
+                    </span>
+                    <span class="ea__nav-text">Templately</span>
+                </div>
+
+                <div class="ea__onboard-nav">
+                    <span class="ea__nav-count">
+                        6
+                    </span>
+                    <span class="ea__nav-text">Integrations</span>
+                </div>
+            </div>
+            <div class="ea__onboard-content-wrapper ea__onboard-elements mb-4 min-h-538">
+                <div class="ea__connect-others flex gap-4 justify-between items-start mb-10">
+                    <div class="flex gap-4 flex-1">
+                        <div class="ea__others-icon eaicon-1">
+                            <i class="ea-dash-icon ea-elements"></i>
+                        </div>
+                        <div class="max-w-454">
+                            <h4>Turn on the Elements that you need</h4>
+                            <p>Enable/Disable the elements anytime you want from Essential Addons Dashboard</p>
+                        </div>
+                    </div>
+                    <button class="primary-btn changelog-btn flex items-center gap-2">
+                        View All
+                        <i class="ea-dash-icon ea-right-arrow-long"></i>
+                    </button>
+                </div>
+                <div class="onBoard-scroll-wrap">
+                    <div id="Content" class="ea__contents">
+                        <div class="flex items-center gap-2 justify-between mb-4">
+                            <h3 class="ea__content-title">Content Elements</h3>
+                            <div class="ea__enable-elements">
+                                <div class="toggle-wrapper flex items-center gap-2">
+                                    <h5>Enable all</h5>
+                                    <label class="toggle-wrap">
+                                        <input type="checkbox">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ea__content-wrapper">
+                            <div class="ea__content-items">
+                                <div class="ea__content-head">
+                                    <h5 class="toggle-label">Creative Button</h5>
+                                    <label class="toggle-wrap">
+                                        <input type="checkbox" checked="checked">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="ea__content-items">
+                                <div class="ea__content-head">
+                                    <h5 class="toggle-label">Team Member</h5>
+                                    <label class="toggle-wrap">
+                                        <input type="checkbox">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="ea__content-items">
+                                <div class="ea__content-head">
+                                    <h5 class="toggle-label">Testimonial</h5>
+                                    <label class="toggle-wrap">
+                                        <input type="checkbox">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="ea__content-items">
+                                <div class="ea__content-head">
+                                    <h5 class="toggle-label">Flip Box</h5>
+                                    <label class="toggle-wrap">
+                                        <input type="checkbox">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="ea__content-items">
+                                <div class="ea__content-head">
+                                    <h5 class="toggle-label">Info Box</h5>
+                                    <label class="toggle-wrap">
+                                        <input type="checkbox" checked="checked">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ea__section-wrapper flex flex-end gap-4">
+                <button class="previous-btn flex gap-2 items-center">
+                    <i class="ea-dash-icon ea-left-arrow-long"></i>
+                    Previous
+                </button>
+                <button class="primary-btn install-btn flex gap-2 items-center">
+                    Next
+                    <i class="ea-dash-icon ea-right-arrow-long"></i>
+                </button>
+            </div>
+        </section>
+    </section>
+
+	<section id="ea__dashboard--wrapper" class="ea__onboard--wrapper">
+        <section class="ea__onboard-main-wrapper">
+            <div class="ea__onboard-nav-list flex justify-between">
+                <div class="ea__onboard-nav">
+                    <span class="ea__nav-count">
+                        1
+                    </span>
+                    <span class="ea__nav-text">Getting Started</span>
+                </div>
+                <div class="ea__onboard-nav">
+                    <span class="ea__nav-count">
+                        2
+                    </span>
+                    <span class="ea__nav-text">Configuration</span>
+                </div>
+                <div class="ea__onboard-nav">
+                    <span class="ea__nav-count">
+                        3
+                    </span>
+                    <span class="ea__nav-text">Elements</span>
+                </div>
+
+                <div class="ea__onboard-nav active">
+                    <span class="ea__nav-count">
+                        4
+                    </span>
+                    <span class="ea__nav-text">Go PRO</span>
+                </div>
+
+                <div class="ea__onboard-nav">
+                    <span class="ea__nav-count">
+                        5
+                    </span>
+                    <span class="ea__nav-text">Templately</span>
+                </div>
+
+                <div class="ea__onboard-nav">
+                    <span class="ea__nav-count">
+                        6
+                    </span>
+                    <span class="ea__nav-text">Integrations</span>
+                </div>
+            </div>
+            <div class="ea__onboard-content-wrapper ea__onboard-pro mb-4 min-h-538">
+                <div class="ea__connect-others flex gap-4 justify-between items-start mb-10">
+                    <div class="flex gap-4 flex-1">
+                        <div class="ea__others-icon eaicon-1">
+                            <i class="ea-dash-icon ea-lock"></i>
+                        </div>
+                        <div class="max-w-454">
+                            <h4>Turn on the Elements that you need</h4>
+                            <p>Enable/Disable the elements anytime you want from Essential Addons Dashboard</p>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <button class="upgrade-button">
+                            <i class="ea-dash-icon ea-crown-1"></i>
+                            Upgrade to PRO
+                        </button>
+                    </a>
+                </div>
+                <div class="ea__pro-features flex justify-between items-center">
+                    <div class="ea__features-content">
+                        <h2>Explore Premiere Pro features</h2>
+                        <p class="mb-7">Learn all about the tools and techniques you can use to edit videos,
+                            animate titles,
+                            add effects, mix sound, and more.
+                        </p>
+                        <a href="#">
+                            <button class="primary-btn changelog-btn">
+                                <i class="ea-dash-icon ea-link"></i>
+                                View More
+                            </button>
+                        </a>
+                    </div>
+                    <div class="features-img">
+                        <img src="assets/images/img-3.png" alt="img">
+                    </div>
+                </div>
+            </div>
+            <div class="ea__section-wrapper flex flex-end gap-4">
+                <button class="previous-btn flex gap-2 items-center">
+                    <i class="ea-dash-icon ea-left-arrow-long"></i>
+                    Previous
+                </button>
+                <button class="primary-btn install-btn flex gap-2 items-center">
+                    Next
+                    <i class="ea-dash-icon ea-right-arrow-long"></i>
+                </button>
+            </div>
+        </section>
+    </section>
+	
         <div class="eael-quick-setup-wizard-wrap">
 			<?php
 			$this->change_site_title();

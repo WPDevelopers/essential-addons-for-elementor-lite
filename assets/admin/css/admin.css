@@ -7001,7 +7001,7 @@ section.ea__onboard-main-wrapper {
     background-color: transparent;
     border: 1.5px solid #D0D5DD;
     border-radius: 50%;
-    transition: ease-in-out .35s;
+    transition: ease-in-out .15s;
     margin-bottom: 16px;
     position: relative;
 }
@@ -7016,7 +7016,6 @@ section.ea__onboard-main-wrapper {
     height: 10px;
     border: solid #fff;
     border-width: 0 2px 2px 0;
-    transition: ease-in-out .35s;
     -webkit-transform: translateY(-50%) translateX(-50%) rotate(46deg);
     -ms-transform: translateY(-50%) translateX(-50%) rotate(46deg);
     transform: translateY(-50%) translateX(-50%) rotate(46deg);
