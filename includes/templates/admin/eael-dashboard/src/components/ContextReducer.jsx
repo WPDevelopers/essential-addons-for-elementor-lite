@@ -1,6 +1,7 @@
 import {useEffect, useReducer} from "react";
 import {ContextProvider} from '../context'
 import App from "./App.jsx";
+import {eaAjax} from "../helper";
 
 function ContextReducer() {
 
@@ -70,6 +71,26 @@ function ContextReducer() {
                 return {...state, search: payload.value};
             case 'OPEN_LICENSE_FORM':
                 return {...state, licenseFormOpen: payload};
+            case 'LICENSE_ACTIVATE':
+                const params = {
+                        action: 'essential-addons-elementor/license/activate',
+                        license_key: payload,
+                        _nonce: wpdeveloperLicenseManagerConfig.nonce
+                    },
+                    response = eaAjax(params);
+
+                let licenseError = false,
+                    otp = false,
+                    otpEmail = '';
+
+                if (response?.success) {
+                    otp = response.data.license === 'required_otp';
+                    otpEmail = response.data.customer_email;
+                } else {
+                    licenseError = true;
+                }
+
+                return {...state, otp, licenseError, otpEmail};
         }
     }
 
