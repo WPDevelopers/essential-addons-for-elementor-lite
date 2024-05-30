@@ -1,7 +1,13 @@
 import consumer from "../context/index.js";
+import {useRef} from "react";
 
 function LicenseOtpForm() {
-    const {eaState, eaDispatch} = consumer();
+    const otpRef = useRef(),
+        {eaState, eaDispatch} = consumer(),
+        submitHandler = () => {
+            // eaDispatch({type: 'ON_PROCESSING', payload: {licenseBtn: true}});
+            eaDispatch({type: 'OTP_VERIFY', payload: otpRef.current.value});
+        };
 
     return (
         <>
@@ -10,9 +16,8 @@ function LicenseOtpForm() {
                     your email. copy the code and insert it bellow:
                 </p>
                 <div className="license-key-items flex items-center">
-                    <input className="input-api" type="text"
-                           placeholder="Enter Your Verification Code"/>
-                    <button className="primary-btn verify-btn">Verify</button>
+                    <input ref={otpRef} className="input-api" type="text" placeholder="Enter Your Verification Code"/>
+                    <button className="primary-btn verify-btn" onClick={submitHandler}>Verify</button>
                 </div>
                 <p className="resend-content">
                     Haven’t receive email. Code has been sent to this mail.

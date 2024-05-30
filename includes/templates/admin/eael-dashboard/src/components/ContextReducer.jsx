@@ -36,6 +36,9 @@ function ContextReducer() {
     }, []);
 
     const reducer = (state, {type, payload}) => {
+        const licenseManagerConfig = typeof wpdeveloperLicenseManagerConfig === 'undefined' ? {} : wpdeveloperLicenseManagerConfig;
+        let params, response, licenseStatus, licenseError, otp, otpEmail, errorMessage;
+
         switch (type) {
             case 'ON_PROCESSING':
                 return {...state, ...payload};
@@ -74,17 +77,16 @@ function ContextReducer() {
             case 'OPEN_LICENSE_FORM':
                 return {...state, licenseFormOpen: payload};
             case 'LICENSE_ACTIVATE':
-                const licenseManagerConfig = typeof wpdeveloperLicenseManagerConfig === 'undefined' ? {} : wpdeveloperLicenseManagerConfig,
-                    params = {
-                        action: 'essential-addons-elementor/license/activate',
-                        license_key: payload,
-                        _nonce: licenseManagerConfig?.nonce
-                    },
-                    response = eaAjax(params);
+                params = {
+                    action: 'essential-addons-elementor/license/activate',
+                    license_key: payload,
+                    _nonce: licenseManagerConfig?.nonce
+                };
+                response = eaAjax(params);
 
-                let licenseError = false,
-                    otp = false,
-                    otpEmail = '';
+                licenseError = false;
+                otp = false;
+                otpEmail = '';
 
                 if (response?.success) {
                     otp = response.data.license === 'required_otp';
@@ -93,7 +95,25 @@ function ContextReducer() {
                     licenseError = true;
                 }
 
-                return {...state, otp, licenseError, otpEmail};
+                return {...state, otp, licenseError, otpEmail, errorMessage, license_key: payload};
+            case 'OTP_VERIFY':
+                params = {
+                    action: 'essential-addons-elementor/license/submit-otp',
+                    license: state.license_key,
+                    otp: payload,
+                    _nonce: licenseManagerConfig?.nonce
+                };
+                response = eaAjax(params);
+                console.log(response)
+                if (response?.success) {
+                    otp = false;
+                    licenseStatus = 'valid';
+                } else {
+                    licenseError = true;
+                    errorMessage = response.data.message;
+                }
+
+                return {...state, licenseStatus, licenseError, errorMessage};
         }
     }
 
