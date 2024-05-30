@@ -120,6 +120,8 @@ function ea_conditional_logic_type_title(value) {
         recurring_day: eael_select2_localize.cl_recurring_day,
         query_string: eael_select2_localize.cl_query_string,
         visit_count: eael_select2_localize.cl_visit_count,
+        woo_products: eael_select2_localize.cl_woo_products,
+        woo_cart: eael_select2_localize.cl_woo_cart
     };
 
     return labelValues[value] ? labelValues[value] : '';
