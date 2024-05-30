@@ -138,6 +138,8 @@ function ContextReducer() {
                 return {...state, licenseStatus, hiddenLicenseKey, licenseError, errorMessage};
             case 'OPEN_MODAL':
                 return {...state, modal: 'open'}
+            case 'CLOSE_MODAL':
+                return {...state, modal: 'close'}
         }
     }
 
