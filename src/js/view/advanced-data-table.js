@@ -135,9 +135,9 @@ class advancedDataTable {
 
   // frontend - sort
   initTableSort(table, pagination, classCollection) {
-    if($(table).hasClass('ea-advanced-data-table-sortable')){
-      $(table).click(function(e) {
-        var th = $(e.target).closest("th");
+    if(jQuery(table).hasClass('ea-advanced-data-table-sortable')){
+      jQuery(table).click(function(e) {
+        var th = jQuery(e.target).closest("th");
         if (!th.length) return; // click wasn't on a table header
     
         var _table = th.closest("table");
@@ -191,8 +191,8 @@ class advancedDataTable {
     
         rows.sort(function(a, b) {
           var colIndex = th.index();
-          var valueA = $(a).children().eq(colIndex).text().toUpperCase();
-          var valueB = $(b).children().eq(colIndex).text().toUpperCase();
+          var valueA = jQuery(a).children().eq(colIndex).text().toUpperCase();
+          var valueB = jQuery(b).children().eq(colIndex).text().toUpperCase();
 
           if (isLikelyDate(valueA) && isLikelyDate(valueB)) {
             // Both are likely dates, sort by parsed date
@@ -219,8 +219,8 @@ class advancedDataTable {
         });
 
         if (pagination && pagination.innerHTML.length > 0) {
-          let itemsPerPage   = $(table).data('items-per-page'),
-              paginationType = $(pagination).hasClass( "ea-advanced-data-table-pagination-button" ) ? "button": "select",
+          let itemsPerPage   = jQuery(table).data('items-per-page'),
+              paginationType = jQuery(pagination).hasClass( "ea-advanced-data-table-pagination-button" ) ? "button": "select",
               currentPage    =  startIndex = 1,
               endIndex       = rows.length;
           
@@ -229,9 +229,9 @@ class advancedDataTable {
           startIndex = (currentPage - 1) * itemsPerPage;
           endIndex = endIndex - (currentPage - 1) * itemsPerPage >= itemsPerPage ? currentPage * itemsPerPage : endIndex;
 
-          $(rows).removeAttr('style');
+          jQuery(rows).removeAttr('style');
           for (let i = startIndex; i < endIndex; i++) {
-              $(rows[i]).attr('style', 'display: table-row;');
+            jQuery(rows[i]).attr('style', 'display: table-row;');
           }
         }
 
