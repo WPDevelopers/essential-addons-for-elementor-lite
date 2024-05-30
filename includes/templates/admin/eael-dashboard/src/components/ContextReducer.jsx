@@ -118,7 +118,7 @@ function ContextReducer() {
                     errorMessage = response.data.message;
                 }
 
-                return {...state, licenseStatus, hiddenLicenseKey, licenseError, errorMessage};
+                return {...state, licenseStatus, hiddenLicenseKey, licenseError, errorMessage, otp};
         }
     }
 
