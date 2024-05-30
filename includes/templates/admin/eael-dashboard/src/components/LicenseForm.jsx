@@ -22,8 +22,10 @@ function LicenseForm() {
                     <i className="ea-dash-icon  ea-key"></i>
                     <input ref={licenseRef} disabled={disabled} className="input-api" type="text"
                            placeholder={eaState.hiddenLicenseKey || "Place Your License Key and Active"}/>
-                    <button className="primary-btn install-btn" onClick={submitHandler}
-                            disabled={eaState.otp === true}>{eaState.licenseStatus === 'valid' ? "Deactivate" : "Active License"}
+                    <button
+                        className={eaState.licenseStatus === 'valid' ? 'primary-btn install-btn deactivated' : 'primary-btn install-btn'}
+                        onClick={submitHandler}
+                        disabled={eaState.otp === true}>{eaState.licenseStatus === 'valid' ? "Deactivate" : "Active License"}
                     </button>
                 </div>
             </div>
