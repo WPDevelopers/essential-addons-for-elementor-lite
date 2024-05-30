@@ -122,6 +122,7 @@ function ea_conditional_logic_type_title(value) {
         url_contains: eael_select2_localize.cl_url_contains,
         archive: eael_select2_localize.cl_archive,
         woo_products: eael_select2_localize.cl_woo_products,
+        visit_count: eael_select2_localize.cl_visit_count,
         woo_cart: eael_select2_localize.cl_woo_cart,
         woo_orders: eael_select2_localize.cl_woo_orders,
     };

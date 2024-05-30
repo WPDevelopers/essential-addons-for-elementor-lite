@@ -35,6 +35,7 @@
                             &.eael-simple-menu-indicator{
                                 display: none;
                             }
+                            display: none;
                         }
                     }
 
@@ -414,6 +415,8 @@
                     span {
                         position: relative;
                         margin-left: 5px;
+                        padding-right: 4px;
+                        border: 1px solid transparent;
                     }
                 }
 
@@ -717,6 +720,7 @@
 
 .eael-simple-menu-container {
     .eael-simple-menu-toggle {
+        display: none;
         svg {
             width: 35px;
             height: auto;
@@ -760,8 +764,4 @@
         }
 
     }
-}
-
-.eael-simple-menu-container .eael-simple-menu-toggle {
-    display: none;
 }
