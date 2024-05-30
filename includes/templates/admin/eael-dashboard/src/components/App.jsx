@@ -7,6 +7,7 @@ import Tools from './Tools.jsx'
 import Integration from './Integration.jsx'
 import Premium from './Premium.jsx'
 import consumer from "../context";
+import Modal from "./Modal.jsx";
 import '../App.css'
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
                     {eaState.menu === 'Integration' ? <Integration/> : ''}
                     {eaState.menu === 'Go Premium' ? <Premium/> : ''}
                 </section>
+                {eaState.modal === 'open' && <Modal/>}
             </section>
         </>
     )

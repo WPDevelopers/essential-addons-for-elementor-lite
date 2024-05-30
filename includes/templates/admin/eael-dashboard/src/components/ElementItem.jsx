@@ -8,6 +8,9 @@ function ElementItem(props) {
         checked = !isDisabled && eaState.elements[props.index],
         changeHandler = (e) => {
             eaDispatch({type: 'ON_CHANGE_ELEMENT', payload: {key: props.index, value: e.target.checked}});
+        },
+        clickHandler = () => {
+            eaDispatch({type: 'OPEN_MODAL', payload: {key: '', value: ''}});
         };
 
     return (
@@ -27,7 +30,7 @@ function ElementItem(props) {
                     <div className="content-icons">
                         <a href={eaData.doc_link} target="_blank"><i className="ea-dash-icon ea-docs"></i></a>
                         <a href={eaData.demo_link} target="_blank"><i className="ea-dash-icon ea-link-2"></i></a>
-                        {eaData.setting ? <i className="ea-dash-icon ea-settings"></i> : ''}
+                        {eaData.setting ? <i className="ea-dash-icon ea-settings" onClick={clickHandler}></i> : ''}
                     </div>
                 </div>
             </div>
