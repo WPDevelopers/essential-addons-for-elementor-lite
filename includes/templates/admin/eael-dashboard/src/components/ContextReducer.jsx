@@ -15,7 +15,8 @@ function ContextReducer() {
             elements: {},
             extensionAll: false,
             widgetAll: false,
-            licenseStatus: licenseData?.license_status
+            licenseStatus: licenseData?.license_status,
+            hiddenLicenseKey: licenseData?.hidden_license_key
         }
 
     useEffect(() => {
@@ -39,7 +40,7 @@ function ContextReducer() {
 
     const reducer = (state, {type, payload}) => {
         const licenseManagerConfig = typeof wpdeveloperLicenseManagerConfig === 'undefined' ? {} : wpdeveloperLicenseManagerConfig;
-        let params, response, licenseStatus, licenseError, otp, otpEmail, errorMessage;
+        let params, response, licenseStatus, licenseError, otp, otpEmail, errorMessage, hiddenLicenseKey;
 
         switch (type) {
             case 'ON_PROCESSING':
@@ -107,16 +108,17 @@ function ContextReducer() {
                     _nonce: licenseManagerConfig?.nonce
                 };
                 response = eaAjax(params);
-                console.log(response)
+
                 if (response?.success) {
                     otp = false;
-                    licenseStatus = 'valid';
+                    licenseStatus = response.data.license;
+                    hiddenLicenseKey = response.data.license_key;
                 } else {
                     licenseError = true;
                     errorMessage = response.data.message;
                 }
 
-                return {...state, licenseStatus, licenseError, errorMessage};
+                return {...state, licenseStatus, hiddenLicenseKey, licenseError, errorMessage};
         }
     }
 
