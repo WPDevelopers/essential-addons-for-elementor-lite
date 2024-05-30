@@ -6,6 +6,7 @@ import {eaAjax} from "../helper";
 function ContextReducer() {
 
     const eaData = localize.eael_dashboard,
+        licenseData = typeof wpdeveloperLicenseData === 'undefined' ? {} : wpdeveloperLicenseData,
         initValue = {
             menu: 'General',
             integrations: {},
@@ -13,7 +14,8 @@ function ContextReducer() {
             widgets: {},
             elements: {},
             extensionAll: false,
-            widgetAll: false
+            widgetAll: false,
+            licenseStatus: licenseData?.license_status
         }
 
     useEffect(() => {

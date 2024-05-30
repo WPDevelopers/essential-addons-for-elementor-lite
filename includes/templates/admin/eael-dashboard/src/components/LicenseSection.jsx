@@ -6,8 +6,7 @@ import LicenseUnlockBox from "./LicenseUnlockBox.jsx";
 import LicenseActivatedBox from "./LicenseActivatedBox.jsx";
 
 function LicenseSection() {
-    const licenseData = typeof wpdeveloperLicenseData === 'undefined' ? {} : wpdeveloperLicenseData,
-        {eaState, eaDispatch} = consumer(),
+    const {eaState, eaDispatch} = consumer(),
         isOpenForm = eaState?.licenseFormOpen === true,
         clickHandler = () => {
             eaDispatch({type: 'OPEN_LICENSE_FORM', payload: !isOpenForm});
@@ -16,9 +15,9 @@ function LicenseSection() {
     return (
         <>
             <div className="ea__general-content-item relative">
-                {licenseData?.license_status !== 'valid' ? <LicenseUnlockBox/> : <LicenseActivatedBox/>}
+                {eaState.licenseStatus !== 'valid' ? <LicenseUnlockBox/> : <LicenseActivatedBox/>}
                 <div className="ea__license-wrapper">
-                    {licenseData?.license_status !== 'valid' &&
+                    {eaState.licenseStatus !== 'valid' &&
                         <div className="ea__license-content" onClick={clickHandler}>
                             <h5>
                                 How to get license key?
@@ -27,13 +26,13 @@ function LicenseSection() {
                         </div>
                     }
 
-                    {licenseData?.license_status === 'valid' &&
+                    {eaState.licenseStatus === 'valid' &&
                         <div className="ea__license-options-wrapper">
                             <LicenseForm/>
                         </div>
                     }
 
-                    {(licenseData?.license_status !== 'valid' && isOpenForm) &&
+                    {(eaState.licenseStatus !== 'valid' && isOpenForm) &&
                         <div className="ea__license-options-wrapper">
                             <LicenseSteps/>
                             <LicenseForm/>
