@@ -256,3 +256,10 @@
 .elementor-control-type-eael-image-choose .elementor-choices input:checked+.elementor-choices-label{
 	background: #333538;
 }  will do add it letter */
+
+.elementor-control-url_contains_url_type .elementor-choices-label{
+	line-height: 32px;
+}
+.elementor-control-url_contains_url_type .elementor-choices-label i{
+	font-size: 180%;
+}
