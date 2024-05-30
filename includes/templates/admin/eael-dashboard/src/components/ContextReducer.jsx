@@ -95,6 +95,7 @@ function ContextReducer() {
                     otpEmail = response.data.customer_email;
                 } else {
                     licenseError = true;
+                    errorMessage = response.data.message;
                 }
 
                 return {...state, otp, licenseError, otpEmail, errorMessage, license_key: payload};
