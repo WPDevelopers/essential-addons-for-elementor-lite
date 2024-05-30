@@ -6,7 +6,12 @@ function LicenseForm() {
         {eaState, eaDispatch} = consumer(),
         submitHandler = () => {
             eaDispatch({type: 'ON_PROCESSING', payload: {licenseBtn: true}});
-            eaDispatch({type: 'LICENSE_ACTIVATE', payload: licenseRef.current.value});
+
+            if (eaState.licenseStatus !== 'valid') {
+                eaDispatch({type: 'LICENSE_ACTIVATE', payload: licenseRef.current.value});
+            } else {
+                eaDispatch({type: 'LICENSE_DEACTIVATE'});
+            }
         },
         disabled = eaState.otp === true || eaState.licenseStatus === 'valid';
 
