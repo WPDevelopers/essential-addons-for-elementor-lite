@@ -135,14 +135,13 @@ class advancedDataTable {
 
   // frontend - sort
   initTableSort(table, pagination, classCollection) {
-    table = $(table);
-    if(table.hasClass('ea-advanced-data-table-sortable')){
-      table.click(function(e) {
+    if($(table).hasClass('ea-advanced-data-table-sortable')){
+      $(table).click(function(e) {
         var th = $(e.target).closest("th");
         if (!th.length) return; // click wasn't on a table header
     
-        var table = th.closest("table");
-        var tbody = table.find("tbody");
+        var _table = th.closest("table");
+        var tbody = _table.find("tbody");
         var rows = tbody.find("tr");
     
         var sortOrder = 1;
@@ -220,7 +219,7 @@ class advancedDataTable {
         });
 
         if (pagination && pagination.innerHTML.length > 0) {
-          let itemsPerPage   = table.data('items-per-page'),
+          let itemsPerPage   = $(table).data('items-per-page'),
               paginationType = $(pagination).hasClass( "ea-advanced-data-table-pagination-button" ) ? "button": "select",
               currentPage    =  startIndex = 1,
               endIndex       = rows.length;
