@@ -7,6 +7,9 @@ function LicenseOtpForm() {
         submitHandler = () => {
             // eaDispatch({type: 'ON_PROCESSING', payload: {licenseBtn: true}});
             eaDispatch({type: 'OTP_VERIFY', payload: otpRef.current.value});
+        },
+        clickHandler = () => {
+            eaDispatch({type: 'RESEND_OTP'});
         };
 
     return (
@@ -20,10 +23,9 @@ function LicenseOtpForm() {
                     <button className="primary-btn verify-btn" onClick={submitHandler}>Verify</button>
                 </div>
                 <p className="resend-content">
-                    Haven’t receive email. Code has been sent to this mail.
-                    Please <br/>
-                    <span className="resend-text">resend button</span>
-                    your email. copy the code and insert it meanutes.
+                    Haven’t receive email. Code has been sent to this mail. Please <br/>
+                    <span className="resend-text" onClick={clickHandler}>resend button</span> your email. copy the code and insert
+                    it meanutes.
                     <i className="ea-dash-icon  ea-info">
                     <span className="tooltip-api">
                         Check out this <span className="color-ex">guide</span> to verify your

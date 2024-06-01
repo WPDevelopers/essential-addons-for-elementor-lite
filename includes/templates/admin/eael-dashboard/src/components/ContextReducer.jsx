@@ -106,7 +106,16 @@ function ContextReducer() {
                     errorMessage = response.data.message;
                 }
 
-                return {...state, otp, licenseStatus, hiddenLicenseKey, licenseError, otpEmail, errorMessage, licenseKey: payload};
+                return {
+                    ...state,
+                    otp,
+                    licenseStatus,
+                    hiddenLicenseKey,
+                    licenseError,
+                    otpEmail,
+                    errorMessage,
+                    licenseKey: payload
+                };
             case 'OTP_VERIFY':
                 params = {
                     action: 'essential-addons-elementor/license/submit-otp',
@@ -143,6 +152,22 @@ function ContextReducer() {
                 }
 
                 return {...state, licenseStatus, hiddenLicenseKey, licenseError, errorMessage};
+            case 'RESEND_OTP':
+                params = {
+                    action: 'essential-addons-elementor/license/resend-otp',
+                    _nonce: licenseManagerConfig?.nonce,
+                    license: state.licenseKey
+                };
+                response = eaAjax(params);
+
+                if (response?.success) {
+                    otp = true;
+                } else {
+                    licenseError = true;
+                    errorMessage = response.data.message;
+                }
+
+                return {...state, otp, licenseError, errorMessage};
             case 'OPEN_MODAL':
                 return {...state, modal: 'open'}
             case 'CLOSE_MODAL':
