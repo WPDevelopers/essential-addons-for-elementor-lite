@@ -89,17 +89,24 @@ function ContextReducer() {
 
                 licenseError = false;
                 otp = false;
-                otpEmail = '';
+                otpEmail = response.data.customer_email;
 
                 if (response?.success) {
-                    otp = response.data.license === 'required_otp';
-                    otpEmail = response.data.customer_email;
+                    switch (response.data.license) {
+                        case 'required_otp':
+                            otp = true;
+                            break;
+                        case 'valid':
+                            licenseStatus = response.data.license;
+                            hiddenLicenseKey = response.data.license_key;
+                            break;
+                    }
                 } else {
                     licenseError = true;
                     errorMessage = response.data.message;
                 }
 
-                return {...state, otp, licenseError, otpEmail, errorMessage, license_key: payload};
+                return {...state, otp, licenseStatus, hiddenLicenseKey, licenseError, otpEmail, errorMessage, license_key: payload};
             case 'OTP_VERIFY':
                 params = {
                     action: 'essential-addons-elementor/license/submit-otp',
