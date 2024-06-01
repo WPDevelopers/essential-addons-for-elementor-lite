@@ -10,8 +10,7 @@ function LicenseSteps() {
                 <div className="ea__license-step-items flex items-center">
                     <span className="step-count">2</span>
                     <p>If you don't yet have a license key, get <span
-                        className="step-details-ex">BetterDocs Pro</span>
-                        now.</p>
+                        className="step-details-ex">Essential Addons Pro</span> now.</p>
                 </div>
                 <div className="ea__license-step-items flex items-center">
                     <span className="step-count">3</span>
