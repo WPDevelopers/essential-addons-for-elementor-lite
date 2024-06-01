@@ -269,7 +269,10 @@ input:focus {
   color: var(--base-background);
   border: 1px solid var(--base-color-75);
   background: conic-gradient(from 195.22deg at 68.31% 39.29%, rgba(143, 32, 251, 0) 0deg, #8F20FB 360deg), linear-gradient(0deg, #6F0AF2, #6F0AF2);
+}
 
+#ea__dashboard--wrapper .primary-btn.install-btn[disabled] {
+  cursor: not-allowed;
 }
 
 #ea__dashboard--wrapper button.primary-btn.changelog-btn i {
@@ -1846,6 +1849,10 @@ input.input-api {
   flex: 1;
 }
 
+input.input-api[disabled] {
+  box-shadow: none;
+}
+
 .ea__license-verify {
   padding: 24px;
   background: #FFFCF5;
@@ -1886,7 +1893,6 @@ input.input-api {
   color: var(--base-background);
   border: 1px solid #D92D20;
   background: #D92D20;
-  cursor: not-allowed;
 }
 
 .resend-text {
