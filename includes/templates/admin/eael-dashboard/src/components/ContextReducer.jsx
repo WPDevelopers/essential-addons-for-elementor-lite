@@ -106,11 +106,11 @@ function ContextReducer() {
                     errorMessage = response.data.message;
                 }
 
-                return {...state, otp, licenseStatus, hiddenLicenseKey, licenseError, otpEmail, errorMessage, license_key: payload};
+                return {...state, otp, licenseStatus, hiddenLicenseKey, licenseError, otpEmail, errorMessage, licenseKey: payload};
             case 'OTP_VERIFY':
                 params = {
                     action: 'essential-addons-elementor/license/submit-otp',
-                    license: state.license_key,
+                    license: state.licenseKey,
                     otp: payload,
                     _nonce: licenseManagerConfig?.nonce
                 };
