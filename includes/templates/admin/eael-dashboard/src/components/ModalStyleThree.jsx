@@ -20,15 +20,18 @@ function ModalStyleThree() {
                             <i className="ea-dash-icon ea-dropdown"></i>
                         </div>
                     </div>
-                    <div className="ea__according-content flex flex-col gap-2">
-                        {eaData.accordion[item].fields.map((subItem, subIndex) => {
-                            return (<div className="flex gap-4 items-center" key={subIndex}>
-                                <label>{subItem.label}</label>
-                                <input name={subItem.name} className="input-name" type="text"
-                                       placeholder={subItem.placeholder}/>
-                            </div>);
-                        })}
-                    </div>
+                    {item === eaState.modalAccordion &&
+                        (<div className="ea__according-content flex flex-col gap-2">
+                            {eaData.accordion[item].fields.map((subItem, subIndex) => {
+                                return (<div className="flex gap-4 items-center" key={subIndex}>
+                                    <label>{subItem.label}</label>
+                                    <input name={subItem.name} className="input-name" type="text"
+                                           placeholder={subItem.placeholder}/>
+                                </div>);
+                            })}
+                        </div>)
+                    }
+
                 </div>
             })}
         </>
