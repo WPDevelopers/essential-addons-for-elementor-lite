@@ -1204,7 +1204,7 @@ trait Admin {
 				        'accordion' => [
 					        'reCaptchaV2'    => [
 						        'title'  => __( 'reCAPTCHA v2', 'essential-addons-for-elementor-lite' ),
-						        'icon'   => 'image/map.svg',
+						        'icon'   => 'images/recap.svg',
 						        'fields' => [
 							        [
 								        'name'        => 'lr_recaptcha_sitekey',
@@ -1225,7 +1225,7 @@ trait Admin {
 					        ],
 					        'reCaptchaV3'    => [
 						        'title'  => __( 'reCAPTCHA v3', 'essential-addons-for-elementor-lite' ),
-						        'icon'   => 'image/map.svg',
+						        'icon'   => 'images/recap.svg',
 						        'fields' => [
 							        [
 								        'name'        => 'lr_recaptcha_sitekey_v3',
@@ -1246,7 +1246,7 @@ trait Admin {
 					        ],
 					        'googleLogin'    => [
 						        'title'  => __( 'Google Login', 'essential-addons-for-elementor-lite' ),
-						        'icon'   => 'image/map.svg',
+						        'icon'   => 'images/map.svg',
 						        'fields' => [
 							        [
 								        'name'        => 'lr_g_client_id',
@@ -1257,7 +1257,7 @@ trait Admin {
 					        ],
 					        'facebookLogin'  => [
 						        'title'  => __( 'Facebook Login', 'essential-addons-for-elementor-lite' ),
-						        'icon'   => 'image/map.svg',
+						        'icon'   => 'images/map.svg',
 						        'fields' => [
 							        [
 								        'name'        => 'lr_fb_app_id',
@@ -1273,7 +1273,7 @@ trait Admin {
 					        ],
 					        'mailchimpLogin' => [
 						        'title'  => __( 'Mailchimp Integration', 'essential-addons-for-elementor-lite' ),
-						        'icon'   => 'image/map.svg',
+						        'icon'   => 'images/mc.svg',
 						        'fields' => [
 							        [
 								        'name'        => 'lr_mailchimp_api_key',
@@ -1284,7 +1284,7 @@ trait Admin {
 					        ],
 					        'customFields'   => [
 						        'title'  => __( 'Enable Custom Fields', 'essential-addons-for-elementor-lite' ),
-						        'icon'   => 'image/map.svg',
+						        'icon'   => 'images/map.svg',
 						        'fields' => [
 							        [
 								        'name'        => 'lr_custom_profile_fields_text',
