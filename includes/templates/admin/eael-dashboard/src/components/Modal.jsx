@@ -1,6 +1,7 @@
 import consumer from "../context/index.js";
 import ModalStyleOne from "./ModalStyleOne.jsx";
 import ModalStyleTwo from "./ModalStyleTwo.jsx";
+import ModalStyleThree from "./ModalStyleThree.jsx";
 
 function Modal(props) {
     const {eaState, eaDispatch} = consumer(),
@@ -17,8 +18,10 @@ function Modal(props) {
                     </div>
                     <div className="ea__modal-body">
                         <form action="#" method="post">
+                            {eaState.modalID === 'loginRegisterSetting' && <ModalStyleThree/>}
                             {eaState.modalID === 'postDuplicatorSetting' && <ModalStyleTwo/>}
-                            {eaState.modalID === 'postDuplicatorSetting' || <ModalStyleOne/>}
+                            {['loginRegisterSetting', 'postDuplicatorSetting'].includes(eaState.modalID) ||
+                                <ModalStyleOne/>}
                         </form>
                     </div>
                     <div className="ea__modal-footer flex flex-end">
