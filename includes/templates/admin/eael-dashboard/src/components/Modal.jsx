@@ -15,7 +15,9 @@ function Modal(props) {
                         <h5>{eaState.modalTitle}</h5>
                     </div>
                     <div className="ea__modal-body">
-                        <ModalStyleOne/>
+                        <form action="#" method="post">
+                            <ModalStyleOne/>
+                        </form>
                     </div>
                     <div className="ea__modal-footer flex flex-end">
                         <button className="ea__modal-btn">Save</button>

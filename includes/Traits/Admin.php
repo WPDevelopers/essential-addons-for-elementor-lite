@@ -1173,18 +1173,14 @@ trait Admin {
 				        'label'      => __( "Set API Key", 'essential-addons-for-elementor-lite' ),
 				        'name'       => 'google-map-api',
 				        'image'      => 'images/map.png',
-				        'link'       => [
-					        'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
-					        'url'  => '#'
-				        ]
 			        ],
 			        'businessReviewsSetting' => [],
 			        'mailchimpSetting'       => [
 				        'title'      => __( "MailChimp API Key", 'essential-addons-for-elementor-lite' ),
-				        'title_icon' => 'images/map.svg',
+				        'title_icon' => 'images/mc.svg',
 				        'label'      => __( "Set API Key", 'essential-addons-for-elementor-lite' ),
-				        'name'       => 'google-map-api',
-				        'image'      => 'images/map.png',
+				        'name'       => 'mailchimp-api',
+				        'image'      => 'images/mc.png',
 				        'link'       => [
 					        'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
 					        'url'  => '#'
