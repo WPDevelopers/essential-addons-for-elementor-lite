@@ -1174,7 +1174,17 @@ trait Admin {
 				        'name'       => 'google-map-api',
 				        'image'      => 'images/map.png',
 			        ],
-			        'businessReviewsSetting' => [],
+			        'businessReviewsSetting' => [
+				        'title'      => __( "Google Place API Key", 'essential-addons-for-elementor-lite' ),
+				        'title_icon' => 'images/map.svg',
+				        'label'      => __( "Set API Key", 'essential-addons-for-elementor-lite' ),
+				        'name'       => 'br_google_place_api_key',
+				        'image'      => 'images/map2.png',
+				        'link'       => [
+					        'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
+					        'url'  => '#'
+				        ]
+					],
 			        'mailchimpSetting'       => [
 				        'title'      => __( "MailChimp API Key", 'essential-addons-for-elementor-lite' ),
 				        'title_icon' => 'images/mc.svg',
