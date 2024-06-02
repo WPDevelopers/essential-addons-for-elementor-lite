@@ -1200,7 +1200,110 @@ trait Admin {
 					        'url'  => '#'
 				        ]
 			        ],
-			        'loginRegisterSetting'   => []
+			        'loginRegisterSetting'   => [
+				        'accordion' => [
+					        'reCaptchaV2'    => [
+						        'title'  => __( 'reCAPTCHA v2', 'essential-addons-for-elementor-lite' ),
+						        'icon'   => 'image/map.svg',
+						        'fields' => [
+							        [
+								        'name'        => 'lr_recaptcha_sitekey',
+								        'label'       => __( 'Site Key:', 'essential-addons-for-elementor-lite' ),
+								        'placeholder' => __( 'Site Key', 'essential-addons-for-elementor-lite' ),
+							        ],
+							        [
+								        'name'        => 'lr_recaptcha_secret',
+								        'label'       => __( 'Site Secret:', 'essential-addons-for-elementor-lite' ),
+								        'placeholder' => __( 'Site Secret', 'essential-addons-for-elementor-lite' ),
+							        ],
+							        [
+								        'name'        => 'lr_recaptcha_language',
+								        'label'       => __( 'Language:', 'essential-addons-for-elementor-lite' ),
+								        'placeholder' => __( 'reCAPTCHA Language Code', 'essential-addons-for-elementor-lite' ),
+							        ]
+						        ]
+					        ],
+					        'reCaptchaV3'    => [
+						        'title'  => __( 'reCAPTCHA v3', 'essential-addons-for-elementor-lite' ),
+						        'icon'   => 'image/map.svg',
+						        'fields' => [
+							        [
+								        'name'        => 'lr_recaptcha_sitekey_v3',
+								        'label'       => __( 'Site Key:', 'essential-addons-for-elementor-lite' ),
+								        'placeholder' => __( 'Site Key', 'essential-addons-for-elementor-lite' ),
+							        ],
+							        [
+								        'name'        => 'lr_recaptcha_secret_v3',
+								        'label'       => __( 'Site Secret:', 'essential-addons-for-elementor-lite' ),
+								        'placeholder' => __( 'Site Secret', 'essential-addons-for-elementor-lite' ),
+							        ],
+							        [
+								        'name'        => 'lr_recaptcha_language_v3',
+								        'label'       => __( 'Language:', 'essential-addons-for-elementor-lite' ),
+								        'placeholder' => __( 'reCAPTCHA Language Code', 'essential-addons-for-elementor-lite' ),
+							        ]
+						        ]
+					        ],
+					        'googleLogin'    => [
+						        'title'  => __( 'Google Login', 'essential-addons-for-elementor-lite' ),
+						        'icon'   => 'image/map.svg',
+						        'fields' => [
+							        [
+								        'name'        => 'lr_g_client_id',
+								        'label'       => __( 'Google Client ID:', 'essential-addons-for-elementor-lite' ),
+								        'placeholder' => __( 'Google Client ID', 'essential-addons-for-elementor-lite' ),
+							        ]
+						        ]
+					        ],
+					        'facebookLogin'  => [
+						        'title'  => __( 'Facebook Login', 'essential-addons-for-elementor-lite' ),
+						        'icon'   => 'image/map.svg',
+						        'fields' => [
+							        [
+								        'name'        => 'lr_fb_app_id',
+								        'label'       => __( 'Facebook App ID:', 'essential-addons-for-elementor-lite' ),
+								        'placeholder' => __( 'Facebook App ID', 'essential-addons-for-elementor-lite' ),
+							        ],
+							        [
+								        'name'        => 'lr_fb_app_secret',
+								        'label'       => __( 'Facebook App Secret:', 'essential-addons-for-elementor-lite' ),
+								        'placeholder' => __( 'Facebook App Secret', 'essential-addons-for-elementor-lite' ),
+							        ]
+						        ]
+					        ],
+					        'mailchimpLogin' => [
+						        'title'  => __( 'Mailchimp Integration', 'essential-addons-for-elementor-lite' ),
+						        'icon'   => 'image/map.svg',
+						        'fields' => [
+							        [
+								        'name'        => 'lr_mailchimp_api_key',
+								        'label'       => __( 'Mailchimp API Key:', 'essential-addons-for-elementor-lite' ),
+								        'placeholder' => __( 'Mailchimp API', 'essential-addons-for-elementor-lite' ),
+							        ]
+						        ]
+					        ],
+					        'customFields'   => [
+						        'title'  => __( 'Enable Custom Fields', 'essential-addons-for-elementor-lite' ),
+						        'icon'   => 'image/map.svg',
+						        'fields' => [
+							        [
+								        'name'        => 'lr_custom_profile_fields_text',
+								        'label'       => __( 'Text Type Fields:', 'essential-addons-for-elementor-lite' ),
+								        'placeholder' => __( 'Field 1, Field 2 ...', 'essential-addons-for-elementor-lite' ),
+							        ],
+							        [
+								        'name'        => 'lr_custom_profile_fields_img',
+								        'label'       => __( 'File Type Fields:', 'essential-addons-for-elementor-lite' ),
+								        'placeholder' => __( 'Field 1, Field 2 ...', 'essential-addons-for-elementor-lite' ),
+							        ]
+						        ]
+					        ],
+				        ],
+				        'link'      => [
+					        'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
+					        'url'  => '#'
+				        ]
+			        ]
 		        ]
 	        ];
 

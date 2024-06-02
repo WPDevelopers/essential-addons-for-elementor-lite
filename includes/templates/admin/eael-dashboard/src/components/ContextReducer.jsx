@@ -172,6 +172,8 @@ function ContextReducer() {
                 return {...state, modal: 'open', modalID: payload.key, modalTitle: payload.title}
             case 'CLOSE_MODAL':
                 return {...state, modal: 'close'}
+            case 'MODAL_ACCORDION':
+                return {...state, modalAccordion: payload.key}
         }
     }
 
