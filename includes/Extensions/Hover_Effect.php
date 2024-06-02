@@ -52,7 +52,6 @@ class Hover_Effect {
 			'eael_hover_effect_enable_live_changes_note',
 			[
 				'type'            => Controls_Manager  :: RAW_HTML,
-				'separator' 	  => 'after',
 				'raw'             => __( 'Enabling this option will let you preview the Hover Interactions inside the Elementor Editor.', 'essential-addons-for-elementor-lite' ),
 				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 				'condition'       => [
@@ -75,16 +74,6 @@ class Hover_Effect {
 				]
 			]
 		);
-
-        //Background
-        // $element->add_group_control(
-		// 	\Elementor\Group_Control_Background::get_type(),
-		// 	[
-		// 		'name'     => 'eael_hover_effect_background',
-		// 		'types'    => [ 'classic', 'gradient' ],
-		// 		'selector' => '{{WRAPPER}} .elementor-widget-container',
-		// 	]
-		// );
 
         //Opacity
         $element->add_control(
@@ -707,16 +696,6 @@ class Hover_Effect {
 				]
 			]
 				);
-
-         //Background Hover
-        // $element->add_group_control(
-		// 	\Elementor\Group_Control_Background::get_type(),
-		// 	[
-		// 		'name'     => 'eael_hover_effect_background_hover',
-		// 		'types'    => [ 'classic', 'gradient' ],
-		// 		'selector' => '{{WRAPPER}} .your-class',
-		// 	]
-		// );
 
         //Opacity Hover
         $element->add_control(
