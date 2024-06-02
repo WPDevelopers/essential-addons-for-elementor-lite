@@ -76,16 +76,6 @@ class Hover_Effect {
 			]
 		);
 
-        //Background
-        // $element->add_group_control(
-		// 	\Elementor\Group_Control_Background::get_type(),
-		// 	[
-		// 		'name'     => 'eael_hover_effect_background',
-		// 		'types'    => [ 'classic', 'gradient' ],
-		// 		'selector' => '{{WRAPPER}} .elementor-widget-container',
-		// 	]
-		// );
-
         //Opacity
         $element->add_control(
 			'eael_hover_effect_opacity_popover',
@@ -707,16 +697,6 @@ class Hover_Effect {
 				]
 			]
 				);
-
-         //Background Hover
-        // $element->add_group_control(
-		// 	\Elementor\Group_Control_Background::get_type(),
-		// 	[
-		// 		'name'     => 'eael_hover_effect_background_hover',
-		// 		'types'    => [ 'classic', 'gradient' ],
-		// 		'selector' => '{{WRAPPER}} .your-class',
-		// 	]
-		// );
 
         //Opacity Hover
         $element->add_control(
