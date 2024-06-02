@@ -3,7 +3,7 @@ import ModalStyleOne from "./ModalStyleOne.jsx";
 import ModalStyleTwo from "./ModalStyleTwo.jsx";
 import ModalStyleThree from "./ModalStyleThree.jsx";
 
-function Modal(props) {
+function Modal() {
     const {eaState, eaDispatch} = consumer(),
         clickHandler = () => {
             eaDispatch({type: 'CLOSE_MODAL', payload: {key: '', value: ''}});
