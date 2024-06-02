@@ -20,7 +20,7 @@ $extensions = [
 			],
 			[
 				'key'       => 'smooth-animation',
-				'title'     => __( 'Smooth Animation', 'essential-addons-for-elementor-lite' ),
+				'title'     => __( 'Interactive Animations', 'essential-addons-for-elementor-lite' ),
 				'demo_link' => 'https://essential-addons.com/elementor/parallax-scrolling/',
 				'doc_link'  => 'https://essential-addons.com/elementor/docs/ea-parallax/',
 				'is_pro'    => true,
