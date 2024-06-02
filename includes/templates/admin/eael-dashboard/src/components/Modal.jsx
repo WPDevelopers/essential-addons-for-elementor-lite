@@ -12,7 +12,7 @@ function Modal(props) {
             <section className="ea__modal-wrapper">
                 <div className="ea__modal-content-wrapper">
                     <div className="ea__modal-header">
-                        <h5>Advanced Google Map</h5>
+                        <h5>{eaState.modalTitle}</h5>
                     </div>
                     <div className="ea__modal-body">
                         <ModalStyleOne/>

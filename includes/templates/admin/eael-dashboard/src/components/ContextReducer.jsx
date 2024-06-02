@@ -169,7 +169,7 @@ function ContextReducer() {
 
                 return {...state, otp, licenseError, errorMessage};
             case 'OPEN_MODAL':
-                return {...state, modal: 'open'}
+                return {...state, modal: 'open', modalID: payload.key, modalTitle: payload.title}
             case 'CLOSE_MODAL':
                 return {...state, modal: 'close'}
         }

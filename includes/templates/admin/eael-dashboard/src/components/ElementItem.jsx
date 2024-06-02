@@ -10,7 +10,7 @@ function ElementItem(props) {
             eaDispatch({type: 'ON_CHANGE_ELEMENT', payload: {key: props.index, value: e.target.checked}});
         },
         clickHandler = () => {
-            eaDispatch({type: 'OPEN_MODAL', payload: {key: '', value: ''}});
+            eaDispatch({type: 'OPEN_MODAL', payload: {key: eaData.setting.id, title: eaData.title}});
         };
 
     return (

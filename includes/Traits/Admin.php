@@ -363,7 +363,7 @@ trait Admin {
 					        'demo_link'   => 'https://essential-addons.com/elementor/duplicator/',
 					        'doc_link'    => 'https://essential-addons.com/elementor/docs/duplicator/',
 					        'is_pro'      => false,
-					        'setting'     => [ 'id' => 'eael-post-duplicator-setting' ],
+					        'setting'     => [ 'id' => 'postDuplicatorSetting' ],
 					        'is_activate' => boolval( $this->get_settings( 'post-duplicator' ) )
 				        ],
 				        'custom-js'           => [
@@ -622,7 +622,7 @@ trait Admin {
 						        'demo_link'   => 'https://essential-addons.com/elementor/advanced-google-map/',
 						        'doc_link'    => 'https://essential-addons.com/elementor/docs/advanced-google-map/',
 						        'is_pro'      => true,
-						        'setting'     => $this->pro_enabled ? [ 'id' => 'eael-googl-map-setting' ] : [],
+						        'setting'     => $this->pro_enabled ? [ 'id' => 'googleMapSetting' ] : [],
 						        'promotion'   => 'popular',
 						        'is_activate' => boolval( $this->get_settings( 'adv-google-map' ) )
 					        ],
@@ -682,7 +682,7 @@ trait Admin {
 						        'title'       => __( 'Business Reviews', 'essential-addons-for-elementor-lite' ),
 						        'demo_link'   => 'https://essential-addons.com/elementor/business-reviews/',
 						        'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-business-reviews/',
-						        'setting'     => [ 'id' => 'eael-business-reviews-setting' ],
+						        'setting'     => [ 'id' => 'businessReviewsSetting' ],
 						        'promotion'   => 'new',
 						        'is_activate' => boolval( $this->get_settings( 'business-reviews' ) )
 					        ],
@@ -966,7 +966,7 @@ trait Admin {
 						        'demo_link'   => 'https://essential-addons.com/elementor/mailchimp/',
 						        'doc_link'    => 'https://essential-addons.com/elementor/docs/mailchimp/',
 						        'is_pro'      => true,
-						        'setting'     => $this->pro_enabled ? [ 'id' => 'eael-mailchimp-setting' ] : [],
+						        'setting'     => $this->pro_enabled ? [ 'id' => 'mailchimpSetting' ] : [],
 						        'promotion'   => 'popular',
 						        'is_activate' => boolval( $this->get_settings( 'mailchimp' ) )
 					        ],
@@ -975,7 +975,7 @@ trait Admin {
 						        'title'       => __( 'Login | Register Form', 'essential-addons-for-elementor-lite' ),
 						        'demo_link'   => 'https://essential-addons.com/elementor/login-register-form',
 						        'doc_link'    => 'https://essential-addons.com/elementor/docs/login-register-form/',
-						        'setting'     => [ 'id' => 'eael-login-register-setting' ],
+						        'setting'     => [ 'id' => 'loginRegisterSetting' ],
 						        'promotion'   => 'popular',
 						        'is_activate' => boolval( $this->get_settings( 'login-register' ) )
 					        ],
@@ -1164,6 +1164,33 @@ trait Admin {
 					        ]
 				        ]
 			        ]
+		        ],
+		        'modal'                => [
+			        'postDuplicatorSetting'  => [],
+			        'googleMapSetting'       => [
+				        'title'      => __( "Google Map API Key", 'essential-addons-for-elementor-lite' ),
+				        'title_icon' => 'images/map.svg',
+				        'label'      => __( "Set API Key", 'essential-addons-for-elementor-lite' ),
+				        'name'       => 'google-map-api',
+				        'image'      => 'images/map.png',
+				        'link'       => [
+					        'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
+					        'url'  => '#'
+				        ]
+			        ],
+			        'businessReviewsSetting' => [],
+			        'mailchimpSetting'       => [
+				        'title'      => __( "MailChimp API Key", 'essential-addons-for-elementor-lite' ),
+				        'title_icon' => 'images/map.svg',
+				        'label'      => __( "Set API Key", 'essential-addons-for-elementor-lite' ),
+				        'name'       => 'google-map-api',
+				        'image'      => 'images/map.png',
+				        'link'       => [
+					        'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
+					        'url'  => '#'
+				        ]
+					],
+			        'loginRegisterSetting'   => []
 		        ]
 	        ];
 

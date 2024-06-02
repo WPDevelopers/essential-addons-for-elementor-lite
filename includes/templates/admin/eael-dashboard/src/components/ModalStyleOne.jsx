@@ -1,17 +1,22 @@
+import consumer from "../context/index.js";
+
 function ModalStyleOne() {
+    const {eaState} = consumer(),
+        eaData = localize.eael_dashboard.modal[eaState.modalID];
+
     return (
         <>
             <div className="flex items-center gap-2">
-                <img src={localize.eael_dashboard.reactPath + 'images/map.svg'} alt="mapLogo"/>
-                <h4>Google Map API Key</h4>
+                <img src={localize.eael_dashboard.reactPath + eaData.title_icon} alt="mapLogo"/>
+                <h4>{eaData.title}</h4>
             </div>
             <div>
-                <label className="mb-2">Set API Key</label>
-                <input className="input-name" type="text" placeholder="API Key"/>
-                <a className="ea__api-link" href="#">To configure the API Keys, check out this doc</a>
+                <label className="mb-2">{eaData.label}</label>
+                <input className="input-name" type="text" placeholder="API Key" name={eaData.name}/>
+                {eaData.link === undefined || <a className="ea__api-link" href={eaData.link.url}>{eaData.link.text}</a>}
             </div>
             <img className="ea__modal-map-img"
-                 src={localize.eael_dashboard.reactPath + 'images/map.png'} alt="mapImg"/></>
+                 src={localize.eael_dashboard.reactPath + eaData.image} alt="mapImg"/></>
     );
 }
 
