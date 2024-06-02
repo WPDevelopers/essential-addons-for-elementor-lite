@@ -1166,7 +1166,11 @@ trait Admin {
 			        ]
 		        ],
 		        'modal'                => [
-			        'postDuplicatorSetting'  => [],
+			        'postDuplicatorSetting'  => [
+				        'title'   => __( "Select Post Types", 'essential-addons-for-elementor-lite' ),
+				        'name'    => 'post-duplicator-post-type',
+				        'options' => get_post_types( [ 'public' => true, 'show_in_nav_menus' => true ] )
+			        ],
 			        'googleMapSetting'       => [
 				        'title'      => __( "Google Map API Key", 'essential-addons-for-elementor-lite' ),
 				        'title_icon' => 'images/map.svg',
@@ -1184,7 +1188,7 @@ trait Admin {
 					        'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
 					        'url'  => '#'
 				        ]
-					],
+			        ],
 			        'mailchimpSetting'       => [
 				        'title'      => __( "MailChimp API Key", 'essential-addons-for-elementor-lite' ),
 				        'title_icon' => 'images/mc.svg',
@@ -1195,7 +1199,7 @@ trait Admin {
 					        'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
 					        'url'  => '#'
 				        ]
-					],
+			        ],
 			        'loginRegisterSetting'   => []
 		        ]
 	        ];

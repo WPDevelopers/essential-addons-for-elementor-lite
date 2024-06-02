@@ -1,5 +1,6 @@
 import consumer from "../context/index.js";
 import ModalStyleOne from "./ModalStyleOne.jsx";
+import ModalStyleTwo from "./ModalStyleTwo.jsx";
 
 function Modal(props) {
     const {eaState, eaDispatch} = consumer(),
@@ -16,7 +17,8 @@ function Modal(props) {
                     </div>
                     <div className="ea__modal-body">
                         <form action="#" method="post">
-                            <ModalStyleOne/>
+                            {eaState.modalID === 'postDuplicatorSetting' && <ModalStyleTwo/>}
+                            {eaState.modalID === 'postDuplicatorSetting' || <ModalStyleOne/>}
                         </form>
                     </div>
                     <div className="ea__modal-footer flex flex-end">
