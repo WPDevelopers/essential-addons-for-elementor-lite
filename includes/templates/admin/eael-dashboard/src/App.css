@@ -819,12 +819,12 @@ span.dark-icon {
   z-index: 99;
 }
 .ea__section-overlay {
-  position: sticky;
-  min-height: 200px;
-  background: linear-gradient(360deg, #FFFFFF 33.15%, rgba(255, 255, 255, 0) 100%);
+  position: absolute;
+  min-height: 140px;
+  background: linear-gradient(360deg, #FFFFFF 50%, rgba(255, 255, 255, 0) 100%);
   bottom: 0;
-  left: 0;
-  right: 0;
+  left: 16px;
+  right: 16px;
   border-radius: 8px;
   display: flex;
   justify-content: flex-end;
@@ -835,6 +835,14 @@ span.dark-icon {
   justify-content: flex-end;
   align-items: flex-end;
   padding: 20px;
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+#ea__dashboard--wrapper .ea__elements-button-wrap .primary-btn.install-btn {
+  z-index: 9999;
+  margin-right: 16px;
 }
 
 .ea__content-header.sticky .ea__content-info {
@@ -950,8 +958,7 @@ span.ea__tooltip {
   flex-direction: column;
   gap: 16px;
   background: #F1F2FA;
-  max-height: 400px;
-  overflow: auto;
+  padding-bottom: 26px;
 }
 
 .ea__contents {
