@@ -5540,7 +5540,7 @@ body {
     background: var(--page-background);
 }
 
-#ea__onboard--wrapper {
+#eael-onboard--wrapper {
     font-size: 16px;
     font-family: "Rubik", sans-serif;
 }
@@ -5670,31 +5670,31 @@ img {
     min-height: 538px;
 }
 
-#ea__onboard--wrapper .min-w-220 {
+#eael-onboard--wrapper .min-w-220 {
     min-width: 220px;
 }
 
-#ea__onboard--wrapper .max-w-220 {
+#eael-onboard--wrapper .max-w-220 {
     max-width: 220px;
 }
 
-#ea__onboard--wrapper .min-w-230 {
+#eael-onboard--wrapper .min-w-230 {
     min-width: 230px;
 }
 
-#ea__onboard--wrapper .max-w-230 {
+#eael-onboard--wrapper .max-w-230 {
     max-width: 230px;
 }
 
-#ea__onboard--wrapper .max-w-454 {
+#eael-onboard--wrapper .max-w-454 {
     max-width: 454px;
 }
 
-#ea__onboard--wrapper .underline {
+#eael-onboard--wrapper .underline {
     text-decoration: underline;
 }
 
-#ea__onboard--wrapper .primary-btn {
+#eael-onboard--wrapper .primary-btn {
     font-size: 14px;
     font-weight: 450;
     line-height: 1.6em;
@@ -5714,29 +5714,29 @@ img {
 
 }
 
-#ea__onboard--wrapper .primary-btn:hover {
+#eael-onboard--wrapper .primary-btn:hover {
     color: var(--base-background);
     background: var(--base-color-75);
     border: 1px solid var(--base-color-75);
 
 }
 
-#ea__onboard--wrapper .primary-btn.install-btn {
+#eael-onboard--wrapper .primary-btn.install-btn {
     color: var(--base-background);
     border: 1px solid var(--base-color-75);
     background: conic-gradient(from 195.22deg at 68.31% 39.29%, rgba(143, 32, 251, 0) 0deg, #8F20FB 360deg), linear-gradient(0deg, #6F0AF2, #6F0AF2);
 
 }
 
-#ea__onboard--wrapper button.primary-btn.changelog-btn i {
+#eael-onboard--wrapper button.primary-btn.changelog-btn i {
     font-size: 9px;
 }
 
-#ea__onboard--wrapper button.primary-btn.install-btn i {
+#eael-onboard--wrapper button.primary-btn.install-btn i {
     font-size: 12px;
 }
 
-#ea__onboard--wrapper button.upgrade-button {
+#eael-onboard--wrapper button.upgrade-button {
     font-size: 14px;
     font-weight: 450;
     line-height: 1.5rem;
@@ -5756,17 +5756,17 @@ img {
     width: 100%;
 }
 
-#ea__onboard--wrapper button.upgrade-button:hover {
+#eael-onboard--wrapper button.upgrade-button:hover {
     color: var(--base-background);
     background: var(--base-color-100);
     border-bottom: 1px solid var(--border-color-3);
 }
 
-#ea__onboard--wrapper button.upgrade-button i {
+#eael-onboard--wrapper button.upgrade-button i {
     font-size: 16px;
 }
 
-#ea__onboard--wrapper button {
+#eael-onboard--wrapper button {
     font-size: 14px;
     font-weight: 450;
     line-height: 1.3em;
@@ -5778,29 +5778,29 @@ img {
     transition: all .35s ease-in-out;
 }
 
-#ea__onboard--wrapper button:hover {
+#eael-onboard--wrapper button:hover {
     color: var(--base-color-50);
 }
 
-#ea__onboard--wrapper h3.ea__content-title {
+#eael-onboard--wrapper h3.eael-content-title {
     font-size: 18px;
     line-height: 1.2em;
     font-weight: 500;
     color: var(--text-color-25);
 }
 
-#ea__onboard--wrapper h3.ea__content-title.title {
+#eael-onboard--wrapper h3.eael-content-title.title {
     margin-bottom: 16px;
 }
 
-#ea__onboard--wrapper .toggle-label {
+#eael-onboard--wrapper .toggle-label {
     font-size: 14px;
     line-height: 1.2em;
     font-weight: 400;
     color: var(--text-color-25);
 }
 
-#ea__onboard--wrapper input.input-name {
+#eael-onboard--wrapper input.input-name {
     font-size: 14px;
     color: var(--text-color-100);
     line-height: 1.2em;
@@ -5812,19 +5812,19 @@ img {
     background: transparent;
 }
 
-#ea__onboard--wrapper input.input-name:focus-visible {
+#eael-onboard--wrapper input.input-name:focus-visible {
     outline: 0;
 }
 
-#ea__onboard--wrapper ::placeholder {
+#eael-onboard--wrapper ::placeholder {
     color: var(--text-icon-500);
 }
 
-#ea__onboard--wrapper .select-option-wrapper {
+#eael-onboard--wrapper .select-option-wrapper {
     position: relative;
 }
 
-#ea__onboard--wrapper .form-select {
+#eael-onboard--wrapper .form-select {
     color: var(--text-color-100);
     font-size: 14px;
     line-height: 1.5em;
@@ -5837,14 +5837,14 @@ img {
     appearance: none;
 }
 
-#ea__onboard--wrapper .form-select:focus-visible,
-#ea__onboard--wrapper .form-select:focus {
+#eael-onboard--wrapper .form-select:focus-visible,
+#eael-onboard--wrapper .form-select:focus {
     outline: 0;
     box-shadow: none;
 }
 
-#ea__onboard--wrapper .select-option-wrapper:after,
-#ea__onboard--wrapper .select-option-external:after {
+#eael-onboard--wrapper .select-option-wrapper:after,
+#eael-onboard--wrapper .select-option-external:after {
     content: '';
     position: absolute;
     top: 50%;
@@ -5858,26 +5858,26 @@ img {
     pointer-events: none;
 }
 
-#ea__onboard--wrapper .select-wrapper {
+#eael-onboard--wrapper .select-wrapper {
     margin-bottom: 30px;
 }
 
 /* Toggle css */
 
-#ea__onboard--wrapper .toggle-wrap {
+#eael-onboard--wrapper .toggle-wrap {
     position: relative;
     display: inline-block;
     width: 36px;
     height: 20px;
 }
 
-#ea__onboard--wrapper .toggle-wrap input {
+#eael-onboard--wrapper .toggle-wrap input {
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-#ea__onboard--wrapper .slider {
+#eael-onboard--wrapper .slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -5889,7 +5889,7 @@ img {
     transition: ease-in-out .35s;
 }
 
-#ea__onboard--wrapper .slider:before {
+#eael-onboard--wrapper .slider:before {
     position: absolute;
     content: "";
     height: 16px;
@@ -5902,7 +5902,7 @@ img {
     box-shadow: 0px 1px 2px 0px var(--shadow-color-6), 0px 1px 3px 0px var(--shadow-color-10);
 }
 
-#ea__onboard--wrapper .slider.pro:before {
+#eael-onboard--wrapper .slider.pro:before {
     content: '\e901';
     font-family: "ea-dash-icon";
     font-size: 10px;
@@ -5912,11 +5912,11 @@ img {
     justify-content: center;
 }
 
-#ea__onboard--wrapper input:checked+.slider {
+#eael-onboard--wrapper input:checked+.slider {
     background-color: var(--label-color-fill);
 }
 
-#ea__onboard--wrapper input:checked+.slider:before {
+#eael-onboard--wrapper input:checked+.slider:before {
     transform: translateX(16px);
 }
 
@@ -5936,7 +5936,7 @@ img {
 
 /*-------- others-css ------------*/
 
-.ea__others-icon {
+.eael-others-icon {
     font-size: 18px;
     width: 40px;
     height: 40px;
@@ -5947,25 +5947,25 @@ img {
     margin-bottom: 16px;
 }
 
-.ea__others-icon.eaicon-1 {
+.eael-others-icon.eaicon-1 {
     color: var(--base-color-50);
     background: var(--background-2);
 }
 
-.ea__contents {
+.eael-contents {
     padding: 16px;
     background: var(--base-background);
     border: 1px solid var(--border-color-base);
     border-radius: 8px;
 }
 
-.ea__content-wrapper {
+.eael-content-wrapper {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
 }
 
-.ea__content-items {
+.eael-content-items {
     background: var(--base-background);
     padding: 16px;
     border: 1px solid var(--border-color-base);
@@ -5973,23 +5973,23 @@ img {
     transition: all .25s ease-in-out;
 }
 
-.ea__content-items:hover {
+.eael-content-items:hover {
     box-shadow: 0px 7px 18px 0px var(--shadow-color-8);
 }
 
-.ea__content-head {
+.eael-content-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 8px;
 }
 
-.ea__features-content {
+.eael-features-content {
     padding: 24px;
     max-width: 550px;
 }
 
-.ea__general-content-item .ea__content-details {
+.eael-general-content-item .eael-content-details {
     font-size: 16px;
     font-weight: 400;
     color: var(--text-color-100);
@@ -6013,27 +6013,27 @@ img {
     color: var(--text-color-25);
 }
 
-.ea__integration-content-wrapper {
+.eael-integration-content-wrapper {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
 }
 
-.ea__integration-header {
+.eael-integration-header {
     padding: 20px 24px;
     background: #FBFCFF;
     border-radius: 8px 8px 0 0;
     border: 1px solid var(--border-color-base);
 }
 
-.ea__integration-header h5 {
+.eael-integration-header h5 {
     font-size: 16px;
     font-weight: 500;
     line-height: 1.2em;
     color: var(--text-color-25);
 }
 
-.ea__integration-footer {
+.eael-integration-footer {
     padding: 24px;
     background: var(--base-background);
     border-radius: 0 0 8px 8px;
@@ -6052,7 +6052,7 @@ img {
 
 /*--------- Modal ---------*/
 
-section.ea__modal-wrapper {
+section.eael-modal-wrapper {
     position: fixed;
     top: 0;
     left: 0;
@@ -6063,7 +6063,7 @@ section.ea__modal-wrapper {
     font-family: "Rubik", sans-serif;
 }
 
-.ea__modal-content-wrapper {
+.eael-modal-content-wrapper {
     max-width: 663px;
     position: absolute;
     top: 50%;
@@ -6074,26 +6074,26 @@ section.ea__modal-wrapper {
     border: 1px solid var(--label-color);
 }
 
-.ea__modal-header {
+.eael-modal-header {
     padding: 24px 40px;
     border-bottom: 1px solid var(--label-color);
 }
 
-.ea__modal-header h5 {
+.eael-modal-header h5 {
     font-size: 16px;
     line-height: 1.1em;
     font-weight: 400;
     color: var(--text-color-100);
 }
 
-.ea__modal-body {
+.eael-modal-body {
     padding: 40px;
     display: flex;
     flex-direction: column;
     gap: 24px;
 }
 
-.ea__modal-body h4 {
+.eael-modal-body h4 {
     font-size: 22px;
     line-height: 1.2em;
     font-weight: 450;
@@ -6101,26 +6101,26 @@ section.ea__modal-wrapper {
 }
 
 
-.ea__modal-body p {
+.eael-modal-body p {
     font-size: 14px;
     line-height: 1.5em;
     color: var(--text-color-100);
     margin-bottom: 16px;
 }
 
-.ea__modal-body label {
+.eael-modal-body label {
     font-size: 14px;
     line-height: 1.3em;
     display: block;
     margin-bottom: 6px;
 }
 
-.ea__modal-body .ea__api-key-according label {
+.eael-modal-body .eael-api-key-according label {
     min-width: 153px;
     margin-bottom: 0;
 }
 
-#ea__onboard--wrapper .ea__modal-body input.input-name {
+#eael-onboard--wrapper .eael-modal-body input.input-name {
     padding: 10px 14px;
     background: var(--background-8);
     border-radius: 8px;
@@ -6128,7 +6128,7 @@ section.ea__modal-wrapper {
     width: 100%;
 }
 
-.ea__modal-body .ea__api-link {
+.eael-modal-body .eael-api-link {
     font-size: 14px;
     line-height: 1.2em;
     color: var(--text-color-200);
@@ -6136,7 +6136,7 @@ section.ea__modal-wrapper {
     margin-top: 6px;
 }
 
-#ea__onboard--wrapper .ea__modal-body .form-select {
+#eael-onboard--wrapper .eael-modal-body .form-select {
     color: var(--text-color-100);
     font-size: 14px;
     line-height: 1.5em;
@@ -6151,34 +6151,34 @@ section.ea__modal-wrapper {
     position: relative;
 }
 
-.ea__api-key-according {
+.eael-api-key-according {
     background: #F7FAFF;
     border-radius: 8px;
     padding-left: 16px;
     padding-right: 16px;
 }
 
-.ea__according-title {
+.eael-according-title {
     padding-top: 16px;
 }
 
-.ea__according-title i {
+.eael-according-title i {
     font-size: 14px;
     color: #000;
 }
 
-.ea__according-content {
+.eael-according-content {
     padding-top: 16px;
     padding-bottom: 16px;
     border-top: 1px solid #EAECF0;
 }
 
-.ea__modal-footer {
+.eael-modal-footer {
     padding: 16px 40px;
     border-top: 1px solid var(--label-color);
 }
 
-#ea__onboard--wrapper button.ea__modal-btn {
+#eael-onboard--wrapper button.eael-modal-btn {
     font-size: 14px;
     font-weight: 450;
     line-height: 1.6em;
@@ -6193,7 +6193,7 @@ section.ea__modal-wrapper {
     border: 1px solid var(--base-color-75);
 }
 
-.ea__modal-close-btn {
+.eael-modal-close-btn {
     position: absolute;
     top: 0;
     right: -55px;
@@ -6210,23 +6210,23 @@ section.ea__modal-wrapper {
     cursor: pointer;
 }
 
-.ea__modal-content-wrapper.ea__onboard-modal {
+.eael-modal-content-wrapper.eael-onboard-modal {
     padding: 40px;
     text-align: left;
 }
 
-.ea__modal-content-wrapper.ea__onboard-modal .congrats--wrapper {
+.eael-modal-content-wrapper.eael-onboard-modal .congrats--wrapper {
     text-align: center;
 }
 
-.ea__onboard-modal h6 {
+.eael-onboard-modal h6 {
     font-size: 22px;
     line-height: 1.1em;
     font-weight: 450;
     color: var(--text-color-100);
 }
 
-.ea__onboard-modal h5 {
+.eael-onboard-modal h5 {
     font-size: 32px;
     line-height: 1.1em;
     font-weight: 450;
@@ -6234,14 +6234,14 @@ section.ea__modal-wrapper {
     margin-bottom: 32px;
 }
 
-.ea__onboard-modal h4 {
+.eael-onboard-modal h4 {
     font-size: 22px;
     line-height: 1.2em;
     font-weight: 450;
     color: var(--text-color-25);
 }
 
-.ea__onboard-modal h4.congrats--title {
+.eael-onboard-modal h4.congrats--title {
     font-size: 36px;
     line-height: 1.3em;
     font-weight: 450;
@@ -6249,7 +6249,7 @@ section.ea__modal-wrapper {
     margin-bottom: 16px;
 }
 
-.ea__onboard-modal p {
+.eael-onboard-modal p {
     font-size: 16px;
     font-weight: 400;
     color: var(--text-color-100);
@@ -6258,24 +6258,24 @@ section.ea__modal-wrapper {
 
 /*-------- Onboard ------------*/
 
-#ea__onboard--wrapper {
+#eael-onboard--wrapper {
     font-size: 16px;
     font-family: "Rubik", sans-serif;
 }
 
-section.ea__onboard-main-wrapper {
+section.eael-onboard-main-wrapper {
     max-width: 1047px;
     margin: 0 auto;
     padding: 80px 0;
 }
 
-.ea__onboard-nav-list {
+.eael-onboard-nav-list {
     background: #fff;
     border-radius: 8px 8px 0 0;
     border: 1px solid #F2F4F7;
 }
 
-.ea__onboard-nav {
+.eael-onboard-nav {
     font-size: 16px;
     line-height: 1em;
     font-weight: 450;
@@ -6287,7 +6287,7 @@ section.ea__onboard-main-wrapper {
     cursor: pointer;
 }
 
-.ea__onboard-nav .ea__nav-count {
+.eael-onboard-nav .eael-nav-count {
     width: 32px;
     height: 32px;
     display: flex;
@@ -6298,16 +6298,16 @@ section.ea__onboard-main-wrapper {
     border-radius: 50%;
 }
 
-.ea__onboard-nav.active {
+.eael-onboard-nav.active {
     border-bottom: 2px solid #750EF4;
 }
 
-.ea__onboard-nav.active .ea__nav-count {
+.eael-onboard-nav.active .eael-nav-count {
     color: #750EF4;
     background: #F6EEFF;
 }
 
-.ea__onboard-content-wrapper {
+.eael-onboard-content-wrapper {
     padding-top: 48px;
     background: #fff;
     border-radius: 0 0 8px 8px;
@@ -6319,18 +6319,18 @@ section.ea__onboard-main-wrapper {
     overflow: auto;
 }
 
-.ea__integration-content-wrapper.onBoard-scroll-wrap {
+.eael-integration-content-wrapper.onBoard-scroll-wrap {
     max-height: 350px;
     padding-bottom: 62px;
 }
 
-.ea__onboard-content {
+.eael-onboard-content {
     text-align: center;
     max-width: 728px;
     margin: 0 auto;
 }
 
-.ea__onboard-content-wrapper h3 {
+.eael-onboard-content-wrapper h3 {
     font-size: 22px;
     line-height: 1.2em;
     font-weight: 500;
@@ -6339,27 +6339,27 @@ section.ea__onboard-main-wrapper {
     margin-bottom: 16px;
 }
 
-.ea__onboard-content-wrapper p {
+.eael-onboard-content-wrapper p {
     font-size: 16px;
     font-weight: 400;
     color: var(--text-color-100);
     line-height: 1.5em;
 }
 
-.ea__onboard-content-top p {
+.eael-onboard-content-top p {
     max-width: 460px;
     margin: 0 auto;
     padding-bottom: 40px;
 }
 
-.ea__next-step-wrapper {
+.eael-next-step-wrapper {
     border: 1px solid #F2F4F7;
     border-radius: 8px;
     padding: 24px;
     display: inline-block;
 }
 
-.ea__next-step-wrapper p {
+.eael-next-step-wrapper p {
     margin-bottom: 24px;
 }
 
@@ -6385,14 +6385,14 @@ section.ea__onboard-main-wrapper {
     border-color: rgb(20 122 255 / var(--tw-border-opacity));
 }
 
-.ea__onboard-content-select {
+.eael-onboard-content-select {
     display: flex;
     align-items: flex-start;
     gap: 16px;
     padding-bottom: 34px;
 }
 
-.ea__onboard-content-select .checkbox--label .select--wrapper {
+.eael-onboard-content-select .checkbox--label .select--wrapper {
     text-align: left;
     padding: 24px;
     border: 1px solid #F2F4F7;
@@ -6447,7 +6447,7 @@ section.ea__onboard-main-wrapper {
     display: block;
 }
 
-.ea__onboard-content-wrapper .ea__onboard-content-select h4 {
+.eael-onboard-content-wrapper .eael-onboard-content-select h4 {
     font-size: 16px;
     font-weight: 500;
     line-height: 1.1em;
@@ -6455,55 +6455,55 @@ section.ea__onboard-main-wrapper {
     margin-bottom: 8px;
 }
 
-.ea__onboard-content-select h4 span {
+.eael-onboard-content-select h4 span {
     color: #750EF4;
 }
 
-.ea__onboard-content-select p {
+.eael-onboard-content-select p {
     font-size: 14px;
     line-height: 1.5em;
     color: #475467;
 }
 
-.ea__onboard-content-wrapper.ea__onboard-elements {
+.eael-onboard-content-wrapper.eael-onboard-elements {
     padding: 40px;
     position: relative;
 }
 
-.ea__onboard-content-wrapper.ea__onboard-elements .ea__connect-others {
+.eael-onboard-content-wrapper.eael-onboard-elements .eael-connect-others {
     padding: 0;
     background: transparent;
     border-radius: 0;
 }
 
-#ea__onboard--wrapper .ea__onboard-content-wrapper.ea__onboard-elements h3.ea__content-title {
+#eael-onboard--wrapper .eael-onboard-content-wrapper.eael-onboard-elements h3.eael-content-title {
     margin-top: 0px;
     margin-bottom: 0px;
 }
 
-.ea__onboard-content-wrapper .ea__features-content h2 {
+.eael-onboard-content-wrapper .eael-features-content h2 {
     font-size: 22px;
     font-weight: 450;
     margin-bottom: 16px;
 }
 
-.ea__onboard-content-wrapper.ea__onboard-pro {
+.eael-onboard-content-wrapper.eael-onboard-pro {
     padding: 40px;
 }
 
-.ea__onboard-content-wrapper.ea__onboard-pro .ea__connect-others {
+.eael-onboard-content-wrapper.eael-onboard-pro .eael-connect-others {
     padding: 0;
     background: var(--base-background);
     border-radius: 0;
 }
 
-.ea__onboard--wrapper .ea__pro-features {
+.eael-onboard--wrapper .eael-pro-features {
     border: 1px solid var(--border-color-base);
     background: linear-gradient(89.99deg, #FEFBFF 35.58%, #F4E4F6 99.99%);
     border-radius: 8px;
 }
 
-.ea__onboard--wrapper .ea__others-icon {
+.eael-onboard--wrapper .eael-others-icon {
     font-size: 22px;
     width: 56px;
     height: 56px;
@@ -6536,11 +6536,11 @@ section.ea__onboard-main-wrapper {
     position: relative;
 }
 
-.features-widget-item a:hover span.ea__tooltip {
+.features-widget-item a:hover span.eael-tooltip {
     opacity: 1;
 }
 
-span.ea__tooltip {
+span.eael-tooltip {
     position: absolute;
     left: 50%;
     top: -40px;
@@ -6559,7 +6559,7 @@ span.ea__tooltip {
     opacity: 0;
 }
 
-span.ea__tooltip:after {
+span.eael-tooltip:after {
     content: '';
     position: absolute;
     top: 30px;
@@ -6570,7 +6570,7 @@ span.ea__tooltip:after {
     border-left: 8px solid transparent;
 }
 
-.features-widget-item span.ea__tooltip {
+.features-widget-item span.eael-tooltip {
     position: absolute;
     left: 50%;
     top: -18px;
@@ -6589,11 +6589,11 @@ span.ea__tooltip:after {
     opacity: 0;
 }
 
-.ea__onboard-content-wrapper.ea__onboard-templately {
+.eael-onboard-content-wrapper.eael-onboard-templately {
     padding: 40px;
 }
 
-.ea__onboard--wrapper .ea__general-content-item h2 {
+.eael-onboard--wrapper .eael-general-content-item h2 {
     font-size: 40px;
     line-height: 1.2em;
     font-weight: 500;
@@ -6601,7 +6601,7 @@ span.ea__tooltip:after {
     margin-bottom: 8px;
 }
 
-.ea__onboard-content-wrapper.ea__onboard-templately .ea__general-content-item.templates {
+.eael-onboard-content-wrapper.eael-onboard-templately .eael-general-content-item.templates {
     padding: 0;
     background-image: none;
     background-color: transparent;
@@ -6609,7 +6609,7 @@ span.ea__tooltip:after {
     margin-bottom: 0;
 }
 
-.ea__onboard-content-wrapper.ea__onboard-templately .templates-content {
+.eael-onboard-content-wrapper.eael-onboard-templately .templates-content {
     padding: 0;
     max-width: 485px;
 }
@@ -6618,67 +6618,67 @@ span.title-color-2 {
     color: #FF7B8E;
 }
 
-.ea__templately-details .ea__content-details {
+.eael-templately-details .eael-content-details {
     padding: 16px;
     border-radius: 4px;
 }
 
-.ea__templately-details .ea__content-details:nth-child(1) {
+.eael-templately-details .eael-content-details:nth-child(1) {
     background: #F7F4FF;
 }
 
-.ea__templately-details .ea__content-details:nth-child(2) {
+.eael-templately-details .eael-content-details:nth-child(2) {
     background: #FFFAFA;
 }
 
-.ea__templately-details .ea__content-details:nth-child(3) {
+.eael-templately-details .eael-content-details:nth-child(3) {
     background: #FFF8F0;
 }
 
-.ea__templately-details .ea__content-details:nth-child(4) {
+.eael-templately-details .eael-content-details:nth-child(4) {
     background: #F1FAFF;
 }
 
-.ea__onboard-content-wrapper.ea__onboard-integrations {
+.eael-onboard-content-wrapper.eael-onboard-integrations {
     padding: 40px;
     position: relative;
 }
 
-.ea__onboard-content-wrapper.ea__onboard-integrations .ea__connect-others {
+.eael-onboard-content-wrapper.eael-onboard-integrations .eael-connect-others {
     padding: 0;
     background: transparent;
     border-radius: 0;
 }
 
-.ea__onboard-content-wrapper.ea__onboard-integrations .toggle-wrapper h5 {
+.eael-onboard-content-wrapper.eael-onboard-integrations .toggle-wrapper h5 {
     margin-bottom: 0;
 }
 
-.ea__onboard-content-wrapper.ea__onboard-integrations label.toggle-wrap {
+.eael-onboard-content-wrapper.eael-onboard-integrations label.toggle-wrap {
     min-width: auto;
 }
 
-.ea__onboard-content-wrapper h4 {
+.eael-onboard-content-wrapper h4 {
     font-size: 22px;
     font-weight: 500;
     line-height: 1.1em;
     margin-bottom: 8px;
 }
 
-.ea__onboard-content-wrapper .ea__integration-footer p {
+.eael-onboard-content-wrapper .eael-integration-footer p {
     font-size: 14px;
     padding-bottom: 16px;
     border-bottom: 1px solid var(--border-color-base);
 }
 
-.ea__general-content-item h4 {
+.eael-general-content-item h4 {
     font-size: 22px;
     font-weight: 500;
     line-height: 1.1em;
     margin-bottom: 8px;
 }
 
-.ea__section-overlay {
+.eael-section-overlay {
     position: absolute;
     min-height: 100px;
     background: linear-gradient(360deg, #FFFFFF 33.15%, rgba(255, 255, 255, 0) 100%);
@@ -6700,50 +6700,50 @@ span.title-color-2 {
         gap: 12px;
     }
 
-    #ea__onboard--wrapper button {
+    #eael-onboard--wrapper button {
         font-size: 12px;
     }
 
-    #ea__onboard--wrapper button.upgrade-button {
+    #eael-onboard--wrapper button.upgrade-button {
         font-size: 12px;
         gap: 6px;
         padding: 8px 14px;
     }
 
-    #ea__onboard--wrapper .primary-btn {
+    #eael-onboard--wrapper .primary-btn {
         font-size: 13px;
         padding: 7px 16px;
     }
 
-    #ea__onboard--wrapper .toggle-wrap {
+    #eael-onboard--wrapper .toggle-wrap {
         width: 30px;
         height: 16px;
     }
 
-    #ea__onboard--wrapper input:checked+.slider:before {
+    #eael-onboard--wrapper input:checked+.slider:before {
         transform: translateX(14px);
     }
 
-    #ea__onboard--wrapper .slider:before {
+    #eael-onboard--wrapper .slider:before {
         height: 12px;
         width: 12px;
         left: 2px;
         bottom: 2px;
     }
 
-    section.ea__onboard-main-wrapper {
+    section.eael-onboard-main-wrapper {
         padding: 50px 20px !important;
     }
 
-    .ea__onboard-content-wrapper .ea__general-content-item.templates {
+    .eael-onboard-content-wrapper .eael-general-content-item.templates {
         flex-wrap: nowrap;
     }
 
-    .ea__onboard-content-wrapper .templates-img img {
+    .eael-onboard-content-wrapper .templates-img img {
         padding-left: 20px;
     }
 
-    .ea__onboard-content-wrapper .templates-img {
+    .eael-onboard-content-wrapper .templates-img {
         display: block;
     }
 
@@ -6751,17 +6751,17 @@ span.title-color-2 {
 
 @media only screen and (max-width: 1024px) {
 
-    .ea__onboard-content-wrapper {
+    .eael-onboard-content-wrapper {
         padding-top: 36px;
         padding-left: 20px;
         padding-right: 20px;
     }
 
-    .ea__content-wrapper {
+    .eael-content-wrapper {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .ea__features-content h2 {
+    .eael-features-content h2 {
         font-size: 22px;
         margin-bottom: 8px;
     }
@@ -6774,11 +6774,11 @@ span.title-color-2 {
         font-size: 11px;
     }
 
-    .ea__features-content {
+    .eael-features-content {
         max-width: 375px;
     }
 
-    .ea__connect-others p {
+    .eael-connect-others p {
         margin-bottom: 10px;
     }
 
@@ -6786,36 +6786,36 @@ span.title-color-2 {
         margin-bottom: 28px;
     }
 
-    .ea__onboard-nav {
+    .eael-onboard-nav {
         font-size: 12px;
         padding: 16px 10px;
         gap: 6px;
     }
 
-    .ea__onboard-nav .ea__nav-count {
+    .eael-onboard-nav .eael-nav-count {
         width: 26px;
         height: 26px;
     }
 
-    .ea__onboard-content-wrapper .ea__connect-others {
+    .eael-onboard-content-wrapper .eael-connect-others {
         padding: 0;
     }
 
-    .ea__onboard--wrapper .ea__general-content-item h2 {
+    .eael-onboard--wrapper .eael-general-content-item h2 {
         font-size: 28px;
         margin-bottom: 6px;
     }
 
-    .ea__onboard-content-wrapper h4 {
+    .eael-onboard-content-wrapper h4 {
         font-size: 18px;
         margin-bottom: 6px;
     }
 
-    .ea__onboard-content-wrapper p {
+    .eael-onboard-content-wrapper p {
         font-size: 14px;
     }
 
-    .ea__features-content {
+    .eael-features-content {
         padding: 18px;
     }
 
@@ -6823,23 +6823,23 @@ span.title-color-2 {
         padding: 18px;
     }
 
-    .ea__templately-details .ea__content-details {
+    .eael-templately-details .eael-content-details {
         padding: 12px;
     }
 
-    .ea__integration-header {
+    .eael-integration-header {
         padding: 14px 18px;
     }
 
-    .ea__integration-header h5 {
+    .eael-integration-header h5 {
         font-size: 14px;
     }
 
-    .ea__integration-footer {
+    .eael-integration-footer {
         padding: 18px;
     }
 
-    .ea__onboard-content-wrapper .ea__integration-footer p {
+    .eael-onboard-content-wrapper .eael-integration-footer p {
         font-size: 12px;
         padding-bottom: 12px;
     }
@@ -6848,7 +6848,7 @@ span.title-color-2 {
         padding-top: 12px;
     }
 
-    #ea__onboard--wrapper .toggle-label {
+    #eael-onboard--wrapper .toggle-label {
         font-size: 12px;
     }
 
@@ -6864,19 +6864,19 @@ span.title-color-2 {
         margin-bottom: 20px;
     }
 
-    #ea__onboard--wrapper .max-w-454 {
+    #eael-onboard--wrapper .max-w-454 {
         max-width: 280px;
     }
 
-    #ea__onboard--wrapper .toggle-label {
+    #eael-onboard--wrapper .toggle-label {
         font-size: 12px;
     }
 
-    section.ea__section-wrapper.ea__main-wrapper {
+    section.eael-section-wrapper.eael-main-wrapper {
         flex-direction: column;
     }
 
-    .ea__sidebar-nav-list {
+    .eael-sidebar-nav-list {
         max-width: 100%;
         min-height: auto;
         gap: 0;
@@ -6887,64 +6887,64 @@ span.title-color-2 {
         flex-wrap: wrap;
     }
 
-    .ea__main-content-wrapper {
+    .eael-main-content-wrapper {
         flex-wrap: wrap;
     }
 
-    .ea__connect-others-wrapper {
+    .eael-connect-others-wrapper {
         display: grid;
     }
 
-    .ea__sidebar-info {
+    .eael-sidebar-info {
         max-width: 100%;
         min-width: 100%;
     }
 
-    .ea__sidebar-content {
+    .eael-sidebar-content {
         padding: 16px;
         background-position: unset;
         background-position-y: -130px;
         background-size: cover;
     }
 
-    .ea__onboard-content-top img {
+    .eael-onboard-content-top img {
         height: 40px;
         aspect-ratio: 1;
     }
 
-    .ea__pro-elements-content h3 {
+    .eael-pro-elements-content h3 {
         font-size: 20px;
         padding-bottom: 28px;
     }
 
-    .ea__onboard-nav {
+    .eael-onboard-nav {
         padding: 12px 10px;
     }
 
-    .ea__onboard-nav-list {
+    .eael-onboard-nav-list {
         flex-wrap: wrap;
         justify-content: flex-start;
     }
 
-    .ea__onboard-content-wrapper h3 {
+    .eael-onboard-content-wrapper h3 {
         font-size: 18px;
         margin-top: 12px;
         margin-bottom: 12px;
     }
 
-    .ea__onboard-content-top p {
+    .eael-onboard-content-top p {
         padding-bottom: 30px;
     }
 
-    .ea__onboard-content-wrapper p {
+    .eael-onboard-content-wrapper p {
         font-size: 14px;
     }
 
-    .ea__next-step-wrapper p {
+    .eael-next-step-wrapper p {
         margin-bottom: 18px;
     }
 
-    .ea__next-step-wrapper {
+    .eael-next-step-wrapper {
         padding: 18px;
     }
 
@@ -6953,21 +6953,21 @@ span.title-color-2 {
         margin-top: 10px;
     }
 
-    .ea__onboard-content-wrapper {
+    .eael-onboard-content-wrapper {
         padding-top: 30px;
     }
 
-    .ea__onboard-content-select {
+    .eael-onboard-content-select {
         gap: 12px;
         padding-bottom: 24px;
         flex-wrap: wrap;
     }
 
-    .ea__onboard-content-select .flex-1 {
+    .eael-onboard-content-select .flex-1 {
         min-width: 165px;
     }
 
-    .ea__onboard-content-select .checkbox--label .select--wrapper {
+    .eael-onboard-content-select .checkbox--label .select--wrapper {
         padding: 18px;
     }
 
@@ -6983,73 +6983,73 @@ span.title-color-2 {
 
     }
 
-    .ea__onboard-content-wrapper.ea__onboard-elements {
+    .eael-onboard-content-wrapper.eael-onboard-elements {
         padding: 30px;
     }
 
-    .ea__onboard-content-wrapper.ea__onboard-integrations .ea__connect-others {
+    .eael-onboard-content-wrapper.eael-onboard-integrations .eael-connect-others {
         flex-direction: column;
 
     }
 
-    .ea__onboard-content-wrapper .ea__onboard-content-select h4 {
+    .eael-onboard-content-wrapper .eael-onboard-content-select h4 {
         font-size: 14px;
         margin-bottom: 6px;
     }
 
-    .ea__onboard-content-wrapper.ea__onboard-pro {
+    .eael-onboard-content-wrapper.eael-onboard-pro {
         padding: 30px;
     }
 
-    .ea__onboard-content-wrapper h4 {
+    .eael-onboard-content-wrapper h4 {
         font-size: 18px;
         margin-bottom: 6px;
     }
 
-    .ea__onboard--wrapper .ea__others-icon {
+    .eael-onboard--wrapper .eael-others-icon {
         font-size: 18px;
         width: 40px;
         height: 40px;
     }
 
-    .ea__onboard-content-wrapper .ea__features-content h2 {
+    .eael-onboard-content-wrapper .eael-features-content h2 {
         font-size: 18px;
         margin-bottom: 10px;
     }
 
-    .ea__onboard-content-wrapper.ea__onboard-templately {
+    .eael-onboard-content-wrapper.eael-onboard-templately {
         padding: 30px;
     }
 
-    .ea__onboard-content-wrapper.ea__onboard-templately .ea__general-content-item.templates {
+    .eael-onboard-content-wrapper.eael-onboard-templately .eael-general-content-item.templates {
         flex-direction: column;
         align-items: flex-start;
         gap: 30px;
     }
 
-    .ea__onboard-content-wrapper.ea__onboard-templately .templates-content {
+    .eael-onboard-content-wrapper.eael-onboard-templately .templates-content {
         max-width: 100%;
     }
 
-    .ea__onboard-content-wrapper .templates-img {
+    .eael-onboard-content-wrapper .templates-img {
         display: block;
         width: 100%;
     }
 
-    .ea__onboard-content-wrapper .templates-img img {
+    .eael-onboard-content-wrapper .templates-img img {
         padding-left: 0;
         width: 100%;
     }
 
-    .ea__onboard-content-wrapper.ea__onboard-integrations {
+    .eael-onboard-content-wrapper.eael-onboard-integrations {
         padding: 30px;
     }
 
-    .ea__integration-content-wrapper {
+    .eael-integration-content-wrapper {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .ea__onboard--wrapper .ea__general-content-item h2 {
+    .eael-onboard--wrapper .eael-general-content-item h2 {
         font-size: 24px;
     }
 
@@ -7061,28 +7061,28 @@ span.title-color-2 {
 }
 
 @media only screen and (max-width: 525px) {
-    #ea__onboard--wrapper .max-w-454 {
+    #eael-onboard--wrapper .max-w-454 {
         max-width: 230px;
     }
 
-    .ea__content-wrapper {
+    .eael-content-wrapper {
         grid-template-columns: repeat(1, 1fr);
     }
 
-    .ea__pro-elements-content h3 {
+    .eael-pro-elements-content h3 {
         font-size: 16px;
         padding-bottom: 24px;
     }
 
-    .ea__integration-content-wrapper {
+    .eael-integration-content-wrapper {
         grid-template-columns: repeat(1, 1fr);
     }
 
-    .ea__onboard--wrapper .ea__pro-features {
+    .eael-onboard--wrapper .eael-pro-features {
         flex-wrap: wrap;
     }
 
-    .ea__onboard-content-wrapper p {
+    .eael-onboard-content-wrapper p {
         font-size: 12px;
     }
 }
