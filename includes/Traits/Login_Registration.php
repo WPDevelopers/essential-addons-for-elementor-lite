@@ -348,6 +348,14 @@ trait Login_Registration {
 						$errors['eael_phone_number'] = isset( $settings['err_phone_number_missing'] ) ? $settings['err_phone_number_missing'] : __( 'Phone number is required', 'essential-addons-for-elementor-lite' );
 					}
 				}
+				
+				if( isset( $register_field['field_type'] ) && 'honeypot' === $register_field['field_type']	){
+					$honeypot_name  = 'eaelhoneyp' . esc_attr( $widget_id );
+					$honeypot_value = sanitize_text_field( $_POST[ esc_attr( $honeypot_name ) ] );
+					if ( ! empty( $honeypot_value ) ) {
+						$errors[ $register_field['field_type'] ] = __( 'Sorry, you are not allowed to submit this form!', 'essential-addons-for-elementor-lite' );
+					}
+				}
 
 				if( isset( $register_field['field_type'] ) && in_array( $register_field['field_type'], $eael_custom_profile_fields_image_keys )	){
 
