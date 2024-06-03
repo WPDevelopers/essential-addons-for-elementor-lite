@@ -44,11 +44,11 @@ function ContextReducer() {
                 initValue.modals[key] = eaData.modal[item].value;
             } else if (item === 'loginRegisterSetting') {
                 const accordion = eaData.modal[item].accordion;
-                Object.keys(accordion).map((subItem, subIndex) => {
-                    Object.keys(accordion[subItem].fields).map((childItem, childIndex) => {
-                        const key = accordion[subItem].fields[childItem]?.name;
+                Object.keys(accordion).map((subItem) => {
+                    accordion[subItem].fields.map((childItem) => {
+                        const key = childItem?.name;
                         if (key !== undefined) {
-                            initValue.modals[key] = accordion[subItem].fields[childItem]?.value;
+                            initValue.modals[key] = childItem?.value;
                         }
                     });
                 });
