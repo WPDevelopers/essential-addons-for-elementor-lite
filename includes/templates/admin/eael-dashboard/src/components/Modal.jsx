@@ -16,15 +16,14 @@ function Modal() {
                     <div className="ea__modal-header">
                         <h5>{eaState.modalTitle}</h5>
                     </div>
-                    <div className="ea__modal-body">
-                        <form action="#" method="post">
-                            {eaState.modalID === 'loginRegisterSetting' && <ModalStyleThree/>}
-                            {eaState.modalID === 'postDuplicatorSetting' && <ModalStyleTwo/>}
-                            {['loginRegisterSetting', 'postDuplicatorSetting'].includes(eaState.modalID) ||
-                                <ModalStyleOne/>}
-                        </form>
-                    </div>
-                    <div className="ea__modal-footer flex flex-end">
+                    <form action="#" method="post" className="ea__modal-body">
+                        {eaState.modalID === 'loginRegisterSetting' && <ModalStyleThree/>}
+                        {eaState.modalID === 'postDuplicatorSetting' && <ModalStyleTwo/>}
+                        {['loginRegisterSetting', 'postDuplicatorSetting'].includes(eaState.modalID) ||
+                            <ModalStyleOne/>}
+                    </form>
+                    <div className="ea__modal-footer flex justify-between items-center">
+                        <a className="ea__api-link" href="#">To configure the API Keys, check out this doc</a>
                         <button className="ea__modal-btn">Save</button>
                     </div>
                     <div className="ea__modal-close-btn" onClick={clickHandler}>
