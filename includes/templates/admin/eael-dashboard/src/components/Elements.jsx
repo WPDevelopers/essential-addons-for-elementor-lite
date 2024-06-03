@@ -78,15 +78,20 @@ function Elements() {
                         })}
                     </div>
                 </div>
-                <div className="ea__content-elements-wrapper">
+                <div className="ea__content-elements-wrapper relative">
                     {!!searchParam?.current?.value || Object.keys(eaData).map((item, index) => {
                         return <ElementsSubSection index={item} key={index}/>
                     })}
                     {!!searchParam?.current?.value && <ElementsSearchSection searchTerm={searchParam.current.value}/>}
-                    <div className="flex flex-end mb-6">
-                        <button className="primary-btn install-btn">{i18n.save_settings}</button>
+                </div>
+
+
+                <div className="ea__elements-button-wrap">
+                    <button className="primary-btn install-btn">{i18n.save_settings}</button>
+                    <div className="ea__section-overlay">
                     </div>
                 </div>
+
             </div>
         </>
     );
