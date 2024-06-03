@@ -143,53 +143,9 @@ class WPDeveloper_Setup_Wizard {
                     </div>
                 </div>
             </div>
-        </section>
-    </section>
 
-	<section id="ea__onboard--wrapper" class="ea__onboard--wrapper">
-        <section class="ea__onboard-main-wrapper">
-            <div class="ea__onboard-nav-list flex justify-between">
-                <div class="ea__onboard-nav">
-                    <span class="ea__nav-count">
-                        1
-                    </span>
-                    <span class="ea__nav-text">Getting Started</span>
-                </div>
-                <div class="ea__onboard-nav active">
-                    <span class="ea__nav-count">
-                        2
-                    </span>
-                    <span class="ea__nav-text">Configuration</span>
-                </div>
-                <div class="ea__onboard-nav">
-                    <span class="ea__nav-count">
-                        3
-                    </span>
-                    <span class="ea__nav-text">Elements</span>
-                </div>
 
-                <div class="ea__onboard-nav">
-                    <span class="ea__nav-count">
-                        4
-                    </span>
-                    <span class="ea__nav-text">Go PRO</span>
-                </div>
-
-                <div class="ea__onboard-nav">
-                    <span class="ea__nav-count">
-                        5
-                    </span>
-                    <span class="ea__nav-text">Templately</span>
-                </div>
-
-                <div class="ea__onboard-nav">
-                    <span class="ea__nav-count">
-                        6
-                    </span>
-                    <span class="ea__nav-text">Integrations</span>
-                </div>
-            </div>
-            <div class="ea__onboard-content-wrapper mb-4 min-h-538">
+			<div class="ea__onboard-content-wrapper mb-4 min-h-538">
                 <div class="ea__onboard-content">
                     <div class="ea__onboard-content-top">
 						<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/ea-new.png' ); ?>"
@@ -236,52 +192,14 @@ class WPDeveloper_Setup_Wizard {
                     <i class="ea-dash-icon ea-right-arrow-long"></i>
                 </button>
             </div>
+
+
         </section>
     </section>
 
 	<section id="ea__dashboard--wrapper" class="ea__onboard--wrapper">
         <section class="ea__onboard-main-wrapper">
-            <div class="ea__onboard-nav-list flex justify-between">
-                <div class="ea__onboard-nav">
-                    <span class="ea__nav-count">
-                        1
-                    </span>
-                    <span class="ea__nav-text">Getting Started</span>
-                </div>
-                <div class="ea__onboard-nav">
-                    <span class="ea__nav-count">
-                        2
-                    </span>
-                    <span class="ea__nav-text">Configuration</span>
-                </div>
-                <div class="ea__onboard-nav active">
-                    <span class="ea__nav-count">
-                        3
-                    </span>
-                    <span class="ea__nav-text">Elements</span>
-                </div>
-
-                <div class="ea__onboard-nav">
-                    <span class="ea__nav-count">
-                        4
-                    </span>
-                    <span class="ea__nav-text">Go PRO</span>
-                </div>
-
-                <div class="ea__onboard-nav">
-                    <span class="ea__nav-count">
-                        5
-                    </span>
-                    <span class="ea__nav-text">Templately</span>
-                </div>
-
-                <div class="ea__onboard-nav">
-                    <span class="ea__nav-count">
-                        6
-                    </span>
-                    <span class="ea__nav-text">Integrations</span>
-                </div>
-            </div>
+            
             <div class="ea__onboard-content-wrapper ea__onboard-elements mb-4 min-h-538">
                 <div class="ea__connect-others flex gap-4 justify-between items-start mb-10">
                     <div class="flex gap-4 flex-1">
@@ -504,47 +422,7 @@ class WPDeveloper_Setup_Wizard {
 
 	<section id="ea__dashboard--wrapper" class="ea__onboard--wrapper">
         <section class="ea__onboard-main-wrapper">
-            <div class="ea__onboard-nav-list flex justify-between">
-                <div class="ea__onboard-nav">
-                    <span class="ea__nav-count">
-                        1
-                    </span>
-                    <span class="ea__nav-text">Getting Started</span>
-                </div>
-                <div class="ea__onboard-nav">
-                    <span class="ea__nav-count">
-                        2
-                    </span>
-                    <span class="ea__nav-text">Configuration</span>
-                </div>
-                <div class="ea__onboard-nav">
-                    <span class="ea__nav-count">
-                        3
-                    </span>
-                    <span class="ea__nav-text">Elements</span>
-                </div>
-
-                <div class="ea__onboard-nav active">
-                    <span class="ea__nav-count">
-                        4
-                    </span>
-                    <span class="ea__nav-text">Go PRO</span>
-                </div>
-
-                <div class="ea__onboard-nav">
-                    <span class="ea__nav-count">
-                        5
-                    </span>
-                    <span class="ea__nav-text">Templately</span>
-                </div>
-
-                <div class="ea__onboard-nav">
-                    <span class="ea__nav-count">
-                        6
-                    </span>
-                    <span class="ea__nav-text">Integrations</span>
-                </div>
-            </div>
+            
             <div class="ea__onboard-content-wrapper ea__onboard-pro mb-4 min-h-538">
                 <div class="ea__connect-others flex gap-4 justify-between items-start mb-10">
                     <div class="flex gap-4 flex-1">
@@ -686,47 +564,7 @@ class WPDeveloper_Setup_Wizard {
 
 	<section id="ea__dashboard--wrapper" class="ea__onboard--wrapper">
         <section class="ea__onboard-main-wrapper">
-            <div class="ea__onboard-nav-list flex justify-between">
-                <div class="ea__onboard-nav">
-                    <span class="ea__nav-count">
-                        1
-                    </span>
-                    <span class="ea__nav-text">Getting Started</span>
-                </div>
-                <div class="ea__onboard-nav">
-                    <span class="ea__nav-count">
-                        2
-                    </span>
-                    <span class="ea__nav-text">Configuration</span>
-                </div>
-                <div class="ea__onboard-nav">
-                    <span class="ea__nav-count">
-                        3
-                    </span>
-                    <span class="ea__nav-text">Elements</span>
-                </div>
-
-                <div class="ea__onboard-nav">
-                    <span class="ea__nav-count">
-                        4
-                    </span>
-                    <span class="ea__nav-text">Go PRO</span>
-                </div>
-
-                <div class="ea__onboard-nav active">
-                    <span class="ea__nav-count">
-                        5
-                    </span>
-                    <span class="ea__nav-text">Templately</span>
-                </div>
-
-                <div class="ea__onboard-nav">
-                    <span class="ea__nav-count">
-                        6
-                    </span>
-                    <span class="ea__nav-text">Integrations</span>
-                </div>
-            </div>
+            
             <div class="ea__onboard-content-wrapper ea__onboard-templately mb-4 min-h-538">
                 <div class="ea__general-content-item templates flex justify-between items-center">
                     <div class="templates-content">
@@ -781,47 +619,7 @@ class WPDeveloper_Setup_Wizard {
 
 	<section id="ea__dashboard--wrapper" class="ea__onboard--wrapper">
         <section class="ea__onboard-main-wrapper">
-            <div class="ea__onboard-nav-list flex justify-between">
-                <div class="ea__onboard-nav">
-                    <span class="ea__nav-count">
-                        1
-                    </span>
-                    <span class="ea__nav-text">Getting Started</span>
-                </div>
-                <div class="ea__onboard-nav">
-                    <span class="ea__nav-count">
-                        2
-                    </span>
-                    <span class="ea__nav-text">Configuration</span>
-                </div>
-                <div class="ea__onboard-nav">
-                    <span class="ea__nav-count">
-                        3
-                    </span>
-                    <span class="ea__nav-text">Elements</span>
-                </div>
-
-                <div class="ea__onboard-nav">
-                    <span class="ea__nav-count">
-                        4
-                    </span>
-                    <span class="ea__nav-text">Go PRO</span>
-                </div>
-
-                <div class="ea__onboard-nav">
-                    <span class="ea__nav-count">
-                        5
-                    </span>
-                    <span class="ea__nav-text">Templately</span>
-                </div>
-
-                <div class="ea__onboard-nav active">
-                    <span class="ea__nav-count">
-                        6
-                    </span>
-                    <span class="ea__nav-text">Integrations</span>
-                </div>
-            </div>
+            
             <div class="ea__onboard-content-wrapper ea__onboard-integrations min-h-538 mb-4">
                 <div class="ea__connect-others flex gap-4 justify-between items-start mb-10">
                     <div class="flex gap-4 flex-1">
@@ -1205,7 +1003,7 @@ class WPDeveloper_Setup_Wizard {
         </section>
     </section>
 
-	<section class="ea__modal-wrapper">
+	<section class="ea__modal-wrapper eael-d-none">
             <div class="ea__modal-content-wrapper ea__onboard-modal">
                 <div class="">
                     <h5>What we collect? </h5>
