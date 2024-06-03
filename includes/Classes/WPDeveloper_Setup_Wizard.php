@@ -86,31 +86,31 @@ class WPDeveloper_Setup_Wizard {
 					<?php $this->menu_items(); ?>
 				</div>
 
-				<div class="eael-getting-started-content">
+				<div class="eael-setup-content eael-getting-started-content">
 					<?php $this->getting_started_cotnent(); ?>
 				</div>
 
-				<div class="eael-configuration-content eael-d-none">
+				<div class="eael-setup-content eael-configuration-content eael-d-none">
 					<?php $this->configuration_cotnent(); ?>
 				</div>
 
-				<div class="eael-elements-content eael-d-none">
+				<div class="eael-setup-content eael-elements-content eael-d-none">
 					<?php $this->elements_content(); ?>
 				</div>
 
-				<div class="eael-go-pro-content eael-d-none">
+				<div class="eael-setup-content eael-go-pro-content eael-d-none">
 					<?php $this->go_pro_content(); ?>
 				</div>
 
-				<div class="eael-templately-content eael-d-none">
+				<div class="eael-setup-content eael-templately-content eael-d-none">
 					<?php $this->templately_content(); ?>
 				</div>
 
-				<div class="eael-integrations-content eael-d-none">
+				<div class="eael-setup-content eael-integrations-content eael-d-none">
 					<?php $this->integrations_content(); ?>
 				</div>
 
-				<div class="eael-modal-content eael-d-none">
+				<div class="eael-setup-content eael-modal-content eael-d-none">
 					<?php $this->modal_content(); ?>
 				</div>
 			</section>
@@ -170,11 +170,11 @@ class WPDeveloper_Setup_Wizard {
 				<div class="eael-next-step-wrapper" id="eael-dashboard--wrapper">
 					<p>By clicking this button I am allowing this app to
 						collect my information. <span class="collect-info">What We Collect?</span></p>
-					<button class="primary-btn install-btn">
+					<button class="primary-btn install-btn eael-setup-next-btn" data-next="configuration">
 						Proceed to Next Step
 						<i class="ea-dash-icon ea-install"></i>
 					</button>
-					<span class="skip-item">Skip This Step</span>
+					<span class="skip-item eael-setup-next-btn" data-next="configuration">Skip This Step</span>
 				</div>
 			</div>
 		</div>
@@ -225,7 +225,7 @@ class WPDeveloper_Setup_Wizard {
 			</div>
 		</div>
 		<div id="eael-dashboard--wrapper" class="eael-section-wrapper flex flex-end">
-			<button class="primary-btn install-btn flex gap-2 items-center">
+			<button class="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn" data-next="elements">
 				Next
 				<i class="ea-dash-icon ea-right-arrow-long"></i>
 			</button>
@@ -443,11 +443,11 @@ class WPDeveloper_Setup_Wizard {
 			<div class="eael-section-overlay"></div>
 		</div>
 		<div class="eael-section-wrapper flex flex-end gap-4">
-			<button class="previous-btn flex gap-2 items-center">
+			<button class="previous-btn flex gap-2 items-center eael-setup-next-btn" data-next="configuration">
 				<i class="ea-dash-icon ea-left-arrow-long"></i>
 				Previous
 			</button>
-			<button class="primary-btn install-btn flex gap-2 items-center">
+			<button class="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn" data-next="go-pro">
 				Next
 				<i class="ea-dash-icon ea-right-arrow-long"></i>
 			</button>
@@ -584,11 +584,12 @@ class WPDeveloper_Setup_Wizard {
 			</div>
 		</div>
 		<div class="eael-section-wrapper flex flex-end gap-4">
-			<button class="previous-btn flex gap-2 items-center">
+			<button class="previous-btn flex gap-2 items-center eael-setup-next-btn" data-next="elements">
 				<i class="ea-dash-icon ea-left-arrow-long"></i>
 				Previous
 			</button>
-			<button class="primary-btn install-btn flex gap-2 items-center">
+			<!-- #TODO templately check -->
+			<button class="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn" data-next="templately">
 				Next
 				<i class="ea-dash-icon ea-right-arrow-long"></i>
 			</button>
@@ -639,11 +640,11 @@ class WPDeveloper_Setup_Wizard {
 			</div>
 		</div>
 		<div class="eael-section-wrapper flex flex-end gap-4">
-			<button class="previous-btn flex gap-2 items-center">
+			<button class="previous-btn flex gap-2 items-center eael-setup-next-btn" data-next="integrations">
 				<i class="ea-dash-icon ea-left-arrow-long"></i>
 				Skip
 			</button>
-			<button class="primary-btn install-btn flex gap-2 items-center">
+			<button class="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn" data-next="integrations">
 				Enable Templates
 			</button>
 		</div>
@@ -1024,7 +1025,8 @@ class WPDeveloper_Setup_Wizard {
 			<div class="eael-section-overlay"></div>
 		</div>
 		<div class="eael-section-wrapper flex flex-end gap-4">
-			<button class="previous-btn flex gap-2 items-center">
+			<!-- #ToDo templately status check -->
+			<button class="previous-btn flex gap-2 items-center eael-setup-next-btn" data-next="templately">
 				<i class="ea-dash-icon ea-left-arrow-long"></i>
 				Previous
 			</button>
