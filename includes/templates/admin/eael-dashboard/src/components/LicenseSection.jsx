@@ -22,7 +22,7 @@ function LicenseSection() {
                             <h5>
                                 How to get license key?
                             </h5>
-                            <i className="ea-dash-icon ea-dropdown"></i>
+                            <i className={isOpenForm ? 'ea-dash-icon ea-dropdown rotate-180' : 'ea-dash-icon ea-dropdown'}></i>
                         </div>
                     }
 
