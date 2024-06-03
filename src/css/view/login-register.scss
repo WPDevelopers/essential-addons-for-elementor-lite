@@ -43,6 +43,17 @@ $sizes: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 100;
 }
 
 /*-----Form Specific---*/
+.eael-recaptcha-no-branding-wrapper {
+    width: 370px;
+    margin: 0 auto;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.eael-login-register-page-body .grecaptcha-badge {
+    visibility: hidden;
+}
+
 .eael-lr-form-wrapper {
     width: 370px;
     margin: 0 auto;
