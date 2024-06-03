@@ -15,8 +15,9 @@ function ModalStyleThree() {
                         <div className="flex justify-between items-center gap-2 mb-4 pointer">
                         <span className="flex gap-2 items-center">
                             <img src={localize.eael_dashboard.reactPath + eaData.accordion[item].icon} alt="icon"/>
-                            <h4 className="flex items-center">{eaData.accordion[item].title}<i
-                                className="ea-dash-icon ea-info"></i></h4>
+                            <h4 className="flex items-center">{eaData.accordion[item].title}
+                                {eaData.accordion[item]?.info !== undefined && <i className="ea-dash-icon ea-info"></i>}
+                            </h4>
                         </span>
                             <i className={item === eaState.modalAccordion ? 'ea-dash-icon ea-dropdown rotate-180' : 'ea-dash-icon ea-dropdown'}></i>
                         </div>
