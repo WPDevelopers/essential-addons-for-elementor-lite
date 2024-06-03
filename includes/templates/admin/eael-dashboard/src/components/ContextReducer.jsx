@@ -16,7 +16,8 @@ function ContextReducer() {
             extensionAll: false,
             widgetAll: false,
             licenseStatus: licenseData?.license_status,
-            hiddenLicenseKey: licenseData?.hidden_license_key
+            hiddenLicenseKey: licenseData?.hidden_license_key,
+            modals: {}
         }
 
     useEffect(() => {
@@ -35,6 +36,24 @@ function ContextReducer() {
                 initValue.widgets[item].push(subitem);
                 initValue.elements[subitem] = eaData.widgets[item].elements[subitem].is_activate;
             });
+        });
+
+        Object.keys(eaData.modal).map((item) => {
+            const key = eaData.modal[item]?.name;
+            if (key !== undefined) {
+                initValue.modals[key] = eaData.modal[item].value;
+            } else if (item === 'loginRegisterSetting') {
+                const accordion = eaData.modal[item].accordion;
+                Object.keys(accordion).map((subItem, subIndex) => {
+                    Object.keys(accordion[subItem].fields).map((childItem, childIndex) => {
+                        const key = accordion[subItem].fields[childItem]?.name;
+                        if (key !== undefined) {
+                            initValue.modals[key] = accordion[subItem].fields[childItem]?.value;
+                        }
+                    });
+                });
+            }
+
         });
     }, []);
 
