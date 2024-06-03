@@ -26,8 +26,8 @@ function ModalStyleThree() {
                         {eaData.accordion[item].fields.map((subItem, subIndex) => {
                             return (<div className="flex gap-4 items-center" key={subIndex}>
                                 <label>{subItem.label}</label>
-                                <input name={subItem.name} className="input-name" type="text"
-                                       placeholder={subItem.placeholder}/>
+                                <input name={subItem.name} value={eaState.modals[subItem.name]} className="input-name"
+                                       type="text" placeholder={subItem.placeholder}/>
                             </div>);
                         })}
                     </div>
