@@ -12,7 +12,7 @@ function ModalStyleOne() {
             </div>
             <div>
                 <label className="mb-2">{eaData.label}</label>
-                <input className="input-name" type="text" placeholder="API Key" name={eaData.name}/>
+                <input className="input-name" type="text" placeholder="API Key" name={eaData.name} value={eaData.value}/>
                 {eaData.link === undefined || <a className="ea__api-link" href={eaData.link.url}>{eaData.link.text}</a>}
             </div>
             <img className="ea__modal-map-img"

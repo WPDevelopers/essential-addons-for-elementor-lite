@@ -1176,6 +1176,7 @@ trait Admin {
 				        'title_icon' => 'images/map.svg',
 				        'label'      => __( "Set API Key", 'essential-addons-for-elementor-lite' ),
 				        'name'       => 'google-map-api',
+						'value'		 => get_option( 'eael_save_google_map_api' ),
 				        'image'      => 'images/map.png',
 			        ],
 			        'businessReviewsSetting' => [
@@ -1183,6 +1184,7 @@ trait Admin {
 				        'title_icon' => 'images/map.svg',
 				        'label'      => __( "Set API Key", 'essential-addons-for-elementor-lite' ),
 				        'name'       => 'br_google_place_api_key',
+				        'value'		 => get_option( 'eael_br_google_place_api_key' ),
 				        'image'      => 'images/map2.png',
 				        'link'       => [
 					        'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
@@ -1194,6 +1196,7 @@ trait Admin {
 				        'title_icon' => 'images/mc.svg',
 				        'label'      => __( "Set API Key", 'essential-addons-for-elementor-lite' ),
 				        'name'       => 'mailchimp-api',
+				        'value'		 => get_option( 'eael_save_mailchimp_api' ),
 				        'image'      => 'images/mc.png',
 				        'link'       => [
 					        'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
