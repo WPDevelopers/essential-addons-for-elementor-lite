@@ -83,6 +83,19 @@ $enable-prefers-reduced-motion-media-query: true !default;
         margin: 0;
         padding: 0;
 
+        &.eael-feature-list-horizontal{
+            display: flex;
+            overflow: auto;
+
+            .eael-feature-list-item{
+                flex-shrink: 0;
+                flex-grow: 0;
+            }
+            .eael-feature-list-title{
+                white-space: nowrap;
+            }
+        }
+
         .eael-feature-list-item {
             position: relative;
 
