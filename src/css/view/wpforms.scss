@@ -8,6 +8,7 @@
 .eael-wpforms .wpforms-container .wpforms-form button[type="submit"]:hover,
 .eael-wpforms .wpforms-container .wpforms-form .wpforms-page-button:hover {
 	border: 0;
+	background: none;
 }
 
 .eael-wpforms .wpforms-container .wpforms-form input[type="checkbox"],
@@ -30,6 +31,7 @@
 .eael-wpforms .wpforms-container .wpforms-field textarea,
 .eael-wpforms .wpforms-container .wpforms-field select {
 	max-width: 100% !important;
+	min-height: 43px;
 }
 
 .eael-wpforms-labels-yes .wpforms-container .wpforms-form .wpforms-field-label {
