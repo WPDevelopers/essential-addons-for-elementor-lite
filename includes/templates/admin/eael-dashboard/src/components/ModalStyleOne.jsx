@@ -2,7 +2,8 @@ import consumer from "../context/index.js";
 
 function ModalStyleOne() {
     const {eaState} = consumer(),
-        eaData = localize.eael_dashboard.modal[eaState.modalID];
+        eaData = localize.eael_dashboard.modal[eaState.modalID],
+        apiKey = eaState.modals[eaData.name];
 
     return (
         <>
@@ -12,7 +13,7 @@ function ModalStyleOne() {
             </div>
             <div>
                 <label className="mb-2">{eaData.label}</label>
-                <input className="input-name" type="text" placeholder="API Key" name={eaData.name} value={eaData.value}/>
+                <input className="input-name" type="text" placeholder="API Key" name={eaData.name} value={apiKey}/>
                 {eaData.link === undefined || <a className="ea__api-link" href={eaData.link.url}>{eaData.link.text}</a>}
             </div>
             <img className="ea__modal-map-img"
