@@ -212,7 +212,7 @@ html {
 }
 
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-number li:before {
-  content: counters(counter, ".") " ";
+  content: counters(counter, ". ") ". ";
 }
 
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-number li ul {

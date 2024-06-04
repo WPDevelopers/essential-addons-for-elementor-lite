@@ -198,7 +198,7 @@ html {
 					counter-increment: counter;
 
 					&:before {
-						content: counters(counter, ".") " ";
+						content: counters(counter, ". ") ". ";
 					}
 
 					ul {
