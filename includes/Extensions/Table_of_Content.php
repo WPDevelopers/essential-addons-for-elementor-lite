@@ -518,7 +518,7 @@ class Table_of_Content
             ]
         );
 
-        $element->add_control(
+        $element->add_responsive_control(
             'eael_ext_toc_width',
             [
                 'label' => __('Width', 'essential-addons-for-elementor-lite'),
