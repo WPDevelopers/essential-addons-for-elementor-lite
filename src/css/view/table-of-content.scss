@@ -282,3 +282,16 @@ html {
 		display: none !important;
 	}
 }
+
+@media only screen and (max-width: 991px) {
+	.eael-toc.collapsed.eael-toc-top .eael-toc-button,
+	.eael-toc.collapsed.eael-toc-bottom .eael-toc-button {
+		transform: rotate(0deg);
+	}
+	.eael-toc-mobile .eael-toc.collapsed.eael-toc-top {
+		bottom: unset !important;
+	}
+	.eael-toc-mobile .eael-toc.eael-sticky.eael-toc-bottom {
+		top: unset !important;
+	}
+}
