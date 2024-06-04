@@ -143,7 +143,7 @@ class WPDeveloper_Setup_Wizard {
 		?>
 		<div class="eael-onboard-nav-list flex justify-between <?php echo esc_attr( $wizard_column ); ?>" data-step="1">
 			<?php foreach ( $items as $item ): ?>
-				<?php //if ( $item == 'Templately' && $this->templately_status || ( $this->get_local_plugin_data( 'templately/templately.php' ) !== false && $item == 'Templately' ) ) continue; ?>
+				<?php if ( $item == 'Templately' && $this->templately_status || ( $this->get_local_plugin_data( 'templately/templately.php' ) !== false && $item == 'Templately' ) ) continue; ?>
 				<div class="eael-onboard-nav <?php echo $i === 0 ? esc_html( 'active' ) : ''; ?> <?php echo esc_attr( strtolower(str_replace(' ', '-', trim( $item ) )) ); ?>">
 					<span class="eael-nav-count">
 						<?php echo esc_html( ++$i ); ?>
@@ -316,7 +316,7 @@ class WPDeveloper_Setup_Wizard {
 						<p><?php _e( 'Lorem ipsum is placeholder text commonly used in the graphic', 'essential-addons-for-elementor-lite' ); ?></p>
 					</div>
 				</div>
-				<a href="#">
+				<a target="_blank" href="https://wpdeveloper.com/in/upgrade-essential-addons-elementor">
 					<button class="upgrade-button">
 						<i class="ea-dash-icon ea-crown-1"></i>
 						<?php _e( 'Upgrade to PRO', 'essential-addons-for-elementor-lite' ); ?>
@@ -328,7 +328,7 @@ class WPDeveloper_Setup_Wizard {
 					<h2><?php _e( 'Explore Premiere Pro features', 'essential-addons-for-elementor-lite' ); ?></h2>
 					<p class="mb-7"><?php _e( 'Learn all about the tools and techniques you can use to edit videos, animate titles, add effects, mix sound, and more.', 'essential-addons-for-elementor-lite' ); ?>
 					</p>
-					<a href="#">
+					<a href="https://essential-addons.com/demos/" target="_blank">
 						<button class="primary-btn changelog-btn">
 							<i class="ea-dash-icon ea-link"></i>
 							<?php _e( 'View More', 'essential-addons-for-elementor-lite' ); ?>
@@ -434,8 +434,7 @@ class WPDeveloper_Setup_Wizard {
 				<i class="ea-dash-icon ea-left-arrow-long"></i>
 				<?php _e( 'Previous', 'essential-addons-for-elementor-lite' ); ?>
 			</button>
-			<!-- #TODO templately check -->
-			<button class="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn" data-next="templately">
+			<button class="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn" data-next="<?php echo ! $this->get_local_plugin_data( 'templately/templately.php' ) !== false ? 'templately' : 'integrations'; ?>">
 			<?php _e( 'Next', 'essential-addons-for-elementor-lite' ); ?>
 				<i class="ea-dash-icon ea-right-arrow-long"></i>
 			</button>
@@ -488,8 +487,8 @@ class WPDeveloper_Setup_Wizard {
 				<i class="ea-dash-icon ea-left-arrow-long"></i>
 				<?php _e( 'Skip', 'essential-addons-for-elementor-lite' ); ?>
 			</button>
-			<button class="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn" data-next="integrations">
-			<?php _e( 'Enable Templates', 'essential-addons-for-elementor-lite' ); ?>
+			<button class="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn eael-quick-setup-next-button wpdeveloper-plugin-installer" data-next="integrations" data-action="install" data-slug="templately">
+				<?php _e( 'Enable Templates', 'essential-addons-for-elementor-lite' ); ?>
 			</button>
 		</div>
 		<?php 
@@ -838,7 +837,7 @@ class WPDeveloper_Setup_Wizard {
 		</div>
 		<div class="eael-section-wrapper flex flex-end gap-4">
 			<!-- #ToDo templately status check -->
-			<button class="previous-btn flex gap-2 items-center eael-setup-next-btn" data-next="templately">
+			<button class="previous-btn flex gap-2 items-center eael-setup-next-btn" data-next="<?php echo ! $this->get_local_plugin_data( 'templately/templately.php' ) !== false ? 'templately' : 'go-pro'; ?>">
 				<i class="ea-dash-icon ea-left-arrow-long"></i>
 				<?php _e( 'Previous', 'essential-addons-for-elementor-lite' ); ?>
 			</button>
