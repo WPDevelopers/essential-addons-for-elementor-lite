@@ -6002,7 +6002,6 @@ img {
 
 .templates-img img {
     border-radius: 0 8px 8px 0;
-    padding-left: 30px;
     max-width: 430px;
 }
 
@@ -6574,7 +6573,7 @@ span.eael-tooltip:after {
     position: absolute;
     left: 50%;
     top: -18px;
-    min-width: 110px;
+    min-width: 135px;
     transform: translate(-50%, -50%);
     font-size: 12px;
     font-weight: 400;
@@ -6737,10 +6736,6 @@ span.title-color-2 {
 
     .eael-onboard-content-wrapper .eael-general-content-item.templates {
         flex-wrap: nowrap;
-    }
-
-    .eael-onboard-content-wrapper .templates-img img {
-        padding-left: 20px;
     }
 
     .eael-onboard-content-wrapper .templates-img {

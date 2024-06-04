@@ -261,7 +261,7 @@ class WPDeveloper_Setup_Wizard {
 							<div class="eael-content-head">
 								<h5 class="toggle-label">Creative Button</h5>
 								<label class="toggle-wrap">
-									<input type="checkbox">
+									<input type="checkbox" checked="checked">
 									<span class="slider"></span>
 								</label>
 							</div>
@@ -270,7 +270,7 @@ class WPDeveloper_Setup_Wizard {
 							<div class="eael-content-head">
 								<h5 class="toggle-label">Team Member</h5>
 								<label class="toggle-wrap">
-									<input type="checkbox">
+									<input type="checkbox" checked="checked">
 									<span class="slider"></span>
 								</label>
 							</div>
@@ -297,7 +297,7 @@ class WPDeveloper_Setup_Wizard {
 							<div class="eael-content-head">
 								<h5 class="toggle-label">Info Box</h5>
 								<label class="toggle-wrap">
-									<input type="checkbox">
+									<input type="checkbox" checked="checked">
 									<span class="slider"></span>
 								</label>
 							</div>
@@ -315,7 +315,7 @@ class WPDeveloper_Setup_Wizard {
 							<div class="eael-content-head">
 								<h5 class="toggle-label">Tooltip</h5>
 								<label class="toggle-wrap">
-									<input type="checkbox">
+									<input type="checkbox" checked="checked">
 									<span class="slider"></span>
 								</label>
 							</div>
@@ -324,7 +324,7 @@ class WPDeveloper_Setup_Wizard {
 							<div class="eael-content-head">
 								<h5 class="toggle-label">Advanced Accordion</h5>
 								<label class="toggle-wrap">
-									<input type="checkbox">
+									<input type="checkbox" checked="checked">
 									<span class="slider"></span>
 								</label>
 							</div>
@@ -333,7 +333,7 @@ class WPDeveloper_Setup_Wizard {
 							<div class="eael-content-head">
 								<h5 class="toggle-label">Advanced Tabs</h5>
 								<label class="toggle-wrap">
-									<input type="checkbox">
+									<input type="checkbox" checked="checked">
 									<span class="slider"></span>
 								</label>
 							</div>
@@ -342,7 +342,7 @@ class WPDeveloper_Setup_Wizard {
 							<div class="eael-content-head">
 								<h5 class="toggle-label">Feature List</h5>
 								<label class="toggle-wrap">
-									<input type="checkbox">
+									<input type="checkbox" checked="checked">
 									<span class="slider"></span>
 								</label>
 							</div>
@@ -351,7 +351,7 @@ class WPDeveloper_Setup_Wizard {
 							<div class="eael-content-head">
 								<h5 class="toggle-label">Offcanvas</h5>
 								<label class="toggle-wrap">
-									<input type="checkbox" checked="checked">
+									<input type="checkbox">
 									<span class="slider"></span>
 								</label>
 							</div>
@@ -405,7 +405,7 @@ class WPDeveloper_Setup_Wizard {
 							<div class="eael-content-head">
 								<h5 class="toggle-label">Sticky Video</h5>
 								<label class="toggle-wrap">
-									<input type="checkbox">
+									<input type="checkbox" checked="checked">
 									<span class="slider"></span>
 								</label>
 							</div>
@@ -423,7 +423,7 @@ class WPDeveloper_Setup_Wizard {
 							<div class="eael-content-head">
 								<h5 class="toggle-label">Simple Menu</h5>
 								<label class="toggle-wrap">
-									<input type="checkbox">
+									<input type="checkbox" checked="checked">
 									<span class="slider"></span>
 								</label>
 							</div>
@@ -600,7 +600,7 @@ class WPDeveloper_Setup_Wizard {
 	public function templately_content(){
 		?>
 		<div class="eael-onboard-content-wrapper eael-onboard-templately mb-4 min-h-538">
-			<div class="eael-general-content-item templates flex justify-between items-center">
+			<div class="eael-general-content-item templates flex justify-between items-center gap-2">
 				<div class="templates-content">
 					<h2> <span class="title-color-2">5000+</span> Ready Templates </h2>
 					<p class="mb-10">Get Access to amazing features and boost your Elementor page building
