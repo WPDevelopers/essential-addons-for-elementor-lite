@@ -18,8 +18,8 @@ function Modal() {
             formData.forEach((item, index) => {
                 inputData[index] = item;
             });
-console.log(inputData);
-            // eaDispatch({type: 'SAVE_MODAL_DATA', payload: inputData});
+
+            eaDispatch({type: 'SAVE_MODAL_DATA', payload: inputData});
         };
 
     return (

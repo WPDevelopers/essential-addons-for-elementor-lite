@@ -913,11 +913,8 @@ trait Ajax_Handler {
 			wp_send_json_error( __( 'you are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
 		}
 
-		if ( ! isset( $_POST['fields'] ) ) {
-			return;
-		}
-
-		wp_parse_str( $_POST['fields'], $settings );
+		$settings = array_map( 'sanitize_text_field', $_POST );
+		unset($settings['action'], $settings['security']);
 
 		if ( ! empty( $_POST['is_login_register'] ) ) {
 			// Saving Login | Register Related Data
@@ -1041,17 +1038,16 @@ trait Ajax_Handler {
 			update_option( 'eael_js_print_method', sanitize_text_field( $settings['eael-js-print-method'] ) );
 		}
 
-		$settings = array_map( 'sanitize_text_field', $settings );
 		$defaults = array_fill_keys( array_keys( array_merge( $this->registered_elements, $this->registered_extensions ) ), false );
 		$elements = array_merge( $defaults, array_fill_keys( array_keys( array_intersect_key( $settings, $defaults ) ), true ) );
 
 		// update new settings
-		$updated = update_option( 'eael_save_settings', $elements );
+//		$updated = update_option( 'eael_save_settings', $elements );
 
 		// clear assets files
 		$this->empty_dir( EAEL_ASSET_PATH );
 
-		wp_send_json( $updated );
+		wp_send_json_success( [$settings, $defaults, $elements] );
 	}
 
 	/**

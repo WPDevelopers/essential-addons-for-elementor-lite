@@ -197,6 +197,20 @@ function ContextReducer() {
             case 'MODAL_ON_CHANGE':
                 modals = {...state.modals, [payload.key]: payload.value};
                 return {...state, modals};
+            case 'SAVE_MODAL_DATA':
+                params = {
+                    action: 'save_settings_with_ajax',
+                    security: localize.nonce,
+                    ...payload
+                };
+
+                response = eaAjax(params);
+
+                if (response?.success) {
+                    return {...state, modal: 'close'};
+                }
+
+                return {...state};
         }
     }
 
