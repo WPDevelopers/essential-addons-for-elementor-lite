@@ -116,14 +116,14 @@ class WPDeveloper_Setup_Wizard {
 			</section>
 		</section>
 	
-        <!-- <div class="eael-quick-setup-wizard-wrap">
+        <div class="eael-quick-setup-wizard-wrap">
 			<?php
-			// $this->change_site_title();
-			// $this->tab_step();
-			// $this->tab_content();
-			// $this->setup_wizard_footer();
+			$this->change_site_title();
+			$this->tab_step();
+			$this->tab_content();
+			$this->setup_wizard_footer();
 			?>
-        </div> -->
+        </div>
 		<?php
 	}
 
@@ -196,7 +196,8 @@ class WPDeveloper_Setup_Wizard {
 				</div>
 				<div class="eael-onboard-content-select">
 					<label class="flex-1 checkbox--label">
-						<input name="choose-provider" id="1" type="radio" checked class="eael-d-none">
+						<input id="basic" value="basic" class="eael_preferences eael-d-none" name="eael_preferences" type="radio" checked/>
+						
 						<span class="select--wrapper">
 							<span class="check-mark"></span>
 							<h4><?php _e( 'Basic', 'essential-addons-for-elementor-lite' ); ?> <span><?php _e( '(Recommended)', 'essential-addons-for-elementor-lite' ); ?></span></h4>
@@ -204,7 +205,7 @@ class WPDeveloper_Setup_Wizard {
 						</span>
 					</label>
 					<label class="flex-1 checkbox--label">
-						<input name="choose-provider" id="2" type="radio" class="eael-d-none">
+						<input id="advance" value="advance" class="eael_preferences eael-d-none" name="eael_preferences" type="radio"/>
 						<span class="select--wrapper">
 							<span class="check-mark"></span>
 							<h4><?php _e( 'Advanced', 'essential-addons-for-elementor-lite' ); ?></h4>
@@ -212,7 +213,7 @@ class WPDeveloper_Setup_Wizard {
 						</span>
 					</label>
 					<label class="flex-1 checkbox--label">
-						<input name="choose-provider" id="3" type="radio" class="eael-d-none">
+						<input id="custom" value="custom" class="eael_preferences eael-d-none" name="eael_preferences" type="radio"/>
 						<span class="select--wrapper">
 							<span class="check-mark"></span>
 							<h4><?php _e( 'Custom', 'essential-addons-for-elementor-lite' ); ?></h4>
@@ -225,6 +226,76 @@ class WPDeveloper_Setup_Wizard {
 		</div>
 		<div id="eael-dashboard--wrapper" class="eael-section-wrapper flex flex-end">
 			<button class="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn" data-next="elements">
+				<?php _e( 'Next', 'essential-addons-for-elementor-lite' ); ?>
+				<i class="ea-dash-icon ea-right-arrow-long"></i>
+			</button>
+		</div>
+		<?php 
+	}
+
+	public function elements_content(){
+		$init = 0;
+		?>
+		<div class="eael-onboard-content-wrapper eael-onboard-elements mb-4 min-h-538">
+			<div class="eael-connect-others flex gap-4 justify-between items-start mb-10">
+				<div class="flex gap-4 flex-1">
+					<div class="eael-others-icon eaicon-1">
+						<i class="ea-dash-icon ea-elements"></i>
+					</div>
+					<div class="max-w-454">
+						<h4><?php _e( 'Turn on the Elements that you need', 'essential-addons-for-elementor-lite' ); ?></h4>
+						<p><?php _e( 'Enable/Disable the elements anytime you want from Essential Addons Dashboard', 'essential-addons-for-elementor-lite' ); ?></p>
+					</div>
+				</div>
+				<button class="primary-btn changelog-btn flex items-center gap-2 view-all-elements">
+					<?php _e( 'View All', 'essential-addons-for-elementor-lite' ); ?>
+					<i class="ea-dash-icon ea-right-arrow-long"></i>
+				</button>
+			</div>
+			<div class="onBoard-scroll-wrap">
+				<div id="Content" class="eael-contents">
+					<?php foreach ( $this->get_element_list() as $key => $item ):
+						$init++;
+						$disable = ( $init > 2 ) ? 'eael-d-none' : '';
+					?>
+					<div class="flex items-center gap-2 justify-between mb-4 eael-element-title-wrap <?php echo esc_attr( $disable ); ?>">
+						<h3 class="eael-content-title"><?php echo esc_html( $item[ 'title' ] ); ?></h3>
+					</div>
+					<div class="eael-content-wrapper mb-10 eael-element-content-wrap <?php echo esc_attr( $disable ); ?>">
+						<?php foreach ( $item[ 'elements' ] as $element ):
+							$preferences = $checked = '';
+							if ( isset( $element[ 'preferences' ] ) ) {
+								$preferences = $element[ 'preferences' ];
+								if ( $element[ 'preferences' ] == 'basic' ) {
+									$checked = 'checked';
+								}
+							}
+							?>
+							<div class="eael-content-items eael-quick-setup-post-grid">
+								<div class="eael-content-head">
+									<h5 class="toggle-label"><?php echo esc_html( $element[ 'title' ] ); ?></h5>
+									<label class="toggle-wrap eael-quick-setup-toggler">
+										<input type="checkbox" 
+												data-preferences="<?php echo esc_attr( $preferences ); ?>"
+												name="eael_element[<?php echo esc_attr( $element[ 'key' ] ); ?>]"
+												<?php echo esc_attr( $checked ); ?> >
+										<span class="slider"></span>
+									</label>
+								</div>
+							</div>
+						<?php endforeach; ?>
+					</div>
+					<?php endforeach; ?>
+				</div>
+			</div>
+			<div class="eael-section-overlay"></div>
+		</div>
+		<div class="eael-section-wrapper flex flex-end gap-4">
+			<button class="previous-btn flex gap-2 items-center eael-setup-next-btn" data-next="configuration">
+				<i class="ea-dash-icon ea-left-arrow-long"></i>
+				<?php _e( 'Previous', 'essential-addons-for-elementor-lite' ); ?>
+			</button>
+			<button class="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn" data-next="go-pro">
 				<?php _e( 'Next', 'essential-addons-for-elementor-lite' ); ?>
 				<i class="ea-dash-icon ea-right-arrow-long"></i>
 			</button>
@@ -800,6 +871,33 @@ class WPDeveloper_Setup_Wizard {
             </div>
         </section>
 		<?php 
+	}
+
+	/**
+	 * Render tab
+	 */
+	public function tab_step() {
+		!$this->templately_status ? $wizard_column = 'five' : $wizard_column = 'four';
+		$items = [
+			__( 'Configuration', 'essential-addons-for-elementor-lite' ),
+			__( 'Elements', 'essential-addons-for-elementor-lite' ),
+			__( 'Go PRO', 'essential-addons-for-elementor-lite' ),
+			__( 'Templately', 'essential-addons-for-elementor-lite' ),
+			__( 'Integrations', 'essential-addons-for-elementor-lite' ),
+			__( 'Finalize', 'essential-addons-for-elementor-lite' ),
+		];
+		$i     = 0;
+		?>
+        <ul class="eael-quick-setup-wizard <?php echo esc_attr( $wizard_column ); ?>" data-step="1">
+			<?php foreach ( $items as $item ): ?>
+				<?php if ( $item == 'Templately' && $this->templately_status || ( $this->get_local_plugin_data( 'templately/templately.php' ) !== false && $item == 'Templately' ) ) continue; ?>
+                <li class="eael-quick-setup-step active <?php echo esc_attr( strtolower($item) ); ?>">
+                    <div class="eael-quick-setup-icon"><?php echo ++$i; ?></div>
+                    <div class="eael-quick-setup-name"><?php echo esc_html( $item ); ?></div>
+                </li>
+			<?php endforeach; ?>
+        </ul>
+		<?php
 	}
 
 	/**
