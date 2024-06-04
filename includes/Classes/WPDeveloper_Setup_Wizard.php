@@ -336,96 +336,96 @@ class WPDeveloper_Setup_Wizard {
 					</a>
 				</div>
 				<div class="features-widget-wrapper">
-					<div class="features-widget-item">
-						<a href="https://essential-addons.com/event-calendar/" target="_blank">
-							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/event-calendar.svg' ); ?>" alt="<?php _e( 'Event Calendar', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip"><?php _e( 'Event Calendar', 'essential-addons-for-elementor-lite' ); ?></span>
-						</a>
-					</div>
-					<div class="features-widget-item">
-						<a href="https://essential-addons.com/image-hotspots/" target="_blank">
-							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/image-hotspots.svg' ); ?>" alt="<?php _e( 'Image Hotspots', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip"><?php _e( 'Image Hotspots', 'essential-addons-for-elementor-lite' ); ?></span>
-						</a>
-					</div>
-					<div class="features-widget-item">
-						<a href="https://essential-addons.com/learndash-course-list/" target="_blank">
-							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/learndash-course-list.svg' ); ?>" alt="<?php _e( 'LearnDash Course List', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip"><?php _e( 'LearnDash Course List', 'essential-addons-for-elementor-lite' ); ?></span>
-						</a>
-					</div>
-					<div class="features-widget-item">
-						<a href="https://essential-addons.com/particle-effect/" target="_blank">
-							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/particle-effect.svg' ); ?>" alt="<?php _e( 'Particle Effect', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip"><?php _e( 'Particle Effect', 'essential-addons-for-elementor-lite' ); ?></span>
-						</a>
-					</div>
-					<div class="features-widget-item">
-						<a href="https://essential-addons.com/instagram-feed/" target="_blank">
-							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/instagram-feed.svg' ); ?>" alt="<?php _e( 'Instagram Feed', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip"><?php _e( 'Instagram Feed', 'essential-addons-for-elementor-lite' ); ?></span>
-						</a>
-					</div>
-					<div class="features-widget-item">
-						<a href="https://essential-addons.com/dynamic-gallery/" target="_blank">
-							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/dynamic-gallery.svg' ); ?>" alt="<?php _e( 'Dynamic Gallery', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip"><?php _e( 'Dynamic Gallery', 'essential-addons-for-elementor-lite' ); ?></span>
-						</a>
-					</div>
-					<div class="features-widget-item">
-						<a href="https://essential-addons.com/parallax-scrolling/" target="_blank">
-							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/parallax-scrolling.svg' ); ?>" alt="<?php _e( 'Parallax Effect', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip"><?php _e( 'Parallax Effect', 'essential-addons-for-elementor-lite' ); ?></span>
-						</a>
-					</div>
-					<div class="features-widget-item">
-						<a href="https://essential-addons.com/mailchimp/" target="_blank">
-							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/mailchimp.svg' ); ?>" alt="<?php _e( 'Mailchimp', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip"><?php _e( 'Mailchimp', 'essential-addons-for-elementor-lite' ); ?></span>
-						</a>
-					</div>
-					<div class="features-widget-item">
-						<a href="https://essential-addons.com/advanced-google-map/" target="_blank">
-							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/advanced-google-map.svg' ); ?>" alt="<?php _e( 'Advanced Google Map', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip"><?php _e( 'Advanced Google Map', 'essential-addons-for-elementor-lite' ); ?></span>
-						</a>
-					</div>
-					<div class="features-widget-item">
-						<a href="https://essential-addons.com/advanced-tooltip/" target="_blank">
-							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/advanced-tooltip.svg' ); ?>" alt="<?php _e( 'Advanced Tooltip', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip"><?php _e( 'Advanced Tooltip', 'essential-addons-for-elementor-lite' ); ?></span>
-						</a>
-					</div>
-					<div class="features-widget-item">
-						<a href="https://essential-addons.com/content-toggle/" target="_blank">
-							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/content-toggle.svg' ); ?>" alt="<?php _e( 'Content Toggle', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip"><?php _e( 'Content Toggle', 'essential-addons-for-elementor-lite' ); ?></span>
-						</a>
-					</div>
-					<div class="features-widget-item">
-						<a href="https://essential-addons.com/lightbox-modal/" target="_blank">
-							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/lightbox-modal.svg' ); ?>" alt="<?php _e( 'Lightbox & Modal', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip"><?php _e( 'Lightbox & Modal', 'essential-addons-for-elementor-lite' ); ?></span>
-						</a>
-					</div>
-					<div class="features-widget-item">
-						<a href="https://essential-addons.com/logo-carousel/" target="_blank">
-							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/logo-carousel.svg' ); ?>" alt="<?php _e( 'Logo Carousel', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip"><?php _e( 'Logo Carousel', 'essential-addons-for-elementor-lite' ); ?></span>
-						</a>
-					</div>
-					<div class="features-widget-item">
-						<a href="https://essential-addons.com/woo-product-slider/" target="_blank">
-							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/woo-product-slider.svg' ); ?>" alt="<?php _e( 'Woo Product Slider', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip"><?php _e( 'Woo Product Slider', 'essential-addons-for-elementor-lite' ); ?></span>
-						</a>
-					</div>
-					<div class="features-widget-item">
-						<a href="https://essential-addons.com/woo-cross-sells/" target="_blank">
-							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/woo-cross-sells.svg' ); ?>" alt="<?php _e( 'Woo Cross Sells', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip"><?php _e( 'Woo Cross Sells', 'essential-addons-for-elementor-lite' ); ?></span>
-						</a>
-					</div>
+					<?php 
+					$feature_items = [
+						[
+							'title' => 'Event Calendar',
+							'link' => 'https://essential-addons.com/event-calendar/',
+							'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/event-calendar.svg',
+						],
+						[
+							'title' => 'Image Hotspots',
+							'link' => 'https://essential-addons.com/image-hotspots/',
+							'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/image-hotspots.svg',
+						],
+						[
+							'title' => 'LearnDash Course List',
+							'link' => 'https://essential-addons.com/learndash-course-list/',
+							'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/learndash-course-list.svg',
+						],
+						[
+							'title' => 'Particle Effect',
+							'link' => 'https://essential-addons.com/particle-effect/',
+							'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/particle-effect.svg',
+						],
+						[
+							'title' => 'Instagram Feed',
+							'link' => 'https://essential-addons.com/instagram-feed/',
+							'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/instagram-feed.svg',
+						],
+						[
+							'title' => 'Dynamic Gallery',
+							'link' => 'https://essential-addons.com/dynamic-gallery/',
+							'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/dynamic-gallery.svg',
+						],
+						[
+							'title' => 'Parallax Effect',
+							'link' => 'https://essential-addons.com/parallax-scrolling/',
+							'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/parallax-scrolling.svg',
+						],
+						[
+							'title' => 'Mailchimp',
+							'link' => 'https://essential-addons.com/mailchimp/',
+							'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/mailchimp.svg',
+						],
+						[
+							'title' => 'Advanced Google Map',
+							'link' => 'https://essential-addons.com/advanced-google-map/',
+							'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/advanced-google-map.svg',
+						],
+						[
+							'title' => 'Advanced Tooltip',
+							'link' => 'https://essential-addons.com/advanced-tooltip/',
+							'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/advanced-tooltip.svg',
+						],
+						[
+							'title' => 'Content Toggle',
+							'link' => 'https://essential-addons.com/content-toggle/',
+							'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/content-toggle.svg',
+						],
+						[
+							'title' => 'Lightbox & Modal',
+							'link' => 'https://essential-addons.com/lightbox-modal/',
+							'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/lightbox-modal.svg',
+						],
+						[
+							'title' => 'Logo Carousel',
+							'link' => 'https://essential-addons.com/logo-carousel/',
+							'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/logo-carousel.svg',
+						],
+						[
+							'title' => 'Woo Product Slider',
+							'link' => 'https://essential-addons.com/woo-product-slider/',
+							'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/woo-product-slider.svg',
+						],
+						[
+							'title' => 'Woo Cross Sells',
+							'link' => 'https://essential-addons.com/woo-cross-sells/',
+							'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/woo-cross-sells.svg',
+						]
+					];
+
+					foreach( $feature_items as $feature_item ) :
+						?>
+						<div class="features-widget-item">
+							<a href="<?php echo esc_url( $feature_item['link'] ); ?>" target="_blank">
+								<img src="<?php echo esc_url( $feature_item['img_src'] ); ?>" alt="<?php esc_attr_e( $feature_item['title'], 'essential-addons-for-elementor-lite' ); ?>">
+								<span class="eael-tooltip"><?php esc_html_e( $feature_item['title'], 'essential-addons-for-elementor-lite' ); ?></span>
+							</a>
+						</div>
+						<?php 
+					endforeach;
+					?>
 				</div>
 			</div>
 		</div>
