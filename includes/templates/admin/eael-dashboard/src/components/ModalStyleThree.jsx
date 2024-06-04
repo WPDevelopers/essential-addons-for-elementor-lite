@@ -5,6 +5,9 @@ function ModalStyleThree() {
         eaData = localize.eael_dashboard.modal[eaState.modalID],
         clickHandler = (param) => {
             eaDispatch({type: 'MODAL_ACCORDION', payload: {key: param}});
+        },
+        changeHandler = (e, key) => {
+            eaDispatch({type: 'MODAL_ON_CHANGE', payload: {key, value: e.target.value}});
         };
 
     return (
@@ -27,7 +30,8 @@ function ModalStyleThree() {
                         {eaData.accordion[item].fields.map((subItem, subIndex) => {
                             return (<div className="flex gap-4 items-center" key={subIndex}>
                                 <label>{subItem.label}</label>
-                                <input name={subItem.name} value={eaState.modals[subItem.name]} className="input-name"
+                                <input name={subItem.name} value={eaState.modals[subItem.name]}
+                                       onChange={(e) => changeHandler(e, subItem.name)} className="input-name"
                                        type="text" placeholder={subItem.placeholder}/>
                             </div>);
                         })}
