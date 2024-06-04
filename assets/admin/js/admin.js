@@ -446,6 +446,12 @@
 		$('.eael-onboard-elements .eael-element-title-wrap').removeClass('eael-d-none');
 		$('.eael-onboard-elements .eael-element-content-wrap').removeClass('eael-d-none');
 	});
+
+	$(document).on("change", ".eael-onboard-integrations .enable-integration-switch", function() {
+		if ($(this).is(':checked')) {
+            $(this).closest('.eael-integration-footer').find('.wpdeveloper-plugin-installer').click();
+        }
+	});
 	
 	/**
 	 * eaelStepIndicator

@@ -525,11 +525,7 @@ class WPDeveloper_Setup_Wizard {
 					<div class="eael-integration-footer">
 						<p><?php echo esc_textarea( $plugin[ 'desc' ] ) ; ?></p>
 						<div class="integration-settings flex justify-between items-center">
-							<h5 class="toggle-label"><?php _e( 'Enable Integration', 'essential-addons-for-elementor-lite' ); ?></h5>
-							<label class=" toggle-wrap">
-								<input type="checkbox">
-								<span class="slider"></span>
-							</label>
+							<h5 class="toggle-label eael-d-none"><?php _e( 'Integration', 'essential-addons-for-elementor-lite' ); ?></h5>
 
 							<?php if ( $this->get_local_plugin_data( $plugin[ 'basename' ] ) === false ) { ?>
 								<button class="wpdeveloper-plugin-installer eael-quick-setup-wpdeveloper-plugin-installer"
@@ -544,6 +540,11 @@ class WPDeveloper_Setup_Wizard {
 											data-basename="<?php echo esc_attr( $plugin[ 'basename' ] ); ?>"><?php _e( 'Activate', 'essential-addons-for-elementor-lite' ); ?></button>
 								<?php } ?>
 							<?php } ?>
+
+							<label class=" toggle-wrap">
+								<input type="checkbox" class="enable-integration-switch" <?php if ( is_plugin_active( $plugin[ 'basename' ] ) ) : ?> checked <?php endif; ?>>
+								<span class="slider"></span>
+							</label>
 						</div>
 					</div>
 				</div>
