@@ -161,20 +161,22 @@ class WPDeveloper_Setup_Wizard {
 			<div class="eael-onboard-content">
 				<div class="eael-onboard-content-top">
 					<a href="https://www.youtube.com/watch?v=ZISSbnHo0rE&ab_channel=WPDeveloper" target="_blank">
-						<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/youtube-promo.png' )?>" alt="Youtube Promo">
+						<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/youtube-promo.png' )?>" alt="<?php _e( 'Youtube Promo', 'essential-addons-for-elementor-lite' ); ?>">
 					</a>
-					<h3>Getting Started</h3>
-					<p>Easily get started with this easy setup wizard and complete setting up your Knowledge Base.
-					</p>
+					<h3><?php _e( 'Getting Started', 'essential-addons-for-elementor-lite' ); ?></h3>
+					<p><?php _e( 'Easily get started with this easy setup wizard and complete setting up your Knowledge Base.', 'essential-addons-for-elementor-lite' ); ?></p>
 				</div>
 				<div class="eael-next-step-wrapper" id="eael-dashboard--wrapper">
-					<p>By clicking this button I am allowing this app to
-						collect my information. <span class="collect-info">What We Collect?</span></p>
+					<p>
+						<?php _e( 'By clicking this button I am allowing this app to collect my information.', 'essential-addons-for-elementor-lite' ); ?> 
+						<span class="collect-info"><?php _e( 'What We Collect?', 'essential-addons-for-elementor-lite' ); ?></span>
+					</p>
+					
 					<button class="primary-btn install-btn eael-setup-next-btn" data-next="configuration">
-						Proceed to Next Step
+						<?php _e( 'Proceed to Next Step', 'essential-addons-for-elementor-lite' ); ?>
 						<i class="ea-dash-icon ea-install"></i>
 					</button>
-					<span class="skip-item eael-setup-next-btn" data-next="configuration">Skip This Step</span>
+					<span class="skip-item eael-setup-next-btn" data-next="configuration"><?php _e( 'Skip This Step', 'essential-addons-for-elementor-lite' ); ?></span>
 				</div>
 			</div>
 		</div>
@@ -189,35 +191,32 @@ class WPDeveloper_Setup_Wizard {
 					<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/ea-new.png' ); ?>"
 						alt="<?php _e( 'EA Logo', 'essential-addons-for-elementor-lite' ); ?>">
 
-					<h3>Get Started with Essential Addons 🚀</h3>
-					<p>Enhance your Elementor page building experience with 50+ amazing elements & extensions 🔥</p>
+					<h3><?php _e( 'Get Started with Essential Addons', 'essential-addons-for-elementor-lite' ); ?> 🚀</h3>
+					<p><?php _e( 'Enhance your Elementor page building experience with 50+ amazing elements & extensions', 'essential-addons-for-elementor-lite' ); ?> 🔥</p>
 				</div>
 				<div class="eael-onboard-content-select">
 					<label class="flex-1 checkbox--label">
 						<input name="choose-provider" id="1" type="radio" checked class="eael-d-none">
 						<span class="select--wrapper">
 							<span class="check-mark"></span>
-							<h4>Basic <span>(Recommended)</span></h4>
-							<p>For websites where you want to only use the basic features and keep your site
-								lightweight. Most basic elements are activated in this option.</p>
+							<h4><?php _e( 'Basic', 'essential-addons-for-elementor-lite' ); ?> <span><?php _e( '(Recommended)', 'essential-addons-for-elementor-lite' ); ?></span></h4>
+							<p><?php _e( 'For websites where you want to only use the basic features and keep your site lightweight. Most basic elements are activated in this option.', 'essential-addons-for-elementor-lite' ); ?></p>
 						</span>
 					</label>
 					<label class="flex-1 checkbox--label">
 						<input name="choose-provider" id="2" type="radio" class="eael-d-none">
 						<span class="select--wrapper">
 							<span class="check-mark"></span>
-							<h4>Advanced</h4>
-							<p>For advanced users who are trying to build complex websites with advanced
-								functionalities with Elementor. All the dynamic elements will be activated in this
-								option.</p>
+							<h4><?php _e( 'Advanced', 'essential-addons-for-elementor-lite' ); ?></h4>
+							<p><?php _e( 'For advanced users who are trying to build complex websites with advanced functionalities with Elementor. All the dynamic elements will be activated in this option.', 'essential-addons-for-elementor-lite' ); ?></p>
 						</span>
 					</label>
 					<label class="flex-1 checkbox--label">
 						<input name="choose-provider" id="3" type="radio" class="eael-d-none">
 						<span class="select--wrapper">
 							<span class="check-mark"></span>
-							<h4>Custom</h4>
-							<p>Pick this option if you want to configure the elements as per your wish.</p>
+							<h4><?php _e( 'Custom', 'essential-addons-for-elementor-lite' ); ?></h4>
+							<p><?php _e( 'Pick this option if you want to configure the elements as per your wish.', 'essential-addons-for-elementor-lite' ); ?></p>
 						</span>
 					</label>
 
@@ -226,7 +225,7 @@ class WPDeveloper_Setup_Wizard {
 		</div>
 		<div id="eael-dashboard--wrapper" class="eael-section-wrapper flex flex-end">
 			<button class="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn" data-next="elements">
-				Next
+				<?php _e( 'Next', 'essential-addons-for-elementor-lite' ); ?>
 				<i class="ea-dash-icon ea-right-arrow-long"></i>
 			</button>
 		</div>
@@ -242,24 +241,24 @@ class WPDeveloper_Setup_Wizard {
 						<i class="ea-dash-icon ea-elements"></i>
 					</div>
 					<div class="max-w-454">
-						<h4>Turn on the Elements that you need</h4>
-						<p>Enable/Disable the elements anytime you want from Essential Addons Dashboard</p>
+						<h4><?php _e( 'Turn on the Elements that you need', 'essential-addons-for-elementor-lite' ); ?></h4>
+						<p><?php _e( 'Enable/Disable the elements anytime you want from Essential Addons Dashboard', 'essential-addons-for-elementor-lite' ); ?></p>
 					</div>
 				</div>
 				<button class="primary-btn changelog-btn flex items-center gap-2">
-					View All
+					<?php _e( 'View All', 'essential-addons-for-elementor-lite' ); ?>
 					<i class="ea-dash-icon ea-right-arrow-long"></i>
 				</button>
 			</div>
 			<div class="onBoard-scroll-wrap">
 				<div id="Content" class="eael-contents">
 					<div class="flex items-center gap-2 justify-between mb-4">
-						<h3 class="eael-content-title">Content Elements</h3>
+						<h3 class="eael-content-title"><?php _e( 'Content Elements', 'essential-addons-for-elementor-lite' ); ?></h3>
 					</div>
 					<div class="eael-content-wrapper mb-10">
 						<div class="eael-content-items">
 							<div class="eael-content-head">
-								<h5 class="toggle-label">Creative Button</h5>
+								<h5 class="toggle-label"><?php _e( 'Creative Button', 'essential-addons-for-elementor-lite' ); ?></h5>
 								<label class="toggle-wrap">
 									<input type="checkbox" checked="checked">
 									<span class="slider"></span>
@@ -268,7 +267,7 @@ class WPDeveloper_Setup_Wizard {
 						</div>
 						<div class="eael-content-items">
 							<div class="eael-content-head">
-								<h5 class="toggle-label">Team Member</h5>
+								<h5 class="toggle-label"><?php _e( 'Team Member', 'essential-addons-for-elementor-lite' ); ?></h5>
 								<label class="toggle-wrap">
 									<input type="checkbox" checked="checked">
 									<span class="slider"></span>
@@ -277,7 +276,7 @@ class WPDeveloper_Setup_Wizard {
 						</div>
 						<div class="eael-content-items">
 							<div class="eael-content-head">
-								<h5 class="toggle-label">Testimonial</h5>
+								<h5 class="toggle-label"><?php _e( 'Testimonial', 'essential-addons-for-elementor-lite' ); ?></h5>
 								<label class="toggle-wrap">
 									<input type="checkbox" checked="checked">
 									<span class="slider"></span>
@@ -286,7 +285,7 @@ class WPDeveloper_Setup_Wizard {
 						</div>
 						<div class="eael-content-items">
 							<div class="eael-content-head">
-								<h5 class="toggle-label">Flip Box</h5>
+								<h5 class="toggle-label"><?php _e( 'Flip Box', 'essential-addons-for-elementor-lite' ); ?></h5>
 								<label class="toggle-wrap">
 									<input type="checkbox" checked="checked">
 									<span class="slider"></span>
@@ -295,7 +294,7 @@ class WPDeveloper_Setup_Wizard {
 						</div>
 						<div class="eael-content-items">
 							<div class="eael-content-head">
-								<h5 class="toggle-label">Info Box</h5>
+								<h5 class="toggle-label"><?php _e( 'Info Box', 'essential-addons-for-elementor-lite' ); ?></h5>
 								<label class="toggle-wrap">
 									<input type="checkbox" checked="checked">
 									<span class="slider"></span>
@@ -304,7 +303,7 @@ class WPDeveloper_Setup_Wizard {
 						</div>
 						<div class="eael-content-items">
 							<div class="eael-content-head">
-								<h5 class="toggle-label">Dual Color Heading</h5>
+								<h5 class="toggle-label"><?php _e( 'Dual Color Heading', 'essential-addons-for-elementor-lite' ); ?></h5>
 								<label class="toggle-wrap">
 									<input type="checkbox" checked="checked">
 									<span class="slider"></span>
@@ -313,7 +312,7 @@ class WPDeveloper_Setup_Wizard {
 						</div>
 						<div class="eael-content-items">
 							<div class="eael-content-head">
-								<h5 class="toggle-label">Tooltip</h5>
+								<h5 class="toggle-label"><?php _e( 'Tooltip', 'essential-addons-for-elementor-lite' ); ?></h5>
 								<label class="toggle-wrap">
 									<input type="checkbox" checked="checked">
 									<span class="slider"></span>
@@ -322,7 +321,7 @@ class WPDeveloper_Setup_Wizard {
 						</div>
 						<div class="eael-content-items">
 							<div class="eael-content-head">
-								<h5 class="toggle-label">Advanced Accordion</h5>
+								<h5 class="toggle-label"><?php _e( 'Advanced Accordion', 'essential-addons-for-elementor-lite' ); ?></h5>
 								<label class="toggle-wrap">
 									<input type="checkbox" checked="checked">
 									<span class="slider"></span>
@@ -331,7 +330,7 @@ class WPDeveloper_Setup_Wizard {
 						</div>
 						<div class="eael-content-items">
 							<div class="eael-content-head">
-								<h5 class="toggle-label">Advanced Tabs</h5>
+								<h5 class="toggle-label"><?php _e( 'Advanced Tabs', 'essential-addons-for-elementor-lite' ); ?></h5>
 								<label class="toggle-wrap">
 									<input type="checkbox" checked="checked">
 									<span class="slider"></span>
@@ -340,7 +339,7 @@ class WPDeveloper_Setup_Wizard {
 						</div>
 						<div class="eael-content-items">
 							<div class="eael-content-head">
-								<h5 class="toggle-label">Feature List</h5>
+								<h5 class="toggle-label"><?php _e( 'Feature List', 'essential-addons-for-elementor-lite' ); ?></h5>
 								<label class="toggle-wrap">
 									<input type="checkbox" checked="checked">
 									<span class="slider"></span>
@@ -349,7 +348,7 @@ class WPDeveloper_Setup_Wizard {
 						</div>
 						<div class="eael-content-items">
 							<div class="eael-content-head">
-								<h5 class="toggle-label">Offcanvas</h5>
+								<h5 class="toggle-label"><?php _e( 'Offcanvas', 'essential-addons-for-elementor-lite' ); ?></h5>
 								<label class="toggle-wrap">
 									<input type="checkbox">
 									<span class="slider"></span>
@@ -358,7 +357,7 @@ class WPDeveloper_Setup_Wizard {
 						</div>
 						<div class="eael-content-items">
 							<div class="eael-content-head">
-								<h5 class="toggle-label">Advanced Menu</h5>
+								<h5 class="toggle-label"><?php _e( 'Advanced Menu', 'essential-addons-for-elementor-lite' ); ?></h5>
 								<label class="toggle-wrap">
 									<input type="checkbox">
 									<span class="slider"></span>
@@ -367,7 +366,7 @@ class WPDeveloper_Setup_Wizard {
 						</div>
 						<div class="eael-content-items">
 							<div class="eael-content-head">
-								<h5 class="toggle-label">Toggle</h5>
+								<h5 class="toggle-label"><?php _e( 'Toggle', 'essential-addons-for-elementor-lite' ); ?></h5>
 								<label class="toggle-wrap">
 									<input type="checkbox">
 									<span class="slider"></span>
@@ -376,7 +375,7 @@ class WPDeveloper_Setup_Wizard {
 						</div>
 						<div class="eael-content-items">
 							<div class="eael-content-head">
-								<h5 class="toggle-label">Testimonial Slider</h5>
+								<h5 class="toggle-label"><?php _e( 'Testimonial Slider', 'essential-addons-for-elementor-lite' ); ?></h5>
 								<label class="toggle-wrap">
 									<input type="checkbox">
 									<span class="slider"></span>
@@ -385,7 +384,7 @@ class WPDeveloper_Setup_Wizard {
 						</div>
 						<div class="eael-content-items">
 							<div class="eael-content-head">
-								<h5 class="toggle-label">Static Product</h5>
+								<h5 class="toggle-label"><?php _e( 'Static Product', 'essential-addons-for-elementor-lite' ); ?></h5>
 								<label class="toggle-wrap">
 									<input type="checkbox">
 									<span class="slider"></span>
@@ -394,7 +393,7 @@ class WPDeveloper_Setup_Wizard {
 						</div>
 						<div class="eael-content-items">
 							<div class="eael-content-head">
-								<h5 class="toggle-label">Team Member Carousel</h5>
+								<h5 class="toggle-label"><?php _e( 'Team Member Carousel', 'essential-addons-for-elementor-lite' ); ?></h5>
 								<label class="toggle-wrap">
 									<input type="checkbox">
 									<span class="slider"></span>
@@ -403,7 +402,7 @@ class WPDeveloper_Setup_Wizard {
 						</div>
 						<div class="eael-content-items">
 							<div class="eael-content-head">
-								<h5 class="toggle-label">Sticky Video</h5>
+								<h5 class="toggle-label"><?php _e( 'Sticky Video', 'essential-addons-for-elementor-lite' ); ?></h5>
 								<label class="toggle-wrap">
 									<input type="checkbox" checked="checked">
 									<span class="slider"></span>
@@ -412,7 +411,7 @@ class WPDeveloper_Setup_Wizard {
 						</div>
 						<div class="eael-content-items">
 							<div class="eael-content-head">
-								<h5 class="toggle-label">Event Calendar</h5>
+								<h5 class="toggle-label"><?php _e( 'Event Calendar', 'essential-addons-for-elementor-lite' ); ?></h5>
 								<label class="toggle-wrap">
 									<input type="checkbox">
 									<span class="slider"></span>
@@ -421,7 +420,7 @@ class WPDeveloper_Setup_Wizard {
 						</div>
 						<div class="eael-content-items">
 							<div class="eael-content-head">
-								<h5 class="toggle-label">Simple Menu</h5>
+								<h5 class="toggle-label"><?php _e( 'Simple Menu', 'essential-addons-for-elementor-lite' ); ?></h5>
 								<label class="toggle-wrap">
 									<input type="checkbox" checked="checked">
 									<span class="slider"></span>
@@ -430,7 +429,7 @@ class WPDeveloper_Setup_Wizard {
 						</div>
 						<div class="eael-content-items">
 							<div class="eael-content-head">
-								<h5 class="toggle-label">Advanced Search</h5>
+								<h5 class="toggle-label"><?php _e( 'Advanced Search', 'essential-addons-for-elementor-lite' ); ?></h5>
 								<label class="toggle-wrap">
 									<input type="checkbox">
 									<span class="slider"></span>
@@ -445,10 +444,10 @@ class WPDeveloper_Setup_Wizard {
 		<div class="eael-section-wrapper flex flex-end gap-4">
 			<button class="previous-btn flex gap-2 items-center eael-setup-next-btn" data-next="configuration">
 				<i class="ea-dash-icon ea-left-arrow-long"></i>
-				Previous
+				<?php _e( 'Previous', 'essential-addons-for-elementor-lite' ); ?>
 			</button>
 			<button class="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn" data-next="go-pro">
-				Next
+				<?php _e( 'Next', 'essential-addons-for-elementor-lite' ); ?>
 				<i class="ea-dash-icon ea-right-arrow-long"></i>
 			</button>
 		</div>
@@ -464,28 +463,26 @@ class WPDeveloper_Setup_Wizard {
 						<i class="ea-dash-icon ea-lock"></i>
 					</div>
 					<div class="max-w-454">
-						<h4>Unlocking 35+ Advanced PRO Elements</h4>
-						<p>Lorem ipsum is placeholder text commonly used in the graphic, </p>
+						<h4><?php _e( 'Unlocking 35+ Advanced PRO Elements', 'essential-addons-for-elementor-lite' ); ?></h4>
+						<p><?php _e( 'Lorem ipsum is placeholder text commonly used in the graphic', 'essential-addons-for-elementor-lite' ); ?></p>
 					</div>
 				</div>
 				<a href="#">
 					<button class="upgrade-button">
 						<i class="ea-dash-icon ea-crown-1"></i>
-						Upgrade to PRO
+						<?php _e( 'Upgrade to PRO', 'essential-addons-for-elementor-lite' ); ?>
 					</button>
 				</a>
 			</div>
 			<div class="eael-pro-features flex justify-between items-center">
 				<div class="eael-features-content">
-					<h2>Explore Premiere Pro features</h2>
-					<p class="mb-7">Learn all about the tools and techniques you can use to edit videos,
-						animate titles,
-						add effects, mix sound, and more.
+					<h2><?php _e( 'Explore Premiere Pro features', 'essential-addons-for-elementor-lite' ); ?></h2>
+					<p class="mb-7"><?php _e( 'Learn all about the tools and techniques you can use to edit videos, animate titles, add effects, mix sound, and more.', 'essential-addons-for-elementor-lite' ); ?>
 					</p>
 					<a href="#">
 						<button class="primary-btn changelog-btn">
 							<i class="ea-dash-icon ea-link"></i>
-							View More
+							<?php _e( 'View More', 'essential-addons-for-elementor-lite' ); ?>
 						</button>
 					</a>
 				</div>
@@ -493,91 +490,91 @@ class WPDeveloper_Setup_Wizard {
 					<div class="features-widget-item">
 						<a href="https://essential-addons.com/event-calendar/" target="_blank">
 							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/event-calendar.svg' ); ?>" alt="<?php _e( 'Event Calendar', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip">Event Calendar</span>
+							<span class="eael-tooltip"><?php _e( 'Event Calendar', 'essential-addons-for-elementor-lite' ); ?></span>
 						</a>
 					</div>
 					<div class="features-widget-item">
 						<a href="https://essential-addons.com/image-hotspots/" target="_blank">
 							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/image-hotspots.svg' ); ?>" alt="<?php _e( 'Image Hotspots', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip">Image Hotspots</span>
+							<span class="eael-tooltip"><?php _e( 'Image Hotspots', 'essential-addons-for-elementor-lite' ); ?></span>
 						</a>
 					</div>
 					<div class="features-widget-item">
 						<a href="https://essential-addons.com/learndash-course-list/" target="_blank">
 							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/learndash-course-list.svg' ); ?>" alt="<?php _e( 'LearnDash Course List', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip">LearnDash Course List</span>
+							<span class="eael-tooltip"><?php _e( 'LearnDash Course List', 'essential-addons-for-elementor-lite' ); ?></span>
 						</a>
 					</div>
 					<div class="features-widget-item">
 						<a href="https://essential-addons.com/particle-effect/" target="_blank">
 							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/particle-effect.svg' ); ?>" alt="<?php _e( 'Particle Effect', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip">Particle Effect</span>
+							<span class="eael-tooltip"><?php _e( 'Particle Effect', 'essential-addons-for-elementor-lite' ); ?></span>
 						</a>
 					</div>
 					<div class="features-widget-item">
 						<a href="https://essential-addons.com/instagram-feed/" target="_blank">
 							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/instagram-feed.svg' ); ?>" alt="<?php _e( 'Instagram Feed', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip">Instagram Feed</span>
+							<span class="eael-tooltip"><?php _e( 'Instagram Feed', 'essential-addons-for-elementor-lite' ); ?></span>
 						</a>
 					</div>
 					<div class="features-widget-item">
 						<a href="https://essential-addons.com/dynamic-gallery/" target="_blank">
 							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/dynamic-gallery.svg' ); ?>" alt="<?php _e( 'Dynamic Gallery', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip">Dynamic Gallery</span>
+							<span class="eael-tooltip"><?php _e( 'Dynamic Gallery', 'essential-addons-for-elementor-lite' ); ?></span>
 						</a>
 					</div>
 					<div class="features-widget-item">
 						<a href="https://essential-addons.com/parallax-scrolling/" target="_blank">
 							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/parallax-scrolling.svg' ); ?>" alt="<?php _e( 'Parallax Effect', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip">Parallax Effect</span>
+							<span class="eael-tooltip"><?php _e( 'Parallax Effect', 'essential-addons-for-elementor-lite' ); ?></span>
 						</a>
 					</div>
 					<div class="features-widget-item">
 						<a href="https://essential-addons.com/mailchimp/" target="_blank">
 							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/mailchimp.svg' ); ?>" alt="<?php _e( 'Mailchimp', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip">Mailchimp</span>
+							<span class="eael-tooltip"><?php _e( 'Mailchimp', 'essential-addons-for-elementor-lite' ); ?></span>
 						</a>
 					</div>
 					<div class="features-widget-item">
 						<a href="https://essential-addons.com/advanced-google-map/" target="_blank">
 							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/advanced-google-map.svg' ); ?>" alt="<?php _e( 'Advanced Google Map', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip">Advanced Google Map</span>
+							<span class="eael-tooltip"><?php _e( 'Advanced Google Map', 'essential-addons-for-elementor-lite' ); ?></span>
 						</a>
 					</div>
 					<div class="features-widget-item">
 						<a href="https://essential-addons.com/advanced-tooltip/" target="_blank">
 							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/advanced-tooltip.svg' ); ?>" alt="<?php _e( 'Advanced Tooltip', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip">Advanced Tooltip</span>
+							<span class="eael-tooltip"><?php _e( 'Advanced Tooltip', 'essential-addons-for-elementor-lite' ); ?></span>
 						</a>
 					</div>
 					<div class="features-widget-item">
 						<a href="https://essential-addons.com/content-toggle/" target="_blank">
 							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/content-toggle.svg' ); ?>" alt="<?php _e( 'Content Toggle', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip">Content Toggle</span>
+							<span class="eael-tooltip"><?php _e( 'Content Toggle', 'essential-addons-for-elementor-lite' ); ?></span>
 						</a>
 					</div>
 					<div class="features-widget-item">
 						<a href="https://essential-addons.com/lightbox-modal/" target="_blank">
 							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/lightbox-modal.svg' ); ?>" alt="<?php _e( 'Lightbox & Modal', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip">Lightbox & Modal</span>
+							<span class="eael-tooltip"><?php _e( 'Lightbox & Modal', 'essential-addons-for-elementor-lite' ); ?></span>
 						</a>
 					</div>
 					<div class="features-widget-item">
 						<a href="https://essential-addons.com/logo-carousel/" target="_blank">
 							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/logo-carousel.svg' ); ?>" alt="<?php _e( 'Logo Carousel', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip">Logo Carousel</span>
+							<span class="eael-tooltip"><?php _e( 'Logo Carousel', 'essential-addons-for-elementor-lite' ); ?></span>
 						</a>
 					</div>
 					<div class="features-widget-item">
 						<a href="https://essential-addons.com/woo-product-slider/" target="_blank">
 							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/woo-product-slider.svg' ); ?>" alt="<?php _e( 'Woo Product Slider', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip">Woo Product Slider</span>
+							<span class="eael-tooltip"><?php _e( 'Woo Product Slider', 'essential-addons-for-elementor-lite' ); ?></span>
 						</a>
 					</div>
 					<div class="features-widget-item">
 						<a href="https://essential-addons.com/woo-cross-sells/" target="_blank">
 							<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/woo-cross-sells.svg' ); ?>" alt="<?php _e( 'Woo Cross Sells', 'essential-addons-for-elementor-lite' ); ?>">
-							<span class="eael-tooltip">Woo Cross Sells</span>
+							<span class="eael-tooltip"><?php _e( 'Woo Cross Sells', 'essential-addons-for-elementor-lite' ); ?></span>
 						</a>
 					</div>
 				</div>
@@ -586,11 +583,11 @@ class WPDeveloper_Setup_Wizard {
 		<div class="eael-section-wrapper flex flex-end gap-4">
 			<button class="previous-btn flex gap-2 items-center eael-setup-next-btn" data-next="elements">
 				<i class="ea-dash-icon ea-left-arrow-long"></i>
-				Previous
+				<?php _e( 'Previous', 'essential-addons-for-elementor-lite' ); ?>
 			</button>
 			<!-- #TODO templately check -->
 			<button class="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn" data-next="templately">
-				Next
+			<?php _e( 'Next', 'essential-addons-for-elementor-lite' ); ?>
 				<i class="ea-dash-icon ea-right-arrow-long"></i>
 			</button>
 		</div>
@@ -602,34 +599,32 @@ class WPDeveloper_Setup_Wizard {
 		<div class="eael-onboard-content-wrapper eael-onboard-templately mb-4 min-h-538">
 			<div class="eael-general-content-item templates flex justify-between items-center gap-2">
 				<div class="templates-content">
-					<h2> <span class="title-color-2">5000+</span> Ready Templates </h2>
-					<p class="mb-10">Get Access to amazing features and boost your Elementor page building
-						experience with Templately
-					</p>
+					<h2> <span class="title-color-2"><?php _e( '5000+', 'essential-addons-for-elementor-lite' ); ?></span> <?php _e( 'Ready Templates', 'essential-addons-for-elementor-lite' ); ?></h2>
+					<p class="mb-10"><?php _e( 'Get Access to amazing features and boost your Elementor page building experience with Templately', 'essential-addons-for-elementor-lite' ); ?></p>
 					<div class="eael-templately-details flex flex-col gap-4">
 						<div class="eael-content-details flex gap-2 items-center">
 							<span>
 								<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-icon-1.svg' ); ?>" alt="<?php _e( 'Templately Icon 1', 'essential-addons-for-elementor-lite' ); ?>">
 							</span>
-							Stunning, Ready Website Templates
+							<?php _e( 'Stunning, Ready Website Templates', 'essential-addons-for-elementor-lite' ); ?>
 						</div>
 						<div class="eael-content-details flex gap-2 items-center">
 							<span>
 								<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-icon-2.svg' ); ?>" alt="<?php _e( 'Templately Icon 2', 'essential-addons-for-elementor-lite' ); ?>">
 							</span>
-							Add Team Members & Collaborate
+							<?php _e( 'Add Team Members & Collaborate', 'essential-addons-for-elementor-lite' ); ?>
 						</div>
 						<div class="eael-content-details flex gap-2 items-center">
 							<span>
 								<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-icon-3.svg' ); ?>" alt="<?php _e( 'Templately Icon 3', 'essential-addons-for-elementor-lite' ); ?>">
 							</span>
-							Design With MyCloud Storage Space
+							<?php _e( 'Design With MyCloud Storage Space', 'essential-addons-for-elementor-lite' ); ?>
 						</div>
 						<div class="eael-content-details flex gap-2 items-center">
 							<span>
 								<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-icon-4.svg' ); ?>" alt="<?php _e( 'Templately Icon 4', 'essential-addons-for-elementor-lite' ); ?>">
 							</span>
-							Cloud With Templately WorkSpace
+							<?php _e( 'Cloud With Templately WorkSpace', 'essential-addons-for-elementor-lite' ); ?>
 						</div>
 					</div>
 				</div>
@@ -642,10 +637,10 @@ class WPDeveloper_Setup_Wizard {
 		<div class="eael-section-wrapper flex flex-end gap-4">
 			<button class="previous-btn flex gap-2 items-center eael-setup-next-btn" data-next="integrations">
 				<i class="ea-dash-icon ea-left-arrow-long"></i>
-				Skip
+				<?php _e( 'Skip', 'essential-addons-for-elementor-lite' ); ?>
 			</button>
 			<button class="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn" data-next="integrations">
-				Enable Templates
+			<?php _e( 'Enable Templates', 'essential-addons-for-elementor-lite' ); ?>
 			</button>
 		</div>
 		<?php 
@@ -660,12 +655,12 @@ class WPDeveloper_Setup_Wizard {
 						<i class="ea-dash-icon ea-plug"></i>
 					</div>
 					<div class="max-w-454">
-						<h4>Integration</h4>
-						<p>Enable/Disable the elements anytime you want from Essential Addons Dashboard</p>
+						<h4><?php _e( 'Integration', 'essential-addons-for-elementor-lite' ); ?></h4>
+						<p><?php _e( 'Enable/Disable the elements anytime you want from Essential Addons Dashboard', 'essential-addons-for-elementor-lite' ); ?></p>
 					</div>
 				</div>
 				<div class="toggle-wrapper flex items-center gap-2">
-					<h5>Enable All Integrations</h5>
+					<h5><?php _e( 'Enable All Integrations', 'essential-addons-for-elementor-lite' ); ?></h5>
 					<label class="toggle-wrap">
 						<input type="checkbox">
 						<span class="slider"></span>
@@ -690,16 +685,12 @@ class WPDeveloper_Setup_Wizard {
 								d="M24.0314 11.2185C23.9896 11.1311 23.9364 11.0514 23.8775 10.9773L25.6419 7.93859C26.6028 6.2863 26.6085 4.30925 25.6552 2.65126C24.6999 0.991375 22.9887 0 21.0724 0H13.0901C11.2195 0 9.4684 1.00847 8.52071 2.63227L0.724557 16.0614C-0.236431 17.7137 -0.242128 19.6908 0.711262 21.3487C1.66655 23.0086 3.37772 24 5.294 24H18.9719C21.4086 24 23.6382 22.7693 24.9354 20.7049C26.2325 18.6424 26.3768 16.0994 25.3209 13.9039L24.0314 11.2185ZM7.31093 21.5216H5.2921C4.27603 21.5216 3.36632 20.9955 2.85924 20.1143C2.35406 19.2349 2.35596 18.1866 2.86684 17.3092L10.6668 3.87814C11.1701 3.01401 12.1007 2.47844 13.0939 2.47844H21.0762C22.0923 2.47844 23.002 3.00451 23.5091 3.88573C24.0143 4.76505 24.0124 5.81341 23.5015 6.69083L15.6977 20.1238C15.2001 20.9841 14.2733 21.5197 13.2782 21.5197H7.31093V21.5216Z"
 								fill="#00B682"></path>
 						</svg>
-						<h5>BetterDocs</h5>
+						<h5><?php _e( 'BetterDocs', 'essential-addons-for-elementor-lite' ); ?></h5>
 					</div>
 					<div class="eael-integration-footer">
-						<p>BetterDocs will help you to create &amp; organize your
-							documentation page in a beautiful way that will make your visitors find any help
-							article
-							easily.
-						</p>
+						<p><?php _e( 'BetterDocs will help you to create &amp; organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ); ?></p>
 						<div class="integration-settings flex justify-between items-center">
-							<h5 class="toggle-label">Enable / Disable Integration</h5>
+							<h5 class="toggle-label"><?php _e( 'Enable / Disable Integration', 'essential-addons-for-elementor-lite' ); ?></h5>
 							<label class=" toggle-wrap">
 								<input type="checkbox" checked="checked">
 								<span class="slider"></span>
@@ -733,16 +724,12 @@ class WPDeveloper_Setup_Wizard {
 								</clipPath>
 							</defs>
 						</svg>
-						<h5>Essential Blocks</h5>
+						<h5><?php _e( 'Essential Blocks', 'essential-addons-for-elementor-lite' ); ?></h5>
 					</div>
 					<div class="eael-integration-footer">
-						<p>BetterDocs will help you to create & organize your
-							documentation page in a beautiful way that will make your visitors find any help
-							article
-							easily.
-						</p>
+						<p><?php _e( 'BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ); ?></p>
 						<div class="integration-settings flex justify-between items-center">
-							<h5 class="toggle-label">Enable / Disable Integration</h5>
+							<h5 class="toggle-label"><?php _e( 'Enable / Disable Integration', 'essential-addons-for-elementor-lite' ); ?></h5>
 							<label class="toggle-wrap">
 								<input type="checkbox" checked="checked">
 								<span class="slider"></span>
@@ -768,16 +755,12 @@ class WPDeveloper_Setup_Wizard {
 								d="M5.29274 21.4981C3.39153 21.2934 1.72432 20.1527 0.788344 18.5147C0.027862 17.14 -0.147632 15.5313 0.261858 14.0103C0.700597 12.4894 1.69508 11.2024 3.09904 10.4419C3.21604 10.3834 3.33304 10.325 3.45003 10.2665C4.44451 9.79847 5.58523 9.59372 6.6967 9.73997C7.01844 9.76922 7.31094 9.82771 7.60343 9.91546L9.15365 10.3834C9.38764 10.4419 9.50464 10.7052 9.41689 10.9099L8.62716 13.1329L6.90145 12.5771C6.72596 12.5186 6.52121 12.4894 6.34571 12.4601C5.73148 12.4016 5.14649 12.4894 4.59075 12.7526C4.53226 12.7819 4.47376 12.8111 4.41526 12.8404C3.68403 13.2499 3.12829 13.9226 2.89429 14.7416C2.6603 15.5605 2.74805 16.4088 3.15754 17.1693C3.65478 18.0467 4.56151 18.661 5.58523 18.778C6.17022 18.8365 6.78445 18.7487 7.31094 18.4855C7.36944 18.4562 7.42794 18.427 7.48644 18.3977C8.18842 18.0175 8.74416 17.3155 9.0074 16.4965L12.2541 7.25379C12.6636 5.79133 13.6873 4.53361 15.062 3.77313C15.179 3.71464 15.296 3.65614 15.413 3.59764C16.4075 3.12965 17.5482 2.92491 18.6304 3.07116C20.5316 3.2759 22.1988 4.41662 23.1348 6.05457C24.7143 8.89174 23.6905 12.5186 20.8241 14.1273C20.7071 14.1858 20.5901 14.2443 20.4731 14.3028C19.4787 14.7708 18.3672 14.9756 17.2557 14.8293C16.934 14.8001 16.6415 14.7416 16.349 14.6538L15.1205 14.3028C15.0035 14.2736 14.945 14.1566 14.9743 14.0396L15.764 11.8459C15.7932 11.7289 15.9102 11.6704 16.0272 11.6997L17.0217 11.9922H17.051C17.2265 12.0507 17.4019 12.0799 17.6067 12.1091C18.2209 12.1676 18.8059 12.0799 19.3617 11.8167C19.4202 11.7874 19.4787 11.7582 19.5371 11.7289C21.0874 10.8807 21.6431 8.92099 20.7949 7.40003C20.2976 6.52256 19.3909 5.90833 18.3672 5.79133C17.7822 5.73283 17.168 5.82058 16.6415 6.08382C16.583 6.11307 16.5245 6.14232 16.466 6.17157C15.7932 6.55181 15.3253 7.13679 14.945 8.07277V8.10201L11.6983 17.3155C11.2596 18.778 10.2359 20.0357 8.8904 20.7962C8.7734 20.8547 8.65641 20.9131 8.53941 20.9716C7.51568 21.4396 6.40421 21.6444 5.29274 21.4981Z"
 								fill="#5B4E96"></path>
 						</svg>
-						<h5>EmbedPress</h5>
+						<h5><?php _e( 'EmbedPress', 'essential-addons-for-elementor-lite' ); ?></h5>
 					</div>
 					<div class="eael-integration-footer">
-						<p>BetterDocs will help you to create &amp; organize your
-							documentation page in a beautiful way that will make your visitors find any help
-							article
-							easily.
-						</p>
+						<p><?php _e( 'BetterDocs will help you to create &amp; organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ); ?></p>
 						<div class="integration-settings flex justify-between items-center">
-							<h5 class="toggle-label">Enable / Disable Integration</h5>
+							<h5 class="toggle-label"><?php _e( 'Enable / Disable Integration', 'essential-addons-for-elementor-lite' ); ?></h5>
 							<label class="toggle-wrap">
 								<input type="checkbox" checked="checked">
 								<span class="slider"></span>
@@ -815,16 +798,12 @@ class WPDeveloper_Setup_Wizard {
 								</clipPath>
 							</defs>
 						</svg>
-						<h5>NotificationX</h5>
+						<h5><?php _e( 'NotificationX', 'essential-addons-for-elementor-lite' ); ?></h5>
 					</div>
 					<div class="eael-integration-footer">
-						<p>BetterDocs will help you to create &amp; organize your
-							documentation page in a beautiful way that will make your visitors find any help
-							article
-							easily.
-						</p>
+						<p><?php _e( 'BetterDocs will help you to create &amp; organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ); ?></p>
 						<div class="integration-settings flex justify-between items-center">
-							<h5 class="toggle-label">Enable / Disable Integration</h5>
+							<h5 class="toggle-label"><?php _e( 'Enable / Disable Integration', 'essential-addons-for-elementor-lite' ); ?></h5>
 							<label class=" toggle-wrap">
 								<input type="checkbox" checked="checked">
 								<span class="slider"></span>
@@ -855,16 +834,12 @@ class WPDeveloper_Setup_Wizard {
 								d="M18.0667 14.8667C19 13.4 19.5333 11.6 19.5333 9.73333C19.5333 5.06667 16.2 1.13333 11.7333 0.199999C11.0667 0.0666662 10.4 0 9.66667 0C4.33333 0 0 4.33333 0 9.73333C0 14.2667 3.06667 18.1333 7.26667 19.2C6.6 18.8667 1.93333 15.6667 2 9.46667C2 5.46666 5.4 2.2 9.4 2.06667C13.7333 1.93333 17.3333 5.4 17.3333 9.73333C17.3333 12.9333 15.4 15.6667 12.6 16.8C12 17 10 17.4667 8.26667 15.1333C7.13333 13.4667 7.26667 11.6667 7.33333 11.1333C7.4 10.1333 8.2 9.4 9.13334 9.4C9.2 9.4 9.26667 9.4 9.33333 9.4C10.4667 9.46667 11.2 10.2667 11.1333 11.3333C11.0667 12.2 10.8667 13.1333 10.4667 13.9333L10.4 14C10.3333 14.1333 10.2667 14.2667 10.2 14.4C10.1333 14.5333 10.1333 14.6667 10.1333 14.8C10.2 15.1333 10.5333 15.3333 10.8667 15.2667C11.0667 15.2667 11.2 15.1333 11.2667 15C12.1333 13.7333 12.7333 12.4667 12.7333 10.9333C12.7333 10 12.4 9.13333 11.8 8.53333C11.1333 7.86667 10.2667 7.53333 9.26667 7.53333C9.2 7.53333 9.13334 7.53333 9.06667 7.53333C8.53333 7.53333 8.06667 7.66667 7.66667 7.86667C7.66667 7.86667 5.53333 8.53333 5.33333 11C5.13333 12.4 5.26667 14.6667 7.33333 16.9333C7.6 17.2 7.8 17.4667 8.13334 17.7333C8.46667 18 8.8 18.2 9.2 18.4667C9.4 18.6 9.6 18.6667 9.73333 18.7333C10.0667 18.8667 10.4667 19 10.8667 19.0667C11.7333 19.2 12.6 19.0667 13.4 18.7333C14.0667 18.4667 14.6667 18.1333 15.2 17.7333L16.8 19.2C17.2 18.8 17.8 18.6 18.4 18.6C19.3333 18.6 20.2 19.2 20.5333 20C20.7333 19.4667 21.2 19.0667 21.7333 18.8667L18.0667 14.8667Z"
 								fill="#597DFC" />
 						</svg>
-						<h5>easy.jobs</h5>
+						<h5><?php _e( 'easy.jobs', 'essential-addons-for-elementor-lite' ); ?></h5>
 					</div>
 					<div class="eael-integration-footer">
-						<p>BetterDocs will help you to create &amp; organize your
-							documentation page in a beautiful way that will make your visitors find any help
-							article
-							easily.
-						</p>
+						<p><?php _e( 'BetterDocs will help you to create &amp; organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ); ?></p>
 						<div class="integration-settings flex justify-between items-center">
-							<h5 class="toggle-label">Enable / Disable Integration</h5>
+							<h5 class="toggle-label"><?php _e( 'Enable / Disable Integration', 'essential-addons-for-elementor-lite' ); ?></h5>
 							<label class=" toggle-wrap">
 								<input type="checkbox" checked="checked">
 								<span class="slider"></span>
@@ -913,16 +888,12 @@ class WPDeveloper_Setup_Wizard {
 								</radialGradient>
 							</defs>
 						</svg>
-						<h5>SchedulePress</h5>
+						<h5><?php _e( 'SchedulePress', 'essential-addons-for-elementor-lite' ); ?></h5>
 					</div>
 					<div class="eael-integration-footer">
-						<p>BetterDocs will help you to create &amp; organize your
-							documentation page in a beautiful way that will make your visitors find any help
-							article
-							easily.
-						</p>
+						<p><?php _e( 'BetterDocs will help you to create &amp; organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ); ?></p>
 						<div class="integration-settings flex justify-between items-center">
-							<h5 class="toggle-label">Enable / Disable Integration</h5>
+							<h5 class="toggle-label"><?php _e( 'Enable / Disable Integration', 'essential-addons-for-elementor-lite' ); ?></h5>
 							<label class=" toggle-wrap">
 								<input type="checkbox" checked="checked">
 								<span class="slider"></span>
@@ -962,16 +933,12 @@ class WPDeveloper_Setup_Wizard {
 								d="M13.8908 17.7592C13.8737 17.6223 13.8223 17.4853 13.7539 17.3484C13.5998 17.0575 13.3773 16.835 13.1035 16.6809C12.6927 16.4755 12.1964 16.4584 11.7685 16.6638C11.2037 16.9548 10.8956 17.5538 10.9469 18.1528C10.9641 18.3753 11.0496 18.5978 11.1866 18.8032C11.5631 19.3851 12.3162 19.6248 12.9494 19.3852C13.4287 19.1969 13.7367 18.8203 13.8565 18.3753C13.9079 18.1871 13.925 17.9646 13.8908 17.7592Z"
 								fill="#0847F9" />
 						</svg>
-						<h5>BetterLinks</h5>
+						<h5><?php _e( 'BetterLinks', 'essential-addons-for-elementor-lite' ); ?></h5>
 					</div>
 					<div class="eael-integration-footer">
-						<p>BetterDocs will help you to create &amp; organize your
-							documentation page in a beautiful way that will make your visitors find any help
-							article
-							easily.
-						</p>
+						<p><?php _e( 'BetterDocs will help you to create &amp; organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ); ?></p>
 						<div class="integration-settings flex justify-between items-center">
-							<h5 class="toggle-label">Enable / Disable Integration</h5>
+							<h5 class="toggle-label"><?php _e( 'Enable / Disable Integration', 'essential-addons-for-elementor-lite' ); ?></h5>
 							<label class=" toggle-wrap">
 								<input type="checkbox" checked="checked">
 								<span class="slider"></span>
@@ -1003,16 +970,12 @@ class WPDeveloper_Setup_Wizard {
 								</linearGradient>
 							</defs>
 						</svg>
-						<h5>Better Payment</h5>
+						<h5><?php _e( 'Better Payment', 'essential-addons-for-elementor-lite' ); ?></h5>
 					</div>
 					<div class="eael-integration-footer">
-						<p>BetterDocs will help you to create &amp; organize your
-							documentation page in a beautiful way that will make your visitors find any help
-							article
-							easily.
-						</p>
+						<p><?php _e( 'BetterDocs will help you to create &amp; organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ); ?></p>
 						<div class="integration-settings flex justify-between items-center">
-							<h5 class="toggle-label">Enable / Disable Integration</h5>
+							<h5 class="toggle-label"><?php _e( 'Enable / Disable Integration', 'essential-addons-for-elementor-lite' ); ?></h5>
 							<label class=" toggle-wrap">
 								<input type="checkbox" checked="checked">
 								<span class="slider"></span>
@@ -1028,10 +991,10 @@ class WPDeveloper_Setup_Wizard {
 			<!-- #ToDo templately status check -->
 			<button class="previous-btn flex gap-2 items-center eael-setup-next-btn" data-next="templately">
 				<i class="ea-dash-icon ea-left-arrow-long"></i>
-				Previous
+				<?php _e( 'Previous', 'essential-addons-for-elementor-lite' ); ?>
 			</button>
 			<button class="primary-btn install-btn flex gap-2 items-center">
-				Finish
+			<?php _e( 'Finish', 'essential-addons-for-elementor-lite' ); ?>
 			</button>
 		</div>
 		<?php 
@@ -1042,14 +1005,14 @@ class WPDeveloper_Setup_Wizard {
 		<section class="eael-modal-wrapper eael-d-none">
             <div class="eael-modal-content-wrapper eael-onboard-modal">
                 <div class="">
-                    <h5>What we collect? </h5>
-                    <p>We collect non-sensitive diagnostic data and plugin usage information. Your site URL, WordPress &
+                    <h5><?php _e( 'What we collect?', 'essential-addons-for-elementor-lite' ); ?></h5>
+                    <p><?php _e( 'We collect non-sensitive diagnostic data and plugin usage information. Your site URL, WordPress &
                         PHP version, plugins & themes and email address to send you the discount coupon. This data lets
                         us make sure this plugin always stays compatible with the most popular plugins and themes. No
-                        spam, we promise.</p>
+                        spam, we promise.', 'essential-addons-for-elementor-lite' ); ?></p>
                     <div class="congrats--wrapper">
-                        <h6>You are done!</h6>
-                        <h4 class="congrats--title">Congratulations!</h4>
+                        <h6><?php _e( 'You are done!', 'essential-addons-for-elementor-lite' ); ?></h6>
+                        <h4 class="congrats--title"><?php _e( 'Congratulations!', 'essential-addons-for-elementor-lite' ); ?></h4>
 						<img class="eael-modal-map-img" src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/success-2.png' ); ?>" alt="<?php _e( 'Success Image', 'essential-addons-for-elementor-lite' ); ?>">
                     </div>
                 </div>
