@@ -5606,6 +5606,10 @@ img {
     gap: 8px;
 }
 
+.gap-3 {
+    gap: 12px;
+}
+
 .gap-4 {
     gap: 16px;
 }
@@ -5996,14 +6000,10 @@ img {
     line-height: 1.2em;
 }
 
-.templates-img {
-    display: contents;
-}
-
-.templates-img img {
+/* .templates-img img {
     border-radius: 0 8px 8px 0;
     max-width: 430px;
-}
+} */
 
 .toggle-wrapper h5 {
     font-size: 14px;
@@ -6313,12 +6313,12 @@ section.eael-onboard-main-wrapper {
     margin-top: 8px;
 }
 
-.onBoard-scroll-wrap {
+.onboard-scroll-wrap {
     max-height: 360px;
     overflow: auto;
 }
 
-.eael-integration-content-wrapper.onBoard-scroll-wrap {
+.eael-integration-content-wrapper.onboard-scroll-wrap {
     max-height: 350px;
     padding-bottom: 62px;
 }
@@ -7032,7 +7032,6 @@ span.title-color-2 {
     }
 
     .eael-onboard-content-wrapper .templates-img img {
-        padding-left: 0;
         width: 100%;
     }
 
