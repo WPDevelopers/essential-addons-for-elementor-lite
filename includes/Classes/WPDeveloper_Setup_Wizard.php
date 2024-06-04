@@ -180,6 +180,21 @@ class WPDeveloper_Setup_Wizard {
 				</div>
 			</div>
 		</div>
+
+		<section class="eael-modal-wrapper eael-d-none eael-what-we-collect-modal">
+            <div class="eael-modal-content-wrapper eael-onboard-modal">
+                <div class="">
+                    <h5><?php _e( 'What we collect?', 'essential-addons-for-elementor-lite' ); ?></h5>
+                    <p><?php _e( 'We collect non-sensitive diagnostic data and plugin usage information. Your site URL, WordPress &
+                        PHP version, plugins & themes and email address to send you the discount coupon. This data lets
+                        us make sure this plugin always stays compatible with the most popular plugins and themes. No
+                        spam, we promise.', 'essential-addons-for-elementor-lite' ); ?></p>
+                </div>
+                <div class="eael-modal-close-btn">
+                    <i class="ea-dash-icon ea-close"></i>
+                </div>
+            </div>
+        </section>
 		<?php 
 	}
 
@@ -558,8 +573,8 @@ class WPDeveloper_Setup_Wizard {
 				<i class="ea-dash-icon ea-left-arrow-long"></i>
 				<?php _e( 'Previous', 'essential-addons-for-elementor-lite' ); ?>
 			</button>
-			<button class="primary-btn install-btn flex gap-2 items-center">
-			<?php _e( 'Finish', 'essential-addons-for-elementor-lite' ); ?>
+			<button class="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn1 eael-setup-wizard-save" data-next="">
+				<?php _e( 'Finish', 'essential-addons-for-elementor-lite' ); ?>
 			</button>
 		</div>
 		<?php 
@@ -567,14 +582,9 @@ class WPDeveloper_Setup_Wizard {
 
 	public function modal_content(){
 		?>
-		<section class="eael-modal-wrapper eael-d-none">
+		<section class="eael-modal-wrapper">
             <div class="eael-modal-content-wrapper eael-onboard-modal">
                 <div class="">
-                    <h5><?php _e( 'What we collect?', 'essential-addons-for-elementor-lite' ); ?></h5>
-                    <p><?php _e( 'We collect non-sensitive diagnostic data and plugin usage information. Your site URL, WordPress &
-                        PHP version, plugins & themes and email address to send you the discount coupon. This data lets
-                        us make sure this plugin always stays compatible with the most popular plugins and themes. No
-                        spam, we promise.', 'essential-addons-for-elementor-lite' ); ?></p>
                     <div class="congrats--wrapper">
                         <h6><?php _e( 'You are done!', 'essential-addons-for-elementor-lite' ); ?></h6>
                         <h4 class="congrats--title"><?php _e( 'Congratulations!', 'essential-addons-for-elementor-lite' ); ?></h4>
