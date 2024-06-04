@@ -59,7 +59,8 @@ function ContextReducer() {
 
     const reducer = (state, {type, payload}) => {
         const licenseManagerConfig = typeof wpdeveloperLicenseManagerConfig === 'undefined' ? {} : wpdeveloperLicenseManagerConfig;
-        let params, response, licenseStatus, licenseError, otp, otpEmail, errorMessage, hiddenLicenseKey;
+        let params, response, licenseStatus, licenseError, otp, otpEmail, errorMessage, hiddenLicenseKey, integrations,
+            elements, modals;
 
         switch (type) {
             case 'ON_PROCESSING':
@@ -67,10 +68,10 @@ function ContextReducer() {
             case 'SET_MENU':
                 return {...state, menu: payload};
             case 'ON_CHANGE_INTEGRATION':
-                const integrations = {...state.integrations, [payload.key]: payload.value};
+                integrations = {...state.integrations, [payload.key]: payload.value};
                 return {...state, integrations};
             case 'ON_CHANGE_ELEMENT':
-                const elements = {...state.elements, [payload.key]: payload.value};
+                elements = {...state.elements, [payload.key]: payload.value};
                 return {...state, elements};
             case 'ON_CHANGE_ALL':
                 if (payload.key === 'extensionAll') {
@@ -193,6 +194,9 @@ function ContextReducer() {
                 return {...state, modal: 'close'}
             case 'MODAL_ACCORDION':
                 return {...state, modalAccordion: payload.key}
+            case 'MODAL_ON_CHANGE':
+                modals = {...state.modals, [payload.key]: payload.value};
+                return {...state, modals};
         }
     }
 
