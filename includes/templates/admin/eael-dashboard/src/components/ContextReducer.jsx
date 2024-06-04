@@ -211,6 +211,26 @@ function ContextReducer() {
                 }
 
                 return {...state};
+            case 'SAVE_ELEMENTS_DATA':
+                params = {
+                    action: 'save_settings_with_ajax',
+                    security: localize.nonce,
+                    elements: true
+                };
+
+                Object.keys(state.elements).map((item) => {
+                    if (state.elements[item] === true) {
+                        params[item] = true;
+                    }
+                });
+
+                response = eaAjax(params);
+
+                // if (response?.success) {
+                //     return {...state, modal: 'close'};
+                // }
+
+                return {...state};
         }
     }
 

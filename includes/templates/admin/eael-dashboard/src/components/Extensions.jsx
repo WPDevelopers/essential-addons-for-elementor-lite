@@ -8,6 +8,9 @@ function Extensions() {
         i18n = localize.eael_dashboard.i18n,
         changeHandler = (e) => {
             eaDispatch({type: 'ON_CHANGE_ALL', payload: {key: 'extensionAll', value: e.target.checked}});
+        },
+        clickHandler = () => {
+            eaDispatch({type: 'SAVE_ELEMENTS_DATA'});
         };
 
     return (
@@ -34,7 +37,8 @@ function Extensions() {
                         </div>
                     </div>
                     <div className="ea__section-wrapper flex flex-end mb-5">
-                        <button className="primary-btn install-btn flex flex-end mb-6">{i18n.save_settings}</button>
+                        <button className="primary-btn install-btn flex flex-end mb-6"
+                                onClick={clickHandler}>{i18n.save_settings}</button>
                     </div>
                 </div>
             </div>
