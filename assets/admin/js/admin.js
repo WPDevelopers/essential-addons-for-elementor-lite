@@ -442,6 +442,11 @@
 		$(`.eael-onboard-nav.${target}`).addClass('active');
 	});
 	
+	$(document).on("click", ".eael-onboard-elements .view-all-elements", function() {
+		$('.eael-onboard-elements .eael-element-title-wrap').removeClass('eael-d-none');
+		$('.eael-onboard-elements .eael-element-content-wrap').removeClass('eael-d-none');
+	});
+	
 	/**
 	 * eaelStepIndicator
 	 * @param stepNumber
