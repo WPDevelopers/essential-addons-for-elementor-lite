@@ -321,7 +321,7 @@ trait Admin {
 					        'demo_link'   => 'https://essential-addons.com/elementor/particle-effect/',
 					        'doc_link'    => 'https://essential-addons.com/elementor/docs/particles/',
 					        'is_pro'      => true,
-					        'is_activate' => boolval( $this->get_settings( 'section-parallax' ) )
+					        'is_activate' => boolval( $this->get_settings( 'section-particles' ) )
 				        ],
 				        'tooltip-section'     => [
 					        'key'         => 'tooltip-section',
