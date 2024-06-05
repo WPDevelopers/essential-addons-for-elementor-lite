@@ -174,7 +174,9 @@ class WPDeveloper_Setup_Wizard {
 						<span class="collect-info eael-what-we-collect"><?php _e( 'What We Collect?', 'essential-addons-for-elementor-lite' ); ?></span>
 					</p>
 					
-					<button class="primary-btn install-btn eael-setup-next-btn" data-next="configuration">
+                    <input type="hidden" value="0" id="eael_user_email_address" name="eael_user_email_address">
+
+					<button class="primary-btn install-btn eael-setup-next-btn eael-user-email-address" data-next="configuration">
 						<?php _e( 'Proceed to Next Step', 'essential-addons-for-elementor-lite' ); ?>
 						<i class="ea-dash-icon ea-install"></i>
 					</button>

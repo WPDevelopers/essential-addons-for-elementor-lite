@@ -436,11 +436,16 @@
 	$(document).on("click",".eael-setup-next-btn",function(e) {
 		e.preventDefault();
 		let target = $(this).attr('data-next');
+
 		$('.eael-setup-content').addClass('eael-d-none');
 		$(`.eael-${target}-content`).removeClass('eael-d-none');
 		
 		$('.eael-onboard-nav').removeClass('active');
 		$(`.eael-onboard-nav.${target}`).addClass('active');
+
+		if ( $(this).hasClass('eael-user-email-address') ) {
+			$('#eael_user_email_address').val(1);
+		}
 	});
 	
 	$(document).on("click",".eael-what-we-collect",function(e) {
@@ -564,41 +569,40 @@
 			$( "#eael_user_email_address" ).val( 1 );
 		}
 		
-		console.log($("form.eael-setup-wizard-form").serialize());
-		// $.ajax({
-		// 	       url: localize.ajaxurl,
-		// 	       type: "POST",
-		// 	       data: {
-		// 		       action: "save_setup_wizard_data",
-		// 		       security: localize.nonce,
-		// 		       fields: $("form.eael-setup-wizard-form").serialize()
-		// 	       },
+		$.ajax({
+			       url: localize.ajaxurl,
+			       type: "POST",
+			       data: {
+				       action: "save_setup_wizard_data",
+				       security: localize.nonce,
+				       fields: $("form.eael-setup-wizard-form").serialize()
+			       },
 			
-		// 	       success: function (response) {
-		// 		       if (response.success) {
-		// 				   $('.eael-onboard--wrapper .eael-modal-content').fadeIn().removeClass('eael-d-none');
+			       success: function (response) {
+				       if (response.success) {
+						   $('.eael-onboard--wrapper .eael-modal-content').fadeIn().removeClass('eael-d-none');
 						   
-		// 				   setTimeout(function() { 
-		// 						window.location = response.data.redirect_url;
-		// 					}, 3000);
-		// 		       } else {
-		// 			       $this.attr('disabled', 'disabled');
-		// 			       Swal.fire({
-		// 				                 type: "error",
-		// 				                 title: 'Error',
-		// 				                 text: 'error',
-		// 			                 });
-		// 		       }
-		// 	       },
-		// 	       error: function (err) {
-		// 		       $this.attr('disabled', 'disabled');
-		// 		       Swal.fire({
-		// 			                 type: "error",
-		// 			                 title: 'Error',
-		// 			                 text: 'error',
-		// 		                 });
-		// 	       },
-		//        });
+						   setTimeout(function() { 
+								window.location = response.data.redirect_url;
+							}, 3000);
+				       } else {
+					       $this.attr('disabled', 'disabled');
+					       Swal.fire({
+						                 type: "error",
+						                 title: 'Error',
+						                 text: 'error',
+					                 });
+				       }
+			       },
+			       error: function (err) {
+				       $this.attr('disabled', 'disabled');
+				       Swal.fire({
+					                 type: "error",
+					                 title: 'Error',
+					                 text: 'error',
+				                 });
+			       },
+		       });
 	});
 
 	$(".eael-admin-promotion-close").on('click',function(event){
