@@ -339,20 +339,17 @@ class Scroll_to_Top
         );
 
         $element->add_control(
-            'eael_ext_scroll_to_top_button_icon_image',
-            [
-                'label' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::ICONS,
-                'default' => [
-                    'value' => 'fas fa-chevron-up',
-                    'library' => 'fa-solid',
-                ],
-                'separator' => 'before',
-                'condition' => [
+			'eael_ext_scroll_to_top_button_icon_image',
+			[
+				'label'       => esc_html__( 'Upload SVG Icon', 'essential-addons-for-elementor-lite' ),
+				'type'        => \Elementor\Controls_Manager::MEDIA,
+				'media_types' => [ 'svg' ],
+                'separator'   => 'before',
+                'condition'   => [
                     'eael_ext_scroll_to_top' => 'yes',
                 ],
-            ]
-        );
+			]
+		);
 
         $element->add_control(
             'eael_ext_scroll_to_top_button_icon_size',
@@ -374,22 +371,6 @@ class Scroll_to_Top
                 'selectors' => [
                     '.eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button i' => 'font-size: {{SIZE}}{{UNIT}};',
                     '.eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-                ],
-                'condition' => [
-                    'eael_ext_scroll_to_top' => 'yes',
-                ],
-            ]
-        );
-
-        $element->add_control(
-            'eael_ext_scroll_to_top_button_icon_color',
-            [
-                'label' => __('Icon Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#ffffff',
-                'selectors' => [
-                    '.eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button i' => 'color: {{VALUE}}',
-                    '.eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button svg' => 'fill: {{VALUE}}',
                 ],
                 'condition' => [
                     'eael_ext_scroll_to_top' => 'yes',

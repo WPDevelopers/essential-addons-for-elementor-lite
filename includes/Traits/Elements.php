@@ -608,10 +608,8 @@ trait Elements {
 					//global status is true only when locally scroll to top is disabled.
 					$this->scroll_to_top_global_css( $global_settings );
 				}
-				$scroll_to_top_icon_image = ! empty( $settings_data_scroll_to_top['eael_ext_scroll_to_top_button_icon_image'] )
-					? $settings_data_scroll_to_top['eael_ext_scroll_to_top_button_icon_image']['value'] : '';
 
-				$scroll_to_top_icon_html = \Essential_Addons_Elementor\Classes\Helper::get_render_icon( $settings_data_scroll_to_top['eael_ext_scroll_to_top_button_icon_image'] ?? '' );
+				$scroll_to_top_icon_html = Icons_Manager::render_uploaded_svg_icon( $settings_data_scroll_to_top['eael_ext_scroll_to_top_button_icon_image'] );
 
 				$scroll_to_top_html = "<div class='eael-ext-scroll-to-top-wrap scroll-to-top-hide'><span class='eael-ext-scroll-to-top-button'>$scroll_to_top_icon_html</span></div>";
 
@@ -901,8 +899,8 @@ trait Elements {
 		$eael_stt_button_opacity_unit       = isset( $eael_scroll_to_top['eael_ext_scroll_to_top_button_opacity']['unit'] ) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_opacity']['unit'] : 'px';
 		$eael_stt_button_icon_size_size     = isset( $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_size']['size'] ) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_size']['size'] : 16;
 		$eael_stt_button_icon_size_unit     = isset( $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_size']['unit'] ) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_size']['unit'] : 'px';
-		$eael_stt_button_icon_svg_size_size = isset( $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_svg_size']['size'] ) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_svg_size']['size'] : 32;
-		$eael_stt_button_icon_svg_size_unit = isset( $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_svg_size']['unit'] ) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_svg_size']['unit'] : 'px';
+		$eael_stt_button_icon_svg_size_size = isset( $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_size']['size'] ) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_size']['size'] : 32;
+		$eael_stt_button_icon_svg_size_unit = isset( $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_size']['unit'] ) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_size']['unit'] : 'px';
 		$eael_stt_button_icon_color         = $eael_scroll_to_top['eael_ext_scroll_to_top_button_icon_color'];
 		$eael_stt_button_bg_color           = $eael_scroll_to_top['eael_ext_scroll_to_top_button_bg_color'];
 		$eael_stt_button_border_radius_size = isset( $eael_scroll_to_top['eael_ext_scroll_to_top_button_border_radius']['size'] ) ? $eael_scroll_to_top['eael_ext_scroll_to_top_button_border_radius']['size'] : 5;
