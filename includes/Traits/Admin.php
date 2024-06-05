@@ -1270,7 +1270,7 @@ trait Admin {
 					        ],
 					        'facebookLogin'  => [
 						        'title'  => __( 'Facebook Login', 'essential-addons-for-elementor-lite' ),
-						        'icon'   => 'images/map.svg',
+						        'icon'   => 'images/fb.svg',
 						        'fields' => [
 							        [
 								        'name'        => 'lr_fb_app_id',
@@ -1288,7 +1288,7 @@ trait Admin {
 					        ],
 					        'mailchimpLogin' => [
 						        'title'  => __( 'Mailchimp Integration', 'essential-addons-for-elementor-lite' ),
-						        'icon'   => 'images/mc.svg',
+						        'icon'   => 'images/mcwhite.svg',
 						        'fields' => [
 							        [
 								        'name'        => 'lr_mailchimp_api_key',
@@ -1300,7 +1300,7 @@ trait Admin {
 					        ],
 					        'customFields'   => [
 						        'title'  => __( 'Enable Custom Fields', 'essential-addons-for-elementor-lite' ),
-						        'icon'   => 'images/map.svg',
+						        'icon'   => 'images/customfield.svg',
 								'info'	 => __( 'Fields will be available on both the edit profile page and the EA Login | Register Form.', 'essential-addons-for-elementor-lite' ),
 						        'fields' => [
 							        [
