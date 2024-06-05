@@ -42,11 +42,10 @@ function Tools() {
                         <label>{eaData.box_3.heading}</label>
                         <div className="flex-1">
                             <div className="select-option-external">
-                                <select name={eaData.box_3.name} id="select-option" className="form-select"
-                                        ref={selectRef}>
+                                <select name={eaData.box_3.name} defaultValue={eaData.box_3.value} id="select-option"
+                                        className="form-select" ref={selectRef}>
                                     {Object.keys(eaData.box_3.methods).map((item, index) => {
-                                        return <option value={item} selected={eaData.box_3.value === item}
-                                                       key={index}>{eaData.box_3.methods[item]}</option>
+                                        return <option value={item} key={index}>{eaData.box_3.methods[item]}</option>
                                     })}
                                 </select>
                             </div>
