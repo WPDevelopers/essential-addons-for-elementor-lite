@@ -82,37 +82,39 @@ class WPDeveloper_Setup_Wizard {
 
 		<section id="eael-onboard--wrapper" class="eael-onboard--wrapper">
 			<section class="eael-onboard-main-wrapper eael-quick-setup-wizard-wrapper">
-				<div class="eael-menu-items">
-					<?php $this->menu_items(); ?>
-				</div>
+	            <form class="eael-setup-wizard-form eael-quick-setup-wizard-form" method="post">
+					<div class="eael-menu-items">
+						<?php $this->menu_items(); ?>
+					</div>
 
-				<div class="eael-setup-content eael-getting-started-content">
-					<?php $this->getting_started_cotnent(); ?>
-				</div>
+					<div class="eael-setup-content eael-getting-started-content">
+						<?php $this->getting_started_cotnent(); ?>
+					</div>
 
-				<div class="eael-setup-content eael-configuration-content eael-d-none">
-					<?php $this->configuration_cotnent(); ?>
-				</div>
+					<div class="eael-setup-content eael-configuration-content eael-d-none">
+						<?php $this->configuration_cotnent(); ?>
+					</div>
 
-				<div class="eael-setup-content eael-elements-content eael-d-none">
-					<?php $this->elements_content(); ?>
-				</div>
+					<div class="eael-setup-content eael-elements-content eael-d-none">
+						<?php $this->elements_content(); ?>
+					</div>
 
-				<div class="eael-setup-content eael-go-pro-content eael-d-none">
-					<?php $this->go_pro_content(); ?>
-				</div>
+					<div class="eael-setup-content eael-go-pro-content eael-d-none">
+						<?php $this->go_pro_content(); ?>
+					</div>
 
-				<div class="eael-setup-content eael-templately-content eael-d-none">
-					<?php $this->templately_content(); ?>
-				</div>
+					<div class="eael-setup-content eael-templately-content eael-d-none">
+						<?php $this->templately_content(); ?>
+					</div>
 
-				<div class="eael-setup-content eael-integrations-content eael-d-none">
-					<?php $this->integrations_content(); ?>
-				</div>
+					<div class="eael-setup-content eael-integrations-content eael-d-none">
+						<?php $this->integrations_content(); ?>
+					</div>
 
-				<div class="eael-setup-content eael-modal-content eael-d-none">
-					<?php $this->modal_content(); ?>
-				</div>
+					<div class="eael-modal-content eael-d-none">
+						<?php $this->modal_content(); ?>
+					</div>
+				</form>
 			</section>
 		</section>
 	
@@ -169,7 +171,7 @@ class WPDeveloper_Setup_Wizard {
 				<div class="eael-next-step-wrapper" id="eael-dashboard--wrapper">
 					<p>
 						<?php _e( 'By clicking this button I am allowing this app to collect my information.', 'essential-addons-for-elementor-lite' ); ?> 
-						<span class="collect-info"><?php _e( 'What We Collect?', 'essential-addons-for-elementor-lite' ); ?></span>
+						<span class="collect-info eael-what-we-collect"><?php _e( 'What We Collect?', 'essential-addons-for-elementor-lite' ); ?></span>
 					</p>
 					
 					<button class="primary-btn install-btn eael-setup-next-btn" data-next="configuration">
@@ -332,10 +334,10 @@ class WPDeveloper_Setup_Wizard {
 					</div>
 				</div>
 				<a target="_blank" href="https://wpdeveloper.com/in/upgrade-essential-addons-elementor">
-					<button class="upgrade-button">
+					<span class="upgrade-button">
 						<i class="ea-dash-icon ea-crown-1"></i>
 						<?php _e( 'Upgrade to PRO', 'essential-addons-for-elementor-lite' ); ?>
-					</button>
+					</span>
 				</a>
 			</div>
 			<div class="eael-pro-features flex justify-between items-center">
@@ -344,10 +346,10 @@ class WPDeveloper_Setup_Wizard {
 					<p class="mb-7"><?php _e( 'Learn all about the tools and techniques you can use to edit videos, animate titles, add effects, mix sound, and more.', 'essential-addons-for-elementor-lite' ); ?>
 					</p>
 					<a href="https://essential-addons.com/demos/" target="_blank">
-						<button class="primary-btn changelog-btn">
+						<span class="primary-btn changelog-btn">
 							<i class="ea-dash-icon ea-link"></i>
 							<?php _e( 'View More', 'essential-addons-for-elementor-lite' ); ?>
-						</button>
+						</span>
 					</a>
 				</div>
 				<div class="features-widget-wrapper">
@@ -817,8 +819,7 @@ class WPDeveloper_Setup_Wizard {
 				<?php endforeach; ?>
             </div>
             <div class="eael-quick-setup-pro-button-wrapper">
-                <a target="_blank" href="https://wpdeveloper.com/in/upgrade-essential-addons-elementor"
-                   class="button eael-quick-setup-btn eael-quick-setup-pro-button">
+                <a target="_blank" href="https://wpdeveloper.com/in/upgrade-essential-addons-elementor" class="button eael-quick-setup-btn eael-quick-setup-pro-button">
 					<?php _e( 'Upgrade to PRO', 'essential-addons-for-elementor-lite' ); ?>
                 </a>
             </div>

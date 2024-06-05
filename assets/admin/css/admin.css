@@ -5461,13 +5461,6 @@ button.button__greyBg:hover:disabled {
 /* Setup Wizard V2 Starts */
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 :root {
     $mode-base: #ffffff;
     --page-background: #F5F6FC;
@@ -5505,35 +5498,6 @@ button.button__greyBg:hover:disabled {
     --shadow-color-6: #1018280F;
 
     --mode-switcher-icon: "\e905";
-}
-
-.ea-admin {
-    font-family: "Rubik", sans-serif;
-
-    &.ea-dark-mode {
-        $mode-base: #000000;
-        --page-background: #36405a;
-        --base-background: #2c3650;
-        --base-color-50: #1f283d;
-        --base-color-75: #1f283d;
-        --base-color-100: #1f283d;
-        --text-color-25: #101828;
-        --text-color-50: #232e46;
-        --text-color-100: #101828;
-        --text-color-150: #232e46;
-        --text-color-200: #36405a;
-        --text-color-300: #36405a;
-        --text-color-400: #36405a;
-        --text-color-500: #d0d5dd;
-        --text-color-600: #d0d5dd;
-        --text-color-700: #fcfcfd;
-        --text-color-800: #fcfcfd;
-        --text-color-900: #fcfcfd;
-        --warning-50: #473502;
-        --warning-100: #5d470b;
-        --danger-50: #190207;
-        --mode-switcher-icon: "\e903";
-    }
 }
 
 body {
@@ -5740,7 +5704,7 @@ img {
     font-size: 12px;
 }
 
-#eael-onboard--wrapper button.upgrade-button {
+#eael-onboard--wrapper .upgrade-button {
     font-size: 14px;
     font-weight: 450;
     line-height: 1.5rem;
@@ -5760,13 +5724,13 @@ img {
     width: 100%;
 }
 
-#eael-onboard--wrapper button.upgrade-button:hover {
+#eael-onboard--wrapper .upgrade-button:hover {
     color: var(--base-background);
     background: var(--base-color-100);
     border-bottom: 1px solid var(--border-color-3);
 }
 
-#eael-onboard--wrapper button.upgrade-button i {
+#eael-onboard--wrapper .upgrade-button i {
     font-size: 16px;
 }
 
@@ -6703,7 +6667,7 @@ span.title-color-2 {
         font-size: 12px;
     }
 
-    #eael-onboard--wrapper button.upgrade-button {
+    #eael-onboard--wrapper .upgrade-button {
         font-size: 12px;
         gap: 6px;
         padding: 8px 14px;
