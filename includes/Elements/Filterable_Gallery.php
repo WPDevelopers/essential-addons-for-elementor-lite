@@ -614,6 +614,30 @@ class Filterable_Gallery extends Widget_Base
 				],
             ]
         );
+
+        $repeater->add_control(
+			'eael_fg_gallery_video_layout',
+			[
+				'label' => esc_html__( 'Video Layout Type', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::CHOOSE,
+				'options' => [
+					'horizontal' => [
+						'title' => esc_html__( 'Horizontal', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-justify-space-around-v',
+					],
+					'vertical' => [
+						'title' => esc_html__( 'Vertical', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-justify-space-around-h',
+					],
+				],
+                'condition' => [
+                    'fg_video_gallery_switch' => 'true',
+                ],
+				'default'   => 'horizontal',
+				'toggle'    => false,
+				'separator' => 'after',
+			]
+		);
         
         $repeater->add_control(
             'eael_fg_gallery_control_name',
@@ -3348,14 +3372,15 @@ class Filterable_Gallery extends Widget_Base
         $video_gallery_yt_privacy = ! empty( $settings['video_gallery_yt_privacy'] ) && 'yes' === $settings['video_gallery_yt_privacy'] ? 1 : 0;
         
         foreach ($gallery_items as $gallery) {
-            $gallery_store[$counter]['title'] = Helper::eael_wp_kses($gallery['eael_fg_gallery_item_name']);
-            $gallery_store[$counter]['content'] = $gallery['eael_fg_gallery_item_content'];
-            $gallery_store[$counter]['id'] = $gallery['_id'];
-            $gallery_store[$counter]['image'] = $gallery['eael_fg_gallery_img'];
-            $gallery_store[$counter]['image'] = sanitize_url( $gallery['eael_fg_gallery_img']['url'] );
-            $gallery_store[$counter]['image_id'] = $gallery['eael_fg_gallery_img']['id'];
-            $gallery_store[$counter]['maybe_link'] = $gallery['eael_fg_gallery_link'];
-            $gallery_store[$counter]['link'] = $gallery['eael_fg_gallery_img_link'];
+            $gallery_store[$counter]['title']        = Helper::eael_wp_kses($gallery['eael_fg_gallery_item_name']);
+            $gallery_store[$counter]['content']      = $gallery['eael_fg_gallery_item_content'];
+            $gallery_store[$counter]['id']           = $gallery['_id'];
+            $gallery_store[$counter]['image']        = $gallery['eael_fg_gallery_img'];
+            $gallery_store[$counter]['image']        = sanitize_url( $gallery['eael_fg_gallery_img']['url'] );
+            $gallery_store[$counter]['image_id']     = $gallery['eael_fg_gallery_img']['id'];
+            $gallery_store[$counter]['maybe_link']   = $gallery['eael_fg_gallery_link'];
+            $gallery_store[$counter]['link']         = $gallery['eael_fg_gallery_img_link'];
+            $gallery_store[$counter]['video_layout'] = isset( $gallery['eael_fg_gallery_video_layout'] ) && !empty( $gallery['eael_fg_gallery_video_layout'] ) ? $gallery['eael_fg_gallery_video_layout'] : 'horizontal';
             
             $gallery_store[$counter]['video_gallery_switch'] = $gallery['fg_video_gallery_switch'];
 
@@ -3480,13 +3505,13 @@ class Filterable_Gallery extends Widget_Base
      * @return string : Html markup
      */
     protected function video_gallery_switch_content( $item, $show_video_popup_bg=true, $settings = null ) {
-        $html = '';
-
-        $icon_url = isset($item['play_icon']['url']) ? $item['play_icon']['url'] : '';
-        $video_url = isset($item['video_link']) ? $item['video_link'] : '#';
-        $eael_privacy_notice = isset( $settings['eael_privacy_notice'] ) ? $settings['eael_privacy_notice'] : '';
+        $html           = '';
+        $icon_url       = isset($item['play_icon']['url']) ? $item['play_icon']['url'] : '';
+        $video_url      = isset($item['video_link']) ? $item['video_link'] : '#';
+        $privacy_notice = isset( $settings['eael_privacy_notice'] ) ? $settings['eael_privacy_notice'] : '';
+        $classes        = "video-popup eael-magnific-link eael-magnific-link-clone active eael-magnific-video-link mfp-iframe playout-" . $item['video_layout'];
         
-        $html .= '<a title="' . esc_attr( strip_tags( $eael_privacy_notice ) ) .'" aria-label="eael-magnific-video-link" href="' . esc_url($video_url) . '" class="video-popup eael-magnific-link eael-magnific-link-clone active eael-magnific-video-link mfp-iframe" data-elementor-open-lightbox="yes">';
+        $html .= '<a title="' . esc_attr( strip_tags( $privacy_notice ) ) .'" aria-label="eael-magnific-video-link" href="' . esc_url($video_url) . '" class="' . esc_attr( $classes ) . '" data-id="'. esc_attr( $item['id'] ) .'" data-elementor-open-lightbox="yes">';
 
         if( $show_video_popup_bg ){
             $html .= '<div class="video-popup-bg"></div>';
@@ -3909,7 +3934,7 @@ class Filterable_Gallery extends Widget_Base
                 for ($i = 0; $i < $init_show; $i++) {
 
                     if (array_key_exists($i, $gallery_items)) {
-                        echo wp_kses( $gallery_items[$i], Helper::eael_allowed_tags() );
+                        echo wp_kses( $gallery_items[$i], Helper::eael_allowed_tags(['a'=>['data-elementor-lightbox-slideshow'=>[]]]) );
                     }
                 }
                 if ( $settings['eael_fg_caption_style'] === 'layout_3' ):

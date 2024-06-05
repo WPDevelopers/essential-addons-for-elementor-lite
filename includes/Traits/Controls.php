@@ -1026,34 +1026,6 @@ trait Controls
                     ],
                 ]
             );
-            $wb->add_control(
-                'eael_show_fallback_img',
-                [
-                    'label' => __('Fallback Image', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SWITCHER,
-                    'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                    'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
-                    'return_value' => 'yes',
-                    'default' => '',
-                    'condition' => [
-                        'eael_show_image' => 'yes',
-                    ],
-                ]
-            );
-            $wb->add_control(
-                'eael_post_carousel_fallback_img',
-                [
-                    'label'             => __( 'Image', 'essential-addons-for-elementor-lite' ),
-                    'type'              => Controls_Manager::MEDIA,
-                    'condition'         => [
-                        'eael_show_fallback_img'    => 'yes',
-                        'eael_show_image' => 'yes',
-                    ],
-                    'ai' => [
-                        'active' => false,
-                    ],
-                ]
-            );
         }
 
         $wb->add_control(
@@ -1407,6 +1379,11 @@ trait Controls
                 $eael_show_post_terms_child_condition = [ 'eael_show_post_terms' => 'yes' ];
             }
 
+            //Only show for "Post Grid" widget
+            if ( 'eael-post-grid' === $wb->get_name() ) {
+                $eael_show_post_terms_child_condition['eael_post_grid_preset_style'] = ['two', 'three'];
+            }
+
 	        $post_types = ControlsHelper::get_post_types();
 	        unset(
 		        $post_types['post'],
@@ -1439,11 +1416,30 @@ trait Controls
 					        'eael_show_image'             => 'yes',
 					        'eael_show_post_terms'        => 'yes',
 					        'post_type'                   => $post_type,
-					        'eael_post_grid_preset_style' =>  'two',
+					        'eael_post_grid_preset_style' =>  ['two', 'three'],
 				        ],
 			        ]
 		        );
 	        }
+
+            //Only show for "Post Grid" widget
+            if( 'eael-post-grid' === $wb->get_name() ) {
+                $wb->add_control(
+                    'eael_post_grid_preset_style',
+                    [
+                        'label'   => __('Select Terms Style', 'essential-addons-for-elementor-lite'),
+                        'type'    => Controls_Manager::SELECT,
+                        'options' => [
+                            'two'   => __('Style One', 'essential-addons-for-elementor-lite'),
+                            'three' => __('Style Two', 'essential-addons-for-elementor-lite'),
+                        ],
+                        'default' => 'two',
+                        'condition' => [
+                            'eael_show_post_terms' => $eael_show_post_terms_child_condition['eael_show_post_terms'],
+                        ]
+                    ]
+                );
+            }
 
             $wb->add_control(
                 'eael_post_terms',
@@ -1489,7 +1485,7 @@ trait Controls
                         'default'     => esc_html__( '', 'essential-addons-for-elementor-lite' ),
                         'condition'   => [
                             'eael_show_post_terms'        => 'yes',
-                            'eael_post_grid_preset_style' =>  'two',
+                            'eael_post_grid_preset_style' =>  ['two', 'three'],
                         ],
                     ]
                 );
