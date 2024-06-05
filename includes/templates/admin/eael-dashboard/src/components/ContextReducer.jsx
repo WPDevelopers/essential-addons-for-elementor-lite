@@ -241,6 +241,14 @@ function ContextReducer() {
                 response = eaAjax(params);
 
                 return {...state};
+            case 'REGENERATE_ASSETS':
+                params = {
+                    action: 'clear_cache_files_with_ajax',
+                    security: localize.nonce
+                };
+
+                response = eaAjax(params);
+                return {...state}
         }
     }
 

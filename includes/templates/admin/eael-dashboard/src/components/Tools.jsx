@@ -8,6 +8,9 @@ function Tools() {
         {eaDispatch} = consumer(),
         saveHandler = () => {
             eaDispatch({type: 'SAVE_TOOLS', payload: {key: eaData.box_3.name, value: selectRef.current.value}});
+        },
+        clickHandler = () => {
+            eaDispatch({type: 'REGENERATE_ASSETS'});
         };
 
     return (
@@ -24,7 +27,7 @@ function Tools() {
                                 <p>{eaData.box_1.content}</p>
                             </div>
                         </div>
-                        <button className="primary-btn changelog-btn">{eaData.box_1.button.label}</button>
+                        <button className="primary-btn changelog-btn" onClick={clickHandler}>{eaData.box_1.button.label}</button>
                     </div>
                     <div className="ea__connect-others flex gap-4 justify-between items-start">
                         <div className="flex gap-4 flex-1">
