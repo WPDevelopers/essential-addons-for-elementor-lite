@@ -301,7 +301,9 @@ trait Admin {
 				        'methods' => [
 					        'external' => __( 'External file', 'essential-addons-for-elementor-lite' ),
 					        'internal' => __( 'Internal Embedding', 'essential-addons-for-elementor-lite' ),
-				        ]
+				        ],
+				        'name'    => 'eael-js-print-method',
+				        'value'   => get_option( 'eael_js_print_method', 'external' )
 			        ]
 		        ],
 		        'extensions'           => [

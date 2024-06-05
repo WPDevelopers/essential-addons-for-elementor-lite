@@ -231,6 +231,16 @@ function ContextReducer() {
                 // }
 
                 return {...state};
+            case 'SAVE_TOOLS':
+                params = {
+                    action: 'save_settings_with_ajax',
+                    security: localize.nonce,
+                    [payload.key]: payload.value
+                };
+
+                response = eaAjax(params);
+
+                return {...state};
         }
     }
 
