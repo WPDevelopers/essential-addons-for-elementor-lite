@@ -118,14 +118,14 @@ class WPDeveloper_Setup_Wizard {
 			</section>
 		</section>
 	
-        <div class="eael-quick-setup-wizard-wrap">
+        <!-- <div class="eael-quick-setup-wizard-wrap"> -->
 			<?php
-			$this->change_site_title();
-			$this->tab_step();
-			$this->tab_content();
-			$this->setup_wizard_footer();
+			// $this->change_site_title();
+			// $this->tab_step();
+			// $this->tab_content();
+			// $this->setup_wizard_footer();
 			?>
-        </div>
+        <!-- </div> -->
 		<?php
 	}
 
@@ -635,18 +635,18 @@ class WPDeveloper_Setup_Wizard {
 	 */
 	public function tab_content() {
 		?>
-        <div class="eael-quick-setup-body">
+        <!-- <div class="eael-quick-setup-body">
             <form class="eael-setup-wizard-form eael-quick-setup-wizard-form" method="post">
 				<?php
-				$this->configuration_tab();
-				$this->eael_elements();
-				$this->go_pro();
-				$this->templately_integrations();
-				$this->eael_integrations();
-				$this->final_step();
+				// $this->configuration_tab();
+				// $this->eael_elements();
+				// $this->go_pro();
+				// $this->templately_integrations();
+				// $this->eael_integrations();
+				// $this->final_step();
 				?>
             </form>
-        </div>
+        </div> -->
 		<?php
 	}
 
