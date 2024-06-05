@@ -230,7 +230,7 @@ function ContextReducer() {
                 //     return {...state, modal: 'close'};
                 // }
 
-                return {...state};
+                return {...state, modal2: 'open'};
             case 'SAVE_TOOLS':
                 params = {
                     action: 'save_settings_with_ajax',
