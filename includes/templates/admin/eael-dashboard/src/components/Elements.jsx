@@ -37,6 +37,9 @@ function Elements() {
             }
 
             eaDispatch({type: 'ON_SEARCH', payload: {value: results}});
+        },
+        clickHandler = () => {
+            eaDispatch({type: 'SAVE_ELEMENTS_DATA'});
         };
 
     return (
@@ -87,7 +90,7 @@ function Elements() {
 
 
                 <div className="ea__elements-button-wrap">
-                    <button className="primary-btn install-btn">{i18n.save_settings}</button>
+                    <button className="primary-btn install-btn" onClick={clickHandler}>{i18n.save_settings}</button>
                     <div className="ea__section-overlay">
                     </div>
                 </div>
