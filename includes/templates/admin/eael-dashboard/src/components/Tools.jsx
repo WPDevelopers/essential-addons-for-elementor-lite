@@ -36,7 +36,8 @@ function Tools() {
                                 <p>{eaData.box_2.content}</p>
                             </div>
                         </div>
-                        <button className="primary-btn changelog-btn">{eaData.box_2.button.label}</button>
+                        <a className="primary-btn changelog-btn" target="_blank"
+                           href={eaData.box_2.button.url}>{eaData.box_2.button.label}</a>
                     </div>
                     <div className="ea__connect-others flex gap-6 justify-between items-start">
                         <label>{eaData.box_3.heading}</label>

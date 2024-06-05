@@ -292,7 +292,7 @@ trait Admin {
 				        'icon'    => 'ea-settings',
 				        'button'  => [
 					        'label' => __( 'CSS Print Method', 'essential-addons-for-elementor-lite' ),
-					        'url'   => '#'
+					        'url'   => admin_url('admin.php?page=elementor#tab-advanced')
 				        ]
 			        ],
 			        'box_3' => [
