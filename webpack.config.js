@@ -39,21 +39,19 @@ const outputEntry = () => {
 		}
 	}, {});
 
-	// console.log(paths);
 	return paths;
 };
 const removeEntry = () => {
 	entry = [];
 
-	glob.sync("./front-end/src/css/view/*").reduce((acc, file) => {
+	glob.sync("./src/css/view/*").reduce((acc, file) => {
 		let fileName = path.parse(file).name;
 
 		if (fileName.charAt(0) !== "_") {
-			entry.push(path.join("css", "view", fileName.concat(".js")));
-			entry.push(path.join("css", "view", fileName.concat(".min.js")));
+			entry.push(path.join("front-end", "css", "view", fileName.concat(".js")));
+			entry.push(path.join("front-end", "css", "view", fileName.concat(".min.js")));
 		}
 	}, {});
-	console.log(entry);
 
 	return entry;
 };
