@@ -11,7 +11,7 @@ const outputEntry = () => {
 		let fileName = path.parse(file).name;
 
 		if (fileName.charAt(0) !== "_") {
-			paths[path.join("js", "view", fileName)] = file;
+			paths[path.join("front-end", "js", "view", fileName)] = file;
 		}
 	}, {});
 
@@ -19,7 +19,7 @@ const outputEntry = () => {
 		let fileName = path.parse(file).name;
 
 		if (fileName.charAt(0) !== "_") {
-			paths[path.join("js", "edit", fileName)] = file;
+			paths[path.join("front-end/", "js", "edit", fileName)] = file;
 		}
 	}, {});
 
@@ -27,16 +27,25 @@ const outputEntry = () => {
 		let fileName = path.parse(file).name;
 
 		if (fileName.charAt(0) !== "_") {
-			paths[path.join("css", "view", fileName)] = file;
+			paths[path.join("front-end/", "css", "view", fileName)] = file;
 		}
 	}, {});
 
+	glob.sync("./src/js/admin/quick-setup/*").reduce((acc, file) => {
+		let fileName = path.parse(file).name;
+
+		if (fileName.charAt(0) !== "_") {
+			paths[path.join("admin", "js", "quick-setup", fileName)] = file;
+		}
+	}, {});
+
+	// console.log(paths);
 	return paths;
 };
 const removeEntry = () => {
 	entry = [];
 
-	glob.sync("./src/css/view/*").reduce((acc, file) => {
+	glob.sync("./front-end/src/css/view/*").reduce((acc, file) => {
 		let fileName = path.parse(file).name;
 
 		if (fileName.charAt(0) !== "_") {
@@ -44,6 +53,7 @@ const removeEntry = () => {
 			entry.push(path.join("css", "view", fileName.concat(".min.js")));
 		}
 	}, {});
+	console.log(entry);
 
 	return entry;
 };
@@ -64,7 +74,7 @@ module.exports = (env, argv) => {
 		stats: "minimal",
 		entry: outputEntry(),
 		output: {
-			path: path.resolve(__dirname, "assets/front-end/"),
+			path: path.resolve(__dirname, "assets/"),
 			filename:
 				argv.mode === "production" ? "[name].min.js" : "[name].js",
 		},
