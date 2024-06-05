@@ -561,7 +561,7 @@ span.ea__nav-icon svg {
   padding: 24px;
   border: 1px solid var(--border-color-base);
   margin-bottom: 16px;
-  background-image: url(/assets/images/img-4.png);
+  background-image: url('../images/img-4.png');
   background-repeat: no-repeat;
   background-position-x: right;
 }
@@ -641,7 +641,7 @@ span.dark-icon {
   border-radius: 8px;
   border: 1px solid var(--border-color-base);
   margin-bottom: 16px;
-  background-image: url(/assets/images/pro-bg.png);
+  background-image: url('../images/pro-bg.png');
   background-repeat: no-repeat;
   background-position: top;
 }
@@ -1181,7 +1181,7 @@ span.select-details {
   padding: 48px;
   background: #FFFEFC;
   border-radius: 8px;
-  background-image: url(/assets/images/pro-elements-bg.png);
+  background-image: url('../images/pro-elements-bg.png');
   background-repeat: no-repeat;
   background-position: top;
 }
