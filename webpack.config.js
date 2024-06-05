@@ -19,7 +19,7 @@ const outputEntry = () => {
 		let fileName = path.parse(file).name;
 
 		if (fileName.charAt(0) !== "_") {
-			paths[path.join("front-end/", "js", "edit", fileName)] = file;
+			paths[path.join("front-end", "js", "edit", fileName)] = file;
 		}
 	}, {});
 
@@ -27,7 +27,7 @@ const outputEntry = () => {
 		let fileName = path.parse(file).name;
 
 		if (fileName.charAt(0) !== "_") {
-			paths[path.join("front-end/", "css", "view", fileName)] = file;
+			paths[path.join("front-end", "css", "view", fileName)] = file;
 		}
 	}, {});
 
