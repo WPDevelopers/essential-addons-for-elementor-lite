@@ -20,7 +20,8 @@ function Modal() {
             });
 
             eaDispatch({type: 'SAVE_MODAL_DATA', payload: inputData});
-        };
+        },
+        eaData = localize.eael_dashboard.modal;
 
     return (
         <>
@@ -37,7 +38,9 @@ function Modal() {
                             <ModalStyleOne/>}
                     </div>
                     <div className="ea__modal-footer flex justify-between items-center">
-                        <a className="ea__api-link" href="#">To configure the API Keys, check out this doc</a>
+                        {eaState.modalID === 'loginRegisterSetting' &&
+                            <a className="ea__api-link"
+                               href={eaData[eaState.modalID].link.url}>{eaData[eaState.modalID].link.text}</a>}
                         <button className="ea__modal-btn">Save</button>
                     </div>
                     <div className="ea__modal-close-btn" onClick={clickHandler}>
