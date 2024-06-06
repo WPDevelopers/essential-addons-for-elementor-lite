@@ -19,11 +19,16 @@ const debouncer = (callback, delay) => {
         }
         return result;
     },
-    eaXMLHttpRequest = (params) => {
+    eaXMLHttpRequest = (params, async = false) => {
         const request = new XMLHttpRequest();
-        request.open('POST', localize.ajaxurl, false);
+        request.open('POST', localize.ajaxurl, async);
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
         request.send(encodeURI(params));
+
+        if (async) {
+            return request;
+        }
+
         return JSON.parse(request.responseText);
     };
 
