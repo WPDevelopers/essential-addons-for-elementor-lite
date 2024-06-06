@@ -11,6 +11,7 @@ class WPDeveloper_Plugin_Installer
 {
     public function __construct()
     {
+        add_action('wp_ajax_wpdeveloper_auto_active_even_not_installed', [$this, 'ajax_auto_active_even_not_installed']);
         add_action('wp_ajax_wpdeveloper_install_plugin', [$this, 'ajax_install_plugin']);
         add_action('wp_ajax_wpdeveloper_upgrade_plugin', [$this, 'ajax_upgrade_plugin']);
         add_action('wp_ajax_wpdeveloper_activate_plugin', [$this, 'ajax_activate_plugin']);
@@ -200,4 +201,14 @@ class WPDeveloper_Plugin_Installer
         }
         wp_send_json_success(__('Plugin is activated successfully!', 'essential-addons-for-elementor-lite'));
     }
+
+	public function ajax_auto_active_even_not_installed() {
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+		if ( $this->get_local_plugin_data( $_POST['basename'] ) === false ) {
+			$this->ajax_install_plugin();
+		} else {
+			$this->ajax_activate_plugin();
+		}
+	}
 }
