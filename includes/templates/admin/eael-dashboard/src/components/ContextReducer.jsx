@@ -59,7 +59,8 @@ function ContextReducer() {
 
     const reducer = (state, {type, payload}) => {
         const licenseManagerConfig = typeof wpdeveloperLicenseManagerConfig === 'undefined' ? {} : wpdeveloperLicenseManagerConfig;
-        let params, response, licenseStatus, licenseError, otp, otpEmail, errorMessage, hiddenLicenseKey, integrations,
+        let params, request, response, licenseStatus, licenseError, otp, otpEmail, errorMessage, hiddenLicenseKey,
+            integrations,
             elements, modals;
 
         switch (type) {
@@ -68,6 +69,18 @@ function ContextReducer() {
             case 'SET_MENU':
                 return {...state, menu: payload};
             case 'ON_CHANGE_INTEGRATION':
+                params = {
+                    action: 'wpdeveloper_auto_active_even_not_installed',
+                    security: localize.nonce,
+                    slug: eaData.integration_box.list[payload.key].slug,
+                    basename: eaData.integration_box.list[payload.key].basename
+                };
+
+                request = eaAjax(params, true);
+                request.onreadystatechange = () => {
+                    response = JSON.parse(request.responseText);
+                }
+
                 integrations = {...state.integrations, [payload.key]: payload.value};
                 return {...state, integrations};
             case 'ON_CHANGE_ELEMENT':

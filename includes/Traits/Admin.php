@@ -203,7 +203,7 @@ trait Admin {
 					        'logo'     => 'images/BD.svg',
 					        'title'    => __( 'BetterDocs', 'essential-addons-for-elementor-lite' ),
 					        'desc'     => __( 'BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ),
-					        'status'   => true
+					        'status'   => is_plugin_active( 'betterdocs/betterdocs.php' )
 				        ],
 				        'ep' => [
 					        'slug'     => 'embedpress',
@@ -211,7 +211,7 @@ trait Admin {
 					        'logo'     => 'images/EP.svg',
 					        'title'    => __( 'EmbedPress', 'essential-addons-for-elementor-lite' ),
 					        'desc'     => __( 'EmbedPress lets you embed videos, images, posts, audio, maps and upload PDF, DOC, PPT & all other types of content into your WordPress site. ', 'essential-addons-for-elementor-lite' ),
-					        'status'   => true
+					        'status'   => is_plugin_active( 'embedpress/embedpress.php' )
 				        ],
 				        'nx' => [
 					        'slug'     => 'notificationx',
@@ -219,7 +219,7 @@ trait Admin {
 					        'logo'     => 'images/NX.svg',
 					        'title'    => __( 'NotificationX', 'essential-addons-for-elementor-lite' ),
 					        'desc'     => __( 'Best FOMO Social Proof Plugin to boost your sales conversion. Create stunning Sales Popup & Notification Bar With Elementor Support.', 'essential-addons-for-elementor-lite' ),
-					        'status'   => true
+					        'status'   => is_plugin_active( 'notificationx/notificationx.php' )
 				        ],
 				        'ej' => [
 					        'slug'     => 'easyjobs',
@@ -227,7 +227,7 @@ trait Admin {
 					        'logo'     => 'images/EJ.svg',
 					        'title'    => __( 'easy.jobs', 'essential-addons-for-elementor-lite' ),
 					        'desc'     => __( 'Easy solution for the job recruitment to attract, manage & hire right talent faster. The Best Talent Recruitment Suite which lets you manage jobs & career page in Elementor.', 'essential-addons-for-elementor-lite' ),
-					        'status'   => true
+					        'status'   => is_plugin_active( 'easyjobs/easyjobs.php' )
 				        ],
 				        'sp' => [
 					        'slug'     => 'wp-scheduled-posts',
@@ -235,7 +235,7 @@ trait Admin {
 					        'logo'     => 'images/SP.svg',
 					        'title'    => __( 'SchedulePress', 'essential-addons-for-elementor-lite' ),
 					        'desc'     => __( 'Best Content Marketing Tool For WordPress – Schedule, Organize, & Auto Share Blog Posts. Take a quick glance at your content planning with Schedule Calendar, Auto & Manual Scheduler and  more.', 'essential-addons-for-elementor-lite' ),
-					        'status'   => true
+					        'status'   => is_plugin_active( 'wp-scheduled-posts/wp-scheduled-posts.php' )
 				        ],
 				        'bl' => [
 					        'slug'     => 'betterlinks',
@@ -243,7 +243,7 @@ trait Admin {
 					        'logo'     => 'images/BL.svg',
 					        'title'    => __( 'BetterLinks', 'essential-addons-for-elementor-lite' ),
 					        'desc'     => __( 'Best Link Shortening tool to create, shorten and manage any URL to help you cross-promote your brands & products. Gather analytics reports, run successfully marketing campaigns easily & many more.', 'essential-addons-for-elementor-lite' ),
-					        'status'   => true
+					        'status'   => is_plugin_active( 'betterlinks/betterlinks.php' )
 				        ],
 				        'eb' => [
 					        'slug'     => 'essential-blocks',
@@ -251,7 +251,7 @@ trait Admin {
 					        'logo'     => 'images/EB.svg',
 					        'title'    => __( 'Essential Blocks', 'essential-addons-for-elementor-lite' ),
 					        'desc'     => __( 'Enhance your Gutenberg experience with 40+ unique blocks (more coming soon). Add power to the block editor using our easy-to-use blocks which are designed to make your next WordPress page or posts design easier and prettier than ever before.', 'essential-addons-for-elementor-lite' ),
-					        'status'   => true
+					        'status'   => is_plugin_active( 'essential-blocks/essential-blocks.php' )
 				        ],
 				        'bp' => [
 					        'slug'     => 'better-payment',
@@ -259,7 +259,7 @@ trait Admin {
 					        'logo'     => 'images/BP.svg',
 					        'title'    => __( 'Better Payment', 'essential-addons-for-elementor-lite' ),
 					        'desc'     => __( 'Better Payment streamlines transactions in Elementor, integrating PayPal, Stripe, advanced analytics, validation, and Elementor forms for the most secure & efficient payments.', 'essential-addons-for-elementor-lite' ),
-					        'status'   => true
+					        'status'   => is_plugin_active( 'better-payment/better-payment.php' )
 				        ]
 			        ]
 		        ],
