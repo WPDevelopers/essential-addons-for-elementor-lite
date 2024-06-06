@@ -229,7 +229,7 @@ function ContextReducer() {
                     return {...state, modal: 'close'};
                 }
 
-                return {...state};
+                return {...state, modalRegenerateAssets: 'open'};
             case 'SAVE_ELEMENTS_DATA':
                 params = {
                     action: 'save_settings_with_ajax',
@@ -249,7 +249,7 @@ function ContextReducer() {
                 //     return {...state, modal: 'close'};
                 // }
 
-                return {...state};
+                return {...state, modalRegenerateAssets: 'open'};
             case 'SAVE_TOOLS':
                 params = {
                     action: 'save_settings_with_ajax',
@@ -259,7 +259,7 @@ function ContextReducer() {
 
                 response = eaAjax(params);
 
-                return {...state};
+                return {...state, modalRegenerateAssets: 'open'};
             case 'REGENERATE_ASSETS':
                 params = {
                     action: 'clear_cache_files_with_ajax',
