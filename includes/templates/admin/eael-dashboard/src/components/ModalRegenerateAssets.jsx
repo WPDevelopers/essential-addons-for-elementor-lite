@@ -1,5 +1,17 @@
+import {useEffect} from "react";
+import consumer from "../context";
+
 function ModalRegenerateAssets() {
-    const eaData = localize.eael_dashboard;
+    const eaData = localize.eael_dashboard,
+        {eaState, eaDispatch} = consumer();
+
+    useEffect(() => {
+        if (eaState.modalRegenerateAssets === 'open') {
+            setTimeout(() => {
+                eaDispatch({type: 'CLOSE_MODAL'});
+            }, 2000);
+        }
+    }, [eaState.modalRegenerateAssets]);
 
     return (
         <>
