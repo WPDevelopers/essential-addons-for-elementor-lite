@@ -13,9 +13,6 @@ function ModalRegenerateAssets() {
                             <img src={eaData.reactPath + "images/regenerate-modal.png"} alt="Regenerated Img"/>
                         </div>
                     </div>
-                    <div className="ea__modal-close-btn">
-                        <i className="ea-dash-icon ea-close"></i>
-                    </div>
                 </div>
 
             </section>
