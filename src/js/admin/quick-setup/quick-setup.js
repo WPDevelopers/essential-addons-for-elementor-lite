@@ -1,18 +1,14 @@
-// export default function QuickSetup(){
-// 	return (
-// 		<div>
-// 			<h1>Welcome to my app</h1>
-//       		<MyButton />
-// 		</div>
-// 	);
-// }
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App';
 
-// function MyButton(){
-// 	return (
-// 		<button>
-// 			I'm a button
-// 		</button>
-// 	);
-// }
-
-console.log('okk');
+document.addEventListener('DOMContentLoaded', function () { 
+    const quickSetupWrapper = document.getElementById('eael-onboard--wrapper');
+    const root = createRoot( quickSetupWrapper );
+    
+    root.render(
+      <StrictMode>
+        <App />
+      </StrictMode>
+    );
+});

@@ -31,7 +31,7 @@ const outputEntry = () => {
 		}
 	}, {});
 
-	glob.sync("./src/js/admin/quick-setup/*").reduce((acc, file) => {
+	glob.sync("./src/js/admin/quick-setup/quick-setup.js").reduce((acc, file) => {
 		let fileName = path.parse(file).name;
 
 		if (fileName.charAt(0) !== "_") {

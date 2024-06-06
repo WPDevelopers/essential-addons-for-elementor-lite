@@ -49,7 +49,7 @@ class WPDeveloper_Setup_Wizard {
 			wp_enqueue_script( 'sweetalert2-js', EAEL_PLUGIN_URL . 'assets/admin/vendor/sweetalert2/js/sweetalert2.min.js', array( 'jquery', 'sweetalert2-core-js' ), EAEL_PLUGIN_VERSION, true );
 			wp_enqueue_script( 'sweetalert2-core-js', EAEL_PLUGIN_URL . 'assets/admin/vendor/sweetalert2/js/core.js', array( 'jquery' ), EAEL_PLUGIN_VERSION, true );
 			wp_enqueue_script( 'essential_addons_elementor-setup-wizard-js', EAEL_PLUGIN_URL . 'assets/admin/js/admin.js', array( 'jquery' ), EAEL_PLUGIN_VERSION, true );
-			wp_enqueue_script( 'essential_addons_elementor-setup-wizard-react-js', EAEL_PLUGIN_URL . 'assets/admin/js/quick-setup.js', array( ), EAEL_PLUGIN_VERSION, true );
+			wp_enqueue_script( 'essential_addons_elementor-setup-wizard-react-js', EAEL_PLUGIN_URL . 'assets/admin/js/quick-setup/quick-setup.min.js', array( ), EAEL_PLUGIN_VERSION, true );
 			wp_localize_script( 'essential_addons_elementor-setup-wizard-js', 'localize', array(
 				'ajaxurl'       => esc_url( admin_url( 'admin-ajax.php' ) ),
 				'nonce'         => wp_create_nonce( 'essential-addons-elementor' ),
@@ -82,41 +82,41 @@ class WPDeveloper_Setup_Wizard {
 		?>
 
 		<section id="eael-onboard--wrapper" class="eael-onboard--wrapper">
-			<section class="eael-onboard-main-wrapper eael-quick-setup-wizard-wrapper">
+			<!-- <section class="eael-onboard-main-wrapper eael-quick-setup-wizard-wrapper">
 	            <form class="eael-setup-wizard-form eael-quick-setup-wizard-form" method="post">
 					<div class="eael-menu-items">
-						<?php $this->menu_items(); ?>
+						<?php //$this->menu_items(); ?>
 					</div>
 
 					<div class="eael-setup-content eael-getting-started-content">
-						<?php $this->getting_started_cotnent(); ?>
+						<?php //$this->getting_started_cotnent(); ?>
 					</div>
 
 					<div class="eael-setup-content eael-configuration-content eael-d-none">
-						<?php $this->configuration_cotnent(); ?>
+						<?php //$this->configuration_cotnent(); ?>
 					</div>
 
 					<div class="eael-setup-content eael-elements-content eael-d-none">
-						<?php $this->elements_content(); ?>
+						<?php //$this->elements_content(); ?>
 					</div>
 
 					<div class="eael-setup-content eael-go-pro-content eael-d-none">
-						<?php $this->go_pro_content(); ?>
+						<?php //$this->go_pro_content(); ?>
 					</div>
 
 					<div class="eael-setup-content eael-templately-content eael-d-none">
-						<?php $this->templately_content(); ?>
+						<?php //$this->templately_content(); ?>
 					</div>
 
 					<div class="eael-setup-content eael-integrations-content eael-d-none">
-						<?php $this->integrations_content(); ?>
+						<?php //$this->integrations_content(); ?>
 					</div>
 
 					<div class="eael-modal-content eael-d-none">
-						<?php $this->modal_content(); ?>
+						<?php //$this->modal_content(); ?>
 					</div>
 				</form>
-			</section>
+			</section> -->
 		</section>
 	
         <!-- <div class="eael-quick-setup-wizard-wrap"> -->
