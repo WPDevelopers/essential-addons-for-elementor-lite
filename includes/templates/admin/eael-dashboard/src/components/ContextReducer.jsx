@@ -70,11 +70,15 @@ function ContextReducer() {
                 return {...state, menu: payload};
             case 'ON_CHANGE_INTEGRATION':
                 params = {
-                    action: 'wpdeveloper_auto_active_even_not_installed',
+                    action: 'wpdeveloper_deactivate_plugin',
                     security: localize.nonce,
                     slug: eaData.integration_box.list[payload.key].slug,
                     basename: eaData.integration_box.list[payload.key].basename
                 };
+
+                if (payload.value) {
+                    params.action = 'wpdeveloper_auto_active_even_not_installed';
+                }
 
                 request = eaAjax(params, true);
                 request.onreadystatechange = () => {
