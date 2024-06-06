@@ -820,8 +820,8 @@ span.dark-icon {
 }
 .ea__section-overlay {
   position: absolute;
-  min-height: 140px;
-  background: linear-gradient(360deg, #FFFFFF 50%, rgba(255, 255, 255, 0) 100%);
+  min-height: 100px;
+  background: linear-gradient(360deg, #FFFFFF 68%, rgba(255, 255, 255, 0) 100%);
   bottom: 0;
   left: 16px;
   right: 16px;
@@ -1316,6 +1316,30 @@ section.ea__modal-wrapper {
   text-decoration: underline;
   margin-top: 6px;
 }
+
+.ea__modal-body .regenerated-wrapper {
+  width: 573px;
+}
+
+.ea__modal-body .regenerated-wrapper h4 {
+  margin-bottom: 16px;
+}
+
+.ea__modal-body .regenerated-wrapper p {
+  font-size: 16px;
+}
+
+.ea__modal-body .go-premium-wrapper {
+  width: 573px;
+}
+.ea__modal-body .go-premium-wrapper {
+  width: 573px;
+}
+
+#ea__dashboard--wrapper .ea__modal-footer button.upgrade-button {
+  width: auto;
+}
+
 .ea__modal-footer .ea__api-link {
   font-size: 14px;
   line-height: 1.2em;
@@ -1323,12 +1347,16 @@ section.ea__modal-wrapper {
   text-decoration: underline;
 }
 
+#ea__dashboard--wrapper .ea__modal-body .select-option-wrapper {
+  width: 573px;
+  position: relative;
+}
 
 #ea__dashboard--wrapper .ea__modal-body .form-select {
   color: var(--text-color-100);
   font-size: 14px;
   line-height: 1.5em;
-  width: 573px;
+  width: 100%;
   height: 44px;
   border: 1px solid #EAECF0;
   border-radius: 8px;
@@ -1851,14 +1879,15 @@ span.title-color-2 {
 }
 
 .ea__license-step-items:not(:last-child):before {
-  content: '\e90a';
-  font-family: 'ea-dash-icon';
   position: absolute;
-  bottom: -22px;
-  left: 20px;
-  margin-left: .5px;
-  color: #D0D5DD;
-  font-size: 8px;
+  bottom: 18px;
+  left: 22px;
+  width: 5px;
+  height: 5px;
+  border-style: solid;
+  border-width: 0 1px 1px 0;
+  border-color: #d0d5dd;
+  transform: rotate(45deg);
 }
 
 span.step-count {
@@ -1915,7 +1944,6 @@ input.input-api {
   padding-left: 54px;
   padding-right: 15px;
   flex: 1;
-  max-width: 416px;
 }
 
 input.input-api[disabled] {
@@ -2367,9 +2395,8 @@ input.input-api[disabled] {
   }
 
   .ea__license-step-items:not(:last-child):before {
-    bottom: -22px;
-    left: 18px;
-    font-size: 6px;
+    bottom: -14px;
+    left: 19px;
   }
 
   .ea__license-key {
@@ -2585,6 +2612,10 @@ input.input-api[disabled] {
 
   .ea__main-content-wrapper {
     flex-wrap: wrap;
+  }
+
+  .ea__main-content-wrapper > div {
+    flex: 1;
   }
 
   .ea__connect-others-wrapper {

@@ -10,7 +10,7 @@ function ModalStyleTwo() {
 
     return (
         <>
-            <h4 className="mb-4">{eaData.title}</h4>
+            <h4>{eaData.title}</h4>
             <div className="select-option-wrapper">
                 <select name={eaData.name} onChange={changeHandler} id="select-option" className="form-select">
                     <option value="all">All</option>
