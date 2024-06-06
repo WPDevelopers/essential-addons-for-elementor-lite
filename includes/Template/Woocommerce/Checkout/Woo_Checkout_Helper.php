@@ -256,12 +256,11 @@ trait Woo_Checkout_Helper {
 		}
 		?>
 		<div class="woo-checkout-coupon">
-			<div class="ea-coupon-icon">
-				<?php Icons_Manager::render_icon( $settings['ea_woo_checkout_coupon_icon'], [ 'aria-hidden' => 'true' ] ); ?>
-			</div>
-
-			<?php if( wc_coupons_enabled() ){ ?>
+			<?php if( wc_coupons_enabled() ) { ?>
                 <div class="woocommerce-form-coupon-toggle">
+					<div class="ea-coupon-icon">
+						<?php Icons_Manager::render_icon( $settings['ea_woo_checkout_coupon_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+					</div>
                     <?php wc_print_notice( apply_filters( 'woocommerce_checkout_coupon_message', $settings['ea_woo_checkout_coupon_title'] . ' <a href="#" class="showcoupon">' . $settings['ea_woo_checkout_coupon_link_text'] . '</a>' ), 'notice' ); ?>
                 </div>
 
@@ -302,10 +301,10 @@ trait Woo_Checkout_Helper {
         ob_start();
 		?>
         <div class="woo-checkout-login <?php echo $class; ?>">
-            <div class="ea-login-icon">
-				<?php Icons_Manager::render_icon( $settings['ea_woo_checkout_login_icon'], [ 'aria-hidden' => 'true' ] ); ?>
-            </div>
             <div class="woocommerce-form-login-toggle">
+				<div class="ea-login-icon">
+					<?php Icons_Manager::render_icon( $settings['ea_woo_checkout_login_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+				</div>
 				<?php wc_print_notice( apply_filters( 'woocommerce_checkout_login_message', $settings['ea_woo_checkout_login_title'] ) . ' <a href="#" class="showlogin">' . $settings['ea_woo_checkout_login_link_text'] . '</a>', 'notice' ); ?>
             </div>
 

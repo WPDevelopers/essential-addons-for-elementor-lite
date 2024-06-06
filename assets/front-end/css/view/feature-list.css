@@ -39,6 +39,22 @@
   margin: 0;
   padding: 0;
 }
+.elementor-widget-eael-feature-list .eael-feature-list-items.eael-feature-list-horizontal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: auto;
+}
+.elementor-widget-eael-feature-list .eael-feature-list-items.eael-feature-list-horizontal .eael-feature-list-item {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+}
+.elementor-widget-eael-feature-list .eael-feature-list-items.eael-feature-list-horizontal .eael-feature-list-title {
+  white-space: nowrap;
+}
 .elementor-widget-eael-feature-list .eael-feature-list-items .eael-feature-list-item {
   position: relative;
 }
@@ -135,13 +151,10 @@
 }
 .elementor-widget-eael-feature-list .eael-feature-list-items .eael-feature-list-item .eael-feature-list-content-box .eael-feature-list-title {
   margin-top: -2px;
-  line-height: 1.5em;
 }
 .elementor-widget-eael-feature-list .eael-feature-list-items .eael-feature-list-item .eael-feature-list-content-box .eael-feature-list-content {
   padding: 0;
   margin: 0;
-  font-size: 14px;
-  line-height: 1.5em;
 }
 .elementor-widget-eael-feature-list .eael-feature-list-items.stacked .eael-feature-list-icon-box .eael-feature-list-icon {
   color: #fff;

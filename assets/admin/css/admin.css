@@ -4018,6 +4018,46 @@ button.button__greyBg:hover:disabled {
     display: block !important;
 }
 
+.eael-p-0 {
+    padding: 0 !important;
+}
+
+.eael-pt-0 {
+    padding-top: 0 !important;
+}
+
+.eael-pb-0 {
+    padding-bottom: 0 !important;
+}
+
+.eael-pl-0 {
+    padding-left: 0 !important;
+}
+
+.eael-pr-0 {
+    padding-right: 0 !important;
+}
+
+.eael-m-0 {
+    margin: 0 !important;
+}
+
+.eael-mt-0 {
+    margin-top: 0 !important;
+}
+
+.eael-mb-0 {
+    margin-bottom: 0 !important;
+}
+
+.eael-ml-0 {
+    margin-left: 0 !important;
+}
+
+.eael-mr-0 {
+    margin-right: 0 !important;
+}
+
 .eael-element__wrap-popup {
     padding: 0 20px 0 10px;
 }
