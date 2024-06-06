@@ -14,7 +14,6 @@ function ModalRegenerateAssets() {
                         </div>
                     </div>
                 </div>
-
             </section>
         </>
     );

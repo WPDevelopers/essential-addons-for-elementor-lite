@@ -30,8 +30,8 @@ function App() {
                     {eaState.menu === 'Go Premium' ? <Premium/> : ''}
                 </section>
                 {eaState.modal === 'open' && <Modal/>}
-                {eaState.modal2 === 'open' && <ModalRegenerateAssets/>}
-                <ModalGoPremium/>
+                {eaState.modalRegenerateAssets === 'open' && <ModalRegenerateAssets/>}
+                {eaState.modalGoPremium === 'open' && <ModalGoPremium/>}
             </section>
         </>
     )
