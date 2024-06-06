@@ -304,7 +304,7 @@ class WpForms extends Widget_Base {
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form' => 'max-width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-contact-form' => 'max-width: {{SIZE}}{{UNIT}};width: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -1452,15 +1452,10 @@ class WpForms extends Widget_Base {
         if ($settings['custom_radio_checkbox'] == 'yes') {
             $this->add_render_attribute('contact-form', 'class', 'eael-custom-radio-checkbox');
         }
-        if ($settings['eael_contact_form_alignment'] == 'left') {
-            $this->add_render_attribute('contact-form', 'class', 'eael-contact-form-align-left');
-        } elseif ($settings['eael_contact_form_alignment'] == 'center') {
-            $this->add_render_attribute('contact-form', 'class', 'eael-contact-form-align-center');
-        } elseif ($settings['eael_contact_form_alignment'] == 'right') {
-            $this->add_render_attribute('contact-form', 'class', 'eael-contact-form-align-right');
-        } else {
-            $this->add_render_attribute('contact-form', 'class', 'eael-contact-form-align-default');
-        }
+
+        $alignment = '' !== $settings['eael_contact_form_alignment'] ? $settings['eael_contact_form_alignment'] : 'default';
+
+        $this->add_render_attribute('contact-form', 'class', 'eael-contact-form-align-' . $alignment );
 
         if (!empty($settings['contact_form_list'])) { ?>
             <div <?php echo $this->get_render_attribute_string('contact-form'); ?>>

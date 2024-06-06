@@ -219,7 +219,7 @@ trait Twitter_Feed
                             $html .= '<span class="eael-twitter-feed-item-author">' . esc_html( $user_name_full ) . '</span>
                         </a>';
 
-                        if ($settings['eael_twitter_feed_show_date'] == 'true') {
+                        if ( $settings['eael_twitter_feed_show_date'] == 'true' && isset( $item['created_at'] )) {
                             $html .= '<span class="eael-twitter-feed-item-date">' . sprintf(__('%s ago', 'essential-addons-for-elementor-lite'), human_time_diff(strtotime($item['created_at']))) . '</span>';
                         }
                     $html .= '</div>

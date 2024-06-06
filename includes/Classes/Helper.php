@@ -1056,8 +1056,8 @@ class Helper
 	 * eael_allowed_tags
 	 * @return array
 	 */
-	public static function eael_allowed_tags() {
-		return apply_filters( 'eael_allowed_tags', [
+	public static function eael_allowed_tags( $extra = [] ) {
+		$allowed_tags = [
 			'a'       => [
 				'href'   => [],
 				'title'  => [],
@@ -1313,7 +1313,13 @@ class Helper
 				'height' => [],
 				'src'    => []
 			]
-		] );
+		];
+
+		if ( count( $extra ) > 0 ) {
+			$allowed_tags = array_merge_recursive( $allowed_tags, $extra );
+		}
+
+		return apply_filters( 'eael_allowed_tags', $allowed_tags );
 	}
 
     /**

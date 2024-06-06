@@ -3165,7 +3165,7 @@ class Event_Calendar extends Widget_Base
 					$row_style .= "color:{$event['textColor']};";
 				}
 
-				$row_style = $row_style !== '' ? "style={" . esc_attr( $row_style ) . "}" : '';
+				$row_style = $row_style !== '' ? 'style="' . esc_attr( $row_style ) . '" ' : '';
 
 				$item_count ++;
 				echo '<tr ' . $style . ' >';
@@ -3180,7 +3180,7 @@ class Event_Calendar extends Widget_Base
 	                    $event['title'] = '<a ' . $this->get_render_attribute_string( 'eael_event_link_'.$item_count ) . ' >' . $event['title'] . '</a>';
                     }
 
-					echo '<td class="eael-ec-event-title" ' . esc_attr( $row_style ) . '>' . Helper::eael_wp_kses( $event['title'] ) . '</td>';
+					echo '<td class="eael-ec-event-title" ' . $row_style . '>' . Helper::eael_wp_kses( $event['title'] ) . '</td>';
 				}
 				if ( $settings['eael_ec_show_description'] === 'yes' ) {
 					$link = '';
@@ -3190,7 +3190,7 @@ class Event_Calendar extends Widget_Base
 					$see_more = sprintf( " <a %s class='eael-see-more'>%s</a>", $link, Helper::eael_wp_kses( $settings['eael_ec_desc_see_more'] ) );
 					$event_description = wp_trim_words( $event['description'], $settings['eael_ec_description_limit'], $see_more );
 
-					echo '<td class="eael-ec-event-description" ' . esc_attr( $row_style ) . '>' . Helper::eael_wp_kses( $event_description ) . '</td>';
+					echo '<td class="eael-ec-event-description" ' . $row_style . '>' . Helper::eael_wp_kses( $event_description ) . '</td>';
 				}
 				if ( $settings['eael_ec_show_date'] === 'yes' ) {
 					$start_timezone = isset( $event['start_timezone'] ) && '' !== $event['start_timezone'] ? new \DateTimeZone( $event['start_timezone'] ) : '';
@@ -3216,7 +3216,7 @@ class Event_Calendar extends Widget_Base
 
 					$separator = $end ? $settings['eael_ec_date_to_date_separator'] : '';
 					$date      = sprintf( '<span class="hide">%s</span> %s %s %s', strtotime( $event['start'] ), $start, $separator, $end );
-					echo '<td class="eael-ec-event-date" ' . esc_attr( $row_style ) . '>' . Helper::eael_wp_kses( $date ) . '</td>';
+					echo '<td class="eael-ec-event-date" ' . $row_style . '>' . Helper::eael_wp_kses( $date ) . '</td>';
 				}
 				echo "</tr>";
 			}

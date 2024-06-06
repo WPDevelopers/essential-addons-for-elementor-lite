@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 5.9.22
+Stable tag: 5.9.23
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -296,6 +296,28 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.9.23 - 05/06/2024 =
+
+- Improved: Security Enhancement
+- Improved: EA Login/Register Form | Added Score Threshold option for reCAPTCHA & option to remove the branding
+- Improved: EA Woo product Grid | Added option to filter by tags
+- Improved: EA Login/Register Form | Added support for register_form action hook
+- Improved: EA Login/Register Form | Added field for honeypot
+- Improved: EA Interactive Circle | Added option to rotate the Interactive Circle around the middle and pause on hover
+- Improved: EA Feature List | Added Horizontal layout option
+- Improved: EA Filterable Gallery | Added support for vertical 9:16 video
+- Fixed: EA Simple Menu | Using a hash link (#) on a sub-menu item within a hamburger menu will not open the dropdown item on mobile/tablet view
+- Fixed: EA Woo Product Grid | Not working properly with WordPress and WooCommerce Filter
+- Fixed: EA Filterable Gallery | Image Tag being changed from <a> tag to <img> tag after Version 5.9.15
+- Fixed: EA Advanced Data Table | Header text reverting to Black if the Sort option in the advanced Features is turned off
+- Fixed: EA Post Grid | Conflict with Ultimate Member plugin
+- Fixed: EA Post Grid | On Style 3 Terms on Hover is not showing after clicking on the Load More button
+- Fixed: EA WP Forms | EA WP Forms Widget Width Restriction in Latest Update
+- Fixed: EA Woo Product Gallery | Error in code — data-template and data-terms attributes
+- Fixed: EA Woo Product Grid | "Out of stock" badge showing on top of "Sale" badge
+- Fixed: EA Login/Register Form | Spinner is not visible on the front-end
+- Few minor bug fixes & improvements
 
 = 5.9.22 - 22/05/2024 =
 

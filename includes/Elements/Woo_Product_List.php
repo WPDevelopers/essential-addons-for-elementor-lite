@@ -18,6 +18,7 @@ use Elementor\Widget_Base;
 use Essential_Addons_Elementor\Classes\Helper as ClassesHelper;
 use Essential_Addons_Elementor\Traits\Helper;
 
+#[\AllowDynamicProperties]
 class Woo_Product_List extends Widget_Base
 {
     use Helper;
