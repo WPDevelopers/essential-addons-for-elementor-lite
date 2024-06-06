@@ -1879,6 +1879,7 @@ span.title-color-2 {
 }
 
 .ea__license-step-items:not(:last-child):before {
+  content: '';
   position: absolute;
   bottom: 18px;
   left: 22px;
