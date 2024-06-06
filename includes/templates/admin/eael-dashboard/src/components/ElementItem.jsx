@@ -11,6 +11,9 @@ function ElementItem(props) {
         },
         clickHandler = () => {
             eaDispatch({type: 'OPEN_MODAL', payload: {key: eaData.setting.id, title: eaData.title}});
+        },
+        goProModal = () => {
+            eaDispatch({type: 'GO_PRO_MODAL'});
         };
 
     return (
@@ -18,9 +21,8 @@ function ElementItem(props) {
             <div className="ea__content-items">
                 <div className="ea__content-head">
                     <h5 className="toggle-label">{eaData.title}</h5>
-                    <label className="toggle-wrap">
-                        <input type="checkbox" checked={checked} disabled={isDisabled}
-                               onChange={changeHandler}/>
+                    <label className="toggle-wrap" onClick={eaData.is_pro && !isProActivated ? goProModal : undefined}>
+                        <input type="checkbox" checked={checked} disabled={isDisabled} onChange={changeHandler}/>
                         <span className={eaData.is_pro && !isProActivated ? 'slider pro' : 'slider'}></span>
                     </label>
                 </div>

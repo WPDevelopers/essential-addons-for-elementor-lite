@@ -188,10 +188,12 @@ function ContextReducer() {
                 }
 
                 return {...state, otp, licenseError, errorMessage};
+            case 'GO_PRO_MODAL':
+                return {...state, modalGoPremium: 'open'}
             case 'OPEN_MODAL':
                 return {...state, modal: 'open', modalID: payload.key, modalTitle: payload.title}
             case 'CLOSE_MODAL':
-                return {...state, modal: 'close'}
+                return {...state, modal: 'close', modalGoPremium: 'close', modalRegenerateAssets: 'close'}
             case 'MODAL_ACCORDION':
                 return {...state, modalAccordion: payload.key}
             case 'MODAL_ON_CHANGE':

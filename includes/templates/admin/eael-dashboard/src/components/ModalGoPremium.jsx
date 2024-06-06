@@ -1,5 +1,11 @@
+import consumer from "../context";
+
 function ModalGoPremium() {
-    const eaData = localize.eael_dashboard;
+    const eaData = localize.eael_dashboard,
+        {eaDispatch} = consumer(),
+        clickHandler = () => {
+            eaDispatch({type: 'CLOSE_MODAL'});
+        };
 
     return (
         <>
@@ -24,7 +30,7 @@ function ModalGoPremium() {
                             </button>
                         </a>
                     </div>
-                    <div className="ea__modal-close-btn">
+                    <div className="ea__modal-close-btn" onClick={clickHandler}>
                         <i className="ea-dash-icon ea-close"></i>
                     </div>
                 </div>

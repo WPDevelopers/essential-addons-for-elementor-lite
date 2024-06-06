@@ -8,7 +8,7 @@ function Modal() {
     const {eaState, eaDispatch} = consumer(),
         formRef = useRef(),
         clickHandler = () => {
-            eaDispatch({type: 'CLOSE_MODAL', payload: {key: '', value: ''}});
+            eaDispatch({type: 'CLOSE_MODAL'});
         },
         submitHandler = (e) => {
             e.preventDefault();
@@ -39,8 +39,8 @@ function Modal() {
                     </div>
                     <div className="ea__modal-footer flex items-center">
                         {eaState.modalID === 'loginRegisterSetting' &&
-                        <a className="ea__api-link"
-                           href={eaData[eaState.modalID].link.url}>{eaData[eaState.modalID].link.text}</a>}
+                            <a className="ea__api-link"
+                               href={eaData[eaState.modalID].link.url}>{eaData[eaState.modalID].link.text}</a>}
                         <div className='flex flex-end flex-1'>
                             <button className="ea__modal-btn">Save</button>
                         </div>
