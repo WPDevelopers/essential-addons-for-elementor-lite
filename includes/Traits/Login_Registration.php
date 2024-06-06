@@ -37,8 +37,10 @@ trait Login_Registration {
 
 	public static $recaptcha_v3_default_action = 'eael_login_register_form';
 
-	public static function get_recaptcha_threshold() {
-		return apply_filters( 'eael_recaptcha_threshold', 0.5 );
+	public static function get_recaptcha_threshold( $settings = [] ) {
+		$score_threshold = isset( $settings['login_register_recaptcha_v3_score_threshold']['size'] ) ? floatval( $settings['login_register_recaptcha_v3_score_threshold']['size'] ) : 0.5;
+		$score_threshold = $score_threshold >= 0 && $score_threshold <= 1 ? $score_threshold : 0.5;
+		return apply_filters( 'eael_recaptcha_threshold', $score_threshold );
 	}
 
 	public function login_or_register_user() {
@@ -139,7 +141,7 @@ trait Login_Registration {
 		if ( $is_version_2 || $is_version_3 ) {
 			$ld_recaptcha_version = $is_version_3 ? 'v3' : 'v2';
 			
-			if( ! $this->lr_validate_recaptcha($ld_recaptcha_version) ) {
+			if( ! $this->lr_validate_recaptcha( $ld_recaptcha_version, $settings ) ) {
 				$err_msg = isset( $settings['err_recaptcha'] ) ? Helper::eael_wp_kses( $settings['err_recaptcha'] ) : __( 'You did not pass recaptcha challenge.', 'essential-addons-for-elementor-lite' );
 				if ( $ajax ) {
 					wp_send_json_error( $err_msg );
@@ -346,6 +348,14 @@ trait Login_Registration {
 						$errors['eael_phone_number'] = isset( $settings['err_phone_number_missing'] ) ? $settings['err_phone_number_missing'] : __( 'Phone number is required', 'essential-addons-for-elementor-lite' );
 					}
 				}
+				
+				if( isset( $register_field['field_type'] ) && 'honeypot' === $register_field['field_type']	){
+					$honeypot_name  = 'eaelhoneyp' . esc_attr( $widget_id );
+					$honeypot_value = sanitize_text_field( $_POST[ esc_attr( $honeypot_name ) ] );
+					if ( ! empty( $honeypot_value ) ) {
+						$errors[ $register_field['field_type'] ] = __( 'Sorry, you are not allowed to submit this form!', 'essential-addons-for-elementor-lite' );
+					}
+				}
 
 				if( isset( $register_field['field_type'] ) && in_array( $register_field['field_type'], $eael_custom_profile_fields_image_keys )	){
 
@@ -409,7 +419,7 @@ trait Login_Registration {
 		if ( $is_version_2 || $is_version_3 ) {
 			$ld_recaptcha_version = $is_version_3 ? 'v3' : 'v2';
 			
-			if( ! $this->lr_validate_recaptcha($ld_recaptcha_version) ) {
+			if( ! $this->lr_validate_recaptcha( $ld_recaptcha_version, $settings ) ) {
 				$errors['recaptcha'] = isset( $settings['err_recaptcha'] ) ? Helper::eael_wp_kses( $settings['err_recaptcha'] ) : __( 'You did not pass recaptcha challenge.', 'essential-addons-for-elementor-lite' );
 			}
 		}
@@ -1505,7 +1515,7 @@ trait Login_Registration {
 		return preg_replace( $placeholders, $replacement, $text );
 	}
 
-	public function lr_validate_recaptcha($version = 'v2') {
+	public function lr_validate_recaptcha( $version = 'v2', $settings = [] ) {
 		if ( ! isset( $_REQUEST['g-recaptcha-response'] ) ) {
 			return false;
 		}
@@ -1521,7 +1531,7 @@ trait Login_Registration {
 			if('v3' === $version ) {
 				$action = self::$recaptcha_v3_default_action;
 				$action_ok = ! isset( $res['action'] ) ? true : $action === $res['action'];
-				return $action_ok && isset( $res['score'] ) && ( $res['score'] > self::get_recaptcha_threshold() );
+				return $action_ok && isset( $res['score'] ) && ( $res['score'] > self::get_recaptcha_threshold( $settings ) );
 			}else {
 				return $res['success'];				
 			}

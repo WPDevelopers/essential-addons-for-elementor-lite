@@ -459,9 +459,9 @@ class Advanced_Data_Table extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#444444',
                 'selectors' => [
-                    '{{WRAPPER}} .ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th:before' => 'border-bottom-color: {{VALUE}};',
-                    '{{WRAPPER}} .ea-advanced-data-table-wrap .ea-advanced-data-table.ea-advanced-data-table-sortable th:after' => 'border-top-color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-wrap .ea-advanced-data-table th' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-wrap .ea-advanced-data-table th:before' => 'border-bottom-color: {{VALUE}};',
+                    '{{WRAPPER}} .ea-advanced-data-table-wrap .ea-advanced-data-table th:after' => 'border-top-color: {{VALUE}};',
                 ],
             ]
         );
