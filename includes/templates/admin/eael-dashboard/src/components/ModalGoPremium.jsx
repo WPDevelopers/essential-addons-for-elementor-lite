@@ -17,11 +17,12 @@ function ModalGoPremium() {
                         </div>
                     </div>
                     <div className="ea__modal-footer flex items-center">
-                        <div className='flex flex-end flex-1'>
+                        <a href="#" className='flex justify-center flex-1'>
                             <button className="upgrade-button">
-                                <i className="ea-dash-icon ea-crown-1"></i>Upgrade to PRO
+                                <i className="ea-dash-icon ea-crown-1"></i>
+                                Upgrade to PRO
                             </button>
-                        </div>
+                        </a>
                     </div>
                     <div className="ea__modal-close-btn">
                         <i className="ea-dash-icon ea-close"></i>
