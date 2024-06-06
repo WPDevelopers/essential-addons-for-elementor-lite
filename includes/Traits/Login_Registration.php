@@ -1611,7 +1611,7 @@ trait Login_Registration {
 				<th><label for="<?php echo esc_attr( $eael_custom_profile_field_image_key ); ?>"><?php _e( esc_html( $eael_custom_profile_field_value ) ); ?></label></th>
 				<td>
 					<input type="text" name="<?php echo esc_attr( $eael_custom_profile_field_image_key ); ?>" id="<?php echo esc_attr( $eael_custom_profile_field_image_key ); ?>" value="<?php echo esc_attr( $user_meta_attachment_id ); ?>" class="regular-text" /><br />
-					<p class="description"><?php printf( __( "Above, input the %s of the attachment.", 'essential-addons-for-elementor-lite'), esc_html( 'ID', 'essential-addons-for-elementor-lite' )); ?></p>
+					<p class="description"><?php printf( __( "Above, input the %s of the attachment.", 'essential-addons-for-elementor-lite'), esc_html__( 'ID', 'essential-addons-for-elementor-lite' )); ?></p>
 					<?php
 					if( ! empty( $user_meta_attachment_id ) ){
 						echo Helper::eael_wp_kses( wp_get_attachment_image($user_meta_attachment_id, 'thumbnail', 1) );
