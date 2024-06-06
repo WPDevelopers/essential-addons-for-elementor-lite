@@ -917,7 +917,6 @@ span.dark-icon {
   cursor: pointer;
   transition: all .30s ease-in-out;
 }
-
 .ea__icon-wrapper i:hover span.ea__tooltip {
   opacity: 1;
 }
@@ -1498,6 +1497,21 @@ section.ea__modal-wrapper {
   line-height: 1.5em;
 }
 
+.ea__according-title h4 i:hover span.ea__tooltip {
+  opacity: 1;
+}
+.ea__according-title h4 i {
+  position: relative;
+  transition: all .35s ease-in-out;
+}
+.ea__according-title h4 i span.ea__tooltip {
+  width: 340px;
+  top: -54px;
+}
+.ea__according-title h4 i span.ea__tooltip:after {
+  top: 44px;
+}
+
 /*-------- Onboard ------------*/
 
 #ea__onboard--wrapper {
@@ -1910,6 +1924,9 @@ span.step-count {
 }
 
 .step-details-ex {
+  color: #750EF4;
+}
+.step-details-ex:hover {
   color: #750EF4;
 }
 
