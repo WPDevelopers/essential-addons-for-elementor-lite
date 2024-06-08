@@ -226,10 +226,10 @@ function ContextReducer() {
                 response = eaAjax(params);
 
                 if (response?.success) {
-                    return {...state, modal: 'close'};
+                    return {...state, modal: 'close', modalRegenerateAssets: 'open'};
                 }
 
-                return {...state, modalRegenerateAssets: 'open'};
+                return {...state};
             case 'SAVE_ELEMENTS_DATA':
                 params = {
                     action: 'save_settings_with_ajax',
