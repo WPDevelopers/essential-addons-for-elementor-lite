@@ -541,9 +541,9 @@ class Content_Ticker extends Widget_Base
                 ],
                 'size_units' => ['px'],
                 'selectors'  => [
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev'         => 'font-size: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next img, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next svg, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; line-height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next, {{WRAPPER}} .eael-ticker .swiper-button-prev'         => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next img, {{WRAPPER}} .eael-ticker .swiper-button-prev img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next svg, {{WRAPPER}} .eael-ticker .swiper-button-prev svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; line-height: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -562,7 +562,7 @@ class Content_Ticker extends Widget_Base
                 ],
                 'size_units' => ['px'],
                 'selectors'  => [
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'right: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-prev' => 'right: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -580,8 +580,12 @@ class Content_Ticker extends Widget_Base
                     ],
                 ],
                 'size_units' => ['px'],
+                'default' => [
+					'unit' => 'px',
+					'size' => 0,
+				],
                 'selectors'  => [
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next' => 'right: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next' => 'right: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -602,7 +606,7 @@ class Content_Ticker extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next, {{WRAPPER}} .eael-ticker .swiper-button-prev' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -614,8 +618,8 @@ class Content_Ticker extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next svg, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev svg' => 'fill: {{VALUE}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next, {{WRAPPER}} .eael-ticker .swiper-button-prev' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next svg, {{WRAPPER}} .eael-ticker .swiper-button-prev svg' => 'fill: {{VALUE}};',
                 ],
             ]
         );
@@ -627,7 +631,7 @@ class Content_Ticker extends Widget_Base
                 'label'       => __('Border', 'essential-addons-for-elementor-lite'),
                 'placeholder' => '1px',
                 'default'     => '1px',
-                'selector'    => '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev',
+                'selector'    => '{{WRAPPER}} .eael-ticker .swiper-button-next, {{WRAPPER}} .eael-ticker .swiper-button-prev',
             ]
         );
 
@@ -638,7 +642,7 @@ class Content_Ticker extends Widget_Base
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors'  => [
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next, {{WRAPPER}} .eael-ticker .swiper-button-prev' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -659,7 +663,7 @@ class Content_Ticker extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next:hover, {{WRAPPER}} .eael-ticker .swiper-button-prev:hover' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -671,8 +675,8 @@ class Content_Ticker extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover svg, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover svg' => 'fill: {{VALUE}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next:hover, {{WRAPPER}} .eael-ticker .swiper-button-prev:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next:hover svg, {{WRAPPER}} .eael-ticker .swiper-button-prev:hover svg' => 'fill: {{VALUE}};',
                 ],
             ]
         );
@@ -684,7 +688,7 @@ class Content_Ticker extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover' => 'border-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next:hover, {{WRAPPER}} .eael-ticker .swiper-button-prev:hover' => 'border-color: {{VALUE}};',
                 ],
             ]
         );
@@ -700,7 +704,7 @@ class Content_Ticker extends Widget_Base
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors'  => [
-                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-ticker .swiper-button-next, {{WRAPPER}} .eael-ticker .swiper-button-prev' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'separator'  => 'before',
             ]
@@ -715,9 +719,17 @@ class Content_Ticker extends Widget_Base
         $settings = Helper::fix_old_query($settings);
         $args = Helper::get_query_args($settings);
 
-        $this->add_render_attribute('content-ticker-wrap', 'class', 'swiper-container-wrap eael-ticker');
+        //Supported New SwiperJS version
+        $swiper_class = $swiper_version_class = '';
+        if ( class_exists( 'Elementor\Plugin' ) ) {
+            $swiper_class           = \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_swiper_latest' ) ? 'swiper' : 'swiper-container';
+            $swiper_version_class   = 'swiper' === $swiper_class ? 'swiper-8' : 'swiper-8-lower';
+        }
 
-        $this->add_render_attribute('content-ticker', 'class', 'swiper-container eael-content-ticker');
+        $this->add_render_attribute('content-ticker-wrap', 'class', 'eael-ticker');
+        $this->add_render_attribute('content-ticker', 'class', esc_attr( $swiper_class ) );
+        $this->add_render_attribute('content-ticker', 'class', esc_attr( $swiper_version_class ) );
+        $this->add_render_attribute('content-ticker', 'class', 'eael-content-ticker');
         $this->add_render_attribute('content-ticker', 'class', 'swiper-container-' . esc_attr($this->get_id()));
         $this->add_render_attribute('content-ticker', 'data-pagination', '.swiper-pagination-' . esc_attr($this->get_id()));
         $this->add_render_attribute('content-ticker', 'data-arrow-next', '.swiper-button-next-' . esc_attr($this->get_id()));
@@ -757,7 +769,7 @@ class Content_Ticker extends Widget_Base
             $this->add_render_attribute('content-ticker', 'data-arrows', '1');
         }
         
-        echo '<div class="eael-ticker-wrap" id="eael-ticker-wrap-' . $this->get_id() . '">';
+        echo '<div class="eael-ticker-wrap" id="eael-ticker-wrap-' . esc_attr( $this->get_id() ) . '">';
         if (!empty($settings['eael_ticker_tag_text'])) {
             echo '<div class="ticker-badge">
                     <span>' . Helper::eael_wp_kses($settings['eael_ticker_tag_text']) . '</span>
@@ -817,7 +829,7 @@ class Content_Ticker extends Widget_Base
 
             $html = '<div class="content-ticker-pagination">';
 
-            $html .= '<div class="swiper-button-next swiper-button-next-' . $this->get_id() . '">';
+            $html .= '<div class="swiper-button-next swiper-button-next-' . esc_attr( $this->get_id() ) . '">';
             if (isset($arrow['url'])) {
                 $html .= '<img src="' . esc_url($arrow['url']) . '" alt="' . esc_attr(get_post_meta($arrow['id'], '_wp_attachment_image_alt', true)) . '" />';
             } else {
@@ -825,7 +837,7 @@ class Content_Ticker extends Widget_Base
             }
             $html .= '</div>';
 
-            $html .= '<div class="swiper-button-prev swiper-button-prev-' . $this->get_id() . '">';
+            $html .= '<div class="swiper-button-prev swiper-button-prev-' . esc_attr( $this->get_id() ) . '">';
             if (isset($settings['prev_arrow']['value']['url'])) {
                 $html .= '<img src="' . esc_url($settings['prev_arrow']['value']['url']) . '" alt="' . esc_attr(get_post_meta($settings['prev_arrow']['value']['id'], '_wp_attachment_image_alt', true)) . '" />';
             } else {

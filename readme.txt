@@ -2,9 +2,9 @@
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk, himadree12
 Tags: elementor, elements, addons, elementor addons, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
 Requires at least: 5.0
-Tested up to: 6.4
+Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 5.9.11
+Stable tag: 5.9.23
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -297,31 +297,66 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 5.9.11 - 13/03/2024 =
+= 5.9.23 - 05/06/2024 =
 
-- Fixed: EA Woo Checkout | Undefined array key "class"
-- Fixed: Fatal Error | Class "Essential_Addons_ElementorClassesBootstrap" not found
-- Fixed: Conflict with Fluent Form | ff-hidden CSS class not working as expected
-- Fixed: EA Gravity Forms | Conflict with orbital theme layout
-- Fixed: EA Interactive Circle | Elementor Nav Menu is not working
-- Fixed: EA Advanced Accordion | Anchor tags inside accordions not working properly
-- Fixed: EA Woo Product Grid | Active Woo Product Grid disables product selection in store when JetMenu is enabled
-- Fixed: EA Advanced Data Table | Export is downloading empty csv file
-- Fixed: EA Event Calendar | List view shows previous date first for some time
-- Fixed: EA Advanced Data Table | CSV file import shows " " sign
-- Improved: EA Call to Action | Background image styling option
-- Improved: EA Advanced Tabs | Clicking on the tab takes the user to the top of the content
-- Improved: EA Filterable Gallery | Added RTL support
-- Improved: EA Post Grid | Added RTL support
-- Improved: EA Woo Product Carousel | Option to hide and show add to cart button
-- Improved: Accessibility Support
+- Improved: Security Enhancement
+- Improved: EA Login/Register Form | Added Score Threshold option for reCAPTCHA & option to remove the branding
+- Improved: EA Woo product Grid | Added option to filter by tags
+- Improved: EA Login/Register Form | Added support for register_form action hook
+- Improved: EA Login/Register Form | Added field for honeypot
+- Improved: EA Interactive Circle | Added option to rotate the Interactive Circle around the middle and pause on hover
+- Improved: EA Feature List | Added Horizontal layout option
+- Improved: EA Filterable Gallery | Added support for vertical 9:16 video
+- Fixed: EA Simple Menu | Using a hash link (#) on a sub-menu item within a hamburger menu will not open the dropdown item on mobile/tablet view
+- Fixed: EA Woo Product Grid | Not working properly with WordPress and WooCommerce Filter
+- Fixed: EA Filterable Gallery | Image Tag being changed from <a> tag to <img> tag after Version 5.9.15
+- Fixed: EA Advanced Data Table | Header text reverting to Black if the Sort option in the advanced Features is turned off
+- Fixed: EA Post Grid | Conflict with Ultimate Member plugin
+- Fixed: EA Post Grid | On Style 3 Terms on Hover is not showing after clicking on the Load More button
+- Fixed: EA WP Forms | EA WP Forms Widget Width Restriction in Latest Update
+- Fixed: EA Woo Product Gallery | Error in code — data-template and data-terms attributes
+- Fixed: EA Woo Product Grid | "Out of stock" badge showing on top of "Sale" badge
+- Fixed: EA Login/Register Form | Spinner is not visible on the front-end
 - Few minor bug fixes & improvements
 
+= 5.9.22 - 22/05/2024 =
 
-= 5.9.10 - 19/02/2024 =
-
-- Fixed: EA Post Grid | Show post terms not showing from Tags
 - Improved: Security Enhancement
+- Few minor bug fixes & improvements
+
+= 5.9.21 - 13/05/2024 =
+
+- Revamped: NFT Gallery | OpenSea API version
+- Fixed: Filterable Gallery | iframe not working issue
+- Improved: Security Enhancement
+- Few minor bug fixes & improvements
+
+= 5.9.20 - 08/05/2024 =
+
+- Improved: Security Enhancement
+- Few minor bug fixes & improvements
+
+= 5.9.19 - 05/05/2024 =
+
+- Fixed: EA Sticky Video | Conflicts with the Blocksy theme
+- Fixed: EA Login Register Form | Validation message doesn't show up while using the form in the popup
+- Fixed: EA Login Register Form | Showing error message for not required field
+- Fixed: EA Simple Menu | Dropdown icon is not showing on the desktop mode
+- Fixed: EA Tooltip | Displaying the content after the hover is complete
+- Fixed: EA Feature list | Icons don't show when the shape view is set to Framed
+- Fixed: EA Contact Form 7 | Alignment of the container, title & description is not working
+- Fixed: EA Advanced Accordion | Conflicts with the Specia Standard theme
+- Fixed: EA Advanced Data Table | Checkbox is not showing when using TablePress
+- Fixed: EA Advanced Tabs| Switching tabs causes the page to scroll up or down
+- Fixed: EA Woo Checkout | 'User Account' & 'Coupon Percentage' icons are broken on checkout page
+- Fixed: EA Advanced Data Table | Data sorting icons' colors don't change while using table as a template
+- Fixed: EA Simple Menu | Menu item doesn't activate when scrolling the page
+- Fixed: EA Advanced Data Table | Clearing the search values, all table contents appear when the rows per page is left blank
+- Fixed: EA Woo Product Carousel | 'Add to Cart' button disappears from default shop page if EA Woo Carousel widget is present on the same page
+- Improved: EA Event Calendar | Date format change option for week view
+- Improved: EA Advanced Accordion | Stop auto-scrolling while anchoring tab
+- Improved: EA Login Register Form | File max size description
+- Improved: EA Facebook Feed | Graph API Upgrade
 - Few minor bug fixes & improvements
 
 [See changelog for all versions](https://essential-addons.com/changelog).

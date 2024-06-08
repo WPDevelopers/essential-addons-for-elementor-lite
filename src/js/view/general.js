@@ -122,6 +122,26 @@ jQuery(window).on("elementor/frontend/init", function () {
 			});
 		}
 	}
+	ea.sanitizeURL = function (url) {
+		if (url.startsWith('/') || url.startsWith('#')) {
+			return url;
+		}
+
+		try {
+			const urlObject = new URL(url);
+
+			// Check if the protocol is valid (allowing only 'http' and 'https')
+			if (!['http:', 'https:', 'ftp:', 'ftps:', 'mailto:', 'news:', 'irc:', 'irc6:', 'ircs:', 'gopher:', 'nntp:', 'feed:', 'telnet:', 'mms:', 'rtsp:', 'sms:', 'svn:', 'tel:', 'fax:', 'xmpp:', 'webcal:', 'urn:'].includes(urlObject.protocol)) {
+				throw new Error('Invalid protocol');
+			}
+
+			// If all checks pass, return the sanitized URL
+			return urlObject.toString();
+		} catch (error) {
+			console.error('Error sanitizing URL:', error.message);
+			return '#';
+		}
+	}
 
 	//Add hashchange code form advanced-accordion
 	let  isTriggerOnHashchange = true;
@@ -157,20 +177,32 @@ jQuery(window).on("elementor/frontend/init", function () {
 
 		// we will try and catch the error but not show anything just do it if possible
 		try {
-			if (isStartWithHash && ($(hashURL).hasClass('eael-tab-item-trigger') || $(hashURL).hasClass('eael-accordion-header'))) {
-				$(hashURL).trigger('click');
-
-				if (typeof hashURL !== 'undefined' && hashURL) {
-					let idOffset = $(hashURL).closest('.eael-advance-tabs').data('custom-id-offset');
-					idOffset = idOffset ? parseFloat(idOffset) : 0;
-					$('html, body').animate({
-						scrollTop: $(hashURL).offset().top - idOffset,
-					}, 300);
+			if( hashURL.startsWith( '#!' ) ){
+				var replace_with_hash = hashURL.replace( '#!', '#' );
+				$( replace_with_hash ).trigger( 'click' );
+			} else {
+				if (isStartWithHash && ($(hashURL).hasClass('eael-tab-item-trigger') || $(hashURL).hasClass('eael-accordion-header'))) {
+					$(hashURL).trigger('click');
+	
+					if (typeof hashURL !== 'undefined' && hashURL) {
+						let tabs = $(hashURL).closest('.eael-advance-tabs');
+						if( tabs.length > 0 ){
+							let idOffset = tab.data('custom-id-offset');
+							idOffset = idOffset ? parseFloat(idOffset) : 0;
+							$('html, body').animate({
+								scrollTop: $(hashURL).offset().top - idOffset,
+							}, 300);
+						}
+					}
 				}
 			}
 		} catch (err) {
 			// nothing to do
 		}
+	});
+
+	$(document).on('click', '.e-n-tab-title', function () {
+		window.dispatchEvent(new Event('resize'));
 	});
 })(jQuery);
 
