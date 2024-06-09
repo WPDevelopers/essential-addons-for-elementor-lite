@@ -173,7 +173,12 @@ const QuickView = {
 	},
 }
 
-if (!ea.elementStatusCheck('eaelQuickView')) {
+//This is only for YITH WooCommerce Ajax Product Filter
+jQuery( document ).on( 'click', '.yith-wcan-filters', function() {
+    window.forceFullyRun = true;
+} );
+
+if (!ea.elementStatusCheck('eaelQuickView') || window.forceFullyRun !== undefined ) {
 	ea.hooks.addAction('quickViewAddMarkup', 'ea', QuickView.quickViewAddMarkup, 10);
 	ea.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.openPopup, 10);
 	ea.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.closePopup, 10);

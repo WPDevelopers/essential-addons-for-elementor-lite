@@ -3330,9 +3330,9 @@ class Product_Grid extends Widget_Base
                         $isotope_products.isotope('layout');
                     })
 
-                    $(window).on('resize', function() {
-                        $isotope_products.isotope('layout');
-                    });
+                    // $(window).on('resize', function() {
+                    //     $isotope_products.isotope('layout');
+                    // });
                 }
             });
         </script>
