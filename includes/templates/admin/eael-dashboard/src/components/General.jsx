@@ -5,6 +5,7 @@ import CommunityBox from "./CommunityBox.jsx";
 import SidebarBox from "./SidebarBox.jsx";
 import LicenseSection from "./LicenseSection.jsx";
 import ElementStatistics from "./ElementStatistics.jsx";
+import VideoPromo from "./VideoPromo.jsx";
 
 function General() {
     const isProActivated = localize.eael_dashboard.is_eapro_activate;
@@ -15,6 +16,7 @@ function General() {
                 <div>
                     {isProActivated ? <LicenseSection/> : <WhatsNew/>}
                     <TemplatelyPromo/>
+                    <VideoPromo/>
                     {isProActivated || <div className="ea__connect-others-wrapper flex gap-4">
                         <CommunityBox index={0}/>
                         <CommunityBox index={1}/>
