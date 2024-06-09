@@ -490,8 +490,19 @@
             </fields>
             <fields-in-item items_of="fields">
                 <field type="Woo Product Compare: Type" editor_type="LINE">field_type</field>
-                <field  type="Woo Product Compare: Label" editor_type="LINE">field_label</field>
+                <field type="Woo Product Compare: Label" editor_type="LINE">field_label</field>
             </fields-in-item>
+        </widget>
+        <widget name="eael-woo-product-gallery">
+            <conditions>
+                <condition key="widgetType">eael-woo-product-gallery</condition>
+            </conditions>
+            <fields>
+                <field type="Woo Product Gallery: Change All Text" editor_type="LINE">eael_woo_product_gallery_terms_all_text</field>
+                <field type="Woo Product Gallery: Sale Text" editor_type="LINE">eael_product_gallery_sale_text</field>
+                <field type="Woo Product Gallery: Stock Out Text" editor_type="LINE">eael_product_gallery_stockout_text</field>
+                <field type="Woo Product Gallery: Label Text" editor_type="LINE">show_load_more_text</field>
+            </fields>
         </widget>
     </elementor-widgets>
 </wpml-config>
