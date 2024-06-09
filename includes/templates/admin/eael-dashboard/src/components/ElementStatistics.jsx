@@ -1,8 +1,9 @@
 import consumer from "../context";
 
 function ElementStatistics() {
-    const {eaState} = consumer(),
-        statistics = {activated: 0, deactivated: 0};
+    const eaData = localize.eael_dashboard,
+        {eaState} = consumer(),
+        statistics = {activated: 0, deactivated: eaData.is_eapro_activate ? 0 : -eaState.proElements.length};
 
     Object.keys(eaState.elements).map((item) => {
         if (eaState.elements[item]) {

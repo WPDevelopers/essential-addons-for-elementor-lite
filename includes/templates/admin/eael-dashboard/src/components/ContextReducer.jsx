@@ -13,6 +13,7 @@ function ContextReducer() {
             extensions: [],
             widgets: {},
             elements: {},
+            proElements: [],
             extensionAll: false,
             widgetAll: false,
             licenseStatus: licenseData?.license_status,
@@ -28,6 +29,12 @@ function ContextReducer() {
         Object.keys(eaData.extensions.list).map((item) => {
             initValue.extensions.push(item);
             initValue.elements[item] = eaData.extensions.list[item].is_activate;
+
+            // set false for pro elements if ea pro is not activated
+            if (!eaData.is_eapro_activate && eaData.extensions.list[item].is_pro) {
+                initValue.proElements.push(item);
+                initValue.elements[item] = false
+            }
         });
 
         Object.keys(eaData.widgets).map((item) => {
@@ -35,6 +42,12 @@ function ContextReducer() {
             Object.keys(eaData.widgets[item].elements).map((subitem) => {
                 initValue.widgets[item].push(subitem);
                 initValue.elements[subitem] = eaData.widgets[item].elements[subitem].is_activate;
+
+                // set false for pro elements if ea pro is not activated
+                if (!eaData.is_eapro_activate && eaData.widgets[item].elements[subitem].is_pro) {
+                    initValue.proElements.push(subitem);
+                    initValue.elements[subitem] = false
+                }
             });
         });
 
