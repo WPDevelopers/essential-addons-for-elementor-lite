@@ -299,7 +299,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 = 5.9.24 - 09/06/2024 =
 
-- Improved: Disallowing low level users to add/edit custom JS
+- Improved: User role permissions to add/edit custom JS
 - Few minor bug fixes & improvements
 
 = 5.9.23 - 05/06/2024 =
