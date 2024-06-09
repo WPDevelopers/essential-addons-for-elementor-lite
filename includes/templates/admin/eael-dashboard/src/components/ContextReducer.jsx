@@ -106,21 +106,37 @@ function ContextReducer() {
             case 'ON_CHANGE_ALL':
                 if (payload.key === 'extensionAll') {
                     state.extensions.map((item) => {
+                        if (state.proElements.includes(item)) {
+                            return;
+                        }
+
                         state.elements[item] = payload.value;
                     });
                 } else if (payload.key === 'widgetAll') {
                     Object.keys(state.widgets).map((item) => {
                         state[item] = payload.value;
                         state.widgets[item].map((subitem) => {
+                            if (state.proElements.includes(subitem)) {
+                                return;
+                            }
+
                             state.elements[subitem] = payload.value;
                         });
                     });
                 } else if (payload.key === 'searchAll') {
                     Object.keys(state.search).map((item) => {
+                        if (state.proElements.includes(item)) {
+                            return;
+                        }
+
                         state.elements[item] = payload.value;
                     });
                 } else {
                     state.widgets[payload.key].map((item) => {
+                        if (state.proElements.includes(item)) {
+                            return;
+                        }
+
                         state.elements[item] = payload.value;
                     });
                 }
