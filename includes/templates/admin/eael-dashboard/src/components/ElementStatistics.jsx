@@ -1,20 +1,33 @@
-function ElementStatistics(props) {
+import consumer from "../context";
+
+function ElementStatistics() {
+    const {eaState} = consumer(),
+        statistics = {activated: 0, deactivated: 0};
+
+    Object.keys(eaState.elements).map((item) => {
+        if (eaState.elements[item]) {
+            statistics.activated++;
+        } else {
+            statistics.deactivated++;
+        }
+    });
+
     return (
         <>
             <div className="ea__connect-others">
                 <div className="ea__elements-wrapper elements-1">
                     <i className="ea-elements ea-dash-icon"></i>
-                    <h4>57</h4>
+                    <h4>{statistics.activated + statistics.deactivated}</h4>
                     <span>Total Elements</span>
                 </div>
                 <div className="ea__elements-wrapper elements-2">
                     <i className="ea-active ea-dash-icon"></i>
-                    <h4>28</h4>
+                    <h4>{statistics.activated}</h4>
                     <span>Active</span>
                 </div>
                 <div className="ea__elements-wrapper elements-3">
                     <i className="ea-inactive ea-dash-icon"></i>
-                    <h4>21</h4>
+                    <h4>{statistics.deactivated}</h4>
                     <span>Inactive</span>
                 </div>
             </div>

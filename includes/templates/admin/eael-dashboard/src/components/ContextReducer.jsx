@@ -20,7 +20,7 @@ function ContextReducer() {
             modals: {}
         }
 
-    useEffect(() => {
+    // useEffect(() => {
         Object.keys(eaData.integration_box.list).map((item) => {
             initValue.integrations[item] = eaData.integration_box.list[item].status;
         });
@@ -55,7 +55,7 @@ function ContextReducer() {
             }
 
         });
-    }, []);
+    // }, []);
 
     const reducer = (state, {type, payload}) => {
         const licenseManagerConfig = typeof wpdeveloperLicenseManagerConfig === 'undefined' ? {} : wpdeveloperLicenseManagerConfig;
