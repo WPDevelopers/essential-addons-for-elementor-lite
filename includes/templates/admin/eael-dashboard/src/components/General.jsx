@@ -4,6 +4,7 @@ import TemplatelyPromo from "./TemplatelyPromo.jsx";
 import CommunityBox from "./CommunityBox.jsx";
 import SidebarBox from "./SidebarBox.jsx";
 import LicenseSection from "./LicenseSection.jsx";
+import ElementStatistics from "./ElementStatistics.jsx";
 
 function General() {
     const isProActivated = localize.eael_dashboard.is_eapro_activate;
@@ -22,6 +23,7 @@ function General() {
                 </div>
                 <div className="ea__sidebar-info">
                     {isProActivated || <SidebarBox/>}
+                    <ElementStatistics/>
                     <div>
                         {isProActivated && <>
                             <CommunityBox index={0}/>
