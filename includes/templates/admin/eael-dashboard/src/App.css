@@ -2020,6 +2020,25 @@ span.step-count {
   border-radius: 8px;
 }
 
+.ea__license-key.ea__invalid-license {
+  background: #FEF3F2;
+}
+
+.ea__license-key.ea__invalid-license .license-key-items {
+  border: 1px solid #F97066;
+}
+
+.invalid-text {
+  margin-top: 8px;
+  gap: 6px;
+}
+
+.invalid-text span {
+  font-size: 12px;
+  line-height: 1em;
+  color: #7A271A;
+}
+
 .license-key-items {
   background: #fff;
   border-radius: 8px;
@@ -2061,6 +2080,13 @@ input.input-api[disabled] {
   flex-direction: column;
   gap: 18px;
   margin-bottom: 30px;
+}
+
+.ea__license-verify.warning {
+  background: #FEF3F2;
+}
+.ea__license-verify.warning .license-key-items {
+  border: 1px solid #F97066;
 }
 
 .ea__general-content-item .ea__license-verify p.resend-content {
