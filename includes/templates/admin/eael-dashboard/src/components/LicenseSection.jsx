@@ -14,7 +14,7 @@ function LicenseSection() {
 
     return (
         <>
-            <div className="ea__general-content-item relative">
+            <div className="ea__general-content-item license-unlock relative">
                 {eaState.licenseStatus !== 'valid' ? <LicenseUnlockBox/> : <LicenseActivatedBox/>}
                 <div className="ea__license-wrapper">
                     {eaState.licenseStatus !== 'valid' &&
