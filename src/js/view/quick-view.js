@@ -12,10 +12,14 @@ const QuickView = {
 	
 	openPopup:($scope, $)=>{
 		// Quick view
-		$scope.on("click", ".open-popup-link", function (e) {
+		jQuery(document).on("click", ".open-popup-link", function (e) {
 			e.preventDefault();
 			e.stopPropagation();
+
 			const $this = $(this);
+			if( ! $this.hasClass( 'eael-product-grid-open-popup' ) ) {
+				return;
+			}
 			const quickview_setting = $this.data('quickview-setting');
 			const popup_view = $(".eael-woocommerce-popup-view");
 			popup_view.find(".eael-popup-details-render").html('<div class="eael-preloader"></div>')
