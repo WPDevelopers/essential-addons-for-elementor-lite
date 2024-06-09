@@ -481,5 +481,17 @@
                 <field type="Business Reviews: Label | Google Reviews Text" editor_type="LINE">eael_business_reviews_google_reviews_label</field>
             </fields>
         </widget>
+        <widget name="eael-woo-product-compare">
+            <conditions>
+                <condition key="widgetType">eael-woo-product-compare</condition>
+            </conditions>
+            <fields>
+                <field type="Woo Product Compare: Table Title" editor_type="LINE">table_title</field>
+            </fields>
+            <fields-in-item items_of="fields">
+                <field type="Woo Product Compare: Type" editor_type="LINE">field_type</field>
+                <field  type="Woo Product Compare: Label" editor_type="LINE">field_label</field>
+            </fields-in-item>
+        </widget>
     </elementor-widgets>
 </wpml-config>
