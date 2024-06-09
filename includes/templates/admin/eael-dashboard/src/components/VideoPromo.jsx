@@ -1,6 +1,8 @@
 import React from "react";
 
 function VideoPromo(props) {
+    const eaData = localize.eael_dashboard;
+
     return (
         <>
             <div className="ea__general-content-item video-promo">
@@ -16,7 +18,7 @@ function VideoPromo(props) {
                     </div>
                     <div className="templates-img">
                         <a href="https://www.youtube.com/watch?v=ZISSbnHo0rE" target="_blank">
-                            <img src="../../public/images/video-promo.png" alt="video promo"/>
+                            <img src={eaData.reactPath + 'images/video-promo.png'} alt="video promo"/>
                         </a>
                     </div>
                 </div>
