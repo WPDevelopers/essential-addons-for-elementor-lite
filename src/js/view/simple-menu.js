@@ -24,10 +24,10 @@ var SimpleMenu = function ($scope, $) {
 
         hashURL = hashURL === undefined ? '' : hashURL;
         isStartWithHash = hashURL.startsWith('#');
-
+        
         if ( hashURL !== '#' && splitURL.length > 1 && localize.page_permalink === splitURL[0] && splitURL[1] ){
             all_ids.push(splitURL[1]);
-        }else if( splitURL[1] && $(hashURL).length > 0 ){
+        }else if( isStartWithHash && splitURL[1] && $(hashURL).length > 0 ){
             all_ids.push(splitURL[1]);
         }
         if ( !isStartWithHash && localize.page_permalink === thisURL ) {

@@ -321,7 +321,7 @@ trait Ajax_Handler {
 		$settings['eael_page_id']   = $page_id;
 		$settings['eael_widget_id'] = $widget_id;
 		wp_parse_str( $_REQUEST['args'], $args );
-		$args['post_status'] = array_intersect( $settings['eael_product_grid_products_status'], [ 'publish', 'draft', 'pending', 'future' ] );
+		$args['post_status'] = array_intersect( (array) $settings['eael_product_grid_products_status'], [ 'publish', 'draft', 'pending', 'future' ] );
 
 		if ( isset( $args['date_query']['relation'] ) ) {
 			$args['date_query']['relation'] = HelperClass::eael_sanitize_relation( $args['date_query']['relation'] );
@@ -974,6 +974,12 @@ trait Ajax_Handler {
 		}
 		if ( isset( $settings['lr_recaptcha_language_v3'] ) ) {
 			update_option( 'eael_recaptcha_language_v3', sanitize_text_field( $settings['lr_recaptcha_language_v3'] ) );
+		}
+
+		if ( isset( $settings['lr_recaptcha_badge_hide'] ) ) {
+			update_option( 'eael_recaptcha_badge_hide', sanitize_text_field( $settings['lr_recaptcha_badge_hide'] ) );
+		} else {
+			update_option( 'eael_recaptcha_badge_hide', '' );
 		}
 
 		if ( isset( $settings['lr_custom_profile_fields'] ) ) {

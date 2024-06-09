@@ -75,6 +75,15 @@
           flex-direction: column;
 }
 /*-----Form Specific---*/
+.eael-recaptcha-no-branding-wrapper {
+  width: 370px;
+  margin: 0 auto;
+  padding-top: 20px;
+  text-align: center;
+}
+.eael-login-register-page-body .grecaptcha-badge {
+  visibility: hidden;
+}
 .eael-lr-form-wrapper {
   width: 370px;
   margin: 0 auto;
