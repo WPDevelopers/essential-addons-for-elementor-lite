@@ -9,7 +9,7 @@ function ContextReducer() {
 
     const reducer = (state, {type, payload}) => {
         const licenseManagerConfig = typeof wpdeveloperLicenseManagerConfig === 'undefined' ? {} : wpdeveloperLicenseManagerConfig;
-        let params, request, response, licenseStatus, licenseError, otp, otpEmail, errorMessage, hiddenLicenseKey,
+        let params, request, response, licenseStatus, licenseError, otpError, otp, otpEmail, errorMessage, hiddenLicenseKey,
             integrations,
             elements, modals;
 
@@ -134,11 +134,11 @@ function ContextReducer() {
                     hiddenLicenseKey = response.data.license_key;
                 } else {
                     otp = true;
-                    licenseError = true;
+                    otpError = true;
                     errorMessage = response.data.message;
                 }
 
-                return {...state, licenseStatus, hiddenLicenseKey, licenseError, errorMessage, otp};
+                return {...state, licenseStatus, hiddenLicenseKey, otpError, errorMessage, otp};
             case 'LICENSE_DEACTIVATE':
                 params = {
                     action: 'essential-addons-elementor/license/deactivate',
