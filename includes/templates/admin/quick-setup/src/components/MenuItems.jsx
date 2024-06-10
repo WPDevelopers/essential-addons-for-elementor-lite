@@ -9,34 +9,38 @@ function MenuItems() {
   let templately_local_plugin_data = menu_items?.templately_local_plugin_data;
 
   let i = 0;
-  let isActive = '';
-  let itemClass = '';
+  let isActive = "";
+  let itemClass = "";
 
   return (
     <>
-		<div className={`eael-onboard-nav-list flex justify-between ${eaelQuickSetup.menu_items.wizard_column}`} data-step="1">
-            {items.map((item, index) => {
-                // Conditional logic to skip certain items
-                if (
-                    (item === 'Templately' && templately_status) ||
-                    (templately_local_plugin_data !== false && item === 'Templately')
-                ) {
-                    return null;
-                }
+      <div
+        className={`eael-onboard-nav-list flex justify-between ${eaelQuickSetup.menu_items.wizard_column}`}
+        data-step="1"
+      >
+        {items.map((item, index) => {
+          // Conditional logic to skip certain items
+          if (
+            (item === "Templately" && templately_status) ||
+            (templately_local_plugin_data !== false && item === "Templately")
+          ) {
+            return null;
+          }
 
-                isActive = i === 0 ? 'active' : '';
-                itemClass = item.trim().toLowerCase().replace(/ /g, '-');
+          isActive = i === 0 ? "active" : "";
+          itemClass = item.trim().toLowerCase().replace(/ /g, "-");
 
-                return (
-                    <div className={`eael-onboard-nav ${isActive} ${itemClass}`} key={index}>
-                        <span className="eael-nav-count">
-                            {++i}
-                        </span>
-                        <span className="eael-nav-text">{item}</span>
-                    </div>
-                );
-            })}
-		</div>
+          return (
+            <div
+              className={`eael-onboard-nav ${isActive} ${itemClass}`}
+              key={index}
+            >
+              <span className="eael-nav-count">{++i}</span>
+              <span className="eael-nav-text">{item}</span>
+            </div>
+          );
+        })}
+      </div>
     </>
   );
 }
