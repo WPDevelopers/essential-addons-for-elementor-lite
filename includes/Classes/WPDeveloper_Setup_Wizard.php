@@ -49,12 +49,19 @@ class WPDeveloper_Setup_Wizard {
 			wp_enqueue_script( 'sweetalert2-js', EAEL_PLUGIN_URL . 'assets/admin/vendor/sweetalert2/js/sweetalert2.min.js', array( 'jquery', 'sweetalert2-core-js' ), EAEL_PLUGIN_VERSION, true );
 			wp_enqueue_script( 'sweetalert2-core-js', EAEL_PLUGIN_URL . 'assets/admin/vendor/sweetalert2/js/core.js', array( 'jquery' ), EAEL_PLUGIN_VERSION, true );
 			wp_enqueue_script( 'essential_addons_elementor-setup-wizard-js', EAEL_PLUGIN_URL . 'assets/admin/js/admin.js', array( 'jquery' ), EAEL_PLUGIN_VERSION, true );
-			wp_enqueue_script( 'essential_addons_elementor-setup-wizard-react-css', EAEL_PLUGIN_URL . 'includes/templates/admin/quick-setup/dist/quick-setup.min.css', array(), EAEL_PLUGIN_VERSION, true );
+			// wp_enqueue_script( 'essential_addons_elementor-setup-wizard-react-css', EAEL_PLUGIN_URL . 'includes/templates/admin/quick-setup/dist/quick-setup.min.css', array(), EAEL_PLUGIN_VERSION, true );
 			wp_enqueue_script( 'essential_addons_elementor-setup-wizard-react-js', EAEL_PLUGIN_URL . 'includes/templates/admin/quick-setup/dist/quick-setup.min.js', array( 'essential_addons_elementor-setup-wizard-js' ), EAEL_PLUGIN_VERSION, true );
+			
+			$eael_quick_setup_data = [
+				'is_quick_setup' => 1,
+				'menu_items' => $this->data_menu_items(),
+			];
+
 			wp_localize_script( 'essential_addons_elementor-setup-wizard-js', 'localize', array(
 				'ajaxurl'       => esc_url( admin_url( 'admin-ajax.php' ) ),
 				'nonce'         => wp_create_nonce( 'essential-addons-elementor' ),
 				'success_image' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/success.gif',
+				'eael_quick_setup_data' => $eael_quick_setup_data,
 			) );
 		}
 		return [];
@@ -157,6 +164,26 @@ class WPDeveloper_Setup_Wizard {
 			<?php endforeach; ?>
 		</div>
 		<?php 
+	}
+
+	public function data_menu_items(){
+		$items = [
+			__( 'Getting Started', 'essential-addons-for-elementor-lite' ),
+			__( 'Configuration', 'essential-addons-for-elementor-lite' ),
+			__( 'Elements', 'essential-addons-for-elementor-lite' ),
+			__( 'Go PRO', 'essential-addons-for-elementor-lite' ),
+			__( 'Templately', 'essential-addons-for-elementor-lite' ),
+			__( 'Integrations', 'essential-addons-for-elementor-lite' ),
+		];
+
+		$menu_items = [
+			'templately_status' => $this->templately_status,
+			'wizard_column' => !$this->templately_status ? 'five' : 'four',
+			'items' => $items,
+			'templately_local_plugin_data' => $this->get_local_plugin_data( 'templately/templately.php' ),
+		];
+
+		return $menu_items;
 	}
 
 	public function getting_started_cotnent(){
