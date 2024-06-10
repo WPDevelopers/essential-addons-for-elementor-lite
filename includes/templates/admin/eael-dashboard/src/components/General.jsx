@@ -16,20 +16,15 @@ function General() {
                 <div>
                     {isProActivated ? <LicenseSection/> : <WhatsNew/>}
                     {isTemplatelyActivate ? <VideoPromo/> : <TemplatelyPromo/>}
-                    {isProActivated || <div className="ea__connect-others-wrapper flex gap-4">
+                    <div className="ea__connect-others-wrapper flex gap-4">
                         <CommunityBox index={0}/>
                         <CommunityBox index={1}/>
-                    </div>}
-
+                    </div>
                 </div>
                 <div className="ea__sidebar-info">
                     {isProActivated || <SidebarBox/>}
                     <ElementStatistics/>
                     <div>
-                        {isProActivated && <>
-                            <CommunityBox index={0}/>
-                            <CommunityBox index={1}/>
-                        </>}
                         <CommunityBox index={2}/>
                     </div>
                 </div>
