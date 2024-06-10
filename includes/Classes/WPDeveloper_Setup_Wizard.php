@@ -57,6 +57,7 @@ class WPDeveloper_Setup_Wizard {
 				'menu_items' => $this->data_menu_items(),
 				'getting_started_content' => $this->data_getting_started_content(),
 				'configuration_content' => $this->data_configuration_content(),
+				'elements_content' => $this->data_elements_content(),
 			];
 
 			wp_localize_script( 'essential_addons_elementor-setup-wizard-js', 'localize', array(
@@ -202,6 +203,14 @@ class WPDeveloper_Setup_Wizard {
 		];
 
 		return $configuration_content;
+	}
+
+	public function data_elements_content(){
+		$elements_content = [
+			'elements_list' => $this->get_element_list(),
+		];
+
+		return $elements_content;
 	}
 
 	public function getting_started_cotnent(){

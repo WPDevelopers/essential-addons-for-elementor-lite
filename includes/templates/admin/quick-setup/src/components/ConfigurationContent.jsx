@@ -3,8 +3,8 @@ import { __ } from "@wordpress/i18n";
 
 function ConfigurationContent() {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
-  let configuration_cotnent = eaelQuickSetup?.configuration_cotnent;
-  let ea_logo_src = configuration_cotnent?.ea_logo_src;
+  let configuration_content = eaelQuickSetup?.configuration_content;
+  let ea_logo_src = configuration_content?.ea_logo_src;
 
   return (
     <>

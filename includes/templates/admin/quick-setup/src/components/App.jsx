@@ -3,7 +3,7 @@ import MenuItems from "./MenuItems.jsx";
 import GettingStartedContent from "./GettingStartedContent.jsx";
 import ConfigurationContent from "./ConfigurationContent.jsx";
 import ElementsContent from "./ElementsContent.jsx";
-import GoProContent from "./TemplatelyContent.jsx";
+import GoProContent from "./GoProContent.jsx";
 import TemplatelyContent from "./TemplatelyContent.jsx";
 import IntegrationContent from "./IntegrationContent.jsx";
 import ModalContent from "./ModalContent.jsx";
