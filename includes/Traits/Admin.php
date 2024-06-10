@@ -89,6 +89,7 @@ trait Admin {
 	        $ea_dashboard = [
 		        'reactPath'            => EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/',
 		        'is_eapro_activate'    => $this->pro_enabled,
+		        'is_templately_activate'=> $this->installer->get_local_plugin_data( 'templately/templately.php' ),
 		        'menu'                 => [
 			        __( 'General', 'essential-addons-for-elementor-lite' )     => 'ea-home',
 			        __( 'Elements', 'essential-addons-for-elementor-lite' )    => 'ea-elements',
