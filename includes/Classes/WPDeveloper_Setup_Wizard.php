@@ -55,6 +55,8 @@ class WPDeveloper_Setup_Wizard {
 			$eael_quick_setup_data = [
 				'is_quick_setup' => 1,
 				'menu_items' => $this->data_menu_items(),
+				'getting_started_content' => $this->data_getting_started_content(),
+				'configuration_content' => $this->data_configuration_content(),
 			];
 
 			wp_localize_script( 'essential_addons_elementor-setup-wizard-js', 'localize', array(
@@ -184,6 +186,22 @@ class WPDeveloper_Setup_Wizard {
 		];
 
 		return $menu_items;
+	}
+	
+	public function data_getting_started_content(){
+		$getting_started_content = [
+			'youtube_promo_src' => esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/youtube-promo.png' ),
+		];
+
+		return $getting_started_content;
+	}
+	
+	public function data_configuration_content(){
+		$configuration_content = [
+			'ea_logo_src' => esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/ea-new.png' ),
+		];
+
+		return $configuration_content;
 	}
 
 	public function getting_started_cotnent(){
