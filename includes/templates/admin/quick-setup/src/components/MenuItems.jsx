@@ -24,9 +24,10 @@ function MenuItems() {
                     return null;
                 }
 
-                isActive = i === 0 ? 'active' : isActive;
+                isActive = i === 0 ? 'active' : '';
                 itemClass = item.trim().toLowerCase().replace(/ /g, '-');
 
+                console.log(i);
                 return (
                     <div className={`eael-onboard-nav ${isActive} ${itemClass}`} key={index}>
                         <span className="eael-nav-count">

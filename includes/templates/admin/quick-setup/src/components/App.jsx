@@ -15,19 +15,6 @@ function App() {
 
   return (
     <>
-      <h1>EA Quick Setup 2 </h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-
       <section className="eael-onboard-main-wrapper eael-quick-setup-wizard-wrapper">
         <form
           className="eael-setup-wizard-form eael-quick-setup-wizard-form"
