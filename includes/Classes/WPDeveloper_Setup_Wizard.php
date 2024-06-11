@@ -60,6 +60,7 @@ class WPDeveloper_Setup_Wizard {
 				'elements_content' => $this->data_elements_content(),
 				'go_pro_content' => $this->data_go_pro_content(),
 				'templately_content' => $this->data_templately_content(),
+				'integrations_content' => $this->data_integrations_content(),
 			];
 
 			wp_localize_script( 'essential_addons_elementor-setup-wizard-js', 'localize', array(
@@ -311,6 +312,14 @@ class WPDeveloper_Setup_Wizard {
 		];
 
 		return $templately_content;
+	}
+	
+	public function data_integrations_content(){
+		$integrations_content = [
+			'plugin_list' => $this->get_plugin_list(),
+		];
+
+		return $integrations_content;
 	}
 
 	public function getting_started_cotnent(){
@@ -1149,6 +1158,8 @@ class WPDeveloper_Setup_Wizard {
 				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/bd-new.svg',
 				'title'    => __( 'BetterDocs', 'essential-addons-for-elementor-lite' ),
 				'desc'     => __( 'BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ),
+				'is_active' => is_plugin_active( 'betterdocs/betterdocs.php' ),
+				'local_plugin_data' => $this->get_local_plugin_data( 'betterdocs/betterdocs.php' ),
 			],
 			[
 				'slug'     => 'embedpress',
@@ -1156,6 +1167,8 @@ class WPDeveloper_Setup_Wizard {
 				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/ep-logo.png',
 				'title'    => __( 'EmbedPress', 'essential-addons-for-elementor-lite' ),
 				'desc'     => __( 'EmbedPress lets you embed videos, images, posts, audio, maps and upload PDF, DOC, PPT & all other types of content into your WordPress site. ', 'essential-addons-for-elementor-lite' ),
+				'is_active' => is_plugin_active( 'embedpress/embedpress.php' ),
+				'local_plugin_data' => $this->get_local_plugin_data( 'embedpress/embedpress.php' ),
 			],
 			[
 				'slug'     => 'notificationx',
@@ -1163,6 +1176,8 @@ class WPDeveloper_Setup_Wizard {
 				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/nx-logo.svg',
 				'title'    => __( 'NotificationX', 'essential-addons-for-elementor-lite' ),
 				'desc'     => __( 'Best FOMO Social Proof Plugin to boost your sales conversion. Create stunning Sales Popup & Notification Bar With Elementor Support.', 'essential-addons-for-elementor-lite' ),
+				'is_active' => is_plugin_active( 'notificationx/notificationx.php' ),
+				'local_plugin_data' => $this->get_local_plugin_data( 'notificationx/notificationx.php' ),
 			],
 			[
 				'slug'     => 'easyjobs',
@@ -1170,6 +1185,8 @@ class WPDeveloper_Setup_Wizard {
 				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/easy-jobs-logo.svg',
 				'title'    => __( 'easy.jobs', 'essential-addons-for-elementor-lite' ),
 				'desc'     => __( 'Easy solution for the job recruitment to attract, manage & hire right talent faster. The Best Talent Recruitment Suite which lets you manage jobs & career page in Elementor.', 'essential-addons-for-elementor-lite' ),
+				'is_active' => is_plugin_active( 'easyjobs/easyjobs.php' ),
+				'local_plugin_data' => $this->get_local_plugin_data( 'easyjobs/easyjobs.php' ),
 			],
 			[
 				'slug'     => 'wp-scheduled-posts',
@@ -1177,6 +1194,8 @@ class WPDeveloper_Setup_Wizard {
 				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/wscp.svg',
 				'title'    => __( 'SchedulePress', 'essential-addons-for-elementor-lite' ),
 				'desc'     => __( 'Best Content Marketing Tool For WordPress – Schedule, Organize, & Auto Share Blog Posts. Take a quick glance at your content planning with Schedule Calendar, Auto & Manual Scheduler and  more.', 'essential-addons-for-elementor-lite' ),
+				'is_active' => is_plugin_active( 'wp-scheduled-posts/wp-scheduled-posts.php' ),
+				'local_plugin_data' => $this->get_local_plugin_data( 'wp-scheduled-posts/wp-scheduled-posts.php' ),
 			],
 			[
 				'slug'     => 'betterlinks',
@@ -1184,6 +1203,8 @@ class WPDeveloper_Setup_Wizard {
 				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/btl.svg',
 				'title'    => __( 'BetterLinks', 'essential-addons-for-elementor-lite' ),
 				'desc'     => __( 'Best Link Shortening tool to create, shorten and manage any URL to help you cross-promote your brands & products. Gather analytics reports, run successfully marketing campaigns easily & many more.', 'essential-addons-for-elementor-lite' ),
+				'is_active' => is_plugin_active( 'betterlinks/betterlinks.php' ),
+				'local_plugin_data' => $this->get_local_plugin_data( 'betterlinks/betterlinks.php' ),
 			],
 			[
 				'slug'     => 'essential-blocks',
@@ -1191,6 +1212,8 @@ class WPDeveloper_Setup_Wizard {
 				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/eb-new.svg',
 				'title'    => __( 'Essential Blocks', 'essential-addons-for-elementor-lite' ),
 				'desc'     => __( 'Enhance your Gutenberg experience with 40+ unique blocks (more coming soon). Add power to the block editor using our easy-to-use blocks which are designed to make your next WordPress page or posts design easier and prettier than ever before.', 'essential-addons-for-elementor-lite' ),
+				'is_active' => is_plugin_active( 'essential-blocks/essential-blocks.php' ),
+				'local_plugin_data' => $this->get_local_plugin_data( 'essential-blocks/essential-blocks.php' ),
 			],
 			[
 				'slug'     => 'better-payment',
@@ -1198,6 +1221,8 @@ class WPDeveloper_Setup_Wizard {
 				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/bp.svg',
 				'title'    => __( 'Better Payment', 'essential-addons-for-elementor-lite' ),
 				'desc'     => __( 'Better Payment streamlines transactions in Elementor, integrating PayPal, Stripe, advanced analytics, validation, and Elementor forms for the most secure & efficient payments.', 'essential-addons-for-elementor-lite' ),
+				'is_active' => is_plugin_active( 'better-payment/better-payment.php' ),
+				'local_plugin_data' => $this->get_local_plugin_data( 'better-payment/better-payment.php' ),
 			],
 		];
 	}
