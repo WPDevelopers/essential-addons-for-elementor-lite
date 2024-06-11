@@ -1395,7 +1395,7 @@ trait Admin {
      */
     public function admin_settings_page() {
         ?>
-		<link rel="stylesheet" href="<?php echo EAEL_PLUGIN_URL; ?>includes/templates/admin/new-ui/assets/icons/style.css">
+		<link rel="stylesheet" href="<?php echo EAEL_PLUGIN_URL; ?>includes/templates/admin/eael-dashboard/dist/icons/style.css">
 		<link rel="stylesheet" href="<?php echo EAEL_PLUGIN_URL; ?>includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.css">
 		<div id="eael-dashboard"></div>
 		<form action="" method="POST" id="eael-settings" name="eael-settings" style="display: none;">
