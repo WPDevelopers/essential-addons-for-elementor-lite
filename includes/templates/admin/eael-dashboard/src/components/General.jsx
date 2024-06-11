@@ -13,7 +13,7 @@ function General() {
     return (
         <>
             <div className="ea__main-content-wrapper flex gap-4">
-                <div>
+                <div className='ea__general-content--wrapper'>
                     {isProActivated ? <LicenseSection/> : <WhatsNew/>}
                     {isTemplatelyActivate ? <VideoPromo/> : <TemplatelyPromo/>}
                     <div className="ea__connect-others-wrapper flex gap-4">
@@ -22,11 +22,14 @@ function General() {
                     </div>
                 </div>
                 <div className="ea__sidebar-info">
-                    {isProActivated || <SidebarBox/>}
-                    <ElementStatistics/>
-                    <div>
-                        <CommunityBox index={2}/>
+                    <div className="ea__sidebar-sticky">
+                        {isProActivated || <SidebarBox/>}
+                        <ElementStatistics/>
+                        <div>
+                            <CommunityBox index={2}/>
+                        </div>
                     </div>
+                    <div></div>
                 </div>
             </div>
         </>

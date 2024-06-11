@@ -642,6 +642,11 @@ span.dark-icon {
   min-width: 232px;
 }
 
+.ea__sidebar-sticky {
+  position: sticky;
+  top: 92px;
+}
+
 .ea__sidebar-content {
   padding: 24px;
   background: var(--base-background);
@@ -2321,6 +2326,10 @@ input.input-api[disabled] {
     min-width: 180px;
   }
 
+  .ea__sidebar-sticky {
+    top: 80px;
+  }
+
   .ea__general-content-item {
     padding: 16px;
     margin-bottom: 12px;
@@ -2785,7 +2794,7 @@ input.input-api[disabled] {
     flex-wrap: wrap;
   }
 
-  .ea__main-content-wrapper > div {
+  .ea__main-content-wrapper .ea__general-content--wrapper {
     flex: 1;
   }
 

@@ -27,7 +27,7 @@ function ElementStatistics() {
                     <span>Active</span>
                 </div>
                 <div className="ea__elements-wrapper elements-3">
-                    <i className="ea-inactive ea-dash-icon"></i>
+                    <i className="ea-incative ea-dash-icon"></i>
                     <h4>{statistics.deactivated}</h4>
                     <span>Inactive</span>
                 </div>
