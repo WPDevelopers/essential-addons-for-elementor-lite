@@ -10,7 +10,7 @@ function ElementsContent() {
 
   elements_list =
     typeof elements_list === "object"
-      ? Object.keys(elements_list)
+      ? Object.entries(elements_list)
       : elements_list;
 
   return (
@@ -52,12 +52,36 @@ function ElementsContent() {
                   <div
                     className={`flex items-center gap-2 justify-between mb-4 eael-element-title-wrap ${disable}`}
                   >
-                    <h3 className="eael-content-title">{item["title"]}</h3>
+                    <h3 className="eael-content-title">{item[1].title}</h3>
                   </div>
                   <div
                     className={`eael-content-wrapper mb-10 eael-element-content-wrap ${disable}`}
                   >
-                    {/* // here  */}
+                    {item[1]?.elements.map((element) => {
+                      const preferences = element.preferences || "";
+                      const checked = preferences === "basic" ? "checked" : "";
+
+                      return (
+                        <div
+                          className="eael-content-items eael-quick-setup-post-grid"
+                          key={element.key}
+                        >
+                          <div className="eael-content-head">
+                            <h5 className="toggle-label">{element.title}</h5>
+                            <label className="toggle-wrap eael-quick-setup-toggler">
+                              <input
+                                type="checkbox"
+                                data-preferences={preferences}
+                                name={`eael_element[${element.key}]`}
+                                checked={checked}
+                                onChange={() => {}}
+                              />
+                              <span className="slider"></span>
+                            </label>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               );
