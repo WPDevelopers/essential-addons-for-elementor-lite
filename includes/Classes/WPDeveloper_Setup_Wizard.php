@@ -59,6 +59,7 @@ class WPDeveloper_Setup_Wizard {
 				'configuration_content' => $this->data_configuration_content(),
 				'elements_content' => $this->data_elements_content(),
 				'go_pro_content' => $this->data_go_pro_content(),
+				'templately_content' => $this->data_templately_content(),
 			];
 
 			wp_localize_script( 'essential_addons_elementor-setup-wizard-js', 'localize', array(
@@ -298,6 +299,18 @@ class WPDeveloper_Setup_Wizard {
 		];
 
 		return $go_pro_content;
+	}
+
+	public function data_templately_content(){
+		$templately_content = [
+			'templately_icon_1_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-icon-1.svg',
+			'templately_icon_2_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-icon-2.svg',
+			'templately_icon_3_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-icon-3.svg',
+			'templately_icon_4_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-icon-4.svg',
+			'templately_promo_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-qs-img.png'
+		];
+
+		return $templately_content;
 	}
 
 	public function getting_started_cotnent(){
