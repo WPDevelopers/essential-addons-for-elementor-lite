@@ -58,6 +58,7 @@ class WPDeveloper_Setup_Wizard {
 				'getting_started_content' => $this->data_getting_started_content(),
 				'configuration_content' => $this->data_configuration_content(),
 				'elements_content' => $this->data_elements_content(),
+				'go_pro_content' => $this->data_go_pro_content(),
 			];
 
 			wp_localize_script( 'essential_addons_elementor-setup-wizard-js', 'localize', array(
@@ -211,6 +212,92 @@ class WPDeveloper_Setup_Wizard {
 		];
 
 		return $elements_content;
+	}
+	
+	public function data_go_pro_content(){
+		$feature_items = [
+			[
+				'title' => 'Event Calendar',
+				'link' => 'https://essential-addons.com/event-calendar/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/event-calendar.svg',
+			],
+			[
+				'title' => 'Image Hotspots',
+				'link' => 'https://essential-addons.com/image-hotspots/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/image-hotspots.svg',
+			],
+			[
+				'title' => 'LearnDash Course List',
+				'link' => 'https://essential-addons.com/learndash-course-list/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/learndash-course-list.svg',
+			],
+			[
+				'title' => 'Particle Effect',
+				'link' => 'https://essential-addons.com/particle-effect/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/particle-effect.svg',
+			],
+			[
+				'title' => 'Instagram Feed',
+				'link' => 'https://essential-addons.com/instagram-feed/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/instagram-feed.svg',
+			],
+			[
+				'title' => 'Dynamic Gallery',
+				'link' => 'https://essential-addons.com/dynamic-gallery/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/dynamic-gallery.svg',
+			],
+			[
+				'title' => 'Parallax Effect',
+				'link' => 'https://essential-addons.com/parallax-scrolling/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/parallax-scrolling.svg',
+			],
+			[
+				'title' => 'Mailchimp',
+				'link' => 'https://essential-addons.com/mailchimp/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/mailchimp.svg',
+			],
+			[
+				'title' => 'Advanced Google Map',
+				'link' => 'https://essential-addons.com/advanced-google-map/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/advanced-google-map.svg',
+			],
+			[
+				'title' => 'Advanced Tooltip',
+				'link' => 'https://essential-addons.com/advanced-tooltip/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/advanced-tooltip.svg',
+			],
+			[
+				'title' => 'Content Toggle',
+				'link' => 'https://essential-addons.com/content-toggle/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/content-toggle.svg',
+			],
+			[
+				'title' => 'Lightbox & Modal',
+				'link' => 'https://essential-addons.com/lightbox-modal/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/lightbox-modal.svg',
+			],
+			[
+				'title' => 'Logo Carousel',
+				'link' => 'https://essential-addons.com/logo-carousel/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/logo-carousel.svg',
+			],
+			[
+				'title' => 'Woo Product Slider',
+				'link' => 'https://essential-addons.com/woo-product-slider/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/woo-product-slider.svg',
+			],
+			[
+				'title' => 'Woo Cross Sells',
+				'link' => 'https://essential-addons.com/woo-cross-sells/',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/woo-cross-sells.svg',
+			]
+		];
+
+		$go_pro_content = [
+			'feature_items' => $feature_items,
+		];
+
+		return $go_pro_content;
 	}
 
 	public function getting_started_cotnent(){
