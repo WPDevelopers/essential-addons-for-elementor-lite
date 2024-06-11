@@ -1212,7 +1212,7 @@ trait Admin {
 			        'postDuplicatorSetting'  => [
 				        'title'   => __( "Select Post Types", 'essential-addons-for-elementor-lite' ),
 				        'name'    => 'post-duplicator-post-type',
-				        'value'   => get_option( 'eael_save_post_duplicator_post_type' ),
+				        'value'   => get_option( 'eael_save_post_duplicator_post_type', 'all' ),
 				        'options' => get_post_types( [ 'public' => true, 'show_in_nav_menus' => true ] )
 			        ],
 			        'googleMapSetting'       => [
@@ -1220,7 +1220,7 @@ trait Admin {
 				        'title_icon' => 'images/map.svg',
 				        'label'      => __( "Set API Key", 'essential-addons-for-elementor-lite' ),
 				        'name'       => 'google-map-api',
-				        'value'      => get_option( 'eael_save_google_map_api' ),
+				        'value'      => get_option( 'eael_save_google_map_api', '' ),
 				        'image'      => 'images/map.png',
 			        ],
 			        'businessReviewsSetting' => [
@@ -1228,7 +1228,7 @@ trait Admin {
 				        'title_icon' => 'images/map.svg',
 				        'label'      => __( "Set API Key", 'essential-addons-for-elementor-lite' ),
 				        'name'       => 'br_google_place_api_key',
-				        'value'      => get_option( 'eael_br_google_place_api_key' ),
+				        'value'      => get_option( 'eael_br_google_place_api_key', '' ),
 				        'image'      => 'images/map2.png',
 				        'link'       => [
 					        'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
@@ -1240,7 +1240,7 @@ trait Admin {
 				        'title_icon' => 'images/mc.svg',
 				        'label'      => __( "Set API Key", 'essential-addons-for-elementor-lite' ),
 				        'name'       => 'mailchimp-api',
-				        'value'      => get_option( 'eael_save_mailchimp_api' ),
+				        'value'      => get_option( 'eael_save_mailchimp_api', '' ),
 				        'image'      => 'images/mc.png',
 				        'link'       => [
 					        'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
@@ -1255,19 +1255,19 @@ trait Admin {
 						        'fields' => [
 							        [
 								        'name'        => 'lr_recaptcha_sitekey',
-								        'value'       => get_option( 'eael_recaptcha_sitekey' ),
+								        'value'       => get_option( 'eael_recaptcha_sitekey', '' ),
 								        'label'       => __( 'Site Key:', 'essential-addons-for-elementor-lite' ),
 								        'placeholder' => __( 'Site Key', 'essential-addons-for-elementor-lite' ),
 							        ],
 							        [
 								        'name'        => 'lr_recaptcha_secret',
-								        'value'       => get_option( 'eael_recaptcha_secret' ),
+								        'value'       => get_option( 'eael_recaptcha_secret', '' ),
 								        'label'       => __( 'Site Secret:', 'essential-addons-for-elementor-lite' ),
 								        'placeholder' => __( 'Site Secret', 'essential-addons-for-elementor-lite' ),
 							        ],
 							        [
 								        'name'        => 'lr_recaptcha_language',
-								        'value'       => get_option( 'eael_recaptcha_language' ),
+								        'value'       => get_option( 'eael_recaptcha_language', '' ),
 								        'label'       => __( 'Language:', 'essential-addons-for-elementor-lite' ),
 								        'placeholder' => __( 'reCAPTCHA Language Code', 'essential-addons-for-elementor-lite' ),
 							        ]
@@ -1279,19 +1279,19 @@ trait Admin {
 						        'fields' => [
 							        [
 								        'name'        => 'lr_recaptcha_sitekey_v3',
-								        'value'       => get_option( 'eael_recaptcha_sitekey_v3' ),
+								        'value'       => get_option( 'eael_recaptcha_sitekey_v3', '' ),
 								        'label'       => __( 'Site Key:', 'essential-addons-for-elementor-lite' ),
 								        'placeholder' => __( 'Site Key', 'essential-addons-for-elementor-lite' ),
 							        ],
 							        [
 								        'name'        => 'lr_recaptcha_secret_v3',
-								        'value'       => get_option( 'eael_recaptcha_secret_v3' ),
+								        'value'       => get_option( 'eael_recaptcha_secret_v3', '' ),
 								        'label'       => __( 'Site Secret:', 'essential-addons-for-elementor-lite' ),
 								        'placeholder' => __( 'Site Secret', 'essential-addons-for-elementor-lite' ),
 							        ],
 							        [
 								        'name'        => 'lr_recaptcha_language_v3',
-								        'value'       => get_option( 'eael_recaptcha_language_v3' ),
+								        'value'       => get_option( 'eael_recaptcha_language_v3', '' ),
 								        'label'       => __( 'Language:', 'essential-addons-for-elementor-lite' ),
 								        'placeholder' => __( 'reCAPTCHA Language Code', 'essential-addons-for-elementor-lite' ),
 							        ]
@@ -1303,7 +1303,7 @@ trait Admin {
 						        'fields' => [
 							        [
 								        'name'        => 'lr_g_client_id',
-								        'value'       => get_option( 'eael_g_client_id' ),
+								        'value'       => get_option( 'eael_g_client_id', '' ),
 								        'label'       => __( 'Google Client ID:', 'essential-addons-for-elementor-lite' ),
 								        'placeholder' => __( 'Google Client ID', 'essential-addons-for-elementor-lite' ),
 							        ]
@@ -1315,13 +1315,13 @@ trait Admin {
 						        'fields' => [
 							        [
 								        'name'        => 'lr_fb_app_id',
-								        'value'       => get_option( 'eael_fb_app_id' ),
+								        'value'       => get_option( 'eael_fb_app_id', '' ),
 								        'label'       => __( 'Facebook App ID:', 'essential-addons-for-elementor-lite' ),
 								        'placeholder' => __( 'Facebook App ID', 'essential-addons-for-elementor-lite' ),
 							        ],
 							        [
 								        'name'        => 'lr_fb_app_secret',
-								        'value'       => get_option( 'eael_fb_app_secret' ),
+								        'value'       => get_option( 'eael_fb_app_secret', '' ),
 								        'label'       => __( 'Facebook App Secret:', 'essential-addons-for-elementor-lite' ),
 								        'placeholder' => __( 'Facebook App Secret', 'essential-addons-for-elementor-lite' ),
 							        ]
@@ -1333,7 +1333,7 @@ trait Admin {
 						        'fields' => [
 							        [
 								        'name'        => 'lr_mailchimp_api_key',
-								        'value'       => get_option( 'eael_lr_mailchimp_api_key' ),
+								        'value'       => get_option( 'eael_lr_mailchimp_api_key', '' ),
 								        'label'       => __( 'Mailchimp API Key:', 'essential-addons-for-elementor-lite' ),
 								        'placeholder' => __( 'Mailchimp API', 'essential-addons-for-elementor-lite' ),
 							        ]
@@ -1346,13 +1346,13 @@ trait Admin {
 						        'fields' => [
 							        [
 								        'name'        => 'lr_custom_profile_fields_text',
-								        'value'       => get_option( 'eael_custom_profile_fields_text' ),
+								        'value'       => get_option( 'eael_custom_profile_fields_text', '' ),
 								        'label'       => __( 'Text Type Fields:', 'essential-addons-for-elementor-lite' ),
 								        'placeholder' => __( 'Field 1, Field 2 ...', 'essential-addons-for-elementor-lite' ),
 							        ],
 							        [
 								        'name'        => 'lr_custom_profile_fields_img',
-								        'value'       => get_option( 'eael_custom_profile_fields_img' ),
+								        'value'       => get_option( 'eael_custom_profile_fields_img', '' ),
 								        'label'       => __( 'File Type Fields:', 'essential-addons-for-elementor-lite' ),
 								        'placeholder' => __( 'Field 1, Field 2 ...', 'essential-addons-for-elementor-lite' ),
 							        ]
