@@ -23,7 +23,7 @@ $enable_ratio = $settings['enable_postgrid_image_ratio'] == 'yes' ? 'eael-image-
 
 $title_tag = isset($settings['title_tag']) ? Helper::eael_validate_html_tag($settings['title_tag']) : 'h2';
 
-if ($settings['eael_post_grid_preset_style'] === 'two') {
+if ( $settings['eael_post_grid_preset_style'] === 'two' && $settings['eael_show_post_terms'] === 'yes' ) {
     echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . get_the_ID() . '">
         <div class="eael-grid-post-holder">
             <div class="eael-grid-post-holder-inner">';
@@ -179,7 +179,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
     echo '</div>
         </div>
     </article>';
-} else if ($settings['eael_post_grid_preset_style'] === 'three') {
+} else if ($settings['eael_post_grid_preset_style'] === 'three' && $settings['eael_show_post_terms'] === 'yes' ) {
     echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . get_the_ID() . '">
         <div class="eael-grid-post-holder">
             <div class="eael-grid-post-holder-inner">';
