@@ -37,9 +37,6 @@ function LicenseSection() {
                             <LicenseSteps/>
                             <LicenseForm/>
                             {eaState?.otp === true && <LicenseOtpForm/>}
-                            {eaState?.licenseError === true &&
-                                <p className="eael-license-error-msg error-message">{eaState.errorMessage}</p>
-                            }
                         </div>
                     }
                 </div>
