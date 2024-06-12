@@ -6504,6 +6504,7 @@ section.eael-onboard-main-wrapper {
     border: 1px solid var(--border-color-base);
     background: linear-gradient(89.99deg, #FEFBFF 35.58%, #F4E4F6 99.99%);
     border-radius: 8px;
+    margin-bottom: 16px;
 }
 
 .eael-onboard--wrapper .eael-others-icon {
