@@ -1230,6 +1230,7 @@ span.select-details {
 .ea__premium-item {
   border: 1px solid var(--background-2);
   border-radius: 8px;
+  margin-bottom: 20px;
 }
 
 .ea__premium-item-footer {
@@ -1248,6 +1249,14 @@ span.select-details {
   font-size: 14px;
   line-height: 1.5em;
   color: var(--text-color-100);
+}
+
+.ea__slider-connect .swiper-pagination-bullets.swiper-pagination-horizontal {
+  bottom: -4px;
+}
+
+.ea__slider-connect .swiper-wrapper {
+  max-width: 860px;
 }
 
 .ea__pro-features {

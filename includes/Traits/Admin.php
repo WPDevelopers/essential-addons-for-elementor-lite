@@ -292,7 +292,16 @@ trait Admin {
 						        'url'   => '#'
 					        ],
 					        'image'   => 'images/img-5.png'
-				        ]
+				        ],
+				        [
+					        'heading' => __( 'Smart Post List', 'essential-addons-for-elementor-lite' ),
+					        'content' => __( 'Restrict access to important data of your website by setting up user permissions', 'essential-addons-for-elementor-lite' ),
+					        'button'  => [
+						        'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
+						        'url'   => '#'
+					        ],
+					        'image'   => 'images/img-6.png'
+				        ],
 			        ]
 		        ],
 		        'enhance_experience'     => [
