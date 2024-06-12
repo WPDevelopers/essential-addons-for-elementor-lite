@@ -10,7 +10,7 @@ function IntegrationContent() {
 
   return (
     <>
-      <div className="eael-onboard-content-wrapper eael-onboard-integrations min-h-538 mb-4">
+      <div className="eael-onboard-content-wrapper eael-onboard-integrations mb-4">
         <div className="eael-connect-others flex gap-4 justify-between items-start mb-10">
           <div className="flex gap-4 flex-1">
             <div className="eael-others-icon eaicon-1">
@@ -92,21 +92,21 @@ function IntegrationContent() {
           ))}
         </div>
         <div className="eael-section-overlay"></div>
-        <div className="eael-section-wrapper flex flex-end gap-4">
-          <button
+      </div>
+      <div className="eael-section-wrapper flex flex-end gap-4">
+        <button
             className="previous-btn flex gap-2 items-center eael-setup-next-btn"
             data-next={ ! templately_local_plugin_data !== false ? 'templately' : 'go-pro'}
-          >
-            <i className="ea-dash-icon ea-left-arrow-long"></i>
-            {__("Previous", "essential-addons-for-elementor-lite")}
-          </button>
-          <button
+        >
+          <i className="ea-dash-icon ea-left-arrow-long"></i>
+          {__("Previous", "essential-addons-for-elementor-lite")}
+        </button>
+        <button
             className="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn1 eael-setup-wizard-save"
             data-next=""
-          >
-            {__("Finish", "essential-addons-for-elementor-lite")}
-          </button>
-        </div>
+        >
+          {__("Finish", "essential-addons-for-elementor-lite")}
+        </button>
       </div>
     </>
   );
