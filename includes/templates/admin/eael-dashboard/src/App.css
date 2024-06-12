@@ -1084,11 +1084,11 @@ span.ea__tooltip {
 }
 
 .content-btn.updated {
-  background: var(--background-5);
+  background: var(--background-6);
 }
 
 .content-btn.new {
-  background: var(--background-6);
+  background: var(--background-5);
 }
 
 .content-btn.popular {
