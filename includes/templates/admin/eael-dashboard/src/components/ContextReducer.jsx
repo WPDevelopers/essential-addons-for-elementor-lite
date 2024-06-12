@@ -237,6 +237,8 @@ function ContextReducer() {
                 return {...state, modalRegenerateAssets: 'open'}
             case 'ELEMENTS_CAT':
                 return {...state, elementsActivateCatIndex: payload}
+            case 'LIGHT_DARK_TOGGLE':
+                return {...state, isDark: !state.isDark}
         }
     }
 

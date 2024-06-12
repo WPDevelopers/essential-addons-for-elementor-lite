@@ -48,7 +48,7 @@
   --mode-switcher-icon: "\e905";
 }
 
-.ea-admin {
+#ea__dashboard--wrapper {
   font-family: "Rubik", sans-serif;
 
   &.ea-dark-mode {
