@@ -52,23 +52,11 @@ class WPDeveloper_Setup_Wizard {
 			// wp_enqueue_script( 'essential_addons_elementor-setup-wizard-react-css', EAEL_PLUGIN_URL . 'includes/templates/admin/quick-setup/dist/quick-setup.min.css', array(), EAEL_PLUGIN_VERSION, true );
 			wp_enqueue_script( 'essential_addons_elementor-setup-wizard-react-js', EAEL_PLUGIN_URL . 'includes/templates/admin/quick-setup/dist/quick-setup.min.js', array( 'essential_addons_elementor-setup-wizard-js' ), EAEL_PLUGIN_VERSION, true );
 			
-			$eael_quick_setup_data = [
-				'is_quick_setup' => 1,
-				'menu_items' => $this->data_menu_items(),
-				'getting_started_content' => $this->data_getting_started_content(),
-				'configuration_content' => $this->data_configuration_content(),
-				'elements_content' => $this->data_elements_content(),
-				'go_pro_content' => $this->data_go_pro_content(),
-				'templately_content' => $this->data_templately_content(),
-				'integrations_content' => $this->data_integrations_content(),
-				'modal_content' => $this->data_modal_content(),
-			];
-
 			wp_localize_script( 'essential_addons_elementor-setup-wizard-js', 'localize', array(
 				'ajaxurl'       => esc_url( admin_url( 'admin-ajax.php' ) ),
 				'nonce'         => wp_create_nonce( 'essential-addons-elementor' ),
 				'success_image' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/success.gif',
-				'eael_quick_setup_data' => $eael_quick_setup_data,
+				'eael_quick_setup_data' => $this->eael_quick_setup_data(),
 			) );
 		}
 		return [];
@@ -98,6 +86,22 @@ class WPDeveloper_Setup_Wizard {
 		<section id="eael-onboard--wrapper" class="eael-onboard--wrapper">
 		</section>
 		<?php
+	}
+
+	public function eael_quick_setup_data() {
+		$eael_quick_setup_data = [
+			'is_quick_setup' => 1,
+			'menu_items' => $this->data_menu_items(),
+			'getting_started_content' => $this->data_getting_started_content(),
+			'configuration_content' => $this->data_configuration_content(),
+			'elements_content' => $this->data_elements_content(),
+			'go_pro_content' => $this->data_go_pro_content(),
+			'templately_content' => $this->data_templately_content(),
+			'integrations_content' => $this->data_integrations_content(),
+			'modal_content' => $this->data_modal_content(),
+		];
+
+		return $eael_quick_setup_data;
 	}
 
 	public function data_menu_items(){
