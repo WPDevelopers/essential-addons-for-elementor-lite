@@ -236,7 +236,7 @@ function ContextReducer() {
                 response = eaAjax(params);
                 return {...state, modalRegenerateAssets: 'open'}
             case 'ELEMENTS_CAT':
-                return {...state, elementsActivateCatIndex: payload.value}
+                return {...state, elementsActivateCatIndex: payload}
         }
     }
 

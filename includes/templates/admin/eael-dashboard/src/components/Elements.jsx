@@ -75,11 +75,7 @@ function Elements() {
                 currentActivateCatIndex = 1;
             }
 
-            if(eaState.elementsActivateCatIndex){
-
-            }
-
-            console.log(currentActivateCatIndex, newScroll.y, subCatChildrenArr);
+            eaDispatch({type: 'ELEMENTS_CAT', payload: currentActivateCatIndex});
         };
 
     useEffect(() => {
@@ -126,7 +122,7 @@ function Elements() {
                     </div>
                     <div className="ea__content-icon flex">
                         {Object.keys(eaData).map((item, index) => {
-                            return <ElementCategoryBox index={item} key={index}/>
+                            return <ElementCategoryBox index={item} key={index} activateIndex={index}/>
                         })}
                     </div>
                 </div>
