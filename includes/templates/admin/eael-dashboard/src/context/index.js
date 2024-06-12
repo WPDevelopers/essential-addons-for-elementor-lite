@@ -18,7 +18,8 @@ const eaData = localize.eael_dashboard,
         widgetAll: false,
         licenseStatus: licenseData?.license_status,
         hiddenLicenseKey: licenseData?.hidden_license_key,
-        modals: {}
+        modals: {},
+        elementsActivateCatIndex: 0
     };
 
 Object.keys(eaData.integration_box.list).map((item) => {

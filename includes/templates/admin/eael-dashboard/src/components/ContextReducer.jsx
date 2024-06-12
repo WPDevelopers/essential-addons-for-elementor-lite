@@ -9,7 +9,8 @@ function ContextReducer() {
 
     const reducer = (state, {type, payload}) => {
         const licenseManagerConfig = typeof wpdeveloperLicenseManagerConfig === 'undefined' ? {} : wpdeveloperLicenseManagerConfig;
-        let params, request, response, licenseStatus, licenseError, otpError, otp, otpEmail, errorMessage, hiddenLicenseKey,
+        let params, request, response, licenseStatus, licenseError, otpError, otp, otpEmail, errorMessage,
+            hiddenLicenseKey,
             integrations,
             elements, modals;
 
@@ -234,6 +235,8 @@ function ContextReducer() {
 
                 response = eaAjax(params);
                 return {...state, modalRegenerateAssets: 'open'}
+            case 'ELEMENTS_CAT':
+                return {...state, elementsActivateCatIndex: payload.value}
         }
     }
 
