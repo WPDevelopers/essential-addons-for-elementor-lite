@@ -15,7 +15,7 @@ function ElementsContent() {
 
   return (
     <>
-      <div className="eael-onboard-content-wrapper eael-onboard-elements mb-4 min-h-538">
+      <div className="eael-onboard-content-wrapper eael-onboard-elements mb-4">
         <div className="eael-connect-others flex gap-4 justify-between items-start mb-10">
           <div className="flex gap-4 flex-1">
             <div className="eael-others-icon eaicon-1">
