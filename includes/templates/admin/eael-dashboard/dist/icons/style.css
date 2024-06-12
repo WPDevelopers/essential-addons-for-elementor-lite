@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'ea-dash-icon';
-  src:  url('fonts/ea-dash-icon.eot?yuel2y');
-  src:  url('fonts/ea-dash-icon.eot?yuel2y#iefix') format('embedded-opentype'),
-    url('fonts/ea-dash-icon.ttf?yuel2y') format('truetype'),
-    url('fonts/ea-dash-icon.woff?yuel2y') format('woff'),
-    url('fonts/ea-dash-icon.svg?yuel2y#ea-dash-icon') format('svg');
+  src:  url('fonts/ea-dash-icon.eot?ut594q');
+  src:  url('fonts/ea-dash-icon.eot?ut594q#iefix') format('embedded-opentype'),
+    url('fonts/ea-dash-icon.ttf?ut594q') format('truetype'),
+    url('fonts/ea-dash-icon.woff?ut594q') format('woff'),
+    url('fonts/ea-dash-icon.svg?ut594q#ea-dash-icon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ea-moon:before {
+  content: "\e92b";
+}
+.ea-active:before {
+  content: "\e92c";
+}
+.ea-incative:before {
+  content: "\e92d";
+}
 .ea-down-arrow-long:before {
   content: "\e929";
 }

@@ -14,7 +14,7 @@ function LicenseSection() {
 
     return (
         <>
-            <div className="ea__general-content-item relative">
+            <div className="ea__general-content-item license-unlock relative">
                 {eaState.licenseStatus !== 'valid' ? <LicenseUnlockBox/> : <LicenseActivatedBox/>}
                 <div className="ea__license-wrapper">
                     {eaState.licenseStatus !== 'valid' &&
@@ -37,9 +37,6 @@ function LicenseSection() {
                             <LicenseSteps/>
                             <LicenseForm/>
                             {eaState?.otp === true && <LicenseOtpForm/>}
-                            {eaState?.licenseError === true &&
-                                <p className="eael-license-error-msg error-message">{eaState.errorMessage}</p>
-                            }
                         </div>
                     }
                 </div>

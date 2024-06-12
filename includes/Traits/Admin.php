@@ -87,9 +87,10 @@ trait Admin {
             ];
 
 	        $ea_dashboard = [
-		        'reactPath'            => EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/',
-		        'is_eapro_activate'    => $this->pro_enabled,
-		        'menu'                 => [
+		        'reactPath'              => EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/',
+		        'is_eapro_activate'      => $this->pro_enabled,
+		        'is_templately_activate' => $this->installer->get_local_plugin_data( 'templately/templately.php' ),
+		        'menu'                   => [
 			        __( 'General', 'essential-addons-for-elementor-lite' )     => 'ea-home',
 			        __( 'Elements', 'essential-addons-for-elementor-lite' )    => 'ea-elements',
 			        __( 'Extensions', 'essential-addons-for-elementor-lite' )  => 'ea-extensions',
@@ -97,14 +98,14 @@ trait Admin {
 			        __( 'Integration', 'essential-addons-for-elementor-lite' ) => 'ea-plug',
 			        __( 'Go Premium', 'essential-addons-for-elementor-lite' )  => 'ea-lock',
 		        ],
-		        'i18n'                 => [
+		        'i18n'                   => [
 			        'enable_all'          => __( 'Enable all', 'essential-addons-for-elementor-lite' ),
 			        'enable_all_elements' => __( 'Enable all Elements', 'essential-addons-for-elementor-lite' ),
 			        'save_settings'       => __( 'Save Settings', 'essential-addons-for-elementor-lite' ),
 			        'search_result_for'   => __( 'Search Results for :', 'essential-addons-for-elementor-lite' ),
 			        'all_widgets'         => __( 'All Widgets', 'essential-addons-for-elementor-lite' ),
 		        ],
-		        'whats_new'            => [
+		        'whats_new'              => [
 			        'heading' => __( 'What is New on Version?', 'essential-addons-for-elementor-lite' ),
 			        'list'    => [
 				        __( 'EA Fancy Chart Symbol display option in the fancy chart', 'essential-addons-for-elementor-lite' ),
@@ -116,7 +117,7 @@ trait Admin {
 				        'url'   => '#'
 			        ]
 		        ],
-		        'templately_promo'     => [
+		        'templately_promo'       => [
 			        'heading' => __( 'Unlock 5000+ Ready Templates', 'essential-addons-for-elementor-lite' ),
 			        'list'    => [
 				        __( 'Stunning, Ready Website Templates', 'essential-addons-for-elementor-lite' ),
@@ -128,7 +129,7 @@ trait Admin {
 				        'url'   => '#'
 			        ]
 		        ],
-		        'community_box'        => [
+		        'community_box'          => [
 			        [
 				        'heading'    => __( 'GitHub & Support', 'essential-addons-for-elementor-lite' ),
 				        'content'    => __( 'Encountering a problem? Seek assistance through live chat or by submitting.', 'essential-addons-for-elementor-lite' ),
@@ -180,7 +181,7 @@ trait Admin {
 				        'icon_color' => 'eaicon-1'
 			        ]
 		        ],
-		        'sidebar_box'          => [
+		        'sidebar_box'            => [
 			        'heading' => __( 'Unlimited Features', 'essential-addons-for-elementor-lite' ),
 			        'content' => __( 'Supercharge your content schedule and', 'essential-addons-for-elementor-lite' ),
 			        'review'  => [
@@ -193,37 +194,77 @@ trait Admin {
 				        'icon'  => 'ea-crown-1'
 			        ]
 		        ],
-		        'integration_box'      => [
+		        'integration_box'        => [
 			        'enable'  => __( 'Enable Integration', 'essential-addons-for-elementor-lite' ),
 			        'disable' => __( 'Disable Integration', 'essential-addons-for-elementor-lite' ),
 			        'list'    => [
 				        'bd' => [
-					        'heading' => __( 'BetterDocs', 'essential-addons-for-elementor-lite' ),
-					        'content' => __( 'BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ),
-					        'icon'    => 'images/BD.svg',
-					        'status'  => true
-				        ],
-				        'eb' => [
-					        'heading' => __( 'Essential Blocks', 'essential-addons-for-elementor-lite' ),
-					        'content' => __( 'BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ),
-					        'icon'    => 'images/EB.svg',
-					        'status'  => false
+					        'slug'     => 'betterdocs',
+					        'basename' => 'betterdocs/betterdocs.php',
+					        'logo'     => 'images/BD.svg',
+					        'title'    => __( 'BetterDocs', 'essential-addons-for-elementor-lite' ),
+					        'desc'     => __( 'BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ),
+					        'status'   => is_plugin_active( 'betterdocs/betterdocs.php' )
 				        ],
 				        'ep' => [
-					        'heading' => __( 'EmbedPress', 'essential-addons-for-elementor-lite' ),
-					        'content' => __( 'BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ),
-					        'icon'    => 'images/EP.svg',
-					        'status'  => true
+					        'slug'     => 'embedpress',
+					        'basename' => 'embedpress/embedpress.php',
+					        'logo'     => 'images/EP.svg',
+					        'title'    => __( 'EmbedPress', 'essential-addons-for-elementor-lite' ),
+					        'desc'     => __( 'EmbedPress lets you embed videos, images, posts, audio, maps and upload PDF, DOC, PPT & all other types of content into your WordPress site. ', 'essential-addons-for-elementor-lite' ),
+					        'status'   => is_plugin_active( 'embedpress/embedpress.php' )
 				        ],
 				        'nx' => [
-					        'heading' => __( 'NotificationX', 'essential-addons-for-elementor-lite' ),
-					        'content' => __( 'BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ),
-					        'icon'    => 'images/NX.svg',
-					        'status'  => true
+					        'slug'     => 'notificationx',
+					        'basename' => 'notificationx/notificationx.php',
+					        'logo'     => 'images/NX.svg',
+					        'title'    => __( 'NotificationX', 'essential-addons-for-elementor-lite' ),
+					        'desc'     => __( 'Best FOMO Social Proof Plugin to boost your sales conversion. Create stunning Sales Popup & Notification Bar With Elementor Support.', 'essential-addons-for-elementor-lite' ),
+					        'status'   => is_plugin_active( 'notificationx/notificationx.php' )
+				        ],
+				        'ej' => [
+					        'slug'     => 'easyjobs',
+					        'basename' => 'easyjobs/easyjobs.php',
+					        'logo'     => 'images/EJ.svg',
+					        'title'    => __( 'easy.jobs', 'essential-addons-for-elementor-lite' ),
+					        'desc'     => __( 'Easy solution for the job recruitment to attract, manage & hire right talent faster. The Best Talent Recruitment Suite which lets you manage jobs & career page in Elementor.', 'essential-addons-for-elementor-lite' ),
+					        'status'   => is_plugin_active( 'easyjobs/easyjobs.php' )
+				        ],
+				        'sp' => [
+					        'slug'     => 'wp-scheduled-posts',
+					        'basename' => 'wp-scheduled-posts/wp-scheduled-posts.php',
+					        'logo'     => 'images/SP.svg',
+					        'title'    => __( 'SchedulePress', 'essential-addons-for-elementor-lite' ),
+					        'desc'     => __( 'Best Content Marketing Tool For WordPress – Schedule, Organize, & Auto Share Blog Posts. Take a quick glance at your content planning with Schedule Calendar, Auto & Manual Scheduler and  more.', 'essential-addons-for-elementor-lite' ),
+					        'status'   => is_plugin_active( 'wp-scheduled-posts/wp-scheduled-posts.php' )
+				        ],
+				        'bl' => [
+					        'slug'     => 'betterlinks',
+					        'basename' => 'betterlinks/betterlinks.php',
+					        'logo'     => 'images/BL.svg',
+					        'title'    => __( 'BetterLinks', 'essential-addons-for-elementor-lite' ),
+					        'desc'     => __( 'Best Link Shortening tool to create, shorten and manage any URL to help you cross-promote your brands & products. Gather analytics reports, run successfully marketing campaigns easily & many more.', 'essential-addons-for-elementor-lite' ),
+					        'status'   => is_plugin_active( 'betterlinks/betterlinks.php' )
+				        ],
+				        'eb' => [
+					        'slug'     => 'essential-blocks',
+					        'basename' => 'essential-blocks/essential-blocks.php',
+					        'logo'     => 'images/EB.svg',
+					        'title'    => __( 'Essential Blocks', 'essential-addons-for-elementor-lite' ),
+					        'desc'     => __( 'Enhance your Gutenberg experience with 40+ unique blocks (more coming soon). Add power to the block editor using our easy-to-use blocks which are designed to make your next WordPress page or posts design easier and prettier than ever before.', 'essential-addons-for-elementor-lite' ),
+					        'status'   => is_plugin_active( 'essential-blocks/essential-blocks.php' )
+				        ],
+				        'bp' => [
+					        'slug'     => 'better-payment',
+					        'basename' => 'better-payment/better-payment.php',
+					        'logo'     => 'images/BP.svg',
+					        'title'    => __( 'Better Payment', 'essential-addons-for-elementor-lite' ),
+					        'desc'     => __( 'Better Payment streamlines transactions in Elementor, integrating PayPal, Stripe, advanced analytics, validation, and Elementor forms for the most secure & efficient payments.', 'essential-addons-for-elementor-lite' ),
+					        'status'   => is_plugin_active( 'better-payment/better-payment.php' )
 				        ]
 			        ]
 		        ],
-		        'premium_items'        => [
+		        'premium_items'          => [
 			        'list' => [
 				        [
 					        'heading' => __( 'Protected Content', 'essential-addons-for-elementor-lite' ),
@@ -254,7 +295,7 @@ trait Admin {
 				        ]
 			        ]
 		        ],
-		        'enhance_experience'   => [
+		        'enhance_experience'     => [
 			        'heading' => __( "Enhance Your Elementor Experience By <br/> <b>Unlocking</b> <span class='Advance-color'>35+ Advanced PRO</span> <b>Elements</b>", 'essential-addons-for-elementor-lite' ),
 			        'review'  => [
 				        'label' => __( 'Review from Real Users', 'essential-addons-for-elementor-lite' ),
@@ -267,7 +308,7 @@ trait Admin {
 				        'icon'  => 'ea-crown-1'
 			        ]
 		        ],
-		        'explore_pro_features' => [
+		        'explore_pro_features'   => [
 			        'heading' => __( "Explore Premiere Pro features", 'essential-addons-for-elementor-lite' ),
 			        'content' => __( "Learn all about the tools and techniques you can use to edit videos, animate titles, add effects, mix sound, and more.", 'essential-addons-for-elementor-lite' ),
 			        'image'   => 'images/img-3.png',
@@ -277,7 +318,7 @@ trait Admin {
 				        'icon'  => 'ea-link'
 			        ]
 		        ],
-		        'tools'                => [
+		        'tools'                  => [
 			        'box_1' => [
 				        'heading' => __( "Regenerate Assets", 'essential-addons-for-elementor-lite' ),
 				        'content' => __( "Essential Addons styles & scripts are saved in Uploads folder. This option will clear all those generated files.", 'essential-addons-for-elementor-lite' ),
@@ -292,7 +333,7 @@ trait Admin {
 				        'icon'    => 'ea-settings',
 				        'button'  => [
 					        'label' => __( 'CSS Print Method', 'essential-addons-for-elementor-lite' ),
-					        'url'   => '#'
+					        'url'   => admin_url( 'admin.php?page=elementor#tab-advanced' )
 				        ]
 			        ],
 			        'box_3' => [
@@ -301,10 +342,12 @@ trait Admin {
 				        'methods' => [
 					        'external' => __( 'External file', 'essential-addons-for-elementor-lite' ),
 					        'internal' => __( 'Internal Embedding', 'essential-addons-for-elementor-lite' ),
-				        ]
+				        ],
+				        'name'    => 'eael-js-print-method',
+				        'value'   => get_option( 'eael_js_print_method', 'external' )
 			        ]
 		        ],
-		        'extensions'           => [
+		        'extensions'             => [
 			        'heading' => __( 'Premium Extensions', 'essential-addons-for-elementor-lite' ),
 			        'list'    => [
 				        'section-parallax'    => [
@@ -321,7 +364,7 @@ trait Admin {
 					        'demo_link'   => 'https://essential-addons.com/elementor/particle-effect/',
 					        'doc_link'    => 'https://essential-addons.com/elementor/docs/particles/',
 					        'is_pro'      => true,
-					        'is_activate' => boolval( $this->get_settings( 'section-parallax' ) )
+					        'is_activate' => boolval( $this->get_settings( 'section-particles' ) )
 				        ],
 				        'tooltip-section'     => [
 					        'key'         => 'tooltip-section',
@@ -413,7 +456,7 @@ trait Admin {
 				        ],
 			        ]
 		        ],
-		        'widgets'              => [
+		        'widgets'                => [
 			        'content-elements'         => [
 				        'title'    => __( 'Content Elements', 'essential-addons-for-elementor-lite' ),
 				        'icon'     => 'ea-content',
@@ -1165,11 +1208,11 @@ trait Admin {
 				        ]
 			        ]
 		        ],
-		        'modal'                => [
+		        'modal'                  => [
 			        'postDuplicatorSetting'  => [
 				        'title'   => __( "Select Post Types", 'essential-addons-for-elementor-lite' ),
 				        'name'    => 'post-duplicator-post-type',
-				        'value'   => get_option( 'eael_save_post_duplicator_post_type' ),
+				        'value'   => get_option( 'eael_save_post_duplicator_post_type', 'all' ),
 				        'options' => get_post_types( [ 'public' => true, 'show_in_nav_menus' => true ] )
 			        ],
 			        'googleMapSetting'       => [
@@ -1177,7 +1220,7 @@ trait Admin {
 				        'title_icon' => 'images/map.svg',
 				        'label'      => __( "Set API Key", 'essential-addons-for-elementor-lite' ),
 				        'name'       => 'google-map-api',
-				        'value'      => get_option( 'eael_save_google_map_api' ),
+				        'value'      => get_option( 'eael_save_google_map_api', '' ),
 				        'image'      => 'images/map.png',
 			        ],
 			        'businessReviewsSetting' => [
@@ -1185,7 +1228,7 @@ trait Admin {
 				        'title_icon' => 'images/map.svg',
 				        'label'      => __( "Set API Key", 'essential-addons-for-elementor-lite' ),
 				        'name'       => 'br_google_place_api_key',
-				        'value'      => get_option( 'eael_br_google_place_api_key' ),
+				        'value'      => get_option( 'eael_br_google_place_api_key', '' ),
 				        'image'      => 'images/map2.png',
 				        'link'       => [
 					        'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
@@ -1197,7 +1240,7 @@ trait Admin {
 				        'title_icon' => 'images/mc.svg',
 				        'label'      => __( "Set API Key", 'essential-addons-for-elementor-lite' ),
 				        'name'       => 'mailchimp-api',
-				        'value'      => get_option( 'eael_save_mailchimp_api' ),
+				        'value'      => get_option( 'eael_save_mailchimp_api', '' ),
 				        'image'      => 'images/mc.png',
 				        'link'       => [
 					        'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
@@ -1212,19 +1255,19 @@ trait Admin {
 						        'fields' => [
 							        [
 								        'name'        => 'lr_recaptcha_sitekey',
-								        'value'       => get_option( 'eael_recaptcha_sitekey' ),
+								        'value'       => get_option( 'eael_recaptcha_sitekey', '' ),
 								        'label'       => __( 'Site Key:', 'essential-addons-for-elementor-lite' ),
 								        'placeholder' => __( 'Site Key', 'essential-addons-for-elementor-lite' ),
 							        ],
 							        [
 								        'name'        => 'lr_recaptcha_secret',
-								        'value'       => get_option( 'eael_recaptcha_secret' ),
+								        'value'       => get_option( 'eael_recaptcha_secret', '' ),
 								        'label'       => __( 'Site Secret:', 'essential-addons-for-elementor-lite' ),
 								        'placeholder' => __( 'Site Secret', 'essential-addons-for-elementor-lite' ),
 							        ],
 							        [
 								        'name'        => 'lr_recaptcha_language',
-								        'value'       => get_option( 'eael_recaptcha_language' ),
+								        'value'       => get_option( 'eael_recaptcha_language', '' ),
 								        'label'       => __( 'Language:', 'essential-addons-for-elementor-lite' ),
 								        'placeholder' => __( 'reCAPTCHA Language Code', 'essential-addons-for-elementor-lite' ),
 							        ]
@@ -1236,19 +1279,19 @@ trait Admin {
 						        'fields' => [
 							        [
 								        'name'        => 'lr_recaptcha_sitekey_v3',
-								        'value'       => get_option( 'eael_recaptcha_sitekey_v3' ),
+								        'value'       => get_option( 'eael_recaptcha_sitekey_v3', '' ),
 								        'label'       => __( 'Site Key:', 'essential-addons-for-elementor-lite' ),
 								        'placeholder' => __( 'Site Key', 'essential-addons-for-elementor-lite' ),
 							        ],
 							        [
 								        'name'        => 'lr_recaptcha_secret_v3',
-								        'value'       => get_option( 'eael_recaptcha_secret_v3' ),
+								        'value'       => get_option( 'eael_recaptcha_secret_v3', '' ),
 								        'label'       => __( 'Site Secret:', 'essential-addons-for-elementor-lite' ),
 								        'placeholder' => __( 'Site Secret', 'essential-addons-for-elementor-lite' ),
 							        ],
 							        [
 								        'name'        => 'lr_recaptcha_language_v3',
-								        'value'       => get_option( 'eael_recaptcha_language_v3' ),
+								        'value'       => get_option( 'eael_recaptcha_language_v3', '' ),
 								        'label'       => __( 'Language:', 'essential-addons-for-elementor-lite' ),
 								        'placeholder' => __( 'reCAPTCHA Language Code', 'essential-addons-for-elementor-lite' ),
 							        ]
@@ -1260,7 +1303,7 @@ trait Admin {
 						        'fields' => [
 							        [
 								        'name'        => 'lr_g_client_id',
-								        'value'       => get_option( 'eael_g_client_id' ),
+								        'value'       => get_option( 'eael_g_client_id', '' ),
 								        'label'       => __( 'Google Client ID:', 'essential-addons-for-elementor-lite' ),
 								        'placeholder' => __( 'Google Client ID', 'essential-addons-for-elementor-lite' ),
 							        ]
@@ -1268,17 +1311,17 @@ trait Admin {
 					        ],
 					        'facebookLogin'  => [
 						        'title'  => __( 'Facebook Login', 'essential-addons-for-elementor-lite' ),
-						        'icon'   => 'images/map.svg',
+						        'icon'   => 'images/fb.svg',
 						        'fields' => [
 							        [
 								        'name'        => 'lr_fb_app_id',
-								        'value'       => get_option( 'eael_fb_app_id' ),
+								        'value'       => get_option( 'eael_fb_app_id', '' ),
 								        'label'       => __( 'Facebook App ID:', 'essential-addons-for-elementor-lite' ),
 								        'placeholder' => __( 'Facebook App ID', 'essential-addons-for-elementor-lite' ),
 							        ],
 							        [
 								        'name'        => 'lr_fb_app_secret',
-								        'value'       => get_option( 'eael_fb_app_secret' ),
+								        'value'       => get_option( 'eael_fb_app_secret', '' ),
 								        'label'       => __( 'Facebook App Secret:', 'essential-addons-for-elementor-lite' ),
 								        'placeholder' => __( 'Facebook App Secret', 'essential-addons-for-elementor-lite' ),
 							        ]
@@ -1286,11 +1329,11 @@ trait Admin {
 					        ],
 					        'mailchimpLogin' => [
 						        'title'  => __( 'Mailchimp Integration', 'essential-addons-for-elementor-lite' ),
-						        'icon'   => 'images/mc.svg',
+						        'icon'   => 'images/mcwhite.svg',
 						        'fields' => [
 							        [
 								        'name'        => 'lr_mailchimp_api_key',
-								        'value'       => get_option( 'eael_lr_mailchimp_api_key' ),
+								        'value'       => get_option( 'eael_lr_mailchimp_api_key', '' ),
 								        'label'       => __( 'Mailchimp API Key:', 'essential-addons-for-elementor-lite' ),
 								        'placeholder' => __( 'Mailchimp API', 'essential-addons-for-elementor-lite' ),
 							        ]
@@ -1298,18 +1341,18 @@ trait Admin {
 					        ],
 					        'customFields'   => [
 						        'title'  => __( 'Enable Custom Fields', 'essential-addons-for-elementor-lite' ),
-						        'icon'   => 'images/map.svg',
-								'info'	 => __( 'Fields will be available on both the edit profile page and the EA Login | Register Form.', 'essential-addons-for-elementor-lite' ),
+						        'icon'   => 'images/customfield.svg',
+						        'info'   => __( 'Fields will be available on both the edit profile page and the EA Login | Register Form.', 'essential-addons-for-elementor-lite' ),
 						        'fields' => [
 							        [
 								        'name'        => 'lr_custom_profile_fields_text',
-								        'value'       => get_option( 'eael_custom_profile_fields_text' ),
+								        'value'       => get_option( 'eael_custom_profile_fields_text', '' ),
 								        'label'       => __( 'Text Type Fields:', 'essential-addons-for-elementor-lite' ),
 								        'placeholder' => __( 'Field 1, Field 2 ...', 'essential-addons-for-elementor-lite' ),
 							        ],
 							        [
 								        'name'        => 'lr_custom_profile_fields_img',
-								        'value'       => get_option( 'eael_custom_profile_fields_img' ),
+								        'value'       => get_option( 'eael_custom_profile_fields_img', '' ),
 								        'label'       => __( 'File Type Fields:', 'essential-addons-for-elementor-lite' ),
 								        'placeholder' => __( 'Field 1, Field 2 ...', 'essential-addons-for-elementor-lite' ),
 							        ]
@@ -1352,7 +1395,7 @@ trait Admin {
      */
     public function admin_settings_page() {
         ?>
-		<link rel="stylesheet" href="<?php echo EAEL_PLUGIN_URL; ?>includes/templates/admin/new-ui/assets/icons/style.css">
+		<link rel="stylesheet" href="<?php echo EAEL_PLUGIN_URL; ?>includes/templates/admin/eael-dashboard/dist/icons/style.css">
 		<link rel="stylesheet" href="<?php echo EAEL_PLUGIN_URL; ?>includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.css">
 		<div id="eael-dashboard"></div>
 		<form action="" method="POST" id="eael-settings" name="eael-settings" style="display: none;">

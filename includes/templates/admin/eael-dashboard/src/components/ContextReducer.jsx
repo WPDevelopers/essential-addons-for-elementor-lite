@@ -1,65 +1,17 @@
-import {useEffect, useReducer} from "react";
-import {ContextProvider} from '../context'
+import {useReducer} from "react";
+import {ContextProvider, initValue} from '../context'
 import App from "./App.jsx";
 import {eaAjax} from "../helper";
 
 function ContextReducer() {
 
-    const eaData = localize.eael_dashboard,
-        licenseData = typeof wpdeveloperLicenseData === 'undefined' ? {} : wpdeveloperLicenseData,
-        initValue = {
-            menu: 'General',
-            integrations: {},
-            extensions: [],
-            widgets: {},
-            elements: {},
-            extensionAll: false,
-            widgetAll: false,
-            licenseStatus: licenseData?.license_status,
-            hiddenLicenseKey: licenseData?.hidden_license_key,
-            modals: {}
-        }
-
-    useEffect(() => {
-        Object.keys(eaData.integration_box.list).map((item) => {
-            initValue.integrations[item] = eaData.integration_box.list[item].status;
-        });
-
-        Object.keys(eaData.extensions.list).map((item) => {
-            initValue.extensions.push(item);
-            initValue.elements[item] = eaData.extensions.list[item].is_activate;
-        });
-
-        Object.keys(eaData.widgets).map((item) => {
-            initValue.widgets[item] = [];
-            Object.keys(eaData.widgets[item].elements).map((subitem) => {
-                initValue.widgets[item].push(subitem);
-                initValue.elements[subitem] = eaData.widgets[item].elements[subitem].is_activate;
-            });
-        });
-
-        Object.keys(eaData.modal).map((item) => {
-            const key = eaData.modal[item]?.name;
-            if (key !== undefined) {
-                initValue.modals[key] = eaData.modal[item].value;
-            } else if (item === 'loginRegisterSetting') {
-                const accordion = eaData.modal[item].accordion;
-                Object.keys(accordion).map((subItem) => {
-                    accordion[subItem].fields.map((childItem) => {
-                        const key = childItem?.name;
-                        if (key !== undefined) {
-                            initValue.modals[key] = childItem?.value;
-                        }
-                    });
-                });
-            }
-
-        });
-    }, []);
+    const eaData = localize.eael_dashboard;
 
     const reducer = (state, {type, payload}) => {
         const licenseManagerConfig = typeof wpdeveloperLicenseManagerConfig === 'undefined' ? {} : wpdeveloperLicenseManagerConfig;
-        let params, response, licenseStatus, licenseError, otp, otpEmail, errorMessage, hiddenLicenseKey, integrations,
+        let params, request, response, licenseStatus, licenseError, otpError, otp, otpEmail, errorMessage,
+            hiddenLicenseKey,
+            integrations,
             elements, modals;
 
         switch (type) {
@@ -68,6 +20,22 @@ function ContextReducer() {
             case 'SET_MENU':
                 return {...state, menu: payload};
             case 'ON_CHANGE_INTEGRATION':
+                params = {
+                    action: 'wpdeveloper_deactivate_plugin',
+                    security: localize.nonce,
+                    slug: eaData.integration_box.list[payload.key].slug,
+                    basename: eaData.integration_box.list[payload.key].basename
+                };
+
+                if (payload.value) {
+                    params.action = 'wpdeveloper_auto_active_even_not_installed';
+                }
+
+                request = eaAjax(params, true);
+                request.onreadystatechange = () => {
+                    response = JSON.parse(request.responseText);
+                }
+
                 integrations = {...state.integrations, [payload.key]: payload.value};
                 return {...state, integrations};
             case 'ON_CHANGE_ELEMENT':
@@ -76,21 +44,37 @@ function ContextReducer() {
             case 'ON_CHANGE_ALL':
                 if (payload.key === 'extensionAll') {
                     state.extensions.map((item) => {
+                        if (state.proElements.includes(item)) {
+                            return;
+                        }
+
                         state.elements[item] = payload.value;
                     });
                 } else if (payload.key === 'widgetAll') {
                     Object.keys(state.widgets).map((item) => {
                         state[item] = payload.value;
                         state.widgets[item].map((subitem) => {
+                            if (state.proElements.includes(subitem)) {
+                                return;
+                            }
+
                             state.elements[subitem] = payload.value;
                         });
                     });
                 } else if (payload.key === 'searchAll') {
                     Object.keys(state.search).map((item) => {
+                        if (state.proElements.includes(item)) {
+                            return;
+                        }
+
                         state.elements[item] = payload.value;
                     });
                 } else {
                     state.widgets[payload.key].map((item) => {
+                        if (state.proElements.includes(item)) {
+                            return;
+                        }
+
                         state.elements[item] = payload.value;
                     });
                 }
@@ -151,11 +135,11 @@ function ContextReducer() {
                     hiddenLicenseKey = response.data.license_key;
                 } else {
                     otp = true;
-                    licenseError = true;
+                    otpError = true;
                     errorMessage = response.data.message;
                 }
 
-                return {...state, licenseStatus, hiddenLicenseKey, licenseError, errorMessage, otp};
+                return {...state, licenseStatus, hiddenLicenseKey, otpError, errorMessage, otp};
             case 'LICENSE_DEACTIVATE':
                 params = {
                     action: 'essential-addons-elementor/license/deactivate',
@@ -188,10 +172,12 @@ function ContextReducer() {
                 }
 
                 return {...state, otp, licenseError, errorMessage};
+            case 'GO_PRO_MODAL':
+                return {...state, modalGoPremium: 'open'}
             case 'OPEN_MODAL':
                 return {...state, modal: 'open', modalID: payload.key, modalTitle: payload.title}
             case 'CLOSE_MODAL':
-                return {...state, modal: 'close'}
+                return {...state, modal: 'close', modalGoPremium: 'close', modalRegenerateAssets: 'close'}
             case 'MODAL_ACCORDION':
                 return {...state, modalAccordion: payload.key}
             case 'MODAL_ON_CHANGE':
@@ -207,7 +193,7 @@ function ContextReducer() {
                 response = eaAjax(params);
 
                 if (response?.success) {
-                    return {...state, modal: 'close'};
+                    return {...state, modal: 'close', modalRegenerateAssets: 'open'};
                 }
 
                 return {...state};
@@ -230,7 +216,27 @@ function ContextReducer() {
                 //     return {...state, modal: 'close'};
                 // }
 
-                return {...state};
+                return {...state, modalRegenerateAssets: 'open'};
+            case 'SAVE_TOOLS':
+                params = {
+                    action: 'save_settings_with_ajax',
+                    security: localize.nonce,
+                    [payload.key]: payload.value
+                };
+
+                response = eaAjax(params);
+
+                return {...state, modalRegenerateAssets: 'open'};
+            case 'REGENERATE_ASSETS':
+                params = {
+                    action: 'clear_cache_files_with_ajax',
+                    security: localize.nonce
+                };
+
+                response = eaAjax(params);
+                return {...state, modalRegenerateAssets: 'open'}
+            case 'ELEMENTS_CAT':
+                return {...state, elementsActivateCatIndex: payload}
         }
     }
 

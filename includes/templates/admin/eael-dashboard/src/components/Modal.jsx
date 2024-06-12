@@ -8,7 +8,7 @@ function Modal() {
     const {eaState, eaDispatch} = consumer(),
         formRef = useRef(),
         clickHandler = () => {
-            eaDispatch({type: 'CLOSE_MODAL', payload: {key: '', value: ''}});
+            eaDispatch({type: 'CLOSE_MODAL'});
         },
         submitHandler = (e) => {
             e.preventDefault();
@@ -20,7 +20,8 @@ function Modal() {
             });
 
             eaDispatch({type: 'SAVE_MODAL_DATA', payload: inputData});
-        };
+        },
+        eaData = localize.eael_dashboard.modal;
 
     return (
         <>
@@ -36,9 +37,13 @@ function Modal() {
                         {['loginRegisterSetting', 'postDuplicatorSetting'].includes(eaState.modalID) ||
                             <ModalStyleOne/>}
                     </div>
-                    <div className="ea__modal-footer flex justify-between items-center">
-                        <a className="ea__api-link" href="#">To configure the API Keys, check out this doc</a>
-                        <button className="ea__modal-btn">Save</button>
+                    <div className="ea__modal-footer flex items-center">
+                        {eaState.modalID === 'loginRegisterSetting' &&
+                            <a className="ea__api-link"
+                               href={eaData[eaState.modalID].link.url}>{eaData[eaState.modalID].link.text}</a>}
+                        <div className='flex flex-end flex-1'>
+                            <button className="ea__modal-btn">Save</button>
+                        </div>
                     </div>
                     <div className="ea__modal-close-btn" onClick={clickHandler}>
                         <i className="ea-dash-icon ea-close"></i>

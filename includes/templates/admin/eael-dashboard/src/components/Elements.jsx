@@ -2,7 +2,7 @@ import ElementsSubSection from "./ElementsSubSection.jsx";
 import consumer from "../context";
 import ElementCategoryBox from "./ElementCategoryBox.jsx";
 import ElementsSearchSection from "./ElementsSearchSection.jsx";
-import {useRef} from "react";
+import {useRef, useEffect} from "react";
 import {debounce} from "../helper";
 
 function Elements() {
@@ -15,6 +15,8 @@ function Elements() {
         },
         searchParam = useRef(),
         categoryRef = useRef(),
+        subCatRef = useRef(),
+        newScroll = {},
         onSearch = () => {
             let results = {},
                 searchTerm = searchParam.current.value,
@@ -37,7 +39,53 @@ function Elements() {
             }
 
             eaDispatch({type: 'ON_SEARCH', payload: {value: results}});
+        },
+        clickHandler = () => {
+            eaDispatch({type: 'SAVE_ELEMENTS_DATA'});
+        },
+        scrollHandler = () => {
+            newScroll.y = window.pageYOffset;
+            const subCatChildren = subCatRef.current.children,
+                subCatChildrenArr = [subCatChildren[8]?.offsetTop,
+                    subCatChildren[7]?.offsetTop,
+                    subCatChildren[6]?.offsetTop,
+                    subCatChildren[5]?.offsetTop,
+                    subCatChildren[4]?.offsetTop,
+                    subCatChildren[3]?.offsetTop,
+                    subCatChildren[2]?.offsetTop,
+                    subCatChildren[1]?.offsetTop,
+                    subCatChildren[0]?.offsetTop,];
+            let currentActivateCatIndex = 0;
+
+            if (window.pageYOffset > subCatChildren[8]?.offsetTop) {
+                currentActivateCatIndex = 8;
+            } else if (window.pageYOffset > subCatChildren[7]?.offsetTop) {
+                currentActivateCatIndex = 7;
+            } else if (window.pageYOffset > subCatChildren[6]?.offsetTop) {
+                currentActivateCatIndex = 6;
+            } else if (window.pageYOffset > subCatChildren[5]?.offsetTop) {
+                currentActivateCatIndex = 5;
+            } else if (window.pageYOffset > subCatChildren[4]?.offsetTop) {
+                currentActivateCatIndex = 4;
+            } else if (window.pageYOffset > subCatChildren[3]?.offsetTop) {
+                currentActivateCatIndex = 3;
+            } else if (window.pageYOffset > subCatChildren[2]?.offsetTop) {
+                currentActivateCatIndex = 2;
+            } else if (window.pageYOffset > subCatChildren[1]?.offsetTop) {
+                currentActivateCatIndex = 1;
+            }
+
+            eaDispatch({type: 'ELEMENTS_CAT', payload: currentActivateCatIndex});
         };
+
+    useEffect(() => {
+        window.addEventListener('scroll', scrollHandler);
+        console.log('didmount scroll');
+        return () => {
+            window.removeEventListener('scroll', scrollHandler);
+            console.log('unmount scroll');
+        };
+    }, []);
 
     return (
         <>
@@ -74,11 +122,11 @@ function Elements() {
                     </div>
                     <div className="ea__content-icon flex">
                         {Object.keys(eaData).map((item, index) => {
-                            return <ElementCategoryBox index={item} key={index}/>
+                            return <ElementCategoryBox index={item} key={index} activateIndex={index}/>
                         })}
                     </div>
                 </div>
-                <div className="ea__content-elements-wrapper relative">
+                <div className="ea__content-elements-wrapper relative" ref={subCatRef}>
                     {!!searchParam?.current?.value || Object.keys(eaData).map((item, index) => {
                         return <ElementsSubSection index={item} key={index}/>
                     })}
@@ -87,7 +135,7 @@ function Elements() {
 
 
                 <div className="ea__elements-button-wrap">
-                    <button className="primary-btn install-btn">{i18n.save_settings}</button>
+                    <button className="primary-btn install-btn" onClick={clickHandler}>{i18n.save_settings}</button>
                     <div className="ea__section-overlay">
                     </div>
                 </div>

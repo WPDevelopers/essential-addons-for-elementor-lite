@@ -8,7 +8,9 @@ import Integration from './Integration.jsx'
 import Premium from './Premium.jsx'
 import consumer from "../context";
 import Modal from "./Modal.jsx";
+import ModalRegenerateAssets from "./ModalRegenerateAssets.jsx";
 import '../App.css'
+import ModalGoPremium from "./ModalGoPremium.jsx";
 
 function App() {
     const {eaState} = consumer();
@@ -28,6 +30,8 @@ function App() {
                     {eaState.menu === 'Go Premium' ? <Premium/> : ''}
                 </section>
                 {eaState.modal === 'open' && <Modal/>}
+                {eaState.modalRegenerateAssets === 'open' && <ModalRegenerateAssets/>}
+                {eaState.modalGoPremium === 'open' && <ModalGoPremium/>}
             </section>
         </>
     )
