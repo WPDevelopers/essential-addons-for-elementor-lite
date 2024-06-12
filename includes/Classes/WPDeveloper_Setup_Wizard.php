@@ -61,6 +61,7 @@ class WPDeveloper_Setup_Wizard {
 				'go_pro_content' => $this->data_go_pro_content(),
 				'templately_content' => $this->data_templately_content(),
 				'integrations_content' => $this->data_integrations_content(),
+				'modal_content' => $this->data_modal_content(),
 			];
 
 			wp_localize_script( 'essential_addons_elementor-setup-wizard-js', 'localize', array(
@@ -320,6 +321,14 @@ class WPDeveloper_Setup_Wizard {
 		];
 
 		return $integrations_content;
+	}
+	
+	public function data_modal_content(){
+		$modal_content = [
+			'success_2_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/success-2.png',
+		];
+
+		return $modal_content;
 	}
 
 	public function getting_started_cotnent(){

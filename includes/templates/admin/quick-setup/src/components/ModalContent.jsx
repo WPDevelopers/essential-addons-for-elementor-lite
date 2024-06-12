@@ -3,41 +3,25 @@ import { __ } from "@wordpress/i18n";
 
 function ModalContent() {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
-  let menu_items = eaelQuickSetup?.menu_items;
-  let wizard_column = menu_items?.wizard_column;
-  let templately_status = menu_items?.templately_status;
-  let items = menu_items?.items;
-  let templately_local_plugin_data = menu_items?.templately_local_plugin_data;
-
-  let i = 0;
-  let isActive = '';
-  let itemClass = '';
+  let modal_content = eaelQuickSetup?.modal_content;
+  let success_2_src = modal_content?.success_2_src;
 
   return (
     <>
-		<div className={`eael-onboard-nav-list flex justify-between ${eaelQuickSetup.menu_items.wizard_column}`} data-step="1">
-            {items.map((item, index) => {
-                // Conditional logic to skip certain items
-                if (
-                    (item === 'Templately' && templately_status) ||
-                    (templately_local_plugin_data !== false && item === 'Templately')
-                ) {
-                    return null;
-                }
-
-                isActive = i === 0 ? 'active' : isActive;
-                itemClass = item.trim().toLowerCase().replace(/ /g, '-');
-
-                return (
-                    <div className={`eael-onboard-nav ${isActive} ${itemClass}`} key={index}>
-                        <span className="eael-nav-count">
-                            {++i}
-                        </span>
-                        <span className="eael-nav-text">{item}</span>
+		<section className="eael-modal-wrapper">
+            <div className="eael-modal-content-wrapper eael-onboard-modal">
+                <div className="">
+                    <div className="congrats--wrapper">
+                        <h6>{__( 'You are done!', 'essential-addons-for-elementor-lite' )}</h6>
+                        <h4 className="congrats--title">{__( 'Congratulations!', 'essential-addons-for-elementor-lite' )}</h4>
+						            <img className="eael-modal-map-img" src={success_2_src} alt={__( 'Success Image', 'essential-addons-for-elementor-lite' )} />
                     </div>
-                );
-            })}
-		</div>
+                </div>
+                <div className="eael-modal-close-btn">
+                    <i className="ea-dash-icon ea-close"></i>
+                </div>
+            </div>
+        </section>
     </>
   );
 }
