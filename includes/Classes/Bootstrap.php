@@ -315,6 +315,10 @@ class Bootstrap
 
 		    if ( ! current_user_can( 'administrator' ) ) {
 			    add_filter( 'elementor/document/save/data', function ( $data ) {
+				    if ( isset( $data['settings']['eael_custom_js'] ) ) {
+					    $data['settings']['eael_custom_js'] = get_post_meta( get_the_ID(), '_eael_custom_js', true );
+				    }
+
 				    if ( empty( $data['elements'] ) ) {
 					    return $data;
 				    }

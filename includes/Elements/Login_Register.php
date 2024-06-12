@@ -120,6 +120,12 @@ class Login_Register extends Widget_Base {
 	 * @var string|false
 	 */
 	protected $recaptcha_sitekey_v3;
+	
+	/**
+	 * Google reCAPTCHA v3 badge hide flag
+	 * @var string|false
+	 */
+	protected $recaptcha_badge_hide;
 
 	/**
 	 * @var mixed|void
@@ -136,9 +142,13 @@ class Login_Register extends Widget_Base {
 		$this->user_can_register = get_option( 'users_can_register' );
 		$this->recaptcha_sitekey = get_option( 'eael_recaptcha_sitekey' );
 		$this->recaptcha_sitekey_v3 = get_option( 'eael_recaptcha_sitekey_v3' );
+		$this->recaptcha_badge_hide = get_option('eael_recaptcha_badge_hide');
 		$this->in_editor         = Plugin::instance()->editor->is_edit_mode();
 		$this->pro_enabled       = apply_filters( 'eael/pro_enabled', false );
 
+		if ( $this->recaptcha_badge_hide ) {
+			add_filter( 'body_class', [ $this, 'add_login_register_body_class' ] );
+		}
 	}
 
 	/**
@@ -222,6 +232,7 @@ class Login_Register extends Widget_Base {
 			'first_name'   => __( 'First Name', 'essential-addons-for-elementor-lite' ),
 			'last_name'    => __( 'Last Name', 'essential-addons-for-elementor-lite' ),
 			'website'      => __( 'Website', 'essential-addons-for-elementor-lite' ),
+			'honeypot'     => __( 'Honeypot', 'essential-addons-for-elementor-lite' ),
 		];
 
 		if( 'on' === get_option( 'eael_custom_profile_fields' ) ){
@@ -769,6 +780,30 @@ class Login_Register extends Widget_Base {
 				],
 			] );
 		}
+
+		$this->add_control( 'login_register_recaptcha_v3_score_threshold', [
+			'label'       => esc_html__( 'Score Threshold', 'essential-addons-for-elementor-lite' ),
+			'description' => esc_html__( 'By default, you can use a threshold of 0.5.', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'%',
+			],
+			'range'      => [
+				'%' => [
+					'min'  => 0,
+					'max'  => 1,
+					'step' => 0.1,
+				],
+			],
+			'default'    => [
+				'unit' => '%',
+				'size' => 0.5,
+			],
+			'condition'       => [
+				'enable_login_register_recaptcha' => 'yes',
+				'login_register_recaptcha_version' => 'v3',
+			],
+		] );
 
 		do_action( 'eael/login-register/after-general-controls', $this );
 
@@ -1978,7 +2013,7 @@ class Login_Register extends Widget_Base {
 				'active' => true,
 			],
 			'condition' => [
-				'field_type!' => $custom_fields_image,
+				'field_type!' => array_merge( $custom_fields_image, ['honeypot'] ),
 			],
 			'ai' => [
 				'active' => false,
@@ -1993,6 +2028,7 @@ class Login_Register extends Widget_Base {
 					'email',
 					'password',
 					'confirm_pass',
+					'honeypot'
 				],
 			],
 		] );
@@ -2031,6 +2067,11 @@ class Login_Register extends Widget_Base {
 			],
 			'selectors' => [
 				'{{WRAPPER}} {{CURRENT_ITEM}}' => 'width: {{SIZE}}{{UNIT}};',
+			],
+			'condition'       => [
+				'field_type!' => [
+					'honeypot'
+				],
 			],
 		] );
 		apply_filters( 'eael/login-register/register-repeater', $repeater );
@@ -5478,6 +5519,12 @@ class Login_Register extends Widget_Base {
 		return $terms_relation_conditions;
 	}
 
+	public function add_login_register_body_class( $classes ) {
+		$classes[] = 'eael-login-register-page-body';
+
+		return $classes;
+	}
+
 	protected function render() {
 
 		if ( ! current_user_can( 'manage_options' ) && 'yes' === $this->get_settings_for_display( 'redirect_for_logged_in_user' ) && is_user_logged_in() ) {
@@ -5549,7 +5596,6 @@ class Login_Register extends Widget_Base {
 			wp_enqueue_script('eael-recaptcha-v3');
 			wp_dequeue_script('eael-recaptcha');
         }
-
 		?>
         <div class="eael-login-registration-wrapper <?php echo empty( $form_image_id ) ? '' : esc_attr( 'has-illustration' ); ?>"
              data-is-ajax="<?php echo esc_attr( $this->get_settings_for_display( 'enable_ajax' ) ); ?>"
@@ -5566,6 +5612,18 @@ class Login_Register extends Widget_Base {
 			$this->print_login_form();
 			$this->print_register_form();
 			$this->print_lostpassword_form(); //request for a new password.
+			
+			if ( $this->recaptcha_badge_hide ) {
+			?>
+				<div class="eael-recaptcha-no-branding-wrapper">
+					<small>
+					This site is protected by reCAPTCHA and the Google
+					<a href="https://policies.google.com/privacy">Privacy Policy</a> and
+					<a href="https://policies.google.com/terms">Terms of Service</a> apply.
+					</small>
+				</div>
+			<?php
+			}
 			?>
         </div>
 
@@ -5760,7 +5818,7 @@ class Login_Register extends Widget_Base {
 										
 										<?php if( !empty( $show_login_spinner ) && 'true' === $show_login_spinner ): ?>
 										<span class="eael-lr-form-loader eael-lr-login-form-loader d-none<?php esc_attr_e($this->in_editor ? '-editor' : '') ?>">
-											<i class="eicon-spinner eicon-animation-spin"></i>
+											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z"/></svg>
 										</span>
 										<?php endif; ?>
 
@@ -5830,6 +5888,7 @@ class Login_Register extends Widget_Base {
 			$last_name_exists    = 0;
 			$website_exists      = 0;
 			$eael_phone_number_exists = 0;
+			$honeypot_exists = 0;
 			
 			$f_labels            = [
 				'email'            	=> __( 'Email', 'essential-addons-for-elementor-lite' ),
@@ -5840,6 +5899,7 @@ class Login_Register extends Widget_Base {
 				'last_name'        	=> __( 'Last Name', 'essential-addons-for-elementor-lite' ),
 				'website'          	=> __( 'Website', 'essential-addons-for-elementor-lite' ),
 				'eael_phone_number'	=> __( 'Phone', 'essential-addons-for-elementor-lite' ),
+				'honeypot'			=> __( 'Honeypot', 'essential-addons-for-elementor-lite' ),
 			];
 
 			$eael_custom_profile_fields_text = $this->get_eael_custom_profile_fields( 'text' );
@@ -5977,6 +6037,7 @@ class Login_Register extends Widget_Base {
 									case 'user_name':
 									case 'first_name':
 									case 'last_name':
+									case 'honeypot':
 										$field_input_type = 'text';
 										break;
 									case 'confirm_pass':
@@ -5996,6 +6057,9 @@ class Login_Register extends Widget_Base {
 								if( ! empty( $eael_custom_profile_fields_image[ $field_type ] ) ){
 									$field_input_type = 'file';
 								}
+
+								$field_type_honeypot = 'eaelhoneyp' . esc_attr( $this->get_id() );
+								$field_type = 'honeypot' === $field_type ? $field_type_honeypot : $field_type;
 
 								$this->add_render_attribute( [
 									$input_key => [
@@ -6030,14 +6094,21 @@ class Login_Register extends Widget_Base {
 
 
 								// add css classes to the main input field wrapper.
-								$this->add_render_attribute( [
-									$field_group_key => [
-										'class' => [
-											'eael-lr-form-group',
-                                            'elementor-repeater-item-'.$field['_id'],
-											'eael-field-type-' . $field_type,
-										],
+								$field_group_key_array = [
+									'class' => [
+										'eael-lr-form-group',
+										'elementor-repeater-item-'.$field['_id'],
+										'eael-field-type-' . $field_type,
 									],
+								];
+
+								if ( $field_type_honeypot === $field_type ){
+									$field_group_key_array['style'] = 'display:none;';
+									$field['field_label'] = '';
+								}
+
+								$this->add_render_attribute( [
+									$field_group_key => $field_group_key_array,
 								] );
 
 								?>
@@ -6077,6 +6148,11 @@ class Login_Register extends Widget_Base {
 								if ( 'password' === $field['field_type'] ) {
 									do_action( 'eael/login-register/after-password-field', $this );
 								}
+								
+								if ( 'email' === $field['field_type'] ) {
+									do_action( 'eael/login-register/after-email-field' );
+								}
+								
                                 echo "</div>";
 							endforeach;
 							$this->print_necessary_hidden_fields( 'register' );
@@ -6094,7 +6170,7 @@ class Login_Register extends Widget_Base {
 										
 									<?php if( !empty( $show_register_spinner ) && 'true' === $show_register_spinner ): ?>
 									<span class="eael-lr-form-loader eael-lr-register-form-loader d-none<?php esc_attr_e($this->in_editor ? '-editor' : '') ?>">
-										<i class="eicon-spinner eicon-animation-spin"></i>
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z"/></svg>
 									</span>
 									<?php endif; ?>
 
