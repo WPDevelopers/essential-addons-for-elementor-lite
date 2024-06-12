@@ -78,7 +78,7 @@ function Elements() {
 
     return (
         <>
-            <div className="ea__elements-nav-content">
+            <div className="ea__elements-nav-content elements-contents">
                 <div className="ea__content-header sticky">
                     <div className="ea__content-info flex justify-between items-center gap-2">
                         <div className="ea__widget-elements flex items-center">
