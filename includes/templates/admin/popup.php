@@ -133,7 +133,7 @@
 
                     <div class="border__line"><span></span></div>
 
-                    <div class="modal__content">
+                    <div class="modal__content eael-pb-0">
                         <div class="eael-login__setup">
                             <span class="login__setup__header">
                                 <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/recaptcha.svg' ); ?>"
@@ -160,6 +160,24 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="eael-element__wrap eael-d-block eael-element__wrap-popup">
+                        <div class="eael-element__item eael-pt-0">
+                            <div class="element__content">
+                                <h4><?php esc_html_e( 'Hide Badge', 'essential-addons-for-elementor-lite' ); ?></h4>
+                                <div class="element__options">
+                                    <p class="element__icon">
+                                        <i class="eicon-info login-register-info-icon"></i>
+                                        <span class="tooltip-text"><?php esc_attr_e('We are allowed to hide the badge as long as we include the reCAPTCHA branding visibly in the user flow.', 'essential-addons-for-elementor-lite') ?></span>
+                                    </p>
+                                    <label class="eael-switch">
+                                        <input name="lr_recaptcha_badge_hide" id="lr_recaptcha_badge_hide" <?php if( 'on' === get_option( 'eael_recaptcha_badge_hide' ) ) : ?> checked <?php endif; ?> class="eael-form__control eael-elements-list" type="checkbox">  <span class="switch__box "></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
 					<?php if ( $this->pro_enabled ): ?>
                         <div class="border__line"><span></span></div>
                         <div class="modal__content">

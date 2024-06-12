@@ -284,6 +284,9 @@ trait Library
 	        'manage_sub_accounts',
 	        'ppw_postpass',
         ];
+
+		$allow_action = apply_filters( 'eael/asset-builder/allowed_actions', $allow_action );
+
         if (in_array($action_name, $allow_action)){
             return true;
         }

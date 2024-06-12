@@ -248,31 +248,6 @@ class Post_Grid extends Widget_Base
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
-        $this->add_control(
-            'eael_post_grid_preset_style',
-            [
-                'label' => __('Select Style', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'options' => [
-                    '' => __('Default', 'essential-addons-for-elementor-lite'),
-                    'two' => __('Style Two', 'essential-addons-for-elementor-lite'),
-                    'three' => __('Style Three', 'essential-addons-for-elementor-lite'),
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_post_grid_style_three_alert',
-            [
-                'type' => Controls_Manager::RAW_HTML,
-                'raw' => __('Make sure to enable <strong>Show Date</strong> option from <strong>Layout Settings</strong>', 'essential-addons-for-elementor-lite'),
-                'content_classes' => 'eael-warning',
-                'condition' => [
-                    'eael_post_grid_preset_style' => ['two', 'three'],
-                    'eael_show_date' => '',
-                ],
-            ]
-        );
 
         $this->add_control(
             'eael_post_grid_bg_color',
