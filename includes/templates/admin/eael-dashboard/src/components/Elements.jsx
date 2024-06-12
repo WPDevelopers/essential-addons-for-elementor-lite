@@ -80,10 +80,9 @@ function Elements() {
 
     useEffect(() => {
         window.addEventListener('scroll', scrollHandler);
-        console.log('didmount scroll');
+
         return () => {
             window.removeEventListener('scroll', scrollHandler);
-            console.log('unmount scroll');
         };
     }, []);
 
@@ -122,7 +121,7 @@ function Elements() {
                     </div>
                     <div className="ea__content-icon flex">
                         {Object.keys(eaData).map((item, index) => {
-                            return <ElementCategoryBox index={item} key={index} activateIndex={index}/>
+                            return <ElementCategoryBox index={item} key={index} activateIndex={index} subCatRef={subCatRef}/>
                         })}
                     </div>
                 </div>
