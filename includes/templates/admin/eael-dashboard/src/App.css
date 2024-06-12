@@ -633,7 +633,7 @@ span.dark-icon {
 
 .ea__section-wrapper.ea__main-wrapper {
   padding-top: 50px;
-  padding-bottom: 100px;
+  padding-bottom: 16px;
 }
 
 .ea__sidebar-info {
@@ -882,6 +882,14 @@ span.dark-icon {
 
 .ea__elements-nav-content {
   flex: 1;
+}
+.ea__elements-nav-content.elements-contents {
+  background: #F1F2FA;
+  padding-bottom: 10px;
+  border-radius: 0 0 8px 0;
+}
+.ea__elements-nav-content.elements-contents .ea__content-elements-wrapper {
+  background: transparent;
 }
 
 .ea__content-header.sticky {
@@ -1438,6 +1446,7 @@ section.ea__modal-wrapper {
   font-size: 14px;
   line-height: 1.5em;
   width: 100%;
+  min-width: 100%;
   height: 44px;
   border: 1px solid #EAECF0;
   border-radius: 8px;
@@ -2199,6 +2208,7 @@ input::placeholder {
 
 .resend-content .info-icon-wrap {
   margin-left: 4px;
+  display: inline-flex;
   position: relative;
   cursor: pointer;
 }
@@ -2209,7 +2219,7 @@ input::placeholder {
   border-radius: 50%;
   width: 22px;
   height: 22px;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   font-size: 8px;
@@ -2375,7 +2385,7 @@ input::placeholder {
 
   .ea__section-wrapper.ea__main-wrapper {
     padding-top: 40px;
-    padding-bottom: 60px;
+    padding-bottom: 10px;
   }
 
   .ea__content-header.sticky {
