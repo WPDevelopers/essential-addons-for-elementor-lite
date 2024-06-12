@@ -21,7 +21,7 @@ function ModalStyleThree() {
                             <h4 className="flex items-center">{eaData.accordion[item].title}
                                 {eaData.accordion[item]?.info !== undefined &&
                                 <i className="ea-dash-icon ea-info">
-                                    <span className='ea__tooltip'>Fields will be available on both the edit profile page and the EA Login | Register Form.</span>
+                                    <span className='ea__tooltip'>Fields will be available on both the edit profile page and the EA <span className='color--exx'>Login</span> | <span className='color--exx'>Register</span> Form.</span>
                                 </i>}
                             </h4>
                         </span>

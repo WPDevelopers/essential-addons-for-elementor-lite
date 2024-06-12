@@ -21,7 +21,7 @@ function LicenseOtpForm() {
                 </p>
                 <div>
                     <div className="license-key-items flex items-center">
-                        <input ref={otpRef} className="input-api" type="text"
+                        <input ref={otpRef} className="input-api verify" type="text"
                                placeholder="Enter Your Verification Code"/>
                         <button className="primary-btn verify-btn" onClick={submitHandler}>Verify</button>
                     </div>
@@ -37,19 +37,21 @@ function LicenseOtpForm() {
                         </div>
                     }
                 </div>
-                <p className="resend-content">
+                <div className="resend-content">
                     Haven’t receive email. Code has been sent to this mail. Please <br/>
                     <span className="resend-text" onClick={clickHandler}>resend button</span> your email. copy the code
                     and insert it meanutes.
-                    <i className="ea-dash-icon  ea-info">
-                    <span className="tooltip-api">
-                        Check out this <span className="color-ex">guide</span> to verify your
-                        license key. If you need any
-                        assistance with retrieving your License Verification Key, please <span
-                        className="color-ex">contact support.</span>
+                    <span className="info-icon-wrap">
+                        <i className="ea-dash-icon  ea-info">
+                            <span className="tooltip-api">
+                                Check out this <span className="color-ex">guide</span> to verify your
+                                license key. If you need any
+                                assistance with retrieving your License Verification Key, please <span
+                                className="color-ex">contact support.</span>
+                            </span>
+                        </i>
                     </span>
-                    </i>
-                </p>
+                </div>
             </div>
         </>
     );
