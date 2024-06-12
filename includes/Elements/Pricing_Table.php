@@ -2295,7 +2295,7 @@ class Pricing_Table extends Widget_Base
                     <div class="body">
                         <?php $this->render_feature_list($settings, $this); ?>
                     </div>
-	                <?php if($settings['eael_pricing_table_button_show']=='yes'): ?>
+	                <?php if( isset( $settings['eael_pricing_table_button_show'] ) && 'yes' === $settings['eael_pricing_table_button_show'] ): ?>
                     <div class="footer">
                         <a <?php echo $this->get_render_attribute_string('eael_pricing_button'); ?> >
                             <?php if ('left' == $icon_position) : ?>
@@ -2346,7 +2346,7 @@ class Pricing_Table extends Widget_Base
                     <div class="body">
                         <?php $this->render_feature_list($settings, $this); ?>
                     </div>
-	                <?php if($settings['eael_pricing_table_button_show']=='yes'): ?>
+	                <?php if( isset( $settings['eael_pricing_table_button_show'] ) && 'yes' === $settings['eael_pricing_table_button_show'] ): ?>
                     <div class="footer">
                         <a <?php echo $this->get_render_attribute_string('eael_pricing_button'); ?> >
                             <?php if ('left' == $icon_position) : ?>
