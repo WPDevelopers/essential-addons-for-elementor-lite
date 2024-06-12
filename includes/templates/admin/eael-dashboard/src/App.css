@@ -1084,11 +1084,11 @@ span.ea__tooltip {
 }
 
 .content-btn.updated {
-  background: var(--background-6);
+  background: var(--background-5);
 }
 
 .content-btn.new {
-  background: var(--background-5);
+  background: var(--background-6);
 }
 
 .content-btn.popular {
@@ -1388,7 +1388,6 @@ section.ea__modal-wrapper {
   border-radius: 8px;
   border: 1px solid var(--label-color);
   width: 100%;
-  max-width: 573px;
 }
 
 .ea__modal-body .ea__api-link {
@@ -1430,7 +1429,7 @@ section.ea__modal-wrapper {
 }
 
 #ea__dashboard--wrapper .ea__modal-body .select-option-wrapper {
-  width: 573px;
+  width: 100%;
   position: relative;
 }
 
@@ -2134,6 +2133,12 @@ input.input-api:disabled {
 input.input-api[disabled]::placeholder {
   color: #98A2B3 !important;
 }
+input.input-api::placeholder {
+  color: #98A2B3 !important;
+}
+input.input-api.verify::placeholder {
+  color: #667085 !important;
+}
 input::placeholder {
   color: #667085 !important;
 }
@@ -2146,7 +2151,6 @@ input::placeholder {
   display: flex;
   flex-direction: column;
   gap: 18px;
-  margin-bottom: 30px;
 }
 
 .ea__license-verify.warning {
@@ -2156,12 +2160,11 @@ input::placeholder {
   border: 1px solid #F97066;
 }
 
-.ea__general-content-item .ea__license-verify p.resend-content {
+.ea__general-content-item .ea__license-verify .resend-content {
+  font-size: 16px;
+  font-weight: 400;
   color: #667085;
-}
-
-.ea__license-verify span {
-  font-weight: 500;
+  line-height: 1.5em;
 }
 
 .ea__license-verify input.input-api {
@@ -2189,12 +2192,18 @@ input::placeholder {
 
 .resend-text {
   color: #1570EF;
+  font-weight: 500;
   text-decoration: underline;
   cursor: pointer;
-
 }
 
-.resend-content i {
+.resend-content .info-icon-wrap {
+  margin-left: 4px;
+  position: relative;
+  cursor: pointer;
+}
+
+.resend-content .info-icon-wrap i {
   background: #750EF4;
   border: 4px solid #F6EEFF;
   border-radius: 50%;
@@ -2206,8 +2215,6 @@ input::placeholder {
   font-size: 8px;
   color: #fff;
   font-weight: 700;
-  cursor: pointer;
-  position: relative;
 }
 
 .tooltip-api {
@@ -2238,7 +2245,7 @@ input::placeholder {
   position: absolute;
   right: 0;
   top: -7px;
-  transform: translateX(-46px);
+  transform: translateX(-50px);
   border-bottom: 8px solid var(--base-background);
   border-right: 8px solid transparent;
   border-left: 8px solid transparent;
@@ -2611,7 +2618,6 @@ input::placeholder {
     padding: 18px;
     margin-top: 18px;
     gap: 15px;
-    margin-bottom: 24px;
   }
 
   .ea__license-verify input.input-api {
