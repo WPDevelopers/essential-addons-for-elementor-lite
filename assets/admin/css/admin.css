@@ -6016,43 +6016,6 @@ img {
     color: var(--text-color-25);
 }
 
-.eael-integration-content-wrapper {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-}
-
-.eael-integration-header {
-    padding: 20px 24px;
-    background: #FBFCFF;
-    border-radius: 8px 8px 0 0;
-    border: 1px solid var(--border-color-base);
-}
-
-.eael-integration-header h5 {
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 1.2em;
-    color: var(--text-color-25);
-}
-
-.eael-integration-footer {
-    padding: 24px;
-    background: var(--base-background);
-    border-radius: 0 0 8px 8px;
-    border-color: var(--border-color-base);
-    border-style: solid;
-    border-width: 0 1px 1px 1px;
-}
-
-.integration-settings {
-    padding-top: 16px;
-}
-
-
-
-
-
 /*--------- Modal ---------*/
 
 section.eael-modal-wrapper {
@@ -6102,7 +6065,6 @@ section.eael-modal-wrapper {
     font-weight: 450;
     color: var(--text-color-25);
 }
-
 
 .eael-modal-body p {
     font-size: 14px;
@@ -6669,10 +6631,52 @@ span.title-color-2 {
     margin-bottom: 8px;
 }
 
+.eael-integration-content-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.eael-integration-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.eael-integration-header {
+    padding: 20px 24px;
+    background: #FBFCFF;
+    border-radius: 8px 8px 0 0;
+    border: 1px solid var(--border-color-base);
+}
+
+.eael-integration-header h5 {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.2em;
+    color: var(--text-color-25);
+}
+
+.eael-integration-footer {
+    padding: 24px;
+    background: var(--base-background);
+    border-radius: 0 0 8px 8px;
+    border-color: var(--border-color-base);
+    border-style: solid;
+    border-width: 0 1px 1px 1px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.integration-settings {
+    padding-top: 16px;
+}
+
 .eael-onboard-content-wrapper .eael-integration-footer p {
     font-size: 14px;
     padding-bottom: 16px;
     border-bottom: 1px solid var(--border-color-base);
+    flex: 1;
 }
 
 .eael-general-content-item h4 {
