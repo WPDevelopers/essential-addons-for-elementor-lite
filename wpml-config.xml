@@ -489,8 +489,8 @@
                 <field type="Woo Product Compare: Table Title" editor_type="LINE">table_title</field>
             </fields>
             <fields-in-item items_of="fields">
-                <field type="Woo Product Compare: Type" editor_type="LINE">field_type</field>
-                <field type="Woo Product Compare: Label" editor_type="LINE">field_label</field>
+                <field type="Woo Product Compare: Field Type" editor_type="LINE">field_type</field>
+                <field type="Woo Product Compare: Field Label" editor_type="LINE">field_label</field>
             </fields-in-item>
         </widget>
         <widget name="eael-woo-product-gallery">
