@@ -20,7 +20,8 @@ const eaData = localize.eael_dashboard,
         hiddenLicenseKey: licenseData?.hidden_license_key,
         modals: {},
         elementsActivateCatIndex: 0,
-        isDark: false
+        isDark: false,
+        isTemplatelyInstalled: eaData.is_templately_installed
     };
 
 Object.keys(eaData.integration_box.list).map((item) => {

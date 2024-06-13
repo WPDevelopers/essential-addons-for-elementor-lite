@@ -239,6 +239,19 @@ function ContextReducer() {
                 return {...state, elementsActivateCatIndex: payload}
             case 'LIGHT_DARK_TOGGLE':
                 return {...state, isDark: !state.isDark}
+            case 'INSTALL_TEMPLATELY':
+                params = {
+                    action: 'wpdeveloper_install_plugin',
+                    security: localize.nonce,
+                    slug: 'templately'
+                };
+
+                request = eaAjax(params, true);
+                request.onreadystatechange = () => {
+                    response = JSON.parse(request.responseText);
+                }
+
+                return {...state, isTemplatelyInstalled: true}
         }
     }
 
