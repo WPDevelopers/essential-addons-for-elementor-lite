@@ -639,7 +639,7 @@ span.ea__nav-icon svg {
 }
 
 .ea__header-content img {
-  width: 130px;
+  height: 40px;
 }
 
 span.dark-icon {
@@ -2395,15 +2395,15 @@ input::placeholder {
   }
 }
 
-.toaster-content.success::after {
+.toaster-content.ea__success::after {
   background-image: linear-gradient(90deg, #52CB98 0%, #FFFFFF 100%);
 }
 
-.toaster-content.warning::after {
+.toaster-content.ea__warning::after {
   background-image: linear-gradient(90deg, #FFB545 0%, #FFFFFF 100%);
 }
 
-.toaster-content.error::after {
+.toaster-content.ea__error::after {
   background-image: linear-gradient(90deg, #FF3E3E 0%, #FFFFFF 100%);
 }
 
@@ -2476,7 +2476,7 @@ input::placeholder {
   }
 
   .ea__header-content img {
-    width: 105px;
+    height: 36px;
   }
 
   span.dark-icon {
