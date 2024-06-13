@@ -24,35 +24,35 @@ function App() {
           method="post"
         >
           <div className="eael-menu-items">
-            <MenuItems activeTab={activeTab}/>
+            <MenuItems activeTab={activeTab} handleTabChange={handleTabChange} />
           </div>
 
           <div className={`eael-setup-content eael-getting-started-content ${activeTab == 'getting-started' ? '' : 'eael-d-none'}`}>
-            <GettingStartedContent activeTab={activeTab} handleTabChange={handleTabChange}/>
+            <GettingStartedContent activeTab={activeTab} handleTabChange={handleTabChange} />
           </div>
 
           <div className={`eael-setup-content eael-configuration-content ${activeTab === 'configuration' ? '' : 'eael-d-none'}`}>
-            <ConfigurationContent />
+            <ConfigurationContent activeTab={activeTab} handleTabChange={handleTabChange} />
           </div>
 
           <div className={`eael-setup-content eael-elements-content ${activeTab === 'elements' ? '' : 'eael-d-none'}`}>
-            <ElementsContent />
+            <ElementsContent activeTab={activeTab} handleTabChange={handleTabChange} />
           </div>
 
           <div className={`eael-setup-content eael-go-pro-content ${activeTab === 'go-pro' ? '' : 'eael-d-none'}`}>
-            <GoProContent />
+            <GoProContent activeTab={activeTab} handleTabChange={handleTabChange} />
           </div>
 
           <div className={`eael-setup-content eael-templately-content ${activeTab === 'templately' ? '' : 'eael-d-none'}`}>
-            <TemplatelyContent />
+            <TemplatelyContent activeTab={activeTab} handleTabChange={handleTabChange} />
           </div>
 
           <div className={`eael-setup-content eael-integrations-content ${activeTab === 'integrations' ? '' : 'eael-d-none'}`}>
-            <IntegrationContent />
+            <IntegrationContent activeTab={activeTab} handleTabChange={handleTabChange} />
           </div>
 
           <div className={`eael-modal-content ${activeTab === 'modal' ? '' : 'eael-d-none'}`}>
-            <ModalContent />
+            <ModalContent activeTab={activeTab} handleTabChange={handleTabChange} />
           </div>
         </form>
       </section>

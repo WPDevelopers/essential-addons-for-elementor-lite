@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { __ } from "@wordpress/i18n";
 
-function TemplatelyContent() {
+function TemplatelyContent({activeTab, handleTabChange}) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let templately_content = eaelQuickSetup?.templately_content;
 

@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { __ } from "@wordpress/i18n";
 
-function ConfigurationContent() {
+function ConfigurationContent({activeTab, handleTabChange}) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let configuration_content = eaelQuickSetup?.configuration_content;
   let ea_logo_src = configuration_content?.ea_logo_src;

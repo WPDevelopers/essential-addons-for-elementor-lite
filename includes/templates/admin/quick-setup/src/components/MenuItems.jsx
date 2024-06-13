@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { __ } from "@wordpress/i18n";
 
-function MenuItems({activeTab}) {
+function MenuItems({activeTab, handleTabChange}) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let menu_items = eaelQuickSetup?.menu_items;
   let wizard_column = menu_items?.wizard_column;
