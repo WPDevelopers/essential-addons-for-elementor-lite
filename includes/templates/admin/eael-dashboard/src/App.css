@@ -937,7 +937,7 @@ span.dark-icon {
 .ea__section-overlay {
   position: absolute;
   min-height: 100px;
-  background: linear-gradient(360deg, --base-background 68%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(360deg, #ffffff 68%, rgba(255, 255, 255, 0) 100%);
   bottom: 0;
   left: 16px;
   right: 16px;
