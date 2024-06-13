@@ -1,16 +1,16 @@
-import { useState } from "react";
 import { __ } from "@wordpress/i18n";
 
-function GettingStartedContent() {
+function GettingStartedContent({activeTab, handleTabChange}) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let getting_started_content = eaelQuickSetup?.getting_started_content;
   let youtube_promo_src = getting_started_content?.youtube_promo_src;
-
+  
   return (
     <>
       <div className="eael-onboard-content-wrapper min-h-538">
         <div className="eael-onboard-content">
           <div className="eael-onboard-content-top">
+
             <a
               href="//www.youtube.com/watch?v=ZISSbnHo0rE&ab_channel=WPDeveloper"
               target="_blank"
@@ -50,7 +50,9 @@ function GettingStartedContent() {
 
             <button
               className="primary-btn install-btn eael-setup-next-btn eael-user-email-address"
+              type="button"
               data-next="configuration"
+              onClick={handleTabChange}
             >
               {__(
                 "Proceed to Next Step",
@@ -60,7 +62,9 @@ function GettingStartedContent() {
             </button>
             <span
               className="skip-item eael-setup-next-btn"
+              type="button"
               data-next="configuration"
+              onClick={handleTabChange}
             >
               {__("Skip This Step", "essential-addons-for-elementor-lite")}
             </span>

@@ -433,20 +433,20 @@
 		eaelStepIndicator(step)
 	}
 
-	$(document).on("click",".eael-setup-next-btn",function(e) {
-		e.preventDefault();
-		let target = $(this).attr('data-next');
+	// $(document).on("click",".eael-setup-next-btn",function(e) {
+	// 	e.preventDefault();
+	// 	let target = $(this).attr('data-next');
 
-		$('.eael-setup-content').addClass('eael-d-none');
-		$(`.eael-${target}-content`).removeClass('eael-d-none');
+	// 	$('.eael-setup-content').addClass('eael-d-none');
+	// 	$(`.eael-${target}-content`).removeClass('eael-d-none');
 		
-		$('.eael-onboard-nav').removeClass('active');
-		$(`.eael-onboard-nav.${target}`).addClass('active');
+	// 	$('.eael-onboard-nav').removeClass('active');
+	// 	$(`.eael-onboard-nav.${target}`).addClass('active');
 
-		if ( $(this).hasClass('eael-user-email-address') ) {
-			$('#eael_user_email_address').val(1);
-		}
-	});
+	// 	if ( $(this).hasClass('eael-user-email-address') ) {
+	// 		$('#eael_user_email_address').val(1);
+	// 	}
+	// });
 	
 	$(document).on("click",".eael-what-we-collect",function(e) {
 		e.preventDefault();
