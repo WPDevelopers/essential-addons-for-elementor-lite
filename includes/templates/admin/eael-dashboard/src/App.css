@@ -638,6 +638,10 @@ span.ea__nav-icon svg {
   justify-content: space-between;
 }
 
+.ea__header-content img {
+  width: 130px;
+}
+
 span.dark-icon {
   width: 36px;
   height: 36px;
@@ -933,7 +937,7 @@ span.dark-icon {
 .ea__section-overlay {
   position: absolute;
   min-height: 100px;
-  background: linear-gradient(360deg, --base-background 68%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(360deg, #ffffff 68%, rgba(255, 255, 255, 0) 100%);
   bottom: 0;
   left: 16px;
   right: 16px;
@@ -2368,20 +2372,39 @@ input::placeholder {
   border-radius: 2px;
   -webkit-box-shadow: 0 20px 36px 0 #00012314;
   box-shadow: 0 20px 36px 0 #00012314;
-  border-bottom: 3px solid;
-  border-image: linear-gradient(90deg, #52CB98 0%, #FFFFFF 100%) 1;
+  position: relative;
 }
 
-.toaster-content.success {
-  border-image: linear-gradient(90deg, #52CB98 0%, #FFFFFF 100%) 1;
+.toaster-content::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  border-radius: 0 0 3px 3px;
+  background-image: linear-gradient(90deg, #52CB98 0%, #FFFFFF 100%);
+  animation: slide 2s infinite;
 }
 
-.toaster-content.warning {
-  border-image: linear-gradient(90deg, #FFB545 0%, #FFFFFF 100%) 1;
+@keyframes slide {
+  from{
+    right: 100%;
+  }
+  to {
+    right: 0%;
+  }
 }
 
-.toaster-content.error {
-  border-image: linear-gradient(90deg, #FF3E3E 0%, #FFFFFF 100%) 1;
+.toaster-content.success::after {
+  background-image: linear-gradient(90deg, #52CB98 0%, #FFFFFF 100%);
+}
+
+.toaster-content.warning::after {
+  background-image: linear-gradient(90deg, #FFB545 0%, #FFFFFF 100%);
+}
+
+.toaster-content.error::after {
+  background-image: linear-gradient(90deg, #FF3E3E 0%, #FFFFFF 100%);
 }
 
 .toaster-content h5 {
