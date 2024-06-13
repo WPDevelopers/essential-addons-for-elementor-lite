@@ -95,7 +95,9 @@ function IntegrationContent({activeTab, handleTabChange}) {
       <div className="eael-section-wrapper flex flex-end gap-4">
         <button
             className="previous-btn flex gap-2 items-center eael-setup-next-btn"
+            type="button"
             data-next={ ! templately_local_plugin_data !== false ? 'templately' : 'go-pro'}
+            onClick={handleTabChange}
         >
           <i className="ea-dash-icon ea-left-arrow-long"></i>
           {__("Previous", "essential-addons-for-elementor-lite")}

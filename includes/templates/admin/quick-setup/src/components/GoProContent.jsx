@@ -96,18 +96,22 @@ function GoProContent({activeTab, handleTabChange}) {
       <div className="eael-section-wrapper flex flex-end gap-4">
         <button
             className="previous-btn flex gap-2 items-center eael-setup-next-btn"
+            type="button"
             data-next="elements"
+            onClick={handleTabChange}
         >
           <i className="ea-dash-icon ea-left-arrow-long"></i>
           {__('Previous', "essential-addons-for-elementor-lite")}
         </button>
         <button
             className="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn"
+            type="button"
             data-next={
               !templately_local_plugin_data !== false
                   ? "templately"
                   : "integrations"
             }
+            onClick={handleTabChange}
         >
           {__('Next', "essential-addons-for-elementor-lite")}
           <i className="ea-dash-icon ea-right-arrow-long"></i>

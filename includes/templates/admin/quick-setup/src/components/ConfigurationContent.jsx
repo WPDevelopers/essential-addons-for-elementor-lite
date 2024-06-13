@@ -104,7 +104,9 @@ function ConfigurationContent({activeTab, handleTabChange}) {
       >
         <button
           className="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn"
+          type="button"
           data-next="elements"
+          onClick={handleTabChange}
         >
           {__("Next", "essential-addons-for-elementor-lite")}
           <i className="ea-dash-icon ea-right-arrow-long"></i>
