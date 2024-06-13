@@ -11,6 +11,7 @@ import ModalContent from "./ModalContent.jsx";
 function App() {
   const [activeTab, setActiveTab] = useState("getting-started");
   const [modalTarget, setModalTarget] = useState("");
+  const [showElements, setShowElements] = useState(0);
   let eaelQuickSetup = localize.eael_quick_setup_data;
 
   const handleTabChange = (event) => {
@@ -23,6 +24,10 @@ function App() {
 
   const closeModal = () => {
     setModalTarget("");
+  };
+
+  const handleShowElements = (event) => {
+    setShowElements(1);
   };
 
   return (
@@ -72,6 +77,8 @@ function App() {
             <ElementsContent
               activeTab={activeTab}
               handleTabChange={handleTabChange}
+              showElements={showElements}
+              handleShowElements={handleShowElements}
             />
           </div>
 

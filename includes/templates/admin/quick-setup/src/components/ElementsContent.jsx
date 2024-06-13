@@ -1,6 +1,6 @@
 import { __ } from "@wordpress/i18n";
 
-function ElementsContent({activeTab, handleTabChange}) {
+function ElementsContent({ activeTab, handleTabChange, showElements, handleShowElements }) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let elements_content = eaelQuickSetup?.elements_content;
   let elements_list = elements_content?.elements_list;
@@ -35,7 +35,11 @@ function ElementsContent({activeTab, handleTabChange}) {
               </p>
             </div>
           </div>
-          <button className="primary-btn changelog-btn flex items-center gap-2 view-all-elements">
+          <button
+            className="primary-btn changelog-btn flex items-center gap-2 view-all-elements"
+            type="button"
+            onClick={handleShowElements}
+          >
             {__("View All", "essential-addons-for-elementor-lite")}
             <i className="ea-dash-icon ea-right-arrow-long"></i>
           </button>
@@ -49,12 +53,12 @@ function ElementsContent({activeTab, handleTabChange}) {
               return (
                 <div key={index}>
                   <div
-                    className={`flex items-center gap-2 justify-between mb-4 eael-element-title-wrap ${disable}`}
+                    className={`flex items-center gap-2 justify-between mb-4 eael-element-title-wrap ${ showElements ? '' : disable }`}
                   >
                     <h3 className="eael-content-title">{item[1].title}</h3>
                   </div>
                   <div
-                    className={`eael-content-wrapper mb-10 eael-element-content-wrap ${disable}`}
+                    className={`eael-content-wrapper mb-10 eael-element-content-wrap ${ showElements ? '' : disable }`}
                   >
                     {item[1]?.elements.map((element) => {
                       const preferences = element.preferences || "";
