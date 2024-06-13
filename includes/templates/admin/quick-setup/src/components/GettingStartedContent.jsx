@@ -1,6 +1,6 @@
 import { __ } from "@wordpress/i18n";
 
-function GettingStartedContent({activeTab, handleTabChange}) {
+function GettingStartedContent({activeTab, handleTabChange, modalTarget, handleModalChange, closeModal}) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let getting_started_content = eaelQuickSetup?.getting_started_content;
   let youtube_promo_src = getting_started_content?.youtube_promo_src;
@@ -36,7 +36,7 @@ function GettingStartedContent({activeTab, handleTabChange}) {
                 "By clicking this button I am allowing this app to collect my information.",
                 "essential-addons-for-elementor-lite"
               )}
-              <span className="collect-info eael-what-we-collect">
+              <span className="collect-info eael-what-we-collect" onClick={handleModalChange} data-target="what-we-collect">
                 {__("What We Collect?", "essential-addons-for-elementor-lite")}
               </span>
             </p>
@@ -72,7 +72,7 @@ function GettingStartedContent({activeTab, handleTabChange}) {
         </div>
       </div>
 
-      <section class="eael-modal-wrapper eael-d-none eael-what-we-collect-modal">
+      <section class={`eael-modal-wrapper ${ modalTarget == 'what-we-collect' ?  '' : 'eael-d-none' } eael-what-we-collect-modal`}>
         <div class="eael-modal-content-wrapper eael-onboard-modal">
           <div class="">
             <h5>
@@ -85,7 +85,7 @@ function GettingStartedContent({activeTab, handleTabChange}) {
               )}
             </p>
           </div>
-          <div class="eael-modal-close-btn">
+          <div class="eael-modal-close-btn" onClick={closeModal}>
             <i class="ea-dash-icon ea-close"></i>
           </div>
         </div>

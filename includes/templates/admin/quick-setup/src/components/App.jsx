@@ -9,11 +9,20 @@ import IntegrationContent from "./IntegrationContent.jsx";
 import ModalContent from "./ModalContent.jsx";
 
 function App() {
-  const [activeTab, setActiveTab] = useState('getting-started');
+  const [activeTab, setActiveTab] = useState("getting-started");
+  const [modalTarget, setModalTarget] = useState("");
   let eaelQuickSetup = localize.eael_quick_setup_data;
 
   const handleTabChange = (event) => {
-    setActiveTab(event.currentTarget.getAttribute('data-next'));
+    setActiveTab(event.currentTarget.getAttribute("data-next"));
+  };
+
+  const handleModalChange = (event) => {
+    setModalTarget(event.currentTarget.getAttribute("data-target"));
+  };
+
+  const closeModal = () => {
+    setModalTarget("");
   };
 
   return (
@@ -24,35 +33,90 @@ function App() {
           method="post"
         >
           <div className="eael-menu-items">
-            <MenuItems activeTab={activeTab} handleTabChange={handleTabChange} />
+            <MenuItems
+              activeTab={activeTab}
+              handleTabChange={handleTabChange}
+            />
           </div>
 
-          <div className={`eael-setup-content eael-getting-started-content ${activeTab == 'getting-started' ? '' : 'eael-d-none'}`}>
-            <GettingStartedContent activeTab={activeTab} handleTabChange={handleTabChange} />
+          <div
+            className={`eael-setup-content eael-getting-started-content ${
+              activeTab == "getting-started" ? "" : "eael-d-none"
+            }`}
+          >
+            <GettingStartedContent
+              activeTab={activeTab}
+              handleTabChange={handleTabChange}
+              modalTarget={modalTarget}
+              handleModalChange={handleModalChange}
+              closeModal={closeModal}
+            />
           </div>
 
-          <div className={`eael-setup-content eael-configuration-content ${activeTab === 'configuration' ? '' : 'eael-d-none'}`}>
-            <ConfigurationContent activeTab={activeTab} handleTabChange={handleTabChange} />
+          <div
+            className={`eael-setup-content eael-configuration-content ${
+              activeTab === "configuration" ? "" : "eael-d-none"
+            }`}
+          >
+            <ConfigurationContent
+              activeTab={activeTab}
+              handleTabChange={handleTabChange}
+            />
           </div>
 
-          <div className={`eael-setup-content eael-elements-content ${activeTab === 'elements' ? '' : 'eael-d-none'}`}>
-            <ElementsContent activeTab={activeTab} handleTabChange={handleTabChange} />
+          <div
+            className={`eael-setup-content eael-elements-content ${
+              activeTab === "elements" ? "" : "eael-d-none"
+            }`}
+          >
+            <ElementsContent
+              activeTab={activeTab}
+              handleTabChange={handleTabChange}
+            />
           </div>
 
-          <div className={`eael-setup-content eael-go-pro-content ${activeTab === 'go-pro' ? '' : 'eael-d-none'}`}>
-            <GoProContent activeTab={activeTab} handleTabChange={handleTabChange} />
+          <div
+            className={`eael-setup-content eael-go-pro-content ${
+              activeTab === "go-pro" ? "" : "eael-d-none"
+            }`}
+          >
+            <GoProContent
+              activeTab={activeTab}
+              handleTabChange={handleTabChange}
+            />
           </div>
 
-          <div className={`eael-setup-content eael-templately-content ${activeTab === 'templately' ? '' : 'eael-d-none'}`}>
-            <TemplatelyContent activeTab={activeTab} handleTabChange={handleTabChange} />
+          <div
+            className={`eael-setup-content eael-templately-content ${
+              activeTab === "templately" ? "" : "eael-d-none"
+            }`}
+          >
+            <TemplatelyContent
+              activeTab={activeTab}
+              handleTabChange={handleTabChange}
+            />
           </div>
 
-          <div className={`eael-setup-content eael-integrations-content ${activeTab === 'integrations' ? '' : 'eael-d-none'}`}>
-            <IntegrationContent activeTab={activeTab} handleTabChange={handleTabChange} />
+          <div
+            className={`eael-setup-content eael-integrations-content ${
+              activeTab === "integrations" ? "" : "eael-d-none"
+            }`}
+          >
+            <IntegrationContent
+              activeTab={activeTab}
+              handleTabChange={handleTabChange}
+            />
           </div>
 
-          <div className={`eael-modal-content ${activeTab === 'modal' ? '' : 'eael-d-none'}`}>
-            <ModalContent activeTab={activeTab} handleTabChange={handleTabChange} />
+          <div
+            className={`eael-modal-content ${
+              activeTab === "modal" ? "" : "eael-d-none"
+            }`}
+          >
+            <ModalContent
+              activeTab={activeTab}
+              handleTabChange={handleTabChange}
+            />
           </div>
         </form>
       </section>
