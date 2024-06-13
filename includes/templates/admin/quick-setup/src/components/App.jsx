@@ -1,4 +1,4 @@
-import { act, useState } from "react";
+import { React, useState, useRef } from "react";
 import MenuItems from "./MenuItems.jsx";
 import GettingStartedContent from "./GettingStartedContent.jsx";
 import ConfigurationContent from "./ConfigurationContent.jsx";
