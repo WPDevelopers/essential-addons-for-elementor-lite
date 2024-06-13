@@ -20,6 +20,8 @@
   --background-7: #5262EE;
   --background-8: #FDFDFF;
   --background-9: #F1F2FA;
+  --background-10: #FEFAFF;
+  --background-11: #FBFCFF;
   --label-color: #EAECF0;
   --label-color-fill: #7F56D9;
   --base-color-50: #750EF4;
@@ -64,6 +66,8 @@
     --background-7: #5262EE;
     --background-8: #FDFDFF;
     --background-9: #101112;
+    --background-10: #18191B;
+    --background-11: #18191B;
     --label-color: #EAECF0;
     --label-color-fill: #7F56D9;
     --base-color-50: #750EF4;
@@ -92,13 +96,10 @@
   }
 }
 
-body {
-  background: var(--page-background);
-}
-
 #ea__dashboard--wrapper {
   font-size: 16px;
   font-family: "Rubik", sans-serif;
+  background: var(--page-background);
 }
 
 a {
@@ -708,7 +709,7 @@ span.dark-icon {
 .ea__general-content-item.templates {
   padding: 0;
   background-image: none;
-  background-color: #FEFAFF;
+  background-color: var(--background-10);
   border: 1px solid var(--border-color-base);
 }
 
@@ -1197,7 +1198,7 @@ span.select-details {
 
 .ea__integration-header {
   padding: 20px 24px;
-  background: #FBFCFF;
+  background: var(--background-11);
   border-radius: 8px 8px 0 0;
   border: 1px solid var(--border-color-base);
 }
@@ -1278,7 +1279,7 @@ span.select-details {
 .ea__pro-features {
   border: 1px solid var(--border-color-base);
   border-radius: 8px;
-  background: linear-gradient(90deg, #FEFAFF 61.34%, #DFA9FF 100%);
+  background: linear-gradient(90deg, var(--background-10) 61.34%, #DFA9FF 100%);
 }
 
 .ea__features-content {
@@ -2010,7 +2011,7 @@ span.title-color-2 {
 
 .ea__general-content-item.video-promo {
   padding: 0;
-  background: #FEFAFF;
+  background: var(--background-10);
   border: 1px solid var(--border-color-base);
 }
 
@@ -2026,8 +2027,7 @@ span.title-color-2 {
 .ea__general-content-item.video-promo .templates-img {
   width: 100%;
   padding: 16px;
-  background: linear-gradient(269.7deg, #DEA8FF 1.1%, #FEFAFF 99.7%);
-  ;
+  background: linear-gradient(269.7deg, #DEA8FF 1.1%, var(--background-10) 99.7%);
   border-radius: 0 8px 8px 0;
   justify-content: flex-end;
   display: flex;
