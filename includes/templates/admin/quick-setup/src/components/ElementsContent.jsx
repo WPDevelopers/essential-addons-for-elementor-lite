@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { __ } from "@wordpress/i18n";
 
-function ElementsContent() {
+function ElementsContent({activeTab, handleTabChange}) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let elements_content = eaelQuickSetup?.elements_content;
   let elements_list = elements_content?.elements_list;
