@@ -638,6 +638,10 @@ span.ea__nav-icon svg {
   justify-content: space-between;
 }
 
+.ea__header-content img {
+  width: 130px;
+}
+
 span.dark-icon {
   width: 36px;
   height: 36px;
