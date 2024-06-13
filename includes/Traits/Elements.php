@@ -946,8 +946,8 @@ trait Elements {
 
             .eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button svg {
                 fill: {$eael_stt_button_icon_color};
-                width: {$eael_stt_button_icon_svg_size_size}{$eael_stt_button_icon_svg_size_unit};
-                height: {$eael_stt_button_icon_svg_size_size}{$eael_stt_button_icon_svg_size_unit};
+                width: {$eael_stt_button_icon_size_size}{$eael_stt_button_icon_size_unit};
+                height: {$eael_stt_button_icon_size_size}{$eael_stt_button_icon_size_unit};
             } 
         ";
 
