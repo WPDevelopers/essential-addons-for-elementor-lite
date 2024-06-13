@@ -16,7 +16,7 @@ function ElementsSearchSection(props) {
                     <h3 className="ea__content-title">{i18n.search_result_for} {props.searchTerm}</h3>
                     <div className="ea__enable-elements">
                         <div className="toggle-wrapper flex items-center gap-2">
-                            <h5>{i18n.enable_all}</h5>
+                            <h5>{checked ? i18n.disable_all : i18n.enable_all}</h5>
                             <label className="toggle-wrap">
                                 <input type="checkbox" checked={checked} onChange={changeHandler}/>
                                 <span className="slider"></span>
