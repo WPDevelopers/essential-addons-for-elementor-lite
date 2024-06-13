@@ -433,17 +433,6 @@
 		eaelStepIndicator(step)
 	}
 	
-	// $(document).on("click",".eael-what-we-collect",function(e) {
-	// 	e.preventDefault();
-	// 	$('.eael-what-we-collect-modal').fadeIn().removeClass('eael-d-none');
-	// });
-	
-	$(document).on("click",".eael-modal-close-btn",function(e) {
-		e.preventDefault();
-		let target = $(this).closest('.eael-modal-wrapper');
-		$(target).fadeOut();
-	});
-	
 	$(document).on("click", ".eael-onboard-elements .view-all-elements", function(e) {
 		e.preventDefault();
 		$('.eael-onboard-elements .eael-element-title-wrap').removeClass('eael-d-none');

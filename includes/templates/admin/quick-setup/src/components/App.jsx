@@ -105,6 +105,9 @@ function App() {
             <IntegrationContent
               activeTab={activeTab}
               handleTabChange={handleTabChange}
+              modalTarget={modalTarget}
+              handleModalChange={handleModalChange}
+              closeModal={closeModal}
             />
           </div>
 
@@ -116,6 +119,9 @@ function App() {
             <ModalContent
               activeTab={activeTab}
               handleTabChange={handleTabChange}
+              modalTarget={modalTarget}
+              handleModalChange={handleModalChange}
+              closeModal={closeModal}
             />
           </div>
         </form>

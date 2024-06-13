@@ -1,6 +1,6 @@
 import { __ } from "@wordpress/i18n";
 
-function ModalContent({activeTab, handleTabChange}) {
+function ModalContent({activeTab, handleTabChange, modalTarget, handleModalChange, closeModal}) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let modal_content = eaelQuickSetup?.modal_content;
   let success_2_src = modal_content?.success_2_src;
@@ -16,7 +16,7 @@ function ModalContent({activeTab, handleTabChange}) {
 						            <img className="eael-modal-map-img" src={success_2_src} alt={__( 'Success Image', 'essential-addons-for-elementor-lite' )} />
                     </div>
                 </div>
-                <div className="eael-modal-close-btn">
+                <div className="eael-modal-close-btn" onClick={closeModal}>
                     <i className="ea-dash-icon ea-close"></i>
                 </div>
             </div>
