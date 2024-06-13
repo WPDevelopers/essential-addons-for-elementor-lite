@@ -433,11 +433,11 @@
 		eaelStepIndicator(step)
 	}
 	
-	$(document).on("click", ".eael-onboard-elements .view-all-elements", function(e) {
-		e.preventDefault();
-		$('.eael-onboard-elements .eael-element-title-wrap').removeClass('eael-d-none');
-		$('.eael-onboard-elements .eael-element-content-wrap').removeClass('eael-d-none');
-	});
+	// $(document).on("click", ".eael-onboard-elements .view-all-elements", function(e) {
+	// 	e.preventDefault();
+	// 	$('.eael-onboard-elements .eael-element-title-wrap').removeClass('eael-d-none');
+	// 	$('.eael-onboard-elements .eael-element-content-wrap').removeClass('eael-d-none');
+	// });
 
 	$(document).on("change", ".eael-onboard-integrations .enable-integration-switch", function() {
 		if ($(this).is(':checked')) {
