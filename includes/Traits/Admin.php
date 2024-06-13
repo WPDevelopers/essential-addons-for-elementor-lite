@@ -87,10 +87,10 @@ trait Admin {
             ];
 
 	        $ea_dashboard = [
-		        'reactPath'              => EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/',
-		        'is_eapro_activate'      => $this->pro_enabled,
+		        'reactPath'               => EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/',
+		        'is_eapro_activate'       => $this->pro_enabled,
 		        'is_templately_installed' => $this->installer->get_local_plugin_data( 'templately/templately.php' ),
-		        'menu'                   => [
+		        'menu'                    => [
 			        __( 'General', 'essential-addons-for-elementor-lite' )     => 'ea-home',
 			        __( 'Elements', 'essential-addons-for-elementor-lite' )    => 'ea-elements',
 			        __( 'Extensions', 'essential-addons-for-elementor-lite' )  => 'ea-extensions',
@@ -98,14 +98,16 @@ trait Admin {
 			        __( 'Integration', 'essential-addons-for-elementor-lite' ) => 'ea-plug',
 			        __( 'Go Premium', 'essential-addons-for-elementor-lite' )  => 'ea-lock',
 		        ],
-		        'i18n'                   => [
-			        'enable_all'          => __( 'Enable all', 'essential-addons-for-elementor-lite' ),
-			        'enable_all_elements' => __( 'Enable all Elements', 'essential-addons-for-elementor-lite' ),
-			        'save_settings'       => __( 'Save Settings', 'essential-addons-for-elementor-lite' ),
-			        'search_result_for'   => __( 'Search Results for :', 'essential-addons-for-elementor-lite' ),
-			        'all_widgets'         => __( 'All Widgets', 'essential-addons-for-elementor-lite' ),
+		        'i18n'                    => [
+			        'enable_all'           => __( 'Enable All', 'essential-addons-for-elementor-lite' ),
+			        'disable_all'          => __( 'Disable All', 'essential-addons-for-elementor-lite' ),
+			        'enable_all_elements'  => __( 'Enable All Elements', 'essential-addons-for-elementor-lite' ),
+			        'disable_all_elements' => __( 'Disable All Elements', 'essential-addons-for-elementor-lite' ),
+			        'save_settings'        => __( 'Save Settings', 'essential-addons-for-elementor-lite' ),
+			        'search_result_for'    => __( 'Search Results for :', 'essential-addons-for-elementor-lite' ),
+			        'all_widgets'          => __( 'All Widgets', 'essential-addons-for-elementor-lite' ),
 		        ],
-		        'whats_new'              => [
+		        'whats_new'               => [
 			        'heading' => __( 'What is New on Version?', 'essential-addons-for-elementor-lite' ),
 			        'list'    => [
 				        __( 'EA Fancy Chart Symbol display option in the fancy chart', 'essential-addons-for-elementor-lite' ),
@@ -117,7 +119,7 @@ trait Admin {
 				        'url'   => '#'
 			        ]
 		        ],
-		        'templately_promo'       => [
+		        'templately_promo'        => [
 			        'heading' => __( 'Unlock 5000+ Ready Templates', 'essential-addons-for-elementor-lite' ),
 			        'list'    => [
 				        __( 'Stunning, Ready Website Templates', 'essential-addons-for-elementor-lite' ),
@@ -129,7 +131,7 @@ trait Admin {
 				        'url'   => '#'
 			        ]
 		        ],
-		        'community_box'          => [
+		        'community_box'           => [
 			        [
 				        'heading'    => __( 'GitHub & Support', 'essential-addons-for-elementor-lite' ),
 				        'content'    => __( 'Encountering a problem? Seek assistance through live chat or by submitting.', 'essential-addons-for-elementor-lite' ),
@@ -181,7 +183,7 @@ trait Admin {
 				        'icon_color' => 'eaicon-1'
 			        ]
 		        ],
-		        'sidebar_box'            => [
+		        'sidebar_box'             => [
 			        'heading' => __( 'Unlimited Features', 'essential-addons-for-elementor-lite' ),
 			        'content' => __( 'Supercharge your content schedule and', 'essential-addons-for-elementor-lite' ),
 			        'review'  => [
@@ -194,7 +196,7 @@ trait Admin {
 				        'icon'  => 'ea-crown-1'
 			        ]
 		        ],
-		        'integration_box'        => [
+		        'integration_box'         => [
 			        'enable'  => __( 'Enable Integration', 'essential-addons-for-elementor-lite' ),
 			        'disable' => __( 'Disable Integration', 'essential-addons-for-elementor-lite' ),
 			        'list'    => [
@@ -264,7 +266,7 @@ trait Admin {
 				        ]
 			        ]
 		        ],
-		        'premium_items'          => [
+		        'premium_items'           => [
 			        'list' => [
 				        [
 					        'heading' => __( 'Protected Content', 'essential-addons-for-elementor-lite' ),
@@ -304,7 +306,7 @@ trait Admin {
 				        ],
 			        ]
 		        ],
-		        'enhance_experience'     => [
+		        'enhance_experience'      => [
 			        'heading' => __( "Enhance Your Elementor Experience By <br/> <b>Unlocking</b> <span class='Advance-color'>35+ Advanced PRO</span> <b>Elements</b>", 'essential-addons-for-elementor-lite' ),
 			        'review'  => [
 				        'label' => __( 'Review from Real Users', 'essential-addons-for-elementor-lite' ),
@@ -317,7 +319,7 @@ trait Admin {
 				        'icon'  => 'ea-crown-1'
 			        ]
 		        ],
-		        'explore_pro_features'   => [
+		        'explore_pro_features'    => [
 			        'heading' => __( "Explore Premiere Pro features", 'essential-addons-for-elementor-lite' ),
 			        'content' => __( "Learn all about the tools and techniques you can use to edit videos, animate titles, add effects, mix sound, and more.", 'essential-addons-for-elementor-lite' ),
 			        'image'   => 'images/img-3.png',
@@ -327,7 +329,7 @@ trait Admin {
 				        'icon'  => 'ea-link'
 			        ]
 		        ],
-		        'tools'                  => [
+		        'tools'                   => [
 			        'box_1' => [
 				        'heading' => __( "Regenerate Assets", 'essential-addons-for-elementor-lite' ),
 				        'content' => __( "Essential Addons styles & scripts are saved in Uploads folder. This option will clear all those generated files.", 'essential-addons-for-elementor-lite' ),
@@ -356,7 +358,7 @@ trait Admin {
 				        'value'   => get_option( 'eael_js_print_method', 'external' )
 			        ]
 		        ],
-		        'extensions'             => [
+		        'extensions'              => [
 			        'heading' => __( 'Premium Extensions', 'essential-addons-for-elementor-lite' ),
 			        'list'    => [
 				        'section-parallax'    => [
@@ -465,7 +467,7 @@ trait Admin {
 				        ],
 			        ]
 		        ],
-		        'widgets'                => [
+		        'widgets'                 => [
 			        'content-elements'         => [
 				        'title'    => __( 'Content Elements', 'essential-addons-for-elementor-lite' ),
 				        'icon'     => 'ea-content',
@@ -1217,7 +1219,7 @@ trait Admin {
 				        ]
 			        ]
 		        ],
-		        'modal'                  => [
+		        'modal'                   => [
 			        'postDuplicatorSetting'  => [
 				        'title'   => __( "Select Post Types", 'essential-addons-for-elementor-lite' ),
 				        'name'    => 'post-duplicator-post-type',

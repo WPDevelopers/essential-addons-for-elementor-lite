@@ -101,7 +101,7 @@ function Elements() {
                         </div>
                         <div className="ea__enable-elements">
                             <div className="toggle-wrapper flex items-center gap-2">
-                                <h5>{i18n.enable_all_elements}</h5>
+                                <h5>{checked? i18n.disable_all_elements : i18n.enable_all_elements}</h5>
                                 <label className="toggle-wrap">
                                     <input type="checkbox" checked={checked} onChange={changeHandler}/>
                                     <span className="slider"></span>
