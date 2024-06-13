@@ -2352,12 +2352,49 @@ input::placeholder {
   font-size: 12px;
 }
 
-/*
-::placeholder {
-    color: #98A2B3;
-    opacity: 1;
-} */
+/*-------- Toaster-item ------------*/
 
+.ea__toaster-wrapper {
+  width: 360px;
+  margin: auto;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+}
+
+.toaster-content {
+  background: #fff;
+  padding: 16px;
+  border-radius: 2px;
+  -webkit-box-shadow: 0 20px 36px 0 #00012314;
+  box-shadow: 0 20px 36px 0 #00012314;
+  border-bottom: 3px solid;
+  border-image: linear-gradient(90deg, #52CB98 0%, #FFFFFF 100%) 1;
+}
+
+.toaster-content.success {
+  border-image: linear-gradient(90deg, #52CB98 0%, #FFFFFF 100%) 1;
+}
+
+.toaster-content.warning {
+  border-image: linear-gradient(90deg, #FFB545 0%, #FFFFFF 100%) 1;
+}
+
+.toaster-content.error {
+  border-image: linear-gradient(90deg, #FF3E3E 0%, #FFFFFF 100%) 1;
+}
+
+.toaster-content h5 {
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 450;
+  color: #1D2939;
+}
+.toaster-content i {
+  color: #A89E9E;
+  font-size: 10px;
+  cursor: pointer;
+}
 
 /*-------- Responsive-item ------------*/
 
