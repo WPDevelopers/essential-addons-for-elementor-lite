@@ -11,6 +11,7 @@ import Modal from "./Modal.jsx";
 import ModalRegenerateAssets from "./ModalRegenerateAssets.jsx";
 import '../App.css'
 import ModalGoPremium from "./ModalGoPremium.jsx";
+import Toasts from "./Toasts.jsx";
 
 function App() {
     const {eaState} = consumer();
@@ -33,6 +34,7 @@ function App() {
                 {eaState.modal === 'open' && <Modal/>}
                 {eaState.modalRegenerateAssets === 'open' && <ModalRegenerateAssets/>}
                 {eaState.modalGoPremium === 'open' && <ModalGoPremium/>}
+                <Toasts/>
             </section>
         </>
     )
