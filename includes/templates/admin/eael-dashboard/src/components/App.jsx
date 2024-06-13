@@ -34,7 +34,7 @@ function App() {
                 {eaState.modal === 'open' && <Modal/>}
                 {eaState.modalRegenerateAssets === 'open' && <ModalRegenerateAssets/>}
                 {eaState.modalGoPremium === 'open' && <ModalGoPremium/>}
-                <Toasts/>
+                {eaState.toasts && <Toasts/>}
             </section>
         </>
     )

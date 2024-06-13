@@ -1,4 +1,16 @@
+import {useEffect} from "react";
+import consumer from "../context";
+
 function Toasts() {
+    const {eaState, eaDispatch} = consumer();
+
+    useEffect(() => {
+        if (eaState.toasts === true) {
+            setTimeout(() => {
+                eaDispatch({type: 'CLOSE_TOAST'});
+            }, 2000);
+        }
+    }, [eaState.toasts]);
     return (
         <>
             <div className='ea__toaster-wrapper'>
