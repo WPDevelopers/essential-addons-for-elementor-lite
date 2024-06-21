@@ -738,12 +738,8 @@ class Helper
                 ];
             }
 
-            if ( isset($data->taxonomy) ) {
-                $args[ 'tax_query' ][] = [
-                    'taxonomy' => $data->taxonomy,
-                    'field'    => 'term_id',
-                    'terms'    => $data->term_id,
-                ];
+            if ( isset($wp_query->tax_query) ) {
+                $args[ 'tax_query' ][] = $wp_query->tax_query->queries;
             }
 
             if (get_query_var('author') > 0) {
