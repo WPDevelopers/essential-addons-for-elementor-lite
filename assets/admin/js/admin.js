@@ -522,7 +522,7 @@
 		}
 	});
 
-	$(document).on('click', '.eael-setup-wizard-save', function (e) {
+	$(document).on('click', '.eael-setup-wizard-save1', function (e) {
 		e.preventDefault();
 		var $this = $(this);
 		$(".eael-setup-wizard-save").attr('disabled', 'disabled');
@@ -544,9 +544,9 @@
 				       if (response.success) {
 						   $('.eael-onboard--wrapper .eael-modal-content').fadeIn().removeClass('eael-d-none');
 						   
-						   setTimeout(function() { 
-								window.location = response.data.redirect_url;
-							}, 3000);
+						//    setTimeout(function() { 
+						// 		window.location = response.data.redirect_url;
+						// 	}, 3000);
 				       } else {
 					       $this.attr('disabled', 'disabled');
 					       Swal.fire({

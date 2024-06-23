@@ -24,6 +24,67 @@ function IntegrationContent({
     }
   };
 
+  const handleSaveClick = async (event) => {
+    event.preventDefault();
+    const button = event.target;
+    button.setAttribute("disabled", "disabled");
+
+    if (button.id === "eael-count-me-bt") {
+      document.getElementById("eael_user_email_address").value = 1;
+    }
+
+    let fields = new FormData(
+      document.querySelector("form.eael-setup-wizard-form")
+    );
+
+    console.log(fields);
+    fields = new URLSearchParams(fields).toString();
+    console.log(fields);
+
+    try {
+      const response = await fetch(localize.ajaxurl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          action: "save_setup_wizard_data",
+          security: localize.nonce,
+          fields: fields,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        document
+          .querySelector(".eael-onboard--wrapper .eael-modal-content")
+          .classList.remove("eael-d-none");
+        document
+          .querySelector(".eael-onboard--wrapper .eael-modal-content")
+          .classList.add("fadeIn");
+
+        // setTimeout(() => {
+        //   window.location = result.data.redirect_url;
+        // }, 3000);
+      } else {
+        button.removeAttribute("disabled");
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "error",
+        });
+      }
+    } catch (error) {
+      button.removeAttribute("disabled");
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "error",
+      });
+    }
+  };
+
   return (
     <>
       <div className="eael-onboard-content-wrapper eael-onboard-integrations mb-4">
@@ -128,6 +189,7 @@ function IntegrationContent({
         <button
           className="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn1 eael-setup-wizard-save"
           data-next=""
+          onClick={handleSaveClick}
         >
           {__("Finish", "essential-addons-for-elementor-lite")}
         </button>
