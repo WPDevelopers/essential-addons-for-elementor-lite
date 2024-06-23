@@ -128,6 +128,14 @@ class Bootstrap
 
     }
 
+    protected function is_current_theme( $name ) {
+        $current_theme = wp_get_theme();
+
+        if ( $name == $current_theme->get( 'Name' ) || $name == $current_theme->get( 'Template' ) ) {
+            return true;
+        }
+        return false;
+    }
     protected function register_hooks()
     {
         // Core
@@ -262,9 +270,11 @@ class Bootstrap
 
 			    add_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open' );
 			    add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close' );
-			    add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
+
                 if( function_exists( 'astra_woo_woocommerce_shop_product_content' ) ){
                     add_action( 'woocommerce_after_shop_loop_item', 'astra_woo_woocommerce_shop_product_content' );
+                } else if ( ! $this->is_current_theme( 'OceanWP' ) ) {
+                    add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
                 }
 		    } );
 	    }
