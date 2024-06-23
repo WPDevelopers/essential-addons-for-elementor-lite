@@ -490,33 +490,17 @@ input:focus {
   transform: translateX(16px);
 }
 
-#ea__dashboard--wrapper input:checked+.slider.loader:before {
-  opacity: 1;
-  visibility: visible;
-
+#ea__dashboard--wrapper input:checked+.slider.ea-loader {
+  background-color: var(--label-color-fill);
 }
 
-#ea__dashboard--wrapper input:checked+.slider.loader:before {
-  opacity: 1;
-  visibility: visible;
-
-}
-
-#ea__dashboard--wrapper input:checked+.slider.loader:after {
-  opacity: 0;
-  visibility: hidden;
-}
-
-#ea__dashboard--wrapper input:checked+.slider:before {
+#ea__dashboard--wrapper input:checked+.slider.ea-loader:before {
   transform: translateX(16px);
+  background-color: var(--base-background);
+  border-radius: 50%;
 }
 
-#ea__dashboard--wrapper .slider.loader:before {
-  opacity: 0;
-  visibility: hidden;
-}
-
-#ea__dashboard--wrapper .slider.loader::after {
+#ea__dashboard--wrapper .slider.ea-loader::before {
   position: absolute;
   content: "";
   height: 16px;
@@ -529,13 +513,16 @@ input:focus {
   border: 2px solid rgba(71, 75, 87, .2);
   border-top-color: #1D2939;
   border-radius: 50%;
-  transition: ease-in-out .5s;
+  transition: ease-in-out .5s;animation: loading 1s infinite;
 }
 
-#ea__dashboard--wrapper .slider.loader.active::after {
-  opacity: 1;
-  visibility: visible;
-  transform: rotate(360deg);
+@keyframes loading {
+  from{
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /*----- checkbox -------- */
