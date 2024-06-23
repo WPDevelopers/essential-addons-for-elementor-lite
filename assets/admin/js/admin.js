@@ -432,12 +432,6 @@
 		}
 		eaelStepIndicator(step)
 	}
-
-	$(document).on("change", ".eael-onboard-integrations .enable-integration-switch", function() {
-		if ($(this).is(':checked')) {
-            $(this).closest('.eael-integration-footer').find('.wpdeveloper-plugin-installer').click();
-        }
-	});
 	
 	/**
 	 * eaelStepIndicator
