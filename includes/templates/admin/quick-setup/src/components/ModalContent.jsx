@@ -1,6 +1,6 @@
 import { __ } from "@wordpress/i18n";
 
-function ModalContent({activeTab, handleTabChange, modalTarget, handleModalChange, closeModal}) {
+function ModalContent({closeModal}) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let modal_content = eaelQuickSetup?.modal_content;
   let success_2_src = modal_content?.success_2_src;

@@ -118,19 +118,17 @@ function App() {
             />
           </div>
 
-          <div
-            className={`eael-modal-content ${
-              activeTab === "modal" ? "" : "eael-d-none"
-            }`}
-          >
-            <ModalContent
-              activeTab={activeTab}
-              handleTabChange={handleTabChange}
-              modalTarget={modalTarget}
-              handleModalChange={handleModalChange}
-              closeModal={closeModal}
-            />
-          </div>
+          {modalTarget && (
+            <div className="eael-modal-content">
+              <ModalContent
+                activeTab={activeTab}
+                handleTabChange={handleTabChange}
+                modalTarget={modalTarget}
+                handleModalChange={handleModalChange}
+                closeModal={closeModal}
+              />
+            </div>
+          )}
         </form>
       </section>
     </>

@@ -57,16 +57,11 @@ function IntegrationContent({
       const result = await response.json();
 
       if (result.success) {
-        document
-          .querySelector(".eael-onboard--wrapper .eael-modal-content")
-          .classList.remove("eael-d-none");
-        document
-          .querySelector(".eael-onboard--wrapper .eael-modal-content")
-          .classList.add("fadeIn");
-
-        // setTimeout(() => {
-        //   window.location = result.data.redirect_url;
-        // }, 3000);
+        handleModalChange({ currentTarget: { getAttribute: () => "modal" } });
+        
+        setTimeout(() => {
+          window.location = result.data.redirect_url;
+        }, 3000);
       } else {
         button.removeAttribute("disabled");
         Swal.fire({
