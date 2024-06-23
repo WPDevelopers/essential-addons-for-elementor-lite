@@ -7,6 +7,7 @@ function IntegrationBox(props) {
         {eaState, eaDispatch} = consumer(),
         checked = eaState.integrations[props.index],
         changeHandler = (e) => {
+            eaDispatch({type: 'INTEGRATION_LOADER', payload: props.index});
             eaDispatch({type: 'ON_CHANGE_INTEGRATION', payload: {key: props.index, value: e.target.checked}});
         };
 
@@ -23,7 +24,7 @@ function IntegrationBox(props) {
                         <h5 className="toggle-label">{checked ? disableTxt : enableTxt}</h5>
                         <label className=" toggle-wrap">
                             <input type="checkbox" checked={checked} onChange={changeHandler}/>
-                            <span className="slider"></span>
+                            <span className={eaState[props.index] === true ? 'slider ea-loader' : 'slider'}></span>
                         </label>
                     </div>
                 </div>

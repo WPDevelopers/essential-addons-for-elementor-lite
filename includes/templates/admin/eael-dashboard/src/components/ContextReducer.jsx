@@ -17,6 +17,8 @@ function ContextReducer() {
                 return {...state, ...payload};
             case 'SET_MENU':
                 return {...state, menu: payload};
+            case 'INTEGRATION_LOADER':
+                return {...state, [payload]: true};
             case 'ON_CHANGE_INTEGRATION':
                 params = {
                     action: 'wpdeveloper_deactivate_plugin',
@@ -29,13 +31,10 @@ function ContextReducer() {
                     params.action = 'wpdeveloper_auto_active_even_not_installed';
                 }
 
-                request = eaAjax(params, true);
-                request.onreadystatechange = () => {
-                    response = JSON.parse(request.responseText);
-                }
+                response = eaAjax(params);
 
                 integrations = {...state.integrations, [payload.key]: payload.value};
-                return {...state, integrations};
+                return {...state, integrations, [payload.key]: false};
             case 'ON_CHANGE_ELEMENT':
                 elements = {...state.elements, [payload.key]: payload.value};
                 return {...state, elements};
