@@ -10,9 +10,7 @@ function ContextReducer() {
     const reducer = (state, {type, payload}) => {
         const licenseManagerConfig = typeof wpdeveloperLicenseManagerConfig === 'undefined' ? {} : wpdeveloperLicenseManagerConfig;
         let params, request, response, licenseStatus, licenseError, otpError, otp, otpEmail, errorMessage,
-            hiddenLicenseKey,
-            integrations,
-            elements, modals;
+            hiddenLicenseKey, integrations, elements, modals, toastMessage, toastType;
 
         switch (type) {
             case 'ON_PROCESSING':
@@ -195,10 +193,16 @@ function ContextReducer() {
                 response = eaAjax(params);
 
                 if (response?.success) {
-                    return {...state, modal: 'close', toasts: true};
+                    return {
+                        ...state,
+                        modal: 'close',
+                        toasts: true,
+                        toastType: 'success',
+                        toastMessage: 'Save Successfully'
+                    };
                 }
 
-                return {...state};
+                return {...state, toasts: true, toastType: 'error', toastMessage: 'Failed to save modal data'};
             case 'SAVE_ELEMENTS_DATA':
                 params = {
                     action: 'save_settings_with_ajax',
@@ -214,11 +218,15 @@ function ContextReducer() {
 
                 response = eaAjax(params);
 
-                // if (response?.success) {
-                //     return {...state, modal: 'close'};
-                // }
+                if (response?.success) {
+                    toastType = 'success';
+                    toastMessage = 'Elements Save Successfully';
+                } else {
+                    toastType = 'error';
+                    toastMessage = 'Failed to Save Elements';
+                }
 
-                return {...state, toasts: true};
+                return {...state, toasts: true, toastType, toastMessage};
             case 'SAVE_TOOLS':
                 params = {
                     action: 'save_settings_with_ajax',
@@ -228,7 +236,15 @@ function ContextReducer() {
 
                 response = eaAjax(params);
 
-                return {...state, toasts: true};
+                if (response?.success) {
+                    toastType = 'success';
+                    toastMessage = 'Success';
+                } else {
+                    toastType = 'error';
+                    toastMessage = 'Error';
+                }
+
+                return {...state, toasts: true, toastType, toastMessage};
             case 'REGENERATE_ASSETS':
                 params = {
                     action: 'clear_cache_files_with_ajax',
