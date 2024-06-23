@@ -2383,7 +2383,8 @@ input::placeholder {
   height: 3px;
   border-radius: 0 0 3px 3px;
   background-image: linear-gradient(90deg, #52CB98 0%, #FFFFFF 100%);
-  animation: slide 2s infinite;
+  animation: slide 2s 1;
+  animation-fill-mode: forwards;
 }
 
 @keyframes slide {
