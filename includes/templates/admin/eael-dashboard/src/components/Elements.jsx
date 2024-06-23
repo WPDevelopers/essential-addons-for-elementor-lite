@@ -16,7 +16,6 @@ function Elements() {
         searchParam = useRef(),
         categoryRef = useRef(),
         subCatRef = useRef(),
-        newScroll = {},
         onSearch = () => {
             let results = {},
                 searchTerm = searchParam.current.value,
@@ -44,34 +43,25 @@ function Elements() {
             eaDispatch({type: 'SAVE_ELEMENTS_DATA'});
         },
         scrollHandler = () => {
-            newScroll.y = window.pageYOffset;
-            const subCatChildren = subCatRef.current.children,
-                subCatChildrenArr = [subCatChildren[8]?.offsetTop,
-                    subCatChildren[7]?.offsetTop,
-                    subCatChildren[6]?.offsetTop,
-                    subCatChildren[5]?.offsetTop,
-                    subCatChildren[4]?.offsetTop,
-                    subCatChildren[3]?.offsetTop,
-                    subCatChildren[2]?.offsetTop,
-                    subCatChildren[1]?.offsetTop,
-                    subCatChildren[0]?.offsetTop,];
+            const newScrollY = window.pageYOffset - 32,
+                subCatChildren = subCatRef.current.children;
             let currentActivateCatIndex = 0;
 
-            if (window.pageYOffset > subCatChildren[8]?.offsetTop) {
+            if (newScrollY > subCatChildren[8]?.offsetTop) {
                 currentActivateCatIndex = 8;
-            } else if (window.pageYOffset > subCatChildren[7]?.offsetTop) {
+            } else if (newScrollY > subCatChildren[7]?.offsetTop) {
                 currentActivateCatIndex = 7;
-            } else if (window.pageYOffset > subCatChildren[6]?.offsetTop) {
+            } else if (newScrollY > subCatChildren[6]?.offsetTop) {
                 currentActivateCatIndex = 6;
-            } else if (window.pageYOffset > subCatChildren[5]?.offsetTop) {
+            } else if (newScrollY > subCatChildren[5]?.offsetTop) {
                 currentActivateCatIndex = 5;
-            } else if (window.pageYOffset > subCatChildren[4]?.offsetTop) {
+            } else if (newScrollY > subCatChildren[4]?.offsetTop) {
                 currentActivateCatIndex = 4;
-            } else if (window.pageYOffset > subCatChildren[3]?.offsetTop) {
+            } else if (newScrollY > subCatChildren[3]?.offsetTop) {
                 currentActivateCatIndex = 3;
-            } else if (window.pageYOffset > subCatChildren[2]?.offsetTop) {
+            } else if (newScrollY > subCatChildren[2]?.offsetTop) {
                 currentActivateCatIndex = 2;
-            } else if (window.pageYOffset > subCatChildren[1]?.offsetTop) {
+            } else if (newScrollY > subCatChildren[1]?.offsetTop) {
                 currentActivateCatIndex = 1;
             }
 
@@ -80,16 +70,15 @@ function Elements() {
 
     useEffect(() => {
         window.addEventListener('scroll', scrollHandler);
-        console.log('didmount scroll');
+
         return () => {
             window.removeEventListener('scroll', scrollHandler);
-            console.log('unmount scroll');
         };
     }, []);
 
     return (
         <>
-            <div className="ea__elements-nav-content">
+            <div className="ea__elements-nav-content elements-contents">
                 <div className="ea__content-header sticky">
                     <div className="ea__content-info flex justify-between items-center gap-2">
                         <div className="ea__widget-elements flex items-center">
@@ -112,7 +101,7 @@ function Elements() {
                         </div>
                         <div className="ea__enable-elements">
                             <div className="toggle-wrapper flex items-center gap-2">
-                                <h5>{i18n.enable_all_elements}</h5>
+                                <h5>{checked? i18n.disable_all_elements : i18n.enable_all_elements}</h5>
                                 <label className="toggle-wrap">
                                     <input type="checkbox" checked={checked} onChange={changeHandler}/>
                                     <span className="slider"></span>
@@ -122,7 +111,8 @@ function Elements() {
                     </div>
                     <div className="ea__content-icon flex">
                         {Object.keys(eaData).map((item, index) => {
-                            return <ElementCategoryBox index={item} key={index} activateIndex={index}/>
+                            return <ElementCategoryBox index={item} key={index} activateIndex={index}
+                                                       subCatRef={subCatRef}/>
                         })}
                     </div>
                 </div>

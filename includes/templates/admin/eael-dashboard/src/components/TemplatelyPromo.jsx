@@ -1,7 +1,11 @@
-import React from 'react';
+import consumer from "../context";
 
 function TemplatelyPromo() {
-    const eaData = localize.eael_dashboard.templately_promo;
+    const eaData = localize.eael_dashboard.templately_promo,
+        {eaDispatch} = consumer(),
+        clickHandler = () => {
+            eaDispatch({type: 'INSTALL_TEMPLATELY'});
+        };
 
     return (
         <>
@@ -17,7 +21,7 @@ function TemplatelyPromo() {
                         })}
                     </div>
                     <a href={eaData.button.url}>
-                        <button className="primary-btn install-btn">
+                        <button className="primary-btn install-btn" onClick={clickHandler}>
                             <i className="ea-dash-icon ea-install"></i>
                             {eaData.button.label}
                         </button>

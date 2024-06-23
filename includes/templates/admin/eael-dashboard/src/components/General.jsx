@@ -5,17 +5,18 @@ import SidebarBox from "./SidebarBox.jsx";
 import LicenseSection from "./LicenseSection.jsx";
 import ElementStatistics from "./ElementStatistics.jsx";
 import VideoPromo from "./VideoPromo.jsx";
+import consumer from "../context";
 
 function General() {
     const isProActivated = localize.eael_dashboard.is_eapro_activate,
-        isTemplatelyActivate = localize.eael_dashboard.is_templately_activate;
+        {eaState} = consumer();
 
     return (
         <>
             <div className="ea__main-content-wrapper flex gap-4">
                 <div className='ea__general-content--wrapper'>
                     {isProActivated ? <LicenseSection/> : <WhatsNew/>}
-                    {isTemplatelyActivate ? <VideoPromo/> : <TemplatelyPromo/>}
+                    {eaState.isTemplatelyInstalled ? <VideoPromo/> : <TemplatelyPromo/>}
                     <div className="ea__connect-others-wrapper flex gap-4">
                         <CommunityBox index={0}/>
                         <CommunityBox index={1}/>

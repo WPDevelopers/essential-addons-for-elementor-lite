@@ -178,6 +178,8 @@ function ContextReducer() {
                 return {...state, modal: 'open', modalID: payload.key, modalTitle: payload.title}
             case 'CLOSE_MODAL':
                 return {...state, modal: 'close', modalGoPremium: 'close', modalRegenerateAssets: 'close'}
+            case 'CLOSE_TOAST':
+                return {...state, toasts: false}
             case 'MODAL_ACCORDION':
                 return {...state, modalAccordion: payload.key}
             case 'MODAL_ON_CHANGE':
@@ -193,7 +195,7 @@ function ContextReducer() {
                 response = eaAjax(params);
 
                 if (response?.success) {
-                    return {...state, modal: 'close', modalRegenerateAssets: 'open'};
+                    return {...state, modal: 'close', toasts: true};
                 }
 
                 return {...state};
@@ -216,7 +218,7 @@ function ContextReducer() {
                 //     return {...state, modal: 'close'};
                 // }
 
-                return {...state, modalRegenerateAssets: 'open'};
+                return {...state, toasts: true};
             case 'SAVE_TOOLS':
                 params = {
                     action: 'save_settings_with_ajax',
@@ -226,7 +228,7 @@ function ContextReducer() {
 
                 response = eaAjax(params);
 
-                return {...state, modalRegenerateAssets: 'open'};
+                return {...state, toasts: true};
             case 'REGENERATE_ASSETS':
                 params = {
                     action: 'clear_cache_files_with_ajax',
@@ -237,6 +239,21 @@ function ContextReducer() {
                 return {...state, modalRegenerateAssets: 'open'}
             case 'ELEMENTS_CAT':
                 return {...state, elementsActivateCatIndex: payload}
+            case 'LIGHT_DARK_TOGGLE':
+                return {...state, isDark: !state.isDark}
+            case 'INSTALL_TEMPLATELY':
+                params = {
+                    action: 'wpdeveloper_install_plugin',
+                    security: localize.nonce,
+                    slug: 'templately'
+                };
+
+                request = eaAjax(params, true);
+                request.onreadystatechange = () => {
+                    response = JSON.parse(request.responseText);
+                }
+
+                return {...state, isTemplatelyInstalled: true}
         }
     }
 
