@@ -38,7 +38,7 @@ function ConfigurationContent({activeTab, handleTabChange}) {
                 className="eael_preferences eael-d-none"
                 name="eael_preferences"
                 type="radio"
-                checked
+                defaultChecked="checked"
               />
 
               <span className="select--wrapper">
