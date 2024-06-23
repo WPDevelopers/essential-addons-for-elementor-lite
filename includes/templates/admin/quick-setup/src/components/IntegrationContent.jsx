@@ -1,11 +1,28 @@
 import { __ } from "@wordpress/i18n";
 
-function IntegrationContent({activeTab, handleTabChange, modalTarget, handleModalChange, closeModal}) {
+function IntegrationContent({
+  activeTab,
+  handleTabChange,
+  modalTarget,
+  handleModalChange,
+  closeModal,
+}) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let integrations_content = eaelQuickSetup?.integrations_content;
   let templately_local_plugin_data =
     eaelQuickSetup?.menu_items?.templately_local_plugin_data;
   let plugin_list = integrations_content?.plugin_list;
+
+  const handleIntegrationSwitch = (event, plugin) => {
+    if (event.target.checked) {
+      const installerButton = event.target
+        .closest(".eael-integration-footer")
+        .querySelector(".wpdeveloper-plugin-installer");
+      if (installerButton) {
+        installerButton.click();
+      }
+    }
+  };
 
   return (
     <>
@@ -62,10 +79,11 @@ function IntegrationContent({activeTab, handleTabChange, modalTarget, handleModa
                     >
                       {__("Install", "essential-addons-for-elementor-lite")}
                     </button>
+                  ) : plugin.is_active ? (
+                    <button className="wpdeveloper-plugin-installer button__white-not-hover eael-quick-setup-wpdeveloper-plugin-installer">
+                      {__("Activated", "essential-addons-for-elementor-lite")}
+                    </button>
                   ) : (
-                    plugin.is_active ? 
-									  <button className="wpdeveloper-plugin-installer button__white-not-hover eael-quick-setup-wpdeveloper-plugin-installer">{__("Activated", "essential-addons-for-elementor-lite")}</button>
-                    :
                     <button
                       className="wpdeveloper-plugin-installer eael-quick-setup-wpdeveloper-plugin-installer"
                       data-action="activate"
@@ -81,7 +99,10 @@ function IntegrationContent({activeTab, handleTabChange, modalTarget, handleModa
                     <input
                       type="checkbox"
                       className="enable-integration-switch"
-                      defaultChecked={plugin.is_active ? 'checked' : null}
+                      defaultChecked={plugin.is_active}
+                      onChange={(event) =>
+                        handleIntegrationSwitch(event, plugin)
+                      }
                     />
                     <span className="slider"></span>
                   </label>
@@ -94,17 +115,19 @@ function IntegrationContent({activeTab, handleTabChange, modalTarget, handleModa
       </div>
       <div className="eael-section-wrapper flex flex-end gap-4">
         <button
-            className="previous-btn flex gap-2 items-center eael-setup-next-btn"
-            type="button"
-            data-next={ ! templately_local_plugin_data !== false ? 'templately' : 'go-pro'}
-            onClick={handleTabChange}
+          className="previous-btn flex gap-2 items-center eael-setup-next-btn"
+          type="button"
+          data-next={
+            !templately_local_plugin_data !== false ? "templately" : "go-pro"
+          }
+          onClick={handleTabChange}
         >
           <i className="ea-dash-icon ea-left-arrow-long"></i>
           {__("Previous", "essential-addons-for-elementor-lite")}
         </button>
         <button
-            className="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn1 eael-setup-wizard-save"
-            data-next=""
+          className="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn1 eael-setup-wizard-save"
+          data-next=""
         >
           {__("Finish", "essential-addons-for-elementor-lite")}
         </button>
