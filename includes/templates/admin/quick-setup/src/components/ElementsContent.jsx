@@ -76,8 +76,7 @@ function ElementsContent({ activeTab, handleTabChange, showElements, handleShowE
                                 type="checkbox"
                                 data-preferences={preferences}
                                 name={`eael_element[${element.key}]`}
-                                checked={checked}
-                                onChange={() => {}}
+                                defaultChecked={checked}
                               />
                               <span className="slider"></span>
                             </label>
