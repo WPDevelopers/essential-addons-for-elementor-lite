@@ -8,7 +8,10 @@ function IntegrationBox(props) {
         checked = eaState.integrations[props.index],
         changeHandler = (e) => {
             eaDispatch({type: 'INTEGRATION_LOADER', payload: props.index});
-            eaDispatch({type: 'ON_CHANGE_INTEGRATION', payload: {key: props.index, value: e.target.checked}});
+            setTimeout(eaDispatch, 300, {
+                type: 'ON_CHANGE_INTEGRATION',
+                payload: {key: props.index, value: e.target.checked}
+            })
         };
 
     return (

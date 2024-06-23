@@ -513,7 +513,8 @@ input:focus {
   border: 2px solid rgba(71, 75, 87, .2);
   border-top-color: #1D2939;
   border-radius: 50%;
-  transition: ease-in-out .5s;animation: loading 1s infinite;
+  transition: ease-in-out .1s;
+  animation: loading 1s infinite;
 }
 
 @keyframes loading {
