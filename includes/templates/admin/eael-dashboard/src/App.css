@@ -593,10 +593,10 @@ input:focus {
   border-top-color: #1D2939;
   border-radius: 50%;
   transition: ease-in-out .1s;
-  animation: loading 1s infinite;
+  animation: ea_loading 1s infinite;
 }
 
-@keyframes loading {
+@keyframes ea_loading {
   from{
     transform: rotate(0deg);
   }
