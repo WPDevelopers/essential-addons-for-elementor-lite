@@ -4,7 +4,7 @@ import General from './General.jsx'
 import Elements from './Elements.jsx'
 import Extensions from './Extensions.jsx'
 import Tools from './Tools.jsx'
-import Integration from './Integration.jsx'
+import Integrations from './Integrations.jsx'
 import Premium from './Premium.jsx'
 import consumer from "../context";
 import Modal from "./Modal.jsx";
@@ -28,7 +28,7 @@ function App() {
                     {eaState.menu === 'Elements' ? <Elements/> : ''}
                     {eaState.menu === 'Extensions' ? <Extensions/> : ''}
                     {eaState.menu === 'Tools' ? <Tools/> : ''}
-                    {eaState.menu === 'Integration' ? <Integration/> : ''}
+                    {eaState.menu === 'Integrations' ? <Integrations/> : ''}
                     {eaState.menu === 'Go Premium' ? <Premium/> : ''}
                 </section>
                 {eaState.modal === 'open' && <Modal/>}

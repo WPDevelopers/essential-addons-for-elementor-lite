@@ -1,7 +1,7 @@
 import React from 'react';
 import IntegrationBox from "./IntegrationBox.jsx";
 
-function Integration() {
+function Integrations() {
     const eaData = localize.eael_dashboard.integration_box;
 
     return (
@@ -17,4 +17,4 @@ function Integration() {
     );
 }
 
-export default Integration;
+export default Integrations;

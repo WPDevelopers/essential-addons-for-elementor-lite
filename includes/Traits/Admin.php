@@ -89,7 +89,7 @@ trait Admin {
 				    __( 'Elements', 'essential-addons-for-elementor-lite' )    => 'ea-elements',
 				    __( 'Extensions', 'essential-addons-for-elementor-lite' )  => 'ea-extensions',
 				    __( 'Tools', 'essential-addons-for-elementor-lite' )       => 'ea-tool',
-				    __( 'Integration', 'essential-addons-for-elementor-lite' ) => 'ea-plug',
+				    __( 'Integrations', 'essential-addons-for-elementor-lite' ) => 'ea-plug',
 				    __( 'Go Premium', 'essential-addons-for-elementor-lite' )  => 'ea-lock',
 			    ],
 			    'i18n'                    => [
