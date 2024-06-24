@@ -21,11 +21,11 @@ function GettingStartedContent({activeTab, handleTabChange, modalTarget, handleM
               />
             </a>
             <h3>
-              {__("Getting Started", "essential-addons-for-elementor-lite")}
+              {__("Get Started with Essential Addons", "essential-addons-for-elementor-lite")}
             </h3>
             <p>
               {__(
-                "Easily get started with this easy setup wizard and complete setting up your Knowledge Base.",
+                "Thank you for choosing Essential Addons for Elementor. Follow these simple steps of easy setup wizard & enjoy your Elementor web-building experience now!",
                 "essential-addons-for-elementor-lite"
               )}
             </p>
@@ -33,11 +33,11 @@ function GettingStartedContent({activeTab, handleTabChange, modalTarget, handleM
           <div className="eael-next-step-wrapper" id="eael-dashboard--wrapper">
             <p>
               {__(
-                "By clicking this button I am allowing this app to collect my information.",
+                "By proceeding, you grant permission for this plugin to collect your information.",
                 "essential-addons-for-elementor-lite"
               )}
               <span className="collect-info eael-what-we-collect" onClick={handleModalChange} data-target="what-we-collect">
-                {__("What We Collect?", "essential-addons-for-elementor-lite")}
+                {__("Find out what we collect.", "essential-addons-for-elementor-lite")}
               </span>
             </p>
 
@@ -76,11 +76,11 @@ function GettingStartedContent({activeTab, handleTabChange, modalTarget, handleM
         <div class="eael-modal-content-wrapper eael-onboard-modal">
           <div class="">
             <h5>
-              {__("What we collect?", "essential-addons-for-elementor-lite")}
+              {__("What We Collect?", "essential-addons-for-elementor-lite")}
             </h5>
             <p>
               {__(
-                "We collect non-sensitive diagnostic data and plugin usage information. Your site URL, WordPress & PHP version, plugins & themes and email address to send you the discount coupon. This data lets us make sure this plugin always stays compatible with the most popular plugins and themes. No spam, we promise.",
+                "We collect non-sensitive diagnostic data and plugin usage information. Your site URL, WordPress & PHP version, plugins & themes, and email address to send you the discount coupon. This data lets us make sure this plugin always stays compatible with the most popular plugins and themes. No spam, we promise.",
                 "essential-addons-for-elementor-lite"
               )}
             </p>
