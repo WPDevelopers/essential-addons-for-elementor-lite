@@ -58,7 +58,7 @@ function GettingStartedContent({activeTab, handleTabChange, modalTarget, handleM
                 "Proceed to Next Step",
                 "essential-addons-for-elementor-lite"
               )}
-              <i className="ea-dash-icon ea-install"></i>
+              <i className="ea-dash-icon ea-right-arrow-long"></i>
             </button>
             <span
               className="skip-item eael-setup-next-btn"
