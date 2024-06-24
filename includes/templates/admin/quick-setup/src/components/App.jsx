@@ -19,7 +19,10 @@ function App() {
   };
 
   const handleModalChange = (event) => {
+    console.log(event.currentTarget);
+    console.log(event.currentTarget.getAttribute("data-target"));
     setModalTarget(event.currentTarget.getAttribute("data-target"));
+    console.log(modalTarget);
   };
 
   const closeModal = () => {
@@ -118,7 +121,7 @@ function App() {
             />
           </div>
 
-          {modalTarget && (
+          {modalTarget === 'modal' && (
             <div className="eael-modal-content">
               <ModalContent
                 activeTab={activeTab}
