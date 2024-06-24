@@ -45,7 +45,46 @@ a,
 span {
   display: inline-block;
 }
+.eael-admin-promotion-message {
+  background: #5E2EFF;
+  color: white;
+  padding: 15px 10px;
+  position: relative;
+}
 
+.eael-admin-promotion-message p {
+  font-size:14px;
+  text-align:center;
+}
+
+.eael-admin-promotion-message p a {
+  font-weight: bold;
+}
+
+.eael-admin-promotion-message p i {
+  font-size: 15px;
+  margin-right: 5px;
+}
+
+.eael-admin-promotion-message p a:focus {
+  color:inherit;
+  outline:none;
+  box-shadow:none;
+}
+.eael-admin-promotion-close {
+  top: 7px !important;
+}
+.eael-lock-style {
+  position: absolute;
+  right: 21px;
+  color: #E8AA17;
+  font-size: 12px;
+}
+
+
+.eael-admin-promotion-message i:before {
+  color:white;
+}
 .toplevel_page_eael-settings #wpcontent {
   padding-left: 0;
 }

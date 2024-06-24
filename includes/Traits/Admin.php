@@ -49,7 +49,7 @@ trait Admin {
         }
 
         if ( isset( $hook ) && $hook == 'toplevel_page_eael-settings' ) {
-            wp_enqueue_style( 'essential_addons_elementor-admin-css', EAEL_PLUGIN_URL . 'assets/admin/css/admin.css', false, EAEL_PLUGIN_VERSION );
+            wp_enqueue_style( 'essential_addons_elementor-admin-css', EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.css', false, EAEL_PLUGIN_VERSION );
             if ( $this->pro_enabled ) {
                 wp_enqueue_style( 'eael_pro-admin-css', EAEL_PRO_PLUGIN_URL . 'assets/admin/css/admin.css', false, EAEL_PRO_PLUGIN_VERSION );
             }
@@ -1407,7 +1407,6 @@ trait Admin {
     public function admin_settings_page() {
         ?>
 		<link rel="stylesheet" href="<?php echo EAEL_PLUGIN_URL; ?>includes/templates/admin/eael-dashboard/dist/icons/style.css">
-		<link rel="stylesheet" href="<?php echo EAEL_PLUGIN_URL; ?>includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.css">
 		<div id="eael-dashboard"></div>
         <?php
 	    do_action( 'eael_admin_page_setting' );
