@@ -612,7 +612,8 @@ input:focus {
 #ea__dashboard--wrapper input:checked+.slider.ea-loader:before {
   left: 18px;
   background-color: var(--base-background);
-  border-radius: 50%;
+  border-color: rgb(165 137 226);
+  border-top-color: #421E90;
 }
 
 /*----- checkbox -------- */
