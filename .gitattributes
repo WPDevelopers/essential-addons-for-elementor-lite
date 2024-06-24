@@ -43,3 +43,9 @@ node_modules/           export-ignore
 /src/                   export-ignore
 build/                  export-ignore
 postcss.config.js       export-ignore
+
+includes/templates/admin/eael-dashboard/*       export-ignore
+!includes/templates/admin/eael-dashboard/dist   export-ignore
+includes/templates/admin/icons/*                export-ignore
+!includes/templates/admin/icons/fonts           export-ignore
+!includes/templates/admin/icons/style.css       export-ignore
