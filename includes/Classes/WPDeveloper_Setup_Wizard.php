@@ -264,33 +264,6 @@ class WPDeveloper_Setup_Wizard {
 	}
 
 	/**
-	 * Render tab
-	 */
-	public function tab_step() {
-		!$this->templately_status ? $wizard_column = 'five' : $wizard_column = 'four';
-		$items = [
-			__( 'Configuration', 'essential-addons-for-elementor-lite' ),
-			__( 'Elements', 'essential-addons-for-elementor-lite' ),
-			__( 'Go PRO', 'essential-addons-for-elementor-lite' ),
-			__( 'Templately', 'essential-addons-for-elementor-lite' ),
-			__( 'Integrations', 'essential-addons-for-elementor-lite' ),
-			__( 'Finalize', 'essential-addons-for-elementor-lite' ),
-		];
-		$i     = 0;
-		?>
-        <ul class="eael-quick-setup-wizard <?php echo esc_attr( $wizard_column ); ?>" data-step="1">
-			<?php foreach ( $items as $item ): ?>
-				<?php if ( $item == 'Templately' && $this->templately_status || ( $this->get_local_plugin_data( 'templately/templately.php' ) !== false && $item == 'Templately' ) ) continue; ?>
-                <li class="eael-quick-setup-step active <?php echo esc_attr( strtolower($item) ); ?>">
-                    <div class="eael-quick-setup-icon"><?php echo ++$i; ?></div>
-                    <div class="eael-quick-setup-name"><?php echo esc_html( $item ); ?></div>
-                </li>
-			<?php endforeach; ?>
-        </ul>
-		<?php
-	}
-
-	/**
 	 * get_plugin_list
 	 * @return array
 	 */
@@ -755,51 +728,6 @@ class WPDeveloper_Setup_Wizard {
 						'preferences' => 'advance',
 					]
 				]
-			]
-		];
-	}
-
-	public function pro_elements() {
-		return [
-			'event-calendar'     => [
-				'title' => __( 'Event Calendar', 'essential-addons-for-elementor-lite' ),
-				'link'  => esc_url( 'https://essential-addons.com/elementor/event-calendar/' ),
-				'logo'  => esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/event-cal.svg' ),
-			],
-			'toggle'             => [
-				'title' => __( 'Toggle', 'essential-addons-for-elementor-lite' ),
-				'link'  => esc_url( 'https://essential-addons.com/elementor/content-toggle/' ),
-				'logo'  => esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/toggle.svg' ),
-			],
-			'adv-google-map'     => [
-				'title' => __( 'Advanced Google Map', 'essential-addons-for-elementor-lite' ),
-				'link'  => esc_url( 'https://essential-addons.com/elementor/advanced-google-map/' ),
-				'logo'  => esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/adv-google-map.svg' ),
-			],
-			'dynamic-gallery'    => [
-				'title' => __( 'Dynamic Gallery', 'essential-addons-for-elementor-lite' ),
-				'link'  => esc_url( 'https://essential-addons.com/elementor/dynamic-gallery/' ),
-				'logo'  => esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/dynamic-gallery.svg' ),
-			],
-			'image-hotspots'     => [
-				'title' => __( 'Image Hotspots', 'essential-addons-for-elementor-lite' ),
-				'link'  => esc_url( 'https://essential-addons.com/elementor/image-hotspots/' ),
-				'logo'  => esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/image-hotspots.svg' ),
-			],
-			'lightbox-and-modal' => [
-				'title' => __( 'Lightbox and Modal', 'essential-addons-for-elementor-lite' ),
-				'link'  => esc_url( 'https://essential-addons.com/elementor/lightbox-modal/' ),
-				'logo'  => esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/lightbox-and-modal.svg' ),
-			],
-			'mailchimp'          => [
-				'title' => __( 'Mailchimp', 'essential-addons-for-elementor-lite' ),
-				'link'  => esc_url( 'https://essential-addons.com/elementor/mailchimp/' ),
-				'logo'  => esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/mailchimp.svg' ),
-			],
-			'instagram-feed'     => [
-				'title' => __( 'Instagram Feed', 'essential-addons-for-elementor-lite' ),
-				'link'  => esc_url( 'https://essential-addons.com/elementor/instagram-feed/' ),
-				'logo'  => esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/instagram-feed.svg' ),
 			]
 		];
 	}

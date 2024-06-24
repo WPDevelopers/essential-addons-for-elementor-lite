@@ -522,51 +522,6 @@
 		}
 	});
 
-	$(document).on('click', '.eael-setup-wizard-save1', function (e) {
-		e.preventDefault();
-		var $this = $(this);
-		$(".eael-setup-wizard-save").attr('disabled', 'disabled');
-		
-		if ( $this.attr( 'id' ) && $this.attr( 'id' ) == 'eael-count-me-bt' ) {
-			$( "#eael_user_email_address" ).val( 1 );
-		}
-		
-		$.ajax({
-			       url: localize.ajaxurl,
-			       type: "POST",
-			       data: {
-				       action: "save_setup_wizard_data",
-				       security: localize.nonce,
-				       fields: $("form.eael-setup-wizard-form").serialize()
-			       },
-			
-			       success: function (response) {
-				       if (response.success) {
-						   $('.eael-onboard--wrapper .eael-modal-content').fadeIn().removeClass('eael-d-none');
-						   
-						//    setTimeout(function() { 
-						// 		window.location = response.data.redirect_url;
-						// 	}, 3000);
-				       } else {
-					       $this.attr('disabled', 'disabled');
-					       Swal.fire({
-						                 type: "error",
-						                 title: 'Error',
-						                 text: 'error',
-					                 });
-				       }
-			       },
-			       error: function (err) {
-				       $this.attr('disabled', 'disabled');
-				       Swal.fire({
-					                 type: "error",
-					                 title: 'Error',
-					                 text: 'error',
-				                 });
-			       },
-		       });
-	});
-
 	$(".eael-admin-promotion-close").on('click',function(event){
 		event.preventDefault();
 		$.ajax({
