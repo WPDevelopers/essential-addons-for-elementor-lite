@@ -477,7 +477,7 @@ input:focus {
 }
 
 #ea__dashboard--wrapper input:checked+.slider:before {
-  transform: translateX(16px);
+  left: 18px;
 }
 
 #ea__dashboard--wrapper .slider.pro:before {
@@ -521,7 +521,7 @@ input:focus {
 }
 
 #ea__dashboard--wrapper input:checked+.slider.ea-loader:before {
-  transform: translateX(16px);
+  left: 18px;
   background-color: var(--base-background);
   border-radius: 50%;
 }
@@ -2489,7 +2489,7 @@ input::placeholder {
   }
 
   #ea__dashboard--wrapper input:checked+.slider:before {
-    transform: translateX(14px);
+    left: 16px;
   }
 
   #ea__dashboard--wrapper .slider:before {
