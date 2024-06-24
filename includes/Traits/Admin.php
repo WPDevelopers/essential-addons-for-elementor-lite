@@ -53,12 +53,9 @@ trait Admin {
             if ( $this->pro_enabled ) {
                 wp_enqueue_style( 'eael_pro-admin-css', EAEL_PRO_PLUGIN_URL . 'assets/admin/css/admin.css', false, EAEL_PRO_PLUGIN_VERSION );
             }
-            wp_enqueue_style( 'sweetalert2-css', EAEL_PLUGIN_URL . 'assets/admin/vendor/sweetalert2/css/sweetalert2.min.css', false, EAEL_PLUGIN_VERSION );
-            wp_enqueue_script( 'sweetalert2-js', EAEL_PLUGIN_URL . 'assets/admin/vendor/sweetalert2/js/sweetalert2.min.js', array( 'jquery', 'sweetalert2-core-js' ), EAEL_PLUGIN_VERSION, true );
-            wp_enqueue_script( 'sweetalert2-core-js', EAEL_PLUGIN_URL . 'assets/admin/vendor/sweetalert2/js/core.js', array( 'jquery' ), EAEL_PLUGIN_VERSION, true );
 
             wp_enqueue_script( 'essential_addons_elementor-admin-js', EAEL_PLUGIN_URL . 'assets/admin/js/admin.js', array( 'jquery' ), EAEL_PLUGIN_VERSION, true );
-	        wp_enqueue_script( 'essential_addons_elementor-admin-dashboard', EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.js', array( 'essential_addons_elementor-admin-js' ), time(), true );
+	        wp_enqueue_script( 'essential_addons_elementor-admin-dashboard', EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.js', array(), time(), true );
 	        add_filter( 'wp_script_attributes', [ $this, 'add_type_attribute' ] );
 
             //Internationalizing JS string translation
@@ -1378,7 +1375,7 @@ trait Admin {
 		        ]
 	        ];
 
-	        wp_localize_script( 'essential_addons_elementor-admin-js', 'localize', array(
+	        wp_localize_script( 'essential_addons_elementor-admin-dashboard', 'localize', array(
 		        'ajaxurl'            => admin_url( 'admin-ajax.php' ),
 		        'nonce'              => wp_create_nonce( 'essential-addons-elementor' ),
 		        'i18n'               => $i18n,
