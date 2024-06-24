@@ -24,12 +24,12 @@ function App() {
                 <section
                     className={eaState.menu === 'Elements' ? 'ea__section-wrapper ea__main-wrapper flex' : 'ea__section-wrapper ea__main-wrapper flex gap-4'}>
                     <Menu/>
-                    {eaState.menu === 'General' ? <General/> : ''}
-                    {eaState.menu === 'Elements' ? <Elements/> : ''}
-                    {eaState.menu === 'Extensions' ? <Extensions/> : ''}
-                    {eaState.menu === 'Tools' ? <Tools/> : ''}
-                    {eaState.menu === 'Integrations' ? <Integrations/> : ''}
-                    {eaState.menu === 'Go Premium' ? <Premium/> : ''}
+                    {eaState.menu === 'general' ? <General/> : ''}
+                    {eaState.menu === 'elements' ? <Elements/> : ''}
+                    {eaState.menu === 'extensions' ? <Extensions/> : ''}
+                    {eaState.menu === 'tools' ? <Tools/> : ''}
+                    {eaState.menu === 'integrations' ? <Integrations/> : ''}
+                    {eaState.menu === 'go-premium' ? <Premium/> : ''}
                 </section>
                 {eaState.modal === 'open' && <Modal/>}
                 {eaState.modalRegenerateAssets === 'open' && <ModalRegenerateAssets/>}

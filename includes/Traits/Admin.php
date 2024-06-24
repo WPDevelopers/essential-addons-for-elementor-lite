@@ -85,12 +85,30 @@ trait Admin {
 			    'is_eapro_activate'       => $this->pro_enabled,
 			    'is_templately_installed' => $this->installer->get_local_plugin_data( 'templately/templately.php' ),
 			    'menu'                    => [
-				    __( 'General', 'essential-addons-for-elementor-lite' )     => 'ea-home',
-				    __( 'Elements', 'essential-addons-for-elementor-lite' )    => 'ea-elements',
-				    __( 'Extensions', 'essential-addons-for-elementor-lite' )  => 'ea-extensions',
-				    __( 'Tools', 'essential-addons-for-elementor-lite' )       => 'ea-tool',
-				    __( 'Integrations', 'essential-addons-for-elementor-lite' ) => 'ea-plug',
-				    __( 'Go Premium', 'essential-addons-for-elementor-lite' )  => 'ea-lock',
+				    'general'      => [
+					    'label' => __( 'General', 'essential-addons-for-elementor-lite' ),
+					    'icon'  => 'ea-home'
+				    ],
+				    'elements'     => [
+					    'label' => __( 'Elements', 'essential-addons-for-elementor-lite' ),
+					    'icon'  => 'ea-elements'
+				    ],
+				    'extensions'   => [
+					    'label' => __( 'Extensions', 'essential-addons-for-elementor-lite' ),
+					    'icon'  => 'ea-extensions'
+				    ],
+				    'tools'        => [
+					    'label' => __( 'Tools', 'essential-addons-for-elementor-lite' ),
+					    'icon'  => 'ea-tool'
+				    ],
+				    'integrations' => [
+					    'label' => __( 'Integrations', 'essential-addons-for-elementor-lite' ),
+					    'icon'  => 'ea-plug'
+				    ],
+				    'go-premium'   => [
+					    'label' => __( 'Go Premium', 'essential-addons-for-elementor-lite' ),
+					    'icon'  => 'ea-lock'
+				    ],
 			    ],
 			    'i18n'                    => [
 				    'enable_all'           => __( 'Enable All', 'essential-addons-for-elementor-lite' ),
