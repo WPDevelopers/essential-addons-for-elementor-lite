@@ -193,56 +193,56 @@ msgstr ""
 msgid "BetterDocs"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:304, ../includes/Traits/Admin.php:208, ../includes/templates/admin/integrations.php:8
-msgid "BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily."
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:304
+msgid "BetterDocs will help you to create & organize your documentation page in an organized way that will make your visitors find any helpful article easily."
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:312, ../includes/Elements/EmbedPress.php:19, ../includes/Traits/Admin.php:215, ../includes/templates/admin/integrations.php:14
 msgid "EmbedPress"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:313, ../includes/Traits/Admin.php:216, ../includes/templates/admin/integrations.php:15
-msgid "EmbedPress lets you embed videos, images, posts, audio, maps and upload PDF, DOC, PPT & all other types of content into your WordPress site. "
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:313
+msgid "EmbedPress lets you embed videos, images, posts, audio, and maps and upload PDF, DOC, PPT & all other types of content into your WordPress site."
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:321, ../includes/Traits/Admin.php:223, ../includes/templates/admin/integrations.php:21
 msgid "NotificationX"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:322, ../includes/Traits/Admin.php:224, ../includes/templates/admin/integrations.php:22
-msgid "Best FOMO Social Proof Plugin to boost your sales conversion. Create stunning Sales Popup & Notification Bar With Elementor Support."
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:322
+msgid "Best FOMO social proof plugin to boost your sales conversion by creating stunning sales popups & notification bars with Elementor support."
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:330, ../includes/Traits/Admin.php:231, ../includes/templates/admin/integrations.php:28
 msgid "easy.jobs"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:331, ../includes/Traits/Admin.php:232, ../includes/templates/admin/integrations.php:29
-msgid "Easy solution for the job recruitment to attract, manage & hire right talent faster. The Best Talent Recruitment Suite which lets you manage jobs & career page in Elementor."
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:331
+msgid "Easy solution for job recruitment to attract, manage & hire the right talent faster. The Best Talent Recruitment Suite which lets you manage jobs & career pages in Elementor."
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:339, ../includes/Traits/Admin.php:239, ../includes/templates/admin/integrations.php:35
 msgid "SchedulePress"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:340, ../includes/Traits/Admin.php:240, ../includes/templates/admin/integrations.php:36
-msgid "Best Content Marketing Tool For WordPress – Schedule, Organize, & Auto Share Blog Posts. Take a quick glance at your content planning with Schedule Calendar, Auto & Manual Scheduler and  more."
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:340
+msgid "Advanced Content Marketing Tool For WordPress – Schedule, Organize, & Auto Share Blog Posts. Take a quick glance at your content planning with Schedule Calendar, Auto & Manual Scheduler, and more."
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:348, ../includes/Traits/Admin.php:247, ../includes/templates/admin/integrations.php:42
 msgid "BetterLinks"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:349, ../includes/Traits/Admin.php:248, ../includes/templates/admin/integrations.php:43
-msgid "Best Link Shortening tool to create, shorten and manage any URL to help you cross-promote your brands & products. Gather analytics reports, run successfully marketing campaigns easily & many more."
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:349
+msgid "Best Link Shortening tool to create, shorten & manage any URL to help you cross-promote your brands & products. Gather analytics reports, run successful marketing campaigns easily & many more."
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:357, ../includes/Traits/Admin.php:255, ../includes/Traits/Helper.php:622, ../includes/templates/admin/integrations.php:49
 msgid "Essential Blocks"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:358, ../includes/Traits/Admin.php:256, ../includes/templates/admin/integrations.php:50
-msgid "Enhance your Gutenberg experience with 40+ unique blocks (more coming soon). Add power to the block editor using our easy-to-use blocks which are designed to make your next WordPress page or posts design easier and prettier than ever before."
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:358
+msgid "Enhance your Gutenberg experience with 50+ unique blocks (more coming soon). Add power to the block editor using our easy-to-use blocks which are designed to make your next WordPress page or post design easier and prettier than ever before."
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:366, ../includes/Elements/Better_Payment.php:19, ../includes/Traits/Admin.php:263, ../includes/templates/admin/integrations.php:56
@@ -9587,6 +9587,34 @@ msgstr ""
 
 #: ../includes/Traits/Admin.php:201
 msgid "Disable Integration"
+msgstr ""
+
+#: ../includes/Traits/Admin.php:208, ../includes/templates/admin/integrations.php:8
+msgid "BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily."
+msgstr ""
+
+#: ../includes/Traits/Admin.php:216, ../includes/templates/admin/integrations.php:15
+msgid "EmbedPress lets you embed videos, images, posts, audio, maps and upload PDF, DOC, PPT & all other types of content into your WordPress site. "
+msgstr ""
+
+#: ../includes/Traits/Admin.php:224, ../includes/templates/admin/integrations.php:22
+msgid "Best FOMO Social Proof Plugin to boost your sales conversion. Create stunning Sales Popup & Notification Bar With Elementor Support."
+msgstr ""
+
+#: ../includes/Traits/Admin.php:232, ../includes/templates/admin/integrations.php:29
+msgid "Easy solution for the job recruitment to attract, manage & hire right talent faster. The Best Talent Recruitment Suite which lets you manage jobs & career page in Elementor."
+msgstr ""
+
+#: ../includes/Traits/Admin.php:240, ../includes/templates/admin/integrations.php:36
+msgid "Best Content Marketing Tool For WordPress – Schedule, Organize, & Auto Share Blog Posts. Take a quick glance at your content planning with Schedule Calendar, Auto & Manual Scheduler and  more."
+msgstr ""
+
+#: ../includes/Traits/Admin.php:248, ../includes/templates/admin/integrations.php:43
+msgid "Best Link Shortening tool to create, shorten and manage any URL to help you cross-promote your brands & products. Gather analytics reports, run successfully marketing campaigns easily & many more."
+msgstr ""
+
+#: ../includes/Traits/Admin.php:256, ../includes/templates/admin/integrations.php:50
+msgid "Enhance your Gutenberg experience with 40+ unique blocks (more coming soon). Add power to the block editor using our easy-to-use blocks which are designed to make your next WordPress page or posts design easier and prettier than ever before."
 msgstr ""
 
 #: ../includes/Traits/Admin.php:272, ../includes/Traits/Admin.php:814, ../includes/Traits/Elements.php:274, ../includes/templates/admin/elements.php:303, ../includes/templates/admin/go-pro.php:23
