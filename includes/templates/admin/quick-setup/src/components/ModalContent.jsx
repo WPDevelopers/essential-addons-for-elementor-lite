@@ -11,7 +11,8 @@ function ModalContent({closeModal}) {
             <div className="eael-modal-content-wrapper eael-onboard-modal">
                 <div className="">
                     <div className="congrats--wrapper">
-                        <h6>{__( 'You are done!', 'essential-addons-for-elementor-lite' )}</h6>
+                        <h6>{__( 'That\'s a wrap! You are now successfully onboarded.', 'essential-addons-for-elementor-lite' )} 🎉</h6>
+                        <h6>{__( 'The most exclusive element library is now at your fingertips. Cheers to a happy web-building journey!', 'essential-addons-for-elementor-lite' )}</h6>
                         <h4 className="congrats--title">{__( 'Congratulations!', 'essential-addons-for-elementor-lite' )}</h4>
 						            <img className="eael-modal-map-img" src={success_2_src} alt={__( 'Success Image', 'essential-addons-for-elementor-lite' )} />
                     </div>
