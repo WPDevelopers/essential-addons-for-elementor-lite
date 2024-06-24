@@ -44,8 +44,10 @@ node_modules/           export-ignore
 build/                  export-ignore
 postcss.config.js       export-ignore
 
-includes/templates/admin/eael-dashboard/*       export-ignore
-!includes/templates/admin/eael-dashboard/dist   export-ignore
-includes/templates/admin/icons/*                export-ignore
-!includes/templates/admin/icons/fonts           export-ignore
-!includes/templates/admin/icons/style.css       export-ignore
+includes/templates/admin/eael-dashboard/src             export-ignore
+includes/templates/admin/eael-dashboard/public          export-ignore
+includes/templates/admin/eael-dashboard/index.html      export-ignore
+includes/templates/admin/eael-dashboard/dist/index.html export-ignore
+includes/templates/admin/icons/icons-svg                export-ignore
+includes/templates/admin/icons/demo.html                export-ignore
+includes/templates/admin/icons/selection.json           export-ignore
