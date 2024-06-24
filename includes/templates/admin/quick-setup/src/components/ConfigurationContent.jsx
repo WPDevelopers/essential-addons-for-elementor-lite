@@ -17,14 +17,14 @@ function ConfigurationContent({activeTab, handleTabChange}) {
 
             <h3>
               {__(
-                "Get Started with Essential Addons",
+                "Choose your Preferred Mode for Essential Addons",
                 "essential-addons-for-elementor-lite"
               )}{" "}
               🚀
             </h3>
             <p>
               {__(
-                "Enhance your Elementor page building experience with 50+ amazing elements & extensions",
+                "Select any mode you desire to start with; you can also easily access features of all modes at any point later.",
                 "essential-addons-for-elementor-lite"
               )}{" "}
               🔥
@@ -51,7 +51,7 @@ function ConfigurationContent({activeTab, handleTabChange}) {
                 </h4>
                 <p>
                   {__(
-                    "For websites where you want to only use the basic features and keep your site lightweight. Most basic elements are activated in this option.",
+                    "Use the basic features of Essential Addons and keep your site lightweight. Most basic elements are activated in this option.",
                     "essential-addons-for-elementor-lite"
                   )}
                 </p>
@@ -70,7 +70,7 @@ function ConfigurationContent({activeTab, handleTabChange}) {
                 <h4>{__("Advanced", "essential-addons-for-elementor-lite")}</h4>
                 <p>
                   {__(
-                    "For advanced users who are trying to build complex websites with advanced functionalities with Elementor. All the dynamic elements will be activated in this option.",
+                    "Build complex websites with these advanced functionalities of Essential Addons. All the dynamic elements will be activated in this option.",
                     "essential-addons-for-elementor-lite"
                   )}
                 </p>
@@ -89,7 +89,7 @@ function ConfigurationContent({activeTab, handleTabChange}) {
                 <h4>{__("Custom", "essential-addons-for-elementor-lite")}</h4>
                 <p>
                   {__(
-                    "Pick this option if you want to configure the elements as per your wish.",
+                    "Configure the elements of Essential Addons according to your preferences to make your website stand out.",
                     "essential-addons-for-elementor-lite"
                   )}
                 </p>
