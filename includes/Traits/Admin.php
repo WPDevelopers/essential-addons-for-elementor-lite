@@ -1409,37 +1409,6 @@ trait Admin {
 		<link rel="stylesheet" href="<?php echo EAEL_PLUGIN_URL; ?>includes/templates/admin/eael-dashboard/dist/icons/style.css">
 		<link rel="stylesheet" href="<?php echo EAEL_PLUGIN_URL; ?>includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.css">
 		<div id="eael-dashboard"></div>
-		<form action="" method="POST" id="eael-settings" name="eael-settings" style="display: none;">
-            <div class="template__wrapper background__greyBg px30 py50">
-                <div class="eael-container">
-                    <div class="eael-main__tab mb45">
-                        <ul class="ls-none tab__menu">
-                            <li class="tab__list active"><a class="tab__item" href="#general"><i class="ea-admin-icon eael-icon-gear-alt"></i><?php echo __( 'General', 'essential-addons-for-elementor-lite' ); ?></a></li>
-                            <li class="tab__list"><a class="tab__item" href="#elements"><i class="ea-admin-icon eael-icon-element"></i><?php echo __( 'Elements', 'essential-addons-for-elementor-lite' ); ?></a></li>
-                            <li class="tab__list"><a class="tab__item" href="#extensions"><i class="ea-admin-icon eael-icon-extension"></i><?php echo __( 'Extensions', 'essential-addons-for-elementor-lite' ); ?></a></li>
-                            <li class="tab__list"><a class="tab__item" href="#tools"><i class="ea-admin-icon eael-icon-tools"></i><?php echo __( 'Tools', 'essential-addons-for-elementor-lite' ); ?></a></li>
-                            <li class="tab__list"><a class="tab__item" href="#integrations"><i class="ea-admin-icon eael-icon-plug"></i><?php echo __( 'Integrations', 'essential-addons-for-elementor-lite' ); ?></a></li>
-                            <?php  if ( !$this->pro_enabled ) { ?>
-                                <li class="tab__list"><a class="tab__item" href="#go-pro"><i class="ea-admin-icon eael-icon-lock-alt"></i><?php echo __( 'Go Premium', 'essential-addons-for-elementor-lite' ); ?></a></li>
-                             <?php } ?>
-                        </ul>
-                    </div>
-                </div>
-                <div class="eael-admin-setting-tabs">
-	                <?php
-	                include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/general.php';
-	                include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/elements.php';
-	                include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/extensions.php';
-	                include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/tools.php';
-	                if ( !$this->pro_enabled ) {
-		                include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/go-pro.php';
-	                }
-	                include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/integrations.php';
-	                include_once EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'includes/templates/admin/popup.php';
-	                ?>
-                </div>
-            </div>
-        </form>
         <?php
 	    do_action( 'eael_admin_page_setting' );
     }
