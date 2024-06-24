@@ -23,13 +23,13 @@ function ElementsContent({ activeTab, handleTabChange, showElements, handleShowE
             <div className="max-w-454">
               <h4>
                 {__(
-                  "Turn on the Elements that you need",
+                  "Turn on the Elements That You Need",
                   "essential-addons-for-elementor-lite"
                 )}
               </h4>
               <p>
                 {__(
-                  "Enable/Disable the elements anytime you want from Essential Addons Dashboard",
+                  "Enable/Disable the elements anytime you want from the Essential Addons Dashboard",
                   "essential-addons-for-elementor-lite"
                 )}
               </p>

@@ -18,15 +18,16 @@ function GoProContent({activeTab, handleTabChange}) {
             <div className="max-w-454">
               <h4>
                 {__(
-                  "Unlocking 35+ Advanced PRO Elements",
+                  "Unlock 40+ Advanced PRO Widgets",
                   "essential-addons-for-elementor-lite"
                 )}
               </h4>
               <p>
                 {__(
-                  "Lorem ipsum is placeholder text commonly used in the graphic",
+                  "Elevate your web building experience to the next echelon with an array of cool premium elements, cutting-edge extensions and robust integrations.",
                   "essential-addons-for-elementor-lite"
                 )}
+                🔥
               </p>
             </div>
           </div>
@@ -45,16 +46,39 @@ function GoProContent({activeTab, handleTabChange}) {
           <div className="eael-features-content">
             <h2>
               {__(
-                "Explore Premiere Pro features",
+                "Explore Premium Features",
                 "essential-addons-for-elementor-lite"
               )}
             </h2>
             <p className="mb-7">
               {__(
-                "Learn all about the tools and techniques you can use to edit videos, animate titles, add effects, mix sound, and more.",
+                "Discover the premium features of the most popular elements library for Elementor. Experience the web building experience with:",
                 "essential-addons-for-elementor-lite"
               )}
-            </p>
+            </p>            
+            <ul className="mb-7">
+              <li>
+                -
+                {__(
+                "Greater Customization Flexibility in Design with a Collection of Premium Creative Elements.",
+                "essential-addons-for-elementor-lite"
+                )}
+              </li>
+              <li>
+                -
+                {__(
+                "More Advanced WooCommerce Widgets like Woo Product Slider, Woo Cross Sells, and more.",
+                "essential-addons-for-elementor-lite"
+                )}
+              </li>
+              <li>
+                -
+                {__(
+                "Cutting-edge Extensions Like Custom JS, Conditional Display, Content Protection, and more.",
+                "essential-addons-for-elementor-lite"
+                )}
+              </li>
+            </ul>
             <a
               href="https://essential-addons.com/demos/"
               target="_blank"
@@ -62,7 +86,7 @@ function GoProContent({activeTab, handleTabChange}) {
             >
               <span className="primary-btn changelog-btn">
                 <i className="ea-dash-icon ea-link"></i>
-                {__("View More", "essential-addons-for-elementor-lite")}
+                {__("Learn More", "essential-addons-for-elementor-lite")}
               </span>
             </a>
           </div>
