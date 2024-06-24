@@ -90,11 +90,11 @@ function IntegrationContent({
             </div>
             <div className="max-w-454">
               <h4>
-                {__("Integration", "essential-addons-for-elementor-lite")}
+                {__("Fusion Hub for WordPress", "essential-addons-for-elementor-lite")}
               </h4>
               <p>
                 {__(
-                  "Enable/Disable the elements anytime you want from Essential Addons Dashboard",
+                  "Boost your websites with some exclusive and popular plugins to get the most out of WordPress. They are absolutely free for you to explore.",
                   "essential-addons-for-elementor-lite"
                 )}
               </p>
