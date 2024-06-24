@@ -17,7 +17,7 @@ function TemplatelyContent({ activeTab, handleTabChange }) {
             </h2>
             <p className="mb-10">
               {__(
-                "Get Access to amazing features and boost your Elementor page building experience with Templately",
+                "Unlock an extensive collection of ready WordPress templates from Templately along with full site import and cloud collaboration features.",
                 "essential-addons-for-elementor-lite"
               )}
             </p>
@@ -33,7 +33,7 @@ function TemplatelyContent({ activeTab, handleTabChange }) {
                   />
                 </span>
                 {__(
-                  "Stunning, Ready Website Templates",
+                  "Stunning Ready Website Templates",
                   "essential-addons-for-elementor-lite"
                 )}
               </div>
@@ -48,7 +48,7 @@ function TemplatelyContent({ activeTab, handleTabChange }) {
                   />
                 </span>
                 {__(
-                  "Add Team Members & Collaborate",
+                  "One-Click Full Site Import",
                   "essential-addons-for-elementor-lite"
                 )}
               </div>
@@ -63,7 +63,7 @@ function TemplatelyContent({ activeTab, handleTabChange }) {
                   />
                 </span>
                 {__(
-                  "Design With MyCloud Storage Space",
+                  "Team Collaboration WorkSpace",
                   "essential-addons-for-elementor-lite"
                 )}
               </div>
@@ -78,7 +78,7 @@ function TemplatelyContent({ activeTab, handleTabChange }) {
                   />
                 </span>
                 {__(
-                  "Cloud With Templately WorkSpace",
+                  "Unlimited Cloud Storage",
                   "essential-addons-for-elementor-lite"
                 )}
               </div>
