@@ -58,7 +58,7 @@ function IntegrationContent({
 
       if (result.success) {
         handleModalChange({ currentTarget: { getAttribute: () => "modal" } });
-        
+
         setTimeout(() => {
           window.location = result.data.redirect_url;
         }, 3000);
