@@ -6,8 +6,13 @@ function IntegrationBox(props) {
         disableTxt = localize.eael_dashboard.integration_box.disable,
         {eaState, eaDispatch} = consumer(),
         checked = eaState.integrations[props.index],
+        isLoading = eaState[props.index] === true,
         changeHandler = (e) => {
-            eaDispatch({type: 'ON_CHANGE_INTEGRATION', payload: {key: props.index, value: e.target.checked}});
+            eaDispatch({type: 'INTEGRATION_LOADER', payload: props.index});
+            setTimeout(eaDispatch, 300, {
+                type: 'ON_CHANGE_INTEGRATION',
+                payload: {key: props.index, value: e.target.checked}
+            })
         };
 
     return (
@@ -20,10 +25,10 @@ function IntegrationBox(props) {
                 <div className="ea__integration-footer">
                     <p>{eaData.desc}</p>
                     <div className="integration-settings flex justify-between items-center">
-                        <h5 className="toggle-label">{checked ? disableTxt : enableTxt}</h5>
+                        <h5 className="toggle-label">{isLoading ? 'Processing...' : (checked ? disableTxt : enableTxt)}</h5>
                         <label className=" toggle-wrap">
                             <input type="checkbox" checked={checked} onChange={changeHandler}/>
-                            <span className="slider"></span>
+                            <span className={isLoading ? 'slider ea-loader' : 'slider'}></span>
                         </label>
                     </div>
                 </div>

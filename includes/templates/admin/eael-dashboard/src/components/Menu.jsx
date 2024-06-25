@@ -12,11 +12,11 @@ function Menu() {
                 className={eaState.menu === 'Elements' ? 'ea__sidebar-nav-list ea__elements-nav' : 'ea__sidebar-nav-list'}>
                 <div className="nav-sticky">
                     {Object.keys(eaData).map((item, index) => {
-                        if (item === 'Go Premium' && isProActivated) {
+                        if (item === 'go-premium' && isProActivated) {
                             return;
                         }
 
-                        return <MenuItem key={index} item={item}/>
+                        return <MenuItem item={item} key={index}/>
                     })}
                 </div>
                 <div></div>

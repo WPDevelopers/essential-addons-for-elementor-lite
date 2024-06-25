@@ -10,15 +10,15 @@ function ContextReducer() {
     const reducer = (state, {type, payload}) => {
         const licenseManagerConfig = typeof wpdeveloperLicenseManagerConfig === 'undefined' ? {} : wpdeveloperLicenseManagerConfig;
         let params, request, response, licenseStatus, licenseError, otpError, otp, otpEmail, errorMessage,
-            hiddenLicenseKey,
-            integrations,
-            elements, modals;
+            hiddenLicenseKey, integrations, elements, modals, toastMessage, toastType;
 
         switch (type) {
             case 'ON_PROCESSING':
                 return {...state, ...payload};
             case 'SET_MENU':
                 return {...state, menu: payload};
+            case 'INTEGRATION_LOADER':
+                return {...state, [payload]: true};
             case 'ON_CHANGE_INTEGRATION':
                 params = {
                     action: 'wpdeveloper_deactivate_plugin',
@@ -31,13 +31,10 @@ function ContextReducer() {
                     params.action = 'wpdeveloper_auto_active_even_not_installed';
                 }
 
-                request = eaAjax(params, true);
-                request.onreadystatechange = () => {
-                    response = JSON.parse(request.responseText);
-                }
+                response = eaAjax(params);
 
                 integrations = {...state.integrations, [payload.key]: payload.value};
-                return {...state, integrations};
+                return {...state, integrations, [payload.key]: false};
             case 'ON_CHANGE_ELEMENT':
                 elements = {...state.elements, [payload.key]: payload.value};
                 return {...state, elements};
@@ -195,10 +192,16 @@ function ContextReducer() {
                 response = eaAjax(params);
 
                 if (response?.success) {
-                    return {...state, modal: 'close', toasts: true};
+                    return {
+                        ...state,
+                        modal: 'close',
+                        toasts: true,
+                        toastType: 'success',
+                        toastMessage: 'Save Successfully'
+                    };
                 }
 
-                return {...state};
+                return {...state, toasts: true, toastType: 'error', toastMessage: 'Failed to save modal data'};
             case 'SAVE_ELEMENTS_DATA':
                 params = {
                     action: 'save_settings_with_ajax',
@@ -214,11 +217,15 @@ function ContextReducer() {
 
                 response = eaAjax(params);
 
-                // if (response?.success) {
-                //     return {...state, modal: 'close'};
-                // }
+                if (response?.success) {
+                    toastType = 'success';
+                    toastMessage = 'Elements Save Successfully';
+                } else {
+                    toastType = 'error';
+                    toastMessage = 'Failed to Save Elements';
+                }
 
-                return {...state, toasts: true};
+                return {...state, toasts: true, toastType, toastMessage};
             case 'SAVE_TOOLS':
                 params = {
                     action: 'save_settings_with_ajax',
@@ -228,7 +235,15 @@ function ContextReducer() {
 
                 response = eaAjax(params);
 
-                return {...state, toasts: true};
+                if (response?.success) {
+                    toastType = 'success';
+                    toastMessage = 'Success';
+                } else {
+                    toastType = 'error';
+                    toastMessage = 'Error';
+                }
+
+                return {...state, toasts: true, toastType, toastMessage};
             case 'REGENERATE_ASSETS':
                 params = {
                     action: 'clear_cache_files_with_ajax',

@@ -8,7 +8,7 @@ const consumer = () => {
 const eaData = localize.eael_dashboard,
     licenseData = typeof wpdeveloperLicenseData === 'undefined' ? {} : wpdeveloperLicenseData,
     initValue = {
-        menu: 'General',
+        menu: 'general',
         integrations: {},
         extensions: [],
         widgets: {},
