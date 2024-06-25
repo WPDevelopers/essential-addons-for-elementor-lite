@@ -44,7 +44,7 @@ class WPDeveloper_Setup_Wizard {
 	 */
 	public function setup_wizard_scripts( $hook ) {
 		if ( isset( $hook ) && $hook == 'admin_page_eael-setup-wizard' ) {
-			wp_enqueue_style( 'essential_addons_elementor-setup-wizard-css', EAEL_PLUGIN_URL . 'assets/admin/css/admin.css', false, EAEL_PLUGIN_VERSION );
+			wp_enqueue_style( 'essential_addons_elementor-setup-wizard-css', EAEL_PLUGIN_URL . 'assets/admin/css/quick-setup.css', false, EAEL_PLUGIN_VERSION );
             wp_enqueue_style( 'essential_addons_elementor-setup-wizard-fonts', EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/public/icons/style.css', false, EAEL_PLUGIN_VERSION );
 			wp_enqueue_style( 'sweetalert2-css', EAEL_PLUGIN_URL . 'assets/admin/vendor/sweetalert2/css/sweetalert2.min.css', false, EAEL_PLUGIN_VERSION );
 			wp_enqueue_script( 'sweetalert2-js', EAEL_PLUGIN_URL . 'assets/admin/vendor/sweetalert2/js/sweetalert2.min.js', array( 'jquery', 'sweetalert2-core-js' ), EAEL_PLUGIN_VERSION, true );
