@@ -94,27 +94,27 @@ function TemplatelyContent({ activeTab, handleTabChange }) {
             />
           </div>
         </div>
-        <div className="eael-section-wrapper flex flex-end gap-4">
-          <button
-            className="previous-btn flex gap-2 items-center eael-setup-next-btn"
-            type="button"
-            data-next="integrations"
-            onClick={handleTabChange}
-          >
-            <i className="ea-dash-icon ea-left-arrow-long"></i>
-            {__("Skip", "essential-addons-for-elementor-lite")}
-          </button>
-          <button
-            className="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn eael-quick-setup-next-button wpdeveloper-plugin-installer"
-            type="button"
-            data-next="integrations"
-            data-action="install"
-            data-slug="templately"
-            onClick={handleTabChange}
-          >
-            {__("Enable Templates", "essential-addons-for-elementor-lite")}
-          </button>
-        </div>
+      </div>
+      <div className="eael-section-wrapper flex flex-end gap-4">
+        <button
+          className="previous-btn flex gap-2 items-center eael-setup-next-btn"
+          type="button"
+          data-next="integrations"
+          onClick={handleTabChange}
+        >
+          <i className="ea-dash-icon ea-left-arrow-long"></i>
+          {__("Skip", "essential-addons-for-elementor-lite")}
+        </button>
+        <button
+          className="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn eael-quick-setup-next-button wpdeveloper-plugin-installer"
+          type="button"
+          data-next="integrations"
+          data-action="install"
+          data-slug="templately"
+          onClick={handleTabChange}
+        >
+          {__("Enable Templates", "essential-addons-for-elementor-lite")}
+        </button>
       </div>
     </>
   );

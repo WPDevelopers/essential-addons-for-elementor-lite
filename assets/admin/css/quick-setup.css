@@ -6282,6 +6282,15 @@ section.eael-modal-wrapper {
     text-align: center;
 }
 
+.eael-modal-content-wrapper.eael-onboard-modal .congrats--wrapper img {
+    margin-bottom: 40px;
+    max-width: 100%;
+}
+
+.eael-modal-content-wrapper.eael-onboard-modal .congrats--wrapper h6 {
+    margin-bottom: 8px;
+}
+
 .eael-onboard-modal h6 {
     font-size: 22px;
     line-height: 1.1em;
@@ -6308,8 +6317,6 @@ section.eael-modal-wrapper {
     font-size: 36px;
     line-height: 1.3em;
     font-weight: 450;
-    color: #039855;
-    margin-bottom: 16px;
 }
 
 .eael-onboard-modal p {
@@ -6565,6 +6572,7 @@ section.eael-onboard-main-wrapper {
     border: 1px solid var(--border-color-base);
     background: linear-gradient(89.99deg, #FEFBFF 35.58%, #F4E4F6 99.99%);
     border-radius: 8px;
+    margin-bottom: 16px;
 }
 
 .eael-feature-list-item p {

@@ -18,16 +18,15 @@ function GoProContent({ activeTab, handleTabChange }) {
             <div className="max-w-454">
               <h4>
                 {__(
-                  "Unlock 40+ Advanced PRO Widgets",
+                  "Unlocking 35+ Advanced PRO Elements",
                   "essential-addons-for-elementor-lite"
                 )}
               </h4>
               <p>
                 {__(
-                  "Elevate your web building experience to the next echelon with an array of cool premium elements, cutting-edge extensions and robust integrations.",
+                  "Lorem ipsum is placeholder text commonly used in the graphic, ",
                   "essential-addons-for-elementor-lite"
                 )}
-                🔥
               </p>
             </div>
           </div>
@@ -52,7 +51,7 @@ function GoProContent({ activeTab, handleTabChange }) {
             </h2>
             <p className="mb-7">
               {__(
-                "Discover the premium features of the most popular elements library for Elementor. Experience the web building experience with:",
+                "Learn all about the tools and techniques you can use to edit videos, animate titles, add effects, mix sound, and more.",
                 "essential-addons-for-elementor-lite"
               )}
             </p>
