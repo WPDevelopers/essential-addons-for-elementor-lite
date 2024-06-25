@@ -4,6 +4,7 @@
 .editorconfig           export-ignore
 .eslintignore           export-ignore
 .eslintrc               export-ignore
+.eslintrc.cjs           export-ignore
 .git                    export-ignore
 .github                 export-ignore
 .gitattributes          export-ignore
@@ -23,6 +24,8 @@ dependencies.yml        export-ignore
 Gruntfile.js            export-ignore
 package.json            export-ignore
 package-lock.json       export-ignore
+pnpm-lock.yaml          export-ignore
+vite.config.js          export-ignore
 phpunit.xml             export-ignore
 phpunit.xml.dist        export-ignore
 multisite.xml           export-ignore
@@ -43,3 +46,11 @@ node_modules/           export-ignore
 /src/                   export-ignore
 build/                  export-ignore
 postcss.config.js       export-ignore
+
+includes/templates/admin/eael-dashboard/src             export-ignore
+includes/templates/admin/eael-dashboard/public          export-ignore
+includes/templates/admin/eael-dashboard/index.html      export-ignore
+includes/templates/admin/eael-dashboard/dist/index.html export-ignore
+includes/templates/admin/icons/icons-svg                export-ignore
+includes/templates/admin/icons/demo.html                export-ignore
+includes/templates/admin/icons/selection.json           export-ignore

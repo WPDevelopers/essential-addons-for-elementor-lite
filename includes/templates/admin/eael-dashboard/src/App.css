@@ -1,5 +1,94 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+/* from old dashboard start */
+a, a:hover {
+  color: inherit;
+}
 
+label {
+  margin-bottom: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+  padding-left: 18px;
+}
+
+img,
+video {
+  max-width: 100%;
+}
+
+a,
+span {
+  display: inline-block;
+}
+.eael-admin-promotion-message {
+  background: #5E2EFF;
+  color: white;
+  padding: 15px 10px;
+  position: relative;
+}
+
+.eael-admin-promotion-message p {
+  font-size:14px;
+  text-align:center;
+}
+
+.eael-admin-promotion-message p a {
+  font-weight: bold;
+}
+
+.eael-admin-promotion-message p i {
+  font-size: 15px;
+  margin-right: 5px;
+}
+
+.eael-admin-promotion-message p a:focus {
+  color:inherit;
+  outline:none;
+  box-shadow:none;
+}
+.eael-admin-promotion-close {
+  top: 7px !important;
+}
+.eael-lock-style {
+  position: absolute;
+  right: 21px;
+  color: #E8AA17;
+  font-size: 12px;
+}
+
+
+.eael-admin-promotion-message i:before {
+  color:white;
+}
+.toplevel_page_eael-settings #wpcontent {
+  padding-left: 0;
+}
+/* from old dashboard end */
 
 * {
   margin: 0;
@@ -472,6 +561,14 @@ input:focus {
   box-shadow: 0px 1px 2px 0px var(--shadow-color-6), 0px 1px 3px 0px var(--shadow-color-10);
 }
 
+#ea__dashboard--wrapper input:checked+.slider {
+  background-color: var(--label-color-fill);
+}
+
+#ea__dashboard--wrapper input:checked+.slider:before {
+  left: 18px;
+}
+
 #ea__dashboard--wrapper .slider.pro:before {
   content: '\e901';
   font-family: "ea-dash-icon";
@@ -482,41 +579,7 @@ input:focus {
   justify-content: center;
 }
 
-#ea__dashboard--wrapper input:checked+.slider {
-  background-color: var(--label-color-fill);
-}
-
-#ea__dashboard--wrapper input:checked+.slider:before {
-  transform: translateX(16px);
-}
-
-#ea__dashboard--wrapper input:checked+.slider.loader:before {
-  opacity: 1;
-  visibility: visible;
-
-}
-
-#ea__dashboard--wrapper input:checked+.slider.loader:before {
-  opacity: 1;
-  visibility: visible;
-
-}
-
-#ea__dashboard--wrapper input:checked+.slider.loader:after {
-  opacity: 0;
-  visibility: hidden;
-}
-
-#ea__dashboard--wrapper input:checked+.slider:before {
-  transform: translateX(16px);
-}
-
-#ea__dashboard--wrapper .slider.loader:before {
-  opacity: 0;
-  visibility: hidden;
-}
-
-#ea__dashboard--wrapper .slider.loader::after {
+#ea__dashboard--wrapper .slider.ea-loader::before {
   position: absolute;
   content: "";
   height: 16px;
@@ -529,13 +592,28 @@ input:focus {
   border: 2px solid rgba(71, 75, 87, .2);
   border-top-color: #1D2939;
   border-radius: 50%;
-  transition: ease-in-out .5s;
+  transition: ease-in-out .1s;
+  animation: ea_loading 1s infinite;
 }
 
-#ea__dashboard--wrapper .slider.loader.active::after {
-  opacity: 1;
-  visibility: visible;
-  transform: rotate(360deg);
+@keyframes ea_loading {
+  from{
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#ea__dashboard--wrapper input:checked+.slider.ea-loader {
+  background-color: var(--label-color-fill);
+}
+
+#ea__dashboard--wrapper input:checked+.slider.ea-loader:before {
+  left: 18px;
+  background-color: var(--base-background);
+  border-color: rgb(165 137 226);
+  border-top-color: #421E90;
 }
 
 /*----- checkbox -------- */
@@ -2431,7 +2509,8 @@ input::placeholder {
   height: 3px;
   border-radius: 0 0 3px 3px;
   background-image: linear-gradient(90deg, #52CB98 0%, #FFFFFF 100%);
-  animation: slide 2s infinite;
+  animation: slide 2s 1;
+  animation-fill-mode: forwards;
 }
 
 @keyframes slide {
@@ -2500,14 +2579,21 @@ input::placeholder {
   }
 
   #ea__dashboard--wrapper input:checked+.slider:before {
-    transform: translateX(14px);
+    left: 16px;
   }
 
   #ea__dashboard--wrapper .slider:before {
     height: 12px;
     width: 12px;
-    left: 2px;
-    bottom: 2px;
+  }
+
+  #ea__dashboard--wrapper .slider.ea-loader::before {
+    height: 12px;
+    width: 12px;
+  }
+
+  #ea__dashboard--wrapper input:checked+.slider.ea-loader:before {
+    transform: translateX(14px);
   }
 
   .ea__section-wrapper.ea__main-wrapper {
