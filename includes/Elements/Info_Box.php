@@ -268,10 +268,12 @@ class Info_Box extends Widget_Base
         $this->add_control(
             'eael_primary_templates',
             [
-                'label' => __('Choose Template', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'options' => Helper::get_elementor_templates(),
-                'condition' => [
+                'label'       => __('Choose Template', 'essential-addons-for-elementor-lite'),
+                'label_block' => true,
+				'type'        => 'eael-select2',
+                'source_name' => 'post_type',
+                'source_type' => 'elementor_library',
+                'condition'   => [
                     'eael_infobox_text_type' => 'template',
                 ],
             ]
