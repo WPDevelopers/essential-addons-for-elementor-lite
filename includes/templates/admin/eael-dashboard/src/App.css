@@ -1406,6 +1406,74 @@ span.select-details {
   max-width: 860px;
 }
 
+.features-widget-wrapper {
+  padding:
+          24px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap:
+          8px;
+}
+.features-widget-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.features-widget-item a {
+  position: relative;
+}
+
+
+.features-widget-item span.eael-tooltip {
+  position: absolute;
+  left: 50%;
+  top: -18px;
+  min-width: 135px;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.2em;
+  color: var(--text-color-25);
+  font-family: "Rubik", sans-serif;
+  text-align: center;
+  padding: 8px 0;
+  box-shadow: 0px 8px 16px -2px var(--shadow-color-12);
+  background: var(--base-background);
+  border-radius: 4px;
+  opacity: 0;
+}
+
+.features-widget-item a:hover span.eael-tooltip {
+  opacity: 1;
+}
+
+span.eael-tooltip:after {
+  content: '';
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translate(-50%);
+  border-top: 8px solid var(--base-background);
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+}
+
+.ea__feature-list-item p {
+  font-size: 16px;
+  line-height: 1em;
+  color: #1d2939;
+}
+
+#ea__dashboard--wrapper .primary-btn i {
+  font-size: 9px;
+}
+
 .ea__pro-features {
   border: 1px solid var(--border-color-base);
   border-radius: 8px;
