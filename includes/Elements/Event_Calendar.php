@@ -3341,22 +3341,22 @@ class Event_Calendar extends Widget_Base
                 $_custom_attributes = explode(',', $_custom_attributes );
                 $custom_attributes  = [];
 
-                if ( $_custom_attributes ) {
-                    foreach ( $_custom_attributes as $attribute ) {
-                        if ( $attribute ) {
-                            $attribute_set = explode( '|', $attribute );
+	            if ( $_custom_attributes ) {
+		            foreach ( $_custom_attributes as $attribute ) {
+			            if ( $attribute ) {
+				            $attribute_set = explode( '|', $attribute );
 
-	                        if ( in_array( $attribute_set[0], $this->xssAttributes() ) ) {
-		                        continue;
-	                        }
+				            if ( in_array( strtolower( $attribute_set[0] ), $this->xssAttributes() ) ) {
+					            continue;
+				            }
 
-                            $custom_attributes[] = [
-                                'key'   => sanitize_text_field($attribute_set[0]),
-                                'value' => isset( $attribute_set[1] ) ? esc_attr( $attribute_set[1] ) : ''
-                            ];
-                        }
-                    }
-                }
+				            $custom_attributes[] = [
+					            'key'   => sanitize_text_field( $attribute_set[0] ),
+					            'value' => isset( $attribute_set[1] ) ? esc_attr( $attribute_set[1] ) : ''
+				            ];
+			            }
+		            }
+	            }
 
 	            $data[] = [
 		            'id'                => $i,
