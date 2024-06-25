@@ -775,85 +775,84 @@ if ( ! defined( 'ABSPATH' ) ) {
 		public function deactivate_reasons_form() {
 			$form = $this->deactivation_reasons();
 			$class_plugin_name = esc_attr( $this->plugin_name );
-			$html = '<section class=ea__modal-wrapper><div class=ea__modal-content-wrapper><div class="flex items-center gap-4 ea__modal-header flex-col"><svg fill=none height=64 viewBox="0 0 65 64"width=65 xmlns=http://www.w3.org/2000/svg><rect fill=#F6EEFF height=64 rx=16 width=64 x=0.5 /><path d="M41.8346 22.668L45.8346 18.668M19.168 45.3346L23.168 41.3346M26.5013 34.0013L29.8346 30.668M30.5013 38.0013L33.8346 34.668M24.9013 43.068C25.1986 43.3663 25.5518 43.603 25.9408 43.7645C26.3298 43.926 26.7468 44.0092 27.168 44.0092C27.5891 44.0092 28.0062 43.926 28.3951 43.7645C28.7841 43.603 29.1373 43.3663 29.4346 43.068L32.5013 40.0013L24.5013 32.0013L21.4346 35.068C21.1363 35.3653 20.8996 35.7185 20.7381 36.1075C20.5766 36.4964 20.4934 36.9135 20.4934 37.3346C20.4934 37.7558 20.5766 38.1728 20.7381 38.5618C20.8996 38.9508 21.1363 39.304 21.4346 39.6013L24.9013 43.068ZM32.5013 24.0013L40.5013 32.0013L43.568 28.9346C43.8663 28.6373 44.103 28.2841 44.2645 27.8951C44.426 27.5062 44.5092 27.0891 44.5092 26.668C44.5092 26.2468 44.426 25.8298 44.2645 25.4408C44.103 25.0518 43.8663 24.6986 43.568 24.4013L40.1013 20.9346C39.804 20.6363 39.4508 20.3996 39.0618 20.2381C38.6728 20.0766 38.2558 19.9934 37.8346 19.9934C37.4135 19.9934 36.9964 20.0766 36.6075 20.2381C36.2185 20.3996 35.8653 20.6363 35.568 20.9346L32.5013 24.0013Z"stroke=#750EF4 stroke-linecap=round stroke-linejoin=round stroke-width=2 /></svg><h5>Sorry to see you go</h5></div><div class="ea__modal-body min-w-653"><div class="flex flex-col"><p>Before you deactivate the plugin, would you quickly give us your reason for doing so?<div class="flex flex-col gap-4"><label class="checkbox--label flex-1"><input class=d-none id=1 name=choose-provider type=radio checked> <span class="flex items-center gap-2 select--wrapper"><span class=check-mark></span> <span>I no longer need the plugin</span></span></label> <label class="checkbox--label flex-1"><input class=d-none id=2 name=choose-provider type=radio> <span class="flex items-center gap-2 select--wrapper"><span class=check-mark></span> <span>I found a better plugin</span></span></label> <label class="checkbox--label flex-1"><input class=d-none id=3 name=choose-provider type=radio> <span class="flex items-center gap-2 select--wrapper"><span class=check-mark></span> <span>I couldn’t get the plugin to work</span></span></label> <label class="checkbox--label flex-1"><input class=d-none id=4 name=choose-provider type=radio> <span class="flex items-center gap-2 select--wrapper"><span class=check-mark></span> <span>It’s a temporary Deactivation</span></span></label> <label class="checkbox--label flex-1"><input class=d-none id=5 name=choose-provider type=radio> <span class="flex items-center gap-2 select--wrapper"><span class=check-mark></span> <span>Others</span></span></label></div></div></div><div class="flex items-center gap-4 ea__modal-footer"><button class="install-btn primary-btn">Submit & Deactivate</button> <button><span class=underline>Just Deactivate</span> <i class="ea-dash-icon ea-right-arrow"></i></button></div><div class=ea__modal-close-btn><i class="ea-dash-icon ea-close"></i></div></div></section>';
-//			$html = '<div class="wpinsights-goodbye-form-head"><strong>' . esc_html( $form['heading'] ) . '</strong></div>';
-//			$html .= '<div class="wpinsights-goodbye-form-body"><p class="wpinsights-goodbye-form-caption">' . esc_html( $form['body'] ) . '</p>';
-//			if( is_array( $form['options'] ) ) {
-//				$html .= '<div id="wpinsights-goodbye-options" class="wpinsights-goodbye-options"><ul>';
-//				foreach( $form['options'] as $option ) {
-//					if( is_array( $option ) ) {
-//						$id = strtolower( str_replace( " ", "_", esc_attr( $option['label'] ) ) );
-//						$id = $id . '_' . $class_plugin_name;
-//						$html .= '<li class="has-goodbye-extra">';
-//						$html .= '<input type="radio" name="wpinsights-'. esc_attr( $class_plugin_name ) .'-goodbye-options" id="' . esc_attr( $id ) . '" value="' . esc_attr( $option['label'] ) . '">';
-//						$html .= '<div><label for="' . $id . '">' . esc_attr( $option['label'] ) . '</label>';
-//						if( isset( $option[ 'extra_field' ] ) && ! isset( $option['type'] )) {
-//							$html .= '<input type="text" style="display: none" name="'. esc_attr( $id ) .'" id="' . str_replace( " ", "", esc_attr( $option['extra_field'] ) ) . '" placeholder="' . esc_attr( $option['extra_field'] ) . '">';
-//						}
-//						if( isset( $option[ 'extra_field' ] ) && isset( $option['type'] )) {
-//							$html .= '<'. $option['type'] .' style="display: none" type="text" name="'. esc_attr( $id ) .'" id="' . str_replace( " ", "", esc_attr( $option['extra_field'] ) ) . '" placeholder="' . esc_attr( $option['extra_field'] ) . '"></' . $option['type'] . '>';
-//						}
-//						$html .= '</div></li>';
-//					} else {
-//						$id = strtolower( str_replace( " ", "_", esc_attr( $option ) ) );
-//						$id = $id . '_' . $class_plugin_name;
-//						$html .= '<li><input type="radio" name="wpinsights-'. $class_plugin_name .'-goodbye-options" id="' . esc_attr( $id ) . '" value="' . esc_attr( $option ) . '"> <label for="' . $id . '">' . esc_attr( $option ) . '</label></li>';
-//					}
-//				}
-//				$html .= '</ul></div><!-- .wpinsights-'. $class_plugin_name .'-goodbye-options -->';
-//			}
-//			$html .= '</div><!-- .wpinsights-goodbye-form-body -->';
-//			$html .= '<p class="deactivating-spinner"><span class="spinner"></span> ' . __( 'Submitting form', 'disable-comments' ) . '</p>';
+			$html = '<div class="wpinsights-goodbye-form-head"><strong>' . esc_html( $form['heading'] ) . '</strong></div>';
+			$html .= '<div class="wpinsights-goodbye-form-body"><p class="wpinsights-goodbye-form-caption">' . esc_html( $form['body'] ) . '</p>';
+			if( is_array( $form['options'] ) ) {
+				$html .= '<div id="wpinsights-goodbye-options" class="wpinsights-goodbye-options"><ul>';
+				foreach( $form['options'] as $option ) {
+					if( is_array( $option ) ) {
+						$id = strtolower( str_replace( " ", "_", esc_attr( $option['label'] ) ) );
+						$id = $id . '_' . $class_plugin_name;
+						$html .= '<li class="has-goodbye-extra">';
+						$html .= '<input type="radio" name="wpinsights-'. esc_attr( $class_plugin_name ) .'-goodbye-options" id="' . esc_attr( $id ) . '" value="' . esc_attr( $option['label'] ) . '">';
+						$html .= '<div><label for="' . $id . '">' . esc_attr( $option['label'] ) . '</label>';
+						if( isset( $option[ 'extra_field' ] ) && ! isset( $option['type'] )) {
+							$html .= '<input type="text" style="display: none" name="'. esc_attr( $id ) .'" id="' . str_replace( " ", "", esc_attr( $option['extra_field'] ) ) . '" placeholder="' . esc_attr( $option['extra_field'] ) . '">';
+						}
+						if( isset( $option[ 'extra_field' ] ) && isset( $option['type'] )) {
+							$html .= '<'. $option['type'] .' style="display: none" type="text" name="'. esc_attr( $id ) .'" id="' . str_replace( " ", "", esc_attr( $option['extra_field'] ) ) . '" placeholder="' . esc_attr( $option['extra_field'] ) . '"></' . $option['type'] . '>';
+						}
+						$html .= '</div></li>';
+					} else {
+						$id = strtolower( str_replace( " ", "_", esc_attr( $option ) ) );
+						$id = $id . '_' . $class_plugin_name;
+						$html .= '<li><input type="radio" name="wpinsights-'. $class_plugin_name .'-goodbye-options" id="' . esc_attr( $id ) . '" value="' . esc_attr( $option ) . '"> <label for="' . $id . '">' . esc_attr( $option ) . '</label></li>';
+					}
+				}
+				$html .= '</ul></div><!-- .wpinsights-'. $class_plugin_name .'-goodbye-options -->';
+			}
+			$html .= '</div><!-- .wpinsights-goodbye-form-body -->';
+			$html .= '<p class="deactivating-spinner"><span class="spinner"></span> ' . __( 'Submitting form', 'disable-comments' ) . '</p>';
 
 			$wrapper_class = '.wpinsights-goodbye-form-wrapper-'. $class_plugin_name;
 
-			$styles = '<style>@import url(https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap);#ea__dashboard--wrapper .primary-btn,#ea__dashboard--wrapper button{font-size:14px;background:0 0;color:var(--text-color-50);transition:.35s ease-in-out;font-family:Rubik,sans-serif;font-weight:450;cursor:pointer}*{margin:0;padding:0;box-sizing:border-box}:root{--page-background:#F5F6FC;--base-background:#ffffff;--background-1:#F9EFFB;--background-2:#F6EEFF;--background-3:#EFF8FF;--background-4:#E0FCF5;--background-5:#12B76A;--background-6:#FFAD4C;--background-7:#5262EE;--background-8:#FDFDFF;--label-color:#EAECF0;--label-color-fill:#7F56D9;--base-color-50:#750EF4;--base-color-75:#6F0AF2;--base-color-100:#FF9437;--text-color-25:#1D2939;--text-color-50:#344054;--text-color-100:#475467;--text-color-150:#937998;--text-color-200:#1570EF;--text-icon-100:#98A2B3;--text-icon-200:#2E90FA;--text-icon-300:#00C567;--text-icon-400:#AFB6C0;--text-icon-500:#667085;--text-icon-active:#E1C9FF;--border-color-base:#F2F4F7;--border-color-2:#F9F3F1;--border-color-3:#ED7206;--shadow-color-12:#1B212C1F;--shadow-color-10:#1018281A;--shadow-color-8:#00012314;--shadow-color-6:#1018280F;--mode-switcher-icon:"\e905"}.ea-admin{font-family:Rubik,sans-serif;--page-background:#36405a;--base-background:#2c3650;--base-color-50:#1f283d;--base-color-75:#1f283d;--base-color-100:#1f283d;--text-color-25:#101828;--text-color-50:#232e46;--text-color-100:#101828;--text-color-150:#232e46;--text-color-200:#36405a;--text-color-300:#36405a;--text-color-400:#36405a;--text-color-500:#d0d5dd;--text-color-600:#d0d5dd;--text-color-700:#fcfcfd;--text-color-800:#fcfcfd;--text-color-900:#fcfcfd;--warning-50:#473502;--warning-100:#5d470b;--danger-50:#190207;--mode-switcher-icon:"\e903"}#ea__dashboard--wrapper{font-size:16px;font-family:Rubik,sans-serif}a{text-decoration:none;display:inline-flex}img{max-width:100%}.relative{position:relative}.hidden{overflow:hidden}.flex{display:flex}.flex-col{flex-direction:column}.flex-1{flex:1}.justify-between{justify-content:space-between}.justify-center{justify-content:center}.flex-end{justify-content:flex-end}.items-start{align-items:flex-start}.items-center{align-items:center}.min-h-full{min-height:100vh}.gap-1{gap:4px}.gap-2{gap:8px}.gap-4{gap:16px}.gap-5{gap:20px}.gap-6{gap:24px}.gap-10{gap:40px}.mb-1{margin-bottom:4px}.mb-2{margin-bottom:8px}.mb-3{margin-bottom:12px}.ea__modal-body p,.mb-4{margin-bottom:16px}.mb-5{margin-bottom:20px}.mb-6{margin-bottom:24px}.mb-7{margin-bottom:28px}.mb-8{margin-bottom:32px}.mb-10{margin-bottom:40px}.pointer{cursor:pointer}.d-none{display:none!important;}.min-h-538{min-height:538px}#ea__dashboard--wrapper .min-w-653{min-width:653px}#ea__dashboard--wrapper .underline{text-decoration:underline}#ea__dashboard--wrapper .primary-btn{line-height:1.6em;display:inline-flex;gap:10px;align-items:center;justify-content:center;padding:8px 20px;border-radius:8px;border:1px solid var(--text-color-100);position:relative}#ea__dashboard--wrapper .primary-btn:hover{color:var(--base-background);background:var(--base-color-75);border:1px solid var(--base-color-75)}#ea__dashboard--wrapper .primary-btn.install-btn{color:var(--base-background);border:1px solid var(--base-color-75);background:conic-gradient(from 195.22deg at 68.31% 39.29%,rgba(143,32,251,0) 0deg,#8f20fb 360deg),linear-gradient(0deg,#6f0af2,#6f0af2)}#ea__dashboard--wrapper button{line-height:1.3em;border:none}#ea__dashboard--wrapper button:hover{color:var(--base-color-50)}#ea__dashboard--wrapper button i{font-size:10px}.peer:checked~.peer-checked{--tw-border-opacity:1;border-color:rgb(20 122 255 / var(--tw-border-opacity))}.ea__onboard-content-select{display:flex;align-items:flex-start;gap:16px;padding-bottom:34px}.ea__onboard-content-select .checkbox--label .select--wrapper{text-align:left;padding:24px;border:1px solid #f2f4f7;border-radius:8px;display:flex;flex-direction:column;align-items:flex-start;cursor:pointer}.checkbox--label>input:checked+.select--wrapper{border-color:#750ef4}.select--wrapper .check-mark{height:18px;aspect-ratio:1;flex-shrink:0;background-color:transparent;border:1.5px solid #d0d5dd;border-radius:50%;transition:.35s ease-in-out;position:relative}.checkbox--label>input:checked+.select--wrapper .check-mark{background-color:#750ef4;border:1.5px solid #e2cbff}section.ea__modal-wrapper{position:fixed;top:0;left:0;right:0;bottom:0;background:#1d232733;z-index:99999;font-family:Rubik,sans-serif}.ea__modal-content-wrapper{max-width:663px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:8px;border:1px solid var(--label-color)}.ea__modal-header{padding:24px 40px;border-bottom:1px solid var(--label-color)}.ea__modal-header h5{font-size:22px;line-height:1.1em;font-weight:450;color:#1d2939}.ea__modal-body{padding:40px;display:flex;flex-direction:column;gap:24px;max-height:calc(90vh - 226px);overflow:auto}.ea__modal-body h4{font-size:22px;line-height:1.2em;font-weight:450;color:var(--text-color-25)}.ea__modal-body p{font-size:14px;line-height:1.5em;color:#1d2939}.ea__modal-body label{font-size:14px;line-height:1.1em;color:#475467}.ea__modal-footer{padding:16px 40px;border-top:1px solid var(--label-color)}.ea__modal-close-btn{position:absolute;top:0;right:-55px;width:40px;height:40px;background:var(--border-color-base);border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:12px;font-weight:500;color:var(--text-color-100);cursor:pointer}</style>';
-//			$styles .= '<style type="text/css">';
-//				$styles .= '.wpinsights-form-active-' . $class_plugin_name . ' .wpinsights-goodbye-form-bg {';
-//					$styles .= 'background: rgba( 0, 0, 0, .8 );position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 9;';
-//				$styles .= '}';
-//				$styles .= $wrapper_class . '{';
-//					$styles .= 'position: relative; display: none;';
-//				$styles .= '}';
-//				$styles .= '.wpinsights-form-active-' . $class_plugin_name . ' ' . $wrapper_class . '{';
-//					$styles .= 'display: flex !important; position: fixed;top: 0;left: 0;width: 100%;height: 100%; justify-content: center; align-items: center;';
-//				$styles .= '}';
-//				$styles .= $wrapper_class . ' .wpinsights-goodbye-form { display: none; }';
-//				$styles .= '.wpinsights-form-active-' . $class_plugin_name . ' .wpinsights-goodbye-form {';
-//					$styles .= 'position: relative !important; width: 550px; max-width: 80%; background: #fff; box-shadow: 2px 8px 23px 3px rgba(0,0,0,.2); border-radius: 3px; white-space: normal; overflow: hidden; display: block; z-index: 999999;';
-//				$styles .= '}';
-//				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-head {';
-//					$styles .= 'background: #fff; color: #495157; padding: 18px; box-shadow: 0 0 8px rgba(0,0,0,.1); font-size: 15px;';
-//				$styles .= '}';
-//				$styles .= $wrapper_class . ' .wpinsights-goodbye-form .wpinsights-goodbye-form-head strong { font-size: 15px; }';
-//				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-body { padding: 8px 18px; color: #333; }';
-//				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-body label { padding-left: 5px; color: #6d7882; }';
-//				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-body .wpinsights-goodbye-form-caption {';
-//					$styles .= 'font-weight: 500; font-size: 15px; color: #495157; line-height: 1.4;';
-//				$styles .= '}';
-//				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-body #wpinsights-goodbye-options { padding-top: 5px; }';
-//				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-body #wpinsights-goodbye-options ul > li { margin-bottom: 15px; }';
-//				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-body #wpinsights-goodbye-options ul > li > div { display: inline; padding-left: 3px; }';
-//				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-body #wpinsights-goodbye-options ul > li > div > input, '. $wrapper_class .' .wpinsights-goodbye-form-body #wpinsights-goodbye-options ul > li > div > textarea {';
-//					$styles .= 'margin: 10px 18px; padding: 8px; width: 80%;';
-//				$styles .= '}';
-//				$styles .= $wrapper_class . ' .deactivating-spinner { display: none; padding-bottom: 20px !important; }';
-//				$styles .= $wrapper_class . ' .deactivating-spinner .spinner { float: none; margin: 4px 4px 0 18px; vertical-align: bottom; visibility: visible; }';
-//				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-footer { padding: 8px 18px; margin-bottom: 15px; }';
-//				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-footer > .wpinsights-goodbye-form-buttons { display: flex; align-items: center; justify-content: space-between; }';
-//				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-footer .wpinsights-submit-btn {';
-//					$styles .= 'background-color: #f3bafd; -webkit-border-radius: 3px; border-radius: 3px; color: #0c0d0e; line-height: 1; padding: 10px 20px; font-size: 13px; font-weight: 500; text-transform: uppercase; transition: .3s;';
-//				$styles .= '}';
-//                $styles .= $wrapper_class . ' .wpinsights-goodbye-form-footer .wpinsights-submit-btn:hover {';
-//					$styles .= 'background-color: #f5d0fe;';
-//				$styles .= '}';
-//				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-footer .wpinsights-deactivate-btn {';
-//					$styles .= 'font-size: 13px; color: #a4afb7; background: none; float: right; padding-right: 10px; width: auto; text-decoration: underline;';
-//				$styles .= '}';
-//				$styles .= $wrapper_class . ' .test {';
-//				$styles .= '}';
-//			$styles .= '</style>';
-//			$styles .= '';
+			$styles = '';
+			$styles .= '<style type="text/css">';
+				$styles .= '.wpinsights-form-active-' . $class_plugin_name . ' .wpinsights-goodbye-form-bg {';
+					$styles .= 'background: rgba( 0, 0, 0, .8 );position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 9;';
+				$styles .= '}';
+				$styles .= $wrapper_class . '{';
+					$styles .= 'position: relative; display: none;';
+				$styles .= '}';
+				$styles .= '.wpinsights-form-active-' . $class_plugin_name . ' ' . $wrapper_class . '{';
+					$styles .= 'display: flex !important; position: fixed;top: 0;left: 0;width: 100%;height: 100%; justify-content: center; align-items: center;';
+				$styles .= '}';
+				$styles .= $wrapper_class . ' .wpinsights-goodbye-form { display: none; }';
+				$styles .= '.wpinsights-form-active-' . $class_plugin_name . ' .wpinsights-goodbye-form {';
+					$styles .= 'position: relative !important; width: 550px; max-width: 80%; background: #fff; box-shadow: 2px 8px 23px 3px rgba(0,0,0,.2); border-radius: 3px; white-space: normal; overflow: hidden; display: block; z-index: 999999;';
+				$styles .= '}';
+				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-head {';
+					$styles .= 'background: #fff; color: #495157; padding: 18px; box-shadow: 0 0 8px rgba(0,0,0,.1); font-size: 15px;';
+				$styles .= '}';
+				$styles .= $wrapper_class . ' .wpinsights-goodbye-form .wpinsights-goodbye-form-head strong { font-size: 15px; }';
+				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-body { padding: 8px 18px; color: #333; }';
+				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-body label { padding-left: 5px; color: #6d7882; }';
+				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-body .wpinsights-goodbye-form-caption {';
+					$styles .= 'font-weight: 500; font-size: 15px; color: #495157; line-height: 1.4;';
+				$styles .= '}';
+				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-body #wpinsights-goodbye-options { padding-top: 5px; }';
+				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-body #wpinsights-goodbye-options ul > li { margin-bottom: 15px; }';
+				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-body #wpinsights-goodbye-options ul > li > div { display: inline; padding-left: 3px; }';
+				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-body #wpinsights-goodbye-options ul > li > div > input, '. $wrapper_class .' .wpinsights-goodbye-form-body #wpinsights-goodbye-options ul > li > div > textarea {';
+					$styles .= 'margin: 10px 18px; padding: 8px; width: 80%;';
+				$styles .= '}';
+				$styles .= $wrapper_class . ' .deactivating-spinner { display: none; padding-bottom: 20px !important; }';
+				$styles .= $wrapper_class . ' .deactivating-spinner .spinner { float: none; margin: 4px 4px 0 18px; vertical-align: bottom; visibility: visible; }';
+				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-footer { padding: 8px 18px; margin-bottom: 15px; }';
+				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-footer > .wpinsights-goodbye-form-buttons { display: flex; align-items: center; justify-content: space-between; }';
+				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-footer .wpinsights-submit-btn {';
+					$styles .= 'background-color: #f3bafd; -webkit-border-radius: 3px; border-radius: 3px; color: #0c0d0e; line-height: 1; padding: 10px 20px; font-size: 13px; font-weight: 500; text-transform: uppercase; transition: .3s;';
+				$styles .= '}';
+                $styles .= $wrapper_class . ' .wpinsights-goodbye-form-footer .wpinsights-submit-btn:hover {';
+					$styles .= 'background-color: #f5d0fe;';
+				$styles .= '}';
+				$styles .= $wrapper_class . ' .wpinsights-goodbye-form-footer .wpinsights-deactivate-btn {';
+					$styles .= 'font-size: 13px; color: #a4afb7; background: none; float: right; padding-right: 10px; width: auto; text-decoration: underline;';
+				$styles .= '}';
+				$styles .= $wrapper_class . ' .test {';
+				$styles .= '}';
+			$styles .= '</style>';
+			$styles .= '';
 
 			echo $styles;
 			?>
@@ -864,8 +863,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						var url = document.getElementById("wpinsights-goodbye-link-<?php echo $class_plugin_name; ?>");
 						$('body').toggleClass('wpinsights-form-active-<?php echo $class_plugin_name; ?>');
 						$(".wpinsights-goodbye-form-wrapper-<?php echo $class_plugin_name; ?> #wpinsights-goodbye-form").fadeIn();
-						//$(".wpinsights-goodbye-form-wrapper-<?php //echo $class_plugin_name; ?>// #wpinsights-goodbye-form").html( '<?php //echo $html; ?>//' + '<div class="wpinsights-goodbye-form-footer"><div class="wpinsights-goodbye-form-buttons"><a id="wpinsights-submit-form-<?php //echo $class_plugin_name; ?>//" class="wpinsights-submit-btn" href="#"><?php //_e( 'Submit and Deactivate', 'disable-comments' ); ?>//</a>&nbsp;<a class="wpsp-put-deactivate-btn" href="'+url+'"><?php //_e( 'Just Deactivate', 'disable-comments' ); ?>//</a></div></div>');
-                        $(".wpinsights-goodbye-form-wrapper-<?php echo $class_plugin_name; ?> #wpinsights-goodbye-form").html( '<?php echo $html; ?>' );
+						$(".wpinsights-goodbye-form-wrapper-<?php echo $class_plugin_name; ?> #wpinsights-goodbye-form").html( '<?php echo $html; ?>' + '<div class="wpinsights-goodbye-form-footer"><div class="wpinsights-goodbye-form-buttons"><a id="wpinsights-submit-form-<?php echo $class_plugin_name; ?>" class="wpinsights-submit-btn" href="#"><?php _e( 'Submit and Deactivate', 'disable-comments' ); ?></a>&nbsp;<a class="wpsp-put-deactivate-btn" href="'+url+'"><?php _e( 'Just Deactivate', 'disable-comments' ); ?></a></div></div>');
 						$('#wpinsights-submit-form-<?php echo $class_plugin_name; ?>').on('click', function(e){
 							// As soon as we click, the body of the form should disappear
 							$("#wpinsights-goodbye-form-<?php echo $class_plugin_name; ?> .wpinsights-goodbye-form-body").fadeOut();
