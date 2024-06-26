@@ -51,48 +51,95 @@ function ExploreProFeatures() {
                 </div>
                 <div className="features-widget-wrapper">
                     <div className="features-widget-item">
-                        <a href="https://essential-addons.com/event-calendar/">
+                        <a href="https://essential-addons.com/event-calendar/" target="_blank">
                             <img src={assetPath + 'images/Event Calendar.svg'} alt="img"/>
                             <span className="eael-tooltip">Event Calendar</span>
                         </a>
                     </div>
                     <div className="features-widget-item">
-                        <a href="#">
-                            <img src={assetPath + 'images/img-7.png'} alt="img"/>
-                            <span className="eael-tooltip">Event Calendar</span>
+                        <a href="https://essential-addons.com/image-hotspots/" target="_blank">
+                            <img src={assetPath + 'images/Image Hotspots.svg'} alt="img"/>
+                            <span className="eael-tooltip">Image Hotspots</span>
                         </a>
                     </div>
                     <div className="features-widget-item">
-                        <a href="#">
-                            <img src={assetPath + 'images/img-7.png'} alt="img"/>
-                            <span className="eael-tooltip">Event Calendar</span>
+                        <a href="https://essential-addons.com/learndash-course-list/" target="_blank">
+                            <img src={assetPath + 'images/LearnDash Course List.svg'} alt="img"/>
+                            <span className="eael-tooltip">LearnDash Course List</span>
                         </a>
                     </div>
                     <div className="features-widget-item">
-                        <a href="#">
-                            <img src={assetPath + 'images/img-7.png'} alt="img"/>
-                            <span className="eael-tooltip">Event Calendar</span>
+                        <a href="https://essential-addons.com/particle-effect/" target="_blank">
+                            <img src={assetPath + 'images/Particles.svg'} alt="img"/>
+                            <span className="eael-tooltip">Particles</span>
                         </a>
                     </div>
                     <div className="features-widget-item">
-                        <a href="#">
-                            <img src={assetPath + 'images/img-7.png'} alt="img"/>
-                            <span className="eael-tooltip">Event Calendar</span>
+                        <a href="https://essential-addons.com/instagram-feed/" target="_blank">
+                            <img src={assetPath + 'images/Instagram Feed.svg'} alt="img"/>
+                            <span className="eael-tooltip">Instagram Feed</span>
                         </a>
                     </div>
                     <div className="features-widget-item">
-                        <a href="#">
-                            <img src={assetPath + 'images/img-7.png'} alt="img"/>
-                            <span className="eael-tooltip">Event Calendar</span>
+                        <a href="https://essential-addons.com/dynamic-gallery/" target="_blank">
+                            <img src={assetPath + 'images/Dynamic Gallery.svg'} alt="img"/>
+                            <span className="eael-tooltip">Dynamic Gallery</span>
                         </a>
                     </div>
                     <div className="features-widget-item">
-                        <a href="#">
-                            <img src={assetPath + 'images/img-7.png'} alt="img"/>
-                            <span className="eael-tooltip">Event Calendar</span>
+                        <a href="https://essential-addons.com/parallax-scrolling/" target="_blank">
+                            <img src={assetPath + 'images/Parallax Effect.svg'} alt="img"/>
+                            <span className="eael-tooltip">Parallax Effect</span>
                         </a>
                     </div>
-
+                    <div className="features-widget-item">
+                        <a href="https://essential-addons.com/mailchimp/" target="_blank">
+                            <img src={assetPath + 'images/Mailchimp.svg'} alt="img"/>
+                            <span className="eael-tooltip">Mailchimp</span>
+                        </a>
+                    </div>
+                    <div className="features-widget-item">
+                        <a href="https://essential-addons.com/advanced-google-map/" target="_blank">
+                            <img src={assetPath + 'images/Advanced Google Map.svg'} alt="img"/>
+                            <span className="eael-tooltip">Advanced Google Map</span>
+                        </a>
+                    </div>
+                    <div className="features-widget-item">
+                        <a href="https://essential-addons.com/advanced-tooltip/" target="_blank">
+                            <img src={assetPath + 'images/Advanced Tooltip.svg'} alt="img"/>
+                            <span className="eael-tooltip">Advanced Tooltip</span>
+                        </a>
+                    </div>
+                    <div className="features-widget-item">
+                        <a href="https://essential-addons.com/content-toggle/" target="_blank">
+                            <img src={assetPath + 'images/Content Toggle.svg'} alt="img"/>
+                            <span className="eael-tooltip">Content Toggle</span>
+                        </a>
+                    </div>
+                    <div className="features-widget-item">
+                        <a href="https://essential-addons.com/lightbox-modal/" target="_blank">
+                            <img src={assetPath + 'images/Lightbox & Modal.svg'} alt="img"/>
+                            <span className="eael-tooltip">Lightbox & Modal</span>
+                        </a>
+                    </div>
+                    <div className="features-widget-item">
+                        <a href="https://essential-addons.com/logo-carousel/" target="_blank">
+                            <img src={assetPath + 'images/Logo Carousel.svg'} alt="img"/>
+                            <span className="eael-tooltip">Logo Carousel</span>
+                        </a>
+                    </div>
+                    <div className="features-widget-item">
+                        <a href="https://essential-addons.com/woo-product-slider/" target="_blank">
+                            <img src={assetPath + 'images/Woo Product Slider.svg'} alt="img"/>
+                            <span className="eael-tooltip">Woo Product Slider</span>
+                        </a>
+                    </div>
+                    <div className="features-widget-item">
+                        <a href="https://essential-addons.com/woo-cross-sells/" target="_blank">
+                            <img src={assetPath + 'images/Woo Cross Sells.svg'} alt="img"/>
+                            <span className="eael-tooltip">Woo Cross Sells</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </>
