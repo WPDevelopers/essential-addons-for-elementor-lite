@@ -37,6 +37,9 @@ function ModalStyleThree() {
                     </div>
                     <div
                         className={item === eaState.modalAccordion ? 'ea__according-content flex flex-col gap-2 accordion-show' : 'ea__according-content flex flex-col gap-2'}>
+                        <div className="flex gap-4 items-center">
+                            <p>Fields will be available on both the edit profile page and the EA Login | Register Form.</p>
+                        </div>
                         {eaData.accordion[item].fields.map((subItem, subIndex) => {
                             return (<div className="flex gap-4 items-center" key={subIndex}>
                                 <label>{subItem.label}</label>
