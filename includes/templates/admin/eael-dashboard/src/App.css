@@ -1691,8 +1691,8 @@ section.ea__modal-wrapper {
 }
 
 .ea__modal-body .ea__hide-badge input[type=checkbox] {
-  border: 1px solid var(--text-color-25);
-  border-radius: 2px;
+  border: 1.5px solid var(--text-color-25);
+  border-radius: 4px;
   box-shadow: none;
   margin: 0;
 }
