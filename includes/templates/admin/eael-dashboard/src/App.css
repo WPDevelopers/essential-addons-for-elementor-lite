@@ -2786,10 +2786,6 @@ input::placeholder {
     padding: 16px;
   }
 
-  .ea__connect-others:not(:last-child) {
-    margin-bottom: 12px;
-  }
-
   .ea__connect-others h5 {
     font-size: 14px;
     margin-bottom: 7px;
@@ -3046,6 +3042,10 @@ input::placeholder {
     width: 100%;
   }
 
+  .ea__pro-features {
+    flex-wrap: wrap;
+  }
+
   .ea__pro-elements-content h3 {
     font-size: 26px;
     padding-bottom: 38px;
@@ -3083,6 +3083,10 @@ input::placeholder {
 
   .ea__features-content {
     max-width: 375px;
+  }
+
+  .ea__pro-features .ea__features-content {
+    max-width: 100%;
   }
 
   .ea__premium-item-footer h5 {
