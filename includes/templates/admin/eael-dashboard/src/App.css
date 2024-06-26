@@ -1610,12 +1610,24 @@ section.ea__modal-wrapper {
   color: var(--text-color-25);
 }
 
+.ea__modal-body .go-premium-wrapper h3 {
+  font-size: 22px;
+  line-height: 1.2em;
+  font-weight: 450;
+  color: var(--text-color-25);;
+}
+
 
 .ea__modal-body p {
   font-size: 14px;
   line-height: 1.5em;
   color: var(--text-color-100);
   margin-bottom: 16px;
+}
+
+.ea__modal-body .ea__feature-list-item p {
+  text-align: center;
+  margin-bottom: 0;
 }
 
 .ea__modal-body label {
