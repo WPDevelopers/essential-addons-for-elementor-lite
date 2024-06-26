@@ -6,6 +6,81 @@
       -ms-flex-pack: center;
           justify-content: center;
 }
+.eael-circle-wrapper.eael-interactive-circle-rotate,
+.eael-circle-wrapper .eael-interactive-circle-rotate {
+  -webkit-animation: rotation 50s linear infinite;
+          animation: rotation 50s linear infinite;
+}
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes rotation-reverse {
+  from {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+  to {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+@keyframes rotation-reverse {
+  from {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+  to {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+.eael-circle-wrapper.eael-interactive-circle-rotate .eael-circle-btn-icon, .eael-circle-wrapper.eael-interactive-circle-rotate .eael-circle-content,
+.eael-circle-wrapper .eael-interactive-circle-rotate .eael-circle-btn-icon,
+.eael-circle-wrapper .eael-interactive-circle-rotate .eael-circle-content {
+  -webkit-animation: rotation-reverse 50s linear infinite;
+          animation: rotation-reverse 50s linear infinite;
+}
+@media only screen and (max-width: 600px) {
+  .eael-circle-wrapper.eael-interactive-circle-rotate.eael-circle-responsive-view,
+  .eael-circle-wrapper .eael-interactive-circle-rotate.eael-circle-responsive-view {
+    -webkit-animation: none !important;
+            animation: none !important;
+  }
+  .eael-circle-wrapper.eael-interactive-circle-rotate.eael-circle-responsive-view .eael-circle-btn-icon, .eael-circle-wrapper.eael-interactive-circle-rotate.eael-circle-responsive-view .eael-circle-content,
+  .eael-circle-wrapper .eael-interactive-circle-rotate.eael-circle-responsive-view .eael-circle-btn-icon,
+  .eael-circle-wrapper .eael-interactive-circle-rotate.eael-circle-responsive-view .eael-circle-content {
+    -webkit-animation: none !important;
+            animation: none !important;
+  }
+}
+.eael-circle-wrapper.eael-interactive-circle-rotate.pause-rotate:hover,
+.eael-circle-wrapper .eael-interactive-circle-rotate.pause-rotate:hover {
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
+}
+.eael-circle-wrapper.eael-interactive-circle-rotate.pause-rotate:hover .eael-circle-btn-icon, .eael-circle-wrapper.eael-interactive-circle-rotate.pause-rotate:hover .eael-circle-content,
+.eael-circle-wrapper .eael-interactive-circle-rotate.pause-rotate:hover .eael-circle-btn-icon,
+.eael-circle-wrapper .eael-interactive-circle-rotate.pause-rotate:hover .eael-circle-content {
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
+}
 .eael-circle-wrapper .eael-circle-info {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -76,7 +151,7 @@
   border: 4px solid #fff;
   -webkit-box-shadow: 0px 5px 40px rgba(131, 100, 196, 0.2);
           box-shadow: 0px 5px 40px rgba(131, 100, 196, 0.2);
-  z-index: 0;
+  z-index: 9;
 }
 .eael-circle-wrapper.eael-interactive-circle-preset-1 .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn .eael-circle-icon-shapes {
   display: none;

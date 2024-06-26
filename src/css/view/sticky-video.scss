@@ -149,3 +149,11 @@
 	}
 }
 
+/*******************
+	Theme Support
+********************/
+//Blocksy Theme
+.theme-blocksy .eael-sticky-video-player2[data-sticky*=yes]:not(.in, .out), 
+.theme-blocksy .eael-sticky-video-player2[data-sticky*=fixed]:not(.in, .out) {
+	position: initial !important;
+}

@@ -79,13 +79,14 @@
   position: absolute;
   top: 20px;
   left: 20px;
-  font-size: 20px;
+  font-size: 16px;
 }
 .ea-woo-checkout .woocommerce .woo-checkout-login .ea-login-icon i, .ea-woo-checkout .woocommerce .woo-checkout-login .ea-login-icon svg {
   width: 1em;
   height: 1em;
   position: relative;
   display: block;
+  font-size: 16px;
 }
 .ea-woo-checkout .woocommerce .woo-checkout-login .form-row-first {
   width: 48.5%;
@@ -456,6 +457,12 @@
 .eael-woo-checkout .woocommerce .woo-checkout-login.woo-checkout-login-editor {
   display: none;
 }
+.eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .wc-block-components-notice-banner svg {
+  display: none;
+}
+.eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .wc-block-components-notice-banner .wc-block-components-notice-banner__content {
+  margin-left: 25px;
+}
 .eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-error, .eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-info, .eael-woo-checkout .woocommerce .woo-checkout-login .woocommerce-form-login-toggle .woocommerce-message {
   background-color: transparent !important;
   padding: 0 0 0 40px !important;
@@ -494,8 +501,8 @@
 .eael-woo-checkout .woocommerce .woo-checkout-coupon .ea-coupon-icon {
   width: 20px;
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 24px;
+  left: 35px;
   font-size: 20px;
 }
 .eael-woo-checkout .woocommerce .woo-checkout-coupon .ea-coupon-icon i, .eael-woo-checkout .woocommerce .woo-checkout-coupon .ea-coupon-icon svg {
@@ -519,6 +526,12 @@
 }
 .eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-info li, .eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-message li, .eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-error li {
   margin-left: 0;
+}
+.eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .wc-block-components-notice-banner svg {
+  display: none;
+}
+.eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .wc-block-components-notice-banner .wc-block-components-notice-banner__content {
+  margin-left: 25px;
 }
 .eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-error, .eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-info, .eael-woo-checkout .woocommerce .woo-checkout-coupon .woocommerce-form-coupon-toggle .woocommerce-message {
   background-color: transparent !important;
