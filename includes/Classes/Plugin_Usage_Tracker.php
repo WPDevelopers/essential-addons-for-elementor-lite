@@ -929,6 +929,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         font-size: 14px;
                         line-height: 1.5em;
                         resize: none;
+                        max-height: 44px;
                     }
                     input[type=radio] {
                         border: 1px solid #D0D5DD;
