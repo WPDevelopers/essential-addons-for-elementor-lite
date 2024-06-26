@@ -50,7 +50,7 @@ trait Admin {
 
 	    if ( isset( $hook ) && $hook == 'toplevel_page_eael-settings' ) {
 		    wp_enqueue_style( 'essential_addons_elementor-admin-icon-css', EAEL_PLUGIN_URL . 'includes/templates/admin/icons/style.css', false, EAEL_PLUGIN_VERSION );
-		    wp_enqueue_style( 'essential_addons_elementor-admin-css', EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.css', false, EAEL_PLUGIN_VERSION );
+		    wp_enqueue_style( 'essential_addons_elementor-admin-css', EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.css', false, time() );
 		    wp_enqueue_script( 'essential_addons_elementor-admin-js', EAEL_PLUGIN_URL . 'assets/admin/js/admin.js', array( 'jquery' ), EAEL_PLUGIN_VERSION, true );
 		    wp_enqueue_script( 'essential_addons_elementor-admin-dashboard', EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.js', array(), time(), true );
 		    add_filter( 'wp_script_attributes', [ $this, 'add_type_attribute' ] );
