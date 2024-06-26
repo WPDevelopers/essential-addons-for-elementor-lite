@@ -861,10 +861,13 @@ if ( ! defined( 'ABSPATH' ) ) {
                         right: 0;
                         bottom: 0;
                         width: 100%;
-                        z-index: 9999999;
+                        z-index: 9999;
                         height: 100%;
                         justify-content: center;
                         align-items: center;
+                    }
+                    .wpinsights-form-active-essential_adons_elementor .wpinsights-goodbye-form {
+                        border-radius: 8px;
                     }
                     .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-head {
                         background: #fff;
@@ -926,6 +929,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         font-size: 14px;
                         line-height: 1.5em;
                         resize: none;
+                        max-height: 44px;
                     }
                     input[type=radio] {
                         border: 1px solid #D0D5DD;
@@ -973,7 +977,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         transition: .3s;
                     }
                     .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-footer .wpinsights-submit-btn:hover {
-                        background: #6F0AF2;
+                        background: conic-gradient(from 195.22deg at 68.31% 39.29%, #8f20fb00, #8f20fb 360deg), linear-gradient(0deg, #6f0af2, #6f0af2);
                     }
                     
                     .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-footer .wpsp-put-deactivate-btn {
