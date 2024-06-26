@@ -868,11 +868,33 @@ if ( ! defined( 'ABSPATH' ) ) {
                     }
                     .wpinsights-form-active-essential_adons_elementor .wpinsights-goodbye-form {
                         border-radius: 8px;
+                        overflow: visible;
+                        position: relative;
+                    }
+                    .wpinsights-goodbye-form .ea__modal-close-btn {
+                        position: absolute;
+                        top: 0;
+                        right: -55px;
+                        width: 40px;
+                        height: 40px;
+                        background: #fff;
+                        border-radius: 50%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 12px;
+                        font-weight: 500;
+                        color: #475467;
+                        cursor: pointer;
+                    }
+                    .wpinsights-goodbye-form .ea__modal-close-btn svg {
+                        width: 20px;
                     }
                     .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-head {
                         background: #fff;
                         color: #495157;
                         padding: 24px;
+                        border-radius: 8px 8px 0 0;
                     }
                     .wpinsights-goodbye-form-head {
                         display: flex;
