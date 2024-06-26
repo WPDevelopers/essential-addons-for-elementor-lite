@@ -852,6 +852,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$styles .= $wrapper_class . ' .test {';
 				$styles .= '}';
 				$styles .= '
+                    
+                    .wpinsights-form-active-essential_adons_elementor .wpinsights-goodbye-form-wrapper-essential_adons_elementor {
+                        display: flex !important;
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        width: 100%;
+                        z-index: 9999999;
+                        height: 100%;
+                        justify-content: center;
+                        align-items: center;
+                    }
                     .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-head {
                         background: #fff;
                         color: #495157;
@@ -870,7 +884,8 @@ if ( ! defined( 'ABSPATH' ) ) {
                     }
                     .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-body {
                         padding: 32px 40px;
-                        color: #333;
+                        max-height: calc(70vh - 230px);
+                        overflow: auto;
                     }
                     .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-body .wpinsights-goodbye-form-caption {
                         font-size: 18px;
