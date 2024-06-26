@@ -1656,6 +1656,67 @@ section.ea__modal-wrapper {
   margin-bottom: 0;
 }
 
+.ea__modal-body .ea__api-key-according label.toggle-wrap {
+  min-width: auto;
+  margin-bottom: 5px;
+}
+
+.ea__modal-body p.info--text {
+  font-size: 12px;
+  color: #667085;
+  margin-left: 18px;
+  position: relative;
+}
+
+.ea__modal-body p.info--text:before {
+  position: absolute;
+  content: '\e924';
+  font-family: 'ea-dash-icon';
+  left: -18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  font-size: 7px;
+  color: #667085;
+  border: 1px solid #667085;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ea__modal-body .ea__hide-badge {
+  margin-top: 12px;
+}
+
+.ea__modal-body .ea__hide-badge input[type=checkbox] {
+  border: 1px solid #1D2939;
+  border-radius: 2px;
+  box-shadow: none;
+  margin: 0;
+}
+
+.ea__modal-body .ea__hide-badge label {
+  font-size: 15px;
+  color: #1d2939;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ea__modal-body .ea__hide-badge label i {
+  width: 14px;
+  height: 14px;
+  font-size: 7px;
+  color: #667085;
+  border: 1px solid #667085;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #ea__dashboard--wrapper .ea__modal-body input.input-name {
   padding: 10px 14px;
   background: var(--background-8);

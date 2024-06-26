@@ -22,14 +22,17 @@ function ModalStyleThree() {
                         <div className="flex justify-between items-center gap-2 mb-4 pointer">
                         <span className="flex gap-2 items-center">
                             <img src={localize.eael_dashboard.reactPath + eaData.accordion[item].icon} alt="icon"/>
-                            <h4 className="flex items-center">{eaData.accordion[item].title}
+                            <h4 className="flex items-center gap-1">{eaData.accordion[item].title}
                                 {eaData.accordion[item]?.info !== undefined &&
                                     <i className="ea-dash-icon ea-info">
                                         <span className='ea__tooltip'>Fields will be available on both the edit profile page and the EA <span
                                             className='color--exx'>Login</span> | <span
                                             className='color--exx'>Register</span> Form.</span>
                                     </i>}
-                                <label><input type="checkbox"/></label>
+                                <label className="toggle-wrap">
+                                    <input type="checkbox" />
+                                    <span className="slider"></span>
+                                </label>
                             </h4>
                         </span>
                             <i className={item === eaState.modalAccordion ? 'ea-dash-icon ea-dropdown rotate-180' : 'ea-dash-icon ea-dropdown'}></i>
@@ -38,7 +41,7 @@ function ModalStyleThree() {
                     <div
                         className={item === eaState.modalAccordion ? 'ea__according-content flex flex-col gap-2 accordion-show' : 'ea__according-content flex flex-col gap-2'}>
                         <div className="flex gap-4 items-center">
-                            <p>Fields will be available on both the edit profile page and the EA Login | Register Form.</p>
+                            <p className="info--text">Fields will be available on both the edit profile page and the EA Login | Register Form.</p>
                         </div>
                         {eaData.accordion[item].fields.map((subItem, subIndex) => {
                             return (<div className="flex gap-4 items-center" key={subIndex}>
@@ -48,7 +51,7 @@ function ModalStyleThree() {
                                        type="text" placeholder={subItem.placeholder}/>
                             </div>);
                         })}
-                        <div className="flex gap-4 items-center">
+                        <div className="ea__hide-badge flex gap-2">
                             <input type="checkbox"/>
                             <label>Hide Badge <i className="ea-dash-icon ea-info">
                                 <span className='ea__tooltip'>Fields will be available on both the edit profile page and the EA <span
