@@ -1581,6 +1581,14 @@ section.ea__modal-wrapper {
   border: 1px solid var(--label-color);
 }
 
+.ea__modal-content-wrapper.go-premium-wrapper {
+  max-width: 444px;
+}
+
+.ea__modal-content-wrapper.go-premium-wrapper .ea__modal-body {
+  width: 444px;
+}
+
 .ea__modal-header {
   padding: 24px 40px;
   border-bottom: 1px solid var(--label-color);
@@ -1626,10 +1634,13 @@ section.ea__modal-wrapper {
 }
 
 .ea__modal-body p.pro--content {
+  font-size: 16px;
   text-align: center;
 }
 
 .ea__modal-body .ea__feature-list-item p {
+  font-size: 16px;
+  color: var(--text-color-25);
   margin-bottom: 0;
 }
 
@@ -1671,14 +1682,6 @@ section.ea__modal-wrapper {
 
 .ea__modal-body .regenerated-wrapper p {
   font-size: 16px;
-}
-
-.ea__modal-body .go-premium-wrapper {
-  width: 573px;
-}
-
-.ea__modal-body .go-premium-wrapper {
-  width: 573px;
 }
 
 #ea__dashboard--wrapper .ea__modal-footer button.upgrade-button {

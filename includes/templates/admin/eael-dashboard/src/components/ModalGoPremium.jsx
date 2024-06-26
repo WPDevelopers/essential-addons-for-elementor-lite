@@ -11,7 +11,7 @@ function ModalGoPremium() {
     return (
         <>
             <section className="ea__modal-wrapper">
-                <div className="ea__modal-content-wrapper">
+                <div className="ea__modal-content-wrapper go-premium-wrapper">
                     <div className="ea__modal-body">
                         <div className='go-premium-wrapper'>
                             <div className="flex flex-col items-center gap-2 mb-6">
@@ -47,7 +47,7 @@ function ModalGoPremium() {
                                     </svg>
                                     <p>EA Instagram Feed  Feed is getting</p>
                                 </div>
-                                <div className="ea__feature-list-item flex gap-2 items-center mb-4">
+                                <div className="ea__feature-list-item flex gap-2 items-center">
                                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path
