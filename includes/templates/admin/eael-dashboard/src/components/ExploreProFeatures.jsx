@@ -51,8 +51,8 @@ function ExploreProFeatures() {
                 </div>
                 <div className="features-widget-wrapper">
                     <div className="features-widget-item">
-                        <a href="#">
-                            <img src={assetPath + 'images/img-7.png'} alt="img"/>
+                        <a href="https://essential-addons.com/event-calendar/">
+                            <img src={assetPath + 'images/Event Calendar.svg'} alt="img"/>
                             <span className="eael-tooltip">Event Calendar</span>
                         </a>
                     </div>

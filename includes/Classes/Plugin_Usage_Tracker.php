@@ -951,13 +951,19 @@ if ( ! defined( 'ABSPATH' ) ) {
                         box-shadow: none;
                         outline: 0;
                     }
-                    .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-body #wpinsights-goodbye-options ul > li > div > input::placeholder {
+                    .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-body #wpinsights-goodbye-options ul > li > div > input::placeholder,
+                     .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-body #wpinsights-goodbye-options ul > li > div > textarea::placeholder{
                         color: #D0D5DD !important;
                     }
                     .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-footer {
                         padding: 16px 36px;
                         margin-bottom: 0;
                         border-top: 1px solid #EAECF0;
+                    }
+                    input:focus,
+                    textarea:focus {
+                        box-shadow: none !important;
+                        outline: 0 !important;
                     }
                     .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-footer > .wpinsights-goodbye-form-buttons {
                         display: flex;
