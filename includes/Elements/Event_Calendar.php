@@ -3346,7 +3346,7 @@ class Event_Calendar extends Widget_Base
 			            if ( $attribute ) {
 				            $attribute_set = explode( '|', $attribute );
 
-				            if ( in_array( strtolower( $attribute_set[0] ), $this->xssAttributes() ) ) {
+				            if ( in_array( trim( strtolower( $attribute_set[0] ) ), $this->xssAttributes() ) ) {
 					            continue;
 				            }
 
