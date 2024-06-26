@@ -775,7 +775,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		public function deactivate_reasons_form() {
 			$form = $this->deactivation_reasons();
 			$class_plugin_name = esc_attr( $this->plugin_name );
-			$html = '<div class="wpinsights-goodbye-form-head"><strong>' . esc_html( $form['heading'] ) . '</strong></div>';
+			$html = '<div class="wpinsights-goodbye-form-head"><span>Icons</span><h1>Don’t Leave Installing....</h1></div>';
 			$html .= '<div class="wpinsights-goodbye-form-body"><p class="wpinsights-goodbye-form-caption">' . esc_html( $form['body'] ) . '</p>';
 			if( is_array( $form['options'] ) ) {
 				$html .= '<div id="wpinsights-goodbye-options" class="wpinsights-goodbye-options"><ul>';
@@ -851,8 +851,106 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$styles .= '}';
 				$styles .= $wrapper_class . ' .test {';
 				$styles .= '}';
+				$styles .= '
+                    .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-head {
+                        background: #fff;
+                        color: #495157;
+                        padding: 24px;
+                    }
+                    .wpinsights-goodbye-form-head {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 16px;
+                        align-items: center;
+                    }
+                    .wpinsights-goodbye-form-head h1 {
+                        font-size: 22px;
+                        font-weight: 450;
+                        color: #1D2939;
+                    }
+                    .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-body {
+                        padding: 32px 40px;
+                        color: #333;
+                    }
+                    .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-body .wpinsights-goodbye-form-caption {
+                        font-size: 18px;
+                        color: #1D2939;
+                        margin: 0;
+                        padding-bottom: 16px;
+                        font-weight: 400;
+                    }
+                    .widefat td ul {
+                        font-size: 14px;
+                        margin: 0;
+                        color: #475467;
+                    }
+                    .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-body #wpinsights-goodbye-options ul > li {
+                        margin-bottom: 16px;
+                        
+                    }
+                    input[type=radio] {
+                        border-radius: 50%;
+                        margin-right: .25rem;
+                        line-height: .71428571;
+                        margin: 0;
+                    }
+                    .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-body label {
+                        padding-left: 4px;
+                        color: #475467;
+                        font-size: 14px;
+                    }
+                    .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-body #wpinsights-goodbye-options ul > li > div > input, .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-body #wpinsights-goodbye-options ul > li > div > textarea {
+                        padding: 10px 16px;
+                        border-radius: 8px;
+                        width: 100%;
+                        border: 1px solid #EAECF0;
+                        margin: 0;
+                        margin-top: 16px;
+                        color: #1D2939;
+                        font-size: 14px;
+                        line-height: 1.5em;
+                        resize: none;
+                    }
+                    .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-body #wpinsights-goodbye-options ul > li > div > input::placeholder {
+                        color: #D0D5DD !important;
+                    }
+                    .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-footer {
+                        padding: 16px 36px;
+                        margin-bottom: 0;
+                        border-top: 1px solid #EAECF0;
+                    }
+                    .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-footer > .wpinsights-goodbye-form-buttons {
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-start;
+                    }
+                    .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-footer .wpinsights-submit-btn {
+                        background-color: #6F0AF2;
+                        -webkit-border-radius: 8px;
+                        border-radius: 8px;
+                        color: #fff;
+                        padding: 8px 16px;
+                        font-size: 14px;
+                        font-weight: 500;
+                        line-height: 1.5em;
+                        text-transform: capitalize;
+                        transition: .3s;
+                    }
+                    .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-footer .wpinsights-submit-btn:hover {
+                        background-color: #6F0AF2;
+                    }
+                    
+                    .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-footer .wpsp-put-deactivate-btn {
+                        font-size: 14px;
+                        font-weight: 500;
+                        color: #344054;
+                        margin-left: 10px;
+                    }
+                ';
 			$styles .= '</style>';
 			$styles .= '';
+
+
 
 			echo $styles;
 			?>
