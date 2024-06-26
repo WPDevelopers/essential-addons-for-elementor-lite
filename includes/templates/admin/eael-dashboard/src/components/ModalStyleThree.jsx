@@ -13,6 +13,10 @@ function ModalStyleThree() {
     return (
         <>
             {Object.keys(eaData.accordion).map((item, index) => {
+                if (!localize.eael_dashboard.is_eapro_activate && eaData.accordion[item]?.isPro === true) {
+                    return;
+                }
+
                 return <div className="ea__api-key-according" key={index}>
                     <div className="ea__according-title" onClick={() => clickHandler(item)}>
                         <div className="flex justify-between items-center gap-2 mb-4 pointer">
@@ -20,9 +24,12 @@ function ModalStyleThree() {
                             <img src={localize.eael_dashboard.reactPath + eaData.accordion[item].icon} alt="icon"/>
                             <h4 className="flex items-center">{eaData.accordion[item].title}
                                 {eaData.accordion[item]?.info !== undefined &&
-                                <i className="ea-dash-icon ea-info">
-                                    <span className='ea__tooltip'>Fields will be available on both the edit profile page and the EA <span className='color--exx'>Login</span> | <span className='color--exx'>Register</span> Form.</span>
-                                </i>}
+                                    <i className="ea-dash-icon ea-info">
+                                        <span className='ea__tooltip'>Fields will be available on both the edit profile page and the EA <span
+                                            className='color--exx'>Login</span> | <span
+                                            className='color--exx'>Register</span> Form.</span>
+                                    </i>}
+                                <label><input type="checkbox"/></label>
                             </h4>
                         </span>
                             <i className={item === eaState.modalAccordion ? 'ea-dash-icon ea-dropdown rotate-180' : 'ea-dash-icon ea-dropdown'}></i>
@@ -38,6 +45,13 @@ function ModalStyleThree() {
                                        type="text" placeholder={subItem.placeholder}/>
                             </div>);
                         })}
+                        <div className="flex gap-4 items-center">
+                            <input type="checkbox"/>
+                            <label>Hide Badge <i className="ea-dash-icon ea-info">
+                                <span className='ea__tooltip'>Fields will be available on both the edit profile page and the EA <span
+                                    className='color--exx'>Login</span> | <span className='color--exx'>Register</span> Form.</span>
+                            </i></label>
+                        </div>
                     </div>
                 </div>
             })}

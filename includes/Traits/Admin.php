@@ -1330,7 +1330,8 @@ trait Admin {
 									    'label'       => __( 'Google Client ID:', 'essential-addons-for-elementor-lite' ),
 									    'placeholder' => __( 'Google Client ID', 'essential-addons-for-elementor-lite' ),
 								    ]
-							    ]
+							    ],
+							    'isPro'  => true
 						    ],
 						    'facebookLogin'  => [
 							    'title'  => __( 'Facebook Login', 'essential-addons-for-elementor-lite' ),
@@ -1348,7 +1349,8 @@ trait Admin {
 									    'label'       => __( 'Facebook App Secret:', 'essential-addons-for-elementor-lite' ),
 									    'placeholder' => __( 'Facebook App Secret', 'essential-addons-for-elementor-lite' ),
 								    ]
-							    ]
+							    ],
+							    'isPro'  => true
 						    ],
 						    'mailchimpLogin' => [
 							    'title'  => __( 'Mailchimp Integration', 'essential-addons-for-elementor-lite' ),
@@ -1360,12 +1362,13 @@ trait Admin {
 									    'label'       => __( 'Mailchimp API Key:', 'essential-addons-for-elementor-lite' ),
 									    'placeholder' => __( 'Mailchimp API', 'essential-addons-for-elementor-lite' ),
 								    ]
-							    ]
+							    ],
+							    'isPro'  => true
 						    ],
 						    'customFields'   => [
 							    'title'  => __( 'Enable Custom Fields', 'essential-addons-for-elementor-lite' ),
 							    'icon'   => 'images/customfield.svg',
-							    'info'   => __( 'Fields will be available on both the edit profile page and the EA Login | Register Form.', 'essential-addons-for-elementor-lite' ),
+//							    'info'   => __( 'Fields will be available on both the edit profile page and the EA Login | Register Form.', 'essential-addons-for-elementor-lite' ),
 							    'fields' => [
 								    [
 									    'name'        => 'lr_custom_profile_fields_text',
