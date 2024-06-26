@@ -174,7 +174,7 @@ function ContextReducer() {
             case 'OPEN_MODAL':
                 return {...state, modal: 'open', modalID: payload.key, modalTitle: payload.title}
             case 'CLOSE_MODAL':
-                return {...state, modal: 'close', modalGoPremium: 'close', modalRegenerateAssets: 'close'}
+                return {...state, modal: 'close', modalGoPremium: 'close'}
             case 'CLOSE_TOAST':
                 return {...state, toasts: false}
             case 'MODAL_ACCORDION':
@@ -251,7 +251,16 @@ function ContextReducer() {
                 };
 
                 response = eaAjax(params);
-                return {...state, modalRegenerateAssets: 'open'}
+
+                if (response === true) {
+                    toastType = 'success';
+                    toastMessage = 'Assets Regenerated!';
+                } else {
+                    toastType = 'error';
+                    toastMessage = 'Failed to Regenerate Assets!';
+                }
+
+                return {...state, toasts: true, toastType, toastMessage}
             case 'ELEMENTS_CAT':
                 return {...state, elementsActivateCatIndex: payload}
             case 'LIGHT_DARK_TOGGLE':
