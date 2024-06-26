@@ -17,7 +17,7 @@ function ModalGoPremium() {
                             <div className="flex flex-col items-center gap-2 mb-6">
                                 <img className="mb-4" src={eaData.reactPath + "images/go-pro-icon.svg"} alt="go-pro Logo"/>
                                 <h3>Unlock to pro features</h3>
-                                <p>Purchase our premium version to unlock these pro components. you’ll have all the features you.</p>
+                                <p className="pro--content">Purchase our premium version to unlock these pro components. you’ll have all the features you.</p>
                             </div>
                             <div className="ea__feature-list-wrap">
                                 <div className="ea__feature-list-item flex gap-2 items-center mb-4">

@@ -1625,8 +1625,11 @@ section.ea__modal-wrapper {
   margin-bottom: 16px;
 }
 
-.ea__modal-body .ea__feature-list-item p {
+.ea__modal-body p.pro--content {
   text-align: center;
+}
+
+.ea__modal-body .ea__feature-list-item p {
   margin-bottom: 0;
 }
 
