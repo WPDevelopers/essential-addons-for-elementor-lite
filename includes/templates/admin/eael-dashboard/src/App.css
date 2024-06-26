@@ -590,7 +590,7 @@ input:focus {
   box-shadow: none;
   box-sizing: border-box;
   border: 2px solid rgba(71, 75, 87, .2);
-  border-top-color: #1D2939;
+  border-top-color: var(--text-color-25);
   border-radius: 50%;
   transition: ease-in-out .1s;
   animation: ea_loading 1s infinite;
@@ -1467,7 +1467,7 @@ span.eael-tooltip:after {
 .ea__feature-list-item p {
   font-size: 16px;
   line-height: 1em;
-  color: #1d2939;
+  color: var(--text-color-25);
 }
 
 #ea__dashboard--wrapper .primary-btn i {
@@ -1663,7 +1663,7 @@ section.ea__modal-wrapper {
 
 .ea__modal-body p.info--text {
   font-size: 12px;
-  color: #667085;
+  color: var(--text-icon-500);
   margin-left: 18px;
   position: relative;
 }
@@ -1678,8 +1678,8 @@ section.ea__modal-wrapper {
   width: 12px;
   height: 12px;
   font-size: 7px;
-  color: #667085;
-  border: 1px solid #667085;
+  color: var(--text-icon-500);
+  border: 1px solid var(--text-icon-500);
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
@@ -1691,7 +1691,7 @@ section.ea__modal-wrapper {
 }
 
 .ea__modal-body .ea__hide-badge input[type=checkbox] {
-  border: 1px solid #1D2939;
+  border: 1px solid var(--text-color-25);
   border-radius: 2px;
   box-shadow: none;
   margin: 0;
@@ -1699,7 +1699,7 @@ section.ea__modal-wrapper {
 
 .ea__modal-body .ea__hide-badge label {
   font-size: 15px;
-  color: #1d2939;
+  color: var(--text-color-25);
   display: flex;
   align-items: center;
   gap: 4px;
@@ -1709,12 +1709,13 @@ section.ea__modal-wrapper {
   width: 14px;
   height: 14px;
   font-size: 7px;
-  color: #667085;
-  border: 1px solid #667085;
+  color: var(--text-icon-500);
+  border: 1px solid var(--text-icon-500);
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 #ea__dashboard--wrapper .ea__modal-body input.input-name {
@@ -1943,25 +1944,25 @@ section.ea__modal-wrapper {
   line-height: 1.5em;
 }
 
-.ea__according-title h4 i:hover span.ea__tooltip {
+.ea__according-content .ea__hide-badge i:hover span.ea__tooltip {
   opacity: 1;
 }
 
-.ea__according-title h4 i {
+.ea__according-content .ea__hide-badge i {
   position: relative;
   transition: all .35s ease-in-out;
 }
 
-.ea__according-title h4 i span.ea__tooltip {
-  width: 340px;
+.ea__according-content .ea__hide-badge i span.ea__tooltip {
+  width: 310px;
   top: -60px;
 }
 
-.ea__according-title h4 i span.ea__tooltip:after {
+.ea__according-content .ea__hide-badge i span.ea__tooltip:after {
   top: 50px;
 }
 
-.ea__according-title h4 i span .color--exx {
+.ea__according-content .ea__hide-badge i span .color--exx {
   color: #1570EF;
 }
 
@@ -2002,7 +2003,7 @@ section.ea__onboard-main-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #667085;
+  color: var(--text-icon-500);
   background: #F2F4F7;
   border-radius: 50%;
 }
@@ -2069,7 +2070,7 @@ section.ea__onboard-main-wrapper {
 
 .collect-info {
   font-size: 14px;
-  color: #667085;
+  color: var(--text-icon-500);
   text-decoration: underline;
   cursor: pointer;
   padding-left: 4px;
@@ -2328,7 +2329,7 @@ span.title-color-2 {
 }
 
 .ea__license-wrapper .ea__license-content h5 {
-  color: #98A2B3;
+  color: var(--text-icon-100);
   font-size: 16px;
   font-weight: 400;
   line-height: 1.4em;
@@ -2459,7 +2460,7 @@ span.step-count {
 
 input.input-api {
   font-size: 16px;
-  color: #667085;
+  color: var(--text-icon-500);
   border: none;
   background: transparent;
   outline: 0;
@@ -2470,23 +2471,23 @@ input.input-api {
 
 input.input-api:disabled {
   box-shadow: none;
-  color: #98A2B3 !important;
+  color: var(--text-icon-100) !important;
 }
 
 input.input-api[disabled]::placeholder {
-  color: #98A2B3 !important;
+  color: var(--text-icon-100) !important;
 }
 
 input.input-api::placeholder {
-  color: #98A2B3 !important;
+  color: var(--text-icon-100) !important;
 }
 
 input.input-api.verify::placeholder {
-  color: #667085 !important;
+  color: var(--text-icon-500) !important;
 }
 
 input::placeholder {
-  color: #667085 !important;
+  color: var(--text-icon-500) !important;
 }
 
 .ea__license-verify {
@@ -2510,7 +2511,7 @@ input::placeholder {
 .ea__general-content-item .ea__license-verify .resend-content {
   font-size: 16px;
   font-weight: 400;
-  color: #667085;
+  color: var(--text-icon-500);
   line-height: 1.5em;
 }
 
@@ -2576,7 +2577,7 @@ input::placeholder {
   box-shadow: 0px 4px 14px 0px #00012314;
   border-radius: 8px;
   font-size: 12px;
-  color: #344054;
+  color: var(--text-color-50);
   font-family: "Rubik", sans-serif;
   font-weight: 400 !important;
   line-height: 1.5em;
