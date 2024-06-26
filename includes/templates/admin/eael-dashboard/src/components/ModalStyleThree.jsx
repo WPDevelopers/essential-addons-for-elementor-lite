@@ -29,6 +29,7 @@ function ModalStyleThree() {
                                             className='color--exx'>Login</span> | <span
                                             className='color--exx'>Register</span> Form.</span>
                                     </i>}
+                                <label><input type="checkbox"/></label>
                             </h4>
                         </span>
                             <i className={item === eaState.modalAccordion ? 'ea-dash-icon ea-dropdown rotate-180' : 'ea-dash-icon ea-dropdown'}></i>
@@ -44,6 +45,13 @@ function ModalStyleThree() {
                                        type="text" placeholder={subItem.placeholder}/>
                             </div>);
                         })}
+                        <div className="flex gap-4 items-center">
+                            <input type="checkbox"/>
+                            <label>Hide Badge <i className="ea-dash-icon ea-info">
+                                <span className='ea__tooltip'>Fields will be available on both the edit profile page and the EA <span
+                                    className='color--exx'>Login</span> | <span className='color--exx'>Register</span> Form.</span>
+                            </i></label>
+                        </div>
                     </div>
                 </div>
             })}
