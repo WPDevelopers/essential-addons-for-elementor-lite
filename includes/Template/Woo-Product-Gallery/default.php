@@ -25,7 +25,7 @@ if ( has_post_thumbnail() ) {
 	$settings['eael_image_size_customize_size'] = $settings['eael_product_gallery_image_size_size'];
 			$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings,'eael_image_size_customize' );
 }
-
+$product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_class', [], $product->get_id(), 'woo-product-gallery' ) );
 $title_tag = isset( $settings['eael_product_gallery_title_html_tag'] ) ? Helper::eael_validate_html_tag($settings['eael_product_gallery_title_html_tag'])  : 'h2';
 
 // Improvement
