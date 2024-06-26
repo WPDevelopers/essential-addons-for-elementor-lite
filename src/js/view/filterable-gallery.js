@@ -226,6 +226,12 @@ jQuery(window).on("elementor/frontend/init", function () {
 
 				if($this.hasClass('all-control')){
 					//All items are active
+					if ( LoadMoreShow || ( fg_items.length <= 1 ) ) {
+						loadMore.hide()
+					} else {
+						loadMore.show()
+					}
+
 					$('.eael-filterable-gallery-item-wrap .eael-magnific-link-clone').removeClass('active').addClass('active');
 				}else {
 					$('.eael-filterable-gallery-item-wrap .eael-magnific-link-clone').removeClass('active');
