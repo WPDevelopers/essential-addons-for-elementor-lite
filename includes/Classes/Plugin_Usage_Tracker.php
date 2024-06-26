@@ -881,6 +881,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         font-size: 22px;
                         font-weight: 450;
                         color: #1D2939;
+                        padding: 0;
                     }
                     .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-body {
                         padding: 32px 40px;
@@ -926,6 +927,26 @@ if ( ! defined( 'ABSPATH' ) ) {
                         line-height: 1.5em;
                         resize: none;
                     }
+                    input[type=radio] {
+                        border: 1px solid #D0D5DD;
+                        box-shadow: none;
+                    }
+                    input[type=radio]:checked::before {
+                        content: "";
+                        border-radius: 50%;
+                        width: .88rem;
+                        height: .88rem;
+                        margin: -.95px;
+                        background-color: #750EF4;
+                        border: 1px solid #E2CBFF;
+                        line-height: 1.14285714;
+                        outline: 0;
+                    }
+                    input[type=radio]:focus {
+                        border-color: #D0D5DD;
+                        box-shadow: none;
+                        outline: 0;
+                    }
                     .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-body #wpinsights-goodbye-options ul > li > div > input::placeholder {
                         color: #D0D5DD !important;
                     }
@@ -940,7 +961,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         justify-content: flex-start;
                     }
                     .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-footer .wpinsights-submit-btn {
-                        background-color: #6F0AF2;
+                        background: conic-gradient(from 195.22deg at 68.31% 39.29%, #8f20fb00, #8f20fb 360deg), linear-gradient(0deg, #6f0af2, #6f0af2);
                         -webkit-border-radius: 8px;
                         border-radius: 8px;
                         color: #fff;
@@ -952,7 +973,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         transition: .3s;
                     }
                     .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-footer .wpinsights-submit-btn:hover {
-                        background-color: #6F0AF2;
+                        background: #6F0AF2;
                     }
                     
                     .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-footer .wpsp-put-deactivate-btn {
@@ -961,6 +982,12 @@ if ( ! defined( 'ABSPATH' ) ) {
                         color: #344054;
                         margin-left: 10px;
                     }
+                    .wp-person a:focus .gravatar, a:focus, a:focus .media-icon img, a:focus .plugin-icon {
+                        color: #043959;
+                        box-shadow: none;
+                        outline: 0;
+                    }
+                    
                 ';
 			$styles .= '</style>';
 			$styles .= '';
