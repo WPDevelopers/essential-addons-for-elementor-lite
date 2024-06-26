@@ -1658,7 +1658,6 @@ section.ea__modal-wrapper {
 
 .ea__modal-body .ea__api-key-according label.toggle-wrap {
   min-width: auto;
-  margin-bottom: 5px;
 }
 
 .ea__modal-body p.info--text {
@@ -1823,6 +1822,7 @@ section.ea__modal-wrapper {
 
 .ea__according-title {
   padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 .ea__according-title i.ea-dash-icon.ea-info {
