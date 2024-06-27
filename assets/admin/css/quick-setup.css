@@ -5842,6 +5842,10 @@ img {
     font-size: 12px;
 }
 
+#eael-onboard--wrapper button.previous-btn i {
+    font-size: 12px;
+}
+
 #eael-onboard--wrapper .upgrade-button {
     font-size: 14px;
     font-weight: 450;
@@ -6123,7 +6127,7 @@ section.eael-modal-wrapper {
     right: 0;
     bottom: 0;
     background: #1D232733;
-    z-index: 99999;
+    z-index: 999;
     font-family: "Rubik", sans-serif;
 }
 
@@ -6131,7 +6135,7 @@ section.eael-modal-wrapper {
     max-width: 663px;
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 55%;
     transform: translate(-50%, -50%);
     background: #fff;
     border-radius: 8px;
