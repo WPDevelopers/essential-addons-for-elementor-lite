@@ -17,7 +17,7 @@ function ConfigurationContent({activeTab, handleTabChange}) {
 
             <h3>
               {__(
-                "Choose your Preferred Mode for Essential Addons",
+                "Choose Your Preferred Mode for Essential Addons",
                 "essential-addons-for-elementor-lite"
               )}{" "}
               🚀
@@ -70,7 +70,7 @@ function ConfigurationContent({activeTab, handleTabChange}) {
                 <h4>{__("Advanced", "essential-addons-for-elementor-lite")}</h4>
                 <p>
                   {__(
-                    "Build complex websites with these advanced functionalities of Essential Addons. All the dynamic elements will be activated in this option.",
+                    "Build complex websites with these advanced functionalities of Essential Addons. All dynamic elements will be activated in this option.",
                     "essential-addons-for-elementor-lite"
                   )}
                 </p>
@@ -89,7 +89,7 @@ function ConfigurationContent({activeTab, handleTabChange}) {
                 <h4>{__("Custom", "essential-addons-for-elementor-lite")}</h4>
                 <p>
                   {__(
-                    "Configure the elements of Essential Addons according to your preferences to make your website stand out.",
+                    "Configure the elements of Essential Addons according to your preferences to make your website engage, captivate, and stand out.",
                     "essential-addons-for-elementor-lite"
                   )}
                 </p>

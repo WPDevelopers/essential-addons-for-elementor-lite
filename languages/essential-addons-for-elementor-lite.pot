@@ -190,7 +190,7 @@ msgid "BetterDocs"
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:277
-msgid "BetterDocs will help you to create & organize your documentation page in an organized way that will make your visitors find any helpful article easily."
+msgid "Create and organize your knowledge base, FAQ & documentation page efficiently, making it easy for visitors to find any helpful article quickly and effortlessly."
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:285, ../includes/Elements/EmbedPress.php:19, ../includes/Traits/Admin.php:227
@@ -198,7 +198,7 @@ msgid "EmbedPress"
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:286
-msgid "EmbedPress lets you embed videos, images, posts, audio, and maps and upload PDF, DOC, PPT & all other types of content into your WordPress site."
+msgid "Embed videos, images, gifs, charts, docs, maps, audio, live streams, pdf & more from 150+ sources into your WordPress site and get seamless customization options."
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:294, ../includes/Traits/Admin.php:235
@@ -206,7 +206,7 @@ msgid "NotificationX"
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:295
-msgid "Best FOMO social proof plugin to boost your sales conversion by creating stunning sales popups & notification bars with Elementor support."
+msgid "Best FOMO & social proof plugin to boost sales conversion by creating stunning sales popups, growth & discount alerts, flashing tabs, notification bars & more."
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:303, ../includes/Traits/Admin.php:243
@@ -214,7 +214,7 @@ msgid "easy.jobs"
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:304
-msgid "Easy solution for job recruitment to attract, manage & hire the right talent faster. The Best Talent Recruitment Suite which lets you manage jobs & career pages in Elementor."
+msgid "Job recruitment tool to attract, manage, and hire the right talent faster. This talent recruitment solution lets you manage jobs and career pages in Elementor."
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:312, ../includes/Traits/Admin.php:251
@@ -222,7 +222,7 @@ msgid "SchedulePress"
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:313
-msgid "Advanced Content Marketing Tool For WordPress – Schedule, Organize, & Auto Share Blog Posts. Take a quick glance at your content planning with Schedule Calendar, Auto & Manual Scheduler, and more."
+msgid "Advanced content marketing tool for WordPress to schedule posts & pages with Schedule Calendar, Auto & Manual Scheduler, etc. It also allows auto-social sharing."
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:321, ../includes/Traits/Admin.php:259
@@ -230,7 +230,7 @@ msgid "BetterLinks"
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:322
-msgid "Best Link Shortening tool to create, shorten & manage any URL to help you cross-promote your brands & products. Gather analytics reports, run successful marketing campaigns easily & many more."
+msgid "Link Shortening tool to create, shorten & manage any URL. It helps to cross promote brands & products and gather analytics reports while running marketing campaigns."
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:330, ../includes/Traits/Admin.php:267, ../includes/Traits/Helper.php:622
@@ -238,15 +238,15 @@ msgid "Essential Blocks"
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:331
-msgid "Enhance your Gutenberg experience with 50+ unique blocks (more coming soon). Add power to the block editor using our easy-to-use blocks which are designed to make your next WordPress page or post design easier and prettier than ever before."
+msgid "Enhance Gutenberg experience with 50+ unique blocks (more coming soon). Boost your block editor with easy-to-use blocks for a simpler WordPress page or post design."
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:339, ../includes/Elements/Better_Payment.php:19, ../includes/Traits/Admin.php:275
 msgid "Better Payment"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:340, ../includes/Traits/Admin.php:276
-msgid "Better Payment streamlines transactions in Elementor, integrating PayPal, Stripe, advanced analytics, validation, and Elementor forms for the most secure & efficient payments."
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:340
+msgid "Streamline transactions in Elementor by integrating PayPal & Stripe. Experience advanced analytics, validation, and Elementor forms for secure & efficient payments."
 msgstr ""
 
 #: ../includes/Classes/WPDeveloper_Setup_Wizard.php:448, ../includes/Traits/Admin.php:484
@@ -9583,6 +9583,10 @@ msgstr ""
 
 #: ../includes/Traits/Admin.php:268
 msgid "Enhance your Gutenberg experience with 40+ unique blocks (more coming soon). Add power to the block editor using our easy-to-use blocks which are designed to make your next WordPress page or posts design easier and prettier than ever before."
+msgstr ""
+
+#: ../includes/Traits/Admin.php:276
+msgid "Better Payment streamlines transactions in Elementor, integrating PayPal, Stripe, advanced analytics, validation, and Elementor forms for the most secure & efficient payments."
 msgstr ""
 
 #: ../includes/Traits/Admin.php:284, ../includes/Traits/Admin.php:826, ../includes/Traits/Elements.php:274

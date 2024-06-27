@@ -94,7 +94,7 @@ function IntegrationContent({
               </h4>
               <p>
                 {__(
-                  "Boost your websites with some exclusive and popular plugins to get the most out of WordPress. They are absolutely free for you to explore.",
+                  "Boost your websites with some exclusive and popular plugins to get the most out of WordPress.",
                   "essential-addons-for-elementor-lite"
                 )}
               </p>
