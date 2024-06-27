@@ -47,69 +47,81 @@ function App() {
             />
           </div>
 
-          {activeTab === "getting-started" && (
-            <div className="eael-setup-content eael-getting-started-content">
-              <GettingStartedContent
-                activeTab={activeTab}
-                handleTabChange={handleTabChange}
-                modalTarget={modalTarget}
-                handleModalChange={handleModalChange}
-                closeModal={closeModal}
-              />
-            </div>
-          )}
+          <div
+            className={`eael-setup-content eael-getting-started-content ${
+              activeTab == "getting-started" ? "" : "eael-d-none"
+            }`}
+          >
+            <GettingStartedContent
+              activeTab={activeTab}
+              handleTabChange={handleTabChange}
+              modalTarget={modalTarget}
+              handleModalChange={handleModalChange}
+              closeModal={closeModal}
+            />
+          </div>
 
-          {activeTab === "configuration" && (
-            <div className="eael-setup-content eael-configuration-content">
-              <ConfigurationContent
-                activeTab={activeTab}
-                handleTabChange={handleTabChange}
-              />
-            </div>
-          )}
+          <div
+            className={`eael-setup-content eael-configuration-content ${
+              activeTab === "configuration" ? "" : "eael-d-none"
+            }`}
+          >
+            <ConfigurationContent
+              activeTab={activeTab}
+              handleTabChange={handleTabChange}
+            />
+          </div>
 
-          {activeTab === "elements" && (
-            <div className="eael-setup-content eael-elements-content">
-              <ElementsContent
-                activeTab={activeTab}
-                handleTabChange={handleTabChange}
-                showElements={showElements}
-                handleShowElements={handleShowElements}
-              />
-            </div>
-          )}
+          <div
+            className={`eael-setup-content eael-elements-content ${
+              activeTab === "elements" ? "" : "eael-d-none"
+            }`}
+          >
+            <ElementsContent
+              activeTab={activeTab}
+              handleTabChange={handleTabChange}
+              showElements={showElements}
+              handleShowElements={handleShowElements}
+            />
+          </div>
 
-          {activeTab === "go-pro" && (
-            <div className="eael-setup-content eael-go-pro-content">
-              <GoProContent
-                activeTab={activeTab}
-                handleTabChange={handleTabChange}
-              />
-            </div>
-          )}
+          <div
+            className={`eael-setup-content eael-go-pro-content ${
+              activeTab === "go-pro" ? "" : "eael-d-none"
+            }`}
+          >
+            <GoProContent
+              activeTab={activeTab}
+              handleTabChange={handleTabChange}
+            />
+          </div>
 
-          {activeTab === "templately" && (
-            <div className="eael-setup-content eael-templately-content">
-              <TemplatelyContent
-                activeTab={activeTab}
-                handleTabChange={handleTabChange}
-              />
-            </div>
-          )}
+          <div
+            className={`eael-setup-content eael-templately-content ${
+              activeTab === "templately" ? "" : "eael-d-none"
+            }`}
+          >
+            <TemplatelyContent
+              activeTab={activeTab}
+              handleTabChange={handleTabChange}
+            />
+          </div>
 
-          {activeTab === "integrations" && (
-            <div className="eael-setup-content eael-integrations-content">
-              <IntegrationContent
-                activeTab={activeTab}
-                handleTabChange={handleTabChange}
-                modalTarget={modalTarget}
-                handleModalChange={handleModalChange}
-                closeModal={closeModal}
-              />
-            </div>
-          )}
+          <div
+            className={`eael-setup-content eael-integrations-content ${
+              activeTab === "integrations" ? "" : "eael-d-none"
+            }`}
+          >
+            <IntegrationContent
+              activeTab={activeTab}
+              handleTabChange={handleTabChange}
+              modalTarget={modalTarget}
+              handleModalChange={handleModalChange}
+              closeModal={closeModal}
+            />
+          </div>
 
-          {modalTarget === "modal" && (
+          {modalTarget === 'modal' && (
             <div className="eael-modal-content">
               <ModalContent
                 activeTab={activeTab}

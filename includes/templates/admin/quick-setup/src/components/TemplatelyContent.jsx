@@ -102,7 +102,6 @@ function TemplatelyContent({ activeTab, handleTabChange }) {
           data-next="integrations"
           onClick={handleTabChange}
         >
-          <i className="ea-dash-icon ea-left-arrow-long"></i>
           {__("Skip", "essential-addons-for-elementor-lite")}
         </button>
         <button
