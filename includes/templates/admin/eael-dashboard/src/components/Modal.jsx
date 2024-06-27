@@ -17,6 +17,10 @@ function Modal() {
 
             formData.forEach((item, index) => {
                 inputData[index] = item;
+
+                if (index === 'lr_custom_profile_fields_text') {
+                    inputData['lr_custom_profile_fields'] = inputData.lr_custom_profile_fields !== undefined ? inputData.lr_custom_profile_fields : '';
+                }
             });
 
             eaDispatch({type: 'SAVE_MODAL_DATA', payload: inputData});
