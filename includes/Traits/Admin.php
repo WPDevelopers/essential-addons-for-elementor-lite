@@ -1317,6 +1317,13 @@ trait Admin {
 									    'value'       => get_option( 'eael_recaptcha_language_v3', '' ),
 									    'label'       => __( 'Language:', 'essential-addons-for-elementor-lite' ),
 									    'placeholder' => __( 'reCAPTCHA Language Code', 'essential-addons-for-elementor-lite' ),
+								    ],
+								    [
+									    'name'  => 'lr_recaptcha_badge_hide',
+									    'value' => get_option( 'eael_recaptcha_badge_hide', '' ),
+									    'label' => __( 'Hide Badge', 'essential-addons-for-elementor-lite' ),
+									    'type'  => 'checkbox',
+										'info'	=> __( 'We are allowed to hide the badge as long as we include the reCAPTCHA branding visibly in the user flow.', 'essential-addons-for-elementor-lite' ),
 								    ]
 							    ]
 						    ],

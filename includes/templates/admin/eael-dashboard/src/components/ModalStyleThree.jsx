@@ -42,6 +42,14 @@ function ModalStyleThree() {
                             <p className="info--text">{eaData.accordion[item].info}</p>
                         </div>}
                         {eaData.accordion[item].fields.map((subItem, subIndex) => {
+                            if (subItem?.type === 'checkbox') {
+                                return (<div className="ea__hide-badge flex gap-2" key={subIndex}>
+                                    <input type="checkbox" name={subItem.name}/>
+                                    <label>{subItem.label} {subItem?.info && <i className="ea-dash-icon ea-info"><span
+                                        className='ea__tooltip'>{subItem.info}</span></i>}</label>
+                                </div>);
+                            }
+
                             return (<div className="flex gap-4 items-center" key={subIndex}>
                                 <label>{subItem.label}</label>
                                 <input name={subItem.name} value={eaState.modals[subItem.name]}
@@ -49,13 +57,6 @@ function ModalStyleThree() {
                                        type="text" placeholder={subItem.placeholder}/>
                             </div>);
                         })}
-                        <div className="ea__hide-badge flex gap-2">
-                            <input type="checkbox"/>
-                            <label>Hide Badge <i className="ea-dash-icon ea-info">
-                                <span className='ea__tooltip'>Fields will be available on both the edit profile page and the EA <span
-                                    className='color--exx'>Login</span> | <span className='color--exx'>Register</span> Form.</span>
-                            </i></label>
-                        </div>
                     </div>
                 </div>
             })}
