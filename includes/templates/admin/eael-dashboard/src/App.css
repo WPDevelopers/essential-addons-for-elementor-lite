@@ -163,7 +163,7 @@ span {
     --base-color-75: #6F0AF2;
     --base-color-100: #FF9437;
     --text-color-25: #FFFFFF;
-    --text-color-50: #344054;
+    --text-color-50: #D0D5DD;
     --text-color-100: #B1B4B9;
     --text-color-150: #937998;
     --text-color-200: #1570EF;
@@ -173,7 +173,7 @@ span {
     --text-icon-400: #AFB6C0;
     --text-icon-500: #667085;
     --text-icon-active: #E1C9FF;
-    --border-color-base: #F2F4F7;
+    --border-color-base: #1F2125;
     --border-color-2: #F9F3F1;
     --border-color-3: #ED7206;
     --border-color-4: #18191B;
@@ -370,14 +370,14 @@ input:focus {
 }
 
 #ea__dashboard--wrapper .primary-btn:hover {
-  color: var(--base-background);
+  color: #ffffff;
   background: var(--base-color-75);
   border: 1px solid var(--base-color-75);
 
 }
 
 #ea__dashboard--wrapper .primary-btn.install-btn {
-  color: var(--base-background);
+  color: #ffffff;
   border: 1px solid var(--base-color-75);
   background: conic-gradient(from 195.22deg at 68.31% 39.29%, rgba(143, 32, 251, 0) 0deg, #8F20FB 360deg), linear-gradient(0deg, #6F0AF2, #6F0AF2);
 }
@@ -683,15 +683,11 @@ span.ea__nav-icon svg {
 }
 
 .ea__sidebar-nav.active .ea__nav-text {
-  color: var(--base-background);
+  color: #ffffff;
 }
 
 .ea__sidebar-nav.active span.ea__nav-icon {
   color: var(--text-icon-active);
-}
-
-.ea__sidebar-nav.active {
-  color: #2B2748;
 }
 
 .ea__main-content-wrapper {
