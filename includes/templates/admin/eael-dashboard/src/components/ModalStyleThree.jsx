@@ -20,10 +20,10 @@ function ModalStyleThree() {
 
                 return <div className="ea__api-key-according" key={index}>
                     <div className="ea__according-title" onClick={() => clickHandler(item)}>
-                        <div className="flex justify-between items-center gap-2 mb-4 pointer">
+                        <div className="flex justify-between items-center gap-2 pointer">
                         <span className="flex gap-2 items-center">
                             <img src={localize.eael_dashboard.reactPath + eaData.accordion[item].icon} alt="icon"/>
-                            <h4 className="flex items-center gap-1">{eaData.accordion[item].title}
+                            <h4 className="flex items-center gap-2">{eaData.accordion[item].title}
                                 {eaData.accordion[item]?.status != undefined &&
                                     <label className="toggle-wrap">
                                         <input type="checkbox" value="on" name={eaData.accordion[item].status.name}
