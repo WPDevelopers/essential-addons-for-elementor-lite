@@ -23,16 +23,13 @@ function ModalStyleThree() {
                         <span className="flex gap-2 items-center">
                             <img src={localize.eael_dashboard.reactPath + eaData.accordion[item].icon} alt="icon"/>
                             <h4 className="flex items-center gap-1">{eaData.accordion[item].title}
-                                {eaData.accordion[item]?.info !== undefined &&
-                                    <i className="ea-dash-icon ea-info">
-                                        <span className='ea__tooltip'>Fields will be available on both the edit profile page and the EA <span
-                                            className='color--exx'>Login</span> | <span
-                                            className='color--exx'>Register</span> Form.</span>
-                                    </i>}
-                                <label className="toggle-wrap">
-                                    <input type="checkbox" />
-                                    <span className="slider"></span>
-                                </label>
+                                {eaData.accordion[item]?.status != undefined &&
+                                    <label className="toggle-wrap">
+                                        <input type="checkbox" value="on" name={eaData.accordion[item].status.name}
+                                               checked={eaState.modals[eaData.accordion[item].status.name] === 'on'}
+                                               onChange={(e) => changeHandler(e, eaData.accordion[item].status.name)}/>
+                                        <span className="slider"></span>
+                                    </label>}
                             </h4>
                         </span>
                             <i className={item === eaState.modalAccordion ? 'ea-dash-icon ea-dropdown rotate-180' : 'ea-dash-icon ea-dropdown'}></i>

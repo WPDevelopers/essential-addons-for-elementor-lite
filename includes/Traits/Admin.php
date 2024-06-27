@@ -1382,6 +1382,10 @@ trait Admin {
 									    'label'       => __( 'File Type Fields:', 'essential-addons-for-elementor-lite' ),
 									    'placeholder' => __( 'Field 1, Field 2 ...', 'essential-addons-for-elementor-lite' ),
 								    ]
+							    ],
+							    'status' => [
+								    'name'  => 'lr_custom_profile_fields',
+								    'value' => get_option( 'eael_custom_profile_fields', '' ),
 							    ]
 						    ],
 					    ],
