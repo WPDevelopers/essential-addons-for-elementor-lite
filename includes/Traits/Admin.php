@@ -1368,7 +1368,7 @@ trait Admin {
 						    'customFields'   => [
 							    'title'  => __( 'Enable Custom Fields', 'essential-addons-for-elementor-lite' ),
 							    'icon'   => 'images/customfield.svg',
-//							    'info'   => __( 'Fields will be available on both the edit profile page and the EA Login | Register Form.', 'essential-addons-for-elementor-lite' ),
+							    'info'   => __( 'Fields will be available on both the edit profile page and the EA Login | Register Form.', 'essential-addons-for-elementor-lite' ),
 							    'fields' => [
 								    [
 									    'name'        => 'lr_custom_profile_fields_text',
