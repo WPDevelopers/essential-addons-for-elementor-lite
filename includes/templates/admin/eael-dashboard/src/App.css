@@ -2647,6 +2647,7 @@ input::placeholder {
   -webkit-box-shadow: 0 20px 36px 0 #00012314;
   box-shadow: 0 20px 36px 0 #00012314;
   position: relative;
+  overflow: hidden;
 }
 
 .toaster-content::after {
@@ -2654,32 +2655,33 @@ input::placeholder {
   position: absolute;
   bottom: 0;
   left: 0;
+  width: 100%;
   height: 3px;
   border-radius: 0 0 3px 3px;
-  background-image: linear-gradient(90deg, #52CB98 0%, #FFFFFF 100%);
+  background-image: linear-gradient(90deg, #FFFFFF, #52CB98 50%, #FFFFFF);
   animation: slide 2s 1;
   animation-fill-mode: forwards;
 }
 
 @keyframes slide {
   from{
-    right: 100%;
+    transform: translateX(-100%);
   }
   to {
-    right: 0%;
+    transform: translateX(100%);
   }
 }
 
 .toaster-content.ea__success::after {
-  background-image: linear-gradient(90deg, #52CB98 0%, #FFFFFF 100%);
+  background-image: linear-gradient(90deg, #FFFFFF, #52CB98 50%, #FFFFFF);
 }
 
 .toaster-content.ea__warning::after {
-  background-image: linear-gradient(90deg, #FFB545 0%, #FFFFFF 100%);
+  background-image: linear-gradient(90deg, #FFFFFF, #FFB545 50%, #FFFFFF);
 }
 
 .toaster-content.ea__error::after {
-  background-image: linear-gradient(90deg, #FF3E3E 0%, #FFFFFF 100%);
+  background-image: linear-gradient(90deg, #FFFFFF, #FF3E3E 50%, #FFFFFF);
 }
 
 .toaster-content h5 {
