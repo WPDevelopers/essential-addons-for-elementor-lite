@@ -7,7 +7,8 @@ function ModalStyleThree() {
             eaDispatch({type: 'MODAL_ACCORDION', payload: {key: param}});
         },
         changeHandler = (e, key) => {
-            eaDispatch({type: 'MODAL_ON_CHANGE', payload: {key, value: e.target.value}});
+            const value = key === 'lr_custom_profile_fields' ? (e.target.checked ? 'on' : '') : e.target.value;
+            eaDispatch({type: 'MODAL_ON_CHANGE', payload: {key, value}});
         };
 
     return (
