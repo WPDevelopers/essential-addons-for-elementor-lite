@@ -199,11 +199,18 @@ function ContextReducer() {
                         modal: 'close',
                         toasts: true,
                         toastType: 'success',
-                        toastMessage: 'Save Successfully'
+                        toastMessage: 'Save Successfully',
+                        btnLoader: ''
                     };
                 }
 
-                return {...state, toasts: true, toastType: 'error', toastMessage: 'Failed to save modal data'};
+                return {
+                    ...state,
+                    toasts: true,
+                    toastType: 'error',
+                    toastMessage: 'Failed to save modal data',
+                    btnLoader: ''
+                };
             case 'SAVE_ELEMENTS_DATA':
                 params = {
                     action: 'save_settings_with_ajax',

@@ -1929,6 +1929,9 @@ section.ea__modal-wrapper {
   color: var(--base-background);
   background: var(--base-color-75);
   border: 1px solid var(--base-color-75);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .ea__modal-close-btn {
