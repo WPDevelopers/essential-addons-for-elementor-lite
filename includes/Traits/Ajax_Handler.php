@@ -979,8 +979,6 @@ trait Ajax_Handler {
 
 		if ( isset( $settings['lr_recaptcha_badge_hide'] ) ) {
 			update_option( 'eael_recaptcha_badge_hide', sanitize_text_field( $settings['lr_recaptcha_badge_hide'] ) );
-		} else {
-			update_option( 'eael_recaptcha_badge_hide', '' );
 		}
 
 		if ( isset( $settings['lr_custom_profile_fields'] ) ) {

@@ -7,7 +7,7 @@ function ModalStyleThree() {
             eaDispatch({type: 'MODAL_ACCORDION', payload: {key: param}});
         },
         changeHandler = (e, key) => {
-            const value = key === 'lr_custom_profile_fields' ? (e.target.checked ? 'on' : '') : e.target.value;
+            const value = ['lr_custom_profile_fields', 'lr_recaptcha_badge_hide'].includes(key) ? (e.target.checked ? 'on' : '') : e.target.value;
             eaDispatch({type: 'MODAL_ON_CHANGE', payload: {key, value}});
         };
 
@@ -44,7 +44,9 @@ function ModalStyleThree() {
                         {eaData.accordion[item].fields.map((subItem, subIndex) => {
                             if (subItem?.type === 'checkbox') {
                                 return (<div className="ea__hide-badge flex gap-2" key={subIndex}>
-                                    <input type="checkbox" name={subItem.name}/>
+                                    <input type="checkbox" name={subItem.name}
+                                           checked={eaState.modals[subItem.name] === 'on'}
+                                           onChange={(e) => changeHandler(e, subItem.name)}/>
                                     <label>{subItem.label} {subItem?.info && <i className="ea-dash-icon ea-info"><span
                                         className='ea__tooltip'>{subItem.info}</span></i>}</label>
                                 </div>);

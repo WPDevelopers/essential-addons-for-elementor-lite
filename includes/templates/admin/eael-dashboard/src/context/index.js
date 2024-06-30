@@ -69,7 +69,6 @@ Object.keys(eaData.modal).map((item) => {
             });
 
             if (accordion[subItem]?.status !== undefined) {
-                console.log(subItem, accordion[subItem]);
                 initValue.modals[accordion[subItem]?.status.name] = accordion[subItem]?.status?.value;
             }
         });
