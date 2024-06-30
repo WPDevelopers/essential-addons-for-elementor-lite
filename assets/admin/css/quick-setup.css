@@ -6626,6 +6626,7 @@ section.eael-onboard-main-wrapper {
 
 .features-widget-item a:hover span.eael-tooltip {
     opacity: 1;
+    visibility: visible;
 }
 
 span.eael-tooltip {
@@ -6645,6 +6646,7 @@ span.eael-tooltip {
     background: var(--base-background);
     border-radius: 4px;
     opacity: 0;
+    visibility: hidden;
 }
 
 span.eael-tooltip:after {
