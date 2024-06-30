@@ -206,6 +206,35 @@ span {
   }
 }
 
+.eael_btn_loader {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  position: relative;
+  animation: ea_rotate 1s linear infinite
+}
+.eael_btn_loader::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 3px solid #FFF;
+  animation: eaPrixClipFix 2s linear infinite ;
+}
+
+@keyframes ea_rotate {
+  100%   {transform: rotate(360deg)}
+}
+
+@keyframes eaPrixClipFix {
+  0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
+  25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
+  50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+  75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
+  100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
+}
+
 #ea__dashboard--wrapper {
   font-size: 16px;
   font-family: "Rubik", sans-serif;
