@@ -1,7 +1,7 @@
 import {useReducer} from "react";
 import {ContextProvider, initValue} from '../context'
 import App from "./App.jsx";
-import {eaAjax} from "../helper";
+import {eaAjax, setLsData} from "../helper";
 
 function ContextReducer() {
 
@@ -273,6 +273,7 @@ function ContextReducer() {
             case 'ELEMENTS_CAT':
                 return {...state, elementsActivateCatIndex: payload}
             case 'LIGHT_DARK_TOGGLE':
+                setLsData('isDark', !state.isDark);
                 return {...state, isDark: !state.isDark}
             case 'INSTALL_TEMPLATELY':
                 params = {

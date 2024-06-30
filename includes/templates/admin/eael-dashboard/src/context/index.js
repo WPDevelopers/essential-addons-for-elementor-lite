@@ -1,4 +1,5 @@
 import {createContext, useContext} from "react";
+import {getLsData} from "../helper";
 
 const context = createContext();
 const consumer = () => {
@@ -20,7 +21,7 @@ const eaData = localize.eael_dashboard,
         hiddenLicenseKey: licenseData?.hidden_license_key,
         modals: {},
         elementsActivateCatIndex: 0,
-        isDark: false,
+        isDark: getLsData('isDark', false),
         isTemplatelyInstalled: eaData.is_templately_installed,
         toasts: false,
         modalAccordion: Object.keys(eaData.modal.loginRegisterSetting.accordion)[0],
