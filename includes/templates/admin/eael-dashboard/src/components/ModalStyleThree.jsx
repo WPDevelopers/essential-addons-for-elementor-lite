@@ -43,7 +43,7 @@ function ModalStyleThree() {
                         </div>}
                         {eaData.accordion[item].fields.map((subItem, subIndex) => {
                             if (subItem?.type === 'checkbox') {
-                                return (<div className="ea__hide-badge flex gap-2" key={subIndex}>
+                                return (<div className="ea__hide-badge flex gap-2 items-center" key={subIndex}>
                                     <input type="checkbox" name={subItem.name}/>
                                     <label>{subItem.label} {subItem?.info && <i className="ea-dash-icon ea-info"><span
                                         className='ea__tooltip'>{subItem.info}</span></i>}</label>

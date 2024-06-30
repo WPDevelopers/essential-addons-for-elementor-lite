@@ -1834,6 +1834,7 @@ section.ea__modal-wrapper {
   background: var(--base-background);
   border-radius: 4px;
   opacity: 0;
+  visibility: hidden;
 }
 
 .ea__according-title {
@@ -1962,6 +1963,7 @@ section.ea__modal-wrapper {
 
 .ea__according-content .ea__hide-badge i:hover span.ea__tooltip {
   opacity: 1;
+  visibility: visible;
 }
 
 .ea__according-content .ea__hide-badge i {
@@ -1970,7 +1972,7 @@ section.ea__modal-wrapper {
 }
 
 .ea__according-content .ea__hide-badge i span.ea__tooltip {
-  width: 310px;
+  width: 330px;
   top: -60px;
 }
 
