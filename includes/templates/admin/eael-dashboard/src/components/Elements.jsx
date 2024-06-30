@@ -40,7 +40,8 @@ function Elements() {
             eaDispatch({type: 'ON_SEARCH', payload: {value: results}});
         },
         clickHandler = () => {
-            eaDispatch({type: 'SAVE_ELEMENTS_DATA'});
+            eaDispatch({type: 'BUTTON_LOADER', payload: 'elements'});
+            setTimeout(eaDispatch, 500, {type: 'SAVE_ELEMENTS_DATA'});
         },
         scrollHandler = () => {
             const newScrollY = window.pageYOffset - 32,
@@ -101,7 +102,7 @@ function Elements() {
                         </div>
                         <div className="ea__enable-elements">
                             <div className="toggle-wrapper flex items-center gap-2">
-                                <h5>{checked? i18n.disable_all_elements : i18n.enable_all_elements}</h5>
+                                <h5>{checked ? i18n.disable_all_elements : i18n.enable_all_elements}</h5>
                                 <label className="toggle-wrap">
                                     <input type="checkbox" checked={checked} onChange={changeHandler}/>
                                     <span className="slider"></span>
@@ -125,7 +126,9 @@ function Elements() {
 
 
                 <div className="ea__elements-button-wrap">
-                    <button className="primary-btn install-btn" onClick={clickHandler}>{i18n.save_settings}</button>
+                    <button className="primary-btn install-btn"
+                            onClick={clickHandler}>{i18n.save_settings} {eaState.btnLoader === 'elements' &&
+                        <span className="eael_btn_loader"></span>}</button>
                     <div className="ea__section-overlay">
                     </div>
                 </div>
