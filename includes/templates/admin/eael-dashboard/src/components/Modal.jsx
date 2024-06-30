@@ -17,6 +17,14 @@ function Modal() {
 
             formData.forEach((item, index) => {
                 inputData[index] = item;
+
+                if (index === 'lr_custom_profile_fields_text') {
+                    inputData['lr_custom_profile_fields'] = inputData.lr_custom_profile_fields !== undefined ? inputData.lr_custom_profile_fields : '';
+                }
+
+                if (index === 'lr_recaptcha_language_v3') {
+                    inputData['lr_recaptcha_badge_hide'] = inputData.lr_recaptcha_badge_hide !== undefined ? inputData.lr_recaptcha_badge_hide : '';
+                }
             });
 
             eaDispatch({type: 'SAVE_MODAL_DATA', payload: inputData});

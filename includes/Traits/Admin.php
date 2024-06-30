@@ -50,7 +50,7 @@ trait Admin {
 
 	    if ( isset( $hook ) && $hook == 'toplevel_page_eael-settings' ) {
 		    wp_enqueue_style( 'essential_addons_elementor-admin-icon-css', EAEL_PLUGIN_URL . 'includes/templates/admin/icons/style.css', false, EAEL_PLUGIN_VERSION );
-		    wp_enqueue_style( 'essential_addons_elementor-admin-css', EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.css', false, EAEL_PLUGIN_VERSION );
+		    wp_enqueue_style( 'essential_addons_elementor-admin-css', EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.css', false, time() );
 		    wp_enqueue_script( 'essential_addons_elementor-admin-js', EAEL_PLUGIN_URL . 'assets/admin/js/admin.js', array( 'jquery' ), EAEL_PLUGIN_VERSION, true );
 		    wp_enqueue_script( 'essential_addons_elementor-admin-dashboard', EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.js', array(), time(), true );
 		    add_filter( 'wp_script_attributes', [ $this, 'add_type_attribute' ] );
@@ -1317,6 +1317,13 @@ trait Admin {
 									    'value'       => get_option( 'eael_recaptcha_language_v3', '' ),
 									    'label'       => __( 'Language:', 'essential-addons-for-elementor-lite' ),
 									    'placeholder' => __( 'reCAPTCHA Language Code', 'essential-addons-for-elementor-lite' ),
+								    ],
+								    [
+									    'name'  => 'lr_recaptcha_badge_hide',
+									    'value' => get_option( 'eael_recaptcha_badge_hide', '' ),
+									    'label' => __( 'Hide Badge', 'essential-addons-for-elementor-lite' ),
+									    'type'  => 'checkbox',
+										'info'	=> __( 'We are allowed to hide the badge as long as we include the reCAPTCHA branding visibly in the user flow.', 'essential-addons-for-elementor-lite' ),
 								    ]
 							    ]
 						    ],
@@ -1330,7 +1337,8 @@ trait Admin {
 									    'label'       => __( 'Google Client ID:', 'essential-addons-for-elementor-lite' ),
 									    'placeholder' => __( 'Google Client ID', 'essential-addons-for-elementor-lite' ),
 								    ]
-							    ]
+							    ],
+							    'isPro'  => true
 						    ],
 						    'facebookLogin'  => [
 							    'title'  => __( 'Facebook Login', 'essential-addons-for-elementor-lite' ),
@@ -1348,7 +1356,8 @@ trait Admin {
 									    'label'       => __( 'Facebook App Secret:', 'essential-addons-for-elementor-lite' ),
 									    'placeholder' => __( 'Facebook App Secret', 'essential-addons-for-elementor-lite' ),
 								    ]
-							    ]
+							    ],
+							    'isPro'  => true
 						    ],
 						    'mailchimpLogin' => [
 							    'title'  => __( 'Mailchimp Integration', 'essential-addons-for-elementor-lite' ),
@@ -1360,7 +1369,8 @@ trait Admin {
 									    'label'       => __( 'Mailchimp API Key:', 'essential-addons-for-elementor-lite' ),
 									    'placeholder' => __( 'Mailchimp API', 'essential-addons-for-elementor-lite' ),
 								    ]
-							    ]
+							    ],
+							    'isPro'  => true
 						    ],
 						    'customFields'   => [
 							    'title'  => __( 'Enable Custom Fields', 'essential-addons-for-elementor-lite' ),
@@ -1379,6 +1389,10 @@ trait Admin {
 									    'label'       => __( 'File Type Fields:', 'essential-addons-for-elementor-lite' ),
 									    'placeholder' => __( 'Field 1, Field 2 ...', 'essential-addons-for-elementor-lite' ),
 								    ]
+							    ],
+							    'status' => [
+								    'name'  => 'lr_custom_profile_fields',
+								    'value' => get_option( 'eael_custom_profile_fields', '' ),
 							    ]
 						    ],
 					    ],

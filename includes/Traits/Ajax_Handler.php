@@ -979,14 +979,10 @@ trait Ajax_Handler {
 
 		if ( isset( $settings['lr_recaptcha_badge_hide'] ) ) {
 			update_option( 'eael_recaptcha_badge_hide', sanitize_text_field( $settings['lr_recaptcha_badge_hide'] ) );
-		} else {
-			update_option( 'eael_recaptcha_badge_hide', '' );
 		}
 
 		if ( isset( $settings['lr_custom_profile_fields'] ) ) {
 			update_option( 'eael_custom_profile_fields', sanitize_text_field( $settings['lr_custom_profile_fields'] ) );
-		} else {
-			update_option( 'eael_custom_profile_fields', '' );
 		}
 
 		if ( isset( $settings['lr_custom_profile_fields_text'] ) ) {
