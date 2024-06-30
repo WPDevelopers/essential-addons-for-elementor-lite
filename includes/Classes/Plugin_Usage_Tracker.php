@@ -1080,7 +1080,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							parent.find('label').next('input, textarea').css('display', 'block');
 						});
 						// If we click outside the form, the form will close
-						$('.wpinsights-goodbye-form-bg').on('click',function(){
+						$('.wpinsights-goodbye-form-bg, #wpinsights-goodbye-form > .ea__modal-close-btn').on('click',function(){
 							$("#wpinsights-goodbye-form").fadeOut();
 							$('body').removeClass('wpinsights-form-active-<?php echo esc_attr( $class_plugin_name ); ?>');
 						});
