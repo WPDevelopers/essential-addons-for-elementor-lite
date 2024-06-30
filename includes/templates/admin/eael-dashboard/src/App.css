@@ -207,8 +207,8 @@ span {
 }
 
 .eael_btn_loader {
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   position: relative;
   animation: ea_rotate 1s linear infinite
@@ -219,7 +219,7 @@ span {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  border: 3px solid #FFF;
+  border: 2px solid #FFF;
   animation: eaPrixClipFix 2s linear infinite ;
 }
 

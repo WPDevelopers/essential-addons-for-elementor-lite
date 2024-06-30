@@ -171,6 +171,8 @@ function ContextReducer() {
                 return {...state, otp, licenseError, errorMessage};
             case 'GO_PRO_MODAL':
                 return {...state, modalGoPremium: 'open'}
+            case 'BUTTON_LOADER':
+                return {...state, btnLoader: payload}
             case 'OPEN_MODAL':
                 return {...state, modal: 'open', modalID: payload.key, modalTitle: payload.title}
             case 'CLOSE_MODAL':
@@ -243,7 +245,7 @@ function ContextReducer() {
                     toastMessage = 'Error';
                 }
 
-                return {...state, toasts: true, toastType, toastMessage};
+                return {...state, toasts: true, toastType, toastMessage, btnLoader: ''};
             case 'REGENERATE_ASSETS':
                 params = {
                     action: 'clear_cache_files_with_ajax',
