@@ -1181,6 +1181,7 @@ span.dark-icon {
 
 .ea__icon-wrapper i:hover span.ea__tooltip {
   opacity: 1;
+  visibility: visible;
 }
 
 span.ea__tooltip:after {
@@ -1211,6 +1212,7 @@ span.ea__tooltip {
   background: var(--base-background);
   border-radius: 4px;
   opacity: 0;
+  visibility: hidden;
 }
 
 .ea__content-elements-wrapper {
@@ -1463,10 +1465,12 @@ span.select-details {
   background: var(--base-background);
   border-radius: 4px;
   opacity: 0;
+  visibility: hidden;
 }
 
 .features-widget-item a:hover span.eael-tooltip {
   opacity: 1;
+  visibility: visible;
 }
 
 span.eael-tooltip:after {
