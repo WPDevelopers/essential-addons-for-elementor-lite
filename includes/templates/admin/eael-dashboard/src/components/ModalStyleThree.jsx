@@ -43,7 +43,7 @@ function ModalStyleThree() {
                         </div>}
                         {eaData.accordion[item].fields.map((subItem, subIndex) => {
                             if (subItem?.type === 'checkbox') {
-                                return (<div className="ea__hide-badge flex gap-2" key={subIndex}>
+                                return (<div className="ea__hide-badge flex gap-2 items-center" key={subIndex}>
                                     <input type="checkbox" name={subItem.name}
                                            checked={eaState.modals[subItem.name] === 'on'}
                                            onChange={(e) => changeHandler(e, subItem.name)}/>
