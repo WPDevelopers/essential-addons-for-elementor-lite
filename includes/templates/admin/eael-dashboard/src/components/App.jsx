@@ -11,9 +11,14 @@ import Modal from "./Modal.jsx";
 import '../App.css'
 import ModalGoPremium from "./ModalGoPremium.jsx";
 import Toasts from "./Toasts.jsx";
+import {useEffect} from "react";
 
 function App() {
     const {eaState} = consumer();
+
+    useEffect(() => {
+        document.body.classList.toggle('eael_dark_mode');
+    }, [eaState.isDark]);
 
     return (
         <>
