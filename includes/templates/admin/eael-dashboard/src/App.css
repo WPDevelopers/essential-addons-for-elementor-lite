@@ -97,7 +97,6 @@ span {
 }
 
 :root {
-  $mode-base: #FFFFFF;
   --page-background: #F5F6FC;
   --base-background: #FFFFFF;
   --background-1: #F9EFFB;
@@ -145,65 +144,62 @@ span {
   --modal-bg-3: #F7F8FF;
   --modal-bg-4: #F9F9F9;
   --modal-bg-5: #F3F7FF;
-
   --mode-switcher-icon: "\e905";
+}
+
+body.eael_dash_dark_mode {
+  --page-background: #09090A;
+  --base-background: #18191B;
+  --background-1: #F9EFFB;
+  --background-2: #2C213A;
+  --background-3: #182741;
+  --background-4: #182B23;
+  --background-5: #12B76A;
+  --background-6: #FFAD4C;
+  --background-7: #5262EE;
+  --background-8: #18191B;
+  --background-9: #101112;
+  --background-10: #18191B;
+  --background-11: #101112;
+  --background-12: #18191B;
+  --background-13: #09090A;
+  --background-14: #09090A;
+  --label-color: #1F2125;
+  --label-color-fill: #7F56D9;
+  --base-color-50: #750EF4;
+  --base-color-75: #6F0AF2;
+  --base-color-100: #FF9437;
+  --text-color-25: #FFFFFF;
+  --text-color-50: #D0D5DD;
+  --text-color-100: #B1B4B9;
+  --text-color-150: #937998;
+  --text-color-200: #1570EF;
+  --text-color-500: #1F2125;
+  --text-icon-100: #667085;
+  --text-icon-200: #2E90FA;
+  --text-icon-300: #00C567;
+  --text-icon-400: #AFB6C0;
+  --text-icon-500: #667085;
+  --text-icon-active: #E1C9FF;
+  --border-color-base: #1F2125;
+  --border-color-2: #2A2D33;
+  --border-color-3: #ED7206;
+  --border-color-4: #18191B;
+  --shadow-color-1: #18191B00;
+  --shadow-color-6: #1018280F;
+  --shadow-color-8: #00012314;
+  --shadow-color-10: #1018281A;
+  --shadow-color-12: #1B212C1F;
+  --modal-bg-base: #09090A;
+  --modal-bg-2: #09090A;
+  --modal-bg-3: #09090A;
+  --modal-bg-4: #09090A;
+  --modal-bg-5: #09090A;
+  --mode-switcher-icon: "\e903";
 }
 
 #ea__dashboard--wrapper {
   font-family: "Rubik", sans-serif;
-
-  &.ea-dark-mode {
-    $mode-base: #000000;
-    --page-background: #09090A;
-    --base-background: #18191B;
-    --background-1: #F9EFFB;
-    --background-2: #2C213A;
-    --background-3: #182741;
-    --background-4: #182B23;
-    --background-5: #12B76A;
-    --background-6: #FFAD4C;
-    --background-7: #5262EE;
-    --background-8: #18191B;
-    --background-9: #101112;
-    --background-10: #18191B;
-    --background-11: #101112;
-    --background-12: #18191B;
-    --background-13: #09090A;
-    --background-14: #09090A;
-    --label-color: #1F2125;
-    --label-color-fill: #7F56D9;
-    --base-color-50: #750EF4;
-    --base-color-75: #6F0AF2;
-    --base-color-100: #FF9437;
-    --text-color-25: #FFFFFF;
-    --text-color-50: #D0D5DD;
-    --text-color-100: #B1B4B9;
-    --text-color-150: #937998;
-    --text-color-200: #1570EF;
-    --text-color-500: #1F2125;
-    --text-icon-100: #667085;
-    --text-icon-200: #2E90FA;
-    --text-icon-300: #00C567;
-    --text-icon-400: #AFB6C0;
-    --text-icon-500: #667085;
-    --text-icon-active: #E1C9FF;
-    --border-color-base: #1F2125;
-    --border-color-2: #2A2D33;
-    --border-color-3: #ED7206;
-    --border-color-4: #18191B;
-    --shadow-color-1: #18191B00;
-    --shadow-color-6: #1018280F;
-    --shadow-color-8: #00012314;
-    --shadow-color-10: #1018281A;
-    --shadow-color-12: #1B212C1F;
-    --modal-bg-base: #09090A;
-    --modal-bg-2: #09090A;
-    --modal-bg-3: #09090A;
-    --modal-bg-4: #09090A;
-    --modal-bg-5: #09090A;
-
-    --mode-switcher-icon: "\e903";
-  }
 }
 
 .eael_btn_loader {

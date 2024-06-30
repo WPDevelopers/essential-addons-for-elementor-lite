@@ -17,13 +17,12 @@ function App() {
     const {eaState} = consumer();
 
     useEffect(() => {
-        document.body.classList.toggle('eael_dark_mode');
+        eaState.isDark ? document.body.classList.add('eael_dash_dark_mode') : document.body.classList.remove('eael_dash_dark_mode');
     }, [eaState.isDark]);
 
     return (
         <>
-            <section id="ea__dashboard--wrapper"
-                     className={eaState.isDark ? 'ea__dashboard--wrapper ea-dark-mode' : 'ea__dashboard--wrapper'}>
+            <section id="ea__dashboard--wrapper" className="ea__dashboard--wrapper">
                 <Header/>
                 <section
                     className={eaState.menu === 'Elements' ? 'ea__section-wrapper ea__main-wrapper flex' : 'ea__section-wrapper ea__main-wrapper flex gap-4'}>
