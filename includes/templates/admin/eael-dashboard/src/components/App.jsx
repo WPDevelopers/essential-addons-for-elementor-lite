@@ -14,7 +14,8 @@ import Toasts from "./Toasts.jsx";
 import {useEffect} from "react";
 
 function App() {
-    const {eaState} = consumer();
+    const {eaState} = consumer(),
+        eaData = localize.eael_dashboard;
 
     useEffect(() => {
         eaState.isDark ? document.body.classList.add('eael_dash_dark_mode') : document.body.classList.remove('eael_dash_dark_mode');
@@ -22,6 +23,11 @@ function App() {
 
     return (
         <>
+            <div id="eael-admin-promotion-message" className="eael-admin-promotion-message">
+                <i className="e-notice__dismiss eael-admin-promotion-close" role="button" aria-label="Dismiss"
+                   tabIndex="0"></i>
+                <p dangerouslySetInnerHTML={{__html: eaData.admin_screen_promo.content}}></p>
+            </div>
             <section id="ea__dashboard--wrapper" className="ea__dashboard--wrapper">
                 <Header/>
                 <section

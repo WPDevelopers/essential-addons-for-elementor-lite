@@ -1323,7 +1323,7 @@ trait Admin {
 									    'value' => get_option( 'eael_recaptcha_badge_hide', '' ),
 									    'label' => __( 'Hide Badge', 'essential-addons-for-elementor-lite' ),
 									    'type'  => 'checkbox',
-										'info'	=> __( 'We are allowed to hide the badge as long as we include the reCAPTCHA branding visibly in the user flow.', 'essential-addons-for-elementor-lite' ),
+									    'info'  => __( 'We are allowed to hide the badge as long as we include the reCAPTCHA branding visibly in the user flow.', 'essential-addons-for-elementor-lite' ),
 								    ]
 							    ]
 						    ],
@@ -1401,6 +1401,10 @@ trait Admin {
 						    'url'  => '#'
 					    ]
 				    ]
+			    ],
+			    'admin_screen_promo'      => [
+				    'display' => true,
+				    'content'    => sprintf( __( "<p> <i>📣</i> NEW: Essential Addons 5.9 is here, with new '<a target='_blank' href='%s'>Woo Product List</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/woo-product-list/' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) )
 			    ]
 		    ];
 
