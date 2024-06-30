@@ -227,7 +227,7 @@ function ContextReducer() {
                     toastMessage = 'Failed to Save Elements';
                 }
 
-                return {...state, toasts: true, toastType, toastMessage};
+                return {...state, toasts: true, toastType, toastMessage, btnLoader: ''};
             case 'SAVE_TOOLS':
                 params = {
                     action: 'save_settings_with_ajax',
