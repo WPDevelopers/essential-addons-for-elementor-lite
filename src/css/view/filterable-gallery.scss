@@ -480,6 +480,10 @@ body.rtl {
 }
 
 /*--- Video Gallery ---*/
+iframe.eael-video-gallery-on + .mfp-bottom-bar {
+	margin-top: 0;
+}
+
 .gallery-item-thumbnail-wrap {
 	position: relative;
 }
