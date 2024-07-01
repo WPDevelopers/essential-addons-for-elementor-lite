@@ -283,40 +283,85 @@ trait Admin {
 				    'list' => [
 					    [
 						    'heading' => __( 'Protected Content', 'essential-addons-for-elementor-lite' ),
-						    'content' => __( 'Restrict access to important data of your website by setting up user permissions', 'essential-addons-for-elementor-lite' ),
+						    'content' => __( 'Restrict important data by setting up user permission or giving passwords to a particular area.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => '#'
+							    'url'   => 'https://essential-addons.com/elementor/protected-content/'
 						    ],
 						    'image'   => 'images/img-5.png'
 					    ],
 					    [
 						    'heading' => __( 'Smart Post List', 'essential-addons-for-elementor-lite' ),
-						    'content' => __( 'Restrict access to important data of your website by setting up user permissions', 'essential-addons-for-elementor-lite' ),
+						    'content' => __( 'Display your blog posts in an amazing grid layout with advanced search & filter options.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => '#'
+							    'url'   => 'https://essential-addons.com/elementor/post-list/'
 						    ],
 						    'image'   => 'images/img-6.png'
 					    ],
 					    [
 						    'heading' => __( 'Woo Product Slider', 'essential-addons-for-elementor-lite' ),
-						    'content' => __( 'Restrict access to important data of your website by setting up user permissions', 'essential-addons-for-elementor-lite' ),
+						    'content' => __( 'Showcase your WooCommerce products beautifully with amazing ready slider layouts.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => '#'
+							    'url'   => 'https://essential-addons.com/elementor/woo-product-slider/'
 						    ],
 						    'image'   => 'images/img-5.png'
 					    ],
 					    [
-						    'heading' => __( 'Smart Post List', 'essential-addons-for-elementor-lite' ),
-						    'content' => __( 'Restrict access to important data of your website by setting up user permissions', 'essential-addons-for-elementor-lite' ),
+						    'heading' => __( 'Post Carousel', 'essential-addons-for-elementor-lite' ),
+						    'content' => __( 'Dynamic Gallery lets you showcase images in an interactive format. Display posts and WooCommerce products with advanced customization.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => '#'
+							    'url'   => 'https://essential-addons.com/elementor/protected-content/'
+						    ],
+						    'image'   => 'images/img-5.png'
+					    ],
+					    [
+						    'heading' => __( 'Instagram Feed', 'essential-addons-for-elementor-lite' ),
+						    'content' => __( 'Allows you to display a beautiful & responsive feed of your latest Instagram posts with customizable options and stunning layouts.', 'essential-addons-for-elementor-lite' ),
+						    'button'  => [
+							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
+							    'url'   => 'https://essential-addons.com/elementor/post-list/'
 						    ],
 						    'image'   => 'images/img-6.png'
 					    ],
+					    [
+						    'heading' => __( 'Custom JS', 'essential-addons-for-elementor-lite' ),
+						    'content' => __( 'Add custom JavaScript to your WordPress site effortlessly with advanced customization and functionality without modifying core files.', 'essential-addons-for-elementor-lite' ),
+						    'button'  => [
+							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
+							    'url'   => 'https://essential-addons.com/elementor/woo-product-slider/'
+						    ],
+						    'image'   => 'images/img-5.png'
+					    ],
+					    [
+						    'heading' => __( 'MailChimp', 'essential-addons-for-elementor-lite' ),
+						    'content' => __( 'Helps you easily connect your site with MailChimp. You can create and manage subscription forms directly on your website.', 'essential-addons-for-elementor-lite' ),
+						    'button'  => [
+							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
+							    'url'   => 'https://essential-addons.com/elementor/protected-content/'
+						    ],
+						    'image'   => 'images/img-5.png'
+					    ],
+					    [
+						    'heading' => __( 'Advanced Google Map', 'essential-addons-for-elementor-lite' ),
+						    'content' => __( 'Integrates Google Maps to display locations, routes, and markers easily on your site as your preferences.', 'essential-addons-for-elementor-lite' ),
+						    'button'  => [
+							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
+							    'url'   => 'https://essential-addons.com/elementor/post-list/'
+						    ],
+						    'image'   => 'images/img-6.png'
+					    ],
+					    [
+						    'heading' => __( 'Dynamic Gallery', 'essential-addons-for-elementor-lite' ),
+						    'content' => __( 'Showcase posts, Woo Products and more images in a captivating and interactive gallery format to highlight visual content dynamically.', 'essential-addons-for-elementor-lite' ),
+						    'button'  => [
+							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
+							    'url'   => 'https://essential-addons.com/elementor/woo-product-slider/'
+						    ],
+						    'image'   => 'images/img-5.png'
+					    ]
 				    ]
 			    ],
 			    'enhance_experience'      => [
@@ -335,11 +380,11 @@ trait Admin {
 			    'explore_pro_features'    => [
 				    'heading' => __( "Get Access to Advanced Features!", 'essential-addons-for-elementor-lite' ),
 				    'content' => __( "Discover the premium features of the most popular elements library for Elementor. Experience the web building experience with:", 'essential-addons-for-elementor-lite' ),
-					'list'		=> [
-						__( 'Customization Flexibility in Design with Premium Creative Elements.', 'essential-addons-for-elementor-lite' ),
-						__( 'Advanced WooCommerce Widgets like Checkout, Cross-Sells & more.', 'essential-addons-for-elementor-lite' ),
-						__( 'Cutting-edge Extensions Like Custom JS, Content Protection & more.', 'essential-addons-for-elementor-lite' ),
-					],
+				    'list'    => [
+					    __( 'Customization Flexibility in Design with Premium Creative Elements.', 'essential-addons-for-elementor-lite' ),
+					    __( 'Advanced WooCommerce Widgets like Checkout, Cross-Sells & more.', 'essential-addons-for-elementor-lite' ),
+					    __( 'Cutting-edge Extensions Like Custom JS, Content Protection & more.', 'essential-addons-for-elementor-lite' ),
+				    ],
 				    'image'   => 'images/img-3.png',
 				    'button'  => [
 					    'label' => __( 'View Changelog', 'essential-addons-for-elementor-lite' ),
