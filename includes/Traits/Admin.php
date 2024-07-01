@@ -146,21 +146,21 @@ trait Admin {
 			    ],
 			    'community_box'           => [
 				    [
-					    'heading'    => __( 'GitHub & Support', 'essential-addons-for-elementor-lite' ),
-					    'content'    => __( 'Encountering a problem? Seek assistance through live chat or by submitting.', 'essential-addons-for-elementor-lite' ),
+					    'heading'    => __( 'Need Any Help?', 'essential-addons-for-elementor-lite' ),
+					    'content'    => __( 'If you encounter any issues or need assistance, we are here to help. You can report specific issues or bugs directly on our GitHub issues page.', 'essential-addons-for-elementor-lite' ),
 					    'button'     => [
-						    'label' => __( 'Create Ticket', 'essential-addons-for-elementor-lite' ),
-						    'url'   => '#'
+						    'label' => __( 'Create a Ticket', 'essential-addons-for-elementor-lite' ),
+						    'url'   => 'https://wpdeveloper.com/support/'
 					    ],
 					    'icon'       => 'ea-github',
 					    'icon_color' => 'eaicon-1'
 				    ],
 				    [
-					    'heading'    => __( 'Join Community', 'essential-addons-for-elementor-lite' ),
-					    'content'    => __( 'Encountering a problem? Seek assistance through live chat or by submitting.', 'essential-addons-for-elementor-lite' ),
+					    'heading'    => __( 'Join Our Community', 'essential-addons-for-elementor-lite' ),
+					    'content'    => __( 'Join the Facebook community & discuss with fellow developers & users to get attached to the community people & stay updated.', 'essential-addons-for-elementor-lite' ),
 					    'button'     => [
 						    'label' => __( 'Join with us', 'essential-addons-for-elementor-lite' ),
-						    'url'   => '#'
+						    'url'   => 'https://www.facebook.com/groups/essentialaddons/'
 					    ],
 					    'icon'       => 'ea-community',
 					    'icon_color' => 'eaicon-2'
