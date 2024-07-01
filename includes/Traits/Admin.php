@@ -372,7 +372,7 @@ trait Admin {
 				    ]
 			    ],
 			    'extensions'              => [
-				    'heading' => __( 'Premium Extensions', 'essential-addons-for-elementor-lite' ),
+				    'heading' => __( 'Advanced Extensions', 'essential-addons-for-elementor-lite' ),
 				    'list'    => [
 					    'section-parallax'    => [
 						    'key'         => 'section-parallax',
@@ -945,7 +945,7 @@ trait Admin {
 						    ],
 						    'price-menu'     => [
 							    'key'         => 'price-menu',
-							    'title'       => __( 'Price menu', 'essential-addons-for-elementor-lite' ),
+							    'title'       => __( 'Price Menu', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/elementor/price-menu/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/price-menu/',
 							    'is_pro'      => true,
