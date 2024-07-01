@@ -199,7 +199,7 @@ function ContextReducer() {
                         modal: 'close',
                         toasts: true,
                         toastType: 'success',
-                        toastMessage: 'Save Successfully',
+                        toastMessage: eaData.i18n.toaster_success_msg,
                         btnLoader: ''
                     };
                 }
@@ -208,7 +208,7 @@ function ContextReducer() {
                     ...state,
                     toasts: true,
                     toastType: 'error',
-                    toastMessage: 'Failed to save modal data',
+                    toastMessage: eaData.i18n.toaster_error_msg,
                     btnLoader: ''
                 };
             case 'SAVE_ELEMENTS_DATA':
@@ -228,10 +228,10 @@ function ContextReducer() {
 
                 if (response?.success) {
                     toastType = 'success';
-                    toastMessage = 'Elements Save Successfully';
+                    toastMessage = eaData.i18n.toaster_success_msg;
                 } else {
                     toastType = 'error';
-                    toastMessage = 'Failed to Save Elements';
+                    toastMessage = eaData.i18n.toaster_error_msg;
                 }
 
                 return {...state, toasts: true, toastType, toastMessage, btnLoader: ''};
@@ -246,10 +246,10 @@ function ContextReducer() {
 
                 if (response?.success) {
                     toastType = 'success';
-                    toastMessage = 'Success';
+                    toastMessage = eaData.i18n.toaster_success_msg;
                 } else {
                     toastType = 'error';
-                    toastMessage = 'Error';
+                    toastMessage = eaData.i18n.toaster_error_msg;
                 }
 
                 return {...state, toasts: true, toastType, toastMessage, btnLoader: ''};
