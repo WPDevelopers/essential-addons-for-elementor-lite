@@ -333,12 +333,17 @@ trait Admin {
 				    ]
 			    ],
 			    'explore_pro_features'    => [
-				    'heading' => __( "Explore Premiere Pro features", 'essential-addons-for-elementor-lite' ),
-				    'content' => __( "Learn all about the tools and techniques you can use to edit videos, animate titles, add effects, mix sound, and more.", 'essential-addons-for-elementor-lite' ),
+				    'heading' => __( "Get Access to Advanced Features!", 'essential-addons-for-elementor-lite' ),
+				    'content' => __( "Discover the premium features of the most popular elements library for Elementor. Experience the web building experience with:", 'essential-addons-for-elementor-lite' ),
+					'list'		=> [
+						__( 'Customization Flexibility in Design with Premium Creative Elements.', 'essential-addons-for-elementor-lite' ),
+						__( 'Advanced WooCommerce Widgets like Checkout, Cross-Sells & more.', 'essential-addons-for-elementor-lite' ),
+						__( 'Cutting-edge Extensions Like Custom JS, Content Protection & more.', 'essential-addons-for-elementor-lite' ),
+					],
 				    'image'   => 'images/img-3.png',
 				    'button'  => [
 					    'label' => __( 'View Changelog', 'essential-addons-for-elementor-lite' ),
-					    'url'   => '#',
+					    'url'   => 'https://essential-addons.com/elementor/changelog/',
 					    'icon'  => 'ea-link'
 				    ]
 			    ],
