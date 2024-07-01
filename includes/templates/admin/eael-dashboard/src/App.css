@@ -679,6 +679,32 @@ input:focus {
   display: none;
 }
 
+.e-notice__dismiss.eael-admin-promotion-close {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  font-size: .8125rem;
+  background: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50% !important;
+  inset-inline-end: 10px;
+  transform: translateY(-50%);
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  font-style: normal;
+}
+
+.eael-admin-promotion-message p {
+  font-size: 14px;
+  text-align: center;
+  padding-right: 20px;
+}
+
 /*-------- general-nav ------------*/
 
 .ea__sidebar-nav-list {
