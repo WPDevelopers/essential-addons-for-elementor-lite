@@ -135,13 +135,13 @@ trait Admin {
 			    'templately_promo'        => [
 				    'heading' => __( 'Unlock 5000+ Ready Templates', 'essential-addons-for-elementor-lite' ),
 				    'list'    => [
-					    __( 'Stunning, Ready Website Templates', 'essential-addons-for-elementor-lite' ),
-					    __( 'Add Team Members & Collaborate', 'essential-addons-for-elementor-lite' ),
-					    __( 'Cloud With Templately WorkSpace', 'essential-addons-for-elementor-lite' ),
+					    __( 'Stunning Website Templates For All Niche', 'essential-addons-for-elementor-lite' ),
+					    __( 'One-Click Full Site Import Feature', 'essential-addons-for-elementor-lite' ),
+					    __( 'Collaborate With Team Members in WorkSpace', 'essential-addons-for-elementor-lite' ),
+					    __( 'Unlimited Cloud Storage', 'essential-addons-for-elementor-lite' ),
 				    ],
 				    'button'  => [
-					    'label' => __( 'Install templately', 'essential-addons-for-elementor-lite' ),
-					    'url'   => '#'
+					    'label' => __( 'Install templately', 'essential-addons-for-elementor-lite' )
 				    ]
 			    ],
 			    'community_box'           => [
