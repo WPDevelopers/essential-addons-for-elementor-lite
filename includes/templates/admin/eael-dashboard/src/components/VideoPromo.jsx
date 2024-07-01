@@ -9,11 +9,9 @@ function VideoPromo(props) {
                 <div className='video-promo-wrapper flex justify-between items-center gap-4'>
                     <div className="templates-content">
                         <h2>Get Started with Essential Addons for Elementor</h2>
-                        <p className='mb-6'>Get ready to enhance your Elementor site building experience by using 90+ Essential Addons elements & extensions.</p>
-                        <a href="#">
-                            <button className="primary-btn install-btn">
-                                YouTube Tutorials
-                            </button>
+                        <p className='mb-6'>Thank you for choosing Essential Addons. Get ready to enhance your Elementor site-building experience with 100+ powerful elements & extensions from Essential Addons.</p>
+                        <a href="https://www.youtube.com/playlist?list=PLWHp1xKHCfxC7JeWSg31vtVbLHGzfxDvh">
+                            <button className="primary-btn install-btn">Watch & Learn</button>
                         </a>
                     </div>
                     <div className="templates-img">
