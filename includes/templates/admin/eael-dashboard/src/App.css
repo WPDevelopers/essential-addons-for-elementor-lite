@@ -113,6 +113,7 @@ span {
   --background-12: #FFFEFC;
   --background-13: #F9FAFB;
   --background-14: #F5F1FF;
+  --background-15: #FFFCF5;
   --label-color: #EAECF0;
   --label-color-fill: #7F56D9;
   --base-color-50: #750EF4;
@@ -159,11 +160,12 @@ body.eael_dash_dark_mode {
   --background-7: #5262EE;
   --background-8: #18191B;
   --background-9: #101112;
-  --background-10: #18191B;
+  --background-10: #17111D;
   --background-11: #101112;
   --background-12: #18191B;
   --background-13: #09090A;
   --background-14: #09090A;
+  --background-15: #09090A;
   --label-color: #1F2125;
   --label-color-fill: #7F56D9;
   --base-color-50: #750EF4;
@@ -2572,7 +2574,7 @@ input::placeholder {
 
 .ea__license-verify {
   padding: 24px;
-  background: #FFFCF5;
+  background: var(--background-15);
   border-radius: 8px;
   margin-top: 24px;
   display: flex;
