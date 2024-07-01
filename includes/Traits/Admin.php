@@ -176,22 +176,14 @@ trait Admin {
 					    'icon_color' => 'eaicon-3'
 				    ],
 				    [
-					    'heading'    => __( 'Automatic Updates & Priority Support', 'essential-addons-for-elementor-lite' ),
-					    'content'    => __( 'LoremGet access to automatic updates & keep your website up-to-date with constantly developing features. Having any trouble?', 'essential-addons-for-elementor-lite' ),
-					    'button'     => [
-						    'label' => __( 'Learn More', 'essential-addons-for-elementor-lite' ),
-						    'url'   => '#'
-					    ],
+					    'heading'    => __( 'Continuous Features & Security Updates', 'essential-addons-for-elementor-lite' ),
+					    'content'    => __( 'Keep your website secure and up-to-date with regular security updates. Enjoy the convenience of continuous updates with exciting new features.', 'essential-addons-for-elementor-lite' ),
 					    'icon'       => 'ea-support',
 					    'icon_color' => 'eaicon-1'
 				    ],
 				    [
-					    'heading'    => __( 'Automatic Updates & Priority Support', 'essential-addons-for-elementor-lite' ),
-					    'content'    => __( 'LoremGet access to automatic updates & keep your website up-to-date with constantly developing features. Having any trouble?', 'essential-addons-for-elementor-lite' ),
-					    'button'     => [
-						    'label' => __( 'Learn More', 'essential-addons-for-elementor-lite' ),
-						    'url'   => '#'
-					    ],
+					    'heading'    => __( 'Priority Support', 'essential-addons-for-elementor-lite' ),
+					    'content'    => __( 'Are you encountering issues? Do not worry! Our expert support team is available 24/7 through live chat or support tickets. Our team will reach out to you within 12-24 hours.', 'essential-addons-for-elementor-lite' ),
 					    'icon'       => 'ea-docs',
 					    'icon_color' => 'eaicon-1'
 				    ]
