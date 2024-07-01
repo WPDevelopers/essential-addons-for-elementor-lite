@@ -120,15 +120,16 @@ trait Admin {
 				    'all_widgets'          => __( 'All Widgets', 'essential-addons-for-elementor-lite' ),
 			    ],
 			    'whats_new'               => [
-				    'heading' => __( 'What is New on Version?', 'essential-addons-for-elementor-lite' ),
+				    'heading' => __( "What's New In Essential Addons 6.0?", 'essential-addons-for-elementor-lite' ),
 				    'list'    => [
-					    __( 'EA Fancy Chart Symbol display option in the fancy chart', 'essential-addons-for-elementor-lite' ),
-					    __( 'EA Instagram Feed Feed is getting broken on the front-end view', 'essential-addons-for-elementor-lite' ),
-					    __( 'EA Woo Product Carouse Option to hide and show add to cart', 'essential-addons-for-elementor-lite' ),
+					    __( 'EA Dynamic Tags allow you to display content dynamically from posts, users and custom fields.', 'essential-addons-for-elementor-lite' ),
+					    __( 'EA Conditional Display lets you show contents based on specific conditions.', 'essential-addons-for-elementor-lite' ),
+					    __( 'EA Hover Interactions add engaging effects when users hover over elements.', 'essential-addons-for-elementor-lite' ),
+					    __( 'Interactive Animation brings dynamic, user-responsive animations to your website.', 'essential-addons-for-elementor-lite' ),
 				    ],
 				    'button'  => [
 					    'label' => __( 'View Changelog', 'essential-addons-for-elementor-lite' ),
-					    'url'   => '#'
+					    'url'   => 'https://essential-addons.com/changelog/'
 				    ]
 			    ],
 			    'templately_promo'        => [
