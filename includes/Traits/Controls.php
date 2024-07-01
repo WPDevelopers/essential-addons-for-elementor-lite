@@ -1462,6 +1462,36 @@ trait Controls
             );
         }
 
+        //Only show for "Post Grid" widget
+        if( 'eael-post-grid' === $wb->get_name() ) {
+            $image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/post-grid-';
+            $wb->add_control(
+                'eael_post_grid_preset_style',
+                [
+                    'label'       => esc_html__( 'Select Style', 'essential-addons-for-elementor-lite' ),
+                    'type'        => Controls_Manager::CHOOSE,
+                    'options'     => [
+                        'one' => [
+                            'title' => esc_html__('Default', 'essential-addons-for-elementor-lite'),
+                            'image' => $image_path . 'one.png'
+                        ],
+                        'two' => [
+                            'title' => esc_html__('Two', 'essential-addons-for-elementor-lite'),
+                            'image' => $image_path . 'two.png'
+                        ],
+                        'three' => [
+                            'title' => esc_html__('Three', 'essential-addons-for-elementor-lite'),
+                            'image' => $image_path . 'three.png'
+                        ],
+                    ],
+                    'default'     => 'one',
+                    'label_block' => true,
+                    'toggle'      => false,
+                    'image_choose'=> true,
+                ]
+            );
+        }
+
         if ( 'eael-post-carousel' === $wb->get_name() 
             || 'eael-post-grid' === $wb->get_name()
             || 'eael-post-block' === $wb->get_name()
@@ -1540,25 +1570,6 @@ trait Controls
 			        ]
 		        );
 	        }
-
-            //Only show for "Post Grid" widget
-            if( 'eael-post-grid' === $wb->get_name() ) {
-                $wb->add_control(
-                    'eael_post_grid_preset_style',
-                    [
-                        'label'   => __('Select Terms Style', 'essential-addons-for-elementor-lite'),
-                        'type'    => Controls_Manager::SELECT,
-                        'options' => [
-                            'two'   => __('Style One', 'essential-addons-for-elementor-lite'),
-                            'three' => __('Style Two', 'essential-addons-for-elementor-lite'),
-                        ],
-                        'default' => 'two',
-                        'condition' => [
-                            'eael_show_post_terms' => $eael_show_post_terms_child_condition['eael_show_post_terms'],
-                        ]
-                    ]
-                );
-            }
 
             $wb->add_control(
                 'eael_post_terms',
