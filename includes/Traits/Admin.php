@@ -320,15 +320,15 @@ trait Admin {
 				    ]
 			    ],
 			    'enhance_experience'      => [
-				    'heading' => __( "Enhance Your Elementor Experience By <br/> <b>Unlocking</b> <span class='Advance-color'>35+ Advanced PRO</span> <b>Elements</b>", 'essential-addons-for-elementor-lite' ),
+				    'heading' => __( "Enhance Your Elementor Experience By <br/> <b>Unlocking</b> <span class='Advance-color'>40+ Advanced PRO</span> <b>Elements</b>", 'essential-addons-for-elementor-lite' ),
 				    'review'  => [
-					    'label' => __( 'Review from Real Users', 'essential-addons-for-elementor-lite' ),
+					    'label' => __( 'Our Users Are Satisfied', 'essential-addons-for-elementor-lite' ),
 					    'score' => __( '5/5', 'essential-addons-for-elementor-lite' ),
 					    'url'   => '#',
 				    ],
 				    'button'  => [
-					    'label' => __( 'Upgrade to PRO', 'essential-addons-for-elementor-lite' ),
-					    'url'   => '#',
+					    'label' => __( 'Upgrade To PRO', 'essential-addons-for-elementor-lite' ),
+					    'url'   => 'https://essential-addons.com/#pricing',
 					    'icon'  => 'ea-crown-1'
 				    ]
 			    ],
