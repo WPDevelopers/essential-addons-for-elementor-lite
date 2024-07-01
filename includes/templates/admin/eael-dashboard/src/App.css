@@ -515,6 +515,7 @@ input:focus {
   line-height: 1.2em;
   border: none;
   border-right: 1px solid var(--label-color);
+  border-radius: 0;
   padding-left: 16px;
   padding-right: 16px;
   width: 220px;
@@ -825,7 +826,7 @@ span.ea__nav-icon svg {
   left: 0;
   right: 0;
   top: 32px;
-  z-index: 9999;
+  z-index: 999;
 }
 
 .ea__header-content {
@@ -1210,6 +1211,8 @@ span.dark-icon {
   border-width: 1px 0px 1px 1px;
   font-size: 20px;
   color: var(--text-icon-100);
+  cursor: pointer;
+  position: relative;
 }
 
 .ea__icon-wrapper.active {
@@ -1228,14 +1231,11 @@ span.dark-icon {
 
 .ea__icon-wrapper i {
   font-size: 20px;
-  padding: 4px;
   color: var(--text-icon-100);
-  position: relative;
-  cursor: pointer;
   transition: all .30s ease-in-out;
 }
 
-.ea__icon-wrapper i:hover span.ea__tooltip {
+.ea__icon-wrapper:hover span.ea__tooltip {
   opacity: 1;
   visibility: visible;
 }
@@ -1254,7 +1254,7 @@ span.ea__tooltip:after {
 span.ea__tooltip {
   position: absolute;
   left: 50%;
-  top: -40px;
+  top: -20px;
   transform: translate(-50%);
   min-width: 175px;
   font-size: 12px;
@@ -1267,6 +1267,7 @@ span.ea__tooltip {
   box-shadow: 0px 8px 16px -2px var(--shadow-color-12);
   background: var(--base-background);
   border-radius: 4px;
+  z-index: 9999;
   opacity: 0;
   visibility: hidden;
 }
@@ -1322,7 +1323,7 @@ span.ea__tooltip {
 
 .content-btn {
   font-size: 11px;
-  line-height: .9em;
+  line-height: 10px;
   font-weight: 500;
   color: var(--base-background);
   text-transform: uppercase;
@@ -3012,7 +3013,6 @@ input::placeholder {
 
   .ea__icon-wrapper i {
     font-size: 15px;
-    padding: 2px;
   }
 
   #ea__dashboard--wrapper h3.ea__content-title {
