@@ -197,15 +197,15 @@ trait Admin {
 				    ]
 			    ],
 			    'sidebar_box'             => [
-				    'heading' => __( 'Unlimited Features', 'essential-addons-for-elementor-lite' ),
-				    'content' => __( 'Supercharge your content schedule and', 'essential-addons-for-elementor-lite' ),
+				    'heading' => __( 'Want Advanced Features?', 'essential-addons-for-elementor-lite' ),
+				    'content' => __( 'Get more powerful Widgets & Extensions to elevate your experience of creating a beautiful Elementor website.', 'essential-addons-for-elementor-lite' ),
 				    'review'  => [
 					    'label' => __( 'Review from Real Users', 'essential-addons-for-elementor-lite' ),
 					    'score' => __( '5/5', 'essential-addons-for-elementor-lite' ),
 				    ],
 				    'button'  => [
 					    'label' => __( 'Upgrade to PRO', 'essential-addons-for-elementor-lite' ),
-					    'url'   => '#',
+					    'url'   => 'https://essential-addons.com/#pricing',
 					    'icon'  => 'ea-crown-1'
 				    ]
 			    ],
