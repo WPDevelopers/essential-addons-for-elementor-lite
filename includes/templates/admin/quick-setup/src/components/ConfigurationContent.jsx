@@ -70,7 +70,7 @@ function ConfigurationContent({activeTab, handleTabChange}) {
                 <h4>{__("Advanced", "essential-addons-for-elementor-lite")}</h4>
                 <p>
                   {__(
-                    "Build complex websites with these functionalities of Essential Addons. All dynamic elements will be activated in this option.",
+                    "Build complex websites with the advanced functionalities of Essential Addons. All dynamic elements will be activated in this option.",
                     "essential-addons-for-elementor-lite"
                   )}
                 </p>
