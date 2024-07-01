@@ -27,7 +27,8 @@ function Modal() {
                 }
             });
 
-            eaDispatch({type: 'SAVE_MODAL_DATA', payload: inputData});
+            eaDispatch({type: 'BUTTON_LOADER', payload: 'modal'});
+            setTimeout(eaDispatch, 500, {type: 'SAVE_MODAL_DATA', payload: inputData});
         },
         eaData = localize.eael_dashboard.modal;
 
@@ -50,7 +51,8 @@ function Modal() {
                             <a className="ea__api-link"
                                href={eaData[eaState.modalID].link.url}>{eaData[eaState.modalID].link.text}</a>}
                         <div className='flex flex-end flex-1'>
-                            <button className="ea__modal-btn">Save</button>
+                            <button className="ea__modal-btn">Save {eaState.btnLoader === 'modal' &&
+                                <span className="eael_btn_loader"></span>}</button>
                         </div>
                     </div>
                     <div className="ea__modal-close-btn" onClick={clickHandler}>

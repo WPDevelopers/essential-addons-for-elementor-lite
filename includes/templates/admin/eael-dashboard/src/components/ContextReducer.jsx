@@ -1,7 +1,7 @@
 import {useReducer} from "react";
 import {ContextProvider, initValue} from '../context'
 import App from "./App.jsx";
-import {eaAjax} from "../helper";
+import {eaAjax, setLsData} from "../helper";
 
 function ContextReducer() {
 
@@ -171,6 +171,8 @@ function ContextReducer() {
                 return {...state, otp, licenseError, errorMessage};
             case 'GO_PRO_MODAL':
                 return {...state, modalGoPremium: 'open'}
+            case 'BUTTON_LOADER':
+                return {...state, btnLoader: payload}
             case 'OPEN_MODAL':
                 return {...state, modal: 'open', modalID: payload.key, modalTitle: payload.title}
             case 'CLOSE_MODAL':
@@ -197,11 +199,18 @@ function ContextReducer() {
                         modal: 'close',
                         toasts: true,
                         toastType: 'success',
-                        toastMessage: 'Save Successfully'
+                        toastMessage: eaData.i18n.toaster_success_msg,
+                        btnLoader: ''
                     };
                 }
 
-                return {...state, toasts: true, toastType: 'error', toastMessage: 'Failed to save modal data'};
+                return {
+                    ...state,
+                    toasts: true,
+                    toastType: 'error',
+                    toastMessage: eaData.i18n.toaster_error_msg,
+                    btnLoader: ''
+                };
             case 'SAVE_ELEMENTS_DATA':
                 params = {
                     action: 'save_settings_with_ajax',
@@ -219,13 +228,13 @@ function ContextReducer() {
 
                 if (response?.success) {
                     toastType = 'success';
-                    toastMessage = 'Elements Save Successfully';
+                    toastMessage = eaData.i18n.toaster_success_msg;
                 } else {
                     toastType = 'error';
-                    toastMessage = 'Failed to Save Elements';
+                    toastMessage = eaData.i18n.toaster_error_msg;
                 }
 
-                return {...state, toasts: true, toastType, toastMessage};
+                return {...state, toasts: true, toastType, toastMessage, btnLoader: ''};
             case 'SAVE_TOOLS':
                 params = {
                     action: 'save_settings_with_ajax',
@@ -237,13 +246,13 @@ function ContextReducer() {
 
                 if (response?.success) {
                     toastType = 'success';
-                    toastMessage = 'Success';
+                    toastMessage = eaData.i18n.toaster_success_msg;
                 } else {
                     toastType = 'error';
-                    toastMessage = 'Error';
+                    toastMessage = eaData.i18n.toaster_error_msg;
                 }
 
-                return {...state, toasts: true, toastType, toastMessage};
+                return {...state, toasts: true, toastType, toastMessage, btnLoader: ''};
             case 'REGENERATE_ASSETS':
                 params = {
                     action: 'clear_cache_files_with_ajax',
@@ -264,6 +273,7 @@ function ContextReducer() {
             case 'ELEMENTS_CAT':
                 return {...state, elementsActivateCatIndex: payload}
             case 'LIGHT_DARK_TOGGLE':
+                setLsData('isDark', !state.isDark);
                 return {...state, isDark: !state.isDark}
             case 'INSTALL_TEMPLATELY':
                 params = {

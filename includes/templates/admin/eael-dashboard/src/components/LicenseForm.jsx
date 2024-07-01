@@ -26,7 +26,7 @@ function LicenseForm() {
                     <button
                         className={eaState.licenseStatus === 'valid' ? 'primary-btn install-btn deactivated' : 'primary-btn install-btn'}
                         onClick={submitHandler}
-                        disabled={eaState.otp === true}>{eaState.licenseStatus === 'valid' ? "Deactivate" : "Active License"}
+                        disabled={eaState.otp === true}>{eaState.licenseStatus === 'valid' ? "Deactivate" : "Activate License"}
                     </button>
                 </div>
                 {isLicenseError &&

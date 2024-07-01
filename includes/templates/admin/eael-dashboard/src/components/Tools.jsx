@@ -5,9 +5,13 @@ function Tools() {
     const eaData = localize.eael_dashboard.tools,
         i18n = localize.eael_dashboard.i18n,
         selectRef = useRef(),
-        {eaDispatch} = consumer(),
+        {eaState, eaDispatch} = consumer(),
         saveHandler = () => {
-            eaDispatch({type: 'SAVE_TOOLS', payload: {key: eaData.box_3.name, value: selectRef.current.value}});
+            eaDispatch({type: 'BUTTON_LOADER', payload: 'tools'});
+            setTimeout(eaDispatch, 500, {
+                type: 'SAVE_TOOLS',
+                payload: {key: eaData.box_3.name, value: selectRef.current.value}
+            });
         },
         clickHandler = () => {
             eaDispatch({type: 'REGENERATE_ASSETS'});
@@ -27,7 +31,8 @@ function Tools() {
                                 <p>{eaData.box_1.content}</p>
                             </div>
                         </div>
-                        <button className="primary-btn changelog-btn" onClick={clickHandler}>{eaData.box_1.button.label}</button>
+                        <button className="primary-btn changelog-btn"
+                                onClick={clickHandler}>{eaData.box_1.button.label}</button>
                     </div>
                     <div className="ea__connect-others flex gap-4 justify-between items-start">
                         <div className="flex gap-4 flex-1">
@@ -58,7 +63,8 @@ function Tools() {
                     </div>
                     <div className="flex flex-end mb-5">
                         <button className="primary-btn install-btn flex flex-end mb-6"
-                                onClick={saveHandler}>{i18n.save_settings} <span className="eael_btn_loader"></span></button>
+                                onClick={saveHandler}>{i18n.save_settings} {eaState.btnLoader === 'tools' &&
+                            <span className="eael_btn_loader"></span>}</button>
                     </div>
                 </div>
             </div>

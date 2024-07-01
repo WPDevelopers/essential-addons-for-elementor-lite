@@ -10,7 +10,8 @@ function Extensions() {
             eaDispatch({type: 'ON_CHANGE_ALL', payload: {key: 'extensionAll', value: e.target.checked}});
         },
         clickHandler = () => {
-            eaDispatch({type: 'SAVE_ELEMENTS_DATA'});
+            eaDispatch({type: 'BUTTON_LOADER', payload: 'extensions'});
+            setTimeout(eaDispatch, 500, {type: 'SAVE_ELEMENTS_DATA'});
         };
 
     return (
@@ -38,7 +39,8 @@ function Extensions() {
                     </div>
                     <div className="ea__section-wrapper flex flex-end mb-5">
                         <button className="primary-btn install-btn flex flex-end mb-6"
-                                onClick={clickHandler}>{i18n.save_settings}</button>
+                                onClick={clickHandler}>{i18n.save_settings} {eaState.btnLoader === 'extensions' &&
+                            <span className="eael_btn_loader"></span>}</button>
                     </div>
                 </div>
             </div>

@@ -30,7 +30,18 @@ const debouncer = (callback, delay) => {
         }
 
         return JSON.parse(request.responseText);
+    },
+    getData = (key = null, defaultValue = undefined) => {
+        const data = localStorage.getItem('eael_dashboard') ? JSON.parse(localStorage.getItem('eael_dashboard')) : {};
+        return key ? data?. [key] ?? defaultValue : data;
+    },
+    setData = (key, val) => {
+        let data = getData();
+        data[key] = val;
+        localStorage.setItem('eael_dashboard', JSON.stringify(data));
     };
 
 export const debounce = debouncer;
 export const eaAjax = eaXMLHttpRequest;
+export const getLsData = getData;
+export const setLsData = setData;
