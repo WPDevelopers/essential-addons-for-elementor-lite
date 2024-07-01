@@ -198,8 +198,11 @@ body.eael_dash_dark_mode {
   --mode-switcher-icon: "\e903";
 }
 
+body,
 #ea__dashboard--wrapper {
+  font-size: 16px;
   font-family: "Rubik", sans-serif;
+  background: var(--page-background);
 }
 
 .eael_btn_loader {
