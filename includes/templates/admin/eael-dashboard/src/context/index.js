@@ -25,7 +25,8 @@ const eaData = localize.eael_dashboard,
         isTemplatelyInstalled: eaData.is_templately_installed,
         toasts: false,
         modalAccordion: Object.keys(eaData.modal.loginRegisterSetting.accordion)[0],
-        btnLoader: ''
+        btnLoader: '',
+        optinPromo: eaData.admin_screen_promo.display
     };
 
 Object.keys(eaData.integration_box.list).map((item) => {

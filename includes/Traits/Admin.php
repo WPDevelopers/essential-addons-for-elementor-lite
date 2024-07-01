@@ -1403,8 +1403,8 @@ trait Admin {
 				    ]
 			    ],
 			    'admin_screen_promo'      => [
-				    'display' => true,
-				    'content'    => sprintf( __( "<p> <i>📣</i> NEW: Essential Addons 5.9 is here, with new '<a target='_blank' href='%s'>Woo Product List</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/woo-product-list/' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) )
+				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
+				    'content' => sprintf( __( "<p> <i>📣</i> NEW: Essential Addons 6.0 is here, with new '<a target='_blank' href='%s'>Woo Product List</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/woo-product-list/' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) )
 			    ]
 		    ];
 
