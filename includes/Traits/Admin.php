@@ -166,11 +166,11 @@ trait Admin {
 					    'icon_color' => 'eaicon-2'
 				    ],
 				    [
-					    'heading'    => __( 'View knowledgebase', 'essential-addons-for-elementor-lite' ),
-					    'content'    => __( 'Get started by spending some time with the documentation', 'essential-addons-for-elementor-lite' ),
+					    'heading'    => __( 'View Knowledge Base', 'essential-addons-for-elementor-lite' ),
+					    'content'    => __( 'Read our comprehensive documentation and learn to build a stunning website easily with Essential Addons for Elementor.', 'essential-addons-for-elementor-lite' ),
 					    'button'     => [
-						    'label' => __( 'View Docs', 'essential-addons-for-elementor-lite' ),
-						    'url'   => '#'
+						    'label' => __( 'Read Documentation', 'essential-addons-for-elementor-lite' ),
+						    'url'   => 'https://essential-addons.com/docs/'
 					    ],
 					    'icon'       => 'ea-docs',
 					    'icon_color' => 'eaicon-3'
