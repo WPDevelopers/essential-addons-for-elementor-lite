@@ -1218,7 +1218,7 @@ span.dark-icon {
 .ea__icon-wrapper.active {
   background: linear-gradient(180deg, var(--base-background) 15%, var(--page-background) 100%);
   border-width: 2px 0 0 0;
-  border-color: var(--base-color-50);
+  border-top-color: var(--base-color-50);
 }
 
 .ea__icon-wrapper.active i {
@@ -1235,7 +1235,7 @@ span.dark-icon {
   transition: all .30s ease-in-out;
 }
 
-.ea__icon-wrapper:hover span.ea__tooltip {
+.ea__icon-wrapper i:hover span.ea__tooltip {
   opacity: 1;
   visibility: visible;
 }
