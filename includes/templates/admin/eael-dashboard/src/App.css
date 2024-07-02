@@ -1217,8 +1217,19 @@ span.dark-icon {
 
 .ea__icon-wrapper.active {
   background: linear-gradient(180deg, var(--base-background) 15%, var(--page-background) 100%);
-  border-width: 2px 0 0 0;
-  border-top-color: var(--base-color-50);
+  border-color: var(--page-background);
+  border-width: 0 0 1px 1px;
+}
+
+.ea__icon-wrapper.active:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--base-color-50);
 }
 
 .ea__icon-wrapper.active i {
