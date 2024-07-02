@@ -1327,8 +1327,12 @@ span.ea__tooltip {
   font-weight: 500;
   color: var(--base-background);
   text-transform: uppercase;
-  padding: 4px 4px 3px;
+  padding: 0 4px 0;
   border-radius: 4px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .content-btn.updated {
