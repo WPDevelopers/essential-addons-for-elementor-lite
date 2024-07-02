@@ -14,51 +14,51 @@ function IntegrationContent({
   let plugin_list = integrations_content?.plugin_list;
 
   const handleIntegrationSwitch = async (event, plugin) => {
-    const action = plugin.local_plugin_data === false ? 'install' : 'activate';
-    const identifier = action === 'install' ? plugin.slug : plugin.basename;
+    const isChecked = event.target.checked;
+    
+    const isActionInstall = plugin.local_plugin_data === false;
+   
+    const action = isActionInstall ? 'install' : ( isChecked ? 'activate' : 'deactivate' );
+    const identifier = isActionInstall ? plugin.slug : plugin.basename;
 
     let requestData = {
-      action: action === 'install' ? 'wpdeveloper_install_plugin' : 'wpdeveloper_activate_plugin',
+      action: `wpdeveloper_${action}_plugin`,
       security: localize.nonce,
     };
-    requestData[action === 'install' ? 'slug' : 'basename'] = identifier;
+    requestData[isActionInstall ? 'slug' : 'basename'] = identifier;
 
-    const button = event.target
+    const label = event.target
       .closest('.eael-integration-footer')
-      .querySelector('.wpdeveloper-plugin-installer');
+      .querySelector('.toggle-label');
 
-    if (button) {
-      button.disabled = true;
-      button.textContent = action === 'install' ? 'Installing...' : 'Activating...';
+    if (label) {
+      label.textContent = 'Processing...';
 
       try {
-        const response = await axios.post(localize.ajaxurl, requestData);
+        const response = await fetch(localize.ajaxurl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: new URLSearchParams(requestData).toString(),
+        });
 
-        if (response.data.success) {
-          button.textContent = 'Activated';
-          button.dataset.action = 'completed';
+        const result = await response.json();
 
-          if (
-            (pagenow === 'admin_page_eael-setup-wizard' &&
-              button.classList.contains('eael-quick-setup-next-button')) ||
-            (pagenow === 'toplevel_page_eael-settings' &&
-              button.classList.contains('eael-dashboard-templately-install-btn'))
-          ) {
-            button.textContent = 'Enabled Templates';
-          }
+        if (result.success) {
+          label.textContent = isChecked ? 'Deactivate' : 'Activate';
+
           document.body.dispatchEvent(
             new CustomEvent('eael_after_active_plugin', {
               detail: { plugin: identifier },
             })
           );
         } else {
-          button.textContent = action === 'install' ? 'Install' : 'Activate';
-          button.disabled = false;
+          label.textContent = isChecked ? 'Activate' : 'Deactivate';
         }
       } catch (error) {
-        console.log(error.response.data);
-        button.textContent = action === 'install' ? 'Install' : 'Activate';
-        button.disabled = false;
+        console.log(error);
+        label.textContent = isChecked ? 'Activate' : 'Deactivate';
       }
     }
   };
@@ -166,11 +166,9 @@ function IntegrationContent({
                 <p>{plugin.desc}</p>
                 <div className="integration-settings flex justify-between items-center">
                   <h5 className="toggle-label">
-                    {plugin.local_plugin_data === false
-                      ? __("Install", "essential-addons-for-elementor-lite")
-                      : plugin.is_active
-                      ? __("Activated", "essential-addons-for-elementor-lite")
-                      : __("Activate", "essential-addons-for-elementor-lite")}
+                    {plugin.local_plugin_data === false || ( ! plugin.is_active )
+                      ? __("Activate", "essential-addons-for-elementor-lite")
+                      : __("Deactivate", "essential-addons-for-elementor-lite")}
                   </h5>
                   <button
                     className="wpdeveloper-plugin-installer eael-quick-setup-wpdeveloper-plugin-installer eael-d-none"
