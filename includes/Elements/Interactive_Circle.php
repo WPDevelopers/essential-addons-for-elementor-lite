@@ -208,6 +208,15 @@ class Interactive_Circle extends Widget_Base {
 			]
 		);
 
+		$repeater->add_control( 'eael_interactive_circle_btn_link_mess', [
+			'type'            => Controls_Manager::RAW_HTML,
+			'raw'             => __( 'To view the detailed content, select <strong>Additional Settings -> Mouse Event -> Hover</strong>', 'essential-addons-for-elementor-lite' ),
+			'content_classes' => 'eael-warning',
+			'condition' => [
+				'eael_interactive_circle_btn_link_on' => 'yes',
+			]
+		] );
+
 		$repeater->add_control(
             'eael_interactive_circle_btn_link',
             [
