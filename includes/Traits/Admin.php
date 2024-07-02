@@ -1455,10 +1455,9 @@ trait Admin {
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),
 				    'content' => __( 'Upgrade to Essential Addons PRO and gain access to advanced elements and functionalities to build websites more efficiently', 'essential-addons-for-elementor-lite' ),
 				    'list'    => [
-					    __( 'EA Fancy Chart Symbol display', 'essential-addons-for-elementor-lite' ),
-					    __( 'EA Instagram Feed Feed is getting', 'essential-addons-for-elementor-lite' ),
-					    __( 'EA Instagram Feed Feed is getting', 'essential-addons-for-elementor-lite' ),
-					    __( 'EA Instagram Feed Feed is getting', 'essential-addons-for-elementor-lite' ),
+					    __( 'Customization Flexibility in Design with Premium Creative Elements.', 'essential-addons-for-elementor-lite' ),
+					    __( 'Advanced WooCommerce Widgets like Checkout, Cross-Sells & more.', 'essential-addons-for-elementor-lite' ),
+					    __( 'Cutting-edge Extensions Like Custom JS, Content Protection & more.', 'essential-addons-for-elementor-lite' )
 				    ],
 				    'button'  => [
 					    'label' => __( 'Upgrade to PRO', 'essential-addons-for-elementor-lite' ),
