@@ -280,7 +280,7 @@ trait Admin {
 						    'content' => __( 'Restrict important data by setting up user permission or giving passwords to a particular area.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => 'https://essential-addons.com/elementor/protected-content/'
+							    'url'   => 'https://essential-addons.com/protected-content/'
 						    ],
 						    'image'   => 'images/img-5.png'
 					    ],
@@ -289,7 +289,7 @@ trait Admin {
 						    'content' => __( 'Display your blog posts in an amazing grid layout with advanced search & filter options.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => 'https://essential-addons.com/elementor/post-list/'
+							    'url'   => 'https://essential-addons.com/post-list/'
 						    ],
 						    'image'   => 'images/img-6.png'
 					    ],
@@ -298,7 +298,7 @@ trait Admin {
 						    'content' => __( 'Showcase your WooCommerce products beautifully with amazing ready slider layouts.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => 'https://essential-addons.com/elementor/woo-product-slider/'
+							    'url'   => 'https://essential-addons.com/woo-product-slider/'
 						    ],
 						    'image'   => 'images/img-5.png'
 					    ],
@@ -307,7 +307,7 @@ trait Admin {
 						    'content' => __( 'Dynamic Gallery lets you showcase images in an interactive format. Display posts and WooCommerce products with advanced customization.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => 'https://essential-addons.com/elementor/protected-content/'
+							    'url'   => 'https://essential-addons.com/post-carousel/'
 						    ],
 						    'image'   => 'images/img-5.png'
 					    ],
@@ -316,7 +316,7 @@ trait Admin {
 						    'content' => __( 'Allows you to display a beautiful & responsive feed of your latest Instagram posts with customizable options and stunning layouts.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => 'https://essential-addons.com/elementor/post-list/'
+							    'url'   => 'https://essential-addons.com/instagram-feed/'
 						    ],
 						    'image'   => 'images/img-6.png'
 					    ],
@@ -325,7 +325,7 @@ trait Admin {
 						    'content' => __( 'Add custom JavaScript to your WordPress site effortlessly with advanced customization and functionality without modifying core files.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => 'https://essential-addons.com/elementor/woo-product-slider/'
+							    'url'   => '#'
 						    ],
 						    'image'   => 'images/img-5.png'
 					    ],
@@ -334,7 +334,7 @@ trait Admin {
 						    'content' => __( 'Helps you easily connect your site with MailChimp. You can create and manage subscription forms directly on your website.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => 'https://essential-addons.com/elementor/protected-content/'
+							    'url'   => 'https://essential-addons.com/mailchimp/'
 						    ],
 						    'image'   => 'images/img-5.png'
 					    ],
@@ -343,7 +343,7 @@ trait Admin {
 						    'content' => __( 'Integrates Google Maps to display locations, routes, and markers easily on your site as your preferences.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => 'https://essential-addons.com/elementor/post-list/'
+							    'url'   => 'https://essential-addons.com/advanced-google-map/'
 						    ],
 						    'image'   => 'images/img-6.png'
 					    ],
@@ -352,7 +352,7 @@ trait Admin {
 						    'content' => __( 'Showcase posts, Woo Products and more images in a captivating and interactive gallery format to highlight visual content dynamically.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => 'https://essential-addons.com/elementor/woo-product-slider/'
+							    'url'   => 'https://essential-addons.com/dynamic-gallery/'
 						    ],
 						    'image'   => 'images/img-5.png'
 					    ]
