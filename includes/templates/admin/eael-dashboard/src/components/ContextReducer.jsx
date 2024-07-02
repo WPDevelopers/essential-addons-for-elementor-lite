@@ -288,6 +288,15 @@ function ContextReducer() {
                 }
 
                 return {...state, isTemplatelyInstalled: true}
+            case 'CLOSE_ADMIN_PROMOTION':
+                params = {
+                    action: 'eael_admin_promotion',
+                    security: localize.nonce
+                };
+
+                eaAjax(params, true);
+
+                return {...state, optinPromo: false}
         }
     }
 
