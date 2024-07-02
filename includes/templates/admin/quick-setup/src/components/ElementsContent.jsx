@@ -36,7 +36,7 @@ function ElementsContent({ activeTab, handleTabChange, showElements, handleShowE
             </div>
           </div>
           <button
-            className="primary-btn changelog-btn flex items-center gap-2 view-all-elements"
+            className="primary-btn changelog-btn flex items-center gap-2 view-all-elements eael-d-none"
             type="button"
             onClick={handleShowElements}
           >
@@ -48,7 +48,7 @@ function ElementsContent({ activeTab, handleTabChange, showElements, handleShowE
           <div id="Content" className="eael-contents">
             {elements_list.map((item, index) => {
               init++;
-              disable = init > 2 ? "eael-d-none" : "";
+              disable = "";
 
               return (
                 <div key={index}>

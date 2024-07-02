@@ -2,7 +2,8 @@ import consumer from "../context";
 
 function TemplatelyPromo() {
     const eaData = localize.eael_dashboard.templately_promo,
-        {eaDispatch} = consumer(),
+        {eaState, eaDispatch} = consumer(),
+        imgSrc = eaState.isDark ? '/images/img-2-dark.png' : '/images/img-2.png',
         clickHandler = () => {
             eaDispatch({type: 'INSTALL_TEMPLATELY'});
         };
@@ -20,15 +21,13 @@ function TemplatelyPromo() {
                             </div>;
                         })}
                     </div>
-                    <a href={eaData.button.url}>
-                        <button className="primary-btn install-btn" onClick={clickHandler}>
-                            <i className="ea-dash-icon ea-install"></i>
-                            {eaData.button.label}
-                        </button>
-                    </a>
+                    <button className="primary-btn install-btn" onClick={clickHandler}>
+                        <i className="ea-dash-icon ea-install"></i>
+                        {eaData.button.label}
+                    </button>
                 </div>
                 <div className="templates-img">
-                    <img src={localize.eael_dashboard.reactPath + '/images/img-2.png'} alt="img"/>
+                    <img src={localize.eael_dashboard.reactPath + imgSrc} alt="img"/>
                 </div>
             </div>
         </>

@@ -11,12 +11,12 @@ function CommunityBox(props) {
                 </div>
                 <h5>{eaData.heading}</h5>
                 <p className="mb-6">{eaData.content}</p>
-                <a href={eaData.button.url}>
+                {eaData.button === undefined || (<a href={eaData.button.url}>
                     <button>
                         <span className="underline">{eaData.button.label}</span>
                         <i className="ea-dash-icon ea-right-arrow"></i>
                     </button>
-                </a>
+                </a>)}
             </div>
         </>
     );

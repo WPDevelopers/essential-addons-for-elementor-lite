@@ -5652,6 +5652,11 @@ a {
     display: inline-flex;
 }
 
+a:focus {
+    box-shadow: none;
+    outline: 0;
+}
+
 img {
     max-width: 100%;
 }
@@ -6772,6 +6777,10 @@ span.title-color-2 {
     background: #FBFCFF;
     border-radius: 8px 8px 0 0;
     border: 1px solid var(--border-color-base);
+}
+
+.eael-integration-header img {
+    max-height: 24px;
 }
 
 .eael-integration-header h5 {

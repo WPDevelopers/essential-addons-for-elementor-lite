@@ -118,163 +118,158 @@ trait Admin {
 				    'save_settings'        => __( 'Save Settings', 'essential-addons-for-elementor-lite' ),
 				    'search_result_for'    => __( 'Search Results for :', 'essential-addons-for-elementor-lite' ),
 				    'all_widgets'          => __( 'All Widgets', 'essential-addons-for-elementor-lite' ),
+				    'toaster_success_msg'  => __( 'Your changes have been saved successfully.', 'essential-addons-for-elementor-lite' ),
+				    'toaster_error_msg'    => __( 'Oops! Something went wrong. Please try again.', 'essential-addons-for-elementor-lite' ),
 			    ],
 			    'whats_new'               => [
-				    'heading' => __( 'What is New on Version?', 'essential-addons-for-elementor-lite' ),
+				    'heading' => __( "What's New In Essential Addons 6.0?", 'essential-addons-for-elementor-lite' ),
 				    'list'    => [
-					    __( 'EA Fancy Chart Symbol display option in the fancy chart', 'essential-addons-for-elementor-lite' ),
-					    __( 'EA Instagram Feed Feed is getting broken on the front-end view', 'essential-addons-for-elementor-lite' ),
-					    __( 'EA Woo Product Carouse Option to hide and show add to cart', 'essential-addons-for-elementor-lite' ),
+					    __( 'EA Dynamic Tags allow you to display content dynamically from posts, users and custom fields.', 'essential-addons-for-elementor-lite' ),
+					    __( 'EA Conditional Display lets you show contents based on specific conditions.', 'essential-addons-for-elementor-lite' ),
+					    __( 'EA Hover Interactions add engaging effects when users hover over elements.', 'essential-addons-for-elementor-lite' ),
+					    __( 'Interactive Animation brings dynamic, user-responsive animations to your website.', 'essential-addons-for-elementor-lite' ),
 				    ],
 				    'button'  => [
 					    'label' => __( 'View Changelog', 'essential-addons-for-elementor-lite' ),
-					    'url'   => '#'
+					    'url'   => 'https://essential-addons.com/changelog/'
 				    ]
 			    ],
 			    'templately_promo'        => [
 				    'heading' => __( 'Unlock 5000+ Ready Templates', 'essential-addons-for-elementor-lite' ),
 				    'list'    => [
-					    __( 'Stunning, Ready Website Templates', 'essential-addons-for-elementor-lite' ),
-					    __( 'Add Team Members & Collaborate', 'essential-addons-for-elementor-lite' ),
-					    __( 'Cloud With Templately WorkSpace', 'essential-addons-for-elementor-lite' ),
+					    __( 'Stunning Website Templates For All Niche', 'essential-addons-for-elementor-lite' ),
+					    __( 'One-Click Full Site Import Feature', 'essential-addons-for-elementor-lite' ),
+					    __( 'Collaborate With Team Members in WorkSpace', 'essential-addons-for-elementor-lite' ),
+					    __( 'Unlimited Cloud Storage', 'essential-addons-for-elementor-lite' ),
 				    ],
 				    'button'  => [
-					    'label' => __( 'Install templately', 'essential-addons-for-elementor-lite' ),
-					    'url'   => '#'
+					    'label' => __( 'Install templately', 'essential-addons-for-elementor-lite' )
 				    ]
 			    ],
 			    'community_box'           => [
 				    [
-					    'heading'    => __( 'GitHub & Support', 'essential-addons-for-elementor-lite' ),
-					    'content'    => __( 'Encountering a problem? Seek assistance through live chat or by submitting.', 'essential-addons-for-elementor-lite' ),
+					    'heading'    => __( 'Need Any Help?', 'essential-addons-for-elementor-lite' ),
+					    'content'    => __( 'If you encounter any issues or need assistance, we are here to help. You can report specific issues or bugs directly on our GitHub issues page.', 'essential-addons-for-elementor-lite' ),
 					    'button'     => [
-						    'label' => __( 'Create Ticket', 'essential-addons-for-elementor-lite' ),
-						    'url'   => '#'
+						    'label' => __( 'Create a Ticket', 'essential-addons-for-elementor-lite' ),
+						    'url'   => 'https://wpdeveloper.com/support/'
 					    ],
 					    'icon'       => 'ea-github',
 					    'icon_color' => 'eaicon-1'
 				    ],
 				    [
-					    'heading'    => __( 'Join Community', 'essential-addons-for-elementor-lite' ),
-					    'content'    => __( 'Encountering a problem? Seek assistance through live chat or by submitting.', 'essential-addons-for-elementor-lite' ),
+					    'heading'    => __( 'Join Our Community', 'essential-addons-for-elementor-lite' ),
+					    'content'    => __( 'Join the Facebook community & discuss with fellow developers & users to get attached to the community people & stay updated.', 'essential-addons-for-elementor-lite' ),
 					    'button'     => [
 						    'label' => __( 'Join with us', 'essential-addons-for-elementor-lite' ),
-						    'url'   => '#'
+						    'url'   => 'https://www.facebook.com/groups/essentialaddons/'
 					    ],
 					    'icon'       => 'ea-community',
 					    'icon_color' => 'eaicon-2'
 				    ],
 				    [
-					    'heading'    => __( 'View knowledgebase', 'essential-addons-for-elementor-lite' ),
-					    'content'    => __( 'Get started by spending some time with the documentation', 'essential-addons-for-elementor-lite' ),
+					    'heading'    => __( 'View Knowledge Base', 'essential-addons-for-elementor-lite' ),
+					    'content'    => __( 'Read our comprehensive documentation and learn to build a stunning website easily with Essential Addons for Elementor.', 'essential-addons-for-elementor-lite' ),
 					    'button'     => [
-						    'label' => __( 'View Docs', 'essential-addons-for-elementor-lite' ),
-						    'url'   => '#'
+						    'label' => __( 'Read Documentation', 'essential-addons-for-elementor-lite' ),
+						    'url'   => 'https://essential-addons.com/docs/'
 					    ],
 					    'icon'       => 'ea-docs',
 					    'icon_color' => 'eaicon-3'
 				    ],
 				    [
-					    'heading'    => __( 'Automatic Updates & Priority Support', 'essential-addons-for-elementor-lite' ),
-					    'content'    => __( 'LoremGet access to automatic updates & keep your website up-to-date with constantly developing features. Having any trouble?', 'essential-addons-for-elementor-lite' ),
-					    'button'     => [
-						    'label' => __( 'Learn More', 'essential-addons-for-elementor-lite' ),
-						    'url'   => '#'
-					    ],
+					    'heading'    => __( 'Continuous Features & Security Updates', 'essential-addons-for-elementor-lite' ),
+					    'content'    => __( 'Keep your website secure and up-to-date with regular security updates. Enjoy the convenience of continuous updates with exciting new features.', 'essential-addons-for-elementor-lite' ),
 					    'icon'       => 'ea-support',
 					    'icon_color' => 'eaicon-1'
 				    ],
 				    [
-					    'heading'    => __( 'Automatic Updates & Priority Support', 'essential-addons-for-elementor-lite' ),
-					    'content'    => __( 'LoremGet access to automatic updates & keep your website up-to-date with constantly developing features. Having any trouble?', 'essential-addons-for-elementor-lite' ),
-					    'button'     => [
-						    'label' => __( 'Learn More', 'essential-addons-for-elementor-lite' ),
-						    'url'   => '#'
-					    ],
+					    'heading'    => __( 'Priority Support', 'essential-addons-for-elementor-lite' ),
+					    'content'    => __( 'Are you encountering issues? Do not worry! Our expert support team is available 24/7 through live chat or support tickets. Our team will reach out to you within 12-24 hours.', 'essential-addons-for-elementor-lite' ),
 					    'icon'       => 'ea-docs',
 					    'icon_color' => 'eaicon-1'
 				    ]
 			    ],
 			    'sidebar_box'             => [
-				    'heading' => __( 'Unlimited Features', 'essential-addons-for-elementor-lite' ),
-				    'content' => __( 'Supercharge your content schedule and', 'essential-addons-for-elementor-lite' ),
+				    'heading' => __( 'Want Advanced Features?', 'essential-addons-for-elementor-lite' ),
+				    'content' => __( 'Get more powerful Widgets & Extensions to elevate your experience of creating a beautiful Elementor website.', 'essential-addons-for-elementor-lite' ),
 				    'review'  => [
 					    'label' => __( 'Review from Real Users', 'essential-addons-for-elementor-lite' ),
 					    'score' => __( '5/5', 'essential-addons-for-elementor-lite' ),
 				    ],
 				    'button'  => [
 					    'label' => __( 'Upgrade to PRO', 'essential-addons-for-elementor-lite' ),
-					    'url'   => '#',
+					    'url'   => 'https://essential-addons.com/#pricing',
 					    'icon'  => 'ea-crown-1'
 				    ]
 			    ],
 			    'integration_box'         => [
-				    'enable'  => __( 'Enable Integration', 'essential-addons-for-elementor-lite' ),
-				    'disable' => __( 'Disable Integration', 'essential-addons-for-elementor-lite' ),
+				    'enable'  => __( 'Activate', 'essential-addons-for-elementor-lite' ),
+				    'disable' => __( 'Deactivate', 'essential-addons-for-elementor-lite' ),
 				    'list'    => [
 					    'bd' => [
 						    'slug'     => 'betterdocs',
 						    'basename' => 'betterdocs/betterdocs.php',
 						    'logo'     => 'images/BD.svg',
 						    'title'    => __( 'BetterDocs', 'essential-addons-for-elementor-lite' ),
-						    'desc'     => __( 'BetterDocs will help you to create & organize your documentation page in a beautiful way that will make your visitors find any help article easily.', 'essential-addons-for-elementor-lite' ),
+						    'desc'     => __( 'Create and organize your knowledge base, FAQ & documentation page efficiently, making it easy for visitors to find any helpful article quickly and effortlessly.', 'essential-addons-for-elementor-lite' ),
 						    'status'   => is_plugin_active( 'betterdocs/betterdocs.php' )
-					    ],
-					    'ep' => [
-						    'slug'     => 'embedpress',
-						    'basename' => 'embedpress/embedpress.php',
-						    'logo'     => 'images/EP.svg',
-						    'title'    => __( 'EmbedPress', 'essential-addons-for-elementor-lite' ),
-						    'desc'     => __( 'EmbedPress lets you embed videos, images, posts, audio, maps and upload PDF, DOC, PPT & all other types of content into your WordPress site. ', 'essential-addons-for-elementor-lite' ),
-						    'status'   => is_plugin_active( 'embedpress/embedpress.php' )
-					    ],
-					    'nx' => [
-						    'slug'     => 'notificationx',
-						    'basename' => 'notificationx/notificationx.php',
-						    'logo'     => 'images/NX.svg',
-						    'title'    => __( 'NotificationX', 'essential-addons-for-elementor-lite' ),
-						    'desc'     => __( 'Best FOMO Social Proof Plugin to boost your sales conversion. Create stunning Sales Popup & Notification Bar With Elementor Support.', 'essential-addons-for-elementor-lite' ),
-						    'status'   => is_plugin_active( 'notificationx/notificationx.php' )
-					    ],
-					    'ej' => [
-						    'slug'     => 'easyjobs',
-						    'basename' => 'easyjobs/easyjobs.php',
-						    'logo'     => 'images/EJ.svg',
-						    'title'    => __( 'easy.jobs', 'essential-addons-for-elementor-lite' ),
-						    'desc'     => __( 'Easy solution for the job recruitment to attract, manage & hire right talent faster. The Best Talent Recruitment Suite which lets you manage jobs & career page in Elementor.', 'essential-addons-for-elementor-lite' ),
-						    'status'   => is_plugin_active( 'easyjobs/easyjobs.php' )
-					    ],
-					    'sp' => [
-						    'slug'     => 'wp-scheduled-posts',
-						    'basename' => 'wp-scheduled-posts/wp-scheduled-posts.php',
-						    'logo'     => 'images/SP.svg',
-						    'title'    => __( 'SchedulePress', 'essential-addons-for-elementor-lite' ),
-						    'desc'     => __( 'Best Content Marketing Tool For WordPress – Schedule, Organize, & Auto Share Blog Posts. Take a quick glance at your content planning with Schedule Calendar, Auto & Manual Scheduler and  more.', 'essential-addons-for-elementor-lite' ),
-						    'status'   => is_plugin_active( 'wp-scheduled-posts/wp-scheduled-posts.php' )
 					    ],
 					    'bl' => [
 						    'slug'     => 'betterlinks',
 						    'basename' => 'betterlinks/betterlinks.php',
 						    'logo'     => 'images/BL.svg',
 						    'title'    => __( 'BetterLinks', 'essential-addons-for-elementor-lite' ),
-						    'desc'     => __( 'Best Link Shortening tool to create, shorten and manage any URL to help you cross-promote your brands & products. Gather analytics reports, run successfully marketing campaigns easily & many more.', 'essential-addons-for-elementor-lite' ),
+						    'desc'     => __( 'Link Shortening tool to create, shorten & manage any URL. It helps to cross promote brands & products and gather analytics reports while running marketing campaigns.', 'essential-addons-for-elementor-lite' ),
 						    'status'   => is_plugin_active( 'betterlinks/betterlinks.php' )
-					    ],
-					    'eb' => [
-						    'slug'     => 'essential-blocks',
-						    'basename' => 'essential-blocks/essential-blocks.php',
-						    'logo'     => 'images/EB.svg',
-						    'title'    => __( 'Essential Blocks', 'essential-addons-for-elementor-lite' ),
-						    'desc'     => __( 'Enhance your Gutenberg experience with 40+ unique blocks (more coming soon). Add power to the block editor using our easy-to-use blocks which are designed to make your next WordPress page or posts design easier and prettier than ever before.', 'essential-addons-for-elementor-lite' ),
-						    'status'   => is_plugin_active( 'essential-blocks/essential-blocks.php' )
 					    ],
 					    'bp' => [
 						    'slug'     => 'better-payment',
 						    'basename' => 'better-payment/better-payment.php',
 						    'logo'     => 'images/BP.svg',
 						    'title'    => __( 'Better Payment', 'essential-addons-for-elementor-lite' ),
-						    'desc'     => __( 'Better Payment streamlines transactions in Elementor, integrating PayPal, Stripe, advanced analytics, validation, and Elementor forms for the most secure & efficient payments.', 'essential-addons-for-elementor-lite' ),
+						    'desc'     => __( 'Streamline transactions in Elementor by integrating PayPal & Stripe. Experience advanced analytics, validation, and Elementor forms for secure & efficient payments.', 'essential-addons-for-elementor-lite' ),
 						    'status'   => is_plugin_active( 'better-payment/better-payment.php' )
+					    ],
+					    'nx' => [
+						    'slug'     => 'notificationx',
+						    'basename' => 'notificationx/notificationx.php',
+						    'logo'     => 'images/NX.svg',
+						    'title'    => __( 'NotificationX', 'essential-addons-for-elementor-lite' ),
+						    'desc'     => __( 'Best FOMO & social proof plugin to boost sales conversion by creating stunning sales popups, growth & discount alerts, flashing tabs, notification bars & more.', 'essential-addons-for-elementor-lite' ),
+						    'status'   => is_plugin_active( 'notificationx/notificationx.php' )
+					    ],
+					    'sp' => [
+						    'slug'     => 'wp-scheduled-posts',
+						    'basename' => 'wp-scheduled-posts/wp-scheduled-posts.php',
+						    'logo'     => 'images/SP.svg',
+						    'title'    => __( 'SchedulePress', 'essential-addons-for-elementor-lite' ),
+						    'desc'     => __( 'Advanced content marketing tool for WordPress to schedule posts & pages with Schedule Calendar, Auto & Manual Scheduler, etc. It also allows auto-social sharing.', 'essential-addons-for-elementor-lite' ),
+						    'status'   => is_plugin_active( 'wp-scheduled-posts/wp-scheduled-posts.php' )
+					    ],
+					    'ej' => [
+						    'slug'     => 'easyjobs',
+						    'basename' => 'easyjobs/easyjobs.php',
+						    'logo'     => 'images/EJ.svg',
+						    'title'    => __( 'easy.jobs', 'essential-addons-for-elementor-lite' ),
+						    'desc'     => __( 'Job recruitment tool to attract, manage, and hire the right talent faster. This talent recruitment solution lets you manage jobs and career pages in Elementor.', 'essential-addons-for-elementor-lite' ),
+						    'status'   => is_plugin_active( 'easyjobs/easyjobs.php' )
+					    ],
+					    'ep' => [
+						    'slug'     => 'embedpress',
+						    'basename' => 'embedpress/embedpress.php',
+						    'logo'     => 'images/EP.svg',
+						    'title'    => __( 'EmbedPress', 'essential-addons-for-elementor-lite' ),
+						    'desc'     => __( 'Embed videos, images, gifs, charts, docs, maps, audio, live streams, pdf & more from 150+ sources into your WordPress site and get seamless customization options.', 'essential-addons-for-elementor-lite' ),
+						    'status'   => is_plugin_active( 'embedpress/embedpress.php' )
+					    ],
+					    'eb' => [
+						    'slug'     => 'essential-blocks',
+						    'basename' => 'essential-blocks/essential-blocks.php',
+						    'logo'     => 'images/EB.svg',
+						    'title'    => __( 'Essential Blocks', 'essential-addons-for-elementor-lite' ),
+						    'desc'     => __( 'Enhance Gutenberg experience with 50+ unique blocks (more coming soon). Boost your block editor with easy-to-use blocks for a simpler WordPress page or post design.', 'essential-addons-for-elementor-lite' ),
+						    'status'   => is_plugin_active( 'essential-blocks/essential-blocks.php' )
 					    ]
 				    ]
 			    ],
@@ -282,62 +277,112 @@ trait Admin {
 				    'list' => [
 					    [
 						    'heading' => __( 'Protected Content', 'essential-addons-for-elementor-lite' ),
-						    'content' => __( 'Restrict access to important data of your website by setting up user permissions', 'essential-addons-for-elementor-lite' ),
+						    'content' => __( 'Restrict important data by setting up user permission or giving passwords to a particular area.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => '#'
+							    'url'   => 'https://essential-addons.com/elementor/protected-content/'
 						    ],
 						    'image'   => 'images/img-5.png'
 					    ],
 					    [
 						    'heading' => __( 'Smart Post List', 'essential-addons-for-elementor-lite' ),
-						    'content' => __( 'Restrict access to important data of your website by setting up user permissions', 'essential-addons-for-elementor-lite' ),
+						    'content' => __( 'Display your blog posts in an amazing grid layout with advanced search & filter options.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => '#'
+							    'url'   => 'https://essential-addons.com/elementor/post-list/'
 						    ],
 						    'image'   => 'images/img-6.png'
 					    ],
 					    [
 						    'heading' => __( 'Woo Product Slider', 'essential-addons-for-elementor-lite' ),
-						    'content' => __( 'Restrict access to important data of your website by setting up user permissions', 'essential-addons-for-elementor-lite' ),
+						    'content' => __( 'Showcase your WooCommerce products beautifully with amazing ready slider layouts.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => '#'
+							    'url'   => 'https://essential-addons.com/elementor/woo-product-slider/'
 						    ],
 						    'image'   => 'images/img-5.png'
 					    ],
 					    [
-						    'heading' => __( 'Smart Post List', 'essential-addons-for-elementor-lite' ),
-						    'content' => __( 'Restrict access to important data of your website by setting up user permissions', 'essential-addons-for-elementor-lite' ),
+						    'heading' => __( 'Post Carousel', 'essential-addons-for-elementor-lite' ),
+						    'content' => __( 'Dynamic Gallery lets you showcase images in an interactive format. Display posts and WooCommerce products with advanced customization.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => '#'
+							    'url'   => 'https://essential-addons.com/elementor/protected-content/'
+						    ],
+						    'image'   => 'images/img-5.png'
+					    ],
+					    [
+						    'heading' => __( 'Instagram Feed', 'essential-addons-for-elementor-lite' ),
+						    'content' => __( 'Allows you to display a beautiful & responsive feed of your latest Instagram posts with customizable options and stunning layouts.', 'essential-addons-for-elementor-lite' ),
+						    'button'  => [
+							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
+							    'url'   => 'https://essential-addons.com/elementor/post-list/'
 						    ],
 						    'image'   => 'images/img-6.png'
 					    ],
+					    [
+						    'heading' => __( 'Custom JS', 'essential-addons-for-elementor-lite' ),
+						    'content' => __( 'Add custom JavaScript to your WordPress site effortlessly with advanced customization and functionality without modifying core files.', 'essential-addons-for-elementor-lite' ),
+						    'button'  => [
+							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
+							    'url'   => 'https://essential-addons.com/elementor/woo-product-slider/'
+						    ],
+						    'image'   => 'images/img-5.png'
+					    ],
+					    [
+						    'heading' => __( 'MailChimp', 'essential-addons-for-elementor-lite' ),
+						    'content' => __( 'Helps you easily connect your site with MailChimp. You can create and manage subscription forms directly on your website.', 'essential-addons-for-elementor-lite' ),
+						    'button'  => [
+							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
+							    'url'   => 'https://essential-addons.com/elementor/protected-content/'
+						    ],
+						    'image'   => 'images/img-5.png'
+					    ],
+					    [
+						    'heading' => __( 'Advanced Google Map', 'essential-addons-for-elementor-lite' ),
+						    'content' => __( 'Integrates Google Maps to display locations, routes, and markers easily on your site as your preferences.', 'essential-addons-for-elementor-lite' ),
+						    'button'  => [
+							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
+							    'url'   => 'https://essential-addons.com/elementor/post-list/'
+						    ],
+						    'image'   => 'images/img-6.png'
+					    ],
+					    [
+						    'heading' => __( 'Dynamic Gallery', 'essential-addons-for-elementor-lite' ),
+						    'content' => __( 'Showcase posts, Woo Products and more images in a captivating and interactive gallery format to highlight visual content dynamically.', 'essential-addons-for-elementor-lite' ),
+						    'button'  => [
+							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
+							    'url'   => 'https://essential-addons.com/elementor/woo-product-slider/'
+						    ],
+						    'image'   => 'images/img-5.png'
+					    ]
 				    ]
 			    ],
 			    'enhance_experience'      => [
-				    'heading' => __( "Enhance Your Elementor Experience By <br/> <b>Unlocking</b> <span class='Advance-color'>35+ Advanced PRO</span> <b>Elements</b>", 'essential-addons-for-elementor-lite' ),
+				    'heading' => __( "Enhance Your Elementor Experience By <br/> <b>Unlocking</b> <span class='Advance-color'>40+ Advanced PRO</span> <b>Elements</b>", 'essential-addons-for-elementor-lite' ),
 				    'review'  => [
-					    'label' => __( 'Review from Real Users', 'essential-addons-for-elementor-lite' ),
+					    'label' => __( 'Our Users Are Satisfied', 'essential-addons-for-elementor-lite' ),
 					    'score' => __( '5/5', 'essential-addons-for-elementor-lite' ),
 					    'url'   => '#',
 				    ],
 				    'button'  => [
-					    'label' => __( 'Upgrade to PRO', 'essential-addons-for-elementor-lite' ),
-					    'url'   => '#',
+					    'label' => __( 'Upgrade To PRO', 'essential-addons-for-elementor-lite' ),
+					    'url'   => 'https://essential-addons.com/#pricing',
 					    'icon'  => 'ea-crown-1'
 				    ]
 			    ],
 			    'explore_pro_features'    => [
-				    'heading' => __( "Explore Premiere Pro features", 'essential-addons-for-elementor-lite' ),
-				    'content' => __( "Learn all about the tools and techniques you can use to edit videos, animate titles, add effects, mix sound, and more.", 'essential-addons-for-elementor-lite' ),
+				    'heading' => __( "Get Access to Advanced Features!", 'essential-addons-for-elementor-lite' ),
+				    'content' => __( "Discover the premium features of the most popular elements library for Elementor. Experience the web building experience with:", 'essential-addons-for-elementor-lite' ),
+				    'list'    => [
+					    __( 'Customization Flexibility in Design with Premium Creative Elements.', 'essential-addons-for-elementor-lite' ),
+					    __( 'Advanced WooCommerce Widgets like Checkout, Cross-Sells & more.', 'essential-addons-for-elementor-lite' ),
+					    __( 'Cutting-edge Extensions Like Custom JS, Content Protection & more.', 'essential-addons-for-elementor-lite' ),
+				    ],
 				    'image'   => 'images/img-3.png',
 				    'button'  => [
 					    'label' => __( 'View Changelog', 'essential-addons-for-elementor-lite' ),
-					    'url'   => '#',
+					    'url'   => 'https://essential-addons.com/elementor/changelog/',
 					    'icon'  => 'ea-link'
 				    ]
 			    ],
@@ -371,7 +416,7 @@ trait Admin {
 				    ]
 			    ],
 			    'extensions'              => [
-				    'heading' => __( 'Premium Extensions', 'essential-addons-for-elementor-lite' ),
+				    'heading' => __( 'Advanced Extensions', 'essential-addons-for-elementor-lite' ),
 				    'list'    => [
 					    'section-parallax'    => [
 						    'key'         => 'section-parallax',
@@ -944,7 +989,7 @@ trait Admin {
 						    ],
 						    'price-menu'     => [
 							    'key'         => 'price-menu',
-							    'title'       => __( 'Price menu', 'essential-addons-for-elementor-lite' ),
+							    'title'       => __( 'Price Menu', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/elementor/price-menu/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/price-menu/',
 							    'is_pro'      => true,
@@ -1323,7 +1368,7 @@ trait Admin {
 									    'value' => get_option( 'eael_recaptcha_badge_hide', '' ),
 									    'label' => __( 'Hide Badge', 'essential-addons-for-elementor-lite' ),
 									    'type'  => 'checkbox',
-										'info'	=> __( 'We are allowed to hide the badge as long as we include the reCAPTCHA branding visibly in the user flow.', 'essential-addons-for-elementor-lite' ),
+									    'info'  => __( 'We are allowed to hide the badge as long as we include the reCAPTCHA branding visibly in the user flow.', 'essential-addons-for-elementor-lite' ),
 								    ]
 							    ]
 						    ],
@@ -1400,6 +1445,24 @@ trait Admin {
 						    'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
 						    'url'  => '#'
 					    ]
+				    ]
+			    ],
+			    'admin_screen_promo'      => [
+				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
+				    'content' => sprintf( __( "<p> <i>📣</i> NEW: Essential Addons 6.0 is here, with new '<a target='_blank' href='%s'>Woo Product List</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/woo-product-list/' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) )
+			    ],
+			    'pro_modal'               => [
+				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),
+				    'content' => __( 'Upgrade to Essential Addons PRO and gain access to advanced elements and functionalities to build websites more efficiently', 'essential-addons-for-elementor-lite' ),
+				    'list'    => [
+					    __( 'EA Fancy Chart Symbol display', 'essential-addons-for-elementor-lite' ),
+					    __( 'EA Instagram Feed Feed is getting', 'essential-addons-for-elementor-lite' ),
+					    __( 'EA Instagram Feed Feed is getting', 'essential-addons-for-elementor-lite' ),
+					    __( 'EA Instagram Feed Feed is getting', 'essential-addons-for-elementor-lite' ),
+				    ],
+				    'button'  => [
+					    'label' => __( 'Upgrade to PRO', 'essential-addons-for-elementor-lite' ),
+					    'url'   => 'https://essential-addons.com/#pricing'
 				    ]
 			    ]
 		    ];
