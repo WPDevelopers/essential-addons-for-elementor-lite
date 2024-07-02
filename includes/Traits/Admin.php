@@ -119,7 +119,7 @@ trait Admin {
 				    'search_result_for'    => __( 'Search Results for :', 'essential-addons-for-elementor-lite' ),
 				    'all_widgets'          => __( 'All Widgets', 'essential-addons-for-elementor-lite' ),
 				    'toaster_success_msg'  => __( 'Your changes have been saved successfully.', 'essential-addons-for-elementor-lite' ),
-				    'toaster_error_msg'	   => __( 'Oops! Something went wrong. Please try again.', 'essential-addons-for-elementor-lite' ),
+				    'toaster_error_msg'    => __( 'Oops! Something went wrong. Please try again.', 'essential-addons-for-elementor-lite' ),
 			    ],
 			    'whats_new'               => [
 				    'heading' => __( "What's New In Essential Addons 6.0?", 'essential-addons-for-elementor-lite' ),
@@ -1450,6 +1450,20 @@ trait Admin {
 			    'admin_screen_promo'      => [
 				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
 				    'content' => sprintf( __( "<p> <i>📣</i> NEW: Essential Addons 6.0 is here, with new '<a target='_blank' href='%s'>Woo Product List</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/woo-product-list/' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) )
+			    ],
+			    'pro_modal'               => [
+				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),
+				    'content' => __( 'Upgrade to Essential Addons PRO and gain access to advanced elements and functionalities to build websites more efficiently', 'essential-addons-for-elementor-lite' ),
+				    'list'    => [
+					    __( 'EA Fancy Chart Symbol display', 'essential-addons-for-elementor-lite' ),
+					    __( 'EA Instagram Feed Feed is getting', 'essential-addons-for-elementor-lite' ),
+					    __( 'EA Instagram Feed Feed is getting', 'essential-addons-for-elementor-lite' ),
+					    __( 'EA Instagram Feed Feed is getting', 'essential-addons-for-elementor-lite' ),
+				    ],
+				    'button'  => [
+					    'label' => __( 'Upgrade to PRO', 'essential-addons-for-elementor-lite' ),
+					    'url'   => 'https://essential-addons.com/#pricing'
+				    ]
 			    ]
 		    ];
 
