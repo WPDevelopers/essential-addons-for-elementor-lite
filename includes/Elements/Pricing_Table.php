@@ -560,9 +560,6 @@ class Pricing_Table extends Widget_Base
                 'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default'      => 'yes',
-                'selectors'    => [
-                    '{{WRAPPER}} .eael-pricing-button' => 'display: inline-block;',
-                ],
             ]
         );
 
