@@ -7,7 +7,7 @@ function LicenseUnlockBox() {
                 </div>
                 <div className="max-w-454">
                     <h4>Unlock With Your License Key</h4>
-                    <p>Just one more step to go!<br/>Enter your license key here, to activate Essential Addons Pro, and get automatic updates and premium support. Visit the <a href="https://essential-addons.com/docs/verify-essential-addons-pro-license-key/">Validation Guide</a> for help.</p>
+                    <p>Enter your license key here, to activate Essential Addons Pro, and get automatic updates and premium support. Visit the <a href="https://essential-addons.com/docs/verify-essential-addons-pro-license-key/">Validation Guide</a> for help.</p>
                 </div>
             </div>
         </>
