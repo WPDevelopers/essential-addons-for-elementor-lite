@@ -3198,6 +3198,7 @@ class Product_Grid extends Widget_Base
 	    $settings['layout_mode']    = $settings["eael_product_grid_layout"];
 	    $widget_id                  = esc_attr( $this->get_id() );
 	    $settings['eael_widget_id'] = $widget_id;
+        $is_product_archive         = is_product_tag() || is_product_category() || is_shop() || is_product_taxonomy();
 
 	    if ( $settings['post_type'] === 'source_dynamic' && is_archive() || ! empty( $_REQUEST['post_type'] ) ) {
 		    $settings['posts_per_page'] = $settings['eael_product_grid_products_count'] ?: 4;
@@ -3269,7 +3270,7 @@ class Product_Grid extends Widget_Base
                 if ( file_exists( $template ) ) {
 	                $settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
 
-                    if( $settings['post_type'] === 'source_archive' && is_archive() && is_post_type_archive( 'product' ) ){
+                    if( $settings['post_type'] === 'source_archive' && is_archive() && $is_product_archive ){
                         global $wp_query;
                         $query = $wp_query;
                         $args  = $wp_query->query_vars;

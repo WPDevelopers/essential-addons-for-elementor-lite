@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 5.9.24
+Stable tag: 5.9.25
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -296,6 +296,18 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.9.25 - 02/07/2024 =
+
+- Fixed: EA Simple Menu | Active menu not showing for archive pages
+- Fixed: Missing translatable strings for EA Woo Product List & EA NFT Gallery
+- Fixed: EA Call to action | Margin not being applied uniformly
+- Updated: WPML Config file in some widgets
+- Improved: EA Event Calendar for Security Enhancement
+- Improved: EA Post Grid | Added option to show user's first & last name instead of just username
+- Improved: EA Advanced Data Table | CSV Data import/export mechanism
+- Few minor bug fixes & improvements
+
 
 = 5.9.24 - 09/06/2024 =
 
