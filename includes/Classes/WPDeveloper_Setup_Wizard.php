@@ -129,6 +129,7 @@ class WPDeveloper_Setup_Wizard {
 	public function data_getting_started_content(){
 		$getting_started_content = [
 			'youtube_promo_src' => esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/youtube-promo.png' ),
+			'is_tracking_allowed' => $this->get_is_tracking_allowed(),
 		];
 
 		return $getting_started_content;
@@ -410,10 +411,8 @@ class WPDeveloper_Setup_Wizard {
 		}
 
 		wp_parse_str( $_POST[ 'fields' ], $fields );
-
-		if ( isset( $fields[ 'eael_user_email_address' ] ) && intval( $fields[ 'eael_user_email_address' ] ) == 1 ) {
-			$this->wpins_process();
-		}
+		
+		$this->wpins_process();
 
 		wp_send_json_success();
 	}
@@ -778,6 +777,17 @@ class WPDeveloper_Setup_Wizard {
 			$tracker->set_is_tracking_allowed( true );
 			$tracker->do_tracking( true );
 		}
+	}
+
+	public function get_is_tracking_allowed( $plugin = 'essential_adons_elementor' ){
+		/**
+		 * Get All Tracked Plugin List using this Tracker.
+		 */
+		$allow_tracking = get_option( 'wpins_allow_tracking' );
+		/**
+		 * Check user is opted out for tracking or not.
+		 */
+		return intval( isset( $allow_tracking[$plugin] ) );
 	}
 
 	public function get_dummy_widget() {

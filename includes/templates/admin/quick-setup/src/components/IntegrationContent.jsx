@@ -82,10 +82,6 @@ function IntegrationContent({
     const button = event.target;
     button.setAttribute("disabled", "disabled");
 
-    if (button.id === "eael-count-me-bt") {
-      document.getElementById("eael_user_email_address").value = 1;
-    }
-
     let fields = new FormData(
       document.querySelector("form.eael-setup-wizard-form")
     );
