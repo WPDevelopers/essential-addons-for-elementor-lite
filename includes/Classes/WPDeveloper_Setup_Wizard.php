@@ -13,6 +13,7 @@ class WPDeveloper_Setup_Wizard {
 		add_action( 'admin_enqueue_scripts', array( $this, 'setup_wizard_scripts' ) );
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'wp_ajax_save_setup_wizard_data', [ $this, 'save_setup_wizard_data' ] );
+		add_action( 'wp_ajax_enable_wpins_process', [ $this, 'enable_wpins_process' ] );
 		add_action( 'wp_ajax_save_eael_elements_data', [ $this, 'save_eael_elements_data' ] );
 		add_action( 'in_admin_header', [ $this, 'remove_notice' ], 1000 );
 		$this->templately_status = $this->templately_active_status();
@@ -394,6 +395,27 @@ class WPDeveloper_Setup_Wizard {
 			wp_send_json_success( [ 'redirect_url' => esc_url( admin_url( 'admin.php?page=eael-settings' ) ) ] );
 		}
 		wp_send_json_error();
+	}
+
+	public function enable_wpins_process() {
+
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+		if ( !current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( __( 'you are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
+		}
+
+		if ( !isset( $_POST[ 'fields' ] ) ) {
+			return;
+		}
+
+		wp_parse_str( $_POST[ 'fields' ], $fields );
+
+		if ( isset( $fields[ 'eael_user_email_address' ] ) && intval( $fields[ 'eael_user_email_address' ] ) == 1 ) {
+			$this->wpins_process();
+		}
+
+		wp_send_json_success();
 	}
 
 	/**

@@ -16,12 +16,46 @@ function App() {
   const [emailAddress, setEmailAddress] = useState("0");
 
   const handleTabChange = (event) => {
+    setActiveTab(event.currentTarget.getAttribute("data-next"));
+    
     if (event.currentTarget.classList.contains("eael-user-email-address")) {
       setEmailAddress("1");
+      saveWPIns();
     }
-
-    setActiveTab(event.currentTarget.getAttribute("data-next"));
   };
+
+  const saveWPIns = async (event) => {
+    let fields = new FormData(
+      document.querySelector("form.eael-setup-wizard-form")
+    );
+
+    fields = new URLSearchParams(fields).toString();
+    
+    try {
+      const response = await fetch(localize.ajaxurl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          action: "enable_wpins_process",
+          security: localize.nonce,
+          fields: fields,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        
+      } else {
+        
+      }
+    } catch (error) {
+      
+    }
+  };
+  
 
   const handleModalChange = (event) => {
     console.log(event.currentTarget);
