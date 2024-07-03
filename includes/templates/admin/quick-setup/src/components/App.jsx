@@ -13,8 +13,13 @@ function App() {
   const [modalTarget, setModalTarget] = useState("");
   const [showElements, setShowElements] = useState(0);
   let eaelQuickSetup = localize.eael_quick_setup_data;
+  const [emailAddress, setEmailAddress] = useState("0");
 
   const handleTabChange = (event) => {
+    if (event.currentTarget.classList.contains("eael-user-email-address")) {
+      setEmailAddress("1");
+    }
+
     setActiveTab(event.currentTarget.getAttribute("data-next"));
   };
 
@@ -58,6 +63,7 @@ function App() {
               modalTarget={modalTarget}
               handleModalChange={handleModalChange}
               closeModal={closeModal}
+              emailAddress={emailAddress}
             />
           </div>
 
