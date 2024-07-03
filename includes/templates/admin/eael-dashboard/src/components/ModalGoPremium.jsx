@@ -41,7 +41,7 @@ function ModalGoPremium() {
                         </div>
                     </div>
                     <div className="ea__modal-footer flex items-center">
-                        <a href={eaData.button.url} className='flex justify-center flex-1'>
+                        <a href={eaData.button.url} className='flex justify-center flex-1' target="_blank">
                             <button className="upgrade-button">
                                 <i className="ea-dash-icon ea-crown-1"></i>
                                 {eaData.button.label}

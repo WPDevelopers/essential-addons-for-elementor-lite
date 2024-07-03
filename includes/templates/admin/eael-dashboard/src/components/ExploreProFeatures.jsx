@@ -24,7 +24,7 @@ function ExploreProFeatures() {
                             </div>;
                         })}
                     </div>
-                    <a href={eaData.button.url}>
+                    <a href={eaData.button.url} target="_blank">
                          <span className="primary-btn changelog-btn">
                            <i className="ea-dash-icon ea-link"></i>
                              {eaData.button.label}

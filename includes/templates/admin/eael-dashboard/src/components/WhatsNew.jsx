@@ -25,7 +25,7 @@ function WhatsNew() {
                         </div>;
                     })}
                 </div>
-                <a href={eaData.button.url}>
+                <a href={eaData.button.url} target="_blank">
                     <button className="primary-btn changelog-btn">
                         {eaData.button.label}
                         <i className="ea-dash-icon ea-link"></i>
