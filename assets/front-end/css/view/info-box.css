@@ -29,6 +29,9 @@
 }
 /*--- For Content Alignment ---*/
 .eael-infobox-content-align-left .eael-infobox .infobox-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
@@ -38,6 +41,9 @@
   text-align: left;
 }
 .eael-infobox-content-align-right .eael-infobox .infobox-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;

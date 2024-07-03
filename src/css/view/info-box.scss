@@ -26,6 +26,7 @@
 /*--- For Content Alignment ---*/
 .eael-infobox-content-align-left .eael-infobox {
     .infobox-icon{
+		display: flex;
         justify-content: flex-start;
     }
 	.infobox-content,
@@ -36,6 +37,7 @@
 
 .eael-infobox-content-align-right .eael-infobox {
 	.infobox-icon{
+		display: flex;
         justify-content: flex-end;
     }
 	.infobox-content,
