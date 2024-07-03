@@ -2,7 +2,7 @@ function LicenseUnlockBox() {
     return (
         <>
             <div className="ea__unlock-license flex gap-4">
-                <div className="ea__others-icon eaicon-1">
+                <div className="ea__others-icon eaicon-unlock">
                     <i className="ea-dash-icon ea-lock"></i>
                 </div>
                 <div className="max-w-454">

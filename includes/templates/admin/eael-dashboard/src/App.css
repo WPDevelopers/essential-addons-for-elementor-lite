@@ -114,11 +114,13 @@ span {
   --background-13: #F9FAFB;
   --background-14: #F5F1FF;
   --background-15: #FFFCF5;
+  --background-16: #FFF1F3;
   --label-color: #EAECF0;
   --label-color-fill: #7F56D9;
   --base-color-50: #750EF4;
   --base-color-75: #6F0AF2;
   --base-color-100: #FF9437;
+  --base-color-200: #C01048;
   --text-color-25: #1D2939;
   --text-color-50: #344054;
   --text-color-100: #475467;
@@ -166,11 +168,13 @@ body.eael_dash_dark_mode {
   --background-13: #09090A;
   --background-14: #09090A;
   --background-15: #09090A;
+  --background-16: #FFF1F3;
   --label-color: #1F2125;
   --label-color-fill: #7F56D9;
   --base-color-50: #750EF4;
   --base-color-75: #6F0AF2;
   --base-color-100: #FF9437;
+  --base-color-200: #C01048;
   --text-color-25: #FFFFFF;
   --text-color-50: #D0D5DD;
   --text-color-100: #B1B4B9;
@@ -952,6 +956,11 @@ span.dark-icon {
   margin-bottom: 16px;
 }
 
+.ea__others-icon.eaicon-unlock {
+  color: var(--base-color-200);
+  background: var(--background-16);
+}
+
 .ea__others-icon.eaicon-1 {
   color: var(--base-color-50);
   background: var(--background-2);
@@ -1334,7 +1343,7 @@ span.ea__tooltip {
 
 .content-btn {
   font-size: 11px;
-  line-height: 10px;
+  line-height: 11px;
   font-weight: 500;
   color: var(--base-background);
   text-transform: uppercase;
