@@ -149,7 +149,7 @@ trait Admin {
 			    'community_box'           => [
 				    [
 					    'heading'    => __( 'Need Any Help?', 'essential-addons-for-elementor-lite' ),
-					    'content'    => __( 'If you encounter any issues or need assistance, we are here to help. You can report specific issues or bugs directly on our GitHub issues page.', 'essential-addons-for-elementor-lite' ),
+					    'content'    => __( 'If you encounter any issues or need assistance, we are here to help. You can report specific issues or bugs directly on our <a href="https://github.com/WPDevelopers/essential-addons-for-elementor-lite/issues">GitHub issues page.</a>', 'essential-addons-for-elementor-lite' ),
 					    'button'     => [
 						    'label' => __( 'Create a Ticket', 'essential-addons-for-elementor-lite' ),
 						    'url'   => 'https://wpdeveloper.com/support/'
@@ -280,7 +280,7 @@ trait Admin {
 						    'content' => __( 'Restrict important data by setting up user permission or giving passwords to a particular area.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => 'https://essential-addons.com/elementor/protected-content/'
+							    'url'   => 'https://essential-addons.com/protected-content/'
 						    ],
 						    'image'   => 'images/img-5.png'
 					    ],
@@ -289,7 +289,7 @@ trait Admin {
 						    'content' => __( 'Display your blog posts in an amazing grid layout with advanced search & filter options.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => 'https://essential-addons.com/elementor/post-list/'
+							    'url'   => 'https://essential-addons.com/post-list/'
 						    ],
 						    'image'   => 'images/img-6.png'
 					    ],
@@ -298,7 +298,7 @@ trait Admin {
 						    'content' => __( 'Showcase your WooCommerce products beautifully with amazing ready slider layouts.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => 'https://essential-addons.com/elementor/woo-product-slider/'
+							    'url'   => 'https://essential-addons.com/woo-product-slider/'
 						    ],
 						    'image'   => 'images/img-5.png'
 					    ],
@@ -307,7 +307,7 @@ trait Admin {
 						    'content' => __( 'Dynamic Gallery lets you showcase images in an interactive format. Display posts and WooCommerce products with advanced customization.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => 'https://essential-addons.com/elementor/protected-content/'
+							    'url'   => 'https://essential-addons.com/post-carousel/'
 						    ],
 						    'image'   => 'images/img-5.png'
 					    ],
@@ -316,7 +316,7 @@ trait Admin {
 						    'content' => __( 'Allows you to display a beautiful & responsive feed of your latest Instagram posts with customizable options and stunning layouts.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => 'https://essential-addons.com/elementor/post-list/'
+							    'url'   => 'https://essential-addons.com/instagram-feed/'
 						    ],
 						    'image'   => 'images/img-6.png'
 					    ],
@@ -325,7 +325,7 @@ trait Admin {
 						    'content' => __( 'Add custom JavaScript to your WordPress site effortlessly with advanced customization and functionality without modifying core files.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => 'https://essential-addons.com/elementor/woo-product-slider/'
+							    'url'   => '#'
 						    ],
 						    'image'   => 'images/img-5.png'
 					    ],
@@ -334,7 +334,7 @@ trait Admin {
 						    'content' => __( 'Helps you easily connect your site with MailChimp. You can create and manage subscription forms directly on your website.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => 'https://essential-addons.com/elementor/protected-content/'
+							    'url'   => 'https://essential-addons.com/mailchimp/'
 						    ],
 						    'image'   => 'images/img-5.png'
 					    ],
@@ -343,7 +343,7 @@ trait Admin {
 						    'content' => __( 'Integrates Google Maps to display locations, routes, and markers easily on your site as your preferences.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => 'https://essential-addons.com/elementor/post-list/'
+							    'url'   => 'https://essential-addons.com/advanced-google-map/'
 						    ],
 						    'image'   => 'images/img-6.png'
 					    ],
@@ -352,7 +352,7 @@ trait Admin {
 						    'content' => __( 'Showcase posts, Woo Products and more images in a captivating and interactive gallery format to highlight visual content dynamically.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => 'https://essential-addons.com/elementor/woo-product-slider/'
+							    'url'   => 'https://essential-addons.com/dynamic-gallery/'
 						    ],
 						    'image'   => 'images/img-5.png'
 					    ]
@@ -418,7 +418,7 @@ trait Admin {
 			    'extensions'              => [
 				    'heading' => __( 'Advanced Extensions', 'essential-addons-for-elementor-lite' ),
 				    'list'    => [
-					    'section-parallax'    => [
+					    'section-parallax'      => [
 						    'key'         => 'section-parallax',
 						    'title'       => __( 'Parallax', 'essential-addons-for-elementor-lite' ),
 						    'demo_link'   => 'https://essential-addons.com/elementor/parallax-scrolling/',
@@ -426,7 +426,7 @@ trait Admin {
 						    'is_pro'      => true,
 						    'is_activate' => boolval( $this->get_settings( 'section-parallax' ) )
 					    ],
-					    'section-particles'   => [
+					    'section-particles'     => [
 						    'key'         => 'section-particles',
 						    'title'       => __( 'Particles', 'essential-addons-for-elementor-lite' ),
 						    'demo_link'   => 'https://essential-addons.com/elementor/particle-effect/',
@@ -434,7 +434,7 @@ trait Admin {
 						    'is_pro'      => true,
 						    'is_activate' => boolval( $this->get_settings( 'section-particles' ) )
 					    ],
-					    'tooltip-section'     => [
+					    'tooltip-section'       => [
 						    'key'         => 'tooltip-section',
 						    'title'       => __( 'Advanced Tooltip', 'essential-addons-for-elementor-lite' ),
 						    'demo_link'   => 'https://essential-addons.com/elementor/advanced-tooltip/',
@@ -442,7 +442,7 @@ trait Admin {
 						    'is_pro'      => true,
 						    'is_activate' => boolval( $this->get_settings( 'tooltip-section' ) )
 					    ],
-					    'content-protection'  => [
+					    'content-protection'    => [
 						    'key'         => 'content-protection',
 						    'title'       => __( 'Content Protection', 'essential-addons-for-elementor-lite' ),
 						    'demo_link'   => 'https://essential-addons.com/elementor/content-protection/',
@@ -451,7 +451,7 @@ trait Admin {
 						    'promotion'   => 'popular',
 						    'is_activate' => boolval( $this->get_settings( 'content-protection' ) )
 					    ],
-					    'reading-progress'    => [
+					    'reading-progress'      => [
 						    'key'         => 'reading-progress',
 						    'title'       => __( 'Reading Progress Bar', 'essential-addons-for-elementor-lite' ),
 						    'demo_link'   => 'https://essential-addons.com/elementor/reading-progress/',
@@ -459,7 +459,7 @@ trait Admin {
 						    'is_pro'      => false,
 						    'is_activate' => boolval( $this->get_settings( 'reading-progress' ) )
 					    ],
-					    'table-of-content'    => [
+					    'table-of-content'      => [
 						    'key'         => 'table-of-content',
 						    'title'       => __( 'Table of Contents', 'essential-addons-for-elementor-lite' ),
 						    'demo_link'   => 'https://essential-addons.com/elementor/table-of-content/',
@@ -468,7 +468,7 @@ trait Admin {
 						    'promotion'   => 'popular',
 						    'is_activate' => boolval( $this->get_settings( 'table-of-content' ) )
 					    ],
-					    'post-duplicator'     => [
+					    'post-duplicator'       => [
 						    'key'         => 'post-duplicator',
 						    'title'       => __( 'Duplicator', 'essential-addons-for-elementor-lite' ),
 						    'demo_link'   => 'https://essential-addons.com/elementor/duplicator/',
@@ -477,7 +477,7 @@ trait Admin {
 						    'setting'     => [ 'id' => 'postDuplicatorSetting' ],
 						    'is_activate' => boolval( $this->get_settings( 'post-duplicator' ) )
 					    ],
-					    'custom-js'           => [
+					    'custom-js'             => [
 						    'key'         => 'custom-js',
 						    'title'       => __( 'Custom JS', 'essential-addons-for-elementor-lite' ),
 						    'demo_link'   => 'https://essential-addons.com/elementor/custom-js/',
@@ -486,7 +486,7 @@ trait Admin {
 						    'promotion'   => 'popular',
 						    'is_activate' => boolval( $this->get_settings( 'custom-js' ) )
 					    ],
-					    'xd-copy'             => [
+					    'xd-copy'               => [
 						    'key'         => 'xd-copy',
 						    'title'       => __( 'Cross-Domain Copy Paste', 'essential-addons-for-elementor-lite' ),
 						    'demo_link'   => 'https://essential-addons.com/elementor/cross-domain-copy-paste/',
@@ -495,7 +495,7 @@ trait Admin {
 						    'promotion'   => 'new',
 						    'is_activate' => boolval( $this->get_settings( 'xd-copy' ) )
 					    ],
-					    'scroll-to-top'       => [
+					    'scroll-to-top'         => [
 						    'key'         => 'scroll-to-top',
 						    'title'       => __( 'Scroll to Top', 'essential-addons-for-elementor-lite' ),
 						    'demo_link'   => 'https://essential-addons.com/elementor/scroll-to-top/',
@@ -504,7 +504,7 @@ trait Admin {
 						    'promotion'   => 'new',
 						    'is_activate' => boolval( $this->get_settings( 'scroll-to-top' ) )
 					    ],
-					    'conditional-display' => [
+					    'conditional-display'   => [
 						    'key'         => 'conditional-display',
 						    'title'       => __( 'Conditional Display', 'essential-addons-for-elementor-lite' ),
 						    'demo_link'   => 'https://essential-addons.com/elementor/conditional-display/',
@@ -513,7 +513,7 @@ trait Admin {
 						    'promotion'   => 'new',
 						    'is_activate' => boolval( $this->get_settings( 'conditional-display' ) )
 					    ],
-					    'wrapper-link'        => [
+					    'wrapper-link'          => [
 						    'key'         => 'wrapper-link',
 						    'title'       => __( 'Wrapper Link', 'essential-addons-for-elementor-lite' ),
 						    'demo_link'   => 'https://essential-addons.com/elementor/wrapper-link/',
@@ -522,6 +522,32 @@ trait Admin {
 						    'promotion'   => 'new',
 						    'is_activate' => boolval( $this->get_settings( 'wrapper-link' ) )
 					    ],
+					    'advanced-dynamic-tags' => [
+						    'key'         => 'advanced-dynamic-tags',
+						    'title'       => __( 'Dynamic Tags', 'essential-addons-for-elementor-lite' ),
+						    'demo_link'   => 'https://essential-addons.com/elementor/advanced-dynamic-tags/',
+						    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-advanced-dynamic-tags/',
+						    'is_pro'      => true,
+						    'promotion'   => 'new',
+						    'is_activate' => boolval( $this->get_settings( 'advanced-dynamic-tags' ) )
+					    ],
+					    'smooth-animation'      => [
+						    'key'         => 'smooth-animation',
+						    'title'       => __( 'Interactive Animations', 'essential-addons-for-elementor-lite' ),
+						    'demo_link'   => 'https://essential-addons.com/elementor/parallax-scrolling/',
+						    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-parallax/',
+						    'is_pro'      => true,
+						    'promotion'   => 'new',
+						    'is_activate' => boolval( $this->get_settings( 'smooth-animation' ) )
+					    ],
+					    'special-hover-effect'  => [
+						    'key'         => 'special-hover-effect',
+						    'title'       => __( 'Hover Interactions', 'essential-addons-for-elementor-lite' ),
+						    'demo_link'   => 'https://essential-addons.com/elementor/special-hover-effect/',
+						    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-special-hover-effect/',
+						    'promotion'   => 'new',
+						    'is_activate' => boolval( $this->get_settings( 'special-hover-effect' ) )
+					    ]
 				    ]
 			    ],
 			    'widgets'                 => [
@@ -1455,10 +1481,9 @@ trait Admin {
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),
 				    'content' => __( 'Upgrade to Essential Addons PRO and gain access to advanced elements and functionalities to build websites more efficiently', 'essential-addons-for-elementor-lite' ),
 				    'list'    => [
-					    __( 'EA Fancy Chart Symbol display', 'essential-addons-for-elementor-lite' ),
-					    __( 'EA Instagram Feed Feed is getting', 'essential-addons-for-elementor-lite' ),
-					    __( 'EA Instagram Feed Feed is getting', 'essential-addons-for-elementor-lite' ),
-					    __( 'EA Instagram Feed Feed is getting', 'essential-addons-for-elementor-lite' ),
+					    __( 'Customization Flexibility in Design with Premium Creative Elements.', 'essential-addons-for-elementor-lite' ),
+					    __( 'Advanced WooCommerce Widgets like Checkout, Cross-Sells & more.', 'essential-addons-for-elementor-lite' ),
+					    __( 'Cutting-edge Extensions Like Custom JS, Content Protection & more.', 'essential-addons-for-elementor-lite' )
 				    ],
 				    'button'  => [
 					    'label' => __( 'Upgrade to PRO', 'essential-addons-for-elementor-lite' ),

@@ -4,12 +4,12 @@ function LicenseSteps() {
             <div className="ea__license-step">
                 <div className="ea__license-step-items flex">
                     <span className="step-count">1</span>
-                    <p>Log in to <a href="https://store.wpdeveloper.com/" className="step-details-ex">your account</a> to get your license key.</p>
+                    <p>Log in to <a href="https://store.wpdeveloper.com/" target="_blank" className="step-details-ex">your account</a> to get your license key.</p>
                 </div>
                 <div className="ea__license-step-items flex">
                     <span className="step-count">2</span>
                     <p>If you don't yet have a license key, get <a href="https://essential-addons.com/#pricing"
-                        className="step-details-ex">Essential Addons Pro now</a>.</p>
+                        className="step-details-ex" target="_blank">Essential Addons Pro now</a>.</p>
                 </div>
                 <div className="ea__license-step-items flex">
                     <span className="step-count">3</span>

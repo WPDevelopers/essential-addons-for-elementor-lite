@@ -19,7 +19,7 @@ function SidebarBox() {
                         <span className="reating-details">{eaData.review.score}</span>
                     </div>
                 </div>
-                <a href={eaData.button.url}>
+                <a href={eaData.button.url} target="_blank">
                     <button className="upgrade-button">
                         <i className={'ea-dash-icon ' + eaData.button.icon}></i>
                         {eaData.button.label}
