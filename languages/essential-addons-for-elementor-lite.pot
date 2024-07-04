@@ -1257,7 +1257,7 @@ msgstr ""
 msgid "File Not Found"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Category_Box.php:1188, ../includes/Elements/Betterdocs_Category_Box.php:1153, ../includes/Elements/Betterdocs_Category_Grid.php:1690, ../includes/Elements/Betterdocs_Category_Grid.php:1657, ../includes/Elements/Post_Grid.php:1113, ../includes/Elements/Post_Timeline.php:788, ../includes/Elements/Product_Grid.php:3429, ../includes/Traits/Ajax_Handler.php:265
+#: ../includes/Elements/Betterdocs_Category_Box.php:1188, ../includes/Elements/Betterdocs_Category_Box.php:1153, ../includes/Elements/Betterdocs_Category_Grid.php:1690, ../includes/Elements/Betterdocs_Category_Grid.php:1657, ../includes/Elements/Post_Grid.php:1113, ../includes/Elements/Post_Timeline.php:788, ../includes/Elements/Product_Grid.php:3430, ../includes/Traits/Ajax_Handler.php:265
 msgid "<p class=\"no-posts-found\">No posts found!</p>"
 msgstr ""
 
@@ -3345,7 +3345,7 @@ msgstr ""
 msgid "Tomorrow"
 msgstr ""
 
-#: ../includes/Elements/Event_Calendar.php:3558
+#: ../includes/Elements/Event_Calendar.php:3610
 msgid "No Title"
 msgstr ""
 
@@ -6180,6 +6180,10 @@ msgstr ""
 msgid "Get your API key from <a href=\"https://docs.opensea.io/reference/api-keys\" class=\"eael-btn\" target=\"_blank\">%s</a>"
 msgstr ""
 
+#: ../includes/Elements/NFT_Gallery.php:94
+msgid "here"
+msgstr ""
+
 #: ../includes/Elements/NFT_Gallery.php:109
 msgid "Collections"
 msgstr ""
@@ -6532,7 +6536,7 @@ msgstr ""
 msgid "Timeline Vertical Line Color"
 msgstr ""
 
-#: ../includes/Elements/Post_Timeline.php:792, ../includes/Elements/Product_Grid.php:3433
+#: ../includes/Elements/Post_Timeline.php:792, ../includes/Elements/Product_Grid.php:3434
 msgid "<p class=\"no-posts-found\">No layout found!</p>"
 msgstr ""
 
@@ -7000,7 +7004,7 @@ msgstr ""
 msgid "Simple Product"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:784, ../includes/Elements/Product_Grid.php:832, ../includes/Elements/Woo_Product_List.php:1054, ../includes/Elements/Woo_Product_List.php:1105
+#: ../includes/Elements/Product_Grid.php:784, ../includes/Elements/Product_Grid.php:832, ../includes/Elements/Woo_Product_List.php:1054, ../includes/Elements/Woo_Product_List.php:1105, ../includes/Elements/Woo_Product_List.php:3735, ../includes/Elements/Woo_Product_List.php:3736, ../includes/Elements/Woo_Product_List.php:3737, ../includes/Elements/Woo_Product_List.php:3738, ../includes/Elements/Woo_Product_List.php:3739
 msgid "Buy Now"
 msgstr ""
 
@@ -7188,19 +7192,19 @@ msgstr ""
 msgid "Cart Button"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:3620, ../includes/Elements/Woo_Product_Carousel.php:147, ../includes/Elements/Woo_Product_List.php:3551
+#: ../includes/Elements/Product_Grid.php:3621, ../includes/Elements/Woo_Product_Carousel.php:147, ../includes/Elements/Woo_Product_List.php:3551
 msgid "Publish"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:3621, ../includes/Elements/Woo_Product_Carousel.php:148, ../includes/Elements/Woo_Product_List.php:3552
+#: ../includes/Elements/Product_Grid.php:3622, ../includes/Elements/Woo_Product_Carousel.php:148, ../includes/Elements/Woo_Product_List.php:3552
 msgid "Draft"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:3622, ../includes/Elements/Woo_Product_Carousel.php:149, ../includes/Elements/Woo_Product_List.php:3553
+#: ../includes/Elements/Product_Grid.php:3623, ../includes/Elements/Woo_Product_Carousel.php:149, ../includes/Elements/Woo_Product_List.php:3553
 msgid "Pending Review"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:3623, ../includes/Elements/Woo_Product_Carousel.php:150, ../includes/Elements/Woo_Product_List.php:3554
+#: ../includes/Elements/Product_Grid.php:3624, ../includes/Elements/Woo_Product_Carousel.php:150, ../includes/Elements/Woo_Product_List.php:3554
 msgid "Schedule"
 msgstr ""
 
@@ -8989,7 +8993,7 @@ msgstr ""
 msgid "Total Sold Text"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_List.php:1002
+#: ../includes/Elements/Woo_Product_List.php:1002, ../includes/Elements/Woo_Product_List.php:3729
 msgid "Total Sold:"
 msgstr ""
 
@@ -8997,11 +9001,11 @@ msgstr ""
 msgid "Remaining Text"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_List.php:1016
+#: ../includes/Elements/Woo_Product_List.php:1016, ../includes/Elements/Woo_Product_List.php:3730
 msgid "Remaining:"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_List.php:1202, ../includes/Elements/Woo_Product_List.php:1925
+#: ../includes/Elements/Woo_Product_List.php:1202, ../includes/Elements/Woo_Product_List.php:1925, ../includes/Elements/Woo_Product_List.php:3731
 msgid "View Product"
 msgstr ""
 
@@ -9009,7 +9013,7 @@ msgstr ""
 msgid "Not Found"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_List.php:1229, ../includes/Template/Content/Product_Grid.php:82, ../includes/Template/Content/Woo_Product_List.php:82
+#: ../includes/Elements/Woo_Product_List.php:1229, ../includes/Elements/Woo_Product_List.php:3732, ../includes/Template/Content/Product_Grid.php:82, ../includes/Template/Content/Woo_Product_List.php:82
 msgid "No products found!"
 msgstr ""
 
@@ -10289,7 +10293,7 @@ msgstr ""
 msgid "Term ID"
 msgstr ""
 
-#: ../includes/Traits/Controls.php:353
+#: ../includes/Traits/Controls.php:353, ../includes/Traits/Login_Registration.php:1614
 msgid "ID"
 msgstr ""
 
