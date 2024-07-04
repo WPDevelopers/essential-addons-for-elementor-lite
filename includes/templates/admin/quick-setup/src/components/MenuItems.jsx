@@ -1,13 +1,13 @@
 import { __ } from "@wordpress/i18n";
 
-function MenuItems({activeTab, handleTabChange}) {
+function MenuItems({ activeTab, handleTabChange }) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let menu_items = eaelQuickSetup?.menu_items;
   let wizard_column = menu_items?.wizard_column;
   let templately_status = menu_items?.templately_status;
   let items = menu_items?.items;
   let templately_local_plugin_data = menu_items?.templately_local_plugin_data;
-
+  let ea_pro_local_plugin_data = menu_items?.ea_pro_local_plugin_data;
   let i = 0;
   let itemClass = "";
 
@@ -25,12 +25,17 @@ function MenuItems({activeTab, handleTabChange}) {
           ) {
             return null;
           }
+          if ( ea_pro_local_plugin_data && item === "Go PRO") {
+            return null;
+          }
 
           itemClass = item.trim().toLowerCase().replace(/ /g, "-");
 
           return (
             <div
-              className={`eael-onboard-nav ${activeTab === itemClass ? 'active' : ''} ${itemClass}`}
+              className={`eael-onboard-nav ${
+                activeTab === itemClass ? "active" : ""
+              } ${itemClass}`}
               key={index}
             >
               <span className="eael-nav-count">{++i}</span>

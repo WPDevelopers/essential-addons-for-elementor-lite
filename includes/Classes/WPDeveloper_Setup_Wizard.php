@@ -121,6 +121,7 @@ class WPDeveloper_Setup_Wizard {
 			'wizard_column' => !$this->templately_status ? 'five' : 'four',
 			'items' => $items,
 			'templately_local_plugin_data' => $this->get_local_plugin_data( 'templately/templately.php' ),
+			'ea_pro_local_plugin_data' => $this->get_local_plugin_data( 'essential-addons-elementor/essential_adons_elementor.php' ),
 		];
 
 		return $menu_items;

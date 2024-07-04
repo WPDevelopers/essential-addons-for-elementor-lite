@@ -6,6 +6,10 @@ function ElementsContent({ activeTab, handleTabChange, showElements, handleShowE
   let elements_list = elements_content?.elements_list;
   let init = 0;
   let disable = "";
+  let ea_pro_local_plugin_data =
+  eaelQuickSetup?.menu_items?.ea_pro_local_plugin_data;
+  let templately_local_plugin_data =
+  eaelQuickSetup?.menu_items?.templately_local_plugin_data;
 
   elements_list =
     typeof elements_list === "object"
@@ -116,7 +120,13 @@ function ElementsContent({ activeTab, handleTabChange, showElements, handleShowE
         <button
           className="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn"
           type="button"
-          data-next="go-pro"
+          data-next={
+            ! ea_pro_local_plugin_data
+              ? "go-pro"
+              : ( ! templately_local_plugin_data
+                ? "templately"
+                : "integrations" )
+          }
           onClick={handleTabChange}
         >
           {__("Next", "essential-addons-for-elementor-lite")}
