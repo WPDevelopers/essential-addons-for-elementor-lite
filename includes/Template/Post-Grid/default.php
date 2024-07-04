@@ -18,7 +18,26 @@ if ( $settings['eael_show_image'] == 'yes' ) {
 	$settings['eael_image_size_customize_size'] = $settings['image_size'];
 	$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings,'eael_image_size_customize' );
 }
+global $authordata;
+$author_link = '';
+if ( is_object( $authordata ) ) {
+    $author_name = $authordata->display_name;
 
+    if ( isset( $authordata->first_name ) ) {
+        $author_name = $authordata->first_name;
+		if ( isset( $authordata->last_name ) ) {
+			$author_name .= ' ' . $authordata->last_name;
+		}
+	}
+
+    $author_link = sprintf(
+		'<a href="%1$s" title="%2$s" rel="author">%3$s</a>',
+		esc_url( get_author_posts_url( $authordata->ID, $authordata->user_nicename ) ),
+		/* translators: %s: Author's display name. */
+		esc_attr( sprintf( __( 'Posts by %s' ), $author_name ) ),
+		$author_name
+	);
+}
 $enable_ratio = $settings['enable_postgrid_image_ratio'] == 'yes' ? 'eael-image-ratio':'';
 
 $title_tag = isset($settings['title_tag']) ? Helper::eael_validate_html_tag($settings['title_tag']) : 'h2';
@@ -76,7 +95,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                         if ($settings['eael_show_meta']) {
                             echo '<div class="eael-entry-meta">';
                             if ( isset( $settings['eael_show_author_two'] ) && 'yes' === $settings['eael_show_author_two'] ) {
-                                echo '<span class="eael-posted-by">' . get_the_author_posts_link() . '</span>';
+                                echo '<span class="eael-posted-by">' . $author_link . '</span>';
                             }
                             if ($settings['eael_show_date'] === 'yes') {
                                 echo '<span class="eael-posted-on eael-meta-posted-on"><i class="far fa-clock"></i><time datetime="' . get_the_date() . '">' . get_the_date() . '</time></span>';
@@ -115,7 +134,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
 
                             echo '<div class="eael-entry-meta">';
                             if ( isset( $settings['eael_show_author_two'] ) && 'yes' === $settings['eael_show_author_two'] ) {
-                                echo '<span class="eael-posted-by style-two-footer">' . get_the_author_posts_link() . '</span>';
+                                echo '<span class="eael-posted-by style-two-footer">' . $author_link . '</span>';
                             }
                             if ( 'yes' === $settings['eael_show_date'] ) {
                                 echo '<span class="eael-meta-posted-on"><i class="far fa-clock"></i><time datetime="' . get_the_date() . '">' . get_the_date() . '</time></span>';
@@ -236,7 +255,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
             if ($settings['eael_show_meta']) {
                 echo '<div class="eael-entry-meta">';
                 if ( isset( $settings['eael_show_author_three'] ) && 'yes' === $settings['eael_show_author_three'] ) {
-                    echo '<span class="eael-posted-by">' . get_the_author_posts_link() . '</span>';
+                    echo '<span class="eael-posted-by">' . $author_link . '</span>';
                 }
                 if ($settings['eael_show_date'] === 'yes') {
                     echo '<span class="eael-posted-on"><time datetime="' . get_the_date() . '">' . get_the_date() . '</time></span>';
@@ -329,7 +348,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
             if ($settings['eael_show_meta']) {
                 echo '<div class="eael-entry-meta">';
                 if ( isset( $settings['eael_show_author'] ) && 'yes' === $settings['eael_show_author'] ) {
-                    echo '<span class="eael-posted-by">' . get_the_author_posts_link() . '</span>';
+                    echo '<span class="eael-posted-by">' . $author_link . '</span>';
                 }
                 if ($settings['eael_show_date'] === 'yes') {
                     echo '<span class="eael-posted-on"><time datetime="' . get_the_date() . '">' . get_the_date() . '</time></span>';
@@ -369,7 +388,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
             if ($settings['eael_show_meta']) {
                 echo '<div class="eael-entry-meta">';
                 if ( isset( $settings['eael_show_author'] ) && 'yes' === $settings['eael_show_author'] ) {
-                    echo '<span class="eael-posted-by">' . get_the_author_posts_link() . '</span>';
+                    echo '<span class="eael-posted-by">' . $author_link . '</span>';
                 }
                 if ($settings['eael_show_date'] === 'yes') {
                     echo '<span class="eael-posted-on"><time datetime="' . get_the_date() . '">' . get_the_date() . '</time></span>';

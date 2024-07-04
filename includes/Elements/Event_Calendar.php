@@ -3252,6 +3252,53 @@ class Event_Calendar extends Widget_Base
         </div>';
     }
 
+	public function xssAttributes() {
+		return [
+			'onabort',
+			'onblur',
+			'onchange',
+			'onclick',
+			'oncontextmenu',
+			'oncopy',
+			'oncut',
+			'ondblclick',
+			'ondrag',
+			'ondragend',
+			'ondragenter',
+			'ondragleave',
+			'ondragover',
+			'ondragstart',
+			'ondrop',
+			'onerror',
+			'onfocus',
+			'oninput',
+			'onkeydown',
+			'onkeypress',
+			'onkeyup',
+			'onload',
+			'onmousedown',
+			'onmouseenter',
+			'onmouseleave',
+			'onmousemove',
+			'onmouseout',
+			'onmouseover',
+			'onmouseup',
+			'onpaste',
+			'onreset',
+			'onresize',
+			'onscroll',
+			'onselect',
+			'onsubmit',
+			'ontouchcancel',
+			'ontouchend',
+			'ontouchmove',
+			'ontouchstart',
+			'onanimationstart',
+			'onanimationend',
+			'onanimationiteration'
+		];
+	}
+
     public function get_manual_calendar_events($settings)
     {
         $events = $settings['eael_event_items'];
@@ -3294,17 +3341,22 @@ class Event_Calendar extends Widget_Base
                 $_custom_attributes = explode(',', $_custom_attributes );
                 $custom_attributes  = [];
 
-                if ( $_custom_attributes ) {
-                    foreach ( $_custom_attributes as $attribute ) {
-                        if ( $attribute ) {
-                            $attribute_set = explode( '|', $attribute );
-                            $custom_attributes[] = [
-                                'key'   => sanitize_text_field($attribute_set[0]),
-                                'value' => isset( $attribute_set[1] ) ? sanitize_text_field($attribute_set[1]) : ''
-                            ];
-                        }
-                    }
-                }
+	            if ( $_custom_attributes ) {
+		            foreach ( $_custom_attributes as $attribute ) {
+			            if ( $attribute ) {
+				            $attribute_set = explode( '|', $attribute );
+
+				            if ( in_array( trim( strtolower( $attribute_set[0] ) ), $this->xssAttributes() ) ) {
+					            continue;
+				            }
+
+				            $custom_attributes[] = [
+					            'key'   => sanitize_text_field( $attribute_set[0] ),
+					            'value' => isset( $attribute_set[1] ) ? esc_attr( $attribute_set[1] ) : ''
+				            ];
+			            }
+		            }
+	            }
 
 	            $data[] = [
 		            'id'                => $i,
