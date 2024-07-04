@@ -996,7 +996,7 @@ span.dark-icon {
   font-weight: 500;
   line-height: 1.2em;
   color: var(--text-color-25);
-  padding-top: 50px;
+  padding-top: 30px;
   margin-bottom: 10px;
 }
 
@@ -2972,7 +2972,7 @@ input::placeholder {
   .ea__sidebar-content {
     padding: 16px;
     background-position: unset;
-    background-position-y: -45px;
+    background-position-y: -20px;
   }
 
   .ea__connect-others {
