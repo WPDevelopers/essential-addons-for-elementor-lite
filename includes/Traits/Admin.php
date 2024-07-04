@@ -137,9 +137,9 @@ trait Admin {
 			    'templately_promo'        => [
 				    'heading' => __( 'Unlock 5000+ Ready Templates', 'essential-addons-for-elementor-lite' ),
 				    'list'    => [
-					    __( 'Stunning Website Templates For All Niche', 'essential-addons-for-elementor-lite' ),
-					    __( 'One-Click Full Site Import Feature', 'essential-addons-for-elementor-lite' ),
-					    __( 'Collaborate With Team Members in WorkSpace', 'essential-addons-for-elementor-lite' ),
+					    __( 'Stunning Templates For All', 'essential-addons-for-elementor-lite' ),
+					    __( 'One-Click Full Site Import', 'essential-addons-for-elementor-lite' ),
+					    __( 'Collaborate in Team WorkSpace', 'essential-addons-for-elementor-lite' ),
 					    __( 'Unlimited Cloud Storage', 'essential-addons-for-elementor-lite' ),
 				    ],
 				    'button'  => [
