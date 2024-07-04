@@ -12,7 +12,7 @@ function IntegrationBox(props) {
             setTimeout(eaDispatch, 300, {
                 type: 'ON_CHANGE_INTEGRATION',
                 payload: {key: props.index, value: e.target.checked}
-            })
+            });
         };
 
     return (

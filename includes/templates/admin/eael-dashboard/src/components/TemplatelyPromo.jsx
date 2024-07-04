@@ -5,7 +5,8 @@ function TemplatelyPromo() {
         {eaState, eaDispatch} = consumer(),
         imgSrc = eaState.isDark ? '/images/img-2-dark.png' : '/images/img-2.png',
         clickHandler = () => {
-            eaDispatch({type: 'INSTALL_TEMPLATELY'});
+            eaDispatch({type: 'BUTTON_LOADER', payload: 'tl'});
+            setTimeout(eaDispatch, 500, {type: 'INSTALL_TEMPLATELY'});
         };
 
     return (
@@ -23,7 +24,8 @@ function TemplatelyPromo() {
                     </div>
                     <button className="primary-btn install-btn" onClick={clickHandler}>
                         <i className="ea-dash-icon ea-install"></i>
-                        {eaData.button.label}
+                        {eaState.btnLoader === 'tl' ? 'Installing...' : eaData.button.label}
+                        {eaState.btnLoader === 'tl' && <span className="eael_btn_loader"></span>}
                     </button>
                 </div>
                 <div className="templates-img">

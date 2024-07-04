@@ -13,8 +13,6 @@ function ContextReducer() {
             hiddenLicenseKey, integrations, elements, modals, toastMessage, toastType;
 
         switch (type) {
-            case 'ON_PROCESSING':
-                return {...state, ...payload};
             case 'SET_MENU':
                 return {...state, menu: payload};
             case 'INTEGRATION_LOADER':
@@ -282,12 +280,9 @@ function ContextReducer() {
                     slug: 'templately'
                 };
 
-                request = eaAjax(params, true);
-                request.onreadystatechange = () => {
-                    response = JSON.parse(request.responseText);
-                }
+                response = eaAjax(params);
 
-                return {...state, isTemplatelyInstalled: true}
+                return {...state, isTemplatelyInstalled: true, btnLoader: ''}
             case 'CLOSE_ADMIN_PROMOTION':
                 params = {
                     action: 'eael_admin_promotion',

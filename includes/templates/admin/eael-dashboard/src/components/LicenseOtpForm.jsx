@@ -5,7 +5,6 @@ function LicenseOtpForm() {
     const otpRef = useRef(),
         {eaState, eaDispatch} = consumer(),
         submitHandler = () => {
-            // eaDispatch({type: 'ON_PROCESSING', payload: {licenseBtn: true}});
             eaDispatch({type: 'OTP_VERIFY', payload: otpRef.current.value});
         },
         clickHandler = () => {
