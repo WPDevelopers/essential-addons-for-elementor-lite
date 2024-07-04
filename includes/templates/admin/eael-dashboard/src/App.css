@@ -911,7 +911,7 @@ span.dark-icon {
 }
 
 .templates-content {
-  padding: 0 18px 0 8px;
+  padding: 24px 18px 24px 24px;
   max-width: 330px;
 }
 
@@ -920,10 +920,17 @@ span.dark-icon {
   background-image: none;
   background-color: var(--background-10);
   border: 1px solid var(--border-color-base);
+  border-radius: 8px;
+}
+
+.ea__templates-content-wrapper {
+  background: linear-gradient(269.7deg, #dea8ff 0.1%, #fefaff 35.7%);
+  border-radius: 8px;
 }
 
 .templates-img {
-  display: contents;
+  display: inline-flex;
+  padding: 12px 12px 12px 30px;
 }
 
 .templates-img img {
@@ -2948,7 +2955,7 @@ input::placeholder {
   }
 
   .templates-content {
-    padding: 0 16px 0 2px;
+    padding: 16px;
   }
 
   .ea__pro-elements-content {
@@ -3321,7 +3328,6 @@ input::placeholder {
   }
 
   .templates-content {
-    padding: 0;
     max-width: 100%;
   }
 
