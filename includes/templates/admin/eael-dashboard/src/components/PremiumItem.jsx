@@ -12,7 +12,7 @@ function PremiumItem(props) {
                 <div className="ea__premium-item-footer">
                     <h5>{eaData.heading}</h5>
                     <p className="mb-2">{eaData.content}</p>
-                    <a href={eaData.button.url}>
+                    <a href={eaData.button.url} target="_blank">
                         <button className="underline">{eaData.button.label}</button>
                     </a>
                 </div>

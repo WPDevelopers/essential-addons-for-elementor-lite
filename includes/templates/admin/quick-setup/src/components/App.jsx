@@ -9,13 +9,52 @@ import IntegrationContent from "./IntegrationContent.jsx";
 import ModalContent from "./ModalContent.jsx";
 
 function App() {
-  const [activeTab, setActiveTab] = useState("getting-started");
+  let eaelQuickSetup = localize.eael_quick_setup_data;
+  let is_tracking_allowed =
+    eaelQuickSetup?.getting_started_content?.is_tracking_allowed;
+  let currentTabValue = ! is_tracking_allowed ? 'getting-started' : 'configuration';
+
+  const [activeTab, setActiveTab] = useState(currentTabValue);
   const [modalTarget, setModalTarget] = useState("");
   const [showElements, setShowElements] = useState(0);
-  let eaelQuickSetup = localize.eael_quick_setup_data;
+  const [emailAddress, setEmailAddress] = useState(is_tracking_allowed);
 
   const handleTabChange = (event) => {
     setActiveTab(event.currentTarget.getAttribute("data-next"));
+
+    if (event.currentTarget.classList.contains("eael-user-email-address")) {
+      setEmailAddress("1");
+      document.getElementById("eael_user_email_address").value = 1;
+      saveWPIns();
+    }
+  };
+
+  const saveWPIns = async (event) => {
+    let fields = new FormData(
+      document.querySelector("form.eael-setup-wizard-form")
+    );
+
+    fields = new URLSearchParams(fields).toString();
+
+    try {
+      const response = await fetch(localize.ajaxurl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          action: "enable_wpins_process",
+          security: localize.nonce,
+          fields: fields,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+      } else {
+      }
+    } catch (error) {}
   };
 
   const handleModalChange = (event) => {
@@ -47,19 +86,22 @@ function App() {
             />
           </div>
 
-          <div
-            className={`eael-setup-content eael-getting-started-content ${
-              activeTab == "getting-started" ? "" : "eael-d-none"
-            }`}
-          >
-            <GettingStartedContent
-              activeTab={activeTab}
-              handleTabChange={handleTabChange}
-              modalTarget={modalTarget}
-              handleModalChange={handleModalChange}
-              closeModal={closeModal}
-            />
-          </div>
+          {!is_tracking_allowed && (
+            <div
+              className={`eael-setup-content eael-getting-started-content ${
+                activeTab == "getting-started" ? "" : "eael-d-none"
+              }`}
+            >
+              <GettingStartedContent
+                activeTab={activeTab}
+                handleTabChange={handleTabChange}
+                modalTarget={modalTarget}
+                handleModalChange={handleModalChange}
+                closeModal={closeModal}
+                emailAddress={emailAddress}
+              />
+            </div>
+          )}
 
           <div
             className={`eael-setup-content eael-configuration-content ${
@@ -121,7 +163,7 @@ function App() {
             />
           </div>
 
-          {modalTarget === 'modal' && (
+          {modalTarget === "modal" && (
             <div className="eael-modal-content">
               <ModalContent
                 activeTab={activeTab}

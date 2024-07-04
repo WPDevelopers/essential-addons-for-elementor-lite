@@ -48,7 +48,7 @@ function Modal() {
                     </div>
                     <div className="ea__modal-footer flex items-center">
                         {eaState.modalID === 'loginRegisterSetting' &&
-                            <a className="ea__api-link"
+                            <a className="ea__api-link" target="_blank"
                                href={eaData[eaState.modalID].link.url}>{eaData[eaState.modalID].link.text}</a>}
                         <div className='flex flex-end flex-1'>
                             <button className="ea__modal-btn">Save {eaState.btnLoader === 'modal' &&

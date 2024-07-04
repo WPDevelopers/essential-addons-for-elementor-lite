@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { __ } from "@wordpress/i18n";
 
 function IntegrationContent({
@@ -11,15 +12,67 @@ function IntegrationContent({
   let integrations_content = eaelQuickSetup?.integrations_content;
   let templately_local_plugin_data =
     eaelQuickSetup?.menu_items?.templately_local_plugin_data;
-  let plugin_list = integrations_content?.plugin_list;
+  let initialPluginList = integrations_content?.plugin_list;
 
-  const handleIntegrationSwitch = (event, plugin) => {
-    if (event.target.checked) {
-      const installerButton = event.target
-        .closest(".eael-integration-footer")
-        .querySelector(".wpdeveloper-plugin-installer");
-      if (installerButton) {
-        installerButton.click();
+  const [pluginList, setPluginList] = useState(initialPluginList);
+
+  const handleIntegrationSwitch = async (event, plugin) => {
+    const isChecked = event.target.checked;
+
+    const isActionInstall =
+      event.target.getAttribute("data-local_plugin_data") === "false";
+
+    console.log(isActionInstall);
+
+    const action = isActionInstall
+      ? "install"
+      : isChecked
+      ? "activate"
+      : "deactivate";
+    const identifier = isActionInstall ? plugin.slug : plugin.basename;
+
+    let requestData = {
+      action: `wpdeveloper_${action}_plugin`,
+      security: localize.nonce,
+    };
+    requestData[isActionInstall ? "slug" : "basename"] = identifier;
+
+    const label = event.target
+      .closest(".eael-integration-footer")
+      .querySelector(".toggle-label");
+
+    if (label) {
+      label.textContent = "Processing...";
+
+      try {
+        const response = await fetch(localize.ajaxurl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams(requestData).toString(),
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          label.textContent = isChecked ? "Deactivate" : "Activate";
+
+          if (isActionInstall) {
+            setPluginList((prevList) =>
+              prevList.map((p) =>
+                p.slug === plugin.slug
+                  ? { ...p, local_plugin_data: true }
+                  : p
+              )
+            );
+          }
+        } else {
+          label.textContent = isChecked ? "Activate" : "Deactivate";
+        }
+      } catch (error) {
+        console.log(error);
+        label.textContent = isChecked ? "Activate" : "Deactivate";
       }
     }
   };
@@ -28,10 +81,6 @@ function IntegrationContent({
     event.preventDefault();
     const button = event.target;
     button.setAttribute("disabled", "disabled");
-
-    if (button.id === "eael-count-me-bt") {
-      document.getElementById("eael_user_email_address").value = 1;
-    }
 
     let fields = new FormData(
       document.querySelector("form.eael-setup-wizard-form")
@@ -90,7 +139,10 @@ function IntegrationContent({
             </div>
             <div className="max-w-454">
               <h4>
-                {__("Fusion Hub for WordPress", "essential-addons-for-elementor-lite")}
+                {__(
+                  "Fusion Hub for WordPress",
+                  "essential-addons-for-elementor-lite"
+                )}
               </h4>
               <p>
                 {__(
@@ -114,7 +166,7 @@ function IntegrationContent({
           </div>
         </div>
         <div className="eael-integration-content-wrapper onboard-scroll-wrap">
-          {plugin_list.map((plugin) => (
+          {pluginList.map((plugin) => (
             <div className="eael-integration-item" key={plugin.basename}>
               <div className="eael-integration-header flex gap-2 items-center">
                 <img src={plugin.logo} alt="logo" width="30" />
@@ -123,39 +175,33 @@ function IntegrationContent({
               <div className="eael-integration-footer">
                 <p>{plugin.desc}</p>
                 <div className="integration-settings flex justify-between items-center">
-                  <h5 className="toggle-label eael-d-none">
-                    {__("Integration", "essential-addons-for-elementor-lite")}
+                  <h5 className="toggle-label">
+                    {plugin.local_plugin_data === false || !plugin.is_active
+                      ? __("Activate", "essential-addons-for-elementor-lite")
+                      : __("Deactivate", "essential-addons-for-elementor-lite")}
                   </h5>
-                  {plugin.local_plugin_data === false ? (
-                    <button
-                      className="wpdeveloper-plugin-installer eael-quick-setup-wpdeveloper-plugin-installer"
-                      data-action="install"
-                      data-slug={plugin.slug}
-                      onClick={() => handleActionClick("install", plugin.slug)}
-                    >
-                      {__("Install", "essential-addons-for-elementor-lite")}
-                    </button>
-                  ) : plugin.is_active ? (
-                    <button className="wpdeveloper-plugin-installer button__white-not-hover eael-quick-setup-wpdeveloper-plugin-installer">
-                      {__("Activated", "essential-addons-for-elementor-lite")}
-                    </button>
-                  ) : (
-                    <button
-                      className="wpdeveloper-plugin-installer eael-quick-setup-wpdeveloper-plugin-installer"
-                      data-action="activate"
-                      data-basename={plugin.basename}
-                      onClick={() =>
-                        handleActionClick("activate", plugin.basename)
-                      }
-                    >
-                      {__("Activate", "essential-addons-for-elementor-lite")}
-                    </button>
-                  )}
+                  <button
+                    className="wpdeveloper-plugin-installer eael-quick-setup-wpdeveloper-plugin-installer eael-d-none"
+                    data-action={
+                      plugin.local_plugin_data === false
+                        ? "install"
+                        : "activate"
+                    }
+                    data-slug={plugin.slug}
+                    data-basename={plugin.basename}
+                  >
+                    {plugin.local_plugin_data === false
+                      ? __("Install", "essential-addons-for-elementor-lite")
+                      : plugin.is_active
+                      ? __("Activated", "essential-addons-for-elementor-lite")
+                      : __("Activate", "essential-addons-for-elementor-lite")}
+                  </button>
                   <label className="toggle-wrap">
                     <input
                       type="checkbox"
                       className="enable-integration-switch"
                       defaultChecked={plugin.is_active}
+                      data-local_plugin_data={plugin.local_plugin_data}
                       onChange={(event) =>
                         handleIntegrationSwitch(event, plugin)
                       }

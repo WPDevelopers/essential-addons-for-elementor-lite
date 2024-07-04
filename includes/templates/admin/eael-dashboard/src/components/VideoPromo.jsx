@@ -10,7 +10,7 @@ function VideoPromo(props) {
                     <div className="templates-content">
                         <h2>Get Started with Essential Addons for Elementor</h2>
                         <p className='mb-6'>Thank you for choosing Essential Addons. Get ready to enhance your Elementor site-building experience with 100+ powerful elements & extensions from Essential Addons.</p>
-                        <a href="https://www.youtube.com/playlist?list=PLWHp1xKHCfxC7JeWSg31vtVbLHGzfxDvh">
+                        <a href="https://www.youtube.com/playlist?list=PLWHp1xKHCfxC7JeWSg31vtVbLHGzfxDvh" target="_blank">
                             <button className="primary-btn install-btn">Watch & Learn</button>
                         </a>
                     </div>

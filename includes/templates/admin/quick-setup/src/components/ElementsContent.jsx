@@ -43,6 +43,17 @@ function ElementsContent({ activeTab, handleTabChange, showElements, handleShowE
             {__("View All", "essential-addons-for-elementor-lite")}
             <i className="ea-dash-icon ea-right-arrow-long"></i>
           </button>
+
+          <a
+              href="https://essential-addons.com/demos/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="primary-btn changelog-btn">
+                {__("View All", "essential-addons-for-elementor-lite")}
+                <i className="ea-dash-icon ea-right-arrow-long"></i>
+              </span>
+            </a>
         </div>
         <div className="onboard-scroll-wrap">
           <div id="Content" className="eael-contents">

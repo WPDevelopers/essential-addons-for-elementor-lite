@@ -1,10 +1,10 @@
 import { __ } from "@wordpress/i18n";
 
-function GettingStartedContent({activeTab, handleTabChange, modalTarget, handleModalChange, closeModal}) {
+function GettingStartedContent({activeTab, handleTabChange, modalTarget, handleModalChange, closeModal, emailAddress}) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let getting_started_content = eaelQuickSetup?.getting_started_content;
-  let youtube_promo_src = getting_started_content?.youtube_promo_src;
-  
+  let youtube_promo_src = getting_started_content?.youtube_promo_src;  
+
   return (
     <>
       <div className="eael-onboard-content-wrapper min-h-538">
@@ -43,7 +43,7 @@ function GettingStartedContent({activeTab, handleTabChange, modalTarget, handleM
 
             <input
               type="hidden"
-              value="0"
+              value={emailAddress}
               id="eael_user_email_address"
               name="eael_user_email_address"
             />

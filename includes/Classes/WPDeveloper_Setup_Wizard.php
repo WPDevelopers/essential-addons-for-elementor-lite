@@ -13,6 +13,7 @@ class WPDeveloper_Setup_Wizard {
 		add_action( 'admin_enqueue_scripts', array( $this, 'setup_wizard_scripts' ) );
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'wp_ajax_save_setup_wizard_data', [ $this, 'save_setup_wizard_data' ] );
+		add_action( 'wp_ajax_enable_wpins_process', [ $this, 'enable_wpins_process' ] );
 		add_action( 'wp_ajax_save_eael_elements_data', [ $this, 'save_eael_elements_data' ] );
 		add_action( 'in_admin_header', [ $this, 'remove_notice' ], 1000 );
 		$this->templately_status = $this->templately_active_status();
@@ -128,6 +129,7 @@ class WPDeveloper_Setup_Wizard {
 	public function data_getting_started_content(){
 		$getting_started_content = [
 			'youtube_promo_src' => esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/youtube-promo.png' ),
+			'is_tracking_allowed' => $this->get_is_tracking_allowed(),
 		];
 
 		return $getting_started_content;
@@ -152,80 +154,80 @@ class WPDeveloper_Setup_Wizard {
 	public function data_go_pro_content(){
 		$feature_items = [
 			[
-				'title' => 'Event Calendar',
-				'link' => 'https://essential-addons.com/event-calendar/',
+				'title' => 'Smart Post List',
+				'link' => 'https://essential-addons.com/post-list/',
 				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/event-calendar.svg',
 			],
-			[
-				'title' => 'Image Hotspots',
-				'link' => 'https://essential-addons.com/image-hotspots/',
-				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/image-hotspots.svg',
-			],
-			[
-				'title' => 'LearnDash Course List',
-				'link' => 'https://essential-addons.com/learndash-course-list/',
-				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/learndash-course-list.svg',
-			],
-			[
-				'title' => 'Particle Effect',
-				'link' => 'https://essential-addons.com/particle-effect/',
-				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/particle-effect.svg',
-			],
-			[
-				'title' => 'Instagram Feed',
-				'link' => 'https://essential-addons.com/instagram-feed/',
-				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/instagram-feed.svg',
-			],
-			[
-				'title' => 'Dynamic Gallery',
-				'link' => 'https://essential-addons.com/dynamic-gallery/',
-				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/dynamic-gallery.svg',
-			],
-			[
-				'title' => 'Parallax Effect',
-				'link' => 'https://essential-addons.com/parallax-scrolling/',
-				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/parallax-scrolling.svg',
-			],
-			[
-				'title' => 'Mailchimp',
-				'link' => 'https://essential-addons.com/mailchimp/',
-				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/mailchimp.svg',
-			],
-			[
-				'title' => 'Advanced Google Map',
-				'link' => 'https://essential-addons.com/advanced-google-map/',
-				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/advanced-google-map.svg',
-			],
-			[
-				'title' => 'Advanced Tooltip',
-				'link' => 'https://essential-addons.com/advanced-tooltip/',
-				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/advanced-tooltip.svg',
-			],
-			[
-				'title' => 'Content Toggle',
-				'link' => 'https://essential-addons.com/content-toggle/',
-				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/content-toggle.svg',
-			],
-			[
-				'title' => 'Lightbox & Modal',
-				'link' => 'https://essential-addons.com/lightbox-modal/',
-				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/lightbox-modal.svg',
-			],
+            [
+                'title' => 'Dynamic Gallery',
+                'link' => 'https://essential-addons.com/dynamic-gallery/',
+                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/dynamic-gallery.svg',
+            ],
+            [
+                'title' => 'Custom JS',
+                'link' => 'https://essential-addons.com/demos/',
+                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/advanced-tooltip.svg',
+            ],
+            [
+                'title' => 'Protected Content',
+                'link' => 'https://essential-addons.com/protected-content/',
+                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/content-toggle.svg',
+            ],
+            [
+                'title' => 'Interactive Animations',
+                'link' => 'https://essential-addons.com/demos/',
+                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/lightbox-modal.svg',
+            ],
+            [
+                'title' => 'Advanced Google Map',
+                'link' => 'https://essential-addons.com/advanced-google-map/',
+                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/advanced-google-map.svg',
+            ],
+            [
+                'title' => 'Mailchimp',
+                'link' => 'https://essential-addons.com/mailchimp/',
+                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/mailchimp.svg',
+            ],
+            [
+                'title' => 'Instagram Feed',
+                'link' => 'https://essential-addons.com/instagram-feed/',
+                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/instagram-feed.svg',
+            ],
+            [
+                'title' => 'Woo Product Slider',
+                'link' => 'https://essential-addons.com/woo-product-slider/',
+                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/woo-product-slider.svg',
+            ],
+            [
+                'title' => 'Parallax',
+                'link' => 'https://essential-addons.com/parallax-scrolling/',
+                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/parallax-scrolling.svg',
+            ],
+            [
+                'title' => 'Post Carousel',
+                'link' => 'https://essential-addons.com/post-carousel/',
+                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/logo-carousel.svg',
+            ],
+            [
+                'title' => 'LearnDash Course List',
+                'link' => 'https://essential-addons.com/learndash-course-list/',
+                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/learndash-course-list.svg',
+            ],
+            [
+                'title' => 'Particle Effect',
+                'link' => 'https://essential-addons.com/particle-effect/',
+                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/particle-effect.svg',
+            ],
 			[
 				'title' => 'Logo Carousel',
 				'link' => 'https://essential-addons.com/logo-carousel/',
 				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/logo-carousel.svg',
 			],
-			[
-				'title' => 'Woo Product Slider',
-				'link' => 'https://essential-addons.com/woo-product-slider/',
-				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/woo-product-slider.svg',
-			],
-			[
-				'title' => 'Woo Cross Sells',
-				'link' => 'https://essential-addons.com/woo-cross-sells/',
-				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/woo-cross-sells.svg',
-			]
+            [
+                'title' => 'Image Hotspots',
+                'link' => 'https://essential-addons.com/image-hotspots/',
+                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/image-hotspots.svg',
+            ]
 		];
 
 		$go_pro_content = [
@@ -279,13 +281,22 @@ class WPDeveloper_Setup_Wizard {
 				'local_plugin_data' => $this->get_local_plugin_data( 'betterdocs/betterdocs.php' ),
 			],
 			[
-				'slug'     => 'embedpress',
-				'basename' => 'embedpress/embedpress.php',
-				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/ep-logo.png',
-				'title'    => __( 'EmbedPress', 'essential-addons-for-elementor-lite' ),
-				'desc'     => __( 'Embed videos, images, gifs, charts, docs, maps, audio, live streams, pdf & more from 150+ sources into your WordPress site and get seamless customization options.', 'essential-addons-for-elementor-lite' ),
-				'is_active' => is_plugin_active( 'embedpress/embedpress.php' ),
-				'local_plugin_data' => $this->get_local_plugin_data( 'embedpress/embedpress.php' ),
+				'slug'     => 'betterlinks',
+				'basename' => 'betterlinks/betterlinks.php',
+				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/btl.svg',
+				'title'    => __( 'BetterLinks', 'essential-addons-for-elementor-lite' ),
+				'desc'     => __( 'Link Shortening tool to create, shorten & manage any URL. It helps to cross promote brands & products and gather analytics reports while running marketing campaigns.', 'essential-addons-for-elementor-lite' ),
+				'is_active' => is_plugin_active( 'betterlinks/betterlinks.php' ),
+				'local_plugin_data' => $this->get_local_plugin_data( 'betterlinks/betterlinks.php' ),
+			],
+			[
+				'slug'     => 'better-payment',
+				'basename' => 'better-payment/better-payment.php',
+				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/bp.svg',
+				'title'    => __( 'Better Payment', 'essential-addons-for-elementor-lite' ),
+				'desc'     => __( 'Streamline transactions in Elementor by integrating PayPal & Stripe. Experience advanced analytics, validation, and Elementor forms for secure & efficient payments.', 'essential-addons-for-elementor-lite' ),
+				'is_active' => is_plugin_active( 'better-payment/better-payment.php' ),
+				'local_plugin_data' => $this->get_local_plugin_data( 'better-payment/better-payment.php' ),
 			],
 			[
 				'slug'     => 'notificationx',
@@ -297,15 +308,6 @@ class WPDeveloper_Setup_Wizard {
 				'local_plugin_data' => $this->get_local_plugin_data( 'notificationx/notificationx.php' ),
 			],
 			[
-				'slug'     => 'easyjobs',
-				'basename' => 'easyjobs/easyjobs.php',
-				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/easy-jobs-logo.svg',
-				'title'    => __( 'easy.jobs', 'essential-addons-for-elementor-lite' ),
-				'desc'     => __( 'Job recruitment tool to attract, manage, and hire the right talent faster. This talent recruitment solution lets you manage jobs and career pages in Elementor.', 'essential-addons-for-elementor-lite' ),
-				'is_active' => is_plugin_active( 'easyjobs/easyjobs.php' ),
-				'local_plugin_data' => $this->get_local_plugin_data( 'easyjobs/easyjobs.php' ),
-			],
-			[
 				'slug'     => 'wp-scheduled-posts',
 				'basename' => 'wp-scheduled-posts/wp-scheduled-posts.php',
 				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/wscp.svg',
@@ -315,13 +317,22 @@ class WPDeveloper_Setup_Wizard {
 				'local_plugin_data' => $this->get_local_plugin_data( 'wp-scheduled-posts/wp-scheduled-posts.php' ),
 			],
 			[
-				'slug'     => 'betterlinks',
-				'basename' => 'betterlinks/betterlinks.php',
-				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/btl.svg',
-				'title'    => __( 'BetterLinks', 'essential-addons-for-elementor-lite' ),
-				'desc'     => __( 'Link Shortening tool to create, shorten & manage any URL. It helps to cross promote brands & products and gather analytics reports while running marketing campaigns.', 'essential-addons-for-elementor-lite' ),
-				'is_active' => is_plugin_active( 'betterlinks/betterlinks.php' ),
-				'local_plugin_data' => $this->get_local_plugin_data( 'betterlinks/betterlinks.php' ),
+				'slug'     => 'easyjobs',
+				'basename' => 'easyjobs/easyjobs.php',
+				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/easy-jobs-logo.svg',
+				'title'    => __( 'easy.jobs', 'essential-addons-for-elementor-lite' ),
+				'desc'     => __( 'Job recruitment tool to attract, manage, and hire the right talent faster. This talent recruitment solution lets you manage jobs and career pages in Elementor.', 'essential-addons-for-elementor-lite' ),
+				'is_active' => is_plugin_active( 'easyjobs/easyjobs.php' ),
+				'local_plugin_data' => $this->get_local_plugin_data( 'easyjobs/easyjobs.php' ),
+			],
+			[
+				'slug'     => 'embedpress',
+				'basename' => 'embedpress/embedpress.php',
+				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/ep-logo.png',
+				'title'    => __( 'EmbedPress', 'essential-addons-for-elementor-lite' ),
+				'desc'     => __( 'Embed videos, images, gifs, charts, docs, maps, audio, live streams, pdf & more from 150+ sources into your WordPress site and get seamless customization options.', 'essential-addons-for-elementor-lite' ),
+				'is_active' => is_plugin_active( 'embedpress/embedpress.php' ),
+				'local_plugin_data' => $this->get_local_plugin_data( 'embedpress/embedpress.php' ),
 			],
 			[
 				'slug'     => 'essential-blocks',
@@ -331,15 +342,6 @@ class WPDeveloper_Setup_Wizard {
 				'desc'     => __( 'Enhance Gutenberg experience with 50+ unique blocks (more coming soon). Boost your block editor with easy-to-use blocks for a simpler WordPress page or post design.', 'essential-addons-for-elementor-lite' ),
 				'is_active' => is_plugin_active( 'essential-blocks/essential-blocks.php' ),
 				'local_plugin_data' => $this->get_local_plugin_data( 'essential-blocks/essential-blocks.php' ),
-			],
-			[
-				'slug'     => 'better-payment',
-				'basename' => 'better-payment/better-payment.php',
-				'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/bp.svg',
-				'title'    => __( 'Better Payment', 'essential-addons-for-elementor-lite' ),
-				'desc'     => __( 'Streamline transactions in Elementor by integrating PayPal & Stripe. Experience advanced analytics, validation, and Elementor forms for secure & efficient payments.', 'essential-addons-for-elementor-lite' ),
-				'is_active' => is_plugin_active( 'better-payment/better-payment.php' ),
-				'local_plugin_data' => $this->get_local_plugin_data( 'better-payment/better-payment.php' ),
 			],
 		];
 	}
@@ -394,6 +396,25 @@ class WPDeveloper_Setup_Wizard {
 			wp_send_json_success( [ 'redirect_url' => esc_url( admin_url( 'admin.php?page=eael-settings' ) ) ] );
 		}
 		wp_send_json_error();
+	}
+
+	public function enable_wpins_process() {
+
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+		if ( !current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( __( 'you are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
+		}
+
+		if ( !isset( $_POST[ 'fields' ] ) ) {
+			return;
+		}
+
+		wp_parse_str( $_POST[ 'fields' ], $fields );
+		
+		$this->wpins_process();
+
+		wp_send_json_success();
 	}
 
 	/**
@@ -756,6 +777,17 @@ class WPDeveloper_Setup_Wizard {
 			$tracker->set_is_tracking_allowed( true );
 			$tracker->do_tracking( true );
 		}
+	}
+
+	public function get_is_tracking_allowed( $plugin = 'essential_adons_elementor' ){
+		/**
+		 * Get All Tracked Plugin List using this Tracker.
+		 */
+		$allow_tracking = get_option( 'wpins_allow_tracking' );
+		/**
+		 * Check user is opted out for tracking or not.
+		 */
+		return intval( isset( $allow_tracking[$plugin] ) );
 	}
 
 	public function get_dummy_widget() {

@@ -114,11 +114,13 @@ span {
   --background-13: #F9FAFB;
   --background-14: #F5F1FF;
   --background-15: #FFFCF5;
+  --background-16: #FFF1F3;
   --label-color: #EAECF0;
   --label-color-fill: #7F56D9;
   --base-color-50: #750EF4;
   --base-color-75: #6F0AF2;
   --base-color-100: #FF9437;
+  --base-color-200: #C01048;
   --text-color-25: #1D2939;
   --text-color-50: #344054;
   --text-color-100: #475467;
@@ -166,11 +168,13 @@ body.eael_dash_dark_mode {
   --background-13: #09090A;
   --background-14: #09090A;
   --background-15: #09090A;
+  --background-16: #FFF1F3;
   --label-color: #1F2125;
   --label-color-fill: #7F56D9;
   --base-color-50: #750EF4;
   --base-color-75: #6F0AF2;
   --base-color-100: #FF9437;
+  --base-color-200: #C01048;
   --text-color-25: #FFFFFF;
   --text-color-50: #D0D5DD;
   --text-color-100: #B1B4B9;
@@ -907,7 +911,8 @@ span.dark-icon {
 }
 
 .templates-content {
-  padding: 24px 0px 24px 24px;
+  padding: 0 18px 0 8px;
+  max-width: 330px;
 }
 
 .ea__general-content-item.templates {
@@ -950,6 +955,11 @@ span.dark-icon {
   align-items: center;
   border-radius: 8px;
   margin-bottom: 16px;
+}
+
+.ea__others-icon.eaicon-unlock {
+  color: var(--base-color-200);
+  background: var(--background-16);
 }
 
 .ea__others-icon.eaicon-1 {
@@ -1334,7 +1344,7 @@ span.ea__tooltip {
 
 .content-btn {
   font-size: 11px;
-  line-height: 10px;
+  line-height: 11px;
   font-weight: 500;
   color: var(--base-background);
   text-transform: uppercase;
@@ -2400,13 +2410,14 @@ span.title-color-2 {
   font-size: 14px;
 }
 
+.video-promo-wrapper {
+  padding: 16px;
+  background: linear-gradient(282.7deg, #DEA8FF -7.9%, #FEFAFF 35.7%);
+  border-radius: 8px;
+}
+
 .ea__general-content-item.video-promo .templates-img {
   width: 100%;
-  padding: 16px;
-  background: linear-gradient(269.7deg, #DEA8FF 1.1%, var(--background-10) 99.7%);
-  border-radius: 0 8px 8px 0;
-  justify-content: flex-end;
-  display: flex;
 }
 
 .ea__general-content-item.video-promo .templates-img img {
@@ -2925,7 +2936,7 @@ input::placeholder {
   }
 
   .templates-content {
-    padding: 18px 0px 18px 18px;
+    padding: 0 16px 0 2px;
   }
 
   .ea__general-content-item h2 {
@@ -3294,6 +3305,21 @@ input::placeholder {
 
   .ea__general-content-item.video-promo .templates-img a img {
     width: 100%;
+  }
+
+  .video-promo-wrapper {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .templates-content {
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .ea__general-content-item.video-promo .templates-img {
+    width: 100%;
+    display: inline-flex;
   }
 
   /* .ea__sidebar-nav-list {

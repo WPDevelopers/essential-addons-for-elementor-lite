@@ -10,8 +10,8 @@ function CommunityBox(props) {
                     <i className={eaData.icon + ' ea-dash-icon'}></i>
                 </div>
                 <h5>{eaData.heading}</h5>
-                <p className="mb-6">{eaData.content}</p>
-                {eaData.button === undefined || (<a href={eaData.button.url}>
+                <p className="mb-6" dangerouslySetInnerHTML={{__html: eaData.content}}></p>
+                {eaData.button === undefined || (<a href={eaData.button.url} target="_blank">
                     <button>
                         <span className="underline">{eaData.button.label}</span>
                         <i className="ea-dash-icon ea-right-arrow"></i>
