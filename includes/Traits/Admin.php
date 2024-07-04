@@ -192,7 +192,7 @@ trait Admin {
 			    ],
 			    'sidebar_box'             => [
 				    'heading' => __( 'Want Advanced Features?', 'essential-addons-for-elementor-lite' ),
-				    'content' => __( 'Get more powerful Widgets & Extensions to elevate your experience of creating a beautiful Elementor website.', 'essential-addons-for-elementor-lite' ),
+				    'content' => __( 'Get more powerful widgets & extensions to elevate your Elementor website', 'essential-addons-for-elementor-lite' ),
 				    'review'  => [
 					    'label' => __( 'Review from Real Users', 'essential-addons-for-elementor-lite' ),
 					    'score' => __( '5/5', 'essential-addons-for-elementor-lite' ),
