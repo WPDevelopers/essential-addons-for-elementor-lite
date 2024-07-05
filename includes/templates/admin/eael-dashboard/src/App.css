@@ -1782,6 +1782,10 @@ section.ea__modal-wrapper {
   margin-bottom: 0;
 }
 
+.ea__modal-body .ea__feature-list-item span {
+  line-height: 1.7em;
+}
+
 .ea__modal-body label {
   font-size: 14px;
   line-height: 1.3em;

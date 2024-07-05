@@ -868,6 +868,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     }
                     .wpinsights-form-active-essential_adons_elementor .wpinsights-goodbye-form {
                         border-radius: 8px;
+                        width: 563px;
                         overflow: visible;
                         position: relative;
                     }
@@ -895,12 +896,15 @@ if ( ! defined( 'ABSPATH' ) ) {
                         color: #495157;
                         padding: 24px;
                         border-radius: 8px 8px 0 0;
-                    }
-                    .wpinsights-goodbye-form-head {
+                        box-shadow: none;
+                        border-bottom: 1px solid #EAECF0;
                         display: flex;
                         flex-direction: column;
                         gap: 16px;
                         align-items: center;
+                    }
+                    .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-head > span {
+                        display: inline-flex;
                     }
                     .wpinsights-goodbye-form-head h1 {
                         font-size: 22px;
@@ -920,14 +924,20 @@ if ( ! defined( 'ABSPATH' ) ) {
                         padding-bottom: 16px;
                         font-weight: 400;
                     }
+                    .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-body #wpinsights-goodbye-options {
+                        padding-top: 0px;
+                    }
                     .widefat td ul {
                         font-size: 14px;
                         margin: 0;
                         color: #475467;
+                        line-height: 1.4em;
                     }
-                    .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-body #wpinsights-goodbye-options ul > li {
-                        margin-bottom: 16px;
-                        
+                    .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-body #wpinsights-goodbye-options ul > li:not(:last-child) {
+                        margin-bottom: 16px;  
+                    }
+                    .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-body #wpinsights-goodbye-options ul > li:last-child {
+                        margin-bottom: 0;
                     }
                     input[type=radio] {
                         border-radius: 50%;
@@ -944,7 +954,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         padding: 10px 16px;
                         border-radius: 8px;
                         width: 100%;
-                        border: 1px solid #EAECF0;
+                        border: 1px solid #D0D5DD;
                         margin: 0;
                         margin-top: 16px;
                         color: #1D2939;
@@ -975,7 +985,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     }
                     .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-body #wpinsights-goodbye-options ul > li > div > input::placeholder,
                      .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-body #wpinsights-goodbye-options ul > li > div > textarea::placeholder{
-                        color: #D0D5DD !important;
+                        color: #C6CBD2 !important;
                     }
                     .wpinsights-goodbye-form-wrapper-essential_adons_elementor .wpinsights-goodbye-form-footer {
                         padding: 16px 36px;
