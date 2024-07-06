@@ -1163,7 +1163,7 @@ span.dark-icon {
 
 .ea__elements-nav-content.elements-contents {
   background: var(--background-9);
-  padding-bottom: 10px;
+  padding-bottom: 16px;
   border-radius: 0 8px 8px 0;
 }
 
@@ -1181,8 +1181,8 @@ span.dark-icon {
 
 .ea__section-overlay {
   position: absolute;
-  min-height: 100px;
-  background: linear-gradient(360deg, var(--base-background) 68%, var(--shadow-color-1) 100%);
+  min-height: 75px;
+  background: linear-gradient(360deg,var(--base-background) 78%,var(--shadow-color-1) 100%);
   bottom: 0;
   left: 16px;
   right: 16px;
@@ -1195,8 +1195,7 @@ span.dark-icon {
 .ea__elements-button-wrap {
   display: flex;
   justify-content: flex-end;
-  align-items: flex-end;
-  padding: 20px;
+  padding: 0 20px 16px;
   position: sticky;
   bottom: 0;
   left: 0;
@@ -1205,7 +1204,7 @@ span.dark-icon {
 
 #ea__dashboard--wrapper .ea__elements-button-wrap .primary-btn.install-btn {
   z-index: 9999;
-  margin-right: 16px;
+  margin-right: 12px;
 }
 
 .ea__content-header.sticky .ea__content-info {
@@ -1328,12 +1327,11 @@ span.ea__tooltip {
 }
 
 .ea__content-elements-wrapper {
-  padding: 16px;
+  padding: 16px 16px 0;
   display: flex;
   flex-direction: column;
   gap: 16px;
   background: var(--background-9);
-  padding-bottom: 26px;
 }
 
 .ea__contents {
