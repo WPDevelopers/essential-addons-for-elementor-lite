@@ -544,6 +544,22 @@ input:focus {
   color: var(--text-icon-500);
 }
 
+input.input-api[disabled]::placeholder {
+  color: var(--text-icon-100) !important;
+}
+
+input.input-api::placeholder {
+  color: var(--text-icon-100) !important;
+}
+
+input.input-api.verify::placeholder {
+  color: var(--text-icon-500) !important;
+}
+
+input::placeholder {
+  color: var(--text-icon-500) !important;
+}
+
 #ea__dashboard--wrapper .select-option-wrapper {
   position: relative;
 }
@@ -974,6 +990,10 @@ span.dark-icon {
 
 .ea__connect-others:not(:last-child) {
   margin-bottom: 16px;
+}
+
+.ea__tools-content-wrapper .ea__connect-others {
+  margin-bottom: 0;
 }
 
 .ea__connect-others-wrapper .ea__connect-others {
@@ -2631,22 +2651,6 @@ input.input-api {
 input.input-api:disabled {
   box-shadow: none;
   color: var(--text-icon-100) !important;
-}
-
-input.input-api[disabled]::placeholder {
-  color: var(--text-icon-100) !important;
-}
-
-input.input-api::placeholder {
-  color: var(--text-icon-100) !important;
-}
-
-input.input-api.verify::placeholder {
-  color: var(--text-icon-500) !important;
-}
-
-input::placeholder {
-  color: var(--text-icon-500) !important;
 }
 
 .ea__license-verify {
