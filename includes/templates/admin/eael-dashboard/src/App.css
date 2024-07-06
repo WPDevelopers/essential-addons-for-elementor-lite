@@ -147,6 +147,11 @@ span {
   --modal-bg-3: #F7F8FF;
   --modal-bg-4: #F9F9F9;
   --modal-bg-5: #F3F7FF;
+  --gardient-1: #fefbff;
+  --gardient-2: #f4e4f6;
+  --gardient-3: #dea8ff;
+  --gardient-4: #fefaff;
+  --modal-overlay: #1D232733;
   --mode-switcher-icon: "\e905";
 }
 
@@ -201,6 +206,11 @@ body.eael_dash_dark_mode {
   --modal-bg-3: #09090A;
   --modal-bg-4: #09090A;
   --modal-bg-5: #09090A;
+  --gardient-1: #17111D;
+  --gardient-2: #693787;
+  --gardient-3: #693787;
+  --gardient-4: #17111D;
+  --modal-overlay: #09090ACC;
   --mode-switcher-icon: "\e903";
 }
 
@@ -928,7 +938,7 @@ span.dark-icon {
 }
 
 .ea__templates-content-wrapper {
-  background: linear-gradient(269.7deg, #dea8ff 0.1%, #fefaff 35.7%);
+  background: linear-gradient(282.7deg, var(--gardient-3) -7.9%, var(--gardient-4) 35.7%);
   border-radius: 8px;
   gap: 50px;
 }
@@ -1491,6 +1501,8 @@ span.select-details {
   padding-top: 16px;
 }
 
+/* --------- Slide css-------- */
+
 .ea__slider-connect {
   width: 100%;
   overflow: hidden;
@@ -1498,6 +1510,10 @@ span.select-details {
   background: var(--base-background);
   border-radius: 8px;
   padding: 24px 24px 40px;
+}
+
+.ea__slider-connect .swiper-wrapper {
+  max-width: 860px;
 }
 
 .ea__premium-item {
@@ -1528,10 +1544,6 @@ span.select-details {
   bottom: -4px;
 }
 
-.ea__slider-connect .swiper-wrapper {
-  max-width: 860px;
-}
-
 .features-widget-wrapper {
   padding-left: 24px;
   display: grid;
@@ -1553,7 +1565,6 @@ span.select-details {
 .features-widget-item a {
   position: relative;
 }
-
 
 .features-widget-item span.eael-tooltip {
   position: absolute;
@@ -1604,7 +1615,7 @@ span.eael-tooltip:after {
 .ea__pro-features {
   border: 1px solid var(--border-color-base);
   border-radius: 8px;
-  background: linear-gradient(89.99deg, #FEFBFF 35.58%, #F4E4F6 99.99%);
+  background: linear-gradient(89.99deg, var(--gardient-1) 63.58%, var(--gardient-2) 115.99%);
   padding: 24px;
 }
 
@@ -1703,7 +1714,7 @@ section.ea__modal-wrapper {
   left: 0;
   right: 0;
   bottom: 0;
-  background: #1D232733;
+  background: var(--modal-overlay);
   z-index: 99999;
   font-family: "Rubik", sans-serif;
 }
@@ -2452,7 +2463,7 @@ span.title-color-2 {
 
 .video-promo-wrapper {
   padding: 16px;
-  background: linear-gradient(282.7deg, #DEA8FF -7.9%, #FEFAFF 35.7%);
+  background: linear-gradient(282.7deg, var(--gardient-3) -7.9%, var(--gardient-4) 35.7%);
   border-radius: 8px;
 }
 
