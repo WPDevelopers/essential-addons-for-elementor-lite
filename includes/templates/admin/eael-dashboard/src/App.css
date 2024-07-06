@@ -1516,6 +1516,10 @@ span.select-details {
   max-width: 860px;
 }
 
+.swiper-slide {
+  display: flex;
+}
+
 .ea__premium-item {
   border: 1px solid var(--border-color-base);
   border-radius: 8px;
