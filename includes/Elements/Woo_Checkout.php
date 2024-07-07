@@ -2792,6 +2792,14 @@ class Woo_Checkout extends Widget_Base {
 			]
 		);
 
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'ea_woo_checkout_payment_methods_typo',
+				'selector' => '.eael-woo-checkout {{WRAPPER}} .woo-checkout-payment .payment_box p',
+			]
+		);
+
 		// Privacy Policy
 		$this->add_control(
 			'ea_woo_checkout_privacy_policy',
