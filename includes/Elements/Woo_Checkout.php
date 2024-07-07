@@ -2498,7 +2498,11 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#cccccc',
 				'selectors' => [
-					'{{WRAPPER}} #customer_details input, {{WRAPPER}} #customer_details .select, {{WRAPPER}} #customer_details .select2-container--default .select2-selection--single, {{WRAPPER}} #customer_details textarea' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} #customer_details input, 
+					{{WRAPPER}} #customer_details .select, 
+					{{WRAPPER}} .ea-woo-checkout .woocommerce-input-wrapper select, 
+					{{WRAPPER}} #customer_details .select2-container--default .select2-selection--single, 
+					{{WRAPPER}} #customer_details textarea' => 'border-color: {{VALUE}};',
 				],
 			]
 		);
