@@ -381,8 +381,8 @@ trait Admin {
 				    ],
 				    'image'   => 'images/img-3.png',
 				    'button'  => [
-					    'label' => __( 'View Changelog', 'essential-addons-for-elementor-lite' ),
-					    'url'   => 'https://essential-addons.com/elementor/changelog/',
+					    'label' => __( 'More Premium Features', 'essential-addons-for-elementor-lite' ),
+					    'url'   => 'https://essential-addons.com/compare/',
 					    'icon'  => 'ea-link'
 				    ]
 			    ],
