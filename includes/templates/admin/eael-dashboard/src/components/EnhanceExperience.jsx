@@ -9,20 +9,11 @@ function EnhanceExperience() {
                 <div>
                     <h3 dangerouslySetInnerHTML={{__html: eaData.heading}}></h3>
                 </div>
-                <div className="review-wrap-ex flex justify-between">
+                <div className="review-wrap flex items-center justify-between">
                     <div className="flex gap-2">
-                        <i className="ea-dash-icon ea-link-2"></i>
-                        <div>
-                            <h6>{eaData.review.label}</h6>
-                            <div className="icons flex items-center gap-1">
-                                <i className="ea-dash-icon ea-star"></i>
-                                <i className="ea-dash-icon ea-star"></i>
-                                <i className="ea-dash-icon ea-star"></i>
-                                <i className="ea-dash-icon ea-star"></i>
-                                <i className="ea-dash-icon ea-star"></i>
-                                <span className="reating-details">{eaData.review.score}</span>
-                            </div>
-                        </div>
+                        <i className="ea-dash-icon ea-star"></i>
+                        <h6>3200+</h6>
+                        <span className="reating-details">Five Star Reviews</span>
                     </div>
                     <a href={eaData.button.url} target="_blank">
                         <button className="upgrade-button">
