@@ -54,10 +54,13 @@ var CountDown = function ($scope, $) {
 							window.location.href = ea.sanitizeURL($redirect_url);
 						}
 					} else if ($expire_type === "template") {
-						countDown.remove();
-						$coundDown.find(".eael-countdown-expiry-template")
+						countDown.html($coundDown.find(".eael-countdown-expiry-template").html());
+						if( $countdown_type === 'evergreen' ){
+							countDown.remove();
+							$coundDown.find(".eael-countdown-expiry-template")
 								  .attr( "id", "#eael-countdown-" + $countdown_id ).show()
 								  .removeClass( "eael-countdown-expiry-template" ).addClass( "eael-countdown-template" );
+						}
 					} else {
 						//do nothing!
 					}
