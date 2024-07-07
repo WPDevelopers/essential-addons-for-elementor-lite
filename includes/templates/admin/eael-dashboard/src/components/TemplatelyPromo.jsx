@@ -17,7 +17,7 @@ function TemplatelyPromo() {
                         <h2>{eaData.heading}</h2>
                         <div className="mb-6 flex flex-col gap-4">
                             {eaData.list.map((item, index) => {
-                                return <div className="ea__content-details flex gap-2 items-center" key={index}>
+                                return <div className="ea__content-details flex gap-2" key={index}>
                                     <span className="check-icon ea-dash-icon ea-check"></span>
                                     {item}
                                 </div>;
