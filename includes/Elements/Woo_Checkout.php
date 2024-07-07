@@ -1046,6 +1046,18 @@ class Woo_Checkout extends Widget_Base {
 				'selector' => '{{WRAPPER}} .ea-woo-checkout-order-review .table-row',
 			]
 		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'name'      => 'ea_woo_checkout_order_review_row_border',
+				'selector'  => '{{WRAPPER}} .ea-woo-checkout-order-review .table-row',
+				'condition' => [
+					'ea_woo_checkout_layout' => 'default',
+				],
+			]
+		);
+
 		$this->add_responsive_control(
 			'ea_woo_checkout_order_review_row_border_radius',
 			[
@@ -1241,9 +1253,22 @@ class Woo_Checkout extends Widget_Base {
 				'default' => '#404040',
 				'selectors' => [
 					'{{WRAPPER}} .ea-woo-checkout-order-review .footer-content > div' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .ea-woo-checkout-order-review .footer-content' => 'border-color: {{VALUE}};',
 				],
 			]
 		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'name'      => 'ea_woo_checkout_order_review_footer_border',
+				'selector'  => '{{WRAPPER}} .ea-woo-checkout-order-review .footer-content',
+				'condition' => [
+					'ea_woo_checkout_layout' => 'default',
+				],
+			]
+		);
+
 		$this->add_responsive_control(
 			'ea_woo_checkout_order_review_footer_border_radius',
 			[
