@@ -258,7 +258,10 @@ class advancedDataTableEdit {
 
 					if (this.table.classList.contains("ea-advanced-data-table-static")) {
 						for (let j = 0; j < cols.length; j++) {
-							row.push( decodeURI( cols[j].dataset.quill ) );
+							let encodedText = decodeURI( cols[j].dataset.quill );
+							let modifiedString = encodedText.replace(/"/g, '""');
+							modifiedString = `"${modifiedString}"`;
+							row.push( modifiedString );
 						}
 					} else {
 						for (let j = 0; j < cols.length; j++) {
@@ -289,38 +292,51 @@ class advancedDataTableEdit {
 				let header = "";
 				let body = "";
 
-				if (textarea.value.length > 0) {
+				if ( textarea.value.length > 0 ) {
 					body += "<tbody>";
-					csletr.forEach((row, index) => {
-						if (row.length > 0) {
-							let colReplace = row.replace(/,"""([^"]+)""",/g, ',"$1",');
-							cols = colReplace.match(/("(?:[^"\\]|\\.)*"|[^","]+)/gm);
-
-							if (cols.length > 0) {
-								if (enableHeader && index == 0) {
-									header += "<thead><tr>";
-									cols.forEach((col) => {
-										if (col.match(/(^"")|(^")|("$)|(""$)/g)) {
-											header += `<th>${JSON.parse(col)}</th>`;
-										} else {
-											header += `<th>${col}</th>`;
-										}
-									});
-									header += "</tr></thead>";
+					csletr.forEach( (row, index) => {
+						const result = [];
+						let field = '';
+						let inQuotes = false;
+						let i = 0;
+						while ( i < row.length ) {
+							const char = row[i];
+							if ( char === '"' ) {
+								if ( inQuotes && row[i + 1] === '"' ) {
+									//Handle escaped double quote
+									field += '"';
+									i++;
 								} else {
-									body += "<tr>";
-									cols.forEach((col) => {
-										if ( col.match(/(^"")|(^")|("$)|(""$)/g) ) {
-											body += `<td>${JSON.parse(col)}</td>`;
-										} else {
-											body += `<td>${col}</td>`;
-										}
-									});
-									body += "</tr>";
+									inQuotes = !inQuotes; //Toggle inQuotes
 								}
+							} else if ( char === ',' && !inQuotes ) {
+								//End of field
+								result.push(field);
+								field = '';
+							} else {
+								field += char; //Regular character
+							}
+							i++;
+						}
+						result.push(field);
+
+						//Generate HTML table
+						if ( result.length > 0 ) {
+							if ( enableHeader && index == 0 ) {
+								header += "<thead><tr>";
+								result.forEach( (col) => {
+									header += `<th>${col}</th>`;
+								} );
+								header += "</tr></thead>";
+							} else {
+								body += "<tr>";
+								result.forEach( (col) => {
+									body += `<td>${col}</td>`;
+								} );
+								body += "</tr>";
 							}
 						}
-					});
+					} );
 					body += "</tbody>";
 
 					if (header.length > 0 || body.length > 0) {
