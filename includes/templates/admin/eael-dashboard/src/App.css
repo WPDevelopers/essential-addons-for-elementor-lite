@@ -886,7 +886,7 @@ span.dark-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 18px;
   color: var(--text-color-100);
 }
 
@@ -2956,7 +2956,7 @@ input.input-api:disabled {
   span.dark-icon {
     width: 32px;
     height: 32px;
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .nav-sticky {
