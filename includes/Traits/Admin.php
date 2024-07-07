@@ -137,9 +137,9 @@ trait Admin {
 			    'templately_promo'        => [
 				    'heading' => __( 'Unlock 5000+ Ready Templates', 'essential-addons-for-elementor-lite' ),
 				    'list'    => [
-					    __( 'Stunning Website Templates For All Niche', 'essential-addons-for-elementor-lite' ),
-					    __( 'One-Click Full Site Import Feature', 'essential-addons-for-elementor-lite' ),
-					    __( 'Collaborate With Team Members in WorkSpace', 'essential-addons-for-elementor-lite' ),
+					    __( 'Stunning Templates For All', 'essential-addons-for-elementor-lite' ),
+					    __( 'One-Click Full Site Import', 'essential-addons-for-elementor-lite' ),
+					    __( 'Collaborate in Team WorkSpace', 'essential-addons-for-elementor-lite' ),
 					    __( 'Unlimited Cloud Storage', 'essential-addons-for-elementor-lite' ),
 				    ],
 				    'button'  => [
@@ -192,7 +192,7 @@ trait Admin {
 			    ],
 			    'sidebar_box'             => [
 				    'heading' => __( 'Want Advanced Features?', 'essential-addons-for-elementor-lite' ),
-				    'content' => __( 'Get more powerful Widgets & Extensions to elevate your experience of creating a beautiful Elementor website.', 'essential-addons-for-elementor-lite' ),
+				    'content' => __( 'Get more powerful widgets & extensions to elevate your Elementor website', 'essential-addons-for-elementor-lite' ),
 				    'review'  => [
 					    'label' => __( 'Review from Real Users', 'essential-addons-for-elementor-lite' ),
 					    'score' => __( '5/5', 'essential-addons-for-elementor-lite' ),

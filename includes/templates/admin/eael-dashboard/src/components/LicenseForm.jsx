@@ -5,8 +5,6 @@ function LicenseForm() {
     const licenseRef = useRef(),
         {eaState, eaDispatch} = consumer(),
         submitHandler = () => {
-            eaDispatch({type: 'ON_PROCESSING', payload: {licenseBtn: true}});
-
             if (eaState.licenseStatus !== 'valid') {
                 eaDispatch({type: 'LICENSE_ACTIVATE', payload: licenseRef.current.value});
             } else {

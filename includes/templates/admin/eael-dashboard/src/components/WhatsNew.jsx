@@ -9,7 +9,7 @@ function WhatsNew() {
                 <h3>{eaData.heading}</h3>
                 <div className="mb-6 flex flex-col gap-4">
                     {eaData.list.map((item, index) => {
-                        return <div className="ea__content-details flex gap-2 items-center" key={index}>
+                        return <div className="ea__content-details flex gap-2" key={index}>
                                 <span>
                                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">

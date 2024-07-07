@@ -121,6 +121,7 @@ class WPDeveloper_Setup_Wizard {
 			'wizard_column' => !$this->templately_status ? 'five' : 'four',
 			'items' => $items,
 			'templately_local_plugin_data' => $this->get_local_plugin_data( 'templately/templately.php' ),
+			'ea_pro_local_plugin_data' => $this->get_local_plugin_data( 'essential-addons-elementor/essential_adons_elementor.php' ),
 		];
 
 		return $menu_items;
@@ -156,7 +157,7 @@ class WPDeveloper_Setup_Wizard {
 			[
 				'title' => 'Smart Post List',
 				'link' => 'https://essential-addons.com/post-list/',
-				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/event-calendar.svg',
+				'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/smart-post-list.svg',
 			],
             [
                 'title' => 'Dynamic Gallery',
@@ -166,12 +167,12 @@ class WPDeveloper_Setup_Wizard {
             [
                 'title' => 'Custom JS',
                 'link' => 'https://essential-addons.com/demos/',
-                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/advanced-tooltip.svg',
+                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/custom-js.svg',
             ],
             [
                 'title' => 'Protected Content',
                 'link' => 'https://essential-addons.com/protected-content/',
-                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/content-toggle.svg',
+                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/protected-content.svg',
             ],
             [
                 'title' => 'Interactive Animations',
@@ -206,7 +207,7 @@ class WPDeveloper_Setup_Wizard {
             [
                 'title' => 'Post Carousel',
                 'link' => 'https://essential-addons.com/post-carousel/',
-                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/logo-carousel.svg',
+                'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/post-carousel.svg',
             ],
             [
                 'title' => 'LearnDash Course List',

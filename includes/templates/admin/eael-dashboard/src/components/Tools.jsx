@@ -62,7 +62,7 @@ function Tools() {
                         </div>
                     </div>
                     <div className="flex flex-end mb-5">
-                        <button className="primary-btn install-btn flex flex-end mb-6"
+                        <button className="primary-btn install-btn flex flex-end"
                                 onClick={saveHandler}>{i18n.save_settings} {eaState.btnLoader === 'tools' &&
                             <span className="eael_btn_loader"></span>}</button>
                     </div>
