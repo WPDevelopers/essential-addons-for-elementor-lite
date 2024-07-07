@@ -200,17 +200,17 @@ class Interactive_Circle extends Widget_Base {
 		$repeater->add_control(
 			'eael_interactive_circle_btn_link_on',
 			[
-				'label'        => esc_html__( 'Show Link', 'essential-addons-for-elementor-lite' ),
+				'label'        => esc_html__( 'Item Link', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 			]
 		);
 
 		$repeater->add_control( 'eael_interactive_circle_btn_link_mess', [
 			'type'            => Controls_Manager::RAW_HTML,
-			'raw'             => __( 'To view the detailed content, select <strong>Additional Settings -> Mouse Event -> Hover</strong>', 'essential-addons-for-elementor-lite' ),
+			'raw'             => __( 'To be able to view detailed content, Please go to<strong> > Additional Settings,</strong> then <strong>Mouse Event,</strong> and choose <strong>Hover</strong>', 'essential-addons-for-elementor-lite' ),
 			'content_classes' => 'eael-warning',
 			'condition' => [
 				'eael_interactive_circle_btn_link_on' => 'yes',
