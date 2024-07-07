@@ -553,11 +553,14 @@ trait Controls
             $template_list = $wb->get_template_list_for_dropdown();
             $layout_options = [];
             if( ! empty( $template_list ) ){
-                $image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/post-timeline-';
+                $image_dir_url = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/';
+                $image_dir_path = EAEL_PLUGIN_PATH . 'assets/admin/images/layout-previews/';
                 foreach( $template_list as $key => $label ){
+                    $image_url = $image_dir_url . 'post-timeline-' . $key . '.png';
+                    $image_url =  file_exists( $image_dir_path . 'post-timeline-' . $key . '.png' ) ? $image_url : $image_dir_url . 'custom-layout.png';
                     $layout_options[ $key ] = [
                         'title' => $label,
-                        'image' => $image_path . $key . '.png'
+                        'image' => $image_url
                     ];
                 }
             }
