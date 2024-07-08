@@ -9,15 +9,11 @@ function SidebarBox() {
                 <h5>{eaData.heading}</h5>
                 <p>{eaData.content}</p>
                 <div className="review-wrap">
-                    <h6>{eaData.review.label}</h6>
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-2">
                         <i className="ea-dash-icon ea-star"></i>
-                        <i className="ea-dash-icon ea-star"></i>
-                        <i className="ea-dash-icon ea-star"></i>
-                        <i className="ea-dash-icon ea-star"></i>
-                        <i className="ea-dash-icon ea-star"></i>
-                        <span className="reating-details">{eaData.review.score}</span>
+                        <h6>{eaData.review.count}</h6>
                     </div>
+                    <span className="reating-details">{eaData.review.label}</span>
                 </div>
                 <a href={eaData.button.url} target="_blank">
                     <button className="upgrade-button">
