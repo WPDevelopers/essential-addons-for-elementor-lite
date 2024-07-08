@@ -19,25 +19,11 @@ function Premium() {
                     <ExploreProFeatures/>
                     <div className="ea__slider-connect">
                         <div className="ea__connect-wrapper flex">
-                            <Swiper
-                                modules={[Autoplay, Pagination]}
-                                spaceBetween={16}
-                                slidesPerView={3}
-                                autoplay={{
-                                    delay: 2500,
-                                    disableOnInteraction: false
-                                }}
-                                loop={true}
-                                pagination={{
-                                    clickable: true
-                                }}
-                                onSlideChange={() => console.log('slide change')}
-                                onSwiper={(swiper) => console.log(swiper)}
-                            >
+                            <Swiper modules={[Autoplay, Pagination]} spaceBetween={16} slidesPerView={3} loop={true}
+                                    autoplay={{delay: 2500, disableOnInteraction: false}}
+                                    pagination={{clickable: true}}>
                                 {eaData.list.map((item, index) => {
-                                    return <SwiperSlide key={index}>
-                                        <PremiumItem index={index}/>
-                                    </SwiperSlide>;
+                                    return <SwiperSlide key={index}><PremiumItem index={index}/></SwiperSlide>;
                                 })}
                             </Swiper>
                         </div>

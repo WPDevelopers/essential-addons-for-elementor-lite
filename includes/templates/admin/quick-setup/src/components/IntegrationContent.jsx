@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { __ } from "@wordpress/i18n";
 
 function IntegrationContent({
@@ -10,6 +10,8 @@ function IntegrationContent({
 }) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let integrations_content = eaelQuickSetup?.integrations_content;
+  let ea_pro_local_plugin_data =
+    eaelQuickSetup?.menu_items?.ea_pro_local_plugin_data;
   let templately_local_plugin_data =
     eaelQuickSetup?.menu_items?.templately_local_plugin_data;
   let initialPluginList = integrations_content?.plugin_list;
@@ -61,9 +63,7 @@ function IntegrationContent({
           if (isActionInstall) {
             setPluginList((prevList) =>
               prevList.map((p) =>
-                p.slug === plugin.slug
-                  ? { ...p, local_plugin_data: true }
-                  : p
+                p.slug === plugin.slug ? { ...p, local_plugin_data: true } : p
               )
             );
           }
@@ -220,7 +220,11 @@ function IntegrationContent({
           className="previous-btn flex gap-2 items-center eael-setup-next-btn"
           type="button"
           data-next={
-            !templately_local_plugin_data !== false ? "templately" : "go-pro"
+            !templately_local_plugin_data !== false
+              ? "templately"
+              : !ea_pro_local_plugin_data
+              ? "go-pro"
+              : "elements"
           }
           onClick={handleTabChange}
         >
