@@ -7,6 +7,9 @@ function EnhanceExperience() {
         <>
             <div className="ea__pro-elements-content">
                 <div>
+                    <div className='ea__active-user-wrapper'>
+                        <span className='ea__active-users'>2+ Million Active Users</span>
+                    </div>
                     <h3 dangerouslySetInnerHTML={{__html: eaData.heading}}></h3>
                 </div>
                 <div className="review-wrap flex items-center justify-between">
