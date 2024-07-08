@@ -45,6 +45,12 @@ a,
 span {
   display: inline-block;
 }
+
+a:focus {
+  box-shadow: none;
+  outline: 0;
+}
+
 .eael-admin-promotion-message {
   background: #5E2EFF;
   color: white;
@@ -157,6 +163,9 @@ span {
   --elements-2: #F1FFF2;
   --elements-3: #F6F9FF;
   --mode-switcher-icon: "\e905";
+  --enhance-bg: url('../images/pro-elements-bg.png');
+  --whats-new-bg: url('../images/img-4.png');
+  --features-bg: url('../images/pro-bg.png');
 }
 
 body.eael_dash_dark_mode {
@@ -220,6 +229,9 @@ body.eael_dash_dark_mode {
   --elements-2: #182B23;
   --elements-3: #1B1E2F;
   --mode-switcher-icon: "\e903";
+  --enhance-bg: url('../images/pro-elements-bg-dark.png');
+  --whats-new-bg: url('../images/img-4-dark.png');
+  --features-bg: url('../images/pro-bg-dark.png');
 }
 
 body,
@@ -472,7 +484,7 @@ input:focus {
   font-weight: 450;
   line-height: 1.5rem;
   font-family: "Rubik", sans-serif;
-  color: var(--base-background);
+  color: #FFFFFF;
   display: flex;
   gap: 10px;
   align-items: center;
@@ -488,7 +500,7 @@ input:focus {
 }
 
 #ea__dashboard--wrapper button.upgrade-button:hover {
-  color: var(--base-background);
+  color: #FFFFFF;
   background: var(--base-color-100);
   border-bottom: 1px solid var(--border-color-3);
 }
@@ -816,7 +828,7 @@ span.ea__nav-icon svg {
   padding: 24px;
   border: 1px solid var(--border-color-base);
   margin-bottom: 16px;
-  background-image: url('../images/img-4.png');
+  background-image: var(--whats-new-bg);
   background-repeat: no-repeat;
   background-position-x: right;
 }
@@ -919,7 +931,7 @@ span.dark-icon {
   border-radius: 8px;
   border: 1px solid var(--border-color-base);
   margin-bottom: 16px;
-  background-image: url('../images/pro-bg.png');
+  background-image: var(--features-bg);
   background-repeat: no-repeat;
   background-position: top;
 }
@@ -1111,7 +1123,7 @@ span.dark-icon {
 }
 
 .ea__pro-elements-content .review-wrap button.upgrade-button i {
-  color: var(--base-background);
+  color: #FFFFFF;
 }
 
 .ea__connect-others button i {
@@ -1618,7 +1630,7 @@ span.select-details {
   position: absolute;
   left: 50%;
   top: -20px;
-  min-width: 135px;
+  min-width: 125px;
   transform: translate(-50%, -50%);
   font-size: 12px;
   font-weight: 400;
@@ -1626,10 +1638,11 @@ span.select-details {
   color: #1D2939;
   font-family: "Rubik", sans-serif;
   text-align: center;
-  padding: 8px 0;
-  box-shadow: 0px 7px 22px 0px #00012329;
+  padding: 8px 4px;
+  box-shadow: 0 7px 22px 0 #00012329;
   background: #FFF;
   border-radius: 4px;
+  z-index: 99;
   opacity: 0;
   visibility: hidden;
 }
@@ -1642,7 +1655,7 @@ span.select-details {
 span.eael-tooltip:after {
   content: '';
   position: absolute;
-  top: 30px;
+  bottom: -5px;
   left: 50%;
   transform: translate(-50%);
   border-top: 6px solid #FFF;
@@ -1707,7 +1720,7 @@ span.eael-tooltip:after {
   padding: 48px;
   background: var(--background-12);
   border-radius: 8px;
-  background-image: url('../images/pro-elements-bg.png');
+  background-image: var(--enhance-bg);
   background-repeat: no-repeat;
   background-position: top;
   background-size: cover;
