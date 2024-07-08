@@ -1569,6 +1569,7 @@ span.select-details {
   border: 1px solid var(--border-color-base);
   border-radius: 8px;
   margin-bottom: 20px;
+  overflow: hidden;
 }
 
 .ea__premium-item-footer {
