@@ -809,6 +809,10 @@ input::placeholder {
   color: var(--text-icon-100);
 }
 
+.ea__nav-icon i {
+  font-weight: 700;
+}
+
 span.ea__nav-icon svg {
   width: 24px;
   height: 24px;
