@@ -359,11 +359,11 @@ trait Admin {
 				    ]
 			    ],
 			    'enhance_experience'      => [
+					'top_heading'	=> __( '2+ Million Active Users', 'essential-addons-for-elementor-lite' ),
 				    'heading' => __( "Enhance Your Elementor Experience By <br/> <b>Unlocking</b> <span class='Advance-color'>40+ Advanced PRO</span> <b>Elements</b>", 'essential-addons-for-elementor-lite' ),
 				    'review'  => [
-					    'label' => __( 'Our Users Are Satisfied', 'essential-addons-for-elementor-lite' ),
-					    'score' => __( '5/5', 'essential-addons-for-elementor-lite' ),
-					    'url'   => '#',
+					    'count' => __( '3300+', 'essential-addons-for-elementor-lite' ),
+					    'label' => __( 'Five Star Reviews', 'essential-addons-for-elementor-lite' )
 				    ],
 				    'button'  => [
 					    'label' => __( 'Upgrade To PRO', 'essential-addons-for-elementor-lite' ),
