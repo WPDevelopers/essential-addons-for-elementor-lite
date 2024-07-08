@@ -21,10 +21,8 @@ function WhatsNew() {
                                                 fill="#EBE9FE"/>
                                         </svg>
                                     </span>
-                                    <div><span className='title--ex'>New Extension:</span>{item}</div>
-                                    {/*<div><span className='title--ex'>New Extension:</span>Conditional Display, Dynamic Tags, Dynamic Tags</div>*/}
-                                    {/*<div><span className='title--ex'>Revamp:</span>Dashboard</div>*/}
-                            </div>;
+                            <div><span className='title--ex'>{item.label}</span>{item.content}</div>
+                        </div>;
                     })}
                 </div>
                 <a href={eaData.button.url} target="_blank">

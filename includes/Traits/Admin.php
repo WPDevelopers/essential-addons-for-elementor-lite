@@ -124,10 +124,18 @@ trait Admin {
 			    'whats_new'               => [
 				    'heading' => __( "What's New In Essential Addons 6.0?", 'essential-addons-for-elementor-lite' ),
 				    'list'    => [
-					    __( 'EA Dynamic Tags allow you to display content dynamically from posts, users and custom fields.', 'essential-addons-for-elementor-lite' ),
-					    __( 'EA Conditional Display lets you show contents based on specific conditions.', 'essential-addons-for-elementor-lite' ),
-					    __( 'EA Hover Interactions add engaging effects when users hover over elements.', 'essential-addons-for-elementor-lite' ),
-					    __( 'Interactive Animation brings dynamic, user-responsive animations to your website.', 'essential-addons-for-elementor-lite' ),
+					    [
+						    'label'   => 'New Extension:',
+						    'content' => __( 'Dynamic Tags, Hover Interactions, Interactive Animation', 'essential-addons-for-elementor-lite' )
+					    ],
+					    [
+						    'label'   => 'Improvements:',
+						    'content' => __( 'Dynamic Widgets, Conditional Display', 'essential-addons-for-elementor-lite' )
+					    ],
+					    [
+						    'label'   => '',
+						    'content' => __( 'Elevate your Workflow with the New Essential Addons Dashboard!', 'essential-addons-for-elementor-lite' )
+					    ]
 				    ],
 				    'button'  => [
 					    'label' => __( 'View Changelog', 'essential-addons-for-elementor-lite' ),
@@ -180,13 +188,13 @@ trait Admin {
 				    [
 					    'heading'    => __( 'Continuous Features & Security Updates', 'essential-addons-for-elementor-lite' ),
 					    'content'    => __( 'Keep your website secure and up-to-date with regular security updates. Enjoy the convenience of continuous updates with exciting new features.', 'essential-addons-for-elementor-lite' ),
-					    'icon'       => 'ea-support',
+					    'icon'       => 'ea-security-update',
 					    'icon_color' => 'eaicon-1'
 				    ],
 				    [
 					    'heading'    => __( 'Priority Support', 'essential-addons-for-elementor-lite' ),
 					    'content'    => __( 'Are you encountering issues? Do not worry! Our expert support team is available 24/7 through live chat or support tickets. Our team will reach out to you within 12-24 hours.', 'essential-addons-for-elementor-lite' ),
-					    'icon'       => 'ea-docs',
+					    'icon'       => 'ea-priority-support',
 					    'icon_color' => 'eaicon-1'
 				    ]
 			    ],
@@ -359,13 +367,13 @@ trait Admin {
 				    ]
 			    ],
 			    'enhance_experience'      => [
-					'top_heading'	=> __( '2+ Million Active Users', 'essential-addons-for-elementor-lite' ),
-				    'heading' => __( "Enhance Your Elementor Experience By <br/> <b>Unlocking</b> <span class='Advance-color'>40+ Advanced PRO</span> <b>Elements</b>", 'essential-addons-for-elementor-lite' ),
-				    'review'  => [
+				    'top_heading' => __( '2+ Million Active Users', 'essential-addons-for-elementor-lite' ),
+				    'heading'     => __( "Enhance Your Elementor Experience By <br/> <b>Unlocking</b> <span class='Advance-color'>40+ Advanced PRO</span> <b>Elements</b>", 'essential-addons-for-elementor-lite' ),
+				    'review'      => [
 					    'count' => __( '3300+', 'essential-addons-for-elementor-lite' ),
 					    'label' => __( 'Five Star Reviews', 'essential-addons-for-elementor-lite' )
 				    ],
-				    'button'  => [
+				    'button'      => [
 					    'label' => __( 'Upgrade To PRO', 'essential-addons-for-elementor-lite' ),
 					    'url'   => 'https://essential-addons.com/#pricing',
 					    'icon'  => 'ea-crown-1'
@@ -385,108 +393,108 @@ trait Admin {
 					    'url'   => 'https://essential-addons.com/compare/',
 					    'icon'  => 'ea-link'
 				    ],
-					'icons'		=> [
-						[
-							'label'	=> __('Smart Post List', 'essential-addons-for-elementor-lite'),
-							'url'	=> 'https://essential-addons.com/post-list/',
-							'icon'	=> 'images/Smart-Post-List.svg'
-						],
-						[
-							'label'	=> __('Dynamic Gallery', 'essential-addons-for-elementor-lite'),
-							'url'	=> 'https://essential-addons.com/dynamic-gallery/',
-							'icon'	=> 'images/Dynamic-Gallery.svg'
-						],
-						[
-							'label'	=> __('Custom JS', 'essential-addons-for-elementor-lite'),
-							'url'	=> '',
-							'icon'	=> 'images/Custom-JS.svg'
-						],
-						[
-							'label'	=> __('Protected Content', 'essential-addons-for-elementor-lite'),
-							'url'	=> 'https://essential-addons.com/protected-content/',
-							'icon'	=> 'images/Protected-Content.svg'
-						],
-						[
-							'label'	=> __('Advanced Google Map', 'essential-addons-for-elementor-lite'),
-							'url'	=> 'https://essential-addons.com/advanced-google-map/',
-							'icon'	=> 'images/Advanced-Google-Map.svg'
-						],
-						[
-							'label'	=> __('MailChimp', 'essential-addons-for-elementor-lite'),
-							'url'	=> 'https://essential-addons.com/mailchimp/',
-							'icon'	=> 'images/MailChimp.svg'
-						],
-						[
-							'label'	=> __('Instagram Feed', 'essential-addons-for-elementor-lite'),
-							'url'	=> 'https://essential-addons.com/instagram-feed/',
-							'icon'	=> 'images/Instagram-Feed.svg'
-						],
-						[
-							'label'	=> __('Woo Product Slider', 'essential-addons-for-elementor-lite'),
-							'url'	=> 'https://essential-addons.com/woo-product-slider/',
-							'icon'	=> 'images/Woo-Product-Slider.svg'
-						],
-						[
-							'label'	=> __('Parallax', 'essential-addons-for-elementor-lite'),
-							'url'	=> 'https://essential-addons.com/parallax-scrolling/',
-							'icon'	=> 'images/Parallax-Effect.svg'
-						],
-						[
-							'label'	=> __('Post Carousel', 'essential-addons-for-elementor-lite'),
-							'url'	=> 'https://essential-addons.com/post-carousel/',
-							'icon'	=> 'images/Post-Carousel.svg'
-						],
-						[
-							'label'	=> __('LearnDash Course List', 'essential-addons-for-elementor-lite'),
-							'url'	=> 'https://essential-addons.com/learndash-course-list/',
-							'icon'	=> 'images/Learn-Dash-Course-List.svg'
-						],
-						[
-							'label'	=> __('Particle Effect', 'essential-addons-for-elementor-lite'),
-							'url'	=> 'https://essential-addons.com/particle-effect/',
-							'icon'	=> 'images/Particles.svg'
-						],
-						[
-							'label'	=> __('Logo Carousel', 'essential-addons-for-elementor-lite'),
-							'url'	=> 'https://essential-addons.com/logo-carousel/',
-							'icon'	=> 'images/Logo-Carousel.svg'
-						],
-						[
-							'label'	=> __('Image Hotspots', 'essential-addons-for-elementor-lite'),
-							'url'	=> 'https://essential-addons.com/image-hotspots/',
-							'icon'	=> 'images/Image-Hotspots.svg'
-						],
-						[
-							'label'	=> __('Conditional Display', 'essential-addons-for-elementor-lite'),
-							'url'	=> 'https://essential-addons.com/conditional-display/',
-							'icon'	=> 'images/Conditional-Display.svg'
-						],
-						[
-							'label'	=> __('Advanced Search', 'essential-addons-for-elementor-lite'),
-							'url'	=> 'https://essential-addons.com/advanced-search',
-							'icon'	=> 'images/Advanced-Search.svg'
-						],
-						[
-							'label'	=> __('Team Member Carousel', 'essential-addons-for-elementor-lite'),
-							'url'	=> 'https://essential-addons.com/team-members-carousel/',
-							'icon'	=> 'images/Team-Member-Carousel.svg'
-						],
-						[
-							'label'	=> __('Woo Cross Sells', 'essential-addons-for-elementor-lite'),
-							'url'	=> 'https://essential-addons.com/woo-cross-sells/',
-							'icon'	=> 'images/Woo-Cross-Sells.svg'
-						],
-						[
-							'label'	=> __('Woo Account Dashboard', 'essential-addons-for-elementor-lite'),
-							'url'	=> 'https://essential-addons.com/woo-account-dashboard/',
-							'icon'	=> 'images/Woo-Account-Dashboard.svg'
-						],
-						[
-							'label'	=> __('Lightbox And Modal', 'essential-addons-for-elementor-lite'),
-							'url'	=> 'https://essential-addons.com/lightbox-modal/',
-							'icon'	=> 'images/Lightbox-And-Modal.svg'
-						]
-					]
+				    'icons'   => [
+					    [
+						    'label' => __( 'Smart Post List', 'essential-addons-for-elementor-lite' ),
+						    'url'   => 'https://essential-addons.com/post-list/',
+						    'icon'  => 'images/Smart-Post-List.svg'
+					    ],
+					    [
+						    'label' => __( 'Dynamic Gallery', 'essential-addons-for-elementor-lite' ),
+						    'url'   => 'https://essential-addons.com/dynamic-gallery/',
+						    'icon'  => 'images/Dynamic-Gallery.svg'
+					    ],
+					    [
+						    'label' => __( 'Custom JS', 'essential-addons-for-elementor-lite' ),
+						    'url'   => '',
+						    'icon'  => 'images/Custom-JS.svg'
+					    ],
+					    [
+						    'label' => __( 'Protected Content', 'essential-addons-for-elementor-lite' ),
+						    'url'   => 'https://essential-addons.com/protected-content/',
+						    'icon'  => 'images/Protected-Content.svg'
+					    ],
+					    [
+						    'label' => __( 'Advanced Google Map', 'essential-addons-for-elementor-lite' ),
+						    'url'   => 'https://essential-addons.com/advanced-google-map/',
+						    'icon'  => 'images/Advanced-Google-Map.svg'
+					    ],
+					    [
+						    'label' => __( 'MailChimp', 'essential-addons-for-elementor-lite' ),
+						    'url'   => 'https://essential-addons.com/mailchimp/',
+						    'icon'  => 'images/MailChimp.svg'
+					    ],
+					    [
+						    'label' => __( 'Instagram Feed', 'essential-addons-for-elementor-lite' ),
+						    'url'   => 'https://essential-addons.com/instagram-feed/',
+						    'icon'  => 'images/Instagram-Feed.svg'
+					    ],
+					    [
+						    'label' => __( 'Woo Product Slider', 'essential-addons-for-elementor-lite' ),
+						    'url'   => 'https://essential-addons.com/woo-product-slider/',
+						    'icon'  => 'images/Woo-Product-Slider.svg'
+					    ],
+					    [
+						    'label' => __( 'Parallax', 'essential-addons-for-elementor-lite' ),
+						    'url'   => 'https://essential-addons.com/parallax-scrolling/',
+						    'icon'  => 'images/Parallax-Effect.svg'
+					    ],
+					    [
+						    'label' => __( 'Post Carousel', 'essential-addons-for-elementor-lite' ),
+						    'url'   => 'https://essential-addons.com/post-carousel/',
+						    'icon'  => 'images/Post-Carousel.svg'
+					    ],
+					    [
+						    'label' => __( 'LearnDash Course List', 'essential-addons-for-elementor-lite' ),
+						    'url'   => 'https://essential-addons.com/learndash-course-list/',
+						    'icon'  => 'images/Learn-Dash-Course-List.svg'
+					    ],
+					    [
+						    'label' => __( 'Particle Effect', 'essential-addons-for-elementor-lite' ),
+						    'url'   => 'https://essential-addons.com/particle-effect/',
+						    'icon'  => 'images/Particles.svg'
+					    ],
+					    [
+						    'label' => __( 'Logo Carousel', 'essential-addons-for-elementor-lite' ),
+						    'url'   => 'https://essential-addons.com/logo-carousel/',
+						    'icon'  => 'images/Logo-Carousel.svg'
+					    ],
+					    [
+						    'label' => __( 'Image Hotspots', 'essential-addons-for-elementor-lite' ),
+						    'url'   => 'https://essential-addons.com/image-hotspots/',
+						    'icon'  => 'images/Image-Hotspots.svg'
+					    ],
+					    [
+						    'label' => __( 'Conditional Display', 'essential-addons-for-elementor-lite' ),
+						    'url'   => 'https://essential-addons.com/conditional-display/',
+						    'icon'  => 'images/Conditional-Display.svg'
+					    ],
+					    [
+						    'label' => __( 'Advanced Search', 'essential-addons-for-elementor-lite' ),
+						    'url'   => 'https://essential-addons.com/advanced-search',
+						    'icon'  => 'images/Advanced-Search.svg'
+					    ],
+					    [
+						    'label' => __( 'Team Member Carousel', 'essential-addons-for-elementor-lite' ),
+						    'url'   => 'https://essential-addons.com/team-members-carousel/',
+						    'icon'  => 'images/Team-Member-Carousel.svg'
+					    ],
+					    [
+						    'label' => __( 'Woo Cross Sells', 'essential-addons-for-elementor-lite' ),
+						    'url'   => 'https://essential-addons.com/woo-cross-sells/',
+						    'icon'  => 'images/Woo-Cross-Sells.svg'
+					    ],
+					    [
+						    'label' => __( 'Woo Account Dashboard', 'essential-addons-for-elementor-lite' ),
+						    'url'   => 'https://essential-addons.com/woo-account-dashboard/',
+						    'icon'  => 'images/Woo-Account-Dashboard.svg'
+					    ],
+					    [
+						    'label' => __( 'Lightbox And Modal', 'essential-addons-for-elementor-lite' ),
+						    'url'   => 'https://essential-addons.com/lightbox-modal/',
+						    'icon'  => 'images/Lightbox-And-Modal.svg'
+					    ]
+				    ]
 			    ],
 			    'tools'                   => [
 				    'box_1' => [
