@@ -61,7 +61,7 @@ function Tools() {
                             <span className="select-details">{eaData.box_3.content}</span>
                         </div>
                     </div>
-                    <div className="flex flex-end mb-5">
+                    <div className="flex flex-end">
                         <button className="primary-btn install-btn flex flex-end"
                                 onClick={saveHandler}>{i18n.save_settings} {eaState.btnLoader === 'tools' &&
                             <span className="eael_btn_loader"></span>}</button>

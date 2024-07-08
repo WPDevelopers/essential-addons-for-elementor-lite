@@ -38,7 +38,7 @@ function Extensions() {
                         </div>
                     </div>
                     <div className="ea__section-wrapper flex flex-end mb-5">
-                        <button className="primary-btn install-btn flex flex-end mb-6"
+                        <button className="primary-btn install-btn flex flex-end"
                                 onClick={clickHandler}>{i18n.save_settings} {eaState.btnLoader === 'extensions' &&
                             <span className="eael_btn_loader"></span>}</button>
                     </div>
