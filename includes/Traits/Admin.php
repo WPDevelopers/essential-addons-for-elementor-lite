@@ -162,7 +162,7 @@ trait Admin {
 						    'label' => __( 'Create a Ticket', 'essential-addons-for-elementor-lite' ),
 						    'url'   => 'https://wpdeveloper.com/support/'
 					    ],
-					    'icon'       => 'ea-github',
+					    'icon'       => 'ea-support',
 					    'icon_color' => 'eaicon-1'
 				    ],
 				    [
