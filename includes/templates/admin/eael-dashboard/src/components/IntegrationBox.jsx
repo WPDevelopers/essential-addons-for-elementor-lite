@@ -25,7 +25,7 @@ function IntegrationBox(props) {
                 <div className="ea__integration-footer">
                     <p>{eaData.desc}</p>
                     <div className="integration-settings flex justify-between items-center">
-                        <h5 className="toggle-label">{isLoading ? 'Processing...' : (checked ? disableTxt : enableTxt)}</h5>
+                        <h5 className="eael-toggle-label">{isLoading ? 'Processing...' : (checked ? disableTxt : enableTxt)}</h5>
                         <label className=" toggle-wrap">
                             <input type="checkbox" checked={checked} onChange={changeHandler}/>
                             <span className={isLoading ? 'slider ea-loader' : 'slider'}></span>
