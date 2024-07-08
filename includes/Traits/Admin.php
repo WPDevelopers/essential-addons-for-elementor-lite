@@ -344,7 +344,7 @@ trait Admin {
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
 							    'url'   => 'https://essential-addons.com/mailchimp/'
 						    ],
-						    'image'   => 'images/Mailchimp.jpg'
+						    'image'   => 'images/MailChimp.jpg'
 					    ],
 					    [
 						    'heading' => __( 'Advanced Google Map', 'essential-addons-for-elementor-lite' ),
@@ -422,7 +422,7 @@ trait Admin {
 					    [
 						    'label' => __( 'MailChimp', 'essential-addons-for-elementor-lite' ),
 						    'url'   => 'https://essential-addons.com/mailchimp/',
-						    'icon'  => 'images/MailChimp.svg'
+						    'icon'  => 'images/Mailchimp.svg'
 					    ],
 					    [
 						    'label' => __( 'Instagram Feed', 'essential-addons-for-elementor-lite' ),
