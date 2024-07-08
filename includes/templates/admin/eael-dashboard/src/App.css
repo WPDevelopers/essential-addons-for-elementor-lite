@@ -875,6 +875,10 @@ span.ea__nav-icon svg {
   padding-right: 4px;
 }
 
+.ea__content-details .title--ex:empty {
+  display: none;
+}
+
 .ea__general-content-item h2 {
   font-size: 26px;
   line-height: 1.2em;
