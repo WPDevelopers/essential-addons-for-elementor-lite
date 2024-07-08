@@ -154,10 +154,15 @@ a:focus {
   --modal-bg-3: #F7F8FF;
   --modal-bg-4: #F9F9F9;
   --modal-bg-5: #F3F7FF;
+  --gardient-text: #750EF4;
   --gardient-1: #fefbff;
   --gardient-2: #f4e4f6;
   --gardient-3: #dea8ff;
   --gardient-4: #fefaff;
+  --gardient-5: #FBEEFF;
+  --gardient-6: #FEFEFE;
+  --gardient-7: #8725FF;
+  --gardient-8: #EED6FF;
   --modal-overlay: #1D232733;
   --elements-1: #FAF5FF;
   --elements-2: #F1FFF2;
@@ -220,10 +225,15 @@ body.eael_dash_dark_mode {
   --modal-bg-3: #09090A;
   --modal-bg-4: #09090A;
   --modal-bg-5: #09090A;
+  --gardient-text: #FFFFFF;
   --gardient-1: #17111D;
   --gardient-2: #693787;
   --gardient-3: #693787;
   --gardient-4: #17111D;
+  --gardient-5: #9743FF;
+  --gardient-6: #151618;
+  --gardient-7: #B477FF;
+  --gardient-8: #4B00A7;
   --modal-overlay: #09090ACC;
   --elements-1: #2C213A;
   --elements-2: #182B23;
@@ -1739,8 +1749,8 @@ span.eael-tooltip:after {
   font-size: 16px;
   line-height: 1em;
   font-weight: 400;
-  color: var(--base-color-50);
-  background: linear-gradient(90deg, #FBEEFF 0%, #FEFEFE 100%);
+  color: var(--gardient-text);
+  background: linear-gradient(90deg, var(--gardient-5) 0%, var(--gardient-6) 100%);
   padding: 6px 8px;
   border-radius: 7px;
 }
@@ -1753,7 +1763,7 @@ span.eael-tooltip:after {
   bottom: -1px;
   z-index: -1;
   border-radius: 8px;
-  background: linear-gradient(90deg, #8725FF 0%, #EED6FF 100%);
+  background: linear-gradient(90deg, var(--gardient-7) 0%, var(--gardient-8) 100%);
 }
 
 .ea__pro-elements-content h3 {
