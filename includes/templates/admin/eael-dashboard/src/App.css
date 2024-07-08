@@ -529,6 +529,9 @@ input:focus {
   color: var(--text-color-50);
   cursor: pointer;
   transition: all .35s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 #ea__dashboard--wrapper button:hover {
