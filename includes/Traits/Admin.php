@@ -282,7 +282,7 @@ trait Admin {
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
 							    'url'   => 'https://essential-addons.com/protected-content/'
 						    ],
-						    'image'   => 'images/img-5.png'
+						    'image'   => 'images/Protected-Content.jpg'
 					    ],
 					    [
 						    'heading' => __( 'Smart Post List', 'essential-addons-for-elementor-lite' ),
@@ -291,7 +291,7 @@ trait Admin {
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
 							    'url'   => 'https://essential-addons.com/post-list/'
 						    ],
-						    'image'   => 'images/img-6.png'
+						    'image'   => 'images/Smart-Post-List.jpg'
 					    ],
 					    [
 						    'heading' => __( 'Woo Product Slider', 'essential-addons-for-elementor-lite' ),
@@ -300,7 +300,7 @@ trait Admin {
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
 							    'url'   => 'https://essential-addons.com/woo-product-slider/'
 						    ],
-						    'image'   => 'images/img-5.png'
+						    'image'   => 'images/Woo-Product-Slider.jpg'
 					    ],
 					    [
 						    'heading' => __( 'Post Carousel', 'essential-addons-for-elementor-lite' ),
@@ -309,7 +309,7 @@ trait Admin {
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
 							    'url'   => 'https://essential-addons.com/post-carousel/'
 						    ],
-						    'image'   => 'images/img-5.png'
+						    'image'   => 'images/Post-Carousel.jpg'
 					    ],
 					    [
 						    'heading' => __( 'Instagram Feed', 'essential-addons-for-elementor-lite' ),
@@ -318,7 +318,7 @@ trait Admin {
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
 							    'url'   => 'https://essential-addons.com/instagram-feed/'
 						    ],
-						    'image'   => 'images/img-6.png'
+						    'image'   => 'images/Instagram-Feed.jpg'
 					    ],
 					    [
 						    'heading' => __( 'Custom JS', 'essential-addons-for-elementor-lite' ),
@@ -327,7 +327,7 @@ trait Admin {
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
 							    'url'   => '#'
 						    ],
-						    'image'   => 'images/img-5.png'
+						    'image'   => 'images/Custom-JS.jpg'
 					    ],
 					    [
 						    'heading' => __( 'MailChimp', 'essential-addons-for-elementor-lite' ),
@@ -336,7 +336,7 @@ trait Admin {
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
 							    'url'   => 'https://essential-addons.com/mailchimp/'
 						    ],
-						    'image'   => 'images/img-5.png'
+						    'image'   => 'images/MailChimp.jpg'
 					    ],
 					    [
 						    'heading' => __( 'Advanced Google Map', 'essential-addons-for-elementor-lite' ),
@@ -345,7 +345,7 @@ trait Admin {
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
 							    'url'   => 'https://essential-addons.com/advanced-google-map/'
 						    ],
-						    'image'   => 'images/img-6.png'
+						    'image'   => 'images/Advanced-Google-Map.jpg'
 					    ],
 					    [
 						    'heading' => __( 'Dynamic Gallery', 'essential-addons-for-elementor-lite' ),
@@ -354,7 +354,7 @@ trait Admin {
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
 							    'url'   => 'https://essential-addons.com/dynamic-gallery/'
 						    ],
-						    'image'   => 'images/img-5.png'
+						    'image'   => 'images/Dynamic-Gallery.jpg'
 					    ]
 				    ]
 			    ],
