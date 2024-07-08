@@ -157,6 +157,9 @@ span {
   --elements-2: #F1FFF2;
   --elements-3: #F6F9FF;
   --mode-switcher-icon: "\e905";
+  --enhance-bg: url('../images/pro-elements-bg.png');
+  --whats-new-bg: url('../images/img-4.png');
+  --features-bg: url('../images/pro-bg.png');
 }
 
 body.eael_dash_dark_mode {
@@ -220,6 +223,9 @@ body.eael_dash_dark_mode {
   --elements-2: #182B23;
   --elements-3: #1B1E2F;
   --mode-switcher-icon: "\e903";
+  --enhance-bg: url('../images/pro-elements-bg-dark.png');
+  --whats-new-bg: url('../images/img-4-dark.png');
+  --features-bg: url('../images/pro-bg-dark.png');
 }
 
 body,
@@ -816,7 +822,7 @@ span.ea__nav-icon svg {
   padding: 24px;
   border: 1px solid var(--border-color-base);
   margin-bottom: 16px;
-  background-image: url('../images/img-4.png');
+  background-image: var(--whats-new-bg);
   background-repeat: no-repeat;
   background-position-x: right;
 }
@@ -919,7 +925,7 @@ span.dark-icon {
   border-radius: 8px;
   border: 1px solid var(--border-color-base);
   margin-bottom: 16px;
-  background-image: url('../images/pro-bg.png');
+  background-image: var(--features-bg);
   background-repeat: no-repeat;
   background-position: top;
 }
@@ -1707,7 +1713,7 @@ span.eael-tooltip:after {
   padding: 48px;
   background: var(--background-12);
   border-radius: 8px;
-  background-image: url('../images/pro-elements-bg.png');
+  background-image: var(--enhance-bg);
   background-repeat: no-repeat;
   background-position: top;
   background-size: cover;
