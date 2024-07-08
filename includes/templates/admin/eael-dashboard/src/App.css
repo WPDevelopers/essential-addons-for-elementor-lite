@@ -479,6 +479,10 @@ input:focus {
   background: conic-gradient(from 195.22deg at 68.31% 39.29%, rgba(143, 32, 251, 0) 0deg, #8F20FB 360deg), linear-gradient(0deg, #6F0AF2, #6F0AF2);
 }
 
+#ea__dashboard--wrapper .primary-btn.install-btn:hover {
+  background: conic-gradient(from 226deg at 68.31% 39.29%, rgba(143, 32, 251, 0) 0deg, #8F20FB 360deg), linear-gradient(0deg, #6F0AF2, #6F0AF2);
+}
+
 #ea__dashboard--wrapper .primary-btn.install-btn[disabled] {
   cursor: not-allowed;
 }
@@ -513,8 +517,8 @@ input:focus {
 
 #ea__dashboard--wrapper button.upgrade-button:hover {
   color: #FFFFFF;
-  background: var(--base-color-100);
-  border-bottom: 1px solid var(--border-color-3);
+  background: #FF8114;
+  border-color: #CB5F00;
 }
 
 #ea__dashboard--wrapper button.upgrade-button i {
@@ -844,7 +848,7 @@ span.ea__nav-icon svg {
   border: 1px solid var(--border-color-base);
   margin-bottom: 16px;
   background-image: var(--whats-new-bg);
-  background-repeat: no-repeat;
+  background-repeat: repeat-y;
   background-position-x: right;
 }
 
@@ -991,6 +995,15 @@ span.dark-icon {
   gap: 50px;
 }
 
+.ea__connect-others-wrapper .ea__connect-others p a {
+  text-decoration: underline;
+  transition: ease-in-out .35s;
+}
+
+.ea__connect-others-wrapper .ea__connect-others p a:hover {
+  color: var(--base-color-50);
+}
+
 .templates-img {
   display: inline-flex;
   padding: 12px 12px 12px 0;
@@ -1082,7 +1095,7 @@ span.dark-icon {
   font-weight: 500;
   line-height: 1.1em;
   color: var(--text-color-25);
-  padding-top: 30px;
+  padding-top: 46px;
   margin-bottom: 8px;
 }
 
@@ -3028,8 +3041,8 @@ input.input-api:disabled {
   }
 
   .ea__sidebar-info {
-    max-width: 180px;
-    min-width: 180px;
+    max-width: 196px;
+    min-width: 196px;
   }
 
   .ea__sidebar-sticky {
@@ -3128,7 +3141,7 @@ input.input-api:disabled {
 
   .ea__sidebar-content h5 {
     font-size: 14px;
-    padding-top: 25px;
+    padding-top: 28px;
     margin-bottom: 8px;
   }
 
