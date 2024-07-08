@@ -126,6 +126,7 @@ span {
   --text-color-100: #475467;
   --text-color-150: #937998;
   --text-color-200: #1570EF;
+  --text-color-300: #959AA1;
   --text-color-500: #D0D5DD;
   --text-icon-100: #98A2B3;
   --text-icon-200: #2E90FA;
@@ -188,6 +189,7 @@ body.eael_dash_dark_mode {
   --text-color-100: #B1B4B9;
   --text-color-150: #8D809C;
   --text-color-200: #1570EF;
+  --text-color-300: #8D809C;
   --text-color-500: #1F2125;
   --text-icon-100: #667085;
   --text-icon-200: #2E90FA;
@@ -842,6 +844,12 @@ span.ea__nav-icon svg {
   line-height: 1.4em;
 }
 
+.ea__content-details .title--ex {
+  font-weight: 500;
+  color: var(--text-color-300);
+  padding-right: 4px;
+}
+
 .ea__general-content-item h2 {
   font-size: 26px;
   line-height: 1.2em;
@@ -915,19 +923,6 @@ span.dark-icon {
   background-repeat: no-repeat;
   background-position: top;
 }
-
-/* .ea__sidebar-content:before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    background: linear-gradient(#FFF1E0B2, #FFCDD0);
-    z-index: -1;
-    -webkit-clip-path: ellipse(145% 50% at left top);
-    clip-path: ellipse(145% 50% at left top);
-} */
 
 .ea__content-details span.check-icon {
   width: 18px;
