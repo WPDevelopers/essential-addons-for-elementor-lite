@@ -157,7 +157,7 @@ trait Admin {
 			    'community_box'           => [
 				    [
 					    'heading'    => __( 'Need Any Help?', 'essential-addons-for-elementor-lite' ),
-					    'content'    => __( 'If you encounter any issues or need assistance, we are here to help. You can report specific issues or bugs directly on our <a href="https://github.com/WPDevelopers/essential-addons-for-elementor-lite/issues">GitHub issues page.</a>', 'essential-addons-for-elementor-lite' ),
+					    'content'    => __( 'If you encounter any issues or need assistance, we are here to help. You can report specific issues or bugs directly on our <a href="https://github.com/WPDevelopers/essential-addons-for-elementor-lite/issues" target="_blank">GitHub issues page.</a>', 'essential-addons-for-elementor-lite' ),
 					    'button'     => [
 						    'label' => __( 'Create a Ticket', 'essential-addons-for-elementor-lite' ),
 						    'url'   => 'https://wpdeveloper.com/support/'
