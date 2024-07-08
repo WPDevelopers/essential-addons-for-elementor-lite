@@ -71,7 +71,7 @@ trait Twitter_Feed
 
             add_filter('https_ssl_verify', '__return_false');
 
-            $api_endpoint = 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=' . $settings['eael_twitter_feed_ac_name'] . '&count=999&tweet_mode=extended';
+            $api_endpoint = esc_url( 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=' . $settings['eael_twitter_feed_ac_name'] . '&count=999&tweet_mode=extended' );
             
             if ( $twitter_v2 ){
                 $token = ! empty( $settings['eael_twitter_feed_bearer_token'] ) ? $settings['eael_twitter_feed_bearer_token'] : '';
@@ -79,7 +79,7 @@ trait Twitter_Feed
                 $tweet_fields_params = implode(',', $tweet_fields);
 
                 if ( empty( $user_object ) ){
-                    $api_endpoint_user = "https://api.twitter.com/2/users/by/username/$account_name?user.fields=profile_image_url";
+                    $api_endpoint_user = esc_url( "https://api.twitter.com/2/users/by/username/$account_name?user.fields=profile_image_url" );
 
                     $response_user = wp_remote_get($api_endpoint_user, [
                         'blocking' => true,
@@ -105,7 +105,7 @@ trait Twitter_Feed
                     return $html;
                 }
 
-                $api_endpoint = "https://api.twitter.com/2/users/$user_id/tweets?max_results=100&tweet.fields=$tweet_fields_params";
+                $api_endpoint = esc_url( "https://api.twitter.com/2/users/$user_id/tweets?max_results=100&tweet.fields=$tweet_fields_params" );
             }
             
             $response = wp_remote_get($api_endpoint, [
@@ -207,19 +207,19 @@ trait Twitter_Feed
                         $user_name_full = $twitter_v2 && ! empty( $user_name ) ? $user_name : '';
                         
                         if ($settings['eael_twitter_feed_show_avatar'] == 'true' && ! empty( $user_profile_image_url_https ) ) {
-                            $html .= '<a class="eael-twitter-feed-item-avatar avatar-' . $settings['eael_twitter_feed_avatar_style'] . '" href="//twitter.com/' . $settings['eael_twitter_feed_ac_name'] . '" target="_blank">
+                            $html .= '<a class="eael-twitter-feed-item-avatar avatar-' . esc_attr( $settings['eael_twitter_feed_avatar_style'] ) . '" href="//twitter.com/' . esc_attr( $settings['eael_twitter_feed_ac_name'] ) . '" target="_blank">
                                 <img src="' . esc_url( $user_profile_image_url_https ) . '">
                             </a>';
                         }
 
-                        $html .= '<a class="eael-twitter-feed-item-meta" href="//twitter.com/' . $settings['eael_twitter_feed_ac_name'] . '" target="_blank">';
+                        $html .= '<a class="eael-twitter-feed-item-meta" href="//twitter.com/' . esc_attr( $settings['eael_twitter_feed_ac_name'] ) . '" target="_blank">';
                             if ( $settings['eael_twitter_feed_show_icon'] == 'true' && ! empty( $user_name_full ) ) {
                                 $html .= '<i class="fab fa-twitter eael-twitter-feed-item-icon"></i>';
                             }
-                            $html .= '<span class="eael-twitter-feed-item-author">' . $user_name_full . '</span>
+                            $html .= '<span class="eael-twitter-feed-item-author">' . esc_html( $user_name_full ) . '</span>
                         </a>';
 
-                        if ($settings['eael_twitter_feed_show_date'] == 'true') {
+                        if ( $settings['eael_twitter_feed_show_date'] == 'true' && isset( $item['created_at'] )) {
                             $html .= '<span class="eael-twitter-feed-item-date">' . sprintf(__('%s ago', 'essential-addons-for-elementor-lite'), human_time_diff(strtotime($item['created_at']))) . '</span>';
                         }
                     $html .= '</div>

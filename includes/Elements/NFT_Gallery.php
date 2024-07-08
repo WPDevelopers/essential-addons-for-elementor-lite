@@ -91,7 +91,7 @@ class NFT_Gallery extends Widget_Base {
 				'type'        => Controls_Manager::TEXT,
 				'placeholder' => 'Enter API key',
 				'description' => sprintf( __( 'Get your API key from <a href="https://docs.opensea.io/reference/api-keys" class="eael-btn" target="_blank">%s</a>',
-					'essential-addons-for-elementor-lite' ), esc_html( 'here' ) ),
+					'essential-addons-for-elementor-lite' ), esc_html__( 'here', 'essential-addons-for-elementor-lite' ) ),
 				'ai' => [
 					'active' => false,
 				],
@@ -103,9 +103,9 @@ class NFT_Gallery extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Type', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::SELECT,
-				'default'   => 'assets',
+				'default'   => 'collections',
 				'options'   => [
-					'assets'      => esc_html__( 'Assets', 'essential-addons-for-elementor-lite' ),
+					// 'assets'      => esc_html__( 'Assets', 'essential-addons-for-elementor-lite' ),
 					'collections' => esc_html__( 'Collections', 'essential-addons-for-elementor-lite' ),
 				],
 				'condition' => [
@@ -2761,7 +2761,7 @@ class NFT_Gallery extends Widget_Base {
 			$nft_gallery['filterby_slug']   = ! empty( $settings['eael_nft_gallery_opensea_filterby_slug'] ) ? $settings['eael_nft_gallery_opensea_filterby_slug'] : '';
 			$nft_gallery['filterby_wallet'] = ! empty( $settings['eael_nft_gallery_opensea_filterby_wallet'] ) ? $settings['eael_nft_gallery_opensea_filterby_wallet'] : '';
 
-			$url   = "https://api.opensea.io/api/v1";
+			$url   = "https://api.opensea.io/api/v2";
 			$param = array();
 
 			if ( 'collections' === $nft_gallery['opensea_type'] ) {

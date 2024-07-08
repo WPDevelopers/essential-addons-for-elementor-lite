@@ -177,7 +177,12 @@ class Elements_Manager {
 			$list['advanced-dynamic-tags'] = 'advanced-dynamic-tags';
 		}
 
-		//Hover Effect
+		//Smooth Animation
+		if ( ! empty( $element['settings']['eael_smooth_animation_section'] ) ) {
+			$list['smooth-animation'] = 'smooth-animation';
+		}
+
+		//Hover Interactions
 		if ( ! empty( $element['settings']['eael_hover_effect_switch'] ) ) {
 			$list['special-hover-effect'] = 'special-hover-effect';
 		}

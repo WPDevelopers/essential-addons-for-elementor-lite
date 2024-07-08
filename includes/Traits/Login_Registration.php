@@ -37,8 +37,10 @@ trait Login_Registration {
 
 	public static $recaptcha_v3_default_action = 'eael_login_register_form';
 
-	public static function get_recaptcha_threshold() {
-		return apply_filters( 'eael_recaptcha_threshold', 0.5 );
+	public static function get_recaptcha_threshold( $settings = [] ) {
+		$score_threshold = isset( $settings['login_register_recaptcha_v3_score_threshold']['size'] ) ? floatval( $settings['login_register_recaptcha_v3_score_threshold']['size'] ) : 0.5;
+		$score_threshold = $score_threshold >= 0 && $score_threshold <= 1 ? $score_threshold : 0.5;
+		return apply_filters( 'eael_recaptcha_threshold', $score_threshold );
 	}
 
 	public function login_or_register_user() {
@@ -139,7 +141,7 @@ trait Login_Registration {
 		if ( $is_version_2 || $is_version_3 ) {
 			$ld_recaptcha_version = $is_version_3 ? 'v3' : 'v2';
 			
-			if( ! $this->lr_validate_recaptcha($ld_recaptcha_version) ) {
+			if( ! $this->lr_validate_recaptcha( $ld_recaptcha_version, $settings ) ) {
 				$err_msg = isset( $settings['err_recaptcha'] ) ? Helper::eael_wp_kses( $settings['err_recaptcha'] ) : __( 'You did not pass recaptcha challenge.', 'essential-addons-for-elementor-lite' );
 				if ( $ajax ) {
 					wp_send_json_error( $err_msg );
@@ -199,18 +201,18 @@ trait Login_Registration {
 
 			$redirect_to = '';
 			if ( ! empty( $_POST['redirect_to'] ) ) {
-				$redirect_to = esc_url_raw( $_POST['redirect_to'] );
-				if( ! empty( $current_user_role ) ){
-					$redirect_to = ! empty( $_POST['redirect_to_' . esc_html( $current_user_role )] ) ? esc_url_raw( $_POST['redirect_to_' . esc_html( $current_user_role )] ) : $redirect_to;
+				$redirect_to = sanitize_url( $_POST['redirect_to'] );
+				if ( ! empty( $current_user_role ) ) {
+					$redirect_to = ! empty( $_POST[ 'redirect_to_' . esc_html( $current_user_role ) ] ) ? sanitize_url( $_POST[ 'redirect_to_' . esc_html( $current_user_role ) ] ) : $redirect_to;
 				}
 			}
 
 			do_action( 'wp_login', $user_data->user_login, $user_data );
 			do_action( 'eael/login-register/after-login', $user_data->user_login, $user_data );
 
-			$custom_redirect_url 	= ! empty( $_POST['redirect_to'] ) ? sanitize_url( $_POST['redirect_to'] ) : '';
-			$previous_page_url 		= ! empty( $_POST['redirect_to_prev_page_login'] ) ? sanitize_url( $_POST['redirect_to_prev_page_login'] ) : '';
-			$custom_redirect_url 	= ! empty( $settings['login_redirect_url_prev_page'] ) && $settings['login_redirect_url_prev_page'] === 'yes' ? $previous_page_url : $custom_redirect_url;
+			$custom_redirect_url = $redirect_to;
+			$previous_page_url   = ! empty( $_POST['redirect_to_prev_page_login'] ) ? sanitize_url( $_POST['redirect_to_prev_page_login'] ) : '';
+			$custom_redirect_url = ! empty( $settings['login_redirect_url_prev_page'] ) && $settings['login_redirect_url_prev_page'] === 'yes' ? $previous_page_url : $custom_redirect_url;
 
 			if ( $ajax ) {
 				$data = [
@@ -224,7 +226,7 @@ trait Login_Registration {
 			}
 
 			if ( ! empty( $custom_redirect_url ) ) {
-				wp_safe_redirect( esc_url_raw( $custom_redirect_url ) );
+				wp_redirect( esc_url_raw( $custom_redirect_url ) );
 				exit();
 			}
 		}
@@ -346,6 +348,14 @@ trait Login_Registration {
 						$errors['eael_phone_number'] = isset( $settings['err_phone_number_missing'] ) ? $settings['err_phone_number_missing'] : __( 'Phone number is required', 'essential-addons-for-elementor-lite' );
 					}
 				}
+				
+				if( isset( $register_field['field_type'] ) && 'honeypot' === $register_field['field_type']	){
+					$honeypot_name  = 'eaelhoneyp' . esc_attr( $widget_id );
+					$honeypot_value = sanitize_text_field( $_POST[ esc_attr( $honeypot_name ) ] );
+					if ( ! empty( $honeypot_value ) ) {
+						$errors[ $register_field['field_type'] ] = __( 'Sorry, you are not allowed to submit this form!', 'essential-addons-for-elementor-lite' );
+					}
+				}
 
 				if( isset( $register_field['field_type'] ) && in_array( $register_field['field_type'], $eael_custom_profile_fields_image_keys )	){
 
@@ -409,7 +419,7 @@ trait Login_Registration {
 		if ( $is_version_2 || $is_version_3 ) {
 			$ld_recaptcha_version = $is_version_3 ? 'v3' : 'v2';
 			
-			if( ! $this->lr_validate_recaptcha($ld_recaptcha_version) ) {
+			if( ! $this->lr_validate_recaptcha( $ld_recaptcha_version, $settings ) ) {
 				$errors['recaptcha'] = isset( $settings['err_recaptcha'] ) ? Helper::eael_wp_kses( $settings['err_recaptcha'] ) : __( 'You did not pass recaptcha challenge.', 'essential-addons-for-elementor-lite' );
 			}
 		}
@@ -428,7 +438,7 @@ trait Login_Registration {
 		}
 
 		// if user provided user name, validate & sanitize it
-		if ( isset( $_POST['user_name'] ) ) {
+		if ( !empty( $_POST['user_name'] ) ) {
 			$username = sanitize_user( $_POST['user_name'] );
 			if ( ! validate_username( $username ) || mb_strlen( $username ) > 60 ) {
 				$errors['user_name'] = isset( $settings['err_username'] ) ? Helper::eael_wp_kses( $settings['err_username'] ) : __( 'Invalid username provided.', 'essential-addons-for-elementor-lite' );
@@ -929,7 +939,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_resetpassword_error_' . $widget_id, $err_msg, false );
+			update_option( 'eael_resetpassword_error_' . $widget_id, wp_json_encode( $err_msg ), false );
 
             if (isset($_SERVER['HTTP_REFERER'])) {
                 wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -942,7 +952,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_resetpassword_error_' . $widget_id, $err_msg, false );
+			update_option( 'eael_resetpassword_error_' . $widget_id, wp_json_encode( $err_msg ), false );
 
             if (isset($_SERVER['HTTP_REFERER'])) {
                 wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -954,7 +964,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_resetpassword_error_' . $widget_id, $err_msg, false );
+			update_option( 'eael_resetpassword_error_' . $widget_id, wp_json_encode( $err_msg ), false );
 
             if (isset($_SERVER['HTTP_REFERER'])) {
                 wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -968,7 +978,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_resetpassword_error_' . $widget_id, $err_msg, false );
+			update_option( 'eael_resetpassword_error_' . $widget_id, wp_json_encode( $err_msg ), false );
 
             if (isset($_SERVER['HTTP_REFERER'])) {
                 wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -1009,7 +1019,7 @@ trait Login_Registration {
 			$user = check_password_reset_key( $rp_data_db['rp_key'], $rp_data_db['rp_login'] );
 
 			if( is_wp_error( $user ) || ! $user ){
-				$data['message'] = isset( $settings['error_resetpassword'] ) ? Helper::eael_wp_kses( $settings['error_resetpassword'] ) : esc_html__( 'Invalid user name found!', 'essential-addons-for-elementor-lite' );
+				$data['message'] = esc_html__( 'Invalid user name found!', 'essential-addons-for-elementor-lite' );
 
 				$success_key = 'eael_resetpassword_success_' . esc_attr( $widget_id );
 				delete_option( $success_key );
@@ -1017,7 +1027,7 @@ trait Login_Registration {
 				if($ajax){
 					wp_send_json_error( $data['message'] );
 				}else {
-					update_option( 'eael_resetpassword_error_' . $widget_id, $data['message'], false );
+					update_option( 'eael_resetpassword_error_' . $widget_id, wp_json_encode( $data['message'] ), false );
 				}
 			}
 
@@ -1038,7 +1048,7 @@ trait Login_Registration {
 
 						wp_send_json_success( $data );
 					} else {
-						update_option( 'eael_resetpassword_success_' . $widget_id, $data['message'], false );
+						update_option( 'eael_resetpassword_success_' . $widget_id, wp_json_encode( $data['message'] ), false );
 					}
 
 					if ( ! empty( $_POST['resetpassword_redirect_to'] ) ) {
@@ -1066,7 +1076,7 @@ trait Login_Registration {
 					$err_msg .= '</ol>';
 					wp_send_json_error( $err_msg );
 				}
-				update_option( 'eael_resetpassword_error_' . $widget_id, maybe_serialize( $errors ), false );
+				update_option( 'eael_resetpassword_error_' . $widget_id, wp_json_encode( $errors ), false );
 
 				if (isset( $_SERVER['HTTP_REFERER'] )) {
 					wp_safe_redirect( $_SERVER['HTTP_REFERER'] );
@@ -1086,47 +1096,29 @@ trait Login_Registration {
 		$this->widget_id = isset( $_GET['widget_id'] ) ? sanitize_text_field( $_GET['widget_id'] ) : '';
 		$this->resetpassword_in_popup_selector = isset( $_GET['popup-selector'] ) ? sanitize_text_field( $_GET['popup-selector'] ) : '';
 		$rp_page_url = get_permalink( $this->page_id );
-		
-		$rp_path = '/';
-		$rp_cookie       = 'wp-resetpass-' . COOKIEHASH;
+		$user = false;
 
 		if ( isset( $_GET['key'] ) && isset( $_GET['login'] ) ) {
-			$value = sprintf( '%s:%s', wp_unslash( $_GET['login'] ), wp_unslash( $_GET['key'] ) );
-			setcookie( $rp_cookie, $value, 0, $rp_path, COOKIE_DOMAIN, is_ssl(), true );
-
-			wp_safe_redirect( remove_query_arg( array( 'key', 'login' ) ) );
-			exit;
-		}
-
-		if ( isset( $_COOKIE[ $rp_cookie ] ) && 0 < strpos( $_COOKIE[ $rp_cookie ], ':' ) ) {
-			list( $rp_login, $rp_key ) = explode( ':', wp_unslash( $_COOKIE[ $rp_cookie ] ), 2 );
-
-			$user = check_password_reset_key( $rp_key, $rp_login );
-
-			if ( isset( $_POST['eael-pass1'] ) && isset( $_POST['rp_key'] ) && ! hash_equals( $rp_key, $_POST['rp_key'] ) ) {
-				$user = false;
-			}
-		} else {
-			$user = false;
+			$user        = check_password_reset_key( $_GET['key'], $_GET['login'] );
+			$rp_page_url .= "?eael_key={$_GET['key']}&eael_login={$_GET['login']}";
 		}
 
 		if ( ! $user || is_wp_error( $user ) ) {
-			setcookie( $rp_cookie, ' ', time() - YEAR_IN_SECONDS, $rp_path, COOKIE_DOMAIN, is_ssl(), true );
 			update_option( 'eael_lostpassword_error_' . esc_attr( $this->widget_id ) . '_show', 1, false );
 
 			if ( $user && $user->get_error_code() === 'expired_key' ) {
-				wp_redirect( $rp_page_url . '?eael-lostpassword=1&error=expiredkey' );
+				wp_redirect( $rp_page_url . '&eael-lostpassword=1&error=expiredkey' );
 			} else {
-				wp_redirect( $rp_page_url . '?eael-lostpassword=1&error=expiredkey' );
+				wp_redirect( $rp_page_url . '&eael-lostpassword=1&error=expiredkey' );
 			}
 
 			exit;
 		}
 
 		if( $this->resetpassword_in_popup_selector ){
-			wp_redirect( $rp_page_url . '?eael-resetpassword=1&popup-selector=' . $this->resetpassword_in_popup_selector );
+			wp_redirect( $rp_page_url . '&eael-resetpassword=1&popup-selector=' . $this->resetpassword_in_popup_selector );
 		} else {
-			wp_redirect( $rp_page_url . '?eael-resetpassword=1' );
+			wp_redirect( $rp_page_url . '&eael-resetpassword=1' );
 		}
 
 		exit;
@@ -1523,7 +1515,7 @@ trait Login_Registration {
 		return preg_replace( $placeholders, $replacement, $text );
 	}
 
-	public function lr_validate_recaptcha($version = 'v2') {
+	public function lr_validate_recaptcha( $version = 'v2', $settings = [] ) {
 		if ( ! isset( $_REQUEST['g-recaptcha-response'] ) ) {
 			return false;
 		}
@@ -1539,7 +1531,7 @@ trait Login_Registration {
 			if('v3' === $version ) {
 				$action = self::$recaptcha_v3_default_action;
 				$action_ok = ! isset( $res['action'] ) ? true : $action === $res['action'];
-				return $action_ok && isset( $res['score'] ) && ( $res['score'] > self::get_recaptcha_threshold() );
+				return $action_ok && isset( $res['score'] ) && ( $res['score'] > self::get_recaptcha_threshold( $settings ) );
 			}else {
 				return $res['success'];				
 			}
@@ -1619,7 +1611,7 @@ trait Login_Registration {
 				<th><label for="<?php echo esc_attr( $eael_custom_profile_field_image_key ); ?>"><?php _e( esc_html( $eael_custom_profile_field_value ) ); ?></label></th>
 				<td>
 					<input type="text" name="<?php echo esc_attr( $eael_custom_profile_field_image_key ); ?>" id="<?php echo esc_attr( $eael_custom_profile_field_image_key ); ?>" value="<?php echo esc_attr( $user_meta_attachment_id ); ?>" class="regular-text" /><br />
-					<p class="description"><?php printf( __( "Above, input the %s of the attachment.", 'essential-addons-for-elementor-lite'), esc_html( 'ID' )); ?></p>
+					<p class="description"><?php printf( __( "Above, input the %s of the attachment.", 'essential-addons-for-elementor-lite'), esc_html__( 'ID', 'essential-addons-for-elementor-lite' )); ?></p>
 					<?php
 					if( ! empty( $user_meta_attachment_id ) ){
 						echo Helper::eael_wp_kses( wp_get_attachment_image($user_meta_attachment_id, 'thumbnail', 1) );

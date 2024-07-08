@@ -1,4 +1,17 @@
 jQuery(window).on("elementor/frontend/init", function () {
+	function getVideoId(url) {
+		var vimeoMatch = url.match(/\/\/(?:player\.)?vimeo.com\/(?:video\/)?([0-9]+)/);
+		if (vimeoMatch) {
+			return vimeoMatch[1];
+		}
+	
+		var youtubeMatch = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+		if (youtubeMatch) {
+			return youtubeMatch[1];
+		}
+	
+		return null;
+	}
 	var filterableGalleryHandler = function ($scope, $) {
 		var filterControls = $scope.find(".fg-layout-3-filter-controls").eq(0),
 			filterTrigger  = $scope.find("#fg-filter-trigger"),
@@ -30,6 +43,39 @@ jQuery(window).on("elementor/frontend/init", function () {
 			filterControls.removeClass("open-filters");
 		});
 
+		$('.video-popup.eael-magnific-video-link.playout-vertical', $scope).on('click', function(){
+			setTimeout(function(){
+				$('.mfp-iframe-holder').addClass('eael-gf-vertical-video-popup');
+			}, 1);
+		});
+
+		$('.eael-magnific-link', $scope).on('click', function(){
+			setTimeout(function(){
+				$('.mfp-wrap').addClass('eael-gf-mfp-popup');
+			}, 1);
+		});
+
+		$(document).on('click','.mfp-arrow.mfp-arrow-left, .mfp-arrow.mfp-arrow-right', function(){
+			setTimeout(function(){
+				var container = $('.eael-gf-mfp-popup .mfp-container');
+				if( container.hasClass('mfp-iframe-holder') ){
+					var src    = $('iframe', container).attr('src'),
+						plyBtn = $('a[href="'+src+'"]');
+						
+					if( plyBtn.length < 1 ){
+						var videoId = getVideoId( src ),
+							plyBtn  = $('a[href*="'+videoId+'"]');
+					}
+					
+					if( plyBtn.hasClass('playout-vertical') ){
+						container.addClass('eael-gf-vertical-video-popup');
+					} else{
+						container.removeClass('eael-gf-vertical-video-popup');
+					}
+				}
+			}, 1);
+		});
+
 		if (!isEditMode) {
 			var $gallery         = $(".eael-filter-gallery-container", $scope),
 				$settings        = $gallery.data("settings"),
@@ -38,7 +84,8 @@ jQuery(window).on("elementor/frontend/init", function () {
 				$gallery_enabled = ($settings.gallery_enabled === "yes"),
 				$images_per_page = $gallery.data("images-per-page"),
 				$init_show_setting     = $gallery.data("init-show");
-				fg_items.splice(0, $init_show_setting)
+				fg_items.splice(0, $init_show_setting),
+				isRTL = $('body').hasClass('rtl');
 			// init isotope
 			let gwrap = $(".eael-filter-gallery-wrapper");
 			var layoutMode       = gwrap.data("layout-mode");
@@ -48,6 +95,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 				percentPosition: true,
 				stagger: 30,
 				transitionDuration: $settings.duration + "ms",
+				isOriginLeft: !isRTL,
 				filter: function () {
 					var $this   = $(this);
 					var $result = searchRegex ? $this.text().match(searchRegex) : true;
@@ -94,6 +142,13 @@ jQuery(window).on("elementor/frontend/init", function () {
 						setTimeout(() => {
 							$(".eael-privacy-message").remove();
 						}, 5000);
+
+						setTimeout(() => {
+							var el_lightbox = $('.dialog-type-lightbox.elementor-lightbox');
+							if( el_lightbox.length > 0 ){
+								el_lightbox.remove();
+							}
+						}, 100);
 					},
 				}
 			});

@@ -23,7 +23,7 @@ class Hover_Effect {
 		$element->start_controls_section(
 			'eael_hover_effect_section',
 			[
-				'label' => __( '<i class="eaicon-logo"></i> Hover Effect', 'essential-addons-for-elementor-lite' ),
+				'label' => __( '<i class="eaicon-logo"></i> Hover Interactions', 'essential-addons-for-elementor-lite' ),
 				'tab'   => Controls_Manager::TAB_ADVANCED
 			]
 		);
@@ -31,8 +31,32 @@ class Hover_Effect {
 		$element->add_control(
 			'eael_hover_effect_switch',
 			[
-				'label' => __( 'Enable Hover Effect', 'essential-addons-for-elementor-lite' ),
+				'label' => __( 'Enable Hover Interactions', 'essential-addons-for-elementor-lite' ),
 				'type'  => Controls_Manager::SWITCHER
+			]
+		);
+
+		$element->add_control(
+			'eael_hover_effect_enable_live_changes',
+			[
+				'label'     => __( 'Show Preview in Editor', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'separator' => 'before',
+				'condition' => [
+					'eael_hover_effect_switch' => 'yes',
+				]
+			]
+		);
+
+		$element->add_control(
+			'eael_hover_effect_enable_live_changes_note',
+			[
+				'type'            => Controls_Manager  :: RAW_HTML,
+				'raw'             => __( 'Enabling this option will let you preview the Hover Interactions inside the Elementor Editor.', 'essential-addons-for-elementor-lite' ),
+				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+				'condition'       => [
+					'eael_hover_effect_switch' => 'yes',
+				],
 			]
 		);
 
@@ -50,16 +74,6 @@ class Hover_Effect {
 				]
 			]
 		);
-
-        //Background
-        // $element->add_group_control(
-		// 	\Elementor\Group_Control_Background::get_type(),
-		// 	[
-		// 		'name'     => 'eael_hover_effect_background',
-		// 		'types'    => [ 'classic', 'gradient' ],
-		// 		'selector' => '{{WRAPPER}} .elementor-widget-container',
-		// 	]
-		// );
 
         //Opacity
         $element->add_control(
@@ -81,7 +95,7 @@ class Hover_Effect {
                 'label'              => __( 'Opacity', 'essential-addons-for-elementor-lite' ),
                 'type'               => Controls_Manager::SLIDER,
                 'default' => [
-                    'size' => 1,
+                    'size' => 0.8,
                 ],
                 'range' => [
                     'px' => [
@@ -129,7 +143,7 @@ class Hover_Effect {
                 'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
                 'type'               => Controls_Manager::SLIDER,
                 'default' => [
-                    'size' => 0,
+                    'size' => 1,
                 ],
                 'range' => [
                     'px' => [
@@ -162,7 +176,7 @@ class Hover_Effect {
                 'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
                 'type'               => Controls_Manager::SLIDER,
                 'default' => [
-					'size' => 100,
+					'size' => 80,
 				],
                 'range' => [
                     '%' => [
@@ -195,7 +209,7 @@ class Hover_Effect {
                 'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
                 'type'               => Controls_Manager::SLIDER,
                 'default' => [
-					'size' => 0,
+					'size' => 40,
 				],
                 'range' => [
                     '%' => [
@@ -228,7 +242,7 @@ class Hover_Effect {
                 'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
                 'type'               => Controls_Manager::SLIDER,
                 'default' => [
-					'size' => 0,
+					'size' => 70,
 				],
                 'range' => [
                     '%' => [
@@ -261,7 +275,7 @@ class Hover_Effect {
                 'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
                 'type'               => Controls_Manager::SLIDER,
                 'default' => [
-					'size' => 100,
+					'size' => 50,
 				],
                 'range' => [
                     '%' => [
@@ -294,7 +308,7 @@ class Hover_Effect {
                 'label'              => __( 'Value', 'essential-addons-for-elementor-lite' ),
                 'type'               => Controls_Manager::SLIDER,
                 'default' => [
-					'size' => 0,
+					'size' => 50,
 				],
                 'range' => [
                     '%' => [
@@ -324,7 +338,7 @@ class Hover_Effect {
 			]
 		);
         $element->start_popover();
-		$element->add_control(
+		$element->add_responsive_control(
             'eael_hover_effect_offset_left',
             [
                 'label'              => __( 'Offset Top', 'essential-addons-for-elementor-lite' ),
@@ -333,7 +347,7 @@ class Hover_Effect {
                 'size_units'         => ['px', '%'],
                 'default' => [
 					'unit' => 'px',
-					'size' => 0,
+					'size' => 5,
 				],
                 'range' => [
                     'px' => [
@@ -353,7 +367,7 @@ class Hover_Effect {
             ]
         );
 
-        $element->add_control(
+        $element->add_responsive_control(
             'eael_hover_effect_offset_top',
             [
                 'label'              => __( 'Offset Left', 'essential-addons-for-elementor-lite' ),
@@ -362,7 +376,7 @@ class Hover_Effect {
                 'size_units'         => ['px', '%'],
                 'default' => [
 					'unit' => 'px',
-					'size' => 0,
+					'size' => 5,
 				],
                 'range' => [
                     'px' => [
@@ -411,10 +425,10 @@ class Hover_Effect {
 		);
 
 		//RotateX
-        $element->add_control(
+        $element->add_responsive_control(
 			'eael_hover_effect_transform_rotatex',
 			[
-				'label' => esc_html__( 'RotateX', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'RotateX (deg)', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'range' => [
                     'px' => [
@@ -434,10 +448,10 @@ class Hover_Effect {
 		);
 
 		//RotateY
-        $element->add_control(
+        $element->add_responsive_control(
 			'eael_hover_effect_transform_rotatey',
 			[
-				'label' => esc_html__( 'RotateY', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'RotateY (deg)', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'range' => [
                     'px' => [
@@ -457,10 +471,10 @@ class Hover_Effect {
 		);
 
 		//RotateZ
-        $element->add_control(
+        $element->add_responsive_control(
 			'eael_hover_effect_transform_rotatez',
 			[
-				'label' => esc_html__( 'RotateZ', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'RotateZ (deg)', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'range' => [
                     'px' => [
@@ -470,7 +484,7 @@ class Hover_Effect {
 					],
 				],
 				'default' => [
-					'size' => 0,
+					'size' => 5,
 				],
                 'condition' => [
 					'eael_hover_effect_rotate_is_on'      => 'yes',
@@ -492,7 +506,7 @@ class Hover_Effect {
 		);
 
 		//ScaleX
-        $element->add_control(
+        $element->add_responsive_control(
 			'eael_hover_effect_transform_scalex',
 			[
 				'label' => esc_html__( 'ScaleX', 'essential-addons-for-elementor-lite' ),
@@ -504,7 +518,7 @@ class Hover_Effect {
                     ],
 				],
                 'default' => [
-					'size' => 0,
+					'size' => 0.9,
 				],
                 'condition' => [
 					'eael_hover_effect_scale_is_on'       => 'yes',
@@ -514,7 +528,7 @@ class Hover_Effect {
 		);
 
 		//ScaleY
-        $element->add_control(
+        $element->add_responsive_control(
 			'eael_hover_effect_transform_scaley',
 			[
 				'label' => esc_html__( 'ScaleY', 'essential-addons-for-elementor-lite' ),
@@ -526,7 +540,7 @@ class Hover_Effect {
                     ],
 				],
                 'default' => [
-					'size' => 0,
+					'size' => 0.9,
 				],
                 'condition' => [
 					'eael_hover_effect_scale_is_on'       => 'yes',
@@ -548,10 +562,10 @@ class Hover_Effect {
 		);
 
 		//SkewX
-        $element->add_control(
+        $element->add_responsive_control(
 			'eael_hover_effect_transform_skewx',
 			[
-				'label' => esc_html__( 'SkewX', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'SkewX (deg)', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'range' => [
                     'px' => [
@@ -561,7 +575,7 @@ class Hover_Effect {
 					],
 				],
 				'default' => [
-					'size' => 0,
+					'size' => 5,
 				],
                 'condition' => [
 					'eael_hover_effect_skew_is_on'        => 'yes',
@@ -571,10 +585,10 @@ class Hover_Effect {
 		);
 
 		//SkewY
-        $element->add_control(
+        $element->add_responsive_control(
 			'eael_hover_effect_transform_skewy',
 			[
-				'label' => esc_html__( 'SkewY', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'SkewY (deg)', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'range' => [
                     'px' => [
@@ -584,7 +598,7 @@ class Hover_Effect {
 					],
 				],
 				'default' => [
-					'size' => 0,
+					'size' => 5,
 				],
                 'condition' => [
 					'eael_hover_effect_skew_is_on'        => 'yes',
@@ -681,17 +695,7 @@ class Hover_Effect {
 					'eael_hover_effect_switch' => 'yes',
 				]
 			]
-		);
-
-         //Background Hover
-        // $element->add_group_control(
-		// 	\Elementor\Group_Control_Background::get_type(),
-		// 	[
-		// 		'name'     => 'eael_hover_effect_background_hover',
-		// 		'types'    => [ 'classic', 'gradient' ],
-		// 		'selector' => '{{WRAPPER}} .your-class',
-		// 	]
-		// );
+				);
 
         //Opacity Hover
         $element->add_control(
@@ -979,7 +983,7 @@ class Hover_Effect {
 			]
 		);
         $element->start_popover();
-		$element->add_control(
+		$element->add_responsive_control(
             'eael_hover_effect_offset_hover_left',
             [
                 'label'              => __( 'Offset Top', 'essential-addons-for-elementor-lite' ),
@@ -1008,7 +1012,7 @@ class Hover_Effect {
             ]
         );
 		
-        $element->add_control(
+        $element->add_responsive_control(
             'eael_hover_effect_offset_hover_top',
             [
                 'label'              => __( 'Offset Left', 'essential-addons-for-elementor-lite' ),
@@ -1069,7 +1073,7 @@ class Hover_Effect {
         $element->add_responsive_control(
 			'eael_hover_effect_transform_hover_rotatex',
 			[
-                'label' => esc_html__( 'RotateX', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'RotateX (deg)', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'range' => [
                     'px' => [
@@ -1091,7 +1095,7 @@ class Hover_Effect {
         $element->add_responsive_control(
 			'eael_hover_effect_transform_hover_rotatey',
 			[
-                'label' => esc_html__( 'RotateY', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'RotateY (deg)', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'range' => [
                     'px' => [
@@ -1113,7 +1117,7 @@ class Hover_Effect {
         $element->add_responsive_control(
 			'eael_hover_effect_transform_hover_rotatez',
 			[
-                'label' => esc_html__( 'RotateZ', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'RotateZ (deg)', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'range' => [
                     'px' => [
@@ -1203,7 +1207,7 @@ class Hover_Effect {
         $element->add_responsive_control(
 			'eael_hover_effect_transform_hover_skewx',
 			[
-                'label' => esc_html__( 'SkewX', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'SkewX (deg)', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'range' => [
                     'px' => [
@@ -1225,7 +1229,7 @@ class Hover_Effect {
         $element->add_responsive_control(
 			'eael_hover_effect_transform_hover_skewy',
 			[
-                'label' => esc_html__( 'SkewY', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'SkewY (deg)', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'range' => [
                     'px' => [
@@ -1321,33 +1325,22 @@ class Hover_Effect {
 			]
         );
 
-        $element->end_controls_tab();
-        $element->end_controls_tabs();
-		
 		$element->add_control(
-			'eael_hover_effect_enable_live_changes',
+			'eael_hover_effect_hover_tilt',
 			[
-				'label'     => __( 'Enable Editor Preview', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'separator' => 'before',
-				'condition' => [
+				'label'        => esc_html__( 'Tilt Effect', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'On', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Off', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'condition'    => [
 					'eael_hover_effect_switch' => 'yes',
 				]
 			]
 		);
 
-		$element->add_control(
-			'eael_hover_effect_enable_live_changes_note',
-			[
-				'type'            => Controls_Manager  :: RAW_HTML,
-				'raw'             => __( 'Please keep it disabled after you are done with the editing.', 'essential-addons-for-elementor-lite' ),
-				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
-				'condition'       => [
-					'eael_hover_effect_switch' => 'yes',
-					'eael_hover_effect_enable_live_changes' => 'yes',
-				],
-			]
-		);
+        $element->end_controls_tab();
+        $element->end_controls_tabs();
 
 		$element->end_controls_section();
 	}
@@ -1486,7 +1479,7 @@ class Hover_Effect {
 			}
 	
 			/**
-			 * Hover Effect Options
+			 * Hover Interactions Options
 			 */
 			//Opacity
 			if( !empty( $settings['eael_hover_effect_opacity_hover']['size'] ) ) {
@@ -1614,7 +1607,15 @@ class Hover_Effect {
 				$element->add_render_attribute( '_wrapper', 'data-eael_hover_easing', wp_json_encode( $transition_easing_settings ) );
 			}
 			
+			//Tilt
+			if( !empty( $settings['eael_hover_effect_hover_tilt'] ) ) {
+				$element->add_render_attribute( '_wrapper', 'data-eaeltilt', 'eael_tilt' );
+			}
+			
 			$element->add_render_attribute( '_wrapper', 'class', 'eael_hover_effect' );
+
+			?>
+			<?php
 		}
 	}
 
