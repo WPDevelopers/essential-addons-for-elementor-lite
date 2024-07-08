@@ -406,7 +406,7 @@ trait Admin {
 					    ],
 					    [
 						    'label' => __( 'Custom JS', 'essential-addons-for-elementor-lite' ),
-						    'url'   => '',
+						    'url'   => '#',
 						    'icon'  => 'images/Custom-JS.svg'
 					    ],
 					    [
