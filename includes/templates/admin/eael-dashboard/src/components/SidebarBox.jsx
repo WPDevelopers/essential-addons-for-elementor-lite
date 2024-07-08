@@ -11,9 +11,9 @@ function SidebarBox() {
                 <div className="review-wrap">
                     <div className="flex items-center gap-2">
                         <i className="ea-dash-icon ea-star"></i>
-                        <h6>3200+</h6>
+                        <h6>{eaData.review.count}</h6>
                     </div>
-                    <span className="reating-details">Five Star Reviews</span>
+                    <span className="reating-details">{eaData.review.label}</span>
                 </div>
                 <a href={eaData.button.url} target="_blank">
                     <button className="upgrade-button">
