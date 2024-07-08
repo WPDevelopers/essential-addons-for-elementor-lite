@@ -1,4 +1,155 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --page-background: #F5F6FC;
+  --base-background: #FFFFFF;
+  --background-1: #F9EFFB;
+  --background-2: #F6EEFF;
+  --background-3: #EFF8FF;
+  --background-4: #E0FCF5;
+  --background-5: #12B76A;
+  --background-6: #FFAD4C;
+  --background-7: #5262EE;
+  --background-8: #FDFDFF;
+  --background-9: #F1F2FA;
+  --background-10: #FEFAFF;
+  --background-11: #FBFCFF;
+  --background-12: #FFFEFC;
+  --background-13: #F9FAFB;
+  --background-14: #F5F1FF;
+  --background-15: #FFFCF5;
+  --background-16: #FFF1F3;
+  --toggle-color: #EAECF0;
+  --label-color: #EAECF0;
+  --label-color-fill: #7F56D9;
+  --base-color-50: #750EF4;
+  --base-color-75: #6F0AF2;
+  --base-color-100: #FF9437;
+  --base-color-200: #C01048;
+  --text-color-25: #1D2939;
+  --text-color-50: #344054;
+  --text-color-100: #475467;
+  --text-color-150: #937998;
+  --text-color-200: #1570EF;
+  --text-color-300: #959AA1;
+  --text-color-500: #D0D5DD;
+  --text-icon-100: #98A2B3;
+  --text-icon-200: #2E90FA;
+  --text-icon-300: #00C567;
+  --text-icon-400: #AFB6C0;
+  --text-icon-500: #667085;
+  --text-icon-active: #E1C9FF;
+  --border-color-base: #F2F4F7;
+  --border-color-2: #F9F3F1;
+  --border-color-3: #ED7206;
+  --border-color-4: #EBEEF2;
+  --shadow-color-1: #FFFFFF00;
+  --shadow-color-6: #1018280F;
+  --shadow-color-8: #00012314;
+  --shadow-color-10: #1018281A;
+  --shadow-color-12: #1B212C1F;
+  --modal-bg-base: #F7FAFF;
+  --modal-bg-2: #FFF7F7;
+  --modal-bg-3: #F7F8FF;
+  --modal-bg-4: #F9F9F9;
+  --modal-bg-5: #F3F7FF;
+  --gardient-text: #750EF4;
+  --gardient-1: #fefbff;
+  --gardient-2: #f4e4f6;
+  --gardient-3: #dea8ff;
+  --gardient-4: #fefaff;
+  --gardient-5: #FBEEFF;
+  --gardient-6: #FEFEFE;
+  --gardient-7: #8725FF;
+  --gardient-8: #EED6FF;
+  --modal-overlay: #1D232733;
+  --elements-1: #FAF5FF;
+  --elements-2: #F1FFF2;
+  --elements-3: #F6F9FF;
+  --mode-switcher-icon: "\e905";
+  --enhance-bg: url('../images/pro-elements-bg.png');
+  --whats-new-bg: url('../images/img-4.png');
+  --features-bg: url('../images/pro-bg.png');
+}
+
+body.eael_dash_dark_mode {
+  --page-background: #09090A;
+  --base-background: #18191B;
+  --background-1: #302837;
+  --background-2: #2C213A;
+  --background-3: #182741;
+  --background-4: #182B23;
+  --background-5: #12B76A;
+  --background-6: #FFAD4C;
+  --background-7: #5262EE;
+  --background-8: #18191B;
+  --background-9: #101112;
+  --background-10: #17111D;
+  --background-11: #101112;
+  --background-12: #18191B;
+  --background-13: #09090A;
+  --background-14: #09090A;
+  --background-15: #09090A;
+  --background-16: #FFF1F3;
+  --toggle-color: #2D2F34;
+  --label-color: #1F2125;
+  --label-color-fill: #7F56D9;
+  --base-color-50: #750EF4;
+  --base-color-75: #6F0AF2;
+  --base-color-100: #FF9437;
+  --base-color-200: #C01048;
+  --text-color-25: #FFFFFF;
+  --text-color-50: #D0D5DD;
+  --text-color-100: #B1B4B9;
+  --text-color-150: #8D809C;
+  --text-color-200: #1570EF;
+  --text-color-300: #8D809C;
+  --text-color-500: #1F2125;
+  --text-icon-100: #667085;
+  --text-icon-200: #2E90FA;
+  --text-icon-300: #00C567;
+  --text-icon-400: #AFB6C0;
+  --text-icon-500: #667085;
+  --text-icon-active: #E1C9FF;
+  --border-color-base: #1F2125;
+  --border-color-2: #2A2D33;
+  --border-color-3: #ED7206;
+  --border-color-4: #18191B;
+  --shadow-color-1: #18191B00;
+  --shadow-color-6: #1018280F;
+  --shadow-color-8: #00012314;
+  --shadow-color-10: #1018281A;
+  --shadow-color-12: #1B212C1F;
+  --modal-bg-base: #09090A;
+  --modal-bg-2: #09090A;
+  --modal-bg-3: #09090A;
+  --modal-bg-4: #09090A;
+  --modal-bg-5: #09090A;
+  --gardient-text: #FFFFFF;
+  --gardient-1: #17111D;
+  --gardient-2: #693787;
+  --gardient-3: #693787;
+  --gardient-4: #17111D;
+  --gardient-5: #9743FF;
+  --gardient-6: #151618;
+  --gardient-7: #B477FF;
+  --gardient-8: #4B00A7;
+  --modal-overlay: #09090ACC;
+  --elements-1: #2C213A;
+  --elements-2: #182B23;
+  --elements-3: #1B1E2F;
+  --mode-switcher-icon: "\e903";
+  --enhance-bg: url('../images/pro-elements-bg-dark.png');
+  --whats-new-bg: url('../images/img-4-dark.png');
+  --features-bg: url('../images/pro-bg-dark.png');
+}
+
 /* from old dashboard start */
 a, a:hover {
   color: inherit;
@@ -87,7 +238,6 @@ a:focus {
   font-size: 12px;
 }
 
-
 .eael-admin-promotion-message i:before {
   color:white;
 }
@@ -95,154 +245,6 @@ a:focus {
   padding-left: 0;
 }
 /* from old dashboard end */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-:root {
-  --page-background: #F5F6FC;
-  --base-background: #FFFFFF;
-  --background-1: #F9EFFB;
-  --background-2: #F6EEFF;
-  --background-3: #EFF8FF;
-  --background-4: #E0FCF5;
-  --background-5: #12B76A;
-  --background-6: #FFAD4C;
-  --background-7: #5262EE;
-  --background-8: #FDFDFF;
-  --background-9: #F1F2FA;
-  --background-10: #FEFAFF;
-  --background-11: #FBFCFF;
-  --background-12: #FFFEFC;
-  --background-13: #F9FAFB;
-  --background-14: #F5F1FF;
-  --background-15: #FFFCF5;
-  --background-16: #FFF1F3;
-  --label-color: #EAECF0;
-  --label-color-fill: #7F56D9;
-  --base-color-50: #750EF4;
-  --base-color-75: #6F0AF2;
-  --base-color-100: #FF9437;
-  --base-color-200: #C01048;
-  --text-color-25: #1D2939;
-  --text-color-50: #344054;
-  --text-color-100: #475467;
-  --text-color-150: #937998;
-  --text-color-200: #1570EF;
-  --text-color-300: #959AA1;
-  --text-color-500: #D0D5DD;
-  --text-icon-100: #98A2B3;
-  --text-icon-200: #2E90FA;
-  --text-icon-300: #00C567;
-  --text-icon-400: #AFB6C0;
-  --text-icon-500: #667085;
-  --text-icon-active: #E1C9FF;
-  --border-color-base: #F2F4F7;
-  --border-color-2: #F9F3F1;
-  --border-color-3: #ED7206;
-  --border-color-4: #EBEEF2;
-  --shadow-color-1: #FFFFFF00;
-  --shadow-color-6: #1018280F;
-  --shadow-color-8: #00012314;
-  --shadow-color-10: #1018281A;
-  --shadow-color-12: #1B212C1F;
-  --modal-bg-base: #F7FAFF;
-  --modal-bg-2: #FFF7F7;
-  --modal-bg-3: #F7F8FF;
-  --modal-bg-4: #F9F9F9;
-  --modal-bg-5: #F3F7FF;
-  --gardient-text: #750EF4;
-  --gardient-1: #fefbff;
-  --gardient-2: #f4e4f6;
-  --gardient-3: #dea8ff;
-  --gardient-4: #fefaff;
-  --gardient-5: #FBEEFF;
-  --gardient-6: #FEFEFE;
-  --gardient-7: #8725FF;
-  --gardient-8: #EED6FF;
-  --modal-overlay: #1D232733;
-  --elements-1: #FAF5FF;
-  --elements-2: #F1FFF2;
-  --elements-3: #F6F9FF;
-  --mode-switcher-icon: "\e905";
-  --enhance-bg: url('../images/pro-elements-bg.png');
-  --whats-new-bg: url('../images/img-4.png');
-  --features-bg: url('../images/pro-bg.png');
-}
-
-body.eael_dash_dark_mode {
-  --page-background: #09090A;
-  --base-background: #18191B;
-  --background-1: #302837;
-  --background-2: #2C213A;
-  --background-3: #182741;
-  --background-4: #182B23;
-  --background-5: #12B76A;
-  --background-6: #FFAD4C;
-  --background-7: #5262EE;
-  --background-8: #18191B;
-  --background-9: #101112;
-  --background-10: #17111D;
-  --background-11: #101112;
-  --background-12: #18191B;
-  --background-13: #09090A;
-  --background-14: #09090A;
-  --background-15: #09090A;
-  --background-16: #FFF1F3;
-  --label-color: #1F2125;
-  --label-color-fill: #7F56D9;
-  --base-color-50: #750EF4;
-  --base-color-75: #6F0AF2;
-  --base-color-100: #FF9437;
-  --base-color-200: #C01048;
-  --text-color-25: #FFFFFF;
-  --text-color-50: #D0D5DD;
-  --text-color-100: #B1B4B9;
-  --text-color-150: #8D809C;
-  --text-color-200: #1570EF;
-  --text-color-300: #8D809C;
-  --text-color-500: #1F2125;
-  --text-icon-100: #667085;
-  --text-icon-200: #2E90FA;
-  --text-icon-300: #00C567;
-  --text-icon-400: #AFB6C0;
-  --text-icon-500: #667085;
-  --text-icon-active: #E1C9FF;
-  --border-color-base: #1F2125;
-  --border-color-2: #2A2D33;
-  --border-color-3: #ED7206;
-  --border-color-4: #18191B;
-  --shadow-color-1: #18191B00;
-  --shadow-color-6: #1018280F;
-  --shadow-color-8: #00012314;
-  --shadow-color-10: #1018281A;
-  --shadow-color-12: #1B212C1F;
-  --modal-bg-base: #09090A;
-  --modal-bg-2: #09090A;
-  --modal-bg-3: #09090A;
-  --modal-bg-4: #09090A;
-  --modal-bg-5: #09090A;
-  --gardient-text: #FFFFFF;
-  --gardient-1: #17111D;
-  --gardient-2: #693787;
-  --gardient-3: #693787;
-  --gardient-4: #17111D;
-  --gardient-5: #9743FF;
-  --gardient-6: #151618;
-  --gardient-7: #B477FF;
-  --gardient-8: #4B00A7;
-  --modal-overlay: #09090ACC;
-  --elements-1: #2C213A;
-  --elements-2: #182B23;
-  --elements-3: #1B1E2F;
-  --mode-switcher-icon: "\e903";
-  --enhance-bg: url('../images/pro-elements-bg-dark.png');
-  --whats-new-bg: url('../images/img-4-dark.png');
-  --features-bg: url('../images/pro-bg-dark.png');
-}
 
 body,
 #ea__dashboard--wrapper {
@@ -658,7 +660,7 @@ input::placeholder {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--label-color);
+  background-color: var(--toggle-color);
   border-radius: 12px;
   transition: ease-in-out .35s;
 }
