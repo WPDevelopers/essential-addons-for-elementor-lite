@@ -1296,7 +1296,7 @@ span.dark-icon {
   position: sticky;
   left: 0;
   right: 0;
-  top: 102px;
+  top: 100px;
   z-index: 99;
 }
 
@@ -2649,6 +2649,10 @@ input.input-api:disabled {
     padding-right: 20px;
   }
 
+  .ea__content-header.sticky {
+    top: 94px;
+  }
+
   .ea__header-content {
     padding: 12px 16px;
   }
@@ -3205,6 +3209,12 @@ input.input-api:disabled {
 @media only screen and (max-width: 800px) {
   #ea__dashboard--wrapper .max-w-454 {
     max-width: 270px;
+  }
+}
+
+@media only screen and (max-width: 782px) {
+  .ea__section-header {
+    top: 46px;
   }
 }
 
