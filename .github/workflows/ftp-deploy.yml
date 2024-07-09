@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 3395
+  workflow_dispatch
 
 jobs:
   web-deploy:
