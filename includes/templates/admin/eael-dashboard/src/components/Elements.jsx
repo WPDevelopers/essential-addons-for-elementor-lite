@@ -88,7 +88,7 @@ function Elements() {
                             <div className="search--widget flex">
                                 <div className='ea__input-search-wrapper'>
                                     <input ref={searchParam} onChange={debounce(onSearch, 500)} className="input-name"
-                                           type="search"
+                                           type="text"
                                            placeholder="Search by name"/>
                                 </div>
                                 <div className="select-option-wrapper">
