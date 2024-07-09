@@ -4,6 +4,7 @@ import ElementCategoryBox from "./ElementCategoryBox.jsx";
 import ElementsSearchSection from "./ElementsSearchSection.jsx";
 import {useRef, useEffect} from "react";
 import {debounce} from "../helper";
+import Search404 from "./Search404.jsx";
 
 function Elements() {
     const eaData = localize.eael_dashboard.widgets,
@@ -124,6 +125,7 @@ function Elements() {
                         return <ElementsSubSection index={item} key={index}/>
                     })}
                     {!!searchParam?.current?.value && <ElementsSearchSection searchTerm={searchParam.current.value}/>}
+                    <Search404/>
                 </div>
 
 
