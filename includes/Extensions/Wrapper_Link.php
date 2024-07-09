@@ -59,8 +59,8 @@ class Wrapper_Link {
 
 	public function before_render( $element ) {
 		$wrapper_link_settings = $element->get_settings_for_display( 'eael_wrapper_link' );
-
-		if ( ! empty( $element->get_settings_for_display( 'eael_wrapper_link_switch' ) ) && ! empty( $wrapper_link_settings['url'] ) ) {
+		
+		if ( "yes" === $element->get_settings_for_display( 'eael_wrapper_link_switch' ) && ! empty( $wrapper_link_settings['url'] ) ) {
 			$element->add_link_attributes( 'eael_wrapper_link', $wrapper_link_settings );
 			echo "<a "; $element->print_render_attribute_string( 'eael_wrapper_link' ); echo ">";
 		}
@@ -69,7 +69,7 @@ class Wrapper_Link {
 	public function after_render( $element ){
 		$wrapper_link_settings = $element->get_settings_for_display( 'eael_wrapper_link' );
 
-		if ( ! empty( $element->get_settings_for_display( 'eael_wrapper_link_switch' ) ) && ! empty( $wrapper_link_settings['url'] ) ) {
+		if ( "yes" === $element->get_settings_for_display( 'eael_wrapper_link_switch' ) && ! empty( $wrapper_link_settings['url'] ) ) {
 			echo "</a>";
 		}
 	}
