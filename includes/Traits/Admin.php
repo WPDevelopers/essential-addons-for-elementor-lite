@@ -120,7 +120,7 @@ trait Admin {
 				    'all_widgets'          => __( 'All Widgets', 'essential-addons-for-elementor-lite' ),
 				    'toaster_success_msg'  => __( 'Your changes have been saved successfully.', 'essential-addons-for-elementor-lite' ),
 				    'toaster_error_msg'    => __( 'Oops! Something went wrong. Please try again.', 'essential-addons-for-elementor-lite' ),
-				    'search_not_found'     => __( 'No elements found with these keyword', 'essential-addons-for-elementor-lite' ),
+				    'search_not_found'     => __( 'No elements exist with this keyword', 'essential-addons-for-elementor-lite' ),
 			    ],
 			    'whats_new'               => [
 				    'heading' => __( "What's New In Essential Addons 6.0?", 'essential-addons-for-elementor-lite' ),
