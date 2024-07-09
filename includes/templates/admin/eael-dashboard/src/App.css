@@ -3357,3 +3357,9 @@ input.input-api:disabled {
     grid-template-columns: repeat(1, 1fr);
   }
 }
+
+@media only screen and (min-height: 840px) {
+  .ea__elements-nav-content.elements-contents {
+    padding-bottom: calc(100vh - 841px);
+  }
+}
