@@ -3886,10 +3886,6 @@ class Filterable_Gallery extends Widget_Base
             $gallery_items = $items = $this->render_gallery_items();
         }
 
-        if ( $settings['eael_item_randomize'] === 'yes' ){
-            shuffle($gallery_items);
-        }
-
         $this->add_render_attribute('gallery-items-wrap', [
             'class' => [
                 'eael-filter-gallery-container',
@@ -3898,6 +3894,7 @@ class Filterable_Gallery extends Widget_Base
             'data-images-per-page' => $settings['images_per_page'],
             'data-total-gallery-items' => count($settings['eael_fg_gallery_items']),
             'data-nomore-item-text' => $no_more_items_text,
+            'data-is-randomize' => 'yes' === $settings['eael_item_randomize'] ? 'yes' : 'no',
         ]);
 
         $this->add_render_attribute('gallery-items-wrap', 'data-settings', wp_json_encode($gallery_settings));
