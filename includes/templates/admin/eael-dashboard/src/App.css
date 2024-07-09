@@ -2139,7 +2139,7 @@ section.ea__modal-wrapper {
   transition: all .35s ease-in-out;
   cursor: pointer;
   position: relative;
-  color: var(--base-background);
+  color: #FFFFFF;
   background: var(--base-color-75);
   border: 1px solid var(--base-color-75);
   display: inline-flex;
