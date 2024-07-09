@@ -616,6 +616,8 @@ input::placeholder {
   background: transparent;
   cursor: pointer;
   appearance: none;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 #ea__dashboard--wrapper .form-select:focus-visible,
