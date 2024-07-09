@@ -85,9 +85,11 @@ function Elements() {
                         <div className="ea__widget-elements flex items-center">
                             <h4>Elements</h4>
                             <div className="search--widget flex">
-                                <input ref={searchParam} onChange={debounce(onSearch, 500)} className="input-name"
-                                       type="search"
-                                       placeholder="Search by name"/>
+                                <div className='ea__input-search-wrapper'>
+                                    <input ref={searchParam} onChange={debounce(onSearch, 500)} className="input-name"
+                                           type="search"
+                                           placeholder="Search by name"/>
+                                </div>
                                 <div className="select-option-wrapper">
                                     <select ref={categoryRef} onChange={debounce(onSearch, 100)} name="select"
                                             id="select-option"

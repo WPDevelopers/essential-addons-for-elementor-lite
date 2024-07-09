@@ -562,6 +562,11 @@ input:focus {
   color: var(--text-color-25);
 }
 
+.ea__input-search-wrapper {
+  position: relative;
+  display: inline-flex;
+}
+
 #ea__dashboard--wrapper input.input-name {
   font-size: 14px;
   color: var(--text-color-100);
@@ -573,6 +578,18 @@ input:focus {
   padding-right: 16px;
   width: 220px;
   background: transparent;
+}
+
+.ea__input-search-wrapper:after {
+  content: '\e930';
+  font-family: 'ea-dash-icon';
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  transform: translateY(-50%);
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-icon-500);
 }
 
 #ea__dashboard--wrapper input.input-name:focus-visible {
@@ -2861,6 +2878,11 @@ input.input-api:disabled {
     padding-left: 10px;
     padding-right: 10px;
     width: 160px;
+  }
+
+  .ea__input-search-wrapper:after {
+    right: 12px;
+    font-size: 12px;
   }
 
   #ea__dashboard--wrapper .form-select {
