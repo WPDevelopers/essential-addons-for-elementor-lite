@@ -1456,10 +1456,34 @@ span.ea__tooltip {
 }
 
 .ea__contents {
+  flex: 1;
   padding: 16px;
   background: var(--base-background);
   border: 1px solid var(--border-color-base);
   border-radius: 8px;
+}
+
+.ea__not-found-wrapper {
+  max-width: 260px;
+  margin: auto;
+  padding: 100px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.ea__not-found-wrapper img {
+  max-width: 172px;
+}
+
+.ea__not-found-wrapper h5 {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text-color-100);
+  line-height: 1.2em;
+  text-align: center;
 }
 
 .ea__content-wrapper {
