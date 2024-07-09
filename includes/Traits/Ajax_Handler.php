@@ -1053,7 +1053,7 @@ trait Ajax_Handler {
 			$this->empty_dir( EAEL_ASSET_PATH );
 		}
 
-		wp_send_json_success( [$settings] );
+		wp_send_json_success( true );
 	}
 
 	/**
