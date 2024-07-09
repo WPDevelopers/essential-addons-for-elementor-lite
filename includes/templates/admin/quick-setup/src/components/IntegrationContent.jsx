@@ -39,7 +39,7 @@ function IntegrationContent({
 
     const label = event.target
       .closest(".eael-integration-footer")
-      .querySelector(".toggle-label");
+      .querySelector(".eael-toggle-label");
 
     if (label) {
       label.textContent = "Processing...";
@@ -175,7 +175,7 @@ function IntegrationContent({
               <div className="eael-integration-footer">
                 <p>{plugin.desc}</p>
                 <div className="integration-settings flex justify-between items-center">
-                  <h5 className="toggle-label">
+                  <h5 className="eael-toggle-label">
                     {plugin.local_plugin_data === false || !plugin.is_active
                       ? __("Activate", "essential-addons-for-elementor-lite")
                       : __("Deactivate", "essential-addons-for-elementor-lite")}

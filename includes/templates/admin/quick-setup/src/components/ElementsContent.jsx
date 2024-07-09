@@ -85,7 +85,7 @@ function ElementsContent({ activeTab, handleTabChange, showElements, handleShowE
                           key={element.key}
                         >
                           <div className="eael-content-head">
-                            <h5 className="toggle-label">{element.title}</h5>
+                            <h5 className="eael-toggle-label">{element.title}</h5>
                             <label className="toggle-wrap eael-quick-setup-toggler">
                               <input
                                 type="checkbox"

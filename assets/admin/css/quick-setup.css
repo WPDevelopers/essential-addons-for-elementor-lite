@@ -5908,7 +5908,7 @@ img {
     margin-bottom: 16px;
 }
 
-#eael-onboard--wrapper .toggle-label {
+#eael-onboard--wrapper .eael-toggle-label {
     font-size: 14px;
     line-height: 1.2em;
     font-weight: 400;
@@ -6990,7 +6990,7 @@ span.title-color-2 {
         padding-top: 12px;
     }
 
-    #eael-onboard--wrapper .toggle-label {
+    #eael-onboard--wrapper .eael-toggle-label {
         font-size: 12px;
     }
 
@@ -7010,7 +7010,7 @@ span.title-color-2 {
         max-width: 280px;
     }
 
-    #eael-onboard--wrapper .toggle-label {
+    #eael-onboard--wrapper .eael-toggle-label {
         font-size: 12px;
     }
 
