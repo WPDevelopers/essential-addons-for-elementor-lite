@@ -3214,7 +3214,7 @@ input.input-api:disabled {
 
 @media only screen and (max-width: 782px) {
   .ea__section-header {
-    top: 46px;
+    top: 44px;
   }
 }
 
@@ -3335,6 +3335,12 @@ input.input-api:disabled {
     grid-template-columns: repeat(2, 1fr);
   }
 
+}
+
+@media only screen and (max-width: 600px) {
+  .ea__section-header {
+    top: 0;
+  }
 }
 
 @media only screen and (max-width: 580px) {
