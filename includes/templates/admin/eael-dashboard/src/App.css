@@ -626,16 +626,16 @@ input::placeholder {
 
 #ea__dashboard--wrapper .select-option-wrapper:after,
 #ea__dashboard--wrapper .select-option-external:after {
-  content: '';
+  content: '\e90a';
+  font-family: 'ea-dash-icon';
   position: absolute;
   top: 50%;
   right: 14px;
   transform: translateY(-50%);
   text-align: center;
+  font-size: 10px;
+  color: var(--text-icon-500);
   cursor: pointer;
-  border-top: 5px solid var(--text-icon-500);
-  border-right: 5px solid transparent;
-  border-left: 5px solid transparent;
   pointer-events: none;
 }
 
