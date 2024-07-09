@@ -3063,6 +3063,14 @@ input.input-api:disabled {
   .ea__elements-wrapper span {
     font-size: 13px;
   }
+
+  /*.ea__icon-wrapper:last-child span.ea__tooltip {*/
+  /*  left: -30%;*/
+  /*}*/
+
+  /*.ea__icon-wrapper:last-child span.ea__tooltip:after {*/
+  /*  left: 82%;*/
+  /*}*/
 }
 
 @media only screen and (max-width: 1024px) {
