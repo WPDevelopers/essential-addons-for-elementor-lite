@@ -85,13 +85,13 @@ function Elements() {
                         <div className="ea__widget-elements flex items-center">
                             <h4>Elements</h4>
                             <div className="search--widget flex">
-                                <input ref={searchParam} onChange={debounce(onSearch, 500)} className="input-name"
-                                       type="search"
-                                       placeholder="Search by name"/>
+                                <div className='ea__input-search-wrapper'>
+                                    <input ref={searchParam} onChange={debounce(onSearch, 500)} className="input-name"
+                                           type="text" placeholder="Search by name"/>
+                                </div>
                                 <div className="select-option-wrapper">
                                     <select ref={categoryRef} onChange={debounce(onSearch, 100)} name="select"
-                                            id="select-option"
-                                            className="form-select">
+                                            id="select-option" className="form-select">
                                         <option value="">{i18n.all_widgets}</option>
                                         {Object.keys(eaData).map((item, index) => {
                                             return <option value={item} key={index}>{eaData[item].title}</option>
@@ -123,16 +123,12 @@ function Elements() {
                     })}
                     {!!searchParam?.current?.value && <ElementsSearchSection searchTerm={searchParam.current.value}/>}
                 </div>
-
-
-                <div className="ea__elements-button-wrap">
+                {eaState.search404 || (<div className="ea__elements-button-wrap">
                     <button className="primary-btn install-btn"
                             onClick={clickHandler}>{i18n.save_settings} {eaState.btnLoader === 'elements' &&
                         <span className="eael_btn_loader"></span>}</button>
-                    <div className="ea__section-overlay">
-                    </div>
-                </div>
-
+                    <div className="ea__section-overlay"></div>
+                </div>)}
             </div>
         </>
     );

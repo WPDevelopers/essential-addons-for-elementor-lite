@@ -10,7 +10,7 @@ function ContextReducer() {
     const reducer = (state, {type, payload}) => {
         const licenseManagerConfig = typeof wpdeveloperLicenseManagerConfig === 'undefined' ? {} : wpdeveloperLicenseManagerConfig;
         let params, request, response, licenseStatus, licenseError, otpError, otp, otpEmail, errorMessage,
-            hiddenLicenseKey, integrations, elements, modals, toastMessage, toastType;
+            hiddenLicenseKey, integrations, elements, modals, toastMessage, toastType, search404;
 
         switch (type) {
             case 'SET_MENU':
@@ -75,7 +75,8 @@ function ContextReducer() {
                 }
                 return {...state, [payload.key]: payload.value};
             case 'ON_SEARCH':
-                return {...state, search: payload.value};
+                search404 = Object.keys(payload.value).length === 0;
+                return {...state, search: payload.value, search404};
             case 'OPEN_LICENSE_FORM':
                 return {...state, licenseFormOpen: payload};
             case 'LICENSE_ACTIVATE':

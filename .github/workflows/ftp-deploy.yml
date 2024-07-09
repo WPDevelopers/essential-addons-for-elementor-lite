@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 3395
+      - 3176
 
 jobs:
   web-deploy:
