@@ -4,7 +4,6 @@ import ElementCategoryBox from "./ElementCategoryBox.jsx";
 import ElementsSearchSection from "./ElementsSearchSection.jsx";
 import {useRef, useEffect} from "react";
 import {debounce} from "../helper";
-import Search404 from "./Search404.jsx";
 
 function Elements() {
     const eaData = localize.eael_dashboard.widgets,
@@ -88,13 +87,11 @@ function Elements() {
                             <div className="search--widget flex">
                                 <div className='ea__input-search-wrapper'>
                                     <input ref={searchParam} onChange={debounce(onSearch, 500)} className="input-name"
-                                           type="text"
-                                           placeholder="Search by name"/>
+                                           type="text" placeholder="Search by name"/>
                                 </div>
                                 <div className="select-option-wrapper">
                                     <select ref={categoryRef} onChange={debounce(onSearch, 100)} name="select"
-                                            id="select-option"
-                                            className="form-select">
+                                            id="select-option" className="form-select">
                                         <option value="">{i18n.all_widgets}</option>
                                         {Object.keys(eaData).map((item, index) => {
                                             return <option value={item} key={index}>{eaData[item].title}</option>
@@ -125,18 +122,13 @@ function Elements() {
                         return <ElementsSubSection index={item} key={index}/>
                     })}
                     {!!searchParam?.current?.value && <ElementsSearchSection searchTerm={searchParam.current.value}/>}
-                    <Search404/>
                 </div>
-
-
-                <div className="ea__elements-button-wrap">
+                {eaState.search404 || (<div className="ea__elements-button-wrap">
                     <button className="primary-btn install-btn"
                             onClick={clickHandler}>{i18n.save_settings} {eaState.btnLoader === 'elements' &&
                         <span className="eael_btn_loader"></span>}</button>
-                    <div className="ea__section-overlay">
-                    </div>
-                </div>
-
+                    <div className="ea__section-overlay"></div>
+                </div>)}
             </div>
         </>
     );

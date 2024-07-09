@@ -1,5 +1,6 @@
 import ElementItem from "./ElementItem.jsx";
 import consumer from "../context";
+import Search404 from "./Search404.jsx";
 
 function ElementsSearchSection(props) {
     const {eaState, eaDispatch} = consumer(),
@@ -11,7 +12,7 @@ function ElementsSearchSection(props) {
 
     return (
         <>
-            <div id="ID-search-section" className="ea__contents">
+            {eaState.search404 ? <Search404/> : (<div id="ID-search-section" className="ea__contents">
                 <div className="flex items-center gap-2 justify-between mb-4">
                     <h3 className="ea__content-title">{i18n.search_result_for} {props.searchTerm}</h3>
                     <div className="ea__enable-elements">
@@ -29,7 +30,7 @@ function ElementsSearchSection(props) {
                         return <ElementItem source={eaState.search} index={item} key={index}/>
                     })}
                 </div>
-            </div>
+            </div>)}
         </>
     );
 }
