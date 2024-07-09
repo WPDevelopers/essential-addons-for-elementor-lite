@@ -308,6 +308,8 @@ let HoverEffectHandler = function ($scope, $) {
         }
     );  
 
+    $eaelContainer.css(normalStyles);
+
     //Tilt Effect
     if( $eaelTilt === 'eael_tilt' ) {
         $(`.elementor-element-${$scopeId}`).mousemove( function( e ) {
@@ -319,18 +321,8 @@ let HoverEffectHandler = function ($scope, $) {
         $(`.elementor-element-${$scopeId}`).mouseleave(function( e ) {
             $(this).find('.elementor-widget-container').css( 'transform','rotateY(0) rotateX(0)' );
         });
-    } else {
-        $(`.elementor-element-${$scopeId}`).mousemove( function( e ) {
-            $(this).find( '.elementor-widget-container' ).css( 'transform','perspective(500px) rotateY(0deg) rotateX(0deg)' );
-        });
-    
-        $(`.elementor-element-${$scopeId}`).mouseleave(function( e ) {
-            $(this).find('.elementor-widget-container').css( 'transform','rotateY(0) rotateX(0)' );
-        });
     }
 
-    
-    $eaelContainer.css(normalStyles);
 }
 
 jQuery(window).on("elementor/frontend/init", function () {
