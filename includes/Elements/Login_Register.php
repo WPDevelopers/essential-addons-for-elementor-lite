@@ -383,7 +383,7 @@ class Login_Register extends Widget_Base {
 		$this->add_control( 'hide_for_logged_in_user', [
 			'label'   => __( 'Hide all Forms from Logged-in Users', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::SWITCHER,
-			'default' => 'yes',
+			'default' => '',
 		] );
 		$this->add_control( 'redirect_for_logged_in_user', [
 			'label'   => __( 'Redirect for Logged-in Users', 'essential-addons-for-elementor-lite' ),
