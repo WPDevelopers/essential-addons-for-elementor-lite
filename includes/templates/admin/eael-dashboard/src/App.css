@@ -1907,7 +1907,7 @@ section.ea__modal-wrapper {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  max-height: calc(100vh - 170px);
+  max-height: calc(90vh - 170px);
   overflow: auto;
   width: 653px;
 }
@@ -1937,6 +1937,7 @@ section.ea__modal-wrapper {
 .ea__modal-body p.pro--content {
   font-size: 16px;
   text-align: center;
+  margin-bottom: 8px;
 }
 
 .ea__modal-body .ea__feature-list-item p {
@@ -3228,6 +3229,60 @@ input.input-api:disabled {
     width: 100%;
     display: inline-flex;
   }
+
+  .ea__modal-header {
+    padding: 18px 28px;
+  }
+
+  .ea__modal-body {
+    padding: 28px;
+    gap: 18px;
+    max-height: calc(90vh - 130px);
+    width: 460px;
+  }
+
+  .ea__modal-content-wrapper.go-premium-wrapper .ea__modal-body {
+    width: 380px;
+  }
+
+  .ea__modal-body .regenerated-wrapper {
+    width: 460px;
+  }
+
+  .ea__modal-body .ea__api-key-according label {
+    min-width: 132px;
+  }
+
+  .go-premium-wrapper .mb-6 {
+    margin-bottom: 18px;
+  }
+
+  .ea__modal-body .go-premium-wrapper h3 {
+    font-size: 20px;
+  }
+
+  .ea__modal-body p.pro--content {
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+
+  .ea__modal-body .ea__feature-list-item {
+    margin-bottom: 12px;
+  }
+
+  .ea__modal-body .ea__feature-list-item p {
+    font-size: 14px;
+  }
+
+  .ea__modal-footer {
+    padding: 12px 28px;
+  }
+  .ea__modal-close-btn {
+    right: -42px;
+    width: 34px;
+    height: 34px;
+    font-size: 10px;
+  }
 }
 
 @media only screen and (max-width: 800px) {
@@ -3359,6 +3414,18 @@ input.input-api:disabled {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .ea__modal-body {
+    width: 380px;
+  }
+
+  .ea__modal-content-wrapper.go-premium-wrapper .ea__modal-body {
+    width: 320px;
+  }
+
+  .ea__modal-body .regenerated-wrapper {
+    width: 380px;
+  }
+
 }
 
 @media only screen and (max-width: 600px) {
@@ -3395,6 +3462,18 @@ input.input-api:disabled {
 
   .ea__integration-content-wrapper {
     grid-template-columns: repeat(1, 1fr);
+  }
+
+  .ea__modal-body {
+    width: 320px;
+  }
+
+  .ea__modal-content-wrapper.go-premium-wrapper .ea__modal-body {
+    width: 310px;
+  }
+
+  .ea__modal-body .regenerated-wrapper {
+    width: 320px;
   }
 }
 
