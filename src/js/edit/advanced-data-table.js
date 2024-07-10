@@ -392,15 +392,6 @@ class advancedDataTableEdit {
 			// parse table html
 			let origTable = this.parseHTML(eaTable.cloneNode(true));
 			this.tableInnerHTML = origTable.innerHTML;
-			
-			// update table
-			// this.updateFromView(
-			// 	this.view,
-			// 	{
-			// 		ea_adv_data_table_static_html: this.tableInnerHTML,
-			// 	},
-			// 	true
-			// );
 		});
 	}
 

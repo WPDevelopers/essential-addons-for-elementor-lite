@@ -529,31 +529,6 @@ class Dual_Color_Header extends Widget_Base
 			]
 		);
 
-		// $this->add_group_control(
-		// 	Group_Control_Background::get_type(),
-		// 	[
-		// 		'name'     => 'eael_dch_dual_title_color_gradient',
-		// 		'types'    => ['gradient'],
-		// 		'fields_options' => [
-		// 			'background' => [
-		// 				'label' => _x( 'Gradient Color', 'Text Shadow Control', 'elementor' ),
-		// 				'toggle' => false,
-		// 				'default' => 'gradient',
-		// 			],
-		// 			'color' => [
-		// 				'default' => '#062ACA',
-		// 			],
-		// 			'color_b' => [
-		// 				'default' => '#9401D9',
-		// 			]
-		// 		],
-		// 		'selector' => '{{WRAPPER}} .eael-dual-header .title span.lead',
-		// 		'condition' => [
-		// 			'eael_dch_dual_color_selector' => 'gradient-color'
-		// 		],
-		// 	]
-		// );
-
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
