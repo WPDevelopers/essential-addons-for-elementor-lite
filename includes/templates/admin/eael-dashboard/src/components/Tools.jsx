@@ -23,7 +23,7 @@ function Tools() {
                 <div className='ea__tools-sticky'>
                     <div className="ea__tools-content-wrapper">
                         <div className="ea__connect-others flex gap-4 justify-between items-start">
-                            <div className="flex gap-4 flex-1">
+                            <div className="ea__connect--info flex gap-4 flex-1">
                                 <div className="ea__others-icon eaicon-1">
                                     <i className={"ea-dash-icon " + eaData.box_1.icon}></i>
                                 </div>
@@ -36,7 +36,7 @@ function Tools() {
                                     onClick={clickHandler}>{eaData.box_1.button.label}</button>
                         </div>
                         <div className="ea__connect-others flex gap-4 justify-between items-start">
-                            <div className="flex gap-4 flex-1">
+                            <div className="ea__connect--info flex gap-4 flex-1">
                                 <div className="ea__others-icon eaicon-1">
                                     <i className={"ea-dash-icon " + eaData.box_2.icon}></i>
                                 </div>
