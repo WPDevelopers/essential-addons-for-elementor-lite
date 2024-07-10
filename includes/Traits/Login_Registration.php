@@ -208,7 +208,7 @@ trait Login_Registration {
 			}
 
 			do_action( 'wp_login', $user_data->user_login, $user_data );
-			do_action( 'eael/login-register/after-login', $user_data->user_login, $user_data );
+			do_action( 'eael/login-register/after-login', $user_data->user_login, $user_data, $settings );
 
 			$custom_redirect_url = $redirect_to;
 			$previous_page_url   = ! empty( $_POST['redirect_to_prev_page_login'] ) ? sanitize_url( $_POST['redirect_to_prev_page_login'] ) : '';
@@ -634,7 +634,7 @@ trait Login_Registration {
 			}
 		}
 
-		do_action( 'eael/login-register/after-insert-user', $user_id, $user_data );
+		do_action( 'eael/login-register/after-insert-user', $user_id, $user_data, $settings );
 
 		if ( is_wp_error( $user_id ) ) {
 			// error happened during user creation
