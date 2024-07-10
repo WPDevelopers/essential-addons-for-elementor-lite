@@ -313,7 +313,7 @@ trait Admin {
 					    ],
 					    [
 						    'heading' => __( 'Post Carousel', 'essential-addons-for-elementor-lite' ),
-						    'content' => __( 'Dynamic Gallery lets you showcase images in an interactive format. Display posts and WooCommerce products with advanced customization.', 'essential-addons-for-elementor-lite' ),
+						    'content' => __( 'Amaze site visitors by displaying your posts creatively. Add transition effects, overlays, & more to showcase your posts beautifully on your site.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
 							    'url'   => 'https://essential-addons.com/post-carousel/'
