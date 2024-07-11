@@ -15,6 +15,8 @@ function ContextReducer() {
         switch (type) {
             case 'SET_MENU':
                 return {...state, menu: payload};
+            case 'SET_OFFSET_TOP':
+                return {...state, scrollOffset: payload}
             case 'INTEGRATION_LOADER':
                 return {...state, [payload]: true};
             case 'ON_CHANGE_INTEGRATION':
