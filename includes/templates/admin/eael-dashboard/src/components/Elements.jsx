@@ -44,7 +44,7 @@ function Elements() {
             setTimeout(eaDispatch, 500, {type: 'SAVE_ELEMENTS_DATA'});
         },
         scrollHandler = () => {
-            const newScrollY = window.pageYOffset - 32,
+            const newScrollY = window.pageYOffset - 32 - eaState.scrollOffset,
                 subCatChildren = subCatRef.current.children;
             let currentActivateCatIndex = 0;
 
@@ -87,7 +87,7 @@ function Elements() {
                             <div className="search--widget flex">
                                 <div className='ea__input-search-wrapper'>
                                     <input ref={searchParam} onChange={debounce(onSearch, 500)} className="input-name"
-                                           type="text" placeholder="Search by name"/>
+                                           type="search" placeholder="Search by name"/>
                                 </div>
                                 <div className="select-option-wrapper">
                                     <select ref={categoryRef} onChange={debounce(onSearch, 100)} name="select"

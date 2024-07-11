@@ -2,9 +2,9 @@
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk, himadree12
 Tags: elementor, elements, addons, elementor addons, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
 Requires at least: 5.0
-Tested up to: 6.5
+Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 5.9.25
+Stable tag: 5.9.26
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -296,6 +296,14 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 5.9.26 - 11/07/2024 =
+
+- Improved: Security Enhancement
+- Fixed: EA Login / Reset Form | Password form shows error when hit on "Forgot Password"
+- Fixed: Cannot redeclare control with same name "eael_global_warning_text"
+- Few minor bug fixes & improvements
+
 
 = 5.9.25 - 02/07/2024 =
 

@@ -11,20 +11,22 @@ import Modal from "./Modal.jsx";
 import ModalGoPremium from "./ModalGoPremium.jsx";
 import Toasts from "./Toasts.jsx";
 import Optin from "./Optin.jsx";
-import {useEffect} from "react";
+import {useEffect, useRef} from "react";
 import '../App.css'
 
 function App() {
-    const {eaState} = consumer();
+    const {eaState, eaDispatch} = consumer(),
+    wrapperRef = useRef();
 
     useEffect(() => {
         eaState.isDark ? document.body.classList.add('eael_dash_dark_mode') : document.body.classList.remove('eael_dash_dark_mode');
+        eaDispatch({type: 'SET_OFFSET_TOP', payload: wrapperRef.current.offsetTop});
     }, [eaState.isDark]);
 
     return (
         <>
             {eaState.optinPromo && <Optin/>}
-            <section id="ea__dashboard--wrapper" className="ea__dashboard--wrapper">
+            <section id="ea__dashboard--wrapper" className="ea__dashboard--wrapper" ref={wrapperRef}>
                 <Header/>
                 <section
                     className={eaState.menu === 'Elements' ? 'ea__section-wrapper ea__main-wrapper flex' : 'ea__section-wrapper ea__main-wrapper flex gap-4'}>

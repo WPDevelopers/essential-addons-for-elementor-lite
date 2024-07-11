@@ -119,7 +119,7 @@ trait Admin {
 				    'all_widgets'          => __( 'All Widgets', 'essential-addons-for-elementor-lite' ),
 				    'toaster_success_msg'  => __( 'Your changes have been saved successfully.', 'essential-addons-for-elementor-lite' ),
 				    'toaster_error_msg'    => __( 'Oops! Something went wrong. Please try again.', 'essential-addons-for-elementor-lite' ),
-				    'search_not_found'     => __( 'Sorry, no results found for this term!', 'essential-addons-for-elementor-lite' ),
+				    'search_not_found'     => __( 'Sorry, no results found', 'essential-addons-for-elementor-lite' ),
 			    ],
 			    'whats_new'               => [
 				    'heading' => __( "What's New In Essential Addons 6.0?", 'essential-addons-for-elementor-lite' ),
@@ -1585,7 +1585,7 @@ trait Admin {
 			    ],
 			    'admin_screen_promo'      => [
 				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
-				    'content' => sprintf( __( "<p> <i>📣</i> NEW: Essential Addons 6.0 is here, with new '<a target='_blank' href='%s'>Dynamic Tags</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/woo-product-list/' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) )
+				    'content' => sprintf( __( "<p> <i>📣</i> NEW: Essential Addons 6.0 is here, with new '<a target='_blank' href='%s'>Dynamic Tags</a>', '<a target='_blank' href='%s'>Interactive Animations</a>', '<a target='_blank' href='%s'>Hover Interactions</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/woo-product-list/' ), esc_url( 'https://essential-addons.com/elementor/woo-product-list/' ), esc_url( 'https://essential-addons.com/elementor/woo-product-list/' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) )
 			    ],
 			    'pro_modal'               => [
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),
