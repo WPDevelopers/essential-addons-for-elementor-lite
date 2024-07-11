@@ -7,7 +7,7 @@ function ElementCategoryBox(props) {
             e.preventDefault();
 
             window.scrollTo({
-                top: props.subCatRef.current.children['ID-' + props.index]?.offsetTop + 1 + 32 + eaState.scrollOffset,
+                top: props.subCatRef.current.children['ID-' + props.index]?.offsetTop + 35 + eaState.scrollOffset,
                 behavior: 'smooth'
             });
         };
