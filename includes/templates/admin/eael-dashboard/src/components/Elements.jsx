@@ -44,7 +44,7 @@ function Elements() {
             setTimeout(eaDispatch, 500, {type: 'SAVE_ELEMENTS_DATA'});
         },
         scrollHandler = () => {
-            const newScrollY = window.pageYOffset - 32,
+            const newScrollY = window.pageYOffset - 32 - eaState.scrollOffset,
                 subCatChildren = subCatRef.current.children;
             let currentActivateCatIndex = 0;
 
