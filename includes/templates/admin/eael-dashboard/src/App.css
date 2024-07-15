@@ -244,6 +244,10 @@ a:focus {
 .toplevel_page_eael-settings #wpcontent {
   padding-left: 0;
 }
+
+ul#adminmenu>li.current>a.current:after {
+  border-right-color: var(--page-background);
+}
 /* from old dashboard end */
 
 body,
