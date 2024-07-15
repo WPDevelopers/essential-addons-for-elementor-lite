@@ -8,6 +8,7 @@ function MenuItem(props) {
         {eaState, eaDispatch} = consumer(),
         changeHandler = () => {
             eaDispatch({type: 'SET_MENU', payload: props.item});
+            window.dispatchEvent(new Event('resize'));
         };
 
     return (
