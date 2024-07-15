@@ -71,6 +71,7 @@ function Elements() {
 
     useEffect(() => {
         window.addEventListener('scroll', scrollHandler);
+        window.dispatchEvent(new Event('resize'));
 
         return () => {
             window.removeEventListener('scroll', scrollHandler);
