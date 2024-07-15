@@ -533,7 +533,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'eael_product_gallery_show_secondary_image',
 			[
 				'label'        => __( 'Show Secondary Image on Hover', 'essential-addons-for-elementor-lite' ),
@@ -2521,7 +2521,23 @@ class Woo_Product_Gallery extends Widget_Base {
 					$query                    = new \WP_Query( $args );
 					$show_secondary_image     = isset( $settings['eael_product_gallery_show_secondary_image'] ) && 'yes' === $settings['eael_product_gallery_show_secondary_image'];
 
-					echo '<ul class="products eael-post-appender eael-post-appender-' . esc_attr( $this->get_id() ) . '" data-layout-mode="' . esc_attr( $settings["eael_product_gallery_items_layout"] ) . '" data-show-secondary-image="' . intval( $show_secondary_image ) . '" >';
+					$this->add_render_attribute( 'eael-post-appender', 'class', 'products eael-post-appender eael-post-appender-' . $this->get_id() );
+					$this->add_render_attribute( 'eael-post-appender', 'data-layout-mode', $settings["eael_product_gallery_items_layout"] );
+
+					if ( method_exists( Plugin::$instance->breakpoints, 'get_breakpoints_config' ) && ! empty( $breakpoints = Plugin::$instance->breakpoints->get_breakpoints_config() ) ) {
+						foreach ( $breakpoints as $key => $breakpoint ){
+							if ($breakpoint['is_enabled']) {
+								if( isset( $settings['eael_product_gallery_show_secondary_image_' . $key] ) ){
+									$value = "yes" === $settings['eael_product_gallery_show_secondary_image_' . $key] ? 'yes' : 'no';
+									$this->add_render_attribute( 'eael-post-appender', 'data-ssi-'.$key, $value); // ssi = show secondary image
+								}
+							}
+						}
+					}
+
+					$this->add_render_attribute( 'eael-post-appender', 'data-ssi-desktop', $show_secondary_image ? 'yes' : 'no' );
+
+					echo '<ul '; $this->print_render_attribute_string( 'eael-post-appender' ); echo ' >';
 					if ( $query->have_posts() ) {
 						$found_posts         = $query->found_posts;
 						$max_page            = ceil( $found_posts / absint( $args['posts_per_page'] ) );
