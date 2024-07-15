@@ -2886,7 +2886,7 @@ msgstr ""
 msgid "Cell Text"
 msgstr ""
 
-#: ../includes/Elements/Data_Table.php:411, ../includes/Elements/Feature_List.php:208, ../includes/Elements/Filterable_Gallery.php:373, ../includes/Elements/Flip_Box.php:658, ../includes/Elements/Flip_Box.php:683, ../includes/Elements/NFT_Gallery.php:1508, ../includes/Elements/NFT_Gallery.php:1761, ../includes/Elements/Sticky_Video.php:158, ../includes/Elements/Sticky_Video.php:176, ../includes/Elements/Sticky_Video.php:194, ../includes/Elements/Sticky_Video.php:245, ../includes/Elements/SVG_Draw.php:210, ../includes/Elements/Team_Member.php:189, ../includes/Elements/Woo_Product_List.php:374, ../includes/Extensions/Wrapper_Link.php:45
+#: ../includes/Elements/Data_Table.php:411, ../includes/Elements/Feature_List.php:208, ../includes/Elements/Filterable_Gallery.php:373, ../includes/Elements/Flip_Box.php:658, ../includes/Elements/Flip_Box.php:683, ../includes/Elements/NFT_Gallery.php:1508, ../includes/Elements/NFT_Gallery.php:1761, ../includes/Elements/Sticky_Video.php:158, ../includes/Elements/Sticky_Video.php:176, ../includes/Elements/Sticky_Video.php:194, ../includes/Elements/Sticky_Video.php:245, ../includes/Elements/SVG_Draw.php:210, ../includes/Elements/Team_Member.php:189, ../includes/Elements/Woo_Product_List.php:374, ../includes/Extensions/Wrapper_Link.php:46
 msgid "Link"
 msgstr ""
 
@@ -9494,11 +9494,11 @@ msgstr ""
 msgid "Sub Item Space"
 msgstr ""
 
-#: ../includes/Extensions/Wrapper_Link.php:29
+#: ../includes/Extensions/Wrapper_Link.php:30
 msgid "<i class=\"eaicon-logo\"></i> Wrapper Link"
 msgstr ""
 
-#: ../includes/Extensions/Wrapper_Link.php:37
+#: ../includes/Extensions/Wrapper_Link.php:38
 msgid "Enable Wrapper Link"
 msgstr ""
 
