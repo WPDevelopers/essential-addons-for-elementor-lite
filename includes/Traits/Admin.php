@@ -685,6 +685,7 @@ trait Admin {
 							    'title'       => __( 'Testimonial', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/elementor/testimonials/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/testimonials/',
+							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'testimonials' ) )
 						    ],
 						    'flip-box'             => [
@@ -720,7 +721,6 @@ trait Admin {
 							    'title'       => __( 'Advanced Accordion', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/elementor/advanced-accordion/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/advanced-accordion/',
-							    'promotion'   => 'updated',
 							    'is_activate' => boolval( $this->get_settings( 'adv-accordion' ) )
 						    ],
 						    'adv-tabs'             => [
@@ -736,6 +736,7 @@ trait Admin {
 							    'title'       => __( 'Feature List', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/elementor/feature-list/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-feature-list/',
+							    'promotion'   => 'updated',
 							    'is_activate' => boolval( $this->get_settings( 'feature-list' ) )
 						    ],
 						    'offcanvas'            => [
@@ -744,7 +745,7 @@ trait Admin {
 							    'demo_link'   => 'https://essential-addons.com/elementor/offcanvas-content/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/essential-addons-elementor-offcanvas/',
 							    'is_pro'      => true,
-							    'promotion'   => 'popular',
+							    'promotion'   => 'updated',
 							    'is_activate' => boolval( $this->get_settings( 'offcanvas' ) )
 						    ],
 						    'advanced-menu'        => [
@@ -768,6 +769,7 @@ trait Admin {
 							    'title'       => __( 'Testimonial Slider', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/elementor/testimonial-slider/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/testimonial-slider/',
+							    'promotion'   => 'updated',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'testimonial-slider' ) )
 						    ],
@@ -793,7 +795,6 @@ trait Admin {
 							    'title'       => __( 'Sticky Video', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/elementor/sticky-video/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/sticky-video/',
-							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'sticky-video' ) )
 						    ],
 						    'event-calendar'       => [
@@ -817,7 +818,6 @@ trait Admin {
 							    'demo_link'   => 'https://essential-addons.com/elementor/advanced-search/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/advanced-search/',
 							    'is_pro'      => true,
-							    'promotion'   => 'new',
 							    'is_activate' => boolval( $this->get_settings( 'advanced-search' ) )
 						    ],
 					    ]
