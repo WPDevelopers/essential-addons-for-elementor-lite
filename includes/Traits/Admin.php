@@ -1183,6 +1183,7 @@ trait Admin {
 							    'title'       => __( 'Fluent Forms', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/elementor/fluent-forms/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/fluent-form/',
+							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'fluentform' ) )
 						    ],
 						    'formstack'      => [
