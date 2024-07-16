@@ -951,7 +951,6 @@ trait Admin {
 							    'title'       => __( 'Fancy Text', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/elementor/fancy-text/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/fancy-text/',
-							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'fancy-text' ) )
 						    ],
 						    'filter-gallery'      => [
@@ -974,7 +973,6 @@ trait Admin {
 							    'title'       => __( 'Progress Bar', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/elementor/progress-bar/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/progress-bar/',
-							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'progress-bar' ) )
 						    ],
 						    'interactive-promo'   => [
@@ -999,7 +997,7 @@ trait Admin {
 							    'demo_link'   => 'https://essential-addons.com/elementor/lightbox-modal/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/lightbox-modal/',
 							    'is_pro'      => true,
-							    'promotion'   => 'popular',
+							    'promotion'   => 'updated',
 							    'is_activate' => boolval( $this->get_settings( 'lightbox' ) )
 						    ],
 						    'protected-content'   => [
@@ -1017,6 +1015,7 @@ trait Admin {
 							    'demo_link'   => 'https://essential-addons.com/elementor/image-comparison/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/image-comparison/',
 							    'is_pro'      => true,
+							    'promotion'   => 'updated',
 							    'is_activate' => boolval( $this->get_settings( 'img-comparison' ) )
 						    ],
 						    'flip-carousel'       => [
@@ -1025,6 +1024,7 @@ trait Admin {
 							    'demo_link'   => 'https://essential-addons.com/elementor/flip-carousel/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/flip-carousel/',
 							    'is_pro'      => true,
+							    'promotion'   => 'updated',
 							    'is_activate' => boolval( $this->get_settings( 'flip-carousel' ) )
 						    ],
 						    'logo-carousel'       => [
@@ -1050,7 +1050,6 @@ trait Admin {
 							    'demo_link'   => 'https://essential-addons.com/elementor/one-page-nav/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/one-page-navigation/',
 							    'is_pro'      => true,
-							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'one-page-navigation' ) )
 						    ],
 						    'image-hotspots'      => [
@@ -1059,6 +1058,7 @@ trait Admin {
 							    'demo_link'   => 'https://essential-addons.com/elementor/image-hotspots/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/image-hotspots/',
 							    'is_pro'      => true,
+							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'image-hotspots' ) )
 						    ],
 						    'divider'             => [
@@ -1082,7 +1082,7 @@ trait Admin {
 							    'title'       => __( 'Interactive Circle', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/elementor/interactive-circle/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/interactive-circle/',
-							    'promotion'   => 'new',
+							    'promotion'   => 'updated',
 							    'is_activate' => boolval( $this->get_settings( 'interactive-circle' ) )
 						    ],
 						    'svg-draw'            => [
@@ -1090,7 +1090,6 @@ trait Admin {
 							    'title'       => __( 'SVG Draw', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/elementor/svg-draw/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-svg-draw/',
-							    'promotion'   => 'new',
 							    'is_activate' => boolval( $this->get_settings( 'svg-draw' ) )
 						    ],
 						    'fancy-chart'         => [
@@ -1098,7 +1097,6 @@ trait Admin {
 							    'title'       => __( 'Fancy Chart', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/elementor/fancy-chart/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-fancy-chart/',
-							    'promotion'   => 'new',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'fancy-chart' ) )
 						    ]
