@@ -334,7 +334,7 @@ trait Admin {
 						    'content' => __( 'Add custom JavaScript to your WordPress site effortlessly with advanced customization and functionality without modifying core files.', 'essential-addons-for-elementor-lite' ),
 						    'button'  => [
 							    'label' => __( 'View Demo', 'essential-addons-for-elementor-lite' ),
-							    'url'   => '#'
+							    'url'   => 'https://essential-addons.com/custom-js/'
 						    ],
 						    'image'   => 'images/Custom-JS.jpg'
 					    ],
@@ -407,7 +407,7 @@ trait Admin {
 					    ],
 					    [
 						    'label' => __( 'Custom JS', 'essential-addons-for-elementor-lite' ),
-						    'url'   => '#',
+						    'url'   => 'https://essential-addons.com/custom-js/',
 						    'icon'  => 'images/Custom-JS.svg'
 					    ],
 					    [
@@ -592,8 +592,8 @@ trait Admin {
 					    'custom-js'             => [
 						    'key'         => 'custom-js',
 						    'title'       => __( 'Custom JS', 'essential-addons-for-elementor-lite' ),
-						    'demo_link'   => 'https://essential-addons.com/elementor/custom-js/',
-						    'doc_link'    => 'https://essential-addons.com/elementor/docs/custom-js/',
+						    'demo_link'   => 'https://essential-addons.com/custom-js/',
+						    'doc_link'    => 'https://essential-addons.com/docs/custom-js/',
 						    'is_pro'      => false,
 						    'promotion'   => 'popular',
 						    'is_activate' => boolval( $this->get_settings( 'custom-js' ) )
@@ -634,8 +634,8 @@ trait Admin {
 					    'advanced-dynamic-tags' => [
 						    'key'         => 'advanced-dynamic-tags',
 						    'title'       => __( 'Dynamic Tags', 'essential-addons-for-elementor-lite' ),
-						    'demo_link'   => 'https://essential-addons.com/elementor/advanced-dynamic-tags/',
-						    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-advanced-dynamic-tags/',
+						    'demo_link'   => 'https://essential-addons.com/dynamic-tags/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-dynamic-tags/',
 						    'is_pro'      => true,
 						    'promotion'   => 'new',
 						    'is_activate' => boolval( $this->get_settings( 'advanced-dynamic-tags' ) )
@@ -643,8 +643,8 @@ trait Admin {
 					    'smooth-animation'      => [
 						    'key'         => 'smooth-animation',
 						    'title'       => __( 'Interactive Animations', 'essential-addons-for-elementor-lite' ),
-						    'demo_link'   => 'https://essential-addons.com/elementor/parallax-scrolling/',
-						    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-parallax/',
+						    'demo_link'   => 'https://essential-addons.com/interactive-animations/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-interactive-animations/',
 						    'is_pro'      => true,
 						    'promotion'   => 'new',
 						    'is_activate' => boolval( $this->get_settings( 'smooth-animation' ) )
@@ -652,8 +652,8 @@ trait Admin {
 					    'special-hover-effect'  => [
 						    'key'         => 'special-hover-effect',
 						    'title'       => __( 'Hover Interactions', 'essential-addons-for-elementor-lite' ),
-						    'demo_link'   => 'https://essential-addons.com/elementor/special-hover-effect/',
-						    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-special-hover-effect/',
+						    'demo_link'   => 'https://essential-addons.com/hover-interaction/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-hover-interaction/',
 						    'promotion'   => 'new',
 						    'is_activate' => boolval( $this->get_settings( 'special-hover-effect' ) )
 					    ]
@@ -1582,7 +1582,7 @@ trait Admin {
 			    ],
 			    'admin_screen_promo'      => [
 				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
-				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing Essential Addons 6.0 with new & revamped 'Dashboard', '<a target='_blank' href='%s'>Interactive Animations</a>', '<a target='_blank' href='%s'>Hover Interactions</a>', '<a target='_blank' href='%s'>Dynamic Tags</a>' extensions & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/interactive-animations/' ), esc_url( 'https://essential-addons.com/hover-interaction/' ), esc_url( 'https://essential-addons.com/dynamic-tags/' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) )
+				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing Essential Addons 6.0 with new & revamped '<b>Dashboard</b>', '<a target='_blank' href='%s'>Interactive Animations</a>', '<a target='_blank' href='%s'>Hover Interactions</a>', '<a target='_blank' href='%s'>Dynamic Tags</a>' extensions & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/interactive-animations/' ), esc_url( 'https://essential-addons.com/hover-interaction/' ), esc_url( 'https://essential-addons.com/dynamic-tags/' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) )
 			    ],
 			    'pro_modal'               => [
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),
