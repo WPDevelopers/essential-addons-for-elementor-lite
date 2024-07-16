@@ -208,7 +208,7 @@ trait Admin {
 				    ],
 				    'button'  => [
 					    'label' => __( 'Upgrade to PRO', 'essential-addons-for-elementor-lite' ),
-					    'url'   => 'https://essential-addons.com/#pricing',
+					    'url'   => 'https://essential-addons.com/upgrade-ea-pro',
 					    'icon'  => 'ea-crown-1'
 				    ]
 			    ],
@@ -376,7 +376,7 @@ trait Admin {
 				    ],
 				    'button'      => [
 					    'label' => __( 'Upgrade To PRO', 'essential-addons-for-elementor-lite' ),
-					    'url'   => 'https://essential-addons.com/#pricing',
+					    'url'   => 'https://essential-addons.com/upgrade-ea-pro',
 					    'icon'  => 'ea-crown-1'
 				    ]
 			    ],
@@ -1594,7 +1594,7 @@ trait Admin {
 				    ],
 				    'button'  => [
 					    'label' => __( 'Upgrade to PRO', 'essential-addons-for-elementor-lite' ),
-					    'url'   => 'https://essential-addons.com/#pricing'
+					    'url'   => 'https://essential-addons.com/upgrade-ea-pro'
 				    ]
 			    ]
 		    ];
