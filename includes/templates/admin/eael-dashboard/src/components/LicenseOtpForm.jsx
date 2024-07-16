@@ -15,9 +15,8 @@ function LicenseOtpForm() {
     return (
         <>
             <div className={isOtpError ? 'ea__license-verify warning' : 'ea__license-verify'}>
-                <p>Licence Verification Code has been sent to this <span>{eaState.otpEmail}</span> mail. Please check
-                    your email. copy the code and insert it bellow:
-                </p>
+                <p>License Verification code has been sent to this <span>{eaState.otpEmail}</span>. Please check your
+                    email for the code & insert it below</p>
                 <div>
                     <div className="license-key-items flex items-center">
                         <input ref={otpRef} className="input-api verify" type="text"
@@ -37,9 +36,7 @@ function LicenseOtpForm() {
                     }
                 </div>
                 <div className="resend-content">
-                    Haven’t receive email. Code has been sent to this mail. Please <br/>
-                    <span className="resend-text" onClick={clickHandler}>resend button</span> your email. copy the code
-                    and insert it meanutes.
+                    Haven’t received an email? Retry clicking on <span className="resend-text" onClick={clickHandler}>Resend button</span>. Please note that this verification code will expire after 15 minutes.
                     <span className="info-icon-wrap">
                         <i className="ea-dash-icon  ea-info">
                             <span className="tooltip-api">
