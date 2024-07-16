@@ -31,7 +31,7 @@ trait Admin {
 			'manage_options',
 			'eael-settings',
 			[ $this, 'admin_settings_page' ],
-			$this->safe_url( EAEL_PLUGIN_URL . 'assets/admin/images/ea-icon-white.svg' ),
+			$this->safe_url( EAEL_PLUGIN_URL . 'assets/admin/images/ea-icon-new-white.svg' ),
 			'58.6'
 		);
 	}
