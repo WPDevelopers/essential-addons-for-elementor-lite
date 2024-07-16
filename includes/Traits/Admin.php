@@ -1276,6 +1276,7 @@ trait Admin {
 							    'demo_link'   => 'https://essential-addons.com/elementor/learndash-course-list/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/learndash-course-list/',
 							    'is_pro'      => true,
+							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'learn-dash-course-list' ) )
 						    ]
 					    ]
