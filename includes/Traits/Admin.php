@@ -534,6 +534,7 @@ trait Admin {
 						    'demo_link'   => 'https://essential-addons.com/elementor/parallax-scrolling/',
 						    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-parallax/',
 						    'is_pro'      => true,
+						    'promotion'   => 'popular',
 						    'is_activate' => boolval( $this->get_settings( 'section-parallax' ) )
 					    ],
 					    'section-particles'     => [
@@ -602,7 +603,6 @@ trait Admin {
 						    'demo_link'   => 'https://essential-addons.com/elementor/cross-domain-copy-paste/',
 						    'doc_link'    => 'https://essential-addons.com/elementor/docs/cross-domain-copy-paste/',
 						    'is_pro'      => true,
-						    'promotion'   => 'new',
 						    'is_activate' => boolval( $this->get_settings( 'xd-copy' ) )
 					    ],
 					    'scroll-to-top'         => [
@@ -611,7 +611,6 @@ trait Admin {
 						    'demo_link'   => 'https://essential-addons.com/elementor/scroll-to-top/',
 						    'doc_link'    => 'https://essential-addons.com/elementor/docs/scroll-to-top/',
 						    'is_pro'      => false,
-						    'promotion'   => 'new',
 						    'is_activate' => boolval( $this->get_settings( 'scroll-to-top' ) )
 					    ],
 					    'conditional-display'   => [
@@ -620,7 +619,7 @@ trait Admin {
 						    'demo_link'   => 'https://essential-addons.com/elementor/conditional-display/',
 						    'doc_link'    => 'https://essential-addons.com/elementor/docs/conditional-display/',
 						    'is_pro'      => true,
-						    'promotion'   => 'new',
+						    'promotion'   => 'updated',
 						    'is_activate' => boolval( $this->get_settings( 'conditional-display' ) )
 					    ],
 					    'wrapper-link'          => [
@@ -629,7 +628,6 @@ trait Admin {
 						    'demo_link'   => 'https://essential-addons.com/elementor/wrapper-link/',
 						    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-wrapper-link/',
 						    'is_pro'      => false,
-						    'promotion'   => 'new',
 						    'is_activate' => boolval( $this->get_settings( 'wrapper-link' ) )
 					    ],
 					    'advanced-dynamic-tags' => [
