@@ -1658,7 +1658,7 @@ trait Admin {
 
         $review_notice = __( 'We hope you\'re enjoying Essential Addons for Elementor! Could you please do us a BIG favor and give it a 5-star rating on WordPress to help us spread the word and boost our motivation?', 'essential-addons-for-elementor-lite' );
 		$_review_notice = [
-			'thumbnail' => plugins_url( 'assets/admin/images/icon-ea-logo.svg', EAEL_PLUGIN_BASENAME ),
+			'thumbnail' => plugins_url( 'assets/admin/images/icon-ea-new-logo.svg', EAEL_PLUGIN_BASENAME ),
 			'html'      => '<p>' . $review_notice . '</p>',
 			'links'     => [
 				'later'            => array(
@@ -2160,7 +2160,7 @@ trait Admin {
         <div class="wpnotice-wrapper notice notice-info is-dismissible eael-black-friday-notice">
             <div class="wpnotice-content-wrapper">
                 <div class="eael-black-friday-optin-logo">
-                    <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/icon-ea-logo.svg' ); ?>" width="25" alt="">
+                    <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/icon-ea-new-logo.svg' ); ?>" width="25" alt="">
                 </div>
                 <div class="eael-black-friday-optin">
 					<p><?php _e( 'Join us in celebrating <strong>2 MILLION+</strong> happy users and grab up to an exclusive 30% OFF on the most used Elementor addons!', 'essential-addons-for-elementor-lite' ); ?></p>

@@ -27,7 +27,7 @@ class Promotion
     {
         $html = '<div class="ea-nerd-box">
             <div class="ea-nerd-box-icon">
-                <img src="' . EAEL_PLUGIN_URL . 'assets/admin/images/icon-ea-logo.svg' . '">
+                <img src="' . EAEL_PLUGIN_URL . 'assets/admin/images/icon-ea-new-logo.svg' . '">
             </div>
             <div class="ea-nerd-box-title">' . $texts['title'] . '</div>
             <div class="ea-nerd-box-message">' . $texts['messages'] . '</div>
