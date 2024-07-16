@@ -8,7 +8,7 @@ function LicenseSteps() {
                 </div>
                 <div className="ea__license-step-items flex">
                     <span className="step-count">2</span>
-                    <p>If you don't yet have a license key, get <a href="https://essential-addons.com/#pricing"
+                    <p>If you don't yet have a license key, get <a href="https://essential-addons.com/upgrade-ea-pro"
                         className="step-details-ex" target="_blank">Essential Addons Pro now</a>.</p>
                 </div>
                 <div className="ea__license-step-items flex">
