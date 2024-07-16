@@ -391,7 +391,7 @@ trait Admin {
 				    'image'   => 'images/img-3.png',
 				    'button'  => [
 					    'label' => __( 'More Premium Features', 'essential-addons-for-elementor-lite' ),
-					    'url'   => 'https://essential-addons.com/compare/',
+					    'url'   => 'https://essential-addons.com/premium-features/',
 					    'icon'  => 'ea-link'
 				    ],
 				    'icons'   => [
