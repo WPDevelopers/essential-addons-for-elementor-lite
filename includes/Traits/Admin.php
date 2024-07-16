@@ -1326,7 +1326,6 @@ trait Admin {
 							    'title'       => __( 'Woo Product List', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/elementor/woo-product-list/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-woo-product-list/',
-							    'promotion'   => 'new',
 							    'is_activate' => boolval( $this->get_settings( 'woo-product-list' ) )
 						    ],
 						    'woo-collections'       => [
@@ -1343,6 +1342,7 @@ trait Admin {
 							    'demo_link'   => 'https://essential-addons.com/elementor/woo-product-slider/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/woo-product-slider/',
 							    'is_pro'      => true,
+							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'woo-product-slider' ) )
 						    ],
 						    'woo-product-carousel'  => [
@@ -1350,7 +1350,7 @@ trait Admin {
 							    'title'       => __( 'Woo Product Carousel', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/elementor/woo-product-carousel/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/woo-product-carousel/',
-							    'promotion'   => 'new',
+							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'woo-product-carousel' ) )
 						    ],
 						    'woo-checkout'          => [
@@ -1358,7 +1358,7 @@ trait Admin {
 							    'title'       => __( 'Woo Checkout', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/elementor/woo-checkout/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/woo-checkout/',
-							    'promotion'   => 'updated',
+							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'woo-checkout' ) )
 						    ],
 						    'woo-cart'              => [
@@ -1366,7 +1366,6 @@ trait Admin {
 							    'title'       => __( 'Woo Cart', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/elementor/woo-cart/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/woocommerce-cart/',
-							    'promotion'   => 'new',
 							    'is_activate' => boolval( $this->get_settings( 'woo-cart' ) )
 						    ],
 						    'woo-thank-you'         => [
@@ -1374,7 +1373,6 @@ trait Admin {
 							    'title'       => __( 'Woo Thank You', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/elementor/woo-thank-you',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-woo-thank-you',
-							    'promotion'   => 'new',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'woo-thank-you' ) )
 						    ],
@@ -1383,7 +1381,6 @@ trait Admin {
 							    'title'       => __( 'Woo Cross Sells', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/elementor/woo-cross-sells/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-woo-cross-sells/',
-							    'promotion'   => 'new',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'woo-cross-sells' ) )
 						    ],
@@ -1399,6 +1396,7 @@ trait Admin {
 							    'title'       => __( 'Woo Product Gallery', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/elementor/woo-product-gallery/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/woo-product-gallery/',
+							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'woo-product-gallery' ) )
 						    ],
 						    'woo-account-dashboard' => [
@@ -1406,7 +1404,6 @@ trait Admin {
 							    'title'       => __( 'Woo Account Dashboard', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/elementor/woo-account-dashboard/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-woo-account-dashboard/',
-							    'promotion'   => 'new',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'woo-account-dashboard' ) )
 						    ]
