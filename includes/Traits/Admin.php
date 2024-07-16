@@ -1445,7 +1445,7 @@ trait Admin {
 					    'image'      => 'images/mc.png',
 					    'link'       => [
 						    'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
-						    'url'  => '#'
+						    'url'  => 'https://essential-addons.com/docs/mailchimp/#3-toc-title'
 					    ]
 				    ],
 				    'loginRegisterSetting'   => [
