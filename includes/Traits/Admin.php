@@ -879,6 +879,7 @@ trait Admin {
 							    'demo_link'   => 'https://essential-addons.com/elementor/post-block/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/post-block/',
 							    'is_pro'      => true,
+							    'promotion'   => 'updated',
 							    'is_activate' => boolval( $this->get_settings( 'post-block' ) )
 						    ],
 						    'post-carousel'          => [
@@ -887,6 +888,7 @@ trait Admin {
 							    'demo_link'   => 'https://essential-addons.com/elementor/post-carousel/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/post-carousel/',
 							    'is_pro'      => true,
+								'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'post-carousel' ) )
 						    ],
 						    'post-list'              => [
@@ -904,7 +906,6 @@ trait Admin {
 							    'demo_link'   => 'https://essential-addons.com/elementor/content-timeline/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/content-timeline/',
 							    'is_pro'      => true,
-							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'content-timeline' ) )
 						    ],
 						    'dynamic-filter-gallery' => [
@@ -921,7 +922,7 @@ trait Admin {
 							    'title'       => __( 'NFT Gallery', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/elementor/nft-gallery/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-nft-gallery/',
-							    'promotion'   => 'new',
+							    'promotion'   => 'updated',
 							    'is_activate' => boolval( $this->get_settings( 'nft-gallery' ) )
 						    ],
 						    'business-reviews'       => [
@@ -930,7 +931,6 @@ trait Admin {
 							    'demo_link'   => 'https://essential-addons.com/elementor/business-reviews/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-business-reviews/',
 							    'setting'     => [ 'id' => 'businessReviewsSetting' ],
-							    'promotion'   => 'new',
 							    'is_activate' => boolval( $this->get_settings( 'business-reviews' ) )
 						    ],
 					    ]
