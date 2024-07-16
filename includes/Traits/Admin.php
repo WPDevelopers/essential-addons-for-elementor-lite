@@ -1433,7 +1433,7 @@ trait Admin {
 					    'image'      => 'images/map2.png',
 					    'link'       => [
 						    'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
-						    'url'  => '#'
+						    'url'  => 'https://developers.google.com/maps/documentation/places/web-service/get-api-key'
 					    ]
 				    ],
 				    'mailchimpSetting'       => [
@@ -1576,7 +1576,7 @@ trait Admin {
 					    ],
 					    'link'      => [
 						    'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
-						    'url'  => '#'
+						    'url'  => 'https://essential-addons.com/docs/social-login-recaptcha/'
 					    ]
 				    ]
 			    ],
