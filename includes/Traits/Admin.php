@@ -527,7 +527,7 @@ trait Admin {
 				    ]
 			    ],
 			    'extensions'              => [
-				    'heading' => __( 'Advanced Extensions', 'essential-addons-for-elementor-lite' ),
+				    'heading' => __( 'Extensions', 'essential-addons-for-elementor-lite' ),
 				    'list'    => [
 					    'section-parallax'      => [
 						    'key'         => 'section-parallax',
