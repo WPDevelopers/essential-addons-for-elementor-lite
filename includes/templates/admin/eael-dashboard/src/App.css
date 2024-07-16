@@ -885,6 +885,10 @@ span.ea__nav-icon svg {
   background-image: none;
 }
 
+.ea__general-content-item.license-unlock a {
+  text-decoration: underline;
+}
+
 .ea__general-content-item.license-unlock .ea__others-icon {
   margin-bottom: 0;
 }
