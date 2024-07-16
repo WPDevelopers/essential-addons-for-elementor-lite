@@ -1927,6 +1927,7 @@ trait Admin {
                 padding-top: 0;
                 padding-bottom: 0;
                 padding-left: 0;
+                margin-bottom: 15px;
             }
 
             .eael-eb-special-optin-notice h3,
