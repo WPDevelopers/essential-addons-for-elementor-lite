@@ -1290,6 +1290,7 @@ trait Admin {
 							    'title'       => __( 'BetterDocs Category Grid', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/elementor/betterdocs-category-grid/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/betterdocs-category-grid/',
+							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'betterdocs-category-grid' ) )
 						    ],
 						    'betterdocs-category-box'  => [
