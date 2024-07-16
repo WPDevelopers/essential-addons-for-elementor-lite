@@ -120,6 +120,7 @@ trait Admin {
 				    'toaster_success_msg'  => __( 'Your changes have been saved successfully.', 'essential-addons-for-elementor-lite' ),
 				    'toaster_error_msg'    => __( 'Oops! Something went wrong. Please try again.', 'essential-addons-for-elementor-lite' ),
 				    'search_not_found'     => __( 'Sorry, no results found', 'essential-addons-for-elementor-lite' ),
+				    'enabling'             => __( 'Enabling...', 'essential-addons-for-elementor-lite' ),
 			    ],
 			    'whats_new'               => [
 				    'heading' => __( "What's New In Essential Addons 6.0?", 'essential-addons-for-elementor-lite' ),
@@ -151,7 +152,7 @@ trait Admin {
 					    __( 'Unlimited Cloud Storage', 'essential-addons-for-elementor-lite' ),
 				    ],
 				    'button'  => [
-					    'label' => __( 'Install templately', 'essential-addons-for-elementor-lite' )
+					    'label' => __( 'Enable Templates', 'essential-addons-for-elementor-lite' )
 				    ]
 			    ],
 			    'community_box'           => [
@@ -511,7 +512,7 @@ trait Admin {
 					    'icon'    => 'ea-settings',
 					    'button'  => [
 						    'label' => __( 'CSS Print Method', 'essential-addons-for-elementor-lite' ),
-						    'url'   => defined('ELEMENTOR_VERSION') && version_compare( ELEMENTOR_VERSION, '3.21.0', '>=' ) ? admin_url( 'admin.php?page=elementor-tools' ) : admin_url( 'admin.php?page=elementor#tab-advanced' )
+						    'url'   => defined( 'ELEMENTOR_VERSION' ) && version_compare( ELEMENTOR_VERSION, '3.21.0', '>=' ) ? admin_url( 'admin.php?page=elementor-tools' ) : admin_url( 'admin.php?page=elementor#tab-advanced' )
 					    ]
 				    ],
 				    'box_3' => [
@@ -886,7 +887,7 @@ trait Admin {
 							    'demo_link'   => 'https://essential-addons.com/elementor/post-carousel/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/post-carousel/',
 							    'is_pro'      => true,
-								'promotion'   => 'popular',
+							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'post-carousel' ) )
 						    ],
 						    'post-list'              => [

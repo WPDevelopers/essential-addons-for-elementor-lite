@@ -2,6 +2,7 @@ import consumer from "../context";
 
 function TemplatelyPromo() {
     const eaData = localize.eael_dashboard.templately_promo,
+        i18n = localize.eael_dashboard.i18n,
         {eaState, eaDispatch} = consumer(),
         imgSrc = eaState.isDark ? '/images/templates-img.png' : '/images/templates-img.png',
         clickHandler = () => {
@@ -25,7 +26,7 @@ function TemplatelyPromo() {
                         </div>
                         <button className="primary-btn install-btn" onClick={clickHandler}>
                             <i className="ea-dash-icon ea-install"></i>
-                            {eaState.btnLoader === 'tl' ? 'Installing...' : eaData.button.label}
+                            {eaState.btnLoader === 'tl' ? i18n.enabling : eaData.button.label}
                         {eaState.btnLoader === 'tl' && <span className="eael_btn_loader"></span>}
                         </button>
                     </div>
