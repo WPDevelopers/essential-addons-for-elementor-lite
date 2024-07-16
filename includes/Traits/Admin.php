@@ -532,8 +532,8 @@ trait Admin {
 					    'section-parallax'      => [
 						    'key'         => 'section-parallax',
 						    'title'       => __( 'Parallax', 'essential-addons-for-elementor-lite' ),
-						    'demo_link'   => 'https://essential-addons.com/elementor/parallax-scrolling/',
-						    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-parallax/',
+						    'demo_link'   => 'https://essential-addons.com/parallax-scrolling/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-parallax/',
 						    'is_pro'      => true,
 						    'promotion'   => 'popular',
 						    'is_activate' => boolval( $this->get_settings( 'section-parallax' ) )
@@ -541,24 +541,24 @@ trait Admin {
 					    'section-particles'     => [
 						    'key'         => 'section-particles',
 						    'title'       => __( 'Particles', 'essential-addons-for-elementor-lite' ),
-						    'demo_link'   => 'https://essential-addons.com/elementor/particle-effect/',
-						    'doc_link'    => 'https://essential-addons.com/elementor/docs/particles/',
+						    'demo_link'   => 'https://essential-addons.com/particle-effect/',
+						    'doc_link'    => 'https://essential-addons.com/docs/particles/',
 						    'is_pro'      => true,
 						    'is_activate' => boolval( $this->get_settings( 'section-particles' ) )
 					    ],
 					    'tooltip-section'       => [
 						    'key'         => 'tooltip-section',
 						    'title'       => __( 'Advanced Tooltip', 'essential-addons-for-elementor-lite' ),
-						    'demo_link'   => 'https://essential-addons.com/elementor/advanced-tooltip/',
-						    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-advanced-tooltip/',
+						    'demo_link'   => 'https://essential-addons.com/advanced-tooltip/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-advanced-tooltip/',
 						    'is_pro'      => true,
 						    'is_activate' => boolval( $this->get_settings( 'tooltip-section' ) )
 					    ],
 					    'content-protection'    => [
 						    'key'         => 'content-protection',
 						    'title'       => __( 'Content Protection', 'essential-addons-for-elementor-lite' ),
-						    'demo_link'   => 'https://essential-addons.com/elementor/content-protection/',
-						    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-content-protection/',
+						    'demo_link'   => 'https://essential-addons.com/content-protection/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-content-protection/',
 						    'is_pro'      => true,
 						    'promotion'   => 'popular',
 						    'is_activate' => boolval( $this->get_settings( 'content-protection' ) )
@@ -566,16 +566,16 @@ trait Admin {
 					    'reading-progress'      => [
 						    'key'         => 'reading-progress',
 						    'title'       => __( 'Reading Progress Bar', 'essential-addons-for-elementor-lite' ),
-						    'demo_link'   => 'https://essential-addons.com/elementor/reading-progress/',
-						    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-reading-progress-bar/',
+						    'demo_link'   => 'https://essential-addons.com/reading-progress/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-reading-progress-bar/',
 						    'is_pro'      => false,
 						    'is_activate' => boolval( $this->get_settings( 'reading-progress' ) )
 					    ],
 					    'table-of-content'      => [
 						    'key'         => 'table-of-content',
 						    'title'       => __( 'Table of Contents', 'essential-addons-for-elementor-lite' ),
-						    'demo_link'   => 'https://essential-addons.com/elementor/table-of-content/',
-						    'doc_link'    => 'https://essential-addons.com/elementor/docs/table-of-content',
+						    'demo_link'   => 'https://essential-addons.com/table-of-content/',
+						    'doc_link'    => 'https://essential-addons.com/docs/table-of-content',
 						    'is_pro'      => false,
 						    'promotion'   => 'popular',
 						    'is_activate' => boolval( $this->get_settings( 'table-of-content' ) )
@@ -583,8 +583,8 @@ trait Admin {
 					    'post-duplicator'       => [
 						    'key'         => 'post-duplicator',
 						    'title'       => __( 'Duplicator', 'essential-addons-for-elementor-lite' ),
-						    'demo_link'   => 'https://essential-addons.com/elementor/duplicator/',
-						    'doc_link'    => 'https://essential-addons.com/elementor/docs/duplicator/',
+						    'demo_link'   => 'https://essential-addons.com/duplicator/',
+						    'doc_link'    => 'https://essential-addons.com/docs/duplicator/',
 						    'is_pro'      => false,
 						    'setting'     => [ 'id' => 'postDuplicatorSetting' ],
 						    'is_activate' => boolval( $this->get_settings( 'post-duplicator' ) )
@@ -601,24 +601,24 @@ trait Admin {
 					    'xd-copy'               => [
 						    'key'         => 'xd-copy',
 						    'title'       => __( 'Cross-Domain Copy Paste', 'essential-addons-for-elementor-lite' ),
-						    'demo_link'   => 'https://essential-addons.com/elementor/cross-domain-copy-paste/',
-						    'doc_link'    => 'https://essential-addons.com/elementor/docs/cross-domain-copy-paste/',
+						    'demo_link'   => 'https://essential-addons.com/cross-domain-copy-paste/',
+						    'doc_link'    => 'https://essential-addons.com/docs/cross-domain-copy-paste/',
 						    'is_pro'      => true,
 						    'is_activate' => boolval( $this->get_settings( 'xd-copy' ) )
 					    ],
 					    'scroll-to-top'         => [
 						    'key'         => 'scroll-to-top',
 						    'title'       => __( 'Scroll to Top', 'essential-addons-for-elementor-lite' ),
-						    'demo_link'   => 'https://essential-addons.com/elementor/scroll-to-top/',
-						    'doc_link'    => 'https://essential-addons.com/elementor/docs/scroll-to-top/',
+						    'demo_link'   => 'https://essential-addons.com/scroll-to-top/',
+						    'doc_link'    => 'https://essential-addons.com/docs/scroll-to-top/',
 						    'is_pro'      => false,
 						    'is_activate' => boolval( $this->get_settings( 'scroll-to-top' ) )
 					    ],
 					    'conditional-display'   => [
 						    'key'         => 'conditional-display',
 						    'title'       => __( 'Conditional Display', 'essential-addons-for-elementor-lite' ),
-						    'demo_link'   => 'https://essential-addons.com/elementor/conditional-display/',
-						    'doc_link'    => 'https://essential-addons.com/elementor/docs/conditional-display/',
+						    'demo_link'   => 'https://essential-addons.com/conditional-display/',
+						    'doc_link'    => 'https://essential-addons.com/docs/conditional-display/',
 						    'is_pro'      => true,
 						    'promotion'   => 'updated',
 						    'is_activate' => boolval( $this->get_settings( 'conditional-display' ) )
@@ -626,8 +626,8 @@ trait Admin {
 					    'wrapper-link'          => [
 						    'key'         => 'wrapper-link',
 						    'title'       => __( 'Wrapper Link', 'essential-addons-for-elementor-lite' ),
-						    'demo_link'   => 'https://essential-addons.com/elementor/wrapper-link/',
-						    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-wrapper-link/',
+						    'demo_link'   => 'https://essential-addons.com/wrapper-link/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-wrapper-link/',
 						    'is_pro'      => false,
 						    'is_activate' => boolval( $this->get_settings( 'wrapper-link' ) )
 					    ],
@@ -667,82 +667,82 @@ trait Admin {
 						    'creative-btn'         => [
 							    'key'         => 'creative-btn',
 							    'title'       => __( 'Creative Button', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/creative-buttons/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/content-elements/creative-buttons/',
+							    'demo_link'   => 'https://essential-addons.com/creative-buttons/',
+							    'doc_link'    => 'https://essential-addons.com/docs/content-elements/creative-buttons/',
 							    'is_activate' => boolval( $this->get_settings( 'creative-btn' ) )
 						    ],
 						    'team-members'         => [
 							    'key'         => 'team-members',
 							    'title'       => __( 'Team Member', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/team-members/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/team-members/',
+							    'demo_link'   => 'https://essential-addons.com/team-members/',
+							    'doc_link'    => 'https://essential-addons.com/docs/team-members/',
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'team-members' ) )
 						    ],
 						    'testimonials'         => [
 							    'key'         => 'testimonials',
 							    'title'       => __( 'Testimonial', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/testimonials/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/testimonials/',
+							    'demo_link'   => 'https://essential-addons.com/testimonials/',
+							    'doc_link'    => 'https://essential-addons.com/docs/testimonials/',
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'testimonials' ) )
 						    ],
 						    'flip-box'             => [
 							    'key'         => 'flip-box',
 							    'title'       => __( 'Flip Box', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/flip-box/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/flip-box/',
+							    'demo_link'   => 'https://essential-addons.com/flip-box/',
+							    'doc_link'    => 'https://essential-addons.com/docs/flip-box/',
 							    'is_activate' => boolval( $this->get_settings( 'flip-box' ) )
 						    ],
 						    'info-box'             => [
 							    'key'         => 'info-box',
 							    'title'       => __( 'Info Box', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/info-box/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/info-box/',
+							    'demo_link'   => 'https://essential-addons.com/info-box/',
+							    'doc_link'    => 'https://essential-addons.com/docs/info-box/',
 							    'is_activate' => boolval( $this->get_settings( 'info-box' ) )
 						    ],
 						    'dual-header'          => [
 							    'key'         => 'dual-header',
 							    'title'       => __( 'Dual Color Heading', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/dual-color-headline/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/dual-color-headline/',
+							    'demo_link'   => 'https://essential-addons.com/dual-color-headline/',
+							    'doc_link'    => 'https://essential-addons.com/docs/dual-color-headline/',
 							    'is_activate' => boolval( $this->get_settings( 'dual-header' ) )
 						    ],
 						    'tooltip'              => [
 							    'key'         => 'tooltip',
 							    'title'       => __( 'Tooltip', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/tooltip/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/tooltip/',
+							    'demo_link'   => 'https://essential-addons.com/tooltip/',
+							    'doc_link'    => 'https://essential-addons.com/docs/tooltip/',
 							    'is_activate' => boolval( $this->get_settings( 'tooltip' ) )
 						    ],
 						    'adv-accordion'        => [
 							    'key'         => 'adv-accordion',
 							    'title'       => __( 'Advanced Accordion', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/advanced-accordion/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/advanced-accordion/',
+							    'demo_link'   => 'https://essential-addons.com/advanced-accordion/',
+							    'doc_link'    => 'https://essential-addons.com/docs/advanced-accordion/',
 							    'is_activate' => boolval( $this->get_settings( 'adv-accordion' ) )
 						    ],
 						    'adv-tabs'             => [
 							    'key'         => 'adv-tabs',
 							    'title'       => __( 'Advanced Tabs', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/advanced-tabs/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/advanced-tabs/',
+							    'demo_link'   => 'https://essential-addons.com/advanced-tabs/',
+							    'doc_link'    => 'https://essential-addons.com/docs/advanced-tabs/',
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'adv-tabs' ) )
 						    ],
 						    'feature-list'         => [
 							    'key'         => 'feature-list',
 							    'title'       => __( 'Feature List', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/feature-list/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-feature-list/',
+							    'demo_link'   => 'https://essential-addons.com/feature-list/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-feature-list/',
 							    'promotion'   => 'updated',
 							    'is_activate' => boolval( $this->get_settings( 'feature-list' ) )
 						    ],
 						    'offcanvas'            => [
 							    'key'         => 'offcanvas',
 							    'title'       => __( 'Offcanvas', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/offcanvas-content/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/essential-addons-elementor-offcanvas/',
+							    'demo_link'   => 'https://essential-addons.com/offcanvas-content/',
+							    'doc_link'    => 'https://essential-addons.com/docs/essential-addons-elementor-offcanvas/',
 							    'is_pro'      => true,
 							    'promotion'   => 'updated',
 							    'is_activate' => boolval( $this->get_settings( 'offcanvas' ) )
@@ -750,24 +750,24 @@ trait Admin {
 						    'advanced-menu'        => [
 							    'key'         => 'advanced-menu',
 							    'title'       => __( 'Advanced Menu', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/advanced-menu/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-advanced-menu/',
+							    'demo_link'   => 'https://essential-addons.com/advanced-menu/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-advanced-menu/',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'advanced-menu' ) )
 						    ],
 						    'toggle'               => [
 							    'key'         => 'toggle',
 							    'title'       => __( 'Toggle', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/content-toggle/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/content-toggle/',
+							    'demo_link'   => 'https://essential-addons.com/content-toggle/',
+							    'doc_link'    => 'https://essential-addons.com/docs/content-toggle/',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'toggle' ) )
 						    ],
 						    'testimonial-slider'   => [
 							    'key'         => 'testimonial-slider',
 							    'title'       => __( 'Testimonial Slider', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/testimonial-slider/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/testimonial-slider/',
+							    'demo_link'   => 'https://essential-addons.com/testimonial-slider/',
+							    'doc_link'    => 'https://essential-addons.com/docs/testimonial-slider/',
 							    'promotion'   => 'updated',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'testimonial-slider' ) )
@@ -775,16 +775,16 @@ trait Admin {
 						    'static-product'       => [
 							    'key'         => 'static-product',
 							    'title'       => __( 'Static Product', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/static-product/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/static-product/',
+							    'demo_link'   => 'https://essential-addons.com/static-product/',
+							    'doc_link'    => 'https://essential-addons.com/docs/static-product/',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'static-product' ) )
 						    ],
 						    'team-member-carousel' => [
 							    'key'         => 'team-member-carousel',
 							    'title'       => __( 'Team Member Carousel', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/team-members-carousel/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/team-member-carousel/',
+							    'demo_link'   => 'https://essential-addons.com/team-members-carousel/',
+							    'doc_link'    => 'https://essential-addons.com/docs/team-member-carousel/',
 							    'is_pro'      => true,
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'team-member-carousel' ) )
@@ -792,30 +792,30 @@ trait Admin {
 						    'sticky-video'         => [
 							    'key'         => 'sticky-video',
 							    'title'       => __( 'Sticky Video', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/sticky-video/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/sticky-video/',
+							    'demo_link'   => 'https://essential-addons.com/sticky-video/',
+							    'doc_link'    => 'https://essential-addons.com/docs/sticky-video/',
 							    'is_activate' => boolval( $this->get_settings( 'sticky-video' ) )
 						    ],
 						    'event-calendar'       => [
 							    'key'         => 'event-calendar',
 							    'title'       => __( 'Event Calendar', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/event-calendar/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/event-calendar/',
+							    'demo_link'   => 'https://essential-addons.com/event-calendar/',
+							    'doc_link'    => 'https://essential-addons.com/docs/event-calendar/',
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'event-calendar' ) )
 						    ],
 						    'simple-menu'          => [
 							    'key'         => 'simple-menu',
 							    'title'       => __( 'Simple Menu', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/simple-menu/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/simple-menu/',
+							    'demo_link'   => 'https://essential-addons.com/simple-menu/',
+							    'doc_link'    => 'https://essential-addons.com/docs/simple-menu/',
 							    'is_activate' => boolval( $this->get_settings( 'simple-menu' ) )
 						    ],
 						    'advanced-search'      => [
 							    'key'         => 'advanced-search',
 							    'title'       => __( 'Advanced Search', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/advanced-search/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/advanced-search/',
+							    'demo_link'   => 'https://essential-addons.com/advanced-search/',
+							    'doc_link'    => 'https://essential-addons.com/docs/advanced-search/',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'advanced-search' ) )
 						    ],
@@ -828,45 +828,45 @@ trait Admin {
 						    'post-grid'              => [
 							    'key'         => 'post-grid',
 							    'title'       => __( 'Post Grid', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/post-grid/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/post-grid/',
+							    'demo_link'   => 'https://essential-addons.com/post-grid/',
+							    'doc_link'    => 'https://essential-addons.com/docs/post-grid/',
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'post-grid' ) )
 						    ],
 						    'post-timeline'          => [
 							    'key'         => 'post-timeline',
 							    'title'       => __( 'Post Timeline', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/post-timeline/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/post-timeline/',
+							    'demo_link'   => 'https://essential-addons.com/post-timeline/',
+							    'doc_link'    => 'https://essential-addons.com/docs/post-timeline/',
 							    'is_activate' => boolval( $this->get_settings( 'post-timeline' ) )
 						    ],
 						    'data-table'             => [
 							    'key'         => 'data-table',
 							    'title'       => __( 'Data Table', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/table/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/data-table/',
+							    'demo_link'   => 'https://essential-addons.com/table/',
+							    'doc_link'    => 'https://essential-addons.com/docs/data-table/',
 							    'is_activate' => boolval( $this->get_settings( 'data-table' ) )
 						    ],
 						    'advanced-data-table'    => [
 							    'key'         => 'advanced-data-table',
 							    'title'       => __( 'Advanced Data Table', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/advanced-data-table/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/advanced-data-table/',
+							    'demo_link'   => 'https://essential-addons.com/advanced-data-table/',
+							    'doc_link'    => 'https://essential-addons.com/docs/advanced-data-table/',
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'advanced-data-table' ) )
 						    ],
 						    'content-ticker'         => [
 							    'key'         => 'content-ticker',
 							    'title'       => __( 'Content Ticker', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/content-ticker/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/content-ticker/',
+							    'demo_link'   => 'https://essential-addons.com/content-ticker/',
+							    'doc_link'    => 'https://essential-addons.com/docs/content-ticker/',
 							    'is_activate' => boolval( $this->get_settings( 'content-ticker' ) )
 						    ],
 						    'adv-google-map'         => [
 							    'key'         => 'adv-google-map',
 							    'title'       => __( 'Advanced Google Map', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/advanced-google-map/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/advanced-google-map/',
+							    'demo_link'   => 'https://essential-addons.com/advanced-google-map/',
+							    'doc_link'    => 'https://essential-addons.com/docs/advanced-google-map/',
 							    'is_pro'      => true,
 							    'setting'     => $this->pro_enabled ? [ 'id' => 'googleMapSetting' ] : [],
 							    'promotion'   => 'popular',
@@ -875,8 +875,8 @@ trait Admin {
 						    'post-block'             => [
 							    'key'         => 'post-block',
 							    'title'       => __( 'Post Block', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/post-block/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/post-block/',
+							    'demo_link'   => 'https://essential-addons.com/post-block/',
+							    'doc_link'    => 'https://essential-addons.com/docs/post-block/',
 							    'is_pro'      => true,
 							    'promotion'   => 'updated',
 							    'is_activate' => boolval( $this->get_settings( 'post-block' ) )
@@ -884,8 +884,8 @@ trait Admin {
 						    'post-carousel'          => [
 							    'key'         => 'post-carousel',
 							    'title'       => __( 'Post Carousel', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/post-carousel/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/post-carousel/',
+							    'demo_link'   => 'https://essential-addons.com/post-carousel/',
+							    'doc_link'    => 'https://essential-addons.com/docs/post-carousel/',
 							    'is_pro'      => true,
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'post-carousel' ) )
@@ -893,8 +893,8 @@ trait Admin {
 						    'post-list'              => [
 							    'key'         => 'post-list',
 							    'title'       => __( 'Smart Post List', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/post-list/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/smart-post-list/',
+							    'demo_link'   => 'https://essential-addons.com/post-list/',
+							    'doc_link'    => 'https://essential-addons.com/docs/smart-post-list/',
 							    'is_pro'      => true,
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'post-list' ) )
@@ -902,16 +902,16 @@ trait Admin {
 						    'content-timeline'       => [
 							    'key'         => 'content-timeline',
 							    'title'       => __( 'Content Timeline', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/content-timeline/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/content-timeline/',
+							    'demo_link'   => 'https://essential-addons.com/content-timeline/',
+							    'doc_link'    => 'https://essential-addons.com/docs/content-timeline/',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'content-timeline' ) )
 						    ],
 						    'dynamic-filter-gallery' => [
 							    'key'         => 'dynamic-filter-gallery',
 							    'title'       => __( 'Dynamic Gallery', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/dynamic-gallery/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/dynamic-filterable-gallery/',
+							    'demo_link'   => 'https://essential-addons.com/dynamic-gallery/',
+							    'doc_link'    => 'https://essential-addons.com/docs/dynamic-filterable-gallery/',
 							    'promotion'   => 'popular',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'dynamic-filter-gallery' ) )
@@ -919,16 +919,16 @@ trait Admin {
 						    'nft-gallery'            => [
 							    'key'         => 'nft-gallery',
 							    'title'       => __( 'NFT Gallery', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/nft-gallery/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-nft-gallery/',
+							    'demo_link'   => 'https://essential-addons.com/nft-gallery/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-nft-gallery/',
 							    'promotion'   => 'updated',
 							    'is_activate' => boolval( $this->get_settings( 'nft-gallery' ) )
 						    ],
 						    'business-reviews'       => [
 							    'key'         => 'business-reviews',
 							    'title'       => __( 'Business Reviews', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/business-reviews/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-business-reviews/',
+							    'demo_link'   => 'https://essential-addons.com/business-reviews/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-business-reviews/',
 							    'setting'     => [ 'id' => 'businessReviewsSetting' ],
 							    'is_activate' => boolval( $this->get_settings( 'business-reviews' ) )
 						    ],
@@ -941,60 +941,60 @@ trait Admin {
 						    'count-down'          => [
 							    'key'         => 'count-down',
 							    'title'       => __( 'Countdown', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/countdown/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/creative-elements/ea-countdown/',
+							    'demo_link'   => 'https://essential-addons.com/countdown/',
+							    'doc_link'    => 'https://essential-addons.com/docs/creative-elements/ea-countdown/',
 							    'is_activate' => boolval( $this->get_settings( 'count-down' ) )
 						    ],
 						    'fancy-text'          => [
 							    'key'         => 'fancy-text',
 							    'title'       => __( 'Fancy Text', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/fancy-text/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/fancy-text/',
+							    'demo_link'   => 'https://essential-addons.com/fancy-text/',
+							    'doc_link'    => 'https://essential-addons.com/docs/fancy-text/',
 							    'is_activate' => boolval( $this->get_settings( 'fancy-text' ) )
 						    ],
 						    'filter-gallery'      => [
 							    'key'         => 'filter-gallery',
 							    'title'       => __( 'Filterable Gallery', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/filterable-gallery/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/filterable-gallery/',
+							    'demo_link'   => 'https://essential-addons.com/filterable-gallery/',
+							    'doc_link'    => 'https://essential-addons.com/docs/filterable-gallery/',
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'filter-gallery' ) )
 						    ],
 						    'image-accordion'     => [
 							    'key'         => 'image-accordion',
 							    'title'       => __( 'Image Accordion', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/image-accordion/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/image-accordion/',
+							    'demo_link'   => 'https://essential-addons.com/image-accordion/',
+							    'doc_link'    => 'https://essential-addons.com/docs/image-accordion/',
 							    'is_activate' => boolval( $this->get_settings( 'image-accordion' ) )
 						    ],
 						    'progress-bar'        => [
 							    'key'         => 'progress-bar',
 							    'title'       => __( 'Progress Bar', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/progress-bar/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/progress-bar/',
+							    'demo_link'   => 'https://essential-addons.com/progress-bar/',
+							    'doc_link'    => 'https://essential-addons.com/docs/progress-bar/',
 							    'is_activate' => boolval( $this->get_settings( 'progress-bar' ) )
 						    ],
 						    'interactive-promo'   => [
 							    'key'         => 'interactive-promo',
 							    'title'       => __( 'Interactive Promo', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/interactive-promo/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/interactive-promo/',
+							    'demo_link'   => 'https://essential-addons.com/interactive-promo/',
+							    'doc_link'    => 'https://essential-addons.com/docs/interactive-promo/',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'interactive-promo' ) )
 						    ],
 						    'counter'             => [
 							    'key'         => 'counter',
 							    'title'       => __( 'Counter', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/counter/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/counter/',
+							    'demo_link'   => 'https://essential-addons.com/counter/',
+							    'doc_link'    => 'https://essential-addons.com/docs/counter/',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'counter' ) )
 						    ],
 						    'lightbox'            => [
 							    'key'         => 'lightbox',
 							    'title'       => __( 'Lightbox & Modal', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/lightbox-modal/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/lightbox-modal/',
+							    'demo_link'   => 'https://essential-addons.com/lightbox-modal/',
+							    'doc_link'    => 'https://essential-addons.com/docs/lightbox-modal/',
 							    'is_pro'      => true,
 							    'promotion'   => 'updated',
 							    'is_activate' => boolval( $this->get_settings( 'lightbox' ) )
@@ -1002,8 +1002,8 @@ trait Admin {
 						    'protected-content'   => [
 							    'key'         => 'protected-content',
 							    'title'       => __( 'Protected Content', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/protected-content/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-protected-content/',
+							    'demo_link'   => 'https://essential-addons.com/protected-content/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-protected-content/',
 							    'is_pro'      => true,
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'protected-content' ) )
@@ -1011,8 +1011,8 @@ trait Admin {
 						    'img-comparison'      => [
 							    'key'         => 'img-comparison',
 							    'title'       => __( 'Image Comparison', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/image-comparison/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/image-comparison/',
+							    'demo_link'   => 'https://essential-addons.com/image-comparison/',
+							    'doc_link'    => 'https://essential-addons.com/docs/image-comparison/',
 							    'is_pro'      => true,
 							    'promotion'   => 'updated',
 							    'is_activate' => boolval( $this->get_settings( 'img-comparison' ) )
@@ -1020,8 +1020,8 @@ trait Admin {
 						    'flip-carousel'       => [
 							    'key'         => 'flip-carousel',
 							    'title'       => __( 'Flip Carousel', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/flip-carousel/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/flip-carousel/',
+							    'demo_link'   => 'https://essential-addons.com/flip-carousel/',
+							    'doc_link'    => 'https://essential-addons.com/docs/flip-carousel/',
 							    'is_pro'      => true,
 							    'promotion'   => 'updated',
 							    'is_activate' => boolval( $this->get_settings( 'flip-carousel' ) )
@@ -1029,8 +1029,8 @@ trait Admin {
 						    'logo-carousel'       => [
 							    'key'         => 'logo-carousel',
 							    'title'       => __( 'Logo Carousel', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/logo-carousel/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/logo-carousel/',
+							    'demo_link'   => 'https://essential-addons.com/logo-carousel/',
+							    'doc_link'    => 'https://essential-addons.com/docs/logo-carousel/',
 							    'is_pro'      => true,
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'logo-carousel' ) )
@@ -1038,24 +1038,24 @@ trait Admin {
 						    'interactive-cards'   => [
 							    'key'         => 'interactive-cards',
 							    'title'       => __( 'Interactive Cards', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/interactive-cards/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/interactive-cards/',
+							    'demo_link'   => 'https://essential-addons.com/interactive-cards/',
+							    'doc_link'    => 'https://essential-addons.com/docs/interactive-cards/',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'interactive-cards' ) )
 						    ],
 						    'one-page-navigation' => [
 							    'key'         => 'one-page-navigation',
 							    'title'       => __( 'One Page Navigation', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/one-page-nav/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/one-page-navigation/',
+							    'demo_link'   => 'https://essential-addons.com/one-page-nav/',
+							    'doc_link'    => 'https://essential-addons.com/docs/one-page-navigation/',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'one-page-navigation' ) )
 						    ],
 						    'image-hotspots'      => [
 							    'key'         => 'image-hotspots',
 							    'title'       => __( 'Image Hotspots', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/image-hotspots/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/image-hotspots/',
+							    'demo_link'   => 'https://essential-addons.com/image-hotspots/',
+							    'doc_link'    => 'https://essential-addons.com/docs/image-hotspots/',
 							    'is_pro'      => true,
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'image-hotspots' ) )
@@ -1063,39 +1063,39 @@ trait Admin {
 						    'divider'             => [
 							    'key'         => 'divider',
 							    'title'       => __( 'Divider', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/divider/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/divider/',
+							    'demo_link'   => 'https://essential-addons.com/divider/',
+							    'doc_link'    => 'https://essential-addons.com/docs/divider/',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'divider' ) )
 						    ],
 						    'image-scroller'      => [
 							    'key'         => 'image-scroller',
 							    'title'       => __( 'Image Scroller', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/image-scroller/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-image-scroller/',
+							    'demo_link'   => 'https://essential-addons.com/image-scroller/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-image-scroller/',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'image-scroller' ) )
 						    ],
 						    'interactive-circle'  => [
 							    'key'         => 'interactive-circle',
 							    'title'       => __( 'Interactive Circle', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/interactive-circle/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/interactive-circle/',
+							    'demo_link'   => 'https://essential-addons.com/interactive-circle/',
+							    'doc_link'    => 'https://essential-addons.com/docs/interactive-circle/',
 							    'promotion'   => 'updated',
 							    'is_activate' => boolval( $this->get_settings( 'interactive-circle' ) )
 						    ],
 						    'svg-draw'            => [
 							    'key'         => 'svg-draw',
 							    'title'       => __( 'SVG Draw', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/svg-draw/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-svg-draw/',
+							    'demo_link'   => 'https://essential-addons.com/svg-draw/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-svg-draw/',
 							    'is_activate' => boolval( $this->get_settings( 'svg-draw' ) )
 						    ],
 						    'fancy-chart'         => [
 							    'key'         => 'fancy-chart',
 							    'title'       => __( 'Fancy Chart', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/fancy-chart/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-fancy-chart/',
+							    'demo_link'   => 'https://essential-addons.com/fancy-chart/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-fancy-chart/',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'fancy-chart' ) )
 						    ]
@@ -1108,23 +1108,23 @@ trait Admin {
 						    'call-to-action' => [
 							    'key'         => 'call-to-action',
 							    'title'       => __( 'Call To Action', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/call-to-action/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/call-to-action/',
+							    'demo_link'   => 'https://essential-addons.com/call-to-action/',
+							    'doc_link'    => 'https://essential-addons.com/docs/call-to-action/',
 							    'is_activate' => boolval( $this->get_settings( 'call-to-action' ) )
 						    ],
 						    'price-table'    => [
 							    'key'         => 'price-table',
 							    'title'       => __( 'Pricing Table', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/pricing-table/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/pricing-table/',
+							    'demo_link'   => 'https://essential-addons.com/pricing-table/',
+							    'doc_link'    => 'https://essential-addons.com/docs/pricing-table/',
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'price-table' ) )
 						    ],
 						    'price-menu'     => [
 							    'key'         => 'price-menu',
 							    'title'       => __( 'Price Menu', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/price-menu/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/price-menu/',
+							    'demo_link'   => 'https://essential-addons.com/price-menu/',
+							    'doc_link'    => 'https://essential-addons.com/docs/price-menu/',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'price-menu' ) )
 						    ],
@@ -1137,66 +1137,66 @@ trait Admin {
 						    'contact-form-7' => [
 							    'key'         => 'contact-form-7',
 							    'title'       => __( 'Contact Form 7', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/contact-form-7/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/contact-form-7/',
+							    'demo_link'   => 'https://essential-addons.com/contact-form-7/',
+							    'doc_link'    => 'https://essential-addons.com/docs/contact-form-7/',
 							    'is_activate' => boolval( $this->get_settings( 'contact-form-7' ) )
 						    ],
 						    'weforms'        => [
 							    'key'         => 'weforms',
 							    'title'       => __( 'weForms', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/weforms/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/weforms/',
+							    'demo_link'   => 'https://essential-addons.com/weforms/',
+							    'doc_link'    => 'https://essential-addons.com/docs/weforms/',
 							    'is_activate' => boolval( $this->get_settings( 'weforms' ) )
 						    ],
 						    'ninja-form'     => [
 							    'key'         => 'ninja-form',
 							    'title'       => __( 'Ninja Form', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/ninja-forms/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ninja-forms/',
+							    'demo_link'   => 'https://essential-addons.com/ninja-forms/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ninja-forms/',
 							    'is_activate' => boolval( $this->get_settings( 'ninja-form' ) )
 						    ],
 						    'gravity-form'   => [
 							    'key'         => 'gravity-form',
 							    'title'       => __( 'Gravity Form', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/gravity-forms/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/gravity-forms/',
+							    'demo_link'   => 'https://essential-addons.com/gravity-forms/',
+							    'doc_link'    => 'https://essential-addons.com/docs/gravity-forms/',
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'gravity-form' ) )
 						    ],
 						    'caldera-form'   => [
 							    'key'         => 'caldera-form',
 							    'title'       => __( 'Caldera Form', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/caldera-forms/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/caldera-forms/',
+							    'demo_link'   => 'https://essential-addons.com/caldera-forms/',
+							    'doc_link'    => 'https://essential-addons.com/docs/caldera-forms/',
 							    'is_activate' => boolval( $this->get_settings( 'caldera-form' ) )
 						    ],
 						    'wpforms'        => [
 							    'key'         => 'wpforms',
 							    'title'       => __( 'WPForms', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/wpforms/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/wpforms/',
+							    'demo_link'   => 'https://essential-addons.com/wpforms/',
+							    'doc_link'    => 'https://essential-addons.com/docs/wpforms/',
 							    'is_activate' => boolval( $this->get_settings( 'wpforms' ) )
 						    ],
 						    'fluentform'     => [
 							    'key'         => 'fluentform',
 							    'title'       => __( 'Fluent Forms', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/fluent-forms/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/fluent-form/',
+							    'demo_link'   => 'https://essential-addons.com/fluent-forms/',
+							    'doc_link'    => 'https://essential-addons.com/docs/fluent-form/',
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'fluentform' ) )
 						    ],
 						    'formstack'      => [
 							    'key'         => 'formstack',
 							    'title'       => __( 'Formstack', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/formstack/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/formstack/',
+							    'demo_link'   => 'https://essential-addons.com/formstack/',
+							    'doc_link'    => 'https://essential-addons.com/docs/formstack/',
 							    'is_activate' => boolval( $this->get_settings( 'formstack' ) )
 						    ],
 						    'typeform'       => [
 							    'key'         => 'typeform',
 							    'title'       => __( 'Typeform', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/typeform/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/typeform/',
+							    'demo_link'   => 'https://essential-addons.com/typeform/',
+							    'doc_link'    => 'https://essential-addons.com/docs/typeform/',
 							    'setting'     => [
 								    'link' => esc_url( add_query_arg( [
 									    'pr_code'      => wp_hash( 'eael_typeform' ),
@@ -1208,8 +1208,8 @@ trait Admin {
 						    'mailchimp'      => [
 							    'key'         => 'mailchimp',
 							    'title'       => __( 'Mailchimp', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/mailchimp/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/mailchimp/',
+							    'demo_link'   => 'https://essential-addons.com/mailchimp/',
+							    'doc_link'    => 'https://essential-addons.com/docs/mailchimp/',
 							    'is_pro'      => true,
 							    'setting'     => $this->pro_enabled ? [ 'id' => 'mailchimpSetting' ] : [],
 							    'promotion'   => 'popular',
@@ -1218,8 +1218,8 @@ trait Admin {
 						    'login-register' => [
 							    'key'         => 'login-register',
 							    'title'       => __( 'Login | Register Form', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/login-register-form',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/login-register-form/',
+							    'demo_link'   => 'https://essential-addons.com/login-register-form',
+							    'doc_link'    => 'https://essential-addons.com/docs/login-register-form/',
 							    'setting'     => [ 'id' => 'loginRegisterSetting' ],
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'login-register' ) )
@@ -1233,24 +1233,24 @@ trait Admin {
 						    'twitter-feed'          => [
 							    'key'         => 'twitter-feed',
 							    'title'       => __( 'Twitter Feed', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/twitter-feed/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/twitter-feed/',
+							    'demo_link'   => 'https://essential-addons.com/twitter-feed/',
+							    'doc_link'    => 'https://essential-addons.com/docs/twitter-feed/',
 							    'promotion'   => 'updated',
 							    'is_activate' => boolval( $this->get_settings( 'twitter-feed' ) )
 						    ],
 						    'twitter-feed-carousel' => [
 							    'key'         => 'twitter-feed-carousel',
 							    'title'       => __( 'Twitter Feed Carousel', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/twitter-feed/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/twitter-feed-carousel/',
+							    'demo_link'   => 'https://essential-addons.com/twitter-feed/',
+							    'doc_link'    => 'https://essential-addons.com/docs/twitter-feed-carousel/',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'twitter-feed-carousel' ) )
 						    ],
 						    'instagram-gallery'     => [
 							    'key'         => 'instagram-gallery',
 							    'title'       => __( 'Instagram Feed', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/instagram-feed/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/instagram-feed/',
+							    'demo_link'   => 'https://essential-addons.com/instagram-feed/',
+							    'doc_link'    => 'https://essential-addons.com/docs/instagram-feed/',
 							    'is_pro'      => true,
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'instagram-gallery' ) )
@@ -1258,8 +1258,8 @@ trait Admin {
 						    'facebook-feed'         => [
 							    'key'         => 'facebook-feed',
 							    'title'       => __( 'Facebook Feed', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/facebook-feed/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/facebook-feed/',
+							    'demo_link'   => 'https://essential-addons.com/facebook-feed/',
+							    'doc_link'    => 'https://essential-addons.com/docs/facebook-feed/',
 							    'promotion'   => 'updated',
 							    'is_activate' => boolval( $this->get_settings( 'facebook-feed' ) )
 						    ],
@@ -1272,8 +1272,8 @@ trait Admin {
 						    'learn-dash-course-list' => [
 							    'key'         => 'learn-dash-course-list',
 							    'title'       => __( 'LearnDash Course List', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/learndash-course-list/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/learndash-course-list/',
+							    'demo_link'   => 'https://essential-addons.com/learndash-course-list/',
+							    'doc_link'    => 'https://essential-addons.com/docs/learndash-course-list/',
 							    'is_pro'      => true,
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'learn-dash-course-list' ) )
@@ -1287,23 +1287,23 @@ trait Admin {
 						    'betterdocs-category-grid' => [
 							    'key'         => 'betterdocs-category-grid',
 							    'title'       => __( 'BetterDocs Category Grid', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/betterdocs-category-grid/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/betterdocs-category-grid/',
+							    'demo_link'   => 'https://essential-addons.com/betterdocs-category-grid/',
+							    'doc_link'    => 'https://essential-addons.com/docs/betterdocs-category-grid/',
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'betterdocs-category-grid' ) )
 						    ],
 						    'betterdocs-category-box'  => [
 							    'key'         => 'betterdocs-category-box',
 							    'title'       => __( 'BetterDocs Category Box', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/betterdocs-category-box/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/betterdocs-category-box/',
+							    'demo_link'   => 'https://essential-addons.com/betterdocs-category-box/',
+							    'doc_link'    => 'https://essential-addons.com/docs/betterdocs-category-box/',
 							    'is_activate' => boolval( $this->get_settings( 'betterdocs-category-box' ) )
 						    ],
 						    'betterdocs-search-form'   => [
 							    'key'         => 'betterdocs-search-form',
 							    'title'       => __( 'BetterDocs Search Form', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/betterdocs-search-form/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/betterdocs-search-form/',
+							    'demo_link'   => 'https://essential-addons.com/betterdocs-search-form/',
+							    'doc_link'    => 'https://essential-addons.com/docs/betterdocs-search-form/',
 							    'is_activate' => boolval( $this->get_settings( 'betterdocs-search-form' ) )
 						    ],
 					    ]
@@ -1315,31 +1315,31 @@ trait Admin {
 						    'product-grid'          => [
 							    'key'         => 'product-grid',
 							    'title'       => __( 'Woo Product Grid', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/woo-product-grid/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/woocommerce-product-grid/',
+							    'demo_link'   => 'https://essential-addons.com/woo-product-grid/',
+							    'doc_link'    => 'https://essential-addons.com/docs/woocommerce-product-grid/',
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'product-grid' ) )
 						    ],
 						    'woo-product-list'      => [
 							    'key'         => 'woo-product-list',
 							    'title'       => __( 'Woo Product List', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/woo-product-list/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-woo-product-list/',
+							    'demo_link'   => 'https://essential-addons.com/woo-product-list/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-list/',
 							    'is_activate' => boolval( $this->get_settings( 'woo-product-list' ) )
 						    ],
 						    'woo-collections'       => [
 							    'key'         => 'woo-collections',
 							    'title'       => __( 'Woo Product Collections', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/woocommerce-product-collections/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-woo-product-collections/',
+							    'demo_link'   => 'https://essential-addons.com/woocommerce-product-collections/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-collections/',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'woo-collections' ) )
 						    ],
 						    'woo-product-slider'    => [
 							    'key'         => 'woo-product-slider',
 							    'title'       => __( 'Woo Product Slider', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/woo-product-slider/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/woo-product-slider/',
+							    'demo_link'   => 'https://essential-addons.com/woo-product-slider/',
+							    'doc_link'    => 'https://essential-addons.com/docs/woo-product-slider/',
 							    'is_pro'      => true,
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'woo-product-slider' ) )
@@ -1347,62 +1347,62 @@ trait Admin {
 						    'woo-product-carousel'  => [
 							    'key'         => 'woo-product-carousel',
 							    'title'       => __( 'Woo Product Carousel', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/woo-product-carousel/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/woo-product-carousel/',
+							    'demo_link'   => 'https://essential-addons.com/woo-product-carousel/',
+							    'doc_link'    => 'https://essential-addons.com/docs/woo-product-carousel/',
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'woo-product-carousel' ) )
 						    ],
 						    'woo-checkout'          => [
 							    'key'         => 'woo-checkout',
 							    'title'       => __( 'Woo Checkout', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/woo-checkout/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/woo-checkout/',
+							    'demo_link'   => 'https://essential-addons.com/woo-checkout/',
+							    'doc_link'    => 'https://essential-addons.com/docs/woo-checkout/',
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'woo-checkout' ) )
 						    ],
 						    'woo-cart'              => [
 							    'key'         => 'woo-cart',
 							    'title'       => __( 'Woo Cart', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/woo-cart/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/woocommerce-cart/',
+							    'demo_link'   => 'https://essential-addons.com/woo-cart/',
+							    'doc_link'    => 'https://essential-addons.com/docs/woocommerce-cart/',
 							    'is_activate' => boolval( $this->get_settings( 'woo-cart' ) )
 						    ],
 						    'woo-thank-you'         => [
 							    'key'         => 'woo-thank-you',
 							    'title'       => __( 'Woo Thank You', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/woo-thank-you',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-woo-thank-you',
+							    'demo_link'   => 'https://essential-addons.com/woo-thank-you',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-thank-you',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'woo-thank-you' ) )
 						    ],
 						    'woo-cross-sells'       => [
 							    'key'         => 'woo-cross-sells',
 							    'title'       => __( 'Woo Cross Sells', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/woo-cross-sells/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-woo-cross-sells/',
+							    'demo_link'   => 'https://essential-addons.com/woo-cross-sells/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-cross-sells/',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'woo-cross-sells' ) )
 						    ],
 						    'woo-product-compare'   => [
 							    'key'         => 'woo-product-compare',
 							    'title'       => __( 'Woo Product Compare', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/woo-product-compare/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/woo-product-compare/',
+							    'demo_link'   => 'https://essential-addons.com/woo-product-compare/',
+							    'doc_link'    => 'https://essential-addons.com/docs/woo-product-compare/',
 							    'is_activate' => boolval( $this->get_settings( 'woo-product-compare' ) )
 						    ],
 						    'woo-product-gallery'   => [
 							    'key'         => 'woo-product-gallery',
 							    'title'       => __( 'Woo Product Gallery', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/woo-product-gallery/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/woo-product-gallery/',
+							    'demo_link'   => 'https://essential-addons.com/woo-product-gallery/',
+							    'doc_link'    => 'https://essential-addons.com/docs/woo-product-gallery/',
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'woo-product-gallery' ) )
 						    ],
 						    'woo-account-dashboard' => [
 							    'key'         => 'woo-account-dashboard',
 							    'title'       => __( 'Woo Account Dashboard', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/woo-account-dashboard/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-woo-account-dashboard/',
+							    'demo_link'   => 'https://essential-addons.com/woo-account-dashboard/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-account-dashboard/',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'woo-account-dashboard' ) )
 						    ]
@@ -1582,7 +1582,7 @@ trait Admin {
 			    ],
 			    'admin_screen_promo'      => [
 				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
-				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA 6.0 with revamped '<b>Dashboard</b>', '<a target='_blank' href='%s'>Interactive Animations</a>', '<a target='_blank' href='%s'>Hover Interactions</a>', '<a target='_blank' href='%s'>Dynamic Tags</a>' & more! Check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/interactive-animations/' ), esc_url( 'https://essential-addons.com/hover-interaction/' ), esc_url( 'https://essential-addons.com/dynamic-tags/' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) )
+				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA 6.0 with revamped '<b>Dashboard</b>', '<a target='_blank' href='%s'>Interactive Animations</a>', '<a target='_blank' href='%s'>Hover Interactions</a>', '<a target='_blank' href='%s'>Dynamic Tags</a>' & more! Check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/interactive-animations/' ), esc_url( 'https://essential-addons.com/hover-interaction/' ), esc_url( 'https://essential-addons.com/dynamic-tags/' ), esc_url( 'https://essential-addons.com/changelog/' ) )
 			    ],
 			    'pro_modal'               => [
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),
