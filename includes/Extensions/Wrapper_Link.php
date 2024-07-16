@@ -20,7 +20,6 @@ class Wrapper_Link {
 		add_action( 'elementor/element/section/section_advanced/after_section_end', [ $this, 'register_controls' ] );
 		add_action( 'elementor/element/container/section_layout/after_section_end', [ $this, 'register_controls' ] );
 		add_action( 'elementor/frontend/before_render', [ $this, 'before_render' ], 1 );
-		add_action( 'elementor/frontend/after_render', [ $this, 'after_render' ], 1 );
 	}
 
 	public function register_controls( $element ) {
@@ -61,17 +60,12 @@ class Wrapper_Link {
 		$wrapper_link_settings = $element->get_settings_for_display( 'eael_wrapper_link' );
 		
 		if ( "yes" === $element->get_settings_for_display( 'eael_wrapper_link_switch' ) && ! empty( $wrapper_link_settings['url'] ) ) {
+			$link_id = 'eael-wrapper-link-' . $element->get_id();
+			$element->add_render_attribute( 'eael_wrapper_link', 'id', $link_id );
 			$element->add_link_attributes( 'eael_wrapper_link', $wrapper_link_settings );
-			echo "<a "; $element->print_render_attribute_string( 'eael_wrapper_link' ); echo ">";
+			echo "<a "; $element->print_render_attribute_string( 'eael_wrapper_link' ); echo "></a>";
+
+			$element->add_render_attribute( '_wrapper', 'data-eael-wrapper-link', $link_id );
 		}
 	}
-
-	public function after_render( $element ){
-		$wrapper_link_settings = $element->get_settings_for_display( 'eael_wrapper_link' );
-
-		if ( "yes" === $element->get_settings_for_display( 'eael_wrapper_link_switch' ) && ! empty( $wrapper_link_settings['url'] ) ) {
-			echo "</a>";
-		}
-	}
-
 }

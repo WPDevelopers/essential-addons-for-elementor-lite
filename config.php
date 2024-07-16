@@ -1207,6 +1207,15 @@ $config = [
         ],
         'wrapper-link' => [
 	        'class'      => '\Essential_Addons_Elementor\Extensions\Wrapper_Link',
+            'dependency' => [
+		        'js'  => [
+			        [
+				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/wrapper-link.min.js',
+				        'type'    => 'self',
+				        'context' => 'view',
+			        ],
+		        ],
+	        ],
         ],
     ],
 ];
