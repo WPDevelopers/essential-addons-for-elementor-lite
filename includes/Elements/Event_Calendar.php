@@ -13,6 +13,7 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Repeater;
+use Elementor\Utils;
 use \Elementor\Widget_Base;
 use \Essential_Addons_Elementor\Classes\Helper;
 
@@ -3378,22 +3379,15 @@ class Event_Calendar extends Widget_Base
                 $settings_eael_event_global_text_color = $this->fetch_color_or_global_color($event, 'eael_event_text_color');
                 $settings_eael_event_global_popup_ribbon_color = $this->fetch_color_or_global_color($event, 'eael_event_border_color');
 
-                $_custom_attributes = $event['eael_event_link']['custom_attributes'];
-                $_custom_attributes = explode(',', $_custom_attributes );
+	            $_custom_attributes = Utils::parse_custom_attributes( $event['eael_event_link']['custom_attributes'] );
                 $custom_attributes  = [];
 
 	            if ( $_custom_attributes ) {
-		            foreach ( $_custom_attributes as $attribute ) {
-			            if ( $attribute ) {
-				            $attribute_set = explode( '|', $attribute );
-
-				            if ( in_array( trim( strtolower( $attribute_set[0] ) ), $this->xssAttributes() ) ) {
-					            continue;
-				            }
-
+		            foreach ( $_custom_attributes as $key=>$value ) {
+			            if ( $key ) {
 				            $custom_attributes[] = [
-					            'key'   => sanitize_text_field( $attribute_set[0] ),
-					            'value' => isset( $attribute_set[1] ) ? esc_attr( $attribute_set[1] ) : ''
+					            'key'   => sanitize_text_field( $key ),
+					            'value' => esc_attr( $value )
 				            ];
 			            }
 		            }
