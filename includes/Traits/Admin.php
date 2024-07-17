@@ -49,9 +49,9 @@ trait Admin {
         }
 
 	    if ( isset( $hook ) && $hook == 'toplevel_page_eael-settings' ) {
-		    wp_enqueue_style( 'essential_addons_elementor-admin-icon-css', EAEL_PLUGIN_URL . 'includes/templates/admin/icons/style.css', false, EAEL_PLUGIN_VERSION );
-		    wp_enqueue_style( 'essential_addons_elementor-admin-css', EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.css', false, time() );
-		    wp_enqueue_script( 'essential_addons_elementor-admin-dashboard', EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.js', array(), time(), true );
+		    wp_enqueue_style( 'eael-admin-icon-css', EAEL_PLUGIN_URL . 'includes/templates/admin/icons/style.css', false, EAEL_PLUGIN_VERSION );
+		    wp_enqueue_style( 'eael-admin-css', EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.css', false, time() );
+		    wp_enqueue_script( 'eael-admin-dashboard', EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.js', array(), time(), true );
 		    add_filter( 'wp_script_attributes', [ $this, 'add_type_attribute' ] );
 
 		    //Internationalizing JS string translation
@@ -1599,7 +1599,7 @@ trait Admin {
 			    ]
 		    ];
 
-		    wp_localize_script( 'essential_addons_elementor-admin-dashboard', 'localize', array(
+		    wp_localize_script( 'eael-admin-dashboard', 'localize', array(
 			    'ajaxurl'            => admin_url( 'admin-ajax.php' ),
 			    'nonce'              => wp_create_nonce( 'essential-addons-elementor' ),
 			    'i18n'               => $i18n,
@@ -1632,7 +1632,7 @@ trait Admin {
 	}
 
 	public function add_type_attribute( $attributes ) {
-		if ( isset( $attributes['id'] ) && $attributes['id'] === 'essential_addons_elementor-admin-dashboard-js' ) {
+		if ( isset( $attributes['id'] ) && $attributes['id'] === 'eael-admin-dashboard-js' ) {
 			$attributes['type'] = 'module';
 		}
 
