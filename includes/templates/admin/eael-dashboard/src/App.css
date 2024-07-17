@@ -2537,6 +2537,7 @@ input.input-api:disabled {
   display: inline-flex;
   position: relative;
   cursor: pointer;
+  vertical-align: top;
 }
 
 .resend-content .info-icon-wrap i {
