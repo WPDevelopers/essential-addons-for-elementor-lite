@@ -1612,6 +1612,25 @@ trait Admin {
         $this->eael_admin_inline_css();
     }
 
+	public function admin_dequeue_scripts( $hook ) {
+		if ( isset( $hook ) && $hook === 'toplevel_page_eael-settings' ) {
+			wp_dequeue_style( 'betterdocs-global' );
+			wp_dequeue_style( 'betterdocs-select2' );
+			wp_dequeue_style( 'betterdocs-daterangepicker' );
+			wp_dequeue_style( 'betterdocs-old' );
+			wp_dequeue_style( 'betterdocs' );
+			wp_dequeue_style( 'betterdocs-icons' );
+			wp_dequeue_style( 'betterdocs-instant-answer' );
+			wp_dequeue_style( 'betterdocs-pro-settings' );
+
+			wp_dequeue_script( 'betterdocs-categorygrid' );
+			wp_dequeue_script( 'betterdocs-blocks-actions' );
+			wp_dequeue_script( 'betterdocs-kbselect' );
+			wp_dequeue_script( 'betterdocs-instant-answer' );
+			wp_dequeue_script( 'betterdocs-pro-settings' );
+		}
+	}
+
 	public function add_type_attribute( $attributes ) {
 		if ( isset( $attributes['id'] ) && $attributes['id'] === 'essential_addons_elementor-admin-dashboard-js' ) {
 			$attributes['type'] = 'module';
