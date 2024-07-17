@@ -2737,6 +2737,7 @@ input.input-api:disabled {
   #ea__dashboard--wrapper .slider:before {
     height: 12px;
     width: 12px;
+    font-size: 7px;
   }
 
   #ea__dashboard--wrapper .slider.ea-loader::before {
@@ -3468,6 +3469,9 @@ input.input-api:disabled {
 @media only screen and (max-width: 600px) {
   .ea__section-header {
     top: 0;
+  }
+  .ea__content-header.sticky {
+    top: 59px;
   }
 }
 
