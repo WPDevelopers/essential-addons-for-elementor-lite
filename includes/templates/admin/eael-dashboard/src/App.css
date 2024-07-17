@@ -2739,6 +2739,10 @@ input.input-api:disabled {
     width: 12px;
   }
 
+  #ea__dashboard--wrapper .slider.pro:before {
+    font-size: 7px;
+  }
+
   #ea__dashboard--wrapper .slider.ea-loader::before {
     height: 12px;
     width: 12px;
@@ -3468,6 +3472,9 @@ input.input-api:disabled {
 @media only screen and (max-width: 600px) {
   .ea__section-header {
     top: 0;
+  }
+  .ea__content-header.sticky {
+    top: 59px;
   }
 }
 
