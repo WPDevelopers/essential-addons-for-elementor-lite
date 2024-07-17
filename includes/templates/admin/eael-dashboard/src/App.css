@@ -2737,6 +2737,9 @@ input.input-api:disabled {
   #ea__dashboard--wrapper .slider:before {
     height: 12px;
     width: 12px;
+  }
+
+  #ea__dashboard--wrapper .slider.pro:before {
     font-size: 7px;
   }
 
