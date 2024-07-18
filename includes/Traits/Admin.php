@@ -155,6 +155,15 @@ trait Admin {
 					    'label' => __( 'Enable Templates', 'essential-addons-for-elementor-lite' )
 				    ]
 			    ],
+			    'video_promo'             => [
+				    'heading' => __( 'Design Your Website With Most Popular Elementor Addons', 'essential-addons-for-elementor-lite' ),
+				    'content' => __( 'Learn to build stunning websites with 100+ elements & extensions of Essential Addons through our easy tutorials and enhance your Elementor site-building experience.', 'essential-addons-for-elementor-lite' ),
+				    'image'   => 'images/video-promo.png',
+				    'button'  => [
+					    'label' => __( 'Watch Tutorials', 'essential-addons-for-elementor-lite' ),
+					    'url'   => 'https://www.youtube.com/watch?v=ZISSbnHo0rE'
+				    ]
+			    ],
 			    'community_box'           => [
 				    [
 					    'heading'    => __( 'Need Any Help?', 'essential-addons-for-elementor-lite' ),
