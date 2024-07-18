@@ -1623,7 +1623,7 @@ trait Admin {
     }
 
 	public function admin_dequeue_scripts( $hook ) {
-		if ( isset( $hook ) && $hook === 'toplevel_page_eael-settings' ) {
+		if ( isset( $hook ) && in_array( $hook, [ 'toplevel_page_eael-settings', 'admin_page_eael-setup-wizard' ] ) ) {
 			wp_dequeue_style( 'betterdocs-global' );
 			wp_dequeue_style( 'betterdocs-select2' );
 			wp_dequeue_style( 'betterdocs-daterangepicker' );
