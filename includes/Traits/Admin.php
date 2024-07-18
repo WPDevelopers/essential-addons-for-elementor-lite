@@ -193,8 +193,8 @@ trait Admin {
 						    'label' => __( 'Leave a Review', 'essential-addons-for-elementor-lite' ),
 						    'url'   => 'https://essential-addons.com/ea-show-your-love'
 					    ],
-					    'icon'       => 'ea-docs',
-					    'icon_color' => 'eaicon-3'
+					    'icon'       => 'ea-star-lite',
+					    'icon_color' => 'eaicon-4'
 				    ],
 				    [
 					    'heading'    => __( 'Continuous Features & Security Updates', 'essential-addons-for-elementor-lite' ),
