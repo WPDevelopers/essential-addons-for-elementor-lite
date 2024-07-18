@@ -668,7 +668,7 @@ trait Admin {
 							    'key'         => 'creative-btn',
 							    'title'       => __( 'Creative Button', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/creative-buttons/',
-							    'doc_link'    => 'https://essential-addons.com/docs/content-elements/creative-buttons/',
+							    'doc_link'    => 'https://essential-addons.com/docs/creative-buttons/',
 							    'is_activate' => boolval( $this->get_settings( 'creative-btn' ) )
 						    ],
 						    'team-members'         => [
@@ -1241,7 +1241,7 @@ trait Admin {
 						    'twitter-feed-carousel' => [
 							    'key'         => 'twitter-feed-carousel',
 							    'title'       => __( 'Twitter Feed Carousel', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/twitter-feed/',
+							    'demo_link'   => 'https://essential-addons.com/twitter-feed-carousel/',
 							    'doc_link'    => 'https://essential-addons.com/docs/twitter-feed-carousel/',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'twitter-feed-carousel' ) )
