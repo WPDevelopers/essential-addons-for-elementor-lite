@@ -2571,6 +2571,7 @@ input.input-api:disabled {
   line-height: 1.5em;
   transition: all .25s ease-in-out;
   opacity: 0;
+  cursor: auto;
 }
 
 .resend-content i:hover .tooltip-api {

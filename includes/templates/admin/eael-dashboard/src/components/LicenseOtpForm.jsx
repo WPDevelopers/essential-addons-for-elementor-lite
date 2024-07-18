@@ -15,8 +15,8 @@ function LicenseOtpForm() {
     return (
         <>
             <div className={isOtpError ? 'ea__license-verify warning' : 'ea__license-verify'}>
-                <p>License Verification code has been sent to this <span>{eaState.otpEmail}</span>. Please check your
-                    email for the code & insert it below</p>
+                <p>License Verification code has been sent to this email <span>{eaState.otpEmail}</span>. Please check
+                    your email for the code & insert it below</p>
                 <div>
                     <div className="license-key-items flex items-center">
                         <input ref={otpRef} className="input-api verify" type="text"
@@ -36,14 +36,14 @@ function LicenseOtpForm() {
                     }
                 </div>
                 <div className="resend-content">
-                    Haven’t received an email? Retry clicking on <span className="resend-text" onClick={clickHandler}>Resend button</span>. Please note that this verification code will expire after 15 minutes.
+                    Haven’t received email? Retry clicking on <span className="resend-text" onClick={clickHandler}>Resend button</span>.
+                    Please note that this verification code will expire after 15 minutes.
                     <span className="info-icon-wrap">
                         <i className="ea-dash-icon  ea-info">
                             <span className="tooltip-api">
-                                Check out this <span className="color-ex">guide</span> to verify your
-                                license key. If you need any
-                                assistance with retrieving your License Verification Key, please <span
-                                className="color-ex">contact support.</span>
+                                Check out this <a target="_blank" className="color-ex"
+                                                  href="https://essential-addons.com/docs/verify-essential-addons-pro-license-key/">guide</a> to verify your license key. If you need any assistance with retrieving your License Verification Key, please <a
+                                href="https://wpdeveloper.com/support/" target="_blank" className="color-ex">contact support.</a>
                             </span>
                         </i>
                     </span>
