@@ -158,7 +158,7 @@ trait Admin {
 			    'community_box'           => [
 				    [
 					    'heading'    => __( 'Need Any Help?', 'essential-addons-for-elementor-lite' ),
-					    'content'    => __( 'If you encounter any issues or need assistance, we are here to help. You can report specific issues or bugs directly on our <a href="https://github.com/WPDevelopers/essential-addons-for-elementor-lite/issues" target="_blank">GitHub issues page.</a>', 'essential-addons-for-elementor-lite' ),
+					    'content'    => __( "If you encounter issues or need assistance, we're here to help or report specific problems on our <a href='https://github.com/WPDevelopers/essential-addons-for-elementor-lite/issues' target='_blank'>GitHub issues page.</a>", 'essential-addons-for-elementor-lite' ),
 					    'button'     => [
 						    'label' => __( 'Create a Ticket', 'essential-addons-for-elementor-lite' ),
 						    'url'   => 'https://wpdeveloper.com/support/'
@@ -168,7 +168,7 @@ trait Admin {
 				    ],
 				    [
 					    'heading'    => __( 'Join Our Community', 'essential-addons-for-elementor-lite' ),
-					    'content'    => __( 'Join the Facebook community & discuss with fellow developers & users to get attached to the community people & stay updated.', 'essential-addons-for-elementor-lite' ),
+					    'content'    => __( 'Join the Facebook community to discuss with fellow developers, connect with others, and stay updated.', 'essential-addons-for-elementor-lite' ),
 					    'button'     => [
 						    'label' => __( 'Join with us', 'essential-addons-for-elementor-lite' ),
 						    'url'   => 'https://www.facebook.com/groups/essentialaddons/'
@@ -182,6 +182,16 @@ trait Admin {
 					    'button'     => [
 						    'label' => __( 'Read Documentation', 'essential-addons-for-elementor-lite' ),
 						    'url'   => 'https://essential-addons.com/docs/'
+					    ],
+					    'icon'       => 'ea-docs',
+					    'icon_color' => 'eaicon-3'
+				    ],
+				    [
+					    'heading'    => __( 'Show Your Love', 'essential-addons-for-elementor-lite' ),
+					    'content'    => __( 'We love having you in our Essential Addons family every day. Please take 2 minutes to review us and show some love.', 'essential-addons-for-elementor-lite' ),
+					    'button'     => [
+						    'label' => __( 'Leave a Review', 'essential-addons-for-elementor-lite' ),
+						    'url'   => 'https://essential-addons.com/ea-show-your-love'
 					    ],
 					    'icon'       => 'ea-docs',
 					    'icon_color' => 'eaicon-3'

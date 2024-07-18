@@ -29,8 +29,8 @@ function Premium() {
                         </div>
                     </div>
                     <div className="ea__connect-others-wrapper flex gap-4">
-                        <CommunityBox index={3}/>
                         <CommunityBox index={4}/>
+                        <CommunityBox index={5}/>
                     </div>
                 </div>
             </div>

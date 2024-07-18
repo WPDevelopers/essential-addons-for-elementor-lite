@@ -20,6 +20,7 @@ function General() {
                     <div className="ea__connect-others-wrapper flex gap-4">
                         <CommunityBox index={0}/>
                         <CommunityBox index={1}/>
+                        <CommunityBox index={2}/>
                     </div>
                 </div>
                 <div className="ea__sidebar-info">
@@ -27,7 +28,7 @@ function General() {
                         {isProActivated || <SidebarBox/>}
                         <ElementStatistics/>
                         <div>
-                            <CommunityBox index={2}/>
+                            <CommunityBox index={3}/>
                         </div>
                     </div>
                     <div></div>
