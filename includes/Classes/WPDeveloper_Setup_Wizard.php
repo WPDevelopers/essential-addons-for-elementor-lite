@@ -166,7 +166,7 @@ class WPDeveloper_Setup_Wizard {
             ],
             [
                 'title' => 'Custom JS',
-                'link' => 'https://essential-addons.com/demos/',
+                'link' => 'https://essential-addons.com/custom-js/',
                 'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/custom-js.svg',
             ],
             [
@@ -176,7 +176,7 @@ class WPDeveloper_Setup_Wizard {
             ],
             [
                 'title' => 'Interactive Animations',
-                'link' => 'https://essential-addons.com/demos/',
+                'link' => 'https://essential-addons.com/interactive-animations/',
                 'img_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/lightbox-modal.svg',
             ],
             [
