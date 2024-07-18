@@ -1528,6 +1528,10 @@ span.ea__tooltip {
   margin-top: 10px;
 }
 
+.ea__content-footer.ea-no-label {
+  justify-content: end;
+}
+
 .content-btn {
   font-size: 11px;
   line-height: 11px;

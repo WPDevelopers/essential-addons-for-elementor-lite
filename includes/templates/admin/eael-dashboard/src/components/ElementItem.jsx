@@ -26,14 +26,15 @@ function ElementItem(props) {
                         <span className={eaData.is_pro && !isProActivated ? 'slider pro' : 'slider'}></span>
                     </label>
                 </div>
-                <div className="ea__content-footer">
+                <div className={eaData.promotion ? "ea__content-footer" : "ea__content-footer ea-no-label"}>
                     {eaData.promotion ?
                         <span className={"content-btn " + eaData.promotion}>{eaData.promotion}</span> : ''}
                     <div className="content-icons">
                         <a href={eaData.doc_link} target="_blank"><i className="ea-dash-icon ea-docs"></i></a>
                         <a href={eaData.demo_link} target="_blank"><i className="ea-dash-icon ea-link-2"></i></a>
                         {eaData.setting?.link !== undefined &&
-                            <a href={eaData.setting?.link.replace("&#038;", "&")} target="_blank"><i className="ea-dash-icon ea-settings"></i></a>}
+                            <a href={eaData.setting?.link.replace("&#038;", "&")} target="_blank"><i
+                                className="ea-dash-icon ea-settings"></i></a>}
                         {eaData.setting?.id ? <i className="ea-dash-icon ea-settings" onClick={clickHandler}></i> : ''}
                     </div>
                 </div>
