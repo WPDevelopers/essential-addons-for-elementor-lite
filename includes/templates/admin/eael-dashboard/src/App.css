@@ -25,6 +25,7 @@
   --background-14: #F5F1FF;
   --background-15: #FFFCF5;
   --background-16: #FFF1F3;
+  --background-17: #FFF6ED;
   --toggle-color: #EAECF0;
   --label-color: #EAECF0;
   --label-color-fill: #7F56D9;
@@ -44,6 +45,7 @@
   --text-icon-300: #00C567;
   --text-icon-400: #AFB6C0;
   --text-icon-500: #667085;
+  --text-icon-600: #FD853A;
   --text-icon-active: #E1C9FF;
   --border-color-base: #F2F4F7;
   --border-color-2: #F9F3F1;
@@ -97,6 +99,7 @@ body.eael_dash_dark_mode {
   --background-14: #09090A;
   --background-15: #09090A;
   --background-16: #FFF1F3;
+  --background-17: #8E511636;
   --toggle-color: #2D2F34;
   --label-color: #1F2125;
   --label-color-fill: #7F56D9;
@@ -116,6 +119,7 @@ body.eael_dash_dark_mode {
   --text-icon-300: #00C567;
   --text-icon-400: #AFB6C0;
   --text-icon-500: #667085;
+  --text-icon-600: #FD853A;
   --text-icon-active: #E1C9FF;
   --border-color-base: #1F2125;
   --border-color-2: #2A2D33;
@@ -937,7 +941,7 @@ span.ea__nav-icon svg {
   position: sticky;
   left: 0;
   right: 0;
-  top: 32px;
+  top: 31px;
   z-index: 999;
 }
 
@@ -1112,6 +1116,11 @@ span.dark-icon {
 .ea__others-icon.eaicon-3 {
   color: var(--text-icon-300);
   background: var(--background-4);
+}
+
+.ea__others-icon.eaicon-4 {
+  color: var(--text-icon-600);
+  background: var(--background-17);
 }
 
 .ea__connect-others h5 {
