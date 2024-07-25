@@ -17,7 +17,18 @@ if ( $settings['eael_show_image'] == 'yes' ) {
 	];
 	$settings['eael_image_size_customize_size'] = $settings['image_size'];
 	$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings,'eael_image_size_customize' );
+    
+    if ( "" === $thumbnail_html && 'yes' === $settings['eael_show_fallback_img_all'] && !empty( $settings['eael_post_carousel_fallback_img_all']['url'] ) ) {
+        $fallback_image_id = $settings['eael_post_carousel_fallback_img_all']['id'];
+        $settings[ 'eael_image_size_customize' ] = [
+            'id' => $settings['eael_post_carousel_fallback_img_all']['id'],
+        ];
+        $settings['eael_image_size_customize_size'] = $settings['image_size'];
+        $thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings,'eael_image_size_customize' );
+    }
 }
+
+
 global $authordata;
 $author_link = '';
 if ( is_object( $authordata ) ) {
