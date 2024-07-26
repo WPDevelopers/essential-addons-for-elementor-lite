@@ -166,15 +166,15 @@ function ContextReducer() {
                 if (response?.success) {
                     otp = true;
                 } else {
-                    licenseError = true;
+                    otpError = true;
                     errorMessage = response.data.message;
                 }
 
-                return {...state, otp, licenseError, errorMessage};
+                return {...state, otp, otpError, errorMessage};
             case 'GO_PRO_MODAL':
                 return {...state, modalGoPremium: 'open'}
             case 'BUTTON_LOADER':
-                return {...state, btnLoader: payload}
+                return {...state, btnLoader: payload, licenseError: '', otpError: ''}
             case 'OPEN_MODAL':
                 return {...state, modal: 'open', modalID: payload.key, modalTitle: payload.title}
             case 'CLOSE_MODAL':
