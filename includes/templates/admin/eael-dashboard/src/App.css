@@ -3549,6 +3549,6 @@ input.input-api:disabled {
 
 @media only screen and (min-height: 840px) {
   .ea__elements-nav-content.elements-contents {
-    padding-bottom: calc(100vh - 841px);
+    padding-bottom: calc(100vh - 835px);
   }
 }
