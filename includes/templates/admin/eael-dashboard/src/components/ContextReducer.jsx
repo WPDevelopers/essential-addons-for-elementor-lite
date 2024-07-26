@@ -116,6 +116,7 @@ function ContextReducer() {
                     licenseError,
                     otpEmail,
                     errorMessage,
+                    btnLoader: '',
                     licenseKey: payload
                 };
             case 'OTP_VERIFY':
@@ -153,7 +154,7 @@ function ContextReducer() {
                     errorMessage = response.data.message;
                 }
 
-                return {...state, licenseStatus, hiddenLicenseKey, licenseError, errorMessage};
+                return {...state, licenseStatus, hiddenLicenseKey, licenseError, errorMessage, btnLoader: ''};
             case 'RESEND_OTP':
                 params = {
                     action: 'essential-addons-elementor/license/resend-otp',

@@ -5,14 +5,18 @@ function LicenseForm() {
     const licenseRef = useRef(),
         {eaState, eaDispatch} = consumer(),
         submitHandler = () => {
+            eaDispatch({type: 'BUTTON_LOADER', payload: 'license'});
+
             if (eaState.licenseStatus !== 'valid') {
-                eaDispatch({type: 'LICENSE_ACTIVATE', payload: licenseRef.current.value});
+                setTimeout(eaDispatch, 500, {type: 'LICENSE_ACTIVATE', payload: licenseRef.current.value});
             } else {
-                eaDispatch({type: 'LICENSE_DEACTIVATE'});
+                setTimeout(eaDispatch, 500, {type: 'LICENSE_DEACTIVATE'});
             }
         },
         disabled = eaState.otp === true || eaState.licenseStatus === 'valid',
-        isLicenseError = eaState?.licenseError === true;
+        isLicenseError = eaState?.licenseError === true,
+        activateLabel = eaState.btnLoader === 'license' ? 'Activating...' : (eaState.otp === true ? 'Verification Required' : 'Activate License'),
+        deactivateLabel = eaState.btnLoader === 'license' ? 'Deactivating' : 'Deactivate';
 
     return (
         <>
@@ -24,7 +28,8 @@ function LicenseForm() {
                     <button
                         className={eaState.licenseStatus === 'valid' ? 'primary-btn install-btn deactivated' : 'primary-btn install-btn'}
                         onClick={submitHandler}
-                        disabled={eaState.otp === true}>{eaState.licenseStatus === 'valid' ? "Deactivate" : "Activate License"}
+                        disabled={eaState.otp === true}>{eaState.licenseStatus === 'valid' ? deactivateLabel : activateLabel}
+                        {eaState.btnLoader === 'license' && <span className="eael_btn_loader"></span>}
                     </button>
                 </div>
                 {isLicenseError &&
