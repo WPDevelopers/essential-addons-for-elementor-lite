@@ -1615,7 +1615,8 @@ trait Admin {
 					    'label' => __( 'Upgrade to PRO', 'essential-addons-for-elementor-lite' ),
 					    'url'   => 'https://essential-addons.com/upgrade-ea-pro'
 				    ]
-			    ]
+			    ],
+			    'el_disabled_elements'       => get_option( 'elementor_disabled_elements', [] )
 		    ];
 
 		    wp_localize_script( 'eael-admin-dashboard', 'localize', array(
