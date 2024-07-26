@@ -1714,6 +1714,16 @@ span.select-details {
   bottom: -4px;
 }
 
+.ea__slider-connect .swiper-pagination-bullets.swiper-pagination-horizontal .swiper-pagination-bullet {
+  width: 12px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.ea__slider-connect .swiper-pagination-bullets.swiper-pagination-horizontal .swiper-pagination-bullet-active {
+  background: #5E2EFF;
+}
+
 .features-widget-wrapper {
   padding-left: 24px;
   display: grid;
