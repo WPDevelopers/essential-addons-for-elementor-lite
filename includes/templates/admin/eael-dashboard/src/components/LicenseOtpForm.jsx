@@ -5,12 +5,14 @@ function LicenseOtpForm() {
     const otpRef = useRef(),
         {eaState, eaDispatch} = consumer(),
         submitHandler = () => {
-            eaDispatch({type: 'OTP_VERIFY', payload: otpRef.current.value});
+            eaDispatch({type: 'BUTTON_LOADER', payload: 'otp'});
+            setTimeout(eaDispatch, 500, {type: 'OTP_VERIFY', payload: otpRef.current.value});
         },
         clickHandler = () => {
             eaDispatch({type: 'RESEND_OTP'});
         },
-        isOtpError = eaState?.otpError === true;
+        isOtpError = eaState?.otpError === true,
+        otpLabel = eaState.btnLoader === 'otp' ? 'Verifying...' : 'Verify';
 
     return (
         <>
@@ -21,7 +23,7 @@ function LicenseOtpForm() {
                     <div className="license-key-items flex items-center">
                         <input ref={otpRef} className="input-api verify" type="text"
                                placeholder="Enter Your Verification Code"/>
-                        <button className="primary-btn verify-btn" onClick={submitHandler}>Verify</button>
+                        <button className="primary-btn verify-btn" onClick={submitHandler}>{otpLabel} {eaState.btnLoader === 'otp' && <span className="eael_btn_loader"></span>}</button>
                     </div>
                     {isOtpError &&
                         <div className="invalid-text flex items-center">

@@ -138,7 +138,7 @@ function ContextReducer() {
                     errorMessage = response.data.message;
                 }
 
-                return {...state, licenseStatus, hiddenLicenseKey, otpError, errorMessage, otp};
+                return {...state, licenseStatus, hiddenLicenseKey, otpError, errorMessage, otp, btnLoader: ''};
             case 'LICENSE_DEACTIVATE':
                 params = {
                     action: 'essential-addons-elementor/license/deactivate',
