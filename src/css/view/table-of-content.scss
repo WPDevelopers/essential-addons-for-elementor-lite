@@ -253,7 +253,7 @@ html {
 
 			&.eael-toc-collapse {
 				:not(.eael-highlight-parent) {
-					ul {
+					> ul {
 						display: none;
 					}
 				}
