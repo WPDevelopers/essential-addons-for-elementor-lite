@@ -164,13 +164,14 @@ function ContextReducer() {
                 response = eaAjax(params);
 
                 if (response?.success) {
-                    otp = true;
+                    toastType = 'success';
+                    toastMessage = 'A verification code sent to your email';
                 } else {
-                    otpError = true;
-                    errorMessage = response.data.message;
+                    toastType = 'error';
+                    toastMessage = response.data.message;
                 }
 
-                return {...state, otp, otpError, errorMessage};
+                return {...state, otp: true, toasts: true, toastType, toastMessage, btnLoader: ''};
             case 'GO_PRO_MODAL':
                 return {...state, modalGoPremium: 'open'}
             case 'BUTTON_LOADER':

@@ -9,10 +9,12 @@ function LicenseOtpForm() {
             setTimeout(eaDispatch, 500, {type: 'OTP_VERIFY', payload: otpRef.current.value});
         },
         clickHandler = () => {
-            eaDispatch({type: 'RESEND_OTP'});
+            eaDispatch({type: 'BUTTON_LOADER', payload: 'resend'});
+            setTimeout(eaDispatch, 500, {type: 'RESEND_OTP'});
         },
         isOtpError = eaState?.otpError === true,
-        otpLabel = eaState.btnLoader === 'otp' ? 'Verifying...' : 'Verify';
+        otpLabel = eaState.btnLoader === 'otp' ? 'Verifying...' : 'Verify',
+        resendLabel = eaState.btnLoader === 'resend' ? 'Resending...' : 'Resend button';
 
     return (
         <>
@@ -23,7 +25,9 @@ function LicenseOtpForm() {
                     <div className="license-key-items flex items-center">
                         <input ref={otpRef} className="input-api verify" type="text"
                                placeholder="Enter Your Verification Code"/>
-                        <button className="primary-btn verify-btn" onClick={submitHandler}>{otpLabel} {eaState.btnLoader === 'otp' && <span className="eael_btn_loader"></span>}</button>
+                        <button className="primary-btn verify-btn"
+                                onClick={submitHandler}>{otpLabel} {eaState.btnLoader === 'otp' &&
+                            <span className="eael_btn_loader"></span>}</button>
                     </div>
                     {isOtpError &&
                         <div className="invalid-text flex items-center">
@@ -38,7 +42,8 @@ function LicenseOtpForm() {
                     }
                 </div>
                 <div className="resend-content">
-                    Haven’t received email? Retry clicking on <span className="resend-text" onClick={clickHandler}>Resend button</span>.
+                    Haven’t received email? Retry clicking on <span className="resend-text"
+                                                                    onClick={clickHandler}>{resendLabel}</span>.
                     Please note that this verification code will expire after 15 minutes.
                     <span className="info-icon-wrap">
                         <i className="ea-dash-icon  ea-info">
