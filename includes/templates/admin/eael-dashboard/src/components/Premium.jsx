@@ -13,7 +13,7 @@ function Premium() {
 
     return (
         <>
-            <div className="ea__elements-nav-content">
+            <div className="ea__elements-nav-content go-premium-wrapper">
                 <div className="ea__premium-content-wrapper">
                     <EnhanceExperience/>
                     <ExploreProFeatures/>
