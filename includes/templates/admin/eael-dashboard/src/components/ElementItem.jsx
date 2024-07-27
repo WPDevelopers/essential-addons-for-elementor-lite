@@ -5,7 +5,8 @@ function ElementItem(props) {
         isProActivated = localize.eael_dashboard.is_eapro_activate,
         isDisabled = eaData.is_pro && !isProActivated,
         elDisabledElements = localize.eael_dashboard.el_disabled_elements,
-        isDisabledFromElementor = elDisabledElements.includes('eael-' + props.index),
+        elementName = localize.eael_dashboard.replace_widget_name['eael-' + props.index] ?? 'eael-' + props.index,
+        isDisabledFromElementor = elDisabledElements.includes(elementName),
         {eaState, eaDispatch} = consumer(),
         checked = !isDisabled && eaState.elements[props.index] && !isDisabledFromElementor,
         changeHandler = (e) => {

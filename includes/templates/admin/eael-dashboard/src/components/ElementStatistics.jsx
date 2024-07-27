@@ -7,7 +7,9 @@ function ElementStatistics() {
         elDisabledElements = localize.eael_dashboard.el_disabled_elements;
 
     Object.keys(eaState.elements).map((item) => {
-        if (eaState.elements[item] && !elDisabledElements.includes('eael-' + item)) {
+        const elementName = localize.eael_dashboard.replace_widget_name['eael-' + item] ?? 'eael-' + item;
+
+        if (eaState.elements[item] && !elDisabledElements.includes(elementName)) {
             statistics.activated++;
         } else {
             statistics.deactivated++;
