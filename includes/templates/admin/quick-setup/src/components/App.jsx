@@ -72,6 +72,89 @@ function App() {
     setShowElements(1);
   };
 
+  const handleIntegrationSwitch = async (event, plugin, isTemplately = 0) => {
+    const isChecked = event.target.checked ?? 0;
+
+    const isActionInstall =
+      event.target.getAttribute("data-local_plugin_data") === "false";
+
+    const action = isActionInstall
+      ? "install"
+      : isChecked
+      ? "activate"
+      : "deactivate";
+    const identifier = isActionInstall ? plugin?.slug : plugin?.basename;
+
+    let requestData = {
+      action: `wpdeveloper_${action}_plugin`,
+      security: localize.nonce,
+    };
+    requestData[isActionInstall ? "slug" : "basename"] = identifier;
+
+    let label = '';
+    let dataNext = '';
+
+    if ( isTemplately ) {
+        requestData['action'] = 'wpdeveloper_install_plugin';
+        requestData['slug'] = 'templately';
+        requestData['basename'] = 'templately/templately.php';
+        label = event.currentTarget;
+        dataNext = event.currentTarget.getAttribute("data-next");
+    } else {
+      label = event.target
+      .closest(".eael-integration-footer")
+      .querySelector(".toggle-label")
+    }
+    
+    console.log(dataNext);
+
+    if (label) {
+      label.textContent = "Processing...";
+
+      try {
+        const response = await fetch(localize.ajaxurl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams(requestData).toString(),
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          if( isTemplately ) {
+            label.textContent = 'Enabled Templates';
+            console.log(dataNext);
+            setActiveTab(dataNext);
+          } else {
+            label.textContent = isChecked ? "Deactivate" : "Activate";
+          }
+
+          if (isActionInstall) {
+            setPluginList((prevList) =>
+              prevList.map((p) =>
+                p.slug === plugin.slug ? { ...p, local_plugin_data: true } : p
+              )
+            );
+          }
+
+        } else {
+          if( isTemplately ) {
+            setActiveTab(dataNext);
+          } else {
+            label.textContent = isChecked ? "Activate" : "Deactivate";
+          } 
+        }
+      } catch (error) {
+        if( isTemplately ) {
+          setActiveTab(dataNext);
+        } else {
+          label.textContent = isChecked ? "Activate" : "Deactivate";
+        }
+      }
+    }
+  };
+
   return (
     <>
       <section className="eael-onboard-main-wrapper eael-quick-setup-wizard-wrapper">
@@ -146,6 +229,7 @@ function App() {
             <TemplatelyContent
               activeTab={activeTab}
               handleTabChange={handleTabChange}
+              handleIntegrationSwitch={handleIntegrationSwitch}
             />
           </div>
 
@@ -160,6 +244,7 @@ function App() {
               modalTarget={modalTarget}
               handleModalChange={handleModalChange}
               closeModal={closeModal}
+              handleIntegrationSwitch={handleIntegrationSwitch}
             />
           </div>
 
