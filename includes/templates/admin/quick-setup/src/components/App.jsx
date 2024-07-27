@@ -58,10 +58,7 @@ function App() {
   };
 
   const handleModalChange = (event) => {
-    console.log(event.currentTarget);
-    console.log(event.currentTarget.getAttribute("data-target"));
     setModalTarget(event.currentTarget.getAttribute("data-target"));
-    console.log(modalTarget);
   };
 
   const closeModal = () => {
@@ -97,7 +94,6 @@ function App() {
     if ( isTemplately ) {
         requestData['action'] = 'wpdeveloper_install_plugin';
         requestData['slug'] = 'templately';
-        requestData['basename'] = 'templately/templately.php';
         label = event.currentTarget;
         dataNext = event.currentTarget.getAttribute("data-next");
     } else {
@@ -106,8 +102,6 @@ function App() {
       .querySelector(".toggle-label")
     }
     
-    console.log(dataNext);
-
     if (label) {
       label.textContent = "Processing...";
 
@@ -124,7 +118,6 @@ function App() {
         if (result.success) {
           if( isTemplately ) {
             label.textContent = 'Enabled Templates';
-            console.log(dataNext);
             setActiveTab(dataNext);
           } else {
             label.textContent = isChecked ? "Deactivate" : "Activate";

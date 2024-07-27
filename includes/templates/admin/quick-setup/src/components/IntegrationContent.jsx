@@ -28,9 +28,7 @@ function IntegrationContent({
       document.querySelector("form.eael-setup-wizard-form")
     );
 
-    console.log(fields);
     fields = new URLSearchParams(fields).toString();
-    console.log(fields);
 
     try {
       const response = await fetch(localize.ajaxurl, {
