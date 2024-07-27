@@ -1,6 +1,6 @@
 import { __ } from "@wordpress/i18n";
 
-function TemplatelyContent({ activeTab, handleTabChange }) {
+function TemplatelyContent({ activeTab, handleTabChange, handleIntegrationSwitch }) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let templately_content = eaelQuickSetup?.templately_content;
 
@@ -110,7 +110,11 @@ function TemplatelyContent({ activeTab, handleTabChange }) {
           data-next="integrations"
           data-action="install"
           data-slug="templately"
-          onClick={handleTabChange}
+          onClick={async (event) => {
+              await handleIntegrationSwitch(event, '', 1);
+            }
+          }
+
         >
           {__("Enable Templates", "essential-addons-for-elementor-lite")}
         </button>

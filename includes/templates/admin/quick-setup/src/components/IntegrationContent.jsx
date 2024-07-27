@@ -7,6 +7,7 @@ function IntegrationContent({
   modalTarget,
   handleModalChange,
   closeModal,
+  handleIntegrationSwitch,
 }) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let integrations_content = eaelQuickSetup?.integrations_content;
@@ -18,65 +19,6 @@ function IntegrationContent({
 
   const [pluginList, setPluginList] = useState(initialPluginList);
 
-  const handleIntegrationSwitch = async (event, plugin) => {
-    const isChecked = event.target.checked;
-
-    const isActionInstall =
-      event.target.getAttribute("data-local_plugin_data") === "false";
-
-    console.log(isActionInstall);
-
-    const action = isActionInstall
-      ? "install"
-      : isChecked
-      ? "activate"
-      : "deactivate";
-    const identifier = isActionInstall ? plugin.slug : plugin.basename;
-
-    let requestData = {
-      action: `wpdeveloper_${action}_plugin`,
-      security: localize.nonce,
-    };
-    requestData[isActionInstall ? "slug" : "basename"] = identifier;
-
-    const label = event.target
-      .closest(".eael-integration-footer")
-      .querySelector(".toggle-label");
-
-    if (label) {
-      label.textContent = "Processing...";
-
-      try {
-        const response = await fetch(localize.ajaxurl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: new URLSearchParams(requestData).toString(),
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-          label.textContent = isChecked ? "Deactivate" : "Activate";
-
-          if (isActionInstall) {
-            setPluginList((prevList) =>
-              prevList.map((p) =>
-                p.slug === plugin.slug ? { ...p, local_plugin_data: true } : p
-              )
-            );
-          }
-        } else {
-          label.textContent = isChecked ? "Activate" : "Deactivate";
-        }
-      } catch (error) {
-        console.log(error);
-        label.textContent = isChecked ? "Activate" : "Deactivate";
-      }
-    }
-  };
-
   const handleSaveClick = async (event) => {
     event.preventDefault();
     const button = event.target;
@@ -86,9 +28,7 @@ function IntegrationContent({
       document.querySelector("form.eael-setup-wizard-form")
     );
 
-    console.log(fields);
     fields = new URLSearchParams(fields).toString();
-    console.log(fields);
 
     try {
       const response = await fetch(localize.ajaxurl, {
