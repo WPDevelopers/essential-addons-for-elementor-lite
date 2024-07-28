@@ -4,11 +4,8 @@ function ElementItem(props) {
     const eaData = props.source[props.index],
         isProActivated = localize.eael_dashboard.is_eapro_activate,
         isDisabled = eaData.is_pro && !isProActivated,
-        elDisabledElements = localize.eael_dashboard.el_disabled_elements,
-        elementName = localize.eael_dashboard.replace_widget_name['eael-' + props.index] ?? 'eael-' + props.index,
-        isDisabledFromElementor = elDisabledElements.includes(elementName),
         {eaState, eaDispatch} = consumer(),
-        checked = !isDisabled && eaState.elements[props.index] && !isDisabledFromElementor,
+        checked = !isDisabled && eaState.elements[props.index],
         changeHandler = (e) => {
             eaDispatch({type: 'ON_CHANGE_ELEMENT', payload: {key: props.index, value: e.target.checked}});
         },

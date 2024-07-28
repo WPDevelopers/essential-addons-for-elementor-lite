@@ -3,13 +3,10 @@ import consumer from "../context";
 function ElementStatistics() {
     const eaData = localize.eael_dashboard,
         {eaState} = consumer(),
-        statistics = {activated: 0, deactivated: eaData.is_eapro_activate ? 0 : -eaState.proElements.length},
-        elDisabledElements = localize.eael_dashboard.el_disabled_elements;
+        statistics = {activated: 0, deactivated: eaData.is_eapro_activate ? 0 : -eaState.proElements.length};
 
     Object.keys(eaState.elements).map((item) => {
-        const elementName = localize.eael_dashboard.replace_widget_name['eael-' + item] ?? 'eael-' + item;
-
-        if (eaState.elements[item] && !elDisabledElements.includes(elementName)) {
+        if (eaState.elements[item]) {
             statistics.activated++;
         } else {
             statistics.deactivated++;
