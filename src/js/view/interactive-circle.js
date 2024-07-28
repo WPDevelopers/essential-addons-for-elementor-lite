@@ -15,7 +15,7 @@ ea.hooks.addAction( "init", "ea", () => {
 		}
 	
 		if ( $animation !== 'eael-interactive-circle-animation-0' ) {
-			let $circleContent = $scope.find(".eael-circle-content"),
+			let $circleContent = $scope.find(".eael-circle-content.active"),
 				$activeItem = $scope.find('.eael-circle-btn.active');
 			$activeItem.siblings('.eael-circle-btn-content').removeClass('active');
 
