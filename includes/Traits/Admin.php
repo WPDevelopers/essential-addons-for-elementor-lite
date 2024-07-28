@@ -167,7 +167,7 @@ trait Admin {
 			    'community_box'           => [
 				    [
 					    'heading'    => __( 'Need Any Help?', 'essential-addons-for-elementor-lite' ),
-					    'content'    => __( "If you encounter issues or need assistance, we're here to help or report specific problems on our <a href='https://github.com/WPDevelopers/essential-addons-for-elementor-lite/issues' target='_blank'>GitHub issues page.</a>", 'essential-addons-for-elementor-lite' ),
+					    'content'    => __( "If you encounter issues or need assistance, we're here to help or report specific problems on <a href='https://github.com/WPDevelopers/essential-addons-for-elementor-lite/issues' target='_blank'>GitHub issues page.</a>", 'essential-addons-for-elementor-lite' ),
 					    'button'     => [
 						    'label' => __( 'Create a Ticket', 'essential-addons-for-elementor-lite' ),
 						    'url'   => 'https://wpdeveloper.com/support/'
@@ -187,7 +187,7 @@ trait Admin {
 				    ],
 				    [
 					    'heading'    => __( 'View Knowledge Base', 'essential-addons-for-elementor-lite' ),
-					    'content'    => __( 'Read our comprehensive documentation and learn to build a stunning website easily with Essential Addons for Elementor.', 'essential-addons-for-elementor-lite' ),
+					    'content'    => __( 'Read comprehensive documentation & learn to build a website easily with Essential Addons.', 'essential-addons-for-elementor-lite' ),
 					    'button'     => [
 						    'label' => __( 'Read Documentation', 'essential-addons-for-elementor-lite' ),
 						    'url'   => 'https://essential-addons.com/docs/'
