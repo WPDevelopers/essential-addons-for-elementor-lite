@@ -143,6 +143,17 @@ jQuery(window).on("elementor/frontend/init", function () {
 		}
 	}
 
+	ea.sanitizeXSSAttributes = function (html) {
+		// Define XSS-related attributes
+		const xssAttributes = ['onclick', 'onmouseover', 'onmouseout', 'onmousedown', 'onmouseup', 'ondblclick', 'onmousemove', 'onmouseenter', 'onmouseleave', 'onwheel', 'onkeydown', 'onkeypress', 'onkeyup', 'onsubmit', 'onreset', 'onfocus', 'onblur', 'onchange', 'oninput', 'onselect', 'onload', 'onunload', 'onresize', 'onscroll', 'onbeforeunload', 'onerror', 'onhashchange', 'onpagehide', 'onpageshow', 'onpopstate', 'onstorage', 'oncopy', 'oncut', 'onpaste', 'onplay', 'onpause', 'onended', 'onvolumechange', 'onwaiting', 'oncanplay', 'oncanplaythrough', 'oncuechange', 'ondurationchange', 'onemptied', 'onloadeddata', 'onloadedmetadata', 'onloadstart', 'onplaying', 'onprogress', 'onratechange', 'onseeked', 'onseeking', 'onstalled', 'onsuspend', 'ontimeupdate', 'ondrag', 'ondragstart', 'ondragend', 'ondragover', 'ondragenter', 'ondragleave', 'ondrop', 'ontouchstart', 'ontouchmove', 'ontouchend', 'ontouchcancel', 'onfocusin', 'onfocusout', 'oncontextmenu', 'onreadystatechange', 'onvisibilitychange', 'onshow', 'onmessage', 'onabort', 'onafterprint', 'onbeforeprint', 'oninvalid', 'ontoggle', 'onanimationstart', 'onanimationend', 'onanimationiteration', 'onoffline', 'ononline'];
+
+		// Construct the regular expression pattern dynamically
+		const pattern = new RegExp(`\\s+(${xssAttributes.join('|')})=[^>\\s]+`, 'gi');
+
+		// Remove XSS-related attributes using string manipulation
+		return html.replace(pattern, '');
+	}
+
 	//Add hashchange code form advanced-accordion
 	let  isTriggerOnHashchange = true;
 	window.addEventListener( 'hashchange', function () {
