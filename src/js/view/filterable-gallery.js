@@ -286,7 +286,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 				var $this            = $(this),
 					// $init_show       = $(".eael-filter-gallery-container", $scope).children(".eael-filterable-gallery-item-wrap").length,
 					// $total_items     = $gallery.data("total-gallery-items"),
-					$nomore_text     = ea.sanitizeXSSAttributes($gallery.data("nomore-item-text")),
+					$nomore_text     = $gallery.data("nomore-item-text"),
 					filter_enable 	= $(".eael-filter-gallery-control",$scope).length,
 					$items           = [];
 				var filter_name      = $(".eael-filter-gallery-control li.active", $scope).data('filter');
@@ -325,7 +325,8 @@ jQuery(window).on("elementor/frontend/init", function () {
 				}
 
 				if (fg_items.length<1) {
-					$this.html('<div class="no-more-items-text">' + $nomore_text + "</div>");
+					$this.html('<div class="no-more-items-text"></div>');
+					$this.children('.no-more-items-text').text($nomore_text);
 					setTimeout(function () {
 						$this.fadeOut("slow");
 					}, 600);
