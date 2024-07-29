@@ -8,6 +8,7 @@
 namespace Essential_Addons_Elementor\Traits;
 
 use Automattic\WooCommerce\Utilities\OrderUtil;
+use Essential_Addons_Elementor\Classes\Elements_Manager;
 use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 use Essential_Addons_Elementor\Template\Woocommerce\Checkout\Woo_Checkout_Helper;
 use Essential_Addons_Elementor\Traits\Template_Query;
@@ -1043,11 +1044,25 @@ trait Ajax_Handler {
 		}
 
 		if ( ! empty( $settings['elements'] ) ) {
-			$defaults = array_fill_keys( array_keys( array_merge( $this->registered_elements, $this->registered_extensions ) ), false );
-			$elements = array_merge( $defaults, array_fill_keys( array_keys( array_intersect_key( $settings, $defaults ) ), true ) );
+			$defaults    = array_fill_keys( array_keys( array_merge( $this->registered_elements, $this->registered_extensions ) ), false );
+			$elements    = array_merge( $defaults, array_fill_keys( array_keys( array_intersect_key( $settings, $defaults ) ), true ) );
+			$el_disable  = get_option( 'elementor_disabled_elements', [] );
+			$new_disable = [];
+
+			foreach ( $el_disable as $element ) {
+				$el_new_name = Elements_Manager::replace_widget_name();
+				$el_new_name = $el_new_name[ $element ] ?? $element;
+				$el_new_name = substr( $el_new_name, 5 );
+				if ( in_array( $el_new_name, $elements ) && $elements[ $el_new_name ] === true ) {
+					continue;
+				}
+
+				$new_disable[] = $element;
+			}
 
 			// update new settings
 			$updated = update_option( 'eael_save_settings', $elements );
+			update_option( 'elementor_disabled_elements', $new_disable );
 
 			// clear assets files
 			$this->empty_dir( EAEL_ASSET_PATH );

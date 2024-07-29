@@ -8,6 +8,7 @@ if ( !defined( 'ABSPATH' ) ) {
 
 // Exit if accessed directly
 
+use Essential_Addons_Elementor\Classes\Elements_Manager;
 use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 use Essential_Addons_Elementor\Classes\WPDeveloper_Notice;
 use PriyoMukul\WPNotice\Notices;
@@ -1615,7 +1616,9 @@ trait Admin {
 					    'label' => __( 'Upgrade to PRO', 'essential-addons-for-elementor-lite' ),
 					    'url'   => 'https://essential-addons.com/upgrade-ea-pro'
 				    ]
-			    ]
+			    ],
+			    'el_disabled_elements'    => get_option( 'elementor_disabled_elements', [] ),
+			    'replace_widget_old2new'  => Elements_Manager::replace_widget_name()
 		    ];
 
 		    wp_localize_script( 'eael-admin-dashboard', 'localize', array(

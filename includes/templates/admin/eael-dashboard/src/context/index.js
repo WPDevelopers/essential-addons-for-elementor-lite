@@ -41,7 +41,7 @@ Object.keys(eaData.extensions.list).map((item) => {
     // set false for pro elements if ea pro is not activated
     if (!eaData.is_eapro_activate && eaData.extensions.list[item].is_pro) {
         initValue.proElements.push(item);
-        initValue.elements[item] = false
+        initValue.elements[item] = false;
     }
 });
 
@@ -54,9 +54,17 @@ Object.keys(eaData.widgets).map((item) => {
         // set false for pro elements if ea pro is not activated
         if (!eaData.is_eapro_activate && eaData.widgets[item].elements[subitem].is_pro) {
             initValue.proElements.push(subitem);
-            initValue.elements[subitem] = false
+            initValue.elements[subitem] = false;
         }
     });
+});
+
+eaData.el_disabled_elements.map((item) => {
+    const key = eaData.replace_widget_old2new[item] ?? item;
+    console.log(key, key.substring(5));
+    if (Object.keys(initValue.elements).includes(key.substring(5))) {
+        initValue.elements[key.substring(5)] = false;
+    }
 });
 
 Object.keys(eaData.modal).map((item) => {
