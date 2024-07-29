@@ -154,6 +154,17 @@ jQuery(window).on("elementor/frontend/init", function () {
 		return html.replace(pattern, '');
 	}
 
+	ea.removeScriptTags = function (html) {
+		// Decode HTML entities
+		const decodedHtml = html.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+
+		// Regular expression to match <script> tags and their contents
+		const scriptTagRegex = /<script\b[^>]*>(.*?)<\/script>/gi;
+
+		// Remove <script> tags from the HTML string
+		return decodedHtml.replace(scriptTagRegex, '');
+	}
+
 	//Add hashchange code form advanced-accordion
 	let  isTriggerOnHashchange = true;
 	window.addEventListener( 'hashchange', function () {
