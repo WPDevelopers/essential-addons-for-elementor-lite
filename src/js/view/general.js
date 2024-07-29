@@ -156,13 +156,18 @@ jQuery(window).on("elementor/frontend/init", function () {
 
 	ea.removeScriptTags = function (html) {
 		// Decode HTML entities
-		const decodedHtml = html.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+		const decodedHtml = html.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
 
-		// Regular expression to match <script> tags and their contents
-		const scriptTagRegex = /<script\b[^>]*>(.*?)<\/script>/gi;
+		// Regular expression to match <script> tags and their contents, including nested or malformed tags
+		const scriptTagRegex = /<script\b[^>]*>([\s\S]*?)<\/script>/gi;
 
 		// Remove <script> tags from the HTML string
-		return decodedHtml.replace(scriptTagRegex, '');
+		let sanitizedHtml = decodedHtml;
+		while (scriptTagRegex.test(sanitizedHtml)) {
+			sanitizedHtml = sanitizedHtml.replace(scriptTagRegex, '');
+		}
+
+		return sanitizedHtml;
 	}
 
 	//Add hashchange code form advanced-accordion
