@@ -890,6 +890,10 @@ $theme-preset4: #ec3b75;
         }
     }
 
+    .eael-marquee-carousel .swiper-wrapper{
+        transition-timing-function: linear !important; 
+    }
+
     // dot
     &.swiper-container-dots-outside .swiper-pagination,
     &.swiper-container-wrap-dots-outside .swiper-pagination {
@@ -899,7 +903,7 @@ $theme-preset4: #ec3b75;
     &.swiper-container-dots-outside .swiper-pagination,
     &.swiper-container-wrap-dots-outside .swiper-pagination,
     &.swiper-container-dots-inside .swiper-pagination,
-    &.swiper-container-wrap-dots-inside .swiper-pagination, {
+    &.swiper-container-wrap-dots-inside .swiper-pagination {
 
         &.dots-preset-1 .swiper-pagination-bullet {
             border-radius: 2px;
