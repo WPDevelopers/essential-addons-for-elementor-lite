@@ -1618,7 +1618,6 @@ trait Admin {
 				    ]
 			    ],
 			    'el_disabled_elements'    => get_option( 'elementor_disabled_elements', [] ),
-			    'replace_widget_new2old'  => array_flip( Elements_Manager::replace_widget_name() ),
 			    'replace_widget_old2new'  => Elements_Manager::replace_widget_name()
 		    ];
 
