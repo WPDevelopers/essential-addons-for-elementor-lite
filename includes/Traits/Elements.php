@@ -872,7 +872,7 @@ trait Elements {
 	 * @return string|void
 	 */
 	public function progress_bar_local_css( $document_settings ) {
-		$eael_reading_progress_fill_color = isset( $document_settings['eael_ext_reading_progress_fill_color'] ) ? $document_settings['eael_ext_reading_progress_fill_color'] : '';
+		$eael_reading_progress_fill_color = Helper::eael_fetch_color_or_global_color($document_settings, 'eael_ext_reading_progress_fill_color');
 
 		$reading_progress_local_css = '';
 		$eael_reading_progress_id_selector = '#eael-reading-progress-' . get_the_ID();
