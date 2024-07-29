@@ -127,6 +127,11 @@ $config = [
                         'type' => 'lib',
                         'context' => 'view',
                     ],
+	                [
+		                'file' => EAEL_PLUGIN_PATH . '/assets/front-end/js/lib-view/dom-purify/purify.min.js',
+		                'type' => 'lib',
+		                'context' => 'view',
+	                ],
                     [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/count-down.min.js',
                         'type' => 'self',

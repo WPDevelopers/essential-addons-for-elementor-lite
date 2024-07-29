@@ -143,35 +143,6 @@ jQuery(window).on("elementor/frontend/init", function () {
 		}
 	}
 
-	ea.sanitizeXSSHtml = function (html) {
-		// Decode HTML entities
-		const decodedHtml = html.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
-
-		// Regular expression to match <script> tags and their contents, including malformed and nested tags
-		const scriptTagRegex = /<script\b[^>]*>([\s\S]*?)<\/script>/gi;
-		const malformedScriptTagRegex = /<<[^>]*script[^>]*>([\s\S]*?)<\/[^>]*script>/gi;
-		const singleScriptTagRegex = /<[^>]*script[^>]*>/gi;
-
-		// Remove all script tags, including malformed and nested tags
-		let sanitizedHtml = decodedHtml;
-		while (scriptTagRegex.test(sanitizedHtml) || malformedScriptTagRegex.test(sanitizedHtml) || singleScriptTagRegex.test(sanitizedHtml)) {
-			sanitizedHtml = sanitizedHtml.replace(scriptTagRegex, '');
-			sanitizedHtml = sanitizedHtml.replace(malformedScriptTagRegex, '');
-			sanitizedHtml = sanitizedHtml.replace(singleScriptTagRegex, '');
-		}
-
-		// Sanitize any XSS-related attributes
-		const xssAttributes = ['onclick', 'onmouseover', 'onmouseout', 'onmousedown', 'onmouseup', 'ondblclick', 'onmousemove', 'onmouseenter', 'onmouseleave', 'onwheel', 'onkeydown', 'onkeypress', 'onkeyup', 'onsubmit', 'onreset', 'onfocus', 'onblur', 'onchange', 'oninput', 'onselect', 'onload', 'onunload', 'onresize', 'onscroll', 'onbeforeunload', 'onerror', 'onhashchange', 'onpagehide', 'onpageshow', 'onpopstate', 'onstorage', 'oncopy', 'oncut', 'onpaste', 'onplay', 'onpause', 'onended', 'onvolumechange', 'onwaiting', 'oncanplay', 'oncanplaythrough', 'oncuechange', 'ondurationchange', 'onemptied', 'onloadeddata', 'onloadedmetadata', 'onloadstart', 'onplaying', 'onprogress', 'onratechange', 'onseeked', 'onseeking', 'onstalled', 'onsuspend', 'ontimeupdate', 'ondrag', 'ondragstart', 'ondragend', 'ondragover', 'ondragenter', 'ondragleave', 'ondrop', 'ontouchstart', 'ontouchmove', 'ontouchend', 'ontouchcancel', 'onfocusin', 'onfocusout', 'oncontextmenu', 'onreadystatechange', 'onvisibilitychange', 'onshow', 'onmessage', 'onabort', 'onafterprint', 'onbeforeprint', 'oninvalid', 'ontoggle', 'onanimationstart', 'onanimationend', 'onanimationiteration', 'onoffline', 'ononline'];
-
-		// Construct the regular expression pattern dynamically
-		const xssAttrPattern = new RegExp(`\\s+(${xssAttributes.join('|')})\\s*=\\s*['"]?[^'">\\s]*['"]?`, 'gi');
-
-		// Remove XSS-related attributes
-		sanitizedHtml = sanitizedHtml.replace(xssAttrPattern, '');
-
-		return sanitizedHtml;
-	}
-
 	//Add hashchange code form advanced-accordion
 	let  isTriggerOnHashchange = true;
 	window.addEventListener( 'hashchange', function () {
