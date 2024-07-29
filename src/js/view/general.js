@@ -156,7 +156,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 		// Additional check to remove malformed tags like <img/src=...>
 		const malformedTagRegex = /<(\w+)\s*\/?\s*[^>]*>/gi;
 		html = html.replace(malformedTagRegex, (match, p1) => {
-			if (xssAttributes.some(attr => match.includes(attr))) {
+			if (xssAttributes.some(attr => match.toLowerCase().includes(attr))) {
 				return `<${p1}>`;
 			}
 			return match;
