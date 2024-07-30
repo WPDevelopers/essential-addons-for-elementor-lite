@@ -720,9 +720,20 @@ class Woo_Product_Carousel extends Widget_Base {
                 'label'     => __( 'Navigation', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::HEADING,
                 'separator' => 'before',
-                'condition'  => [
-					'marquee_mood!' => 'yes',
-				],
+            ]
+        );
+
+        $this->add_control( 
+			'eael_marquee_warning_text', 
+            [
+                'type'            => Controls_Manager::RAW_HTML,
+                'raw'             => __( 'Navigation Controllers won\'t work on <strong>Marquee</stong> Mood.', 'essential-addons-for-elementor-lite' ),
+                'content_classes' => 'eael-warning',
+                'condition'       => [
+                    'autoplay' => 'yes',
+                    'marquee_mood' => 'yes',
+                    'carousel_effect' => [ 'slide', 'coverflow' ],
+                ],
             ]
         );
         
@@ -735,9 +746,6 @@ class Woo_Product_Carousel extends Widget_Base {
                 'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
                 'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
                 'return_value' => 'yes',
-                'condition'    => [
-					'marquee_mood!' => 'yes',
-				],
             ]
         );
         
@@ -750,9 +758,6 @@ class Woo_Product_Carousel extends Widget_Base {
                 'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
                 'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
                 'return_value' => 'yes',
-                'condition'    => [
-					'marquee_mood!' => 'yes',
-				],
             ]
         );
 
@@ -766,7 +771,6 @@ class Woo_Product_Carousel extends Widget_Base {
 			    'return_value' => 'yes',
 			    'condition'    => [
 				    'dots'          => 'yes',
-					'marquee_mood!' => 'yes',
 			    ]
 		    ]
 	    );
@@ -784,7 +788,6 @@ class Woo_Product_Carousel extends Widget_Base {
 			    'condition'    => [
 				    'dots'    => 'yes',
 				    'image_dots'    => 'yes',
-					'marquee_mood!' => 'yes',
 			    ]
 		    ]
 	    );
@@ -3108,10 +3111,12 @@ class Woo_Product_Carousel extends Widget_Base {
              * Render Slider Dots!
              */
 
-            if (file_exists( $template ) && $settings['image_dots'] === 'yes') {
-                $this->render_image_dots($query);
-            } else {
-	            $this->render_dots();
+            if( 'yes' !== $settings['marquee_mood'] ){
+                if ( file_exists( $template ) && $settings['image_dots'] === 'yes') {
+                    $this->render_image_dots($query);
+                } else {
+                    $this->render_dots();
+                }
             }
 
 
@@ -3119,7 +3124,10 @@ class Woo_Product_Carousel extends Widget_Base {
             /**
              * Render Slider Navigations!
              */
-            $this->render_arrows();
+
+            if( 'yes' !== $settings['marquee_mood'] ){ 
+                $this->render_arrows();
+            }
             ?>
         </div>
         <?php
