@@ -13,6 +13,7 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Repeater;
+use Elementor\Utils;
 use \Elementor\Widget_Base;
 use \Essential_Addons_Elementor\Classes\Helper;
 
@@ -3254,48 +3255,89 @@ class Event_Calendar extends Widget_Base
 
 	public function xssAttributes() {
 		return [
-			'onabort',
-			'onblur',
-			'onchange',
 			'onclick',
-			'oncontextmenu',
-			'oncopy',
-			'oncut',
+			'onmouseover',
+			'onmouseout',
+			'onmousedown',
+			'onmouseup',
 			'ondblclick',
-			'ondrag',
-			'ondragend',
-			'ondragenter',
-			'ondragleave',
-			'ondragover',
-			'ondragstart',
-			'ondrop',
-			'onerror',
-			'onfocus',
-			'oninput',
+			'onmousemove',
+			'onmouseenter',
+			'onmouseleave',
+			'onwheel',
 			'onkeydown',
 			'onkeypress',
 			'onkeyup',
-			'onload',
-			'onmousedown',
-			'onmouseenter',
-			'onmouseleave',
-			'onmousemove',
-			'onmouseout',
-			'onmouseover',
-			'onmouseup',
-			'onpaste',
+			'onsubmit',
 			'onreset',
+			'onfocus',
+			'onblur',
+			'onchange',
+			'oninput',
+			'onselect',
+			'onload',
+			'onunload',
 			'onresize',
 			'onscroll',
-			'onselect',
-			'onsubmit',
-			'ontouchcancel',
-			'ontouchend',
-			'ontouchmove',
+			'onbeforeunload',
+			'onerror',
+			'onhashchange',
+			'onpagehide',
+			'onpageshow',
+			'onpopstate',
+			'onstorage',
+			'oncopy',
+			'oncut',
+			'onpaste',
+			'onplay',
+			'onpause',
+			'onended',
+			'onvolumechange',
+			'onwaiting',
+			'oncanplay',
+			'oncanplaythrough',
+			'oncuechange',
+			'ondurationchange',
+			'onemptied',
+			'onloadeddata',
+			'onloadedmetadata',
+			'onloadstart',
+			'onplaying',
+			'onprogress',
+			'onratechange',
+			'onseeked',
+			'onseeking',
+			'onstalled',
+			'onsuspend',
+			'ontimeupdate',
+			'ondrag',
+			'ondragstart',
+			'ondragend',
+			'ondragover',
+			'ondragenter',
+			'ondragleave',
+			'ondrop',
 			'ontouchstart',
+			'ontouchmove',
+			'ontouchend',
+			'ontouchcancel',
+			'onfocusin',
+			'onfocusout',
+			'oncontextmenu',
+			'onreadystatechange',
+			'onvisibilitychange',
+			'onshow',
+			'onmessage',
+			'onabort',
+			'onafterprint',
+			'onbeforeprint',
+			'oninvalid',
+			'ontoggle',
 			'onanimationstart',
 			'onanimationend',
-			'onanimationiteration'
+			'onanimationiteration',
+			'onoffline',
+			'ononline'
 		];
 	}
 
@@ -3337,22 +3379,15 @@ class Event_Calendar extends Widget_Base
                 $settings_eael_event_global_text_color = $this->fetch_color_or_global_color($event, 'eael_event_text_color');
                 $settings_eael_event_global_popup_ribbon_color = $this->fetch_color_or_global_color($event, 'eael_event_border_color');
 
-                $_custom_attributes = $event['eael_event_link']['custom_attributes'];
-                $_custom_attributes = explode(',', $_custom_attributes );
+	            $_custom_attributes = Utils::parse_custom_attributes( $event['eael_event_link']['custom_attributes'] );
                 $custom_attributes  = [];
 
 	            if ( $_custom_attributes ) {
-		            foreach ( $_custom_attributes as $attribute ) {
-			            if ( $attribute ) {
-				            $attribute_set = explode( '|', $attribute );
-
-				            if ( in_array( trim( strtolower( $attribute_set[0] ) ), $this->xssAttributes() ) ) {
-					            continue;
-				            }
-
+		            foreach ( $_custom_attributes as $key=>$value ) {
+			            if ( $key ) {
 				            $custom_attributes[] = [
-					            'key'   => sanitize_text_field( $attribute_set[0] ),
-					            'value' => isset( $attribute_set[1] ) ? esc_attr( $attribute_set[1] ) : ''
+					            'key'   => sanitize_text_field( $key ),
+					            'value' => esc_attr( $value )
 				            ];
 			            }
 		            }

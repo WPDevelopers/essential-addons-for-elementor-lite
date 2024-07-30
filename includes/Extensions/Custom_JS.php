@@ -43,7 +43,7 @@ class Custom_JS
 
 	    if ( ! current_user_can( 'administrator' ) ) {
 		    $controls->add_control(
-			    'eael_global_warning_text',
+			    'eael_custom_js_global_warning_text',
 			    [
 				    'type'            => Controls_Manager::RAW_HTML,
 				    'raw'             => __( '<strong>Note:</strong> Only the Administrator can add/edit JavaScript code from here', 'essential-addons-for-elementor-lite' ),
