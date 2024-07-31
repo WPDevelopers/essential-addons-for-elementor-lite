@@ -8,6 +8,7 @@ function IntegrationContent({
   handleModalChange,
   closeModal,
   handleIntegrationSwitch,
+  disableSwitches,
 }) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let integrations_content = eaelQuickSetup?.integrations_content;
@@ -145,6 +146,7 @@ function IntegrationContent({
                       onChange={(event) =>
                         handleIntegrationSwitch(event, plugin)
                       }
+                      disabled={disableSwitches}
                     />
                     <span className="slider"></span>
                   </label>

@@ -18,6 +18,7 @@ function App() {
   const [modalTarget, setModalTarget] = useState("");
   const [showElements, setShowElements] = useState(0);
   const [emailAddress, setEmailAddress] = useState(is_tracking_allowed);
+  const [disableSwitches, setDisableSwitches] = useState(false);
 
   const handleTabChange = (event) => {
     setActiveTab(event.currentTarget.getAttribute("data-next"));
@@ -70,6 +71,8 @@ function App() {
   };
 
   const handleIntegrationSwitch = async (event, plugin, isTemplately = 0) => {
+    setDisableSwitches(true);
+
     const isChecked = event.target.checked ?? 0;
 
     const isActionInstall =
@@ -115,6 +118,7 @@ function App() {
         });
 
         const result = await response.json();
+
         if (result.success) {
           if( isTemplately ) {
             label.textContent = 'Enabled Templates';
@@ -139,13 +143,15 @@ function App() {
           } 
         }
       } catch (error) {
-        if( isTemplately ) {
-          setActiveTab(dataNext);
-        } else {
-          label.textContent = isChecked ? "Activate" : "Deactivate";
-        }
+        // if( isTemplately ) {
+        //   setActiveTab(dataNext);
+        // } else {
+        //   label.textContent = isChecked ? "Activate" : "Deactivate";
+        // }
       }
     }
+
+    setDisableSwitches(false);
   };
 
   return (
@@ -238,6 +244,7 @@ function App() {
               handleModalChange={handleModalChange}
               closeModal={closeModal}
               handleIntegrationSwitch={handleIntegrationSwitch}
+              disableSwitches={disableSwitches}
             />
           </div>
 
