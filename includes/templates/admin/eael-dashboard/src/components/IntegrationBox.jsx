@@ -8,6 +8,24 @@ function IntegrationBox(props) {
         {eaState, eaDispatch} = consumer(),
         checked = eaState.integrations[props.index],
         isLoading = eaState[props.index] === true,
+        integrationProcess = function (params, arg) {
+            if (window.eaAjaxRunning === true) {
+                setTimeout(integrationProcess, 500, params, arg);
+                return;
+            }
+
+            window.eaAjaxRunning = true;
+            const request = eaAjax(params, true);
+
+            request.onreadystatechange = () => {
+                const response = request.responseText ? JSON.parse(request.responseText) : {};
+
+                if (response.success) {
+                    eaDispatch({type: 'ON_CHANGE_INTEGRATION', payload: {key: arg.index, value: arg.isChecked}});
+                }
+                window.eaAjaxRunning = false;
+            }
+        },
         changeHandler = (e) => {
             eaDispatch({type: 'INTEGRATION_LOADER', payload: props.index});
 
@@ -24,25 +42,6 @@ function IntegrationBox(props) {
             }
 
             setTimeout(integrationProcess, 100, params, {index: props.index, isChecked});
-
-            function integrationProcess(params, arg) {
-                if (window.eaAjaxRunning === true) {
-                    setTimeout(integrationProcess, 1000, params, arg);
-                    return;
-                }
-
-                window.eaAjaxRunning = true;
-                const request = eaAjax(params, true);
-
-                request.onreadystatechange = () => {
-                    const response = request.responseText ? JSON.parse(request.responseText) : {};
-
-                    if (response.success) {
-                        eaDispatch({type: 'ON_CHANGE_INTEGRATION', payload: {key: arg.index, value: arg.isChecked}});
-                        window.eaAjaxRunning = false;
-                    }
-                }
-            }
         };
 
     return (
