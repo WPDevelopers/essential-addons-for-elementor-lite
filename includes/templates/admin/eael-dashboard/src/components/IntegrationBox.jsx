@@ -23,12 +23,24 @@ function IntegrationBox(props) {
                 params.action = 'wpdeveloper_auto_active_even_not_installed';
             }
 
-            const request = eaAjax(params, true);
-            request.onreadystatechange = () => {
-                const response = JSON.parse(request.responseText);
+            setTimeout(integrationProcess, 100, params, {index: props.index, isChecked});
 
-                if (response.success) {
-                    eaDispatch({type: 'ON_CHANGE_INTEGRATION', payload: {key: props.index, value: isChecked}});
+            function integrationProcess(params, arg) {
+                if (window.eaAjaxRunning === true) {
+                    setTimeout(integrationProcess, 1000, params, arg);
+                    return;
+                }
+
+                window.eaAjaxRunning = true;
+                const request = eaAjax(params, true);
+
+                request.onreadystatechange = () => {
+                    const response = request.responseText ? JSON.parse(request.responseText) : {};
+
+                    if (response.success) {
+                        eaDispatch({type: 'ON_CHANGE_INTEGRATION', payload: {key: arg.index, value: arg.isChecked}});
+                        window.eaAjaxRunning = false;
+                    }
                 }
             }
         };
