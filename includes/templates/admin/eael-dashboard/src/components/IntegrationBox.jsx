@@ -1,4 +1,5 @@
 import consumer from "../context";
+import {eaAjax} from "../helper/index.js";
 
 function IntegrationBox(props) {
     const eaData = localize.eael_dashboard.integration_box.list[props.index],
@@ -9,10 +10,27 @@ function IntegrationBox(props) {
         isLoading = eaState[props.index] === true,
         changeHandler = (e) => {
             eaDispatch({type: 'INTEGRATION_LOADER', payload: props.index});
-            setTimeout(eaDispatch, 300, {
-                type: 'ON_CHANGE_INTEGRATION',
-                payload: {key: props.index, value: e.target.checked}
-            });
+
+            const params = {
+                    action: 'wpdeveloper_deactivate_plugin',
+                    security: localize.nonce,
+                    slug: eaData.slug,
+                    basename: eaData.basename
+                },
+                isChecked = e.target.checked;
+
+            if (isChecked) {
+                params.action = 'wpdeveloper_auto_active_even_not_installed';
+            }
+
+            const request = eaAjax(params, true);
+            request.onreadystatechange = () => {
+                const response = JSON.parse(request.responseText);
+
+                if (response.success) {
+                    eaDispatch({type: 'ON_CHANGE_INTEGRATION', payload: {key: props.index, value: isChecked}});
+                }
+            }
         };
 
     return (
