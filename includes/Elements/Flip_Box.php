@@ -78,7 +78,7 @@ class Flip_Box extends Widget_Base
             ]
         );
 
-        $this->add_responsive_control(
+        $this->add_control(
 			'eael_flipbox_event_type',
 			[
 				'label'   => esc_html__( 'Choose Event', 'essential-addons-for-elementor-lite' ),
