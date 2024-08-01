@@ -12,9 +12,9 @@ The Essential plugin you install after Elementor! Packed with 50+ stunning eleme
 
 == Description ==
 
-Enhance your [Elementor](https://wordpress.org/plugins/elementor/) page building experience with 90+ creative elements and extensions. Add powers to your website builder using our easy-to-use Elementor widgets and ready template which were designed to make your next WordPress page and posts design easier and prettier than ever before.
+Enhance your [Elementor](https://wordpress.org/plugins/elementor/) page building experience with 100+ creative elements and extensions. Add powers to your website builder using our easy-to-use Elementor widgets and ready template which were designed to make your next WordPress page and posts design easier and prettier than ever before.
 
-##ESSENTIAL ADDONS FOR ELEMENTOR - 90+ BEST ELEMENTOR WIDGETS WITH KITS, 5,000+ READY TEMPLATES & BEST WOOCOMMERCE BUILDER, SERVING 2 MILLION+ ACTIVE USERS##
+##ESSENTIAL ADDONS FOR ELEMENTOR: 100+ BEST ELEMENTOR WIDGETS WITH KITS, 5,000+ READY TEMPLATES & BEST WOOCOMMERCE BUILDER, SERVING 2 MILLION+ ACTIVE USERS##
 
 [Check the Demos](https://essential-addons.com/elementor/demos)
 
@@ -52,7 +52,7 @@ We have extra-ordinary support team ready to help you. Ask your questions in the
 ### [Elementor](https://wordpress.org/plugins/elementor/) Website builder is required for this plugin.
 
 
-### 50+ FREE ELEMENTOR ADDONS AND COUNTING
+### 55+ FREE ELEMENTOR ADDONS AND COUNTING
 
 We have designed more than 50 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
 
@@ -117,10 +117,11 @@ Extensions (Free):
 3. [Table of Contents](https://essential-addons.com/elementor/table-of-content/) - Display Table of Contents anywhere you want
 [youtube](https://www.youtube.com/watch?v=W6woRX7Ud7I)
 4. [Custom JS](https://essential-addons.com/elementor/docs/custom-js/) - Add custom JavaScript in Elementor with a few clicks
-5. [Scroll to Top](https://essential-addons.com/elementor/scroll-to-top)- Let visitors quickly navigate to the top of your page
-6. [Wrapper Link](https://essential-addons.com/elementor/wrapper-link)- Add custom links into any section, column, or even flexbox
+5. [Scroll to Top](https://essential-addons.com/elementor/scroll-to-top) - Let visitors quickly navigate to the top of your page
+6. [Wrapper Link](https://essential-addons.com/elementor/wrapper-link) - Add custom links into any section, column, or even flexbox
+7. [Hover Interactions](https://essential-addons.com/hover-interaction/) - Create captivating effects on buttons, images, texts and more
 
-### More elements (35+) on [Premium Version](https://wpdeveloper.com/in/upgrade-essential-addons-elementor)
+### More elements (40+) on [Premium Version](https://wpdeveloper.com/in/upgrade-essential-addons-elementor)
 
 1. [Post Block](https://essential-addons.com/elementor/post-block/) - Display your blog posts with a variety of styles
 2. [Lightbox & Modal](https://essential-addons.com/elementor/lightbox-modal/) - Create interactive popups after trigger actions
@@ -169,6 +170,8 @@ Extensions (Pro):
 4. [Content Protection](https://essential-addons.com/elementor/content-protection/) - Hide your content with password protection
 5. [Cross-Domain Copy Paste](https://essential-addons.com/elementor/cross-domain-copy-paste/)- Copy any section in Elementor from one website and paste it on another
 6. [Conditional Display](https://essential-addons.com/elementor/conditional-display/)- Display your preferred content based on the logic conditions you have set
+7. [Dynamic Tags](https://essential-addons.com/dynamic-tags/)- Display content dynamically on your preferred section of the website
+8. [Interactive animations](https://essential-addons.com/interactive-animations/)- Create stunning animations & build a fully dynamic web page
 
 
 More features and improvements are coming on regular updates. Want to unlock the advanced elements? [Upgrade to our Pro version](https://essential-addons.com/elementor/#pricing)
