@@ -105,7 +105,7 @@ We have designed more than 50 of the most useful widgets to enhance your Element
 46. [Woo Cart](https://essential-addons.com/woo-cart/)- Use WooCommerce Cart page to boost online sales
 47. [Interactive Circle](https://essential-addons.com/interactive-circle/)- Display content with engaging circular layouts
 48. [NFT Gallery](https://essential-addons.com/nft-gallery/)- Add and showcase NFT collections effortlessly in Elementor
-49. [Business Reviews]( https://essential-addons.com/business-reviews/)- Display Google Customer Review to increase your online reputation
+49. [Business Reviews](https://essential-addons.com/business-reviews/)- Display Google Customer Review to increase your online reputation
 50. [SVG Draw](https://essential-addons.com/svg-draw/)- Display SVG elements in a visually striking and interactive way on your website
 51. [Woo Product List](https://essential-addons.com/woo-product-list/)- Showcase your store’s products with a stunning listicle format
 
@@ -116,7 +116,7 @@ Extensions (Free):
 2. [Duplicator](https://essential-addons.com/duplicator/) - Duplicate any page or post in a single click
 3. [Table of Contents](https://essential-addons.com/table-of-content/) - Display Table of Contents anywhere you want
 [youtube](https://www.youtube.com/watch?v=W6woRX7Ud7I)
-4. [Custom JS](https://essential-addons.com/docs/custom-js/) - Add custom JavaScript in Elementor with a few clicks
+4. [Custom JS](https://essential-addons.com/custom-js/) - Add custom JavaScript in Elementor with a few clicks
 5. [Scroll to Top](https://essential-addons.com/scroll-to-top) - Let visitors quickly navigate to the top of your page
 6. [Wrapper Link](https://essential-addons.com/wrapper-link) - Add custom links into any section, column, or even flexbox
 7. [Hover Interactions](https://essential-addons.com/hover-interaction/) - Create captivating effects on buttons, images, texts and more
