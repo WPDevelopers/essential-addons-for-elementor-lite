@@ -388,6 +388,7 @@ class Woo_Product_Gallery extends Widget_Base {
 				'options' => [
 					'product'        => esc_html__( 'Products', 'essential-addons-for-elementor-lite' ),
 					'source_dynamic' => esc_html__( 'Dynamic', 'essential-addons-for-elementor-lite' ),
+					'archive' 		=> esc_html__( 'Archive', 'essential-addons-for-elementor-lite' ),
 				],
 			]
 		);
@@ -399,7 +400,7 @@ class Woo_Product_Gallery extends Widget_Base {
 				'raw'             => __( 'This option will only affect in <strong>Archive page of Elementor Theme Builder</strong> dynamically.', 'essential-addons-for-elementor-lite' ),
 				'content_classes' => 'eael-warning',
 				'condition'       => [
-					'post_type' => 'source_dynamic',
+					'post_type' => 'archive',
 				],
 			]
 		);
@@ -410,7 +411,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			'default'   => 'recent-products',
 			'options'   => $this->eael_get_product_filterby_options(),
 			'condition' => [
-				'post_type!' => 'source_dynamic',
+				'post_type' => 'product',
 			],
 		] );
 
@@ -419,6 +420,9 @@ class Woo_Product_Gallery extends Widget_Base {
 			'type'    => Controls_Manager::SELECT,
 			'options' => $this->eael_get_product_orderby_options(),
 			'default' => 'date',
+			'condition' => [
+				'post_type' => 'product',
+			],
 
 		] );
 
@@ -430,6 +434,9 @@ class Woo_Product_Gallery extends Widget_Base {
 				'desc' => 'Descending',
 			],
 			'default' => 'desc',
+			'condition' => [
+				'post_type' => 'product',
+			],
 
 		] );
 
@@ -440,12 +447,18 @@ class Woo_Product_Gallery extends Widget_Base {
 			'min'     => 1,
 			'max'     => 1000,
 			'step'    => 1,
+			'condition' => [
+				'post_type' => 'product',
+			],
 		] );
 
 		$this->add_control( 'product_offset', [
 			'label'   => __( 'Offset', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::NUMBER,
 			'default' => 0,
+			'condition' => [
+				'post_type' => 'product',
+			],
 		] );
 
 		$this->add_control(
@@ -456,6 +469,9 @@ class Woo_Product_Gallery extends Widget_Base {
 				'source_type' => 'product_cat',
 				'label_block' => true,
 				'multiple'    => true,
+				'condition' => [
+					'post_type' => 'product',
+				],
 			]
 		);
 
@@ -467,6 +483,9 @@ class Woo_Product_Gallery extends Widget_Base {
 				'source_type' => 'product_tag',
 				'label_block' => true,
 				'multiple'    => true,
+				'condition' => [
+					'post_type' => 'product',
+				],
 			]
 		);
 
@@ -480,6 +499,9 @@ class Woo_Product_Gallery extends Widget_Base {
                 'not-purchased' => __('Not Purchased Only', 'essential-addons-for-elementor-lite'),
             ],
             'default' => 'both',
+			'condition' => [
+				'post_type' => 'product',
+			],
         ]);
 
 		$this->add_control(
@@ -2453,6 +2475,8 @@ class Woo_Product_Gallery extends Widget_Base {
 		$settings[ 'layout_mode' ]    = $settings[ 'eael_product_gallery_items_layout' ];
 		$widget_id                    = esc_attr( $this->get_id() );
 		$settings[ 'eael_widget_id' ] = $widget_id;
+		$is_product_archive = is_product_tag() || is_product_category() || is_shop() || is_product_taxonomy();
+
 		if ( $settings[ 'post_type' ] === 'source_dynamic' && is_archive() || !empty( $_REQUEST[ 'post_type' ] ) ) {
 			$settings[ 'posts_per_page' ] = $settings[ 'eael_product_gallery_products_count' ] ?: 3;
 			$settings[ 'offset' ]         = $settings[ 'product_offset' ];
@@ -2518,8 +2542,15 @@ class Woo_Product_Gallery extends Widget_Base {
 
 				if ( file_exists( $template ) ) {
 					$settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
-					$query                    = new \WP_Query( $args );
 					$show_secondary_image     = isset( $settings['eael_product_gallery_show_secondary_image'] ) && 'yes' === $settings['eael_product_gallery_show_secondary_image'];
+
+					if( $settings['post_type'] === 'archive' && is_archive() && $is_product_archive ){
+                        global $wp_query;
+                        $query = $wp_query;
+                        $args  = $wp_query->query_vars;
+                    } else {
+	                    $query = new \WP_Query( $args );
+                    }
 
 					echo '<ul class="products eael-post-appender eael-post-appender-' . esc_attr( $this->get_id() ) . '" data-layout-mode="' . esc_attr( $settings["eael_product_gallery_items_layout"] ) . '" data-show-secondary-image="' . intval( $show_secondary_image ) . '" >';
 					if ( $query->have_posts() ) {
