@@ -396,6 +396,7 @@ class Woo_Product_List extends Widget_Base
                 'options' => [
                     'product'        => esc_html__( 'Products', 'essential-addons-for-elementor-lite' ),
                     'source_dynamic' => esc_html__( 'Dynamic', 'essential-addons-for-elementor-lite' ),
+                    'source_archive' => esc_html__( 'Archive', 'essential-addons-for-elementor-lite' ),
                 ],
             ]
         );
@@ -407,7 +408,7 @@ class Woo_Product_List extends Widget_Base
                 'raw'             => __( 'This option will only affect in <strong>Archive page of Elementor Theme Builder</strong> dynamically.', 'essential-addons-for-elementor-lite' ),
                 'content_classes' => 'eael-warning',
                 'condition'       => [
-                    'post_type' => 'source_dynamic',
+                    'post_type' => 'source_archive',
                 ],
             ]
         );
@@ -429,7 +430,7 @@ class Woo_Product_List extends Widget_Base
             'default'   => 'recent-products',
             'options'   => $this->eael_get_product_filterby_options(),
             'condition' => [
-              'post_type!' => 'source_dynamic',
+              'post_type!' => [ 'source_dynamic', 'source_archive' ]
             ],
         ]);
 
@@ -440,6 +441,7 @@ class Woo_Product_List extends Widget_Base
             'default'   => 'date',
             'condition' => [
                 'eael_product_list_product_filter!' => [ 'best-selling-products', 'top-products' ],
+                'post_type!' => 'source_archive'
             ]
         ]);
 
@@ -453,6 +455,7 @@ class Woo_Product_List extends Widget_Base
             'default' => 'desc',
             'condition' => [
                 'eael_product_list_product_filter!' => [ 'best-selling-products' ],
+                'post_type!' => 'source_archive'
             ]
         ]);
 
@@ -464,6 +467,9 @@ class Woo_Product_List extends Widget_Base
             'max'       => 1000,
             'step'      => 1,
             'separator' => 'before',
+            'condition' => [
+                'post_type!' => 'source_archive'
+            ]
         ]);
 
         $this->add_control('product_offset', [
@@ -471,7 +477,8 @@ class Woo_Product_List extends Widget_Base
             'type'      => Controls_Manager::NUMBER,
             'default'   => 0,
             'condition' => [
-                'eael_product_list_product_filter!' => 'manual'
+                'eael_product_list_product_filter!' => 'manual',
+                'post_type!' => 'source_archive'
             ],
         ]);
 
@@ -485,7 +492,8 @@ class Woo_Product_List extends Widget_Base
                 'default'       => [ 'publish', 'pending', 'future' ],
                 'options'       => $this->eael_get_product_statuses(),
                 'condition'     => [
-                    'eael_product_list_product_filter!' => 'manual'
+                    'eael_product_list_product_filter!' => 'manual',
+                    'post_type!' => 'source_archive'
                 ],
                 'separator'     => 'before',
             ]
@@ -498,7 +506,7 @@ class Woo_Product_List extends Widget_Base
             'multiple'      => true,
             'options'       => ClassesHelper::get_terms_list('product_cat', 'slug'),
             'condition'     => [
-              'post_type!'                          => 'source_dynamic',
+              'post_type!'                          => [ 'source_dynamic', 'source_archive' ],
               'eael_product_list_product_filter!'   => 'manual'
             ],
         ]);
@@ -511,7 +519,7 @@ class Woo_Product_List extends Widget_Base
             'source_name'   => 'post_type',
             'source_type'   => 'product',
             'condition'     => [
-                'post_type!'                        => 'source_dynamic',
+                'post_type!'                        => [ 'source_dynamic', 'source_archive' ],
                 'eael_product_list_product_filter'  => 'manual'
             ],
         ]);
@@ -526,6 +534,9 @@ class Woo_Product_List extends Widget_Base
                 'not-purchased' => __('Not Purchased Only', 'essential-addons-for-elementor-lite'),
             ],
             'default' => 'both',
+            'condition'     => [
+                'post_type!'                        => [ 'source_dynamic', 'source_archive' ],
+            ]
         ]);
 
         $this->end_controls_section();
@@ -3707,7 +3718,8 @@ class Woo_Product_List extends Widget_Base
 
         $settings           = $this->settings                   = $this->get_settings_for_display();
 		$woo_product_list   = $this->woo_product_list_settings  = self::get_woo_product_list_settings( $settings );
-        
+        $is_product_archive = is_product_tag() || is_product_category() || is_shop() || is_product_taxonomy();
+
         if ( 'source_dynamic' === $settings['post_type'] && is_archive() || ! empty( $_REQUEST['post_type'] ) ) {
 		    $settings['posts_per_page'] = ! empty( $settings['eael_woo_product_list_products_count'] )  ? intval( $settings['eael_woo_product_list_products_count'] ) : 4;
 		    $settings['offset']         = ! empty( $settings['product_offset'] )  ? intval( $settings['product_offset'] ) : 0;
@@ -3757,7 +3769,13 @@ class Woo_Product_List extends Widget_Base
                         
 
                         if ( file_exists( $template ) ) {
-                            $query  = new \WP_Query( $args );
+                            if( $settings['post_type'] === 'source_archive' && is_archive() && $is_product_archive ){
+                                global $wp_query;
+                                $query = $wp_query;
+                                $args  = $wp_query->query_vars;
+                            } else {
+                                $query = new \WP_Query( $args );
+                            }
                             
                             if ( $query->have_posts() ) {
                                 // Load more data
