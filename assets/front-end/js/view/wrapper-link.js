@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("var EaelWrapperLink = function EaelWrapperLink($scope, $) {\n  if ($scope.data(\"eael-wrapper-link\") !== undefined) {\n    var link_id = $scope.data(\"eael-wrapper-link\");\n    $('#' + link_id).appendTo($scope).css({\n      position: 'absolute',\n      height: '100%',\n      width: '100%',\n      zIndex: '9999',\n      top: 0,\n      left: 0\n    });\n  }\n};\njQuery(window).on('elementor/frontend/init', function () {\n  elementorFrontend.hooks.addAction('frontend/element_ready/global', EaelWrapperLink);\n});\n\n//# sourceURL=webpack:///./src/js/view/wrapper-link.js?");
+eval("var EaelWrapperLink = function EaelWrapperLink($scope, $) {\n  if ($scope.data(\"eael-wrapper-link\") !== undefined) {\n    var link_id = $scope.data(\"eael-wrapper-link\");\n    $('#' + link_id).appendTo($scope).css({\n      background: 'transparent',\n      border: 'none',\n      position: 'absolute',\n      height: '100%',\n      width: '100%',\n      zIndex: '9999',\n      top: 0,\n      left: 0\n    });\n  }\n};\njQuery(window).on('elementor/frontend/init', function () {\n  elementorFrontend.hooks.addAction('frontend/element_ready/global', EaelWrapperLink);\n});\n\n//# sourceURL=webpack:///./src/js/view/wrapper-link.js?");
 
 /***/ })
 
