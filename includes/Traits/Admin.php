@@ -97,6 +97,9 @@ trait Admin {
 				    'toaster_error_msg'    => __( 'Oops! Something went wrong. Please try again.', 'essential-addons-for-elementor-lite' ),
 				    'search_not_found'     => __( 'Sorry, no results found', 'essential-addons-for-elementor-lite' ),
 				    'enabling'             => __( 'Enabling...', 'essential-addons-for-elementor-lite' ),
+				    'total_elements'             => __( 'Total Elements', 'essential-addons-for-elementor-lite' ),
+				    'active'             => __( 'Active', 'essential-addons-for-elementor-lite' ),
+				    'inactive'             => __( 'Inactive', 'essential-addons-for-elementor-lite' ),
 			    ],
 			    'whats_new'               => [
 				    'heading' => __( "What's New In Essential Addons 6.0?", 'essential-addons-for-elementor-lite' ),

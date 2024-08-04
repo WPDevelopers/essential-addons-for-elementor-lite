@@ -19,17 +19,17 @@ function ElementStatistics() {
                 <div className="ea__elements-wrapper elements-1">
                     <i className="ea-elements ea-dash-icon"></i>
                     <h4>{statistics.activated + statistics.deactivated}</h4>
-                    <span>Total Elements</span>
+                    <span>{eaData.i18n.total_elements}</span>
                 </div>
                 <div className="ea__elements-wrapper elements-2">
                     <i className="ea-active ea-dash-icon"></i>
                     <h4>{statistics.activated}</h4>
-                    <span>Active</span>
+                    <span>{eaData.i18n.active}</span>
                 </div>
                 <div className="ea__elements-wrapper elements-3">
                     <i className="ea-incative ea-dash-icon"></i>
                     <h4>{statistics.deactivated}</h4>
-                    <span>Inactive</span>
+                    <span>{eaData.i18n.inactive}</span>
                 </div>
             </div>
         </>

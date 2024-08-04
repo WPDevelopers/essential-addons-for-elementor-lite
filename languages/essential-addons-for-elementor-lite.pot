@@ -169,7 +169,7 @@ msgstr ""
 msgid "Configuration"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:113, ../includes/Traits/Admin.php:93
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:113, ../includes/Traits/Admin.php:68
 msgid "Elements"
 msgstr ""
 
@@ -181,195 +181,195 @@ msgstr ""
 msgid "Templately"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:116, ../includes/Traits/Admin.php:105
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:116, ../includes/Traits/Admin.php:80
 msgid "Integrations"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:279, ../includes/Traits/Admin.php:243
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:279, ../includes/Traits/Admin.php:221
 msgid "BetterDocs"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:280, ../includes/Traits/Admin.php:244
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:280, ../includes/Traits/Admin.php:222
 msgid "Create and organize your knowledge base, FAQ & documentation page efficiently, making it easy for visitors to find any helpful article quickly and effortlessly."
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:288, ../includes/Traits/Admin.php:251
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:288, ../includes/Traits/Admin.php:229
 msgid "BetterLinks"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:289, ../includes/Traits/Admin.php:252
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:289, ../includes/Traits/Admin.php:230
 msgid "Link Shortening tool to create, shorten & manage any URL. It helps to cross promote brands & products and gather analytics reports while running marketing campaigns."
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:297, ../includes/Elements/Better_Payment.php:19, ../includes/Traits/Admin.php:259
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:297, ../includes/Elements/Better_Payment.php:19, ../includes/Traits/Admin.php:237
 msgid "Better Payment"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:298, ../includes/Traits/Admin.php:260
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:298, ../includes/Traits/Admin.php:238
 msgid "Streamline transactions in Elementor by integrating PayPal & Stripe. Experience advanced analytics, validation, and Elementor forms for secure & efficient payments."
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:306, ../includes/Traits/Admin.php:267
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:306, ../includes/Traits/Admin.php:245
 msgid "NotificationX"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:307, ../includes/Traits/Admin.php:268
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:307, ../includes/Traits/Admin.php:246
 msgid "Best FOMO & social proof plugin to boost sales conversion by creating stunning sales popups, growth & discount alerts, flashing tabs, notification bars & more."
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:315, ../includes/Traits/Admin.php:275
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:315, ../includes/Traits/Admin.php:253
 msgid "SchedulePress"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:316, ../includes/Traits/Admin.php:276
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:316, ../includes/Traits/Admin.php:254
 msgid "Advanced content marketing tool for WordPress to schedule posts & pages with Schedule Calendar, Auto & Manual Scheduler, etc. It also allows auto-social sharing."
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:324, ../includes/Traits/Admin.php:283
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:324, ../includes/Traits/Admin.php:261
 msgid "easy.jobs"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:325, ../includes/Traits/Admin.php:284
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:325, ../includes/Traits/Admin.php:262
 msgid "Job recruitment tool to attract, manage, and hire the right talent faster. This talent recruitment solution lets you manage jobs and career pages in Elementor."
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:333, ../includes/Elements/EmbedPress.php:19, ../includes/Traits/Admin.php:291
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:333, ../includes/Elements/EmbedPress.php:19, ../includes/Traits/Admin.php:269
 msgid "EmbedPress"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:334, ../includes/Traits/Admin.php:292
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:334, ../includes/Traits/Admin.php:270
 msgid "Embed videos, images, gifs, charts, docs, maps, audio, live streams, pdf & more from 150+ sources into your WordPress site and get seamless customization options."
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:342, ../includes/Traits/Admin.php:299, ../includes/Traits/Helper.php:620
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:342, ../includes/Traits/Admin.php:277, ../includes/Traits/Helper.php:620
 msgid "Essential Blocks"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:343, ../includes/Traits/Admin.php:300
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:343, ../includes/Traits/Admin.php:278
 msgid "Enhance Gutenberg experience with 50+ unique blocks (more coming soon). Boost your block editor with easy-to-use blocks for a simpler WordPress page or post design."
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:470, ../includes/Traits/Admin.php:684
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:470, ../includes/Traits/Admin.php:662
 msgid "Content Elements"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:474, ../includes/Elements/Creative_Button.php:32, ../includes/Traits/Admin.php:689
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:474, ../includes/Elements/Creative_Button.php:32, ../includes/Traits/Admin.php:667
 msgid "Creative Button"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:479, ../includes/Elements/Team_Member.php:26, ../includes/Traits/Admin.php:696
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:479, ../includes/Elements/Team_Member.php:26, ../includes/Traits/Admin.php:674
 msgid "Team Member"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:484, ../includes/Elements/Testimonial.php:24, ../includes/Traits/Admin.php:704
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:484, ../includes/Elements/Testimonial.php:24, ../includes/Traits/Admin.php:682
 msgid "Testimonial"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:489, ../includes/Elements/Flip_Box.php:33, ../includes/Traits/Admin.php:712
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:489, ../includes/Elements/Flip_Box.php:33, ../includes/Traits/Admin.php:690
 msgid "Flip Box"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:494, ../includes/Elements/Info_Box.php:30, ../includes/Traits/Admin.php:719
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:494, ../includes/Elements/Info_Box.php:30, ../includes/Traits/Admin.php:697
 msgid "Info Box"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:499, ../includes/Elements/Dual_Color_Header.php:29, ../includes/Traits/Admin.php:726
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:499, ../includes/Elements/Dual_Color_Header.php:29, ../includes/Traits/Admin.php:704
 msgid "Dual Color Heading"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:504, ../includes/Elements/Pricing_Table.php:1542, ../includes/Elements/Tooltip.php:26, ../includes/Traits/Admin.php:733
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:504, ../includes/Elements/Pricing_Table.php:1542, ../includes/Elements/Tooltip.php:26, ../includes/Traits/Admin.php:711
 msgid "Tooltip"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:509, ../includes/Elements/Adv_Accordion.php:31, ../includes/Traits/Admin.php:740
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:509, ../includes/Elements/Adv_Accordion.php:31, ../includes/Traits/Admin.php:718
 msgid "Advanced Accordion"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:514, ../includes/Elements/Adv_Tabs.php:31, ../includes/Traits/Admin.php:747
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:514, ../includes/Elements/Adv_Tabs.php:31, ../includes/Traits/Admin.php:725
 msgid "Advanced Tabs"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:519, ../includes/Elements/Feature_List.php:28, ../includes/Elements/Pricing_Table.php:1258, ../includes/Traits/Admin.php:755
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:519, ../includes/Elements/Feature_List.php:28, ../includes/Elements/Pricing_Table.php:1258, ../includes/Traits/Admin.php:733
 msgid "Feature List"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:525, ../includes/Elements/Sticky_Video.php:27, ../includes/Traits/Admin.php:814
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:525, ../includes/Elements/Sticky_Video.php:27, ../includes/Traits/Admin.php:792
 msgid "Sticky Video"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:530, ../includes/Elements/Event_Calendar.php:39, ../includes/Traits/Admin.php:821
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:530, ../includes/Elements/Event_Calendar.php:39, ../includes/Traits/Admin.php:799
 msgid "Event Calendar"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:535, ../includes/Elements/Simple_Menu.php:33, ../includes/Traits/Admin.php:829
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:535, ../includes/Elements/Simple_Menu.php:33, ../includes/Traits/Admin.php:807
 msgid "Simple Menu"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:541, ../includes/Traits/Admin.php:845
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:541, ../includes/Traits/Admin.php:823
 msgid "Dynamic Content Elements"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:545, ../includes/Elements/Post_Grid.php:33, ../includes/Traits/Admin.php:850
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:545, ../includes/Elements/Post_Grid.php:33, ../includes/Traits/Admin.php:828
 msgid "Post Grid"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:550, ../includes/Elements/Post_Timeline.php:31, ../includes/Traits/Admin.php:858
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:550, ../includes/Elements/Post_Timeline.php:31, ../includes/Traits/Admin.php:836
 msgid "Post Timeline"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:554, ../includes/Elements/Data_Table.php:32, ../includes/Traits/Admin.php:865
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:554, ../includes/Elements/Data_Table.php:32, ../includes/Traits/Admin.php:843
 msgid "Data Table"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:559, ../includes/Elements/Advanced_Data_Table.php:26, ../includes/Traits/Admin.php:872
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:559, ../includes/Elements/Advanced_Data_Table.php:26, ../includes/Traits/Admin.php:850
 msgid "Advanced Data Table"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:563, ../includes/Elements/Content_Ticker.php:30, ../includes/Traits/Admin.php:880
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:563, ../includes/Elements/Content_Ticker.php:30, ../includes/Traits/Admin.php:858
 msgid "Content Ticker"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:568, ../includes/Elements/NFT_Gallery.php:31, ../includes/Elements/NFT_Gallery.php:2397, ../includes/Elements/NFT_Gallery.php:2522, ../includes/Traits/Admin.php:941
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:568, ../includes/Elements/NFT_Gallery.php:31, ../includes/Elements/NFT_Gallery.php:2397, ../includes/Elements/NFT_Gallery.php:2522, ../includes/Traits/Admin.php:919
 msgid "NFT Gallery"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:573, ../includes/Elements/Business_Reviews.php:37, ../includes/Traits/Admin.php:949
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:573, ../includes/Elements/Business_Reviews.php:37, ../includes/Traits/Admin.php:927
 msgid "Business Reviews"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:578, ../includes/Traits/Admin.php:958
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:578, ../includes/Traits/Admin.php:936
 msgid "Creative Elements"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:582, ../includes/Elements/Countdown.php:27, ../includes/Traits/Admin.php:963
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:582, ../includes/Elements/Countdown.php:27, ../includes/Traits/Admin.php:941
 msgid "Countdown"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:587, ../includes/Elements/Fancy_Text.php:27, ../includes/Elements/Fancy_Text.php:70, ../includes/Traits/Admin.php:970
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:587, ../includes/Elements/Fancy_Text.php:27, ../includes/Elements/Fancy_Text.php:70, ../includes/Traits/Admin.php:948
 msgid "Fancy Text"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:592, ../includes/Elements/Filterable_Gallery.php:36, ../includes/Traits/Admin.php:977
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:592, ../includes/Elements/Filterable_Gallery.php:36, ../includes/Traits/Admin.php:955
 msgid "Filterable Gallery"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:597, ../includes/Elements/Image_Accordion.php:26, ../includes/Traits/Admin.php:985
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:597, ../includes/Elements/Image_Accordion.php:26, ../includes/Traits/Admin.php:963
 msgid "Image Accordion"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:602, ../includes/Elements/GravityForms.php:581, ../includes/Elements/GravityForms.php:647, ../includes/Elements/Progress_Bar.php:28, ../includes/Elements/Progress_Bar.php:127, ../includes/Elements/Progress_Bar.php:179, ../includes/Traits/Admin.php:992
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:602, ../includes/Elements/GravityForms.php:581, ../includes/Elements/GravityForms.php:647, ../includes/Elements/Progress_Bar.php:28, ../includes/Elements/Progress_Bar.php:127, ../includes/Elements/Progress_Bar.php:179, ../includes/Traits/Admin.php:970
 msgid "Progress Bar"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:607, ../includes/Elements/Interactive_Circle.php:26, ../includes/Traits/Admin.php:1101
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:607, ../includes/Elements/Interactive_Circle.php:26, ../includes/Traits/Admin.php:1079
 msgid "Interactive Circle"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:612, ../includes/Elements/SVG_Draw.php:24, ../includes/Traits/Admin.php:1109
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:612, ../includes/Elements/SVG_Draw.php:24, ../includes/Traits/Admin.php:1087
 msgid "SVG Draw"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:617, ../includes/Traits/Admin.php:1116, ../includes/Traits/Elements.php:347
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:617, ../includes/Traits/Admin.php:1094, ../includes/Traits/Elements.php:347
 msgid "Fancy Chart"
 msgstr ""
 
@@ -377,59 +377,59 @@ msgstr ""
 msgid "Marketing & Social Feed Elements"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:627, ../includes/Traits/Admin.php:1130
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:627, ../includes/Traits/Admin.php:1108
 msgid "Call To Action"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:632, ../includes/Elements/Pricing_Table.php:33, ../includes/Traits/Admin.php:1137
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:632, ../includes/Elements/Pricing_Table.php:33, ../includes/Traits/Admin.php:1115
 msgid "Pricing Table"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:637, ../includes/Traits/Admin.php:1255
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:637, ../includes/Traits/Admin.php:1233
 msgid "Twitter Feed"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:642, ../includes/Elements/Facebook_Feed.php:28, ../includes/Traits/Admin.php:1280
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:642, ../includes/Elements/Facebook_Feed.php:28, ../includes/Traits/Admin.php:1258
 msgid "Facebook Feed"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:649, ../includes/Traits/Admin.php:1154
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:649, ../includes/Traits/Admin.php:1132
 msgid "Form Styler Elements"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:653, ../includes/Elements/Contact_Form_7.php:43, ../includes/Traits/Admin.php:1159
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:653, ../includes/Elements/Contact_Form_7.php:43, ../includes/Traits/Admin.php:1137
 msgid "Contact Form 7"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:658, ../includes/Traits/Admin.php:1166
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:658, ../includes/Traits/Admin.php:1144
 msgid "weForms"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:662, ../includes/Traits/Admin.php:1173
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:662, ../includes/Traits/Admin.php:1151
 msgid "Ninja Form"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:666, ../includes/Traits/Admin.php:1180
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:666, ../includes/Traits/Admin.php:1158
 msgid "Gravity Form"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:670, ../includes/Elements/Caldera_Forms.php:96, ../includes/Traits/Admin.php:1188
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:670, ../includes/Elements/Caldera_Forms.php:96, ../includes/Traits/Admin.php:1166
 msgid "Caldera Form"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:674, ../includes/Elements/WpForms.php:27, ../includes/Elements/WpForms.php:87, ../includes/Traits/Admin.php:1195
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:674, ../includes/Elements/WpForms.php:27, ../includes/Elements/WpForms.php:87, ../includes/Traits/Admin.php:1173
 msgid "WPForms"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:678, ../includes/Elements/FluentForm.php:30, ../includes/Traits/Admin.php:1202
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:678, ../includes/Elements/FluentForm.php:30, ../includes/Traits/Admin.php:1180
 msgid "Fluent Forms"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:682, ../includes/Elements/Formstack.php:28, ../includes/Elements/Formstack.php:169, ../includes/Traits/Admin.php:1210
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:682, ../includes/Elements/Formstack.php:28, ../includes/Elements/Formstack.php:169, ../includes/Traits/Admin.php:1188
 msgid "Formstack"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:686, ../includes/Elements/TypeForm.php:24, ../includes/Elements/TypeForm.php:125, ../includes/Elements/TypeForm.php:131, ../includes/Traits/Admin.php:1217
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:686, ../includes/Elements/TypeForm.php:24, ../includes/Elements/TypeForm.php:125, ../includes/Elements/TypeForm.php:131, ../includes/Traits/Admin.php:1195
 msgid "Typeform"
 msgstr ""
 
@@ -437,55 +437,55 @@ msgstr ""
 msgid "Login Register Form"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:696, ../includes/Traits/Admin.php:1304
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:696, ../includes/Traits/Admin.php:1282
 msgid "Documentation Elements"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:700, ../includes/Elements/Betterdocs_Category_Grid.php:30, ../includes/Traits/Admin.php:1309
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:700, ../includes/Elements/Betterdocs_Category_Grid.php:30, ../includes/Traits/Admin.php:1287
 msgid "BetterDocs Category Grid"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:704, ../includes/Elements/Betterdocs_Category_Box.php:34, ../includes/Traits/Admin.php:1317
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:704, ../includes/Elements/Betterdocs_Category_Box.php:34, ../includes/Traits/Admin.php:1295
 msgid "BetterDocs Category Box"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:709, ../includes/Elements/Betterdocs_Search_Form.php:29, ../includes/Traits/Admin.php:1324
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:709, ../includes/Elements/Betterdocs_Search_Form.php:29, ../includes/Traits/Admin.php:1302
 msgid "BetterDocs Search Form"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:714, ../includes/Traits/Admin.php:1332
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:714, ../includes/Traits/Admin.php:1310
 msgid "WooCommerce Elements"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:718, ../includes/Elements/Product_Grid.php:61, ../includes/Traits/Admin.php:1337
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:718, ../includes/Elements/Product_Grid.php:61, ../includes/Traits/Admin.php:1315
 msgid "Woo Product Grid"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:723, ../includes/Elements/Woo_Product_List.php:50, ../includes/Traits/Admin.php:1345
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:723, ../includes/Elements/Woo_Product_List.php:50, ../includes/Traits/Admin.php:1323
 msgid "Woo Product List"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:728, ../includes/Elements/Woo_Product_Carousel.php:63, ../includes/Traits/Admin.php:1369
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:728, ../includes/Elements/Woo_Product_Carousel.php:63, ../includes/Traits/Admin.php:1347
 msgid "Woo Product Carousel"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:732, ../includes/Elements/Woo_Checkout.php:52, ../includes/Traits/Admin.php:1377
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:732, ../includes/Elements/Woo_Checkout.php:52, ../includes/Traits/Admin.php:1355
 msgid "Woo Checkout"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:736, ../includes/Controls/Select2.php:45, ../includes/Elements/Woo_Cart.php:67, ../includes/Traits/Admin.php:1385
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:736, ../includes/Controls/Select2.php:45, ../includes/Elements/Woo_Cart.php:67, ../includes/Traits/Admin.php:1363
 msgid "Woo Cart"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:740, ../includes/Traits/Admin.php:504, ../includes/Traits/Admin.php:1400, ../includes/Traits/Elements.php:335
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:740, ../includes/Traits/Admin.php:482, ../includes/Traits/Admin.php:1378, ../includes/Traits/Elements.php:335
 msgid "Woo Cross Sells"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:744, ../includes/Elements/Woo_Product_Compare.php:34, ../includes/Traits/Admin.php:1408
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:744, ../includes/Elements/Woo_Product_Compare.php:34, ../includes/Traits/Admin.php:1386
 msgid "Woo Product Compare"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:749, ../includes/Elements/Woo_Product_Gallery.php:49, ../includes/Traits/Admin.php:1415
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:749, ../includes/Elements/Woo_Product_Gallery.php:49, ../includes/Traits/Admin.php:1393
 msgid "Woo Product Gallery"
 msgstr ""
 
@@ -833,7 +833,7 @@ msgstr ""
 msgid "Accordion"
 msgstr ""
 
-#: ../includes/Elements/Adv_Accordion.php:117, ../includes/Elements/Business_Reviews.php:2145, ../includes/Elements/Login_Register.php:1621, ../includes/Elements/Login_Register.php:4346, ../includes/Elements/Woo_Product_Carousel.php:2703, ../includes/Traits/Admin.php:780, ../includes/Traits/Elements.php:299
+#: ../includes/Elements/Adv_Accordion.php:117, ../includes/Elements/Business_Reviews.php:2145, ../includes/Elements/Login_Register.php:1621, ../includes/Elements/Login_Register.php:4346, ../includes/Elements/Woo_Product_Carousel.php:2703, ../includes/Traits/Admin.php:758, ../includes/Traits/Elements.php:299
 msgid "Toggle"
 msgstr ""
 
@@ -1017,7 +1017,7 @@ msgstr ""
 msgid "Icon Color"
 msgstr ""
 
-#: ../includes/Elements/Adv_Accordion.php:785, ../includes/Elements/Adv_Accordion.php:1091, ../includes/Elements/Adv_Tabs.php:731, ../includes/Elements/Event_Calendar.php:1859, ../includes/Elements/Event_Calendar.php:2190, ../includes/Elements/Filterable_Gallery.php:1238, ../includes/Elements/Interactive_Circle.php:766, ../includes/Elements/Product_Grid.php:2657, ../includes/Elements/Simple_Menu.php:461, ../includes/Elements/Simple_Menu.php:1104, ../includes/Elements/Woo_Product_Carousel.php:2466, ../includes/Elements/Woo_Product_Gallery.php:1553, ../includes/Extensions/Table_of_Content.php:1080
+#: ../includes/Elements/Adv_Accordion.php:785, ../includes/Elements/Adv_Accordion.php:1091, ../includes/Elements/Adv_Tabs.php:731, ../includes/Elements/Event_Calendar.php:1859, ../includes/Elements/Event_Calendar.php:2190, ../includes/Elements/Filterable_Gallery.php:1238, ../includes/Elements/Interactive_Circle.php:766, ../includes/Elements/Product_Grid.php:2657, ../includes/Elements/Simple_Menu.php:461, ../includes/Elements/Simple_Menu.php:1104, ../includes/Elements/Woo_Product_Carousel.php:2466, ../includes/Elements/Woo_Product_Gallery.php:1553, ../includes/Extensions/Table_of_Content.php:1080, ../includes/Traits/Admin.php:101
 msgid "Active"
 msgstr ""
 
@@ -1129,7 +1129,7 @@ msgstr ""
 msgid "Tab Title 3"
 msgstr ""
 
-#: ../includes/Elements/Adv_Tabs.php:418, ../includes/Elements/Business_Reviews.php:92, ../includes/Elements/Event_Calendar.php:156, ../includes/Elements/Filterable_Gallery.php:1044, ../includes/Elements/Image_Accordion.php:61, ../includes/Elements/Image_Accordion.php:302, ../includes/Elements/Interactive_Circle.php:63, ../includes/Elements/Interactive_Circle.php:471, ../includes/Elements/Login_Register.php:314, ../includes/Elements/Login_Register.php:2545, ../includes/Elements/Progress_Bar.php:349, ../includes/Elements/Progress_Bar.php:618, ../includes/Elements/Simple_Menu.php:106, ../includes/Elements/SVG_Draw.php:73, ../includes/Elements/Woo_Cart.php:1224, ../includes/Elements/Woo_Product_List.php:245, ../includes/Elements/Woo_Product_List.php:654, ../includes/Traits/Admin.php:89
+#: ../includes/Elements/Adv_Tabs.php:418, ../includes/Elements/Business_Reviews.php:92, ../includes/Elements/Event_Calendar.php:156, ../includes/Elements/Filterable_Gallery.php:1044, ../includes/Elements/Image_Accordion.php:61, ../includes/Elements/Image_Accordion.php:302, ../includes/Elements/Interactive_Circle.php:63, ../includes/Elements/Interactive_Circle.php:471, ../includes/Elements/Login_Register.php:314, ../includes/Elements/Login_Register.php:2545, ../includes/Elements/Progress_Bar.php:349, ../includes/Elements/Progress_Bar.php:618, ../includes/Elements/Simple_Menu.php:106, ../includes/Elements/SVG_Draw.php:73, ../includes/Elements/Woo_Cart.php:1224, ../includes/Elements/Woo_Product_List.php:245, ../includes/Elements/Woo_Product_List.php:654, ../includes/Traits/Admin.php:64
 msgid "General"
 msgstr ""
 
@@ -3037,7 +3037,7 @@ msgstr ""
 msgid "Event Category"
 msgstr ""
 
-#: ../includes/Elements/Event_Calendar.php:485, ../includes/Traits/Admin.php:73
+#: ../includes/Elements/Event_Calendar.php:485
 msgid "Language"
 msgstr ""
 
@@ -4857,7 +4857,7 @@ msgstr ""
 msgid "Desktop view for mobile"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:165, ../includes/Traits/Admin.php:1240
+#: ../includes/Elements/Login_Register.php:165, ../includes/Traits/Admin.php:1218
 msgid "Login | Register Form"
 msgstr ""
 
@@ -5545,7 +5545,7 @@ msgstr ""
 msgid "Eg. Something went wrong"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:1821, ../includes/Traits/Admin.php:69, ../includes/Traits/Login_Registration.php:185
+#: ../includes/Elements/Login_Register.php:1821, ../includes/Traits/Login_Registration.php:185
 msgid "Something went wrong!"
 msgstr ""
 
@@ -7312,7 +7312,7 @@ msgstr ""
 msgid "Inner Title Color"
 msgstr ""
 
-#: ../includes/Elements/Progress_Bar.php:844, ../includes/Traits/Admin.php:1007, ../includes/Traits/Elements.php:149
+#: ../includes/Elements/Progress_Bar.php:844, ../includes/Traits/Admin.php:985, ../includes/Traits/Elements.php:149
 msgid "Counter"
 msgstr ""
 
@@ -9065,7 +9065,7 @@ msgstr ""
 msgid "<strong>WPForms</strong> is not installed/activated on your site. Please install and activate <strong>WPForms</strong> first."
 msgstr ""
 
-#: ../includes/Extensions/Custom_JS.php:22, ../includes/Traits/Admin.php:353, ../includes/Traits/Admin.php:429, ../includes/Traits/Admin.php:614
+#: ../includes/Extensions/Custom_JS.php:22, ../includes/Traits/Admin.php:331, ../includes/Traits/Admin.php:407, ../includes/Traits/Admin.php:592
 msgid "Custom JS"
 msgstr ""
 
@@ -9361,7 +9361,7 @@ msgstr ""
 msgid "All %s"
 msgstr ""
 
-#: ../includes/Extensions/Table_of_Content.php:127, ../includes/Traits/Admin.php:596
+#: ../includes/Extensions/Table_of_Content.php:127, ../includes/Traits/Admin.php:574
 msgid "Table of Contents"
 msgstr ""
 
@@ -9509,759 +9509,731 @@ msgstr ""
 msgid "Essential Addons %s"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:62
-msgid "Login | Register Form Settings"
-msgstr ""
-
-#: ../includes/Traits/Admin.php:63, ../includes/Traits/Admin.php:1455, ../includes/Traits/Admin.php:1467, ../includes/Traits/Admin.php:1598
-msgid "To configure the API Keys, check out this doc"
-msgstr ""
-
-#: ../includes/Traits/Admin.php:63
-msgid "To retrieve your API Keys, click here"
-msgstr ""
-
-#: ../includes/Traits/Admin.php:64
-msgid "Save"
-msgstr ""
-
-#: ../includes/Traits/Admin.php:65
-msgid "Cancel"
-msgstr ""
-
-#: ../includes/Traits/Admin.php:66
-msgid "Login | Register Form Settings Saved"
-msgstr ""
-
-#: ../includes/Traits/Admin.php:67
-msgid "Reload the page to see updated data"
-msgstr ""
-
-#: ../includes/Traits/Admin.php:68
-msgid "Oops..."
-msgstr ""
-
-#: ../includes/Traits/Admin.php:70, ../includes/Traits/Admin.php:1474
-msgid "reCAPTCHA v2"
-msgstr ""
-
-#: ../includes/Traits/Admin.php:71, ../includes/Traits/Admin.php:1481, ../includes/Traits/Admin.php:1505
-msgid "Site Key"
-msgstr ""
-
-#: ../includes/Traits/Admin.php:72, ../includes/Traits/Admin.php:1487, ../includes/Traits/Admin.php:1511
-msgid "Site Secret"
-msgstr ""
-
-#: ../includes/Traits/Admin.php:74, ../includes/Traits/Admin.php:1493, ../includes/Traits/Admin.php:1517
-msgid "reCAPTCHA Language Code"
-msgstr ""
-
-#: ../includes/Traits/Admin.php:75, ../includes/Traits/Admin.php:1529
-msgid "Google Login"
-msgstr ""
-
-#: ../includes/Traits/Admin.php:76, ../includes/Traits/Admin.php:1536
-msgid "Google Client ID"
-msgstr ""
-
-#: ../includes/Traits/Admin.php:77, ../includes/Traits/Admin.php:1542
-msgid "Facebook Login"
-msgstr ""
-
-#: ../includes/Traits/Admin.php:78
-msgid "Facebook APP ID"
-msgstr ""
-
-#: ../includes/Traits/Admin.php:79
-msgid "Facebook APP Secret"
-msgstr ""
-
-#: ../includes/Traits/Admin.php:97, ../includes/Traits/Admin.php:550
+#: ../includes/Traits/Admin.php:72, ../includes/Traits/Admin.php:528
 msgid "Extensions"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:101
+#: ../includes/Traits/Admin.php:76
 msgid "Tools"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:109
+#: ../includes/Traits/Admin.php:84
 msgid "Go Premium"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:114
+#: ../includes/Traits/Admin.php:89
 msgid "Enable All"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:115
+#: ../includes/Traits/Admin.php:90
 msgid "Disable All"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:116
+#: ../includes/Traits/Admin.php:91
 msgid "Enable All Elements"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:117
+#: ../includes/Traits/Admin.php:92
 msgid "Disable All Elements"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:118
+#: ../includes/Traits/Admin.php:93
 msgid "Save Settings"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:119
+#: ../includes/Traits/Admin.php:94
 msgid "Search Results for :"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:120
+#: ../includes/Traits/Admin.php:95
 msgid "All Widgets"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:121
+#: ../includes/Traits/Admin.php:96
 msgid "Your changes have been saved successfully."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:122
+#: ../includes/Traits/Admin.php:97
 msgid "Oops! Something went wrong. Please try again."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:123
+#: ../includes/Traits/Admin.php:98
 msgid "Sorry, no results found"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:124
+#: ../includes/Traits/Admin.php:99
 msgid "Enabling..."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:127
+#: ../includes/Traits/Admin.php:100
+msgid "Total Elements"
+msgstr ""
+
+#: ../includes/Traits/Admin.php:102
+msgid "Inactive"
+msgstr ""
+
+#: ../includes/Traits/Admin.php:105
 msgid "What's New In Essential Addons 6.0?"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:131
+#: ../includes/Traits/Admin.php:109
 msgid "Dynamic Tags, Hover Interactions, Interactive Animation"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:135
+#: ../includes/Traits/Admin.php:113
 msgid "Dynamic Widgets, Conditional Display"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:139
+#: ../includes/Traits/Admin.php:117
 msgid "Elevate your Workflow with the New Essential Addons Dashboard!"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:143
+#: ../includes/Traits/Admin.php:121
 msgid "View Changelog"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:148
+#: ../includes/Traits/Admin.php:126
 msgid "Unlock 5000+ Ready Templates"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:150
+#: ../includes/Traits/Admin.php:128
 msgid "Stunning Templates For All"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:151
+#: ../includes/Traits/Admin.php:129
 msgid "One-Click Full Site Import"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:152
+#: ../includes/Traits/Admin.php:130
 msgid "Collaborate in Team WorkSpace"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:153
+#: ../includes/Traits/Admin.php:131
 msgid "Unlimited Cloud Storage"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:156
+#: ../includes/Traits/Admin.php:134
 msgid "Enable Templates"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:160
+#: ../includes/Traits/Admin.php:138
 msgid "Design Your Website With Most Popular Elementor Addons"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:161
+#: ../includes/Traits/Admin.php:139
 msgid "Learn to build stunning websites with 100+ elements & extensions of Essential Addons through our easy tutorials and enhance your Elementor site-building experience."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:164
+#: ../includes/Traits/Admin.php:142
 msgid "Watch Tutorials"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:170
+#: ../includes/Traits/Admin.php:148
 msgid "Need Any Help?"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:171
+#: ../includes/Traits/Admin.php:149
 msgid "If you encounter issues or need assistance, we're here to help or report specific problems on <a href='https://github.com/WPDevelopers/essential-addons-for-elementor-lite/issues' target='_blank'>GitHub issues page.</a>"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:173
+#: ../includes/Traits/Admin.php:151
 msgid "Create a Ticket"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:180
+#: ../includes/Traits/Admin.php:158
 msgid "Join Our Community"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:181
+#: ../includes/Traits/Admin.php:159
 msgid "Join the Facebook community to discuss with fellow developers, connect with others, and stay updated."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:183
+#: ../includes/Traits/Admin.php:161
 msgid "Join with us"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:190
+#: ../includes/Traits/Admin.php:168
 msgid "View Knowledge Base"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:191
+#: ../includes/Traits/Admin.php:169
 msgid "Read comprehensive documentation & learn to build a website easily with Essential Addons."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:193
+#: ../includes/Traits/Admin.php:171
 msgid "Read Documentation"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:200
+#: ../includes/Traits/Admin.php:178
 msgid "Show Your Love"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:201
+#: ../includes/Traits/Admin.php:179
 msgid "We love having you in our Essential Addons family every day. Please take 2 minutes to review us and show some love."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:203
+#: ../includes/Traits/Admin.php:181
 msgid "Leave a Review"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:210
+#: ../includes/Traits/Admin.php:188
 msgid "Continuous Features & Security Updates"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:211
+#: ../includes/Traits/Admin.php:189
 msgid "Keep your website secure and up-to-date with regular security updates. Enjoy the convenience of continuous updates with exciting new features."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:216
+#: ../includes/Traits/Admin.php:194
 msgid "Priority Support"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:217
+#: ../includes/Traits/Admin.php:195
 msgid "Are you encountering issues? Do not worry! Our expert support team is available 24/7 through live chat or support tickets. Our team will reach out to you within 12-24 hours."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:223
+#: ../includes/Traits/Admin.php:201
 msgid "Want Advanced Features?"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:224
+#: ../includes/Traits/Admin.php:202
 msgid "Get more powerful widgets & extensions to elevate your Elementor website"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:226, ../includes/Traits/Admin.php:394
+#: ../includes/Traits/Admin.php:204, ../includes/Traits/Admin.php:372
 msgid "3300+"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:227, ../includes/Traits/Admin.php:395
+#: ../includes/Traits/Admin.php:205, ../includes/Traits/Admin.php:373
 msgid "Five Star Reviews"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:230, ../includes/Traits/Admin.php:1616
+#: ../includes/Traits/Admin.php:208, ../includes/Traits/Admin.php:1594
 msgid "Upgrade to PRO"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:236, ../includes/Traits/Admin.php:1827, ../includes/Traits/Admin.php:1962, ../includes/Traits/Helper.php:615
+#: ../includes/Traits/Admin.php:214, ../includes/Traits/Admin.php:1802, ../includes/Traits/Admin.php:1937, ../includes/Traits/Helper.php:615
 msgid "Activate"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:237
+#: ../includes/Traits/Admin.php:215
 msgid "Deactivate"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:308, ../includes/Traits/Admin.php:434, ../includes/Traits/Admin.php:1024, ../includes/Traits/Elements.php:275
+#: ../includes/Traits/Admin.php:286, ../includes/Traits/Admin.php:412, ../includes/Traits/Admin.php:1002, ../includes/Traits/Elements.php:275
 msgid "Protected Content"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:309
+#: ../includes/Traits/Admin.php:287
 msgid "Restrict important data by setting up user permission or giving passwords to a particular area."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:311, ../includes/Traits/Admin.php:320, ../includes/Traits/Admin.php:329, ../includes/Traits/Admin.php:338, ../includes/Traits/Admin.php:347, ../includes/Traits/Admin.php:356, ../includes/Traits/Admin.php:365, ../includes/Traits/Admin.php:374, ../includes/Traits/Admin.php:383
+#: ../includes/Traits/Admin.php:289, ../includes/Traits/Admin.php:298, ../includes/Traits/Admin.php:307, ../includes/Traits/Admin.php:316, ../includes/Traits/Admin.php:325, ../includes/Traits/Admin.php:334, ../includes/Traits/Admin.php:343, ../includes/Traits/Admin.php:352, ../includes/Traits/Admin.php:361
 msgid "View Demo"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:317, ../includes/Traits/Admin.php:419, ../includes/Traits/Admin.php:915, ../includes/Traits/Elements.php:263
+#: ../includes/Traits/Admin.php:295, ../includes/Traits/Admin.php:397, ../includes/Traits/Admin.php:893, ../includes/Traits/Elements.php:263
 msgid "Smart Post List"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:318
+#: ../includes/Traits/Admin.php:296
 msgid "Display your blog posts in an amazing grid layout with advanced search & filter options."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:326, ../includes/Traits/Admin.php:454, ../includes/Traits/Admin.php:1360, ../includes/Traits/Elements.php:317
+#: ../includes/Traits/Admin.php:304, ../includes/Traits/Admin.php:432, ../includes/Traits/Admin.php:1338, ../includes/Traits/Elements.php:317
 msgid "Woo Product Slider"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:327
+#: ../includes/Traits/Admin.php:305
 msgid "Showcase your WooCommerce products beautifully with amazing ready slider layouts."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:335, ../includes/Traits/Admin.php:464, ../includes/Traits/Admin.php:906, ../includes/Traits/Elements.php:257
+#: ../includes/Traits/Admin.php:313, ../includes/Traits/Admin.php:442, ../includes/Traits/Admin.php:884, ../includes/Traits/Elements.php:257
 msgid "Post Carousel"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:336
+#: ../includes/Traits/Admin.php:314
 msgid "Amaze site visitors by displaying your posts creatively. Add transition effects, overlays, & more to showcase your posts beautifully on your site."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:344, ../includes/Traits/Admin.php:449, ../includes/Traits/Admin.php:1271, ../includes/Traits/Elements.php:197
+#: ../includes/Traits/Admin.php:322, ../includes/Traits/Admin.php:427, ../includes/Traits/Admin.php:1249, ../includes/Traits/Elements.php:197
 msgid "Instagram Feed"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:345
+#: ../includes/Traits/Admin.php:323
 msgid "Allows you to display a beautiful & responsive feed of your latest Instagram posts with customizable options and stunning layouts."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:354
+#: ../includes/Traits/Admin.php:332
 msgid "Add custom JavaScript to your WordPress site effortlessly with advanced customization and functionality without modifying core files."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:362, ../includes/Traits/Admin.php:444
+#: ../includes/Traits/Admin.php:340, ../includes/Traits/Admin.php:422
 msgid "MailChimp"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:363
+#: ../includes/Traits/Admin.php:341
 msgid "Helps you easily connect your site with MailChimp. You can create and manage subscription forms directly on your website."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:371, ../includes/Traits/Admin.php:439, ../includes/Traits/Admin.php:887
+#: ../includes/Traits/Admin.php:349, ../includes/Traits/Admin.php:417, ../includes/Traits/Admin.php:865
 msgid "Advanced Google Map"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:372
+#: ../includes/Traits/Admin.php:350
 msgid "Integrates Google Maps to display locations, routes, and markers easily on your site as your preferences."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:380, ../includes/Traits/Admin.php:424, ../includes/Traits/Admin.php:932, ../includes/Traits/Elements.php:161
+#: ../includes/Traits/Admin.php:358, ../includes/Traits/Admin.php:402, ../includes/Traits/Admin.php:910, ../includes/Traits/Elements.php:161
 msgid "Dynamic Gallery"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:381
+#: ../includes/Traits/Admin.php:359
 msgid "Showcase posts, Woo Products and more images in a captivating and interactive gallery format to highlight visual content dynamically."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:391
+#: ../includes/Traits/Admin.php:369
 msgid "2+ Million Active Users"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:392
+#: ../includes/Traits/Admin.php:370
 msgid "Enhance Your Elementor Experience By <br/> <b>Unlocking</b> <span class='Advance-color'>40+ Advanced PRO</span> <b>Elements</b>"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:398
+#: ../includes/Traits/Admin.php:376
 msgid "Upgrade To PRO"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:404
+#: ../includes/Traits/Admin.php:382
 msgid "Get Access to Advanced Features!"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:405
+#: ../includes/Traits/Admin.php:383
 msgid "Discover the premium features of the most popular elements library for Elementor. Experience the web building experience with:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:407, ../includes/Traits/Admin.php:1611
+#: ../includes/Traits/Admin.php:385, ../includes/Traits/Admin.php:1589
 msgid "Customization Flexibility in Design with Premium Creative Elements."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:408, ../includes/Traits/Admin.php:1612
+#: ../includes/Traits/Admin.php:386, ../includes/Traits/Admin.php:1590
 msgid "Advanced WooCommerce Widgets like Checkout, Cross-Sells & more."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:409, ../includes/Traits/Admin.php:1613
+#: ../includes/Traits/Admin.php:387, ../includes/Traits/Admin.php:1591
 msgid "Cutting-edge Extensions Like Custom JS, Content Protection & more."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:413
+#: ../includes/Traits/Admin.php:391
 msgid "More Premium Features"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:459, ../includes/Traits/Admin.php:554
+#: ../includes/Traits/Admin.php:437, ../includes/Traits/Admin.php:532
 msgid "Parallax"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:469, ../includes/Traits/Admin.php:1294, ../includes/Traits/Elements.php:215
+#: ../includes/Traits/Admin.php:447, ../includes/Traits/Admin.php:1272, ../includes/Traits/Elements.php:215
 msgid "LearnDash Course List"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:474
+#: ../includes/Traits/Admin.php:452
 msgid "Particle Effect"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:479, ../includes/Traits/Admin.php:1051, ../includes/Traits/Elements.php:227
+#: ../includes/Traits/Admin.php:457, ../includes/Traits/Admin.php:1029, ../includes/Traits/Elements.php:227
 msgid "Logo Carousel"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:484, ../includes/Traits/Admin.php:1076, ../includes/Traits/Elements.php:185
+#: ../includes/Traits/Admin.php:462, ../includes/Traits/Admin.php:1054, ../includes/Traits/Elements.php:185
 msgid "Image Hotspots"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:489, ../includes/Traits/Admin.php:639
+#: ../includes/Traits/Admin.php:467, ../includes/Traits/Admin.php:617
 msgid "Conditional Display"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:494, ../includes/Traits/Admin.php:836, ../includes/Traits/Elements.php:323
+#: ../includes/Traits/Admin.php:472, ../includes/Traits/Admin.php:814, ../includes/Traits/Elements.php:323
 msgid "Advanced Search"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:499, ../includes/Traits/Admin.php:805, ../includes/Traits/Elements.php:287
+#: ../includes/Traits/Admin.php:477, ../includes/Traits/Admin.php:783, ../includes/Traits/Elements.php:287
 msgid "Team Member Carousel"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:509, ../includes/Traits/Admin.php:1423, ../includes/Traits/Elements.php:341
+#: ../includes/Traits/Admin.php:487, ../includes/Traits/Admin.php:1401, ../includes/Traits/Elements.php:341
 msgid "Woo Account Dashboard"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:514
+#: ../includes/Traits/Admin.php:492
 msgid "Lightbox And Modal"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:522, ../includes/Traits/Admin.php:526
+#: ../includes/Traits/Admin.php:500, ../includes/Traits/Admin.php:504
 msgid "Regenerate Assets"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:523
+#: ../includes/Traits/Admin.php:501
 msgid "Essential Addons styles & scripts are saved in Uploads folder. This option will clear all those generated files."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:530
+#: ../includes/Traits/Admin.php:508
 msgid "Assets Embed Method"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:531
+#: ../includes/Traits/Admin.php:509
 msgid "Configure the Essential Addons assets embed method. Keep it as default (recommended)."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:534
+#: ../includes/Traits/Admin.php:512
 msgid "CSS Print Method"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:539
+#: ../includes/Traits/Admin.php:517
 msgid "JS Print Method"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:540
+#: ../includes/Traits/Admin.php:518
 msgid "CSS Print Method is handled by Elementor Settings itself. Use External CSS Files for better performance (recommended)."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:542
+#: ../includes/Traits/Admin.php:520
 msgid "External file"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:543
+#: ../includes/Traits/Admin.php:521
 msgid "Internal Embedding"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:563
+#: ../includes/Traits/Admin.php:541
 msgid "Particles"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:571
+#: ../includes/Traits/Admin.php:549
 msgid "Advanced Tooltip"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:579
+#: ../includes/Traits/Admin.php:557
 msgid "Content Protection"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:588
+#: ../includes/Traits/Admin.php:566
 msgid "Reading Progress Bar"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:605
+#: ../includes/Traits/Admin.php:583
 msgid "Duplicator"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:623
+#: ../includes/Traits/Admin.php:601
 msgid "Cross-Domain Copy Paste"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:631
+#: ../includes/Traits/Admin.php:609
 msgid "Scroll to Top"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:648
+#: ../includes/Traits/Admin.php:626
 msgid "Wrapper Link"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:656
+#: ../includes/Traits/Admin.php:634
 msgid "Dynamic Tags"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:665
+#: ../includes/Traits/Admin.php:643
 msgid "Interactive Animations"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:674
+#: ../includes/Traits/Admin.php:652
 msgid "Hover Interactions"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:763, ../includes/Traits/Elements.php:239
+#: ../includes/Traits/Admin.php:741, ../includes/Traits/Elements.php:239
 msgid "Offcanvas"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:772, ../includes/Traits/Elements.php:137
+#: ../includes/Traits/Admin.php:750, ../includes/Traits/Elements.php:137
 msgid "Advanced Menu"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:788, ../includes/Traits/Elements.php:293
+#: ../includes/Traits/Admin.php:766, ../includes/Traits/Elements.php:293
 msgid "Testimonial Slider"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:797, ../includes/Traits/Elements.php:281
+#: ../includes/Traits/Admin.php:775, ../includes/Traits/Elements.php:281
 msgid "Static Product"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:897, ../includes/Traits/Elements.php:251
+#: ../includes/Traits/Admin.php:875, ../includes/Traits/Elements.php:251
 msgid "Post Block"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:924, ../includes/Traits/Elements.php:143
+#: ../includes/Traits/Admin.php:902, ../includes/Traits/Elements.php:143
 msgid "Content Timeline"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:999, ../includes/Traits/Elements.php:209
+#: ../includes/Traits/Admin.php:977, ../includes/Traits/Elements.php:209
 msgid "Interactive Promo"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1015, ../includes/Traits/Elements.php:221
+#: ../includes/Traits/Admin.php:993, ../includes/Traits/Elements.php:221
 msgid "Lightbox & Modal"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1033, ../includes/Traits/Elements.php:179
+#: ../includes/Traits/Admin.php:1011, ../includes/Traits/Elements.php:179
 msgid "Image Comparison"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1042, ../includes/Traits/Elements.php:167
+#: ../includes/Traits/Admin.php:1020, ../includes/Traits/Elements.php:167
 msgid "Flip Carousel"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1060
+#: ../includes/Traits/Admin.php:1038
 msgid "Interactive Cards"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1068, ../includes/Traits/Elements.php:245
+#: ../includes/Traits/Admin.php:1046, ../includes/Traits/Elements.php:245
 msgid "One Page Navigation"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1085, ../includes/Traits/Elements.php:155
+#: ../includes/Traits/Admin.php:1063, ../includes/Traits/Elements.php:155
 msgid "Divider"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1093, ../includes/Traits/Elements.php:191
+#: ../includes/Traits/Admin.php:1071, ../includes/Traits/Elements.php:191
 msgid "Image Scroller"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1125
+#: ../includes/Traits/Admin.php:1103
 msgid "Marketing Elements"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1145, ../includes/Traits/Elements.php:269
+#: ../includes/Traits/Admin.php:1123, ../includes/Traits/Elements.php:269
 msgid "Price Menu"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1230, ../includes/Traits/Elements.php:233
+#: ../includes/Traits/Admin.php:1208, ../includes/Traits/Elements.php:233
 msgid "Mailchimp"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1250
+#: ../includes/Traits/Admin.php:1228
 msgid "Social Feed Elements"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1263
+#: ../includes/Traits/Admin.php:1241
 msgid "Twitter Feed Carousel"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1289
+#: ../includes/Traits/Admin.php:1267
 msgid "LearnDash Elements"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1352, ../includes/Traits/Elements.php:311
+#: ../includes/Traits/Admin.php:1330, ../includes/Traits/Elements.php:311
 msgid "Woo Product Collections"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1392, ../includes/Traits/Elements.php:329
+#: ../includes/Traits/Admin.php:1370, ../includes/Traits/Elements.php:329
 msgid "Woo Thank You"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1434
+#: ../includes/Traits/Admin.php:1412
 msgid "Select Post Types"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1440
+#: ../includes/Traits/Admin.php:1418
 msgid "Google Map API Key"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1442, ../includes/Traits/Admin.php:1450, ../includes/Traits/Admin.php:1462
+#: ../includes/Traits/Admin.php:1420, ../includes/Traits/Admin.php:1428, ../includes/Traits/Admin.php:1440
 msgid "Set API Key"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1448
+#: ../includes/Traits/Admin.php:1426
 msgid "Google Place API Key"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1460
+#: ../includes/Traits/Admin.php:1433, ../includes/Traits/Admin.php:1445, ../includes/Traits/Admin.php:1576
+msgid "To configure the API Keys, check out this doc"
+msgstr ""
+
+#: ../includes/Traits/Admin.php:1438
 msgid "MailChimp API Key"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1480, ../includes/Traits/Admin.php:1504
+#: ../includes/Traits/Admin.php:1452
+msgid "reCAPTCHA v2"
+msgstr ""
+
+#: ../includes/Traits/Admin.php:1458, ../includes/Traits/Admin.php:1482
 msgid "Site Key:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1486, ../includes/Traits/Admin.php:1510
+#: ../includes/Traits/Admin.php:1459, ../includes/Traits/Admin.php:1483
+msgid "Site Key"
+msgstr ""
+
+#: ../includes/Traits/Admin.php:1464, ../includes/Traits/Admin.php:1488
 msgid "Site Secret:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1492, ../includes/Traits/Admin.php:1516
+#: ../includes/Traits/Admin.php:1465, ../includes/Traits/Admin.php:1489
+msgid "Site Secret"
+msgstr ""
+
+#: ../includes/Traits/Admin.php:1470, ../includes/Traits/Admin.php:1494
 msgid "Language:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1498
+#: ../includes/Traits/Admin.php:1471, ../includes/Traits/Admin.php:1495
+msgid "reCAPTCHA Language Code"
+msgstr ""
+
+#: ../includes/Traits/Admin.php:1476
 msgid "reCAPTCHA v3"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1522
+#: ../includes/Traits/Admin.php:1500
 msgid "Hide Badge"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1524
+#: ../includes/Traits/Admin.php:1502
 msgid "We are allowed to hide the badge as long as we include the reCAPTCHA branding visibly in the user flow."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1535
+#: ../includes/Traits/Admin.php:1507
+msgid "Google Login"
+msgstr ""
+
+#: ../includes/Traits/Admin.php:1513
 msgid "Google Client ID:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1548
+#: ../includes/Traits/Admin.php:1514
+msgid "Google Client ID"
+msgstr ""
+
+#: ../includes/Traits/Admin.php:1520
+msgid "Facebook Login"
+msgstr ""
+
+#: ../includes/Traits/Admin.php:1526
 msgid "Facebook App ID:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1549
+#: ../includes/Traits/Admin.php:1527
 msgid "Facebook App ID"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1554
+#: ../includes/Traits/Admin.php:1532
 msgid "Facebook App Secret:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1555
+#: ../includes/Traits/Admin.php:1533
 msgid "Facebook App Secret"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1561
+#: ../includes/Traits/Admin.php:1539
 msgid "Mailchimp Integration"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1567
+#: ../includes/Traits/Admin.php:1545
 msgid "Mailchimp API Key:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1568
+#: ../includes/Traits/Admin.php:1546
 msgid "Mailchimp API"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1574
+#: ../includes/Traits/Admin.php:1552
 msgid "Enable Custom Fields"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1576
+#: ../includes/Traits/Admin.php:1554
 msgid "Fields will be available on both the edit profile page and the EA Login | Register Form."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1581
+#: ../includes/Traits/Admin.php:1559
 msgid "Text Type Fields:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1582, ../includes/Traits/Admin.php:1588
+#: ../includes/Traits/Admin.php:1560, ../includes/Traits/Admin.php:1566
 msgid "Field 1, Field 2 ..."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1587
+#: ../includes/Traits/Admin.php:1565
 msgid "File Type Fields:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1605
+#: ../includes/Traits/Admin.php:1583
 msgid "<p> <i>📣</i> <b>NEW:</b> Introducing EA 6.0 with revamped '<b>Dashboard</b>', '<a target='_blank' href='%s'>Interactive Animations</a>', '<a target='_blank' href='%s'>Hover Interactions</a>', '<a target='_blank' href='%s'>Dynamic Tags</a>' & more! Check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1608
+#: ../includes/Traits/Admin.php:1586
 msgid "Unlock the PRO Features"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1609
+#: ../includes/Traits/Admin.php:1587
 msgid "Upgrade to Essential Addons PRO and gain access to advanced elements and functionalities to build websites more efficiently"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1700
+#: ../includes/Traits/Admin.php:1675
 msgid "We hope you're enjoying Essential Addons for Elementor! Could you please do us a BIG favor and give it a 5-star rating on WordPress to help us spread the word and boost our motivation?"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1708
+#: ../includes/Traits/Admin.php:1683
 msgid "Ok, you deserve it!"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1712
+#: ../includes/Traits/Admin.php:1687
 msgid "I already did"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1719
+#: ../includes/Traits/Admin.php:1694
 msgid "Maybe Later"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1727
+#: ../includes/Traits/Admin.php:1702
 msgid "I need help"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1731
+#: ../includes/Traits/Admin.php:1706
 msgid "Never show again"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1827, ../includes/Traits/Admin.php:1962
+#: ../includes/Traits/Admin.php:1802, ../includes/Traits/Admin.php:1937
 msgid "Install Essential Blocks"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1836, ../includes/Traits/Admin.php:2016
+#: ../includes/Traits/Admin.php:1811, ../includes/Traits/Admin.php:1991
 msgid "Using Gutenberg? Check out Essential Blocks!"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1837, ../includes/Traits/Admin.php:2017
+#: ../includes/Traits/Admin.php:1812, ../includes/Traits/Admin.php:1992
 msgid "Are you using the Gutenberg Editor for your website? Then try out Essential Blocks for Gutenberg, and explore 40+ unique blocks to make your web design experience in WordPress even more powerful. 🚀"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1838, ../includes/Traits/Admin.php:2018
+#: ../includes/Traits/Admin.php:1813, ../includes/Traits/Admin.php:1993
 msgid "For more information, <a href=\"https://essential-blocks.com/demo/\" target=\"_blank\">check out the demo here</a>."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:2137, ../includes/Traits/Admin.php:2148
+#: ../includes/Traits/Admin.php:2112, ../includes/Traits/Admin.php:2123
 msgid "You are not allowed to do this action"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:2207
+#: ../includes/Traits/Admin.php:2182
 msgid "Join us in celebrating <strong>2 MILLION+</strong> happy users and grab up to an exclusive 30% OFF on the most used Elementor addons!"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:2209
+#: ../includes/Traits/Admin.php:2184
 msgid "Upgrade To PRO Now"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:2211
+#: ../includes/Traits/Admin.php:2186
 msgid "Give Me LIFETIME access"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:2213
+#: ../includes/Traits/Admin.php:2188
 msgid "I don’t want to save money"
 msgstr ""
 
