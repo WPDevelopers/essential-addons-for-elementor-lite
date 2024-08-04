@@ -55,31 +55,6 @@ trait Admin {
 		    wp_enqueue_script( 'eael-admin-dashboard', EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.js', array(), EAEL_PLUGIN_VERSION, true );
 		    add_filter( 'wp_script_attributes', [ $this, 'add_type_attribute' ] );
 
-		    //Internationalizing JS string translation
-		    $i18n = [
-			    'login_register' => [
-				    //m=modal, rm=response modal, r=reCAPTCHA, g= google, f=facebook, e=error
-				    'm_title'       => __( 'Login | Register Form Settings', 'essential-addons-for-elementor-lite' ),
-				    'm_footer'      => $this->pro_enabled ? __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ) : __( 'To retrieve your API Keys, click here', 'essential-addons-for-elementor-lite' ),
-				    'save'          => __( 'Save', 'essential-addons-for-elementor-lite' ),
-				    'cancel'        => __( 'Cancel', 'essential-addons-for-elementor-lite' ),
-				    'rm_title'      => __( 'Login | Register Form Settings Saved', 'essential-addons-for-elementor-lite' ),
-				    'rm_footer'     => __( 'Reload the page to see updated data', 'essential-addons-for-elementor-lite' ),
-				    'e_title'       => __( 'Oops...', 'essential-addons-for-elementor-lite' ),
-				    'e_text'        => __( 'Something went wrong!', 'essential-addons-for-elementor-lite' ),
-				    'r_title'       => __( 'reCAPTCHA v2', 'essential-addons-for-elementor-lite' ),
-				    'r_sitekey'     => __( 'Site Key', 'essential-addons-for-elementor-lite' ),
-				    'r_sitesecret'  => __( 'Site Secret', 'essential-addons-for-elementor-lite' ),
-				    'r_language'    => __( 'Language', 'essential-addons-for-elementor-lite' ),
-				    'r_language_ph' => __( 'reCAPTCHA Language Code', 'essential-addons-for-elementor-lite' ),
-				    'g_title'       => __( 'Google Login', 'essential-addons-for-elementor-lite' ),
-				    'g_cid'         => __( 'Google Client ID', 'essential-addons-for-elementor-lite' ),
-				    'f_title'       => __( 'Facebook Login', 'essential-addons-for-elementor-lite' ),
-				    'f_app_id'      => __( 'Facebook APP ID', 'essential-addons-for-elementor-lite' ),
-				    'f_app_secret'  => __( 'Facebook APP Secret', 'essential-addons-for-elementor-lite' ),
-			    ]
-		    ];
-
 		    $ea_dashboard = [
 			    'reactPath'               => EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/',
 			    'is_eapro_activate'       => $this->pro_enabled,
@@ -1624,9 +1599,6 @@ trait Admin {
 		    wp_localize_script( 'eael-admin-dashboard', 'localize', array(
 			    'ajaxurl'            => admin_url( 'admin-ajax.php' ),
 			    'nonce'              => wp_create_nonce( 'essential-addons-elementor' ),
-			    'i18n'               => $i18n,
-			    'settings_save'      => EAEL_PLUGIN_URL . 'assets/admin/images/settings-save.gif',
-			    'assets_regenerated' => EAEL_PLUGIN_URL . 'assets/admin/images/assets-regenerated.gif',
 			    'eael_dashboard'     => $ea_dashboard
 		    ) );
 	    }

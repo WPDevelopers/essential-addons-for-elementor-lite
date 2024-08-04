@@ -9,7 +9,7 @@ function ContextReducer() {
 
     const reducer = (state, {type, payload}) => {
         const licenseManagerConfig = typeof wpdeveloperLicenseManagerConfig === 'undefined' ? {} : wpdeveloperLicenseManagerConfig;
-        let params, request, response, licenseStatus, licenseError, otpError, otp, otpEmail, errorMessage,
+        let params, response, licenseStatus, licenseError, otpError, otp, otpEmail, errorMessage,
             hiddenLicenseKey, integrations, elements, modals, toastMessage, toastType, search404;
 
         switch (type) {
