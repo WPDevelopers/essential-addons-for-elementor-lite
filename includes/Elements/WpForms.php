@@ -708,6 +708,10 @@ class WpForms extends Widget_Base {
                         'step'  => 1,
                     ],
                 ],
+                'default' => [
+					'unit' => 'px',
+					'size' => 30,
+				],
                 'size_units'        => ['px', 'em', '%'],
                 'selectors'         => [
                     '{{WRAPPER}} .eael-wpforms .wpforms-field input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-wpforms .wpforms-field select' => 'height: {{SIZE}}{{UNIT}}',
@@ -1327,7 +1331,8 @@ class WpForms extends Widget_Base {
                 'type'              => Controls_Manager::COLOR,
                 'default'           => '',
                 'selectors'         => [
-                    '{{WRAPPER}} .eael-wpforms .wpforms-submit-container .wpforms-submit:hover' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-wpforms .wpforms-submit-container .wpforms-submit:hover, 
+                    {{WRAPPER}} .eael-wpforms .wpforms-container-full .wpforms-submit-container .wpforms-form button[type=submit]:hover' => 'background-color: {{VALUE}} !important',
                 ],
             ]
         );
