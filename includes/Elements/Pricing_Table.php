@@ -851,6 +851,18 @@ class Pricing_Table extends Widget_Base
             ]
         );
 
+        $this->add_control(
+			'eael_pricing_table_hover_box_shadow',
+			[
+				'label'        => esc_html__( 'Hover Box Shadow', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'ON', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'OFF', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
+
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(),
             [
@@ -2226,13 +2238,22 @@ class Pricing_Table extends Widget_Base
         $nofollow = isset($table_btn_link['nofollow']) && !empty($table_btn_link['nofollow']) ? 'rel="nofollow"' : '';
         $featured_class = ('yes' === $settings['eael_pricing_table_featured'] ? 'featured ' . $settings['eael_pricing_table_featured_styles'] : '');
         $featured_class .= ($settings['eael_pricing_table_ribbon_alignment'] === 'left' ? ' ribbon-left' : '');
-        $inline_style = ($settings['eael_pricing_table_featured_styles'] === 'ribbon-4' && 'yes' === $settings['eael_pricing_table_featured'] ? ' style="overflow: hidden;"' : '');
         $icon_position = $this->get_settings('eael_pricing_table_button_icon_alignment');
 	    $settings['eael_pricing_table_price'] = ( $settings['eael_pricing_table_price'] === '0' ) ? '0' : HelperClass::eael_wp_kses( $settings[ 'eael_pricing_table_price' ] );
 	    $settings['eael_pricing_table_onsale_price'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_onsale_price']);
 	    $settings['eael_pricing_table_price_cur'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_price_cur']);
 	    $settings['eael_pricing_table_btn'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_btn']);
         
+        $this->add_render_attribute('eael_pricing_wrapper', 'class', [ 'eael-pricing' , $settings['eael_pricing_table_style'] ] );
+
+        if( 'yes' === $settings['eael_pricing_table_hover_box_shadow'] ){
+            $this->add_render_attribute('eael_pricing_wrapper', 'class', 'eael-pricing-box-shadow' );
+        }
+
+        if( $settings['eael_pricing_table_featured_styles'] === 'ribbon-4' && 'yes' === $settings['eael_pricing_table_featured'] ){
+            $this->add_render_attribute('eael_pricing_wrapper', 'style', 'overflow: hidden;' );
+        }
+
         $this->add_render_attribute('eael_pricing_button', [ 'class' => [ 'eael-pricing-button' ] ]);
 
         if ( ! empty( $settings['eael_pricing_table_btn_link']['url'] ) ) {
@@ -2279,8 +2300,9 @@ class Pricing_Table extends Widget_Base
             }
         }
     ?>
-        <?php if ('style-1' === $settings['eael_pricing_table_style']) : ?>
-            <div class="eael-pricing style-1" <?php echo $inline_style; ?>>
+        
+        <div <?php $this->print_render_attribute_string( 'eael_pricing_wrapper' ); ?>>
+            <?php if ('style-1' === $settings['eael_pricing_table_style']) : ?>
                 <div class="eael-pricing-item <?php echo esc_attr($featured_class); ?>">
                     <div class="header">
                         <h2 class="title"><?php echo HelperClass::eael_wp_kses($settings['eael_pricing_table_title']); ?></h2>
@@ -2317,10 +2339,8 @@ class Pricing_Table extends Widget_Base
                     </div>
                     <?php endif; ?>
                 </div>
-            </div>
-        <?php endif; ?>
-        <?php if ('style-2' === $settings['eael_pricing_table_style']) : ?>
-            <div class="eael-pricing style-2" <?php echo $inline_style; ?>>
+            <?php endif; ?>
+            <?php if ('style-2' === $settings['eael_pricing_table_style']) : ?>
                 <div class="eael-pricing-item <?php echo esc_attr($featured_class); ?>">
                     <div class="eael-pricing-icon">
                         <span class="icon" style="background:<?php if ('yes' != $settings['eael_pricing_table_icon_bg_show']) : echo 'none';
@@ -2368,9 +2388,10 @@ class Pricing_Table extends Widget_Base
                     </div>
                     <?php endif; ?>
                 </div>
-            </div>
-        <?php endif; ?>
-<?php
-        do_action('add_pricing_table_style_block', $settings, $this, $pricing, $table_btn_link, $nofollow, $featured_class);
+            <?php endif; ?>
+
+            <?php do_action('add_pricing_table_style_block', $settings, $this, $pricing, $table_btn_link, $nofollow, $featured_class); ?>
+        </div>
+        <?php
     }
 }
