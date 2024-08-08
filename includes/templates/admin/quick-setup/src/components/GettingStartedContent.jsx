@@ -12,7 +12,7 @@ function GettingStartedContent({activeTab, handleTabChange, modalTarget, handleM
           <div className="eael-onboard-content-top">
 
             <a
-              href="//www.youtube.com/watch?v=ZISSbnHo0rE&ab_channel=WPDeveloper"
+              href="https://youtu.be/XPKZzYJcjZU"
               target="_blank"
             >
               <img

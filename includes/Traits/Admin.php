@@ -140,7 +140,7 @@ trait Admin {
 				    'image'   => 'images/video-promo.png',
 				    'button'  => [
 					    'label' => __( 'Watch Tutorials', 'essential-addons-for-elementor-lite' ),
-					    'url'   => 'https://www.youtube.com/watch?v=ZISSbnHo0rE'
+					    'url'   => 'https://youtu.be/XPKZzYJcjZU'
 				    ]
 			    ],
 			    'community_box'           => [
