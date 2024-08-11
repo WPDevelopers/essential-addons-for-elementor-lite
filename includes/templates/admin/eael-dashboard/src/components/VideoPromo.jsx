@@ -16,6 +16,9 @@ function VideoPromo() {
                     <div className="templates-img">
                         <a href={eaData.button.url} target="_blank">
                             <img src={reactPath + eaData.image} alt="video promo"/>
+                            <span>
+                                <i className='ea-dash-icon ea-play'></i>
+                            </span>
                         </a>
                     </div>
                 </div>
