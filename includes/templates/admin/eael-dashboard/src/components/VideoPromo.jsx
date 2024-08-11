@@ -9,7 +9,7 @@ function VideoPromo() {
                     <div className="templates-content">
                         <h2>{eaData.heading}</h2>
                         <p className='mb-6'>{eaData.content}</p>
-                        <a href={eaData.button.url} target="_blank">
+                        <a href={eaData.button.playlist} target="_blank">
                             <button className="primary-btn install-btn">{eaData.button.label}</button>
                         </a>
                     </div>

@@ -97,8 +97,8 @@ trait Admin {
 				    'toaster_error_msg'    => __( 'Oops! Something went wrong. Please try again.', 'essential-addons-for-elementor-lite' ),
 				    'search_not_found'     => __( 'Sorry, no results found', 'essential-addons-for-elementor-lite' ),
 				    'enabling'             => __( 'Enabling...', 'essential-addons-for-elementor-lite' ),
-				    'total_elements'             => __( 'Total Elements', 'essential-addons-for-elementor-lite' ),
-				    'active'             => __( 'Active', 'essential-addons-for-elementor-lite' ),
+				    'total_elements'       => __( 'Total Elements', 'essential-addons-for-elementor-lite' ),
+				    'active'               => __( 'Active', 'essential-addons-for-elementor-lite' ),
 				    'inactive'             => __( 'Inactive', 'essential-addons-for-elementor-lite' ),
 			    ],
 			    'whats_new'               => [
@@ -139,8 +139,9 @@ trait Admin {
 				    'content' => __( 'Learn to build stunning websites with 100+ elements & extensions of Essential Addons through our easy tutorials and enhance your Elementor site-building experience.', 'essential-addons-for-elementor-lite' ),
 				    'image'   => 'images/video-promo.png',
 				    'button'  => [
-					    'label' => __( 'Watch Tutorials', 'essential-addons-for-elementor-lite' ),
-					    'url'   => 'https://youtu.be/XPKZzYJcjZU'
+					    'label'    => __( 'Watch Tutorials', 'essential-addons-for-elementor-lite' ),
+					    'playlist' => 'https://www.youtube.com/watch?v=2a3GRk_06bg&list=PLWHp1xKHCfxC7JeWSg31vtVbLHGzfxDvh',
+					    'url'      => 'https://youtu.be/XPKZzYJcjZU'
 				    ]
 			    ],
 			    'community_box'           => [
