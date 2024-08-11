@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 5.9.27
+Stable tag: 6.0.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -299,6 +299,16 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.0.0 - 11/08/2024 =
+
+- Revamped: New EA Dashboard for better UI/UX
+- Revamped: New EA Quick Setup for better UI/UX
+- Added: New Extension: EA Hover Interactions
+- Added: New Skin Presets for different Post widgets
+- Improved: Added proper sanitization inside EA Filterable Gallery widget
+- Fixed: EA Pricing Table | Button Not Displaying and Getting Undefined index
+- Few minor bug fixes & improvements
 
 = 5.9.27 - 11/07/2024 =
 
