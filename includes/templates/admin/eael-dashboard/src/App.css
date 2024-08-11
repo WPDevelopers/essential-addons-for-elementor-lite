@@ -26,6 +26,7 @@
   --background-15: #FFFCF5;
   --background-16: #FFF1F3;
   --background-17: #FFF6ED;
+  --background-18: #FEF3F2;
   --toggle-color: #EAECF0;
   --label-color: #EAECF0;
   --label-color-fill: #7F56D9;
@@ -100,6 +101,7 @@ body.eael_dash_dark_mode {
   --background-15: #09090A;
   --background-16: #FFF1F3;
   --background-17: #8E511636;
+  --background-18: #09090A;
   --toggle-color: #2D2F34;
   --label-color: #1F2125;
   --label-color-fill: #7F56D9;
@@ -2479,7 +2481,7 @@ span.step-count {
 }
 
 .ea__license-key.ea__invalid-license {
-  background: #FEF3F2;
+  background: var(--background-18);
 }
 
 .ea__license-key.ea__invalid-license .license-key-items {
@@ -2542,7 +2544,7 @@ input.input-api:disabled {
 }
 
 .ea__license-verify.warning {
-  background: #FEF3F2;
+  background: var(--background-18);
 }
 
 .ea__license-verify.warning .license-key-items {
