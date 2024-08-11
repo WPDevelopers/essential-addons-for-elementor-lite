@@ -12,7 +12,7 @@ function ModalContent({ closeModal }) {
           <div className="congrats--wrapper">
             <img className="eael-modal-map-img" src={success_2_src} alt={__('Success Image', 'essential-addons-for-elementor-lite')} />
             <h4 className="congrats--title">{__('Congratulations!', 'essential-addons-for-elementor-lite')}</h4>
-            <h6 className="congrats--content">{__('You are now ready to enjoy all the amazing features..', 'essential-addons-for-elementor-lite')} 🎉</h6>
+            <h6 className="congrats--content">{__('You’re all set! Start elevating your website design with Essential Addons', 'essential-addons-for-elementor-lite')} 🎉</h6>
           </div>
           <div className="eael-modal-close-btn" onClick={closeModal}>
             <i className="ea-dash-icon ea-close"></i>
