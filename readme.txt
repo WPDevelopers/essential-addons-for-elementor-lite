@@ -304,8 +304,8 @@ Your existing elements/content will work with premium version. So you won't lose
 
 - Revamped: New EA Dashboard for better UI/UX
 - Revamped: New EA Quick Setup for better UI/UX
-- Added: New Extension: EA Hover Interactions
-- Added: New Skin Presets for different Post widgets
+- Added: New Extension- EA Hover Interactions
+- Added: New Skin Presets for different Post, WooCommerce & Other widgets
 - Improved: Added proper sanitization inside EA Filterable Gallery widget
 - Fixed: EA Pricing Table | Button Not Displaying and Getting Undefined index
 - Few minor bug fixes & improvements
