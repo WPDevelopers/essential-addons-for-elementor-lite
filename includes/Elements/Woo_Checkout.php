@@ -122,18 +122,34 @@ class Woo_Checkout extends Widget_Base {
 				'label' => esc_html__( 'General Settings', 'essential-addons-for-elementor-lite' ),
 			]
 		);
+
+		$template_list = apply_filters('eael/woo-checkout/layout', [
+			'default'     => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
+			'multi-steps' => esc_html__( 'Multi Steps (Pro)', 'essential-addons-for-elementor-lite' ),
+			'split'       => esc_html__( 'Split (Pro)', 'essential-addons-for-elementor-lite' ),
+		]);
+        $layout_options = [];
+
+		if( ! empty( $template_list ) ){
+            $image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/woo-checkout-';
+            foreach( $template_list as $key => $label ){
+                $layout_options[ $key ] = [
+                    'title' => $label,
+                    'image' => $image_path . $key . '.png'
+                ];
+            }
+        }
+
 		$this->add_control(
 			'ea_woo_checkout_layout',
 			[
-				'label' => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'default',
-				'label_block' => false,
-				'options' => apply_filters('eael/woo-checkout/layout', [
-					'default' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
-					'multi-steps' => esc_html__( 'Multi Steps (Pro)', 'essential-addons-for-elementor-lite' ),
-					'split' => esc_html__( 'Split (Pro)', 'essential-addons-for-elementor-lite' ),
-				]),
+				'label'       => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => $layout_options,
+				'default'     => 'default',
+				'label_block' => true,
+                'toggle'      => false,
+                'image_choose'=> true,
 			]
 		);
 

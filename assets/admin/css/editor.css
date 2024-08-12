@@ -236,3 +236,30 @@
 .elementor-control-unit-2[data-setting="eael_evergreen_counter_recurring_restart_after"] {
 	width: 70px;
 }
+
+/* EAEL Image Choose CSS */
+.elementor-control-type-choose .elementor-choices.eael-image-choices{
+	height: auto;
+	display: grid;
+    grid-template-columns: repeat(3, 1fr);
+	gap: 10px;
+}
+.elementor-control-type-choose .elementor-choices.eael-image-choices .elementor-choices-label{
+	border: none;
+	border-radius: 4px;
+	padding: 10px;
+}
+.elementor-control-type-choose .elementor-choices.eael-image-choices .elementor-choices-label img{
+	image-rendering: pixelated;
+}
+/* .elementor-control-type-eael-image-choose .eael-image-choices .elementor-choices-label:hover,
+.elementor-control-type-eael-image-choose .elementor-choices input:checked+.elementor-choices-label{
+	background: #333538;
+}  will do add it letter */
+
+.elementor-control-url_contains_url_type .elementor-choices-label{
+	line-height: 32px;
+}
+.elementor-control-url_contains_url_type .elementor-choices-label i{
+	font-size: 180%;
+}

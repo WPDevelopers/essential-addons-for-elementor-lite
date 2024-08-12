@@ -2,36 +2,14 @@ var CountDown = function ($scope, $) {
 	var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
 		$countdown_id = $coundDown.data("countdown-id") !== undefined ? $coundDown.data("countdown-id") : "",
 		$expire_type = $coundDown.data("expire-type") !== undefined ? $coundDown.data("expire-type") : "",
-		$expiry_text = $coundDown.data("expiry-text") !== undefined ? sanitizeXSSAttributes(removeScriptTags($coundDown.data("expiry-text"))) : "",
-		$expiry_title = $coundDown.data("expiry-title") !== undefined ? sanitizeXSSAttributes(removeScriptTags($coundDown.data("expiry-title"))) : "",
+		$expiry_text = $coundDown.data("expiry-text") !== undefined ? DOMPurify.sanitize($coundDown.data("expiry-text")) : "",
+		$expiry_title = $coundDown.data("expiry-title") !== undefined ? DOMPurify.sanitize($coundDown.data("expiry-title")) : "",
 		$redirect_url = $coundDown.data("redirect-url") !== undefined ? $coundDown.data("redirect-url") : "",
 		$template = $coundDown.data("template") !== undefined ? $coundDown.data("template") : "",
 		$countdown_type = $coundDown.data("countdown-type") !== undefined ? $coundDown.data("countdown-type") : "",
 		$evergreen_time = $coundDown.data("evergreen-time") !== undefined ? $coundDown.data("evergreen-time") : "",
 		$recurring = $coundDown.data("evergreen-recurring") !== undefined ? $coundDown.data("evergreen-recurring") : false,
 		$recurring_stop_time = $coundDown.data("evergreen-recurring-stop") !== undefined ? $coundDown.data("evergreen-recurring-stop") : "";
-
-	function sanitizeXSSAttributes(html) {
-		// Define XSS-related attributes
-		const xssAttributes = ['onclick', 'onmouseover', 'onmouseout', 'onmousedown', 'onmouseup', 'ondblclick', 'onmousemove', 'onmouseenter', 'onmouseleave', 'onwheel', 'onkeydown', 'onkeypress', 'onkeyup', 'onsubmit', 'onreset', 'onfocus', 'onblur', 'onchange', 'oninput', 'onselect', 'onload', 'onunload', 'onresize', 'onscroll', 'onbeforeunload', 'onerror', 'onhashchange', 'onpagehide', 'onpageshow', 'onpopstate', 'onstorage', 'oncopy', 'oncut', 'onpaste', 'onplay', 'onpause', 'onended', 'onvolumechange', 'onwaiting', 'oncanplay', 'oncanplaythrough', 'oncuechange', 'ondurationchange', 'onemptied', 'onloadeddata', 'onloadedmetadata', 'onloadstart', 'onplaying', 'onprogress', 'onratechange', 'onseeked', 'onseeking', 'onstalled', 'onsuspend', 'ontimeupdate', 'ondrag', 'ondragstart', 'ondragend', 'ondragover', 'ondragenter', 'ondragleave', 'ondrop', 'ontouchstart', 'ontouchmove', 'ontouchend', 'ontouchcancel', 'onfocusin', 'onfocusout', 'oncontextmenu', 'onreadystatechange', 'onvisibilitychange', 'onshow', 'onmessage', 'onabort', 'onafterprint', 'onbeforeprint', 'oninvalid', 'ontoggle', 'onanimationstart', 'onanimationend', 'onanimationiteration', 'onoffline', 'ononline'];
-
-		// Construct the regular expression pattern dynamically
-		const pattern = new RegExp(`\\s+(${xssAttributes.join('|')})=[^>\\s]+`, 'gi');
-
-		// Remove XSS-related attributes using string manipulation
-		return html.replace(pattern, '');
-	}
-
-	function removeScriptTags(html) {
-		// Decode HTML entities
-		const decodedHtml = html.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
-
-		// Regular expression to match <script> tags and their contents
-		const scriptTagRegex = /<script\b[^>]*>(.*?)<\/script>/gi;
-
-		// Remove <script> tags from the HTML string
-		return decodedHtml.replace(scriptTagRegex, '');
-	}
 
 	jQuery(document).ready(function ($) {
 		"use strict";

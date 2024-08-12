@@ -213,15 +213,34 @@ class Woo_Product_Carousel extends Widget_Base {
 		    ]
 	    );
 
-	    $this->add_control(
-		    'eael_dynamic_template_layout',
-		    [
-			    'label'   => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
-			    'type'    => Controls_Manager::SELECT,
-			    'default' => 'preset-1',
-			    'options' => $this->get_template_list_for_dropdown(true),
-		    ]
-	    );
+        $layout_options = [];
+		$template_list = $this->get_template_list_for_dropdown( true );
+
+        if( ! empty( $template_list ) ){
+            $image_dir_url = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/';
+            $image_dir_path = EAEL_PLUGIN_PATH . 'assets/admin/images/layout-previews/';
+            foreach( $template_list as $key => $label ){
+                $image_url = $image_dir_url . 'woo-product-carousel-' . $key . '.png';
+                $image_url =  file_exists( $image_dir_path . 'woo-product-carousel-' . $key . '.png' ) ? $image_url : $image_dir_url . 'custom-layout.png';
+                $layout_options[ $key ] = [
+                    'title' => $label,
+                    'image' => $image_url
+                ];
+            }
+        }
+
+		$this->add_control(
+			'eael_dynamic_template_layout',
+			[
+				'label'       => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => $layout_options,
+				'default'     => 'preset-1',
+				'label_block' => true,
+                'toggle'      => false,
+                'image_choose'=> true,
+			]
+		);
 
 	    $this->add_control(
 		    'eael_product_carousel_show_title',

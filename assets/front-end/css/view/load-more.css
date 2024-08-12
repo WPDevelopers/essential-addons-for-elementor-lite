@@ -28,6 +28,17 @@
 .eael-load-more-button-wrap.eael-force-hide {
   display: none !important;
 }
+.eael-button-wrap.eael-infinity-scroll,
+.eael-load-more-button-wrap.eael-infinity-scroll {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.eael-button-wrap.eael-infinity-scroll .eael-load-more-button:not(.button--loading),
+.eael-load-more-button-wrap.eael-infinity-scroll .eael-load-more-button:not(.button--loading) {
+  display: none !important;
+  height: 1px;
+}
 .eael-button,
 .eael-load-more-button {
   display: -webkit-box !important;
