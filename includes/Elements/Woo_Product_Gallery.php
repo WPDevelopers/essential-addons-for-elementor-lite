@@ -416,6 +416,10 @@ class Woo_Product_Gallery extends Widget_Base {
 						'title' => esc_html__( 'Dynamic', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eicon-archive',
 					],
+					'archive' => [
+						'title' => esc_html__( 'Archive', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-archive-posts',
+					],
 				],
 				'default' => 'product',
 				'toggle'  => false,

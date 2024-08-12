@@ -450,6 +450,10 @@ class Woo_Product_List extends Widget_Base
 						'title' => esc_html__( 'Dynamic', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eicon-archive',
 					],
+					'source_archive' => [
+						'title' => esc_html__( 'Archive', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-archive-posts',
+					],
 				],
 				'default' => 'product',
 				'toggle'  => false,
