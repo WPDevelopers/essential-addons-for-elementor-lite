@@ -3876,7 +3876,7 @@ class Filterable_Gallery extends Widget_Base
 
         $gallery_settings['widget_id'] = $this->get_id();
         
-        $no_more_items_text = Helper::eael_wp_kses($settings['nomore_items_text']);
+        $no_more_items_text = esc_html($settings['nomore_items_text']);
         $grid_class = $settings['eael_fg_grid_style'] == 'grid' ? 'eael-filter-gallery-grid' : 'masonry';
 
         if ('layout_3' == $settings['eael_fg_caption_style']) {

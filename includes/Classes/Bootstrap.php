@@ -278,8 +278,9 @@ class Bootstrap
                 new WPDeveloper_Core_Installer( basename( EAEL_PLUGIN_BASENAME, '.php' ) );
             }
 
-            add_action('admin_menu', array($this, 'admin_menu'));
-            add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
+		    add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+		    add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+		    add_action( 'admin_enqueue_scripts', array( $this, 'admin_dequeue_scripts' ), 100 );
 
             // Core
             add_filter('plugin_action_links_' . EAEL_PLUGIN_BASENAME, array($this, 'insert_plugin_links'));
