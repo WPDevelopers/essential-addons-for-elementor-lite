@@ -18,6 +18,8 @@ class Promotion
 			add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'conditional_display' ] );
 			add_action( 'elementor/element/column/section_advanced/after_section_end', [ $this, 'conditional_display' ] );
 			add_action( 'elementor/element/section/section_advanced/after_section_end', [ $this, 'conditional_display' ] );
+			add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'smooth_animation' ] );
+			add_action( 'elementor/element/column/section_advanced/after_section_end', [ $this, 'smooth_animation' ] );
 		}
 	}
 
@@ -25,7 +27,7 @@ class Promotion
     {
         $html = '<div class="ea-nerd-box">
             <div class="ea-nerd-box-icon">
-                <img src="' . EAEL_PLUGIN_URL . 'assets/admin/images/icon-ea-logo.svg' . '">
+                <img src="' . EAEL_PLUGIN_URL . 'assets/admin/images/icon-ea-new-logo.svg' . '">
             </div>
             <div class="ea-nerd-box-title">' . $texts['title'] . '</div>
             <div class="ea-nerd-box-message">' . $texts['messages'] . '</div>
@@ -149,6 +151,29 @@ class Promotion
 				'raw'  => $this->teaser_template( [
 					'title'    => __( 'Meet EA Conditional Display', 'essential-addons-for-elementor-lite' ),
 					'messages' => __( "Control any section, column, container or widget’s visibility with your own logic.", 'essential-addons-for-elementor-lite' ),
+				] ),
+			]
+		);
+
+		$element->end_controls_section();
+	}
+
+    public function smooth_animation( $element ) {
+		$element->start_controls_section(
+			'eael_smooth_animation_section',
+			[
+				'label' => __( '<i class="eaicon-logo"></i> Interactive Animations', 'essential-addons-for-elementor-lite' ),
+				'tab'   => Controls_Manager::TAB_ADVANCED
+			]
+		);
+
+		$element->add_control(
+			'eael_smooth_animation_section_pro_required',
+			[
+				'type' => Controls_Manager::RAW_HTML,
+				'raw'  => $this->teaser_template( [
+					'title'    => __( 'Meet EA Interactive Animations', 'essential-addons-for-elementor-lite' ),
+					'messages' => __( "Witness magic in Elementor - animate any section, column, container, or widget", 'essential-addons-for-elementor-lite' ),
 				] ),
 			]
 		);

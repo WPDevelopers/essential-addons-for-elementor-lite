@@ -1,0 +1,16 @@
+.elementor-widget-container {
+  position: relative;
+}
+
+[data-eaeltilt=eael_tilt] .elementor-widget-container {
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 3.55);
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 3.55);
+  position: relative;
+}
+
+[data-eaeltilt=eael_tilt]:hover .elementor-widget-container {
+  -webkit-transition: all 0.15s !important;
+  transition: all 0.15s !important;
+}

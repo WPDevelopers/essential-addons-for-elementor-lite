@@ -325,7 +325,8 @@ jQuery(window).on("elementor/frontend/init", function () {
 				}
 
 				if (fg_items.length<1) {
-					$this.html('<div class="no-more-items-text">' + $nomore_text + "</div>");
+					$this.html('<div class="no-more-items-text"></div>');
+					$this.children('.no-more-items-text').text($nomore_text);
 					setTimeout(function () {
 						$this.fadeOut("slow");
 					}, 600);
