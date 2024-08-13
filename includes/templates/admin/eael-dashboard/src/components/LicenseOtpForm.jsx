@@ -31,7 +31,7 @@ function LicenseOtpForm() {
                 } else {
                     otp = true;
                     otpError = true;
-                    errorMessage = response.data.message;
+                    errorMessage = response?.data?.message;
                 }
 
                 eaDispatch({
