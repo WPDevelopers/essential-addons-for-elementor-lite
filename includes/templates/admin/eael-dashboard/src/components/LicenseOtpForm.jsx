@@ -20,7 +20,7 @@ function LicenseOtpForm() {
                 const response = request.responseText ? JSON.parse(request.responseText) : {};
                 let otp,
                     licenseStatus,
-                    hiddenLicenseKey,
+                    hiddenLicenseKey = eaState.hiddenLicenseKey,
                     otpError,
                     errorMessage;
 
