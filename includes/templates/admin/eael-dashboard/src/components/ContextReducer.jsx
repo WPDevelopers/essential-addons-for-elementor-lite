@@ -8,7 +8,6 @@ function ContextReducer() {
     const eaData = localize.eael_dashboard;
 
     const reducer = (state, {type, payload}) => {
-        const licenseManagerConfig = typeof wpdeveloperLicenseManagerConfig === 'undefined' ? {} : wpdeveloperLicenseManagerConfig;
         let params, response, licenseStatus, licenseError, otpError, otp, otpEmail, errorMessage,
             hiddenLicenseKey, integrations, elements, modals, toastMessage, toastType, search404;
 
@@ -70,31 +69,12 @@ function ContextReducer() {
             case 'OPEN_LICENSE_FORM':
                 return {...state, licenseFormOpen: payload};
             case 'LICENSE_ACTIVATE':
-                params = {
-                    action: 'essential-addons-elementor/license/activate',
-                    license_key: payload,
-                    _nonce: licenseManagerConfig?.nonce
-                };
-                response = eaAjax(params);
-
-                licenseError = false;
-                otp = false;
-                otpEmail = response.data.customer_email;
-
-                if (response?.success) {
-                    switch (response.data.license) {
-                        case 'required_otp':
-                            otp = true;
-                            break;
-                        case 'valid':
-                            licenseStatus = response.data.license;
-                            hiddenLicenseKey = response.data.license_key;
-                            break;
-                    }
-                } else {
-                    licenseError = true;
-                    errorMessage = response.data.message;
-                }
+                licenseError = payload.licenseError;
+                otp = payload.otp;
+                otpEmail = payload.otpEmail;
+                licenseStatus = payload.licenseStatus;
+                hiddenLicenseKey = payload.hiddenLicenseKey;
+                errorMessage = payload.errorMessage;
 
                 return {
                     ...state,
@@ -105,59 +85,26 @@ function ContextReducer() {
                     otpEmail,
                     errorMessage,
                     btnLoader: '',
-                    licenseKey: payload
+                    licenseKey: payload.licenseKey
                 };
             case 'OTP_VERIFY':
-                params = {
-                    action: 'essential-addons-elementor/license/submit-otp',
-                    license: state.licenseKey,
-                    otp: payload,
-                    _nonce: licenseManagerConfig?.nonce
-                };
-                response = eaAjax(params);
-
-                if (response?.success) {
-                    otp = false;
-                    licenseStatus = response.data.license;
-                    hiddenLicenseKey = response.data.license_key;
-                } else {
-                    otp = true;
-                    otpError = true;
-                    errorMessage = response.data.message;
-                }
+                licenseStatus = payload.licenseStatus;
+                hiddenLicenseKey = payload.hiddenLicenseKey;
+                otpError = payload.otpError;
+                errorMessage = payload.errorMessage;
+                otp = payload.otp;
 
                 return {...state, licenseStatus, hiddenLicenseKey, otpError, errorMessage, otp, btnLoader: ''};
             case 'LICENSE_DEACTIVATE':
-                params = {
-                    action: 'essential-addons-elementor/license/deactivate',
-                    _nonce: licenseManagerConfig?.nonce
-                };
-                response = eaAjax(params);
-
-                if (response?.success) {
-                    licenseStatus = '';
-                    hiddenLicenseKey = '';
-                } else {
-                    licenseError = true;
-                    errorMessage = response.data.message;
-                }
+                licenseStatus = payload.licenseStatus;
+                hiddenLicenseKey = payload.hiddenLicenseKey;
+                licenseError = payload.licenseError;
+                errorMessage = payload.errorMessage;
 
                 return {...state, licenseStatus, hiddenLicenseKey, licenseError, errorMessage, btnLoader: ''};
             case 'RESEND_OTP':
-                params = {
-                    action: 'essential-addons-elementor/license/resend-otp',
-                    _nonce: licenseManagerConfig?.nonce,
-                    license: state.licenseKey
-                };
-                response = eaAjax(params);
-
-                if (response?.success) {
-                    toastType = 'success';
-                    toastMessage = 'A verification code sent to your email';
-                } else {
-                    toastType = 'error';
-                    toastMessage = response.data.message;
-                }
+                toastType = payload.toastType;
+                toastMessage = payload.toastMessage;
 
                 return {...state, otp: true, toasts: true, toastType, toastMessage, btnLoader: ''};
             case 'GO_PRO_MODAL':
