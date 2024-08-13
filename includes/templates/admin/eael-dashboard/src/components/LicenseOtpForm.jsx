@@ -58,7 +58,7 @@ function LicenseOtpForm() {
                     toastMessage = 'A verification code sent to your email';
                 } else {
                     toastType = 'error';
-                    toastMessage = response.data.message;
+                    toastMessage = response?.data?.message;
                 }
 
                 eaDispatch({
