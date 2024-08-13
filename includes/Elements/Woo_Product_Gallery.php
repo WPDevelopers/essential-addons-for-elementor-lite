@@ -2741,10 +2741,10 @@ class Woo_Product_Gallery extends Widget_Base {
 	 */
 	public function build_product_query( $settings ) {
 		$get_product_cats = $settings[ 'eael_product_gallery_categories' ];
-		$product_cats     = str_replace( ' ', '', $get_product_cats );
+		$product_cats     = ! empty( $get_product_cats ) ? str_replace( ' ', '', $get_product_cats ) : '';
 
 		$get_product_tags = $settings[ 'eael_product_gallery_tags' ];
-		$product_tags_items = str_replace( ' ', '', $get_product_tags );
+		$product_tags_items = ! empty( $get_product_tags ) ? str_replace( ' ', '', $get_product_tags ) : '';
 
 		// Category retrieve
 		$cat_args            = array(
@@ -2922,10 +2922,10 @@ class Woo_Product_Gallery extends Widget_Base {
 
 	public function eael_product_terms_render( $settings, $args ) {
 		$get_product_cats = $settings[ 'eael_product_gallery_categories' ];
-		$product_cats     = str_replace( ' ', '', $get_product_cats );
+		$product_cats     = $get_product_cats ? str_replace( ' ', '', $get_product_cats ) : '';
 
 		$get_product_tags = $settings[ 'eael_product_gallery_tags' ];
-		$product_tags_items = str_replace( ' ', '', $get_product_tags );
+		$product_tags_items = $get_product_tags ? str_replace( ' ', '', $get_product_tags ) : '';
 
 		if ( $settings[ 'eael_woo_product_gallery_terms_show_all' ] == '' && empty( $get_product_cats ) && empty( $get_product_tags ) ) {
 			return;
