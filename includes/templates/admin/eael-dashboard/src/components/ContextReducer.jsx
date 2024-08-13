@@ -8,7 +8,6 @@ function ContextReducer() {
     const eaData = localize.eael_dashboard;
 
     const reducer = (state, {type, payload}) => {
-        const licenseManagerConfig = typeof wpdeveloperLicenseManagerConfig === 'undefined' ? {} : wpdeveloperLicenseManagerConfig;
         let params, response, licenseStatus, licenseError, otpError, otp, otpEmail, errorMessage,
             hiddenLicenseKey, integrations, elements, modals, toastMessage, toastType, search404;
 
@@ -104,20 +103,8 @@ function ContextReducer() {
 
                 return {...state, licenseStatus, hiddenLicenseKey, licenseError, errorMessage, btnLoader: ''};
             case 'RESEND_OTP':
-                params = {
-                    action: 'essential-addons-elementor/license/resend-otp',
-                    _nonce: licenseManagerConfig?.nonce,
-                    license: state.licenseKey
-                };
-                response = eaAjax(params);
-
-                if (response?.success) {
-                    toastType = 'success';
-                    toastMessage = 'A verification code sent to your email';
-                } else {
-                    toastType = 'error';
-                    toastMessage = response.data.message;
-                }
+                toastType = payload.toastType;
+                toastMessage = payload.toastMessage;
 
                 return {...state, otp: true, toasts: true, toastType, toastMessage, btnLoader: ''};
             case 'GO_PRO_MODAL':
