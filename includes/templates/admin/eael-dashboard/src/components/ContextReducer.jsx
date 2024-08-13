@@ -89,23 +89,11 @@ function ContextReducer() {
                     licenseKey: payload.licenseKey
                 };
             case 'OTP_VERIFY':
-                params = {
-                    action: 'essential-addons-elementor/license/submit-otp',
-                    license: state.licenseKey,
-                    otp: payload,
-                    _nonce: licenseManagerConfig?.nonce
-                };
-                response = eaAjax(params);
-
-                if (response?.success) {
-                    otp = false;
-                    licenseStatus = response.data.license;
-                    hiddenLicenseKey = response.data.license_key;
-                } else {
-                    otp = true;
-                    otpError = true;
-                    errorMessage = response.data.message;
-                }
+                licenseStatus = payload.licenseStatus;
+                hiddenLicenseKey = payload.hiddenLicenseKey;
+                otpError = payload.otpError;
+                errorMessage = payload.errorMessage;
+                otp = payload.otp;
 
                 return {...state, licenseStatus, hiddenLicenseKey, otpError, errorMessage, otp, btnLoader: ''};
             case 'LICENSE_DEACTIVATE':

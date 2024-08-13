@@ -1,12 +1,45 @@
 import consumer from "../context/index.js";
 import {useRef} from "react";
+import {eaAjax} from "../helper/index.js";
 
 function LicenseOtpForm() {
     const otpRef = useRef(),
         {eaState, eaDispatch} = consumer(),
         submitHandler = () => {
+            const licenseManagerConfig = typeof wpdeveloperLicenseManagerConfig === 'undefined' ? {} : wpdeveloperLicenseManagerConfig;
+
             eaDispatch({type: 'BUTTON_LOADER', payload: 'otp'});
-            setTimeout(eaDispatch, 500, {type: 'OTP_VERIFY', payload: otpRef.current.value});
+            const params = {
+                action: 'essential-addons-elementor/license/submit-otp',
+                license: eaState.licenseKey,
+                otp: otpRef.current.value,
+                _nonce: licenseManagerConfig?.nonce
+            };
+
+            const request = eaAjax(params, true);
+            request.onreadystatechange = () => {
+                const response = request.responseText ? JSON.parse(request.responseText) : {};
+                let otp,
+                    licenseStatus,
+                    hiddenLicenseKey,
+                    otpError,
+                    errorMessage;
+
+                if (response?.success) {
+                    otp = false;
+                    licenseStatus = response.data.license;
+                    hiddenLicenseKey = response.data.license_key;
+                } else {
+                    otp = true;
+                    otpError = true;
+                    errorMessage = response.data.message;
+                }
+
+                eaDispatch({
+                    type: 'OTP_VERIFY',
+                    payload: {licenseStatus, hiddenLicenseKey, otpError, errorMessage, otp}
+                });
+            }
         },
         clickHandler = () => {
             eaDispatch({type: 'BUTTON_LOADER', payload: 'resend'});
