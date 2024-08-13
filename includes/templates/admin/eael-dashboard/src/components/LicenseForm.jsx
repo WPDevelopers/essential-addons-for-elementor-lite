@@ -30,6 +30,7 @@ function LicenseForm() {
                         switch (response.data.license) {
                             case 'required_otp':
                                 otp = true;
+                                hiddenLicenseKey = response.data?.license_key;
                                 break;
                             case 'valid':
                                 licenseStatus = response.data?.license;
@@ -55,7 +56,37 @@ function LicenseForm() {
                     });
                 }
             } else {
-                setTimeout(eaDispatch, 500, {type: 'LICENSE_DEACTIVATE'});
+                const params = {
+                    action: 'essential-addons-elementor/license/deactivate',
+                    _nonce: licenseManagerConfig?.nonce
+                };
+
+                const request = eaAjax(params, true);
+                request.onreadystatechange = () => {
+                    const response = request.responseText ? JSON.parse(request.responseText) : {};
+                    let licenseError = false,
+                        licenseStatus,
+                        hiddenLicenseKey,
+                        errorMessage;
+
+                    if (response?.success) {
+                        licenseStatus = '';
+                        hiddenLicenseKey = '';
+                    } else {
+                        licenseError = true;
+                        errorMessage = response?.data?.message;
+                    }
+
+                    eaDispatch({
+                        type: 'LICENSE_DEACTIVATE',
+                        payload: {
+                            licenseStatus,
+                            hiddenLicenseKey,
+                            licenseError,
+                            errorMessage
+                        }
+                    });
+                }
             }
         },
         disabled = eaState.otp === true || eaState.licenseStatus === 'valid',

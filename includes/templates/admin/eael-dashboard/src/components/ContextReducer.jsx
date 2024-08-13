@@ -97,19 +97,10 @@ function ContextReducer() {
 
                 return {...state, licenseStatus, hiddenLicenseKey, otpError, errorMessage, otp, btnLoader: ''};
             case 'LICENSE_DEACTIVATE':
-                params = {
-                    action: 'essential-addons-elementor/license/deactivate',
-                    _nonce: licenseManagerConfig?.nonce
-                };
-                response = eaAjax(params);
-
-                if (response?.success) {
-                    licenseStatus = '';
-                    hiddenLicenseKey = '';
-                } else {
-                    licenseError = true;
-                    errorMessage = response.data.message;
-                }
+                licenseStatus = payload.licenseStatus;
+                hiddenLicenseKey = payload.hiddenLicenseKey;
+                licenseError = payload.licenseError;
+                errorMessage = payload.errorMessage;
 
                 return {...state, licenseStatus, hiddenLicenseKey, licenseError, errorMessage, btnLoader: ''};
             case 'RESEND_OTP':
