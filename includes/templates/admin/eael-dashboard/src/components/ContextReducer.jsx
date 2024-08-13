@@ -70,31 +70,12 @@ function ContextReducer() {
             case 'OPEN_LICENSE_FORM':
                 return {...state, licenseFormOpen: payload};
             case 'LICENSE_ACTIVATE':
-                params = {
-                    action: 'essential-addons-elementor/license/activate',
-                    license_key: payload,
-                    _nonce: licenseManagerConfig?.nonce
-                };
-                response = eaAjax(params);
-
-                licenseError = false;
-                otp = false;
-                otpEmail = response.data.customer_email;
-
-                if (response?.success) {
-                    switch (response.data.license) {
-                        case 'required_otp':
-                            otp = true;
-                            break;
-                        case 'valid':
-                            licenseStatus = response.data.license;
-                            hiddenLicenseKey = response.data.license_key;
-                            break;
-                    }
-                } else {
-                    licenseError = true;
-                    errorMessage = response.data.message;
-                }
+                licenseError = payload.licenseError;
+                otp = payload.otp;
+                otpEmail = payload.otpEmail;
+                licenseStatus = payload.licenseStatus;
+                hiddenLicenseKey = payload.hiddenLicenseKey;
+                errorMessage = payload.errorMessage;
 
                 return {
                     ...state,
@@ -105,7 +86,7 @@ function ContextReducer() {
                     otpEmail,
                     errorMessage,
                     btnLoader: '',
-                    licenseKey: payload
+                    licenseKey: payload.licenseKey
                 };
             case 'OTP_VERIFY':
                 params = {
