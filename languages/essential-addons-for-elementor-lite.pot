@@ -9713,7 +9713,7 @@ msgstr ""
 msgid "Upgrade to PRO"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:215, ../includes/Traits/Admin.php:1803, ../includes/Traits/Admin.php:1938, ../includes/Traits/Helper.php:615
+#: ../includes/Traits/Admin.php:215, ../includes/Traits/Admin.php:1805, ../includes/Traits/Admin.php:1940, ../includes/Traits/Helper.php:615
 msgid "Activate"
 msgstr ""
 
@@ -10177,63 +10177,63 @@ msgstr ""
 msgid "Upgrade to Essential Addons PRO and gain access to advanced elements and functionalities to build websites more efficiently"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1676
+#: ../includes/Traits/Admin.php:1678
 msgid "We hope you're enjoying Essential Addons for Elementor! Could you please do us a BIG favor and give it a 5-star rating on WordPress to help us spread the word and boost our motivation?"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1684
+#: ../includes/Traits/Admin.php:1686
 msgid "Ok, you deserve it!"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1688
+#: ../includes/Traits/Admin.php:1690
 msgid "I already did"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1695
+#: ../includes/Traits/Admin.php:1697
 msgid "Maybe Later"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1703
+#: ../includes/Traits/Admin.php:1705
 msgid "I need help"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1707
+#: ../includes/Traits/Admin.php:1709
 msgid "Never show again"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1803, ../includes/Traits/Admin.php:1938
+#: ../includes/Traits/Admin.php:1805, ../includes/Traits/Admin.php:1940
 msgid "Install Essential Blocks"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1812, ../includes/Traits/Admin.php:1992
+#: ../includes/Traits/Admin.php:1814, ../includes/Traits/Admin.php:1994
 msgid "Using Gutenberg? Check out Essential Blocks!"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1813, ../includes/Traits/Admin.php:1993
+#: ../includes/Traits/Admin.php:1815, ../includes/Traits/Admin.php:1995
 msgid "Are you using the Gutenberg Editor for your website? Then try out Essential Blocks for Gutenberg, and explore 40+ unique blocks to make your web design experience in WordPress even more powerful. 🚀"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1814, ../includes/Traits/Admin.php:1994
+#: ../includes/Traits/Admin.php:1816, ../includes/Traits/Admin.php:1996
 msgid "For more information, <a href=\"https://essential-blocks.com/demo/\" target=\"_blank\">check out the demo here</a>."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:2113, ../includes/Traits/Admin.php:2124
+#: ../includes/Traits/Admin.php:2115, ../includes/Traits/Admin.php:2126
 msgid "You are not allowed to do this action"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:2183
+#: ../includes/Traits/Admin.php:2185
 msgid "Join us in celebrating <strong>2 MILLION+</strong> happy users and grab up to an exclusive 30% OFF on the most used Elementor addons!"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:2185
+#: ../includes/Traits/Admin.php:2187
 msgid "Upgrade To PRO Now"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:2187
+#: ../includes/Traits/Admin.php:2189
 msgid "Give Me LIFETIME access"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:2189
+#: ../includes/Traits/Admin.php:2191
 msgid "I don’t want to save money"
 msgstr ""
 
