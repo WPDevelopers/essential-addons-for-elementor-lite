@@ -291,6 +291,7 @@ let HoverEffectHandler = function ($scope, $) {
         "transition-duration": `${$eaelDurationVal}ms`,
         "transition-delay": `${$eaelDelayVal}ms`,
         "transition-timing-function": $eaelEasingVal,
+        "z-index": 1
     }
 
     //Hover
@@ -302,6 +303,7 @@ let HoverEffectHandler = function ($scope, $) {
         "transition-duration": `${$eaelDurationHoverVal}ms`,
         "transition-delay": `${$eaelDelayHoverVal}ms`,
         "transition-timing-function": $eaelEasingHoverVal,
+        "z-index": 2
     };
 
     if ($enabledElementList.includes($scopeId)) {
