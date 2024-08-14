@@ -37,6 +37,15 @@ class Hover_Effect {
 		);
 
 		$element->add_control(
+			'eael_hover_effect_enable_note',
+			[
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => __( "Enabling this option will disable Elementor's Transform feature within the Elementor Editor.", 'essential-addons-for-elementor-lite' ),
+				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+			]
+		);
+
+		$element->add_control(
 			'eael_hover_effect_enable_live_changes',
 			[
 				'label'     => __( 'Show Preview in Editor', 'essential-addons-for-elementor-lite' ),
