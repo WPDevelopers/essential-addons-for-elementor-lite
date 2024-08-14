@@ -60,7 +60,7 @@ class Hover_Effect {
 		$element->add_control(
 			'eael_hover_effect_enable_live_changes_note',
 			[
-				'type'            => Controls_Manager  :: RAW_HTML,
+				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => __( 'Enabling this option will let you preview the Hover Interactions inside the Elementor Editor.', 'essential-addons-for-elementor-lite' ),
 				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 				'condition'       => [
@@ -69,8 +69,13 @@ class Hover_Effect {
 			]
 		);
 
-        $element->start_controls_tabs(
-			'eael_hover_effect'
+		$element->start_controls_tabs(
+			'eael_hover_effect',
+			[
+				'condition' => [
+					'eael_hover_effect_switch' => 'yes',
+				]
+			]
 		);
 
         //Normal Tab
