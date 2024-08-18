@@ -63,7 +63,6 @@ var WooCheckout = function ($scope, $) {
         let item_quantity = $( this ).val();
         let currentVal = parseFloat(item_quantity);
 		$this = $(this);
-		$( document.body ).trigger( 'update_checkout' );
         $.ajax({
 			type: 'POST',
 			url: localize.ajaxurl,
@@ -73,6 +72,11 @@ var WooCheckout = function ($scope, $) {
 				cart_item_key: cart_item_key,
 				quantity: currentVal
 			},
+			success: function(response) {
+				if(response.success) {
+					$( document.body ).trigger( 'update_checkout' );
+				}
+			}
 		});
     });
 
