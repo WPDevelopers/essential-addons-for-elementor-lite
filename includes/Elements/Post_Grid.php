@@ -250,6 +250,19 @@ class Post_Grid extends Widget_Base
         );
 
         $this->add_control(
+            'eael_post_grid_style_three_alert',
+            [
+                'type' => Controls_Manager::RAW_HTML,
+                'raw' => __('Make sure to enable <strong>Show Date</strong> option from <strong>Layout Settings</strong>', 'essential-addons-for-elementor-lite'),
+                'content_classes' => 'eael-warning',
+                'condition' => [
+                    'eael_post_grid_preset_style' => ['two', 'three'],
+                    'eael_show_date' => '',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'eael_post_grid_bg_color',
             [
                 'label' => __('Post Background Color', 'essential-addons-for-elementor-lite'),
