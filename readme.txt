@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 6.0.0
+Stable tag: 6.0.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -298,6 +298,14 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.0.1 - 19/08/2024 =
+
+- Fixed: Elementor transform example rotate, skew etc features not working inside Elementor Editor
+- Fixed: Custom Template shows broken inside Elementor Editor if EA is activated in some cases
+- Fixed: Dashboard UI/UX related issues after EA 6.0 update
+- Improved: Added async requests to all the actions inside EA Dashboard
+- Few minor bug fixes & improvements
 
 = 6.0.0 - 11/08/2024 =
 
