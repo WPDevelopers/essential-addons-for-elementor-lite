@@ -206,7 +206,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
     if ( $thumbnail_html && 'yes' === $settings['eael_show_image'] ) {
 
         echo '<div class="eael-entry-media">';
-        if ( 'yes' === $settings['eael_post_terms_on_image_hover'] ) {
+        if ( 'yes' === $settings['eael_show_post_terms'] && 'yes' === $settings['eael_post_terms_on_image_hover'] ) {
             echo Helper::get_terms_as_list($settings['eael_post_terms'], $settings['eael_post_terms_max_length']);
         }
 
