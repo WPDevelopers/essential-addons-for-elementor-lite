@@ -57,7 +57,7 @@ class Woo_Product_Price extends Widget_Base {
 				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'.woocommerce {{WRAPPER}} .price' => 'color: {{VALUE}};',
+					'.woocommerce {{WRAPPER}} .eael-single-product-price .price' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -83,7 +83,7 @@ class Woo_Product_Price extends Widget_Base {
 				],
 				'toggle'       => true,
 				'selectors'    => [
-					'{{WRAPPER}}' =>  'text-align: {{VALUE}};',
+					'{{WRAPPER}} .eael-single-product-price' =>  'text-align: {{VALUE}};',
 				],
 			]
 		);
@@ -92,7 +92,7 @@ class Woo_Product_Price extends Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name'     => 'price_typography',
-				'selector' => '.woocommerce {{WRAPPER}} .price',
+				'selector' => '.woocommerce {{WRAPPER}} .eael-single-product-price .price',
 			]
 		);
 
@@ -102,7 +102,7 @@ class Woo_Product_Price extends Widget_Base {
 				'label'     => esc_html__( 'Text Decoration Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'.woocommerce {{WRAPPER}} .price del' => 'text-decoration-color: {{VALUE}};',
+					'.woocommerce {{WRAPPER}} .eael-single-product-price .price del' => 'text-decoration-color: {{VALUE}};',
 				],
 			]
 		);
@@ -124,7 +124,7 @@ class Woo_Product_Price extends Widget_Base {
 				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'.woocommerce {{WRAPPER}} .price del .woocommerce-Price-currencySymbol' => 'color: {{VALUE}};',
+					'.woocommerce {{WRAPPER}} .eael-single-product-price .price del .woocommerce-Price-currencySymbol' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -133,7 +133,7 @@ class Woo_Product_Price extends Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name'     => 'price_currency_typography',
-				'selector' => '.woocommerce {{WRAPPER}} .price del .woocommerce-Price-currencySymbol',
+				'selector' => '.woocommerce {{WRAPPER}} .eael-single-product-price .price del .woocommerce-Price-currencySymbol',
 			]
 		);
 
@@ -152,7 +152,7 @@ class Woo_Product_Price extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'.woocommerce {{WRAPPER}} .price del .woocommerce-Price-currencySymbol' => 'margin-right: {{SIZE}}{{UNIT}};',
+					'.woocommerce {{WRAPPER}} .eael-single-product-price .price del .woocommerce-Price-currencySymbol' => 'margin-right: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -174,7 +174,7 @@ class Woo_Product_Price extends Widget_Base {
 				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'.woocommerce {{WRAPPER}} .price ins' => 'color: {{VALUE}};',
+					'.woocommerce {{WRAPPER}} .eael-single-product-price .price ins' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -183,7 +183,7 @@ class Woo_Product_Price extends Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name'     => 'sale_typography',
-				'selector' => '.woocommerce {{WRAPPER}} .price ins',
+				'selector' => '.woocommerce {{WRAPPER}} .eael-single-product-price .price ins',
 			]
 		);
 
@@ -202,7 +202,7 @@ class Woo_Product_Price extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'.woocommerce {{WRAPPER}} .price del' => 'margin-right: {{SIZE}}{{UNIT}}',
+					'.woocommerce {{WRAPPER}} .eael-single-product-price .price del' => 'margin-right: {{SIZE}}{{UNIT}}',
 				],
 			]
 		);
@@ -213,7 +213,7 @@ class Woo_Product_Price extends Widget_Base {
 				'label'     => esc_html__( 'Text Decoration Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'.woocommerce {{WRAPPER}} .price ins' => 'text-decoration-color: {{VALUE}};',
+					'.woocommerce {{WRAPPER}} .eael-single-product-price .price ins' => 'text-decoration-color: {{VALUE}};',
 				],
 			]
 		);
@@ -235,7 +235,7 @@ class Woo_Product_Price extends Widget_Base {
 				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'.woocommerce {{WRAPPER}} .price ins .woocommerce-Price-currencySymbol' => 'color: {{VALUE}};',
+					'.woocommerce {{WRAPPER}} .eael-single-product-price .price ins .woocommerce-Price-currencySymbol' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -244,7 +244,7 @@ class Woo_Product_Price extends Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name'     => 'sale_currency_typography',
-				'selector' => '.woocommerce {{WRAPPER}} .price ins .woocommerce-Price-currencySymbol',
+				'selector' => '.woocommerce {{WRAPPER}} .eael-single-product-price .price ins .woocommerce-Price-currencySymbol',
 			]
 		);
 
@@ -263,7 +263,7 @@ class Woo_Product_Price extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'.woocommerce {{WRAPPER}} .price ins .woocommerce-Price-currencySymbol' => 'margin-right: {{SIZE}}{{UNIT}}',
+					'.woocommerce {{WRAPPER}} .eael-single-product-price .price ins .woocommerce-Price-currencySymbol' => 'margin-right: {{SIZE}}{{UNIT}}',
 				],
 			]
 		);
@@ -280,7 +280,10 @@ class Woo_Product_Price extends Widget_Base {
         if ( ! $product ) {
             return;
         }
-
-        wc_get_template( '/single-product/price.php' );
+        ?>
+        <div class="eael-single-product-price">
+            <?php wc_get_template( '/single-product/price.php' ); ?>
+        </div>
+        <?php
 	}
 }
