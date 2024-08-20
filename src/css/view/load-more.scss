@@ -15,6 +15,15 @@
 	&.eael-force-hide {
 		display: none !important;
 	}
+
+	&.eael-infinity-scroll{
+		justify-content: center;
+
+		.eael-load-more-button:not(.button--loading){
+			display: none !important;
+			height: 1px;
+		}
+	}
 }
 
 .eael-button,

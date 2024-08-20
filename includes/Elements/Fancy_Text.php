@@ -591,8 +591,8 @@ class Fancy_Text extends Widget_Base {
 	public function fancy_text($settings) {
 		$fancy_text = array("");
 		foreach ( $settings as $item ) {
-			if ( ! empty( $item['eael_fancy_text_strings_text_field'] ) )  {
-				$fancy_text[] = HelperClass::eael_wp_kses($item['eael_fancy_text_strings_text_field']) ;
+			if ( ! empty( $item['eael_fancy_text_strings_text_field'] ) ) {
+				$fancy_text[] = HelperClass::eael_wp_kses( html_entity_decode( $item['eael_fancy_text_strings_text_field'] ) );
 			}
 		}
 		return implode("|",$fancy_text);

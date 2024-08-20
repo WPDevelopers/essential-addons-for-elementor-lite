@@ -11,9 +11,52 @@
     $nav-item-border-radius: 50%;
     $breakpoint: 600px;
     $animation-duration: 2s;
+    $rotation-speed: 50s;
 
     display: flex;
     justify-content: center;
+
+    &.eael-interactive-circle-rotate,
+    .eael-interactive-circle-rotate{
+        @keyframes rotation {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes rotation-reverse {
+            from {
+                transform: rotate(360deg);
+            }
+            to {
+                transform: rotate(0deg);
+            }
+        }
+        animation: rotation $rotation-speed linear infinite;
+
+        .eael-circle-btn-icon,.eael-circle-content {
+            animation: rotation-reverse $rotation-speed linear infinite;
+        }
+
+        @media only screen and (max-width: $breakpoint) {
+            &.eael-circle-responsive-view{
+                animation: none !important;
+
+                .eael-circle-btn-icon,.eael-circle-content {
+                    animation: none !important;
+                }
+            }
+        }
+
+        &.pause-rotate:hover{
+            animation-play-state: paused;
+            .eael-circle-btn-icon,.eael-circle-content {
+                animation-play-state: paused;
+            }
+        }
+    }
 
     .eael-circle-info {
         display: inline-flex;
@@ -94,7 +137,7 @@
                         background: $nav-item-initial-background;
                         border: $nav-item-border-width solid $nav-item-border-color;
                         box-shadow: $nav-item-box-shadow;
-                        z-index: 0;
+                        z-index: 9;
                         .eael-circle-icon-shapes {
                             display: none;
                         }

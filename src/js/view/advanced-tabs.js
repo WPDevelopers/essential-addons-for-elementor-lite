@@ -183,10 +183,6 @@ eael.hooks.addAction("init", "ea", () => {
 				if ($evCalendar.length) {
 					eael.hooks.doAction("eventCalendar.reinit");
 				}
-
-				setTimeout(function () {
-					window.dispatchEvent(new Event('resize'));
-				}, 100);
 			});
 
 			// If hashTag is not null then scroll to that hashTag smoothly

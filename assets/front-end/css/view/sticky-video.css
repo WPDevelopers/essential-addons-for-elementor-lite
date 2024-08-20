@@ -161,3 +161,12 @@
 .eaelsv-overlay-visibility-transparent .plyr--youtube.plyr--full-ui.plyr--video .plyr__control--overlaid {
   opacity: 0;
 }
+
+/*******************
+	Theme Support
+********************/
+
+.theme-blocksy .eael-sticky-video-player2[data-sticky*=yes]:not(.in, .out),
+.theme-blocksy .eael-sticky-video-player2[data-sticky*=fixed]:not(.in, .out) {
+  position: initial !important;
+}

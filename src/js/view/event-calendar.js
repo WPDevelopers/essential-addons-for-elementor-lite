@@ -14,11 +14,32 @@ var EventCalendar = function ($scope, $) {
 		multiDaysEventDayCount = typeof element.data("multidays_event_day_count") !== 'undefined' ? element.data("multidays_event_day_count") : 0,
 		eventLimit = element.data("event_limit"),
 		popupDateFormate = element.data("popup_date_formate"),
+		monthColumnHeaderFormat = element.data("monthcolumnheaderformat"),
+		weekColumnHeaderFormat = element.data("weekcolumnheaderformat"),
 		time_format = element.data("time_format") == "yes" ? true : false;
 
 	if ( wrapper.hasClass( 'layout-calendar' ) ){
 		var calendar = new Calendar(
 			$scope[0].querySelector(".eael-event-calendar-cls"), {
+				views: {
+					month: { // will produce something like "Tuesday, September 18, 2018"
+						dayHeaderContent: (args) => {
+							console.log('monthColumnHeaderFormat', monthColumnHeaderFormat)
+							if (args.view.type === 'dayGridMonth' && monthColumnHeaderFormat ) {
+								return moment(args.date).format(monthColumnHeaderFormat)
+							}
+						},
+					},
+					week: {
+						dayHeaderContent: (args) => {
+							console.log('weekColumnHeaderFormat', weekColumnHeaderFormat)
+
+							if (weekColumnHeaderFormat) {
+								return moment(args.date).format(weekColumnHeaderFormat);
+							}
+						},
+					},
+				},
 				editable: false,
 				selectable: false,
 				firstDay: firstDay,
@@ -48,13 +69,13 @@ var EventCalendar = function ($scope, $) {
 					if(multiDaysEventDayCount && event.endStr > event.startStr){
 						let startDate 	= typeof event.startStr !== 'undefined' ? new Date(event.startStr) : '';
 						let endDate 	= typeof event.endStr 	!== 'undefined' ? new Date(event.endStr) : '';
-						
+
 						let oneDay = 24 * 60 * 60 * 1000;
 						let totalDays = (endDate - startDate ) / oneDay;
-						
+
 						let currentCellDate = $(element).prevAll('tr.fc-list-day:first')?.data('date');
 							currentCellDate	= typeof currentCellDate !== 'undefined' ? new Date(currentCellDate) : '';
-						
+
 						let eventDayCount 	= startDate && currentCellDate ? Math.ceil((currentCellDate - startDate) / oneDay) + 1 : '';
 						let eventTitle = `${event.title} (Day ${eventDayCount}/${totalDays} )`;
 						element.find(".fc-list-event-title a").text(eventTitle);

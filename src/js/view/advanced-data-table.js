@@ -42,7 +42,7 @@ class advancedDataTable {
           let text = $(this)[0].innerHTML;
           if (isEscapedHtmlString(text)) {
             text = decodeEscapedHtmlString(text);
-            $(this).html(text.replace("<script>", "").replace("</script>", "").replace("<script", ""));
+            $(this).html(DOMPurify.sanitize(text));
           }
         });
       }

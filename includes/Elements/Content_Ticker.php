@@ -769,7 +769,7 @@ class Content_Ticker extends Widget_Base
             $this->add_render_attribute('content-ticker', 'data-arrows', '1');
         }
         
-        echo '<div class="eael-ticker-wrap" id="eael-ticker-wrap-' . $this->get_id() . '">';
+        echo '<div class="eael-ticker-wrap" id="eael-ticker-wrap-' . esc_attr( $this->get_id() ) . '">';
         if (!empty($settings['eael_ticker_tag_text'])) {
             echo '<div class="ticker-badge">
                     <span>' . Helper::eael_wp_kses($settings['eael_ticker_tag_text']) . '</span>
@@ -829,7 +829,7 @@ class Content_Ticker extends Widget_Base
 
             $html = '<div class="content-ticker-pagination">';
 
-            $html .= '<div class="swiper-button-next swiper-button-next-' . $this->get_id() . '">';
+            $html .= '<div class="swiper-button-next swiper-button-next-' . esc_attr( $this->get_id() ) . '">';
             if (isset($arrow['url'])) {
                 $html .= '<img src="' . esc_url($arrow['url']) . '" alt="' . esc_attr(get_post_meta($arrow['id'], '_wp_attachment_image_alt', true)) . '" />';
             } else {
@@ -837,7 +837,7 @@ class Content_Ticker extends Widget_Base
             }
             $html .= '</div>';
 
-            $html .= '<div class="swiper-button-prev swiper-button-prev-' . $this->get_id() . '">';
+            $html .= '<div class="swiper-button-prev swiper-button-prev-' . esc_attr( $this->get_id() ) . '">';
             if (isset($settings['prev_arrow']['value']['url'])) {
                 $html .= '<img src="' . esc_url($settings['prev_arrow']['value']['url']) . '" alt="' . esc_attr(get_post_meta($settings['prev_arrow']['value']['id'], '_wp_attachment_image_alt', true)) . '" />';
             } else {

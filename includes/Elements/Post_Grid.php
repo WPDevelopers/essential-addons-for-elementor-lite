@@ -248,18 +248,6 @@ class Post_Grid extends Widget_Base
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
-        $this->add_control(
-            'eael_post_grid_preset_style',
-            [
-                'label' => __('Select Style', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'options' => [
-                    '' => __('Default', 'essential-addons-for-elementor-lite'),
-                    'two' => __('Style Two', 'essential-addons-for-elementor-lite'),
-                    'three' => __('Style Three', 'essential-addons-for-elementor-lite'),
-                ],
-            ]
-        );
 
         $this->add_control(
             'eael_post_grid_style_three_alert',
@@ -1142,7 +1130,7 @@ class Post_Grid extends Widget_Base
             <script type="text/javascript">
                 jQuery(document).ready(function($) {
                     jQuery(".eael-post-grid").each(function() {
-                        var $scope = jQuery(".elementor-element-<?php echo $this->get_id(); ?>"),
+                        var $scope = jQuery(".elementor-element-<?php echo esc_js( $this->get_id() ); ?>"),
                             $gallery = $(this),
                             $layout_mode = $gallery.data('layout-mode');
 

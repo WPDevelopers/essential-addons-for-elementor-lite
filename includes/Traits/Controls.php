@@ -193,6 +193,20 @@ trait Controls
             ]
         );
 
+        if( $wb->get_name() === 'eael-post-list' ) {
+            $wb->add_control(
+                'eael_fecth_all_posts',
+                [
+                    'label' => esc_html__( 'Fetch All Posts', 'essential-addons-for-elementor-lite' ),
+                    'type' => Controls_Manager::SWITCHER,
+                    'label_on' => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+                    'label_off' => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+                    'return_value' => 'yes',
+                    'description' => esc_html__( 'By Enabling this option all posts will be fetch for "All" tab except exclude.', 'essential-addons-for-elementor-lite' ),
+                ]
+            );
+        }
+
         $wb->add_control(
             'orderby',
             [
@@ -205,18 +219,24 @@ trait Controls
         );
 
         $wb->add_control(
-            'order',
-            [
-                'label' => __('Order', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'options' => [
-                    'asc' => 'Ascending',
-                    'desc' => 'Descending',
-                ],
-                'default' => 'desc',
-
-            ]
-        );
+			'order',
+			[
+				'label'   => __( 'Order', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'asc' => [
+						'title' => esc_html__( 'Ascending', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fas fa-sort-amount-up-alt',
+					],
+					'desc' => [
+						'title' => esc_html__( 'Descending', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fas fa-sort-amount-down',
+					],
+				],
+				'default' => 'desc',
+				'toggle'  => false,
+			]
+		);
 
         $wb->end_controls_section();
     }
@@ -425,18 +445,25 @@ trait Controls
         );
 
 	    if ('eael-post-block' === $wb->get_name()) {
-		    $wb->add_control(
-			    'eael_post_block_layout',
-			    [
-				    'label' => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
-				    'type' => Controls_Manager::SELECT,
-				    'default' => 'post-block-layout-block',
-				    'options' => [
-					    'post-block-layout-block' => esc_html__('Block', 'essential-addons-for-elementor-lite'),
-					    'post-block-layout-tiled' => esc_html__('Tiled', 'essential-addons-for-elementor-lite'),
-				    ],
-			    ]
-		    );
+            $wb->add_control(
+                'eael_post_block_layout',
+                [
+                    'label' => esc_html__( 'Layout', 'textdomain' ),
+                    'type' => Controls_Manager::CHOOSE,
+                    'options' => [
+                        'post-block-layout-block' => [
+                            'title' => esc_html__( 'Block', 'essential-addons-for-elementor-lite' ),
+                            'icon' => 'eicon-gallery-grid',
+                        ],
+                        'post-block-layout-tiled' => [
+                            'title' => esc_html__( 'Tiled', 'essential-addons-for-elementor-lite' ),
+                            'icon' => 'eicon-posts-group',
+                        ],
+                    ],
+                    'default' => 'post-block-layout-block',
+                    'toggle' => false,
+                ]
+            );
 
 		    $wb->add_control(
 			    'eael_post_tiled_preset',
@@ -522,15 +549,45 @@ trait Controls
 		    );
 	    }
 
-        $wb->add_control(
-            'eael_dynamic_template_Layout',
-            [
-                'label'   => esc_html__('Template Layout', 'essential-addons-for-elementor-lite'),
-                'type'    => Controls_Manager::SELECT,
-                'default' => 'default',
-                'options' => $wb->get_template_list_for_dropdown(),
-            ]
-        );
+        if( 'eael-post-timeline' === $wb->get_name() ){
+            $template_list = $wb->get_template_list_for_dropdown();
+            $layout_options = [];
+            if( ! empty( $template_list ) ){
+                $image_dir_url = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/';
+                $image_dir_path = EAEL_PLUGIN_PATH . 'assets/admin/images/layout-previews/';
+                foreach( $template_list as $key => $label ){
+                    $image_url = $image_dir_url . 'post-timeline-' . $key . '.png';
+                    $image_url =  file_exists( $image_dir_path . 'post-timeline-' . $key . '.png' ) ? $image_url : $image_dir_url . 'custom-layout.png';
+                    $layout_options[ $key ] = [
+                        'title' => $label,
+                        'image' => $image_url
+                    ];
+                }
+            }
+
+            $wb->add_control(
+                'eael_dynamic_template_Layout',
+                [
+                    'label'       => esc_html__( 'Template Layout', 'essential-addons-for-elementor-lite' ),
+                    'type'        => Controls_Manager::CHOOSE,
+                    'options'     => $layout_options,
+                    'default'     => 'default',
+                    'label_block' => true,
+                    'toggle'      => false,
+                    'image_choose'=> true,
+                ]
+            );
+        }else{
+            $wb->add_control(
+                'eael_dynamic_template_Layout',
+                [
+                    'label'   => esc_html__('Template Layout', 'essential-addons-for-elementor-lite'),
+                    'type'    => Controls_Manager::SELECT,
+                    'default' => 'default',
+                    'options' => $wb->get_template_list_for_dropdown(),
+                ]
+            );
+        }
 
         if ('eael-post-carousel' === $wb->get_name()) {
             $wb->add_control(
@@ -635,14 +692,24 @@ trait Controls
                 $wb->add_control(
                     'content_timeline_layout',
                     [
-                        'label' => esc_html__('Position', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::SELECT,
-                        'default' => 'center',
+                        'label'   => esc_html__( 'Position', 'essential-addons-for-elementor-lite' ),
+                        'type'    => Controls_Manager::CHOOSE,
                         'options' => [
-                            'left' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
-                            'center' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
-                            'right' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
+                            'left' => [
+                                'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+                                'icon'  => 'eicon-h-align-right',
+                            ],
+                            'center' => [
+                                'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
+                                'icon'  => 'eicon-h-align-center',
+                            ],
+                            'right' => [
+                                'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+                                'icon'  => 'eicon-h-align-left',
+                            ],
                         ],
+                        'default'   => 'center',
+                        'toggle'    => false,
                         'condition' => [
                             'eael_dynamic_template_Layout' => 'default',
                         ],
@@ -652,14 +719,24 @@ trait Controls
                 $wb->add_control(
                     'content_timeline_layout_horizontal',
                     [
-                        'label' => esc_html__('Position', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::SELECT,
-                        'default' => 'middle',
+                        'label'   => esc_html__( 'Position', 'essential-addons-for-elementor-lite' ),
+                        'type'    => Controls_Manager::CHOOSE,
                         'options' => [
-                            'top' => esc_html__('Top', 'essential-addons-for-elementor-lite'),
-                            'middle' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
-                            'bottom' => esc_html__('Bottom', 'essential-addons-for-elementor-lite'),
+                            'top' => [
+                                'title' => esc_html__( 'Top', 'essential-addons-for-elementor-lite' ),
+                                'icon'  => 'eicon-v-align-bottom',
+                            ],
+                            'middle' => [
+                                'title' => esc_html__( 'Middle', 'essential-addons-for-elementor-lite' ),
+                                'icon'  => 'eicon-v-align-middle',
+                            ],
+                            'bottom' => [
+                                'title' => esc_html__( 'Bottom', 'essential-addons-for-elementor-lite' ),
+                                'icon'  => 'eicon-v-align-top',
+                            ],
                         ],
+                        'default'   => 'middle',
+                        'toggle'    => false,
                         'condition' => [
                             'eael_dynamic_template_Layout' => 'horizontal',
                         ],
@@ -704,24 +781,54 @@ trait Controls
                 $wb->add_control(
                     'show_load_more',
                     [
-                        'label' => __('Show Load More', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::SWITCHER,
-                        'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                        'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
-                        'return_value' => 'yes',
-                        'default' => '',
+                        'label'   => esc_html__( 'Load More', 'essential-addons-for-elementor-lite' ),
+                        'type'    => Controls_Manager::CHOOSE,
+                        'options' => [
+                            'no' => [
+                                'title' => esc_html__( 'Disable', 'essential-addons-for-elementor-lite' ),
+                                'icon'  => 'eicon-ban',
+                            ],
+                            'yes' => [
+                                'title' => esc_html__( 'Button', 'essential-addons-for-elementor-lite' ),
+                                'icon'  => 'eicon-button',
+                            ],
+                            'infinity' => [
+                                'title' => esc_html__( 'Infinity Scroll', 'essential-addons-for-elementor-lite' ),
+                                'icon'  => 'eicon-image-box',
+                            ],
+                        ],
+                        'default'   => 'no',
+                        'separator' => 'before',
+                        'toggle'    => false,
+                    ]
+                );
+
+                $wb->add_control(
+                    'load_more_infinityscroll_offset',
+                    [
+                        'label'       => esc_html__('Scroll Offset (px)', 'essential-addons-for-elementor-lite'),
+                        'type'        => Controls_Manager::NUMBER,
+                        'dynamic'     => [ 'active' => false ],
+                        'label_block' => false,
+                        'separator'   => 'after',
+                        'default'     => '-200',
+                        'description' => esc_html__('Set the position of loading to the viewport before it ends from view', 'essential-addons-for-elementor-lite'),
+                        'condition'   => [
+                            'show_load_more' => 'infinity',
+                        ],
                     ]
                 );
 
                 $wb->add_control(
                     'show_load_more_text',
                     [
-                        'label' => esc_html__('Label Text', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::TEXT,
+                        'label'       => esc_html__('Label Text', 'essential-addons-for-elementor-lite'),
+                        'type'        => Controls_Manager::TEXT,
                         'dynamic'     => [ 'active' => true ],
                         'label_block' => false,
-                        'default' => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
-                        'condition' => [
+                        'separator'   => 'after',
+                        'default'     => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
+                        'condition'   => [
                             'show_load_more' => ['yes', '1', 'true'],
                         ],
                     ]
@@ -1012,35 +1119,37 @@ trait Controls
                     ],
                 ]
             );
-            $wb->add_control(
-                'eael_show_fallback_img',
-                [
-                    'label' => __('Fallback Image', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SWITCHER,
-                    'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                    'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
-                    'return_value' => 'yes',
-                    'default' => '',
-                    'condition' => [
-                        'eael_show_image' => 'yes',
-                    ],
-                ]
-            );
-            $wb->add_control(
-                'eael_post_carousel_fallback_img',
-                [
-                    'label'             => __( 'Image', 'essential-addons-for-elementor-lite' ),
-                    'type'              => Controls_Manager::MEDIA,
-                    'condition'         => [
-                        'eael_show_fallback_img'    => 'yes',
-                        'eael_show_image' => 'yes',
-                    ],
-                    'ai' => [
-                        'active' => false,
-                    ],
-                ]
-            );
         }
+
+        $wb->add_control(
+            'eael_show_fallback_img_all',
+            [
+                'label' => __('Fallback Image', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default' => '',
+                'condition' => [
+                    'eael_show_image' => 'yes',
+                ],
+            ]
+        );
+
+        $wb->add_control(
+            'eael_post_carousel_fallback_img_all',
+            [
+                'label'             => __( 'Image', 'essential-addons-for-elementor-lite' ),
+                'type'              => Controls_Manager::MEDIA,
+                'condition'         => [
+                    'eael_show_fallback_img_all'    => 'yes',
+                    'eael_show_image' => 'yes',
+                ],
+                'ai' => [
+                    'active' => false,
+                ],
+            ]
+        );
 
         $wb->add_control(
             'eael_show_title',
@@ -1057,25 +1166,54 @@ trait Controls
         $wb->add_control(
             'title_tag',
             [
-                'label' => __('Title Tag', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'default' => 'h2',
-                'options' => [
-                    'h1' => __('H1', 'essential-addons-for-elementor-lite'),
-                    'h2' => __('H2', 'essential-addons-for-elementor-lite'),
-                    'h3' => __('H3', 'essential-addons-for-elementor-lite'),
-                    'h4' => __('H4', 'essential-addons-for-elementor-lite'),
-                    'h5' => __('H5', 'essential-addons-for-elementor-lite'),
-                    'h6' => __('H6', 'essential-addons-for-elementor-lite'),
-                    'span' => __('Span', 'essential-addons-for-elementor-lite'),
-                    'p' => __('P', 'essential-addons-for-elementor-lite'),
-                    'div' => __('Div', 'essential-addons-for-elementor-lite'),
-                ],
+                'label'       => __('Title Tag', 'essential-addons-for-elementor-lite'),
+				'label_block' => true,
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => [
+					'h1' => [
+						'title' => esc_html__( 'H1', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h1',
+					],
+					'h2' => [
+						'title' => esc_html__( 'H2', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h2',
+					],
+					'h3' => [
+						'title' => esc_html__( 'H3', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h3',
+					],
+					'h4' => [
+						'title' => esc_html__( 'H4', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h4',
+					],
+					'h5' => [
+						'title' => esc_html__( 'H5', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h5',
+					],
+					'h6' => [
+						'title' => esc_html__( 'H6', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h6',
+					],
+					'div' => [
+						'title' => esc_html__( 'Div', 'essential-addons-for-elementor-lite' ),
+						'text'  => 'div',
+					],
+					'span' => [
+						'title' => esc_html__( 'Span', 'essential-addons-for-elementor-lite' ),
+						'text'  => 'span',
+					],
+					'p' => [
+						'title' => esc_html__( 'P', 'essential-addons-for-elementor-lite' ),
+						'text'  => 'P',
+					],
+				],
+                'default'   => 'h2',
+				'toggle'    => false,
                 'condition' => [
                     'eael_show_title' => 'yes',
                 ],
-            ]
-        );
+			]
+		);
 
         if ('eael-post-grid' === $wb->get_name() || 'eael-post-carousel' === $wb->get_name()) {
             $wb->add_control(
@@ -1327,6 +1465,36 @@ trait Controls
             );
         }
 
+        //Only show for "Post Grid" widget
+        if( 'eael-post-grid' === $wb->get_name() ) {
+            $image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/post-grid-';
+            $wb->add_control(
+                'eael_post_grid_preset_style',
+                [
+                    'label'       => esc_html__( 'Select Style', 'essential-addons-for-elementor-lite' ),
+                    'type'        => Controls_Manager::CHOOSE,
+                    'options'     => [
+                        'one' => [
+                            'title' => esc_html__('Default', 'essential-addons-for-elementor-lite'),
+                            'image' => $image_path . 'one.png'
+                        ],
+                        'two' => [
+                            'title' => esc_html__('Two', 'essential-addons-for-elementor-lite'),
+                            'image' => $image_path . 'two.png'
+                        ],
+                        'three' => [
+                            'title' => esc_html__('Three', 'essential-addons-for-elementor-lite'),
+                            'image' => $image_path . 'three.png'
+                        ],
+                    ],
+                    'default'     => 'one',
+                    'label_block' => true,
+                    'toggle'      => false,
+                    'image_choose'=> true,
+                ]
+            );
+        }
+
         if ( 'eael-post-carousel' === $wb->get_name() 
             || 'eael-post-grid' === $wb->get_name()
             || 'eael-post-block' === $wb->get_name()
@@ -1363,6 +1531,11 @@ trait Controls
                 $eael_show_post_terms_child_condition = [ 'eael_show_post_terms' => 'yes' ];
             }
 
+            //Only show for "Post Grid" widget
+            if ( 'eael-post-grid' === $wb->get_name() ) {
+                $eael_show_post_terms_child_condition['eael_post_grid_preset_style'] = ['two', 'three'];
+            }
+
 	        $post_types = ControlsHelper::get_post_types();
 	        unset(
 		        $post_types['post'],
@@ -1395,7 +1568,7 @@ trait Controls
 					        'eael_show_image'             => 'yes',
 					        'eael_show_post_terms'        => 'yes',
 					        'post_type'                   => $post_type,
-					        'eael_post_grid_preset_style' =>  'two',
+					        'eael_post_grid_preset_style' =>  ['two', 'three'],
 				        ],
 			        ]
 		        );
@@ -1445,7 +1618,7 @@ trait Controls
                         'default'     => esc_html__( '', 'essential-addons-for-elementor-lite' ),
                         'condition'   => [
                             'eael_show_post_terms'        => 'yes',
-                            'eael_post_grid_preset_style' =>  'two',
+                            'eael_post_grid_preset_style' =>  ['two', 'three'],
                         ],
                     ]
                 );
@@ -1990,10 +2163,10 @@ trait Controls
         $wb->start_controls_section(
             'eael_section_load_more_btn',
             [
-                'label' => __('Load More Button', 'essential-addons-for-elementor-lite'),
+                'label' => __('Load More', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
-                    'show_load_more' => ['yes', '1', 'true'],
+                    'show_load_more' => ['yes', '1', 'true', 'infinity'],
                 ],
             ]
         );
