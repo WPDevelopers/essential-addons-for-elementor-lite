@@ -90,25 +90,6 @@ class Woo_Product_Rating extends Widget_Base {
 		);
 
         $this->add_control(
-			'eael_star_text_color',
-			[
-				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
-				'selectors' => [
-					'.woocommerce {{WRAPPER}} .eael-single-product-rating .woocommerce-review-link' => 'color: {{VALUE}};',
-				],
-			]
-		);
-
-        $this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
-			[
-				'name'     => 'eael_star_text_typography',
-				'selector' => '.woocommerce {{WRAPPER}} .eael-single-product-rating .woocommerce-review-link',
-			]
-		);
-
-        $this->add_control(
 			'eael_star_size',
 			[
 				'label'      => esc_html__( 'Star Size', 'essential-addons-for-elementor-lite' ),
@@ -131,6 +112,25 @@ class Woo_Product_Rating extends Widget_Base {
 				'selectors' => [
 					'.woocommerce {{WRAPPER}} .eael-single-product-rating .star-rating' => 'font-size: {{SIZE}}{{UNIT}};',
 				],
+			]
+		);
+
+        $this->add_control(
+			'eael_star_text_color',
+			[
+				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-rating .woocommerce-review-link' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name'     => 'eael_star_text_typography',
+				'selector' => '.woocommerce {{WRAPPER}} .eael-single-product-rating .woocommerce-review-link',
 			]
 		);
 
