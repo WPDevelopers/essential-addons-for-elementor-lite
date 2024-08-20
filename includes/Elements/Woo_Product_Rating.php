@@ -33,10 +33,37 @@ class Woo_Product_Rating extends Widget_Base {
 
 		// Style Tab Start
 		$this->start_controls_section(
-			'section_title_style',
+			'eael_section_title_style',
 			[
 				'label' => esc_html__( 'Rating', 'essential-addons-for-elementor-lite' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+        $this->add_control(
+			'eael_star_align',
+			[
+				'label'   => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
+				'type'    => \Elementor\Controls_Manager::CHOOSE,
+				'options' => [
+					'left' => [
+						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-center',
+					],
+					'right' => [
+						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+                    'justify' => [
+						'title' => esc_html__( 'Justified', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-text-align-justify',
+					],
+				],
+                'prefix_class' => 'elementor-product-rating--align-',
 			]
 		);
 
@@ -62,6 +89,77 @@ class Woo_Product_Rating extends Widget_Base {
 			]
 		);
 
+        $this->add_control(
+			'eael_star_text_color',
+			[
+				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-rating .woocommerce-review-link' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name'     => 'eael_star_text_typography',
+				'selector' => '.woocommerce {{WRAPPER}} .eael-single-product-rating .woocommerce-review-link',
+			]
+		);
+
+        $this->add_control(
+			'eael_star_size',
+			[
+				'label'      => esc_html__( 'Star Size', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'rem', 'em', '%', 'custom' ],
+				'range' => [
+					'px' => [
+						'max' => 100,
+					],
+                    'rem' => [
+						'max' => 50,
+					],
+					'em' => [
+						'max' => 50,
+					],
+					'%' => [
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-rating .star-rating' => 'font-size: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+        $this->add_control(
+			'eael_star_text_spaceing',
+			[
+				'label'      => esc_html__( 'Text Spaceing', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'rem', 'em', '%', 'custom' ],
+				'range' => [
+					'px' => [
+						'max' => 100,
+					],
+                    'rem' => [
+						'max' => 50,
+					],
+					'em' => [
+						'max' => 50,
+					],
+					'%' => [
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-rating .star-rating' => 'margin-right: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 		// Style Tab End
 
@@ -69,6 +167,7 @@ class Woo_Product_Rating extends Widget_Base {
 
 	protected function render() {
         global $product;
+
         if ( ! $product ) {
             return;
         }
