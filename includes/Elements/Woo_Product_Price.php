@@ -19,7 +19,7 @@ class Woo_Product_Price extends Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'eicon-product-price';
+		return 'eicon-elementor-circle';
 	}
 
 	public function get_categories() {
