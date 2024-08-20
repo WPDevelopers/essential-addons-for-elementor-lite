@@ -238,6 +238,77 @@ trait Controls
 			]
 		);
 
+
+        if ( 'eael-dynamic-filterable-gallery' === $wb->get_name() ) {
+            $wb->add_control(
+                'fetch_acf_image_gallery',
+                [
+                    'label'        => esc_html__( 'Image From ACF Gallery ?', 'essential-addons-for-elementor-lite' ),
+                    'type'         => Controls_Manager::SWITCHER,
+                    'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+                    'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+                    'return_value' => 'yes',
+                    'default'      => 'no',
+                    'separator'    => 'before',
+                ]
+            );
+
+            $wb->add_control(
+                'eael_gf_hide_parent_post',
+                [
+                    'label'        => esc_html__( 'Hide Parent Post ?', 'essential-addons-for-elementor-lite' ),
+                    'type'         => Controls_Manager::SWITCHER,
+                    'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+                    'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+                    'return_value' => 'yes',
+                    'default'      => 'no',
+                    'condition'    => [
+                        'fetch_acf_image_gallery' => 'yes'
+                    ]
+                ]
+            );
+
+            if( class_exists( 'ACF' ) ){
+                $fields = get_field_objects();
+                $key_list = [ '' => esc_html__( 'No Gallery Field Found', 'essential-addons-for-elementor-lite' ) ];
+                if( ! empty( $fields ) ){
+                    $key_list = [];
+                    foreach( $fields as $field_name => $field ){
+                        if( 'gallery' === $field['type'] ){
+                            $key_list[ $field_name ] = $field['label'];
+                        }
+                    }
+                }
+                    
+                $wb->add_control(
+                    'eael_acf_gallery_keys',
+                    [
+                        'label'       => esc_html__( 'Select ACF Gallery Fields', 'essential-addons-for-elementor-lite' ),
+                        'type'        => Controls_Manager::SELECT2,
+                        'label_block' => true,
+                        'multiple'    => true,
+                        'options'     => $key_list,
+                        'condition'   => [
+                            'fetch_acf_image_gallery' => 'yes'
+                        ]
+                    ]
+                );
+
+            } else {
+                $wb->add_control(
+                    'eael_scf_gallery_warnig_text',
+                    [
+                        'type'            => Controls_Manager::RAW_HTML,
+                        'raw'             => __('<strong>Advanced Custom Fields (ACF)</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=advanced-custom-fields&tab=search&type=term" target="_blank">Advanced Custom Fields (ACF)</a> first.', 'essential-addons-for-elementor-lite'),
+                        'content_classes' => 'eael-warning',
+                        'condition'       => [
+                            'fetch_acf_image_gallery' => 'yes'
+                        ]
+                    ]
+                );
+            }
+        }
+
         $wb->end_controls_section();
     }
 
