@@ -32,6 +32,7 @@ let HoverEffectHandler = function ($scope, $) {
     $eaelOffsetHoverLeft     = $scope.data('eael_offset_hover_left'),
     $eaelTilt                = $scope.data('eaeltilt'),
     $eaelContainer           = $('.elementor-widget-container', $scope);
+    $enabledElementList      = [];
 
     /**
      * For editor page
@@ -45,9 +46,13 @@ let HoverEffectHandler = function ($scope, $) {
                 $.each($el, function (i, el) {
                     // console.log(el.attributes.settings.attributes);
                     let $getSettings = el.attributes.settings.attributes;
-                    if ( el.attributes.elType === 'widget' ) {
-                        if ( $getSettings['eael_hover_effect_switch'] === 'yes' && $getSettings['eael_hover_effect_enable_live_changes'] === 'yes' ) {
-                            eaelEditModeSettings[el.attributes.id] = el.attributes.settings.attributes;
+                    if (el.attributes.elType === 'widget') {
+                        if ($getSettings['eael_hover_effect_switch'] === 'yes') {
+                            $enabledElementList.push(el.attributes.id);
+
+                            if ($getSettings['eael_hover_effect_enable_live_changes'] === 'yes') {
+                                eaelEditModeSettings[el.attributes.id] = el.attributes.settings.attributes;
+                            }
                         }
                     }
     
@@ -286,6 +291,7 @@ let HoverEffectHandler = function ($scope, $) {
         "transition-duration": `${$eaelDurationVal}ms`,
         "transition-delay": `${$eaelDelayVal}ms`,
         "transition-timing-function": $eaelEasingVal,
+        "z-index": 1
     }
 
     //Hover
@@ -297,18 +303,21 @@ let HoverEffectHandler = function ($scope, $) {
         "transition-duration": `${$eaelDurationHoverVal}ms`,
         "transition-delay": `${$eaelDelayHoverVal}ms`,
         "transition-timing-function": $eaelEasingHoverVal,
+        "z-index": 2
     };
 
-    $(hoverSelector).hover(
-        function() {
-            $(this).css(hoverStyles);
-        },
-        function() {
-        $(this).css(normalStyles);
-        }
-    );  
+    if ($enabledElementList.includes($scopeId)) {
+        $(hoverSelector).hover(
+            function () {
+                $(this).css(hoverStyles);
+            },
+            function () {
+                $(this).css(normalStyles);
+            }
+        );
 
-    $eaelContainer.css(normalStyles);
+        $eaelContainer.css(normalStyles);
+    }
 
     //Tilt Effect
     if( $eaelTilt === 'eael_tilt' ) {

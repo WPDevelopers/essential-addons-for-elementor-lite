@@ -1634,6 +1634,8 @@ trait Admin {
 			wp_dequeue_style( 'betterdocs-icons' );
 			wp_dequeue_style( 'betterdocs-instant-answer' );
 			wp_dequeue_style( 'betterdocs-pro-settings' );
+			wp_dequeue_style( 'otgs-notices' );
+			wp_dequeue_style( 'sitepress-style' );
 
 			wp_dequeue_script( 'betterdocs-categorygrid' );
 			wp_dequeue_script( 'betterdocs-blocks-actions' );
