@@ -40,16 +40,97 @@ class Woo_Product_Images extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'eael_images_color',
+        //Start image
+        $this->add_control(
+			'eael_image_sale_flash',
 			[
-				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
-				'selectors' => [
-					'.woocommerce {{WRAPPER}}' => 'color: {{VALUE}};',
+				'label'        => esc_html__( 'Sale Flash', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'render_type'  => 'template',
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'prefix_class' => '',
+			]
+		);
+
+        $this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'name'      => 'eael_image_border',
+				'selector'  => '.woocommerce {{WRAPPER}} .eael-single-product-images .flex-viewport',
+				'separator' => 'before',
+			]
+		);
+
+        $this->add_responsive_control(
+			'eael_image_border_radius',
+			[
+				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
+				'selectors'  => [
+                    '.woocommerce {{WRAPPER}} .eael-single-product-images .flex-viewport' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
 				],
 			]
 		);
+
+        $this->add_control(
+			'eael_image_spacing',
+			[
+				'label'      => esc_html__( 'Spacing', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
+				'selectors'  => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-images .flex-viewport:not(:last-child)' => 'margin-bottom: {{SIZE}}{{UNIT}}',
+				],
+			]
+		);
+        //End image
+
+        //Start thumbnail
+        $this->add_control(
+			'eael_thumb_heading',
+			[
+				'label'     => esc_html__( 'Thumbnails', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'after',
+			]
+		);
+
+        $this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'name'      => 'eael_thumb_border',
+				'selector'  => '.woocommerce {{WRAPPER}} .eael-single-product-images .flex-control-thumbs img',
+			]
+		);
+
+        $this->add_responsive_control(
+			'eael_thumb_border_radius',
+			[
+				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
+				'selectors'  => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-images .flex-control-thumbs img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
+				],
+			]
+		);
+
+        $this->add_control(
+			'eael_thumb_spacing',
+			[
+				'label'      => esc_html__( 'Spacing', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
+				'selectors'  => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-images .flex-control-thumbs li:not(:last-child)' => 'margin-right: {{SIZE}}{{UNIT}}',
+				],
+			]
+		);
+        //End thumbnail
 
 		$this->end_controls_section();
 		// Style Tab End
