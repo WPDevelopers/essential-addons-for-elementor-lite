@@ -643,6 +643,9 @@ $config = [
         'woo-product-rating' => [
             'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Rating',
         ],
+        'woo-product-images' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Images',
+        ],
         'contact-form-7' => [
             'class' => '\Essential_Addons_Elementor\Elements\Contact_Form_7',
             'dependency' => [
