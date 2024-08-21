@@ -31,7 +31,6 @@ let HoverEffectHandler = function ($scope, $) {
     $eaelOffsetHoverTop      = $scope.data('eael_offset_hover_top'),
     $eaelOffsetHoverLeft     = $scope.data('eael_offset_hover_left'),
     $eaelTilt                = $scope.data('eaeltilt'),
-    $eaelContainer           = $('.elementor-widget-container', $scope);
     $enabledElementList      = [];
 
     /**
@@ -215,7 +214,8 @@ let HoverEffectHandler = function ($scope, $) {
         }
     }
 
-    let hoverSelector = `body [data-id="${$scopeId}"] > .elementor-widget-container`;
+    let hoverSelector = window.isEditMode ? `body [data-id="${$scopeId}"] > .elementor-widget-container` : `body .eael_hover_effect[data-id="${$scopeId}"] > .elementor-widget-container`,
+        $hoverSelector = $(hoverSelector);
 
     //Opacity
     let $opacityVal = $Opacity ? $Opacity?.opacity : '1';
@@ -306,8 +306,8 @@ let HoverEffectHandler = function ($scope, $) {
         "z-index": 2
     };
 
-    if ($enabledElementList.includes($scopeId)) {
-        $(hoverSelector).hover(
+    if (window.isEditMode && $enabledElementList.includes($scopeId) || !window.isEditMode && $hoverSelector.length) {
+        $hoverSelector.hover(
             function () {
                 $(this).css(hoverStyles);
             },
@@ -316,7 +316,7 @@ let HoverEffectHandler = function ($scope, $) {
             }
         );
 
-        $eaelContainer.css(normalStyles);
+        $hoverSelector.css(normalStyles);
     }
 
     //Tilt Effect
