@@ -55,6 +55,34 @@ class Woo_Product_Images extends Widget_Base {
 			]
 		);
 
+        $this->add_control(
+			'eael_image_sale_flash_text_color',
+			[
+				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-images span.onsale' => 'color: {{VALUE}};',
+				],
+                'condition' => [
+                    'eael_image_sale_flash' => 'yes',
+                ],        
+			]
+		);
+
+        $this->add_control(
+			'eael_image_sale_flash_bg_color',
+			[
+				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-images span.onsale' => 'background-color: {{VALUE}};',
+				],
+                'condition' => [
+                    'eael_image_sale_flash' => 'yes',
+                ],  
+			]
+		);
+
         $this->add_group_control(
 			\Elementor\Group_Control_Border::get_type(),
 			[
@@ -143,9 +171,24 @@ class Woo_Product_Images extends Widget_Base {
         if ( ! $product ) {
             return;
         }
+
+        $settings = $this->get_settings_for_display();
         ?>
         <div class="eael-single-product-images">
-            <?php wc_get_template( 'single-product/product-image.php' ); ?>
+            <?php
+                if ( 'yes' === $settings['eael_image_sale_flash'] ) {
+                    wc_get_template( 'loop/sale-flash.php' );
+                } 
+                wc_get_template( 'single-product/product-image.php' ); 
+            ?>
+
+            <?php if( \Elementor\Plugin::$instance->editor->is_edit_mode() ) { ?>
+            <script>
+				jQuery( '.woocommerce-product-gallery' ).each( function() {
+					jQuery( this ).wc_product_gallery();
+				} );
+			</script>
+            <?php } ?>
         </div>
         <?php
 	}
