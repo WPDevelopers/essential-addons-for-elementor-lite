@@ -1,6 +1,7 @@
 <?php
 
 namespace Essential_Addons_Elementor\Traits;
+use Essential_Addons_Elementor\Classes\Helper;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -269,7 +270,7 @@ trait Controls
             );
 
             if( class_exists( 'ACF' ) ){
-                $fields = get_field_objects();
+                $fields = Helper::get_all_acf_fields();
                 $key_list = [ '' => esc_html__( 'No Gallery Field Found', 'essential-addons-for-elementor-lite' ) ];
                 if( ! empty( $fields ) ){
                     $key_list = [];
