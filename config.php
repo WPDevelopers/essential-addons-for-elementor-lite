@@ -646,6 +646,9 @@ $config = [
         'woo-product-images' => [
             'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Images',
         ],
+        'woo-product-add-to-cart' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Add_To_Cart',
+        ],
         'contact-form-7' => [
             'class' => '\Essential_Addons_Elementor\Elements\Contact_Form_7',
             'dependency' => [
