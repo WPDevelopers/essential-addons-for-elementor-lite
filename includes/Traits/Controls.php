@@ -262,7 +262,7 @@ trait Controls
                     'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
                     'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
                     'return_value' => 'yes',
-                    'default'      => 'no',
+                    'default'      => 'yes',
                     'condition'    => [
                         'fetch_acf_image_gallery' => 'yes'
                     ]
