@@ -1,16 +1,92 @@
 import {useRef} from "react";
 import consumer from "../context";
+import {eaAjax} from "../helper/index.js";
 
 function LicenseForm() {
     const licenseRef = useRef(),
         {eaState, eaDispatch} = consumer(),
         submitHandler = () => {
+            const licenseManagerConfig = typeof wpdeveloperLicenseManagerConfig === 'undefined' ? {} : wpdeveloperLicenseManagerConfig;
             eaDispatch({type: 'BUTTON_LOADER', payload: 'license'});
 
             if (eaState.licenseStatus !== 'valid') {
-                setTimeout(eaDispatch, 500, {type: 'LICENSE_ACTIVATE', payload: licenseRef.current.value});
+                const params = {
+                    action: 'essential-addons-elementor/license/activate',
+                    license_key: licenseRef.current.value,
+                    _nonce: licenseManagerConfig?.nonce
+                };
+
+                const request = eaAjax(params, true);
+                request.onreadystatechange = () => {
+                    const response = request.responseText ? JSON.parse(request.responseText) : {};
+                    let licenseError = false,
+                        otp = false,
+                        otpEmail = response.data?.customer_email,
+                        licenseStatus,
+                        hiddenLicenseKey,
+                        errorMessage;
+
+                    if (response?.success) {
+                        switch (response.data.license) {
+                            case 'required_otp':
+                                otp = true;
+                                hiddenLicenseKey = response.data?.license_key;
+                                break;
+                            case 'valid':
+                                licenseStatus = response.data?.license;
+                                hiddenLicenseKey = response.data?.license_key;
+                                break;
+                        }
+                    } else {
+                        licenseError = true;
+                        errorMessage = response.data?.message;
+                    }
+
+                    eaDispatch({
+                        type: 'LICENSE_ACTIVATE',
+                        payload: {
+                            otp,
+                            licenseStatus,
+                            hiddenLicenseKey,
+                            licenseError,
+                            otpEmail,
+                            errorMessage,
+                            licenseKey: params.license_key
+                        }
+                    });
+                }
             } else {
-                setTimeout(eaDispatch, 500, {type: 'LICENSE_DEACTIVATE'});
+                const params = {
+                    action: 'essential-addons-elementor/license/deactivate',
+                    _nonce: licenseManagerConfig?.nonce
+                };
+
+                const request = eaAjax(params, true);
+                request.onreadystatechange = () => {
+                    const response = request.responseText ? JSON.parse(request.responseText) : {};
+                    let licenseError = false,
+                        licenseStatus,
+                        hiddenLicenseKey,
+                        errorMessage;
+
+                    if (response?.success) {
+                        licenseStatus = '';
+                        hiddenLicenseKey = '';
+                    } else {
+                        licenseError = true;
+                        errorMessage = response?.data?.message;
+                    }
+
+                    eaDispatch({
+                        type: 'LICENSE_DEACTIVATE',
+                        payload: {
+                            licenseStatus,
+                            hiddenLicenseKey,
+                            licenseError,
+                            errorMessage
+                        }
+                    });
+                }
             }
         },
         disabled = eaState.otp === true || eaState.licenseStatus === 'valid',

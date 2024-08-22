@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 6.0.0
+Stable tag: 6.0.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -29,9 +29,9 @@ Enable and disable individual Elementor adding to make your page load faster and
 
 
 ### 5000+ Ready Elementor Templates & Blocks through **Templately**
-Grab access to 5,000 pre-made templates templates from the ultimate templates cloud for WordPress, Templately, that come with Essential Addons.Unlock stunning Elementor templates, blocks and sections,and design your website to stand out from the crowd.
+Grab access to 5,000 pre-made templates from the ultimate templates cloud for WordPress, Templately, that come with Essential Addons.Unlock stunning Elementor templates, blocks and sections,and design your website to stand out from the crowd.
 
-[Templately: Most Popular Templates Cloud For Elementor](https://www.youtube.com/watch?v=Z73muoczARc)
+https://youtu.be/Z73muoczARc
 
 Each of these Elementor templates is completely customizable and responsive, and also seamlessly compatible with Essential Addons. You can add Elementor addons, change font or color  and personalize them effortlessly.
 
@@ -112,10 +112,10 @@ We have designed more than 50 of the most useful widgets to enhance your Element
 Extensions (Free):
 
 1. [Reading Progress Bar](https://essential-addons.com/reading-progress/) - Add progress bar to show reading position
-[youtube](https://www.youtube.com/watch?v=3Teo4kSWJPA)
+[Watch YouTube Tutorial](https://www.youtube.com/watch?v=3Teo4kSWJPA)
 2. [Duplicator](https://essential-addons.com/duplicator/) - Duplicate any page or post in a single click
 3. [Table of Contents](https://essential-addons.com/table-of-content/) - Display Table of Contents anywhere you want
-[youtube](https://www.youtube.com/watch?v=W6woRX7Ud7I)
+[Watch YouTube Tutorial](https://youtu.be/W6woRX7Ud7I)
 4. [Custom JS](https://essential-addons.com/custom-js/) - Add custom JavaScript in Elementor with a few clicks
 5. [Scroll to Top](https://essential-addons.com/scroll-to-top) - Let visitors quickly navigate to the top of your page
 6. [Wrapper Link](https://essential-addons.com/wrapper-link) - Add custom links into any section, column, or even flexbox
@@ -130,7 +130,7 @@ Extensions (Free):
 5. [Interactive Promo](https://essential-addons.com/interactive-promo/ ) - Display content with attractive animations
 6. [Instagram Feed](https://essential-addons.com/instagram-feed/) - Display Instagram posts beautifully in Elementor
 7. [Advanced Google Map](https://essential-addons.com/advanced-google-map/) - Create maps with unlimited themes
-[youtube](https://www.youtube.com/watch?v=kLx9O8ZoBv0)
+[Watch YouTube Tutorial](https://www.youtube.com/watch?v=kLx9O8ZoBv0)
 8. [Static Product](https://essential-addons.com/static-product/) - Present your static product just the way you want
 9. [Flip Carousel](https://essential-addons.com/flip-carousel/) - Feature your content using a unique carousel style
 10. [Interactive Cards](https://essential-addons.com/interactive-cards/) - Create fascinating effects for your content
@@ -188,7 +188,7 @@ With Essential Addons, we bring you seamless compatibility with WooCommerce, enh
 
 [EA Woo Product Collection (PRO)](https://essential-addons.com/docs/ea-woo-product-collections/): Exhibit your WooCommerce product collections on any section of your Elementor website to showcase items based on categories, tags, or attributes, and add engaging hover effects.
 
-[How to Add WooCommerce Product Collections using Elementor](https://youtu.be/4jKW2e2QY-g)
+https://youtu.be/4jKW2e2QY-g
 
 [EA Woo Product List](https://essential-addons.com/docs/ea-woo-product-list/): Easily add all your WooCommerce products in a listicle format on any Elementor page or post on your website and customize with unique layouts to attract customers instantly.
 
@@ -200,7 +200,7 @@ With Essential Addons, we bring you seamless compatibility with WooCommerce, enh
 
 [EA Woo Cross Sells:](https://essential-addons.com/docs/ea-woo-cross-sells/): Effortlessly show related items to your customers with this premium Elementor widget, aiding them in discovering complementary products and enriching their overall shopping experience.
 
-[How To Configure Cross-Sell With The EA Woo Cross Sell Widget?](https://www.youtube.com/watch?v=EQu8e1MwuKI)
+https://youtu.be/EQu8e1MwuKI
 
 
 [EA Woo Cart](https://essential-addons.com/docs/woocommerce-cart/): Elevate customers’ purchasing experience on your WooCommerce store by effortlessly designing an appealing Cart Page with Essential Addons using no coding.
@@ -209,7 +209,7 @@ With Essential Addons, we bring you seamless compatibility with WooCommerce, enh
 
 [EA Woo Account Dashboard (PRO)](https://essential-addons.com/docs/ea-woo-account-dashboard/): Create a user-friendly and visually appealing dashboard for your WooCommerce store, consolidating all vital tabs into one convenient location.
 
-[Configure The WooCommerce My Account With EA Woo Account Dashboard Widget](https://www.youtube.com/watch?v=CEUqgOS4CN0)
+https://youtu.be/CEUqgOS4CN0
 
 [EA Woo Thank You (PRO)](https://essential-addons.com/docs/ea-woo-thank-you/):Resonate with customers and ensure a positive post-purchase experience with this advanced Elementor WooCommerce widget from Essential Addons. It lets you create tailor-made thank-you messages with limitless personalization.
 
@@ -221,8 +221,7 @@ With Essential Addons, we bring you seamless compatibility with WooCommerce, enh
 **MonsterPost:** “Essential Addons for Elementor has the largest number of active users among all third-party extensions on the market. The widgets are tested in all popular web browsers to ensure full browser compatibility for all elements.”
 **WPCrafter:** WordPress influencer Adam Preiser did a Speed Test & found Essential Addons for Elementor is the fastest solution out there 👇
 
-[Essential Add-ons For Elementor Review & Speed Performance Test](https://www.youtube.com/watch?v=K9BssSV-KC8)
-
+https://youtu.be/K9BssSV-KC8
 
 ### BACKED BY A TRUSTED TEAM
 Essential Addons for Elementor is brought to you by [WPDeveloper](https://wpdeveloper.com/), a dedicated WordPress product company, trusted by 5 million+ happy users.
@@ -299,6 +298,14 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.0.1 - 19/08/2024 =
+
+- Fixed: Elementor transform example rotate, skew etc features not working inside Elementor Editor
+- Fixed: Custom Template shows broken inside Elementor Editor if EA is activated in some cases
+- Fixed: Dashboard UI/UX related issues after EA 6.0 update
+- Improved: Added async requests to all the actions inside EA Dashboard
+- Few minor bug fixes & improvements
 
 = 6.0.0 - 11/08/2024 =
 
