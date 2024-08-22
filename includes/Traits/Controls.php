@@ -182,6 +182,21 @@ trait Controls
             ]
         );
 
+        if ( 'eael-dynamic-filterable-gallery' === $wb->get_name() ) {
+            $wb->add_control(
+                'eael_acf_important_note',
+                [
+                    'label' => '',
+                    'type'  => Controls_Manager::RAW_HTML,
+                    'raw'   => esc_html__( 'Given number of posts will be fetched along with their ACF gallery items', 'essential-addons-for-elementor-lite' ),
+                    'content_classes' => 'elementor-descriptor',
+                    'condition'       => [
+                        'fetch_acf_image_gallery' => 'yes'
+                    ]
+                ]
+            );
+        }
+
         $wb->add_control(
             'offset',
             [
