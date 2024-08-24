@@ -1,3 +1,5 @@
+import {useState} from "react";
+
 const debouncer = (callback, delay) => {
         let timer
         return function () {
@@ -19,7 +21,7 @@ const debouncer = (callback, delay) => {
         }
         return result;
     },
-    eaXMLHttpRequest = (params, async = false) => {
+    eaXMLHttpRequest = async (params, async = false) => {
         const request = new XMLHttpRequest();
         request.open('POST', localize.ajaxurl, async);
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
@@ -31,6 +33,20 @@ const debouncer = (callback, delay) => {
 
         return JSON.parse(request.responseText);
     },
+    eaFetchRequest = (params) => {
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            body: encodeURI(params)
+        };
+
+        return fetch(localize.ajaxurl, options)
+            .then(response => response.json())
+            .then(data => data)
+            .catch(error => console.error('Fetch Error:', error));
+    },
     getData = (key = null, defaultValue = undefined) => {
         const data = localStorage.getItem('eael_dashboard') ? JSON.parse(localStorage.getItem('eael_dashboard')) : {};
         return key ? data?. [key] ?? defaultValue : data;
@@ -41,7 +57,14 @@ const debouncer = (callback, delay) => {
         localStorage.setItem('eael_dashboard', JSON.stringify(data));
     };
 
+export function useAsyncReducer(reducer, initState) {
+    const [state, setState] = useState(initState),
+        dispatchState = async (action) => setState(await reducer(state, action));
+    return [state, dispatchState];
+}
+
 export const debounce = debouncer;
 export const eaAjax = eaXMLHttpRequest;
+export const eaAjaxFetch = eaFetchRequest;
 export const getLsData = getData;
 export const setLsData = setData;

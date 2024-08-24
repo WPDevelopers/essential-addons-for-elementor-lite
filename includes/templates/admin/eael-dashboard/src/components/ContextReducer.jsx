@@ -1,13 +1,12 @@
-import {useReducer} from "react";
 import {ContextProvider, initValue} from '../context'
 import App from "./App.jsx";
-import {eaAjax, setLsData} from "../helper";
+import {eaAjax, eaAjaxFetch, setLsData, useAsyncReducer} from "../helper";
 
 function ContextReducer() {
 
     const eaData = localize.eael_dashboard;
 
-    const reducer = (state, {type, payload}) => {
+    const reducer = async (state, {type, payload}) => {
         let params, response, licenseStatus, licenseError, otpError, otp, otpEmail, errorMessage,
             hiddenLicenseKey, integrations, elements, modals, toastMessage, toastType, search404;
 
@@ -129,7 +128,7 @@ function ContextReducer() {
                     ...payload
                 };
 
-                response = eaAjax(params);
+                response = await eaAjaxFetch(params);
 
                 if (response?.success) {
                     return {
@@ -162,7 +161,7 @@ function ContextReducer() {
                     }
                 });
 
-                response = eaAjax(params);
+                response = await eaAjaxFetch(params);
 
                 if (response?.success) {
                     toastType = 'success';
@@ -180,7 +179,7 @@ function ContextReducer() {
                     [payload.key]: payload.value
                 };
 
-                response = eaAjax(params);
+                response = await eaAjaxFetch(params);
 
                 if (response?.success) {
                     toastType = 'success';
@@ -197,7 +196,7 @@ function ContextReducer() {
                     security: localize.nonce
                 };
 
-                response = eaAjax(params);
+                response = await eaAjaxFetch(params);
 
                 if (response === true) {
                     toastType = 'success';
@@ -220,7 +219,7 @@ function ContextReducer() {
                     slug: 'templately'
                 };
 
-                response = eaAjax(params);
+                response = await eaAjaxFetch(params);
 
                 return {...state, isTemplatelyInstalled: true, btnLoader: ''}
             case 'CLOSE_ADMIN_PROMOTION':
@@ -235,7 +234,7 @@ function ContextReducer() {
         }
     }
 
-    const [eaState, eaDispatch] = useReducer(reducer, initValue);
+    const [eaState, eaDispatch] = useAsyncReducer(reducer, initValue);
 
     return (
         <ContextProvider value={{eaState, eaDispatch}}>
