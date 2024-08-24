@@ -21,7 +21,7 @@ const debouncer = (callback, delay) => {
         }
         return result;
     },
-    eaXMLHttpRequest = async (params, async = false) => {
+    eaXMLHttpRequest = (params, async = false) => {
         const request = new XMLHttpRequest();
         request.open('POST', localize.ajaxurl, async);
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
