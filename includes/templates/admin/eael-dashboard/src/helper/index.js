@@ -1,5 +1,3 @@
-import {useState} from "react";
-
 const debouncer = (callback, delay) => {
         let timer
         return function () {
@@ -57,10 +55,6 @@ const debouncer = (callback, delay) => {
         localStorage.setItem('eael_dashboard', JSON.stringify(data));
     };
 
-export function useAsyncReducer(reducer, initState) {
-    const [state, setState] = useState(initState),
-        dispatchState = async (action) => setState(await reducer(state, action));
-    return [state, dispatchState];
 }
 
 export const debounce = debouncer;

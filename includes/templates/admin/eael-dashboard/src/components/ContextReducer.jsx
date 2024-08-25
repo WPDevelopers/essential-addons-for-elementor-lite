@@ -1,12 +1,13 @@
+import {useReducer} from "react";
 import {ContextProvider, initValue} from '../context'
 import App from "./App.jsx";
-import {eaAjax, eaAjaxFetch, setLsData, useAsyncReducer} from "../helper";
+import {eaAjax, eaAjaxFetch, setLsData} from "../helper";
 
 function ContextReducer() {
 
     const eaData = localize.eael_dashboard;
 
-    const reducer = async (state, {type, payload}) => {
+    const reducer = (state, {type, payload}) => {
         let params, response, licenseStatus, licenseError, otpError, otp, otpEmail, errorMessage,
             hiddenLicenseKey, integrations, elements, modals, toastMessage, toastType, search404;
 
@@ -234,7 +235,7 @@ function ContextReducer() {
         }
     }
 
-    const [eaState, eaDispatch] = useAsyncReducer(reducer, initValue);
+    const [eaState, eaDispatch] = useReducer(reducer, initValue);
 
     return (
         <ContextProvider value={{eaState, eaDispatch}}>
