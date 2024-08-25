@@ -12,7 +12,7 @@ function Extensions() {
         },
         clickHandler = () => {
             eaDispatch({type: 'BUTTON_LOADER', payload: 'extensions'});
-            asyncDispatch({eaState, eaDispatch}, 'SAVE_ELEMENTS_DATA', {});
+            asyncDispatch({eaState, eaDispatch}, 'SAVE_ELEMENTS_DATA');
         };
 
     return (

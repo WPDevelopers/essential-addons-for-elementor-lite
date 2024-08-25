@@ -41,7 +41,7 @@ function Elements() {
         },
         clickHandler = () => {
             eaDispatch({type: 'BUTTON_LOADER', payload: 'elements'});
-            asyncDispatch({eaState, eaDispatch}, 'SAVE_ELEMENTS_DATA', {});
+            asyncDispatch({eaState, eaDispatch}, 'SAVE_ELEMENTS_DATA');
         },
         scrollHandler = () => {
             const newScrollY = window.pageYOffset - 32 - eaState.scrollOffset,

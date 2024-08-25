@@ -55,7 +55,7 @@ const debouncer = (callback, delay) => {
         localStorage.setItem('eael_dashboard', JSON.stringify(data));
     };
 
-export function asyncDispatch({eaState, eaDispatch}, $type, $args) {
+export function asyncDispatch({eaState, eaDispatch}, $type, $args = {}) {
     const eaData = localize.eael_dashboard;
     let $payload, params;
 
