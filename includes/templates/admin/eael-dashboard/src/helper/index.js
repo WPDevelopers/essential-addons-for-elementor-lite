@@ -160,6 +160,16 @@ export function asyncDispatch({eaState, eaDispatch}, $type, $args) {
                 eaDispatch({type: $type, payload: $payload});
             });
             return;
+        case 'INSTALL_TEMPLATELY':
+            params = {
+                action: 'wpdeveloper_install_plugin',
+                security: localize.nonce,
+                slug: 'templately'
+            };
+
+            eaAjaxFetch(params).then(() => {
+                eaDispatch({type: $type});
+            });
     }
 }
 

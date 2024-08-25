@@ -1,7 +1,7 @@
 import {useReducer} from "react";
 import {ContextProvider, initValue} from '../context'
 import App from "./App.jsx";
-import {eaAjax, eaAjaxFetch, setLsData} from "../helper";
+import {eaAjax, setLsData} from "../helper";
 
 function ContextReducer() {
 
@@ -136,14 +136,6 @@ function ContextReducer() {
                 setLsData('isDark', !state.isDark);
                 return {...state, isDark: !state.isDark}
             case 'INSTALL_TEMPLATELY':
-                params = {
-                    action: 'wpdeveloper_install_plugin',
-                    security: localize.nonce,
-                    slug: 'templately'
-                };
-
-                response =  eaAjaxFetch(params);
-
                 return {...state, isTemplatelyInstalled: true, btnLoader: ''}
             case 'CLOSE_ADMIN_PROMOTION':
                 params = {
