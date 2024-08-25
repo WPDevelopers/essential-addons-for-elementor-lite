@@ -434,7 +434,177 @@ class Woo_Product_Add_To_Cart extends Widget_Base {
         $this->end_controls_tabs();
 
 		$this->end_controls_section();
-		// End
+
+        //Start Variations
+        $this->start_controls_section(
+			'eael_add_to_cart_variations_style',
+			[
+				'label' => esc_html__( 'Variations', 'essential-addons-for-elementor-lite' ),
+				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+        $this->add_control(
+			'eael_add_to_variations_width',
+			[
+				'label'      => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'rem', 'em', 'vw', 'custom' ],
+				'default'    => [
+					'unit' => '%',
+				],
+				'selectors' => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart .variations' => 'width: {{SIZE}}{{UNIT}}',
+				],
+			]
+		);
+
+        $this->add_control(
+			'eael_add_to_variations_spacing',
+			[
+				'label'      => esc_html__( 'Spacing Bottom', 'elementor-proessential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em', 'rem', 'custom' ],
+				'range'      => [
+					'px' => [
+						'max' => 100,
+					],
+					'em' => [
+						'max' => 10,
+					],
+					'rem' => [
+						'max' => 10,
+					],
+				],
+				'selectors' => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart .variations' => 'margin-bottom: {{SIZE}}{{UNIT}}',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_add_to_variations_space_between',
+			[
+				'label'      => esc_html__( 'Space Between', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
+				'range'      => [
+					'px' => [
+						'max' => 100,
+					],
+                    '%' => [
+						'max' => 100,
+					],
+					'em' => [
+						'max' => 10,
+					],
+					'rem' => [
+						'max' => 10,
+					],
+				],
+				'selectors' => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations tr th, 
+                    .woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations tr td' => 'padding-top: calc( {{SIZE}}{{UNIT}}/2 ); padding-bottom: calc( {{SIZE}}{{UNIT}}/2 );',
+				],
+			]
+		);
+
+        $this->add_control(
+			'eael_add_to_cart_variations_label_style',
+			[
+				'label'     => esc_html__( 'Label', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'eael_add_to_cart_variations_label_color_focus',
+			[
+				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations label' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name'     => 'eael_add_to_cart_variations_label_typography',
+				'selector' => '.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations label',
+			]
+		);
+
+        $this->add_control(
+			'eael_add_to_cart_variations_select_style',
+			[
+				'label'     => esc_html__( 'Select field', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+        $this->add_control(
+			'eael_add_to_cart_variations_select_color',
+			[
+				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations td.value select' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+        $this->add_control(
+			'eael_add_to_cart_variations_select_bg_color',
+			[
+				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations td.value select, 
+                    .woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations td.value:before' => 'background-color: {{VALUE}}',
+				],
+			]
+		);
+
+        $this->add_control(
+			'eael_add_to_cart_variations_select_border_color',
+			[
+				'label'     => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations td.value select, 
+                    .woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations td.value:before' => 'border: 1px solid {{VALUE}}',
+				],
+			]
+		);
+
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name'     => 'variations_select_typography',
+				'selector' => '.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations td.value select, 
+                .woocommerce div.product.elementor{{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations td.value:before',
+			]
+		);
+
+		$this->add_control(
+			'variations_select_border_radius',
+			[
+				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
+				'selectors'  => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations td.value select, 
+                    .woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations td.value:before' => 'border-radius: {{SIZE}}{{UNIT}}',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+		// End Variations
 
 	}
 
