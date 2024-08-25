@@ -162,7 +162,7 @@ function ContextReducer() {
                     }
                 });
 
-                response = await eaAjaxFetch(params);
+                response =  eaAjaxFetch(params);
 
                 if (response?.success) {
                     toastType = 'success';
@@ -180,7 +180,7 @@ function ContextReducer() {
                     [payload.key]: payload.value
                 };
 
-                response = await eaAjaxFetch(params);
+                response =  eaAjaxFetch(params);
 
                 if (response?.success) {
                     toastType = 'success';
@@ -197,7 +197,7 @@ function ContextReducer() {
                     security: localize.nonce
                 };
 
-                response = await eaAjaxFetch(params);
+                response =  eaAjaxFetch(params);
 
                 if (response === true) {
                     toastType = 'success';
@@ -220,7 +220,7 @@ function ContextReducer() {
                     slug: 'templately'
                 };
 
-                response = await eaAjaxFetch(params);
+                response =  eaAjaxFetch(params);
 
                 return {...state, isTemplatelyInstalled: true, btnLoader: ''}
             case 'CLOSE_ADMIN_PROMOTION':
