@@ -1,5 +1,6 @@
 import consumer from "../context";
 import {useRef} from "react";
+import {asyncDispatch} from "../helper/index.js";
 
 function Tools() {
     const eaData = localize.eael_dashboard.tools,
@@ -8,10 +9,7 @@ function Tools() {
         {eaState, eaDispatch} = consumer(),
         saveHandler = () => {
             eaDispatch({type: 'BUTTON_LOADER', payload: 'tools'});
-            setTimeout(eaDispatch, 500, {
-                type: 'SAVE_TOOLS',
-                payload: {key: eaData.box_3.name, value: selectRef.current.value}
-            });
+            asyncDispatch({eaState, eaDispatch}, 'SAVE_TOOLS', {key: eaData.box_3.name, value: selectRef.current.value});
         },
         clickHandler = () => {
             eaDispatch({type: 'REGENERATE_ASSETS'});
