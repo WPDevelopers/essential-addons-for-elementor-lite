@@ -3,6 +3,7 @@ import ModalStyleOne from "./ModalStyleOne.jsx";
 import ModalStyleTwo from "./ModalStyleTwo.jsx";
 import ModalStyleThree from "./ModalStyleThree.jsx";
 import {useRef} from "react";
+import {asyncDispatch} from "../helper/index.js";
 
 function Modal() {
     const {eaState, eaDispatch} = consumer(),
@@ -28,7 +29,7 @@ function Modal() {
             });
 
             eaDispatch({type: 'BUTTON_LOADER', payload: 'modal'});
-            setTimeout(eaDispatch, 500, {type: 'SAVE_MODAL_DATA', payload: inputData});
+            asyncDispatch(eaDispatch, 'SAVE_MODAL_DATA', inputData);
         },
         eaData = localize.eael_dashboard.modal;
 

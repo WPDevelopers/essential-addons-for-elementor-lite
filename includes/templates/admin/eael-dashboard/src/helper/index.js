@@ -55,6 +55,37 @@ const debouncer = (callback, delay) => {
         localStorage.setItem('eael_dashboard', JSON.stringify(data));
     };
 
+export function asyncDispatch(eaDispatch, $type, $args) {
+    const eaData = localize.eael_dashboard;
+    let $payload;
+
+    switch ($type) {
+        case 'SAVE_MODAL_DATA':
+            $payload = {
+                toasts: true,
+                toastType: 'error',
+                toastMessage: eaData.i18n.toaster_error_msg,
+                btnLoader: ''
+            };
+            eaAjaxFetch({
+                action: 'save_settings_with_ajax',
+                security: localize.nonce,
+                ...$args
+            }).then((response) => {
+                if (response?.success) {
+                    $payload = {
+                        ...$payload,
+                        modal: 'close',
+                        toastType: 'success',
+                        toastMessage: eaData.i18n.toaster_success_msg,
+                    };
+                }
+                eaDispatch({type: $type, payload: $payload});
+            });
+            return;
+        case 'SET_MENU_DATA':
+            return;
+    }
 }
 
 export const debounce = debouncer;

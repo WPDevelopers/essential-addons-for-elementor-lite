@@ -123,32 +123,7 @@ function ContextReducer() {
                 modals = {...state.modals, [payload.key]: payload.value};
                 return {...state, modals};
             case 'SAVE_MODAL_DATA':
-                params = {
-                    action: 'save_settings_with_ajax',
-                    security: localize.nonce,
-                    ...payload
-                };
-
-                response = await eaAjaxFetch(params);
-
-                if (response?.success) {
-                    return {
-                        ...state,
-                        modal: 'close',
-                        toasts: true,
-                        toastType: 'success',
-                        toastMessage: eaData.i18n.toaster_success_msg,
-                        btnLoader: ''
-                    };
-                }
-
-                return {
-                    ...state,
-                    toasts: true,
-                    toastType: 'error',
-                    toastMessage: eaData.i18n.toaster_error_msg,
-                    btnLoader: ''
-                };
+                return {...state, ...payload};
             case 'SAVE_ELEMENTS_DATA':
                 params = {
                     action: 'save_settings_with_ajax',
