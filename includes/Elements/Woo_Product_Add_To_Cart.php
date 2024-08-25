@@ -71,7 +71,7 @@ class Woo_Product_Add_To_Cart extends Widget_Base {
 				'label'   => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
 				'type'    => \Elementor\Controls_Manager::CHOOSE,
 				'options' => [
-					'left' => [
+					'flex-start' => [
 						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
@@ -79,10 +79,36 @@ class Woo_Product_Add_To_Cart extends Widget_Base {
 						'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
-					'right' => [
+					'end' => [
 						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
+				],
+			]
+		);
+
+        $this->add_control(
+			'width',
+			[
+				'label'      => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
+				'range'      => [
+					'px' => [
+						'max' => 1000,
+					],
+					'%' => [
+						'max' => 100,
+					],
+					'rem' => [
+						'max' => 100,
+					],
+					'em' => [
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart .cart .button' => 'width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -244,18 +270,6 @@ class Woo_Product_Add_To_Cart extends Widget_Base {
 			[
 				'label' => esc_html__( 'Quantity', 'essential-addons-for-elementor-lite' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
-			]
-		);
-
-        $this->add_control(
-			'eael_show_quantity',
-			[
-				'label'        => esc_html__( 'Show Quantity', 'essential-addons-for-elementor-lite' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
-				'return_value' => 'yes',
-				'default'      => 'yes',
 			]
 		);
 
@@ -608,21 +622,38 @@ class Woo_Product_Add_To_Cart extends Widget_Base {
 
 	}
 
+    //
+    public function get_product( $product_id = false ) {
+		if ( 'product_variation' === get_post_type() ) {
+			return $this->get_product_variation( $product_id );
+		}
+
+		$product = wc_get_product( $product_id );
+
+		if ( ! $product ) {
+			$product = wc_get_product();
+		}
+
+		return $product;
+	}
+
+    public function get_product_variation( $product_id = false ) {
+		return wc_get_product( get_the_ID() );
+	}
+
 	protected function render() {
         global $product;
+
+        $product = $this->get_product();
 
         if ( ! $product ) {
             return;
         }
 
-        $settings = $this->get_settings_for_display();
-
         ?>
         <div class="eael-single-product-add-to-cart">
             <div class="elementor-add-to-cart elementor-product-<?php echo esc_attr( $product->get_type() ); ?>">
-                <?php 
-                    woocommerce_template_single_add_to_cart();
-                ?>
+                <?php woocommerce_template_single_add_to_cart(); ?>
             </div>
         </div>
         <?php
