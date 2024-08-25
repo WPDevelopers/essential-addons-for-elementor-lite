@@ -8,6 +8,7 @@ if (!defined('ABSPATH')) {
 }
 
 use Elementor\Widget_Base;
+use \Essential_Addons_Elementor\Classes\Helper;
 
 class Woo_Product_Price extends Widget_Base {
     public function get_name() {
@@ -276,7 +277,9 @@ class Woo_Product_Price extends Widget_Base {
 
 	protected function render() {
         global $product;
-		$settings = $this->get_settings_for_display();
+
+		$product = Helper::get_product();
+
         if ( ! $product ) {
             return;
         }
