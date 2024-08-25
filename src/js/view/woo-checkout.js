@@ -58,11 +58,16 @@ var WooCheckout = function ($scope, $) {
 		$('.ea-woo-checkout .checkout_coupon.woocommerce-form-coupon').before(message);
 	});
 
-	$( document ).on( 'change', '.eael-checkout-cart-qty-input', function() {
+	function eael_update_checkout() {
         let cart_item_key = $( this ).attr( 'name' ).replace(/cart\[([\w]+)\]\[qty\]/g, "$1");
         let item_quantity = $( this ).val();
+		let cart_table = $('.ea-checkout-review-order-table', $scope );
         let currentVal = parseFloat(item_quantity);
 		$this = $(this);
+		
+		cart_table.css('opacity', '0.7');
+		$('.eael-checkout-cart-qty-input', cart_table).attr('disabled', true);
+
         $.ajax({
 			type: 'POST',
 			url: localize.ajaxurl,
@@ -78,7 +83,9 @@ var WooCheckout = function ($scope, $) {
 				}
 			}
 		});
-    });
+    };
+
+	$( document ).on( 'change', '.eael-checkout-cart-qty-input', ea.debounce(eael_update_checkout, 300));
 
 };
 
