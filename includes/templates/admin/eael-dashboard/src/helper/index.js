@@ -138,6 +138,28 @@ export function asyncDispatch({eaState, eaDispatch}, $type, $args) {
                 eaDispatch({type: $type, payload: $payload});
             });
             return;
+        case 'REGENERATE_ASSETS':
+            params = {
+                action: 'clear_cache_files_with_ajax',
+                security: localize.nonce
+            };
+
+            $payload = {
+                toastType: 'error',
+                toastMessage: eaData.i18n.toaster_error_msg
+            }
+
+            eaAjaxFetch(params).then((response) => {
+                if (response === true) {
+                    $payload = {
+                        ...$payload,
+                        toastType: 'success',
+                        toastMessage: 'Assets Regenerated!'
+                    }
+                }
+                eaDispatch({type: $type, payload: $payload});
+            });
+            return;
     }
 }
 

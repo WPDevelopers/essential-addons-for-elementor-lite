@@ -129,22 +129,7 @@ function ContextReducer() {
             case 'SAVE_TOOLS':
                 return {...state, toasts: true, btnLoader: '', ...payload};
             case 'REGENERATE_ASSETS':
-                params = {
-                    action: 'clear_cache_files_with_ajax',
-                    security: localize.nonce
-                };
-
-                response =  eaAjaxFetch(params);
-
-                if (response === true) {
-                    toastType = 'success';
-                    toastMessage = 'Assets Regenerated!';
-                } else {
-                    toastType = 'error';
-                    toastMessage = 'Failed to Regenerate Assets!';
-                }
-
-                return {...state, toasts: true, toastType, toastMessage}
+                return {...state, toasts: true, ...payload}
             case 'ELEMENTS_CAT':
                 return {...state, elementsActivateCatIndex: payload}
             case 'LIGHT_DARK_TOGGLE':
