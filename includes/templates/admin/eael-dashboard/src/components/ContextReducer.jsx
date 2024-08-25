@@ -125,29 +125,7 @@ function ContextReducer() {
             case 'SAVE_MODAL_DATA':
                 return {...state, ...payload};
             case 'SAVE_ELEMENTS_DATA':
-                params = {
-                    action: 'save_settings_with_ajax',
-                    security: localize.nonce,
-                    elements: true
-                };
-
-                Object.keys(state.elements).map((item) => {
-                    if (state.elements[item] === true) {
-                        params[item] = true;
-                    }
-                });
-
-                response =  eaAjaxFetch(params);
-
-                if (response?.success) {
-                    toastType = 'success';
-                    toastMessage = eaData.i18n.toaster_success_msg;
-                } else {
-                    toastType = 'error';
-                    toastMessage = eaData.i18n.toaster_error_msg;
-                }
-
-                return {...state, toasts: true, toastType, toastMessage, btnLoader: ''};
+                return {...state, toasts: true, btnLoader: '', ...payload};
             case 'SAVE_TOOLS':
                 params = {
                     action: 'save_settings_with_ajax',

@@ -55,23 +55,25 @@ const debouncer = (callback, delay) => {
         localStorage.setItem('eael_dashboard', JSON.stringify(data));
     };
 
-export function asyncDispatch(eaDispatch, $type, $args) {
+export function asyncDispatch({eaState, eaDispatch}, $type, $args) {
     const eaData = localize.eael_dashboard;
-    let $payload;
+    let $payload, params;
 
     switch ($type) {
         case 'SAVE_MODAL_DATA':
+            params = {
+                action: 'save_settings_with_ajax',
+                security: localize.nonce,
+                ...$args
+            };
+
             $payload = {
                 toasts: true,
                 toastType: 'error',
                 toastMessage: eaData.i18n.toaster_error_msg,
                 btnLoader: ''
             };
-            eaAjaxFetch({
-                action: 'save_settings_with_ajax',
-                security: localize.nonce,
-                ...$args
-            }).then((response) => {
+            eaAjaxFetch(params).then((response) => {
                 if (response?.success) {
                     $payload = {
                         ...$payload,
@@ -83,7 +85,35 @@ export function asyncDispatch(eaDispatch, $type, $args) {
                 eaDispatch({type: $type, payload: $payload});
             });
             return;
-        case 'SET_MENU_DATA':
+        case 'SAVE_ELEMENTS_DATA':
+            params = {
+                action: 'save_settings_with_ajax',
+                security: localize.nonce,
+                elements: true
+            };
+
+            $payload = {
+                toastType: 'error',
+                toastMessage: eaData.i18n.toaster_error_msg
+            }
+
+            Object.keys(eaState.elements).map((item) => {
+                if (eaState.elements[item] === true) {
+                    params[item] = true;
+                }
+            });
+
+            eaAjaxFetch(params).then((response) => {
+                if (response?.success) {
+                    $payload = {
+                        ...$payload,
+                        toastType: 'success',
+                        toastMessage: eaData.i18n.toaster_success_msg
+                    }
+                }
+
+                eaDispatch({type: $type, payload: $payload});
+            });
             return;
     }
 }

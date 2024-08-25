@@ -29,7 +29,7 @@ function Modal() {
             });
 
             eaDispatch({type: 'BUTTON_LOADER', payload: 'modal'});
-            asyncDispatch(eaDispatch, 'SAVE_MODAL_DATA', inputData);
+            asyncDispatch({eaState, eaDispatch}, 'SAVE_MODAL_DATA', inputData);
         },
         eaData = localize.eael_dashboard.modal;
 

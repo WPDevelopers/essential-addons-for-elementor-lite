@@ -1,5 +1,6 @@
 import ElementItem from "./ElementItem.jsx";
 import consumer from "../context";
+import {asyncDispatch} from "../helper/index.js";
 
 function Extensions() {
     const eaData = localize.eael_dashboard.extensions,
@@ -11,7 +12,7 @@ function Extensions() {
         },
         clickHandler = () => {
             eaDispatch({type: 'BUTTON_LOADER', payload: 'extensions'});
-            setTimeout(eaDispatch, 500, {type: 'SAVE_ELEMENTS_DATA'});
+            asyncDispatch({eaState, eaDispatch}, 'SAVE_ELEMENTS_DATA', {});
         };
 
     return (
