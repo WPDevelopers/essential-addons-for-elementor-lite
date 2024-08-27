@@ -645,6 +645,15 @@ $config = [
         ],
         'woo-product-images' => [
             'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Images',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-product-images.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
         ],
         'woo-product-add-to-cart' => [
             'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Add_To_Cart',
