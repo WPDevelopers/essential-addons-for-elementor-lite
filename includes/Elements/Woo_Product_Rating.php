@@ -59,12 +59,8 @@ class Woo_Product_Rating extends Widget_Base {
 						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
-                    'justify' => [
-						'title' => esc_html__( 'Justified', 'essential-addons-for-elementor-lite' ),
-						'icon' => 'eicon-text-align-justify',
-					],
 				],
-                'prefix_class' => 'elementor-product-rating--align-',
+                'prefix_class' => 'eael-product-rating--align-',
 			]
 		);
 

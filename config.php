@@ -642,6 +642,15 @@ $config = [
         ],
         'woo-product-rating' => [
             'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Rating',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-product-rating.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
         ],
         'woo-product-images' => [
             'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Images',
