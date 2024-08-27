@@ -648,6 +648,15 @@ $config = [
         ],
         'woo-product-add-to-cart' => [
             'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Add_To_Cart',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-product-add-to-cart.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
         ],
         'contact-form-7' => [
             'class' => '\Essential_Addons_Elementor\Elements\Contact_Form_7',

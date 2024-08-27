@@ -85,6 +85,7 @@ class Woo_Product_Add_To_Cart extends Widget_Base {
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
+				'prefix_class' => 'eael-add-to-cart--align-',
 			]
 		);
 
