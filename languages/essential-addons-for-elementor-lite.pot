@@ -7336,7 +7336,7 @@ msgstr ""
 msgid "Prefix/Postfix Color"
 msgstr ""
 
-#: ../includes/Elements/Progress_Bar.php:946, ../includes/Elements/Progress_Bar.php:977, ../includes/Elements/Progress_Bar.php:977, ../includes/Elements/Progress_Bar.php:1023
+#: ../includes/Elements/Progress_Bar.php:946, ../includes/Elements/Progress_Bar.php:979, ../includes/Elements/Progress_Bar.php:979, ../includes/Elements/Progress_Bar.php:1025
 msgid "%"
 msgstr ""
 
