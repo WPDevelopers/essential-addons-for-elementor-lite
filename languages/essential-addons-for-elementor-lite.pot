@@ -3974,7 +3974,7 @@ msgid "Display Consent Notice"
 msgstr ""
 
 #: ../includes/Elements/Filterable_Gallery.php:560
-msgid "If enabled, The consent motice will appear before playing the video."
+msgid "If enabled, The consent notice will appear before playing the video."
 msgstr ""
 
 #: ../includes/Elements/Filterable_Gallery.php:568
