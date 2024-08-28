@@ -4730,8 +4730,8 @@ class Login_Register extends Widget_Base {
 			'label'     => __( 'Checkbox | Toggle Color', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap  input[type=checkbox]:checked" => 'border-color: {{VALUE}};background: {{VALUE}};',
-				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap input[type=checkbox]:hover:not(:checked):not(:disabled)" => 'border-color: {{VALUE}};',
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap  input[type=checkbox]:checked" => 'border-color: {{VALUE}} !important; background: {{VALUE}} !important;',
+				"{{WRAPPER}} .lr-form-wrapper .eael_accept_tnc_wrap input[type=checkbox]:hover:not(:checked):not(:disabled)" => 'border-color: {{VALUE}} !important;',
 			],
 			'condition' => [
 				'terms_conditions_style_pot' => 'yes',
