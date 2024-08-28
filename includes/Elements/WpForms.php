@@ -1327,7 +1327,7 @@ class WpForms extends Widget_Base {
                 'type'              => Controls_Manager::COLOR,
                 'default'           => '#065689',
                 'selectors'         => [
-                    '{{WRAPPER}} .eael-wpforms .wpforms-submit-container .wpforms-submit:hover' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-wpforms .wpforms-submit-container .wpforms-submit:hover' => 'background: {{VALUE}} !important',
                 ],
             ]
         );
