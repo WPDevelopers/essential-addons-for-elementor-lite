@@ -879,9 +879,13 @@ trait Login_Registration {
 		if ( is_wp_error( $results ) ) {
 			$err_msg = '';
 			if ( isset( $results->errors['invalidcombo'][0] ) ) {
-				$err_msg = esc_html__( 'There is no account with that username or email address.', 'essential-addons-for-elementor-lite' );
-			}else if( isset( $results->errors ) && count( $results->errors ) ) {
-				$err_msg = esc_html__( 'There is no account with that username or email address.', 'essential-addons-for-elementor-lite' );
+				$err_msg = $results->errors['invalidcombo'][0];
+			} else if( isset( $results->errors ) && count( $results->errors ) ) {
+				if( isset( $results->errors['retrieve_password_email_failure'] ) ){
+					$err_msg = $results->errors['retrieve_password_email_failure'];
+				} else {
+					$err_msg = esc_html__( 'There is no account with that username or email address.', 'essential-addons-for-elementor-lite' );
+				}
 			}
 
 			if ( $ajax ) {
