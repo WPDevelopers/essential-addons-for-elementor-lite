@@ -1,7 +1,7 @@
 import { createHooks } from "@wordpress/hooks";
 
 window.isEditMode = false;
-window.eael = {
+window.eael = window.ea = {
 	hooks: createHooks(),
 	isEditMode: false,
 	elementStatusCheck:function(name){
