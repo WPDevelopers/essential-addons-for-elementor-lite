@@ -1946,3 +1946,13 @@ $theme-preset4: #ec3b75;
         }
     }
 }
+
+//Botiga Theme support
+.theme-botiga .ul.wc-block-grid__products, 
+.theme-botiga ul.products{
+    display: flex !important;
+}
+
+.theme-botiga .row {
+    justify-content: center;
+}

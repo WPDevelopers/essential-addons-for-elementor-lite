@@ -513,6 +513,8 @@ trait Elements {
 				$support_tag                     = (array) $settings_data['eael_ext_toc_supported_heading_tag'];
 				$support_tag                     = implode( ',', array_filter( $support_tag ) );
 				$position                        = $settings_data['eael_ext_toc_position'];
+				$is_mobile_on                    = $settings_data['eael_ext_toc_position_mobile'];
+				$mobile_position                 = $settings_data['eael_ext_toc_position_mobile_top_bottom'];
 				$page_offset                     = ! empty( $settings_data['eael_ext_toc_main_page_offset'] ) ? $settings_data['eael_ext_toc_main_page_offset']['size'] : 0;
 				$close_bt_text_style             = $settings_data['eael_ext_toc_close_button_text_style'];
 				$auto_collapse                   = $settings_data['eael_ext_toc_auto_collapse'];
@@ -535,6 +537,10 @@ trait Elements {
 				$el_class .= ( $close_bt_text_style == 'bottom_to_top' ) ? ' eael-bottom-to-top' : ' ';
 				$el_class .= ( $auto_collapse == 'yes' ) ? ' eael-toc-auto-collapse collapsed' : ' ';
 				$el_class .= ( $hide_mobile == 'yes' ) ? ' eael-toc-mobile-hide' : ' ';
+
+				if( 'yes' === $is_mobile_on ) {
+					$el_class .= ( 'top' === $mobile_position ) ? ' eael-toc-top' : ' eael-toc-bottom';
+				}
 
 				$toc_style_class = ' eael-toc-list-' . $toc_style;
 				$toc_style_class .= ( $toc_collapse == 'yes' ) ? ' eael-toc-collapse' : ' ';
@@ -947,8 +953,8 @@ trait Elements {
 
             .eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button svg {
                 fill: {$eael_stt_button_icon_color};
-                width: {$eael_stt_button_icon_svg_size_size}{$eael_stt_button_icon_svg_size_unit};
-                height: {$eael_stt_button_icon_svg_size_size}{$eael_stt_button_icon_svg_size_unit};
+                width: {$eael_stt_button_icon_size_size}{$eael_stt_button_icon_size_unit};
+                height: {$eael_stt_button_icon_size_size}{$eael_stt_button_icon_size_unit};
             } 
         ";
 
