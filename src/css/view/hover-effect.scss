@@ -1,0 +1,14 @@
+.elementor-widget-container {
+    position: relative;
+}
+
+//Tilt Effect
+[data-eaeltilt="eael_tilt"] .elementor-widget-container {
+    transform-style: preserve-3d;
+    transition: all 0.5s cubic-bezier( 0.68, -0.55, 0.265, 3.55 );
+    position: relative;
+}
+
+[data-eaeltilt="eael_tilt"]:hover .elementor-widget-container {
+    transition: all 0.15s !important;
+}
