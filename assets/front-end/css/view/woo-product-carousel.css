@@ -1447,3 +1447,14 @@
 .theme-flexia .eael-woo-product-carousel-container.preset-2 .eael-product-carousel .product-overlay-content, .theme-flexia .eael-woo-product-carousel-container.preset-4 .eael-product-carousel .product-overlay-content {
   z-index: 2;
 }
+.theme-botiga .ul.wc-block-grid__products,
+.theme-botiga ul.products {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+.theme-botiga .row {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}

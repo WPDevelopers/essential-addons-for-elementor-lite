@@ -1,19 +1,15 @@
 let EaelWrapperLink = function ($scope, $) {
     if ($scope.data("eael-wrapper-link") !== undefined) {
-        let wrapperData = $scope.data("eael-wrapper-link"),
-            target = wrapperData.is_external === 'on' ? '_blank' : '_self';
-
-        $scope.on('click', function () {
-            let anchor = document.createElement('a');
-
-            anchor.href = ea.sanitizeURL(wrapperData.url);
-            anchor.target = target;
-
-            if (wrapperData.nofollow === 'on') {
-                anchor.rel = 'nofollow';
-            }
-
-            anchor.click();
+        let link_id = $scope.data("eael-wrapper-link");
+        $('#'+link_id).appendTo($scope).css({
+            background: 'transparent',
+            border: 'none',
+            position: 'absolute', 
+            height:'100%',
+            width: '100%',
+            zIndex: '9999',
+            top: 0,
+            left: 0
         });
     }
 };

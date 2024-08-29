@@ -963,8 +963,10 @@ class Progress_Bar extends Widget_Base
                 ]
             );
 
+            $has_shadow = isset( $settings['progress_bar_circle_box_shadow_box_shadow'] ) && !empty( $settings['progress_bar_circle_box_shadow_box_shadow'] );
+            
             echo '<div class="eael-progressbar-circle-container ' . esc_attr( $settings['progress_bar_circle_alignment'] ) . '">
-                ' . ($settings['progress_bar_circle_box_shadow_box_shadow'] ? '<div class="eael-progressbar-circle-shadow">' : '') . '
+                ' . ( $has_shadow ? '<div class="eael-progressbar-circle-shadow">' : '') . '
 
                 <div ' . $this->get_render_attribute_string('eael-progressbar-circle') . '>
                     <div class="eael-progressbar-circle-pie">
@@ -978,7 +980,7 @@ class Progress_Bar extends Widget_Base
                     </div>
                 </div>
 
-                ' . ($settings['progress_bar_circle_box_shadow_box_shadow'] ? '</div>' : '') . '
+                ' . ( $has_shadow ? '</div>' : '') . '
             </div>';
         }
 

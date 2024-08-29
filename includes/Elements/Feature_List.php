@@ -932,8 +932,8 @@ class Feature_List extends Widget_Base {
         $this->add_render_attribute( 'eael_feature_list_item', 'class', 'eael-feature-list-item' );
 
         // $padding = $settings['eael_feature_list_icon_padding']['size'];
-        $circle_size = intval( $settings['eael_feature_list_icon_circle_size']['size'] );
-        $font = $settings['eael_feature_list_icon_size']['size'];
+        $circle_size = isset( $settings['eael_feature_list_icon_circle_size']['size'] ) ? intval( $settings['eael_feature_list_icon_circle_size']['size'] ) : 70;
+        $font = isset( $settings['eael_feature_list_icon_size']['size'] ) ? $settings['eael_feature_list_icon_size']['size'] : 21;
 
         if ( isset( $settings['eael_feature_list_icon_border_width']['right'] ) && isset( $settings['eael_feature_list_icon_border_width']['left'] ) ) {
             $border = $settings['eael_feature_list_icon_border_width']['right'] + $settings['eael_feature_list_icon_border_width']['left'];

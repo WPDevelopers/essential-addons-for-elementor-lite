@@ -4,7 +4,7 @@ Tags: elementor, elements, addons, elementor addons, elementor widget, elementor
 Requires at least: 5.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 6.0.1
+Stable tag: 6.0.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -298,6 +298,28 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.0.2 - 29/08/2024 =
+
+- Fixed: Enabling elements inside Elementor causing blank EA dashboard
+- Fixed: EA Filterable Gallery | "Load More" button shows on those filters which doesn't have any items and less items
+- Fixed: EA Interactive Circle | Add URL support for interactive items
+- Fixed: EA Hover Interactions | Hover Interactions does not work on the front-end
+- Fixed: EA Dashboard | Update CSS Print Method link 
+- Fixed: EA Post Grid | After Load More the terms are not displayed with Style 3
+- Fixed: EA Flip Box | Add overlay for the background image
+- Fixed: EA Woo Product Carousel | Carousel disappears when using Botiga theme
+- Fixed: EA Post Grid | Child sections ignores 'Show Meta' parents
+- Fixed: EA Scroll To Top | Scroll To Top icon doesn't show
+- Fixed: EA WPForms | Submit button hover color stays grey
+- Fixed: EA Filterable Gallery | Updated label to "Notice" on display content notice
+- Fixed: EA NFT Gallery | Not working 
+- Improved: EA Dual Color Heading | Vulnerable to Cross Site Scripting (XSS)
+- Improved: EA Woo Checkout | EA Woo Checkout is missing some styling options
+- Improved: EA Wrapper link | Elementor popup doesn't work on wrapper link
+- Improved: EA Table of Contents | Width option for mobile device
+- Improved: Optimized Control Loading | EA Feature List, EA Sticky Video, EA Pricing Table, EA Progress Bar, EA Woo Product Compare
+- Few minor bug fixes & improvements
 
 = 6.0.1 - 19/08/2024 =
 
