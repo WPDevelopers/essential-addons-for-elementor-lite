@@ -1039,7 +1039,6 @@ body.rtl {
 		}
 	}
 
-	.mfp-close,
     .mfp-close {
 		width: auto;
 	}
@@ -1047,6 +1046,7 @@ body.rtl {
 
 .mfp-zoom-out-cur .mfp-image-holder .mfp-close {
 	cursor: pointer;
+	text-align: right !important;
 }
 
 .mfp-zoom-out-cur .mfp-image-holder .mfp-close:hover {
