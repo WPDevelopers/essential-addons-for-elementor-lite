@@ -197,6 +197,44 @@ class Interactive_Circle extends Widget_Base {
 			]
 		);
 
+		$repeater->add_control(
+			'eael_interactive_circle_btn_link_on',
+			[
+				'label'        => esc_html__( 'Item Link', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+			]
+		);
+
+		$repeater->add_control( 'eael_interactive_circle_btn_link_mess', [
+			'type'            => Controls_Manager::RAW_HTML,
+			'raw'             => __( 'To be able to view detailed content, Please go to<strong> > Additional Settings,</strong> then <strong>Mouse Event,</strong> and choose <strong>Hover</strong>', 'essential-addons-for-elementor-lite' ),
+			'content_classes' => 'eael-warning',
+			'condition' => [
+				'eael_interactive_circle_btn_link_on' => 'yes',
+			]
+		] );
+
+		$repeater->add_control(
+            'eael_interactive_circle_btn_link',
+            [
+                'label'           => esc_html__('Link', 'essential-addons-for-elementor-lite'),
+                'type'            => Controls_Manager::URL,
+                'dynamic'         => ['active' => false],
+                'label_block'     => true,
+                'default'         => [
+                    'url'		  => '#',
+                    'is_external' => '',
+                ],
+                'show_external'   => true,
+				'condition' => [
+	                'eael_interactive_circle_btn_link_on' => 'yes',
+                ]
+            ]
+        );
+
 		$repeater->end_controls_tab();
 
 		$repeater->start_controls_tab( 'interactive_circle_content_tab', [ 'label' => __( 'Content', 'essential-addons-for-elementor-lite' ) ] );
@@ -1046,18 +1084,47 @@ class Interactive_Circle extends Widget_Base {
 											<div class="eael-shape-2"></div>
 										</div>
 										<?php } ?>
-                                        <div class="eael-circle-btn-icon <?php echo esc_attr( $item_style_classic ); ?>">
-                                            <div class="eael-circle-icon-inner">
-												<?php
-												if ( $show_btn_icon ) {
-													Icons_Manager::render_icon( $item['eael_interactive_circle_btn_icon'] );
+
+										<!-- Start URL support -->
+										<?php 
+											if( 'yes' == $item['eael_interactive_circle_btn_link_on'] ) {
+												if ( ! empty( $item['eael_interactive_circle_btn_link']['url'] ) ) {
+													$this->add_link_attributes( 'interactive_circle_link', $item['eael_interactive_circle_btn_link'] );
 												}
-												if ( $show_btn_title ) {
-													echo '<span class="eael-circle-btn-txt">' . esc_html( $item['eael_interactive_circle_btn_title'] ) . '</span>';
-												}
-												?>
-                                            </div>
-                                        </div>
+											?>
+											<a <?php echo $this->get_render_attribute_string('interactive_circle_link'); ?>>
+												<div class="eael-circle-btn-icon <?php echo esc_attr( $item_style_classic ); ?>">
+													<div class="eael-circle-icon-inner">
+														<?php
+														if ( $show_btn_icon ) {
+															Icons_Manager::render_icon( $item['eael_interactive_circle_btn_icon'] );
+														}
+														if ( $show_btn_title ) {
+															echo '<span class="eael-circle-btn-txt">' . esc_html( $item['eael_interactive_circle_btn_title'] ) . '</span>';
+														}
+														?>
+													</div>
+												</div>
+											</a>
+											<?php
+										} else {
+											?>
+											<div class="eael-circle-btn-icon <?php echo esc_attr( $item_style_classic ); ?>">
+												<div class="eael-circle-icon-inner">
+													<?php
+													if ( $show_btn_icon ) {
+														Icons_Manager::render_icon( $item['eael_interactive_circle_btn_icon'] );
+													}
+													if ( $show_btn_title ) {
+														echo '<span class="eael-circle-btn-txt">' . esc_html( $item['eael_interactive_circle_btn_title'] ) . '</span>';
+													}
+													?>
+												</div>
+                                        	</div>
+											<?php
+										} ?>
+										<!-- End URL support -->
+                                        
                                     </div>
                                     <div id="eael-interactive-<?php echo esc_attr( $item_count ); ?>" aria-labelledby="eael-circle-item-<?php echo esc_attr( $item_count ); ?>" class="eael-circle-btn-content eael-circle-item-<?php echo $item_count . ' ' . $is_active; ?>">
                                         <div class="eael-circle-content">
