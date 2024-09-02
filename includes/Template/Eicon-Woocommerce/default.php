@@ -87,8 +87,14 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
             </div>';
 
 			if ( $should_print_rating ) {
-				echo wp_kses_post( wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) );
+				$avg_rating = $product->get_average_rating();
+				if( $avg_rating > 0 ){
+					echo wc_get_rating_html($product->get_average_rating(), $product->get_rating_count());
+				} else {
+					echo Helper::eael_rating_markup( $product->get_average_rating(), $product->get_rating_count() );
+				}
 			}
+
 			if ( $is_show_badge ){
 				if ( ! $product->is_in_stock() ) {
 					printf( '<span class="outofstock-badge ' . esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) . '">%s</span>', $stock_out_badge_text );
@@ -170,7 +176,12 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
         </div>';
 
 		if ( $should_print_rating ) {
-			echo wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() );
+			$avg_rating = $product->get_average_rating();
+			if( $avg_rating > 0 ){
+				echo wc_get_rating_html($product->get_average_rating(), $product->get_rating_count());
+			} else {
+				echo Helper::eael_rating_markup( $product->get_average_rating(), $product->get_rating_count() );
+			}
 		}
 
 		if ( $is_show_badge ) {
@@ -319,9 +330,13 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 						echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
 					}
 
-					if ($should_print_rating) {
-						echo wc_get_rating_html
-						($product->get_average_rating(), $product->get_rating_count());
+					if ( $should_print_rating ) {
+						$avg_rating = $product->get_average_rating();
+						if( $avg_rating > 0 ){
+							echo wc_get_rating_html($product->get_average_rating(), $product->get_rating_count());
+						} else {
+							echo Helper::eael_rating_markup( $product->get_average_rating(), $product->get_rating_count() );
+						}
 					}
 					?>
                     <div class="eael-product-title">
@@ -464,9 +479,13 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 							echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
 						}
 
-						if ($should_print_rating) {
-							echo wc_get_rating_html
-							($product->get_average_rating(), $product->get_rating_count());
+						if ( $should_print_rating ) {
+							$avg_rating = $product->get_average_rating();
+							if( $avg_rating > 0 ){
+								echo wc_get_rating_html($product->get_average_rating(), $product->get_rating_count());
+							} else {
+								echo Helper::eael_rating_markup( $product->get_average_rating(), $product->get_rating_count() );
+							}
 						}
 
 					} elseif ($list_style_preset == 'eael-product-list-preset-3') {
@@ -474,9 +493,13 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 						if ($should_print_price) {
 							echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
 						}
-						if ($should_print_rating) {
-							echo wc_get_rating_html
-							($product->get_average_rating(), $product->get_rating_count());
+						if ( $should_print_rating ) {
+							$avg_rating = $product->get_average_rating();
+							if( $avg_rating > 0 ){
+								echo wc_get_rating_html($product->get_average_rating(), $product->get_rating_count());
+							} else {
+								echo Helper::eael_rating_markup( $product->get_average_rating(), $product->get_rating_count() );
+							}
 						}
 						echo '</div>
                             <div class="title-wrap">
@@ -494,9 +517,13 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 						echo '</div>';
 					} elseif ($list_style_preset == 'eael-product-list-preset-4') {
 
-						if ($should_print_rating) {
-							echo wc_get_rating_html
-							($product->get_average_rating(), $product->get_rating_count());
+						if ( $should_print_rating ) {
+							$avg_rating = $product->get_average_rating();
+							if( $avg_rating > 0 ){
+								echo wc_get_rating_html($product->get_average_rating(), $product->get_rating_count());
+							} else {
+								echo Helper::eael_rating_markup( $product->get_average_rating(), $product->get_rating_count() );
+							}
 						}
 
 						echo '<div class="eael-product-title">
@@ -525,9 +552,13 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 							echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
 						}
 
-						if ($should_print_rating) {
-							echo wc_get_rating_html
-							($product->get_average_rating(), $product->get_rating_count());
+						if ( $should_print_rating ) {
+							$avg_rating = $product->get_average_rating();
+							if( $avg_rating > 0 ){
+								echo wc_get_rating_html($product->get_average_rating(), $product->get_rating_count());
+							} else {
+								echo Helper::eael_rating_markup( $product->get_average_rating(), $product->get_rating_count() );
+							}
 						}
 
 						if ( $should_print_excerpt ) {
