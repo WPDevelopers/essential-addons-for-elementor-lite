@@ -1,7 +1,7 @@
-ea.hooks.addAction("init", "ea", () => {
+eael.hooks.addAction("init", "ea", () => {
 
 	const wooProductCarousel = function ($scope, $) {
-		ea.hooks.doAction("quickViewAddMarkup",$scope,$);
+		eael.hooks.doAction("quickViewAddMarkup",$scope,$);
 		var $wooProductCarousel = $scope.find(".eael-woo-product-carousel").eq(0),
 			$type = $wooProductCarousel.data("type"),
 			$autoplay =
@@ -238,7 +238,7 @@ ea.hooks.addAction("init", "ea", () => {
 			}
 		});
 
-		ea.hooks.doAction("quickViewPopupViewInit",$scope,$);
+		eael.hooks.doAction("quickViewPopupViewInit",$scope,$);
 
 		if (isEditMode) {
 			$(".eael-product-image-wrap .woocommerce-product-gallery").css(
@@ -273,8 +273,8 @@ ea.hooks.addAction("init", "ea", () => {
 			}
 		}
 
-		ea.hooks.addAction("ea-lightbox-triggered", "ea", WooProductCarouselLoader);
-		ea.hooks.addAction("ea-toggle-triggered", "ea", WooProductCarouselLoader);
+		eael.hooks.addAction("ea-lightbox-triggered", "ea", WooProductCarouselLoader);
+		eael.hooks.addAction("ea-toggle-triggered", "ea", WooProductCarouselLoader);
 	};
 
 	const swiperLoader = (swiperElement, swiperConfig) => {
@@ -295,7 +295,7 @@ ea.hooks.addAction("init", "ea", () => {
 		});
 	}
 
-	if (ea.elementStatusCheck('eaelWooProductSliderLoad')) {
+	if (eael.elementStatusCheck('eaelWooProductSliderLoad')) {
 		return false;
 	}
 

@@ -115,7 +115,7 @@ var SVGDraw = function ($scope, $) {
 }
 jQuery(window).on("elementor/frontend/init", function () {
 
-    if (ea.elementStatusCheck('eaelDrawSVG')) {
+    if (eael.elementStatusCheck('eaelDrawSVG')) {
         return false;
     }
 

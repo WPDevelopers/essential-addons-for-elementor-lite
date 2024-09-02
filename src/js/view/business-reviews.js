@@ -106,8 +106,8 @@ const swiperPromise =  (swiperElement, swiperConfig) => {
 	});
 }
 
-ea.hooks.addAction("init", "ea", () => {
-	if (ea.elementStatusCheck('eaelBusinessReviews')) {
+eael.hooks.addAction("init", "ea", () => {
+	if (eael.elementStatusCheck('eaelBusinessReviews')) {
 		return false;
 	}
 

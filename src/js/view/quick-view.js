@@ -182,12 +182,12 @@ jQuery( document ).on( 'click', '.yith-wcan-filters', function() {
     window.forceFullyRun = true;
 } );
 
-if (!ea.elementStatusCheck('eaelQuickView') || window.forceFullyRun !== undefined ) {
-	ea.hooks.addAction('quickViewAddMarkup', 'ea', QuickView.quickViewAddMarkup, 10);
-	ea.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.openPopup, 10);
-	ea.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.closePopup, 10);
-	ea.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.singlePageAddToCartButton, 10);
-	ea.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.preventStringInNumberField, 10);
+if (!eael.elementStatusCheck('eaelQuickView') || window.forceFullyRun !== undefined ) {
+	eael.hooks.addAction('quickViewAddMarkup', 'ea', QuickView.quickViewAddMarkup, 10);
+	eael.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.openPopup, 10);
+	eael.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.closePopup, 10);
+	eael.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.singlePageAddToCartButton, 10);
+	eael.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.preventStringInNumberField, 10);
 }
 
 
