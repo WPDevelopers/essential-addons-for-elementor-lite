@@ -202,7 +202,9 @@ jQuery(window).on("elementor/frontend/init", function () {
 	});
 
 	$(document).on('click', '.e-n-tab-title', function () {
-		window.dispatchEvent(new Event('resize'));
+		setTimeout(function () {
+			window.dispatchEvent(new Event('resize'));
+		}, 100);
 	});
 })(jQuery);
 
