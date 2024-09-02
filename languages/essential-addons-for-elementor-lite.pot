@@ -1397,7 +1397,7 @@ msgstr ""
 msgid "Search Result List"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Search_Form.php:407, ../includes/Elements/Betterdocs_Search_Form.php:513, ../includes/Elements/Filterable_Gallery.php:1315, ../includes/Elements/Interactive_Circle.php:623, ../includes/Elements/Woo_Product_List.php:1358, ../includes/Template/Woo-Product-List/preset-3.php:115
+#: ../includes/Elements/Betterdocs_Search_Form.php:407, ../includes/Elements/Betterdocs_Search_Form.php:513, ../includes/Elements/Filterable_Gallery.php:1315, ../includes/Elements/Interactive_Circle.php:623, ../includes/Elements/Woo_Product_List.php:1358, ../includes/Template/Woo-Product-List/preset-3.php:123
 msgid "Item"
 msgstr ""
 
@@ -9021,7 +9021,7 @@ msgstr ""
 msgid "Not Found"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_List.php:1232, ../includes/Elements/Woo_Product_List.php:3735, ../includes/Template/Content/Product_Grid.php:82, ../includes/Template/Content/Woo_Product_List.php:82
+#: ../includes/Elements/Woo_Product_List.php:1232, ../includes/Elements/Woo_Product_List.php:3735, ../includes/Template/Content/Product_Grid.php:93, ../includes/Template/Content/Woo_Product_List.php:95
 msgid "No products found!"
 msgstr ""
 
@@ -11201,11 +11201,11 @@ msgstr ""
 msgid "Layout 2"
 msgstr ""
 
-#: ../includes/Template/Content/Product_Grid.php:63, ../includes/Template/Content/Product_Grid.php:29, ../includes/Template/Content/Woo_Product_List.php:63, ../includes/Template/Content/Woo_Product_List.php:29, ../includes/Template/Eicon-Woocommerce/default.php:50
+#: ../includes/Template/Content/Product_Grid.php:74, ../includes/Template/Content/Product_Grid.php:35, ../includes/Template/Content/Woo_Product_List.php:76, ../includes/Template/Content/Woo_Product_List.php:37, ../includes/Template/Eicon-Woocommerce/default.php:50
 msgid "Sale!"
 msgstr ""
 
-#: ../includes/Template/Content/Product_Grid.php:27, ../includes/Template/Content/Woo_Product_List.php:27, ../includes/Template/Eicon-Woocommerce/default.php:51
+#: ../includes/Template/Content/Product_Grid.php:33, ../includes/Template/Content/Woo_Product_List.php:35, ../includes/Template/Eicon-Woocommerce/default.php:51
 msgid "Stock <br/> Out"
 msgstr ""
 
