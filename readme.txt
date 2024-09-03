@@ -8,7 +8,7 @@ Stable tag: 6.0.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-The Essential plugin you install after Elementor! Packed with 50+ stunning elements like Data Table, Event Calendar, Filterable Gallery, WooCommerce.
+The Essential plugin you install after Elementor! Packed with  100+ powerful Elementor widgets & extensions including Advanced Data Table, Event Calendar, Filterable Gallery, WooCommerce, and many more.
 
 == Description ==
 
