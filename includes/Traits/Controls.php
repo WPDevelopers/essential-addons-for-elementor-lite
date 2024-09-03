@@ -259,28 +259,13 @@ trait Controls
             $wb->add_control(
                 'fetch_acf_image_gallery',
                 [
-                    'label'        => esc_html__( 'Image From ACF Gallery ?', 'essential-addons-for-elementor-lite' ),
+                    'label'        => esc_html__( 'Fetch Images from ACF Gallery', 'essential-addons-for-elementor-lite' ),
                     'type'         => Controls_Manager::SWITCHER,
                     'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
                     'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
                     'return_value' => 'yes',
                     'default'      => 'no',
                     'separator'    => 'before',
-                ]
-            );
-
-            $wb->add_control(
-                'eael_gf_hide_parent_items',
-                [
-                    'label'        => esc_html__( 'Hide Parent Items ?', 'essential-addons-for-elementor-lite' ),
-                    'type'         => Controls_Manager::SWITCHER,
-                    'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
-                    'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
-                    'return_value' => 'yes',
-                    'default'      => 'yes',
-                    'condition'    => [
-                        'fetch_acf_image_gallery' => 'yes'
-                    ]
                 ]
             );
 
@@ -299,7 +284,7 @@ trait Controls
                 $wb->add_control(
                     'eael_acf_gallery_keys',
                     [
-                        'label'       => esc_html__( 'Select ACF Gallery Fields', 'essential-addons-for-elementor-lite' ),
+                        'label'       => esc_html__( 'Select ACF Gallery Items Field', 'essential-addons-for-elementor-lite' ),
                         'type'        => Controls_Manager::SELECT2,
                         'label_block' => true,
                         'multiple'    => true,
@@ -309,11 +294,26 @@ trait Controls
                         ]
                     ]
                 );
+
+                $wb->add_control(
+                    'eael_gf_hide_parent_items',
+                    [
+                        'label'        => esc_html__( 'Hide Featured Image', 'essential-addons-for-elementor-lite' ),
+                        'type'         => Controls_Manager::SWITCHER,
+                        'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+                        'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+                        'return_value' => 'yes',
+                        'default'      => 'yes',
+                        'condition'    => [
+                            'fetch_acf_image_gallery' => 'yes'
+                        ]
+                    ]
+                );
                 
                 $wb->add_control(
                     'eael_gf_afc_use_parent_data',
                     [
-                        'label'        => esc_html__( 'Use Parent data for ACF items ?', 'essential-addons-for-elementor-lite' ),
+                        'label'        => esc_html__( 'Use Parent Data for ACF Gallery Items', 'essential-addons-for-elementor-lite' ),
                         'type'         => Controls_Manager::SWITCHER,
                         'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
                         'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
