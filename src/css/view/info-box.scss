@@ -235,50 +235,67 @@
 }
 
 /*---------For Responsive---------*/
-[data-elementor-device-mode="tablet"] .eael-infobox-content-align--tablet-left .eael-infobox .infobox-icon .infobox-icon-wrap {
-	justify-content: flex-start;
+[data-elementor-device-mode="tablet"] {
+	.eael-infobox-content-align--tablet-left {
+		.eael-infobox .infobox-icon .infobox-icon-wrap {
+			justify-content: flex-start;
+		}
+
+		.eael-infobox .infobox-content {
+			text-align: left;
+		}
+	}
+
+	.eael-infobox-content-align--tablet-center {
+		.eael-infobox .infobox-icon .infobox-icon-wrap {
+			justify-content: center;
+		}
+
+		.eael-infobox .infobox-content {
+			text-align: center;
+		}
+	}
+
+	.eael-infobox-content-align--tablet-right {
+		.eael-infobox .infobox-icon .infobox-icon-wrap {
+			justify-content: flex-end;
+		}
+
+		.eael-infobox .infobox-content {
+			text-align: right;
+		}
+	}
 }
 
-[data-elementor-device-mode="tablet"] .eael-infobox-content-align--tablet-left .eael-infobox .infobox-content {
-	text-align: left;
-}
-[data-elementor-device-mode="tablet"] .eael-infobox-content-align--tablet-center .eael-infobox .infobox-icon .infobox-icon-wrap {
-	justify-content: center;
+[data-elementor-device-mode="mobile"] {
+	.eael-infobox-content-align--mobile-left {
+		.eael-infobox .infobox-icon .infobox-icon-wrap {
+			justify-content: flex-start;
+		}
+
+		.eael-infobox .infobox-content {
+			text-align: left;
+		}
+	}
+
+	.eael-infobox-content-align--mobile-center {
+		.eael-infobox .infobox-icon .infobox-icon-wrap {
+			justify-content: center;
+		}
+
+		.eael-infobox .infobox-content {
+			text-align: center;
+		}
+	}
+
+	.eael-infobox-content-align--mobile-right {
+		.eael-infobox .infobox-icon .infobox-icon-wrap {
+			justify-content: flex-end;
+		}
+
+		.eael-infobox .infobox-content {
+			text-align: right;
+		}
+	}
 }
 
-[data-elementor-device-mode="tablet"] .eael-infobox-content-align--tablet-center .eael-infobox .infobox-content {
-	text-align: center;
-}
-
-[data-elementor-device-mode="tablet"] .eael-infobox-content-align--tablet-right .eael-infobox .infobox-icon .infobox-icon-wrap {
-	justify-content: flex-end;
-}
-
-[data-elementor-device-mode="tablet"] .eael-infobox-content-align--tablet-right .eael-infobox .infobox-content {
-	text-align: right;
-}
-
-//Mobile
-[data-elementor-device-mode="mobile"] .eael-infobox-content-align--mobile-left .eael-infobox .infobox-icon .infobox-icon-wrap {
-	justify-content: flex-start;
-}
-
-[data-elementor-device-mode="mobile"] .eael-infobox-content-align--mobile-left .eael-infobox .infobox-content {
-	text-align: left;
-}
-
-[data-elementor-device-mode="mobile"] .eael-infobox-content-align--mobile-center .eael-infobox .infobox-icon .infobox-icon-wrap {
-	justify-content: center;
-}
-
-[data-elementor-device-mode="mobile"] .eael-infobox-content-align--mobile-center .eael-infobox .infobox-content {
-	text-align: center;
-}
-
-[data-elementor-device-mode="mobile"] .eael-infobox-content-align--mobile-right .eael-infobox .infobox-icon .infobox-icon-wrap {
-	justify-content: flex-end;
-}
-
-[data-elementor-device-mode="mobile"] .eael-infobox-content-align--mobile-right .eael-infobox .infobox-content {
-	text-align: right;
-}
