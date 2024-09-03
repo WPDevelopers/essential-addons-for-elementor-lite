@@ -30,7 +30,7 @@ if ( $settings['eael_show_image'] == 'yes' ) {
 
 
 global $authordata;
-$author_link = '';
+$author_link = $author_name = $author_url = '';
 if ( is_object( $authordata ) ) {
     $author_name = $authordata->display_name;
 
@@ -41,9 +41,10 @@ if ( is_object( $authordata ) ) {
 		}
 	}
 
+    $author_url = get_author_posts_url( $authordata->ID, $authordata->user_nicename );
     $author_link = sprintf(
 		'<a href="%1$s" title="%2$s" rel="author">%3$s</a>',
-		esc_url( get_author_posts_url( $authordata->ID, $authordata->user_nicename ) ),
+		esc_url( $author_url ),
 		/* translators: %s: Author's display name. */
 		esc_attr( sprintf( __( 'Posts by %s' ), $author_name ) ),
 		$author_name
@@ -83,10 +84,7 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
                     echo '<div class="eael-entry-wrapper">';
                     if ($settings['eael_show_title']) {
                         echo '<header class="eael-entry-header"><' . $title_tag . ' class="eael-entry-title">';
-                        echo '<a
-                                    class="eael-grid-post-link"
-                                    href="' . get_the_permalink() . '"
-                                    title="' . strip_tags( get_the_title() ) . '"' . $link_settings['title_link_nofollow'] . '' . $link_settings['title_link_target_blank'] . '>';
+                        echo '<a class="eael-grid-post-link" href="' . get_the_permalink() . '" title="' . strip_tags( get_the_title() ) . '"' . $link_settings['title_link_nofollow'] . '' . $link_settings['title_link_target_blank'] . '>';
 
                         if (empty($settings['eael_title_length'])) {
                             echo get_the_title();
@@ -100,7 +98,7 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
                     if ( $is_show_meta && 'meta-entry-header' === $settings['meta_position'] ) {
                         echo '<div class="eael-entry-header-after style-two">';
                         if ( isset( $settings['eael_show_avatar_two'] ) && 'yes' === $settings['eael_show_avatar_two'] ) {
-                            echo '<div class="eael-author-avatar"><a href="' . get_author_posts_url(get_the_author_meta('ID')) . '">' . get_avatar(get_the_author_meta('ID'), 96, '', get_the_author_meta( 'display_name' ) ) . '</a></div>';
+                            echo '<div class="eael-author-avatar"><a href="' . esc_url( $author_url ) . '">' . get_avatar( get_the_author_meta( 'ID' ), 96, '', $author_name ) . '</a></div>';
                         }
 
                         if ( $settings['eael_show_meta'] ) {
@@ -140,7 +138,7 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
                     if ( $is_show_meta && 'meta-entry-footer' === $settings['meta_position'] ) {
                         echo '<div class="eael-entry-header-after style-two">';
                             if ( isset( $settings['eael_show_avatar_two'] ) && 'yes' === $settings['eael_show_avatar_two'] ) {
-                                echo '<div class="eael-author-avatar"><a href="' . get_author_posts_url(get_the_author_meta('ID')) . '">' . get_avatar(get_the_author_meta('ID'), 96, '', get_the_author_meta( 'display_name' ) ) . '</a></div>';
+                                echo '<div class="eael-author-avatar"><a href="' . esc_url( $author_url ) . '">' . get_avatar( get_the_author_meta( 'ID' ), 96, '', $author_name ) . '</a></div>';
                             }
 
                             echo '<div class="eael-entry-meta">';
@@ -352,7 +350,7 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
         if ( $is_show_meta && 'meta-entry-header' === $settings['meta_position'] ) {
             echo '<div class="eael-entry-header-after">';
             if ( isset( $settings['eael_show_avatar'] ) && 'yes' === $settings['eael_show_avatar'] ) {
-                echo '<div class="eael-author-avatar"><a href="' . get_author_posts_url(get_the_author_meta('ID')) . '">' . get_avatar(get_the_author_meta('ID'), 96, '', get_the_author_meta( 'display_name' ) ) . '</a></div>';
+                echo '<div class="eael-author-avatar"><a href="' . esc_url( $author_url ) . '">' . get_avatar( get_the_author_meta( 'ID' ), 96, '', $author_name ) . '</a></div>';
 
             }
 
@@ -393,7 +391,7 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
         if ( $is_show_meta && 'meta-entry-footer' === $settings['meta_position'] ) {
             echo '<div class="eael-entry-footer">';
             if ( isset( $settings['eael_show_avatar'] ) && 'yes' === $settings['eael_show_avatar'] ) {
-                echo '<div class="eael-author-avatar"><a href="' . get_author_posts_url(get_the_author_meta('ID')) . '">' . get_avatar(get_the_author_meta('ID'), 96, '', get_the_author_meta( 'display_name' ) ) . '</a></div>';
+                echo '<div class="eael-author-avatar"><a href="' . esc_url( $author_url ) . '">' . get_avatar( get_the_author_meta( 'ID' ), 96, '', $author_name ) . '</a></div>';
             }
 
             if ($settings['eael_show_meta']) {
