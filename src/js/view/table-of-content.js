@@ -396,5 +396,17 @@
 		if (intSupportTag !== "" && !editMode) {
 			eael_toc_content(eael_toc_check_content(), intSupportTag);
 		}
+
+		// Function to check the window width and add/remove the class
+		function checkWindowSize() {
+			if (window.innerWidth <= 991) {
+				document.body.classList.add('eael-toc-mobile');
+			} else {
+				document.body.classList.remove('eael-toc-mobile');
+			}
+		}
+		checkWindowSize();
+		window.addEventListener('resize', checkWindowSize);
+		
 	});
 })(jQuery);

@@ -201,7 +201,10 @@ jQuery(window).on("elementor/frontend/init", function () {
 					 loadMore = $(".eael-gallery-load-more",$scope);
 				
 				//hide load more button if selected control have no item to show
-				if(LoadMoreShow || fg_items.length < 1){
+				let replaceWithDot = buttonFilter.replace('.', '');
+				const restOfItem = fg_items.filter( galleryItem => galleryItem.includes( replaceWithDot ) ).length;
+				
+				if( LoadMoreShow || ( restOfItem < 1 ) ) {
 					loadMore.hide()
 				}else{
 					loadMore.show()
@@ -223,6 +226,12 @@ jQuery(window).on("elementor/frontend/init", function () {
 
 				if($this.hasClass('all-control')){
 					//All items are active
+					if ( LoadMoreShow || ( fg_items.length <= 1 ) ) {
+						loadMore.hide()
+					} else {
+						loadMore.show()
+					}
+
 					$('.eael-filterable-gallery-item-wrap .eael-magnific-link-clone').removeClass('active').addClass('active');
 				}else {
 					$('.eael-filterable-gallery-item-wrap .eael-magnific-link-clone').removeClass('active');

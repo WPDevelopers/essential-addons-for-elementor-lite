@@ -123,105 +123,19 @@ function ContextReducer() {
                 modals = {...state.modals, [payload.key]: payload.value};
                 return {...state, modals};
             case 'SAVE_MODAL_DATA':
-                params = {
-                    action: 'save_settings_with_ajax',
-                    security: localize.nonce,
-                    ...payload
-                };
-
-                response = eaAjax(params);
-
-                if (response?.success) {
-                    return {
-                        ...state,
-                        modal: 'close',
-                        toasts: true,
-                        toastType: 'success',
-                        toastMessage: eaData.i18n.toaster_success_msg,
-                        btnLoader: ''
-                    };
-                }
-
-                return {
-                    ...state,
-                    toasts: true,
-                    toastType: 'error',
-                    toastMessage: eaData.i18n.toaster_error_msg,
-                    btnLoader: ''
-                };
+                return {...state, ...payload};
             case 'SAVE_ELEMENTS_DATA':
-                params = {
-                    action: 'save_settings_with_ajax',
-                    security: localize.nonce,
-                    elements: true
-                };
-
-                Object.keys(state.elements).map((item) => {
-                    if (state.elements[item] === true) {
-                        params[item] = true;
-                    }
-                });
-
-                response = eaAjax(params);
-
-                if (response?.success) {
-                    toastType = 'success';
-                    toastMessage = eaData.i18n.toaster_success_msg;
-                } else {
-                    toastType = 'error';
-                    toastMessage = eaData.i18n.toaster_error_msg;
-                }
-
-                return {...state, toasts: true, toastType, toastMessage, btnLoader: ''};
+                return {...state, toasts: true, btnLoader: '', ...payload};
             case 'SAVE_TOOLS':
-                params = {
-                    action: 'save_settings_with_ajax',
-                    security: localize.nonce,
-                    [payload.key]: payload.value
-                };
-
-                response = eaAjax(params);
-
-                if (response?.success) {
-                    toastType = 'success';
-                    toastMessage = eaData.i18n.toaster_success_msg;
-                } else {
-                    toastType = 'error';
-                    toastMessage = eaData.i18n.toaster_error_msg;
-                }
-
-                return {...state, toasts: true, toastType, toastMessage, btnLoader: ''};
+                return {...state, toasts: true, btnLoader: '', ...payload};
             case 'REGENERATE_ASSETS':
-                params = {
-                    action: 'clear_cache_files_with_ajax',
-                    security: localize.nonce
-                };
-
-                response = eaAjax(params);
-
-                if (response === true) {
-                    toastType = 'success';
-                    toastMessage = 'Assets Regenerated!';
-                } else {
-                    toastType = 'error';
-                    toastMessage = 'Failed to Regenerate Assets!';
-                }
-
-                return {...state, toasts: true, toastType, toastMessage}
+                return {...state, toasts: true, ...payload}
             case 'ELEMENTS_CAT':
                 return {...state, elementsActivateCatIndex: payload}
             case 'LIGHT_DARK_TOGGLE':
                 setLsData('isDark', !state.isDark);
                 return {...state, isDark: !state.isDark}
             case 'INSTALL_TEMPLATELY':
-                params = {
-                    action: 'wpdeveloper_install_plugin',
-                    security: localize.nonce,
-                    slug: 'templately'
-                };
-
-                response = eaAjax(params);
-
                 return {...state, isTemplatelyInstalled: true, btnLoader: ''}
             case 'CLOSE_ADMIN_PROMOTION':
                 params = {

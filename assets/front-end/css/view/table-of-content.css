@@ -212,7 +212,7 @@ html {
 }
 
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-number li:before {
-  content: counters(counter, ".") " ";
+  content: counters(counter, ". ") ". ";
 }
 
 .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-number li ul {
@@ -272,5 +272,20 @@ html {
 @media only screen and (max-width: 767px) {
   .eael-toc.eael-toc-mobile-hide {
     display: none !important;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .eael-toc.collapsed.eael-toc-top .eael-toc-button,
+  .eael-toc.collapsed.eael-toc-bottom .eael-toc-button {
+    -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  .eael-toc-mobile .eael-toc.collapsed.eael-toc-top {
+    bottom: unset !important;
+  }
+  .eael-toc-mobile .eael-toc.eael-sticky.eael-toc-bottom {
+    top: unset !important;
   }
 }
