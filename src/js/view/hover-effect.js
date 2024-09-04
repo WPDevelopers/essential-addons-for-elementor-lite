@@ -335,7 +335,7 @@ let HoverEffectHandler = function ($scope, $) {
 }
 
 jQuery(window).on("elementor/frontend/init", function () {
-    if (ea.elementStatusCheck('eaelHoverEffect')) {
+    if (eael.elementStatusCheck('eaelHoverEffect')) {
         return false;
     }
     elementorFrontend.hooks.addAction(

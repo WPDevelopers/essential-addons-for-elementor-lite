@@ -712,6 +712,7 @@ class Interactive_Circle extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn .eael-circle-btn-icon i'   => 'color: {{VALUE}}!important;',
 					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn .eael-circle-btn-icon svg' => 'fill: {{VALUE}}!important;',
+					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn .eael-circle-btn-icon svg path' => 'fill: {{VALUE}}!important;',
 				],
 				'condition' => [
 					'eael_interactive_circle_btn_icon_show' => 'yes'

@@ -333,6 +333,7 @@ class Post_Timeline extends Widget_Base
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-timeline-post-title .eael-timeline-post-title-text' => 'text-align: {{VALUE}};',
+                    '{{WRAPPER}} .eael-timeline-post-title .eael-timeline-post-title-text-card' => 'text-align: {{VALUE}};',
                 ],
             ]
         );
@@ -346,6 +347,7 @@ class Post_Timeline extends Widget_Base
                     'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
                 ],
                 'selector' => '{{WRAPPER}} .eael-timeline-post-title .eael-timeline-post-title-text',
+                'selector' => '{{WRAPPER}} .eael-timeline-post-title .eael-timeline-post-title-text-card',
             ]
         );
 
