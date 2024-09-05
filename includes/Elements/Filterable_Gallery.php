@@ -80,6 +80,10 @@ class Filterable_Gallery extends Widget_Base
             'essential addons'
         ];
     }
+
+    protected function is_dynamic_content():bool {
+        return false;
+    }
     
     public function get_custom_help_url()
     {
