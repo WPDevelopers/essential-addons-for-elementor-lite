@@ -49,7 +49,7 @@ var FancyText = function ($scope, $) {
 };
 jQuery(window).on("elementor/frontend/init", function () {
 
-    if (ea.elementStatusCheck('eaelFancyTextLoad')) {
+    if (eael.elementStatusCheck('eaelFancyTextLoad')) {
         return false;
     }
 

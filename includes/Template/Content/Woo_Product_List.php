@@ -1,6 +1,7 @@
 <?php
 
 namespace Essential_Addons_Elementor\Template\Content;
+use Essential_Addons_Elementor\Classes\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -20,9 +21,16 @@ trait Woo_Product_List {
 							<?php echo wp_kses_post( $product->get_image( 'woocommerce_thumbnail' )); ?>
                             <h2 class="woocommerce-loop-product__title"> <?php echo esc_html( $product->get_title()); ?> </h2>
 							<?php
-							if ( $settings['eael_woo_product_list_rating'] == 'yes' ) {
-								echo wp_kses_post( wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ));
+
+							if ( 'yes' === $settings['eael_woo_product_list_rating'] ) {
+								$avg_rating = $product->get_average_rating();
+								if( $avg_rating > 0 ){
+									echo wc_get_rating_html($product->get_average_rating(), $product->get_rating_count());
+								} else {
+									echo Helper::eael_rating_markup( $product->get_average_rating(), $product->get_rating_count() );
+								}
 							}
+
 							if ( ! $product->managing_stock() && ! $product->is_in_stock() ) {
 								printf( '<span class="outofstock-badge">%s</span>', __( 'Stock <br/> Out', 'essential-addons-for-elementor-lite' ) );
 							} elseif ( $product->is_on_sale() ) {
@@ -56,9 +64,14 @@ trait Woo_Product_List {
                         </div>
                         <h2 class="woocommerce-loop-product__title"><?php echo esc_html( $product->get_title()); ?></h2>
                         <?php
-                        if ($settings['eael_woo_product_list_rating'] === 'yes') {
-                            echo wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() );
-                        }
+                        if ( 'yes' === $settings['eael_woo_product_list_rating'] ) {
+							$avg_rating = $product->get_average_rating();
+							if( $avg_rating > 0 ){
+								echo wc_get_rating_html($product->get_average_rating(), $product->get_rating_count());
+							} else {
+								echo Helper::eael_rating_markup( $product->get_average_rating(), $product->get_rating_count() );
+							}
+						}
                         if ($product->is_on_sale()){
                             printf( '<span class="onsale">%s</span>', __( 'Sale!', 'essential-addons-for-elementor-lite' ));
                         }

@@ -58,10 +58,10 @@ class Wrapper_Link {
 
 	public function before_render( $element ) {
 		$wrapper_link_settings = $element->get_settings_for_display( 'eael_wrapper_link' );
-		
+
 		if ( "yes" === $element->get_settings_for_display( 'eael_wrapper_link_switch' ) && ! empty( $wrapper_link_settings['url'] ) ) {
 			$link_id = 'eael-wrapper-link-' . $element->get_id();
-			$element->add_render_attribute( 'eael_wrapper_link', 'id', $link_id );
+			$element->add_render_attribute( 'eael_wrapper_link', 'class', $link_id . ' --eael-wrapper-link-tag' );
 			$element->add_link_attributes( 'eael_wrapper_link', $wrapper_link_settings );
 			echo "<a "; $element->print_render_attribute_string( 'eael_wrapper_link' ); echo "></a>";
 
