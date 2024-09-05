@@ -1090,10 +1090,10 @@ class Interactive_Circle extends Widget_Base {
 										<?php 
 											if( 'yes' == $item['eael_interactive_circle_btn_link_on'] ) {
 												if ( ! empty( $item['eael_interactive_circle_btn_link']['url'] ) ) {
-													$this->add_link_attributes( 'interactive_circle_link', $item['eael_interactive_circle_btn_link'] );
+													$this->add_link_attributes( 'interactive_circle_link_' . $index, $item['eael_interactive_circle_btn_link'] );
 												}
 											?>
-											<a <?php echo $this->get_render_attribute_string('interactive_circle_link'); ?>>
+											<a <?php echo $this->get_render_attribute_string( 'interactive_circle_link_' . $index ); ?>>
 												<div class="eael-circle-btn-icon <?php echo esc_attr( $item_style_classic ); ?>">
 													<div class="eael-circle-icon-inner">
 														<?php
