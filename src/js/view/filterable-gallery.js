@@ -148,6 +148,14 @@ jQuery(window).on("elementor/frontend/init", function () {
 							if( el_lightbox.length > 0 ){
 								el_lightbox.remove();
 							}
+
+							//Fix Safari pop video width issue. 
+							$('.e--ua-safari .eael-gf-mfp-popup iframe.mfp-iframe').on('load', function() {
+								// Access the iframe's document
+								var iframeDoc = this.contentDocument || this.contentWindow.document;
+								var $video = $(iframeDoc).find('video');
+								$video.removeClass('mac');
+							});
 						}, 100);
 					},
 				}
@@ -372,14 +380,14 @@ jQuery(window).on("elementor/frontend/init", function () {
 				});
 			}
 
-			ea.hooks.addAction("ea-toggle-triggered", "ea", FilterableGallery);
-			ea.hooks.addAction("ea-lightbox-triggered", "ea", FilterableGallery);
-			ea.hooks.addAction("ea-advanced-tabs-triggered", "ea", FilterableGallery);
-			ea.hooks.addAction("ea-advanced-accordion-triggered", "ea", FilterableGallery);
+			eael.hooks.addAction("ea-toggle-triggered", "ea", FilterableGallery);
+			eael.hooks.addAction("ea-lightbox-triggered", "ea", FilterableGallery);
+			eael.hooks.addAction("ea-advanced-tabs-triggered", "ea", FilterableGallery);
+			eael.hooks.addAction("ea-advanced-accordion-triggered", "ea", FilterableGallery);
 		}
 	};
 
-	if (ea.elementStatusCheck('eaelFilterableGallery')) {
+	if (eael.elementStatusCheck('eaelFilterableGallery')) {
 		return false;
 	}
 

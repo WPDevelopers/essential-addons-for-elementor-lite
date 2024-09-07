@@ -101,11 +101,15 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
 		                    }
 		                    echo '</div>';
 	                    }
-	                    ?>
-			            <?php if ($should_print_rating) {
-				            echo wc_get_rating_html
-				            ($product->get_average_rating(), $product->get_rating_count());
-			            } ?>
+	                    if ( $should_print_rating ) {
+							$avg_rating = $product->get_average_rating();
+							if( $avg_rating > 0 ){
+								echo wc_get_rating_html( $avg_rating, $product->get_rating_count());
+							} else {
+								echo Helper::eael_rating_markup( $avg_rating, $product->get_rating_count() );
+							}
+						}
+						?>
                     </div>
 		            <?php if($should_print_price ){
 			            echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';

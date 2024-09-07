@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("ea.hooks.addAction(\"init\", \"ea\", function () {\n  var wooProductList = function wooProductList($scope, $) {\n    ea.hooks.doAction(\"quickViewAddMarkup\", $scope, $);\n    ea.hooks.doAction(\"quickViewPopupViewInit\", $scope, $);\n  };\n  elementorFrontend.hooks.addAction(\"frontend/element_ready/eael-woo-product-list.default\", wooProductList);\n});\n\n//# sourceURL=webpack:///./src/js/view/woo-product-list.js?");
+eval("eael.hooks.addAction(\"init\", \"ea\", function () {\n  var wooProductList = function wooProductList($scope, $) {\n    eael.hooks.doAction(\"quickViewAddMarkup\", $scope, $);\n    eael.hooks.doAction(\"quickViewPopupViewInit\", $scope, $);\n  };\n  elementorFrontend.hooks.addAction(\"frontend/element_ready/eael-woo-product-list.default\", wooProductList);\n});\n\n//# sourceURL=webpack:///./src/js/view/woo-product-list.js?");
 
 /***/ })
 

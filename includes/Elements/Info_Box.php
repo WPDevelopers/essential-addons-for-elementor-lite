@@ -326,7 +326,8 @@ class Info_Box extends Widget_Base
                     ],
                 ],
                 'default' => 'center',
-                'prefix_class' => 'eael-infobox-content-align-',
+                'devices' => [ 'desktop', 'tablet', 'mobile' ],
+                'prefix_class' => 'eael-infobox-content-align-%s-',
                 'condition' => [
                     'eael_infobox_img_type' => 'img-on-top',
                 ],
