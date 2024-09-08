@@ -156,9 +156,9 @@ jQuery(window).on("elementor/frontend/init", function () {
 							</div>`
 				},
 				callbacks: {
-					markupParse: function(template, values, item) {
-						if( item.el.attr('title') !== "" ) {
-							values.title = item.el.attr('title');
+					markupParse: function (template, values, item) {
+						if (item.el.attr('title') !== "") {
+							values.title = DOMPurify.sanitize(item.el.attr('title'));
 						}
 					},
 					open: function() {
