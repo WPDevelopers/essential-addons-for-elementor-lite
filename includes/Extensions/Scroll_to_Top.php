@@ -355,6 +355,18 @@ class Scroll_to_Top
         );
 
         $element->add_control(
+			'eael_ext_scroll_to_top_button_icon_note',
+			[
+				'type'            => Controls_Manager  :: RAW_HTML,
+				'raw'             => __( 'If a page is not supported <strong>Font Awesome Icon</strong> please use <strong>SVG</strong> icon instead of it.', 'essential-addons-for-elementor-lite' ),
+				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+				'condition'       => [
+					'eael_ext_scroll_to_top' => 'yes',
+				],
+			]
+		);
+
+        $element->add_control(
             'eael_ext_scroll_to_top_button_icon_size',
             [
                 'label' => __('Icon Size', 'essential-addons-for-elementor-lite'),

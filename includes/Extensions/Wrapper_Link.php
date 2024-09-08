@@ -59,16 +59,13 @@ class Wrapper_Link {
 	public function before_render( $element ) {
 		$wrapper_link_settings = $element->get_settings_for_display( 'eael_wrapper_link' );
 
-		if ( ! empty( $element->get_settings_for_display( 'eael_wrapper_link_switch' ) ) && ! empty( $wrapper_link_settings['url'] ) ) {
-			$element->add_render_attribute( '_wrapper',
-				'data-eael-wrapper-link',
-				wp_json_encode( [
-					'url'         => esc_url( $wrapper_link_settings['url'] ),
-					'is_external' => esc_attr( $wrapper_link_settings['is_external'] ),
-					'nofollow'    => esc_attr( $wrapper_link_settings['nofollow'] )
-				] )
-			);
+		if ( "yes" === $element->get_settings_for_display( 'eael_wrapper_link_switch' ) && ! empty( $wrapper_link_settings['url'] ) ) {
+			$link_id = 'eael-wrapper-link-' . $element->get_id();
+			$element->add_render_attribute( 'eael_wrapper_link', 'class', $link_id . ' --eael-wrapper-link-tag' );
+			$element->add_link_attributes( 'eael_wrapper_link', $wrapper_link_settings );
+			echo "<a "; $element->print_render_attribute_string( 'eael_wrapper_link' ); echo "></a>";
+
+			$element->add_render_attribute( '_wrapper', 'data-eael-wrapper-link', $link_id );
 		}
 	}
-
 }

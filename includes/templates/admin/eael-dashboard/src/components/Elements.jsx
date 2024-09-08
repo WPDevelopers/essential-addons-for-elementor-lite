@@ -3,7 +3,7 @@ import consumer from "../context";
 import ElementCategoryBox from "./ElementCategoryBox.jsx";
 import ElementsSearchSection from "./ElementsSearchSection.jsx";
 import {useRef, useEffect} from "react";
-import {debounce} from "../helper";
+import {asyncDispatch, debounce} from "../helper";
 
 function Elements() {
     const eaData = localize.eael_dashboard.widgets,
@@ -41,7 +41,7 @@ function Elements() {
         },
         clickHandler = () => {
             eaDispatch({type: 'BUTTON_LOADER', payload: 'elements'});
-            setTimeout(eaDispatch, 500, {type: 'SAVE_ELEMENTS_DATA'});
+            asyncDispatch({eaState, eaDispatch}, 'SAVE_ELEMENTS_DATA');
         },
         scrollHandler = () => {
             const newScrollY = window.pageYOffset - 32 - eaState.scrollOffset,

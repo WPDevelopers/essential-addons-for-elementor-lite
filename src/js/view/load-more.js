@@ -1,7 +1,7 @@
 (function ($) {
 	"use strict";
 
-	ea.getToken();
+	eael.getToken();
 
 	$(document).on("click", ".eael-load-more-button", function (e) {
 		e.preventDefault();

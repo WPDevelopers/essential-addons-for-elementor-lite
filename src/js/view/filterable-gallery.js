@@ -148,6 +148,14 @@ jQuery(window).on("elementor/frontend/init", function () {
 							if( el_lightbox.length > 0 ){
 								el_lightbox.remove();
 							}
+
+							//Fix Safari pop video width issue. 
+							$('.e--ua-safari .eael-gf-mfp-popup iframe.mfp-iframe').on('load', function() {
+								// Access the iframe's document
+								var iframeDoc = this.contentDocument || this.contentWindow.document;
+								var $video = $(iframeDoc).find('video');
+								$video.removeClass('mac');
+							});
 						}, 100);
 					},
 				}
@@ -201,7 +209,10 @@ jQuery(window).on("elementor/frontend/init", function () {
 					 loadMore = $(".eael-gallery-load-more",$scope);
 				
 				//hide load more button if selected control have no item to show
-				if(LoadMoreShow || fg_items.length < 1){
+				let replaceWithDot = buttonFilter.replace('.', '');
+				const restOfItem = fg_items.filter( galleryItem => galleryItem.includes( replaceWithDot ) ).length;
+				
+				if( LoadMoreShow || ( restOfItem < 1 ) ) {
 					loadMore.hide()
 				}else{
 					loadMore.show()
@@ -223,6 +234,12 @@ jQuery(window).on("elementor/frontend/init", function () {
 
 				if($this.hasClass('all-control')){
 					//All items are active
+					if ( LoadMoreShow || ( fg_items.length <= 1 ) ) {
+						loadMore.hide()
+					} else {
+						loadMore.show()
+					}
+
 					$('.eael-filterable-gallery-item-wrap .eael-magnific-link-clone').removeClass('active').addClass('active');
 				}else {
 					$('.eael-filterable-gallery-item-wrap .eael-magnific-link-clone').removeClass('active');
@@ -363,14 +380,14 @@ jQuery(window).on("elementor/frontend/init", function () {
 				});
 			}
 
-			ea.hooks.addAction("ea-toggle-triggered", "ea", FilterableGallery);
-			ea.hooks.addAction("ea-lightbox-triggered", "ea", FilterableGallery);
-			ea.hooks.addAction("ea-advanced-tabs-triggered", "ea", FilterableGallery);
-			ea.hooks.addAction("ea-advanced-accordion-triggered", "ea", FilterableGallery);
+			eael.hooks.addAction("ea-toggle-triggered", "ea", FilterableGallery);
+			eael.hooks.addAction("ea-lightbox-triggered", "ea", FilterableGallery);
+			eael.hooks.addAction("ea-advanced-tabs-triggered", "ea", FilterableGallery);
+			eael.hooks.addAction("ea-advanced-accordion-triggered", "ea", FilterableGallery);
 		}
 	};
 
-	if (ea.elementStatusCheck('eaelFilterableGallery')) {
+	if (eael.elementStatusCheck('eaelFilterableGallery')) {
 		return false;
 	}
 
