@@ -281,6 +281,11 @@ eael.hooks.addAction("init", "ea", () => {
 		}
 
 	};
+
+	if ( eael.elementStatusCheck('eaelProductGridLoad') && window.forceFullyRun === undefined ) {
+        return;
+    }
+
 	elementorFrontend.hooks.addAction(
 		"frontend/element_ready/eicon-woocommerce.default",
 		productGrid
