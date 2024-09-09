@@ -295,8 +295,8 @@ eael.hooks.addAction("init", "ea", () => {
 		});
 	}
 
-	if (eael.elementStatusCheck('eaelWooProductSliderLoad')) {
-		return false;
+	if ( eael.elementStatusCheck('eaelWooProductSliderLoad') && window.forceFullyRun === undefined ) {
+		return;
 	}
 
 	elementorFrontend.hooks.addAction(
