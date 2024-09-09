@@ -3969,7 +3969,7 @@ class Filterable_Gallery extends Widget_Base
         <script type="text/javascript">
             jQuery(document).ready(function($) {
                 $('.eael-filter-gallery-container').each(function() {
-                    var $node_id = '<?php echo $this->get_id(); ?>',
+                    var $node_id = '<?php echo esc_js($this->get_id()); ?>',
                         $scope = $('[data-id="' + $node_id + '"]'),
                         $gallery = $(this),
                         $settings = $gallery.data('settings'),
