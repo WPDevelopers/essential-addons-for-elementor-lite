@@ -12,6 +12,19 @@ jQuery(window).on("elementor/frontend/init", function () {
 	
 		return null;
 	}
+
+	function shuffleGalleryItems( items ) {
+		for (var i = 0; i < items.length - 1; i++) {
+			var j = i + Math.floor(Math.random() * (items.length - i));
+	
+			var temp = items[j];
+			items[j] = items[i];
+			items[i] = temp;
+		}
+
+		return items;
+	}
+
 	var filterableGalleryHandler = function ($scope, $) {
 		var filterControls = $scope.find(".fg-layout-3-filter-controls").eq(0),
 			filterTrigger  = $scope.find("#fg-filter-trigger"),
@@ -79,13 +92,23 @@ jQuery(window).on("elementor/frontend/init", function () {
 		if (!isEditMode) {
 			var $gallery         = $(".eael-filter-gallery-container", $scope),
 				$settings        = $gallery.data("settings"),
-				fg_items = $gallery_items   = $gallery.data("gallery-items"),
+				fg_items 		 =  $gallery.data("gallery-items"),
 				$layout_mode     = $settings.grid_style === "masonry" ? "masonry" : "fitRows",
 				$gallery_enabled = ($settings.gallery_enabled === "yes"),
 				$images_per_page = $gallery.data("images-per-page"),
-				$init_show_setting     = $gallery.data("init-show");
-				fg_items.splice(0, $init_show_setting),
+				$init_show_setting     = $gallery.data("init-show"),
+				$is_randomize     = $gallery.data("is-randomize");
 				isRTL = $('body').hasClass('rtl');
+				
+				if( 'yes' === $is_randomize ){
+					fg_items = shuffleGalleryItems( fg_items );
+					$gallery.empty();
+					for (let i =  0; i < $init_show_setting; i++) {
+						$gallery.append(fg_items[i]);
+					}
+				}
+				fg_items.splice(0, $init_show_setting);
+
 			// init isotope
 			let gwrap = $(".eael-filter-gallery-wrapper");
 			var layoutMode       = gwrap.data("layout-mode");
@@ -133,9 +156,9 @@ jQuery(window).on("elementor/frontend/init", function () {
 							</div>`
 				},
 				callbacks: {
-					markupParse: function(template, values, item) {
-						if( item.el.attr('title') !== "" ) {
-							values.title = item.el.attr('title');
+					markupParse: function (template, values, item) {
+						if (item.el.attr('title') !== "") {
+							values.title = DOMPurify.sanitize(item.el.attr('title'));
 						}
 					},
 					open: function() {

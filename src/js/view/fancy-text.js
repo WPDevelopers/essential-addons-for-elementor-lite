@@ -7,7 +7,8 @@ var FancyText = function ($scope, $) {
         $fancy_text_delay = $fancyText.data("fancy-text-delay") !== undefined ? $fancyText.data("fancy-text-delay") : "",
         $fancy_text_cursor = $fancyText.data("fancy-text-cursor") === "yes",
         $fancy_text_loop = $fancyText.data("fancy-text-loop") !== undefined ? ($fancyText.data("fancy-text-loop") === "yes") : false;
-    $fancy_text = $fancy_text.split("|");
+
+    $fancy_text = DOMPurify.sanitize($fancy_text).split("|");
 
     if ($transition_type === "typing") {
         new Typed("#eael-fancy-text-" + $id, {
