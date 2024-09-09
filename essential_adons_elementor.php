@@ -4,14 +4,14 @@
  * Description: Most Used Elementor addon, an advanced elements library for Elementor web builder with 100+ powerful widgets & extensions with WooCommerce builder.
  * Plugin URI: https://essential-addons.com/
  * Author: WPDeveloper
- * Version: 6.0.3
+ * Version: 6.0.4
  * Author URI: https://wpdeveloper.com/
  * Text Domain: essential-addons-for-elementor-lite
  * Domain Path: /languages
  *
  * WC tested up to: 9.2
- * Elementor tested up to: 3.23
- * Elementor Pro tested up to: 3.23
+ * Elementor tested up to: 3.24
+ * Elementor Pro tested up to: 3.24
  */
 
 if (!defined('ABSPATH')) {
@@ -27,7 +27,7 @@ define('EAEL_PLUGIN_FILE', __FILE__);
 define('EAEL_PLUGIN_BASENAME', plugin_basename(__FILE__));
 define('EAEL_PLUGIN_PATH', trailingslashit(plugin_dir_path(__FILE__)));
 define('EAEL_PLUGIN_URL', trailingslashit(plugins_url('/', __FILE__)));
-define('EAEL_PLUGIN_VERSION', '6.0.3');
+define('EAEL_PLUGIN_VERSION', '6.0.4');
 define('EAEL_ASSET_PATH', wp_upload_dir()['basedir'] . '/essential-addons-elementor');
 define('EAEL_ASSET_URL', wp_upload_dir()['baseurl'] . '/essential-addons-elementor');
 /**
