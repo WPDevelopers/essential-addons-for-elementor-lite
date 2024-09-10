@@ -511,7 +511,7 @@ trait Admin {
 					    'icon'    => 'ea-settings',
 					    'button'  => [
 						    'label' => __( 'CSS Print Method', 'essential-addons-for-elementor-lite' ),
-						    'url'   => defined( 'ELEMENTOR_VERSION' ) && version_compare( ELEMENTOR_VERSION, '3.21.0', '>=' ) ? admin_url( 'admin.php?page=elementor-tools' ) : admin_url( 'admin.php?page=elementor#tab-advanced' )
+						    'url'   => defined( 'ELEMENTOR_VERSION' ) && version_compare( ELEMENTOR_VERSION, '3.21.0', '>=' ) ? admin_url( 'admin.php?page=elementor-settings#tab-performance' ) : admin_url( 'admin.php?page=elementor#tab-advanced' )
 					    ]
 				    ],
 				    'box_3' => [

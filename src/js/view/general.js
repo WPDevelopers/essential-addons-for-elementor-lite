@@ -1,7 +1,7 @@
 import { createHooks } from "@wordpress/hooks";
 
 window.isEditMode = false;
-window.ea = {
+window.eael = window.ea = {
 	hooks: createHooks(),
 	isEditMode: false,
 	elementStatusCheck:function(name){
@@ -14,7 +14,7 @@ window.ea = {
 	}
 };
 
-ea.hooks.addAction("widgets.reinit", "ea", ($content) => {
+eael.hooks.addAction("widgets.reinit", "ea", ($content) => {
 	let filterGallery = jQuery(".eael-filter-gallery-container", $content);
 	let postGridGallery = jQuery(
 		".eael-post-grid:not(.eael-post-carousel)",
@@ -54,27 +54,27 @@ ea.hooks.addAction("widgets.reinit", "ea", ($content) => {
 	}
 
 	if (eventCalendar.length) {
-		ea.hooks.doAction("eventCalendar.reinit");
+		eael.hooks.doAction("eventCalendar.reinit");
 	}
 
 	if (testimonialSlider.length) {
-		ea.hooks.doAction("testimonialSlider.reinit");
+		eael.hooks.doAction("testimonialSlider.reinit");
 	}
 
 	if (teamMemberCarousel.length) {
-		ea.hooks.doAction("teamMemberCarousel.reinit");
+		eael.hooks.doAction("teamMemberCarousel.reinit");
 	}
 
 	if (postCarousel.length) {
-		ea.hooks.doAction("postCarousel.reinit");
+		eael.hooks.doAction("postCarousel.reinit");
 	}
 
 	if (logoCarousel.length) {
-		ea.hooks.doAction("logoCarousel.reinit");
+		eael.hooks.doAction("logoCarousel.reinit");
 	}
 
 	if (twitterCarousel.length) {
-		ea.hooks.doAction("twitterCarousel.reinit");
+		eael.hooks.doAction("twitterCarousel.reinit");
 	}
 });
 
@@ -88,25 +88,25 @@ let ea_swiper_slider_init_inside_template = (content) => {
 	});
 }
 
-ea.hooks.addAction("ea-advanced-tabs-triggered", "ea", ea_swiper_slider_init_inside_template);
-ea.hooks.addAction("ea-advanced-accordion-triggered", "ea", ea_swiper_slider_init_inside_template);
+eael.hooks.addAction("ea-advanced-tabs-triggered", "ea", ea_swiper_slider_init_inside_template);
+eael.hooks.addAction("ea-advanced-accordion-triggered", "ea", ea_swiper_slider_init_inside_template);
 
 jQuery(window).on("elementor/frontend/init", function () {
 	window.isEditMode = elementorFrontend.isEditMode();
-	window.ea.isEditMode = elementorFrontend.isEditMode();
+	window.eael.isEditMode = elementorFrontend.isEditMode();
 
 	// hooks
-	ea.hooks.doAction("init");
+	eael.hooks.doAction("init");
 
 	// init edit mode hook
-	if (ea.isEditMode) {
-		ea.hooks.doAction("editMode.init");
+	if (eael.isEditMode) {
+		eael.hooks.doAction("editMode.init");
 	}
 });
 
 (function ($) {
-	ea.getToken = () => {
-		if (localize.nonce && !ea.noncegenerated) {
+	eael.getToken = () => {
+		if (localize.nonce && !eael.noncegenerated) {
 			$.ajax({
 				url: localize.ajaxurl,
 				type: "post",
@@ -116,13 +116,13 @@ jQuery(window).on("elementor/frontend/init", function () {
 				success: function (response) {
 					if (response.success) {
 						localize.nonce = response.data.nonce
-						ea.noncegenerated = true;
+						eael.noncegenerated = true;
 					}
 				}
 			});
 		}
 	}
-	ea.sanitizeURL = function (url) {
+	eael.sanitizeURL = function (url) {
 		if (url.startsWith('/') || url.startsWith('#')) {
 			return url;
 		}
@@ -187,7 +187,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 					if (typeof hashURL !== 'undefined' && hashURL) {
 						let tabs = $(hashURL).closest('.eael-advance-tabs');
 						if( tabs.length > 0 ){
-							let idOffset = tab.data('custom-id-offset');
+							let idOffset = tabs.data('custom-id-offset');
 							idOffset = idOffset ? parseFloat(idOffset) : 0;
 							$('html, body').animate({
 								scrollTop: $(hashURL).offset().top - idOffset,
@@ -202,7 +202,9 @@ jQuery(window).on("elementor/frontend/init", function () {
 	});
 
 	$(document).on('click', '.e-n-tab-title', function () {
-		window.dispatchEvent(new Event('resize'));
+		setTimeout(function () {
+			window.dispatchEvent(new Event('resize'));
+		}, 100);
 	});
 })(jQuery);
 

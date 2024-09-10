@@ -434,6 +434,7 @@
             text-transform: capitalize;
             border: none;
             letter-spacing: normal;
+            display: flex;
 
             &:hover,
             &:visited {
@@ -1245,18 +1246,6 @@
         margin: 1%;
     }
 
-}
-
-.theme-oceanwp {
-    //&.elementor-editor-active {
-    //    .eael-product-popup.woocommerce div.product form.cart div.quantity .qty {
-    //        max-width: 150px;
-    //    }
-    //}
-    //
-    //.eael-product-popup.woocommerce div.product form.cart div.quantity .qty:focus {
-    //    border: 1px solid;
-    //}
 }
 
 @-webkit-keyframes ploaderSpin {

@@ -51,6 +51,10 @@ class Countdown extends Widget_Base {
         ];
     }
 
+    protected function is_dynamic_content():bool {
+        return false;
+    }
+
     public function get_custom_help_url() {
         return 'https://essential-addons.com/elementor/docs/creative-elements/ea-countdown/';
     }

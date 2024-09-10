@@ -72,7 +72,7 @@ var data_table_panel = function(panel, model, view) {
 };
 
 jQuery(window).on("elementor/frontend/init", function() {
-	if (ea.elementStatusCheck('eaelDataTable')) {
+	if (eael.elementStatusCheck('eaelDataTable')) {
 		return false;
 	}
 

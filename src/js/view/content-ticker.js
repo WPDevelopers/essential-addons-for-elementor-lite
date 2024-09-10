@@ -1,4 +1,4 @@
-ea.hooks.addAction("init", "ea", () => {
+eael.hooks.addAction("init", "ea", () => {
     function get_configurations($contentTicker) {
         let $items =
             $contentTicker.data("items") !== undefined
@@ -139,10 +139,10 @@ ea.hooks.addAction("init", "ea", () => {
             }
         }
 
-        ea.hooks.addAction("ea-toggle-triggered", "ea", ContentTickerSlider);
-        ea.hooks.addAction("ea-lightbox-triggered", "ea", ContentTickerSlider);
-        ea.hooks.addAction("ea-advanced-tabs-triggered", "ea", ContentTickerSlider);
-        ea.hooks.addAction("ea-advanced-accordion-triggered", "ea", ContentTickerSlider);
+        eael.hooks.addAction("ea-toggle-triggered", "ea", ContentTickerSlider);
+        eael.hooks.addAction("ea-lightbox-triggered", "ea", ContentTickerSlider);
+        eael.hooks.addAction("ea-advanced-tabs-triggered", "ea", ContentTickerSlider);
+        eael.hooks.addAction("ea-advanced-accordion-triggered", "ea", ContentTickerSlider);
     };
 
     const swiperLoader = (swiperElement, swiperConfig) => {

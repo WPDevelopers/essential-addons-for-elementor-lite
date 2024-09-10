@@ -83,7 +83,12 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
                 }
                 printf('<%1$s class="woocommerce-loop-product__title">%2$s</%1$s>', $title_tag, Helper::eael_wp_kses($product->get_title()));
                 if ( $should_print_rating ) {
-                    echo wp_kses_post( wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) );
+                    $avg_rating = $product->get_average_rating();
+                    if( $avg_rating > 0 ){
+                        echo wc_get_rating_html( $avg_rating, $product->get_rating_count());
+                    } else {
+                        echo Helper::eael_rating_markup( $avg_rating, $product->get_rating_count() );
+                    }
                 }
 
                 if ( $should_print_price ) {
@@ -179,9 +184,13 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
                         echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
                     }
 
-                    if ($should_print_rating) {
-                        echo wc_get_rating_html
-                        ($product->get_average_rating(), $product->get_rating_count());
+                    if ( $should_print_rating ) {
+                        $avg_rating = $product->get_average_rating();
+                        if( $avg_rating > 0 ){
+                            echo wc_get_rating_html( $avg_rating, $product->get_rating_count());
+                        } else {
+                            echo Helper::eael_rating_markup( $avg_rating, $product->get_rating_count() );
+                        }
                     }
                     ?>
                     <div class="eael-product-title">

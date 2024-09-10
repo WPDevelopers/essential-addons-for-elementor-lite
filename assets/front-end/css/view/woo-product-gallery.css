@@ -360,6 +360,9 @@
   text-transform: capitalize;
   border: none;
   letter-spacing: normal;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 .eael-product-gallery .woocommerce ul.products li.product .button:hover, .eael-product-gallery .woocommerce ul.products li.product .button:visited {
   text-decoration: none;

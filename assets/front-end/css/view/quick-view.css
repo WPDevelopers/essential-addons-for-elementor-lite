@@ -161,13 +161,37 @@
 .eael-product-popup.woocommerce div.product div.images .flex-control-thumbs li:nth-child(4n) {
   margin-right: 0;
 }
-.eael-product-popup.woocommerce div.product div.woocommerce-product-gallery--columns-4 .flex-control-thumbs li {
+.eael-product-popup.woocommerce div.product div.woocommerce-product-gallery--columns-4 .flex-control-thumbs li,
+.eael-product-popup.woocommerce div.product div.woocommerce-product-gallery--columns-5 .flex-control-thumbs li {
   width: calc(25% - 0.75em);
   margin-right: 1em;
   margin-bottom: 1em;
 }
-.eael-product-popup.woocommerce div.product div.woocommerce-product-gallery--columns-4 .flex-control-thumbs li:last-child {
+.eael-product-popup.woocommerce div.product div.woocommerce-product-gallery--columns-4 .flex-control-thumbs li img,
+.eael-product-popup.woocommerce div.product div.woocommerce-product-gallery--columns-5 .flex-control-thumbs li img {
+  cursor: pointer;
+  opacity: 0.5;
+}
+.eael-product-popup.woocommerce div.product div.woocommerce-product-gallery--columns-4 .flex-control-thumbs li img:hover,
+.eael-product-popup.woocommerce div.product div.woocommerce-product-gallery--columns-5 .flex-control-thumbs li img:hover {
+  opacity: 1;
+}
+.eael-product-popup.woocommerce div.product div.woocommerce-product-gallery--columns-4 .flex-control-thumbs li img.flex-active,
+.eael-product-popup.woocommerce div.product div.woocommerce-product-gallery--columns-5 .flex-control-thumbs li img.flex-active {
+  opacity: 1;
+}
+.eael-product-popup.woocommerce div.product div.woocommerce-product-gallery--columns-4 .flex-control-thumbs li:last-child,
+.eael-product-popup.woocommerce div.product div.woocommerce-product-gallery--columns-5 .flex-control-thumbs li:last-child {
   margin-right: 0;
+}
+.eael-product-popup.woocommerce div.product div.woocommerce-product-gallery--columns-4 ol.flex-control-thumbs,
+.eael-product-popup.woocommerce div.product div.woocommerce-product-gallery--columns-5 ol.flex-control-thumbs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 .eael-product-popup.woocommerce div.product .product_title {
   font-size: 28px;

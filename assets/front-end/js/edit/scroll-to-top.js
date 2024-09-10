@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("ea.hooks.addAction(\"editMode.init\", \"ea\", function () {\n  elementor.settings.page.addChangeCallback(\"eael_ext_scroll_to_top\", function (newValue) {\n    elementor.saver.update.apply().then(function () {\n      elementor.reloadPreview();\n    });\n  });\n  elementor.settings.page.addChangeCallback(\"eael_ext_scroll_to_top_button_icon_image\", function (newValue) {\n    elementor.saver.update.apply().then(function () {\n      elementor.reloadPreview();\n    });\n  });\n});\n\n//# sourceURL=webpack:///./src/js/edit/scroll-to-top.js?");
+eval("eael.hooks.addAction(\"editMode.init\", \"ea\", function () {\n  elementor.settings.page.addChangeCallback(\"eael_ext_scroll_to_top\", function (newValue) {\n    elementor.saver.update.apply().then(function () {\n      elementor.reloadPreview();\n    });\n  });\n  elementor.settings.page.addChangeCallback(\"eael_ext_scroll_to_top_button_icon_image\", function (newValue) {\n    elementor.saver.update.apply().then(function () {\n      elementor.reloadPreview();\n    });\n  });\n});\n\n//# sourceURL=webpack:///./src/js/edit/scroll-to-top.js?");
 
 /***/ })
 

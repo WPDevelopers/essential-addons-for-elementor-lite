@@ -1580,4 +1580,13 @@ class Helper
 		return wc_get_product( get_the_ID() );
 	}
 
+    public static function eael_rating_markup( $rating, $count ) {
+        $html = '';
+		if ( 0 == $rating ) {
+			$html  = '<div class="eael-star-rating star-rating">';
+			$html .= wc_get_star_rating_html( $rating, $count );
+			$html .= '</div>';
+		}
+		return $html;
+	}
 }
