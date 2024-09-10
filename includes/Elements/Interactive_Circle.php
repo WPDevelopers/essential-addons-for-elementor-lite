@@ -49,6 +49,10 @@ class Interactive_Circle extends Widget_Base {
 		];
 	}
 
+	protected function is_dynamic_content():bool {
+        return false;
+    }
+
 	public function get_custom_help_url() {
 		return 'https://essential-addons.com/elementor/docs/interactive-circle/';
 	}
@@ -1090,10 +1094,10 @@ class Interactive_Circle extends Widget_Base {
 										<?php 
 											if( 'yes' == $item['eael_interactive_circle_btn_link_on'] ) {
 												if ( ! empty( $item['eael_interactive_circle_btn_link']['url'] ) ) {
-													$this->add_link_attributes( 'interactive_circle_link', $item['eael_interactive_circle_btn_link'] );
+													$this->add_link_attributes( 'interactive_circle_link_' . $index, $item['eael_interactive_circle_btn_link'] );
 												}
 											?>
-											<a <?php echo $this->get_render_attribute_string('interactive_circle_link'); ?>>
+											<a <?php echo $this->get_render_attribute_string( 'interactive_circle_link_' . $index ); ?>>
 												<div class="eael-circle-btn-icon <?php echo esc_attr( $item_style_classic ); ?>">
 													<div class="eael-circle-icon-inner">
 														<?php
@@ -1156,18 +1160,48 @@ class Interactive_Circle extends Widget_Base {
                                             <div class="eael-shape-1"></div>
                                             <div class="eael-shape-2"></div>
                                         </div>
-                                        <div class="eael-circle-btn-icon">
-                                            <div class="eael-circle-btn-icon-inner">
-												<?php
-												if ( $show_btn_icon ) {
-													Icons_Manager::render_icon( $item['eael_interactive_circle_btn_icon'] );
-												}
-												if ( $show_btn_title ) {
-													echo '<span class="eael-circle-btn-txt">' . esc_html( $item['eael_interactive_circle_btn_title'] ) . '</span>';
-												}
-												?>
-                                            </div>
-                                        </div>
+
+										<!-- Start URL support -->
+										<?php 
+										if( 'yes' == $item['eael_interactive_circle_btn_link_on'] ) {
+											if ( ! empty( $item['eael_interactive_circle_btn_link']['url'] ) ) {
+												$this->add_link_attributes( 'interactive_circle_link_' . $index, $item['eael_interactive_circle_btn_link'] );
+											}
+											?>
+											<a <?php echo $this->get_render_attribute_string( 'interactive_circle_link_' . $index ); ?>>
+												<div class="eael-circle-btn-icon">
+													<div class="eael-circle-btn-icon-inner">
+														<?php
+														if ( $show_btn_icon ) {
+															Icons_Manager::render_icon( $item['eael_interactive_circle_btn_icon'] );
+														}
+														if ( $show_btn_title ) {
+															echo '<span class="eael-circle-btn-txt">' . esc_html( $item['eael_interactive_circle_btn_title'] ) . '</span>';
+														}
+														?>
+													</div>
+												</div>
+											</a>
+											<?php
+										} else {
+											?>
+											<div class="eael-circle-btn-icon">
+												<div class="eael-circle-btn-icon-inner">
+													<?php
+													if ( $show_btn_icon ) {
+														Icons_Manager::render_icon( $item['eael_interactive_circle_btn_icon'] );
+													}
+													if ( $show_btn_title ) {
+														echo '<span class="eael-circle-btn-txt">' . esc_html( $item['eael_interactive_circle_btn_title'] ) . '</span>';
+													}
+													?>
+												</div>
+                                        	</div>
+											<?php
+										}
+										?>
+										<!-- End URL support -->
+
                                     </div>
                                     <div class="eael-circle-btn-content eael-circle-item-<?php echo $item_count . ' ' . $is_active; ?>">
                                         <div id="eael-interactive<?php echo esc_attr( $item_count ); ?>" aria-labelledby="eael-circle-item-<?php echo esc_attr( $item_count ); ?>" class="eael-circle-content">

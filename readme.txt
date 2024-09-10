@@ -1,10 +1,10 @@
-=== Essential Addons for Elementor - Best Elementor Templates, Widgets, Kits & WooCommerce Builders ===
+=== Essential Addons for Elementor – Best Elementor Addon, Templates, Widgets, Kits & WooCommerce Builders ===
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk, himadree12
 Tags: elementor, elements, woocommerce, elementor addon, elementor widget
 Requires at least: 5.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 6.0.3
+Stable tag: 6.0.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -298,6 +298,16 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.0.4 - 09/09/2024 =
+
+- Improved: Security enchancements in EA Fancy Chart & EA Filterably Gallery widgets
+- Improved: EA Woo Product widgets | Added manual product selection option
+- Added: Compatibility with Element Caching
+- Fixed: Scroll position changing on click Elementor Tab when EA is activated
+- Fixed: EA Interactive Circle | Link malfunction in interactive items
+- Fixed: EA Filterable Gallery | Randomized Gallery option not randomizing the gallery items due to caching issue
+- Few minor bug fixes & improvements
 
 = 6.0.3 - 04/09/2024 =
 

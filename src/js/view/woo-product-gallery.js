@@ -154,8 +154,8 @@ eael.hooks.addAction("init", "ea", () => {
 		}, false );
 	};
 
-    if (eael.elementStatusCheck('productGalleryLoad')) {
-        return false;
+    if ( eael.elementStatusCheck('productGalleryLoad') && window.forceFullyRun === undefined ) {
+        return;
     }
 
 	elementorFrontend.hooks.addAction(

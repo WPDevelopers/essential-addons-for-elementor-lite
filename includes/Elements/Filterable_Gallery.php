@@ -80,6 +80,10 @@ class Filterable_Gallery extends Widget_Base
             'essential addons'
         ];
     }
+
+    protected function is_dynamic_content():bool {
+        return false;
+    }
     
     public function get_custom_help_url()
     {
@@ -3886,10 +3890,6 @@ class Filterable_Gallery extends Widget_Base
             $gallery_items = $items = $this->render_gallery_items();
         }
 
-        if ( $settings['eael_item_randomize'] === 'yes' ){
-            shuffle($gallery_items);
-        }
-
         $this->add_render_attribute('gallery-items-wrap', [
             'class' => [
                 'eael-filter-gallery-container',
@@ -3898,6 +3898,7 @@ class Filterable_Gallery extends Widget_Base
             'data-images-per-page' => $settings['images_per_page'],
             'data-total-gallery-items' => count($settings['eael_fg_gallery_items']),
             'data-nomore-item-text' => $no_more_items_text,
+            'data-is-randomize' => 'yes' === $settings['eael_item_randomize'] ? 'yes' : 'no',
         ]);
 
         $this->add_render_attribute('gallery-items-wrap', 'data-settings', wp_json_encode($gallery_settings));
@@ -3968,7 +3969,7 @@ class Filterable_Gallery extends Widget_Base
         <script type="text/javascript">
             jQuery(document).ready(function($) {
                 $('.eael-filter-gallery-container').each(function() {
-                    var $node_id = '<?php echo $this->get_id(); ?>',
+                    var $node_id = '<?php echo esc_js($this->get_id()); ?>',
                         $scope = $('[data-id="' + $node_id + '"]'),
                         $gallery = $(this),
                         $settings = $gallery.data('settings'),
@@ -4032,7 +4033,7 @@ class Filterable_Gallery extends Widget_Base
                         callbacks: {
                             markupParse: function(template, values, item) {
                                 if( item.el.attr('title') !== "" ) {
-                                    values.title = item.el.attr('title');
+                                    values.title = DOMPurify.sanitize(item.el.attr('title'));
                                 }
                             },
                             open: function() {
