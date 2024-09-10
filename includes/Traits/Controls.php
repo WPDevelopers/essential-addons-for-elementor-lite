@@ -1502,7 +1502,7 @@ trait Controls
 
 	        $eael_show_post_terms_condition = [
                 'eael_show_image'             => 'yes',
-                'eael_post_grid_preset_style' => 'two',
+                'eael_post_grid_preset_style' => ['two', 'three'],
             ]; //Applicable for both elements: Post Carousel and Post Grid
 
             if( 'eael-post-block' === $wb->get_name() ){
@@ -1524,7 +1524,7 @@ trait Controls
             $eael_show_post_terms_child_condition = [
                 'eael_show_image'             => 'yes', 
                 'eael_show_post_terms'        => 'yes',
-                'eael_post_grid_preset_style' => 'two',
+                'eael_post_grid_preset_style' => ['two', 'three'],
             ];
 
             if( 'eael-post-block' === $wb->get_name() ){
@@ -1675,15 +1675,15 @@ trait Controls
                 $wb->add_control(
                     'eael_show_avatar',
                     [
-                        'label' => __('Show Avatar', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::SWITCHER,
-                        'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                        'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                        'label'        => __('Show Avatar', 'essential-addons-for-elementor-lite'),
+                        'type'         => Controls_Manager::SWITCHER,
+                        'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                        'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
                         'return_value' => 'yes',
-                        'default' => 'yes',
-                        'condition' => [
+                        'default'      => 'yes',
+                        'condition'    => [
                             'eael_show_meta' => 'yes',
-                            'eael_post_grid_preset_style' => '',
+                            'eael_post_grid_preset_style!' => ['two', 'three'],
                         ],
                     ]
                 );
@@ -1720,23 +1720,6 @@ trait Controls
                         ],
                     ]
                 );
-                
-                // $wb->add_control(
-                //     'eael_show_avatar_three',
-                //     [
-                //         'label' => __('Show Avatar', 'essential-addons-for-elementor-lite'),
-                //         'type' => Controls_Manager::SWITCHER,
-                //         'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                //         'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
-                //         'return_value' => 'yes',
-                //         'default' => '',
-                //         'condition' => [
-                //             'eael_show_meta' => 'yes',
-                //             'meta_position' => 'meta-entry-footer',
-                //             'eael_post_grid_preset_style' => 'three',
-                //         ],
-                //     ]
-                // );
                 
                 $wb->add_control(
                     'eael_show_author_two',

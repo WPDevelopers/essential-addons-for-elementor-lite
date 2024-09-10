@@ -1,4 +1,4 @@
-ea.hooks.addAction("editMode.init", "ea", () => {
+eael.hooks.addAction("editMode.init", "ea", () => {
 	elementor.settings.page.addChangeCallback(
 		"eael_ext_reading_progress",
 		function (newValue) {
