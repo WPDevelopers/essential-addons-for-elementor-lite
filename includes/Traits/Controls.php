@@ -171,6 +171,20 @@ trait Controls
 		    ]
 	    );
 
+        if( 'eael-post-grid' === $wb->get_name() ){
+            $wb->add_control(
+                'ignore_sticky_posts',
+                [
+                    'label'        => __('Ignore Sticky Posts', 'essential-addons-for-elementor-lite'),
+                    'type'         => Controls_Manager::SWITCHER,
+                    'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+                    'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+                    'return_value' => 'yes',
+                    'default'      => 'yes',
+                ]
+            );
+        }
+
         $wb->add_control(
             'posts_per_page',
             [
