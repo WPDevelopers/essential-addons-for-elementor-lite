@@ -882,7 +882,7 @@ trait Login_Registration {
 				$err_msg = $results->errors['invalidcombo'][0];
 			} else if( isset( $results->errors ) && count( $results->errors ) ) {
 				if( isset( $results->errors['retrieve_password_email_failure'] ) ){
-					$err_msg = $results->errors['retrieve_password_email_failure'];
+					$err_msg = is_array( $results->errors['retrieve_password_email_failure'] ) ? $results->errors['retrieve_password_email_failure'][0] : $results->errors['retrieve_password_email_failure'];
 				} else {
 					$err_msg = esc_html__( 'There is no account with that username or email address.', 'essential-addons-for-elementor-lite' );
 				}
