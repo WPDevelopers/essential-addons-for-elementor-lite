@@ -489,6 +489,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			'step'    => 1,
 			'condition' => [
 				'post_type' => 'product',
+				'eael_product_gallery_product_filter!' => 'manual'
 			],
 		] );
 
