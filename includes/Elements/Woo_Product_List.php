@@ -3646,7 +3646,7 @@ class Woo_Product_List extends Widget_Base
         ?>
             <<?php echo $woo_product_list['title_tag'];  ?> class="eael-product-list-title">
                 <?php if ( $woo_product_list['title_clickable'] ) : ?>
-                <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link" target="_blank">
+                <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
                     <?php echo ClassesHelper::eael_wp_kses( $product->get_title() ); ?>
                 </a>
                 <?php else : ?>
