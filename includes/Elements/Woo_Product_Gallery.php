@@ -493,11 +493,12 @@ class Woo_Product_Gallery extends Widget_Base {
 		] );
 
 		$this->add_control( 'product_offset', [
-			'label'   => __( 'Offset', 'essential-addons-for-elementor-lite' ),
-			'type'    => Controls_Manager::NUMBER,
-			'default' => 0,
+			'label'     => __( 'Offset', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::NUMBER,
+			'default'   => 0,
 			'condition' => [
-				'post_type' => 'product',
+				'post_type'                            => 'product',
+				'eael_product_gallery_product_filter!' => 'manual'
 			],
 		] );
 
@@ -538,8 +539,9 @@ class Woo_Product_Gallery extends Widget_Base {
 				'source_type' => 'product_tag',
 				'label_block' => true,
 				'multiple'    => true,
-				'condition' => [
-					'post_type' => 'product',
+				'condition'   => [
+					'post_type'                            => 'product',
+					'eael_product_gallery_product_filter!' => 'manual'
 				],
 			]
 		);
