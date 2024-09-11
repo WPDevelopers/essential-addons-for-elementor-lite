@@ -503,19 +503,20 @@ class Woo_Product_Gallery extends Widget_Base {
 		] );
 
 		$this->add_control(
-            'eael_product_gallery_products_in',
-            [
-            'label'         => esc_html__('Select Products', 'essential-addons-for-elementor-lite'),
-            'type'          => 'eael-select2',
-            'label_block'   => true,
-            'multiple'      => true,
-			'source_name'   => 'post_type',
-            'source_type'   => 'product',
-            'condition'     => [
-                'eael_product_gallery_product_filter'  => 'manual',
-				'post_type!'                       	   => 'source_dynamic',
-            ],
-        ]);
+			'eael_product_gallery_products_in',
+			[
+				'label'       => esc_html__( 'Select Products', 'essential-addons-for-elementor-lite' ),
+				'type'        => 'eael-select2',
+				'label_block' => true,
+				'multiple'    => true,
+				'source_name' => 'post_type',
+				'source_type' => 'product',
+				'condition'   => [
+					'eael_product_gallery_product_filter' => 'manual',
+					'post_type'                           => 'product'
+				],
+			]
+		);
 
 		$this->add_control(
 			'eael_product_gallery_categories', [
