@@ -1320,8 +1320,8 @@ class Countdown extends Widget_Base {
 	    ] );
         ?>
 
-		<div <?php echo $this->get_render_attribute_string( 'eael-countdown' ); ?>>
-			<div <?php echo $this->get_render_attribute_string( 'eael-countdown-container' ); ?>>
+		<div <?php $this->print_render_attribute_string( 'eael-countdown' ); ?>>
+			<div <?php $this->print_render_attribute_string( 'eael-countdown-container' ); ?>>
 				<ul id="eael-countdown-<?php echo esc_attr( $this->get_id() ); ?>" class="eael-countdown-items" data-date="<?php echo esc_attr( "{$due_date} {$gmt_offset}" ); ?>">
 					<?php if ( !empty( $settings['eael_countdown_days'] ) ): ?><li class="eael-countdown-item"><div class="eael-countdown-days"><span data-days class="eael-countdown-digits">00</span><?php if ( !empty( $settings['eael_countdown_days_label'] ) ): ?><span class="eael-countdown-label"><?php echo esc_attr( $settings['eael_countdown_days_label'] ); ?></span><?php endif;?></div></li><?php endif;?>
 					<?php if ( !empty( $settings['eael_countdown_hours'] ) ): ?><li class="eael-countdown-item"><div class="eael-countdown-hours"><span data-hours class="eael-countdown-digits">00</span><?php if ( !empty( $settings['eael_countdown_hours_label'] ) ): ?><span class="eael-countdown-label"><?php echo esc_attr( $settings['eael_countdown_hours_label'] ); ?></span><?php endif;?></div></li><?php endif;?>
@@ -1336,6 +1336,7 @@ class Countdown extends Widget_Base {
 							if ( ! is_array( $settings['countdown_expiry_templates'] ) ) {
 								$settings['countdown_expiry_templates'] = apply_filters( 'wpml_object_id', $settings['countdown_expiry_templates'], 'wp_template', true );
 							}
+                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							echo Plugin::$instance->frontend->get_builder_content( $settings['countdown_expiry_templates'], true );
 						}
 					}
