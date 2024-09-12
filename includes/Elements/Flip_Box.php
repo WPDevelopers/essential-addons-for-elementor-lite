@@ -1576,9 +1576,9 @@ class Flip_Box extends Widget_Base
 
 ?>
 
-        <div <?php echo $this->get_render_attribute_string('eael_flipbox_main_wrap'); ?>>
+        <div <?php $this->print_render_attribute_string('eael_flipbox_main_wrap'); ?>>
 
-            <<?php echo $flipbox_if_html_tag, ' ', $this->get_render_attribute_string('flipbox-container'); ?>>
+            <<?php echo esc_html( $flipbox_if_html_tag ) . ' '; $this->print_render_attribute_string('flipbox-container'); ?>>
                 <div class="eael-elements-flip-box-front-container">
 
                     <?php
@@ -1588,6 +1588,7 @@ class Flip_Box extends Widget_Base
 		                    if ( ! is_array( $settings['eael_flipbox_front_templates'] ) ) {
 			                    $settings['eael_flipbox_front_templates'] = apply_filters( 'wpml_object_id', $settings['eael_flipbox_front_templates'], 'wp_template', true );
 		                    }
+                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		                    echo Plugin::$instance->frontend->get_builder_content( $settings['eael_flipbox_front_templates'], true );
 	                    }
                     } else { ?>
@@ -1597,17 +1598,23 @@ class Flip_Box extends Widget_Base
                                 <div class="eael-elements-flip-box-padding">
                                     <div class="eael-elements-flip-box-icon-image">
                                         <?php if ('icon' === $settings['eael_flipbox_img_or_icon']) : ?>
-                                            <?php $this->render_icon($settings); ?>
+                                            <?php
+                                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                            $this->render_icon($settings); ?>
                                         <?php elseif ('img' === $settings['eael_flipbox_img_or_icon']) : ?>
                                             <img class="eael-flipbox-image-as-icon" src="<?php echo esc_url($flipbox_image_url); ?>" alt="<?php echo esc_attr(get_post_meta($flipbox_image['id'], '_wp_attachment_image_alt', true)); ?>">
                                         <?php endif; ?>
                                     </div>
-                                    <?php if ( !empty( $settings['eael_flipbox_front_title'] ) ): ?>
-                                    <<?php echo Helper::eael_validate_html_tag($settings['eael_flipbox_front_title_tag']); ?> class="eael-elements-flip-box-heading"><?php echo Helper::eael_wp_kses( $settings['eael_flipbox_front_title'] ); ?></<?php echo Helper::eael_validate_html_tag($settings['eael_flipbox_front_title_tag']); ?>>
-                                    <?php endif; ?>
+                                    <?php if ( !empty( $settings['eael_flipbox_front_title'] ) ): 
+                                        $title = '<'. $settings['eael_flipbox_front_title_tag'] . ' class="eael-elements-flip-box-heading">';
+                                        $title .= $settings['eael_flipbox_front_title'];
+                                        $title .= '</' . $settings['eael_flipbox_front_title_tag'] . '>';
+                                        echo wp_kses( $title, Helper::eael_allowed_tags() );
+                                        endif; ?>
                                     <div class="eael-elements-flip-box-content">
-	                                    <?php $tagsPresent = preg_match( '/<(h[1-6]|p|pre)>.*<\/(h[1-6]|p|pre)>/i', $settings['eael_flipbox_front_text'] ); ?>
-                                        <?php echo $tagsPresent ? $settings['eael_flipbox_front_text'] : '<p>' . $settings['eael_flipbox_front_text'] . '</p>'; ?>
+	                                    <?php 
+                                        $tagsPresent = preg_match( '/<(h[1-6]|p|pre)>.*<\/(h[1-6]|p|pre)>/i', $settings['eael_flipbox_front_text'] );
+                                        echo $tagsPresent ? wp_kses( $settings['eael_flipbox_front_text'], Helper::eael_allowed_tags() ) : '<p>' . wp_kses( $settings['eael_flipbox_front_text'], Helper::eael_allowed_tags() ) . '</p>'; ?>
                                     </div>
                                 </div>
                             </div>
@@ -1624,6 +1631,7 @@ class Flip_Box extends Widget_Base
 		                    if ( ! is_array( $settings['eael_flipbox_back_templates'] ) ) {
 			                    $settings['eael_flipbox_back_templates'] = apply_filters( 'wpml_object_id', $settings['eael_flipbox_back_templates'], 'wp_template', true );
 		                    }
+                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		                    echo Plugin::$instance->frontend->get_builder_content( $settings['eael_flipbox_back_templates'], true );
 	                    }
                     } else { ?>
@@ -1640,19 +1648,19 @@ class Flip_Box extends Widget_Base
                                         </div>
                                     <?php } ?>
                                     <?php if ( !empty( $settings['eael_flipbox_back_title'] ) ): ?>
-                                    <<?php echo $flipbox_if_html_title_tag, ' ', $this->get_render_attribute_string('flipbox-title-container'); ?>><?php echo Helper::eael_wp_kses( $settings['eael_flipbox_back_title'] ); ?></<?php echo $flipbox_if_html_title_tag; ?>>
+                                    <<?php echo esc_html( $flipbox_if_html_title_tag ), ' '; $this->print_render_attribute_string('flipbox-title-container'); ?>><?php echo wp_kses( $settings['eael_flipbox_back_title'], Helper::eael_allowed_tags() ); ?></<?php echo esc_html( $flipbox_if_html_title_tag ); ?>>
                                     <?php endif; ?>
                                     <div class="eael-elements-flip-box-content">
                                         <?php $tagsPresent = preg_match( '/<(h[1-6]|p|pre)>.*<\/(h[1-6]|p|pre)>/i', $settings['eael_flipbox_back_text'] ); ?>
-                                        <?php echo $tagsPresent ? $settings['eael_flipbox_back_text'] : '<p>' . $settings['eael_flipbox_back_text'] . '</p>'; ?>
+                                        <?php echo $tagsPresent ? wp_kses( $settings['eael_flipbox_back_text'], Helper::eael_allowed_tags() ) : '<p>' . wp_kses( $settings['eael_flipbox_back_text'], Helper::eael_allowed_tags() ) . '</p>'; ?>
                                     </div>
 
                                     <?php if ($settings['flipbox_link_type'] == 'button' && !empty($settings['flipbox_button_text'])) : ?>
-                                        <a <?php echo $this->get_render_attribute_string('flipbox-button-container'); ?>>
+                                        <a <?php $this->print_render_attribute_string('flipbox-button-container'); ?>>
                                             <?php if ('before' == $settings['button_icon_position']) {
                                                 $this->render_icon($settings, 'button');
                                             } ?>
-                                            <?php echo Helper::eael_wp_kses($settings['flipbox_button_text']); ?>
+                                            <?php echo wp_kses( $settings['flipbox_button_text'], Helper::eael_allowed_tags() ); ?>
                                             <?php if ('after' == $settings['button_icon_position']) {
                                                 $this->render_icon($settings, 'button');
                                             } ?>
@@ -1663,7 +1671,7 @@ class Flip_Box extends Widget_Base
                         </div>
                     <?php } ?>
                 </div>
-            </<?php echo $flipbox_if_html_tag; ?>>
+            </<?php echo esc_html( $flipbox_if_html_tag ); ?>>
         </div>
 
 <?php
