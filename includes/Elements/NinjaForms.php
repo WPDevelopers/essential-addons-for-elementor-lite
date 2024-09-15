@@ -1745,7 +1745,7 @@ class NinjaForms extends Widget_Base
         }
 
         if (!empty($settings['contact_form_list'])) {?>
-            <div <?php echo $this->get_render_attribute_string('contact-form'); ?>>
+            <div <?php $this->print_render_attribute_string('contact-form'); ?>>
                 <?php if ($settings['custom_title_description'] == 'yes') {?>
                     <div class="eael-ninja-form-heading">
                         <?php if ($settings['form_title_custom'] != '') {?>
@@ -1755,12 +1755,14 @@ class NinjaForms extends Widget_Base
                         <?php }?>
                         <?php if ($settings['form_description_custom'] != '') {?>
                             <div class="eael-contact-form-description eael-ninja-form-description">
-                                <?php echo $this->parse_text_editor($settings['form_description_custom']); ?>
+                                <?php echo wp_kses( $this->parse_text_editor($settings['form_description_custom']), Helper::eael_allowed_tags() ); ?>
                             </div>
                         <?php }?>
                     </div>
                 <?php }?>
-                <?php echo Ninja_Forms()->display($settings['contact_form_list']); ?>
+                <?php 
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                echo Ninja_Forms()->display($settings['contact_form_list']); ?>
             </div>
             <?php
         }
