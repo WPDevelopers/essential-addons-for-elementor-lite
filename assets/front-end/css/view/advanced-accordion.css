@@ -107,7 +107,7 @@
   display: block;
 }
 
-@-webkit-keyframes rotate-90 {
+@-webkit-keyframes eaelRotate-90 {
   0% {
     -webkit-transform: rotateY(0deg);
             transform: rotateY(0deg);
@@ -118,7 +118,7 @@
   }
 }
 
-@keyframes rotate-90 {
+@keyframes eaelRotate-90 {
   0% {
     -webkit-transform: rotateY(0deg);
             transform: rotateY(0deg);
@@ -129,7 +129,7 @@
   }
 }
 
-@-webkit-keyframes fadeIn {
+@-webkit-keyframes eaelFadeIn {
   0% {
     opacity: 1;
     -webkit-transition: all 0.3s ease-in-out;
@@ -142,7 +142,7 @@
   }
 }
 
-@keyframes fadeIn {
+@keyframes eaelFadeIn {
   0% {
     opacity: 1;
     -webkit-transition: all 0.3s ease-in-out;

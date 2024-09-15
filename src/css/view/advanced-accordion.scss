@@ -87,7 +87,7 @@
     display: block;
 }
 
-@keyframes rotate-90 {
+@keyframes eaelRotate-90 {
     0% {
         transform: rotateY(0deg);
     }
@@ -96,7 +96,7 @@
     }
 }
 
-@keyframes fadeIn {
+@keyframes eaelFadeIn {
     0% {
         opacity: 1;
         transition: all 0.3s ease-in-out;

@@ -4960,8 +4960,8 @@ button.button__greyBg:hover:disabled {
     padding: 0;
     list-style: none;
     opacity: 0;
-    -webkit-animation-name: HideList;
-    animation-name: HideList;
+    -webkit-animation-name: eaelHideList;
+    animation-name: eaelHideList;
     -webkit-animation-duration: 0.5s;
     animation-duration: 0.5s;
     -webkit-animation-delay: 0.5s;
@@ -4988,7 +4988,7 @@ button.button__greyBg:hover:disabled {
     color: #5E2EFF;
 }
 
-@-webkit-keyframes HideList {
+@-webkit-keyframes eaelHideList {
     from {
         -webkit-transform: scaleY(1);
         transform: scaleY(1);
@@ -5000,7 +5000,7 @@ button.button__greyBg:hover:disabled {
     }
 }
 
-@keyframes HideList {
+@keyframes eaelHideList {
     from {
         -webkit-transform: scaleY(1);
         transform: scaleY(1);
@@ -5365,24 +5365,24 @@ button.button__greyBg:hover:disabled {
     float: left;
     -webkit-transition-property: -webkit-transform;
     -webkit-transition-duration: 1.2s;
-    -webkit-animation-name: rotate;
+    -webkit-animation-name: eaelRotate;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
 
     -moz-transition-property: -moz-transform;
-    -moz-animation-name: rotate;
+    -moz-animation-name: eaelRotate;
     -moz-animation-duration: 1.2s;
     -moz-animation-iteration-count: infinite;
     -moz-animation-timing-function: linear;
 
     transition-property: transform;
-    animation-name: rotate;
+    animation-name: eaelRotate;
     animation-duration: 1.2s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
 }
 
-@-webkit-keyframes rotate {
+@-webkit-keyframes eaelRotate {
     from {
         -webkit-transform: rotate(0deg);
     }
@@ -5392,7 +5392,7 @@ button.button__greyBg:hover:disabled {
     }
 }
 
-@-moz-keyframes rotate {
+@-moz-keyframes eaelRotate {
     from {
         -moz-transform: rotate(0deg);
     }
@@ -5402,7 +5402,7 @@ button.button__greyBg:hover:disabled {
     }
 }
 
-@keyframes rotate {
+@keyframes eaelRotate {
     from {
         transform: rotate(0deg);
     }
