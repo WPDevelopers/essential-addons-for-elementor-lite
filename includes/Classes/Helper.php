@@ -937,17 +937,17 @@ class Helper
                     if ( $pagination_Paginationlist < 7 + ($adjacents * 2) ){
                         for ( $pagination = 1; $pagination <= $pagination_Paginationlist; $pagination ++ ) {
                             $active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
-	                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
+	                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" , esc_attr( $active ) ,esc_html( $pagination ) );
                         }
 
                     } else if ( $pagination_Paginationlist >= 5 + ($adjacents * 2) ){
                         for ( $pagination = 1; $pagination <= 4 + ( $adjacents * 2 ); $pagination ++ ) {
                             $active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
-	                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
+	                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,esc_attr( $active ) ,esc_html( $pagination ) );
                         }
 
                         $setPagination .="<li class='pagitext dots'>...</li>";
-                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
+                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,esc_attr( $active ) ,esc_html( $pagination ) );
                     }
 
                     if ($pagination_Paginationlist > 1) {

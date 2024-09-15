@@ -3427,15 +3427,16 @@ class Product_Grid extends Widget_Base
                         do_action( 'eael_woo_after_product_loop' );
 
 	                } else {
-		                _e( '<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite' );
+                        echo '<p class="no-posts-found">' . esc_html__( 'No posts found!', 'essential-addons-for-elementor-lite' ) . '</p>';
 	                }
 
                 } else {
-	                _e( '<p class="no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
+	                echo '<p class="no-posts-found">' . esc_html__( 'No layout found!', 'essential-addons-for-elementor-lite' ) . '</p>';
                 }
 
                 if ( 'true' == $settings['show_pagination'] && 'source_archive' !== $settings['post_type'] ) {
 	                $settings['eael_widget_name'] = $this->get_name();
+                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	                echo HelperClass::eael_pagination( $args, $settings );
                 }
 
