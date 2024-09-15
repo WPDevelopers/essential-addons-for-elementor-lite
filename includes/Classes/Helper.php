@@ -665,7 +665,7 @@ class Helper
             $link = ($term_type === 'category') ? get_category_link($term->term_id) : get_tag_link($term->term_id);
             $html .= '<li>';
             $html .= '<a href="' . esc_url($link) . '">';
-            $html .= $term->name;
+            $html .= esc_html( $term->name );
             $html .= '</a>';
             $html .= '</li>';
             $count++;
