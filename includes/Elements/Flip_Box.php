@@ -1605,16 +1605,19 @@ class Flip_Box extends Widget_Base
                                             <img class="eael-flipbox-image-as-icon" src="<?php echo esc_url($flipbox_image_url); ?>" alt="<?php echo esc_attr(get_post_meta($flipbox_image['id'], '_wp_attachment_image_alt', true)); ?>">
                                         <?php endif; ?>
                                     </div>
-                                    <?php if ( !empty( $settings['eael_flipbox_front_title'] ) ): 
+                                    <?php
+                                    if ( !empty( $settings['eael_flipbox_front_title'] ) ){
                                         $title = '<'. $settings['eael_flipbox_front_title_tag'] . ' class="eael-elements-flip-box-heading">';
                                         $title .= $settings['eael_flipbox_front_title'];
                                         $title .= '</' . $settings['eael_flipbox_front_title_tag'] . '>';
                                         echo wp_kses( $title, Helper::eael_allowed_tags() );
-                                        endif; ?>
+                                    }
+                                    ?>
                                     <div class="eael-elements-flip-box-content">
 	                                    <?php 
                                         $tagsPresent = preg_match( '/<(h[1-6]|p|pre)>.*<\/(h[1-6]|p|pre)>/i', $settings['eael_flipbox_front_text'] );
-                                        echo $tagsPresent ? wp_kses( $settings['eael_flipbox_front_text'], Helper::eael_allowed_tags() ) : '<p>' . wp_kses( $settings['eael_flipbox_front_text'], Helper::eael_allowed_tags() ) . '</p>'; ?>
+                                        echo $tagsPresent ? wp_kses( $settings['eael_flipbox_front_text'], Helper::eael_allowed_tags() ) : '<p>' . wp_kses( $settings['eael_flipbox_front_text'], Helper::eael_allowed_tags() ) . '</p>';
+                                        ?>
                                     </div>
                                 </div>
                             </div>
