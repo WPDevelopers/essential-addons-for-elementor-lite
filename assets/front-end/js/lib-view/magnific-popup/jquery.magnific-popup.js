@@ -1,6 +1,3 @@
-/*! Magnific Popup - v1.2.0 - 2024-06-08
-* http://dimsemenov.com/plugins/magnific-popup/
-* Copyright (c) 2024 Dmytro Semenov; */
 ;(function (factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
