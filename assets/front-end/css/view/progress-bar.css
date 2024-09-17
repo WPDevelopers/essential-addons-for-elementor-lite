@@ -1,4 +1,4 @@
-@-webkit-keyframes animateStripe {
+@-webkit-keyframes eaelAnimateStripe {
   0% {
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0);
@@ -8,7 +8,7 @@
             transform: translate(35px, 0);
   }
 }
-@keyframes animateStripe {
+@keyframes eaelAnimateStripe {
   0% {
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0);
@@ -18,7 +18,7 @@
             transform: translate(35px, 0);
   }
 }
-@-webkit-keyframes animateStripeRTL {
+@-webkit-keyframes eaelAnimateStripeRTL {
   0% {
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0);
@@ -28,7 +28,7 @@
             transform: translate(-35px, 0);
   }
 }
-@keyframes animateStripeRTL {
+@keyframes eaelAnimateStripeRTL {
   0% {
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0);
@@ -196,12 +196,12 @@
   background-size: 35px 35px;
 }
 .eael-progressbar-line-animate .eael-progressbar-line-fill:after {
-  -webkit-animation: animateStripe 2s linear infinite;
-          animation: animateStripe 2s linear infinite;
+  -webkit-animation: eaelAnimateStripe 2s linear infinite;
+          animation: eaelAnimateStripe 2s linear infinite;
 }
 .eael-progressbar-line-animate-rtl .eael-progressbar-line-fill:after {
-  -webkit-animation: animateStripeRTL 2s linear infinite;
-          animation: animateStripeRTL 2s linear infinite;
+  -webkit-animation: eaelAnimateStripeRTL 2s linear infinite;
+          animation: eaelAnimateStripeRTL 2s linear infinite;
 }
 .eael-progressbar-circle-wrap > div {
   margin: 0 auto;
