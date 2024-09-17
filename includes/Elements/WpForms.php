@@ -1474,7 +1474,7 @@ class WpForms extends Widget_Base {
         $this->add_render_attribute('contact-form', 'class', 'eael-contact-form-align-' . $alignment );
 
         if (!empty($settings['contact_form_list'])) { ?>
-            <div <?php echo $this->get_render_attribute_string('contact-form'); ?>>
+            <div <?php $this->print_render_attribute_string('contact-form'); ?>>
                 <?php if ($settings['custom_title_description'] == 'yes') { ?>
                     <div class="eael-wpforms-heading">
                         <?php if ($settings['form_title_custom'] != '') { ?>
@@ -1484,20 +1484,21 @@ class WpForms extends Widget_Base {
                         <?php } ?>
                         <?php if ($settings['form_description_custom'] != '') { ?>
                             <div class="eael-contact-form-description eael-wpforms-description">
-                                <?php echo $this->parse_text_editor($settings['form_description_custom']); ?>
+                                <?php echo wp_kses( $this->parse_text_editor($settings['form_description_custom']), Helper::eael_allowed_tags() ); ?>
                             </div>
                         <?php } ?>
                     </div>
                 <?php } ?>
                 <?php
-                $eael_form_title = $settings['form_title'];
-                $eael_form_description = $settings['form_description'];
+                $eael_form_title = isset( $settings['form_title'] ) && 'yes' === $settings['form_title'];
+                $eael_form_description = isset( $settings['form_description'] ) && 'yes' === $settings['form_description'];
 
                 if ($settings['custom_title_description'] == 'yes') {
                     $eael_form_title = false;
                     $eael_form_description = false;
                 }
 
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                 echo wpforms_display($settings['contact_form_list'], $eael_form_title, $eael_form_description);
                 ?>
             </div>
