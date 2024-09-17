@@ -937,7 +937,7 @@ class Team_Member extends Widget_Base {
 				<?php 
 					if ( isset( $settings['eael_team_members_enable_text_overlay'] ) && $settings['eael_team_members_enable_text_overlay'] == 'yes' ) {
 						?>
-						<p <?php echo $this->get_render_attribute_string('eael_team_text'); ?>><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_description']); ?></p>
+						<p <?php $this->print_render_attribute_string('eael_team_text'); ?>><?php echo wp_kses( $settings['eael_team_member_description'], HelperClass::eael_allowed_tags() ); ?></p>
 						<?php
 					}
 				?>
@@ -945,8 +945,8 @@ class Team_Member extends Widget_Base {
 			</div>
 
 			<div class="eael-team-content">
-				<h2 class="eael-team-member-name"><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_name']); ?></h2>
-				<h3 class="eael-team-member-position"><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_job_title']); ?></h3>
+				<h2 class="eael-team-member-name"><?php echo wp_kses($settings['eael_team_member_name'], HelperClass::eael_allowed_tags() ); ?></h2>
+				<h3 class="eael-team-member-position"><?php echo wp_kses($settings['eael_team_member_job_title'], HelperClass::eael_allowed_tags() ); ?></h3>
 
 				<?php if( 'eael-team-members-social-bottom' === $settings['eael_team_members_preset'] ) : ?>
 					<?php do_action( 'eael/team_member_social_botton_markup', $settings, $this ); ?>
@@ -975,7 +975,7 @@ class Team_Member extends Widget_Base {
 							<?php endforeach; ?>
 						</ul>
 					<?php endif; ?>
-					<p <?php echo $this->get_render_attribute_string('eael_team_text'); ?>><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_description']); ?></p>
+					<p <?php $this->print_render_attribute_string('eael_team_text'); ?>><?php echo wp_kses( $settings['eael_team_member_description'], HelperClass::eael_allowed_tags() ); ?></p>
 				<?php endif; ?>
 			</div>
 		</div>
