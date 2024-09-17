@@ -1591,7 +1591,7 @@ trait Login_Registration {
 			foreach( $eael_custom_profile_fields_text as $eael_custom_profile_field_text_key => $eael_custom_profile_field_value ) :
 		?>
 			<tr>
-				<th><label for="<?php echo esc_attr( $eael_custom_profile_field_text_key ); ?>"><?php esc_html( $eael_custom_profile_field_value ); ?></label></th>
+				<th><label for="<?php echo esc_attr( $eael_custom_profile_field_text_key ); ?>"><?php echo esc_html( $eael_custom_profile_field_value ); ?></label></th>
 				<td>
 					<input type="text" name="<?php echo esc_attr( $eael_custom_profile_field_text_key ); ?>" id="<?php echo esc_attr( $eael_custom_profile_field_text_key ); ?>" value="<?php echo esc_attr( get_the_author_meta( self::$eael_custom_profile_field_prefix . $eael_custom_profile_field_text_key, $user->ID ) ); ?>" class="regular-text" /><br />
 					<!-- <p class="description"><?php //printf( __( "Please Enter %s", 'essential-addons-for-elementor-lite'), esc_html( $custom_profile_fields_text )); ?></p> -->
@@ -1608,7 +1608,7 @@ trait Login_Registration {
 				$user_meta_attachment_id = get_the_author_meta( self::$eael_custom_profile_field_prefix . $eael_custom_profile_field_image_key, $user->ID );
 		?>
 			<tr>
-				<th><label for="<?php echo esc_attr( $eael_custom_profile_field_image_key ); ?>"><?php esc_html( $eael_custom_profile_field_value ); ?></label></th>
+				<th><label for="<?php echo esc_attr( $eael_custom_profile_field_image_key ); ?>"><?php echo esc_html( $eael_custom_profile_field_value ); ?></label></th>
 				<td>
 					<input type="text" name="<?php echo esc_attr( $eael_custom_profile_field_image_key ); ?>" id="<?php echo esc_attr( $eael_custom_profile_field_image_key ); ?>" value="<?php echo esc_attr( $user_meta_attachment_id ); ?>" class="regular-text" /><br />
 					<p class="description"><?php esc_html_e( "Above, input the ID of the attachment.", 'essential-addons-for-elementor-lite'); ?></p>
