@@ -1076,6 +1076,7 @@ class Helper
 			'img'     => [
 				'src'    => [],
 				'alt'    => [],
+				'title'  => [],
 				'height' => [],
 				'width'  => [],
 				'class'  => [],
