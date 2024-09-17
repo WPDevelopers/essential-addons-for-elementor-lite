@@ -2686,13 +2686,13 @@ class Woo_Product_Gallery extends Widget_Base {
 						}
 						wp_reset_postdata();
 					} else {
-						echo '<h2 class="eael-product-not-found">' . __( 'No Product Found', 'essential-addons-for-elementor-lite' ) . '</h2>';
+						echo '<h2 class="eael-product-not-found">' . esc_html__( 'No Product Found', 'essential-addons-for-elementor-lite' ) . '</h2>';
 					}
 					echo '</ul>';
 					do_action( 'eael_woo_after_product_loop' );
 
 				} else {
-					echo '<h2 class="eael-product-not-found">' . __( 'No Layout Found', 'essential-addons-for-elementor-lite' ) . '</h2>';
+					echo '<h2 class="eael-product-not-found">' . esc_html__( 'No Layout Found', 'essential-addons-for-elementor-lite' ) . '</h2>';
 				}
 				
 				do_action( 'eael_woo_after_product_loop' );
@@ -2944,7 +2944,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			'data-page'      => 1
 		] );
 
-		echo '<ul ' . $this->get_render_attribute_string( 'eael_product_gallery_product_ul' ) . '>';
+		echo '<ul '; $this->print_render_attribute_string( 'eael_product_gallery_product_ul' ); echo '>';
 
 		if ( $settings[ 'eael_woo_product_gallery_terms_show_all' ] == 'yes' ) {
 			$all_taxonomy = 'all';
@@ -2967,7 +2967,9 @@ class Woo_Product_Gallery extends Widget_Base {
 
 			echo '<li><a href="javascript:;" data-taxonomy="' . esc_attr( $all_taxonomy ) . '" data-page="1" data-tagid="' . esc_attr( $product_tags_items_data ) . '" data-id="' . esc_attr( $product_cats_data ) .
 			     '" class="active post-list-filter-item post-list-cat-'
-			     . esc_attr( $this->get_id() ) . '">' .$show_all_cat_thumb. '' . __( $settings[ 'eael_woo_product_gallery_terms_all_text' ], 'essential-addons-for-elementor-lite' ) . '</a></li>';
+			     . esc_attr( $this->get_id() ) . '">';
+				 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				 echo $show_all_cat_thumb. '' . esc_html( $settings[ 'eael_woo_product_gallery_terms_all_text' ] ) . '</a></li>';
 		}
 
 		// Category and tag retrieve
@@ -2996,7 +2998,9 @@ class Woo_Product_Gallery extends Widget_Base {
 					echo '<li><a href="javascript:;" data-page="1" data-taxonomy="product_cat" data-terms=\''
 						 . json_encode
 						 ( [ $category->slug ] ) . '\' data-id="'
-						 . $category->term_id . '" class="post-list-filter-item ">' . $show_cat_thumb_tag . '' . $category->name . '</a></li>';
+						 . esc_attr( $category->term_id ) . '" class="post-list-filter-item ">';
+						 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						 echo $show_cat_thumb_tag . '' . esc_html( $category->name ) . '</a></li>';
 				}
 			}
 		}
@@ -3024,7 +3028,9 @@ class Woo_Product_Gallery extends Widget_Base {
 					echo '<li><a href="javascript:;" data-page="1" data-taxonomy="product_tag" data-terms=\''
 						 . json_encode
 						 ( [ $product_tag->slug ] ) . '\' data-id="'
-						 . $product_tag->term_id . '" class="post-list-filter-item ">' . $show_cat_thumb_tag . '' . $product_tag->name . '</a></li>';
+						 . esc_attr( $product_tag->term_id ) . '" class="post-list-filter-item ">';
+						 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						 echo $show_cat_thumb_tag . '' . esc_html( $product_tag->name ) . '</a></li>';
 				}
 			}
 		}
