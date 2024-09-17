@@ -3096,7 +3096,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 if ( file_exists( $template ) ):
 	                $query = new \WP_Query( $args );
 	                if ( $query->have_posts() ):
-                        echo '<div '.$this->get_render_attribute_string( 'eael-woo-product-carousel-wrap' ).'>';
+                        echo '<div '; $this->print_render_attribute_string( 'eael-woo-product-carousel-wrap' ); echo '>';
 		                    $settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
                             echo '<ul class="swiper-wrapper products">';
                             while ( $query->have_posts() ) {
@@ -3108,10 +3108,10 @@ class Woo_Product_Carousel extends Widget_Base {
                             do_action( 'eael_woo_after_product_loop' );
                         echo '</div>';
                     else:
-	                    echo '<p class="eael-no-posts-found">'.HelperClass::eael_wp_kses($settings['eael_product_carousel_not_found_msg']).'</p>';
+	                    echo '<p class="eael-no-posts-found">' . wp_kses( $settings['eael_product_carousel_not_found_msg'], HelperClass::eael_allowed_tags() ) . '</p>';
                     endif;
                 else:
-	                _e( '<p class="eael-no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
+	                echo '<p class="eael-no-posts-found">' . esc_html__( 'No layout found!', 'essential-addons-for-elementor-lite' ) . '</p>'; ;
                 endif;
             /**
              * Render Slider Dots!
@@ -3173,7 +3173,7 @@ class Woo_Product_Carousel extends Widget_Base {
 
 		if ($settings['image_dots'] === 'yes') : ?>
 
-            <div <?php echo $this->get_render_attribute_string('eael_gallery_pagination_wrapper'); ?>>
+            <div <?php $this->print_render_attribute_string('eael_gallery_pagination_wrapper'); ?>>
 
             <?php
 			if ( $query->have_posts() ) {
