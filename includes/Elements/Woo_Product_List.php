@@ -3644,15 +3644,15 @@ class Woo_Product_List extends Widget_Base
     public static function eael_print_product_title_html( $woo_product_list, $product ){
         if ( $woo_product_list['title_show'] ) : 
         ?>
-            <<?php echo $woo_product_list['title_tag'];  ?> class="eael-product-list-title">
+            <<?php echo esc_html( $woo_product_list['title_tag'] );  ?> class="eael-product-list-title">
                 <?php if ( $woo_product_list['title_clickable'] ) : ?>
                 <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link" target="_blank">
-                    <?php echo ClassesHelper::eael_wp_kses( $product->get_title() ); ?>
+                    <?php echo wp_kses( $product->get_title(), ClassesHelper::eael_allowed_tags() ); ?>
                 </a>
                 <?php else : ?>
-                    <?php echo ClassesHelper::eael_wp_kses( $product->get_title() ); ?>
+                    <?php echo wp_kses( $product->get_title(), ClassesHelper::eael_allowed_tags() ); ?>
                 <?php endif; ?>
-            </<?php echo $woo_product_list['title_tag'];  ?>>
+            </<?php echo esc_html( $woo_product_list['title_tag'] );  ?>>
         <?php 
         endif;
     }
@@ -3918,10 +3918,10 @@ class Woo_Product_List extends Widget_Base
                                 }
                                 wp_reset_postdata();
                             } else {
-                                printf( '<p class="no-posts-found">%s</p>', __( $woo_product_list['products_not_found_text'], 'essential-addons-for-elementor-lite' ) );
+                                printf( '<p class="no-posts-found">%s</p>', esc_html( $woo_product_list['products_not_found_text'] ) );
                             }
                         } else {
-                            _e( '<p class="eael-no-posts-found">No layout found!</p>', 'essential-addons-for-elementor-lite' );
+                            echo '<p class="eael-no-posts-found">' . esc_html__( 'No layout found!', 'essential-addons-for-elementor-lite' ) . '</p>';
                         }
 
                         do_action( 'eael/woo-product-list/after-product-loop' );
