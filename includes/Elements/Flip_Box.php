@@ -830,6 +830,11 @@ class Flip_Box extends Widget_Base
                 'label'     => __('Back Background Color', 'essential-addons-for-elementor-lite'),
                 'types'     => ['classic', 'gradient'],
                 'selector'  => '{{WRAPPER}} .eael-elements-flip-box-rear-container',
+                'fields_options' => [
+                    'color' => [
+                        'default' => '#502fc6',
+                    ],
+                ],
                 'separator' => 'after',
             ]
         );
