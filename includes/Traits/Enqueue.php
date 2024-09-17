@@ -23,6 +23,22 @@ trait Enqueue
             add_filter('caldera_forms_force_enqueue_styles_early', '__return_true');
         }
 
+		// Compatibility: Gravity Forms
+		if ( class_exists( 'GFForms' ) && class_exists( 'GFCommon' ) ) {
+			wp_register_style( 'gravity_forms_theme_reset', \GFCommon::get_base_url() . "/assets/css/dist/gravity-forms-theme-reset.min.css", array(), \GFForms::$version );
+			wp_register_style( 'gravity_forms_theme_foundation', \GFCommon::get_base_url() . "/assets/css/dist/gravity-forms-theme-foundation.min.css", array(), \GFForms::$version );
+
+			wp_register_style(
+				'gravity_forms_theme_framework',
+				\GFCommon::get_base_url() . "/assets/css/dist/gravity-forms-theme-framework.min.css",
+				array(
+					'gravity_forms_theme_reset',
+					'gravity_forms_theme_foundation',
+				),
+				\GFForms::$version
+			);
+		}
+
         // Compatibility: reCaptcha with login/register
         if (in_array('login-register', $widgets) && $site_key = get_option('eael_recaptcha_sitekey')) {
 	        $recaptcha_api_args['render'] = 'explicit';
