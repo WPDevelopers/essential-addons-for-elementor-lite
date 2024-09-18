@@ -1207,7 +1207,8 @@ class Adv_Accordion extends Widget_Base
             }
             // tab title
             if ($settings['eael_adv_accordion_toggle_icon_postion'] === '') {
-                $title = '<' . $settings['eael_adv_accordion_title_tag']  . ' class="eael-accordion-tab-title">' . $tab['eael_adv_accordion_tab_title'] . '</' . $settings['eael_adv_accordion_title_tag'] . '>';
+                $title_tag = Helper::eael_validate_html_tag( $settings['eael_adv_accordion_title_tag'] );
+                $title = '<' . $title_tag  . ' class="eael-accordion-tab-title">' . $tab['eael_adv_accordion_tab_title'] . '</' . $title_tag . '>';
                 echo wp_kses( $title, Helper::eael_allowed_tags() );
             }
             // tab icon
@@ -1240,7 +1241,8 @@ class Adv_Accordion extends Widget_Base
             }
             // tab title
             if ($settings['eael_adv_accordion_toggle_icon_postion'] === 'right' || $settings['eael_adv_accordion_toggle_icon_postion'] === null) {
-                $title = '<' . $settings['eael_adv_accordion_title_tag'] . ' class="eael-accordion-tab-title">' . $tab['eael_adv_accordion_tab_title'] . '</' . $settings['eael_adv_accordion_title_tag'] . '>';
+                $title_tag = Helper::eael_validate_html_tag( $settings['eael_adv_accordion_title_tag'] );
+                $title = '<' . $title_tag . ' class="eael-accordion-tab-title">' . $tab['eael_adv_accordion_tab_title'] . '</' . $title_tag . '>';
                 echo wp_kses( $title, Helper::eael_allowed_tags() );
             }
             // toggle icon
