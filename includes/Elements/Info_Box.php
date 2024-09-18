@@ -1669,7 +1669,7 @@ class Info_Box extends Widget_Base
         <div <?php $this->print_render_attribute_string('infobox_content'); ?>>
             <?php
             if ( !empty( $settings['eael_infobox_title'] ) ){
-                printf( '<%1$s class="title">%2$s</%1$s>', esc_html( $settings['eael_infobox_title_tag'] ), wp_kses( $settings['eael_infobox_title'], Helper::eael_allowed_tags() ) );
+                printf( '<%1$s class="title">%2$s</%1$s>', esc_html( Helper::eael_validate_html_tag( $settings['eael_infobox_title_tag'] ) ), wp_kses( $settings['eael_infobox_title'], Helper::eael_allowed_tags() ) );
             }
             if ('yes' == $settings['eael_show_infobox_content']){
                 if ('content' === $settings['eael_infobox_text_type']){
