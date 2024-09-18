@@ -610,7 +610,7 @@ class Image_Accordion extends Widget_Base {
                             echo "<a "; $this->print_render_attribute_string( 'eael-image-accordion-link-' . $key ); echo ">";
                         }
                         if ( !empty( $img_accordion[ 'eael_accordion_tittle' ] ) ):
-                            printf( '<%1$s class="img-accordion-title">%2$s</%1$s>', esc_html( $settings[ 'title_tag' ] ), wp_kses( $img_accordion[ 'eael_accordion_tittle' ], Helper::eael_allowed_tags() ) );
+                            printf( '<%1$s class="img-accordion-title">%2$s</%1$s>', esc_html( Helper::eael_validate_html_tag( $settings[ 'title_tag' ] ) ), wp_kses( $img_accordion[ 'eael_accordion_tittle' ], Helper::eael_allowed_tags() ) );
                         endif;
 
                         echo $title_linked ? '</a>' : '';
