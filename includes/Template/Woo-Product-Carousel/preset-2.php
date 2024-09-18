@@ -23,6 +23,7 @@ $sale_badge_align = isset( $settings['eael_product_sale_badge_alignment'] ) ? $s
 $sale_badge_preset = isset($settings['eael_product_sale_badge_preset']) ? $settings['eael_product_sale_badge_preset'] : '';
 $sale_text = !empty($settings['eael_product_carousel_sale_text']) ? $settings['eael_product_carousel_sale_text'] : 'Sale!';
 $stockout_text = !empty($settings['eael_product_carousel_stockout_text']) ? $settings['eael_product_carousel_stockout_text'] : 'Stock Out';
+$title_tag = isset( $settings['eael_product_carousel_title_tag'] ) ? Helper::eael_validate_html_tag($settings['eael_product_carousel_title_tag'])  : 'h2';
 
 // should print vars
 $should_print_rating = isset( $settings['eael_product_carousel_rating'] ) && 'yes' === $settings['eael_product_carousel_rating'];
@@ -89,14 +90,14 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
 	                        if( $should_print_title_clickable ) {
 	                            echo '<a href="' . esc_url( $product->get_permalink() ) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
 	                        }
-		                    echo '<' . esc_html( $settings['eael_product_carousel_title_tag'] )  . '>';
+		                    echo '<' . esc_html( $title_tag )  . '>';
 		                    if ( empty( $settings['eael_product_carousel_title_length'] ) ) {
 			                    echo wp_kses( $product->get_title(), Helper::eael_allowed_tags() );
 		                    } else {
 								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			                    echo implode( " ", array_slice( explode( " ", Helper::eael_wp_kses( $product->get_title() ) ), 0, $settings['eael_product_carousel_title_length'] ) );
 		                    }
-		                    echo '</' . esc_html( $settings['eael_product_carousel_title_tag'] ) . '>';
+		                    echo '</' . esc_html( $title_tag ) . '>';
 
 		                    if( $should_print_title_clickable ) {
 		                        echo '</a>';
