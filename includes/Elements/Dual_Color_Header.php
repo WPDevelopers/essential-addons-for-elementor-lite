@@ -911,14 +911,15 @@ class Dual_Color_Header extends Widget_Base
 		}
 		$separator_markup .= '</div>'; 
 		
-		$title_html = '<' . $settings['title_tag'] . ' class="title">';
+		$title_tag = Helper::eael_validate_html_tag( $settings['title_tag'] );
+		$title_html = '<' . $title_tag . ' class="title">';
 		$title_html .= '<span';
 		if( $has_color_first_and_second ){
 			$title_html .= ' style="' . $gradient_style . '" ';
 		}
 		$title_html .= 'class="lead ' . $settings['eael_dch_dual_color_selector'] . '">' . $settings['eael_dch_first_title'] . '</span>';
 		$title_html .= '<span>' . $settings['eael_dch_last_title'] . '</span>';
-		$title_html .= '</' . $settings['title_tag'] . '>';
+		$title_html .= '</' . $title_tag . '>';
 
 		if ('dch-default' == $settings['eael_dch_type']) : ?>
 			<div class="eael-dual-header">
