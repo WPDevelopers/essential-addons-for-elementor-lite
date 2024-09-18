@@ -943,8 +943,9 @@ class Progress_Bar extends Widget_Base
                 'style' => '-webkit-transition-duration:' . $settings['progress_bar_animation_duration']['size'] . 'ms;-o-transition-duration:' . $settings['progress_bar_animation_duration']['size'] . 'ms;transition-duration:' . $settings['progress_bar_animation_duration']['size'] . 'ms;',
             ]);
 
+            $title_tag = Helper::eael_validate_html_tag( $settings['progress_bar_title_html_tag'] );
             echo '<div class="eael-progressbar-line-container ' . esc_attr( $settings['progress_bar_line_alignment'] ) . '">
-                ' . ($settings['progress_bar_title'] ? sprintf('<%1$s class="eael-progressbar-title">%2$s</%1$s>', esc_html($settings['progress_bar_title_html_tag']), wp_kses( $settings['progress_bar_title'], Helper::eael_allowed_tags() )) : '') . '
+                ' . ($settings['progress_bar_title'] ? sprintf('<%1$s class="eael-progressbar-title">%2$s</%1$s>', esc_html( $title_tag ), wp_kses( $settings['progress_bar_title'], Helper::eael_allowed_tags() )) : '') . '
 
                 <div '; $this->print_render_attribute_string('eael-progressbar-line'); echo '>
                     ' . ($settings['progress_bar_show_count'] === 'yes' ? '<span class="eael-progressbar-count-wrap"><span class="eael-progressbar-count">0</span><span class="postfix">' . esc_html__('%', 'essential-addons-for-elementor-lite') . '</span></span>' : '') . '
@@ -971,7 +972,7 @@ class Progress_Bar extends Widget_Base
             
             echo '<div class="eael-progressbar-circle-container ' . esc_attr( $settings['progress_bar_circle_alignment'] ) . '">
                 ' . ( $has_shadow ? '<div class="eael-progressbar-circle-shadow">' : '') . '
-
+            
                 <div '; $this->print_render_attribute_string('eael-progressbar-circle'); echo '>
                     <div class="eael-progressbar-circle-pie">
                         <div class="eael-progressbar-circle-half-left eael-progressbar-circle-half"></div>
@@ -979,7 +980,7 @@ class Progress_Bar extends Widget_Base
                     </div>
                     <div class="eael-progressbar-circle-inner"></div>
                     <div class="eael-progressbar-circle-inner-content">
-                        ' . ($settings['progress_bar_title'] ? sprintf('<%1$s class="eael-progressbar-title">%2$s</%1$s>', esc_html( $settings['progress_bar_title_html_tag'] ), wp_kses( $settings['progress_bar_title'], Helper::eael_allowed_tags() ) ) : '') . '
+                        ' . ($settings['progress_bar_title'] ? sprintf('<%1$s class="eael-progressbar-title">%2$s</%1$s>', esc_html( Helper::eael_validate_html_tag( $settings['progress_bar_title_html_tag'] ) ), wp_kses( $settings['progress_bar_title'], Helper::eael_allowed_tags() ) ) : '') . '
                         ' . ($settings['progress_bar_show_count'] === 'yes' ? '<span class="eael-progressbar-count-wrap"><span class="eael-progressbar-count">0</span><span class="postfix">' . esc_html__('%', 'essential-addons-for-elementor-lite') . '</span></span>' : '<span class="eael-progressbar-count-wrap" style="display: none;"><span class="eael-progressbar-count">0</span><span class="postfix">' . esc_html__('%', 'essential-addons-for-elementor-lite') . '</span></span>') . '
                     </div>
                 </div>
@@ -1025,7 +1026,7 @@ class Progress_Bar extends Widget_Base
                         <div class="eael-progressbar-circle-inner"></div>
                     </div>
                     <div class="eael-progressbar-circle-inner-content">
-                        ' . ($settings['progress_bar_title'] ? sprintf('<%1$s class="eael-progressbar-title">%2$s</%1$s>', esc_html( $settings['progress_bar_title_html_tag'] ), wp_kses( $settings['progress_bar_title'], Helper::eael_allowed_tags() ) ) : '') . '
+                        ' . ($settings['progress_bar_title'] ? sprintf('<%1$s class="eael-progressbar-title">%2$s</%1$s>', esc_html( Helper::eael_validate_html_tag( $settings['progress_bar_title_html_tag'] ) ), wp_kses( $settings['progress_bar_title'], Helper::eael_allowed_tags() ) ) : '') . '
                         ' . ($settings['progress_bar_show_count'] === 'yes' ? '<span class="eael-progressbar-count-wrap"><span class="eael-progressbar-count">0</span><span class="postfix">' . esc_html__('%', 'essential-addons-for-elementor-lite') . '</span></span>' : '') . '
                     </div>
                 </div>
