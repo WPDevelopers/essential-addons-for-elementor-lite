@@ -1543,7 +1543,8 @@ class Cta_Box extends Widget_Base
         }
 
         if (!empty($settings['eael_cta_title'])){
-            $headingMarkup .='<' . $settings['title_tag'] .' class="title">'. $settings['eael_cta_title'] . '</' . $settings['title_tag'] . '>';
+            $title_tag = Helper::eael_validate_html_tag( $settings['title_tag'] );
+            $headingMarkup .='<' . $title_tag .' class="title">'. $settings['eael_cta_title'] . '</' . $title_tag . '>';
         }
 
         ob_start();
