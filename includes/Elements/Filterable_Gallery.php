@@ -3561,7 +3561,8 @@ class Filterable_Gallery extends Widget_Base
                     $title_link_close = '</a>';
                 }
 
-                $html .= $title_link_open . '<' . Helper::eael_validate_html_tag($settings['title_tag']) . ' class="fg-item-title">' . $item['title'] . '</' . Helper::eael_validate_html_tag($settings['title_tag']) . '>' . $title_link_close;
+                $title_tag = Helper::eael_validate_html_tag( $settings['title_tag'] );
+                $html .= $title_link_open . '<' . $title_tag . ' class="fg-item-title">' . $item['title'] . '</' . $title_tag . '>' . $title_link_close;
             }
 
             if (!empty($item['content'])) {
@@ -3713,7 +3714,8 @@ class Filterable_Gallery extends Widget_Base
                 $title_link_close = '</a>';
             }
 
-            $html .= $title_link_open . '<' . Helper::eael_validate_html_tag($settings['title_tag']) . ' class="fg-item-title">' . $item['title'] . '</' . Helper::eael_validate_html_tag($settings['title_tag']) . '>' . $title_link_close;
+            $title_tag = Helper::eael_validate_html_tag( $settings['title_tag'] );
+            $html .= $title_link_open . '<' . $title_tag . ' class="fg-item-title">' . $item['title'] . '</' . $title_tag . '>' . $title_link_close;
             $html .= '<div class="fg-item-content">' . wpautop($item['content']) . '</div>';
             $html .= '</div>';
             
