@@ -24,7 +24,8 @@ echo '<article class="eael-better-docs-category-grid-post" data-id="' . esc_attr
                     }
                     $html = '';
                     if ( $settings['show_title'] ) {
-                        $html .= '<' . $settings['title_tag'] . ' class="eael-docs-cat-title">' . $term->name . '</' . $settings['title_tag'] . '>';
+                        $title_tag = Helper::eael_validate_html_tag( $settings['title_tag'] );
+                        $html .= '<' . $title_tag . ' class="eael-docs-cat-title">' . $term->name . '</' . $title_tag . '>';
                     }
                     if ( $settings['show_count'] ) {
                         $html .= '<div class="eael-docs-item-count">' . Helper::get_doc_post_count( $term->count, $term->term_id ) . '</div>';

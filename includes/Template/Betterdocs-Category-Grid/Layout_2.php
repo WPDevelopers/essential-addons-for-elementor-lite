@@ -15,7 +15,8 @@ echo '<article class="eael-better-docs-category-grid-post layout-2" data-id="' .
                 echo '<div class="eael-docs-item-count" data-content="' . esc_attr( Helper::get_doc_post_count( $term->count, $term->term_id ) ) . '"></div>';
             }
             if ( $settings['show_title'] ) {
-                $title = '<' . $settings['title_tag'] . ' class="eael-docs-cat-title">' . $term->name . '</' . $settings['title_tag'] . '>';
+                $title_tag = Helper::eael_validate_html_tag( $settings['title_tag'] );
+                $title = '<' . $title_tag . ' class="eael-docs-cat-title">' . $term->name . '</' . $title_tag . '>';
                 echo wp_kses( $title, Helper::eael_allowed_tags() );
             }
             echo '</div>';
