@@ -32,7 +32,8 @@ if ($settings['show_icon']) {
 }
 
 if ($settings['show_title']) {
-    $title = '<' . $settings['title_tag'] . ' class="eael-bd-cb-cat-title__layout-2"><span>' . $term->name . '</span></' . $settings['title_tag'] . '>';
+    $title_tag = Helper::eael_validate_html_tag( $settings['title_tag'] );
+    $title = '<' . $$title_tag . ' class="eael-bd-cb-cat-title__layout-2"><span>' . $term->name . '</span></' . $title_tag . '>';
     echo wp_kses( $title, Helper::eael_allowed_tags() );
 }
 

@@ -32,7 +32,8 @@ echo '<a href="' . esc_url( $button_link ) . '" class="eael-better-docs-category
     }
 
     if ($settings['show_title']) {
-        $title = '<' . $settings['title_tag'] . ' class="eael-bd-cb-cat-title">' . $term->name . '</' . $settings['title_tag'] . '>';
+        $title_tag = Helper::eael_validate_html_tag( $settings['title_tag'] );
+        $title = '<' . $title_tag . ' class="eael-bd-cb-cat-title">' . $term->name . '</' . $title_tag . '>';
         echo wp_kses( $title, Helper::eael_allowed_tags() );
     }
 
