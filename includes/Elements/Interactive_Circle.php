@@ -249,6 +249,7 @@ class Interactive_Circle extends Widget_Base {
 				'name'    => 'eael_interactive_circle_content_icon',
 				'label'   => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::ICONS,
+				'description' => esc_html__( 'Icon will only visible for Preset 2', 'essential-addons-for-elementor-lite' )
 			]
 		);
 
@@ -837,11 +838,6 @@ class Interactive_Circle extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
-				//			    'default' => '#fff',
-				'selectors' => [
-					'{{WRAPPER}} .eael-circle-btn.active i'   => 'color: {{VALUE}}!important;',
-					'{{WRAPPER}} .eael-circle-btn.active svg' => 'fill: {{VALUE}}!important;',
-				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn.active .eael-circle-btn-icon i'   => 'color: {{VALUE}}!important;',
 					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn.active .eael-circle-btn-icon svg' => 'fill: {{VALUE}}!important;',
