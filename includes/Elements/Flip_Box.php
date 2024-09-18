@@ -1607,9 +1607,10 @@ class Flip_Box extends Widget_Base
                                     </div>
                                     <?php
                                     if ( !empty( $settings['eael_flipbox_front_title'] ) ){
-                                        $title = '<'. $settings['eael_flipbox_front_title_tag'] . ' class="eael-elements-flip-box-heading">';
+                                        $title_tag = Helper::eael_validate_html_tag( $settings['eael_flipbox_front_title_tag'] );
+                                        $title = '<'. $title_tag . ' class="eael-elements-flip-box-heading">';
                                         $title .= $settings['eael_flipbox_front_title'];
-                                        $title .= '</' . $settings['eael_flipbox_front_title_tag'] . '>';
+                                        $title .= '</' . $title_tag . '>';
                                         echo wp_kses( $title, Helper::eael_allowed_tags() );
                                     }
                                     ?>
