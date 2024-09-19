@@ -541,7 +541,7 @@ trait Admin {
 						    'key'         => 'section-particles',
 						    'title'       => __( 'Particles', 'essential-addons-for-elementor-lite' ),
 						    'demo_link'   => 'https://essential-addons.com/particle-effect/',
-						    'doc_link'    => 'https://essential-addons.com/docs/particles/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-particles/',
 						    'is_pro'      => true,
 						    'is_activate' => boolval( $this->get_settings( 'section-particles' ) )
 					    ],

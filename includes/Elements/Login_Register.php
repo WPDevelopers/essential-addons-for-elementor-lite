@@ -6750,7 +6750,7 @@ class Login_Register extends Widget_Base {
 			do_action( 'eael/login-register/before-showing-lostpassword-error', $lostpassword_error, $this );
 			?>
             <p class="eael-form-msg invalid">
-				<?php echo esc_html( $lostpassword_error ); ?>
+				<?php echo wp_kses( $lostpassword_error, HelperCLass::eael_allowed_tags() ); ?>
             </p>
 			<?php
 			do_action( 'eael/login-register/after-showing-login-error', $lostpassword_error, $this );
