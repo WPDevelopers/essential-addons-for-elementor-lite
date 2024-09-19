@@ -32,6 +32,10 @@ eael.hooks.addAction("init", "ea", () => {
 				$wooProductCarousel.data("items-mobile") !== undefined
 					? $wooProductCarousel.data("items-mobile")
 					: 3,
+			$slideItems =
+				$wooProductCarousel.data("slide-items") !== undefined
+					? $wooProductCarousel.data("slide-items")
+					: 1,
 			$margin =
 				$wooProductCarousel.data("margin") !== undefined
 					? $wooProductCarousel.data("margin")
@@ -86,7 +90,6 @@ eael.hooks.addAction("init", "ea", () => {
 			grabCursor: $grab_cursor,
 			autoHeight: true,
 			loop: $loop,
-			slidesPerGroup: 1,
 			autoplay: {
 				delay: $autoplay,
 				disableOnInteraction: false
@@ -114,15 +117,18 @@ eael.hooks.addAction("init", "ea", () => {
 				$carouselOptions.breakpoints = {
 					1024: {
 						slidesPerView: $items,
-						spaceBetween: $margin
+						spaceBetween: $margin,
+						slidesPerGroup: $slideItems
 					},
 					768: {
 						slidesPerView: $items_tablet,
-						spaceBetween: $margin_tablet
+						spaceBetween: $margin_tablet,
+						slidesPerGroup: $slideItems
 					},
 					320: {
 						slidesPerView: $items_mobile,
-						spaceBetween: $margin_mobile
+						spaceBetween: $margin_mobile,
+						slidesPerGroup: $slideItems
 					}
 				};
 			} else {
@@ -143,9 +149,12 @@ eael.hooks.addAction("init", "ea", () => {
 					let breakpoint = localize.el_breakpoints[device];
 					if (breakpoint.is_enabled) {
 						let _items = $wooProductCarousel.data('items-' + device),
+							_slideItems = $wooProductCarousel.data('slide-items-' + device),
 							_margin = $wooProductCarousel.data('margin-' + device);
 						$margin = _margin !== undefined ? _margin : (device === 'desktop' ? $margin : 10);
 						$itemsPerView = _items !== undefined && _items !== "" ? _items : (device === 'desktop' ? $items : 3);
+						$slidePerGroup = _slideItems !== undefined && _slideItems !== "" ? _slideItems : (device === 'desktop' ? $slideItems : 1 );
+						
 
 						if( device === 'mobile' && _items === undefined ){
 							$itemsPerView = 1;
@@ -156,7 +165,8 @@ eael.hooks.addAction("init", "ea", () => {
 						el_breakpoints[bp_index] = {
 							breakpoint: breakpoint.value,
 							slidesPerView: $itemsPerView,
-							spaceBetween: $margin
+							spaceBetween: $margin,
+							slidePerGroup: $slidePerGroup
 						}
 						bp_index++;
 					}
@@ -167,7 +177,8 @@ eael.hooks.addAction("init", "ea", () => {
 					if (typeof el_breakpoints[_index + 1] !== 'undefined') {
 						breakpoints[breakpoint.breakpoint] = {
 							slidesPerView: el_breakpoints[_index + 1].slidesPerView,
-							spaceBetween: el_breakpoints[_index + 1].spaceBetween
+							spaceBetween: el_breakpoints[_index + 1].spaceBetween,
+							slidesPerGroup: el_breakpoints[_index + 1].slidePerGroup,
 						}
 					}
 				});

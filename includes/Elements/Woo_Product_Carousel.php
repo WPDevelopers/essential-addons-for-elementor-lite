@@ -553,6 +553,26 @@ class Woo_Product_Carousel extends Widget_Base {
 		    ]
 	    );
 
+        $this->add_responsive_control(
+		    'slide_items',
+		    [
+			    'label'   => __( 'Slide to Scroll', 'essential-addons-for-elementor-lite' ),
+			    'type'    => Controls_Manager::SELECT,
+			    'options' => [
+				    '1' => __( '1', 'essential-addons-for-elementor-lite' ),
+				    '2' => __( '2', 'essential-addons-for-elementor-lite' ),
+				    '3' => __( '3', 'essential-addons-for-elementor-lite' ),
+				    '4' => __( '4', 'essential-addons-for-elementor-lite' ),
+				    '5' => __( '5', 'essential-addons-for-elementor-lite' ),
+				    '6' => __( '6', 'essential-addons-for-elementor-lite' ),
+			    ],
+			    'default' => 1,
+                'condition' => [
+                    'carousel_effect' => 'slide',
+                ]
+		    ]
+	    );
+
 	    $this->add_control(
 		    'carousel_rotate',
 		    [
@@ -2997,6 +3017,9 @@ class Woo_Product_Carousel extends Widget_Base {
 		    if ( !empty( $settings[ 'items' ] ) ) {
 			    $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-items', $settings[ 'items' ] );
 		    }
+		    if ( !empty( $settings[ 'items' ] ) ) {
+			    $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-slide-items', $settings[ 'slide_items' ] );
+		    }
 	    }
         
         if ( method_exists( Plugin::$instance->breakpoints, 'get_breakpoints_config' ) && ! empty( $breakpoints = Plugin::$instance->breakpoints->get_breakpoints_config() ) ) {
@@ -3004,6 +3027,9 @@ class Woo_Product_Carousel extends Widget_Base {
                 if ($breakpoint['is_enabled']) {
                     if ( $settings['carousel_effect'] == 'slide' && !empty($settings['items_'.$key]) ) {
                         $this->add_render_attribute('eael-woo-product-carousel-wrap', 'data-items-'.$key, $settings['items_'.$key]);
+                    }
+                    if ( $settings['carousel_effect'] == 'slide' && !empty($settings['slide_items_'.$key]) ) {
+                        $this->add_render_attribute('eael-woo-product-carousel-wrap', 'data-slide-items-'.$key, $settings['slide_items_'.$key]);
                     }
                     if (!empty($settings['margin_'.$key]['size'])) {
                         $this->add_render_attribute('eael-woo-product-carousel-wrap', 'data-margin-'.$key, $settings['margin_'.$key]['size']);
