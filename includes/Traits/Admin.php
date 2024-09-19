@@ -1347,7 +1347,7 @@ trait Admin {
 							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-images/',
 							    'is_activate' => boolval( $this->get_settings( 'woo-product-images' ) )
 						    ],
-						    'woo-product-images'      => [
+						    'woo-product-add-to-cart'      => [
 							    'key'         => 'woo-product-add-to-cart',
 							    'title'       => __( 'Woo Product Add To Cart', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/woo-product-add-to-cart/',

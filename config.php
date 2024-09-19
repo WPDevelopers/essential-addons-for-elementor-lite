@@ -641,14 +641,6 @@ $config = [
         ],
         'woo-product-price' => [
             'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Price',
-            // 'dependency' => [
-            //     'css' => [
-                    
-            //     ],
-            //     'js'  => [
-                    
-            //     ],
-            // ],
         ],
         'woo-product-rating' => [
             'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Rating',
