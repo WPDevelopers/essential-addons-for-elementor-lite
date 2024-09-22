@@ -1561,6 +1561,53 @@ class Helper
 		return "unknown";
 	}
 
+    public static function get_all_acf_fields() {
+
+        if( ! class_exists( 'ACF' ) ){
+            return [];
+        }
+
+        // Get all registered post types
+        $post_types = get_post_types( [ 'public' => true ], 'names' );
+        $acf_fields = [];
+    
+        // Loop through each post type
+        foreach( $post_types as $post_type ) {
+            // Query the first post of this post type
+            $args = [
+                'post_type'      => $post_type,
+                'posts_per_page' => 1,
+                'post_status'    => 'publish'
+            ];
+    
+            $query = new \WP_Query($args);
+    
+            if( $query->have_posts() ) {
+                while( $query->have_posts() ): $query->the_post();
+    
+                    // Get all field objects for this post
+                    $fields = get_field_objects();
+    
+                    if( $fields ) {
+                        foreach( $fields as $field_name => $field ) {
+                            // Add field details to the array
+                            $acf_fields[ $field_name ] = [
+                                'label'     => $field['label'],
+                                'name'      => $field_name,
+                                'type'      => $field['type'],
+                                'post_type' => $post_type,
+                            ];
+                        }
+                    }
+    
+                endwhile;
+                wp_reset_postdata();
+            }
+        }
+    
+        return $acf_fields;
+    }  
+      
     public static function eael_rating_markup( $rating, $count ) {
         $html = '';
 		if ( 0 == $rating ) {
