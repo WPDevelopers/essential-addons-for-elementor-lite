@@ -353,7 +353,7 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
             if (empty($settings['eael_title_length'])) {
                 echo wp_kses( get_the_title(), Helper::eael_allowed_tags() );
             } else {
-                echo wp_kses( implode(" ", array_slice(explode(" ", get_the_title()), 0, $settings['eael_title_length']) )  );
+                echo wp_kses( implode(" ", array_slice(explode(" ", get_the_title()), 0, $settings['eael_title_length']) ), Helper::eael_allowed_tags()  );
             }
             echo '</a>';
             echo '</' . esc_html( $title_tag ) . '></header>';
