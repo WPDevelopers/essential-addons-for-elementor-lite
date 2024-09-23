@@ -90,7 +90,14 @@ eael.hooks.addAction("widgets.reinit", "ea", ($content) => {
 });
 
 let ea_swiper_slider_init_inside_template = (content) => {
-	window.dispatchEvent(new Event('resize'));
+
+	/*
+	* If you want to prevent calling the resize event use this code.
+	* window.eaelPreventResizeOnClick = true;
+	*/
+	if ( window.eaelPreventResizeOnClick === undefined ) {
+		window.dispatchEvent(new Event('resize'));
+	}
 
 	content = typeof content === 'object' ? content : jQuery(content);
 	content.find('.swiper-wrapper').each(function () {
