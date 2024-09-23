@@ -23,7 +23,7 @@ class Woo_Product_Rating extends Widget_Base {
 	}
 
 	public function get_categories() {
-		return [ 'theme-elements-single' ];
+		return [ 'templately_library' ];
 	}
 
 	public function get_keywords() {
