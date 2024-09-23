@@ -19,7 +19,7 @@ var ProgressBar = function ($scope, $) {
 			});
 		}
 
-		ea.hooks.doAction("progressBar.initValue", $this, $layout, $num);
+		eael.hooks.doAction("progressBar.initValue", $this, $layout, $num);
 
 		$(".eael-progressbar-count", $this)
 			.prop({

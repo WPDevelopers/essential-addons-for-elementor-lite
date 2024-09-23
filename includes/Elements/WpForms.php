@@ -708,6 +708,10 @@ class WpForms extends Widget_Base {
                         'step'  => 1,
                     ],
                 ],
+                'default' => [
+					'unit' => 'px',
+					'size' => 30,
+				],
                 'size_units'        => ['px', 'em', '%'],
                 'selectors'         => [
                     '{{WRAPPER}} .eael-wpforms .wpforms-field input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .eael-wpforms .wpforms-field select' => 'height: {{SIZE}}{{UNIT}}',
@@ -1325,9 +1329,10 @@ class WpForms extends Widget_Base {
             [
                 'label'             => __('Background Color', 'essential-addons-for-elementor-lite'),
                 'type'              => Controls_Manager::COLOR,
-                'default'           => '',
+                'default'           => '#065689',
                 'selectors'         => [
-                    '{{WRAPPER}} .eael-wpforms .wpforms-submit-container .wpforms-submit:hover' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-wpforms .wpforms-submit-container .wpforms-submit:hover, 
+                    {{WRAPPER}} .eael-wpforms .wpforms-container-full .wpforms-submit-container .wpforms-form button[type=submit]:hover' => 'background: {{VALUE}} !important',
                 ],
             ]
         );
@@ -1344,14 +1349,25 @@ class WpForms extends Widget_Base {
             ]
         );
 
-        $this->add_control(
-            'button_border_color_hover',
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
             [
-                'label'             => __('Border Color', 'essential-addons-for-elementor-lite'),
-                'type'              => Controls_Manager::COLOR,
-                'default'           => '',
+                'name'              => 'button_border_normal_hover',
+                'label'             => __('Border', 'essential-addons-for-elementor-lite'),
+                'placeholder'       => '1px',
+                'default'           => '1px',
+                'selector'          => '{{WRAPPER}} .eael-wpforms .wpforms-submit-container .wpforms-submit:hover',
+            ]
+        );
+
+        $this->add_control(
+            'button_border_radius_hover',
+            [
+                'label'             => __('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type'              => Controls_Manager::DIMENSIONS,
+                'size_units'        => ['px', 'em', '%'],
                 'selectors'         => [
-                    '{{WRAPPER}} .eael-wpforms .wpforms-submit-container .wpforms-submit:hover' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-wpforms .wpforms-submit-container .wpforms-submit:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );

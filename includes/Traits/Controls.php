@@ -1,6 +1,7 @@
 <?php
 
 namespace Essential_Addons_Elementor\Traits;
+use Essential_Addons_Elementor\Classes\Helper;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -181,6 +182,21 @@ trait Controls
             ]
         );
 
+        if ( 'eael-dynamic-filterable-gallery' === $wb->get_name() ) {
+            $wb->add_control(
+                'eael_acf_important_note',
+                [
+                    'label' => '',
+                    'type'  => Controls_Manager::RAW_HTML,
+                    'raw'   => esc_html__( 'Given number of posts will be fetched along with their ACF gallery items', 'essential-addons-for-elementor-lite' ),
+                    'content_classes' => 'elementor-descriptor',
+                    'condition'       => [
+                        'fetch_acf_image_gallery' => 'yes'
+                    ]
+                ]
+            );
+        }
+
         $wb->add_control(
             'offset',
             [
@@ -237,6 +253,92 @@ trait Controls
 				'toggle'  => false,
 			]
 		);
+
+
+        if ( 'eael-dynamic-filterable-gallery' === $wb->get_name() ) {
+            $wb->add_control(
+                'fetch_acf_image_gallery',
+                [
+                    'label'        => esc_html__( 'Fetch Images from ACF Gallery', 'essential-addons-for-elementor-lite' ),
+                    'type'         => Controls_Manager::SWITCHER,
+                    'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+                    'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+                    'return_value' => 'yes',
+                    'default'      => 'no',
+                    'separator'    => 'before',
+                ]
+            );
+
+            if( class_exists( 'ACF' ) ){
+                $fields = Helper::get_all_acf_fields();
+                $key_list = [ '' => esc_html__( 'No Gallery Field Found', 'essential-addons-for-elementor-lite' ) ];
+                if( ! empty( $fields ) ){
+                    $key_list = [];
+                    foreach( $fields as $field_name => $field ){
+                        if( 'gallery' === $field['type'] ){
+                            $key_list[ $field_name ] = $field['label'];
+                        }
+                    }
+                }
+                    
+                $wb->add_control(
+                    'eael_acf_gallery_keys',
+                    [
+                        'label'       => esc_html__( 'Select ACF Gallery Items Field', 'essential-addons-for-elementor-lite' ),
+                        'type'        => Controls_Manager::SELECT2,
+                        'label_block' => true,
+                        'multiple'    => true,
+                        'options'     => $key_list,
+                        'condition'   => [
+                            'fetch_acf_image_gallery' => 'yes'
+                        ]
+                    ]
+                );
+
+                $wb->add_control(
+                    'eael_gf_hide_parent_items',
+                    [
+                        'label'        => esc_html__( 'Hide Featured Image', 'essential-addons-for-elementor-lite' ),
+                        'type'         => Controls_Manager::SWITCHER,
+                        'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+                        'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+                        'return_value' => 'yes',
+                        'default'      => 'yes',
+                        'condition'    => [
+                            'fetch_acf_image_gallery' => 'yes'
+                        ]
+                    ]
+                );
+                
+                $wb->add_control(
+                    'eael_gf_afc_use_parent_data',
+                    [
+                        'label'        => esc_html__( 'Use Parent Data to Populate ACF Gallery Items', 'essential-addons-for-elementor-lite' ),
+                        'type'         => Controls_Manager::SWITCHER,
+                        'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+                        'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+                        'return_value' => 'yes',
+                        'default'      => 'no',
+                        'condition'    => [
+                            'fetch_acf_image_gallery' => 'yes'
+                        ]
+                    ]
+                );
+
+            } else {
+                $wb->add_control(
+                    'eael_scf_gallery_warnig_text',
+                    [
+                        'type'            => Controls_Manager::RAW_HTML,
+                        'raw'             => __('<strong>Advanced Custom Fields (ACF)</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=advanced-custom-fields&tab=search&type=term" target="_blank">Advanced Custom Fields (ACF)</a> first.', 'essential-addons-for-elementor-lite'),
+                        'content_classes' => 'eael-warning',
+                        'condition'       => [
+                            'fetch_acf_image_gallery' => 'yes'
+                        ]
+                    ]
+                );
+            }
+        }
 
         $wb->end_controls_section();
     }
@@ -1502,7 +1604,7 @@ trait Controls
 
 	        $eael_show_post_terms_condition = [
                 'eael_show_image'             => 'yes',
-                'eael_post_grid_preset_style' => 'two',
+                'eael_post_grid_preset_style' => ['two', 'three'],
             ]; //Applicable for both elements: Post Carousel and Post Grid
 
             if( 'eael-post-block' === $wb->get_name() ){
@@ -1524,7 +1626,7 @@ trait Controls
             $eael_show_post_terms_child_condition = [
                 'eael_show_image'             => 'yes', 
                 'eael_show_post_terms'        => 'yes',
-                'eael_post_grid_preset_style' => 'two',
+                'eael_post_grid_preset_style' => ['two', 'three'],
             ];
 
             if( 'eael-post-block' === $wb->get_name() ){
@@ -1675,15 +1777,15 @@ trait Controls
                 $wb->add_control(
                     'eael_show_avatar',
                     [
-                        'label' => __('Show Avatar', 'essential-addons-for-elementor-lite'),
-                        'type' => Controls_Manager::SWITCHER,
-                        'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                        'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                        'label'        => __('Show Avatar', 'essential-addons-for-elementor-lite'),
+                        'type'         => Controls_Manager::SWITCHER,
+                        'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                        'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
                         'return_value' => 'yes',
-                        'default' => 'yes',
-                        'condition' => [
+                        'default'      => 'yes',
+                        'condition'    => [
                             'eael_show_meta' => 'yes',
-                            'eael_post_grid_preset_style' => '',
+                            'eael_post_grid_preset_style!' => ['two', 'three'],
                         ],
                     ]
                 );
@@ -1720,23 +1822,6 @@ trait Controls
                         ],
                     ]
                 );
-                
-                // $wb->add_control(
-                //     'eael_show_avatar_three',
-                //     [
-                //         'label' => __('Show Avatar', 'essential-addons-for-elementor-lite'),
-                //         'type' => Controls_Manager::SWITCHER,
-                //         'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                //         'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
-                //         'return_value' => 'yes',
-                //         'default' => '',
-                //         'condition' => [
-                //             'eael_show_meta' => 'yes',
-                //             'meta_position' => 'meta-entry-footer',
-                //             'eael_post_grid_preset_style' => 'three',
-                //         ],
-                //     ]
-                // );
                 
                 $wb->add_control(
                     'eael_show_author_two',

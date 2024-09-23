@@ -1,4 +1,4 @@
-@keyframes loaderSpin {
+@keyframes eaelLoaderSpin {
 	0% {
 		transform: rotate(0deg);
 	}
@@ -62,7 +62,7 @@
 		border-bottom: 4px solid rgba(255, 255, 255, 0.2);
 		border-left: 4px solid #ffffff;
 		transform: translateZ(0);
-		animation: loaderSpin 1.1s infinite linear;
+		animation: eaelLoaderSpin 1.1s infinite linear;
 		margin-right: 5px;
 		transition: all 0.2s;
 

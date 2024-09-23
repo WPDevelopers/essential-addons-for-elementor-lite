@@ -1,4 +1,5 @@
 import consumer from "../context";
+import {asyncDispatch} from "../helper/index.js";
 
 function TemplatelyPromo() {
     const eaData = localize.eael_dashboard.templately_promo,
@@ -7,7 +8,7 @@ function TemplatelyPromo() {
         imgSrc = eaState.isDark ? '/images/templates-img.png' : '/images/templates-img.png',
         clickHandler = () => {
             eaDispatch({type: 'BUTTON_LOADER', payload: 'tl'});
-            setTimeout(eaDispatch, 500, {type: 'INSTALL_TEMPLATELY'});
+            asyncDispatch({eaState, eaDispatch}, 'INSTALL_TEMPLATELY');
         };
 
     return (
