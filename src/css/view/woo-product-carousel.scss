@@ -119,40 +119,10 @@ $theme-preset4: #ec3b75;
                 text-align: left;
             }
         }
-
-        //@media (min-width: 1025px) {
-        //    &[data-items="1"] .product.swiper-slide{
-        //        flex: 0 0 100%;
-        //        max-width: 100%;
-        //    }
-        //    &[data-items="2"] .product.swiper-slide{
-        //        flex: 0 0 50%;
-        //        max-width: 50%;
-        //    }
-        //    &[data-items="3"] .product.swiper-slide{
-        //        flex: 0 0 33.33333%;
-        //        max-width: 33.33333%;
-        //    }
-        //    &[data-items="4"] .product.swiper-slide{
-        //        flex: 0 0 25%;
-        //        max-width: 25%;
-        //    }
-        //    &[data-items="5"] .product.swiper-slide{
-        //        flex: 0 0 20%;
-        //        max-width: 20%;
-        //    }
-        //    &[data-items="6"] .product.swiper-slide{
-        //        flex: 0 0 16.66666%;
-        //        max-width: 16.66666%;
-        //    }
-        //}
     }
 
     &.preset-1 {
         .swiper-pagination .swiper-pagination-bullet {
-            //border-radius: 2px;
-            //width: 8px;
-            //height: 3px;
 
             &.swiper-pagination-bullet-active {
                 //width: 20px;
@@ -527,14 +497,6 @@ $theme-preset4: #ec3b75;
 
             .eael-product-price {
                 color: $theme-preset3;
-
-                //del .amount {
-                //    color: #fff;
-                //}
-                //ins .amount,
-                //.amount {
-                //    color: $theme-preset3;
-                //}
             }
         }
 
@@ -544,18 +506,7 @@ $theme-preset4: #ec3b75;
         }
 
         .product-details-wrap {
-            //display: flex;
-            //align-items: center;
-            //justify-content: space-between;
             padding: 20px;
-
-            .product-details {
-                //width: 60%;
-            }
-            //.eael-product-price {
-            //    width: 40%;
-            //    text-align: right;
-            //}
 
             .eael-product-excerpt p {
                 margin-top: 5px;
@@ -657,11 +608,6 @@ $theme-preset4: #ec3b75;
                 .image-wrap a {
                     opacity: .2;
                 }
-
-                //// icon
-                //.icons-wrap li {
-                //    transform: translateX(-70px);
-                //}
 
             }
 
@@ -1654,18 +1600,6 @@ $theme-preset4: #ec3b75;
 
 }
 
-.theme-oceanwp {
-    //&.elementor-editor-active {
-    //    .eael-product-popup.woocommerce div.product form.cart div.quantity .qty {
-    //        max-width: 150px;
-    //    }
-    //}
-    //
-    //.eael-product-popup.woocommerce div.product form.cart div.quantity .qty:focus {
-    //    border: 1px solid;
-    //}
-}
-
 .theme-astra {
     .woocommerce.eael-woo-product-carousel ul.products, .woocommerce-page .eael-woo-product-carousel ul.products {
         display: flex;
@@ -1949,4 +1883,14 @@ $theme-preset4: #ec3b75;
             }
         }
     }
+}
+
+//Botiga Theme support
+.theme-botiga .ul.wc-block-grid__products, 
+.theme-botiga ul.products{
+    display: flex !important;
+}
+
+.theme-botiga .row {
+    justify-content: center;
 }

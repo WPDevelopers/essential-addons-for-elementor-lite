@@ -360,6 +360,9 @@
   text-transform: capitalize;
   border: none;
   letter-spacing: normal;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 .eael-product-gallery .woocommerce ul.products li.product .button:hover, .eael-product-gallery .woocommerce ul.products li.product .button:visited {
   text-decoration: none;
@@ -1045,7 +1048,7 @@
     margin: 1%;
   }
 }
-@-webkit-keyframes ploaderSpin {
+@-webkit-keyframes eaelPloaderSpin {
   0% {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
@@ -1055,7 +1058,7 @@
     transform: rotate(360deg);
   }
 }
-@keyframes ploaderSpin {
+@keyframes eaelPloaderSpin {
   0% {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg);

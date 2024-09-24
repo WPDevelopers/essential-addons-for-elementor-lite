@@ -1,4 +1,4 @@
-ea.hooks.addAction("editMode.init", "ea", () => {
+eael.hooks.addAction("editMode.init", "ea", () => {
 	if (typeof parent.document==="undefined"){
 		return false;
 	}

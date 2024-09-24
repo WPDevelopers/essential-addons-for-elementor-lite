@@ -99,6 +99,8 @@
       -ms-flex-direction: row;
           flex-direction: row;
   white-space: nowrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .eael-grid-post .eael-entry-footer .eael-entry-meta {

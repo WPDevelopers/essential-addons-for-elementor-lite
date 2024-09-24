@@ -174,13 +174,14 @@
 				return false;
 			}
 
-			$(".eael-highlight-active, .eael-highlight-parent").removeClass(
-				"eael-highlight-active eael-highlight-parent"
-			);
-
-			$(this).closest(".eael-first-child").addClass("eael-highlight-parent");
-
-			$(this).parent().addClass("eael-highlight-active");
+			var $this = $(this).closest("li");
+			if ($this.hasClass('eael-highlight-active')) {
+				$this.removeClass('eael-highlight-active eael-highlight-parent');
+				$this.find('.eael-highlight-active').removeClass('eael-highlight-active '); // Remove active class from all child elements
+			} else {
+				$this.closest('ul').find('li.eael-highlight-active').removeClass('eael-highlight-active eael-highlight-parent'); // Close other branches
+				$this.addClass('eael-highlight-active eael-highlight-parent');
+			}
 
 			$('html, body').animate({
                 scrollTop: $(target).offset().top - offsetSpan
@@ -375,7 +376,7 @@
 		}
 
 
-		if (typeof ea !== 'undefined' && ea.isEditMode){
+		if (typeof eael !== 'undefined' && eael.isEditMode){
 			elementorFrontend.hooks.addAction(
 				"frontend/element_ready/widget",
 				function ($scope, jQuery) {
@@ -396,5 +397,17 @@
 		if (intSupportTag !== "" && !editMode) {
 			eael_toc_content(eael_toc_check_content(), intSupportTag);
 		}
+
+		// Function to check the window width and add/remove the class
+		function checkWindowSize() {
+			if (window.innerWidth <= 991) {
+				document.body.classList.add('eael-toc-mobile');
+			} else {
+				document.body.classList.remove('eael-toc-mobile');
+			}
+		}
+		checkWindowSize();
+		window.addEventListener('resize', checkWindowSize);
+		
 	});
 })(jQuery);
