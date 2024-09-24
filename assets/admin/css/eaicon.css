@@ -2,13 +2,13 @@
 	font-family: 'eaicon';
 	src:  url('../fonts/eaicon.eot?jbjw5b');
 	src:  url('../fonts/eaicon.eot?jbjw5b#iefix') format('embedded-opentype'),
-	url('../fonts/eaicon.ttf?jbjw5b') format('truetype'),
-	url('../fonts/eaicon.woff?jbjw5b') format('woff'),
-	url('../fonts/eaicon.svg?jbjw5b#eaicon') format('svg');
+	  url('../fonts/eaicon.ttf?jbjw5b') format('truetype'),
+	  url('../fonts/eaicon.woff?jbjw5b') format('woff'),
+	  url('../fonts/eaicon.svg?jbjw5b#eaicon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 	font-display: block;
-}
+  }
 
 [class^="eaicon-"],
 [class*=" eaicon-"] {

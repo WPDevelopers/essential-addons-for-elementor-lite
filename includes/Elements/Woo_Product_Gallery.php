@@ -127,6 +127,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			'best-selling-products' => esc_html__( 'Best Selling Products', 'essential-addons-for-elementor-lite' ),
 			'sale-products'         => esc_html__( 'Sale Products', 'essential-addons-for-elementor-lite' ),
 			'top-products'          => esc_html__( 'Top Rated Products', 'essential-addons-for-elementor-lite' ),
+			'manual'                => esc_html__('Manual Selection', 'essential-addons-for-elementor-lite'),
 		] );
 	}
 
@@ -174,12 +175,19 @@ class Woo_Product_Gallery extends Widget_Base {
 			'eael_product_gallery_terms_position',
 			[
 				'label'   => __( 'Position', 'essential-addons-for-elementor-lite' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'eael-terms-layout-horizontal',
+				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
-					'eael-terms-layout-horizontal' => __( 'Horizontal', 'essential-addons-for-elementor-lite' ),
-					'eael-terms-layout-vertical'   => __( 'Vertical', 'essential-addons-for-elementor-lite' ),
+					'eael-terms-layout-horizontal' => [
+						'title' => esc_html__( 'Horizontal', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-justify-start-v',
+					],
+					'eael-terms-layout-vertical' => [
+						'title' => esc_html__( 'Vertical', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-justify-start-h',
+					],
 				],
+				'default' => 'eael-terms-layout-horizontal',
+				'toggle'  => false,
 			]
 		);
 
@@ -323,18 +331,34 @@ class Woo_Product_Gallery extends Widget_Base {
 			]
 		);
 
+		$image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/woo-product-gallery-';
 		$this->add_control(
 			'eael_product_gallery_style_preset',
 			[
-				'label'   => esc_html__( 'Style Preset', 'essential-addons-for-elementor-lite' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'eael-product-preset-1',
-				'options' => [
-					'eael-product-preset-1' => esc_html__( 'Preset 1', 'essential-addons-for-elementor-lite' ),
-					'eael-product-preset-2' => esc_html__( 'Preset 2', 'essential-addons-for-elementor-lite' ),
-					'eael-product-preset-3' => esc_html__( 'Preset 3', 'essential-addons-for-elementor-lite' ),
-					'eael-product-preset-4' => esc_html__( 'Preset 4', 'essential-addons-for-elementor-lite' ),
+				'label'       => esc_html__( 'Style Preset', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => [
+					'eael-product-preset-1' => [
+						'title' => esc_html__( 'Preset 1', 'essential-addons-for-elementor-lite' ),
+						'image' => $image_path . 'preset-1.png'
+					],
+					'eael-product-preset-2' => [
+						'title' => esc_html__( 'Preset 2', 'essential-addons-for-elementor-lite' ),
+						'image' => $image_path . 'preset-2.png'
+					],
+					'eael-product-preset-3' => [
+						'title' => esc_html__( 'Preset 3', 'essential-addons-for-elementor-lite' ),
+						'image' => $image_path . 'preset-3.png'
+					],
+					'eael-product-preset-4' => [
+						'title' => esc_html__( 'Preset 4', 'essential-addons-for-elementor-lite' ),
+						'image' => $image_path . 'preset-4.png'
+					]
 				],
+				'default'     => 'eael-product-preset-1',
+				'label_block' => true,
+                'toggle'      => false,
+                'image_choose'=> true,
 			]
 		);
 
@@ -383,12 +407,23 @@ class Woo_Product_Gallery extends Widget_Base {
 			'post_type',
 			[
 				'label'   => __( 'Source', 'essential-addons-for-elementor-lite' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'product',
+				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
-					'product'        => esc_html__( 'Products', 'essential-addons-for-elementor-lite' ),
-					'source_dynamic' => esc_html__( 'Dynamic', 'essential-addons-for-elementor-lite' ),
+					'product' => [
+						'title' => esc_html__( 'Products', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-product-related',
+					],
+					'source_dynamic' => [
+						'title' => esc_html__( 'Dynamic', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-archive',
+					],
+					'archive' => [
+						'title' => esc_html__( 'Archive', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-archive-posts',
+					],
 				],
+				'default' => 'product',
+				'toggle'  => false,
 			]
 		);
 
@@ -399,7 +434,7 @@ class Woo_Product_Gallery extends Widget_Base {
 				'raw'             => __( 'This option will only affect in <strong>Archive page of Elementor Theme Builder</strong> dynamically.', 'essential-addons-for-elementor-lite' ),
 				'content_classes' => 'eael-warning',
 				'condition'       => [
-					'post_type' => 'source_dynamic',
+					'post_type' => 'archive',
 				],
 			]
 		);
@@ -410,7 +445,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			'default'   => 'recent-products',
 			'options'   => $this->eael_get_product_filterby_options(),
 			'condition' => [
-				'post_type!' => 'source_dynamic',
+				'post_type' => 'product',
 			],
 		] );
 
@@ -419,19 +454,31 @@ class Woo_Product_Gallery extends Widget_Base {
 			'type'    => Controls_Manager::SELECT,
 			'options' => $this->eael_get_product_orderby_options(),
 			'default' => 'date',
-
-		] );
-
-		$this->add_control( 'order', [
-			'label'   => __( 'Order', 'essential-addons-for-elementor-lite' ),
-			'type'    => Controls_Manager::SELECT,
-			'options' => [
-				'asc'  => 'Ascending',
-				'desc' => 'Descending',
+			'condition' => [
+				'post_type' => 'product',
 			],
-			'default' => 'desc',
 
 		] );
+
+		$this->add_control(
+			'order',
+			[
+				'label'   => __( 'Order', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'asc' => [
+						'title' => esc_html__( 'Ascending', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fas fa-sort-amount-up-alt',
+					],
+					'desc' => [
+						'title' => esc_html__( 'Descending', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'fas fa-sort-amount-down',
+					],
+				],
+				'default' => 'desc',
+				'toggle'  => false,
+			]
+		);
 
 		$this->add_control( 'eael_product_gallery_products_count', [
 			'label'   => __( 'Products Count', 'essential-addons-for-elementor-lite' ),
@@ -440,13 +487,37 @@ class Woo_Product_Gallery extends Widget_Base {
 			'min'     => 1,
 			'max'     => 1000,
 			'step'    => 1,
+			'condition' => [
+				'post_type' => 'product',
+				'eael_product_gallery_product_filter!' => 'manual'
+			],
 		] );
 
 		$this->add_control( 'product_offset', [
-			'label'   => __( 'Offset', 'essential-addons-for-elementor-lite' ),
-			'type'    => Controls_Manager::NUMBER,
-			'default' => 0,
+			'label'     => __( 'Offset', 'essential-addons-for-elementor-lite' ),
+			'type'      => Controls_Manager::NUMBER,
+			'default'   => 0,
+			'condition' => [
+				'post_type'                            => 'product',
+				'eael_product_gallery_product_filter!' => 'manual'
+			],
 		] );
+
+		$this->add_control(
+			'eael_product_gallery_products_in',
+			[
+				'label'       => esc_html__( 'Select Products', 'essential-addons-for-elementor-lite' ),
+				'type'        => 'eael-select2',
+				'label_block' => true,
+				'multiple'    => true,
+				'source_name' => 'post_type',
+				'source_type' => 'product',
+				'condition'   => [
+					'eael_product_gallery_product_filter' => 'manual',
+					'post_type'                           => 'product'
+				],
+			]
+		);
 
 		$this->add_control(
 			'eael_product_gallery_categories', [
@@ -456,6 +527,9 @@ class Woo_Product_Gallery extends Widget_Base {
 				'source_type' => 'product_cat',
 				'label_block' => true,
 				'multiple'    => true,
+				'condition' => [
+					'post_type' => 'product',
+				],
 			]
 		);
 
@@ -467,7 +541,28 @@ class Woo_Product_Gallery extends Widget_Base {
 				'source_type' => 'product_tag',
 				'label_block' => true,
 				'multiple'    => true,
+				'condition'   => [
+					'post_type'                            => 'product',
+					'eael_product_gallery_product_filter!' => 'manual'
+				],
 			]
+		);
+
+		$this->add_control(
+			'product_type_logged_users',
+			[
+				'label'       => __('Purchase Type', 'essential-addons-for-elementor-lite'),
+				'type'        => Controls_Manager::SELECT,
+				'description' => __('For logged in users only!', 'essential-addons-for-elementor-lite'),
+				'options'     => [
+					'both'          => __('Both', 'essential-addons-for-elementor-lite'),
+					'purchased'     => __('Purchased Only', 'essential-addons-for-elementor-lite'),
+					'not-purchased' => __('Not Purchased Only', 'essential-addons-for-elementor-lite'),
+				],
+				'default' => 'both',
+			'condition' => [
+				'post_type' => 'product',
+			],]
 		);
 
 		$this->add_control(
@@ -483,20 +578,49 @@ class Woo_Product_Gallery extends Widget_Base {
 		$this->add_control(
 			'eael_product_gallery_title_html_tag',
 			[
-				'label'   => __( 'Title HTML Tag', 'essential-addons-for-elementor-lite' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'h2',
-				'options' => [
-					'h1'   => __( 'H1', 'essential-addons-for-elementor-lite' ),
-					'h2'   => __( 'H2', 'essential-addons-for-elementor-lite' ),
-					'h3'   => __( 'H3', 'essential-addons-for-elementor-lite' ),
-					'h4'   => __( 'H4', 'essential-addons-for-elementor-lite' ),
-					'h5'   => __( 'H5', 'essential-addons-for-elementor-lite' ),
-					'h6'   => __( 'H6', 'essential-addons-for-elementor-lite' ),
-					'div'  => __( 'div', 'essential-addons-for-elementor-lite' ),
-					'span' => __( 'span', 'essential-addons-for-elementor-lite' ),
-					'p'    => __( 'p', 'essential-addons-for-elementor-lite' ),
+				'label'       => __( 'Title HTML Tag', 'essential-addons-for-elementor-lite' ),
+				'label_block' => true,
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => [
+					'h1' => [
+						'title' => esc_html__( 'H1', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h1',
+					],
+					'h2' => [
+						'title' => esc_html__( 'H2', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h2',
+					],
+					'h3' => [
+						'title' => esc_html__( 'H3', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h3',
+					],
+					'h4' => [
+						'title' => esc_html__( 'H4', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h4',
+					],
+					'h5' => [
+						'title' => esc_html__( 'H5', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h5',
+					],
+					'h6' => [
+						'title' => esc_html__( 'H6', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h6',
+					],
+					'div' => [
+						'title' => esc_html__( 'Div', 'essential-addons-for-elementor-lite' ),
+						'text'  => 'div',
+					],
+					'span' => [
+						'title' => esc_html__( 'Span', 'essential-addons-for-elementor-lite' ),
+						'text'  => 'span',
+					],
+					'p' => [
+						'title' => esc_html__( 'P', 'essential-addons-for-elementor-lite' ),
+						'text'  => 'P',
+					],
 				],
+				'default' => 'h2',
+				'toggle'  => false,
 			]
 		);
 
@@ -521,7 +645,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'eael_product_gallery_show_secondary_image',
 			[
 				'label'        => __( 'Show Secondary Image on Hover', 'essential-addons-for-elementor-lite' ),
@@ -565,14 +689,44 @@ class Woo_Product_Gallery extends Widget_Base {
 			'label' => esc_html__( 'Load More', 'essential-addons-for-elementor-lite' ),
 		] );
 
-		$this->add_control( 'show_load_more', [
-			'label'        => __( 'Show Load More', 'essential-addons-for-elementor-lite' ),
-			'type'         => Controls_Manager::SWITCHER,
-			'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
-			'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
-			'return_value' => 'true',
-			'default'      => '',
-		] );
+		$this->add_control(
+            'show_load_more',
+            [
+                'label'   => esc_html__( 'Load More', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::CHOOSE,
+                'options' => [
+                    'no' => [
+                        'title' => esc_html__( 'Disable', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-ban',
+                    ],
+                    'true' => [
+                        'title' => esc_html__( 'Button', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-button',
+                    ],
+                    'infinity' => [
+                        'title' => esc_html__( 'Infinity Scroll', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-image-box',
+                    ],
+                ],
+                'default'   => 'no',
+                'toggle'    => false,
+            ]
+        );
+
+        $this->add_control(
+            'load_more_infinityscroll_offset',
+            [
+                'label'       => esc_html__('Scroll Offset (px)', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::NUMBER,
+                'dynamic'     => [ 'active' => false ],
+                'label_block' => false,
+                'default'     => '-200',
+                'description' => esc_html__('Set the position of loading to the viewport before it ends from view', 'essential-addons-for-elementor-lite'),
+                'condition'   => [
+                    'show_load_more' => 'infinity',
+                ],
+            ]
+        );
 
 		$this->add_control( 'show_load_more_text', [
 			'label'       => esc_html__( 'Label Text', 'essential-addons-for-elementor-lite' ),
@@ -1646,21 +1800,50 @@ class Woo_Product_Gallery extends Widget_Base {
 		$this->add_control(
 			'eael_product_quick_view_title_tag',
 			[
-				'label'     => __( 'Quick view Title Tag', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'h1',
-				'separator' => 'after',
-				'options'   => [
-					'h1'   => __( 'H1', 'essential-addons-for-elementor-lite' ),
-					'h2'   => __( 'H2', 'essential-addons-for-elementor-lite' ),
-					'h3'   => __( 'H3', 'essential-addons-for-elementor-lite' ),
-					'h4'   => __( 'H4', 'essential-addons-for-elementor-lite' ),
-					'h5'   => __( 'H5', 'essential-addons-for-elementor-lite' ),
-					'h6'   => __( 'H6', 'essential-addons-for-elementor-lite' ),
-					'span' => __( 'Span', 'essential-addons-for-elementor-lite' ),
-					'p'    => __( 'P', 'essential-addons-for-elementor-lite' ),
-					'div'  => __( 'Div', 'essential-addons-for-elementor-lite' ),
+				'label'       => __( 'Quick view Title Tag', 'essential-addons-for-elementor-lite' ),
+				'label_block' => true,
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => [
+					'h1' => [
+						'title' => esc_html__( 'H1', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h1',
+					],
+					'h2' => [
+						'title' => esc_html__( 'H2', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h2',
+					],
+					'h3' => [
+						'title' => esc_html__( 'H3', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h3',
+					],
+					'h4' => [
+						'title' => esc_html__( 'H4', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h4',
+					],
+					'h5' => [
+						'title' => esc_html__( 'H5', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h5',
+					],
+					'h6' => [
+						'title' => esc_html__( 'H6', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h6',
+					],
+					'div' => [
+						'title' => esc_html__( 'Div', 'essential-addons-for-elementor-lite' ),
+						'text'  => 'div',
+					],
+					'span' => [
+						'title' => esc_html__( 'Span', 'essential-addons-for-elementor-lite' ),
+						'text'  => 'span',
+					],
+					'p' => [
+						'title' => esc_html__( 'P', 'essential-addons-for-elementor-lite' ),
+						'text'  => 'P',
+					],
 				],
+				'default'   => 'h1',
+				'toggle'    => false,
+				'separator' => 'after',
 				'condition' => [
 					'eael_product_gallery_style_preset!' => [
 						'eael-product-preset-4',
@@ -2439,8 +2622,10 @@ class Woo_Product_Gallery extends Widget_Base {
 
 		// normalize for load more fix
 		$settings[ 'layout_mode' ]    = $settings[ 'eael_product_gallery_items_layout' ];
-		$widget_id                    = $this->get_id();
+		$widget_id                    = esc_attr( $this->get_id() );
 		$settings[ 'eael_widget_id' ] = $widget_id;
+		$is_product_archive = is_product_tag() || is_product_category() || is_shop() || is_product_taxonomy();
+
 		if ( $settings[ 'post_type' ] === 'source_dynamic' && is_archive() || !empty( $_REQUEST[ 'post_type' ] ) ) {
 			$settings[ 'posts_per_page' ] = $settings[ 'eael_product_gallery_products_count' ] ?: 3;
 			$settings[ 'offset' ]         = $settings[ 'product_offset' ];
@@ -2468,6 +2653,25 @@ class Woo_Product_Gallery extends Widget_Base {
 
 		$this->add_render_attribute( 'wrap', 'class', $settings[ 'eael_product_gallery_terms_position' ] );
 
+		$no_products_found = 0;
+
+        if ( is_user_logged_in() ) {
+            $product_purchase_type = ! empty( $settings['product_type_logged_users'] ) ? sanitize_text_field( $settings['product_type_logged_users'] ) : '';
+
+            if (  in_array( $product_purchase_type, ['purchased', 'not-purchased'] ) ) {
+                $user_ordered_products = HelperClass::eael_get_all_user_ordered_products();
+                $no_products_found = empty( $user_ordered_products ) && 'purchased' === $product_purchase_type ? 1 : 0;
+ 
+                if ( ! empty( $user_ordered_products ) && 'purchased' === $product_purchase_type ){
+                    $args['post__in'] = $user_ordered_products;
+                }
+
+                if ( ! empty( $user_ordered_products ) && 'not-purchased' === $product_purchase_type ){
+                    $args['post__not_in'] = $user_ordered_products;
+                }
+            }
+        }
+
 		?>
 
         <div <?php $this->print_render_attribute_string( 'wrap' ); ?> >
@@ -2487,10 +2691,33 @@ class Woo_Product_Gallery extends Widget_Base {
 
 				if ( file_exists( $template ) ) {
 					$settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
-					$query                    = new \WP_Query( $args );
 					$show_secondary_image     = isset( $settings['eael_product_gallery_show_secondary_image'] ) && 'yes' === $settings['eael_product_gallery_show_secondary_image'];
 
-					echo '<ul class="products eael-post-appender eael-post-appender-' . $this->get_id() . '" data-layout-mode="' . $settings["eael_product_gallery_items_layout"] . '" data-show-secondary-image="' . intval( $show_secondary_image ) . '" >';
+					if( $settings['post_type'] === 'archive' && is_archive() && $is_product_archive ){
+                        global $wp_query;
+                        $query = $wp_query;
+                        $args  = $wp_query->query_vars;
+                    } else {
+	                    $query = new \WP_Query( $args );
+                    }
+
+					$this->add_render_attribute( 'eael-post-appender', 'class', 'products eael-post-appender eael-post-appender-' . $this->get_id() );
+					$this->add_render_attribute( 'eael-post-appender', 'data-layout-mode', $settings["eael_product_gallery_items_layout"] );
+
+					if ( method_exists( Plugin::$instance->breakpoints, 'get_breakpoints_config' ) && ! empty( $breakpoints = Plugin::$instance->breakpoints->get_breakpoints_config() ) ) {
+						foreach ( $breakpoints as $key => $breakpoint ){
+							if ($breakpoint['is_enabled']) {
+								if( isset( $settings['eael_product_gallery_show_secondary_image_' . $key] ) ){
+									$value = "yes" === $settings['eael_product_gallery_show_secondary_image_' . $key] ? 'yes' : 'no';
+									$this->add_render_attribute( 'eael-post-appender', 'data-ssi-'.$key, $value); // ssi = show secondary image
+								}
+							}
+						}
+					}
+
+					$this->add_render_attribute( 'eael-post-appender', 'data-ssi-desktop', $show_secondary_image ? 'yes' : 'no' );
+
+					echo '<ul '; $this->print_render_attribute_string( 'eael-post-appender' ); echo ' >';
 					if ( $query->have_posts() ) {
 						$found_posts         = $query->found_posts;
 						$max_page            = ceil( $found_posts / absint( $args['posts_per_page'] ) );
@@ -2506,10 +2733,13 @@ class Woo_Product_Gallery extends Widget_Base {
 						echo '<h2 class="eael-product-not-found">' . __( 'No Product Found', 'essential-addons-for-elementor-lite' ) . '</h2>';
 					}
 					echo '</ul>';
+					do_action( 'eael_woo_after_product_loop' );
 
 				} else {
 					echo '<h2 class="eael-product-not-found">' . __( 'No Layout Found', 'essential-addons-for-elementor-lite' ) . '</h2>';
 				}
+				
+				do_action( 'eael_woo_after_product_loop' );
 
 				$this->print_load_more_button( $settings, $args, $dir_name );
 				?>
@@ -2517,7 +2747,7 @@ class Woo_Product_Gallery extends Widget_Base {
         </div>
         <script type="text/javascript">
 			jQuery(document).ready(function ($) {
-				var $scope = jQuery(".elementor-element-<?php echo $this->get_id(); ?>");
+				var $scope = jQuery(".elementor-element-<?php echo esc_js( $this->get_id() ); ?>");
 				var $products = $('.products', $scope);
 				var $layout_mode = $products.data('layout-mode');
 
@@ -2548,11 +2778,11 @@ class Woo_Product_Gallery extends Widget_Base {
 	 * @return array
 	 */
 	public function build_product_query( $settings ) {
-		$get_product_cats = $settings[ 'eael_product_gallery_categories' ];
-		$product_cats     = str_replace( ' ', '', $get_product_cats );
+		$get_product_cats = $settings[ 'eael_product_gallery_categories' ] ?: '';
+		$product_cats     = ! empty( $get_product_cats ) ? str_replace( ' ', '', $get_product_cats ) : '';
 
-		$get_product_tags = $settings[ 'eael_product_gallery_tags' ];
-		$product_tags_items = str_replace( ' ', '', $get_product_tags );
+		$get_product_tags = $settings[ 'eael_product_gallery_tags' ] ?: '';
+		$product_tags_items = ! empty( $get_product_tags ) ? str_replace( ' ', '', $get_product_tags ) : '';
 
 		// Category retrieve
 		$cat_args            = array(
@@ -2678,6 +2908,8 @@ class Woo_Product_Gallery extends Widget_Base {
 			$args[ 'meta_key' ] = '_wc_average_rating';
 			$args[ 'orderby' ]  = 'meta_value_num';
 			$args[ 'order' ]    = 'DESC';
+		} else if( $settings[ 'eael_product_gallery_product_filter' ] == 'manual' ) {
+			$args['post__in'] = ! empty( $settings['eael_product_gallery_products_in'] ) ? $settings['eael_product_gallery_products_in'] : [ 0 ];
 		} else if ( $settings[ 'eael_product_gallery_product_filter' ] == 'related-products' ) {
 		    $current_product_id = get_the_ID();
             $product_categories = wp_get_post_terms( $current_product_id, 'product_cat', array( 'fields' => 'ids' ) );
@@ -2729,11 +2961,11 @@ class Woo_Product_Gallery extends Widget_Base {
 	}
 
 	public function eael_product_terms_render( $settings, $args ) {
-		$get_product_cats = $settings[ 'eael_product_gallery_categories' ];
-		$product_cats     = str_replace( ' ', '', $get_product_cats );
+		$get_product_cats = $settings[ 'eael_product_gallery_categories' ] ?: '';
+		$product_cats     = $get_product_cats ? str_replace( ' ', '', $get_product_cats ) : '';
 
-		$get_product_tags = $settings[ 'eael_product_gallery_tags' ];
-		$product_tags_items = str_replace( ' ', '', $get_product_tags );
+		$get_product_tags = $settings[ 'eael_product_gallery_tags' ] ?: '';
+		$product_tags_items = $get_product_tags ? str_replace( ' ', '', $get_product_tags ) : '';
 
 		if ( $settings[ 'eael_woo_product_gallery_terms_show_all' ] == '' && empty( $get_product_cats ) && empty( $get_product_tags ) ) {
 			return;
@@ -2743,8 +2975,20 @@ class Woo_Product_Gallery extends Widget_Base {
 		$dir_name       = method_exists( $this, 'get_temp_dir_name' ) ? $this->get_temp_dir_name( $this->get_filename_only( $template ) ) : "pro";
 		$show_cat_thumb = isset( $settings[ 'eael_woo_product_gallery_terms_thumb' ] ) && 'yes' === $settings[ 'eael_woo_product_gallery_terms_thumb' ];
 
-		echo '<ul class="eael-cat-tab" data-layout="' . $settings[ "eael_product_gallery_items_layout" ] . '" data-template=' . json_encode( [ 'dir' => $dir_name, 'file_name' =>
-				$this->get_filename_only( $template ), 'name'                                                                                        => $this->process_directory_name() ], 1 ) . '  data-nonce="' . wp_create_nonce( 'eael_product_gallery' ) . '" data-page-id="' . $this->page_id . '" data-widget-id="' . $this->get_id() . '" data-widget="' . $this->get_id() . '" data-class="' . get_class( $this ) . '" data-args="' . http_build_query( $args ) . '" data-page="1">';
+		$this->add_render_attribute( 'eael_product_gallery_product_ul', [
+			'class'          => 'eael-cat-tab',
+			'data-layout'    => $settings["eael_product_gallery_items_layout"],
+			'data-template'  => json_encode( [ 'dir' => $dir_name, 'file_name' => $this->get_filename_only( $template ), 'name' => $this->process_directory_name() ], 1 ),
+			'data-nonce'     => wp_create_nonce( 'eael_product_gallery' ),
+			'data-page-id'   => $this->page_id,
+			'data-widget-id' => $this->get_id(),
+			'data-widget'    => $this->get_id(),
+			'data-class'     => get_class( $this ),
+			'data-args'      => http_build_query( $args ),
+			'data-page'      => 1
+		] );
+
+		echo '<ul ' . $this->get_render_attribute_string( 'eael_product_gallery_product_ul' ) . '>';
 
 		if ( $settings[ 'eael_woo_product_gallery_terms_show_all' ] == 'yes' ) {
 			$all_taxonomy = 'all';
@@ -2757,7 +3001,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			}
 
 			if ( $show_cat_thumb && !empty($settings['eael_all_tab_thumb']['url'])) {
-				$show_all_cat_thumb = '<img src="' . $settings['eael_all_tab_thumb']['url'] . '" />';
+				$show_all_cat_thumb = '<img src="' . esc_url( $settings['eael_all_tab_thumb']['url'] ) . '" />';
 			} else {
 				$show_all_cat_thumb = '';
 			}
@@ -2767,7 +3011,7 @@ class Woo_Product_Gallery extends Widget_Base {
 
 			echo '<li><a href="javascript:;" data-taxonomy="' . esc_attr( $all_taxonomy ) . '" data-page="1" data-tagid="' . esc_attr( $product_tags_items_data ) . '" data-id="' . esc_attr( $product_cats_data ) .
 			     '" class="active post-list-filter-item post-list-cat-'
-			     . $this->get_id() . '">' .$show_all_cat_thumb. '' . __( $settings[ 'eael_woo_product_gallery_terms_all_text' ], 'essential-addons-for-elementor-lite' ) . '</a></li>';
+			     . esc_attr( $this->get_id() ) . '">' .$show_all_cat_thumb. '' . __( $settings[ 'eael_woo_product_gallery_terms_all_text' ], 'essential-addons-for-elementor-lite' ) . '</a></li>';
 		}
 
 		// Category and tag retrieve
@@ -2788,14 +3032,14 @@ class Woo_Product_Gallery extends Widget_Base {
 					$image_url    = wp_get_attachment_url( $thumbnail_id );
 
 					if ( $show_cat_thumb && $image_url ) {
-						$show_cat_thumb_tag = '<img src="' . $image_url . '" />';
+						$show_cat_thumb_tag = '<img src="' . esc_url( $image_url ) . '" />';
 					} else {
 						$show_cat_thumb_tag = '';
 					}
 
-					echo '<li><a href="javascript:;" data-page="1" data-taxonomy="product_cat" data-terms='
+					echo '<li><a href="javascript:;" data-page="1" data-taxonomy="product_cat" data-terms=\''
 						 . json_encode
-						 ( [ $category->slug ] ) . ' data-id="'
+						 ( [ $category->slug ] ) . '\' data-id="'
 						 . $category->term_id . '" class="post-list-filter-item ">' . $show_cat_thumb_tag . '' . $category->name . '</a></li>';
 				}
 			}
@@ -2816,14 +3060,14 @@ class Woo_Product_Gallery extends Widget_Base {
 					$image_url    = wp_get_attachment_url( $thumbnail_id );
 
 					if ( $show_cat_thumb && $image_url ) {
-						$show_cat_thumb_tag = '<img src="' . $image_url . '" />';
+						$show_cat_thumb_tag = '<img src="' . esc_url( $image_url ) . '" />';
 					} else {
 						$show_cat_thumb_tag = '';
 					}
 
-					echo '<li><a href="javascript:;" data-page="1" data-taxonomy="product_tag" data-terms='
+					echo '<li><a href="javascript:;" data-page="1" data-taxonomy="product_tag" data-terms=\''
 						 . json_encode
-						 ( [ $product_tag->slug ] ) . ' data-id="'
+						 ( [ $product_tag->slug ] ) . '\' data-id="'
 						 . $product_tag->term_id . '" class="post-list-filter-item ">' . $show_cat_thumb_tag . '' . $product_tag->name . '</a></li>';
 				}
 			}

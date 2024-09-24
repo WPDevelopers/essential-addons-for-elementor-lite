@@ -99,6 +99,8 @@
       -ms-flex-direction: row;
           flex-direction: row;
   white-space: nowrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .eael-grid-post .eael-entry-footer .eael-entry-meta {
@@ -359,7 +361,7 @@
     margin-right: 0 !important;
   }
   .elementor-element.elementor-grid-eael-col-2 .eael-grid-post:nth-of-type(2n + 1) {
-    clear: left;
+    clear: both;
   }
   .elementor-element.elementor-grid-eael-col-3 {
     position: relative;
@@ -372,7 +374,7 @@
     margin-right: 0 !important;
   }
   .elementor-element.elementor-grid-eael-col-3 .eael-grid-post:nth-of-type(3n + 1) {
-    clear: left;
+    clear: both;
   }
   .elementor-element.elementor-grid-eael-col-4 {
     position: relative;
@@ -385,7 +387,7 @@
     margin-right: 0 !important;
   }
   .elementor-element.elementor-grid-eael-col-4 .eael-grid-post:nth-of-type(4n + 1) {
-    clear: left;
+    clear: both;
   }
   .elementor-element.elementor-grid-eael-col-5 {
     position: relative;
@@ -398,7 +400,7 @@
     margin-right: 0 !important;
   }
   .elementor-element.elementor-grid-eael-col-5 .eael-grid-post:nth-of-type(5n + 1) {
-    clear: left;
+    clear: both;
   }
   .elementor-element.elementor-grid-eael-col-6 {
     position: relative;
@@ -411,7 +413,7 @@
     margin-right: 0 !important;
   }
   .elementor-element.elementor-grid-eael-col-6 .eael-grid-post:nth-of-type(6n + 1) {
-    clear: left;
+    clear: both;
   }
 }
 
@@ -435,7 +437,7 @@
     margin-right: 0 !important;
   }
   .elementor-element.elementor-grid-tablet-eael-col-2 .eael-grid-post:nth-of-type(2n + 1) {
-    clear: left;
+    clear: both;
   }
   .elementor-element.elementor-grid-tablet-eael-col-3 {
     position: relative;
@@ -448,7 +450,7 @@
     margin-right: 0 !important;
   }
   .elementor-element.elementor-grid-tablet-eael-col-3 .eael-grid-post:nth-of-type(3n + 1) {
-    clear: left;
+    clear: both;
   }
   .elementor-element.elementor-grid-tablet-eael-col-4 {
     position: relative;
@@ -461,7 +463,7 @@
     margin-right: 0 !important;
   }
   .elementor-element.elementor-grid-tablet-eael-col-4 .eael-grid-post:nth-of-type(4n + 1) {
-    clear: left;
+    clear: both;
   }
   .elementor-element.elementor-grid-tablet-eael-col-5 {
     position: relative;
@@ -474,7 +476,7 @@
     margin-right: 0 !important;
   }
   .elementor-element.elementor-grid-tablet-eael-col-5 .eael-grid-post:nth-of-type(5n + 1) {
-    clear: left;
+    clear: both;
   }
   .elementor-element.elementor-grid-tablet-eael-col-6 {
     position: relative;
@@ -487,7 +489,7 @@
     margin-right: 0 !important;
   }
   .elementor-element.elementor-grid-tablet-eael-col-6 .eael-grid-post:nth-of-type(6n + 1) {
-    clear: left;
+    clear: both;
   }
 }
 
@@ -510,7 +512,7 @@
     margin-right: 0 !important;
   }
   .elementor-element.elementor-grid-mobile-eael-col-2 .eael-grid-post:nth-of-type(2n + 1) {
-    clear: left;
+    clear: both;
   }
   .elementor-element.elementor-grid-mobile-eael-col-3 {
     position: relative;
@@ -523,7 +525,7 @@
     margin-right: 0 !important;
   }
   .elementor-element.elementor-grid-mobile-eael-col-3 .eael-grid-post:nth-of-type(3n + 1) {
-    clear: left;
+    clear: both;
   }
   .elementor-element.elementor-grid-mobile-eael-col-4 {
     position: relative;
@@ -536,7 +538,7 @@
     margin-right: 0 !important;
   }
   .elementor-element.elementor-grid-mobile-eael-col-4 .eael-grid-post:nth-of-type(4n + 1) {
-    clear: left;
+    clear: both;
   }
   .elementor-element.elementor-grid-mobile-eael-col-5 {
     position: relative;
@@ -549,7 +551,7 @@
     margin-right: 0 !important;
   }
   .elementor-element.elementor-grid-mobile-eael-col-5 .eael-grid-post:nth-of-type(5n + 1) {
-    clear: left;
+    clear: both;
   }
   .elementor-element.elementor-grid-mobile-eael-col-6 {
     position: relative;
@@ -562,7 +564,7 @@
     margin-right: 0 !important;
   }
   .elementor-element.elementor-grid-mobile-eael-col-6 .eael-grid-post:nth-of-type(6n + 1) {
-    clear: left;
+    clear: both;
   }
 }
 
@@ -702,6 +704,42 @@
   color: #929292;
 }
 
-.rtl .eael-grid-post .eael-entry-footer {
-  direction: ltr;
+.rtl .eael-post-grid-container .eael-post-grid .eael-grid-post {
+  float: right;
+}
+
+.rtl .eael-post-grid .eael-entry-footer .eael-entry-meta {
+  text-align: right;
+}
+
+.rtl .eael-post-grid .eael-entry-footer .eael-author-avatar {
+  padding-right: 0;
+  padding-left: 8px;
+}
+
+.rtl .eael-entry-header-after .eael-author-avatar {
+  padding-right: 0;
+  padding-left: 8px;
+}
+
+.rtl .eael-post-grid-style-two .eael-entry-meta .eael-meta-posted-on {
+  margin-right: 0;
+  margin-left: 15px;
+}
+
+.rtl .eael-post-grid-style-two .eael-entry-meta .eael-meta-posted-on i {
+  margin-right: 0;
+  margin-left: 7px;
+}
+
+.rtl .eael-post-grid .eael-entry-wrapper > .eael-entry-meta span.eael-posted-by,
+.rtl .eael-post-grid .eael-entry-wrapper > .eael-entry-header-after .eael-entry-meta span.eael-posted-by {
+  padding-right: 0;
+  padding-left: 8px;
+}
+
+.rtl .eael-post-grid .eael-entry-wrapper > .eael-entry-meta span.eael-posted-on::before,
+.rtl .eael-post-grid .eael-entry-wrapper > .eael-entry-header-after .eael-entry-meta span.eael-posted-on::before {
+  padding-right: 0;
+  padding-left: 7px;
 }

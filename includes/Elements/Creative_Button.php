@@ -57,6 +57,10 @@ class Creative_Button extends Widget_Base
         ];
     }
 
+    protected function is_dynamic_content():bool {
+        return false;
+    }
+
     public function get_custom_help_url()
     {
         return 'https://essential-addons.com/elementor/docs/creative-buttons/';
@@ -578,7 +582,7 @@ class Creative_Button extends Widget_Base
         }
 
         if ($settings['creative_button_link_url']['is_external']) {
-            $this->add_render_attribute('eael_creative_button', 'target', '_blank');
+            $this->add_render_attribute('eael_creative_button', 'target');
         }
 
         if ($settings['creative_button_link_url']['nofollow']) {

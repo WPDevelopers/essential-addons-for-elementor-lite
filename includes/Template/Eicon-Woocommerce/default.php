@@ -87,13 +87,19 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
             </div>';
 
 			if ( $should_print_rating ) {
-				echo wp_kses_post( wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) );
+				$avg_rating = $product->get_average_rating();
+				if( $avg_rating > 0 ){
+					echo wc_get_rating_html($product->get_average_rating(), $product->get_rating_count());
+				} else {
+					echo Helper::eael_rating_markup( $product->get_average_rating(), $product->get_rating_count() );
+				}
 			}
+
 			if ( $is_show_badge ){
 				if ( ! $product->is_in_stock() ) {
-					printf( '<span class="outofstock-badge ' . $sale_badge_preset . ' ' . $sale_badge_align . '">%s</span>', $stock_out_badge_text );
+					printf( '<span class="outofstock-badge ' . esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) . '">%s</span>', $stock_out_badge_text );
 				} elseif ( $product->is_on_sale() ) {
-					printf( '<span class="onsale ' . $sale_badge_preset . ' ' . $sale_badge_align . '">%s</span>', $sale_badge_text );
+					printf( '<span class="onsale ' . esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) . '">%s</span>', $sale_badge_text );
 				}
 			}
 
@@ -170,14 +176,19 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
         </div>';
 
 		if ( $should_print_rating ) {
-			echo wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() );
+			$avg_rating = $product->get_average_rating();
+			if( $avg_rating > 0 ){
+				echo wc_get_rating_html($product->get_average_rating(), $product->get_rating_count());
+			} else {
+				echo Helper::eael_rating_markup( $product->get_average_rating(), $product->get_rating_count() );
+			}
 		}
 
 		if ( $is_show_badge ) {
 			if ( ! $product->is_in_stock() ) {
-				printf( '<span class="outofstock-badge ' . $sale_badge_preset . ' ' . $sale_badge_align . '">%s</span>', $stock_out_badge_text );
+				printf( '<span class="outofstock-badge ' . esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) . '">%s</span>', $stock_out_badge_text );
 			} elseif ( $product->is_on_sale() ) {
-				printf( '<span class="onsale ' . $sale_badge_preset . ' ' . $sale_badge_align . '">%s</span>', $sale_badge_text );
+				printf( '<span class="onsale ' . esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) . '">%s</span>', $sale_badge_text );
 			}
 		}
 
@@ -207,7 +218,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                     <div class="image-wrap">
 						<?php
 						if ( $is_show_badge ) {
-							echo( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock ' . $sale_badge_preset . ' ' . $sale_badge_align . '">' . $stock_out_badge_text . '</span>' : ( $product->is_on_sale() ? '<span class="eael-onsale ' . $sale_badge_preset . ' ' . $sale_badge_align . '">' . $sale_badge_text . '</span>' : '' ) );
+							echo( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock ' . esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) . '">' . $stock_out_badge_text . '</span>' : ( $product->is_on_sale() ? '<span class="eael-onsale ' . esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) . '">' . $sale_badge_text . '</span>' : '' ) );
 						}
 
 						if( $should_print_image_clickable ) {
@@ -319,9 +330,13 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 						echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
 					}
 
-					if ($should_print_rating) {
-						echo wc_get_rating_html
-						($product->get_average_rating(), $product->get_rating_count());
+					if ( $should_print_rating ) {
+						$avg_rating = $product->get_average_rating();
+						if( $avg_rating > 0 ){
+							echo wc_get_rating_html($product->get_average_rating(), $product->get_rating_count());
+						} else {
+							echo Helper::eael_rating_markup( $product->get_average_rating(), $product->get_rating_count() );
+						}
 					}
 					?>
                     <div class="eael-product-title">
@@ -359,7 +374,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 						}
 
 						if ( $is_show_badge ) {
-							echo( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock ' . $sale_badge_preset . ' ' . $sale_badge_align . '">' . $stock_out_badge_text . '</span>' : ( $product->is_on_sale() ? '<span class="eael-onsale ' . $sale_badge_preset . ' ' . $sale_badge_align . '">' . $sale_badge_text . '</span>' : '' ) );
+							echo( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock ' . esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) . '">' . $stock_out_badge_text . '</span>' : ( $product->is_on_sale() ? '<span class="eael-onsale ' . esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) . '">' . $sale_badge_text . '</span>' : '' ) );
 						}
 
 						echo $product->get_image($settings['eael_product_grid_image_size_size'], ['loading' => 'eager']);
@@ -432,7 +447,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 							echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
 						}
 						if ( $is_show_badge ) {
-							echo( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock ' . $sale_badge_preset . ' ' . $sale_badge_align . '">' . $stock_out_badge_text . '</span>' : ( $product->is_on_sale() ? '<span class="eael-onsale ' . $sale_badge_preset . ' ' . $sale_badge_align . '">' . $sale_badge_text . '</span>' : '' ) );
+							echo( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock ' . esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) . '">' . $stock_out_badge_text . '</span>' : ( $product->is_on_sale() ? '<span class="eael-onsale ' . esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) . '">' . $sale_badge_text . '</span>' : '' ) );
 						}
 						echo wp_kses_post( $product->get_image( $settings['eael_product_grid_image_size_size'], [ 'loading' => 'eager' ] ) );
 
@@ -464,9 +479,13 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 							echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
 						}
 
-						if ($should_print_rating) {
-							echo wc_get_rating_html
-							($product->get_average_rating(), $product->get_rating_count());
+						if ( $should_print_rating ) {
+							$avg_rating = $product->get_average_rating();
+							if( $avg_rating > 0 ){
+								echo wc_get_rating_html($product->get_average_rating(), $product->get_rating_count());
+							} else {
+								echo Helper::eael_rating_markup( $product->get_average_rating(), $product->get_rating_count() );
+							}
 						}
 
 					} elseif ($list_style_preset == 'eael-product-list-preset-3') {
@@ -474,9 +493,13 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 						if ($should_print_price) {
 							echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
 						}
-						if ($should_print_rating) {
-							echo wc_get_rating_html
-							($product->get_average_rating(), $product->get_rating_count());
+						if ( $should_print_rating ) {
+							$avg_rating = $product->get_average_rating();
+							if( $avg_rating > 0 ){
+								echo wc_get_rating_html($product->get_average_rating(), $product->get_rating_count());
+							} else {
+								echo Helper::eael_rating_markup( $product->get_average_rating(), $product->get_rating_count() );
+							}
 						}
 						echo '</div>
                             <div class="title-wrap">
@@ -494,9 +517,13 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 						echo '</div>';
 					} elseif ($list_style_preset == 'eael-product-list-preset-4') {
 
-						if ($should_print_rating) {
-							echo wc_get_rating_html
-							($product->get_average_rating(), $product->get_rating_count());
+						if ( $should_print_rating ) {
+							$avg_rating = $product->get_average_rating();
+							if( $avg_rating > 0 ){
+								echo wc_get_rating_html($product->get_average_rating(), $product->get_rating_count());
+							} else {
+								echo Helper::eael_rating_markup( $product->get_average_rating(), $product->get_rating_count() );
+							}
 						}
 
 						echo '<div class="eael-product-title">
@@ -525,9 +552,13 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 							echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
 						}
 
-						if ($should_print_rating) {
-							echo wc_get_rating_html
-							($product->get_average_rating(), $product->get_rating_count());
+						if ( $should_print_rating ) {
+							$avg_rating = $product->get_average_rating();
+							if( $avg_rating > 0 ){
+								echo wc_get_rating_html($product->get_average_rating(), $product->get_rating_count());
+							} else {
+								echo Helper::eael_rating_markup( $product->get_average_rating(), $product->get_rating_count() );
+							}
 						}
 
 						if ( $should_print_excerpt ) {
@@ -584,13 +615,17 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 		remove_action('woocommerce_after_shop_loop_item_title','woocommerce_template_loop_rating',5);
 	}
 
-	add_action('woocommerce_before_shop_loop_item_title',function(){
+	add_action('woocommerce_before_shop_loop_item_title',function() use ( $stock_out_badge_text ){
 		global $product;
 		if ( ! $product->is_in_stock() ) {
 			remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10 );
-			echo '<span class="outofstock-badge">'.__('Stock ', 'essential-addons-for-elementor-lite'). '<br />' . __('Out', 'essential-addons-for-elementor-lite').'</span>';
+			echo '<span class="outofstock-badge">'. $stock_out_badge_text .'</span>';
 		}
 	},9);
+
+	add_filter('woocommerce_sale_flash', function($text, $post, $product) use( $sale_badge_text ) {
+		return '<span class="onsale" data-notification="default">'. $sale_badge_text .'</span>';
+	}, 10, 3);
 
 	if ( $should_print_compare_btn ) {
 		add_action( 'woocommerce_after_shop_loop_item', [

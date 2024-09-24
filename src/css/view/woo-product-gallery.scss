@@ -434,6 +434,7 @@
             text-transform: capitalize;
             border: none;
             letter-spacing: normal;
+            display: flex;
 
             &:hover,
             &:visited {
@@ -1247,19 +1248,7 @@
 
 }
 
-.theme-oceanwp {
-    //&.elementor-editor-active {
-    //    .eael-product-popup.woocommerce div.product form.cart div.quantity .qty {
-    //        max-width: 150px;
-    //    }
-    //}
-    //
-    //.eael-product-popup.woocommerce div.product form.cart div.quantity .qty:focus {
-    //    border: 1px solid;
-    //}
-}
-
-@-webkit-keyframes ploaderSpin {
+@-webkit-keyframes eaelPloaderSpin {
     0% {
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg);
@@ -1269,7 +1258,7 @@
         transform: rotate(360deg);
     }
 }
-@keyframes ploaderSpin {
+@keyframes eaelPloaderSpin {
     0% {
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg);

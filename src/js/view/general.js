@@ -1,7 +1,7 @@
 import { createHooks } from "@wordpress/hooks";
 
 window.isEditMode = false;
-window.ea = {
+window.eael = window.ea = {
 	hooks: createHooks(),
 	isEditMode: false,
 	elementStatusCheck:function(name){
@@ -11,28 +11,21 @@ window.ea = {
 			window.eaElementList = {...window.eaElementList, [name]: true}
 		}
 		return false;
+	},
+	debounce: function(func, delay) {
+		var timeout;
+		return function() {
+			var context = this;
+			var args = arguments;
+			clearTimeout(timeout);
+			timeout = setTimeout(function() {
+				func.apply(context, args);
+			}, delay);
+		};
 	}
 };
 
-function EAELsetScreenSize() {
-	jQuery.ajax({
-		url: localize.ajaxurl,
-		type: "post",
-		data: {
-			action: "eael_set_screen_width",
-			screen_width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
-		}
-	});
-}
-
-EAELsetScreenSize();
-let debunce_time = false;
-window.addEventListener('resize', function () {
-	clearTimeout(debunce_time);
-	debunce_time = setTimeout(EAELsetScreenSize, 250);
-});
-
-ea.hooks.addAction("widgets.reinit", "ea", ($content) => {
+eael.hooks.addAction("widgets.reinit", "ea", ($content) => {
 	let filterGallery = jQuery(".eael-filter-gallery-container", $content);
 	let postGridGallery = jQuery(
 		".eael-post-grid:not(.eael-post-carousel)",
@@ -72,46 +65,59 @@ ea.hooks.addAction("widgets.reinit", "ea", ($content) => {
 	}
 
 	if (eventCalendar.length) {
-		ea.hooks.doAction("eventCalendar.reinit");
+		eael.hooks.doAction("eventCalendar.reinit");
 	}
 
 	if (testimonialSlider.length) {
-		ea.hooks.doAction("testimonialSlider.reinit");
+		eael.hooks.doAction("testimonialSlider.reinit");
 	}
 
 	if (teamMemberCarousel.length) {
-		ea.hooks.doAction("teamMemberCarousel.reinit");
+		eael.hooks.doAction("teamMemberCarousel.reinit");
 	}
 
 	if (postCarousel.length) {
-		ea.hooks.doAction("postCarousel.reinit");
+		eael.hooks.doAction("postCarousel.reinit");
 	}
 
 	if (logoCarousel.length) {
-		ea.hooks.doAction("logoCarousel.reinit");
+		eael.hooks.doAction("logoCarousel.reinit");
 	}
 
 	if (twitterCarousel.length) {
-		ea.hooks.doAction("twitterCarousel.reinit");
+		eael.hooks.doAction("twitterCarousel.reinit");
 	}
 });
 
+let ea_swiper_slider_init_inside_template = (content) => {
+	window.dispatchEvent(new Event('resize'));
+
+	content = typeof content === 'object' ? content : jQuery(content);
+	content.find('.swiper-wrapper').each(function () {
+		let transform = jQuery(this).css('transform');
+		jQuery(this).css('transform', transform);
+	});
+}
+
+eael.hooks.addAction("ea-advanced-tabs-triggered", "ea", ea_swiper_slider_init_inside_template);
+eael.hooks.addAction("ea-advanced-accordion-triggered", "ea", ea_swiper_slider_init_inside_template);
+
 jQuery(window).on("elementor/frontend/init", function () {
 	window.isEditMode = elementorFrontend.isEditMode();
-	window.ea.isEditMode = elementorFrontend.isEditMode();
+	window.eael.isEditMode = elementorFrontend.isEditMode();
 
 	// hooks
-	ea.hooks.doAction("init");
+	eael.hooks.doAction("init");
 
 	// init edit mode hook
-	if (ea.isEditMode) {
-		ea.hooks.doAction("editMode.init");
+	if (eael.isEditMode) {
+		eael.hooks.doAction("editMode.init");
 	}
 });
 
 (function ($) {
-	ea.getToken = () => {
-		if (localize.nonce && !ea.noncegenerated) {
+	eael.getToken = () => {
+		if (localize.nonce && !eael.noncegenerated) {
 			$.ajax({
 				url: localize.ajaxurl,
 				type: "post",
@@ -121,12 +127,45 @@ jQuery(window).on("elementor/frontend/init", function () {
 				success: function (response) {
 					if (response.success) {
 						localize.nonce = response.data.nonce
-						ea.noncegenerated = true;
+						eael.noncegenerated = true;
 					}
 				}
 			});
 		}
 	}
+	eael.sanitizeURL = function (url) {
+		if (url.startsWith('/') || url.startsWith('#')) {
+			return url;
+		}
+
+		try {
+			const urlObject = new URL(url);
+
+			// Check if the protocol is valid (allowing only 'http' and 'https')
+			if (!['http:', 'https:', 'ftp:', 'ftps:', 'mailto:', 'news:', 'irc:', 'irc6:', 'ircs:', 'gopher:', 'nntp:', 'feed:', 'telnet:', 'mms:', 'rtsp:', 'sms:', 'svn:', 'tel:', 'fax:', 'xmpp:', 'webcal:', 'urn:'].includes(urlObject.protocol)) {
+				throw new Error('Invalid protocol');
+			}
+
+			// If all checks pass, return the sanitized URL
+			return urlObject.toString();
+		} catch (error) {
+			console.error('Error sanitizing URL:', error.message);
+			return '#';
+		}
+	}
+
+	//Add hashchange code form advanced-accordion
+	let  isTriggerOnHashchange = true;
+	window.addEventListener( 'hashchange', function () {
+		if( !isTriggerOnHashchange ) {
+			return;
+		}
+		let hashTag = window.location.hash.substr(1);
+		hashTag = hashTag === 'safari' ? 'eael-safari' : hashTag;
+		if ( hashTag !== 'undefined' && hashTag ) {
+			jQuery( '#' + hashTag ).trigger( 'click' );
+		}
+	});
 
 	$('a').on('click', function (e) {
 		var hashURL = $(this).attr('href'),
@@ -140,22 +179,43 @@ jQuery(window).on("elementor/frontend/init", function () {
 			isStartWithHash = hashURL.startsWith('#');
 		}
 
+		if( isStartWithHash ) {
+			isTriggerOnHashchange = false;
+			setTimeout( () => {
+				isTriggerOnHashchange = true;
+			}, 100 );
+		}
+
 		// we will try and catch the error but not show anything just do it if possible
 		try {
-			if (isStartWithHash && ($(hashURL).hasClass('eael-tab-item-trigger') || $(hashURL).hasClass('eael-accordion-header'))) {
-				$(hashURL).trigger('click');
-
-				if (typeof hashURL !== 'undefined' && hashURL) {
-					let idOffset = $(hashURL).closest('.eael-advance-tabs').data('custom-id-offset');
-					idOffset = idOffset ? parseFloat(idOffset) : 0;
-					$('html, body').animate({
-						scrollTop: $(hashURL).offset().top - idOffset,
-					}, 300);
+			if( hashURL.startsWith( '#!' ) ){
+				var replace_with_hash = hashURL.replace( '#!', '#' );
+				$( replace_with_hash ).trigger( 'click' );
+			} else {
+				if (isStartWithHash && ($(hashURL).hasClass('eael-tab-item-trigger') || $(hashURL).hasClass('eael-accordion-header'))) {
+					$(hashURL).trigger('click');
+	
+					if (typeof hashURL !== 'undefined' && hashURL) {
+						let tabs = $(hashURL).closest('.eael-advance-tabs');
+						if( tabs.length > 0 ){
+							let idOffset = tabs.data('custom-id-offset');
+							idOffset = idOffset ? parseFloat(idOffset) : 0;
+							$('html, body').animate({
+								scrollTop: $(hashURL).offset().top - idOffset,
+							}, 300);
+						}
+					}
 				}
 			}
 		} catch (err) {
 			// nothing to do
 		}
+	});
+
+	$(document).on('click', '.e-n-tab-title', function () {
+		setTimeout(function () {
+			window.dispatchEvent(new Event('resize'));
+		}, 100);
 	});
 })(jQuery);
 

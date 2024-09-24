@@ -15,14 +15,14 @@ class advancedDataTableEdit {
 		this.dragging = false;
 
 		// register hooks
-		ea.hooks.addFilter("advancedDataTable.getClassProps", "ea", this.getClassProps.bind(this));
-		ea.hooks.addFilter("advancedDataTable.setClassProps", "ea", this.setClassProps.bind(this));
-		ea.hooks.addFilter("advancedDataTable.parseHTML", "ea", this.parseHTML);
-		ea.hooks.addAction("advancedDataTable.initEditor", "ea", this.initEditor.bind(this));
-		ea.hooks.addAction("advancedDataTable.updateFromView", "ea", this.updateFromView.bind(this));
-		ea.hooks.addAction("advancedDataTable.initInlineEdit", "ea", this.initInlineEdit.bind(this));
-		ea.hooks.addAction("advancedDataTable.initPanelAction", "ea", this.initPanelAction.bind(this));
-		ea.hooks.addAction("advancedDataTable.triggerTextChange", "ea", this.triggerTextChange.bind(this));
+		eael.hooks.addFilter("advancedDataTable.getClassProps", "ea", this.getClassProps.bind(this));
+		eael.hooks.addFilter("advancedDataTable.setClassProps", "ea", this.setClassProps.bind(this));
+		eael.hooks.addFilter("advancedDataTable.parseHTML", "ea", this.parseHTML);
+		eael.hooks.addAction("advancedDataTable.initEditor", "ea", this.initEditor.bind(this));
+		eael.hooks.addAction("advancedDataTable.updateFromView", "ea", this.updateFromView.bind(this));
+		eael.hooks.addAction("advancedDataTable.initInlineEdit", "ea", this.initInlineEdit.bind(this));
+		eael.hooks.addAction("advancedDataTable.initPanelAction", "ea", this.initPanelAction.bind(this));
+		eael.hooks.addAction("advancedDataTable.triggerTextChange", "ea", this.triggerTextChange.bind(this));
 
 		elementor.hooks.addFilter("elements/widget/contextMenuGroups", this.initContextMenu);
 		elementor.hooks.addAction("panel/open_editor/widget/eael-advanced-data-table", this.initPanel.bind(this));
@@ -258,11 +258,14 @@ class advancedDataTableEdit {
 
 					if (this.table.classList.contains("ea-advanced-data-table-static")) {
 						for (let j = 0; j < cols.length; j++) {
-							row.push(JSON.stringify(decodeURI(cols[j].dataset.quill)));
+							let encodedText = decodeURI( cols[j].dataset.quill );
+							let modifiedString = encodedText.replace(/"/g, '""');
+							modifiedString = `"${modifiedString}"`;
+							row.push( modifiedString );
 						}
 					} else {
 						for (let j = 0; j < cols.length; j++) {
-							row.push(JSON.stringify(cols[j].innerHTML.replace(/(\r\n|\n|\r)/gm, " ").trim()));
+							row.push(JSON.stringify(cols[j].innerHTML.replace( /,"""([^"]+)""",/g, ',"$1",' ).trim()));
 						}
 					}
 
@@ -289,37 +292,51 @@ class advancedDataTableEdit {
 				let header = "";
 				let body = "";
 
-				if (textarea.value.length > 0) {
+				if ( textarea.value.length > 0 ) {
 					body += "<tbody>";
-					csletr.forEach((row, index) => {
-						if (row.length > 0) {
-							cols = row.match(/("(?:[^"\\]|\\.)*"|[^","]+)/gm);
-
-							if (cols.length > 0) {
-								if (enableHeader && index == 0) {
-									header += "<thead><tr>";
-									cols.forEach((col) => {
-										if (col.match(/(^"")|(^")|("$)|(""$)/g)) {
-											header += `<th>${JSON.parse(col)}</th>`;
-										} else {
-											header += `<th>${col}</th>`;
-										}
-									});
-									header += "</tr></thead>";
+					csletr.forEach( (row, index) => {
+						const result = [];
+						let field = '';
+						let inQuotes = false;
+						let i = 0;
+						while ( i < row.length ) {
+							const char = row[i];
+							if ( char === '"' ) {
+								if ( inQuotes && row[i + 1] === '"' ) {
+									//Handle escaped double quote
+									field += '"';
+									i++;
 								} else {
-									body += "<tr>";
-									cols.forEach((col) => {
-										if (col.match(/(^"")|(^")|("$)|(""$)/g)) {
-											body += `<td>${JSON.parse(col)}</td>`;
-										} else {
-											body += `<td>${col}</td>`;
-										}
-									});
-									body += "</tr>";
+									inQuotes = !inQuotes; //Toggle inQuotes
 								}
+							} else if ( char === ',' && !inQuotes ) {
+								//End of field
+								result.push(field);
+								field = '';
+							} else {
+								field += char; //Regular character
+							}
+							i++;
+						}
+						result.push(field);
+
+						//Generate HTML table
+						if ( result.length > 0 ) {
+							if ( enableHeader && index == 0 ) {
+								header += "<thead><tr>";
+								result.forEach( (col) => {
+									header += `<th>${col}</th>`;
+								} );
+								header += "</tr></thead>";
+							} else {
+								body += "<tr>";
+								result.forEach( (col) => {
+									body += `<td>${col}</td>`;
+								} );
+								body += "</tr>";
 							}
 						}
-					});
+					} );
 					body += "</tbody>";
 
 					if (header.length > 0 || body.length > 0) {
@@ -338,7 +355,7 @@ class advancedDataTableEdit {
 							if (this.view.el.querySelector(".ea-advanced-data-table").innerHTML == header + body) {
 								clearInterval(interval);
 
-								ea.hooks.doAction("advancedDataTable.initInlineEdit");
+								eael.hooks.doAction("advancedDataTable.initInlineEdit");
 							}
 						}, 500);
 					}
@@ -347,7 +364,7 @@ class advancedDataTableEdit {
 				textarea.value = "";
 			}
 
-			ea.hooks.doAction("advancedDataTable.panelAction", this.panel, this.model, this.view, event);
+			eael.hooks.doAction("advancedDataTable.panelAction", this.panel, this.model, this.view, event);
 		};
 	}
 
@@ -359,13 +376,13 @@ class advancedDataTableEdit {
 		const elClass = `.ea-advanced-data-table-${this.view.container.args.id}`;
 		const eaTable  = this.view.el.querySelector( ".ea-advanced-data-table" + elClass )
 		// init inline edit
-		ea.hooks.doAction("advancedDataTable.initInlineEdit");
+		eael.hooks.doAction("advancedDataTable.initInlineEdit");
 
 		// init panel action
-		ea.hooks.doAction("advancedDataTable.initPanelAction");
+		eael.hooks.doAction("advancedDataTable.initPanelAction");
 
 		// after panel init hook
-		ea.hooks.doAction("advancedDataTable.afterInitPanel", panel, model, view);
+		eael.hooks.doAction("advancedDataTable.afterInitPanel", panel, model, view);
 		
 		model.once("editor:close", () => {
 
@@ -375,15 +392,6 @@ class advancedDataTableEdit {
 			// parse table html
 			let origTable = this.parseHTML(eaTable.cloneNode(true));
 			this.tableInnerHTML = origTable.innerHTML;
-			
-			// update table
-			this.updateFromView(
-				this.view,
-				{
-					ea_adv_data_table_static_html: this.tableInnerHTML,
-				},
-				true
-			);
 		});
 	}
 
@@ -400,7 +408,7 @@ class advancedDataTableEdit {
 						name: "add_row_above",
 						title: "Add Row Above",
 						callback() {
-							const { view, table, activeCell } = ea.hooks.applyFilters("advancedDataTable.getClassProps");
+							const { view, table, activeCell } = eael.hooks.applyFilters("advancedDataTable.getClassProps");
 							// remove blank tr if any
 							jQuery(table).find('tr:empty').each(function() {
 								if(jQuery(this).find('td').length == 0) {
@@ -416,22 +424,22 @@ class advancedDataTableEdit {
 									let cell = row.insertCell(i);
 
 									// init inline editor
-									ea.hooks.doAction("advancedDataTable.initEditor", cell);
+									eael.hooks.doAction("advancedDataTable.initEditor", cell);
 								}
 
 								// remove active cell
-								ea.hooks.applyFilters("advancedDataTable.setClassProps", { activeCell: null });
+								eael.hooks.applyFilters("advancedDataTable.setClassProps", { activeCell: null });
 
 								// parse table html
-								let origTable = ea.hooks.applyFilters("advancedDataTable.parseHTML", table.cloneNode(true));
+								let origTable = eael.hooks.applyFilters("advancedDataTable.parseHTML", table.cloneNode(true));
 
 								// update model
-								ea.hooks.doAction("advancedDataTable.updateFromView", view, {
+								eael.hooks.doAction("advancedDataTable.updateFromView", view, {
 									ea_adv_data_table_static_html: origTable.innerHTML,
 								});
 
 								// trigger text-change event
-								ea.hooks.doAction("advancedDataTable.triggerTextChange", table);
+								eael.hooks.doAction("advancedDataTable.triggerTextChange", table);
 							}
 						},
 					},
@@ -439,7 +447,7 @@ class advancedDataTableEdit {
 						name: "add_row_below",
 						title: "Add Row Below",
 						callback() {
-							const { view, table, activeCell } = ea.hooks.applyFilters("advancedDataTable.getClassProps");
+							const { view, table, activeCell } = eael.hooks.applyFilters("advancedDataTable.getClassProps");
 
 							if (activeCell !== null) {
 								let index = activeCell.parentNode.rowIndex + 1;
@@ -449,22 +457,22 @@ class advancedDataTableEdit {
 									let cell = row.insertCell(i);
 
 									// init inline editor
-									ea.hooks.doAction("advancedDataTable.initEditor", cell);
+									eael.hooks.doAction("advancedDataTable.initEditor", cell);
 								}
 
 								// remove active cell
-								ea.hooks.applyFilters("advancedDataTable.setClassProps", { activeCell: null });
+								eael.hooks.applyFilters("advancedDataTable.setClassProps", { activeCell: null });
 
 								// parse table html
-								let origTable = ea.hooks.applyFilters("advancedDataTable.parseHTML", table.cloneNode(true));
+								let origTable = eael.hooks.applyFilters("advancedDataTable.parseHTML", table.cloneNode(true));
 
 								// update model
-								ea.hooks.doAction("advancedDataTable.updateFromView", view, {
+								eael.hooks.doAction("advancedDataTable.updateFromView", view, {
 									ea_adv_data_table_static_html: origTable.innerHTML,
 								});
 
 								// trigger text-change event
-								ea.hooks.doAction("advancedDataTable.triggerTextChange", table);
+								eael.hooks.doAction("advancedDataTable.triggerTextChange", table);
 							}
 						},
 					},
@@ -472,7 +480,7 @@ class advancedDataTableEdit {
 						name: "add_column_left",
 						title: "Add Column Left",
 						callback() {
-							const { view, table, activeCell } = ea.hooks.applyFilters("advancedDataTable.getClassProps");
+							const { view, table, activeCell } = eael.hooks.applyFilters("advancedDataTable.getClassProps");
 
 							if (activeCell !== null) {
 								let index = activeCell.cellIndex;
@@ -482,28 +490,28 @@ class advancedDataTableEdit {
 										let cell = table.rows[i].insertBefore(document.createElement("th"), table.rows[i].cells[index]);
 
 										// init inline editor
-										ea.hooks.doAction("advancedDataTable.initEditor", cell);
+										eael.hooks.doAction("advancedDataTable.initEditor", cell);
 									} else {
 										let cell = table.rows[i].insertCell(index);
 
 										// init inline editor
-										ea.hooks.doAction("advancedDataTable.initEditor", cell);
+										eael.hooks.doAction("advancedDataTable.initEditor", cell);
 									}
 								}
 
 								// remove active cell
-								ea.hooks.applyFilters("advancedDataTable.setClassProps", { activeCell: null });
+								eael.hooks.applyFilters("advancedDataTable.setClassProps", { activeCell: null });
 
 								// parse table html
-								let origTable = ea.hooks.applyFilters("advancedDataTable.parseHTML", table.cloneNode(true));
+								let origTable = eael.hooks.applyFilters("advancedDataTable.parseHTML", table.cloneNode(true));
 
 								// update model
-								ea.hooks.doAction("advancedDataTable.updateFromView", view, {
+								eael.hooks.doAction("advancedDataTable.updateFromView", view, {
 									ea_adv_data_table_static_html: origTable.innerHTML,
 								});
 
 								// trigger text-change event
-								ea.hooks.doAction("advancedDataTable.triggerTextChange", table);
+								eael.hooks.doAction("advancedDataTable.triggerTextChange", table);
 							}
 						},
 					},
@@ -511,7 +519,7 @@ class advancedDataTableEdit {
 						name: "add_column_right",
 						title: "Add Column Right",
 						callback() {
-							const { view, table, activeCell } = ea.hooks.applyFilters("advancedDataTable.getClassProps");
+							const { view, table, activeCell } = eael.hooks.applyFilters("advancedDataTable.getClassProps");
 
 							if (activeCell !== null) {
 								let index = activeCell.cellIndex + 1;
@@ -521,28 +529,28 @@ class advancedDataTableEdit {
 										let cell = table.rows[i].insertBefore(document.createElement("th"), table.rows[i].cells[index]);
 
 										// init inline editor
-										ea.hooks.doAction("advancedDataTable.initEditor", cell);
+										eael.hooks.doAction("advancedDataTable.initEditor", cell);
 									} else {
 										let cell = table.rows[i].insertCell(index);
 
 										// init inline editor
-										ea.hooks.doAction("advancedDataTable.initEditor", cell);
+										eael.hooks.doAction("advancedDataTable.initEditor", cell);
 									}
 								}
 
 								// remove active cell
-								ea.hooks.applyFilters("advancedDataTable.setClassProps", { activeCell: null });
+								eael.hooks.applyFilters("advancedDataTable.setClassProps", { activeCell: null });
 
 								// parse table html
-								let origTable = ea.hooks.applyFilters("advancedDataTable.parseHTML", table.cloneNode(true));
+								let origTable = eael.hooks.applyFilters("advancedDataTable.parseHTML", table.cloneNode(true));
 
 								// update model
-								ea.hooks.doAction("advancedDataTable.updateFromView", view, {
+								eael.hooks.doAction("advancedDataTable.updateFromView", view, {
 									ea_adv_data_table_static_html: origTable.innerHTML,
 								});
 
 								// trigger text-change event
-								ea.hooks.doAction("advancedDataTable.triggerTextChange", table);
+								eael.hooks.doAction("advancedDataTable.triggerTextChange", table);
 							}
 						},
 					},
@@ -550,7 +558,7 @@ class advancedDataTableEdit {
 						name: "delete_row",
 						title: "Delete Row",
 						callback() {
-							const { view, table, activeCell } = ea.hooks.applyFilters("advancedDataTable.getClassProps");
+							const { view, table, activeCell } = eael.hooks.applyFilters("advancedDataTable.getClassProps");
 
 							if (activeCell !== null) {
 								let index = activeCell.parentNode.rowIndex;
@@ -559,18 +567,18 @@ class advancedDataTableEdit {
 								table.deleteRow(index);
 
 								// remove active cell
-								ea.hooks.applyFilters("advancedDataTable.setClassProps", { activeCell: null });
+								eael.hooks.applyFilters("advancedDataTable.setClassProps", { activeCell: null });
 
 								// parse table html
-								let origTable = ea.hooks.applyFilters("advancedDataTable.parseHTML", table.cloneNode(true));
+								let origTable = eael.hooks.applyFilters("advancedDataTable.parseHTML", table.cloneNode(true));
 
 								// update model
-								ea.hooks.doAction("advancedDataTable.updateFromView", view, {
+								eael.hooks.doAction("advancedDataTable.updateFromView", view, {
 									ea_adv_data_table_static_html: origTable.innerHTML,
 								});
 
 								// trigger text-change event
-								ea.hooks.doAction("advancedDataTable.triggerTextChange", table);
+								eael.hooks.doAction("advancedDataTable.triggerTextChange", table);
 							}
 						},
 					},
@@ -578,7 +586,7 @@ class advancedDataTableEdit {
 						name: "delete_column",
 						title: "Delete Column",
 						callback() {
-							const { view, table, activeCell } = ea.hooks.applyFilters("advancedDataTable.getClassProps");
+							const { view, table, activeCell } = eael.hooks.applyFilters("advancedDataTable.getClassProps");
 
 							if (activeCell !== null) {
 								let index = activeCell.cellIndex;
@@ -589,18 +597,18 @@ class advancedDataTableEdit {
 								}
 
 								// remove active cell
-								ea.hooks.applyFilters("advancedDataTable.setClassProps", { activeCell: null });
+								eael.hooks.applyFilters("advancedDataTable.setClassProps", { activeCell: null });
 
 								// parse table html
-								let origTable = ea.hooks.applyFilters("advancedDataTable.parseHTML", table.cloneNode(true));
+								let origTable = eael.hooks.applyFilters("advancedDataTable.parseHTML", table.cloneNode(true));
 
 								// update model
-								ea.hooks.doAction("advancedDataTable.updateFromView", view, {
+								eael.hooks.doAction("advancedDataTable.updateFromView", view, {
 									ea_adv_data_table_static_html: origTable.innerHTML,
 								});
 
 								// trigger text-change event
-								ea.hooks.doAction("advancedDataTable.triggerTextChange", table);
+								eael.hooks.doAction("advancedDataTable.triggerTextChange", table);
 							}
 						},
 					},
@@ -625,6 +633,6 @@ class advancedDataTableEdit {
 	}
 }
 
-ea.hooks.addAction("editMode.init", "ea", () => {
+eael.hooks.addAction("editMode.init", "ea", () => {
 	new advancedDataTableEdit();
 });

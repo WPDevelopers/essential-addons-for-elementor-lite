@@ -25,6 +25,9 @@
 	p {
 		margin: 0;
 	}
+	a {
+		transition: none;
+	}
 }
 
 .eael-tooltip .eael-tooltip-text::after {
@@ -49,7 +52,7 @@
 
 .eael-tooltip:hover .eael-tooltip-text.eael-tooltip-left,
 .eael-tooltip-content:focus + .eael-tooltip-text.eael-tooltip-left {
-	animation: tooltipLeftIn 300ms ease-in-out;
+	animation: eaelTooltipLeftIn 300ms ease-in-out;
 }
 
 .eael-tooltip .eael-tooltip-text.eael-tooltip-left::after {
@@ -69,7 +72,7 @@
 
 .eael-tooltip:hover .eael-tooltip-text.eael-tooltip-right,
 .eael-tooltip-content:focus + .eael-tooltip-text.eael-tooltip-right {
-	animation: tooltipRightIn 300ms linear;
+	animation: eaelTooltipRightIn 300ms linear;
 }
 
 .eael-tooltip .eael-tooltip-text.eael-tooltip-right::after {
@@ -95,7 +98,7 @@
 
 .eael-tooltip:hover .eael-tooltip-text.eael-tooltip-top,
 .eael-tooltip-content:focus + .eael-tooltip-text.eael-tooltip-top {
-	animation: tooltipTopIn 300ms linear;
+	animation: eaelTooltipTopIn 300ms linear;
 }
 
 /*--- Bottom ---*/
@@ -115,7 +118,7 @@
 
 .eael-tooltip:hover .eael-tooltip-text.eael-tooltip-bottom,
 .eael-tooltip-content:focus + .eael-tooltip-text.eael-tooltip-bottom {
-	animation: tooltipBottomIn 300ms linear;
+	animation: eaelTooltipBottomIn 300ms linear;
 }
 
 /*--- Alignments ---*/
@@ -179,7 +182,7 @@
 }
 
 /*--- Tooltip Keyframes ---*/
-@keyframes tooltipRightIn {
+@keyframes eaelTooltipRightIn {
 	0% {
 		opacity: 0;
 		left: 105%;
@@ -190,7 +193,7 @@
 	}
 }
 
-@keyframes tooltipLeftIn {
+@keyframes eaelTooltipLeftIn {
 	0% {
 		opacity: 0;
 		right: 105%;
@@ -201,7 +204,7 @@
 	}
 }
 
-@keyframes tooltipTopIn {
+@keyframes eaelTooltipTopIn {
 	0% {
 		opacity: 0;
 		bottom: 110%;
@@ -212,7 +215,7 @@
 	}
 }
 
-@keyframes tooltipBottomIn {
+@keyframes eaelTooltipBottomIn {
 	0% {
 		opacity: 0;
 		top: 110%;

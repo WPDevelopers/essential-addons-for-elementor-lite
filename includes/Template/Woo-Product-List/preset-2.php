@@ -3,6 +3,7 @@
  * Template Name: Preset 2
  */
 
+use Essential_Addons_Elementor\Classes\Helper;
 use Essential_Addons_Elementor\Elements\Woo_Product_List;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -75,7 +76,14 @@ $woo_product_list_loop = Woo_Product_List::get_woo_product_list_loop_settings( $
             <div class="eael-product-list-content-header <?php echo esc_attr( $woo_product_list_loop['direction_rtl_class'] ) ?>" >
                 <?php if ( $woo_product_list['rating_show'] ) : ?>
                 <div class="eael-product-list-rating">
-                    <?php echo wp_kses_post( wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) ); ?>
+                    <?php 
+                    $avg_rating = $product->get_average_rating();
+                    if( $avg_rating > 0 ){
+                        echo wc_get_rating_html( $avg_rating, $product->get_rating_count());
+                    } else {
+                        echo Helper::eael_rating_markup( $avg_rating, $product->get_rating_count() );
+                    }
+                    ?>
                     
                     <?php if ( $woo_product_list['review_count_show'] && $woo_product_list_loop['review_count'] > 0 ) : ?>
                         <a href="<?php echo esc_url( get_permalink() ) ?>#reviews" class="woocommerce-review-link eael-product-list-review-count" rel="nofollow">(<?php printf( '%s', __( $woo_product_list_loop['review_count'], 'essential-addons-for-elementor-lite' ) ); ?>)</a>
@@ -101,14 +109,20 @@ $woo_product_list_loop = Woo_Product_List::get_woo_product_list_loop_settings( $
 
                 <?php if ( $woo_product_list['excerpt_show'] ) : ?>
                 <div class="eael-product-list-excerpt">
-                    <?php echo wp_trim_words( strip_shortcodes( get_the_excerpt() ), $woo_product_list['excerpt_words_count'], $woo_product_list['excerpt_expanison_indicator'] ); ?>
+                    <?php 
+                    if( $woo_product_list['excerpt_words_count'] ){
+                        echo wp_trim_words( strip_shortcodes( get_the_excerpt() ), $woo_product_list['excerpt_words_count'], $woo_product_list['excerpt_expanison_indicator'] );
+                    } else {
+                        echo get_the_excerpt();
+                    }
+                    ?>
                 </div>
                 <?php endif; ?>
 
                 <?php if ( $woo_product_list['price_show'] ) : ?>
-                <h4 class="eael-product-list-price">
+                <h3 class="eael-product-list-price">
                     <?php echo wp_kses_post( $product->get_price_html() ); ?>
-                </h4>
+                </h3>
                 <?php endif; ?>
             </div>
             <div class="eael-product-list-content-footer">

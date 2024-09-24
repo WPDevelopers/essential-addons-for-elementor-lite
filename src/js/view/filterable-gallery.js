@@ -1,4 +1,30 @@
 jQuery(window).on("elementor/frontend/init", function () {
+	function getVideoId(url) {
+		var vimeoMatch = url.match(/\/\/(?:player\.)?vimeo.com\/(?:video\/)?([0-9]+)/);
+		if (vimeoMatch) {
+			return vimeoMatch[1];
+		}
+	
+		var youtubeMatch = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+		if (youtubeMatch) {
+			return youtubeMatch[1];
+		}
+	
+		return null;
+	}
+
+	function shuffleGalleryItems( items ) {
+		for (var i = 0; i < items.length - 1; i++) {
+			var j = i + Math.floor(Math.random() * (items.length - i));
+	
+			var temp = items[j];
+			items[j] = items[i];
+			items[i] = temp;
+		}
+
+		return items;
+	}
+
 	var filterableGalleryHandler = function ($scope, $) {
 		var filterControls = $scope.find(".fg-layout-3-filter-controls").eq(0),
 			filterTrigger  = $scope.find("#fg-filter-trigger"),
@@ -30,15 +56,59 @@ jQuery(window).on("elementor/frontend/init", function () {
 			filterControls.removeClass("open-filters");
 		});
 
+		$('.video-popup.eael-magnific-video-link.playout-vertical', $scope).on('click', function(){
+			setTimeout(function(){
+				$('.mfp-iframe-holder').addClass('eael-gf-vertical-video-popup');
+			}, 1);
+		});
+
+		$('.eael-magnific-link', $scope).on('click', function(){
+			setTimeout(function(){
+				$('.mfp-wrap').addClass('eael-gf-mfp-popup');
+			}, 1);
+		});
+
+		$(document).on('click','.mfp-arrow.mfp-arrow-left, .mfp-arrow.mfp-arrow-right', function(){
+			setTimeout(function(){
+				var container = $('.eael-gf-mfp-popup .mfp-container');
+				if( container.hasClass('mfp-iframe-holder') ){
+					var src    = $('iframe', container).attr('src'),
+						plyBtn = $('a[href="'+src+'"]');
+						
+					if( plyBtn.length < 1 ){
+						var videoId = getVideoId( src ),
+							plyBtn  = $('a[href*="'+videoId+'"]');
+					}
+					
+					if( plyBtn.hasClass('playout-vertical') ){
+						container.addClass('eael-gf-vertical-video-popup');
+					} else{
+						container.removeClass('eael-gf-vertical-video-popup');
+					}
+				}
+			}, 1);
+		});
+
 		if (!isEditMode) {
 			var $gallery         = $(".eael-filter-gallery-container", $scope),
 				$settings        = $gallery.data("settings"),
-				fg_items = $gallery_items   = $gallery.data("gallery-items"),
+				fg_items 		 =  $gallery.data("gallery-items"),
 				$layout_mode     = $settings.grid_style === "masonry" ? "masonry" : "fitRows",
 				$gallery_enabled = ($settings.gallery_enabled === "yes"),
 				$images_per_page = $gallery.data("images-per-page"),
-				$init_show_setting     = $gallery.data("init-show");
-				fg_items.splice(0, $init_show_setting)
+				$init_show_setting     = $gallery.data("init-show"),
+				$is_randomize     = $gallery.data("is-randomize");
+				isRTL = $('body').hasClass('rtl');
+				
+				if( 'yes' === $is_randomize ){
+					fg_items = shuffleGalleryItems( fg_items );
+					$gallery.empty();
+					for (let i =  0; i < $init_show_setting; i++) {
+						$gallery.append(fg_items[i]);
+					}
+				}
+				fg_items.splice(0, $init_show_setting);
+
 			// init isotope
 			let gwrap = $(".eael-filter-gallery-wrapper");
 			var layoutMode       = gwrap.data("layout-mode");
@@ -48,6 +118,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 				percentPosition: true,
 				stagger: 30,
 				transitionDuration: $settings.duration + "ms",
+				isOriginLeft: !isRTL,
 				filter: function () {
 					var $this   = $(this);
 					var $result = searchRegex ? $this.text().match(searchRegex) : true;
@@ -85,15 +156,30 @@ jQuery(window).on("elementor/frontend/init", function () {
 							</div>`
 				},
 				callbacks: {
-					markupParse: function(template, values, item) {
-						if( item.el.attr('title') !== "" ) {
-							values.title = item.el.attr('title');
+					markupParse: function (template, values, item) {
+						if (item.el.attr('title') !== "") {
+							values.title = DOMPurify.sanitize(item.el.attr('title'));
 						}
 					},
 					open: function() {
 						setTimeout(() => {
 							$(".eael-privacy-message").remove();
 						}, 5000);
+
+						setTimeout(() => {
+							var el_lightbox = $('.dialog-type-lightbox.elementor-lightbox');
+							if( el_lightbox.length > 0 ){
+								el_lightbox.remove();
+							}
+
+							//Fix Safari pop video width issue. 
+							$('.e--ua-safari .eael-gf-mfp-popup iframe.mfp-iframe').on('load', function() {
+								// Access the iframe's document
+								var iframeDoc = this.contentDocument || this.contentWindow.document;
+								var $video = $(iframeDoc).find('video');
+								$video.removeClass('mac');
+							});
+						}, 100);
 					},
 				}
 			});
@@ -146,7 +232,10 @@ jQuery(window).on("elementor/frontend/init", function () {
 					 loadMore = $(".eael-gallery-load-more",$scope);
 				
 				//hide load more button if selected control have no item to show
-				if(LoadMoreShow || fg_items.length < 1){
+				let replaceWithDot = buttonFilter.replace('.', '');
+				const restOfItem = fg_items.filter( galleryItem => galleryItem.includes( replaceWithDot ) ).length;
+				
+				if( LoadMoreShow || ( restOfItem < 1 ) ) {
 					loadMore.hide()
 				}else{
 					loadMore.show()
@@ -168,6 +257,12 @@ jQuery(window).on("elementor/frontend/init", function () {
 
 				if($this.hasClass('all-control')){
 					//All items are active
+					if ( LoadMoreShow || ( fg_items.length <= 1 ) ) {
+						loadMore.hide()
+					} else {
+						loadMore.show()
+					}
+
 					$('.eael-filterable-gallery-item-wrap .eael-magnific-link-clone').removeClass('active').addClass('active');
 				}else {
 					$('.eael-filterable-gallery-item-wrap .eael-magnific-link-clone').removeClass('active');
@@ -270,7 +365,8 @@ jQuery(window).on("elementor/frontend/init", function () {
 				}
 
 				if (fg_items.length<1) {
-					$this.html('<div class="no-more-items-text">' + $nomore_text + "</div>");
+					$this.html('<div class="no-more-items-text"></div>');
+					$this.children('.no-more-items-text').text($nomore_text);
 					setTimeout(function () {
 						$this.fadeOut("slow");
 					}, 600);
@@ -300,10 +396,21 @@ jQuery(window).on("elementor/frontend/init", function () {
 					jQuery(`.eael-filter-gallery-control li:nth-child(${default_control_key})` ).trigger('click');
 				}
 			});
+
+			var FilterableGallery = function (element) {
+				$isotope_gallery.imagesLoaded().progress(function () {
+					$isotope_gallery.isotope("layout");
+				});
+			}
+
+			eael.hooks.addAction("ea-toggle-triggered", "ea", FilterableGallery);
+			eael.hooks.addAction("ea-lightbox-triggered", "ea", FilterableGallery);
+			eael.hooks.addAction("ea-advanced-tabs-triggered", "ea", FilterableGallery);
+			eael.hooks.addAction("ea-advanced-accordion-triggered", "ea", FilterableGallery);
 		}
 	};
 
-	if (ea.elementStatusCheck('eaelFilterableGallery')) {
+	if (eael.elementStatusCheck('eaelFilterableGallery')) {
 		return false;
 	}
 

@@ -49,6 +49,10 @@ class Tooltip extends Widget_Base {
 		];
     }
 
+	protected function is_dynamic_content():bool {
+        return false;
+    }
+
 	public function get_custom_help_url()
 	{
         return 'https://essential-addons.com/elementor/docs/tooltip/';
@@ -728,7 +732,7 @@ class Tooltip extends Widget_Base {
 			<span class="eael-tooltip-content" tabindex="0" aria-describedby="tooltip-text-<?php echo esc_attr( $this->get_id() ); ?>"><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?><a <?php $this->print_render_attribute_string( 'eael_tooltip_link' ); ?>><?php endif; ?>
 			<?php if ($icon_is_new || $icon_migrated) { ?>
 				<?php if( isset($settings['eael_tooltip_icon_content_new']['value']['url']) ) : ?>
-					<img class="ea-tooltip-svg-trigger" src="<?php echo esc_attr( $settings['eael_tooltip_icon_content_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_tooltip_icon_content_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+					<img class="ea-tooltip-svg-trigger" src="<?php echo esc_url( $settings['eael_tooltip_icon_content_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_tooltip_icon_content_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
 				<?php else :
                     Icons_Manager::render_icon( $settings['eael_tooltip_icon_content_new'], [ 'aria-hidden' => 'true' ] );
                   endif;

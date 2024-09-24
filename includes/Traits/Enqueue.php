@@ -12,14 +12,6 @@ trait Enqueue
 {
 	public function before_enqueue_styles( $widgets ) {
 		$widgets = (array) $widgets;
-		// Compatibility: Gravity forms
-		if ( in_array( 'gravity-form', $widgets ) && class_exists( 'GFCommon' ) ) {
-			foreach ( EnqueueHelper::get_gravity_form_list() as $form_id => $form_name ) {
-				if ( $form_id != '0' ) {
-					gravity_form_enqueue_scripts( $form_id );
-				}
-			}
-		}
 
         // Compatibility: WPforms
         if (in_array('wpforms', $widgets) && function_exists('wpforms')) {
@@ -29,23 +21,6 @@ trait Enqueue
         // Compatibility: Caldera forms
         if (in_array('caldera-form', $widgets) && class_exists('Caldera_Forms')) {
             add_filter('caldera_forms_force_enqueue_styles_early', '__return_true');
-        }
-
-        // Compatibility: Fluent forms
-        if (in_array('fluentform', $widgets) && defined('FLUENTFORM')) {
-            wp_register_style(
-                'fluent-form-styles',
-                WP_PLUGIN_URL . '/fluentform/public/css/fluent-forms-public.css',
-                false,
-                FLUENTFORM_VERSION
-            );
-
-            wp_register_style(
-                'fluentform-public-default',
-                WP_PLUGIN_URL . '/fluentform/public/css/fluentform-public-default.css',
-                false,
-                FLUENTFORM_VERSION
-            );
         }
 
         // Compatibility: reCaptcha with login/register

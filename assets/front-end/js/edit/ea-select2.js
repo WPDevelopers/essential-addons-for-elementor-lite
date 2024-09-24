@@ -118,7 +118,13 @@ function ea_conditional_logic_type_title(value) {
         browser: eael_select2_localize.cl_browser,
         date_time: eael_select2_localize.cl_date_time,
         recurring_day: eael_select2_localize.cl_recurring_day,
-        query_string: eael_select2_localize.cl_query_string
+        query_string: eael_select2_localize.cl_query_string,
+        url_contains: eael_select2_localize.cl_url_contains,
+        archive: eael_select2_localize.cl_archive,
+        visit_count: eael_select2_localize.cl_visit_count,
+        woo_products: eael_select2_localize.cl_woo_products,
+        woo_cart: eael_select2_localize.cl_woo_cart,
+        woo_orders: eael_select2_localize.cl_woo_orders,
     };
 
     return labelValues[value] ? labelValues[value] : '';

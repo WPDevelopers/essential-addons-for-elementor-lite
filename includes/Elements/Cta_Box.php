@@ -57,6 +57,10 @@ class Cta_Box extends Widget_Base
         ];
     }
 
+    protected function is_dynamic_content():bool {
+        return false;
+    }
+
     public function get_custom_help_url() {
         return 'https://essential-addons.com/elementor/docs/call-to-action/';
     }
@@ -166,6 +170,80 @@ class Cta_Box extends Widget_Base
         );
 
         $this->add_control(
+			'eael_cta_bg_image_background_manager',
+			[
+				'label' => esc_html__( 'Background Image Options', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
+				'label_on' => esc_html__( 'Custom', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+                'condition' => [
+                    'eael_cta_color_type' => ['cta-bg-img', 'cta-bg-img-fixed'],
+                ],
+			]
+		);
+
+		$this->start_popover();
+
+        $this->add_control(
+			'eael_cta_bg_image_repeat',
+			[
+				'label' => esc_html__( 'Repeat', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'no-repeat',
+				'options' => [
+					'no-repeat' => esc_html__( 'No Repeat', 'essential-addons-for-elementor-lite' ),
+					'repeat' => esc_html__( 'Repeat', 'essential-addons-for-elementor-lite' ),
+					'repeat-x' => esc_html__( 'Repeat X', 'essential-addons-for-elementor-lite' ),
+					'repeat-y' => esc_html__( 'Repeat Y', 'essential-addons-for-elementor-lite' ),
+					'round' => esc_html__( 'Round', 'essential-addons-for-elementor-lite' ),
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-call-to-action.bg-img' => 'background-repeat: {{VALUE}};',
+				],
+			]
+		);
+
+        $this->add_control(
+			'eael_cta_bg_image_position',
+			[
+				'label' => esc_html__( 'Position', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'center',
+				'options' => [
+					'top' => esc_html__( 'Top', 'essential-addons-for-elementor-lite' ),
+					'right' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+					'center' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
+					'bottom' => esc_html__( 'Bottom', 'essential-addons-for-elementor-lite' ),
+					'left' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-call-to-action.bg-img' => 'background-position: {{VALUE}};',
+				],
+			]
+		);
+
+        $this->add_control(
+			'eael_cta_bg_image_size',
+			[
+				'label' => esc_html__( 'Size', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'cover',
+				'options' => [
+					'cover' => esc_html__( 'Cover', 'essential-addons-for-elementor-lite' ),
+					'contain' => esc_html__( 'Contain', 'essential-addons-for-elementor-lite' ),
+					'inherit' => esc_html__( 'Inherit', 'essential-addons-for-elementor-lite' ),
+					'initial' => esc_html__( 'Initial', 'essential-addons-for-elementor-lite' ),
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-call-to-action.bg-img' => 'background-size: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->end_popover();
+
+        $this->add_control(
             'eael_cta_bg_overlay',
             [
                 'label' => __('Background Overlay', 'essential-addons-for-elementor-lite'),
@@ -174,6 +252,7 @@ class Cta_Box extends Widget_Base
                 'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default' => 'yes',
+                'separator' => 'after',
                 'prefix_class' => 'eael-cta-overlay-',
                 'condition' => [
                     'eael_cta_color_type!' => 'cta-bg-color',
@@ -520,10 +599,8 @@ class Cta_Box extends Widget_Base
                 'condition' => [
                     'eael_cta_color_type!' => 'cta-bg-color',
                     'eael_cta_bg_overlay' => 'yes',
-                ],
-                'condition' => [
                     'eael_cta_preset' => 'cta-preset-2',
-                ]
+                ],
             ]
         );
 
@@ -886,6 +963,7 @@ class Cta_Box extends Widget_Base
 				'name' => 'eael_cta_btn_normal_gradient_bg_color',
 				'label' => __( 'Background', 'essential-addons-for-elementor-lite' ),
                 'types' => [ 'classic', 'gradient' ],
+                'exclude' => [ 'image' ],
                 'selector' => '{{WRAPPER}} .eael-call-to-action .cta-button:not(.cta-secondary-button)',
                 'condition' => [
                     'eael_cta_btn_is_used_gradient_bg' => 'yes'
@@ -1517,7 +1595,7 @@ class Cta_Box extends Widget_Base
 	    }
     ?>
 	<?php if ('cta-basic' == $settings['eael_cta_type']): ?>
-	<div class="eael-call-to-action cta-basic <?php echo esc_attr($cta_class). ' ' . $settings['eael_cta_preset']; ?>">
+	<div class="eael-call-to-action cta-basic <?php echo esc_attr( $cta_class . ' ' . $settings['eael_cta_preset'] ); ?>">
         <?php
             print $headingMarkup;
             print $contentMarkup;
@@ -1526,7 +1604,7 @@ class Cta_Box extends Widget_Base
 	</div>
 	<?php endif;?>
 	<?php if ('cta-flex' == $settings['eael_cta_type']): ?>
-	<div class="eael-call-to-action cta-flex <?php echo esc_attr($cta_class). ' ' . $settings['eael_cta_preset']; ?>">
+	<div class="eael-call-to-action cta-flex <?php echo esc_attr( $cta_class . ' ' . $settings['eael_cta_preset'] ); ?>">
 	    <div class="content">
             <?php
                 print $headingMarkup;
@@ -1539,11 +1617,11 @@ class Cta_Box extends Widget_Base
 	</div>
 	<?php endif;?>
 	<?php if ('cta-icon-flex' == $settings['eael_cta_type']): ?>
-	<div class="eael-call-to-action cta-icon-flex <?php echo esc_attr($cta_class). ' ' . $settings['eael_cta_preset']; ?>">
+	<div class="eael-call-to-action cta-icon-flex <?php echo esc_attr( $cta_class . ' ' . $settings['eael_cta_preset'] ); ?>">
 	    <div class="icon">
 			<?php if ($icon_is_new || $icon_migrated) {?>
 				<?php if (isset($settings['eael_cta_flex_grid_icon_new']['value']['url'])): ?>
-					<img src="<?php echo esc_attr($settings['eael_cta_flex_grid_icon_new']['value']['url']); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_cta_flex_grid_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+					<img src="<?php echo esc_url( $settings['eael_cta_flex_grid_icon_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($settings['eael_cta_flex_grid_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
 				<?php else:
                     Icons_Manager::render_icon( $settings['eael_cta_flex_grid_icon_new'] );
 

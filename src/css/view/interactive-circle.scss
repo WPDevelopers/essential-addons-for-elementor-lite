@@ -11,9 +11,52 @@
     $nav-item-border-radius: 50%;
     $breakpoint: 600px;
     $animation-duration: 2s;
+    $rotation-speed: 50s;
 
     display: flex;
     justify-content: center;
+
+    &.eael-interactive-circle-rotate,
+    .eael-interactive-circle-rotate{
+        @keyframes eaelRotation {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes eaelRotation-reverse {
+            from {
+                transform: rotate(360deg);
+            }
+            to {
+                transform: rotate(0deg);
+            }
+        }
+        animation: eaelRotation $rotation-speed linear infinite;
+
+        .eael-circle-btn-icon,.eael-circle-content {
+            animation: eaelRotation-reverse $rotation-speed linear infinite;
+        }
+
+        @media only screen and (max-width: $breakpoint) {
+            &.eael-circle-responsive-view{
+                animation: none !important;
+
+                .eael-circle-btn-icon,.eael-circle-content {
+                    animation: none !important;
+                }
+            }
+        }
+
+        &.pause-rotate:hover{
+            animation-play-state: paused;
+            .eael-circle-btn-icon,.eael-circle-content {
+                animation-play-state: paused;
+            }
+        }
+    }
 
     .eael-circle-info {
         display: inline-flex;
@@ -72,8 +115,8 @@
             $nav-item-padding: 18px;
             $nav-item-icon-width: 30px;
             $nav-item-initial-background: #fff;
-            $nav-item-hover-background: #7a5bff;
-            $nav-item-initial-color: #7a5bff;
+            $nav-item-hover-background: #4f31d3;
+            $nav-item-initial-color: #3204ff;
             $nav-item-hover-color: #fff;
 
             margin: 45px 0;
@@ -94,7 +137,7 @@
                         background: $nav-item-initial-background;
                         border: $nav-item-border-width solid $nav-item-border-color;
                         box-shadow: $nav-item-box-shadow;
-                        z-index: 0;
+                        z-index: 9;
                         .eael-circle-icon-shapes {
                             display: none;
                         }
@@ -2240,17 +2283,6 @@
                             top: 0%;
                             left: 50%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    //background: radial-gradient(
-                            //    //                81.89% 82.54% at 48.96% 49.88%,
-                            //    //                #0956c6 3.76%,
-                            //    //                #07a9f0 55.38%,
-                            //    //                #93dcfc 100%
-                            //    //);
-                            //    svg {
-                            //        fill: #07a9f0;
-                            //    }
-                            //}
                         }
                     }
                 }
@@ -2260,35 +2292,11 @@
                             top: 40%;
                             left: 10%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    //background: radial-gradient(
-                            //    //                81.89% 82.54% at 48.96% 49.88%,
-                            //    //                #0956c6 3.76%,
-                            //    //                #07a9f0 55.38%,
-                            //    //                #93dcfc 100%
-                            //    //);
-                            //    svg {
-                            //        fill: #07a9f0;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-2 {
                             top: 40%;
                             left: 90%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    //background: radial-gradient(
-                            //    //                73.69% 72.33% at 51.12% 47.67%,
-                            //    //                #2b3894 3.76%,
-                            //    //                #364099 14.18%,
-                            //    //                #5356a8 32.43%,
-                            //    //                #8078bf 55.38%,
-                            //    //                #d2a8d1 100%
-                            //    //);
-                            //    svg {
-                            //        fill: #364099;
-                            //    }
-                            //}
                         }
                     }
                 }
@@ -2298,46 +2306,16 @@
                             top: 72%;
                             left: 2%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    //background: radial-gradient(
-                            //    //                81.89% 82.54% at 48.96% 49.88%,
-                            //    //                #0956c6 3.76%,
-                            //    //                #07a9f0 55.38%,
-                            //    //                #93dcfc 100%
-                            //    //);
-                            //    svg {
-                            //        fill: #07a9f0;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-2 {
                             top: 0%;
                             left: 50%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    //background: radial-gradient(
-                            //    //                65.76% 66.29% at 48.95% 49.57%,
-                            //    //                #b40042 3.76%,
-                            //    //                #c50048 48.92%,
-                            //    //                #ff5e93 100%
-                            //    //);
-                            //    svg {
-                            //        fill: #c50048;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-3 {
                             top: 72%;
                             left: 98%;
                             transform: translate(-50%, -50%);
-                            //background: radial-gradient(
-                            //                94.25% 92.56% at 48.86% 49.71%,
-                            //                #199a8e 3.76%,
-                            //                #7af4ab 55.38%
-                            //);
-                            //svg {
-                            //    fill: #199a8e;
-                            //}
                         }
                     }
                 }
@@ -2347,61 +2325,21 @@
                             top: 72%;
                             left: 2%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    //background: radial-gradient(
-                            //    //                81.89% 82.54% at 48.96% 49.88%,
-                            //    //                #0956c6 3.76%,
-                            //    //                #07a9f0 55.38%,
-                            //    //                #93dcfc 100%
-                            //    //);
-                            //    svg {
-                            //        fill: #07a9f0;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-2 {
                             top: 10.6%;
                             left: 27.6%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    //background: radial-gradient(
-                            //    //                101.16% 101.7% at 47.77% 50.74%,
-                            //    //                #ff9100 3.76%,
-                            //    //                #ffb655 56.99%,
-                            //    //                #fff04a 100%
-                            //    //);
-                            //    svg {
-                            //        fill: #ffb655;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-3 {
                             top: 10.6%;
                             left: 72.4%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    //background: radial-gradient(
-                            //    //                94.25% 92.56% at 48.86% 49.71%,
-                            //    //                #199a8e 3.76%,
-                            //    //                #7af4ab 55.38%
-                            //    //);
-                            //    svg {
-                            //        fill: #7af4ab;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-4 {
                             top: 72%;
                             left: 98%;
                             transform: translate(-50%, -50%);
-                            //background: radial-gradient(
-                            //                94.25% 92.56% at 48.86% 49.71%,
-                            //                #199a8e 3.76%,
-                            //                #7af4ab 55.38%
-                            //);
-                            //svg {
-                            //    fill: #199a8e;
-                            //}
                         }
                     }
                 }
@@ -2411,77 +2349,26 @@
                             top: 72%;
                             left: 2%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    background: radial-gradient(
-                            //                    81.89% 82.54% at 48.96% 49.88%,
-                            //                    #0956c6 3.76%,
-                            //                    #07a9f0 55.38%,
-                            //                    #93dcfc 100%
-                            //    );
-                            //    svg {
-                            //        fill: #07a9f0;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-2 {
                             top: 20%;
                             left: 20%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    background: radial-gradient(
-                            //                    101.16% 101.7% at 47.77% 50.74%,
-                            //                    #ff9100 3.76%,
-                            //                    #ffb655 56.99%,
-                            //                    #fff04a 100%
-                            //    );
-                            //    svg {
-                            //        fill: #ffb655;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-3 {
                             top: 0%;
                             left: 50%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    background: radial-gradient(
-                            //                    94.25% 92.56% at 48.86% 49.71%,
-                            //                    #199a8e 3.76%,
-                            //                    #7af4ab 55.38%
-                            //    );
-                            //    svg {
-                            //        fill: #7af4ab;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-4 {
                             top: 20%;
                             left: 80%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    background: radial-gradient(
-                            //                    65.76% 66.29% at 48.95% 49.57%,
-                            //                    #b40042 3.76%,
-                            //                    #c50048 48.92%,
-                            //                    #ff5e93 100%
-                            //    );
-                            //    svg {
-                            //        fill: #c50048;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-5 {
                             top: 72%;
                             left: 98%;
                             transform: translate(-50%, -50%);
-                            //background: radial-gradient(
-                            //                94.25% 92.56% at 48.86% 49.71%,
-                            //                #199a8e 3.76%,
-                            //                #7af4ab 55.38%
-                            //);
-                            //svg {
-                            //    fill: #199a8e;
-                            //}
                         }
                     }
                 }
@@ -2491,92 +2378,31 @@
                             top: 72%;
                             left: 2%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    background: radial-gradient(
-                            //                    81.89% 82.54% at 48.96% 49.88%,
-                            //                    #0956c6 3.76%,
-                            //                    #07a9f0 55.38%,
-                            //                    #93dcfc 100%
-                            //    );
-                            //    svg {
-                            //        fill: #07a9f0;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-2 {
                             top: 28.4%;
                             left: 15%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    background: radial-gradient(
-                            //                    101.16% 101.7% at 47.77% 50.74%,
-                            //                    #ff9100 3.76%,
-                            //                    #ffb655 56.99%,
-                            //                    #fff04a 100%
-                            //    );
-                            //    svg {
-                            //        fill: #ffb655;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-3 {
                             top: 3.6%;
                             left: 36.6%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    background: radial-gradient(
-                            //                    94.25% 92.56% at 48.86% 49.71%,
-                            //                    #199a8e 3.76%,
-                            //                    #7af4ab 55.38%
-                            //    );
-                            //    svg {
-                            //        fill: #7af4ab;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-4 {
                             top: 3.6%;
                             left: 63.4%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    background: radial-gradient(
-                            //                    94.25% 92.56% at 48.86% 49.71%,
-                            //                    #199a8e 3.76%,
-                            //                    #7af4ab 55.38%
-                            //    );
-                            //    svg {
-                            //        fill: #7af4ab;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-5 {
                             top: 28.4%;
                             left: 85%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    background: radial-gradient(
-                            //                    65.76% 66.29% at 48.95% 49.57%,
-                            //                    #b40042 3.76%,
-                            //                    #c50048 48.92%,
-                            //                    #ff5e93 100%
-                            //    );
-                            //    svg {
-                            //        fill: #c50048;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-6 {
                             top: 72%;
                             left: 98%;
                             transform: translate(-50%, -50%);
-                            //background: radial-gradient(
-                            //                94.25% 92.56% at 48.86% 49.71%,
-                            //                #199a8e 3.76%,
-                            //                #7af4ab 55.38%
-                            //);
-                            //svg {
-                            //    fill: #199a8e;
-                            //}
                         }
                     }
                 }
@@ -2586,111 +2412,36 @@
                             top: 72%;
                             left: 2%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    background: radial-gradient(
-                            //                    81.89% 82.54% at 48.96% 49.88%,
-                            //                    #0956c6 3.76%,
-                            //                    #07a9f0 55.38%,
-                            //                    #93dcfc 100%
-                            //    );
-                            //    svg {
-                            //        fill: #07a9f0;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-2 {
                             top: 37.5%;
                             left: 11%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    background: radial-gradient(
-                            //                    101.16% 101.7% at 47.77% 50.74%,
-                            //                    #ff9100 3.76%,
-                            //                    #ffb655 56.99%,
-                            //                    #fff04a 100%
-                            //    );
-                            //    svg {
-                            //        fill: #ffb655;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-3 {
                             top: 10.9%;
                             left: 27.3%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    background: radial-gradient(
-                            //                    65.76% 66.29% at 48.95% 49.57%,
-                            //                    #b40042 3.76%,
-                            //                    #c50048 48.92%,
-                            //                    #ff5e93 100%
-                            //    );
-                            //    svg {
-                            //        fill: #c50048;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-4 {
                             top: 0%;
                             left: 50%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    background: radial-gradient(
-                            //                    94.25% 92.56% at 48.86% 49.71%,
-                            //                    #199a8e 3.76%,
-                            //                    #7af4ab 55.38%
-                            //    );
-                            //    svg {
-                            //        fill: #7af4ab;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-5 {
                             top: 10.9%;
                             left: 72.7%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    background: radial-gradient(
-                            //                    65.76% 66.29% at 48.95% 49.57%,
-                            //                    #b40042 3.76%,
-                            //                    #c50048 48.92%,
-                            //                    #ff5e93 100%
-                            //    );
-                            //    svg {
-                            //        fill: #c50048;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-6 {
                             top: 37.5%;
                             left: 89%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    background: radial-gradient(
-                            //                    73.69% 72.33% at 51.12% 47.67%,
-                            //                    #2b3894 3.76%,
-                            //                    #364099 14.18%,
-                            //                    #5356a8 32.43%,
-                            //                    #8078bf 55.38%,
-                            //                    #d2a8d1 100%
-                            //    );
-                            //    svg {
-                            //        fill: #364099;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-7 {
                             top: 72%;
                             left: 98%;
                             transform: translate(-50%, -50%);
-                            //background: radial-gradient(
-                            //                94.25% 92.56% at 48.86% 49.71%,
-                            //                #199a8e 3.76%,
-                            //                #7af4ab 55.38%
-                            //);
-                            //svg {
-                            //    fill: #199a8e;
-                            //}
                         }
                     }
                 }
@@ -2700,129 +2451,41 @@
                             top: 72%;
                             left: 2%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    background: radial-gradient(
-                            //                    81.89% 82.54% at 48.96% 49.88%,
-                            //                    #0956c6 3.76%,
-                            //                    #07a9f0 55.38%,
-                            //                    #93dcfc 100%
-                            //    );
-                            //    svg {
-                            //        fill: #07a9f0;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-2 {
                             top: 40%;
                             left: 10%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    background: radial-gradient(
-                            //                    64.96% 65.32% at 52.18% 47.01%,
-                            //                    #6f00ff 3.76%,
-                            //                    #533fff 55.38%,
-                            //                    #b9aaff 100%
-                            //    );
-                            //    svg {
-                            //        fill: #715eff;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-3 {
                             top: 16%;
                             left: 22.9%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    background: radial-gradient(
-                            //                    101.16% 101.7% at 47.77% 50.74%,
-                            //                    #ff9100 3.76%,
-                            //                    #ffb655 56.99%,
-                            //                    #fff04a 100%
-                            //    );
-                            //    svg {
-                            //        fill: #ffb655;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-4 {
                             top: 1.9%;
                             left: 40.6%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    background: radial-gradient(
-                            //                    65.76% 66.29% at 48.95% 49.57%,
-                            //                    #b40042 3.76%,
-                            //                    #c50048 48.92%,
-                            //                    #ff5e93 100%
-                            //    );
-                            //    svg {
-                            //        fill: #c50048;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-5 {
                             top: 1.9%;
                             left: 59.4%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    background: radial-gradient(
-                            //                    73.69% 72.33% at 51.12% 47.67%,
-                            //                    #2b3894 3.76%,
-                            //                    #364099 14.18%,
-                            //                    #5356a8 32.43%,
-                            //                    #8078bf 55.38%,
-                            //                    #d2a8d1 100%
-                            //    );
-                            //    svg {
-                            //        fill: #364099;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-6 {
                             top: 16%;
                             left: 77.1%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    background: radial-gradient(
-                            //                    94.25% 92.56% at 48.86% 49.71%,
-                            //                    #199a8e 3.76%,
-                            //                    #7af4ab 55.38%
-                            //    );
-                            //    svg {
-                            //        fill: #7af4ab;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-7 {
                             top: 40%;
                             left: 90%;
                             transform: translate(-50%, -50%);
-                            //.eael-circle-btn-icon {
-                            //    background: radial-gradient(
-                            //                    73.69% 72.33% at 51.12% 47.67%,
-                            //                    #2b3894 3.76%,
-                            //                    #364099 14.18%,
-                            //                    #5356a8 32.43%,
-                            //                    #8078bf 55.38%,
-                            //                    #d2a8d1 100%
-                            //    );
-                            //    svg {
-                            //        fill: #364099;
-                            //    }
-                            //}
                         }
                         #eael-circle-item-8 {
                             top: 72%;
                             left: 98%;
                             transform: translate(-50%, -50%);
-                            //background: radial-gradient(
-                            //                94.25% 92.56% at 48.86% 49.71%,
-                            //                #199a8e 3.76%,
-                            //                #7af4ab 55.38%
-                            //);
-                            //svg {
-                            //    fill: #199a8e;
-                            //}
                         }
                     }
                 }
@@ -5717,17 +5380,6 @@
                         top: 14.6%;
                         left: 14.6%;
                         transform: translate(-50%, -50%);
-                        //.eael-circle-btn-icon {
-                        //    background: radial-gradient(
-                        //                    81.89% 82.54% at 48.96% 49.88%,
-                        //                    #0956c6 3.76%,
-                        //                    #07a9f0 55.38%,
-                        //                    #93dcfc 100%
-                        //    );
-                        //    svg {
-                        //        fill: #07a9f0;
-                        //    }
-                        //}
                         .eael-circle-icon-shapes {
                             transform: rotate(45deg);
                         }
@@ -5736,17 +5388,6 @@
                         top: 14.6%;
                         left: 85.4%;
                         transform: translate(-50%, -50%);
-                        //.eael-circle-btn-icon {
-                        //    background: radial-gradient(
-                        //                    64.96% 65.32% at 52.18% 47.01%,
-                        //                    #6f00ff 3.76%,
-                        //                    #533fff 55.38%,
-                        //                    #b9aaff 100%
-                        //    );
-                        //    svg {
-                        //        fill: #715eff;
-                        //    }
-                        //}
                         .eael-circle-icon-shapes {
                             transform: rotate(135deg);
                         }
@@ -5755,17 +5396,6 @@
                         top: 85.4%;
                         left: 14.6%;
                         transform: translate(-50%, -50%);
-                        //.eael-circle-btn-icon {
-                        //    background: radial-gradient(
-                        //                    101.16% 101.7% at 47.77% 50.74%,
-                        //                    #ff9100 3.76%,
-                        //                    #ffb655 56.99%,
-                        //                    #fff04a 100%
-                        //    );
-                        //    svg {
-                        //        fill: #ffb655;
-                        //    }
-                        //}
                         .eael-circle-icon-shapes {
                             transform: rotate(-45deg);
                         }
@@ -5774,17 +5404,6 @@
                         top: 85.4%;
                         left: 85.4%;
                         transform: translate(-50%, -50%);
-                        //.eael-circle-btn-icon {
-                        //    background: radial-gradient(
-                        //                    65.76% 66.29% at 48.95% 49.57%,
-                        //                    #b40042 3.76%,
-                        //                    #c50048 48.92%,
-                        //                    #ff5e93 100%
-                        //    );
-                        //    svg {
-                        //        fill: #c50048;
-                        //    }
-                        //}
                         .eael-circle-icon-shapes {
                             transform: rotate(-135deg);
                         }
@@ -5793,34 +5412,11 @@
                         top: 50%;
                         left: 0%;
                         transform: translate(-50%, -50%);
-                        //.eael-circle-btn-icon {
-                        //    background: radial-gradient(
-                        //                    73.69% 72.33% at 51.12% 47.67%,
-                        //                    #2b3894 3.76%,
-                        //                    #364099 14.18%,
-                        //                    #5356a8 32.43%,
-                        //                    #8078bf 55.38%,
-                        //                    #d2a8d1 100%
-                        //    );
-                        //    svg {
-                        //        fill: #364099;
-                        //    }
-                        //}
                     }
                     #eael-circle-item-6 {
                         top: 50%;
                         left: 100%;
                         transform: translate(-50%, -50%);
-                        //.eael-circle-btn-icon {
-                        //    background: radial-gradient(
-                        //                    94.25% 92.56% at 48.86% 49.71%,
-                        //                    #199a8e 3.76%,
-                        //                    #7af4ab 55.38%
-                        //    );
-                        //    svg {
-                        //        fill: #7af4ab;
-                        //    }
-                        //}
                         .eael-circle-icon-shapes {
                             transform: rotate(180deg);
                         }
@@ -5829,19 +5425,6 @@
                         top: 0%;
                         left: 50%;
                         transform: translate(-50%, -50%);
-                        //.eael-circle-btn-icon {
-                        //    background: radial-gradient(
-                        //                    73.69% 72.33% at 51.12% 47.67%,
-                        //                    #2b3894 3.76%,
-                        //                    #364099 14.18%,
-                        //                    #5356a8 32.43%,
-                        //                    #8078bf 55.38%,
-                        //                    #d2a8d1 100%
-                        //    );
-                        //    svg {
-                        //        fill: #364099;
-                        //    }
-                        //}
                         .eael-circle-icon-shapes {
                             transform: rotate(90deg);
                         }
@@ -5850,14 +5433,6 @@
                         top: 100%;
                         left: 50%;
                         transform: translate(-50%, -50%);
-                        //background: radial-gradient(
-                        //                94.25% 92.56% at 48.86% 49.71%,
-                        //                #199a8e 3.76%,
-                        //                #7af4ab 55.38%
-                        //);
-                        //svg {
-                        //    fill: #199a8e;
-                        //}
                         .eael-circle-icon-shapes {
                             transform: rotate(-90deg);
                         }
@@ -6890,153 +6465,41 @@
                     top: 50%;
                     left: 0%;
                     transform: translate(-50%, -50%);
-                    //.eael-circle-icon-shapes {
-                    //    transform: rotate(-45deg);
-                    //    background: radial-gradient(
-                    //                    94.25% 92.56% at 48.86% 49.71%,
-                    //                    #199a8e 3.76%,
-                    //                    #7af4ab 55.38%
-                    //    );
-                    //}
-                    //.eael-circle-btn-icon {
-                    //    svg {
-                    //        fill: #199a8e;
-                    //    }
-                    //}
                 }
                 #eael-circle-item-2 {
                     top: 85.4%;
                     left: 14.6%;
                     transform: translate(-50%, -50%);
-                    //.eael-circle-icon-shapes {
-                    //    transform: rotate(-90deg);
-                    //    background: linear-gradient(
-                    //                    144.3deg,
-                    //                    #476df8 15.07%,
-                    //                    #6a8aff 97.18%
-                    //    );
-                    //}
-                    //.eael-circle-btn-icon {
-                    //    svg {
-                    //        fill: #07a9f0;
-                    //    }
-                    //}
                 }
                 #eael-circle-item-3 {
                     top: 100%;
                     left: 50%;
                     transform: translate(-50%, -50%);
-                    //.eael-circle-icon-shapes {
-                    //    transform: rotate(-135deg);
-                    //    background: radial-gradient(
-                    //                    64.96% 65.32% at 52.18% 47.01%,
-                    //                    #6f00ff 3.76%,
-                    //                    #533fff 55.38%,
-                    //                    #b9aaff 100%
-                    //    );
-                    //}
-                    //.eael-circle-btn-icon {
-                    //    svg {
-                    //        fill: #715eff;
-                    //    }
-                    //}
                 }
                 #eael-circle-item-4 {
                     top: 85.4%;
                     left: 85.4%;
                     transform: translate(-50%, -50%);
-                    //.eael-circle-icon-shapes {
-                    //    transform: rotate(-180deg);
-                    //    background: radial-gradient(
-                    //                    101.16% 101.7% at 47.77% 50.74%,
-                    //                    #ff9100 3.76%,
-                    //                    #ffb655 56.99%,
-                    //                    #fff04a 100%
-                    //    );
-                    //}
-                    //.eael-circle-btn-icon {
-                    //    svg {
-                    //        fill: #ffae42;
-                    //    }
-                    //}
                 }
                 #eael-circle-item-5 {
                     top: 50%;
                     left: 100%;
                     transform: translate(-50%, -50%);
-                    //.eael-circle-icon-shapes {
-                    //    transform: rotate(135deg);
-                    //    background: radial-gradient(
-                    //                    65.76% 66.29% at 48.95% 49.57%,
-                    //                    #b40042 3.76%,
-                    //                    #c50048 48.92%,
-                    //                    #ff5e93 100%
-                    //    );
-                    //}
-                    //.eael-circle-btn-icon {
-                    //    svg {
-                    //        fill: #b40042;
-                    //    }
-                    //}
                 }
                 #eael-circle-item-6 {
                     top: 14.6%;
                     left: 85.4%;
                     transform: translate(-50%, -50%);
-                    //.eael-circle-icon-shapes {
-                    //    transform: rotate(90deg);
-                    //    background: radial-gradient(
-                    //                    73.69% 72.33% at 51.12% 47.67%,
-                    //                    #2b3894 3.76%,
-                    //                    #364099 14.18%,
-                    //                    #5356a8 32.43%,
-                    //                    #8078bf 55.38%,
-                    //                    #d2a8d1 100%
-                    //    );
-                    //}
-                    //.eael-circle-btn-icon {
-                    //    svg {
-                    //        fill: #2b3894;
-                    //    }
-                    //}
                 }
                 #eael-circle-item-7 {
                     top: 0%;
                     left: 50%;
                     transform: translate(-50%, -50%);
-                    //.eael-circle-icon-shapes {
-                    //    transform: rotate(45deg);
-                    //    background: radial-gradient(
-                    //                    94.25% 92.56% at 48.86% 49.71%,
-                    //                    #199a8e 3.76%,
-                    //                    #7af4ab 55.38%
-                    //    );
-                    //}
-                    //.eael-circle-btn-icon {
-                    //    svg {
-                    //        fill: #199a8e;
-                    //    }
-                    //}
                 }
                 #eael-circle-item-8 {
                     top: 14.6%;
                     left: 14.6%;
                     transform: translate(-50%, -50%);
-                    //.eael-circle-icon-shapes {
-                    //    background: radial-gradient(
-                    //                    73.69% 72.33% at 51.12% 47.67%,
-                    //                    #2b3894 3.76%,
-                    //                    #364099 14.18%,
-                    //                    #5356a8 32.43%,
-                    //                    #8078bf 55.38%,
-                    //                    #d2a8d1 100%
-                    //    );
-                    //}
-                    //.eael-circle-btn-icon {
-                    //    svg {
-                    //        fill: #2b3894;
-                    //    }
-                    //}
                 }
             }
         }

@@ -62,6 +62,10 @@ class Pricing_Table extends Widget_Base
         ];
     }
 
+    protected function is_dynamic_content():bool {
+        return false;
+    }
+
     public function get_custom_help_url()
     {
         return 'https://essential-addons.com/elementor/docs/pricing-table/';
@@ -560,9 +564,6 @@ class Pricing_Table extends Widget_Base
                 'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default'      => 'yes',
-                'selectors'    => [
-                    '{{WRAPPER}} .eael-pricing-button' => 'display: inline-block;',
-                ],
             ]
         );
 
@@ -1924,7 +1925,7 @@ class Pricing_Table extends Widget_Base
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
-                    '{{WRAPPER}} .eael-pricing .eael-pricing-button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-pricing .footer' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -2115,20 +2116,18 @@ class Pricing_Table extends Widget_Base
     }
 
     public function render_pricing_list_icon( $settings, $item ){
-        if ('show' === $settings['eael_pricing_table_icon_enabled']) : ?>
-            <?php $eael_pricing_table_list_icon_color = HelperClass::eael_fetch_color_or_global_color($item, 'eael_pricing_table_list_icon_color'); ?>
+        if ('show' === $settings['eael_pricing_table_icon_enabled']) :
+            $icon_color = HelperClass::eael_fetch_color_or_global_color($item, 'eael_pricing_table_list_icon_color');
+            ?>
 
-            <span class="li-icon" style="color:<?php echo esc_attr($eael_pricing_table_list_icon_color); ?>;fill:<?php echo esc_attr($eael_pricing_table_list_icon_color); ?>;" >
-                <?php if (isset($item['__fa4_migrated']['eael_pricing_table_list_icon_new']) || empty($item['eael_pricing_table_list_icon'])) { ?>
-                    <?php if (isset($item['eael_pricing_table_list_icon_new']['value']['url'])) : ?>
-                        <?php Icons_Manager::render_icon( $item['eael_pricing_table_list_icon_new'], [ 'aria-hidden' => 'true' ] ); ?>
-<!--                                    <img src="--><?php //echo $item['eael_pricing_table_list_icon_new']['value']['url']; ?><!--" alt="--><?php //echo esc_attr(get_post_meta($item['eael_pricing_table_list_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?><!--" />-->
-                    <?php else : ?>
-                        <i class="<?php echo $item['eael_pricing_table_list_icon_new']['value']; ?>"></i>
-                    <?php endif; ?>
-                <?php } else { ?>
-                    <i class="<?php echo $item['eael_pricing_table_list_icon']; ?>"></i>
-                <?php } ?>
+            <span class="li-icon" style="<?php echo 'color:'. esc_attr( $icon_color ) . ';fill:' . esc_attr( $icon_color ) . ';'; ?>" >
+                <?php
+                if ( isset( $item['__fa4_migrated']['eael_pricing_table_list_icon_new'] ) || empty( $item['eael_pricing_table_list_icon'] ) ) {
+                    Icons_Manager::render_icon( $item['eael_pricing_table_list_icon_new'], [ 'aria-hidden' => 'true' ] );
+                } else {
+                    echo '<i class="'. esc_attr( $item['eael_pricing_table_list_icon'] ) .'"></i>';
+                }
+                ?>
             </span>
 
         <?php endif;
@@ -2161,7 +2160,7 @@ class Pricing_Table extends Widget_Base
                     $obj->add_render_attribute(
                         'pricing_feature_item_tooltip' . $counter,
                         [
-                            'class' => 'tooltip',
+                            'class' => 'eael-tooltip',
                             'title' => HelperClass::eael_wp_kses($item['eael_pricing_item_tooltip_content']),
                             'id'    => $obj->get_id() . $counter,
                         ]
@@ -2235,22 +2234,12 @@ class Pricing_Table extends Widget_Base
 	    $settings['eael_pricing_table_price_cur'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_price_cur']);
 	    $settings['eael_pricing_table_btn'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_btn']);
         
-        $this->add_render_attribute('eael_pricing_button', [
-            'class' => [ 'eael-pricing-button' ],
-        ]);
+        $this->add_render_attribute('eael_pricing_button', [ 'class' => [ 'eael-pricing-button' ] ]);
 
         if ( ! empty( $settings['eael_pricing_table_btn_link']['url'] ) ) {
             $this->add_link_attributes( 'eael_pricing_button', $settings['eael_pricing_table_btn_link'] );
         }
-        
-        if ( ! empty( $settings['eael_pricing_table_btn_link']['is_external'] ) ) {
-            $this->add_render_attribute('eael_pricing_button', 'target', '_blank');
-        }
 
-        if ( ! empty( $settings['eael_pricing_table_btn_link']['nofollow'] ) ) {
-            $this->add_render_attribute('eael_pricing_button', 'rel', 'nofollow');
-        }
-        
         if ('yes' === $settings['eael_pricing_table_onsale']) {
             if ($settings['eael_pricing_table_price_cur_placement'] == 'left') {
                 $pricing = '<del class="original-price">
@@ -2298,13 +2287,16 @@ class Pricing_Table extends Widget_Base
                         <h2 class="title"><?php echo HelperClass::eael_wp_kses($settings['eael_pricing_table_title']); ?></h2>
                     </div>
                     <div class="eael-pricing-tag">
-                        <span class="price-tag"><?php echo $pricing; ?></span>
-                        <span class="price-period"><?php echo HelperClass::eael_wp_kses($settings['eael_pricing_table_period_separator']); ?> <?php echo HelperClass::eael_wp_kses($settings['eael_pricing_table_price_period']); ?></span>
+                        <?php 
+                            $html = '<span class="price-tag">' . $pricing . '</span>';
+                            $html .= '<span class="price-period">' . $settings['eael_pricing_table_period_separator'] . $settings['eael_pricing_table_price_period'] . '</span>';
+                            echo wp_kses( $html, HelperClass::eael_allowed_tags() );
+                        ?>
                     </div>
                     <div class="body">
                         <?php $this->render_feature_list($settings, $this); ?>
                     </div>
-	                <?php if($settings['eael_pricing_table_button_show']=='yes'): ?>
+	                <?php if( isset( $settings['eael_pricing_table_button_show'] ) && 'yes' === $settings['eael_pricing_table_button_show'] ): ?>
                     <div class="footer">
                         <a <?php echo $this->get_render_attribute_string('eael_pricing_button'); ?> >
                             <?php if ('left' == $icon_position) : ?>
@@ -2346,13 +2338,16 @@ class Pricing_Table extends Widget_Base
                         <span class="subtitle"><?php echo HelperClass::eael_wp_kses( $settings['eael_pricing_table_sub_title'] ); ?></span>
                     </div>
                     <div class="eael-pricing-tag">
-                        <span class="price-tag"><?php echo $pricing; ?></span>
-                        <span class="price-period"><?php echo HelperClass::eael_wp_kses($settings['eael_pricing_table_period_separator']); ?> <?php echo HelperClass::eael_wp_kses($settings['eael_pricing_table_price_period']); ?></span>
+                        <?php 
+                            $html = '<span class="price-tag">' . $pricing . '</span>';
+                            $html .= '<span class="price-period">' . $settings['eael_pricing_table_period_separator'] . $settings['eael_pricing_table_price_period'] . '</span>';
+                            echo wp_kses( $html, HelperClass::eael_allowed_tags() );
+                        ?>
                     </div>
                     <div class="body">
                         <?php $this->render_feature_list($settings, $this); ?>
                     </div>
-	                <?php if($settings['eael_pricing_table_button_show']=='yes'): ?>
+	                <?php if( isset( $settings['eael_pricing_table_button_show'] ) && 'yes' === $settings['eael_pricing_table_button_show'] ): ?>
                     <div class="footer">
                         <a <?php echo $this->get_render_attribute_string('eael_pricing_button'); ?> >
                             <?php if ('left' == $icon_position) : ?>
@@ -2377,6 +2372,6 @@ class Pricing_Table extends Widget_Base
             </div>
         <?php endif; ?>
 <?php
-        do_action('add_pricing_table_style_block', $settings, $this, $pricing, $target, $nofollow, $featured_class);
+        do_action('add_pricing_table_style_block', $settings, $this, $pricing, $table_btn_link, $nofollow, $featured_class);
     }
 }

@@ -1,4 +1,4 @@
-@-webkit-keyframes animateStripe {
+@-webkit-keyframes eaelAnimateStripe {
   0% {
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0);
@@ -8,7 +8,7 @@
             transform: translate(35px, 0);
   }
 }
-@keyframes animateStripe {
+@keyframes eaelAnimateStripe {
   0% {
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0);
@@ -18,7 +18,7 @@
             transform: translate(35px, 0);
   }
 }
-@-webkit-keyframes animateStripeRTL {
+@-webkit-keyframes eaelAnimateStripeRTL {
   0% {
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0);
@@ -28,7 +28,7 @@
             transform: translate(-35px, 0);
   }
 }
-@keyframes animateStripeRTL {
+@keyframes eaelAnimateStripeRTL {
   0% {
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0);
@@ -100,8 +100,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  -webkit-clip-path: inset(0 0 0 50%);
-          clip-path: inset(0 0 0 50%);
+  clip-path: inset(0 0 0 50%);
 }
 .eael-progressbar-circle-inner {
   height: 100%;
@@ -121,8 +120,7 @@
   border-style: solid;
   border-color: #000000;
   border-radius: 50%;
-  -webkit-clip-path: inset(0 50% 0 0);
-          clip-path: inset(0 50% 0 0);
+  clip-path: inset(0 50% 0 0);
 }
 .eael-progressbar-circle-half-left {
   -webkit-transform: rotate(0deg);
@@ -151,12 +149,10 @@
   overflow: hidden;
 }
 .eael-progressbar-half-circle .eael-progressbar-circle-pie {
-  -webkit-clip-path: inset(0 0 50% 0);
-          clip-path: inset(0 0 50% 0);
+  clip-path: inset(0 0 50% 0);
 }
 .eael-progressbar-half-circle .eael-progressbar-circle-half {
-  -webkit-clip-path: inset(50% 0 0 0);
-          clip-path: inset(50% 0 0 0);
+  clip-path: inset(50% 0 0 0);
   -webkit-transform: rotate(0deg);
       -ms-transform: rotate(0deg);
           transform: rotate(0deg);
@@ -200,12 +196,12 @@
   background-size: 35px 35px;
 }
 .eael-progressbar-line-animate .eael-progressbar-line-fill:after {
-  -webkit-animation: animateStripe 2s linear infinite;
-          animation: animateStripe 2s linear infinite;
+  -webkit-animation: eaelAnimateStripe 2s linear infinite;
+          animation: eaelAnimateStripe 2s linear infinite;
 }
 .eael-progressbar-line-animate-rtl .eael-progressbar-line-fill:after {
-  -webkit-animation: animateStripeRTL 2s linear infinite;
-          animation: animateStripeRTL 2s linear infinite;
+  -webkit-animation: eaelAnimateStripeRTL 2s linear infinite;
+          animation: eaelAnimateStripeRTL 2s linear infinite;
 }
 .eael-progressbar-circle-wrap > div {
   margin: 0 auto;
@@ -238,12 +234,10 @@
   right: 0;
 }
 .rtl .eael-progressbar.eael-progressbar-circle .eael-progressbar-circle-pie {
-  -webkit-clip-path: inset(0 50% 0 0);
-          clip-path: inset(0 50% 0 0);
+  clip-path: inset(0 50% 0 0);
 }
 .rtl .eael-progressbar.eael-progressbar-circle .eael-progressbar-circle-half {
-  -webkit-clip-path: inset(0 0 0 50%);
-          clip-path: inset(0 0 0 50%);
+  clip-path: inset(0 0 0 50%);
 }
 .rtl .eael-progressbar-circle-container .eael-progressbar-half-circle-after .eael-progressbar-prefix-label {
   float: left;

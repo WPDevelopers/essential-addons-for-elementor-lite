@@ -18,7 +18,6 @@
 }
 
 .eael-pricing .eael-pricing-button {
-  display: none;
   padding: 12px 25px;
   background: #00c853;
   font-size: 14px;
@@ -218,7 +217,6 @@
 
 .eael-pricing.style-1 .eael-pricing-item .price-tag {
   position: relative;
-  display: inline-block;
   font-size: 28px;
   font-weight: 500;
   line-height: 0px;
@@ -431,7 +429,6 @@
 
 .eael-pricing.style-2 .eael-pricing-item .price-tag {
   position: relative;
-  display: inline-block;
   font-size: 28px;
   font-weight: 500;
   line-height: 0px;

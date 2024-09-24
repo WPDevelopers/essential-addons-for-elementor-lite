@@ -51,6 +51,10 @@ class Feature_List extends Widget_Base {
         ];
     }
 
+    protected function is_dynamic_content():bool {
+        return false;
+    }
+
     public function get_custom_help_url() {
         return 'https://essential-addons.com/elementor/docs/ea-feature-list/';
     }
@@ -251,6 +255,21 @@ class Feature_List extends Widget_Base {
         );
 
         $this->add_control(
+            'eael_feature_list_layout',
+            [
+                'label'       => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::SELECT,
+                'default'     => 'vertical',
+                'label_block' => false,
+                'separator'   => 'before',
+                'options'     => [
+                    'vertical'   => esc_html__( 'Vertical', 'essential-addons-for-elementor-lite' ),
+                    'horizontal' => esc_html__( 'Horizontal', 'essential-addons-for-elementor-lite' ),
+                ],
+            ]
+        );
+
+        $this->add_control(
             'eael_feature_list_title_size',
             [
                 'label'     => esc_html__( 'Title HTML Tag', 'essential-addons-for-elementor-lite' ),
@@ -266,8 +285,7 @@ class Feature_List extends Widget_Base {
                     'span' => 'span',
                     'p'    => 'p',
                 ],
-                'default'   => 'h3',
-                'separator' => 'before',
+                'default'   => 'h2',
             ]
         );
 
@@ -328,6 +346,37 @@ class Feature_List extends Widget_Base {
             ]
         );
 
+        $this->add_control(
+            'eael_feature_list_icon_vertical_position',
+            [
+                'label'           => esc_html__( 'Icon Vertical Position', 'essential-addons-for-elementor-lite' ),
+                'type'            => Controls_Manager::CHOOSE,
+                'options'         => [
+                    'start'  => [
+                        'title' => esc_html__( 'Top', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-v-align-top',
+                    ],
+                    'center'   => [
+                        'title' => esc_html__( 'Middle', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-v-align-middle',
+                    ],
+                    'end' => [
+                        'title' => esc_html__( 'Bottom', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-v-align-bottom',
+                    ],
+                ],
+                'default'         => 'start',
+                'toggle'          => false,
+                'condition'  => [
+                    'eael_feature_list_layout'         => 'horizontal',
+                    'eael_feature_list_icon_position!' => 'top',
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-horizontal .eael-feature-list-item' => 'align-items: {{VALUE}};',
+                ],
+            ]
+        );
+
         $this->add_responsive_control(
             'eael_feature_list_icon_right_indicator_position',
             [
@@ -353,6 +402,7 @@ class Feature_List extends Widget_Base {
                     '{{WRAPPER}} .eael-feature-list-items.connector-type-modern .eael-feature-list-item:after' => 'top: {{SIZE}}{{UNIT}} !important;',
                 ],
                 'condition'  => [
+                    'eael_feature_list_layout'        => 'vertical',
                     'eael_feature_list_icon_position' => 'top',
                 ],
             ]
@@ -367,6 +417,9 @@ class Feature_List extends Widget_Base {
                 'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
                 'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
                 'return_value' => 'yes',
+                'condition' => [
+                    'eael_feature_list_layout' => 'vertical'
+                ]
             ]
         );
 
@@ -387,6 +440,35 @@ class Feature_List extends Widget_Base {
         );
 
         $this->add_responsive_control(
+            'eael_feature_list_item_width',
+            [
+                'label'     => esc_html__( 'Item Width', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+                'default'   => [
+					'unit' => '%',
+                    'size' => 40,
+                ],
+                'range'     => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1000,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-horizontal .eael-feature-list-item' => 'width: {{SIZE}}{{UNIT}}',
+                ],
+                'condition'   => [
+                    'eael_feature_list_layout'      => 'horizontal',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
             'eael_feature_list_space_between',
             [
                 'label'     => esc_html__( 'Space Between', 'essential-addons-for-elementor-lite' ),
@@ -400,10 +482,11 @@ class Feature_List extends Widget_Base {
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-feature-list-items .eael-feature-list-item:not(:last-child)'                              => 'padding-bottom: calc({{SIZE}}{{UNIT}}/2)',
-                    '{{WRAPPER}} .eael-feature-list-items .eael-feature-list-item:not(:first-child)'                             => 'padding-top: calc({{SIZE}}{{UNIT}}/2)',
-                    '{{WRAPPER}} .eael-feature-list-items.connector-type-modern .eael-feature-list-item:not(:last-child):before' => 'height: calc(100% + {{SIZE}}{{UNIT}})',
-                    'body.rtl {{WRAPPER}} .eael-feature-list-items .eael-feature-list-item:after'                                => 'left: calc(-{{SIZE}}{{UNIT}}/2)',
+                    '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-horizontal' => 'gap: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-vertical .eael-feature-list-item:not(:last-child)'  => 'padding-bottom: calc({{SIZE}}{{UNIT}}/2)',
+                    '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-vertical .eael-feature-list-item:not(:first-child)' => 'padding-top: calc({{SIZE}}{{UNIT}}/2)',
+                    'body.rtl {{WRAPPER}} .eael-feature-list-items.eael-feature-list-vertical .eael-feature-list-item:after'    => 'left: calc(-{{SIZE}}{{UNIT}}/2)',
+                    '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-vertical.connector-type-modern .eael-feature-list-item:not(:last-child):before' => 'height: calc(100% + {{SIZE}}{{UNIT}})',
                 ],
             ]
         );
@@ -530,7 +613,7 @@ class Feature_List extends Widget_Base {
             [
                 'label'     => esc_html__( 'Secondary Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '#ffffff',
+                'default'   => '#07b4eb',
                 'selectors' => [
                     '{{WRAPPER}} .eael-feature-list-items.framed .eael-feature-list-icon' => 'background-color: {{VALUE}};',
                 ],
@@ -833,6 +916,8 @@ class Feature_List extends Widget_Base {
     protected function render() {
         $settings = $this->get_settings_for_display();
         $css_id = 'eael-feature-list-' . esc_attr( $this->get_id() );
+        $layout = ( !empty($settings['eael_feature_list_layout']) && $settings['eael_feature_list_layout'] ) ? $settings['eael_feature_list_layout'] : 'vertical';
+
         $this->add_render_attribute( 'eael_feature_list', [
             'id'    => $css_id,
             'class' => [
@@ -840,6 +925,7 @@ class Feature_List extends Widget_Base {
                 $settings['eael_feature_list_icon_shape'],
                 $settings['eael_feature_list_icon_shape_view'],
                 $settings['eael_feature_list_connector_type'],
+                'eael-feature-list-' . $layout,
             ],
         ] );
         // connector class change by connector type
@@ -850,8 +936,8 @@ class Feature_List extends Widget_Base {
         $this->add_render_attribute( 'eael_feature_list_item', 'class', 'eael-feature-list-item' );
 
         // $padding = $settings['eael_feature_list_icon_padding']['size'];
-        $circle_size = intval( $settings['eael_feature_list_icon_circle_size']['size'] );
-        $font = $settings['eael_feature_list_icon_size']['size'];
+        $circle_size = isset( $settings['eael_feature_list_icon_circle_size']['size'] ) ? intval( $settings['eael_feature_list_icon_circle_size']['size'] ) : 70;
+        $font = isset( $settings['eael_feature_list_icon_size']['size'] ) ? $settings['eael_feature_list_icon_size']['size'] : 21;
 
         if ( isset( $settings['eael_feature_list_icon_border_width']['right'] ) && isset( $settings['eael_feature_list_icon_border_width']['left'] ) ) {
             $border = $settings['eael_feature_list_icon_border_width']['right'] + $settings['eael_feature_list_icon_border_width']['left'];
@@ -882,6 +968,7 @@ class Feature_List extends Widget_Base {
         } else {
             $connector_mobile = 'right: calc(100% - ' . $connector_width . 'px); left: 0;';
         }
+
         // icon position for all mode
         $eael_feature_list_icon_position_setting = ( !empty($settings['eael_feature_list_icon_position']) && $settings['eael_feature_list_icon_position'] ) ? $settings['eael_feature_list_icon_position'] : 'left';
         $eael_feature_list_icon_position_tablet_setting = ( !empty($settings['eael_feature_list_icon_position_tablet']) && $settings['eael_feature_list_icon_position_tablet'] ) ? $settings['eael_feature_list_icon_position_tablet'] : 'left';
@@ -965,10 +1052,7 @@ class Feature_List extends Widget_Base {
 							</div>
 						</div>
 						<div class="eael-feature-list-content-box">
-							<<?php echo implode( ' ', [
-            $feat_title_tag,
-            $this->get_render_attribute_string( 'eael_feature_list_title' . $index),
-        ] ); ?>
+							<<?php echo implode( ' ', [ $feat_title_tag, $this->get_render_attribute_string( 'eael_feature_list_title' . $index), ] ); ?>
 							><?php echo !empty( $item['eael_feature_list_link']['url'] ) ? "<a {$this->get_render_attribute_string( 'eael_feature_list_title_anchor' . $index)}>" : ''; ?><?php echo Helper::eael_wp_kses($item['eael_feature_list_title']); ?><?php echo !empty( $item['eael_feature_list_link']['url'] ) ? "</a>" : ''; ?></<?php echo $feat_title_tag; ?>
 						>
 						<p <?php echo $this->get_render_attribute_string( 'eael_feature_list_content' . $index); ?>><?php echo Helper::eael_wp_kses($item['eael_feature_list_content']); ?></p>

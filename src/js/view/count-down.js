@@ -2,8 +2,8 @@ var CountDown = function ($scope, $) {
 	var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
 		$countdown_id = $coundDown.data("countdown-id") !== undefined ? $coundDown.data("countdown-id") : "",
 		$expire_type = $coundDown.data("expire-type") !== undefined ? $coundDown.data("expire-type") : "",
-		$expiry_text = $coundDown.data("expiry-text") !== undefined ? $coundDown.data("expiry-text") : "",
-		$expiry_title = $coundDown.data("expiry-title") !== undefined ? $coundDown.data("expiry-title") : "",
+		$expiry_text = $coundDown.data("expiry-text") !== undefined ? DOMPurify.sanitize($coundDown.data("expiry-text")) : "",
+		$expiry_title = $coundDown.data("expiry-title") !== undefined ? DOMPurify.sanitize($coundDown.data("expiry-title")) : "",
 		$redirect_url = $coundDown.data("redirect-url") !== undefined ? $coundDown.data("redirect-url") : "",
 		$template = $coundDown.data("template") !== undefined ? $coundDown.data("template") : "",
 		$countdown_type = $coundDown.data("countdown-type") !== undefined ? $coundDown.data("countdown-type") : "",
@@ -29,10 +29,16 @@ var CountDown = function ($scope, $) {
 						if (isEditMode) {
 							countDown.html("Your Page will be redirected to given URL (only on Frontend).");
 						} else {
-							window.location.href = $redirect_url;
+							window.location.href = eael.sanitizeURL($redirect_url);
 						}
 					} else if ($expire_type === "template") {
 						countDown.html($coundDown.find(".eael-countdown-expiry-template").html());
+						if( $countdown_type === 'evergreen' ){
+							countDown.remove();
+							$coundDown.find(".eael-countdown-expiry-template")
+								  .attr( "id", "#eael-countdown-" + $countdown_id ).show()
+								  .removeClass( "eael-countdown-expiry-template" ).addClass( "eael-countdown-template" );
+						}
 					} else {
 						//do nothing!
 					}

@@ -1,11 +1,16 @@
-ea.hooks.addAction("init", "ea", () => {
-	if (ea.elementStatusCheck('eaelAdvancedTabs')) {
+eael.hooks.addAction("init", "ea", () => {
+	if (eael.elementStatusCheck('eaelAdvancedTabs')) {
 		return false;
 	}
 	elementorFrontend.hooks.addAction(
 		"frontend/element_ready/eael-adv-tabs.default",
 		function ($scope, $) {
 			const $currentTab = $scope.find('.eael-advance-tabs');
+
+			var $advanceTab = $scope.find(".eael-advance-tabs"),
+			$scrollOnClick = $advanceTab.data("scroll-on-click");
+			$scrollSpeed = $advanceTab.data("scroll-speed");
+			
 			let $customIdOffsetTab = $currentTab.data('custom-id-offset');
 			if ( !$currentTab.attr( 'id' ) ) {
 				return false;
@@ -97,6 +102,18 @@ ea.hooks.addAction("init", "ea", () => {
 
 					$(tabsContent).not(':eq(' + currentTabIndex + ')').removeClass("active").addClass("inactive");
 					$(tabsContent).eq(currentTabIndex).toggleClass('active inactive');
+
+					//Scroll on click
+					if ( $scrollOnClick === 'yes' ) {
+						let $eaelContainerSelect = $(this).attr('aria-controls');
+						$(this).attr('data-scroll', $('#'+$eaelContainerSelect).offset().top)
+					}
+					if ($scrollOnClick === 'yes' && $(this).hasClass("active") ) {
+						let $customIdOffsetVal = $customIdOffsetTab ? parseFloat($customIdOffsetTab) : 0;
+						$('html, body').animate({
+							scrollTop: $(this).data('scroll') - $customIdOffsetVal,
+						}, $scrollSpeed);
+					}
 				} else {
 					$(this).parent("li").addClass("active");
 					$(tabsNav).removeClass("active active-default").addClass("inactive").attr('aria-selected', 'false').attr('aria-expanded', 'false');
@@ -105,8 +122,20 @@ ea.hooks.addAction("init", "ea", () => {
 
 					$(tabsContent).removeClass("active").addClass("inactive");
 					$(tabsContent).eq(currentTabIndex).addClass("active").removeClass("inactive");
+
+					//Scroll on click
+					if ($scrollOnClick === 'yes') {
+						let $eaelContainerSelect = $(this).attr('aria-controls');
+						$(this).attr('data-scroll', $('#'+$eaelContainerSelect).offset().top)
+					}
+					if ($scrollOnClick === 'yes' && $(this).hasClass("active")) {
+						let $customIdOffsetVal = $customIdOffsetTab ? parseFloat($customIdOffsetTab) : 0;
+						$('html, body').animate({
+							scrollTop: $(this).data('scroll') - $customIdOffsetVal,
+						}, $scrollSpeed);
+					}
 				}
-				ea.hooks.doAction("ea-advanced-tabs-triggered", $(tabsContent).eq(currentTabIndex));
+				eael.hooks.doAction("ea-advanced-tabs-triggered", $(tabsContent).eq(currentTabIndex));
 				
 				$(tabsContent).each(function (index) {
 					$(this).removeClass("active-default");
@@ -152,16 +181,12 @@ ea.hooks.addAction("init", "ea", () => {
 				}
 				
 				if ($evCalendar.length) {
-					ea.hooks.doAction("eventCalendar.reinit");
+					eael.hooks.doAction("eventCalendar.reinit");
 				}
-
-				setTimeout(function () {
-					window.dispatchEvent(new Event('resize'));
-				}, 100);
 			});
 
 			// If hashTag is not null then scroll to that hashTag smoothly
-			if( typeof hashTag !== 'undefined' && hashTag && !ea.elementStatusCheck('eaelAdvancedTabScroll')){
+			if( typeof hashTag !== 'undefined' && hashTag && !eael.elementStatusCheck('eaelAdvancedTabScroll')){
 				let $customIdOffsetValTab = $customIdOffsetTab ? parseFloat($customIdOffsetTab) : 0;
 					$('html, body').animate({
 						scrollTop: $("#"+hashTag).offset().top - $customIdOffsetValTab,

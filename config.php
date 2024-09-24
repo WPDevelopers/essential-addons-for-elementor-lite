@@ -81,6 +81,11 @@ $config = [
                     ],
                 ],
                 'js' => [
+	                [
+		                'file' => EAEL_PLUGIN_PATH . '/assets/front-end/js/lib-view/dom-purify/purify.min.js',
+		                'type' => 'lib',
+		                'context' => 'view',
+	                ],
                     [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/morphext/morphext.min.js',
                         'type' => 'lib',
@@ -127,6 +132,11 @@ $config = [
                         'type' => 'lib',
                         'context' => 'view',
                     ],
+	                [
+		                'file' => EAEL_PLUGIN_PATH . '/assets/front-end/js/lib-view/dom-purify/purify.min.js',
+		                'type' => 'lib',
+		                'context' => 'view',
+	                ],
                     [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/count-down.min.js',
                         'type' => 'self',
@@ -321,6 +331,11 @@ $config = [
                         'context' => 'edit',
                     ],
                     [
+                        'file' => EAEL_PLUGIN_PATH . '/assets/front-end/js/lib-view/dom-purify/purify.min.js',
+                        'type' => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/advanced-data-table.min.js',
                         'type' => 'self',
                         'context' => 'view',
@@ -373,6 +388,11 @@ $config = [
                     ],
                 ],
                 'js' => [
+	                [
+		                'file' => EAEL_PLUGIN_PATH . '/assets/front-end/js/lib-view/dom-purify/purify.min.js',
+		                'type' => 'lib',
+		                'context' => 'view',
+	                ],
                     [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/imagesloaded/imagesloaded.pkgd.min.js',
                         'type' => 'lib',
@@ -1207,14 +1227,7 @@ $config = [
         ],
         'wrapper-link' => [
 	        'class'      => '\Essential_Addons_Elementor\Extensions\Wrapper_Link',
-	        'dependency' => [
-		        'css' => [
-			        [
-				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/wrapper-link.min.css',
-				        'type'    => 'self',
-				        'context' => 'view',
-			        ],
-		        ],
+            'dependency' => [
 		        'js'  => [
 			        [
 				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/wrapper-link.min.js',
@@ -1223,6 +1236,25 @@ $config = [
 			        ],
 		        ],
 	        ],
+        ],
+        'special-hover-effect' => [
+            'class'      => '\Essential_Addons_Elementor\Extensions\Hover_Effect',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/hover-effect.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/hover-effect.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
         ],
     ],
 ];

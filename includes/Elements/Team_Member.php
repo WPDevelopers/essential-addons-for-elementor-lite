@@ -52,6 +52,10 @@ class Team_Member extends Widget_Base {
 		];
     }
 
+	protected function is_dynamic_content():bool {
+        return false;
+    }
+
 	public function get_custom_help_url()
 	{
         return 'https://essential-addons.com/elementor/docs/team-members/';
@@ -274,7 +278,7 @@ class Team_Member extends Widget_Base {
 			]
 		);
 
-		$team_member_style_presets_options = apply_filters('eael_team_member_style_presets_options', [
+		$template_list = apply_filters('eael_team_member_style_presets_options', [
 			'eael-team-members-simple'        => esc_html__( 'Simple Style', 		'essential-addons-for-elementor-lite' ),
 			'eael-team-members-overlay'       => esc_html__( 'Overlay Style', 	'essential-addons-for-elementor-lite' ),
 			'eael-team-members-centered'      => esc_html__( 'Centered Style', 	'essential-addons-for-elementor-lite' ),
@@ -283,13 +287,28 @@ class Team_Member extends Widget_Base {
 			'eael-team-members-social-right'  => esc_html__( 'Social on Right', 	'essential-addons-for-elementor-lite' ),
 		]);
 
+		$layout_options = [];
+
+		if( ! empty( $template_list ) ){
+            $image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/team-preset-';
+            foreach( $template_list as $key => $label ){
+                $layout_options[ $key ] = [
+                    'title' => $label,
+                    'image' => $image_path . str_replace( 'eael-team-members-', '', $key ) . '.png'
+                ];
+            }
+        }
+
 		$this->add_control(
 			'eael_team_members_preset',
 			[
-				'label'   => esc_html__( 'Style Preset', 'essential-addons-for-elementor-lite'),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'eael-team-members-simple',
-				'options' => $team_member_style_presets_options
+				'label'       => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => $layout_options,
+				'default'     => 'eael-team-members-simple',
+				'label_block' => true,
+                'toggle'      => false,
+                'image_choose'=> true,
 			]
 		);
 
@@ -905,7 +924,7 @@ class Team_Member extends Widget_Base {
 	?>
 
 
-	<div id="eael-team-member-<?php echo esc_attr($this->get_id()); ?>" class="eael-team-item <?php echo $team_member_classes; ?>">
+	<div id="eael-team-member-<?php echo esc_attr($this->get_id()); ?>" class="eael-team-item <?php echo esc_attr( $team_member_classes ); ?>">
 		<div class="eael-team-item-inner">
 			<div class="eael-team-image">
 				<figure>
@@ -926,8 +945,8 @@ class Team_Member extends Widget_Base {
 			</div>
 
 			<div class="eael-team-content">
-				<h3 class="eael-team-member-name"><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_name']); ?></h3>
-				<h4 class="eael-team-member-position"><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_job_title']); ?></h4>
+				<h2 class="eael-team-member-name"><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_name']); ?></h2>
+				<h3 class="eael-team-member-position"><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_job_title']); ?></h3>
 
 				<?php if( 'eael-team-members-social-bottom' === $settings['eael_team_members_preset'] ) : ?>
 					<?php do_action( 'eael/team_member_social_botton_markup', $settings, $this ); ?>
@@ -943,7 +962,7 @@ class Team_Member extends Widget_Base {
 										<a <?php $this->print_render_attribute_string( 'social_link_' . $index ); ?>>
 											<?php if ($icon_is_new || $icon_migrated) { ?>
 												<?php if( isset( $item['social_new']['value']['url'] ) ) : ?>
-													<img src="<?php echo esc_attr($item['social_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($item['social_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+													<img src="<?php echo esc_url( $item['social_new']['value']['url'] ); ?>" alt="<?php echo esc_attr(get_post_meta($item['social_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
 												<?php else :
                                                     \Elementor\Icons_Manager::render_icon( $item['social_new'], [ 'aria-hidden' => 'true' ] );
                                                 endif; ?>
