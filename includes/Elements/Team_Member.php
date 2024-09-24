@@ -83,6 +83,9 @@ class Team_Member extends Widget_Base {
 				'ai' => [
 					'active' => false,
 				],
+				'dynamic' => [
+                    'active' => true,
+                ],
 			]
 		);
 
