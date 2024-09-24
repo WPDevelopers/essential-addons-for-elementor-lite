@@ -19,11 +19,11 @@ class Woo_Product_Images extends Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'eicon-elementor-circle templately-widget-icon';
+		return 'eaicon-product-image templately-widget-icon';
 	}
 
 	public function get_categories() {
-		return [ 'templately_library' ];
+		return [ 'templately-single' ];
 	}
 
 	public function get_keywords() {
