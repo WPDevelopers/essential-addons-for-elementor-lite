@@ -74,10 +74,6 @@ class Adv_Accordion extends Widget_Base
         ];
     }
 
-    protected function is_dynamic_content():bool {
-        return false;
-    }
-
     public function get_custom_help_url()
     {
         return 'https://essential-addons.com/elementor/docs/advanced-accordion/';
@@ -264,6 +260,22 @@ class Adv_Accordion extends Widget_Base
 				],
                 'default'   => 'custom',
 				'toggle'    => false,
+			]
+		);
+
+        $this->add_control(
+			'eael_adv_accordion_show_full_content',
+			[
+				'label'        => esc_html__( 'Show Full Content', 'textdomain' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'no',
+                'description'  => esc_html__( 'By Enabling this, Post\'s full content will be shown. By default it shows the excerpt.', 'essential-addons-for-elementor-lite' ),
+                'condition'    => [
+                    'eael_adv_accordion_content_source' => 'dynamic',
+                ],
 			]
 		);
 
@@ -1372,11 +1384,11 @@ class Adv_Accordion extends Widget_Base
                     'class'         => $tab_title_class,
                     'tabindex'      => 0,
                     'data-tab'      => $tab_count,
-                    'aria-controls' => 'elementor-tab-content-' . $tab_id . $tab_count,
+                    'aria-controls' => 'elementor-tab-content-' . $tab_id . '-' . $tab_count,
                 ]);
 
                 $this->add_render_attribute($tab_content_setting_key, [
-                    'id'              => 'elementor-tab-content-' . $tab_id . $tab_count,
+                    'id'              => 'elementor-tab-content-' . $tab_id . '-' . $tab_count,
                     'class'           => $tab_content_class,
                     'data-tab'        => $tab_count,
     //                'role'            => 'tabpanel',
@@ -1418,7 +1430,7 @@ class Adv_Accordion extends Widget_Base
                     echo '</div>';
 
                     echo '<div ' . $this->get_render_attribute_string($tab_content_setting_key) . '>';
-                        $content = get_the_excerpt() ? get_the_excerpt() : get_the_content();
+                        $content = isset( $settings['eael_adv_accordion_show_full_content'] ) && 'yes' === $settings['eael_adv_accordion_show_full_content'] ? get_the_content() : get_the_excerpt();
                         echo wp_kses( $content, Helper::eael_allowed_tags() );
                     echo '</div>';
                 echo '</div>';
