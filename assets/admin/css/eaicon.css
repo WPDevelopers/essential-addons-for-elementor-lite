@@ -443,17 +443,13 @@ font-display: block;
 }
 .eaicon-add-to-cart:before {
 	content: "\e982";
-	color: #515962;
 }
 .eaicon-product-image:before {
 	content: "\e983";
-	color: #515962;
 }
 .eaicon-product-price:before {
 	content: "\e984";
-	color: #515962;
 }
 .eaicon-product-rating:before {
 	content: "\e985";
-	color: #515962;
 }
