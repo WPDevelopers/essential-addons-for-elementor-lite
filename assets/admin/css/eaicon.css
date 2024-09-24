@@ -1,14 +1,14 @@
 @font-face {
-	font-family: 'eaicon';
-	src:  url('../fonts/eaicon.eot?jbjw5b');
-	src:  url('../fonts/eaicon.eot?jbjw5b#iefix') format('embedded-opentype'),
-	  url('../fonts/eaicon.ttf?jbjw5b') format('truetype'),
-	  url('../fonts/eaicon.woff?jbjw5b') format('woff'),
-	  url('../fonts/eaicon.svg?jbjw5b#eaicon') format('svg');
-	font-weight: normal;
-	font-style: normal;
-	font-display: block;
-  }
+font-family: 'eaicon';
+src:  url('../fonts/eaicon.eot?co9s01');
+src:  url('../fonts/eaicon.eot?co9s01#iefix') format('embedded-opentype'),
+	url('../fonts/eaicon.ttf?co9s01') format('truetype'),
+	url('../fonts/eaicon.woff?co9s01') format('woff'),
+	url('../fonts/eaicon.svg?co9s01#eaicon') format('svg');
+font-weight: normal;
+font-style: normal;
+font-display: block;
+}
 
 [class^="eaicon-"],
 [class*=" eaicon-"] {
@@ -440,4 +440,20 @@
 }
 .eaicon-photo-sphere:before {
 	content: "\e982";
+}
+.eaicon-add-to-cart:before {
+	content: "\e982";
+	color: #515962;
+}
+.eaicon-product-image:before {
+	content: "\e983";
+	color: #515962;
+}
+.eaicon-product-price:before {
+	content: "\e984";
+	color: #515962;
+}
+.eaicon-product-rating:before {
+	content: "\e985";
+	color: #515962;
 }
