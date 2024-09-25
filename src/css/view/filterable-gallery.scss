@@ -480,6 +480,14 @@ body.rtl {
 }
 
 /*--- Video Gallery ---*/
+.mfp-bottom-bar {
+	margin-top: 0;
+}
+
+figcaption .mfp-bottom-bar {
+	margin-top: -36px;
+}
+
 .gallery-item-thumbnail-wrap {
 	position: relative;
 }

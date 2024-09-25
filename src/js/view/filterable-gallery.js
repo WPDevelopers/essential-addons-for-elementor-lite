@@ -151,8 +151,10 @@ jQuery(window).on("elementor/frontend/init", function () {
 				iframe: {
 					markup: `<div class="mfp-iframe-scaler">
 								<div class="mfp-close"></div>
-								<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>
+								<iframe class="mfp-iframe eael-video-gallery-on" frameborder="0" allowfullscreen></iframe>
 								<div class="mfp-title eael-privacy-message"></div>
+								<div class="mfp-bottom-bar">
+								<div class="mfp-counter"></div>
 							</div>`
 				},
 				callbacks: {
