@@ -189,8 +189,10 @@
   text-align: left;
 }
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr {
-  position: relative;
-  z-index: 2;
+  -webkit-transform: translate(0);
+      -ms-transform: translate(0);
+          transform: translate(0);
+  clip-path: inset(0);
 }
 .eael-woo-cart .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table tbody tr::after {
   position: absolute;
