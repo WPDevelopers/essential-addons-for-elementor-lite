@@ -1043,7 +1043,7 @@ class Adv_Tabs extends Widget_Base
 
                         $this->add_render_attribute( $tab_title_setting_key, [
                             'id' => $tab_id,
-                            'class' => [ $tab['eael_adv_tabs_tab_show_as_default'], 'eael-tab-item-trigger' ],
+                            'class' => [ $tab['eael_adv_tabs_tab_show_as_default'], 'eael-tab-item-trigger', 'eael-tab-nav-item' ],
                             'aria-selected' => 1 === $tab_count ? 'true' : 'false',
                             'data-tab' => $tab_count,
                             'role' => 'tab',
