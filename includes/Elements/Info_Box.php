@@ -669,10 +669,10 @@ class Info_Box extends Widget_Base
 
         $this->end_controls_tabs();
 
-        $this->add_control(
+        $this->add_responsive_control(
             'eael_infobox_image_resizer',
             [
-                'label' => esc_html__('Image Resizer', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Image Width', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 100,
@@ -686,7 +686,25 @@ class Info_Box extends Widget_Base
                     '{{WRAPPER}} .eael-infobox .infobox-icon img' => 'width: {{SIZE}}px;',
                     '{{WRAPPER}} .eael-infobox.icon-on-left .infobox-icon' => 'width: {{SIZE}}px;',
                     '{{WRAPPER}} .eael-infobox.icon-on-right .infobox-icon' => 'width: {{SIZE}}px;',
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_infobox_image_height',
+            [
+                'label' => esc_html__('Image Height', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'max' => 500,
+                    ],
                 ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-infobox .infobox-icon img' => 'height: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-infobox.icon-on-left .infobox-icon' => 'height: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-infobox.icon-on-right .infobox-icon' => 'height: {{SIZE}}px;',
+                ]
             ]
         );
 
