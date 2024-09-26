@@ -677,9 +677,9 @@ class Woo_Product_Carousel extends Widget_Base {
         );
 
         $this->add_control(
-			'marquee_mood',
+			'enable_marquee',
 			[
-				'label'        => __( 'Marquee Mood', 'essential-addons-elementor' ),
+				'label'        => __( 'Enable Marquee', 'essential-addons-elementor' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => __( 'Yes', 'essential-addons-elementor' ),
 				'label_off'    => __( 'No', 'essential-addons-elementor' ),
@@ -708,7 +708,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 'size_units' => '',
 				'condition'  => [
 					'autoplay' => 'yes',
-					'marquee_mood!' => 'yes',
+					'enable_marquee!' => 'yes',
 				],
             ]
         );
@@ -771,7 +771,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 'content_classes' => 'eael-warning',
                 'condition'       => [
                     'autoplay' => 'yes',
-                    'marquee_mood' => 'yes',
+                    'enable_marquee' => 'yes',
                     'carousel_effect' => [ 'slide', 'coverflow' ],
                 ],
             ]
@@ -3093,7 +3093,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 $settings[ 'slider_speed' ][ 'size' ] );
         }
 
-        if( 'yes' === $settings['marquee_mood'] ){
+        if( 'yes' === $settings['enable_marquee'] ){
 			$this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-autoplay', '0.001' );
 			$this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'class', 'eael-marquee-carousel' );
 		}
@@ -3177,7 +3177,7 @@ class Woo_Product_Carousel extends Widget_Base {
              * Render Slider Dots!
              */
 
-            if( 'yes' !== $settings['marquee_mood'] ){
+            if( 'yes' !== $settings['enable_marquee'] ){
                 if ( file_exists( $template ) && $settings['image_dots'] === 'yes') {
                     $this->render_image_dots($query);
                 } else {
@@ -3191,7 +3191,7 @@ class Woo_Product_Carousel extends Widget_Base {
              * Render Slider Navigations!
              */
 
-            if( 'yes' !== $settings['marquee_mood'] ){ 
+            if( 'yes' !== $settings['enable_marquee'] ){ 
                 $this->render_arrows();
             }
             ?>
