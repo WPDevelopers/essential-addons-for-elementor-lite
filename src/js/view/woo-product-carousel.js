@@ -36,6 +36,7 @@ eael.hooks.addAction("init", "ea", () => {
 				$wooProductCarousel.data("slide-items") !== undefined
 					? $wooProductCarousel.data("slide-items")
 					: 1,
+			$slideItems = '' === $slideItems ? 1 : $slideItems,
 			$margin =
 				$wooProductCarousel.data("margin") !== undefined
 					? $wooProductCarousel.data("margin")
