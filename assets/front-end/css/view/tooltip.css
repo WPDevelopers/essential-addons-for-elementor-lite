@@ -58,8 +58,8 @@
 
 .eael-tooltip:hover .eael-tooltip-text.eael-tooltip-left,
 .eael-tooltip-content:focus + .eael-tooltip-text.eael-tooltip-left {
-  -webkit-animation: tooltipLeftIn 300ms ease-in-out;
-          animation: tooltipLeftIn 300ms ease-in-out;
+  -webkit-animation: eaelTooltipLeftIn 300ms ease-in-out;
+          animation: eaelTooltipLeftIn 300ms ease-in-out;
 }
 
 .eael-tooltip .eael-tooltip-text.eael-tooltip-left::after {
@@ -83,8 +83,8 @@
 
 .eael-tooltip:hover .eael-tooltip-text.eael-tooltip-right,
 .eael-tooltip-content:focus + .eael-tooltip-text.eael-tooltip-right {
-  -webkit-animation: tooltipRightIn 300ms linear;
-          animation: tooltipRightIn 300ms linear;
+  -webkit-animation: eaelTooltipRightIn 300ms linear;
+          animation: eaelTooltipRightIn 300ms linear;
 }
 
 .eael-tooltip .eael-tooltip-text.eael-tooltip-right::after {
@@ -113,8 +113,8 @@
 
 .eael-tooltip:hover .eael-tooltip-text.eael-tooltip-top,
 .eael-tooltip-content:focus + .eael-tooltip-text.eael-tooltip-top {
-  -webkit-animation: tooltipTopIn 300ms linear;
-          animation: tooltipTopIn 300ms linear;
+  -webkit-animation: eaelTooltipTopIn 300ms linear;
+          animation: eaelTooltipTopIn 300ms linear;
 }
 
 /*--- Bottom ---*/
@@ -137,8 +137,8 @@
 
 .eael-tooltip:hover .eael-tooltip-text.eael-tooltip-bottom,
 .eael-tooltip-content:focus + .eael-tooltip-text.eael-tooltip-bottom {
-  -webkit-animation: tooltipBottomIn 300ms linear;
-          animation: tooltipBottomIn 300ms linear;
+  -webkit-animation: eaelTooltipBottomIn 300ms linear;
+          animation: eaelTooltipBottomIn 300ms linear;
 }
 
 /*--- Alignments ---*/
@@ -215,7 +215,7 @@
 
 /*--- Tooltip Keyframes ---*/
 
-@-webkit-keyframes tooltipRightIn {
+@-webkit-keyframes eaelTooltipRightIn {
   0% {
     opacity: 0;
     left: 105%;
@@ -226,7 +226,7 @@
   }
 }
 
-@keyframes tooltipRightIn {
+@keyframes eaelTooltipRightIn {
   0% {
     opacity: 0;
     left: 105%;
@@ -237,7 +237,7 @@
   }
 }
 
-@-webkit-keyframes tooltipLeftIn {
+@-webkit-keyframes eaelTooltipLeftIn {
   0% {
     opacity: 0;
     right: 105%;
@@ -248,7 +248,7 @@
   }
 }
 
-@keyframes tooltipLeftIn {
+@keyframes eaelTooltipLeftIn {
   0% {
     opacity: 0;
     right: 105%;
@@ -259,7 +259,7 @@
   }
 }
 
-@-webkit-keyframes tooltipTopIn {
+@-webkit-keyframes eaelTooltipTopIn {
   0% {
     opacity: 0;
     bottom: 110%;
@@ -270,7 +270,7 @@
   }
 }
 
-@keyframes tooltipTopIn {
+@keyframes eaelTooltipTopIn {
   0% {
     opacity: 0;
     bottom: 110%;
@@ -281,7 +281,7 @@
   }
 }
 
-@-webkit-keyframes tooltipBottomIn {
+@-webkit-keyframes eaelTooltipBottomIn {
   0% {
     opacity: 0;
     top: 110%;
@@ -292,7 +292,7 @@
   }
 }
 
-@keyframes tooltipBottomIn {
+@keyframes eaelTooltipBottomIn {
   0% {
     opacity: 0;
     top: 110%;

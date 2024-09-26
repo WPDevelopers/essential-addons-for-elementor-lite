@@ -10,10 +10,10 @@
   border-top: 5px solid #3498db;
   width: 50px;
   height: 50px;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 2s linear infinite;
+  -webkit-animation: eaelSpin 2s linear infinite; /* Safari */
+  animation: eaelSpin 2s linear infinite;
 }
-@-webkit-keyframes spin {
+@-webkit-keyframes eaelSpin {
   0% {
     -webkit-transform: rotate(0deg);
   }
@@ -21,7 +21,7 @@
     -webkit-transform: rotate(360deg);
   }
 }
-@keyframes spin {
+@keyframes eaelSpin {
   0% {
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg);
@@ -127,8 +127,8 @@
   font-weight: 900;
   position: absolute;
   right: 12px;
-  -webkit-animation: spin 2s linear infinite;
-          animation: spin 2s linear infinite;
+  -webkit-animation: eaelSpin 2s linear infinite;
+          animation: eaelSpin 2s linear infinite;
 }
 .eael-product-popup.woocommerce div.product {
   display: -webkit-box;

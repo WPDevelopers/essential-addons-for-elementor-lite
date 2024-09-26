@@ -18,7 +18,7 @@
 
     &.eael-interactive-circle-rotate,
     .eael-interactive-circle-rotate{
-        @keyframes rotation {
+        @keyframes eaelRotation {
             from {
                 transform: rotate(0deg);
             }
@@ -26,7 +26,7 @@
                 transform: rotate(360deg);
             }
         }
-        @keyframes rotation-reverse {
+        @keyframes eaelRotation-reverse {
             from {
                 transform: rotate(360deg);
             }
@@ -34,10 +34,10 @@
                 transform: rotate(0deg);
             }
         }
-        animation: rotation $rotation-speed linear infinite;
+        animation: eaelRotation $rotation-speed linear infinite;
 
         .eael-circle-btn-icon,.eael-circle-content {
-            animation: rotation-reverse $rotation-speed linear infinite;
+            animation: eaelRotation-reverse $rotation-speed linear infinite;
         }
 
         @media only screen and (max-width: $breakpoint) {
