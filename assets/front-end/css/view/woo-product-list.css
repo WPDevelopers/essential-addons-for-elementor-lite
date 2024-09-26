@@ -653,3 +653,8 @@
 .theme-flexia mark {
   background: unset;
 }
+.theme-blocksy .eael-product-list-add-to-cart-button .button:before {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}

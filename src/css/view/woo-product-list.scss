@@ -768,3 +768,7 @@ $spacer-lg: $spacing5;
         background: unset;
     }
 }
+
+.theme-blocksy .eael-product-list-add-to-cart-button .button:before {
+    width: fit-content;
+}
