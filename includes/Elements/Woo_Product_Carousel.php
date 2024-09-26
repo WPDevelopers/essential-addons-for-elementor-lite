@@ -569,6 +569,7 @@ class Woo_Product_Carousel extends Widget_Base {
 			    'default' => 1,
                 'condition' => [
                     'carousel_effect' => 'slide',
+                    'enable_marquee!' => 'yes',
                 ]
 		    ]
 	    );
@@ -724,6 +725,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 'return_value' => 'yes',
                 'condition'    => [
                     'autoplay' => 'yes',
+					'enable_marquee!' => 'yes',
                 ],
             ]
         );
@@ -767,7 +769,7 @@ class Woo_Product_Carousel extends Widget_Base {
 			'eael_marquee_warning_text', 
             [
                 'type'            => Controls_Manager::RAW_HTML,
-                'raw'             => __( 'Navigation Controllers won\'t work on <strong>Marquee</stong> Mood.', 'essential-addons-for-elementor-lite' ),
+                'raw'             => __( 'Arrows & Dots are not available on <strong>Marquee</stong> Mode.', 'essential-addons-for-elementor-lite' ),
                 'content_classes' => 'eael-warning',
                 'condition'       => [
                     'autoplay' => 'yes',
