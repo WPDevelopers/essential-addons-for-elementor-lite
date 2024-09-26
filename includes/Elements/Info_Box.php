@@ -594,7 +594,7 @@ class Info_Box extends Widget_Base
         $this->add_control(
             'eael_infobox_img_shape',
             [
-                'label' => esc_html__('Image Shape', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Shape', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'square',
                 'label_block' => false,
@@ -649,7 +649,7 @@ class Info_Box extends Widget_Base
         $this->add_control(
             'eael_infobox_hover_img_shape',
             [
-                'label' => esc_html__('Image Shape', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Shape', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'square',
                 'label_block' => false,
@@ -672,7 +672,7 @@ class Info_Box extends Widget_Base
         $this->add_responsive_control(
             'eael_infobox_image_resizer',
             [
-                'label' => esc_html__('Image Width', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Width', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 100,
@@ -693,7 +693,7 @@ class Info_Box extends Widget_Base
         $this->add_responsive_control(
             'eael_infobox_image_height',
             [
-                'label' => esc_html__('Image Height', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Height', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
