@@ -996,6 +996,7 @@ class Adv_Tabs extends Widget_Base
     {
         $settings = $this->get_settings_for_display();
 
+		$page_id = get_the_ID();
         $eael_find_default_tab = [];
         $eael_adv_tab_id = 1;
         $eael_adv_tab_content_id = 1;
@@ -1124,7 +1125,7 @@ class Adv_Tabs extends Widget_Base
                                 if ( ! is_array( $tab['eael_primary_templates'] ) ) {
                                     $tab['eael_primary_templates'] = apply_filters( 'wpml_object_id', $tab['eael_primary_templates'], 'wp_template', true );
                                 }
-                                
+                                echo "<div id='eael-xyz-click' data-template-id='{$tab['eael_primary_templates']}' data-page-id='{$page_id}' data-mode='edit'>Edit Template</div>";
                                 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                                 echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'] );
                             } ?>

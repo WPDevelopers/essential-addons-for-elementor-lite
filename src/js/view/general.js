@@ -276,4 +276,25 @@ jQuery(window).on("elementor/frontend/init", function () {
 			}
 		}
 	});
+
+	jQuery(document).on('click', '#eael-xyz-click', function () {
+		let $this = $(this),
+			templateID = $this.data('template-id'),
+			pageID = $this.data('page-id'),
+			mode = $this.data('mode');
+
+		if (mode === 'edit') {
+			parent.window.$e.run('editor/documents/switch', {
+				id: parseInt(templateID),  // Switch back to the original document
+				mode: 'edit'  // You can use 'edit' mode here if you want to continue editing the original document
+			});
+			$this.data('mode', 'save');
+		} else if (mode === 'save') {
+			parent.window.$e.run('editor/documents/switch', {
+				id: parseInt(pageID),  // Switch back to the original document
+				mode: 'save'  // You can use 'edit' mode here if you want to continue editing the original document
+			});
+			$this.data('mode', 'edit');
+		}
+	});
 })(jQuery);
