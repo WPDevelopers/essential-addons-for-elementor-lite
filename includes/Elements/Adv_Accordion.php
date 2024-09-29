@@ -1365,13 +1365,17 @@ class Adv_Accordion extends Widget_Base
         $settings = Helper::fix_old_query( $settings );
 		$args     = Helper::get_query_args( $settings );
         $query    = new \WP_Query($args);
+        $current_id = get_the_ID();
 
         if ( $query->have_posts() ) {
             $tab_count = 0;
             while ( $query->have_posts() ) {
                 $query->the_post();
-
                 $tab_id = get_the_ID();
+                if( $current_id === $tab_id ){
+                    continue;
+                }
+
                 $tab_count++;
 
                 $tab_title_setting_key   = 'eael_adv_accordion_title_' . $tab_id;
