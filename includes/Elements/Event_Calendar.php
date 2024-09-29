@@ -694,13 +694,22 @@ class Event_Calendar extends Widget_Base
 				'type' => Controls_Manager::SELECT,
 				'default' => 'MMM Do',
 				'options' => [
-					'MMM Do'      => date('M jS'),
-					'MMMM Do'     => date('F jS'),
-					'Do MMM'      => date('jS M'),
-					'Do MMMM'     => date('jS F'),
-					'MM-DD-YYYY'  => date('m-d-Y'),
-					'YYYY-DD-MM'  => date('Y-d-m'),
-					'YYYY-MM-DD'  => date('Y-m-d'),
+					'MMM Do'      => date('M jS'),     // Sep 29th
+                    'MMMM Do'     => date('F jS'),     // September 29th
+                    'Do MMM'      => date('jS M'),     // 29th Sep
+                    'Do MMMM'     => date('jS F'),     // 29th September
+                    'MM-DD-YYYY'  => date('m-d-Y'),    // 09-29-2024
+                    'YYYY-DD-MM'  => date('Y-d-m'),    // 2024-29-09
+                    'YYYY-MM-DD'  => date('Y-m-d'),    // 2024-09-29
+                    'DD/MM/YYYY'  => date('d/m/Y'),    // 29/09/2024
+                    'MM/DD/YYYY'  => date('m/d/Y'),    // 09/29/2024
+                    'YYYY/MM/DD'  => date('Y/m/d'),    // 2024/09/29
+                    'DD.MM.YYYY'  => date('d.m.Y'),    // 29/09/2024
+                    'MM.DD.YYYY'  => date('m.d.Y'),    // 09/29/2024
+                    'YYYY.MM.DD'  => date('Y.m.d'),    // 2024/09/29
+                    'D-MMM-YYYY'  => date('j-M-Y'),    // 29-Sep-2024
+                    'MMMM YYYY'   => date('F Y'),      // September 2024
+                    'MMM YYYY'    => date('M Y'),      // Sep 2024
 				],
 			]
 		);
