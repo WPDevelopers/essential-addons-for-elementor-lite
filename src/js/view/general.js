@@ -289,6 +289,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 				mode: 'edit'  // You can use 'edit' mode here if you want to continue editing the original document
 			});
 			$this.data('mode', 'save');
+			$this.text('Save & Back');
 		} else if (mode === 'save') {
 			parent.window.$e.run('editor/documents/switch', {
 				id: parseInt(pageID),  // Switch back to the original document
