@@ -1430,8 +1430,22 @@ class Adv_Accordion extends Widget_Base
                     echo '</div>';
 
                     echo '<div ' . $this->get_render_attribute_string($tab_content_setting_key) . '>';
-                        $content = isset( $settings['eael_adv_accordion_show_full_content'] ) && 'yes' === $settings['eael_adv_accordion_show_full_content'] ? get_the_content() : get_the_excerpt();
-                        echo wp_kses( $content, Helper::eael_allowed_tags() );
+                        if( isset( $settings['eael_adv_accordion_show_full_content'] ) && 'yes' === $settings['eael_adv_accordion_show_full_content'] ) {
+                            $document = Plugin::instance()->documents->get( $tab_id );
+                            if( $document && $document->is_built_with_elementor() ) {
+                                echo Plugin::$instance->frontend->get_builder_content( $tab_id, true );
+                            }
+                            else if ( has_blocks( get_the_content() ) ) {
+                                echo '<div class="eael-accordion-gutenberg-content">';
+                                the_content();
+                                echo '</div>';
+                            } else {
+                                the_content();
+                            }
+                        } else {
+                            echo wp_kses( get_the_excerpt(), Helper::eael_allowed_tags() );
+                        }
+                        
                     echo '</div>';
                 echo '</div>';
             }

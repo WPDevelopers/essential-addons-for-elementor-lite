@@ -81,6 +81,15 @@
     box-sizing: border-box;
     font-size: 1rem;
     line-height: 1.7;
+
+    .eael-accordion-gutenberg-content {
+        .alignfull {
+            width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+            max-width: 100%;
+        }
+    }
 }
 
 .eael-adv-accordion .eael-accordion-list .eael-accordion-content.active {
