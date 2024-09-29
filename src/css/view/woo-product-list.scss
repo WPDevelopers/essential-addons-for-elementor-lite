@@ -769,6 +769,13 @@ $spacer-lg: $spacing5;
     }
 }
 
-.theme-blocksy .eael-product-list-add-to-cart-button .button:before {
-    width: fit-content;
+.theme-blocksy {
+    .eael-product-list-add-to-cart-button {
+        .button:before {
+            width: fit-content;
+            filter: none !important;
+            opacity: 1;
+            z-index: 0;
+        }
+    }
 }
