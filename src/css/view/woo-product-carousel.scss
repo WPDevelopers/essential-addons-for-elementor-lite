@@ -836,6 +836,10 @@ $theme-preset4: #ec3b75;
         }
     }
 
+    .eael-marquee-carousel .swiper-wrapper{
+        transition-timing-function: linear !important; 
+    }
+
     // dot
     &.swiper-container-dots-outside .swiper-pagination,
     &.swiper-container-wrap-dots-outside .swiper-pagination {

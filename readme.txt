@@ -4,7 +4,7 @@ Tags: elementor, elements, elementor addon, elementor widget, woocommerce elemen
 Requires at least: 5.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 6.0.5
+Stable tag: 6.0.6
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -298,6 +298,23 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.0.6 - 29/09/2024 =
+
+- Improved: EA Filterable Gallery | Pagination on video gallery
+- Improved: EA Woo Product Carousel | Added Marquee support 
+- Improved: EA Wrapper Link | Add enable and disable option for traditional link
+- Improved: EA Woo Product Carousel | Add option to select items count on slide
+- Improved: EA Table of Contents | Position & Color
+- Improved: Security enhancements
+- Improved: EA Woo Checkout | Need an option to change Input field background color
+- Improved: EA Interactive Circle | Interactive Circle content icon not displaying.
+- Improved: EA Post Grid | Sticky posts visible at first
+- Fixed: EA Flip Box | Purple Color Overlay Issue
+- Fixed: EA Filterable Gallery | EA Filterable Gallery field link not translatable with WPML
+- Fixed: EA Login/Register Form | Absence of message validation
+- Fixed: EA Advanced Tabs | Accessibility Issue, Screen Reader Focus Limited to First Tab 
+- Few minor bug fixes & improvements
 
 = 6.0.5 - 18/09/2024 =
 

@@ -593,10 +593,10 @@ class Creative_Button extends Widget_Base
 ?>
         <div class="eael-creative-button-wrapper">
 
-            <a <?php echo $this->get_render_attribute_string('eael_creative_button'); ?>>
+            <a <?php $this->print_render_attribute_string('eael_creative_button'); ?>>
 
 	    <?php if ($settings['creative_button_effect'] === 'eael-creative-button--tamaya' ) : ?>
-            <div class="eael-creative-button--tamaya-secondary eael-creative-button--tamaya-before"><span><?php echo Helper::eael_wp_kses($settings['creative_button_secondary_text']); ?></span></div>
+            <div class="eael-creative-button--tamaya-secondary eael-creative-button--tamaya-before"><span><?php echo wp_kses( $settings['creative_button_secondary_text'], Helper::eael_allowed_tags() ); ?></span></div>
         <?php endif; ?>
 
                 <div class="creative-button-inner">
@@ -611,7 +611,7 @@ class Creative_Button extends Widget_Base
                         <?php } ?>
                     <?php endif; ?>
 
-                    <span class="cretive-button-text"><?php echo Helper::eael_wp_kses($settings['creative_button_text']); ?></span>
+                    <span class="cretive-button-text"><?php echo wp_kses( $settings['creative_button_text'], Helper::eael_allowed_tags() ); ?></span>
 
                     <?php if ($settings['creative_button_effect'] !== 'eael-creative-button--tamaya' && $settings['eael_creative_button_icon_alignment'] == 'right') : ?>
                         <?php if ($icon_migrated || $icon_is_new) {
@@ -624,7 +624,7 @@ class Creative_Button extends Widget_Base
                     <?php endif; ?>
                 </div>
 	            <?php if ($settings['creative_button_effect'] === 'eael-creative-button--tamaya' ) : ?>
-                    <div class="eael-creative-button--tamaya-secondary eael-creative-button--tamaya-after"><span><?php echo Helper::eael_wp_kses($settings['creative_button_secondary_text']); ?></span></div>
+                    <div class="eael-creative-button--tamaya-secondary eael-creative-button--tamaya-after"><span><?php echo wp_kses( $settings['creative_button_secondary_text'], Helper::eael_allowed_tags() ); ?></span></div>
 	            <?php endif; ?>
             </a>
         </div>
