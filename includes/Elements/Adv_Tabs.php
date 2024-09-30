@@ -1127,7 +1127,9 @@ class Adv_Tabs extends Widget_Base
                                 }
 
 						        if ( Plugin::$instance->editor->is_edit_mode() ) {
-							        echo "<div id='eael-xyz-click' data-template-id='{$tab['eael_primary_templates']}' data-page-id='{$page_id}' data-mode='edit'>Edit Template</div>";
+							        echo "<div class='eael-onpage-edit-template-wrapper'>
+											<div class='eael-onpage-edit-template' data-template-id='{$tab['eael_primary_templates']}' data-page-id='{$page_id}' data-mode='edit'><i class='eicon-edit'></i>Edit Template</div>
+									</div>";
 						        }
 
                                 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

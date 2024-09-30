@@ -277,7 +277,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 		}
 	});
 
-	jQuery(document).on('click', '#eael-xyz-click', function () {
+	jQuery(document).on('click', '.eael-onpage-edit-template', function () {
 		let $this = $(this),
 			templateID = $this.data('template-id'),
 			pageID = $this.data('page-id'),
