@@ -917,8 +917,8 @@ class Dual_Color_Header extends Widget_Base
 		if( $has_color_first_and_second ){
 			$title_html .= ' style="' . $gradient_style . '" ';
 		}
-		$title_html .= 'class="lead ' . $settings['eael_dch_dual_color_selector'] . '">' . $settings['eael_dch_first_title'] . '</span>';
-		$title_html .= '<span>' . $settings['eael_dch_last_title'] . '</span>';
+		$title_html .= ' class="lead ' . $settings['eael_dch_dual_color_selector'] . '">' . $settings['eael_dch_first_title'] . '</span>';
+		$title_html .= ' <span>' . $settings['eael_dch_last_title'] . '</span>';
 		$title_html .= '</' . $title_tag . '>';
 
 		if ('dch-default' == $settings['eael_dch_type']) : ?>
