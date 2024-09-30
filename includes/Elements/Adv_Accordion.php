@@ -75,6 +75,9 @@ class Adv_Accordion extends Widget_Base
     }
 
     protected function is_dynamic_content():bool {
+        if( Plugin::$instance->editor->is_edit_mode() ) {
+            return false;
+        }
         $accordion_tabs     = $this->get_settings('eael_adv_accordion_tab');
         $is_dynamic_content = false;
         if( ! empty( $accordion_tabs ) ){
