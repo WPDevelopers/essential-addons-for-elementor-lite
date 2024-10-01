@@ -282,7 +282,8 @@ trait Login_Registration {
             if ( $ajax ) {
                 wp_send_json_error( $err_msg );
             }
-            update_option( 'eael_register_errors_' . $widget_id, $err_msg, false );
+            
+			setcookie( 'eael_register_errors_' . $widget_id, $err_msg );
 
             if (isset($_SERVER['HTTP_REFERER'])) {
                 wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -475,19 +476,23 @@ trait Login_Registration {
 		
 		// if any error found, abort
 		if ( ! empty( $errors ) ) {
+			$err_msg = '<ol>';
+			if ( count( $errors ) === 1 ) {
+				$err_msg = '<ol class="'. esc_attr('eael-list-style-none-wrap').'">';
+			}
+			
+			foreach ( $errors as $error ) {
+				$err_msg .= "<li>{$error}</li>";
+			}
+			$err_msg .= '</ol>';
+
+			//If AJAX enabled
 			if ( $ajax ) {
-				$err_msg = '<ol>';
-				if ( count( $errors ) === 1 ) {
-					$err_msg = '<ol class="'. esc_attr('eael-list-style-none-wrap').'">';
-				}
-				
-				foreach ( $errors as $error ) {
-					$err_msg .= "<li>{$error}</li>";
-				}
-				$err_msg .= '</ol>';
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_register_errors_' . $widget_id, $errors, false );
+
+			setcookie( 'eael_register_errors_' . $widget_id, $err_msg );
+
 			wp_safe_redirect( esc_url_raw( $url ) );
 			exit();
 		}
@@ -552,7 +557,8 @@ trait Login_Registration {
 				if ( $ajax ) {
 					wp_send_json_error( $err_msg );
 				}
-				update_option( 'eael_register_errors_' . $widget_id, $err_msg, false );
+				
+				setcookie( 'eael_register_errors_' . $widget_id, $err_msg );
 
 				if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
 					wp_safe_redirect( $_SERVER['HTTP_REFERER'] );
@@ -642,7 +648,8 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $errors['user_create'] );
 			}
-			update_option( 'eael_register_errors_' . $widget_id, $errors, false );
+			
+			setcookie( 'eael_register_errors_' . $widget_id, $errors['user_create'] );
 			wp_safe_redirect( esc_url_raw( $url ) );
 			exit();
 		}
