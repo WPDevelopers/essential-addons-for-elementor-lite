@@ -61,7 +61,15 @@ class Flip_Box extends Widget_Base
     }
 
     protected function is_dynamic_content():bool {
-        return false;
+        if( Plugin::$instance->editor->is_edit_mode() ) {
+            return false;
+        }
+        
+        $front_content_type = $this->get_settings('eael_flipbox_front_content_type');
+        $back_content_type  = $this->get_settings('eael_flipbox_back_content_type');
+        $is_dynamic_content = 'template' === $front_content_type || 'template' === $back_content_type;
+
+        return $is_dynamic_content;
     }
 
     public function get_custom_help_url()
