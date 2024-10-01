@@ -56,7 +56,13 @@ class Info_Box extends Widget_Base
     }
 
     protected function is_dynamic_content():bool {
-        return false;
+        if( Plugin::$instance->editor->is_edit_mode() ) {
+            return false;
+        }
+        $content_type       = $this->get_settings('eael_infobox_text_type');
+        $is_dynamic_content = 'template' === $content_type;
+
+        return $is_dynamic_content;
     }
 
     public function get_custom_help_url()
