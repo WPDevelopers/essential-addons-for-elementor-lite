@@ -1081,7 +1081,7 @@ class Event_Calendar extends Widget_Base
 		    'eael_ec_desc_label',
 		    [
 			    'label'       => esc_html__( 'Label', 'essential-addons-for-elementor-lite' ),
-			    'type'        => \Elementor\Controls_Manager::TEXT,
+			    'type'        => Controls_Manager::TEXT,
 			    'ai'          => [ 'active' => false ],
 			    'placeholder' => esc_html__( 'Description', 'essential-addons-for-elementor-lite' ),
 			    'default'     => esc_html__( 'Description', 'essential-addons-for-elementor-lite' ),
@@ -1095,9 +1095,10 @@ class Event_Calendar extends Widget_Base
 		    'eael_ec_description_limit',
 		    [
 			    'label'       => esc_html__( 'Word Count', 'essential-addons-for-elementor-lite' ),
-			    'type'        => \Elementor\Controls_Manager::NUMBER,
+			    'type'        => Controls_Manager::NUMBER,
 			    'placeholder' => 20,
 			    'default'     => 20,
+			    'min'         => 0,
 			    'condition'   => [
 				    'eael_ec_show_description' => 'yes',
 			    ]
@@ -1108,13 +1109,25 @@ class Event_Calendar extends Widget_Base
 		    'eael_ec_desc_see_more',
 		    [
 			    'label'       => esc_html__( 'Expansion Indicator', 'essential-addons-for-elementor-lite' ),
-			    'type'        => \Elementor\Controls_Manager::TEXT,
+			    'type'        => Controls_Manager::TEXT,
 			    'ai'          => [ 'active' => false ],
 			    'placeholder' => esc_html__( '...', 'essential-addons-for-elementor-lite' ),
 			    'default'     => esc_html__( '... see more', 'essential-addons-for-elementor-lite' ),
-			    'condition'   => [
-				    'eael_ec_show_description' => 'yes',
-			    ]
+			    'conditions'  => [
+                    'relation'=> 'and',
+                    'terms'   => [
+                        [
+                            'name'     => 'eael_ec_show_description',
+                            'operator' => ' === ',
+                            'value'    => 'yes'
+                        ],
+                        [
+                            'name'     => 'eael_ec_description_limit',
+                            'operator' => '>',
+                            'value'    => 0
+                        ]
+                    ]
+                ]
 		    ]
 	    );
 
@@ -1122,15 +1135,27 @@ class Event_Calendar extends Widget_Base
 		    'eael_ec_desc_see_more_link',
 		    [
 			    'label'        => esc_html__( 'Linkable', 'essential-addons-for-elementor-lite' ),
-			    'type'         => \Elementor\Controls_Manager::SWITCHER,
+			    'type'         => Controls_Manager::SWITCHER,
 			    'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
 			    'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
 			    'description'  => esc_html__( 'By clicking on the expansion indicator will redirect to the event details link.', 'essential-addons-for-elementor-lite' ),
 			    'return_value' => 'yes',
 			    'default'      => 'yes',
-			    'condition'    => [
-				    'eael_ec_show_description' => 'yes',
-			    ]
+                'conditions'   => [
+                    'relation' => 'and',
+                    'terms'    => [
+                        [
+                            'name'     => 'eael_ec_show_description',
+                            'operator' => ' === ',
+                            'value'    => 'yes'
+                        ],
+                        [
+                            'name'     => 'eael_ec_description_limit',
+                            'operator' => '>',
+                            'value'    => 0
+                        ]
+                    ]
+                ]
 		    ]
 	    );
 
@@ -3200,7 +3225,7 @@ class Event_Calendar extends Widget_Base
 					if ( $settings['eael_ec_desc_see_more_link'] === 'yes' && $event['url'] ) {
 						$link = sprintf( " href='%s'", esc_url( $event['url'] ) );
 					}                    
-                    if( $settings['eael_ec_description_limit'] ) {
+                    if( $settings['eael_ec_description_limit']  > 0 ) {
                         $see_more = sprintf( " <a %s class='eael-see-more'>%s</a>", $link, Helper::eael_wp_kses( $settings['eael_ec_desc_see_more'] ) );
                         $event_description = wp_trim_words( $event['description'], $settings['eael_ec_description_limit'], $see_more );
                     } else {
