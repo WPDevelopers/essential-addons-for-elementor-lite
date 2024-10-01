@@ -1260,7 +1260,8 @@ class Adv_Accordion extends Widget_Base
                     if ( ! is_array( $tab['eael_primary_templates'] ) ) {
                         $tab['eael_primary_templates'] = apply_filters( 'wpml_object_id', $tab['eael_primary_templates'], 'wp_template', true );
                     }
-                    
+
+	                Helper::eael_onpage_edit_template_markup( get_the_ID(), $tab['eael_primary_templates'] );
                     // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'], true ); 
                 }
