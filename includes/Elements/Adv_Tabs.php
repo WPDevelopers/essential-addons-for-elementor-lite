@@ -1126,11 +1126,7 @@ class Adv_Tabs extends Widget_Base
                                     $tab['eael_primary_templates'] = apply_filters( 'wpml_object_id', $tab['eael_primary_templates'], 'wp_template', true );
                                 }
 
-						        if ( Plugin::$instance->editor->is_edit_mode() ) {
-							        echo "<div class='eael-onpage-edit-template-wrapper'>
-											<div class='eael-onpage-edit-template' data-template-id='{$tab['eael_primary_templates']}' data-page-id='{$page_id}' data-mode='edit'><i class='eicon-edit'></i>Edit Template</div>
-									</div>";
-						        }
+						        Helper::eael_onpage_edit_template_markup( $page_id, $tab['eael_primary_templates'] );
 
                                 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                                 echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'] );

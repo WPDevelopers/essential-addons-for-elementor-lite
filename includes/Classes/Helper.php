@@ -1631,4 +1631,16 @@ class Helper
 		}
 		return $html;
 	}
+
+	public static function eael_onpage_edit_template_markup( $page_id, $template_id ) {
+		if ( Plugin::$instance->editor->is_edit_mode() ) {
+			?>
+			<div class='eael-onpage-edit-template-wrapper'>
+				<div class='eael-onpage-edit-template' data-template-id='<?php echo esc_attr( $template_id ); ?>'
+					 data-page-id='<?php echo esc_attr( $page_id ); ?>' data-mode='edit'><i class='eicon-edit'></i><?php esc_html_e( 'Edit Template' ); ?>
+				</div>
+			</div>
+			<?php
+		}
+	}
 }
