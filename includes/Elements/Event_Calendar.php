@@ -3199,9 +3199,13 @@ class Event_Calendar extends Widget_Base
 					$link = '';
 					if ( $settings['eael_ec_desc_see_more_link'] === 'yes' && $event['url'] ) {
 						$link = sprintf( " href='%s'", esc_url( $event['url'] ) );
-					}
-					$see_more = sprintf( " <a %s class='eael-see-more'>%s</a>", $link, Helper::eael_wp_kses( $settings['eael_ec_desc_see_more'] ) );
-					$event_description = wp_trim_words( $event['description'], $settings['eael_ec_description_limit'], $see_more );
+					}                    
+                    if( $settings['eael_ec_description_limit'] ) {
+                        $see_more = sprintf( " <a %s class='eael-see-more'>%s</a>", $link, Helper::eael_wp_kses( $settings['eael_ec_desc_see_more'] ) );
+                        $event_description = wp_trim_words( $event['description'], $settings['eael_ec_description_limit'], $see_more );
+                    } else {
+                        $event_description = $event['description'];
+                    }
 
 					echo '<td class="eael-ec-event-description" ' . $row_style . '>' . Helper::eael_wp_kses( $event_description ) . '</td>';
 				}
