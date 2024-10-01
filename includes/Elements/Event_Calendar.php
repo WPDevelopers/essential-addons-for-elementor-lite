@@ -1183,13 +1183,16 @@ class Event_Calendar extends Widget_Base
 		    'eael_ec_date_format',
 		    [
 			    'label'     => esc_html__( 'Date Format', 'essential-addons-for-elementor-lite' ),
-			    'type'      => \Elementor\Controls_Manager::SELECT,
+			    'type'      => Controls_Manager::SELECT,
 			    'default'   => 'jS F Y',
 			    'options'   => [
 				    'F j, Y'    => date( 'F j, Y' ),                   // January 1, 2022
 				    'Y-m-d'     => date( 'Y-m-d' ),
 				    "d-m-Y"     => date( "d-m-y" ),
 				    "m-d-Y"     => date( "m-d-y" ),
+				    'Y.m.d'     => date( 'Y.m.d' ),
+				    "d.m.Y"     => date( "d.m.y" ),
+				    "m.d.Y"     => date( "m.d.y" ),
 				    'm/d/Y'     => date( 'm/d/Y' ),                    // 01/01/2022
 				    'd/m/Y'     => date( 'd/m/Y' ),                    // 01/01/2022
 				    'Y/m/d'     => date( 'Y/m/d' ),                    // 2022/01/01
