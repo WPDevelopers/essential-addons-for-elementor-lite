@@ -1,14 +1,14 @@
 === Essential Addons for Elementor – Best Elementor Addon, Templates, Widgets, Kits & WooCommerce Builders ===
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk, himadree12
-Tags: elementor, elements, woocommerce, elementor addon, elementor widget
+Tags: elementor, elements, elementor addon, elementor widget, woocommerce elementor
 Requires at least: 5.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 6.0.4
+Stable tag: 6.0.6
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-Most Used Elementor addon, an advanced elements library for Elementor web builder with 100+ powerful widgets & extensions with WooCommerce builder.
+The Essential plugin you install after Elementor! Packed with 100+ stunning elements like Data Table, Event Calendar, Filterable Gallery, WooCommerce.
 
 == Description ==
 
@@ -298,6 +298,39 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.0.6 - 29/09/2024 =
+
+- Improved: EA Filterable Gallery | Pagination on video gallery
+- Improved: EA Woo Product Carousel | Added Marquee support 
+- Improved: EA Wrapper Link | Add enable and disable option for traditional link
+- Improved: EA Woo Product Carousel | Add option to select items count on slide
+- Improved: EA Table of Contents | Position & Color
+- Improved: Security enhancements
+- Improved: EA Woo Checkout | Need an option to change Input field background color
+- Improved: EA Interactive Circle | Interactive Circle content icon not displaying.
+- Improved: EA Post Grid | Sticky posts visible at first
+- Fixed: EA Flip Box | Purple Color Overlay Issue
+- Fixed: EA Filterable Gallery | EA Filterable Gallery field link not translatable with WPML
+- Fixed: EA Login/Register Form | Absence of message validation
+- Fixed: EA Advanced Tabs | Accessibility Issue, Screen Reader Focus Limited to First Tab 
+- Few minor bug fixes & improvements
+
+= 6.0.5 - 18/09/2024 =
+
+- Improved: EA Flip Box | UI for mobile devices
+- Improved: EA Filterable Gallery | Added Overlay for the video gallery
+- Improved: EA Woo Product Gallery | Added Archive Product Support for Product Category Page
+- Improved: EA Woo Product Gallery | Added support to Turn off secondary image on hover for mobile
+- Fixed: Animation conflicting issue with Elementor
+- Fixed: EA Advanced Accordion | Conflict with Elementor 3.24.0
+- Fixed: EA Woo Product List | HTML Tags Support for Product Excerpts
+- Fixed: EA Woo Product Carousel | Added compatibility for Astra theme
+- Fixed: EA Checkout | Conflict with USPS Shipping Method for WooCommerce
+- Fixed: EA Countdown | Expiration issue with Saved Templates
+- Fixed: EA Login Register Form | Warning message on reset password
+- Fixed: EA Interactive Circle | UI issue when Scrolling
+- Few minor bug fixes & improvements
 
 = 6.0.4 - 09/09/2024 =
 

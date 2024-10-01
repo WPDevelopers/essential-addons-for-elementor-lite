@@ -3,8 +3,8 @@
 }
 .eael-fancy-text-container[data-fancy-text-cursor=yes] .eael-fancy-text-strings::after {
   content: "|";
-  -webkit-animation: blink_cursor 0.7s infinite;
-          animation: blink_cursor 0.7s infinite;
+  -webkit-animation: eaelBlink_cursor 0.7s infinite;
+          animation: eaelBlink_cursor 0.7s infinite;
 }
 .eael-fancy-text-container .typed-cursor {
   display: none;
@@ -19,7 +19,7 @@
 .morphext > .animated {
   display: inline-block;
 }
-@-webkit-keyframes blink_cursor {
+@-webkit-keyframes eaelBlink_cursor {
   0% {
     opacity: 1;
   }
@@ -30,7 +30,7 @@
     opacity: 1;
   }
 }
-@keyframes blink_cursor {
+@keyframes eaelBlink_cursor {
   0% {
     opacity: 1;
   }

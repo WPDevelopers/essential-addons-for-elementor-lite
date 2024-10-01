@@ -11,6 +11,17 @@ window.eael = window.ea = {
 			window.eaElementList = {...window.eaElementList, [name]: true}
 		}
 		return false;
+	},
+	debounce: function(func, delay) {
+		var timeout;
+		return function() {
+			var context = this;
+			var args = arguments;
+			clearTimeout(timeout);
+			timeout = setTimeout(function() {
+				func.apply(context, args);
+			}, delay);
+		};
 	}
 };
 

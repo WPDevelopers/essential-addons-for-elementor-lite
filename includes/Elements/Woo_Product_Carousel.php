@@ -553,6 +553,27 @@ class Woo_Product_Carousel extends Widget_Base {
 		    ]
 	    );
 
+        $this->add_responsive_control(
+		    'slide_items',
+		    [
+			    'label'   => __( 'Slide to Scroll', 'essential-addons-for-elementor-lite' ),
+			    'type'    => Controls_Manager::SELECT,
+			    'options' => [
+				    '1' => __( '1', 'essential-addons-for-elementor-lite' ),
+				    '2' => __( '2', 'essential-addons-for-elementor-lite' ),
+				    '3' => __( '3', 'essential-addons-for-elementor-lite' ),
+				    '4' => __( '4', 'essential-addons-for-elementor-lite' ),
+				    '5' => __( '5', 'essential-addons-for-elementor-lite' ),
+				    '6' => __( '6', 'essential-addons-for-elementor-lite' ),
+			    ],
+			    'default' => 1,
+                'condition' => [
+                    'carousel_effect' => 'slide',
+                    'enable_marquee!' => 'yes',
+                ]
+		    ]
+	    );
+
 	    $this->add_control(
 		    'carousel_rotate',
 		    [
@@ -636,7 +657,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 'range'       => [
                     'px' => [
                         'min'  => 100,
-                        'max'  => 3000,
+                        'max'  => 10000,
                         'step' => 1,
                     ],
                 ],
@@ -655,6 +676,22 @@ class Woo_Product_Carousel extends Widget_Base {
                 'return_value' => 'yes',
             ]
         );
+
+        $this->add_control(
+			'enable_marquee',
+			[
+				'label'        => __( 'Enable Marquee', 'essential-addons-elementor' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Yes', 'essential-addons-elementor' ),
+				'label_off'    => __( 'No', 'essential-addons-elementor' ),
+				'default'      => 'no',
+				'return_value' => 'yes',
+				'condition'    => [
+					'autoplay' => 'yes',
+					'carousel_effect' => [ 'slide', 'coverflow' ],
+				],
+			]
+		);
         
         $this->add_control(
             'autoplay_speed',
@@ -670,9 +707,10 @@ class Woo_Product_Carousel extends Widget_Base {
                     ],
                 ],
                 'size_units' => '',
-                'condition'  => [
-                    'autoplay' => 'yes',
-                ],
+				'condition'  => [
+					'autoplay' => 'yes',
+					'enable_marquee!' => 'yes',
+				],
             ]
         );
         
@@ -687,6 +725,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 'return_value' => 'yes',
                 'condition'    => [
                     'autoplay' => 'yes',
+					'enable_marquee!' => 'yes',
                 ],
             ]
         );
@@ -725,6 +764,20 @@ class Woo_Product_Carousel extends Widget_Base {
                 'separator' => 'before',
             ]
         );
+
+        $this->add_control( 
+			'eael_marquee_warning_text', 
+            [
+                'type'            => Controls_Manager::RAW_HTML,
+                'raw'             => __( 'Arrows & Dots are not available on <strong>Marquee</stong> Mode.', 'essential-addons-for-elementor-lite' ),
+                'content_classes' => 'eael-warning',
+                'condition'       => [
+                    'autoplay' => 'yes',
+                    'enable_marquee' => 'yes',
+                    'carousel_effect' => [ 'slide', 'coverflow' ],
+                ],
+            ]
+        );
         
         $this->add_control(
             'arrows',
@@ -753,13 +806,13 @@ class Woo_Product_Carousel extends Widget_Base {
 	    $this->add_control(
 		    'image_dots',
 		    [
-			    'label'                 => __('Image Dots', 'essential-addons-for-elementor-lite'),
-			    'type'                  => Controls_Manager::SWITCHER,
-			    'label_on'              => __('Yes', 'essential-addons-for-elementor-lite'),
-			    'label_off'             => __('No', 'essential-addons-for-elementor-lite'),
-			    'return_value'          => 'yes',
-			    'condition' => [
-				    'dots'    => 'yes'
+			    'label'        => __('Image Dots', 'essential-addons-for-elementor-lite'),
+			    'type'         => Controls_Manager::SWITCHER,
+			    'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
+			    'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
+			    'return_value' => 'yes',
+			    'condition'    => [
+				    'dots'          => 'yes',
 			    ]
 		    ]
 	    );
@@ -768,15 +821,15 @@ class Woo_Product_Carousel extends Widget_Base {
 	    $this->add_responsive_control(
 		    'image_dots_visibility',
 		    [
-			    'label' => __('Image Dots Visibility', 'essential-addons-for-elementor-lite'),
-			    'type' => \Elementor\Controls_Manager::SWITCHER,
-			    'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-			    'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+			    'label'        => __('Image Dots Visibility', 'essential-addons-for-elementor-lite'),
+			    'type'         => Controls_Manager::SWITCHER,
+			    'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+			    'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
 			    'return_value' => 'yes',
-			    'default' => 'yes',
-			    'condition' => [
+			    'default'      => 'yes',
+			    'condition'    => [
 				    'dots'    => 'yes',
-				    'image_dots'    => 'yes'
+				    'image_dots'    => 'yes',
 			    ]
 		    ]
 	    );
@@ -2997,6 +3050,9 @@ class Woo_Product_Carousel extends Widget_Base {
 		    if ( !empty( $settings[ 'items' ] ) ) {
 			    $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-items', $settings[ 'items' ] );
 		    }
+		    if ( !empty( $settings[ 'items' ] ) ) {
+			    $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-slide-items', $settings[ 'slide_items' ] );
+		    }
 	    }
         
         if ( method_exists( Plugin::$instance->breakpoints, 'get_breakpoints_config' ) && ! empty( $breakpoints = Plugin::$instance->breakpoints->get_breakpoints_config() ) ) {
@@ -3004,6 +3060,9 @@ class Woo_Product_Carousel extends Widget_Base {
                 if ($breakpoint['is_enabled']) {
                     if ( $settings['carousel_effect'] == 'slide' && !empty($settings['items_'.$key]) ) {
                         $this->add_render_attribute('eael-woo-product-carousel-wrap', 'data-items-'.$key, $settings['items_'.$key]);
+                    }
+                    if ( $settings['carousel_effect'] == 'slide' && !empty($settings['slide_items_'.$key]) ) {
+                        $this->add_render_attribute('eael-woo-product-carousel-wrap', 'data-slide-items-'.$key, $settings['slide_items_'.$key]);
                     }
                     if (!empty($settings['margin_'.$key]['size'])) {
                         $this->add_render_attribute('eael-woo-product-carousel-wrap', 'data-margin-'.$key, $settings['margin_'.$key]['size']);
@@ -3036,9 +3095,12 @@ class Woo_Product_Carousel extends Widget_Base {
                 $settings[ 'slider_speed' ][ 'size' ] );
         }
 
-        if ( $settings[ 'autoplay' ] == 'yes' && !empty( $settings[ 'autoplay_speed' ][ 'size' ] ) ) {
-            $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-autoplay',
-                $settings[ 'autoplay_speed' ][ 'size' ] );
+        if( 'yes' === $settings['enable_marquee'] ){
+			$this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-autoplay', '0.001' );
+			$this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'class', 'eael-marquee-carousel' );
+		}
+		else if ( $settings[ 'autoplay' ] == 'yes' && !empty( $settings[ 'autoplay_speed' ][ 'size' ] ) ) {
+            $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-autoplay', $settings[ 'autoplay_speed' ][ 'size' ] );
         } else {
             $this->add_render_attribute( 'eael-woo-product-carousel-wrap', 'data-autoplay', '0' );
         }
@@ -3117,10 +3179,12 @@ class Woo_Product_Carousel extends Widget_Base {
              * Render Slider Dots!
              */
 
-            if (file_exists( $template ) && $settings['image_dots'] === 'yes') {
-                $this->render_image_dots($query);
-            } else {
-	            $this->render_dots();
+            if( 'yes' !== $settings['enable_marquee'] ){
+                if ( file_exists( $template ) && $settings['image_dots'] === 'yes') {
+                    $this->render_image_dots($query);
+                } else {
+                    $this->render_dots();
+                }
             }
 
 
@@ -3128,7 +3192,10 @@ class Woo_Product_Carousel extends Widget_Base {
             /**
              * Render Slider Navigations!
              */
-            $this->render_arrows();
+
+            if( 'yes' !== $settings['enable_marquee'] ){ 
+                $this->render_arrows();
+            }
             ?>
         </div>
         <?php
