@@ -220,6 +220,10 @@
 		opacity: .3;
 	}
 
+	&.eael-onpage-edit-activate::after{
+		display: none;
+	}
+
 	.eael-onpage-edit-template {
 		background: #5eead4;
 		color: #000;

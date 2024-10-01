@@ -287,9 +287,11 @@ jQuery(window).on("elementor/frontend/init", function () {
 			parent.window.$e.run('editor/documents/switch', {
 				id: parseInt(templateID),  // Switch back to the original document
 				mode: 'edit'  // You can use 'edit' mode here if you want to continue editing the original document
+			}).then(function () {
+				$this.data('mode', 'save');
+				$this.text('Save & Back');
+				$this.closest('.eael-onpage-edit-template-wrapper').addClass('eael-onpage-edit-activate');
 			});
-			$this.data('mode', 'save');
-			$this.text('Save & Back');
 		} else if (mode === 'save') {
 			parent.window.$e.run('editor/documents/switch', {
 				id: parseInt(pageID),  // Switch back to the original document
