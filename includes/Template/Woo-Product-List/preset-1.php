@@ -113,9 +113,10 @@ $woo_product_list_loop = Woo_Product_List::get_woo_product_list_loop_settings( $
                 <div class="eael-product-list-excerpt">
                     <?php 
                     if( $woo_product_list['excerpt_words_count'] ){
-                        echo wp_trim_words( strip_shortcodes( get_the_excerpt() ), $woo_product_list['excerpt_words_count'], $woo_product_list['excerpt_expanison_indicator'] );
+                        $content = wp_trim_words( strip_shortcodes( get_the_excerpt() ), $woo_product_list['excerpt_words_count'], $woo_product_list['excerpt_expanison_indicator'] );
+                        echo esc_html( $content );
                     } else {
-                        echo get_the_excerpt();
+                        echo wp_kses( get_the_excerpt(), Helper::eael_allowed_tags() );
                     }
                     ?>
                 </div>
