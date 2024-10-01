@@ -1,4 +1,5 @@
 <?php
+use Essential_Addons_Elementor\Classes\Helper;
 
 /**
  * Template Name: Default
@@ -25,7 +26,7 @@ if (isset($content) && isset($link)) {
             echo '>';
         }
 
-        echo $content;
+        echo wp_kses( $content, Helper::eael_allowed_tags() );
 
         if (!empty($link['url'])) {
             echo '</a>';
@@ -35,7 +36,7 @@ if (isset($content) && isset($link)) {
 } else {
     echo '<div class="swiper-slide">
         <div class="ticker-content">
-            <a href="' . get_the_permalink() . '" class="ticker-content-link">' . get_the_title() . '</a>
+            <a href="' . esc_url( get_the_permalink() ) . '" class="ticker-content-link">' . wp_kses( get_the_title(), Helper::eael_allowed_tags() ) . '</a>
         </div>
     </div>';
 }

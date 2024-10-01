@@ -1097,6 +1097,8 @@ class Post_Grid extends Widget_Base
         $settings['read_more_button_text'] = $this->get_settings_for_display('read_more_button_text');
         $settings['excerpt_expanison_indicator'] = $this->get_settings_for_display('excerpt_expanison_indicator');
 
+        $args['ignore_sticky_posts'] = isset( $settings['ignore_sticky_posts'] ) && 'yes' === $settings['ignore_sticky_posts'];
+
         if(file_exists($template)){
             $query = new \WP_Query( $args );
 

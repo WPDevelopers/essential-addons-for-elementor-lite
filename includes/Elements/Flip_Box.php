@@ -83,6 +83,26 @@ class Flip_Box extends Widget_Base
         );
 
         $this->add_control(
+			'eael_flipbox_event_type',
+			[
+				'label'   => esc_html__( 'Choose Event', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'hover' => [
+						'title' => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-button',
+					],
+                    'click' => [
+						'title' => esc_html__( 'Click', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-click',
+					],
+				],
+				'default' => 'hover',
+				'toggle'  => true,
+			]
+		);
+
+        $this->add_control(
             'eael_flipbox_type',
             [
                 'label'       => esc_html__('Flipbox Type', 'essential-addons-for-elementor-lite'),
@@ -802,10 +822,15 @@ class Flip_Box extends Widget_Base
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
-                'name'     => 'eael_flipbox_front_bg_color',
-                'label'    => __('Front Background Color', 'essential-addons-for-elementor-lite'),
-                'types'    => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .eael-elements-flip-box-front-container',
+                'name'           => 'eael_flipbox_front_bg_color',
+                'label'          => __('Front Background Color', 'essential-addons-for-elementor-lite'),
+                'types'          => ['classic', 'gradient'],
+                'selector'       => '{{WRAPPER}} .eael-elements-flip-box-front-container',
+                'fields_options' => [
+                    'color' => [
+                        'default' => '#8a35ff',
+                    ],
+                ],
             ]
         );
 
@@ -825,6 +850,11 @@ class Flip_Box extends Widget_Base
                 'label'     => __('Back Background Color', 'essential-addons-for-elementor-lite'),
                 'types'     => ['classic', 'gradient'],
                 'selector'  => '{{WRAPPER}} .eael-elements-flip-box-rear-container',
+                'fields_options' => [
+                    'color' => [
+                        'default' => '#502fc6',
+                    ],
+                ],
                 'separator' => 'after',
             ]
         );
@@ -1513,6 +1543,9 @@ class Flip_Box extends Widget_Base
             $flipbox_image_url = $flipbox_image['url'];
         }
 
+        // $breakpoints = Plugin::$instance->breakpoints->get_active_breakpoints();
+        // print_r($breakpoints);
+
         $flipbox_if_html_tag = 'div';
         $flipbox_if_html_title_tag = Helper::eael_validate_html_tag($settings['eael_flipbox_back_title_tag']);
         $this->add_render_attribute('flipbox-container', 'class', 'eael-elements-flip-box-flip-card');
@@ -1570,6 +1603,7 @@ class Flip_Box extends Widget_Base
                     'eael-animate-flip',
                     'eael-' . esc_attr($settings['eael_flipbox_type']),
                     'eael-' . esc_attr($settings['eael_flipbox_front_content_type']),
+                    'eael-flip-box-' . esc_attr($settings['eael_flipbox_event_type']),
                 ],
             ]
         );
@@ -1665,6 +1699,14 @@ class Flip_Box extends Widget_Base
                 </div>
             </<?php echo $flipbox_if_html_tag; ?>>
         </div>
+
+        <script>
+            jQuery(document).ready(function( $ ) {
+                $(".eael-flip-box-click").on( 'click', function() {
+                    $(this).toggleClass( '--active' );
+                });
+            });
+        </script>
 
 <?php
     }
