@@ -3213,13 +3213,13 @@ class Event_Calendar extends Widget_Base
 					    $end      = wp_date( $date_format, $end_time, $end_timezone );
                         $same_day = wp_date( 'Ymd', $start_time, $start_timezone ) === wp_date( 'Ymd', $end_time, $end_timezone );
                     } else{
-                        $start    = date( $date_format, $start_time );
-                        $end      = date( $date_format, $end_time );
+                        $start    = date_i18n( $date_format, $start_time );
+                        $end      = date_i18n( $date_format, $end_time );
                         $same_day = date( 'Ymd', $start_time ) === date( 'Ymd', $end_time );
                     }
                     
 					if ( $time_format && $same_day ) {
-						$end = '' !== $start_timezone && '' !== $end_timezone ? wp_date( $time_format, $end_time, $end_timezone ) : date( $time_format, $end_time ) ;
+						$end = '' !== $start_timezone && '' !== $end_timezone ? wp_date( $time_format, $end_time, $end_timezone ) : date_i18n( $time_format, $end_time ) ;
 					}else if( ! $time_format && $same_day ){
                         $end = '';
                     }
