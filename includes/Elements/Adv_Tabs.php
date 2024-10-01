@@ -59,7 +59,21 @@ class Adv_Tabs extends Widget_Base
     }
     
     protected function is_dynamic_content():bool {
-        return false;
+        if( Plugin::$instance->editor->is_edit_mode() ) {
+            return false;
+        }
+        $tabs     = $this->get_settings('eael_adv_tabs_tab');
+        $is_dynamic_content = false;
+        if( ! empty( $tabs ) ){
+            foreach( $tabs as $tab ){
+                if( isset( $tab['eael_adv_tabs_text_type'] ) && 'template' == $tab['eael_adv_tabs_text_type'] ) {
+                    $is_dynamic_content = true;
+                    break;
+                }
+            }
+        }
+
+        return $is_dynamic_content;
     }
 
     public function get_custom_help_url()
