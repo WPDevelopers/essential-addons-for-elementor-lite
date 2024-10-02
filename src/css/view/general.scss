@@ -221,8 +221,12 @@
 		opacity: .3;
 	}
 
-	&.eael-onpage-edit-activate::after {
-		display: none;
+	&.eael-onpage-edit-activate{
+		display: block;
+
+		&::after {
+			display: none;
+		}
 	}
 
 	.eael-onpage-edit-template {

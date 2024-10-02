@@ -215,6 +215,10 @@
   opacity: 0.3;
 }
 
+.eael-onpage-edit-template-wrapper.eael-onpage-edit-activate {
+  display: block;
+}
+
 .eael-onpage-edit-template-wrapper.eael-onpage-edit-activate::after {
   display: none;
 }
