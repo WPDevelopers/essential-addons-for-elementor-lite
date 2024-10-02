@@ -232,11 +232,32 @@
 		text-align: center;
 		height: 30px;
 		line-height: 30px;
-		font-size: 14px;
-		border-bottom-right-radius: 5px;
+		font-size: 12px;
 		cursor: pointer;
 		position: relative;
 		z-index: 3;
+		left: 50%;
+		transform: translateX(-50%);
+
+		&::before {
+			content: "";
+			border-top: 30px solid #5eead4;
+			border-right: 0;
+			border-bottom: 0;
+			border-left: 14px solid transparent;
+			right: 100%;
+			position: absolute;
+		}
+
+		&::after {
+			content: "";
+			border-top: 0;
+			border-right: 0;
+			border-bottom: 30px solid transparent;
+			border-left: 14px solid #5eead4;
+			left: 100%;
+			position: absolute;
+		}
 
 		> i {
 			margin-right: 8px;

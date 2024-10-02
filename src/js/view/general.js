@@ -289,7 +289,8 @@ jQuery(window).on("elementor/frontend/init", function () {
 				mode: 'edit'  // You can use 'edit' mode here if you want to continue editing the original document
 			}).then(function () {
 				$this.data('mode', 'save');
-				$this.text('Save & Back');
+				$this.find('span').text('Save & Back');
+				$this.find('i').addClass('eicon-arrow-left').removeClass('eicon-edit');
 				$this.closest('.eael-onpage-edit-template-wrapper').addClass('eael-onpage-edit-activate');
 			});
 		} else if (mode === 'save') {

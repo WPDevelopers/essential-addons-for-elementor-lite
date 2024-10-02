@@ -1637,7 +1637,9 @@ class Helper
 			?>
 			<div class='eael-onpage-edit-template-wrapper'>
 				<div class='eael-onpage-edit-template' data-template-id='<?php echo esc_attr( $template_id ); ?>'
-					 data-page-id='<?php echo esc_attr( $page_id ); ?>' data-mode='edit'><i class='eicon-edit'></i><?php esc_html_e( 'Edit Template' ); ?>
+					 data-page-id='<?php echo esc_attr( $page_id ); ?>' data-mode='edit'>
+					<i class='eicon-edit'></i>
+					<span><?php esc_html_e( 'Edit Template' ); ?></span>
 				</div>
 			</div>
 			<?php
