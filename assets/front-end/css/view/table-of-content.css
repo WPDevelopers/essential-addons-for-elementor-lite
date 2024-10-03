@@ -232,7 +232,6 @@ html {
   position: absolute;
   left: 0;
   z-index: 999999;
-  border-bottom: 10px solid #ff7d50;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   -webkit-transform: rotate(90deg);
@@ -247,7 +246,6 @@ html {
   right: 0;
   height: 30px;
   width: 2px;
-  background: #ff7d50;
   z-index: 999999;
 }
 
