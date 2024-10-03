@@ -1740,7 +1740,7 @@ class Contact_Form_7 extends Widget_Base
 
         if (!empty($settings['contact_form_list'])) {
             echo '<div class="eael-contact-form-7-wrapper">
-                <div ' . $this->get_render_attribute_string('contact-form') . '>';
+                <div '; $this->print_render_attribute_string('contact-form'); echo '>';
             if ($settings['form_title'] == 'yes' || $settings['form_description'] == 'yes') {
                 echo '<div class="eael-contact-form-7-heading">';
                 if ($settings['form_title'] == 'yes' && $settings['form_title_text'] != '') {
@@ -1750,7 +1750,7 @@ class Contact_Form_7 extends Widget_Base
                 }
                 if ($settings['form_description'] == 'yes' && $settings['form_description_text'] != '') {
                     echo '<div class="eael-contact-form-description eael-contact-form-7-description">
-                                    ' . $this->parse_text_editor($settings['form_description_text']) . '
+                                    ' . wp_kses( $this->parse_text_editor($settings['form_description_text']), Helper::eael_allowed_tags() ) . '
                                 </div>';
                 }
                 echo '</div>';

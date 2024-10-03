@@ -1046,6 +1046,22 @@ class Table_of_Content
         );
 
         $element->add_control(
+            'eael_ext_toc_indicator_color',
+            [
+                'label'     => __('Indicator Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#ff7d50',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-list-bar li.eael-highlight-active > a:after' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-list-arrow li.eael-highlight-active > a:before' => 'border-bottom: 10px solid {{VALUE}}',
+                ],
+                'condition' => [
+                    'eael_ext_table_of_content_list_style' => [ 'arrow', 'bar' ]
+                ],
+            ]
+        );
+
+        $element->add_control(
             'eael_ext_toc_indicator_size',
             [
                 'label' => __('Indicator Size', 'essential-addons-for-elementor-lite'),
