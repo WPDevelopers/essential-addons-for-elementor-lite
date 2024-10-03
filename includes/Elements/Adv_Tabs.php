@@ -1126,7 +1126,7 @@ class Adv_Tabs extends Widget_Base
                                 }
                                 
                                 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'] );
+                                echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'], true );
                             } ?>
 				        <?php endif; ?>
                     </div>
