@@ -1590,7 +1590,21 @@ class Helper
 		}
     
         return $acf_fields;
-    }  
+    }
+
+    public static function eael_get_attachment_id_from_url( $attachment_url ) {
+        global $wpdb;
+    
+        // Strip the image size from the file name (if any)
+        $attachment_url = preg_replace( '/-\d+x\d+(?=\.[^.\s]{2,4}$)/i', '', $attachment_url );
+    
+        // Prepare the query to search in the 'guid' column in 'wp_posts'
+        $attachment_id = $wpdb->get_var( $wpdb->prepare(
+            "SELECT ID FROM $wpdb->posts WHERE guid = %s AND post_type = 'attachment'", $attachment_url
+        ));
+    
+        return $attachment_id;
+    }
       
     public static function eael_rating_markup( $rating, $count ) {
         $html = '';
