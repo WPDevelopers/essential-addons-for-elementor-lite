@@ -1642,7 +1642,16 @@ class Advanced_Data_Table extends Widget_Base
             }
 
             $html .= '<tbody>';
+            $row_count = 0;
+            $is_edit_mode = Plugin::$instance->editor->is_edit_mode();
             foreach ($table_rows as $key => $tr) {
+                if( $is_edit_mode && 'yes' === $settings['ea_adv_data_table_pagination'] ){
+                    $row_count++;
+                    $pasination_count = $settings['ea_adv_data_table_items_per_page'] > 0 ? $settings['ea_adv_data_table_items_per_page'] : 10;
+                    if( $row_count > $pasination_count ){
+                        break;
+                    }
+                }
                 $html .= '<tr>';
                 foreach ($table_headers as $th) {
                     if (!isset($th['data_type'])) {
