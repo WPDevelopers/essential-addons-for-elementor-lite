@@ -577,7 +577,7 @@
     }
 }
 
-//Theme Supports
+//Theme Compatibility
 
 //Storefront Theme
 .theme-storefront {
@@ -585,8 +585,10 @@
         form.cart.variations_form .variations td select {
             padding: 6px;
         }
+
         .woocommerce-product-gallery {
             position: relative;
+            
             .woocommerce-product-gallery__trigger {
                 position: absolute;
                 top: 5px;
@@ -594,6 +596,7 @@
                 z-index: 1;
             }
         }
+
         .eael-product-popup.woocommerce div.product table tbody tr td {
             padding: 5px 15px 15px 0 !important;
         }
