@@ -291,7 +291,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 				$this.data('mode', 'save');
 				$this.find('span').text('Save & Back');
 				$this.find('i').addClass('eicon-arrow-left').removeClass('eicon-edit');
-				$this.closest('.eael-onpage-edit-template-wrapper').addClass('eael-onpage-edit-activate');
+				$this.closest('.eael-onpage-edit-template-wrapper').addClass('eael-onpage-edit-activate').parent().addClass('eael-widget-otea-active');
 			});
 		} else if (mode === 'save') {
 			parent.window.$e.run('editor/documents/switch', {

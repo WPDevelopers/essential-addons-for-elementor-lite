@@ -200,6 +200,16 @@
 	}
 }
 
+// Onpage Template edit area
+.eael-widget-otea-active {
+	.elementor-element:hover > .elementor-element-overlay,
+	.elementor-empty-view,
+	.elementor-add-section-inline,
+	.elementor-add-section {
+		display: initial !important;
+	}
+}
+
 .eael-onpage-edit-template-wrapper {
 	position: absolute;
 	top: 0;
@@ -221,7 +231,7 @@
 		opacity: .3;
 	}
 
-	&.eael-onpage-edit-activate{
+	&.eael-onpage-edit-activate {
 		display: block;
 
 		&::after {
