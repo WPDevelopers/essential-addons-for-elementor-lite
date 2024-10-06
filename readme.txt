@@ -302,7 +302,7 @@ Your existing elements/content will work with premium version. So you won't lose
 = 6.0.6 - 29/09/2024 =
 
 - Improved: EA Filterable Gallery | Pagination on video gallery
-- Improved: EA Woo Product Carousel | Added Marquee support 
+- Improved: EA Woo Product Carousel | Added Marquee support
 - Improved: EA Wrapper Link | Add enable and disable option for traditional link
 - Improved: EA Woo Product Carousel | Add option to select items count on slide
 - Improved: EA Table of Contents | Position & Color
@@ -311,9 +311,9 @@ Your existing elements/content will work with premium version. So you won't lose
 - Improved: EA Interactive Circle | Interactive Circle content icon not displaying.
 - Improved: EA Post Grid | Sticky posts visible at first
 - Fixed: EA Flip Box | Purple Color Overlay Issue
-- Fixed: EA Filterable Gallery | EA Filterable Gallery field link not translatable with WPML
+- Fixed: EA Filterable Gallery | Field link not translatable with WPML
 - Fixed: EA Login/Register Form | Absence of message validation
-- Fixed: EA Advanced Tabs | Accessibility Issue, Screen Reader Focus Limited to First Tab 
+- Fixed: EA Advanced Tabs | Accessibility Issue, Screen Reader Focus Limited to First Tab
 - Few minor bug fixes & improvements
 
 = 6.0.5 - 18/09/2024 =
@@ -366,7 +366,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Fixed: EA Filterable Gallery | "Load More" button shows on those filters which doesn't have any items and less items
 - Fixed: EA Interactive Circle | Add URL support for interactive items
 - Fixed: EA Hover Interactions | Hover Interactions does not work on the front-end
-- Fixed: EA Dashboard | Update CSS Print Method link 
+- Fixed: EA Dashboard | Update CSS Print Method link
 - Fixed: EA Post Grid | After Load More the terms are not displayed with Style 3
 - Fixed: EA Flip Box | Add overlay for the background image
 - Fixed: EA Woo Product Carousel | Carousel disappears when using Botiga theme
@@ -374,7 +374,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Fixed: EA Scroll To Top | Scroll To Top icon doesn't show
 - Fixed: EA WPForms | Submit button hover color stays grey
 - Fixed: EA Filterable Gallery | Updated label to "Notice" on display content notice
-- Fixed: EA NFT Gallery | Not working 
+- Fixed: EA NFT Gallery | Not working
 - Improved: EA Dual Color Heading | Vulnerable to Cross Site Scripting (XSS)
 - Improved: EA Woo Checkout | EA Woo Checkout is missing some styling options
 - Improved: EA Wrapper link | Elementor popup doesn't work on wrapper link
