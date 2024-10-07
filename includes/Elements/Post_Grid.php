@@ -97,40 +97,60 @@ class Post_Grid extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'eael_dynamic_template_Layout',
-            [
-                'label'   => esc_html__('Template Layout', 'essential-addons-for-elementor-lite'),
-                'type'    => Controls_Manager::SELECT,
-                'default' => 'default',
-                'options' => $this->get_template_list_for_dropdown(),
-            ]
-        );
+        // $this->add_control(
+        //     'eael_dynamic_template_Layout',
+        //     [
+        //         'label'   => esc_html__('Template Layout', 'essential-addons-for-elementor-lite'),
+        //         'type'    => Controls_Manager::SELECT,
+        //         'default' => 'default',
+        //         'options' => $this->get_template_list_for_dropdown(),
+        //     ]
+        // );
 
-        $image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/post-grid-';
+        $template_list = $this->get_template_list_for_dropdown();
+        $layout_options = [];
+        if( ! empty( $template_list ) ){
+            $image_dir_url = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/';
+            $image_dir_path = EAEL_PLUGIN_PATH . 'assets/admin/images/layout-previews/';
+            foreach( $template_list as $key => $label ){
+                $image_url = $image_dir_url . 'post-grid-' . $key . '.png';
+                $image_url =  file_exists( $image_dir_path . 'post-grid-' . $key . '.png' ) ? $image_url : $image_dir_url . 'custom-layout.png';
+                $layout_options[ $key ] = [
+                    'title' => $label,
+                    'image' => $image_url
+                ];
+            }
+        }
+
         $this->add_control(
             'eael_post_grid_preset_style',
             [
                 'label'       => esc_html__( 'Skin', 'essential-addons-for-elementor-lite' ),
                 'type'        => Controls_Manager::CHOOSE,
-                'options'     => [
-                    'one' => [
-                        'title' => esc_html__('Default', 'essential-addons-for-elementor-lite'),
-                        'image' => $image_path . 'one.png'
-                    ],
-                    'two' => [
-                        'title' => esc_html__('Two', 'essential-addons-for-elementor-lite'),
-                        'image' => $image_path . 'two.png'
-                    ],
-                    'three' => [
-                        'title' => esc_html__('Three', 'essential-addons-for-elementor-lite'),
-                        'image' => $image_path . 'three.png'
-                    ],
-                ],
+                'options'     => $layout_options,
                 'default'     => 'one',
                 'label_block' => true,
                 'toggle'      => false,
                 'image_choose'=> true,
+            ]
+        );
+
+        $this->add_control(
+            'layout_mode',
+            [
+                'label'   => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::CHOOSE,
+                'default' => 'masonry',
+                'options' => [
+                    'grid'       => [
+                        'title'  => esc_html__('Grid', 'essential-addons-for-elementor-lite'),
+                        'icon'   => 'eicon-gallery-grid'
+                    ],
+                    'masonry' => [
+                        'title'  => esc_html__('Masonry', 'essential-addons-for-elementor-lite'),
+                        'icon'   => 'eicon-gallery-masonry'
+                    ],
+                ],
             ]
         );
 
@@ -172,25 +192,6 @@ class Post_Grid extends Widget_Base
                 'mobile_default'     => 'eael-col-1',
                 'prefix_class'       => 'elementor-grid%s-',
                 'frontend_available' => true,
-            ]
-        );
-
-        $this->add_control(
-            'layout_mode',
-            [
-                'label'   => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
-                'type'    => Controls_Manager::CHOOSE,
-                'default' => 'masonry',
-                'options' => [
-                    'grid'       => [
-                        'title'  => esc_html__('Grid', 'essential-addons-for-elementor-lite'),
-                        'icon'   => 'eicon-gallery-grid'
-                    ],
-                    'masonry' => [
-                        'title'  => esc_html__('Masonry', 'essential-addons-for-elementor-lite'),
-                        'icon'   => 'eicon-gallery-masonry'
-                    ],
-                ],
             ]
         );
 
@@ -1794,7 +1795,7 @@ class Post_Grid extends Widget_Base
         echo '<div ' . $this->get_render_attribute_string( 'post_grid_wrapper' ) . '>
             <div ' . $this->get_render_attribute_string( 'post_grid_container' ) . ' data-layout-mode="' . esc_attr( $settings["layout_mode"] ) . '">';
 
-        $template = $this->get_template($settings['eael_dynamic_template_Layout']);
+        $template = $this->get_template($settings['eael_post_grid_preset_style'] );
         $settings['loadable_file_name'] = $this->get_filename_only($template);
 	    $dir_name = $this->get_temp_dir_name($settings['loadable_file_name']);
 	    $found_posts = 0;
