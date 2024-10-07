@@ -1612,6 +1612,39 @@ trait Controls
                 ]
             );
 
+            if ( 'eael-post-grid' !== $wb->get_name() ){
+                $wb->add_control(
+                    'eael_show_avatar',
+                    [
+                        'label' => __('Show Avatar', 'essential-addons-for-elementor-lite'),
+                        'type' => Controls_Manager::SWITCHER,
+                        'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
+                        'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                        'return_value' => 'yes',
+                        'default' => 'yes',
+                        'condition' => [
+                            'meta_position' => 'meta-entry-footer',
+                            'eael_show_meta' => 'yes',
+                        ],
+                    ]
+                );
+    
+                $wb->add_control(
+                    'eael_show_author',
+                    [
+                        'label' => __('Show Author Name', 'essential-addons-for-elementor-lite'),
+                        'type' => Controls_Manager::SWITCHER,
+                        'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
+                        'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                        'return_value' => 'yes',
+                        'default' => 'yes',
+                        'condition' => [
+                            'eael_show_meta' => 'yes',
+                        ],
+                    ]
+                );
+            }
+
             $wb->add_control(
                 'eael_show_date',
                 [
