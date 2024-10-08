@@ -705,21 +705,6 @@ trait Controls
             );
         }
 
-        if ('eael-post-carousel' === $wb->get_name()) {
-            $wb->add_control(
-                'eael_post_carousel_item_style',
-                [
-                    'label' => esc_html__('Item Style', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SELECT,
-                    'default' => 'eael-cards',
-                    'options' => [
-                        'eael-overlay' => esc_html__('Overlay', 'essential-addons-for-elementor-lite'),
-                        'eael-cards' => esc_html__('Cards', 'essential-addons-for-elementor-lite'),
-                    ],
-                ]
-            );
-        }
-
         if ('eael-post-block' === $wb->get_name()) {
             $wb->add_control(
                 'grid_style',
@@ -1447,7 +1432,7 @@ trait Controls
             );
         }
 
-        if ( 'eael-post-block' === $wb->get_name() || 'eael-post-carousel' === $wb->get_name() ) {
+        if ( 'eael-post-block' === $wb->get_name() ) {
             $wb->add_control(
                 'eael_show_read_more_button',
                 [
@@ -1475,9 +1460,7 @@ trait Controls
             );
         }
 
-        if ( 'eael-post-carousel' === $wb->get_name() 
-            || 'eael-post-block' === $wb->get_name()
-            ) {
+        if ( 'eael-post-block' === $wb->get_name() ) {
 
 	        $eael_show_post_terms_condition = [
                 'eael_show_image'             => 'yes',
