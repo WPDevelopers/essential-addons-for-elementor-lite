@@ -1116,8 +1116,8 @@ class Adv_Tabs extends Widget_Base
 			        $tab_id = $tab_id === 'safari' ? 'eael-safari-tab' : $tab_id . '-tab'; ?>
 
                     <div id="<?php echo esc_attr( $tab_id ); ?>" class="clearfix eael-tab-content-item <?php echo esc_attr($tab['eael_adv_tabs_tab_show_as_default']); ?>" data-title-link="<?php echo esc_attr( $tab_id ); ?>">
-				        <?php 
-                        if ('content' == $tab['eael_adv_tabs_text_type']) : 
+				        <?php
+                        if ('content' == $tab['eael_adv_tabs_text_type']) :
                             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                             echo $this->parse_text_editor( $tab['eael_adv_tabs_tab_content'] );
 
@@ -1129,7 +1129,7 @@ class Adv_Tabs extends Widget_Base
                                 }
                                 
                                 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'] );
+                                echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'], true );
                             }
 				        endif; ?>
                     </div>
