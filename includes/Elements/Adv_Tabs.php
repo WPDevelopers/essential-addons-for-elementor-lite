@@ -596,58 +596,6 @@ class Adv_Tabs extends Widget_Base
             ]
         );
 
-        $this->add_control(
-			'eael_adv_tabs_tab_use_focus_style',
-			[
-				'label'        => esc_html__( 'Border Color on Focus', 'essential-addons-for-elementor-lite' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
-				'return_value' => 'yes',
-				'default'      => 'yes',
-			]
-		);
-
-        $this->add_control(
-			'eael_adv_tabs_tab_use_focus_border_width',
-			[
-				'label'      => esc_html__( 'Border Width', 'textdomain' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px' ],
-				'default'    => [
-					'top'    => 1,
-					'right'  => 1,
-					'bottom' => 1,
-					'left'   => 1,
-					'unit'   => 'px',
-					'isLinked' => true,
-				],
-                'selectors' => [
-					'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:focus' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
-					'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active:focus' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
-				],
-                'condition' => [
-                    'eael_adv_tabs_tab_use_focus_style' => 'yes'
-                ]
-			]
-		);
-
-        $this->add_control(
-			'eael_adv_tabs_tab_use_focus_color',
-			[
-				'label'     => esc_html__( 'Border Color', 'textdomain' ),
-				'type'      => Controls_Manager::COLOR,
-                'default'   => '#a9d204',
-				'selectors' => [
-					'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:focus' => 'border-color: {{VALUE}} !important; border-style: solid;',
-					'{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active:focus' => 'border-color: {{VALUE}} !important; border-style: solid;',
-				],
-                'condition' => [
-                    'eael_adv_tabs_tab_use_focus_style' => 'yes'
-                ]
-			]
-		);
-
         $this->start_controls_tabs('eael_adv_tabs_header_tabs');
         // Normal State Tab
         $this->start_controls_tab('eael_adv_tabs_header_normal', ['label' => esc_html__('Normal', 'essential-addons-for-elementor-lite')]);
