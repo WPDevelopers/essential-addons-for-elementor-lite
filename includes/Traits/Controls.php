@@ -868,49 +868,6 @@ trait Controls
 
         }
 
-        if( 'eael-post-carousel' === $wb->get_name() ) {
-            $wb->add_control(
-                'enable_post_carousel_image_ratio',
-                [
-                    'label' => __('Enable Image Ratio', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::SWITCHER,
-                    'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
-                    'label_off' => __('No', 'essential-addons-for-elementor-lite'),
-                    'return_value' => 'yes',
-                    'default' => '',
-                    'condition' => [
-                        'eael_show_image' => 'yes',
-                    ],
-                ]
-            );
-            $wb->add_responsive_control(
-                'post_carousel_image_ratio',
-                [
-                    'label'      => __('Image Ratio', 'essential-addons-for-elementor-lite'),
-                    'type'       => Controls_Manager::SLIDER,
-                    'range'      => [
-                        'px' => [
-                            'min'  => 0.1,
-                            'max'  => 2,
-                            'step' => 0.01,
-                        ],
-                    ],
-                    'default' => [
-                        'unit' => 'px',
-                        'size' => 0.66,
-                    ],
-                    'size_units' => ['px'],
-                    'selectors'  => [
-                        '{{WRAPPER}} div.eael-entry-thumbnail' => 'padding-bottom: calc({{SIZE}} * 100%);height: auto !important;',
-                    ],
-                    'condition' => [
-                        'eael_show_image' => 'yes',
-                        'enable_post_carousel_image_ratio' => 'yes',
-                    ],
-                ]
-            );
-        }
-
         $wb->add_control(
             'eael_show_fallback_img_all',
             [
@@ -1004,19 +961,6 @@ trait Controls
                 ],
 			]
 		);
-
-        if ('eael-post-carousel' === $wb->get_name()) {
-            $wb->add_control(
-                'eael_title_length',
-                [
-                    'label' => __('Title Length', 'essential-addons-for-elementor-lite'),
-                    'type' => Controls_Manager::NUMBER,
-                    'condition' => [
-                        'eael_show_title' => 'yes',
-                    ],
-                ]
-            );
-        }
 
 	    if ( 'eael-content-timeline' === $wb->get_name() ) {
 		    $wb->add_control(
