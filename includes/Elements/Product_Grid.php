@@ -169,8 +169,8 @@ class Product_Grid extends Widget_Base
             return;
         }
         // Content Controls
-        $this->init_content_layout_controls();
         $this->init_content_product_settings_controls();
+        $this->init_content_layout_controls();
         $this->eael_product_badges();
         $this->init_content_addtocart_controls();
         $this->init_content_load_more_controls();
@@ -407,8 +407,10 @@ class Product_Grid extends Widget_Base
 
     protected function init_content_product_settings_controls()
     {
-        $this->start_controls_section('eael_section_product_grid_settings', [
-            'label' => esc_html__('Product Settings', 'essential-addons-for-elementor-lite'),
+        $this->start_controls_section(
+            'eael_section_product_grid_settings', 
+            [
+            'label' => esc_html__('Query', 'essential-addons-for-elementor-lite'),
         ]);
 
         $this->add_control(
@@ -648,12 +650,16 @@ class Product_Grid extends Widget_Base
 			]
 		);
 
-        $this->add_control('eael_product_grid_rating', [
-            'label' => esc_html__('Show Product Rating?', 'essential-addons-for-elementor-lite'),
-            'type' => Controls_Manager::SWITCHER,
+        $this->add_control(
+            'eael_product_grid_rating', 
+        [
+            'label'        => esc_html__('Product Rating?', 'essential-addons-for-elementor-lite'),
+            'type'         => Controls_Manager::SWITCHER,
+            'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+            'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
             'return_value' => 'yes',
-            'default' => 'yes',
-            'condition' => [
+            'default'      => 'yes',
+            'condition'    => [
                 'eael_product_grid_style_preset!' => ['eael-product-preset-8'],
             ],
 
@@ -662,11 +668,13 @@ class Product_Grid extends Widget_Base
         $this->add_control(
             'eael_product_grid_price',
             [
-                'label' => esc_html__('Show Product Price?', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
+                'label'        => esc_html__('Product Price?', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+                'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
                 'return_value' => 'yes',
-                'default' => 'yes',
-                'condition' => [
+                'default'      => 'yes',
+                'condition'    => [
                     'eael_product_grid_style_preset!' => 'eael-product-default',
                 ],
             ]
@@ -674,11 +682,13 @@ class Product_Grid extends Widget_Base
         $this->add_control(
             'eael_product_grid_excerpt',
             [
-                'label' => esc_html__('Short Description?', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
+                'label'        => esc_html__('Short Description?', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+                'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
                 'return_value' => 'yes',
-                'default' => 'yes',
-                'condition' => [
+                'default'      => 'yes',
+                'condition'    => [
                     'eael_product_grid_layout' => 'list',
                 ],
             ]
@@ -724,17 +734,19 @@ class Product_Grid extends Widget_Base
         );
 
         $this->add_control('show_compare', [
-            'label' => esc_html__('Show Product Compare?', 'essential-addons-for-elementor-lite'),
-            'type' => Controls_Manager::SWITCHER,
+            'label'     => esc_html__('Product Compare?', 'essential-addons-for-elementor-lite'),
+            'type'      => Controls_Manager::SWITCHER,
+            'label_on'  => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+            'label_off' => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
         ]);
 
 	    $this->add_control(
 		    'eael_product_grid_image_clickable',
 		    [
-			    'label' => esc_html__('Image Clickable?', 'essential-addons-for-elementor-lite'),
-			    'type' => Controls_Manager::SWITCHER,
+			    'label'        => esc_html__('Image Clickable?', 'essential-addons-for-elementor-lite'),
+			    'type'         => Controls_Manager::SWITCHER,
 			    'return_value' => 'yes',
-			    'default' => 'no',
+			    'default'      => 'no',
 		    ]
 	    );
 
@@ -742,8 +754,10 @@ class Product_Grid extends Widget_Base
 		    $this->add_control(
 			    'eael_product_grid_wishlist',
 			    [
-				    'label'        => esc_html__( 'Show Wishlist?', 'essential-addons-for-elementor-lite' ),
+				    'label'        => esc_html__( 'Wishlist?', 'essential-addons-for-elementor-lite' ),
 				    'type'         => Controls_Manager::SWITCHER,
+                    'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+                    'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				    'return_value' => 'yes',
 				    'default'      => 'no',
 			    ]
@@ -765,12 +779,10 @@ class Product_Grid extends Widget_Base
         $this->add_control(
             'show_add_to_cart_custom_text',
             [
-                'label' => __('Show Add to cart custom text', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Custom text', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'true',
-                'default' => '',
+                'default'      => '',
             ]
         );
 
@@ -935,7 +947,7 @@ class Product_Grid extends Widget_Base
             'default'     => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
             'ai'          => [ 'active' => false ],
             'condition'   => [
-                'show_load_more' => ['yes', '1', 'true'],
+                'show_load_more' => 'true',
             ],
         ]);
 
@@ -1628,7 +1640,7 @@ class Product_Grid extends Widget_Base
 	    $this->start_controls_section(
 		    'eael_section_product_grid_sale_badge_style',
 		    [
-			    'label' => esc_html__('Sale Badge Style', 'essential-addons-for-elementor-lite'),
+			    'label' => esc_html__('Badges', 'essential-addons-for-elementor-lite'),
 			    'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_show_product_sale_badge' => 'yes'
@@ -1636,10 +1648,19 @@ class Product_Grid extends Widget_Base
 		    ]
 	    );
 
+        // stock out badge
+	    $this->add_control(
+		    'eael_product_grid_sale_out_badge_heading',
+		    [
+			    'label' => __('Sale Badge', 'essential-addons-for-elementor-lite'),
+			    'type' => Controls_Manager::HEADING,
+		    ]
+	    );
+
 	    $this->add_control(
 		    'eael_product_grid_sale_badge_color',
 		    [
-			    'label' => esc_html__('Sale Badge Color', 'essential-addons-for-elementor-lite'),
+			    'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::COLOR,
 			    'default' => '#fff',
 			    'selectors' => [
@@ -1651,7 +1672,7 @@ class Product_Grid extends Widget_Base
 	    $this->add_control(
 		    'eael_product_grid_sale_badge_background',
 		    [
-			    'label' => esc_html__('Sale Badge Background', 'essential-addons-for-elementor-lite'),
+			    'label' => esc_html__('Background', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::COLOR,
 			    'default' => '#ff2a13',
 			    'selectors' => [
@@ -1673,15 +1694,16 @@ class Product_Grid extends Widget_Base
 	    $this->add_control(
 		    'eael_product_grid_stock_out_badge_heading',
 		    [
-			    'label' => __('Stock Out Badge', 'essential-addons-for-elementor-lite'),
+			    'label' => __('Stock Out', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::HEADING,
+                'separator' => 'before'
 		    ]
 	    );
 
 	    $this->add_control(
 		    'eael_product_grid_stock_out_badge_color',
 		    [
-			    'label' => esc_html__('Stock Out Badge Color', 'essential-addons-for-elementor-lite'),
+			    'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::COLOR,
 			    'default' => '#fff',
 			    'selectors' => [
@@ -1693,7 +1715,7 @@ class Product_Grid extends Widget_Base
 	    $this->add_control(
 		    'eael_product_grid_stock_out_badge_background',
 		    [
-			    'label' => esc_html__('Stock Out Badge Background', 'essential-addons-for-elementor-lite'),
+			    'label' => esc_html__('Background', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::COLOR,
 			    'default' => '#ff2a13',
 			    'selectors' => [
@@ -1720,7 +1742,7 @@ class Product_Grid extends Widget_Base
         $this->start_controls_section(
             'eael_section_product_grid_add_to_cart_styles',
             [
-                'label' => esc_html__('Button Styles', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Add To Cart', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_product_grid_style_preset!' => [
@@ -1769,9 +1791,9 @@ class Product_Grid extends Widget_Base
             'eael_product_grid_add_to_cart_is_gradient_bg',
             [
                 'label' => __('Use Gradient Background', 'essential-addons-for-elementor-lite'),
-                'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
             ]
         );
@@ -1948,7 +1970,7 @@ class Product_Grid extends Widget_Base
         $this->add_control(
             'eael_product_sale_badge_preset',
             [
-                'label' => esc_html__('Style Preset', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Style', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'sale-preset-1',
                 'options' => [
