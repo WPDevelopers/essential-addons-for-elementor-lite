@@ -138,8 +138,8 @@ class Woo_Product_Gallery extends Widget_Base {
 			return;
 		}
 		// Content Controls
-		$this->init_content_layout_controls();
 		$this->init_content_product_settings_controls();
+		$this->init_content_layout_controls();
 		$this->eael_product_badges();
 		$this->init_content_load_more_controls();
 
@@ -339,30 +339,43 @@ class Woo_Product_Gallery extends Widget_Base {
             ]
         );
 
+		// $this->add_control(
+		// 	'eael_product_gallery_dynamic_template',
+		// 	[
+		// 		'label'   => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
+		// 		'type'    => Controls_Manager::SELECT,
+		// 		'default' => 'default',
+		// 		'options' => $this->get_template_list_for_dropdown(),
+		// 	]
+		// );
+
+		$template_list = $this->get_template_list_for_dropdown();
+        $layout_options = [];
+        if( ! empty( $template_list ) ){
+            $image_dir_url = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/';
+            $image_dir_path = EAEL_PLUGIN_PATH . 'assets/admin/images/layout-previews/';
+			$count = 1;
+            foreach( $template_list as $key => $label ){
+                $image_url = $image_dir_url . 'woo-product-gallery-' . $key . '.png';
+                $image_url =  file_exists( $image_dir_path . 'woo-product-gallery-' . $key . '.png' ) ? $image_url : $image_dir_url . 'custom-layout.png';
+				$_key = $key;
+				if( in_array( $key, [ 'preset-1', 'preset-2', 'preset-3', 'preset-4' ] ) ){
+					$_key = "eael-product-{$key}";
+				}
+                $layout_options[ $_key ] = [
+                    'title' => $label,
+                    'image' => $image_url
+                ];
+            }
+        }
+
 		$image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/woo-product-gallery-';
 		$this->add_control(
 			'eael_product_gallery_style_preset',
 			[
 				'label'       => esc_html__( 'Skin', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::CHOOSE,
-				'options'     => [
-					'eael-product-preset-1' => [
-						'title' => esc_html__( 'Preset 1', 'essential-addons-for-elementor-lite' ),
-						'image' => $image_path . 'preset-1.png'
-					],
-					'eael-product-preset-2' => [
-						'title' => esc_html__( 'Preset 2', 'essential-addons-for-elementor-lite' ),
-						'image' => $image_path . 'preset-2.png'
-					],
-					'eael-product-preset-3' => [
-						'title' => esc_html__( 'Preset 3', 'essential-addons-for-elementor-lite' ),
-						'image' => $image_path . 'preset-3.png'
-					],
-					'eael-product-preset-4' => [
-						'title' => esc_html__( 'Preset 4', 'essential-addons-for-elementor-lite' ),
-						'image' => $image_path . 'preset-4.png'
-					]
-				],
+				'options'     => $layout_options,
 				'default'     => 'eael-product-preset-1',
 				'label_block' => true,
                 'toggle'      => false,
@@ -420,16 +433,6 @@ class Woo_Product_Gallery extends Widget_Base {
 				'separator'    => 'before',
 				'default'      => '',
 				'description'  => __( 'This will enable WooCommerce loop Before and After hooks. It may break your layout.', 'essential-addons-for-elementor-lite' )
-			]
-		);
-
-		$this->add_control(
-			'eael_product_gallery_dynamic_template',
-			[
-				'label'   => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'default',
-				'options' => $this->get_template_list_for_dropdown(),
 			]
 		);
 
@@ -2718,7 +2721,13 @@ class Woo_Product_Gallery extends Widget_Base {
             <div class="woocommerce">
 				<?php
 				do_action( 'eael_woo_before_product_loop' );
-				$template                         = $this->get_template( $settings[ 'eael_product_gallery_dynamic_template' ] );
+				$template_name = $settings[ 'eael_product_gallery_style_preset' ];
+				
+				if( in_array( $template_name, [ 'eael-product-preset-1', 'eael-product-preset-2', 'eael-product-preset-3', 'eael-product-preset-4' ] ) ){
+					$template_name = str_replace( 'eael-product-', '', $template_name );
+				}
+				
+				$template                         = $this->get_template( $template_name );
 				$settings[ 'loadable_file_name' ] = $this->get_filename_only( $template );
 				$dir_name                         = $this->get_temp_dir_name( $settings[ 'loadable_file_name' ] );
 				$found_posts                      = 0;
