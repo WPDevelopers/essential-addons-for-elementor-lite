@@ -4,7 +4,7 @@ Tags: elementor, elements, elementor addon, elementor widget, woocommerce elemen
 Requires at least: 5.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 6.0.6
+Stable tag: 6.0.7
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -298,6 +298,19 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.0.7 - 09/10/2024 =
+
+- Fixed: EA Advanced Tabs | While being hovered or active, the tab shows green border
+- Fixed: EA Woo Cart | Style 2 - Remove product button size increase or decrease is not working for mobile
+- Fixed: EA Contact form 7 | Form width doesn't change
+- Fixed: EA Woo Product Grid | Search results isn't showing while being used as Search result template
+- Fixed: EA Advanced Data Table | Sorting is not working
+- Fixed: EA Advanced Tabs | JS compatibility issue
+- Fixed: EA Advanced Data Table | Images are not showing
+- Fixed: EA Advanced Tabs | Feature List as a saved template is broken
+- Few minor bug fixes & improvements
+
 
 = 6.0.6 - 29/09/2024 =
 
