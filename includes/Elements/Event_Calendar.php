@@ -1680,6 +1680,32 @@ class Event_Calendar extends Widget_Base
             ]
         );
 
+        $this->add_control(
+		    'eael_ec_table_body_content_linked_color',
+		    [
+			    'label'     => esc_html__( 'Linked Text', 'essential-addons-for-elementor-lite' ),
+			    'type'      => Controls_Manager::COLOR,
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-event-calendar-table tbody tr:nth-child(even) td.eael-ec-event-description a' => 'color: {{VALUE}} !important',
+			    ],
+                'conditions'   => [
+                    'relation' => 'and',
+                    'terms'    => [
+                        [
+                            'name'     => 'eael_ec_show_description',
+                            'operator' => ' === ',
+                            'value'    => 'yes'
+                        ],
+                        [
+                            'name'     => 'eael_ec_description_limit',
+                            'operator' => '<',
+                            'value'    => 1
+                        ]
+                    ]
+                ]
+		    ]
+	    );
+
         $this->add_group_control(
             Group_Control_Background::get_type(),
 	        [
@@ -1712,6 +1738,32 @@ class Event_Calendar extends Widget_Base
                 ],
             ]
         );
+
+        $this->add_control(
+		    'eael_ec_table_body_content_linked_color_odd',
+		    [
+			    'label'     => esc_html__( 'Linked Text', 'essential-addons-for-elementor-lite' ),
+			    'type'      => Controls_Manager::COLOR,
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-event-calendar-table tbody tr:nth-child(odd) td.eael-ec-event-description a' => 'color: {{VALUE}} !important',
+			    ],
+                'conditions'   => [
+                    'relation' => 'and',
+                    'terms'    => [
+                        [
+                            'name'     => 'eael_ec_show_description',
+                            'operator' => ' === ',
+                            'value'    => 'yes'
+                        ],
+                        [
+                            'name'     => 'eael_ec_description_limit',
+                            'operator' => '<',
+                            'value'    => 1
+                        ]
+                    ]
+                ]
+		    ]
+	    );
 
 	    $this->add_group_control(
 		    Group_Control_Background::get_type(),
@@ -1752,16 +1804,46 @@ class Event_Calendar extends Widget_Base
 		    'eael_ec_table_body_see_more',
 		    [
 			    'label'     => esc_html__( 'Expansion Indicator', 'essential-addons-for-elementor-lite' ),
-			    'type'      => \Elementor\Controls_Manager::HEADING,
+			    'type'      => Controls_Manager::HEADING,
 			    'separator' => 'before',
+                'conditions'   => [
+                    'relation' => 'and',
+                    'terms'    => [
+                        [
+                            'name'     => 'eael_ec_show_description',
+                            'operator' => ' === ',
+                            'value'    => 'yes'
+                        ],
+                        [
+                            'name'     => 'eael_ec_description_limit',
+                            'operator' => '>',
+                            'value'    => 0
+                        ]
+                    ]
+                ]
 		    ]
 	    );
 
 	    $this->add_group_control(
-		    \Elementor\Group_Control_Typography::get_type(),
+		    Group_Control_Typography::get_type(),
 		    [
 			    'name'     => 'eael_ec_table_body_see_more_typography',
 			    'selector' => '{{WRAPPER}} .eael-event-calendar-table tbody tr td .eael-see-more',
+                'conditions'   => [
+                    'relation' => 'and',
+                    'terms'    => [
+                        [
+                            'name'     => 'eael_ec_show_description',
+                            'operator' => ' === ',
+                            'value'    => 'yes'
+                        ],
+                        [
+                            'name'     => 'eael_ec_description_limit',
+                            'operator' => '>',
+                            'value'    => 0
+                        ]
+                    ]
+                ]
 		    ]
 	    );
 
@@ -1769,10 +1851,25 @@ class Event_Calendar extends Widget_Base
 		    'eael_ec_table_body_see_more_color',
 		    [
 			    'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
-			    'type'      => \Elementor\Controls_Manager::COLOR,
+			    'type'      => Controls_Manager::COLOR,
 			    'selectors' => [
 				    '{{WRAPPER}} .eael-event-calendar-table tbody tr td .eael-see-more' => 'color: {{VALUE}}',
 			    ],
+                'conditions'   => [
+                    'relation' => 'and',
+                    'terms'    => [
+                        [
+                            'name'     => 'eael_ec_show_description',
+                            'operator' => ' === ',
+                            'value'    => 'yes'
+                        ],
+                        [
+                            'name'     => 'eael_ec_description_limit',
+                            'operator' => '>',
+                            'value'    => 0
+                        ]
+                    ]
+                ]
 		    ]
 	    );
 
