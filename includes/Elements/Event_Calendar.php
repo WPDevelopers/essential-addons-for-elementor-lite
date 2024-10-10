@@ -1190,7 +1190,7 @@ class Event_Calendar extends Widget_Base
 		    'eael_ec_date_time_format',
 		    [
 			    'label'     => esc_html__( 'Visibility', 'essential-addons-for-elementor-lite' ),
-			    'type'      => \Elementor\Controls_Manager::SELECT,
+			    'type'      => Controls_Manager::SELECT,
 			    'default'   => 'date',
 			    'options'   => [
 				    'date-time' => esc_html__( 'Date Time', 'essential-addons-for-elementor-lite' ),
@@ -1203,6 +1203,35 @@ class Event_Calendar extends Widget_Base
 			    ]
 		    ]
 	    );
+
+        $this->add_control(
+			'eael_ec_enable_custom_date_format',
+			[
+				'label'        => esc_html__( 'Custom Date Format', 'textdomain' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+                'condition'    => [
+				    'eael_ec_show_date' => 'yes',
+				    'eael_ec_date_time_format!' => 'time',
+			    ]
+			]
+		);
+
+        $this->add_control(
+			'eael_ec_custom_date_format',
+			[
+				'label'   => esc_html__( 'Date Format', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::TEXT,
+				'default' => 'Y.m.d',
+				'placeholder' => 'm/d/Y',
+                'ai'          => [ 'active' => false ],
+                'condition'   => [
+				    'eael_ec_show_date' => 'yes',
+				    'eael_ec_date_time_format!' => 'time',
+				    'eael_ec_enable_custom_date_format' => 'yes'
+			    ]
+			]
+		);
 
 	    $this->add_control(
 		    'eael_ec_date_format',
@@ -1232,7 +1261,8 @@ class Event_Calendar extends Widget_Base
 			    ],
 			    'condition' => [
 				    'eael_ec_show_date'         => 'yes',
-				    'eael_ec_date_time_format!' => 'time'
+				    'eael_ec_date_time_format!' => 'time',
+				    'eael_ec_enable_custom_date_format!' => 'yes',
 			    ]
 		    ]
 	    );
@@ -1241,7 +1271,7 @@ class Event_Calendar extends Widget_Base
 		    'eael_ec_time_format',
 		    [
 			    'label'     => esc_html__( 'Time Format', 'essential-addons-for-elementor-lite' ),
-			    'type'      => \Elementor\Controls_Manager::SELECT,
+			    'type'      => Controls_Manager::SELECT,
 			    'default'   => 'g:i A',
 			    'options'   => [             // 00:00
 				    'g:i a'   => date( 'g:i a' ),            // 12:00 am/pm
@@ -3156,7 +3186,7 @@ class Event_Calendar extends Widget_Base
 
 			$item_count  = 1;
 
-			$date_format = $settings['eael_ec_date_format'];
+			$date_format = 'yes' === $settings['eael_ec_enable_custom_date_format'] && $settings['eael_ec_custom_date_format'] ? esc_html( $settings['eael_ec_custom_date_format'] )  : $settings['eael_ec_date_format'] ;
 			$time_format = $settings['eael_ec_time_format'];
 			$time_separator = '';
 
