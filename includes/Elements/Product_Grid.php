@@ -252,6 +252,16 @@ class Product_Grid extends Widget_Base
 			]
 		);
 
+        // $this->add_control(
+        //     'eael_dynamic_template_Layout',
+        //     [
+        //         'label' => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
+        //         'type' => Controls_Manager::SELECT,
+        //         'default' => 'default',
+        //         'options' => $this->get_template_list_for_dropdown(),
+        //     ]
+        // );
+
         $image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/woo-product-grid-preset-';
         $this->add_control(
 			'eael_product_grid_style_preset',
@@ -587,16 +597,6 @@ class Product_Grid extends Widget_Base
             'default' => '',
 
         ]);
-
-        $this->add_control(
-            'eael_dynamic_template_Layout',
-            [
-                'label' => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'default' => 'default',
-                'options' => $this->get_template_list_for_dropdown(),
-            ]
-        );
 
         $this->add_control(
 			'eael_product_grid_title_html_tag',
@@ -2460,20 +2460,20 @@ class Product_Grid extends Widget_Base
         $this->add_control(
             'show_pagination',
             [
-                'label' => __('Show pagination', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                'label'        => __('pagination', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'true',
-                'default' => '',
+                'default'      => '',
             ]
         );
 
         $this->add_control(
             'pagination_prev_label',
             [
-                'label' => __('Previous Label', 'essential-addons-for-elementor-lite'),
-                'default' => __('←', 'essential-addons-for-elementor-lite'),
+                'label'     => __('Previous Label', 'essential-addons-for-elementor-lite'),
+                'default'   => __('←', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'show_pagination' => 'true',
                 ]
@@ -2483,8 +2483,8 @@ class Product_Grid extends Widget_Base
         $this->add_control(
             'pagination_next_label',
             [
-                'label' => __('Next Label', 'essential-addons-for-elementor-lite'),
-                'default' => __('→', 'essential-addons-for-elementor-lite'),
+                'label'     => __('Next Label', 'essential-addons-for-elementor-lite'),
+                'default'   => __('→', 'essential-addons-for-elementor-lite'),
                 'condition' => [
                     'show_pagination' => 'true',
                 ]
@@ -3415,8 +3415,13 @@ class Product_Grid extends Widget_Base
                 <?php
                 do_action( 'eael_woo_before_product_loop', $settings['eael_product_grid_style_preset'] );
 
+                $template_name = $settings['eael_product_grid_style_preset'];
+                if ( strpos( $template_name, 'eael-product-' ) === 0 ) {
+                    $template_name = str_replace( 'eael-product-', '', $template_name );
+                }
+
                 $template                       = $this->get_template( $settings['eael_dynamic_template_Layout'] );
-                $settings['loadable_file_name']  = $this->get_filename_only( $template );
+                $settings['loadable_file_name'] = $this->get_filename_only( $template );
                 $dir_name                       = $this->get_temp_dir_name( $settings['loadable_file_name'] );
                 $found_posts                    = 0;
 
