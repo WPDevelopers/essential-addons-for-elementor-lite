@@ -191,8 +191,8 @@ class advancedDataTable {
     
         rows.sort(function(a, b) {
           var colIndex = th.index();
-          var valueA = jQuery(a).children().eq(colIndex).text().toUpperCase();
-          var valueB = jQuery(b).children().eq(colIndex).text().toUpperCase();
+          var valueA = jQuery(a).children().eq(colIndex).text().toUpperCase().replace(/[^A-Za-z0-9\s]/g, '');
+          var valueB = jQuery(b).children().eq(colIndex).text().toUpperCase().replace(/[^A-Za-z0-9\s]/g, '');
 
           if (isLikelyDate(valueA) && isLikelyDate(valueB)) {
             // Both are likely dates, sort by parsed date

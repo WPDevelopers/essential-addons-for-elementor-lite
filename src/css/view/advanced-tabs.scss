@@ -58,9 +58,8 @@
 	.eael-tabs-nav > {
 		ul {
 			li {
-				&:focus,
-				&.active:focus{
-					border: 1px solid #a9d204 !important;
+				&:focus-visible{
+					outline: 1px solid #a9d204 !important;
 				}
 			}
 		}

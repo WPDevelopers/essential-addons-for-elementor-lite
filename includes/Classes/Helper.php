@@ -1050,6 +1050,20 @@ class Helper
 		return wp_kses( $text, self::eael_allowed_tags(), array_merge( wp_allowed_protocols(), [ 'data' ] ) );
 	}
 
+    /**
+     * List of allowed protocols for wp_kses
+     *
+	 * eael_allowed_protocols
+	 * @return array
+	 */
+    public static function eael_allowed_protocols( $extra = [] ) {
+        $protocols = array_merge( wp_allowed_protocols(), [ 'data' ] );
+        if ( count( $extra ) > 0 ) {
+			$protocols = array_merge( $protocols, $extra );
+		}
+        return $protocols;
+	}
+
 	/**
      * List of allowed html tag for wp_kses
      *
