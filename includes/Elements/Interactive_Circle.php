@@ -1042,7 +1042,7 @@ class Interactive_Circle extends Widget_Base {
 			]
 		);
 
-		$this->add_render_attribute( 'eael_circle_wrapper', 'data-animation', $settings['eael_interactive_circle_animation'] );
+		$this->add_render_attribute( 'eael_circle_wrapper', 'data-appearance', $settings['eael_interactive_circle_animation'] );
 		$this->add_render_attribute( 'eael_circle_wrapper', 'data-autoplay', esc_attr( 'yes' === $settings['eael_interactive_circle_autoplay'] ? 1 : 0 ) );
 		$this->add_render_attribute( 'eael_circle_wrapper', 'data-autoplay-interval', esc_attr( ! empty( $settings['eael_interactive_circle_autoplay_interval']['size'] ) ? intval( $settings['eael_interactive_circle_autoplay_interval']['size'] ) : 2000 ) );
 
