@@ -2123,7 +2123,7 @@ class Formstack extends Widget_Base {
                     <?php } ?>
                     <?php if ($settings['eael_formstack_form_description_custom'] != '') { ?>
                         <div class="eael-contact-form-description eael-formstack-description">
-                            <?php echo wp_kses( $this->parse_text_editor($settings['eael_formstack_form_description_custom']), Helper::eael_allowed_tags() ); ?>
+                            <?php echo $this->parse_text_editor( $settings['eael_formstack_form_description_custom'] ); ?>
                         </div>
                     <?php } ?>
                 </div>
