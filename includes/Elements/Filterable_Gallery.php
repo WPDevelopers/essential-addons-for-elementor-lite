@@ -3377,7 +3377,7 @@ class Filterable_Gallery extends Widget_Base
         
         foreach ($gallery_items as $gallery) {
             $gallery_store[$counter]['title']        = Helper::eael_wp_kses($gallery['eael_fg_gallery_item_name']);
-            $gallery_store[$counter]['content']      = $gallery['eael_fg_gallery_item_content'];
+            $gallery_store[$counter]['content']      = $this->parse_text_editor( $gallery['eael_fg_gallery_item_content'] );
             $gallery_store[$counter]['id']           = $gallery['_id'];
             $gallery_store[$counter]['image']        = $gallery['eael_fg_gallery_img'];
             $gallery_store[$counter]['image']        = sanitize_url( $gallery['eael_fg_gallery_img']['url'] );
