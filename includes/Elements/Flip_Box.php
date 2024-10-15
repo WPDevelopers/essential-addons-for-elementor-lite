@@ -1650,9 +1650,8 @@ class Flip_Box extends Widget_Base
                                     ?>
                                     <div class="eael-elements-flip-box-content">
 	                                    <?php 
-                                        $tagsPresent = preg_match( '/<(h[1-6]|p|pre)>.*<\/(h[1-6]|p|pre)>/i', $settings['eael_flipbox_front_text'] );
-                                        echo $tagsPresent ? wp_kses( $settings['eael_flipbox_front_text'], Helper::eael_allowed_tags() ) : '<p>' . wp_kses( $settings['eael_flipbox_front_text'], Helper::eael_allowed_tags() ) . '</p>';
-                                        ?>
+                                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                        echo $this->parse_text_editor( $settings['eael_flipbox_front_text'] );?>
                                     </div>
                                 </div>
                             </div>
@@ -1689,8 +1688,10 @@ class Flip_Box extends Widget_Base
                                     <<?php echo esc_html( $flipbox_if_html_title_tag ), ' '; $this->print_render_attribute_string('flipbox-title-container'); ?>><?php echo wp_kses( $settings['eael_flipbox_back_title'], Helper::eael_allowed_tags() ); ?></<?php echo esc_html( $flipbox_if_html_title_tag ); ?>>
                                     <?php endif; ?>
                                     <div class="eael-elements-flip-box-content">
-                                        <?php $tagsPresent = preg_match( '/<(h[1-6]|p|pre)>.*<\/(h[1-6]|p|pre)>/i', $settings['eael_flipbox_back_text'] ); ?>
-                                        <?php echo $tagsPresent ? wp_kses( $settings['eael_flipbox_back_text'], Helper::eael_allowed_tags() ) : '<p>' . wp_kses( $settings['eael_flipbox_back_text'], Helper::eael_allowed_tags() ) . '</p>'; ?>
+                                        <?php
+                                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                        echo $this->parse_text_editor( $settings['eael_flipbox_back_text'] );
+                                        ?>
                                     </div>
 
                                     <?php if ($settings['flipbox_link_type'] == 'button' && !empty($settings['flipbox_button_text'])) : ?>
