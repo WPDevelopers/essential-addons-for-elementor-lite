@@ -1674,8 +1674,10 @@ class Info_Box extends Widget_Base
             if ('yes' == $settings['eael_show_infobox_content']){
                 if ('content' === $settings['eael_infobox_text_type']){
                     if (!empty($settings['eael_infobox_text'])) {
-                        $tagsPresent = preg_match('/<(h[1-6]|p|pre)>.*<\/(h[1-6]|p|pre)>/i', $settings['eael_infobox_text']);
-                        echo $tagsPresent ? wp_kses( $settings['eael_infobox_text'], Helper::eael_allowed_tags() ) : '<p>' . wp_kses( $settings['eael_infobox_text'], Helper::eael_allowed_tags() ) . '</p>';
+                        echo '<div>';
+                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                        echo $this->parse_text_editor( $settings['eael_infobox_text'] );
+                        echo '</div>';
                     }
                     $this->render_infobox_button();
                 } elseif ('template' === $settings['eael_infobox_text_type']) {
