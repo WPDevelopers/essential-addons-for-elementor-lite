@@ -1117,10 +1117,13 @@ class Adv_Tabs extends Widget_Base
 			        $tab_id = $tab_id === 'safari' ? 'eael-safari-tab' : $tab_id . '-tab'; ?>
 
                     <div id="<?php echo esc_attr( $tab_id ); ?>" class="clearfix eael-tab-content-item <?php echo esc_attr($tab['eael_adv_tabs_tab_show_as_default']); ?>" data-title-link="<?php echo esc_attr( $tab_id ); ?>">
-				        <?php if ('content' == $tab['eael_adv_tabs_text_type']) : ?>
-					        <?php echo wp_kses( $this->parse_text_editor( $tab['eael_adv_tabs_tab_content'] ), Helper::eael_allowed_tags() ); ?>
-				        <?php elseif ('template' == $tab['eael_adv_tabs_text_type']) : ?>
-                            <?php if ( ! empty( $tab['eael_primary_templates'] ) ) {
+				        <?php
+                        if ('content' == $tab['eael_adv_tabs_text_type']) :
+                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                            echo $this->parse_text_editor( $tab['eael_adv_tabs_tab_content'] );
+
+				        elseif ('template' == $tab['eael_adv_tabs_text_type']) :
+                            if ( ! empty( $tab['eael_primary_templates'] ) ) {
                                 // WPML Compatibility
                                 if ( ! is_array( $tab['eael_primary_templates'] ) ) {
                                     $tab['eael_primary_templates'] = apply_filters( 'wpml_object_id', $tab['eael_primary_templates'], 'wp_template', true );
@@ -1129,9 +1132,9 @@ class Adv_Tabs extends Widget_Base
 						        Helper::eael_onpage_edit_template_markup( $page_id, $tab['eael_primary_templates'] );
 
                                 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'] );
-                            } ?>
-				        <?php endif; ?>
+                                echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'], true );
+                            }
+				        endif; ?>
                     </div>
 		        <?php endforeach; ?>
             </div>
