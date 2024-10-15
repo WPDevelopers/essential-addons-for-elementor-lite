@@ -1480,7 +1480,7 @@ class Woo_Cart extends Widget_Base {
 			]
 		);
 
-        $this->add_control(
+        $this->add_responsive_control(
             'eael_woo_cart_table_style_icon_size',
             [
                 'label'       => __( 'Icon Size', 'essential-addons-for-elementor-lite' ),
@@ -1495,8 +1495,11 @@ class Woo_Cart extends Widget_Base {
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-remove a svg,
+                    .eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .product-thumbnail .eael-woo-cart-product-remove,
+                    {{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .product-thumbnail .eael-woo-cart-product-remove a svg,
 					{{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-td.product-remove a svg' => 'height: {{SIZE}}{{UNIT}};width: {{SIZE}}{{UNIT}};line-height: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-remove a i,
+                    {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .product-thumbnail .eael-woo-cart-product-remove a i,
 					{{WRAPPER}} .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-td.product-remove a i' => 'font-size: {{SIZE}}{{UNIT}};',
                 ],
             ]
