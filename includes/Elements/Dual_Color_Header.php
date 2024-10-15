@@ -929,7 +929,9 @@ class Dual_Color_Header extends Widget_Base
 				echo wp_kses( $title_html, Helper::eael_allowed_tags() );
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				echo ( $settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
-				<span class="subtext"><?php echo wp_kses( $settings['eael_dch_subtext'], Helper::eael_allowed_tags() ); ?></span>
+				<span class="subtext"><?php
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo $this->parse_text_editor( $settings['eael_dch_subtext'] ); ?></span>
 				<?php if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
 					<?php if ($icon_is_new || $icon_migrated) {
 						echo '<span class="eael-dch-svg-icon">';
