@@ -1455,7 +1455,11 @@ class Data_Table extends Widget_Base {
 										</td>
 										<?php else: ?>
 											<td <?php $this->print_render_attribute_string('table_inside_td'.$i.$j); ?>>
-												<div class="td-content-wrapper"><div <?php $this->print_render_attribute_string('td_content'); ?>><?php echo $table_td[$j]['title']; ?></div></div>
+												<div class="td-content-wrapper"><div <?php $this->print_render_attribute_string('td_content'); ?>>
+													<?php
+													// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+													echo $this->parse_text_editor( $table_td[$j]['title'] ); ?>
+												</div></div>
 											</td>
 										<?php endif; ?>
 										<?php
