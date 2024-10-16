@@ -1593,10 +1593,10 @@ class Helper
 					$acf_fields[ $field['name'] ] = [
 						'ID'    => $field['ID'],
 						'key'   => $field['key'],
-						'label' => $field['label'],
-						'name'  => $field['name'],
+						'label' => $field['label'] ?? '',
+						'name'  => $field['name'] ?? '',
 						'type'  => $field['type'],
-						'group' => $group['title'],
+						'group' => $group['title'] ?? '',
 					];
 				}
 			}
