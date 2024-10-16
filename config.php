@@ -634,6 +634,45 @@ $config = [
                 ],
             ],
         ],
+        'woo-product-price' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Price',
+        ],
+        'woo-product-rating' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Rating',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-product-rating.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
+        'woo-product-images' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Images',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-product-images.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
+        'woo-product-add-to-cart' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Add_To_Cart',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-product-add-to-cart.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
         'contact-form-7' => [
             'class' => '\Essential_Addons_Elementor\Elements\Contact_Form_7',
             'dependency' => [
