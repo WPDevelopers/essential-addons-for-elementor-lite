@@ -165,7 +165,7 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
                                     $get_custom_taxonomy  = $settings["eael_{$get_custom_post_type}_terms"]; //tags
                                 }
 
-                                if( 'post' !== $get_custom_post_type && $settings["eael_{$get_custom_post_type}_terms"] === $get_custom_taxonomy ) {
+                                if( 'post' !== $get_custom_post_type && isset( $settings["eael_{$get_custom_post_type}_terms"] ) && $settings["eael_{$get_custom_post_type}_terms"] === $get_custom_taxonomy ) {
                                     $terms = wp_get_post_terms( get_the_ID(), $get_custom_taxonomy );
                                 }
 

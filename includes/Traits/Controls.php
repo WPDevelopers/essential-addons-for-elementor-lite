@@ -1672,12 +1672,12 @@ trait Controls
 		        $options = [];
                 $default = '';
 
-                if( isset( $post_types_tax[ $post_type ] ) ){
+                if ( isset( $post_types_tax[ $post_type ] ) ){
                     $options = $post_types_tax[ $post_type ];
                     $default = key( $post_types_tax[ $post_type ] );
                 }
 
-                if( 'product' === $post_type ) {
+                if ( 'product' === $post_type ) {
                     unset( $options['product_cat'], $options['product_tag'] );
                     $options['category'] = __('Category', 'essential-addons-for-elementor-lite');
                     $options['tags']     = __('Tags', 'essential-addons-for-elementor-lite');
