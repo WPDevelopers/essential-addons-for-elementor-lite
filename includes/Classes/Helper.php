@@ -1577,18 +1577,18 @@ class Helper
 
     public static function get_all_acf_fields() {
 
-        if( ! class_exists( 'ACF' ) || ! function_exists( 'acf_get_field_groups' ) ){
+        if ( ! class_exists( 'ACF' ) || ! function_exists( 'acf_get_field_groups' ) ){
             return [];
         }
 
         $acf_field_groups = acf_get_field_groups();
 
-        if( empty( $acf_field_groups ) ) return [];
+        if ( empty( $acf_field_groups ) ) return [];
 
         $acf_fields = [];
 		foreach( $acf_field_groups as $group ){
 			$default_acf_fields = acf_get_fields( $group['key'] );
-			if( ! empty( $default_acf_fields ) ) {
+			if ( ! empty( $default_acf_fields ) ) {
 				foreach( $default_acf_fields as $field ) {
 					$acf_fields[ $field['name'] ] = [
 						'ID'    => $field['ID'],
