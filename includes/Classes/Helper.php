@@ -1588,7 +1588,7 @@ class Helper
         $acf_fields = [];
 		foreach( $acf_field_groups as $group ){
 			$default_acf_fields = acf_get_fields( $group['key'] );
-			if( !empty( $default_acf_fields ) ) {
+			if( ! empty( $default_acf_fields ) ) {
 				foreach( $default_acf_fields as $field ) {
 					$acf_fields[ $field['name'] ] = [
 						'ID'    => $field['ID'],
