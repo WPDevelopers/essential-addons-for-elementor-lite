@@ -1373,6 +1373,7 @@ class Adv_Accordion extends Widget_Base
 		$args     = Helper::get_query_args( $settings );
         $query    = new \WP_Query($args);
         $current_id = get_the_ID();
+        $has_block = false;
 
         if ( $query->have_posts() ) {
             $tab_count = 0;
@@ -1447,6 +1448,7 @@ class Adv_Accordion extends Widget_Base
                                 echo Plugin::$instance->frontend->get_builder_content( $tab_id, true );
                             }
                             else if ( has_blocks( get_the_content() ) ) {
+                                $has_block = true;
                                 echo '<div class="eael-accordion-gutenberg-content">';
                                 the_content();
                                 echo '</div>';
@@ -1464,6 +1466,13 @@ class Adv_Accordion extends Widget_Base
             echo '<p class="no-posts-found">'. esc_html__('No posts found!', 'essential-addons-elementor') .'</p>';
         }
         wp_reset_postdata();
+        
+        if ( $has_block ) {
+            wp_enqueue_style( 'wp-block-library' );
+            wp_enqueue_style( 'wp-block-library-theme' );
+            wp_enqueue_style( 'wc-block-style' );
+            wp_enqueue_style( 'wc-blocks-style' );
+        }
     }
     
 
