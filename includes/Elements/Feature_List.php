@@ -789,23 +789,23 @@ class Feature_List extends Widget_Base {
         $this->add_responsive_control(
             'eael_feature_list_text_align',
             [
-                'label'     => __( 'Alignment', 'elementor' ),
+                'label'     => __( 'Alignment', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::CHOOSE,
                 'options'   => [
                     'left'    => [
-                        'title' => __( 'Left', 'elementor' ),
+                        'title' => __( 'Left', 'essential-addons-for-elementor-lite' ),
                         'icon'  => 'eicon-text-align-left',
                     ],
                     'center'  => [
-                        'title' => __( 'Center', 'elementor' ),
+                        'title' => __( 'Center', 'essential-addons-for-elementor-lite' ),
                         'icon'  => 'eicon-text-align-center',
                     ],
                     'right'   => [
-                        'title' => __( 'Right', 'elementor' ),
+                        'title' => __( 'Right', 'essential-addons-for-elementor-lite' ),
                         'icon'  => 'eicon-text-align-right',
                     ],
                     'justify' => [
-                        'title' => __( 'Justified', 'elementor' ),
+                        'title' => __( 'Justified', 'essential-addons-for-elementor-lite' ),
                         'icon'  => 'eicon-text-align-justify',
                     ],
                 ],

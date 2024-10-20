@@ -383,7 +383,7 @@ class Woo_Checkout extends Widget_Base {
 		$this->add_control(
 			'ea_woo_checkout_coupon_icon',
 			[
-				'label' => __( 'Icon', 'elementor' ),
+				'label' => __( 'Icon', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::ICONS,
 				'default' => [
 					'value' => 'fas fa-percent',
@@ -505,7 +505,7 @@ class Woo_Checkout extends Widget_Base {
 		$this->add_control(
 			'ea_woo_checkout_login_icon',
 			[
-				'label' => __( 'Icon', 'elementor' ),
+				'label' => __( 'Icon', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::ICONS,
 				'default' => [
 					'value' => 'fas fa-user',
