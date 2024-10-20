@@ -2627,10 +2627,10 @@ class Woo_Checkout extends Widget_Base {
 			);
 
 			$this->start_controls_tabs('ea_woo_checkout_pickup_point_tabs');
-			$this->start_controls_tab('ea_woo_checkout_pickup_point_tab_normal', ['label' => __('Normal', 'essential-addons-for-elementor')]);
+			$this->start_controls_tab('ea_woo_checkout_pickup_point_tab_normal', ['label' => __('Normal', 'essential-addons-for-elementor-lite')]);
 
 			$this->add_control('ea_woo_checkout_pickup_point_btn_bg_color', [
-				'label' => __('Background Color', 'essential-addons-for-elementor'),
+				'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#7866ff',
 				'selectors' => [
@@ -2639,7 +2639,7 @@ class Woo_Checkout extends Widget_Base {
 			]);
 
 			$this->add_control('ea_woo_checkout_pickup_point_btn_color', [
-				'label' => __('Color', 'essential-addons-for-elementor'),
+				'label' => __('Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#ffffff',
 				'selectors' => [
@@ -2654,10 +2654,10 @@ class Woo_Checkout extends Widget_Base {
 
 			$this->end_controls_tab();
 
-			$this->start_controls_tab('ea_woo_checkout_pickup_point_tab_hover', ['label' => __('Hover', 'essential-addons-for-elementor')]);
+			$this->start_controls_tab('ea_woo_checkout_pickup_point_tab_hover', ['label' => __('Hover', 'essential-addons-for-elementor-lite')]);
 
 			$this->add_control('ea_woo_checkout_pickup_point_btn_bg_color_hover', [
-				'label' => __('Background Color', 'essential-addons-for-elementor'),
+				'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#7866ff',
 				'selectors' => [
@@ -2666,7 +2666,7 @@ class Woo_Checkout extends Widget_Base {
 			]);
 
 			$this->add_control('ea_woo_checkout_pickup_point_btn_color_hover', [
-				'label' => __('Color', 'essential-addons-for-elementor'),
+				'label' => __('Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#ffffff',
 				'selectors' => [
@@ -2675,7 +2675,7 @@ class Woo_Checkout extends Widget_Base {
 			]);
 
 			$this->add_control('ea_woo_checkout_pickup_point_btn_border_color_hover', [
-				'label' => __('Border Color', 'essential-addons-for-elementor'),
+				'label' => __('Border Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .woo-checkout-payment .carrier-agents-postcode-search .woo-carrier-agents-postcode-input-wrapper #woo-carrier-agents-search-button:hover' => 'border-color: {{VALUE}};',
