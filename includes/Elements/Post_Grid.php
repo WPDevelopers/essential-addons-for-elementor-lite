@@ -250,6 +250,19 @@ class Post_Grid extends Widget_Base
         );
 
         $this->add_control(
+            'eael_post_grid_style_three_alert',
+            [
+                'type' => Controls_Manager::RAW_HTML,
+                'raw' => __('Make sure to enable <strong>Show Date</strong> option from <strong>Layout Settings</strong>', 'essential-addons-for-elementor-lite'),
+                'content_classes' => 'eael-warning',
+                'condition' => [
+                    'eael_post_grid_preset_style' => ['two', 'three'],
+                    'eael_show_date' => '',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'eael_post_grid_bg_color',
             [
                 'label' => __('Post Background Color', 'essential-addons-for-elementor-lite'),
@@ -1083,6 +1096,8 @@ class Post_Grid extends Widget_Base
         set_transient( 'eael_post_grid_excerpt_expanison_indicator_'. $this->get_id(), $this->get_settings_for_display('excerpt_expanison_indicator'), DAY_IN_SECONDS );
         $settings['read_more_button_text'] = $this->get_settings_for_display('read_more_button_text');
         $settings['excerpt_expanison_indicator'] = $this->get_settings_for_display('excerpt_expanison_indicator');
+
+        $args['ignore_sticky_posts'] = isset( $settings['ignore_sticky_posts'] ) && 'yes' === $settings['ignore_sticky_posts'];
 
         if(file_exists($template)){
             $query = new \WP_Query( $args );

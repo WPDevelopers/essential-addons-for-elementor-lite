@@ -6,7 +6,7 @@
 	&[data-fancy-text-cursor="yes"] .eael-fancy-text-strings {
 		&::after {
 			content: "|";
-			animation: blink_cursor .7s infinite;
+			animation: eaelBlink_cursor .7s infinite;
 		}
 	}
 
@@ -27,7 +27,7 @@
 	display: inline-block;
 }
 
-@keyframes blink_cursor {
+@keyframes eaelBlink_cursor {
 	0% {
 		opacity: 1;
 	}

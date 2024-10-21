@@ -74,6 +74,10 @@ class Adv_Accordion extends Widget_Base
         ];
     }
 
+    protected function is_dynamic_content():bool {
+        return false;
+    }
+
     public function get_custom_help_url()
     {
         return 'https://essential-addons.com/elementor/docs/advanced-accordion/';
@@ -1154,8 +1158,13 @@ class Adv_Accordion extends Widget_Base
             $this->add_render_attribute('eael-adv-accordion', 'data-custom-id-offset', esc_attr( $settings['eael_adv_accordion_custom_id_offset'] ) );
         }
 ?>
-        <div <?php echo $this->get_render_attribute_string('eael-adv-accordion'); ?> <?php echo 'data-accordion-id="' . esc_attr($this->get_id()) . '"'; ?> <?php echo !empty($settings['eael_adv_accordion_type']) ? 'data-accordion-type="' . esc_attr($settings['eael_adv_accordion_type']) . '"' : 'accordion'; ?> <?php echo !empty($settings['eael_adv_accordion_toggle_speed']) ? 'data-toogle-speed="' . esc_attr($settings['eael_adv_accordion_toggle_speed']) . '"' : '300'; ?>>
-    <?php foreach ($settings['eael_adv_accordion_tab'] as $index => $tab) {
+        <div <?php $this->print_render_attribute_string('eael-adv-accordion'); ?> <?php echo 'data-accordion-id="' . esc_attr($this->get_id()) . '"'; ?> <?php echo !empty($settings['eael_adv_accordion_type']) ? 'data-accordion-type="' . esc_attr($settings['eael_adv_accordion_type']) . '"' : 'accordion'; ?> <?php echo !empty($settings['eael_adv_accordion_toggle_speed']) ? 'data-toogle-speed="' . esc_attr($settings['eael_adv_accordion_toggle_speed']) . '"' : '300'; ?>>
+    <?php 
+        foreach ($settings['eael_adv_accordion_tab'] as $index => $tab) {
+            if( empty( $tab['eael_adv_accordion_tab_title'] ) || ( 'content' == $tab['eael_adv_accordion_text_type'] && empty( $tab['eael_adv_accordion_tab_content'] ) ) ){
+                continue;
+            }
+
             $tab_count = $index + 1;
             $tab_title_setting_key = $this->get_repeater_setting_key('eael_adv_accordion_tab_title', 'eael_adv_accordion_tab', $index);
             $tab_content_setting_key = $this->get_repeater_setting_key('eael_adv_accordion_tab_content', 'eael_adv_accordion_tab', $index);
@@ -1191,14 +1200,16 @@ class Adv_Accordion extends Widget_Base
             ]);
 
             echo '<div class="eael-accordion-list">
-                <div ' . $this->get_render_attribute_string($tab_title_setting_key) . '>';
+                <div '; $this->print_render_attribute_string($tab_title_setting_key); echo '>';
             // toggle icon if user set position to left
             if ($settings['eael_adv_accordion_icon_show'] === 'yes' && $settings['eael_adv_accordion_toggle_icon_postion'] === '') {
                 $this->print_toggle_icon($settings);
             }
             // tab title
             if ($settings['eael_adv_accordion_toggle_icon_postion'] === '') {
-                echo '<' . Helper::eael_validate_html_tag($settings['eael_adv_accordion_title_tag']) . ' class="eael-accordion-tab-title">' . Helper::eael_wp_kses($tab['eael_adv_accordion_tab_title']) . '</' . Helper::eael_validate_html_tag($settings['eael_adv_accordion_title_tag']) . '>';
+                $title_tag = Helper::eael_validate_html_tag( $settings['eael_adv_accordion_title_tag'] );
+                $title = '<' . $title_tag  . ' class="eael-accordion-tab-title">' . $tab['eael_adv_accordion_tab_title'] . '</' . $title_tag . '>';
+                echo wp_kses( $title, Helper::eael_allowed_tags() );
             }
             // tab icon
             if ($tab['eael_adv_accordion_tab_icon_show'] === 'yes') {
@@ -1230,16 +1241,19 @@ class Adv_Accordion extends Widget_Base
             }
             // tab title
             if ($settings['eael_adv_accordion_toggle_icon_postion'] === 'right' || $settings['eael_adv_accordion_toggle_icon_postion'] === null) {
-                echo '<' . Helper::eael_validate_html_tag($settings['eael_adv_accordion_title_tag']) . ' class="eael-accordion-tab-title">' . Helper::eael_wp_kses($tab['eael_adv_accordion_tab_title']) . '</' . Helper::eael_validate_html_tag($settings['eael_adv_accordion_title_tag']) . '>';
+                $title_tag = Helper::eael_validate_html_tag( $settings['eael_adv_accordion_title_tag'] );
+                $title = '<' . $title_tag . ' class="eael-accordion-tab-title">' . $tab['eael_adv_accordion_tab_title'] . '</' . $title_tag . '>';
+                echo wp_kses( $title, Helper::eael_allowed_tags() );
             }
             // toggle icon
             if ($settings['eael_adv_accordion_icon_show'] === 'yes' && $settings['eael_adv_accordion_toggle_icon_postion'] === 'right') {
-                $this->print_toggle_icon($settings);
+                $this->print_toggle_icon( $settings );
             }
             echo '</div>';
 
-            echo '<div ' . $this->get_render_attribute_string($tab_content_setting_key) . '>';
+            echo '<div ';  $this->print_render_attribute_string($tab_content_setting_key); echo '>';
             if ('content' == $tab['eael_adv_accordion_text_type']) {
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                 echo $this->parse_text_editor( $tab['eael_adv_accordion_tab_content'] );
             } elseif ('template' == $tab['eael_adv_accordion_text_type']) {
                 if ( ! empty( $tab['eael_primary_templates'] ) ) {
@@ -1247,7 +1261,9 @@ class Adv_Accordion extends Widget_Base
                     if ( ! is_array( $tab['eael_primary_templates'] ) ) {
                         $tab['eael_primary_templates'] = apply_filters( 'wpml_object_id', $tab['eael_primary_templates'], 'wp_template', true );
                     }
-                    echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'], true );
+                    
+                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                    echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'], true ); 
                 }
             }
             echo '</div>

@@ -59,13 +59,23 @@ $quick_view_setting = [
 $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_class', [], $product->get_id(), 'eicon-woocommerce' ) );
 
 $product_data = [
+	'id'     => get_the_ID(),
 	'title'  => '<div class="eael-product-title">
                                 <a href="' . esc_url( $product->get_permalink() ) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">' .
 	            sprintf( '<%1$s class="woocommerce-loop-product__title">%2$s</%1$s>', $title_tag, $product->get_title() )
 	            . '</a></div>',
 	'ratings' => $should_print_rating ? wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) : '',
-	'price'  => $should_print_price ? '<div class="eael-product-price">' . $product->get_price_html() . '</div>' : ''
+	'price'   => ''
 ];
+
+if ( $should_print_rating ) {
+	$avg_rating = $product->get_average_rating();
+	if( $avg_rating > 0 ){
+		$product_data['ratings'] = wc_get_rating_html($product->get_average_rating(), $product->get_rating_count());
+	} else {
+		$product_data['ratings'] = Helper::eael_rating_markup( $product->get_average_rating(), $product->get_rating_count() );
+	}
+}
 
 if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-product-reveal' ) { ?>
     <li class="product <?php echo esc_attr( $product_wrapper_classes ); ?>">
@@ -91,7 +101,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
             if ( ! empty( $product_data ) ) {
 	            foreach ( $product_data as $content ) {
 		            if ( ! empty( $content ) ) {
-			            echo Helper::eael_wp_kses( $content );
+			            echo wp_kses( $content, Helper::eael_allowed_tags(), Helper::eael_allowed_protocols() );
 		            }
 	            }
             }
@@ -168,7 +178,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
         if ( ! empty( $product_data ) ) {
 	        foreach ( $product_data as $content ) {
 		        if ( ! empty( $content ) ) {
-			        echo Helper::eael_wp_kses( $content );
+					echo wp_kses( $content, Helper::eael_allowed_tags(), Helper::eael_allowed_protocols() );
 		        }
 	        }
         }
@@ -311,25 +321,30 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                 </div>
                 <div class="product-details-wrap">
 					<?php
-					$_product_data['id'] = $product_data['id'];
+					$new_product_data['id'] = $product_data['id'];
                     if(($grid_style_preset == 'eael-product-preset-7') && $should_print_price ){
-	                    $_product_data['price'] = '<div class="eael-product-price">'.$product->get_price_html().'</div>';
+	                    $new_product_data['price'] = '<div class="eael-product-price">'.$product->get_price_html().'</div>';
 					}
 
                     if ( $should_print_rating ) {
-                        $_product_data['ratings'] = wc_get_rating_html ($product->get_average_rating(), $product->get_rating_count());
+						$avg_rating = $product->get_average_rating();
+						if( $avg_rating > 0 ){
+							$new_product_data['ratings'] = wc_get_rating_html($product->get_average_rating(), $product->get_rating_count());
+						} else {
+							$new_product_data['ratings'] = Helper::eael_rating_markup( $product->get_average_rating(), $product->get_rating_count() );
+						}
                     }
-                    $_product_data['title'] = $product_data['title'];
+                    $new_product_data['title'] = $product_data['title'];
 
                     if(($grid_style_preset != 'eael-product-preset-7') && $should_print_price ){
-	                    $_product_data['price'] = '<div class="eael-product-price">'.$product->get_price_html().'</div>';
+	                    $new_product_data['price'] = '<div class="eael-product-price">'.$product->get_price_html().'</div>';
                     }
 
-                    $product_data = apply_filters( 'eael/product-grid/content/reordering', $_product_data, $settings, $product );
+                    $product_data = apply_filters( 'eael/product-grid/content/reordering', $new_product_data, $settings, $product );
                     if ( ! empty( $product_data ) ) {
 	                    foreach ( $product_data as $content ) {
 		                    if ( ! empty( $content ) ) {
-			                    echo Helper::eael_wp_kses( $content );
+								echo wp_kses( $content, Helper::eael_allowed_tags(), Helper::eael_allowed_protocols() );
 		                    }
 	                    }
                     }
@@ -411,7 +426,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                     if ( ! empty( $product_data ) ) {
 	                    foreach ( $product_data as $content ) {
 		                    if ( ! empty( $content ) ) {
-			                    echo Helper::eael_wp_kses( $content );
+								echo wp_kses( $content, Helper::eael_allowed_tags(), Helper::eael_allowed_protocols() );
 		                    }
 	                    }
                     }
@@ -478,8 +493,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 		                        echo '<div class="eael-product-price">' . $product->get_price_html() . '</div>';
 	                        }
 	                        if ( $should_print_rating ) {
-		                        echo wc_get_rating_html
-		                        ( $product->get_average_rating(), $product->get_rating_count() );
+		                        echo wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() );
 	                        }
 	                        echo '</div>
                             <div class="title-wrap">
@@ -516,7 +530,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                     if ( ! empty( $product_data ) ) {
 	                    foreach ( $product_data as $content ) {
 		                    if ( ! empty( $content ) ) {
-			                    echo Helper::eael_wp_kses( $content );
+								echo wp_kses( $content, Helper::eael_allowed_tags(), Helper::eael_allowed_protocols() );
 		                    }
 	                    }
 					}

@@ -57,6 +57,10 @@ class Fancy_Text extends Widget_Base {
         ];
     }
 
+	protected function is_dynamic_content():bool {
+        return false;
+    }
+
     public function get_custom_help_url() {
         return 'https://essential-addons.com/elementor/docs/fancy-text/';
     }
@@ -599,8 +603,6 @@ class Fancy_Text extends Widget_Base {
 	}
 
 	protected function render() {
-
-
 		$settings = $this->get_settings_for_display();
 		$fancy_text = $this->fancy_text($settings['eael_fancy_text_strings']);
 		if(!apply_filters('eael/pro_enabled', false)) { $settings['eael_fancy_text_style'] = 'style-1'; }
@@ -650,5 +652,4 @@ class Fancy_Text extends Widget_Base {
 
 	}
 
-	protected function content_template() {}
 }

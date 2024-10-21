@@ -62,6 +62,10 @@ class Pricing_Table extends Widget_Base
         ];
     }
 
+    protected function is_dynamic_content():bool {
+        return false;
+    }
+
     public function get_custom_help_url()
     {
         return 'https://essential-addons.com/elementor/docs/pricing-table/';
@@ -560,9 +564,6 @@ class Pricing_Table extends Widget_Base
                 'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default'      => 'yes',
-                'selectors'    => [
-                    '{{WRAPPER}} .eael-pricing-button' => 'display: inline-block;',
-                ],
             ]
         );
 
@@ -1924,7 +1925,7 @@ class Pricing_Table extends Widget_Base
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
-                    '{{WRAPPER}} .eael-pricing .eael-pricing-button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-pricing .footer' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -2159,7 +2160,7 @@ class Pricing_Table extends Widget_Base
                     $obj->add_render_attribute(
                         'pricing_feature_item_tooltip' . $counter,
                         [
-                            'class' => 'tooltip',
+                            'class' => 'eael-tooltip',
                             'title' => HelperClass::eael_wp_kses($item['eael_pricing_item_tooltip_content']),
                             'id'    => $obj->get_id() . $counter,
                         ]
@@ -2295,7 +2296,7 @@ class Pricing_Table extends Widget_Base
                     <div class="body">
                         <?php $this->render_feature_list($settings, $this); ?>
                     </div>
-	                <?php if($settings['eael_pricing_table_button_show']=='yes'): ?>
+	                <?php if( isset( $settings['eael_pricing_table_button_show'] ) && 'yes' === $settings['eael_pricing_table_button_show'] ): ?>
                     <div class="footer">
                         <a <?php echo $this->get_render_attribute_string('eael_pricing_button'); ?> >
                             <?php if ('left' == $icon_position) : ?>
@@ -2346,7 +2347,7 @@ class Pricing_Table extends Widget_Base
                     <div class="body">
                         <?php $this->render_feature_list($settings, $this); ?>
                     </div>
-	                <?php if($settings['eael_pricing_table_button_show']=='yes'): ?>
+	                <?php if( isset( $settings['eael_pricing_table_button_show'] ) && 'yes' === $settings['eael_pricing_table_button_show'] ): ?>
                     <div class="footer">
                         <a <?php echo $this->get_render_attribute_string('eael_pricing_button'); ?> >
                             <?php if ('left' == $icon_position) : ?>

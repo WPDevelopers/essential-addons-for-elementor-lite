@@ -144,7 +144,7 @@ class Post_Duplicator {
 					$meta_key      = sanitize_text_field( $meta_info->meta_key );
 					$meta_value    =  $meta_info->meta_value;
 					
-					$exclude_meta_keys = [ '_wc_average_rating', '_wc_review_count', '_wc_rating_count' ];
+					$exclude_meta_keys = [ '_wc_average_rating', '_wc_review_count', '_wc_rating_count', '_elementor_css' ];
 					
 					if( in_array($meta_key, $exclude_meta_keys) ){
 						continue;

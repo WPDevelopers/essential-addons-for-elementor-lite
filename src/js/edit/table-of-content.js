@@ -1,4 +1,4 @@
-ea.hooks.addAction("editMode.init", "ea", () => {
+eael.hooks.addAction("editMode.init", "ea", () => {
 	elementor.settings.page.addChangeCallback(
 		"eael_ext_table_of_content",
 		function (newValue) {
@@ -19,6 +19,7 @@ ea.hooks.addAction("editMode.init", "ea", () => {
 		var selector = jQuery("#eael-toc");
 		if (newValue === "right") {
 			selector.addClass("eael-toc-right");
+			selector.removeClass("eael-toc-left");
 		} else {
 			selector.removeClass("eael-toc-right");
 			selector.addClass("eael-toc-left");

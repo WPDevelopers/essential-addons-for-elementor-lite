@@ -480,6 +480,14 @@ body.rtl {
 }
 
 /*--- Video Gallery ---*/
+.mfp-bottom-bar {
+	margin-top: 0;
+}
+
+figcaption .mfp-bottom-bar {
+	margin-top: -36px;
+}
+
 .gallery-item-thumbnail-wrap {
 	position: relative;
 }
@@ -1039,7 +1047,6 @@ body.rtl {
 		}
 	}
 
-	.mfp-close,
     .mfp-close {
 		width: auto;
 	}
@@ -1047,6 +1054,7 @@ body.rtl {
 
 .mfp-zoom-out-cur .mfp-image-holder .mfp-close {
 	cursor: pointer;
+	text-align: right !important;
 }
 
 .mfp-zoom-out-cur .mfp-image-holder .mfp-close:hover {

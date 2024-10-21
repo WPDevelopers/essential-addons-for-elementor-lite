@@ -518,7 +518,7 @@ class Table_of_Content
             ]
         );
 
-        $element->add_control(
+        $element->add_responsive_control(
             'eael_ext_toc_width',
             [
                 'label' => __('Width', 'essential-addons-for-elementor-lite'),
@@ -558,6 +558,91 @@ class Table_of_Content
                 'separator' => 'before',
                 'condition' => [
                     'eael_ext_table_of_content' => 'yes',
+                ],
+            ]
+        );
+
+        $element->add_control(
+			'eael_ext_toc_position_mobile',
+			[
+				'label'        => esc_html__( 'Position For Mobile Device', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+			]
+		);
+
+        $element->add_control(
+            'eael_ext_toc_position_mobile_top_bottom',
+            [
+                'label'       => __('Position', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::SELECT,
+                'default'     => 'top',
+                'label_block' => false,
+                'options'     => [
+                    'top'    => __('Top', 'essential-addons-for-elementor-lite'),
+                    'bottom' => __('Bottom', 'essential-addons-for-elementor-lite'),
+                ],
+                'condition' => [
+                    'eael_ext_table_of_content'    => 'yes',
+                    'eael_ext_toc_position_mobile' => 'yes',
+                ],
+            ]
+        );
+
+        $element->add_control(
+            'eael_ext_toc_position_mobile_top_offset',
+            [
+                'label' => __('Top Offset', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 5,
+                        'max' => 2000,
+                        'step' => 10,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 50,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-toc.eael-toc-top.eael-sticky' => 'top: {{SIZE}}{{UNIT}} !important;',
+                ],
+                'condition' => [
+                    'eael_ext_table_of_content' => 'yes',
+                    'eael_ext_toc_position_mobile_top_bottom' => 'top',
+                    'eael_ext_toc_position_mobile' => 'yes',
+                ],
+            ]
+        );
+
+        $element->add_control(
+            'eael_ext_toc_position_mobile_bottom_offset',
+            [
+                'label' => __('Bottom Offset', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 5,
+                        'max' => 2000,
+                        'step' => 10,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 50,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-toc.eael-toc-bottom.eael-sticky' => 'bottom: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_ext_table_of_content' => 'yes',
+                    'eael_ext_toc_position_mobile_top_bottom' => 'bottom',
+                    'eael_ext_toc_position_mobile' => 'yes',
                 ],
             ]
         );
@@ -956,6 +1041,22 @@ class Table_of_Content
                     'none' => __('None', 'essential-addons-for-elementor-lite'),
                     'arrow' => __('Arrow', 'essential-addons-for-elementor-lite'),
                     'bar' => __('Bar', 'essential-addons-for-elementor-lite'),
+                ],
+            ]
+        );
+
+        $element->add_control(
+            'eael_ext_toc_indicator_color',
+            [
+                'label'     => __('Indicator Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#ff7d50',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-list-bar li.eael-highlight-active > a:after' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-toc .eael-toc-body ul.eael-toc-list.eael-toc-list-arrow li.eael-highlight-active > a:before' => 'border-bottom: 10px solid {{VALUE}}',
+                ],
+                'condition' => [
+                    'eael_ext_table_of_content_list_style' => [ 'arrow', 'bar' ]
                 ],
             ]
         );

@@ -56,8 +56,18 @@ $image_sources = [
 $product_data = [
 	'title'   => sprintf( '<%1$s class="woocommerce-loop-product__title">%2$s</%1$s>', $title_tag, $product->get_title() ),
 	'price'   => $should_print_price ? '<div class="eael-product-price">' . $product->get_price_html() . '</div>' : '',
-	'ratings' => $should_print_rating ? wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) : '',
+	'ratings' => '',
 ];
+
+if ( $should_print_rating ) {
+	$avg_rating = $product->get_average_rating();
+	if( $avg_rating > 0 ){
+		$product_data['ratings'] = wc_get_rating_html( $avg_rating, $product->get_rating_count());
+	} else {
+		$product_data['ratings'] = Helper::eael_rating_markup( $avg_rating, $product->get_rating_count() );
+	}
+}
+
 if ( $gallery_style_preset == 'eael-product-preset-4' ) { ?>
     <li class="product">
 		<?php
@@ -87,7 +97,7 @@ if ( $gallery_style_preset == 'eael-product-preset-4' ) { ?>
 			if ( ! empty( $product_data ) ) {
 				foreach ( $product_data as $content ) {
 					if ( ! empty( $content ) ) {
-						echo Helper::eael_wp_kses( $content );
+						echo wp_kses( $content, Helper::eael_allowed_tags(), Helper::eael_allowed_protocols() );
 					}
 				}
 			}
@@ -193,7 +203,7 @@ else if (($gallery_style_preset == 'eael-product-preset-3') || ($gallery_style_p
 				if ( ! empty( $product_data ) ) {
 					foreach ( $product_data as $content ) {
 						if ( ! empty( $content ) ) {
-							echo Helper::eael_wp_kses( $content );
+							echo wp_kses( $content, Helper::eael_allowed_tags(), Helper::eael_allowed_protocols() );
 						}
 					}
 				}
@@ -268,7 +278,7 @@ else if ($gallery_style_preset == 'eael-product-preset-1') {
 				if ( ! empty( $product_data ) ) {
 					foreach ( $product_data as $content ) {
 						if ( ! empty( $content ) ) {
-							echo Helper::eael_wp_kses( $content );
+							echo wp_kses( $content, Helper::eael_allowed_tags(), Helper::eael_allowed_protocols() );
 						}
 					}
 				}
