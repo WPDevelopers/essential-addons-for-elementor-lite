@@ -123,7 +123,7 @@ class Event_Calendar extends Widget_Base
                 [
                     'type' => Controls_Manager::RAW_HTML,
                     'raw' => __('<strong>The Events Calendar</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=the-events-calendar&tab=search&type=term" target="_blank">The Events Calendar</a> first.',
-                        'essential-addons-for-elementor'),
+                        'essential-addons-for-elementor-lite'),
                     'content_classes' => 'eael-warning',
                     'condition' => [
                         'eael_event_calendar_type' => 'the_events_calendar',
@@ -2674,7 +2674,7 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'eael_more_event',
             [
-                'label' => esc_html__( 'More Event Text', 'textdomain' ),
+                'label' => esc_html__( 'More Event Text', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]

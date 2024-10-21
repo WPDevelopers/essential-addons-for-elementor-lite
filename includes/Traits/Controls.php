@@ -564,7 +564,7 @@ trait Controls
             $wb->add_control(
                 'eael_post_block_layout',
                 [
-                    'label' => esc_html__( 'Layout', 'textdomain' ),
+                    'label' => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
                     'type' => Controls_Manager::CHOOSE,
                     'options' => [
                         'post-block-layout-block' => [
