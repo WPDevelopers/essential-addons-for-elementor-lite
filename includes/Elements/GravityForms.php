@@ -2843,9 +2843,9 @@ class GravityForms extends Widget_Base {
 	 * @access protected
 	 */
     protected function render() {
-        if(!class_exists('\GFForms')) {
-            return;
-        }
+	    if ( ! class_exists( '\GFForms' ) || get_post_type( get_the_ID() ) === 'conversational_form' ) {
+		    return;
+	    }
 
         $settings = $this->get_settings_for_display();
         
