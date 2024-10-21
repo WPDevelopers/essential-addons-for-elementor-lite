@@ -1577,7 +1577,7 @@ class Helper
 
     public static function get_all_acf_fields() {
 
-        if ( ! class_exists( 'ACF' ) || ! function_exists( 'acf_get_field_groups' ) ){
+        if ( ! class_exists( 'ACF' ) || ! function_exists( 'acf_get_field_groups' ) ) {
             return [];
         }
 
