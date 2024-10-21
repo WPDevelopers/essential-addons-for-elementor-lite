@@ -276,17 +276,37 @@ class Woo_Product_Price extends Widget_Base {
 	}
 
 	protected function render() {
-        global $product;
+		global $product;
 
 		$product = Helper::get_product();
 
-        if ( ! $product ) {
-            return;
-        }
-        ?>
-        <div class="eael-single-product-price">
-            <?php wc_get_template( '/single-product/price.php' ); ?>
-        </div>
-        <?php
+		if ( ! $product ) {
+			return;
+		}
+
+		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
+			?>
+			<div class="eael-single-product-price">
+				<p class="price">
+					<del aria-hidden="true">
+						<span class="woocommerce-Price-amount amount">
+							<bdi><span class="woocommerce-Price-currencySymbol"><?php esc_html_e( '$', 'essential-addons-for-elementor-lite' ); ?></span><?php esc_html_e( '80.00', 'essential-addons-for-elementor-lite' ); ?></bdi>
+						</span>
+					</del>
+					<ins aria-hidden="true">
+						<span class="woocommerce-Price-amount amount">
+							<bdi><span class="woocommerce-Price-currencySymbol"><?php esc_html_e( '$', 'essential-addons-for-elementor-lite' ); ?></span><?php esc_html_e( '50.00', 'essential-addons-for-elementor-lite' ); ?></bdi>
+						</span>
+					</ins>
+				</p>
+			</div>
+			<?php
+		} else {
+			?>
+			<div class="eael-single-product-price">
+				<?php wc_get_template( '/single-product/price.php' ); ?>
+			</div>
+			<?php
+		}
 	}
 }
