@@ -33,6 +33,100 @@ class Woo_Product_Price extends Widget_Base {
 
 	protected function register_controls() {
 
+		$this->start_controls_section(
+			'content_section',
+			[
+				'label' => esc_html__( 'Content', 'essential-addons-for-elementor-lite' ),
+				'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'sale_price_position',
+			[
+				'label'   => esc_html__( 'Sale Price Position', 'essential-addons-for-elementor-lite' ),
+				'type'    => \Elementor\Controls_Manager::SELECT,
+				'default' => 'after_price',
+				'options' => [
+					'after_price'  => esc_html__( 'After Regular Price', 'essential-addons-for-elementor-lite' ),
+					'before_price' => esc_html__( 'Before Regular Price', 'essential-addons-for-elementor-lite' ),
+				],
+			]
+		);
+
+		$this->add_control(
+			'show_prefix',
+			[
+				'label'        => esc_html__( 'Show Prefix', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+			]
+		);
+
+		//Text
+		$this->start_controls_tabs(
+			'style_tabs'
+		);
+
+		$this->start_controls_tab(
+			'style_normal_tab',
+			[
+				'label'     => esc_html__( 'Text', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'show_prefix' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'prefix_text',
+			[
+				'label'       => esc_html__( 'Text', 'essential-addons-for-elementor-lite' ),
+				'type'        => \Elementor\Controls_Manager::TEXT,
+				'default'     => esc_html__( 'Default title', 'essential-addons-for-elementor-lite' ),
+				'placeholder' => esc_html__( 'Type your title here', 'essential-addons-for-elementor-lite' ),
+				'condition'   => [
+					'show_prefix' => 'yes',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		//Icon
+		$this->start_controls_tab(
+			'style_hover_tab',
+			[
+				'label'     => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'show_prefix' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'prefix_icon',
+			[
+				'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+				'type'  => \Elementor\Controls_Manager::ICONS,
+				'default' => [
+					'value'   => 'fas fa-circle',
+					'library' => 'fa-solid',
+				],
+				'condition' => [
+					'show_prefix' => 'yes',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
+		$this->end_controls_section();
+
 		// Style Tab Start
 		$this->start_controls_section(
 			'section_title_style',
