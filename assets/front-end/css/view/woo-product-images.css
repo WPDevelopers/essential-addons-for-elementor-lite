@@ -1,0 +1,8 @@
+body.woocommerce #content div.product .elementor-widget-eael-woo-product-images div.images,
+body.woocommerce-page #content div.product .elementor-widget-eael-woo-product-images div.images,
+body.woocommerce-page div.product .elementor-widget-eael-woo-product-images div.images,
+body.woocommerce div.product .elementor-widget-eael-woo-product-images div.images {
+  width: 100%;
+  float: none;
+  padding: 0;
+}
