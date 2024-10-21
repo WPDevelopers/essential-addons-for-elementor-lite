@@ -20,11 +20,11 @@ class Woo_Product_Price extends Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'eaicon-product-price templately-widget-icon';
+		return 'eaicon-product-price';
 	}
 
 	public function get_categories() {
-		return [ 'templately-single' ];
+		return [ 'essential-addons-elementor', 'woocommerce-elements' ];
 	}
 
 	public function get_keywords() {
