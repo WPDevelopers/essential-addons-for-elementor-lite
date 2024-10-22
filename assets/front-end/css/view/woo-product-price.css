@@ -1,0 +1,5 @@
+.eael-single-product-price .price {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
