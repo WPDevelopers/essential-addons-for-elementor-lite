@@ -3377,7 +3377,7 @@ class Filterable_Gallery extends Widget_Base
         
         foreach ($gallery_items as $gallery) {
             $gallery_store[$counter]['title']        = Helper::eael_wp_kses($gallery['eael_fg_gallery_item_name']);
-            $gallery_store[$counter]['content']      = $gallery['eael_fg_gallery_item_content'];
+            $gallery_store[$counter]['content']      = $this->parse_text_editor( $gallery['eael_fg_gallery_item_content'] );
             $gallery_store[$counter]['id']           = $gallery['_id'];
             $gallery_store[$counter]['image']        = $gallery['eael_fg_gallery_img'];
             $gallery_store[$counter]['image']        = sanitize_url( $gallery['eael_fg_gallery_img']['url'] );
@@ -3920,9 +3920,12 @@ class Filterable_Gallery extends Widget_Base
             'data-is-randomize' => 'yes' === $settings['eael_item_randomize'] ? 'yes' : 'no',
         ]);
 
+        $html_json   = wp_json_encode( $gallery_items );
+        $json_base64 = base64_encode( $html_json );
+        
         $this->add_render_attribute('gallery-items-wrap', 'data-settings', wp_json_encode($gallery_settings));
         $this->add_render_attribute('gallery-items-wrap', 'data-search-all', esc_attr( $settings['eael_search_among_all'] ));
-        $this->add_render_attribute( 'gallery-items-wrap', 'data-gallery-items', wp_json_encode( $gallery_items, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE ) );
+        $this->add_render_attribute( 'gallery-items-wrap', 'data-gallery-items', esc_attr( $json_base64 ) );
         $this->add_render_attribute('gallery-items-wrap', 'data-init-show', esc_attr($settings['eael_fg_items_to_show']));
         $this->render_media_query( $settings );
 
@@ -3954,7 +3957,8 @@ class Filterable_Gallery extends Widget_Base
                 for ($i = 0; $i < $init_show; $i++) {
 
                     if (array_key_exists($i, $gallery_items)) {
-                        echo wp_kses( $gallery_items[$i], Helper::eael_allowed_tags(['a'=>['data-elementor-lightbox-slideshow'=>[]]]) );
+                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                        echo  $gallery_items[$i];
                     }
                 }
                 if ( $settings['eael_fg_caption_style'] === 'layout_3' ):
