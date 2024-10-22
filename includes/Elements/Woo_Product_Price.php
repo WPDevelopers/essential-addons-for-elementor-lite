@@ -312,6 +312,11 @@ class Woo_Product_Price extends Widget_Base {
 				'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
+				'selectors' => [
+					'{{WRAPPER}} .eael-single-product-price .price' => 'flex-wrap: wrap;',
+					'{{WRAPPER}} .eael-single-product-price .price del' => 'display: block; flex: 1 1 100%;',
+					'{{WRAPPER}} .eael-single-product-price .price ins' => 'display: block; flex: 1 1 100%;',
+				],
 			]
 		);
 
