@@ -327,6 +327,18 @@ class Woo_Product_Price extends Widget_Base {
 			]
 		);
 
+		//Prefix-Suffix Controls
+		$this->eael_prefix_suffix();
+
+		$this->end_controls_section();
+	}
+
+	/**
+	 * Undocumented function
+	 *
+	 * @return void
+	 */
+	protected function eael_prefix_suffix() {
 		//Prefix Controls
 		$this->add_control(
 			'show_prefix',
@@ -339,15 +351,23 @@ class Woo_Product_Price extends Widget_Base {
 			]
 		);
 
-		//Text
-		$this->start_controls_tabs(
-			'prefix_control'
-		);
-
-		$this->start_controls_tab(
-			'prefix_text_tab',
+		$this->add_control(
+			'prefix_content',
 			[
-				'label'     => esc_html__( 'Text', 'essential-addons-for-elementor-lite' ),
+				'label'   => esc_html__( 'Prefix Content', 'essential-addons-for-elementor-lite' ),
+				'type'    => \Elementor\Controls_Manager::CHOOSE,
+				'options' => [
+					'text' => [
+						'title' => esc_html__( 'Text', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-area',
+					],
+					'icon' => [
+						'title' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-nerd',
+					],
+				],
+				'default'   => 'text',
+				'toggle'    => false,
 				'condition' => [
 					'show_prefix' => 'yes',
 				],
@@ -359,23 +379,13 @@ class Woo_Product_Price extends Widget_Base {
 			[
 				'label'       => esc_html__( 'Prefix Text', 'essential-addons-for-elementor-lite' ),
 				'type'        => \Elementor\Controls_Manager::TEXT,
-				'default'     => esc_html__( 'Default title', 'essential-addons-for-elementor-lite' ),
-				'placeholder' => esc_html__( 'Type your title here', 'essential-addons-for-elementor-lite' ),
+				'default'     => esc_html__( 'Limited Time Offer', 'essential-addons-for-elementor-lite' ),
 				'condition'   => [
-					'show_prefix' => 'yes',
+					'show_prefix'    => 'yes',
+					'prefix_content' => 'text',
 				],
-			]
-		);
-
-		$this->end_controls_tab();
-
-		//Icon
-		$this->start_controls_tab(
-			'prefix_icon_tab',
-			[
-				'label'     => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
-				'condition' => [
-					'show_prefix' => 'yes',
+				'ai' => [
+					'active' => false,
 				],
 			]
 		);
@@ -386,31 +396,17 @@ class Woo_Product_Price extends Widget_Base {
 				'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
 				'type'  => \Elementor\Controls_Manager::ICONS,
 				'default' => [
-					'value'   => 'fas fa-circle',
+					'value'   => 'fas fa-fire',
 					'library' => 'fa-solid',
 				],
 				'condition' => [
-					'show_prefix' => 'yes',
+					'show_prefix'    => 'yes',
+					'prefix_content' => 'icon',
 				],
 			]
 		);
 
-		$this->end_controls_tab();
-
-		$this->end_controls_tabs();
-
-		//Suffix Controls
-		$this->eael_prefix_suffix();
-
-		$this->end_controls_section();
-	}
-
-	/**
-	 * Undocumented function
-	 *
-	 * @return void
-	 */
-	protected function eael_prefix_suffix() {
+		//Suffix
 		$this->add_control(
 			'show_suffix',
 			[
@@ -422,15 +418,23 @@ class Woo_Product_Price extends Widget_Base {
 			]
 		);
 
-		//Text
-		$this->start_controls_tabs(
-			'suffix_control'
-		);
-
-		$this->start_controls_tab(
-			'suffix_text_tab',
+		$this->add_control(
+			'suffix_content',
 			[
-				'label'     => esc_html__( 'Text', 'essential-addons-for-elementor-lite' ),
+				'label'   => esc_html__( 'Suffix Content', 'essential-addons-for-elementor-lite' ),
+				'type'    => \Elementor\Controls_Manager::CHOOSE,
+				'options' => [
+					'text' => [
+						'title' => esc_html__( 'Text', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-area',
+					],
+					'icon' => [
+						'title' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-nerd',
+					],
+				],
+				'default'   => 'text',
+				'toggle'    => false,
 				'condition' => [
 					'show_suffix' => 'yes',
 				],
@@ -442,23 +446,13 @@ class Woo_Product_Price extends Widget_Base {
 			[
 				'label'       => esc_html__( 'Suffix Text', 'essential-addons-for-elementor-lite' ),
 				'type'        => \Elementor\Controls_Manager::TEXT,
-				'default'     => esc_html__( 'Default title', 'essential-addons-for-elementor-lite' ),
-				'placeholder' => esc_html__( 'Type your title here', 'essential-addons-for-elementor-lite' ),
+				'default'     => esc_html__( 'Sales Ongoing', 'essential-addons-for-elementor-lite' ),
 				'condition'   => [
-					'show_suffix' => 'yes',
+					'show_suffix'    => 'yes',
+					'suffix_content' => 'text',
 				],
-			]
-		);
-
-		$this->end_controls_tab();
-
-		//Icon
-		$this->start_controls_tab(
-			'suffix_icon_tab',
-			[
-				'label'     => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
-				'condition' => [
-					'show_suffix' => 'yes',
+				'ai' => [
+					'active' => false,
 				],
 			]
 		);
@@ -466,28 +460,25 @@ class Woo_Product_Price extends Widget_Base {
 		$this->add_control(
 			'suffix_icon',
 			[
-				'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
-				'type'  => \Elementor\Controls_Manager::ICONS,
+				'label'   => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+				'type'    => \Elementor\Controls_Manager::ICONS,
 				'default' => [
-					'value'   => 'fas fa-circle',
+					'value'   => 'fas fa-pepper-hot',
 					'library' => 'fa-solid',
 				],
 				'condition' => [
-					'show_suffix' => 'yes',
+					'show_suffix'    => 'yes',
+					'suffix_content' => 'icon',
 				],
 			]
 		);
-
-		$this->end_controls_tab();
-
-		$this->end_controls_tabs();
 	}
-	
-	
 
 	protected function render() {
 		global $product;
-
+		$settings = $this->get_settings_for_display();
+		$prefix_content = $settings['prefix_content'];
+		$suffix_content = $settings['suffix_content'];
 		$product = Helper::get_product();
 
 		if ( ! $product ) {
@@ -497,6 +488,26 @@ class Woo_Product_Price extends Widget_Base {
 		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
 			?>
 			<div class="eael-single-product-price">
+				<?php
+					if ( 'yes' === $settings['show_prefix'] ) {
+						switch ($prefix_content) {
+							case 'text':
+								?>
+								<div class="prefix-wrap">
+									<span><?php echo Helper::eael_wp_kses( $settings['prefix_text'] ); ?></span>
+								</div>
+								<?php
+								break;
+							case 'icon':
+								?>
+								<div class="price-icon">
+									<?php \Elementor\Icons_Manager::render_icon( $settings['prefix_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+								</div>
+								<?php
+								break;
+						}
+					}
+				?>
 				<p class="price">
 					<del aria-hidden="true">
 						<span class="woocommerce-Price-amount amount">
@@ -509,12 +520,73 @@ class Woo_Product_Price extends Widget_Base {
 						</span>
 					</ins>
 				</p>
+				<?php
+					if ( 'yes' === $settings['show_suffix'] ) {
+						switch ($suffix_content) {
+							case 'text':
+								?>
+								<div class="prefix-wrap">
+									<span><?php echo Helper::eael_wp_kses( $settings['suffix_text'] ); ?></span>
+								</div>
+								<?php
+								break;
+							case 'icon':
+								?>
+								<div class="price-icon">
+									<?php \Elementor\Icons_Manager::render_icon( $settings['suffix_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+								</div>
+								<?php
+								break;
+						}
+					}
+				?>
 			</div>
 			<?php
 		} else {
 			?>
 			<div class="eael-single-product-price">
-				<?php wc_get_template( '/single-product/price.php' ); ?>
+				<?php 
+				if ( 'yes' === $settings['show_prefix'] ) {
+					switch ($prefix_content) {
+						case 'text':
+							?>
+							<div class="prefix-wrap">
+								<span><?php echo Helper::eael_wp_kses( $settings['prefix_text'] ); ?></span>
+							</div>
+							<?php
+							break;
+						case 'icon':
+							?>
+							<div class="price-icon">
+								<?php \Elementor\Icons_Manager::render_icon( $settings['prefix_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+							</div>
+							<?php
+							break;
+					}
+				}
+				?>
+				<?php 
+				wc_get_template( '/single-product/price.php' );
+
+				if ( 'yes' === $settings['show_suffix'] ) {
+					switch ($suffix_content) {
+						case 'text':
+							?>
+							<div class="prefix-wrap">
+								<span><?php echo Helper::eael_wp_kses( $settings['suffix_text'] ); ?></span>
+							</div>
+							<?php
+							break;
+						case 'icon':
+							?>
+							<div class="price-icon">
+								<?php \Elementor\Icons_Manager::render_icon( $settings['suffix_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+							</div>
+							<?php
+							break;
+					}
+				}
+				?>
 			</div>
 			<?php
 		}
