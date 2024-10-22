@@ -1702,7 +1702,8 @@ class Flip_Box extends Widget_Base
 
         <script>
             jQuery(document).ready(function( $ ) {
-                $(".eael-flip-box-click").off('click').on( 'click', function() {
+                $(".eael-flip-box-click").off('click').on( 'click', function( event ) {
+                    event.stopPropagation();
                     $(this).toggleClass( '--active' );
                 });
             });
