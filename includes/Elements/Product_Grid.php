@@ -573,6 +573,35 @@ class Product_Grid extends Widget_Base
             ],
         ]);
 
+        $this->add_control(
+            'eael_product_not_in', 
+        [
+            'label'       => esc_html__('Exclude Products', 'essential-addons-for-elementor-lite'),
+            'type'        => 'eael-select2',
+            'label_block' => true,
+            'multiple'    => true,
+            'source_name' => 'post_type',
+            'source_type' => 'product',
+            'condition'   => [
+              'post_type' => 'product',
+              'eael_product_grid_product_filter!' => [ 'manual' , 'related-products' ],
+            ],
+        ]);
+
+        $this->add_control(
+            'eael_product_cat_not_in', 
+            [
+            'label'       => esc_html__('Exclude Categories', 'essential-addons-for-elementor-lite'),
+            'type'        => Controls_Manager::SELECT2,
+            'label_block' => true,
+            'multiple'    => true,
+            'options'     => HelperClass::get_terms_list('product_cat', 'slug'),
+            'condition'   => [
+              'post_type' => 'product',
+              'eael_product_grid_product_filter!' => [ 'manual' , 'related-products' ],
+            ],
+        ]);
+
         $this->add_control('product_type_logged_users', [
             'label' => __('Product Type', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::SELECT,
@@ -3359,6 +3388,15 @@ class Product_Grid extends Widget_Base
             }
         }
 
+        if ( ! empty( $settings['eael_product_not_in'] ) ) {
+            if ( ! empty( $args['post__not_in'] ) ) {
+                $post_not_in = array_merge( $args['post__not_in'], $settings['eael_product_not_in'] );
+                $args['post__not_in'] = $post_not_in;
+            } else {
+                $args['post__not_in'] = $settings['eael_product_not_in'];
+            }
+        }
+
 	    $this->is_show_custom_add_to_cart       = boolval( $settings['show_add_to_cart_custom_text'] );
 	    $this->simple_add_to_cart_button_text   = $settings['add_to_cart_simple_product_button_text'];
 	    $this->variable_add_to_cart_button_text = $settings['add_to_cart_variable_product_button_text'];
@@ -3526,6 +3564,15 @@ class Product_Grid extends Widget_Base
             ];
         }
 
+        if ( ! empty( $settings['eael_product_cat_not_in'] ) ) {
+            $args['tax_query'][] = [
+                'taxonomy' => 'product_cat',
+                'field'    => 'slug',
+                'terms'    => $settings['eael_product_cat_not_in'],
+                'operator' => 'NOT IN',
+            ];
+        }
+
         if ( ! empty( $settings['eael_product_grid_tags'] ) ) {
             $args['tax_query'][] = [
                 'taxonomy' => 'product_tag',
@@ -3537,7 +3584,7 @@ class Product_Grid extends Widget_Base
 
         $args['meta_query'] = ['relation' => 'AND'];
 
-        if (get_option('woocommerce_hide_out_of_stock_items') == 'yes') {
+        if ( get_option('woocommerce_hide_out_of_stock_items') == 'yes' ) {
             $args['meta_query'][] = [
                 'key' => '_stock_status',
                 'value' => 'instock'
