@@ -217,6 +217,8 @@ trait Core
                 'eael_ext_toc_title' => $document->get_settings('eael_ext_toc_title'),
                 'eael_ext_toc_title_tag' => $document->get_settings('eael_ext_toc_title_tag'),
                 'eael_ext_toc_position' => $document->get_settings('eael_ext_toc_position'),
+                'eael_ext_toc_position_mobile' => $document->get_settings('eael_ext_toc_position_mobile'),
+                'eael_ext_toc_position_mobile_top_bottom' => $document->get_settings('eael_ext_toc_position_mobile_top_bottom'),
                 'eael_ext_toc_supported_heading_tag' => $document->get_settings('eael_ext_toc_supported_heading_tag'),
                 'eael_ext_toc_content_selector' => $document->get_settings('eael_ext_toc_content_selector'),
                 'eael_toc_exclude_selector' => $document->get_settings('eael_toc_exclude_selector'),
