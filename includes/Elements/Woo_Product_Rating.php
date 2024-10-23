@@ -10,7 +10,7 @@ use Elementor\Widget_Base;
 use \Essential_Addons_Elementor\Classes\Helper;
 
 class Woo_Product_Rating extends Widget_Base {
-    public function get_name() {
+   public function get_name() {
 		return 'eael-woo-product-rating';
 	}
 
@@ -19,11 +19,11 @@ class Woo_Product_Rating extends Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'eaicon-product-rating templately-widget-icon';
+		return 'eaicon-product-rating';
 	}
 
 	public function get_categories() {
-		return [ 'templately-single' ];
+		return [ 'essential-addons-elementor', 'woocommerce-elements' ];
 	}
 
 	public function get_keywords() {
@@ -163,17 +163,33 @@ class Woo_Product_Rating extends Widget_Base {
 	}
 
 	protected function render() {
-        global $product;
+      global $product;
 
-        $product = Helper::get_product();
+      $product = Helper::get_product();
 
-        if ( ! $product ) {
-            return;
-        }
-        ?>
-        <div class="eael-single-product-rating">
-            <?php wc_get_template( 'single-product/rating.php' ); ?>
-        </div>
-        <?php
+      if ( ! $product ) {
+         return;
+      }
+
+		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
+			?>
+			<div class="eael-single-product-rating">
+				<div class="woocommerce-product-rating">
+					<div class="star-rating" role="img" aria-label="Rated 3.00 out of 5">
+						<span style="width:60%"></span>
+					</div>
+					<a href="#reviews" class="woocommerce-review-link" rel="nofollow">
+						(<span class="count"><?php esc_html_e( '1', 'essential-addons-for-elementor-lite' ); ?></span> <?php esc_html_e( 'customer review', 'essential-addons-for-elementor-lite' ); ?>)
+					</a>
+				</div>
+			</div>
+			<?php
+		} else {
+			?>
+			<div class="eael-single-product-rating">
+				<?php wc_get_template( 'single-product/rating.php' ); ?>
+			</div>
+			<?php
+		}
 	}
 }
