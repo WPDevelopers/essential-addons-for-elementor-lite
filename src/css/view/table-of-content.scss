@@ -198,7 +198,7 @@ html {
 					counter-increment: counter;
 
 					&:before {
-						content: counters(counter, ".") " ";
+						content: counters(counter, ". ") ". ";
 					}
 
 					ul {
@@ -224,7 +224,6 @@ html {
 							position: absolute;
 							left: 0;
 							z-index: 999999;
-							border-bottom: 10px solid #ff7d50;
 							border-left: 5px solid transparent;
 							border-right: 5px solid transparent;
 							transform: rotate(90deg);
@@ -244,7 +243,6 @@ html {
 							right: 0;
 							height: 30px; // todo: set height as line height
 							width: 2px;
-							background: #ff7d50;
 							z-index: 999999;
 						}
 					}
@@ -253,7 +251,7 @@ html {
 
 			&.eael-toc-collapse {
 				:not(.eael-highlight-parent) {
-					ul {
+					> ul {
 						display: none;
 					}
 				}
@@ -280,5 +278,18 @@ html {
 @media only screen and (max-width: 767px) {
 	.eael-toc.eael-toc-mobile-hide {
 		display: none !important;
+	}
+}
+
+@media only screen and (max-width: 991px) {
+	.eael-toc.collapsed.eael-toc-top .eael-toc-button,
+	.eael-toc.collapsed.eael-toc-bottom .eael-toc-button {
+		transform: rotate(0deg);
+	}
+	.eael-toc-mobile .eael-toc.collapsed.eael-toc-top {
+		bottom: unset !important;
+	}
+	.eael-toc-mobile .eael-toc.eael-sticky.eael-toc-bottom {
+		top: unset !important;
 	}
 }

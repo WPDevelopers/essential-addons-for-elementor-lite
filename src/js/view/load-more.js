@@ -1,7 +1,7 @@
 (function ($) {
 	"use strict";
 
-	ea.getToken();
+	eael.getToken();
 
 	$(document).on("click", ".eael-load-more-button", function (e) {
 		e.preventDefault();
@@ -227,6 +227,26 @@
 			error: function (response) {
 				console.log(response);
 			},
+		});
+	});
+
+	$(window).on('scroll', function(){
+		var scrollElements = $('.eael-infinity-scroll');
+
+		if ( scrollElements.length < 1 ) return false;
+
+		$.each(scrollElements, function(index, element){
+			var scrollElement = $(element);
+			var offset        = scrollElement.data('offset');
+			var elementTop    = scrollElement.offset().top;
+			var elementBottom = elementTop + scrollElement.outerHeight() - ( offset );
+			var viewportTop   = $(window).scrollTop();
+			var viewportHalf  = viewportTop + $(window).height() - ( offset );
+			var inView        = elementBottom > viewportTop && elementTop < viewportHalf;
+
+			if( inView ){
+				$(".eael-load-more-button", scrollElement ).trigger('click');
+			}
 		});
 	});
 })(jQuery);

@@ -5,6 +5,7 @@
 .editorconfig
 .eslintignore
 .eslintrc
+.eslintrc.cjs
 .git
 .github
 .gitattributes
@@ -23,6 +24,8 @@ dependencies.yml
 Gruntfile.js
 package.json
 package-lock.json
+pnpm-lock.yaml
+vite.config.js
 phpunit.xml
 phpunit.xml.dist
 multisite.xml
@@ -49,3 +52,11 @@ vendor/priyomukul/wp-notice/.editorconfig
 vendor/priyomukul/wp-notice/.gitignore
 vendor/priyomukul/wp-notice/composer.json
 vendor/priyomukul/wp-notice/README.md
+
+includes/templates/admin/eael-dashboard/src
+includes/templates/admin/eael-dashboard/public
+includes/templates/admin/eael-dashboard/index.html
+includes/templates/admin/eael-dashboard/dist/index.html
+includes/templates/admin/icons/icons-svg
+includes/templates/admin/icons/demo.html
+includes/templates/admin/icons/selection.json

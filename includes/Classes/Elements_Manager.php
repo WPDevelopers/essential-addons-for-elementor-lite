@@ -172,6 +172,20 @@ class Elements_Manager {
 		if ( ! empty( $element['settings']['eael_wrapper_link_switch'] ) ) {
 			$list['wrapper-link'] = 'wrapper-link';
 		}
+		
+		if ( ! empty( $element['settings']['eael_ext_advanced_dynamic_tags'] ) ) {
+			$list['advanced-dynamic-tags'] = 'advanced-dynamic-tags';
+		}
+
+		//Smooth Animation
+		if ( ! empty( $element['settings']['eael_smooth_animation_section'] ) ) {
+			$list['smooth-animation'] = 'smooth-animation';
+		}
+
+		//Hover Interactions
+		if ( ! empty( $element['settings']['eael_hover_effect_switch'] ) ) {
+			$list['special-hover-effect'] = 'special-hover-effect';
+		}
 
 		return $list;
 	}
