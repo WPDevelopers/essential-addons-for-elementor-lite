@@ -106,10 +106,13 @@ class Woo_Product_Price extends Widget_Base {
 			[
 				'label'   => esc_html__( 'Sale Price Position', 'essential-addons-for-elementor-lite' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
-				'default' => 'after_price',
+				'default' => 'row',
 				'options' => [
-					'after_price'  => esc_html__( 'After Regular Price', 'essential-addons-for-elementor-lite' ),
-					'before_price' => esc_html__( 'Before Regular Price', 'essential-addons-for-elementor-lite' ),
+					'row'  => esc_html__( 'After Regular Price', 'essential-addons-for-elementor-lite' ),
+					'row-reverse' => esc_html__( 'Before Regular Price', 'essential-addons-for-elementor-lite' ),
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-single-product-price .price' => 'flex-direction: {{VALUE}}',
 				],
 			]
 		);
