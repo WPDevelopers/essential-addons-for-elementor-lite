@@ -928,7 +928,11 @@ class Team_Member extends Widget_Base {
 		<div class="eael-team-item-inner">
 			<div class="eael-team-image">
 				<figure>
-					<img src="<?php echo esc_url($team_member_image_url);?>" alt="<?php echo esc_attr( get_post_meta($team_member_image['id'], '_wp_attachment_image_alt', true) ); ?>">
+					<?php
+					$img_alt = get_post_meta( $team_member_image['id'], '_wp_attachment_image_alt', true );
+					$alt_text = $img_alt ? $img_alt : $settings['eael_team_member_name'];
+					?>
+					<img src="<?php echo esc_url($team_member_image_url);?>" alt="<?php echo esc_attr( $alt_text ); ?>">
 				</figure>
 				<?php if( 'eael-team-members-social-right' === $settings['eael_team_members_preset'] ) : ?>
 					<?php do_action( 'eael/team_member_social_right_markup', $settings, $this ); ?>
