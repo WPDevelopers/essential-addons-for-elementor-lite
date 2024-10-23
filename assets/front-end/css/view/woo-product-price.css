@@ -12,3 +12,6 @@
   display: -ms-flexbox;
   display: flex;
 }
+.eael-single-product-price .price ins {
+  text-decoration: none;
+}

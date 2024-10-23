@@ -1,12 +1,9 @@
 .eael-single-product-price {
    display: flex;
-   .price-icon {
-      svg {
-         height: 40px;
-         width: 40px;
-      }
-   }
    .price {
       display: flex;
+      ins {
+         text-decoration: none;
+      }
    }
 }

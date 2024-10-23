@@ -43,238 +43,48 @@ class Woo_Product_Price extends Widget_Base {
 				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
+		//Start regular price
+		$this->eael_product_regular_price();
 
-        //Start regular price
-        $this->add_control(
-			'regular_peice_heading',
-			[
-				'label' => esc_html__( 'Regular Price', 'essential-addons-for-elementor-lite' ),
-				'type' => \Elementor\Controls_Manager::HEADING,
-				'separator' => 'after',
-			]
-		);
+		//Start Currency Symbol
+		$this->eael_product_regular_price_currency();
 
-		$this->add_control(
-			'price_color',
-			[
-				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
-				'selectors' => [
-					'.woocommerce {{WRAPPER}} .eael-single-product-price .price' => 'color: {{VALUE}};',
-				],
-			]
-		);
+		//Start sale price
+		$this->eael_product_sale_price();
 
-        $this->add_control(
-			'price_align',
-			[
-				'label'   => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
-				'type'    => \Elementor\Controls_Manager::CHOOSE,
-				'options' => [
-					'left' => [
-						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'eicon-text-align-left',
-					],
-					'center' => [
-						'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'eicon-text-align-center',
-					],
-					'right' => [
-						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'eicon-text-align-right',
-					],
-				],
-				'toggle'       => true,
-				'selectors'    => [
-					'{{WRAPPER}} .eael-single-product-price' =>  'text-align: {{VALUE}};',
-				],
-			]
-		);
-
-        $this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
-			[
-				'name'     => 'price_typography',
-				'selector' => '.woocommerce {{WRAPPER}} .eael-single-product-price .price',
-			]
-		);
-
-        $this->add_control(
-			'price_text_decoration_color',
-			[
-				'label'     => esc_html__( 'Text Decoration Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
-				'selectors' => [
-					'.woocommerce {{WRAPPER}} .eael-single-product-price .price del' => 'text-decoration-color: {{VALUE}};',
-				],
-			]
-		);
-        //End regular price
-
-        //Start Currency Symbol
-        $this->add_control(
-			'peice_currency_heading',
-			[
-				'label' => esc_html__( 'Price Currency Symbol', 'essential-addons-for-elementor-lite' ),
-				'type' => \Elementor\Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
-        $this->add_control(
-			'price_currency_color',
-			[
-				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
-				'selectors' => [
-					'.woocommerce {{WRAPPER}} .eael-single-product-price .price del .woocommerce-Price-currencySymbol' => 'color: {{VALUE}};',
-				],
-			]
-		);
-
-        $this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
-			[
-				'name'     => 'price_currency_typography',
-				'selector' => '.woocommerce {{WRAPPER}} .eael-single-product-price .price del .woocommerce-Price-currencySymbol',
-			]
-		);
-
-        $this->add_control(
-			'price_currency_spacing',
-			[
-				'label' => esc_html__( 'Spacing', 'essential-addons-for-elementor-lite' ),
-				'type' => \Elementor\Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'rem', 'em', '%', 'custom' ],
-				'range' => [
-					'px' => [
-						'max' => 100,
-					],
-					'%' => [
-						'max' => 100,
-					],
-				],
-				'selectors' => [
-					'.woocommerce {{WRAPPER}} .eael-single-product-price .price del .woocommerce-Price-currencySymbol' => 'margin-right: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-        //End Currency Symbol
-
-        //Start sale price
-        $this->add_control(
-			'sale_heading',
-			[
-				'label' => esc_html__( 'Sale Price', 'essential-addons-for-elementor-lite' ),
-				'type' => \Elementor\Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
-        $this->add_control(
-			'sale_color',
-			[
-				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
-				'selectors' => [
-					'.woocommerce {{WRAPPER}} .eael-single-product-price .price ins' => 'color: {{VALUE}};',
-				],
-			]
-		);
-
-        $this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
-			[
-				'name'     => 'sale_typography',
-				'selector' => '.woocommerce {{WRAPPER}} .eael-single-product-price .price ins',
-			]
-		);
-
-        $this->add_control(
-			'sale_spacing',
-			[
-				'label' => esc_html__( 'Spacing', 'essential-addons-for-elementor-lite' ),
-				'type' => \Elementor\Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'rem', 'em', '%', 'custom' ],
-				'range' => [
-					'px' => [
-						'max' => 100,
-					],
-					'%' => [
-						'max' => 100,
-					],
-				],
-				'selectors' => [
-					'.woocommerce {{WRAPPER}} .eael-single-product-price .price del' => 'margin-right: {{SIZE}}{{UNIT}}',
-				],
-			]
-		);
-
-        $this->add_control(
-			'sale_text_decoration_color',
-			[
-				'label'     => esc_html__( 'Text Decoration Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
-				'selectors' => [
-					'.woocommerce {{WRAPPER}} .eael-single-product-price .price ins' => 'text-decoration-color: {{VALUE}};',
-				],
-			]
-		);
-        //End sale price
-
-        //Start Currency Symbol
-        $this->add_control(
-			'sale_currency_heading',
-			[
-				'label' => esc_html__( 'Sale Currency Symbol', 'essential-addons-for-elementor-lite' ),
-				'type' => \Elementor\Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
-        $this->add_control(
-			'sale_currency_color',
-			[
-				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
-				'selectors' => [
-					'.woocommerce {{WRAPPER}} .eael-single-product-price .price ins .woocommerce-Price-currencySymbol' => 'color: {{VALUE}};',
-				],
-			]
-		);
-
-        $this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
-			[
-				'name'     => 'sale_currency_typography',
-				'selector' => '.woocommerce {{WRAPPER}} .eael-single-product-price .price ins .woocommerce-Price-currencySymbol',
-			]
-		);
-
-        $this->add_control(
-			'sale_currency_spacing',
-			[
-				'label' => esc_html__( 'Spacing', 'essential-addons-for-elementor-lite' ),
-				'type' => \Elementor\Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'rem', 'em', '%', 'custom' ],
-				'range' => [
-					'px' => [
-						'max' => 100,
-					],
-					'%' => [
-						'max' => 100,
-					],
-				],
-				'selectors' => [
-					'.woocommerce {{WRAPPER}} .eael-single-product-price .price ins .woocommerce-Price-currencySymbol' => 'margin-right: {{SIZE}}{{UNIT}}',
-				],
-			]
-		);
-        //End Currency Symbol
+		//Start Currency Symbol
+		$this->eael_product_sale_price_currency();
 
 		$this->end_controls_section();
 		// Style Tab End
 
+		//Prefix
+		$this->start_controls_section(
+			'section_prefix',
+			[
+				'label' => esc_html__( 'Prefix', 'essential-addons-for-elementor-lite' ),
+				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+		
+		$this->eael_product_price_prefix();
+
+		$this->end_controls_section();
+		// Style Tab End
+
+		//Suffix
+		$this->start_controls_section(
+			'section_suffix',
+			[
+				'label' => esc_html__( 'Suffix', 'essential-addons-for-elementor-lite' ),
+				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+		
+		$this->eael_product_price_suffix();
+
+		$this->end_controls_section();
+		// Style Tab End
 	}
 
 	/**
@@ -474,6 +284,447 @@ class Woo_Product_Price extends Widget_Base {
 		);
 	}
 
+	protected function eael_product_regular_price() {
+		$this->add_control(
+			'regular_peice_heading',
+			[
+				'label' => esc_html__( 'Regular Price', 'essential-addons-for-elementor-lite' ),
+				'type' => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'after',
+			]
+		);
+
+		$this->add_control(
+			'price_color',
+			[
+				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-price .price' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+      $this->add_control(
+			'price_align',
+			[
+				'label'   => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
+				'type'    => \Elementor\Controls_Manager::CHOOSE,
+				'options' => [
+					'left' => [
+						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-center',
+					],
+					'right' => [
+						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+				],
+				'toggle'       => true,
+				'selectors'    => [
+					'{{WRAPPER}} .eael-single-product-price' =>  'text-align: {{VALUE}};',
+				],
+			]
+		);
+
+      $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name'     => 'price_typography',
+				'selector' => '.woocommerce {{WRAPPER}} .eael-single-product-price .price',
+			]
+		);
+
+		$this->add_control(
+			'price_text_decoration_color',
+			[
+				'label'     => esc_html__( 'Text Decoration Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-price .price del' => 'text-decoration-color: {{VALUE}};',
+				],
+			]
+		);
+	}
+	protected function eael_product_regular_price_currency() {
+		$this->add_control(
+			'peice_currency_heading',
+			[
+				'label' => esc_html__( 'Price Currency Symbol', 'essential-addons-for-elementor-lite' ),
+				'type' => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+      $this->add_control(
+			'price_currency_color',
+			[
+				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-price .price del .woocommerce-Price-currencySymbol' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+      $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name'     => 'price_currency_typography',
+				'selector' => '.woocommerce {{WRAPPER}} .eael-single-product-price .price del .woocommerce-Price-currencySymbol',
+			]
+		);
+
+      $this->add_control(
+			'price_currency_spacing',
+			[
+				'label' => esc_html__( 'Spacing', 'essential-addons-for-elementor-lite' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'rem', 'em', '%', 'custom' ],
+				'range' => [
+					'px' => [
+						'max' => 100,
+					],
+					'%' => [
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-price .price del .woocommerce-Price-currencySymbol' => 'margin-right: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+	}
+	protected function eael_product_sale_price() {
+		$this->add_control(
+			'sale_heading',
+			[
+				'label' => esc_html__( 'Sale Price', 'essential-addons-for-elementor-lite' ),
+				'type' => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+      $this->add_control(
+			'sale_color',
+			[
+				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-price .price ins' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+      $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name'     => 'sale_typography',
+				'selector' => '.woocommerce {{WRAPPER}} .eael-single-product-price .price ins',
+			]
+		);
+
+      $this->add_control(
+			'sale_spacing',
+			[
+				'label' => esc_html__( 'Spacing', 'essential-addons-for-elementor-lite' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'rem', 'em', '%', 'custom' ],
+				'range' => [
+					'px' => [
+						'max' => 100,
+					],
+					'%' => [
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-price .price del' => 'margin-right: {{SIZE}}{{UNIT}}',
+				],
+			]
+		);
+
+      $this->add_control(
+			'sale_text_decoration_color',
+			[
+				'label'     => esc_html__( 'Text Decoration Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-price .price ins' => 'text-decoration-color: {{VALUE}};',
+				],
+			]
+		);
+	}
+	protected function eael_product_sale_price_currency() {
+		$this->add_control(
+			'sale_currency_heading',
+			[
+				'label' => esc_html__( 'Sale Currency Symbol', 'essential-addons-for-elementor-lite' ),
+				'type' => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+      $this->add_control(
+			'sale_currency_color',
+			[
+				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-price .price ins .woocommerce-Price-currencySymbol' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+      $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name'     => 'sale_currency_typography',
+				'selector' => '.woocommerce {{WRAPPER}} .eael-single-product-price .price ins .woocommerce-Price-currencySymbol',
+			]
+		);
+
+      $this->add_control(
+			'sale_currency_spacing',
+			[
+				'label' => esc_html__( 'Spacing', 'essential-addons-for-elementor-lite' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'rem', 'em', '%', 'custom' ],
+				'range' => [
+					'px' => [
+						'max' => 100,
+					],
+					'%' => [
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-price .price ins .woocommerce-Price-currencySymbol' => 'margin-right: {{SIZE}}{{UNIT}}',
+				],
+			]
+		);
+	}
+	protected function eael_product_price_prefix() {
+		$this->add_control(
+			'price_prefix',
+			[
+				'label'     => esc_html__( 'Price Prefix', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'prefix_text_color',
+			[
+				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-single-product-price .prefix-price-text span' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name'     => 'prefix_text_typography',
+				'selector' => '{{WRAPPER}} .eael-single-product-price .prefix-price-text span',
+			]
+		);
+
+		$this->add_control(
+			'prefix_text_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'default'    => [
+					'top'    => 3,
+					'right'  => 2,
+					'bottom' => 0,
+					'left'   => 0,
+					'unit'   => 'px',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-single-product-price .prefix-price-text' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'prefix_icon_color',
+			[
+				'label' => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-single-product-price .prefix-price-icon svg' => 'fill: {{VALUE}}',
+				],
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'prefix_icon_size',
+			[
+				'label'      => esc_html__( 'Icon Size', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'range' => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 100,
+						'step' => 1,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 25,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-single-product-price .prefix-price-icon svg' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'prefix_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'default'    => [
+					'top'    => 4,
+					'right'  => 0,
+					'bottom' => 0,
+					'left'   => 0,
+					'unit'   => 'px',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-single-product-price .prefix-price-icon svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+	}
+	protected function eael_product_price_suffix() {
+		$this->add_control(
+			'price_suffix',
+			[
+				'label'     => esc_html__( 'Price Suffix', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'suffix_text_color',
+			[
+				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-single-product-price .suffix-price-text span' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name'     => 'suffix_text_typography',
+				'selector' => '{{WRAPPER}} .eael-single-product-price .suffix-price-text span',
+			]
+		);
+
+		$this->add_control(
+			'suffix_text_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'default'    => [
+					'top'    => 3,
+					'right'  => 2,
+					'bottom' => 0,
+					'left'   => 0,
+					'unit'   => 'px',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-single-product-price .suffix-price-text' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'suffix_icon_color',
+			[
+				'label' => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-single-product-price .suffix-price-icon svg' => 'fill: {{VALUE}}',
+				],
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'suffix_icon_size',
+			[
+				'label'      => esc_html__( 'Icon Size', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'range' => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 100,
+						'step' => 1,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 25,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-single-product-price .suffix-price-icon svg' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'suffix_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'default'    => [
+					'top'    => 4,
+					'right'  => 0,
+					'bottom' => 0,
+					'left'   => 0,
+					'unit'   => 'px',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-single-product-price .suffix-price-icon svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+	}
+
 	protected function render() {
 		global $product;
 		$settings = $this->get_settings_for_display();
@@ -493,14 +744,14 @@ class Woo_Product_Price extends Widget_Base {
 						switch ($prefix_content) {
 							case 'text':
 								?>
-								<div class="prefix-wrap">
+								<div class="prefix-price-text">
 									<span><?php echo Helper::eael_wp_kses( $settings['prefix_text'] ); ?></span>
 								</div>
 								<?php
 								break;
 							case 'icon':
 								?>
-								<div class="price-icon">
+								<div class="prefix-price-icon">
 									<?php \Elementor\Icons_Manager::render_icon( $settings['prefix_icon'], [ 'aria-hidden' => 'true' ] ); ?>
 								</div>
 								<?php
@@ -525,14 +776,14 @@ class Woo_Product_Price extends Widget_Base {
 						switch ($suffix_content) {
 							case 'text':
 								?>
-								<div class="prefix-wrap">
+								<div class="suffix-price-text">
 									<span><?php echo Helper::eael_wp_kses( $settings['suffix_text'] ); ?></span>
 								</div>
 								<?php
 								break;
 							case 'icon':
 								?>
-								<div class="price-icon">
+								<div class="suffix-price-icon">
 									<?php \Elementor\Icons_Manager::render_icon( $settings['suffix_icon'], [ 'aria-hidden' => 'true' ] ); ?>
 								</div>
 								<?php
@@ -550,14 +801,14 @@ class Woo_Product_Price extends Widget_Base {
 					switch ($prefix_content) {
 						case 'text':
 							?>
-							<div class="prefix-wrap">
+							<div class="prefix-price-text">
 								<span><?php echo Helper::eael_wp_kses( $settings['prefix_text'] ); ?></span>
 							</div>
 							<?php
 							break;
 						case 'icon':
 							?>
-							<div class="price-icon">
+							<div class="prefix-price-icon">
 								<?php \Elementor\Icons_Manager::render_icon( $settings['prefix_icon'], [ 'aria-hidden' => 'true' ] ); ?>
 							</div>
 							<?php
@@ -572,14 +823,14 @@ class Woo_Product_Price extends Widget_Base {
 					switch ($suffix_content) {
 						case 'text':
 							?>
-							<div class="prefix-wrap">
+							<div class="suffix-price-text">
 								<span><?php echo Helper::eael_wp_kses( $settings['suffix_text'] ); ?></span>
 							</div>
 							<?php
 							break;
 						case 'icon':
 							?>
-							<div class="price-icon">
+							<div class="suffix-price-icon">
 								<?php \Elementor\Icons_Manager::render_icon( $settings['suffix_icon'], [ 'aria-hidden' => 'true' ] ); ?>
 							</div>
 							<?php
