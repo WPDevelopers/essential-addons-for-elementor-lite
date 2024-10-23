@@ -440,7 +440,7 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label' => __('Select Title Tag', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
-                'default' => 'h5',
+                'default' => 'h2',
                 'options' => [
                     'h1' => __('H1', 'essential-addons-for-elementor-lite'),
                     'h2' => __('H2', 'essential-addons-for-elementor-lite'),
@@ -3481,8 +3481,10 @@ class Filterable_Gallery extends Widget_Base
     protected function gallery_item_thumbnail_content($settings, $item){
         
         $caption_style  = $settings['eael_fg_caption_style'] == 'card' ? 'caption-style-card' : 'caption-style-hoverer';
+        $image_alt = get_post_meta( $item['image_id'], '_wp_attachment_image_alt', true );
+        $alt_text = $image_alt ? $image_alt : $item['title'];
 
-        $html = '<img src="' . esc_url( $item['image'] ) . '" data-lazy-src="' . esc_url( $item['image'] ) . '" alt="' . esc_attr( get_post_meta( $item['image_id'], '_wp_attachment_image_alt', true ) ) . '" class="gallery-item-thumbnail">';
+        $html = '<img src="' . esc_url( $item['image'] ) . '" data-lazy-src="' . esc_url( $item['image'] ) . '" alt="' . esc_attr( $alt_text ) . '" class="gallery-item-thumbnail">';
 
         if ( empty($settings['eael_section_fg_full_image_clickable']) && $item['video_gallery_switch'] !== 'true' ) {
             if ($settings['eael_fg_show_popup'] == 'buttons' && $settings['eael_fg_caption_style'] === 'card') {
