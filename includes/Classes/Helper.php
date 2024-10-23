@@ -1033,7 +1033,7 @@ class Helper
 	 * @return mixed|string
 	 */
     public static function eael_validate_html_tag( $tag ){
-	    return in_array( strtolower( $tag ), self::EAEL_ALLOWED_HTML_TAGS ) ? $tag : 'div';
+	    return in_array( strtolower( (string) $tag ), self::EAEL_ALLOWED_HTML_TAGS ) ? $tag : 'div';
     }
 
 	/**
