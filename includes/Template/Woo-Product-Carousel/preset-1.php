@@ -104,11 +104,18 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
                     
                     if ( $should_print_rating ) {
                         $avg_rating = $product->get_average_rating();
+                        $rating_count = $product->get_rating_count();
+                        echo '<div class="eael-star-rating">';
+                        $rating_text = '';
+                        if( 'yes' === $settings['eael_rating_count'] && ! empty( $settings['eael_rating_text'] ) ) {
+                            $rating_text = str_replace( [ '[avg_user_rating]', '[max_rating]', '[total_rating]' ], [ $avg_rating, '5', $rating_count ], $settings['eael_rating_text'] );
+                        }
                         if( $avg_rating > 0 ){
-                            echo wc_get_rating_html( $avg_rating, $product->get_rating_count());
+                            echo wc_get_rating_html( $avg_rating, $product->get_rating_count() ) . $rating_text;
                         } else {
                             echo Helper::eael_rating_markup( $avg_rating, $product->get_rating_count() );
                         }
+                        echo '</div>';
                     }
                     if ( $should_print_excerpt ) {
 	                    echo '<div class="eael-product-excerpt">';

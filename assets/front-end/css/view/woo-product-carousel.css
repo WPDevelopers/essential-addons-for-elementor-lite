@@ -16,6 +16,15 @@
   margin: 0;
   padding: 0;
 }
+.eael-woo-product-carousel-container .woocommerce ul.products .product .eael-star-rating {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+}
 .eael-woo-product-carousel-container .woocommerce ul.products .product .star-rating {
   margin: 0;
   display: block;
