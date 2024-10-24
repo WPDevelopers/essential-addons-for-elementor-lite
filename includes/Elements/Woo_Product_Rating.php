@@ -220,8 +220,15 @@ class Woo_Product_Rating extends Widget_Base {
 
 	protected function render() {
       global $product;
-
+		$settings = $this->get_settings_for_display();
       $product = Helper::get_product();
+		if ( ! wc_review_ratings_enabled() ) {
+			return;
+		}
+		
+		$rating_count = $product->get_rating_count();
+		$review_count = $product->get_review_count();
+		$average      = $product->get_average_rating();
 
       if ( ! $product ) {
          return;
@@ -235,17 +242,49 @@ class Woo_Product_Rating extends Widget_Base {
 						<span style="width:60%"></span>
 					</div>
 					<a href="#reviews" class="woocommerce-review-link" rel="nofollow">
-						(<span class="count"><?php esc_html_e( '1', 'essential-addons-for-elementor-lite' ); ?></span> <?php esc_html_e( 'customer review', 'essential-addons-for-elementor-lite' ); ?>)
+						<span class="before-rating">
+							<?php echo Helper::eael_wp_kses( $settings['before_rating_caption'] ); ?>
+						</span>
+						<span class="count">
+							<?php esc_html_e( '1', 'essential-addons-for-elementor-lite' ); ?>
+						</span> 
+						<?php echo Helper::eael_wp_kses( $settings['rating_caption'] ); ?>
+						<span class="after-rating">
+							<?php echo Helper::eael_wp_kses( $settings['after_rating_caption'] ); ?>
+						</span>
 					</a>
 				</div>
 			</div>
 			<?php
 		} else {
 			?>
+			<!-- <div class="eael-single-product-rating"> -->
+				<?php //wc_get_template( 'single-product/rating.php' ); ?>
+			<!-- </div> -->
+			<?php
+
+			if ( $rating_count > 0 ) { ?>
 			<div class="eael-single-product-rating">
-				<?php wc_get_template( 'single-product/rating.php' ); ?>
+				<div class="woocommerce-product-rating">
+					<?php echo wc_get_rating_html( $average, $rating_count ); ?>
+					<?php if ( comments_open() ) { ?>
+						<a href="#reviews" class="woocommerce-review-link" rel="nofollow">
+								<span class="before-rating">
+									<?php echo Helper::eael_wp_kses( $settings['before_rating_caption'] ); ?>
+								</span>
+									<?php //esc_html( $review_count ); 
+									// var_dump($review_count);
+									?>
+								<span class="count"><?php echo Helper::eael_wp_kses( $settings['rating_caption'] ); ?></span>
+								<span class="after-rating">
+									<?php echo Helper::eael_wp_kses( $settings['after_rating_caption'] ); ?>
+								</span>
+						</a>
+					<?php } ?>
+				</div>
 			</div>
 			<?php
+			}
 		}
 	}
 }
