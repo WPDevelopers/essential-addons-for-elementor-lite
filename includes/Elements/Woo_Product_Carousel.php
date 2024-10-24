@@ -75,7 +75,7 @@ class Woo_Product_Carousel extends Widget_Base {
     }
 
 	public function get_categories() {
-		return [ 'essential-addons-elementor', 'woocommerce-elements' ];
+		return [ 'essential-addons-for-elementor-lite', 'woocommerce-elements' ];
 	}
 
 	/**
@@ -300,13 +300,52 @@ class Woo_Product_Carousel extends Widget_Base {
 			    ],
 		    ]
 	    );
+
+        $this->add_control(
+			'eael_product_rating_content_heading',
+			[
+				'label'     => esc_html__( 'Product Rating', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
         
-        $this->add_control( 'eael_product_carousel_rating', [
-            'label'        => esc_html__( 'Show Product Rating?', 'essential-addons-for-elementor-lite' ),
+        $this->add_control( 
+            'eael_product_carousel_rating',
+             [
+            'label'        => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
             'type'         => Controls_Manager::SWITCHER,
             'return_value' => 'yes',
             'default'      => 'yes',
         ] );
+
+        $this->add_control( 
+            'eael_rating_count',
+            [
+            'label'        => esc_html__( 'Show Count ?', 'essential-addons-for-elementor-lite' ),
+            'type'         => Controls_Manager::SWITCHER,
+            'return_value' => 'yes',
+            'default'      => 'no',
+            'condition'    => [
+                'eael_product_carousel_rating' => 'yes'
+            ]
+        ] );
+
+        $this->add_control(
+			'eael_rating_text',
+			[
+				'label'       => esc_html__( 'Text Format', 'essential-addons-for-elementor-lite' ),
+                'label_block' => true,
+				'type'        => Controls_Manager::TEXTAREA,
+				'default'     => '[avg_user_rating]/[max_rating] ([total_rating])',
+                'ai'          => [ 'active' => false ],
+                'condition'   => [
+                    'eael_rating_count' => 'yes',
+                    'eael_product_carousel_rating' => 'yes'
+                ],
+                'description' => __( '<strong>[avg_user_rating]</strong> represents the average user rating. <strong>[max_rating]</strong> is the maximum rating, which is 5. <strong>[total_rating]</strong> indicates the number of ratings provided by users.', 'essential-addons-for-elementor-lite' )
+			]
+		); 
         
         $this->add_control(
             'eael_product_carousel_price',
@@ -315,6 +354,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default'      => 'yes',
+                'separator'    => 'before',
             ]
         );
         $this->add_control(
@@ -680,10 +720,10 @@ class Woo_Product_Carousel extends Widget_Base {
         $this->add_control(
 			'enable_marquee',
 			[
-				'label'        => __( 'Enable Marquee', 'essential-addons-elementor' ),
+				'label'        => __( 'Enable Marquee', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => __( 'Yes', 'essential-addons-elementor' ),
-				'label_off'    => __( 'No', 'essential-addons-elementor' ),
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
 				'default'      => 'no',
 				'return_value' => 'yes',
 				'condition'    => [
