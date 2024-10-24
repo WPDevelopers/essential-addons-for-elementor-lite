@@ -235,6 +235,25 @@ class Woo_Product_Rating extends Widget_Base {
 				],
 			]
 		);
+
+		$this->add_control(
+			'product_rating_hr',
+			[
+				'type' => \Elementor\Controls_Manager::DIVIDER,
+			]
+		);
+
+		$this->add_control(
+			'empty_rating_caption',
+			[
+				'label'       => esc_html__( 'Empty Caption', 'essential-addons-for-elementor-lite' ),
+				'type'        => \Elementor\Controls_Manager::TEXT,
+				'default'     => esc_html__( 'Empty Caption', 'essential-addons-for-elementor-lite' ),
+				'ai' => [
+					'active' => false,
+				],
+			]
+		);
 		
 		$this->end_controls_section();
 	}
