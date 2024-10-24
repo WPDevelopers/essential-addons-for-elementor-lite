@@ -244,6 +244,17 @@ class Woo_Product_Rating extends Widget_Base {
 		);
 
 		$this->add_control(
+			'show_empty_review',
+			[
+				'label'        => esc_html__( 'Show Empty Review', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+			]
+		);
+
+		$this->add_control(
 			'empty_rating_caption',
 			[
 				'label'       => esc_html__( 'Empty Caption', 'essential-addons-for-elementor-lite' ),
@@ -251,6 +262,9 @@ class Woo_Product_Rating extends Widget_Base {
 				'default'     => esc_html__( 'Empty Caption', 'essential-addons-for-elementor-lite' ),
 				'ai' => [
 					'active' => false,
+				],
+				'condition' => [
+					'show_empty_review' => 'yes',
 				],
 			]
 		);
