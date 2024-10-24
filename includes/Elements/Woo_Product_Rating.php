@@ -180,6 +180,18 @@ class Woo_Product_Rating extends Widget_Base {
 		);
 
 		$this->add_control(
+			'show_review_count',
+			[
+				'label'        => esc_html__( 'Show Review Count', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
+
+		$this->add_control(
 			'rating_caption',
 			[
 				'label'       => esc_html__( 'Rating Caption', 'essential-addons-for-elementor-lite' ),
@@ -187,6 +199,9 @@ class Woo_Product_Rating extends Widget_Base {
 				'default'     => esc_html__( 'Customer Review', 'essential-addons-for-elementor-lite' ),
 				'ai' => [
 					'active' => false,
+				],
+				'condition' => [
+					'show_review_count' => 'yes',
 				],
 			]
 		);
@@ -200,6 +215,9 @@ class Woo_Product_Rating extends Widget_Base {
 				'ai' => [
 					'active' => false,
 				],
+				'condition' => [
+					'show_review_count' => 'yes',
+				],
 			]
 		);
 
@@ -211,6 +229,9 @@ class Woo_Product_Rating extends Widget_Base {
 				'default'     => esc_html__( ' )', 'essential-addons-for-elementor-lite' ),
 				'ai' => [
 					'active' => false,
+				],
+				'condition' => [
+					'show_review_count' => 'yes',
 				],
 			]
 		);
@@ -241,18 +262,20 @@ class Woo_Product_Rating extends Widget_Base {
 					<div class="star-rating" role="img" aria-label="Rated 3.00 out of 5">
 						<span style="width:60%"></span>
 					</div>
-					<a href="#reviews" class="woocommerce-review-link" rel="nofollow">
-						<span class="before-rating">
-							<?php echo Helper::eael_wp_kses( $settings['before_rating_caption'] ); ?>
-						</span>
-						<span class="count">
-							<?php esc_html_e( '1', 'essential-addons-for-elementor-lite' ); ?>
-						</span> 
-						<?php echo Helper::eael_wp_kses( $settings['rating_caption'] ); ?>
-						<span class="after-rating">
-							<?php echo Helper::eael_wp_kses( $settings['after_rating_caption'] ); ?>
-						</span>
-					</a>
+					<?php if ( 'yes' === $settings['show_review_count'] ) { ?>
+						<a href="#reviews" class="woocommerce-review-link" rel="nofollow">
+							<span class="before-rating">
+								<?php echo Helper::eael_wp_kses( $settings['before_rating_caption'] ); ?>
+							</span>
+							<span class="count">
+								<?php esc_html_e( '1', 'essential-addons-for-elementor-lite' ); ?>
+							</span> 
+							<?php echo Helper::eael_wp_kses( $settings['rating_caption'] ); ?>
+							<span class="after-rating">
+								<?php echo Helper::eael_wp_kses( $settings['after_rating_caption'] ); ?>
+							</span>
+						</a>
+					<?php } ?>
 				</div>
 			</div>
 			<?php
@@ -267,7 +290,7 @@ class Woo_Product_Rating extends Widget_Base {
 			<div class="eael-single-product-rating">
 				<div class="woocommerce-product-rating">
 					<?php echo wc_get_rating_html( $average, $rating_count ); ?>
-					<?php if ( comments_open() ) { ?>
+					<?php if ( comments_open() && 'yes' === $settings['show_review_count'] ) { ?>
 						<a href="#reviews" class="woocommerce-review-link" rel="nofollow">
 								<span class="before-rating">
 									<?php echo Helper::eael_wp_kses( $settings['before_rating_caption'] ); ?>
