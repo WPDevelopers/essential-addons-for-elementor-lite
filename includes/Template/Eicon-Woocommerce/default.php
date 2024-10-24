@@ -60,17 +60,17 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
 
 
 
-if($settings['eael_product_grid_rating']!='yes'){
+if ( 'yes' !== $settings['eael_product_grid_rating'] ) {
 	remove_action('woocommerce_after_shop_loop_item_title','woocommerce_template_loop_rating',5);
 }
 
-add_action('woocommerce_before_shop_loop_item_title',function() use ( $stock_out_badge_text ){
+add_action('woocommerce_before_shop_loop_item_title', function() use ( $stock_out_badge_text ) {
 	global $product;
 	if ( ! $product->is_in_stock() ) {
 		remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10 );
 		echo '<span class="outofstock-badge">'. $stock_out_badge_text .'</span>';
 	}
-},9);
+}, 9 );
 
 add_filter('woocommerce_sale_flash', function($text, $post, $product) use( $sale_badge_text ) {
 	return '<span class="onsale" data-notification="default">'. $sale_badge_text .'</span>';
@@ -85,18 +85,18 @@ if ( $should_print_compare_btn ) {
 
 $thumb_size = isset($settings['eael_product_grid_image_size_size']) ? $settings['eael_product_grid_image_size_size'] : '';
 global $eael_thumb_default;
-add_filter( 'single_product_archive_thumbnail_size', function($size)use($thumb_size){
+add_filter( 'single_product_archive_thumbnail_size', function( $size ) use ( $thumb_size ) {
 	global $eael_thumb_default;
 	$eael_thumb_default = $size;
-	return $thumb_size != '' ? $thumb_size : $size ;
-});
+	return  ! empty( $thumb_size ) ? $thumb_size : $size ;
+} );
 
 wc_get_template_part( 'content', 'product' );
 
-add_filter( 'single_product_archive_thumbnail_size', function($size){
+add_filter( 'single_product_archive_thumbnail_size', function( $size ) {
 	global $eael_thumb_default;
-	return !empty($eael_thumb_default) ? $eael_thumb_default : $size;
-});
+	return ! empty( $eael_thumb_default ) ? $eael_thumb_default : $size;
+} );
 
 if ( $should_print_compare_btn ) {
 	remove_action( 'woocommerce_after_shop_loop_item', [
