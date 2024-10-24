@@ -133,7 +133,7 @@ msgstr ""
 msgid "Install Now!"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:152, ../includes/Classes/WPDeveloper_Plugin_Installer.php:170, ../includes/Classes/WPDeveloper_Plugin_Installer.php:189, ../includes/Classes/WPDeveloper_Plugin_Installer.php:210, ../includes/Classes/WPDeveloper_Setup_Wizard.php:383, ../includes/Classes/WPDeveloper_Setup_Wizard.php:407, ../includes/Classes/WPDeveloper_Setup_Wizard.php:428, ../includes/Traits/Ajax_Handler.php:914, ../includes/Traits/Ajax_Handler.php:1087, ../includes/Traits/Ajax_Handler.php:1117, ../includes/Traits/Ajax_Handler.php:1134, ../includes/Traits/Helper.php:426
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:152, ../includes/Classes/WPDeveloper_Plugin_Installer.php:170, ../includes/Classes/WPDeveloper_Plugin_Installer.php:189, ../includes/Classes/WPDeveloper_Plugin_Installer.php:210, ../includes/Classes/WPDeveloper_Setup_Wizard.php:383, ../includes/Classes/WPDeveloper_Setup_Wizard.php:407, ../includes/Classes/WPDeveloper_Setup_Wizard.php:428, ../includes/Traits/Ajax_Handler.php:919, ../includes/Traits/Ajax_Handler.php:1092, ../includes/Traits/Ajax_Handler.php:1122, ../includes/Traits/Ajax_Handler.php:1139, ../includes/Traits/Helper.php:426
 msgid "you are not allowed to do this action"
 msgstr ""
 
@@ -10317,7 +10317,7 @@ msgstr ""
 msgid "Widget settings are not found. Did you save the widget before using load more??"
 msgstr ""
 
-#: ../includes/Traits/Ajax_Handler.php:957
+#: ../includes/Traits/Ajax_Handler.php:962
 msgid "Login | Register Settings updated"
 msgstr ""
 
