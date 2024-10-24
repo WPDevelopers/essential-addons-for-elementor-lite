@@ -358,11 +358,11 @@ class Woo_Product_Gallery extends Widget_Base {
             foreach( $template_list as $key => $label ){
                 $image_url = $image_dir_url . 'woo-product-gallery-' . $key . '.png';
                 $image_url =  file_exists( $image_dir_path . 'woo-product-gallery-' . $key . '.png' ) ? $image_url : $image_dir_url . 'custom-layout.png';
-				$_key = $key;
+				$new_key = $key;
 				if( in_array( $key, [ 'preset-1', 'preset-2', 'preset-3', 'preset-4' ] ) ){
-					$_key = "eael-product-{$key}";
+					$new_key = "eael-product-{$key}";
 				}
-                $layout_options[ $_key ] = [
+                $layout_options[ $new_key ] = [
                     'title' => $label,
                     'image' => $image_url
                 ];
