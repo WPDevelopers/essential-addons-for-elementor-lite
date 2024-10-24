@@ -32,6 +32,9 @@ class Woo_Product_Rating extends Widget_Base {
 
 	protected function register_controls() {
 
+		//
+		$this->eael_product_rating_content();
+
 		// Style Tab Start
 		$this->start_controls_section(
 			'eael_section_title_style',
@@ -160,6 +163,59 @@ class Woo_Product_Rating extends Widget_Base {
 		$this->end_controls_section();
 		// Style Tab End
 
+	}
+
+	/**
+	 * Undocumented function
+	 *
+	 * @return void
+	 */
+	protected function eael_product_rating_content() {
+		$this->start_controls_section(
+			'rating_content_section',
+			[
+				'label' => esc_html__( 'Content', 'essential-addons-for-elementor-lite' ),
+				'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'rating_caption',
+			[
+				'label'       => esc_html__( 'Rating Caption', 'essential-addons-for-elementor-lite' ),
+				'type'        => \Elementor\Controls_Manager::TEXT,
+				'default'     => esc_html__( 'Customer Review', 'essential-addons-for-elementor-lite' ),
+				'ai' => [
+					'active' => false,
+				],
+			]
+		);
+
+		$this->add_control(
+			'before_rating_caption',
+			[
+				'label'       => esc_html__( 'Before Caption', 'essential-addons-for-elementor-lite' ),
+				'type'        => \Elementor\Controls_Manager::TEXT,
+				'default'     => esc_html__( '( ', 'essential-addons-for-elementor-lite' ),
+				'ai' => [
+					'active' => false,
+				],
+			]
+		);
+
+		$this->add_control(
+			'after_rating_caption',
+			[
+				'label'       => esc_html__( 'After Caption', 'essential-addons-for-elementor-lite' ),
+				'type'        => \Elementor\Controls_Manager::TEXT,
+				'default'     => esc_html__( ' )', 'essential-addons-for-elementor-lite' ),
+				'ai' => [
+					'active' => false,
+				],
+			]
+		);
+		
+		$this->end_controls_section();
 	}
 
 	protected function render() {
