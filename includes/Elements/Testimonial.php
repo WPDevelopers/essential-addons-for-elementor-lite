@@ -373,7 +373,7 @@ class Testimonial extends Widget_Base {
 		$this->add_control(
 			'eael_testimonial_user_display_block',
 			[
-				'label'        => esc_html__( 'User & Company line break', 'essential-addons-for-elementor-lite'),
+				'label'        => esc_html__( 'User & Company Line Break', 'essential-addons-for-elementor-lite'),
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default'      => '',
