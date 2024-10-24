@@ -43,10 +43,10 @@ $should_print_quick_view = isset( $settings['eael_product_grid_quick_view'] ) &&
 $should_print_image_clickable = isset( $settings['eael_product_grid_image_clickable'] ) && 'yes' === $settings['eael_product_grid_image_clickable'];
 $should_print_price = isset( $settings['eael_product_grid_price'] ) && 'yes' === $settings['eael_product_grid_price'];
 $should_print_excerpt = isset( $settings['eael_product_grid_excerpt'] ) && ('yes' === $settings['eael_product_grid_excerpt'] && has_excerpt());
-$widget_id = isset($settings['eael_widget_id']) ? $settings['eael_widget_id'] : null;
+$widget_id = isset($settings['eael_widget_id']) ? $settings['eael_widget_id'] : '';
 
-$sale_badge_text = !empty($settings['eael_product_sale_text']) ? $settings['eael_product_sale_text'] :  __( 'Sale!', 'essential-addons-for-elementor-lite' );
-$stock_out_badge_text = !empty($settings['eael_product_stockout_text']) ?$settings['eael_product_stockout_text'] : __( 'Stock <br/> Out', 'essential-addons-for-elementor-lite' );
+$sale_badge_text = ! empty( $settings['eael_product_sale_text'] ) ? $settings['eael_product_sale_text'] :  __( 'Sale!', 'essential-addons-for-elementor-lite' );
+$stock_out_badge_text = ! empty( $settings['eael_product_stockout_text'] ) ? $settings['eael_product_stockout_text'] : __( 'Stock <br/> Out', 'essential-addons-for-elementor-lite' );
 $is_show_badge = $settings['eael_show_product_sale_badge'];
 
 $quick_view_setting = [
@@ -133,7 +133,7 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
                     <?php //printf('<%1$s><a href="%3$s" class="woocommerce-LoopProduct-link woocommerce-loop-product__link woocommerce-loop-product__title_link woocommerce-loop-product__title_link_simple woocommerce-loop-product__title_link_reveal">%2$s</a></%1$s>', $title_tag, $product->get_title(), $product->get_permalink()); ?>
                 </div>
                 <?php if( $should_print_price ){
-                    echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
+                    echo '<div class="eael-product-price">' . $product->get_price_html() . '</div>';
                 }?>
             </div>
         </div>
