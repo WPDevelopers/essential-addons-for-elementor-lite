@@ -10,8 +10,8 @@
  * Domain Path: /languages
  *
  * WC tested up to: 9.3
- * Elementor tested up to: 3.24
- * Elementor Pro tested up to: 3.24
+ * Elementor tested up to: 3.25
+ * Elementor Pro tested up to: 3.25
  */
 
 if (!defined('ABSPATH')) {
