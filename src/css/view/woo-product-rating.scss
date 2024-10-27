@@ -4,6 +4,9 @@
    .woocommerce-product-rating {
    display: flex;
    margin-bottom: 0;
+   .star-rating {
+      margin: 0;
+   }
 }
 
 .eael-product-rating--align-left .woocommerce-product-rating {
@@ -18,6 +21,10 @@
    justify-content: flex-end;
 }
 .eael-product-rating-wrap {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   align-items: center;
    .eael-product-rating {
       svg {
          height: 30px;

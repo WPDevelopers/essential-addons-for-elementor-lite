@@ -3,7 +3,7 @@ namespace Essential_Addons_Elementor\Elements;
 
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
-    exit;
+   exit;
 }
 
 use Elementor\Widget_Base;
@@ -44,7 +44,7 @@ class Woo_Product_Rating extends Widget_Base {
 			]
 		);
 
-        $this->add_control(
+      $this->add_control(
 			'eael_star_align',
 			[
 				'label'   => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
@@ -63,7 +63,7 @@ class Woo_Product_Rating extends Widget_Base {
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
-                'prefix_class' => 'eael-product-rating--align-',
+               'prefix_class' => 'eael-product-rating--align-',
 			]
 		);
 
@@ -79,7 +79,7 @@ class Woo_Product_Rating extends Widget_Base {
 			]
 		);
 
-        $this->add_control(
+      $this->add_control(
 			'eael_empty_star_color',
 			[
 				'label'     => esc_html__( 'Empty Star Color', 'essential-addons-for-elementor-lite' ),
@@ -96,7 +96,7 @@ class Woo_Product_Rating extends Widget_Base {
 			[
 				'label'      => esc_html__( 'Star Size', 'essential-addons-for-elementor-lite' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'rem', 'em', '%', 'custom' ],
+				'size_units' => [ 'px', 'rem', '%', 'custom' ],
 				'range' => [
 					'px' => [
 						'max' => 100,
@@ -120,6 +120,46 @@ class Woo_Product_Rating extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_star_gap',
+			[
+				'label'      => esc_html__( 'Gap', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'rem', '%', 'custom' ],
+				'range' => [
+					'px' => [
+						'max' => 100,
+					],
+                  'rem' => [
+						'max' => 50,
+					],
+					'%' => [
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 2,
+				],
+				'selectors' => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap' => 'gap: {{SIZE}}{{UNIT}};',
+					'.woocommerce {{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap' => 'gap: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'margin',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'selectors' => [
+					'{{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
 			'product_rating_hr1',
 			[
 				'type' => \Elementor\Controls_Manager::DIVIDER,
@@ -137,7 +177,7 @@ class Woo_Product_Rating extends Widget_Base {
 			]
 		);
 
-        $this->add_group_control(
+      $this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name'     => 'eael_star_text_typography',
@@ -145,7 +185,7 @@ class Woo_Product_Rating extends Widget_Base {
 			]
 		);
 
-        $this->add_control(
+      $this->add_control(
 			'eael_star_text_spaceing',
 			[
 				'label'      => esc_html__( 'Text Spaceing', 'essential-addons-for-elementor-lite' ),
@@ -155,7 +195,7 @@ class Woo_Product_Rating extends Widget_Base {
 					'px' => [
 						'max' => 100,
 					],
-                    'rem' => [
+                  'rem' => [
 						'max' => 50,
 					],
 					'em' => [
