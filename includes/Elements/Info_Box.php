@@ -56,7 +56,13 @@ class Info_Box extends Widget_Base
     }
 
     protected function is_dynamic_content():bool {
-        return false;
+        if( Plugin::$instance->editor->is_edit_mode() ) {
+            return false;
+        }
+        $content_type       = $this->get_settings('eael_infobox_text_type');
+        $is_dynamic_content = 'template' === $content_type;
+
+        return $is_dynamic_content;
     }
 
     public function get_custom_help_url()
@@ -1547,10 +1553,11 @@ class Info_Box extends Widget_Base
 	    ob_start();
 
 	    if ( 'yes' == $settings['eael_show_infobox_clickable'] ) { ?>
-            <a <?php echo $this->get_render_attribute_string( 'infobox_clickable_link' ); ?>>
+            <a <?php $this->print_render_attribute_string( 'infobox_clickable_link' ); ?>>
 	    <?php } ?>
-        <div <?php echo $this->get_render_attribute_string( 'eael_infobox_inner' ); ?>>
+        <div <?php $this->print_render_attribute_string( 'eael_infobox_inner' ); ?>>
 	    <?php
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	    echo ob_get_clean();
     }
 
@@ -1567,7 +1574,7 @@ class Info_Box extends Widget_Base
 		if ( 'yes' == $settings['eael_show_infobox_clickable'] ) { ?>
             </a>
 		<?php }
-
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo ob_get_clean();
 	}
 
@@ -1630,7 +1637,7 @@ class Info_Box extends Widget_Base
 
         ob_start();
         ?>
-        <div <?php echo $this->get_render_attribute_string('infobox_icon'); ?>>
+        <div <?php $this->print_render_attribute_string('infobox_icon'); ?>>
 
             <?php if ('img' == $settings['eael_infobox_img_or_icon']): ?>
                 <img src="<?php echo esc_url($infobox_image_url); ?>" alt="<?php echo esc_attr(get_post_meta($infobox_image['id'], '_wp_attachment_image_alt', true)); ?>">
@@ -1644,12 +1651,13 @@ class Info_Box extends Widget_Base
 
             <?php if ('number' == $settings['eael_infobox_img_or_icon']): ?>
                 <div class="infobox-icon-wrap">
-                    <span class="infobox-icon-number"><?php echo esc_attr($settings['eael_infobox_number']); ?></span>
+                    <span class="infobox-icon-number"><?php echo esc_html( $settings['eael_infobox_number'] ); ?></span>
                 </div>
             <?php endif;?>
 
         </div>
     <?php
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         echo ob_get_clean();
     }
 
@@ -1664,31 +1672,35 @@ class Info_Box extends Widget_Base
 
         ob_start();
         ?>
-        <div <?php echo $this->get_render_attribute_string('infobox_content'); ?>>
-            <?php if ( !empty( $settings['eael_infobox_title'] ) ): ?>
-                <<?php echo Helper::eael_validate_html_tag( $settings['eael_infobox_title_tag'] ); ?> class="title"><?php echo Helper::eael_wp_kses($settings['eael_infobox_title']); ?></<?php echo Helper::eael_validate_html_tag( $settings['eael_infobox_title_tag'] ); ?>>
+        <div <?php $this->print_render_attribute_string('infobox_content'); ?>>
             <?php
-                endif;
-            if ('yes' == $settings['eael_show_infobox_content']): ?>
-                <?php if ('content' === $settings['eael_infobox_text_type']): ?>
-                    <?php if (!empty($settings['eael_infobox_text'])): ?>
-                        <?php $tagsPresent = preg_match('/<(h[1-6]|p|pre)>.*<\/(h[1-6]|p|pre)>/i', $settings['eael_infobox_text']); ?>
-                        <?php echo $tagsPresent ? $settings['eael_infobox_text'] : '<p>' . $settings['eael_infobox_text'] . '</p>'; ?>
-                    <?php endif;?>
-                    <?php $this->render_infobox_button();?>
-                <?php elseif ('template' === $settings['eael_infobox_text_type']):
+            if ( !empty( $settings['eael_infobox_title'] ) ){
+                printf( '<%1$s class="title">%2$s</%1$s>', esc_html( Helper::eael_validate_html_tag( $settings['eael_infobox_title_tag'] ) ), wp_kses( $settings['eael_infobox_title'], Helper::eael_allowed_tags() ) );
+            }
+            if ('yes' == $settings['eael_show_infobox_content']){
+                if ('content' === $settings['eael_infobox_text_type']){
+                    if (!empty($settings['eael_infobox_text'])) {
+                        echo '<div>';
+                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                        echo $this->parse_text_editor( $settings['eael_infobox_text'] );
+                        echo '</div>';
+                    }
+                    $this->render_infobox_button();
+                } elseif ('template' === $settings['eael_infobox_text_type']) {
                     if ( ! empty( $settings['eael_primary_templates'] ) ) {
                         // WPML Compatibility
                         if ( ! is_array( $settings['eael_primary_templates'] ) ) {
                             $settings['eael_primary_templates'] = apply_filters( 'wpml_object_id', $settings['eael_primary_templates'], 'wp_template', true );
                         }
+                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                         echo Plugin::$instance->frontend->get_builder_content( $settings['eael_primary_templates'], true );
                     }
-        endif;?>
-            <?php endif;?>
+                }
+            }
+            ?>
         </div>
     <?php
-
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         echo ob_get_clean();
     }
 
@@ -1714,7 +1726,7 @@ class Info_Box extends Widget_Base
         ob_start();
         ?>
         <div class="infobox-button">
-            <a <?php echo $this->get_render_attribute_string('infobox_button'); ?>>
+            <a <?php $this->print_render_attribute_string('infobox_button'); ?>>
                 <?php if ('left' == $settings['eael_infobox_button_icon_alignment']): ?>
                     <?php if ($button_icon_is_new || $button_icon_migrated) {?>
                         <?php if (isset($settings['eael_infobox_button_icon_new']['value']['url'])) {?>
@@ -1754,13 +1766,14 @@ class Info_Box extends Widget_Base
                 ]
             );
             ?>
-                        <i <?php echo $this->get_render_attribute_string('button_icon'); ?>></i>
+                        <i <?php $this->print_render_attribute_string('button_icon'); ?>></i>
                     <?php }?>
                 <?php endif;?>
             </a>
         </div>
-<?php
-echo ob_get_clean();
+    <?php
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    echo ob_get_clean();
     }
 
     protected function render()
