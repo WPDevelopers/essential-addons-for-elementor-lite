@@ -427,9 +427,22 @@ class Woo_Product_Rating extends Widget_Base {
 				</div>
 			</div>
 			<?php
+			} else {
+				?>
+				<?php if ( 'yes' === $settings['show_empty_review'] ) { ?>
+					<div class="eael-single-product-rating">
+						<div class="woocommerce-product-rating">
+							<div class="eael-product-rating-wrap">
+								<?php $this->eael_rating_style( $settings, $average = 0, $rating_count ); ?>
+							</div>
+							<a href="#reviews" class="woocommerce-review-link" rel="nofollow">
+								<?php echo Helper::eael_wp_kses( $settings['empty_rating_caption'] ); ?>
+							</a>
+							
+						</div>
+					</div>
+				<?php }
 			}
 		}
-		?>
-		<?php
 	}
 }
