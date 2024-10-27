@@ -74,6 +74,7 @@ class Woo_Product_Rating extends Widget_Base {
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
 					'.woocommerce {{WRAPPER}} .eael-single-product-rating .star-rating' => 'color: {{VALUE}};',
+					'.woocommerce {{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap .eael-product-rating.filled svg path' => 'fill: {{VALUE}};',
 				],
 			]
 		);
@@ -89,7 +90,7 @@ class Woo_Product_Rating extends Widget_Base {
 			]
 		);
 
-        $this->add_control(
+      $this->add_control(
 			'eael_star_size',
 			[
 				'label'      => esc_html__( 'Star Size', 'essential-addons-for-elementor-lite' ),
@@ -99,23 +100,32 @@ class Woo_Product_Rating extends Widget_Base {
 					'px' => [
 						'max' => 100,
 					],
-                    'rem' => [
-						'max' => 50,
-					],
-					'em' => [
+                  'rem' => [
 						'max' => 50,
 					],
 					'%' => [
 						'max' => 100,
 					],
 				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 15,
+				],
 				'selectors' => [
 					'.woocommerce {{WRAPPER}} .eael-single-product-rating .star-rating' => 'font-size: {{SIZE}}{{UNIT}};',
+					'.woocommerce {{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap .eael-product-rating svg' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
 
-        $this->add_control(
+		$this->add_control(
+			'product_rating_hr1',
+			[
+				'type' => \Elementor\Controls_Manager::DIVIDER,
+			]
+		);
+
+      $this->add_control(
 			'eael_star_text_color',
 			[
 				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
