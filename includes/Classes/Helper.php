@@ -1033,7 +1033,7 @@ class Helper
 	 * @return mixed|string
 	 */
     public static function eael_validate_html_tag( $tag ){
-	    return in_array( strtolower( $tag ), self::EAEL_ALLOWED_HTML_TAGS ) ? $tag : 'div';
+	    return in_array( strtolower( (string) $tag ), self::EAEL_ALLOWED_HTML_TAGS ) ? $tag : 'div';
     }
 
 	/**
@@ -1577,47 +1577,30 @@ class Helper
 
     public static function get_all_acf_fields() {
 
-        if( ! class_exists( 'ACF' ) ){
+        if ( ! class_exists( 'ACF' ) || ! function_exists( 'acf_get_field_groups' ) ) {
             return [];
         }
 
-        // Get all registered post types
-        $post_types = get_post_types( [ 'public' => true ], 'names' );
+        $acf_field_groups = acf_get_field_groups();
+
+        if ( empty( $acf_field_groups ) ) return [];
+
         $acf_fields = [];
-    
-        // Loop through each post type
-        foreach( $post_types as $post_type ) {
-            // Query the first post of this post type
-            $args = [
-                'post_type'      => $post_type,
-                'posts_per_page' => 1,
-                'post_status'    => 'publish'
-            ];
-    
-            $query = new \WP_Query($args);
-    
-            if( $query->have_posts() ) {
-                while( $query->have_posts() ): $query->the_post();
-    
-                    // Get all field objects for this post
-                    $fields = get_field_objects();
-    
-                    if( $fields ) {
-                        foreach( $fields as $field_name => $field ) {
-                            // Add field details to the array
-                            $acf_fields[ $field_name ] = [
-                                'label'     => $field['label'],
-                                'name'      => $field_name,
-                                'type'      => $field['type'],
-                                'post_type' => $post_type,
-                            ];
-                        }
-                    }
-    
-                endwhile;
-                wp_reset_postdata();
-            }
-        }
+		foreach( $acf_field_groups as $group ){
+			$default_acf_fields = acf_get_fields( $group['key'] );
+			if ( ! empty( $default_acf_fields ) ) {
+				foreach( $default_acf_fields as $field ) {
+					$acf_fields[ $field['name'] ] = [
+						'ID'    => $field['ID'],
+						'key'   => $field['key'],
+						'label' => $field['label'] ?? '',
+						'name'  => $field['name'] ?? '',
+						'type'  => $field['type'],
+						'group' => $group['title'] ?? '',
+					];
+				}
+			}
+		}
     
         return $acf_fields;
     }
