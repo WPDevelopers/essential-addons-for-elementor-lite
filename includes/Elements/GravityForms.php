@@ -126,18 +126,18 @@ class GravityForms extends Widget_Base {
             $this->start_controls_section(
                 'section_info_box',
                 [
-                    'label'                 => __( 'Gravity Forms', 'essential-addons-for-elementor-lite'),
+                    'label' => __( 'Gravity Forms', 'essential-addons-for-elementor-lite'),
                 ]
             );
             
             $this->add_control(
                 'contact_form_list',
                 [
-                    'label'                 => esc_html__( 'Select Form', 'essential-addons-for-elementor-lite'),
-                    'type'                  => Controls_Manager::SELECT,
-                    'label_block'           => true,
-                    'options'               => Helper::get_gravity_form_list(),
-                    'default'               => '0',
+                    'label'       => esc_html__( 'Select Form', 'essential-addons-for-elementor-lite'),
+                    'type'        => Controls_Manager::SELECT2,
+                    'label_block' => true,
+                    'options'     => Helper::get_gravity_form_list(),
+                    'default'     => '0',
                 ]
             );
             
