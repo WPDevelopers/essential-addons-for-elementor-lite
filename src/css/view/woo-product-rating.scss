@@ -1,16 +1,26 @@
-.woocommerce .elementor-widget-eael-woo-product-rating .elementor-widget-container .woocommerce-product-rating {
-    display: flex;
-    margin-bottom: 0;
+.woocommerce
+   .elementor-widget-eael-woo-product-rating
+   .elementor-widget-container
+   .woocommerce-product-rating {
+   display: flex;
+   margin-bottom: 0;
 }
 
 .eael-product-rating--align-left .woocommerce-product-rating {
-    justify-content: flex-start;
+   justify-content: flex-start;
 }
 
 .eael-product-rating--align-center .woocommerce-product-rating {
-    justify-content: center;
+   justify-content: center;
 }
 
 .eael-product-rating--align-right .woocommerce-product-rating {
-    justify-content: flex-end;
+   justify-content: flex-end;
+}
+.rating-style-2 .eael-product-rating svg {
+   height: 30px;
+   width: 30px;
+}
+.rating-style-2 .eael-product-rating.filled svg path {
+   fill: #ff5733;
 }

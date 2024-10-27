@@ -3,10 +3,6 @@
   display: -ms-flexbox;
   display: flex;
 }
-.eael-single-product-price .price-icon svg {
-  height: 40px;
-  width: 40px;
-}
 .eael-single-product-price .price {
   display: -webkit-box;
   display: -ms-flexbox;
