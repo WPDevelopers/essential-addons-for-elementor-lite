@@ -985,8 +985,8 @@ class Feature_List extends Widget_Base {
         );
 
         ?>
-		<div <?php echo $this->get_render_attribute_string( 'eael_feature_list_wrapper' ); ?>>
-			<ul <?php echo $this->get_render_attribute_string( 'eael_feature_list' ); ?>>
+		<div <?php $this->print_render_attribute_string( 'eael_feature_list_wrapper' ); ?>>
+			<ul <?php $this->print_render_attribute_string( 'eael_feature_list' ); ?>>
 			<?php
 			$individual_icon_color_css = '';
         foreach ( $settings['eael_feature_list'] as $index => $item ):
@@ -1002,7 +1002,7 @@ class Feature_List extends Widget_Base {
             $feat_title_tag = Helper::eael_validate_html_tag($settings['eael_feature_list_title_size']);
 
             if ( $item['eael_feature_list_link']['url'] ) {
-                $this->add_link_attributes( 'eael_feature_list_title_anchor' . $index, $item['eael_feature_list_link'] );
+                $this->add_link_attributes( 'eael_feature_list_title_anchor_' . $index, $item['eael_feature_list_link'] );
             }
 
             $feature_icon_tag = 'span';
@@ -1017,15 +1017,15 @@ class Feature_List extends Widget_Base {
             ?>
                 <li class="eael-feature-list-item <?php echo 'elementor-repeater-item-' . esc_attr( $item['_id'] ); ?>">
                     <?php if ( 'yes' == $settings['eael_feature_list_connector'] ): ?>
-                        <span class="connector" style="<?php echo $connector; ?>"></span>
-                        <span class="connector connector-tablet" style="<?php echo $connector_tablet; ?>"></span>
-                        <span class="connector connector-mobile" style="<?php echo $connector_mobile; ?>"></span>
+                        <span class="connector" style="<?php echo esc_attr( $connector ); ?>"></span>
+                        <span class="connector connector-tablet" style="<?php echo esc_attr( $connector_tablet ); ?>"></span>
+                        <span class="connector connector-mobile" style="<?php echo esc_attr( $connector_mobile ); ?>"></span>
                     <?php endif;?>
 
 						<div class="eael-feature-list-icon-box">
 							<div class="eael-feature-list-icon-inner">
 
-								<<?php echo $feature_icon_tag . ' ' . $this->get_render_attribute_string( 'eael_feature_list_icon' . $index) . $this->get_render_attribute_string( 'eael_feature_list_link' . $index); ?>>
+								<<?php echo esc_html( $feature_icon_tag ) . ' '; $this->print_render_attribute_string( 'eael_feature_list_icon' . $index); $this->print_render_attribute_string( 'eael_feature_list_link' . $index); ?>>
 
 		<?php
             if ( $item['eael_feature_list_icon_type'] == 'icon' && $feature_has_icon ) {
@@ -1045,17 +1045,24 @@ class Feature_List extends Widget_Base {
                 'alt'   => esc_attr( get_post_meta( $item['eael_feature_list_img']['id'], '_wp_attachment_image_alt', true ) ),
             ] );
 
-            echo '<img ' . $this->get_render_attribute_string( 'feature_list_image' . $index) . '>';
+            echo '<img '; $this->print_render_attribute_string( 'feature_list_image' . $index); echo '>';
 
         }?>
-								</<?php echo $feature_icon_tag; ?>>
+								</<?php echo esc_html( $feature_icon_tag ); ?>>
 							</div>
 						</div>
 						<div class="eael-feature-list-content-box">
-							<<?php echo implode( ' ', [ $feat_title_tag, $this->get_render_attribute_string( 'eael_feature_list_title' . $index), ] ); ?>
-							><?php echo !empty( $item['eael_feature_list_link']['url'] ) ? "<a {$this->get_render_attribute_string( 'eael_feature_list_title_anchor' . $index)}>" : ''; ?><?php echo Helper::eael_wp_kses($item['eael_feature_list_title']); ?><?php echo !empty( $item['eael_feature_list_link']['url'] ) ? "</a>" : ''; ?></<?php echo $feat_title_tag; ?>
-						>
-						<p <?php echo $this->get_render_attribute_string( 'eael_feature_list_content' . $index); ?>><?php echo Helper::eael_wp_kses($item['eael_feature_list_content']); ?></p>
+                            <?php 
+                            echo '<' . esc_html( $feat_title_tag ) . ' '; $this->print_render_attribute_string( 'eael_feature_list_title' . $index); echo '>';
+                            $is_linked = ! empty( $item['eael_feature_list_link']['url'] );
+                            if( $is_linked ){
+                                echo '<a '; $this->print_render_attribute_string( 'eael_feature_list_title_anchor_' . $index); echo '>';
+                            }
+                            echo wp_kses( $item['eael_feature_list_title'], Helper::eael_allowed_tags() );
+                            echo $is_linked ? '</a>' : '';
+                            echo '</' . esc_html( $feat_title_tag ) . '>';
+                            ?>
+						<p <?php $this->print_render_attribute_string( 'eael_feature_list_content' . $index); ?>><?php echo wp_kses( $item['eael_feature_list_content'], Helper::eael_allowed_tags() ); ?></p>
 						</div>
 
 					</li>
