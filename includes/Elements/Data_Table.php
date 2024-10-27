@@ -63,8 +63,17 @@ class Data_Table extends Widget_Base {
             return false;
         }
 		
-        $content_type       = $this->get_settings('eael_data_table_content_type');
-        $is_dynamic_content = 'template' === $content_type;
+        $table_rows = $this->get_settings('eael_data_table_content_rows');
+		$is_dynamic_content = false;
+
+		if( ! empty( $table_rows ) ){
+            foreach( $table_rows as $table_row ){
+                if( isset( $table_row['eael_data_table_content_type'] ) && 'template' == $table_row['eael_data_table_content_type'] ) {
+					$is_dynamic_content = true;
+                    break;
+                }
+            }
+        }
 
         return $is_dynamic_content;
     }
