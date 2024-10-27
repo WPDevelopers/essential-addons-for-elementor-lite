@@ -1430,12 +1430,51 @@ class Woo_Product_Carousel extends Widget_Base {
             
             ]
         );
+
+        $this->add_control(
+            'eael_product_carousel_rating_count_heading',
+            [
+                'label'     => __( 'Rating Count', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+                'condition' => [
+                    'eael_rating_count' => 'yes'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_product_carousel_rating_count_typography',
+                'selector' => '{{WRAPPER}} .eael-woo-product-carousel-container .woocommerce ul.products .product .eael-star-rating .eael-star-rating-text',
+                'condition' => [
+                    'eael_rating_count' => 'yes'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_product_carousel_rating_count_color',
+            [
+                'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#000',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-woo-product-carousel-container .woocommerce ul.products .product .eael-star-rating .eael-star-rating-text' => 'color: {{VALUE}}',
+                ],
+                'condition' => [
+                    'eael_rating_count' => 'yes'
+                ]
+            ]
+        );
         
         $this->add_control(
             'eael_product_carousel_desc_heading',
             [
                 'label'     => __( 'Product Description', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
                 'condition' => [
                     'eael_product_carousel_excerpt' => 'yes',
                 ],
@@ -1473,6 +1512,7 @@ class Woo_Product_Carousel extends Widget_Base {
             [
                 'label' => __( 'Sale Badge', 'essential-addons-for-elementor-lite' ),
                 'type'  => Controls_Manager::HEADING,
+				'separator' => 'before',
             ]
         );
         

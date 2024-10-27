@@ -109,6 +109,7 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
                         $rating_text = '';
                         if( 'yes' === $settings['eael_rating_count'] && ! empty( $settings['eael_rating_text'] ) ) {
                             $rating_text = str_replace( [ '[avg_user_rating]', '[max_rating]', '[total_rating]' ], [ $avg_rating, '5', $rating_count ], $settings['eael_rating_text'] );
+                            $rating_text = '<span class="eael-star-rating-text">' . esc_html( $rating_text ) . '</span>';
                         }
                         if( $avg_rating > 0 ){
                             echo wc_get_rating_html( $avg_rating, $product->get_rating_count() ) . $rating_text;
