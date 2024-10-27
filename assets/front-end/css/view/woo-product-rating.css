@@ -23,11 +23,11 @@
           justify-content: flex-end;
 }
 
-.rating-style-2 .eael-product-rating svg {
+.eael-product-rating-wrap .eael-product-rating svg {
   height: 30px;
   width: 30px;
 }
 
-.rating-style-2 .eael-product-rating.filled svg path {
+.eael-product-rating-wrap .eael-product-rating.filled svg path {
   fill: #ff5733;
 }
