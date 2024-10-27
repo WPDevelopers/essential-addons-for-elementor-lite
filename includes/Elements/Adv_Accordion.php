@@ -75,7 +75,21 @@ class Adv_Accordion extends Widget_Base
     }
 
     protected function is_dynamic_content():bool {
-        return false;
+        if( Plugin::$instance->editor->is_edit_mode() ) {
+            return false;
+        }
+        $accordion_tabs     = $this->get_settings('eael_adv_accordion_tab');
+        $is_dynamic_content = false;
+        if( ! empty( $accordion_tabs ) ){
+            foreach( $accordion_tabs as $accordion_tab ){
+                if( isset( $accordion_tab['eael_adv_accordion_text_type'] ) && 'template' == $accordion_tab['eael_adv_accordion_text_type'] ) {
+                    $is_dynamic_content = true;
+                    break;
+                }
+            }
+        }
+
+        return $is_dynamic_content;
     }
 
     public function get_custom_help_url()
