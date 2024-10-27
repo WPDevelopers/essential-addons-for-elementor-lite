@@ -3066,20 +3066,22 @@ class Event_Calendar extends Widget_Base
 		    echo '<div id="eael-event-calendar-' . esc_attr( $this->get_id() ) . '" class="eael-event-calendar-cls"
             data-cal_id = "' . esc_attr( $this->get_id() ) . '"
             data-locale = "' . esc_attr( $local ) . '"
-            data-translate = "' . htmlspecialchars( json_encode( $translate_date ), ENT_QUOTES, 'UTF-8' ) . '"
+            data-translate = "' . esc_attr( htmlspecialchars( json_encode( $translate_date ), ENT_QUOTES, 'UTF-8' ) ) . '"
             data-defaultview = "' . esc_attr( $default_view ) . '"
             data-defaultdate = "' . esc_attr( $default_date ) . '"
             data-time_format = "' . esc_attr( $time_format ) . '"
-            data-event_limit = "' . $event_limit . '"
+            data-event_limit = "' . esc_attr( $event_limit ) . '"
             data-popup_date_formate = "' . esc_attr( $settings['eael_event_popup_date_formate'] ) . '"
-            data-multidays_event_day_count= "' . $multi_days_event_day_count . '"
+            data-multidays_event_day_count= "' . esc_attr( $multi_days_event_day_count ) . '"
             data-monthColumnHeaderFormat = "' . esc_attr( $settings['eael_calendar_column_heading_month'] ) . '"
             data-weekColumnHeaderFormat = "' . esc_attr( $settings['eael_calendar_column_heading_week'] ) . '"
             data-hideDetailsLink= "' . esc_attr( $settings['eael_event_details_link_hide'] ) . '"
             data-detailsButtonText = "' . esc_attr( Helper::eael_wp_kses( $settings['eael_event_details_text'] ) ) . '"
-            data-events="' . htmlspecialchars( json_encode( $data ), ENT_QUOTES, 'UTF-8' ) . '"
-            data-first_day="' . esc_attr( $settings['eael_event_calendar_first_day'] ) . '"></div>
-            ' . $this->eaelec_load_event_details();
+            data-events="' . esc_attr( htmlspecialchars( json_encode( $data ), ENT_QUOTES, 'UTF-8' ) ) . '"
+            data-first_day="' . esc_attr( $settings['eael_event_calendar_first_day'] ) . '"></div>';
+
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo $this->eaelec_load_event_details();
 	    } else {
 		    $this->eaelec_display_table( $data, $settings );
 	    }
@@ -3102,15 +3104,19 @@ class Event_Calendar extends Widget_Base
 			<thead>
 			<tr style="display: table-row;">
 				<?php
+                $thead_html = '';
 				if ( $settings['eael_ec_show_title'] === 'yes' ) {
-					echo '<th>' . Helper::eael_wp_kses( $settings['eael_ec_title_label'] ) . '</th>';
+					$thead_html .= '<th>' . $settings['eael_ec_title_label'] . '</th>';
 				}
 				if ( $settings['eael_ec_show_description'] === 'yes' ) {
-					echo '<th>' . Helper::eael_wp_kses( $settings['eael_ec_desc_label'] ) . '</th>';
+					$thead_html .= '<th>' . $settings['eael_ec_desc_label'] . '</th>';
 				}
 				if ( $settings['eael_ec_show_date'] === 'yes' ) {
-					echo '<th>' . Helper::eael_wp_kses( $settings['eael_ec_date_label'] ) . '</th>';
+					$thead_html .= '<th>' . $settings['eael_ec_date_label'] . '</th>';
 				}
+                if( $thead_html ){
+                    echo wp_kses( $thead_html, Helper::eael_allowed_tags() );
+                }
 				?>
 			</tr>
 			</thead>
@@ -3169,7 +3175,10 @@ class Event_Calendar extends Widget_Base
 				$row_style = $row_style !== '' ? 'style="' . esc_attr( $row_style ) . '" ' : '';
 
 				$item_count ++;
+
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				echo '<tr ' . $style . ' >';
+                $tr_inner_html = '';
 				if ( $settings['eael_ec_show_title'] === 'yes' ) {
 					if ( $settings['eael_ec_event_details_link'] === 'yes' && $event['url'] ){
                         $new_tab = $settings['eael_ec_title_on_new_tab'] === 'yes' ? 'target="_blank"' : '';
@@ -3180,8 +3189,7 @@ class Event_Calendar extends Widget_Base
 	                    $this->add_link_attributes( 'eael_event_link_'.$item_count, $event['event_link'] );
 	                    $event['title'] = '<a ' . $this->get_render_attribute_string( 'eael_event_link_'.$item_count ) . ' >' . $event['title'] . '</a>';
                     }
-
-					echo '<td class="eael-ec-event-title" ' . $row_style . '>' . Helper::eael_wp_kses( $event['title'] ) . '</td>';
+					$tr_inner_html .= '<td class="eael-ec-event-title" ' . $row_style . '>' . $event['title'] . '</td>';
 				}
 				if ( $settings['eael_ec_show_description'] === 'yes' ) {
 					$link = '';
@@ -3190,8 +3198,7 @@ class Event_Calendar extends Widget_Base
 					}
 					$see_more = sprintf( " <a %s class='eael-see-more'>%s</a>", $link, Helper::eael_wp_kses( $settings['eael_ec_desc_see_more'] ) );
 					$event_description = wp_trim_words( $event['description'], $settings['eael_ec_description_limit'], $see_more );
-
-					echo '<td class="eael-ec-event-description" ' . $row_style . '>' . Helper::eael_wp_kses( $event_description ) . '</td>';
+					$tr_inner_html .= '<td class="eael-ec-event-description" ' . $row_style . '>' . $event_description . '</td>';
 				}
 				if ( $settings['eael_ec_show_date'] === 'yes' ) {
 					$start_timezone = isset( $event['start_timezone'] ) && '' !== $event['start_timezone'] ? new \DateTimeZone( $event['start_timezone'] ) : '';
@@ -3217,8 +3224,11 @@ class Event_Calendar extends Widget_Base
 
 					$separator = $end ? $settings['eael_ec_date_to_date_separator'] : '';
 					$date      = sprintf( '<span class="hide">%s</span> %s %s %s', strtotime( $event['start'] ), $start, $separator, $end );
-					echo '<td class="eael-ec-event-date" ' . $row_style . '>' . Helper::eael_wp_kses( $date ) . '</td>';
+					$tr_inner_html .= '<td class="eael-ec-event-date" ' . $row_style . '>' . $date . '</td>';
 				}
+                if( $tr_inner_html ){
+                    echo wp_kses( $tr_inner_html, Helper::eael_allowed_tags() );
+                }
 				echo "</tr>";
 			}
 			?>
