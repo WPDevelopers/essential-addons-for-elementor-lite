@@ -1130,6 +1130,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 'toggle'    => true,
                 'selectors' => [
                     '{{WRAPPER}} .eael-product-carousel .product-details-wrap' => 'text-align: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-carousel .product-details-wrap .eael-star-rating' => 'justify-content: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_dynamic_template_layout' => 'preset-3',
