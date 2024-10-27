@@ -59,7 +59,23 @@ class Data_Table extends Widget_Base {
     }
 
 	protected function is_dynamic_content():bool {
-        return false;
+        if( Plugin::$instance->editor->is_edit_mode() ) {
+            return false;
+        }
+		
+        $table_rows = $this->get_settings('eael_data_table_content_rows');
+		$is_dynamic_content = false;
+
+		if( ! empty( $table_rows ) ){
+            foreach( $table_rows as $table_row ){
+                if( isset( $table_row['eael_data_table_content_type'] ) && 'template' == $table_row['eael_data_table_content_type'] ) {
+					$is_dynamic_content = true;
+                    break;
+                }
+            }
+        }
+
+        return $is_dynamic_content;
     }
 
     public function get_custom_help_url()
@@ -1298,9 +1314,6 @@ class Data_Table extends Widget_Base {
                 $icon_migrated = isset($settings['__fa4_migrated']['eael_data_table_icon_content_new']);
                 $icon_is_new = empty($settings['eael_data_table_icon_content']);
 
-	  			$target = !empty($content_row['eael_data_table_content_row_title_link']['is_external']) ? 'target="_blank"' : '';
-	  			$nofollow = !empty($content_row['eael_data_table_content_row_title_link']['nofollow']) ? 'rel="nofollow"' : '';
-
 	  			$table_tr_keys = array_keys( $table_tr );
 	  			$last_key = end( $table_tr_keys );
 				$tbody_content = ($content_row['eael_data_table_content_type'] == 'editor') ? $content_row['eael_data_table_content_row_content'] : Helper::eael_wp_kses($content_row['eael_data_table_content_row_title']);
@@ -1311,13 +1324,11 @@ class Data_Table extends Widget_Base {
 					'content_type'	=> $content_row['eael_data_table_content_type'],
 					'template'		=> $content_row['eael_primary_templates_for_tables'],
 	  				'title'			=> $tbody_content,
-	  				'link_url'		=> !empty($content_row['eael_data_table_content_row_title_link']['url'])?$content_row['eael_data_table_content_row_title_link']['url']:'',
+	  				'link_url'		=> ! empty($content_row['eael_data_table_content_row_title_link']) ? $content_row['eael_data_table_content_row_title_link'] : [],
 	  				'icon_content_new'	=> !empty($content_row['eael_data_table_icon_content_new']) ? $content_row['eael_data_table_icon_content_new']:'',
 	  				'icon_content'	=> !empty($content_row['eael_data_table_icon_content']) ? $content_row['eael_data_table_icon_content']:'',
 	  				'icon_migrated'	=> $icon_migrated,
 	  				'icon_is_new'	=> $icon_is_new,
-	  				'link_target'	=> $target,
-	  				'nofollow'		=> $nofollow,
 					'colspan'		=> $content_row['eael_data_table_content_row_colspan'],
 					'rowspan'		=> $content_row['eael_data_table_content_row_rowspan'],
 					'tr_class'		=> $content_row['eael_data_table_content_row_css_class'],
@@ -1365,8 +1376,8 @@ class Data_Table extends Widget_Base {
 			</style>';
 		}
 	  	?>
-		<div <?php echo $this->get_render_attribute_string('eael_data_table_wrap'); ?>>
-			<table <?php echo $this->get_render_attribute_string('eael_data_table'); ?>>
+		<div <?php $this->print_render_attribute_string('eael_data_table_wrap'); ?>>
+			<table <?php $this->print_render_attribute_string('eael_data_table'); ?>>
 			    <thead>
 			        <tr class="table-header">
 						<?php $i = 0; foreach( $settings['eael_data_table_header_cols_data'] as $header_title ) :
@@ -1380,7 +1391,7 @@ class Data_Table extends Widget_Base {
 								$this->add_render_attribute('th_class'.$i, 'class', 'sorting' );
 							}
 						?>
-			            <th <?php echo $this->get_render_attribute_string('th_class'.$i); ?>>
+			            <th <?php $this->print_render_attribute_string('th_class'.$i); ?>>
 							<?php if( $header_title['eael_data_table_header_col_icon_enabled'] == 'true' && $header_title['eael_data_table_header_icon_type'] == 'icon' ) : ?>
 								<?php if (empty($header_title['eael_data_table_header_col_icon']) || isset($header_title['__fa4_migrated']['eael_data_table_header_col_icon_new'])) { ?>
 									<?php if( isset($header_title['eael_data_table_header_col_icon_new']['value']['url']) ) : ?>
@@ -1400,7 +1411,7 @@ class Data_Table extends Widget_Base {
 										'style'	=> "width:{$header_title['eael_data_table_header_col_img_size']}px;",
 										'alt'	=> esc_attr(get_post_meta($header_title['eael_data_table_header_col_img']['id'], '_wp_attachment_image_alt', true))
 									]);
-							?><img <?php echo $this->get_render_attribute_string('data_table_th_img'.$i); ?>><?php endif; ?><span class="data-table-header-text"><?php echo __( Helper::eael_wp_kses($header_title['eael_data_table_header_col']), 'essential-addons-for-elementor-lite'); ?></span></th>
+							?><img <?php $this->print_render_attribute_string('data_table_th_img'.$i); ?>><?php endif; ?><span class="data-table-header-text"><?php echo wp_kses( $header_title['eael_data_table_header_col'], Helper::eael_allowed_tags() ); ?></span></th>
 			        	<?php $i++; endforeach; ?>
 			        </tr>
 			    </thead>
@@ -1421,7 +1432,7 @@ class Data_Table extends Widget_Base {
 										);
 										?>
 									   <?php if(  $table_td[$j]['content_type'] == 'icon' ) : ?>
-											<td <?php echo $this->get_render_attribute_string('table_inside_td'.$i.$j); ?>>
+											<td <?php $this->print_render_attribute_string('table_inside_td'.$i.$j); ?>>
 												<div class="td-content-wrapper">
 													<?php if ( $table_td[$j]['icon_is_new'] || $table_td[$j]['icon_migrated']) { ?>
                                                         <div class="eael-datatable-icon td-content">
@@ -1434,30 +1445,37 @@ class Data_Table extends Widget_Base {
                                                     <?php } ?>
 												</div>
 											</td>
-										<?php elseif(  $table_td[$j]['content_type'] == 'textarea' && !empty($table_td[$j]['link_url']) ) : ?>
-											<td <?php echo $this->get_render_attribute_string('table_inside_td'.$i.$j); ?>>
+										<?php elseif(  $table_td[$j]['content_type'] == 'textarea' && !empty($table_td[$j]['link_url']) ) : 
+											$this->add_link_attributes( 'eael_table_link_' . $i . $j, $table_td[$j]['link_url'] )
+											?>
+											<td <?php $this->print_render_attribute_string('table_inside_td'.$i.$j); ?>>
 												<div class="td-content-wrapper">
-													<a href="<?php echo esc_url( $table_td[$j]['link_url'] ); ?>" <?php echo $table_td[$j]['link_target'] ?> <?php echo $table_td[$j]['nofollow'] ?>><?php echo wp_kses_post($table_td[$j]['title']); ?></a>
+													<a <?php $this->print_render_attribute_string( 'eael_table_link_' . $i . $j ) ?>><?php echo wp_kses( $table_td[$j]['title'], Helper::eael_allowed_tags()); ?></a>
 												</div>
 											</td>
 
 										<?php elseif( $table_td[$j]['content_type'] == 'template' && ! empty($table_td[$j]['template']) ) : ?>
-										<td <?php echo $this->get_render_attribute_string('table_inside_td'.$i.$j); ?>>
+										<td <?php $this->print_render_attribute_string('table_inside_td'.$i.$j); ?>>
 											<div class="td-content-wrapper">
-												<div <?php echo $this->get_render_attribute_string('td_content'); ?>>
+												<div <?php $this->print_render_attribute_string('td_content'); ?>>
 													<?php
 													// WPML Compatibility
 													if ( ! is_array( $table_td[ $j ]['template'] ) ) {
 														$table_td[ $j ]['template'] = apply_filters( 'wpml_object_id', $table_td[ $j ]['template'], 'wp_template', true );
 													}
+													// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 													echo Plugin::$instance->frontend->get_builder_content( intval( $table_td[ $j ]['template'] ), true );
 													?>
 												</div>
 											</div>
 										</td>
 										<?php else: ?>
-											<td <?php echo $this->get_render_attribute_string('table_inside_td'.$i.$j); ?>>
-												<div class="td-content-wrapper"><div <?php echo $this->get_render_attribute_string('td_content'); ?>><?php echo $table_td[$j]['title']; ?></div></div>
+											<td <?php $this->print_render_attribute_string('table_inside_td'.$i.$j); ?>>
+												<div class="td-content-wrapper"><div <?php $this->print_render_attribute_string('td_content'); ?>>
+													<?php
+													// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+													echo $this->parse_text_editor( $table_td[$j]['title'] ); ?>
+												</div></div>
 											</td>
 										<?php endif; ?>
 										<?php
