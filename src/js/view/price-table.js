@@ -1,6 +1,6 @@
 var PricingTooltip = function($scope, $) {
     if ($.fn.tooltipster) {
-        var $tooltip = $scope.find(".eael-tooltip"),
+        var $tooltip = $scope.find(".eael-pricing-tooltip"),
             i;
 
         for (i = 0; i < $tooltip.length; i++) {
