@@ -3,14 +3,14 @@ namespace Essential_Addons_Elementor\Elements;
 
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
-    exit;
+   exit;
 }
 
 use Elementor\Widget_Base;
 use \Essential_Addons_Elementor\Classes\Helper;
 
 class Woo_Product_Add_To_Cart extends Widget_Base {
-    public function get_name() {
+   public function get_name() {
 		return 'eael-woo-product-add-to-cart';
 	}
 
@@ -19,11 +19,11 @@ class Woo_Product_Add_To_Cart extends Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'eaicon-add-to-cart templately-widget-icon';
+		return 'eaicon-add-to-cart';
 	}
 
 	public function get_categories() {
-		return [ 'templately-single' ];
+		return [ 'essential-addons-elementor', 'woocommerce-elements' ];
 	}
 
 	public function get_keywords() {
@@ -31,6 +31,9 @@ class Woo_Product_Add_To_Cart extends Widget_Base {
 	}
 
 	protected function register_controls() {
+
+		//
+		$this->eael_product_add_to_cart_content();
 
 		// Style Tab Start
 		$this->start_controls_section(
@@ -478,7 +481,7 @@ class Woo_Product_Add_To_Cart extends Widget_Base {
         $this->add_control(
 			'eael_add_to_variations_spacing',
 			[
-				'label'      => esc_html__( 'Spacing Bottom', 'elementor-proessential-addons-for-elementor-lite' ),
+				'label'      => esc_html__( 'Spacing Bottom', 'essential-addons-for-elementor-lite' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => [ 'px', 'em', 'rem', 'custom' ],
 				'range'      => [
@@ -624,21 +627,86 @@ class Woo_Product_Add_To_Cart extends Widget_Base {
 
 	}
 
-	protected function render() {
-        global $product;
+	protected function eael_product_add_to_cart_content() {
+		$this->start_controls_section(
+			'section_product',
+			[
+				'label' => esc_html__( 'General', 'essential-addons-for-elementor-lite' ),
+			]
+		);
 
-        $product = Helper::get_product();
+		$this->add_control(
+			'add_to_cart_layout',
+			[
+				'label'   => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
+				'type'    => \Elementor\Controls_Manager::SELECT,
+				'options' => [
+					''        => esc_html__( 'Inline', 'essential-addons-for-elementor-lite' ),
+					'stacked' => esc_html__( 'Stacked', 'essential-addons-for-elementor-lite' ),
+				],
+			]
+		);
 
-        if ( ! $product ) {
-            return;
-        }
+		$this->add_control(
+			'add_to_cart_show_quantity',
+			[
+				'label'       => esc_html__( 'Show Quantity', 'essential-addons-for-elementor-lite' ),
+				'type'        => \Elementor\Controls_Manager::SWITCHER,
+				'label_off'   => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'label_on'    => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'description' => esc_html__( 'Please note that switching on this option will disable some of the design controls.', 'essential-addons-for-elementor-lite' ),
+			]
+		);
 
-        ?>
-        <div class="eael-single-product-add-to-cart">
-            <div class="elementor-add-to-cart elementor-product-<?php echo esc_attr( $product->get_type() ); ?>">
-                <?php woocommerce_template_single_add_to_cart(); ?>
-            </div>
-        </div>
-        <?php
+		$this->add_control(
+			'add_to_cart_product_type',
+			[
+				'label'   => esc_html__( 'Choose Product Type', 'essential-addons-for-elementor-lite' ),
+				'type'    => \Elementor\Controls_Manager::SELECT,
+				'default' => 'simple',
+				'options' => [
+					'simple'   => esc_html__( 'Simple Product', 'essential-addons-for-elementor-lite' ),
+					'grouped'  => esc_html__( 'Grouped Product', 'essential-addons-for-elementor-lite' ),
+					'external' => esc_html__( 'External/Affiliate product', 'essential-addons-for-elementor-lite' ),
+					'variable' => esc_html__( 'Variable product', 'essential-addons-for-elementor-lite' ),
+				],
+			]
+		);
+
+		$this->add_control(
+			'add_to_cart_text',
+			[
+				'label'   => esc_html__( 'Button Text', 'essential-addons-for-elementor-lite' ),
+				'type'    => \Elementor\Controls_Manager::TEXT,
+				'default' => esc_html__( 'Add to cart', 'essential-addons-for-elementor-lite' ),
+				'ai' => [
+					'active' => false,
+				],
+			]
+		);
+
+		$this->end_controls_section();
 	}
+	
+
+	protected function render() {
+      global $product;
+
+      $product = Helper::get_product();
+
+      if ( ! $product ) {
+         return;
+      }
+
+      ?>
+      <div class="eael-single-product-add-to-cart">
+            <div class="elementor-add-to-cart elementor-product-<?php echo esc_attr( $product->get_type() ); ?>">
+               <?php 
+					woocommerce_template_single_add_to_cart();
+					add_filter( 'woocommerce_product_single_add_to_cart_text', [ $this, 'custom_add_to_cart_button_text_single'] ); 
+					?>
+            </div>
+      </div>
+      <?php
+	} 
 }
