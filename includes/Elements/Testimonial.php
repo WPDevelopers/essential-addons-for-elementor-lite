@@ -83,7 +83,7 @@ class Testimonial extends Widget_Base {
   		$this->start_controls_section(
   			'eael_section_testimonial_image',
   			[
-  				'label' => esc_html__( 'Testimonial Image', 'essential-addons-for-elementor-lite')
+  				'label' => esc_html__( 'Image', 'essential-addons-for-elementor-lite')
   			]
   		);
 
@@ -99,7 +99,7 @@ class Testimonial extends Widget_Base {
 		$this->add_control(
 			'image',
 			[
-				'label' => __( 'Testimonial Avatar', 'essential-addons-for-elementor-lite'),
+				'label' => '',
 				'type' => Controls_Manager::MEDIA,
 				'default' => [
 					'url' => Utils::get_placeholder_image_src(),
@@ -132,7 +132,7 @@ class Testimonial extends Widget_Base {
   		$this->start_controls_section(
   			'eael_section_testimonial_content',
   			[
-  				'label' => esc_html__( 'Testimonial Content', 'essential-addons-for-elementor-lite')
+  				'label' => esc_html__( 'Content', 'essential-addons-for-elementor-lite')
   			]
   		);
 
@@ -165,7 +165,7 @@ class Testimonial extends Widget_Base {
 		$this->add_control(
 			'eael_testimonial_description',
 			[
-				'label' => esc_html__( 'Testimonial Description', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Description', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::WYSIWYG,
 				'default' => esc_html__( 'Add testimonial description here. Edit and place your own text.', 'essential-addons-for-elementor-lite'),
 			]
@@ -174,7 +174,7 @@ class Testimonial extends Widget_Base {
 		$this->add_control(
 			'content_height',
 			[
-				'label' => esc_html__( 'Description Height', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Height', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'size_units'	=> ['px', '%', 'em'],
 				'range' => [
@@ -251,7 +251,7 @@ class Testimonial extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_testimonial_styles_general',
 			[
-				'label' => esc_html__( 'Testimonial Styles', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Layout', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -260,7 +260,7 @@ class Testimonial extends Widget_Base {
 		$this->add_control(
 			'eael_testimonial_style',
 			[
-				'label'       => esc_html__( 'Select Style', 'essential-addons-for-elementor-lite' ),
+				'label'       => esc_html__( 'Skin', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::CHOOSE,
 				'options'     => [
 					'default-style' => [
@@ -302,10 +302,10 @@ class Testimonial extends Widget_Base {
 		$this->add_control(
 			'eael_testimonial_is_gradient_background',
 			[
-				'label' => __('Use Gradient Background', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::SWITCHER,
-				'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-				'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+				'label'        => __('Gradient Background', 'essential-addons-for-elementor-lite'),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
+				'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
 				'return_value' => 'yes',
 			]
 		);
@@ -341,7 +341,7 @@ class Testimonial extends Widget_Base {
 		$this->add_control(
 			'eael_testimonial_alignment',
 			[
-				'label' => esc_html__( 'Layout Alignment', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Content Alignment', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::CHOOSE,
 				'label_block' => true,
 				'options' => [
@@ -373,10 +373,10 @@ class Testimonial extends Widget_Base {
 		$this->add_control(
 			'eael_testimonial_user_display_block',
 			[
-				'label' => esc_html__( 'Display User & Company Block?', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::SWITCHER,
+				'label'        => esc_html__( 'User & Company Line Break', 'essential-addons-for-elementor-lite'),
+				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
-				'default' => '',
+				'default'      => '',
 			]
 		);
 
@@ -386,7 +386,7 @@ class Testimonial extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_testimonial_image_styles',
 			[
-				'label' => esc_html__( 'Testimonial Image Style', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Image', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition'	=> [
 					'eael_testimonial_enable_avatar'	=> 'yes'
@@ -397,7 +397,7 @@ class Testimonial extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_testimonial_image_width',
 			[
-				'label' => esc_html__( 'Image Width', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Width', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 150,
@@ -423,7 +423,7 @@ class Testimonial extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_testimonial_max_image_width',
 			[
-				'label' => esc_html__( 'Image Max Width', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Max Width', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 100,
@@ -507,7 +507,7 @@ class Testimonial extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_testimonial_typography',
 			[
-				'label' => esc_html__( 'Color, Typography &amp; Spacing', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Content', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -523,7 +523,7 @@ class Testimonial extends Widget_Base {
 		$this->add_control(
 			'eael_testimonial_name_color',
 			[
-				'label' => esc_html__( 'User Name Color', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#272727',
 				'selectors' => [
@@ -564,7 +564,7 @@ class Testimonial extends Widget_Base {
 		$this->add_control(
 			'eael_testimonial_company_color',
 			[
-				'label' => esc_html__( 'Company Color', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#272727',
 				'selectors' => [
@@ -605,7 +605,7 @@ class Testimonial extends Widget_Base {
 		$this->add_control(
 			'eael_testimonial_description_color',
 			[
-				'label' => esc_html__( 'Testimonial Text Color', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#292929',
 				'selectors' => [
@@ -646,7 +646,7 @@ class Testimonial extends Widget_Base {
 		$this->add_control(
 			'eael_testimonial_rating_item_color',
 			[
-				'label'     => esc_html__( 'Rating Color', 'essential-addons-for-elementor-lite'),
+				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#f2b01e',
 				'selectors' => [
@@ -662,7 +662,7 @@ class Testimonial extends Widget_Base {
 		$this->add_control(
 			'eael_testimonial_rating_item_size',
 			[
-				'label'      => esc_html__( 'Rating Size', 'essential-addons-for-elementor-lite'),
+				'label'      => esc_html__( 'Icon Size', 'essential-addons-for-elementor-lite'),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -674,7 +674,7 @@ class Testimonial extends Widget_Base {
 		$this->add_control(
 			'eael_testimonial_rating_item_distance',
 			[
-				'label' => esc_html__( 'Distance Between Rating Item', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Space Between Icons', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -700,7 +700,7 @@ class Testimonial extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_testimonial_quotation_typography',
 			[
-				'label' => esc_html__( 'Quotation Style', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Quotation', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -708,7 +708,7 @@ class Testimonial extends Widget_Base {
 		$this->add_control(
 			'eael_testimonial_quotation_color',
 			[
-				'label' => esc_html__( 'Quotation Mark Color', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => 'rgba(0,0,0,0.15)',
 				'selectors' => [
@@ -728,7 +728,7 @@ class Testimonial extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_testimonial_quotation_top',
 			[
-				'label' => esc_html__( 'Quotation Postion From Top', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Postion From Top', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 5,
@@ -750,7 +750,7 @@ class Testimonial extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_testimonial_quotation_right',
 			[
-				'label' => esc_html__( 'Quotation Postion From Right', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Postion From Right', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 5,
