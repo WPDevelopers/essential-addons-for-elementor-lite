@@ -687,7 +687,6 @@ class Woo_Product_Add_To_Cart extends Widget_Base {
 
 		$this->end_controls_section();
 	}
-	
 
 	protected function render() {
       global $product;
@@ -698,15 +697,24 @@ class Woo_Product_Add_To_Cart extends Widget_Base {
          return;
       }
 
+		$settings = $this->get_settings_for_display();
+
       ?>
       <div class="eael-single-product-add-to-cart">
             <div class="elementor-add-to-cart elementor-product-<?php echo esc_attr( $product->get_type() ); ?>">
                <?php 
+					add_filter( 'woocommerce_product_single_add_to_cart_text', [ $this, 'eael_add_to_cart_button_text_single'], 10, 1 ); 
 					woocommerce_template_single_add_to_cart();
-					add_filter( 'woocommerce_product_single_add_to_cart_text', [ $this, 'custom_add_to_cart_button_text_single'] ); 
 					?>
             </div>
       </div>
       <?php
 	} 
+
+	public function eael_add_to_cart_button_text_single() {
+		$settings = $this->get_settings_for_display();
+		if ( ! empty( $settings['add_to_cart_text'] ) ) {
+			return $settings['add_to_cart_text'];
+		}
+	}
 }
