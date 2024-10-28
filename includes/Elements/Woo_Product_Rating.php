@@ -447,7 +447,10 @@ class Woo_Product_Rating extends Widget_Base {
 			</div>
 			<?php
 		} else {
-			if ( $rating_count > 0 ) { ?>
+			if ( $rating_count > 0  || 'yes' === $settings['show_empty_review'] ) {
+				$average = ( $rating_count > 0 ) ? $average : 0;
+				$review_caption = ( $rating_count > 0 ) ? $settings['rating_caption'] : $settings['empty_rating_caption'];
+			?>
 			<div class="eael-single-product-rating">
 				<div class="woocommerce-product-rating">
 					<div class="eael-product-rating-wrap">
@@ -455,33 +458,20 @@ class Woo_Product_Rating extends Widget_Base {
 					</div>
 					<?php if ( comments_open() && 'yes' === $settings['show_review_count'] ) { ?>
 						<a href="#reviews" class="woocommerce-review-link" rel="nofollow">
-								<span class="before-rating">
-									<?php echo Helper::eael_wp_kses( $settings['before_rating_caption'] ); ?>
-								</span>
-								<span class="count"><?php echo Helper::eael_wp_kses( $settings['rating_caption'] ); ?></span>
-								<span class="after-rating">
-									<?php echo Helper::eael_wp_kses( $settings['after_rating_caption'] ); ?>
-								</span>
+								<span class="before-rating"><?php echo Helper::eael_wp_kses( $settings['before_rating_caption'] ); ?></span>
+								<span class="count"><?php echo Helper::eael_wp_kses( $review_caption ); ?></span>
+								<span class="after-rating"><?php echo Helper::eael_wp_kses( $settings['after_rating_caption'] ); ?></span>
 						</a>
-					<?php } ?>
+					<?php } elseif ( $rating_count === 0 && 'yes' === $settings['show_empty_review'] ) {
+						?>
+						<a href="#reviews" class="woocommerce-review-link" rel="nofollow">
+							<?php echo Helper::eael_wp_kses( $review_caption ); ?>
+						</a>
+						<?php
+					} ?>
 				</div>
 			</div>
 			<?php
-			} else {
-				?>
-				<?php if ( 'yes' === $settings['show_empty_review'] ) { ?>
-					<div class="eael-single-product-rating">
-						<div class="woocommerce-product-rating">
-							<div class="eael-product-rating-wrap">
-								<?php $this->eael_rating_style( $settings, $average = 0, $rating_count ); ?>
-							</div>
-							<a href="#reviews" class="woocommerce-review-link" rel="nofollow">
-								<?php echo Helper::eael_wp_kses( $settings['empty_rating_caption'] ); ?>
-							</a>
-							
-						</div>
-					</div>
-				<?php }
 			}
 		}
 	}
