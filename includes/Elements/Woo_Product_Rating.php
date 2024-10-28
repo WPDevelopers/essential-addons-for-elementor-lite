@@ -44,7 +44,7 @@ class Woo_Product_Rating extends Widget_Base {
 			]
 		);
 
-      $this->add_control(
+      $this->add_responsive_control(
 			'eael_star_align',
 			[
 				'label'   => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
@@ -148,13 +148,13 @@ class Woo_Product_Rating extends Widget_Base {
 		);
 
 		$this->add_control(
-			'margin',
+			'product_rating_margin',
 			[
-				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'rem', 'custom' ],
 				'selectors' => [
-					'{{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -188,7 +188,7 @@ class Woo_Product_Rating extends Widget_Base {
       $this->add_control(
 			'eael_star_text_spaceing',
 			[
-				'label'      => esc_html__( 'Text Spaceing', 'essential-addons-for-elementor-lite' ),
+				'label'      => esc_html__( 'Space Between', 'essential-addons-for-elementor-lite' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => [ 'px', 'rem', 'em', '%', 'custom' ],
 				'range' => [
@@ -206,7 +206,7 @@ class Woo_Product_Rating extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'.woocommerce {{WRAPPER}} .eael-single-product-rating .star-rating' => 'margin-right: {{SIZE}}{{UNIT}};',
+					'.woocommerce {{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap' => 'margin-right: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);

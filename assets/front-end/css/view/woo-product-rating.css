@@ -35,6 +35,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin-top: 1px;
 }
 .eael-product-rating-wrap .eael-product-rating svg {
   height: 30px;
