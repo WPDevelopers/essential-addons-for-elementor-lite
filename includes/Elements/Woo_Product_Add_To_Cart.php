@@ -35,31 +35,6 @@ class Woo_Product_Add_To_Cart extends Widget_Base {
 		//
 		$this->eael_product_add_to_cart_content();
 
-		// Style Tab Start
-		$this->start_controls_section(
-			'eael_add_to_cart_title_style',
-			[
-				'label' => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
-				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
-			]
-		);
-
-        $this->add_control(
-			'eael_add_to_cart_layout',
-			[
-				'label'   => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
-				'type'    => \Elementor\Controls_Manager::SELECT,
-				'options' => [
-					''        => esc_html__( 'Inline', 'essential-addons-for-elementor-lite' ),
-					'stacked' => esc_html__( 'Stacked', 'essential-addons-for-elementor-lite' ),
-					'auto'    => esc_html__( 'Auto', 'essential-addons-for-elementor-lite' ),
-				],
-			]
-		);
-
-		$this->end_controls_section();
-		// Style Tab End
-
         // Start Button
 		$this->start_controls_section(
 			'eael_add_to_cart_button',
@@ -640,10 +615,15 @@ class Woo_Product_Add_To_Cart extends Widget_Base {
 			[
 				'label'   => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
+				'default' => 'row',
 				'options' => [
-					''        => esc_html__( 'Inline', 'essential-addons-for-elementor-lite' ),
-					'stacked' => esc_html__( 'Stacked', 'essential-addons-for-elementor-lite' ),
+					'row'    => esc_html__( 'Inline', 'essential-addons-for-elementor-lite' ),
+					'column' => esc_html__( 'Stacked', 'essential-addons-for-elementor-lite' ),
 				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-single-product-add-to-cart .elementor-add-to-cart.elementor-product-simple .cart' => 'flex-direction: {{VALUE}};',
+				],
+				'prefix_class' => 'eael-add-to-cart--layout-',
 			]
 		);
 
@@ -703,7 +683,7 @@ class Woo_Product_Add_To_Cart extends Widget_Base {
       <div class="eael-single-product-add-to-cart">
             <div class="elementor-add-to-cart elementor-product-<?php echo esc_attr( $product->get_type() ); ?>">
                <?php 
-					add_filter( 'woocommerce_product_single_add_to_cart_text', [ $this, 'eael_add_to_cart_button_text_single'], 10, 1 ); 
+					add_filter( 'woocommerce_product_single_add_to_cart_text', [ $this, 'eael_add_to_cart_button_text_single'] ); 
 					woocommerce_template_single_add_to_cart();
 					?>
             </div>
