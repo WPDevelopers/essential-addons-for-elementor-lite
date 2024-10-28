@@ -1131,7 +1131,7 @@ trait Controls
                     ],
                     'default' => 'icon',
                     'condition' => [
-                        'eael_content_timeline_choose' => 'dynamic',
+                        'eael_content_timeline_choose!' => 'custom',
                     ],
                 ]
             );
@@ -1186,7 +1186,7 @@ trait Controls
                         'library' => 'fa-solid',
                     ],
                     'condition' => [
-                        'eael_content_timeline_choose' => 'dynamic',
+                        'eael_content_timeline_choose!' => 'custom',
                         'eael_show_image_or_icon' => 'icon',
                     ],
                 ]
@@ -1355,7 +1355,7 @@ trait Controls
 				    'return_value' => 'yes',
 				    'default'      => '',
 				    'condition'    => [
-					    'eael_content_timeline_choose' => 'dynamic',
+					    'eael_content_timeline_choose!' => 'custom',
 				    ],
 			    ]
 		    );
@@ -1368,7 +1368,7 @@ trait Controls
 				    'default'   => 'medium',
 				    'condition' => [
 					    'eael_show_image'              => 'yes',
-					    'eael_content_timeline_choose' => 'dynamic',
+					    'eael_content_timeline_choose!' => 'custom',
 				    ],
 			    ]
 		    );
@@ -1384,7 +1384,7 @@ trait Controls
 				    'default'      => '',
 				    'condition'    => [
 					    'eael_show_image'              => 'yes',
-					    'eael_content_timeline_choose' => 'dynamic',
+					    'eael_content_timeline_choose!' => 'custom',
 				    ],
 			    ]
 		    );
@@ -1470,7 +1470,7 @@ trait Controls
                 'return_value' => 'yes',
                 'default' => 'yes',
                 'condition' => [
-                    'eael_content_timeline_choose' => 'dynamic',
+                    'eael_content_timeline_choose!' => 'custom',
                 ],
             ]
         );
@@ -1484,7 +1484,7 @@ trait Controls
                 'label_block' => false,
                 'default' => esc_html__('Read More', 'essential-addons-for-elementor-lite'),
                 'condition' => [
-                    'eael_content_timeline_choose' => 'dynamic',
+                    'eael_content_timeline_choose!' => 'custom',
                     'eael_show_read_more' => 'yes',
                 ],
             ]
