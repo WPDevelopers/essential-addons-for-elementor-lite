@@ -282,7 +282,8 @@ trait Login_Registration {
             if ( $ajax ) {
                 wp_send_json_error( $err_msg );
             }
-            update_option( 'eael_register_errors_' . $widget_id, $err_msg, false );
+            
+			setcookie( 'eael_register_errors_' . $widget_id, $err_msg );
 
             if (isset($_SERVER['HTTP_REFERER'])) {
                 wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -475,19 +476,23 @@ trait Login_Registration {
 		
 		// if any error found, abort
 		if ( ! empty( $errors ) ) {
+			$err_msg = '<ol>';
+			if ( count( $errors ) === 1 ) {
+				$err_msg = '<ol class="'. esc_attr('eael-list-style-none-wrap').'">';
+			}
+			
+			foreach ( $errors as $error ) {
+				$err_msg .= "<li>{$error}</li>";
+			}
+			$err_msg .= '</ol>';
+
+			//If AJAX enabled
 			if ( $ajax ) {
-				$err_msg = '<ol>';
-				if ( count( $errors ) === 1 ) {
-					$err_msg = '<ol class="'. esc_attr('eael-list-style-none-wrap').'">';
-				}
-				
-				foreach ( $errors as $error ) {
-					$err_msg .= "<li>{$error}</li>";
-				}
-				$err_msg .= '</ol>';
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_register_errors_' . $widget_id, $errors, false );
+
+			setcookie( 'eael_register_errors_' . $widget_id, $err_msg );
+
 			wp_safe_redirect( esc_url_raw( $url ) );
 			exit();
 		}
@@ -552,7 +557,8 @@ trait Login_Registration {
 				if ( $ajax ) {
 					wp_send_json_error( $err_msg );
 				}
-				update_option( 'eael_register_errors_' . $widget_id, $err_msg, false );
+				
+				setcookie( 'eael_register_errors_' . $widget_id, $err_msg );
 
 				if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
 					wp_safe_redirect( $_SERVER['HTTP_REFERER'] );
@@ -642,7 +648,8 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $errors['user_create'] );
 			}
-			update_option( 'eael_register_errors_' . $widget_id, $errors, false );
+			
+			setcookie( 'eael_register_errors_' . $widget_id, $errors['user_create'] );
 			wp_safe_redirect( esc_url_raw( $url ) );
 			exit();
 		}
@@ -879,9 +886,13 @@ trait Login_Registration {
 		if ( is_wp_error( $results ) ) {
 			$err_msg = '';
 			if ( isset( $results->errors['invalidcombo'][0] ) ) {
-				$err_msg = esc_html__( 'There is no account with that username or email address.', 'essential-addons-for-elementor-lite' );
-			}else if( isset( $results->errors ) && count( $results->errors ) ) {
-				$err_msg = esc_html__( 'There is no account with that username or email address.', 'essential-addons-for-elementor-lite' );
+				$err_msg = $results->errors['invalidcombo'][0];
+			} else if( isset( $results->errors ) && count( $results->errors ) ) {
+				if( isset( $results->errors['retrieve_password_email_failure'] ) ){
+					$err_msg = is_array( $results->errors['retrieve_password_email_failure'] ) ? $results->errors['retrieve_password_email_failure'][0] : $results->errors['retrieve_password_email_failure'];
+				} else {
+					$err_msg = esc_html__( 'There is no account with that username or email address.', 'essential-addons-for-elementor-lite' );
+				}
 			}
 
 			if ( $ajax ) {
@@ -1135,7 +1146,7 @@ trait Login_Registration {
 
 		$page_id = self::$email_options_lostpassword['page_id'] ? self::$email_options_lostpassword['page_id'] : 0;
 		$widget_id = self::$email_options_lostpassword['widget_id'] ? self::$email_options_lostpassword['widget_id'] : '';
-		$resetpassword_in_popup_selector = self::$email_options_lostpassword['resetpassword_in_popup_selector'] ? str_replace(' ', '_', self::$email_options_lostpassword['resetpassword_in_popup_selector']) : '';
+		$resetpassword_in_popup_selector = isset( self::$email_options_lostpassword['resetpassword_in_popup_selector'] ) ? str_replace(' ', '_', self::$email_options_lostpassword['resetpassword_in_popup_selector']) : '';
 
 		if ( ! empty( self::$email_options_lostpassword['message'] ) ) {
 			if ( ! empty( $key ) ) {

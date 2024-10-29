@@ -62,6 +62,10 @@ class Pricing_Table extends Widget_Base
         ];
     }
 
+    protected function is_dynamic_content():bool {
+        return false;
+    }
+
     public function get_custom_help_url()
     {
         return 'https://essential-addons.com/elementor/docs/pricing-table/';
@@ -1933,7 +1937,7 @@ class Pricing_Table extends Widget_Base
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
-                    '{{WRAPPER}} .eael-pricing .eael-pricing-button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-pricing .footer' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -2168,7 +2172,7 @@ class Pricing_Table extends Widget_Base
                     $obj->add_render_attribute(
                         'pricing_feature_item_tooltip' . $counter,
                         [
-                            'class' => 'tooltip',
+                            'class' => 'eael-pricing-tooltip',
                             'title' => HelperClass::eael_wp_kses($item['eael_pricing_item_tooltip_content']),
                             'id'    => $obj->get_id() . $counter,
                         ]
@@ -2240,6 +2244,7 @@ class Pricing_Table extends Widget_Base
 	    $settings['eael_pricing_table_onsale_price'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_onsale_price']);
 	    $settings['eael_pricing_table_price_cur'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_price_cur']);
 	    $settings['eael_pricing_table_btn'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_btn']);
+        $table_btn_link = $settings['eael_pricing_table_btn_link']['url'];
         
         $this->add_render_attribute('eael_pricing_wrapper', 'class', [ 'eael-pricing' , $settings['eael_pricing_table_style'] ] );
 

@@ -97,6 +97,7 @@
                 <field type="Filterable Gallery: Item Category" editor_type="LINE">fg_item_cat</field>
                 <field type="Filterable Gallery: Item Content" editor_type="VISUAL">eael_fg_gallery_item_content</field>
                 <field type="Filterable Gallery: Item Link" key_of="eael_fg_gallery_img_link" editor_type="LINE">url</field>
+                <field type="Filterable Gallery: Item Video Link" editor_type="LINE">eael_fg_gallery_item_video_link</field>
             </fields-in-item>
         </widget>
         <widget name="eael-image-accordion">

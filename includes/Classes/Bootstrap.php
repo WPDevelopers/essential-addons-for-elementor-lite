@@ -235,7 +235,6 @@ class Bootstrap
 		    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_add_to_cart', 25 );
 		    add_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_meta', 30 );
 
-		    add_filter( 'woocommerce_product_get_rating_html', [ $this, 'eael_rating_markup' ], 10, 3 );
 		    add_filter( 'eael_product_wrapper_class', [ $this, 'eael_product_wrapper_class' ], 10, 3 );
 
             add_action('wp_ajax_eael_checkout_cart_qty_update', [$this, 'eael_checkout_cart_qty_update'] );
@@ -262,9 +261,18 @@ class Bootstrap
 
 			    add_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open' );
 			    add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close' );
-			    add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
+                //Get current active theme
+                $theme = wp_get_theme();
+                //Astra Theme
                 if( function_exists( 'astra_woo_woocommerce_shop_product_content' ) ){
                     add_action( 'woocommerce_after_shop_loop_item', 'astra_woo_woocommerce_shop_product_content' );
+                } else {
+                    add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
+                }
+                //Theme Support
+                $theme_to_check = ['OceanWP', 'Blocksy', 'Travel Ocean'];
+                if( in_array( $theme->name, $theme_to_check, true ) ) {
+                    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
                 }
 		    } );
 	    }

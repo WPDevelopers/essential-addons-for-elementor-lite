@@ -511,7 +511,7 @@ trait Admin {
 					    'icon'    => 'ea-settings',
 					    'button'  => [
 						    'label' => __( 'CSS Print Method', 'essential-addons-for-elementor-lite' ),
-						    'url'   => defined( 'ELEMENTOR_VERSION' ) && version_compare( ELEMENTOR_VERSION, '3.21.0', '>=' ) ? admin_url( 'admin.php?page=elementor-tools' ) : admin_url( 'admin.php?page=elementor#tab-advanced' )
+						    'url'   => defined( 'ELEMENTOR_VERSION' ) && version_compare( ELEMENTOR_VERSION, '3.21.0', '>=' ) ? admin_url( 'admin.php?page=elementor-settings#tab-performance' ) : admin_url( 'admin.php?page=elementor#tab-advanced' )
 					    ]
 				    ],
 				    'box_3' => [
@@ -541,7 +541,7 @@ trait Admin {
 						    'key'         => 'section-particles',
 						    'title'       => __( 'Particles', 'essential-addons-for-elementor-lite' ),
 						    'demo_link'   => 'https://essential-addons.com/particle-effect/',
-						    'doc_link'    => 'https://essential-addons.com/docs/particles/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-particles/',
 						    'is_pro'      => true,
 						    'is_activate' => boolval( $this->get_settings( 'section-particles' ) )
 					    ],
@@ -1620,6 +1620,8 @@ trait Admin {
 			wp_dequeue_style( 'betterdocs-icons' );
 			wp_dequeue_style( 'betterdocs-instant-answer' );
 			wp_dequeue_style( 'betterdocs-pro-settings' );
+			wp_dequeue_style( 'otgs-notices' );
+			wp_dequeue_style( 'sitepress-style' );
 
 			wp_dequeue_script( 'betterdocs-categorygrid' );
 			wp_dequeue_script( 'betterdocs-blocks-actions' );

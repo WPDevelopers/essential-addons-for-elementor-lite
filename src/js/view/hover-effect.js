@@ -31,7 +31,7 @@ let HoverEffectHandler = function ($scope, $) {
     $eaelOffsetHoverTop      = $scope.data('eael_offset_hover_top'),
     $eaelOffsetHoverLeft     = $scope.data('eael_offset_hover_left'),
     $eaelTilt                = $scope.data('eaeltilt'),
-    $eaelContainer           = $('.elementor-widget-container', $scope);
+    $enabledElementList      = [];
 
     /**
      * For editor page
@@ -45,9 +45,13 @@ let HoverEffectHandler = function ($scope, $) {
                 $.each($el, function (i, el) {
                     // console.log(el.attributes.settings.attributes);
                     let $getSettings = el.attributes.settings.attributes;
-                    if ( el.attributes.elType === 'widget' ) {
-                        if ( $getSettings['eael_hover_effect_switch'] === 'yes' && $getSettings['eael_hover_effect_enable_live_changes'] === 'yes' ) {
-                            eaelEditModeSettings[el.attributes.id] = el.attributes.settings.attributes;
+                    if (el.attributes.elType === 'widget') {
+                        if ($getSettings['eael_hover_effect_switch'] === 'yes') {
+                            $enabledElementList.push(el.attributes.id);
+
+                            if ($getSettings['eael_hover_effect_enable_live_changes'] === 'yes') {
+                                eaelEditModeSettings[el.attributes.id] = el.attributes.settings.attributes;
+                            }
                         }
                     }
     
@@ -210,7 +214,8 @@ let HoverEffectHandler = function ($scope, $) {
         }
     }
 
-    let hoverSelector = `body [data-id="${$scopeId}"] > .elementor-widget-container`;
+    let hoverSelector = window.isEditMode ? `body [data-id="${$scopeId}"] > .elementor-widget-container` : `body .eael_hover_effect[data-id="${$scopeId}"] > .elementor-widget-container`,
+        $hoverSelector = $(hoverSelector);
 
     //Opacity
     let $opacityVal = $Opacity ? $Opacity?.opacity : '1';
@@ -286,6 +291,7 @@ let HoverEffectHandler = function ($scope, $) {
         "transition-duration": `${$eaelDurationVal}ms`,
         "transition-delay": `${$eaelDelayVal}ms`,
         "transition-timing-function": $eaelEasingVal,
+        "z-index": 1
     }
 
     //Hover
@@ -297,18 +303,21 @@ let HoverEffectHandler = function ($scope, $) {
         "transition-duration": `${$eaelDurationHoverVal}ms`,
         "transition-delay": `${$eaelDelayHoverVal}ms`,
         "transition-timing-function": $eaelEasingHoverVal,
+        "z-index": 2
     };
 
-    $(hoverSelector).hover(
-        function() {
-            $(this).css(hoverStyles);
-        },
-        function() {
-        $(this).css(normalStyles);
-        }
-    );  
+    if (window.isEditMode && $enabledElementList.includes($scopeId) || !window.isEditMode && $hoverSelector.length) {
+        $hoverSelector.hover(
+            function () {
+                $(this).css(hoverStyles);
+            },
+            function () {
+                $(this).css(normalStyles);
+            }
+        );
 
-    $eaelContainer.css(normalStyles);
+        $hoverSelector.css(normalStyles);
+    }
 
     //Tilt Effect
     if( $eaelTilt === 'eael_tilt' ) {
@@ -326,7 +335,7 @@ let HoverEffectHandler = function ($scope, $) {
 }
 
 jQuery(window).on("elementor/frontend/init", function () {
-    if (ea.elementStatusCheck('eaelHoverEffect')) {
+    if (eael.elementStatusCheck('eaelHoverEffect')) {
         return false;
     }
     elementorFrontend.hooks.addAction(

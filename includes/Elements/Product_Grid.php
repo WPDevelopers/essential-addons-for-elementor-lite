@@ -3401,7 +3401,7 @@ class Product_Grid extends Widget_Base
                 if ( file_exists( $template ) ) {
 	                $settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
 
-                    if( $settings['post_type'] === 'source_archive' && is_archive() && $is_product_archive ){
+                    if( $settings['post_type'] === 'source_archive' && ( ( is_archive() && $is_product_archive ) || is_search() ) ){
                         global $wp_query;
                         $query = $wp_query;
                         $args  = $wp_query->query_vars;
@@ -3471,10 +3471,7 @@ class Product_Grid extends Widget_Base
                     $isotope_products.imagesLoaded().progress( function() {
                         $isotope_products.isotope('layout');
                     })
-
-                    $(window).on('resize', function() {
-                        $isotope_products.isotope('layout');
-                    });
+                    
                 }
             });
         </script>
