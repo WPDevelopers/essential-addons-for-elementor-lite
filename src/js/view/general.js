@@ -285,8 +285,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 
 		if (mode === 'edit') {
 			parent.window.$e.run('editor/documents/switch', {
-				id: parseInt(templateID),  // Switch back to the original document
-				mode: 'edit'  // You can use 'edit' mode here if you want to continue editing the original document
+				id: parseInt(templateID)  // Switch back to the original document
 			}).then(function () {
 				$this.data('mode', 'save');
 				$this.find('span').text('Save & Back');
