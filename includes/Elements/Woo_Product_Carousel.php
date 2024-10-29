@@ -680,10 +680,10 @@ class Woo_Product_Carousel extends Widget_Base {
         $this->add_control(
 			'enable_marquee',
 			[
-				'label'        => __( 'Enable Marquee', 'essential-addons-elementor' ),
+				'label'        => __( 'Enable Marquee', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => __( 'Yes', 'essential-addons-elementor' ),
-				'label_off'    => __( 'No', 'essential-addons-elementor' ),
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
 				'default'      => 'no',
 				'return_value' => 'yes',
 				'condition'    => [
