@@ -1066,10 +1066,10 @@ class Interactive_Circle extends Widget_Base {
 		}
 
 		?>
-        <div <?php echo $this->get_render_attribute_string( 'eael_interactive_circle_container' ); ?>>
+        <div <?php $this->print_render_attribute_string( 'eael_interactive_circle_container' ); ?>>
 			<?php if ( ( $settings['eael_interactive_circle_preset'] != 'eael-interactive-circle-preset-2' ) ) { ?>
-                <div <?php echo $this->get_render_attribute_string( 'eael_circle_wrapper' ); ?>>
-                    <div <?php echo $this->get_render_attribute_string( 'eael_circle_info' ); ?>>
+                <div <?php $this->print_render_attribute_string( 'eael_circle_wrapper' ); ?>>
+                    <div <?php $this->print_render_attribute_string( 'eael_circle_info' ); ?>>
                         <div class="eael-circle-inner">
 							<?php
 							foreach ( $settings['eael_interactive_circle_item'] as $index => $item ) :
@@ -1078,7 +1078,7 @@ class Interactive_Circle extends Widget_Base {
 								$is_active  = $item['eael_interactive_circle_default_active'] === 'yes' ? 'active' : '';
 								?>
                                 <div class="eael-circle-item elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
-                                    <div aria-controls="eael-interactive-<?php echo esc_attr( $item_count ); ?>" tabindex="0" class="eael-circle-btn <?php echo $is_active; ?>" id="eael-circle-item-<?php echo $item_count; ?>">
+                                    <div aria-controls="eael-interactive-<?php echo esc_attr( $item_count ); ?>" tabindex="0" class="eael-circle-btn <?php echo esc_attr( $is_active ); ?>" id="eael-circle-item-<?php echo esc_attr( $item_count ); ?>">
 										<?php if ( in_array( $settings['eael_interactive_circle_preset'], [ 'eael-interactive-circle-preset-3', 'eael-interactive-circle-preset-4'] ) ) { ?>
 										<div class="eael-circle-icon-shapes <?php echo esc_attr( $item_style_classic ); ?>">
 											<div class="eael-shape-1"></div>
@@ -1093,7 +1093,7 @@ class Interactive_Circle extends Widget_Base {
 													$this->add_link_attributes( 'interactive_circle_link_' . $index, $item['eael_interactive_circle_btn_link'] );
 												}
 											?>
-											<a <?php echo $this->get_render_attribute_string( 'interactive_circle_link_' . $index ); ?>>
+											<a <?php $this->print_render_attribute_string( 'interactive_circle_link_' . $index ); ?>>
 												<div class="eael-circle-btn-icon <?php echo esc_attr( $item_style_classic ); ?>">
 													<div class="eael-circle-icon-inner">
 														<?php
@@ -1127,9 +1127,11 @@ class Interactive_Circle extends Widget_Base {
 										<!-- End URL support -->
                                         
                                     </div>
-                                    <div id="eael-interactive-<?php echo esc_attr( $item_count ); ?>" aria-labelledby="eael-circle-item-<?php echo esc_attr( $item_count ); ?>" class="eael-circle-btn-content eael-circle-item-<?php echo $item_count . ' ' . $is_active; ?>">
+                                    <div id="eael-interactive-<?php echo esc_attr( $item_count ); ?>" aria-labelledby="eael-circle-item-<?php echo esc_attr( $item_count ); ?>" class="eael-circle-btn-content eael-circle-item-<?php echo esc_attr( $item_count . ' ' . $is_active ); ?>">
                                         <div class="eael-circle-content">
-											<?php echo wp_kses( $item['eael_interactive_circle_item_content'], Helper::eael_allowed_tags() ); ?>
+											<?php 
+											// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+											echo $this->parse_text_editor( $item['eael_interactive_circle_item_content'] ); ?>
                                         </div>
                                     </div>
                                 </div>
@@ -1142,16 +1144,16 @@ class Interactive_Circle extends Widget_Base {
 
 			<?php } else { ?>
 
-                <div <?php echo $this->get_render_attribute_string( 'eael_circle_wrapper' ); ?>>
+                <div <?php $this->print_render_attribute_string( 'eael_circle_wrapper' ); ?>>
                     <div class="eael-circle-info">
-                        <div class="eael-circle-inner" data-items="<?php echo $item_count; ?>">
+                        <div class="eael-circle-inner" data-items="<?php echo esc_attr( $item_count ); ?>">
 							<?php
 							foreach ( $settings['eael_interactive_circle_item'] as $index => $item ) :
 								$item_count = $index + 1;
 								$is_active  = $item['eael_interactive_circle_default_active'] === 'yes' ? 'active' : '';
 								?>
                                 <div class="eael-circle-item elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
-                                    <div aria-controls="eael-interactive-<?php echo esc_attr( $item_count ); ?>" tabindex="0" class="eael-circle-btn <?php echo $is_active; ?>" id="eael-circle-item-<?php echo $item_count; ?>">
+                                    <div aria-controls="eael-interactive-<?php echo esc_attr( $item_count ); ?>" tabindex="0" class="eael-circle-btn <?php echo esc_attr( $is_active ); ?>" id="eael-circle-item-<?php echo esc_attr( $item_count ); ?>">
                                         <div class="eael-circle-icon-shapes">
                                             <div class="eael-shape-1"></div>
                                             <div class="eael-shape-2"></div>
@@ -1164,7 +1166,7 @@ class Interactive_Circle extends Widget_Base {
 												$this->add_link_attributes( 'interactive_circle_link_' . $index, $item['eael_interactive_circle_btn_link'] );
 											}
 											?>
-											<a <?php echo $this->get_render_attribute_string( 'interactive_circle_link_' . $index ); ?>>
+											<a <?php $this->print_render_attribute_string( 'interactive_circle_link_' . $index ); ?>>
 												<div class="eael-circle-btn-icon">
 													<div class="eael-circle-btn-icon-inner">
 														<?php
@@ -1199,7 +1201,7 @@ class Interactive_Circle extends Widget_Base {
 										<!-- End URL support -->
 
                                     </div>
-                                    <div class="eael-circle-btn-content eael-circle-item-<?php echo $item_count . ' ' . $is_active; ?>">
+                                    <div class="eael-circle-btn-content eael-circle-item-<?php echo esc_attr( $item_count . ' ' . $is_active ); ?>">
                                         <div id="eael-interactive<?php echo esc_attr( $item_count ); ?>" aria-labelledby="eael-circle-item-<?php echo esc_attr( $item_count ); ?>" class="eael-circle-content">
 											<?php if ( $show_content_icon ) : ?>
 												<div class="eael-circle-content-icon">

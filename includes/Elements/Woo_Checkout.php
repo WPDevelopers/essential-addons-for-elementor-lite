@@ -1261,21 +1261,8 @@ class Woo_Checkout extends Widget_Base {
 
 		$this->end_controls_tabs();
 
-		$this->add_control(
-			'ea_woo_checkout_order_review_footer_border_color',
-			[
-				'label' => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#404040',
-				'selectors' => [
-					'{{WRAPPER}} .ea-woo-checkout-order-review .footer-content > div' => 'border-color: {{VALUE}};',
-					'{{WRAPPER}} .ea-woo-checkout-order-review .footer-content' => 'border-color: {{VALUE}};',
-				],
-			]
-		);
-
 		$this->add_group_control(
-			\Elementor\Group_Control_Border::get_type(),
+			Group_Control_Border::get_type(),
 			[
 				'name'      => 'ea_woo_checkout_order_review_footer_border',
 				'selector'  => '{{WRAPPER}} .ea-woo-checkout-order-review .footer-content',
