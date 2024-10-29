@@ -75,7 +75,6 @@ $theme-preset4: #ec3b75;
 
     .eael-woo-product-carousel.swiper-8 {
         &:not(.swiper-initialized) .eael-product-carousel {
-            width: 350px;
             height: 450px
         }
     }
@@ -88,6 +87,16 @@ $theme-preset4: #ec3b75;
     }
     
     .eael-woo-product-carousel{
+        &:not(.swiper-initialized){
+            @for $i from 1 through 6 {
+                &[data-items="#{$i}"] {
+                    .swiper-wrapper.products {
+                        display: grid;
+                        grid-template-columns: repeat($i, 1fr);
+                    }
+                }
+            }
+        }
         .eael-product-carousel {
             direction: ltr;
         }
