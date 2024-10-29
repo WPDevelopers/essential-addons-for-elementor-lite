@@ -682,6 +682,18 @@ $config = [
                 ],
             ],
         ],
+        'eael-breadcrumbs' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Breadcrumbs',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/breadcrumbs.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
         'contact-form-7' => [
             'class' => '\Essential_Addons_Elementor\Elements\Contact_Form_7',
             'dependency' => [

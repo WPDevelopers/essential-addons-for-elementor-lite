@@ -734,6 +734,10 @@ class WPDeveloper_Setup_Wizard {
 						'preferences' => 'advance',
 					],
 					[
+						'key'         => 'eael-breadcrumbs',
+						'title'       => __( 'Breadcrumbs', 'essential-addons-for-elementor-lite' ),
+					],
+					[
 						'key'   => 'woo-product-carousel',
 						'title' => __( 'Woo Product Carousel', 'essential-addons-for-elementor-lite' ),
 					],
