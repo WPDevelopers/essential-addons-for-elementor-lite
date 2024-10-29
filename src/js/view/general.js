@@ -298,7 +298,8 @@ jQuery(window).on("elementor/frontend/init", function () {
 			parent.window.$e.internal('panel/state-loading');
 			parent.window.$e.run('editor/documents/switch', {
 				id: parseInt(pageID),  // Switch back to the original document
-				mode: 'save'  // You can use 'edit' mode here if you want to continue editing the original document
+				mode: 'save',  // You can use 'edit' mode here if you want to continue editing the original document
+				shouldScroll: false
 			}).then(function () {
 				parent.window.$e.internal('panel/state-ready');
 				$this.data('mode', 'edit');
