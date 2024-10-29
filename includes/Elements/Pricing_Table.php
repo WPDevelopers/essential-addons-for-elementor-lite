@@ -391,9 +391,18 @@ class Pricing_Table extends Widget_Base
         );
 
         $repeater->add_control(
+			'eael_pricing_item_tooltip_heading',
+			[
+				'label'     => esc_html__( 'Tooltip', 'textdomain' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+        $repeater->add_control(
             'eael_pricing_item_tooltip',
             [
-                'label'        => esc_html__( 'Enable Tooltip?', 'essential-addons-for-elementor-lite' ),
+                'label'        => esc_html__( 'Enable', 'essential-addons-for-elementor-lite' ),
                 'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default'      => false,
@@ -403,7 +412,7 @@ class Pricing_Table extends Widget_Base
         $repeater->add_control(
             'eael_pricing_item_tooltip_content',
             [
-                'label'     => esc_html__( 'Tooltip Content', 'essential-addons-for-elementor-lite' ),
+                'label'     => esc_html__( 'Content', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::TEXTAREA,
                 'dynamic'   => ['active' => true],
                 'default'   => __( "I'm a awesome tooltip!!", 'essential-addons-for-elementor-lite' ),
@@ -416,7 +425,7 @@ class Pricing_Table extends Widget_Base
         $repeater->add_control(
             'eael_pricing_item_tooltip_side',
             [
-                'label'     => esc_html__( 'Tooltip Side', 'essential-addons-for-elementor-lite' ),
+                'label'     => esc_html__( 'Appearance', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::CHOOSE,
                 'options'   => [
                     'left'   => [
@@ -446,8 +455,8 @@ class Pricing_Table extends Widget_Base
         $repeater->add_control(
             'eael_pricing_item_tooltip_trigger',
             [
-                'label'     => esc_html__( 'Tooltip Trigger', 'essential-addons-for-elementor-lite' ),
-                'type'      => Controls_Manager::SELECT2,
+                'label'     => esc_html__( 'Trigger', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::SELECT,
                 'options'   => [
                     'hover' => __( 'Hover', 'essential-addons-for-elementor-lite' ),
                     'click' => __( 'Click', 'essential-addons-for-elementor-lite' ),
@@ -462,8 +471,8 @@ class Pricing_Table extends Widget_Base
         $repeater->add_control(
             'eael_pricing_item_tooltip_animation',
             [
-                'label'     => esc_html__( 'Tooltip Animation', 'essential-addons-for-elementor-lite' ),
-                'type'      => Controls_Manager::SELECT2,
+                'label'     => esc_html__( 'Animation Type', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::SELECT,
                 'options'   => [
                     'fade'  => __( 'Fade', 'essential-addons-for-elementor-lite' ),
                     'grow'  => __( 'Grow', 'essential-addons-for-elementor-lite' ),
@@ -496,8 +505,10 @@ class Pricing_Table extends Widget_Base
         $repeater->add_control(
             'eael_pricing_table_toolip_arrow',
             [
-                'label'        => esc_html__( 'Tooltip Arrow', 'essential-addons-for-elementor-lite' ),
+                'label'        => esc_html__( 'Arrow', 'essential-addons-for-elementor-lite' ),
                 'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
                 'return_value' => 'yes',
                 'default'      => 'yes',
                 'condition'    => [
@@ -509,8 +520,8 @@ class Pricing_Table extends Widget_Base
         $repeater->add_control(
             'eael_pricing_item_tooltip_theme',
             [
-                'label'     => esc_html__( 'Tooltip Theme', 'essential-addons-for-elementor-lite' ),
-                'type'      => Controls_Manager::SELECT2,
+                'label'     => esc_html__( 'Theme', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::SELECT,
                 'options'   => [
                     'default'    => __( 'Default', 'essential-addons-for-elementor-lite' ),
                     'noir'       => __( 'Noir', 'essential-addons-for-elementor-lite' ),
