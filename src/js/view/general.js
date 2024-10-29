@@ -284,6 +284,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 			mode = $this.data('mode');
 
 		if (mode === 'edit') {
+			parent.window.$e.internal('panel/state-loading');
 			parent.window.$e.run('editor/documents/switch', {
 				id: parseInt(templateID)  // Switch back to the original document
 			}).then(function () {
@@ -291,13 +292,17 @@ jQuery(window).on("elementor/frontend/init", function () {
 				$this.find('span').text('Save & Back');
 				$this.find('i').addClass('eicon-arrow-left').removeClass('eicon-edit');
 				$this.closest('.eael-onpage-edit-template-wrapper').addClass('eael-onpage-edit-activate').parent().addClass('eael-widget-otea-active');
+				parent.window.$e.internal('panel/state-ready');
 			});
 		} else if (mode === 'save') {
+			parent.window.$e.internal('panel/state-loading');
 			parent.window.$e.run('editor/documents/switch', {
 				id: parseInt(pageID),  // Switch back to the original document
 				mode: 'save'  // You can use 'edit' mode here if you want to continue editing the original document
+			}).then(function () {
+				parent.window.$e.internal('panel/state-ready');
+				$this.data('mode', 'edit');
 			});
-			$this.data('mode', 'edit');
 		}
 	});
 })(jQuery);
