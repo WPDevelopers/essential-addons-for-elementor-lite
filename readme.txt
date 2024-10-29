@@ -4,7 +4,7 @@ Tags: elementor, elements, elementor addon, elementor widget, woocommerce elemen
 Requires at least: 5.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 6.0.7
+Stable tag: 6.0.8
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -298,6 +298,18 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.0.8 - 27/10/2024 =
+
+- Fixed: EA Pricing Table | Font weight changes while tooltip is used
+- Fixed: EA Flip Box | Flip box click Not working on frontend when using more than one flip boxes with saved templates
+- Fixed: EA Filterable Gallery | Not working while being used as shortcode from site review plugin
+- Fixed: EA Scroll To Top | Global feature isn't working after editing the page
+- Fixed: EA Table of Contents | Undefined array key
+- Fixed: EA Pricing Table | Dynamic tag for button is not working
+- Fixed: Saved Template design breaks due to an issue with element caching
+- Fixed: EA Woo Product Gallery | Show extra cart button on enabling woocommerce loop hooks
+- Few minor bug fixes & improvements
 
 = 6.0.7 - 09/10/2024 =
 
