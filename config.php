@@ -658,6 +658,18 @@ $config = [
                 ],
             ],
         ],
+        'breadcrumbs' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Breadcrumbs',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/breadcrumbs.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
         'woo-product-images' => [
             'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Images',
             'dependency' => [
@@ -676,18 +688,6 @@ $config = [
                 'css' => [
                     [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/woo-product-add-to-cart.min.css',
-                        'type' => 'self',
-                        'context' => 'view',
-                    ],
-                ],
-            ],
-        ],
-        'eael-breadcrumbs' => [
-            'class' => '\Essential_Addons_Elementor\Elements\Breadcrumbs',
-            'dependency' => [
-                'css' => [
-                    [
-                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/breadcrumbs.min.css',
                         'type' => 'self',
                         'context' => 'view',
                     ],

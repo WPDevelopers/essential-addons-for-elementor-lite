@@ -818,8 +818,8 @@ trait Admin {
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'advanced-search' ) )
 						    ],
-							'eael-breadcrumbs'      => [
-								'key'         => 'eael-breadcrumbs',
+							'breadcrumbs'      => [
+								'key'         => 'breadcrumbs',
 								'title'       => __( 'Breadcrumbs', 'essential-addons-for-elementor-lite' ),
 								'demo_link'   => 'https://essential-addons.com/eael-breadcrumbs/',
 								'doc_link'    => 'https://essential-addons.com/docs/eael-breadcrumbs/',
