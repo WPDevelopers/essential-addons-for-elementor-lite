@@ -98,6 +98,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
             }
 
 			$product_data = apply_filters( 'eael/product-grid/content/reordering', $product_data, $settings, $product );
+			unset( $product_data['id'] );
             if ( ! empty( $product_data ) ) {
 	            foreach ( $product_data as $content ) {
 		            if ( ! empty( $content ) ) {
@@ -175,6 +176,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
         <?php
 
         $product_data = apply_filters( 'eael/product-grid/content/reordering', $product_data, $settings, $product );
+		unset( $product_data['id'] );
         if ( ! empty( $product_data ) ) {
 	        foreach ( $product_data as $content ) {
 		        if ( ! empty( $content ) ) {
@@ -341,6 +343,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
                     }
 
                     $product_data = apply_filters( 'eael/product-grid/content/reordering', $new_product_data, $settings, $product );
+					unset( $product_data['id'] );
                     if ( ! empty( $product_data ) ) {
 	                    foreach ( $product_data as $content ) {
 		                    if ( ! empty( $content ) ) {
@@ -423,6 +426,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 
                     $_product_data['title'] = $product_data['title'];
                     $product_data = apply_filters( 'eael/product-grid/content/reordering', $_product_data, $settings, $product );
+					unset( $product_data['id'] );
                     if ( ! empty( $product_data ) ) {
 	                    foreach ( $product_data as $content ) {
 		                    if ( ! empty( $content ) ) {
@@ -527,6 +531,7 @@ if ( $grid_style_preset == 'eael-product-simple' || $grid_style_preset == 'eael-
 							<p>' . wp_trim_words( strip_shortcodes( get_the_excerpt() ), $settings['eael_product_grid_excerpt_length'], $settings['eael_product_grid_excerpt_expanison_indicator'] ) . '</p></div>' : '';
                     }
                     $product_data = apply_filters( 'eael/product-grid/content/reordering', $_product_data, $settings, $product );
+					unset( $product_data['id'] );
                     if ( ! empty( $product_data ) ) {
 	                    foreach ( $product_data as $content ) {
 		                    if ( ! empty( $content ) ) {
