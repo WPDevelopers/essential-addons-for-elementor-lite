@@ -61,6 +61,140 @@ class Breadcrumbs extends Widget_Base {
 				],
 			]
 		);
+
+      $this->add_control(
+			'breadcrumb_home',
+			[
+				'label'       => esc_html__( 'Label For Home', 'essential-addons-for-elementor-lite' ),
+				'type'        => \Elementor\Controls_Manager::TEXT,
+				'default'     => esc_html__( 'Default title', 'essential-addons-for-elementor-lite' ),
+				'placeholder' => esc_html__( 'Type your title here', 'essential-addons-for-elementor-lite' ),
+            'ai'  => [
+					'active' => false,
+				],
+			]
+		);
+
+      $this->add_control(
+			'breadcrumb_prefix_switch',
+			[
+				'label'        => esc_html__( 'Show Prefix', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
+
+      $this->start_controls_tabs(
+			'breadcrumb_prefix_tabs',
+         [
+            'condition' => [
+               'breadcrumb_prefix_switch' => 'yes',
+            ],
+         ]
+		);
+
+		$this->start_controls_tab(
+			'breadcrumb_prefix_iocn_tab',
+			[
+				'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+      $this->add_control(
+			'breadcrumb_prefix_iocn',
+			[
+				'label'   => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+				'type'    => \Elementor\Controls_Manager::ICONS,
+				'default' => [
+					'value'   => 'fas fa-circle',
+					'library' => 'fa-solid',
+				],
+			]
+		);
+
+      $this->end_controls_tab();
+
+      $this->start_controls_tab(
+			'breadcrumb_prefix_text_tab',
+			[
+				'label' => esc_html__( 'Text', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+      $this->add_control(
+			'breadcrumb_prefix_text',
+			[
+				'label'       => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
+				'type'        => \Elementor\Controls_Manager::TEXT,
+				'default'     => esc_html__( 'Default title', 'essential-addons-for-elementor-lite' ),
+				'placeholder' => esc_html__( 'Type your title here', 'essential-addons-for-elementor-lite' ),
+            'ai'  => [
+					'active' => false,
+				],
+			]
+		);
+      $this->end_controls_tab();
+      $this->end_controls_tabs();
+
+      //
+      $this->add_control(
+			'more_options',
+			[
+				'label'     => esc_html__( 'Separator Type', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+      $this->start_controls_tabs(
+			'breadcrumb_separator_tab',
+		);
+
+		$this->start_controls_tab(
+			'breadcrumb_separator_iocn_tab',
+			[
+				'label' => esc_html__( 'Separator Icon', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+      $this->add_control(
+			'breadcrumb_separator_icon',
+			[
+				'label'   => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+				'type'    => \Elementor\Controls_Manager::ICONS,
+				'default' => [
+					'value'   => 'fas fa-circle',
+					'library' => 'fa-solid',
+				],
+			]
+		);
+
+      $this->end_controls_tab();
+
+      $this->start_controls_tab(
+			'breadcrumb_separator_text_tab',
+			[
+				'label' => esc_html__( 'Separator Text', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+      $this->add_control(
+			'breadcrumb_separator_text',
+			[
+				'label'       => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
+				'type'        => \Elementor\Controls_Manager::TEXT,
+				'default'     => esc_html__( 'Default title', 'essential-addons-for-elementor-lite' ),
+				'placeholder' => esc_html__( 'Type your title here', 'essential-addons-for-elementor-lite' ),
+            'ai'  => [
+					'active' => false,
+				],
+			]
+		);
+      $this->end_controls_tab();
+      $this->end_controls_tabs();
       
       $this->end_controls_section();
    }
@@ -86,15 +220,16 @@ class Breadcrumbs extends Widget_Base {
    }
 
    protected function render() {
-      ?>
-      <div class="breadcrumb-wrap">
-      <ol class="breadcrumb">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Library</a></li>
-            <li class="active">Data</li>
-      </ol>
-      </div>
-      <?php
+      $args = array(
+         'delimiter'   => '&nbsp;&#47;&nbsp;',
+         'wrap_before' => '<nav class="woocommerce-breadcrumb" aria-label="Breadcrumb">',
+         'wrap_after'  => '</nav>',
+         'before'      => '',
+         'after'       => '',
+         'home'        => _x( 'Home', 'breadcrumb', 'essential-addons-for-elementor-lite' ),
+      ); 
+      
+      woocommerce_breadcrumb( $args );
    }
 
 }
