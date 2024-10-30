@@ -92,7 +92,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 		if (!isEditMode) {
 			var $gallery         = $(".eael-filter-gallery-container", $scope),
 				$settings        = $gallery.data("settings"),
-				fg_items 		 =  $gallery.data("gallery-items"),
+				fg_items 		 = JSON.parse( atob( $gallery.data("gallery-items") ) ),
 				$layout_mode     = $settings.grid_style === "masonry" ? "masonry" : "fitRows",
 				$gallery_enabled = ($settings.gallery_enabled === "yes"),
 				$images_per_page = $gallery.data("images-per-page"),
@@ -151,14 +151,16 @@ jQuery(window).on("elementor/frontend/init", function () {
 				iframe: {
 					markup: `<div class="mfp-iframe-scaler">
 								<div class="mfp-close"></div>
-								<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>
+								<iframe class="mfp-iframe eael-video-gallery-on" frameborder="0" allowfullscreen></iframe>
 								<div class="mfp-title eael-privacy-message"></div>
+								<div class="mfp-bottom-bar">
+								<div class="mfp-counter"></div>
 							</div>`
 				},
 				callbacks: {
 					markupParse: function (template, values, item) {
 						if (item.el.attr('title') !== "") {
-							values.title = DOMPurify.sanitize(item.el.attr('title'));
+							values.title = item.el.attr('title');
 						}
 					},
 					open: function() {

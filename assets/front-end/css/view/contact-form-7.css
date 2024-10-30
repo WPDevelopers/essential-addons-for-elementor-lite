@@ -1,5 +1,5 @@
 .eael-contact-form-align-default {
-  display: inline-block;
+  display: block;
   text-align: left;
 }
 
@@ -45,7 +45,6 @@
   transition: border linear 0.2s, -webkit-box-shadow linear 0.2s;
   transition: border linear 0.2s, box-shadow linear 0.2s;
   transition: border linear 0.2s, box-shadow linear 0.2s, -webkit-box-shadow linear 0.2s;
-  width: auto;
   max-width: 100%;
 }
 

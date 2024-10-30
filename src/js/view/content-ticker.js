@@ -99,7 +99,7 @@ eael.hooks.addAction("init", "ea", () => {
         };
     }
 
-    function autoPlayManager( element, options, event ){
+    function autoPlayManager( element, event, options ){
         if (options.autoplay.delay === 0) {
             event?.autoplay?.stop();
         }

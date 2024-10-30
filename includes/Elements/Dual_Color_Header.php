@@ -909,87 +909,103 @@ class Dual_Color_Header extends Widget_Base
 			$separator_markup .= '<span class="separator-one"></span>
 			<span class="separator-two"></span>';
 		}
-		$separator_markup .= '</div>'; ?>
+		$separator_markup .= '</div>'; 
+		
+		$title_tag = Helper::eael_validate_html_tag( $settings['title_tag'] );
+		$title_html = '<' . $title_tag . ' class="title">';
+		$title_html .= '<span';
+		if( $has_color_first_and_second ){
+			$title_html .= ' style="' . $gradient_style . '" ';
+		}
+		$title_html .= ' class="lead ' . $settings['eael_dch_dual_color_selector'] . '">' . $settings['eael_dch_first_title'] . '</span>';
+		$title_html .= ' <span>' . $settings['eael_dch_last_title'] . '</span>';
+		$title_html .= '</' . $title_tag . '>';
 
-		<?php if ('dch-default' == $settings['eael_dch_type']) : ?>
-        <div class="eael-dual-header">
-		<?php echo ($settings['eael_dch_separator_position'] === 'before_title' ? $separator_markup : ''); ?>
-		<<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?> class="title">
-			<span <?php if ( $has_color_first_and_second ) : ?> style="<?php echo esc_attr( $gradient_style ); ?>" <?php endif; ?> class="lead <?php echo esc_attr( $settings['eael_dch_dual_color_selector'] ); ?>"><?php esc_html_e($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span>
-			<span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span>
-		</<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?>>
-		<?php echo ($settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
-		<span class="subtext"><?php echo Helper::eael_wp_kses( $settings['eael_dch_subtext'] ); ?></span>
-		<?php if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
-			<?php if ($icon_is_new || $icon_migrated) {
-				echo '<span class="eael-dch-svg-icon">';
-				Icons_Manager::render_icon( $settings['eael_dch_icon_new'], [ 'aria-hidden' => 'true' ] );
-				echo '</span>';
+		if ('dch-default' == $settings['eael_dch_type']) : ?>
+			<div class="eael-dual-header">
+				<?php 
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo ($settings['eael_dch_separator_position'] === 'before_title' ? $separator_markup : '');
+				echo wp_kses( $title_html, Helper::eael_allowed_tags() );
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo ( $settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
+				<span class="subtext"><?php
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo $this->parse_text_editor( $settings['eael_dch_subtext'] ); ?></span>
+				<?php if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
+					<?php if ($icon_is_new || $icon_migrated) {
+						echo '<span class="eael-dch-svg-icon">';
+						Icons_Manager::render_icon( $settings['eael_dch_icon_new'], [ 'aria-hidden' => 'true' ] );
+						echo '</span>';
 
-             } else { ?>
-				<i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
-			<?php } ?>
-		<?php endif; ?>
-		</div>
-	<?php endif; ?>
+					} else { ?>
+						<i class="<?php echo esc_attr( $settings['eael_dch_icon'] ); ?>"></i>
+					<?php } ?>
+				<?php endif; #if ('yes' == $settings['eael_show_dch_icon_content']) ?>
+			</div>
 
-		<?php if ('dch-icon-on-top' == $settings['eael_dch_type']) : ?>
-		<div class="eael-dual-header">
-		<?php if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
-			<?php if ($icon_is_new || $icon_migrated) {
-				echo '<span class="eael-dch-svg-icon">';
-				Icons_Manager::render_icon( $settings['eael_dch_icon_new'], [ 'aria-hidden' => 'true' ] );
-				echo '</span>';
+		<?php elseif ('dch-icon-on-top' == $settings['eael_dch_type']) : ?>
+			<div class="eael-dual-header">
+				<?php if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
+					<?php if ($icon_is_new || $icon_migrated) {
+						echo '<span class="eael-dch-svg-icon">';
+						Icons_Manager::render_icon( $settings['eael_dch_icon_new'], [ 'aria-hidden' => 'true' ] );
+						echo '</span>';
 
-             } else { ?>
-				<i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
-			<?php } ?>
-		<?php endif; ?>
-		<?php echo ($settings['eael_dch_separator_position'] === 'before_title' ? $separator_markup : ''); ?>
-		<<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?> class="title"><span style="<?php echo esc_attr( $gradient_style ); ?>" class="lead <?php echo esc_attr( $settings['eael_dch_dual_color_selector'] ); ?>"><?php esc_html_e($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?>>
-		<?php echo ($settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
-		<span class="subtext"><?php echo Helper::eael_wp_kses( $settings['eael_dch_subtext'] ); ?></span>
-		</div>
-	<?php endif; ?>
+					} else { ?>
+						<i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
+					<?php } ?>
+				<?php endif; #if ('yes' == $settings['eael_show_dch_icon_content']) ?>
+				<?php 
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo ($settings['eael_dch_separator_position'] === 'before_title' ? $separator_markup : ''); 
+				echo wp_kses( $title_html, Helper::eael_allowed_tags() );
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo ($settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
+				<span class="subtext"><?php echo wp_kses( $settings['eael_dch_subtext'], Helper::eael_allowed_tags() ); ?></span>
+			</div>
+		<?php elseif ('dch-icon-subtext-on-top' == $settings['eael_dch_type']) : ?>
+			<div class="eael-dual-header">
+				<?php if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
+					<?php if ($icon_is_new || $icon_migrated) {
+						echo '<span class="eael-dch-svg-icon">';
+						Icons_Manager::render_icon( $settings['eael_dch_icon_new'], [ 'aria-hidden' => 'true' ] );
+						echo '</span>';
 
-		<?php if ('dch-icon-subtext-on-top' == $settings['eael_dch_type']) : ?>
-		<div class="eael-dual-header">
-		<?php if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
-			<?php if ($icon_is_new || $icon_migrated) {
-				echo '<span class="eael-dch-svg-icon">';
-				Icons_Manager::render_icon( $settings['eael_dch_icon_new'], [ 'aria-hidden' => 'true' ] );
-				echo '</span>';
+					} else { ?>
+						<i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
+					<?php } ?>
+				<?php endif; #if ('yes' == $settings['eael_show_dch_icon_content']) ?>
+				<span class="subtext"><?php echo wp_kses( $settings['eael_dch_subtext'], Helper::eael_allowed_tags() ); ?></span>
+				<?php 
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo ($settings['eael_dch_separator_position'] === 'before_title' ? $separator_markup : ''); 
+				echo wp_kses( $title_html, Helper::eael_allowed_tags() );
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo ($settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : '');
+				?>
+			</div>
+		<?php elseif ('dch-subtext-on-top' == $settings['eael_dch_type']) : ?>
+			<div class="eael-dual-header">
+				<span class="subtext"><?php echo wp_kses( $settings['eael_dch_subtext'], Helper::eael_allowed_tags() ); ?></span>
+				<?php
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo ($settings['eael_dch_separator_position'] === 'before_title' ? $separator_markup : '');
+				echo wp_kses( $title_html, Helper::eael_allowed_tags() ); 
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo ($settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : '');
+				?>
+				<?php if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
+					<?php if ($icon_is_new || $icon_migrated) {
+						echo '<span class="eael-dch-svg-icon">';
+						Icons_Manager::render_icon( $settings['eael_dch_icon_new'], [ 'aria-hidden' => 'true' ] );
+						echo '</span>';
 
-             } else { ?>
-				<i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
-			<?php } ?>
-		<?php endif; ?>
-		<span class="subtext"><?php echo Helper::eael_wp_kses( $settings['eael_dch_subtext'] ); ?></span>
-		<?php echo ($settings['eael_dch_separator_position'] === 'before_title' ? $separator_markup : ''); ?>
-		<<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?> class="title"><span style="<?php echo esc_attr( $gradient_style ); ?>" class="lead <?php echo esc_attr( $settings['eael_dch_dual_color_selector'] ); ?>"><?php esc_html_e($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?>>
-		<?php echo ($settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
-		</div>
-	<?php endif; ?>
-
-		<?php if ('dch-subtext-on-top' == $settings['eael_dch_type']) : ?>
-		<div class="eael-dual-header">
-		<span class="subtext"><?php echo Helper::eael_wp_kses( $settings['eael_dch_subtext'] ); ?></span>
-		<?php echo ($settings['eael_dch_separator_position'] === 'before_title' ? $separator_markup : ''); ?>
-		<<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?> class="title"><span style="<?php echo esc_attr( $gradient_style ); ?>" class="lead <?php echo esc_attr( $settings['eael_dch_dual_color_selector'] ); ?>"><?php esc_html_e($settings['eael_dch_first_title'], 'essential-addons-for-elementor-lite'); ?></span> <span><?php esc_html_e($settings['eael_dch_last_title'], 'essential-addons-for-elementor-lite'); ?></span></<?php echo Helper::eael_validate_html_tag($settings['title_tag']); ?>>
-		<?php echo ($settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
-		<?php if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
-			<?php if ($icon_is_new || $icon_migrated) {
-				echo '<span class="eael-dch-svg-icon">';
-				Icons_Manager::render_icon( $settings['eael_dch_icon_new'], [ 'aria-hidden' => 'true' ] );
-				echo '</span>';
-
-             } else { ?>
-				<i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
-			<?php } ?>
-		<?php endif; ?>
-		</div>
-	<?php endif; ?>
-
-		<?php
+					} else { ?>
+						<i class="<?php echo esc_attr($settings['eael_dch_icon']); ?>"></i>
+					<?php } ?>
+				<?php endif; #if ('yes' == $settings['eael_show_dch_icon_content']) ?>
+			</div>
+		<?php endif; 
 	}
 }

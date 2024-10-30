@@ -1261,21 +1261,8 @@ class Woo_Checkout extends Widget_Base {
 
 		$this->end_controls_tabs();
 
-		$this->add_control(
-			'ea_woo_checkout_order_review_footer_border_color',
-			[
-				'label' => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#404040',
-				'selectors' => [
-					'{{WRAPPER}} .ea-woo-checkout-order-review .footer-content > div' => 'border-color: {{VALUE}};',
-					'{{WRAPPER}} .ea-woo-checkout-order-review .footer-content' => 'border-color: {{VALUE}};',
-				],
-			]
-		);
-
 		$this->add_group_control(
-			\Elementor\Group_Control_Border::get_type(),
+			Group_Control_Border::get_type(),
 			[
 				'name'      => 'ea_woo_checkout_order_review_footer_border',
 				'selector'  => '{{WRAPPER}} .ea-woo-checkout-order-review .footer-content',
@@ -2499,10 +2486,30 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#443e6d',
 				'selectors' => [
-					'{{WRAPPER}} #customer_details input, {{WRAPPER}} #customer_details select, {{WRAPPER}} #customer_details textarea' => 'color: {{VALUE}};',
+					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper input' => 'color: {{VALUE}};', 
+					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper select' => 'color: {{VALUE}};', 
+					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper textarea' => 'color: {{VALUE}};',
+					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper .select2-selection span' => 'color: {{VALUE}};',
 				],
 			]
 		);
+
+		$this->add_control(
+			'ea_woo_checkout_customer_details_field_bg_color',
+			[
+				'label' => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#fff',
+				'selectors' => [
+					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper input' => 'background: {{VALUE}};',
+					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper select' => 'background: {{VALUE}};',
+					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper textarea' => 'background: {{VALUE}};',
+					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper .select2-selection' => 'background: {{VALUE}};',
+				],
+			]
+		);
+
+
 		$this->start_controls_tabs( 'ea_woo_checkout_customer_details_field_tabs' );
 
 		$this->start_controls_tab( 'ea_woo_checkout_customer_details_field_tab_normal', [ 'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite' ) ] );

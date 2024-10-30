@@ -1,14 +1,14 @@
 === Essential Addons for Elementor – Best Elementor Addon, Templates, Widgets, Kits & WooCommerce Builders ===
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk, himadree12
-Tags: elementor, elements, woocommerce, elementor addon, elementor widget
+Tags: elementor, elements, elementor addon, elementor widget, woocommerce elementor
 Requires at least: 5.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 6.0.4
+Stable tag: 6.0.8
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-Most Used Elementor addon, an advanced elements library for Elementor web builder with 100+ powerful widgets & extensions with WooCommerce builder.
+The Essential plugin you install after Elementor! Packed with 100+ stunning elements like Data Table, Event Calendar, Filterable Gallery, WooCommerce.
 
 == Description ==
 
@@ -299,6 +299,64 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+= 6.0.8 - 27/10/2024 =
+
+- Fixed: EA Pricing Table | Font weight changes while tooltip is used
+- Fixed: EA Flip Box | Flip box click Not working on frontend when using more than one flip boxes with saved templates
+- Fixed: EA Filterable Gallery | Not working while being used as shortcode from site review plugin
+- Fixed: EA Scroll To Top | Global feature isn't working after editing the page
+- Fixed: EA Table of Contents | Undefined array key
+- Fixed: EA Pricing Table | Dynamic tag for button is not working
+- Fixed: Saved Template design breaks due to an issue with element caching
+- Fixed: EA Woo Product Gallery | Show extra cart button on enabling woocommerce loop hooks
+- Few minor bug fixes & improvements
+
+= 6.0.7 - 09/10/2024 =
+
+- Fixed: EA Advanced Tabs | While being hovered or active, the tab shows green border
+- Fixed: EA Woo Cart | Style 2 - Remove product button size increase or decrease is not working for mobile
+- Fixed: EA Contact form 7 | Form width doesn't change
+- Fixed: EA Woo Product Grid | Search results isn't showing while being used as Search result template
+- Fixed: EA Advanced Data Table | Sorting is not working
+- Fixed: EA Advanced Tabs | JS compatibility issue
+- Fixed: EA Advanced Data Table | Images are not showing
+- Fixed: EA Advanced Tabs | Feature List as a saved template is broken
+- Few minor bug fixes & improvements
+
+
+= 6.0.6 - 29/09/2024 =
+
+- Improved: EA Filterable Gallery | Pagination on video gallery
+- Improved: EA Woo Product Carousel | Added Marquee support
+- Improved: EA Wrapper Link | Add enable and disable option for traditional link
+- Improved: EA Woo Product Carousel | Add option to select items count on slide
+- Improved: EA Table of Contents | Position & Color
+- Improved: Security enhancements
+- Improved: EA Woo Checkout | Need an option to change Input field background color
+- Improved: EA Interactive Circle | Interactive Circle content icon not displaying.
+- Improved: EA Post Grid | Sticky posts visible at first
+- Fixed: EA Flip Box | Purple Color Overlay Issue
+- Fixed: EA Filterable Gallery | Field link not translatable with WPML
+- Fixed: EA Login/Register Form | Absence of message validation
+- Fixed: EA Advanced Tabs | Accessibility Issue, Screen Reader Focus Limited to First Tab
+- Few minor bug fixes & improvements
+
+= 6.0.5 - 18/09/2024 =
+
+- Improved: EA Flip Box | UI for mobile devices
+- Improved: EA Filterable Gallery | Added Overlay for the video gallery
+- Improved: EA Woo Product Gallery | Added Archive Product Support for Product Category Page
+- Improved: EA Woo Product Gallery | Added support to Turn off secondary image on hover for mobile
+- Fixed: Animation conflicting issue with Elementor
+- Fixed: EA Advanced Accordion | Conflict with Elementor 3.24.0
+- Fixed: EA Woo Product List | HTML Tags Support for Product Excerpts
+- Fixed: EA Woo Product Carousel | Added compatibility for Astra theme
+- Fixed: EA Checkout | Conflict with USPS Shipping Method for WooCommerce
+- Fixed: EA Countdown | Expiration issue with Saved Templates
+- Fixed: EA Login Register Form | Warning message on reset password
+- Fixed: EA Interactive Circle | UI issue when Scrolling
+- Few minor bug fixes & improvements
+
 = 6.0.4 - 09/09/2024 =
 
 - Improved: Security enchancements in EA Fancy Chart & EA Filterably Gallery widgets
@@ -333,7 +391,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Fixed: EA Filterable Gallery | "Load More" button shows on those filters which doesn't have any items and less items
 - Fixed: EA Interactive Circle | Add URL support for interactive items
 - Fixed: EA Hover Interactions | Hover Interactions does not work on the front-end
-- Fixed: EA Dashboard | Update CSS Print Method link 
+- Fixed: EA Dashboard | Update CSS Print Method link
 - Fixed: EA Post Grid | After Load More the terms are not displayed with Style 3
 - Fixed: EA Flip Box | Add overlay for the background image
 - Fixed: EA Woo Product Carousel | Carousel disappears when using Botiga theme
@@ -341,7 +399,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Fixed: EA Scroll To Top | Scroll To Top icon doesn't show
 - Fixed: EA WPForms | Submit button hover color stays grey
 - Fixed: EA Filterable Gallery | Updated label to "Notice" on display content notice
-- Fixed: EA NFT Gallery | Not working 
+- Fixed: EA NFT Gallery | Not working
 - Improved: EA Dual Color Heading | Vulnerable to Cross Site Scripting (XSS)
 - Improved: EA Woo Checkout | EA Woo Checkout is missing some styling options
 - Improved: EA Wrapper link | Elementor popup doesn't work on wrapper link
