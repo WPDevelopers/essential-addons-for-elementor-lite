@@ -35,6 +35,9 @@ class Breadcrumbs extends Widget_Base {
       $this->eael_breadcrumb_general();
       //Style Section
       $this->eael_breadcrumb_style();
+
+      //
+      $this->eael_breadcrumb_separator_style();
    }
 
    protected function eael_breadcrumb_general() {
@@ -211,6 +214,76 @@ class Breadcrumbs extends Widget_Base {
 			[
 				'label' => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
 				'type'  => \Elementor\Controls_Manager::COLOR,
+			]
+		);
+      
+      $this->end_controls_section();
+   }
+
+   protected function eael_breadcrumb_separator_style() {
+      $this->start_controls_section(
+         'separator_style',
+         [
+            'label' => esc_html__( 'Separator', 'essential-addons-for-elementor-lite' ),
+            'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+         ]
+      );
+
+      $this->add_control(
+			'separator_text_color',
+			[
+				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+            'selectors' => [
+					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumb-separator svg path' => 'fill: {{VALUE}}',
+				],
+			]
+		);
+
+      $this->add_control(
+			'separator_size',
+			[
+				'label'      => esc_html__( 'Size', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'range'      => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 50,
+						'step' => 1,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 15,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumb-separator svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+      $this->add_control(
+			'separator_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'default'    => [
+					'top'    => 4,
+					'right'  => 10,
+					'bottom' => 0,
+					'left'   => 10,
+					'unit'   => 'px',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumb-separator svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
 			]
 		);
       

@@ -6,11 +6,14 @@
          height: 20px;
       }
    }
-}
-
-.eael-breadcrumb-separator {
-   svg {
-      height: 15px;
-      width: 15px;
+   .woocommerce-breadcrumb {
+      display: flex;
+   }
+   .eael-breadcrumb-separator {
+      svg {
+         height: 15px;
+         width: 15px;
+         margin: 4px 10px;
+      }
    }
 }
