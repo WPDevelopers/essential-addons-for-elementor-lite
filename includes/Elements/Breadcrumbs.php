@@ -38,6 +38,9 @@ class Breadcrumbs extends Widget_Base {
 
       //
       $this->eael_breadcrumb_separator_style();
+
+      //
+      $this->eael_breadcrumb_prefix_style();
    }
 
    protected function eael_breadcrumb_general() {
@@ -220,6 +223,131 @@ class Breadcrumbs extends Widget_Base {
       $this->end_controls_section();
    }
 
+   protected function eael_breadcrumb_prefix_style() {
+      $this->start_controls_section(
+         'prefix_style',
+         [
+            'label' => esc_html__( 'Prefix', 'essential-addons-for-elementor-lite' ),
+            'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+         ]
+      );
+
+      $this->add_control(
+			'prefix_style_icon_heading',
+			[
+				'label'     => esc_html__( 'Icon Style', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'after',
+			]
+		);
+
+      $this->add_control(
+			'prefix_icon_color',
+			[
+				'label'     => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+            'selectors' => [
+					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__prefix svg path' => 'fill: {{VALUE}}',
+				],
+			]
+		);
+
+      $this->add_control(
+			'prefix_icon_size',
+			[
+				'label'      => esc_html__( 'Icon Size', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'range'      => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 50,
+						'step' => 1,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 20,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__prefix svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+      $this->add_control(
+			'prefix_icon_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'default'    => [
+					'top'    => 0,
+					'right'  => 8,
+					'bottom' => 0,
+					'left'   => 0,
+					'isLinked' => true,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__prefix svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+      $this->add_control(
+			'prefix_style_text_heading',
+			[
+				'label'     => esc_html__( 'Text Style', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'after',
+			]
+		);
+
+      $this->add_control(
+			'prefix_text_color',
+			[
+				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+            'selectors' => [
+					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__prefix span' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+      $this->add_control(
+			'prefix_text_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'default'    => [
+					'top'    => -3,
+					'right'  => 10,
+					'bottom' => 0,
+					'left'   => 0,
+					'isLinked' => true,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__prefix span' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+      $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name'     => 'prefix_text_typography',
+				'selector' => '{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__prefix span',
+			]
+		);
+      
+      $this->end_controls_section();
+   }
+
    protected function eael_breadcrumb_separator_style() {
       $this->start_controls_section(
          'separator_style',
@@ -278,8 +406,7 @@ class Breadcrumbs extends Widget_Base {
 					'right'  => 10,
 					'bottom' => 0,
 					'left'   => 10,
-					'unit'   => 'px',
-					'isLinked' => false,
+					'isLinked' => true,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumb-separator svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -334,7 +461,7 @@ class Breadcrumbs extends Widget_Base {
                         \Elementor\Icons_Manager::render_icon( $settings['eael_breadcrumb_prefix_icon'], [ 'aria-hidden' => 'true' ] );
                         break;
                      case 'text':
-                        echo Helper::eael_wp_kses( $settings['eael_breadcrumb_prefix_text'] );
+                        echo "<span>" . Helper::eael_wp_kses( $settings['eael_breadcrumb_prefix_text'] ) . "</span>";
                         break;
                   }
                ?>

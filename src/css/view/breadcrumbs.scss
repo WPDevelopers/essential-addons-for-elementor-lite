@@ -1,19 +1,17 @@
 .eael-breadcrumbs {
    display: flex;
    &__prefix {
-      svg {
-         width: 20px;
-         height: 20px;
-      }
+      display: flex;
    }
    .woocommerce-breadcrumb {
       display: flex;
    }
-   .eael-breadcrumb-separator {
-      svg {
-         height: 15px;
-         width: 15px;
-         margin: 4px 10px;
+}
+
+.woocommerce {
+   .eael-breadcrumbs {
+      .woocommerce-breadcrumb {
+         margin-bottom: 0;
       }
    }
 }
