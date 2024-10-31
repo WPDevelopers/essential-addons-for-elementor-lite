@@ -74,6 +74,7 @@ class Breadcrumbs extends Widget_Base {
 			]
 		);
 
+      //
       $this->add_control(
 			'breadcrumb_prefix_switch',
 			[
@@ -82,60 +83,64 @@ class Breadcrumbs extends Widget_Base {
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
-				'default'      => 'yes',
-			]
-		);
-
-      $this->start_controls_tabs(
-			'breadcrumb_prefix_tabs',
-         [
-            'condition' => [
-               'breadcrumb_prefix_switch' => 'yes',
-            ],
-         ]
-		);
-
-		$this->start_controls_tab(
-			'breadcrumb_prefix_iocn_tab',
-			[
-				'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+            'separator' => 'before',
 			]
 		);
 
       $this->add_control(
-			'breadcrumb_prefix_iocn',
+			'eael_breadcrumb_prefix_type',
+			[
+				'label'   => esc_html__( 'Prefix Type', 'essential-addons-for-elementor-lite' ),
+				'type'    => \Elementor\Controls_Manager::CHOOSE,
+				'options' => [
+					'icon' => [
+						'title' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-nerd',
+					],
+					'text' => [
+						'title' => esc_html__( 'Text', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-area',
+					],
+				],
+				'default'   => 'icon',
+            'condition' => [
+					'breadcrumb_prefix_switch' => 'yes',
+				],
+			]
+		);
+
+      $this->add_control(
+			'eael_breadcrumb_prefix_icon',
 			[
 				'label'   => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
 				'type'    => \Elementor\Controls_Manager::ICONS,
 				'default' => [
-					'value'   => 'fas fa-circle',
+					'value'   => 'fas fa-home',
 					'library' => 'fa-solid',
 				],
-			]
-		);
-
-      $this->end_controls_tab();
-
-      $this->start_controls_tab(
-			'breadcrumb_prefix_text_tab',
-			[
-				'label' => esc_html__( 'Text', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'eael_breadcrumb_prefix_type' => 'icon',
+					'breadcrumb_prefix_switch'    => 'yes',
+				],
 			]
 		);
 
       $this->add_control(
-			'breadcrumb_prefix_text',
+			'eael_breadcrumb_prefix_text',
 			[
-				'label'       => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
+				'label'       => esc_html__( 'Text', 'essential-addons-for-elementor-lite' ),
 				'type'        => \Elementor\Controls_Manager::TEXT,
-				'default'     => esc_html__( 'Default title', 'essential-addons-for-elementor-lite' ),
-				'placeholder' => esc_html__( 'Type your title here', 'essential-addons-for-elementor-lite' ),
-            'ai'  => [
+				'default'     => esc_html__( 'Browse: ', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'eael_breadcrumb_prefix_type' => 'text',
+					'breadcrumb_prefix_switch'    => 'yes',
+				],
+				'ai' => [
 					'active' => false,
 				],
 			]
 		);
-      $this->end_controls_tab();
+
       $this->end_controls_tabs();
 
       //
@@ -165,7 +170,7 @@ class Breadcrumbs extends Widget_Base {
 				'label'   => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
 				'type'    => \Elementor\Controls_Manager::ICONS,
 				'default' => [
-					'value'   => 'fa-angles-right',
+					'value'   => 'fas fa-angle-double-right',
 					'library' => 'fa-solid',
 				],
 				'condition' => [
@@ -233,6 +238,9 @@ class Breadcrumbs extends Widget_Base {
    }
 
    protected function render() {
+      $settings = $this->get_settings_for_display();
+      $prefix_type = $settings['eael_breadcrumb_prefix_type'];
+
       $args = array(
          'delimiter'   => $this->breadcrumb_separator(),
          'wrap_before' => '<nav class="woocommerce-breadcrumb" aria-label="Breadcrumb">',
@@ -241,8 +249,29 @@ class Breadcrumbs extends Widget_Base {
          'after'       => '',
          'home'        => $this->breadcrumb_home_label(),
       ); 
-      
-      woocommerce_breadcrumb( $args );
+
+      ?>
+      <div class="eael-breadcrumbs">
+         <?php if ( 'yes' == $settings['breadcrumb_prefix_switch'] ) {
+            ?>
+            <div class="eael-breadcrumbs__prefix">
+               <?php 
+                  switch ( $prefix_type ) {
+                     case 'icon':
+                        \Elementor\Icons_Manager::render_icon( $settings['eael_breadcrumb_prefix_icon'], [ 'aria-hidden' => 'true' ] );
+                        break;
+                     case 'text':
+                        echo Helper::eael_wp_kses( $settings['eael_breadcrumb_prefix_text'] );
+                        break;
+                  }
+               ?>
+            </div>
+            <?php
+         }
+         ?>
+         <?php woocommerce_breadcrumb( $args ); ?>
+      </div>
+      <?php
    }
 
 }
