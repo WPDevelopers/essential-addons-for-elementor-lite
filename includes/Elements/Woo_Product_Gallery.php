@@ -549,6 +549,30 @@ class Woo_Product_Gallery extends Widget_Base {
 		);
 
 		$this->add_control(
+			'relation_cats_tags',
+			[
+				'label'   => esc_html__( 'Relation of Category & Tags Query', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'or' => [
+						'title' => esc_html__( 'OR', 'essential-addons-for-elementor-lite' ),
+						'text' => esc_html__( 'OR', 'essential-addons-for-elementor-lite' ),
+					],
+					'and' => [
+						'title' => esc_html__( 'AND', 'essential-addons-for-elementor-lite' ),
+						'text' => esc_html__( 'AND', 'essential-addons-for-elementor-lite' ),
+					],
+				],
+				'default' => 'or',
+				'toggle' => false,
+				'condition'   => [
+					'post_type'                            => 'product',
+					'eael_product_gallery_product_filter!' => 'manual'
+				],
+			]
+		);
+
+		$this->add_control(
 			'product_type_logged_users',
 			[
 				'label'       => __('Purchase Type', 'essential-addons-for-elementor-lite'),
@@ -2852,7 +2876,7 @@ class Woo_Product_Gallery extends Widget_Base {
 		}
 
 		if ( ! empty( $settings[ 'eael_product_gallery_tags' ] ) ) {
-			$args_tax_query_combined['relation'] = 'OR';
+			$args_tax_query_combined['relation'] = isset( $settings['relation_cats_tags'] ) ? $settings['relation_cats_tags'] : 'OR';
 
 			if ( $settings[ 'eael_woo_product_gallery_terms_show_all' ] == '' ) {
 				if ( ! empty( $product_tags_items ) && count( $product_tags ) > 0 ) {
@@ -2915,7 +2939,7 @@ class Woo_Product_Gallery extends Widget_Base {
             $product_categories = wp_get_post_terms( $current_product_id, 'product_cat', array( 'fields' => 'ids' ) );
             $product_tags       = wp_get_post_terms( $current_product_id, 'product_tag', array( 'fields' => 'names' ) );
             $args['tax_query'] = array(
-                'relation' => 'OR',
+                'relation' => isset( $settings['relation_cats_tags'] ) ? $settings['relation_cats_tags'] : 'OR',
                 array(
                     'taxonomy' => 'product_cat',
                     'field'    => 'term_id',
