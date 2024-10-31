@@ -1631,15 +1631,29 @@ class Helper
 
 	public static function eael_onpage_edit_template_markup( $page_id, $template_id ) {
 		if ( Plugin::$instance->editor->is_edit_mode() ) {
+			$active_doc = $_GET['active-document'] ?? 0;
+			$mode       = $active_doc === $template_id ? 'save' : 'edit';
 			?>
 			<div class='eael-onpage-edit-template-wrapper'>
-				<div class='eael-onpage-edit-template' data-template-id='<?php echo esc_attr( $template_id ); ?>'
-					 data-page-id='<?php echo esc_attr( $page_id ); ?>' data-mode='edit'>
+				<div class='eael-onpage-edit-template' data-eael-template-id='<?php echo esc_attr( $template_id ); ?>'
+					 data-page-id='<?php echo esc_attr( $page_id ); ?>' data-mode='<?php echo esc_attr( $mode ); ?>'>
 					<i class='eicon-edit'></i>
 					<span><?php esc_html_e( 'Edit Template' ); ?></span>
 				</div>
 			</div>
 			<?php
+			if ( $mode === 'save' ) {
+				?>
+				<script>
+                    (function ($) {
+                        let $this = $("[data-eael-template-id='<?php echo esc_js( $template_id ); ?>']");
+                        $this.find('span').text('Save & Back');
+                        $this.find('i').addClass('eicon-arrow-left').removeClass('eicon-edit');
+                        $this.closest('.eael-onpage-edit-template-wrapper').addClass('eael-onpage-edit-activate').parent().addClass('eael-widget-otea-active');
+                    })(jQuery);
+				</script>
+				<?php
+			}
 		}
 	}
 }
