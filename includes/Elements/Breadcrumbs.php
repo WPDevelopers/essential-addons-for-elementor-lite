@@ -63,12 +63,11 @@ class Breadcrumbs extends Widget_Base {
 		);
 
       $this->add_control(
-			'breadcrumb_home',
+			'breadcrumb_home_text',
 			[
 				'label'       => esc_html__( 'Label For Home', 'essential-addons-for-elementor-lite' ),
 				'type'        => \Elementor\Controls_Manager::TEXT,
-				'default'     => esc_html__( 'Default title', 'essential-addons-for-elementor-lite' ),
-				'placeholder' => esc_html__( 'Type your title here', 'essential-addons-for-elementor-lite' ),
+				'default'     => esc_html__( 'Home', 'essential-addons-for-elementor-lite' ),
             'ai'  => [
 					'active' => false,
 				],
@@ -141,60 +140,54 @@ class Breadcrumbs extends Widget_Base {
 
       //
       $this->add_control(
-			'more_options',
+			'eael_separator_type',
 			[
-				'label'     => esc_html__( 'Separator Type', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
-      $this->start_controls_tabs(
-			'breadcrumb_separator_tab',
-		);
-
-		$this->start_controls_tab(
-			'breadcrumb_separator_iocn_tab',
-			[
-				'label' => esc_html__( 'Separator Icon', 'essential-addons-for-elementor-lite' ),
+				'label'   => esc_html__( 'Separator Type', 'essential-addons-for-elementor-lite' ),
+				'type'    => \Elementor\Controls_Manager::CHOOSE,
+				'options' => [
+					'icon' => [
+						'title' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-nerd',
+					],
+					'text' => [
+						'title' => esc_html__( 'Text', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-area',
+					],
+				],
+				'default' => 'icon',
+            'separator' => 'before',
 			]
 		);
 
       $this->add_control(
-			'breadcrumb_separator_icon',
+			'eael_separator_icon',
 			[
 				'label'   => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
 				'type'    => \Elementor\Controls_Manager::ICONS,
 				'default' => [
-					'value'   => 'fas fa-circle',
+					'value'   => 'fa-angles-right',
 					'library' => 'fa-solid',
 				],
-			]
-		);
-
-      $this->end_controls_tab();
-
-      $this->start_controls_tab(
-			'breadcrumb_separator_text_tab',
-			[
-				'label' => esc_html__( 'Separator Text', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'eael_separator_type' => 'icon',
+				],
 			]
 		);
 
       $this->add_control(
-			'breadcrumb_separator_text',
+			'eael_separator_type_text',
 			[
-				'label'       => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
+				'label'       => esc_html__( 'Text', 'essential-addons-for-elementor-lite' ),
 				'type'        => \Elementor\Controls_Manager::TEXT,
-				'default'     => esc_html__( 'Default title', 'essential-addons-for-elementor-lite' ),
-				'placeholder' => esc_html__( 'Type your title here', 'essential-addons-for-elementor-lite' ),
-            'ai'  => [
+				'default'     => esc_html__( '/', 'essential-addons-for-elementor-lite' ),
+				'condition'   => [
+					'eael_separator_type' => 'text',
+				],
+				'ai' => [
 					'active' => false,
 				],
 			]
 		);
-      $this->end_controls_tab();
-      $this->end_controls_tabs();
       
       $this->end_controls_section();
    }
@@ -219,14 +212,34 @@ class Breadcrumbs extends Widget_Base {
       $this->end_controls_section();
    }
 
+   protected function breadcrumb_home_label() {
+      $settings = $this->get_settings_for_display();
+      if ( ! empty( $settings['breadcrumb_home_text'] ) ) {
+         return Helper::eael_wp_kses( $settings['breadcrumb_home_text'] );
+      }
+      return esc_html__( 'Home', 'essential-addons-for-elementor-lite' );
+   }
+
+   protected function breadcrumb_separator() {
+      $settings = $this->get_settings_for_display();
+      if ( ! empty( $settings['eael_separator_icon'] ) ) {
+         ob_start();
+         \Elementor\Icons_Manager::render_icon($settings['eael_separator_icon'], ['aria-hidden' => 'true']);
+         $separator_icon = ob_get_clean();
+         return sprintf( '<span class="eael-breadcrumb-separator">%s</span>', $separator_icon );
+      } else {
+         return Helper::eael_wp_kses( $settings['eael_separator_type_text'] );
+      }
+   }
+
    protected function render() {
       $args = array(
-         'delimiter'   => '&nbsp;&#47;&nbsp;',
+         'delimiter'   => $this->breadcrumb_separator(),
          'wrap_before' => '<nav class="woocommerce-breadcrumb" aria-label="Breadcrumb">',
          'wrap_after'  => '</nav>',
          'before'      => '',
          'after'       => '',
-         'home'        => _x( 'Home', 'breadcrumb', 'essential-addons-for-elementor-lite' ),
+         'home'        => $this->breadcrumb_home_label(),
       ); 
       
       woocommerce_breadcrumb( $args );

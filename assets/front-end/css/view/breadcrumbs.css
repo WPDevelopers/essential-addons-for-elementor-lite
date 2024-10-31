@@ -47,3 +47,7 @@
 .breadcrumb li:last-child::after {
   border-left-color: #fddc05;
 }
+.eael-breadcrumb-separator svg {
+  height: 15px;
+  width: 15px;
+}
