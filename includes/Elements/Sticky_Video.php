@@ -108,9 +108,6 @@ class Sticky_Video extends Widget_Base
                 'label_off' => __('Off', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default' => 'yes',
-                'selectors' => [
-                    '{{WRAPPER}} div.eaelsv-sticky-player' => 'display: block',
-                ],
             ]
         );
 
