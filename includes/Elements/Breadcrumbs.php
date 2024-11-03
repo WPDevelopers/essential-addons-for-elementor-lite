@@ -437,8 +437,8 @@ class Breadcrumbs extends Widget_Base {
       }
    }
 
-   protected function render() {
-      $settings = $this->get_settings_for_display();
+	protected function eael_wc_breadcrumb() {
+		$settings = $this->get_settings_for_display();
       $prefix_type = $settings['eael_breadcrumb_prefix_type'];
 
       $args = array(
@@ -451,7 +451,7 @@ class Breadcrumbs extends Widget_Base {
       ); 
 
       ?>
-      <div class="eael-breadcrumbs">
+      <div class="">
          <?php if ( 'yes' == $settings['breadcrumb_prefix_switch'] ) {
             ?>
             <div class="eael-breadcrumbs__prefix">
@@ -472,6 +472,127 @@ class Breadcrumbs extends Widget_Base {
          <?php woocommerce_breadcrumb( $args ); ?>
       </div>
       <?php
-   }
+	}
 
+	protected function eael_breadcrumbs() {
+		global $post;
+		$show_on_home = 1;
+		$delimiter    = $this->breadcrumb_separator();
+		$home         = 'Home';
+		$show_current = 1;
+		$before       = '<span class = "eael-current">';
+		$after        = '</span>';
+		$home_link    = get_bloginfo( 'url' );
+
+		//
+		$output = '';
+		if ( is_home() || is_front_page() ) {
+			if ( $show_on_home == 1 ) {
+				$output .= '<div class="eb-breadcrumb"><span class="eb-breadcrumb-item"><a href="' . $home_link . '">' . $home . '</a></span></div>';
+			}
+		} else {
+			$output .= '<div id="eael-crumbs"><a href="' . $home_link . '">' . $home . '</a> ' . $delimiter . ' ';
+			if ( is_category() ) {
+				$get_category = get_category( get_query_var( 'cat' ), false );
+				if ( $get_category->parent != 0 ) {
+					$output .= get_category_parents( $get_category->parent, true, ' ' . $delimiter . ' ' );
+				}
+				$output .= $before . 'Archive by category "' . single_cat_title( '', false ) . '"' . $after;
+			} elseif ( is_page() && ! $post->post_parent ) {
+				if ( $show_current == 1 ) {
+					$output .= $before . get_the_title() . $after;
+				}
+			} elseif ( is_search() ) {
+				$output .= $before . 'Search results for "' . get_search_query() . '"' . $after;
+			} elseif ( is_day() ) {
+				$output .= '<a href="' . get_year_link( get_the_time( 'Y' ) ) . '">' . get_the_time( 'Y' ) . '</a> ' . $delimiter . ' ';
+				$output .= '<a href="' . get_month_link( get_the_time( 'Y' ), get_the_time( 'm' ) ) . '">' . get_the_time( 'F' ) . '</a> ' . $delimiter . ' ';
+				$output .= $before . get_the_time( 'd' ) . $after;
+			} elseif ( is_month() ) {
+				$output .= '<a href="' . get_year_link( get_the_time( 'Y' ) ) . '">' . get_the_time( 'Y' ) . '</a> ' . $delimiter . ' ';
+				$output .= $before . get_the_time( 'F' ) . $after;
+			} elseif ( is_year() ) {
+				$output .= $before . get_the_time( 'Y' ) . $after;
+			} elseif ( is_tag() ) {
+				$output .= $before . 'Posts tagged "' . single_tag_title( '', false ) . '"' . $after;
+			} elseif( is_author() ) {
+				global $author;
+				$user_data = get_userdata( $author );
+				$output .= $before . 'Articles posted by ' . $user_data->display_name . $after;
+			} elseif ( is_404() ) {
+				$output .= $before . 'Error 404' . $after;
+			} elseif ( is_attachment() ) {
+				$parent   = get_post( $post->post_parent );
+				$cat      = get_the_category( $parent->ID ); 
+				$cat      = $cat[0];
+				$output   .= get_category_parents( $cat, TRUE, ' ' . $delimiter . ' ' );
+				$output   .= '<a href="' . get_permalink( $parent ) . '">' . $parent->post_title . '</a>';
+				if ( $show_current == 1 ) {
+					$output .= ' ' . $delimiter . ' ' . $before . get_the_title() . $after;
+				} 
+			} elseif ( is_single() && ! is_attachment() ) {
+				if ( 'post' !== get_post_type() ) {
+					$post_type = get_post_type_object( get_post_type() );
+					$get_slug = $post_type->rewrite;
+					$output .= '<a href="' . $home_link . '/' . $get_slug['slug'] . '/">' . $post_type->labels->singular_name . '</a>';
+					if ( $show_current == 1 ) {
+						$output .= ' ' . $delimiter . ' ' . $before . get_the_title() . $after;
+					}
+				} else {
+					$cat  = get_the_category();
+					$cat  = $cat[0];
+					$cats = get_category_parents( $cat, TRUE, ' ' . $delimiter . ' ' );
+					if ( $show_current == 0 ) {
+						$cats = preg_replace( "#^(.+)\s$delimiter\s$#", "$1", $cats ) ;
+					}
+					$output .= $cats;
+					if ( $show_current == 1 ) {
+						$output .= $before . get_the_title() . $after;
+					}
+				}
+			} elseif ( ! is_single() && ! is_page() && get_post_type() !== 'post' && ! is_404() ) {
+				$post_type = get_post_type_object( get_post_type() );
+				$output .= $before . $post_type->labels->singular_name . $after;
+			} elseif ( is_page() && $post->post_parent ) {
+				$parent_id  = $post->post_parent;
+				$breadcrumbs = array();
+				while ( $parent_id ) {
+					$page = get_page( $parent_id );
+					$breadcrumbs[] = '<a href="' . get_permalink( $page->ID) . '">' . get_the_title($page->ID) . '</a>';
+					$parent_id  = $page->post_parent;
+				}
+				$breadcrumbs = array_reverse($breadcrumbs);
+				for ($i = 0; $i < count($breadcrumbs); $i++) {
+					$output .= $breadcrumbs[$i];
+					if ($i != count($breadcrumbs)-1) {
+						$output .= ' ' . $delimiter . ' ';
+					}
+				}
+				if ($show_current == 1){
+					$output .= ' ' . $delimiter . ' ' . $before . get_the_title() . $after;
+				} 
+			}
+		}
+		echo $output;
+	}
+
+   protected function render() {
+		$product = false;
+
+		if ( class_exists( 'WooCommerce' ) ) {
+			$product = wc_get_product( get_the_ID() );
+		}
+
+		?>
+		<div class="eael-breadcrumbs">
+			<?php
+			if ( ! $product ) {
+				$this->eael_breadcrumbs();
+			} else {
+				$this->eael_wc_breadcrumb();
+			}
+			?>
+		</div>
+		<?php
+   }
 }
