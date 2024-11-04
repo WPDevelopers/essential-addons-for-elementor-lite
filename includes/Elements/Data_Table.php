@@ -1324,7 +1324,7 @@ class Data_Table extends Widget_Base {
 					'content_type'	=> $content_row['eael_data_table_content_type'],
 					'template'		=> $content_row['eael_primary_templates_for_tables'],
 	  				'title'			=> $tbody_content,
-	  				'link_url'		=> ! empty($content_row['eael_data_table_content_row_title_link']) ? $content_row['eael_data_table_content_row_title_link'] : [],
+	  				'link_url'		=> ! empty( $content_row['eael_data_table_content_row_title_link'] ) ? $content_row['eael_data_table_content_row_title_link'] : [],
 	  				'icon_content_new'	=> !empty($content_row['eael_data_table_icon_content_new']) ? $content_row['eael_data_table_icon_content_new']:'',
 	  				'icon_content'	=> !empty($content_row['eael_data_table_icon_content']) ? $content_row['eael_data_table_icon_content']:'',
 	  				'icon_migrated'	=> $icon_migrated,
@@ -1445,7 +1445,7 @@ class Data_Table extends Widget_Base {
                                                     <?php } ?>
 												</div>
 											</td>
-										<?php elseif(  $table_td[$j]['content_type'] == 'textarea' && !empty($table_td[$j]['link_url']) ) : 
+										<?php elseif(  $table_td[$j]['content_type'] == 'textarea' && !empty($table_td[$j]['link_url']['url']) ) : 
 											$this->add_link_attributes( 'eael_table_link_' . $i . $j, $table_td[$j]['link_url'] )
 											?>
 											<td <?php $this->print_render_attribute_string('table_inside_td'.$i.$j); ?>>
