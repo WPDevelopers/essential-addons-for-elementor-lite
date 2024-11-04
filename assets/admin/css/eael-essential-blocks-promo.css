@@ -215,3 +215,37 @@
 .eael-gb-eb-popup .--page-1 .eael-gb-eb-footer button.eael-gb-eb-never-show {
     display: block;
 }
+
+@media (min-width: 1000px) and (max-width: 1355px) {
+    .has-eael-eb-promo .editor-header__center,
+    .has-eael-eb-promo .editor-header__center .editor-document-bar{
+        display: block;
+        width: fit-content;
+        justify-content: start;
+    }
+}
+@media (max-width: 1069px) {
+    .has-eael-eb-promo .editor-document-bar__title {
+        padding-left: 0;
+    }
+    .has-eael-eb-promo .editor-header__center {
+        justify-content: start;
+        width: fit-content;
+    }
+    .has-eael-eb-promo .editor-header__center .editor-document-bar{
+        display: block;
+        width: fit-content;
+    }
+    #eael-eb-popup-button {
+        width: 32px;
+        overflow: hidden;
+        color: transparent;
+        display: block;
+        padding: 5px;
+        background: transparent;
+    }
+    #eael-eb-popup-button:hover{
+        padding-right: 0;
+    }
+}
+  

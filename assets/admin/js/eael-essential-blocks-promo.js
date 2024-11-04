@@ -13,6 +13,10 @@
             $gb_editor_panel.find('.edit-post-header__settings, .editor-header__settings').prepend($('#eael-gb-eb-button-template').html());
             if ($('#eael-eb-popup-button').length) {
                 $is_popup_button_added = true;
+
+                if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+                    $('#eael-eb-popup-button').closest('.editor-header').addClass('has-eael-eb-promo');
+                }
             }
         }
     }
