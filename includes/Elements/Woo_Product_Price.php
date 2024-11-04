@@ -303,7 +303,7 @@ class Woo_Product_Price extends Widget_Base {
 				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'.woocommerce {{WRAPPER}} .woocommerce .eael-single-product-price .price' => 'color: {{VALUE}};',
+					'.woocommerce {{WRAPPER}} .eael-single-product-price .price .amount' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -314,7 +314,7 @@ class Woo_Product_Price extends Widget_Base {
 				'label'   => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
 				'type'    => \Elementor\Controls_Manager::CHOOSE,
 				'options' => [
-					'left' => [
+					'flex-start' => [
 						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eicon-text-align-left',
 					],
@@ -322,14 +322,15 @@ class Woo_Product_Price extends Widget_Base {
 						'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eicon-text-align-center',
 					],
-					'right' => [
+					'flex-end' => [
 						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
+				'default' 		=> 'flex-start',
 				'toggle'       => true,
 				'selectors'    => [
-					'.woocommerce {{WRAPPER}} .eael-single-product-price' =>  'text-align: {{VALUE}};',
+					'.woocommerce {{WRAPPER}} .eael-single-product-price' =>  'justify-content: {{VALUE}};',
 				],
 			]
 		);
