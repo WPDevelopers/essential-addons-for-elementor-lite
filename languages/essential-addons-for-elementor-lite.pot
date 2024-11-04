@@ -505,11 +505,11 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
-#: ../includes/Controls/Select2.php:31, ../includes/Elements/Filterable_Gallery.php:2245, ../includes/Elements/GravityForms.php:1368, ../includes/Elements/NFT_Gallery.php:1220, ../includes/Elements/Pricing_Table.php:223, ../includes/Elements/Pricing_Table.php:230, ../includes/Elements/Product_Grid.php:142, ../includes/Elements/Product_Grid.php:2789, ../includes/Elements/Woo_Cart.php:196, ../includes/Elements/Woo_Cart.php:397, ../includes/Elements/Woo_Cart.php:563, ../includes/Elements/Woo_Cart.php:578, ../includes/Elements/Woo_Checkout.php:267, ../includes/Elements/Woo_Product_Carousel.php:124, ../includes/Elements/Woo_Product_Carousel.php:1767, ../includes/Elements/Woo_Product_Gallery.php:113, ../includes/Elements/Woo_Product_Gallery.php:2050, ../includes/Elements/Woo_Product_List.php:145, ../includes/Elements/Woo_Product_List.php:363, ../includes/Elements/Woo_Product_List.php:1771, ../includes/Traits/Woo_Product_Comparable.php:42, ../includes/Traits/Woo_Product_Comparable.php:79
+#: ../includes/Controls/Select2.php:31, ../includes/Elements/Filterable_Gallery.php:2245, ../includes/Elements/GravityForms.php:1368, ../includes/Elements/NFT_Gallery.php:1220, ../includes/Elements/Pricing_Table.php:223, ../includes/Elements/Pricing_Table.php:230, ../includes/Elements/Product_Grid.php:142, ../includes/Elements/Product_Grid.php:2799, ../includes/Elements/Woo_Cart.php:196, ../includes/Elements/Woo_Cart.php:397, ../includes/Elements/Woo_Cart.php:563, ../includes/Elements/Woo_Cart.php:578, ../includes/Elements/Woo_Checkout.php:267, ../includes/Elements/Woo_Product_Carousel.php:124, ../includes/Elements/Woo_Product_Carousel.php:1767, ../includes/Elements/Woo_Product_Gallery.php:113, ../includes/Elements/Woo_Product_Gallery.php:2062, ../includes/Elements/Woo_Product_List.php:145, ../includes/Elements/Woo_Product_List.php:363, ../includes/Elements/Woo_Product_List.php:1771, ../includes/Traits/Woo_Product_Comparable.php:42, ../includes/Traits/Woo_Product_Comparable.php:79
 msgid "Price"
 msgstr ""
 
-#: ../includes/Controls/Select2.php:32, ../includes/Elements/Product_Grid.php:2938, ../includes/Elements/Woo_Cart.php:197, ../includes/Elements/Woo_Cart.php:401, ../includes/Elements/Woo_Cart.php:637, ../includes/Elements/Woo_Cart.php:652, ../includes/Elements/Woo_Checkout.php:247, ../includes/Elements/Woo_Product_Carousel.php:1928, ../includes/Elements/Woo_Product_Gallery.php:2240, ../includes/Elements/Woo_Product_List.php:3041
+#: ../includes/Controls/Select2.php:32, ../includes/Elements/Product_Grid.php:2948, ../includes/Elements/Woo_Cart.php:197, ../includes/Elements/Woo_Cart.php:401, ../includes/Elements/Woo_Cart.php:637, ../includes/Elements/Woo_Cart.php:652, ../includes/Elements/Woo_Checkout.php:247, ../includes/Elements/Woo_Product_Carousel.php:1928, ../includes/Elements/Woo_Product_Gallery.php:2252, ../includes/Elements/Woo_Product_List.php:3041
 msgid "Quantity"
 msgstr ""
 
@@ -553,7 +553,7 @@ msgstr ""
 msgid "URL Contains"
 msgstr ""
 
-#: ../includes/Controls/Select2.php:43, ../includes/Elements/Product_Grid.php:423, ../includes/Elements/Woo_Product_Gallery.php:421, ../includes/Elements/Woo_Product_List.php:454
+#: ../includes/Controls/Select2.php:43, ../includes/Elements/Product_Grid.php:425, ../includes/Elements/Woo_Product_Gallery.php:423, ../includes/Elements/Woo_Product_List.php:454
 msgid "Archive"
 msgstr ""
 
@@ -569,7 +569,7 @@ msgstr ""
 msgid "Data Source"
 msgstr ""
 
-#: ../includes/Elements/Advanced_Data_Table.php:80, ../includes/Elements/Business_Reviews.php:99, ../includes/Elements/Event_Calendar.php:94, ../includes/Elements/Facebook_Feed.php:126, ../includes/Elements/NFT_Gallery.php:78, ../includes/Elements/Product_Grid.php:417, ../includes/Elements/Sticky_Video.php:148, ../includes/Elements/SVG_Draw.php:85, ../includes/Elements/Woo_Product_Gallery.php:409, ../includes/Elements/Woo_Product_List.php:442, ../includes/Traits/Controls.php:68
+#: ../includes/Elements/Advanced_Data_Table.php:80, ../includes/Elements/Business_Reviews.php:99, ../includes/Elements/Event_Calendar.php:94, ../includes/Elements/Facebook_Feed.php:126, ../includes/Elements/NFT_Gallery.php:78, ../includes/Elements/Product_Grid.php:419, ../includes/Elements/Sticky_Video.php:148, ../includes/Elements/SVG_Draw.php:85, ../includes/Elements/Woo_Product_Gallery.php:411, ../includes/Elements/Woo_Product_List.php:442, ../includes/Traits/Controls.php:68
 msgid "Source"
 msgstr ""
 
@@ -641,7 +641,7 @@ msgstr ""
 msgid "Button"
 msgstr ""
 
-#: ../includes/Elements/Advanced_Data_Table.php:197, ../includes/Elements/Product_Grid.php:581
+#: ../includes/Elements/Advanced_Data_Table.php:197, ../includes/Elements/Product_Grid.php:583
 msgid "Select"
 msgstr ""
 
@@ -701,7 +701,7 @@ msgstr ""
 msgid "Border Radius"
 msgstr ""
 
-#: ../includes/Elements/Advanced_Data_Table.php:404, ../includes/Elements/Advanced_Data_Table.php:1472, ../includes/Elements/Betterdocs_Category_Grid.php:334, ../includes/Elements/Betterdocs_Category_Grid.php:382, ../includes/Elements/Event_Calendar.php:1986, ../includes/Elements/Event_Calendar.php:2956, ../includes/Elements/Event_Calendar.php:3030, ../includes/Elements/Product_Grid.php:1171, ../includes/Elements/Product_Grid.php:1199, ../includes/Elements/Product_Grid.php:3271, ../includes/Elements/Product_Grid.php:3306, ../includes/Elements/Progress_Bar.php:757, ../includes/Elements/Twitter_Feed.php:944, ../includes/Elements/Twitter_Feed.php:1156, ../includes/Elements/Woo_Cart.php:1385, ../includes/Elements/Woo_Cart.php:1570, ../includes/Elements/Woo_Cart.php:2466, ../includes/Elements/Woo_Cart.php:2551, ../includes/Elements/Woo_Cart.php:2636, ../includes/Elements/Woo_Product_Carousel.php:1175, ../includes/Elements/Woo_Product_Carousel.php:1204, ../includes/Elements/Woo_Product_Carousel.php:2259, ../includes/Elements/Woo_Product_Carousel.php:2294, ../includes/Elements/Woo_Product_Carousel.php:2973, ../includes/Elements/Woo_Product_Gallery.php:846, ../includes/Elements/Woo_Product_Gallery.php:874, ../includes/Elements/Woo_Product_Gallery.php:1465, ../includes/Elements/Woo_Product_Gallery.php:1641, ../includes/Elements/Woo_Product_Gallery.php:2573, ../includes/Elements/Woo_Product_Gallery.php:2608, ../includes/Elements/Woo_Product_List.php:3397, ../includes/Elements/Woo_Product_List.php:3432, ../includes/Extensions/Table_of_Content.php:735, ../includes/Extensions/Table_of_Content.php:982, ../includes/Traits/Woo_Product_Comparable.php:1418
+#: ../includes/Elements/Advanced_Data_Table.php:404, ../includes/Elements/Advanced_Data_Table.php:1472, ../includes/Elements/Betterdocs_Category_Grid.php:334, ../includes/Elements/Betterdocs_Category_Grid.php:382, ../includes/Elements/Event_Calendar.php:1986, ../includes/Elements/Event_Calendar.php:2956, ../includes/Elements/Event_Calendar.php:3030, ../includes/Elements/Product_Grid.php:1178, ../includes/Elements/Product_Grid.php:1206, ../includes/Elements/Product_Grid.php:3281, ../includes/Elements/Product_Grid.php:3316, ../includes/Elements/Progress_Bar.php:757, ../includes/Elements/Twitter_Feed.php:944, ../includes/Elements/Twitter_Feed.php:1156, ../includes/Elements/Woo_Cart.php:1385, ../includes/Elements/Woo_Cart.php:1570, ../includes/Elements/Woo_Cart.php:2466, ../includes/Elements/Woo_Cart.php:2551, ../includes/Elements/Woo_Cart.php:2636, ../includes/Elements/Woo_Product_Carousel.php:1175, ../includes/Elements/Woo_Product_Carousel.php:1204, ../includes/Elements/Woo_Product_Carousel.php:2259, ../includes/Elements/Woo_Product_Carousel.php:2294, ../includes/Elements/Woo_Product_Carousel.php:2973, ../includes/Elements/Woo_Product_Gallery.php:853, ../includes/Elements/Woo_Product_Gallery.php:881, ../includes/Elements/Woo_Product_Gallery.php:1477, ../includes/Elements/Woo_Product_Gallery.php:1653, ../includes/Elements/Woo_Product_Gallery.php:2585, ../includes/Elements/Woo_Product_Gallery.php:2620, ../includes/Elements/Woo_Product_List.php:3397, ../includes/Elements/Woo_Product_List.php:3432, ../includes/Extensions/Table_of_Content.php:735, ../includes/Extensions/Table_of_Content.php:982, ../includes/Traits/Woo_Product_Comparable.php:1418
 msgid "Box Shadow"
 msgstr ""
 
@@ -1317,7 +1317,7 @@ msgstr ""
 msgid "List"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Category_Grid.php:1020, ../includes/Elements/Filterable_Gallery.php:1456, ../includes/Elements/Filterable_Gallery.php:1913, ../includes/Elements/Filterable_Gallery.php:2683, ../includes/Elements/Login_Register.php:4571, ../includes/Elements/Pricing_Table.php:1863, ../includes/Elements/Product_Grid.php:3153, ../includes/Elements/Twitter_Feed.php:1046, ../includes/Elements/Woo_Product_Carousel.php:2141, ../includes/Elements/Woo_Product_Gallery.php:2455, ../includes/Elements/Woo_Product_List.php:3279
+#: ../includes/Elements/Betterdocs_Category_Grid.php:1020, ../includes/Elements/Filterable_Gallery.php:1456, ../includes/Elements/Filterable_Gallery.php:1913, ../includes/Elements/Filterable_Gallery.php:2683, ../includes/Elements/Login_Register.php:4571, ../includes/Elements/Pricing_Table.php:1863, ../includes/Elements/Product_Grid.php:3163, ../includes/Elements/Twitter_Feed.php:1046, ../includes/Elements/Woo_Product_Carousel.php:2141, ../includes/Elements/Woo_Product_Gallery.php:2467, ../includes/Elements/Woo_Product_List.php:3279
 msgid "Hover Color"
 msgstr ""
 
@@ -1457,7 +1457,7 @@ msgstr ""
 msgid "Enable"
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:179, ../includes/Elements/Filterable_Gallery.php:305, ../includes/Elements/Filterable_Gallery.php:317, ../includes/Elements/Interactive_Circle.php:615, ../includes/Elements/Product_Grid.php:899, ../includes/Elements/Twitter_Feed.php:417, ../includes/Elements/Twitter_Feed.php:429, ../includes/Elements/Woo_Product_Gallery.php:699, ../includes/Elements/Woo_Product_List.php:258, ../includes/Traits/Controls.php:904
+#: ../includes/Elements/Business_Reviews.php:179, ../includes/Elements/Filterable_Gallery.php:305, ../includes/Elements/Filterable_Gallery.php:317, ../includes/Elements/Interactive_Circle.php:615, ../includes/Elements/Product_Grid.php:906, ../includes/Elements/Twitter_Feed.php:417, ../includes/Elements/Twitter_Feed.php:429, ../includes/Elements/Woo_Product_Gallery.php:706, ../includes/Elements/Woo_Product_List.php:258, ../includes/Traits/Controls.php:904
 msgid "Disable"
 msgstr ""
 
@@ -1477,11 +1477,11 @@ msgstr ""
 msgid "Preset 2"
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:221, ../includes/Elements/Interactive_Circle.php:80, ../includes/Elements/Product_Grid.php:321, ../includes/Elements/Product_Grid.php:1957, ../includes/Elements/Simple_Menu.php:144, ../includes/Elements/Woo_Product_Carousel.php:1007, ../includes/Elements/Woo_Product_Carousel.php:2325, ../includes/Elements/Woo_Product_Gallery.php:350, ../includes/Elements/Woo_Product_Gallery.php:1726, ../includes/Elements/Woo_Product_List.php:785, ../includes/Elements/Woo_Product_List.php:803, ../includes/Traits/Controls.php:593, ../includes/Template/Woo-Product-Carousel/preset-3.php:4, ../includes/Template/Woo-Product-List/preset-3.php:3
+#: ../includes/Elements/Business_Reviews.php:221, ../includes/Elements/Interactive_Circle.php:80, ../includes/Elements/Product_Grid.php:321, ../includes/Elements/Product_Grid.php:1967, ../includes/Elements/Simple_Menu.php:144, ../includes/Elements/Woo_Product_Carousel.php:1007, ../includes/Elements/Woo_Product_Carousel.php:2325, ../includes/Elements/Woo_Product_Gallery.php:350, ../includes/Elements/Woo_Product_Gallery.php:1738, ../includes/Elements/Woo_Product_List.php:785, ../includes/Elements/Woo_Product_List.php:803, ../includes/Traits/Controls.php:593, ../includes/Template/Woo-Product-Carousel/preset-3.php:4, ../includes/Template/Woo-Product-List/preset-3.php:3
 msgid "Preset 3"
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:229, ../includes/Elements/Business_Reviews.php:245, ../includes/Elements/NFT_Gallery.php:254, ../includes/Elements/Product_Grid.php:259, ../includes/Elements/Product_Grid.php:309, ../includes/Elements/Product_Grid.php:1951, ../includes/Elements/Product_Grid.php:2110, ../includes/Elements/Woo_Product_Carousel.php:1001, ../includes/Elements/Woo_Product_Gallery.php:338, ../includes/Elements/Woo_Product_Gallery.php:1720
+#: ../includes/Elements/Business_Reviews.php:229, ../includes/Elements/Business_Reviews.php:245, ../includes/Elements/NFT_Gallery.php:254, ../includes/Elements/Product_Grid.php:259, ../includes/Elements/Product_Grid.php:309, ../includes/Elements/Product_Grid.php:1961, ../includes/Elements/Product_Grid.php:2120, ../includes/Elements/Woo_Product_Carousel.php:1001, ../includes/Elements/Woo_Product_Gallery.php:338, ../includes/Elements/Woo_Product_Gallery.php:1732
 msgid "Style Preset"
 msgstr ""
 
@@ -2045,7 +2045,7 @@ msgstr ""
 msgid "Template Layout"
 msgstr ""
 
-#: ../includes/Elements/Content_Ticker.php:91, ../includes/Elements/Product_Grid.php:422, ../includes/Elements/Progress_Bar.php:201, ../includes/Elements/Woo_Product_Gallery.php:417, ../includes/Elements/Woo_Product_List.php:450, ../includes/Traits/Controls.php:31
+#: ../includes/Elements/Content_Ticker.php:91, ../includes/Elements/Product_Grid.php:424, ../includes/Elements/Progress_Bar.php:201, ../includes/Elements/Woo_Product_Gallery.php:419, ../includes/Elements/Woo_Product_List.php:450, ../includes/Traits/Controls.php:31
 msgid "Dynamic"
 msgstr ""
 
@@ -3197,7 +3197,7 @@ msgstr ""
 msgid "Word Count"
 msgstr ""
 
-#: ../includes/Elements/Event_Calendar.php:1101, ../includes/Elements/Event_Calendar.php:1687, ../includes/Elements/Product_Grid.php:702, ../includes/Elements/Woo_Product_Carousel.php:344, ../includes/Elements/Woo_Product_List.php:968, ../includes/Traits/Controls.php:1450, ../includes/Traits/Controls.php:1422
+#: ../includes/Elements/Event_Calendar.php:1101, ../includes/Elements/Event_Calendar.php:1687, ../includes/Elements/Product_Grid.php:709, ../includes/Elements/Woo_Product_Carousel.php:344, ../includes/Elements/Woo_Product_List.php:968, ../includes/Traits/Controls.php:1450, ../includes/Traits/Controls.php:1422
 msgid "Expansion Indicator"
 msgstr ""
 
@@ -3325,11 +3325,11 @@ msgstr ""
 msgid "Content Color"
 msgstr ""
 
-#: ../includes/Elements/Event_Calendar.php:2835, ../includes/Elements/Product_Grid.php:3164, ../includes/Elements/Woo_Product_Carousel.php:2152, ../includes/Elements/Woo_Product_Gallery.php:2466, ../includes/Elements/Woo_Product_List.php:3290, ../includes/Traits/Woo_Product_Comparable.php:1336
+#: ../includes/Elements/Event_Calendar.php:2835, ../includes/Elements/Product_Grid.php:3174, ../includes/Elements/Woo_Product_Carousel.php:2152, ../includes/Elements/Woo_Product_Gallery.php:2478, ../includes/Elements/Woo_Product_List.php:3290, ../includes/Traits/Woo_Product_Comparable.php:1336
 msgid " Close Button"
 msgstr ""
 
-#: ../includes/Elements/Event_Calendar.php:2870, ../includes/Elements/Product_Grid.php:3199, ../includes/Elements/Woo_Product_Carousel.php:2187, ../includes/Elements/Woo_Product_Gallery.php:2501, ../includes/Elements/Woo_Product_List.php:3325, ../includes/Extensions/Table_of_Content.php:903
+#: ../includes/Elements/Event_Calendar.php:2870, ../includes/Elements/Product_Grid.php:3209, ../includes/Elements/Woo_Product_Carousel.php:2187, ../includes/Elements/Woo_Product_Gallery.php:2513, ../includes/Elements/Woo_Product_List.php:3325, ../includes/Extensions/Table_of_Content.php:903
 msgid "Button Size"
 msgstr ""
 
@@ -3481,7 +3481,7 @@ msgstr ""
 msgid "Show Load More"
 msgstr ""
 
-#: ../includes/Elements/Facebook_Feed.php:486, ../includes/Elements/Filterable_Gallery.php:908, ../includes/Elements/NFT_Gallery.php:649, ../includes/Elements/Product_Grid.php:864, ../includes/Elements/Product_Grid.php:895, ../includes/Elements/Product_Grid.php:935, ../includes/Elements/Twitter_Feed.php:479, ../includes/Elements/Woo_Product_Gallery.php:689, ../includes/Elements/Woo_Product_Gallery.php:695, ../includes/Elements/Woo_Product_Gallery.php:735, ../includes/Elements/Woo_Product_List.php:254, ../includes/Elements/Woo_Product_List.php:1260, ../includes/Elements/Woo_Product_List.php:1270, ../includes/Traits/Controls.php:900, ../includes/Traits/Controls.php:946, ../includes/Traits/Controls.php:2265
+#: ../includes/Elements/Facebook_Feed.php:486, ../includes/Elements/Filterable_Gallery.php:908, ../includes/Elements/NFT_Gallery.php:649, ../includes/Elements/Product_Grid.php:871, ../includes/Elements/Product_Grid.php:902, ../includes/Elements/Product_Grid.php:942, ../includes/Elements/Twitter_Feed.php:479, ../includes/Elements/Woo_Product_Gallery.php:696, ../includes/Elements/Woo_Product_Gallery.php:702, ../includes/Elements/Woo_Product_Gallery.php:742, ../includes/Elements/Woo_Product_List.php:254, ../includes/Elements/Woo_Product_List.php:1260, ../includes/Elements/Woo_Product_List.php:1270, ../includes/Traits/Controls.php:900, ../includes/Traits/Controls.php:946, ../includes/Traits/Controls.php:2265
 msgid "Load More"
 msgstr ""
 
@@ -3773,7 +3773,7 @@ msgstr ""
 msgid "Item Width"
 msgstr ""
 
-#: ../includes/Elements/Feature_List.php:474, ../includes/Elements/Login_Register.php:4930, ../includes/Elements/Login_Register.php:5258, ../includes/Elements/Woo_Product_Gallery.php:1687
+#: ../includes/Elements/Feature_List.php:474, ../includes/Elements/Login_Register.php:4930, ../includes/Elements/Login_Register.php:5258, ../includes/Elements/Woo_Product_Gallery.php:1699
 msgid "Space Between"
 msgstr ""
 
@@ -3881,7 +3881,7 @@ msgstr ""
 msgid "Media"
 msgstr ""
 
-#: ../includes/Elements/Filterable_Gallery.php:291, ../includes/Elements/Product_Grid.php:2020, ../includes/Elements/Woo_Product_Gallery.php:1781, ../includes/Elements/Woo_Product_List.php:675, ../includes/Traits/Woo_Product_Comparable.php:879
+#: ../includes/Elements/Filterable_Gallery.php:291, ../includes/Elements/Product_Grid.php:2030, ../includes/Elements/Woo_Product_Gallery.php:1793, ../includes/Elements/Woo_Product_List.php:675, ../includes/Traits/Woo_Product_Comparable.php:879
 msgid "Buttons"
 msgstr ""
 
@@ -4137,7 +4137,7 @@ msgstr ""
 msgid "Content Typography"
 msgstr ""
 
-#: ../includes/Elements/Filterable_Gallery.php:1550, ../includes/Elements/Image_Accordion.php:436, ../includes/Elements/Woo_Cart.php:430, ../includes/Elements/Woo_Product_Gallery.php:1649
+#: ../includes/Elements/Filterable_Gallery.php:1550, ../includes/Elements/Image_Accordion.php:436, ../includes/Elements/Woo_Cart.php:430, ../includes/Elements/Woo_Product_Gallery.php:1661
 msgid "Thumbnail"
 msgstr ""
 
@@ -4501,7 +4501,7 @@ msgstr ""
 msgid "Price Label Color"
 msgstr ""
 
-#: ../includes/Elements/GravityForms.php:1388, ../includes/Elements/Product_Grid.php:1469, ../includes/Elements/Product_Grid.php:2807, ../includes/Elements/Woo_Product_Carousel.php:1785, ../includes/Elements/Woo_Product_Gallery.php:988, ../includes/Elements/Woo_Product_Gallery.php:2068
+#: ../includes/Elements/GravityForms.php:1388, ../includes/Elements/Product_Grid.php:1476, ../includes/Elements/Product_Grid.php:2817, ../includes/Elements/Woo_Product_Carousel.php:1785, ../includes/Elements/Woo_Product_Gallery.php:995, ../includes/Elements/Woo_Product_Gallery.php:2080
 msgid "Price Color"
 msgstr ""
 
@@ -4737,7 +4737,7 @@ msgstr ""
 msgid "Preset"
 msgstr ""
 
-#: ../includes/Elements/Interactive_Circle.php:81, ../includes/Elements/Product_Grid.php:325, ../includes/Elements/Product_Grid.php:1958, ../includes/Elements/Woo_Product_Carousel.php:1008, ../includes/Elements/Woo_Product_Carousel.php:2326, ../includes/Elements/Woo_Product_Gallery.php:354, ../includes/Elements/Woo_Product_Gallery.php:1727, ../includes/Traits/Controls.php:594, ../includes/Template/Woo-Product-Carousel/preset-4.php:4
+#: ../includes/Elements/Interactive_Circle.php:81, ../includes/Elements/Product_Grid.php:325, ../includes/Elements/Product_Grid.php:1968, ../includes/Elements/Woo_Product_Carousel.php:1008, ../includes/Elements/Woo_Product_Carousel.php:2326, ../includes/Elements/Woo_Product_Gallery.php:354, ../includes/Elements/Woo_Product_Gallery.php:1739, ../includes/Traits/Controls.php:594, ../includes/Template/Woo-Product-Carousel/preset-4.php:4
 msgid "Preset 4"
 msgstr ""
 
@@ -6204,7 +6204,7 @@ msgstr ""
 msgid "Collections"
 msgstr ""
 
-#: ../includes/Elements/NFT_Gallery.php:120, ../includes/Elements/Product_Grid.php:452, ../includes/Elements/Woo_Product_Carousel.php:862, ../includes/Elements/Woo_Product_Gallery.php:443, ../includes/Elements/Woo_Product_List.php:487
+#: ../includes/Elements/NFT_Gallery.php:120, ../includes/Elements/Product_Grid.php:454, ../includes/Elements/Woo_Product_Carousel.php:862, ../includes/Elements/Woo_Product_Gallery.php:445, ../includes/Elements/Woo_Product_List.php:487
 msgid "Filter By"
 msgstr ""
 
@@ -6224,7 +6224,7 @@ msgstr ""
 msgid "Checkout this <a target=\"_blank\" href=\"%s\">document</a> to learn how to obtain a wallet address."
 msgstr ""
 
-#: ../includes/Elements/NFT_Gallery.php:192, ../includes/Elements/Product_Grid.php:486, ../includes/Elements/Woo_Product_Carousel.php:889, ../includes/Elements/Woo_Product_Gallery.php:466, ../includes/Elements/Woo_Product_List.php:510, ../includes/Traits/Controls.php:254, ../includes/Traits/Controls.php:481, ../includes/Traits/Controls.php:524
+#: ../includes/Elements/NFT_Gallery.php:192, ../includes/Elements/Product_Grid.php:488, ../includes/Elements/Woo_Product_Carousel.php:889, ../includes/Elements/Woo_Product_Gallery.php:468, ../includes/Elements/Woo_Product_List.php:510, ../includes/Traits/Controls.php:254, ../includes/Traits/Controls.php:481, ../includes/Traits/Controls.php:524
 msgid "Order"
 msgstr ""
 
@@ -6240,7 +6240,7 @@ msgstr ""
 msgid "NFT Image"
 msgstr ""
 
-#: ../includes/Elements/NFT_Gallery.php:305, ../includes/Elements/Product_Grid.php:734, ../includes/Elements/Woo_Product_Carousel.php:476, ../includes/Elements/Woo_Product_Gallery.php:1884
+#: ../includes/Elements/NFT_Gallery.php:305, ../includes/Elements/Product_Grid.php:741, ../includes/Elements/Woo_Product_Carousel.php:476, ../includes/Elements/Woo_Product_Gallery.php:1896
 msgid "Image Clickable?"
 msgstr ""
 
@@ -6308,7 +6308,7 @@ msgstr ""
 msgid "Gallery"
 msgstr ""
 
-#: ../includes/Elements/NFT_Gallery.php:890, ../includes/Elements/Simple_Menu.php:357, ../includes/Elements/Woo_Product_Gallery.php:1473
+#: ../includes/Elements/NFT_Gallery.php:890, ../includes/Elements/Simple_Menu.php:357, ../includes/Elements/Woo_Product_Gallery.php:1485
 msgid "Items"
 msgstr ""
 
@@ -6376,7 +6376,7 @@ msgstr ""
 msgid "Target Blank"
 msgstr ""
 
-#: ../includes/Elements/Post_Grid.php:203, ../includes/Elements/Product_Grid.php:848, ../includes/Elements/Twitter_Feed.php:368, ../includes/Elements/Woo_Product_List.php:1138, ../includes/Traits/Controls.php:1485, ../includes/Traits/Controls.php:1576, ../includes/Traits/Controls.php:2013, ../includes/Traits/Twitter_Feed.php:264
+#: ../includes/Elements/Post_Grid.php:203, ../includes/Elements/Product_Grid.php:855, ../includes/Elements/Twitter_Feed.php:368, ../includes/Elements/Woo_Product_List.php:1138, ../includes/Traits/Controls.php:1485, ../includes/Traits/Controls.php:1576, ../includes/Traits/Controls.php:2013, ../includes/Traits/Twitter_Feed.php:264
 msgid "Read More"
 msgstr ""
 
@@ -6488,7 +6488,7 @@ msgstr ""
 msgid "<p class=\"no-posts-found\">No Layout Found!</p>"
 msgstr ""
 
-#: ../includes/Elements/Post_Grid.php:1115, ../includes/Elements/Post_Timeline.php:790, ../includes/Elements/Product_Grid.php:3430, ../includes/Traits/Ajax_Handler.php:265
+#: ../includes/Elements/Post_Grid.php:1115, ../includes/Elements/Post_Timeline.php:790, ../includes/Elements/Product_Grid.php:3440, ../includes/Traits/Ajax_Handler.php:265
 msgid "<p class=\"no-posts-found\">No posts found!</p>"
 msgstr ""
 
@@ -6556,7 +6556,7 @@ msgstr ""
 msgid "Timeline Vertical Line Color"
 msgstr ""
 
-#: ../includes/Elements/Post_Timeline.php:794, ../includes/Elements/Product_Grid.php:3434
+#: ../includes/Elements/Post_Timeline.php:794, ../includes/Elements/Product_Grid.php:3444
 msgid "<p class=\"no-posts-found\">No layout found!</p>"
 msgstr ""
 
@@ -6844,11 +6844,11 @@ msgstr ""
 msgid "Product ID"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:141, ../includes/Elements/Product_Grid.php:1433, ../includes/Elements/Woo_Cart.php:208, ../includes/Elements/Woo_Cart.php:444, ../includes/Elements/Woo_Product_Carousel.php:123, ../includes/Elements/Woo_Product_Carousel.php:1286, ../includes/Elements/Woo_Product_Gallery.php:112, ../includes/Elements/Woo_Product_Gallery.php:952, ../includes/Elements/Woo_Product_List.php:144
+#: ../includes/Elements/Product_Grid.php:141, ../includes/Elements/Product_Grid.php:1440, ../includes/Elements/Woo_Cart.php:208, ../includes/Elements/Woo_Cart.php:444, ../includes/Elements/Woo_Product_Carousel.php:123, ../includes/Elements/Woo_Product_Carousel.php:1286, ../includes/Elements/Woo_Product_Gallery.php:112, ../includes/Elements/Woo_Product_Gallery.php:959, ../includes/Elements/Woo_Product_List.php:144
 msgid "Product Title"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:143, ../includes/Elements/Product_Grid.php:3112, ../includes/Elements/Woo_Product_Carousel.php:125, ../includes/Elements/Woo_Product_Carousel.php:2104, ../includes/Elements/Woo_Product_Gallery.php:114, ../includes/Elements/Woo_Product_Gallery.php:2414, ../includes/Elements/Woo_Product_List.php:146, ../includes/Elements/Woo_Product_List.php:3238, ../includes/Traits/Woo_Product_Comparable.php:45, ../includes/Traits/Woo_Product_Comparable.php:91
+#: ../includes/Elements/Product_Grid.php:143, ../includes/Elements/Product_Grid.php:3122, ../includes/Elements/Woo_Product_Carousel.php:125, ../includes/Elements/Woo_Product_Carousel.php:2104, ../includes/Elements/Woo_Product_Gallery.php:114, ../includes/Elements/Woo_Product_Gallery.php:2426, ../includes/Elements/Woo_Product_List.php:146, ../includes/Elements/Woo_Product_List.php:3238, ../includes/Traits/Woo_Product_Comparable.php:45, ../includes/Traits/Woo_Product_Comparable.php:91
 msgid "SKU"
 msgstr ""
 
@@ -6896,7 +6896,7 @@ msgstr ""
 msgid "Overlay Style"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:279, ../includes/Elements/Product_Grid.php:1959, ../includes/Elements/Woo_Product_Carousel.php:1009, ../includes/Elements/Woo_Product_Gallery.php:1728, ../includes/Traits/Controls.php:595
+#: ../includes/Elements/Product_Grid.php:279, ../includes/Elements/Product_Grid.php:1969, ../includes/Elements/Woo_Product_Carousel.php:1009, ../includes/Elements/Woo_Product_Gallery.php:1740, ../includes/Traits/Controls.php:595
 msgid "Preset 5"
 msgstr ""
 
@@ -6924,307 +6924,307 @@ msgstr ""
 msgid "This will enable WooCommerce loop Before and After hooks. It may break your layout."
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:411, ../includes/Elements/Woo_Product_Gallery.php:403
+#: ../includes/Elements/Product_Grid.php:413, ../includes/Elements/Woo_Product_Gallery.php:405
 msgid "Product Settings"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:421, ../includes/Elements/Product_Grid.php:950, ../includes/Elements/Woo_Product_Carousel.php:1065, ../includes/Elements/Woo_Product_Gallery.php:413, ../includes/Elements/Woo_Product_Gallery.php:751, ../includes/Elements/Woo_Product_List.php:446, ../includes/Traits/Woo_Product_Comparable.php:164
+#: ../includes/Elements/Product_Grid.php:423, ../includes/Elements/Product_Grid.php:957, ../includes/Elements/Woo_Product_Carousel.php:1065, ../includes/Elements/Woo_Product_Gallery.php:415, ../includes/Elements/Woo_Product_Gallery.php:758, ../includes/Elements/Woo_Product_List.php:446, ../includes/Traits/Woo_Product_Comparable.php:164
 msgid "Products"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:432, ../includes/Elements/Woo_Product_Gallery.php:434, ../includes/Elements/Woo_Product_List.php:467, ../includes/Traits/Controls.php:79
+#: ../includes/Elements/Product_Grid.php:434, ../includes/Elements/Woo_Product_Gallery.php:436, ../includes/Elements/Woo_Product_List.php:467, ../includes/Traits/Controls.php:79
 msgid "This option will only affect in <strong>Archive page of Elementor Theme Builder</strong> dynamically."
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:445, ../includes/Elements/Woo_Cart.php:120, ../includes/Elements/Woo_Checkout.php:105, ../includes/Elements/Woo_Product_Carousel.php:195, ../includes/Elements/Woo_Product_Gallery.php:99, ../includes/Elements/Woo_Product_List.php:196, ../includes/Elements/Woo_Product_List.php:480, ../includes/Traits/Woo_Product_Comparable.php:135
+#: ../includes/Elements/Product_Grid.php:447, ../includes/Elements/Woo_Cart.php:120, ../includes/Elements/Woo_Checkout.php:105, ../includes/Elements/Woo_Product_Carousel.php:195, ../includes/Elements/Woo_Product_Gallery.php:99, ../includes/Elements/Woo_Product_List.php:196, ../includes/Elements/Woo_Product_List.php:480, ../includes/Traits/Woo_Product_Comparable.php:135
 msgid "<strong>WooCommerce</strong> is not installed/activated on your site. Please install and activate <a href=\"plugin-install.php?s=woocommerce&tab=search&type=term\" target=\"_blank\">WooCommerce</a> first."
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:465, ../includes/Elements/Woo_Product_Carousel.php:872
+#: ../includes/Elements/Product_Grid.php:467, ../includes/Elements/Woo_Product_Carousel.php:872
 msgid "This filter will only affect in <strong>Single Product</strong> page of <strong>Elementor Theme Builder</strong> dynamically."
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:474, ../includes/Elements/Woo_Product_Carousel.php:881, ../includes/Elements/Woo_Product_Gallery.php:453, ../includes/Elements/Woo_Product_List.php:497, ../includes/Traits/Controls.php:243, ../includes/Traits/Controls.php:462, ../includes/Traits/Controls.php:514
+#: ../includes/Elements/Product_Grid.php:476, ../includes/Elements/Woo_Product_Carousel.php:881, ../includes/Elements/Woo_Product_Gallery.php:455, ../includes/Elements/Woo_Product_List.php:497, ../includes/Traits/Controls.php:243, ../includes/Traits/Controls.php:462, ../includes/Traits/Controls.php:514
 msgid "Order By"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:500, ../includes/Elements/Woo_Product_Carousel.php:900, ../includes/Elements/Woo_Product_Gallery.php:484
+#: ../includes/Elements/Product_Grid.php:502, ../includes/Elements/Woo_Product_Carousel.php:900, ../includes/Elements/Woo_Product_Gallery.php:486
 msgid "Products Count"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:512, ../includes/Elements/Woo_Product_Carousel.php:909, ../includes/Elements/Woo_Product_Gallery.php:497, ../includes/Elements/Woo_Product_List.php:544, ../includes/Extensions/Hover_Effect.php:345, ../includes/Extensions/Hover_Effect.php:990, ../includes/Traits/Controls.php:217, ../includes/Traits/Controls.php:453, ../includes/Traits/Controls.php:2508, ../includes/Traits/Controls.php:2547, ../includes/Traits/Controls.php:2610, ../includes/Traits/Controls.php:2648
+#: ../includes/Elements/Product_Grid.php:514, ../includes/Elements/Woo_Product_Carousel.php:909, ../includes/Elements/Woo_Product_Gallery.php:499, ../includes/Elements/Woo_Product_List.php:544, ../includes/Extensions/Hover_Effect.php:345, ../includes/Extensions/Hover_Effect.php:990, ../includes/Traits/Controls.php:217, ../includes/Traits/Controls.php:453, ../includes/Traits/Controls.php:2508, ../includes/Traits/Controls.php:2547, ../includes/Traits/Controls.php:2610, ../includes/Traits/Controls.php:2648
 msgid "Offset"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:525, ../includes/Elements/Woo_Product_Carousel.php:933
+#: ../includes/Elements/Product_Grid.php:527, ../includes/Elements/Woo_Product_Carousel.php:933
 msgid "Product Status"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:540, ../includes/Elements/Woo_Product_Gallery.php:524
+#: ../includes/Elements/Product_Grid.php:542, ../includes/Elements/Woo_Product_Gallery.php:526
 msgid "Product Categories"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:552, ../includes/Elements/Woo_Product_Gallery.php:538
+#: ../includes/Elements/Product_Grid.php:554, ../includes/Elements/Woo_Product_Gallery.php:540
 msgid "Product Tags"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:564, ../includes/Elements/Woo_Product_Carousel.php:920, ../includes/Elements/Woo_Product_Gallery.php:509, ../includes/Elements/Woo_Product_List.php:583
+#: ../includes/Elements/Product_Grid.php:566, ../includes/Elements/Woo_Product_Carousel.php:920, ../includes/Elements/Woo_Product_Gallery.php:511, ../includes/Elements/Woo_Product_List.php:583
 msgid "Select Products"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:577, ../includes/Elements/Woo_Product_List.php:596
+#: ../includes/Elements/Product_Grid.php:579, ../includes/Elements/Woo_Product_List.php:596
 msgid "Product Type"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:579, ../includes/Elements/Woo_Product_Carousel.php:950, ../includes/Elements/Woo_Product_Gallery.php:556, ../includes/Elements/Woo_Product_List.php:598
+#: ../includes/Elements/Product_Grid.php:581, ../includes/Elements/Woo_Product_Carousel.php:950, ../includes/Elements/Woo_Product_Gallery.php:558, ../includes/Elements/Woo_Product_List.php:598
 msgid "For logged in users only!"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:582, ../includes/Elements/Woo_Product_Carousel.php:953, ../includes/Elements/Woo_Product_Gallery.php:559, ../includes/Elements/Woo_Product_List.php:601
+#: ../includes/Elements/Product_Grid.php:584, ../includes/Elements/Woo_Product_Carousel.php:953, ../includes/Elements/Woo_Product_Gallery.php:561, ../includes/Elements/Woo_Product_List.php:601
 msgid "Purchased Only"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:583, ../includes/Elements/Woo_Product_Carousel.php:954, ../includes/Elements/Woo_Product_Gallery.php:560, ../includes/Elements/Woo_Product_List.php:602
+#: ../includes/Elements/Product_Grid.php:585, ../includes/Elements/Woo_Product_Carousel.php:954, ../includes/Elements/Woo_Product_Gallery.php:562, ../includes/Elements/Woo_Product_List.php:602
 msgid "Not Purchased Only"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:652, ../includes/Elements/Woo_Product_Carousel.php:305, ../includes/Elements/Woo_Product_Gallery.php:628
+#: ../includes/Elements/Product_Grid.php:654, ../includes/Elements/Woo_Product_Carousel.php:305, ../includes/Elements/Woo_Product_Gallery.php:653
 msgid "Show Product Rating?"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:665, ../includes/Elements/Woo_Product_Carousel.php:314, ../includes/Elements/Woo_Product_Gallery.php:664
+#: ../includes/Elements/Product_Grid.php:669, ../includes/Elements/Woo_Product_Carousel.php:314, ../includes/Elements/Woo_Product_Gallery.php:669
 msgid "Show Product Price?"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:677, ../includes/Elements/Woo_Product_Carousel.php:323
+#: ../includes/Elements/Product_Grid.php:684, ../includes/Elements/Woo_Product_Carousel.php:323
 msgid "Short Description?"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:689, ../includes/Elements/Woo_Product_Carousel.php:332, ../includes/Traits/Controls.php:1438, ../includes/Traits/Controls.php:1409
+#: ../includes/Elements/Product_Grid.php:696, ../includes/Elements/Woo_Product_Carousel.php:332, ../includes/Traits/Controls.php:1438, ../includes/Traits/Controls.php:1409
 msgid "Excerpt Words"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:727, ../includes/Traits/Woo_Product_Comparable.php:158
+#: ../includes/Elements/Product_Grid.php:734, ../includes/Traits/Woo_Product_Comparable.php:158
 msgid "Show Product Compare?"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:745
+#: ../includes/Elements/Product_Grid.php:752
 msgid "Show Wishlist?"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:761
+#: ../includes/Elements/Product_Grid.php:768
 msgid "Add To Cart"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:768
+#: ../includes/Elements/Product_Grid.php:775
 msgid "Show Add to cart custom text"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:780, ../includes/Elements/Woo_Product_List.php:1066
+#: ../includes/Elements/Product_Grid.php:787, ../includes/Elements/Woo_Product_List.php:1066
 msgid "Simple Product"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:784, ../includes/Elements/Product_Grid.php:832, ../includes/Elements/Woo_Product_List.php:1070, ../includes/Elements/Woo_Product_List.php:1121, ../includes/Elements/Woo_Product_List.php:3751, ../includes/Elements/Woo_Product_List.php:3752, ../includes/Elements/Woo_Product_List.php:3753, ../includes/Elements/Woo_Product_List.php:3754, ../includes/Elements/Woo_Product_List.php:3755
+#: ../includes/Elements/Product_Grid.php:791, ../includes/Elements/Product_Grid.php:839, ../includes/Elements/Woo_Product_List.php:1070, ../includes/Elements/Woo_Product_List.php:1121, ../includes/Elements/Woo_Product_List.php:3751, ../includes/Elements/Woo_Product_List.php:3752, ../includes/Elements/Woo_Product_List.php:3753, ../includes/Elements/Woo_Product_List.php:3754, ../includes/Elements/Woo_Product_List.php:3755
 msgid "Buy Now"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:796, ../includes/Elements/Woo_Product_List.php:1083
+#: ../includes/Elements/Product_Grid.php:803, ../includes/Elements/Woo_Product_List.php:1083
 msgid "Variable Product"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:800, ../includes/Elements/Woo_Product_List.php:1087
+#: ../includes/Elements/Product_Grid.php:807, ../includes/Elements/Woo_Product_List.php:1087
 msgid "Select options"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:812, ../includes/Elements/Woo_Product_List.php:1100
+#: ../includes/Elements/Product_Grid.php:819, ../includes/Elements/Woo_Product_List.php:1100
 msgid "Grouped Product"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:816, ../includes/Elements/Woo_Product_List.php:1104
+#: ../includes/Elements/Product_Grid.php:823, ../includes/Elements/Woo_Product_List.php:1104
 msgid "View products"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:828, ../includes/Elements/Woo_Product_List.php:1117
+#: ../includes/Elements/Product_Grid.php:835, ../includes/Elements/Woo_Product_List.php:1117
 msgid "External Product"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:844, ../includes/Elements/Woo_Product_List.php:1134
+#: ../includes/Elements/Product_Grid.php:851, ../includes/Elements/Woo_Product_List.php:1134
 msgid "Default Product"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:907, ../includes/Elements/Woo_Product_Gallery.php:707, ../includes/Elements/Woo_Product_List.php:266, ../includes/Traits/Controls.php:912
+#: ../includes/Elements/Product_Grid.php:914, ../includes/Elements/Woo_Product_Gallery.php:714, ../includes/Elements/Woo_Product_List.php:266, ../includes/Traits/Controls.php:912
 msgid "Infinity Scroll"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:919, ../includes/Elements/Woo_Product_Gallery.php:719, ../includes/Elements/Woo_Product_List.php:278, ../includes/Traits/Controls.php:925
+#: ../includes/Elements/Product_Grid.php:926, ../includes/Elements/Woo_Product_Gallery.php:726, ../includes/Elements/Woo_Product_List.php:278, ../includes/Traits/Controls.php:925
 msgid "Scroll Offset (px)"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:924, ../includes/Elements/Woo_Product_Gallery.php:724, ../includes/Elements/Woo_Product_List.php:283, ../includes/Traits/Controls.php:931
+#: ../includes/Elements/Product_Grid.php:931, ../includes/Elements/Woo_Product_Gallery.php:731, ../includes/Elements/Woo_Product_List.php:283, ../includes/Traits/Controls.php:931
 msgid "Set the position of loading to the viewport before it ends from view"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:932, ../includes/Elements/Woo_Product_Gallery.php:732, ../includes/Traits/Controls.php:941, ../includes/Traits/Controls.php:1481
+#: ../includes/Elements/Product_Grid.php:939, ../includes/Elements/Woo_Product_Gallery.php:739, ../includes/Traits/Controls.php:941, ../includes/Traits/Controls.php:1481
 msgid "Label Text"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:1008, ../includes/Elements/Team_Member.php:409, ../includes/Elements/Woo_Product_Gallery.php:789
+#: ../includes/Elements/Product_Grid.php:1015, ../includes/Elements/Team_Member.php:409, ../includes/Elements/Woo_Product_Gallery.php:796
 msgid "Content Background Color"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:1224
+#: ../includes/Elements/Product_Grid.php:1231
 msgid "Image Width(%)"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:1244, ../includes/Elements/Woo_Product_Carousel.php:1233
+#: ../includes/Elements/Product_Grid.php:1251, ../includes/Elements/Woo_Product_Carousel.php:1233
 msgid "Product Details"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:1378
+#: ../includes/Elements/Product_Grid.php:1385
 msgid "Padding (PX)"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:1400
+#: ../includes/Elements/Product_Grid.php:1407
 msgid "Width (%)"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:1441, ../includes/Elements/Woo_Product_Carousel.php:1294, ../includes/Elements/Woo_Product_Gallery.php:960
+#: ../includes/Elements/Product_Grid.php:1448, ../includes/Elements/Woo_Product_Carousel.php:1294, ../includes/Elements/Woo_Product_Gallery.php:967
 msgid "Product Title Color"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:1461, ../includes/Elements/Woo_Product_Carousel.php:1314, ../includes/Elements/Woo_Product_Gallery.php:980
+#: ../includes/Elements/Product_Grid.php:1468, ../includes/Elements/Woo_Product_Carousel.php:1314, ../includes/Elements/Woo_Product_Gallery.php:987
 msgid "Product Price"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:1481, ../includes/Elements/Product_Grid.php:2819, ../includes/Elements/Woo_Product_Carousel.php:1334, ../includes/Elements/Woo_Product_Carousel.php:1797, ../includes/Elements/Woo_Product_Gallery.php:1000, ../includes/Elements/Woo_Product_Gallery.php:2080
+#: ../includes/Elements/Product_Grid.php:1488, ../includes/Elements/Product_Grid.php:2829, ../includes/Elements/Woo_Product_Carousel.php:1334, ../includes/Elements/Woo_Product_Carousel.php:1797, ../includes/Elements/Woo_Product_Gallery.php:1007, ../includes/Elements/Woo_Product_Gallery.php:2092
 msgid "Sale Price Color"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:1500, ../includes/Elements/Woo_Product_Carousel.php:1354, ../includes/Elements/Woo_Product_Gallery.php:1019, ../includes/Elements/Woo_Product_List.php:2246
+#: ../includes/Elements/Product_Grid.php:1507, ../includes/Elements/Woo_Product_Carousel.php:1354, ../includes/Elements/Woo_Product_Gallery.php:1026, ../includes/Elements/Woo_Product_List.php:2246
 msgid "Star Rating"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:1508, ../includes/Elements/Testimonial.php:649, ../includes/Elements/Woo_Product_Carousel.php:1362, ../includes/Elements/Woo_Product_Gallery.php:1027, ../includes/Elements/Woo_Product_List.php:2254
+#: ../includes/Elements/Product_Grid.php:1515, ../includes/Elements/Testimonial.php:649, ../includes/Elements/Woo_Product_Carousel.php:1362, ../includes/Elements/Woo_Product_Gallery.php:1034, ../includes/Elements/Woo_Product_List.php:2254
 msgid "Rating Color"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:1587, ../includes/Elements/Woo_Product_Carousel.php:1397
+#: ../includes/Elements/Product_Grid.php:1595, ../includes/Elements/Woo_Product_Carousel.php:1397
 msgid "Product Description"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:1631
+#: ../includes/Elements/Product_Grid.php:1641
 msgid "Sale Badge Style"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:1642, ../includes/Elements/Woo_Product_Carousel.php:1442, ../includes/Elements/Woo_Product_Gallery.php:1088
+#: ../includes/Elements/Product_Grid.php:1652, ../includes/Elements/Woo_Product_Carousel.php:1442, ../includes/Elements/Woo_Product_Gallery.php:1097
 msgid "Sale Badge Color"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:1654, ../includes/Elements/Woo_Product_Carousel.php:1454, ../includes/Elements/Woo_Product_Gallery.php:1100
+#: ../includes/Elements/Product_Grid.php:1664, ../includes/Elements/Woo_Product_Carousel.php:1454, ../includes/Elements/Woo_Product_Gallery.php:1109
 msgid "Sale Badge Background"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:1676, ../includes/Elements/Woo_Product_Carousel.php:1476, ../includes/Elements/Woo_Product_Gallery.php:1122, ../includes/Elements/Woo_Product_Gallery.php:2199
+#: ../includes/Elements/Product_Grid.php:1686, ../includes/Elements/Woo_Product_Carousel.php:1476, ../includes/Elements/Woo_Product_Gallery.php:1131, ../includes/Elements/Woo_Product_Gallery.php:2211
 msgid "Stock Out Badge"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:1684, ../includes/Elements/Woo_Product_Carousel.php:1484, ../includes/Elements/Woo_Product_Gallery.php:1130
+#: ../includes/Elements/Product_Grid.php:1694, ../includes/Elements/Woo_Product_Carousel.php:1484, ../includes/Elements/Woo_Product_Gallery.php:1139
 msgid "Stock Out Badge Color"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:1696, ../includes/Elements/Woo_Product_Carousel.php:1496, ../includes/Elements/Woo_Product_Gallery.php:1142
+#: ../includes/Elements/Product_Grid.php:1706, ../includes/Elements/Woo_Product_Carousel.php:1496, ../includes/Elements/Woo_Product_Gallery.php:1151
 msgid "Stock Out Badge Background"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:1786, ../includes/Elements/Product_Grid.php:1866, ../includes/Elements/Woo_Product_Gallery.php:1226, ../includes/Elements/Woo_Product_Gallery.php:1299
+#: ../includes/Elements/Product_Grid.php:1796, ../includes/Elements/Product_Grid.php:1876, ../includes/Elements/Woo_Product_Gallery.php:1238, ../includes/Elements/Woo_Product_Gallery.php:1311
 msgid "Button Color"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:1941, ../includes/Elements/Woo_Product_Carousel.php:994, ../includes/Elements/Woo_Product_Gallery.php:1714
+#: ../includes/Elements/Product_Grid.php:1951, ../includes/Elements/Woo_Product_Carousel.php:994, ../includes/Elements/Woo_Product_Gallery.php:1726
 msgid "Sale / Stock Out Badge"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:1993, ../includes/Elements/Woo_Product_Carousel.php:1039, ../includes/Elements/Woo_Product_Gallery.php:1755, ../includes/Elements/Woo_Product_List.php:836
+#: ../includes/Elements/Product_Grid.php:2003, ../includes/Elements/Woo_Product_Carousel.php:1039, ../includes/Elements/Woo_Product_Gallery.php:1767, ../includes/Elements/Woo_Product_List.php:836
 msgid "Sale Text"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:2005, ../includes/Elements/Woo_Product_Carousel.php:1050, ../includes/Elements/Woo_Product_Gallery.php:1766, ../includes/Elements/Woo_Product_List.php:851
+#: ../includes/Elements/Product_Grid.php:2015, ../includes/Elements/Woo_Product_Carousel.php:1050, ../includes/Elements/Woo_Product_Gallery.php:1778, ../includes/Elements/Woo_Product_List.php:851
 msgid "Stock Out Text"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:2007
+#: ../includes/Elements/Product_Grid.php:2017
 msgid "Out of stock"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:2047, ../includes/Elements/Woo_Product_Gallery.php:1788
+#: ../includes/Elements/Product_Grid.php:2057, ../includes/Elements/Woo_Product_Gallery.php:1800
 msgid "Show Quick view?"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:2057, ../includes/Elements/Woo_Product_Gallery.php:1803
+#: ../includes/Elements/Product_Grid.php:2067, ../includes/Elements/Woo_Product_Gallery.php:1815
 msgid "Quick view Title Tag"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:2189, ../includes/Elements/Woo_Product_Carousel.php:1567
+#: ../includes/Elements/Product_Grid.php:2199, ../includes/Elements/Woo_Product_Carousel.php:1567
 msgid "Icons Size"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:2441
+#: ../includes/Elements/Product_Grid.php:2451
 msgid "Show pagination"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:2453
+#: ../includes/Elements/Product_Grid.php:2463
 msgid "Previous Label"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:2454
+#: ../includes/Elements/Product_Grid.php:2464
 msgid "←"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:2464
+#: ../includes/Elements/Product_Grid.php:2474
 msgid "Next Label"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:2465
+#: ../includes/Elements/Product_Grid.php:2475
 msgid "→"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:2725
+#: ../includes/Elements/Product_Grid.php:2735
 msgid "Loader"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:2751, ../includes/Elements/Woo_Product_Carousel.php:1730, ../includes/Elements/Woo_Product_Gallery.php:2007, ../includes/Elements/Woo_Product_List.php:3032
+#: ../includes/Elements/Product_Grid.php:2761, ../includes/Elements/Woo_Product_Carousel.php:1730, ../includes/Elements/Woo_Product_Gallery.php:2019, ../includes/Elements/Woo_Product_List.php:3032
 msgid "Popup"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:2861, ../includes/Elements/Woo_Product_Carousel.php:1851, ../includes/Elements/Woo_Product_Gallery.php:2122
+#: ../includes/Elements/Product_Grid.php:2871, ../includes/Elements/Woo_Product_Carousel.php:1851, ../includes/Elements/Woo_Product_Gallery.php:2134
 msgid "Review Link Color"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:2872, ../includes/Elements/Woo_Product_Carousel.php:1863, ../includes/Elements/Woo_Product_Gallery.php:2133
+#: ../includes/Elements/Product_Grid.php:2882, ../includes/Elements/Woo_Product_Carousel.php:1863, ../includes/Elements/Woo_Product_Gallery.php:2145
 msgid "Review Link Hover"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:2897, ../includes/Elements/Woo_Product_Carousel.php:1888, ../includes/Elements/Woo_Product_List.php:837, ../includes/Elements/Woo_Product_List.php:2113, ../includes/Elements/Woo_Product_List.php:3731
+#: ../includes/Elements/Product_Grid.php:2907, ../includes/Elements/Woo_Product_Carousel.php:1888, ../includes/Elements/Woo_Product_List.php:837, ../includes/Elements/Woo_Product_List.php:2113, ../includes/Elements/Woo_Product_List.php:3731
 msgid "Sale"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:2995, ../includes/Elements/Woo_Product_Carousel.php:1985, ../includes/Elements/Woo_Product_Gallery.php:2297, ../includes/Elements/Woo_Product_List.php:3098
+#: ../includes/Elements/Product_Grid.php:3005, ../includes/Elements/Woo_Product_Carousel.php:1985, ../includes/Elements/Woo_Product_Gallery.php:2309, ../includes/Elements/Woo_Product_List.php:3098
 msgid "Cart Button"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:3618, ../includes/Elements/Woo_Product_Carousel.php:148, ../includes/Elements/Woo_Product_List.php:3567
+#: ../includes/Elements/Product_Grid.php:3628, ../includes/Elements/Woo_Product_Carousel.php:148, ../includes/Elements/Woo_Product_List.php:3567
 msgid "Publish"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:3619, ../includes/Elements/Woo_Product_Carousel.php:149, ../includes/Elements/Woo_Product_List.php:3568
+#: ../includes/Elements/Product_Grid.php:3629, ../includes/Elements/Woo_Product_Carousel.php:149, ../includes/Elements/Woo_Product_List.php:3568
 msgid "Draft"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:3620, ../includes/Elements/Woo_Product_Carousel.php:150, ../includes/Elements/Woo_Product_List.php:3569
+#: ../includes/Elements/Product_Grid.php:3630, ../includes/Elements/Woo_Product_Carousel.php:150, ../includes/Elements/Woo_Product_List.php:3569
 msgid "Pending Review"
 msgstr ""
 
-#: ../includes/Elements/Product_Grid.php:3621, ../includes/Elements/Woo_Product_Carousel.php:151, ../includes/Elements/Woo_Product_List.php:3570
+#: ../includes/Elements/Product_Grid.php:3631, ../includes/Elements/Woo_Product_Carousel.php:151, ../includes/Elements/Woo_Product_List.php:3570
 msgid "Schedule"
 msgstr ""
 
@@ -8821,11 +8821,11 @@ msgstr ""
 msgid "Image Dots Visibility"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Carousel.php:948, ../includes/Elements/Woo_Product_Gallery.php:554
+#: ../includes/Elements/Woo_Product_Carousel.php:948, ../includes/Elements/Woo_Product_Gallery.php:556
 msgid "Purchase Type"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Carousel.php:952, ../includes/Elements/Woo_Product_Gallery.php:558, ../includes/Elements/Woo_Product_List.php:600, ../includes/Elements/Woo_Product_List.php:680
+#: ../includes/Elements/Woo_Product_Carousel.php:952, ../includes/Elements/Woo_Product_Gallery.php:560, ../includes/Elements/Woo_Product_List.php:600, ../includes/Elements/Woo_Product_List.php:680
 msgid "Both"
 msgstr ""
 
@@ -8837,7 +8837,7 @@ msgstr ""
 msgid "Regular Price Color"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Carousel.php:1434, ../includes/Elements/Woo_Product_Gallery.php:1080, ../includes/Elements/Woo_Product_Gallery.php:2158
+#: ../includes/Elements/Woo_Product_Carousel.php:1434, ../includes/Elements/Woo_Product_Gallery.php:1089, ../includes/Elements/Woo_Product_Gallery.php:2170
 msgid "Sale Badge"
 msgstr ""
 
@@ -8885,55 +8885,55 @@ msgstr ""
 msgid "Display thumbnail if a term (Category/Tag) has a thumbnail."
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Gallery.php:470, ../includes/Elements/Woo_Product_List.php:514, ../includes/Traits/Controls.php:258
+#: ../includes/Elements/Woo_Product_Gallery.php:472, ../includes/Elements/Woo_Product_List.php:514, ../includes/Traits/Controls.php:258
 msgid "Ascending"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Gallery.php:474, ../includes/Elements/Woo_Product_List.php:518, ../includes/Traits/Controls.php:262
+#: ../includes/Elements/Woo_Product_Gallery.php:476, ../includes/Elements/Woo_Product_List.php:518, ../includes/Traits/Controls.php:262
 msgid "Descending"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Gallery.php:641
+#: ../includes/Elements/Woo_Product_Gallery.php:632
 msgid "Show Stock Out Products?"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Gallery.php:651
+#: ../includes/Elements/Woo_Product_Gallery.php:642
 msgid "Show Secondary Image on Hover"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Gallery.php:657
+#: ../includes/Elements/Woo_Product_Gallery.php:648
 msgid "Enable to show a secondary image from the product gallery on hover."
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Gallery.php:1169
+#: ../includes/Elements/Woo_Product_Gallery.php:1181
 msgid "Add to Cart Button Styles"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Gallery.php:1366
+#: ../includes/Elements/Woo_Product_Gallery.php:1378
 msgid "Gallery Styles"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Gallery.php:1407
+#: ../includes/Elements/Woo_Product_Gallery.php:1419
 msgid "Gap"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Gallery.php:1661
+#: ../includes/Elements/Woo_Product_Gallery.php:1673
 msgid "Width (PX)"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Gallery.php:1859
+#: ../includes/Elements/Woo_Product_Gallery.php:1871
 msgid "Show Add to Cart?"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Gallery.php:1869
+#: ../includes/Elements/Woo_Product_Gallery.php:1881
 msgid "Show Link?"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Gallery.php:2739
+#: ../includes/Elements/Woo_Product_Gallery.php:2751
 msgid "No Layout Found"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Gallery.php:2733
+#: ../includes/Elements/Woo_Product_Gallery.php:2745
 msgid "No Product Found"
 msgstr ""
 

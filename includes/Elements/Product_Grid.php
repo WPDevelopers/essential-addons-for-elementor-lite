@@ -402,6 +402,8 @@ class Product_Grid extends Widget_Base
 		    ]
 	    );
 
+	    do_action( 'eael/product_grid/layout/controls', $this );
+
         $this->end_controls_section();
     }
 
@@ -689,18 +691,169 @@ class Product_Grid extends Widget_Base
         ]);
 
         $this->add_control(
+		    'eael_product_rating_type',
+		    [
+			    'label'     => esc_html__( 'Type', 'essential-addons-for-elementor' ),
+			    'type'      => Controls_Manager::SELECT,
+			    'default'   => 'stars',
+			    'options'   => [
+				    'stars'        => esc_html__( '&#10029;&#10029;&#10029;&#10029;&#10027;', 'essential-addons-for-elementor' ),
+				    'stars-number' => esc_html__( '&#10029; 4.7', 'essential-addons-for-elementor' ),
+				    'number'       => esc_html__( '4.7/5', 'essential-addons-for-elementor' ),
+			    ],
+                'condition' => [
+                    'eael_product_grid_rating' => 'yes',
+                    'eael_product_grid_style_preset!' => 'eael-product-preset-8'
+                ],
+			    'separator' => 'after'
+		    ]
+	    );
+
+        $this->add_control(
+            'eael_product_sold_count', [
+                'label'        => esc_html__( 'Show Sold Count?', 'essential-addons-for-elementor-lite' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'return_value' => 'yes',
+                'default'      => '',
+                'condition'    => [
+                    'eael_product_grid_style_preset!' => 'eael-product-default'
+                ]
+            ]
+        );
+
+	    $this->add_control(
+		    'eael_product_sold_count_type',
+		    [
+			    'label'     => esc_html__( 'Type', 'essential-addons-for-elementor' ),
+			    'type'      => Controls_Manager::SELECT,
+			    'default'   => 'number',
+			    'options'   => [
+				    'number'     => esc_html__( 'Only Count', 'essential-addons-for-elementor' ),
+				    'bar-number' => esc_html__( 'Count with Progress Bar', 'essential-addons-for-elementor' ),
+				    'bar'        => esc_html__( 'Only Progress Bar', 'essential-addons-for-elementor' ),
+			    ],
+			    'condition' => [
+				    'eael_product_sold_count' => 'yes',
+                    'eael_product_grid_style_preset!' => 'eael-product-default'
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_product_sold_count_bar_width',
+		    [
+			    'label'       => esc_html__( 'Width', 'essential-addons-for-elementor' ),
+			    'type'        => Controls_Manager::SLIDER,
+			    'size_units'  => [ '%' ],
+			    'range'       => [
+				    '%' => [
+					    'min' => 0,
+					    'max' => 100,
+				    ],
+			    ],
+			    'default'     => [
+				    'unit' => '%',
+				    'size' => 50,
+			    ],
+			    'condition'   => [
+				    'eael_product_sold_count' => 'yes',
+				    'eael_product_sold_count_type!' => 'number',
+                    'eael_product_grid_style_preset!' => 'eael-product-default'
+			    ],
+			    'description' => esc_html__( 'This width applied in progress bar for those products which stocks are not managed', 'essential-addons-for-elementor' ),
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_product_sold_count_bar_height',
+		    [
+			    'label'      => esc_html__( 'Height', 'essential-addons-for-elementor' ),
+			    'type'       => Controls_Manager::SLIDER,
+			    'size_units' => [ '%' ],
+			    'range'      => [
+				    'px' => [
+					    'min' => 1,
+					    'max' => 100,
+				    ],
+			    ],
+			    'default'    => [
+				    'unit' => 'px',
+				    'size' => 10,
+			    ],
+			    'selectors'  => [
+				    '{{WRAPPER}} .eael-product-grid .woocommerce ul.products .product .eael-product-sold-count-progress-bar' => 'height: {{SIZE}}{{UNIT}};'
+			    ],
+			    'condition'  => [
+				    'eael_product_sold_count'       => 'yes',
+				    'eael_product_sold_count_type!' => 'number',
+                    'eael_product_grid_style_preset!' => 'eael-product-default'
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_product_sold_count_text',
+		    [
+			    'label'       => esc_html__( 'Text', 'essential-addons-for-elementor' ),
+			    'type'        => Controls_Manager::TEXTAREA,
+			    'default'     => '[sold_count] Sold',
+			    'condition'   => [
+				    'eael_product_sold_count' => 'yes',
+				    'eael_product_sold_count_type!' => 'bar',
+                    'eael_product_grid_style_preset!' => 'eael-product-default'
+			    ],
+                'ai' => [
+                        'active' => false
+                ],
+			    'description' => __( '<strong>[sold_count]</strong> Will be replaced with actual amount.', 'essential-addons-for-elementor' ),
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_product_sold_count_text_align',
+		    [
+			    'label'     => esc_html__( 'Alignment', 'essential-addons-for-elementor' ),
+			    'type'      => Controls_Manager::CHOOSE,
+			    'options'   => [
+				    'left'   => [
+					    'title' => esc_html__( 'Left', 'essential-addons-for-elementor' ),
+					    'icon'  => 'eicon-text-align-left',
+				    ],
+				    'center' => [
+					    'title' => esc_html__( 'Center', 'essential-addons-for-elementor' ),
+					    'icon'  => 'eicon-text-align-center',
+				    ],
+				    'right'  => [
+					    'title' => esc_html__( 'Right', 'essential-addons-for-elementor' ),
+					    'icon'  => 'eicon-text-align-right',
+				    ],
+			    ],
+			    'condition' => [
+				    'eael_product_sold_count'       => 'yes',
+				    'eael_product_sold_count_type!' => 'bar',
+                    'eael_product_grid_style_preset!' => 'eael-product-default'
+			    ],
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-sold-count-number' => 'text-align: {{VALUE}};',
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
             'eael_product_grid_price',
             [
                 'label' => esc_html__('Show Product Price?', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
+			    'separator' => 'before',
                 'default' => 'yes',
                 'condition' => [
                     'eael_product_grid_style_preset!' => 'eael-product-default',
                 ],
             ]
         );
-        $this->add_control(
+
+	    $this->add_control(
             'eael_product_grid_excerpt',
             [
                 'label' => esc_html__('Short Description?', 'essential-addons-for-elementor-lite'),
@@ -1543,6 +1696,7 @@ class Product_Grid extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-product-grid .woocommerce .star-rating::before' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-grid .woocommerce .star-rating span::before' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-grid .woocommerce .eael-star-rating' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -1551,7 +1705,7 @@ class Product_Grid extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'eael_product_grid_product_rating_typography',
-                'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product .star-rating',
+                'selector' => '{{WRAPPER}} .eael-product-grid .woocommerce ul.products li.product .star-rating,{{WRAPPER}} .eael-product-grid .woocommerce .eael-star-rating',
                 'conditions' => [
                     'relation' => 'or',
                     'terms' => [
@@ -1653,7 +1807,9 @@ class Product_Grid extends Widget_Base
             ]
         );
 
-        $this->end_controls_section();
+	    do_action( 'eael/product_grid/style_settings/control/after_color_typography', $this );
+
+	    $this->end_controls_section();
     }
 
     protected function sale_badge_style(){
@@ -3490,7 +3646,7 @@ class Product_Grid extends Widget_Base
                 if ( $found_posts > $args['posts_per_page'] && 'source_archive' !== $settings['post_type'] ) {
 	                $this->print_load_more_button( $settings, $args, $dir_name );
                 }
-                
+
                 do_action( 'eael_woo_after_product_loop', $settings['eael_product_grid_style_preset'] );
                 ?>
             </div>
