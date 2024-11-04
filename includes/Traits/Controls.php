@@ -1828,7 +1828,7 @@ trait Controls
                         'default' => 'yes',
                         'condition' => [
                             'eael_show_meta' => 'yes',
-                            'eael_post_grid_preset_style' => '',
+                            'eael_post_grid_preset_style' => 'one',
                         ],
                     ]
                 );
