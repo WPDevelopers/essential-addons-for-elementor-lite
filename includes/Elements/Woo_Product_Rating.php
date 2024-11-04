@@ -416,8 +416,8 @@ class Woo_Product_Rating extends Widget_Base {
 			return;
 		}
 		
-		$product = Helper::get_product();
-		$settings = $this->get_settings_for_display();
+		$product      = Helper::get_product();
+		$settings     = $this->get_settings_for_display();
 		$rating_count = $product->get_rating_count();
 		$review_count = $product->get_review_count();
 		$average      = $product->get_average_rating();
@@ -447,8 +447,8 @@ class Woo_Product_Rating extends Widget_Base {
 			</div>
 			<?php
 		} else {
+			$average = ( $rating_count > 0 ) ? $average : 0;
 			if ( $rating_count > 0  || 'yes' === $settings['show_empty_review'] ) {
-				$average = ( $rating_count > 0 ) ? $average : 0;
 				$review_caption = ( $rating_count > 0 ) ? $settings['rating_caption'] : $settings['empty_rating_caption'];
 			?>
 			<div class="eael-single-product-rating">
@@ -459,7 +459,14 @@ class Woo_Product_Rating extends Widget_Base {
 					<?php if ( comments_open() && 'yes' === $settings['show_review_count'] ) { ?>
 						<a href="#reviews" class="woocommerce-review-link" rel="nofollow">
 								<span class="before-rating"><?php echo Helper::eael_wp_kses( $settings['before_rating_caption'] ); ?></span>
-								<span class="count"><?php echo Helper::eael_wp_kses( $review_caption ); ?></span>
+								<span class="count">
+									<span class="count_number">
+										<?php echo esc_html( $review_count ); ?>
+									</span>
+									<span class="count_text">
+										<?php echo Helper::eael_wp_kses( $review_caption ); ?>
+									</span>
+								</span>
 								<span class="after-rating"><?php echo Helper::eael_wp_kses( $settings['after_rating_caption'] ); ?></span>
 						</a>
 					<?php } elseif ( $rating_count === 0 && 'yes' === $settings['show_empty_review'] ) {
