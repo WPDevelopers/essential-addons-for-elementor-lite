@@ -399,7 +399,7 @@ trait Elements {
 			return;
 		}
 
-		if ( ! is_singular() && ! is_archive() ) {
+		if ( ! ( is_singular() || is_archive() || is_home() || is_front_page() ) ) {
 			return;
 		}
 
@@ -407,6 +407,12 @@ trait Elements {
 		$html            = '';
 		$global_settings = $settings_data = $document = [];
 
+		if ( is_front_page() ) {
+			$post_id = get_option('page_on_front');
+		} else if ( is_home() ) {
+			$post_id = get_option('page_for_posts');
+		}
+		
 		if ( $this->get_settings( 'reading-progress' ) || $this->get_settings( 'table-of-content' ) || $this->get_settings( 'scroll-to-top' ) ) {
 			$html            = '';
 			$global_settings = get_option( 'eael_global_settings' );
