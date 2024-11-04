@@ -3,15 +3,11 @@
    &__prefix {
       display: flex;
    }
-   .woocommerce-breadcrumb {
+   &__content {
       display: flex;
-   }
-}
-
-.woocommerce {
-   .eael-breadcrumbs {
-      .woocommerce-breadcrumb {
-         margin-bottom: 0;
-      }
+      font-size: 0.92em;
+      color: #767676;
+      margin-bottom: 0;
+      padding: 0;
    }
 }

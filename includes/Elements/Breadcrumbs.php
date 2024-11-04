@@ -218,7 +218,7 @@ class Breadcrumbs extends Widget_Base {
 				'label' => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
 				'type'  => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-breadcrumbs .woocommerce-breadcrumb' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__content' => 'color: {{VALUE}}',
 				]
 			]
 		);
@@ -229,7 +229,7 @@ class Breadcrumbs extends Widget_Base {
 				'label' => esc_html__( 'Link Color', 'essential-addons-for-elementor-lite' ),
 				'type'  => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-breadcrumbs .woocommerce-breadcrumb a' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__content a' => 'color: {{VALUE}}',
 				]
 			]
 		);
@@ -238,7 +238,7 @@ class Breadcrumbs extends Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name'     => 'breadcrumb_typography',
-				'selector' => '{{WRAPPER}} .eael-breadcrumbs .woocommerce-breadcrumb',
+				'selector' => '{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__content',
 			]
 		);
       
@@ -347,7 +347,7 @@ class Breadcrumbs extends Widget_Base {
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'rem', 'custom' ],
 				'default'    => [
-					'top'    => -3,
+					'top'    => -2,
 					'right'  => 10,
 					'bottom' => 0,
 					'left'   => 0,
@@ -444,8 +444,29 @@ class Breadcrumbs extends Widget_Base {
       if ( ! empty( $settings['breadcrumb_home_text'] ) ) {
          return Helper::eael_wp_kses( $settings['breadcrumb_home_text'] );
       }
-      return esc_html__( 'Home', 'essential-addons-for-elementor-lite' );
+      return;
    }
+
+	protected function eael_breadcrumb_prefix() {
+		$settings = $this->get_settings_for_display();
+		$prefix_type = $settings['eael_breadcrumb_prefix_type'];
+		if ( 'yes' == $settings['breadcrumb_prefix_switch'] ) {
+			?>
+			<div class="eael-breadcrumbs__prefix">
+				<?php 
+					switch ( $prefix_type ) {
+						case 'icon':
+							\Elementor\Icons_Manager::render_icon( $settings['eael_breadcrumb_prefix_icon'], [ 'aria-hidden' => 'true' ] );
+							break;
+						case 'text':
+							echo "<span>" . Helper::eael_wp_kses( $settings['eael_breadcrumb_prefix_text'] ) . "</span>";
+							break;
+					}
+				?>
+			</div>
+			<?php
+		}
+	}
 
    protected function breadcrumb_separator() {
       $settings = $this->get_settings_for_display();
@@ -461,46 +482,26 @@ class Breadcrumbs extends Widget_Base {
 
 	protected function eael_wc_breadcrumb() {
 		$settings = $this->get_settings_for_display();
-      $prefix_type = $settings['eael_breadcrumb_prefix_type'];
 
       $args = array(
          'delimiter'   => $this->breadcrumb_separator(),
-         'wrap_before' => '<nav class="woocommerce-breadcrumb" aria-label="Breadcrumb">',
+         'wrap_before' => '<nav class="eael-breadcrumbs__content woocommerce-breadcrumb" aria-label="Breadcrumb">',
          'wrap_after'  => '</nav>',
          'before'      => '',
          'after'       => '',
          'home'        => $this->breadcrumb_home_label(),
       ); 
 
-      ?>
-      <div class="">
-         <?php if ( 'yes' == $settings['breadcrumb_prefix_switch'] ) {
-            ?>
-            <div class="eael-breadcrumbs__prefix">
-               <?php 
-                  switch ( $prefix_type ) {
-                     case 'icon':
-                        \Elementor\Icons_Manager::render_icon( $settings['eael_breadcrumb_prefix_icon'], [ 'aria-hidden' => 'true' ] );
-                        break;
-                     case 'text':
-                        echo "<span>" . Helper::eael_wp_kses( $settings['eael_breadcrumb_prefix_text'] ) . "</span>";
-                        break;
-                  }
-               ?>
-            </div>
-            <?php
-         }
-         ?>
-         <?php woocommerce_breadcrumb( $args ); ?>
-      </div>
-      <?php
+		$this->eael_breadcrumb_prefix();
+		woocommerce_breadcrumb( $args ); 
+
 	}
 
 	protected function eael_breadcrumbs() {
 		global $post;
 		$show_on_home = 1;
 		$delimiter    = $this->breadcrumb_separator();
-		$home         = 'Home';
+		$home         = $this->breadcrumb_home_label();
 		$show_current = 1;
 		$before       = '<span class = "eael-current">';
 		$after        = '</span>';
@@ -510,10 +511,12 @@ class Breadcrumbs extends Widget_Base {
 		$output = '';
 		if ( is_home() || is_front_page() ) {
 			if ( $show_on_home == 1 ) {
-				$output .= '<div class="eb-breadcrumb"><span class="eb-breadcrumb-item"><a href="' . $home_link . '">' . $home . '</a></span></div>';
+				$this->eael_breadcrumb_prefix();
+				$output .= '<div class="eael-breadcrumbs__content"><a href="' . $home_link . '">' . $home . '</a></div>';
 			}
 		} else {
-			$output .= '<div id="eael-crumbs"><a href="' . $home_link . '">' . $home . '</a> ' . $delimiter . ' ';
+			$this->eael_breadcrumb_prefix();
+			$output .= '<div class="eael-breadcrumbs__content"><a href="' . $home_link . '">' . $home . '</a> ' . $delimiter . ' ';
 			if ( is_category() ) {
 				$get_category = get_category( get_query_var( 'cat' ), false );
 				if ( $get_category->parent != 0 ) {
