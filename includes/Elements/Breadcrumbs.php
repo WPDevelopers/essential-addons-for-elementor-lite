@@ -217,6 +217,28 @@ class Breadcrumbs extends Widget_Base {
 			[
 				'label' => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
 				'type'  => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-breadcrumbs .woocommerce-breadcrumb' => 'color: {{VALUE}}',
+				]
+			]
+		);
+
+		$this->add_control(
+			'breadcrumb_link_color',
+			[
+				'label' => esc_html__( 'Link Color', 'essential-addons-for-elementor-lite' ),
+				'type'  => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-breadcrumbs .woocommerce-breadcrumb a' => 'color: {{VALUE}}',
+				]
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name'     => 'breadcrumb_typography',
+				'selector' => '{{WRAPPER}} .eael-breadcrumbs .woocommerce-breadcrumb',
 			]
 		);
       
