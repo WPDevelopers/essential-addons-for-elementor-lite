@@ -164,12 +164,13 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
                                 //For custom post type
                                 $get_custom_post_type = get_post_type( get_the_ID() ); //post
                                 if ( 'product' === $get_custom_post_type ) {
-                                    $get_custom_taxonomy  = $settings['eael_post_terms'] === 'category' ? 'product_cat' : ( $settings['eael_post_terms'] === 'tags' ? 'product_tag' : $settings['eael_post_terms'] );
+                                    $eael_post_terms = isset( $settings["eael_{$get_custom_post_type}_terms"] ) ? $settings["eael_{$get_custom_post_type}_terms"] : $settings['eael_post_terms'];
+                                    $get_custom_taxonomy  = $eael_post_terms === 'category' ? 'product_cat' : ( $eael_post_terms === 'tags' ? 'product_tag' : $eael_post_terms );
                                 } else {
                                     $get_custom_taxonomy  = $settings["eael_{$get_custom_post_type}_terms"]; //tags
                                 }
 
-                                if( 'post' !== $get_custom_post_type && $settings[ 'eael_post_terms' ] === $get_custom_taxonomy ) {
+                                if ( 'post' !== $get_custom_post_type && isset( $settings["eael_{$get_custom_post_type}_terms"] ) && $settings["eael_{$get_custom_post_type}_terms"] === $get_custom_taxonomy ) {
                                     $terms = wp_get_post_terms( get_the_ID(), $get_custom_taxonomy );
                                 }
 

@@ -1653,11 +1653,7 @@ trait Controls
             }
 
 	        $post_types = ControlsHelper::get_post_types();
-	        unset(
-		        $post_types['post'],
-		        $post_types['page'],
-		        $post_types['product']
-	        );
+	        unset( $post_types['post'] );
 	        $taxonomies     = get_taxonomies( [], 'objects' );
 	        $post_types_tax = [];
 
@@ -1673,13 +1669,30 @@ trait Controls
 	        }
 
 	        foreach ( $post_types as $post_type => $post_taxonomies ) {
+		        $options = [];
+                $default = '';
+
+                if ( isset( $post_types_tax[ $post_type ] ) ){
+                    $options = $post_types_tax[ $post_type ];
+                    $default = key( $post_types_tax[ $post_type ] );
+                }
+
+                if ( 'product' === $post_type ) {
+                    unset( $options['product_cat'], $options['product_tag'] );
+                    $options['category'] = __('Category', 'essential-addons-for-elementor-lite');
+                    $options['tags']     = __('Tags', 'essential-addons-for-elementor-lite');
+                } else if ( 'page' === $post_type ) {
+                    $options['category'] = __('Category', 'essential-addons-for-elementor-lite');
+                    $options['tags']     = __('Tags', 'essential-addons-for-elementor-lite');
+                }
+
 		        $wb->add_control(
 			        'eael_' . $post_type . '_terms',
 			        [
 				        'label'     => __( 'Show Terms From', 'essential-addons-for-elementor-lite' ),
 				        'type'      => Controls_Manager::SELECT,
-				        'options'   => isset( $post_types_tax[ $post_type ] ) ? $post_types_tax[ $post_type ] : [],
-				        'default'   => isset( $post_types_tax[ $post_type ] ) ? key( $post_types_tax[ $post_type ] ) : '',
+				        'options'   => $options,
+				        'default'   => $default,
 				        'condition' => [
 					        'eael_show_image'             => 'yes',
 					        'eael_show_post_terms'        => 'yes',
@@ -1703,7 +1716,7 @@ trait Controls
                     'condition' => [
 	                    'eael_show_image'      => 'yes',
 	                    'eael_show_post_terms' => 'yes',
-	                    'post_type'            => [ 'post', 'page', 'product', 'by_id', 'source_dynamic' ]
+	                    'post_type'            => [ 'post', 'by_id', 'source_dynamic' ]
                     ],
                 ]
             );
