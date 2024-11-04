@@ -88,6 +88,12 @@ class GravityForms extends Widget_Base {
         return 'eaicon-gravity-form';
     }
 
+	public function get_style_depends() {
+		return [
+			'gravity_forms_theme_framework'
+		];
+	}
+
     /**
 	 * Register gravity forms widget controls.
 	 *
