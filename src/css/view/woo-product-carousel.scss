@@ -93,6 +93,10 @@ $theme-preset4: #ec3b75;
                     .swiper-wrapper.products {
                         display: grid;
                         grid-template-columns: repeat($i, 1fr);
+
+                        .product:nth-child(n+#{$i+1}){
+                            display: none;
+                        }
                     }
                 }
             }
