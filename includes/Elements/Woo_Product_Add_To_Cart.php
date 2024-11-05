@@ -665,7 +665,44 @@ class Woo_Product_Add_To_Cart extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'add_to_cart_icon_show',
+			[
+				'label'        => esc_html__( 'Show Icon', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'add_to_cart_icon',
+			[
+				'label'   => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+				'type'    => \Elementor\Controls_Manager::ICONS,
+				'default' => [
+					'value'   => 'fas fa-circle',
+					'library' => 'fa-solid',
+				],
+				'condition' => [
+					'add_to_cart_icon_show' => 'yes'
+				]
+			]
+		);
+
 		$this->end_controls_section();
+	}
+
+	public function eael_add_to_cart_text_single() {
+		$settings = $this->get_settings_for_display();
+
+		if ( 'yes' == $settings['add_to_cart_icon_show'] ) {
+			\Elementor\Icons_Manager::render_icon( $settings['add_to_cart_icon'], [ 'aria-hidden' => 'true' ] );
+		}
+		if ( ! empty( $settings['add_to_cart_text'] ) ) {
+			return $settings['add_to_cart_text'];
+		}
 	}
 
 	protected function render() {
@@ -683,18 +720,11 @@ class Woo_Product_Add_To_Cart extends Widget_Base {
       <div class="eael-single-product-add-to-cart">
             <div class="elementor-add-to-cart elementor-product-<?php echo esc_attr( $product->get_type() ); ?>">
                <?php 
-					add_filter( 'woocommerce_product_single_add_to_cart_text', [ $this, 'eael_add_to_cart_button_text_single'] ); 
+					add_filter( 'woocommerce_product_single_add_to_cart_text', [ $this, 'eael_add_to_cart_text_single'] ); 
 					woocommerce_template_single_add_to_cart();
 					?>
             </div>
       </div>
       <?php
-	} 
-
-	public function eael_add_to_cart_button_text_single() {
-		$settings = $this->get_settings_for_display();
-		if ( ! empty( $settings['add_to_cart_text'] ) ) {
-			return $settings['add_to_cart_text'];
-		}
 	}
 }
