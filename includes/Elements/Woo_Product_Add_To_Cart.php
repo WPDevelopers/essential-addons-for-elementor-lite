@@ -728,21 +728,6 @@ class Woo_Product_Add_To_Cart extends Widget_Base {
 		);
 
 		$this->add_control(
-			'add_to_cart_product_type',
-			[
-				'label'   => esc_html__( 'Choose Product Type', 'essential-addons-for-elementor-lite' ),
-				'type'    => \Elementor\Controls_Manager::SELECT,
-				'default' => 'simple',
-				'options' => [
-					'simple'   => esc_html__( 'Simple Product', 'essential-addons-for-elementor-lite' ),
-					'grouped'  => esc_html__( 'Grouped Product', 'essential-addons-for-elementor-lite' ),
-					'external' => esc_html__( 'External/Affiliate product', 'essential-addons-for-elementor-lite' ),
-					'variable' => esc_html__( 'Variable product', 'essential-addons-for-elementor-lite' ),
-				],
-			]
-		);
-
-		$this->add_control(
 			'add_to_cart_text',
 			[
 				'label'   => esc_html__( 'Button Text', 'essential-addons-for-elementor-lite' ),
