@@ -122,18 +122,34 @@ class Woo_Checkout extends Widget_Base {
 				'label' => esc_html__( 'General Settings', 'essential-addons-for-elementor-lite' ),
 			]
 		);
+
+		$template_list = apply_filters('eael/woo-checkout/layout', [
+			'default'     => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
+			'multi-steps' => esc_html__( 'Multi Steps (Pro)', 'essential-addons-for-elementor-lite' ),
+			'split'       => esc_html__( 'Split (Pro)', 'essential-addons-for-elementor-lite' ),
+		]);
+        $layout_options = [];
+
+		if( ! empty( $template_list ) ){
+            $image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/woo-checkout-';
+            foreach( $template_list as $key => $label ){
+                $layout_options[ $key ] = [
+                    'title' => $label,
+                    'image' => $image_path . $key . '.png'
+                ];
+            }
+        }
+
 		$this->add_control(
 			'ea_woo_checkout_layout',
 			[
-				'label' => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'default',
-				'label_block' => false,
-				'options' => apply_filters('eael/woo-checkout/layout', [
-					'default' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
-					'multi-steps' => esc_html__( 'Multi Steps (Pro)', 'essential-addons-for-elementor-lite' ),
-					'split' => esc_html__( 'Split (Pro)', 'essential-addons-for-elementor-lite' ),
-				]),
+				'label'       => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => $layout_options,
+				'default'     => 'default',
+				'label_block' => true,
+                'toggle'      => false,
+                'image_choose'=> true,
 			]
 		);
 
@@ -1046,6 +1062,18 @@ class Woo_Checkout extends Widget_Base {
 				'selector' => '{{WRAPPER}} .ea-woo-checkout-order-review .table-row',
 			]
 		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'name'      => 'ea_woo_checkout_order_review_row_border',
+				'selector'  => '{{WRAPPER}} .ea-woo-checkout-order-review .table-row',
+				'condition' => [
+					'ea_woo_checkout_layout' => 'default',
+				],
+			]
+		);
+
 		$this->add_responsive_control(
 			'ea_woo_checkout_order_review_row_border_radius',
 			[
@@ -1233,17 +1261,17 @@ class Woo_Checkout extends Widget_Base {
 
 		$this->end_controls_tabs();
 
-		$this->add_control(
-			'ea_woo_checkout_order_review_footer_border_color',
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
 			[
-				'label' => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '#404040',
-				'selectors' => [
-					'{{WRAPPER}} .ea-woo-checkout-order-review .footer-content > div' => 'border-color: {{VALUE}};',
+				'name'      => 'ea_woo_checkout_order_review_footer_border',
+				'selector'  => '{{WRAPPER}} .ea-woo-checkout-order-review .footer-content',
+				'condition' => [
+					'ea_woo_checkout_layout' => 'default',
 				],
 			]
 		);
+
 		$this->add_responsive_control(
 			'ea_woo_checkout_order_review_footer_border_radius',
 			[
@@ -2458,10 +2486,30 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#443e6d',
 				'selectors' => [
-					'{{WRAPPER}} #customer_details input, {{WRAPPER}} #customer_details select, {{WRAPPER}} #customer_details textarea' => 'color: {{VALUE}};',
+					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper input' => 'color: {{VALUE}};', 
+					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper select' => 'color: {{VALUE}};', 
+					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper textarea' => 'color: {{VALUE}};',
+					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper .select2-selection span' => 'color: {{VALUE}};',
 				],
 			]
 		);
+
+		$this->add_control(
+			'ea_woo_checkout_customer_details_field_bg_color',
+			[
+				'label' => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#fff',
+				'selectors' => [
+					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper input' => 'background: {{VALUE}};',
+					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper select' => 'background: {{VALUE}};',
+					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper textarea' => 'background: {{VALUE}};',
+					'{{WRAPPER}} #customer_details .form-row .woocommerce-input-wrapper .select2-selection' => 'background: {{VALUE}};',
+				],
+			]
+		);
+
+
 		$this->start_controls_tabs( 'ea_woo_checkout_customer_details_field_tabs' );
 
 		$this->start_controls_tab( 'ea_woo_checkout_customer_details_field_tab_normal', [ 'label' => esc_html__( 'Normal', 'essential-addons-for-elementor-lite' ) ] );
@@ -2473,7 +2521,11 @@ class Woo_Checkout extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#cccccc',
 				'selectors' => [
-					'{{WRAPPER}} #customer_details input, {{WRAPPER}} #customer_details .select, {{WRAPPER}} #customer_details .select2-container--default .select2-selection--single, {{WRAPPER}} #customer_details textarea' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} #customer_details input, 
+					{{WRAPPER}} #customer_details .select, 
+					{{WRAPPER}} .ea-woo-checkout .woocommerce-input-wrapper select, 
+					{{WRAPPER}} #customer_details .select2-container--default .select2-selection--single, 
+					{{WRAPPER}} #customer_details textarea' => 'border-color: {{VALUE}};',
 				],
 			]
 		);
@@ -2789,6 +2841,14 @@ class Woo_Checkout extends Widget_Base {
 				'selectors' => [
 					'.eael-woo-checkout {{WRAPPER}} .woo-checkout-payment .payment_box' => 'color: {{VALUE}}!important;',
 				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'ea_woo_checkout_payment_methods_typo',
+				'selector' => '.eael-woo-checkout {{WRAPPER}} .woo-checkout-payment .payment_box p',
 			]
 		);
 

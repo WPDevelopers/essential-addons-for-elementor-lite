@@ -175,17 +175,29 @@ trait Helper
 		    'data-layout'    => isset( $settings['layout_mode'] ) ? $settings['layout_mode'] : "",
 		    'data-page'      => 1,
 		    'data-args'      => http_build_query( $args ),
-	    ] );
+	    ]);
 
 	    if ( $max_page ) {
 		    $this->add_render_attribute( 'load-more', [ 'data-max-page' => $max_page ] );
 	    }
 
         if ( $args['posts_per_page'] != '-1' ) {
-            $show_or_hide = ('true' == $settings['show_load_more'] || 1 == $settings['show_load_more'] || 'yes' == $settings['show_load_more']) ? '' : ' eael-force-hide';
+            $this->add_render_attribute( 'load-more-wrap', 'class', 'eael-load-more-button-wrap' );
+        
+            if ( "eael-dynamic-filterable-gallery" == $this->get_name() ){
+                $this->add_render_attribute( 'load-more-wrap', 'class', 'dynamic-filter-gallery-loadmore' );
+            }
+            
+            if ( 'infinity' === $settings['show_load_more'] ) {
+                $this->add_render_attribute( 'load-more-wrap', 'class', 'eael-infinity-scroll' );
+                $this->add_render_attribute( 'load-more-wrap', 'data-offset', esc_attr( $settings['load_more_infinityscroll_offset'] ) );
+            } else if ( ! ( 'true' == $settings['show_load_more'] || 1 == $settings['show_load_more'] || 'yes' == $settings['show_load_more'] ) ){
+                $this->add_render_attribute( 'load-more-wrap', 'class', 'eael-force-hide' );
+            }
+
             do_action( 'eael/global/before-load-more-button', $settings, $args, $plugin_type );
             ?>
-            <div class="eael-load-more-button-wrap<?php echo "eael-dynamic-filterable-gallery" == $this->get_name() ? " dynamic-filter-gallery-loadmore" : ""; echo esc_attr( $show_or_hide ); ?>">
+            <div <?php $this->print_render_attribute_string( 'load-more-wrap' ); ?>>
                 <button <?php $this->print_render_attribute_string( 'load-more' ); ?>>
                     <span class="eael-btn-loader button__loader"></span>
                     <span class="eael_load_more_text"><?php echo esc_html($settings['show_load_more_text']) ?></span>
@@ -548,15 +560,6 @@ trait Helper
 		wp_send_json_success();
 	}
 
-	public function promotion_message_on_admin_screen() {
-		?>
-        <div id="eael-admin-promotion-message" class="eael-admin-promotion-message">
-            <i class="e-notice__dismiss eael-admin-promotion-close" role="button" aria-label="Dismiss" tabindex="0"></i>
-			<?php printf( __( "<p> <i>📣</i> NEW: Essential Addons 5.9 is here, with new '<a target='_blank' href='%s'>Woo Product List</a>' widget & more! Check out the <a target='_blank' href='%s'>Changelog</a> for more details 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/elementor/woo-product-list/' ), esc_url( 'https://essential-addons.com/elementor/changelog/' ) ); ?>
-        </div>
-		<?php
-	}
-
 	/**
 	 * remove_admin_notice
 	 *
@@ -574,11 +577,6 @@ trait Helper
 			add_action( 'admin_notices', function () {
 				do_action( 'eael_admin_notices' );
 			} );
-
-			/*Added admin notice which is basically uses for display new promotion message*/
-			if ( get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG ) {
-				add_action( 'eael_admin_notices', array( $this, 'promotion_message_on_admin_screen' ), 1 );
-			}
 		}
 	}
 

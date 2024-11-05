@@ -1,7 +1,7 @@
 $color_0: #eeeeee;
 $color_1: #000000;
 $color_2: rgba(255, 255, 255, .15);
-@-webkit-keyframes animateStripe {
+@-webkit-keyframes eaelAnimateStripe {
     0% {
         transform: translate(0, 0);
     }
@@ -10,7 +10,7 @@ $color_2: rgba(255, 255, 255, .15);
     }
 }
 
-@keyframes animateStripe {
+@keyframes eaelAnimateStripe {
     0% {
         transform: translate(0, 0);
     }
@@ -19,7 +19,7 @@ $color_2: rgba(255, 255, 255, .15);
     }
 }
 
-@-webkit-keyframes animateStripeRTL {
+@-webkit-keyframes eaelAnimateStripeRTL {
     0% {
         transform: translate(0, 0);
     }
@@ -28,7 +28,7 @@ $color_2: rgba(255, 255, 255, .15);
     }
 }
 
-@keyframes animateStripeRTL {
+@keyframes eaelAnimateStripeRTL {
     0% {
         transform: translate(0, 0);
     }
@@ -195,11 +195,11 @@ $color_2: rgba(255, 255, 255, .15);
 }
 
 .eael-progressbar-line-animate .eael-progressbar-line-fill:after {
-    animation: animateStripe 2s linear infinite;
+    animation: eaelAnimateStripe 2s linear infinite;
 }
 
 .eael-progressbar-line-animate-rtl .eael-progressbar-line-fill:after {
-    animation: animateStripeRTL 2s linear infinite;
+    animation: eaelAnimateStripeRTL 2s linear infinite;
 }
 
 .eael-progressbar-circle-wrap>div {

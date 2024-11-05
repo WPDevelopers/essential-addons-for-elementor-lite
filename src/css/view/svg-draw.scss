@@ -22,13 +22,13 @@
   &.fill-svg {
     svg {
       path, circle, rect, polygon {
-        animation-name: FillIn;
+        animation-name: eaelFillIn;
         animation-fill-mode: forwards;
       }
     }
   }
 
-  @keyframes FillIn {
+  @keyframes eaelFillIn {
     0% {
       fill-opacity: 0;
     }

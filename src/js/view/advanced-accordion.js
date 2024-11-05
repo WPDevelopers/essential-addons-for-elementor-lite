@@ -1,4 +1,4 @@
-ea.hooks.addAction("init", "ea", () => {
+eael.hooks.addAction("init", "ea", () => {
 	elementorFrontend.hooks.addAction(
 		"frontend/element_ready/eael-adv-accordion.default",
 		function ($scope, $) {
@@ -86,8 +86,8 @@ ea.hooks.addAction("init", "ea", () => {
 
                 setTimeout(function () {
                     $this.addClass('triggered');
-                    ea.hooks.doAction("widgets.reinit", $this.parent());
-                    ea.hooks.doAction("ea-advanced-accordion-triggered", $this.next());
+                    eael.hooks.doAction("widgets.reinit", $this.parent());
+                    eael.hooks.doAction("ea-advanced-accordion-triggered", $this.next());
                 }, 50);
 			});
 

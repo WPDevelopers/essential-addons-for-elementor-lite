@@ -1033,7 +1033,7 @@ class Helper
 	 * @return mixed|string
 	 */
     public static function eael_validate_html_tag( $tag ){
-	    return in_array( strtolower( $tag ), self::EAEL_ALLOWED_HTML_TAGS ) ? $tag : 'div';
+	    return in_array( strtolower( (string) $tag ), self::EAEL_ALLOWED_HTML_TAGS ) ? $tag : 'div';
     }
 
 	/**
@@ -1048,6 +1048,20 @@ class Helper
             return '';
         }
 		return wp_kses( $text, self::eael_allowed_tags(), array_merge( wp_allowed_protocols(), [ 'data' ] ) );
+	}
+
+    /**
+     * List of allowed protocols for wp_kses
+     *
+	 * eael_allowed_protocols
+	 * @return array
+	 */
+    public static function eael_allowed_protocols( $extra = [] ) {
+        $protocols = array_merge( wp_allowed_protocols(), [ 'data' ] );
+        if ( count( $extra ) > 0 ) {
+			$protocols = array_merge( $protocols, $extra );
+		}
+        return $protocols;
 	}
 
 	/**
@@ -1559,5 +1573,59 @@ class Helper
 
 		// If no match is found, you can return a default value or handle it as needed.
 		return "unknown";
+	}
+
+    public static function get_all_acf_fields() {
+
+        if ( ! class_exists( 'ACF' ) || ! function_exists( 'acf_get_field_groups' ) ) {
+            return [];
+        }
+
+        $acf_field_groups = acf_get_field_groups();
+
+        if ( empty( $acf_field_groups ) ) return [];
+
+        $acf_fields = [];
+		foreach( $acf_field_groups as $group ){
+			$default_acf_fields = acf_get_fields( $group['key'] );
+			if ( ! empty( $default_acf_fields ) ) {
+				foreach( $default_acf_fields as $field ) {
+					$acf_fields[ $field['name'] ] = [
+						'ID'    => $field['ID'],
+						'key'   => $field['key'],
+						'label' => $field['label'] ?? '',
+						'name'  => $field['name'] ?? '',
+						'type'  => $field['type'],
+						'group' => $group['title'] ?? '',
+					];
+				}
+			}
+		}
+    
+        return $acf_fields;
+    }
+
+    public static function eael_get_attachment_id_from_url( $attachment_url ) {
+        global $wpdb;
+    
+        // Strip the image size from the file name (if any)
+        $attachment_url = preg_replace( '/-\d+x\d+(?=\.[^.\s]{2,4}$)/i', '', $attachment_url );
+    
+        // Prepare the query to search in the 'guid' column in 'wp_posts'
+        $attachment_id = $wpdb->get_var( $wpdb->prepare(
+            "SELECT ID FROM $wpdb->posts WHERE guid = %s AND post_type = 'attachment'", $attachment_url
+        ));
+    
+        return $attachment_id;
+    }
+      
+    public static function eael_rating_markup( $rating, $count ) {
+        $html = '';
+		if ( 0 == $rating ) {
+			$html  = '<div class="eael-star-rating star-rating">';
+			$html .= wc_get_star_rating_html( $rating, $count );
+			$html .= '</div>';
+		}
+		return $html;
 	}
 }

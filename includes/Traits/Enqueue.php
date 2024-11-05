@@ -12,14 +12,6 @@ trait Enqueue
 {
 	public function before_enqueue_styles( $widgets ) {
 		$widgets = (array) $widgets;
-		// Compatibility: Gravity forms
-		if ( in_array( 'gravity-form', $widgets ) && class_exists( 'GFCommon' ) ) {
-			foreach ( EnqueueHelper::get_gravity_form_list() as $form_id => $form_name ) {
-				if ( $form_id != '0' ) {
-					gravity_form_enqueue_scripts( $form_id );
-				}
-			}
-		}
 
         // Compatibility: WPforms
         if (in_array('wpforms', $widgets) && function_exists('wpforms')) {
