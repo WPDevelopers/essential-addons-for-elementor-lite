@@ -717,11 +717,13 @@ class Woo_Product_Add_To_Cart extends Widget_Base {
 		$this->add_control(
 			'add_to_cart_show_quantity',
 			[
-				'label'       => esc_html__( 'Show Quantity', 'essential-addons-for-elementor-lite' ),
-				'type'        => \Elementor\Controls_Manager::SWITCHER,
-				'label_off'   => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
-				'label_on'    => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
-				'description' => esc_html__( 'Please note that switching on this option will disable some of the design controls.', 'essential-addons-for-elementor-lite' ),
+				'label'        => esc_html__( 'Show Quantity', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'description'  => esc_html__( 'Please note that switching on this option will disable some of the design controls.', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
 			]
 		);
 
@@ -792,6 +794,10 @@ class Woo_Product_Add_To_Cart extends Widget_Base {
 		}
 	}
 
+	public function eael_show_quantity_fields( $return, $product ) {
+		return true;
+	}	 
+
 	protected function render() {
       global $product;
 
@@ -802,6 +808,10 @@ class Woo_Product_Add_To_Cart extends Widget_Base {
       }
 
 		$settings = $this->get_settings_for_display();
+
+		if ( ! $settings['add_to_cart_show_quantity'] ) {
+			add_filter( 'woocommerce_is_sold_individually', [ $this, 'eael_show_quantity_fields' ], 10, 2 );
+		}
 
       ?>
       <div class="eael-single-product-add-to-cart">
