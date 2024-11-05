@@ -7,6 +7,13 @@
          }
       }
    }
+   .cart {
+      .button {
+         display: flex;
+         padding-top: 12px;
+         gap: 10px;
+      }
+   }
 }
 .eael-add-to-cart--layout-column {
    &.eael-add-to-cart--align-flex-start {
