@@ -665,7 +665,7 @@ class Helper
             $link = ($term_type === 'category') ? get_category_link($term->term_id) : get_tag_link($term->term_id);
             $html .= '<li>';
             $html .= '<a href="' . esc_url($link) . '">';
-            $html .= $term->name;
+            $html .= esc_html( $term->name );
             $html .= '</a>';
             $html .= '</li>';
             $count++;
@@ -937,17 +937,17 @@ class Helper
                     if ( $pagination_Paginationlist < 7 + ($adjacents * 2) ){
                         for ( $pagination = 1; $pagination <= $pagination_Paginationlist; $pagination ++ ) {
                             $active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
-	                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
+	                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" , esc_attr( $active ) ,esc_html( $pagination ) );
                         }
 
                     } else if ( $pagination_Paginationlist >= 5 + ($adjacents * 2) ){
                         for ( $pagination = 1; $pagination <= 4 + ( $adjacents * 2 ); $pagination ++ ) {
                             $active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
-	                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
+	                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,esc_attr( $active ) ,esc_html( $pagination ) );
                         }
 
                         $setPagination .="<li class='pagitext dots'>...</li>";
-                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
+                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,esc_attr( $active ) ,esc_html( $pagination ) );
                     }
 
                     if ($pagination_Paginationlist > 1) {
@@ -1033,7 +1033,7 @@ class Helper
 	 * @return mixed|string
 	 */
     public static function eael_validate_html_tag( $tag ){
-	    return in_array( strtolower( $tag ), self::EAEL_ALLOWED_HTML_TAGS ) ? $tag : 'div';
+	    return in_array( strtolower( (string) $tag ), self::EAEL_ALLOWED_HTML_TAGS ) ? $tag : 'div';
     }
 
 	/**
@@ -1048,6 +1048,20 @@ class Helper
             return '';
         }
 		return wp_kses( $text, self::eael_allowed_tags(), array_merge( wp_allowed_protocols(), [ 'data' ] ) );
+	}
+
+    /**
+     * List of allowed protocols for wp_kses
+     *
+	 * eael_allowed_protocols
+	 * @return array
+	 */
+    public static function eael_allowed_protocols( $extra = [] ) {
+        $protocols = array_merge( wp_allowed_protocols(), [ 'data' ] );
+        if ( count( $extra ) > 0 ) {
+			$protocols = array_merge( $protocols, $extra );
+		}
+        return $protocols;
 	}
 
 	/**
@@ -1076,6 +1090,7 @@ class Helper
 			'img'     => [
 				'src'    => [],
 				'alt'    => [],
+				'title'  => [],
 				'height' => [],
 				'width'  => [],
 				'class'  => [],
@@ -1563,47 +1578,30 @@ class Helper
 
     public static function get_all_acf_fields() {
 
-        if( ! class_exists( 'ACF' ) ){
+        if ( ! class_exists( 'ACF' ) || ! function_exists( 'acf_get_field_groups' ) ) {
             return [];
         }
 
-        // Get all registered post types
-        $post_types = get_post_types( [ 'public' => true ], 'names' );
+        $acf_field_groups = acf_get_field_groups();
+
+        if ( empty( $acf_field_groups ) ) return [];
+
         $acf_fields = [];
-    
-        // Loop through each post type
-        foreach( $post_types as $post_type ) {
-            // Query the first post of this post type
-            $args = [
-                'post_type'      => $post_type,
-                'posts_per_page' => 1,
-                'post_status'    => 'publish'
-            ];
-    
-            $query = new \WP_Query($args);
-    
-            if( $query->have_posts() ) {
-                while( $query->have_posts() ): $query->the_post();
-    
-                    // Get all field objects for this post
-                    $fields = get_field_objects();
-    
-                    if( $fields ) {
-                        foreach( $fields as $field_name => $field ) {
-                            // Add field details to the array
-                            $acf_fields[ $field_name ] = [
-                                'label'     => $field['label'],
-                                'name'      => $field_name,
-                                'type'      => $field['type'],
-                                'post_type' => $post_type,
-                            ];
-                        }
-                    }
-    
-                endwhile;
-                wp_reset_postdata();
-            }
-        }
+		foreach( $acf_field_groups as $group ){
+			$default_acf_fields = acf_get_fields( $group['key'] );
+			if ( ! empty( $default_acf_fields ) ) {
+				foreach( $default_acf_fields as $field ) {
+					$acf_fields[ $field['name'] ] = [
+						'ID'    => $field['ID'],
+						'key'   => $field['key'],
+						'label' => $field['label'] ?? '',
+						'name'  => $field['name'] ?? '',
+						'type'  => $field['type'],
+						'group' => $group['title'] ?? '',
+					];
+				}
+			}
+		}
     
         return $acf_fields;
     }
@@ -1630,5 +1628,33 @@ class Helper
 			$html .= '</div>';
 		}
 		return $html;
+	}
+
+	public static function eael_onpage_edit_template_markup( $page_id, $template_id ) {
+		if ( Plugin::$instance->editor->is_edit_mode() ) {
+			$active_doc = $_GET['active-document'] ?? 0;
+			$mode       = $active_doc === $template_id ? 'save' : 'edit';
+			?>
+			<div class='eael-onpage-edit-template-wrapper'>
+				<div class='eael-onpage-edit-template' data-eael-template-id='<?php echo esc_attr( $template_id ); ?>'
+					 data-page-id='<?php echo esc_attr( $page_id ); ?>' data-mode='<?php echo esc_attr( $mode ); ?>'>
+					<i class='eicon-edit'></i>
+					<span><?php esc_html_e( 'Edit Template' ); ?></span>
+				</div>
+			</div>
+			<?php
+			if ( $mode === 'save' ) {
+				?>
+				<script>
+                    (function ($) {
+                        let $this = $("[data-eael-template-id='<?php echo esc_js( $template_id ); ?>']");
+                        $this.find('span').text('Save & Back');
+                        $this.find('i').addClass('eicon-arrow-left').removeClass('eicon-edit');
+                        $this.closest('.eael-onpage-edit-template-wrapper').addClass('eael-onpage-edit-activate').parent().addClass('eael-widget-otea-active');
+                    })(jQuery);
+				</script>
+				<?php
+			}
+		}
 	}
 }

@@ -151,7 +151,7 @@ trait Facebook_Feed {
 
 						if ( isset( $settings['eael_facebook_feed_is_show_preview_description'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_description'] ) {
 							$description = isset( $item['attachments']['data'][0]['description'] ) ? $item['attachments']['data'][0]['description'] : '';
-							$html        .= '<p class="eael-facebook-feed-url-description">' . $description . '</p>';
+							$html        .= '<p class="eael-facebook-feed-url-description">' . wp_kses( $description, HelperClass::eael_allowed_tags() ) . '</p>';
 						}
 						$html .= '</div>';
 
@@ -234,7 +234,7 @@ trait Facebook_Feed {
 				header( 'Content-Encoding: gzip' );
 				header( 'Content-Length: ' . strlen( $response ) );
 
-				printf( '%1$s', $response );
+				printf( '%1$s', wp_kses( $response, HelperClass::eael_allowed_tags() ) );
 			} else {
 				wp_send_json( $data );
 			}

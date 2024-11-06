@@ -88,6 +88,12 @@ class GravityForms extends Widget_Base {
         return 'eaicon-gravity-form';
     }
 
+	public function get_style_depends() {
+		return [
+			'gravity_forms_theme_framework'
+		];
+	}
+
     /**
 	 * Register gravity forms widget controls.
 	 *
@@ -2843,9 +2849,9 @@ class GravityForms extends Widget_Base {
 	 * @access protected
 	 */
     protected function render() {
-        if(!class_exists('\GFForms')) {
-            return;
-        }
+	    if ( ! class_exists( '\GFForms' ) || get_post_type( get_the_ID() ) === 'conversational_form' ) {
+		    return;
+	    }
 
         $settings = $this->get_settings_for_display();
         
@@ -2885,7 +2891,7 @@ class GravityForms extends Widget_Base {
         }
 
         if ( ! empty( $settings['contact_form_list'] ) ) { ?>
-            <div <?php echo $this->get_render_attribute_string( 'contact-form' ); ?>>
+            <div <?php $this->print_render_attribute_string( 'contact-form' ); ?>>
                 <?php if ( $settings['custom_title_description'] == 'yes' ) { ?>
                     <div class="eael-gravity-form-heading">
                         <?php if ( $settings['form_title_custom'] != '' ) { ?>
@@ -2895,7 +2901,9 @@ class GravityForms extends Widget_Base {
                         <?php } ?>
                         <?php if ( $settings['form_description_custom'] != '' ) { ?>
                             <div class="eael-contact-form-description eael-gravity-form-description">
-                                <?php echo $this->parse_text_editor( $settings['form_description_custom'] ); ?>
+                                <?php
+                                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                echo $this->parse_text_editor( $settings['form_description_custom'] ); ?>
                             </div>
                         <?php } ?>
                     </div>

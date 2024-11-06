@@ -59,7 +59,21 @@ class Adv_Tabs extends Widget_Base
     }
     
     protected function is_dynamic_content():bool {
-        return false;
+        if( Plugin::$instance->editor->is_edit_mode() ) {
+            return false;
+        }
+        $tabs     = $this->get_settings('eael_adv_tabs_tab');
+        $is_dynamic_content = false;
+        if( ! empty( $tabs ) ){
+            foreach( $tabs as $tab ){
+                if( isset( $tab['eael_adv_tabs_text_type'] ) && 'template' == $tab['eael_adv_tabs_text_type'] ) {
+                    $is_dynamic_content = true;
+                    break;
+                }
+            }
+        }
+
+        return $is_dynamic_content;
     }
 
     public function get_custom_help_url()
@@ -996,6 +1010,7 @@ class Adv_Tabs extends Widget_Base
     {
         $settings = $this->get_settings_for_display();
 
+		$page_id = get_the_ID();
         $eael_find_default_tab = [];
         $eael_adv_tab_id = 1;
         $eael_adv_tab_content_id = 1;
@@ -1116,19 +1131,24 @@ class Adv_Tabs extends Widget_Base
 			        $tab_id = $tab_id === 'safari' ? 'eael-safari-tab' : $tab_id . '-tab'; ?>
 
                     <div id="<?php echo esc_attr( $tab_id ); ?>" class="clearfix eael-tab-content-item <?php echo esc_attr($tab['eael_adv_tabs_tab_show_as_default']); ?>" data-title-link="<?php echo esc_attr( $tab_id ); ?>">
-				        <?php if ('content' == $tab['eael_adv_tabs_text_type']) : ?>
-					        <?php echo wp_kses( $this->parse_text_editor( $tab['eael_adv_tabs_tab_content'] ), Helper::eael_allowed_tags() ); ?>
-				        <?php elseif ('template' == $tab['eael_adv_tabs_text_type']) : ?>
-                            <?php if ( ! empty( $tab['eael_primary_templates'] ) ) {
+				        <?php
+                        if ('content' == $tab['eael_adv_tabs_text_type']) :
+                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                            echo $this->parse_text_editor( $tab['eael_adv_tabs_tab_content'] );
+
+				        elseif ('template' == $tab['eael_adv_tabs_text_type']) :
+                            if ( ! empty( $tab['eael_primary_templates'] ) ) {
                                 // WPML Compatibility
                                 if ( ! is_array( $tab['eael_primary_templates'] ) ) {
                                     $tab['eael_primary_templates'] = apply_filters( 'wpml_object_id', $tab['eael_primary_templates'], 'wp_template', true );
                                 }
-                                
+
+						        Helper::eael_onpage_edit_template_markup( $page_id, $tab['eael_primary_templates'] );
+
                                 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'] );
-                            } ?>
-				        <?php endif; ?>
+                                echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'], true );
+                            }
+				        endif; ?>
                     </div>
 		        <?php endforeach; ?>
             </div>
