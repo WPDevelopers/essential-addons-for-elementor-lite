@@ -656,7 +656,7 @@ trait Woo_Cart_Helper {
 					$icon = Helper::get_render_icon( $settings['eael_woo_cart_components_continue_shopping_icon'], [ 'aria-hidden' => 'true' ] );
 					printf( '<a class="eael-woo-cart-back-to-shop" href="%s">%s %s</a>',
 						esc_url( get_permalink( wc_get_page_id( 'shop' ) ) ),
-						wp_kses( $icon, Helper::eael_allowed_tags() ),
+						wp_kses( $icon, Helper::eael_allowed_icon_tags() ),
 						esc_html( $continue_shopping_text )
 					);
 				}
