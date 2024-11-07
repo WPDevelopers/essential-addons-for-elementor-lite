@@ -24,14 +24,15 @@
   line-height: 48px;
   margin: 10px 0;
 }
-.eael-dual-header .title.load,
-.eael-dual-header .title span.load {
+.eael-dual-header .title.lead,
+.eael-dual-header .title span.lead {
   color: #1abc9c;
 }
-.eael-dual-header .title.load.gradient-color,
-.eael-dual-header .title span.load.gradient-color {
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.eael-dual-header .title.lead.gradient-color,
+.eael-dual-header .title span.lead.gradient-color {
+  -webkit-background-clip: text !important;
+          background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
 }
 .eael-dual-header .subtext {
   font-size: 16px;

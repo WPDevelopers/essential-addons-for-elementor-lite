@@ -891,11 +891,11 @@ class Dual_Color_Header extends Widget_Base
 	{
 		$settings = $this->get_settings_for_display();
         $gradient_style = '';
-		$has_color_first_and_second = $settings['eael_dch_dual_title_color_gradient_first']  && $settings['eael_dch_dual_title_color_gradient_second'];
-        if ( $has_color_first_and_second  ) {
-            $settings_eael_dch_dual_title_color_gradient_first = Helper::eael_fetch_color_or_global_color($settings, 'eael_dch_dual_title_color_gradient_first');
-            $settings_eael_dch_dual_title_color_gradient_second = Helper::eael_fetch_color_or_global_color($settings, 'eael_dch_dual_title_color_gradient_second');
-            $gradient_style = 'background: -webkit-linear-gradient('. esc_attr( $settings_eael_dch_dual_title_color_gradient_first ) . ', '. esc_attr( $settings_eael_dch_dual_title_color_gradient_second ) .');-webkit-background-clip: text;-webkit-text-fill-color: transparent;';
+		$has_gradient = $settings['eael_dch_dual_title_color_gradient_first']  && $settings['eael_dch_dual_title_color_gradient_second'];
+        if ( $has_gradient ) {
+            $gradient_1 = Helper::eael_fetch_color_or_global_color($settings, 'eael_dch_dual_title_color_gradient_first');
+            $gradient_2 = Helper::eael_fetch_color_or_global_color($settings, 'eael_dch_dual_title_color_gradient_second');
+            $gradient_style = 'background: linear-gradient('. esc_attr( $gradient_1 ) . ', '. esc_attr( $gradient_2 ) .');';
         };
 		$icon_migrated = isset($settings['__fa4_migrated']['eael_dch_icon_new']);
 		$icon_is_new = empty($settings['eael_dch_icon']);
@@ -914,7 +914,7 @@ class Dual_Color_Header extends Widget_Base
 		$title_tag = Helper::eael_validate_html_tag( $settings['title_tag'] );
 		$title_html = '<' . $title_tag . ' class="title">';
 		$title_html .= '<span';
-		if( $has_color_first_and_second ){
+		if( $has_gradient ){
 			$title_html .= ' style="' . $gradient_style . '" ';
 		}
 		$title_html .= ' class="lead ' . $settings['eael_dch_dual_color_selector'] . '">' . $settings['eael_dch_first_title'] . '</span>';
