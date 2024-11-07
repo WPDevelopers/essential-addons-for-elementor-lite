@@ -2131,7 +2131,9 @@ class Formstack extends Widget_Base {
                 </div>
             <?php } ?>
             <div class="fsForm">
-                <?php echo wp_kses( $form_data, Helper::eael_allowed_tags() ); ?>
+                <?php
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                echo $this->parse_text_editor( $form_data ); ?>
             </div>
         </div>
         <?php

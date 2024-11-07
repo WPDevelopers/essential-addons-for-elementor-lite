@@ -4,7 +4,7 @@ Tags: elementor, elements, elementor addon, elementor widget, woocommerce elemen
 Requires at least: 5.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 6.0.8
+Stable tag: 6.0.9
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -298,6 +298,22 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.0.9 - 06/11/2024 =
+
+- Improved: Added Edit Template support right inside the page itself
+- Improved: EA Post Grid | Added support to show custom post's field/taxonomy
+- Improved: EA Team Member | Added a dynamic tag option for showing ACF images in Team Member image
+- Improved: EA Filterable Gallery | Added support for YouTube Shorts
+- Fixed: EA Data Table | Using text area Content is visibility issue under < a > tag
+- Fixed: EA Gravity Forms | Layout UI issue on the editor page
+- Fixed: EA Interactive Circle | Conflicting with Whiskers Theme Pro
+- Fixed: EA Post Grid | Author name issue in Style 1 & 2
+- Fixed: EA Scroll To Top | Added support on Archive page
+- Fixed: EA Woo Checkout | PHP Deprecated issue
+- Fixed: EA Product Grid | Image clickable issue
+- Fixed: Conflict with Formstack plugin
+- Few minor bug fixes & improvements
 
 = 6.0.8 - 27/10/2024 =
 

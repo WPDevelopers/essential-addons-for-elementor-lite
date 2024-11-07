@@ -395,6 +395,8 @@ class Woo_Product_Gallery extends Widget_Base {
 			]
 		);
 
+		do_action( 'eael/product_gallery/layout/controls', $this );
+
 		$this->end_controls_section();
 	}
 
@@ -624,17 +626,6 @@ class Woo_Product_Gallery extends Widget_Base {
 			]
 		);
 
-		$this->add_control( 'eael_product_gallery_rating', [
-			'label'        => esc_html__( 'Show Product Rating?', 'essential-addons-for-elementor-lite' ),
-			'type'         => Controls_Manager::SWITCHER,
-			'return_value' => 'yes',
-			'default'      => 'yes',
-			'condition'    => [
-				'eael_product_gallery_style_preset!' => [ 'eael-product-preset-1' ],
-			],
-
-		] );
-
 		$this->add_control(
 			'eael_product_out_of_stock_show',
 			[
@@ -658,6 +649,20 @@ class Woo_Product_Gallery extends Widget_Base {
 			]
 		);
 
+		$this->add_control( 'eael_product_gallery_rating', [
+			'label'        => esc_html__( 'Show Product Rating?', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'return_value' => 'yes',
+			'default'      => 'yes',
+			'condition'    => [
+				'eael_product_gallery_style_preset!' => [ 'eael-product-preset-1' ],
+			],
+
+		] );
+
+		do_action( 'eael/product_gallery/product_settings/control/after_rating', $this );
+
+
 		$this->add_control(
 			'eael_product_gallery_price',
 			[
@@ -670,6 +675,8 @@ class Woo_Product_Gallery extends Widget_Base {
 				],
 			]
 		);
+
+		do_action( 'eael/product_gallery/product_settings/control/after_pricing', $this );
 
 		$this->add_group_control(
 			Group_Control_Image_Size::get_type(),
@@ -1030,6 +1037,7 @@ class Woo_Product_Gallery extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-gallery .woocommerce .star-rating::before'      => 'color: {{VALUE}};',
 					'{{WRAPPER}} .eael-product-gallery .woocommerce .star-rating span::before' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-product-gallery .woocommerce .eael-star-rating'         => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1038,7 +1046,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'      => 'eael_product_gallery_product_rating_typography',
-				'selector'  => '{{WRAPPER}} .eael-product-gallery .woocommerce ul.products li.product .star-rating',
+				'selector'  => '{{WRAPPER}} .eael-product-gallery .woocommerce ul.products li.product .star-rating, {{WRAPPER}} .eael-product-gallery .woocommerce .eael-star-rating',
 				'condition' => [
 					'eael_product_gallery_style_preset!' => [
 						'eael-product-preset-3',
@@ -1064,6 +1072,7 @@ class Woo_Product_Gallery extends Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-product-gallery .woocommerce ul.products li.product .star-rating' => 'font-size: {{SIZE}}px!important;',
+                    '{{WRAPPER}} .eael-product-gallery .woocommerce .eael-star-rating' => 'font-size: {{SIZE}}px!important;',
 				],
 				'condition' => [
 					'eael_product_gallery_style_preset' => [
@@ -1156,6 +1165,9 @@ class Woo_Product_Gallery extends Widget_Base {
 				'selector' => '{{WRAPPER}} .woocommerce ul.products li.product .outofstock-badge, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale.outofstock',
 			]
 		);
+
+		do_action( 'eael/product_gallery/style_settings/control/after_color_typography', $this );
+
 
 		$this->end_controls_section();
 	}
@@ -2738,7 +2750,7 @@ class Woo_Product_Gallery extends Widget_Base {
 				} else {
 					echo '<h2 class="eael-product-not-found">' . esc_html__( 'No Layout Found', 'essential-addons-for-elementor-lite' ) . '</h2>';
 				}
-				
+
 				do_action( 'eael_woo_after_product_loop' );
 
 				$this->print_load_more_button( $settings, $args, $dir_name );
