@@ -58,6 +58,25 @@ $quick_view_setting = [
 ];
 $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_class', [], $product->get_id(), 'eicon-woocommerce' ) );
 
+$product_data = [
+	'id'     => get_the_ID(),
+	'title'  => '<div class="eael-product-title">
+                                <a href="' . esc_url( $product->get_permalink() ) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">' .
+	            sprintf( '<%1$s class="woocommerce-loop-product__title">%2$s</%1$s>', $title_tag, $product->get_title() )
+	            . '</a></div>',
+	'ratings' => $should_print_rating ? wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) : '',
+	'price'   => ''
+];
+
+if ( $should_print_rating ) {
+	$avg_rating = $product->get_average_rating();
+	if( $avg_rating > 0 ){
+		$product_data['ratings'] = wc_get_rating_html($product->get_average_rating(), $product->get_rating_count());
+	} else {
+		$product_data['ratings'] = Helper::eael_rating_markup( $product->get_average_rating(), $product->get_rating_count() );
+	}
+}
+
 
 
 if ( 'yes' !== $settings['eael_product_grid_rating'] ) {
