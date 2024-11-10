@@ -1392,6 +1392,7 @@ trait Login_Registration {
 	 */
 	public function replace_placeholders( $message, $receiver = 'user' ) {
 		$placeholders = [
+			'/(\w+\s*=\s*["\'][^"\']*\[(password_reset_link|password)\][^"\']*["\'])/',
 			'/<[^>]*\[(password_reset_link|password)\][^>]*>/',
 			'/\[eael_phone_number\]/',
 			'/\[password\]/',
@@ -1405,6 +1406,7 @@ trait Login_Registration {
 			'/\[sitetitle\]/',
 		];
 		$replacement  = [
+			'',
 			'',
 			self::$email_options['eael_phone_number'],
 			self::$email_options['password'],
@@ -1481,6 +1483,7 @@ trait Login_Registration {
 		$website 		   = !empty( self::$email_options_lostpassword['website'] ) ? self::$email_options_lostpassword['website'] : '';
 		
 		$placeholders = [
+			'/(\w+\s*=\s*["\'][^"\']*\[password_reset_link\][^"\']*["\'])/',
 			'/<[^>]*\[password_reset_link\][^>]*>/',
 			'/\[password_reset_link\]/',
 			'/\[username\]/',
@@ -1492,6 +1495,7 @@ trait Login_Registration {
 			'/\[sitetitle\]/',
 		];
 		$replacement  = [
+			'',
 			'',
 			$password_reset_link,
 			$username,
