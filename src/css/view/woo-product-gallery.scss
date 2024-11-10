@@ -129,6 +129,17 @@
                     //margin-right: 10px !important;
                 }
 
+                .eael-product-sold-count-progress-bar-wrapper{
+                    background-color: #f1f1f1;
+                    border-radius: 10px;
+                    overflow: hidden;
+                }
+                .eael-product-sold-count-progress-bar{
+                    background-color: #2196F3;
+                    height: 10px;
+                    border-radius: 10px;
+                }
+
                 .star-rating {
                     margin: 0 auto 5px;
                     display: inline-block;
