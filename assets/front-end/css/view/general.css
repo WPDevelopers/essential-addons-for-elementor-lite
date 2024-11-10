@@ -180,3 +180,93 @@
   width: 1px !important;
   white-space: nowrap !important; /* 3 */
 }
+
+/* Onpage Edit Template */
+
+.elementor-widget-eael-adv-tabs .eael-tab-content-item,
+.elementor-widget-eael-adv-accordion .eael-accordion-content {
+  position: relative;
+}
+
+.elementor-widget-eael-adv-tabs .eael-tab-content-item:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-adv-accordion .eael-accordion-content:hover .eael-onpage-edit-template-wrapper {
+  display: block;
+}
+
+.eael-widget-otea-active .elementor-element:hover > .elementor-element-overlay,
+.eael-widget-otea-active .elementor-empty-view,
+.eael-widget-otea-active .elementor-add-section-inline,
+.eael-widget-otea-active .elementor-add-section {
+  display: initial !important;
+}
+
+.eael-onpage-edit-template-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  border: 2px solid #5eead4;
+}
+
+.eael-onpage-edit-template-wrapper::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  background: #5eead4;
+  opacity: 0.3;
+}
+
+.eael-onpage-edit-template-wrapper.eael-onpage-edit-activate {
+  display: block;
+}
+
+.eael-onpage-edit-template-wrapper.eael-onpage-edit-activate::after {
+  display: none;
+}
+
+.eael-onpage-edit-template-wrapper .eael-onpage-edit-template {
+  background: #5eead4;
+  color: #000;
+  width: 150px;
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+  font-size: 12px;
+  cursor: pointer;
+  position: relative;
+  z-index: 3;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
+.eael-onpage-edit-template-wrapper .eael-onpage-edit-template::before {
+  content: "";
+  border-top: 30px solid #5eead4;
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 14px solid transparent;
+  right: 100%;
+  position: absolute;
+}
+
+.eael-onpage-edit-template-wrapper .eael-onpage-edit-template::after {
+  content: "";
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 30px solid transparent;
+  border-left: 14px solid #5eead4;
+  left: 100%;
+  position: absolute;
+}
+
+.eael-onpage-edit-template-wrapper .eael-onpage-edit-template > i {
+  margin-right: 8px;
+}

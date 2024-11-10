@@ -3389,11 +3389,16 @@ class Filterable_Gallery extends Widget_Base
             $gallery_store[$counter]['video_gallery_switch'] = $gallery['fg_video_gallery_switch'];
 
             $gallery['eael_fg_gallery_item_video_link'] = empty( $gallery['eael_fg_gallery_item_video_link'] ) ? '' : $gallery['eael_fg_gallery_item_video_link'];
-            if (strpos($gallery['eael_fg_gallery_item_video_link'], 'youtu.be') != false) {
+            if ( strpos( $gallery['eael_fg_gallery_item_video_link'] , 'youtu.be') != false) {
                 preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/', $gallery['eael_fg_gallery_item_video_link'], $matches);
                 $video_link = !empty($matches) ? sprintf('https://www.youtube.com/watch?v=%s', $matches[1]) : '';
                 $gallery_store[$counter]['video_link'] = $video_link;
-            } else {
+            } else if ( strpos($gallery['eael_fg_gallery_item_video_link'], 'youtube.com/shorts/') !== false ){
+                preg_match('/shorts\/([a-zA-Z0-9_-]+)/', $gallery['eael_fg_gallery_item_video_link'], $matches);
+                $video_link = ! empty( $matches ) ? sprintf('https://www.youtube.com/watch?v=%s', $matches[1]) : '';
+                $gallery_store[$counter]['video_link'] = $video_link;
+            }
+            else {
                 $gallery_store[$counter]['video_link'] = $gallery['eael_fg_gallery_item_video_link'];
             }
             
