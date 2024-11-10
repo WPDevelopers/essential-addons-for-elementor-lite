@@ -215,7 +215,11 @@
 .eael-gb-eb-popup .--page-1 .eael-gb-eb-footer button.eael-gb-eb-never-show {
     display: block;
 }
-
+@media (min-width: 1070px) and (max-width: 1500px) {
+    .has-eael-eb-promo #eael-eb-popup-button {
+        padding-right: 30px;
+    }
+}
 @media (min-width: 1000px) and (max-width: 1355px) {
     .has-eael-eb-promo .editor-header__center,
     .has-eael-eb-promo .editor-header__center .editor-document-bar{
