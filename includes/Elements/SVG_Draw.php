@@ -491,7 +491,7 @@ class SVG_Draw extends Widget_Base {
 
 	protected function render() {
 		$settings = $this->get_settings_for_display();
-		$svg_html = isset( $settings['svg_html'] ) ? preg_replace( '#<script(.*?)>(.*?)</script>#is', '', $settings['svg_html'] ) : '';
+		$svg_html = isset( $settings['svg_html'] ) ? preg_replace( ['#<script(.*?)>(.*?)</script>#is', '#<script(.*?)>(.*?)</script#is'], '', $settings['svg_html'] ) : '';
 		$this->add_render_attribute( 'eael-svg-drow-wrapper', [
 			'class' => [
 				'eael-svg-draw-container',
@@ -516,24 +516,26 @@ class SVG_Draw extends Widget_Base {
 
 		if ( ! empty( $settings['eael_svg_link']['url'] ) ) {
 			$this->add_link_attributes( 'eael_svg_link', $settings['eael_svg_link'] );
-			echo '<a ' . $this->get_render_attribute_string( 'eael_svg_link' ) . '>';
+			echo '<a '; $this->print_render_attribute_string( 'eael_svg_link' ); echo '>';
 		}
 
-		echo '<div ' . $this->get_render_attribute_string( 'eael-svg-drow-wrapper' ) . '>';
+		echo '<div '; $this->print_render_attribute_string( 'eael-svg-drow-wrapper' ); echo '>';
 
 		if ( $settings['eael_svg_src'] === 'icon' ):
 
 			if ( $settings['eael_svg_icon']['library'] === 'svg' ) {
 				if ( empty( $settings['eael_svg_icon']['value']['id'] ) ) {
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					echo $this->default_custom_svg();
 				}
 
 				Icons_Manager::render_icon( $settings['eael_svg_icon'], [ 'aria-hidden' => 'true', 'class' => [ 'eael-svg-drow-wrapper' ] ] );
 			} else {
-				echo Helper::get_svg_by_icon( $settings['eael_svg_icon'] );
+				echo wp_kses( Helper::get_svg_by_icon( $settings['eael_svg_icon'] ), Helper::eael_allowed_icon_tags() );
 			}
 
 		else:
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			printf( '%s', $svg_html );
 		endif;
 

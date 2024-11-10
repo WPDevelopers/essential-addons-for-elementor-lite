@@ -1586,15 +1586,15 @@ trait Login_Registration {
 		<?php $eael_custom_profile_fields_image = $this->get_eael_custom_profile_fields('image'); ?>
 
 		<?php //if ( count( $eael_custom_profile_fields_text ) || count( $eael_custom_profile_fields_image ) ): ?>
-		<h3><?php _e("EA Login | Register Form", "blank"); ?></h3>
+		<h3><?php esc_html_e('EA Login | Register Form', 'essential-addons-for-elementor-lite'); ?></h3>
 		<?php // endif; ?>
 
 		<table class="form-table">
 		<tr>
-				<th><label for="eael_phone_number"><?php _e("Phone"); ?></label></th>
+				<th><label for="eael_phone_number"><?php esc_html_e('Phone', 'essential-addons-for-elementor-lite'); ?></label></th>
 				<td>
 					<input type="text" name="eael_phone_number" id="eael_phone_number" value="<?php echo esc_attr( get_the_author_meta( 'eael_phone_number', $user->ID ) ); ?>" class="regular-text" /><br />
-					<p class="description"><?php esc_html_e("Please enter your phone number."); ?></p>
+					<p class="description"><?php esc_html_e('Please enter your phone number.', 'essential-addons-for-elementor-lite'); ?></p>
 				</td>
 			</tr>
 		<?php
@@ -1602,7 +1602,7 @@ trait Login_Registration {
 			foreach( $eael_custom_profile_fields_text as $eael_custom_profile_field_text_key => $eael_custom_profile_field_value ) :
 		?>
 			<tr>
-				<th><label for="<?php echo esc_attr( $eael_custom_profile_field_text_key ); ?>"><?php _e( esc_html( $eael_custom_profile_field_value ) ); ?></label></th>
+				<th><label for="<?php echo esc_attr( $eael_custom_profile_field_text_key ); ?>"><?php echo esc_html( $eael_custom_profile_field_value ); ?></label></th>
 				<td>
 					<input type="text" name="<?php echo esc_attr( $eael_custom_profile_field_text_key ); ?>" id="<?php echo esc_attr( $eael_custom_profile_field_text_key ); ?>" value="<?php echo esc_attr( get_the_author_meta( self::$eael_custom_profile_field_prefix . $eael_custom_profile_field_text_key, $user->ID ) ); ?>" class="regular-text" /><br />
 					<!-- <p class="description"><?php //printf( __( "Please Enter %s", 'essential-addons-for-elementor-lite'), esc_html( $custom_profile_fields_text )); ?></p> -->
@@ -1619,13 +1619,13 @@ trait Login_Registration {
 				$user_meta_attachment_id = get_the_author_meta( self::$eael_custom_profile_field_prefix . $eael_custom_profile_field_image_key, $user->ID );
 		?>
 			<tr>
-				<th><label for="<?php echo esc_attr( $eael_custom_profile_field_image_key ); ?>"><?php _e( esc_html( $eael_custom_profile_field_value ) ); ?></label></th>
+				<th><label for="<?php echo esc_attr( $eael_custom_profile_field_image_key ); ?>"><?php echo esc_html( $eael_custom_profile_field_value ); ?></label></th>
 				<td>
 					<input type="text" name="<?php echo esc_attr( $eael_custom_profile_field_image_key ); ?>" id="<?php echo esc_attr( $eael_custom_profile_field_image_key ); ?>" value="<?php echo esc_attr( $user_meta_attachment_id ); ?>" class="regular-text" /><br />
-					<p class="description"><?php printf( __( "Above, input the %s of the attachment.", 'essential-addons-for-elementor-lite'), esc_html__( 'ID', 'essential-addons-for-elementor-lite' )); ?></p>
+					<p class="description"><?php esc_html_e( "Above, input the ID of the attachment.", 'essential-addons-for-elementor-lite'); ?></p>
 					<?php
 					if( ! empty( $user_meta_attachment_id ) ){
-						echo Helper::eael_wp_kses( wp_get_attachment_image($user_meta_attachment_id, 'thumbnail', 1) );
+						echo wp_kses( wp_get_attachment_image($user_meta_attachment_id, 'thumbnail', 1), Helper::eael_allowed_tags() );
 					}
 					?>
 				</td>

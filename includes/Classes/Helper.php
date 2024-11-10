@@ -665,7 +665,7 @@ class Helper
             $link = ($term_type === 'category') ? get_category_link($term->term_id) : get_tag_link($term->term_id);
             $html .= '<li>';
             $html .= '<a href="' . esc_url($link) . '">';
-            $html .= $term->name;
+            $html .= esc_html( $term->name );
             $html .= '</a>';
             $html .= '</li>';
             $count++;
@@ -937,17 +937,17 @@ class Helper
                     if ( $pagination_Paginationlist < 7 + ($adjacents * 2) ){
                         for ( $pagination = 1; $pagination <= $pagination_Paginationlist; $pagination ++ ) {
                             $active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
-	                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
+	                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" , esc_attr( $active ) ,esc_html( $pagination ) );
                         }
 
                     } else if ( $pagination_Paginationlist >= 5 + ($adjacents * 2) ){
                         for ( $pagination = 1; $pagination <= 4 + ( $adjacents * 2 ); $pagination ++ ) {
                             $active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
-	                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
+	                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,esc_attr( $active ) ,esc_html( $pagination ) );
                         }
 
                         $setPagination .="<li class='pagitext dots'>...</li>";
-                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
+                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,esc_attr( $active ) ,esc_html( $pagination ) );
                     }
 
                     if ($pagination_Paginationlist > 1) {
@@ -1090,6 +1090,7 @@ class Helper
 			'img'     => [
 				'src'    => [],
 				'alt'    => [],
+				'title'  => [],
 				'height' => [],
 				'width'  => [],
 				'class'  => [],
@@ -1627,5 +1628,33 @@ class Helper
 			$html .= '</div>';
 		}
 		return $html;
+	}
+
+	public static function eael_onpage_edit_template_markup( $page_id, $template_id ) {
+		if ( Plugin::$instance->editor->is_edit_mode() ) {
+			$active_doc = $_GET['active-document'] ?? 0;
+			$mode       = $active_doc === $template_id ? 'save' : 'edit';
+			?>
+			<div class='eael-onpage-edit-template-wrapper'>
+				<div class='eael-onpage-edit-template' data-eael-template-id='<?php echo esc_attr( $template_id ); ?>'
+					 data-page-id='<?php echo esc_attr( $page_id ); ?>' data-mode='<?php echo esc_attr( $mode ); ?>'>
+					<i class='eicon-edit'></i>
+					<span><?php esc_html_e( 'Edit Template' ); ?></span>
+				</div>
+			</div>
+			<?php
+			if ( $mode === 'save' ) {
+				?>
+				<script>
+                    (function ($) {
+                        let $this = $("[data-eael-template-id='<?php echo esc_js( $template_id ); ?>']");
+                        $this.find('span').text('Save & Back');
+                        $this.find('i').addClass('eicon-arrow-left').removeClass('eicon-edit');
+                        $this.closest('.eael-onpage-edit-template-wrapper').addClass('eael-onpage-edit-activate').parent().addClass('eael-widget-otea-active');
+                    })(jQuery);
+				</script>
+				<?php
+			}
+		}
 	}
 }
