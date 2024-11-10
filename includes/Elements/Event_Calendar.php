@@ -688,9 +688,9 @@ class Event_Calendar extends Widget_Base
         );
 
         $this->add_control(
-			'eael_event_popup_date_formate',
+			'eael_event_popup_date_format',
 			[
-				'label' => esc_html__( 'Popup Date Formate', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Popup Date Format', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::SELECT,
 				'default' => 'MMM Do',
 				'options' => [
@@ -3235,7 +3235,7 @@ class Event_Calendar extends Widget_Base
             data-defaultdate = "' . esc_attr( $default_date ) . '"
             data-time_format = "' . esc_attr( $time_format ) . '"
             data-event_limit = "' . esc_attr( $event_limit ) . '"
-            data-popup_date_formate = "' . esc_attr( $settings['eael_event_popup_date_formate'] ) . '"
+            data-popup_date_format = "' . esc_attr( $settings['eael_event_popup_date_format'] ) . '"
             data-multidays_event_day_count= "' . esc_attr( $multi_days_event_day_count ) . '"
             data-monthColumnHeaderFormat = "' . esc_attr( $settings['eael_calendar_column_heading_month'] ) . '"
             data-weekColumnHeaderFormat = "' . esc_attr( $settings['eael_calendar_column_heading_week'] ) . '"
