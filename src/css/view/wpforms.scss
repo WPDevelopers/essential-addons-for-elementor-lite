@@ -14,6 +14,13 @@
 		&.eael-wpforms-align-right {
 			justify-content: end;
 		}
+		&.eael-wpforms-align-left,
+		&.eael-wpforms-align-center,
+		&.eael-wpforms-align-right {
+			.wpforms-container-full {
+				margin: 0;
+			}
+		}
 	}
 	.wpforms-container {
 		.wpforms-form {

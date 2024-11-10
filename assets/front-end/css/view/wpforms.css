@@ -21,6 +21,9 @@
       -ms-flex-pack: end;
           justify-content: end;
 }
+.eael-wpforms.eael-contact-form.eael-wpforms-align-left .wpforms-container-full, .eael-wpforms.eael-contact-form.eael-wpforms-align-center .wpforms-container-full, .eael-wpforms.eael-contact-form.eael-wpforms-align-right .wpforms-container-full {
+  margin: 0;
+}
 .eael-wpforms .wpforms-container .wpforms-form input[type=submit],
 .eael-wpforms .wpforms-container .wpforms-form button[type=submit],
 .eael-wpforms .wpforms-container .wpforms-form .wpforms-page-button {
