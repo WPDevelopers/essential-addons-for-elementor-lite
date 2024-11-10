@@ -220,7 +220,7 @@
         padding-right: 30px;
     }
 }
-@media (min-width: 1000px) and (max-width: 1355px) {
+@media (min-width: 1000px) and (max-width: 1466px) {
     .has-eael-eb-promo .editor-header__center,
     .has-eael-eb-promo .editor-header__center .editor-document-bar{
         display: block;
