@@ -259,7 +259,7 @@ class WpForms extends Widget_Base {
             ]
         );
 
-        $this->add_responsive_control(
+        $this->add_control(
             'eael_contact_form_alignment',
             [
                 'label' => esc_html__('Form Alignment', 'essential-addons-for-elementor-lite'),
@@ -304,7 +304,7 @@ class WpForms extends Widget_Base {
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-contact-form' => 'max-width: {{SIZE}}{{UNIT}};width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .wpforms-container' => 'max-width: {{SIZE}}{{UNIT}};width: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -1471,7 +1471,7 @@ class WpForms extends Widget_Base {
 
         $alignment = '' !== $settings['eael_contact_form_alignment'] ? $settings['eael_contact_form_alignment'] : 'default';
 
-        $this->add_render_attribute('contact-form', 'class', 'eael-contact-form-align-' . $alignment );
+        $this->add_render_attribute('contact-form', 'class', 'eael-wpforms-align-' . $alignment );
 
         if (!empty($settings['contact_form_list'])) { ?>
             <div <?php echo $this->get_render_attribute_string('contact-form'); ?>>
