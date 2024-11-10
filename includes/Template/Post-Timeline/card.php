@@ -22,24 +22,27 @@ $title_tag = isset($settings['title_tag']) ? Helper::eael_validate_html_tag($set
 echo '<article class="eael-timeline-post">
     <div class="eael-timeline-bullet"></div>
     <div class="eael-timeline-post-inner">
-        <a class="eael-timeline-post-link" href="' . get_the_permalink() . '" title="' . esc_html(get_the_title()) . '"' . ($settings['timeline_link_nofollow'] ? 'rel="nofollow"' : '') .'' . ($settings['timeline_link_target_blank'] ? 'target="_blank"' : '') . '>
+        <a class="eael-timeline-post-link" href="' . esc_url( get_the_permalink() ) . '" title="' . esc_html( get_the_title() ) . '"' . ($settings['timeline_link_nofollow'] ? 'rel="nofollow"' : '') .'' . ($settings['timeline_link_target_blank'] ? 'target="_blank"' : '') . '>
             <time datetime="' . get_the_date() . '">' . get_the_date() . '</time>
-            '. $image;
+            '. wp_kses( $image, Helper::eael_allowed_tags() );
 
 			if( $settings['eael_show_title'] || $settings['eael_show_excerpt'] ) {
 				echo '<div class="eael-timeline-content">';
 
 				if ( $settings['eael_show_title'] ) {
-					echo '<div class="eael-timeline-post-title">
-		                    <' . $title_tag . ' class="' . esc_attr( 'eael-timeline-post-title-text-card' ) . '" >' . get_the_title() . '</'.$title_tag.'>
+					$title_html = '<div class="eael-timeline-post-title">
+		                    <' . $title_tag . ' class="eael-timeline-post-title-text-card" >' . get_the_title() . '</'.$title_tag.'>
 		                </div>';
+					echo wp_kses( $title_html, Helper::eael_allowed_tags() );
 				}
 				if ( $settings['eael_show_excerpt'] ) {
 					echo '<div class="eael-timeline-post-excerpt">';
 					if ( empty( $settings['eael_excerpt_length'] ) ) {
-						echo '<p>' . strip_shortcodes( get_the_excerpt() ? get_the_excerpt() : get_the_content() ) . '</p>';
+						$content = strip_shortcodes( get_the_excerpt() ? get_the_excerpt() : get_the_content() );
+						echo '<p>' . wp_kses( $content, Helper::eael_allowed_tags() ) . '</p>';
 					} else {
-						echo '<p>' . wp_trim_words( strip_shortcodes( get_the_excerpt() ? get_the_excerpt() : get_the_content() ), $settings['eael_excerpt_length'], $settings['expanison_indicator'] ) . '</p>';
+						$content = wp_trim_words( strip_shortcodes( get_the_excerpt() ? get_the_excerpt() : get_the_content() ), $settings['eael_excerpt_length'], $settings['expanison_indicator'] );
+						echo '<p>' . esc_html( $content ) . '</p>';
 					}
 					echo '</div>';
 				}
