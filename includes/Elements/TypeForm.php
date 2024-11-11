@@ -365,8 +365,8 @@ class TypeForm extends Widget_Base {
             'hideHeaders' => ($this->get_settings('eael_typeform_hideheaders') == 'yes'),
             'opacity'     => $this->get_settings('eael_typeform_opacity')['size']
         ];
-        echo '<div data-typeform="'.htmlspecialchars(json_encode($data), ENT_QUOTES,
-                'UTF-8').'" '.$this->get_render_attribute_string('eael_typeform_wrapper').'></div>';
+        echo '<div data-typeform="'. esc_attr( htmlspecialchars(json_encode($data), ENT_QUOTES,
+                'UTF-8') ) .'" '; $this->print_render_attribute_string('eael_typeform_wrapper'); echo'></div>';
     }
 
 }
