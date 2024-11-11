@@ -1,6 +1,7 @@
 <?php
 
 namespace Essential_Addons_Elementor\Elements;
+use Essential_Addons_Elementor\Classes\Helper;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -792,8 +793,8 @@ class Sticky_Video extends Widget_Base
                 ]
             );
 
-            echo '<div ' . $this->get_render_attribute_string('esvp_overlay_wrapper') . '>
-					<div class="eaelsv-overlay-icon">' . $icon . '</div>
+            echo '<div '; $this->print_render_attribute_string('esvp_overlay_wrapper'); echo '>
+					<div class="eaelsv-overlay-icon">' . wp_kses(  $icon, Helper::eael_allowed_icon_tags() ) . '</div>
 				</div>';
         }
 
@@ -811,8 +812,9 @@ class Sticky_Video extends Widget_Base
             ]
         );
 
-        echo '<div ' . $this->get_render_attribute_string('esvp_overlay_wrapper2') . '>
-				' . $eaelsvPlayer . '
+        echo '<div '; $this->print_render_attribute_string('esvp_overlay_wrapper2'); echo '>';
+                //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo $eaelsvPlayer . '
 				<span class="eaelsv-sticky-player-close"><i class="fas fa-times-circle"></i></span>
 			</div>
 		</div>';

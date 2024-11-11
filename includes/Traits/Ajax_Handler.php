@@ -7,11 +7,9 @@
 
 namespace Essential_Addons_Elementor\Traits;
 
-use Automattic\WooCommerce\Utilities\OrderUtil;
+use Essential_Addons_Elementor\Classes\AllTraits;
 use Essential_Addons_Elementor\Classes\Elements_Manager;
 use Essential_Addons_Elementor\Classes\Helper as HelperClass;
-use Essential_Addons_Elementor\Template\Woocommerce\Checkout\Woo_Checkout_Helper;
-use Essential_Addons_Elementor\Traits\Template_Query;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -545,7 +543,7 @@ trait Ajax_Handler {
 	public function woo_checkout_update_order_review() {
 		$setting = $_POST['orderReviewData'];
 		ob_start();
-		Woo_Checkout_Helper::checkout_order_review_default( $setting );
+		AllTraits::checkout_order_review_default( $setting );
 		$woo_checkout_update_order_review = ob_get_clean();
 
 		wp_send_json(
