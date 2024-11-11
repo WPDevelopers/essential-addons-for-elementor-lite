@@ -187,6 +187,7 @@ class Woo_Product_Images extends Widget_Base {
 
             <?php 
 				// if( \Elementor\Plugin::$instance->editor->is_edit_mode() ) { 
+					$img_link = EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg';
 					?>
 					<section class="slider">
 						<div class="slider__flex">
@@ -196,19 +197,19 @@ class Woo_Product_Images extends Widget_Base {
 									<div class="swiper-container">
 										<div class="swiper-wrapper">
 											<div class="swiper-slide">
-											<div class="slider__image"><img src="https://picsum.photos/1920/1080" alt=""/></div>
+											<div class="slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
 											</div>
 											<div class="swiper-slide">
-											<div class="slider__image"><img src="https://picsum.photos/1920/1081" alt=""/></div>
+											<div class="slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
 											</div>
 											<div class="swiper-slide">
-											<div class="slider__image"><img src="https://picsum.photos/1920/1082" alt=""/></div>
+											<div class="slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
 											</div>
 											<div class="swiper-slide">
-											<div class="slider__image"><img src="https://picsum.photos/1920/1083" alt=""/></div>
+											<div class="slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
 											</div>
 											<div class="swiper-slide">
-											<div class="slider__image"><img src="https://picsum.photos/1920/1084" alt=""/></div>
+											<div class="slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
 											</div>
 										</div>
 									</div>
@@ -221,19 +222,19 @@ class Woo_Product_Images extends Widget_Base {
 								<div class="swiper-container">
 								<div class="swiper-wrapper">
 									<div class="swiper-slide">
-										<div class="slider__image"><img src="https://picsum.photos/1920/1080" alt=""/></div>
+										<div class="slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
 									</div>
 									<div class="swiper-slide">
-										<div class="slider__image"><img src="https://picsum.photos/1920/1081" alt=""/></div>
+										<div class="slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
 									</div>
 									<div class="swiper-slide">
-										<div class="slider__image"><img src="https://picsum.photos/1920/1082" alt=""/></div>
+										<div class="slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
 									</div>
 									<div class="swiper-slide">
-										<div class="slider__image"><img src="https://picsum.photos/1920/1083" alt=""/></div>
+										<div class="slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
 									</div>
 									<div class="swiper-slide">
-										<div class="slider__image"><img src="https://picsum.photos/1920/1084" alt=""/></div>
+										<div class="slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
 									</div>
 								</div>
 								</div>
@@ -243,17 +244,6 @@ class Woo_Product_Images extends Widget_Base {
 						</section>
 					<?php
 				?>
-            <script>
-				// 	document.addEventListener('DOMContentLoaded', function () {
-					
-				// });
-
-				jQuery( '.woocommerce-product-gallery' ).each( function() {
-					// jQuery( this ).wc_product_gallery();
-					
-
-				} );
-			</script>
             <?php 
 			// }
 			?>

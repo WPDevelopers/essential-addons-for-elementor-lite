@@ -1,29 +1,6 @@
-body.woocommerce
-   #content
-   div.product
-   .elementor-widget-eael-woo-product-images
-   div.images,
-body.woocommerce-page
-   #content
-   div.product
-   .elementor-widget-eael-woo-product-images
-   div.images,
-body.woocommerce-page
-   div.product
-   .elementor-widget-eael-woo-product-images
-   div.images,
-body.woocommerce
-   div.product
-   .elementor-widget-eael-woo-product-images
-   div.images {
-   width: 100%;
-   float: none;
-   padding: 0;
-}
-
 .slider {
    padding: 32px;
-   color: #fff;
+   color: #000;
 }
 .slider .swiper-container {
    width: 100%;

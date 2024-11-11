@@ -34,43 +34,112 @@ var WooProdectImage = function ($scope, $) {
          prevEl: ".slider__prev",
       },
       freeMode: true,
+      breakpoints: {
+         0: {
+            direction: "horizontal",
+         },
+         768: {
+            direction: "vertical",
+         },
+      },
    };
 
-   // console.log(sliderThumbs);
-
-   console.log(
-      "Data",
-      swiperLoader($(".slider__images .swiper-container"), sliderThumbs)
-   );
-
+   // Load the thumbs Swiper first
    let sliderThumbsObj = swiperLoader(
       $(".slider__thumbs .swiper-container"),
       sliderThumbs
    );
 
-   let sliderImages = {
-      direction: "vertical",
-      slidesPerView: 1,
-      spaceBetween: 32,
-      mousewheel: true,
-      navigation: {
-         nextEl: ".slider__next",
-         prevEl: ".slider__prev",
-      },
-      grabCursor: true,
-      thumbs: {
-         swiper: sliderThumbsObj,
-      },
-   };
+   sliderThumbsObj
+      .then((swiperInstance) => {
+         // console.log("Swiper thumbs instance initialized:", swiperInstance);
+
+         // Define the main slider configuration after thumbs instance is ready
+         let sliderImages = {
+            direction: "vertical",
+            slidesPerView: 1,
+            spaceBetween: 32,
+            mousewheel: true,
+            navigation: {
+               nextEl: ".slider__next",
+               prevEl: ".slider__prev",
+            },
+            grabCursor: true,
+            thumbs: {
+               swiper: swiperInstance, // Assign the resolved swiper instance here
+            },
+            breakpoints: {
+               0: {
+                  direction: "horizontal",
+               },
+               768: {
+                  direction: "vertical",
+               },
+            },
+         };
+
+         // Initialize the main slider after setting the thumbs swiper
+         swiperLoader($(".slider__images .swiper-container"), sliderImages)
+            .then((mainSwiperInstance) => {
+               // console.log(
+               //    "Main swiper instance initialized:",
+               //    mainSwiperInstance
+               // );
+            })
+            .catch((error) => {
+               console.log("Error initializing main Swiper:", error);
+            });
+      })
+      .catch((error) => {
+         console.log("Error initializing Swiper thumbs:", error);
+      });
+
+   // sliderThumbsObj
+   //    .then((swiperInstance) => {
+   //       console.log("Swiper instance initialized:", swiperInstance);
+   //       // Now you can work with the swiperInstance directly
+   //       // For example, you can access swiperInstance.slides or other properties
+   //    })
+   //    .catch((error) => {
+   //       console.log("Error initializing Swiper:", error);
+   //    });
+
+   // console.log(sliderThumbsObj);
+
+   // async function fetchData() {
+   //    try {
+   //       const response = await fetch(sliderThumbsObj);
+   //       // const data = await response.json();
+   //       console.log(response);
+   //    } catch (error) {
+   //       console.log("Error", error);
+   //    }
+   // }
+   // fetchData();
+
+   // let sliderImages = {
+   //    direction: "vertical",
+   //    slidesPerView: 1,
+   //    spaceBetween: 32,
+   //    mousewheel: true,
+   //    navigation: {
+   //       nextEl: ".slider__next",
+   //       prevEl: ".slider__prev",
+   //    },
+   //    grabCursor: true,
+   //    thumbs: {
+   //       swiper: sliderThumbsObj,
+   //    },
+   // };
 
    // swiperLoader("slider__thumbs", sliderThumbs).then((productImage) => {});
 
    // console.log(sliderImagesObjThumb);
 
-   let sliderImagesObj = swiperLoader(
-      $(".slider__images .swiper-container"),
-      sliderImages
-   );
+   // let sliderImagesObj = swiperLoader(
+   //    $(".slider__images .swiper-container"),
+   //    sliderImages
+   // );
 };
 
 jQuery(window).on("elementor/frontend/init", function () {

@@ -679,6 +679,11 @@ $config = [
                         'type' => 'self',
                         'context' => 'view',
                     ],
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/swiper/swiper-bundle.min.css',
+                        'type' => 'lib',
+                        'context' => 'view',
+                    ],
                 ],
                 'js' => [
                     [
