@@ -179,19 +179,84 @@ class Woo_Product_Images extends Widget_Base {
         ?>
         <div class="eael-single-product-images">
             <?php
-                if ( 'yes' === $settings['eael_image_sale_flash'] ) {
-                    wc_get_template( 'loop/sale-flash.php' );
-                } 
-                wc_get_template( 'single-product/product-image.php' ); 
+               //  if ( 'yes' === $settings['eael_image_sale_flash'] ) {
+               //      wc_get_template( 'loop/sale-flash.php' );
+               //  } 
+               //  wc_get_template( 'single-product/product-image.php' ); 
             ?>
 
-            <?php if( \Elementor\Plugin::$instance->editor->is_edit_mode() ) { ?>
+            <?php 
+				// if( \Elementor\Plugin::$instance->editor->is_edit_mode() ) { 
+					?>
+					<section class="slider">
+						<div class="slider__flex">
+							<div class="slider__col">
+								<div class="slider__prev">Prev</div>
+								<div class="slider__thumbs">
+									<div class="swiper-container">
+										<div class="swiper-wrapper">
+											<div class="swiper-slide">
+											<div class="slider__image"><img src="https://picsum.photos/1920/1080" alt=""/></div>
+											</div>
+											<div class="swiper-slide">
+											<div class="slider__image"><img src="https://picsum.photos/1920/1081" alt=""/></div>
+											</div>
+											<div class="swiper-slide">
+											<div class="slider__image"><img src="https://picsum.photos/1920/1082" alt=""/></div>
+											</div>
+											<div class="swiper-slide">
+											<div class="slider__image"><img src="https://picsum.photos/1920/1083" alt=""/></div>
+											</div>
+											<div class="swiper-slide">
+											<div class="slider__image"><img src="https://picsum.photos/1920/1084" alt=""/></div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="slider__next">Next</div>
+
+							</div>
+
+							<div class="slider__images">
+								<div class="swiper-container">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide">
+										<div class="slider__image"><img src="https://picsum.photos/1920/1080" alt=""/></div>
+									</div>
+									<div class="swiper-slide">
+										<div class="slider__image"><img src="https://picsum.photos/1920/1081" alt=""/></div>
+									</div>
+									<div class="swiper-slide">
+										<div class="slider__image"><img src="https://picsum.photos/1920/1082" alt=""/></div>
+									</div>
+									<div class="swiper-slide">
+										<div class="slider__image"><img src="https://picsum.photos/1920/1083" alt=""/></div>
+									</div>
+									<div class="swiper-slide">
+										<div class="slider__image"><img src="https://picsum.photos/1920/1084" alt=""/></div>
+									</div>
+								</div>
+								</div>
+							</div>
+
+						</div>
+						</section>
+					<?php
+				?>
             <script>
+				// 	document.addEventListener('DOMContentLoaded', function () {
+					
+				// });
+
 				jQuery( '.woocommerce-product-gallery' ).each( function() {
-					jQuery( this ).wc_product_gallery();
+					// jQuery( this ).wc_product_gallery();
+					
+
 				} );
 			</script>
-            <?php } ?>
+            <?php 
+			// }
+			?>
         </div>
         <?php
 	}

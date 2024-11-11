@@ -680,6 +680,13 @@ $config = [
                         'context' => 'view',
                     ],
                 ],
+                'js' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/woo-product-image.min.js',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
             ],
         ],
         'woo-product-add-to-cart' => [
