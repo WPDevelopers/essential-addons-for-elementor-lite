@@ -704,7 +704,7 @@ class Product_Grid extends Widget_Base
                     ],
                     'condition' => [
                         'eael_product_grid_rating' => 'yes',
-                        'eael_product_grid_style_preset!' => 'eael-product-preset-8'
+                        'eael_product_grid_style_preset!' => [ 'eael-product-default', 'eael-product-preset-8' ],
                     ],
                     'separator' => 'after'
                 ]
