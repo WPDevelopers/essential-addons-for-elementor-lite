@@ -276,7 +276,7 @@ trait Woo_Product_Comparable {
 			'type'        => Controls_Manager::SWITCHER,
 		] );
 		$this->add_control( 'field_icon', [
-			'label'   => __( 'Fields Icon', 'elementor' ),
+			'label'   => __( 'Fields Icon', 'essential-addons-for-elementor-lite' ),
 			'type'    => Controls_Manager::ICONS,
 		] );
         if ( 'eicon-woocommerce' === $this->get_name()) {

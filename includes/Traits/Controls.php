@@ -564,7 +564,7 @@ trait Controls
             $wb->add_control(
                 'eael_post_block_layout',
                 [
-                    'label' => esc_html__( 'Layout', 'textdomain' ),
+                    'label' => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
                     'type' => Controls_Manager::CHOOSE,
                     'options' => [
                         'post-block-layout-block' => [
@@ -1496,12 +1496,12 @@ trait Controls
             $wb->add_control(
                 'eael_content_timeline_navigation_type',
                 array(
-                    'label'   => esc_html__( 'Navigation Type', 'essential-addons-elementor' ),
+                    'label'   => esc_html__( 'Navigation Type', 'essential-addons-for-elementor-lite' ),
                     'type'    => Controls_Manager::SELECT,
                     'default' => 'scrollbar',
                     'options' => array(
-                        'scrollbar' => esc_html__( 'Scrollbar', 'essential-addons-elementor' ),
-                        'arrows' => esc_html__( 'Arrows', 'essential-addons-elementor' ),
+                        'scrollbar' => esc_html__( 'Scrollbar', 'essential-addons-for-elementor-lite' ),
+                        'arrows' => esc_html__( 'Arrows', 'essential-addons-for-elementor-lite' ),
                     ),
                     'condition' => [
                         'eael_dynamic_template_Layout' => 'horizontal',
@@ -1512,7 +1512,7 @@ trait Controls
             $wb->add_control(
                 'eael_content_timeline_arrow_type',
                 array(
-                    'label'   => esc_html__( 'Arrow Type', 'essential-addons-elementor' ),
+                    'label'   => esc_html__( 'Arrow Type', 'essential-addons-for-elementor-lite' ),
                     'type'    => Controls_Manager::SELECT,
                     'default' => 'fa fa-angle-left',
                     'options' => array(
@@ -1537,7 +1537,7 @@ trait Controls
             $wb->add_responsive_control(
                 'eael_content_timeline_slides_to_scroll',
                 array(
-                    'label'     => esc_html__( 'Slides to Scroll', 'essential-addons-elementor' ),
+                    'label'     => esc_html__( 'Slides to Scroll', 'essential-addons-for-elementor-lite' ),
                     'type'      => Controls_Manager::SELECT,
                     'default'   => '1',
                     'options'   => array_combine( $content_timeline_range, $content_timeline_range ),

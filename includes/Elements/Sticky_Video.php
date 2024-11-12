@@ -222,7 +222,7 @@ class Sticky_Video extends Widget_Base
         $this->add_control(
             'eaelsv_hosted_url',
             [
-                'label' => __('Choose File', 'elementor'),
+                'label' => __('Choose File', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::MEDIA,
                 'dynamic' => [
                     'active' => true,

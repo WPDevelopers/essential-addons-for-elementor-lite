@@ -292,7 +292,7 @@ class Woo_Product_Gallery extends Widget_Base {
 		$this->add_control(
 			'eael_all_tab_thumb',
 			[
-				'label' => esc_html__( 'Choose All Tab Thumb', 'elementor' ),
+				'label' => esc_html__( 'Choose All Tab Thumb', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::MEDIA,
 				'dynamic' => [
 					'active' => true,
