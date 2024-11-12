@@ -215,7 +215,6 @@ class Woo_Product_Images extends Widget_Base {
 									</div>
 								</div>
 								<div class="slider__next">Next</div>
-
 							</div>
 
 							<div class="slider__images">

@@ -1,10 +1,4 @@
 var WooProdectImage = function ($scope, $) {
-   // let sliderThumbs = new Swiper(".slider__thumbs .swiper-container", {
-   //    direction: "vertical",
-   //    slidesPerView: 3,
-   //    spaceBetween: 24,
-   // });
-
    const swiperLoader = (swiperElement, swiperConfig) => {
       if ("undefined" === typeof Swiper || "function" === typeof Swiper) {
          const asyncSwiper = elementorFrontend.utils.swiper;
@@ -65,6 +59,11 @@ var WooProdectImage = function ($scope, $) {
                prevEl: ".slider__prev",
             },
             grabCursor: true,
+            loop: true,
+            autoplay: {
+               delay: 500,
+               disableOnInteraction: false,
+            },
             thumbs: {
                swiper: swiperInstance, // Assign the resolved swiper instance here
             },
@@ -93,53 +92,6 @@ var WooProdectImage = function ($scope, $) {
       .catch((error) => {
          console.log("Error initializing Swiper thumbs:", error);
       });
-
-   // sliderThumbsObj
-   //    .then((swiperInstance) => {
-   //       console.log("Swiper instance initialized:", swiperInstance);
-   //       // Now you can work with the swiperInstance directly
-   //       // For example, you can access swiperInstance.slides or other properties
-   //    })
-   //    .catch((error) => {
-   //       console.log("Error initializing Swiper:", error);
-   //    });
-
-   // console.log(sliderThumbsObj);
-
-   // async function fetchData() {
-   //    try {
-   //       const response = await fetch(sliderThumbsObj);
-   //       // const data = await response.json();
-   //       console.log(response);
-   //    } catch (error) {
-   //       console.log("Error", error);
-   //    }
-   // }
-   // fetchData();
-
-   // let sliderImages = {
-   //    direction: "vertical",
-   //    slidesPerView: 1,
-   //    spaceBetween: 32,
-   //    mousewheel: true,
-   //    navigation: {
-   //       nextEl: ".slider__next",
-   //       prevEl: ".slider__prev",
-   //    },
-   //    grabCursor: true,
-   //    thumbs: {
-   //       swiper: sliderThumbsObj,
-   //    },
-   // };
-
-   // swiperLoader("slider__thumbs", sliderThumbs).then((productImage) => {});
-
-   // console.log(sliderImagesObjThumb);
-
-   // let sliderImagesObj = swiperLoader(
-   //    $(".slider__images .swiper-container"),
-   //    sliderImages
-   // );
 };
 
 jQuery(window).on("elementor/frontend/init", function () {
