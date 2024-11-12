@@ -1630,7 +1630,6 @@ class Helper
 		return $html;
 	}
 
-<<<<<<< HEAD
     //WooCommerce Helper Function
     public static function get_product_variation( $product_id = false ) {
 		return wc_get_product( get_the_ID() );
@@ -1647,7 +1646,6 @@ class Helper
 		return $product;
 	}
 
-=======
 	public static function eael_onpage_edit_template_markup( $page_id, $template_id ) {
 		if ( Plugin::$instance->editor->is_edit_mode() ) {
 			$active_doc = $_GET['active-document'] ?? 0;
@@ -1675,5 +1673,4 @@ class Helper
 			}
 		}
 	}
->>>>>>> master
 }
