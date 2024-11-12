@@ -597,14 +597,6 @@ trait Admin {
 						    'promotion'   => 'popular',
 						    'is_activate' => boolval( $this->get_settings( 'custom-js' ) )
 					    ],
-					    'xd-copy'               => [
-						    'key'         => 'xd-copy',
-						    'title'       => __( 'Cross-Domain Copy Paste', 'essential-addons-for-elementor-lite' ),
-						    'demo_link'   => 'https://essential-addons.com/cross-domain-copy-paste/',
-						    'doc_link'    => 'https://essential-addons.com/docs/cross-domain-copy-paste/',
-						    'is_pro'      => true,
-						    'is_activate' => boolval( $this->get_settings( 'xd-copy' ) )
-					    ],
 					    'scroll-to-top'         => [
 						    'key'         => 'scroll-to-top',
 						    'title'       => __( 'Scroll to Top', 'essential-addons-for-elementor-lite' ),
