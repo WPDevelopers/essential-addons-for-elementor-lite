@@ -1803,7 +1803,7 @@ trait Woo_Product_Comparable {
                                 <div class="wcpc-table-header">
 									<?php if ( $field === 'image' ) {
 										if ( ! empty( $title ) ) {
-											printf( "<{$title_tag} class='wcpc-title'>%s</{$title_tag}>", HelperClass::eael_wp_kses( $title ) );
+											printf( '<%1$s class="wcpc-title">%2$s</%1$s>', esc_html( $title_tag ), wp_kses( $title, HelperClass::eael_allowed_tags() ) );
 										}
 									} else {
 										if ( 'theme-5' === $theme && $field === 'title' ) {
@@ -1812,7 +1812,7 @@ trait Woo_Product_Comparable {
 											if ( ! empty( $icon ) ) {
 												self::print_icon( $icon );
 											}
-											printf( '<span class="field-name">%s</span>', HelperClass::eael_wp_kses( $name ) );
+											printf( '<span class="field-name">%s</span>', wp_kses( $name, HelperClass::eael_allowed_tags() ) );
 
 										}
 									} ?>
@@ -1843,6 +1843,7 @@ trait Woo_Product_Comparable {
 	                                    }
                                     }
 
+									// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                                     echo ! empty( $product->fields[ $field ] ) ? $product->fields[ $field ] : '&nbsp;';
 
                                     if ( $field === 'image' ) {
@@ -1850,7 +1851,7 @@ trait Woo_Product_Comparable {
 		                                    echo '</a>';
 	                                    }
 	                                    if ( 'theme-4' === $theme ) {
-		                                    echo ! empty( $product->fields['title'] ) ? sprintf( "<p class='product-title'>%s</p>", HelperClass::eael_wp_kses( $product->fields['title'] ) ) : '&nbsp;';
+		                                    echo ! empty( $product->fields['title'] ) ? sprintf( "<p class='product-title'>%s</p>", wp_kses( $product->fields['title'], HelperClass::eael_allowed_tags() ) ) : '&nbsp;';
 		                                    echo ! empty( $product->fields['price'] ) ? wp_kses_post( $product->fields['price'] ) : '&nbsp;';
 	                                    }
 	                                    echo '</span>';
@@ -2110,10 +2111,12 @@ trait Woo_Product_Comparable {
             </g>
             </svg>';
         $fa_icon = '<i class="fas fa-exchange-alt"></i>';
-		$btn_content = '<span class="eael-wc-compare-text">' .__( 'Compare', 'essential-addons-for-elementor-lite' ). '</span>';
+		$btn_content = '<span class="eael-wc-compare-text">' . esc_html__( 'Compare', 'essential-addons-for-elementor-lite' ). '</span>';
         if ('icon' === $btn_type) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             printf( '<a class="eael-wc-compare eael-wc-compare-icon" data-product-id="%1$d" rel="nofollow" title="Compare">%2$s %3$s</a>', intval( $id ), $loader, $fa_icon );
         }else{
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             printf( '<a class="eael-wc-compare button" data-product-id="%1$d" rel="nofollow" title="Compare">%2$s %3$s</a>', intval( $id ), $loader, $btn_content );
         }
 	}

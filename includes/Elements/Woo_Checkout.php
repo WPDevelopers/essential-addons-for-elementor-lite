@@ -3287,7 +3287,7 @@ class Woo_Checkout extends Widget_Base {
         $this->ea_woo_checkout_add_actions($settings);
 
 		?>
-        <div data-checkout="<?php echo htmlspecialchars(json_encode($order_review_change_data), ENT_QUOTES, 'UTF-8'); ?>" <?php echo $this->get_render_attribute_string( 'container' ); ?>>
+        <div data-checkout="<?php echo esc_attr( htmlspecialchars(json_encode($order_review_change_data), ENT_QUOTES, 'UTF-8') ); ?>" <?php $this->print_render_attribute_string( 'container' ); ?>>
             <div type="text/template" id="eael-wc-billing-reordered-fields">
                 <div class="eael-woo-billing-fields"></div>
             </div>
@@ -3297,7 +3297,7 @@ class Woo_Checkout extends Widget_Base {
             <div class="woocommerce">
                 <style>
                     .woocommerce .blockUI.blockOverlay:before {
-                        background-image: url('<?php echo WC_ABSPATH . 'assets/images/icons/loader.svg' ?>') center center !important;
+                        background-image: url('<?php echo esc_url( WC_ABSPATH . 'assets/images/icons/loader.svg' ); ?>') center center !important;
                     }
                 </style>
 				<?php
