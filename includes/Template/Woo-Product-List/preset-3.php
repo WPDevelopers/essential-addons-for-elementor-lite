@@ -37,7 +37,7 @@ $woo_product_list_loop = Woo_Product_List::get_woo_product_list_loop_settings( $
             <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link" >
             <?php endif; ?>
 
-                <?php echo wp_kses_post( $product->get_image( $woo_product_list['image_size'], ['loading' => 'eager'] ) ); ?>
+                <?php echo wp_kses_post( $product->get_image( $woo_product_list['image_size'], ['loading' => 'eager', 'alt' => $product->get_title() ] ) ); ?>
             
             <?php if ( $woo_product_list['image_clickable'] ) : ?>                   
             </a>

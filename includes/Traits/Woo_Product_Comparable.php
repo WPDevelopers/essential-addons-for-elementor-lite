@@ -1839,7 +1839,7 @@ trait Woo_Product_Comparable {
 	                                    }
 
 	                                    if ( 'yes' === $linkable_img ) {
-		                                    printf( "<a href='%s'>", esc_url( $product->get_permalink() ) );
+		                                    printf( "<a href='%s' alt='%s'>", esc_url( $product->get_permalink() ), esc_attr( $product->get_title() ) );
 	                                    }
                                     }
 
