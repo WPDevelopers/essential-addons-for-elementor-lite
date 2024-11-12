@@ -2747,7 +2747,8 @@ class Product_Grid extends Widget_Base
             [
                 'name' => 'eael_product_grid_pagination_typography',
                 'selector' => '{{WRAPPER}} .eael-woo-pagination,
-                                {{WRAPPER}} .eael-product-grid-pagination .woocommerce-pagination',
+                                {{WRAPPER}} .eael-product-grid-pagination .woocommerce-pagination,
+                                {{WRAPPER}} .eael-woo-pagination ul li a',
             ]
         );
 
