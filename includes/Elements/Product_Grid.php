@@ -690,24 +690,26 @@ class Product_Grid extends Widget_Base
 
         ]);
 
-        $this->add_control(
-		    'eael_product_rating_type',
-		    [
-			    'label'     => esc_html__( 'Type', 'essential-addons-for-elementor' ),
-			    'type'      => Controls_Manager::SELECT,
-			    'default'   => 'stars',
-			    'options'   => [
-				    'stars'        => esc_html__( '&#10029;&#10029;&#10029;&#10029;&#10027;', 'essential-addons-for-elementor' ),
-				    'stars-number' => esc_html__( '&#10029; 4.7', 'essential-addons-for-elementor' ),
-				    'number'       => esc_html__( '4.7/5', 'essential-addons-for-elementor' ),
-			    ],
-                'condition' => [
-                    'eael_product_grid_rating' => 'yes',
-                    'eael_product_grid_style_preset!' => 'eael-product-preset-8'
-                ],
-			    'separator' => 'after'
-		    ]
-	    );
+        if ( apply_filters('eael/pro_enabled', false) ) {
+            $this->add_control(
+                'eael_product_rating_type',
+                [
+                    'label'     => esc_html__( 'Type', 'essential-addons-for-elementor' ),
+                    'type'      => Controls_Manager::SELECT,
+                    'default'   => 'stars',
+                    'options'   => [
+                        'stars'        => esc_html__( '&#10029;&#10029;&#10029;&#10029;&#10027;', 'essential-addons-for-elementor' ),
+                        'stars-number' => esc_html__( '&#10029; 4.7', 'essential-addons-for-elementor' ),
+                        'number'       => esc_html__( '4.7/5', 'essential-addons-for-elementor' ),
+                    ],
+                    'condition' => [
+                        'eael_product_grid_rating' => 'yes',
+                        'eael_product_grid_style_preset!' => 'eael-product-preset-8'
+                    ],
+                    'separator' => 'after'
+                ]
+            );
+        }
 
         $this->add_control(
             'eael_product_sold_count', [
