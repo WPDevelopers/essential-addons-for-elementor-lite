@@ -20,65 +20,49 @@ var WooProdectImage = function ($scope, $) {
    };
 
    let sliderThumbs = {
-      direction: "vertical",
+      // direction: "vertical",
       slidesPerView: 3,
       spaceBetween: 24,
-      navigation: {
-         nextEl: ".slider__next",
-         prevEl: ".slider__prev",
-      },
+      // navigation: {
+      //    nextEl: ".image_slider__next",
+      //    prevEl: ".image_slider__prev",
+      // },
       freeMode: true,
-      breakpoints: {
-         0: {
-            direction: "horizontal",
-         },
-         768: {
-            direction: "vertical",
-         },
-      },
    };
 
    // Load the thumbs Swiper first
    let sliderThumbsObj = swiperLoader(
-      $(".slider__thumbs .swiper-container"),
+      $(".product_image_slider__thumbs .swiper-container"),
       sliderThumbs
    );
 
    sliderThumbsObj
       .then((swiperInstance) => {
-         // console.log("Swiper thumbs instance initialized:", swiperInstance);
-
-         // Define the main slider configuration after thumbs instance is ready
          let sliderImages = {
-            direction: "vertical",
-            slidesPerView: 1,
+            // direction: "vertical",
+            // slidesPerView: 1,
             spaceBetween: 32,
-            mousewheel: true,
+            // mousewheel: true,
             navigation: {
-               nextEl: ".slider__next",
-               prevEl: ".slider__prev",
+               nextEl: ".product_image_slider__next",
+               prevEl: ".product_image_slider__prev",
             },
-            grabCursor: true,
-            loop: true,
-            autoplay: {
-               delay: 500,
-               disableOnInteraction: false,
-            },
+            // grabCursor: true,
+            // loop: true,
+            // autoplay: {
+            //    delay: 500,
+            //    disableOnInteraction: false,
+            // },
             thumbs: {
-               swiper: swiperInstance, // Assign the resolved swiper instance here
-            },
-            breakpoints: {
-               0: {
-                  direction: "horizontal",
-               },
-               768: {
-                  direction: "vertical",
-               },
+               swiper: swiperInstance,
             },
          };
 
          // Initialize the main slider after setting the thumbs swiper
-         swiperLoader($(".slider__images .swiper-container"), sliderImages)
+         swiperLoader(
+            $(".product_image_slider__container .swiper-container"),
+            sliderImages
+         )
             .then((mainSwiperInstance) => {
                // console.log(
                //    "Main swiper instance initialized:",

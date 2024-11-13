@@ -1,75 +1,42 @@
-.slider {
-   padding: 32px;
-   color: #000;
-}
-.slider .swiper-container {
-   width: 100%;
-   height: 100%;
-}
-.slider__flex {
-   display: flex;
-   align-items: flex-start;
-}
-.slider__col {
-   display: flex;
-   flex-direction: column;
-   width: 150px;
-   margin-right: 32px;
-}
-.slider__prev,
-.slider__next {
-   cursor: pointer;
-   text-align: center;
-   font-size: 14px;
-   height: 48px;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   -webkit-user-select: none;
-   -moz-user-select: none;
-   -ms-user-select: none;
-   user-select: none;
-}
-.slider__prev:focus,
-.slider__next:focus {
-   outline: none;
-}
-.slider__thumbs {
-   height: calc(400px - 96px);
-}
-.slider__thumbs .slider__image {
-   transition: 0.25s;
-   -webkit-filter: grayscale(100%);
-   filter: grayscale(100%);
-   opacity: 0.5;
-}
-.slider__thumbs .slider__image:hover {
-   opacity: 1;
-}
-.slider__thumbs .swiper-slide-thumb-active .slider__image {
-   -webkit-filter: grayscale(0%);
-   filter: grayscale(0%);
-   opacity: 1;
-}
-.slider__images {
-   height: 400px;
-}
-.slider__images .slider__image img {
-   transition: 3s;
-}
-.slider__images .slider__image:hover img {
-   transform: scale(1.1);
-}
-.slider__image {
-   width: 100%;
-   height: 100%;
-   border-radius: 30px;
-   overflow: hidden;
-}
-.slider__image img {
-   display: block;
-   width: 100%;
-   height: 100%;
-   -o-object-fit: cover;
-   object-fit: cover;
+.eael-single-product-images {
+   .product_image_slider {
+      width: 100%;
+      max-width: 620px;
+      margin: 40px auto;
+      &__thumbs {
+         width: 100%;
+         padding: 0;
+         overflow: hidden;
+         .swiper-slide {
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            overflow: hidden;
+            opacity: 0.5;
+            &-thumb-active {
+               opacity: 1;
+            }
+            img {
+               width: auto;
+               height: 100%;
+            }
+         }
+      }
+      &__container {
+         width: 100%;
+         height: auto;
+         margin: 0 0 10px 0;
+         .swiper-slide {
+            width: auto;
+            height: 400px;
+
+            img {
+               display: block;
+               width: auto;
+               height: 100%;
+               margin: 0 auto;
+            }
+         }
+      }
+   }
 }

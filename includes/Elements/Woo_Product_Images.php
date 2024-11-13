@@ -189,58 +189,54 @@ class Woo_Product_Images extends Widget_Base {
 				// if( \Elementor\Plugin::$instance->editor->is_edit_mode() ) { 
 					$img_link = EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg';
 					?>
-					<section class="slider">
-						<div class="slider__flex">
-							<div class="slider__col">
-								<div class="slider__prev">Prev</div>
-								<div class="slider__thumbs">
-									<div class="swiper-container">
-										<div class="swiper-wrapper">
-											<div class="swiper-slide">
-											<div class="slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
-											</div>
-											<div class="swiper-slide">
-											<div class="slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
-											</div>
-											<div class="swiper-slide">
-											<div class="slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
-											</div>
-											<div class="swiper-slide">
-											<div class="slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
-											</div>
-											<div class="swiper-slide">
-											<div class="slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="slider__next">Next</div>
-							</div>
-
-							<div class="slider__images">
-								<div class="swiper-container">
+					<div class="product_image_slider">
+						<div class="product_image_slider__container">
+							<div class="swiper-container">
 								<div class="swiper-wrapper">
 									<div class="swiper-slide">
-										<div class="slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
+										<div class="image_slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
 									</div>
 									<div class="swiper-slide">
-										<div class="slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
+										<div class="image_slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
 									</div>
 									<div class="swiper-slide">
-										<div class="slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
+										<div class="image_slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
 									</div>
 									<div class="swiper-slide">
-										<div class="slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
+										<div class="image_slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
 									</div>
 									<div class="swiper-slide">
-										<div class="slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
+										<div class="image_slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
 									</div>
-								</div>
 								</div>
 							</div>
-
 						</div>
-						</section>
+
+						<!-- <div class="product_image_slider__prev">Prev</div> -->
+						<div class="product_image_slider__thumbs">
+							<div class="swiper-container">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide">
+									<div class="product_image_slider__thumbs__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
+									</div>
+									<div class="swiper-slide">
+									<div class="product_image_slider__thumbs__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
+									</div>
+									<div class="swiper-slide">
+									<div class="product_image_slider__thumbs__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
+									</div>
+									<div class="swiper-slide">
+									<div class="product_image_slider__thumbs__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
+									</div>
+									<div class="swiper-slide">
+									<div class="product_image_slider__thumbs__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- <div class="product_image_slider__next">Next</div> -->
+
+					</div>
 					<?php
 				?>
             <?php 
