@@ -2125,7 +2125,7 @@ trait Admin {
 	public function eael_black_friday_optin_dismiss() {
 		check_ajax_referer( 'essential-addons-elementor', 'security' );
 
-		update_option( 'eael_black_friday_optin_hide', true );
+		set_transient( 'eael_black_friday_optin_hide', true, 30 * DAY_IN_SECONDS );
 //		set_transient( 'eael_2M_optin_hide', true, 20 * DAY_IN_SECONDS );
 		wp_send_json_success();
 	}
