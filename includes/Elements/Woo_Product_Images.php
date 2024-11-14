@@ -3,14 +3,14 @@ namespace Essential_Addons_Elementor\Elements;
 
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
-    exit;
+   exit;
 }
 
 use Elementor\Widget_Base;
 use \Essential_Addons_Elementor\Classes\Helper;
 
 class Woo_Product_Images extends Widget_Base {
-    public function get_name() {
+   public function get_name() {
 		return 'eael-woo-product-images';
 	}
 
@@ -32,6 +32,9 @@ class Woo_Product_Images extends Widget_Base {
 
 	protected function register_controls() {
 
+		//General Control
+		$this->eael_product_general_control();
+
 		// Style Tab Start
 		$this->start_controls_section(
 			'eael_images_section_title_style',
@@ -42,7 +45,7 @@ class Woo_Product_Images extends Widget_Base {
 		);
 
         //Start image
-        $this->add_control(
+      $this->add_control(
 			'eael_image_sale_flash',
 			[
 				'label'        => esc_html__( 'Sale Flash', 'essential-addons-for-elementor-lite' ),
@@ -56,7 +59,7 @@ class Woo_Product_Images extends Widget_Base {
 			]
 		);
 
-        $this->add_control(
+      $this->add_control(
 			'eael_image_sale_flash_text_color',
 			[
 				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
@@ -64,13 +67,13 @@ class Woo_Product_Images extends Widget_Base {
 				'selectors' => [
 					'.woocommerce {{WRAPPER}} .eael-single-product-images span.onsale' => 'color: {{VALUE}};',
 				],
-                'condition' => [
-                    'eael_image_sale_flash' => 'yes',
-                ],        
+					'condition' => [
+						'eael_image_sale_flash' => 'yes',
+					],      
 			]
 		);
 
-        $this->add_control(
+		$this->add_control(
 			'eael_image_sale_flash_bg_color',
 			[
 				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
@@ -78,13 +81,13 @@ class Woo_Product_Images extends Widget_Base {
 				'selectors' => [
 					'.woocommerce {{WRAPPER}} .eael-single-product-images span.onsale' => 'background-color: {{VALUE}};',
 				],
-                'condition' => [
-                    'eael_image_sale_flash' => 'yes',
-                ],  
+					'condition' => [
+						'eael_image_sale_flash' => 'yes',
+					],
 			]
 		);
 
-        $this->add_group_control(
+      $this->add_group_control(
 			\Elementor\Group_Control_Border::get_type(),
 			[
 				'name'      => 'eael_image_border',
@@ -93,19 +96,19 @@ class Woo_Product_Images extends Widget_Base {
 			]
 		);
 
-        $this->add_responsive_control(
+      $this->add_responsive_control(
 			'eael_image_border_radius',
 			[
 				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
 				'selectors'  => [
-                    '.woocommerce {{WRAPPER}} .eael-single-product-images .flex-viewport' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
+						'.woocommerce {{WRAPPER}} .eael-single-product-images .flex-viewport' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
 				],
 			]
 		);
 
-        $this->add_control(
+      $this->add_control(
 			'eael_image_spacing',
 			[
 				'label'      => esc_html__( 'Spacing', 'essential-addons-for-elementor-lite' ),
@@ -119,7 +122,7 @@ class Woo_Product_Images extends Widget_Base {
         //End image
 
         //Start thumbnail
-        $this->add_control(
+      $this->add_control(
 			'eael_thumb_heading',
 			[
 				'label'     => esc_html__( 'Thumbnails', 'essential-addons-for-elementor-lite' ),
@@ -128,7 +131,7 @@ class Woo_Product_Images extends Widget_Base {
 			]
 		);
 
-        $this->add_group_control(
+      $this->add_group_control(
 			\Elementor\Group_Control_Border::get_type(),
 			[
 				'name'      => 'eael_thumb_border',
@@ -136,7 +139,7 @@ class Woo_Product_Images extends Widget_Base {
 			]
 		);
 
-        $this->add_responsive_control(
+      $this->add_responsive_control(
 			'eael_thumb_border_radius',
 			[
 				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
@@ -148,7 +151,7 @@ class Woo_Product_Images extends Widget_Base {
 			]
 		);
 
-        $this->add_control(
+      $this->add_control(
 			'eael_thumb_spacing',
 			[
 				'label'      => esc_html__( 'Spacing', 'essential-addons-for-elementor-lite' ),
@@ -164,6 +167,53 @@ class Woo_Product_Images extends Widget_Base {
 		$this->end_controls_section();
 		// Style Tab End
 
+	}
+
+	protected function eael_product_general_control() {
+		$this->start_controls_section(
+			'eael_content_section',
+			[
+				'label' => esc_html__( 'Content', 'essential-addons-for-elementor-lite' ),
+				'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'eael_slide_effects',
+			[
+				'label'   => esc_html__( 'Effects', 'essential-addons-for-elementor-lite' ),
+				'type'    => \Elementor\Controls_Manager::SELECT,
+				'default' => 'slide',
+				'options' => [
+					'slide'     => esc_html__( 'Slide', 'essential-addons-for-elementor-lite' ),
+					'fade'      => esc_html__( 'Fade', 'essential-addons-for-elementor-lite' ),
+					'cube'      => esc_html__( 'Cube', 'essential-addons-for-elementor-lite' ),
+					'flip'      => esc_html__( 'Flip', 'essential-addons-for-elementor-lite' ),
+					'coverflow' => esc_html__( 'Coverflow', 'essential-addons-for-elementor-lite' ),
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_thumb_items',
+			[
+				'label' => esc_html__( 'Thumb Items', 'essential-addons-for-elementor-lite' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => 1,
+						'max' => 20,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'size' => 5,
+				],
+			]
+		);
+		
+		$this->end_controls_section();
+		
 	}
 
 	protected function eael_product_gallery_html( $img_links ) {
