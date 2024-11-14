@@ -1400,6 +1400,7 @@ class WpForms extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
+                    '{{WRAPPER}} .eael-wpforms .wpforms-error' => 'color: {{VALUE}}',
                     '{{WRAPPER}} .eael-wpforms label.wpforms-error' => 'color: {{VALUE}}',
                 ],
                 'condition'             => [
@@ -1415,7 +1416,8 @@ class WpForms extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-wpforms input.wpforms-error, {{WRAPPER}} .eael-wpforms textarea.wpforms-error' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-wpforms input.wpforms-error' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-wpforms textarea.wpforms-error' => 'border-color: {{VALUE}}',
                 ],
                 'condition'             => [
                     'error_messages' => 'show',
@@ -1433,7 +1435,8 @@ class WpForms extends Widget_Base {
                 'max'                   => 10,
                 'step'                  => 1,
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-wpforms input.wpforms-error, {{WRAPPER}} .eael-wpforms textarea.wpforms-error' => 'border-width: {{VALUE}}px',
+                    '{{WRAPPER}} .eael-wpforms input.wpforms-error' => 'border-width: {{VALUE}}px',
+                    '{{WRAPPER}} .eael-wpforms textarea.wpforms-error' => 'border-width: {{VALUE}}px',
                 ],
                 'condition'             => [
                     'error_messages' => 'show',
