@@ -244,7 +244,7 @@ span.coupon-code {
     text-decoration: none;
 }
 
-@media screen and (max-width: 782px) {
+@media screen and (max-width: 767px) {
     .notice-essential-addons-for-elementor-black_friday_24_notice {
         display: none !important;
     }
