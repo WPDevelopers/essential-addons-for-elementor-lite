@@ -154,16 +154,16 @@ jQuery(window).on("elementor/frontend/init", function () {
 		}
 	}
 
-	//Add hashchange code form advanced-accordion
-	let  isTriggerOnHashchange = true;
-	window.addEventListener( 'hashchange', function () {
-		if( !isTriggerOnHashchange ) {
+	//Add hashchange code from advanced-accordion
+	let isTriggerOnHashchange = true;
+	window.addEventListener('hashchange', function () {
+		if (!isTriggerOnHashchange) {
 			return;
 		}
 		let hashTag = window.location.hash.substr(1);
 		hashTag = hashTag === 'safari' ? 'eael-safari' : hashTag;
-		if ( hashTag !== 'undefined' && hashTag ) {
-			jQuery( '#' + hashTag ).trigger( 'click' );
+		if (hashTag !== 'undefined' && hashTag && $('#' + hashTag).length) {
+			$('#' + hashTag).trigger('click');
 		}
 	});
 
