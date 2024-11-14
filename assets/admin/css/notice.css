@@ -243,3 +243,9 @@ span.coupon-code {
 #wpnotice-essential-addons-for-elementor-review a {
     text-decoration: none;
 }
+
+@media screen and (max-width: 782px) {
+    .notice-essential-addons-for-elementor-black_friday_24_notice {
+        display: none !important;
+    }
+}
