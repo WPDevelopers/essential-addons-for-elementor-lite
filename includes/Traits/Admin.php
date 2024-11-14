@@ -2153,7 +2153,7 @@ trait Admin {
 				padding: 12px 0;
             }
             .eael-black-friday-notice .wpnotice-content-wrapper .eael-black-friday-optin-logo {
-                width: 235px;
+                width: 225px;
                 padding: 0;
                 text-align: center;
             }
@@ -2166,21 +2166,23 @@ trait Admin {
                 padding-left: 10px;
                 display: flex;
                 justify-content: space-between;
-                width: calc(100% - 235px);
+                width: calc(100% - 225px);
                 align-items: center;
             }
             .eael-black-friday-notice .wpnotice-content-wrapper .eael-black-friday-optin p {
                 color: #3C434A;
-                font-size: 18px;
+                font-size: 15px;
             }
             .eael-black-friday-notice .wpnotice-content-wrapper .eael-black-friday-optin a {
                 color: #ffffff;
 				background: #5626E7;
-                font-size: 18px;
-                font-weight: 800;
+                font-size: 15px;
+                font-weight: 600;
+				border: 0;
                 border-radius: 4px;
 				height: 38px;
 				line-height: 38px;
+                padding: 0 15px;
             }
             .eael-black-friday-notice .wpnotice-content-wrapper .eael-black-friday-optin svg {
                 vertical-align: sub;
