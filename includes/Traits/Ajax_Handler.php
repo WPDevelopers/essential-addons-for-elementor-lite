@@ -802,8 +802,7 @@ trait Ajax_Handler {
 					'hide_empty' => false,
 					'orderby'    => 'name',
 					'order'      => 'ASC',
-					'search'     => $search,
-					'number'     => '5',
+					'search'     => $search
 				];
 
 				if ( $post_type !== 'all' ) {

@@ -5741,7 +5741,6 @@ class Login_Register extends Widget_Base {
                                            name="eael-user-login"
                                            id="eael-user-login"
                                            class="eael-lr-form-control"
-                                           aria-describedby="emailHelp"
                                            placeholder="<?php if ( $display_label && $u_ph ) {
 										       echo esc_attr( $u_ph );
 									       } ?>"
@@ -6306,7 +6305,6 @@ class Login_Register extends Widget_Base {
 									   name="eael-user-lostpassword"
 									   id="eael-user-lostpassword"
 									   class="eael-lr-form-control"
-									   aria-describedby="emailHelp"
 									   placeholder="<?php if ( $display_label && $u_ph ) {
 										   echo esc_attr( $u_ph );
 									   } ?>"
