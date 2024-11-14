@@ -166,83 +166,87 @@ class Woo_Product_Images extends Widget_Base {
 
 	}
 
-	protected function render() {
-        global $product;
-
-        $product = Helper::get_product();
-
-        if ( ! $product ) {
-            return;
-        }
-
-        $settings = $this->get_settings_for_display();
-        ?>
-        <div class="eael-single-product-images">
-            <?php
-               //  if ( 'yes' === $settings['eael_image_sale_flash'] ) {
-               //      wc_get_template( 'loop/sale-flash.php' );
-               //  } 
-               //  wc_get_template( 'single-product/product-image.php' ); 
-            ?>
-
-            <?php 
-				// if( \Elementor\Plugin::$instance->editor->is_edit_mode() ) { 
-					$img_link = EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg';
-					?>
-					<div class="product_image_slider">
-						<div class="product_image_slider__container">
-							<div class="swiper-container">
-								<div class="swiper-wrapper">
-									<div class="swiper-slide">
-										<div class="image_slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
-									</div>
-									<div class="swiper-slide">
-										<div class="image_slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
-									</div>
-									<div class="swiper-slide">
-										<div class="image_slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
-									</div>
-									<div class="swiper-slide">
-										<div class="image_slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
-									</div>
-									<div class="swiper-slide">
-										<div class="image_slider__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- <div class="product_image_slider__prev">Prev</div> -->
-						<div class="product_image_slider__thumbs">
-							<div class="swiper-container">
-								<div class="swiper-wrapper">
-									<div class="swiper-slide">
-									<div class="product_image_slider__thumbs__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
-									</div>
-									<div class="swiper-slide">
-									<div class="product_image_slider__thumbs__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
-									</div>
-									<div class="swiper-slide">
-									<div class="product_image_slider__thumbs__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
-									</div>
-									<div class="swiper-slide">
-									<div class="product_image_slider__thumbs__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
-									</div>
-									<div class="swiper-slide">
-									<div class="product_image_slider__thumbs__image"><img src="<?php echo $img_link; ?>" alt=""/></div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- <div class="product_image_slider__next">Next</div> -->
-
-					</div>
-					<?php
-				?>
-            <?php 
-			// }
-			?>
-        </div>
-        <?php
+	protected function eael_product_gallery_html( $img_links ) {
+		?>
+		<div class="product_image_slider">
+			<?php $this->render_image_slider( $img_links ); ?>
+			<?php $this->render_thumbnail_slider( $img_links ); ?>
+		</div>
+		<?php
 	}
+
+	protected function render_image_slider( $img_links ) {
+		?>
+		<div class="product_image_slider__container">
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<?php 
+							foreach ( $img_links as $img_link ) {
+								$this->render_slide( $img_link, 'image_slider__image' );
+							}
+						?>
+					</div>
+				</div>
+		</div>
+		<?php
+	}
+
+	protected function render_thumbnail_slider( $img_links ) {
+		?>
+		<div class="product_image_slider__thumbs">
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<?php 
+							foreach ( $img_links as $img_link ) {
+								$this->render_slide( $img_link, 'product_image_slider__thumbs__image' );
+							}
+						?>
+					</div>
+				</div>
+		</div>
+		<?php
+	}
+
+	protected function render_slide( $img_link, $class ) {
+		$image_url = wp_get_attachment_url( $img_link );
+		?>
+		<div class="swiper-slide">
+				<div class="<?php echo esc_attr( $class ); ?>">
+					<img src="<?php echo esc_url( $image_url ); ?>" alt="" />
+				</div>
+		</div>
+		<?php
+	}
+
+	protected function render() {
+		global $product;
+		$product = Helper::get_product();
+		if ( ! $product ) {
+         return;
+		}
+
+		$settings             = $this->get_settings_for_display();
+		$product_id           = $product->get_id();
+		$product_featured_url = wp_get_attachment_image_src( get_post_thumbnail_id( $product_id ), 'single-post-thumbnail' );
+		$product_group        = wc_get_product( $product_id );
+		$product_gallery_ids  = $product_group->get_gallery_image_ids();
+
+      ?>
+      <div class="eael-single-product-images">
+            <?php 
+				if( \Elementor\Plugin::$instance->editor->is_edit_mode() ) { 
+					
+				} else {
+					if ( 'yes' === $settings['eael_image_sale_flash'] ) {
+						wc_get_template( 'loop/sale-flash.php' );
+					}
+					// wc_get_template( 'single-product/product-image.php' );
+
+					$this->eael_product_gallery_html( $product_gallery_ids );
+				}
+			?>
+      </div>
+      <?php
+	}
+
 }
