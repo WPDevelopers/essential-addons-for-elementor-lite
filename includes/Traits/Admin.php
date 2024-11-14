@@ -1749,7 +1749,7 @@ trait Admin {
 				'dismissible' => true,
 				'refresh'     => EAEL_PLUGIN_VERSION,
 				"expire"      => strtotime( '11:59:59pm 5th December, 2024' ),
-				'display_if'  => ! $this->pro_enabled,
+				'display_if'  => ! $this->pro_enabled && $GLOBALS["pagenow"] === 'index.php',
 			]
 		);
 
