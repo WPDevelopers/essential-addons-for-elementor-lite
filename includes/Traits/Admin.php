@@ -1720,7 +1720,7 @@ trait Admin {
 
 	    ob_start(); ?>
 		<div class="eael-black-friday-optin-logo">
-			<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/eael-bfcm-logo.jpg' ); ?>" width="25" alt="">
+			<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/eael-bfcm-logo.png' ); ?>" width="25" alt="">
 		</div>
 		<div class="eael-black-friday-optin">
 			<p><?php _e( '🛍️ This <strong>Black Friday</strong> enjoy up to 30% OFF on PRO plans. Get the best Essential Addons deal of the season now.', 'essential-addons-for-elementor-lite' ); ?></p>

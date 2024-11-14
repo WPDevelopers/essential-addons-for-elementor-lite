@@ -203,6 +203,7 @@ span.coupon-code {
     width: auto;
     display: block;
     margin: auto;
+    max-width: 175px;
 }
 .notice-essential-addons-for-elementor-black_friday_24_notice .wpnotice-content-wrapper .eael-black-friday-optin {
     padding-left: 10px;
