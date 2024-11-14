@@ -23,10 +23,10 @@ var WooProdectImage = function ($scope, $) {
       // direction: "vertical",
       slidesPerView: 3,
       spaceBetween: 24,
-      // navigation: {
-      //    nextEl: ".image_slider__next",
-      //    prevEl: ".image_slider__prev",
-      // },
+      navigation: {
+         nextEl: ".product_image_slider__next",
+         prevEl: ".product_image_slider__prev",
+      },
       freeMode: true,
    };
 
@@ -40,7 +40,7 @@ var WooProdectImage = function ($scope, $) {
       .then((swiperInstance) => {
          let sliderImages = {
             // direction: "vertical",
-            // slidesPerView: 1,
+            slidesPerView: 1,
             spaceBetween: 32,
             // mousewheel: true,
             navigation: {

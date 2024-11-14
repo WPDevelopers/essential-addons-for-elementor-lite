@@ -1,12 +1,31 @@
+@mixin next_prev {
+   cursor: pointer;
+   text-align: center;
+   font-size: 14px;
+   height: 100%;
+   position: absolute;
+   z-index: 2;
+   padding: 3px;
+   background-color: #979a9e;
+   display: flex;
+   align-items: center;
+   svg {
+      width: 20px;
+   }
+}
 .eael-single-product-images {
    .product_image_slider {
       width: 100%;
       max-width: 620px;
-      margin: 40px auto;
       &__thumbs {
          width: 100%;
          padding: 0;
          overflow: hidden;
+         position: relative;
+         display: flex;
+         &__image {
+            width: 100px;
+         }
          .swiper-slide {
             width: 100px;
             height: 100px;
@@ -21,6 +40,14 @@
                height: 100%;
             }
          }
+      }
+      &__prev {
+         @include next_prev;
+         left: 0;
+      }
+      &__next {
+         @include next_prev;
+         right: 0;
       }
       &__container {
          width: 100%;
