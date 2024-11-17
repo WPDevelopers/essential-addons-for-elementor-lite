@@ -169,7 +169,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 		}
 		let hashTag = window.location.hash.substr(1);
 		hashTag = hashTag === 'safari' ? 'eael-safari' : hashTag;
-		if (hashTag !== 'undefined' && hashTag && $('#' + hashTag).length) {
+		if (hashTag !== 'undefined' && hashTag && /^[A-Za-z][-A-Za-z0-9_:.]*$/.test(hashTag)) {
 			$('#' + hashTag).trigger('click');
 		}
 	});
