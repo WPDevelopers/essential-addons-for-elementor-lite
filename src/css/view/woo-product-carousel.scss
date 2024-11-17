@@ -31,12 +31,11 @@ $theme-preset4: #ec3b75;
                 width: 100%;
                 margin: 0;
                 padding: 0;
-                a.add_to_cart_button,
-                span.price,
-                h2.woocommerce-loop-product__title,
-                .eael-wc-compare{
-                    //margin-left: 10px !important;
-                    //margin-right: 10px !important;
+                
+                .eael-star-rating {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
                 }
 
                 .star-rating {

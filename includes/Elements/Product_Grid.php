@@ -302,6 +302,20 @@ class Product_Grid extends Widget_Base
 			]
 		);
 
+        $this->add_control(
+			'eael_product_grid_style_default_preset_notice',
+			[
+				'label' => '',
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => esc_html__( 'We do not recommend this preset, as it is rendered directly by WooCommerce functions. This may lead to broken styles and limited functionality for some controls.', 'essential-addons-for-elementor-lite' ),
+				'content_classes' => 'eael-warning',
+                'condition'   => [
+                    'eael_product_grid_layout' => [ 'grid', 'masonry' ],
+                    'eael_product_grid_style_preset' => 'eael-product-default',
+                ],
+			]
+		);
+
         $image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/woo-product-grid-list-preset-';
         $this->add_control(
 			'eael_product_list_style_preset',
@@ -1973,7 +1987,6 @@ class Product_Grid extends Widget_Base
             [
                 'label' => esc_html__('Button Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#fff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button, 
                     {{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button' => 'color: {{VALUE}};',
@@ -1985,7 +1998,7 @@ class Product_Grid extends Widget_Base
         );
 
         $this->add_group_control(
-            \Elementor\Group_Control_Background::get_type(),
+            Group_Control_Background::get_type(),
             [
                 'name' => 'eael_product_grid_add_to_cart_gradient_background',
                 'label' => __('Background', 'essential-addons-for-elementor-lite'),
@@ -2053,7 +2066,6 @@ class Product_Grid extends Widget_Base
             [
                 'label' => esc_html__('Button Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#fff',
                 'selectors' => [
                     '{{WRAPPER}} .eael-product-grid .woocommerce li.product .button:hover,
                     {{WRAPPER}} .eael-product-grid .woocommerce li.product .button.add_to_cart_button:hover' => 'color: {{VALUE}};',
@@ -2064,7 +2076,7 @@ class Product_Grid extends Widget_Base
             ]
         );
         $this->add_group_control(
-            \Elementor\Group_Control_Background::get_type(),
+            Group_Control_Background::get_type(),
             [
                 'name' => 'eael_product_grid_add_to_cart_hover_gradient_background',
                 'label' => __('Background', 'essential-addons-for-elementor-lite'),
@@ -2747,7 +2759,8 @@ class Product_Grid extends Widget_Base
             [
                 'name' => 'eael_product_grid_pagination_typography',
                 'selector' => '{{WRAPPER}} .eael-woo-pagination,
-                                {{WRAPPER}} .eael-product-grid-pagination .woocommerce-pagination',
+                                {{WRAPPER}} .eael-product-grid-pagination .woocommerce-pagination,
+                                {{WRAPPER}} .eael-woo-pagination ul li a',
             ]
         );
 
