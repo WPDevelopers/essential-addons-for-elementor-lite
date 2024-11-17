@@ -211,6 +211,60 @@ class Woo_Product_Images extends Widget_Base {
 				],
 			]
 		);
+
+		$this->add_control(
+			'eael_product_image_loop',
+			[
+				'label'        => esc_html__( 'Loop', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'eael_product_image_autoplay',
+			[
+				'label'        => esc_html__( 'Autoplay', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'eael_product_image_autoplay_delay',
+			[
+				'label' => esc_html__( 'Delay', 'essential-addons-for-elementor-lite' ),
+				'type'  => \Elementor\Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min'  => 300,
+						'max'  => 10000,
+						'step' => 100,
+					],
+				],
+				'default' => [
+					'size' => 400,
+				],
+				'condition' => [
+					'eael_product_image_autoplay' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_product_image_mouse_wheel',
+			[
+				'label'        => esc_html__( 'Mouse Wheel', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+			]
+		);
 		
 		$this->end_controls_section();
 		
@@ -309,6 +363,8 @@ class Woo_Product_Images extends Widget_Base {
 						wc_get_template( 'loop/sale-flash.php' );
 					}
 					// wc_get_template( 'single-product/product-image.php' );
+
+					$this->add_render_attribute("eael_pi_loop", 'data-loop', 'yes');
 
 					$this->eael_product_gallery_html( $product_gallery_ids );
 				}
