@@ -19,40 +19,24 @@ var WooProdectImage = function ($scope, $) {
       });
    };
 
-   let sliderThumbs = {
-      // direction: "vertical",
-      slidesPerView: 3,
-      spaceBetween: 24,
-      navigation: {
-         nextEl: ".product_image_slider__next",
-         prevEl: ".product_image_slider__prev",
-      },
-      freeMode: true,
-   };
+   //Thumb
+   let $sliderThumbsOptions = $(".product_image_slider__thumbs", $scope);
+   let $sliderThumbs = $sliderThumbsOptions.data("pi_thumb");
+
+   //Image
+   let $sliderImagesOptions = $(".product_image_slider__container", $scope);
+   let $sliderImagesData = $sliderImagesOptions.data("pi_image");
 
    // Load the thumbs Swiper first
    let sliderThumbsObj = swiperLoader(
       $(".product_image_slider__thumbs .swiper-container"),
-      sliderThumbs
+      $sliderThumbs
    );
 
    sliderThumbsObj
       .then((swiperInstance) => {
-         let sliderImages = {
-            // direction: "vertical",
-            slidesPerView: 1,
-            spaceBetween: 32,
-            // mousewheel: true,
-            navigation: {
-               nextEl: ".product_image_slider__next",
-               prevEl: ".product_image_slider__prev",
-            },
-            // grabCursor: true,
-            // loop: true,
-            // autoplay: {
-            //    delay: 500,
-            //    disableOnInteraction: false,
-            // },
+         let $sliderImages = {
+            ...$sliderImagesData,
             thumbs: {
                swiper: swiperInstance,
             },
@@ -61,14 +45,9 @@ var WooProdectImage = function ($scope, $) {
          // Initialize the main slider after setting the thumbs swiper
          swiperLoader(
             $(".product_image_slider__container .swiper-container"),
-            sliderImages
+            $sliderImages
          )
-            .then((mainSwiperInstance) => {
-               // console.log(
-               //    "Main swiper instance initialized:",
-               //    mainSwiperInstance
-               // );
-            })
+            .then((mainSwiperInstance) => {})
             .catch((error) => {
                console.log("Error initializing main Swiper:", error);
             });

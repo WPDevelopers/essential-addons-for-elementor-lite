@@ -179,13 +179,14 @@ class Woo_Product_Images extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_slide_effects',
+			'eael_pi_effects',
 			[
 				'label'   => esc_html__( 'Effects', 'essential-addons-for-elementor-lite' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'default' => 'slide',
 				'options' => [
 					'slide'     => esc_html__( 'Slide', 'essential-addons-for-elementor-lite' ),
+					'cards'     => esc_html__( 'Cards', 'essential-addons-for-elementor-lite' ),
 					'fade'      => esc_html__( 'Fade', 'essential-addons-for-elementor-lite' ),
 					'cube'      => esc_html__( 'Cube', 'essential-addons-for-elementor-lite' ),
 					'flip'      => esc_html__( 'Flip', 'essential-addons-for-elementor-lite' ),
@@ -195,7 +196,7 @@ class Woo_Product_Images extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_thumb_items',
+			'eael_pi_thumb_items',
 			[
 				'label' => esc_html__( 'Thumb Items', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
@@ -219,7 +220,7 @@ class Woo_Product_Images extends Widget_Base {
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
-				'return_value' => 'yes',
+				'return_value' => 'true',
 			]
 		);
 
@@ -247,7 +248,7 @@ class Woo_Product_Images extends Widget_Base {
 					],
 				],
 				'default' => [
-					'size' => 400,
+					'size' => 2000,
 				],
 				'condition' => [
 					'eael_product_image_autoplay' => 'yes',
@@ -262,7 +263,7 @@ class Woo_Product_Images extends Widget_Base {
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
-				'return_value' => 'yes',
+				'return_value' => 'true',
 			]
 		);
 		
@@ -270,18 +271,54 @@ class Woo_Product_Images extends Widget_Base {
 		
 	}
 
-	protected function eael_product_gallery_html( $img_links ) {
+	protected function eael_pi_data_settings( $settings ) {
+		$pi_data_settings = [];
+		$pi_data_settings['thumb_items'] = ! empty( $settings['eael_pi_thumb_items'] ) ? $settings['eael_pi_thumb_items']['size'] : '';
+		$pi_data_settings['image_loop'] = ! empty( $settings['eael_product_image_loop'] ) ? $settings['eael_product_image_loop'] : false;
+		$pi_data_settings['image_autoplay'] = ! empty( $settings['eael_product_image_autoplay'] ) ? $settings['eael_product_image_autoplay'] : false;
+		$pi_data_settings['autoplay_delay'] = ! empty( $settings['eael_product_image_autoplay_delay'] ) ? $settings['eael_product_image_autoplay_delay']['size'] : '';
+		$pi_data_settings['image_effect'] = ! empty( $settings['eael_pi_effects'] ) ? $settings['eael_pi_effects'] : '';
+		return $pi_data_settings;
+	}
+	protected function eael_product_gallery_html( $settings, $img_links ) {
 		?>
 		<div class="product_image_slider">
-			<?php $this->render_image_slider( $img_links ); ?>
-			<?php $this->render_thumbnail_slider( $img_links ); ?>
+			<?php $this->render_image_slider( $settings, $img_links ); ?>
+			<?php $this->render_thumbnail_slider( $settings, $img_links ); ?>
 		</div>
 		<?php
 	}
 
-	protected function render_image_slider( $img_links ) {
+	protected function render_image_slider( $settings, $img_links ) {
+		$image_settings = $this->eael_pi_data_settings( $settings );
+		$sliderImages = [
+			'effect' => $image_settings['image_effect'],
+			'slidesPerView' => 1,
+			'spaceBetween' => 32,
+			'loop' => $image_settings['image_loop'],
+			'grabCursor' => true,
+			'mousewheel' => true,
+			'navigation' => [
+				'nextEl' => ".product_image_slider__next",
+				'prevEl' => ".product_image_slider__prev",
+			],
+		];
+
+		if ( 'yes' == $image_settings['image_autoplay'] ) {
+			$sliderImages['autoplay'] = [
+				'delay' => $image_settings['autoplay_delay'],
+				'disableOnInteraction' => false,
+			];
+		}
+
+		$sliderImagesObj = json_encode( $sliderImages );
+		$this->add_render_attribute( 'eael-pi-image', [
+			'data-pi_image' => $sliderImagesObj,
+			'class'        => 'product_image_slider__container',
+		] );
 		?>
-		<div class="product_image_slider__container">
+
+		<div <?php $this->print_render_attribute_string('eael-pi-image'); ?>>
 				<div class="swiper-container">
 					<div class="swiper-wrapper">
 						<?php 
@@ -295,9 +332,31 @@ class Woo_Product_Images extends Widget_Base {
 		<?php
 	}
 
-	protected function render_thumbnail_slider( $img_links ) {
+	protected function render_thumbnail_slider( $settings, $img_links ) {
+		$thumb_settings = $this->eael_pi_data_settings( $settings );
+		$sliderThumbs = [
+			'slidesPerView' => $thumb_settings['thumb_items'],
+			'spaceBetween' => 5,
+			'navigation' => [
+				'nextEl' => ".product_image_slider__next",
+				'prevEl' => ".product_image_slider__prev",
+			],
+			// 'freeMode' => true,
+			'loop' => $thumb_settings['image_loop'],
+		];
+		if ( 'yes' == $thumb_settings['image_autoplay'] ) {
+			$sliderThumbs['autoplay'] = [
+				'delay' => $thumb_settings['autoplay_delay'],
+				'disableOnInteraction' => false,
+			];
+		}
+		$sliderThumbsObj = json_encode( $sliderThumbs );
+		$this->add_render_attribute( 'eael-pi-thumb', [
+			'data-pi_thumb' => $sliderThumbsObj,
+			'class'         => 'product_image_slider__thumbs',
+		] );
 		?>
-		<div class="product_image_slider__thumbs">
+		<div <?php $this->print_render_attribute_string( 'eael-pi-thumb' ); ?>>
 			<div class="product_image_slider__prev">
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM116.7 244.7l112-112c4.6-4.6 11.5-5.9 17.4-3.5s9.9 8.3 9.9 14.8l0 64 96 0c17.7 0 32 14.3 32 32l0 32c0 17.7-14.3 32-32 32l-96 0 0 64c0 6.5-3.9 12.3-9.9 14.8s-12.9 1.1-17.4-3.5l-112-112c-6.2-6.2-6.2-16.4 0-22.6z"/></svg>
 			</div>
@@ -357,7 +416,7 @@ class Woo_Product_Images extends Widget_Base {
 					if ( 'yes' === $settings['eael_image_sale_flash'] ) {
 						wc_get_template( 'loop/sale-flash.php' );
 					}
-					$this->eael_product_gallery_html( $img_links );
+					$this->eael_product_gallery_html( $settings, $img_links );
 				} else {
 					if ( 'yes' === $settings['eael_image_sale_flash'] ) {
 						wc_get_template( 'loop/sale-flash.php' );
@@ -366,7 +425,7 @@ class Woo_Product_Images extends Widget_Base {
 
 					$this->add_render_attribute("eael_pi_loop", 'data-loop', 'yes');
 
-					$this->eael_product_gallery_html( $product_gallery_ids );
+					$this->eael_product_gallery_html( $settings, $product_gallery_ids );
 				}
 			?>
       </div>

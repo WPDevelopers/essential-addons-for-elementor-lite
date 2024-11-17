@@ -24,7 +24,8 @@
          position: relative;
          display: flex;
          &__image {
-            width: 100px;
+            width: 100%;
+            height: auto;
          }
          .swiper-slide {
             width: 100px;
@@ -56,7 +57,10 @@
          .swiper-slide {
             width: auto;
             height: 400px;
-
+            .image_slider__image {
+               width: 100%;
+               height: 100%;
+            }
             img {
                display: block;
                width: auto;
