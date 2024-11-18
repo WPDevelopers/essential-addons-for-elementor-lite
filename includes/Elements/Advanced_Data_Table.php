@@ -101,6 +101,42 @@ class Advanced_Data_Table extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'heading-import',
+            [
+                'label' => __('Import', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'condition' => [
+                    'ea_adv_data_table_source' => 'csv',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_csv_string',
+            [
+                'type' => Controls_Manager::RAW_HTML,
+                'raw' => '<textarea class="ea_adv_table_csv_string" rows="5" placeholder="Paste CSV string"></textarea><label for="ea_adv_table_csv_string_table"><input type="checkbox" id="ea_adv_table_csv_string_table" class="ea_adv_table_csv_string_table"> Import first row as Header</label>',
+                'condition' => [
+                    'ea_adv_data_table_source' => 'csv',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_import_csv_button',
+            [
+                'label' => __('Import', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::BUTTON,
+                'show_label' => false,
+                'text' => __('Import', 'essential-addons-for-elementor-lite'),
+                'event' => 'ea:advTable:import',
+                'condition' => [
+                    'ea_adv_data_table_source' => 'csv',
+                ],
+            ]
+        );
+
 	    if (!apply_filters('eael/pro_enabled', false)) {
 		    $this->add_control(
 			    'eael_adv_data_table_pro_enable_warning',
@@ -124,6 +160,14 @@ class Advanced_Data_Table extends Widget_Base
             [
                 'type' => Controls_Manager::HIDDEN,
                 'default' => '<thead><tr><th></th><th></th><th></th><th></th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr></tbody>',
+            ]
+        );
+
+        $this->add_control(
+            'ea_adv_data_table_csv_html',
+            [
+                'type' => Controls_Manager::HIDDEN,
+                'default' => '<table><thead><tr><th>Name</th><th>Age</th><th>Country</th><th>Occupation</th></tr></thead><tbody><tr><td>John Doe</td><td>28</td><td>USA</td><td>Software Engineer</td></tr><tr><td>Jane Smith</td><td>32</td><td>UK</td><td>Graphic Designer</td></tr><tr><td>John Albert</td><td>24</td><td>Canada</td><td>Data Scientist</td></tr><tr><td>Maria Garcia</td><td>29</td><td>Spain</td><td>Marketing Specialist</td></tr></tbody></table>',
             ]
         );
 
@@ -233,7 +277,7 @@ class Advanced_Data_Table extends Widget_Base
         $this->start_controls_section(
             'ea_section_adv_data_table_export_import',
             [
-                'label' => esc_html__('Export/Import', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Export', 'essential-addons-for-elementor-lite'),
             ]
         );
 
@@ -244,42 +288,6 @@ class Advanced_Data_Table extends Widget_Base
                 'type' => Controls_Manager::BUTTON,
                 'text' => __('Export', 'essential-addons-for-elementor-lite'),
                 'event' => 'ea:advTable:export',
-            ]
-        );
-
-        $this->add_control(
-            'heading-import',
-            [
-                'label' => __('Import', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
-                'condition' => [
-                    'ea_adv_data_table_source' => 'csv',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'ea_adv_data_table_csv_string',
-            [
-                'type' => Controls_Manager::RAW_HTML,
-                'raw' => '<textarea class="ea_adv_table_csv_string" rows="5" placeholder="Paste CSV string"></textarea><label for="ea_adv_table_csv_string_table"><input type="checkbox" id="ea_adv_table_csv_string_table" class="ea_adv_table_csv_string_table"> Import first row as Header</label>',
-                'condition' => [
-                    'ea_adv_data_table_source' => 'csv',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'ea_adv_data_table_import_csv_button',
-            [
-                'label' => __('Import', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::BUTTON,
-                'show_label' => false,
-                'text' => __('Import', 'essential-addons-for-elementor-lite'),
-                'event' => 'ea:advTable:import',
-                'condition' => [
-                    'ea_adv_data_table_source' => 'csv',
-                ],
             ]
         );
 
@@ -1556,7 +1564,7 @@ class Advanced_Data_Table extends Widget_Base
                 $rows = $dom->getElementsByTagName('tr');
                 $content = '';
                 $pagination = ! empty( $settings['ea_adv_data_table_items_per_page'] ) ? $settings['ea_adv_data_table_items_per_page'] : 10;
-                foreach ($rows as $index => $row) {
+                foreach ( $rows as $index => $row ) {
                     if ( $index > $pagination ) {
                         break;
                     }
@@ -1609,8 +1617,10 @@ class Advanced_Data_Table extends Widget_Base
     {
         $settings = $this->get_settings_for_display();
 
-        if ( 'static' === $settings['ea_adv_data_table_source'] || 'csv' === $settings['ea_adv_data_table_source'] ) {
+        if ( 'static' === $settings['ea_adv_data_table_source'] ) {
             return $settings['ea_adv_data_table_static_html'];
+        } else if ( 'csv' === $settings['ea_adv_data_table_source'] ) {
+            return $settings['ea_adv_data_table_csv_html'];
         } else if ($settings['ea_adv_data_table_source'] == 'ninja') {
             return $this->ninja_integration();
         }
