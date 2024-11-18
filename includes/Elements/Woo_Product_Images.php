@@ -266,6 +266,20 @@ class Woo_Product_Images extends Widget_Base {
 				'return_value' => 'true',
 			]
 		);
+
+		$this->add_control(
+			'eael_pi_thumb_position',
+			[
+				'label'   => esc_html__( 'Thumb Position', 'essential-addons-for-elementor-lite' ),
+				'type'    => \Elementor\Controls_Manager::SELECT,
+				'default' => 'bottom',
+				'options' => [
+					'bottom' => esc_html__( 'Bottm', 'essential-addons-for-elementor-lite' ),
+					'left'   => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+					'right'  => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+				],
+			]
+		);
 		
 		$this->end_controls_section();
 		
@@ -278,6 +292,7 @@ class Woo_Product_Images extends Widget_Base {
 		$pi_data_settings['image_autoplay'] = ! empty( $settings['eael_product_image_autoplay'] ) ? $settings['eael_product_image_autoplay'] : false;
 		$pi_data_settings['autoplay_delay'] = ! empty( $settings['eael_product_image_autoplay_delay'] ) ? $settings['eael_product_image_autoplay_delay']['size'] : '';
 		$pi_data_settings['image_effect'] = ! empty( $settings['eael_pi_effects'] ) ? $settings['eael_pi_effects'] : '';
+		$pi_data_settings['thumb_position'] = ! empty( $settings['eael_pi_thumb_position'] ) ? $settings['eael_pi_thumb_position'] : '';
 		return $pi_data_settings;
 	}
 	protected function eael_product_gallery_html( $settings, $img_links ) {
@@ -301,6 +316,9 @@ class Woo_Product_Images extends Widget_Base {
 			'navigation' => [
 				'nextEl' => ".product_image_slider__next",
 				'prevEl' => ".product_image_slider__prev",
+			],
+			'keyboard'=> [
+				'enabled' => true,
 			],
 		];
 
@@ -346,9 +364,20 @@ class Woo_Product_Images extends Widget_Base {
 				'nextEl' => ".product_image_slider__next",
 				'prevEl' => ".product_image_slider__prev",
 			],
+			'keyboard'=> [
+				'enabled' => true,
+			],
 			// 'freeMode' => true,
 			'loop' => $thumb_settings['image_loop'],
 		];
+		if ( 'left' == $thumb_settings['thumb_position'] ) {
+			$sliderThumbs['breakpoints'] = [
+				480 => [
+					'direction'=> "vertical",
+					'slidesPerView'=> 3,
+				],
+			];
+		}
 		if ( 'yes' == $thumb_settings['image_autoplay'] ) {
 			$sliderThumbs['autoplay'] = [
 				'delay' => $thumb_settings['autoplay_delay'],
