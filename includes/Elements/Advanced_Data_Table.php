@@ -74,31 +74,29 @@ class Advanced_Data_Table extends Widget_Base
             ]
         );
 
+        $sources = [
+            'static'     => __('Static Data', 'essential-addons-for-elementor-lite'),
+            'csv'        => __('CSV Data', 'essential-addons-for-elementor-lite'),
+            'ninja'      => __('Ninja Tables', 'essential-addons-for-elementor-lite'),
+            'database'   => __('Database', 'essential-addons-for-elementor-lite'),
+            'remote'     => __('Remote Database', 'essential-addons-for-elementor-lite'),
+            'google'     => __('Google Sheets', 'essential-addons-for-elementor-lite'),
+            'tablepress' => __('TablePress', 'essential-addons-for-elementor-lite'),
+        ];
+
+        if ( ! apply_filters('eael/pro_enabled', false) ) {
+            $sources['database']   = __('Database (Pro)', 'essential-addons-for-elementor-lite');
+            $sources['remote']     = __('Remote Database (Pro)', 'essential-addons-for-elementor-lite');
+            $sources['google']     = __('Google Sheets (Pro)', 'essential-addons-for-elementor-lite');
+            $sources['tablepress'] = __('TablePress (Pro)', 'essential-addons-for-elementor-lite');
+        }
+
         $this->add_control(
             'ea_adv_data_table_source',
             [
                 'label' => esc_html__('Source', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
-                'options' => call_user_func(function () {
-                    $source = [];
-                    $source['static'] = __('Static Data', 'essential-addons-for-elementor-lite');
-	                $source['ninja'] = __('Ninja Tables', 'essential-addons-for-elementor-lite');
-                    if (apply_filters('eael/pro_enabled', false)) {
-                        $source['database'] = __('Database', 'essential-addons-for-elementor-lite');
-                        $source['remote'] = __('Remote Database', 'essential-addons-for-elementor-lite');
-                        $source['google'] = __('Google Sheets', 'essential-addons-for-elementor-lite');
-                        $source['tablepress'] = __('TablePress', 'essential-addons-for-elementor-lite');
-                    } else {
-                        $source['database'] = __('Database (Pro)', 'essential-addons-for-elementor-lite');
-                        $source['remote'] = __('Remote Database (Pro)', 'essential-addons-for-elementor-lite');
-                        $source['google'] = __('Google Sheets (Pro)', 'essential-addons-for-elementor-lite');
-                        $source['tablepress'] = __('TablePress (Pro)', 'essential-addons-for-elementor-lite');
-                    }
-
-
-
-                    return $source;
-                }),
+                'options' => $sources,
                 'default' => 'static',
             ]
         );
@@ -255,7 +253,7 @@ class Advanced_Data_Table extends Widget_Base
                 'label' => __('Import', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'condition' => [
-                    'ea_adv_data_table_source' => 'static',
+                    'ea_adv_data_table_source' => 'csv',
                 ],
             ]
         );
@@ -266,7 +264,7 @@ class Advanced_Data_Table extends Widget_Base
                 'type' => Controls_Manager::RAW_HTML,
                 'raw' => '<textarea class="ea_adv_table_csv_string" rows="5" placeholder="Paste CSV string"></textarea><label for="ea_adv_table_csv_string_table"><input type="checkbox" id="ea_adv_table_csv_string_table" class="ea_adv_table_csv_string_table"> Import first row as Header</label>',
                 'condition' => [
-                    'ea_adv_data_table_source' => 'static',
+                    'ea_adv_data_table_source' => 'csv',
                 ],
             ]
         );
@@ -280,7 +278,7 @@ class Advanced_Data_Table extends Widget_Base
                 'text' => __('Import', 'essential-addons-for-elementor-lite'),
                 'event' => 'ea:advTable:import',
                 'condition' => [
-                    'ea_adv_data_table_source' => 'static',
+                    'ea_adv_data_table_source' => 'csv',
                 ],
             ]
         );
@@ -1522,12 +1520,6 @@ class Advanced_Data_Table extends Widget_Base
             'data-id' => $this->get_id(),
         ]);
 
-        if (Plugin::$instance->editor->is_edit_mode()) {
-            $this->add_render_attribute('ea-adv-data-table', [
-                'class' => "ea-advanced-data-table-editable",
-            ]);
-        }
-
         if ($settings['ea_adv_data_table_sort'] == 'yes') {
             $this->add_render_attribute('ea-adv-data-table', [
                 'class' => "ea-advanced-data-table-sortable",
@@ -1551,9 +1543,31 @@ class Advanced_Data_Table extends Widget_Base
             ]);
         }
 
+
+        $content = $this->get_table_content();
+        if ( Plugin::$instance->editor->is_edit_mode() ) {
+            $this->add_render_attribute('ea-adv-data-table', [
+                'class' => "ea-advanced-data-table-editable",
+            ]);
+
+            if ( $content && 'csv' === $settings['ea_adv_data_table_source'] ) {
+                $dom = new \DOMDocument();
+                @$dom->loadHTML("<table>$content</table>");
+                $rows = $dom->getElementsByTagName('tr');
+                $content = '';
+                $pagination = ! empty( $settings['ea_adv_data_table_items_per_page'] ) ? $settings['ea_adv_data_table_items_per_page'] : 10;
+                foreach ($rows as $index => $row) {
+                    if ( $index > $pagination ) {
+                        break;
+                    }
+                    $content .= $dom->saveHTML($row);
+                }
+            }
+        }
+
         echo '<div '; $this->print_render_attribute_string('ea-adv-data-table-wrap'); echo '>';
 
-        if ($content = $this->get_table_content()) {
+        if ( $content ) {
             if ($settings['ea_adv_data_table_search'] == 'yes') {
                 echo '<div '; $this->print_render_attribute_string('ea-adv-data-table-search-wrap'); echo '><input type="search" placeholder="' . esc_attr( $settings['ea_adv_data_table_search_placeholder'] ). '" class="ea-advanced-data-table-search"></div>';
             }
@@ -1595,7 +1609,7 @@ class Advanced_Data_Table extends Widget_Base
     {
         $settings = $this->get_settings_for_display();
 
-        if ($settings['ea_adv_data_table_source'] == 'static') {
+        if ( 'static' === $settings['ea_adv_data_table_source'] || 'csv' === $settings['ea_adv_data_table_source'] ) {
             return $settings['ea_adv_data_table_static_html'];
         } else if ($settings['ea_adv_data_table_source'] == 'ninja') {
             return $this->ninja_integration();
