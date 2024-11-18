@@ -689,11 +689,26 @@ $config = [
                         'type' => 'lib',
                         'context' => 'view',
                     ],
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/magnific-popup/magnific-popup.min.css',
+                        'type' => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/filterable-gallery.min.css',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
                 ],
                 'js' => [
                     [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/woo-product-image.min.js',
                         'type' => 'self',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/magnific-popup/jquery.magnific-popup.min.js',
+                        'type' => 'lib',
                         'context' => 'view',
                     ],
                 ],

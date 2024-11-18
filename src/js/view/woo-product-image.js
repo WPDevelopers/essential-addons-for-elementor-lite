@@ -55,6 +55,25 @@ var WooProdectImage = function ($scope, $) {
       .catch((error) => {
          console.log("Error initializing Swiper thumbs:", error);
       });
+
+   //Magnific Popup
+   $(".product_image_slider__trigger a").on("click", function (e) {
+      e.preventDefault();
+      var items = [];
+      $(".swiper-slide .image_slider__image img").each(function (index) {
+         items.push({
+            src: $(this).attr("src"),
+         });
+      });
+
+      $.magnificPopup.open({
+         items: items,
+         gallery: {
+            enabled: true,
+         },
+         type: "image",
+      });
+   });
 };
 
 jQuery(window).on("elementor/frontend/init", function () {
