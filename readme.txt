@@ -2,9 +2,9 @@
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk, himadree12
 Tags: elementor, elements, elementor addon, elementor widget, woocommerce elementor
 Requires at least: 5.0
-Tested up to: 6.6
+Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 6.0.8
+Stable tag: 6.0.10
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -298,6 +298,38 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.0.10 - 14/11/2024 =
+
+- Fixed: EA Advanced Accordion | When click on the accordion it jumps to another section
+- Fixed: Woo Product Grid | Pagination Typography Font Weight is not being applied properly
+- Fixed: Woo Product Grid | Product pricing isn’t displaying after the recent update, despite "Show Price" being enabled
+- Fixed: WPForms Widget | Form Container Alignment Does Not Work properly
+- Fixed: EA Dual Color Header | The Gradient color doesn't work
+- Fixed: EA Woo Product Grid | Price is not showing on list layout
+- Fixed: EA Sticky Video | Sticky Video Misalignment Issue while scorlling
+- Fixed: EA Login/Register Form | {password_reset_link} Shortcode Issue in Registration User Email Template
+- Improved: EA Info Box | Width Controller for Image
+- Improved: EA Woo Product Carrousel | Added rating count next to stars
+- Improved: Select2 Ajax Control : Taxonomy - need to remove limit
+- Improved: Security Enhancement
+- Few minor bug fixes & improvements
+
+= 6.0.9 - 06/11/2024 =
+
+- Improved: Added Edit Template support right inside the page itself
+- Improved: EA Post Grid | Added support to show custom post's field/taxonomy
+- Improved: EA Team Member | Added a dynamic tag option for showing ACF images in Team Member image
+- Improved: EA Filterable Gallery | Added support for YouTube Shorts
+- Fixed: EA Data Table | Using text area Content is visibility issue under < a > tag
+- Fixed: EA Gravity Forms | Layout UI issue on the editor page
+- Fixed: EA Interactive Circle | Conflicting with Whiskers Theme Pro
+- Fixed: EA Post Grid | Author name issue in Style 1 & 2
+- Fixed: EA Scroll To Top | Added support on Archive page
+- Fixed: EA Woo Checkout | PHP Deprecated issue
+- Fixed: EA Product Grid | Image clickable issue
+- Fixed: Conflict with Formstack plugin
+- Few minor bug fixes & improvements
 
 = 6.0.8 - 27/10/2024 =
 

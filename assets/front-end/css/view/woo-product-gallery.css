@@ -114,6 +114,16 @@
   margin: 0;
   padding: 0;
 }
+.eael-product-gallery .woocommerce ul.products .product .eael-product-sold-count-progress-bar-wrapper {
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.eael-product-gallery .woocommerce ul.products .product .eael-product-sold-count-progress-bar {
+  background-color: #2196F3;
+  height: 10px;
+  border-radius: 10px;
+}
 .eael-product-gallery .woocommerce ul.products .product .star-rating {
   margin: 0 auto 5px;
   display: inline-block;

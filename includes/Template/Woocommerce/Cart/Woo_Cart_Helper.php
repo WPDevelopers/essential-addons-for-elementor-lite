@@ -115,10 +115,11 @@ trait Woo_Cart_Helper {
 											        $thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
 
 											        if ( ! $product_permalink ) {
+														// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 												        echo $thumbnail; // PHPCS: XSS ok.
 											        } else {
-												        printf( '<a href="%s">%s</a>', esc_url( $product_permalink ),
-													        $thumbnail ); // PHPCS: XSS ok.
+														// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+												        printf( '<a href="%s">%s</a>', esc_url( $product_permalink ), $thumbnail ); // PHPCS: XSS ok.
 											        }
 											        ?>
                                                 </td>
@@ -139,7 +140,8 @@ trait Woo_Cart_Helper {
 
 											        do_action( 'woocommerce_after_cart_item_name', $cart_item, $cart_item_key );
 
-											        // Meta data.
+											        // Meta data. 
+													// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 											        echo wc_get_formatted_cart_item_data( $cart_item ); // PHPCS: XSS ok.
 
 											        // Backorder notification.
@@ -158,6 +160,7 @@ trait Woo_Cart_Helper {
 									        case 'price': ?>
                                                 <td class="product-price <?php echo esc_attr( $item_class ); ?>">
 											        <?php
+													// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 											        echo apply_filters( 'woocommerce_cart_item_price',
 												        WC()->cart->get_product_price( $_product ), $cart_item,
 												        $cart_item_key ); // PHPCS: XSS ok.
@@ -183,7 +186,7 @@ trait Woo_Cart_Helper {
 													        false
 												        );
 											        }
-
+													// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 											        echo apply_filters( 'woocommerce_cart_item_quantity', $product_quantity,
 												        $cart_item_key, $cart_item ); // PHPCS: XSS ok.
 											        ?>
@@ -193,6 +196,7 @@ trait Woo_Cart_Helper {
 									        case 'subtotal': ?>
                                                 <td class="product-subtotal <?php echo esc_attr( $item_class ); ?>">
 											        <?php
+													// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 											        echo apply_filters( 'woocommerce_cart_item_subtotal',
 												        WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ),
 												        $cart_item,
@@ -475,8 +479,10 @@ trait Woo_Cart_Helper {
 												$thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
 
 												if ( ! $product_permalink ) {
+													// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 													echo $thumbnail; // PHPCS: XSS ok.
 												} else {
+													// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 													printf( '<a href="%s">%s</a>', esc_url( $product_permalink ), $thumbnail ); // PHPCS: XSS ok.
 												}
 
@@ -514,10 +520,11 @@ trait Woo_Cart_Helper {
 
 													// Product SKU
 													if ( $settings['eael_woo_cart_table_components_sku'] === 'yes' && ! empty( $_product->get_sku() ) ) {
-														printf( '<p class="eael-woo-cart-sku">#%s</p>', $_product->get_sku() );
+														printf( '<p class="eael-woo-cart-sku">#%s</p>', esc_html( $_product->get_sku() ) );
 													}
 
-													// Meta data.
+													// Meta data. 
+													// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 													echo wc_get_formatted_cart_item_data( $cart_item ); // PHPCS: XSS ok.
 
 													// Backorder notification.
@@ -539,6 +546,7 @@ trait Woo_Cart_Helper {
 											<?php if ( $settings['eael_woo_cart_table_components_price'] === 'yes' ) { ?>
                                                 <div class="eael-woo-cart-td product-price">
 													<?php
+													// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 													echo apply_filters( 'woocommerce_cart_item_price',
 														WC()->cart->get_product_price( $_product ), $cart_item,
 														$cart_item_key ); // PHPCS: XSS ok.
@@ -565,7 +573,7 @@ trait Woo_Cart_Helper {
 															false
 														);
 													}
-
+													// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 													echo apply_filters( 'woocommerce_cart_item_quantity', $product_quantity,
 														$cart_item_key, $cart_item ); // PHPCS: XSS ok.
 													?>
@@ -576,6 +584,7 @@ trait Woo_Cart_Helper {
 											if ( $settings['eael_woo_cart_table_components_subtotal'] === 'yes' ) { ?>
                                                 <div class="eael-woo-cart-td product-subtotal" data-title="<?php echo esc_html( $title ); ?>">
 													<?php
+													// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 													echo apply_filters( 'woocommerce_cart_item_subtotal',
 														WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ),
 														$cart_item,
@@ -644,9 +653,10 @@ trait Woo_Cart_Helper {
 
 				if ( $settings['eael_woo_cart_components_continue_shopping'] === 'yes' ) {
 					$continue_shopping_text = apply_filters( 'eael_woo_cart_continue_shopping_text', $settings['eael_woo_cart_components_continue_shopping_text'] );
+					$icon = Helper::get_render_icon( $settings['eael_woo_cart_components_continue_shopping_icon'], [ 'aria-hidden' => 'true' ] );
 					printf( '<a class="eael-woo-cart-back-to-shop" href="%s">%s %s</a>',
-						get_permalink( wc_get_page_id( 'shop' ) ),
-						Helper::get_render_icon( $settings['eael_woo_cart_components_continue_shopping_icon'], [ 'aria-hidden' => 'true' ] ),
+						esc_url( get_permalink( wc_get_page_id( 'shop' ) ) ),
+						wp_kses( $icon, Helper::eael_allowed_icon_tags() ),
 						esc_html( $continue_shopping_text )
 					);
 				}

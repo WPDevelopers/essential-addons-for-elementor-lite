@@ -90,7 +90,14 @@ eael.hooks.addAction("widgets.reinit", "ea", ($content) => {
 });
 
 let ea_swiper_slider_init_inside_template = (content) => {
-	window.dispatchEvent(new Event('resize'));
+
+	/*
+	* If you want to prevent calling the resize event use this code.
+	* window.eaelPreventResizeOnClick = true;
+	*/
+	if ( window.eaelPreventResizeOnClick === undefined ) {
+		window.dispatchEvent(new Event('resize'));
+	}
 
 	content = typeof content === 'object' ? content : jQuery(content);
 	content.find('.swiper-wrapper').each(function () {
@@ -274,6 +281,36 @@ jQuery(window).on("elementor/frontend/init", function () {
 					jQuery(popupSelector).trigger('click');
 				}, 300);
 			}
+		}
+	});
+
+	$(document).on('click', '.eael-onpage-edit-template', function () {
+		let $this = $(this),
+			templateID = $this.data('eael-template-id'),
+			pageID = $this.data('page-id'),
+			mode = $this.data('mode');
+
+		if (mode === 'edit') {
+			parent.window.$e.internal('panel/state-loading');
+			parent.window.$e.run('editor/documents/switch', {
+				id: parseInt(templateID)  // Switch back to the original document
+			}).then(function () {
+				$this.data('mode', 'save');
+				$this.find('span').text('Save & Back');
+				$this.find('i').addClass('eicon-arrow-left').removeClass('eicon-edit');
+				$this.closest('.eael-onpage-edit-template-wrapper').addClass('eael-onpage-edit-activate').parent().addClass('eael-widget-otea-active');
+				parent.window.$e.internal('panel/state-ready');
+			});
+		} else if (mode === 'save') {
+			parent.window.$e.internal('panel/state-loading');
+			parent.window.$e.run('editor/documents/switch', {
+				id: parseInt(pageID),  // Switch back to the original document
+				mode: 'save',  // You can use 'edit' mode here if you want to continue editing the original document
+				shouldScroll: false
+			}).then(function () {
+				parent.window.$e.internal('panel/state-ready');
+				$this.data('mode', 'edit');
+			});
 		}
 	});
 })(jQuery);

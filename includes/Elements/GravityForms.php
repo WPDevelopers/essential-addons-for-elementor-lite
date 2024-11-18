@@ -88,6 +88,12 @@ class GravityForms extends Widget_Base {
         return 'eaicon-gravity-form';
     }
 
+	public function get_style_depends() {
+		return [
+			'gravity_forms_theme_framework'
+		];
+	}
+
     /**
 	 * Register gravity forms widget controls.
 	 *
@@ -2843,9 +2849,9 @@ class GravityForms extends Widget_Base {
 	 * @access protected
 	 */
     protected function render() {
-        if(!class_exists('\GFForms')) {
-            return;
-        }
+	    if ( ! class_exists( '\GFForms' ) || get_post_type( get_the_ID() ) === 'conversational_form' ) {
+		    return;
+	    }
 
         $settings = $this->get_settings_for_display();
         
