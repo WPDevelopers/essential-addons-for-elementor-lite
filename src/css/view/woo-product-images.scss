@@ -13,14 +13,33 @@
       width: 20px;
    }
 }
+
+.eael-pi-thumb-left {
+   .product_image_slider {
+      display: flex;
+      flex-direction: row-reverse;
+      .product_image_slider__thumbs {
+         height: 50vh;
+      }
+   }
+}
+
+.eael-pi-thumb-right {
+   .product_image_slider {
+      display: flex;
+      flex-direction: row;
+      .product_image_slider__thumbs {
+         height: 50vh;
+      }
+   }
+}
+
 .eael-single-product-images {
    .product_image_slider {
       width: 100%;
-      max-width: 620px;
       &__thumbs {
          width: 100%;
          padding: 0;
-         overflow: hidden;
          position: relative;
          display: flex;
          &__image {

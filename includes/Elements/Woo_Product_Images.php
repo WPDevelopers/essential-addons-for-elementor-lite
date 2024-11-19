@@ -370,13 +370,17 @@ class Woo_Product_Images extends Widget_Base {
 			// 'freeMode' => true,
 			'loop' => $thumb_settings['image_loop'],
 		];
-		if ( 'left' == $thumb_settings['thumb_position'] ) {
+
+		$thumb_position = ['left', 'right'];
+		// if ( 'left' == $thumb_settings['thumb_position'] ) {
+		if ( in_array( $thumb_settings['thumb_position'], $thumb_position ) ) {
 			$sliderThumbs['breakpoints'] = [
 				480 => [
 					'direction'=> "vertical",
 					'slidesPerView'=> 3,
 				],
 			];
+			$this->add_render_attribute( '_wrapper', ['class' => 'eael-pi-thumb-'.$thumb_settings['thumb_position']] );
 		}
 		if ( 'yes' == $thumb_settings['image_autoplay'] ) {
 			$sliderThumbs['autoplay'] = [
