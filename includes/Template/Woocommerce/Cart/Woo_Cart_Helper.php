@@ -47,7 +47,7 @@ trait Woo_Cart_Helper {
             </div>
 
             <div class="eael-woo-cart-table-warp">
-                <div class="shop_table cart woocommerce-cart-form__contents eael-woo-cart-table eael-wct-column-<?php echo esc_attr( count( $settings['table_items'] ) ); ?>">
+                <div class="shop_table cart woocommerce-cart-form__contents eael-woo-cart-table">
                     <div class="eael-wc-table-header">
                     <div class="eael-wct-tr">
 				        <?php

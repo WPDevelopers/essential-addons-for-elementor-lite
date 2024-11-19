@@ -341,6 +341,12 @@
       -ms-flex: 1 1 20%;
           flex: 1 1 20%;
   text-align: center;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-default .eael-woo-cart-table .eael-wct-tr > .eael-wct-th.product-quantity,
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-default .eael-woo-cart-table .eael-wct-tr > .eael-wct-td.product-quantity {
