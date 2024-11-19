@@ -66,6 +66,8 @@ var WooProdectImage = function ($scope, $) {
          });
       });
 
+      console.log(items);
+
       $.magnificPopup.open({
          items: items,
          gallery: {

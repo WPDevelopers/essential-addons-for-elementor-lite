@@ -295,11 +295,20 @@ class Woo_Product_Images extends Widget_Base {
 		$pi_data_settings['thumb_position'] = ! empty( $settings['eael_pi_thumb_position'] ) ? $settings['eael_pi_thumb_position'] : '';
 		return $pi_data_settings;
 	}
-	protected function eael_product_gallery_html( $settings, $img_links ) {
+
+	protected function eael_product_gallery_html( $settings, $img_links, $product_featured_url ) {
 		?>
 		<div class="product_image_slider">
-			<?php $this->render_image_slider( $settings, $img_links ); ?>
-			<?php $this->render_thumbnail_slider( $settings, $img_links ); ?>
+				<?php 
+				if ( !empty( $img_links ) && is_array( $img_links ) ) {
+					$this->render_image_slider( $settings, $img_links );
+					$this->render_thumbnail_slider( $settings, $img_links );
+				} elseif ( !empty( $product_featured_url ) ) {
+					$this->render_image_slider( $settings, $product_featured_url );
+				} else {
+					echo '<p>No images available for the gallery.</p>';
+				}
+				?>
 		</div>
 		<?php
 	}
@@ -456,6 +465,7 @@ class Woo_Product_Images extends Widget_Base {
 		$product_group        = wc_get_product( $product_id );
 		$product_gallery_ids  = $product_group->get_gallery_image_ids();
 
+
       ?>
       <div class="eael-single-product-images">
             <?php 
@@ -468,7 +478,7 @@ class Woo_Product_Images extends Widget_Base {
 					if ( 'yes' === $settings['eael_image_sale_flash'] ) {
 						wc_get_template( 'loop/sale-flash.php' );
 					}
-					$this->eael_product_gallery_html( $settings, $img_links );
+					$this->eael_product_gallery_html( $settings, $img_links, $product_featured_url );
 				} else {
 					if ( 'yes' === $settings['eael_image_sale_flash'] ) {
 						wc_get_template( 'loop/sale-flash.php' );
@@ -477,7 +487,7 @@ class Woo_Product_Images extends Widget_Base {
 
 					$this->add_render_attribute("eael_pi_loop", 'data-loop', 'yes');
 
-					$this->eael_product_gallery_html( $settings, $product_gallery_ids );
+					$this->eael_product_gallery_html( $settings, $product_gallery_ids, $product_featured_url );
 				}
 			?>
       </div>
