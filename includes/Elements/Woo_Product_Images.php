@@ -162,7 +162,7 @@ class Woo_Product_Images extends Widget_Base {
 			\Elementor\Group_Control_Border::get_type(),
 			[
 				'name'      => 'eael_thumb_border',
-				'selector'  => '.woocommerce {{WRAPPER}} .eael-single-product-images .flex-control-thumbs img',
+				'selector'  => '.woocommerce {{WRAPPER}} .eael-single-product-images .product_image_slider__thumbs .swiper-slide',
 			]
 		);
 
@@ -173,7 +173,7 @@ class Woo_Product_Images extends Widget_Base {
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
 				'selectors'  => [
-					'.woocommerce {{WRAPPER}} .eael-single-product-images .flex-control-thumbs img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
+					'.woocommerce {{WRAPPER}} .eael-single-product-images .product_image_slider__thumbs .swiper-slide' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
 				],
 			]
 		);
@@ -181,11 +181,11 @@ class Woo_Product_Images extends Widget_Base {
       $this->add_control(
 			'eael_thumb_spacing',
 			[
-				'label'      => esc_html__( 'Spacing', 'essential-addons-for-elementor-lite' ),
+				'label'      => esc_html__( 'Gap', 'essential-addons-for-elementor-lite' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
 				'selectors'  => [
-					'.woocommerce {{WRAPPER}} .eael-single-product-images .flex-control-thumbs li:not(:last-child)' => 'margin-right: {{SIZE}}{{UNIT}}',
+					'.woocommerce {{WRAPPER}} .eael-single-product-images .product_image_slider__thumbs .swiper-wrapper' => 'gap: {{SIZE}}{{UNIT}}',
 				],
 			]
 		);
