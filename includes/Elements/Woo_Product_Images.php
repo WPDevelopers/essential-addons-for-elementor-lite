@@ -367,17 +367,22 @@ class Woo_Product_Images extends Widget_Base {
 	protected function render_thumbnail_slider( $settings, $img_links ) {
 		$thumb_settings = $this->eael_pi_data_settings( $settings );
 		$sliderThumbs = [
-			'slidesPerView' => $thumb_settings['thumb_items'],
 			'spaceBetween' => 5,
-			'navigation' => [
-				'nextEl' => ".product_image_slider__next",
-				'prevEl' => ".product_image_slider__prev",
-			],
 			'keyboard'=> [
 				'enabled' => true,
 			],
 			'loop' => $thumb_settings['image_loop'],
 		];
+
+		if ( ! empty ( $img_links ) && is_array( $img_links ) && count( $img_links ) > 3 ) {
+			$sliderThumbs['slidesPerView'] = $thumb_settings['thumb_items'];
+			$sliderThumbs ['navigation'] = [
+				'nextEl' => ".product_image_slider__next",
+				'prevEl' => ".product_image_slider__prev",
+			];
+		} else {
+			$sliderThumbs['slidesPerView'] = 'auto';
+		}
 
 		$thumb_position = ['left', 'right'];
 		if ( in_array( $thumb_settings['thumb_position'], $thumb_position ) ) {
@@ -402,17 +407,22 @@ class Woo_Product_Images extends Widget_Base {
 		] );
 		?>
 		<div <?php $this->print_render_attribute_string( 'eael-pi-thumb' ); ?>>
-			<div class="product_image_slider__prev">
-				<?php if ( in_array( $thumb_settings['thumb_position'], $thumb_position ) ) {
+
+			<?php if ( ! empty ( $img_links ) && is_array( $img_links ) && count( $img_links ) > 3 ) { ?>
+				<div class="product_image_slider__prev">
+					<?php 
+						if ( in_array( $thumb_settings['thumb_position'], $thumb_position ) ) {
+							?>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM377 271c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-87-87-87 87c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9L239 167c9.4-9.4 24.6-9.4 33.9 0L377 271z"/></svg>
+							<?php
+						} else {
+							?>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM271 135c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-87 87 87 87c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L167 273c-9.4-9.4-9.4-24.6 0-33.9L271 135z"/></svg>
+							<?php
+						}
 					?>
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM377 271c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-87-87-87 87c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9L239 167c9.4-9.4 24.6-9.4 33.9 0L377 271z"/></svg>
-					<?php
-				} else {
-					?>
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM271 135c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-87 87 87 87c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L167 273c-9.4-9.4-9.4-24.6 0-33.9L271 135z"/></svg>
-					<?php
-				} ?>
-			</div>
+				</div>
+			<?php } ?>
 				<div class="swiper-container">
 					<div class="swiper-wrapper">
 						<?php 
@@ -422,6 +432,7 @@ class Woo_Product_Images extends Widget_Base {
 						?>
 					</div>
 				</div>
+				<?php if ( ! empty ( $img_links ) && is_array( $img_links ) && count( $img_links ) > 3 ) { ?>
 				<div class="product_image_slider__next">
 					<?php if ( in_array( $thumb_settings['thumb_position'], $thumb_position ) ) {
 						?>
@@ -433,6 +444,7 @@ class Woo_Product_Images extends Widget_Base {
 						<?php
 					} ?>
 				</div>
+				<?php } ?>
 		</div>
 		<?php
 	}
