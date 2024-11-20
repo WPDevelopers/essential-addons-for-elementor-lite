@@ -80,10 +80,6 @@
             &-thumb-active {
                opacity: 1;
             }
-            img {
-               width: auto;
-               height: 100%;
-            }
          }
          .swiper-container:not(.swiper-container-initialized) > .swiper-wrapper,
          .swiper:not(.swiper-initialized) > .swiper-wrapper {
@@ -117,15 +113,12 @@
          }
          .swiper-slide {
             width: auto;
-            height: 400px;
             .image_slider__image {
                width: 100%;
                height: 100%;
             }
             img {
                display: block;
-               width: auto;
-               height: 100%;
                margin: 0 auto;
             }
          }

@@ -87,12 +87,39 @@ class Woo_Product_Images extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'eael_iamge_heading',
+			[
+				'label'     => esc_html__( 'Image', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'after',
+			]
+		);
+
+		$this->add_control(
+			'eael_pi_image_height',
+			[
+				'label'      => esc_html__( 'Addjust Image Height', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'vh', 'px', '%', 'rem', 'em', 'custom' ],
+				'range' => [
+					'vh' => [
+						'min' => 1,
+						'max' => 500,
+						'step' => 1,
+					],
+				],
+				'selectors'  => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-images .product_image_slider__container .swiper-slide' => 'height: {{SIZE}}{{UNIT}}',
+				],
+			]
+		);
+
       $this->add_group_control(
 			\Elementor\Group_Control_Border::get_type(),
 			[
 				'name'      => 'eael_image_border',
-				'selector'  => '.woocommerce {{WRAPPER}} .eael-single-product-images .flex-viewport',
-				'separator' => 'before',
+				'selector'  => '.woocommerce {{WRAPPER}} .eael-single-product-images .product_image_slider__container .swiper-slide-active img',
 			]
 		);
 
@@ -103,7 +130,7 @@ class Woo_Product_Images extends Widget_Base {
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
 				'selectors'  => [
-						'.woocommerce {{WRAPPER}} .eael-single-product-images .flex-viewport' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
+						'.woocommerce {{WRAPPER}} .eael-single-product-images .product_image_slider__container .swiper-slide-active img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
 				],
 			]
 		);
@@ -115,7 +142,7 @@ class Woo_Product_Images extends Widget_Base {
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
 				'selectors'  => [
-					'.woocommerce {{WRAPPER}} .eael-single-product-images .flex-viewport:not(:last-child)' => 'margin-bottom: {{SIZE}}{{UNIT}}',
+					'.woocommerce {{WRAPPER}} .eael-single-product-images .product_image_slider__container .swiper-slide' => 'margin-bottom: {{SIZE}}{{UNIT}}',
 				],
 			]
 		);
@@ -520,7 +547,7 @@ class Woo_Product_Images extends Widget_Base {
 						EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg',
 						EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg',
 					];
-					
+
 					if ( 'yes' === $settings['eael_image_sale_flash'] ) {
 						wc_get_template( 'loop/sale-flash.php' );
 					}
