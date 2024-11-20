@@ -520,7 +520,10 @@ class Woo_Product_Images extends Widget_Base {
 						EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg',
 						EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg',
 					];
-
+					
+					if ( 'yes' === $settings['eael_image_sale_flash'] ) {
+						wc_get_template( 'loop/sale-flash.php' );
+					}
 					$this->eael_product_gallery_html( $settings, $img_links, $product_featured_url );
 
 				} else {
