@@ -208,7 +208,7 @@ class Woo_Product_Images extends Widget_Base {
 					],
 				],
 				'default' => [
-					'size' => 5,
+					'size' => 4,
 				],
 			]
 		);
@@ -257,9 +257,31 @@ class Woo_Product_Images extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_product_image_mouse_wheel',
+			'eael_pi_mouse_wheel',
 			[
 				'label'        => esc_html__( 'Mouse Wheel', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'true',
+			]
+		);
+
+		$this->add_control(
+			'eael_pi_grab_cursor',
+			[
+				'label'        => esc_html__( 'Grab Cursor', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'true',
+			]
+		);
+
+		$this->add_control(
+			'eael_pi_keyboard_press',
+			[
+				'label'        => esc_html__( 'Key Press', 'essential-addons-for-elementor-lite' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
@@ -293,6 +315,9 @@ class Woo_Product_Images extends Widget_Base {
 		$pi_data_settings['autoplay_delay'] = ! empty( $settings['eael_product_image_autoplay_delay'] ) ? $settings['eael_product_image_autoplay_delay']['size'] : '';
 		$pi_data_settings['image_effect'] = ! empty( $settings['eael_pi_effects'] ) ? $settings['eael_pi_effects'] : '';
 		$pi_data_settings['thumb_position'] = ! empty( $settings['eael_pi_thumb_position'] ) ? $settings['eael_pi_thumb_position'] : '';
+		$pi_data_settings['mouse_wheel'] = ! empty( $settings['eael_pi_mouse_wheel'] ) ? $settings['eael_pi_mouse_wheel'] : false;
+		$pi_data_settings['grab_cursor'] = ! empty( $settings['eael_pi_grab_cursor'] ) ? $settings['eael_pi_grab_cursor'] : false;
+		$pi_data_settings['keyboard_press'] = ! empty( $settings['eael_pi_keyboard_press'] ) ? $settings['eael_pi_keyboard_press'] : false;
 		return $pi_data_settings;
 	}
 
@@ -318,16 +343,15 @@ class Woo_Product_Images extends Widget_Base {
 		$sliderImages = [
 			'effect' => $image_settings['image_effect'],
 			'slidesPerView' => 1,
-			'spaceBetween' => 32,
 			'loop' => $image_settings['image_loop'],
-			'grabCursor' => true,
-			'mousewheel' => true,
+			'grabCursor' => $image_settings['grab_cursor'],
+			'mousewheel' => $image_settings['mouse_wheel'],
 			'navigation' => [
 				'nextEl' => ".product_image_slider__next",
 				'prevEl' => ".product_image_slider__prev",
 			],
 			'keyboard'=> [
-				'enabled' => true,
+				'enabled' => $image_settings['keyboard_press'],
 			],
 		];
 
@@ -368,8 +392,9 @@ class Woo_Product_Images extends Widget_Base {
 		$thumb_settings = $this->eael_pi_data_settings( $settings );
 		$sliderThumbs = [
 			// 'spaceBetween' => 2,
+			'mousewheel' => $thumb_settings['mouse_wheel'],
 			'keyboard'=> [
-				'enabled' => true,
+				'enabled' => $thumb_settings['keyboard_press'],
 			],
 			'loop' => $thumb_settings['image_loop'],
 		];
@@ -392,7 +417,6 @@ class Woo_Product_Images extends Widget_Base {
 					'slidesPerView'=> 3,
 				],
 			];
-			$this->add_render_attribute( '_wrapper', ['class' => 'eael-pi-thumb-'.$thumb_settings['thumb_position']] );
 		}
 		if ( 'yes' == $thumb_settings['image_autoplay'] ) {
 			$sliderThumbs['autoplay'] = [
@@ -481,9 +505,11 @@ class Woo_Product_Images extends Widget_Base {
 		$product_group        = wc_get_product( $product_id );
 		$product_gallery_ids  = array_merge( [ $product_featured_id ], $product_group->get_gallery_image_ids() );
 
-
+		$this->add_render_attribute( 'eael_thumb_position', [
+			'class' => ['eael-single-product-images', 'eael-pi-thumb-'.$settings['eael_pi_thumb_position'] ]
+			] );
       ?>
-      <div class="eael-single-product-images">
+      <div <?php $this->print_render_attribute_string( 'eael_thumb_position' ); ?>>
             <?php 
 				if( \Elementor\Plugin::$instance->editor->is_edit_mode() ) { 
 					$img_links = [
