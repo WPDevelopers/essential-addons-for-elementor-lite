@@ -355,7 +355,7 @@ class Woo_Product_Images extends Widget_Base {
 					<div class="swiper-wrapper">
 						<?php 
 							foreach ( $img_links as $img_link ) {
-								$this->render_slide( $img_link, 'image_slider__image' );
+								$this->render_slide( $img_link, 'image_slider__image', 'full' );
 							}
 						?>
 					</div>
@@ -381,7 +381,7 @@ class Woo_Product_Images extends Widget_Base {
 				'prevEl' => ".product_image_slider__prev",
 			];
 		} else {
-			$sliderThumbs['slidesPerView'] = 'auto';
+			$sliderThumbs['slidesPerView'] = count( $img_links );
 		}
 
 		$thumb_position = ['left', 'right'];
@@ -427,7 +427,7 @@ class Woo_Product_Images extends Widget_Base {
 					<div class="swiper-wrapper">
 						<?php 
 							foreach ( $img_links as $img_link ) {
-								$this->render_slide( $img_link, 'product_image_slider__thumbs__image' );
+								$this->render_slide( $img_link, 'product_image_slider__thumbs__image', 'thumbnail' );
 							}
 						?>
 					</div>
@@ -449,17 +449,12 @@ class Woo_Product_Images extends Widget_Base {
 		<?php
 	}
 
-	protected function render_slide( $img_link, $class ) {
-		if ( filter_var( $img_link, FILTER_VALIDATE_URL ) ) {
-			$image_url = $img_link;
-		} else {
-			$image_url = wp_get_attachment_url( $img_link ); // Fetch URL if it's an attachment ID
-		}
+	protected function render_slide( $img_link, $class, $size ) {
 		?>
 		<div class="swiper-slide">
-				<div class="<?php echo esc_attr( $class ); ?>">
-					<img src="<?php echo esc_url( $image_url ); ?>" alt="" />
-				</div>
+			<div class="<?php echo esc_attr( $class ); ?>">
+			<?php echo wp_get_attachment_image( $img_link, $size ); ?>
+			</div>
 		</div>
 		<?php
 	}
@@ -474,8 +469,9 @@ class Woo_Product_Images extends Widget_Base {
 		$settings             = $this->get_settings_for_display();
 		$product_id           = $product->get_id();
 		$product_featured_url = wp_get_attachment_image_src( get_post_thumbnail_id( $product_id ), 'single-post-thumbnail' );
+		$product_featured_id  = get_post_thumbnail_id( $product_id );
 		$product_group        = wc_get_product( $product_id );
-		$product_gallery_ids  = $product_group->get_gallery_image_ids();
+		$product_gallery_ids  = array_merge( [ $product_featured_id ], $product_group->get_gallery_image_ids() );
 
 
       ?>
@@ -496,9 +492,6 @@ class Woo_Product_Images extends Widget_Base {
 						wc_get_template( 'loop/sale-flash.php' );
 					}
 					// wc_get_template( 'single-product/product-image.php' );
-
-					$this->add_render_attribute("eael_pi_loop", 'data-loop', 'yes');
-
 					$this->eael_product_gallery_html( $settings, $product_gallery_ids, $product_featured_url );
 				}
 			?>
