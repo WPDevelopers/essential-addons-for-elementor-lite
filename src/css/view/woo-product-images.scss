@@ -85,6 +85,10 @@
                height: 100%;
             }
          }
+         .swiper-container:not(.swiper-container-initialized) > .swiper-wrapper,
+         .swiper:not(.swiper-initialized) > .swiper-wrapper {
+            overflow: visible;
+         }
       }
       &__prev {
          @include next_prev;
@@ -124,6 +128,10 @@
                height: 100%;
                margin: 0 auto;
             }
+         }
+         .swiper-container:not(.swiper-container-initialized) > .swiper-wrapper,
+         .swiper:not(.swiper-initialized) > .swiper-wrapper {
+            overflow: visible;
          }
       }
    }

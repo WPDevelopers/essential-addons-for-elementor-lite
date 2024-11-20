@@ -367,7 +367,7 @@ class Woo_Product_Images extends Widget_Base {
 	protected function render_thumbnail_slider( $settings, $img_links ) {
 		$thumb_settings = $this->eael_pi_data_settings( $settings );
 		$sliderThumbs = [
-			'spaceBetween' => 5,
+			// 'spaceBetween' => 2,
 			'keyboard'=> [
 				'enabled' => true,
 			],
@@ -453,7 +453,15 @@ class Woo_Product_Images extends Widget_Base {
 		?>
 		<div class="swiper-slide">
 			<div class="<?php echo esc_attr( $class ); ?>">
-			<?php echo wp_get_attachment_image( $img_link, $size ); ?>
+			<?php 
+			if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
+				?>
+				<img src="<?php echo esc_url( $img_link ); ?>" alt="" />
+				<?php
+			} else {
+				echo wp_get_attachment_image( $img_link, $size ); 
+			}
+			?>
 			</div>
 		</div>
 		<?php
@@ -482,11 +490,13 @@ class Woo_Product_Images extends Widget_Base {
 						EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg',
 						EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg',
 						EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg',
+						EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg',
+						EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg',
+						EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg',
 					];
-					if ( 'yes' === $settings['eael_image_sale_flash'] ) {
-						wc_get_template( 'loop/sale-flash.php' );
-					}
+
 					$this->eael_product_gallery_html( $settings, $img_links, $product_featured_url );
+
 				} else {
 					if ( 'yes' === $settings['eael_image_sale_flash'] ) {
 						wc_get_template( 'loop/sale-flash.php' );
