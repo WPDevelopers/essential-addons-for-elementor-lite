@@ -1541,7 +1541,7 @@ class Woo_Cart extends Widget_Base {
 					'unit' => 'px',
 				],
 				'selectors'  => [
-					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .eael-wc-table-body' => 'display: grid;gap: {{SIZE}}{{UNIT}};',
+					'.eael-woo-cart {{WRAPPER}} .eael-woo-cart-wrapper form.eael-woo-cart-form .eael-woo-cart-table .eael-wc-table-body' => 'gap: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
 					'ea_woo_cart_layout' => 'default'

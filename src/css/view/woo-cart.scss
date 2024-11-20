@@ -348,7 +348,8 @@ $thumb-bg-1: #E5F6FC;
             border-collapse: separate;
             border-spacing: 0 13px;
             border: none;
-            margin: 0;
+            margin: 0px 0px 15px 0px;
+            min-width: 700px;
 
             .eael-wct-tr {
                 display: flex;
@@ -392,17 +393,31 @@ $thumb-bg-1: #E5F6FC;
                         }
                     }
                 }
-            }    
-              
-            .eael-wct-th,
-            .eael-wct-td {
-                border: none;
-                color: $text-color-1;
-                padding: 15px;
-                text-transform: initial;
-
-                a {
+                 
+                .eael-wct-th,
+                .eael-wct-td {
+                    border: none;
                     color: $text-color-1;
+                    padding: 15px;
+                    text-transform: initial;
+
+                    a {
+                        color: $text-color-1;
+                    }
+                }
+            }
+
+            .eael-wc-table-body{
+                display: grid;
+                gap: 10px;
+                .eael-wct-tr {
+                    background: #fff;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    width: 100%;
+                    box-shadow: 0 8px 18px 0 rgba(0, 1, 35, .05);
+                    border-radius: 5px;
                 }
             }
 
