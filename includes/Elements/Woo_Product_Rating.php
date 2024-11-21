@@ -284,7 +284,7 @@ class Woo_Product_Rating extends Widget_Base {
 			[
 				'label'       => esc_html__( 'Rating Caption', 'essential-addons-for-elementor-lite' ),
 				'type'        => \Elementor\Controls_Manager::TEXT,
-				'default'     => esc_html__( 'Customer Review', 'essential-addons-for-elementor-lite' ),
+				'default'     => esc_html__( 'Customer Rating', 'essential-addons-for-elementor-lite' ),
 				'ai' => [
 					'active' => false,
 				],
@@ -345,9 +345,9 @@ class Woo_Product_Rating extends Widget_Base {
 		$this->add_control(
 			'empty_rating_caption',
 			[
-				'label'       => esc_html__( 'Empty Caption', 'essential-addons-for-elementor-lite' ),
+				'label'       => esc_html__( 'Empty Rating Caption', 'essential-addons-for-elementor-lite' ),
 				'type'        => \Elementor\Controls_Manager::TEXT,
-				'default'     => esc_html__( 'Empty Caption', 'essential-addons-for-elementor-lite' ),
+				'default'     => esc_html__( 'No Customer Rating', 'essential-addons-for-elementor-lite' ),
 				'ai' => [
 					'active' => false,
 				],
