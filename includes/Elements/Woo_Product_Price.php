@@ -310,7 +310,7 @@ class Woo_Product_Price extends Widget_Base {
 			]
 		);
 
-      $this->add_control(
+      $this->add_responsive_control(
 			'price_align',
 			[
 				'label'   => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
@@ -543,7 +543,7 @@ class Woo_Product_Price extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'prefix_text_margin',
 			[
 				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
@@ -602,7 +602,7 @@ class Woo_Product_Price extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'prefix_margin',
 			[
 				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
@@ -651,7 +651,7 @@ class Woo_Product_Price extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'suffix_text_margin',
 			[
 				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
@@ -710,7 +710,7 @@ class Woo_Product_Price extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'suffix_margin',
 			[
 				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
