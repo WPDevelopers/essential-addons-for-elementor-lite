@@ -419,7 +419,7 @@ class Woo_Product_Rating extends Widget_Base {
 				</div>
 				<?php
 			} else {
-				echo wc_get_rating_html( $average, $rating_count ); 
+				echo wc_get_rating_html( $average = 3, $rating_count );
 			}
 		}
 	}
