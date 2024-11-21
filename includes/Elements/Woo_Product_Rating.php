@@ -88,6 +88,9 @@ class Woo_Product_Rating extends Widget_Base {
 					'.woocommerce {{WRAPPER}} .eael-single-product-rating .star-rating:before' => 'color: {{VALUE}};',
 					'.woocommerce {{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap .eael-product-rating svg path' => 'fill: {{VALUE}};',
 				],
+				'condition' => [
+					'show_empty_review' => 'yes',
+				]
 			]
 		);
 
@@ -143,6 +146,7 @@ class Woo_Product_Rating extends Widget_Base {
 				'selectors' => [
 					'.woocommerce {{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap' => 'gap: {{SIZE}}{{UNIT}};',
 					'.woocommerce {{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap' => 'gap: {{SIZE}}{{UNIT}};',
+					'.woocommerce {{WRAPPER}} .eael-single-product-rating .star-rating' => 'letter-spacing: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -266,11 +270,11 @@ class Woo_Product_Rating extends Widget_Base {
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'default' => 'style_1',
 				'options' => [
-					'style_1' => esc_html__( 'Style 1', 'essential-addons-for-elementor-lite' ),
-					'style_2' => esc_html__( 'Style 2', 'essential-addons-for-elementor-lite' ),
-					'style_3' => esc_html__( 'Style 3', 'essential-addons-for-elementor-lite' ),
-					'style_4' => esc_html__( 'Style 4', 'essential-addons-for-elementor-lite' ),
-					'style_5' => esc_html__( 'Style 5', 'essential-addons-for-elementor-lite' ),
+					'style_1' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
+					'style_2' => esc_html__( 'Style 1', 'essential-addons-for-elementor-lite' ),
+					'style_3' => esc_html__( 'Style 2', 'essential-addons-for-elementor-lite' ),
+					'style_4' => esc_html__( 'Style 3', 'essential-addons-for-elementor-lite' ),
+					'style_5' => esc_html__( 'Style 4', 'essential-addons-for-elementor-lite' ),
 				],
 			]
 		);
@@ -419,7 +423,7 @@ class Woo_Product_Rating extends Widget_Base {
 				</div>
 				<?php
 			} else {
-				echo wc_get_rating_html( $average = 3, $rating_count );
+				echo wc_get_rating_html( $average > 0 ? $average : $average = 5, $rating_count );
 			}
 		}
 	}
