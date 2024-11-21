@@ -7,6 +7,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin: 0;
 }
 .eael-single-product-price .price ins {
   text-decoration: none;

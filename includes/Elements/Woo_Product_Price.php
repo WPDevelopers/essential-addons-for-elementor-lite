@@ -62,8 +62,9 @@ class Woo_Product_Price extends Widget_Base {
 		$this->start_controls_section(
 			'section_prefix',
 			[
-				'label' => esc_html__( 'Prefix', 'essential-addons-for-elementor-lite' ),
-				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+				'label'     => esc_html__( 'Prefix', 'essential-addons-for-elementor-lite' ),
+				'tab'       => \Elementor\Controls_Manager::TAB_STYLE,
+				'condition' => [ 'show_prefix' => 'yes' ],
 			]
 		);
 		
@@ -76,8 +77,9 @@ class Woo_Product_Price extends Widget_Base {
 		$this->start_controls_section(
 			'section_suffix',
 			[
-				'label' => esc_html__( 'Suffix', 'essential-addons-for-elementor-lite' ),
-				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+				'label'     => esc_html__( 'Suffix', 'essential-addons-for-elementor-lite' ),
+				'tab'       => \Elementor\Controls_Manager::TAB_STYLE,
+				'condition' => [ 'show_suffix' => 'yes' ],
 			]
 		);
 		
