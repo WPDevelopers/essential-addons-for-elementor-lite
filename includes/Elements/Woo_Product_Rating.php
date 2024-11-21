@@ -168,7 +168,7 @@ class Woo_Product_Rating extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'product_rating_margin',
 			[
 				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
@@ -481,9 +481,15 @@ class Woo_Product_Rating extends Widget_Base {
 						<a href="#reviews" class="woocommerce-review-link" rel="nofollow">
 								<span class="before-rating"><?php echo Helper::eael_wp_kses( $settings['before_rating_caption'] ); ?></span>
 								<span class="count">
-									<span class="count_number">
-										<?php echo esc_html( $review_count ); ?>
-									</span>
+									<?php 
+										if ( $review_count > 0 ) {
+											?>
+											<span class="count_number">
+												<?php echo esc_html( $review_count ); ?>
+											</span>
+											<?php
+										}
+									?>
 									<span class="count_text">
 										<?php echo Helper::eael_wp_kses( $review_caption ); ?>
 									</span>
