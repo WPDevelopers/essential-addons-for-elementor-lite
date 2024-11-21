@@ -305,7 +305,8 @@ class Woo_Product_Price extends Widget_Base {
 				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'.woocommerce {{WRAPPER}} .eael-single-product-price .price .amount' => 'color: {{VALUE}};',
+					'.woocommerce {{WRAPPER}} .eael-single-product-price .price del .amount bdi' => 'color: {{VALUE}};',
+					'.woocommerce {{WRAPPER}} .eael-single-product-price .price .amount bdi' => 'color: {{VALUE}};',
 				],
 			]
 		);
