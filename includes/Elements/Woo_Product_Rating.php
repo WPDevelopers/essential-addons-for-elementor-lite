@@ -27,7 +27,23 @@ class Woo_Product_Rating extends Widget_Base {
 	}
 
 	public function get_keywords() {
-		return [ 'woocommerce', 'shop', 'store', 'rating', 'review', 'product' ];
+		return [ 
+			'woocommerce', 
+			'shop', 
+			'store', 
+			'rating', 
+			'review', 
+			'comments', 
+			'stars', 
+			'product', 
+			'ea rating', 
+			'ea review',
+			'ea star',
+		];
+	}
+
+	public function get_custom_help_url() {
+		return 'https://essential-addons.com/elementor/docs/product-rating/';
 	}
 
 	protected function register_controls() {
