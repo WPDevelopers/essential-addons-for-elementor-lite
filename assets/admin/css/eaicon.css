@@ -1,13 +1,13 @@
 @font-face {
-  font-family: 'eaicon';
-  src:  url('../fonts/eaicon.eot?8v39no');
-  src:  url('../fonts/eaicon.eot?8v39no#iefix') format('embedded-opentype'),
-  url('../fonts/eaicon.ttf?8v39no') format('truetype'),
-  url('../fonts/eaicon.woff?8v39no') format('woff'),
-  url('../fonts/eaicon.svg?8v39no#eaicon') format('svg');
-  font-weight: normal;
-  font-style: normal;
-  font-display: block;
+	font-family: 'eaicon';
+	src:  url('../fonts/eaicon.eot?8c99ei');
+	src:  url('../fonts/eaicon.eot?8c99ei#iefix') format('embedded-opentype'),
+	url('../fonts/eaicon.ttf?8c99ei') format('truetype'),
+	url('../fonts/eaicon.woff?8c99ei') format('woff'),
+	url('../fonts/eaicon.svg?8c99ei#eaicon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
 }
 
 [class^="eaicon-"],
@@ -452,4 +452,7 @@
 }
 .eaicon-product-price:before {
 	content: "\e985";
+}
+.eaicon-breadcrumbs:before {
+	content: "\e987";
 }
