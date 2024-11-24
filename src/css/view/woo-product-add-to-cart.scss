@@ -6,8 +6,10 @@
             margin-bottom: 0;
             .button {
                display: flex;
-               padding-top: 12px;
+               padding: 12px;
                gap: 10px;
+               align-items: center;
+               flex-grow: 0;
             }
          }
       }
