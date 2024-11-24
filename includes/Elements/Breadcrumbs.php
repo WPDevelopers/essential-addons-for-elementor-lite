@@ -386,6 +386,34 @@ class Breadcrumbs extends Widget_Base {
 				'type'      => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
 					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumb-separator svg path' => 'fill: {{VALUE}}',
+					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumb-separator' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_separator_spacing',
+			[
+				'label'      => esc_html__( 'Spacing', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'range'      => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 50,
+						'step' => 1,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 10,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumb-separator' => 'margin: 0 {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -414,6 +442,9 @@ class Breadcrumbs extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumb-separator svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 				],
+				'condition' => [
+					'eael_separator_type' => 'icon',
+				],
 			]
 		);
 
@@ -425,13 +456,16 @@ class Breadcrumbs extends Widget_Base {
 				'size_units' => [ 'px', '%', 'rem', 'custom' ],
 				'default'    => [
 					'top'    => 4,
-					'right'  => 10,
+					'right'  => 0,
 					'bottom' => 0,
-					'left'   => 10,
+					'left'   => 0,
 					'isLinked' => true,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumb-separator svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition' => [
+					'eael_separator_type' => 'icon',
 				],
 			]
 		);
@@ -476,7 +510,7 @@ class Breadcrumbs extends Widget_Base {
          $separator_icon = ob_get_clean();
          return sprintf( '<span class="eael-breadcrumb-separator">%s</span>', $separator_icon );
       } else {
-         return Helper::eael_wp_kses( $settings['eael_separator_type_text'] );
+			return sprintf( '<span class="eael-breadcrumb-separator">%s</span>', Helper::eael_wp_kses( $settings['eael_separator_type_text'] ) );
       }
    }
 
