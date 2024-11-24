@@ -27,7 +27,11 @@ class Breadcrumbs extends Widget_Base {
 	}
 
    public function get_keywords() {
-		return [ 'breadcrumb', 'shop', 'page', 'post' ];
+		return [ 'breadcrumbs', 'shop', 'page', 'post', 'product', 'ea breadcrumbs' ];
+	}
+
+	public function get_custom_help_url() {
+		return 'https://essential-addons.com/elementor/docs/eael-breadcrumbs/';
 	}
 
    protected function register_controls() {
@@ -51,22 +55,6 @@ class Breadcrumbs extends Widget_Base {
             'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
          ]
       );
-
-      $this->add_control(
-			'breadcrumb_style_preset',
-			[
-				'label'   => esc_html__( 'Border Style', 'essential-addons-for-elementor-lite' ),
-				'type'    => \Elementor\Controls_Manager::SELECT,
-				'default' => 'style1',
-				'options' => [
-					'style1' => esc_html__( 'Style 1', 'essential-addons-for-elementor-lite' ),
-					'style2' => esc_html__( 'Style 2', 'essential-addons-for-elementor-lite' ),
-					'style3' => esc_html__( 'Style 3', 'essential-addons-for-elementor-lite' ),
-					'style4' => esc_html__( 'Style 4', 'essential-addons-for-elementor-lite' ),
-					'style5' => esc_html__( 'Style 5', 'essential-addons-for-elementor-lite' ),
-				],
-			]
-		);
 
       $this->add_control(
 			'breadcrumb_home_text',
