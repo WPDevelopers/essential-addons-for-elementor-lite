@@ -454,7 +454,7 @@ class Woo_Product_Price extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'.woocommerce {{WRAPPER}} .eael-single-product-price .price del' => 'margin-right: {{SIZE}}{{UNIT}}',
+					'.woocommerce {{WRAPPER}} .eael-single-product-price .price' => 'gap: {{SIZE}}{{UNIT}}',
 				],
 			]
 		);
