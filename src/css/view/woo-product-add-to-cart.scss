@@ -1,20 +1,19 @@
-.eael-single-product-add-to-cart {
-   .elementor-add-to-cart {
-      &.elementor-product-simple {
-         .cart {
+.woocommerce {
+   div.product {
+      .eael-single-product-add-to-cart {
+         form.cart {
             display: flex;
             margin-bottom: 0;
+            .button {
+               display: flex;
+               padding-top: 12px;
+               gap: 10px;
+            }
          }
       }
    }
-   .cart {
-      .button {
-         display: flex;
-         padding-top: 12px;
-         gap: 10px;
-      }
-   }
 }
+
 .eael-add-to-cart--layout-column {
    &.eael-add-to-cart--align-flex-start {
       .cart {

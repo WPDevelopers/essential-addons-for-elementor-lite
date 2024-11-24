@@ -1,10 +1,10 @@
-.eael-single-product-add-to-cart .elementor-add-to-cart.elementor-product-simple .cart {
+.woocommerce div.product .eael-single-product-add-to-cart form.cart {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   margin-bottom: 0;
 }
-.eael-single-product-add-to-cart .cart .button {
+.woocommerce div.product .eael-single-product-add-to-cart form.cart .button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
