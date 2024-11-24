@@ -19,7 +19,7 @@ class Breadcrumbs extends Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'eicon-elementor-circle';
+		return 'eaicon-breadcrumbs';
 	}
 
    public function get_categories() {
@@ -199,6 +199,49 @@ class Breadcrumbs extends Widget_Base {
             'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
          ]
       );
+
+		$this->add_control(
+			'eael_breadcrumb_bg_color',
+			[
+				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__content' => 'background-color: {{VALUE}}',
+				]
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'name'     => 'eael_breadcrumb_border',
+				'selector' => '{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__content',
+			]
+		);
+
+		$this->add_control(
+			'eael_breadcrumb_border_radious',
+			[
+				'label'      => esc_html__( 'Border Radious', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__content' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_breadcrumb_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
 
       $this->add_control(
 			'breadcrumb_text_color',
