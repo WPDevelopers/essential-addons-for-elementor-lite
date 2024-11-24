@@ -588,6 +588,10 @@ input:focus {
   background: transparent;
 }
 
+#ea__dashboard--wrapper input.input-name::placeholder {
+  opacity: .7;
+}
+
 .ea__input-search-wrapper:after {
   content: '\e930';
   font-family: 'ea-dash-icon';
