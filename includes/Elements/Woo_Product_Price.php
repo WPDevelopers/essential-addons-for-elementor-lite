@@ -28,7 +28,11 @@ class Woo_Product_Price extends Widget_Base {
 	}
 
 	public function get_keywords() {
-		return [ 'woocommerce', 'shop', 'store', 'price', 'sale', 'product' ];
+		return [ 'woocommerce', 'shop', 'store', 'price', 'sale', 'product', 'ea price', 'ea sale', 'ea product' ];
+	}
+
+	public function get_custom_help_url() {
+		return 'https://essential-addons.com/elementor/docs/eael-product-price/';
 	}
 
 	protected function register_controls() {
