@@ -27,7 +27,11 @@ class Woo_Product_Add_To_Cart extends Widget_Base {
 	}
 
 	public function get_keywords() {
-		return [ 'woocommerce', 'shop', 'store', 'cart', 'product' ];
+		return [ 'woocommerce', 'shop', 'store', 'cart', 'product', 'button', 'add to cart', 'ea cart', 'ea add to cart', 'ea product' ];
+	}
+
+	public function get_custom_help_url() {
+		return 'https://essential-addons.com/elementor/docs/eael-product-add-to-cart/';
 	}
 
 	protected function register_controls() {
