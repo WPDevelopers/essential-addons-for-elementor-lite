@@ -415,6 +415,7 @@ class Breadcrumbs extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
+				'default'   => '#767676',
             'selectors' => [
 					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumb-separator svg path' => 'fill: {{VALUE}}',
 					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumb-separator' => 'color: {{VALUE}}',
