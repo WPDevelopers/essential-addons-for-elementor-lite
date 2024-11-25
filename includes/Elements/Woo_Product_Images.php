@@ -27,7 +27,11 @@ class Woo_Product_Images extends Widget_Base {
 	}
 
 	public function get_keywords() {
-		return [ 'woocommerce', 'shop', 'store', 'images', 'product' ];
+		return [ 'woocommerce', 'shop', 'store', 'images', 'product', 'gallery', 'lightbox', 'ea image', 'ea product', 'ea product image' ];
+	}
+
+	public function get_custom_help_url() {
+		return 'https://essential-addons.com/elementor/docs/woo-product-image/';
 	}
 
 	protected function register_controls() {
