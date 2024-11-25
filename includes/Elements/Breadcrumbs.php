@@ -231,7 +231,7 @@ class Breadcrumbs extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'eael_breadcrumb_padding',
 			[
 				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
@@ -332,7 +332,7 @@ class Breadcrumbs extends Widget_Base {
 			]
 		);
 
-      $this->add_control(
+      $this->add_responsive_control(
 			'prefix_icon_margin',
 			[
 				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
@@ -371,7 +371,7 @@ class Breadcrumbs extends Widget_Base {
 			]
 		);
 
-      $this->add_control(
+      $this->add_responsive_control(
 			'prefix_text_margin',
 			[
 				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
@@ -480,7 +480,7 @@ class Breadcrumbs extends Widget_Base {
 			]
 		);
 
-      $this->add_control(
+      $this->add_responsive_control(
 			'separator_margin',
 			[
 				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
