@@ -21,8 +21,9 @@
    .product_image_slider {
       display: flex;
       flex-direction: row-reverse;
+      justify-content: flex-start;
+      align-items: flex-start;
       .product_image_slider__thumbs {
-         height: 50vh;
          flex-direction: column;
          .product_image_slider__prev {
             position: relative;
@@ -42,8 +43,9 @@
    .product_image_slider {
       display: flex;
       flex-direction: row;
+      justify-content: flex-end;
+      align-items: flex-start;
       .product_image_slider__thumbs {
-         height: 50vh;
          flex-direction: column;
          .product_image_slider__prev {
             position: relative;

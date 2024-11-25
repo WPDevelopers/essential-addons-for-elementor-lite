@@ -179,6 +179,34 @@ class Woo_Product_Images extends Widget_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'eael_thumb_height',
+			[
+				'label'      => esc_html__( 'Adjust Thumb Height', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'vh', 'px', '%', 'rem', 'em', 'custom' ],
+				'range' => [
+					'px' => [
+						'min'  => 1,
+						'max'  => 1000,
+						'step' => 5,
+					],
+					'vh' => [
+						'min' => 1,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => 'vh',
+					'size' => 35,
+				],
+				'selectors'  => [
+					'.woocommerce {{WRAPPER}} .eael-pi-thumb-left .product_image_slider .product_image_slider__thumbs' => 'height: {{SIZE}}{{UNIT}}',
+					'.woocommerce {{WRAPPER}} .eael-pi-thumb-right .product_image_slider .product_image_slider__thumbs' => 'height: {{SIZE}}{{UNIT}}',
+				],
+			]
+		);
+
       $this->add_group_control(
 			\Elementor\Group_Control_Border::get_type(),
 			[
