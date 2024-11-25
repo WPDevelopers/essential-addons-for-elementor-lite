@@ -634,7 +634,7 @@ class Woo_Product_Images extends Widget_Base {
 			$sliderThumbs['breakpoints'] = [
 				480 => [
 					'direction'=> "vertical",
-					'slidesPerView'=> 3,
+					'slidesPerView'=> $thumb_settings['thumb_items'],
 				],
 			];
 		}
