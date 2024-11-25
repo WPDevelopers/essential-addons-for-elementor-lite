@@ -155,6 +155,82 @@ class Woo_Product_Images extends Widget_Base {
 				],
 			]
 		);
+
+		$this->add_control(
+			'eael_image_zoom_box',
+			[
+				'label'     => esc_html__( 'Image Zoom Box', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'after',
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_image_zoom_box_size',
+			[
+				'label'      => esc_html__( 'Size', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
+				'selectors'  => [
+					'.woocommerce {{WRAPPER}} .eael-single-product-images .product_image_slider__container .product_image_slider__trigger' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_image_zoom_box_bg_color',
+			[
+				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-single-product-images .product_image_slider__container .product_image_slider__trigger' => 'background-color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_image_zoom_box_icon_color',
+			[
+				'label'     => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-single-product-images .product_image_slider__container .product_image_slider__trigger svg path' => 'fill: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_image_zoom_box_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'default'    => [
+					'top'    => 5,
+					'right'  => 8,
+					'bottom' => 5,
+					'left'   => 8,
+					'unit'   => 'px',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-single-product-images .product_image_slider__container .product_image_slider__trigger' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_image_zoom_box_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'selectors' => [
+					'{{WRAPPER}} .eael-single-product-images .product_image_slider__container .product_image_slider__trigger' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
         //End image
 
         //Start thumbnail
