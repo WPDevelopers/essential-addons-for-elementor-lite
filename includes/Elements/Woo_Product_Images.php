@@ -167,6 +167,18 @@ class Woo_Product_Images extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'eael_pi_thumb_navigation',
+			[
+				'label'        => esc_html__( 'Thumbnail Navigation', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
+
       $this->add_group_control(
 			\Elementor\Group_Control_Border::get_type(),
 			[
@@ -354,6 +366,7 @@ class Woo_Product_Images extends Widget_Base {
 		$pi_data_settings['mouse_wheel'] = ! empty( $settings['eael_pi_mouse_wheel'] ) ? $settings['eael_pi_mouse_wheel'] : false;
 		$pi_data_settings['grab_cursor'] = ! empty( $settings['eael_pi_grab_cursor'] ) ? $settings['eael_pi_grab_cursor'] : false;
 		$pi_data_settings['keyboard_press'] = ! empty( $settings['eael_pi_keyboard_press'] ) ? $settings['eael_pi_keyboard_press'] : false;
+		$pi_data_settings['thumb_navigation'] = ! empty( $settings['eael_pi_thumb_navigation'] ) ? $settings['eael_pi_thumb_navigation'] : false;
 		return $pi_data_settings;
 	}
 
@@ -468,7 +481,7 @@ class Woo_Product_Images extends Widget_Base {
 		?>
 		<div <?php $this->print_render_attribute_string( 'eael-pi-thumb' ); ?>>
 
-			<?php if ( ! empty ( $img_links ) && is_array( $img_links ) && count( $img_links ) > 3 ) { ?>
+			<?php if ( ! empty ( $img_links ) && is_array( $img_links ) && count( $img_links ) > 3 && 'yes' == $thumb_settings['thumb_navigation'] ) { ?>
 				<div class="product_image_slider__prev">
 					<?php 
 						if ( in_array( $thumb_settings['thumb_position'], $thumb_position ) ) {
@@ -492,15 +505,15 @@ class Woo_Product_Images extends Widget_Base {
 						?>
 					</div>
 				</div>
-				<?php if ( ! empty ( $img_links ) && is_array( $img_links ) && count( $img_links ) > 3 ) { ?>
+				<?php if ( ! empty ( $img_links ) && is_array( $img_links ) && count( $img_links ) > 3 && 'yes' == $thumb_settings['thumb_navigation'] ) { ?>
 				<div class="product_image_slider__next">
 					<?php if ( in_array( $thumb_settings['thumb_position'], $thumb_position ) ) {
 						?>
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M256 0a256 256 0 1 0 0 512A256 256 0 1 0 256 0zM135 241c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l87 87 87-87c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L273 345c-9.4 9.4-24.6 9.4-33.9 0L135 241z"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 0a256 256 0 1 0 0 512A256 256 0 1 0 256 0zM135 241c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l87 87 87-87c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L273 345c-9.4 9.4-24.6 9.4-33.9 0L135 241z"/></svg>
 						<?php
 					} else {
 						?>
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM241 377c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l87-87-87-87c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L345 239c9.4 9.4 9.4 24.6 0 33.9L241 377z"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM241 377c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l87-87-87-87c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L345 239c9.4 9.4 9.4 24.6 0 33.9L241 377z"/></svg>
 						<?php
 					} ?>
 				</div>
