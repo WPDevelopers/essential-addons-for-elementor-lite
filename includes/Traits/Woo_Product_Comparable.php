@@ -1507,7 +1507,7 @@ trait Woo_Product_Comparable {
         $this->add_control(
             'price_heading',
             [
-                'label' => __( 'Normal Price Style', 'plugin-name' ),
+                'label' => __( 'Normal Price Style', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -1556,7 +1556,7 @@ trait Woo_Product_Comparable {
         $this->add_control(
             'sales_price_heading',
             [
-                'label' => __( 'Sales Price Style', 'plugin-name' ),
+                'label' => __( 'Sales Price Style', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
