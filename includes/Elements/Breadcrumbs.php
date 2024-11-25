@@ -282,6 +282,9 @@ class Breadcrumbs extends Widget_Base {
          [
             'label' => esc_html__( 'Prefix', 'essential-addons-for-elementor-lite' ),
             'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'breadcrumb_prefix_switch' => 'yes',
+				],
          ]
       );
 
