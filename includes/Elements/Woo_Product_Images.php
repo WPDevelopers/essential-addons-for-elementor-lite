@@ -167,18 +167,6 @@ class Woo_Product_Images extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'eael_pi_thumb_navigation',
-			[
-				'label'        => esc_html__( 'Thumbnail Navigation', 'essential-addons-for-elementor-lite' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
-				'return_value' => 'yes',
-				'default'      => 'yes',
-			]
-		);
-
 		$this->add_responsive_control(
 			'eael_thumb_height',
 			[
@@ -233,8 +221,87 @@ class Woo_Product_Images extends Widget_Base {
 				'label'      => esc_html__( 'Gap', 'essential-addons-for-elementor-lite' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
+				'default'    => [
+					'unit' => 'px',
+					'size' => 5,
+				],
 				'selectors'  => [
 					'.woocommerce {{WRAPPER}} .eael-single-product-images .product_image_slider__thumbs .swiper-wrapper' => 'gap: {{SIZE}}{{UNIT}}',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_thumb_navigation',
+			[
+				'label'     => esc_html__( 'Navigation', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'after',
+			]
+		);
+
+		$this->add_control(
+			'eael_pi_thumb_navigation',
+			[
+				'label'        => esc_html__( 'Thumbnail Navigation', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'eael_thumb_navigator_bg_color',
+			[
+				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-single-product-images .product_image_slider__prev' => 'background-color: {{VALUE}}',
+					'{{WRAPPER}} .eael-single-product-images .product_image_slider__next' => 'background-color: {{VALUE}}',
+				],
+				'condition' => [
+					'eael_pi_thumb_navigation' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_thumb_navigator_icon_color',
+			[
+				'label'     => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-single-product-images .product_image_slider__prev svg path' => 'fill: {{VALUE}}',
+					'{{WRAPPER}} .eael-single-product-images .product_image_slider__next svg path' => 'fill: {{VALUE}}',
+				],
+				'condition' => [
+					'eael_pi_thumb_navigation' => 'yes',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_thumb_navigator_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'default'    => [
+					'top'    => 3,
+					'right'  => 3,
+					'bottom' => 3,
+					'left'   => 3,
+					'unit'   => 'px',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-single-product-images .product_image_slider__prev' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-single-product-images .product_image_slider__next' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition' => [
+					'eael_pi_thumb_navigation' => 'yes',
 				],
 			]
 		);
