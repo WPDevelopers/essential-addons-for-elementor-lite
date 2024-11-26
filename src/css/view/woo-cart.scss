@@ -722,6 +722,18 @@ $thumb-bg-1: #E5F6FC;
                                 input[type=number] {
                                     background: transparent;
                                 }
+
+                                .eael-cart-qty-minus,
+                                .eael-cart-qty-plus {
+                                    &:hover{
+                                        cursor: pointer;
+                                    }
+                                }
+
+                                .eael-cart-qty-minus ~ .eael-cart-qty-minus,
+                                .eael-cart-qty-plus ~ .eael-cart-qty-plus{
+                                    display: none !important;
+                                }
                             }
 
                             &.product-remove {

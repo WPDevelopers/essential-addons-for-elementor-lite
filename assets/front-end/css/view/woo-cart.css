@@ -680,6 +680,14 @@
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right > .eael-woo-cart-td.product-quantity input[type=number] {
   background: transparent;
 }
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right > .eael-woo-cart-td.product-quantity .eael-cart-qty-minus:hover,
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right > .eael-woo-cart-td.product-quantity .eael-cart-qty-plus:hover {
+  cursor: pointer;
+}
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right > .eael-woo-cart-td.product-quantity .eael-cart-qty-minus ~ .eael-cart-qty-minus,
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right > .eael-woo-cart-td.product-quantity .eael-cart-qty-plus ~ .eael-cart-qty-plus {
+  display: none !important;
+}
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-style-2 form.eael-woo-cart-form .eael-woo-cart-table .eael-woo-cart-tr .eael-woo-cart-tr-right > .eael-woo-cart-td.product-remove {
   color: #BEC6D7;
   -webkit-box-flex: 1;
