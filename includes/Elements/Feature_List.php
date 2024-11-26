@@ -673,7 +673,8 @@ class Feature_List extends Widget_Base {
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-feature-list-icon-box .eael-feature-list-icon'     => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-feature-list-icon-box .eael-feature-list-icon i'   => 'font-size: {{SIZE}}{{UNIT}} !important;',
+                    '{{WRAPPER}} .eael-feature-list-icon-box .eael-feature-list-icon svg' => 'width: {{SIZE}}{{UNIT}} !important; height: {{SIZE}}{{UNIT}} !important;line-height: {{SIZE}}{{UNIT}} !important;',
                     '{{WRAPPER}} .eael-feature-list-icon-box .eael-feature-list-icon img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .eael-feature-list-img'                                  => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
                 ],
@@ -694,7 +695,7 @@ class Feature_List extends Widget_Base {
                     'isLinked' => true,
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .eael-feature-list-icon-box .eael-feature-list-icon' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-feature-list-icon-box .eael-feature-list-icon' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
                 ],
             ]
         );
