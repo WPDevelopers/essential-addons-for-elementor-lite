@@ -68,6 +68,7 @@ var WooProdectImage = function ($scope, $) {
 
       $.magnificPopup.open({
          items: items,
+         mainClass: "eael-pi",
          gallery: {
             enabled: true,
          },
