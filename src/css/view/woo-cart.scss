@@ -713,10 +713,22 @@ $thumb-bg-1: #E5F6FC;
                             &.product-quantity {
                                 flex: 1 1 35%;
 
+                                input[type="number"]::-webkit-inner-spin-button,
+                                input[type="number"]::-webkit-outer-spin-button {
+                                -webkit-appearance: none;
+                                margin: 0; /* Ensures proper alignment in some cases */
+                                }
+
+                                /* For Firefox */
+                                input[type="number"] {
+                                -moz-appearance: textfield; /* Changes to a regular text field */
+                                }
+
                                 .eael-cart-qty-minus,
                                 .eael-cart-qty-plus,
                                 input[type=number] {
                                     font-size: 100%;
+                                    border: none;
                                 }
 
                                 input[type=number] {
