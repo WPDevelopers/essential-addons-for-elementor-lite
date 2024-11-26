@@ -46,7 +46,7 @@ if ( is_object( $authordata ) ) {
 		'<a href="%1$s" title="%2$s" rel="author">%3$s</a>',
 		esc_url( $author_url ),
 		/* translators: %s: Author's display name. */
-		esc_attr( sprintf( __( 'Posts by %s' ), esc_html( $author_name ) ) ),
+		esc_attr( sprintf( __( 'Posts by %s', 'essential-addons-for-elementor-lite' ), esc_html( $author_name ) ) ),
 		esc_html( $author_name )
 	);
 }
