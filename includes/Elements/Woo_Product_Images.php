@@ -398,6 +398,24 @@ class Woo_Product_Images extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_pi_image_resolution',
+			[
+				'label'   => esc_html__( 'Image Resolution', 'essential-addons-for-elementor-lite' ),
+				'type'    => \Elementor\Controls_Manager::SELECT,
+				'default' => 'full',
+				'options' => [
+					'full'         => esc_html__( 'Full', 'essential-addons-for-elementor-lite' ),
+					'large'        => esc_html__( 'Large', 'essential-addons-for-elementor-lite' ),
+					'medium_large' => esc_html__( 'Medium Large', 'essential-addons-for-elementor-lite' ),
+					'medium'       => esc_html__( 'Medium', 'essential-addons-for-elementor-lite' ),
+					'thumbnail'    => esc_html__( 'Thumbnail', 'essential-addons-for-elementor-lite' ),
+					'1536x1536'    => esc_html__( '1536 x 1536', 'essential-addons-for-elementor-lite' ),
+					'2048x2048'    => esc_html__( '2048 x 2048', 'essential-addons-for-elementor-lite' ),
+				],
+			]
+		);
+
+		$this->add_control(
 			'eael_pi_effects',
 			[
 				'label'   => esc_html__( 'Effects', 'essential-addons-for-elementor-lite' ),
@@ -538,6 +556,7 @@ class Woo_Product_Images extends Widget_Base {
 		$pi_data_settings['grab_cursor'] = ! empty( $settings['eael_pi_grab_cursor'] ) ? $settings['eael_pi_grab_cursor'] : false;
 		$pi_data_settings['keyboard_press'] = ! empty( $settings['eael_pi_keyboard_press'] ) ? $settings['eael_pi_keyboard_press'] : false;
 		$pi_data_settings['thumb_navigation'] = ! empty( $settings['eael_pi_thumb_navigation'] ) ? $settings['eael_pi_thumb_navigation'] : false;
+		$pi_data_settings['image_resolution'] = ! empty( $settings['eael_pi_image_resolution'] ) ? $settings['eael_pi_image_resolution'] : 'full';
 		return $pi_data_settings;
 	}
 
@@ -599,7 +618,7 @@ class Woo_Product_Images extends Widget_Base {
 					<div class="swiper-wrapper">
 						<?php 
 							foreach ( $img_links as $img_link ) {
-								$this->render_slide( $img_link, 'image_slider__image', 'full' );
+								$this->render_slide( $img_link, 'image_slider__image', $image_settings['image_resolution'] );
 							}
 						?>
 					</div>
