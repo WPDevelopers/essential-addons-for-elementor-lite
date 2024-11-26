@@ -392,6 +392,10 @@
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-default .eael-woo-cart-table .eael-wct-tr .eael-wct-td a {
   color: #202B46;
 }
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-default .eael-woo-cart-table .eael-wct-tr .eael-wct-th a::before,
+.eael-woo-cart .eael-woo-cart-wrapper.eael-woo-default .eael-woo-cart-table .eael-wct-tr .eael-wct-td a::before {
+  display: none;
+}
 .eael-woo-cart .eael-woo-cart-wrapper.eael-woo-default .eael-woo-cart-table .eael-wc-table-body {
   display: grid;
   gap: 10px;

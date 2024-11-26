@@ -403,6 +403,9 @@ $thumb-bg-1: #E5F6FC;
 
                     a {
                         color: $text-color-1;
+                        &::before{
+                            display: none;
+                        }
                     }
                 }
             }
