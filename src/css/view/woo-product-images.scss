@@ -137,3 +137,15 @@
       }
    }
 }
+
+.swiper {
+   &-button-next::after,
+   &-button-prev::after {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      opacity: 0.75;
+      border-radius: 50%;
+   }
+}

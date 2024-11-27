@@ -182,6 +182,7 @@ class Woo_Product_Images extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
+				'default'   => '#fff',
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-images .product_image_slider__container .product_image_slider__trigger' => 'background-color: {{VALUE}}',
 				],
@@ -193,6 +194,7 @@ class Woo_Product_Images extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
+				'default'   => '#858585',
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-images .product_image_slider__container .product_image_slider__trigger svg path' => 'fill: {{VALUE}}',
 				],
@@ -211,7 +213,7 @@ class Woo_Product_Images extends Widget_Base {
 					'bottom' => 5,
 					'left'   => 8,
 					'unit'   => 'px',
-					'isLinked' => false,
+					'isLinked' => true,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-images .product_image_slider__container .product_image_slider__trigger' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -225,6 +227,14 @@ class Woo_Product_Images extends Widget_Base {
 				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'default'    => [
+					'top'    => 15,
+					'right'  => 15,
+					'bottom' => 15,
+					'left'   => 15,
+					'unit'   => 'px',
+					'isLinked' => true,
+				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-images .product_image_slider__container .product_image_slider__trigger' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
@@ -433,6 +443,17 @@ class Woo_Product_Images extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_pi_pagination',
+			[
+				'label'        => esc_html__( 'Show Pagination', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+			]
+		);
+
+		$this->add_control(
 			'eael_pi_thumb_items',
 			[
 				'label' => esc_html__( 'Thumb Items', 'essential-addons-for-elementor-lite' ),
@@ -557,6 +578,7 @@ class Woo_Product_Images extends Widget_Base {
 		$pi_data_settings['keyboard_press'] = ! empty( $settings['eael_pi_keyboard_press'] ) ? $settings['eael_pi_keyboard_press'] : false;
 		$pi_data_settings['thumb_navigation'] = ! empty( $settings['eael_pi_thumb_navigation'] ) ? $settings['eael_pi_thumb_navigation'] : false;
 		$pi_data_settings['image_resolution'] = ! empty( $settings['eael_pi_image_resolution'] ) ? $settings['eael_pi_image_resolution'] : 'full';
+		$pi_data_settings['pagination'] = ! empty( $settings['eael_pi_pagination'] ) ? $settings['eael_pi_pagination'] : 'false';
 		return $pi_data_settings;
 	}
 
@@ -586,13 +608,21 @@ class Woo_Product_Images extends Widget_Base {
 			'grabCursor' => $image_settings['grab_cursor'],
 			'mousewheel' => $image_settings['mouse_wheel'],
 			'navigation' => [
-				'nextEl' => ".product_image_slider__next",
-				'prevEl' => ".product_image_slider__prev",
+				'nextEl' => ".swiper-button-next",
+				'prevEl' => ".swiper-button-prev",
 			],
 			'keyboard'=> [
 				'enabled' => $image_settings['keyboard_press'],
 			],
 		];
+
+		if ( 'yes' == $image_settings['pagination'] ) {
+			$sliderImages['pagination'] = [
+				'el'             => ".swiper-pagination",
+				'dynamicBullets' => false,
+				'clickable'      => true
+			];
+		}
 
 		if ( 'yes' == $image_settings['image_autoplay'] ) {
 			$sliderImages['autoplay'] = [
@@ -622,6 +652,11 @@ class Woo_Product_Images extends Widget_Base {
 							}
 						?>
 					</div>
+					<?php if ( 'yes' == $image_settings['pagination'] ) {
+						?>
+						<span class="swiper-pagination"></span>
+						<?php
+					} ?>
 				</div>
 		</div>
 		<?php

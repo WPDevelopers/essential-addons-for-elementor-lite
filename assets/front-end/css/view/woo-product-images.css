@@ -208,3 +208,18 @@
 .eael-single-product-images .product_image_slider__container .swiper:not(.swiper-initialized) > .swiper-wrapper {
   overflow: visible;
 }
+
+.swiper-button-next::after, .swiper-button-prev::after {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-weight: 800;
+  opacity: 0.75;
+  border-radius: 50%;
+}
