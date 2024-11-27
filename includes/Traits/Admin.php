@@ -202,7 +202,7 @@ trait Admin {
 				    'heading' => __( 'Want Advanced Features?', 'essential-addons-for-elementor-lite' ),
 				    'content' => __( 'Get more powerful widgets & extensions to elevate your Elementor website', 'essential-addons-for-elementor-lite' ),
 				    'review'  => [
-					    'count' => __( '3300+', 'essential-addons-for-elementor-lite' ),
+					    'count' => __( '3400+', 'essential-addons-for-elementor-lite' ),
 					    'label' => __( 'Five Star Reviews', 'essential-addons-for-elementor-lite' )
 				    ],
 				    'button'  => [
@@ -370,7 +370,7 @@ trait Admin {
 				    'top_heading' => __( '2+ Million Active Users', 'essential-addons-for-elementor-lite' ),
 				    'heading'     => __( "Enhance Your Elementor Experience By <br/> <b>Unlocking</b> <span class='Advance-color'>40+ Advanced PRO</span> <b>Elements</b>", 'essential-addons-for-elementor-lite' ),
 				    'review'      => [
-					    'count' => __( '3300+', 'essential-addons-for-elementor-lite' ),
+					    'count' => __( '3400+', 'essential-addons-for-elementor-lite' ),
 					    'label' => __( 'Five Star Reviews', 'essential-addons-for-elementor-lite' )
 				    ],
 				    'button'      => [
