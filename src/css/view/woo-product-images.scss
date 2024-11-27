@@ -27,6 +27,7 @@
       flex-direction: row-reverse;
       justify-content: flex-start;
       align-items: flex-start;
+      gap: 10px;
       .product_image_slider__thumbs {
          flex-direction: column;
          .product_image_slider__prev {
@@ -49,6 +50,7 @@
       flex-direction: row;
       justify-content: flex-end;
       align-items: flex-start;
+      gap: 10px;
       .product_image_slider__thumbs {
          flex-direction: column;
          .product_image_slider__prev {
@@ -79,7 +81,7 @@
          }
          .swiper-slide {
             width: 100px;
-            height: 100px;
+            height: 90px;
             text-align: center;
             overflow: hidden;
             opacity: 0.5;

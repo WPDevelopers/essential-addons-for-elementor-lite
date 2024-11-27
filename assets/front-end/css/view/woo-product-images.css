@@ -16,6 +16,7 @@
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  gap: 10px;
 }
 
 .eael-pi-thumb-left .product_image_slider .product_image_slider__thumbs {
@@ -55,6 +56,7 @@
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  gap: 10px;
 }
 
 .eael-pi-thumb-right .product_image_slider .product_image_slider__thumbs {
@@ -100,7 +102,7 @@
 
 .eael-single-product-images .product_image_slider__thumbs .swiper-slide {
   width: 100px;
-  height: 100px;
+  height: 90px;
   text-align: center;
   overflow: hidden;
   opacity: 0.5;
