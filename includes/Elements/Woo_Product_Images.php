@@ -452,6 +452,17 @@ class Woo_Product_Images extends Widget_Base {
 				'return_value' => 'yes',
 			]
 		);
+		
+		$this->add_control(
+			'eael_pi_navigation',
+			[
+				'label'        => esc_html__( 'Show Navigation', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+			]
+		);
 
 		$this->add_control(
 			'eael_pi_thumb_items',
@@ -579,6 +590,7 @@ class Woo_Product_Images extends Widget_Base {
 		$pi_data_settings['thumb_navigation'] = ! empty( $settings['eael_pi_thumb_navigation'] ) ? $settings['eael_pi_thumb_navigation'] : false;
 		$pi_data_settings['image_resolution'] = ! empty( $settings['eael_pi_image_resolution'] ) ? $settings['eael_pi_image_resolution'] : 'full';
 		$pi_data_settings['pagination'] = ! empty( $settings['eael_pi_pagination'] ) ? $settings['eael_pi_pagination'] : 'false';
+		$pi_data_settings['navigation'] = ! empty( $settings['eael_pi_navigation'] ) ? $settings['eael_pi_navigation'] : '';
 		return $pi_data_settings;
 	}
 
@@ -607,14 +619,17 @@ class Woo_Product_Images extends Widget_Base {
 			'loop' => $image_settings['image_loop'],
 			'grabCursor' => $image_settings['grab_cursor'],
 			'mousewheel' => $image_settings['mouse_wheel'],
-			'navigation' => [
-				'nextEl' => ".swiper-button-next",
-				'prevEl' => ".swiper-button-prev",
-			],
 			'keyboard'=> [
 				'enabled' => $image_settings['keyboard_press'],
 			],
 		];
+
+		if ( 'yes' == $image_settings['navigation'] ) {
+			$sliderImages['navigation'] = [
+				'nextEl' => ".swiper-button-next",
+				'prevEl' => ".swiper-button-prev",
+			];
+		}
 
 		if ( 'yes' == $image_settings['pagination'] ) {
 			$sliderImages['pagination'] = [
@@ -655,6 +670,12 @@ class Woo_Product_Images extends Widget_Base {
 					<?php if ( 'yes' == $image_settings['pagination'] ) {
 						?>
 						<span class="swiper-pagination"></span>
+						<?php
+					} ?>
+					<?php if ( 'yes' == $image_settings['navigation'] ) {
+						?>
+						<span class="swiper-button-prev"></span>
+						<span class="swiper-button-next"></span>
 						<?php
 					} ?>
 				</div>
