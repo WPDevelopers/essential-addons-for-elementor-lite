@@ -323,30 +323,6 @@ class Woo_Product_Images extends Widget_Base {
 				'label'     => esc_html__( 'Navigation', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::HEADING,
 				'separator' => 'after',
-			]
-		);
-
-		$this->add_control(
-			'eael_pi_thumb_navigation',
-			[
-				'label'        => esc_html__( 'Thumbnail Navigation', 'essential-addons-for-elementor-lite' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
-				'return_value' => 'yes',
-				'default'      => 'yes',
-			]
-		);
-
-		$this->add_control(
-			'eael_thumb_navigator_bg_color',
-			[
-				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .eael-single-product-images .product_image_slider__prev' => 'background-color: {{VALUE}}',
-					'{{WRAPPER}} .eael-single-product-images .product_image_slider__next' => 'background-color: {{VALUE}}',
-				],
 				'condition' => [
 					'eael_pi_thumb_navigation' => 'yes',
 				],
@@ -359,8 +335,8 @@ class Woo_Product_Images extends Widget_Base {
 				'label'     => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-single-product-images .product_image_slider__prev svg path' => 'fill: {{VALUE}}',
-					'{{WRAPPER}} .eael-single-product-images .product_image_slider__next svg path' => 'fill: {{VALUE}}',
+					'{{WRAPPER}} .eael-single-product-images .swiper-button-next' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .eael-single-product-images .swiper-button-prev' => 'color: {{VALUE}}',
 				],
 				'condition' => [
 					'eael_pi_thumb_navigation' => 'yes',
@@ -368,23 +344,18 @@ class Woo_Product_Images extends Widget_Base {
 			]
 		);
 
-		$this->add_responsive_control(
-			'eael_thumb_navigator_padding',
+		$this->add_control(
+			'eael_thumb_navigator_icon_size',
 			[
-				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
-				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'label'      => esc_html__( 'Icon Size', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
 				'default'    => [
-					'top'    => 3,
-					'right'  => 3,
-					'bottom' => 3,
-					'left'   => 3,
-					'unit'   => 'px',
-					'isLinked' => false,
+					'unit' => 'px',
+					'size' => 20,
 				],
-				'selectors' => [
-					'{{WRAPPER}} .eael-single-product-images .product_image_slider__prev' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-					'{{WRAPPER}} .eael-single-product-images .product_image_slider__next' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				'selectors'  => [
+					'{{WRAPPER}} .eael-single-product-images .product_image_slider__thumbs .swiper-button-next:after, {{WRAPPER}} .eael-single-product-images .product_image_slider__thumbs .swiper-button-prev:after' => 'font-size: {{SIZE}}{{UNIT}}; font-weight: 1000;',
 				],
 				'condition' => [
 					'eael_pi_thumb_navigation' => 'yes',
@@ -465,6 +436,17 @@ class Woo_Product_Images extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_pi_thumbnail',
+			[
+				'label'        => esc_html__( 'Show Thumbnail', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+			]
+		);
+
+		$this->add_control(
 			'eael_pi_thumb_items',
 			[
 				'label' => esc_html__( 'Thumb Items', 'essential-addons-for-elementor-lite' ),
@@ -478,6 +460,24 @@ class Woo_Product_Images extends Widget_Base {
 				],
 				'default' => [
 					'size' => 4,
+				],
+				'condition' => [
+					'eael_pi_thumbnail' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_pi_thumb_navigation',
+			[
+				'label'        => esc_html__( 'Thumbnail Navigation', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'condition' => [
+					'eael_pi_thumbnail' => 'yes',
 				],
 			]
 		);
@@ -578,6 +578,7 @@ class Woo_Product_Images extends Widget_Base {
 
 	protected function eael_pi_data_settings( $settings ) {
 		$pi_data_settings = [];
+		$pi_data_settings['thumbnail'] = ! empty( $settings['eael_pi_thumbnail'] ) ? $settings['eael_pi_thumbnail'] : '';
 		$pi_data_settings['thumb_items'] = ! empty( $settings['eael_pi_thumb_items'] ) ? $settings['eael_pi_thumb_items']['size'] : '';
 		$pi_data_settings['image_loop'] = ! empty( $settings['eael_product_image_loop'] ) ? $settings['eael_product_image_loop'] : false;
 		$pi_data_settings['image_autoplay'] = ! empty( $settings['eael_product_image_autoplay'] ) ? $settings['eael_product_image_autoplay'] : false;
@@ -624,12 +625,10 @@ class Woo_Product_Images extends Widget_Base {
 			],
 		];
 
-		if ( 'yes' == $image_settings['navigation'] ) {
-			$sliderImages['navigation'] = [
-				'nextEl' => ".swiper-button-next",
-				'prevEl' => ".swiper-button-prev",
-			];
-		}
+		$sliderImages['navigation'] = [
+			'nextEl' => ".swiper-button-next",
+			'prevEl' => ".swiper-button-prev",
+		];
 
 		if ( 'yes' == $image_settings['pagination'] ) {
 			$sliderImages['pagination'] = [
@@ -671,13 +670,14 @@ class Woo_Product_Images extends Widget_Base {
 						?>
 						<span class="swiper-pagination"></span>
 						<?php
-					} ?>
-					<?php if ( 'yes' == $image_settings['navigation'] ) {
+					}
+					if ( 'yes' == $image_settings['navigation'] ) {
 						?>
 						<span class="swiper-button-prev"></span>
 						<span class="swiper-button-next"></span>
 						<?php
-					} ?>
+					} 
+					?>
 				</div>
 		</div>
 		<?php
@@ -686,7 +686,7 @@ class Woo_Product_Images extends Widget_Base {
 	protected function render_thumbnail_slider( $settings, $img_links ) {
 		$thumb_settings = $this->eael_pi_data_settings( $settings );
 		$sliderThumbs = [
-			// 'spaceBetween' => 2,
+			'thumbnail' => $thumb_settings['thumbnail'],
 			'mousewheel' => $thumb_settings['mouse_wheel'],
 			'keyboard'=> [
 				'enabled' => $thumb_settings['keyboard_press'],
@@ -694,11 +694,11 @@ class Woo_Product_Images extends Widget_Base {
 			'loop' => $thumb_settings['image_loop'],
 		];
 
-		if ( ! empty ( $img_links ) && is_array( $img_links ) && count( $img_links ) > 3 ) {
+		if ( ! empty ( $img_links ) && is_array( $img_links ) && count( $img_links ) > 3 && 'yes' == $thumb_settings['thumbnail'] ) {
 			$sliderThumbs['slidesPerView'] = $thumb_settings['thumb_items'];
 			$sliderThumbs ['navigation'] = [
-				'nextEl' => ".product_image_slider__next",
-				'prevEl' => ".product_image_slider__prev",
+				'nextEl' => ".swiper-button-next",
+				'prevEl' => ".swiper-button-prev",
 			];
 		} else {
 			$sliderThumbs['slidesPerView'] = count( $img_links );
@@ -726,23 +726,8 @@ class Woo_Product_Images extends Widget_Base {
 		] );
 		?>
 		<div <?php $this->print_render_attribute_string( 'eael-pi-thumb' ); ?>>
-
-			<?php if ( ! empty ( $img_links ) && is_array( $img_links ) && count( $img_links ) > 3 && 'yes' == $thumb_settings['thumb_navigation'] ) { ?>
-				<div class="product_image_slider__prev">
-					<?php 
-						if ( in_array( $thumb_settings['thumb_position'], $thumb_position ) ) {
-							?>
-								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM377 271c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-87-87-87 87c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9L239 167c9.4-9.4 24.6-9.4 33.9 0L377 271z"/></svg>
-							<?php
-						} else {
-							?>
-								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM271 135c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-87 87 87 87c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L167 273c-9.4-9.4-9.4-24.6 0-33.9L271 135z"/></svg>
-							<?php
-						}
-					?>
-				</div>
-			<?php } ?>
-				<div class="swiper-container">
+			<div class="swiper-container">
+				<?php if( 'yes' == $thumb_settings['thumbnail'] ) { ?>
 					<div class="swiper-wrapper">
 						<?php 
 							foreach ( $img_links as $img_link ) {
@@ -750,20 +735,10 @@ class Woo_Product_Images extends Widget_Base {
 							}
 						?>
 					</div>
+					<span class="swiper-button-prev"></span>
+					<span class="swiper-button-next"></span>
+					<?php } ?>
 				</div>
-				<?php if ( ! empty ( $img_links ) && is_array( $img_links ) && count( $img_links ) > 3 && 'yes' == $thumb_settings['thumb_navigation'] ) { ?>
-				<div class="product_image_slider__next">
-					<?php if ( in_array( $thumb_settings['thumb_position'], $thumb_position ) ) {
-						?>
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 0a256 256 0 1 0 0 512A256 256 0 1 0 256 0zM135 241c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l87 87 87-87c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L273 345c-9.4 9.4-24.6 9.4-33.9 0L135 241z"/></svg>
-						<?php
-					} else {
-						?>
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM241 377c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l87-87-87-87c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L345 239c9.4 9.4 9.4 24.6 0 33.9L241 377z"/></svg>
-						<?php
-					} ?>
-				</div>
-				<?php } ?>
 		</div>
 		<?php
 	}

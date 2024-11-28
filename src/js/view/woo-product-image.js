@@ -37,9 +37,11 @@ var WooProdectImage = function ($scope, $) {
       .then((swiperInstance) => {
          let $sliderImages = {
             ...$sliderImagesData,
-            thumbs: {
-               swiper: swiperInstance,
-            },
+            ...($sliderThumbs.thumbnail === "yes" && {
+               thumbs: {
+                  swiper: swiperInstance,
+               },
+            }),
          };
 
          // Initialize the main slider after setting the thumbs swiper
