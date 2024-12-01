@@ -742,12 +742,8 @@ class Woo_Product_Price extends Widget_Base {
 		$prefix_content = $settings['prefix_content'];
 		$suffix_content = $settings['suffix_content'];
 		$product = Helper::get_product();
-
-		if ( ! $product ) {
-			return;
-		}
-
-		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
+		
+		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ||  get_post_type( get_the_ID() ) === 'templately_library' ) {
 			?>
 			<div class="eael-single-product-price">
 				<?php
@@ -805,6 +801,9 @@ class Woo_Product_Price extends Widget_Base {
 			</div>
 			<?php
 		} else {
+			if ( ! $product ) {
+				return;
+			}
 			?>
 			<div class="eael-single-product-price">
 				<?php 

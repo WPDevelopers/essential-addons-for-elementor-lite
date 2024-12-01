@@ -446,25 +446,14 @@ class Woo_Product_Rating extends Widget_Base {
 
 	protected function render() {
       global $product;
-		if ( ! $product ) {
-         return;
-      }
-		if ( ! wc_review_ratings_enabled() ) {
-			return;
-		}
-		
-		$product      = Helper::get_product();
 		$settings     = $this->get_settings_for_display();
-		$rating_count = $product->get_rating_count();
-		$review_count = $product->get_review_count();
-		$average      = $product->get_average_rating();
 
-		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
+		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() || get_post_type( get_the_ID() ) === 'templately_library' ) {
 			?>
 			<div class="eael-single-product-rating">
 				<div class="woocommerce-product-rating">
 					<div class="eael-product-rating-wrap">
-						<?php $this->eael_rating_style( $settings, $average = 3, $rating_count ); ?>
+						<?php $this->eael_rating_style( $settings, $average = 3, $rating_count = 1 ); ?>
 					</div>
 					<?php if ( 'yes' === $settings['show_review_count'] ) { ?>
 						<a href="#reviews" class="woocommerce-review-link" rel="nofollow">
@@ -484,6 +473,18 @@ class Woo_Product_Rating extends Widget_Base {
 			</div>
 			<?php
 		} else {
+			if ( ! $product ) {
+				return;
+			}
+			if ( ! wc_review_ratings_enabled() ) {
+				return;
+			}
+			
+			$product      = Helper::get_product();
+			$rating_count = $product->get_rating_count();
+			$review_count = $product->get_review_count();
+			$average      = $product->get_average_rating();
+
 			$average = ( $rating_count > 0 ) ? $average : 0;
 			if ( $rating_count > 0  || 'yes' === $settings['show_empty_review'] ) {
 				$review_caption = ( $rating_count > 0 ) ? $settings['rating_caption'] : $settings['empty_rating_caption'];

@@ -763,17 +763,8 @@ class Woo_Product_Images extends Widget_Base {
 
 	protected function render() {
 		global $product;
-		$product = Helper::get_product();
-		if ( ! $product ) {
-         return;
-		}
-
-		$settings             = $this->get_settings_for_display();
-		$product_id           = $product->get_id();
-		$product_featured_url = wp_get_attachment_image_src( get_post_thumbnail_id( $product_id ), 'single-post-thumbnail' );
-		$product_featured_id  = get_post_thumbnail_id( $product_id );
-		$product_group        = wc_get_product( $product_id );
-		$product_gallery_ids  = array_merge( [ $product_featured_id ], $product_group->get_gallery_image_ids() );
+		$product  = Helper::get_product();
+		$settings = $this->get_settings_for_display();
 
 		$this->add_render_attribute( 'eael_thumb_position', [
 			'class' => ['eael-single-product-images', 'eael-pi-thumb-'.$settings['eael_pi_thumb_position'] ]
@@ -781,7 +772,7 @@ class Woo_Product_Images extends Widget_Base {
       ?>
       <div <?php $this->print_render_attribute_string( 'eael_thumb_position' ); ?>>
             <?php 
-				if( \Elementor\Plugin::$instance->editor->is_edit_mode() ) { 
+				if( \Elementor\Plugin::$instance->editor->is_edit_mode() || get_post_type( get_the_ID() ) === 'templately_library' ) { 
 					$img_links = [
 						EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg',
 						EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg',
@@ -791,16 +782,24 @@ class Woo_Product_Images extends Widget_Base {
 						EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg',
 					];
 
-					if ( 'yes' === $settings['eael_image_sale_flash'] ) {
-						wc_get_template( 'loop/sale-flash.php' );
-					}
-					$this->eael_product_gallery_html( $settings, $img_links, $product_featured_url );
+					// if ( 'yes' === $settings['eael_image_sale_flash'] ) {
+					// 	echo '<span class="onsale">' . esc_html__( 'Sale!', 'woocommerce' ) . '</span>';
+					// }
+					$this->eael_product_gallery_html( $settings, $img_links, $product_featured_url = [] );
 
 				} else {
+					if ( ! $product ) {
+						return;
+					}
+					$product_id           = $product->get_id();
+					$product_featured_url = wp_get_attachment_image_src( get_post_thumbnail_id( $product_id ), 'single-post-thumbnail' );
+					$product_featured_id  = get_post_thumbnail_id( $product_id );
+					$product_group        = wc_get_product( $product_id );
+					$product_gallery_ids  = array_merge( [ $product_featured_id ], $product_group->get_gallery_image_ids() );
+					
 					if ( 'yes' === $settings['eael_image_sale_flash'] ) {
 						wc_get_template( 'loop/sale-flash.php' );
 					}
-					// wc_get_template( 'single-product/product-image.php' );
 					$this->eael_product_gallery_html( $settings, $product_gallery_ids, $product_featured_url );
 				}
 			?>
