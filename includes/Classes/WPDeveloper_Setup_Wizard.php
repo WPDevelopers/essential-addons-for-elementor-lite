@@ -70,7 +70,7 @@ class WPDeveloper_Setup_Wizard {
 	public function admin_menu() {
 
 		add_submenu_page(
-			'',
+			'admin.php',
 			__( 'Essential Addons ', 'essential-addons-for-elementor-lite' ),
 			__( 'Essential Addons ', 'essential-addons-for-elementor-lite' ),
 			'manage_options',
