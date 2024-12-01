@@ -147,7 +147,8 @@ trait Ajax_Handler {
 				$this->sanitize_taxonomy_data( $_REQUEST['taxonomy'] ),
 			];
 
-			$args['tax_query'] = $this->eael_terms_query_multiple( $args['tax_query'] );
+			$relation = isset( $settings['relation_cats_tags'] ) ? $settings['relation_cats_tags'] : 'OR';
+			$args['tax_query'] = $this->eael_terms_query_multiple( $args['tax_query'], $relation );
 		}
 
 		if ( $class == '\Essential_Addons_Elementor\Elements\Post_Grid' ) {
@@ -664,7 +665,27 @@ trait Ajax_Handler {
 				$this->sanitize_taxonomy_data( $_REQUEST['taxonomy'] ),
 			];
 
-			$args['tax_query'] = $this->eael_terms_query_multiple( $args['tax_query'] );
+			$relation = isset( $settings['relation_cats_tags'] ) ? $settings['relation_cats_tags'] : 'OR';
+			if ( 'and' === strtolower( $relation ) ) {
+				if ( 'product_cat' === $_REQUEST['taxonomy']['taxonomy'] && ! empty( $settings['eael_product_gallery_tags'] ) ) {
+					$args['tax_query'][] = [
+						'taxonomy' => 'product_tag',
+						'field'    => 'term_id',
+						'terms'    => $settings['eael_product_gallery_tags'],
+						'operator' => 'IN',
+					];
+				}
+				if ( 'product_tag' === $_REQUEST['taxonomy']['taxonomy'] && ! empty( $settings['eael_product_gallery_categories'] ) ) {
+					$args['tax_query'][] = [
+						'taxonomy' => 'product_cat',
+						'field'    => 'term_id',
+						'terms'    => $settings['eael_product_gallery_categories'],
+						'operator' => 'IN',
+					];
+				}
+			}
+
+			$args['tax_query'] = $this->eael_terms_query_multiple( $args['tax_query'], $relation );
 
 			if ( $settings[ 'eael_product_gallery_product_filter' ] == 'featured-products' ) {
 				$args[ 'tax_query' ][] = [
@@ -733,7 +754,7 @@ trait Ajax_Handler {
 		wp_die();
 	}
 
-	public function eael_terms_query_multiple( $args_tax_query = [] ){
+	public function eael_terms_query_multiple( $args_tax_query = [], $relation = 'OR' ){
 		if ( strpos($args_tax_query[0]['taxonomy'], '|') !== false ) {
 			$args_tax_query_item = $args_tax_query[0];
 
@@ -758,7 +779,7 @@ trait Ajax_Handler {
 
 
 			if ( count( $args_multiple['tax_query'] ) ) {
-				$args_multiple['tax_query']['relation'] = 'OR';
+				$args_multiple['tax_query']['relation'] = $relation;
 			}
 
 			$args_tax_query = $args_multiple['tax_query'];

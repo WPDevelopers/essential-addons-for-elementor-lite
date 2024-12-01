@@ -113,7 +113,7 @@ class Bootstrap
 
 	    // start plugin tracking
 	    if ( ! $this->pro_enabled ) {
-		    $this->start_plugin_tracking();
+            add_action( 'init', [ $this, 'start_plugin_tracking' ] );
 	    }
 
         // register extensions
@@ -281,7 +281,7 @@ class Bootstrap
 	    if ( is_admin() ) {
             // Admin
             if (!$this->pro_enabled) {
-                $this->admin_notice();
+                add_action( 'admin_init', [ $this, 'admin_notice' ] );
             } else {
                 new WPDeveloper_Core_Installer( basename( EAEL_PLUGIN_BASENAME, '.php' ) );
             }
