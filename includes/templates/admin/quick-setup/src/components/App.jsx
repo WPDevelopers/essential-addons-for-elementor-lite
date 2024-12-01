@@ -193,6 +193,7 @@ function App() {
             <ConfigurationContent
               activeTab={activeTab}
               handleTabChange={handleTabChange}
+              isTrackingAllowed={is_tracking_allowed}
             />
           </div>
 
