@@ -1,10 +1,10 @@
-.woocommerce .elementor-widget-eael-woo-product-rating .elementor-widget-container .woocommerce-product-rating {
+.eael-single-product-rating .woocommerce-product-rating {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   margin-bottom: 0;
 }
-.woocommerce .elementor-widget-eael-woo-product-rating .elementor-widget-container .woocommerce-product-rating .star-rating {
+.eael-single-product-rating .woocommerce-product-rating .star-rating {
   margin: 0;
 }
 .eael-product-rating--align-left .woocommerce-product-rating {
@@ -38,8 +38,8 @@
   margin-top: 1px;
 }
 .eael-product-rating-wrap .eael-product-rating svg {
-  height: 30px;
-  width: 30px;
+  height: 15px;
+  width: 15px;
 }
 .eael-product-rating-wrap .eael-product-rating.filled svg path {
   fill: #ff5733;

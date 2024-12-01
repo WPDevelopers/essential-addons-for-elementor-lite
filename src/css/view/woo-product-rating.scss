@@ -1,7 +1,4 @@
-.woocommerce
-   .elementor-widget-eael-woo-product-rating
-   .elementor-widget-container
-   .woocommerce-product-rating {
+.eael-single-product-rating .woocommerce-product-rating {
    display: flex;
    margin-bottom: 0;
    .star-rating {
@@ -28,8 +25,8 @@
    margin-top: 1px;
    .eael-product-rating {
       svg {
-         height: 30px;
-         width: 30px;
+         height: 15px;
+         width: 15px;
       }
       &.filled {
          svg {

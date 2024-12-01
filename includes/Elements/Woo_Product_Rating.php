@@ -90,7 +90,7 @@ class Woo_Product_Rating extends Widget_Base {
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
 					'.woocommerce {{WRAPPER}} .eael-single-product-rating .star-rating' => 'color: {{VALUE}};',
-					'.woocommerce {{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap .eael-product-rating.filled svg path' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap .eael-product-rating.filled svg path' => 'fill: {{VALUE}};',
 				],
 			]
 		);
@@ -102,7 +102,7 @@ class Woo_Product_Rating extends Widget_Base {
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
 					'.woocommerce {{WRAPPER}} .eael-single-product-rating .star-rating:before' => 'color: {{VALUE}};',
-					'.woocommerce {{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap .eael-product-rating svg path' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap .eael-product-rating svg path' => 'fill: {{VALUE}};',
 				],
 				'condition' => [
 					'show_empty_review' => 'yes',
@@ -133,7 +133,7 @@ class Woo_Product_Rating extends Widget_Base {
 				],
 				'selectors' => [
 					'.woocommerce {{WRAPPER}} .eael-single-product-rating .star-rating' => 'font-size: {{SIZE}}{{UNIT}};',
-					'.woocommerce {{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap .eael-product-rating svg' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap .eael-product-rating svg' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -160,9 +160,9 @@ class Woo_Product_Rating extends Widget_Base {
 					'size' => 2,
 				],
 				'selectors' => [
-					'.woocommerce {{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap' => 'gap: {{SIZE}}{{UNIT}};',
-					'.woocommerce {{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap' => 'gap: {{SIZE}}{{UNIT}};',
-					'.woocommerce {{WRAPPER}} .eael-single-product-rating .star-rating' => 'letter-spacing: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap' => 'gap: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap' => 'gap: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-single-product-rating .star-rating' => 'letter-spacing: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -179,7 +179,7 @@ class Woo_Product_Rating extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'.woocommerce {{WRAPPER}} .eael-single-product-rating .star-rating' => 'line-height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-single-product-rating .star-rating' => 'line-height: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -209,7 +209,7 @@ class Woo_Product_Rating extends Widget_Base {
 				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'.woocommerce {{WRAPPER}} .eael-single-product-rating .woocommerce-review-link' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-single-product-rating .woocommerce-review-link' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -218,7 +218,7 @@ class Woo_Product_Rating extends Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name'     => 'eael_star_text_typography',
-				'selector' => '.woocommerce {{WRAPPER}} .eael-single-product-rating .woocommerce-review-link',
+				'selector' => '{{WRAPPER}} .eael-single-product-rating .woocommerce-review-link',
 			]
 		);
 
@@ -243,7 +243,7 @@ class Woo_Product_Rating extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'.woocommerce {{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap' => 'margin-right: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap' => 'margin-right: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -286,11 +286,9 @@ class Woo_Product_Rating extends Widget_Base {
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'default' => 'style_1',
 				'options' => [
-					'style_1' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
-					'style_2' => esc_html__( 'Style 1', 'essential-addons-for-elementor-lite' ),
-					'style_3' => esc_html__( 'Style 2', 'essential-addons-for-elementor-lite' ),
-					'style_4' => esc_html__( 'Style 3', 'essential-addons-for-elementor-lite' ),
-					'style_5' => esc_html__( 'Style 4', 'essential-addons-for-elementor-lite' ),
+					'style_1' => esc_html__( 'Style 1', 'essential-addons-for-elementor-lite' ),
+					'style_2' => esc_html__( 'Style 2', 'essential-addons-for-elementor-lite' ),
+					'style_3' => esc_html__( 'Style 3', 'essential-addons-for-elementor-lite' ),
 				],
 			]
 		);
@@ -376,6 +374,16 @@ class Woo_Product_Rating extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+	public function eael_star_solid( $filled ) {
+		?>
+		<span class="eael-product-rating <?php echo $filled ? 'filled' : ''; ?>">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+				<path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/>
+			</svg>
+		</span>
+		<?php
+	}
+
 	public function eael_star_classic( $filled ) {
 		?>
 		<span class="eael-product-rating <?php echo $filled ? 'filled' : ''; ?>">
@@ -395,51 +403,18 @@ class Woo_Product_Rating extends Widget_Base {
 		</span>
       <?php
    }
-
-   public function eael_face_smile( $filled ) {
-      ?>
-		<span class="eael-product-rating <?php echo $filled ? 'filled' : ''; ?>">
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-				<path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM164.1 325.5C182 346.2 212.6 368 256 368s74-21.8 91.9-42.5c5.8-6.7 15.9-7.4 22.6-1.6s7.4 15.9 1.6 22.6C349.8 372.1 311.1 400 256 400s-93.8-27.9-116.1-53.5c-5.8-6.7-5.1-16.8 1.6-22.6s16.8-5.1 22.6 1.6zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/>
-			</svg>
-		</span>
-      <?php
-   }
-
-   public function eael_face_grin_stars( $filled ) {
-      ?>
-		<span class="eael-product-rating <?php echo $filled ? 'filled' : ''; ?>">
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-				<path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm407.4 75.5c5-11.8-7-22.5-19.3-18.7c-39.7 12.2-84.5 19-131.8 19s-92.1-6.8-131.8-19c-12.3-3.8-24.3 6.9-19.3 18.7c25 59.1 83.2 100.5 151.1 100.5s126.2-41.4 151.1-100.5zM160 120c-3.1 0-5.9 1.8-7.2 4.6l-16.6 34.7-38.1 5c-3.1 .4-5.6 2.5-6.6 5.5s-.1 6.2 2.1 8.3l27.9 26.5-7 37.8c-.6 3 .7 6.1 3.2 7.9s5.8 2 8.5 .6L160 232.5l33.8 18.3c2.7 1.5 6 1.3 8.5-.6s3.7-4.9 3.2-7.9l-7-37.8L226.4 178c2.2-2.1 3.1-5.3 2.1-8.3s-3.5-5.1-6.6-5.5l-38.1-5-16.6-34.7c-1.3-2.8-4.1-4.6-7.2-4.6zm192 0c-3.1 0-5.9 1.8-7.2 4.6l-16.6 34.7-38.1 5c-3.1 .4-5.6 2.5-6.6 5.5s-.1 6.2 2.1 8.3l27.9 26.5-7 37.8c-.6 3 .7 6.1 3.2 7.9s5.8 2 8.5 .6L352 232.5l33.8 18.3c2.7 1.5 6 1.3 8.5-.6s3.7-4.9 3.2-7.9l-7-37.8L418.4 178c2.2-2.1 3.1-5.3 2.1-8.3s-3.5-5.1-6.6-5.5l-38.1-5-16.6-34.7c-1.3-2.8-4.1-4.6-7.2-4.6z"/>
-			</svg>
-		</span>
-      <?php
-   }
 	
 	public function eael_rating_style( $settings, $average, $rating_count ) {
 		$style_methods = [
+			'style_1' => 'eael_star_solid',
 			'style_2' => 'eael_star_classic',
 			'style_3' => 'eael_star_half_stroke',
-			'style_4' => 'eael_face_smile',
-			'style_5' => 'eael_face_grin_stars',
 		];
 		if( isset( $style_methods[ $settings['rating_style'] ] ) ) {
 			$method = $style_methods[ $settings['rating_style'] ];
 			for ( $i=1; $i <=5 ; $i++ ) { 
 				$filled = ( $i <= $average ) ? true : false;
 				$this->$method( $filled );
-			}
-		} else {
-			if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
-				?>
-				<div class="rating-style-1">
-					<div class="star-rating" role="img" aria-label="Rated <?php esc_attr_e( $average ); ?> out of 5">
-						<span style="width:<?php esc_attr_e( ( $average / 5 ) * 100 ); ?>%"></span>
-					</div>
-				</div>
-				<?php
-			} else {
-				echo wc_get_rating_html( $average > 0 ? $average : $average = 5, $rating_count );
 			}
 		}
 	}
