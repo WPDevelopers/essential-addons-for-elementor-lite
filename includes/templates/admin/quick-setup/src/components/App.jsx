@@ -121,7 +121,7 @@ function App() {
 
         if (result.success) {
           if( isTemplately ) {
-            label.textContent = 'Enabled Templates';
+            label.textContent = 'Next';
             setActiveTab(dataNext);
           } else {
             label.textContent = isChecked ? "Deactivate" : "Activate";
