@@ -4,7 +4,7 @@ Tags: elementor, elements, elementor addon, elementor widget, woocommerce elemen
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 6.0.10
+Stable tag: 6.0.11
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -298,6 +298,19 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.0.11 - 01/12/2024 =
+
+- Fixed: Compatibility issue with FunnelKit
+- Fixed: EA Woo Product Carousel | On load carousel first item visibility issue
+- Fixed: PHP Notice: Function "_load_textdomain_just_in_time" error in WordPress 6.7
+- Fixed: EA Post Grid | Added Nickname support for Author
+- Fixed: EA Info Box | Image styling Control issue
+- Fixed: EA Sticky Video | Multiple Sticky Video in Same Page UI issue
+- Fixed: EA Feature List | PHP undefined array notice : "eael_feature_list_icon_individual_box_bg_color"
+- Fixed: EA Woo Product Grid | Product Rating Types issue on Default Preset
+- Improved: EA Woo Product Gallery | Added relation between Category and Tags on Query
+- Few minor bug fixes & improvements
 
 = 6.0.10 - 14/11/2024 =
 
