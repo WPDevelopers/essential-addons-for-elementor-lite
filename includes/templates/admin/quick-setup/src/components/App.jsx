@@ -70,9 +70,8 @@ function App() {
     setShowElements(1);
   };
 
-  const handleIntegrationSwitch = async (event, plugin, isTemplately = 0) => {
+  const handleIntegrationSwitch = async (event, plugin, isTemplately = 0, setTemplatelyPlugin = '') => {
     setDisableSwitches(true);
-
     const isChecked = event.target.checked ?? 0;
 
     const isActionInstall =
@@ -99,6 +98,10 @@ function App() {
         requestData['slug'] = 'templately';
         label = event.currentTarget;
         dataNext = event.currentTarget.getAttribute("data-next");
+        if ( plugin?.local_plugin_data ) {
+          setActiveTab(dataNext);
+          return;
+        } 
     } else {
       label = event.target
       .closest(".eael-integration-footer")
@@ -123,6 +126,14 @@ function App() {
           if( isTemplately ) {
             label.textContent = 'Next';
             setActiveTab(dataNext);
+
+            setTemplatelyPlugin((prevPlugin) => {
+              return {
+                ...prevPlugin,
+                local_plugin_data: true,
+              };
+            });
+
           } else {
             label.textContent = isChecked ? "Deactivate" : "Activate";
           }
