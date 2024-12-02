@@ -9,13 +9,13 @@ if (!defined('ABSPATH')) {
 use Elementor\Widget_Base;
 use \Essential_Addons_Elementor\Classes\Helper;
 
-class Woo_Product_Add_To_Cart extends Widget_Base {
+class Woo_Add_To_Cart extends Widget_Base {
    public function get_name() {
-		return 'eael-woo-product-add-to-cart';
+		return 'eael-woo-add-to-cart';
 	}
 
 	public function get_title() {
-		return esc_html__( 'Woo Product Add To Cart', 'essential-addons-for-elementor-lite' );
+		return esc_html__( 'Woo Add To Cart', 'essential-addons-for-elementor-lite' );
 	}
 
 	public function get_icon() {
