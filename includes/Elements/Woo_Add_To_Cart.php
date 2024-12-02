@@ -809,6 +809,14 @@ class Woo_Add_To_Cart extends Widget_Base {
 		}
 	}
 
+	public function eael_add_to_cart_icon( $settings ) {
+		echo '<span class="cart-icon">';
+		if ( 'yes' == $settings['add_to_cart_icon_show'] ) {
+			return \Elementor\Icons_Manager::render_icon( $settings['add_to_cart_icon'], [ 'aria-hidden' => 'true' ] );
+		}
+		echo '<span>';
+	}
+
 	public function eael_show_quantity_fields( $return, $product ) {
 		return true;
 	}	 
@@ -818,24 +826,43 @@ class Woo_Add_To_Cart extends Widget_Base {
 
       $product = Helper::get_product();
 
-      if ( ! $product ) {
-         return;
-      }
-
 		$settings = $this->get_settings_for_display();
 
 		if ( ! $settings['add_to_cart_show_quantity'] ) {
 			add_filter( 'woocommerce_is_sold_individually', [ $this, 'eael_show_quantity_fields' ], 10, 2 );
 		}
-
       ?>
       <div class="eael-single-product-add-to-cart">
-            <div class="elementor-add-to-cart elementor-product-<?php echo esc_attr( $product->get_type() ); ?>">
+			<?php 
+			if( \Elementor\Plugin::$instance->editor->is_edit_mode() || get_post_type( get_the_ID() ) === 'templately_library' ) {
+				?>
+				<div class="custom-add-to-cart-wrapper">
+					<?php if( 'yes' === $settings['add_to_cart_show_quantity'] ) {
+						?>
+						<input type="number" class="quantity-input" value="1" min="1" />
+						<?php
+					} ?>
+					<button class="custom-add-to-cart">
+						<?php $this->eael_add_to_cart_icon( $settings ); ?>
+						<span class="button-text"><?php echo Helper::eael_wp_kses( $settings['add_to_cart_text'] ); ?></span>
+					</button>
+				</div>
+				<?php
+			} else {
+				if ( ! $product ) {
+					return;
+				}
+				?>
+				<div class="elementor-add-to-cart elementor-product-<?php echo esc_attr( $product->get_type() ); ?>">
                <?php 
 					add_filter( 'woocommerce_product_single_add_to_cart_text', [ $this, 'eael_add_to_cart_text_single'] ); 
 					woocommerce_template_single_add_to_cart();
 					?>
             </div>
+				<?php
+			}
+			?>
+            
       </div>
       <?php
 	}
