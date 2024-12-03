@@ -831,14 +831,18 @@ class Woo_Add_To_Cart extends Widget_Base {
 		$this->end_controls_section();
 	}
 
-	public function eael_add_to_cart_text_single() {
+	public function eael_add_to_cart_text_single( $button_text ) {
+		global $product;
 		$settings = $this->get_settings_for_display();
 
-		if ( 'yes' == $settings['add_to_cart_icon_show'] ) {
-			\Elementor\Icons_Manager::render_icon( $settings['add_to_cart_icon'], [ 'aria-hidden' => 'true' ] );
+		if ( 'external' !== $product->get_type() ) {
+			$this->eael_add_to_cart_icon( $settings );
 		}
-		if ( ! empty( $settings['add_to_cart_text'] ) ) {
+		
+		if ( ! empty( $settings['add_to_cart_text'] ) && 'external' !== $product->get_type() ) {
 			return $settings['add_to_cart_text'];
+		} else {
+			return $button_text;
 		}
 	}
 
