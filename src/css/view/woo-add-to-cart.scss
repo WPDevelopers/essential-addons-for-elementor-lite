@@ -23,12 +23,10 @@
    .custom-add-to-cart {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
       gap: 8px;
       padding: 10px 20px;
-      background-color: #0071a1;
+      background-color: #7f54b3;
       color: white;
-      font-size: 16px;
       font-weight: bold;
       border: none;
       border-radius: 5px;
@@ -36,17 +34,11 @@
       transition: background-color 0.3s ease, transform 0.2s ease;
    }
 
-   .custom-add-to-cart:hover {
-      background-color: #005580;
-      transform: translateY(-2px);
-   }
-
    .custom-add-to-cart:active {
       transform: translateY(0);
    }
 
    .cart-icon {
-      font-size: 18px;
       margin-right: 8px;
       display: inline-block;
    }

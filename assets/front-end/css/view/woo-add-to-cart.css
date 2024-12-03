@@ -30,14 +30,10 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   gap: 8px;
   padding: 10px 20px;
-  background-color: #0071a1;
+  background-color: #7f54b3;
   color: white;
-  font-size: 16px;
   font-weight: bold;
   border: none;
   border-radius: 5px;
@@ -47,19 +43,12 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
   transition: background-color 0.3s ease, transform 0.2s ease, -webkit-transform 0.2s ease;
 }
-.custom-add-to-cart-wrapper .custom-add-to-cart:hover {
-  background-color: #005580;
-  -webkit-transform: translateY(-2px);
-      -ms-transform: translateY(-2px);
-          transform: translateY(-2px);
-}
 .custom-add-to-cart-wrapper .custom-add-to-cart:active {
   -webkit-transform: translateY(0);
       -ms-transform: translateY(0);
           transform: translateY(0);
 }
 .custom-add-to-cart-wrapper .cart-icon {
-  font-size: 18px;
   margin-right: 8px;
   display: inline-block;
 }
