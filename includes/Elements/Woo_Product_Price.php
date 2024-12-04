@@ -8,6 +8,7 @@ if (!defined('ABSPATH')) {
 }
 
 use Elementor\Widget_Base;
+use ElementorPro\Modules\Woocommerce\Widgets\Elements;
 use \Essential_Addons_Elementor\Classes\Helper;
 
 class Woo_Product_Price extends Widget_Base {
@@ -36,6 +37,11 @@ class Woo_Product_Price extends Widget_Base {
 	}
 
 	protected function register_controls() {
+
+		$this->eael_wc_notice_controls();
+		if ( !function_exists( 'WC' ) ) {
+			return;
+		}
 
 		$this->eael_product_price_content();
 
@@ -91,6 +97,27 @@ class Woo_Product_Price extends Widget_Base {
 
 		$this->end_controls_section();
 		// Style Tab End
+	}
+
+	/**
+	 * WC Notice
+	 *
+	 * @return void
+	 */
+	protected function eael_wc_notice_controls() {
+		if ( ! function_exists( 'WC' ) ) {
+			$this->start_controls_section( 'eael_global_warning', [
+				'label' => __( 'Warning!', 'essential-addons-for-elementor-lite' ),
+			] );
+			$this->add_control( 'eael_global_warning_text', [
+				'type'            => \Elementor\Controls_Manager::RAW_HTML,
+				'raw'             => __( '<strong>WooCommerce</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=woocommerce&tab=search&type=term" target="_blank">WooCommerce</a> first.', 'essential-addons-for-elementor-lite' ),
+				'content_classes' => 'eael-warning',
+			] );
+			$this->end_controls_section();
+
+			return;
+		}
 	}
 
 	/**
@@ -775,6 +802,9 @@ class Woo_Product_Price extends Widget_Base {
 	}
 
 	protected function render() {
+		if ( !function_exists( 'WC' ) ) {
+			return;
+		}
 		global $product;
 		$settings = $this->get_settings_for_display();
 		$prefix_content = $settings['prefix_content'];
