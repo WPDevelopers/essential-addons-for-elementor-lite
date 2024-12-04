@@ -582,6 +582,7 @@ class Woo_Product_Price extends Widget_Base {
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-price .prefix-price-icon svg' => 'fill: {{VALUE}}',
+					'{{WRAPPER}} .eael-single-product-price .prefix-price-icon i' => 'color: {{VALUE}}',
 				],
 				'condition' => [
 					'show_prefix'    => 'yes',
@@ -613,6 +614,7 @@ class Woo_Product_Price extends Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-price .prefix-price-icon svg' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-single-product-price .prefix-price-icon i' => 'font-size: {{SIZE}}{{UNIT}};',
 				],
 				'condition' => [
 					'show_prefix'    => 'yes',
@@ -628,8 +630,8 @@ class Woo_Product_Price extends Widget_Base {
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'rem', 'custom' ],
 				'default'    => [
-					'top'    => 4,
-					'right'  => 0,
+					'top'    => 2,
+					'right'  => 8,
 					'bottom' => 0,
 					'left'   => 0,
 					'unit'   => 'px',
@@ -637,6 +639,7 @@ class Woo_Product_Price extends Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-price .prefix-price-icon svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-single-product-price .prefix-price-icon i' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'condition' => [
 					'show_prefix'    => 'yes',
@@ -704,6 +707,7 @@ class Woo_Product_Price extends Widget_Base {
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-price .suffix-price-icon svg' => 'fill: {{VALUE}}',
+					'{{WRAPPER}} .eael-single-product-price .suffix-price-icon i' => 'color: {{VALUE}}',
 				],
 				'condition'   => [
 					'show_suffix'    => 'yes',
@@ -735,6 +739,7 @@ class Woo_Product_Price extends Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-price .suffix-price-icon svg' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-single-product-price .suffix-price-icon i' => 'font-size: {{SIZE}}{{UNIT}};',
 				],
 				'condition'   => [
 					'show_suffix'    => 'yes',
@@ -750,15 +755,16 @@ class Woo_Product_Price extends Widget_Base {
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'rem', 'custom' ],
 				'default'    => [
-					'top'    => 4,
+					'top'    => 2,
 					'right'  => 0,
 					'bottom' => 0,
-					'left'   => 0,
+					'left'   => 8,
 					'unit'   => 'px',
 					'isLinked' => false,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-price .suffix-price-icon svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-single-product-price .suffix-price-icon i' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'condition'   => [
 					'show_suffix'    => 'yes',
