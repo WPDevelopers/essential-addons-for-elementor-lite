@@ -3,8 +3,14 @@
    .price {
       display: flex;
       margin: 0;
+      font-size: 20px;
+      color: #b3af54;
+      del {
+         opacity: 0.5;
+      }
       ins {
          text-decoration: none;
+         font-weight: bold;
       }
    }
 }
