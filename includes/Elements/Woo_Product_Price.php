@@ -525,21 +525,16 @@ class Woo_Product_Price extends Widget_Base {
 	}
 	protected function eael_product_price_prefix() {
 		$this->add_control(
-			'price_prefix',
-			[
-				'label'     => esc_html__( 'Price Prefix', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
-		$this->add_control(
 			'prefix_text_color',
 			[
 				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-price .prefix-price-text span' => 'color: {{VALUE}}',
+				],
+				'condition' => [
+					'show_prefix'    => 'yes',
+					'prefix_content' => 'text',
 				],
 			]
 		);
@@ -549,6 +544,10 @@ class Woo_Product_Price extends Widget_Base {
 			[
 				'name'     => 'prefix_text_typography',
 				'selector' => '{{WRAPPER}} .eael-single-product-price .prefix-price-text span',
+				'condition' => [
+					'show_prefix'    => 'yes',
+					'prefix_content' => 'text',
+				],
 			]
 		);
 
@@ -560,7 +559,7 @@ class Woo_Product_Price extends Widget_Base {
 				'size_units' => [ 'px', '%', 'rem', 'custom' ],
 				'default'    => [
 					'top'    => 3,
-					'right'  => 2,
+					'right'  => 10,
 					'bottom' => 0,
 					'left'   => 0,
 					'unit'   => 'px',
@@ -568,6 +567,10 @@ class Woo_Product_Price extends Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-price .prefix-price-text' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition' => [
+					'show_prefix'    => 'yes',
+					'prefix_content' => 'text',
 				],
 			]
 		);
@@ -580,7 +583,10 @@ class Woo_Product_Price extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-price .prefix-price-icon svg' => 'fill: {{VALUE}}',
 				],
-				'separator' => 'before',
+				'condition' => [
+					'show_prefix'    => 'yes',
+					'prefix_content' => 'icon',
+				],
 			]
 		);
 
@@ -608,6 +614,10 @@ class Woo_Product_Price extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-price .prefix-price-icon svg' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
 				],
+				'condition' => [
+					'show_prefix'    => 'yes',
+					'prefix_content' => 'icon',
+				],
 			]
 		);
 
@@ -628,19 +638,14 @@ class Woo_Product_Price extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-price .prefix-price-icon svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
+				'condition' => [
+					'show_prefix'    => 'yes',
+					'prefix_content' => 'icon',
+				],
 			]
 		);
 	}
 	protected function eael_product_price_suffix() {
-		$this->add_control(
-			'price_suffix',
-			[
-				'label'     => esc_html__( 'Price Suffix', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
 		$this->add_control(
 			'suffix_text_color',
 			[
@@ -648,6 +653,10 @@ class Woo_Product_Price extends Widget_Base {
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-price .suffix-price-text span' => 'color: {{VALUE}}',
+				],
+				'condition'   => [
+					'show_suffix'    => 'yes',
+					'suffix_content' => 'text',
 				],
 			]
 		);
@@ -657,6 +666,10 @@ class Woo_Product_Price extends Widget_Base {
 			[
 				'name'     => 'suffix_text_typography',
 				'selector' => '{{WRAPPER}} .eael-single-product-price .suffix-price-text span',
+				'condition'   => [
+					'show_suffix'    => 'yes',
+					'suffix_content' => 'text',
+				],
 			]
 		);
 
@@ -668,14 +681,18 @@ class Woo_Product_Price extends Widget_Base {
 				'size_units' => [ 'px', '%', 'rem', 'custom' ],
 				'default'    => [
 					'top'    => 3,
-					'right'  => 2,
+					'right'  => 0,
 					'bottom' => 0,
-					'left'   => 0,
+					'left'   => 10,
 					'unit'   => 'px',
 					'isLinked' => false,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-price .suffix-price-text' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'   => [
+					'show_suffix'    => 'yes',
+					'suffix_content' => 'text',
 				],
 			]
 		);
@@ -688,7 +705,10 @@ class Woo_Product_Price extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-price .suffix-price-icon svg' => 'fill: {{VALUE}}',
 				],
-				'separator' => 'before',
+				'condition'   => [
+					'show_suffix'    => 'yes',
+					'suffix_content' => 'icon',
+				],
 			]
 		);
 
@@ -716,6 +736,10 @@ class Woo_Product_Price extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-price .suffix-price-icon svg' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
 				],
+				'condition'   => [
+					'show_suffix'    => 'yes',
+					'suffix_content' => 'icon',
+				],
 			]
 		);
 
@@ -735,6 +759,10 @@ class Woo_Product_Price extends Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-price .suffix-price-icon svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'   => [
+					'show_suffix'    => 'yes',
+					'suffix_content' => 'icon',
 				],
 			]
 		);
