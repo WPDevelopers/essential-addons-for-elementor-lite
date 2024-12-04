@@ -51,6 +51,10 @@
 .woocommerce {
    div.product {
       .eael-single-product-add-to-cart {
+         .variations_form,
+         .grouped_form {
+            flex-direction: column;
+         }
          form.cart {
             display: flex;
             margin-bottom: 0;
@@ -60,6 +64,7 @@
                gap: 10px;
                align-items: center;
                flex-grow: 0;
+               width: fit-content;
             }
          }
       }
