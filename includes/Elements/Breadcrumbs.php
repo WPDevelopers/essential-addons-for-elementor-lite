@@ -153,7 +153,7 @@ class Breadcrumbs extends Widget_Base {
 						'icon'  => 'eicon-text-area',
 					],
 				],
-				'default' => 'icon',
+				'default' => 'text',
             'separator' => 'before',
 			]
 		);
