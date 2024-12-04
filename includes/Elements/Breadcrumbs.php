@@ -243,24 +243,26 @@ class Breadcrumbs extends Widget_Base {
 			]
 		);
 
-      $this->add_control(
-			'breadcrumb_text_color',
+		$this->add_control(
+			'breadcrumb_link_color',
 			[
-				'label' => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
-				'type'  => \Elementor\Controls_Manager::COLOR,
+				'label'     => esc_html__( 'Link Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'default'   => '#105BE0',
 				'selectors' => [
-					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__content' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__content a' => 'color: {{VALUE}}',
 				]
 			]
 		);
 
 		$this->add_control(
-			'breadcrumb_link_color',
+			'breadcrumb_text_color',
 			[
-				'label' => esc_html__( 'Link Color', 'essential-addons-for-elementor-lite' ),
-				'type'  => \Elementor\Controls_Manager::COLOR,
+				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'default'   => '#767676',
 				'selectors' => [
-					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__content a' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__content' => 'color: {{VALUE}}',
 				]
 			]
 		);
