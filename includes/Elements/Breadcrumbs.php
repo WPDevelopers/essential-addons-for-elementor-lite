@@ -200,6 +200,32 @@ class Breadcrumbs extends Widget_Base {
          ]
       );
 
+		$this->add_responsive_control(
+			'breadcrumb_align',
+			[
+				'label' => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
+				'type'  => \Elementor\Controls_Manager::CHOOSE,
+				'options' => [
+					'left' => [
+						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-center',
+					],
+					'right' => [
+						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+				],
+				'toggle'    => true,
+				'selectors' => [
+					'{{WRAPPER}} .eael-breadcrumbs' => 'justify-content: {{VALUE}};',
+				],
+			]
+		);
+
 		$this->add_control(
 			'eael_breadcrumb_bg_color',
 			[
@@ -306,6 +332,7 @@ class Breadcrumbs extends Widget_Base {
 				'type'      => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
 					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__prefix svg path' => 'fill: {{VALUE}}',
+					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__prefix i' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -333,6 +360,7 @@ class Breadcrumbs extends Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__prefix svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__prefix i' => 'font-size: {{SIZE}}{{UNIT}}',
 				],
 			]
 		);
@@ -352,6 +380,7 @@ class Breadcrumbs extends Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__prefix svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__prefix i' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
