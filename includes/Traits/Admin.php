@@ -1421,7 +1421,7 @@ trait Admin {
 					    'title'      => __( "Woo Account Dashboard", 'essential-addons-for-elementor-lite' ),
 					    'label'      => __( "Set Custom Tabs", 'essential-addons-for-elementor-lite' ),
 					    'name'       => 'woo-account-dashboard-custom-tabs',
-					    'placeholder'=> __( "Custom Tab 1, custom-tab-2, custom_tab_3", 'essential-addons-for-elementor-lite' ),
+					    'placeholder'=> __( "Custom Tab 1, Custom Tab 2, Custom Tab 3", 'essential-addons-for-elementor-lite' ),
 					    'value'      => get_option( 'eael_woo_ac_dashboard_custom_tabs', '' ),
 				    ],
 				    'businessReviewsSetting' => [
