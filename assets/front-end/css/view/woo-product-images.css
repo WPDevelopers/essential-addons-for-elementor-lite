@@ -93,6 +93,9 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 
 .eael-single-product-images .product_image_slider__thumbs__image {
@@ -102,8 +105,7 @@
 
 .eael-single-product-images .product_image_slider__thumbs .swiper-slide {
   width: 100px;
-  height: 90px;
-  text-align: center;
+  height: 90px !important;
   overflow: hidden;
   opacity: 0.5;
 }
@@ -170,9 +172,12 @@
 }
 
 .eael-single-product-images .product_image_slider__container {
-  width: 100%;
+  width: 80%;
   height: auto;
   margin: 0 0 10px 0;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 
 .eael-single-product-images .product_image_slider__container .product_image_slider__trigger {

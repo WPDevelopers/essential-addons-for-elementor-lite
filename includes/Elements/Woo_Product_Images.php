@@ -671,9 +671,11 @@ class Woo_Product_Images extends Widget_Base {
 		}
 
 		$sliderImagesObj = json_encode( $sliderImages );
+		$thumb_position = ['left', 'right'];
+		$slider_image_container_width = in_array( $image_settings['thumb_position'], $thumb_position ) ? 'container_width' : 'container_width_full';
 		$this->add_render_attribute( 'eael-pi-image', [
 			'data-pi_image' => $sliderImagesObj,
-			'class'        => 'product_image_slider__container',
+			'class'        => 'product_image_slider__container ' . $slider_image_container_width,
 		] );
 		?>
 
@@ -760,8 +762,9 @@ class Woo_Product_Images extends Widget_Base {
 							}
 						?>
 					</div>
-					<span class="swiper-button-prev"></span>
-					<span class="swiper-button-next"></span>
+					<?php $print_left_right = in_array( $thumb_settings['thumb_position'], $thumb_position ) ? 'left-right-prev' : ''; ?>
+					<span class="swiper-button-prev <?php esc_attr_e( $print_left_right ); ?>"></span>
+					<span class="swiper-button-next <?php esc_attr_e( $print_left_right ); ?>"></span>
 					<?php } ?>
 				</div>
 		</div>
