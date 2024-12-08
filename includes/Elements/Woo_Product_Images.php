@@ -863,5 +863,4 @@ class Woo_Product_Images extends Widget_Base {
       </div>
       <?php
 	}
-
 }

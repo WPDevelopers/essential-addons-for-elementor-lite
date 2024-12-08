@@ -27,6 +27,16 @@ var WooProdectImage = function ($scope, $) {
    let $sliderImagesOptions = $(".product_image_slider__container", $scope);
    let $sliderImagesData = $sliderImagesOptions.data("pi_image");
 
+   //Get slider image height
+   $(window).on("load", function () {
+      let $getImageHeight = $scope.find(".image_slider__image").height();
+      $scope
+         .find(
+            ".eael-pi-thumb-left .product_image_slider .product_image_slider__thumbs, .eael-pi-thumb-right .product_image_slider .product_image_slider__thumbs"
+         )
+         .css("height", $getImageHeight);
+   });
+
    // Load the thumbs Swiper first
    let sliderThumbsObj = swiperLoader(
       $(".product_image_slider__thumbs .swiper-container"),
