@@ -111,10 +111,10 @@
          }
       }
       &__container {
-         // width: 80%;
          height: auto;
          margin: 0 0 10px 0;
          flex: 1;
+         position: relative;
          .product_image_slider__trigger {
             position: absolute;
             right: 0;

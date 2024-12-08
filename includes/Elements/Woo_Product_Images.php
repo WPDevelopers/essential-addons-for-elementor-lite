@@ -617,6 +617,7 @@ class Woo_Product_Images extends Widget_Base {
 		$pi_data_settings['image_resolution'] = ! empty( $settings['eael_pi_image_resolution'] ) ? $settings['eael_pi_image_resolution'] : 'full';
 		$pi_data_settings['pagination'] = ! empty( $settings['eael_pi_pagination'] ) ? $settings['eael_pi_pagination'] : 'false';
 		$pi_data_settings['navigation'] = ! empty( $settings['eael_pi_navigation'] ) ? $settings['eael_pi_navigation'] : '';
+		$pi_data_settings['sale_flash'] = ! empty( $settings['eael_image_sale_flash'] ) ? $settings['eael_image_sale_flash'] : '';
 		return $pi_data_settings;
 	}
 
@@ -629,8 +630,6 @@ class Woo_Product_Images extends Widget_Base {
 					$this->render_thumbnail_slider( $settings, $img_links );
 				} elseif ( !empty( $product_featured_url ) ) {
 					$this->render_image_slider( $settings, $product_featured_url );
-				} else {
-					echo '<p>No images available for the gallery.</p>';
 				}
 				?>
 		</div>
@@ -680,6 +679,12 @@ class Woo_Product_Images extends Widget_Base {
 		?>
 
 		<div <?php $this->print_render_attribute_string('eael-pi-image'); ?>>
+				<?php
+				//Print flash sale on front-end
+					if ( 'yes' === $image_settings['sale_flash'] && !( \Elementor\Plugin::$instance->editor->is_edit_mode() || get_post_type( get_the_ID() ) === 'templately_library' ) ) {
+						wc_get_template( 'loop/sale-flash.php' );
+					}
+				?>
 				<div class="swiper swiper-slider swiper-container">
 					<div class="product_image_slider__trigger">
 						<a href="#">
@@ -829,10 +834,6 @@ class Woo_Product_Images extends Widget_Base {
 					$product_featured_id  = get_post_thumbnail_id( $product_id );
 					$product_group        = wc_get_product( $product_id );
 					$product_gallery_ids  = array_merge( [ $product_featured_id ], $product_group->get_gallery_image_ids() );
-					
-					if ( 'yes' === $settings['eael_image_sale_flash'] ) {
-						wc_get_template( 'loop/sale-flash.php' );
-					}
 					$this->eael_product_gallery_html( $settings, $product_gallery_ids, $product_featured_url );
 				}
 			?>
