@@ -498,12 +498,29 @@ class Woo_Product_Images extends Widget_Base {
 				'range' => [
 					'px' => [
 						'min' => 1,
-						'max' => 20,
+						'max' => 50,
 						'step' => 1,
 					],
 				],
 				'default' => [
 					'size' => 4,
+				],
+				'condition' => [
+					'eael_pi_thumbnail' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_pi_thumb_position',
+			[
+				'label'   => esc_html__( 'Thumb Position', 'essential-addons-for-elementor-lite' ),
+				'type'    => \Elementor\Controls_Manager::SELECT,
+				'default' => 'bottom',
+				'options' => [
+					'bottom' => esc_html__( 'Bottm', 'essential-addons-for-elementor-lite' ),
+					'left'   => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+					'right'  => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
 				],
 				'condition' => [
 					'eael_pi_thumbnail' => 'yes',
@@ -603,23 +620,6 @@ class Woo_Product_Images extends Widget_Base {
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'true',
 				'default'      => 'true',
-			]
-		);
-
-		$this->add_control(
-			'eael_pi_thumb_position',
-			[
-				'label'   => esc_html__( 'Thumb Position', 'essential-addons-for-elementor-lite' ),
-				'type'    => \Elementor\Controls_Manager::SELECT,
-				'default' => 'bottom',
-				'options' => [
-					'bottom' => esc_html__( 'Bottm', 'essential-addons-for-elementor-lite' ),
-					'left'   => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
-					'right'  => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
-				],
-				'condition' => [
-					'eael_pi_thumbnail' => 'yes',
-				],
 			]
 		);
 		
