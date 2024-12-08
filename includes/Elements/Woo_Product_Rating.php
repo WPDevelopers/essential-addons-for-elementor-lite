@@ -453,7 +453,7 @@ class Woo_Product_Rating extends Widget_Base {
 		if( isset( $style_methods[ $settings['rating_style'] ] ) ) {
 			$method = $style_methods[ $settings['rating_style'] ];
 			for ( $i=1; $i <=5 ; $i++ ) { 
-				$filled = ( $i <= $average ) ? true : false;
+				$filled = ( $i <= ceil( $average ) ) ? true : false;
 				$this->$method( $filled );
 			}
 		}
