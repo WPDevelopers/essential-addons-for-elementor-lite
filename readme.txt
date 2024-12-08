@@ -2,9 +2,9 @@
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk, himadree12
 Tags: elementor, elements, elementor addon, elementor widget, woocommerce elementor
 Requires at least: 5.0
-Tested up to: 6.6
+Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 6.0.9
+Stable tag: 6.0.11
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -298,6 +298,35 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.0.11 - 01/12/2024 =
+
+- Fixed: Compatibility issue with FunnelKit
+- Fixed: EA Woo Product Carousel | On load carousel first item visibility issue
+- Fixed: PHP Notice: Function "_load_textdomain_just_in_time" error in WordPress 6.7
+- Fixed: EA Post Grid | Added Nickname support for Author
+- Fixed: EA Info Box | Image styling Control issue
+- Fixed: EA Sticky Video | Multiple Sticky Video in Same Page UI issue
+- Fixed: EA Feature List | PHP undefined array notice : "eael_feature_list_icon_individual_box_bg_color"
+- Fixed: EA Woo Product Grid | Product Rating Types issue on Default Preset
+- Improved: EA Woo Product Gallery | Added relation between Category and Tags on Query
+- Few minor bug fixes & improvements
+
+= 6.0.10 - 14/11/2024 =
+
+- Fixed: EA Advanced Accordion | When click on the accordion it jumps to another section
+- Fixed: Woo Product Grid | Pagination Typography Font Weight is not being applied properly
+- Fixed: Woo Product Grid | Product pricing isn’t displaying after the recent update, despite "Show Price" being enabled
+- Fixed: WPForms Widget | Form Container Alignment Does Not Work properly
+- Fixed: EA Dual Color Header | The Gradient color doesn't work
+- Fixed: EA Woo Product Grid | Price is not showing on list layout
+- Fixed: EA Sticky Video | Sticky Video Misalignment Issue while scorlling
+- Fixed: EA Login/Register Form | {password_reset_link} Shortcode Issue in Registration User Email Template
+- Improved: EA Info Box | Width Controller for Image
+- Improved: EA Woo Product Carrousel | Added rating count next to stars
+- Improved: Select2 Ajax Control : Taxonomy - need to remove limit
+- Improved: Security Enhancement
+- Few minor bug fixes & improvements
 
 = 6.0.9 - 06/11/2024 =
 

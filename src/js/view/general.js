@@ -90,7 +90,14 @@ eael.hooks.addAction("widgets.reinit", "ea", ($content) => {
 });
 
 let ea_swiper_slider_init_inside_template = (content) => {
-	window.dispatchEvent(new Event('resize'));
+
+	/*
+	* If you want to prevent calling the resize event use this code.
+	* window.eaelPreventResizeOnClick = true;
+	*/
+	if ( window.eaelPreventResizeOnClick === undefined ) {
+		window.dispatchEvent(new Event('resize'));
+	}
 
 	content = typeof content === 'object' ? content : jQuery(content);
 	content.find('.swiper-wrapper').each(function () {
@@ -154,16 +161,16 @@ jQuery(window).on("elementor/frontend/init", function () {
 		}
 	}
 
-	//Add hashchange code form advanced-accordion
-	let  isTriggerOnHashchange = true;
-	window.addEventListener( 'hashchange', function () {
-		if( !isTriggerOnHashchange ) {
+	//Add hashchange code from advanced-accordion
+	let isTriggerOnHashchange = true;
+	window.addEventListener('hashchange', function () {
+		if (!isTriggerOnHashchange) {
 			return;
 		}
 		let hashTag = window.location.hash.substr(1);
 		hashTag = hashTag === 'safari' ? 'eael-safari' : hashTag;
-		if ( hashTag !== 'undefined' && hashTag ) {
-			jQuery( '#' + hashTag ).trigger( 'click' );
+		if (hashTag !== 'undefined' && hashTag && /^[A-Za-z][-A-Za-z0-9_:.]*$/.test(hashTag)) {
+			$('#' + hashTag).trigger('click');
 		}
 	});
 

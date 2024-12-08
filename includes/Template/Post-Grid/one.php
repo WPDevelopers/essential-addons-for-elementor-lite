@@ -34,7 +34,7 @@ $author_link = $author_name = $author_url = '';
 if ( is_object( $authordata ) ) {
     $author_name = $authordata->display_name;
 
-    if ( isset( $authordata->first_name ) ) {
+    if ( ! $author_name && isset( $authordata->first_name ) ) {
         $author_name = $authordata->first_name;
 		if ( isset( $authordata->last_name ) ) {
 			$author_name .= ' ' . $authordata->last_name;

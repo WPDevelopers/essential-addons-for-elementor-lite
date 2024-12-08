@@ -113,7 +113,7 @@ class Bootstrap
 
 	    // start plugin tracking
 	    if ( ! $this->pro_enabled ) {
-		    $this->start_plugin_tracking();
+            add_action( 'init', [ $this, 'start_plugin_tracking' ] );
 	    }
 
         // register extensions
@@ -281,7 +281,7 @@ class Bootstrap
 	    if ( is_admin() ) {
             // Admin
             if (!$this->pro_enabled) {
-                $this->admin_notice();
+                add_action( 'admin_init', [ $this, 'admin_notice' ] );
             } else {
                 new WPDeveloper_Core_Installer( basename( EAEL_PLUGIN_BASENAME, '.php' ) );
             }
@@ -316,11 +316,6 @@ class Bootstrap
 
 			// update admin menu notice flag once visit EA settings page
 	        add_action( 'eael_admin_page_setting', [ $this, 'eael_show_admin_menu_notice' ] );
-
-	        // Black Friday Optin
-	        add_action( 'admin_notices', [ $this, 'eael_black_friday_optin' ] );
-	        add_action( 'eael_admin_notices', [ $this, 'eael_black_friday_optin' ] );
-	        add_action( 'wp_ajax_eael_black_friday_optin_dismiss', [ $this, 'eael_black_friday_optin_dismiss' ] );
 
 		    if ( ! current_user_can( 'administrator' ) ) {
 			    add_filter( 'elementor/document/save/data', function ( $data ) {

@@ -31,12 +31,11 @@ $theme-preset4: #ec3b75;
                 width: 100%;
                 margin: 0;
                 padding: 0;
-                a.add_to_cart_button,
-                span.price,
-                h2.woocommerce-loop-product__title,
-                .eael-wc-compare{
-                    //margin-left: 10px !important;
-                    //margin-right: 10px !important;
+                
+                .eael-star-rating {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
                 }
 
                 .star-rating {
@@ -75,7 +74,6 @@ $theme-preset4: #ec3b75;
 
     .eael-woo-product-carousel.swiper-8 {
         &:not(.swiper-initialized) .eael-product-carousel {
-            width: 350px;
             height: 450px
         }
     }
@@ -88,6 +86,20 @@ $theme-preset4: #ec3b75;
     }
     
     .eael-woo-product-carousel{
+        &:not(.swiper-initialized){
+            @for $i from 1 through 6 {
+                &[data-items="#{$i}"] {
+                    .swiper-wrapper.products {
+                        display: grid;
+                        grid-template-columns: repeat($i, 1fr);
+
+                        .product:nth-child(n+#{$i+1}){
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
         .eael-product-carousel {
             direction: ltr;
         }

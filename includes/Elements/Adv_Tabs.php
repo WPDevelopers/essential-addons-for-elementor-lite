@@ -1137,17 +1137,26 @@ class Adv_Tabs extends Widget_Base
                             echo $this->parse_text_editor( $tab['eael_adv_tabs_tab_content'] );
 
 				        elseif ('template' == $tab['eael_adv_tabs_text_type']) :
-                            if ( ! empty( $tab['eael_primary_templates'] ) ) {
-                                // WPML Compatibility
-                                if ( ! is_array( $tab['eael_primary_templates'] ) ) {
-                                    $tab['eael_primary_templates'] = apply_filters( 'wpml_object_id', $tab['eael_primary_templates'], 'wp_template', true );
-                                }
+					        if ( ! empty( $tab['eael_primary_templates'] ) ) {
+						        $current_page_id = get_the_ID();
+						        $revisions       = wp_get_post_revisions( $current_page_id );
+						        $revision_ids    = wp_list_pluck( $revisions, 'ID' );
 
-						        Helper::eael_onpage_edit_template_markup( $page_id, $tab['eael_primary_templates'] );
+						        if ( absint( $tab['eael_primary_templates'] ) === $current_page_id || in_array( absint( $tab['eael_primary_templates'] ), $revision_ids, true ) ) {
+							        _e( '<p>The provided Template matches the current page or one of its revisions!</p>' );
+						        } else {
 
-                                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'], true );
-                            }
+							        // WPML Compatibility
+							        if ( ! is_array( $tab['eael_primary_templates'] ) ) {
+								        $tab['eael_primary_templates'] = apply_filters( 'wpml_object_id', $tab['eael_primary_templates'], 'wp_template', true );
+							        }
+
+							        Helper::eael_onpage_edit_template_markup( $page_id, $tab['eael_primary_templates'] );
+
+							        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							        echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'], true );
+						        }
+					        }
 				        endif; ?>
                     </div>
 		        <?php endforeach; ?>

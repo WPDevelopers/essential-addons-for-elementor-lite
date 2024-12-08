@@ -415,7 +415,7 @@ class Fancy_Text extends Widget_Base {
 				'types'    => ['gradient'],
 				'fields_options' => [
 					'background' => [
-						'label' => _x( 'Gradient Color', 'Text Shadow Control', 'elementor' ),
+						'label' => _x( 'Gradient Color', 'Text Shadow Control', 'essential-addons-for-elementor-lite' ),
 						'toggle' => false,
 						'default' => 'gradient',
 					],

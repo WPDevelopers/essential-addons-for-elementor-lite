@@ -600,6 +600,98 @@ trait Controls
             );
         }
 
+        if ('eael-post-carousel' === $wb->get_name()) {
+            $wb->add_control(
+                'eael_post_carousel_item_style',
+                [
+                    'label' => esc_html__('Item Style', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SELECT,
+                    'default' => 'eael-cards',
+                    'options' => [
+                        'eael-overlay' => esc_html__('Overlay', 'essential-addons-for-elementor-lite'),
+                        'eael-cards' => esc_html__('Cards', 'essential-addons-for-elementor-lite'),
+                    ],
+                ]
+            );
+        }
+
+        if ('eael-post-grid' === $wb->get_name()) {
+            $wb->add_responsive_control(
+                'eael_post_grid_columns',
+                [
+                    'label' => esc_html__('Column', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SELECT,
+                    'default' => 'eael-col-4',
+                    'tablet_default' => 'eael-col-2',
+                    'mobile_default' => 'eael-col-1',
+                    'options' => [
+                        'eael-col-1' => esc_html__('1', 'essential-addons-for-elementor-lite'),
+                        'eael-col-2' => esc_html__('2', 'essential-addons-for-elementor-lite'),
+                        'eael-col-3' => esc_html__('3', 'essential-addons-for-elementor-lite'),
+                        'eael-col-4' => esc_html__('4', 'essential-addons-for-elementor-lite'),
+                        'eael-col-5' => esc_html__('5', 'essential-addons-for-elementor-lite'),
+                        'eael-col-6' => esc_html__('6', 'essential-addons-for-elementor-lite'),
+                    ],
+                    'prefix_class' => 'elementor-grid%s-',
+                    'frontend_available' => true,
+                ]
+            );
+
+            $wb->add_control(
+                'layout_mode',
+                [
+                    'label' => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SELECT,
+                    'default' => 'masonry',
+                    'options' => [
+                        'grid' => esc_html__('Grid', 'essential-addons-for-elementor-lite'),
+                        'masonry' => esc_html__('Masonry', 'essential-addons-for-elementor-lite'),
+                    ],
+                ]
+            );
+
+        }
+
+        if ('eael-post-block' === $wb->get_name()) {
+            $wb->add_control(
+                'grid_style',
+                [
+                    'label' => esc_html__('Post Block Style Preset', 'essential-addons-for-elementor-lite'),
+                    'type' => Controls_Manager::SELECT,
+                    'default' => 'post-block-style-default',
+                    'options' => [
+                        'post-block-style-default' => esc_html__('Default', 'essential-addons-for-elementor-lite'),
+                        'post-block-style-overlay' => esc_html__('Overlay', 'essential-addons-for-elementor-lite'),
+                    ],
+                ]
+            );
+
+	        $wb->add_control(
+		        'eael_show_fallback_img',
+		        [
+			        'label' => __('Fallback Image', 'essential-addons-for-elementor-lite'),
+			        'type' => Controls_Manager::SWITCHER,
+			        'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
+			        'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+			        'return_value' => 'yes',
+			        'default' => 'yes',
+		        ]
+	        );
+	        $wb->add_control(
+		        'eael_post_block_fallback_img',
+		        [
+			        'label'             => __( 'Image', 'essential-addons-for-elementor-lite' ),
+			        'type'              => Controls_Manager::MEDIA,
+			        'condition'         => [
+				        'eael_show_fallback_img'    => 'yes'
+                    ],
+                    'ai' => [
+                        'active' => false,
+                    ],
+		        ]
+	        );
+        }
+
         if ('eael-post-carousel' !== $wb->get_name()) {
 
             /**
@@ -1114,12 +1206,12 @@ trait Controls
             $wb->add_control(
                 'eael_content_timeline_navigation_type',
                 array(
-                    'label'   => esc_html__( 'Navigation Type', 'essential-addons-elementor' ),
+                    'label'   => esc_html__( 'Navigation Type', 'essential-addons-for-elementor-lite' ),
                     'type'    => Controls_Manager::SELECT,
                     'default' => 'scrollbar',
                     'options' => array(
-                        'scrollbar' => esc_html__( 'Scrollbar', 'essential-addons-elementor' ),
-                        'arrows' => esc_html__( 'Arrows', 'essential-addons-elementor' ),
+                        'scrollbar' => esc_html__( 'Scrollbar', 'essential-addons-for-elementor-lite' ),
+                        'arrows' => esc_html__( 'Arrows', 'essential-addons-for-elementor-lite' ),
                     ),
                     'condition' => [
                         'eael_dynamic_template_Layout' => 'horizontal',
@@ -1130,7 +1222,7 @@ trait Controls
             $wb->add_control(
                 'eael_content_timeline_arrow_type',
                 array(
-                    'label'   => esc_html__( 'Arrow Type', 'essential-addons-elementor' ),
+                    'label'   => esc_html__( 'Arrow Type', 'essential-addons-for-elementor-lite' ),
                     'type'    => Controls_Manager::SELECT,
                     'default' => 'fa fa-angle-left',
                     'options' => array(
@@ -1155,7 +1247,7 @@ trait Controls
             $wb->add_responsive_control(
                 'eael_content_timeline_slides_to_scroll',
                 array(
-                    'label'     => esc_html__( 'Slides to Scroll', 'essential-addons-elementor' ),
+                    'label'     => esc_html__( 'Slides to Scroll', 'essential-addons-for-elementor-lite' ),
                     'type'      => Controls_Manager::SELECT,
                     'default'   => '1',
                     'options'   => array_combine( $content_timeline_range, $content_timeline_range ),

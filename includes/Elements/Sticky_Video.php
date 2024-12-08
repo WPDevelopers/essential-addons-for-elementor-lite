@@ -109,9 +109,6 @@ class Sticky_Video extends Widget_Base
                 'label_off' => __('Off', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default' => 'yes',
-                'selectors' => [
-                    '{{WRAPPER}} div.eaelsv-sticky-player' => 'display: block',
-                ],
             ]
         );
 
@@ -225,7 +222,7 @@ class Sticky_Video extends Widget_Base
         $this->add_control(
             'eaelsv_hosted_url',
             [
-                'label' => __('Choose File', 'elementor'),
+                'label' => __('Choose File', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::MEDIA,
                 'dynamic' => [
                     'active' => true,

@@ -555,6 +555,14 @@ class Info_Box extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_infobox_image_icon_hover_animation',
+            [
+                'label' => esc_html__('Hover Animation', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HOVER_ANIMATION,
+            ]
+        );
+
         $this->start_controls_tabs('eael_infobox_image_style');
 
         $this->start_controls_tab(
@@ -576,15 +584,11 @@ class Info_Box extends Widget_Base
             ]
         );
 
-        $this->add_responsive_control(
-            'eael_infobox_image_icon_padding',
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
             [
-                'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', 'em', '%'],
-                'selectors' => [
-                    '{{WRAPPER}} .eael-infobox .infobox-icon img' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
+                'name' => 'eael_infobox_image_icon_shadow',
+                'selector' => '{{WRAPPER}} .eael-infobox .infobox-icon img',
             ]
         );
 
@@ -600,7 +604,7 @@ class Info_Box extends Widget_Base
         $this->add_control(
             'eael_infobox_img_shape',
             [
-                'label' => esc_html__('Image Shape', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Shape', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'square',
                 'label_block' => false,
@@ -625,21 +629,23 @@ class Info_Box extends Widget_Base
             ]
         );
 
-        $this->add_group_control(
-            Group_Control_Box_Shadow::get_type(),
+        $this->add_control(
+            'eael_infobox_image_icon_bg_color_hover',
             [
-                'name' => 'eael_infobox_image_icon_hover_shadow',
+                'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
                 'selectors' => [
                     '{{WRAPPER}} .eael-infobox .infobox-icon:hover img' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
 
-        $this->add_control(
-            'eael_infobox_image_icon_hover_animation',
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
             [
-                'label' => esc_html__('Animation', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HOVER_ANIMATION,
+                'name' => 'eael_infobox_image_icon_hover_shadow',
+                'selector' => '{{WRAPPER}} .eael-infobox .infobox-icon:hover img',
             ]
         );
 
@@ -655,7 +661,7 @@ class Info_Box extends Widget_Base
         $this->add_control(
             'eael_infobox_hover_img_shape',
             [
-                'label' => esc_html__('Image Shape', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Shape', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'square',
                 'label_block' => false,
@@ -675,10 +681,10 @@ class Info_Box extends Widget_Base
 
         $this->end_controls_tabs();
 
-        $this->add_control(
+        $this->add_responsive_control(
             'eael_infobox_image_resizer',
             [
-                'label' => esc_html__('Image Resizer', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Width', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 100,
@@ -688,11 +694,30 @@ class Info_Box extends Widget_Base
                         'max' => 500,
                     ],
                 ],
+                'separator' => 'before',
                 'selectors' => [
                     '{{WRAPPER}} .eael-infobox .infobox-icon img' => 'width: {{SIZE}}px;',
                     '{{WRAPPER}} .eael-infobox.icon-on-left .infobox-icon' => 'width: {{SIZE}}px;',
                     '{{WRAPPER}} .eael-infobox.icon-on-right .infobox-icon' => 'width: {{SIZE}}px;',
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_infobox_image_height',
+            [
+                'label' => esc_html__('Height', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'max' => 500,
+                    ],
                 ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-infobox .infobox-icon img' => 'height: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-infobox.icon-on-left .infobox-icon' => 'height: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-infobox.icon-on-right .infobox-icon' => 'height: {{SIZE}}px;',
+                ]
             ]
         );
 
@@ -706,6 +731,18 @@ class Info_Box extends Widget_Base
                     'eael_infobox_img_or_icon' => 'img',
                 ],
 
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_infobox_image_icon_padding',
+            [
+                'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-infobox .infobox-icon img' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
             ]
         );
 
