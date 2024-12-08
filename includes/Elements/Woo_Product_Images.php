@@ -104,30 +104,6 @@ class Woo_Product_Images extends Widget_Base {
 			]
 		);
 
-		$this->add_responsive_control(
-			'eael_pi_image_height',
-			[
-				'label'      => esc_html__( 'Adjust Image Height', 'essential-addons-for-elementor-lite' ),
-				'type'       => \Elementor\Controls_Manager::SLIDER,
-				'size_units' => [ 'vh', 'px', '%', 'rem', 'em', 'custom' ],
-				'range' => [
-					'vh' => [
-						'min' => 1,
-						'max' => 500,
-						'step' => 1,
-					],
-					'px' => [
-						'min' => 1,
-						'max' => 1000,
-						'step' => 1,
-					],
-				],
-				'selectors'  => [
-					'{{WRAPPER}} .eael-single-product-images .product_image_slider__container .swiper-slide' => 'height: {{SIZE}}{{UNIT}}',
-				],
-			]
-		);
-
       $this->add_group_control(
 			\Elementor\Group_Control_Border::get_type(),
 			[
