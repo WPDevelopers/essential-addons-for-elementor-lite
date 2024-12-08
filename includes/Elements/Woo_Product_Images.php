@@ -254,6 +254,9 @@ class Woo_Product_Images extends Widget_Base {
 				'label'     => esc_html__( 'Thumbnails', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::HEADING,
 				'separator' => 'after',
+				'condition' => [
+					'eael_pi_thumbnail' => 'yes',
+				],
 			]
 		);
 
@@ -282,6 +285,9 @@ class Woo_Product_Images extends Widget_Base {
 					'{{WRAPPER}} .eael-pi-thumb-left .product_image_slider .product_image_slider__thumbs' => 'height: {{SIZE}}{{UNIT}}',
 					'{{WRAPPER}} .eael-pi-thumb-right .product_image_slider .product_image_slider__thumbs' => 'height: {{SIZE}}{{UNIT}}',
 				],
+				'condition' => [
+					'eael_pi_thumbnail' => 'yes',
+				],
 			]
 		);
 
@@ -290,6 +296,9 @@ class Woo_Product_Images extends Widget_Base {
 			[
 				'name'      => 'eael_thumb_border',
 				'selector'  => '{{WRAPPER}} .eael-single-product-images .product_image_slider__thumbs .swiper-slide',
+				'condition' => [
+					'eael_pi_thumbnail' => 'yes',
+				],
 			]
 		);
 
@@ -301,6 +310,9 @@ class Woo_Product_Images extends Widget_Base {
 				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
 				'selectors'  => [
 					'{{WRAPPER}} .eael-single-product-images .product_image_slider__thumbs .swiper-slide' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
+				],
+				'condition' => [
+					'eael_pi_thumbnail' => 'yes',
 				],
 			]
 		);
@@ -318,6 +330,9 @@ class Woo_Product_Images extends Widget_Base {
 				'selectors'  => [
 					'{{WRAPPER}} .eael-single-product-images .product_image_slider__thumbs .swiper-wrapper' => 'gap: {{SIZE}}{{UNIT}}',
 				],
+				'condition' => [
+					'eael_pi_thumbnail' => 'yes',
+				],
 			]
 		);
 
@@ -329,6 +344,7 @@ class Woo_Product_Images extends Widget_Base {
 				'separator' => 'after',
 				'condition' => [
 					'eael_pi_thumb_navigation' => 'yes',
+					'eael_pi_thumbnail'        => 'yes',
 				],
 			]
 		);
@@ -344,6 +360,7 @@ class Woo_Product_Images extends Widget_Base {
 				],
 				'condition' => [
 					'eael_pi_thumb_navigation' => 'yes',
+					'eael_pi_thumbnail'        => 'yes',
 				],
 			]
 		);
@@ -363,6 +380,7 @@ class Woo_Product_Images extends Widget_Base {
 				],
 				'condition' => [
 					'eael_pi_thumb_navigation' => 'yes',
+					'eael_pi_thumbnail'        => 'yes',
 				],
 			]
 		);
@@ -468,6 +486,7 @@ class Woo_Product_Images extends Widget_Base {
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
+				'default'      => 'yes',
 			]
 		);
 
@@ -526,6 +545,7 @@ class Woo_Product_Images extends Widget_Base {
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
+				'default'      => 'yes',
 			]
 		);
 
@@ -558,6 +578,7 @@ class Woo_Product_Images extends Widget_Base {
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'true',
+				'default'      => 'true',
 			]
 		);
 
@@ -569,6 +590,7 @@ class Woo_Product_Images extends Widget_Base {
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'true',
+				'default'      => 'true',
 			]
 		);
 
@@ -580,6 +602,7 @@ class Woo_Product_Images extends Widget_Base {
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'true',
+				'default'      => 'true',
 			]
 		);
 
@@ -593,6 +616,9 @@ class Woo_Product_Images extends Widget_Base {
 					'bottom' => esc_html__( 'Bottm', 'essential-addons-for-elementor-lite' ),
 					'left'   => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
 					'right'  => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+				],
+				'condition' => [
+					'eael_pi_thumbnail' => 'yes',
 				],
 			]
 		);
