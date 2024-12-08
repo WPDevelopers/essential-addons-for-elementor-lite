@@ -108,6 +108,7 @@ class Woo_Product_Carousel extends Widget_Base {
         return [
             'font-awesome-5-all',
             'font-awesome-4-shim',
+            'e-swiper'
         ];
     }
     
