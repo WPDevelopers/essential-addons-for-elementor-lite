@@ -509,6 +509,8 @@ class Woo_Product_Rating extends Widget_Base {
 			$average = ( $rating_count > 0 ) ? $average : 0;
 			if ( $rating_count > 0  || 'yes' === $settings['show_empty_review'] ) {
 				$review_caption = ( $rating_count > 0 ) ? $settings['rating_caption'] : $settings['empty_rating_caption'];
+				$caption_suffix = ( $rating_count > 1 ) ? esc_html__( 's', 'essential-addons-for-elementor-lite' ) : '';
+				$review_caption .= $caption_suffix;
 			?>
 			<div class="eael-single-product-rating">
 				<div class="woocommerce-product-rating">
