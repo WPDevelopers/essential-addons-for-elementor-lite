@@ -817,7 +817,7 @@ class Post_Grid extends Widget_Base
         $this->start_controls_section(
             'section_post_grid_links',
             [
-                'label' => __('Links', 'essential-addons-for-elementor-lite'),
+                'label' => __('Link Options', 'essential-addons-for-elementor-lite'),
                 'conditions' => [
                     'relation' => 'or',
                     'terms' => [
