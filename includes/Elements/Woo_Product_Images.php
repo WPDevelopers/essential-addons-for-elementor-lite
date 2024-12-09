@@ -739,7 +739,7 @@ class Woo_Product_Images extends Widget_Base {
 			'loop' => $thumb_settings['image_loop'],
 		];
 
-		if ( ! empty ( $img_links ) && is_array( $img_links ) && count( $img_links ) > 3 && 'yes' == $thumb_settings['thumbnail'] ) {
+		if ( ! empty ( $img_links ) && is_array( $img_links ) && count( $img_links ) > $thumb_settings['thumb_items'] && 'yes' == $thumb_settings['thumbnail'] ) {
 			$sliderThumbs['slidesPerView'] = $thumb_settings['thumb_items'];
 			$sliderThumbs ['navigation'] = [
 				'nextEl' => ".swiper-button-next",
