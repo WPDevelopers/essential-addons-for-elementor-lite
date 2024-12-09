@@ -81,13 +81,6 @@ class Post_Grid extends Widget_Base
     protected function register_controls()
     {
         /**
-         * Query And Layout Controls!
-         * @source includes/elementor-helper.php
-         */
-        do_action('eael/controls/query', $this);
-        // do_action('eael/controls/layout', $this);
-
-        /**
          * Grid Layout Controls!
          */
         $this->start_controls_section(
@@ -666,6 +659,13 @@ class Post_Grid extends Widget_Base
         );
 
         $this->end_controls_section();
+
+        /**
+         * Query And Layout Controls!
+         * @source includes/elementor-helper.php
+         */
+        do_action('eael/controls/query', $this);
+        // do_action('eael/controls/layout', $this);
 
         /**
          * Grid Image Controls!
