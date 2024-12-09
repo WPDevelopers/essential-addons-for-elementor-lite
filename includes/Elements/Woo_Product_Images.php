@@ -27,7 +27,19 @@ class Woo_Product_Images extends Widget_Base {
 	}
 
 	public function get_keywords() {
-		return [ 'woocommerce', 'shop', 'store', 'images', 'product', 'gallery', 'lightbox', 'ea image', 'ea product', 'ea product image' ];
+		return [ 
+			'woocommerce', 
+			'images', 
+			'product', 
+			'ea',
+         'essential addons',
+			'ea product',
+			'ea product image',
+			'woo',
+			'woo product',
+			'woo image',
+			'woo product image',
+		];
 	}
 
 	public function get_custom_help_url() {

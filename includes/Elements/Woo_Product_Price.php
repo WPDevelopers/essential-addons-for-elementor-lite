@@ -29,7 +29,18 @@ class Woo_Product_Price extends Widget_Base {
 	}
 
 	public function get_keywords() {
-		return [ 'woocommerce', 'shop', 'store', 'price', 'sale', 'product', 'ea price', 'ea sale', 'ea product' ];
+		return [   
+			'woocommerce', 
+			'price', 
+			'product', 
+			'ea',
+         'essential addons',
+			'ea price', 
+			'ea product',
+			'woo',
+			'woo price',
+			'woo product',
+		];
 	}
 
 	public function get_custom_help_url() {

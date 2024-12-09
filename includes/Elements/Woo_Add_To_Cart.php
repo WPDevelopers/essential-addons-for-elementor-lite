@@ -27,7 +27,21 @@ class Woo_Add_To_Cart extends Widget_Base {
 	}
 
 	public function get_keywords() {
-		return [ 'woocommerce', 'shop', 'store', 'cart', 'product', 'button', 'add to cart', 'ea cart', 'ea add to cart', 'ea product' ];
+		return [ 
+			'woocommerce',
+			'cart',
+			'product',
+			'add to cart',
+			'ea',
+         'essential addons',
+			'ea cart',
+			'ea add to cart',
+			'ea product',
+			'woo',
+			'woo product',
+			'woo cart',
+			'woo add to cart',
+		];
 	}
 
 	public function get_custom_help_url() {

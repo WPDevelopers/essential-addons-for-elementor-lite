@@ -28,18 +28,20 @@ class Woo_Product_Rating extends Widget_Base {
 
 	public function get_keywords() {
 		return [ 
-			'woocommerce', 
-			'shop', 
-			'store', 
-			'rating', 
-			'review', 
-			'comments', 
-			'stars', 
-			'product', 
+			'woocommerce',
+			'rating',
+			'review',
+			'comments',
+			'product',
+			'ea',
+         'essential addons',
 			'ea product',
-			'ea rating', 
+			'ea rating',
 			'ea review',
-			'ea star',
+			'woo',
+			'woo product',
+			'woo rating',
+			'woo review',
 		];
 	}
 
