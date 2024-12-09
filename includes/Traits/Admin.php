@@ -815,7 +815,7 @@ trait Admin {
 								'title'       => __( 'Breadcrumbs', 'essential-addons-for-elementor-lite' ),
 								'demo_link'   => 'https://essential-addons.com/eael-breadcrumbs/',
 								'doc_link'    => 'https://essential-addons.com/docs/eael-breadcrumbs/',
-								'is_activate' => boolval( $this->get_settings( 'eael-breadcrumbs' ) )
+								'is_activate' => boolval( $this->get_settings( 'breadcrumbs' ) )
 							],
 					    ]
 				    ],
