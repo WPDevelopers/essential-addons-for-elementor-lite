@@ -163,6 +163,40 @@ class Woo_Product_Gallery extends Widget_Base {
 			]
 		);
 
+		$template_list = $this->get_template_list_for_dropdown();
+        $layout_options = [];
+        if( ! empty( $template_list ) ){
+            $image_dir_url = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/';
+            $image_dir_path = EAEL_PLUGIN_PATH . 'assets/admin/images/layout-previews/';
+			$count = 1;
+            foreach( $template_list as $key => $label ){
+                $image_url = $image_dir_url . 'woo-product-gallery-' . $key . '.png';
+                $image_url =  file_exists( $image_dir_path . 'woo-product-gallery-' . $key . '.png' ) ? $image_url : $image_dir_url . 'custom-layout.png';
+				$new_key = $key;
+				if( in_array( $key, [ 'preset-1', 'preset-2', 'preset-3', 'preset-4' ] ) ){
+					$new_key = "eael-product-{$key}";
+				}
+                $layout_options[ $new_key ] = [
+                    'title' => $label,
+                    'image' => $image_url
+                ];
+            }
+        }
+		
+		$image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/woo-product-gallery-';
+		$this->add_control(
+			'eael_product_gallery_style_preset',
+			[
+				'label'       => esc_html__( 'Skin', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => $layout_options,
+				'default'     => 'eael-product-preset-1',
+				'label_block' => true,
+                'toggle'      => false,
+                'image_choose'=> true,
+			]
+		);
+
 		$this->add_control(
 			'eael_woo_product_gallery_cat_heading',
 			[
@@ -348,40 +382,6 @@ class Woo_Product_Gallery extends Widget_Base {
 		// 		'options' => $this->get_template_list_for_dropdown(),
 		// 	]
 		// );
-
-		$template_list = $this->get_template_list_for_dropdown();
-        $layout_options = [];
-        if( ! empty( $template_list ) ){
-            $image_dir_url = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/';
-            $image_dir_path = EAEL_PLUGIN_PATH . 'assets/admin/images/layout-previews/';
-			$count = 1;
-            foreach( $template_list as $key => $label ){
-                $image_url = $image_dir_url . 'woo-product-gallery-' . $key . '.png';
-                $image_url =  file_exists( $image_dir_path . 'woo-product-gallery-' . $key . '.png' ) ? $image_url : $image_dir_url . 'custom-layout.png';
-				$new_key = $key;
-				if( in_array( $key, [ 'preset-1', 'preset-2', 'preset-3', 'preset-4' ] ) ){
-					$new_key = "eael-product-{$key}";
-				}
-                $layout_options[ $new_key ] = [
-                    'title' => $label,
-                    'image' => $image_url
-                ];
-            }
-        }
-
-		$image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/woo-product-gallery-';
-		$this->add_control(
-			'eael_product_gallery_style_preset',
-			[
-				'label'       => esc_html__( 'Skin', 'essential-addons-for-elementor-lite' ),
-				'type'        => Controls_Manager::CHOOSE,
-				'options'     => $layout_options,
-				'default'     => 'eael-product-preset-1',
-				'label_block' => true,
-                'toggle'      => false,
-                'image_choose'=> true,
-			]
-		);
 
 		$this->add_responsive_control(
             'eael_product_gallery_column',
