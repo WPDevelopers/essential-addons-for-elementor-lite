@@ -79,6 +79,57 @@ class Testimonial extends Widget_Base {
 
 	protected function register_controls() {
 
+		$this->start_controls_section(
+			'eael_section_testimonial_Layouts',
+			[
+				'label' => esc_html__( 'Layout', 'essential-addons-for-elementor-lite'),
+			]
+		);
+
+		$image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/testimonial-';
+		$this->add_control(
+			'eael_testimonial_style',
+			[
+				'label'       => esc_html__( 'Skin', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => [
+					'default-style' => [
+						'title' => esc_html__('Default', 'essential-addons-for-elementor-lite'),
+						'image' => $image_path . 'default-style.png'
+					],
+					'classic-style' => [
+						'title' => esc_html__('Classic', 'essential-addons-for-elementor-lite'),
+						'image' => $image_path . 'classic-style.png'
+					],
+					'middle-style' => [
+						'title' => esc_html__('Content | Icon/Image | Bio', 'essential-addons-for-elementor-lite'),
+						'image' => $image_path . 'middle-style.png'
+					],
+					'icon-img-left-content' => [
+						'title' => esc_html__('Icon/Image | Content', 'essential-addons-for-elementor-lite'),
+						'image' => $image_path . 'icon-img-left-content.png'
+					],
+					'icon-img-right-content' => [
+						'title' => esc_html__('Content | Icon/Image', 'essential-addons-for-elementor-lite'),
+						'image' => $image_path . 'icon-img-right-content.png'
+					],
+					'content-top-icon-title-inline' => [
+						'title' => esc_html__('Content Top | Icon Title Inline', 'essential-addons-for-elementor-lite'),
+						'image' => $image_path . 'content-top-icon-title-inline.png'
+					],
+					'content-bottom-icon-title-inline' => [
+						'title' => esc_html__('Content Bottom | Icon Title Inline', 'essential-addons-for-elementor-lite'),
+						'image' => $image_path . 'content-bottom-icon-title-inline.png'
+					],
+				],
+				'default'     => 'default-style',
+				'label_block' => true,
+				'toggle'      => false,
+				'image_choose'=> true,
+			]
+		);
+
+		$this->end_controls_section();
 
   		$this->start_controls_section(
   			'eael_section_testimonial_image',
@@ -125,7 +176,6 @@ class Testimonial extends Widget_Base {
 				],
 			]
 		);
-
 
 		$this->end_controls_section();
 
@@ -251,51 +301,8 @@ class Testimonial extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_testimonial_styles_general',
 			[
-				'label' => esc_html__( 'Layout', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Testimonial', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE
-			]
-		);
-
-		$image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/testimonial-';
-		$this->add_control(
-			'eael_testimonial_style',
-			[
-				'label'       => esc_html__( 'Skin', 'essential-addons-for-elementor-lite' ),
-				'type'        => Controls_Manager::CHOOSE,
-				'options'     => [
-					'default-style' => [
-						'title' => esc_html__('Default', 'essential-addons-for-elementor-lite'),
-						'image' => $image_path . 'default-style.png'
-					],
-					'classic-style' => [
-						'title' => esc_html__('Classic', 'essential-addons-for-elementor-lite'),
-						'image' => $image_path . 'classic-style.png'
-					],
-					'middle-style' => [
-						'title' => esc_html__('Content | Icon/Image | Bio', 'essential-addons-for-elementor-lite'),
-						'image' => $image_path . 'middle-style.png'
-					],
-					'icon-img-left-content' => [
-						'title' => esc_html__('Icon/Image | Content', 'essential-addons-for-elementor-lite'),
-						'image' => $image_path . 'icon-img-left-content.png'
-					],
-					'icon-img-right-content' => [
-						'title' => esc_html__('Content | Icon/Image', 'essential-addons-for-elementor-lite'),
-						'image' => $image_path . 'icon-img-right-content.png'
-					],
-					'content-top-icon-title-inline' => [
-						'title' => esc_html__('Content Top | Icon Title Inline', 'essential-addons-for-elementor-lite'),
-						'image' => $image_path . 'content-top-icon-title-inline.png'
-					],
-					'content-bottom-icon-title-inline' => [
-						'title' => esc_html__('Content Bottom | Icon Title Inline', 'essential-addons-for-elementor-lite'),
-						'image' => $image_path . 'content-bottom-icon-title-inline.png'
-					],
-				],
-				'default'     => 'default-style',
-				'label_block' => true,
-				'toggle'      => false,
-				'image_choose'=> true,
 			]
 		);
 
