@@ -1653,6 +1653,10 @@ trait Admin {
     public function admin_notice() {
         require_once EAEL_PLUGIN_PATH . 'vendor/autoload.php';
 
+	    if ( ! method_exists( CacheBank::class, 'get_instance' ) ) {
+		    return;
+	    }
+
         self::$cache_bank = CacheBank::get_instance();
 
         NoticeRemover::get_instance('1.0.0');
