@@ -782,8 +782,10 @@ class Woo_Product_Images extends Widget_Base {
 						?>
 					</div>
 					<?php $print_left_right = in_array( $thumb_settings['thumb_position'], $thumb_position ) ? 'left-right-prev' : ''; ?>
-					<span class="swiper-button-prev <?php esc_attr_e( $print_left_right ); ?>"></span>
-					<span class="swiper-button-next <?php esc_attr_e( $print_left_right ); ?>"></span>
+						<?php if ( 'yes' == $thumb_settings['thumb_navigation'] && count( $img_links ) > $thumb_settings['thumb_items'] ) { ?>
+							<span class="swiper-button-prev <?php esc_attr_e( $print_left_right ); ?>"></span>
+							<span class="swiper-button-next <?php esc_attr_e( $print_left_right ); ?>"></span>
+						<?php } ?>
 					<?php } ?>
 				</div>
 		</div>
