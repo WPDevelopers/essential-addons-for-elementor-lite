@@ -402,7 +402,7 @@ class Post_Grid extends Widget_Base
             [
                 'label'       => esc_html__('Text', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
-                'dynamic'     => [ 'active' =>true ],
+                'ai'          => [ 'active' => false ],
                 'label_block' => false,
                 'default'     => esc_html__('Read More', 'essential-addons-for-elementor-lite'),
                 'condition'   => [
@@ -412,14 +412,22 @@ class Post_Grid extends Widget_Base
         );
 
         $this->add_control(
+			'eael_post_terms_heading',
+			[
+				'label'     => esc_html__( 'Post Terms', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+        $this->add_control(
             'eael_show_post_terms',
             [
-                'label'        => __('Show Post Terms', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Show', 'essential-addons-for-elementor-lite'),
                 'type'         => Controls_Manager::SWITCHER,
                 'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
                 'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
-				'separator'    => 'before',
                 'condition'    => [
                     'eael_show_image'             => 'yes',
                     'eael_post_grid_preset_style' => ['two', 'three']
@@ -533,13 +541,21 @@ class Post_Grid extends Widget_Base
         );
 
         $this->add_control(
+			'eael_meta_data_heading',
+			[
+				'label'     => esc_html__( 'Meta Data', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+        $this->add_control(
             'eael_show_meta',
             [
-                'label'        => __('Show Meta', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Show', 'essential-addons-for-elementor-lite'),
                 'type'         => Controls_Manager::SWITCHER,
                 'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
                 'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
-				'separator'    => 'before',
                 'return_value' => 'yes',
                 'default'      => 'yes',
             ]
@@ -564,10 +580,10 @@ class Post_Grid extends Widget_Base
         $this->add_control(
             'eael_show_avatar',
             [
-                'label'        => __('Show Avatar', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Avatar', 'essential-addons-for-elementor-lite'),
                 'type'         => Controls_Manager::SWITCHER,
-                'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
+                'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default'      => 'yes',
                 'condition'    => [
@@ -580,10 +596,10 @@ class Post_Grid extends Widget_Base
         $this->add_control(
             'eael_show_author',
             [
-                'label'        => __('Show Author Name', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Author Name', 'essential-addons-for-elementor-lite'),
                 'type'         => Controls_Manager::SWITCHER,
-                'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
+                'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default'      => 'yes',
                 'condition'    => [
@@ -597,10 +613,10 @@ class Post_Grid extends Widget_Base
         $this->add_control(
             'eael_show_avatar_two',
             [
-                'label'        => __('Show Avatar', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Avatar', 'essential-addons-for-elementor-lite'),
                 'type'         => Controls_Manager::SWITCHER,
-                'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
+                'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default'      => '',
                 'condition'    => [
@@ -613,10 +629,10 @@ class Post_Grid extends Widget_Base
         $this->add_control(
             'eael_show_author_two',
             [
-                'label'        => __('Show Author Name', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Author Name', 'essential-addons-for-elementor-lite'),
                 'type'         => Controls_Manager::SWITCHER,
-                'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
+                'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default'      => '',
                 'condition'    => [
@@ -629,10 +645,10 @@ class Post_Grid extends Widget_Base
         $this->add_control(
             'eael_show_author_three',
             [
-                'label'        => __('Show Author Name', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Author Name', 'essential-addons-for-elementor-lite'),
                 'type'         => Controls_Manager::SWITCHER,
-                'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
+                'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default'      => 'yes',
                 'condition'    => [
@@ -646,10 +662,10 @@ class Post_Grid extends Widget_Base
         $this->add_control(
             'eael_show_date',
             [
-                'label'        => __('Show Date', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Date', 'essential-addons-for-elementor-lite'),
                 'type'         => Controls_Manager::SWITCHER,
-                'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
+                'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default'      => 'yes',
                 'condition'    => [
