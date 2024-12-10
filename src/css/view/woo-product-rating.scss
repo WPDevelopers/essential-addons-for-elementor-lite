@@ -1,9 +1,16 @@
-.eael-single-product-rating .woocommerce-product-rating {
-   display: flex;
-   margin-bottom: 0;
-   gap: 8px;
-   .star-rating {
-      margin: 0;
+.woocommerce {
+   div.product {
+      .eael-single-product-rating {
+         .woocommerce-product-rating {
+            display: flex;
+            margin-bottom: 0;
+            gap: 8px;
+            line-height: 0;
+            .star-rating {
+               margin: 0;
+            }
+         }
+      }
    }
 }
 
