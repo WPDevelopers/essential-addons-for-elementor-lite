@@ -349,6 +349,7 @@ class Woo_Product_Price extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-price .price del .amount bdi' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .eael-single-product-price .price .amount bdi' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-single-product-price .price' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -376,6 +377,7 @@ class Woo_Product_Price extends Widget_Base {
 				'toggle'       => true,
 				'selectors'    => [
 					'{{WRAPPER}} .eael-single-product-price' =>  'justify-content: {{VALUE}};',
+					'{{WRAPPER}} .eael-product-price-edit' =>  'justify-content: {{VALUE}};',
 				],
 			]
 		);
@@ -845,19 +847,20 @@ class Woo_Product_Price extends Widget_Base {
 						}
 					}
 				?>
-				<p class="price">
-					<del aria-hidden="true">
-						<span class="woocommerce-Price-amount amount">
-							<bdi><span class="woocommerce-Price-currencySymbol"><?php esc_html_e( '$', 'essential-addons-for-elementor-lite' ); ?></span><?php esc_html_e( '80.00', 'essential-addons-for-elementor-lite' ); ?></bdi>
-						</span>
-					</del>
-					<ins aria-hidden="true">
-						<span class="woocommerce-Price-amount amount">
-							<bdi><span class="woocommerce-Price-currencySymbol"><?php esc_html_e( '$', 'essential-addons-for-elementor-lite' ); ?></span><?php esc_html_e( '50.00', 'essential-addons-for-elementor-lite' ); ?></bdi>
-						</span>
-					</ins>
-				</p>
-				
+				<div class="eael-product-price-edit">
+					<p class="price">
+						<del aria-hidden="true">
+							<span class="woocommerce-Price-amount amount">
+								<bdi><span class="woocommerce-Price-currencySymbol"><?php esc_html_e( '$', 'essential-addons-for-elementor-lite' ); ?></span><?php esc_html_e( '80.00', 'essential-addons-for-elementor-lite' ); ?></bdi>
+							</span>
+						</del>
+						<ins aria-hidden="true">
+							<span class="woocommerce-Price-amount amount">
+								<bdi><span class="woocommerce-Price-currencySymbol"><?php esc_html_e( '$', 'essential-addons-for-elementor-lite' ); ?></span><?php esc_html_e( '50.00', 'essential-addons-for-elementor-lite' ); ?></bdi>
+							</span>
+						</ins>
+					</p>
+				</div>
 				<?php
 					if ( 'yes' === $settings['show_suffix'] ) {
 						switch ($suffix_content) {
