@@ -436,14 +436,14 @@ trait Ajax_Handler {
 			$setPagination .= "<ul class='page-numbers'>";
 
 			if ( 1 < $paginationNumber ) {
-				$setPagination .= "<li class='pagitext'><a href='javascript:void(0);' class='page-numbers'   data-pnumber='" . $paginationprev . "' >$prev_label</a></li>";
+				$setPagination .= "<li class='pagitext'><a href='javascript:void(0);' class='page-numbers'   data-pnumber='" . esc_attr( $paginationprev ) . "' >" . esc_html( $prev_label ) . "</a></li>";
 			}
 
 			if ( $pagination_Paginationlist < 7 + ( $adjacents * 2 ) ) {
 
 				for ( $pagination = 1; $pagination <= $pagination_Paginationlist; $pagination ++ ) {
 					$active        = ( $paginationNumber == $pagination ) ? 'current' : '';
-					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", esc_attr( $active ), $pagination );
+					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", esc_attr( $active ), esc_html( $pagination ) );
 				}
 
 			} else if ( $pagination_Paginationlist > 5 + ( $adjacents * 2 ) ) {
@@ -452,10 +452,10 @@ trait Ajax_Handler {
 					for ( $pagination = 1; $pagination <= 4 + ( $adjacents * 2 ); $pagination ++ ) {
 
 						$active        = ( $paginationNumber == $pagination ) ? 'current' : '';
-						$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", esc_attr( $active ), $pagination );
+						$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", esc_attr( $active ), esc_html( $pagination ) );
 					}
 					$setPagination .= "<li class='pagitext dots'>...</li>";
-					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", esc_attr( $active ), $pagination );
+					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", esc_attr( $active ), esc_html( $pagination ) );
 
 				} elseif ( $pagination_Paginationlist - ( $adjacents * 2 ) > $paginationNumber && $paginationNumber > ( $adjacents * 2 ) ) {
 					$active        = '';
@@ -463,11 +463,11 @@ trait Ajax_Handler {
 					$setPagination .= "<li class='pagitext dots'>...</li>";
 					for ( $pagination = $paginationNumber - $adjacents; $pagination <= $paginationNumber + $adjacents; $pagination ++ ) {
 						$active        = ( $paginationNumber == $pagination ) ? 'current' : '';
-						$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", esc_attr( $active ), $pagination );
+						$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", esc_attr( $active ), esc_html( $pagination ) );
 					}
 
 					$setPagination .= "<li class='pagitext dots'>...</li>";
-					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", esc_attr( $active ), $last );
+					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", esc_attr( $active ), esc_html( $last ) );
 
 				} else {
 					$active        = '';
@@ -749,7 +749,9 @@ trait Ajax_Handler {
 					do_action( 'eael_woo_after_product_loop' );
 
 					$html .= '<div class="eael-max-page" style="display:none;">'. ceil($query->found_posts / absint( $args['posts_per_page'] ) ) . '</div>';
-					printf( '%1$s', $html );
+
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					echo $html;
 					wp_reset_postdata();
 				}
 			}
