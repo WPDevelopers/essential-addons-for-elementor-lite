@@ -2,16 +2,18 @@
 .custom-add-to-cart-wrapper {
    display: flex;
    align-items: center;
-   gap: 10px;
+   gap: 8px;
    input[type="number"],
    .quantity-input {
       width: 60px;
-      height: 40px;
-      padding: 5px;
-      font-size: 16px;
+      height: 61px;
+      padding: 16px 8px;
+      color: #73727a;
+      font-size: 24px;
       text-align: center;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+      border: 1px solid #a5a4b0;
+      border-radius: 8px;
+      background-color: #fff;
    }
 
    .quantity-input:focus {
@@ -20,16 +22,28 @@
       box-shadow: 0 0 5px rgba(0, 113, 161, 0.5);
    }
 
+   .custom-select-option {
+      font-size: 16px;
+      color: #4d4d4d;
+      padding: 10px 20px;
+      border: 1px solid #a5a4b0;
+      border-radius: 8px;
+      line-height: 26px;
+      margin-bottom: 10px;
+   }
+
    .custom-add-to-cart {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 10px 20px;
-      background-color: #7f54b3;
-      color: white;
-      font-weight: bold;
-      border: none;
-      border-radius: 5px;
+      padding: 16px 24px;
+      background-color: #434347;
+      color: #e1e0e7;
+      font-size: 24px;
+      line-height: 26px;
+      font-weight: 500;
+      border: 1px solid #a5a4b0;
+      border-radius: 8px;
       cursor: pointer;
       transition: background-color 0.3s ease, transform 0.2s ease;
    }
@@ -58,10 +72,31 @@
          form.cart {
             display: flex;
             margin-bottom: 0;
+            input[type="number"],
+            .quantity {
+               .qty {
+                  width: 60px;
+                  height: 61px;
+                  padding: 16px 8px;
+                  color: #73727a;
+                  font-size: 24px;
+                  text-align: center;
+                  border: 1px solid #a5a4b0;
+                  border-radius: 8px;
+                  background-color: #fff;
+               }
+            }
             .button {
                display: flex;
-               padding: 12px;
-               gap: 10px;
+               gap: 8px;
+               padding: 16px 24px;
+               background-color: #434347;
+               color: #e1e0e7;
+               font-size: 24px;
+               line-height: 26px;
+               font-weight: 500;
+               border: 1px solid #a5a4b0;
+               border-radius: 8px;
                align-items: center;
                flex-grow: 0;
                width: fit-content;

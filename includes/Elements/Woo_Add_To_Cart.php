@@ -748,10 +748,6 @@ class Woo_Add_To_Cart extends Widget_Base {
 						'step' => 1,
 					],
 				],
-				'default'    => [
-					'unit' => 'px',
-					'size' => '10',
-				],
 				'selectors' => [
 					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart .single_add_to_cart_button' => 'gap: {{SIZE}}{{UNIT}}',
 					'{{WRAPPER}} .eael-single-product-add-to-cart .custom-add-to-cart-wrapper .custom-add-to-cart' => 'gap: {{SIZE}}{{UNIT}}',
@@ -795,6 +791,21 @@ class Woo_Add_To_Cart extends Widget_Base {
 			'section_product',
 			[
 				'label' => esc_html__( 'General', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_control(
+			'add_to_cart_product_type',
+			[
+				'label'   => esc_html__( 'Product Type (Only For Preview)', 'essential-addons-for-elementor-lite' ),
+				'type'    => \Elementor\Controls_Manager::SELECT,
+				'default' => 'simple_product',
+				'options' => [
+					'simple_product'   => esc_html__( 'Simple Product', 'essential-addons-for-elementor-lite' ),
+					'grouped_product'  => esc_html__( 'Grouped Product', 'essential-addons-for-elementor-lite' ),
+					'external_product' => esc_html__( 'External/Affiliate Product', 'essential-addons-for-elementor-lite' ),
+					'variable_product' => esc_html__( 'Vriable Product', 'essential-addons-for-elementor-lite' ),
+				],
 			]
 		);
 
@@ -915,15 +926,53 @@ class Woo_Add_To_Cart extends Widget_Base {
 			if( \Elementor\Plugin::$instance->editor->is_edit_mode() || get_post_type( get_the_ID() ) === 'templately_library' ) {
 				?>
 				<div class="custom-add-to-cart-wrapper">
-					<?php if( 'yes' === $settings['add_to_cart_show_quantity'] ) { ?>
-						<input type="number" class="quantity-input" value="1" min="1" />
-					<?php } ?>
-					<button class="custom-add-to-cart">
-						<?php if( 'yes' === $settings['add_to_cart_icon_show'] ) { ?>
-							<span class="cart-icon"><?php $this->eael_add_to_cart_icon( $settings ); ?></span>
+					<?php if( 'simple_product' === $settings['add_to_cart_product_type'] ) { ?>
+						<?php if( 'yes' === $settings['add_to_cart_show_quantity'] ) { ?>
+							<input type="number" class="quantity-input" value="1" min="1" />
 						<?php } ?>
-						<span class="button-text"><?php echo Helper::eael_wp_kses( $settings['add_to_cart_text'] ); ?></span>
-					</button>
+						<button class="custom-add-to-cart">
+							<?php if( 'yes' === $settings['add_to_cart_icon_show'] ) { ?>
+								<span class="cart-icon"><?php $this->eael_add_to_cart_icon( $settings ); ?></span>
+							<?php } ?>
+							<span class="button-text"><?php echo Helper::eael_wp_kses( $settings['add_to_cart_text'] ); ?></span>
+						</button>
+					<?php 
+						}
+						elseif ( 'grouped_product' === $settings['add_to_cart_product_type'] ) {
+							?>
+							
+							<?php
+						}
+						elseif ( 'external_product' === $settings['add_to_cart_product_type'] ) {
+							?>
+							<button class="custom-add-to-cart">
+								<span class="button-text"><?php echo Helper::eael_wp_kses( $settings['add_to_cart_text'] ); ?></span>
+							</button>
+							<?php
+						}
+						elseif ( 'variable_product' === $settings['add_to_cart_product_type'] ) {
+							?>
+							<div class="eael-variable-product-edit">
+								<select class="custom-select-option">
+										<option value=""><?php esc_html_e( 'Choose an option', 'essential-addons-for-elementor-lite' ); ?></option>
+										<option value="option-1"><?php esc_html_e( 'Red', 'essential-addons-for-elementor-lite' ); ?></option>
+										<option value="option-1"><?php esc_html_e( 'Green', 'essential-addons-for-elementor-lite' ); ?></option>
+										<option value="option-1"><?php esc_html_e( 'Blue', 'essential-addons-for-elementor-lite' ); ?></option>
+								</select>
+
+								<?php if( 'yes' === $settings['add_to_cart_show_quantity'] ) { ?>
+									<input type="number" class="quantity-input" value="1" min="1" />
+								<?php } ?>
+								<button class="custom-add-to-cart">
+									<?php if( 'yes' === $settings['add_to_cart_icon_show'] ) { ?>
+										<span class="cart-icon"><?php $this->eael_add_to_cart_icon( $settings ); ?></span>
+									<?php } ?>
+									<span class="button-text"><?php echo Helper::eael_wp_kses( $settings['add_to_cart_text'] ); ?></span>
+								</button>
+							</div>
+							<?php
+						}
+					?>
 				</div>
 				<?php
 			} else {
