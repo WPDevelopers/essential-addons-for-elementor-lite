@@ -1,6 +1,7 @@
 .eael-single-product-rating .woocommerce-product-rating {
    display: flex;
    margin-bottom: 0;
+   gap: 8px;
    .star-rating {
       margin: 0;
    }
@@ -17,16 +18,34 @@
 .eael-product-rating--align-right .woocommerce-product-rating {
    justify-content: flex-end;
 }
-.eael-product-rating-wrap {
-   display: flex;
-   flex-direction: row;
-   flex-wrap: wrap;
-   align-items: center;
-   margin-top: 1px;
-   .eael-product-rating {
-      svg {
-         height: 15px;
-         width: 15px;
+
+.eael-single-product-rating {
+   .eael-product-rating-wrap {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 1px;
+      gap: 4px;
+      .eael-product-rating {
+         line-height: 0;
+         &.filled {
+            svg {
+               fill: #434347;
+            }
+         }
+         svg {
+            height: 22px;
+            width: 21px;
+            fill: #a6a5a5;
+         }
       }
+   }
+
+   .woocommerce-review-link {
+      color: #434347;
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 26px;
    }
 }

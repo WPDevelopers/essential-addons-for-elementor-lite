@@ -108,7 +108,6 @@ class Woo_Product_Rating extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Rating Given Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
-				'default'   => '#fabb1c',
 				'selectors' => [
 					'.woocommerce {{WRAPPER}} .eael-single-product-rating .star-rating' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap .eael-product-rating.filled svg path' => 'fill: {{VALUE}};',
@@ -148,10 +147,6 @@ class Woo_Product_Rating extends Widget_Base {
 						'max' => 100,
 					],
 				],
-				'default' => [
-					'unit' => 'px',
-					'size' => 15,
-				],
 				'selectors' => [
 					'.woocommerce {{WRAPPER}} .eael-single-product-rating .star-rating' => 'font-size: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap .eael-product-rating svg' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
@@ -175,10 +170,6 @@ class Woo_Product_Rating extends Widget_Base {
 					'%' => [
 						'max' => 100,
 					],
-				],
-				'default' => [
-					'unit' => 'px',
-					'size' => 2,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap' => 'gap: {{SIZE}}{{UNIT}};',
