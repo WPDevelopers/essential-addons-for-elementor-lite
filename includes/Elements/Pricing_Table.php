@@ -2233,9 +2233,6 @@ class Pricing_Table extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-        $table_btn_link = $settings['eael_pricing_table_btn_link'];
-        $target = isset($table_btn_link['is_external']) && !empty($table_btn_link['is_external']) ? 'target="_blank"' : '';
-        $nofollow = isset($table_btn_link['nofollow']) && !empty($table_btn_link['nofollow']) ? 'rel="nofollow"' : '';
         $featured_class = ('yes' === $settings['eael_pricing_table_featured'] ? 'featured ' . $settings['eael_pricing_table_featured_styles'] : '');
         $featured_class .= ($settings['eael_pricing_table_ribbon_alignment'] === 'left' ? ' ribbon-left' : '');
         $inline_style = $settings['eael_pricing_table_featured_styles'] === 'ribbon-4' && 'yes' === $settings['eael_pricing_table_featured'];
@@ -2244,7 +2241,7 @@ class Pricing_Table extends Widget_Base
 	    $settings['eael_pricing_table_onsale_price'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_onsale_price']);
 	    $settings['eael_pricing_table_price_cur'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_price_cur']);
 	    $settings['eael_pricing_table_btn'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_btn']);
-        $table_btn_link = $settings['eael_pricing_table_btn_link']['url'];
+        $button_url = ! empty( $settings['eael_pricing_table_btn_link']['url'] ) ? $settings['eael_pricing_table_btn_link']['url'] : '';
         
         $this->add_render_attribute('eael_pricing_button', [ 'class' => [ 'eael-pricing-button' ] ]);
 
@@ -2386,7 +2383,7 @@ class Pricing_Table extends Widget_Base
                 </div>
             </div>
         <?php endif; ?>
-<?php
-        do_action('add_pricing_table_style_block', $settings, $this, $pricing, $table_btn_link, $nofollow, $featured_class);
+    <?php
+        do_action('add_pricing_table_style_block', $settings, $this, $pricing, $button_url, $featured_class);
     }
 }
