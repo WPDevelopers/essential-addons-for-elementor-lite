@@ -820,7 +820,7 @@ class Facebook_Feed extends Widget_Base
             \Elementor\Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'eael_section_facebook_feed_hover_shadow',
-                'label' => __('Box Shadow', 'plugin-domain'),
+                'label' => __('Box Shadow', 'essential-addons-for-elementor-lite'),
                 'selector' => '{{WRAPPER}} .eael-facebook-feed-item-inner:hover',
             ]
         );

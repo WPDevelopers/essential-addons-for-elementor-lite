@@ -288,7 +288,7 @@ class Dual_Color_Header extends Widget_Base
 		$this->add_control(
 			'eael_dch_separator_icon',
 			[
-				'label' => __('Icon', 'text-domain'),
+				'label' => __('Icon', 'essential-addons-for-elementor-lite'),
 				'type' => \Elementor\Controls_Manager::ICONS,
 				'default' => [
 					'value' => 'fas fa-star',

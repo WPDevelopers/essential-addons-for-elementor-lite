@@ -393,7 +393,7 @@ class Pricing_Table extends Widget_Base
         $repeater->add_control(
 			'eael_pricing_item_tooltip_heading',
 			[
-				'label'     => esc_html__( 'Tooltip', 'textdomain' ),
+				'label'     => esc_html__( 'Tooltip', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -1051,7 +1051,7 @@ class Pricing_Table extends Widget_Base
         $this->add_control(
             'eael_pricing_table_header_radius',
             [
-                'label'      => __('Radius', 'essential-addons-elementor-lite'),
+                'label'      => __('Radius', 'essential-addons-for-elementor-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors'  => [
@@ -1066,7 +1066,7 @@ class Pricing_Table extends Widget_Base
             Group_Control_Background::get_type(),
             [
                 'name'      => 'eael_pricing_table_header_bg',
-                'label'     => __('Background', 'essential-addons-elementor-lite'),
+                'label'     => __('Background', 'essential-addons-for-elementor-lite'),
                 'types'     => ['classic', 'gradient'],
                 'selector'  => '{{WRAPPER}} .eael-pricing.style-4 .eael-pricing-item .header, {{WRAPPER}} .eael-pricing.style-5 .eael-pricing-item .header',
                 'condition' => [

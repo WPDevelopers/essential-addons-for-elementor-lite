@@ -1639,7 +1639,7 @@ class Helper
 				<div class='eael-onpage-edit-template' data-eael-template-id='<?php echo esc_attr( $template_id ); ?>'
 					 data-page-id='<?php echo esc_attr( $page_id ); ?>' data-mode='<?php echo esc_attr( $mode ); ?>'>
 					<i class='eicon-edit'></i>
-					<span><?php esc_html_e( 'Edit Template' ); ?></span>
+					<span><?php esc_html_e( 'Edit Template', 'essential-addons-for-elementor-lite' ); ?></span>
 				</div>
 			</div>
 			<?php

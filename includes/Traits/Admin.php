@@ -1663,7 +1663,7 @@ trait Admin {
         NoticeRemover::get_instance('1.0.0', '\WPDeveloper\BetterDocs\Dependencies\PriyoMukul\WPNotice\Notices');
 
         $notices = new Notices( [
-			'id'             => 'essential-addons-for-elementor',
+			'id'             => 'essential-addons-for-elementor-lite',
 			'storage_key'    => 'notices',
 			'lifetime'       => 3,
 			'stylesheet_url' => esc_url_raw( EAEL_PLUGIN_URL . 'assets/admin/css/notice.css' ),
