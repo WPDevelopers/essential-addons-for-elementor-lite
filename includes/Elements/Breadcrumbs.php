@@ -274,7 +274,6 @@ class Breadcrumbs extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Link Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
-				'default'   => '#105BE0',
 				'selectors' => [
 					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__content a' => 'color: {{VALUE}}',
 				]
@@ -286,7 +285,6 @@ class Breadcrumbs extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
-				'default'   => '#767676',
 				'selectors' => [
 					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__content' => 'color: {{VALUE}}',
 				]
@@ -449,7 +447,7 @@ class Breadcrumbs extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
-				'default'   => '#767676',
+				'default'   => '#A5A4B0',
             'selectors' => [
 					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumb-separator svg path' => 'fill: {{VALUE}}',
 					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumb-separator' => 'color: {{VALUE}}',
