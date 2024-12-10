@@ -724,7 +724,7 @@ class Woo_Add_To_Cart extends Widget_Base {
 				],
 				'default'    => [
 					'unit' => 'px',
-					'size' => '18',
+					'size' => '16',
 				],
 				'selectors' => [
 					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart .single_add_to_cart_button svg' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
@@ -760,7 +760,7 @@ class Woo_Add_To_Cart extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
-				'default'   => '#fff',
+				'default'   => '#E1E0E7',
 				'selectors' => [
 					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart .single_add_to_cart_button svg path' => 'fill: {{VALUE}}',
 					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart .single_add_to_cart_button i' => 'color: {{VALUE}}',

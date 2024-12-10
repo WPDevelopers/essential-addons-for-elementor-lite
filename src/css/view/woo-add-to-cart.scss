@@ -5,11 +5,11 @@
    gap: 8px;
    input[type="number"],
    .quantity-input {
-      width: 60px;
-      height: 61px;
-      padding: 16px 8px;
+      width: 45px;
+      height: 40px;
+      padding: 0;
       color: #73727a;
-      font-size: 24px;
+      font-size: 16px;
       text-align: center;
       border: 1px solid #a5a4b0;
       border-radius: 8px;
@@ -17,7 +17,7 @@
    }
 
    .quantity-input:focus {
-      border-color: #0071a1;
+      border-color: #a5a4b0;
       outline: none;
       box-shadow: 0 0 5px rgba(0, 113, 161, 0.5);
    }
@@ -35,12 +35,11 @@
    .custom-add-to-cart {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 16px 24px;
+      gap: 4px;
+      padding: 8px 15px;
       background-color: #434347;
       color: #e1e0e7;
-      font-size: 24px;
-      line-height: 26px;
+      font-size: 16px;
       font-weight: 500;
       border: 1px solid #a5a4b0;
       border-radius: 8px;
@@ -75,11 +74,11 @@
             input[type="number"],
             .quantity {
                .qty {
-                  width: 60px;
-                  height: 61px;
-                  padding: 16px 8px;
+                  width: 45px;
+                  height: 40px;
+                  padding: 0;
                   color: #73727a;
-                  font-size: 24px;
+                  font-size: 16px;
                   text-align: center;
                   border: 1px solid #a5a4b0;
                   border-radius: 8px;
@@ -89,11 +88,10 @@
             .button {
                display: flex;
                gap: 8px;
-               padding: 16px 24px;
+               padding: 8px 15px;
                background-color: #434347;
                color: #e1e0e7;
-               font-size: 24px;
-               line-height: 26px;
+               font-size: 16px;
                font-weight: 500;
                border: 1px solid #a5a4b0;
                border-radius: 8px;
