@@ -337,8 +337,7 @@ class Event_Calendar extends Widget_Base
                 'label' => __('API Key', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'label_block' => true,
-                'description' => sprintf(__('<a href="https://essential-addons.com/elementor/docs/google-api-key/" class="eael-btn" target="_blank">%s</a>',
-                    'essential-addons-for-elementor-lite'), 'Get API Key'),
+                'description' => '<a href="https://essential-addons.com/elementor/docs/google-api-key/" class="eael-btn" target="_blank">' . __('Get API Key', 'essential-addons-for-elementor-lite') . '</a>',
                 'ai' => [
                     'active' => false,
                 ],
@@ -351,8 +350,7 @@ class Event_Calendar extends Widget_Base
                 'label' => __('Calendar ID', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'label_block' => true,
-                'description' => sprintf(__('<a href="https://essential-addons.com/elementor/docs/google-calendar-id/" class="eael-btn" target="_blank">%s</a>',
-                    'essential-addons-for-elementor-lite'), 'Get google calendar ID'),
+                'description' => '<a href="https://essential-addons.com/elementor/docs/google-calendar-id/" class="eael-btn" target="_blank">' . __('Get google calendar ID', 'essential-addons-for-elementor-lite') . '</a>',
                 'ai' => [
                     'active' => false,
                 ],
@@ -588,7 +586,7 @@ class Event_Calendar extends Widget_Base
 	    $this->add_control(
 		    'eael_event_calendar_default_date',
 		    [
-			    'label' => __('', 'essential-addons-for-elementor-lite'),
+			    'label' => '',
 			    'type' => Controls_Manager::DATE_TIME,
 			    'label_block' => true,
 			    'picker_options' => [
@@ -933,7 +931,7 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'eael_table_event_calendar_default_date',
             [
-                'label' => __('', 'essential-addons-for-elementor-lite'),
+                'label' => '',
                 'type' => Controls_Manager::DATE_TIME,
                 'label_block' => true,
                 'picker_options' => [
@@ -1207,7 +1205,7 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
 			'eael_ec_enable_custom_date_format',
 			[
-				'label'        => esc_html__( 'Custom Date Format', 'textdomain' ),
+				'label'        => esc_html__( 'Custom Date Format', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
                 'condition'    => [
