@@ -152,6 +152,8 @@ class Helper
             $post_id = get_the_ID();
             $data = get_post_meta($post_id, '_elementor_data', true);
             $data = str_replace('eaeposts_', '', $data);
+
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
             $wpdb->update(
                 $wpdb->postmeta,
                 [
@@ -850,6 +852,8 @@ class Helper
         }
 
         $query = "select post_title,ID  from $wpdb->posts where post_status = 'publish' $where $limit";
+
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $results = $wpdb->get_results($query);
         if (!empty($results)) {
             foreach ($results as $row) {
@@ -1614,6 +1618,7 @@ class Helper
         $attachment_url = preg_replace( '/-\d+x\d+(?=\.[^.\s]{2,4}$)/i', '', $attachment_url );
     
         // Prepare the query to search in the 'guid' column in 'wp_posts'
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $attachment_id = $wpdb->get_var( $wpdb->prepare(
             "SELECT ID FROM $wpdb->posts WHERE guid = %s AND post_type = 'attachment'", $attachment_url
         ));
