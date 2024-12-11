@@ -550,6 +550,8 @@ trait Helper
             FROM  $wpdb->options
             WHERE `option_name` LIKE '$key_pattern'
             ORDER BY `option_name`";
+            
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$results = $wpdb->get_results( $sql );
 
 		foreach ( $results as $transient ) {
