@@ -27,23 +27,29 @@
 }
 
 .eael-single-product-rating {
-   .eael-product-rating-wrap {
+   .woocommerce-product-rating {
       display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 4px;
-      .eael-product-rating {
-         line-height: 0;
-         &.filled {
-            svg {
-               fill: #434347;
+      margin-bottom: 0;
+      gap: 8px;
+      line-height: 0;
+      .eael-product-rating-wrap {
+         display: flex;
+         flex-direction: row;
+         flex-wrap: wrap;
+         align-items: center;
+         gap: 4px;
+         .eael-product-rating {
+            line-height: 0;
+            &.filled {
+               svg {
+                  fill: #434347;
+               }
             }
-         }
-         svg {
-            height: 20px;
-            width: 20px;
-            fill: #a6a5a5;
+            svg {
+               height: 20px;
+               width: 20px;
+               fill: #a6a5a5;
+            }
          }
       }
    }
