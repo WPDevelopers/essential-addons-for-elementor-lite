@@ -827,12 +827,12 @@ class Woo_Product_Images extends Widget_Base {
             <?php 
 				if( \Elementor\Plugin::$instance->editor->is_edit_mode() || get_post_type( get_the_ID() ) === 'templately_library' ) { 
 					$img_links = [
-						EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg',
-						EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg',
-						EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg',
-						EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg',
-						EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg',
-						EAEL_PLUGIN_URL . 'assets/front-end/img/flexia-preview.jpg',
+						EAEL_PLUGIN_URL . 'assets/front-end/img/eael-default-placeholder.png',
+						EAEL_PLUGIN_URL . 'assets/front-end/img/eael-default-placeholder.png',
+						EAEL_PLUGIN_URL . 'assets/front-end/img/eael-default-placeholder.png',
+						EAEL_PLUGIN_URL . 'assets/front-end/img/eael-default-placeholder.png',
+						EAEL_PLUGIN_URL . 'assets/front-end/img/eael-default-placeholder.png',
+						EAEL_PLUGIN_URL . 'assets/front-end/img/eael-default-placeholder.png',
 					];
 
 					$this->eael_product_gallery_html( $settings, $img_links, $product_featured_url = [] );
