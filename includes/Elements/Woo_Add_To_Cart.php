@@ -940,28 +940,28 @@ class Woo_Add_To_Cart extends Widget_Base {
 						}
 						elseif ( 'grouped_product' === $settings['add_to_cart_product_type'] ) {
 							?>
-							<div class="custom-grouped-product-edit">
+							<div class="eael-grouped-product-edit">
 								<div class="grouped-product-variation">
 									<div class="single-product-variation product-edit-odd">
 										<?php if( 'yes' === $settings['add_to_cart_show_quantity'] ) { ?>
 											<input type="number" class="quantity-input" value="1" min="1" />
 										<?php } ?>
-										<a href="#" class="product-variation-title">Hoodie with Pocket</a>
-										<p class="product-variation-price">$45.00</p>
+										<a href="#" class="product-variation-title"><?php esc_html_e( 'Hoodie with Pocket', 'essential-addons-for-elementor-lite' ); ?></a>
+										<p class="product-variation-price"><?php esc_html_e( '$45.00', 'essential-addons-for-elementor-lite' ); ?></p>
 									</div>
 									<div class="single-product-variation">
 										<?php if( 'yes' === $settings['add_to_cart_show_quantity'] ) { ?>
 											<input type="number" class="quantity-input" value="1" min="1" />
 										<?php } ?>
-										<a href="#" class="product-variation-title">Hoodie with Pocket</a>
-										<p class="product-variation-price">$45.00</p>
+										<a href="#" class="product-variation-title"><?php esc_html_e( 'Beanie with Logo', 'essential-addons-for-elementor-lite' ); ?></a>
+										<p class="product-variation-price"><?php esc_html_e( '$18.00', 'essential-addons-for-elementor-lite' ); ?></p>
 									</div>
 									<div class="single-product-variation product-edit-odd">
 										<?php if( 'yes' === $settings['add_to_cart_show_quantity'] ) { ?>
 											<input type="number" class="quantity-input" value="1" min="1" />
 										<?php } ?>
-										<a href="#" class="product-variation-title">Hoodie with Pocket</a>
-										<p class="product-variation-price">$45.00</p>
+										<a href="#" class="product-variation-title"><?php esc_html_e( 'Hoodie with Pocket', 'essential-addons-for-elementor-lite' ); ?></a>
+										<p class="product-variation-price"><?php esc_html_e( '$35.00', 'essential-addons-for-elementor-lite' ); ?></p>
 									</div>
 								</div>
 								<button class="custom-add-to-cart">

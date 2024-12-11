@@ -61,7 +61,7 @@
    }
 }
 
-.custom-grouped-product-edit {
+.eael-grouped-product-edit {
    display: flex;
    flex-direction: column;
    flex: 1;
@@ -76,7 +76,6 @@
          margin-bottom: 10px;
          justify-content: space-between;
          padding: 5px 15px;
-         border-radius: 5px;
          .product-variation-title {
             color: #434347;
             font-size: 15px;
@@ -86,7 +85,6 @@
             margin-bottom: 0;
             color: #434347;
             font-size: 15px;
-            font-weight: 600;
          }
       }
    }
@@ -150,6 +148,12 @@
                   color: #434347;
                   font-size: 15px;
                }
+            }
+            .variations td,
+            .variations th {
+               line-height: 0;
+               vertical-align: middle;
+               padding: 10px 0;
             }
          }
       }
