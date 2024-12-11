@@ -940,7 +940,37 @@ class Woo_Add_To_Cart extends Widget_Base {
 						}
 						elseif ( 'grouped_product' === $settings['add_to_cart_product_type'] ) {
 							?>
-							
+							<div class="custom-grouped-product-edit">
+								<div class="grouped-product-variation">
+									<div class="single-product-variation product-edit-odd">
+										<?php if( 'yes' === $settings['add_to_cart_show_quantity'] ) { ?>
+											<input type="number" class="quantity-input" value="1" min="1" />
+										<?php } ?>
+										<a href="#" class="product-variation-title">Hoodie with Pocket</a>
+										<p class="product-variation-price">$45.00</p>
+									</div>
+									<div class="single-product-variation">
+										<?php if( 'yes' === $settings['add_to_cart_show_quantity'] ) { ?>
+											<input type="number" class="quantity-input" value="1" min="1" />
+										<?php } ?>
+										<a href="#" class="product-variation-title">Hoodie with Pocket</a>
+										<p class="product-variation-price">$45.00</p>
+									</div>
+									<div class="single-product-variation product-edit-odd">
+										<?php if( 'yes' === $settings['add_to_cart_show_quantity'] ) { ?>
+											<input type="number" class="quantity-input" value="1" min="1" />
+										<?php } ?>
+										<a href="#" class="product-variation-title">Hoodie with Pocket</a>
+										<p class="product-variation-price">$45.00</p>
+									</div>
+								</div>
+								<button class="custom-add-to-cart">
+									<?php if( 'yes' === $settings['add_to_cart_icon_show'] ) { ?>
+										<span class="cart-icon"><?php $this->eael_add_to_cart_icon( $settings ); ?></span>
+									<?php } ?>
+									<span class="button-text"><?php echo Helper::eael_wp_kses( $settings['add_to_cart_text'] ); ?></span>
+								</button>
+							</div>
 							<?php
 						}
 						elseif ( 'external_product' === $settings['add_to_cart_product_type'] ) {
