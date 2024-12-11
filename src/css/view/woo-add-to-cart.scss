@@ -22,16 +22,6 @@
       box-shadow: 0 0 5px rgba(0, 113, 161, 0.5);
    }
 
-   .custom-select-option {
-      font-size: 16px;
-      color: #4d4d4d;
-      padding: 10px 20px;
-      border: 1px solid #a5a4b0;
-      border-radius: 8px;
-      line-height: 26px;
-      margin-bottom: 10px;
-   }
-
    .custom-add-to-cart {
       display: inline-flex;
       align-items: center;
@@ -58,6 +48,30 @@
 
    .button-text {
       display: inline-block;
+   }
+}
+
+.eael-variable-product-edit {
+   flex: 1;
+   .eael-variable-product {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background-color: #f6f6f6;
+      padding: 5px 10px;
+      margin-bottom: 15px;
+      .variable-label {
+         color: #434347;
+         font-size: 15px;
+         font-weight: 700;
+      }
+      .custom-select-option {
+         font-size: 16px;
+         color: #4d4d4d;
+         padding: 10px 20px;
+         border: 1px solid #a5a4b0;
+         border-radius: 5px;
+      }
    }
 }
 

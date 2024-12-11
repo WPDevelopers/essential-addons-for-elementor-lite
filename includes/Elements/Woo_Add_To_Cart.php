@@ -983,12 +983,15 @@ class Woo_Add_To_Cart extends Widget_Base {
 						elseif ( 'variable_product' === $settings['add_to_cart_product_type'] ) {
 							?>
 							<div class="eael-variable-product-edit">
-								<select class="custom-select-option">
-										<option value=""><?php esc_html_e( 'Choose an option', 'essential-addons-for-elementor-lite' ); ?></option>
-										<option value="option-1"><?php esc_html_e( 'Red', 'essential-addons-for-elementor-lite' ); ?></option>
-										<option value="option-1"><?php esc_html_e( 'Green', 'essential-addons-for-elementor-lite' ); ?></option>
-										<option value="option-1"><?php esc_html_e( 'Blue', 'essential-addons-for-elementor-lite' ); ?></option>
-								</select>
+								<div class="eael-variable-product">
+									<div class="variable-label"><?php esc_html_e( 'Color', 'essential-addons-for-elementor-lite' ); ?></div>
+									<select class="custom-select-option">
+											<option value=""><?php esc_html_e( 'Choose an option', 'essential-addons-for-elementor-lite' ); ?></option>
+											<option value="option-1"><?php esc_html_e( 'Red', 'essential-addons-for-elementor-lite' ); ?></option>
+											<option value="option-1"><?php esc_html_e( 'Green', 'essential-addons-for-elementor-lite' ); ?></option>
+											<option value="option-1"><?php esc_html_e( 'Blue', 'essential-addons-for-elementor-lite' ); ?></option>
+									</select>
+								</div>
 
 								<?php if( 'yes' === $settings['add_to_cart_show_quantity'] ) { ?>
 									<input type="number" class="quantity-input" value="1" min="1" />
