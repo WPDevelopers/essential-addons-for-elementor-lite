@@ -30,6 +30,7 @@
       gap: 10px;
       .product_image_slider__thumbs {
          flex-direction: column;
+         height: 42vh;
          .single-thumb-img {
             .swiper-slide {
                height: 90px !important;
@@ -58,6 +59,7 @@
       gap: 10px;
       .product_image_slider__thumbs {
          flex-direction: column;
+         height: 42vh;
          .single-thumb-img {
             .swiper-slide {
                height: 90px !important;
