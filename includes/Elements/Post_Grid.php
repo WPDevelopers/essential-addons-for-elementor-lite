@@ -417,6 +417,9 @@ class Post_Grid extends Widget_Base
 				'label'     => esc_html__( 'Post Terms', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
+                'condition'   => [
+                    'eael_post_grid_preset_style' =>  ['two', 'three'],
+                ],
 			]
 		);
 
@@ -486,7 +489,8 @@ class Post_Grid extends Widget_Base
                 'condition' => [
                     'eael_show_image'      => 'yes',
                     'eael_show_post_terms' => 'yes',
-                    'post_type'            => [ 'post', 'page', 'product', 'by_id', 'source_dynamic' ]
+                    'post_type'            => [ 'post', 'page', 'product', 'by_id', 'source_dynamic' ],
+                    'eael_post_grid_preset_style' =>  ['two', 'three'],
                 ],
             ]
         );
@@ -536,6 +540,7 @@ class Post_Grid extends Widget_Base
                 'default'      => 'yes',
                 'condition'    => [
                     'eael_show_post_terms' => 'yes',
+                    'eael_post_grid_preset_style' =>  ['two', 'three'],
                 ],
             ]
         );
