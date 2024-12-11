@@ -1115,6 +1115,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$sql           = "SELECT `post_id`
             FROM  $wpdb->postmeta
             WHERE `meta_key` = '_eael_widget_elements'";
+			
+        	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$post_ids      = $wpdb->get_col( $sql );
 			$used_elements = [];
 
