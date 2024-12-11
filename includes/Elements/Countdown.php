@@ -1334,6 +1334,7 @@ class Countdown extends Widget_Base {
                         if ( ! is_array( $settings['countdown_expiry_templates'] ) ) {
                             $settings['countdown_expiry_templates'] = apply_filters( 'wpml_object_id', $settings['countdown_expiry_templates'], 'wp_template', true );
                         }
+                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                         echo Plugin::$instance->frontend->get_builder_content( $settings['countdown_expiry_templates'], true );
                     } ?>
                <?php else: ?>
