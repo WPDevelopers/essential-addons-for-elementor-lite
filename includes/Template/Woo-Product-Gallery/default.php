@@ -134,7 +134,7 @@ else if (($gallery_style_preset == 'eael-product-preset-3') || ($gallery_style_p
                 <div class="product-image-wrap">
                 <div class="image-wrap">
 					<?php if( $should_print_image_clickable ) {
-						echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+						echo '<a href="' . esc_url( $product->get_permalink() ) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
 					}
 
 					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -258,7 +258,7 @@ else if ($gallery_style_preset == 'eael-product-preset-1') {
 						<?php } ?>
 						<?php if( $should_print_quick_view ){?>
                             <li class="eael-product-quick-view">
-                                <a id="eael_quick_view_<?php echo esc_attr( uniqid() ); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
+                                <a id="eael_quick_view_<?php echo esc_attr( uniqid() ); ?>" data-quickview-setting="<?php echo esc_attr( htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES) ); ?>"
                                    class="eael-product-gallery-open-popup open-popup-link">
                                     <i class="fas fa-eye"></i>
                                 </a>
