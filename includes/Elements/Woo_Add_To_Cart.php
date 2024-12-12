@@ -515,7 +515,7 @@ class Woo_Add_To_Cart extends Widget_Base {
 			]
 		);
 
-        $this->add_control(
+      $this->add_control(
 			'eael_add_to_variations_width',
 			[
 				'label'      => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
@@ -525,12 +525,13 @@ class Woo_Add_To_Cart extends Widget_Base {
 					'unit' => '%',
 				],
 				'selectors' => [
-					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart .variations' => 'width: {{SIZE}}{{UNIT}}',
+					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart .variations,
+					{{WRAPPER}} .eael-variable-product-edit .eael-variable-product' => 'width: {{SIZE}}{{UNIT}}',
 				],
 			]
 		);
 
-        $this->add_control(
+      $this->add_control(
 			'eael_add_to_variations_spacing',
 			[
 				'label'      => esc_html__( 'Spacing Bottom', 'essential-addons-for-elementor-lite' ),
@@ -548,34 +549,20 @@ class Woo_Add_To_Cart extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart .variations' => 'margin-bottom: {{SIZE}}{{UNIT}}',
+					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart .variations,
+					{{WRAPPER}} .eael-variable-product-edit .eael-variable-product' => 'margin-bottom: {{SIZE}}{{UNIT}}',
 				],
 			]
 		);
 
 		$this->add_control(
-			'eael_add_to_variations_space_between',
+			'eael_add_to_cart_variations_select_bg_color',
 			[
-				'label'      => esc_html__( 'Space Between', 'essential-addons-for-elementor-lite' ),
-				'type'       => \Elementor\Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
-				'range'      => [
-					'px' => [
-						'max' => 100,
-					],
-                    '%' => [
-						'max' => 100,
-					],
-					'em' => [
-						'max' => 10,
-					],
-					'rem' => [
-						'max' => 10,
-					],
-				],
+				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations tr th, 
-                    .woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations tr td' => 'padding-top: calc( {{SIZE}}{{UNIT}}/2 ); padding-bottom: calc( {{SIZE}}{{UNIT}}/2 );',
+					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart .elementor-product-variable table tbody>tr:nth-child(odd)>td, .woocommerce {{WRAPPER}} .eael-single-product-add-to-cart .elementor-product-variable table tbody>tr:nth-child(odd)>th,
+					{{WRAPPER}} .eael-variable-product-edit .eael-variable-product' => 'background-color: {{VALUE}}',
 				],
 			]
 		);
@@ -596,6 +583,7 @@ class Woo_Add_To_Cart extends Widget_Base {
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
 					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations label' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .eael-variable-product-edit .eael-variable-product .variable-label' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -604,11 +592,11 @@ class Woo_Add_To_Cart extends Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name'     => 'eael_add_to_cart_variations_label_typography',
-				'selector' => '.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations label',
+				'selector' => '.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations label, {{WRAPPER}} .eael-variable-product-edit .eael-variable-product .variable-label',
 			]
 		);
 
-        $this->add_control(
+      $this->add_control(
 			'eael_add_to_cart_variations_select_style',
 			[
 				'label'     => esc_html__( 'Select field', 'essential-addons-for-elementor-lite' ),
@@ -617,47 +605,28 @@ class Woo_Add_To_Cart extends Widget_Base {
 			]
 		);
 
-        $this->add_control(
+      $this->add_control(
 			'eael_add_to_cart_variations_select_color',
 			[
 				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
 					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations td.value select' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .eael-variable-product-edit .eael-variable-product .custom-select-option' => 'color: {{VALUE}}',
 				],
 			]
 		);
 
-        $this->add_control(
-			'eael_add_to_cart_variations_select_bg_color',
-			[
-				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
-				'selectors' => [
-					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations td.value select, 
-                    .woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations td.value:before' => 'background-color: {{VALUE}}',
-				],
-			]
-		);
-
-        $this->add_control(
+      $this->add_control(
 			'eael_add_to_cart_variations_select_border_color',
 			[
 				'label'     => esc_html__( 'Border Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
 					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations td.value select, 
-                    .woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations td.value:before' => 'border: 1px solid {{VALUE}}',
+               .woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations td.value:before,
+					{{WRAPPER}} .eael-variable-product-edit .eael-variable-product .custom-select-option' => 'border: 1px solid {{VALUE}}',
 				],
-			]
-		);
-
-        $this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
-			[
-				'name'     => 'variations_select_typography',
-				'selector' => '.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations td.value select, 
-                .woocommerce div.product.elementor{{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations td.value:before',
 			]
 		);
 
@@ -669,8 +638,19 @@ class Woo_Add_To_Cart extends Widget_Base {
 				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
 				'selectors'  => [
 					'.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations td.value select, 
-                    .woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations td.value:before' => 'border-radius: {{SIZE}}{{UNIT}}',
+               .woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations td.value:before,
+					{{WRAPPER}} .eael-variable-product-edit .eael-variable-product .custom-select-option' => 'border-radius: {{SIZE}}{{UNIT}}',
 				],
+			]
+		);
+
+      $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name'     => 'variations_select_typography',
+				'selector' => '.woocommerce {{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations td.value select, 
+               .woocommerce div.product.elementor{{WRAPPER}} .eael-single-product-add-to-cart form.cart table.variations td.value:before,
+					{{WRAPPER}} .eael-variable-product-edit .eael-variable-product .custom-select-option',
 			]
 		);
 
