@@ -687,7 +687,7 @@ class Woo_Add_To_Cart extends Widget_Base {
 		$this->start_controls_section(
 			'eael_add_to_cart_icon_style',
 			[
-				'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Cart Icon', 'essential-addons-for-elementor-lite' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
 				'condition'   => [
 					'add_to_cart_product_type!'    => 'external_product',
@@ -850,7 +850,7 @@ class Woo_Add_To_Cart extends Widget_Base {
 		$this->add_control(
 			'add_to_cart_icon_show',
 			[
-				'label'        => esc_html__( 'Show Icon', 'essential-addons-for-elementor-lite' ),
+				'label'        => esc_html__( 'Show Cart Icon', 'essential-addons-for-elementor-lite' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),

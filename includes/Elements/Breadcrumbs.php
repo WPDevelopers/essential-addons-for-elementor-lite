@@ -652,8 +652,15 @@ class Breadcrumbs extends Widget_Base {
 			} elseif ( is_single() && ! is_attachment() ) {
 				if ( 'post' !== get_post_type() ) {
 					$post_type = get_post_type_object( get_post_type() );
-					$get_slug = $post_type->rewrite;
-					$output .= '<a href="' . $home_link . '/' . $get_slug['slug'] . '/">' . $post_type->labels->singular_name . '</a>';
+					$get_slug = $post_type->rewrite ?? false;
+					
+					if ($get_slug && is_array($get_slug) && isset($get_slug['slug'])) {
+						$slug = $get_slug['slug'];
+					} else {
+						$slug = '';
+					}
+					$output .= '<a href="' . $home_link . '/' . $slug . '/">' . $post_type->labels->singular_name . '</a>';
+					
 					if ( $show_current == 1 ) {
 						$output .= ' ' . $delimiter . ' ' . $before . get_the_title() . $after;
 					}
