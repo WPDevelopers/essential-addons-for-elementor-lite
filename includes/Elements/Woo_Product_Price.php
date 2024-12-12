@@ -599,14 +599,6 @@ class Woo_Product_Price extends Widget_Base {
 				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'rem', 'custom' ],
-				'default'    => [
-					'top'    => 3,
-					'right'  => 10,
-					'bottom' => 0,
-					'left'   => 0,
-					'unit'   => 'px',
-					'isLinked' => false,
-				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-price .prefix-price-text' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
@@ -724,14 +716,6 @@ class Woo_Product_Price extends Widget_Base {
 				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'rem', 'custom' ],
-				'default'    => [
-					'top'    => 3,
-					'right'  => 0,
-					'bottom' => 0,
-					'left'   => 10,
-					'unit'   => 'px',
-					'isLinked' => false,
-				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-price .suffix-price-text' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],

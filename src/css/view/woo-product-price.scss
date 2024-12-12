@@ -18,6 +18,12 @@
    }
 }
 
+.eael-single-product-price {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+}
+
 .woocommerce:where(body:not(.woocommerce-uses-block-theme)) div.product {
    .eael-single-product-price {
       display: flex;
