@@ -5,20 +5,22 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 .custom-add-to-cart-wrapper input[type=number],
 .custom-add-to-cart-wrapper .quantity-input {
-  width: 60px;
+  width: 45px;
   height: 40px;
-  padding: 5px;
+  padding: 0;
+  color: #73727a;
   font-size: 16px;
   text-align: center;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid #a5a4b0;
+  border-radius: 8px;
+  background-color: #fff;
 }
 .custom-add-to-cart-wrapper .quantity-input:focus {
-  border-color: #0071a1;
+  border-color: #a5a4b0;
   outline: none;
   -webkit-box-shadow: 0 0 5px rgba(0, 113, 161, 0.5);
           box-shadow: 0 0 5px rgba(0, 113, 161, 0.5);
@@ -30,13 +32,14 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  background-color: #7f54b3;
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
+  gap: 4px;
+  padding: 8px 15px;
+  background-color: #434347;
+  color: #e1e0e7;
+  font-size: 16px;
+  font-weight: 500;
+  border: 1px solid #a5a4b0;
+  border-radius: 8px;
   cursor: pointer;
   -webkit-transition: background-color 0.3s ease, -webkit-transform 0.2s ease;
   transition: background-color 0.3s ease, -webkit-transform 0.2s ease;
@@ -55,6 +58,77 @@
 .custom-add-to-cart-wrapper .button-text {
   display: inline-block;
 }
+.eael-variable-product-edit {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.eael-variable-product-edit .eael-variable-product {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+  background-color: #f6f6f6;
+  padding: 5px 10px;
+  margin-bottom: 15px;
+}
+.eael-variable-product-edit .eael-variable-product .variable-label {
+  color: #434347;
+  font-size: 15px;
+  font-weight: 700;
+}
+.eael-variable-product-edit .eael-variable-product .custom-select-option {
+  font-size: 16px;
+  color: #4d4d4d;
+  padding: 10px 20px;
+  border: 1px solid #a5a4b0;
+  border-radius: 5px;
+}
+.eael-grouped-product-edit {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.eael-grouped-product-edit .grouped-product-variation .single-product-variation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 20px;
+  margin-bottom: 10px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 5px 15px;
+}
+.eael-grouped-product-edit .grouped-product-variation .single-product-variation.product-edit-odd {
+  background-color: #ebebeb;
+}
+.eael-grouped-product-edit .grouped-product-variation .single-product-variation .product-variation-title {
+  color: #434347;
+  font-size: 15px;
+  font-weight: 400;
+}
+.eael-grouped-product-edit .grouped-product-variation .single-product-variation .product-variation-price {
+  margin-bottom: 0;
+  color: #434347;
+  font-size: 15px;
+}
+.eael-grouped-product-edit .custom-add-to-cart {
+  width: 27%;
+}
 .woocommerce div.product .eael-single-product-add-to-cart .variations_form,
 .woocommerce div.product .eael-single-product-add-to-cart .grouped_form {
   -webkit-box-orient: vertical;
@@ -68,12 +142,30 @@
   display: flex;
   margin-bottom: 0;
 }
+.woocommerce div.product .eael-single-product-add-to-cart form.cart input[type=number] .qty,
+.woocommerce div.product .eael-single-product-add-to-cart form.cart .quantity .qty {
+  width: 45px;
+  height: 40px;
+  padding: 0;
+  color: #73727a;
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid #a5a4b0;
+  border-radius: 8px;
+  background-color: #fff;
+}
 .woocommerce div.product .eael-single-product-add-to-cart form.cart .button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding: 12px;
-  gap: 10px;
+  gap: 8px;
+  padding: 8px 15px;
+  background-color: #434347;
+  color: #e1e0e7;
+  font-size: 16px;
+  font-weight: 500;
+  border: 1px solid #a5a4b0;
+  border-radius: 8px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -83,6 +175,25 @@
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+}
+.woocommerce div.product .eael-single-product-add-to-cart form.cart table div.quantity {
+  padding-left: 15px;
+}
+.woocommerce div.product .eael-single-product-add-to-cart form.cart .group_table td.woocommerce-grouped-product-list-item__label a {
+  color: #434347;
+  font-size: 15px;
+  font-weight: 400;
+}
+.woocommerce div.product .eael-single-product-add-to-cart form.cart .group_table td .amount {
+  margin-bottom: 0;
+  color: #434347;
+  font-size: 15px;
+}
+.woocommerce div.product .eael-single-product-add-to-cart form.cart .variations td,
+.woocommerce div.product .eael-single-product-add-to-cart form.cart .variations th {
+  line-height: 0;
+  vertical-align: middle;
+  padding: 10px 0;
 }
 .eael-add-to-cart--layout-column.eael-add-to-cart--align-flex-start .cart {
   -webkit-box-align: start;
