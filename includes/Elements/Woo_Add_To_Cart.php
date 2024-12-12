@@ -41,6 +41,7 @@ class Woo_Add_To_Cart extends Widget_Base {
 			'woo product',
 			'woo cart',
 			'woo add to cart',
+			'EA Woo Add to Cart',
 		];
 	}
 

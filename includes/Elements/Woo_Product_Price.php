@@ -40,6 +40,8 @@ class Woo_Product_Price extends Widget_Base {
 			'woo',
 			'woo price',
 			'woo product',
+			'EA Product Price', 
+			'Product Price',
 		];
 	}
 

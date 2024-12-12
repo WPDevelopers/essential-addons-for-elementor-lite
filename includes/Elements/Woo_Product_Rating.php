@@ -42,6 +42,8 @@ class Woo_Product_Rating extends Widget_Base {
 			'woo product',
 			'woo rating',
 			'woo review',
+			'Product Rating', 
+			'EA Woo Product Rating',
 		];
 	}
 

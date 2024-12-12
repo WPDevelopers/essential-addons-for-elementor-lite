@@ -39,6 +39,7 @@ class Woo_Product_Images extends Widget_Base {
 			'woo product',
 			'woo image',
 			'woo product image',
+			'Product Image',
 		];
 	}
 
