@@ -309,8 +309,11 @@ class Woo_Add_To_Cart extends Widget_Base {
 		$this->start_controls_section(
 			'eael_add_to_cart_quantity_section',
 			[
-				'label' => esc_html__( 'Quantity', 'essential-addons-for-elementor-lite' ),
-				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+				'label'     => esc_html__( 'Quantity', 'essential-addons-for-elementor-lite' ),
+				'tab'       => \Elementor\Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'add_to_cart_product_type!'    => 'external_product',
+				],
 			]
 		);
 
@@ -504,8 +507,11 @@ class Woo_Add_To_Cart extends Widget_Base {
       $this->start_controls_section(
 			'eael_add_to_cart_variations_style',
 			[
-				'label' => esc_html__( 'Variations', 'essential-addons-for-elementor-lite' ),
-				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+				'label'     => esc_html__( 'Variations', 'essential-addons-for-elementor-lite' ),
+				'tab'       => \Elementor\Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'add_to_cart_product_type!'    => ['external_product', 'simple_product'],
+				],
 			]
 		);
 
@@ -702,6 +708,9 @@ class Woo_Add_To_Cart extends Widget_Base {
 			[
 				'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+				'condition'   => [
+					'add_to_cart_product_type!'    => 'external_product',
+				],
 			]
 		);
 
@@ -802,9 +811,9 @@ class Woo_Add_To_Cart extends Widget_Base {
 				'default' => 'simple_product',
 				'options' => [
 					'simple_product'   => esc_html__( 'Simple Product', 'essential-addons-for-elementor-lite' ),
-					'grouped_product'  => esc_html__( 'Grouped Product', 'essential-addons-for-elementor-lite' ),
 					'external_product' => esc_html__( 'External/Affiliate Product', 'essential-addons-for-elementor-lite' ),
-					'variable_product' => esc_html__( 'Vriable Product', 'essential-addons-for-elementor-lite' ),
+					'grouped_product'  => esc_html__( 'Grouped Product', 'essential-addons-for-elementor-lite' ),
+					'variable_product' => esc_html__( 'Variable Product', 'essential-addons-for-elementor-lite' ),
 				],
 			]
 		);
@@ -823,6 +832,9 @@ class Woo_Add_To_Cart extends Widget_Base {
 					'{{WRAPPER}} .eael-single-product-add-to-cart .elementor-add-to-cart.elementor-product-simple .cart' => 'flex-direction: {{VALUE}};',
 				],
 				'prefix_class' => 'eael-add-to-cart--layout-',
+				'condition'   => [
+					'add_to_cart_product_type!'    => 'external_product',
+				],
 			]
 		);
 
@@ -836,6 +848,9 @@ class Woo_Add_To_Cart extends Widget_Base {
 				'description'  => esc_html__( 'Please note that switching on this option will disable some of the design controls.', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
+				'condition'   => [
+					'add_to_cart_product_type!'    => 'external_product',
+				],
 			]
 		);
 
@@ -860,6 +875,9 @@ class Woo_Add_To_Cart extends Widget_Base {
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 				'default' 		=> 'yes',
+				'condition'   => [
+					'add_to_cart_product_type!'    => 'external_product',
+				],
 			]
 		);
 
@@ -873,7 +891,8 @@ class Woo_Add_To_Cart extends Widget_Base {
 					'library' => 'fa-solid',
 				],
 				'condition' => [
-					'add_to_cart_icon_show' => 'yes'
+					'add_to_cart_icon_show' => 'yes',
+					'add_to_cart_product_type!'    => 'external_product',
 				]
 			]
 		);
