@@ -57,7 +57,12 @@
 				var $gallery_page = 1 + 1;
 
 			} else {
-				var $gallery_page = parseInt($('.eael-cat-tab li a.active', $scope).data("page")) + 1;
+				var paging = parseInt($('.eael-cat-tab li a.active', $scope).data("page"));
+				if( isNaN( paging ) ){
+					paging = 1;
+					$('.eael-cat-tab li a.active', $scope).data("page", 1);
+				}
+				var $gallery_page = paging + 1;
 			}
 
 			$data.taxonomy = $taxonomy;
@@ -126,7 +131,9 @@
 			success: function (response) {
 				var $content = $(response);
 				$this.removeAttr('disabled');
+
 				if ( $content.hasClass("no-posts-found") || $content.length === 0 ) {
+					
 					if ($data.class == "Essential_Addons_Elementor\\Elements\\Woo_Product_Gallery") {
 						$this.removeClass('button--loading').addClass('hide-load-more');
 						$LoaderSpan.html($text);
