@@ -137,6 +137,10 @@
 					if ($data.class == "Essential_Addons_Elementor\\Elements\\Woo_Product_Gallery") {
 						$this.removeClass('button--loading').addClass('hide-load-more');
 						$LoaderSpan.html($text);
+						
+						if( $this.parent().hasClass('eael-infinity-scroll') ){
+							$this.parent().remove();
+						}
 					} else if ($data.class == "Essential_Addons_Elementor\\Pro\\Elements\\Dynamic_Filterable_Gallery") {
 						$this.removeClass('button--loading');
 						$LoaderSpan.html($text);
