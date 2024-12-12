@@ -70,7 +70,7 @@ class WPDeveloper_Setup_Wizard {
 	public function admin_menu() {
 
 		add_submenu_page(
-			'',
+			'admin.php',
 			__( 'Essential Addons ', 'essential-addons-for-elementor-lite' ),
 			__( 'Essential Addons ', 'essential-addons-for-elementor-lite' ),
 			'manage_options',
@@ -244,7 +244,16 @@ class WPDeveloper_Setup_Wizard {
 			'templately_icon_2_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-icon-2.svg',
 			'templately_icon_3_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-icon-3.svg',
 			'templately_icon_4_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-icon-4.svg',
-			'templately_promo_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-qs-img.png'
+			'templately_promo_src' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-qs-img.png',
+			'plugin' => [
+				'slug'     => 'templately',
+				'basename' => 'templately/templately.php',
+				// 'logo'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/bd-new.svg',
+				'title'    => __( 'Templately', 'essential-addons-for-elementor-lite' ),
+				// 'desc'     => __( 'Create and organize your knowledge base, FAQ & documentation page efficiently, making it easy for visitors to find any helpful article quickly and effortlessly.', 'essential-addons-for-elementor-lite' ),
+				'is_active' => is_plugin_active( 'templately/templately.php' ),
+				'local_plugin_data' => $this->get_local_plugin_data( 'templately/templately.php' ),
+			],
 		];
 
 		return $templately_content;

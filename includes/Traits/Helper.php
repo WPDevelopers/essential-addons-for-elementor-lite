@@ -314,7 +314,7 @@ trait Helper
 	 */
 	public function eael_checkout_cart_qty_update() {
         if ( ! wp_verify_nonce( $_POST['nonce'], 'essential-addons-elementor' ) ) {
-            die( __('Permission Denied!') );
+            die( __('Permission Denied!', 'essential-addons-for-elementor-lite') );
         }
 
         $cart_item_key = $_POST['cart_item_key'];

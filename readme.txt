@@ -1,10 +1,10 @@
-=== Essential Addons for Elementor – Best Elementor Addon, Templates, Widgets, Kits & WooCommerce Builders ===
+=== Essential Addons for Elementor – Popular Elementor Addon With Ready Templates, Advanced Widgets, Kits & WooCommerce Builders ===
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk, himadree12
 Tags: elementor, elements, elementor addon, elementor widget, woocommerce elementor
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 6.0.11
+Stable tag: 6.0.12
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -298,6 +298,17 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.0.12 - 11/12/2024 =
+
+- Added: Elementor 3.26 Compatibility
+- Fixed: EA Woo Cart | Quantity icons are showing multiple times on the cart page
+- Fixed: EA Event Calendar | Multiple Issues with Date Formatting, Time Input, and Language Options
+- Fixed: EA Scroll To Top | Not working on Search Result page
+- Fixed: PHP Deprecated Warnings during Installation
+- Fixed: EA Pricing Table | Trying to access array offset on null
+- Fixed: Mismatched Text Domains
+- Few minor bug fixes & improvements
 
 = 6.0.11 - 01/12/2024 =
 
