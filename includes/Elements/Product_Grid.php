@@ -624,7 +624,7 @@ class Product_Grid extends Widget_Base
         $this->add_control(
 			'eael_product_show_stockout',
 			[
-				'label'        => esc_html__( 'Stockout Products', 'essential-addons-for-elementor-lite' ),
+				'label'        => esc_html__( 'Out of Stock', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
