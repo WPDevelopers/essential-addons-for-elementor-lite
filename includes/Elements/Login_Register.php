@@ -971,7 +971,7 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$this->add_control( 'login_button_text', [
-			'label'       => __( 'Button Text', 'essential-addons-for-elementor-lite' ),
+			'label'       => __( 'Text', 'essential-addons-for-elementor-lite' ),
 			'type'        => Controls_Manager::TEXT,
 			'dynamic'     => [ 'active' => true, ],
 			'default'     => __( 'Log In', 'essential-addons-for-elementor-lite' ),
@@ -980,6 +980,34 @@ class Login_Register extends Widget_Base {
 				'active' => false,
 			],
 		] );
+
+		$this->add_control(
+			'login_button_icon',
+			[
+				'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::ICONS,
+			]
+		);
+
+		$this->add_control(
+			'login_button_icon_position',
+			[
+				'label'   => esc_html__( 'Icon Position', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'left'   => [
+						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-h-align-left',
+					],
+					'right'  => [
+						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-h-align-right',
+					],
+				],
+				'default'   => 'center',
+				'toggle'    => false,
+			]
+		);
 
 		$this->end_controls_section();
 	}
@@ -5677,6 +5705,8 @@ class Login_Register extends Widget_Base {
 
 
 			$btn_text         = ! empty( $this->ds['login_button_text'] ) ? sanitize_text_field( $this->ds['login_button_text'] ) : '';
+			$btn_icon         = ! empty( $this->ds['login_button_icon'] ) ? $this->ds['login_button_icon'] : '';
+			$btn_icon_position= ! empty( $this->ds['login_button_icon_position'] ) ? sanitize_text_field( $this->ds['login_button_icon_position'] ) : 'left';
 			$show_logout_link = ( ! empty( $this->ds['show_log_out_message'] ) && 'yes' === $this->ds['show_log_out_message'] );
 			$show_rememberme  = ( ! empty( $this->ds['login_show_remember_me'] ) && 'yes' === $this->ds['login_show_remember_me'] );
 			$remember_text    = isset( $this->ds['remember_text'] ) ? $this->ds['remember_text'] : esc_html__( 'Remember Me', 'essential-addons-for-elementor-lite');
@@ -5809,11 +5839,17 @@ class Login_Register extends Widget_Base {
 
                                 <div class="eael-lr-footer">
 									<div class="eael-lr-form-loader-wrapper">
-                                    	<input type="submit"
-                                           name="eael-login-submit"
-                                           id="eael-login-submit"
-                                           class="g-recaptcha eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?>"
-                                           value="<?php echo esc_attr( $btn_text ); ?>"/>
+										<button type="submit" name="eael-login-submit" id="eael-login-submit" class="g-recaptcha eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?>">
+											<?php
+											if ( $btn_icon && 'left' === $btn_icon_position ) {
+												Icons_Manager::render_icon( $btn_icon, [ 'class' => 'eael-lr-btn-icon' ] );
+											}
+											echo esc_html( $btn_text );
+											if ( $btn_icon && 'right' === $btn_icon_position ) {
+												Icons_Manager::render_icon( $btn_icon, [ 'class' => 'eael-lr-btn-icon' ] );
+											}
+											?>
+										</button>
 										
 										<?php if( !empty( $show_login_spinner ) && 'true' === $show_login_spinner ): ?>
 										<span class="eael-lr-form-loader eael-lr-login-form-loader d-none<?php echo esc_attr($this->in_editor ? '-editor' : '') ?>">
