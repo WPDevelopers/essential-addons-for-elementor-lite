@@ -4890,14 +4890,18 @@ class Login_Register extends Widget_Base {
 			'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 		] );
 		
-		$this->add_control( "{$button_type}_btn_pot", [
+		$this->add_control( 
+			"{$button_type}_btn_pot",
+			[
 			'label'        => __( 'Spacing', 'essential-addons-for-elementor-lite' ),
 			'type'         => Controls_Manager::POPOVER_TOGGLE,
 			'label_off'    => __( 'Default', 'essential-addons-for-elementor-lite' ),
 			'label_on'     => __( 'Custom', 'essential-addons-for-elementor-lite' ),
 			'return_value' => 'yes',
 		] );
+		
 		$this->start_popover();
+
 		$this->add_responsive_control( "{$button_type}_btn_margin", [
 			'label'      => __( 'Margin', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::DIMENSIONS,
@@ -4929,10 +4933,42 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 		$this->end_popover();
+
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name'     => "{$button_type}_btn_typography",
 			'selector' => "{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn",
 		] );
+
+		$this->add_control(
+			"{$button_type}_btn_icon_size",
+			[
+				'label'      => esc_html__( 'Icon Size', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em', 'rem' ],
+				'range'      => [
+					'px' => [
+						'min' => 0,
+						'max' => 1000,
+						'step' => 1,
+					],
+					'em' => [
+						'min' => 0,
+						'max' => 500,
+						'step' => 1,
+					],
+					'rem' => [
+						'min' => 0,
+						'max' => 500,
+						'step' => 1,
+					],
+				],
+				'selectors' => [
+					"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn .eael-lr-btn-icon" => 'font-size: {{SIZE}}{{UNIT}};',
+					"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn svg.eael-lr-btn-icon" => 'width: {{SIZE}}{{UNIT}};height: {{SIZE}}{{UNIT}};line-height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
 		$this->add_responsive_control( "{$button_type}_btn_d_type", [
 			'label'     => __( 'Display as', 'essential-addons-for-elementor-lite' ),
 			'type'      => Controls_Manager::SELECT,
@@ -4996,17 +5032,35 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$this->start_controls_tabs( "tabs_{$button_type}_btn_style" );
+
 		/*-----Login Button NORMAL state------ */
 		$this->start_controls_tab( "tab_{$button_type}_btn_normal", [
 			'label' => __( 'Normal', 'essential-addons-for-elementor-lite' ),
 		] );
-		$this->add_control( "{$button_type}_btn_color", [
-			'label'     => __( 'Text Color', 'essential-addons-for-elementor-lite' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [
-				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn" => 'color: {{VALUE}};',
-			],
-		] );
+
+		$this->add_control( 
+			"{$button_type}_btn_color", 
+			[
+				'label'     => __( 'Text Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn" => 'color: {{VALUE}};',
+				],
+			] 
+		);
+
+		$this->add_control( 
+			"{$button_type}_btn_icon_color", 
+			[
+				'label'     => __( 'Icon Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn .eael-lr-btn-icon" => 'color: {{VALUE}};',
+					"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn svg.eael-lr-btn-icon" => 'fill: {{VALUE}};',
+				],
+			]
+		);
+
 		$this->add_group_control( Group_Control_Background::get_type(), [
 			'name'     => "{$button_type}_btn_bg_color",
 			'label'    => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
@@ -5016,10 +5070,12 @@ class Login_Register extends Widget_Base {
 			],
 			'selector' => "{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn",
 		] );
+
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "{$button_type}_btn_border",
 			'selector' => "{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn",
 		] );
+
 		$this->add_control( "{$button_type}_btn_border_radius", [
 			'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
 			'type'       => Controls_Manager::DIMENSIONS,
@@ -5037,13 +5093,30 @@ class Login_Register extends Widget_Base {
 		$this->start_controls_tab( "tab_{$button_type}_button_hover", [
 			'label' => __( 'Hover', 'essential-addons-for-elementor-lite' ),
 		] );
-		$this->add_control( "{$button_type}_button_color_hover", [
-			'label'     => __( 'Text Color', 'essential-addons-for-elementor-lite' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [
-				"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn:hover" => 'color: {{VALUE}};',
-			],
-		] );
+
+		$this->add_control( 
+			"{$button_type}_button_color_hover", 
+			[
+				'label'     => __( 'Text Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn:hover" => 'color: {{VALUE}};',
+				],
+			] 
+		);
+
+		$this->add_control( 
+			"{$button_type}_btn_icon_color_hover", 
+			[
+				'label'     => __( 'Icon Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn:hover .eael-lr-btn-icon" => 'color: {{VALUE}};',
+					"{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn:hover svg.eael-lr-btn-icon" => 'fill: {{VALUE}};',
+				],
+			]
+		);
+
 		$this->add_group_control( Group_Control_Background::get_type(), [
 			'name'     => "{$button_type}_btn_bg_color_hover",
 			'label'    => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
@@ -5053,6 +5126,7 @@ class Login_Register extends Widget_Base {
 			],
 			'selector' => "{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn:hover",
 		] );
+
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "{$button_type}_btn_border_hover",
 			'selector' => "{{WRAPPER}} .eael-{$button_type}-form .eael-lr-btn:hover",
