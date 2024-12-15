@@ -2384,6 +2384,7 @@ class Pricing_Table extends Widget_Base
             </div>
         <?php endif; ?>
     <?php
-        do_action('add_pricing_table_style_block', $settings, $this, $pricing, $button_url, $featured_class);
+        $depricated_param = $featured_class;
+        do_action('add_pricing_table_style_block', $settings, $this, $pricing, $button_url, $featured_class, $depricated_param );
     }
 }
