@@ -3307,7 +3307,7 @@ class Filterable_Gallery extends Widget_Base
                                 if ( $this->default_control_key === $key ){
                                     echo 'active';
                                 }
-                            } ?>" data-filter=".eael-cf-<?php echo esc_attr($sorter_filter); ?>"><?php echo esc_html__($control['eael_fg_control']); ?></li>
+                            } ?>" data-filter=".eael-cf-<?php echo esc_attr($sorter_filter); ?>"><?php echo esc_html__($control['eael_fg_control'], 'essential-addons-for-elementor-lite'); ?></li>
                         <?php endforeach; ?>
                     </ul>
                 </div>

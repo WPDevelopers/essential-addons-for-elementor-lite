@@ -313,7 +313,7 @@ class Data_Table extends Widget_Base {
 			[
 				'label'			=> esc_html__( 'Col Span', 'essential-addons-for-elementor-lite'),
 				'type'			=> Controls_Manager::NUMBER,
-				'description'	=> esc_html__( 'Default: 1 (optional).'),
+				'description'	=> esc_html__( 'Default: 1 (optional).', 'essential-addons-for-elementor-lite'),
 				'default' 		=> 1,
 				'min'     		=> 1,
 				'label_block'	=> true,
@@ -358,7 +358,7 @@ class Data_Table extends Widget_Base {
 			[
 				'label'			=> esc_html__( 'Row Span', 'essential-addons-for-elementor-lite'),
 				'type'			=> Controls_Manager::NUMBER,
-				'description'	=> esc_html__( 'Default: 1 (optional).'),
+				'description'	=> esc_html__( 'Default: 1 (optional).', 'essential-addons-for-elementor-lite'),
 				'default' 		=> 1,
 				'min'     		=> 1,
 				'label_block'	=> true,
