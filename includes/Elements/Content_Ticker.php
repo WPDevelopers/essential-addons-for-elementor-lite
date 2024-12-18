@@ -10,10 +10,8 @@ if (!defined('ABSPATH')) {
 use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Typography;
-use Elementor\Modules\DynamicTags\Module as TagsModule;
 use \Elementor\Widget_Base;
 use \Essential_Addons_Elementor\Classes\Helper;
-use \Essential_Addons_Elementor\Classes\Controls;
 
 class Content_Ticker extends Widget_Base
 {

@@ -14,7 +14,6 @@ use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use Elementor\Repeater;
 use \Elementor\Widget_Base;
-use \Essential_Addons_Elementor\Classes\Helper;
 
 class Woo_Cart extends Widget_Base {
 

@@ -13,7 +13,6 @@ use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
 use Elementor\Icons_Manager;
 use \Elementor\Widget_Base;
-use Essential_Addons_Elementor\Classes\Helper;
 
 class Business_Reviews extends Widget_Base {
 

@@ -13,7 +13,6 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Widget_Base;
 use \Elementor\Group_Control_Box_Shadow;
-use \Essential_Addons_Elementor\Classes\Controls;
 use \Essential_Addons_Elementor\Classes\Helper;
 
 class Betterdocs_Category_Grid extends Widget_Base
