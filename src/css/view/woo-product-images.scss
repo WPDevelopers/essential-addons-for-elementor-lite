@@ -2,13 +2,13 @@
    &.swiper-button-prev {
       top: 20px;
       left: 35%;
-      transform: rotate(87deg);
+      transform: rotate(90deg);
    }
    &.swiper-button-next {
       top: auto;
       bottom: 0;
       right: 35%;
-      transform: rotate(87deg);
+      transform: rotate(90deg);
    }
    &::after {
       font-size: 18px !important;

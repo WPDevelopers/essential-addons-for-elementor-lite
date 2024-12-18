@@ -47,6 +47,12 @@ class Woo_Product_Images extends Widget_Base {
 		return 'https://essential-addons.com/elementor/docs/woo-product-image/';
 	}
 
+	public function get_style_depends() {
+		return [
+			'e-swiper'
+		];
+	}
+
 	protected function register_controls() {
 		$this->eael_wc_notice_controls();
 		if ( !function_exists( 'WC' ) ) {
@@ -503,7 +509,7 @@ class Woo_Product_Images extends Widget_Base {
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'default' => 'bottom',
 				'options' => [
-					'bottom' => esc_html__( 'Bottm', 'essential-addons-for-elementor-lite' ),
+					'bottom' => esc_html__( 'Bottom', 'essential-addons-for-elementor-lite' ),
 					'left'   => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
 					'right'  => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
 				],
@@ -680,6 +686,9 @@ class Woo_Product_Images extends Widget_Base {
 				'disableOnInteraction' => false,
 			];
 		}
+
+		// echo '<pre>';
+		// print_r($sliderImages);
 
 		$sliderImagesObj = json_encode( $sliderImages );
 		$thumb_position = ['left', 'right'];

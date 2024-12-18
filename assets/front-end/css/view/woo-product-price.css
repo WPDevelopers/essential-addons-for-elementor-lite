@@ -21,6 +21,15 @@
   text-decoration: none;
   font-weight: 600;
 }
+.eael-single-product-price {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+}
 .woocommerce:where(body:not(.woocommerce-uses-block-theme)) div.product .eael-single-product-price {
   display: -webkit-box;
   display: -ms-flexbox;
