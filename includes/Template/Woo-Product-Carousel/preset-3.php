@@ -6,8 +6,6 @@ use \Essential_Addons_Elementor\Classes\Helper;
  * Template Name: Preset 3
  */
 
-use Essential_Addons_Elementor\Elements\Woo_Product_carousel;
-
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 } // Exit if accessed directly

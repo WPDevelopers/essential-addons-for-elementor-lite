@@ -5,7 +5,6 @@
  */
 
 use \Essential_Addons_Elementor\Classes\Helper;
-use Essential_Addons_Elementor\Elements\Woo_Product_Gallery;
 use \Elementor\Group_Control_Image_Size;
 
 if ( ! defined( 'ABSPATH' ) ) {
