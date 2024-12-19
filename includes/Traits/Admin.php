@@ -1740,9 +1740,17 @@ trait Admin {
 					</svg>
 				    <?php _e( 'GET PRO Lifetime Access', 'essential-addons-for-elementor-lite' ); ?>
 				</a>
-				<a href=""><?php _e( "No, I'll Pay Full Price Later", 'essential-addons-for-elementor-lite' ); ?></a>
+				<a href="#" class="eael-holiday-notice-dismiss dismiss-btn"><?php _e( "No, I'll Pay Full Price Later", 'essential-addons-for-elementor-lite' ); ?></a>
 			</div>
 		</div>
+		<script>
+            jQuery(document).ready(function ($) {
+                $('.eael-holiday-notice-dismiss').on('click', function (e) {
+                    e.preventDefault();
+                    $('.notice-essential-addons-for-elementor-lite-holiday_24_notice button.notice-dismiss').trigger('click');
+                });
+            });
+		</script>
 	    <?php
 	    $b_message            = ob_get_clean();
 	    $_black_friday_notice = [
