@@ -250,3 +250,7 @@ span.coupon-code {
         display: none !important;
     }
 }
+
+.notice-essential-addons-for-elementor-lite-review ul.essential-addons-for-elementor-lite-notice-links li a span {
+    text-decoration: none;
+}
