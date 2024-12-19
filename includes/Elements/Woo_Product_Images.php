@@ -760,14 +760,16 @@ class Woo_Product_Images extends Widget_Base {
 		}
 
 		$thumb_position = ['left', 'right'];
-		if ( in_array( $thumb_settings['thumb_position'], $thumb_position ) ) {
+		if ( in_array( $thumb_settings['thumb_position'], $thumb_position ) && 'yes' == $thumb_settings['thumbnail'] ) {
+			$slidesPerView = count( $img_links ) > $thumb_settings['thumb_items'] ? $thumb_settings['thumb_items'] : count( $img_links );
 			$sliderThumbs['breakpoints'] = [
 				480 => [
 					'direction'=> "vertical",
-					'slidesPerView'=> $thumb_settings['thumb_items'],
+					'slidesPerView'=> $slidesPerView,
 				],
 			];
 		}
+		
 		if ( 'yes' == $thumb_settings['image_autoplay'] ) {
 			$sliderThumbs['autoplay'] = [
 				'delay' => $thumb_settings['autoplay_delay'],

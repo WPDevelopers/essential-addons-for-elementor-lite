@@ -97,7 +97,6 @@ class Woo_Product_Rating extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Rating Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
-				'default'   => '#858483',
 				'selectors' => [
 					'.woocommerce {{WRAPPER}} .eael-single-product-rating .star-rating' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap .eael-product-rating.unfilled svg path' => 'fill: {{VALUE}};',

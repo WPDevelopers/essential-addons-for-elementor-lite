@@ -2981,7 +2981,7 @@ msgstr ""
 msgid "Top"
 msgstr ""
 
-#: ../includes/Elements/Cta_Box.php:223, ../includes/Elements/Feature_List.php:364, ../includes/Elements/Flip_Box.php:387, ../includes/Elements/Flip_Box.php:627, ../includes/Elements/Image_Accordion.php:144, ../includes/Elements/Info_Box.php:148, ../includes/Elements/Post_Timeline.php:498, ../includes/Elements/Pricing_Table.php:444, ../includes/Elements/Tooltip.php:301, ../includes/Elements/Twitter_Feed.php:653, ../includes/Extensions/Reading_Progress.php:116, ../includes/Extensions/Scroll_to_Top.php:129, ../includes/Extensions/Table_of_Content.php:585, ../includes/Traits/Controls.php:850, ../includes/Traits/Controls.php:2609
+#: ../includes/Elements/Cta_Box.php:223, ../includes/Elements/Feature_List.php:364, ../includes/Elements/Flip_Box.php:387, ../includes/Elements/Flip_Box.php:627, ../includes/Elements/Image_Accordion.php:144, ../includes/Elements/Info_Box.php:148, ../includes/Elements/Post_Timeline.php:498, ../includes/Elements/Pricing_Table.php:444, ../includes/Elements/Tooltip.php:301, ../includes/Elements/Twitter_Feed.php:653, ../includes/Elements/Woo_Product_Images.php:512, ../includes/Extensions/Reading_Progress.php:116, ../includes/Extensions/Scroll_to_Top.php:129, ../includes/Extensions/Table_of_Content.php:585, ../includes/Traits/Controls.php:850, ../includes/Traits/Controls.php:2609
 msgid "Bottom"
 msgstr ""
 
@@ -9584,10 +9584,6 @@ msgstr ""
 
 #: ../includes/Elements/Woo_Product_Images.php:508
 msgid "Thumb Position"
-msgstr ""
-
-#: ../includes/Elements/Woo_Product_Images.php:512
-msgid "Bottm"
 msgstr ""
 
 #: ../includes/Elements/Woo_Product_Images.php:525
