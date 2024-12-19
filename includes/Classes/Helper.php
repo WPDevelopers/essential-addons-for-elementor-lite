@@ -8,7 +8,6 @@ if (!defined('ABSPATH')) {
 
 use \Elementor\Controls_Manager;
 use Elementor\Icons_Manager;
-use \Elementor\Utils;
 use Elementor\Plugin;
 
 class Helper
