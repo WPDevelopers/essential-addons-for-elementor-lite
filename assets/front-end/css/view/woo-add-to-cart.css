@@ -234,3 +234,11 @@
       -ms-flex-pack: end;
           justify-content: flex-end;
 }
+/*
+Theme compatibility
+Name: Blocksy Theme
+*/
+.theme-blocksy.woocommerce div.product .eael-single-product-add-to-cart form.cart input[type=number] .qty,
+.theme-blocksy.woocommerce div.product .eael-single-product-add-to-cart form.cart .quantity .qty {
+  margin: 9px 42px;
+}
