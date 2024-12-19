@@ -180,23 +180,6 @@ class Woo_Product_Rating extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'eael_star_line_height',
-			[
-				'label'      => esc_html__( 'Line Height', 'essential-addons-for-elementor-lite' ),
-				'type'       => \Elementor\Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'rem', '%', 'custom' ],
-				'range' => [
-					'px' => [
-						'max' => 100,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eael-single-product-rating .star-rating' => 'line-height: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
 		$this->add_responsive_control(
 			'product_rating_margin',
 			[
