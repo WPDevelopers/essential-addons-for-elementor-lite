@@ -193,6 +193,7 @@ span.coupon-code {
     display: flex;
     width: 100%;
     padding: 12px 0;
+    align-items: center;
 }
 .notice-essential-addons-for-elementor-lite-holiday_24_notice .wpnotice-content-wrapper .eael-black-friday-optin-logo {
     width: 225px;
@@ -208,15 +209,17 @@ span.coupon-code {
 .notice-essential-addons-for-elementor-lite-holiday_24_notice .wpnotice-content-wrapper .eael-black-friday-optin {
     padding-left: 10px;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     width: calc(100% - 225px);
-    align-items: center;
+    align-items: flex-start;
 }
 .notice-essential-addons-for-elementor-lite-holiday_24_notice .wpnotice-content-wrapper .eael-black-friday-optin p {
     color: #3C434A;
     font-size: 15px;
+    margin-top: 0;
 }
-.notice-essential-addons-for-elementor-lite-holiday_24_notice .wpnotice-content-wrapper .eael-black-friday-optin a {
+.notice-essential-addons-for-elementor-lite-holiday_24_notice .wpnotice-content-wrapper .eael-black-friday-optin a.button-primary {
     color: #ffffff;
     background: #5626E7;
     font-size: 15px;
@@ -226,6 +229,11 @@ span.coupon-code {
     height: 38px;
     line-height: 38px;
     padding: 0 15px;
+}
+
+.notice-essential-addons-for-elementor-lite-holiday_24_notice .wpnotice-content-wrapper .eael-black-friday-optin a + a {
+    color: #5626E7;
+    margin-left: 20px;
 }
 .notice-essential-addons-for-elementor-lite-holiday_24_notice .wpnotice-content-wrapper .eael-black-friday-optin svg {
     vertical-align: sub;
