@@ -505,6 +505,7 @@ class Breadcrumbs extends Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumb-separator svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumb-separator i' => 'font-size: {{SIZE}}{{UNIT}};',
 				],
 				'condition' => [
 					'eael_separator_type' => 'icon',
@@ -523,10 +524,10 @@ class Breadcrumbs extends Widget_Base {
 					'right'  => 0,
 					'bottom' => 0,
 					'left'   => 0,
-					'isLinked' => true,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumb-separator svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumb-separator svg, 
+					{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumb-separator i' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'condition' => [
 					'eael_separator_type' => 'icon',
