@@ -92,7 +92,7 @@ class Woo_Product_Images extends Widget_Base {
 				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-single-product-images span.onsale' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-single-product-images span.onsale, {{WRAPPER}} .eael-single-product-images span.ast-onsale-card ' => 'color: {{VALUE}};',
 				],
 					'condition' => [
 						'eael_image_sale_flash' => 'yes',
@@ -106,7 +106,7 @@ class Woo_Product_Images extends Widget_Base {
 				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-single-product-images span.onsale' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .eael-single-product-images span.onsale, {{WRAPPER}} .eael-single-product-images span.ast-onsale-card ' => 'background-color: {{VALUE}};',
 				],
 					'condition' => [
 						'eael_image_sale_flash' => 'yes',

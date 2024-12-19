@@ -201,6 +201,9 @@
   border-radius: 50%;
   font-size: 20px;
 }
+.eael-single-product-images .product_image_slider span.onsale {
+  z-index: 999;
+}
 .container_width_full {
   width: 100%;
 }
