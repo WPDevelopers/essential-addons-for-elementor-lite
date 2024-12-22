@@ -214,7 +214,7 @@ let HoverEffectHandler = function ($scope, $) {
         }
     }
 
-    let hoverSelector = window.isEditMode ? `body [data-id="${$scopeId}"] > .elementor-widget-container` : `body .eael_hover_effect[data-id="${$scopeId}"] > .elementor-widget-container`,
+    let hoverSelector = window.isEditMode ? `body [data-id="${$scopeId}"]` : `body .eael_hover_effect[data-id="${$scopeId}"]`,
         $hoverSelector = $(hoverSelector);
 
     //Opacity
@@ -324,11 +324,15 @@ let HoverEffectHandler = function ($scope, $) {
         $(`.elementor-element-${$scopeId}`).mousemove( function( e ) {
             var cox = ( e.pageX - $(this).offset().left - $(this).width() / 2 ) / 20;
             var coy = ( $(this).height() / 2 - ( e.pageY - $(this).offset().top ) ) / 20;
-            $(this).find( '.elementor-widget-container' ).css( 'transform','perspective(500px) rotateY('+cox+'deg) rotateX('+coy+'deg)' );
+            if( $(this).hasClass( 'eael_hover_effect' ) ) {
+                $(this).css( 'transform','perspective(500px) rotateY('+cox+'deg) rotateX('+coy+'deg)' );
+            }
         });
     
         $(`.elementor-element-${$scopeId}`).mouseleave(function( e ) {
-            $(this).find('.elementor-widget-container').css( 'transform','rotateY(0) rotateX(0)' );
+            if( $(this).hasClass( 'eael_hover_effect' ) ) {
+                $(this).css( 'transform','rotateY(0) rotateX(0)' );
+            }
         });
     }
 
