@@ -1089,6 +1089,14 @@ trait Admin {
 							    'doc_link'    => 'https://essential-addons.com/docs/ea-fancy-chart/',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'fancy-chart' ) )
+							 ],
+						    'stacked-cards'         => [
+							    'key'         => 'stacked-cards',
+							    'title'       => __( 'Stacked Cards', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/stacked-cards/',
+							    'doc_link'    => 'https://essential-addons.com/docs/stacked-cards/',
+							    'is_pro'      => true,
+							    'is_activate' => boolval( $this->get_settings( 'stacked-cards' ) )
 						    ]
 					    ]
 				    ],

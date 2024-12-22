@@ -348,6 +348,12 @@ trait Elements {
 				'icon'       => 'eicon-elementor-circle',
 				'categories' => '["essential-addons-elementor"]',
 			],
+			[
+				'name'       => 'stacked-cards',
+				'title'      => __( 'Stacked_Cards', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eicon-elementor-circle',
+				'categories' => '["essential-addons-elementor"]',
+			],
 		] );
 
 		$config['promotionWidgets'] = $combine_array;
