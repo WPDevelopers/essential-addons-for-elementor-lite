@@ -10198,7 +10198,7 @@ msgstr ""
 msgid "Upgrade to PRO"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:215, ../includes/Traits/Admin.php:1822, ../includes/Traits/Admin.php:1957, ../includes/Traits/Helper.php:615
+#: ../includes/Traits/Admin.php:215, ../includes/Traits/Admin.php:1830, ../includes/Traits/Admin.php:1965, ../includes/Traits/Helper.php:615
 msgid "Activate"
 msgstr ""
 
@@ -10694,23 +10694,23 @@ msgstr ""
 msgid "No, I'll Pay Full Price Later"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1822, ../includes/Traits/Admin.php:1957
+#: ../includes/Traits/Admin.php:1830, ../includes/Traits/Admin.php:1965
 msgid "Install Essential Blocks"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1831, ../includes/Traits/Admin.php:2011
+#: ../includes/Traits/Admin.php:1839, ../includes/Traits/Admin.php:2019
 msgid "Using Gutenberg? Check out Essential Blocks!"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1832, ../includes/Traits/Admin.php:2012
+#: ../includes/Traits/Admin.php:1840, ../includes/Traits/Admin.php:2020
 msgid "Are you using the Gutenberg Editor for your website? Then try out Essential Blocks for Gutenberg, and explore 40+ unique blocks to make your web design experience in WordPress even more powerful. 🚀"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1833, ../includes/Traits/Admin.php:2013
+#: ../includes/Traits/Admin.php:1841, ../includes/Traits/Admin.php:2021
 msgid "For more information, <a href=\"https://essential-blocks.com/demo/\" target=\"_blank\">check out the demo here</a>."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:2132, ../includes/Traits/Admin.php:2143
+#: ../includes/Traits/Admin.php:2140, ../includes/Traits/Admin.php:2151
 msgid "You are not allowed to do this action"
 msgstr ""
 
