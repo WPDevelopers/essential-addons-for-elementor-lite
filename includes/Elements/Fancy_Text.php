@@ -62,7 +62,7 @@ class Fancy_Text extends Widget_Base {
     }
 
 	public function has_widget_inner_wrapper(): bool {
-        return ! Helper::eael_e_optimized_markup();
+        return ! HelperClass::eael_e_optimized_markup();
     }
 
     public function get_custom_help_url() {
