@@ -318,7 +318,7 @@ class Woo_Add_To_Cart extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'eael_add_to_cart_qt_height',
 			[
 				'label'      => esc_html__( 'Height', 'essential-addons-for-elementor-lite' ),
@@ -347,7 +347,7 @@ class Woo_Add_To_Cart extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'eael_add_to_cart_qt_width',
 			[
 				'label'      => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
