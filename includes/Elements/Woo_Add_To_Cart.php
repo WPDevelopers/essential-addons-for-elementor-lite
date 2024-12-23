@@ -306,7 +306,7 @@ class Woo_Add_To_Cart extends Widget_Base {
 		$this->end_controls_section();
 		// End Button
 
-         // Start Quantity
+      // Start Quantity
 		$this->start_controls_section(
 			'eael_add_to_cart_quantity_section',
 			[
@@ -318,7 +318,65 @@ class Woo_Add_To_Cart extends Widget_Base {
 			]
 		);
 
-        $this->add_control(
+		$this->add_control(
+			'eael_add_to_cart_qt_height',
+			[
+				'label'      => esc_html__( 'Height', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
+				'range'      => [
+					'px' => [
+						'max' => 100,
+					],
+					'%' => [
+						'max' => 100,
+					],
+					'rem' => [
+						'max' => 100,
+					],
+					'em' => [
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'.woocommerce div.product .eael-single-product-add-to-cart form.cart input[type=number] .qty, 
+					.woocommerce div.product .eael-single-product-add-to-cart form.cart .quantity .qty,
+					.custom-add-to-cart-wrapper input[type=number], 
+					.custom-add-to-cart-wrapper .quantity-input' => 'height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_add_to_cart_qt_width',
+			[
+				'label'      => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
+				'range'      => [
+					'px' => [
+						'max' => 500,
+					],
+					'%' => [
+						'max' => 100,
+					],
+					'rem' => [
+						'max' => 100,
+					],
+					'em' => [
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'.woocommerce div.product .eael-single-product-add-to-cart form.cart input[type=number] .qty, 
+					.woocommerce div.product .eael-single-product-add-to-cart form.cart .quantity .qty,
+					.custom-add-to-cart-wrapper input[type=number], 
+					.custom-add-to-cart-wrapper .quantity-input' => 'width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+      $this->add_control(
 			'eael_add_to_cart_qt_spacing',
 			[
 				'label'      => esc_html__( 'Spacing', 'essential-addons-for-elementor-lite' ),
