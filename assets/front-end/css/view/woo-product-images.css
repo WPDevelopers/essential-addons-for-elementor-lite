@@ -203,6 +203,21 @@
 }
 .eael-single-product-images .product_image_slider span.onsale {
   z-index: 999;
+  min-height: 3.236em;
+  min-width: 3.236em;
+  padding: 0.202em;
+  font-size: 1em;
+  font-weight: 700;
+  position: absolute;
+  text-align: center;
+  line-height: 3.236;
+  top: -0.5em;
+  left: -0.5em;
+  margin: 0;
+  border-radius: 100%;
+  background-color: #777335;
+  color: #fff;
+  font-size: 0.857em;
 }
 .container_width_full {
   width: 100%;
