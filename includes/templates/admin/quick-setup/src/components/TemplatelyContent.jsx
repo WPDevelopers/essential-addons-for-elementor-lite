@@ -1,8 +1,12 @@
+import React, { useState } from "react";
 import { __ } from "@wordpress/i18n";
 
 function TemplatelyContent({ activeTab, handleTabChange, handleIntegrationSwitch }) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let templately_content = eaelQuickSetup?.templately_content;
+  let initialTemplatelyPlugin = templately_content?.plugin;
+
+  const [templatelyPlugin, setTemplatelyPlugin] = useState(initialTemplatelyPlugin);
 
   return (
     <>
@@ -111,7 +115,7 @@ function TemplatelyContent({ activeTab, handleTabChange, handleIntegrationSwitch
           data-action="install"
           data-slug="templately"
           onClick={async (event) => {
-              await handleIntegrationSwitch(event, '', 1);
+              await handleIntegrationSwitch(event, templatelyPlugin, 1, setTemplatelyPlugin);
             }
           }
 

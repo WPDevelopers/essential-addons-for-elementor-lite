@@ -399,7 +399,7 @@ trait Elements {
 			return;
 		}
 
-		if ( ! ( is_singular() || is_archive() || is_home() || is_front_page() ) ) {
+		if ( ! ( is_singular() || is_archive() || is_home() || is_front_page() || is_search() ) ) {
 			return;
 		}
 

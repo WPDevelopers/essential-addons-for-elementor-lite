@@ -35,6 +35,10 @@ class Content_Ticker extends Widget_Base
         return 'eaicon-content-ticker';
     }
 
+	public function get_style_depends(): array {
+		return [ 'e-swiper' ];
+	}
+
     public function get_categories()
     {
         return ['essential-addons-elementor'];

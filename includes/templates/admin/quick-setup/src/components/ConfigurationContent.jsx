@@ -1,6 +1,6 @@
 import { __ } from "@wordpress/i18n";
 
-function ConfigurationContent({activeTab, handleTabChange}) {
+function ConfigurationContent({activeTab, handleTabChange, isTrackingAllowed}) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let configuration_content = eaelQuickSetup?.configuration_content;
   let ea_logo_src = configuration_content?.ea_logo_src;
@@ -100,8 +100,24 @@ function ConfigurationContent({activeTab, handleTabChange}) {
       </div>
       <div
         id="eael-dashboard--wrapper"
-        className="eael-section-wrapper flex flex-end"
+        className="eael-section-wrapper flex flex-end gap-4"
       >
+
+        {
+          ! isTrackingAllowed && 
+          (
+          <button
+            className="previous-btn flex gap-2 items-center eael-setup-next-btn"
+            type="button"
+            data-next="getting-started"
+            onClick={handleTabChange}
+          >
+            <i className="ea-dash-icon ea-left-arrow-long"></i>
+            {__("Previous", "essential-addons-for-elementor-lite")}
+          </button>
+          )
+        }
+
         <button
           className="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn"
           type="button"
