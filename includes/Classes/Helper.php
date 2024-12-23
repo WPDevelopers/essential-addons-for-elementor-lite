@@ -1657,4 +1657,8 @@ class Helper
 			}
 		}
 	}
+
+    public static function eael_e_optimized_markup(){
+       return Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
+    }
 }
