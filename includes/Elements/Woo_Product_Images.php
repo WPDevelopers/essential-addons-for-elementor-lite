@@ -828,7 +828,8 @@ class Woo_Product_Images extends Widget_Base {
 		}
 		
 		global $product;
-		$product  = Helper::get_product();
+		$eael_product_id = apply_filters( 'eael_product_image_product_id', false, $this );
+		$product  = Helper::get_product( $eael_product_id );
 		$settings = $this->get_settings_for_display();
 
 		$this->add_render_attribute( 'eael_thumb_position', [
