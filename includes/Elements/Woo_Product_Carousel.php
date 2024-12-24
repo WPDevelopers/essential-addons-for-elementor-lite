@@ -99,6 +99,10 @@ class Woo_Product_Carousel extends Widget_Base {
             'essential addons',
         ];
     }
+
+    public function has_widget_inner_wrapper(): bool {
+        return ! HelperClass::eael_e_optimized_markup();
+    }
     
     public function get_custom_help_url() {
         return 'https://essential-addons.com/elementor/docs/woo-product-carousel/';

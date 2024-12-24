@@ -2,6 +2,8 @@
 
 namespace Essential_Addons_Elementor\Elements;
 
+use Essential_Addons_Elementor\Classes\Helper;
+
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
     exit;
@@ -46,6 +48,10 @@ class TypeForm extends Widget_Base {
             'ea',
             'essential addons'
         ];
+    }
+
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
     }
 
     public function get_custom_help_url () {
