@@ -1751,7 +1751,7 @@ trait Admin {
 					</svg>
 				    <?php esc_html_e( 'GET PRO Lifetime Access', 'essential-addons-for-elementor-lite' ); ?>
 				</a>
-				<a href="#" class="eael-holiday-notice-dismiss dismiss-btn"><?php _e( "No, I'll Pay Full Price Later", 'essential-addons-for-elementor-lite' ); ?></a>
+				<a href="#" class="eael-holiday-notice-dismiss dismiss-btn"><?php esc_html_e( "No, I'll Pay Full Price Later", 'essential-addons-for-elementor-lite' ); ?></a>
 			</div>
 		</div>
 		<script>
