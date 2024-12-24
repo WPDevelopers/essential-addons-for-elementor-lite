@@ -51,6 +51,10 @@ class Countdown extends Widget_Base {
         ];
     }
 
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
+    }
+
     protected function is_dynamic_content():bool {
         if( Plugin::$instance->editor->is_edit_mode() ) {
             return false;
