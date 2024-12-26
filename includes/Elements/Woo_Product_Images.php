@@ -831,9 +831,12 @@ class Woo_Product_Images extends Widget_Base {
 		$eael_product_id = apply_filters( 'eael_product_image_product_id', false, $this );
 		$product  = Helper::get_product( $eael_product_id );
 		$settings = $this->get_settings_for_display();
+		$widget_id = $this->get_id();
 
 		$this->add_render_attribute( 'eael_thumb_position', [
-			'class' => ['eael-single-product-images', 'eael-pi-thumb-'.$settings['eael_pi_thumb_position'] ]
+			'class' => ['eael-single-product-images', 'eael-pi-thumb-'.$settings['eael_pi_thumb_position'] ],
+			'id' => 'slider-container-' . $widget_id, // Unique ID
+			'data-id' => $widget_id
 			] );
       ?>
       <div <?php $this->print_render_attribute_string( 'eael_thumb_position' ); ?>>
