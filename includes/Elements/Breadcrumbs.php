@@ -231,6 +231,7 @@ class Breadcrumbs extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
+				'default'   => '#f8f8fa',
 				'selectors' => [
 					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__content' => 'background-color: {{VALUE}}',
 				]
@@ -248,7 +249,7 @@ class Breadcrumbs extends Widget_Base {
 		$this->add_control(
 			'eael_breadcrumb_border_radious',
 			[
-				'label'      => esc_html__( 'Border Radious', 'essential-addons-for-elementor-lite' ),
+				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'selectors'  => [
