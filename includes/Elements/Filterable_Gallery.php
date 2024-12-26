@@ -84,6 +84,10 @@ class Filterable_Gallery extends Widget_Base
     protected function is_dynamic_content():bool {
         return false;
     }
+
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
+    }
     
     public function get_custom_help_url()
     {
