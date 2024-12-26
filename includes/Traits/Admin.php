@@ -810,6 +810,13 @@ trait Admin {
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'advanced-search' ) )
 						    ],
+							'breadcrumbs'      => [
+								'key'         => 'breadcrumbs',
+								'title'       => __( 'Breadcrumbs', 'essential-addons-for-elementor-lite' ),
+								'demo_link'   => 'https://essential-addons.com/eael-breadcrumbs/',
+								'doc_link'    => 'https://essential-addons.com/docs/eael-breadcrumbs/',
+								'is_activate' => boolval( $this->get_settings( 'breadcrumbs' ) )
+							],
 					    ]
 				    ],
 				    'dynamic-content-elements' => [
@@ -1317,6 +1324,34 @@ trait Admin {
 							    'demo_link'   => 'https://essential-addons.com/woo-product-list/',
 							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-list/',
 							    'is_activate' => boolval( $this->get_settings( 'woo-product-list' ) )
+						    ],
+						    'woo-product-price'      => [
+							    'key'         => 'woo-product-price',
+							    'title'       => __( 'Woo Product Price', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/woo-product-price/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-price/',
+							    'is_activate' => boolval( $this->get_settings( 'woo-product-price' ) )
+						    ],
+						    'woo-product-rating'      => [
+							    'key'         => 'woo-product-rating',
+							    'title'       => __( 'Woo Product Rating', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/woo-product-rating/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-rating/',
+							    'is_activate' => boolval( $this->get_settings( 'woo-product-rating' ) )
+						    ],
+						    'woo-product-images'      => [
+							    'key'         => 'woo-product-images',
+							    'title'       => __( 'Woo Product Images', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/woo-product-images/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-images/',
+							    'is_activate' => boolval( $this->get_settings( 'woo-product-images' ) )
+						    ],
+						    'woo-add-to-cart'      => [
+							    'key'         => 'woo-add-to-cart',
+							    'title'       => __( 'Woo Add To Cart', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/woo-add-to-cart/',
+							    'doc_link'    => 'https://essential-addons.com/docs/woo-add-to-cart/',
+							    'is_activate' => boolval( $this->get_settings( 'woo-add-to-cart' ) )
 						    ],
 						    'woo-collections'       => [
 							    'key'         => 'woo-collections',
