@@ -37,6 +37,14 @@ class WpForms extends Widget_Base {
         return 'eaicon-wpforms';
     }
 
+    public function get_script_depends(): array {
+        if ( ! class_exists( '\WPForms\WPForms' ) ) {
+            return [];
+        }
+        
+		return [ 'wpforms-elementor' ];
+	}
+
     public function get_keywords()
     {
         return [
