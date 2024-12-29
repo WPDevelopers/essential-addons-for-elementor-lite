@@ -1116,7 +1116,7 @@ trait Admin {
 							    'title'       => __( 'Multicolumn Pricing Table', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/multicolumn-pricing-table/',
 							    'doc_link'    => 'https://essential-addons.com/docs/multicolumn-pricing-table/',
-							    'promotion'   => 'popular',
+							    'promotion'   => 'new',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'multicolumn-pricing-table' ) )
 						    ],
