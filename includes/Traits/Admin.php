@@ -813,8 +813,8 @@ trait Admin {
 							'breadcrumbs'      => [
 								'key'         => 'breadcrumbs',
 								'title'       => __( 'Breadcrumbs', 'essential-addons-for-elementor-lite' ),
-								'demo_link'   => 'https://essential-addons.com/eael-breadcrumbs/',
-								'doc_link'    => 'https://essential-addons.com/docs/eael-breadcrumbs/',
+								'demo_link'   => 'https://essential-addons.com/breadcrumbs/',
+								'doc_link'    => 'https://essential-addons.com/docs/ea-breadcrumbs/',
 								'promotion'   => 'new',
 								'is_activate' => boolval( $this->get_settings( 'breadcrumbs' ) )
 							],
@@ -1330,7 +1330,7 @@ trait Admin {
 							    'key'         => 'woo-product-price',
 							    'title'       => __( 'Woo Product Price', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/woo-product-price/',
-							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-price/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-price',
 								 'promotion'   => 'new',
 							    'is_activate' => boolval( $this->get_settings( 'woo-product-price' ) )
 						    ],
@@ -1338,7 +1338,7 @@ trait Admin {
 							    'key'         => 'woo-product-rating',
 							    'title'       => __( 'Woo Product Rating', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/woo-product-rating/',
-							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-rating/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-rating',
 								 'promotion'   => 'new',
 							    'is_activate' => boolval( $this->get_settings( 'woo-product-rating' ) )
 						    ],
@@ -1354,7 +1354,7 @@ trait Admin {
 							    'key'         => 'woo-add-to-cart',
 							    'title'       => __( 'Woo Add To Cart', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/woo-add-to-cart/',
-							    'doc_link'    => 'https://essential-addons.com/docs/woo-add-to-cart/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-add-to-cart/',
 								 'promotion'   => 'new',
 							    'is_activate' => boolval( $this->get_settings( 'woo-add-to-cart' ) )
 						    ],
