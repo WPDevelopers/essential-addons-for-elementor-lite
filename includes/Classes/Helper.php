@@ -1636,6 +1636,22 @@ class Helper
 		return $html;
 	}
 
+    //WooCommerce Helper Function
+    public static function get_product_variation( $product_id = false ) {
+		return wc_get_product( get_the_ID() );
+	}
+    
+    public static function get_product( $product_id = false ) {
+		if ( 'product_variation' === get_post_type() ) {
+			return self::get_product_variation( $product_id );
+		}
+		$product = wc_get_product( $product_id );
+		if ( ! $product ) {
+			$product = wc_get_product();
+		}
+		return $product;
+	}
+
 	public static function eael_onpage_edit_template_markup( $page_id, $template_id ) {
 		if ( Plugin::$instance->editor->is_edit_mode() ) {
 			$active_doc = $_GET['active-document'] ?? 0;

@@ -733,6 +733,31 @@ class WPDeveloper_Setup_Wizard {
 						'preferences' => 'advance',
 					],
 					[
+						'key'         => 'woo-product-image',
+						'title'       => __( 'Woo Product Images', 'essential-addons-for-elementor-lite' ),
+						'preferences' => 'advance',
+					],
+					[
+						'key'         => 'woo-add-to-cart',
+						'title'       => __( 'Woo Add To Cart', 'essential-addons-for-elementor-lite' ),
+						'preferences' => 'advance',
+					],
+					[
+						'key'         => 'woo-product-price',
+						'title'       => __( 'Woo Product Price', 'essential-addons-for-elementor-lite' ),
+						'preferences' => 'advance',
+					],
+					[
+						'key'         => 'woo-product-rating',
+						'title'       => __( 'Woo Product Rating', 'essential-addons-for-elementor-lite' ),
+						'preferences' => 'advance',
+					],
+					[
+						'key'         => 'breadcrumbs',
+						'title'       => __( 'Breadcrumbs', 'essential-addons-for-elementor-lite' ),
+						'preferences' => 'advance',
+					],
+					[
 						'key'   => 'woo-product-carousel',
 						'title' => __( 'Woo Product Carousel', 'essential-addons-for-elementor-lite' ),
 					],
