@@ -236,7 +236,11 @@
   }
   .eael-single-product-images .product_image_slider__container .swiper-button-prev,
   .eael-single-product-images .product_image_slider__container .swiper-button-next {
-    height: 25px;
-    width: 25px;
+    height: 20px;
+    width: 20px;
+  }
+  .eael-single-product-images .product_image_slider__container .swiper-button-prev::after,
+  .eael-single-product-images .product_image_slider__container .swiper-button-next::after {
+    font-size: 12px !important;
   }
 }
