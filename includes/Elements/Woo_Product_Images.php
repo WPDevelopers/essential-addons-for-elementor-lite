@@ -859,14 +859,8 @@ class Woo_Product_Images extends Widget_Base {
       <div <?php $this->print_render_attribute_string( 'eael_thumb_position' ); ?>>
             <?php 
 				if( \Elementor\Plugin::$instance->editor->is_edit_mode() || get_post_type( get_the_ID() ) === 'templately_library' ) { 
-					$img_links = [
-						EAEL_PLUGIN_URL . 'assets/front-end/img/eael-default-placeholder.png',
-						EAEL_PLUGIN_URL . 'assets/front-end/img/eael-default-placeholder.png',
-						EAEL_PLUGIN_URL . 'assets/front-end/img/eael-default-placeholder.png',
-						EAEL_PLUGIN_URL . 'assets/front-end/img/eael-default-placeholder.png',
-						EAEL_PLUGIN_URL . 'assets/front-end/img/eael-default-placeholder.png',
-						EAEL_PLUGIN_URL . 'assets/front-end/img/eael-default-placeholder.png',
-					];
+					$default_image = EAEL_PLUGIN_URL . 'assets/front-end/img/eael-default-placeholder.png';
+					$img_links = array_fill( 0, 6, $default_image );
 
 					$this->eael_product_gallery_html( $settings, $img_links, $product_featured_url = [] );
 
