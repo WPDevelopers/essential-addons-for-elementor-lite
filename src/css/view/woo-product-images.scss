@@ -202,3 +202,27 @@
 .container_width {
    width: 80%;
 }
+
+@media all and (max-width: 767px) {
+   .eael-single-product-images {
+      .product_image_slider {
+         &__thumbs {
+            .swiper-button-prev,
+            .swiper-button-next {
+               height: 20px;
+               width: 20px;
+            }
+            .swiper-slide {
+               width: 60px;
+            }
+         }
+         &__container {
+            .swiper-button-prev,
+            .swiper-button-next {
+               height: 25px;
+               width: 25px;
+            }
+         }
+      }
+   }
+}

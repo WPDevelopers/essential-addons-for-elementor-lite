@@ -763,7 +763,23 @@ class Woo_Product_Images extends Widget_Base {
 		if ( in_array( $thumb_settings['thumb_position'], $thumb_position ) && 'yes' == $thumb_settings['thumbnail'] ) {
 			$slidesPerView = count( $img_links ) > $thumb_settings['thumb_items'] ? $thumb_settings['thumb_items'] : count( $img_links );
 			$sliderThumbs['breakpoints'] = [
-				480 => [
+				320 => [
+					'direction'=> "vertical",
+					'slidesPerView'=>  $slidesPerView,
+				],
+				768 => [
+					'direction'=> "vertical",
+					'slidesPerView'=>  $slidesPerView,
+				],
+				1024 => [
+					'direction'=> "vertical",
+					'slidesPerView'=> $slidesPerView,
+				],
+				1440 => [
+					'direction'=> "vertical",
+					'slidesPerView'=> $slidesPerView,
+				],
+				1920 => [
 					'direction'=> "vertical",
 					'slidesPerView'=> $slidesPerView,
 				],
@@ -776,6 +792,7 @@ class Woo_Product_Images extends Widget_Base {
 				'disableOnInteraction' => false,
 			];
 		}
+
 		$sliderThumbsObj = json_encode( $sliderThumbs );
 		$this->add_render_attribute( 'eael-pi-thumb', [
 			'data-pi_thumb' => $sliderThumbsObj,
