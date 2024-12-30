@@ -810,6 +810,14 @@ trait Admin {
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'advanced-search' ) )
 						    ],
+							'breadcrumbs'      => [
+								'key'         => 'breadcrumbs',
+								'title'       => __( 'Breadcrumbs', 'essential-addons-for-elementor-lite' ),
+								'demo_link'   => 'https://essential-addons.com/breadcrumbs/',
+								'doc_link'    => 'https://essential-addons.com/docs/ea-breadcrumbs/',
+								'promotion'   => 'new',
+								'is_activate' => boolval( $this->get_settings( 'breadcrumbs' ) )
+							],
 					    ]
 				    ],
 				    'dynamic-content-elements' => [
@@ -1326,6 +1334,38 @@ trait Admin {
 							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-list/',
 							    'is_activate' => boolval( $this->get_settings( 'woo-product-list' ) )
 						    ],
+						    'woo-product-price'      => [
+							    'key'         => 'woo-product-price',
+							    'title'       => __( 'Woo Product Price', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/woo-product-price/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-price',
+								 'promotion'   => 'new',
+							    'is_activate' => boolval( $this->get_settings( 'woo-product-price' ) )
+						    ],
+						    'woo-product-rating'      => [
+							    'key'         => 'woo-product-rating',
+							    'title'       => __( 'Woo Product Rating', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/woo-product-rating/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-rating',
+								 'promotion'   => 'new',
+							    'is_activate' => boolval( $this->get_settings( 'woo-product-rating' ) )
+						    ],
+						    'woo-product-images'      => [
+							    'key'         => 'woo-product-images',
+							    'title'       => __( 'Woo Product Images', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/woo-product-images/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-images/',
+								 'promotion'   => 'new',
+							    'is_activate' => boolval( $this->get_settings( 'woo-product-images' ) )
+						    ],
+						    'woo-add-to-cart'      => [
+							    'key'         => 'woo-add-to-cart',
+							    'title'       => __( 'Woo Add To Cart', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/woo-add-to-cart/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-add-to-cart/',
+								 'promotion'   => 'new',
+							    'is_activate' => boolval( $this->get_settings( 'woo-add-to-cart' ) )
+						    ],
 						    'woo-collections'       => [
 							    'key'         => 'woo-collections',
 							    'title'       => __( 'Woo Product Collections', 'essential-addons-for-elementor-lite' ),
@@ -1581,7 +1621,7 @@ trait Admin {
 			    ],
 			    'admin_screen_promo'      => [
 				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
-				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA 6.0 with revamped '<b>Dashboard</b>', '<a target='_blank' href='%s'>Interactive Animations</a>', '<a target='_blank' href='%s'>Hover Interactions</a>', '<a target='_blank' href='%s'>Dynamic Tags</a>' & more! Check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/interactive-animations/' ), esc_url( 'https://essential-addons.com/hover-interaction/' ), esc_url( 'https://essential-addons.com/dynamic-tags/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
+				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA 6.1 with 4 New \"<b>WooCommerce</b>\" widgets along with \"<b>Breadcrumbs</b>\" widget! Check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
 			    ],
 			    'pro_modal'               => [
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),

@@ -4,7 +4,7 @@ Tags: elementor, elements, elementor addon, elementor widget, woocommerce elemen
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 6.0.14
+Stable tag: 6.1.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -52,7 +52,7 @@ We have extra-ordinary support team ready to help you. Ask your questions in the
 ### [Elementor](https://wordpress.org/plugins/elementor/) Website builder is required for this plugin.
 
 
-### 55+ FREE ELEMENTOR ADDONS AND COUNTING
+### 60+ FREE ELEMENTOR ADDONS AND COUNTING
 
 We have designed more than 50 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
 
@@ -108,6 +108,11 @@ We have designed more than 50 of the most useful widgets to enhance your Element
 49. [Business Reviews](https://essential-addons.com/business-reviews/)- Display Google Customer Review to increase your online reputation
 50. [SVG Draw](https://essential-addons.com/svg-draw/)- Display SVG elements in a visually striking and interactive way on your website
 51. [Woo Product List](https://essential-addons.com/woo-product-list/)- Showcase your store’s products with a stunning listicle format
+52. [Woo Product Price](https://essential-addons.com/woo-product-price/)- Style your product price with custom colors and typography
+53. [Woo Product Rating](https://essential-addons.com/woo-product-rating/)- Show ratings to help customers make informed choices
+54. [Woo Product Images](https://essential-addons.com/woo-product-images/)- Display WooCommerce product images with stunning effects
+55. [Woo Add to Cart](https://essential-addons.com/woo-add-to-cart/)- Make shopping easier with an ‘Add to Cart’ button
+56. [Breadcrumbs](https://essential-addons.com/breadcrumbs/)- Improve navigation with breadcrumbs for easy exploration
 
 Extensions (Free):
 
@@ -183,6 +188,14 @@ With Essential Addons, we bring you seamless compatibility with WooCommerce, enh
 [EA Woo Product Carousel](https://essential-addons.com/docs/woo-product-carousel/): Display your store’s products interactively with this Elementor WooCommerce widget and implement various styling options and ready-made layouts to create an interactive product showcase on your WordPress website.
 
 [EA Woo Product Gallery](https://essential-addons.com/docs/woo-product-gallery/): Captivate visitors and drive immediate purchases on your WooCommerce store using the Product Gallery element from Essential Addons. Explore incredible ready layouts, abundant customization choices, and more.
+
+[EA Woo Product Price](https://essential-addons.com/docs/ea-woo-product-price/): Highlight the price of your WooCommerce product Price and style it using custom colors and typography.
+
+[EA Woo Product Rating](https://essential-addons.com/docs/ea-woo-product-rating/): Display WooCommerce product rating to help customers make informed purchasing decisions and increase credibility.
+
+[EA Woo Product Images](https://essential-addons.com/docs/ea-woo-product-images/): Showcase eye-catching WooCommerce product images with advanced customization and effects.
+
+[EA Woo Add to Cart](https://essential-addons.com/docs/ea-woo-add-to-cart/): Simplify the shopping experience by displaying an easy-to-access ‘Add to Cart’ button for all your WooCommerce products.
 
 [EA Woo Product Slider (PRO)](https://essential-addons.com/docs/woo-product-slider/): Present your WooCommerce products in a stunning slider format with this advanced Elementor addon. You can also easily customize the entire slider appearance with fantastic pre-designed layouts, effects, and other advanced options.
 
@@ -298,6 +311,25 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.1.0 - 29/12/2024 =
+
+- Added: EA Woo Product Price
+- Added: EA Woo Product Rating
+- Added: EA Woo Product Images
+- Added: EA Woo Add to Cart
+- Added: EA Breadcrumbs
+- Fixed: Uncaught Error | Class XD_Copy not found
+- Fixed: EA WPForms | Calendar selection not working in Elementor Popup
+- Fixed: EA Woo Product Gallery | "Quick View" button custom URL issue
+- Few minor bug fixes & improvements
+
+
+= 6.0.15 - 24/12/2024 =
+
+- Improved: Security Enhancement
+- Improved: Added Optimized Markup Support
+- Few minor bug fixes & improvements
 
 = 6.0.14 - 19/12/2024 =
 

@@ -110,7 +110,9 @@ trait Elements {
 				continue;
 			}
 
-			new $extension['class'];
+			if ( class_exists( $extension['class'] ) ) {
+				new $extension['class']; // Safely instantiate
+			}
 		}
 	}
 

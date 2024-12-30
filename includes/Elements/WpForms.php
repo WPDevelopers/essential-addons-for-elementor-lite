@@ -37,6 +37,14 @@ class WpForms extends Widget_Base {
         return 'eaicon-wpforms';
     }
 
+    public function get_script_depends(): array {
+        if ( ! class_exists( '\WPForms\WPForms' ) ) {
+            return [];
+        }
+        
+		return [ 'wpforms-elementor' ];
+	}
+
     public function get_keywords()
     {
         return [
@@ -52,6 +60,10 @@ class WpForms extends Widget_Base {
             'ea',
             'essential addons'
         ];
+    }
+
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
     }
 
     public function get_custom_help_url()
