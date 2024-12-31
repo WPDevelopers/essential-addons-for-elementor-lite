@@ -1696,6 +1696,26 @@ class Login_Register extends Widget_Base {
 			'label' => __( 'Validation Messages', 'essential-addons-for-elementor-lite' ),
 		] );
 
+		$this->add_control(
+			'validation_message_position',
+			[
+				'label'   => esc_html__( 'Render Postion', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'top' => [
+						'title' => esc_html__( 'Top', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-v-align-top',
+					],
+					'bottom' => [
+						'title' => esc_html__( 'Bottom', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-v-align-bottom',
+					],
+				],
+				'default' => 'bottom',
+				'toggle'  => false,
+			]
+		);
+
 		$this->add_control( 'err_message_heading', [
 			'label' => esc_html__( 'Error Messages', 'essential-addons-for-elementor-lite' ),
 			'type'  => Controls_Manager::HEADING,
