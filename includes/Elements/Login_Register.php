@@ -5736,7 +5736,12 @@ class Login_Register extends Widget_Base {
                             <form class="eael-login-form eael-lr-form"
                                   id="eael-login-form"
                                   method="post">
-								<?php do_action( 'eael/login-register/after-login-form-open', $this ); ?>
+								<?php
+								if ( 'top' === $this->ds['position_for_login_form'] ) {
+									do_action( 'eael/login-register/render_social_login_for_login_form', $this );
+								}
+								do_action( 'eael/login-register/after-login-form-open', $this );
+								?>
                                 <div class="eael-lr-form-group eael-user-login">
 									<?php if ( $display_label && $u_label ) {
 										echo '<label for="eael-user-login" class="eael-field-label">' . wp_kses( $u_label, HelperCLass::eael_allowed_tags() ) . '</label>';
@@ -5833,7 +5838,12 @@ class Login_Register extends Widget_Base {
 									<?php } ?>
 
                                 </div>
-								<?php do_action( 'eael/login-register/after-login-footer', $this );
+								<?php
+								do_action( 'eael/login-register/after-login-footer', $this );
+								$position = $this->ds['position_for_login_form'];
+								if ( !$position || 'bottom' === $this->ds['position_for_login_form'] ) {
+									do_action( 'eael/login-register/render_social_login_for_login_form', $this );
+								}
 								?>
                                 <div class="eael-form-validation-container">
 									<?php $this->print_login_validation_errors(); ?>
