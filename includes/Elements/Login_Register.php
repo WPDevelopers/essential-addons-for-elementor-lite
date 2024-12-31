@@ -5997,9 +5997,6 @@ class Login_Register extends Widget_Base {
                     <div class="lr-form-wrapper">
 						<?php
 						$this->print_form_header( 'register' );
-						if ( 'top' === $this->ds['position_for_register_form'] ) {
-							do_action( 'eael/login-register/render_social_login_for_register_form', $this );
-						}
 						do_action( 'eael/login-register/before-register-form', $this );
 
 						$has_file_input = 0;
@@ -6019,7 +6016,12 @@ class Login_Register extends Widget_Base {
 								enctype="multipart/form-data"
 							  <?php endif; ?>
 							  >
-							<?php do_action( 'eael/login-register/after-register-form-open', $this ); ?>
+							<?php
+							do_action( 'eael/login-register/after-register-form-open', $this );
+							if ( 'top' === $this->ds['position_for_register_form'] ) {
+								do_action( 'eael/login-register/render_social_login_for_register_form', $this );
+							}
+							?>
 							<?php // Print all dynamic fields
 							foreach ( $this->ds['register_fields'] as $f_index => $field ) :
 								$field_type = $field['field_type'];
