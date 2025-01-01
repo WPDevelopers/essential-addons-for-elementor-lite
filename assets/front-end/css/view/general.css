@@ -184,12 +184,14 @@
 /* Onpage Edit Template */
 
 .elementor-widget-eael-adv-tabs .eael-tab-content-item,
-.elementor-widget-eael-adv-accordion .eael-accordion-content {
+.elementor-widget-eael-adv-accordion .eael-accordion-content,
+.elementor-widget-eael-data-table .td-content {
   position: relative;
 }
 
 .elementor-widget-eael-adv-tabs .eael-tab-content-item:hover .eael-onpage-edit-template-wrapper,
-.elementor-widget-eael-adv-accordion .eael-accordion-content:hover .eael-onpage-edit-template-wrapper {
+.elementor-widget-eael-adv-accordion .eael-accordion-content:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-data-table .td-content:hover .eael-onpage-edit-template-wrapper {
   display: block;
 }
 
