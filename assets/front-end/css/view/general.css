@@ -188,7 +188,8 @@
 .elementor-widget-eael-data-table .td-content,
 .elementor-widget-eael-info-box .eael-infobox-template-wrapper,
 .elementor-widget-eael-countdown .eael-countdown-expiry-template,
-.elementor-widget-eael-countdown .eael-countdown-container {
+.elementor-widget-eael-countdown .eael-countdown-container,
+.elementor-widget-eael-cta-box .eael-cta-template-wrapper {
   position: relative;
 }
 
@@ -197,7 +198,8 @@
 .elementor-widget-eael-data-table .td-content:hover .eael-onpage-edit-template-wrapper,
 .elementor-widget-eael-info-box .eael-infobox-template-wrapper:hover .eael-onpage-edit-template-wrapper,
 .elementor-widget-eael-countdown .eael-countdown-expiry-template:hover .eael-onpage-edit-template-wrapper,
-.elementor-widget-eael-countdown .eael-countdown-container:hover .eael-onpage-edit-template-wrapper {
+.elementor-widget-eael-countdown .eael-countdown-container:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-cta-box .eael-cta-template-wrapper:hover .eael-onpage-edit-template-wrapper {
   display: block;
 }
 
