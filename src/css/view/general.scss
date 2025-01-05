@@ -198,7 +198,9 @@
 .elementor-widget-eael-cta-box .eael-cta-template-wrapper,
 .elementor-widget-eael-interactive-card .eael-interactive-card-template-wrapper,
 .elementor-widget-eael-interactive-card .front-text-body,
-.elementor-widget-eael-interactive-card .text {
+.elementor-widget-eael-interactive-card .text,
+.elementor-widget-eael-toggle .eael-toggle-primary-wrap,
+.elementor-widget-eael-toggle .eael-toggle-secondary-wrap {
 	position: relative;
 
 	&:hover {
