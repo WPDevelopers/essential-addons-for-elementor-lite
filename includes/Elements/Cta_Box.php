@@ -1568,6 +1568,10 @@ class Cta_Box extends Widget_Base
         } else if ( 'template' == $settings['eael_cta_title_content_type'] ) {
 	        if ( ! empty( $settings['eael_primary_templates'] ) ) {
 		        $eael_template_id = $settings['eael_primary_templates'];
+		        // WPML Compatibility
+		        if ( ! is_array( $eael_template_id ) ) {
+			        $eael_template_id = apply_filters( 'wpml_object_id', $eael_template_id, 'wp_template', true );
+		        }
 
 		        $contentMarkup .= Plugin::$instance->frontend->get_builder_content( $eael_template_id, true );
 	        }
