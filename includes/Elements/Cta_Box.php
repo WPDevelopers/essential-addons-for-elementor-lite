@@ -1565,12 +1565,12 @@ class Cta_Box extends Widget_Base
         $contentMarkup = '';
         if ('content' == $settings['eael_cta_title_content_type']) {
             $contentMarkup .= wp_kses( $settings['eael_cta_content'], Helper::eael_allowed_tags() );
-        }else if ('template' == $settings['eael_cta_title_content_type']){
-            if (!empty($settings['eael_primary_templates'])) {
-                $eael_template_id = $settings['eael_primary_templates'];
-                $eael_frontend = new \Elementor\Frontend;
-                $contentMarkup .= $eael_frontend->get_builder_content($eael_template_id, true);
-            }
+        } else if ( 'template' == $settings['eael_cta_title_content_type'] ) {
+	        if ( ! empty( $settings['eael_primary_templates'] ) ) {
+		        $eael_template_id = $settings['eael_primary_templates'];
+
+		        $contentMarkup .= Plugin::$instance->frontend->get_builder_content( $eael_template_id, true );
+	        }
         }
 
         // button attributes
