@@ -189,7 +189,10 @@
 .elementor-widget-eael-info-box .eael-infobox-template-wrapper,
 .elementor-widget-eael-countdown .eael-countdown-expiry-template,
 .elementor-widget-eael-countdown .eael-countdown-container,
-.elementor-widget-eael-cta-box .eael-cta-template-wrapper {
+.elementor-widget-eael-cta-box .eael-cta-template-wrapper,
+.elementor-widget-eael-interactive-card .eael-interactive-card-template-wrapper,
+.elementor-widget-eael-interactive-card .front-text-body,
+.elementor-widget-eael-interactive-card .text {
   position: relative;
 }
 
@@ -199,7 +202,10 @@
 .elementor-widget-eael-info-box .eael-infobox-template-wrapper:hover .eael-onpage-edit-template-wrapper,
 .elementor-widget-eael-countdown .eael-countdown-expiry-template:hover .eael-onpage-edit-template-wrapper,
 .elementor-widget-eael-countdown .eael-countdown-container:hover .eael-onpage-edit-template-wrapper,
-.elementor-widget-eael-cta-box .eael-cta-template-wrapper:hover .eael-onpage-edit-template-wrapper {
+.elementor-widget-eael-cta-box .eael-cta-template-wrapper:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-interactive-card .eael-interactive-card-template-wrapper:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-interactive-card .front-text-body:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-interactive-card .text:hover .eael-onpage-edit-template-wrapper {
   display: block;
 }
 
