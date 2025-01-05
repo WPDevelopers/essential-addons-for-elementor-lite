@@ -2027,6 +2027,7 @@ section.ea__modal-wrapper {
 .ea__modal-body label {
   font-size: 14px;
   line-height: 1.3em;
+  color: var(--text-color-100);
   display: block;
   margin-bottom: 6px;
 }
