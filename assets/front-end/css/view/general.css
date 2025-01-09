@@ -194,7 +194,8 @@
 .elementor-widget-eael-interactive-card .front-text-body,
 .elementor-widget-eael-interactive-card .text,
 .elementor-widget-eael-toggle .eael-toggle-primary-wrap,
-.elementor-widget-eael-toggle .eael-toggle-secondary-wrap {
+.elementor-widget-eael-toggle .eael-toggle-secondary-wrap,
+body.eael-lightbox-popup-open .eael-lightbox-template-wrapper {
   position: relative;
 }
 
@@ -209,7 +210,8 @@
 .elementor-widget-eael-interactive-card .front-text-body:hover .eael-onpage-edit-template-wrapper,
 .elementor-widget-eael-interactive-card .text:hover .eael-onpage-edit-template-wrapper,
 .elementor-widget-eael-toggle .eael-toggle-primary-wrap:hover .eael-onpage-edit-template-wrapper,
-.elementor-widget-eael-toggle .eael-toggle-secondary-wrap:hover .eael-onpage-edit-template-wrapper {
+.elementor-widget-eael-toggle .eael-toggle-secondary-wrap:hover .eael-onpage-edit-template-wrapper,
+body.eael-lightbox-popup-open .eael-lightbox-template-wrapper:hover .eael-onpage-edit-template-wrapper {
   display: block;
 }
 

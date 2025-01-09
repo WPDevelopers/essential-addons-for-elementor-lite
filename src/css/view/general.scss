@@ -200,7 +200,8 @@
 .elementor-widget-eael-interactive-card .front-text-body,
 .elementor-widget-eael-interactive-card .text,
 .elementor-widget-eael-toggle .eael-toggle-primary-wrap,
-.elementor-widget-eael-toggle .eael-toggle-secondary-wrap {
+.elementor-widget-eael-toggle .eael-toggle-secondary-wrap,
+body.eael-lightbox-popup-open .eael-lightbox-template-wrapper {
 	position: relative;
 
 	&:hover {
