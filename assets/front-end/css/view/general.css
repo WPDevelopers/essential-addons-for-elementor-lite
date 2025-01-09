@@ -197,7 +197,8 @@
 .elementor-widget-eael-toggle .eael-toggle-secondary-wrap,
 body.eael-lightbox-popup-open .eael-lightbox-template-wrapper,
 .elementor-widget-eael-protected-content .eael-protected-content-message,
-.elementor-widget-eael-protected-content .protected-content {
+.elementor-widget-eael-protected-content .protected-content,
+.eael-offcanvas-content-visible .eael-offcanvas-body {
   position: relative;
 }
 
@@ -215,7 +216,8 @@ body.eael-lightbox-popup-open .eael-lightbox-template-wrapper,
 .elementor-widget-eael-toggle .eael-toggle-secondary-wrap:hover .eael-onpage-edit-template-wrapper,
 body.eael-lightbox-popup-open .eael-lightbox-template-wrapper:hover .eael-onpage-edit-template-wrapper,
 .elementor-widget-eael-protected-content .eael-protected-content-message:hover .eael-onpage-edit-template-wrapper,
-.elementor-widget-eael-protected-content .protected-content:hover .eael-onpage-edit-template-wrapper {
+.elementor-widget-eael-protected-content .protected-content:hover .eael-onpage-edit-template-wrapper,
+.eael-offcanvas-content-visible .eael-offcanvas-body:hover .eael-onpage-edit-template-wrapper {
   display: block;
 }
 
