@@ -5,6 +5,7 @@ var eaelsvDomHeight = 0;
 var videoIsActive = "off";
 var eaelMakeItSticky = 0;
 var scrollHeight = 0;
+var players = [];
 
 jQuery(window).on("elementor/frontend/init", function () {
   if (isEditMode) {
@@ -70,6 +71,8 @@ jQuery(window).on("elementor/frontend/init", function () {
       PositionStickyPlayer(eaelsvPosition, eaelsvHeight, eaelsvWidth);
 
       var playerAbc = new Plyr( "#eaelsv-player-" + $scope.data("id") );
+
+      players.push( playerAbc );
 
       // If element is Sticky video
       if (overlay === "no") {
@@ -231,8 +234,16 @@ function PlayerPlay(a, b) {
   a.on("play", function (event) {
     eaelsvDomHeight = GetDomElementHeight(b);
     jQuery(".eael-sticky-video-player2").removeAttr("id");
-    jQuery(".eael-sticky-video-player2:not(.out)").removeClass("out");
+    jQuery(".eael-sticky-video-player2").removeClass("out");
     b.attr("id", "videobox");
+    
+    if ( players.length ) {
+      players.forEach( function( other, index ) {
+        if (a !== other) {
+          other.pause();
+        }
+      } );
+    }
 
     videoIsActive = "on";
     eaelsvPosition = b.data("position");

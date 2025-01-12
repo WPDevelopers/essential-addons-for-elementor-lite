@@ -1,6 +1,7 @@
 <?php
 
 namespace Essential_Addons_Elementor\Elements;
+use Essential_Addons_Elementor\Classes\Helper;
 
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
@@ -50,6 +51,10 @@ class Formstack extends Widget_Base {
             'ea',
             'essential addons'
         ];
+    }
+
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
     }
 
     public function get_custom_help_url () {
@@ -2112,7 +2117,7 @@ class Formstack extends Widget_Base {
 
 
         ?>
-        <div <?php echo $this->get_render_attribute_string('eael_formstack_wrapper'); ?>>
+        <div <?php $this->print_render_attribute_string('eael_formstack_wrapper'); ?>>
             <?php if ($settings['eael_formstack_custom_title_description'] == 'yes') { ?>
                 <div class="eael-formstack-heading">
                     <?php if ($settings['eael_formstack_form_title_custom'] != '') { ?>
@@ -2122,13 +2127,17 @@ class Formstack extends Widget_Base {
                     <?php } ?>
                     <?php if ($settings['eael_formstack_form_description_custom'] != '') { ?>
                         <div class="eael-contact-form-description eael-formstack-description">
-                            <?php echo $this->parse_text_editor($settings['eael_formstack_form_description_custom']); ?>
+                            <?php 
+                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                            echo $this->parse_text_editor( $settings['eael_formstack_form_description_custom'] ); ?>
                         </div>
                     <?php } ?>
                 </div>
             <?php } ?>
             <div class="fsForm">
-                <?php echo $form_data; ?>
+                <?php
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                echo $this->parse_text_editor( $form_data ); ?>
             </div>
         </div>
         <?php

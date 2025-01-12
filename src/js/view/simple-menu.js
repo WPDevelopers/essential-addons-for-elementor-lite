@@ -33,6 +33,9 @@ var SimpleMenu = function ($scope, $) {
         if ( !isStartWithHash && localize.page_permalink === thisURL ) {
             $this.addClass('eael-item-active');
         }
+        if( $this.parent().hasClass('current-menu-item') || $this.parent().hasClass('current-menu-parent') ){
+            $this.addClass('eael-item-active');
+        }
     });
     
     $(window).on('load resize scroll', function() {
@@ -261,7 +264,7 @@ var SimpleMenu = function ($scope, $) {
 
 jQuery(window).on('elementor/frontend/init', function () {
 
-    if (ea.elementStatusCheck('eaelSimpleMenu')) {
+    if (eael.elementStatusCheck('eaelSimpleMenu')) {
         return false;
     }
 

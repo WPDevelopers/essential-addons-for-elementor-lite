@@ -56,6 +56,10 @@ class FluentForm extends Widget_Base
         ];
     }
 
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
+    }
+
     public function get_custom_help_url() {
         return 'https://essential-addons.com/elementor/docs/fluent-form/';
     }
@@ -77,14 +81,13 @@ class FluentForm extends Widget_Base
 
 		$options = array();
 
-		if (defined('FLUENTFORM')) {
-			global $wpdb;
+		if ( defined('FLUENTFORM') && function_exists( 'wpFluent' ) ) {
+			$form_list = wpFluent()->table('fluentform_forms')->select(['id', 'title'])->orderBy('id', 'DESC')->get();
 
-			$result = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}fluentform_forms");
-			if ($result) {
+			if ( !empty( $form_list ) ) {
 				$options[0] = esc_html__('Select a Fluent Form', 'essential-addons-for-elementor-lite');
-				foreach ($result as $form) {
-					$options[$form->id] = $form->title;
+				foreach ($form_list as $form) {
+					$options[ $form->id ] = $form->title;
 				}
 			} else {
 				$options[0] = esc_html__('Create a Form First', 'essential-addons-for-elementor-lite');
@@ -2279,7 +2282,7 @@ class FluentForm extends Widget_Base
         $shortcode = '[fluentform id="'.$settings['form_list'].'"]';
 
         ?>
-        <div <?php echo $this->get_render_attribute_string('eael_fluentform_wrapper'); ?>>
+        <div <?php $this->print_render_attribute_string('eael_fluentform_wrapper'); ?>>
 
             <?php if ( $settings['custom_title_description'] == 'yes' ) { ?>
                 <div class="eael-fluentform-heading">
@@ -2290,7 +2293,9 @@ class FluentForm extends Widget_Base
                     <?php } ?>
                     <?php if ( $settings['form_description_custom'] != '' ) { ?>
                         <div class="eael-contact-form-description eael-fluentform-description">
-                            <?php echo $this->parse_text_editor( $settings['form_description_custom'] ); ?>
+                            <?php 
+                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                            echo $this->parse_text_editor( $settings['form_description_custom'] ); ?>
                         </div>
                     <?php } ?>
                 </div>

@@ -35,6 +35,10 @@ class Content_Ticker extends Widget_Base
         return 'eaicon-content-ticker';
     }
 
+	public function get_style_depends(): array {
+		return [ 'e-swiper' ];
+	}
+
     public function get_categories()
     {
         return ['essential-addons-elementor'];
@@ -55,6 +59,10 @@ class Content_Ticker extends Widget_Base
             'ea',
             'essential addons',
         ];
+    }
+
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
     }
 
     public function get_custom_help_url()
@@ -772,12 +780,12 @@ class Content_Ticker extends Widget_Base
         echo '<div class="eael-ticker-wrap" id="eael-ticker-wrap-' . esc_attr( $this->get_id() ) . '">';
         if (!empty($settings['eael_ticker_tag_text'])) {
             echo '<div class="ticker-badge">
-                    <span>' . Helper::eael_wp_kses($settings['eael_ticker_tag_text']) . '</span>
+                    <span>' . wp_kses( $settings['eael_ticker_tag_text'], Helper::eael_allowed_tags() ) . '</span>
                 </div>';
         }
 
-        echo '<div ' . $this->get_render_attribute_string('content-ticker-wrap') . '>
-                <div ' . $this->get_render_attribute_string('content-ticker') . '>
+        echo '<div '; $this->print_render_attribute_string('content-ticker-wrap'); echo '>
+                <div '; $this->print_render_attribute_string('content-ticker'); echo '>
                     <div class="swiper-wrapper">';
 
                         if ('dynamic' === $settings['eael_ticker_type']) {
@@ -792,20 +800,22 @@ class Content_Ticker extends Widget_Base
                                     wp_reset_postdata();
                                 }
                             } else {
-                                echo '<div class="swiper-slide"><a href="#" class="ticker-content">' . __('No content found!', 'essential-addons-for-elementor-lite') . '</a></div>';
+                                echo '<div class="swiper-slide"><a href="#" class="ticker-content">' . esc_html__('No content found!', 'essential-addons-for-elementor-lite') . '</a></div>';
                             }
                         } elseif ('custom' === $settings['eael_ticker_type'] && apply_filters('eael/is_plugin_active', 'essential-addons-elementor/essential_adons_elementor.php')) {
                             if (\file_exists($this->get_template($settings['eael_dynamic_template_Layout']))) {
                                 foreach ($settings['eael_ticker_custom_contents'] as $content) {
-                                    echo Helper::include_with_variable($this->get_template($settings['eael_dynamic_template_Layout']), ['content' => Helper::eael_wp_kses($content['eael_ticker_custom_content']), 'link' => $content['eael_ticker_custom_content_link']]);
+                                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                    echo Helper::include_with_variable( $this->get_template( $settings['eael_dynamic_template_Layout']), ['content' => Helper::eael_wp_kses($content['eael_ticker_custom_content']), 'link' => $content['eael_ticker_custom_content_link']]);
                                 }
                             }
                         }
                         
                     echo '</div>
-				</div>
-				' . $this->render_arrows() . '
-			</div>
+				</div> ';
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                echo $this->render_arrows(); 
+            echo '</div>
 		</div>';
     }
 

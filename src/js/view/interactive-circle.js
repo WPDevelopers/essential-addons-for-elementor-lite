@@ -1,9 +1,9 @@
-ea.hooks.addAction( "init", "ea", () => {
+eael.hooks.addAction( "init", "ea", () => {
 	const interactiveCircle = function ( $scope, $ ) {
 
 		let $circleWrap = $scope.find(".eael-circle-wrapper"),
 			$eventType = "mouseenter",
-			$animation = $circleWrap.data('animation'),
+			$animation = $circleWrap.data('appearance'),
 			$autoplay = $circleWrap.data('autoplay'),
 			$autoplayInterval = parseInt($circleWrap.data('autoplay-interval')),
 			$autoplayPause = 0,
@@ -17,7 +17,7 @@ ea.hooks.addAction( "init", "ea", () => {
 		if ( $animation !== 'eael-interactive-circle-animation-0' ) {
 			let $circleContent = $scope.find(".eael-circle-content"),
 				$activeItem = $scope.find('.eael-circle-btn.active');
-			$activeItem.siblings('.eael-circle-btn-content').removeClass('active');
+			// $activeItem.siblings('.eael-circle-btn-content').removeClass('active');
 
 			$('body').scroll(function () {
 				if($circleWrap.isInViewport()){
@@ -28,9 +28,12 @@ ea.hooks.addAction( "init", "ea", () => {
 			$($circleContent).waypoint(
 				function() {
 					$circleWrap.addClass($animation);
-					setTimeout(function (){
-						$activeItem.siblings('.eael-circle-btn-content').addClass('active');
-					},1700);
+					if ( $activeItem === true ) {
+						setTimeout( function (){
+							$activeItem.siblings('.eael-circle-btn-content').addClass('active');
+						}, 1700 );
+					}
+					
 				},
 				{
 					offset: "80%",

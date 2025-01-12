@@ -1,7 +1,7 @@
-ea.hooks.addAction("init", "ea", () => {
+eael.hooks.addAction("init", "ea", () => {
 
 	const wooProductCarousel = function ($scope, $) {
-		ea.hooks.doAction("quickViewAddMarkup",$scope,$);
+		eael.hooks.doAction("quickViewAddMarkup",$scope,$);
 		var $wooProductCarousel = $scope.find(".eael-woo-product-carousel").eq(0),
 			$type = $wooProductCarousel.data("type"),
 			$autoplay =
@@ -32,6 +32,11 @@ ea.hooks.addAction("init", "ea", () => {
 				$wooProductCarousel.data("items-mobile") !== undefined
 					? $wooProductCarousel.data("items-mobile")
 					: 3,
+			$slideItems =
+				$wooProductCarousel.data("slide-items") !== undefined
+					? $wooProductCarousel.data("slide-items")
+					: 1,
+			$slideItems = '' === $slideItems ? 1 : $slideItems,
 			$margin =
 				$wooProductCarousel.data("margin") !== undefined
 					? $wooProductCarousel.data("margin")
@@ -86,7 +91,6 @@ ea.hooks.addAction("init", "ea", () => {
 			grabCursor: $grab_cursor,
 			autoHeight: true,
 			loop: $loop,
-			slidesPerGroup: 1,
 			autoplay: {
 				delay: $autoplay,
 				disableOnInteraction: false
@@ -110,20 +114,77 @@ ea.hooks.addAction("init", "ea", () => {
 		};
 
 		if ($effect === 'slide') {
-
-			$carouselOptions.breakpoints = {
-				1024: {
-					slidesPerView: $items,
-					spaceBetween: $margin
-				},
-				768: {
-					slidesPerView: $items_tablet,
-					spaceBetween: $margin_tablet
-				},
-				320: {
-					slidesPerView: $items_mobile,
-					spaceBetween: $margin_mobile
+			if (typeof (localize.el_breakpoints) === 'string') {
+				$carouselOptions.breakpoints = {
+					1024: {
+						slidesPerView: $items,
+						spaceBetween: $margin,
+						slidesPerGroup: $slideItems
+					},
+					768: {
+						slidesPerView: $items_tablet,
+						spaceBetween: $margin_tablet,
+						slidesPerGroup: $slideItems
+					},
+					320: {
+						slidesPerView: $items_mobile,
+						spaceBetween: $margin_mobile,
+						slidesPerGroup: $slideItems
+					}
+				};
+			} else {
+				let el_breakpoints = {}, breakpoints = {}, bp_index = 0,
+					desktopBreakPoint = localize.el_breakpoints.widescreen.is_enabled ? localize.el_breakpoints.widescreen.value - 1 : 4800;
+				el_breakpoints[bp_index] = {
+					breakpoint: 0,
+					slidesPerView: 0,
+					spaceBetween: 0
 				}
+				bp_index++;
+				localize.el_breakpoints.desktop = {
+					is_enabled: true,
+					value: desktopBreakPoint
+				}
+
+				$.each(['mobile', 'mobile_extra', 'tablet', 'tablet_extra', 'laptop', 'desktop', 'widescreen'], function (index, device) {
+					let breakpoint = localize.el_breakpoints[device];
+					if (breakpoint.is_enabled) {
+						let _items = $wooProductCarousel.data('items-' + device),
+							_slideItems = $wooProductCarousel.data('slide-items-' + device),
+							_margin = $wooProductCarousel.data('margin-' + device);
+						$margin = _margin !== undefined ? _margin : (device === 'desktop' ? $margin : 10);
+						$itemsPerView = _items !== undefined && _items !== "" ? _items : (device === 'desktop' ? $items : 3);
+						$slidePerGroup = _slideItems !== undefined && _slideItems !== "" ? _slideItems : (device === 'desktop' ? $slideItems : 1 );
+						
+
+						if( device === 'mobile' && _items === undefined ){
+							$itemsPerView = 1;
+						} else if ( device === 'tablet' && _items === undefined ){
+							$itemsPerView = 2;
+						} 
+						
+						el_breakpoints[bp_index] = {
+							breakpoint: breakpoint.value,
+							slidesPerView: $itemsPerView,
+							spaceBetween: $margin,
+							slidePerGroup: $slidePerGroup
+						}
+						bp_index++;
+					}
+				});
+	
+				$.each(el_breakpoints, function (index, breakpoint) {
+					let _index = parseInt(index);
+					if (typeof el_breakpoints[_index + 1] !== 'undefined') {
+						breakpoints[breakpoint.breakpoint] = {
+							slidesPerView: el_breakpoints[_index + 1].slidesPerView,
+							spaceBetween: el_breakpoints[_index + 1].spaceBetween,
+							slidesPerGroup: el_breakpoints[_index + 1].slidePerGroup,
+						}
+					}
+				});
+				
+				$carouselOptions.breakpoints = breakpoints;
 			}
 		}
 
@@ -189,7 +250,7 @@ ea.hooks.addAction("init", "ea", () => {
 			}
 		});
 
-		ea.hooks.doAction("quickViewPopupViewInit",$scope,$);
+		eael.hooks.doAction("quickViewPopupViewInit",$scope,$);
 
 		if (isEditMode) {
 			$(".eael-product-image-wrap .woocommerce-product-gallery").css(
@@ -224,8 +285,8 @@ ea.hooks.addAction("init", "ea", () => {
 			}
 		}
 
-		ea.hooks.addAction("ea-lightbox-triggered", "ea", WooProductCarouselLoader);
-		ea.hooks.addAction("ea-toggle-triggered", "ea", WooProductCarouselLoader);
+		eael.hooks.addAction("ea-lightbox-triggered", "ea", WooProductCarouselLoader);
+		eael.hooks.addAction("ea-toggle-triggered", "ea", WooProductCarouselLoader);
 	};
 
 	const swiperLoader = (swiperElement, swiperConfig) => {
@@ -246,8 +307,8 @@ ea.hooks.addAction("init", "ea", () => {
 		});
 	}
 
-	if (ea.elementStatusCheck('eaelWooProductSliderLoad')) {
-		return false;
+	if ( eael.elementStatusCheck('eaelWooProductSliderLoad') && window.forceFullyRun === undefined ) {
+		return;
 	}
 
 	elementorFrontend.hooks.addAction(

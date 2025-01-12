@@ -59,6 +59,10 @@ class Advanced_Data_Table extends Widget_Base
         ];
     }
 
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
+    }
+
     public function get_custom_help_url()
     {
         return 'https://essential-addons.com/elementor/docs/advanced-data-table/';
@@ -1551,15 +1555,15 @@ class Advanced_Data_Table extends Widget_Base
             ]);
         }
 
-        echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table-wrap') . '>';
+        echo '<div '; $this->print_render_attribute_string('ea-adv-data-table-wrap'); echo '>';
 
         if ($content = $this->get_table_content()) {
             if ($settings['ea_adv_data_table_search'] == 'yes') {
-                echo '<div ' . $this->get_render_attribute_string('ea-adv-data-table-search-wrap') . '><input type="search" placeholder="' . esc_attr( Helper::eael_wp_kses($settings['ea_adv_data_table_search_placeholder'] ) ). '" class="ea-advanced-data-table-search"></div>';
+                echo '<div '; $this->print_render_attribute_string('ea-adv-data-table-search-wrap'); echo '><input type="search" placeholder="' . esc_attr( $settings['ea_adv_data_table_search_placeholder'] ). '" class="ea-advanced-data-table-search"></div>';
             }
 
             echo '<div class="ea-advanced-data-table-wrap-inner">
-                <table ' . $this->get_render_attribute_string('ea-adv-data-table') . '>' . Helper::eael_wp_kses( $content ) . '</table>
+                <table '; $this->print_render_attribute_string('ea-adv-data-table'); echo '>' . wp_kses( $content, Helper::eael_allowed_tags(), Helper::eael_allowed_protocols() ) . '</table>
             </div>';
 
             if ($settings['ea_adv_data_table_pagination'] == 'yes') {

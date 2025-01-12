@@ -57,6 +57,20 @@ class Cta_Box extends Widget_Base
         ];
     }
 
+    protected function is_dynamic_content():bool {
+        if( Plugin::$instance->editor->is_edit_mode() ) {
+            return false;
+        }
+        $content_type       = $this->get_settings('eael_cta_title_content_type');
+        $is_dynamic_content = 'template' === $content_type;
+
+        return $is_dynamic_content;
+    }
+
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
+    }
+
     public function get_custom_help_url() {
         return 'https://essential-addons.com/elementor/docs/call-to-action/';
     }
@@ -1535,16 +1549,22 @@ class Cta_Box extends Widget_Base
         // Heading Markup
         $headingMarkup = '';
         if(!empty($sub_title)){
-            $headingMarkup .='<h4 class="sub-title">'.$sub_title.'</h4>';
+            $headingMarkup .= '<h4 class="sub-title">' . $sub_title . '</h4>';
         }
 
         if (!empty($settings['eael_cta_title'])){
-            $headingMarkup .='<'.Helper::eael_validate_html_tag($settings['title_tag']).' class="title">'.Helper::eael_wp_kses($settings['eael_cta_title']).'</'.Helper::eael_validate_html_tag($settings['title_tag']).'>';
+            $title_tag = Helper::eael_validate_html_tag( $settings['title_tag'] );
+            $headingMarkup .='<' . $title_tag .' class="title">'. $settings['eael_cta_title'] . '</' . $title_tag . '>';
         }
+
+        ob_start();
+        echo wp_kses( $headingMarkup, Helper::eael_allowed_tags() );
+        $headingMarkup = ob_get_clean();
+
         // content markup
         $contentMarkup = '';
         if ('content' == $settings['eael_cta_title_content_type']) {
-            $contentMarkup .= $settings['eael_cta_content'];
+            $contentMarkup .= wp_kses( $settings['eael_cta_content'], Helper::eael_allowed_tags() );
         }else if ('template' == $settings['eael_cta_title_content_type']){
             if (!empty($settings['eael_primary_templates'])) {
                 $eael_template_id = $settings['eael_primary_templates'];
@@ -1574,10 +1594,10 @@ class Cta_Box extends Widget_Base
 
 	    // button markup
 	    $buttonMarkup = '';
-	    $buttonMarkup .= '<a ' . $this->get_render_attribute_string( 'button' ) . '>'. $btn_icon_wrap. $btn_icon .
+	    $buttonMarkup .= '<a ' . $this->get_render_attribute_string( 'button' ) . '>' . 
+                         $btn_icon_wrap . wp_kses( $btn_icon, Helper::eael_allowed_icon_tags() )  .
                          $btn_icon_wrap_end .
-                         esc_html(
-                $settings['eael_cta_btn_text'] ) . '</a>';
+                         esc_html( $settings['eael_cta_btn_text'] ) . '</a>';
 
         if ( $settings['eael_cta_secondary_btn_is_show'] === 'yes' ) {
 		    // button attributes
@@ -1593,9 +1613,8 @@ class Cta_Box extends Widget_Base
 	<?php if ('cta-basic' == $settings['eael_cta_type']): ?>
 	<div class="eael-call-to-action cta-basic <?php echo esc_attr( $cta_class . ' ' . $settings['eael_cta_preset'] ); ?>">
         <?php
-            print $headingMarkup;
-            print $contentMarkup;
-            print $buttonMarkup;
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo $headingMarkup . $contentMarkup . $buttonMarkup;
         ?>
 	</div>
 	<?php endif;?>
@@ -1603,12 +1622,14 @@ class Cta_Box extends Widget_Base
 	<div class="eael-call-to-action cta-flex <?php echo esc_attr( $cta_class . ' ' . $settings['eael_cta_preset'] ); ?>">
 	    <div class="content">
             <?php
-                print $headingMarkup;
-                print $contentMarkup;
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                echo $headingMarkup . $contentMarkup;
             ?>
 	    </div>
 	    <div class="action">
-	        <?php print $buttonMarkup; ?>
+	        <?php 
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            print $buttonMarkup; ?>
 	    </div>
 	</div>
 	<?php endif;?>
@@ -1628,12 +1649,14 @@ class Cta_Box extends Widget_Base
 	    </div>
 	    <div class="content">
             <?php
-                print $headingMarkup;
-                print $contentMarkup;
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                echo $headingMarkup . $contentMarkup;
             ?>
 	    </div>
 	    <div class="action">
-            <?php print $buttonMarkup; ?>
+            <?php 
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                print $buttonMarkup; ?>
 	    </div>
 	</div>
 	<?php endif;?>
