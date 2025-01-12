@@ -2861,6 +2861,7 @@ class Event_Calendar extends Widget_Base
 				'label'      => esc_html__( 'Cell Height', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'em', 'rem' ],
+                'separator'  => 'before',
 				'range'      => [
 					'px' => [
 						'min' => 0,
