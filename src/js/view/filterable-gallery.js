@@ -272,6 +272,22 @@ jQuery(window).on("elementor/frontend/init", function () {
 				}
 			});
 
+			//key board accesibilty
+			$('.eael-filter-gallery-control li.control', $scope).keydown(function(e) {
+                if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                    const tabs 		 = $('.eael-filter-gallery-control li.control', $scope);
+					let currentIndex = $('.eael-filter-gallery-control li.control.active', $scope);
+                    let index 		 = currentIndex < 0 ? tabs.index(this) : tabs.index(currentIndex);
+
+                    if (e.key === 'ArrowRight') index = (index + 1) % tabs.length;
+                    if (e.key === 'ArrowLeft') index = (index - 1 + tabs.length) % tabs.length;
+                    $(tabs[index]).focus().click();
+                }
+            });
+
+			$('.eael-filter-gallery-control li.control', $scope).attr('tabindex', '-1');
+			$('.eael-filter-gallery-control li.control.active', $scope).attr('tabindex', '0');
+
 			//quick search
 			var loaded_on_search = false;
 			input.on("input", function () {
