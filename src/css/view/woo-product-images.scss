@@ -19,6 +19,13 @@
    button.mfp-arrow {
       width: 5%;
    }
+
+   .mfp-arrow-right:before {
+      margin-left: -28px;
+   }
+   .mfp-arrow-right:after {
+      margin-left: -25px;
+   }
 }
 
 .eael-pi-thumb-left {
