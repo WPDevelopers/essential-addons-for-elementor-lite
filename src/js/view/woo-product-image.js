@@ -35,16 +35,30 @@ var WooProdectImage = function ($scope, $) {
 
    // Set slider height dynamically
    $(window).on("load", function () {
-      let getImageHeight = $scope.find(".image_slider__image").height();
-      let newThumbHeightt = $sliderThumbs.slidesPerView * 100;
-      let compareHeight =
-         newThumbHeightt > getImageHeight ? getImageHeight : newThumbHeightt;
+      // Check if the screen width is less than or equal to 767px
+      if (window.matchMedia("(max-width: 767px)").matches) {
+         // For small screens
+         let getImageHeight = $scope.find(".image_slider__image").height();
+         let newThumbHeight = $sliderThumbs.slidesPerView * 50;
+         let compareHeight = Math.min(newThumbHeight, getImageHeight);
 
-      $scope
-         .find(
-            ".eael-pi-thumb-left .product_image_slider .product_image_slider__thumbs, .eael-pi-thumb-right .product_image_slider .product_image_slider__thumbs"
-         )
-         .css("height", compareHeight);
+         $scope
+            .find(
+               ".eael-pi-thumb-left .product_image_slider .product_image_slider__thumbs, .eael-pi-thumb-right .product_image_slider .product_image_slider__thumbs"
+            )
+            .css("height", compareHeight);
+      } else {
+         // For larger screens
+         let getImageHeight = $scope.find(".image_slider__image").height();
+         let newThumbHeight = $sliderThumbs.slidesPerView * 100;
+         let compareHeight = Math.min(newThumbHeight, getImageHeight);
+
+         $scope
+            .find(
+               ".eael-pi-thumb-left .product_image_slider .product_image_slider__thumbs, .eael-pi-thumb-right .product_image_slider .product_image_slider__thumbs"
+            )
+            .css("height", compareHeight);
+      }
    });
 
    // Load the thumbs Swiper first
