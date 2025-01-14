@@ -27,6 +27,7 @@ var WooProdectImage = function ($scope, $) {
    // Thumb slider options
    let $sliderThumbsOptions = $scope.find(".product_image_slider__thumbs");
    let $sliderThumbs = $sliderThumbsOptions.data("pi_thumb");
+   // console.log("Item", $sliderThumbs.slidesPerView);
 
    // Image slider options
    let $sliderImagesOptions = $scope.find(".product_image_slider__container");
@@ -34,12 +35,16 @@ var WooProdectImage = function ($scope, $) {
 
    // Set slider height dynamically
    $(window).on("load", function () {
-      let $getImageHeight = $scope.find(".image_slider__image").height();
+      let getImageHeight = $scope.find(".image_slider__image").height();
+      let newThumbHeightt = $sliderThumbs.slidesPerView * 100;
+      let compareHeight =
+         newThumbHeightt > getImageHeight ? getImageHeight : newThumbHeightt;
+
       $scope
          .find(
             ".eael-pi-thumb-left .product_image_slider .product_image_slider__thumbs, .eael-pi-thumb-right .product_image_slider .product_image_slider__thumbs"
          )
-         .css("height", $getImageHeight);
+         .css("height", compareHeight);
    });
 
    // Load the thumbs Swiper first
