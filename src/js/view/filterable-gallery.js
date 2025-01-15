@@ -265,9 +265,9 @@ jQuery(window).on("elementor/frontend/init", function () {
 						loadMore.show()
 					}
 
-					$('.eael-filterable-gallery-item-wrap .eael-magnific-link-clone').removeClass('active').addClass('active');
+					// $('.eael-filterable-gallery-item-wrap .eael-magnific-link-clone').removeClass('active').addClass('active');
 				}else {
-					$('.eael-filterable-gallery-item-wrap .eael-magnific-link-clone').removeClass('active');
+					// $('.eael-filterable-gallery-item-wrap .eael-magnific-link-clone').removeClass('active');
 					$(buttonFilter + ' .eael-magnific-link').addClass('active');
 				}
 			});
