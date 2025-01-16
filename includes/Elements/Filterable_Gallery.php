@@ -4011,14 +4011,26 @@ class Filterable_Gallery extends Widget_Base
                         $scope = $('[data-id="' + $node_id + '"]'),
                         $gallery = $(this),
                         $settings = $gallery.data('settings'),
-						fg_items = $gallery_items = $gallery.data('gallery-items'),
+						fg_items = JSON.parse( atob( $gallery.data("gallery-items") ) ),
                         $layout_mode = ($settings.grid_style == 'masonry' ? 'masonry' : 'fitRows'),
                         $gallery_enabled = ($settings.gallery_enabled == 'yes' ? true : false),
                         input = $scope.find('#fg-search-box-input'),
-                        searchRegex, buttonFilter, timer;
-					    $init_show_setting     = $gallery.data("init-show");
+                        searchRegex, buttonFilter, timer,
+                        filterControls = $scope.find(".fg-layout-3-filter-controls").eq(0)
+					    $init_show_setting     = $gallery.data("init-show"),
+                        $is_randomize     = $gallery.data("is-randomize");
+                        isRTL = $('body').hasClass('rtl');
+                        
+                        if( 'yes' === $is_randomize ){
+                            fg_items = shuffleGalleryItems( fg_items );
+                            $gallery.empty();
+                            for (let i =  0; i < $init_show_setting; i++) {
+                                $gallery.append(fg_items[i]);
+                            }
+                        }
+
 					fg_items.splice(0, $init_show_setting)
-                    var filterControls = $scope.find(".fg-layout-3-filter-controls").eq(0)
+
 
                     if ($gallery.closest($scope).length < 1) {
                         return;
