@@ -465,7 +465,8 @@ class Filterable_Gallery extends Widget_Base
                 'type' => Controls_Manager::REPEATER,
                 'seperator' => 'before',
                 'default' => [
-                    ['eael_fg_control' => 'Gallery Item'],
+                    [ 'eael_fg_control' => 'Gallery 1' ],
+                    [ 'eael_fg_control' => 'Gallery 2' ],
                 ],
                 'fields' => [
                     [
@@ -564,7 +565,7 @@ class Filterable_Gallery extends Widget_Base
 			'eael_privacy_notice_control',
 			[
 				'label'        => esc_html__( 'Display Consent Notice', 'essential-addons-for-elementor-lite' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'type'         => Controls_Manager::SWITCHER,
                 'description'  => esc_html__( 'If enabled, The consent notice will appear before playing the video.', 'essential-addons-for-elementor-lite' ),
 				'default'      => '',
 			]
@@ -594,6 +595,35 @@ class Filterable_Gallery extends Widget_Base
         );
 
         $repeater = new Repeater();
+
+        $repeater->add_control(
+            'eael_fg_gallery_item_name',
+            [
+                'label' => esc_html__('Item Name', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'dynamic' => ['active' => true],
+                'label_block' => true,
+                'default' => esc_html__('Gallery item name', 'essential-addons-for-elementor-lite'),
+                'ai' => [
+					'active' => false,
+				],
+            ]
+        );
+        
+        $repeater->add_control(
+            'eael_fg_gallery_control_name',
+            [
+                'label' => esc_html__('Control Name', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'dynamic' => ['active' => true],
+                'label_block' => true,
+                'default' => '',
+                'description' => __('Use the gallery control name from Control Settings. Separate multiple items with comma (e.g. <strong>Gallery Item, Gallery Item 2</strong>)', 'essential-addons-for-elementor-lite'),
+                'ai' => [
+					'active' => false,
+				],
+            ]
+        );
         
         $repeater->add_control(
             'fg_video_gallery_switch',
@@ -646,36 +676,6 @@ class Filterable_Gallery extends Widget_Base
 				'separator' => 'after',
 			]
 		);
-        
-        $repeater->add_control(
-            'eael_fg_gallery_control_name',
-            [
-                'label' => esc_html__('Control Name', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'dynamic' => ['active' => true],
-                'label_block' => true,
-                'default' => '',
-                'description' => __('Use the gallery control name from Control Settings. Separate multiple items with comma (e.g. <strong>Gallery Item, Gallery Item 2</strong>)', 'essential-addons-for-elementor-lite'),
-                'ai' => [
-					'active' => false,
-				],
-            ]
-        );
-        
-        $repeater->add_control(
-            'eael_fg_gallery_item_name',
-            [
-                'label' => esc_html__('Item Name', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'dynamic' => ['active' => true],
-                'label_block' => true,
-                'default' => esc_html__('Gallery item name', 'essential-addons-for-elementor-lite'),
-                'ai' => [
-					'active' => false,
-				],
-            ]
-        );
-        
         
         $repeater->add_control(
             'fg_item_price_switch',
@@ -853,12 +853,30 @@ class Filterable_Gallery extends Widget_Base
                 'type' => Controls_Manager::REPEATER,
                 'seperator' => 'before',
                 'default' => [
-                    ['eael_fg_gallery_item_name' => 'Gallery Item Name'],
-                    ['eael_fg_gallery_item_name' => 'Gallery Item Name'],
-                    ['eael_fg_gallery_item_name' => 'Gallery Item Name'],
-                    ['eael_fg_gallery_item_name' => 'Gallery Item Name'],
-                    ['eael_fg_gallery_item_name' => 'Gallery Item Name'],
-                    ['eael_fg_gallery_item_name' => 'Gallery Item Name'],
+                    [ 
+                        'eael_fg_gallery_item_name'    => 'Gallery 1 Item',
+                        'eael_fg_gallery_control_name' => 'Gallery 1'
+                    ],
+                    [ 
+                        'eael_fg_gallery_item_name'    => 'Gallery 2 Item',
+                        'eael_fg_gallery_control_name' => 'Gallery 2'
+                    ],
+                    [ 
+                        'eael_fg_gallery_item_name'    => 'Gallery 1 Item',
+                        'eael_fg_gallery_control_name' => 'Gallery 1'
+                    ],
+                    [ 
+                        'eael_fg_gallery_item_name'    => 'Gallery 2 Item',
+                        'eael_fg_gallery_control_name' => 'Gallery 2'
+                    ],
+                    [ 
+                        'eael_fg_gallery_item_name'    => 'Gallery 1 Item',
+                        'eael_fg_gallery_control_name' => 'Gallery 1'
+                    ],
+                    [ 
+                        'eael_fg_gallery_item_name'    => 'Gallery 2 Item',
+                        'eael_fg_gallery_control_name' => 'Gallery 2'
+                    ],
                 ],
                 'fields' => $repeater->get_controls(),
                 'title_field' => '{{eael_fg_gallery_item_name}}',
@@ -3902,12 +3920,12 @@ class Filterable_Gallery extends Widget_Base
             'control_all_text' => $settings['eael_fg_all_label_text'],
         ];
         
-        if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
-            $gallery_settings['post_id'] = \Elementor\Plugin::$instance->editor->get_post_id();
+        if ( Plugin::$instance->editor->is_edit_mode() ) {
+            $gallery_settings['post_id'] =  Plugin::$instance->editor->get_post_id();
         } else {
             $gallery_settings['post_id'] = get_the_ID();
         }
-        if ( method_exists( \Elementor\Plugin::$instance->breakpoints, 'get_breakpoints_config' ) && ! empty( $breakpoints = \Elementor\Plugin::$instance->breakpoints->get_breakpoints_config() ) ) {
+        if ( method_exists( Plugin::$instance->breakpoints, 'get_breakpoints_config' ) && ! empty( $breakpoints = \Elementor\Plugin::$instance->breakpoints->get_breakpoints_config() ) ) {
 
             $this->add_render_attribute('gallery', 'data-breakpoints', wp_json_encode( $breakpoints ) );
         }
@@ -3987,7 +4005,7 @@ class Filterable_Gallery extends Widget_Base
             </div>
             
             <?php
-            if (\Elementor\Plugin::instance()->editor->is_edit_mode()) {
+            if ( Plugin::instance()->editor->is_edit_mode() ) {
                 $this->render_editor_script();
             }
             $this->render_loadmore_button();
