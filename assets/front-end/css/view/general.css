@@ -195,7 +195,8 @@
 body.eael-lightbox-popup-open .eael-lightbox-template-wrapper,
 .elementor-widget-eael-protected-content .eael-protected-content-message,
 .elementor-widget-eael-protected-content .protected-content,
-.eael-offcanvas-content-visible .eael-offcanvas-body {
+.eael-offcanvas-content-visible .eael-offcanvas-body,
+.elementor-widget-eael-stacked-cards .eael-stacked-cards__item {
   position: relative;
 }
 
@@ -211,7 +212,8 @@ body.eael-lightbox-popup-open .eael-lightbox-template-wrapper,
 body.eael-lightbox-popup-open .eael-lightbox-template-wrapper:hover .eael-onpage-edit-template-wrapper,
 .elementor-widget-eael-protected-content .eael-protected-content-message:hover .eael-onpage-edit-template-wrapper,
 .elementor-widget-eael-protected-content .protected-content:hover .eael-onpage-edit-template-wrapper,
-.eael-offcanvas-content-visible .eael-offcanvas-body:hover .eael-onpage-edit-template-wrapper {
+.eael-offcanvas-content-visible .eael-offcanvas-body:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-stacked-cards .eael-stacked-cards__item:hover .eael-onpage-edit-template-wrapper {
   display: block;
 }
 
