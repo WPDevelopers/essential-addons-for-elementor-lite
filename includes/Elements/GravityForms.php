@@ -2914,9 +2914,9 @@ class GravityForms extends Widget_Base {
                 <?php } ?>
                 <?php
                     $eael_form_id = $settings['contact_form_list'];
-                    $eael_form_title = $settings['form_title'];
-                    $eael_form_description = $settings['form_description'];
-                    $eael_form_ajax = $settings['form_ajax'];
+                    $eael_form_title = $settings['form_title'] === 'yes';
+                    $eael_form_description = $settings['form_description'] === 'yes';
+                    $eael_form_ajax = $settings['form_ajax'] === 'yes';
 
                     gravity_form( $eael_form_id, $eael_form_title, $eael_form_description, $display_inactive = false, $field_values = null, $eael_form_ajax, '', $echo = true );
                 ?>
