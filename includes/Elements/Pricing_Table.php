@@ -20,9 +20,6 @@ use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 
 class Pricing_Table extends Widget_Base
 {
-
-    
-
     public function get_name()
     {
         return 'eael-pricing-table';
@@ -64,6 +61,10 @@ class Pricing_Table extends Widget_Base
 
     protected function is_dynamic_content():bool {
         return false;
+    }
+
+    public function has_widget_inner_wrapper(): bool {
+        return ! HelperClass::eael_e_optimized_markup();
     }
 
     public function get_custom_help_url()
@@ -2384,6 +2385,7 @@ class Pricing_Table extends Widget_Base
             </div>
         <?php endif; ?>
     <?php
-        do_action('add_pricing_table_style_block', $settings, $this, $pricing, $button_url, $featured_class);
+        $depricated_param = $featured_class;
+        do_action('add_pricing_table_style_block', $settings, $this, $pricing, $button_url, $featured_class, $depricated_param );
     }
 }

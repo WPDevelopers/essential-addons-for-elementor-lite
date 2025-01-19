@@ -47,7 +47,7 @@ const QuickView = {
 					       const product_gallery = popup_view.find(".woocommerce-product-gallery");
 
 					       popup_view_render.addClass("elementor-" + quickview_setting.page_id)
-					       popup_view_render.children().addClass("elementor-element elementor-element-" + quickview_setting.widget_id)
+					       popup_view_render.children().addClass("elementor-element-" + quickview_setting.widget_id)
 					
 					       if (popup_details.height() > 400) {
 						       popup_details.css("height", "75vh");
@@ -84,7 +84,7 @@ const QuickView = {
 	singlePageAddToCartButton: ($scope, $) => {
 		$(document).on(
 			"click",
-			".eael-woo-slider-popup .single_add_to_cart_button:not(.wc-variation-selection-needed)",
+			".eael-woo-slider-popup .product:not(.product-type-external) .single_add_to_cart_button:not(.wc-variation-selection-needed)",
 			function (e) {
 				e.preventDefault();
 				e.stopImmediatePropagation();
