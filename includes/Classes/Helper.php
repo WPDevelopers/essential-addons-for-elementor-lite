@@ -1646,7 +1646,11 @@ class Helper
 		return $product;
 	}
 
-	public static function eael_onpage_edit_template_markup( $page_id, $template_id ) {
+	public static function eael_onpage_edit_template_markup( $page_id, $template_id, $return = false ) {
+		if ( $return ) {
+			ob_start();
+		}
+
 		if ( Plugin::$instance->editor->is_edit_mode() ) {
 			$active_doc = $_GET['active-document'] ?? 0;
 			$mode       = $active_doc === $template_id ? 'save' : 'edit';
@@ -1671,6 +1675,10 @@ class Helper
 				</script>
 				<?php
 			}
+		}
+
+		if ( $return ) {
+			return ob_get_clean();
 		}
 	}
 
