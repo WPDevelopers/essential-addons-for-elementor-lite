@@ -79,13 +79,28 @@
                     }
                 });
 
+                let editBtn = $(ID).closest('.elementor-control-field').siblings('a');
+
+                if (obj.currentID === '') {
+                    editBtn.hide();
+                } else {
+                    editBtn.attr('href', location.origin + location.pathname + '?post=' + obj.currentID + '&action=elementor');
+                }
+
                 $(ID).on("select2:select", function(evt) {
                     var element = evt.params.data.element;
                     var $element = $(element);
+                    let selectedId = evt.params.data.id,
+                        editUrl = location.origin + location.pathname + '?post=' + selectedId + '&action=elementor';
 
                     $element.detach();
                     $(this).append($element);
                     $(this).trigger("change");
+                    editBtn.attr('href', editUrl);
+
+                    if (selectedId !== '') {
+                        editBtn.show();
+                    }
                 });
             },200);
             //Manual Sorting : Select2 drag and drop : ends
