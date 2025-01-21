@@ -184,12 +184,34 @@
 /* Onpage Edit Template */
 
 .elementor-widget-eael-adv-tabs .eael-tab-content-item,
-.elementor-widget-eael-adv-accordion .eael-accordion-content {
+.elementor-widget-eael-adv-accordion .eael-accordion-content,
+.elementor-widget-eael-data-table .td-content,
+.elementor-widget-eael-info-box .eael-infobox-template-wrapper,
+.elementor-widget-eael-countdown .eael-countdown-expiry-template,
+.elementor-widget-eael-countdown .eael-countdown-container,
+.elementor-widget-eael-cta-box .eael-cta-template-wrapper,
+.elementor-widget-eael-toggle .eael-toggle-primary-wrap,
+.elementor-widget-eael-toggle .eael-toggle-secondary-wrap,
+.elementor-widget-eael-protected-content .eael-protected-content-message,
+.elementor-widget-eael-protected-content .protected-content,
+.eael-offcanvas-content-visible .eael-offcanvas-body,
+.elementor-widget-eael-stacked-cards .eael-stacked-cards__item {
   position: relative;
 }
 
 .elementor-widget-eael-adv-tabs .eael-tab-content-item:hover .eael-onpage-edit-template-wrapper,
-.elementor-widget-eael-adv-accordion .eael-accordion-content:hover .eael-onpage-edit-template-wrapper {
+.elementor-widget-eael-adv-accordion .eael-accordion-content:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-data-table .td-content:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-info-box .eael-infobox-template-wrapper:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-countdown .eael-countdown-expiry-template:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-countdown .eael-countdown-container:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-cta-box .eael-cta-template-wrapper:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-toggle .eael-toggle-primary-wrap:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-toggle .eael-toggle-secondary-wrap:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-protected-content .eael-protected-content-message:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-protected-content .protected-content:hover .eael-onpage-edit-template-wrapper,
+.eael-offcanvas-content-visible .eael-offcanvas-body:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-stacked-cards .eael-stacked-cards__item:hover .eael-onpage-edit-template-wrapper {
   display: block;
 }
 
