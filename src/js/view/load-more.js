@@ -57,11 +57,21 @@
 				var $gallery_page = 1 + 1;
 
 			} else {
-				var paging = parseInt($('.eael-cat-tab li a.active', $scope).data("page"));
-				if( isNaN( paging ) ){
-					paging = 1;
-					$('.eael-cat-tab li a.active', $scope).data("page", 1);
-				}
+				let active_tab = $('.eael-cat-tab li a.active', $scope);
+				var paging = parseInt(active_tab.data("page"));
+				if( isNaN( paging ) ) {
+					if ( active_tab.length > 0 ){
+						paging = 1;
+						active_tab.data("page", 1);
+					} else {
+						let load_more_btn = $('.eael-load-more-button', $scope);
+						var paging = parseInt(load_more_btn.data("page"));
+						if( isNaN( paging ) ){
+							paging = 1;
+						}
+					}
+				} 
+				
 				var $gallery_page = paging + 1;
 			}
 
