@@ -4,12 +4,25 @@ var WooProdectImage = function ($scope, $) {
       ".swiper-wrapper .swiper-slide:first-child .image_slider__image > img",
       $productGallery
    );
+   var originalImage = {
+      src: $productGalleryImage.attr("src"),
+      srcset: $productGalleryImage.attr("srcset"),
+      sizes: $productGalleryImage.attr("sizes"),
+   };
 
    // Listen for show_variation event
    $(".variations_form").on("show_variation", function (event, variation) {
       if (variation && variation.image && variation.image.src) {
          eaelVariationProductImage(variation.image);
       }
+   });
+
+   $(".variations_form").on("hide_variation", function () {
+      eaelRemoveVariationProductImage();
+   });
+
+   $(".variations_form").on("reset_image", function () {
+      eaelRemoveVariationProductImage();
    });
 
    const eaelVariationProductImage = (variationImage) => {
@@ -19,6 +32,18 @@ var WooProdectImage = function ($scope, $) {
          .attr("sizes", variationImage.sizes)
          .attr("data-src", variationImage.src)
          .attr("data-large_image", variationImage.full_src);
+   };
+
+   const eaelRemoveVariationProductImage = () => {
+      $productGalleryImage.fadeOut(100, function () {
+         $productGalleryImage
+            .attr("src", originalImage.src)
+            .attr("srcset", originalImage.srcset)
+            .attr("sizes", originalImage.sizes)
+            .removeAttr("data-src")
+            .removeAttr("data-large_image");
+         $productGalleryImage.fadeIn(100);
+      });
    };
 
    const swiperLoader = (swiperElement, swiperConfig) => {
