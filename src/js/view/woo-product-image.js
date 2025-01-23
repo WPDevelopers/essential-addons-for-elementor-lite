@@ -1,27 +1,15 @@
 var WooProdectImage = function ($scope, $) {
    var $productGallery = $(".eael-single-product-images");
-   var $productGalleryImage = $productGallery.find(
-      ".image_slider__image > img"
+   var $productGalleryImage = $(
+      ".swiper-wrapper .swiper-slide:first-child .image_slider__image > img",
+      $productGallery
    );
-   var originalImage = {
-      src: $productGalleryImage.attr("src"),
-      srcset: $productGalleryImage.attr("srcset"),
-      sizes: $productGalleryImage.attr("sizes"),
-   };
 
    // Listen for show_variation event
    $(".variations_form").on("show_variation", function (event, variation) {
       if (variation && variation.image && variation.image.src) {
          eaelVariationProductImage(variation.image);
       }
-
-      $(".variations_form").on("hide_variation", function () {
-         eaelRemoveVariationProductImage();
-      });
-
-      $(".variations_form").on("reset_image", function () {
-         eaelRemoveVariationProductImage();
-      });
    });
 
    const eaelVariationProductImage = (variationImage) => {
@@ -31,31 +19,6 @@ var WooProdectImage = function ($scope, $) {
          .attr("sizes", variationImage.sizes)
          .attr("data-src", variationImage.src)
          .attr("data-large_image", variationImage.full_src);
-   };
-
-   const eaelRemoveVariationProductImage = () => {
-      $productGalleryImage.fadeOut(100, function () {
-         $productGalleryImage
-            .attr("src", originalImage.src)
-            .attr("srcset", originalImage.srcset)
-            .attr("sizes", originalImage.sizes)
-            .removeAttr("data-src")
-            .removeAttr("data-large_image")
-            .removeAttr("data-large_image_width")
-            .removeAttr("data-large_image_height");
-         $productGalleryImage.fadeIn(100);
-      });
-
-      // Reset thumbnail if exists
-      var $thumbnail = $(
-         ".swiper-slide .product_image_slider__thumbs__image div:first img"
-      );
-
-      if ($thumbnail.length && originalImage.gallery_thumbnail_src) {
-         $thumbnail
-            .attr("src", originalImage.gallery_thumbnail_src)
-            .attr("srcset", "");
-      }
    };
 
    const swiperLoader = (swiperElement, swiperConfig) => {
