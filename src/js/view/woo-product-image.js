@@ -14,15 +14,23 @@ var WooProdectImage = function ($scope, $) {
    $(".variations_form").on("show_variation", function (event, variation) {
       if (variation && variation.image && variation.image.src) {
          eaelVariationProductImage(variation.image);
+         $(".swiper-container", $scope)[0].swiper.autoplay.stop();
+         $(".swiper-container", $scope)[0].swiper.slideTo(0);
+         $(".swiper-container", $scope)[1].swiper.autoplay.stop();
+         $(".swiper-container", $scope)[1].swiper.slideTo(0);
       }
    });
 
    $(".variations_form").on("hide_variation", function () {
       eaelRemoveVariationProductImage();
+      $(".swiper-container", $scope)[0].swiper.autoplay.start();
+      $(".swiper-container", $scope)[1].swiper.autoplay.start();
    });
 
    $(".variations_form").on("reset_image", function () {
       eaelRemoveVariationProductImage();
+      $(".swiper-container", $scope)[0].swiper.autoplay.start();
+      $(".swiper-container", $scope)[1].swiper.autoplay.start();
    });
 
    const eaelVariationProductImage = (variationImage) => {
@@ -72,12 +80,12 @@ var WooProdectImage = function ($scope, $) {
    const sliderImageSelector = `#slider-container-${sliderId} .product_image_slider__container .swiper-container`;
 
    // Thumb slider options
-   let $sliderThumbsOptions = $scope.find(".product_image_slider__thumbs");
+   let $sliderThumbsOptions = $(".product_image_slider__thumbs", $scope);
    let $sliderThumbs = $sliderThumbsOptions.data("pi_thumb");
    // console.log("Item", $sliderThumbs.slidesPerView);
 
    // Image slider options
-   let $sliderImagesOptions = $scope.find(".product_image_slider__container");
+   let $sliderImagesOptions = $(".product_image_slider__container", $scope);
    let $sliderImagesData = $sliderImagesOptions.data("pi_image");
 
    // Set slider height dynamically
@@ -85,26 +93,24 @@ var WooProdectImage = function ($scope, $) {
       // Check if the screen width is less than or equal to 767px
       if (window.matchMedia("(max-width: 767px)").matches) {
          // For small screens
-         let getImageHeight = $scope.find(".image_slider__image").height();
+         let getImageHeight = $(".image_slider__image", $scope).height();
          let newThumbHeight = $sliderThumbs.slidesPerView * 50;
          let compareHeight = Math.min(newThumbHeight, getImageHeight);
 
-         $scope
-            .find(
-               ".eael-pi-thumb-left .product_image_slider .product_image_slider__thumbs, .eael-pi-thumb-right .product_image_slider .product_image_slider__thumbs"
-            )
-            .css("height", compareHeight);
+         $(
+            ".eael-pi-thumb-left .product_image_slider .product_image_slider__thumbs, .eael-pi-thumb-right .product_image_slider .product_image_slider__thumbs",
+            $scope
+         ).css("height", compareHeight);
       } else {
          // For larger screens
-         let getImageHeight = $scope.find(".image_slider__image").height();
+         let getImageHeight = $(".image_slider__image", $scope).height();
          let newThumbHeight = $sliderThumbs.slidesPerView * 100;
          let compareHeight = Math.min(newThumbHeight, getImageHeight);
 
-         $scope
-            .find(
-               ".eael-pi-thumb-left .product_image_slider .product_image_slider__thumbs, .eael-pi-thumb-right .product_image_slider .product_image_slider__thumbs"
-            )
-            .css("height", compareHeight);
+         $(
+            ".eael-pi-thumb-left .product_image_slider .product_image_slider__thumbs, .eael-pi-thumb-right .product_image_slider .product_image_slider__thumbs",
+            $scope
+         ).css("height", compareHeight);
       }
    });
 
@@ -134,7 +140,7 @@ var WooProdectImage = function ($scope, $) {
       });
 
    // Magnific Popup for the specific slider
-   $scope.find(".product_image_slider__trigger a").on("click", function (e) {
+   $(".product_image_slider__trigger a", $scope).on("click", function (e) {
       e.preventDefault();
       var items = [];
       $scope
