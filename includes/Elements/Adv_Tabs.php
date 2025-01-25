@@ -1085,7 +1085,8 @@ class Adv_Tabs extends Widget_Base
                                 ] );
 
                                 echo '<' . esc_html( $repeater_html_tag ) . ' '; $this->print_render_attribute_string( $tab_title_setting_key . '_repeater_tab_title_attr'); echo ' >';
-                                echo wp_kses( $repeater_tab_title, Helper::eael_allowed_tags() );
+                                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                echo $this->parse_text_editor( $repeater_tab_title );
                                 echo '</' . esc_html( $repeater_html_tag ) . '>';
                                 ?>
                             <?php endif; ?>
@@ -1109,7 +1110,8 @@ class Adv_Tabs extends Widget_Base
                                 ] );
 
                                 echo '<' . esc_html( $repeater_html_tag ) . ' '; $this->print_render_attribute_string( $tab_title_setting_key . '_repeater_tab_title_attr'); echo ' >';
-                                echo wp_kses( $repeater_tab_title, Helper::eael_allowed_tags() );
+                                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                echo $this->parse_text_editor( $repeater_tab_title );
                                 echo '</' . esc_html( $repeater_html_tag ) . '>';
                                 ?>
                             <?php endif; ?>
@@ -1121,7 +1123,8 @@ class Adv_Tabs extends Widget_Base
                                 ] );
 
                                 echo '<' . esc_html( $repeater_html_tag ) . ' '; $this->print_render_attribute_string( $tab_title_setting_key . '_repeater_tab_title_attr'); echo ' >';
-                                echo wp_kses( $repeater_tab_title, Helper::eael_allowed_tags() );
+                                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                echo $this->parse_text_editor( $repeater_tab_title );
                                 echo '</' . esc_html( $repeater_html_tag ) . '>'; 
                                 ?>
                             <?php endif; ?>
