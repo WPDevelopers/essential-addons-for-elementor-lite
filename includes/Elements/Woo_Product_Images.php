@@ -812,10 +812,31 @@ class Woo_Product_Images extends Widget_Base {
 		];
 
 		if ( ! empty ( $img_links ) && is_array( $img_links ) && count( $img_links ) > $thumb_settings['desktop'] && 'yes' == $thumb_settings['thumbnail'] ) {
+			$slidesDesktopPerView = count( $img_links ) > $thumb_settings['desktop'] ? $thumb_settings['desktop'] : count( $img_links );
+			$slidesTabletPerView = count( $img_links ) > $thumb_settings['tablet'] ? $thumb_settings['tablet'] : count( $img_links );
+			$slidesMobilePerView = count( $img_links ) > $thumb_settings['mobile'] ? $thumb_settings['mobile'] : count( $img_links );
+
 			$sliderThumbs['slidesPerView'] = $thumb_settings['desktop'];
 			$sliderThumbs ['navigation'] = [
 				'nextEl' => ".swiper-button-next",
 				'prevEl' => ".swiper-button-prev",
+			];
+			$sliderThumbs['breakpoints'] = [
+				320 => [
+					'slidesPerView'=>  $slidesMobilePerView,
+				],
+				768 => [
+					'slidesPerView'=>  $slidesTabletPerView,
+				],
+				1024 => [
+					'slidesPerView'=> $slidesDesktopPerView,
+				],
+				1440 => [
+					'slidesPerView'=> $slidesDesktopPerView,
+				],
+				1920 => [
+					'slidesPerView'=> $slidesDesktopPerView,
+				],
 			];
 		} else {
 			$sliderThumbs['slidesPerView'] = count( $img_links );
@@ -823,11 +844,6 @@ class Woo_Product_Images extends Widget_Base {
 
 		$thumb_position = ['left', 'right'];
 		if ( in_array( $thumb_settings['thumb_position'], $thumb_position ) && 'yes' == $thumb_settings['thumbnail'] ) {
-
-			$slidesDesktopPerView = count( $img_links ) > $thumb_settings['desktop'] ? $thumb_settings['desktop'] : count( $img_links );
-			$slidesTabletPerView = count( $img_links ) > $thumb_settings['tablet'] ? $thumb_settings['tablet'] : count( $img_links );
-			$slidesMobilePerView = count( $img_links ) > $thumb_settings['mobile'] ? $thumb_settings['mobile'] : count( $img_links );
-
 			$sliderThumbs['breakpoints'] = [
 				320 => [
 					'direction'=> "vertical",
