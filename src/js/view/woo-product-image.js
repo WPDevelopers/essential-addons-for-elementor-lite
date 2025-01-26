@@ -1,13 +1,29 @@
 var WooProdectImage = function ($scope, $) {
    var $productGallery = $(".eael-single-product-images");
+
+   let $sliderThumbsOptions = $(".product_image_slider__thumbs", $scope);
+   let $sliderThumbs = $sliderThumbsOptions.data("pi_thumb");
+
    var $productGalleryImage = $(
       ".swiper-wrapper .swiper-slide:first-child .image_slider__image > img",
       $productGallery
    );
+
+   var $productThumbImage = $(
+      ".swiper-wrapper .swiper-slide:first-child .product_image_slider__thumbs__image > img",
+      $productGallery
+   );
+
    var originalImage = {
       src: $productGalleryImage.attr("src"),
       srcset: $productGalleryImage.attr("srcset"),
       sizes: $productGalleryImage.attr("sizes"),
+   };
+
+   var originalThumbImage = {
+      src: $productThumbImage.attr("src"),
+      srcset: $productThumbImage.attr("srcset"),
+      sizes: $productThumbImage.attr("sizes"),
    };
 
    // Listen for show_variation event
@@ -23,18 +39,29 @@ var WooProdectImage = function ($scope, $) {
 
    $(".variations_form").on("hide_variation", function () {
       eaelRemoveVariationProductImage();
-      $(".swiper-container", $scope)[0].swiper.autoplay.start();
-      $(".swiper-container", $scope)[1].swiper.autoplay.start();
+      if ($sliderThumbs.autoplay !== undefined) {
+         $(".swiper-container", $scope)[0].swiper.autoplay.start();
+         $(".swiper-container", $scope)[1].swiper.autoplay.start();
+      }
    });
 
    $(".variations_form").on("reset_image", function () {
       eaelRemoveVariationProductImage();
-      $(".swiper-container", $scope)[0].swiper.autoplay.start();
-      $(".swiper-container", $scope)[1].swiper.autoplay.start();
+      if ($sliderThumbs.autoplay !== undefined) {
+         $(".swiper-container", $scope)[0].swiper.autoplay.start();
+         $(".swiper-container", $scope)[1].swiper.autoplay.start();
+      }
    });
 
    const eaelVariationProductImage = (variationImage) => {
       $productGalleryImage
+         .attr("src", variationImage.src)
+         .attr("srcset", variationImage.srcset)
+         .attr("sizes", variationImage.sizes)
+         .attr("data-src", variationImage.src)
+         .attr("data-large_image", variationImage.full_src);
+
+      $productThumbImage
          .attr("src", variationImage.src)
          .attr("srcset", variationImage.srcset)
          .attr("sizes", variationImage.sizes)
@@ -51,6 +78,16 @@ var WooProdectImage = function ($scope, $) {
             .removeAttr("data-src")
             .removeAttr("data-large_image");
          $productGalleryImage.fadeIn(100);
+      });
+
+      $productThumbImage.fadeOut(100, function () {
+         $productThumbImage
+            .attr("src", originalThumbImage.src)
+            .attr("srcset", originalThumbImage.srcset)
+            .attr("sizes", originalThumbImage.sizes)
+            .removeAttr("data-src")
+            .removeAttr("data-large_image");
+         $productThumbImage.fadeIn(100);
       });
    };
 
@@ -80,9 +117,9 @@ var WooProdectImage = function ($scope, $) {
    const sliderImageSelector = `#slider-container-${sliderId} .product_image_slider__container .swiper-container`;
 
    // Thumb slider options
-   let $sliderThumbsOptions = $(".product_image_slider__thumbs", $scope);
-   let $sliderThumbs = $sliderThumbsOptions.data("pi_thumb");
-   // console.log("Item", $sliderThumbs.slidesPerView);
+   // let $sliderThumbsOptions = $(".product_image_slider__thumbs", $scope);
+   // let $sliderThumbs = $sliderThumbsOptions.data("pi_thumb");
+   // console.log("Item", $sliderThumbs);
 
    // Image slider options
    let $sliderImagesOptions = $(".product_image_slider__container", $scope);
