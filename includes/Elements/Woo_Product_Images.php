@@ -814,7 +814,16 @@ class Woo_Product_Images extends Widget_Base {
 				<img src="<?php echo esc_url( $img_link ); ?>" alt="" />
 				<?php
 			} else {
-				echo wp_get_attachment_image( $img_link, $size ); 
+				$src = wp_get_attachment_image_src( $img_link, "full");
+				?>
+				<div class="xzoom-container">
+                     <div class="xzoom" xoriginal="<?php echo esc_url( $src[0] ); ?>">
+                        <?php echo wp_get_attachment_image( $img_link, $size ); ?>
+                     </div>
+                  </div>
+				<?php
+
+				// echo wp_get_attachment_image( $img_link, $size ); 
 			}
 			?>
 			</div>

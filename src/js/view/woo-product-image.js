@@ -67,6 +67,14 @@ var WooProdectImage = function ($scope, $) {
          console.log("Error initializing Swiper thumbs:", error);
       });
 
+   //
+   $scope.find(".xzoom").xzoom({
+      zoomWidth: 400,
+      // zoomHeight: 200,
+      tint: "#333",
+      Xoffset: 10,
+   });
+
    // Magnific Popup for the specific slider
    $scope.find(".product_image_slider__trigger a").on("click", function (e) {
       e.preventDefault();
