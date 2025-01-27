@@ -214,6 +214,7 @@
    .eael-single-product-images {
       .product_image_slider {
          &__thumbs {
+            margin: 0 auto;
             .swiper-button-prev,
             .swiper-button-next {
                height: 20px;

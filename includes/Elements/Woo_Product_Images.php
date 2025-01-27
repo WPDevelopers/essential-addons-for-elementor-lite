@@ -566,6 +566,29 @@ class Woo_Product_Images extends Widget_Base {
 		$this->end_popover();
 
 		$this->add_control(
+			'eael_pi_thumb_height_for_mobile',
+			[
+				'label' => esc_html__( 'For Mobile Device Height', 'essential-addons-for-elementor-lite' ),
+				'type'  => \Elementor\Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min'  => 1,
+						'max'  => 100,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'size' => 40,
+				],
+				'condition' => [
+					'eael_pi_thumbnail' => 'yes',
+					'eael_pi_select_thumb_items' => 'yes',
+					// 'eael_pi_thumb_position' => ['left', 'right'],
+				],
+			]
+		);
+
+		$this->add_control(
 			'eael_pi_thumb_position',
 			[
 				'label'   => esc_html__( 'Thumb Position', 'essential-addons-for-elementor-lite' ),
@@ -687,6 +710,7 @@ class Woo_Product_Images extends Widget_Base {
 		$pi_data_settings['desktop'] = ! empty( $settings['eael_pi_thumb_desktop_items'] ) ? $settings['eael_pi_thumb_desktop_items']['size'] : 4;
 		$pi_data_settings['tablet'] = ! empty( $settings['eael_pi_thumb_tablet_items'] ) ? $settings['eael_pi_thumb_tablet_items']['size'] : 3;
 		$pi_data_settings['mobile'] = ! empty( $settings['eael_pi_thumb_mobile_items'] ) ? $settings['eael_pi_thumb_mobile_items']['size'] : 2;
+		$pi_data_settings['height_for_mobile'] = ! empty( $settings['eael_pi_thumb_height_for_mobile'] ) ? $settings['eael_pi_thumb_height_for_mobile']['size'] : 40;
 		$pi_data_settings['image_loop'] = ! empty( $settings['eael_product_image_loop'] ) ? $settings['eael_product_image_loop'] : false;
 		$pi_data_settings['image_autoplay'] = ! empty( $settings['eael_product_image_autoplay'] ) ? $settings['eael_product_image_autoplay'] : false;
 		$pi_data_settings['autoplay_delay'] = ! empty( $settings['eael_product_image_autoplay_delay'] ) ? $settings['eael_product_image_autoplay_delay']['size'] : '';
@@ -879,6 +903,7 @@ class Woo_Product_Images extends Widget_Base {
 		$this->add_render_attribute( 'eael-pi-thumb', [
 			'data-pi_thumb' => $sliderThumbsObj,
 			'class'         => 'product_image_slider__thumbs',
+			'data-for_mobile' => $thumb_settings['height_for_mobile'],
 		] );
 		?>
 		<div <?php $this->print_render_attribute_string( 'eael-pi-thumb' ); ?>>
