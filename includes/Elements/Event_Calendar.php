@@ -485,7 +485,7 @@ class Event_Calendar extends Widget_Base
             'eael_event_calendar_language',
             [
                 'label' => __('Language', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
+                'type' => Controls_Manager::SELECT2,
                 'options' => [
                     'af' => 'Afrikaans',
                     'sq' => 'Albanian',
