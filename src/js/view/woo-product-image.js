@@ -55,7 +55,7 @@ var WooProdectImage = function ($scope, $) {
    //Update product iamges with variation images
    function updateProductImage(variationImage) {
       setImageAttributes($productGalleryImage, variationImage);
-      setImageAttributes($productThumbImage, variationImage);
+      setThumbImageAttributes($productThumbImage, variationImage);
    }
 
    //Set image attributes
@@ -66,6 +66,14 @@ var WooProdectImage = function ($scope, $) {
          .attr("sizes", imageAttributes.sizes)
          .attr("data-src", imageAttributes.src)
          .attr("data-large_image", imageAttributes.full_src);
+   }
+
+   //Set thumb image attributes
+   function setThumbImageAttributes($image, imageAttributes) {
+      $image
+         .attr("src", imageAttributes.gallery_thumbnail_src)
+         .attr("srcset", imageAttributes.gallery_thumbnail_src)
+         .attr("sizes", imageAttributes.gallery_thumbnail_src_h);
    }
 
    // Listen for hide variation or reset image event
