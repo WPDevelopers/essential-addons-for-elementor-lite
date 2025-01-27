@@ -1369,7 +1369,9 @@ class Woo_Product_Carousel extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#025492',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-product-carousel .eael-product-price del .amount, {{WRAPPER}} .eael-product-carousel .eael-product-price .amount bdi' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-carousel .eael-product-price del' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-carousel .eael-product-price del .amount' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-product-carousel .eael-product-price .amount bdi' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -1381,6 +1383,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
+                    '{{WRAPPER}} .eael-product-carousel .eael-product-price ins' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eael-product-carousel .eael-product-price ins .amount bdi' => 'color: {{VALUE}};',
                 ],
             ]
