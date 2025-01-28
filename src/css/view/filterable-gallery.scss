@@ -28,6 +28,12 @@
 	font-size: 24px;
 	display: inline-block;
 	text-align: center;
+
+	&.control{
+		&:focus-visible{
+			outline: 1px solid #a9d204 !important;
+		}
+	}
 }
 
 .eael-filter-gallery-control ul li a.control {
