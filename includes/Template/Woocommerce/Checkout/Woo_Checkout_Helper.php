@@ -365,19 +365,29 @@ trait Woo_Checkout_Helper {
 	 */
 	public static function checkout_order_review_template() {
 		$settings = self::ea_get_woo_checkout_settings();
+		$theme      = wp_get_theme(); // gets the current theme
+		$theme_data = $theme->parent() ? $theme->parent() : $theme;
 		?>
 		<?php do_action('woocommerce_checkout_before_order_review_heading'); ?>
 		<h2 id="order_review_heading" class="woo-checkout-section-title">
 			<?php echo wp_kses( $settings['ea_woo_checkout_order_details_title'], CheckoutHelperCLass::eael_allowed_tags() ); ?>
         </h2>
 
-		<?php do_action('woocommerce_checkout_before_order_review'); ?>
+		<?php 
+		if ( 'Medizin' !== $theme_data->name ) {
+			do_action('woocommerce_checkout_before_order_review');
+		}
+		?>
 
 		<div class="ea-woo-checkout-order-review">
 			<?php self::checkout_order_review_default($settings); ?>
 		</div>
 
-		<?php do_action('woocommerce_checkout_after_order_review'); ?>
+		<?php 
+		if ( 'Medizin' !== $theme_data->name ) {
+			do_action('woocommerce_checkout_after_order_review');
+		}
+		?>
 	<?php }
 
 	public function remove_woocommerce_display_recurring_totals( $settings ){
