@@ -288,7 +288,8 @@
 .eael-lr-form-wrapper ul li:not(:last-child), .eael-lr-form-wrapper ol li:not(:last-child), .eael-lr-form-wrapper .eael-form-msg ul li:not(:last-child), .eael-lr-form-wrapper .eael-form-msg ol li:not(:last-child) {
   padding-bottom: 10px;
 }
-.eael-lr-form-wrapper .eael_accept_tnc_wrap {
+.eael-lr-form-wrapper .eael_accept_tnc_wrap,
+.eael-lr-form-wrapper .eael_user_consent_wrap {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -297,7 +298,8 @@
       -ms-flex-align: center;
           align-items: center;
 }
-.eael-lr-form-wrapper .eael_accept_tnc_wrap .eael-lr-tnc-link {
+.eael-lr-form-wrapper .eael_accept_tnc_wrap .eael-lr-tnc-link,
+.eael-lr-form-wrapper .eael_user_consent_wrap .eael-lr-tnc-link {
   margin-left: 5px;
   display: inline-block;
 }
