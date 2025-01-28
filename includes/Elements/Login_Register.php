@@ -6159,6 +6159,7 @@ class Login_Register extends Widget_Base {
                                 echo "</div>";
 							endforeach;
 							$this->print_necessary_hidden_fields( 'register' );
+							do_action( 'eael/login-register/mailchimp_user_consent_field', $this );
 							$this->print_terms_condition_notice();
 							$this->print_recaptcha_node( 'register' );
 							?>
