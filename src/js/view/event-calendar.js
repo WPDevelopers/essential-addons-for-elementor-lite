@@ -13,7 +13,7 @@ var EventCalendar = function ($scope, $) {
 		defaultDate = element.data("defaultdate"),
 		multiDaysEventDayCount = typeof element.data("multidays_event_day_count") !== 'undefined' ? element.data("multidays_event_day_count") : 0,
 		eventLimit = element.data("event_limit"),
-		popupDateFormate = element.data("popup_date_formate"),
+		popupDateFormate = element.data("popup_date_format"),
 		monthColumnHeaderFormat = element.data("monthcolumnheaderformat"),
 		weekColumnHeaderFormat = element.data("weekcolumnheaderformat"),
 		time_format = element.data("time_format") == "yes" ? true : false;

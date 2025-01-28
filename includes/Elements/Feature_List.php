@@ -55,6 +55,10 @@ class Feature_List extends Widget_Base {
         return false;
     }
 
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
+    }
+
     public function get_custom_help_url() {
         return 'https://essential-addons.com/elementor/docs/ea-feature-list/';
     }
@@ -988,16 +992,11 @@ class Feature_List extends Widget_Base {
 		<div <?php $this->print_render_attribute_string( 'eael_feature_list_wrapper' ); ?>>
 			<ul <?php $this->print_render_attribute_string( 'eael_feature_list' ); ?>>
 			<?php
-			$individual_icon_color_css = '';
         foreach ( $settings['eael_feature_list'] as $index => $item ):
 
             $this->add_render_attribute( 'eael_feature_list_icon' . $index, 'class', 'eael-feature-list-icon fl-icon-'.$index );
             $this->add_render_attribute( 'eael_feature_list_title' . $index, 'class', 'eael-feature-list-title' );
             $this->add_render_attribute( 'eael_feature_list_content' . $index, 'class', 'eael-feature-list-content' );
-            // icon color
-            $icon_color =  ( $item['eael_feature_list_icon_is_individual_style'] == 'on' && isset($item['eael_feature_list_icon_individual_color']) ) ? esc_attr( $item['eael_feature_list_icon_individual_color'] ) : '' ;
-            $icon_bg = (  ( $item['eael_feature_list_icon_is_individual_style'] == 'on' ) ? ' style="background-color:' . esc_attr( $item['eael_feature_list_icon_individual_bg_color'] ) . '"' : '' );
-            $icon_box_bg = (  ( $item['eael_feature_list_icon_is_individual_style'] == 'on' ) ? ' style="background-color:' . esc_attr( $item['eael_feature_list_icon_individual_box_bg_color'] ) . '"' : '' );
 
             $feat_title_tag = Helper::eael_validate_html_tag($settings['eael_feature_list_title_size']);
 

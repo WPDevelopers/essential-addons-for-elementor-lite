@@ -72,6 +72,10 @@ class Woo_Product_Gallery extends Widget_Base {
 		];
 	}
 
+	public function has_widget_inner_wrapper(): bool {
+        return ! HelperClass::eael_e_optimized_markup();
+    }
+
 	public function get_custom_help_url() {
 		return 'https://essential-addons.com/elementor/docs/woo-product-gallery/';
 	}
@@ -543,6 +547,30 @@ class Woo_Product_Gallery extends Widget_Base {
 				'source_type' => 'product_tag',
 				'label_block' => true,
 				'multiple'    => true,
+				'condition'   => [
+					'post_type'                            => 'product',
+					'eael_product_gallery_product_filter!' => 'manual'
+				],
+			]
+		);
+
+		$this->add_control(
+			'relation_cats_tags',
+			[
+				'label'   => esc_html__( 'Relation of Category & Tags Query', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'or' => [
+						'title' => esc_html__( 'OR', 'essential-addons-for-elementor-lite' ),
+						'text' => esc_html__( 'OR', 'essential-addons-for-elementor-lite' ),
+					],
+					'and' => [
+						'title' => esc_html__( 'AND', 'essential-addons-for-elementor-lite' ),
+						'text' => esc_html__( 'AND', 'essential-addons-for-elementor-lite' ),
+					],
+				],
+				'default' => 'or',
+				'toggle' => false,
 				'condition'   => [
 					'post_type'                            => 'product',
 					'eael_product_gallery_product_filter!' => 'manual'
@@ -2864,7 +2892,7 @@ class Woo_Product_Gallery extends Widget_Base {
 		}
 
 		if ( ! empty( $settings[ 'eael_product_gallery_tags' ] ) ) {
-			$args_tax_query_combined['relation'] = 'OR';
+			$args_tax_query_combined['relation'] = isset( $settings['relation_cats_tags'] ) ? $settings['relation_cats_tags'] : 'OR';
 
 			if ( $settings[ 'eael_woo_product_gallery_terms_show_all' ] == '' ) {
 				if ( ! empty( $product_tags_items ) && count( $product_tags ) > 0 ) {
@@ -2927,7 +2955,7 @@ class Woo_Product_Gallery extends Widget_Base {
             $product_categories = wp_get_post_terms( $current_product_id, 'product_cat', array( 'fields' => 'ids' ) );
             $product_tags       = wp_get_post_terms( $current_product_id, 'product_tag', array( 'fields' => 'names' ) );
             $args['tax_query'] = array(
-                'relation' => 'OR',
+                'relation' => isset( $settings['relation_cats_tags'] ) ? $settings['relation_cats_tags'] : 'OR',
                 array(
                     'taxonomy' => 'product_cat',
                     'field'    => 'term_id',

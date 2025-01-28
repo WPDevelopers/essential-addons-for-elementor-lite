@@ -51,6 +51,10 @@ class Image_Accordion extends Widget_Base {
         return false;
     }
 
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
+    }
+
     public function get_custom_help_url() {
         return 'https://essential-addons.com/elementor/docs/image-accordion/';
     }
@@ -227,8 +231,8 @@ class Image_Accordion extends Widget_Base {
             [
                 'label'        => esc_html__( 'Enable Title Link', 'essential-addons-for-elementor-lite' ),
                 'type'         => Controls_Manager::SWITCHER,
-                'label_on'     => __( 'Show', 'your-plugin' ),
-                'label_off'    => __( 'Hide', 'your-plugin' ),
+                'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+                'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
                 'return_value' => 'yes',
                 'default'      => 'yes',
             ]

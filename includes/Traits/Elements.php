@@ -110,7 +110,9 @@ trait Elements {
 				continue;
 			}
 
-			new $extension['class'];
+			if ( class_exists( $extension['class'] ) ) {
+				new $extension['class']; // Safely instantiate
+			}
 		}
 	}
 
@@ -399,7 +401,7 @@ trait Elements {
 			return;
 		}
 
-		if ( ! ( is_singular() || is_archive() || is_home() || is_front_page() ) ) {
+		if ( ! ( is_singular() || is_archive() || is_home() || is_front_page() || is_search() ) ) {
 			return;
 		}
 
@@ -532,7 +534,7 @@ trait Elements {
 				$toc_collapse                    = $settings_data['eael_ext_toc_collapse_sub_heading'];
 				$list_icon                       = $settings_data['eael_ext_toc_list_icon'];
 				$toc_title                       = $settings_data['eael_ext_toc_title'];
-				$toc_title_tag                   = $settings_data['eael_ext_toc_title_tag'];
+				$toc_title_tag                   = isset( $settings_data['eael_ext_toc_title_tag'] ) ? $settings_data['eael_ext_toc_title_tag'] : 'h2';
 				$icon_check                      = $settings_data['eael_ext_table_of_content_header_icon'];
 				$sticky_scroll                   = $settings_data['eael_ext_toc_sticky_scroll'];
 				$hide_mobile                     = $settings_data['eael_ext_toc_hide_in_mobile'];

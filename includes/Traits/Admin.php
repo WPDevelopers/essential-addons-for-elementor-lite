@@ -202,7 +202,7 @@ trait Admin {
 				    'heading' => __( 'Want Advanced Features?', 'essential-addons-for-elementor-lite' ),
 				    'content' => __( 'Get more powerful widgets & extensions to elevate your Elementor website', 'essential-addons-for-elementor-lite' ),
 				    'review'  => [
-					    'count' => __( '3300+', 'essential-addons-for-elementor-lite' ),
+					    'count' => __( '3400+', 'essential-addons-for-elementor-lite' ),
 					    'label' => __( 'Five Star Reviews', 'essential-addons-for-elementor-lite' )
 				    ],
 				    'button'  => [
@@ -370,7 +370,7 @@ trait Admin {
 				    'top_heading' => __( '2+ Million Active Users', 'essential-addons-for-elementor-lite' ),
 				    'heading'     => __( "Enhance Your Elementor Experience By <br/> <b>Unlocking</b> <span class='Advance-color'>40+ Advanced PRO</span> <b>Elements</b>", 'essential-addons-for-elementor-lite' ),
 				    'review'      => [
-					    'count' => __( '3300+', 'essential-addons-for-elementor-lite' ),
+					    'count' => __( '3400+', 'essential-addons-for-elementor-lite' ),
 					    'label' => __( 'Five Star Reviews', 'essential-addons-for-elementor-lite' )
 				    ],
 				    'button'      => [
@@ -810,6 +810,14 @@ trait Admin {
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'advanced-search' ) )
 						    ],
+							'breadcrumbs'      => [
+								'key'         => 'breadcrumbs',
+								'title'       => __( 'Breadcrumbs', 'essential-addons-for-elementor-lite' ),
+								'demo_link'   => 'https://essential-addons.com/breadcrumbs/',
+								'doc_link'    => 'https://essential-addons.com/docs/ea-breadcrumbs/',
+								'promotion'   => 'new',
+								'is_activate' => boolval( $this->get_settings( 'breadcrumbs' ) )
+							],
 					    ]
 				    ],
 				    'dynamic-content-elements' => [
@@ -1318,6 +1326,38 @@ trait Admin {
 							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-list/',
 							    'is_activate' => boolval( $this->get_settings( 'woo-product-list' ) )
 						    ],
+						    'woo-product-price'      => [
+							    'key'         => 'woo-product-price',
+							    'title'       => __( 'Woo Product Price', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/woo-product-price/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-price',
+								 'promotion'   => 'new',
+							    'is_activate' => boolval( $this->get_settings( 'woo-product-price' ) )
+						    ],
+						    'woo-product-rating'      => [
+							    'key'         => 'woo-product-rating',
+							    'title'       => __( 'Woo Product Rating', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/woo-product-rating/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-rating',
+								 'promotion'   => 'new',
+							    'is_activate' => boolval( $this->get_settings( 'woo-product-rating' ) )
+						    ],
+						    'woo-product-images'      => [
+							    'key'         => 'woo-product-images',
+							    'title'       => __( 'Woo Product Images', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/woo-product-images/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-images/',
+								 'promotion'   => 'new',
+							    'is_activate' => boolval( $this->get_settings( 'woo-product-images' ) )
+						    ],
+						    'woo-add-to-cart'      => [
+							    'key'         => 'woo-add-to-cart',
+							    'title'       => __( 'Woo Add To Cart', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/woo-add-to-cart/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-add-to-cart/',
+								 'promotion'   => 'new',
+							    'is_activate' => boolval( $this->get_settings( 'woo-add-to-cart' ) )
+						    ],
 						    'woo-collections'       => [
 							    'key'         => 'woo-collections',
 							    'title'       => __( 'Woo Product Collections', 'essential-addons-for-elementor-lite' ),
@@ -1573,7 +1613,7 @@ trait Admin {
 			    ],
 			    'admin_screen_promo'      => [
 				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
-				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA 6.0 with revamped '<b>Dashboard</b>', '<a target='_blank' href='%s'>Interactive Animations</a>', '<a target='_blank' href='%s'>Hover Interactions</a>', '<a target='_blank' href='%s'>Dynamic Tags</a>' & more! Check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/interactive-animations/' ), esc_url( 'https://essential-addons.com/hover-interaction/' ), esc_url( 'https://essential-addons.com/dynamic-tags/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
+				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA 6.1 with 4 New \"<b>WooCommerce</b>\" widgets along with \"<b>Breadcrumbs</b>\" widget! Check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
 			    ],
 			    'pro_modal'               => [
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),
@@ -1653,13 +1693,17 @@ trait Admin {
     public function admin_notice() {
         require_once EAEL_PLUGIN_PATH . 'vendor/autoload.php';
 
+	    if ( ! method_exists( CacheBank::class, 'get_instance' ) ) {
+		    return;
+	    }
+
         self::$cache_bank = CacheBank::get_instance();
 
         NoticeRemover::get_instance('1.0.0');
         NoticeRemover::get_instance('1.0.0', '\WPDeveloper\BetterDocs\Dependencies\PriyoMukul\WPNotice\Notices');
 
         $notices = new Notices( [
-			'id'             => 'essential-addons-for-elementor',
+			'id'             => 'essential-addons-for-elementor-lite',
 			'storage_key'    => 'notices',
 			'lifetime'       => 3,
 			'stylesheet_url' => esc_url_raw( EAEL_PLUGIN_URL . 'assets/admin/css/notice.css' ),
@@ -1723,17 +1767,30 @@ trait Admin {
 			<img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/eael-bfcm-logo.png' ); ?>" width="25" alt="">
 		</div>
 		<div class="eael-black-friday-optin">
-			<p><?php _e( '🛍️ This <strong>Black Friday</strong> enjoy up to 30% OFF on PRO plans. Get the best Essential Addons deal of the season now.', 'essential-addons-for-elementor-lite' ); ?></p>
-			<a href="https://essential-addons.com/bfcm24-pricing" target="_blank" class="button-primary">
-				<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M16.7432 11.938L16.904 10.3596C16.9898 9.51748 17.0465 8.96138 17.002 8.61101L17.0176 8.6111C17.7443 8.6111 18.3334 7.98927 18.3334 7.22221C18.3334 6.45515 17.7443 5.83332 17.0176 5.83332C16.2909 5.83332 15.7018 6.45515 15.7018 7.22221C15.7018 7.56912 15.8223 7.88632 16.0215 8.12974C15.7355 8.31607 15.3616 8.70925 14.7987 9.30104L14.7987 9.30105L14.7987 9.30106C14.3651 9.75698 14.1483 9.98494 13.9064 10.0202C13.7724 10.0398 13.6359 10.0197 13.5121 9.96217C13.2888 9.85836 13.1399 9.57655 12.8421 9.01292L11.2723 6.04203C11.0886 5.69432 10.9349 5.4033 10.7962 5.16911C11.365 4.86283 11.7544 4.23868 11.7544 3.51851C11.7544 2.49576 10.9689 1.66666 10 1.66666C9.0311 1.66666 8.24563 2.49576 8.24563 3.51851C8.24563 4.23868 8.63509 4.86283 9.20382 5.16911C9.06517 5.40331 8.91143 5.69429 8.72769 6.04203L7.15797 9.01292C6.86016 9.57654 6.71126 9.85836 6.48792 9.96217C6.36418 10.0197 6.22763 10.0398 6.09362 10.0202C5.85175 9.98494 5.63494 9.75698 5.20133 9.30105C4.6385 8.70926 4.26455 8.31607 3.97856 8.12974C4.17777 7.88632 4.29827 7.56912 4.29827 7.22221C4.29827 6.45515 3.70917 5.83332 2.98248 5.83332C2.25579 5.83332 1.66669 6.45515 1.66669 7.22221C1.66669 7.98927 2.25579 8.6111 2.98248 8.6111L2.99801 8.61101C2.95354 8.96138 3.01021 9.51748 3.09603 10.3596L3.25686 11.938C3.34614 12.8142 3.42038 13.6478 3.51131 14.3981H16.4887C16.5797 13.6478 16.6539 12.8142 16.7432 11.938Z"
-						  fill="white"/>
-					<path d="M9.04569 18.3333H10.9544C13.442 18.3333 14.6858 18.3333 15.5157 17.5492C15.878 17.207 16.1073 16.59 16.2729 15.787H3.72718C3.8927 16.59 4.12207 17.207 4.4843 17.5492C5.3142 18.3333 6.55803 18.3333 9.04569 18.3333Z"
-						  fill="white"/>
-				</svg>
-			    <?php _e( 'Upgrade To PRO', 'essential-addons-for-elementor-lite' ); ?>
-			</a>
+			<div>
+				<p><?php _e( '🎁 <strong>SAVE 25% now</strong> & unlock 100+ advanced elements & 2800+ ready templates to design Elementor websites faster in 2025.', 'essential-addons-for-elementor-lite' ); ?></p>
+			</div>
+			<div>
+				<a href="https://essential-addons.com/holiday24-admin-notice" target="_blank" class="button-primary">
+					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M16.7432 11.938L16.904 10.3596C16.9898 9.51748 17.0465 8.96138 17.002 8.61101L17.0176 8.6111C17.7443 8.6111 18.3334 7.98927 18.3334 7.22221C18.3334 6.45515 17.7443 5.83332 17.0176 5.83332C16.2909 5.83332 15.7018 6.45515 15.7018 7.22221C15.7018 7.56912 15.8223 7.88632 16.0215 8.12974C15.7355 8.31607 15.3616 8.70925 14.7987 9.30104L14.7987 9.30105L14.7987 9.30106C14.3651 9.75698 14.1483 9.98494 13.9064 10.0202C13.7724 10.0398 13.6359 10.0197 13.5121 9.96217C13.2888 9.85836 13.1399 9.57655 12.8421 9.01292L11.2723 6.04203C11.0886 5.69432 10.9349 5.4033 10.7962 5.16911C11.365 4.86283 11.7544 4.23868 11.7544 3.51851C11.7544 2.49576 10.9689 1.66666 10 1.66666C9.0311 1.66666 8.24563 2.49576 8.24563 3.51851C8.24563 4.23868 8.63509 4.86283 9.20382 5.16911C9.06517 5.40331 8.91143 5.69429 8.72769 6.04203L7.15797 9.01292C6.86016 9.57654 6.71126 9.85836 6.48792 9.96217C6.36418 10.0197 6.22763 10.0398 6.09362 10.0202C5.85175 9.98494 5.63494 9.75698 5.20133 9.30105C4.6385 8.70926 4.26455 8.31607 3.97856 8.12974C4.17777 7.88632 4.29827 7.56912 4.29827 7.22221C4.29827 6.45515 3.70917 5.83332 2.98248 5.83332C2.25579 5.83332 1.66669 6.45515 1.66669 7.22221C1.66669 7.98927 2.25579 8.6111 2.98248 8.6111L2.99801 8.61101C2.95354 8.96138 3.01021 9.51748 3.09603 10.3596L3.25686 11.938C3.34614 12.8142 3.42038 13.6478 3.51131 14.3981H16.4887C16.5797 13.6478 16.6539 12.8142 16.7432 11.938Z"
+							  fill="white"/>
+						<path d="M9.04569 18.3333H10.9544C13.442 18.3333 14.6858 18.3333 15.5157 17.5492C15.878 17.207 16.1073 16.59 16.2729 15.787H3.72718C3.8927 16.59 4.12207 17.207 4.4843 17.5492C5.3142 18.3333 6.55803 18.3333 9.04569 18.3333Z"
+							  fill="white"/>
+					</svg>
+				    <?php _e( 'GET PRO Lifetime Access', 'essential-addons-for-elementor-lite' ); ?>
+				</a>
+				<a href="#" class="eael-holiday-notice-dismiss dismiss-btn"><?php _e( "No, I'll Pay Full Price Later", 'essential-addons-for-elementor-lite' ); ?></a>
+			</div>
 		</div>
+		<script>
+            jQuery(document).ready(function ($) {
+                $('.eael-holiday-notice-dismiss').on('click', function (e) {
+                    e.preventDefault();
+                    $('.notice-essential-addons-for-elementor-lite-holiday_24_notice button.notice-dismiss').trigger('click');
+                });
+            });
+		</script>
 	    <?php
 	    $b_message            = ob_get_clean();
 	    $_black_friday_notice = [
@@ -1741,14 +1798,14 @@ trait Admin {
 	    ];
 
 	    $notices->add(
-			'black_friday_24_notice',
+			'holiday_24_notice',
 			$_black_friday_notice,
 			[
 				'start'       => $notices->time(),
 				'recurrence'  => false,
 				'dismissible' => true,
 				'refresh'     => EAEL_PLUGIN_VERSION,
-				"expire"      => strtotime( '11:59:59pm 5th December, 2024' ),
+				"expire"      => strtotime( '11:59:59pm 10th January, 2025' ),
 				'display_if'  => ! $this->pro_enabled && $GLOBALS["pagenow"] === 'index.php',
 			]
 		);

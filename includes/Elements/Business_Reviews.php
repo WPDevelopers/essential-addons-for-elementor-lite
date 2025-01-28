@@ -71,7 +71,8 @@ class Business_Reviews extends Widget_Base {
 	public function get_style_depends() {
 		return [
 			'font-awesome-5-all',
-			'font-awesome-4-shim'
+			'font-awesome-4-shim',
+            'e-swiper'
 		];
 	}
 
@@ -80,6 +81,10 @@ class Business_Reviews extends Widget_Base {
 			'font-awesome-4-shim'
 		];
 	}
+
+	public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
+    }
 
 	protected function register_controls() {
 

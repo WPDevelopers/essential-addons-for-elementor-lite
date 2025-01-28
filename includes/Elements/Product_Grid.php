@@ -86,6 +86,10 @@ class Product_Grid extends Widget_Base
         ];
     }
 
+    public function has_widget_inner_wrapper(): bool {
+        return ! HelperClass::eael_e_optimized_markup();
+    }
+
     public function get_custom_help_url()
     {
         return 'https://essential-addons.com/elementor/docs/woocommerce-product-grid/';
@@ -704,24 +708,26 @@ class Product_Grid extends Widget_Base
 
         ]);
 
-        $this->add_control(
-		    'eael_product_rating_type',
-		    [
-			    'label'     => esc_html__( 'Type', 'essential-addons-for-elementor' ),
-			    'type'      => Controls_Manager::SELECT,
-			    'default'   => 'stars',
-			    'options'   => [
-				    'stars'        => esc_html__( '&#10029;&#10029;&#10029;&#10029;&#10027;', 'essential-addons-for-elementor' ),
-				    'stars-number' => esc_html__( '&#10029; 4.7', 'essential-addons-for-elementor' ),
-				    'number'       => esc_html__( '4.7/5', 'essential-addons-for-elementor' ),
-			    ],
-                'condition' => [
-                    'eael_product_grid_rating' => 'yes',
-                    'eael_product_grid_style_preset!' => 'eael-product-preset-8'
-                ],
-			    'separator' => 'after'
-		    ]
-	    );
+        if ( apply_filters('eael/pro_enabled', false) ) {
+            $this->add_control(
+                'eael_product_rating_type',
+                [
+                    'label'     => esc_html__( 'Type', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::SELECT,
+                    'default'   => 'stars',
+                    'options'   => [
+                        'stars'        => esc_html__( '&#10029;&#10029;&#10029;&#10029;&#10027;', 'essential-addons-for-elementor-lite' ),
+                        'stars-number' => esc_html__( '&#10029; 4.7', 'essential-addons-for-elementor-lite' ),
+                        'number'       => esc_html__( '4.7/5', 'essential-addons-for-elementor-lite' ),
+                    ],
+                    'condition' => [
+                        'eael_product_grid_rating' => 'yes',
+                        'eael_product_grid_style_preset!' => [ 'eael-product-default', 'eael-product-preset-8' ],
+                    ],
+                    'separator' => 'after'
+                ]
+            );
+        }
 
         $this->add_control(
             'eael_product_sold_count', [
@@ -738,13 +744,13 @@ class Product_Grid extends Widget_Base
 	    $this->add_control(
 		    'eael_product_sold_count_type',
 		    [
-			    'label'     => esc_html__( 'Type', 'essential-addons-for-elementor' ),
+			    'label'     => esc_html__( 'Type', 'essential-addons-for-elementor-lite' ),
 			    'type'      => Controls_Manager::SELECT,
 			    'default'   => 'number',
 			    'options'   => [
-				    'number'     => esc_html__( 'Only Count', 'essential-addons-for-elementor' ),
-				    'bar-number' => esc_html__( 'Count with Progress Bar', 'essential-addons-for-elementor' ),
-				    'bar'        => esc_html__( 'Only Progress Bar', 'essential-addons-for-elementor' ),
+				    'number'     => esc_html__( 'Only Count', 'essential-addons-for-elementor-lite' ),
+				    'bar-number' => esc_html__( 'Count with Progress Bar', 'essential-addons-for-elementor-lite' ),
+				    'bar'        => esc_html__( 'Only Progress Bar', 'essential-addons-for-elementor-lite' ),
 			    ],
 			    'condition' => [
 				    'eael_product_sold_count' => 'yes',
@@ -756,7 +762,7 @@ class Product_Grid extends Widget_Base
 	    $this->add_control(
 		    'eael_product_sold_count_bar_width',
 		    [
-			    'label'       => esc_html__( 'Width', 'essential-addons-for-elementor' ),
+			    'label'       => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
 			    'type'        => Controls_Manager::SLIDER,
 			    'size_units'  => [ '%' ],
 			    'range'       => [
@@ -774,14 +780,14 @@ class Product_Grid extends Widget_Base
 				    'eael_product_sold_count_type!' => 'number',
                     'eael_product_grid_style_preset!' => 'eael-product-default'
 			    ],
-			    'description' => esc_html__( 'This width applied in progress bar for those products which stocks are not managed', 'essential-addons-for-elementor' ),
+			    'description' => esc_html__( 'This width applied in progress bar for those products which stocks are not managed', 'essential-addons-for-elementor-lite' ),
 		    ]
 	    );
 
 	    $this->add_control(
 		    'eael_product_sold_count_bar_height',
 		    [
-			    'label'      => esc_html__( 'Height', 'essential-addons-for-elementor' ),
+			    'label'      => esc_html__( 'Height', 'essential-addons-for-elementor-lite' ),
 			    'type'       => Controls_Manager::SLIDER,
 			    'size_units' => [ '%' ],
 			    'range'      => [
@@ -808,7 +814,7 @@ class Product_Grid extends Widget_Base
 	    $this->add_control(
 		    'eael_product_sold_count_text',
 		    [
-			    'label'       => esc_html__( 'Text', 'essential-addons-for-elementor' ),
+			    'label'       => esc_html__( 'Text', 'essential-addons-for-elementor-lite' ),
 			    'type'        => Controls_Manager::TEXTAREA,
 			    'default'     => '[sold_count] Sold',
 			    'condition'   => [
@@ -819,26 +825,26 @@ class Product_Grid extends Widget_Base
                 'ai' => [
                         'active' => false
                 ],
-			    'description' => __( '<strong>[sold_count]</strong> Will be replaced with actual amount.', 'essential-addons-for-elementor' ),
+			    'description' => __( '<strong>[sold_count]</strong> Will be replaced with actual amount.', 'essential-addons-for-elementor-lite' ),
 		    ]
 	    );
 
 	    $this->add_control(
 		    'eael_product_sold_count_text_align',
 		    [
-			    'label'     => esc_html__( 'Alignment', 'essential-addons-for-elementor' ),
+			    'label'     => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
 			    'type'      => Controls_Manager::CHOOSE,
 			    'options'   => [
 				    'left'   => [
-					    'title' => esc_html__( 'Left', 'essential-addons-for-elementor' ),
+					    'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
 					    'icon'  => 'eicon-text-align-left',
 				    ],
 				    'center' => [
-					    'title' => esc_html__( 'Center', 'essential-addons-for-elementor' ),
+					    'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
 					    'icon'  => 'eicon-text-align-center',
 				    ],
 				    'right'  => [
-					    'title' => esc_html__( 'Right', 'essential-addons-for-elementor' ),
+					    'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
 					    'icon'  => 'eicon-text-align-right',
 				    ],
 			    ],

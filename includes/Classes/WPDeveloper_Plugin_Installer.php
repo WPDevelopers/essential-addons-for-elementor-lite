@@ -51,7 +51,7 @@ class WPDeveloper_Plugin_Installer
     public function get_remote_plugin_data($slug = '')
     {
         if (empty($slug)) {
-            return new WP_Error('empty_arg', __('Argument should not be empty.'));
+            return new WP_Error('empty_arg', __('Argument should not be empty.', 'essential-addons-for-elementor-lite'));
         }
 
         $response = wp_remote_post(
@@ -86,7 +86,7 @@ class WPDeveloper_Plugin_Installer
     public function install_plugin($slug = '', $active = true)
     {
         if (empty($slug)) {
-            return new WP_Error('empty_arg', __('Argument should not be empty.'));
+            return new WP_Error('empty_arg', __('Argument should not be empty.', 'essential-addons-for-elementor-lite'));
         }
 
         include_once ABSPATH . 'wp-admin/includes/file.php';
@@ -131,7 +131,7 @@ class WPDeveloper_Plugin_Installer
     public function upgrade_plugin($basename = '')
     {
         if (empty($slug)) {
-            return new WP_Error('empty_arg', __('Argument should not be empty.'));
+            return new WP_Error('empty_arg', __('Argument should not be empty.', 'essential-addons-for-elementor-lite'));
         }
 
         include_once ABSPATH . 'wp-admin/includes/file.php';

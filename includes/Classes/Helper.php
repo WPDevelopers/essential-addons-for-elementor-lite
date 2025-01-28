@@ -1630,7 +1630,27 @@ class Helper
 		return $html;
 	}
 
-	public static function eael_onpage_edit_template_markup( $page_id, $template_id ) {
+    //WooCommerce Helper Function
+    public static function get_product_variation( $product_id = false ) {
+		return wc_get_product( get_the_ID() );
+	}
+    
+    public static function get_product( $product_id = false ) {
+		if ( 'product_variation' === get_post_type() ) {
+			return self::get_product_variation( $product_id );
+		}
+		$product = wc_get_product( $product_id );
+		if ( ! $product ) {
+			$product = wc_get_product();
+		}
+		return $product;
+	}
+
+	public static function eael_onpage_edit_template_markup( $page_id, $template_id, $return = false ) {
+		if ( $return ) {
+			ob_start();
+		}
+
 		if ( Plugin::$instance->editor->is_edit_mode() ) {
 			$active_doc = $_GET['active-document'] ?? 0;
 			$mode       = $active_doc === $template_id ? 'save' : 'edit';
@@ -1639,7 +1659,7 @@ class Helper
 				<div class='eael-onpage-edit-template' data-eael-template-id='<?php echo esc_attr( $template_id ); ?>'
 					 data-page-id='<?php echo esc_attr( $page_id ); ?>' data-mode='<?php echo esc_attr( $mode ); ?>'>
 					<i class='eicon-edit'></i>
-					<span><?php esc_html_e( 'Edit Template' ); ?></span>
+					<span><?php esc_html_e( 'Edit Template', 'essential-addons-for-elementor-lite' ); ?></span>
 				</div>
 			</div>
 			<?php
@@ -1656,5 +1676,13 @@ class Helper
 				<?php
 			}
 		}
+
+		if ( $return ) {
+			return ob_get_clean();
+		}
 	}
+
+    public static function eael_e_optimized_markup(){
+        return Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
+     }
 }

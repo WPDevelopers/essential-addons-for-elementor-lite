@@ -161,16 +161,16 @@ jQuery(window).on("elementor/frontend/init", function () {
 		}
 	}
 
-	//Add hashchange code form advanced-accordion
-	let  isTriggerOnHashchange = true;
-	window.addEventListener( 'hashchange', function () {
-		if( !isTriggerOnHashchange ) {
+	//Add hashchange code from advanced-accordion
+	let isTriggerOnHashchange = true;
+	window.addEventListener('hashchange', function () {
+		if (!isTriggerOnHashchange) {
 			return;
 		}
 		let hashTag = window.location.hash.substr(1);
 		hashTag = hashTag === 'safari' ? 'eael-safari' : hashTag;
-		if ( hashTag !== 'undefined' && hashTag ) {
-			jQuery( '#' + hashTag ).trigger( 'click' );
+		if (hashTag !== 'undefined' && hashTag && /^[A-Za-z][-A-Za-z0-9_:.]*$/.test(hashTag)) {
+			$('#' + hashTag).trigger('click');
 		}
 	});
 
@@ -270,14 +270,15 @@ jQuery(window).on("elementor/frontend/init", function () {
 		return elementBottom > viewportTop && elementTop < viewportHalf;
 	};
 
-	$(document).ready(function(){ 
+	$(document).ready(function () {
 		let resetPasswordParams = new URLSearchParams(location.search);
-	
-		if ( resetPasswordParams.has('popup-selector') && ( resetPasswordParams.has('eael-lostpassword') || resetPasswordParams.has('eael-resetpassword') ) ){
+
+		if (resetPasswordParams.has('popup-selector') && (resetPasswordParams.has('eael-lostpassword') || resetPasswordParams.has('eael-resetpassword'))) {
 			let popupSelector = resetPasswordParams.get('popup-selector');
-			if(popupSelector.length){
-				popupSelector = popupSelector.replace(/_/g," ");
-				setTimeout(function(){
+
+			if (popupSelector.length && /^[A-Za-z.#][A-Za-z0-9_:.#\s-]*$/.test(popupSelector)) {
+				popupSelector = popupSelector.replace(/_/g, " ");
+				setTimeout(function () {
 					jQuery(popupSelector).trigger('click');
 				}, 300);
 			}
