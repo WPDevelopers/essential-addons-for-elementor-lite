@@ -868,6 +868,9 @@ class Woo_Product_Images extends Widget_Base {
 
 		$thumb_position = ['left', 'right'];
 		if ( in_array( $thumb_settings['thumb_position'], $thumb_position ) && 'yes' == $thumb_settings['thumbnail'] ) {
+			$slidesDesktopPerView = count( $img_links ) > $thumb_settings['desktop'] ? $thumb_settings['desktop'] : count( $img_links );
+			$slidesTabletPerView = count( $img_links ) > $thumb_settings['tablet'] ? $thumb_settings['tablet'] : count( $img_links );
+			$slidesMobilePerView = count( $img_links ) > $thumb_settings['mobile'] ? $thumb_settings['mobile'] : count( $img_links );
 			$sliderThumbs['breakpoints'] = [
 				320 => [
 					'direction'=> "vertical",
