@@ -570,6 +570,7 @@ class Woo_Product_Images extends Widget_Base {
 			[
 				'label' => esc_html__( 'For Mobile Device Height', 'essential-addons-for-elementor-lite' ),
 				'type'  => \Elementor\Controls_Manager::SLIDER,
+				'description' => esc_html__( 'You can control the height of the image from here', 'essential-addons-for-elementor-lite' ),
 				'range' => [
 					'px' => [
 						'min'  => 1,
