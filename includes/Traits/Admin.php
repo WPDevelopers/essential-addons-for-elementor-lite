@@ -1104,6 +1104,7 @@ trait Admin {
 							    'demo_link'   => 'https://essential-addons.com/stacked-cards/',
 							    'doc_link'    => 'https://essential-addons.com/docs/stacked-cards/',
 							    'is_pro'      => true,
+								 'promotion'   => 'new',
 							    'is_activate' => boolval( $this->get_settings( 'stacked-cards' ) )
 						    ]
 					    ]
