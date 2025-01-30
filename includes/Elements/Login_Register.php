@@ -1696,6 +1696,15 @@ class Login_Register extends Widget_Base {
 			'label' => __( 'Validation Messages', 'essential-addons-for-elementor-lite' ),
 		] );
 
+		$this->start_controls_tabs( 'error_messages_tabs' );
+		
+		$this->start_controls_tab(
+			'error_messages_tab_msg',
+			[
+				'label' => esc_html__( 'Messages', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
 		$this->add_control( 'err_message_heading', [
 			'label' => esc_html__( 'Error Messages', 'essential-addons-for-elementor-lite' ),
 			'type'  => Controls_Manager::HEADING,
@@ -1884,6 +1893,109 @@ class Login_Register extends Widget_Base {
 			'default'     => __( 'Your password has been reset.', 'essential-addons-for-elementor-lite' ),
 			'placeholder' => __( 'eg. Your password has been reset.', 'essential-addons-for-elementor-lite' ),
 		] );
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'error_messages_tab_msg_position',
+			[
+				'label' => esc_html__( 'Position', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_control(
+			'error_messages_position_heading',
+			[
+				'label' => esc_html__( 'Set Error Message Position For', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::HEADING,
+			]
+		);
+
+		$this->add_control(
+			'err_message_position_login',
+			[
+				'label'   => esc_html__( 'Login', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'top' => [
+						'title' => esc_html__( 'Top', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-v-align-top',
+					],
+					'bottom' => [
+						'title' => esc_html__( 'Bottom', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-v-align-bottom',
+					],
+				],
+				'default' => 'bottom',
+				'toggle' => false,
+			]
+		);
+
+		$this->add_control(
+			'err_message_position_registration',
+			[
+				'label'   => esc_html__( 'Registration', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'top' => [
+						'title' => esc_html__( 'Top', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-v-align-top',
+					],
+					'bottom' => [
+						'title' => esc_html__( 'Bottom', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-v-align-bottom',
+					],
+				],
+				'default' => 'bottom',
+				'toggle' => false,
+			]
+		);
+
+		$this->add_control(
+			'err_message_position_forget',
+			[
+				'label'   => esc_html__( 'Forget Password', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'top' => [
+						'title' => esc_html__( 'Top', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-v-align-top',
+					],
+					'bottom' => [
+						'title' => esc_html__( 'Bottom', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-v-align-bottom',
+					],
+				],
+				'default' => 'bottom',
+				'toggle' => false,
+			]
+		);
+
+
+
+		$this->add_control(
+			'err_message_position_reset',
+			[
+				'label'   => esc_html__( 'Reset Password', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'top' => [
+						'title' => esc_html__( 'Top', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-v-align-top',
+					],
+					'bottom' => [
+						'title' => esc_html__( 'Bottom', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-v-align-bottom',
+					],
+				],
+				'default' => 'bottom',
+				'toggle' => false,
+			]
+		);
+		
+		$this->end_controls_tab();
+		
+		$this->end_controls_tabs();
 
 		$this->end_controls_section();
 	}
