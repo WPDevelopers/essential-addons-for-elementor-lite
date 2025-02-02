@@ -1971,8 +1971,6 @@ class Login_Register extends Widget_Base {
 			]
 		);
 
-
-
 		$this->add_control(
 			'err_message_position_reset',
 			[
@@ -5824,12 +5822,9 @@ class Login_Register extends Widget_Base {
 			$icon_class = $show_icon ? 'lr-icon-showing' : '';
 
 			$show_login_spinner  = !empty( $this->ds['login_btn_show_spinner'] ) ? $this->ds['login_btn_show_spinner'] : '';
+			$err_msg_position = $this->ds['err_message_position_login'];
 			?>
-            <section
-                    id="eael-login-form-wrapper"
-                    class="<?php echo esc_attr( $default_hide_class ); ?>"
-                    data-recaptcha-theme="<?php echo esc_attr( $rc_theme ); ?>"
-                    data-recaptcha-size="<?php echo esc_attr( $rc_size ); ?>">
+            <section id="eael-login-form-wrapper" class="<?php echo esc_attr( $default_hide_class ); ?>" data-recaptcha-theme="<?php echo esc_attr( $rc_theme ); ?>" data-recaptcha-size="<?php echo esc_attr( $rc_size ); ?>">
                 <div class="eael-login-form-wrapper eael-lr-form-wrapper style-2 <?php echo esc_attr( $icon_class ); ?>">
 					<?php
 					if ( $show_logout_link && is_user_logged_in() && ! $this->in_editor ) {
@@ -5845,10 +5840,14 @@ class Login_Register extends Widget_Base {
                         <div class="lr-form-wrapper">
 							<?php $this->print_form_header( 'login' ); ?>
 							<?php do_action( 'eael/login-register/before-login-form', $this ); ?>
-                            <form class="eael-login-form eael-lr-form"
-                                  id="eael-login-form"
-                                  method="post">
-								<?php do_action( 'eael/login-register/after-login-form-open', $this ); ?>
+                            <form class="eael-login-form eael-lr-form" id="eael-login-form" method="post">
+								<?php do_action( 'eael/login-register/after-login-form-open', $this ); 
+								if( 'top' === $err_msg_position ) {
+									echo '<div class="eael-form-validation-container">';
+										$this->print_login_validation_errors();
+									echo '</div>';
+								}
+								?>
                                 <div class="eael-lr-form-group eael-user-login">
 									<?php if ( $display_label && $u_label ) {
 										echo '<label for="eael-user-login" class="eael-field-label">' . wp_kses( $u_label, HelperCLass::eael_allowed_tags() ) . '</label>';
@@ -5946,11 +5945,11 @@ class Login_Register extends Widget_Base {
 
                                 </div>
 								<?php do_action( 'eael/login-register/after-login-footer', $this );
-								?>
-                                <div class="eael-form-validation-container">
-									<?php $this->print_login_validation_errors(); ?>
-                                </div>
-								<?php
+								if( ! $err_msg_position || 'bottom' === $err_msg_position ) {
+									echo '<div class="eael-form-validation-container">';
+										$this->print_login_validation_errors();
+									echo '</div>';
+								}
 								$this->print_necessary_hidden_fields( 'login' );
 
 								do_action( 'eael/login-register/before-login-form-close', $this );
