@@ -6076,6 +6076,7 @@ class Login_Register extends Widget_Base {
 			$password_one_lowercase = !empty( $this->ds['weak_pass_one_lowercase'] ) ? true : false;
 			$password_one_number = !empty( $this->ds['weak_pass_one_number'] ) ? true : false;
 			$password_one_special = !empty( $this->ds['weak_pass_one_special'] ) ? true : false;
+			$err_msg_position = $this->ds['err_message_position_registration'];
 
 			ob_start();
 			?>
@@ -6117,8 +6118,13 @@ class Login_Register extends Widget_Base {
 								enctype="multipart/form-data"
 							  <?php endif; ?>
 							  >
-							<?php do_action( 'eael/login-register/after-register-form-open', $this ); ?>
-							<?php // Print all dynamic fields
+							<?php do_action( 'eael/login-register/after-register-form-open', $this );
+							if( ! $err_msg_position || 'bottom' === $err_msg_position ) {
+								echo '<div class="eael-form-validation-container">';
+									$this->print_validation_message();
+								echo '</div>';
+							}
+							// Print all dynamic fields
 							foreach ( $this->ds['register_fields'] as $f_index => $field ) :
 								$field_type = $field['field_type'];
 								$dynamic_field_name = "{$field_type}_exists";
@@ -6296,12 +6302,12 @@ class Login_Register extends Widget_Base {
 								<?php } ?>
                             </div>
 
-							<?php do_action( 'eael/login-register/after-register-footer', $this ); ?>
-
-                            <div class="eael-form-validation-container">
-								<?php $this->print_validation_message(); ?>
-                            </div>
-							<?php
+							<?php do_action( 'eael/login-register/after-register-footer', $this );
+							if( ! $err_msg_position || 'bottom' === $err_msg_position ) {
+								echo '<div class="eael-form-validation-container">';
+									$this->print_validation_message();
+								echo '</div>';
+							}
 
 							do_action( 'eael/login-register/before-register-form-close', $this );
 							?>
@@ -6394,6 +6400,7 @@ class Login_Register extends Widget_Base {
 			// input icons
 			$show_icon  = ( $this->pro_enabled && ! empty( $this->ds['show_lostpassword_icon'] ) && 'yes' === esc_html( $this->ds['show_lostpassword_icon'] ) );
 			$icon_class = $show_icon ? 'lr-icon-showing' : '';
+			$err_msg_position = $this->ds['err_message_position_lostpassword'];
 			?>
             <section
                     id="eael-lostpassword-form-wrapper"
@@ -6408,10 +6415,15 @@ class Login_Register extends Widget_Base {
 					<div class="lr-form-wrapper">
 						<?php $this->print_form_header( 'lostpassword' ); ?>
 						<?php do_action( 'eael/login-register/before-lostpassword-form', $this ); ?>
-						<form class="eael-lostpassword-form eael-lr-form"
-							  id="eael-lostpassword-form"
-							  method="post">
-							<?php do_action( 'eael/login-register/after-lostpassword-form-open', $this ); ?>
+						<form class="eael-lostpassword-form eael-lr-form" id="eael-lostpassword-form" method="post">
+							<?php do_action( 'eael/login-register/after-lostpassword-form-open', $this );
+							if( ! $err_msg_position || 'bottom' === $err_msg_position ) {
+								echo '<div class="eael-form-validation-container">';
+									$this->print_lostpassword_validation_errors();
+								echo '</div>';
+								$this->print_lostpassword_validation_errors();
+							}
+							?>
 							<div class="eael-lr-form-group <?php echo esc_attr( $hide_class_after_submission ); ?>">
 								<?php if ( $display_label && $u_label ) {
 									printf( '<label for="eael-user-lostpassword" class="eael-field-label">%s</label>', esc_html__( $u_label, 'essential-addons-for-elementor-lite' ) );
@@ -6448,14 +6460,13 @@ class Login_Register extends Widget_Base {
 
 							</div>
 							<?php do_action( 'eael/login-register/after-lostpassword-footer', $this );
-							?>
-							<div class="eael-form-validation-container">
-								<?php $this->print_lostpassword_validation_errors(); ?>
-							</div>
-							<?php
+							if( ! $err_msg_position || 'bottom' === $err_msg_position ) {
+								echo '<div class="eael-form-validation-container">';
+									$this->print_lostpassword_validation_errors();
+								echo '</div>';
+								$this->print_lostpassword_validation_errors();
+							}
 							$this->print_necessary_hidden_fields( 'lostpassword' );
-
-							$this->print_lostpassword_validation_errors();
 
 							do_action( 'eael/login-register/before-lostpassword-form-close', $this );
 							?>
@@ -6547,11 +6558,9 @@ class Login_Register extends Widget_Base {
 			$icon_class = $show_icon ? 'lr-icon-showing' : '';
 
 			$show_pv_icon     = ( ! empty( $this->ds['password_toggle_resetpassword'] ) && 'yes' === $this->ds['password_toggle_resetpassword'] );
+			$err_msg_position = $this->ds['err_message_position_resetpassword'];
 			?>
-            <section
-                    id="eael-resetpassword-form-wrapper"
-                    class="<?php echo esc_attr( $default_hide_class ); ?>"
-                    >
+            <section id="eael-resetpassword-form-wrapper" class="<?php echo esc_attr( $default_hide_class ); ?>" >
                 <div class="eael-resetpassword-form-wrapper eael-lr-form-wrapper style-2 <?php echo esc_attr( $icon_class ); ?>">
 					<?php
 					if ( 'left' === $this->form_illustration_pos ) {
@@ -6564,7 +6573,14 @@ class Login_Register extends Widget_Base {
 						<form class="eael-resetpassword-form eael-lr-form"
 							  id="eael-resetpassword-form"
 							  method="post">
-							<?php do_action( 'eael/login-register/after-resetpassword-form-open', $this ); ?>
+							<?php do_action( 'eael/login-register/after-resetpassword-form-open', $this ); 
+							if( ! $err_msg_position || 'bottom' === $err_msg_position ) {
+								echo '<div class="eael-form-validation-container">';
+									$this->print_resetpassword_validation_errors();
+								echo '</div>';
+								$this->print_resetpassword_validation_errors();
+							}
+							?>
 							<div class="eael-lr-form-group <?php echo esc_attr( $hide_class_after_submission ); ?>">
 								<?php if ( $display_label && $password_label ) {
 									printf( '<label for="eael-pass1" class="eael-field-label">%s</label>', esc_html( wp_strip_all_tags( $password_label ) ) );
@@ -6638,14 +6654,14 @@ class Login_Register extends Widget_Base {
 									   value="<?php echo esc_attr( $btn_text ); ?>"/>
 							</div>
 							<?php do_action( 'eael/login-register/after-resetpassword-footer', $this );
-							?>
-							<div class="eael-form-validation-container">
-								<?php $this->print_resetpassword_validation_errors(); ?>
-							</div>
-							<?php
-							$this->print_necessary_hidden_fields( 'resetpassword' );
+							if( ! $err_msg_position || 'bottom' === $err_msg_position ) {
+								echo '<div class="eael-form-validation-container">';
+									$this->print_resetpassword_validation_errors();
+								echo '</div>';
+								$this->print_resetpassword_validation_errors();
+							}
 
-							$this->print_resetpassword_validation_errors();
+							$this->print_necessary_hidden_fields( 'resetpassword' );
 
 							do_action( 'eael/login-register/before-resetpassword-form-close', $this );
 							?>
