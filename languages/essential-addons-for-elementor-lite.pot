@@ -11503,7 +11503,7 @@ msgid "If you like Essential Addons for Elementor, check out Essential Blocks, t
 msgstr ""
 
 #: ../includes/Traits/Helper.php:649, ../includes/Traits/Helper.php:718
-msgid "Never Show Again"
+msgid "Skip for Now"
 msgstr ""
 
 #: ../includes/Traits/Helper.php:650
