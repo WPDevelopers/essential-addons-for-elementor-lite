@@ -5896,16 +5896,8 @@ class Login_Register extends Widget_Base {
                                 <div class="eael-forever-forget eael-lr-form-group">
 									<?php if ( $show_rememberme && !empty( $remember_text )) { ?>
                                         <p class="forget-menot">
-                                            <input name="eael-rememberme"
-                                                   type="checkbox"
-                                                   id="rememberme"
-												   <?php if ( $remember_checked ) : ?>
-												   checked 
-												   <?php endif; ?>
-                                                   class="remember-me <?php echo esc_attr( $rm_type ); ?>"
-                                                   value="forever">
-                                            <label for="rememberme"
-                                                   class="eael-checkbox-label rememberme"><?php echo esc_html( $remember_text ); ?></label>
+                                            <input name="eael-rememberme" type="checkbox" id="rememberme" <?php if ( $remember_checked ) { echo 'checked'; } ?> class="remember-me <?php echo esc_attr( $rm_type ); ?>" value="forever">
+                                            <label for="rememberme" class="eael-checkbox-label rememberme"><?php echo esc_html( $remember_text ); ?></label>
                                         </p>
 									<?php }
 									if ( $show_lp ) {
@@ -6417,7 +6409,7 @@ class Login_Register extends Widget_Base {
 						<?php do_action( 'eael/login-register/before-lostpassword-form', $this ); ?>
 						<form class="eael-lostpassword-form eael-lr-form" id="eael-lostpassword-form" method="post">
 							<?php do_action( 'eael/login-register/after-lostpassword-form-open', $this );
-							if( ! $err_msg_position || 'bottom' === $err_msg_position ) {
+							if( ! $err_msg_position || 'top' === $err_msg_position ) {
 								echo '<div class="eael-form-validation-container">';
 									$this->print_lostpassword_validation_errors();
 								echo '</div>';
@@ -6428,14 +6420,7 @@ class Login_Register extends Widget_Base {
 								<?php if ( $display_label && $u_label ) {
 									printf( '<label for="eael-user-lostpassword" class="eael-field-label">%s</label>', esc_html__( $u_label, 'essential-addons-for-elementor-lite' ) );
 								} ?>
-								<input type="text"
-									   name="eael-user-lostpassword"
-									   id="eael-user-lostpassword"
-									   class="eael-lr-form-control"
-									   placeholder="<?php if ( $display_label && $u_ph ) {
-										   echo esc_attr( $u_ph );
-									   } ?>"
-									   required>
+								<input type="text" name="eael-user-lostpassword" id="eael-user-lostpassword" class="eael-lr-form-control" placeholder="<?php if ( $display_label && $u_ph ) { echo esc_attr( $u_ph ); } ?>" required>
 								<?php
 								if ( $show_icon ) {
 									echo '<i class="fas fa-user"></i>';
