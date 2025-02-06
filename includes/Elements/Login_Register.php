@@ -1952,7 +1952,7 @@ class Login_Register extends Widget_Base {
 		);
 
 		$this->add_control(
-			'err_message_position_forget',
+			'err_message_position_lostpassword',
 			[
 				'label'   => esc_html__( 'Forget Password', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::CHOOSE,
