@@ -6119,7 +6119,7 @@ class Login_Register extends Widget_Base {
 							  <?php endif; ?>
 							  >
 							<?php do_action( 'eael/login-register/after-register-form-open', $this );
-							if( ! $err_msg_position || 'bottom' === $err_msg_position ) {
+							if( ! $err_msg_position || 'top' === $err_msg_position ) {
 								echo '<div class="eael-form-validation-container">';
 									$this->print_validation_message();
 								echo '</div>';
