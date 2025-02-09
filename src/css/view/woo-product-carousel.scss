@@ -64,6 +64,11 @@ $theme-preset4: #ec3b75;
                         }
                     }
                 }
+                .eael-product-price{
+                    ins {
+                        text-decoration: none;
+                    }
+                }
             }
 
             &.products[class*='columns-'] li.product {
