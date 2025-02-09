@@ -40,6 +40,10 @@
   text-align: center;
 }
 
+.eael-filter-gallery-control ul li.control:focus-visible {
+  outline: 1px solid #a9d204 !important;
+}
+
 .eael-filter-gallery-control ul li a.control {
   font-family: "Montserrat", sans-serif;
   font-size: 16px;

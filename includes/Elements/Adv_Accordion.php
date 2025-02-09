@@ -89,6 +89,10 @@ class Adv_Accordion extends Widget_Base
             }
         }
 
+        if( ! $is_dynamic_content ) {
+            $is_dynamic_content = 'yes' === $this->get_settings( 'eael_adv_accordion_faq_schema_show' );
+        }
+
         return $is_dynamic_content;
     }
 

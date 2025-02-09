@@ -1729,12 +1729,21 @@ class Info_Box extends Widget_Base
                     $this->render_infobox_button();
                 } elseif ('template' === $settings['eael_infobox_text_type']) {
                     if ( ! empty( $settings['eael_primary_templates'] ) ) {
+	                    if ( Plugin::$instance->editor->is_edit_mode() ) {
+		                    echo '<div class="eael-infobox-template-wrapper">';
+	                    }
+
                         // WPML Compatibility
                         if ( ! is_array( $settings['eael_primary_templates'] ) ) {
                             $settings['eael_primary_templates'] = apply_filters( 'wpml_object_id', $settings['eael_primary_templates'], 'wp_template', true );
                         }
+
+	                    Helper::eael_onpage_edit_template_markup( get_the_ID(), $settings['eael_primary_templates'] );
                         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                         echo Plugin::$instance->frontend->get_builder_content( $settings['eael_primary_templates'], true );
+	                    if ( Plugin::$instance->editor->is_edit_mode() ) {
+		                    echo '</div>';
+	                    }
                     }
                 }
             }

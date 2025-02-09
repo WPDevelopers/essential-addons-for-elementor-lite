@@ -38,11 +38,34 @@ class advancedDataTable {
       };
 
       if ($(table).hasClass('ea-advanced-data-table-static')) {
+        const DOM_config = {
+          ALLOWED_ATTR: [
+            'class', 'id', 'style', 'title', 'lang', 'dir', 'data-*', 'accesskey', 'tabindex', 'contenteditable', // Global
+            'href', 'target', 'rel', 'download', 'type', // <a>, <button>, <input>, <source>
+            'src', 'alt', 'width', 'height', 'loading', // <img>, <audio>, <video>, <iframe>, <source>, <table>
+            'action', 'method', 'enctype', 'novalidate', // <form>
+            'name', 'value', 'placeholder', 'checked', 'disabled', 'readonly', 'required', 'maxlength', 'min', 'max', 'step', // <input>, <form>, <li>
+            'border', 'cellpadding', 'cellspacing', 'colspan', 'rowspan', 'scope', // <table>, <td>, <th>
+            'controls', 'autoplay', 'loop', 'muted', 'preload', 'poster', // <audio>, <video>
+            'fill', 'stroke', 'viewBox', 'xmlns', 'd', 'cx', 'cy', 'r', // <svg>, <path>, <circle>
+            'allow', 'allowfullscreen', 'sandbox', // <iframe>
+            'content', 'http-equiv', 'charset', // <meta>
+            'aria-label', 'aria-hidden', 'role', // Accessibility (Global)
+            // Common for form elements
+            'pattern', 'multiple', 'autocomplete', // <input>, <textarea>, <select>
+            'accept-charset', // <form>
+            'rows', 'cols', 'wrap', // <textarea>
+            'size', 'multiple', // <select>
+            'for', // <label>
+          ]
+        };
+        
+        
         $(table).find('th, td').each(function () {
           let text = $(this)[0].innerHTML;
           if (isEscapedHtmlString(text)) {
             text = decodeEscapedHtmlString(text);
-            $(this).html(DOMPurify.sanitize(text));
+            $(this).html(DOMPurify.sanitize(text, DOM_config));
           }
         });
       }

@@ -84,7 +84,7 @@ const QuickView = {
 	singlePageAddToCartButton: ($scope, $) => {
 		$(document).on(
 			"click",
-			".eael-woo-slider-popup .product:not(.product-type-external) .single_add_to_cart_button:not(.wc-variation-selection-needed)",
+			".eael-woo-slider-popup .product.product-type-simple .single_add_to_cart_button:not(.wc-variation-selection-needed), .eael-woo-slider-popup .product.product-type-variable .single_add_to_cart_button:not(.wc-variation-selection-needed), .eael-woo-slider-popup .product.product-type-grouped .single_add_to_cart_button:not(.wc-variation-selection-needed)",
 			function (e) {
 				e.preventDefault();
 				e.stopImmediatePropagation();

@@ -2895,32 +2895,31 @@ class GravityForms extends Widget_Base {
         }
 
         if ( ! empty( $settings['contact_form_list'] ) ) { ?>
-            <div <?php $this->print_render_attribute_string( 'contact-form' ); ?>>
-                <?php if ( $settings['custom_title_description'] == 'yes' ) { ?>
-                    <div class="eael-gravity-form-heading">
-                        <?php if ( $settings['form_title_custom'] != '' ) { ?>
-                            <h3 class="eael-contact-form-title eael-gravity-form-title">
-                                <?php echo esc_attr( $settings['form_title_custom'] ); ?>
-                            </h3>
-                        <?php } ?>
-                        <?php if ( $settings['form_description_custom'] != '' ) { ?>
-                            <div class="eael-contact-form-description eael-gravity-form-description">
-                                <?php
-                                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                echo $this->parse_text_editor( $settings['form_description_custom'] ); ?>
-                            </div>
-                        <?php } ?>
-                    </div>
-                <?php } ?>
-                <?php
-                    $eael_form_id = $settings['contact_form_list'];
-                    $eael_form_title = $settings['form_title'];
-                    $eael_form_description = $settings['form_description'];
-                    $eael_form_ajax = $settings['form_ajax'];
+			<div <?php $this->print_render_attribute_string( 'contact-form' ); ?>>
+		        <?php if ( $settings['custom_title_description'] == 'yes' ) { ?>
+					<div class="eael-gravity-form-heading">
+				        <?php if ( $settings['form_title_custom'] != '' ) { ?>
+							<h3 class="eael-contact-form-title eael-gravity-form-title">
+						        <?php echo esc_attr( $settings['form_title_custom'] ); ?>
+							</h3>
+				        <?php } ?>
+				        <?php if ( $settings['form_description_custom'] != '' ) { ?>
+							<div class="eael-contact-form-description eael-gravity-form-description">
+						        <?php
+						        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						        echo $this->parse_text_editor( $settings['form_description_custom'] ); ?>
+							</div>
+				        <?php } ?>
+					</div>
+		        <?php }
+		        $eael_form_id          = $settings['contact_form_list'];
+		        $eael_form_title       = $settings['form_title'] === 'yes';
+		        $eael_form_description = $settings['form_description'] === 'yes';
+		        $eael_form_ajax        = $settings['form_ajax'] === 'yes';
 
-                    gravity_form( $eael_form_id, $eael_form_title, $eael_form_description, $display_inactive = false, $field_values = null, $eael_form_ajax, '', $echo = true );
-                ?>
-            </div>
+		        gravity_form( $eael_form_id, $eael_form_title, $eael_form_description, $display_inactive = false, $field_values = null, $eael_form_ajax, '', $echo = true );
+		        ?>
+			</div>
             <?php
         }
     }

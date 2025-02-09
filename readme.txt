@@ -4,7 +4,7 @@ Tags: elementor, elements, elementor addon, elementor widget, woocommerce elemen
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 6.1.0
+Stable tag: 6.1.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -311,6 +311,23 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.1.1 - 21/01/2025 =
+
+- Improved: Added Edit Template support right inside the page itself for the widgets which got Saved Template option
+- Fixed: EA Breadcrumbs | When used on the Container, the background image of the container doesn't show
+- Fixed: Compatibility issue | WooCommerce Product Bundles | With bundle product quick view add to cart not working
+- Fixed: EA Filterable Gallery | Accessibility issue with Filters
+- Fixed: EA Filterable Gallery | Several fields from Filterable Gallery cannot be translated with WPML.
+- Fixed: Advanced Data Table | open new tab does not work in link
+- Fixed: EA Advanced Accordion | FAQ Schema Issue with Item Count
+- Fixed: EA WPForms | Error text color is not being applied
+- Fixed: EA Filterable Gallery | Load more is not showing properly in some cases
+- Fixed: EA Event Calendar | Events overflowing the container if multiple events available on a day
+- Improved: EA Team Member | Change Team Member name tag from H2 to span
+- Fixed: EA Post timeline | Title font family can't be changed
+- Fixed: EA Gravity Forms | "Next" Button Issue with Ajax and Toggle Settings
+- Few minor bug fixes & improvements
 
 = 6.1.0 - 29/12/2024 =
 

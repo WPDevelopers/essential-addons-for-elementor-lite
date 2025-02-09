@@ -1,6 +1,8 @@
 <?php 
 namespace Essential_Addons_Elementor\Elements;
 
+use Elementor\Icons_Manager;
+
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
    exit;
@@ -556,7 +558,7 @@ class Breadcrumbs extends Widget_Base {
 				<?php 
 					switch ( $prefix_type ) {
 						case 'icon':
-							\Elementor\Icons_Manager::render_icon( $settings['eael_breadcrumb_prefix_icon'], [ 'aria-hidden' => 'true' ] );
+							Icons_Manager::render_icon( $settings['eael_breadcrumb_prefix_icon'], [ 'aria-hidden' => 'true' ] );
 							break;
 						case 'text':
 							echo "<span>" . Helper::eael_wp_kses( $settings['eael_breadcrumb_prefix_text'] ) . "</span>";
@@ -571,10 +573,10 @@ class Breadcrumbs extends Widget_Base {
    protected function eael_breadcrumb_separator() {
       $settings = $this->get_settings_for_display();
       if ( ! empty( $settings['eael_separator_icon'] ) ) {
-         ob_start();
-         \Elementor\Icons_Manager::render_icon($settings['eael_separator_icon'], ['aria-hidden' => 'true']);
-         $separator_icon = ob_get_clean();
-         return sprintf( '<span class="eael-breadcrumb-separator">%s</span>', $separator_icon );
+         	ob_start();
+         	Icons_Manager::render_icon($settings['eael_separator_icon'], ['aria-hidden' => 'true']);
+         	$separator_icon = ob_get_clean();
+         	return sprintf( '<span class="eael-breadcrumb-separator">%s</span>', $separator_icon );
       } else {
 			return sprintf( '<span class="eael-breadcrumb-separator">%s</span>', Helper::eael_wp_kses( $settings['eael_separator_type_text'] ) );
       }
@@ -701,6 +703,8 @@ class Breadcrumbs extends Widget_Base {
 			} elseif ( is_404() ) {
 				$output .= $before . esc_html__( 'Error 404', 'essential-addons-for-elementor-lite' ) . $after;
 			}
+
+			$output .= "</div>";
 		}
 		echo $output;
 	}

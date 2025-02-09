@@ -31,7 +31,7 @@ echo '<article class="eael-timeline-post">
 
 				if ( $settings['eael_show_title'] ) {
 					$title_html = '<div class="eael-timeline-post-title">
-		                    <' . $title_tag . ' class="eael-timeline-post-title-text-card" >' . get_the_title() . '</'.$title_tag.'>
+		                    <' . $title_tag . ' class="eael-timeline-post-title-text" >' . get_the_title() . '</'.$title_tag.'>
 		                </div>';
 					echo wp_kses( $title_html, Helper::eael_allowed_tags() );
 				}

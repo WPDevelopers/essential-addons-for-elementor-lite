@@ -2832,7 +2832,7 @@ class Filterable_Gallery extends Widget_Base
 			'eael_fg_not_found_text_align',
 			[
 				'label' => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
-				'type' => \Elementor\Controls_Manager::CHOOSE,
+				'type' => Controls_Manager::CHOOSE,
 				'options' => [
 					'left' => [
 						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
@@ -3962,7 +3962,7 @@ class Filterable_Gallery extends Widget_Base
         } else {
             $gallery_settings['post_id'] = get_the_ID();
         }
-        if ( method_exists( Plugin::$instance->breakpoints, 'get_breakpoints_config' ) && ! empty( $breakpoints = \Elementor\Plugin::$instance->breakpoints->get_breakpoints_config() ) ) {
+        if ( method_exists(  Plugin::$instance->breakpoints, 'get_breakpoints_config' ) && ! empty( $breakpoints = \Elementor\Plugin::$instance->breakpoints->get_breakpoints_config() ) ) {
 
             $this->add_render_attribute('gallery', 'data-breakpoints', wp_json_encode( $breakpoints ) );
         }

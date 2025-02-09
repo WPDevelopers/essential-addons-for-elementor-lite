@@ -1565,12 +1565,25 @@ class Cta_Box extends Widget_Base
         $contentMarkup = '';
         if ('content' == $settings['eael_cta_title_content_type']) {
             $contentMarkup .= wp_kses( $settings['eael_cta_content'], Helper::eael_allowed_tags() );
-        }else if ('template' == $settings['eael_cta_title_content_type']){
-            if (!empty($settings['eael_primary_templates'])) {
-                $eael_template_id = $settings['eael_primary_templates'];
-                $eael_frontend = new \Elementor\Frontend;
-                $contentMarkup .= $eael_frontend->get_builder_content($eael_template_id, true);
-            }
+        } else if ( 'template' == $settings['eael_cta_title_content_type'] ) {
+	        if ( ! empty( $settings['eael_primary_templates'] ) ) {
+		        $eael_template_id = $settings['eael_primary_templates'];
+		        // WPML Compatibility
+		        if ( ! is_array( $eael_template_id ) ) {
+			        $eael_template_id = apply_filters( 'wpml_object_id', $eael_template_id, 'wp_template', true );
+		        }
+
+		        if ( Plugin::$instance->editor->is_edit_mode() ) {
+			        $contentMarkup .= '<div class="eael-cta-template-wrapper">';
+		        }
+
+		        $contentMarkup .= Helper::eael_onpage_edit_template_markup( get_the_ID(), $eael_template_id, true );
+		        $contentMarkup .= Plugin::$instance->frontend->get_builder_content( $eael_template_id, true );
+
+		        if ( Plugin::$instance->editor->is_edit_mode() ) {
+			        $contentMarkup .= '</div>';
+		        }
+	        }
         }
 
         // button attributes
