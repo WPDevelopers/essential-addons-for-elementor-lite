@@ -4,7 +4,7 @@ Tags: elementor, elements, elementor addon, elementor widget, woocommerce elemen
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 6.1.1
+Stable tag: 6.1.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -311,6 +311,18 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.1.2 - 10/02/2025 =
+
+- Fixed: EA Woo Product Carousel | Regular price strikethrough color is not changing
+- Fixed: EA Woo Product Carousel | Not able to style the pop-up with the woo product carousel
+- Fixed: EA Woo Product Grid | Not able to style the pop-up with the woo product grid
+- Fixed: EA Woo Product Gallery | Product Gallery Display Issue on Chrome (Repeating Rows After Navigation)
+- Fixed: EA Fancy text | - & character can not be used
+- Fixed: EA Advanced Tabs | Editor not loading when Advanced Tabs element is enabled in some cases
+- Fixed: EA Fancy Text | Animation Not Working Except for "Typing Text"
+- Improved: EA Woo Product Images | Added responsive controls
+- Few minor bug fixes & improvements
 
 = 6.1.1 - 21/01/2025 =
 
