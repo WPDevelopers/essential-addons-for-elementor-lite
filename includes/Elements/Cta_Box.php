@@ -968,9 +968,9 @@ class Cta_Box extends Widget_Base
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', 'em', '%' ],
                 'default' => [
-					'top'    => 2,
-					'right'  => 8,
-					'bottom' => 2,
+					'top'    => 1,
+					'right'  => 6,
+					'bottom' => 0,
 					'left'   => 0,
 					'unit'   => 'px',
 					'isLinked' => true,
@@ -1047,6 +1047,23 @@ class Cta_Box extends Widget_Base
                     'eael_cta_btn_is_used_gradient_bg' => '',
                     'eael_cta_preset' => 'cta-preset-2',
                 ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_cta_primary_btn_icon_color',
+            [
+                'label' => esc_html__('Icon Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#344054',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-preset-1 i' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-preset-1 svg' => 'fill: {{VALUE}};',
+                ],
+                'condition' => [ 
+                    'eael_cta_primary_btn_icon_show' => 'yes',
+                    'eael_cta_preset'                => 'cta-preset-1',
+                ],
             ]
         );
 
@@ -1222,6 +1239,22 @@ class Cta_Box extends Widget_Base
                     'eael_cta_btn_is_used_gradient_bg' => '',
                     'eael_cta_preset' => 'cta-preset-1',
                 ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_cta_primary_btn_icon_hover_color',
+            [
+                'label' => esc_html__('Icon Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-preset-1:hover i' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-preset-1:hover svg' => 'fill: {{VALUE}};',
+                ],
+                'condition' => [ 
+                    'eael_cta_primary_btn_icon_show' => 'yes',
+                    'eael_cta_preset'                => 'cta-preset-1',
+                ],
             ]
         );
 
