@@ -626,6 +626,11 @@ class WPDeveloper_Setup_Wizard {
 						'title'       => __( 'Fancy Chart', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
 					],
+					[
+						'key'         => 'stacked-cards',
+						'title'       => __( 'Stacked Cards', 'essential-addons-for-elementor-lite' ),
+						'preferences' => 'advance',
+					],
 				]
 			],
 			'marketing-elements'       => [
