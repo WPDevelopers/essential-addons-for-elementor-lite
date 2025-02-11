@@ -928,6 +928,10 @@ class Cta_Box extends Widget_Base
 				    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-btn-preset-2 i' => 'font-size: {{SIZE}}px;',
 				    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-btn-preset-2 svg' => 'width: {{SIZE}}px; height: {{SIZE}}px;',
 			    ],
+                'condition' => [
+				    'eael_cta_preset' => 'cta-preset-2',
+				    'eael_cta_btn_preset' => 'cta-btn-preset-2',
+			    ]
 		    ]
 	    );
 
