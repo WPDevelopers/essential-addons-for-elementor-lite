@@ -445,6 +445,33 @@ class Cta_Box extends Widget_Base
         );
 
         $this->add_control(
+			'eael_cta_btn_primary_icon_direction',
+			[
+				'label'   => esc_html__( 'Icon Direction', 'essential-addons-for-elementor-lite' ),
+				'type'    => \Elementor\Controls_Manager::CHOOSE,
+				'options' => [
+					'left' => [
+						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-arrow-left',
+					],
+					'right' => [
+						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-arrow-right',
+					],
+				],
+				'default'   => 'left',
+				'toggle'    => true,
+				'selectors' => [
+					'{{WRAPPER}} .eael-call-to-action .cta-button.cta-preset-1 .btn-icon' => 'float: {{VALUE}};',
+				],
+                'condition' => [ 
+                    'eael_cta_primary_btn_icon_show' => 'yes',
+                    'eael_cta_preset'                => 'cta-preset-1',
+                ],
+			]
+		);
+
+        $this->add_control(
             'eael_cta_btn_text',
             [
                 'label' => esc_html__('Primary Button Text', 'essential-addons-for-elementor-lite'),
@@ -968,10 +995,10 @@ class Cta_Box extends Widget_Base
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', 'em', '%' ],
                 'default' => [
-					'top'    => 1,
-					'right'  => 6,
+					'top'    => 2,
+					'right'  => 4,
 					'bottom' => 0,
-					'left'   => 0,
+					'left'   => 4,
 					'unit'   => 'px',
 					'isLinked' => true,
 				],
