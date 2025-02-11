@@ -414,6 +414,35 @@ class Cta_Box extends Widget_Base
 		    ]
 	    );
 
+        $this->add_control(
+			'eael_cta_primary_btn_is_show',
+			[
+				'label'        => __( 'Show Primary Icon', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+                'condition'    => [
+                    'eael_cta_preset' => 'cta-preset-1',
+                ]
+			]
+		);
+
+        $this->add_control(
+            'eael_cta_btn_primary_icon',
+            [
+                'label'   => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::ICONS,
+                'default' => [
+                    'value'   => 'fas fa-arrow-right',
+                    'library' => 'fa-solid',
+                ],
+                'condition' => [ 
+                    'eael_cta_primary_btn_is_show' => 'yes',
+                    'eael_cta_preset'              => 'cta-preset-1',
+                ],
+            ]
+        );
 
         $this->add_control(
             'eael_cta_btn_text',
@@ -1590,7 +1619,7 @@ class Cta_Box extends Widget_Base
 	    if ( ! empty( $settings['eael_cta_btn_link']['url'] ) ) {
 		    $this->add_link_attributes( 'button', $settings['eael_cta_btn_link'] );
 	    }
-	    $this->add_render_attribute( 'button', 'class', "cta-button {$settings['eael_cta_btn_preset']} {$cta_btn_effect}" );
+	    $this->add_render_attribute( 'button', 'class', "cta-button {$settings['eael_cta_preset']} {$settings['eael_cta_btn_preset']} {$cta_btn_effect}" );
 
         if($settings['eael_cta_btn_preset'] === 'cta-btn-preset-2'){
             $btn_icon_wrap = '<span class="btn-icon">';
@@ -1598,7 +1627,15 @@ class Cta_Box extends Widget_Base
 	        Icons_Manager::render_icon( $settings['eael_cta_btn_icon'], [ 'aria-hidden' => 'true' ] );
 	        $btn_icon = ob_get_clean();
 	        $btn_icon_wrap_end = '</span>';
-        } else {
+        } else if( $settings['eael_cta_preset'] === 'cta-preset-1' ){
+            print_r($settings['eael_cta_btn_preset']);
+            $btn_icon_wrap = '<span class="btn-icon">';
+	        ob_start();
+	        Icons_Manager::render_icon( $settings['eael_cta_btn_primary_icon'], [ 'aria-hidden' => 'true' ] );
+	        $btn_icon = ob_get_clean();
+	        $btn_icon_wrap_end = '</span>';
+        } 
+        else {
 	        $btn_icon_wrap = '';
 	        $btn_icon = '';
 	        $btn_icon_wrap_end = '';
