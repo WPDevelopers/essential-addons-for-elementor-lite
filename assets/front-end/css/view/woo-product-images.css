@@ -185,7 +185,8 @@
   height: 100%;
 }
 .eael-single-product-images .product_image_slider__container .swiper-slide img {
-  display: block;
+  display: block !important;
+  opacity: 1 !important;
   margin: 0 auto;
 }
 .eael-single-product-images .product_image_slider__container .swiper-container:not(.swiper-container-initialized) > .swiper-wrapper,
