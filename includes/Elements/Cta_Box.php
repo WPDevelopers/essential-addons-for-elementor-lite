@@ -415,7 +415,7 @@ class Cta_Box extends Widget_Base
 	    );
 
         $this->add_control(
-			'eael_cta_primary_btn_is_show',
+			'eael_cta_primary_btn_icon_show',
 			[
 				'label'        => __( 'Show Primary Icon', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
@@ -438,8 +438,8 @@ class Cta_Box extends Widget_Base
                     'library' => 'fa-solid',
                 ],
                 'condition' => [ 
-                    'eael_cta_primary_btn_is_show' => 'yes',
-                    'eael_cta_preset'              => 'cta-preset-1',
+                    'eael_cta_primary_btn_icon_show' => 'yes',
+                    'eael_cta_preset'                => 'cta-preset-1',
                 ],
             ]
         );
@@ -930,6 +930,56 @@ class Cta_Box extends Widget_Base
 			    ],
 		    ]
 	    );
+
+        $this->add_control(
+            'eael_cta_primary_btn_icon_size',
+            [
+                'label' => esc_html__('Icon Size', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'default' => [ 
+                    'unit' => 'px', 
+                    'size' => 15 
+                ],
+                'range' => [
+                    'px' => [
+                        'max' => 50,
+                    ],
+                ],
+                'separator' => 'before',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-preset-1 i' => 'font-size: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-preset-1 svg' => 'width: {{SIZE}}px; height: {{SIZE}}px;',
+                ],
+                'condition' => [ 
+                    'eael_cta_primary_btn_icon_show' => 'yes',
+                    'eael_cta_preset'                => 'cta-preset-1',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_cta_primary_btn_icon_margin',
+            [
+                'label'      => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', 'em', '%' ],
+                'default' => [
+					'top'    => 2,
+					'right'  => 8,
+					'bottom' => 2,
+					'left'   => 0,
+					'unit'   => 'px',
+					'isLinked' => true,
+				],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-preset-1 span' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition' => [ 
+                    'eael_cta_primary_btn_icon_show' => 'yes',
+                    'eael_cta_preset'                => 'cta-preset-1',
+                ],
+            ]
+        );
 
         $this->start_controls_tabs('eael_cta_button_tabs');
 
@@ -1627,7 +1677,7 @@ class Cta_Box extends Widget_Base
 	        Icons_Manager::render_icon( $settings['eael_cta_btn_icon'], [ 'aria-hidden' => 'true' ] );
 	        $btn_icon = ob_get_clean();
 	        $btn_icon_wrap_end = '</span>';
-        } else if( $settings['eael_cta_preset'] === 'cta-preset-1' ){
+        } else if( $settings['eael_cta_primary_btn_icon_show'] == 'yes' && $settings['eael_cta_preset'] === 'cta-preset-1' ){
             print_r($settings['eael_cta_btn_preset']);
             $btn_icon_wrap = '<span class="btn-icon">';
 	        ob_start();
