@@ -160,7 +160,8 @@
                height: 100%;
             }
             img {
-               display: block;
+               display: block !important;
+               opacity: 1 !important;
                margin: 0 auto;
             }
          }
