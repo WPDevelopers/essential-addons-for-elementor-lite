@@ -347,7 +347,7 @@ trait Elements {
 			[
 				'name'       => 'fancy-chart',
 				'title'      => __( 'Fancy Chart', 'essential-addons-for-elementor-lite' ),
-				'icon'       => 'eicon-elementor-circle',
+				'icon'       => 'eaicon-fancy-chart',
 				'categories' => '["essential-addons-elementor"]',
 			],
 			[
