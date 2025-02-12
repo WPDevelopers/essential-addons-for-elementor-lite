@@ -205,7 +205,7 @@ msgstr ""
 msgid "Argument should not be empty."
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:152, ../includes/Classes/WPDeveloper_Plugin_Installer.php:170, ../includes/Classes/WPDeveloper_Plugin_Installer.php:189, ../includes/Classes/WPDeveloper_Plugin_Installer.php:210, ../includes/Classes/WPDeveloper_Setup_Wizard.php:392, ../includes/Classes/WPDeveloper_Setup_Wizard.php:416, ../includes/Classes/WPDeveloper_Setup_Wizard.php:437, ../includes/Traits/Ajax_Handler.php:937, ../includes/Traits/Ajax_Handler.php:1110, ../includes/Traits/Ajax_Handler.php:1140, ../includes/Traits/Ajax_Handler.php:1157, ../includes/Traits/Helper.php:426
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:152, ../includes/Classes/WPDeveloper_Plugin_Installer.php:170, ../includes/Classes/WPDeveloper_Plugin_Installer.php:189, ../includes/Classes/WPDeveloper_Plugin_Installer.php:210, ../includes/Classes/WPDeveloper_Setup_Wizard.php:392, ../includes/Classes/WPDeveloper_Setup_Wizard.php:416, ../includes/Classes/WPDeveloper_Setup_Wizard.php:437, ../includes/Traits/Ajax_Handler.php:937, ../includes/Traits/Ajax_Handler.php:1115, ../includes/Traits/Ajax_Handler.php:1145, ../includes/Traits/Ajax_Handler.php:1162, ../includes/Traits/Helper.php:426
 msgid "you are not allowed to do this action"
 msgstr ""
 
@@ -3425,7 +3425,7 @@ msgstr ""
 msgid "Google Calendar"
 msgstr ""
 
-#: ../includes/Elements/Event_Calendar.php:341, ../includes/Elements/NFT_Gallery.php:94
+#: ../includes/Elements/Event_Calendar.php:341, ../includes/Elements/NFT_Gallery.php:94, ../includes/Traits/Admin.php:1456
 msgid "API Key"
 msgstr ""
 
@@ -10566,11 +10566,11 @@ msgstr ""
 msgid "Five Star Reviews"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:209, ../includes/Traits/Admin.php:1627
+#: ../includes/Traits/Admin.php:209, ../includes/Traits/Admin.php:1636
 msgid "Upgrade to PRO"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:215, ../includes/Traits/Admin.php:1870, ../includes/Traits/Admin.php:2005, ../includes/Traits/Helper.php:615
+#: ../includes/Traits/Admin.php:215, ../includes/Traits/Admin.php:1879, ../includes/Traits/Admin.php:2014, ../includes/Traits/Helper.php:615
 msgid "Activate"
 msgstr ""
 
@@ -10670,15 +10670,15 @@ msgstr ""
 msgid "Discover the premium features of the most popular elements library for Elementor. Experience the web building experience with:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:386, ../includes/Traits/Admin.php:1622
+#: ../includes/Traits/Admin.php:386, ../includes/Traits/Admin.php:1631
 msgid "Customization Flexibility in Design with Premium Creative Elements."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:387, ../includes/Traits/Admin.php:1623
+#: ../includes/Traits/Admin.php:387, ../includes/Traits/Admin.php:1632
 msgid "Advanced WooCommerce Widgets like Checkout, Cross-Sells & more."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:388, ../includes/Traits/Admin.php:1624
+#: ../includes/Traits/Admin.php:388, ../includes/Traits/Admin.php:1633
 msgid "Cutting-edge Extensions Like Custom JS, Content Protection & more."
 msgstr ""
 
@@ -10718,7 +10718,7 @@ msgstr ""
 msgid "Team Member Carousel"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:488, ../includes/Traits/Admin.php:1434, ../includes/Traits/Elements.php:343
+#: ../includes/Traits/Admin.php:488, ../includes/Traits/Admin.php:1434, ../includes/Traits/Admin.php:1461, ../includes/Traits/Elements.php:343
 msgid "Woo Account Dashboard"
 msgstr ""
 
@@ -10890,199 +10890,207 @@ msgstr ""
 msgid "Woo Thank You"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1445
+#: ../includes/Traits/Admin.php:1446
 msgid "Select Post Types"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1451
+#: ../includes/Traits/Admin.php:1452
 msgid "Google Map API Key"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1453, ../includes/Traits/Admin.php:1461, ../includes/Traits/Admin.php:1473
+#: ../includes/Traits/Admin.php:1454, ../includes/Traits/Admin.php:1470, ../includes/Traits/Admin.php:1482
 msgid "Set API Key"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1459
+#: ../includes/Traits/Admin.php:1462
+msgid "Set Custom Tabs"
+msgstr ""
+
+#: ../includes/Traits/Admin.php:1464
+msgid "Custom Tab 1, Custom Tab 2, Custom Tab 3"
+msgstr ""
+
+#: ../includes/Traits/Admin.php:1468
 msgid "Google Place API Key"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1466, ../includes/Traits/Admin.php:1478, ../includes/Traits/Admin.php:1609
+#: ../includes/Traits/Admin.php:1475, ../includes/Traits/Admin.php:1487, ../includes/Traits/Admin.php:1618
 msgid "To configure the API Keys, check out this doc"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1471
+#: ../includes/Traits/Admin.php:1480
 msgid "MailChimp API Key"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1485
+#: ../includes/Traits/Admin.php:1494
 msgid "reCAPTCHA v2"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1491, ../includes/Traits/Admin.php:1515
+#: ../includes/Traits/Admin.php:1500, ../includes/Traits/Admin.php:1524
 msgid "Site Key:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1492, ../includes/Traits/Admin.php:1516
+#: ../includes/Traits/Admin.php:1501, ../includes/Traits/Admin.php:1525
 msgid "Site Key"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1497, ../includes/Traits/Admin.php:1521
+#: ../includes/Traits/Admin.php:1506, ../includes/Traits/Admin.php:1530
 msgid "Site Secret:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1498, ../includes/Traits/Admin.php:1522
+#: ../includes/Traits/Admin.php:1507, ../includes/Traits/Admin.php:1531
 msgid "Site Secret"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1503, ../includes/Traits/Admin.php:1527
+#: ../includes/Traits/Admin.php:1512, ../includes/Traits/Admin.php:1536
 msgid "Language:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1504, ../includes/Traits/Admin.php:1528
+#: ../includes/Traits/Admin.php:1513, ../includes/Traits/Admin.php:1537
 msgid "reCAPTCHA Language Code"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1509
+#: ../includes/Traits/Admin.php:1518
 msgid "reCAPTCHA v3"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1533
+#: ../includes/Traits/Admin.php:1542
 msgid "Hide Badge"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1535
+#: ../includes/Traits/Admin.php:1544
 msgid "We are allowed to hide the badge as long as we include the reCAPTCHA branding visibly in the user flow."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1540
+#: ../includes/Traits/Admin.php:1549
 msgid "Google Login"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1546
+#: ../includes/Traits/Admin.php:1555
 msgid "Google Client ID:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1547
+#: ../includes/Traits/Admin.php:1556
 msgid "Google Client ID"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1553
+#: ../includes/Traits/Admin.php:1562
 msgid "Facebook Login"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1559
+#: ../includes/Traits/Admin.php:1568
 msgid "Facebook App ID:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1560
+#: ../includes/Traits/Admin.php:1569
 msgid "Facebook App ID"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1565
+#: ../includes/Traits/Admin.php:1574
 msgid "Facebook App Secret:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1566
+#: ../includes/Traits/Admin.php:1575
 msgid "Facebook App Secret"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1572
+#: ../includes/Traits/Admin.php:1581
 msgid "Mailchimp Integration"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1578
+#: ../includes/Traits/Admin.php:1587
 msgid "Mailchimp API Key:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1579
+#: ../includes/Traits/Admin.php:1588
 msgid "Mailchimp API"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1585
+#: ../includes/Traits/Admin.php:1594
 msgid "Enable Custom Fields"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1587
+#: ../includes/Traits/Admin.php:1596
 msgid "Fields will be available on both the edit profile page and the EA Login | Register Form."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1592
+#: ../includes/Traits/Admin.php:1601
 msgid "Text Type Fields:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1593, ../includes/Traits/Admin.php:1599
+#: ../includes/Traits/Admin.php:1602, ../includes/Traits/Admin.php:1608
 msgid "Field 1, Field 2 ..."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1598
+#: ../includes/Traits/Admin.php:1607
 msgid "File Type Fields:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1616
+#: ../includes/Traits/Admin.php:1625
 msgid "<p> <i>📣</i> <b>NEW:</b> Introducing EA 6.1 with 4 New \"<b>WooCommerce</b>\" widgets along with \"<b>Breadcrumbs</b>\" widget! Check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1619
+#: ../includes/Traits/Admin.php:1628
 msgid "Unlock the PRO Features"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1620
+#: ../includes/Traits/Admin.php:1629
 msgid "Upgrade to Essential Addons PRO and gain access to advanced elements and functionalities to build websites more efficiently"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1714
+#: ../includes/Traits/Admin.php:1723
 msgid "We hope you're enjoying Essential Addons for Elementor! Could you please do us a BIG favor and give it a 5-star rating on WordPress to help us spread the word and boost our motivation?"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1722
+#: ../includes/Traits/Admin.php:1731
 msgid "Ok, you deserve it!"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1726
+#: ../includes/Traits/Admin.php:1735
 msgid "I already did"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1733
+#: ../includes/Traits/Admin.php:1742
 msgid "Maybe Later"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1741
+#: ../includes/Traits/Admin.php:1750
 msgid "I need help"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1745
+#: ../includes/Traits/Admin.php:1754
 msgid "Never show again"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1771
+#: ../includes/Traits/Admin.php:1780
 msgid "🎁 <strong>SAVE 25% now</strong> & unlock 100+ advanced elements & 2800+ ready templates to design Elementor websites faster in 2025."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1781
+#: ../includes/Traits/Admin.php:1790
 msgid "GET PRO Lifetime Access"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1783
+#: ../includes/Traits/Admin.php:1792
 msgid "No, I'll Pay Full Price Later"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1870, ../includes/Traits/Admin.php:2005
+#: ../includes/Traits/Admin.php:1879, ../includes/Traits/Admin.php:2014
 msgid "Install Essential Blocks"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1879, ../includes/Traits/Admin.php:2059
+#: ../includes/Traits/Admin.php:1888, ../includes/Traits/Admin.php:2068
 msgid "Using Gutenberg? Check out Essential Blocks!"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1880, ../includes/Traits/Admin.php:2060
+#: ../includes/Traits/Admin.php:1889, ../includes/Traits/Admin.php:2069
 msgid "Are you using the Gutenberg Editor for your website? Then try out Essential Blocks for Gutenberg, and explore 40+ unique blocks to make your web design experience in WordPress even more powerful. 🚀"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1881, ../includes/Traits/Admin.php:2061
+#: ../includes/Traits/Admin.php:1890, ../includes/Traits/Admin.php:2070
 msgid "For more information, <a href=\"https://essential-blocks.com/demo/\" target=\"_blank\">check out the demo here</a>."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:2180, ../includes/Traits/Admin.php:2191
+#: ../includes/Traits/Admin.php:2189, ../includes/Traits/Admin.php:2200
 msgid "You are not allowed to do this action"
 msgstr ""
 
