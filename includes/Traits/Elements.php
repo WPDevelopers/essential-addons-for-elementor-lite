@@ -110,7 +110,9 @@ trait Elements {
 				continue;
 			}
 
-			new $extension['class'];
+			if ( class_exists( $extension['class'] ) ) {
+				new $extension['class']; // Safely instantiate
+			}
 		}
 	}
 
@@ -399,7 +401,7 @@ trait Elements {
 			return;
 		}
 
-		if ( ! ( is_singular() || is_archive() || is_home() || is_front_page() ) ) {
+		if ( ! ( is_singular() || is_archive() || is_home() || is_front_page() || is_search() ) ) {
 			return;
 		}
 

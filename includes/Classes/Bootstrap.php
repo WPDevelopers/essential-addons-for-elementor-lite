@@ -217,7 +217,7 @@ class Bootstrap
         }
 
 	    //Essential Blocks Promo
-	    if ( ! class_exists( 'Classic_Editor' ) && ! class_exists( 'EssentialBlocks' ) && ( ! get_option( 'eael_eb_optin_hide' ) || ! get_option( 'eael_gb_eb_popup_hide' ) ) ) {
+	    if ( ! class_exists( 'Classic_Editor' ) && ! class_exists( 'EssentialBlocks' ) && ( ! get_option( 'eael_eb_optin_hide' ) || ! get_transient( 'eael_gb_eb_popup_hide' ) ) ) {
 		    add_action( 'enqueue_block_editor_assets', [ $this, 'essential_blocks_promo_enqueue_scripts' ] );
 		    add_action( 'admin_notices', [ $this, 'essential_block_optin' ] );
 		    add_action( 'eael_admin_notices', [ $this, 'essential_block_special_optin' ], 100 );

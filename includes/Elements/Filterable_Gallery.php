@@ -84,6 +84,10 @@ class Filterable_Gallery extends Widget_Base
     protected function is_dynamic_content():bool {
         return false;
     }
+
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
+    }
     
     public function get_custom_help_url()
     {
@@ -560,7 +564,7 @@ class Filterable_Gallery extends Widget_Base
 			'eael_privacy_notice_control',
 			[
 				'label'        => esc_html__( 'Display Consent Notice', 'essential-addons-for-elementor-lite' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'type'         => Controls_Manager::SWITCHER,
                 'description'  => esc_html__( 'If enabled, The consent notice will appear before playing the video.', 'essential-addons-for-elementor-lite' ),
 				'default'      => '',
 			]
@@ -2773,7 +2777,7 @@ class Filterable_Gallery extends Widget_Base
 			'eael_fg_not_found_text_align',
 			[
 				'label' => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
-				'type' => \Elementor\Controls_Manager::CHOOSE,
+				'type' => Controls_Manager::CHOOSE,
 				'options' => [
 					'left' => [
 						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
@@ -3307,7 +3311,7 @@ class Filterable_Gallery extends Widget_Base
                                 if ( $this->default_control_key === $key ){
                                     echo 'active';
                                 }
-                            } ?>" data-filter=".eael-cf-<?php echo esc_attr($sorter_filter); ?>"><?php echo esc_html__($control['eael_fg_control']); ?></li>
+                            } ?>" data-filter=".eael-cf-<?php echo esc_attr($sorter_filter); ?>"><?php echo esc_html__($control['eael_fg_control'], 'essential-addons-for-elementor-lite'); ?></li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
@@ -3898,12 +3902,12 @@ class Filterable_Gallery extends Widget_Base
             'control_all_text' => $settings['eael_fg_all_label_text'],
         ];
         
-        if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
-            $gallery_settings['post_id'] = \Elementor\Plugin::$instance->editor->get_post_id();
+        if ( Plugin::$instance->editor->is_edit_mode()) {
+            $gallery_settings['post_id'] =  Plugin::$instance->editor->get_post_id();
         } else {
             $gallery_settings['post_id'] = get_the_ID();
         }
-        if ( method_exists( \Elementor\Plugin::$instance->breakpoints, 'get_breakpoints_config' ) && ! empty( $breakpoints = \Elementor\Plugin::$instance->breakpoints->get_breakpoints_config() ) ) {
+        if ( method_exists(  Plugin::$instance->breakpoints, 'get_breakpoints_config' ) && ! empty( $breakpoints = \Elementor\Plugin::$instance->breakpoints->get_breakpoints_config() ) ) {
 
             $this->add_render_attribute('gallery', 'data-breakpoints', wp_json_encode( $breakpoints ) );
         }
@@ -3983,7 +3987,7 @@ class Filterable_Gallery extends Widget_Base
             </div>
             
             <?php
-            if (\Elementor\Plugin::instance()->editor->is_edit_mode()) {
+            if ( Plugin::instance()->editor->is_edit_mode() ) {
                 $this->render_editor_script();
             }
             $this->render_loadmore_button();

@@ -35,6 +35,10 @@ class Content_Ticker extends Widget_Base
         return 'eaicon-content-ticker';
     }
 
+	public function get_style_depends(): array {
+		return [ 'e-swiper' ];
+	}
+
     public function get_categories()
     {
         return ['essential-addons-elementor'];
@@ -55,6 +59,10 @@ class Content_Ticker extends Widget_Base
             'ea',
             'essential addons',
         ];
+    }
+
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
     }
 
     public function get_custom_help_url()

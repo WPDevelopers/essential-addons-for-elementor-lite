@@ -113,7 +113,7 @@ trait Core
 
         $button = '<p><a href="' . esc_url( $activation_url ) . '" class="button-primary">' . esc_html( $button_text ) . '</a></p>';
 
-        printf('<div class="error"><p>%1$s</p>%2$s</div>', __($message), $button);
+        printf('<div class="error"><p>%1$s</p>%2$s</div>', $message, $button);
     }
 
     /**

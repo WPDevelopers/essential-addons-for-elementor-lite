@@ -13,6 +13,149 @@
 	.typed-cursor {
 		display: none;
 	}
+	.animated {
+		&.fadeIn {
+			animation-name:fadeIn;
+			@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+		}
+	
+		&.fadeInUp {
+			animation-name: fadeInUp;
+			@keyframes fadeInUp {
+				from {
+					opacity: 0;
+					transform: translate3d(0,100%,0)
+				}
+			
+				to {
+					opacity: 1;
+					transform: none
+				}
+			}
+		}
+		
+		&.fadeInDown {
+			animation-name: fadeInDown;
+			@keyframes fadeInDown {
+				from {
+					opacity: 0;
+					transform: translate3d(0,-100%,0)
+				}
+			
+				to {
+					opacity: 1;
+					transform: none
+				}
+			}
+		}
+
+		&.fadeInLeft {
+			animation-name: fadeInLeft;
+			@keyframes fadeInLeft {
+				from {
+					opacity: 0;
+					transform: translate3d(-100%,0,0)
+				}
+			
+				to {
+					opacity: 1;
+					transform: none
+				}
+			}
+		}
+		
+		&.fadeInRight {
+			animation-name: fadeInRight;
+			@keyframes fadeInRight {
+				from {
+					opacity: 0;
+					transform: translate3d(100%,0,0)
+				}
+			
+				to {
+					opacity: 1;
+					transform: none
+				}
+			}
+		}
+		
+		&.zoomIn {
+			animation-name: zoomIn;
+			@keyframes zoomIn {
+				from {
+					opacity: 0;
+					transform: scale3d(.3,.3,.3)
+				}
+			
+				50% {
+					opacity: 1
+				}
+			}
+		}
+		
+		&.bounceIn {
+			animation-name: bounceIn;
+			@keyframes bounceIn {
+				20%,40%,60%,80%,from,to {
+					animation-timing-function: cubic-bezier(0.215,0.61,0.355,1)
+				}
+			
+				0% {
+					opacity: 0;
+					transform: scale3d(.3,.3,.3)
+				}
+			
+				20% {
+					transform: scale3d(1.1,1.1,1.1)
+				}
+			
+				40% {
+					transform: scale3d(.9,.9,.9)
+				}
+			
+				60% {
+					opacity: 1;
+					transform: scale3d(1.03,1.03,1.03)
+				}
+			
+				80% {
+					transform: scale3d(.97,.97,.97)
+				}
+			
+				to {
+					opacity: 1;
+					transform: scale3d(1,1,1)
+				}
+			}
+		}
+		
+		&.swing {
+			transform-origin: top center;
+			animation-name: swing;
+			@keyframes swing {
+				20% {
+					transform: rotate3d(0,0,1,15deg)
+				}
+			
+				40% {
+					transform: rotate3d(0,0,1,-10deg)
+				}
+			
+				60% {
+					transform: rotate3d(0,0,1,5deg)
+				}
+			
+				80% {
+					transform: rotate3d(0,0,1,-5deg)
+				}
+			
+				to {
+					transform: rotate3d(0,0,1,0deg)
+				}
+			}
+		}		
+	}
+	
 }
 
 .eael-fancy-text-strings {
