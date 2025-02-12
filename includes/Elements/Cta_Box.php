@@ -1111,7 +1111,7 @@ class Cta_Box extends Widget_Base
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
-                'name' => 'eael_cat_btn_normal_border',
+                'name' => 'eael_cta_btn_normal_border',
                 'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
                 'selector' => '{{WRAPPER}} .eael-call-to-action .cta-button:not(.cta-secondary-button)',
                 'conditions' => [
@@ -1490,7 +1490,7 @@ class Cta_Box extends Widget_Base
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
-                'name' => 'eael_cat_secondary_btn_normal_border',
+                'name' => 'eael_cta_secondary_btn_normal_border',
                 'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
                 'selector' => '{{WRAPPER}} .eael-call-to-action .cta-button.cta-secondary-button',
             ]
