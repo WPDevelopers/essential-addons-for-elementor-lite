@@ -986,6 +986,53 @@ class Info_Box extends Widget_Base
          * Tab Style (Info Box Icon Style)
          * -------------------------------------------
          */
+
+        $this->start_controls_section(
+            'eael_section_infobox_container',
+            [
+                'label' => esc_html__( 'Container', 'essential-addons-for-elementor-lite' ),
+                'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+			'eael_section_infobox_container_bg',
+			[
+				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-infobox' => 'background-color: {{VALUE}}',
+				],
+			]
+		);
+
+        $this->add_responsive_control(
+			'eael_section_infobox_container_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-infobox' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+        $this->add_responsive_control(
+			'eael_section_infobox_container_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-infobox' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+        
+        $this->end_controls_section();
+
+        
         $this->start_controls_section(
             'eael_section_infobox_icon_style_settings',
             [
