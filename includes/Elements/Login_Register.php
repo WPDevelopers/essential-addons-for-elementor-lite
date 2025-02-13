@@ -1144,6 +1144,34 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 
+		$this->add_control(
+			'lost_pass_button_icon',
+			[
+				'label' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::ICONS,
+			]
+		);
+
+		$this->add_control(
+			'lost_pass_button_icon_position',
+			[
+				'label'   => esc_html__( 'Icon Position', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'left'   => [
+						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-h-align-left',
+					],
+					'right'  => [
+						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-h-align-right',
+					],
+				],
+				'default'   => 'left',
+				'toggle'    => false,
+			]
+		);
+
 		$this->end_controls_section();
 	}
 
@@ -6428,6 +6456,8 @@ class Login_Register extends Widget_Base {
 			// input icons
 			$show_icon  = ( $this->pro_enabled && ! empty( $this->ds['show_lostpassword_icon'] ) && 'yes' === esc_html( $this->ds['show_lostpassword_icon'] ) );
 			$icon_class = $show_icon ? 'lr-icon-showing' : '';
+			$btn_icon         = ! empty( $this->ds['lost_pass_button_icon'] ) ? $this->ds['lost_pass_button_icon'] : '';
+			$btn_icon_position= ! empty( $this->ds['lost_pass_button_icon_position'] ) ? sanitize_text_field( $this->ds['lost_pass_button_icon_position'] ) : 'left';
 			?>
             <section
                     id="eael-lostpassword-form-wrapper"
@@ -6469,11 +6499,15 @@ class Login_Register extends Widget_Base {
 							?>
 
 							<div class="eael-lr-footer">
-								<input type="submit"
-									   name="eael-lostpassword-submit"
-									   id="eael-lostpassword-submit"
-									   class="eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?>  <?php echo esc_attr( $hide_class_after_submission ); ?>"
-									   value="<?php echo esc_attr( $btn_text ); ?>"/>
+								<button type="submit" name="eael-lostpassword-submit" id="eael-lostpassword-submit" class="eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?>  <?php echo esc_attr( $hide_class_after_submission ); ?>"><?php
+									if ( $btn_icon && 'left' === $btn_icon_position ) {
+										Icons_Manager::render_icon( $btn_icon, [ 'class' => 'eael-lr-btn-icon' ] );
+									}
+									echo esc_html( $btn_text );
+									if ( $btn_icon && 'right' === $btn_icon_position ) {
+										Icons_Manager::render_icon( $btn_icon, [ 'class' => 'eael-lr-btn-icon' ] );
+									}
+								?></button>
 								<?php if ( $show_login_link_lostpassword ) { ?>
 									<div class="eael-sign-wrapper <?php echo esc_attr( $link_align ); ?>">
 										<?php echo wp_kses( $login_link_lostpassword, HelperCLass::eael_allowed_tags( [ 'a' => [ 'data-action' => [] ] ] ) ); ?>
