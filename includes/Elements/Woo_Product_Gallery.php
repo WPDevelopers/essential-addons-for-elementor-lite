@@ -510,6 +510,18 @@ class Woo_Product_Gallery extends Widget_Base {
 		] );
 
 		$this->add_control(
+			'eael_product_out_of_stock_show',
+			[
+				'label'        => esc_html__( 'Stock Out Products?', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
+
+		$this->add_control(
 			'eael_product_gallery_products_in',
 			[
 				'label'       => esc_html__( 'Select Products', 'essential-addons-for-elementor-lite' ),
@@ -651,16 +663,6 @@ class Woo_Product_Gallery extends Widget_Base {
 				],
 				'default' => 'h2',
 				'toggle'  => false,
-			]
-		);
-
-		$this->add_control(
-			'eael_product_out_of_stock_show',
-			[
-				'label'        => esc_html__( 'Show Stock Out Products?', 'essential-addons-for-elementor-lite' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'return_value' => 'yes',
-				'default'      => 'yes',
 			]
 		);
 
