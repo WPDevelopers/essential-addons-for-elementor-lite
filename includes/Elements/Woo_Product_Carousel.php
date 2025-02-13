@@ -960,6 +960,15 @@ class Woo_Product_Carousel extends Widget_Base {
         ] );
 
         $this->add_control(
+			'hide_stock_out_product',
+			[
+				'label'        => esc_html__( 'Hide Stock out Products', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+			]
+		);
+
+        $this->add_control(
             'eael_product_carousel_products_in', 
             [
             'label'         => esc_html__('Select Products', 'essential-addons-for-elementor-lite'),
@@ -1011,15 +1020,14 @@ class Woo_Product_Carousel extends Widget_Base {
 		    $this->add_control(
 			    $taxonomy . '_ids',
 			    [
-				    'label' => $object->label,
-				    'type' => Controls_Manager::SELECT2,
+				    'label'       => $object->label,
+				    'type'        => Controls_Manager::SELECT2,
 				    'label_block' => true,
-				    'multiple' => true,
+				    'multiple'    => true,
 				    'object_type' => $taxonomy,
-				    'options' => wp_list_pluck(get_terms($taxonomy), 'name', 'term_id'),
+				    'options'     => wp_list_pluck(get_terms($taxonomy), 'name', 'term_id'),
                     'condition'       => [
-                        'eael_product_carousel_product_filter!' => 'related-products',
-                        'eael_product_carousel_product_filter!' => 'manual',
+                        'eael_product_carousel_product_filter!' => [ 'related-products', 'manual' ]
                     ],
 			    ]
 		    );
@@ -3100,7 +3108,7 @@ class Woo_Product_Carousel extends Widget_Base {
         
         $swiper_class = $swiper_version_class = '';
         if ( class_exists( 'Elementor\Plugin' ) ) {
-            $swiper_class           = \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_swiper_latest' ) ? 'swiper' : 'swiper-container';
+            $swiper_class           = Plugin::$instance->experiments->is_feature_active( 'e_swiper_latest' ) ? 'swiper' : 'swiper-container';
             $swiper_version_class   = 'swiper' === $swiper_class ? 'swiper-8' : 'swiper-8-lower';
         }
 
@@ -3464,7 +3472,7 @@ class Woo_Product_Carousel extends Widget_Base {
             );
 	    }
 
-	    if ( get_option( 'woocommerce_hide_out_of_stock_items' ) == 'yes' ) {
+	    if ( 'yes' === $settings['hide_stock_out_product'] || get_option( 'woocommerce_hide_out_of_stock_items' ) === 'yes' ) {
 		    $args[ 'meta_query' ]   = [ 'relation' => 'AND' ];
 		    $args[ 'meta_query' ][] = [
 			    'key'   => '_stock_status',
