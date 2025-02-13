@@ -555,6 +555,22 @@ class Woo_Product_List extends Widget_Base
         ]);
 
         $this->add_control(
+			'eael_product_out_of_stock_show',
+			[
+				'label'        => esc_html__( 'Stock Out Products?', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+                'condition'    => [
+                    'eael_product_list_product_filter!' => 'manual',
+                    'post_type!'  => 'source_archive'
+                ],
+			]
+		);
+
+        $this->add_control(
             'eael_product_list_products_status',
             [
                 'label'         => __( 'Status', 'essential-addons-for-elementor-lite' ),
@@ -3820,7 +3836,9 @@ class Woo_Product_List extends Widget_Base
         ];
 
         // Stock settings
-        if ( 'yes' === get_option( 'woocommerce_hide_out_of_stock_items' ) ) {
+        $show_stock_out_products = isset( $settings['eael_product_out_of_stock_show'] ) ? $settings['eael_product_out_of_stock_show'] : 'yes';
+
+		if ( get_option( 'woocommerce_hide_out_of_stock_items' ) === 'yes' || 'yes' !== $show_stock_out_products  ) {
             $args['meta_query'][] = [
                 'key' => '_stock_status',
                 'value' => 'instock'
