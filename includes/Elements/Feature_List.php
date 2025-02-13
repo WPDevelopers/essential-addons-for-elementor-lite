@@ -602,11 +602,14 @@ class Feature_List extends Widget_Base {
             [
                 'name'     => 'eael_feature_list_icon_background',
                 'types'    => ['classic', 'gradient'],
-                'exclude'  => [
-                    'image',
-                ],
-                'color'    => [
-                    'default' => '#3858f4',
+                'exclude'  => [ 'image' ],
+                'fields_options'    => [
+                    'background' => [
+                        'default' => 'classic', // Default to classic background
+                    ],
+                    'color' => [
+                        'default' => '#37368e', // Default background color (red)
+                    ],
                 ],
                 'selector' => '{{WRAPPER}} .eael-feature-list-items .eael-feature-list-icon-box .eael-feature-list-icon-inner',
             ]

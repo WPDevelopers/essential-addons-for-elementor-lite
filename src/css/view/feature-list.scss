@@ -124,7 +124,6 @@ $enable-prefers-reduced-motion-media-query: true !default;
                 @include transition(all 0.5s);
 
                 .eael-feature-list-icon-inner {
-                    background-color: #37368e;
                     @include transition(all 0.5s);
                     display: inline-flex;
                 }
