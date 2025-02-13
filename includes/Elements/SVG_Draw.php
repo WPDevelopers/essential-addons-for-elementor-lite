@@ -51,6 +51,10 @@ class SVG_Draw extends Widget_Base {
         return false;
     }
 
+	public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
+    }
+
 	public function get_custom_help_url() {
 		return 'https://essential-addons.com/elementor/docs/ea-svg-draw/';
 	}
@@ -411,11 +415,11 @@ class SVG_Draw extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'label'     => esc_html__( 'Fill Color', 'essential-addons-for-elementor-lite' ),
 				'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container .fill-svg svg path'                            => 'fill:{{VALUE}};',
-					'{{WRAPPER}} .elementor-widget-container .eael-svg-draw-container.fill-svg svg path'    => 'fill:{{VALUE}};',
-					'{{WRAPPER}} .elementor-widget-container .eael-svg-draw-container.fill-svg svg circle'  => 'fill:{{VALUE}};',
-					'{{WRAPPER}} .elementor-widget-container .eael-svg-draw-container.fill-svg svg rect'    => 'fill:{{VALUE}};',
-					'{{WRAPPER}} .elementor-widget-container .eael-svg-draw-container.fill-svg svg polygon' => 'fill:{{VALUE}};'
+					'{{WRAPPER}} .elementor-widget-eael-svg-draw .fill-svg svg path'                            => 'fill:{{VALUE}};',
+					'{{WRAPPER}} .elementor-widget-eael-svg-draw .eael-svg-draw-container.fill-svg svg path'    => 'fill:{{VALUE}};',
+					'{{WRAPPER}} .elementor-widget-eael-svg-draw .eael-svg-draw-container.fill-svg svg circle'  => 'fill:{{VALUE}};',
+					'{{WRAPPER}} .elementor-widget-eael-svg-draw .eael-svg-draw-container.fill-svg svg rect'    => 'fill:{{VALUE}};',
+					'{{WRAPPER}} .elementor-widget-eael-svg-draw .eael-svg-draw-container.fill-svg svg polygon' => 'fill:{{VALUE}};'
 				],
 				'default'   => '#D8C2F3',
 				'condition' => [

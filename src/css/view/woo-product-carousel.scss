@@ -64,6 +64,11 @@ $theme-preset4: #ec3b75;
                         }
                     }
                 }
+                .eael-product-price{
+                    ins {
+                        text-decoration: none;
+                    }
+                }
             }
 
             &.products[class*='columns-'] li.product {
@@ -1685,7 +1690,7 @@ $theme-preset4: #ec3b75;
 
 //theme Buddyboss
 .theme-buddyboss-theme{
-    #content .elementor-widget-container {
+    #content .elementor-widget-eael-woo-product-carousel {
         .star-rating{
             margin: 0px;
         }
