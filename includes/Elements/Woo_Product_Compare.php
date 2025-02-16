@@ -3,6 +3,7 @@
 namespace Essential_Addons_Elementor\Elements;
 
 use Elementor\Widget_Base;
+use Essential_Addons_Elementor\Classes\Helper;
 use Essential_Addons_Elementor\Traits\Woo_Product_Comparable;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -60,6 +61,10 @@ class Woo_Product_Compare extends Widget_Base {
 			'essential addons',
 		];
 	}
+
+	public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
+    }
 
 	public function get_custom_help_url() {
 		return 'https://essential-addons.com/elementor/docs/woo-product-compare/';

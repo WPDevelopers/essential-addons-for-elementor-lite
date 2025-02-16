@@ -61,6 +61,10 @@ class Fancy_Text extends Widget_Base {
         return false;
     }
 
+	public function has_widget_inner_wrapper(): bool {
+        return ! HelperClass::eael_e_optimized_markup();
+    }
+
     public function get_custom_help_url() {
         return 'https://essential-addons.com/elementor/docs/fancy-text/';
     }
@@ -599,7 +603,9 @@ class Fancy_Text extends Widget_Base {
 				$fancy_text[] = HelperClass::eael_wp_kses( html_entity_decode( $item['eael_fancy_text_strings_text_field'] ) );
 			}
 		}
-		return implode("|",$fancy_text);
+
+		$fancy_text = implode("|",$fancy_text);
+		return str_replace( '&', '&amp;', $fancy_text);
 	}
 
 	protected function render() {

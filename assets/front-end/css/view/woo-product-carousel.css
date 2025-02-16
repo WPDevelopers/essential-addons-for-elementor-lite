@@ -48,6 +48,9 @@
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
+.eael-woo-product-carousel-container .woocommerce ul.products .product .eael-product-price ins {
+  text-decoration: none;
+}
 .eael-woo-product-carousel-container .woocommerce ul.products.products[class*=columns-] li.product {
   width: 100%;
 }
@@ -1339,32 +1342,32 @@
   letter-spacing: 14px;
   font-size: 14px;
 }
-.theme-buddyboss-theme #content .elementor-widget-container .star-rating {
+.theme-buddyboss-theme #content .elementor-widget-eael-woo-product-carousel .star-rating {
   margin: 0px;
 }
-.theme-buddyboss-theme #content .elementor-widget-container .eael-product-price ins {
+.theme-buddyboss-theme #content .elementor-widget-eael-woo-product-carousel .eael-product-price ins {
   text-decoration: none;
 }
-.theme-buddyboss-theme #content .elementor-widget-container .eael-woo-product-carousel li.product {
+.theme-buddyboss-theme #content .elementor-widget-eael-woo-product-carousel .eael-woo-product-carousel li.product {
   background: transparent;
   border-radius: 20px;
 }
-.theme-buddyboss-theme #content .elementor-widget-container .eael-woo-product-carousel li.product.type-product {
+.theme-buddyboss-theme #content .elementor-widget-eael-woo-product-carousel .eael-woo-product-carousel li.product.type-product {
   margin: 0 12px 20px;
 }
-.theme-buddyboss-theme #content .elementor-widget-container .eael-woo-product-carousel li.product .eael-product-carousel {
+.theme-buddyboss-theme #content .elementor-widget-eael-woo-product-carousel .eael-woo-product-carousel li.product .eael-product-carousel {
   margin: 0;
   width: 100%;
 }
-.theme-buddyboss-theme #content .elementor-widget-container .eael-woo-product-carousel li.product .star-rating {
+.theme-buddyboss-theme #content .elementor-widget-eael-woo-product-carousel .eael-woo-product-carousel li.product .star-rating {
   min-width: 100px;
 }
-.theme-buddyboss-theme #content .elementor-widget-container .preset-1 .eael-woo-product-carousel li.product .button, .theme-buddyboss-theme #content .elementor-widget-container .preset-2 .eael-woo-product-carousel li.product .button, .theme-buddyboss-theme #content .elementor-widget-container .preset-4 .eael-woo-product-carousel li.product .button {
+.theme-buddyboss-theme #content .elementor-widget-eael-woo-product-carousel .preset-1 .eael-woo-product-carousel li.product .button, .theme-buddyboss-theme #content .elementor-widget-eael-woo-product-carousel .preset-2 .eael-woo-product-carousel li.product .button, .theme-buddyboss-theme #content .elementor-widget-eael-woo-product-carousel .preset-4 .eael-woo-product-carousel li.product .button {
   width: 35px;
   border-radius: 3px;
   margin: 3px;
 }
-.theme-buddyboss-theme #content .elementor-widget-container .preset-1 .eael-woo-product-carousel li.product a.added_to_cart, .theme-buddyboss-theme #content .elementor-widget-container .preset-2 .eael-woo-product-carousel li.product a.added_to_cart, .theme-buddyboss-theme #content .elementor-widget-container .preset-4 .eael-woo-product-carousel li.product a.added_to_cart {
+.theme-buddyboss-theme #content .elementor-widget-eael-woo-product-carousel .preset-1 .eael-woo-product-carousel li.product a.added_to_cart, .theme-buddyboss-theme #content .elementor-widget-eael-woo-product-carousel .preset-2 .eael-woo-product-carousel li.product a.added_to_cart, .theme-buddyboss-theme #content .elementor-widget-eael-woo-product-carousel .preset-4 .eael-woo-product-carousel li.product a.added_to_cart {
   width: 35px;
   line-height: 0;
   font-size: 0;
@@ -1373,7 +1376,7 @@
   margin-bottom: 4px;
   color: inherit;
 }
-.theme-buddyboss-theme #content .elementor-widget-container .preset-3 li.product a.added_to_cart {
+.theme-buddyboss-theme #content .elementor-widget-eael-woo-product-carousel .preset-3 li.product a.added_to_cart {
   line-height: 0;
   font-size: 0;
   width: 100%;
@@ -1381,7 +1384,7 @@
   border: none;
   background: transparent;
 }
-.theme-buddyboss-theme #content .elementor-widget-container .preset-3 li.product .eael-star-rating.star-rating {
+.theme-buddyboss-theme #content .elementor-widget-eael-woo-product-carousel .preset-3 li.product .eael-star-rating.star-rating {
   min-width: 100px;
 }
 .theme-buddyboss-theme .woocommerce.eael-woo-product-carousel ul.products li.product:first-of-type {
