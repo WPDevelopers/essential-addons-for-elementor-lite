@@ -27,6 +27,9 @@ var WooProdectImage = function ($scope, $) {
    // Thumb slider options
    let $sliderThumbsOptions = $scope.find(".product_image_slider__thumbs");
    let $sliderThumbs = $sliderThumbsOptions.data("pi_thumb");
+   let $height_for_mobile = $sliderThumbsOptions.data("for_mobile");
+
+   // console.log("Item", $sliderThumbs.slidesPerView);
 
    // Image slider options
    let $sliderImagesOptions = $scope.find(".product_image_slider__container");
@@ -34,12 +37,36 @@ var WooProdectImage = function ($scope, $) {
 
    // Set slider height dynamically
    $(window).on("load", function () {
-      let $getImageHeight = $scope.find(".image_slider__image").height();
-      $scope
-         .find(
-            ".eael-pi-thumb-left .product_image_slider .product_image_slider__thumbs, .eael-pi-thumb-right .product_image_slider .product_image_slider__thumbs"
-         )
-         .css("height", $getImageHeight);
+      // Check if the screen width is less than or equal to 767px
+      if (window.matchMedia("(max-width: 767px)").matches) {
+         // For small screens
+         let getImageHeight = $scope.find(".image_slider__image").height();
+         let newThumbHeight = $sliderThumbs.slidesPerView * $height_for_mobile;
+         let compareHeight = Math.min(newThumbHeight, getImageHeight);
+
+         $scope
+            .find(
+               ".eael-pi-thumb-left .product_image_slider .product_image_slider__thumbs, .eael-pi-thumb-right .product_image_slider .product_image_slider__thumbs"
+            )
+            .css("height", compareHeight);
+
+         $scope
+            .find(
+               ".eael-pi-thumb-bottom .product_image_slider .product_image_slider__thumbs"
+            )
+            .css("width", compareHeight);
+      } else {
+         // For larger screens
+         let getImageHeight = $scope.find(".image_slider__image").height();
+         let newThumbHeight = $sliderThumbs.slidesPerView * 100;
+         let compareHeight = Math.min(newThumbHeight, getImageHeight);
+
+         $scope
+            .find(
+               ".eael-pi-thumb-left .product_image_slider .product_image_slider__thumbs, .eael-pi-thumb-right .product_image_slider .product_image_slider__thumbs"
+            )
+            .css("height", compareHeight);
+      }
    });
 
    // Load the thumbs Swiper first

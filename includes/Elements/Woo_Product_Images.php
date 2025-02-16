@@ -482,9 +482,25 @@ class Woo_Product_Images extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_pi_thumb_items',
+			'eael_pi_select_thumb_items',
 			[
-				'label' => esc_html__( 'Thumb Items', 'essential-addons-for-elementor-lite' ),
+				'label'        => esc_html__( 'Thumb Items', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
+				'label_on'     => esc_html__( 'Custom', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'condition' => [
+					'eael_pi_thumbnail' => 'yes',
+				],
+			]
+		);
+
+		$this->start_popover();
+		
+		$this->add_control(
+			'eael_pi_thumb_desktop_items',
+			[
+				'label' => esc_html__( 'For Desktop', 'essential-addons-for-elementor-lite' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -498,6 +514,77 @@ class Woo_Product_Images extends Widget_Base {
 				],
 				'condition' => [
 					'eael_pi_thumbnail' => 'yes',
+					'eael_pi_select_thumb_items' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_pi_thumb_tablet_items',
+			[
+				'label' => esc_html__( 'For Tablet', 'essential-addons-for-elementor-lite' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => 1,
+						'max' => 50,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'size' => 3,
+				],
+				'condition' => [
+					'eael_pi_thumbnail' => 'yes',
+					'eael_pi_select_thumb_items' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_pi_thumb_mobile_items',
+			[
+				'label' => esc_html__( 'For Mobile', 'essential-addons-for-elementor-lite' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => 1,
+						'max' => 50,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'size' => 2,
+				],
+				'condition' => [
+					'eael_pi_thumbnail' => 'yes',
+					'eael_pi_select_thumb_items' => 'yes',
+				],
+			]
+		);
+
+		$this->end_popover();
+
+		$this->add_control(
+			'eael_pi_thumb_height_for_mobile',
+			[
+				'label' => esc_html__( 'For Mobile Device Height', 'essential-addons-for-elementor-lite' ),
+				'type'  => \Elementor\Controls_Manager::SLIDER,
+				'description' => esc_html__( 'You can control the height of the image from here', 'essential-addons-for-elementor-lite' ),
+				'range' => [
+					'px' => [
+						'min'  => 1,
+						'max'  => 100,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'size' => 40,
+				],
+				'condition' => [
+					'eael_pi_thumbnail' => 'yes',
+					'eael_pi_select_thumb_items' => 'yes',
+					// 'eael_pi_thumb_position' => ['left', 'right'],
 				],
 			]
 		);
@@ -621,7 +708,10 @@ class Woo_Product_Images extends Widget_Base {
 	protected function eael_pi_data_settings( $settings ) {
 		$pi_data_settings = [];
 		$pi_data_settings['thumbnail'] = ! empty( $settings['eael_pi_thumbnail'] ) ? $settings['eael_pi_thumbnail'] : '';
-		$pi_data_settings['thumb_items'] = ! empty( $settings['eael_pi_thumb_items'] ) ? $settings['eael_pi_thumb_items']['size'] : '';
+		$pi_data_settings['desktop'] = ! empty( $settings['eael_pi_thumb_desktop_items'] ) ? $settings['eael_pi_thumb_desktop_items']['size'] : 4;
+		$pi_data_settings['tablet'] = ! empty( $settings['eael_pi_thumb_tablet_items'] ) ? $settings['eael_pi_thumb_tablet_items']['size'] : 3;
+		$pi_data_settings['mobile'] = ! empty( $settings['eael_pi_thumb_mobile_items'] ) ? $settings['eael_pi_thumb_mobile_items']['size'] : 2;
+		$pi_data_settings['height_for_mobile'] = ! empty( $settings['eael_pi_thumb_height_for_mobile'] ) ? $settings['eael_pi_thumb_height_for_mobile']['size'] : 40;
 		$pi_data_settings['image_loop'] = ! empty( $settings['eael_product_image_loop'] ) ? $settings['eael_product_image_loop'] : false;
 		$pi_data_settings['image_autoplay'] = ! empty( $settings['eael_product_image_autoplay'] ) ? $settings['eael_product_image_autoplay'] : false;
 		$pi_data_settings['autoplay_delay'] = ! empty( $settings['eael_product_image_autoplay_delay'] ) ? $settings['eael_product_image_autoplay_delay']['size'] : '';
@@ -687,9 +777,6 @@ class Woo_Product_Images extends Widget_Base {
 			];
 		}
 
-		// echo '<pre>';
-		// print_r($sliderImages);
-
 		$sliderImagesObj = json_encode( $sliderImages );
 		$thumb_position = ['left', 'right'];
 		$slider_image_container_width = in_array( $image_settings['thumb_position'], $thumb_position ) ? 'container_width' : 'container_width_full';
@@ -749,11 +836,32 @@ class Woo_Product_Images extends Widget_Base {
 			'loop' => $thumb_settings['image_loop'],
 		];
 
-		if ( ! empty ( $img_links ) && is_array( $img_links ) && count( $img_links ) > $thumb_settings['thumb_items'] && 'yes' == $thumb_settings['thumbnail'] ) {
-			$sliderThumbs['slidesPerView'] = $thumb_settings['thumb_items'];
+		if ( ! empty ( $img_links ) && is_array( $img_links ) && count( $img_links ) > $thumb_settings['desktop'] && 'yes' == $thumb_settings['thumbnail'] ) {
+			$slidesDesktopPerView = count( $img_links ) > $thumb_settings['desktop'] ? $thumb_settings['desktop'] : count( $img_links );
+			$slidesTabletPerView = count( $img_links ) > $thumb_settings['tablet'] ? $thumb_settings['tablet'] : count( $img_links );
+			$slidesMobilePerView = count( $img_links ) > $thumb_settings['mobile'] ? $thumb_settings['mobile'] : count( $img_links );
+
+			$sliderThumbs['slidesPerView'] = $thumb_settings['desktop'];
 			$sliderThumbs ['navigation'] = [
 				'nextEl' => ".swiper-button-next",
 				'prevEl' => ".swiper-button-prev",
+			];
+			$sliderThumbs['breakpoints'] = [
+				320 => [
+					'slidesPerView'=>  $slidesMobilePerView,
+				],
+				768 => [
+					'slidesPerView'=>  $slidesTabletPerView,
+				],
+				1024 => [
+					'slidesPerView'=> $slidesDesktopPerView,
+				],
+				1440 => [
+					'slidesPerView'=> $slidesDesktopPerView,
+				],
+				1920 => [
+					'slidesPerView'=> $slidesDesktopPerView,
+				],
 			];
 		} else {
 			$sliderThumbs['slidesPerView'] = count( $img_links );
@@ -761,11 +869,29 @@ class Woo_Product_Images extends Widget_Base {
 
 		$thumb_position = ['left', 'right'];
 		if ( in_array( $thumb_settings['thumb_position'], $thumb_position ) && 'yes' == $thumb_settings['thumbnail'] ) {
-			$slidesPerView = count( $img_links ) > $thumb_settings['thumb_items'] ? $thumb_settings['thumb_items'] : count( $img_links );
+			$slidesDesktopPerView = count( $img_links ) > $thumb_settings['desktop'] ? $thumb_settings['desktop'] : count( $img_links );
+			$slidesTabletPerView = count( $img_links ) > $thumb_settings['tablet'] ? $thumb_settings['tablet'] : count( $img_links );
+			$slidesMobilePerView = count( $img_links ) > $thumb_settings['mobile'] ? $thumb_settings['mobile'] : count( $img_links );
 			$sliderThumbs['breakpoints'] = [
-				480 => [
+				320 => [
 					'direction'=> "vertical",
-					'slidesPerView'=> $slidesPerView,
+					'slidesPerView'=>  $slidesMobilePerView,
+				],
+				768 => [
+					'direction'=> "vertical",
+					'slidesPerView'=>  $slidesTabletPerView,
+				],
+				1024 => [
+					'direction'=> "vertical",
+					'slidesPerView'=> $slidesDesktopPerView,
+				],
+				1440 => [
+					'direction'=> "vertical",
+					'slidesPerView'=> $slidesDesktopPerView,
+				],
+				1920 => [
+					'direction'=> "vertical",
+					'slidesPerView'=> $slidesDesktopPerView,
 				],
 			];
 		}
@@ -776,10 +902,12 @@ class Woo_Product_Images extends Widget_Base {
 				'disableOnInteraction' => false,
 			];
 		}
+
 		$sliderThumbsObj = json_encode( $sliderThumbs );
 		$this->add_render_attribute( 'eael-pi-thumb', [
 			'data-pi_thumb' => $sliderThumbsObj,
 			'class'         => 'product_image_slider__thumbs',
+			'data-for_mobile' => $thumb_settings['height_for_mobile'],
 		] );
 		?>
 		<div <?php $this->print_render_attribute_string( 'eael-pi-thumb' ); ?>>
@@ -794,7 +922,7 @@ class Woo_Product_Images extends Widget_Base {
 						?>
 					</div>
 					<?php $print_left_right = in_array( $thumb_settings['thumb_position'], $thumb_position ) ? 'left-right-prev' : ''; ?>
-						<?php if ( 'yes' == $thumb_settings['thumb_navigation'] && count( $img_links ) > $thumb_settings['thumb_items'] ) { ?>
+						<?php if ( 'yes' == $thumb_settings['thumb_navigation'] && count( $img_links ) > $thumb_settings['desktop'] ) { ?>
 							<span class="swiper-button-prev <?php esc_attr_e( $print_left_right ); ?>"></span>
 							<span class="swiper-button-next <?php esc_attr_e( $print_left_right ); ?>"></span>
 						<?php } ?>
@@ -842,14 +970,8 @@ class Woo_Product_Images extends Widget_Base {
       <div <?php $this->print_render_attribute_string( 'eael_thumb_position' ); ?>>
             <?php 
 				if( \Elementor\Plugin::$instance->editor->is_edit_mode() || get_post_type( get_the_ID() ) === 'templately_library' ) { 
-					$img_links = [
-						EAEL_PLUGIN_URL . 'assets/front-end/img/eael-default-placeholder.png',
-						EAEL_PLUGIN_URL . 'assets/front-end/img/eael-default-placeholder.png',
-						EAEL_PLUGIN_URL . 'assets/front-end/img/eael-default-placeholder.png',
-						EAEL_PLUGIN_URL . 'assets/front-end/img/eael-default-placeholder.png',
-						EAEL_PLUGIN_URL . 'assets/front-end/img/eael-default-placeholder.png',
-						EAEL_PLUGIN_URL . 'assets/front-end/img/eael-default-placeholder.png',
-					];
+					$default_image = EAEL_PLUGIN_URL . 'assets/front-end/img/eael-default-placeholder.png';
+					$img_links = array_fill( 0, 6, $default_image );
 
 					$this->eael_product_gallery_html( $settings, $img_links, $product_featured_url = [] );
 
