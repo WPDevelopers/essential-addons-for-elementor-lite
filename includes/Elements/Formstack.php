@@ -2,6 +2,8 @@
 
 namespace Essential_Addons_Elementor\Elements;
 
+use Essential_Addons_Elementor\Classes\Helper;
+
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
     exit;
