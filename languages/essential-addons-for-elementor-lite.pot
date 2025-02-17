@@ -445,7 +445,7 @@ msgstr ""
 msgid "Fancy Chart"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:631, ../includes/Traits/Admin.php:1103
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:631, ../includes/Traits/Admin.php:1103, ../includes/Traits/Elements.php:355
 msgid "Stacked Cards"
 msgstr ""
 
@@ -11460,10 +11460,6 @@ msgstr ""
 
 #: ../includes/Traits/Elements.php:307
 msgid "X (Twitter) Feed Carousel"
-msgstr ""
-
-#: ../includes/Traits/Elements.php:355
-msgid "Stacked_Cards"
 msgstr ""
 
 #: ../includes/Traits/Facebook_Feed.php:31
