@@ -11031,7 +11031,7 @@ msgid "File Type Fields:"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:1625
-msgid "<p> <i>📣</i> <b>NEW:</b> Introducing EA 6.1 with 4 New \"<b>WooCommerce</b>\" widgets along with \"<b>Breadcrumbs</b>\" widget! Check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>"
+msgid "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.1 with New \"<b><a target='_blank' href='%s'>Stacked Cards</a></b>\" widget! Check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:1628
