@@ -33,8 +33,10 @@ jQuery(window).on("elementor/frontend/init", function () {
 			searchRegex,
 			buttonFilter,
 			timer,
-			fg_mfp_counter_text = localize.eael_translate_text.fg_mfp_counter_text;
+			fg_mfp_counter_text = localize?.eael_translate_text?.fg_mfp_counter_text;
 			fg_mfp_counter_text = fg_mfp_counter_text ? '%curr% '+fg_mfp_counter_text+' %total%' : '%curr% of %total%';
+
+			
 
 		let $galleryWrap = $(".eael-filter-gallery-wrapper", $scope);
 		var custom_default_control 	= $galleryWrap.data('custom_default_control');
