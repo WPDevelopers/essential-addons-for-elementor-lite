@@ -633,7 +633,7 @@ class WPDeveloper_Setup_Wizard {
 					],
 					[
 						'key'         => 'sphere-photo-viewer',
-						'title'       => __( '360 Sphere Photo Viewer', 'essential-addons-for-elementor-lite' ),
+						'title'       => __( '360 Degree Photo Viewer', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
 					],
 				]

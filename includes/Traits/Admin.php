@@ -1109,7 +1109,7 @@ trait Admin {
 						    ],
 						    'sphere-photo-viewer' => [
 							    'key'         => 'sphere-photo-viewer',
-							    'title'       => __( '360 Sphere Photo Viewer', 'essential-addons-for-elementor-lite' ),
+							    'title'       => __( '360 Degree Photo Viewer', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/elementor/sphere-photo-viewer/',
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-sphere-photo-viewer/',
 							    'is_pro'      => true,
