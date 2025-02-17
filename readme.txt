@@ -4,7 +4,7 @@ Tags: elementor, elements, elementor addon, elementor widget, woocommerce elemen
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 6.1.3
+Stable tag: 6.1.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -312,6 +312,10 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.1.4 - 17/02/2025 =
+
+- Few minor bug fixes & improvements
 
 = 6.1.3 - 17/02/2025 =
 
@@ -657,4 +661,3 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Upgrade Notice ==
-
