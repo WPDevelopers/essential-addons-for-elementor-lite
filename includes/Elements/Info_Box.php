@@ -1358,17 +1358,23 @@ class Info_Box extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'eael_infobox_button_background_color',
-            [
-                'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#333333',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-infobox .eael-infobox-button' => 'background: {{VALUE}};',
-                ],
-            ]
-        );
+        $this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'name' => 'eael_infobox_button_background_color',
+				'types' => [ 'classic', 'gradient' ],
+                'fields_options' => [
+                    'background' => [
+                        'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
+                        'default' => 'classic',
+                    ],
+                    'color' => [
+                        'default' => '#333333',
+                    ],
+                ],        
+				'selector' => '{{WRAPPER}} .eael-infobox .eael-infobox-button',
+			]
+		);
 
         $this->add_group_control(
             Group_Control_Border::get_type(),
