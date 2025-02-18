@@ -266,6 +266,59 @@ class Info_Box extends Widget_Base
                 ],
             ]
         );
+
+        $this->add_control(
+			'eael_infobox_show_sub_title',
+			[
+				'label'        => esc_html__( 'Sub Title', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+			]
+		);
+
+        $this->add_control(
+            'eael_infobox_sub_title',
+            [
+                'label'       => esc_html__('Infobox Sub Title', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::TEXT,
+                'label_block' => true,
+                'dynamic' => [
+                    'active' => true,
+                ],
+                'default' => esc_html__('This is a sub title', 'essential-addons-for-elementor-lite'),
+                'ai' => [
+					'active' => false,
+				],
+                'condition' => [
+                    'eael_infobox_show_sub_title' => 'yes',
+                ],
+            ]
+        );
+        $this->add_control(
+            'eael_infobox_sub_title_tag',
+            [
+                'label'   => __('Select Sub Title Tag', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'h4',
+                'options' => [
+                    'h1'   => __('H1', 'essential-addons-for-elementor-lite'),
+                    'h2'   => __('H2', 'essential-addons-for-elementor-lite'),
+                    'h3'   => __('H3', 'essential-addons-for-elementor-lite'),
+                    'h4'   => __('H4', 'essential-addons-for-elementor-lite'),
+                    'h5'   => __('H5', 'essential-addons-for-elementor-lite'),
+                    'h6'   => __('H6', 'essential-addons-for-elementor-lite'),
+                    'span' => __('Span', 'essential-addons-for-elementor-lite'),
+                    'p'    => __('P', 'essential-addons-for-elementor-lite'),
+                    'div'  => __('Div', 'essential-addons-for-elementor-lite'),
+                ],
+                'condition' => [
+                    'eael_infobox_show_sub_title' => 'yes',
+                ],
+            ]
+        );
+
         $this->add_control(
             'eael_infobox_text_type',
             [
@@ -1768,6 +1821,10 @@ class Info_Box extends Widget_Base
         ?>
         <div <?php $this->print_render_attribute_string('infobox_content'); ?>>
             <?php
+            if ( !empty( $settings['eael_infobox_sub_title'] ) && 'yes' === $settings['eael_infobox_show_sub_title'] ){
+                printf( '<%1$s class="title">%2$s</%1$s>', esc_html( Helper::eael_validate_html_tag( $settings['eael_infobox_sub_title_tag'] ) ), wp_kses( $settings['eael_infobox_sub_title'], Helper::eael_allowed_tags() ) );
+            }
+
             if ( !empty( $settings['eael_infobox_title'] ) ){
                 printf( '<%1$s class="title">%2$s</%1$s>', esc_html( Helper::eael_validate_html_tag( $settings['eael_infobox_title_tag'] ) ), wp_kses( $settings['eael_infobox_title'], Helper::eael_allowed_tags() ) );
             }
