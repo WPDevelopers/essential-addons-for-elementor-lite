@@ -748,6 +748,22 @@ class Info_Box extends Widget_Base
             ]
         );
 
+        $this->add_control(
+			'eael_infobox_img_shape_radius',
+			[
+				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-infobox .infobox-icon img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+                'condition' => [
+                    'eael_infobox_img_shape'   => 'radius',
+                    'eael_infobox_img_or_icon' => 'img',
+                ],
+			]
+		);
+
         $this->end_controls_tab();
 
         $this->start_controls_tab(
@@ -804,6 +820,22 @@ class Info_Box extends Widget_Base
                 ],
             ]
         );
+
+        $this->add_control(
+			'eael_infobox_img_shape_radius_hover',
+			[
+				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-infobox:hover .infobox-icon img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+                'condition' => [
+                    'eael_infobox_hover_img_shape'   => 'radius',
+                    'eael_infobox_img_or_icon' => 'img',
+                ],
+			]
+		);
 
         $this->end_controls_tab();
 
