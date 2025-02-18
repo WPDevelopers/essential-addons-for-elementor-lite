@@ -1556,6 +1556,60 @@ class Info_Box extends Widget_Base
                 ],
             ]
         );
+
+        $this->add_control(
+            'eael_infobox_sub_title_heading',
+            [
+                'label'     => esc_html__('Sub Title Style', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'eael_infobox_sub_title_color',
+            [
+                'label'     => esc_html__('Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#4d4d4d',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-infobox .infobox-content .sub_title' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_infobox_sub_title_typography',
+                'selector' => '{{WRAPPER}} .eael-infobox .infobox-content .sub_title',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_infobox_sub_title_margin',
+            [
+                'label'      => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-infobox .infobox-content .sub_title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_infobox_sub_title_padding',
+            [
+                'label'      => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-infobox .infobox-content .sub_title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
         $this->add_control(
             'eael_infobox_content_heading',
             [
@@ -1635,6 +1689,17 @@ class Info_Box extends Widget_Base
                 'default' => '',
                 'selectors' => [
                     '{{WRAPPER}} .eael-infobox:hover .infobox-content .title' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_infobox_sub_title_hover_color',
+            [
+                'label'     => esc_html__('Sub Title Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-infobox:hover .infobox-content .sub_title' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -1822,7 +1887,7 @@ class Info_Box extends Widget_Base
         <div <?php $this->print_render_attribute_string('infobox_content'); ?>>
             <?php
             if ( !empty( $settings['eael_infobox_sub_title'] ) && 'yes' === $settings['eael_infobox_show_sub_title'] ){
-                printf( '<%1$s class="title">%2$s</%1$s>', esc_html( Helper::eael_validate_html_tag( $settings['eael_infobox_sub_title_tag'] ) ), wp_kses( $settings['eael_infobox_sub_title'], Helper::eael_allowed_tags() ) );
+                printf( '<%1$s class="sub_title">%2$s</%1$s>', esc_html( Helper::eael_validate_html_tag( $settings['eael_infobox_sub_title_tag'] ) ), wp_kses( $settings['eael_infobox_sub_title'], Helper::eael_allowed_tags() ) );
             }
 
             if ( !empty( $settings['eael_infobox_title'] ) ){
