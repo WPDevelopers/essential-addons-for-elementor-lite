@@ -20,6 +20,16 @@
    }
 }
 
+.infobox-content {
+   .infobox-title-section {
+      display: flex;
+      flex-direction: column;
+      .sub_title {
+         margin: 0 0 10px 0;
+      }
+   }
+}
+
 /*--- For Content Alignment ---*/
 .eael-infobox-content-align--left .eael-infobox {
    .infobox-icon {
