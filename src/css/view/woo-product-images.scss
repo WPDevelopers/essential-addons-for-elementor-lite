@@ -19,6 +19,13 @@
    button.mfp-arrow {
       width: 85px;
    }
+
+   .mfp-arrow-right:before {
+      margin-left: -28px;
+   }
+   .mfp-arrow-right:after {
+      margin-left: -25px;
+   }
 }
 
 .eael-pi-thumb-left {
@@ -153,7 +160,8 @@
                height: 100%;
             }
             img {
-               display: block;
+               display: block !important;
+               opacity: 1 !important;
                margin: 0 auto;
             }
          }
@@ -200,5 +208,33 @@
 }
 
 .container_width {
-   width: 80%;
+   width: 0%;
+}
+
+@media all and (max-width: 767px) {
+   .eael-single-product-images {
+      .product_image_slider {
+         &__thumbs {
+            margin: 0 auto;
+            .swiper-button-prev,
+            .swiper-button-next {
+               height: 20px;
+               width: 20px;
+            }
+            .swiper-slide {
+               width: 60px;
+            }
+         }
+         &__container {
+            .swiper-button-prev,
+            .swiper-button-next {
+               height: 20px;
+               width: 20px;
+               &::after {
+                  font-size: 12px !important;
+               }
+            }
+         }
+      }
+   }
 }
