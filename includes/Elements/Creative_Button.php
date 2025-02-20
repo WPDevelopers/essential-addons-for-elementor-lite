@@ -61,6 +61,10 @@ class Creative_Button extends Widget_Base
         return false;
     }
 
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
+    }
+
     public function get_custom_help_url()
     {
         return 'https://essential-addons.com/elementor/docs/creative-buttons/';
@@ -144,6 +148,16 @@ class Creative_Button extends Widget_Base
                     'condition'        => [
                         'creative_button_effect!' => ['eael-creative-button--tamaya'],
                     ],
+                ]
+            );
+
+            $this->add_control(
+                'eael_creative_button_remove_svg_color_dummy',
+                [
+                    'label'        => esc_html__( 'Remove Default SVG Color', 'essential-addons-for-elementor-lite' ),
+                    'type'         => Controls_Manager::SWITCHER,
+                    'description'  => esc_html__( 'If you are using a custom SVG and want to apply colors from the controller, enable this option. Note that it will override the default color of your SVG.', 'essential-addons-for-elementor-lite' ),
+                    'return_value' => 'yes',
                 ]
             );
 
@@ -585,12 +599,16 @@ class Creative_Button extends Widget_Base
             $this->add_render_attribute('eael_creative_button', 'target');
         }
 
-        if ($settings['creative_button_link_url']['nofollow']) {
+        if ( $settings['creative_button_link_url']['nofollow'] ) {
             $this->add_render_attribute('eael_creative_button', 'rel', 'nofollow');
         }
 
+        if ( isset( $settings['eael_creative_button_remove_svg_color'] ) && 'yes' === $settings['eael_creative_button_remove_svg_color'] ) {
+            $this->add_render_attribute('eael_creative_button', 'class', 'csvg-use-color');
+        }
+
         $this->add_render_attribute('eael_creative_button', 'data-text', esc_attr($settings['creative_button_secondary_text']));
-?>
+        ?>
         <div class="eael-creative-button-wrapper">
 
             <a <?php $this->print_render_attribute_string('eael_creative_button'); ?>>
@@ -628,7 +646,7 @@ class Creative_Button extends Widget_Base
 	            <?php endif; ?>
             </a>
         </div>
-<?php
+        <?php
 
     }
 }

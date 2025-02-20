@@ -69,6 +69,10 @@ class Simple_Menu extends Widget_Base
         ];
     }
 
+    public function has_widget_inner_wrapper(): bool {
+        return ! HelperClass::eael_e_optimized_markup();
+    }
+
     public function get_custom_help_url()
     {
         return 'https://essential-addons.com/elementor/docs/simple-menu/';
@@ -1616,14 +1620,14 @@ class Simple_Menu extends Widget_Base
 		        }
 
 		        echo "<style>
-                        @media screen and (max-width: {$eael_get_breakpoint_from_option}px) {
-                            .eael-hamburger--{$hamburger_device} {
+                        @media screen and (max-width: " . esc_html( $eael_get_breakpoint_from_option ) . "px) {
+                            .eael-hamburger--" . esc_html( $hamburger_device ) . " {
                                 .eael-simple-menu-horizontal,
                                 .eael-simple-menu-vertical {
                                     display: none;
                                 }
                             }
-                            .eael-hamburger--{$hamburger_device} {
+                            .eael-hamburger--" . esc_html( $hamburger_device ) . " {
                                 .eael-simple-menu-container .eael-simple-menu-toggle {
                                     display: block;
                                 }
@@ -1632,10 +1636,10 @@ class Simple_Menu extends Widget_Base
                     </style>";
 	        }
             ?>
-            <div <?php echo $this->get_render_attribute_string('eael-simple-menu'); ?>>
+            <div <?php $this->print_render_attribute_string('eael-simple-menu'); ?>>
                 <?php echo wp_nav_menu( $args ); ?>
                 <button class="eael-simple-menu-toggle">
-                    <span class="sr-only "><?php esc_html_e( 'Humberger Toggle Menu', 'essential-addons-for-elementor-lite' ); ?></span>
+                    <span class="sr-only "><?php esc_html_e( 'Hamburger Toggle Menu', 'essential-addons-for-elementor-lite' ); ?></span>
                     <?php Icons_Manager::render_icon( $settings['eael_simple_menu_hamburger_icon'], [ 'aria-hidden' => 'true' ] ); ?>
                 </button>
             </div>

@@ -23,12 +23,12 @@
         line-height: 48px;
         margin: 10px 0;
 
-        &.load {
+        &.lead {
             color: #1abc9c;
 
             &.gradient-color {
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
+                background-clip: text !important;
+                -webkit-text-fill-color: transparent !important;
             }
         }
     }

@@ -564,7 +564,7 @@ trait Controls
             $wb->add_control(
                 'eael_post_block_layout',
                 [
-                    'label' => esc_html__( 'Layout', 'textdomain' ),
+                    'label' => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
                     'type' => Controls_Manager::CHOOSE,
                     'options' => [
                         'post-block-layout-block' => [
@@ -1131,7 +1131,7 @@ trait Controls
                     ],
                     'default' => 'icon',
                     'condition' => [
-                        'eael_content_timeline_choose' => 'dynamic',
+                        'eael_content_timeline_choose!' => 'custom',
                     ],
                 ]
             );
@@ -1186,7 +1186,7 @@ trait Controls
                         'library' => 'fa-solid',
                     ],
                     'condition' => [
-                        'eael_content_timeline_choose' => 'dynamic',
+                        'eael_content_timeline_choose!' => 'custom',
                         'eael_show_image_or_icon' => 'icon',
                     ],
                 ]
@@ -1355,7 +1355,7 @@ trait Controls
 				    'return_value' => 'yes',
 				    'default'      => '',
 				    'condition'    => [
-					    'eael_content_timeline_choose' => 'dynamic',
+					    'eael_content_timeline_choose!' => 'custom',
 				    ],
 			    ]
 		    );
@@ -1368,7 +1368,7 @@ trait Controls
 				    'default'   => 'medium',
 				    'condition' => [
 					    'eael_show_image'              => 'yes',
-					    'eael_content_timeline_choose' => 'dynamic',
+					    'eael_content_timeline_choose!' => 'custom',
 				    ],
 			    ]
 		    );
@@ -1384,7 +1384,7 @@ trait Controls
 				    'default'      => '',
 				    'condition'    => [
 					    'eael_show_image'              => 'yes',
-					    'eael_content_timeline_choose' => 'dynamic',
+					    'eael_content_timeline_choose!' => 'custom',
 				    ],
 			    ]
 		    );
@@ -1470,7 +1470,7 @@ trait Controls
                 'return_value' => 'yes',
                 'default' => 'yes',
                 'condition' => [
-                    'eael_content_timeline_choose' => 'dynamic',
+                    'eael_content_timeline_choose!' => 'custom',
                 ],
             ]
         );
@@ -1484,7 +1484,7 @@ trait Controls
                 'label_block' => false,
                 'default' => esc_html__('Read More', 'essential-addons-for-elementor-lite'),
                 'condition' => [
-                    'eael_content_timeline_choose' => 'dynamic',
+                    'eael_content_timeline_choose!' => 'custom',
                     'eael_show_read_more' => 'yes',
                 ],
             ]
@@ -1496,12 +1496,12 @@ trait Controls
             $wb->add_control(
                 'eael_content_timeline_navigation_type',
                 array(
-                    'label'   => esc_html__( 'Navigation Type', 'essential-addons-elementor' ),
+                    'label'   => esc_html__( 'Navigation Type', 'essential-addons-for-elementor-lite' ),
                     'type'    => Controls_Manager::SELECT,
                     'default' => 'scrollbar',
                     'options' => array(
-                        'scrollbar' => esc_html__( 'Scrollbar', 'essential-addons-elementor' ),
-                        'arrows' => esc_html__( 'Arrows', 'essential-addons-elementor' ),
+                        'scrollbar' => esc_html__( 'Scrollbar', 'essential-addons-for-elementor-lite' ),
+                        'arrows' => esc_html__( 'Arrows', 'essential-addons-for-elementor-lite' ),
                     ),
                     'condition' => [
                         'eael_dynamic_template_Layout' => 'horizontal',
@@ -1512,7 +1512,7 @@ trait Controls
             $wb->add_control(
                 'eael_content_timeline_arrow_type',
                 array(
-                    'label'   => esc_html__( 'Arrow Type', 'essential-addons-elementor' ),
+                    'label'   => esc_html__( 'Arrow Type', 'essential-addons-for-elementor-lite' ),
                     'type'    => Controls_Manager::SELECT,
                     'default' => 'fa fa-angle-left',
                     'options' => array(
@@ -1537,7 +1537,7 @@ trait Controls
             $wb->add_responsive_control(
                 'eael_content_timeline_slides_to_scroll',
                 array(
-                    'label'     => esc_html__( 'Slides to Scroll', 'essential-addons-elementor' ),
+                    'label'     => esc_html__( 'Slides to Scroll', 'essential-addons-for-elementor-lite' ),
                     'type'      => Controls_Manager::SELECT,
                     'default'   => '1',
                     'options'   => array_combine( $content_timeline_range, $content_timeline_range ),
@@ -1653,11 +1653,7 @@ trait Controls
             }
 
 	        $post_types = ControlsHelper::get_post_types();
-	        unset(
-		        $post_types['post'],
-		        $post_types['page'],
-		        $post_types['product']
-	        );
+	        unset( $post_types['post'] );
 	        $taxonomies     = get_taxonomies( [], 'objects' );
 	        $post_types_tax = [];
 
@@ -1673,13 +1669,30 @@ trait Controls
 	        }
 
 	        foreach ( $post_types as $post_type => $post_taxonomies ) {
+		        $options = [];
+                $default = '';
+
+                if ( isset( $post_types_tax[ $post_type ] ) ){
+                    $options = $post_types_tax[ $post_type ];
+                    $default = key( $post_types_tax[ $post_type ] );
+                }
+
+                if ( 'product' === $post_type ) {
+                    unset( $options['product_cat'], $options['product_tag'] );
+                    $options['category'] = __('Category', 'essential-addons-for-elementor-lite');
+                    $options['tags']     = __('Tags', 'essential-addons-for-elementor-lite');
+                } else if ( 'page' === $post_type ) {
+                    $options['category'] = __('Category', 'essential-addons-for-elementor-lite');
+                    $options['tags']     = __('Tags', 'essential-addons-for-elementor-lite');
+                }
+
 		        $wb->add_control(
 			        'eael_' . $post_type . '_terms',
 			        [
 				        'label'     => __( 'Show Terms From', 'essential-addons-for-elementor-lite' ),
 				        'type'      => Controls_Manager::SELECT,
-				        'options'   => isset( $post_types_tax[ $post_type ] ) ? $post_types_tax[ $post_type ] : [],
-				        'default'   => isset( $post_types_tax[ $post_type ] ) ? key( $post_types_tax[ $post_type ] ) : '',
+				        'options'   => $options,
+				        'default'   => $default,
 				        'condition' => [
 					        'eael_show_image'             => 'yes',
 					        'eael_show_post_terms'        => 'yes',
@@ -1703,7 +1716,7 @@ trait Controls
                     'condition' => [
 	                    'eael_show_image'      => 'yes',
 	                    'eael_show_post_terms' => 'yes',
-	                    'post_type'            => [ 'post', 'page', 'product', 'by_id', 'source_dynamic' ]
+	                    'post_type'            => [ 'post', 'by_id', 'source_dynamic' ]
                     ],
                 ]
             );
@@ -1815,7 +1828,7 @@ trait Controls
                         'default' => 'yes',
                         'condition' => [
                             'eael_show_meta' => 'yes',
-                            'eael_post_grid_preset_style' => '',
+                            'eael_post_grid_preset_style' => 'one',
                         ],
                     ]
                 );

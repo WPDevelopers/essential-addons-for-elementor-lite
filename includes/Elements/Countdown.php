@@ -51,8 +51,18 @@ class Countdown extends Widget_Base {
         ];
     }
 
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
+    }
+
     protected function is_dynamic_content():bool {
-        return false;
+        if( Plugin::$instance->editor->is_edit_mode() ) {
+            return false;
+        }
+        $expire_type        = $this->get_settings('countdown_expire_type');
+        $is_dynamic_content = 'template' === $expire_type;
+
+        return $is_dynamic_content;
     }
 
     public function get_custom_help_url() {
@@ -1328,6 +1338,9 @@ class Countdown extends Widget_Base {
                         if ( ! is_array( $settings['countdown_expiry_templates'] ) ) {
                             $settings['countdown_expiry_templates'] = apply_filters( 'wpml_object_id', $settings['countdown_expiry_templates'], 'wp_template', true );
                         }
+
+	                    Helper::eael_onpage_edit_template_markup( get_the_ID(), $settings['countdown_expiry_templates'] );
+	                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                         echo Plugin::$instance->frontend->get_builder_content( $settings['countdown_expiry_templates'], true );
                     } ?>
                <?php else: ?>
@@ -1345,6 +1358,8 @@ class Countdown extends Widget_Base {
                                 if ( ! is_array( $settings['countdown_expiry_templates'] ) ) {
                                     $settings['countdown_expiry_templates'] = apply_filters( 'wpml_object_id', $settings['countdown_expiry_templates'], 'wp_template', true );
                                 }
+
+	                            Helper::eael_onpage_edit_template_markup( get_the_ID(), $settings['countdown_expiry_templates'] );
                                 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                                 echo Plugin::$instance->frontend->get_builder_content( $settings['countdown_expiry_templates'], true );
                             }

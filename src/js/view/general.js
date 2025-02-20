@@ -90,7 +90,14 @@ eael.hooks.addAction("widgets.reinit", "ea", ($content) => {
 });
 
 let ea_swiper_slider_init_inside_template = (content) => {
-	window.dispatchEvent(new Event('resize'));
+
+	/*
+	* If you want to prevent calling the resize event use this code.
+	* window.eaelPreventResizeOnClick = true;
+	*/
+	if ( window.eaelPreventResizeOnClick === undefined ) {
+		window.dispatchEvent(new Event('resize'));
+	}
 
 	content = typeof content === 'object' ? content : jQuery(content);
 	content.find('.swiper-wrapper').each(function () {
@@ -154,16 +161,16 @@ jQuery(window).on("elementor/frontend/init", function () {
 		}
 	}
 
-	//Add hashchange code form advanced-accordion
-	let  isTriggerOnHashchange = true;
-	window.addEventListener( 'hashchange', function () {
-		if( !isTriggerOnHashchange ) {
+	//Add hashchange code from advanced-accordion
+	let isTriggerOnHashchange = true;
+	window.addEventListener('hashchange', function () {
+		if (!isTriggerOnHashchange) {
 			return;
 		}
 		let hashTag = window.location.hash.substr(1);
 		hashTag = hashTag === 'safari' ? 'eael-safari' : hashTag;
-		if ( hashTag !== 'undefined' && hashTag ) {
-			jQuery( '#' + hashTag ).trigger( 'click' );
+		if (hashTag !== 'undefined' && hashTag && /^[A-Za-z][-A-Za-z0-9_:.]*$/.test(hashTag)) {
+			$('#' + hashTag).trigger('click');
 		}
 	});
 
@@ -263,17 +270,48 @@ jQuery(window).on("elementor/frontend/init", function () {
 		return elementBottom > viewportTop && elementTop < viewportHalf;
 	};
 
-	$(document).ready(function(){ 
+	$(document).ready(function () {
 		let resetPasswordParams = new URLSearchParams(location.search);
-	
-		if ( resetPasswordParams.has('popup-selector') && ( resetPasswordParams.has('eael-lostpassword') || resetPasswordParams.has('eael-resetpassword') ) ){
+
+		if (resetPasswordParams.has('popup-selector') && (resetPasswordParams.has('eael-lostpassword') || resetPasswordParams.has('eael-resetpassword'))) {
 			let popupSelector = resetPasswordParams.get('popup-selector');
-			if(popupSelector.length){
-				popupSelector = popupSelector.replace(/_/g," ");
-				setTimeout(function(){
+
+			if (popupSelector.length && /^[A-Za-z.#][A-Za-z0-9_:.#\s-]*$/.test(popupSelector)) {
+				popupSelector = popupSelector.replace(/_/g, " ");
+				setTimeout(function () {
 					jQuery(popupSelector).trigger('click');
 				}, 300);
 			}
+		}
+	});
+
+	$(document).on('click', '.eael-onpage-edit-template', function () {
+		let $this = $(this),
+			templateID = $this.data('eael-template-id'),
+			pageID = $this.data('page-id'),
+			mode = $this.data('mode');
+
+		if (mode === 'edit') {
+			parent.window.$e.internal('panel/state-loading');
+			parent.window.$e.run('editor/documents/switch', {
+				id: parseInt(templateID)  // Switch back to the original document
+			}).then(function () {
+				$this.data('mode', 'save');
+				$this.find('span').text('Save & Back');
+				$this.find('i').addClass('eicon-arrow-left').removeClass('eicon-edit');
+				$this.closest('.eael-onpage-edit-template-wrapper').addClass('eael-onpage-edit-activate').parent().addClass('eael-widget-otea-active');
+				parent.window.$e.internal('panel/state-ready');
+			});
+		} else if (mode === 'save') {
+			parent.window.$e.internal('panel/state-loading');
+			parent.window.$e.run('editor/documents/switch', {
+				id: parseInt(pageID),  // Switch back to the original document
+				mode: 'save',  // You can use 'edit' mode here if you want to continue editing the original document
+				shouldScroll: false
+			}).then(function () {
+				parent.window.$e.internal('panel/state-ready');
+				$this.data('mode', 'edit');
+			});
 		}
 	});
 })(jQuery);

@@ -1,6 +1,7 @@
 <?php
 
 namespace Essential_Addons_Elementor\Elements;
+use Essential_Addons_Elementor\Classes\Helper;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -13,8 +14,6 @@ use \Elementor\Widget_Base;
 
 class Sticky_Video extends Widget_Base
 {
-    
-
     protected $eaelRElem = 1;
 
     public function get_name()
@@ -65,6 +64,10 @@ class Sticky_Video extends Widget_Base
         return false;
     }
 
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
+    }
+
     public function get_custom_help_url()
     {
         return 'https://essential-addons.com/elementor/docs/sticky-video/';
@@ -108,9 +111,6 @@ class Sticky_Video extends Widget_Base
                 'label_off' => __('Off', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default' => 'yes',
-                'selectors' => [
-                    '{{WRAPPER}} div.eaelsv-sticky-player' => 'display: block',
-                ],
             ]
         );
 
@@ -224,7 +224,7 @@ class Sticky_Video extends Widget_Base
         $this->add_control(
             'eaelsv_hosted_url',
             [
-                'label' => __('Choose File', 'elementor'),
+                'label' => __('Choose File', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::MEDIA,
                 'dynamic' => [
                     'active' => true,
@@ -795,8 +795,8 @@ class Sticky_Video extends Widget_Base
                 ]
             );
 
-            echo '<div ' . $this->get_render_attribute_string('esvp_overlay_wrapper') . '>
-					<div class="eaelsv-overlay-icon">' . $icon . '</div>
+            echo '<div '; $this->print_render_attribute_string('esvp_overlay_wrapper'); echo '>
+					<div class="eaelsv-overlay-icon">' . wp_kses(  $icon, Helper::eael_allowed_icon_tags() ) . '</div>
 				</div>';
         }
 
@@ -814,8 +814,9 @@ class Sticky_Video extends Widget_Base
             ]
         );
 
-        echo '<div ' . $this->get_render_attribute_string('esvp_overlay_wrapper2') . '>
-				' . $eaelsvPlayer . '
+        echo '<div '; $this->print_render_attribute_string('esvp_overlay_wrapper2'); echo '>';
+                //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo $eaelsvPlayer . '
 				<span class="eaelsv-sticky-player-close"><i class="fas fa-times-circle"></i></span>
 			</div>
 		</div>';

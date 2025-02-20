@@ -92,7 +92,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 		if (!isEditMode) {
 			var $gallery         = $(".eael-filter-gallery-container", $scope),
 				$settings        = $gallery.data("settings"),
-				fg_items 		 =  $gallery.data("gallery-items"),
+				fg_items 		 = JSON.parse( atob( $gallery.data("gallery-items") ) ),
 				$layout_mode     = $settings.grid_style === "masonry" ? "masonry" : "fitRows",
 				$gallery_enabled = ($settings.gallery_enabled === "yes"),
 				$images_per_page = $gallery.data("images-per-page"),
@@ -235,7 +235,14 @@ jQuery(window).on("elementor/frontend/init", function () {
 				
 				//hide load more button if selected control have no item to show
 				let replaceWithDot = buttonFilter.replace('.', '');
-				const restOfItem = fg_items.filter( galleryItem => galleryItem.includes( replaceWithDot ) ).length;
+				let restOfItem = fg_items.filter( galleryItem => galleryItem.includes( replaceWithDot ) ).length;
+				
+				if ( restOfItem < 1 && $this.data('filter') === '*' ) {
+					let renderdItmes = $('.eael-filter-gallery-container .eael-filterable-gallery-item-wrap', $scope).length,
+						totalItems   = $gallery.data("total-gallery-items");
+
+					restOfItem = Number(totalItems) - Number(renderdItmes);
+				}
 				
 				if( LoadMoreShow || ( restOfItem < 1 ) ) {
 					loadMore.hide()
@@ -256,7 +263,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 				} else {
 					$isotope_gallery.isotope();
 				}
-
+						
 				if($this.hasClass('all-control')){
 					//All items are active
 					if ( LoadMoreShow || ( fg_items.length <= 1 ) ) {
@@ -265,12 +272,28 @@ jQuery(window).on("elementor/frontend/init", function () {
 						loadMore.show()
 					}
 
-					$('.eael-filterable-gallery-item-wrap .eael-magnific-link-clone').removeClass('active').addClass('active');
+					// $('.eael-filterable-gallery-item-wrap .eael-magnific-link-clone').removeClass('active').addClass('active');
 				}else {
-					$('.eael-filterable-gallery-item-wrap .eael-magnific-link-clone').removeClass('active');
+					// $('.eael-filterable-gallery-item-wrap .eael-magnific-link-clone').removeClass('active');
 					$(buttonFilter + ' .eael-magnific-link').addClass('active');
 				}
 			});
+
+			//key board accesibilty
+			$('.eael-filter-gallery-control li.control', $scope).keydown(function(e) {
+                if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                    const tabs 		 = $('.eael-filter-gallery-control li.control', $scope);
+					let currentIndex = $('.eael-filter-gallery-control li.control.active', $scope);
+                    let index 		 = currentIndex < 0 ? tabs.index(this) : tabs.index(currentIndex);
+
+                    if (e.key === 'ArrowRight') index = (index + 1) % tabs.length;
+                    if (e.key === 'ArrowLeft') index = (index - 1 + tabs.length) % tabs.length;
+                    $(tabs[index]).focus().click();
+                }
+            });
+
+			$('.eael-filter-gallery-control li.control', $scope).attr('tabindex', '-1');
+			$('.eael-filter-gallery-control li.control.active', $scope).attr('tabindex', '0');
 
 			//quick search
 			var loaded_on_search = false;

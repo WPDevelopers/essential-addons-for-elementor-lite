@@ -53,6 +53,10 @@ class Tooltip extends Widget_Base {
         return false;
     }
 
+	public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
+    }
+
 	public function get_custom_help_url()
 	{
         return 'https://essential-addons.com/elementor/docs/tooltip/';
@@ -726,8 +730,8 @@ class Tooltip extends Widget_Base {
 	?>
 	<div class="eael-tooltip">
 		<?php if( $settings['eael_tooltip_type'] === 'text' ) : ?>
-			<<?php echo esc_attr( Helper::eael_validate_html_tag($settings['eael_tooltip_content_tag']) ); ?> class="eael-tooltip-content" tabindex="0" aria-describedby="tooltip-text-<?php echo esc_attr( $this->get_id() ); ?>"><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?><a <?php $this->print_render_attribute_string( 'eael_tooltip_link' ); ?>><?php endif; ?><?php echo wp_kses_post($settings['eael_tooltip_content']); ?><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?></a><?php endif; ?></<?php echo esc_attr( Helper::eael_validate_html_tag($settings['eael_tooltip_content_tag']) ); ?>>
-  			<span id="tooltip-text-<?php echo esc_attr( $this->get_id() ); ?>" class="eael-tooltip-text eael-tooltip-<?php echo esc_attr( $settings['eael_tooltip_hover_dir'] ) ?>" role="tooltip"><?php echo __( $settings['eael_tooltip_hover_content'] ); ?></span>
+			<<?php echo esc_html( Helper::eael_validate_html_tag($settings['eael_tooltip_content_tag']) ); ?> class="eael-tooltip-content" tabindex="0" aria-describedby="tooltip-text-<?php echo esc_attr( $this->get_id() ); ?>"><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?><a <?php $this->print_render_attribute_string( 'eael_tooltip_link' ); ?>><?php endif; ?><?php echo wp_kses_post($settings['eael_tooltip_content']); ?><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?></a><?php endif; ?></<?php echo esc_html( Helper::eael_validate_html_tag($settings['eael_tooltip_content_tag']) ); ?>>
+  			<span id="tooltip-text-<?php echo esc_attr( $this->get_id() ); ?>" class="eael-tooltip-text eael-tooltip-<?php echo esc_attr( $settings['eael_tooltip_hover_dir'] ) ?>" role="tooltip"><?php echo wp_kses( $settings['eael_tooltip_hover_content'], Helper::eael_allowed_tags() ); ?></span>
   		<?php elseif( $settings['eael_tooltip_type'] === 'icon' ) : ?>
 			<span class="eael-tooltip-content" tabindex="0" aria-describedby="tooltip-text-<?php echo esc_attr( $this->get_id() ); ?>"><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?><a <?php $this->print_render_attribute_string( 'eael_tooltip_link' ); ?>><?php endif; ?>
 			<?php if ($icon_is_new || $icon_migrated) { ?>
@@ -740,13 +744,13 @@ class Tooltip extends Widget_Base {
                 Icons_Manager::render_icon( $settings['eael_tooltip_icon_content'], [ 'aria-hidden' => 'true' ] );
             } ?>
 			<?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?></a><?php endif; ?></span>
-  			<span id="tooltip-text-<?php echo esc_attr( $this->get_id() ); ?>" class="eael-tooltip-text eael-tooltip-<?php echo esc_attr( $settings['eael_tooltip_hover_dir'] ) ?>" role="tooltip"><?php echo __( $settings['eael_tooltip_hover_content'] ); ?></span>
+  			<span id="tooltip-text-<?php echo esc_attr( $this->get_id() ); ?>" class="eael-tooltip-text eael-tooltip-<?php echo esc_attr( $settings['eael_tooltip_hover_dir'] ) ?>" role="tooltip"><?php echo wp_kses( $settings['eael_tooltip_hover_content'], Helper::eael_allowed_tags() ); ?></span>
   		<?php elseif( $settings['eael_tooltip_type'] === 'image' ) : ?>
 			<span class="eael-tooltip-content" tabindex="0" aria-describedby="tooltip-text-<?php echo esc_attr( $this->get_id() ); ?>"><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?><a <?php $this->print_render_attribute_string( 'eael_tooltip_link' ); ?>><?php endif; ?><img src="<?php echo esc_url( $settings['eael_tooltip_img_content']['url'] ); ?>" alt="<?php echo esc_attr( get_post_meta($settings['eael_tooltip_img_content']['id'], '_wp_attachment_image_alt', true) ); ?>"><?php if( $settings['eael_tooltip_enable_link'] === 'yes' ) : ?></a><?php endif; ?></span>
-  			<span id="tooltip-text-<?php echo esc_attr( $this->get_id() ); ?>" class="eael-tooltip-text eael-tooltip-<?php echo esc_attr( $settings['eael_tooltip_hover_dir'] ) ?>" role="tooltip"><?php echo __( $settings['eael_tooltip_hover_content'] ); ?></span>
+  			<span id="tooltip-text-<?php echo esc_attr( $this->get_id() ); ?>" class="eael-tooltip-text eael-tooltip-<?php echo esc_attr( $settings['eael_tooltip_hover_dir'] ) ?>" role="tooltip"><?php echo wp_kses( $settings['eael_tooltip_hover_content'], Helper::eael_allowed_tags() ); ?></span>
   		<?php elseif( $settings['eael_tooltip_type'] === 'shortcode' ) : ?>
 			<div class="eael-tooltip-content" tabindex="0" aria-describedby="tooltip-text-<?php echo esc_attr( $this->get_id() ); ?>"><?php echo do_shortcode( $settings['eael_tooltip_shortcode_content'] ); ?></div>
-  			<span id="tooltip-text-<?php echo esc_attr( $this->get_id() ); ?>" class="eael-tooltip-text eael-tooltip-<?php echo esc_attr( $settings['eael_tooltip_hover_dir'] ) ?>" role="tooltip"><?php echo __( $settings['eael_tooltip_hover_content'] ); ?></span>
+  			<span id="tooltip-text-<?php echo esc_attr( $this->get_id() ); ?>" class="eael-tooltip-text eael-tooltip-<?php echo esc_attr( $settings['eael_tooltip_hover_dir'] ) ?>" role="tooltip"><?php echo wp_kses( $settings['eael_tooltip_hover_content'], Helper::eael_allowed_tags() ); ?></span>
   		<?php endif; ?>
 	</div>
 	<?php

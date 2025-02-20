@@ -56,6 +56,10 @@ class Testimonial extends Widget_Base {
         return false;
     }
 
+	public function has_widget_inner_wrapper(): bool {
+        return ! HelperClass::eael_e_optimized_markup();
+    }
+
 	public function get_custom_help_url()
 	{
         return 'https://essential-addons.com/elementor/docs/testimonials/';
@@ -780,10 +784,11 @@ class Testimonial extends Widget_Base {
 			?>
 			<div class="eael-testimonial-image">
 				<?php if( 'yes' == $settings['eael_testimonial_enable_avatar'] ) : ?>
-					<figure><?php echo Group_Control_Image_Size::get_attachment_image_html( $settings ); ?></figure>
+					<figure><?php echo wp_kses( $image, HelperClass::eael_allowed_tags( [ 'img' => [ 'loading' => [] ] ] ) ); ?></figure>
 				<?php endif; ?>
 			</div>
 			<?php
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo ob_get_clean();
 		}
 	}
@@ -802,14 +807,15 @@ class Testimonial extends Widget_Base {
 			<li><i class="fas fa-star" aria-hidden="true"></i></li>
 		</ul>
 		<?php
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo ob_get_clean();
 		endif;
 	}
 
 	protected function render_user_name_and_company() {
 		$settings = $this->get_settings_for_display();
-		if( ! empty($settings['eael_testimonial_name']) ) : ?><p <?php echo $this->get_render_attribute_string('eael_testimonial_user'); ?>><?php echo HelperClass::eael_wp_kses($settings['eael_testimonial_name']); ?></p><?php endif;
-		if( ! empty($settings['eael_testimonial_company_title']) ) : ?><p class="eael-testimonial-user-company"><?php echo HelperClass::eael_wp_kses($settings['eael_testimonial_company_title']); ?></p><?php endif;
+		if( ! empty($settings['eael_testimonial_name']) ) : ?><p <?php $this->print_render_attribute_string('eael_testimonial_user'); ?>><?php echo wp_kses( $settings['eael_testimonial_name'], HelperClass::eael_allowed_tags() ); ?></p><?php endif;
+		if( ! empty($settings['eael_testimonial_company_title']) ) : ?><p class="eael-testimonial-user-company"><?php echo wp_kses( $settings['eael_testimonial_company_title'], HelperClass::eael_allowed_tags() ); ?></p><?php endif;
 	}
 
 	protected function testimonial_quote() {
@@ -818,7 +824,8 @@ class Testimonial extends Widget_Base {
 
 	protected function testimonial_desc() {
 		$settings = $this->get_settings_for_display();
-		echo '<div class="eael-testimonial-text">'.wpautop($settings['eael_testimonial_description']).'</div>';
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo '<div class="eael-testimonial-text">'. $this->parse_text_editor( $settings['eael_testimonial_description'] ) .'</div>';
 	}
 
 
@@ -850,7 +857,7 @@ class Testimonial extends Widget_Base {
 
 	?>
 
-	<div <?php echo $this->get_render_attribute_string('eael_testimonial_wrap'); ?>>
+	<div <?php $this->print_render_attribute_string('eael_testimonial_wrap'); ?>>
 
 		<?php if('classic-style' == $settings['eael_testimonial_style']) { ?>
 			<div class="eael-testimonial-content">

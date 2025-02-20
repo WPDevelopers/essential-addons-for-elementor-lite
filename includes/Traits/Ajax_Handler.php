@@ -7,11 +7,9 @@
 
 namespace Essential_Addons_Elementor\Traits;
 
-use Automattic\WooCommerce\Utilities\OrderUtil;
+use Essential_Addons_Elementor\Classes\AllTraits;
 use Essential_Addons_Elementor\Classes\Elements_Manager;
 use Essential_Addons_Elementor\Classes\Helper as HelperClass;
-use Essential_Addons_Elementor\Template\Woocommerce\Checkout\Woo_Checkout_Helper;
-use Essential_Addons_Elementor\Traits\Template_Query;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -149,7 +147,8 @@ trait Ajax_Handler {
 				$this->sanitize_taxonomy_data( $_REQUEST['taxonomy'] ),
 			];
 
-			$args['tax_query'] = $this->eael_terms_query_multiple( $args['tax_query'] );
+			$relation = isset( $settings['relation_cats_tags'] ) ? $settings['relation_cats_tags'] : 'OR';
+			$args['tax_query'] = $this->eael_terms_query_multiple( $args['tax_query'], $relation );
 		}
 
 		if ( $class == '\Essential_Addons_Elementor\Elements\Post_Grid' ) {
@@ -545,7 +544,7 @@ trait Ajax_Handler {
 	public function woo_checkout_update_order_review() {
 		$setting = $_POST['orderReviewData'];
 		ob_start();
-		Woo_Checkout_Helper::checkout_order_review_default( $setting );
+		AllTraits::checkout_order_review_default( $setting );
 		$woo_checkout_update_order_review = ob_get_clean();
 
 		wp_send_json(
@@ -666,7 +665,27 @@ trait Ajax_Handler {
 				$this->sanitize_taxonomy_data( $_REQUEST['taxonomy'] ),
 			];
 
-			$args['tax_query'] = $this->eael_terms_query_multiple( $args['tax_query'] );
+			$relation = isset( $settings['relation_cats_tags'] ) ? $settings['relation_cats_tags'] : 'OR';
+			if ( 'and' === strtolower( $relation ) ) {
+				if ( 'product_cat' === $_REQUEST['taxonomy']['taxonomy'] && ! empty( $settings['eael_product_gallery_tags'] ) ) {
+					$args['tax_query'][] = [
+						'taxonomy' => 'product_tag',
+						'field'    => 'term_id',
+						'terms'    => $settings['eael_product_gallery_tags'],
+						'operator' => 'IN',
+					];
+				}
+				if ( 'product_tag' === $_REQUEST['taxonomy']['taxonomy'] && ! empty( $settings['eael_product_gallery_categories'] ) ) {
+					$args['tax_query'][] = [
+						'taxonomy' => 'product_cat',
+						'field'    => 'term_id',
+						'terms'    => $settings['eael_product_gallery_categories'],
+						'operator' => 'IN',
+					];
+				}
+			}
+
+			$args['tax_query'] = $this->eael_terms_query_multiple( $args['tax_query'], $relation );
 
 			if ( $settings[ 'eael_product_gallery_product_filter' ] == 'featured-products' ) {
 				$args[ 'tax_query' ][] = [
@@ -717,10 +736,15 @@ trait Ajax_Handler {
 
 				if ( $query->have_posts() ) {
 
+					do_action( 'eael_woo_before_product_loop' );
+
 					while ( $query->have_posts() ) {
 						$query->the_post();
 						$html .= HelperClass::include_with_variable( $file_path, [ 'settings' => $settings ] );
 					}
+					
+					do_action( 'eael_woo_after_product_loop' );
+
 					$html .= '<div class="eael-max-page" style="display:none;">'. ceil($query->found_posts / absint( $args['posts_per_page'] ) ) . '</div>';
 					printf( '%1$s', $html );
 					wp_reset_postdata();
@@ -730,7 +754,7 @@ trait Ajax_Handler {
 		wp_die();
 	}
 
-	public function eael_terms_query_multiple( $args_tax_query = [] ){
+	public function eael_terms_query_multiple( $args_tax_query = [], $relation = 'OR' ){
 		if ( strpos($args_tax_query[0]['taxonomy'], '|') !== false ) {
 			$args_tax_query_item = $args_tax_query[0];
 
@@ -755,7 +779,7 @@ trait Ajax_Handler {
 
 
 			if ( count( $args_multiple['tax_query'] ) ) {
-				$args_multiple['tax_query']['relation'] = 'OR';
+				$args_multiple['tax_query']['relation'] = $relation;
 			}
 
 			$args_tax_query = $args_multiple['tax_query'];
@@ -799,8 +823,7 @@ trait Ajax_Handler {
 					'hide_empty' => false,
 					'orderby'    => 'name',
 					'order'      => 'ASC',
-					'search'     => $search,
-					'number'     => '5',
+					'search'     => $search
 				];
 
 				if ( $post_type !== 'all' ) {

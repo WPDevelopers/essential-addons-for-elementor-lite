@@ -113,7 +113,7 @@ trait Core
 
         $button = '<p><a href="' . esc_url( $activation_url ) . '" class="button-primary">' . esc_html( $button_text ) . '</a></p>';
 
-        printf('<div class="error"><p>%1$s</p>%2$s</div>', __($message), $button);
+        printf('<div class="error"><p>%1$s</p>%2$s</div>', $message, $button);
     }
 
     /**
@@ -175,7 +175,7 @@ trait Core
         }
 
         $document = Plugin::$instance->documents->get($post_id, false);
-        $global_settings = get_option('eael_global_settings_', []) ?: [];
+        $global_settings = get_option('eael_global_settings', []) ?: [];
          
         if ($document->get_settings('eael_ext_reading_progress_global') == 'yes' && $document->get_settings('eael_ext_reading_progress') == 'yes') {
             $global_settings['reading_progress'] = [
@@ -217,6 +217,8 @@ trait Core
                 'eael_ext_toc_title' => $document->get_settings('eael_ext_toc_title'),
                 'eael_ext_toc_title_tag' => $document->get_settings('eael_ext_toc_title_tag'),
                 'eael_ext_toc_position' => $document->get_settings('eael_ext_toc_position'),
+                'eael_ext_toc_position_mobile' => $document->get_settings('eael_ext_toc_position_mobile'),
+                'eael_ext_toc_position_mobile_top_bottom' => $document->get_settings('eael_ext_toc_position_mobile_top_bottom'),
                 'eael_ext_toc_supported_heading_tag' => $document->get_settings('eael_ext_toc_supported_heading_tag'),
                 'eael_ext_toc_content_selector' => $document->get_settings('eael_ext_toc_content_selector'),
                 'eael_toc_exclude_selector' => $document->get_settings('eael_toc_exclude_selector'),

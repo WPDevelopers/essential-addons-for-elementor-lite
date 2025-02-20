@@ -208,6 +208,10 @@ class Login_Register extends Widget_Base {
 		];
 	}
 
+	public function has_widget_inner_wrapper(): bool {
+        return ! HelperCLass::eael_e_optimized_markup();
+    }
+
 	public function get_custom_help_url() {
 		return 'https://essential-addons.com/elementor/docs/login-register-form/';
 	}
@@ -5694,7 +5698,7 @@ class Login_Register extends Widget_Base {
 				$lp_atts .= ! empty( $this->ds['lost_password_url']['nofollow'] ) ? ' rel="nofollow"' : '';
 				$lp_link = sprintf( '<a href="%s" %s >%s</a>', esc_url( $lp_url ), $lp_atts, $lp_text );
 			} else if ( ! empty( $this->ds['lost_password_link_type'] ) && 'form' === $this->ds['lost_password_link_type'] ){
-				$lp_link = sprintf( '<a id="eael-lr-lostpassword-toggle" href="" data-action="%s">%s</a>', esc_attr('form'), $lp_text );
+				$lp_link = sprintf( '<a id="eael-lr-lostpassword-toggle" href="" data-action="form">%s</a>', $lp_text );
 			}
 			// btn alignment
 			$btn_align = isset( $this->ds['login_btn_align'] ) ? $this->ds['login_btn_align'] : '';
@@ -5720,7 +5724,7 @@ class Login_Register extends Widget_Base {
 						/* translators: %s user display name */
 						$logout_link_text = ! empty( $this->ds['log_out_link_text'] ) ? $this->ds['log_out_link_text'] : 'You are already logged in as [username]. ([logout_link])';
 						$logout_link_text = $this->replace_placeholders_logout_link_text($logout_link_text);
-						printf( '%s', __( HelperCLass::eael_wp_kses( $logout_link_text ), 'essential-addons-for-elementor-lite' ) );
+						echo wp_kses( __( $logout_link_text, 'essential-addons-for-elementor-lite' ), HelperCLass::eael_allowed_tags() );
 					} else {
 						if ( 'left' === $this->form_illustration_pos ) {
 							$this->print_form_illustration();
@@ -5735,13 +5739,12 @@ class Login_Register extends Widget_Base {
 								<?php do_action( 'eael/login-register/after-login-form-open', $this ); ?>
                                 <div class="eael-lr-form-group eael-user-login">
 									<?php if ( $display_label && $u_label ) {
-										printf( '<label for="eael-user-login" class="eael-field-label">%s</label>', HelperCLass::eael_wp_kses( $u_label ) );
+										echo '<label for="eael-user-login" class="eael-field-label">' . wp_kses( $u_label, HelperCLass::eael_allowed_tags() ) . '</label>';
 									} ?>
                                     <input type="text"
                                            name="eael-user-login"
                                            id="eael-user-login"
                                            class="eael-lr-form-control"
-                                           aria-describedby="emailHelp"
                                            placeholder="<?php if ( $display_label && $u_ph ) {
 										       echo esc_attr( $u_ph );
 									       } ?>"
@@ -5753,7 +5756,7 @@ class Login_Register extends Widget_Base {
                                 </div>
                                 <div class="eael-lr-form-group eael-user-password">
 									<?php if ( $display_label && $p_label ) {
-										printf( '<label for="eael-user-password" class="eael-field-label">%s</label>', $p_label );
+										echo '<label for="eael-user-password" class="eael-field-label">' . wp_kses( $p_label, HelperCLass::eael_allowed_tags() ) . '</label>';
 									} ?>
                                     <div class="eael-lr-password-wrapper">
                                         <input type="password"
@@ -5795,7 +5798,7 @@ class Login_Register extends Widget_Base {
                                         </p>
 									<?php }
 									if ( $show_lp ) {
-										echo '<p class="forget-pass">' . $lp_link . '</p>';//XSS ok. already escaped
+										echo '<p class="forget-pass">' . wp_kses( $lp_link, HelperCLass::eael_allowed_tags( [ 'a' => [ 'data-action' => [] ] ] ) ) . '</p>';
 									} ?>
 
                                 </div>
@@ -5817,7 +5820,7 @@ class Login_Register extends Widget_Base {
                                            value="<?php echo esc_attr( $btn_text ); ?>"/>
 										
 										<?php if( !empty( $show_login_spinner ) && 'true' === $show_login_spinner ): ?>
-										<span class="eael-lr-form-loader eael-lr-login-form-loader d-none<?php esc_attr_e($this->in_editor ? '-editor' : '') ?>">
+										<span class="eael-lr-form-loader eael-lr-login-form-loader d-none<?php echo esc_attr($this->in_editor ? '-editor' : '') ?>">
 											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z"/></svg>
 										</span>
 										<?php endif; ?>
@@ -5825,7 +5828,7 @@ class Login_Register extends Widget_Base {
 									</div>
 									<?php if ( $show_reg_link ) { ?>
                                         <div class="eael-sign-wrapper <?php echo esc_attr( $link_align ); ?>">
-											<?php echo $reg_link; // XSS ok. already escaped ?>
+											<?php echo wp_kses( $reg_link, HelperCLass::eael_allowed_tags( [ 'a' => [ 'data-action' => [] ] ] ) ); ?>
                                         </div>
 									<?php } ?>
 
@@ -6115,11 +6118,11 @@ class Login_Register extends Widget_Base {
                                 <div <?php $this->print_render_attribute_string( $field_group_key ) ?>>
 									<?php
 									if ( 'yes' === $this->ds['show_labels'] && ! empty( $field['field_label'] ) ) {
-										echo '<label ' . $this->get_render_attribute_string( $label_key ) . '>' . HelperCLass::eael_wp_kses( $field['field_label'] ) . '</label>';
+										echo '<label '; $this->print_render_attribute_string( $label_key ); echo '>' . wp_kses( $field['field_label'], HelperCLass::eael_allowed_tags() ) . '</label>';
 									}
 									if( 'password' === $field['field_type'] ){
 										echo '<div class="eael-lr-password-wrapper-register">';
-											echo '<input ' . $this->get_render_attribute_string( $input_key ) . '>';
+											echo '<input '; $this->print_render_attribute_string( $input_key ); echo '>';
 
 											if ( $show_pv_icon ) { ?>
 												<button type="button"
@@ -6136,7 +6139,7 @@ class Login_Register extends Widget_Base {
 											}
 										echo '</div>';
 									} else {
-										echo '<input ' . $this->get_render_attribute_string( $input_key ) . '>';
+										echo '<input '; $this->print_render_attribute_string( $input_key ); echo '>';
 
 										if ( $show_icon && ! empty( $field['icon'] ) ) {
 											Icons_Manager::render_icon( $field['icon'], [ 'aria-hidden' => 'true' ] );
@@ -6169,15 +6172,15 @@ class Login_Register extends Widget_Base {
                                        value="<?php echo esc_attr( $btn_text ); ?>"/>
 										
 									<?php if( !empty( $show_register_spinner ) && 'true' === $show_register_spinner ): ?>
-									<span class="eael-lr-form-loader eael-lr-register-form-loader d-none<?php esc_attr_e($this->in_editor ? '-editor' : '') ?>">
+									<span class="eael-lr-form-loader eael-lr-register-form-loader d-none<?php echo esc_attr($this->in_editor ? '-editor' : ''); ?>">
 										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z"/></svg>
 									</span>
 									<?php endif; ?>
 
 								</div>
 								<?php if ( $show_lgn_link ) { ?>
-                                    <div class="eael-sign-wrapper  <?php echo esc_attr( $link_align ); ?>">
-										<?php echo $lgn_link; ?>
+                                    <div class="eael-sign-wrapper <?php echo esc_attr( $link_align ); ?>">
+										<?php echo wp_kses( $lgn_link, HelperCLass::eael_allowed_tags( [ 'a' => [ 'data-action' => [] ] ] ) ); ?>
                                     </div>
 								<?php } ?>
                             </div>
@@ -6209,8 +6212,10 @@ class Login_Register extends Widget_Base {
 				if ( $repeated || $email_field_missing || $pass_missing ) {
 					return false; // error found, exit, dont show form.
 				}
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				echo $form_markup; //XSS OK, data sanitized already.
 			} else {
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				echo $form_markup; //XSS OK, data sanitized already.
 			}
 		}
@@ -6304,7 +6309,6 @@ class Login_Register extends Widget_Base {
 									   name="eael-user-lostpassword"
 									   id="eael-user-lostpassword"
 									   class="eael-lr-form-control"
-									   aria-describedby="emailHelp"
 									   placeholder="<?php if ( $display_label && $u_ph ) {
 										   echo esc_attr( $u_ph );
 									   } ?>"
@@ -6327,7 +6331,7 @@ class Login_Register extends Widget_Base {
 									   value="<?php echo esc_attr( $btn_text ); ?>"/>
 								<?php if ( $show_login_link_lostpassword ) { ?>
 									<div class="eael-sign-wrapper <?php echo esc_attr( $link_align ); ?>">
-										<?php echo $login_link_lostpassword; // XSS ok. already escaped ?>
+										<?php echo wp_kses( $login_link_lostpassword, HelperCLass::eael_allowed_tags( [ 'a' => [ 'data-action' => [] ] ] ) ); ?>
 									</div>
 								<?php } ?>
 
@@ -6565,8 +6569,8 @@ class Login_Register extends Widget_Base {
 	 * @param string $form_type the type of form. Available values: login and register
 	 */
 	protected function print_form_header( $form_type = 'login' ) {
-		$title    = ! empty( $this->ds["{$form_type}_form_title"] ) ?  esc_html__( wp_strip_all_tags( $this->ds["{$form_type}_form_title"] ), 'essential-addons-for-elementor-lite' )  : '';
-		$subtitle = ! empty( $this->ds["{$form_type}_form_subtitle"] ) ? HelperCLass::eael_wp_kses( $this->ds["{$form_type}_form_subtitle"] ) : '';
+		$title    = ! empty( $this->ds["{$form_type}_form_title"] ) ?  wp_strip_all_tags( $this->ds["{$form_type}_form_title"] )  : '';
+		$subtitle = ! empty( $this->ds["{$form_type}_form_subtitle"] ) ? $this->ds["{$form_type}_form_subtitle"] : '';
 		
 		$show_form_logo_class = '';
 		if( 'lostpassword' === $form_type || 'resetpassword' === $form_type ){
@@ -6590,11 +6594,11 @@ class Login_Register extends Widget_Base {
                 <div class="form-dsc">
 					<?php
 					if ( ! empty( $title ) ) {
-						echo "<h4>{$title}</h4>"; // data escaped already.
+						echo "<h4>" . esc_html( $title ) . "</h4>"; // data escaped already.
 					}
 
 					if ( ! empty( $subtitle ) ) {
-						echo "<p>{$subtitle}</p>"; // data escaped already.
+						echo "<p>" . wp_kses( $subtitle, HelperCLass::eael_allowed_tags() ) . "</p>"; // data escaped already.
 					} ?>
                 </div>
 			<?php } ?>
@@ -6708,7 +6712,7 @@ class Login_Register extends Widget_Base {
 				?>
             </label>
 			<?php
-			echo $tc_link; // XSS ok. already sanitized.
+			echo wp_kses( $tc_link, HelperCLass::eael_allowed_tags( [ 'a' => [ 'data-action' => [] ] ] ) );
 			?>
         </div>
 
@@ -6716,7 +6720,7 @@ class Login_Register extends Widget_Base {
 		$tc = '<div class="eael-lr-tnc-wrap">';
 		$tc .= $this->parse_text_editor( $tc_text );
 		$tc .= '</div>';
-		echo $tc;
+		echo wp_kses( $tc, HelperCLass::eael_allowed_tags() );
 
 
 	}
@@ -6802,7 +6806,7 @@ class Login_Register extends Widget_Base {
 	protected function print_recaptcha_node( $form_type = 'login' ) {
 		if ( 'yes' === $this->get_settings_for_display( "enable_{$form_type}_recaptcha" ) || 'v3' === $this->ds["login_register_recaptcha_version"] ) {
 			$id = "{$form_type}-recaptcha-node-" . esc_attr( $this->get_id() );
-			echo "<input type='hidden' name='g-recaptcha-enabled' value='1'/><div id='{$id}' class='eael-recaptcha-wrapper'></div>";
+			echo "<input type='hidden' name='g-recaptcha-enabled' value='1'/><div id='" . esc_attr( $id ) . "' class='eael-recaptcha-wrapper'></div>";
 
 			if( 'v3' === $this->ds["login_register_recaptcha_version"] && ( ! $this->ds[ 'enable_ajax' ] ) ){
 				echo "<input type='hidden' name='action' value='eael_login_register_form'/>";
@@ -6817,7 +6821,8 @@ class Login_Register extends Widget_Base {
             <p class='eael-register-form-error elementor-alert elementor-alert-warning'>
 				<?php
 				/* translators: %s: Error fields */
-				printf( __( 'Error! you seem to have added %s field in the form more than once.', 'essential-addons-for-elementor-lite' ), $error_fields );
+				$error_msg = sprintf( __( 'Error! you seem to have added %s field in the form more than once.', 'essential-addons-for-elementor-lite' ), $error_fields );
+				echo wp_kses( $error_msg, HelperCLass::eael_allowed_tags() );
 				?>
             </p>
 			<?php
@@ -6833,6 +6838,7 @@ class Login_Register extends Widget_Base {
             <p class='eael-register-form-error elementor-alert elementor-alert-warning'>
 				<?php
 				/* translators: %s: Error String */
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				printf( __( 'Error! It is required to use %s field.', 'essential-addons-for-elementor-lite' ), '<strong>Email</strong>' );
 				?>
             </p>
@@ -6857,6 +6863,7 @@ class Login_Register extends Widget_Base {
             <p class='eael-register-form-error elementor-alert elementor-alert-warning'>
 				<?php
 				/* translators: %s: Error String */
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				printf( __( 'Error! It is required to use %s field with %s Field.', 'essential-addons-for-elementor-lite' ), '<strong>Password</strong>', '<strong>Password Confirmation</strong>' );
 				?>
             </p>
@@ -6909,6 +6916,7 @@ class Login_Register extends Widget_Base {
 
 		if ( $success ) {
 			$message = '<p class="eael-form-msg valid">' . esc_html( $this->get_settings_for_display( 'success_register' ) ) . '</p>';
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo apply_filters( 'eael/login-register/registration-success-msg', $message, $success );
 
 			delete_option( 'eael_register_success_' . $this->get_id() );

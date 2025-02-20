@@ -21,6 +21,7 @@
 
 #eael-eb-popup-button img {
     margin-right: 5px;
+	max-width: initial;
 }
 
 .eael-gb-eb-popup {
@@ -214,4 +215,34 @@
 .eael-gb-eb-popup .--page-5 .eael-gb-eb-footer button.eael-gb-eb-install,
 .eael-gb-eb-popup .--page-1 .eael-gb-eb-footer button.eael-gb-eb-never-show {
     display: block;
+}
+
+@media (min-width: 782px) {
+    .has-eael-eb-promo.editor-header:has(> .editor-header__center) {
+		grid-template: auto/60px min-content 1fr min-content 60px !important;
+	}
+}
+@media (max-width: 1100px) {
+    .has-eael-eb-promo .editor-document-bar__title {
+        padding-left: 0;
+    }
+    .has-eael-eb-promo .editor-header__center {
+        justify-content: start;
+        width: fit-content;
+    }
+    .has-eael-eb-promo .editor-header__center .editor-document-bar{
+        display: block;
+        width: fit-content;
+    }
+    #eael-eb-popup-button {
+        width: 32px;
+        overflow: hidden;
+        color: transparent;
+        display: block;
+        padding: 5px;
+        background: transparent;
+    }
+    #eael-eb-popup-button:hover{
+        padding-right: 0;
+    }
 }
