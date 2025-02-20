@@ -793,9 +793,11 @@ body.eael-woo-checkout .astra-pro-wc-module-activated.ea-woo-checkout .woocommer
   padding: 0.9em 0.8em !important;
 }
 /*------------------
-Theme Supports
--> Blocksy Theme
+Theme Compatibility
 --------------------*/
 .theme-blocksy .ea-woo-checkout .ct-order-review {
   top: unset;
+}
+.theme-storefront .eael-woo-checkout .woocommerce .woo-checkout-payment #payment .place-order {
+  background-color: unset;
 }

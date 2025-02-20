@@ -924,3 +924,33 @@ Theme Compatibility
       }
    }
 }
+
+.theme-storefront {
+   &.eael-woo-checkout {
+      .woocommerce {
+         #order_review_heading.woo-checkout-section-title {
+            float: unset;
+         }
+         .woocommerce-checkout {
+            input[type="text"],
+            input[type="number"],
+            input[type="email"],
+            input[type="tel"],
+            input[type="url"],
+            input[type="password"],
+            input[type="search"],
+            textarea,
+            .input-text {
+               border: 1px solid #ccc;
+            }
+         }
+         .woo-checkout-payment {
+            #payment {
+               .place-order {
+                  background-color: unset;
+               }
+            }
+         }
+      }
+   }
+}
