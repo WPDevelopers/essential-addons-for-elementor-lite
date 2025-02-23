@@ -1148,6 +1148,7 @@
          border: none;
          letter-spacing: normal;
          box-shadow: none;
+         color: #fff;
 
          &:hover,
          &:visited {
@@ -3030,6 +3031,24 @@
                   }
                }
             }
+         }
+      }
+   }
+}
+
+//Theme Kadence
+.theme-kadence {
+   .eael-product-grid {
+      .woocommerce {
+         ul.products li.product .button {
+            text-transform: capitalize;
+            border: none;
+            letter-spacing: normal;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            color: #fff;
+            padding: 10px 25px;
+            justify-content: center;
          }
       }
    }
