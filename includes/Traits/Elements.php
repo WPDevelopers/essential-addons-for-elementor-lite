@@ -356,6 +356,12 @@ trait Elements {
 				'icon'       => 'eaicon-stacked-cards',
 				'categories' => '["essential-addons-elementor"]',
 			],
+			[
+				'name'       => 'sphere-photo-viewer',
+				'title'      => __( '360 Degree Photo Viewer', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eaicon-photo-sphere',
+				'categories' => '["essential-addons-elementor"]',
+			],
 		] );
 
 		$config['promotionWidgets'] = $combine_array;

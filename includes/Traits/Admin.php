@@ -1114,7 +1114,7 @@ trait Admin {
 							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-sphere-photo-viewer/',
 							    'is_pro'      => true,
 							    'promotion'   => 'new',
-							    'is_activate' => boolval( $this->get_settings( 'fancy-chart' ) )
+							    'is_activate' => boolval( $this->get_settings( 'sphere-photo-viewer' ) )
 						    ]
 					    ]
 				    ],

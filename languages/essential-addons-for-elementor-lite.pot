@@ -449,7 +449,7 @@ msgstr ""
 msgid "Stacked Cards"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:636, ../includes/Traits/Admin.php:1112
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:636, ../includes/Traits/Admin.php:1112, ../includes/Traits/Elements.php:361
 msgid "360 Degree Photo Viewer"
 msgstr ""
 
