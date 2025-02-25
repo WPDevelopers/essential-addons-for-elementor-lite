@@ -231,6 +231,9 @@ trait Library
     {
         $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
 
+        // Fix stream wrapper paths which must contain a double-slash (e.g. scheme://...)
+        $path = preg_replace( '#^([a-z][a-z0-9+\-.]*):/([^/])#i', '$1://$2', $path );
+
         return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
     }
 
