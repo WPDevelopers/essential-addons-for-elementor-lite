@@ -347,13 +347,7 @@ trait Elements {
 			[
 				'name'       => 'fancy-chart',
 				'title'      => __( 'Fancy Chart', 'essential-addons-for-elementor-lite' ),
-				'icon'       => 'eaicon-fancy-chart',
-				'categories' => '["essential-addons-elementor"]',
-			],
-			[
-				'name'       => 'stacked-cards',
-				'title'      => __( 'Stacked Cards', 'essential-addons-for-elementor-lite' ),
-				'icon'       => 'eaicon-stacked-cards',
+				'icon'       => 'eicon-elementor-circle',
 				'categories' => '["essential-addons-elementor"]',
 			],
 			[
