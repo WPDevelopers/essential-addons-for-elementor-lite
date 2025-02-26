@@ -156,7 +156,6 @@ $base-font-size: 14px;
             // width: 100%;
             width: auto;
             text-align: left;
-            border: 1px solid inherit;
             border-radius: 5px;
 
             p:first-child {
@@ -525,9 +524,6 @@ $base-font-size: 14px;
          color: #155724;
       }
 
-      form.checkout_coupon {
-         border: 1px solid #404040;
-      }
       .eael-reordering {
          opacity: 0.1;
       }
@@ -949,6 +945,20 @@ Theme Compatibility
                .place-order {
                   background-color: unset;
                }
+            }
+         }
+      }
+   }
+}
+
+.theme-oceanwp {
+   .ea-woo-checkout {
+      .woocommerce {
+         .woo-checkout-coupon {
+            .button {
+               line-height: 15px;
+               font-size: 13px;
+               padding: 10px 30px;
             }
          }
       }

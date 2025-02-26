@@ -11,6 +11,7 @@
 }
 .eael-product-gallery.eael-terms-layout-horizontal .eael-cat-tab {
   margin: 0 0 50px 0;
+  display: block;
 }
 .eael-product-gallery.eael-terms-layout-horizontal .eael-cat-tab li:first-child a {
   margin-left: 0;
@@ -120,7 +121,7 @@
   overflow: hidden;
 }
 .eael-product-gallery .woocommerce ul.products .product .eael-product-sold-count-progress-bar {
-  background-color: #2196F3;
+  background-color: #2196f3;
   height: 10px;
   border-radius: 10px;
 }
@@ -362,6 +363,7 @@
   letter-spacing: normal;
   font-weight: 700;
   text-transform: capitalize;
+  font-size: 1em;
 }
 .eael-product-gallery .woocommerce ul.products li.product ins {
   background: transparent;
@@ -500,7 +502,7 @@
   line-height: 74px;
   height: 60px;
   width: 120px;
-  left: -37pX;
+  left: -37px;
   top: -8px;
   right: auto;
   padding: 0;
@@ -529,7 +531,6 @@
           transform: rotate(45deg);
 }
 .eael-product-gallery .eael-product-wrap .eael-product-title * {
-  font-size: 20px;
   line-height: 1.2em;
   color: #252525;
   font-weight: 500;
