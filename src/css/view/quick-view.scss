@@ -325,15 +325,19 @@
          }
       }
 
-      table {
+      table.variations {
          tbody {
+            .label {
+               padding: 15px;
+               line-height: 0;
+            }
             tr {
                border-bottom: 1px solid #ccc;
 
                td {
                   background: transparent;
                   vertical-align: middle !important;
-                  padding: 15px 15px 15px 0 !important;
+                  line-height: 0;
                }
             }
          }
