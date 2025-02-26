@@ -1062,6 +1062,11 @@ trait Ajax_Handler {
 			update_option( 'eael_save_post_duplicator_post_type', sanitize_text_field( $settings['post-duplicator-post-type'] ) );
 		}
 
+		// Saving Woo Acount Dashboard Settings
+		if ( isset( $settings['woo-account-dashboard-custom-tabs'] ) ) {
+			update_option( 'eael_woo_ac_dashboard_custom_tabs', sanitize_text_field( $settings['woo-account-dashboard-custom-tabs'] ) );
+		}
+
 		// save js print method
 		if ( isset( $settings['eael-js-print-method'] ) ) {
 			update_option( 'eael_js_print_method', sanitize_text_field( $settings['eael-js-print-method'] ) );
