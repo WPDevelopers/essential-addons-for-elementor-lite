@@ -1454,7 +1454,7 @@ class Info_Box extends Widget_Base
         );
 
         $this->add_responsive_control(
-            'eael_creative_button_padding',
+            'eael_infobox_button_padding',
             [
                 'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
