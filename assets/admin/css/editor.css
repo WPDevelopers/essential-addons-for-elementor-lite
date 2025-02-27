@@ -268,7 +268,14 @@
 }
 
 /* Depricated Controls */
-.elementor-control-default_eael_advanced_menu_item_padding .elementor-control-content{
+.elementor-control-default_eael_advanced_menu_item_padding .elementor-control-content,
+.elementor-control-skin_one_eael_advanced_menu_item_padding .elementor-control-content,
+.elementor-control-skin_two_eael_advanced_menu_item_padding .elementor-control-content,
+.elementor-control-skin_three_eael_advanced_menu_item_padding .elementor-control-content,
+.elementor-control-skin_four_eael_advanced_menu_item_padding .elementor-control-content,
+.elementor-control-skin_five_eael_advanced_menu_item_padding .elementor-control-content,
+.elementor-control-skin_six_eael_advanced_menu_item_padding .elementor-control-content,
+.elementor-control-skin_seven_eael_advanced_menu_item_padding .elementor-control-content{
 	background: var(--e-a-bg-warning);
 	border-inline-start: 3px solid var(--e-a-color-warning);
 	border-end-end-radius: 3px;
