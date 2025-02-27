@@ -665,6 +665,26 @@ class Info_Box extends Widget_Base
 				],
 			]
 		);
+
+        $this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'name'     => 'eael_section_infobox_container_border',
+				'selector' => '{{WRAPPER}} .eael-infobox .infobox-content',
+			]
+		);
+
+        $this->add_control(
+			'eael_section_infobox_container_border_radius',
+			[
+				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-infobox .infobox-content' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
         
         $this->end_controls_section();
 
