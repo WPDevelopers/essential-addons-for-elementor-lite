@@ -1110,8 +1110,8 @@ trait Admin {
 						    'sphere-photo-viewer' => [
 							    'key'         => 'sphere-photo-viewer',
 							    'title'       => __( '360 Degree Photo Viewer', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/elementor/sphere-photo-viewer/',
-							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-sphere-photo-viewer/',
+							    'demo_link'   => 'https://essential-addons.com/360-degree-photo-viewer',
+							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-360-degree-photo-viewer/',
 							    'is_pro'      => true,
 							    'promotion'   => 'new',
 							    'is_activate' => boolval( $this->get_settings( 'sphere-photo-viewer' ) )
