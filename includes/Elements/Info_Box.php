@@ -822,6 +822,19 @@ class Info_Box extends Widget_Base
         );
 
         $this->add_control(
+			'custom_panel_alert',
+			[
+				'type' => \Elementor\Controls_Manager::ALERT,
+				'alert_type' => 'info',
+				'content' => esc_html__( 'If we need border radius please select radius from shape', 'essential-addons-for-elementor-lite' ),
+                'condition' => [
+                    'eael_infobox_img_shape!' => 'radius',
+                    'eael_infobox_img_or_icon' => 'img',
+                ],
+			]
+		);
+
+        $this->add_control(
 			'eael_infobox_img_shape_radius',
 			[
 				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
