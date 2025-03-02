@@ -427,6 +427,30 @@ class Info_Box extends Widget_Base
             ]
         );
 
+        $this->add_responsive_control(
+            'eael_infobox_content_v_alignment',
+            [
+                'label'       => esc_html__('Vertical Alignment', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::CHOOSE,
+                'label_block' => true,
+                'options'     => [
+                    'middle' => [
+                        'title' => esc_html__('Middle', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-v-align-middle',
+                    ],
+                    'bottom' => [
+                        'title' => esc_html__('Bottom', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-v-align-bottom',
+                    ],
+                ],
+                'devices' => [ 'desktop', 'tablet', 'mobile' ],
+                'prefix_class' => 'eael-infobox-content-v-align-%s-',
+                'condition' => [
+                    'eael_infobox_img_type' => ['img-on-top', 'img-on-left', 'img-on-right'],
+                ],
+            ]
+        );
+
         $this->add_control(
             'content_height',
             [
