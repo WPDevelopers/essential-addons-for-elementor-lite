@@ -21,6 +21,8 @@
 }
 
 .infobox-content {
+   // display: flex;
+   // flex-direction: column;
    .infobox-title-section {
       display: flex;
       flex-direction: column;
@@ -31,6 +33,26 @@
 }
 
 /*--- For Content Alignment ---*/
+.eael-infobox-content-v-align--middle {
+   .eael-infobox {
+      .infobox-content {
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+      }
+   }
+}
+
+.eael-infobox-content-v-align--bottom {
+   .eael-infobox {
+      .infobox-content {
+         display: flex;
+         flex-direction: column;
+         justify-content: flex-end;
+      }
+   }
+}
+
 .eael-infobox-content-align--left .eael-infobox {
    .infobox-icon {
       display: flex;
