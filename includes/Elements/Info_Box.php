@@ -593,6 +593,34 @@ class Info_Box extends Widget_Base
                 ],
             ]
         );
+
+        $this->add_control(
+            'eael_infobox_button_icon_rotate',
+            [
+                'label' => esc_html__('Rotation', 'essential-addons-for-elementor-lite'),
+                'type'  => Controls_Manager::SLIDER,
+                'range' => [
+                    'deg' => [
+                        'min'  => -360,
+                        'max'  => 360,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+					'unit' => 'deg',
+					'size' => 0,
+				],
+                'condition' => [
+                    'eael_infobox_button_icon_new!' => '',
+                    'eael_show_infobox_button' => 'yes',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-infobox .infobox-button .eael-infobox-button svg' => 'rotate: {{SIZE}}deg;',
+                    '{{WRAPPER}} .eael-infobox .infobox-button .eael-infobox-button i' => 'rotate: {{SIZE}}deg;',
+                ],
+            ]
+        );
+
         $this->end_controls_section();
 
         if (!apply_filters('eael/pro_enabled', false)) {
