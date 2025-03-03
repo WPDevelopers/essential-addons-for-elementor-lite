@@ -280,3 +280,8 @@
 	opacity: 0.6;
 	color: #fff !important;
 }
+
+/* For multicolumn pricing layout section */
+.elementor-control-eael_multicolumn_pricing_table_layout.elementor-control-type-section.e-open {
+	padding-block-end: 0;
+}
