@@ -1453,6 +1453,7 @@ trait Admin {
 							    'demo_link'   => 'https://essential-addons.com/woo-account-dashboard/',
 							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-account-dashboard/',
 							    'is_pro'      => true,
+								'setting'     => $this->pro_enabled ? [ 'id' => 'wooAccountDashboard' ] : [],
 							    'is_activate' => boolval( $this->get_settings( 'woo-account-dashboard' ) )
 						    ]
 					    ]
@@ -1470,8 +1471,16 @@ trait Admin {
 					    'title_icon' => 'images/map.svg',
 					    'label'      => __( "Set API Key", 'essential-addons-for-elementor-lite' ),
 					    'name'       => 'google-map-api',
+					    'placeholder'=> __( "API Key", 'essential-addons-for-elementor-lite' ),
 					    'value'      => get_option( 'eael_save_google_map_api', '' ),
 					    'image'      => 'images/map.png',
+				    ],
+					'wooAccountDashboard'       => [
+					    'title'      => __( "Woo Account Dashboard", 'essential-addons-for-elementor-lite' ),
+					    'label'      => __( "Set Custom Tabs", 'essential-addons-for-elementor-lite' ),
+					    'name'       => 'woo-account-dashboard-custom-tabs',
+					    'placeholder'=> __( "Custom Tab 1, Custom Tab 2, Custom Tab 3", 'essential-addons-for-elementor-lite' ),
+					    'value'      => get_option( 'eael_woo_ac_dashboard_custom_tabs', '' ),
 				    ],
 				    'businessReviewsSetting' => [
 					    'title'      => __( "Google Place API Key", 'essential-addons-for-elementor-lite' ),

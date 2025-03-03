@@ -588,6 +588,10 @@ input:focus {
   background: transparent;
 }
 
+#ea__dashboard--wrapper input.input-name::placeholder {
+  opacity: .7;
+}
+
 .ea__input-search-wrapper:after {
   content: '\e930';
   font-family: 'ea-dash-icon';
@@ -2023,6 +2027,7 @@ section.ea__modal-wrapper {
 .ea__modal-body label {
   font-size: 14px;
   line-height: 1.3em;
+  color: var(--text-color-100);
   display: block;
   margin-bottom: 6px;
 }
