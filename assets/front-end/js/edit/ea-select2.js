@@ -152,7 +152,7 @@ if ( window.eaelMCPTPackageRenderButton === undefined ) {
         const saverButton = jQuery("#elementor-panel-footer-sub-menu-item-save-draft");
 
         if ( saverButton.hasClass("elementor-disabled") ) {
-            return;
+            location.reload();
         }
         jQuery(this).prop("disabled", true).addClass("disabled");
         saverButton.trigger("click");
