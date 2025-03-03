@@ -343,7 +343,7 @@ class Info_Box extends Widget_Base
                 'devices' => [ 'desktop', 'tablet', 'mobile' ],
                 'prefix_class' => 'eael-infobox-content-align-%s-',
                 'condition' => [
-                    'eael_infobox_img_type' => 'img-on-top',
+                    'eael_infobox_img_type' => ['img-on-top', 'img-on-left', 'img-on-right'],
                 ],
             ]
         );
@@ -542,6 +542,52 @@ class Info_Box extends Widget_Base
 
             $this->end_controls_section();
         }
+
+        //Style Container
+        $this->start_controls_section(
+            'eael_section_infobox_container',
+            [
+                'label' => esc_html__( 'Container', 'essential-addons-for-elementor-lite' ),
+                'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+			'eael_section_infobox_container_bg',
+			[
+				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-infobox' => 'background-color: {{VALUE}}',
+				],
+			]
+		);
+
+        $this->add_responsive_control(
+			'eael_section_infobox_container_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-infobox' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+        $this->add_responsive_control(
+			'eael_section_infobox_container_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-infobox' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+        
+        $this->end_controls_section();
 
         /**
          * -------------------------------------------
