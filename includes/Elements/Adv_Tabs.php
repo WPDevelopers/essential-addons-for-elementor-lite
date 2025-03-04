@@ -365,7 +365,7 @@ class Adv_Tabs extends Widget_Base
             [
                 'label' => esc_html__('Tab Content', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::WYSIWYG,
-                'default' => esc_html__('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, neque qui velit. Magni dolorum quidem ipsam eligendi, totam, facilis laudantium cum accusamus ullam voluptatibus commodi numquam, error, est. Ea, consequatur.', 'essential-addons-for-elementor-lite'),
+                'default' => esc_html__('Enhance user experience with Advanced Tabs, allowing seamless content navigation. Organize information efficiently while keeping the interface clean and interactive. Perfect for FAQs, product details, or multi-section content.', 'essential-addons-for-elementor-lite'),
                 'dynamic' => ['active' => true],
                 'condition' => [
                     'eael_adv_tabs_text_type' => 'content',
