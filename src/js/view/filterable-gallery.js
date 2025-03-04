@@ -414,6 +414,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 				$isotope_gallery.imagesLoaded().progress(function () {
 					$isotope_gallery.isotope("layout");
 				});
+				manageNotFoundDiv( $isotope_gallery, $scope, $ );
 			});
 
 			// Fix issue on Safari: hide filter menu
