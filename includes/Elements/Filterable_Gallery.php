@@ -182,20 +182,42 @@ class Filterable_Gallery extends Widget_Base
 				],
             ]
         );
+
+        $eael_fg_layout = [
+            'hoverer'           => __('Overlay', 'essential-addons-for-elementor-lite'),
+            'card'              => __('Card', 'essential-addons-for-elementor-lite'),
+            'layout_3'          => __('Search & Filter', 'essential-addons-for-elementor-lite'),
+            'grid_flow_gallery' => __('Grid Flow Gallery', 'essential-addons-for-elementor-lite'),
+            'harmonic_gallery'  => __('Harmonic Gallery', 'essential-addons-for-elementor-lite')
+        ];
+
+        if ( ! apply_filters('eael/pro_enabled', false) ) {
+            $eael_fg_layout['grid_flow_gallery'] = __('Grid Flow Gallery (Pro)', 'essential-addons-for-elementor-lite');
+            $eael_fg_layout['harmonic_gallery']  = __('Harmonic Gallery (Pro)', 'essential-addons-for-elementor-lite');
+        }
         
         $this->add_control(
             'eael_fg_caption_style',
             [
-                'label' => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
+                'label'   => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::SELECT,
                 'default' => 'hoverer',
-                'options' => [
-                    'hoverer' => __('Overlay', 'essential-addons-for-elementor-lite'),
-                    'card' => __('Card', 'essential-addons-for-elementor-lite'),
-                    'layout_3'  => esc_html__('Search & Filter', 'essential-addons-for-elementor-lite')
-                ],
+                'options' => $eael_fg_layout,
             ]
         );
+
+        if ( !apply_filters( 'eael/pro_enabled', false ) ) {
+            $this->add_control(
+                'eael_fg_caption_style_pro_enable_warning',
+                [
+                    'label' => sprintf( '<a target="_blank" href="https://wpdeveloper.com/upgrade/ea-pro">%s</a>', esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite')),
+                    'type' => Controls_Manager::RAW_HTML,
+                    'condition' => [
+                        'eael_fg_caption_style' => [ 'grid_flow_gallery', 'harmonic_gallery' ],
+                    ],
+                ]
+            );
+        }
 
         $this->add_control(
             'eael_search_among_all',
