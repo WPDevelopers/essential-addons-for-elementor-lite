@@ -25,6 +25,19 @@ jQuery(window).on("elementor/frontend/init", function () {
 		return items;
 	}
 
+	function manageNotFoundDiv( $isotope_gallery, $scope, $ ) {
+		let notFoundDiv = $('#eael-fg-no-items-found', $scope),
+			minHeight = notFoundDiv.css('font-size');
+
+		$('.eael-filter-gallery-container', $scope).css('min-height', parseInt(minHeight)*2+'px');
+
+		if (!$isotope_gallery.data('isotope').filteredItems.length) {
+			$('#eael-fg-no-items-found', $scope).show();
+		} else {
+			$('#eael-fg-no-items-found', $scope).hide();
+		}
+	}
+
 	var filterableGalleryHandler = function ($scope, $) {
 		var filterControls = $scope.find(".fg-layout-3-filter-controls").eq(0),
 			filterTrigger  = $scope.find("#fg-filter-trigger"),
@@ -277,6 +290,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 					// $('.eael-filterable-gallery-item-wrap .eael-magnific-link-clone').removeClass('active');
 					$(buttonFilter + ' .eael-magnific-link').addClass('active');
 				}
+				manageNotFoundDiv( $isotope_gallery, $scope, $ );
 			});
 
 			//key board accesibilty
@@ -325,19 +339,10 @@ jQuery(window).on("elementor/frontend/init", function () {
 			$isotope_gallery.imagesLoaded().progress(function () {
 				$isotope_gallery.isotope("layout");
 			});
-
+			
 			// layout gal, on click tabs
 			$isotope_gallery.on("arrangeComplete", function () {
-				let notFoundDiv = $('#eael-fg-no-items-found', $scope),
-					minHeight = notFoundDiv.css('font-size');
-
-				$('.eael-filter-gallery-container', $scope).css('min-height', parseInt(minHeight)*2+'px');
-
-				if (!$isotope_gallery.data('isotope').filteredItems.length) {
-					$('#eael-fg-no-items-found', $scope).show();
-				} else {
-					$('#eael-fg-no-items-found', $scope).hide();
-				}
+				manageNotFoundDiv( $isotope_gallery, $scope, $ );
 			});
 
 			// layout gal, after window loaded
