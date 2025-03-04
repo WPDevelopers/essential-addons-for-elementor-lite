@@ -235,11 +235,16 @@ jQuery(window).on("elementor/frontend/init", function () {
 							}
 						}
 					}
+
+					if( $items.length > 0 ) {
+						$items = $items.filter(item => typeof item !== 'number');
+					}
 					
-					if(index_list.length>0){
+					if(index_list.length > 0){
 						fg_items = fg_items.filter(function (item, index){
 							return !index_list.includes(index);
 						});
+
 					}
 				}
 				
@@ -265,6 +270,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 				
 				$this.siblings().removeClass("active");
 				$this.addClass("active");
+
 				if (!firstInit && $items.length > 0) {
 					$isotope_gallery.isotope();
 					$gallery.append($items);
