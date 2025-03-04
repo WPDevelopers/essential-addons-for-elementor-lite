@@ -4,7 +4,7 @@ Tags: elementor, elements, elementor addon, elementor widget, woocommerce elemen
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 6.1.2
+Stable tag: 6.1.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -165,6 +165,7 @@ Extensions (Free):
 34. [Woo Cross Sells](https://essential-addons.com/woo-cross-sells/)- Customize the display of cross-sell products to boost your sales potential
 35. [Woo Account Dashboard](https://essential-addons.com/woo-account-dashboard/)- Design a personalized WooCommerce Customer Account Dashboard
 36. [Fancy Chart](https://essential-addons.com/fancy-chart/)- Visualize important data with interactive charts and graphs on your website
+37. [Stacked Cards](https://essential-addons.com/stacked-cards/)- Showcase your website content in a distinctive and engaging way
 
 
 Extensions (Pro):
@@ -311,6 +312,18 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.1.4 - 17/02/2025 =
+
+- Few minor bug fixes & improvements
+
+= 6.1.3 - 17/02/2025 =
+
+- Fixed: EA Creative Icon | SVG icon color not applying from settings
+- Fixed: EA Advanced Data Table | Large CSV file import causes unresponsive page during widget edit
+- Fixed: EA Filterable Gallery | Popup redirects to YouTube instead of opening modal
+- Fixed: EA Woo Product Images | Images do not change with product variations
+- Few minor bug fixes & improvements
 
 = 6.1.2 - 10/02/2025 =
 
@@ -648,4 +661,3 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Upgrade Notice ==
-
