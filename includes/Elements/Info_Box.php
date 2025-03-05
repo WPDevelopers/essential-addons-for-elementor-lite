@@ -96,6 +96,7 @@ class Info_Box extends Widget_Base
                 'label_block' => false,
                 'options' => [
                     'img-on-top' => esc_html__('Image/Icon On Top', 'essential-addons-for-elementor-lite'),
+                    'img-on-bottom' => esc_html__('Image/Icon On Bottom', 'essential-addons-for-elementor-lite'),
                     'img-on-left' => esc_html__('Image/Icon On Left', 'essential-addons-for-elementor-lite'),
                     'img-on-right' => esc_html__('Image/Icon On Right', 'essential-addons-for-elementor-lite'),
                 ],
@@ -137,7 +138,7 @@ class Info_Box extends Widget_Base
                 'type' => Controls_Manager::CHOOSE,
                 'default' => 'top',
                 'condition' => [
-                    'eael_infobox_img_type!' => 'img-on-top',
+                    'eael_infobox_img_type!' => ['img-on-top', 'img-on-bottom'],
                 ],
                 'options' => [
                     'top' => [
@@ -422,7 +423,7 @@ class Info_Box extends Widget_Base
                 'devices' => [ 'desktop', 'tablet', 'mobile' ],
                 'prefix_class' => 'eael-infobox-content-align-%s-',
                 'condition' => [
-                    'eael_infobox_img_type' => ['img-on-top', 'img-on-left', 'img-on-right'],
+                    'eael_infobox_img_type' => ['img-on-top', 'img-on-bottom', 'img-on-left', 'img-on-right'],
                 ],
             ]
         );
@@ -446,7 +447,7 @@ class Info_Box extends Widget_Base
                 'devices' => [ 'desktop', 'tablet', 'mobile' ],
                 'prefix_class' => 'eael-infobox-content-v-align-%s-',
                 'condition' => [
-                    'eael_infobox_img_type' => ['img-on-top', 'img-on-left', 'img-on-right'],
+                    'eael_infobox_img_type' => ['img-on-left', 'img-on-right'],
                 ],
             ]
         );
@@ -1922,6 +1923,10 @@ class Info_Box extends Widget_Base
 
         $this->add_render_attribute('eael_infobox_inner', 'class', 'eael-infobox');
 
+        if ('img-on-bottom' == $settings['eael_infobox_img_type']) {
+            $this->add_render_attribute('eael_infobox_inner', 'class', 'icon-on-bottom');
+        }
+        
         if ('img-on-left' == $settings['eael_infobox_img_type']) {
             $this->add_render_attribute('eael_infobox_inner', 'class', 'icon-on-left');
         }
