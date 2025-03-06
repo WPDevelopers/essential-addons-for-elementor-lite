@@ -1564,7 +1564,7 @@ class Advanced_Data_Table extends Widget_Base
 
             if ( $content && 'csv' === $settings['ea_adv_data_table_source'] ) {
                 $dom = new \DOMDocument();
-                @$dom->loadHTML("<table>$content</table>");
+                @$dom->loadHTML("<?xml encoding='UTF-8'><table>$content</table>");
                 $rows = $dom->getElementsByTagName('tr');
                 $content = '';
                 $pagination = ! empty( $settings['ea_adv_data_table_items_per_page'] ) ? $settings['ea_adv_data_table_items_per_page'] : 10;
