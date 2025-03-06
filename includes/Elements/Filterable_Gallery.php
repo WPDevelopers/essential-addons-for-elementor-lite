@@ -3897,6 +3897,38 @@ class Filterable_Gallery extends Widget_Base
         echo '<style id="eael-fg-inline-css-'. esc_attr( $section_id ) .'">'. esc_html( $media_query ) .'</style>';
     }
 
+    /**
+     * Render gallery items
+     *
+     * @param [type] $settings
+     * @param [type] $gallery_items
+     * @return void
+     */
+    public function eael_render_gallery_item_wrap( $settings, $gallery_items ) {
+        ?>
+        <div <?php $this->print_render_attribute_string('gallery-items-wrap'); ?>>
+            <?php
+            $init_show = absint($settings['eael_fg_items_to_show']);
+
+            for ($i = 0; $i < $init_show; $i++) {
+
+                if (array_key_exists($i, $gallery_items)) {
+                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                    echo  $gallery_items[$i];
+                }
+            }
+            if ( $settings['eael_fg_caption_style'] === 'layout_3' ):
+            ?>
+            <div id="eael-fg-no-items-found" style="display:none;">
+                <?php
+                    echo wp_kses( $settings['eael_fg_not_found_text'], Helper::eael_allowed_tags() );
+                ?>
+            </div>
+            <?php endif; ?>
+        </div>
+        <?php
+    }
+
     protected function render() {
         $settings = $this->get_settings_for_display();
 
@@ -3979,36 +4011,18 @@ class Filterable_Gallery extends Widget_Base
         $this->add_render_attribute('gallery', 'data-custom_default_control', esc_attr( $this->custom_default_control ) );
         ?>
         <div <?php $this->print_render_attribute_string('gallery'); ?>>
-            
             <?php
-            if ('layout_3' == $settings['eael_fg_caption_style'])
+            if ( in_array( $settings['eael_fg_caption_style'], ['grid_flow_gallery', 'harmonic_gallery'] ) ) {
+                do_action( 'add_filterable_gallery_style_block', $settings, $this );
+            } elseif ('layout_3' == $settings['eael_fg_caption_style']) {
                 $this->render_layout_3_filters();
-            else
+                $this->eael_render_gallery_item_wrap( $settings, $gallery_items );
+            } else {
                 $this->render_filters();
-            ?>
+                $this->eael_render_gallery_item_wrap( $settings, $gallery_items );
+            }
+            // gallery-items-wrap
 
-            <div <?php $this->print_render_attribute_string('gallery-items-wrap'); ?>>
-                <?php
-                $init_show = absint($settings['eael_fg_items_to_show']);
-
-                for ($i = 0; $i < $init_show; $i++) {
-
-                    if (array_key_exists($i, $gallery_items)) {
-                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                        echo  $gallery_items[$i];
-                    }
-                }
-                if ( $settings['eael_fg_caption_style'] === 'layout_3' ):
-                ?>
-                <div id="eael-fg-no-items-found" style="display:none;">
-                    <?php
-                       echo wp_kses( $settings['eael_fg_not_found_text'], Helper::eael_allowed_tags() );
-                    ?>
-                </div>
-                <?php endif; ?>
-            </div>
-            
-            <?php
             if ( Plugin::instance()->editor->is_edit_mode() ) {
                 $this->render_editor_script();
             }
