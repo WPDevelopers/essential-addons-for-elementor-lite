@@ -183,41 +183,41 @@ class Filterable_Gallery extends Widget_Base
             ]
         );
 
-        $eael_fg_layout = [
-            'hoverer'           => __('Overlay', 'essential-addons-for-elementor-lite'),
-            'card'              => __('Card', 'essential-addons-for-elementor-lite'),
-            'layout_3'          => __('Search & Filter', 'essential-addons-for-elementor-lite'),
-            'grid_flow_gallery' => __('Grid Flow Gallery', 'essential-addons-for-elementor-lite'),
-            'harmonic_gallery'  => __('Harmonic Gallery', 'essential-addons-for-elementor-lite')
-        ];
-
-        if ( ! apply_filters('eael/pro_enabled', false) ) {
-            $eael_fg_layout['grid_flow_gallery'] = __('Grid Flow Gallery (Pro)', 'essential-addons-for-elementor-lite');
-            $eael_fg_layout['harmonic_gallery']  = __('Harmonic Gallery (Pro)', 'essential-addons-for-elementor-lite');
-        }
-        
-        $this->add_control(
-            'eael_fg_caption_style',
+        $eael_fg_layout = apply_filters(
+            'eael_fg_caption_styles',
             [
-                'label'   => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
-                'type'    => Controls_Manager::SELECT,
-                'default' => 'hoverer',
-                'options' => $eael_fg_layout,
+                'styles'     => [
+                    'hoverer'           => __('Overlay', 'essential-addons-for-elementor-lite'),
+                    'card'              => __('Card', 'essential-addons-for-elementor-lite'),
+                    'layout_3'          => __('Search & Filter', 'essential-addons-for-elementor-lite'),
+                    'grid_flow_gallery' => __('Grid Flow Gallery (Pro)', 'essential-addons-for-elementor-lite'),
+                    'harmonic_gallery'  => __('Harmonic Gallery (Pro)', 'essential-addons-for-elementor-lite'),
+                ],
+                'conditions' => ['grid_flow_gallery', 'harmonic_gallery'],
             ]
         );
 
-        if ( !apply_filters( 'eael/pro_enabled', false ) ) {
-            $this->add_control(
-                'eael_fg_caption_style_pro_enable_warning',
-                [
-                    'label' => sprintf( '<a target="_blank" href="https://wpdeveloper.com/upgrade/ea-pro">%s</a>', esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite')),
-                    'type' => Controls_Manager::RAW_HTML,
-                    'condition' => [
-                        'eael_fg_caption_style' => [ 'grid_flow_gallery', 'harmonic_gallery' ],
-                    ],
-                ]
-            );
-        }
+        $this->add_control(
+            'eael_fg_caption_style',
+            [
+                'label'       => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::SELECT,
+                'default'     => 'hoverer',
+                'label_block' => false,
+                'options'     => $eael_fg_layout['styles'],
+            ]
+        );
+
+        $this->add_control(
+            'eael_fg_caption_style_pro_alert',
+            [
+                'label' => sprintf( '<a target="_blank" href="https://wpdeveloper.com/upgrade/ea-pro">%s</a>', esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite')),
+                'type'      => Controls_Manager::HEADING,
+                'condition' => [
+                    'eael_fg_caption_style' => $eael_fg_layout['conditions'],
+                ],
+            ]
+        );
 
         $this->add_control(
             'eael_search_among_all',
