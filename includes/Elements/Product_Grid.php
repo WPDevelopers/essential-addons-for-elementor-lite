@@ -625,6 +625,7 @@ class Product_Grid extends Widget_Base
             ],
         ]);
 
+        $wc_settings_url = admin_url( 'admin.php?page=wc-settings&tab=products&section=inventory' );
         $this->add_control(
 			'eael_product_show_stockout',
 			[
@@ -634,6 +635,7 @@ class Product_Grid extends Widget_Base
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
+                'description'  => __( 'Uncheck "Out of stock visibility" from <a href="' . $wc_settings_url . '" target="_blank">WooCommerce Settings</a>. Otherwise this will not be work.' )
 			]
 		);
 
