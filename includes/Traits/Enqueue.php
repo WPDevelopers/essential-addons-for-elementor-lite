@@ -130,7 +130,7 @@ trait Enqueue
     }
 
 	public function essential_blocks_promo_enqueue_scripts() {
-		if ( is_plugin_active( 'essential-blocks/essential-blocks.php' ) || get_option( 'eael_gb_eb_popup_hide' ) ) {
+		if ( is_plugin_active( 'essential-blocks/essential-blocks.php' ) || get_transient( 'eael_gb_eb_popup_hide' ) ) {
 			return;
 		}
 

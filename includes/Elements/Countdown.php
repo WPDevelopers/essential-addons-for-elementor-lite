@@ -51,6 +51,10 @@ class Countdown extends Widget_Base {
         ];
     }
 
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
+    }
+
     protected function is_dynamic_content():bool {
         if( Plugin::$instance->editor->is_edit_mode() ) {
             return false;
@@ -1334,6 +1338,9 @@ class Countdown extends Widget_Base {
                         if ( ! is_array( $settings['countdown_expiry_templates'] ) ) {
                             $settings['countdown_expiry_templates'] = apply_filters( 'wpml_object_id', $settings['countdown_expiry_templates'], 'wp_template', true );
                         }
+
+	                    Helper::eael_onpage_edit_template_markup( get_the_ID(), $settings['countdown_expiry_templates'] );
+	                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                         echo Plugin::$instance->frontend->get_builder_content( $settings['countdown_expiry_templates'], true );
                     } ?>
                <?php else: ?>
@@ -1351,6 +1358,8 @@ class Countdown extends Widget_Base {
                                 if ( ! is_array( $settings['countdown_expiry_templates'] ) ) {
                                     $settings['countdown_expiry_templates'] = apply_filters( 'wpml_object_id', $settings['countdown_expiry_templates'], 'wp_template', true );
                                 }
+
+	                            Helper::eael_onpage_edit_template_markup( get_the_ID(), $settings['countdown_expiry_templates'] );
                                 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                                 echo Plugin::$instance->frontend->get_builder_content( $settings['countdown_expiry_templates'], true );
                             }

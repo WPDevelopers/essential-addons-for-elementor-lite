@@ -110,7 +110,9 @@ trait Elements {
 				continue;
 			}
 
-			new $extension['class'];
+			if ( class_exists( $extension['class'] ) ) {
+				new $extension['class']; // Safely instantiate
+			}
 		}
 	}
 
@@ -345,7 +347,13 @@ trait Elements {
 			[
 				'name'       => 'fancy-chart',
 				'title'      => __( 'Fancy Chart', 'essential-addons-for-elementor-lite' ),
-				'icon'       => 'eicon-elementor-circle',
+				'icon'       => 'eaicon-fancy-chart',
+				'categories' => '["essential-addons-elementor"]',
+			],
+			[
+				'name'       => 'stacked-cards',
+				'title'      => __( 'Stacked Cards', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eaicon-stacked-cards',
 				'categories' => '["essential-addons-elementor"]',
 			],
 		] );

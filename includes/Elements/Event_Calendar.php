@@ -68,6 +68,10 @@ class Event_Calendar extends Widget_Base
         ];
     }
 
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
+    }
+
     public function get_custom_help_url()
     {
         return 'https://essential-addons.com/elementor/docs/event-calendar/';
@@ -2850,6 +2854,31 @@ class Event_Calendar extends Widget_Base
                 'selector' => '{{WRAPPER}} .fc-daygrid-day-bottom .fc-daygrid-more-link',
             ]
         );
+
+        $this->add_responsive_control(
+			'eael_event_calendar_event_container_height',
+			[
+				'label'      => esc_html__( 'Cell Height', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em', 'rem' ],
+                'separator'  => 'before',
+				'range'      => [
+					'px' => [
+						'min' => 0,
+						'max' => 1000,
+						'step' => 5,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+                'description' => __( 'This is only effective for month view.', 'essential-addons-for-elementor-lite' ),
+				'selectors'   => [
+					'{{WRAPPER}} .eael-event-calendar-wrapper .fc-daygrid.fc-dayGridMonth-view.fc-view td.fc-daygrid-day' => 'height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
 
         $this->end_controls_section();
 
