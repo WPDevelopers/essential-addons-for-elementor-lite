@@ -3568,9 +3568,9 @@ class Filterable_Gallery extends Widget_Base
      * @param string $caption_style
      * @return string : Html markup
      */
-    protected function gallery_item_caption_content($settings, $item, $caption_style){
+    protected function gallery_item_caption_content( $settings, $item, $caption_style){
         $html = '<div class="gallery-item-caption-wrap ' . esc_attr( $caption_style . ' ' . $settings['eael_fg_grid_hover_style'] ) . '">';
-
+        $is_image_clickable = isset( $settings['eael_section_fg_full_image_clickable'] ) && 'yes' === $settings['eael_section_fg_full_image_clickable'];
         if ('hoverer' == $settings['eael_fg_caption_style']) {
             $html .= '<div class="gallery-item-hoverer-bg"></div>';
         }
@@ -3579,7 +3579,7 @@ class Filterable_Gallery extends Widget_Base
         if (isset($item['title']) && !empty($item['title']) || isset($item['content']) && !empty($item['content'])) {
             if (!empty($item['title'])) {
                 $title_link_open = $title_link_close = '';
-                if ( $settings['eael_title_clickable'] === 'yes' ){
+                if ( $settings['eael_title_clickable'] === 'yes' && ! $is_image_clickable ){
                     static $ea_link_repeater_index = 0;
 	                $link_key = 'link_' . $ea_link_repeater_index++;
                     if ( empty( $this->get_render_attribute_string( $link_key ) ) ){
@@ -3594,23 +3594,20 @@ class Filterable_Gallery extends Widget_Base
                 $html .= $title_link_open . '<' . $title_tag . ' class="fg-item-title">' . $item['title'] . '</' . $title_tag . '>' . $title_link_close;
             }
 
-            if (!empty($item['content'])) {
-                $html .= '<div class="fg-item-content">' . wpautop($item['content']) . '</div>';
+            if ( ! empty( $item['content'] ) ) {
+                $content = ! $is_image_clickable ? $item['content'] : preg_replace('/<a\b[^>]*>(.*?)<\/a>/i', '', $item['content'] );
+                $html .= '<div class="fg-item-content">' . wpautop($content ) . '</div>';
             }
         }
 
         if ($settings['eael_fg_show_popup'] == 'buttons' && $settings['eael_fg_caption_style'] !== 'card') {
-            if (empty($settings['eael_section_fg_full_image_clickable'])) {
-                $html .= ($this->render_fg_buttons($settings, $item));
+            if ( ! $is_image_clickable ) {
+                $html .= $this->render_fg_buttons($settings, $item);
             }
         }
         $html .= '</div>';
 
         $html .= '</div>';
-
-        if ($settings['eael_section_fg_full_image_clickable']) {
-            $html .= '</a>';
-        }
 
         return $html;
     }
@@ -3801,7 +3798,7 @@ class Filterable_Gallery extends Widget_Base
                 $html .= '<a aria-hidden="true" aria-label="eael-magnific-link" href="' . esc_url($item['image']) . '" class="'. $magnific_class .' media-content-wrap" data-elementor-open-lightbox="' . esc_attr( $is_lightbox ) . '" title="' . esc_attr( $title ) . '">';
             }
 
-            if ($settings['eael_section_fg_full_image_clickable']) {
+            if ( $settings['eael_section_fg_full_image_clickable'] ) {
                 $html .= $this->gallery_item_full_image_clickable_content($settings, $item);
             }
 
