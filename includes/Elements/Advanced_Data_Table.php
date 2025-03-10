@@ -88,6 +88,10 @@ class Advanced_Data_Table extends Widget_Base
             'tablepress' => __('TablePress', 'essential-addons-for-elementor-lite'),
         ];
 
+        if( ! current_user_can('administrator') ) {
+            unset( $sources['database'] );
+        }
+
         if ( ! apply_filters('eael/pro_enabled', false) ) {
             $sources['database']   = __('Database (Pro)', 'essential-addons-for-elementor-lite');
             $sources['remote']     = __('Remote Database (Pro)', 'essential-addons-for-elementor-lite');
