@@ -88,7 +88,7 @@ class Advanced_Data_Table extends Widget_Base
             'tablepress' => __('TablePress', 'essential-addons-for-elementor-lite'),
         ];
 
-        if( ! current_user_can('administrator') ) {
+        if( ! current_user_can('install_plugins') ) {
             unset( $sources['database'] );
         }
 
@@ -1642,7 +1642,7 @@ class Advanced_Data_Table extends Widget_Base
         }
 
         $content = apply_filters('eael/advanced-data-table/table_html/integration/' . $settings['ea_adv_data_table_source'], $settings);
-        if( ! current_user_can('administrator') && Plugin::$instance->editor->is_edit_mode() ) {
+        if( ! current_user_can('install_plugins') && Plugin::$instance->editor->is_edit_mode() ) {
             $content = '';
         }
 
