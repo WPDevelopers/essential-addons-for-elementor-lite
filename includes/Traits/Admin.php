@@ -526,7 +526,7 @@ trait Admin {
 				    ],
 				    'box_4' => [
 					    'heading' => __( "Allowed Post Types for Widgets/Extensions", 'essential-addons-for-elementor-lite' ),
-					    'content' => __( "Widgets, extensions or other fetaures are enabled for selected post types.", 'essential-addons-for-elementor-lite' ),
+					    'content' => __( "Widgets, extensions or other features are enabled for selected post types.", 'essential-addons-for-elementor-lite' ),
 					    'methods' => HelperClass::get_post_types(),
 					    'name'    => 'eael-allowed-post-types',
 					    'value'   => get_option( 'eael_allowed_post_types', array_map(fn() => true, HelperClass::get_post_types() ) )
