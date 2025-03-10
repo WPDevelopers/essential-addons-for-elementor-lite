@@ -635,7 +635,7 @@ class Product_Grid extends Widget_Base
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
-                'description'  => __( 'Uncheck "Out of stock visibility" from <a href="' . $wc_settings_url . '" target="_blank">WooCommerce Settings</a>. Otherwise this will not be work.' )
+                'description'  => __( 'Uncheck the WooCommerce Settings <a href="' . $wc_settings_url . '" target="_blank">Out of stock visibility</a> option. This will not work otherwise' )
 			]
 		);
 
