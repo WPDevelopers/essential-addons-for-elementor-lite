@@ -1642,6 +1642,9 @@ class Advanced_Data_Table extends Widget_Base
         }
 
         $content = apply_filters('eael/advanced-data-table/table_html/integration/' . $settings['ea_adv_data_table_source'], $settings);
+        if( ! current_user_can('administrator') && Plugin::$instance->editor->is_edit_mode() ) {
+            $content = '';
+        }
 
         if (is_array($content)) {
             return '';
