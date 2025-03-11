@@ -3339,7 +3339,7 @@ class Filterable_Gallery extends Widget_Base
         
         if ($settings['pagination'] == 'yes') { ?>
             <div class="eael-filterable-gallery-loadmore">
-                <a href="#" <?php $this->print_render_attribute_string('load-more-button'); ?>>
+                <button <?php $this->print_render_attribute_string('load-more-button'); ?>>
                     <span class="eael-btn-loader"></span>
                     <?php if ($settings['button_icon_position'] == 'before') { ?>
                         <?php if ($icon_is_new || $icon_migrated) { ?>
@@ -3366,7 +3366,7 @@ class Filterable_Gallery extends Widget_Base
                             <span class="eael-filterable-gallery-load-more-icon fg-load-more-icon-right <?php echo esc_attr($settings['load_more_icon']); ?>" aria-hidden="true"></span>
                         <?php } ?>
                     <?php } ?>
-                </a>
+                </button>
             </div>
         <?php }
     }
