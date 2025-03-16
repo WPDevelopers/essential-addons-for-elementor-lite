@@ -732,7 +732,7 @@ trait Controls
             $wb->add_control(
                 'eael_post_carousel_title_tag',
                 [
-                    'label'       => __('Title Tag', 'essential-addons-for-elementor-lite'),
+                    'label'       => __('Carousel Title Tag', 'essential-addons-for-elementor-lite'),
                     'label_block' => true,
                     'type'        => Controls_Manager::CHOOSE,
                     'options'     => [
