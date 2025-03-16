@@ -109,7 +109,8 @@
 
 //For front-end view
 .woocommerce {
-   div.product {
+   div.product,
+   .dialog-widget-content {
       .eael-single-product-add-to-cart {
          .variations_form,
          .grouped_form {
@@ -172,6 +173,15 @@
          }
          .variations_button {
             display: flex;
+         }
+      }
+   }
+
+   .dialog-widget-content {
+      .eael-single-product-add-to-cart {
+         .single_add_to_cart_button i + i,
+         .single_add_to_cart_button svg + svg {
+            display: none;
          }
       }
    }

@@ -468,15 +468,18 @@ class Product_Grid extends Widget_Base
             );
         }
 
-        $this->add_control('eael_product_grid_product_filter', [
-            'label' => esc_html__('Filter By', 'essential-addons-for-elementor-lite'),
-            'type' => Controls_Manager::SELECT,
-            'default' => 'recent-products',
-            'options' => $this->eael_get_product_filterby_options(),
-            'condition' => [
-              'post_type' => 'product',
-            ],
-        ]);
+        $this->add_control(
+            'eael_product_grid_product_filter', 
+            [
+                'label' => esc_html__('Filter By', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'recent-products',
+                'options' => $this->eael_get_product_filterby_options(),
+                'condition' => [
+                'post_type' => 'product',
+                ],
+            ]
+        );
 
         $this->add_control(
             'eael_global_related_products_warning_text',
@@ -621,6 +624,20 @@ class Product_Grid extends Widget_Base
               'eael_product_grid_product_filter!' => [ 'manual' , 'related-products' ],
             ],
         ]);
+
+        $wc_settings_url = admin_url( 'admin.php?page=wc-settings&tab=products&section=inventory' );
+        $this->add_control(
+			'eael_product_show_stockout',
+			[
+				'label'        => esc_html__( 'Out of Stock', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+                'description'  => __( 'Uncheck the WooCommerce Settings <a href="' . $wc_settings_url . '" target="_blank">Out of stock visibility</a> option. This will not work otherwise' )
+			]
+		);
 
         $this->add_control('product_type_logged_users', [
             'label' => __('Product Type', 'essential-addons-for-elementor-lite'),
@@ -3763,7 +3780,7 @@ class Product_Grid extends Widget_Base
 
         $args['meta_query'] = ['relation' => 'AND'];
 
-        if ( get_option('woocommerce_hide_out_of_stock_items') == 'yes' ) {
+        if ( get_option('woocommerce_hide_out_of_stock_items') == 'yes' || 'yes' !== $settings['eael_product_show_stockout'] ) {
             $args['meta_query'][] = [
                 'key' => '_stock_status',
                 'value' => 'instock'
