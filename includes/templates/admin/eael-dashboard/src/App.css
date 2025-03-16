@@ -1641,6 +1641,13 @@ span.ea__tooltip {
   min-width: 100%;
 }
 
+.select-post-type-options{
+  margin-top: 20px;
+}
+.select-post-type-options li label:hover{
+  cursor: pointer;
+}
+
 span.select-details {
   font-size: 14px;
   line-height: 1.2em;
