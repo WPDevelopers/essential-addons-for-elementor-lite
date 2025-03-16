@@ -24,7 +24,7 @@ trait Controls
      */
     public static function query($wb)
     {
-        $post_types = ControlsHelper::get_post_types();
+        $post_types = ControlsHelper::get_allowed_post_types();
         $post_types['by_id'] = __('Manual Selection', 'essential-addons-for-elementor-lite');
 
         if ($wb->get_name() !== 'eael-dynamic-filterable-gallery' && $wb->get_name() !== 'eael-post-list') {
@@ -1652,7 +1652,7 @@ trait Controls
                 $eael_show_post_terms_child_condition['eael_post_grid_preset_style'] = ['two', 'three'];
             }
 
-	        $post_types = ControlsHelper::get_post_types();
+	        $post_types = ControlsHelper::get_allowed_post_types();
 	        unset( $post_types['post'] );
 	        $taxonomies     = get_taxonomies( [], 'objects' );
 	        $post_types_tax = [];

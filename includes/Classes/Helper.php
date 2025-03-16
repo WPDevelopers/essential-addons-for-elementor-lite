@@ -279,6 +279,31 @@ class Helper
     }
 
     /**
+     * Get allowed Types
+     * @return array
+     */
+
+     public static function get_allowed_post_types() {
+        $post_types = get_option( 'eael_allowed_post_types' );
+
+        if ( empty( $post_types ) ) {
+            return self::get_post_types();
+        }
+
+        $post_types = array_filter( $post_types, function( $value ) {
+            return $value;
+        } );
+
+        if ( empty( $post_types ) ) {
+            return [];
+        }
+
+        $post_types = array_intersect_key( self::get_post_types(), $post_types );
+
+        return $post_types;
+     }
+
+    /**
      * Get all types of post.
      *
      * @param  string  $post_type
