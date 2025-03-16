@@ -1067,6 +1067,12 @@ trait Ajax_Handler {
 			update_option( 'eael_js_print_method', sanitize_text_field( $settings['eael-js-print-method'] ) );
 		}
 
+		// save allowed post types
+		if ( isset( $settings['allowedPostTypes'] ) ) {
+			$post_types = json_decode( stripslashes( $settings['allowedPostTypes'] ), true );
+			update_option( 'eael_allowed_post_types', $post_types );
+		}
+
 		if ( ! empty( $settings['elements'] ) ) {
 			$defaults    = array_fill_keys( array_keys( array_merge( $this->registered_elements, $this->registered_extensions ) ), false );
 			$elements    = array_merge( $defaults, array_fill_keys( array_keys( array_intersect_key( $settings, $defaults ) ), true ) );
