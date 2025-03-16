@@ -275,7 +275,7 @@ trait Elements {
 			[
 				'name'       => 'eael-multicolumn-pricing-table',
 				'title'      => __( 'Multicolumn Pricing Table', 'essential-addons-for-elementor-lite' ),
-				'icon'       => 'eaicon-pricing-table',
+				'icon'       => 'eaicon-multicolumn-pricing',
 				'categories' => '["essential-addons-elementor"]',
 			],
 			[
