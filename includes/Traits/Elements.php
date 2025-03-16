@@ -273,6 +273,12 @@ trait Elements {
 				'categories' => '["essential-addons-elementor"]',
 			],
 			[
+				'name'       => 'eael-multicolumn-pricing-table',
+				'title'      => __( 'Multicolumn Pricing Table', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eaicon-pricing-table',
+				'categories' => '["essential-addons-elementor"]',
+			],
+			[
 				'name'       => 'eael-protected-content',
 				'title'      => __( 'Protected Content', 'essential-addons-for-elementor-lite' ),
 				'icon'       => 'eaicon-protected-content',
