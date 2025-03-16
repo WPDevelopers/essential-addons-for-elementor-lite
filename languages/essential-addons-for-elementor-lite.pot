@@ -11083,7 +11083,7 @@ msgid "File Type Fields:"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:1659
-msgid "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.2 with New \"<b><a target='_blank' href='%s'>360 Degree Photo Viewer</a></b>\" widget! Check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>"
+msgid "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.2 with New \"<b><a target='_blank' href='%s'>360 Degree Photo Viewer</a></b>\" and \"<b><a target='_blank' href='%s'>Multicolumn Pricing Table</a></b>\" widget! Check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:1662
