@@ -46,7 +46,7 @@ class Woo_Product_Price extends Widget_Base {
 	}
 
 	public function get_custom_help_url() {
-		return 'https://essential-addons.com/docs/ea-woo-product-price';
+		return 'https://essential-addons.com/elementor/docs/ea-woo-product-price';
 	}
 
 	protected function register_controls() {
