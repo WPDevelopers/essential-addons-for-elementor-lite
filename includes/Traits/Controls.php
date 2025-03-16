@@ -722,7 +722,7 @@ trait Controls
             $wb->add_control(
                 'eael_post_carousel_title',
                 [
-                    'label'       => esc_html__( 'Section Title', 'essential-addons-for-elementor-lite' ),
+                    'label'       => esc_html__( 'Carousel Title', 'essential-addons-for-elementor-lite' ),
                     'label_block' => true,
                     'type'        => Controls_Manager::TEXT,
                     'placeholder' => esc_html__( 'Essential Addons Post Carousel', 'essential-addons-for-elementor-lite' ),
