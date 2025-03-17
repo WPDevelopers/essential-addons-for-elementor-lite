@@ -1952,7 +1952,9 @@ class Filterable_Gallery extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'eael_fg_item_content_title_typography',
-                'selector' => '{{WRAPPER}} .gallery-item-caption-wrap.caption-style-card .fg-item-title, {{WRAPPER}} .fg-layout-3-item-content .fg-item-title',
+                'selector' => '{{WRAPPER}} .gallery-item-caption-wrap.caption-style-card .fg-item-title, 
+                {{WRAPPER}} .fg-layout-3-item-content .fg-item-title, 
+                {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-grid-fg-box .eael-grid-fg-title .fg-title',
             ]
         );
         
