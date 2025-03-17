@@ -391,6 +391,30 @@ class Testimonial extends Widget_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'eael_testimonial_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-testimonial-item' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_testimonial_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-testimonial-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 
 
