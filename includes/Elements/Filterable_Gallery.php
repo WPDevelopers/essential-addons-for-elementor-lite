@@ -1943,6 +1943,7 @@ class Filterable_Gallery extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .gallery-item-caption-wrap.caption-style-card .fg-item-title:hover' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .fg-layout-3-item-content .fg-item-title:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-grid-fg-box:hover .fg-title' => 'color: {{VALUE}};',
                 ],
             ]
         );
