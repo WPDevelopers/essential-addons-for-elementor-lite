@@ -870,7 +870,7 @@ class Testimonial extends Widget_Base {
 				<div class="clearfix">
 					<?php $this->render_user_name_and_company(); ?>
 				</div>
-				<?php $this->render_testimonial_rating( $settings ); ?>
+				<?php $this->render_testimonial_rating(); ?>
 			</div>
 			<?php $this->render_testimonial_image(); ?>
 		<?php } ?>
@@ -884,7 +884,7 @@ class Testimonial extends Widget_Base {
 				<div class="clearfix">
 					<?php $this->render_user_name_and_company(); ?>
 				</div>
-				<?php $this->render_testimonial_rating( $settings ); ?>
+				<?php $this->render_testimonial_rating(); ?>
 			</div>
 		<?php } ?>
 
@@ -893,7 +893,7 @@ class Testimonial extends Widget_Base {
 			<div class="eael-testimonial-content">
 				<?php
 					$this->testimonial_desc();
-					$this->render_testimonial_rating( $settings );
+					$this->render_testimonial_rating();
 					$this->render_user_name_and_company();
 				?>
 			</div>
@@ -906,7 +906,7 @@ class Testimonial extends Widget_Base {
 			<div class="eael-testimonial-content">
 				<?php
 					$this->testimonial_desc();
-					$this->render_testimonial_rating( $settings );
+					$this->render_testimonial_rating();
 				?>
 				<div class="bio-text clearfix">
 					<?php $this->render_user_name_and_company(); ?>
@@ -921,7 +921,7 @@ class Testimonial extends Widget_Base {
 			<div class="eael-testimonial-content">
 				<?php
 					$this->testimonial_desc();
-					$this->render_testimonial_rating( $settings );
+					$this->render_testimonial_rating();
 				?>
 				<div class="bio-text-right"><?php $this->render_user_name_and_company(); ?></div>
 			</div>
@@ -931,7 +931,7 @@ class Testimonial extends Widget_Base {
 			<div class="eael-testimonial-content eael-testimonial-inline-bio">
 				<?php $this->render_testimonial_image(); ?>
 				<div class="bio-text"><?php $this->render_user_name_and_company(); ?></div>
-				<?php $this->render_testimonial_rating( $settings ); ?>
+				<?php $this->render_testimonial_rating(); ?>
 			</div>
 			<div class="eael-testimonial-content">
 				<?php $this->testimonial_desc(); ?>
@@ -945,7 +945,7 @@ class Testimonial extends Widget_Base {
 			<div class="eael-testimonial-content eael-testimonial-inline-bio">
 				<?php $this->render_testimonial_image(); ?>
 				<div class="bio-text"><?php $this->render_user_name_and_company(); ?></div>
-				<?php $this->render_testimonial_rating( $settings ); ?>
+				<?php $this->render_testimonial_rating(); ?>
 			</div>
 		<?php } ?>
 
