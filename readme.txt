@@ -4,7 +4,7 @@ Tags: elementor, elements, elementor addon, elementor widget, woocommerce elemen
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 6.1.4
+Stable tag: 6.1.5
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -312,6 +312,15 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.1.5 - 13/03/2025 =
+
+- Improved: Introduced Post Types selection mechanism for Widgets
+- Improved: EA Product Grid | Added Stock Out products exclusion option
+- Improved: EA Flip Box | Added option to control flip duration
+- Fixed: EA Advanced Data Table | Issues with non English Special Characters
+- Fixed: EA Woo Add to Cart | Multiple buttons double icon issue
+- Few minor bug fixes & improvements
 
 = 6.1.4 - 17/02/2025 =
 
