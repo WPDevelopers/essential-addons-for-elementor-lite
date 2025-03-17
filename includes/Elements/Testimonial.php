@@ -191,6 +191,14 @@ class Testimonial extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'eael_testimonial_show_quote',
+			[
+				'label'   => esc_html__( 'Display Quote?', 'essential-addons-for-elementor-lite'),
+				'type'    => Controls_Manager::SWITCHER,
+				'default' => 'yes',
+			]
+		);
 
 		$this->add_control(
 			'eael_testimonial_enable_rating',
@@ -200,7 +208,6 @@ class Testimonial extends Widget_Base {
 				'default' => 'yes',
 			]
 		);
-
 
 		$this->add_control(
 		  'eael_testimonial_rating_number',
@@ -818,10 +825,6 @@ class Testimonial extends Widget_Base {
 		if( ! empty($settings['eael_testimonial_company_title']) ) : ?><p class="eael-testimonial-user-company"><?php echo wp_kses( $settings['eael_testimonial_company_title'], HelperClass::eael_allowed_tags() ); ?></p><?php endif;
 	}
 
-	protected function testimonial_quote() {
-		echo '<span class="eael-testimonial-quote"></span>';
-	}
-
 	protected function testimonial_desc() {
 		$settings = $this->get_settings_for_display();
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -862,7 +865,6 @@ class Testimonial extends Widget_Base {
 		<?php if('classic-style' == $settings['eael_testimonial_style']) { ?>
 			<div class="eael-testimonial-content">
 				<?php
-					// $this->testimonial_quote();
 					$this->testimonial_desc();
 				?>
 				<div class="clearfix">
@@ -876,7 +878,6 @@ class Testimonial extends Widget_Base {
 		<?php if('middle-style' == $settings['eael_testimonial_style']) { ?>
 			<div class="eael-testimonial-content">
 				<?php
-					// $this->testimonial_quote();
 					$this->testimonial_desc();
 				?>
 				<?php $this->render_testimonial_image(); ?>
@@ -891,7 +892,6 @@ class Testimonial extends Widget_Base {
 			<?php $this->render_testimonial_image(); ?>
 			<div class="eael-testimonial-content">
 				<?php
-					// $this->testimonial_quote();
 					$this->testimonial_desc();
 					$this->render_testimonial_rating( $settings );
 					$this->render_user_name_and_company();
@@ -901,7 +901,6 @@ class Testimonial extends Widget_Base {
 
 		<?php if('icon-img-left-content' == $settings['eael_testimonial_style']) { ?>
 			<?php
-				// $this->testimonial_quote();
 				$this->render_testimonial_image();
 			?>
 			<div class="eael-testimonial-content">
@@ -917,7 +916,6 @@ class Testimonial extends Widget_Base {
 
 		<?php if('icon-img-right-content' == $settings['eael_testimonial_style']) { ?>
 			<?php
-				// $this->testimonial_quote();
 				$this->render_testimonial_image();
 			?>
 			<div class="eael-testimonial-content">
@@ -951,7 +949,11 @@ class Testimonial extends Widget_Base {
 			</div>
 		<?php } ?>
 
-		<?php $this->testimonial_quote(); ?>
+		<?php 
+			if( 'yes' === $settings['eael_testimonial_show_quote'] ) {
+				echo '<span class="eael-testimonial-quote"></span>';
+			}
+		?>
 
 	</div>
 
