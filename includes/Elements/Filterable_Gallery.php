@@ -3542,7 +3542,8 @@ class Filterable_Gallery extends Widget_Base
                         }
             
                         if (!empty($item['content'])) {
-                            $html .= '<div class="fg-item-content">' . wpautop( $item['content'] ) . '</div>';
+                            $content = preg_replace('/<a\b[^>]*>(.*?)<\/a>/i', '', $item['content'] );
+                            $html .= '<div class="fg-item-content">' . wpautop( $content ) . '</div>';
                         }
                     }
                     $html .= '</div>';
