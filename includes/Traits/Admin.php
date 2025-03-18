@@ -1147,8 +1147,8 @@ trait Admin {
 						    'multicolumn-pricing-table'    => [
 							    'key'         => 'multicolumn-pricing-table',
 							    'title'       => __( 'Multicolumn Pricing Table', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/multicolumn-pricing-table/',
-							    'doc_link'    => 'https://essential-addons.com/docs/multicolumn-pricing-table/',
+							    'demo_link'   => 'https://essential-addons.com/multicolumn-pricing/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-multicolumn-pricing/',
 							    'promotion'   => 'new',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'multicolumn-pricing-table' ) )
@@ -1656,7 +1656,7 @@ trait Admin {
 			    ],
 			    'admin_screen_promo'      => [
 				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
-				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.2 with New \"<b><a target='_blank' href='%s'>360 Degree Photo Viewer</a></b>\" and \"<b><a target='_blank' href='%s'>Multicolumn Pricing Table</a></b>\" widgets! For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/360-degree-photo-viewer' ), esc_url( 'https://essential-addons.com/multicolumn-pricing-table' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
+				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.2 with New \"<b><a target='_blank' href='%s'>360 Degree Photo Viewer</a></b>\" and \"<b><a target='_blank' href='%s'>Multicolumn Pricing Table</a></b>\" widgets! For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/360-degree-photo-viewer' ), esc_url( 'https://essential-addons.com/multicolumn-pricing' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
 			    ],
 			    'pro_modal'               => [
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),
