@@ -3542,8 +3542,7 @@ class Filterable_Gallery extends Widget_Base
                         }
             
                         if (!empty($item['content'])) {
-                            $content = preg_replace('/<a\b[^>]*>(.*?)<\/a>/i', '', $item['content'] );
-                            $html .= '<div class="fg-item-content">' . wpautop( $content ) . '</div>';
+                            $html .= '<div class="fg-item-content">' . wpautop( $item['content'] ) . '</div>';
                         }
                     }
                     $html .= '</div>';
@@ -3688,7 +3687,7 @@ class Filterable_Gallery extends Widget_Base
             $html = '<div class="eael-filterable-gallery-item-wrap eael-cf-' . esc_attr( $item['controls'] ) . '" data-search-key="' . esc_attr( strtolower(str_replace(" ", "-", $item['title'])) ) . '">';
             $html .= '<div class="fg-layout-3-item eael-gallery-grid-item">';
             
-            if ($settings['eael_section_fg_full_image_clickable']) {
+            if ( $settings['eael_section_fg_full_image_clickable'] && 'true' !== $item['video_gallery_switch'] ) {
                 $html .= $this->gallery_item_full_image_clickable_content($settings, $item, false);
             }
             
@@ -3798,9 +3797,9 @@ class Filterable_Gallery extends Widget_Base
                 $close_media_content_wrap = true;
                 $html .= '<a aria-hidden="true" aria-label="eael-magnific-link" href="' . esc_url($item['image']) . '" class="'. $magnific_class .' media-content-wrap" data-elementor-open-lightbox="' . esc_attr( $is_lightbox ) . '" title="' . esc_attr( $title ) . '">';
             }
-
-            if ( $settings['eael_section_fg_full_image_clickable'] ) {
-                $html .= $this->gallery_item_full_image_clickable_content($settings, $item);
+            
+            if ( $settings['eael_section_fg_full_image_clickable'] && 'true' !== $item['video_gallery_switch'] ) {
+                $html .= $this->gallery_item_full_image_clickable_content($settings, $item );
             }
 
             if (isset($item['video_gallery_switch']) && ($item['video_gallery_switch'] === 'true')
