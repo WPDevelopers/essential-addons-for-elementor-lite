@@ -2089,7 +2089,7 @@ msgstr ""
 msgid "Hide 1 Star Reviews"
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:742, ../includes/Elements/Business_Reviews.php:2991, ../includes/Elements/Business_Reviews.php:3035, ../includes/Elements/Business_Reviews.php:3106
+#: ../includes/Elements/Business_Reviews.php:742, ../includes/Elements/Business_Reviews.php:2985, ../includes/Elements/Business_Reviews.php:3029, ../includes/Elements/Business_Reviews.php:3100
 msgid "Reviewer"
 msgstr ""
 
@@ -2569,7 +2569,7 @@ msgstr ""
 msgid "Arrows Size"
 msgstr ""
 
-#: ../includes/Elements/Content_Ticker.php:803
+#: ../includes/Elements/Content_Ticker.php:796
 msgid "No content found!"
 msgstr ""
 
@@ -7049,7 +7049,7 @@ msgstr ""
 msgid "Timeline Vertical Line Color"
 msgstr ""
 
-#: ../includes/Elements/Post_Timeline.php:795, ../includes/Elements/Product_Grid.php:3667, ../includes/Elements/Woo_Product_Carousel.php:3265, ../includes/Elements/Woo_Product_List.php:3949
+#: ../includes/Elements/Post_Timeline.php:795, ../includes/Elements/Product_Grid.php:3667, ../includes/Elements/Woo_Product_Carousel.php:3259, ../includes/Elements/Woo_Product_List.php:3949
 msgid "No layout found!"
 msgstr ""
 
