@@ -4,7 +4,7 @@ Tags: elementor, elements, elementor addon, elementor widget, woocommerce elemen
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 6.1.1
+Stable tag: 6.1.5
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -165,6 +165,7 @@ Extensions (Free):
 34. [Woo Cross Sells](https://essential-addons.com/woo-cross-sells/)- Customize the display of cross-sell products to boost your sales potential
 35. [Woo Account Dashboard](https://essential-addons.com/woo-account-dashboard/)- Design a personalized WooCommerce Customer Account Dashboard
 36. [Fancy Chart](https://essential-addons.com/fancy-chart/)- Visualize important data with interactive charts and graphs on your website
+37. [Stacked Cards](https://essential-addons.com/stacked-cards/)- Showcase your website content in a distinctive and engaging way
 
 
 Extensions (Pro):
@@ -311,6 +312,39 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.1.5 - 13/03/2025 =
+
+- Improved: Introduced Post Types selection mechanism for Widgets
+- Improved: EA Product Grid | Added Stock Out products exclusion option
+- Improved: EA Flip Box | Added option to control flip duration
+- Fixed: EA Advanced Data Table | Issues with non English Special Characters
+- Fixed: EA Woo Add to Cart | Multiple buttons double icon issue
+- Few minor bug fixes & improvements
+
+= 6.1.4 - 17/02/2025 =
+
+- Few minor bug fixes & improvements
+
+= 6.1.3 - 17/02/2025 =
+
+- Fixed: EA Creative Icon | SVG icon color not applying from settings
+- Fixed: EA Advanced Data Table | Large CSV file import causes unresponsive page during widget edit
+- Fixed: EA Filterable Gallery | Popup redirects to YouTube instead of opening modal
+- Fixed: EA Woo Product Images | Images do not change with product variations
+- Few minor bug fixes & improvements
+
+= 6.1.2 - 10/02/2025 =
+
+- Fixed: EA Woo Product Carousel | Regular price strikethrough color is not changing
+- Fixed: EA Woo Product Carousel | Not able to style the pop-up with the woo product carousel
+- Fixed: EA Woo Product Grid | Not able to style the pop-up with the woo product grid
+- Fixed: EA Woo Product Gallery | Product Gallery Display Issue on Chrome (Repeating Rows After Navigation)
+- Fixed: EA Fancy text | - & character can not be used
+- Fixed: EA Advanced Tabs | Editor not loading when Advanced Tabs element is enabled in some cases
+- Fixed: EA Fancy Text | Animation Not Working Except for "Typing Text"
+- Improved: EA Woo Product Images | Added responsive controls
+- Few minor bug fixes & improvements
 
 = 6.1.1 - 21/01/2025 =
 
@@ -636,4 +670,3 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Upgrade Notice ==
-

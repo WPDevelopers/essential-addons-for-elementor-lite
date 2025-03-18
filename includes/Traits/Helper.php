@@ -646,7 +646,7 @@ trait Helper
                         </div>
                     </div>
                     <div class="eael-gb-eb-footer">
-	                    <button class="eael-gb-eb-never-show" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php esc_html_e( 'Never Show Again', 'essential-addons-for-elementor-lite' ); ?></button>
+	                    <button class="eael-gb-eb-never-show" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php esc_html_e( 'Skip for Now', 'essential-addons-for-elementor-lite' ); ?></button>
                         <button class="eael-gb-eb-prev"><?php esc_html_e( 'Previous', 'essential-addons-for-elementor-lite' ); ?></button>
                         <button class="eael-gb-eb-next"><?php esc_html_e( 'Next', 'essential-addons-for-elementor-lite' ); ?></button>
                     </div>
@@ -715,7 +715,7 @@ trait Helper
                     <h3><?php esc_html_e( 'Try Essential Blocks Today!', 'essential-addons-for-elementor-lite' ); ?></h3>
                     <p><?php printf( __( 'Want to get started with Essential Blocks now? Check out %scomplete guides for each blocks%s to learn more about this ultimate block library for Gutenberg.', 'essential-addons-for-elementor-lite' ), '<a href="https://essential-blocks.com/demo" target="_blank">', '</a>' ) ?></p>
                     <button class="eael-gb-eb-install components-button is-primary" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
-                    <button class="eael-gb-eb-never-show" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php esc_html_e( 'Never Show Again', 'essential-addons-for-elementor-lite' ); ?></button>
+                    <button class="eael-gb-eb-never-show" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php esc_html_e( 'Skip for Now', 'essential-addons-for-elementor-lite' ); ?></button>
                 </div>
             </div>
         </script>
@@ -723,7 +723,8 @@ trait Helper
 	}
 
 	public function eael_post_view_count() {
-		if ( is_single() ) {
+        $allowed_post_types = HelperClass::get_allowed_post_types();
+		if ( ! empty( $allowed_post_types ) && is_singular( array_keys( $allowed_post_types ) ) ) {
 			$post_id    = get_the_ID();
 			$view_count = absint( get_post_meta( $post_id, '_eael_post_view_count', true ) );
 			update_post_meta( $post_id, '_eael_post_view_count', ++ $view_count );

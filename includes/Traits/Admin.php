@@ -523,6 +523,13 @@ trait Admin {
 					    ],
 					    'name'    => 'eael-js-print-method',
 					    'value'   => get_option( 'eael_js_print_method', 'external' )
+				    ],
+				    'box_4' => [
+					    'heading' => __( "Allowed Post Types for Widgets", 'essential-addons-for-elementor-lite' ),
+					    'content' => __( "Widgets or other features are enabled for selected post types only.", 'essential-addons-for-elementor-lite' ),
+					    'methods' => HelperClass::get_post_types(),
+					    'name'    => 'eael-allowed-post-types',
+					    'value'   => get_option( 'eael_allowed_post_types', array_map(fn() => true, HelperClass::get_post_types() ) )
 				    ]
 			    ],
 			    'extensions'              => [
@@ -1097,6 +1104,15 @@ trait Admin {
 							    'doc_link'    => 'https://essential-addons.com/docs/ea-fancy-chart/',
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'fancy-chart' ) )
+							 ],
+						    'stacked-cards'         => [
+							    'key'         => 'stacked-cards',
+							    'title'       => __( 'Stacked Cards', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/stacked-cards/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-stacked-cards/',
+							    'is_pro'      => true,
+								 'promotion'   => 'new',
+							    'is_activate' => boolval( $this->get_settings( 'stacked-cards' ) )
 						    ]
 					    ]
 				    ],
@@ -1613,7 +1629,7 @@ trait Admin {
 			    ],
 			    'admin_screen_promo'      => [
 				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
-				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA 6.1 with 4 New \"<b>WooCommerce</b>\" widgets along with \"<b>Breadcrumbs</b>\" widget! Check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
+				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.1 with New \"<b><a target='_blank' href='%s'>Stacked Cards</a></b>\" widget! Check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/stacked-cards/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
 			    ],
 			    'pro_modal'               => [
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),
@@ -2191,7 +2207,7 @@ trait Admin {
 			wp_send_json_error( __( 'You are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
 		}
 
-		update_option( 'eael_gb_eb_popup_hide', true );
+		set_transient( 'eael_gb_eb_popup_hide', true, MONTH_IN_SECONDS * 2 );
 		wp_send_json_success();
 	}
 
