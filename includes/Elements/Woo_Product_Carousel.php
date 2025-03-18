@@ -3097,20 +3097,14 @@ class Woo_Product_Carousel extends Widget_Base {
             $this->add_render_attribute( 'container', 'class',
                 'swiper-container-wrap-dots-' . $settings[ 'dots_position' ] );
         }
-        
-        $swiper_class = $swiper_version_class = '';
-        if ( class_exists( 'Elementor\Plugin' ) ) {
-            $swiper_class           = \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_swiper_latest' ) ? 'swiper' : 'swiper-container';
-            $swiper_version_class   = 'swiper' === $swiper_class ? 'swiper-8' : 'swiper-8-lower';
-        }
 
         $this->add_render_attribute(
             'eael-woo-product-carousel-wrap',
             [
                 'class'           => [
                     'woocommerce',
-                    esc_attr( $swiper_class ),
-                    esc_attr( $swiper_version_class ),
+	                'swiper',
+	                'swiper-8',
                     'eael-woo-product-carousel',
                     'swiper-container-' . esc_attr( $this->get_id() ),
                     'eael-product-appender-' . esc_attr( $this->get_id() ),
