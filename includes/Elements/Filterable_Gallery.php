@@ -3416,6 +3416,10 @@ class Filterable_Gallery extends Widget_Base
             $gallery_store[$counter]['image_id']     = $gallery['eael_fg_gallery_img']['id'];
             $gallery_store[$counter]['maybe_link']   = $gallery['eael_fg_gallery_link'];
             $gallery_store[$counter]['link']         = $gallery['eael_fg_gallery_img_link'];
+            $gallery_store[$counter]['toggle']       = $gallery['eael_fg_gallery_item_toggle'];
+            $gallery_store[$counter]['tag']          = $gallery['eael_fg_gallery_item_tag'];
+            $gallery_store[$counter]['key_word']     = $gallery['eael_fg_gallery_item_key_word'];
+            $gallery_store[$counter]['tag_icon']     = $gallery['eael_fg_gallery_item_tag_icon'];
             $gallery_store[$counter]['video_layout'] = isset( $gallery['eael_fg_gallery_video_layout'] ) && !empty( $gallery['eael_fg_gallery_video_layout'] ) ? $gallery['eael_fg_gallery_video_layout'] : 'horizontal';
             
             $gallery_store[$counter]['video_gallery_switch'] = $gallery['fg_video_gallery_switch'];
