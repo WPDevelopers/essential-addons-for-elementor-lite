@@ -2032,6 +2032,8 @@ class Filterable_Gallery extends Widget_Base
                 'prefix_class' => 'eael-fg-card-content-align-',
             ]
         );
+
+        do_action( 'filterable_gallery_popover_style', $this );
         
         $this->end_controls_section();
         
