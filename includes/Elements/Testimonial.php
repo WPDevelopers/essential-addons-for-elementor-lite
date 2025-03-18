@@ -232,7 +232,7 @@ class Testimonial extends Widget_Base {
 		$this->add_control(
 			'eael_testimonial_rating_position',
 			[
-				'label'   => esc_html__( 'Position', 'essential-addons-for-elementor-lite' ),
+				'label'   => esc_html__( 'Rating Position', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'default' => [
