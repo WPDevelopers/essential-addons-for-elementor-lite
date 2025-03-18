@@ -868,6 +868,8 @@ class Filterable_Gallery extends Widget_Base
                 'show_external' => true
             ]
         );
+
+        do_action('add_filterable_gallery_popover', $repeater);
         
         $this->add_control(
             'eael_fg_gallery_items',
