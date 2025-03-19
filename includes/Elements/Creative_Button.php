@@ -152,6 +152,31 @@ class Creative_Button extends Widget_Base
             );
 
             $this->add_control(
+                'eael_creative_button_icon_rotate',
+                [
+                    'label' => esc_html__('Rotation', 'essential-addons-for-elementor-lite'),
+                    'type'  => Controls_Manager::SLIDER,
+                    'range' => [
+                        'deg' => [
+                            'min'  => -360,
+                            'max'  => 360,
+                            'step' => 1,
+                        ],
+                    ],
+                    'default' => [
+                        'unit' => 'deg',
+                        'size' => 0,
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .eael-creative-button-icon-left svg, 
+                        {{WRAPPER}} .eael-creative-button-icon-right svg' => 'rotate: {{SIZE}}deg;',
+                        '{{WRAPPER}} .eael-creative-button-icon-left i,
+                        {{WRAPPER}} .eael-creative-button-icon-right i' => 'rotate: {{SIZE}}deg;',
+                    ],
+                ]
+            );
+
+            $this->add_control(
                 'eael_creative_button_remove_svg_color_dummy',
                 [
                     'label'        => esc_html__( 'Remove Default SVG Color', 'essential-addons-for-elementor-lite' ),
