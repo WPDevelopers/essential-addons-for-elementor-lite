@@ -1574,7 +1574,7 @@ class Advanced_Data_Table extends Widget_Base
                 $content = '';
                 $pagination = ! empty( $settings['ea_adv_data_table_items_per_page'] ) ? $settings['ea_adv_data_table_items_per_page'] : 10;
                 foreach ( $rows as $index => $row ) {
-                    if ( $index > $pagination ) {
+                    if ( $settings['ea_adv_data_table_pagination'] === 'yes' && $index > $pagination ) {
                         break;
                     }
                     $content .= $dom->saveHTML($row);
