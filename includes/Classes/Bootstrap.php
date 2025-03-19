@@ -340,6 +340,12 @@ class Bootstrap
 						    }
 					    }
 
+                        if ( ! current_user_can( 'install_plugins' ) && isset( $element['widgetType'] ) && $element['widgetType'] === 'eaicon-advanced-data-table' ) {
+						    if ( ! empty( $element['settings']['ea_adv_data_table_source'] ) ) {
+							    $element['settings']['ea_adv_data_table_source'] = 'static';
+						    }
+					    }
+
 					    return $element;
 				    } );
 

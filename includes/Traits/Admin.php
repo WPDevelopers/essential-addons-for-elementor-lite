@@ -817,14 +817,14 @@ trait Admin {
 							    'is_pro'      => true,
 							    'is_activate' => boolval( $this->get_settings( 'advanced-search' ) )
 						    ],
-							'breadcrumbs'      => [
-								'key'         => 'breadcrumbs',
-								'title'       => __( 'Breadcrumbs', 'essential-addons-for-elementor-lite' ),
-								'demo_link'   => 'https://essential-addons.com/breadcrumbs/',
-								'doc_link'    => 'https://essential-addons.com/docs/ea-breadcrumbs/',
-								'promotion'   => 'new',
-								'is_activate' => boolval( $this->get_settings( 'breadcrumbs' ) )
-							],
+						    'breadcrumbs'          => [
+							    'key'         => 'breadcrumbs',
+							    'title'       => __( 'Breadcrumbs', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/breadcrumbs/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-breadcrumbs/',
+							    'promotion'   => 'new',
+							    'is_activate' => boolval( $this->get_settings( 'breadcrumbs' ) )
+						    ],
 					    ]
 				    ],
 				    'dynamic-content-elements' => [
@@ -1113,6 +1113,15 @@ trait Admin {
 							    'is_pro'      => true,
 								 'promotion'   => 'new',
 							    'is_activate' => boolval( $this->get_settings( 'stacked-cards' ) )
+						    ],
+						    'sphere-photo-viewer' => [
+							    'key'         => 'sphere-photo-viewer',
+							    'title'       => __( '360 Degree Photo Viewer', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/360-degree-photo-viewer',
+							    'doc_link'    => 'https://essential-addons.com/elementor/docs/ea-360-degree-photo-viewer/',
+							    'is_pro'      => true,
+							    'promotion'   => 'new',
+							    'is_activate' => boolval( $this->get_settings( 'sphere-photo-viewer' ) )
 						    ]
 					    ]
 				    ],
@@ -1134,6 +1143,15 @@ trait Admin {
 							    'doc_link'    => 'https://essential-addons.com/docs/pricing-table/',
 							    'promotion'   => 'popular',
 							    'is_activate' => boolval( $this->get_settings( 'price-table' ) )
+						    ],
+						    'multicolumn-pricing-table'    => [
+							    'key'         => 'multicolumn-pricing-table',
+							    'title'       => __( 'Multicolumn Pricing Table', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/multicolumn-pricing-table/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-multicolumn-pricing-table/',
+							    'promotion'   => 'new',
+							    'is_pro'      => true,
+							    'is_activate' => boolval( $this->get_settings( 'multicolumn-pricing-table' ) )
 						    ],
 						    'price-menu'     => [
 							    'key'         => 'price-menu',
@@ -1342,36 +1360,36 @@ trait Admin {
 							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-list/',
 							    'is_activate' => boolval( $this->get_settings( 'woo-product-list' ) )
 						    ],
-						    'woo-product-price'      => [
+						    'woo-product-price'     => [
 							    'key'         => 'woo-product-price',
 							    'title'       => __( 'Woo Product Price', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/woo-product-price/',
 							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-price',
-								 'promotion'   => 'new',
+							    'promotion'   => 'new',
 							    'is_activate' => boolval( $this->get_settings( 'woo-product-price' ) )
 						    ],
-						    'woo-product-rating'      => [
+						    'woo-product-rating'    => [
 							    'key'         => 'woo-product-rating',
 							    'title'       => __( 'Woo Product Rating', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/woo-product-rating/',
 							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-rating',
-								 'promotion'   => 'new',
+							    'promotion'   => 'new',
 							    'is_activate' => boolval( $this->get_settings( 'woo-product-rating' ) )
 						    ],
-						    'woo-product-images'      => [
+						    'woo-product-images'    => [
 							    'key'         => 'woo-product-images',
 							    'title'       => __( 'Woo Product Images', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/woo-product-images/',
 							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-product-images/',
-								 'promotion'   => 'new',
+							    'promotion'   => 'new',
 							    'is_activate' => boolval( $this->get_settings( 'woo-product-images' ) )
 						    ],
-						    'woo-add-to-cart'      => [
+						    'woo-add-to-cart'       => [
 							    'key'         => 'woo-add-to-cart',
 							    'title'       => __( 'Woo Add To Cart', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/woo-add-to-cart/',
 							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-add-to-cart/',
-								 'promotion'   => 'new',
+							    'promotion'   => 'new',
 							    'is_activate' => boolval( $this->get_settings( 'woo-add-to-cart' ) )
 						    ],
 						    'woo-collections'       => [
@@ -1451,6 +1469,7 @@ trait Admin {
 							    'demo_link'   => 'https://essential-addons.com/woo-account-dashboard/',
 							    'doc_link'    => 'https://essential-addons.com/docs/ea-woo-account-dashboard/',
 							    'is_pro'      => true,
+								'setting'     => $this->pro_enabled ? [ 'id' => 'wooAccountDashboard' ] : [],
 							    'is_activate' => boolval( $this->get_settings( 'woo-account-dashboard' ) )
 						    ]
 					    ]
@@ -1468,8 +1487,16 @@ trait Admin {
 					    'title_icon' => 'images/map.svg',
 					    'label'      => __( "Set API Key", 'essential-addons-for-elementor-lite' ),
 					    'name'       => 'google-map-api',
+					    'placeholder'=> __( "API Key", 'essential-addons-for-elementor-lite' ),
 					    'value'      => get_option( 'eael_save_google_map_api', '' ),
 					    'image'      => 'images/map.png',
+				    ],
+					'wooAccountDashboard'       => [
+					    'title'      => __( "Woo Account Dashboard", 'essential-addons-for-elementor-lite' ),
+					    'label'      => __( "Set Custom Tabs", 'essential-addons-for-elementor-lite' ),
+					    'name'       => 'woo-account-dashboard-custom-tabs',
+					    'placeholder'=> __( "Custom Tab 1, Custom Tab 2, Custom Tab 3", 'essential-addons-for-elementor-lite' ),
+					    'value'      => get_option( 'eael_woo_ac_dashboard_custom_tabs', '' ),
 				    ],
 				    'businessReviewsSetting' => [
 					    'title'      => __( "Google Place API Key", 'essential-addons-for-elementor-lite' ),
@@ -1629,7 +1656,7 @@ trait Admin {
 			    ],
 			    'admin_screen_promo'      => [
 				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
-				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.1 with New \"<b><a target='_blank' href='%s'>Stacked Cards</a></b>\" widget! Check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/stacked-cards/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
+				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.2 with New \"<b><a target='_blank' href='%s'>360 Degree Photo Viewer</a></b>\" and \"<b><a target='_blank' href='%s'>Multicolumn Pricing Table</a></b>\" widgets! For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/360-degree-photo-viewer' ), esc_url( 'https://essential-addons.com/multicolumn-pricing-table/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
 			    ],
 			    'pro_modal'               => [
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),
