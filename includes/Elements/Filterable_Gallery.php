@@ -3423,6 +3423,8 @@ class Filterable_Gallery extends Widget_Base
             $gallery_store[$counter]['writing_mode'] = $gallery['eael_fg_gallery_item_tag_writing_mode'];
             $gallery_store[$counter]['tag_top']      = $gallery['eael_fg_gallery_item_tag_top'];
             $gallery_store[$counter]['tag_right']    = $gallery['eael_fg_gallery_item_tag_right'];
+            $gallery_store[$counter]['key_top']      = $gallery['eael_fg_gallery_item_key_top'];
+            $gallery_store[$counter]['key_right']    = $gallery['eael_fg_gallery_item_key_right'];
             $gallery_store[$counter]['icon_top']     = $gallery['eael_fg_gallery_item_tag_icon_top'];
             $gallery_store[$counter]['icon_right']   = $gallery['eael_fg_gallery_item_tag_icon_right'];
             $gallery_store[$counter]['key_word']     = $gallery['eael_fg_gallery_item_key_word'];
