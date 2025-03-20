@@ -727,16 +727,9 @@ class Content_Ticker extends Widget_Base
         $settings = Helper::fix_old_query($settings);
         $args = Helper::get_query_args($settings);
 
-        //Supported New SwiperJS version
-        $swiper_class = $swiper_version_class = '';
-        if ( class_exists( 'Elementor\Plugin' ) ) {
-            $swiper_class           = \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_swiper_latest' ) ? 'swiper' : 'swiper-container';
-            $swiper_version_class   = 'swiper' === $swiper_class ? 'swiper-8' : 'swiper-8-lower';
-        }
-
         $this->add_render_attribute('content-ticker-wrap', 'class', 'eael-ticker');
-        $this->add_render_attribute('content-ticker', 'class', esc_attr( $swiper_class ) );
-        $this->add_render_attribute('content-ticker', 'class', esc_attr( $swiper_version_class ) );
+        $this->add_render_attribute('content-ticker', 'class', 'swiper' );
+        $this->add_render_attribute('content-ticker', 'class', 'swiper-8' );
         $this->add_render_attribute('content-ticker', 'class', 'eael-content-ticker');
         $this->add_render_attribute('content-ticker', 'class', 'swiper-container-' . esc_attr($this->get_id()));
         $this->add_render_attribute('content-ticker', 'data-pagination', '.swiper-pagination-' . esc_attr($this->get_id()));

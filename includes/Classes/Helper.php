@@ -1709,5 +1709,18 @@ class Helper
 
     public static function eael_e_optimized_markup(){
         return Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
-     }
+    }
+
+
+    //Get revision id by post id
+    public static function current_revision_id( $post_id = null ) {
+		$current_revision_id = $post_id ?? get_the_ID();
+		$autosave = Utils::get_post_autosave( $current_revision_id );
+
+		if ( is_object( $autosave ) ) {
+			$current_revision_id = $autosave->ID;
+		}
+
+		return $current_revision_id;
+	}
 }

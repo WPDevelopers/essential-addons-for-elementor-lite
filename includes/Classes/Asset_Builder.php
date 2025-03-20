@@ -191,7 +191,9 @@ class Asset_Builder {
 
 		foreach ( $locations as $location => $settings ) {
 
-			$documents = \ElementorPro\Modules\ThemeBuilder\Module::instance()->get_conditions_manager()->get_documents_for_location( $location );
+			$documents = version_compare( ELEMENTOR_PRO_VERSION, '3.24.0', '>=' ) ?
+				\ElementorPro\Modules\ThemeBuilder\Module::instance()->get_locations_manager()->get_documents_for_location( $location ) :
+				\ElementorPro\Modules\ThemeBuilder\Module::instance()->get_conditions_manager()->get_documents_for_location( $location );
 			foreach ( $documents as $document ) {
 				$post_id = $document->get_post()->ID;
 

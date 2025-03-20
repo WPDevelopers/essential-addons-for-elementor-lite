@@ -266,3 +266,22 @@
 .elementor-control-url_contains_url_type .elementor-choices-label i{
 	font-size: 180%;
 }
+
+/* Multicolumn Pricing table render package and Features Sync action button */
+.eael-mcpt-action-btn {
+	margin: 0 auto;
+	display: block;
+	opacity: 0.9;
+}
+.eael-mcpt-action-btn:hover{
+	opacity: 1;
+}
+.eael-mcpt-action-btn.disabled{
+	opacity: 0.6;
+	color: #fff !important;
+}
+
+/* For multicolumn pricing layout section */
+.elementor-control-eael_multicolumn_pricing_table_layout.elementor-control-type-section.e-open {
+	padding-block-end: 0;
+}
