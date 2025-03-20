@@ -273,6 +273,12 @@ trait Elements {
 				'categories' => '["essential-addons-elementor"]',
 			],
 			[
+				'name'       => 'eael-multicolumn-pricing-table',
+				'title'      => __( 'Multicolumn Pricing Table', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eaicon-multicolumn-pricing',
+				'categories' => '["essential-addons-elementor"]',
+			],
+			[
 				'name'       => 'eael-protected-content',
 				'title'      => __( 'Protected Content', 'essential-addons-for-elementor-lite' ),
 				'icon'       => 'eaicon-protected-content',
@@ -354,6 +360,12 @@ trait Elements {
 				'name'       => 'stacked-cards',
 				'title'      => __( 'Stacked Cards', 'essential-addons-for-elementor-lite' ),
 				'icon'       => 'eaicon-stacked-cards',
+				'categories' => '["essential-addons-elementor"]',
+			],
+			[
+				'name'       => 'sphere-photo-viewer',
+				'title'      => __( '360 Degree Photo Viewer', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eaicon-photo-sphere',
 				'categories' => '["essential-addons-elementor"]',
 			],
 		] );

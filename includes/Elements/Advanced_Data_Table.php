@@ -88,6 +88,10 @@ class Advanced_Data_Table extends Widget_Base
             'tablepress' => __('TablePress', 'essential-addons-for-elementor-lite'),
         ];
 
+        if( ! current_user_can('install_plugins') ) {
+            unset( $sources['database'] );
+        }
+
         if ( ! apply_filters('eael/pro_enabled', false) ) {
             $sources['database']   = __('Database (Pro)', 'essential-addons-for-elementor-lite');
             $sources['remote']     = __('Remote Database (Pro)', 'essential-addons-for-elementor-lite');
@@ -1563,9 +1567,10 @@ class Advanced_Data_Table extends Widget_Base
             ]);
 
             if ( $content && 'csv' === $settings['ea_adv_data_table_source'] ) {
-                $dom = new \DOMDocument();
-                @$dom->loadHTML("<table>$content</table>");
-                $rows = $dom->getElementsByTagName('tr');
+                $dom = new \DOMDocument( '1.0', 'UTF-8' );
+                $html = "<table>{$content}</table>";
+                $dom->loadHTML( mb_convert_encoding( $html, 'HTML-ENTITIES', 'UTF-8' ) );
+                $rows = $dom->getElementsByTagName( 'tr' );
                 $content = '';
                 $pagination = ! empty( $settings['ea_adv_data_table_items_per_page'] ) ? $settings['ea_adv_data_table_items_per_page'] : 10;
                 foreach ( $rows as $index => $row ) {
@@ -1638,6 +1643,9 @@ class Advanced_Data_Table extends Widget_Base
         }
 
         $content = apply_filters('eael/advanced-data-table/table_html/integration/' . $settings['ea_adv_data_table_source'], $settings);
+        if( ! current_user_can('install_plugins') && Plugin::$instance->editor->is_edit_mode() ) {
+            $content = '';
+        }
 
         if (is_array($content)) {
             return '';
