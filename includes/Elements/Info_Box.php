@@ -165,6 +165,40 @@ class Info_Box extends Widget_Base
             ]
         );
 
+        $this->add_responsive_control(
+            'icon_vertical_position_top_bottom',
+            [
+                'label'     => __('Icon Position', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::CHOOSE,
+                'default'   => 'middle',
+                'condition' => [
+                    'eael_infobox_img_type!' => ['img-on-left', 'img-on-right'],
+                ],
+                'options' => [
+                    'top' => [
+                        'title' => __('Left', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-h-align-left',
+                    ],
+                    'middle' => [
+                        'title' => __('Middle', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-v-align-middle',
+                    ],
+                    'bottom' => [
+                        'title' => __('Right', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-h-align-right',
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-infobox .infobox-icon' => 'align-self: {{VALUE}};',
+                ],
+                'selectors_dictionary' => [
+                    'top'    => 'flex-start',
+                    'middle' => 'center',
+                    'bottom' => 'flex-end',
+                ],
+            ]
+        );
+
         /**
          * Condition: 'eael_infobox_img_or_icon' => 'img'
          */
@@ -1922,6 +1956,10 @@ class Info_Box extends Widget_Base
         $settings = $this->get_settings_for_display();
 
         $this->add_render_attribute('eael_infobox_inner', 'class', 'eael-infobox');
+
+        if ('img-on-top' == $settings['eael_infobox_img_type']) {
+            $this->add_render_attribute('eael_infobox_inner', 'class', 'icon-on-top');
+        }
 
         if ('img-on-bottom' == $settings['eael_infobox_img_type']) {
             $this->add_render_attribute('eael_infobox_inner', 'class', 'icon-on-bottom');

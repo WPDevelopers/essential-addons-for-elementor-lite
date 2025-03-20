@@ -182,7 +182,8 @@
    justify-content: flex-end;
 }
 
-/*--- Image/Icon On Bottom ---*/
+/*--- Image/Icon On Top & Image/Icon On Bottom ---*/
+.eael-infobox.icon-on-top,
 .eael-infobox.icon-on-bottom {
    position: relative;
    z-index: 0;
