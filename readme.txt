@@ -4,7 +4,7 @@ Tags: elementor, elements, elementor addon, elementor widget, woocommerce elemen
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 6.1.7
+Stable tag: 6.1.8
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -315,6 +315,10 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+= 6.1.8 - 21/03/2025 =
+
+- Few minor bug fixes & improvements
+
 = 6.1.7 - 20/03/2025 =
 
 - Fixed: Compatibility issue causing a critical error with Elementor Pro versions below 3.24.0
@@ -327,7 +331,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Improved: EA Info Box | Added Subtitle Option
 - Improved: EA Sticky Video | Video now plays when clicked
 - Improved: EA Woo Account Dashboard | Added additional controls inside tabs
-- Fixed: Added support for Elementor 3.38.0 compatibility
+- Fixed: Added support for Elementor 3.28.0 compatibility
 - Fixed: EA SVG Draw | "Fill after draw" option now works correctly
 - Fixed: EA Woo Product Images | Navigation arrows are now properly aligned
 - Fixed: EA Filterable Gallery | Resolved masonry layout error
