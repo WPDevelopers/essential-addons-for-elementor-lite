@@ -130,20 +130,25 @@
   width: 27%;
 }
 .woocommerce div.product .eael-single-product-add-to-cart .variations_form,
-.woocommerce div.product .eael-single-product-add-to-cart .grouped_form {
+.woocommerce div.product .eael-single-product-add-to-cart .grouped_form,
+.woocommerce .dialog-widget-content .eael-single-product-add-to-cart .variations_form,
+.woocommerce .dialog-widget-content .eael-single-product-add-to-cart .grouped_form {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
 }
-.woocommerce div.product .eael-single-product-add-to-cart form.cart {
+.woocommerce div.product .eael-single-product-add-to-cart form.cart,
+.woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   margin-bottom: 0;
 }
 .woocommerce div.product .eael-single-product-add-to-cart form.cart input[type=number] .qty,
-.woocommerce div.product .eael-single-product-add-to-cart form.cart .quantity .qty {
+.woocommerce div.product .eael-single-product-add-to-cart form.cart .quantity .qty,
+.woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart input[type=number] .qty,
+.woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart .quantity .qty {
   width: 45px;
   height: 40px;
   padding: 0;
@@ -154,7 +159,8 @@
   border-radius: 8px;
   background-color: #fff;
 }
-.woocommerce div.product .eael-single-product-add-to-cart form.cart .button {
+.woocommerce div.product .eael-single-product-add-to-cart form.cart .button,
+.woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart .button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -176,29 +182,39 @@
   width: -moz-fit-content;
   width: fit-content;
 }
-.woocommerce div.product .eael-single-product-add-to-cart form.cart table div.quantity {
+.woocommerce div.product .eael-single-product-add-to-cart form.cart table div.quantity,
+.woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart table div.quantity {
   padding-left: 15px;
 }
-.woocommerce div.product .eael-single-product-add-to-cart form.cart .group_table td.woocommerce-grouped-product-list-item__label a {
+.woocommerce div.product .eael-single-product-add-to-cart form.cart .group_table td.woocommerce-grouped-product-list-item__label a,
+.woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart .group_table td.woocommerce-grouped-product-list-item__label a {
   color: #434347;
   font-size: 15px;
   font-weight: 400;
 }
-.woocommerce div.product .eael-single-product-add-to-cart form.cart .group_table td .amount {
+.woocommerce div.product .eael-single-product-add-to-cart form.cart .group_table td .amount,
+.woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart .group_table td .amount {
   margin-bottom: 0;
   color: #434347;
   font-size: 15px;
 }
 .woocommerce div.product .eael-single-product-add-to-cart form.cart .variations td,
-.woocommerce div.product .eael-single-product-add-to-cart form.cart .variations th {
+.woocommerce div.product .eael-single-product-add-to-cart form.cart .variations th,
+.woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart .variations td,
+.woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart .variations th {
   line-height: 0;
   vertical-align: middle;
   padding: 10px 0;
 }
-.woocommerce div.product .eael-single-product-add-to-cart .variations_button {
+.woocommerce div.product .eael-single-product-add-to-cart .variations_button,
+.woocommerce .dialog-widget-content .eael-single-product-add-to-cart .variations_button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+.woocommerce .dialog-widget-content .eael-single-product-add-to-cart .single_add_to_cart_button i + i,
+.woocommerce .dialog-widget-content .eael-single-product-add-to-cart .single_add_to_cart_button svg + svg {
+  display: none;
 }
 .eael-add-to-cart--layout-column.eael-add-to-cart--align-flex-start .cart {
   -webkit-box-align: start;

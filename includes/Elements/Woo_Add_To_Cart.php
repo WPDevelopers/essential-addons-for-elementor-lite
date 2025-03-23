@@ -46,7 +46,7 @@ class Woo_Add_To_Cart extends Widget_Base {
 	}
 
 	public function get_custom_help_url() {
-		return 'https://essential-addons.com/docs/ea-woo-add-to-cart/';
+		return 'https://essential-addons.com/elementor/docs/ea-woo-add-to-cart/';
 	}
 
 	protected function register_controls() {

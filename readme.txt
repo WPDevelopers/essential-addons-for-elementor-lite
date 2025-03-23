@@ -4,7 +4,7 @@ Tags: elementor, elements, elementor addon, elementor widget, woocommerce elemen
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 6.1.1
+Stable tag: 6.1.8
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -126,7 +126,7 @@ Extensions (Free):
 6. [Wrapper Link](https://essential-addons.com/wrapper-link) - Add custom links into any section, column, or even flexbox
 7. [Hover Interactions](https://essential-addons.com/hover-interaction/) - Create captivating effects on buttons, images, texts and more
 
-### More elements (40+) on [Premium Version](https://wpdeveloper.com/in/upgrade-essential-addons-elementor)
+### More elements (45+) on [Premium Version](https://wpdeveloper.com/in/upgrade-essential-addons-elementor)
 
 1. [Post Block](https://essential-addons.com/post-block/) - Display your blog posts with a variety of styles
 2. [Lightbox & Modal](https://essential-addons.com/lightbox-modal/) - Create interactive popups after trigger actions
@@ -165,6 +165,9 @@ Extensions (Free):
 34. [Woo Cross Sells](https://essential-addons.com/woo-cross-sells/)- Customize the display of cross-sell products to boost your sales potential
 35. [Woo Account Dashboard](https://essential-addons.com/woo-account-dashboard/)- Design a personalized WooCommerce Customer Account Dashboard
 36. [Fancy Chart](https://essential-addons.com/fancy-chart/)- Visualize important data with interactive charts and graphs on your website
+37. [Stacked Cards](https://essential-addons.com/stacked-cards/)- Showcase your website content in a distinctive and engaging way
+38. [360 Degree Photo Viewer](https://essential-addons.com/360-degree-photo-viewer)- Make your website image visible from every angle with adjustable controls
+39. [Multicolumn Pricing Table](https://essential-addons.com/multicolumn-pricing-table/)- Display pricing plans in multiple columns to compare features and choose the best option
 
 
 Extensions (Pro):
@@ -311,6 +314,66 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.1.8 - 21/03/2025 =
+
+- Few minor bug fixes & improvements
+
+= 6.1.7 - 20/03/2025 =
+
+- Fixed: Compatibility issue causing a critical error with Elementor Pro versions below 3.24.0
+- Few minor bug fixes & improvements
+
+= 6.1.6 - 19/03/2025 =
+
+- Improved: Security Enhancement
+- Improved: EA Facebook Feed | Load More button now functions correctly
+- Improved: EA Info Box | Added Subtitle Option
+- Improved: EA Sticky Video | Video now plays when clicked
+- Improved: EA Woo Account Dashboard | Added additional controls inside tabs
+- Fixed: Added support for Elementor 3.28.0 compatibility
+- Fixed: EA SVG Draw | "Fill after draw" option now works correctly
+- Fixed: EA Woo Product Images | Navigation arrows are now properly aligned
+- Fixed: EA Filterable Gallery | Resolved masonry layout error
+- Fixed: Resolved conflict with Elementor’s 404 page template
+- Fixed: Woo Product Gallery | Now displays more than 4 products correctly
+- Fixed: EA Login Register Form | Custom phone number field now appears in both user and admin emails
+- Fixed: EA Team Member | Using an empty featured image from dynamic tags no longer causes a fatal error
+- Fixed: EA Pricing Table | Icon color issue resolved
+- Few minor bug fixes & improvements
+
+= 6.1.5 - 13/03/2025 =
+
+- Improved: Introduced Post Types selection mechanism for Widgets
+- Improved: EA Product Grid | Added Stock Out products exclusion option
+- Improved: EA Flip Box | Added option to control flip duration
+- Fixed: EA Advanced Data Table | Issues with non English Special Characters
+- Fixed: EA Woo Add to Cart | Multiple buttons double icon issue
+- Few minor bug fixes & improvements
+
+= 6.1.4 - 17/02/2025 =
+
+- Few minor bug fixes & improvements
+
+= 6.1.3 - 17/02/2025 =
+
+- Fixed: EA Creative Icon | SVG icon color not applying from settings
+- Fixed: EA Advanced Data Table | Large CSV file import causes unresponsive page during widget edit
+- Fixed: EA Filterable Gallery | Popup redirects to YouTube instead of opening modal
+- Fixed: EA Woo Product Images | Images do not change with product variations
+- Few minor bug fixes & improvements
+
+= 6.1.2 - 10/02/2025 =
+
+- Fixed: EA Woo Product Carousel | Regular price strikethrough color is not changing
+- Fixed: EA Woo Product Carousel | Not able to style the pop-up with the woo product carousel
+- Fixed: EA Woo Product Grid | Not able to style the pop-up with the woo product grid
+- Fixed: EA Woo Product Gallery | Product Gallery Display Issue on Chrome (Repeating Rows After Navigation)
+- Fixed: EA Fancy text | - & character can not be used
+- Fixed: EA Advanced Tabs | Editor not loading when Advanced Tabs element is enabled in some cases
+- Fixed: EA Fancy Text | Animation Not Working Except for "Typing Text"
+- Improved: EA Woo Product Images | Added responsive controls
+- Few minor bug fixes & improvements
 
 = 6.1.1 - 21/01/2025 =
 
@@ -636,4 +699,3 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Upgrade Notice ==
-

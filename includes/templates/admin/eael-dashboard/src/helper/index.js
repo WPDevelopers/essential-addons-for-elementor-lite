@@ -119,7 +119,8 @@ export function asyncDispatch({eaState, eaDispatch}, $type, $args = {}) {
             params = {
                 action: 'save_settings_with_ajax',
                 security: localize.nonce,
-                [$args.key]: $args.value
+                [$args.key]: $args.value,
+                allowedPostTypes: JSON.stringify(eaState.allowedPostTypes)
             };
 
             $payload = {

@@ -266,6 +266,85 @@ class Info_Box extends Widget_Base
                 ],
             ]
         );
+
+        $this->add_control(
+			'eael_infobox_show_sub_title',
+			[
+				'label'        => esc_html__( 'Sub Title', 'essential-addons-for-elementor-lite' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+			]
+		);
+
+        $this->add_control(
+			'eael_infobox_show_sub_title_after',
+			[
+				'label'   => esc_html__( 'Position', 'essential-addons-for-elementor-lite' ),
+				'type'    => \Elementor\Controls_Manager::CHOOSE,
+				'options' => [
+					'column' => [
+						'title' => esc_html__( 'Top', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-arrow-up',
+					],
+					'column-reverse' => [
+						'title' => esc_html__( 'Bottom', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-arrow-down',
+					],
+				],
+				'default' => 'column',
+				'selectors' => [
+					'{{WRAPPER}} .infobox-content .infobox-title-section' => 'flex-direction: {{VALUE}};',
+				],
+                'condition' => [
+                    'eael_infobox_show_sub_title' => 'yes',
+                ],
+			]
+		);
+
+        $this->add_control(
+            'eael_infobox_sub_title',
+            [
+                'label'       => esc_html__('Infobox Sub Title', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::TEXT,
+                'label_block' => true,
+                'dynamic' => [
+                    'active' => true,
+                ],
+                'default' => esc_html__('This is a sub title', 'essential-addons-for-elementor-lite'),
+                'ai' => [
+					'active' => false,
+				],
+                'condition' => [
+                    'eael_infobox_show_sub_title' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_infobox_sub_title_tag',
+            [
+                'label'   => __('Select Sub Title Tag', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'h4',
+                'options' => [
+                    'h1'   => __('H1', 'essential-addons-for-elementor-lite'),
+                    'h2'   => __('H2', 'essential-addons-for-elementor-lite'),
+                    'h3'   => __('H3', 'essential-addons-for-elementor-lite'),
+                    'h4'   => __('H4', 'essential-addons-for-elementor-lite'),
+                    'h5'   => __('H5', 'essential-addons-for-elementor-lite'),
+                    'h6'   => __('H6', 'essential-addons-for-elementor-lite'),
+                    'span' => __('Span', 'essential-addons-for-elementor-lite'),
+                    'p'    => __('P', 'essential-addons-for-elementor-lite'),
+                    'div'  => __('Div', 'essential-addons-for-elementor-lite'),
+                ],
+                'condition' => [
+                    'eael_infobox_show_sub_title' => 'yes',
+                ],
+            ]
+        );
+
         $this->add_control(
             'eael_infobox_text_type',
             [
@@ -343,7 +422,7 @@ class Info_Box extends Widget_Base
                 'devices' => [ 'desktop', 'tablet', 'mobile' ],
                 'prefix_class' => 'eael-infobox-content-align-%s-',
                 'condition' => [
-                    'eael_infobox_img_type' => 'img-on-top',
+                    'eael_infobox_img_type' => ['img-on-top', 'img-on-left', 'img-on-right'],
                 ],
             ]
         );
@@ -543,6 +622,52 @@ class Info_Box extends Widget_Base
             $this->end_controls_section();
         }
 
+        //Style Container
+        $this->start_controls_section(
+            'eael_section_infobox_container',
+            [
+                'label' => esc_html__( 'Container', 'essential-addons-for-elementor-lite' ),
+                'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+			'eael_section_infobox_container_bg',
+			[
+				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-infobox' => 'background-color: {{VALUE}}',
+				],
+			]
+		);
+
+        $this->add_responsive_control(
+			'eael_section_infobox_container_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-infobox' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+        $this->add_responsive_control(
+			'eael_section_infobox_container_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-infobox' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+        
+        $this->end_controls_section();
+
         /**
          * -------------------------------------------
          * Tab Style (Info Box Image)
@@ -624,6 +749,22 @@ class Info_Box extends Widget_Base
             ]
         );
 
+        $this->add_control(
+			'eael_infobox_img_shape_radius',
+			[
+				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-infobox .infobox-icon img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+                'condition' => [
+                    'eael_infobox_img_shape'   => 'radius',
+                    'eael_infobox_img_or_icon' => 'img',
+                ],
+			]
+		);
+
         $this->end_controls_tab();
 
         $this->start_controls_tab(
@@ -680,6 +821,22 @@ class Info_Box extends Widget_Base
                 ],
             ]
         );
+
+        $this->add_control(
+			'eael_infobox_img_shape_radius_hover',
+			[
+				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-infobox:hover .infobox-icon img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+                'condition' => [
+                    'eael_infobox_hover_img_shape'   => 'radius',
+                    'eael_infobox_img_or_icon' => 'img',
+                ],
+			]
+		);
 
         $this->end_controls_tab();
 
@@ -1311,17 +1468,23 @@ class Info_Box extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'eael_infobox_button_background_color',
-            [
-                'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#333333',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-infobox .eael-infobox-button' => 'background: {{VALUE}};',
-                ],
-            ]
-        );
+        $this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'name' => 'eael_infobox_button_background_color',
+				'types' => [ 'classic', 'gradient' ],
+                'fields_options' => [
+                    'background' => [
+                        'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
+                        'default' => 'classic',
+                    ],
+                    'color' => [
+                        'default' => '#333333',
+                    ],
+                ],        
+				'selector' => '{{WRAPPER}} .eael-infobox .eael-infobox-button',
+			]
+		);
 
         $this->add_group_control(
             Group_Control_Border::get_type(),
@@ -1450,6 +1613,75 @@ class Info_Box extends Widget_Base
                 ],
             ]
         );
+
+        $this->add_control(
+            'eael_infobox_sub_title_heading',
+            [
+                'label'     => esc_html__('Sub Title Style', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::HEADING,
+                'separator' => 'before',
+                'condition' => [
+                    'eael_infobox_show_sub_title' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_infobox_sub_title_color',
+            [
+                'label'     => esc_html__('Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#4d4d4d',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-infobox .infobox-content .sub_title' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_infobox_show_sub_title' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_infobox_sub_title_typography',
+                'selector' => '{{WRAPPER}} .eael-infobox .infobox-content .sub_title',
+                'condition' => [
+                    'eael_infobox_show_sub_title' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_infobox_sub_title_margin',
+            [
+                'label'      => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-infobox .infobox-content .sub_title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_infobox_show_sub_title' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_infobox_sub_title_padding',
+            [
+                'label'      => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-infobox .infobox-content .sub_title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_infobox_show_sub_title' => 'yes',
+                ],
+            ]
+        );
+
         $this->add_control(
             'eael_infobox_content_heading',
             [
@@ -1529,6 +1761,20 @@ class Info_Box extends Widget_Base
                 'default' => '',
                 'selectors' => [
                     '{{WRAPPER}} .eael-infobox:hover .infobox-content .title' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_infobox_sub_title_hover_color',
+            [
+                'label'     => esc_html__('Sub Title Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-infobox:hover .infobox-content .sub_title' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_infobox_show_sub_title' => 'yes',
                 ],
             ]
         );
@@ -1714,9 +1960,19 @@ class Info_Box extends Widget_Base
         ob_start();
         ?>
         <div <?php $this->print_render_attribute_string('infobox_content'); ?>>
+        <?php if ( !empty( $settings['eael_infobox_title'] ) ||  !empty( $settings['eael_infobox_sub_title'] ) ) { ?>
+            <div class="infobox-title-section">
+                <?php 
+                if ( !empty( $settings['eael_infobox_sub_title'] ) && 'yes' === $settings['eael_infobox_show_sub_title'] ){
+                    printf( '<%1$s class="sub_title">%2$s</%1$s>', esc_html( Helper::eael_validate_html_tag( $settings['eael_infobox_sub_title_tag'] ) ), wp_kses( $settings['eael_infobox_sub_title'], Helper::eael_allowed_tags() ) );
+                }
+    
+                if ( !empty( $settings['eael_infobox_title'] ) ){
+                    printf( '<%1$s class="title">%2$s</%1$s>', esc_html( Helper::eael_validate_html_tag( $settings['eael_infobox_title_tag'] ) ), wp_kses( $settings['eael_infobox_title'], Helper::eael_allowed_tags() ) );
+                }
+                ?>
+            </div>
             <?php
-            if ( !empty( $settings['eael_infobox_title'] ) ){
-                printf( '<%1$s class="title">%2$s</%1$s>', esc_html( Helper::eael_validate_html_tag( $settings['eael_infobox_title_tag'] ) ), wp_kses( $settings['eael_infobox_title'], Helper::eael_allowed_tags() ) );
             }
             if ('yes' == $settings['eael_show_infobox_content']){
                 if ('content' === $settings['eael_infobox_text_type']){

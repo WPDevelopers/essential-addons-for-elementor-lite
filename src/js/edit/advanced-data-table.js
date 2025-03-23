@@ -345,7 +345,7 @@ class advancedDataTableEdit {
 						this.updateFromView(
 							this.view,
 							{
-								ea_adv_data_table_static_html: header + body,
+								ea_adv_data_table_csv_html: header + body,
 							},
 							true
 						);

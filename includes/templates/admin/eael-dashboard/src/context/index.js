@@ -28,7 +28,8 @@ const eaData = localize.eael_dashboard,
         btnLoader: '',
         optinPromo: eaData.admin_screen_promo.display,
         search404: false,
-        licenseFormOpen: true
+        licenseFormOpen: true,
+        allowedPostTypes: eaData.tools.box_4.value
     };
 
 Object.keys(eaData.integration_box.list).map((item) => {

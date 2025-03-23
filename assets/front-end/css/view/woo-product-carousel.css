@@ -48,6 +48,9 @@
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
+.eael-woo-product-carousel-container .woocommerce ul.products .product .eael-product-price ins {
+  text-decoration: none;
+}
 .eael-woo-product-carousel-container .woocommerce ul.products.products[class*=columns-] li.product {
   width: 100%;
 }

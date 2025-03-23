@@ -1034,13 +1034,12 @@ class Team_Member extends Widget_Base {
 
         $settings = $this->get_settings_for_display();
 		$team_member_image = $settings['eael_team_member_image'] ?? '';
+		$image_url = $team_member_image['url'] ?? '';
+		$alt_text = $settings['eael_team_member_name'] ?? '';
 
-		$team_member_image_url = Group_Control_Image_Size::get_attachment_image_src( $team_member_image['id'], 'thumbnail', $settings );
-
-		if ( empty( $team_member_image_url ) ) {
-			$team_member_image_url = $team_member_image['url'] ?? '';
-		} else {
-			$team_member_image_url = $team_member_image_url;
+		if( is_array( $team_member_image ) && ! empty( $team_member_image['id'] ) ) {
+			$image_url = Group_Control_Image_Size::get_attachment_image_src( $team_member_image['id'], 'thumbnail', $settings );
+			$alt_text = get_post_meta( $team_member_image['id'], '_wp_attachment_image_alt', true );
 		}
 		
 		$team_member_classes = $this->get_settings('eael_team_members_preset') . " " . $this->get_settings('eael_team_members_image_rounded');
@@ -1058,11 +1057,9 @@ class Team_Member extends Widget_Base {
 		<div class="eael-team-item-inner">
 			<div class="eael-team-image">
 				<figure>
-					<?php
-					$img_alt = get_post_meta( $team_member_image['id'], '_wp_attachment_image_alt', true );
-					$alt_text = $img_alt ? $img_alt : $settings['eael_team_member_name'];
-					?>
-					<img src="<?php echo esc_url($team_member_image_url);?>" alt="<?php echo esc_attr( $alt_text ); ?>">
+					<?php if( !empty( $image_url ) ):  ?>
+					<img src="<?php echo esc_url( $image_url );?>" alt="<?php echo esc_attr( $alt_text ); ?>">
+					<?php endif; ?>
 				</figure>
 				<?php if( 'eael-team-members-social-right' === $settings['eael_team_members_preset'] ) : ?>
 					<?php do_action( 'eael/team_member_social_right_markup', $settings, $this ); ?>

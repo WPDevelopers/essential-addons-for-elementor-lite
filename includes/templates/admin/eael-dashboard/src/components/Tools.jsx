@@ -16,6 +16,9 @@ function Tools() {
         },
         clickHandler = () => {
             asyncDispatch({eaState, eaDispatch}, 'REGENERATE_ASSETS');
+        },
+        changeHandler = (e) => {
+            eaDispatch({type: 'ON_CHANGE_POST_TYPE', payload: {key: e.target.value, value: e.target.checked}});
         };
 
     return (
@@ -63,6 +66,23 @@ function Tools() {
                                     </select>
                                 </div>
                                 <span className="select-details">{eaData.box_3.content}</span>
+                            </div>
+                        </div>
+                        <div className="ea__connect-others justify-between items-start">
+                            <label>{eaData.box_4.heading}</label>
+                            <div><span className="select-details">{eaData.box_4.content}</span></div>
+                            <div className="flex-1">
+                                <ul className="select-post-type-options">
+                                {Object.keys(eaData.box_4.methods).map((item, index) => {
+                                    return <li key={index}>
+                                                <label htmlFor={item}>
+                                                    <input type="checkbox" checked={eaState.allowedPostTypes[item] === true}  value={item} onChange={changeHandler} id={item} />
+                                                    {eaData.box_4.methods[item]}
+                                                </label>
+                                            </li>
+                                }
+                                )}
+                                </ul>
                             </div>
                         </div>
                         <div className="flex flex-end">

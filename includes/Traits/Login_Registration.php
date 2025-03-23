@@ -1400,10 +1400,10 @@ trait Login_Registration {
 
 		if ( 'user' !== $receiver ) {
 			// remove password from admin mail, because admin should not see user's plain password
-			unset( $placeholders[1] );
-			unset( $placeholders[2] );
-			unset( $replacement[1] );
-			unset( $replacement[2] );
+			unset( $placeholders[3] );
+			unset( $placeholders[4] );
+			unset( $replacement[3] );
+			unset( $replacement[4] );
 		}
 
 		$message = preg_replace( $placeholders, $replacement, $message );

@@ -279,6 +279,31 @@ class Helper
     }
 
     /**
+     * Get allowed Types
+     * @return array
+     */
+
+     public static function get_allowed_post_types() {
+        $post_types = get_option( 'eael_allowed_post_types' );
+
+        if ( empty( $post_types ) ) {
+            return self::get_post_types();
+        }
+
+        $post_types = array_filter( $post_types, function( $value ) {
+            return $value;
+        } );
+
+        if ( empty( $post_types ) ) {
+            return [];
+        }
+
+        $post_types = array_intersect_key( self::get_post_types(), $post_types );
+
+        return $post_types;
+     }
+
+    /**
      * Get all types of post.
      *
      * @param  string  $post_type
@@ -1684,5 +1709,18 @@ class Helper
 
     public static function eael_e_optimized_markup(){
         return Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
-     }
+    }
+
+
+    //Get revision id by post id
+    public static function current_revision_id( $post_id = null ) {
+		$current_revision_id = $post_id ?? get_the_ID();
+		$autosave = Utils::get_post_autosave( $current_revision_id );
+
+		if ( is_object( $autosave ) ) {
+			$current_revision_id = $autosave->ID;
+		}
+
+		return $current_revision_id;
+	}
 }

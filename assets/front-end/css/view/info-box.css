@@ -27,6 +27,18 @@
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
+.infobox-content .infobox-title-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.infobox-content .infobox-title-section .sub_title {
+  margin: 0 0 10px 0;
+}
 /*--- For Content Alignment ---*/
 .eael-infobox-content-align--left .eael-infobox .infobox-icon {
   display: -webkit-box;
@@ -228,7 +240,6 @@
 }
 .eael-infobox.icon-on-right .infobox-content {
   padding-right: 15px;
-  text-align: right;
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;

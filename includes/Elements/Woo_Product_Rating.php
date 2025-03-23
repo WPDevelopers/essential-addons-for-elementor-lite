@@ -48,7 +48,7 @@ class Woo_Product_Rating extends Widget_Base {
 	}
 
 	public function get_custom_help_url() {
-		return 'https://essential-addons.com/docs/ea-woo-product-rating';
+		return 'https://essential-addons.com/elementor/docs/ea-woo-product-rating';
 	}
 
 	protected function register_controls() {

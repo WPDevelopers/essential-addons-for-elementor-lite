@@ -91,6 +91,7 @@ class Migration
                            or (option_name = 'eael_reduce_op_table_data')
                            or (option_name = 'eael_remove_old_cache')
                            or (option_name = 'eael_editor_updated_at')
+                           or (option_name = 'eael_gb_eb_popup_hide')
                            or (option_name like 'eael_login_error_%'))
                   ) AS options_tb2 
                     ON options_tb2.option_id = options_tb.option_id";

@@ -144,3 +144,20 @@ function ea_conditional_logic_type_title(value) {
 
     return labelValues[value] ? labelValues[value] : '';
 }
+
+if ( window.eaelMCPTPackageRenderButton === undefined ) {
+    window.eaelMCPTPackageRenderButton = true;
+    
+    jQuery(document).on("click", ".eael-mcpt-action-btn", function() {
+        const saverButton = jQuery("#elementor-panel-footer-sub-menu-item-save-draft");
+
+        if ( saverButton.hasClass("elementor-disabled") ) {
+            location.reload();
+        }
+        jQuery(this).prop("disabled", true).addClass("disabled");
+        saverButton.trigger("click");
+        setTimeout(function() {
+            location.reload();
+        }, 1000);
+    });
+}
