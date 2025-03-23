@@ -2917,103 +2917,21 @@ class Filterable_Gallery extends Widget_Base
                 ],
             ]
         );
-        
-        $this->start_controls_tabs('tabs_eael_load_more_button_style');
-        
-        $this->start_controls_tab(
-            'tab_load_more_button_normal',
-            [
-                'label' => __('Normal', 'essential-addons-for-elementor-lite'),
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
-                ],
-            ]
-        );
-        
+
+
         $this->add_control(
-            'load_more_button_bg_color_normal',
+            'load_more_button_icon_heading',
             [
-                'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#333',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-gallery-load-more' => 'background-color: {{VALUE}}',
-                ],
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
-                ],
-            ]
-        );
-        
-        $this->add_control(
-            'load_more_button_text_color_normal',
-            [
-                'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#fff',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-gallery-load-more' => 'color: {{VALUE}}',
-                ],
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
-                ],
-            ]
-        );
-        
-        $this->add_group_control(
-            Group_Control_Border::get_type(),
-            [
-                'name' => 'load_more_button_border_normal',
-                'label' => __('Border', 'essential-addons-for-elementor-lite'),
-                'placeholder' => '1px',
-                'default' => '1px',
-                'selector' => '{{WRAPPER}} .eael-gallery-load-more',
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
-                ],
-            ]
-        );
-        
-        $this->add_control(
-            'load_more_button_border_radius',
-            [
-                'label' => __('Border Radius', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', '%'],
-                'selectors' => [
-                    '{{WRAPPER}} .eael-gallery-load-more' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
-                ],
-            ]
-        );
-        
-        $this->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name' => 'load_more_button_typography',
-                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'global' => [
-					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				],
-                'selector' => '{{WRAPPER}} .eael-gallery-load-more .eael-filterable-gallery-load-more-text',
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
-                ],
+                'label' => __('Button Icon', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
             ]
         );
         
         $this->add_control(
             'load_more_button_icon_size',
             [
-                'label' => __('Icon Size', 'essential-addons-for-elementor-lite'),
+                'label' => __('Size', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 15,
@@ -3035,7 +2953,7 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'load_more_button_icon_spacing',
             [
-                'label' => __('Icon Spacing', 'essential-addons-for-elementor-lite'),
+                'label' => __('Spacing', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -3046,7 +2964,48 @@ class Filterable_Gallery extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-gallery-load-more .fg-load-more-icon-left' => 'margin-right: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .eael-gallery-load-more .fg-load-more-icon-right' => 'margin-left: {{SIZE}}{{UNIT}};',
-                ]
+                ],
+                'separator' => 'after',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'load_more_button_typography',
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
+                'global' => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
+                'selector' => '{{WRAPPER}} .eael-gallery-load-more .eael-filterable-gallery-load-more-text',
+                'condition' => [
+                    'pagination' => 'yes',
+                    'load_more_text!' => '',
+                ],
+            ]
+        );
+        
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'load_more_button_border_normal',
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
+                'placeholder' => '1px',
+                'default' => '1px',
+                'selector' => '{{WRAPPER}} .eael-gallery-load-more',
+                'exclude'  => [ 'color' ],
+            ]
+        );
+
+        $this->add_control(
+            'load_more_button_border_radius',
+            [
+                'label' => __('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-gallery-load-more' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
             ]
         );
         
@@ -3058,35 +3017,6 @@ class Filterable_Gallery extends Widget_Base
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
                     '{{WRAPPER}} .eael-gallery-load-more' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
-                ],
-            ]
-        );
-        
-        $this->add_group_control(
-            Group_Control_Box_Shadow::get_type(),
-            [
-                'name' => 'load_more_button_box_shadow',
-                'selector' => '{{WRAPPER}} .eael-gallery-load-more',
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
-                ],
-            ]
-        );
-        
-        $this->add_control(
-            'load_more_button_icon_heading',
-            [
-                'label' => __('Button Icon', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
-                'separator' => 'before',
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_icon!' => '',
                 ],
             ]
         );
@@ -3106,10 +3036,59 @@ class Filterable_Gallery extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-gallery-load-more .eael-filterable-gallery-load-more-icon' => 'margin-top: {{TOP}}{{UNIT}}; margin-left: {{LEFT}}{{UNIT}}; margin-right: {{RIGHT}}{{UNIT}}; margin-bottom: {{BOTTOM}}{{UNIT}};',
                 ],
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_icon!' => '',
+            ]
+        );
+        
+        $this->start_controls_tabs('tabs_eael_load_more_button_style');
+        
+        $this->start_controls_tab(
+            'tab_load_more_button_normal',
+            [
+                'label' => __('Normal', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+        
+        $this->add_control(
+            'load_more_button_bg_color_normal',
+            [
+                'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#333',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-gallery-load-more' => 'background-color: {{VALUE}}',
                 ],
+            ]
+        );
+        
+        $this->add_control(
+            'load_more_button_text_color_normal',
+            [
+                'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#fff',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-gallery-load-more' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'load_more_button_border_normal_color',
+            [
+                'label' => __('Border Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-gallery-load-more:hover' => 'border-color: {{VALUE}}',
+                ],
+            ]
+        );
+        
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'load_more_button_box_shadow',
+                'selector' => '{{WRAPPER}} .eael-gallery-load-more',
             ]
         );
         
@@ -3119,10 +3098,6 @@ class Filterable_Gallery extends Widget_Base
             'tab_button_hover',
             [
                 'label' => __('Hover', 'essential-addons-for-elementor-lite'),
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
-                ],
             ]
         );
         
@@ -3134,10 +3109,6 @@ class Filterable_Gallery extends Widget_Base
                 'default' => '',
                 'selectors' => [
                     '{{WRAPPER}} .eael-gallery-load-more:hover' => 'background-color: {{VALUE}}',
-                ],
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
                 ],
             ]
         );
@@ -3151,10 +3122,6 @@ class Filterable_Gallery extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-gallery-load-more:hover' => 'color: {{VALUE}}',
                 ],
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
-                ],
             ]
         );
         
@@ -3167,10 +3134,6 @@ class Filterable_Gallery extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-gallery-load-more:hover' => 'border-color: {{VALUE}}',
                 ],
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
-                ],
             ]
         );
         
@@ -3179,10 +3142,6 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'button_box_shadow_hover',
                 'selector' => '{{WRAPPER}} .eael-gallery-load-more:hover',
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
-                ],
             ]
         );
         
@@ -3339,7 +3298,7 @@ class Filterable_Gallery extends Widget_Base
         
         if ($settings['pagination'] == 'yes') { ?>
             <div class="eael-filterable-gallery-loadmore">
-                <a href="#" <?php $this->print_render_attribute_string('load-more-button'); ?>>
+                <button <?php $this->print_render_attribute_string('load-more-button'); ?>>
                     <span class="eael-btn-loader"></span>
                     <?php if ($settings['button_icon_position'] == 'before') { ?>
                         <?php if ($icon_is_new || $icon_migrated) { ?>
@@ -3366,7 +3325,7 @@ class Filterable_Gallery extends Widget_Base
                             <span class="eael-filterable-gallery-load-more-icon fg-load-more-icon-right <?php echo esc_attr($settings['load_more_icon']); ?>" aria-hidden="true"></span>
                         <?php } ?>
                     <?php } ?>
-                </a>
+                </button>
             </div>
         <?php }
     }
