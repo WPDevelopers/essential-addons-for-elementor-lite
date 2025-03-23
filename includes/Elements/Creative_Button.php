@@ -72,138 +72,138 @@ class Creative_Button extends Widget_Base
 
     protected function register_controls()
     {
+        // Content Controls
+        $this->start_controls_section(
+            'eael_section_creative_button_content',
+            [
+                'label' => esc_html__('Button Content', 'essential-addons-for-elementor-lite'),
+            ]
+        );
 
-        if ( !apply_filters( 'eael/pro_enabled', false ) ) {
-            // Content Controls
-            $this->start_controls_section(
-                'eael_section_creative_button_content',
-                [
-                    'label' => esc_html__('Button Content', 'essential-addons-for-elementor-lite'),
-                ]
-            );
+        $this->add_control(
+            'creative_button_text',
+            [
+                'label'       => __('Button Text', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
+                'label_block' => true,
+                'default'     => 'Click Me!',
+                'placeholder' => __('Enter button text', 'essential-addons-for-elementor-lite'),
+                'title'       => __('Enter button text here', 'essential-addons-for-elementor-lite'),
+                'ai' => [
+                    'active' => false,
+                ],
+            ]
+        );
 
-            $this->add_control(
-                'creative_button_text',
-                [
-                    'label'       => __('Button Text', 'essential-addons-for-elementor-lite'),
-                    'type'        => Controls_Manager::TEXT,
-                    'dynamic' => [
-                        'active' => true,
-                    ],
-                    'label_block' => true,
-                    'default'     => 'Click Me!',
-                    'placeholder' => __('Enter button text', 'essential-addons-for-elementor-lite'),
-                    'title'       => __('Enter button text here', 'essential-addons-for-elementor-lite'),
-                    'ai' => [
-                        'active' => false,
-                    ],
-                ]
-            );
+        $this->add_control(
+            'creative_button_secondary_text',
+            [
+                'label'       => __('Button Secondary Text', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
+                'label_block' => true,
+                'default'     => 'Go!',
+                'placeholder' => __('Enter button secondary text', 'essential-addons-for-elementor-lite'),
+                'title'       => __('Enter button secondary text here', 'essential-addons-for-elementor-lite'),
+                'ai' => [
+                    'active' => false,
+                ],
+            ]
+        );
 
-            $this->add_control(
-                'creative_button_secondary_text',
-                [
-                    'label'       => __('Button Secondary Text', 'essential-addons-for-elementor-lite'),
-                    'type'        => Controls_Manager::TEXT,
-                    'dynamic' => [
-                        'active' => true,
+        $this->add_control(
+            'creative_button_link_url',
+            [
+                'label'         => esc_html__('Link URL', 'essential-addons-for-elementor-lite'),
+                'type'          => Controls_Manager::URL,
+                'dynamic'               => [
+                    'active'       => true,
+                    'categories'   => [
+                        TagsModule::POST_META_CATEGORY,
+                        TagsModule::URL_CATEGORY,
                     ],
-                    'label_block' => true,
-                    'default'     => 'Go!',
-                    'placeholder' => __('Enter button secondary text', 'essential-addons-for-elementor-lite'),
-                    'title'       => __('Enter button secondary text here', 'essential-addons-for-elementor-lite'),
-                    'ai' => [
-                        'active' => false,
-                    ],
-                ]
-            );
+                ],
+                'label_block'   => true,
+                'default'       => [
+                    'url'         => '#',
+                    'is_external' => '',
+                ],
+                'show_external' => true,
+            ]
+        );
 
-            $this->add_control(
-                'creative_button_link_url',
-                [
-                    'label'         => esc_html__('Link URL', 'essential-addons-for-elementor-lite'),
-                    'type'          => Controls_Manager::URL,
-                    'dynamic'               => [
-                        'active'       => true,
-                        'categories'   => [
-                            TagsModule::POST_META_CATEGORY,
-                            TagsModule::URL_CATEGORY,
-                        ],
-                    ],
-                    'label_block'   => true,
-                    'default'       => [
-                        'url'         => '#',
-                        'is_external' => '',
-                    ],
-                    'show_external' => true,
-                ]
-            );
+        $this->add_control(
+            'eael_creative_button_icon_new',
+            [
+                'label'            => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
+                'type'             => Controls_Manager::ICONS,
+                'fa4compatibility' => 'eael_creative_button_icon',
+                'condition'        => [
+                    'creative_button_effect!' => ['eael-creative-button--tamaya'],
+                ],
+            ]
+        );
 
-            $this->add_control(
-                'eael_creative_button_icon_new',
-                [
-                    'label'            => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
-                    'type'             => Controls_Manager::ICONS,
-                    'fa4compatibility' => 'eael_creative_button_icon',
-                    'condition'        => [
-                        'creative_button_effect!' => ['eael-creative-button--tamaya'],
-                    ],
-                ]
-            );
-
-            $this->add_control(
-                'eael_creative_button_remove_svg_color_dummy',
-                [
-                    'label'        => esc_html__( 'Remove Default SVG Color', 'essential-addons-for-elementor-lite' ),
-                    'type'         => Controls_Manager::SWITCHER,
-                    'description'  => esc_html__( 'If you are using a custom SVG and want to apply colors from the controller, enable this option. Note that it will override the default color of your SVG.', 'essential-addons-for-elementor-lite' ),
-                    'return_value' => 'yes',
-                ]
-            );
-
-            $this->add_control(
-                'eael_creative_button_icon_alignment',
-                [
-                    'label'     => esc_html__('Icon Position', 'essential-addons-for-elementor-lite'),
-                    'type'      => Controls_Manager::SELECT,
-                    'default'   => 'left',
-                    'options'   => [
-                        'left'  => esc_html__('Before', 'essential-addons-for-elementor-lite'),
-                        'right' => esc_html__('After', 'essential-addons-for-elementor-lite'),
-                    ],
-                    'condition' => [
-                        'eael_creative_button_icon_new!' => '',
-                        'creative_button_effect!'        => ['eael-creative-button--tamaya'],
-                    ],
-                ]
-            );
-
-            $this->add_responsive_control(
-                'eael_creative_button_icon_indent',
-                [
-                    'label'     => esc_html__('Icon Spacing', 'essential-addons-for-elementor-lite'),
-                    'type'      => Controls_Manager::SLIDER,
-                    'range'     => [
-                        'px' => [
-                            'max' => 60,
-                        ],
-                    ],
-                    'condition' => [
-                        'eael_creative_button_icon_new!' => '',
-                        'creative_button_effect!'        => ['eael-creative-button--tamaya'],
-                    ],
-                    'selectors' => [
-                        '{{WRAPPER}} .eael-creative-button-icon-right' => 'margin-left: {{SIZE}}px;',
-                        '{{WRAPPER}} .eael-creative-button-icon-left'  => 'margin-right: {{SIZE}}px;',
-                        '{{WRAPPER}} .eael-creative-button--shikoba i' => 'left: {{SIZE}}%;',
-                    ],
-                ]
-            );
-
-            $this->end_controls_section();
-        } else {
-            do_action('eael_creative_button_pro_controls', $this);
+        $svg_btn_controller_id = 'eael_creative_button_remove_svg_color_dummy';
+        if ( apply_filters( 'eael/pro_enabled', false ) ) {
+            $svg_btn_controller_id = 'eael_creative_button_remove_svg_color';
         }
+
+        $this->add_control(
+            $svg_btn_controller_id,
+            [
+                'label'        => esc_html__( 'Remove Default SVG Color', 'essential-addons-for-elementor-lite' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'description'  => esc_html__( 'If you are using a custom SVG and want to apply colors from the controller, enable this option. Note that it will override the default color of your SVG.', 'essential-addons-for-elementor-lite' ),
+                'return_value' => 'yes',
+            ]
+        );
+
+        $this->add_control(
+            'eael_creative_button_icon_alignment',
+            [
+                'label'     => esc_html__('Icon Position', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::SELECT,
+                'default'   => 'left',
+                'options'   => [
+                    'left'  => esc_html__('Before', 'essential-addons-for-elementor-lite'),
+                    'right' => esc_html__('After', 'essential-addons-for-elementor-lite'),
+                ],
+                'condition' => [
+                    'eael_creative_button_icon_new!' => '',
+                    'creative_button_effect!'        => ['eael-creative-button--tamaya'],
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_creative_button_icon_indent',
+            [
+                'label'     => esc_html__('Icon Spacing', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::SLIDER,
+                'range'     => [
+                    'px' => [
+                        'max' => 60,
+                    ],
+                ],
+                'condition' => [
+                    'eael_creative_button_icon_new!' => '',
+                    'creative_button_effect!'        => ['eael-creative-button--tamaya'],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-creative-button-icon-right' => 'margin-left: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-creative-button-icon-left'  => 'margin-right: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-creative-button--shikoba i' => 'left: {{SIZE}}%;',
+                ],
+            ]
+        );
+        
+        $this->end_controls_section();
 
         if ( !apply_filters( 'eael/pro_enabled', false ) ) {
             $this->start_controls_section(
