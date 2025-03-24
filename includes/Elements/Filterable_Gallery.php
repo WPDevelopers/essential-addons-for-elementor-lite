@@ -1408,6 +1408,26 @@ class Filterable_Gallery extends Widget_Base
                 'selector' => '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item',
             ]
         );
+
+        $this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'name'      => 'eael_fg_item_background',
+				'types'     => [ 'classic', 'gradient' ],
+                'selector'  => '{{WRAPPER}} .eael-filterable-gallery-item-wrap .box__shadow',
+                'condition' => [ 'eael_fg_caption_style' => 'grid_flow_gallery' ],
+                'fields_options' => [
+                    'background_type' => [
+                        'default' => 'classic',
+                    ],
+                    'image' => [
+                        'default' => [
+                            'url'	=> 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAOklEQVQoU43MSwoAMAgD0eT+h7ZYaOlHo7N+DNHL2HAGgBWcyGcKbqTghTL4oQiG6IUpOqFEC5bI4QD8PAoKd9j4XwAAAABJRU5ErkJggg=='
+                        ],
+                    ],
+                ],
+			]
+		);
         
         $this->end_controls_section();
         
