@@ -57,8 +57,8 @@ var SVGDraw = function ($scope, $) {
             stepCount += 0.01;
             if (stepCount >= 1) {
                 addOrSubtract = false;
-                if (settings.fill === 'fill-svg') {
-                    wrapper.removeClass('fillout-svg').addClass(settings.fill);
+                if (settings.fill === 'after') {
+                    wrapper.removeClass('fillout-svg').addClass('fill-svg');
                 }
             }
         } else if (direction === 'restart') {
