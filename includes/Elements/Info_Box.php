@@ -1471,7 +1471,7 @@ class Info_Box extends Widget_Base
         $this->add_group_control(
 			\Elementor\Group_Control_Background::get_type(),
 			[
-				'name' => 'eael_infobox_button_background_color',
+				'name' => 'eael_infobox_button_background',
 				'types' => [ 'classic', 'gradient' ],
                 'fields_options' => [
                     'background' => [
