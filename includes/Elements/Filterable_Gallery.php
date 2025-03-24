@@ -1417,12 +1417,12 @@ class Filterable_Gallery extends Widget_Base
                 'selector'  => '{{WRAPPER}} .eael-filterable-gallery-item-wrap .box__shadow',
                 'condition' => [ 'eael_fg_caption_style' => 'grid_flow_gallery' ],
                 'fields_options' => [
-                    'background_type' => [
+                    'background' => [
                         'default' => 'classic',
                     ],
                     'image' => [
                         'default' => [
-                            'url'	=> 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAOklEQVQoU43MSwoAMAgD0eT+h7ZYaOlHo7N+DNHL2HAGgBWcyGcKbqTghTL4oQiG6IUpOqFEC5bI4QD8PAoKd9j4XwAAAABJRU5ErkJggg=='
+                            'url' => 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAOklEQVQoU43MSwoAMAgD0eT+h7ZYaOlHo7N+DNHL2HAGgBWcyGcKbqTghTL4oQiG6IUpOqFEC5bI4QD8PAoKd9j4XwAAAABJRU5ErkJggg==',
                         ],
                     ],
                 ],
@@ -3439,6 +3439,7 @@ class Filterable_Gallery extends Widget_Base
             $gallery_store[$counter]['maybe_link']   = $gallery['eael_fg_gallery_link'];
             $gallery_store[$counter]['link']         = $gallery['eael_fg_gallery_img_link'];
             $gallery_store[$counter]['toggle']       = $gallery['eael_fg_gallery_item_toggle'];
+            $gallery_store[$counter]['bg_image']        = sanitize_url( $gallery['eael_fg_item_background']['url'] );
             $gallery_store[$counter]['tag']          = $gallery['eael_fg_gallery_item_tag'];
             $gallery_store[$counter]['writing_mode'] = $gallery['eael_fg_gallery_item_tag_writing_mode'];
             $gallery_store[$counter]['tag_top']      = $gallery['eael_fg_gallery_item_tag_top'];
