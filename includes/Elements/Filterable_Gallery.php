@@ -1408,27 +1408,6 @@ class Filterable_Gallery extends Widget_Base
                 'selector' => '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item',
             ]
         );
-
-        $this->add_group_control(
-			\Elementor\Group_Control_Background::get_type(),
-			[
-				'name'      => 'eael_fg_item_background',
-				'types'     => [ 'classic', 'gradient' ],
-                'selector'  => '{{WRAPPER}} .eael-filterable-gallery-item-wrap .box__shadow',
-                'condition' => [ 'eael_fg_caption_style' => 'grid_flow_gallery' ],
-                'fields_options' => [
-                    'background' => [
-                        'default' => 'classic',
-                    ],
-                    'image' => [
-                        'default' => [
-                            'url' => 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAOklEQVQoU43MSwoAMAgD0eT+h7ZYaOlHo7N+DNHL2HAGgBWcyGcKbqTghTL4oQiG6IUpOqFEC5bI4QD8PAoKd9j4XwAAAABJRU5ErkJggg==',
-                        ],
-                    ],
-                ],
-			]
-		);
-        
         $this->end_controls_section();
         
         /**
@@ -1838,6 +1817,26 @@ class Filterable_Gallery extends Widget_Base
 		);
 
         $this->end_controls_section();
+
+        /**
+         * -------------------------------------------
+         * Grid Flow Gallery
+         * -------------------------------------------
+         */
+        $this->start_controls_section(
+			'eael_gril_flow_section',
+			[
+				'label'     => esc_html__( 'Grid Flow Style', 'essential-addons-for-elementor-lite' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_fg_caption_style' => [ 'grid_flow_gallery' ]
+                ],
+			]
+		);
+
+        do_action( 'eael_grid_flow_gallery_style', $this );
+
+        $this->end_controls_section();
         
         /**
          * -------------------------------------------
@@ -2052,8 +2051,6 @@ class Filterable_Gallery extends Widget_Base
                 'prefix_class' => 'eael-fg-card-content-align-',
             ]
         );
-
-        do_action( 'filterable_gallery_popover_style', $this );
         
         $this->end_controls_section();
         
@@ -3439,7 +3436,6 @@ class Filterable_Gallery extends Widget_Base
             $gallery_store[$counter]['maybe_link']   = $gallery['eael_fg_gallery_link'];
             $gallery_store[$counter]['link']         = $gallery['eael_fg_gallery_img_link'];
             $gallery_store[$counter]['toggle']       = $gallery['eael_fg_gallery_item_toggle'];
-            $gallery_store[$counter]['bg_image']        = sanitize_url( $gallery['eael_fg_item_background']['url'] );
             $gallery_store[$counter]['tag']          = $gallery['eael_fg_gallery_item_tag'];
             $gallery_store[$counter]['writing_mode'] = $gallery['eael_fg_gallery_item_tag_writing_mode'];
             $gallery_store[$counter]['tag_top']      = $gallery['eael_fg_gallery_item_tag_top'];
