@@ -1849,7 +1849,7 @@ class Filterable_Gallery extends Widget_Base
                 'label' => esc_html__('Item Card', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
-                    'eael_fg_caption_style' => ['card', 'layout_3', 'grid_flow_gallery']
+                    'eael_fg_caption_style' => ['card', 'layout_3']
                 ],
             ]
         );
@@ -1929,13 +1929,12 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label'     => esc_html__('Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
-                // 'default'   => '#F56A6A',
+                'default'   => '#F56A6A',
                 'selectors' => [
-                    '{{WRAPPER}} .gallery-item-caption-wrap.caption-style-card .fg-item-title,
-                    {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-grid-fg-box .eael-grid-fg-title' => 'color: {{VALUE}};'
+                    '{{WRAPPER}} .gallery-item-caption-wrap.caption-style-card .fg-item-title' => 'color: {{VALUE}};'
                 ],
                 'condition' => [
-                    'eael_fg_caption_style' => ['card', 'grid_flow_gallery']
+                    'eael_fg_caption_style' => ['card']
                 ],
             ]
         );
@@ -1964,7 +1963,6 @@ class Filterable_Gallery extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .gallery-item-caption-wrap.caption-style-card .fg-item-title:hover' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .fg-layout-3-item-content .fg-item-title:hover' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-grid-fg-box:hover .fg-title' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -1974,8 +1972,7 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'eael_fg_item_content_title_typography',
                 'selector' => '{{WRAPPER}} .gallery-item-caption-wrap.caption-style-card .fg-item-title, 
-                {{WRAPPER}} .fg-layout-3-item-content .fg-item-title, 
-                {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-grid-fg-box .eael-grid-fg-title .fg-title',
+                {{WRAPPER}} .fg-layout-3-item-content .fg-item-title',
             ]
         );
         
