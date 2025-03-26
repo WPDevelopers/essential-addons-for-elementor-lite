@@ -4,7 +4,7 @@ Tags: elementor, elements, elementor addon, elementor widget, woocommerce elemen
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 6.1.8
+Stable tag: 6.1.9
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -314,6 +314,16 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.1.9 - 24/03/2025 =
+
+- Improved: EA Testimonial | Controller Mechanism
+- Improved: EA Creative Button | Controller Mechanism
+- Improved: EA Call To Action | Controller Mechanism
+- Fixed: Elementor editor Overlapping issue
+- Fixed: EA Filterable Gallery | Load more Button functionality issue
+- Fixed: EA Filterable Gallery | Lightbox Slide number discrepancy issue
+- Few minor bug fixes & improvements
 
 = 6.1.8 - 21/03/2025 =
 
