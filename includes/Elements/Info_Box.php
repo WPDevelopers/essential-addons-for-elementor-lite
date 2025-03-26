@@ -422,7 +422,35 @@ class Info_Box extends Widget_Base
                 'devices' => [ 'desktop', 'tablet', 'mobile' ],
                 'prefix_class' => 'eael-infobox-content-align-%s-',
                 'condition' => [
-                    'eael_infobox_img_type' => ['img-on-top', 'img-on-left', 'img-on-right'],
+                    'eael_infobox_img_type' => ['img-on-top'],
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_infobox_content_alignment_left_right',
+            [
+                'label'       => esc_html__('Content Alignment', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::CHOOSE,
+                'label_block' => true,
+                'options'     => [
+                    'left' => [
+                        'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-text-align-left',
+                    ],
+                    'center' => [
+                        'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-text-align-center',
+                    ],
+                    'right' => [
+                        'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-text-align-right',
+                    ],
+                ],
+                'devices'      => [ 'desktop', 'tablet', 'mobile' ],
+                'prefix_class' => 'eael-infobox-content-align-%s-',
+                'condition'    => [
+                    'eael_infobox_img_type' => ['img-on-left', 'img-on-right'],
                 ],
             ]
         );
@@ -1471,7 +1499,7 @@ class Info_Box extends Widget_Base
         $this->add_group_control(
 			\Elementor\Group_Control_Background::get_type(),
 			[
-				'name' => 'eael_infobox_button_background_color',
+				'name' => 'eael_infobox_button_background',
 				'types' => [ 'classic', 'gradient' ],
                 'fields_options' => [
                     'background' => [
