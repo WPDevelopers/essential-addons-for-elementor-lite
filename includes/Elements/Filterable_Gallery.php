@@ -183,15 +183,31 @@ class Filterable_Gallery extends Widget_Base
             ]
         );
 
+        $image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/filterable-gallery-';
         $eael_fg_layout = apply_filters(
             'eael_fg_caption_styles',
             [
-                'styles'     => [
-                    'hoverer'           => __('Overlay', 'essential-addons-for-elementor-lite'),
-                    'card'              => __('Card', 'essential-addons-for-elementor-lite'),
-                    'layout_3'          => __('Search & Filter', 'essential-addons-for-elementor-lite'),
-                    'grid_flow_gallery' => __('Grid Flow Gallery (Pro)', 'essential-addons-for-elementor-lite'),
-                    'harmonic_gallery'  => __('Harmonic Gallery (Pro)', 'essential-addons-for-elementor-lite'),
+                'styles' => [
+                    'hoverer' => [
+                        'title' => esc_html__( 'Overlay', 'essential-addons-for-elementor-lite' ),
+						'image' => $image_path . 'overlay.png'
+                    ],
+                    'card' => [
+                        'title' => esc_html__( 'Card', 'essential-addons-for-elementor-lite' ),
+						'image' => $image_path . 'card.png'
+                    ],
+                    'layout_3' => [
+                        'title' => esc_html__( 'Search & Filter', 'essential-addons-for-elementor-lite' ),
+						'image' => $image_path . 'search.png'
+                    ],
+                    'grid_flow_gallery' => [
+                        'title' => esc_html__( 'Grid Flow Gallery (Pro)', 'essential-addons-for-elementor-lite' ),
+						'image' => $image_path . 'grid_flow_gallery.png'
+                    ],
+                    'harmonic_gallery' => [
+                        'title' => esc_html__( 'Harmonic Gallery (Pro)', 'essential-addons-for-elementor-lite' ),
+						'image' => $image_path . 'harmonic_gallery.png'
+                    ],
                 ],
                 'conditions' => ['grid_flow_gallery', 'harmonic_gallery'],
             ]
@@ -201,9 +217,11 @@ class Filterable_Gallery extends Widget_Base
             'eael_fg_caption_style',
             [
                 'label'       => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
-                'type'        => Controls_Manager::SELECT,
+                'type'        => Controls_Manager::CHOOSE,
                 'default'     => 'hoverer',
-                'label_block' => false,
+                'label_block' => true,
+                'toggle'      => false,
+                'image_choose'=> true,
                 'options'     => $eael_fg_layout['styles'],
             ]
         );
