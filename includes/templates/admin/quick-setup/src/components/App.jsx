@@ -19,6 +19,8 @@ function App() {
   const [showElements, setShowElements] = useState(0);
   const [emailAddress, setEmailAddress] = useState(is_tracking_allowed);
   const [disableSwitches, setDisableSwitches] = useState(false);
+  const [selectedPreference, setSelectedPreference] = useState("basic");
+  const [checkedElements, setCheckedElements] = useState({});
 
   const handleTabChange = (event) => {
     setActiveTab(event.currentTarget.getAttribute("data-next"));
@@ -28,6 +30,42 @@ function App() {
       document.getElementById("eael_user_email_address").value = 1;
       saveWPIns();
     }
+  };
+
+  const handlePreferenceChange = (event) => {
+    const newPreference = event.target.value;
+    setSelectedPreference(newPreference);
+
+    // Get all elements from the elements list
+    const elements_content = eaelQuickSetup?.elements_content;
+    const elements_list = elements_content?.elements_list;
+    
+    if (newPreference === "custom") {
+      // For custom, don't auto-check anything
+      setCheckedElements({});
+    } else {
+      // For basic or advance, check elements with matching preferences
+      const newCheckedState = {};
+      
+      Object.entries(elements_list).forEach(([category, categoryData]) => {
+        categoryData.elements.forEach(element => {
+          if (element.preferences === newPreference) {
+            newCheckedState[element.key] = true;
+          } else {
+            newCheckedState[element.key] = false;
+          }
+        });
+      });
+      
+      setCheckedElements(newCheckedState);
+    }
+  };
+
+  const handleElementCheck = (elementKey, isChecked) => {
+    setCheckedElements(prev => ({
+      ...prev,
+      [elementKey]: isChecked
+    }));
   };
 
   const saveWPIns = async (event) => {
@@ -205,6 +243,8 @@ function App() {
               activeTab={activeTab}
               handleTabChange={handleTabChange}
               isTrackingAllowed={is_tracking_allowed}
+              selectedPreference={selectedPreference}
+              handlePreferenceChange={handlePreferenceChange}
             />
           </div>
 
@@ -218,6 +258,9 @@ function App() {
               handleTabChange={handleTabChange}
               showElements={showElements}
               handleShowElements={handleShowElements}
+              selectedPreference={selectedPreference}
+              checkedElements={checkedElements}
+              handleElementCheck={handleElementCheck}
             />
           </div>
 
