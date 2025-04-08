@@ -1,4 +1,4 @@
-import { React, useState, useRef } from "react";
+import { React, useState, useRef, useEffect } from "react";
 import MenuItems from "./MenuItems.jsx";
 import GettingStartedContent from "./GettingStartedContent.jsx";
 import ConfigurationContent from "./ConfigurationContent.jsx";
@@ -21,6 +21,22 @@ function App() {
   const [disableSwitches, setDisableSwitches] = useState(false);
   const [selectedPreference, setSelectedPreference] = useState("basic");
   const [checkedElements, setCheckedElements] = useState({});
+
+  // Initialize checkedElements with basic elements on component mount
+  useEffect(() => {
+    const elements_content = eaelQuickSetup?.elements_content;
+    const elements_list = elements_content?.elements_list;
+    
+    if (elements_list) {
+      const initialCheckedState = {};
+      Object.entries(elements_list).forEach(([category, categoryData]) => {
+        categoryData.elements.forEach(element => {
+          initialCheckedState[element.key] = element.preferences === "basic";
+        });
+      });
+      setCheckedElements(initialCheckedState);
+    }
+  }, []); // Empty dependency array means this runs once on mount
 
   const handleTabChange = (event) => {
     setActiveTab(event.currentTarget.getAttribute("data-next"));
@@ -46,17 +62,11 @@ function App() {
     } else {
       // For basic or advance, check elements with matching preferences
       const newCheckedState = {};
-      
       Object.entries(elements_list).forEach(([category, categoryData]) => {
         categoryData.elements.forEach(element => {
-          if (element.preferences === newPreference) {
-            newCheckedState[element.key] = true;
-          } else {
-            newCheckedState[element.key] = false;
-          }
+          newCheckedState[element.key] = element.preferences === newPreference;
         });
       });
-      
       setCheckedElements(newCheckedState);
     }
   };
