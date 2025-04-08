@@ -2066,9 +2066,10 @@ class Formstack extends Widget_Base {
 
 	    $settings = $this->get_settings_for_display();
 
-	    if ( ! preg_match( '/https?:\/\/[a-zA-Z0-9.-]+\.formstack\.com\/[^\s"\']*/', $settings['eael_form_key'] ) ) {
+	    if ( ! preg_match( '/\bhttps?:\/\/[a-zA-Z0-9.-]+\.formstack\.com\/[^\s"\']*/', $settings['eael_form_key'], $matches ) ) {
 		    return;
 	    }
+	    $settings['eael_form_key'] = $matches[0];
 
 	    $key       = 'eael_formstack_' . md5( $settings['eael_form_key'] );
 	    $form_data = get_transient( $key );
