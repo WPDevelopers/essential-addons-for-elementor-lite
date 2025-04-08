@@ -1,6 +1,6 @@
 import { __ } from "@wordpress/i18n";
 
-function ElementsContent({ activeTab, handleTabChange, showElements, handleShowElements }) {
+function ElementsContent({ activeTab, handleTabChange, showElements, handleShowElements, handlePreferenceChange, preference }) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let elements_content = eaelQuickSetup?.elements_content;
   let elements_list = elements_content?.elements_list;
@@ -15,6 +15,8 @@ function ElementsContent({ activeTab, handleTabChange, showElements, handleShowE
     typeof elements_list === "object"
       ? Object.entries(elements_list)
       : elements_list;
+
+
 
   return (
     <>
@@ -77,8 +79,8 @@ function ElementsContent({ activeTab, handleTabChange, showElements, handleShowE
                   >
                     {item[1]?.elements.map((element) => {
                       const preferences = element.preferences || "";
-                      const checked = preferences === "basic" ? "checked" : "";
-
+                      const checked = preferences === preference ? "checked" : "";
+                      
                       return (
                         <div
                           className="eael-content-items eael-quick-setup-post-grid"
@@ -91,7 +93,8 @@ function ElementsContent({ activeTab, handleTabChange, showElements, handleShowE
                                 type="checkbox"
                                 data-preferences={preferences}
                                 name={`eael_element[${element.key}]`}
-                                defaultChecked={checked}
+                                checked={checked}
+                                {...(checked ? { onChange: handlePreferenceChange } : {})}
                               />
                               <span className="slider"></span>
                             </label>

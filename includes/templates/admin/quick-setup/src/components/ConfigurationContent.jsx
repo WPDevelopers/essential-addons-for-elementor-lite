@@ -1,6 +1,6 @@
 import { __ } from "@wordpress/i18n";
 
-function ConfigurationContent({activeTab, handleTabChange, isTrackingAllowed}) {
+function ConfigurationContent({activeTab, handleTabChange, isTrackingAllowed, handlePreferenceChange, preference}) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let configuration_content = eaelQuickSetup?.configuration_content;
   let ea_logo_src = configuration_content?.ea_logo_src;
@@ -39,6 +39,7 @@ function ConfigurationContent({activeTab, handleTabChange, isTrackingAllowed}) {
                 name="eael_preferences"
                 type="radio"
                 defaultChecked="checked"
+                onChange={handlePreferenceChange}
               />
 
               <span className="select--wrapper">
@@ -64,6 +65,7 @@ function ConfigurationContent({activeTab, handleTabChange, isTrackingAllowed}) {
                 className="eael_preferences eael-d-none"
                 name="eael_preferences"
                 type="radio"
+                onChange={handlePreferenceChange}
               />
               <span className="select--wrapper">
                 <span className="check-mark"></span>
@@ -83,6 +85,7 @@ function ConfigurationContent({activeTab, handleTabChange, isTrackingAllowed}) {
                 className="eael_preferences eael-d-none"
                 name="eael_preferences"
                 type="radio"
+                onChange={handlePreferenceChange}
               />
               <span className="select--wrapper">
                 <span className="check-mark"></span>

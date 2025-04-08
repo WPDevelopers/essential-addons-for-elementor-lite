@@ -15,6 +15,7 @@ function App() {
   let currentTabValue = ! is_tracking_allowed ? 'getting-started' : 'configuration';
 
   const [activeTab, setActiveTab] = useState(currentTabValue);
+  const [preference, setPreference] = useState('basic');
   const [modalTarget, setModalTarget] = useState("");
   const [showElements, setShowElements] = useState(0);
   const [emailAddress, setEmailAddress] = useState(is_tracking_allowed);
@@ -69,6 +70,11 @@ function App() {
   const handleShowElements = (event) => {
     setShowElements(1);
   };
+
+  const handlePreferenceChange = (event) => {
+    setPreference(event.target.value);
+  };
+
 
   const handleIntegrationSwitch = async (event, plugin, isTemplately = 0, setTemplatelyPlugin = '') => {
     setDisableSwitches(true);
@@ -205,6 +211,8 @@ function App() {
               activeTab={activeTab}
               handleTabChange={handleTabChange}
               isTrackingAllowed={is_tracking_allowed}
+              handlePreferenceChange={handlePreferenceChange}
+              preference={preference}
             />
           </div>
 
@@ -218,6 +226,8 @@ function App() {
               handleTabChange={handleTabChange}
               showElements={showElements}
               handleShowElements={handleShowElements}
+              handlePreferenceChange={handlePreferenceChange}
+              preference={preference}
             />
           </div>
 
