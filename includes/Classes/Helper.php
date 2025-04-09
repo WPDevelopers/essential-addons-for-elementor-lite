@@ -2,6 +2,8 @@
 
 namespace Essential_Addons_Elementor\Classes;
 
+use Elementor\Utils;
+
 if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
