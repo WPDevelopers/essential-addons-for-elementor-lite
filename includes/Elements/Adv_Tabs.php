@@ -623,7 +623,7 @@ class Adv_Tabs extends Widget_Base
             'eael_adv_tabs_tab_color',
             [
                 'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
+                'type' => Controls_Manager::HIDDEN,
                 'default' => '#f1f1f1',
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'background-color: {{VALUE}};',
@@ -690,7 +690,7 @@ class Adv_Tabs extends Widget_Base
             'eael_adv_tabs_tab_color_hover',
             [
                 'label' => esc_html__('Tab Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
+                'type' => Controls_Manager::HIDDEN,
                 'default' => '#333',
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover' => 'background-color: {{VALUE}};',
@@ -757,7 +757,7 @@ class Adv_Tabs extends Widget_Base
             'eael_adv_tabs_tab_color_active',
             [
                 'label' => esc_html__('Tab Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
+                'type' => Controls_Manager::HIDDEN,
                 'default' => '#444',
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active' => 'background-color: {{VALUE}};',
