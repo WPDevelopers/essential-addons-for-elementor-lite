@@ -3587,7 +3587,7 @@ class Woo_Product_List extends Widget_Base
 			    if ( current_theme_supports( 'wc-product-gallery-lightbox' ) ) {
 				    wp_enqueue_script( 'photoswipe-ui-default' );
 				    wp_enqueue_style( 'photoswipe-default-skin' );
-				    if ( has_action( 'wp_footer', 'woocommerce_photoswipe' ) === false ) {
+				    if ( ! Plugin::$instance->editor->is_edit_mode() && has_action( 'wp_footer', 'woocommerce_photoswipe' ) === false ) {
 					    add_action( 'wp_footer', 'woocommerce_photoswipe', 15 );
 				    }
 			    }

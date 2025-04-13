@@ -1657,7 +1657,7 @@ class Flip_Box extends Widget_Base
 
                     <?php
                     if ( $settings['eael_flipbox_front_content_type'] == 'template' ) {
-	                    if ( ! empty( $settings['eael_flipbox_front_templates'] ) ) {
+	                    if ( ! empty( $settings['eael_flipbox_front_templates'] ) && Helper::is_elementor_publish_template( $settings['eael_flipbox_front_templates'] ) ) {
 		                    // WPML Compatibility
 		                    if ( ! is_array( $settings['eael_flipbox_front_templates'] ) ) {
 			                    $settings['eael_flipbox_front_templates'] = apply_filters( 'wpml_object_id', $settings['eael_flipbox_front_templates'], 'wp_template', true );
@@ -1703,7 +1703,7 @@ class Flip_Box extends Widget_Base
 
                     <?php
                     if ( $settings['eael_flipbox_back_content_type'] == 'template' ) {
-	                    if ( ! empty( $settings['eael_flipbox_back_templates'] ) ) {
+	                    if ( ! empty( $settings['eael_flipbox_back_templates'] ) && Helper::is_elementor_publish_template( $settings['eael_flipbox_back_templates'] ) ) {
 		                    // WPML Compatibility
 		                    if ( ! is_array( $settings['eael_flipbox_back_templates'] ) ) {
 			                    $settings['eael_flipbox_back_templates'] = apply_filters( 'wpml_object_id', $settings['eael_flipbox_back_templates'], 'wp_template', true );

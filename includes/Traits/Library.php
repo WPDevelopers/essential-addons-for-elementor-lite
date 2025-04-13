@@ -227,12 +227,23 @@ trait Library
      *
      * @since v3.0.0
      */
-    public function safe_path($path)
-    {
-        $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
+	public function safe_path( $path ) {
+		// Check specifically for vip:// protocol
+		$protocol = 'vip://';
+		if ( strpos( $path, $protocol ) === 0 ) {
+			$path_part = substr( $path, strlen( $protocol ) );
+		} else {
+			$path_part = $path;
+			$protocol  = '';
+		}
 
-        return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
-    }
+		// Normalize the path separators in the path portion
+		$path_part = str_replace( [ '//', '\\\\' ], [ '/', '\\' ], $path_part );
+		$path_part = str_replace( [ '/', '\\' ], DIRECTORY_SEPARATOR, $path_part );
+
+		// Return the protocol (if it was vip://) plus normalized path
+		return $protocol . $path_part;
+	}
 
     /**
      * Generate safe url
