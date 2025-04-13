@@ -1711,7 +1711,6 @@ class Helper
         return Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
     }
 
-
     //Get revision id by post id
     public static function current_revision_id( $post_id = null ) {
 		$current_revision_id = $post_id ?? get_the_ID();
@@ -1722,5 +1721,11 @@ class Helper
 		}
 
 		return $current_revision_id;
+	}
+
+	public static function is_elementor_publish_template( $template_id ) {
+		$template_id = absint( $template_id );
+
+		return get_post_status( $template_id ) === 'publish' && get_post_type( $template_id ) === 'elementor_library';
 	}
 }
