@@ -101,6 +101,7 @@
 
         let button = $(this),
             action = button.data("action"),
+            promoType = button.data("promotype") ?? "",
             nonce = button.data("nonce");
 
         if ($.active && typeof action != "undefined") {
@@ -123,6 +124,7 @@
                     action: "wpdeveloper_install_plugin",
                     security: nonce,
                     slug: "essential-blocks",
+                    promotype: promoType
                 },
                 success: function (response) {
                     if (response.success) {
