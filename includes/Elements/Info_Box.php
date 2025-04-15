@@ -2012,7 +2012,7 @@ class Info_Box extends Widget_Base
                     }
                     $this->render_infobox_button();
                 } elseif ('template' === $settings['eael_infobox_text_type']) {
-                    if ( ! empty( $settings['eael_primary_templates'] ) ) {
+                    if ( ! empty( $settings['eael_primary_templates'] ) && Helper::is_elementor_publish_template( $settings['eael_primary_templates'] ) ) {
 	                    if ( Plugin::$instance->editor->is_edit_mode() ) {
 		                    echo '<div class="eael-infobox-template-wrapper">';
 	                    }
