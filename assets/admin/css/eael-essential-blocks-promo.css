@@ -246,3 +246,48 @@
         padding-right: 0;
     }
 }
+
+/* Banner Promo css */
+#eael-gb-eb-banner-promo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 24px;
+    background: #F0F6FC;
+}
+#eael-gb-eb-banner-promo .eael-gb-eb-banner-promo-left,
+#eael-gb-eb-banner-promo .eael-gb-eb-banner-promo-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+#eael-gb-eb-banner-promo .eael-gb-eb-banner-promo-content .eael-gb-eb-banner-promo-title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+#eael-gb-eb-banner-promo .eael-gb-eb-banner-promo-content .eael-gb-eb-banner-promo-description {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 400;
+}
+#eael-gb-eb-banner-promo .eael-gb-eb-banner-promo-right .eael-gb-eb-banner-promo-learn-more {
+    color: #1E2327;
+    font-size: 14px;
+    font-weight: 500;
+}
+#eael-gb-eb-banner-promo .eael-gb-eb-banner-promo-right .eael-gb-eb-banner-promo-get-block {
+    background: #1680D1;
+    text-decoration: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+#eael-gb-eb-banner-promo .eael-gb-eb-banner-promo-right .eael-gb-eb-banner-promo-close {
+    border: none;
+    line-height: 0;
+    cursor: pointer;
+    background: transparent;
+}

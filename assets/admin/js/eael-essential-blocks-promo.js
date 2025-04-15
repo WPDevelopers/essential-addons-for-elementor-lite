@@ -19,6 +19,10 @@
                 }
             }
         }
+        if( ! $('#eael-gb-eb-banner-promo').length ) {
+            $gb_editor_panel.find('.interface-interface-skeleton__content').prepend($('#eael-gb-eb-banner-promo-template').html());
+        }
+
     }
 
     $(document).on('click', '#eael-eb-popup-button', function () {
