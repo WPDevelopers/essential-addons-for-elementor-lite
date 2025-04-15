@@ -760,7 +760,7 @@ class Adv_Tabs extends Widget_Base
                 'type' => Controls_Manager::HIDDEN,
                 'default' => '#444',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul .active' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
