@@ -755,7 +755,7 @@ trait Helper
                 <div class="eael-gb-eb-banner-promo-right">
                     <a class="eael-gb-eb-banner-promo-learn-more" href="https://essential-blocks.com/"><?php _e( 'Learn More', 'essential-addons-for-elementor-lite' ) ?></a>
                     <button class="eael-gb-eb-banner-promo-get-block eael-gb-eb-install" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php _e( 'Get Essential Blocks', 'essential-addons-for-elementor-lite' ) ?></b>
-                    <button class="eael-gb-eb-banner-promo-close">
+                    <button class="eael-gb-eb-banner-promo-close" data-nonce="<?php echo esc_attr( $nonce ); ?>">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <g clip-path="url(#clip0_1_101)">
                                 <path d="M18 6L6 18" stroke="#7A7B80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

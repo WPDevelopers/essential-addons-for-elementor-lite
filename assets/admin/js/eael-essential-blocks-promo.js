@@ -73,6 +73,29 @@
                 console.log(err.responseText);
             },
         });
+    }).on('click', 'button.eael-gb-eb-banner-promo-close', function () {
+        let $this = $(this),
+            nonce = $this.data('nonce');
+
+        $.ajax({
+            url: "admin-ajax.php",
+            type: "POST",
+            data: {
+                action: "eael_eb_banner_promo_dismiss",
+                security: nonce,
+            },
+            success: function (response) {
+                if (response.success) {
+                    $('#eael-gb-eb-banner-promo-template').remove();
+                    $('#eael-gb-eb-banner-promo').remove();
+                } else {
+                    console.log(response.data);
+                }
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            },
+        });
     }).on('click', 'button.eael-gb-eb-install', function (ev) {
         ev.preventDefault();
 
