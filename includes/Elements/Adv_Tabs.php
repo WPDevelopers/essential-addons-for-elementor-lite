@@ -839,7 +839,7 @@ class Adv_Tabs extends Widget_Base
             'adv_tabs_content_bg_color',
             [
                 'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
+                'type' => Controls_Manager::HIDDEN,
                 'default' => '',
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-content > div' => 'background-color: {{VALUE}};',
@@ -851,7 +851,7 @@ class Adv_Tabs extends Widget_Base
             [
                 'name' => 'adv_tabs_content_bgtype',
                 'types' => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-content > div',
+                'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-content > div.eael-tab-content-item',
             ]
         );
         $this->add_control(
