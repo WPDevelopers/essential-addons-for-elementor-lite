@@ -635,7 +635,7 @@ class Adv_Tabs extends Widget_Base
             [
                 'name' => 'eael_adv_tabs_tab_bgtype',
                 'types' => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li',
+                'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.eael-tab-nav-item',
             ]
         );
         $this->add_control(
@@ -702,7 +702,7 @@ class Adv_Tabs extends Widget_Base
             [
                 'name' => 'eael_adv_tabs_tab_bgtype_hover',
                 'types' => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover',
+                'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.eael-tab-nav-item:hover',
             ]
         );
         $this->add_control(
