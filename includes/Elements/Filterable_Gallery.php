@@ -1855,7 +1855,27 @@ class Filterable_Gallery extends Widget_Base
         do_action( 'eael_grid_flow_gallery_style', $this );
 
         $this->end_controls_section();
-        
+
+        /**
+         * -------------------------------------------
+         * Harmonic Gallery Style
+         * -------------------------------------------
+         */
+        $this->start_controls_section(
+			'eael_harmonic_style_section',
+			[
+				'label'     => esc_html__( 'Harmonic Style', 'essential-addons-for-elementor-lite' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_fg_caption_style' => [ 'harmonic_gallery' ]
+                ],
+			]
+		);
+
+        do_action( 'eael_harmonic_gallery_style', $this );
+
+        $this->end_controls_section();
+
         /**
          * -------------------------------------------
          * Tab Style (Card Style)
