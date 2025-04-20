@@ -175,7 +175,8 @@ class Filterable_Gallery extends Widget_Base
                     'eael_fg_grid_style' => 'grid',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item .gallery-item-thumbnail-wrap' => 'height: {{VALUE}}px;',
+                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item .gallery-item-thumbnail-wrap, 
+                    {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-hg-grid__cell-img .grid__cell-img-inner' => 'height: {{VALUE}}px;',
                 ],
                 'ai' => [
 					'active' => false,
