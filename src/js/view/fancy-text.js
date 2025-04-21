@@ -7,7 +7,8 @@ var FancyText = function ($scope, $) {
         speed: $fancyText.data("fancy-text-speed"),
         delay: $fancyText.data("fancy-text-delay"),
         showCursor: $fancyText.data("fancy-text-cursor") === "yes",
-        loop: $fancyText.data("fancy-text-loop") === "yes"
+        loop: $fancyText.data("fancy-text-loop") === "yes",
+        action: $fancyText.data("fancy-text-action")
     };
 
     function initTyped() {
@@ -38,7 +39,7 @@ var FancyText = function ($scope, $) {
     }
 
     if (config.transitionType === "typing") {
-        if (config.loop) {
+        if ( 'page_load' === config.action ) {
             initTyped();
         } else {
             $(window).on('scroll', function() {
@@ -49,7 +50,7 @@ var FancyText = function ($scope, $) {
             });
         }
     } else {
-        if (config.loop) {
+        if ( 'page_load' === config.action ) {
             initMorphext();
         } else {
             $(window).on('scroll', function() {
