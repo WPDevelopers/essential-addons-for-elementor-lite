@@ -236,7 +236,7 @@ class Fancy_Text extends Widget_Base {
 		$this->add_control(
 			'eael_fancy_text_animation_start_on',
 			[
-				'label'   => esc_html__( 'Animation Start', 'essential-addons-for-elementor-lite' ),
+				'label'   => esc_html__( 'Animation Starts', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => [
 					'page_load'      => esc_html__( 'On Page Load', 'essential-addons-for-elementor-lite'),
