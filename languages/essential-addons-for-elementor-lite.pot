@@ -205,27 +205,27 @@ msgstr ""
 msgid "Argument should not be empty."
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:152, ../includes/Classes/WPDeveloper_Plugin_Installer.php:170, ../includes/Classes/WPDeveloper_Plugin_Installer.php:189, ../includes/Classes/WPDeveloper_Plugin_Installer.php:210, ../includes/Classes/WPDeveloper_Setup_Wizard.php:392, ../includes/Classes/WPDeveloper_Setup_Wizard.php:416, ../includes/Classes/WPDeveloper_Setup_Wizard.php:437, ../includes/Traits/Ajax_Handler.php:937, ../includes/Traits/Ajax_Handler.php:1121, ../includes/Traits/Ajax_Handler.php:1151, ../includes/Traits/Ajax_Handler.php:1168, ../includes/Traits/Helper.php:426
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:152, ../includes/Classes/WPDeveloper_Plugin_Installer.php:174, ../includes/Classes/WPDeveloper_Plugin_Installer.php:193, ../includes/Classes/WPDeveloper_Plugin_Installer.php:214, ../includes/Classes/WPDeveloper_Setup_Wizard.php:392, ../includes/Classes/WPDeveloper_Setup_Wizard.php:416, ../includes/Classes/WPDeveloper_Setup_Wizard.php:437, ../includes/Traits/Ajax_Handler.php:937, ../includes/Traits/Ajax_Handler.php:1121, ../includes/Traits/Ajax_Handler.php:1151, ../includes/Traits/Ajax_Handler.php:1168, ../includes/Traits/Helper.php:426
 msgid "you are not allowed to do this action"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:162
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:166
 msgid "Plugin is installed successfully!"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:180
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:184
 msgid "Plugin is updated successfully!"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:200
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:204
 msgid "Plugin couldn't be activated."
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:202
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:206
 msgid "Plugin is activated successfully!"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:216
+#: ../includes/Classes/WPDeveloper_Plugin_Installer.php:220
 msgid "Plugin is deactivated successfully!"
 msgstr ""
 
@@ -10606,7 +10606,7 @@ msgstr ""
 msgid "Upgrade to PRO"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:215, ../includes/Traits/Admin.php:1913, ../includes/Traits/Admin.php:2048, ../includes/Traits/Helper.php:615
+#: ../includes/Traits/Admin.php:215, ../includes/Traits/Admin.php:1913, ../includes/Traits/Admin.php:2048, ../includes/Traits/Helper.php:615, ../includes/Traits/Helper.php:757
 msgid "Activate"
 msgstr ""
 
@@ -11138,7 +11138,7 @@ msgstr ""
 msgid "For more information, <a href=\"https://essential-blocks.com/demo/\" target=\"_blank\">check out the demo here</a>."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:2223, ../includes/Traits/Admin.php:2234
+#: ../includes/Traits/Admin.php:2223, ../includes/Traits/Admin.php:2234, ../includes/Traits/Admin.php:2245
 msgid "You are not allowed to do this action"
 msgstr ""
 
@@ -11632,6 +11632,22 @@ msgstr ""
 
 #: ../includes/Traits/Helper.php:716
 msgid "Want to get started with Essential Blocks now? Check out %scomplete guides for each blocks%s to learn more about this ultimate block library for Gutenberg."
+msgstr ""
+
+#: ../includes/Traits/Helper.php:751
+msgid "Want To Get All Exclusive Gutenberg Blocks For Free?"
+msgstr ""
+
+#: ../includes/Traits/Helper.php:752
+msgid "If you want to enrich your Gutenberg block library with the latest designs and functionalities, Essential Blocks can be your best companion."
+msgstr ""
+
+#: ../includes/Traits/Helper.php:756
+msgid "Learn More"
+msgstr ""
+
+#: ../includes/Traits/Helper.php:757
+msgid "Get Essential Blocks"
 msgstr ""
 
 #: ../includes/Traits/Login_Registration.php:145, ../includes/Traits/Login_Registration.php:424
