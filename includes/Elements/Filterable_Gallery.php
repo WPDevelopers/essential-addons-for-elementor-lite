@@ -176,6 +176,7 @@ class Filterable_Gallery extends Widget_Base
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item .gallery-item-thumbnail-wrap, 
+                    {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-grid-fg-box .eael-grid-fg-img,
                     {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-hg-grid__cell-img .grid__cell-img-inner' => 'height: {{VALUE}}px;',
                 ],
                 'ai' => [
