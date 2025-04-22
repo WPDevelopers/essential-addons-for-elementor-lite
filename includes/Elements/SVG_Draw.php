@@ -243,7 +243,6 @@ class SVG_Draw extends Widget_Base {
 				'options' => [
 					'none'   => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
 					'after'  => esc_html__( 'Fill After Draw', 'essential-addons-for-elementor-lite' ),
-					'before' => esc_html__( 'Fill Before Draw', 'essential-addons-for-elementor-lite' ),
 				],
 			]
 		);

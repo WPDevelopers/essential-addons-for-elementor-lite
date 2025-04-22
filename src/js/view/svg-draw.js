@@ -4,17 +4,37 @@ var SVGDraw = function ($scope, $) {
         svg_icon = $('svg', wrapper),
         settings = wrapper.data('settings'),
         transition = Number( settings.transition ),
-        is_repeat = settings.loop,
-        pauseOnHover = settings.pause,
-        direction = settings.direction,
         offset = '' !== settings.offset ? settings.offset : 0,
-        draw_interval,
-        addOrSubtract,
-        stepCount = 0,
         $doc = $(document),
         $win = $(window),
         lines = $('path, circle, rect, polygon', svg_icon),
         max = $doc.height() - $win.height();
+
+        function dashArrayReset() {
+            let largestDashArray = 0, largestPath = '';
+            $.each( lines, function (index, line) {
+                let dashArray = $(line).css('stroke-dasharray');
+                let dashArrayValue = parseInt(dashArray);
+                if (dashArrayValue > largestDashArray) {
+                    largestDashArray = dashArrayValue;
+                    largestPath = $(line);
+                }
+            });
+    
+            if ( largestDashArray < 3999 && largestDashArray / 2 > 600 ) {
+                let offset = largestPath.css('stroke-dashoffset');
+                offset = parseInt(offset);
+    
+                if ( 'after' === settings.fill ) {
+                    if (offset < largestDashArray / 2) {
+                        wrapper.addClass('fill-svg');
+                    } else if ( wrapper.hasClass('fill-svg') ) {
+                        wrapper.removeClass('fill-svg');
+                    }
+                }
+                
+            }
+        }
 
         function drawSVGLine (){
             $.each( lines, function (index, line) { 
@@ -80,6 +100,19 @@ var SVGDraw = function ($scope, $) {
                 drawSVGLine( lines, settings );
                 wrapper.addClass('draw-initialized');
             } 
+        });
+    } else if (wrapper.hasClass('page-scroll')) {
+        $win.on('scroll', function () {
+            let step = (($win.scrollTop() - offset) / max);
+            let offsetTop = svg_icon.offset().top,
+                viewPort = $win.innerHeight(),
+                offsetBottom = offsetTop - viewPort;
+
+            if (offsetTop > $win.scrollTop() && offsetBottom < $win.scrollTop()) {
+                step = (($win.scrollTop() - offset) - offsetBottom) / viewPort;
+                svg_icon.drawsvg('progress', step);
+            }
+            dashArrayReset();
         });
     }
 }
