@@ -4,7 +4,7 @@ Tags: elementor, elements, elementor addon, elementor widget, woocommerce elemen
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.1.10
+Stable tag: 6.1.11
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -314,6 +314,13 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.1.11 - 22/04/2025 =
+
+- Improved: EA Info Box | Issues & Enhancements – Phase 2
+- Fixed: EA Quick Setup Wizard | Basic and Advanced settings not working
+- Fixed: EA Event Calendar | Language translation issue
+- Few minor bug fixes & improvements
 
 = 6.1.10 - 10/04/2025 =
 

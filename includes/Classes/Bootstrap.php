@@ -224,6 +224,11 @@ class Bootstrap
 		    add_action( 'wp_ajax_eael_eb_optin_notice_dismiss', [ $this, 'eael_eb_optin_notice_dismiss' ] );
 		    add_action( 'wp_ajax_eael_gb_eb_popup_dismiss', [ $this, 'eael_gb_eb_popup_dismiss' ] );
 	    }
+	    //Essential Blocks Banner Promo
+	    if ( ! class_exists( 'Classic_Editor' ) && ! class_exists( 'EssentialBlocks' ) && ! get_transient( 'eael_eb_banner_promo_hide' ) ) {
+		    add_action( 'enqueue_block_editor_assets', [ $this, 'essential_blocks_banner_promo_enqueue_scripts' ] );
+		    add_action( 'wp_ajax_eael_eb_banner_promo_dismiss', [ $this, 'eael_eb_banner_promo_dismiss' ] );
+	    }
 
 	    if( class_exists( 'woocommerce' ) ) {
 		    // quick view

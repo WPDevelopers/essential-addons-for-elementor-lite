@@ -1,6 +1,14 @@
 import { __ } from "@wordpress/i18n";
 
-function ElementsContent({ activeTab, handleTabChange, showElements, handleShowElements }) {
+function ElementsContent({ 
+  activeTab, 
+  handleTabChange, 
+  showElements, 
+  handleShowElements, 
+  selectedPreference,
+  checkedElements,
+  handleElementCheck 
+}) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let elements_content = eaelQuickSetup?.elements_content;
   let elements_list = elements_content?.elements_list;
@@ -77,7 +85,7 @@ function ElementsContent({ activeTab, handleTabChange, showElements, handleShowE
                   >
                     {item[1]?.elements.map((element) => {
                       const preferences = element.preferences || "";
-                      const checked = preferences === "basic" ? "checked" : "";
+                      const isChecked = checkedElements[element.key] || false;
 
                       return (
                         <div
@@ -91,7 +99,8 @@ function ElementsContent({ activeTab, handleTabChange, showElements, handleShowE
                                 type="checkbox"
                                 data-preferences={preferences}
                                 name={`eael_element[${element.key}]`}
-                                defaultChecked={checked}
+                                checked={isChecked}
+                                onChange={(e) => handleElementCheck(element.key, e.target.checked)}
                               />
                               <span className="slider"></span>
                             </label>
