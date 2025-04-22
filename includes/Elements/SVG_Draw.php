@@ -256,9 +256,6 @@ class SVG_Draw extends Widget_Base {
 				'type'        => Controls_Manager::NUMBER,
 				'default'     => 1,
 				'min'         => 0,
-				'selectors'   => [
-					'{{WRAPPER}} .fill-svg svg path' => 'animation-duration: {{SIZE}}s;',
-				],
 				'description' => esc_html__( 'Duration on SVG fills (in seconds)', 'essential-addons-for-elementor-lite' )
 			]
 		);
@@ -354,7 +351,7 @@ class SVG_Draw extends Widget_Base {
 				'condition'   => [
 					'eael_svg_animation_on!' => [ 'page-scroll' ],
 				],
-				'description' => esc_html__( 'Duration on SVG draws (in ms)', 'essential-addons-for-elementor-lite' )
+				'description' => esc_html__( 'Duration on SVG draws (in seconds)', 'essential-addons-for-elementor-lite' )
 			]
 		);
 
@@ -414,13 +411,13 @@ class SVG_Draw extends Widget_Base {
 			[
 				'type'      => Controls_Manager::COLOR,
 				'label'     => esc_html__( 'Fill Color', 'essential-addons-for-elementor-lite' ),
-				'selectors' => [
-					'{{WRAPPER}} .fill-svg svg path'                            => 'fill:{{VALUE}};',
-					'{{WRAPPER}} .eael-svg-draw-container.fill-svg svg path'    => 'fill:{{VALUE}};',
-					'{{WRAPPER}} .eael-svg-draw-container.fill-svg svg circle'  => 'fill:{{VALUE}};',
-					'{{WRAPPER}} .eael-svg-draw-container.fill-svg svg rect'    => 'fill:{{VALUE}};',
-					'{{WRAPPER}} .eael-svg-draw-container.fill-svg svg polygon' => 'fill:{{VALUE}};'
-				],
+				// 'selectors' => [
+				// 	'{{WRAPPER}} .fill-svg svg path'                            => 'fill:{{VALUE}};',
+				// 	'{{WRAPPER}} .eael-svg-draw-container.fill-svg svg path'    => 'fill:{{VALUE}};',
+				// 	'{{WRAPPER}} .eael-svg-draw-container.fill-svg svg circle'  => 'fill:{{VALUE}};',
+				// 	'{{WRAPPER}} .eael-svg-draw-container.fill-svg svg rect'    => 'fill:{{VALUE}};',
+				// 	'{{WRAPPER}} .eael-svg-draw-container.fill-svg svg polygon' => 'fill:{{VALUE}};'
+				// ],
 				'default'   => '#D8C2F3',
 				'condition' => [
 					'eael_svg_fill!' => 'none'
@@ -505,13 +502,15 @@ class SVG_Draw extends Widget_Base {
 		] );
 
 		$svg_options = [
-			'fill'         => $settings['eael_svg_fill'],
+			'fill_type'    => $settings['eael_svg_fill'],
+			'fill_color'   => $settings['eael_svg_fill_color'],
 			'speed'        => esc_attr( $settings['eael_svg_draw_speed'] ),
 			'offset'       => esc_attr( $settings['eael_svg_draw_offset'] ),
 			'loop'         => $settings['eael_svg_loop'] ? esc_attr( $settings['eael_svg_loop'] ) : 'no',
 			'pause'        => $settings['eael_svg_pause_on_hover'] ? esc_attr( $settings['eael_svg_pause_on_hover'] ) : 'no',
 			'direction'    => esc_attr( $settings['eael_svg_animation_direction'] ),
-			'excludeStyle' => esc_attr( $settings['eael_svg_exclude_style'] )
+			'excludeStyle' => esc_attr( $settings['eael_svg_exclude_style'] ),
+			'transition'   => esc_attr( $settings['eael_svg_fill_transition'] )
 		];
 
 		$this->add_render_attribute( 'eael-svg-drow-wrapper', [

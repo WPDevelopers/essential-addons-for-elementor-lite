@@ -1,12 +1,13 @@
+
 var SVGDraw = function ($scope, $) {
     let wrapper = $('.eael-svg-draw-container', $scope),
         svg_icon = $('svg', wrapper),
         settings = wrapper.data('settings'),
-        speed = settings.speed,
+        transition = Number( settings.transition ),
         is_repeat = settings.loop,
         pauseOnHover = settings.pause,
         direction = settings.direction,
-        offset = settings.offset,
+        offset = '' !== settings.offset ? settings.offset : 0,
         draw_interval,
         addOrSubtract,
         stepCount = 0,
@@ -15,113 +16,62 @@ var SVGDraw = function ($scope, $) {
         lines = $('path, circle, rect, polygon', svg_icon),
         max = $doc.height() - $win.height();
 
-    if (settings.excludeStyle === 'yes') {
-        lines.attr('style', '');
-    }
-
-    function dashArrayReset() {
-        let largestDashArray = 0, largestPath = '';
-        $('path', svg_icon).each(function () {
-            let dashArray = $(this).css('stroke-dasharray');
-            let dashArrayValue = parseInt(dashArray);
-            if (dashArrayValue > largestDashArray) {
-                largestDashArray = dashArrayValue;
-                largestPath = $(this);
-            }
-        });
-
-        if ( largestDashArray < 3999 && largestDashArray / 2 > 600 ) {
-            let offset = largestPath.css('stroke-dashoffset');
-            offset = parseInt(offset);
-
-            if ( 'after' === settings.fill ) {
-                if (offset < largestDashArray / 2) {
-                    wrapper.addClass('fill-svg');
-                } else if ( wrapper.hasClass('fill-svg') ) {
-                    wrapper.removeClass('fill-svg');
-                }
-            } else if ( 'before' === settings.fill ) {
-                if( 100 < offset ){
-                    wrapper.addClass('fill-svg');
-                } else if ( 100 > offset ) {
-                    wrapper.removeClass('fill-svg');
-                }
+        function drawSVGLine (){
+            $.each( lines, function (index, line) { 
+                const length = line.getTotalLength();
+                line.style.strokeDasharray = length;
+                line.style.strokeDashoffset = length;
+            });
+        
+            let loopConfig = {};
+            if ( 'yes' === settings.loop ) {
+                loopConfig = {
+                    repeat: -1,
+                    yoyo: "reverse" === settings.direction,
+                    repeatDelay:  transition
+                };
             }
             
-        }
-    }
-
-    function stepManager() {
-        dashArrayReset();
-        if (addOrSubtract) {
-            stepCount += 0.01;
-            if (stepCount >= 1) {
-                addOrSubtract = false;
-                if (settings.fill === 'fill-svg') {
-                    wrapper.removeClass('fillout-svg').addClass(settings.fill);
-                }
-            }
-        } else if (direction === 'restart') {
-            stepCount = 0;
-            addOrSubtract = true;
-        } else {
-            stepCount -= 0.01;
-            if (stepCount <= 0) {
-                addOrSubtract = true;
-            }
-        }
-
-        return stepCount;
-    }
-
-    if (svg_icon.parent().hasClass('page-scroll')) {
-        $win.on('scroll', function () {
-            let step = (($win.scrollTop() - offset) / max);
-            let offsetTop = svg_icon.offset().top,
-                viewPort = $win.innerHeight(),
-                offsetBottom = offsetTop - viewPort;
-
-            if (offsetTop > $win.scrollTop() && offsetBottom < $win.scrollTop()) {
-                step = (($win.scrollTop() - offset) - offsetBottom) / viewPort;
-                svg_icon.drawsvg('progress', step);
-            }
-            dashArrayReset();
-        });
-    } else if (svg_icon.parent().hasClass('page-load')) {
-        let lastSvg = '';
-        let drawSvg = setInterval(function () {
-            let currentSvg = svg_icon.html();
-            svg_icon.drawsvg('progress', stepManager());
-            if (is_repeat === 'no'){
-                stepManager();
-            }
-            if (currentSvg === lastSvg && is_repeat === 'no') {
-                wrapper.addClass(settings.fill);
-                clearInterval(drawSvg);
-            }
-            lastSvg = currentSvg;
-        }, speed);
-    } else if (svg_icon.parent().hasClass('hover')) {
-        let lastSvg = '';
-        svg_icon.hover(function () {
-            if (pauseOnHover === 'yes' || typeof draw_interval === 'undefined') {
-                draw_interval = window.setInterval(function () {
-                    let currentSvg = svg_icon.html();
-                    svg_icon.drawsvg('progress', stepManager());
-
-                    if (currentSvg === lastSvg && is_repeat === 'no') {
-                        wrapper.addClass(settings.fill);
-                        window.clearInterval(draw_interval);
+            let timeline = gsap.timeline(loopConfig);
+        
+            timeline.to(lines, {
+                strokeDashoffset: offset,
+                duration: settings.speed,
+                onComplete: function() {
+                    if( 'after' === settings.fill_type && '' !== settings.fill_color ) {
+                        gsap.to(lines, {
+                            fill: settings.fill_color,
+                            duration: 1
+                        });
                     }
+                },
+                onReverseComplete: function() {
+                    if( 'after' === settings.fill_type && '' !== settings.fill_color ) {
+                        gsap.to(lines, {
+                            fill: 'none',
+                            duration: 1
+                        });
+                    }
+                },
+                onStart: function () {
+                    if( 'after' === settings.fill_type && '' !== settings.fill_color && "restart" === settings.direction ) {
+                        gsap.to(lines, {
+                            fill: 'none',
+                            duration: 1
+                        });
+                    }
+                }
+            });
 
-                    lastSvg = currentSvg;
-                }, speed);
-            }
-        }, function () {
-            if (pauseOnHover === 'yes') {
-                window.clearInterval(draw_interval);
-            }
-        });
+            svg_icon.hover(function(){
+                timeline.pause();
+            }, function(){
+                timeline.play();
+            });
+        }
+
+    if( wrapper.hasClass( 'page-load' ) ) {
+        drawSVGLine( lines, settings );
     }
 }
 jQuery(window).on("elementor/frontend/init", function () {
