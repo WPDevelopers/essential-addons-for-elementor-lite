@@ -1241,7 +1241,7 @@ $config = [
                 ],
                 'js' => [
                     [
-                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/drawsvg/drawsvg.min.js',
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/gsap/gsap.min.js',
                         'type' => 'lib',
                         'context' => 'view',
                     ],

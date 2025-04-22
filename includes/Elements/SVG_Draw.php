@@ -270,7 +270,7 @@ class SVG_Draw extends Widget_Base {
 					'none'        => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
 					'page-load'   => esc_html__( 'On Page Load', 'essential-addons-for-elementor-lite' ),
 					'page-scroll' => esc_html__( 'On Page Scroll', 'essential-addons-for-elementor-lite' ),
-					'hover'       => esc_html__( 'Mouse Hover', 'essential-addons-for-elementor-lite' ),
+					'mouse-hover' => esc_html__( 'Mouse Hover', 'essential-addons-for-elementor-lite' ),
 				],
 				'separator' => 'before'
 			]
@@ -301,7 +301,7 @@ class SVG_Draw extends Widget_Base {
 				'label_off'   => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
 				'default'     => 'yes',
 				'condition'   => [
-					'eael_svg_animation_on' => 'hover',
+					'eael_svg_animation_on' => 'mouse-hover',
 				],
 				'description' => esc_html__( 'Pause SVG drawing on mouse leave', 'essential-addons-for-elementor-lite' )
 			]

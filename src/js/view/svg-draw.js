@@ -63,15 +63,24 @@ var SVGDraw = function ($scope, $) {
                 }
             });
 
-            svg_icon.hover(function(){
-                timeline.pause();
-            }, function(){
-                timeline.play();
-            });
+            if( 'yes' === settings.pause ) {
+                svg_icon.hover(function(){
+                    timeline.pause();
+                }, function(){
+                    timeline.play();
+                });
+            }
         }
 
     if( wrapper.hasClass( 'page-load' ) ) {
         drawSVGLine( lines, settings );
+    } else if ( wrapper.hasClass( 'mouse-hover' ) ) {
+        svg_icon.hover( function(){
+            if ( ! wrapper.hasClass('draw-initialized') ) {
+                drawSVGLine( lines, settings );
+                wrapper.addClass('draw-initialized');
+            } 
+        });
     }
 }
 jQuery(window).on("elementor/frontend/init", function () {
