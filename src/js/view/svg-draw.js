@@ -37,8 +37,12 @@ var SVGDraw = function ($scope, $) {
         }
 
         function drawSVGLine (){
+            console.log('lines', lines);
+            
             $.each( lines, function (index, line) { 
-                const length = line.getTotalLength();
+                const length = line.getTotalLength() * ( settings.stroke_length * .01 );
+                console.log('leng', length, settings.stroke_length);
+                
                 line.style.strokeDasharray = length;
                 line.style.strokeDashoffset = length;
             });
@@ -63,7 +67,18 @@ var SVGDraw = function ($scope, $) {
                             fill: settings.fill_color,
                             duration: 1
                         });
+                        setTimeout(function(){
+                            gsap.to(lines, {
+                                fill: settings.fill_color + '00',
+                                duration: 2
+                            });
+                        }, transition * 1000 );
+
                     }
+                },
+                onRepeat: function(){
+                    console.log('repeat started');
+                    
                 },
                 onReverseComplete: function() {
                     if( 'after' === settings.fill_type && '' !== settings.fill_color ) {

@@ -354,6 +354,26 @@ class SVG_Draw extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'eael_svg_stroke_dash_adjustment',
+			[
+				'label' => esc_html__( 'Path Length', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ '%' ],
+				'range' => [
+					'%' => [
+						'min' => 10,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => '%',
+					'size' => 100,
+				],
+				'description' => esc_html__( 'You can control how much of the shape gets drawn by specifying a percentage of its total length.', 'essential-addons-for-elementor-lite' )
+			]
+		);
+
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -509,7 +529,8 @@ class SVG_Draw extends Widget_Base {
 			'pause'        => $settings['eael_svg_pause_on_hover'] ? esc_attr( $settings['eael_svg_pause_on_hover'] ) : 'no',
 			'direction'    => esc_attr( $settings['eael_svg_animation_direction'] ),
 			'excludeStyle' => esc_attr( $settings['eael_svg_exclude_style'] ),
-			'transition'   => esc_attr( $settings['eael_svg_fill_transition'] )
+			'transition'   => esc_attr( $settings['eael_svg_fill_transition'] ),
+			'stroke_length' => esc_attr( $settings['eael_svg_stroke_dash_adjustment']['size'] )
 		];
 
 		$this->add_render_attribute( 'eael-svg-drow-wrapper', [
