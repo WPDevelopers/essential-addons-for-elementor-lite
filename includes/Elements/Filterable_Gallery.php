@@ -3441,20 +3441,20 @@ class Filterable_Gallery extends Widget_Base
             $gallery_store[$counter]['image_id']     = $gallery['eael_fg_gallery_img']['id'];
             $gallery_store[$counter]['maybe_link']   = $gallery['eael_fg_gallery_link'];
             $gallery_store[$counter]['link']         = $gallery['eael_fg_gallery_img_link'];
-            $gallery_store[$counter]['toggle']       = $gallery['eael_fg_gallery_item_toggle'];
-            $gallery_store[$counter]['tag']          = $gallery['eael_fg_gallery_item_tag'];
-            $gallery_store[$counter]['writing_mode'] = $gallery['eael_fg_gallery_item_tag_writing_mode'];
-            $gallery_store[$counter]['tag_top']      = $gallery['eael_fg_gallery_item_tag_top'];
-            $gallery_store[$counter]['tag_right']    = $gallery['eael_fg_gallery_item_tag_right'];
-            $gallery_store[$counter]['key_top']      = $gallery['eael_fg_gallery_item_key_top'];
-            $gallery_store[$counter]['key_right']    = $gallery['eael_fg_gallery_item_key_right'];
-            $gallery_store[$counter]['icon_top']     = $gallery['eael_fg_gallery_item_tag_icon_top'];
-            $gallery_store[$counter]['icon_right']   = $gallery['eael_fg_gallery_item_tag_icon_right'];
-            $gallery_store[$counter]['key_word']     = $gallery['eael_fg_gallery_item_key_word'];
-            $gallery_store[$counter]['tag_icon']     = $gallery['eael_fg_gallery_item_tag_icon'];
+            $gallery_store[$counter]['toggle']       = isset( $gallery['eael_fg_gallery_item_toggle'] ) ? $gallery['eael_fg_gallery_item_toggle'] : '';
+            $gallery_store[$counter]['tag']          = isset( $gallery['eael_fg_gallery_item_tag'] ) ? $gallery['eael_fg_gallery_item_tag'] : '';
+            $gallery_store[$counter]['writing_mode'] = isset( $gallery['eael_fg_gallery_item_tag_writing_mode'] ) ? $gallery['eael_fg_gallery_item_tag_writing_mode'] : '';
+            $gallery_store[$counter]['tag_top']      = isset( $gallery['eael_fg_gallery_item_tag_top'] ) ? $gallery['eael_fg_gallery_item_tag_top'] : '';
+            $gallery_store[$counter]['tag_right']    = isset( $gallery['eael_fg_gallery_item_tag_right'] ) ? $gallery['eael_fg_gallery_item_tag_right'] : '';
+            $gallery_store[$counter]['key_top']      = isset( $gallery['eael_fg_gallery_item_key_top'] ) ? $gallery['eael_fg_gallery_item_key_top'] : '';
+            $gallery_store[$counter]['key_right']    = isset( $gallery['eael_fg_gallery_item_key_right'] ) ? $gallery['eael_fg_gallery_item_key_right'] : '';
+            $gallery_store[$counter]['icon_top']     = isset( $gallery['eael_fg_gallery_item_tag_icon_top'] ) ? $gallery['eael_fg_gallery_item_tag_icon_top'] : '';
+            $gallery_store[$counter]['icon_right']   = isset( $gallery['eael_fg_gallery_item_tag_icon_right'] ) ? $gallery['eael_fg_gallery_item_tag_icon_right'] : '';
+            $gallery_store[$counter]['key_word']     = isset( $gallery['eael_fg_gallery_item_key_word'] ) ? $gallery['eael_fg_gallery_item_key_word'] : '';
+            $gallery_store[$counter]['tag_icon']     = isset( $gallery['eael_fg_gallery_item_tag_icon'] ) ? $gallery['eael_fg_gallery_item_tag_icon'] : '';
             $gallery_store[$counter]['video_layout'] = isset( $gallery['eael_fg_gallery_video_layout'] ) && !empty( $gallery['eael_fg_gallery_video_layout'] ) ? $gallery['eael_fg_gallery_video_layout'] : 'horizontal';
             
-            $gallery_store[$counter]['video_gallery_switch'] = $gallery['fg_video_gallery_switch'];
+            $gallery_store[$counter]['video_gallery_switch'] = isset( $gallery['fg_video_gallery_switch'] ) ? $gallery['fg_video_gallery_switch'] : '';
 
             $gallery['eael_fg_gallery_item_video_link'] = empty( $gallery['eael_fg_gallery_item_video_link'] ) ? '' : $gallery['eael_fg_gallery_item_video_link'];
             if ( strpos( $gallery['eael_fg_gallery_item_video_link'] , 'youtu.be') != false) {
