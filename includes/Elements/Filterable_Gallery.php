@@ -199,15 +199,15 @@ class Filterable_Gallery extends Widget_Base
 						'image' => $image_path . 'card.png'
                     ],
                     'layout_3' => [
-                        'title' => esc_html__( 'Search & Filter', 'essential-addons-for-elementor-lite' ),
+                        'title' => esc_html__( 'Search and Filter', 'essential-addons-for-elementor-lite' ),
 						'image' => $image_path . 'search.png'
                     ],
                     'grid_flow_gallery' => [
-                        'title' => esc_html__( 'Grid Flow Gallery (Pro)', 'essential-addons-for-elementor-lite' ),
+                        'title' => esc_html__( 'Grid Flow (Pro)', 'essential-addons-for-elementor-lite' ),
 						'image' => $image_path . 'grid_flow_gallery.png'
                     ],
                     'harmonic_gallery' => [
-                        'title' => esc_html__( 'Harmonic Gallery (Pro)', 'essential-addons-for-elementor-lite' ),
+                        'title' => esc_html__( 'Harmonic (Pro)', 'essential-addons-for-elementor-lite' ),
 						'image' => $image_path . 'harmonic_gallery.png'
                     ],
                 ],
