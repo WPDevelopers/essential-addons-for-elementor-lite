@@ -64,32 +64,21 @@ var SVGDraw = function ($scope, $) {
                             fill: settings.fill_color,
                             duration: 1
                         });
-                        setTimeout(function(){
-                            gsap.to(lines, {
-                                fill: settings.fill_color + '00',
-                                duration: 2
-                            });
-                        }, transition * 1000 );
-
-                    }
-                },
-                onRepeat: function(){
-                    console.log('repeat started');
-                    
-                },
-                onReverseComplete: function() {
-                    if( 'after' === settings.fill_type && '' !== settings.fill_color ) {
-                        gsap.to(lines, {
-                            fill: 'none',
-                            duration: 1
-                        });
+                        if ( 'reverse' === settings.direction ) {
+                            setTimeout(function(){
+                                gsap.to(lines, {
+                                    fill: settings.fill_color + '00',
+                                    duration: 2
+                                });
+                            }, transition * 1000 );
+                        }
                     }
                 },
                 onStart: function () {
                     if( 'after' === settings.fill_type && '' !== settings.fill_color && "restart" === settings.direction ) {
                         gsap.to(lines, {
-                            fill: 'none',
-                            duration: 1
+                            fill: settings.fill_color + '00',
+                            duration: 0.5
                         });
                     }
                 }
