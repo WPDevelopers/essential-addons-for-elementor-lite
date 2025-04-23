@@ -37,12 +37,8 @@ var SVGDraw = function ($scope, $) {
         }
 
         function drawSVGLine (){
-            console.log('lines', lines);
-            
             $.each( lines, function (index, line) { 
                 const length = line.getTotalLength() * ( settings.stroke_length * .01 );
-                console.log('leng', length, settings.stroke_length);
-                
                 line.style.strokeDasharray = length;
                 line.style.strokeDashoffset = length;
             });
@@ -61,6 +57,7 @@ var SVGDraw = function ($scope, $) {
             timeline.to(lines, {
                 strokeDashoffset: offset,
                 duration: settings.speed,
+                ease: settings.ease_type,
                 onComplete: function() {
                     if( 'after' === settings.fill_type && '' !== settings.fill_color ) {
                         gsap.to(lines, {

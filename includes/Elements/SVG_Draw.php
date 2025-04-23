@@ -276,6 +276,34 @@ class SVG_Draw extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_svg_animation_type',
+			[
+				'label'     => esc_html__( 'Draw Type', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'none',
+				'options'   => [
+					'none'                 => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
+					'power3.inOut'         => esc_html__( 'Power', 'essential-addons-for-elementor-lite' ),
+					'power3.in'            => esc_html__( 'Power In', 'essential-addons-for-elementor-lite' ),
+					'power3.out'           => esc_html__( 'Power Out', 'essential-addons-for-elementor-lite' ),
+					'back.inOut(2)'        => esc_html__( 'Back', 'essential-addons-for-elementor-lite' ),
+					'back.in(2)'           => esc_html__( 'Back In', 'essential-addons-for-elementor-lite' ),
+					'back.out(2)'          => esc_html__( 'Back Out', 'essential-addons-for-elementor-lite' ),
+					'bounce.inOut'         => esc_html__( 'Bounce', 'essential-addons-for-elementor-lite' ),
+					'bounce.in'            => esc_html__( 'Bounce In', 'essential-addons-for-elementor-lite' ),
+					'bounce.out'           => esc_html__( 'Bounce Out', 'essential-addons-for-elementor-lite' ),
+					'elastic.inOut(1,0.4)' => esc_html__( 'Elastic', 'essential-addons-for-elementor-lite' ),
+					'elastic.in(1,0.4)'    => esc_html__( 'Elastic In', 'essential-addons-for-elementor-lite' ),
+					'elastic.out(1,0.4)'   => esc_html__( 'Elastic 0ut', 'essential-addons-for-elementor-lite' ),
+					'steps(50)'            => esc_html__( 'Steps', 'essential-addons-for-elementor-lite' ),
+				],
+				'condition'   => [
+					'eael_svg_animation_on!' => 'page-scroll',
+				]
+			]
+		);
+
+		$this->add_control(
 			'eael_svg_draw_offset',
 			[
 				'label'       => esc_html__( 'Drawing Start Point', 'essential-addons-for-elementor-lite' ),
@@ -530,7 +558,8 @@ class SVG_Draw extends Widget_Base {
 			'direction'    => esc_attr( $settings['eael_svg_animation_direction'] ),
 			'excludeStyle' => esc_attr( $settings['eael_svg_exclude_style'] ),
 			'transition'   => esc_attr( $settings['eael_svg_fill_transition'] ),
-			'stroke_length' => esc_attr( $settings['eael_svg_stroke_dash_adjustment']['size'] )
+			'stroke_length' => $settings['eael_svg_stroke_dash_adjustment']['size'] ?? '100',
+			'ease_type'    => $settings['eael_svg_animation_type'] ?? 'none' 
 		];
 
 		$this->add_render_attribute( 'eael-svg-drow-wrapper', [
