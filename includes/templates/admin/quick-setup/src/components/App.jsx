@@ -1,4 +1,4 @@
-import { React, useState, useRef } from "react";
+import { React, useState, useRef, useEffect } from "react";
 import MenuItems from "./MenuItems.jsx";
 import GettingStartedContent from "./GettingStartedContent.jsx";
 import ConfigurationContent from "./ConfigurationContent.jsx";
@@ -19,6 +19,24 @@ function App() {
   const [showElements, setShowElements] = useState(0);
   const [emailAddress, setEmailAddress] = useState(is_tracking_allowed);
   const [disableSwitches, setDisableSwitches] = useState(false);
+  const [selectedPreference, setSelectedPreference] = useState("basic");
+  const [checkedElements, setCheckedElements] = useState({});
+
+  // Initialize checkedElements with basic elements on component mount
+  useEffect(() => {
+    const elements_content = eaelQuickSetup?.elements_content;
+    const elements_list = elements_content?.elements_list;
+    
+    if (elements_list) {
+      const initialCheckedState = {};
+      Object.entries(elements_list).forEach(([category, categoryData]) => {
+        categoryData.elements.forEach(element => {
+          initialCheckedState[element.key] = element.preferences === "basic";
+        });
+      });
+      setCheckedElements(initialCheckedState);
+    }
+  }, []); // Empty dependency array means this runs once on mount
 
   const handleTabChange = (event) => {
     setActiveTab(event.currentTarget.getAttribute("data-next"));
@@ -28,6 +46,36 @@ function App() {
       document.getElementById("eael_user_email_address").value = 1;
       saveWPIns();
     }
+  };
+
+  const handlePreferenceChange = (event) => {
+    const newPreference = event.target.value;
+    setSelectedPreference(newPreference);
+
+    // Get all elements from the elements list
+    const elements_content = eaelQuickSetup?.elements_content;
+    const elements_list = elements_content?.elements_list;
+    
+    if (newPreference === "custom") {
+      // For custom, don't auto-check anything
+      setCheckedElements({});
+    } else {
+      // For basic or advance, check elements with matching preferences
+      const newCheckedState = {};
+      Object.entries(elements_list).forEach(([category, categoryData]) => {
+        categoryData.elements.forEach(element => {
+          newCheckedState[element.key] = element.preferences === newPreference;
+        });
+      });
+      setCheckedElements(newCheckedState);
+    }
+  };
+
+  const handleElementCheck = (elementKey, isChecked) => {
+    setCheckedElements(prev => ({
+      ...prev,
+      [elementKey]: isChecked
+    }));
   };
 
   const saveWPIns = async (event) => {
@@ -70,9 +118,8 @@ function App() {
     setShowElements(1);
   };
 
-  const handleIntegrationSwitch = async (event, plugin, isTemplately = 0) => {
+  const handleIntegrationSwitch = async (event, plugin, isTemplately = 0, setTemplatelyPlugin = '') => {
     setDisableSwitches(true);
-
     const isChecked = event.target.checked ?? 0;
 
     const isActionInstall =
@@ -99,6 +146,10 @@ function App() {
         requestData['slug'] = 'templately';
         label = event.currentTarget;
         dataNext = event.currentTarget.getAttribute("data-next");
+        if ( plugin?.local_plugin_data ) {
+          setActiveTab(dataNext);
+          return;
+        } 
     } else {
       label = event.target
       .closest(".eael-integration-footer")
@@ -121,8 +172,16 @@ function App() {
 
         if (result.success) {
           if( isTemplately ) {
-            label.textContent = 'Enabled Templates';
+            label.textContent = 'Next';
             setActiveTab(dataNext);
+
+            setTemplatelyPlugin((prevPlugin) => {
+              return {
+                ...prevPlugin,
+                local_plugin_data: true,
+              };
+            });
+
           } else {
             label.textContent = isChecked ? "Deactivate" : "Activate";
           }
@@ -193,6 +252,9 @@ function App() {
             <ConfigurationContent
               activeTab={activeTab}
               handleTabChange={handleTabChange}
+              isTrackingAllowed={is_tracking_allowed}
+              selectedPreference={selectedPreference}
+              handlePreferenceChange={handlePreferenceChange}
             />
           </div>
 
@@ -206,6 +268,9 @@ function App() {
               handleTabChange={handleTabChange}
               showElements={showElements}
               handleShowElements={handleShowElements}
+              selectedPreference={selectedPreference}
+              checkedElements={checkedElements}
+              handleElementCheck={handleElementCheck}
             />
           </div>
 

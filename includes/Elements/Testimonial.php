@@ -56,6 +56,10 @@ class Testimonial extends Widget_Base {
         return false;
     }
 
+	public function has_widget_inner_wrapper(): bool {
+        return ! HelperClass::eael_e_optimized_markup();
+    }
+
 	public function get_custom_help_url()
 	{
         return 'https://essential-addons.com/elementor/docs/testimonials/';
@@ -237,6 +241,14 @@ class Testimonial extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'eael_testimonial_show_quote',
+			[
+				'label'   => esc_html__( 'Display Quote?', 'essential-addons-for-elementor-lite'),
+				'type'    => Controls_Manager::SWITCHER,
+				'default' => 'yes',
+			]
+		);
 
 		$this->add_control(
 			'eael_testimonial_enable_rating',
@@ -247,24 +259,47 @@ class Testimonial extends Widget_Base {
 			]
 		);
 
-
 		$this->add_control(
 		  'eael_testimonial_rating_number',
-		  [
-		     'label'       => __( 'Rating Number', 'essential-addons-for-elementor-lite'),
-		     'type' => Controls_Manager::SELECT,
-		     'default' => 'rating-five',
-		     'options' => [
-		     	'rating-one'  => __( '1', 'essential-addons-for-elementor-lite'),
-		     	'rating-two' => __( '2', 'essential-addons-for-elementor-lite'),
-		     	'rating-three' => __( '3', 'essential-addons-for-elementor-lite'),
-		     	'rating-four' => __( '4', 'essential-addons-for-elementor-lite'),
-		     	'rating-five'   => __( '5', 'essential-addons-for-elementor-lite'),
-		     ],
-			'condition' => [
-				'eael_testimonial_enable_rating' => 'yes',
-			],
-		  ]
+			[
+					'label'   => __( 'Rating Number', 'essential-addons-for-elementor-lite'),
+					'type'    => Controls_Manager::SELECT,
+					'default' => 'rating-five',
+					'options' => [
+						'rating-one'   => __( '1', 'essential-addons-for-elementor-lite'),
+						'rating-two'   => __( '2', 'essential-addons-for-elementor-lite'),
+						'rating-three' => __( '3', 'essential-addons-for-elementor-lite'),
+						'rating-four'  => __( '4', 'essential-addons-for-elementor-lite'),
+						'rating-five'  => __( '5', 'essential-addons-for-elementor-lite'),
+				],
+				'condition' => [
+					'eael_testimonial_enable_rating' => 'yes',
+				],
+		  	]
+		);
+
+
+		$this->add_control(
+			'eael_testimonial_rating_position',
+			[
+				'label'   => esc_html__( 'Rating Position', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'default' => [
+						'title' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-align-start-h',
+					],
+					'top' => [
+						'title' => esc_html__( 'Top', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-v-align-top',
+					],
+				],
+				'default' => 'default',
+				'toggle'  => false,
+				'condition' => [
+					'eael_testimonial_enable_rating' => 'yes',
+				],
+			]
 		);
 
 		$this->end_controls_section();
@@ -384,6 +419,50 @@ class Testimonial extends Widget_Base {
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default'      => '',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' => 'eael_testimonial_border',
+				'selector' => '{{WRAPPER}} .eael-testimonial-item',
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_testimonial_border_radius',
+			[
+				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-testimonial-item' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_testimonial_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-testimonial-item' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_testimonial_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-testimonial-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
 			]
 		);
 
@@ -673,7 +752,7 @@ class Testimonial extends Widget_Base {
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .eael-testimonial-content .testimonial-star-rating li i' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-testimonial-item .testimonial-star-rating li i' => 'font-size: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -685,7 +764,7 @@ class Testimonial extends Widget_Base {
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .eael-testimonial-content .testimonial-star-rating li' => 'margin-right: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .eael-testimonial-item .testimonial-star-rating li' => 'margin-right: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -697,7 +776,7 @@ class Testimonial extends Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .eael-testimonial-content .testimonial-star-rating' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .eael-testimonial-item .testimonial-star-rating' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -821,10 +900,6 @@ class Testimonial extends Widget_Base {
 		if( ! empty($settings['eael_testimonial_company_title']) ) : ?><p class="eael-testimonial-user-company"><?php echo wp_kses( $settings['eael_testimonial_company_title'], HelperClass::eael_allowed_tags() ); ?></p><?php endif;
 	}
 
-	protected function testimonial_quote() {
-		echo '<span class="eael-testimonial-quote"></span>';
-	}
-
 	protected function testimonial_desc() {
 		$settings = $this->get_settings_for_display();
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -851,7 +926,7 @@ class Testimonial extends Widget_Base {
 	  );
 
 	if ( $rating == 'yes' )
-		$this->add_render_attribute('eael_testimonial_wrap', 'class', $this->get_settings('eael_testimonial_rating_number'));
+		$this->add_render_attribute('eael_testimonial_wrap', 'class', $this->get_settings('eael_testimonial_rating_number') );
 
 	$this->add_render_attribute('eael_testimonial_user', 'class', 'eael-testimonial-user');
 	if ( ! empty( $settings['eael_testimonial_user_display_block'] ) )
@@ -861,17 +936,24 @@ class Testimonial extends Widget_Base {
 	?>
 
 	<div <?php $this->print_render_attribute_string('eael_testimonial_wrap'); ?>>
-
+		<?php
+			if ( 'top' === $settings['eael_testimonial_rating_position'] ) {
+				$this->render_testimonial_rating();
+			}
+		?>
 		<?php if('classic-style' == $settings['eael_testimonial_style']) { ?>
 			<div class="eael-testimonial-content">
 				<?php
-					// $this->testimonial_quote();
 					$this->testimonial_desc();
 				?>
 				<div class="clearfix">
 					<?php $this->render_user_name_and_company(); ?>
 				</div>
-				<?php $this->render_testimonial_rating( $settings ); ?>
+				<?php
+				if ( 'default' === $settings['eael_testimonial_rating_position'] ) {
+					$this->render_testimonial_rating();
+				}
+				?>
 			</div>
 			<?php $this->render_testimonial_image(); ?>
 		<?php } ?>
@@ -879,14 +961,17 @@ class Testimonial extends Widget_Base {
 		<?php if('middle-style' == $settings['eael_testimonial_style']) { ?>
 			<div class="eael-testimonial-content">
 				<?php
-					// $this->testimonial_quote();
 					$this->testimonial_desc();
 				?>
 				<?php $this->render_testimonial_image(); ?>
 				<div class="clearfix">
 					<?php $this->render_user_name_and_company(); ?>
 				</div>
-				<?php $this->render_testimonial_rating( $settings ); ?>
+				<?php
+				if ( 'default' === $settings['eael_testimonial_rating_position'] ) {
+					$this->render_testimonial_rating();
+				}
+				?>
 			</div>
 		<?php } ?>
 
@@ -894,9 +979,10 @@ class Testimonial extends Widget_Base {
 			<?php $this->render_testimonial_image(); ?>
 			<div class="eael-testimonial-content">
 				<?php
-					// $this->testimonial_quote();
 					$this->testimonial_desc();
-					$this->render_testimonial_rating( $settings );
+					if ( 'default' === $settings['eael_testimonial_rating_position'] ) {
+						$this->render_testimonial_rating();
+					}
 					$this->render_user_name_and_company();
 				?>
 			</div>
@@ -904,13 +990,14 @@ class Testimonial extends Widget_Base {
 
 		<?php if('icon-img-left-content' == $settings['eael_testimonial_style']) { ?>
 			<?php
-				// $this->testimonial_quote();
 				$this->render_testimonial_image();
 			?>
 			<div class="eael-testimonial-content">
 				<?php
 					$this->testimonial_desc();
-					$this->render_testimonial_rating( $settings );
+					if ( 'default' === $settings['eael_testimonial_rating_position'] ) {
+						$this->render_testimonial_rating();
+					}
 				?>
 				<div class="bio-text clearfix">
 					<?php $this->render_user_name_and_company(); ?>
@@ -920,13 +1007,14 @@ class Testimonial extends Widget_Base {
 
 		<?php if('icon-img-right-content' == $settings['eael_testimonial_style']) { ?>
 			<?php
-				// $this->testimonial_quote();
 				$this->render_testimonial_image();
 			?>
 			<div class="eael-testimonial-content">
 				<?php
 					$this->testimonial_desc();
-					$this->render_testimonial_rating( $settings );
+					if ( 'default' === $settings['eael_testimonial_rating_position'] ) {
+						$this->render_testimonial_rating();
+					}
 				?>
 				<div class="bio-text-right"><?php $this->render_user_name_and_company(); ?></div>
 			</div>
@@ -936,7 +1024,11 @@ class Testimonial extends Widget_Base {
 			<div class="eael-testimonial-content eael-testimonial-inline-bio">
 				<?php $this->render_testimonial_image(); ?>
 				<div class="bio-text"><?php $this->render_user_name_and_company(); ?></div>
-				<?php $this->render_testimonial_rating( $settings ); ?>
+				<?php 
+				if ( 'default' === $settings['eael_testimonial_rating_position'] ) {
+					$this->render_testimonial_rating();
+				}
+				?>
 			</div>
 			<div class="eael-testimonial-content">
 				<?php $this->testimonial_desc(); ?>
@@ -950,11 +1042,19 @@ class Testimonial extends Widget_Base {
 			<div class="eael-testimonial-content eael-testimonial-inline-bio">
 				<?php $this->render_testimonial_image(); ?>
 				<div class="bio-text"><?php $this->render_user_name_and_company(); ?></div>
-				<?php $this->render_testimonial_rating( $settings ); ?>
+				<?php
+				if ( 'default' === $settings['eael_testimonial_rating_position'] ) {
+					$this->render_testimonial_rating();
+				}
+				?>
 			</div>
 		<?php } ?>
 
-		<?php $this->testimonial_quote(); ?>
+		<?php 
+			if( 'yes' === $settings['eael_testimonial_show_quote'] ) {
+				echo '<span class="eael-testimonial-quote"></span>';
+			}
+		?>
 
 	</div>
 

@@ -24,7 +24,7 @@ trait Controls
      */
     public static function query($wb)
     {
-        $post_types = ControlsHelper::get_post_types();
+        $post_types = ControlsHelper::get_allowed_post_types();
         $post_types['by_id'] = __('Manual Selection', 'essential-addons-for-elementor-lite');
 
         if ($wb->get_name() !== 'eael-dynamic-filterable-gallery' && $wb->get_name() !== 'eael-post-list') {
@@ -613,6 +613,69 @@ trait Controls
                     ],
                 ]
             );
+
+            $wb->add_control(
+                'eael_post_carousel_title',
+                [
+                    'label'       => esc_html__( 'Carousel Title', 'essential-addons-for-elementor-lite' ),
+                    'label_block' => true,
+                    'type'        => Controls_Manager::TEXT,
+                    'placeholder' => esc_html__( 'Essential Addons Post Carousel', 'essential-addons-for-elementor-lite' ),
+                ]
+            );
+
+            $wb->add_control(
+                'eael_post_carousel_title_tag',
+                [
+                    'label'       => __('Carousel Title Tag', 'essential-addons-for-elementor-lite'),
+                    'label_block' => true,
+                    'type'        => Controls_Manager::CHOOSE,
+                    'options'     => [
+                        'h1' => [
+                            'title' => esc_html__( 'H1', 'essential-addons-for-elementor-lite' ),
+                            'icon'  => 'eicon-editor-h1',
+                        ],
+                        'h2' => [
+                            'title' => esc_html__( 'H2', 'essential-addons-for-elementor-lite' ),
+                            'icon'  => 'eicon-editor-h2',
+                        ],
+                        'h3' => [
+                            'title' => esc_html__( 'H3', 'essential-addons-for-elementor-lite' ),
+                            'icon'  => 'eicon-editor-h3',
+                        ],
+                        'h4' => [
+                            'title' => esc_html__( 'H4', 'essential-addons-for-elementor-lite' ),
+                            'icon'  => 'eicon-editor-h4',
+                        ],
+                        'h5' => [
+                            'title' => esc_html__( 'H5', 'essential-addons-for-elementor-lite' ),
+                            'icon'  => 'eicon-editor-h5',
+                        ],
+                        'h6' => [
+                            'title' => esc_html__( 'H6', 'essential-addons-for-elementor-lite' ),
+                            'icon'  => 'eicon-editor-h6',
+                        ],
+                        'div' => [
+                            'title' => esc_html__( 'Div', 'essential-addons-for-elementor-lite' ),
+                            'text'  => 'div',
+                        ],
+                        'span' => [
+                            'title' => esc_html__( 'Span', 'essential-addons-for-elementor-lite' ),
+                            'text'  => 'span',
+                        ],
+                        'p' => [
+                            'title' => esc_html__( 'P', 'essential-addons-for-elementor-lite' ),
+                            'text'  => 'P',
+                        ],
+                    ],
+                    'default'   => 'h2',
+                    'toggle'    => false,
+                    'condition' => [
+                        'eael_post_carousel_title!' => '',
+                    ],
+                ]
+            );
+
         }
 
         if ('eael-post-grid' === $wb->get_name()) {

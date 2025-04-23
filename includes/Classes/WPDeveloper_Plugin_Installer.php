@@ -51,7 +51,7 @@ class WPDeveloper_Plugin_Installer
     public function get_remote_plugin_data($slug = '')
     {
         if (empty($slug)) {
-            return new WP_Error('empty_arg', __('Argument should not be empty.'));
+            return new WP_Error('empty_arg', __('Argument should not be empty.', 'essential-addons-for-elementor-lite'));
         }
 
         $response = wp_remote_post(
@@ -86,7 +86,7 @@ class WPDeveloper_Plugin_Installer
     public function install_plugin($slug = '', $active = true)
     {
         if (empty($slug)) {
-            return new WP_Error('empty_arg', __('Argument should not be empty.'));
+            return new WP_Error('empty_arg', __('Argument should not be empty.', 'essential-addons-for-elementor-lite'));
         }
 
         include_once ABSPATH . 'wp-admin/includes/file.php';
@@ -131,7 +131,7 @@ class WPDeveloper_Plugin_Installer
     public function upgrade_plugin($basename = '')
     {
         if (empty($slug)) {
-            return new WP_Error('empty_arg', __('Argument should not be empty.'));
+            return new WP_Error('empty_arg', __('Argument should not be empty.', 'essential-addons-for-elementor-lite'));
         }
 
         include_once ABSPATH . 'wp-admin/includes/file.php';
@@ -154,6 +154,10 @@ class WPDeveloper_Plugin_Installer
 
 	    $slug   = isset( $_POST['slug'] ) ? sanitize_text_field( $_POST['slug'] ) : '';
 	    $result = $this->install_plugin( $slug );
+
+        if( isset( $_POST['promotype'] ) && 'eb-banner' === $_POST['promotype'] ) {
+            wp_remote_get( 'https://essential-addons.com/essential-blocks-install-gutenberg' );
+        }
 
 	    if ( is_wp_error( $result ) ) {
 		    wp_send_json_error( $result->get_error_message() );

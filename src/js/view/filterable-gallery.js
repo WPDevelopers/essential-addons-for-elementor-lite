@@ -25,6 +25,19 @@ jQuery(window).on("elementor/frontend/init", function () {
 		return items;
 	}
 
+	function manageNotFoundDiv( $isotope_gallery, $scope, $ ) {
+		let notFoundDiv = $('#eael-fg-no-items-found', $scope),
+			minHeight = notFoundDiv.css('font-size');
+
+		$('.eael-filter-gallery-container', $scope).css('min-height', parseInt(minHeight)*2+'px');
+
+		if (!$isotope_gallery.data('isotope').filteredItems.length) {
+			$('#eael-fg-no-items-found', $scope).show();
+		} else {
+			$('#eael-fg-no-items-found', $scope).hide();
+		}
+	}
+
 	var filterableGalleryHandler = function ($scope, $) {
 		var filterControls = $scope.find(".fg-layout-3-filter-controls").eq(0),
 			filterTrigger  = $scope.find("#fg-filter-trigger"),
@@ -33,8 +46,10 @@ jQuery(window).on("elementor/frontend/init", function () {
 			searchRegex,
 			buttonFilter,
 			timer,
-			fg_mfp_counter_text = localize.eael_translate_text.fg_mfp_counter_text;
+			fg_mfp_counter_text = localize?.eael_translate_text?.fg_mfp_counter_text;
 			fg_mfp_counter_text = fg_mfp_counter_text ? '%curr% '+fg_mfp_counter_text+' %total%' : '%curr% of %total%';
+
+			
 
 		let $galleryWrap = $(".eael-filter-gallery-wrapper", $scope);
 		var custom_default_control 	= $galleryWrap.data('custom_default_control');
@@ -222,11 +237,16 @@ jQuery(window).on("elementor/frontend/init", function () {
 							}
 						}
 					}
+
+					if( $items.length > 0 ) {
+						$items = $items.filter(item => typeof item !== 'number');
+					}
 					
-					if(index_list.length>0){
+					if(index_list.length > 0){
 						fg_items = fg_items.filter(function (item, index){
 							return !index_list.includes(index);
 						});
+
 					}
 				}
 				
@@ -235,7 +255,14 @@ jQuery(window).on("elementor/frontend/init", function () {
 				
 				//hide load more button if selected control have no item to show
 				let replaceWithDot = buttonFilter.replace('.', '');
-				const restOfItem = fg_items.filter( galleryItem => galleryItem.includes( replaceWithDot ) ).length;
+				let restOfItem = fg_items.filter( galleryItem => galleryItem.includes( replaceWithDot ) ).length;
+				
+				if ( restOfItem < 1 && $this.data('filter') === '*' ) {
+					let renderdItmes = $('.eael-filter-gallery-container .eael-filterable-gallery-item-wrap', $scope).length,
+						totalItems   = $gallery.data("total-gallery-items");
+
+					restOfItem = Number(totalItems) - Number(renderdItmes);
+				}
 				
 				if( LoadMoreShow || ( restOfItem < 1 ) ) {
 					loadMore.hide()
@@ -245,6 +272,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 				
 				$this.siblings().removeClass("active");
 				$this.addClass("active");
+
 				if (!firstInit && $items.length > 0) {
 					$isotope_gallery.isotope();
 					$gallery.append($items);
@@ -256,7 +284,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 				} else {
 					$isotope_gallery.isotope();
 				}
-
+						
 				if($this.hasClass('all-control')){
 					//All items are active
 					if ( LoadMoreShow || ( fg_items.length <= 1 ) ) {
@@ -265,12 +293,29 @@ jQuery(window).on("elementor/frontend/init", function () {
 						loadMore.show()
 					}
 
-					$('.eael-filterable-gallery-item-wrap .eael-magnific-link-clone').removeClass('active').addClass('active');
+					// $('.eael-filterable-gallery-item-wrap .eael-magnific-link-clone').removeClass('active').addClass('active');
 				}else {
-					$('.eael-filterable-gallery-item-wrap .eael-magnific-link-clone').removeClass('active');
+					// $('.eael-filterable-gallery-item-wrap .eael-magnific-link-clone').removeClass('active');
 					$(buttonFilter + ' .eael-magnific-link').addClass('active');
 				}
+				manageNotFoundDiv( $isotope_gallery, $scope, $ );
 			});
+
+			//key board accesibilty
+			$('.eael-filter-gallery-control li.control', $scope).keydown(function(e) {
+                if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                    const tabs 		 = $('.eael-filter-gallery-control li.control', $scope);
+					let currentIndex = $('.eael-filter-gallery-control li.control.active', $scope);
+                    let index 		 = currentIndex < 0 ? tabs.index(this) : tabs.index(currentIndex);
+
+                    if (e.key === 'ArrowRight') index = (index + 1) % tabs.length;
+                    if (e.key === 'ArrowLeft') index = (index - 1 + tabs.length) % tabs.length;
+                    $(tabs[index]).focus().click();
+                }
+            });
+
+			$('.eael-filter-gallery-control li.control', $scope).attr('tabindex', '-1');
+			$('.eael-filter-gallery-control li.control.active', $scope).attr('tabindex', '0');
 
 			//quick search
 			var loaded_on_search = false;
@@ -302,19 +347,10 @@ jQuery(window).on("elementor/frontend/init", function () {
 			$isotope_gallery.imagesLoaded().progress(function () {
 				$isotope_gallery.isotope("layout");
 			});
-
+			
 			// layout gal, on click tabs
 			$isotope_gallery.on("arrangeComplete", function () {
-				let notFoundDiv = $('#eael-fg-no-items-found', $scope),
-					minHeight = notFoundDiv.css('font-size');
-
-				$('.eael-filter-gallery-container', $scope).css('min-height', parseInt(minHeight)*2+'px');
-
-				if (!$isotope_gallery.data('isotope').filteredItems.length) {
-					$('#eael-fg-no-items-found', $scope).show();
-				} else {
-					$('#eael-fg-no-items-found', $scope).hide();
-				}
+				manageNotFoundDiv( $isotope_gallery, $scope, $ );
 			});
 
 			// layout gal, after window loaded
@@ -380,6 +416,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 				$isotope_gallery.imagesLoaded().progress(function () {
 					$isotope_gallery.isotope("layout");
 				});
+				manageNotFoundDiv( $isotope_gallery, $scope, $ );
 			});
 
 			// Fix issue on Safari: hide filter menu

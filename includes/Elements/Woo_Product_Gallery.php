@@ -72,6 +72,10 @@ class Woo_Product_Gallery extends Widget_Base {
 		];
 	}
 
+	public function has_widget_inner_wrapper(): bool {
+        return ! HelperClass::eael_e_optimized_markup();
+    }
+
 	public function get_custom_help_url() {
 		return 'https://essential-addons.com/elementor/docs/woo-product-gallery/';
 	}
@@ -630,7 +634,7 @@ class Woo_Product_Gallery extends Widget_Base {
 			'step'    => 1,
 			'condition' => [
 				'post_type' => 'product',
-				'eael_product_gallery_product_filter!' => 'manual'
+				// 'eael_product_gallery_product_filter!' => 'manual'
 			],
 		] );
 
@@ -3022,7 +3026,7 @@ class Woo_Product_Gallery extends Widget_Base {
 				if ( current_theme_supports( 'wc-product-gallery-lightbox' ) ) {
 					wp_enqueue_script( 'photoswipe-ui-default' );
 					wp_enqueue_style( 'photoswipe-default-skin' );
-					if ( has_action( 'wp_footer', 'woocommerce_photoswipe' ) === false ) {
+					if ( ! Plugin::$instance->editor->is_edit_mode() && has_action( 'wp_footer', 'woocommerce_photoswipe' ) === false ) {
 						add_action( 'wp_footer', 'woocommerce_photoswipe', 15 );
 					}
 				}
