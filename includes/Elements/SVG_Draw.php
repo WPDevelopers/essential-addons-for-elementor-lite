@@ -298,7 +298,7 @@ class SVG_Draw extends Widget_Base {
 					'steps(50)'            => esc_html__( 'Steps', 'essential-addons-for-elementor-lite' ),
 				],
 				'condition'   => [
-					'eael_svg_animation_on!' => 'page-scroll',
+					'eael_svg_animation_on!' => [ 'none', 'page-scroll' ],
 				]
 			]
 		);
@@ -313,7 +313,7 @@ class SVG_Draw extends Widget_Base {
 				'step'        => 1,
 				'default'     => 50,
 				'condition'   => [
-					'eael_svg_animation_on' => [ 'page-scroll' ],
+					'eael_svg_animation_on' => 'page-scroll',
 				],
 				'description' => esc_html__( 'The point at which the drawing begins to animate as scrolls down (in pixels).', 'essential-addons-for-elementor-lite' )
 			]
@@ -376,7 +376,7 @@ class SVG_Draw extends Widget_Base {
 				'step'        => 1,
 				'default'     => 20,
 				'condition'   => [
-					'eael_svg_animation_on!' => [ 'page-scroll' ],
+					'eael_svg_animation_on!' => [ 'none', 'page-scroll' ],
 				],
 				'description' => esc_html__( 'Duration on SVG draws (in seconds)', 'essential-addons-for-elementor-lite' )
 			]
@@ -397,6 +397,9 @@ class SVG_Draw extends Widget_Base {
 				'default' => [
 					'unit' => '%',
 					'size' => 100,
+				],
+				'condition'   => [
+					'eael_svg_animation_on!' => [ 'none', 'page-scroll' ],
 				],
 				'description' => esc_html__( 'You can control how much of the shape gets drawn by specifying a percentage of its total length.', 'essential-addons-for-elementor-lite' )
 			]
