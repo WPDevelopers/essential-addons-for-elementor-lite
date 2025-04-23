@@ -648,6 +648,16 @@ class Filterable_Gallery extends Widget_Base
                 'return_value' => 'true',
             ]
         );
+
+        $repeater->add_control(
+			'eael_fg_video_gallery_alert',
+			[
+				'type'       => \Elementor\Controls_Manager::ALERT,
+				'alert_type' => 'info',
+				'heading'    => esc_html__( 'For Video Display', 'essential-addons-for-elementor-lite' ),
+				'content'    => esc_html__( 'Right now video will display in the Overlay, Card and Search and Filter layout', 'essential-addons-for-elementor-lite' ),
+			]
+		);
         
         $repeater->add_control(
             'eael_fg_gallery_item_video_link',
