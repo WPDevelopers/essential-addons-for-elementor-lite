@@ -509,7 +509,7 @@ trait Helper
 	 * @return array|array[]|string[]
 	 * @since 5.0.4
 	 */
-    protected function sanitize_taxonomy_data( $tax_list ){
+    public function sanitize_taxonomy_data( $tax_list ){
 	    return array_map( function ( $param ) {
 		    return is_array( $param ) ? array_map( 'sanitize_text_field', $param ) : sanitize_text_field( $param );
 	    }, $tax_list );
@@ -721,6 +721,58 @@ trait Helper
         </script>
 		<?php
 	}
+
+    public function essential_blocks_banner_promo_admin_js_template() {
+		$eb_banner_promo    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-banner-promo.png';
+		$eb_not_installed = HelperClass::get_local_plugin_data( 'essential-blocks/essential-blocks.php' ) === false;
+		$action           = $eb_not_installed ? 'install' : 'activate';
+        $nonce            = wp_create_nonce( 'essential-addons-elementor' );
+
+        ?>
+        <script id="eael-gb-eb-banner-promo-template" type="text/html">
+            <div id="eael-gb-eb-banner-promo">
+                <div class="eael-gb-eb-banner-promo-left">
+                    <div class="eael-gb-eb-banner-promo-image">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+                            <g clip-path="url(#clip0_1_89)">
+                                <path d="M26.3347 11.0312C27.0408 10.8298 27.4499 10.0941 27.2486 9.38804L25.061 1.71694C24.8596 1.01084 24.124 0.601656 23.4179 0.803023L15.7468 2.9906C15.0407 3.19197 14.6315 3.92762 14.8329 4.63371L17.0204 12.3048C17.2218 13.0109 17.9574 13.4201 18.6636 13.2187L26.3347 11.0312Z" fill="#A5AEB8"/>
+                                <path d="M10.0059 15.2829C10.7402 15.2829 11.3354 14.6877 11.3354 13.9534V5.97652C11.3354 5.24227 10.7402 4.64703 10.0059 4.64703H2.02901C1.29476 4.64703 0.699524 5.24227 0.699524 5.97652V13.9534C0.699524 14.6877 1.29476 15.2829 2.02901 15.2829H10.0059Z" fill="#A5AEB8"/>
+                                <path d="M10.0059 27.2483C10.7402 27.2483 11.3354 26.6531 11.3354 25.9188V17.9419C11.3354 17.2076 10.7402 16.6124 10.0059 16.6124H2.02901C1.29476 16.6124 0.699524 17.2076 0.699524 17.9419V25.9188C0.699524 26.6531 1.29476 27.2483 2.02901 27.2483H10.0059Z" fill="#A5AEB8"/>
+                                <path d="M21.9734 27.2483C22.7077 27.2483 23.3029 26.6531 23.3029 25.9188V17.9419C23.3029 17.2076 22.7077 16.6124 21.9734 16.6124H13.9965C13.2622 16.6124 12.667 17.2076 12.667 17.9419V25.9188C12.667 26.6531 13.2622 27.2483 13.9965 27.2483H21.9734Z" fill="#A5AEB8"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_1_89">
+                                <rect width="28" height="28" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>                    
+                    </div>
+                    <div class="eael-gb-eb-banner-promo-content">
+                        <h3 class="eael-gb-eb-banner-promo-title"><?php _e( 'Want To Get All Exclusive Gutenberg Blocks For Free?', 'essential-addons-for-elementor-lite' ); ?></h3>
+                        <p class="eael-gb-eb-banner-promo-description"><?php _e( 'If you want to enrich your Gutenberg block library with the latest designs and functionalities, Essential Blocks can be your best companion.', 'essential-addons-for-elementor-lite' ); ?></p>
+                    </div>
+                </div>
+                <div class="eael-gb-eb-banner-promo-right">
+                    <a class="eael-gb-eb-banner-promo-learn-more" href="https://essential-blocks.com/" target="_blank"><?php _e( 'Learn More', 'essential-addons-for-elementor-lite' ) ?></a>
+                    <button class="eael-gb-eb-banner-promo-get-block eael-gb-eb-install" data-promotype="eb-banner" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo $eb_not_installed ? __( 'Get Essential Blocks', 'essential-addons-for-elementor-lite' ) : __( 'Activate', 'essential-addons-for-elementor-lite' ); ?></b>
+                    <button class="eael-gb-eb-banner-promo-close" data-nonce="<?php echo esc_attr( $nonce ); ?>">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <g clip-path="url(#clip0_1_101)">
+                                <path d="M18 6L6 18" stroke="#7A7B80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M6 6L18 18" stroke="#7A7B80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_1_101">
+                                    <rect width="24" height="24" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </script>
+        <?php
+    }
 
 	public function eael_post_view_count() {
         $allowed_post_types = HelperClass::get_allowed_post_types();

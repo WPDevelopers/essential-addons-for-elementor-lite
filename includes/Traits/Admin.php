@@ -2238,4 +2238,15 @@ trait Admin {
 		wp_send_json_success();
 	}
 
+	public function eael_eb_banner_promo_dismiss() {
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( __( 'You are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
+		}
+
+		set_transient( 'eael_eb_banner_promo_hide', true, DAY_IN_SECONDS * 45 );
+		wp_send_json_success();
+	}
+
 }
