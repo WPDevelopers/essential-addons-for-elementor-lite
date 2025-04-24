@@ -830,7 +830,7 @@ class Filterable_Gallery extends Widget_Base
                 'type' => Controls_Manager::MEDIA,
                 'dynamic' => ['active' => true],
                 'default' => [
-                    'url' => EAEL_PLUGIN_URL . '/assets/front-end/img/flexia-preview.jpg',
+                    'url' => EAEL_PLUGIN_URL . '/assets/front-end/img/eael-default-placeholder.png',
                 ],
                 'ai' => [
                     'active' => false,
