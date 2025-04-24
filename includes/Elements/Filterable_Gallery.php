@@ -328,7 +328,7 @@ class Filterable_Gallery extends Widget_Base
 				'options' => [
 					'none' => [
 						'title' => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
-						'icon' => 'eicon-editor-unlink',
+						'icon' => 'eicon-ban',
 					],
 					'media' => [
 						'title' => esc_html__( 'Media', 'essential-addons-for-elementor-lite' ),
@@ -494,27 +494,27 @@ class Filterable_Gallery extends Widget_Base
                 'options' => [
                     'h1' => [
 						'title' => __('H1', 'essential-addons-for-elementor-lite'),
-						'icon' => 'eicon-editor-h1',
+						'text' => 'H1',
 					],
                     'h2' => [
 						'title' => __('H2', 'essential-addons-for-elementor-lite'),
-						'icon' => 'eicon-editor-h2',
+						'text' => 'H2',
 					],
                     'h3' => [
 						'title' => __('H3', 'essential-addons-for-elementor-lite'),
-						'icon' => 'eicon-editor-h3',
+						'text' => 'H3',
 					],
                     'h4' => [
 						'title' => __('H4', 'essential-addons-for-elementor-lite'),
-						'icon' => 'eicon-editor-h4',
+						'text' => 'H4',
 					],
                     'h5' => [
 						'title' => __('H5', 'essential-addons-for-elementor-lite'),
-						'icon' => 'eicon-editor-h5',
+						'text' => 'H5',
 					],
                     'h6' => [
 						'title' => __('H6', 'essential-addons-for-elementor-lite'),
-						'icon' => 'eicon-editor-h6',
+						'text' => 'H6',
 					],
                     'span' => [
 						'title' => __('SPAN', 'essential-addons-for-elementor-lite'),
@@ -850,8 +850,9 @@ class Filterable_Gallery extends Widget_Base
                 'type'        => Controls_Manager::NOTICE,
                 'notice_type' => 'info',
 				'dismissible' => false,
-                'heading'     => esc_html__( 'Price, Ratings and Category', 'essential-addons-for-elementor-lite' ),
-                'content'     => esc_html__( 'will only works on Search & Filter layout.', 'essential-addons-for-elementor-lite' ),
+                'content'     => sprintf( '<strong>%s</strong> %s',
+                        esc_html__('Price, Ratings and Category', 'essential-addons-for-elementor-lite'),
+                                sprintf( esc_html__('will be visible only on the "%1$sSearch & Filter%2$s" layout.', 'essential-addons-for-elementor-lite'), '<strong>', '</strong>' ) ),
             ]
         );
         
