@@ -109,12 +109,12 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'eael_fg_items_to_show',
             [
-                'label' => esc_html__('Items to show', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
+                'label'       => esc_html__('Items to show', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::NUMBER,
                 'dynamic'     => [ 'active' => true ],
                 'label_block' => false,
-                'default' => 6,
-                'ai' => [
+                'default'     => 6,
+                'ai'          => [
 					'active' => false,
 				],
             ]
@@ -123,11 +123,11 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'eael_fg_filter_duration',
             [
-                'label' => esc_html__('Animation Duration (ms)', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
+                'label'       => esc_html__('Animation Duration (ms)', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::NUMBER,
                 'label_block' => false,
-                'default' => 500,
-                'ai' => [
+                'default'     => 500,
+                'ai'          => [
 					'active' => false,
 				],
             ]
@@ -136,19 +136,38 @@ class Filterable_Gallery extends Widget_Base
         $this->add_responsive_control(
             'columns',
             [
-                'label' => __('Columns', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'default' => '3',
+                'label'   => __('Columns', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::CHOOSE,
+                'options' => [
+					'1' => [
+						'title' => '1',
+						'text' => '1',
+					],
+					'2' => [
+						'title' => '2',
+						'text' => '2',
+					],
+					'3' => [
+						'title' => '3',
+						'text' => '3',
+					],
+					'4' => [
+						'title' => '4',
+						'text' => '4',
+					],
+					'5' => [
+						'title' => '5',
+						'text' => '5',
+					],
+					'6' => [
+						'title' => '6',
+						'text' => '6',
+					],
+				],
+                'default'        => '3',
                 'tablet_default' => '2',
                 'mobile_default' => '1',
-                'options' => [
-                    '1' => '1',
-                    '2' => '2',
-                    '3' => '3',
-                    '4' => '4',
-                    '5' => '5',
-                    '6' => '6',
-                ],
+				'toggle'         => false,
             ]
         );
 
