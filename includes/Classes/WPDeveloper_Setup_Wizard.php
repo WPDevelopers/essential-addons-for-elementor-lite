@@ -267,7 +267,6 @@ class WPDeveloper_Setup_Wizard {
 					'is_active'         => is_plugin_active( 'templately/templately.php' ),
 					'local_plugin_data' => $this->get_local_plugin_data( 'templately/templately.php' ),
 					'promo_img_url'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-qs-img.png',
-					'description'       => __( "Unlock an extensive collection of ready WordPress templates from Templately along with full site import and cloud collaboration features.", "essential-addons-for-elementor-lite" ),
 					'titles'            => [
 						__("5000+", "essential-addons-for-elementor-lite"),
 						__("Ready Templates", "essential-addons-for-elementor-lite")
@@ -292,32 +291,29 @@ class WPDeveloper_Setup_Wizard {
 					],
 				],
 				[
-					'slug'     => 'essential_blocks',
-					'basename' => 'essential-blocks/essential-blocks.php',
-					'tab_title'    => __( 'Essential Blocks', 'essential-addons-for-elementor-lite' ),
-					'is_active' => is_plugin_active( 'essential-blocks/essential-blocks.php' ),
+					'slug'              => 'essential_blocks',
+					'basename'          => 'essential-blocks/essential-blocks.php',
+					'tab_title'         => __( 'Essential Blocks', 'essential-addons-for-elementor-lite' ),
+					'is_active'         => is_plugin_active( 'essential-blocks/essential-blocks.php' ),
 					'local_plugin_data' => $this->get_local_plugin_data( 'essential-blocks/essential-blocks.php' ),
-					'promo_img_url'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-qs-img.png',
-					'titles' => [
-						__("80+", "essential-addons-for-elementor-lite"),
-						__("Widgets", "essential-addons-for-elementor-lite")
-					],
-					'features' => [
+					'promo_img_url'     => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/eb-promo-image.png',
+					'titles'            => __("Power Up The Gutenberg Editor", "essential-addons-for-elementor-lite")					,
+					'features'          => [
 						[
 							'image_url' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-icon-1.svg',
-							'content'   => __( "Stunning Ready Website Templates", "essential-addons-for-elementor-lite" )
+							'content'   => __( "Access 60+ Essential Gutenberg Blocks", "essential-addons-for-elementor-lite" )
 						],
 						[
 							'image_url' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-icon-2.svg',
-							'content'   => __( "One-Click Full Site Import", "essential-addons-for-elementor-lite" )
+							'content'   => __( "Get Global Styling & Typography Support", "essential-addons-for-elementor-lite" )
 						],
 						[
 							'image_url' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-icon-3.svg',
-							'content'   => __( "Team Collaboration WorkSpace", "essential-addons-for-elementor-lite" )
+							'content'   => __( "Avail 2,900+ Exclusive Gutenberg Templates", "essential-addons-for-elementor-lite" )
 						],
 						[
 							'image_url' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-icon-4.svg',
-							'content'   => __( "Unlimited Cloud Storage", "essential-addons-for-elementor-lite" )
+							'content'   => __( "Use Ready Patterns & Get Facilities To Reuse In Entire Site", "essential-addons-for-elementor-lite" )
 						],
 					],
 				]
