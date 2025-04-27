@@ -5598,7 +5598,6 @@ button.button__greyBg:hover:disabled {
 
 /* Setup Wizard V2 Starts */
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
-
 :root {
     $mode-base: #ffffff;
     --page-background: #F5F6FC;
@@ -6709,7 +6708,7 @@ span.eael-tooltip:after {
     max-width: 485px;
 }
 
-span.title-color-2 {
+span.title-color-1 {
     color: #FF7B8E;
 }
 

@@ -4,7 +4,7 @@ import GettingStartedContent from "./GettingStartedContent.jsx";
 import ConfigurationContent from "./ConfigurationContent.jsx";
 import ElementsContent from "./ElementsContent.jsx";
 import GoProContent from "./GoProContent.jsx";
-import TemplatelyContent from "./TemplatelyContent.jsx";
+import PluginsPromo from "./PluginsPromo.jsx";
 import IntegrationContent from "./IntegrationContent.jsx";
 import ModalContent from "./ModalContent.jsx";
 
@@ -290,7 +290,7 @@ function App() {
               activeTab === "templately" ? "" : "eael-d-none"
             }`}
           >
-            <TemplatelyContent
+            <PluginsPromo
               activeTab={activeTab}
               handleTabChange={handleTabChange}
               handleIntegrationSwitch={handleIntegrationSwitch}

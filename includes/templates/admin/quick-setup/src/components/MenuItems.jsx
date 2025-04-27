@@ -5,8 +5,10 @@ function MenuItems({ activeTab, handleTabChange }) {
   let menu_items = eaelQuickSetup?.menu_items;
   let wizard_column = menu_items?.wizard_column;
   let templately_status = menu_items?.templately_status;
+  let eblocks_status = menu_items?.eblocks_status;
   let items = menu_items?.items;
   let templately_local_plugin_data = menu_items?.templately_local_plugin_data;
+  let eblocks_local_plugin_data = menu_items?.eblocks_local_plugin_data;
   let ea_pro_local_plugin_data = menu_items?.ea_pro_local_plugin_data;
   let i = 0;
   let itemClass = "";
@@ -17,18 +19,18 @@ function MenuItems({ activeTab, handleTabChange }) {
         className={`eael-onboard-nav-list flex justify-between ${eaelQuickSetup.menu_items.wizard_column}`}
         data-step="1"
       >
-        {items.map((item, index) => {
+        {Object.keys(items).map((item, index) => {
           // Conditional logic to skip certain items
-          if (
-            (item === "Templately" && templately_status) ||
-            (templately_local_plugin_data !== false && item === "Templately")
-          ) {
-            return null;
-          }
-          if ( ea_pro_local_plugin_data && item === "Go PRO") {
+
+          if( 'plugins' === item && ( eblocks_status || eblocks_local_plugin_data || templately_status || templately_local_plugin_data ) ) {
             return null;
           }
 
+          if ( 'go_pro' === item && ea_pro_local_plugin_data ) {
+            return null;
+          }
+
+          item = items[item];
           itemClass = item.trim().toLowerCase().replace(/ /g, "-");
 
           return (
