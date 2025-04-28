@@ -655,7 +655,10 @@ class Filterable_Gallery extends Widget_Base
 				'type'       => \Elementor\Controls_Manager::ALERT,
 				'alert_type' => 'info',
 				'heading'    => esc_html__( 'For Video Display', 'essential-addons-for-elementor-lite' ),
-				'content'    => esc_html__( 'Right now video will display in the Overlay, Card and Search and Filter layout', 'essential-addons-for-elementor-lite' ),
+				'content'    => esc_html__( 'Currently, videos are displayed in the Overlay, Card and Search and Filter layout', 'essential-addons-for-elementor-lite' ),
+                'condition'  => [
+                    'fg_video_gallery_switch' => 'true',
+                ]
 			]
 		);
         
