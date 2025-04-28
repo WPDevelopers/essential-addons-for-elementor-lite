@@ -383,10 +383,20 @@ class Pricing_Table extends Widget_Base
             [
                 'label'   => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
                 'type'    => Controls_Manager::COLOR,
-                'default' => '#00C853',
                 'selectors' => [
                     "{{WRAPPER}} {{CURRENT_ITEM}} .li-icon i" => 'color: {{VALUE}};',
-                    "{{WRAPPER}} {{CURRENT_ITEM}} .li-icon svg" => 'color: {{VALUE}} !important; fill: {{VALUE}} !important;',
+                    "{{WRAPPER}} {{CURRENT_ITEM}} .li-icon svg" => 'fill: {{VALUE}} !important;',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_pricing_table_list_text_color',
+            [
+                'label'   => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::COLOR,
+                'selectors' => [
+                    "{{WRAPPER}} {{CURRENT_ITEM}} span" => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -1289,6 +1299,18 @@ class Pricing_Table extends Widget_Base
         );
 
         $this->add_control(
+            'eael_pricing_table_list_icon_color',
+            [
+                'label'   => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::COLOR,
+                'selectors' => [
+                    "{{WRAPPER}} .eael-pricing-item .body ul li .li-icon" => 'color: {{VALUE}};',
+                    "{{WRAPPER}} .eael-pricing-item .body ul li .li-icon svg" => 'fill: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'eael_pricing_table_list_disable_item_color',
             [
                 'label'     => esc_html__('Disable item color', 'essential-addons-for-elementor-lite'),
@@ -2129,10 +2151,8 @@ class Pricing_Table extends Widget_Base
 
     public function render_pricing_list_icon( $settings, $item ){
         if ('show' === $settings['eael_pricing_table_icon_enabled']) :
-            $icon_color = HelperClass::eael_fetch_color_or_global_color($item, 'eael_pricing_table_list_icon_color');
             ?>
-
-            <span class="li-icon" style="<?php echo 'color:'. esc_attr( $icon_color ) . ';fill:' . esc_attr( $icon_color ) . ';'; ?>" >
+            <span class="li-icon">
                 <?php
                 if ( isset( $item['__fa4_migrated']['eael_pricing_table_list_icon_new'] ) || empty( $item['eael_pricing_table_list_icon'] ) ) {
                     Icons_Manager::render_icon( $item['eael_pricing_table_list_icon_new'], [ 'aria-hidden' => 'true' ] );
@@ -2215,7 +2235,7 @@ class Pricing_Table extends Widget_Base
                         } 
                     ?>
 
-                    <span <?php $obj->print_render_attribute_string('pricing_feature_item_tooltip' . $counter); ?>><?php echo wp_kses( $item['eael_pricing_table_item'], HelperClass::eael_allowed_tags() ); ?></span>
+                    <span <?php $obj->print_render_attribute_string( 'pricing_feature_item_tooltip' . $counter ); ?>><?php echo wp_kses( $item['eael_pricing_table_item'], HelperClass::eael_allowed_tags() ); ?></span>
                     
                     <?php 
                         if( 'show' === $settings['eael_pricing_table_icon_enabled'] && 'right' === $settings['eael_pricing_table_icon_placement'] ){

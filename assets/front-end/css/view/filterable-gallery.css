@@ -143,8 +143,9 @@ body.rtl .gallery-item-caption-over {
   text-align: right;
 }
 
-a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
+.eael-gallery-load-more, .eael-gallery-load-more:hover {
   text-decoration: none;
+  border: none;
 }
 
 /*--- Caption Animation ---*/

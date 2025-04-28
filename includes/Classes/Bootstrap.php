@@ -73,8 +73,8 @@ class Bootstrap
     protected $installer;
 
 
-    const EAEL_PROMOTION_FLAG = 11;
-    const EAEL_ADMIN_MENU_FLAG = 11;
+    const EAEL_PROMOTION_FLAG = 12;
+    const EAEL_ADMIN_MENU_FLAG = 12;
     /**
      * Singleton instance
      *
@@ -224,6 +224,11 @@ class Bootstrap
 		    add_action( 'wp_ajax_eael_eb_optin_notice_dismiss', [ $this, 'eael_eb_optin_notice_dismiss' ] );
 		    add_action( 'wp_ajax_eael_gb_eb_popup_dismiss', [ $this, 'eael_gb_eb_popup_dismiss' ] );
 	    }
+	    //Essential Blocks Banner Promo
+	    if ( ! class_exists( 'Classic_Editor' ) && ! class_exists( 'EssentialBlocks' ) && ! get_transient( 'eael_eb_banner_promo_hide' ) ) {
+		    add_action( 'enqueue_block_editor_assets', [ $this, 'essential_blocks_banner_promo_enqueue_scripts' ] );
+		    add_action( 'wp_ajax_eael_eb_banner_promo_dismiss', [ $this, 'eael_eb_banner_promo_dismiss' ] );
+	    }
 
 	    if( class_exists( 'woocommerce' ) ) {
 		    // quick view
@@ -337,6 +342,12 @@ class Bootstrap
 					    if ( isset( $element['widgetType'] ) && $element['widgetType'] === 'eicon-woocommerce' ) {
 						    if ( ! empty( $element['settings']['eael_product_grid_products_status'] ) ) {
 							    $element['settings']['eael_product_grid_products_status'] = [ 'publish' ];
+						    }
+					    }
+
+                        if ( ! current_user_can( 'install_plugins' ) && isset( $element['widgetType'] ) && $element['widgetType'] === 'eaicon-advanced-data-table' ) {
+						    if ( ! empty( $element['settings']['ea_adv_data_table_source'] ) ) {
+							    $element['settings']['ea_adv_data_table_source'] = 'static';
 						    }
 					    }
 
