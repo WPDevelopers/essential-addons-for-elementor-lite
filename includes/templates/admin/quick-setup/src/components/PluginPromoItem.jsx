@@ -9,18 +9,22 @@ function PluginPrormoItem ({ plugin }){
     return (
         <div className={`eael-onboard-content-wrapper eael-qs-plugin-promo mb-4 plugin-${plugin?.slug}`}>
             <div className="eael-plugin-promo-content">
-                <h2 className="eael-plugin-promo-title">{ 
-                    'object' === typeof plugin?.titles ?
-                    titles.map((title, index) => <span className={`title-color-${index + 1}`} key={index}>{title}</span> )
-                    : titles
-                }</h2>
-                <div className="eael-plugin-details">
-                    { features.map((feature, index) => (
-                        <div className="eael-content-details flex gap-3 items-center">
-                            <img src={feature?.image_url} alt={`${plugin.tab_title} Icon ${index+1}`} />
-                            {feature?.content}
-                        </div>
-                    ))}
+                <input className="eael-promo-plugin-checkbox" id={`eael-promo-plugin-checkbox-for-${plugin?.slug}`} type="checkbox" />
+                <div className="eael-plugin-promo-content-inner">
+                    <h2 className="eael-plugin-promo-title">
+                        <label htmlFor={`eael-promo-plugin-checkbox-for-${plugin?.slug}`}>{ 
+                        'object' === typeof plugin?.titles ?
+                        titles.map((title, index) => <span className={`title-color-${index + 1}`} key={index}>{title}</span> )
+                        : titles
+                    }</label></h2>
+                    <div className="eael-plugin-details">
+                        { features.map((feature, index) => (
+                            <div className="eael-content-details flex gap-3 items-center">
+                                <img src={feature?.image_url} alt={`${plugin.tab_title} Icon ${index+1}`} />
+                                {feature?.content}
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
             <div className="eael-qs-plugin-promo-img">

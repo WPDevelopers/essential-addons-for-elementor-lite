@@ -313,7 +313,7 @@ class WPDeveloper_Setup_Wizard {
 						],
 						[
 							'image_url' => EAEL_PLUGIN_URL . 'assets/admin/images/quick-setup/templately-icon-4.svg',
-							'content'   => __( "Use Ready Patterns & Get Facilities To Reuse In Entire Site", "essential-addons-for-elementor-lite" )
+							'content'   => __( "Use Ready Patterns & Reuse Facilities On Entire Site", "essential-addons-for-elementor-lite" )
 						],
 					],
 				]

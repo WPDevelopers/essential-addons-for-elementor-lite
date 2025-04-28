@@ -16,8 +16,7 @@ function ElementsContent({
   let disable = "";
   let ea_pro_local_plugin_data =
   eaelQuickSetup?.menu_items?.ea_pro_local_plugin_data;
-  let templately_local_plugin_data =
-  eaelQuickSetup?.menu_items?.templately_local_plugin_data;
+  let templately_local_plugin_data = eaelQuickSetup?.menu_items?.templately_local_plugin_data;
 
   elements_list =
     typeof elements_list === "object"
