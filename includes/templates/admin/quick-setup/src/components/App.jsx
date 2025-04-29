@@ -12,7 +12,6 @@ function App() {
   let eaelQuickSetup = localize.eael_quick_setup_data;
   let is_tracking_allowed = eaelQuickSetup?.getting_started_content?.is_tracking_allowed;
   let currentTabValue = ! is_tracking_allowed ? 'getting-started' : 'configuration';
-  let plugins_content = eaelQuickSetup?.plugins_content?.plugins;
   let hasPluginPromo = Object.keys(eaelQuickSetup?.plugins_content?.plugins).length;
 
   const [activeTab, setActiveTab] = useState(currentTabValue);
@@ -41,7 +40,6 @@ function App() {
 
   const handleTabChange = (event) => {
     setActiveTab(event.currentTarget.getAttribute("data-next"));
-console.log('activeTab', activeTab);
 
     if (event.currentTarget.classList.contains("eael-user-email-address")) {
       setEmailAddress("1");

@@ -12,10 +12,7 @@ function IntegrationContent({
 }) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let integrations_content = eaelQuickSetup?.integrations_content;
-  let ea_pro_local_plugin_data =
-    eaelQuickSetup?.menu_items?.ea_pro_local_plugin_data;
-  let templately_local_plugin_data =
-    eaelQuickSetup?.menu_items?.templately_local_plugin_data;
+  let ea_pro_local_plugin_data = eaelQuickSetup?.menu_items?.ea_pro_local_plugin_data;
   let initialPluginList = integrations_content?.plugin_list;
   let hasPluginPromo = Object.keys(eaelQuickSetup?.plugins_content?.plugins).length;
 

@@ -14,9 +14,7 @@ function ElementsContent({
   let elements_list = elements_content?.elements_list;
   let init = 0;
   let disable = "";
-  let ea_pro_local_plugin_data =
-  eaelQuickSetup?.menu_items?.ea_pro_local_plugin_data;
-  let templately_local_plugin_data = eaelQuickSetup?.menu_items?.templately_local_plugin_data;
+  let ea_pro_local_plugin_data = eaelQuickSetup?.menu_items?.ea_pro_local_plugin_data;
   let hasPluginPromo = Object.keys(eaelQuickSetup?.plugins_content?.plugins).length;
 
   elements_list =
