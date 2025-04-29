@@ -3092,7 +3092,7 @@ class Woo_Product_List extends Widget_Base
             [
                 'label'     => __('Price Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '#0242e4',
+                'default'   => '#343434',
                 'selectors' => [
                     '.eael-popup-details-render .elementor-element-{{ID}} div.product .price' => 'color: {{VALUE}}!important;',
                 ],
@@ -3104,7 +3104,7 @@ class Woo_Product_List extends Widget_Base
             [
                 'label'     => __('Sale Price Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '#ff2a13',
+                'default'   => '#757C86',
                 'selectors' => [
                     '.eael-popup-details-render .elementor-element-{{ID}} div.product .price ins' => 'color: {{VALUE}}!important;',
                 ],
@@ -3135,44 +3135,9 @@ class Woo_Product_List extends Widget_Base
             [
                 'label'     => __('Content Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '#707070',
+                'default'   => '#5F6368',
                 'selectors' => [
                     '.eael-popup-details-render .elementor-element-{{ID}} .woocommerce-product-details__short-description' => 'color: {{VALUE}};',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_product_popup_review_link_color',
-            [
-                'label'     => __('Review Link Color', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::COLOR,
-                'default'   => '#ccc',
-                'selectors' => [
-                    '.eael-popup-details-render .elementor-element-{{ID}} .product_meta a.woocommerce-review-link, .eael-popup-details-render .elementor-element-{{ID}} .product_meta a' => 'color: {{VALUE}};',
-                ],
-            ]
-        );
-        $this->add_control(
-            'eael_product_popup_review_link_hover',
-            [
-                'label'     => __('Review Link Hover', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::COLOR,
-                'default'   => '#ccc',
-                'selectors' => [
-                    '.eael-popup-details-render .elementor-element-{{ID}} a.woocommerce-review-link:hover, .eael-popup-details-render .elementor-element-{{ID}} .product_meta a:hover' => 'color: {{VALUE}};',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_product_popup_table_border_color',
-            [
-                'label'     => __('Border Color', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::COLOR,
-                'default'   => '#ccc',
-                'selectors' => [
-                    '.eael-popup-details-render .elementor-element-{{ID}} div.product table tbody tr, {{WRAPPER}} .eael-product-popup.woocommerce div.product .product_meta' => 'border-color: {{VALUE}};',
                 ],
             ]
         );
