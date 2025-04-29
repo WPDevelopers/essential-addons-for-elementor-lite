@@ -12,6 +12,8 @@ function MenuItems({ activeTab, handleTabChange }) {
   let ea_pro_local_plugin_data = menu_items?.ea_pro_local_plugin_data;
   let i = 0;
   let itemClass = "";
+  let hasPluginPromo = Object.keys(eaelQuickSetup?.plugins_content?.plugins).length;
+  
 
   return (
     <>
@@ -22,7 +24,7 @@ function MenuItems({ activeTab, handleTabChange }) {
         {Object.keys(items).map((item, index) => {
           // Conditional logic to skip certain items
 
-          if( 'plugins' === item && ( eblocks_status || eblocks_local_plugin_data || templately_status || templately_local_plugin_data ) ) {
+          if( 'pluginspromo' === item && !hasPluginPromo ) {
             return null;
           }
 
@@ -30,9 +32,8 @@ function MenuItems({ activeTab, handleTabChange }) {
             return null;
           }
 
-          item = items[item];
           itemClass = item.trim().toLowerCase().replace(/ /g, "-");
-
+          
           return (
             <div
               className={`eael-onboard-nav ${
@@ -41,7 +42,7 @@ function MenuItems({ activeTab, handleTabChange }) {
               key={index}
             >
               <span className="eael-nav-count">{++i}</span>
-              <span className="eael-nav-text">{item}</span>
+              <span className="eael-nav-text">{items[item]}</span>
             </div>
           );
         })}

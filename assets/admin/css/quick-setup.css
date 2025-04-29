@@ -6688,6 +6688,9 @@ span.eael-tooltip:after {
     grid-template-columns: 1fr 1fr;
     gap: 30px;
 }
+.eael-setup-content.eael-plugins-promo-content .eael-onboard-content-wrapper:not(:first-child){
+    border-radius: 8px;
+}
 
 .eael-onboard--wrapper .eael-general-content-item h2 {
     font-size: 40px;

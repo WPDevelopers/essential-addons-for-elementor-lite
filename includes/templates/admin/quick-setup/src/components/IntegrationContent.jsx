@@ -17,6 +17,7 @@ function IntegrationContent({
   let templately_local_plugin_data =
     eaelQuickSetup?.menu_items?.templately_local_plugin_data;
   let initialPluginList = integrations_content?.plugin_list;
+  let hasPluginPromo = Object.keys(eaelQuickSetup?.plugins_content?.plugins).length;
 
   const [pluginList, setPluginList] = useState(initialPluginList);
 
@@ -161,13 +162,7 @@ function IntegrationContent({
         <button
           className="previous-btn flex gap-2 items-center eael-setup-next-btn"
           type="button"
-          data-next={
-            !templately_local_plugin_data !== false
-              ? "templately"
-              : !ea_pro_local_plugin_data
-              ? "go-pro"
-              : "elements"
-          }
+          data-next={ hasPluginPromo ? "pluginspromo" : !ea_pro_local_plugin_data ? "go-pro" : "elements" }
           onClick={handleTabChange}
         >
           <i className="ea-dash-icon ea-left-arrow-long"></i>

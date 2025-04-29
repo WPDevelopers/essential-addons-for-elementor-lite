@@ -10,9 +10,10 @@ import ModalContent from "./ModalContent.jsx";
 
 function App() {
   let eaelQuickSetup = localize.eael_quick_setup_data;
-  let is_tracking_allowed =
-    eaelQuickSetup?.getting_started_content?.is_tracking_allowed;
+  let is_tracking_allowed = eaelQuickSetup?.getting_started_content?.is_tracking_allowed;
   let currentTabValue = ! is_tracking_allowed ? 'getting-started' : 'configuration';
+  let plugins_content = eaelQuickSetup?.plugins_content?.plugins;
+  let hasPluginPromo = Object.keys(eaelQuickSetup?.plugins_content?.plugins).length;
 
   const [activeTab, setActiveTab] = useState(currentTabValue);
   const [modalTarget, setModalTarget] = useState("");
@@ -40,6 +41,7 @@ function App() {
 
   const handleTabChange = (event) => {
     setActiveTab(event.currentTarget.getAttribute("data-next"));
+console.log('activeTab', activeTab);
 
     if (event.currentTarget.classList.contains("eael-user-email-address")) {
       setEmailAddress("1");
@@ -143,7 +145,7 @@ function App() {
 
     if ( isTemplately ) {
         requestData['action'] = 'wpdeveloper_install_plugin';
-        requestData['slug'] = 'templately';
+        requestData['slug'] = 'pluginspromo';
         label = event.currentTarget;
         dataNext = event.currentTarget.getAttribute("data-next");
         if ( plugin?.local_plugin_data ) {
@@ -285,9 +287,10 @@ function App() {
             />
           </div>
 
+          { hasPluginPromo ?
           <div
-            className={`eael-setup-content eael-templately-content ${
-              activeTab === "templately" ? "" : "eael-d-none"
+            className={`eael-setup-content eael-plugins-promo-content ${
+              activeTab === "pluginspromo" ? "" : "eael-d-none"
             }`}
           >
             <PluginsPromo
@@ -296,6 +299,7 @@ function App() {
               handleIntegrationSwitch={handleIntegrationSwitch}
             />
           </div>
+          : '' }
 
           <div
             className={`eael-setup-content eael-integrations-content ${

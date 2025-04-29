@@ -17,6 +17,7 @@ function ElementsContent({
   let ea_pro_local_plugin_data =
   eaelQuickSetup?.menu_items?.ea_pro_local_plugin_data;
   let templately_local_plugin_data = eaelQuickSetup?.menu_items?.templately_local_plugin_data;
+  let hasPluginPromo = Object.keys(eaelQuickSetup?.plugins_content?.plugins).length;
 
   elements_list =
     typeof elements_list === "object"
@@ -128,13 +129,7 @@ function ElementsContent({
         <button
           className="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn"
           type="button"
-          data-next={
-            ! ea_pro_local_plugin_data
-              ? "go-pro"
-              : ( ! templately_local_plugin_data
-                ? "templately"
-                : "integrations" )
-          }
+          data-next={ ! ea_pro_local_plugin_data ? "go-pro" : ( hasPluginPromo ? "pluginspromo" : "integrations" ) }
           onClick={handleTabChange}
         >
           {__("Next", "essential-addons-for-elementor-lite")}
