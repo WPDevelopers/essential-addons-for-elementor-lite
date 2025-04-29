@@ -731,6 +731,8 @@ class Filterable_Gallery extends Widget_Base
             ]
         );
         
+        // This is for the grid flow layout item animator control
+        do_action( 'eael_grid_fg_item_animator_popover', $repeater );
         
         $repeater->add_control(
             'fg_item_price_switch',
@@ -901,8 +903,6 @@ class Filterable_Gallery extends Widget_Base
                 'show_external' => true
             ]
         );
-
-        do_action('add_filterable_gallery_popover', $repeater);
         
         $this->add_control(
             'eael_fg_gallery_items',
@@ -3445,10 +3445,9 @@ class Filterable_Gallery extends Widget_Base
             $gallery_store[$counter]['maybe_link']   = $gallery['eael_fg_gallery_link'];
             $gallery_store[$counter]['link']         = $gallery['eael_fg_gallery_img_link'];
             $gallery_store[$counter]['toggle']       = isset( $gallery['eael_fg_gallery_item_toggle'] ) ? $gallery['eael_fg_gallery_item_toggle'] : '';
-            $gallery_store[$counter]['tag']          = isset( $gallery['eael_fg_gallery_item_tag'] ) ? $gallery['eael_fg_gallery_item_tag'] : '';
             $gallery_store[$counter]['writing_mode'] = isset( $gallery['eael_fg_gallery_item_tag_writing_mode'] ) ? $gallery['eael_fg_gallery_item_tag_writing_mode'] : '';
-            $gallery_store[$counter]['tag_top']      = isset( $gallery['eael_fg_gallery_item_tag_top'] ) ? $gallery['eael_fg_gallery_item_tag_top'] : '';
-            $gallery_store[$counter]['tag_right']    = isset( $gallery['eael_fg_gallery_item_tag_right'] ) ? $gallery['eael_fg_gallery_item_tag_right'] : '';
+            $gallery_store[$counter]['item_top']      = isset( $gallery['eael_fg_gallery_item_tag_top'] ) ? $gallery['eael_fg_gallery_item_tag_top'] : '';
+            $gallery_store[$counter]['item_right']    = isset( $gallery['eael_fg_gallery_item_tag_right'] ) ? $gallery['eael_fg_gallery_item_tag_right'] : '';
             $gallery_store[$counter]['key_top']      = isset( $gallery['eael_fg_gallery_item_key_top'] ) ? $gallery['eael_fg_gallery_item_key_top'] : '';
             $gallery_store[$counter]['key_right']    = isset( $gallery['eael_fg_gallery_item_key_right'] ) ? $gallery['eael_fg_gallery_item_key_right'] : '';
             $gallery_store[$counter]['icon_top']     = isset( $gallery['eael_fg_gallery_item_tag_icon_top'] ) ? $gallery['eael_fg_gallery_item_tag_icon_top'] : '';
