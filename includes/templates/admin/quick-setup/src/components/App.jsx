@@ -122,8 +122,7 @@ function App() {
     setDisableSwitches(true);
     const isChecked = event.target.checked ?? 0;
 
-    const isActionInstall =
-      event.target.getAttribute("data-local_plugin_data") === "false";
+    const isActionInstall = event.target.getAttribute("data-local_plugin_data") === "false";
 
     const action = isActionInstall
       ? "install"

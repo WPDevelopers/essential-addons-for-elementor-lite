@@ -8,7 +8,6 @@ function MenuItems({ activeTab, handleTabChange }) {
   let i = 0;
   let itemClass = "";
   let hasPluginPromo = Object.keys(eaelQuickSetup?.plugins_content?.plugins).length;
-  
 
   return (
     <>

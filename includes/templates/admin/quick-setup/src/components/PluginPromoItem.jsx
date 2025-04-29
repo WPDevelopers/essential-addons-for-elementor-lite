@@ -2,14 +2,19 @@ import React, { useState } from "react";
 import { __ } from "@wordpress/i18n";
 
 
-function PluginPrormoItem ({ plugin }){
+function PluginPrormoItem ({ plugin, checkedPlugins, handleCheckbox }){
     const titles = 'object' === typeof plugin?.titles ? Object.keys(plugin?.titles || {}).filter(key => !isNaN(key)).map(key => plugin?.titles[key]) : plugin?.titles;
     const features = Object.keys(plugin?.features || {}).filter(key => !isNaN(key)).map(key => plugin?.features[key]);
     
     return (
         <div className={`eael-onboard-content-wrapper eael-qs-plugin-promo mb-4 plugin-${plugin?.slug}`}>
             <div className="eael-plugin-promo-content">
-                <input className="eael-promo-plugin-checkbox" id={`eael-promo-plugin-checkbox-for-${plugin?.slug}`} type="checkbox" />
+                <input 
+                    className="eael-promo-plugin-checkbox" 
+                    id={`eael-promo-plugin-checkbox-for-${plugin?.slug}`} 
+                    type="checkbox" checked={!!checkedPlugins[plugin.slug]} 
+                    onChange={() => handleCheckbox(plugin?.slug)} />
+
                 <div className="eael-plugin-promo-content-inner">
                     <h2 className="eael-plugin-promo-title">
                         <label htmlFor={`eael-promo-plugin-checkbox-for-${plugin?.slug}`}>{ 
