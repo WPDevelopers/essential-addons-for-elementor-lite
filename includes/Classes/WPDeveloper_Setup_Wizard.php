@@ -299,7 +299,7 @@ class WPDeveloper_Setup_Wizard {
 
 		if ( ! $this->get_local_plugin_data( 'essential-blocks/essential-blocks.php' ) ) {
 			$plugins_content['plugins'][] = [
-				'slug'              => 'essential_blocks',
+				'slug'              => 'essential-blocks',
 				'basename'          => 'essential-blocks/essential-blocks.php',
 				'tab_title'         => __( 'Essential Blocks', 'essential-addons-for-elementor-lite' ),
 				'is_active'         => is_plugin_active( 'essential-blocks/essential-blocks.php' ),
@@ -326,7 +326,7 @@ class WPDeveloper_Setup_Wizard {
 				],
 			];
 		}
-		// $plugins_content['plugins'] = [];
+		
 		return $plugins_content;
 	}
 	

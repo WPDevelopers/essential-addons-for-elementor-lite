@@ -142,7 +142,7 @@ function App() {
 
     if ( isTemplately ) {
         requestData['action'] = 'wpdeveloper_install_plugin';
-        requestData['slug'] = 'pluginspromo';
+        requestData['slug'] = plugin?.slug;
         label = event.currentTarget;
         dataNext = event.currentTarget.getAttribute("data-next");
         if ( plugin?.local_plugin_data ) {

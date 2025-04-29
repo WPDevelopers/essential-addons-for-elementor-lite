@@ -10,6 +10,7 @@ function PluginsPromo({ activeTab, handleTabChange, handleIntegrationSwitch }) {
 
   const [checkedPlugins, setCheckedPlugins] = useState({});
   const [buttonLabel, setButtonLabel] = useState( __('Enable Templates & Blocks', "essential-addons-for-elementor-lite") );
+  const [isProcessing, setIsProcessing] = useState(false);
 
   useEffect(() => {
     if (hasPluginPromo > 0 && Object.keys(checkedPlugins).length === 0) {
@@ -29,21 +30,54 @@ function PluginsPromo({ activeTab, handleTabChange, handleIntegrationSwitch }) {
   };
 
   useEffect(() => {
-    if( checkedPlugins?.templately && !checkedPlugins?.essential_blocks ){
+    if( checkedPlugins?.templately && !checkedPlugins?.["essential-blocks"] ){
       setButtonLabel( __('Enable Templates', "essential-addons-for-elementor-lite") );
-    } else if( !checkedPlugins?.templately && checkedPlugins?.essential_blocks ){
+    } else if( !checkedPlugins?.templately && checkedPlugins?.["essential-blocks"] ){
       setButtonLabel( __('Enable Blocks', "essential-addons-for-elementor-lite") );
-    } else if ( checkedPlugins?.templately && checkedPlugins?.essential_blocks ) {
+    } else if ( checkedPlugins?.templately && checkedPlugins?.["essential-blocks"] ) {
       setButtonLabel( __('Enable Templates & Blocks', "essential-addons-for-elementor-lite") );
     } else{
       setButtonLabel( "" );
     }
   }, [checkedPlugins]);
 
-  const handlePluginEnable = () => {
-    const selectedPlugins = Object.keys(checkedPlugins).filter(slug => checkedPlugins[slug]);
-    // handleSubmit(selectedPlugins); // send to your function
-
+  const handlePluginEnable = async (event) => {
+    try {
+      setIsProcessing(true);
+      const selectedPlugins = Object.keys(checkedPlugins).filter(slug => checkedPlugins[slug]);
+      
+      // Process each selected plugin
+      for (const pluginSlug of selectedPlugins) {
+        const plugin = plugins.find(p => p.slug === pluginSlug);
+        if (plugin) {
+          const syntheticEvent = {
+            ...event,
+            currentTarget: {
+              getAttribute: (attr) => {
+                switch(attr) {
+                  case 'data-slug':
+                    return plugin.slug;
+                  case 'data-action':
+                    return 'install';
+                  case 'data-next':
+                    return 'integrations';
+                  default:
+                    return null;
+                }
+              }
+            }
+          };
+          
+          await handleIntegrationSwitch(syntheticEvent, plugin, 1);
+        }
+      }
+      // Only change tab after all plugins are processed
+      handleTabChange(event);
+    } catch (error) {
+      console.error('Error processing plugins:', error);
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   return (
@@ -56,6 +90,7 @@ function PluginsPromo({ activeTab, handleTabChange, handleIntegrationSwitch }) {
           type="button"
           data-next="integrations"
           onClick={handleTabChange}
+          disabled={isProcessing}
         >
           {__("Skip", "essential-addons-for-elementor-lite")}
         </button>
@@ -65,15 +100,10 @@ function PluginsPromo({ activeTab, handleTabChange, handleIntegrationSwitch }) {
           className="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn eael-quick-setup-next-button wpdeveloper-plugin-installer"
           type="button"
           data-next="integrations"
-          data-action="install"
-          data-slug="templately"
-          onClick={async (event) => {
-            console.log();
-            
-            // await handleIntegrationSwitch(event, templatelyPlugin, 1, setTemplatelyPlugin);
-          }}
+          onClick={handlePluginEnable}
+          disabled={isProcessing}
         >
-          {buttonLabel}
+          {isProcessing ? __("Processing...", "essential-addons-for-elementor-lite") : buttonLabel}
         </button> : "" }
       </div>
     </>
