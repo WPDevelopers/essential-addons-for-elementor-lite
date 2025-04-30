@@ -171,60 +171,6 @@ class Filterable_Gallery extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'eael_fg_caption_style',
-            [
-                'label'   => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
-                'type'    => Controls_Manager::SELECT,
-                'default' => 'hoverer',
-                'options' => [
-                    'hoverer'  => __('Overlay', 'essential-addons-for-elementor-lite'),
-                    'card'     => __('Card', 'essential-addons-for-elementor-lite'),
-                    'layout_3' => esc_html__('Search & Filter', 'essential-addons-for-elementor-lite')
-                ],
-            ]
-        );
-
-        $this->add_control(
-			'eael_fg_grid_style',
-			[
-				'label'   => esc_html__( 'Grid Style', 'essential-addons-for-elementor-lite' ),
-				'type'    => Controls_Manager::CHOOSE,
-				'options' => [
-					'grid' => [
-						'title' => esc_html__( 'Grid', 'essential-addons-for-elementor-lite' ),
-						'icon' => 'eicon-gallery-grid',
-					],
-					'masonry' => [
-						'title' => esc_html__( 'Masonry', 'essential-addons-for-elementor-lite' ),
-						'icon' => 'eicon-gallery-masonry',
-					],
-				],
-				'default'   => 'grid',
-				'toggle'    => false,
-			]
-		);
-        
-        $this->add_control(
-            'eael_fg_grid_item_height',
-            [
-                'label'     => esc_html__('Image Height', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::NUMBER,
-                'default'   => 300,
-                'condition' => [
-                    'eael_fg_grid_style' => 'grid',
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item .gallery-item-thumbnail-wrap, 
-                    {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-grid-fg-box .eael-grid-fg-img,
-                    {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-hg-grid__cell-img .grid__cell-img-inner' => 'height: {{VALUE}}px;',
-                ],
-                'ai' => [
-					'active' => false,
-				],
-            ]
-        );
-
         $image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/filterable-gallery-';
         $eael_fg_layout = apply_filters(
             'eael_fg_caption_styles',
@@ -265,6 +211,46 @@ class Filterable_Gallery extends Widget_Base
                 'toggle'      => false,
                 'image_choose'=> true,
                 'options'     => $eael_fg_layout['styles'],
+            ]
+        );
+
+        $this->add_control(
+			'eael_fg_grid_style',
+			[
+				'label'   => esc_html__( 'Grid Style', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'grid' => [
+						'title' => esc_html__( 'Grid', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-gallery-grid',
+					],
+					'masonry' => [
+						'title' => esc_html__( 'Masonry', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-gallery-masonry',
+					],
+				],
+				'default'   => 'grid',
+				'toggle'    => false,
+			]
+		);
+        
+        $this->add_control(
+            'eael_fg_grid_item_height',
+            [
+                'label'     => esc_html__('Image Height', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::NUMBER,
+                'default'   => 300,
+                'condition' => [
+                    'eael_fg_grid_style' => 'grid',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item .gallery-item-thumbnail-wrap, 
+                    {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-grid-fg-box .eael-grid-fg-img,
+                    {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-hg-grid__cell-img .grid__cell-img-inner' => 'height: {{VALUE}}px;',
+                ],
+                'ai' => [
+					'active' => false,
+				],
             ]
         );
 
