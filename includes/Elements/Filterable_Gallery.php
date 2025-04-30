@@ -109,12 +109,12 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'eael_fg_items_to_show',
             [
-                'label' => esc_html__('Items to show', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
+                'label'       => esc_html__('Items to show', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::NUMBER,
                 'dynamic'     => [ 'active' => true ],
                 'label_block' => false,
-                'default' => 6,
-                'ai' => [
+                'default'     => 6,
+                'ai'          => [
 					'active' => false,
 				],
             ]
@@ -123,11 +123,11 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'eael_fg_filter_duration',
             [
-                'label' => esc_html__('Animation Duration (ms)', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
+                'label'       => esc_html__('Animation Duration (ms)', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::NUMBER,
                 'label_block' => false,
-                'default' => 500,
-                'ai' => [
+                'default'     => 500,
+                'ai'          => [
 					'active' => false,
 				],
             ]
@@ -136,41 +136,81 @@ class Filterable_Gallery extends Widget_Base
         $this->add_responsive_control(
             'columns',
             [
-                'label' => __('Columns', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'default' => '3',
+                'label'   => __('Columns', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::CHOOSE,
+                'options' => [
+					'1' => [
+						'title' => '1',
+						'text' => '1',
+					],
+					'2' => [
+						'title' => '2',
+						'text' => '2',
+					],
+					'3' => [
+						'title' => '3',
+						'text' => '3',
+					],
+					'4' => [
+						'title' => '4',
+						'text' => '4',
+					],
+					'5' => [
+						'title' => '5',
+						'text' => '5',
+					],
+					'6' => [
+						'title' => '6',
+						'text' => '6',
+					],
+				],
+                'default'        => '3',
                 'tablet_default' => '2',
                 'mobile_default' => '1',
-                'options' => [
-                    '1' => '1',
-                    '2' => '2',
-                    '3' => '3',
-                    '4' => '4',
-                    '5' => '5',
-                    '6' => '6',
-                ],
+				'toggle'         => false,
             ]
         );
-        
+
         $this->add_control(
-            'eael_fg_grid_style',
+            'eael_fg_caption_style',
             [
-                'label' => esc_html__('Grid Style', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'default' => 'grid',
+                'label'   => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'hoverer',
                 'options' => [
-                    'grid' => esc_html__('Grid', 'essential-addons-for-elementor-lite'),
-                    'masonry' => esc_html__('Masonry', 'essential-addons-for-elementor-lite'),
+                    'hoverer'  => __('Overlay', 'essential-addons-for-elementor-lite'),
+                    'card'     => __('Card', 'essential-addons-for-elementor-lite'),
+                    'layout_3' => esc_html__('Search & Filter', 'essential-addons-for-elementor-lite')
                 ],
             ]
         );
+
+        $this->add_control(
+			'eael_fg_grid_style',
+			[
+				'label'   => esc_html__( 'Grid Style', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'grid' => [
+						'title' => esc_html__( 'Grid', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-gallery-grid',
+					],
+					'masonry' => [
+						'title' => esc_html__( 'Masonry', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-gallery-masonry',
+					],
+				],
+				'default'   => 'grid',
+				'toggle'    => false,
+			]
+		);
         
         $this->add_control(
             'eael_fg_grid_item_height',
             [
-                'label' => esc_html__('Image Height', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'default' => '300',
+                'label'     => esc_html__('Image Height', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::NUMBER,
+                'default'   => 300,
                 'condition' => [
                     'eael_fg_grid_style' => 'grid',
                 ],
@@ -242,13 +282,11 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'eael_search_among_all',
             [
-                'label' => __('Search Full Gallery ?', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Search Full Gallery ?', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
-                'default' => '',
-                'condition' => [
+                'default'      => '',
+                'condition'    => [
                       'eael_fg_caption_style' =>  'layout_3'
                 ]
             ]
@@ -257,7 +295,7 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
 			'eael_search_among_note',
 			[
-				'label' => esc_html__( '', 'essential-addons-for-elementor-lite' ),
+				'label' => '',
 				'type' => Controls_Manager::RAW_HTML,
 				'raw' => esc_html__( 'Enabling this will load all prior items up to the one you searched for.', 'essential-addons-for-elementor-lite' ),
 				'content_classes' => 'eael-warning',
@@ -285,9 +323,21 @@ class Filterable_Gallery extends Widget_Base
 		);
 
         $this->add_control(
+			'hover_style_heading',
+			[
+				'label'     => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+                'condition' => [
+                    'eael_fg_caption_style' => 'hoverer',
+                ],
+			]
+		);
+
+        $this->add_control(
             'eael_fg_grid_hover_style',
             [
-                'label' => esc_html__('Hover Style', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Style', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'eael-slide-up',
                 'options' => [
@@ -305,7 +355,7 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'eael_fg_grid_hover_transition',
             [
-                'label' => esc_html__('Hover Transition', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Transition', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 500,
@@ -322,59 +372,66 @@ class Filterable_Gallery extends Widget_Base
                     'eael_fg_caption_style' => 'hoverer',
                     'eael_fg_grid_hover_style!' => 'eael-none',
                 ],
-            ]
-        );
-        
-        $this->add_control(
-            'eael_fg_show_popup',
-            [
-                'label' => esc_html__('Link to', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'default' => 'buttons',
-                'options' => [
-                    'none' => esc_html__('None', 'essential-addons-for-elementor-lite'),
-                    'media' => esc_html__('Media', 'essential-addons-for-elementor-lite'),
-                    'buttons' => esc_html__('Buttons', 'essential-addons-for-elementor-lite'),
-                ],
-                'condition' => [
-                    'eael_fg_caption_style!'    => 'layout_3'
-                ]
+				'separator' => 'after',
             ]
         );
 
         $this->add_control(
+			'eael_fg_show_popup',
+			[
+                'label'   => esc_html__('Link to', 'essential-addons-for-elementor-lite'),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'none' => [
+						'title' => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-ban',
+					],
+					'media' => [
+						'title' => esc_html__( 'Media', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-e-image',
+					],
+					'buttons' => [
+						'title' => esc_html__( 'Buttons', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-button',
+					],
+				],
+                'condition' => [
+                    'eael_fg_caption_style!'    => 'layout_3'
+                ],
+				'default'   => 'grid',
+				'toggle'    => false,
+			]
+		);
+
+        $this->add_control(
             'eael_title_clickable',
             [
-                'label' => __('Title Clickable', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Enable', 'essential-addons-for-elementor-lite'),
-                'label_off' => __('Disable', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Title Clickable', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
-                'default' => ''
+                'default'      => ''
             ]
         );
 
         $this->add_control(
             'eael_section_fg_full_image_clickable',
             [
-                'label' => __('Image Clickable', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Enable', 'essential-addons-for-elementor-lite'),
-                'label_off' => __('Disable', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Image Clickable', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
-                'default' => ''
+                'default'      => ''
             ]
         );
 
         $this->add_control(
             'eael_section_fg_mfp_caption',
             [
-                'label' => __('Show Popup Caption', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Caption in Popup', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
-                'default' => ''
+                'default'      => ''
             ]
         );
         
@@ -443,8 +500,10 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'filter_enable',
             [
-                'label' => __('Enable Filter', 'essential-addons-for-elementor-lite'),
+                'label' => __('Filter', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
+                'label_on'     => __('Enable', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('Disable', 'essential-addons-for-elementor-lite'),
                 'default' => 'yes',
             ]
         );
@@ -484,19 +543,47 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'title_tag',
             [
-                'label' => __('Select Title Tag', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
+                'label' => __('Title Tag', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::CHOOSE,
+                'label_block' => true,
                 'default' => 'h2',
                 'options' => [
-                    'h1' => __('H1', 'essential-addons-for-elementor-lite'),
-                    'h2' => __('H2', 'essential-addons-for-elementor-lite'),
-                    'h3' => __('H3', 'essential-addons-for-elementor-lite'),
-                    'h4' => __('H4', 'essential-addons-for-elementor-lite'),
-                    'h5' => __('H5', 'essential-addons-for-elementor-lite'),
-                    'h6' => __('H6', 'essential-addons-for-elementor-lite'),
-                    'span' => __('Span', 'essential-addons-for-elementor-lite'),
-                    'p' => __('P', 'essential-addons-for-elementor-lite'),
-                    'div' => __('Div', 'essential-addons-for-elementor-lite'),
+                    'h1' => [
+						'title' => __('H1', 'essential-addons-for-elementor-lite'),
+						'text' => 'H1',
+					],
+                    'h2' => [
+						'title' => __('H2', 'essential-addons-for-elementor-lite'),
+						'text' => 'H2',
+					],
+                    'h3' => [
+						'title' => __('H3', 'essential-addons-for-elementor-lite'),
+						'text' => 'H3',
+					],
+                    'h4' => [
+						'title' => __('H4', 'essential-addons-for-elementor-lite'),
+						'text' => 'H4',
+					],
+                    'h5' => [
+						'title' => __('H5', 'essential-addons-for-elementor-lite'),
+						'text' => 'H5',
+					],
+                    'h6' => [
+						'title' => __('H6', 'essential-addons-for-elementor-lite'),
+						'text' => 'H6',
+					],
+                    'span' => [
+						'title' => __('SPAN', 'essential-addons-for-elementor-lite'),
+						'text' => 'SPAN',
+					],
+                    'p' => [
+						'title' => __('P', 'essential-addons-for-elementor-lite'),
+						'text' => 'P',
+					],
+                    'div' => [
+						'title' => __('DIV', 'essential-addons-for-elementor-lite'),
+						'text' => 'DIV',
+					],
                 ],
             ]
         );
@@ -505,14 +592,13 @@ class Filterable_Gallery extends Widget_Base
             'eael_fg_controls',
             [
                 'type' => Controls_Manager::REPEATER,
-                'seperator' => 'before',
                 'default' => [
                     ['eael_fg_control' => 'Gallery Item'],
                 ],
                 'fields' => [
                     [
                         'name' => 'eael_fg_control',
-                        'label' => esc_html__('List Item', 'essential-addons-for-elementor-lite'),
+                        'label' => esc_html__('Name', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::TEXT,
                         'dynamic' => ['active' => true],
                         'label_block' => true,
@@ -582,9 +668,11 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'photo_gallery',
             [
-                'label' => __('Enable Photo Gallery', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'default' => 'yes',
+                'label'              => __('Photo Gallery', 'essential-addons-for-elementor-lite'),
+                'type'               => Controls_Manager::SWITCHER,
+                'label_on'           => __('Enable', 'essential-addons-for-elementor-lite'),
+                'label_off'          => __('Disable', 'essential-addons-for-elementor-lite'),
+                'default'            => 'yes',
                 'frontend_available' => true,
             ]
         );
@@ -593,10 +681,10 @@ class Filterable_Gallery extends Widget_Base
 		$this->add_control(
 			'video_gallery_yt_privacy',
 			[
-				'label' => esc_html__( 'Video Privacy Mode', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::SWITCHER,
-				'description' => esc_html__( 'If enabled, YouTube won\'t store information about visitors unless they play the video.', 'essential-addons-for-elementor-lite' ),
-				'frontend_available' => true,
+				'label'               => esc_html__( 'Video Privacy Mode', 'essential-addons-for-elementor-lite' ),
+				'type'                => Controls_Manager::SWITCHER,
+				'description'         => esc_html__( 'If enabled, YouTube won\'t store information about visitors unless they play the video.', 'essential-addons-for-elementor-lite' ),
+				'frontend_available'  => true,
                 'default' => '',
 			]
 		);
@@ -605,8 +693,10 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
 			'eael_privacy_notice_control',
 			[
-				'label'        => esc_html__( 'Display Consent Notice', 'essential-addons-for-elementor-lite' ),
+				'label'        => esc_html__( 'Consent Notice', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
                 'description'  => esc_html__( 'If enabled, The consent notice will appear before playing the video.', 'essential-addons-for-elementor-lite' ),
 				'default'      => '',
 			]
@@ -625,26 +715,60 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'eael_item_randomize',
             [
-                'label' => __('Randomize Item', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('YES', 'essential-addons-for-elementor-lite'),
-                'label_off' => __('NO', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Randomize Item', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
-                'default' => '',
-                'description' => __( 'Items will be displayed in a random order.', 'essential-addons-for-elementor-lite' )
+                'default'      => '',
+                'description'  => __( 'Items will be displayed in a random order.', 'essential-addons-for-elementor-lite' )
             ]
         );
 
         $repeater = new Repeater();
-        
+
+        $repeater->add_control(
+            'eael_fg_gallery_item_name',
+            [
+                'label'       => esc_html__('Title', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' =>true ],
+                'label_block' => true,
+                'default'     => esc_html__('Gallery item name', 'essential-addons-for-elementor-lite'),
+                'ai'          => [
+					'active' => false,
+				],
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_fg_gallery_control_name',
+            [
+                'label'       => esc_html__('Control Name', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::TEXT,
+                'dynamic'     => ['active' =>true ],
+                'label_block' => true,
+                'default'     => '',
+                'description' => __('Use the gallery control name from Control Settings. Separate multiple items with comma (e.g. <strong>Gallery Item, Gallery Item 2</strong>)', 'essential-addons-for-elementor-lite'),
+                'ai'          => [
+					'active' => false,
+				],
+            ]
+        );
+
+        $repeater->add_control(
+			'fg_video_gallery_heading',
+			[
+				'label'     => esc_html__( 'Video Gallery?', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
         $repeater->add_control(
             'fg_video_gallery_switch',
             [
-                'label' => __('Video Gallery?', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'default' => 'false',
-                'label_on' => esc_html__('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off' => esc_html__('No', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Enable', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'default'      => 'false',
                 'return_value' => 'true',
             ]
         );
@@ -661,15 +785,15 @@ class Filterable_Gallery extends Widget_Base
                 ]
 			]
 		);
-        
+
         $repeater->add_control(
             'eael_fg_gallery_item_video_link',
             [
-                'label' => esc_html__('Video Link', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
+                'label'       => esc_html__('Link', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::TEXT,
                 'label_block' => true,
-                'default' => 'https://www.youtube.com/watch?v=kB4U67tiQLA',
-                'condition' => [
+                'default'     => 'https://www.youtube.com/watch?v = kB4U67tiQLA',
+                'condition'   => [
                     'fg_video_gallery_switch' => 'true',
                 ],
                 'ai' => [
@@ -681,7 +805,7 @@ class Filterable_Gallery extends Widget_Base
         $repeater->add_control(
 			'eael_fg_gallery_video_layout',
 			[
-				'label' => esc_html__( 'Video Layout Type', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Layout Type', 'essential-addons-for-elementor-lite' ),
 				'type'  => Controls_Manager::CHOOSE,
 				'options' => [
 					'horizontal' => [
@@ -698,61 +822,33 @@ class Filterable_Gallery extends Widget_Base
                 ],
 				'default'   => 'horizontal',
 				'toggle'    => false,
-				'separator' => 'after',
 			]
 		);
         
-        $repeater->add_control(
-            'eael_fg_gallery_control_name',
-            [
-                'label' => esc_html__('Control Name', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'dynamic' => ['active' => true],
-                'label_block' => true,
-                'default' => '',
-                'description' => __('Use the gallery control name from Control Settings. Separate multiple items with comma (e.g. <strong>Gallery Item, Gallery Item 2</strong>)', 'essential-addons-for-elementor-lite'),
-                'ai' => [
-					'active' => false,
-				],
-            ]
-        );
-        
-        $repeater->add_control(
-            'eael_fg_gallery_item_name',
-            [
-                'label' => esc_html__('Item Name', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'dynamic' => ['active' => true],
-                'label_block' => true,
-                'default' => esc_html__('Gallery item name', 'essential-addons-for-elementor-lite'),
-                'ai' => [
-					'active' => false,
-				],
-            ]
-        );
-        
         // This is for the grid flow layout item animator control
         do_action( 'eael_grid_fg_item_animator_popover', $repeater );
-        
+
         $repeater->add_control(
             'fg_item_price_switch',
             [
-                'label' => __('Enable Price ?', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'default'   => 'false',
-                'label_on' => esc_html__('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off' => esc_html__('No', 'essential-addons-for-elementor-lite'),
-                'return_value'  => 'true'
+                'label'        => __('Price', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'default'      => 'false',
+                'label_on'     => esc_html__('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => esc_html__('Hide', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'true',
+				'separator'    => 'before',
             ]
         );
         
         $repeater->add_control(
             'fg_item_price',
             [
-                'label' => esc_html__('Item Price', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'dynamic' => ['active' => true],
-                'default' => esc_html__('$20.00', 'essential-addons-for-elementor-lite'),
+                'label'     => esc_html__('Value', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::TEXT,
+                'dynamic'   => ['active' => true ],
+                'default'   => esc_html__('$20.00', 'essential-addons-for-elementor-lite'),
+				'separator' => 'after',
                 'condition' => [
                     'fg_item_price_switch' => 'true'
                 ],
@@ -765,22 +861,23 @@ class Filterable_Gallery extends Widget_Base
         $repeater->add_control(
             'fg_item_ratings_switch',
             [
-                'label' => __('Enable Ratings ?', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'default'   => 'false',
-                'label_on' => esc_html__('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off' => esc_html__('No', 'essential-addons-for-elementor-lite'),
-                'return_value'  => 'true'
+                'label'        => __('Ratings', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'default'      => 'false',
+                'label_on'     => esc_html__('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => esc_html__('Hide', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'true'
             ]
         );
         
         $repeater->add_control(
             'fg_item_ratings',
             [
-                'label' => esc_html__('Item Ratings', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Value', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'dynamic' => ['active' => true],
                 'default' => esc_html__('5', 'essential-addons-for-elementor-lite'),
+				'separator' => 'after',
                 'condition' => [
                     'fg_item_ratings_switch' => 'true'
                 ],
@@ -793,19 +890,19 @@ class Filterable_Gallery extends Widget_Base
         $repeater->add_control(
             'fg_item_cat_switch',
             [
-                'label' => __('Enable Category ?', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'default'   => 'false',
-                'label_on' => esc_html__('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off' => esc_html__('No', 'essential-addons-for-elementor-lite'),
-                'return_value'  => 'true'
+                'label'        => __('Category', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'default'      => 'false',
+                'label_on'     => esc_html__('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => esc_html__('Hide', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'true'
             ]
         );
         
         $repeater->add_control(
             'fg_item_cat',
             [
-                'label' => esc_html__('Item Category', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Name', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'dynamic' => ['active' => true],
                 'default' => esc_html__('Essential Addons', 'essential-addons-for-elementor-lite'),
@@ -817,13 +914,26 @@ class Filterable_Gallery extends Widget_Base
 				],
             ]
         );
-        
+
+        $repeater->add_control(
+            'filterable_item_notice',
+            [
+                'type'        => Controls_Manager::NOTICE,
+                'notice_type' => 'info',
+				'dismissible' => false,
+                'content'     => sprintf( '<strong>%s</strong> %s',
+                        esc_html__('Price, Ratings and Category', 'essential-addons-for-elementor-lite'),
+                                sprintf( esc_html__('will be visible only on the "%1$sSearch & Filter%2$s" layout.', 'essential-addons-for-elementor-lite'), '<strong>', '</strong>' ) ),
+            ]
+        );
+
         $repeater->add_control(
             'eael_fg_gallery_item_content',
             [
-                'label' => esc_html__('Item Content', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Content', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::WYSIWYG,
                 'label_block' => true,
+				'separator' => 'before',
                 'default' => esc_html__('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, provident.', 'essential-addons-for-elementor-lite'),
             ]
         );
@@ -863,13 +973,13 @@ class Filterable_Gallery extends Widget_Base
         $repeater->add_control(
             'eael_fg_gallery_lightbox',
             [
-                'label' => __('Gallery Lightbox Button?', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'default' => 'true',
-                'label_on' => esc_html__('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off' => esc_html__('No', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Lightbox Button?', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'default'      => 'true',
+                'label_on'     => esc_html__('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => esc_html__('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'true',
-                'condition' => [
+                'condition'    => [
                     'fg_video_gallery_switch!' => 'true',
                 ],
             ]
@@ -878,13 +988,13 @@ class Filterable_Gallery extends Widget_Base
         $repeater->add_control(
             'eael_fg_gallery_link',
             [
-                'label' => __('Gallery Link Button?', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'default' => 'true',
-                'label_on' => esc_html__('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off' => esc_html__('No', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Link Button?', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'default'      => 'true',
+                'label_on'     => esc_html__('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => esc_html__('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'true',
-                'condition' => [
+                'condition'    => [
                     'fg_video_gallery_switch!' => 'true',
                 ],
             ]
@@ -963,7 +1073,7 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'load_more_text',
             [
-                'label' => __('Button Text', 'essential-addons-for-elementor-lite'),
+                'label' => __('Button Label', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'dynamic'   => ['active' => true],
                 'default' => __('Load More', 'essential-addons-for-elementor-lite'),
@@ -1028,11 +1138,17 @@ class Filterable_Gallery extends Widget_Base
             'button_icon_position',
             [
                 'label' => __('Icon Position', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
+                'type' => Controls_Manager::CHOOSE,
                 'default' => 'after',
                 'options' => [
-                    'after' => __('After', 'essential-addons-for-elementor-lite'),
-                    'before' => __('Before', 'essential-addons-for-elementor-lite'),
+                    'before' => [
+                        'title' => __('Before', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-h-align-left',
+                    ],
+                    'after' => [
+                        'title' => __('After', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-h-align-right',
+                    ],
                 ],
                 'condition' => [
                     'pagination' => 'yes',
@@ -1293,7 +1409,6 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'eael_fg_control_shadow',
                 'selector' => '{{WRAPPER}} .eael-filter-gallery-control ul li.control',
-                'separator' => 'before',
             ]
         );
         
@@ -1359,7 +1474,6 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'eael_fg_control_active_shadow',
                 'selector' => '{{WRAPPER}} .eael-filter-gallery-control ul li.control.active',
-                'separator' => 'before',
             ]
         );
         
