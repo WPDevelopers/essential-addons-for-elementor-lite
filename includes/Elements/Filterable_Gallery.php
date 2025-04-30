@@ -3452,6 +3452,7 @@ class Filterable_Gallery extends Widget_Base
             $gallery_store[$counter]['key_right']    = isset( $gallery['eael_fg_gallery_item_key_right'] ) ? $gallery['eael_fg_gallery_item_key_right'] : '';
             $gallery_store[$counter]['icon_top']     = isset( $gallery['eael_fg_gallery_item_tag_icon_top'] ) ? $gallery['eael_fg_gallery_item_tag_icon_top'] : '';
             $gallery_store[$counter]['icon_right']   = isset( $gallery['eael_fg_gallery_item_tag_icon_right'] ) ? $gallery['eael_fg_gallery_item_tag_icon_right'] : '';
+            $gallery_store[$counter]['tag_icon_enable']     = isset( $gallery['eael_fg_gallery_item_tag_icon_enable'] ) ? $gallery['eael_fg_gallery_item_tag_icon_enable'] : '';
             $gallery_store[$counter]['tag_icon']     = isset( $gallery['eael_fg_gallery_item_tag_icon'] ) ? $gallery['eael_fg_gallery_item_tag_icon'] : '';
             $gallery_store[$counter]['video_layout'] = isset( $gallery['eael_fg_gallery_video_layout'] ) && !empty( $gallery['eael_fg_gallery_video_layout'] ) ? $gallery['eael_fg_gallery_video_layout'] : 'horizontal';
             
