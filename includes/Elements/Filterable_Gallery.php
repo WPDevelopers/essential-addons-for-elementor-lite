@@ -1960,7 +1960,7 @@ class Filterable_Gallery extends Widget_Base
         $this->start_controls_section(
 			'eael_gril_flow_section',
 			[
-				'label'     => esc_html__( 'Grid Flow Style', 'essential-addons-for-elementor-lite' ),
+				'label'     => esc_html__( 'Grid Flow', 'essential-addons-for-elementor-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_fg_caption_style' => [ 'grid_flow_gallery' ]
@@ -1980,7 +1980,7 @@ class Filterable_Gallery extends Widget_Base
         $this->start_controls_section(
 			'eael_harmonic_style_section',
 			[
-				'label'     => esc_html__( 'Harmonic Style', 'essential-addons-for-elementor-lite' ),
+				'label'     => esc_html__( 'Harmonic', 'essential-addons-for-elementor-lite' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_fg_caption_style' => [ 'harmonic_gallery' ]
