@@ -155,16 +155,22 @@ class WPDeveloper_Plugin_Installer
 	    $slug   = isset( $_POST['slug'] ) ? sanitize_text_field( $_POST['slug'] ) : '';
 	    $result = $this->install_plugin( $slug );
 
-        if( isset( $_POST['promotype'] ) ) {
-            if( 'eb-banner' === $_POST['promotype'] && 'essential-blocks' === $_POST['slug'] ){
-                wp_remote_get( 'https://essential-addons.com/essential-blocks-install-gutenberg' );
-            }
-            else if( 'quick-setup' === $_POST['promotype'] ){
-                if ( 'essential-blocks' === $_POST['slug'] ){
-                    // wp_remote_get( 'https://essential-addons.com/essential-blocks-install-gutenberg' );
-                } else if ( 'templately' === $_POST['slug'] ){
-                    // wp_remote_get( 'https://essential-addons.com/essential-blocks-install-gutenberg' );
-                }
+        if ( isset( $_POST['promotype'], $_POST['slug'] ) ) {
+            $promotype = sanitize_text_field( $_POST['promotype'] );
+            $slug      = sanitize_text_field( $_POST['slug'] );
+        
+            $remote_urls = [
+                'eb-banner' => [
+                    'essential-blocks' => 'https://essential-addons.com/essential-blocks-install-gutenberg',
+                ],
+                'quick-setup' => [
+                    'essential-blocks' => 'https://essential-addons.com/essential-blocks-install-quick-setup',
+                    'templately'       => 'https://essential-addons.com/templately-install-quick-setup',
+                ],
+            ];
+        
+            if ( isset( $remote_urls[ $promotype ][ $slug ] ) ) {
+                wp_remote_get( $remote_urls[ $promotype ][ $slug ] );
             }
         }
 
