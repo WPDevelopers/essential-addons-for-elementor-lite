@@ -579,16 +579,16 @@ class Filterable_Gallery extends Widget_Base
             [
                 'type' => Controls_Manager::REPEATER,
                 'default' => [
-                    ['eael_fg_control' => 'Gallery Item'],
+                    ['eael_fg_control' => 'Gallery Filter'],
                 ],
                 'fields' => [
                     [
                         'name' => 'eael_fg_control',
-                        'label' => esc_html__('Name', 'essential-addons-for-elementor-lite'),
+                        'label' => esc_html__('Filter Title', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::TEXT,
                         'dynamic' => ['active' => true],
                         'label_block' => true,
-                        'default' => esc_html__('Gallery Item', 'essential-addons-for-elementor-lite'),
+                        'default' => esc_html__('Gallery Filter', 'essential-addons-for-elementor-lite'),
                         'ai' => [
                             'active' => false,
                         ],
@@ -714,7 +714,7 @@ class Filterable_Gallery extends Widget_Base
         $repeater->add_control(
             'eael_fg_gallery_item_name',
             [
-                'label'       => esc_html__('Title', 'essential-addons-for-elementor-lite'),
+                'label'       => esc_html__('Gallery Item Title', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
                 'dynamic'     => [ 'active' =>true ],
                 'label_block' => true,
@@ -728,15 +728,16 @@ class Filterable_Gallery extends Widget_Base
         $repeater->add_control(
             'eael_fg_gallery_control_name',
             [
-                'label'       => esc_html__('Control Name', 'essential-addons-for-elementor-lite'),
+                'label'       => esc_html__('Gallery Filter Title', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
                 'dynamic'     => ['active' =>true ],
                 'label_block' => true,
                 'default'     => '',
-                'description' => __('Use the gallery control name from Control Settings. Separate multiple items with comma (e.g. <strong>Gallery Item, Gallery Item 2</strong>)', 'essential-addons-for-elementor-lite'),
+                'description' => __('Use the gallery filter title from Control Settings. Separate multiple items with comma (e.g. <strong>Gallery Filter, Gallery Filter 2</strong>)', 'essential-addons-for-elementor-lite'),
                 'ai'          => [
 					'active' => false,
 				],
+                'separator' => 'before',
             ]
         );
 
