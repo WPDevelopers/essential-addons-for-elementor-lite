@@ -105,71 +105,6 @@ class Filterable_Gallery extends Widget_Base
                 'label' => esc_html__('Settings', 'essential-addons-for-elementor-lite'),
             ]
         );
-        
-        $this->add_control(
-            'eael_fg_items_to_show',
-            [
-                'label'       => esc_html__('Items to show', 'essential-addons-for-elementor-lite'),
-                'type'        => Controls_Manager::NUMBER,
-                'dynamic'     => [ 'active' => true ],
-                'label_block' => false,
-                'default'     => 6,
-                'ai'          => [
-					'active' => false,
-				],
-            ]
-        );
-        
-        $this->add_control(
-            'eael_fg_filter_duration',
-            [
-                'label'       => esc_html__('Animation Duration (ms)', 'essential-addons-for-elementor-lite'),
-                'type'        => Controls_Manager::NUMBER,
-                'label_block' => false,
-                'default'     => 500,
-                'ai'          => [
-					'active' => false,
-				],
-            ]
-        );
-        
-        $this->add_responsive_control(
-            'columns',
-            [
-                'label'   => __('Columns', 'essential-addons-for-elementor-lite'),
-                'type'    => Controls_Manager::CHOOSE,
-                'options' => [
-					'1' => [
-						'title' => '1',
-						'text' => '1',
-					],
-					'2' => [
-						'title' => '2',
-						'text' => '2',
-					],
-					'3' => [
-						'title' => '3',
-						'text' => '3',
-					],
-					'4' => [
-						'title' => '4',
-						'text' => '4',
-					],
-					'5' => [
-						'title' => '5',
-						'text' => '5',
-					],
-					'6' => [
-						'title' => '6',
-						'text' => '6',
-					],
-				],
-                'default'        => '3',
-                'tablet_default' => '2',
-                'mobile_default' => '1',
-				'toggle'         => false,
-            ]
-        );
 
         $image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/filterable-gallery-';
         $eael_fg_layout = apply_filters(
@@ -213,6 +148,74 @@ class Filterable_Gallery extends Widget_Base
                 'options'     => $eael_fg_layout['styles'],
             ]
         );
+        
+        $this->add_control(
+            'eael_fg_items_to_show',
+            [
+                'label'       => esc_html__('Items to show', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::NUMBER,
+                'dynamic'     => [ 'active' => true ],
+                'label_block' => false,
+                'default'     => 6,
+                'ai'          => [
+					'active' => false,
+				],
+            ]
+        );
+        
+        $this->add_control(
+            'eael_fg_filter_duration',
+            [
+                'label'       => esc_html__('Animation Duration (ms)', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::NUMBER,
+                'label_block' => false,
+                'default'     => 500,
+                'ai'          => [
+					'active' => false,
+				],
+                'condition' => [
+                    'eael_fg_caption_style' => [ 'hoverer', 'card', 'layout_3' ],
+                ],
+            ]
+        );
+        
+        $this->add_responsive_control(
+            'columns',
+            [
+                'label'   => __('Columns', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::CHOOSE,
+                'options' => [
+					'1' => [
+						'title' => '1',
+						'text' => '1',
+					],
+					'2' => [
+						'title' => '2',
+						'text' => '2',
+					],
+					'3' => [
+						'title' => '3',
+						'text' => '3',
+					],
+					'4' => [
+						'title' => '4',
+						'text' => '4',
+					],
+					'5' => [
+						'title' => '5',
+						'text' => '5',
+					],
+					'6' => [
+						'title' => '6',
+						'text' => '6',
+					],
+				],
+                'default'        => '3',
+                'tablet_default' => '2',
+                'mobile_default' => '1',
+				'toggle'         => false,
+            ]
+        );
 
         $this->add_control(
 			'eael_fg_grid_style',
@@ -231,6 +234,9 @@ class Filterable_Gallery extends Widget_Base
 				],
 				'default'   => 'grid',
 				'toggle'    => false,
+                'condition' => [
+                    'eael_fg_caption_style' => [ 'hoverer', 'card', 'layout_3' ],
+                ],
 			]
 		);
         
@@ -382,7 +388,8 @@ class Filterable_Gallery extends Widget_Base
 					],
 				],
                 'condition' => [
-                    'eael_fg_caption_style!'    => 'layout_3'
+                    'eael_fg_caption_style!'    => 'layout_3',
+                    'eael_fg_caption_style'     => [ 'hoverer', 'card', 'layout_3' ],
                 ],
 				'default'   => 'grid',
 				'toggle'    => false,
@@ -395,7 +402,10 @@ class Filterable_Gallery extends Widget_Base
                 'label'        => __('Title Clickable', 'essential-addons-for-elementor-lite'),
                 'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
-                'default'      => ''
+                'default'      => '',   
+                'condition'    => [
+                    'eael_fg_caption_style' => [ 'hoverer', 'card', 'layout_3' ],
+                ],
             ]
         );
 
@@ -405,7 +415,10 @@ class Filterable_Gallery extends Widget_Base
                 'label'        => __('Image Clickable', 'essential-addons-for-elementor-lite'),
                 'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
-                'default'      => ''
+                'default'      => '',
+                'condition'    => [
+                    'eael_fg_caption_style' => [ 'hoverer', 'card', 'layout_3' ],
+                ],
             ]
         );
 
@@ -417,7 +430,10 @@ class Filterable_Gallery extends Widget_Base
                 'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
                 'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
-                'default'      => ''
+                'default'      => '',
+                'condition'    => [
+                    'eael_fg_caption_style' => [ 'hoverer', 'card', 'layout_3' ],
+                ],
             ]
         );
         
@@ -741,6 +757,9 @@ class Filterable_Gallery extends Widget_Base
             ]
         );
 
+        // This is for the grid flow layout item animator control
+        do_action( 'eael_grid_fg_item_animator_popover', $repeater );
+
         $repeater->add_control(
 			'fg_video_gallery_heading',
 			[
@@ -811,9 +830,6 @@ class Filterable_Gallery extends Widget_Base
 				'toggle'    => false,
 			]
 		);
-        
-        // This is for the grid flow layout item animator control
-        do_action( 'eael_grid_fg_item_animator_popover', $repeater );
 
         $repeater->add_control(
             'fg_item_price_switch',
@@ -1957,40 +1973,14 @@ class Filterable_Gallery extends Widget_Base
          * Grid Flow Gallery
          * -------------------------------------------
          */
-        $this->start_controls_section(
-			'eael_gril_flow_section',
-			[
-				'label'     => esc_html__( 'Grid Flow', 'essential-addons-for-elementor-lite' ),
-				'tab'       => Controls_Manager::TAB_STYLE,
-                'condition' => [
-                    'eael_fg_caption_style' => [ 'grid_flow_gallery' ]
-                ],
-			]
-		);
-
         do_action( 'eael_grid_flow_gallery_style', $this );
-
-        $this->end_controls_section();
 
         /**
          * -------------------------------------------
          * Harmonic Gallery Style
          * -------------------------------------------
          */
-        $this->start_controls_section(
-			'eael_harmonic_style_section',
-			[
-				'label'     => esc_html__( 'Harmonic', 'essential-addons-for-elementor-lite' ),
-				'tab'       => Controls_Manager::TAB_STYLE,
-                'condition' => [
-                    'eael_fg_caption_style' => [ 'harmonic_gallery' ]
-                ],
-			]
-		);
-
         do_action( 'eael_harmonic_gallery_style', $this );
-
-        $this->end_controls_section();
 
         /**
          * -------------------------------------------
