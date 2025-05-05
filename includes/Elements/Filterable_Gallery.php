@@ -3539,6 +3539,7 @@ class Filterable_Gallery extends Widget_Base
             $gallery_store[$counter]['writing_mode'] = isset( $gallery['eael_fg_gallery_item_tag_writing_mode'] ) ? $gallery['eael_fg_gallery_item_tag_writing_mode'] : 'vertical-lr';
             $gallery_store[$counter]['item_top']      = isset( $gallery['eael_fg_gallery_item_tag_top'] ) ? $gallery['eael_fg_gallery_item_tag_top'] : '';
             $gallery_store[$counter]['item_right']    = isset( $gallery['eael_fg_gallery_item_tag_right'] ) ? $gallery['eael_fg_gallery_item_tag_right'] : '';
+            $gallery_store[$counter]['item_key_enable'] = isset( $gallery['eael_fg_gallery_item_key_heading_enable'] ) ? $gallery['eael_fg_gallery_item_key_heading_enable'] : '';
             $gallery_store[$counter]['key_top']      = isset( $gallery['eael_fg_gallery_item_key_top'] ) ? $gallery['eael_fg_gallery_item_key_top'] : '';
             $gallery_store[$counter]['key_right']    = isset( $gallery['eael_fg_gallery_item_key_right'] ) ? $gallery['eael_fg_gallery_item_key_right'] : '';
             $gallery_store[$counter]['icon_top']     = isset( $gallery['eael_fg_gallery_item_tag_icon_top'] ) ? $gallery['eael_fg_gallery_item_tag_icon_top'] : '';
