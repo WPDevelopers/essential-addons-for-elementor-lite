@@ -7,7 +7,19 @@ function MenuItems({ activeTab, handleTabChange }) {
   let ea_pro_local_plugin_data = menu_items?.ea_pro_local_plugin_data;
   let i = 0;
   let itemClass = "";
-  let hasPluginPromo = Object.keys(eaelQuickSetup?.plugins_content?.plugins).length;
+  let hasPluginPromo = Object.keys(eaelQuickSetup?.plugins_content?.plugins || {}).length;
+
+  // Check if there are any non-installed plugins to display in the promo page
+  const hasDisplayablePlugins = (() => {
+    const plugins_content = eaelQuickSetup?.plugins_content?.plugins;
+    if (!plugins_content || Object.keys(plugins_content).length === 0) return false;
+
+    const plugins = Object.keys(plugins_content).filter(key => !isNaN(key)).map(key => plugins_content[key]);
+    if (plugins.length === 0) return false;
+
+    // Check if there are any plugins that are not installed
+    return plugins.some(plugin => plugin.local_plugin_data === false);
+  })();
 
   return (
     <>
@@ -18,7 +30,7 @@ function MenuItems({ activeTab, handleTabChange }) {
         {Object.keys(items).map((item, index) => {
           // Conditional logic to skip certain items
 
-          if( 'pluginspromo' === item && !hasPluginPromo ) {
+          if ('pluginspromo' === item && (!hasPluginPromo || !hasDisplayablePlugins)) {
             return null;
           }
 
@@ -27,7 +39,7 @@ function MenuItems({ activeTab, handleTabChange }) {
           }
 
           itemClass = item.trim().toLowerCase().replace(/ /g, "-");
-          
+
           return (
             <div
               className={`eael-onboard-nav ${
