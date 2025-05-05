@@ -666,6 +666,9 @@ class Filterable_Gallery extends Widget_Base
                 'label' => esc_html__('Gallery Items', 'essential-addons-for-elementor-lite'),
             ]
         );
+
+        // This is for the grid flow layout item animator control
+        do_action( 'eael_grid_fg_item_animator_popover', $this );
         
         $this->add_control(
             'photo_gallery',
@@ -756,9 +759,6 @@ class Filterable_Gallery extends Widget_Base
                 'separator' => 'before',
             ]
         );
-
-        // This is for the grid flow layout item animator control
-        do_action( 'eael_grid_fg_item_animator_popover', $repeater );
 
         $repeater->add_control(
 			'fg_video_gallery_heading',
@@ -3539,7 +3539,7 @@ class Filterable_Gallery extends Widget_Base
             $gallery_store[$counter]['writing_mode'] = isset( $gallery['eael_fg_gallery_item_tag_writing_mode'] ) ? $gallery['eael_fg_gallery_item_tag_writing_mode'] : 'vertical-lr';
             $gallery_store[$counter]['item_top']      = isset( $gallery['eael_fg_gallery_item_tag_top'] ) ? $gallery['eael_fg_gallery_item_tag_top'] : '';
             $gallery_store[$counter]['item_right']    = isset( $gallery['eael_fg_gallery_item_tag_right'] ) ? $gallery['eael_fg_gallery_item_tag_right'] : '';
-            $gallery_store[$counter]['item_key_enable'] = isset( $gallery['eael_fg_gallery_item_key_heading_enable'] ) ? $gallery['eael_fg_gallery_item_key_heading_enable'] : '';
+            // $gallery_store[$counter]['item_key_enable'] = isset( $gallery['eael_fg_gallery_item_key_heading_enable'] ) ? $gallery['eael_fg_gallery_item_key_heading_enable'] : '';
             $gallery_store[$counter]['key_top']      = isset( $gallery['eael_fg_gallery_item_key_top'] ) ? $gallery['eael_fg_gallery_item_key_top'] : '';
             $gallery_store[$counter]['key_right']    = isset( $gallery['eael_fg_gallery_item_key_right'] ) ? $gallery['eael_fg_gallery_item_key_right'] : '';
             $gallery_store[$counter]['icon_top']     = isset( $gallery['eael_fg_gallery_item_tag_icon_top'] ) ? $gallery['eael_fg_gallery_item_tag_icon_top'] : '';
