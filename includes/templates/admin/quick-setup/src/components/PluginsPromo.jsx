@@ -83,23 +83,23 @@ function PluginsPromo({ activeTab, handleTabChange }) {
 
             // Remove the installed plugin from displayedPlugins
             setDisplayedPlugins(prev => prev.filter(p => p.slug !== plugin.slug));
+            setCheckedPlugins(prev => {
+              const newChecked = { ...prev };
+              delete newChecked[plugin.slug];
+              return newChecked;
+            });
           }
         }
       }
 
-      // Check if all plugins are now installed
-      const remainingPlugins = displayedPlugins.filter(p => !p.local_plugin_data);
-
-      if (remainingPlugins.length === 0) {
-        // All plugins are installed, navigate to integrations
-        const nextButton = document.createElement('button');
-        nextButton.setAttribute('data-next', 'integrations');
-        handleTabChange({ currentTarget: nextButton });
-      }
-
+      // Immediately navigate to integrations page after installation
+      const nextButton = document.createElement('button');
+      nextButton.setAttribute('data-next', 'integrations');
+      handleTabChange({ currentTarget: nextButton });
+      setButtonLabel( "" );
+      setIsProcessing(false);
     } catch (error) {
       console.error('Error processing plugins:', error);
-    } finally {
       setIsProcessing(false);
     }
   };
