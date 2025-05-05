@@ -2245,7 +2245,7 @@ trait Admin {
 			wp_send_json_error( __( 'You are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
 		}
 
-		set_transient( 'eael_eb_banner_promo_hide', true, DAY_IN_SECONDS * 45 );
+		set_transient( 'wpdeveloper_eb_banner_promo_hide', true, DAY_IN_SECONDS * 45 );
 		wp_send_json_success();
 	}
 
