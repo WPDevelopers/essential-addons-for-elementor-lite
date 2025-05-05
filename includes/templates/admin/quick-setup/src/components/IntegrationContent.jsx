@@ -106,6 +106,7 @@ function IntegrationContent({
         </div>
         <div className="eael-integration-content-wrapper onboard-scroll-wrap">
           {pluginList.map((plugin) => (
+            'essential-blocks' === plugin?.slug ? '' : 
             <div className="eael-integration-item" key={plugin.basename}>
               <div className="eael-integration-header flex gap-2 items-center">
                 <img src={plugin.logo} alt="logo" width="30" />
