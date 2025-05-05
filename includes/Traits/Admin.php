@@ -2249,4 +2249,9 @@ trait Admin {
 		wp_send_json_success();
 	}
 
+	public function eael_eb_banner_promo_init() {
+		add_action( 'enqueue_block_editor_assets', [ $this, 'essential_blocks_banner_promo_enqueue_scripts' ] );
+		add_action( 'wp_ajax_eael_eb_banner_promo_dismiss', [ $this, 'eael_eb_banner_promo_dismiss' ] );
+	}
+
 }
