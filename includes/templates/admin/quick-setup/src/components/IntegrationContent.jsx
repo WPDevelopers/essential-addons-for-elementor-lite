@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { __ } from "@wordpress/i18n";
+import { hasDisplayablePlugins, getPluginPromoCount } from "../utils/pluginPromoUtils";
 
 function IntegrationContent({
   activeTab,
@@ -14,19 +15,10 @@ function IntegrationContent({
   let integrations_content = eaelQuickSetup?.integrations_content;
   let ea_pro_local_plugin_data = eaelQuickSetup?.menu_items?.ea_pro_local_plugin_data;
   let initialPluginList = integrations_content?.plugin_list;
-  let hasPluginPromo = Object.keys(eaelQuickSetup?.plugins_content?.plugins).length;
+  let hasPluginPromo = getPluginPromoCount();
 
-  // Check if there are any non-installed plugins to display in the promo page
-  const hasDisplayablePlugins = (() => {
-    const plugins_content = eaelQuickSetup?.plugins_content?.plugins;
-    if (!plugins_content || Object.keys(plugins_content).length === 0) return false;
-
-    const plugins = Object.keys(plugins_content).filter(key => !isNaN(key)).map(key => plugins_content[key]);
-    if (plugins.length === 0) return false;
-
-    // Check if there are any plugins that are not installed
-    return plugins.some(plugin => plugin.local_plugin_data === false);
-  })();
+  // Check if there are any non-installed plugins to display
+  const shouldShowPluginsPromo = hasDisplayablePlugins();
 
   const [pluginList, setPluginList] = useState(initialPluginList);
 
@@ -172,7 +164,7 @@ function IntegrationContent({
         <button
           className="previous-btn flex gap-2 items-center eael-setup-next-btn"
           type="button"
-          data-next={ hasPluginPromo && hasDisplayablePlugins ? "pluginspromo" : !ea_pro_local_plugin_data ? "go-pro" : "elements" }
+          data-next={ hasPluginPromo && shouldShowPluginsPromo ? "pluginspromo" : !ea_pro_local_plugin_data ? "go-pro" : "elements" }
           onClick={handleTabChange}
         >
           <i className="ea-dash-icon ea-left-arrow-long"></i>

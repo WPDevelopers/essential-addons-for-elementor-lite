@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import PluginPromoItem from "./PluginPromoItem";
 import { __ } from "@wordpress/i18n";
+import { getNonInstalledPlugins } from "../utils/pluginPromoUtils";
 
 function PluginsPromo({ activeTab, handleTabChange }) {
-  let eaelQuickSetup = localize?.eael_quick_setup_data;
-  let plugins_content = eaelQuickSetup?.plugins_content?.plugins || {};
-  let hasPluginPromo = Object.keys(eaelQuickSetup?.plugins_content?.plugins || {}).length;
-  const plugins = Object.keys(plugins_content).filter(key => !isNaN(key)).map(key => plugins_content[key]);
+  const plugins = getNonInstalledPlugins();
 
   const [checkedPlugins, setCheckedPlugins] = useState({});
   const [buttonLabel, setButtonLabel] = useState( __('Enable Templates & Blocks', "essential-addons-for-elementor-lite") );
@@ -19,7 +17,7 @@ function PluginsPromo({ activeTab, handleTabChange }) {
     setDisplayedPlugins(filteredPlugins);
 
     // Set default checked state for remaining plugins
-    if (hasPluginPromo > 0 && Object.keys(checkedPlugins).length === 0) {
+    if (plugins.length > 0 && Object.keys(checkedPlugins).length === 0) {
       const defaultChecked = {};
       filteredPlugins.forEach(plugin => {
         defaultChecked[plugin.slug] = true;

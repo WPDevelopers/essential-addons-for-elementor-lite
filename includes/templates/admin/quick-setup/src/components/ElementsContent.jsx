@@ -1,4 +1,5 @@
 import { __ } from "@wordpress/i18n";
+import { hasDisplayablePlugins, getPluginPromoCount } from "../utils/pluginPromoUtils";
 
 function ElementsContent({ 
   activeTab, 
@@ -16,6 +17,9 @@ function ElementsContent({
   let disable = "";
   let ea_pro_local_plugin_data = eaelQuickSetup?.menu_items?.ea_pro_local_plugin_data;
   let hasPluginPromo = Object.keys(eaelQuickSetup?.plugins_content?.plugins).length;
+
+  // Check if there are any non-installed plugins to display
+    const shouldShowPluginsPromo = hasDisplayablePlugins();
 
   elements_list =
     typeof elements_list === "object"
@@ -127,7 +131,7 @@ function ElementsContent({
         <button
           className="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn"
           type="button"
-          data-next={ ! ea_pro_local_plugin_data ? "go-pro" : ( hasPluginPromo ? "pluginspromo" : "integrations" ) }
+          data-next={ ! ea_pro_local_plugin_data ? "go-pro" : ( hasPluginPromo && shouldShowPluginsPromo ? "pluginspromo" : "integrations" ) }
           onClick={handleTabChange}
         >
           {__("Next", "essential-addons-for-elementor-lite")}
