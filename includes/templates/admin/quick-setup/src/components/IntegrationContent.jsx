@@ -16,6 +16,18 @@ function IntegrationContent({
   let initialPluginList = integrations_content?.plugin_list;
   let hasPluginPromo = Object.keys(eaelQuickSetup?.plugins_content?.plugins).length;
 
+  // Check if there are any non-installed plugins to display in the promo page
+  const hasDisplayablePlugins = (() => {
+    const plugins_content = eaelQuickSetup?.plugins_content?.plugins;
+    if (!plugins_content || Object.keys(plugins_content).length === 0) return false;
+
+    const plugins = Object.keys(plugins_content).filter(key => !isNaN(key)).map(key => plugins_content[key]);
+    if (plugins.length === 0) return false;
+
+    // Check if there are any plugins that are not installed
+    return plugins.some(plugin => plugin.local_plugin_data === false);
+  })();
+
   const [pluginList, setPluginList] = useState(initialPluginList);
 
   const handleSaveClick = async (event) => {
@@ -106,7 +118,7 @@ function IntegrationContent({
         </div>
         <div className="eael-integration-content-wrapper onboard-scroll-wrap">
           {pluginList.map((plugin) => (
-            'essential-blocks' === plugin?.slug ? '' : 
+            'essential-blocks' === plugin?.slug ? '' :
             <div className="eael-integration-item" key={plugin.basename}>
               <div className="eael-integration-header flex gap-2 items-center">
                 <img src={plugin.logo} alt="logo" width="30" />
@@ -160,7 +172,7 @@ function IntegrationContent({
         <button
           className="previous-btn flex gap-2 items-center eael-setup-next-btn"
           type="button"
-          data-next={ hasPluginPromo ? "pluginspromo" : !ea_pro_local_plugin_data ? "go-pro" : "elements" }
+          data-next={ hasPluginPromo && hasDisplayablePlugins ? "pluginspromo" : !ea_pro_local_plugin_data ? "go-pro" : "elements" }
           onClick={handleTabChange}
         >
           <i className="ea-dash-icon ea-left-arrow-long"></i>
