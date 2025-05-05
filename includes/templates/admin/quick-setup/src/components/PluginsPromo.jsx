@@ -2,20 +2,26 @@ import React, { useState, useEffect } from "react";
 import PluginPromoItem from "./PluginPromoItem";
 import { __ } from "@wordpress/i18n";
 
-function PluginsPromo({ activeTab, handleTabChange, handleIntegrationSwitch }) {
+function PluginsPromo({ activeTab, handleTabChange }) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
-  let plugins_content = eaelQuickSetup?.plugins_content?.plugins;
-  let hasPluginPromo = Object.keys(eaelQuickSetup?.plugins_content?.plugins).length;
-  const plugins = Object.keys(plugins_content || {}).filter(key => !isNaN(key)).map(key => plugins_content[key]);
+  let plugins_content = eaelQuickSetup?.plugins_content?.plugins || {};
+  let hasPluginPromo = Object.keys(eaelQuickSetup?.plugins_content?.plugins || {}).length;
+  const plugins = Object.keys(plugins_content).filter(key => !isNaN(key)).map(key => plugins_content[key]);
 
   const [checkedPlugins, setCheckedPlugins] = useState({});
   const [buttonLabel, setButtonLabel] = useState( __('Enable Templates & Blocks', "essential-addons-for-elementor-lite") );
   const [isProcessing, setIsProcessing] = useState(false);
+  const [displayedPlugins, setDisplayedPlugins] = useState(plugins);
 
   useEffect(() => {
+    // Filter out already installed plugins
+    const filteredPlugins = plugins.filter(plugin => plugin.local_plugin_data === false);
+    setDisplayedPlugins(filteredPlugins);
+
+    // Set default checked state for remaining plugins
     if (hasPluginPromo > 0 && Object.keys(checkedPlugins).length === 0) {
       const defaultChecked = {};
-      plugins.forEach(plugin => {
+      filteredPlugins.forEach(plugin => {
         defaultChecked[plugin.slug] = true;
       });
       setCheckedPlugins(defaultChecked);
@@ -41,38 +47,56 @@ function PluginsPromo({ activeTab, handleTabChange, handleIntegrationSwitch }) {
     }
   }, [checkedPlugins]);
 
-  const handlePluginEnable = async (event) => {
+  const handlePluginEnable = async () => {
     try {
       setIsProcessing(true);
       const selectedPlugins = Object.keys(checkedPlugins).filter(slug => checkedPlugins[slug]);
-      
+
       // Process each selected plugin
       for (const pluginSlug of selectedPlugins) {
         const plugin = plugins.find(p => p.slug === pluginSlug);
+
         if (plugin) {
-          const syntheticEvent = {
-            ...event,
-            currentTarget: {
-              getAttribute: (attr) => {
-                switch(attr) {
-                  case 'data-slug':
-                    return plugin.slug;
-                  case 'data-action':
-                    return 'install';
-                  case 'data-next':
-                    return 'integrations';
-                  default:
-                    return null;
-                }
-              }
-            }
+          // Prepare request data for installation
+          let requestData = {
+            action: 'wpdeveloper_install_plugin',
+            security: localize.nonce,
+            slug: plugin.slug,
+            promotype: 'quick-setup'
           };
-          
-          await handleIntegrationSwitch(syntheticEvent, plugin, 1);
+
+          // Make the AJAX request
+          const response = await fetch(localize.ajaxurl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: new URLSearchParams(requestData).toString(),
+          });
+
+          const result = await response.json();
+
+          if (result.success) {
+            // Update plugin status in the local state
+            plugin.local_plugin_data = true;
+            plugin.is_active = true;
+
+            // Remove the installed plugin from displayedPlugins
+            setDisplayedPlugins(prev => prev.filter(p => p.slug !== plugin.slug));
+          }
         }
       }
-      // Only change tab after all plugins are processed
-      handleTabChange(event);
+
+      // Check if all plugins are now installed
+      const remainingPlugins = displayedPlugins.filter(p => !p.local_plugin_data);
+
+      if (remainingPlugins.length === 0) {
+        // All plugins are installed, navigate to integrations
+        const nextButton = document.createElement('button');
+        nextButton.setAttribute('data-next', 'integrations');
+        handleTabChange({ currentTarget: nextButton });
+      }
+
     } catch (error) {
       console.error('Error processing plugins:', error);
     } finally {
@@ -80,9 +104,28 @@ function PluginsPromo({ activeTab, handleTabChange, handleIntegrationSwitch }) {
     }
   };
 
+  // If no plugins to display, automatically redirect to next step
+  useEffect(() => {
+    if (displayedPlugins.length === 0 && activeTab === "pluginspromo") {
+      // Create a simple button element with the data-next attribute
+      const button = document.createElement('button');
+      button.setAttribute('data-next', 'integrations');
+
+      // Call handleTabChange with the button as the event target
+      setTimeout(() => {
+        handleTabChange({ currentTarget: button });
+      }, 100);
+    }
+  }, [displayedPlugins, activeTab]);
+
+  // If no plugins to display, don't render anything
+  if (displayedPlugins.length === 0) {
+    return null;
+  }
+
   return (
     <>
-      {plugins.map((plugin, index) => plugin.features ? <PluginPromoItem key={index} plugin={plugin} checkedPlugins={checkedPlugins} handleCheckbox={handleCheckboxChange} /> : '' )}
+      {displayedPlugins.map((plugin, index) => plugin.features ? <PluginPromoItem key={index} plugin={plugin} checkedPlugins={checkedPlugins} handleCheckbox={handleCheckboxChange} /> : '' )}
 
       <div className="eael-section-wrapper flex flex-end gap-4">
         <button
@@ -95,7 +138,7 @@ function PluginsPromo({ activeTab, handleTabChange, handleIntegrationSwitch }) {
           {__("Skip", "essential-addons-for-elementor-lite")}
         </button>
 
-        { "" !== buttonLabel ?
+        { "" !== buttonLabel && displayedPlugins.length > 0 ?
         <button
           className="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn eael-quick-setup-next-button wpdeveloper-plugin-installer"
           type="button"

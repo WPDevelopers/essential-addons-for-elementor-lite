@@ -26,7 +26,7 @@ function App() {
   useEffect(() => {
     const elements_content = eaelQuickSetup?.elements_content;
     const elements_list = elements_content?.elements_list;
-    
+
     if (elements_list) {
       const initialCheckedState = {};
       Object.entries(elements_list).forEach(([category, categoryData]) => {
@@ -55,7 +55,7 @@ function App() {
     // Get all elements from the elements list
     const elements_content = eaelQuickSetup?.elements_content;
     const elements_list = elements_content?.elements_list;
-    
+
     if (newPreference === "custom") {
       // For custom, don't auto-check anything
       setCheckedElements({});
@@ -149,13 +149,13 @@ function App() {
         if ( plugin?.local_plugin_data ) {
           setActiveTab(dataNext);
           return;
-        } 
+        }
     } else {
       label = event.target
       .closest(".eael-integration-footer")
       .querySelector(".toggle-label")
     }
-    
+
     if (label) {
       label.textContent = "Processing...";
 
@@ -199,7 +199,7 @@ function App() {
             setActiveTab(dataNext);
           } else {
             label.textContent = isChecked ? "Activate" : "Deactivate";
-          } 
+          }
         }
       } catch (error) {
         // if( isTemplately ) {
@@ -294,7 +294,6 @@ function App() {
             <PluginsPromo
               activeTab={activeTab}
               handleTabChange={handleTabChange}
-              handleIntegrationSwitch={handleIntegrationSwitch}
             />
           </div>
           : '' }
