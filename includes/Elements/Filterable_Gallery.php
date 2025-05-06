@@ -1521,7 +1521,9 @@ class Filterable_Gallery extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item,
+                    {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-grid-fg-box,
+                    {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-hg-grid__cell-img' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1533,7 +1535,9 @@ class Filterable_Gallery extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item,
+                    {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-grid-fg-box,
+                    {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-hg-grid__cell-img' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1543,7 +1547,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'eael_fg_item_border',
                 'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item',
+                'selector' => '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item, 
+                {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-grid-fg-box,
+                {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-hg-grid__cell-img',
             ]
         );
         
@@ -1561,7 +1567,9 @@ class Filterable_Gallery extends Widget_Base
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item' => 'border-radius: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item, 
+                    {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-grid-fg-box,
+                    {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-hg-grid__cell-img' => 'border-radius: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -1570,7 +1578,9 @@ class Filterable_Gallery extends Widget_Base
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'eael_fg_item_shadow',
-                'selector' => '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item',
+                'selector' => '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item, 
+                {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-grid-fg-box,
+                {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-hg-grid__cell-img',
             ]
         );
         $this->end_controls_section();
@@ -1818,7 +1828,8 @@ class Filterable_Gallery extends Widget_Base
                 'label' => esc_html__('Video', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
-                    'eael_fg_caption_style!' => 'layout_3'
+                    'eael_fg_caption_style!' => 'layout_3',
+                    'eael_fg_caption_style!' => ['grid_flow_gallery', 'harmonic_gallery'],
                 ]
             ]
         );
@@ -2220,6 +2231,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label' => esc_html__('Icons', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_fg_caption_style!' => ['grid_flow_gallery', 'harmonic_gallery'],
+                ]
             ]
         );
         
@@ -2963,7 +2977,7 @@ class Filterable_Gallery extends Widget_Base
         $this->start_controls_section(
             'eael_not_found_text_style',
             [
-                'label' => esc_html__('Not found text', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Not Found Text', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
