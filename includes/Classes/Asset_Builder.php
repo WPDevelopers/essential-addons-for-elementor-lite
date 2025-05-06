@@ -192,8 +192,8 @@ class Asset_Builder {
 		foreach ( $locations as $location => $settings ) {
 
 			$documents_module = \ElementorPro\Modules\ThemeBuilder\Module::instance();
-			//->get_conditions_manager()->get_documents_for_location( $location )
-			if( method_exists( $documents_module, 'get_locations_manager' ) ){
+			
+			if( method_exists( $documents_module, 'get_locations_manager' ) && method_exists( $documents_module->get_locations_manager(), 'get_documents_for_location' ) ){
 				$documents = $documents_module->get_locations_manager()->get_documents_for_location( $location );
 			} else {
 				$documents = $documents_module->get_conditions_manager()->get_documents_for_location( $location );
