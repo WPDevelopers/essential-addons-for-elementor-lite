@@ -679,6 +679,9 @@ class Filterable_Gallery extends Widget_Base
                 'label_off'          => __('Disable', 'essential-addons-for-elementor-lite'),
                 'default'            => 'yes',
                 'frontend_available' => true,
+                'condition'          => [
+                    'eael_fg_caption_style!' => [ 'grid_flow_gallery', 'harmonic_gallery' ]
+                ],
             ]
         );
 
@@ -690,7 +693,10 @@ class Filterable_Gallery extends Widget_Base
 				'type'                => Controls_Manager::SWITCHER,
 				'description'         => esc_html__( 'If enabled, YouTube won\'t store information about visitors unless they play the video.', 'essential-addons-for-elementor-lite' ),
 				'frontend_available'  => true,
-                'default' => '',
+                'default'             => '',
+                'condition'           => [
+                    'eael_fg_caption_style!' => [ 'grid_flow_gallery', 'harmonic_gallery' ]
+                ],
 			]
 		);
 
@@ -704,6 +710,9 @@ class Filterable_Gallery extends Widget_Base
                 'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
                 'description'  => esc_html__( 'If enabled, The consent notice will appear before playing the video.', 'essential-addons-for-elementor-lite' ),
 				'default'      => '',
+                'condition'    => [
+                    'eael_fg_caption_style!' => [ 'grid_flow_gallery', 'harmonic_gallery' ]
+                ],
 			]
 		);
 
@@ -713,7 +722,10 @@ class Filterable_Gallery extends Widget_Base
 				'label'       => esc_html__( 'Privacy Notice', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::TEXT,
                 'ai'          => [ 'active' => false, ],
-                'condition'   => ['eael_privacy_notice_control' => 'yes' ]
+                'condition'   => ['eael_privacy_notice_control' => 'yes' ],
+                'condition'   => [
+                    'eael_fg_caption_style!' => [ 'grid_flow_gallery', 'harmonic_gallery' ]
+                ],
 			]
 		);
 
@@ -724,7 +736,10 @@ class Filterable_Gallery extends Widget_Base
                 'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default'      => '',
-                'description'  => __( 'Items will be displayed in a random order.', 'essential-addons-for-elementor-lite' )
+                'description'  => __( 'Items will be displayed in a random order.', 'essential-addons-for-elementor-lite' ),
+                'condition'    => [
+                    'eael_fg_caption_style!' => [ 'grid_flow_gallery', 'harmonic_gallery' ]
+                ],
             ]
         );
 
