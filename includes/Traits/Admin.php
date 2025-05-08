@@ -2223,7 +2223,7 @@ trait Admin {
 			wp_send_json_error( __( 'You are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
 		}
 
-		update_option( 'eael_eb_optin_hide', true );
+		set_transient( 'wpdeveloper_eb_optin_hide', true, MONTH_IN_SECONDS * 2 );
 		wp_send_json_success();
 	}
 
@@ -2234,7 +2234,7 @@ trait Admin {
 			wp_send_json_error( __( 'You are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
 		}
 
-		set_transient( 'eael_gb_eb_popup_hide', true, MONTH_IN_SECONDS * 2 );
+		set_transient( 'wpdeveloper_gb_eb_popup_hide', true, MONTH_IN_SECONDS * 2 );
 		wp_send_json_success();
 	}
 
