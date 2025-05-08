@@ -3233,7 +3233,7 @@ class Woo_Product_List extends Widget_Base
 			    'type'      => Controls_Manager::COLOR,
 			    'default'   => '#000',
 			    'selectors' => [
-				    '.eael-popup-details-render div.product form.cart div.quantity .qty, .eael-product-popup.woocommerce div.product form.cart div.quantity > a, .eael-product-popup.woocommerce div.product form.cart div.quantity > .button' => 'border-color: {{VALUE}};',
+				    '.eael-popup-details-render div.product form.cart div.quantity .qty, .eael-product-popup.woocommerce div.product form.cart div.quantity > a, .eael-product-popup.woocommerce div.product form.cart div.quantity > .button' => 'border-color: {{VALUE}} !important;',
 				    // OceanWP
 				    '.eael-popup-details-render div.product form.cart div.quantity .qty:focus' => 'border-color: {{VALUE}};',
 			    ],
