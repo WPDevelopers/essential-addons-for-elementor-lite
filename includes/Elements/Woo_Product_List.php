@@ -3395,7 +3395,7 @@ class Woo_Product_List extends Widget_Base
 		    [
 			    'name'     => 'eael_product_popup_sku_typo',
 			    'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
-			    'selector' => '.eael-popup-details-render .product_meta',
+			    'selector' => '.eael-product-popup.woocommerce .eael-popup-details-render .elementor-element-{{ID}} div.product .product_meta',
 		    ]
 	    );
 
