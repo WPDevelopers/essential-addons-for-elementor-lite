@@ -814,7 +814,7 @@ class Testimonial extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_testimonial_quotation_top',
 			[
-				'label' => esc_html__( 'Postion From Top', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Position From Top (%)', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 5,
@@ -836,7 +836,7 @@ class Testimonial extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_testimonial_quotation_right',
 			[
-				'label' => esc_html__( 'Postion From Right', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Position From Right (%)', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 5,
