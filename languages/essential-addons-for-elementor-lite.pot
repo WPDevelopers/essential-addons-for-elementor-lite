@@ -11587,7 +11587,7 @@ msgid "Supercharge Your Gutenberg Experience With Essential Blocks"
 msgstr ""
 
 #: ../includes/Traits/Helper.php:644, ../includes/Traits/Helper.php:664
-msgid "If you like Essential Addons for Elementor, check out Essential Blocks, the ultimate block library for Gutenberg that is trusted by more than 60,000+ web creators."
+msgid "If you like Essential Addons for Elementor, check out Essential Blocks, the ultimate block library for Gutenberg that is trusted by more than 100,000+ web creators."
 msgstr ""
 
 #: ../includes/Traits/Helper.php:649, ../includes/Traits/Helper.php:718
