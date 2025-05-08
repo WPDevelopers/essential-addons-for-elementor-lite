@@ -173,8 +173,8 @@ class Product_Grid extends Widget_Base
             return;
         }
         // Content Controls
-        $this->init_content_product_settings_controls();
         $this->init_content_layout_controls();
+        $this->init_content_product_settings_controls();
         $this->eael_product_badges();
         $this->init_content_addtocart_controls();
         $this->init_content_load_more_controls();
@@ -255,16 +255,6 @@ class Product_Grid extends Widget_Base
 				'toggle'  => false,
 			]
 		);
-
-        // $this->add_control(
-        //     'eael_dynamic_template_Layout',
-        //     [
-        //         'label' => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
-        //         'type' => Controls_Manager::SELECT,
-        //         'default' => 'default',
-        //         'options' => $this->get_template_list_for_dropdown(),
-        //     ]
-        // );
 
         $image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/woo-product-grid-preset-';
         $this->add_control(
@@ -368,15 +358,34 @@ class Product_Grid extends Widget_Base
             'eael_product_grid_column',
             [
                 'label' => esc_html__('Columns', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
+                'type' => Controls_Manager::CHOOSE,
+				'label_block' => true,
                 'default' => '4',
                 'options' => [
-                    '1' => esc_html__('1', 'essential-addons-for-elementor-lite'),
-                    '2' => esc_html__('2', 'essential-addons-for-elementor-lite'),
-                    '3' => esc_html__('3', 'essential-addons-for-elementor-lite'),
-                    '4' => esc_html__('4', 'essential-addons-for-elementor-lite'),
-                    '5' => esc_html__('5', 'essential-addons-for-elementor-lite'),
-                    '6' => esc_html__('6', 'essential-addons-for-elementor-lite'),
+                    '1' => [
+						'title' => esc_html__( '1', 'essential-addons-for-elementor-lite' ),
+						'text'  => '1',
+					],
+                    '2' => [
+						'title' => esc_html__( '2', 'essential-addons-for-elementor-lite' ),
+						'text'  => '2',
+					],
+                    '3' => [
+						'title' => esc_html__( '3', 'essential-addons-for-elementor-lite' ),
+						'text'  => '3',
+					],
+                    '4' => [
+						'title' => esc_html__( '4', 'essential-addons-for-elementor-lite' ),
+						'text'  => '4',
+					],
+                    '5' => [
+						'title' => esc_html__( '5', 'essential-addons-for-elementor-lite' ),
+						'text'  => '5',
+					],
+                    '6' => [
+						'title' => esc_html__( '6', 'essential-addons-for-elementor-lite' ),
+						'text'  => '6',
+					],
                 ],
                 'toggle' => true,
                 'prefix_class' => 'eael-product-grid-column%s-',
