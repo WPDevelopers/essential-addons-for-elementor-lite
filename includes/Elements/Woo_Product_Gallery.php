@@ -142,8 +142,8 @@ class Woo_Product_Gallery extends Widget_Base {
 			return;
 		}
 		// Content Controls
-		$this->init_content_product_settings_controls();
 		$this->init_content_layout_controls();
+		$this->init_content_product_settings_controls();
 		$this->eael_product_badges();
 		$this->init_content_load_more_controls();
 
