@@ -218,22 +218,21 @@ class Bootstrap
 
 	    //Essential Blocks Promo
 	    if ( ! class_exists( 'Classic_Editor' ) && ! class_exists( 'EssentialBlocks' ) ) {
-			// Essential Blocks Popup
-		    if ( ! get_transient( 'eael_gb_eb_popup_hide' ) ) {
-			    add_action( 'enqueue_block_editor_assets', [ $this, 'essential_blocks_promo_enqueue_scripts' ] );
-			    add_action( 'wp_ajax_eael_gb_eb_popup_dismiss', [ $this, 'eael_gb_eb_popup_dismiss' ] );
+		    // Essential Blocks Popup
+		    add_action( 'wpdeveloper_eb_popup_promo_init', [ $this, 'eael_eb_popup_promo_init' ] );
+		    if ( ! get_transient( 'eael_gb_eb_popup_hide' ) && ( did_action( 'wpdeveloper_eb_popup_promo_init' ) < 1 ) ) {
+			    do_action( 'wpdeveloper_eb_popup_promo_init' );
 		    }
 
-			// Essential Blocks Optin
-		    if ( ! get_option( 'eael_eb_optin_hide' ) ) {
-			    add_action( 'admin_notices', [ $this, 'essential_block_optin' ] );
-			    add_action( 'eael_admin_notices', [ $this, 'essential_block_special_optin' ], 100 );
-			    add_action( 'wp_ajax_eael_eb_optin_notice_dismiss', [ $this, 'eael_eb_optin_notice_dismiss' ] );
+		    // Essential Blocks Optin
+		    add_action( 'wpdeveloper_eb_optin_promo_init', [ $this, 'eael_eb_optin_promo_init' ] );
+		    if ( ! get_option( 'eael_eb_optin_hide' ) && ( did_action( 'wpdeveloper_eb_optin_promo_init' ) < 1 ) ) {
+			    do_action( 'wpdeveloper_eb_optin_promo_init' );
 		    }
 
 		    //Essential Blocks Banner Promo
 		    add_action( 'wpdeveloper_eb_banner_promo_init', [ $this, 'eael_eb_banner_promo_init' ] );
-		    if ( ! class_exists( 'Classic_Editor' ) && ! class_exists( 'EssentialBlocks' ) && ! ( get_transient( 'eael_eb_banner_promo_hide' ) || get_transient( 'wpdeveloper_eb_banner_promo_hide' ) ) && ( did_action( 'wpdeveloper_eb_banner_promo_init' ) < 1 ) ) {
+		    if ( ! ( get_transient( 'eael_eb_banner_promo_hide' ) || get_transient( 'wpdeveloper_eb_banner_promo_hide' ) ) && ( did_action( 'wpdeveloper_eb_banner_promo_init' ) < 1 ) ) {
 			    do_action( 'wpdeveloper_eb_banner_promo_init' );
 		    }
 	    }

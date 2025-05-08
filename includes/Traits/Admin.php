@@ -1900,7 +1900,7 @@ trait Admin {
 	}
 
 	public function essential_block_optin() {
-		if ( is_plugin_active( 'essential-blocks/essential-blocks.php' ) || get_option( 'eael_eb_optin_hide' ) ) {
+		if ( is_plugin_active( 'essential-blocks/essential-blocks.php' ) ) {
 			return;
 		}
 
@@ -2037,7 +2037,7 @@ trait Admin {
 	}
 
 	public function essential_block_special_optin() {
-		if ( is_plugin_active( 'essential-blocks/essential-blocks.php' ) || get_option( 'eael_eb_optin_hide' ) ) {
+		if ( is_plugin_active( 'essential-blocks/essential-blocks.php' ) ) {
 			return;
 		}
 
@@ -2254,4 +2254,14 @@ trait Admin {
 		add_action( 'wp_ajax_eael_eb_banner_promo_dismiss', [ $this, 'eael_eb_banner_promo_dismiss' ] );
 	}
 
+	public function eael_eb_popup_promo_init() {
+		add_action( 'enqueue_block_editor_assets', [ $this, 'essential_blocks_promo_enqueue_scripts' ] );
+		add_action( 'wp_ajax_eael_gb_eb_popup_dismiss', [ $this, 'eael_gb_eb_popup_dismiss' ] );
+	}
+
+	public function eael_eb_optin_promo_init() {
+		add_action( 'admin_notices', [ $this, 'essential_block_optin' ] );
+		add_action( 'eael_admin_notices', [ $this, 'essential_block_special_optin' ], 100 );
+		add_action( 'wp_ajax_eael_eb_optin_notice_dismiss', [ $this, 'eael_eb_optin_notice_dismiss' ] );
+	}
 }
