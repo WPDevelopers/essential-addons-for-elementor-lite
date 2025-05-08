@@ -3261,7 +3261,8 @@ class Woo_Product_List extends Widget_Base
 			    'type'      => Controls_Manager::COLOR,
 			    'default'   => '#fff',
 			    'selectors' => [
-				    '.eael-popup-details-render .button, .eael-popup-details-render button.button.alt' => 'color: {{VALUE}};',
+				    '.eael-popup-details-render .elementor-element-{{ID}} .button, .eael-popup-details-render button.button.alt,
+                    .eael-popup-details-render .elementor-element-{{ID}} .button, .eael-popup-details-render button.button.alt.disabled' => 'color: {{VALUE}};',
 			    ],
 		    ]
 	    );
@@ -3273,7 +3274,8 @@ class Woo_Product_List extends Widget_Base
 			    'type'      => Controls_Manager::COLOR,
 			    'default'   => '#758F4D',
 			    'selectors' => [
-				    '.eael-popup-details-render .button, .eael-popup-details-render button.button.alt' => 'background-color: {{VALUE}};',
+				    '.eael-popup-details-render .elementor-element-{{ID}} .button, .eael-popup-details-render button.button.alt,
+                    .eael-popup-details-render .elementor-element-{{ID}} .button, .eael-popup-details-render button.button.alt.disabled' => 'background-color: {{VALUE}};',
 			    ],
                 'condition'     => [
                     'eael_dynamic_template_layout' => 'preset-1',
@@ -3288,7 +3290,8 @@ class Woo_Product_List extends Widget_Base
 			    'type'      => Controls_Manager::COLOR,
 			    'default'   => '#BC5C5C',
 			    'selectors' => [
-				    '.eael-popup-details-render .button, .eael-popup-details-render button.button.alt' => 'background-color: {{VALUE}};',
+				    '.eael-popup-details-render .button, .eael-popup-details-render button.button.alt,
+                    .eael-popup-details-render .elementor-element-{{ID}} .button, .eael-popup-details-render button.button.alt.disabled' => 'background-color: {{VALUE}};',
 			    ],
                 'condition'     => [
                     'eael_dynamic_template_layout' => 'preset-2',
@@ -3303,7 +3306,8 @@ class Woo_Product_List extends Widget_Base
 			    'type'      => Controls_Manager::COLOR,
 			    'default'   => '#A66C46',
 			    'selectors' => [
-				    '.eael-popup-details-render .button, .eael-popup-details-render button.button.alt' => 'background-color: {{VALUE}};',
+				    '.eael-popup-details-render .button, .eael-popup-details-render button.button.alt,
+                    .eael-popup-details-render .elementor-element-{{ID}} .button, .eael-popup-details-render button.button.alt.disabled' => 'background-color: {{VALUE}};',
 			    ],
                 'condition'     => [
                     'eael_dynamic_template_layout' => 'preset-3',
@@ -3315,7 +3319,8 @@ class Woo_Product_List extends Widget_Base
 		    Group_Control_Border::get_type(),
 		    [
 			    'name'     => 'eael_product_popup_cart_button_border',
-			    'selector' => '.eael-popup-details-render .button, .eael-popup-details-render button.button.alt',
+			    'selector' => '.eael-popup-details-render .button, .eael-popup-details-render button.button.alt, 
+                .eael-popup-details-render .elementor-element-{{ID}} .button, .eael-popup-details-render button.button.alt.disabled',
 		    ]
 	    );
 	    $this->add_control(
@@ -3329,7 +3334,8 @@ class Woo_Product_List extends Widget_Base
 				    ],
 			    ],
 			    'selectors' => [
-				    '.eael-popup-details-render .button, .eael-popup-details-render button.button.alt' => 'border-radius: {{SIZE}}px;',
+				    '.eael-popup-details-render .button, .eael-popup-details-render button.button.alt,
+                    .eael-popup-details-render .elementor-element-{{ID}} .button, .eael-popup-details-render button.button.alt.disabled' => 'border-radius: {{SIZE}}px;',
 			    ],
 		    ]
 	    );
@@ -3344,7 +3350,8 @@ class Woo_Product_List extends Widget_Base
 			    'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
 			    'type'      => Controls_Manager::COLOR,
 			    'selectors' => [
-				    '.eael-popup-details-render .button:hover, .eael-popup-details-render button.button.alt:hover' => 'color: {{VALUE}};',
+				    '.eael-popup-details-render .button:hover, .eael-popup-details-render button.button.alt:hover,
+                    .eael-popup-details-render .elementor-element-{{ID}} .button, .eael-popup-details-render button.button.alt.disabled:hover' => 'color: {{VALUE}};',
 			    ],
 		    ]
 	    );
@@ -3356,7 +3363,8 @@ class Woo_Product_List extends Widget_Base
 			    'type'      => Controls_Manager::COLOR,
 			    'default'   => '#000',
 			    'selectors' => [
-				    '.eael-popup-details-render .button:hover, .eael-popup-details-render button.button.alt:hover' => 'background-color: {{VALUE}};',
+				    '.eael-popup-details-render .button:hover, .eael-popup-details-render button.button.alt:hover,
+                    .eael-popup-details-render .elementor-element-{{ID}} .button, .eael-popup-details-render button.button.alt.disabled:hover' => 'background-color: {{VALUE}};',
 			    ],
 		    ]
 	    );
