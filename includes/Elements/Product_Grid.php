@@ -3729,7 +3729,6 @@ class Product_Grid extends Widget_Base
             'posts_per_page' => $settings['eael_product_grid_products_count'] ?: 4,
             'order' => (isset($settings['order']) ? $settings['order'] : 'desc'),
             'offset' => $settings['product_offset'],
-            'post__not_in' => array( get_the_ID() ),
             'tax_query' => [
                 'relation' => 'AND',
                 [
@@ -3740,6 +3739,11 @@ class Product_Grid extends Widget_Base
                 ],
             ],
         ];
+
+        if ( is_singular() ) {
+            $args['post__not_in'] = [ get_the_ID() ];
+        }
+
         // price & sku filter
         if ($settings['orderby'] == '_price') {
             $args['orderby'] = 'meta_value_num';
