@@ -58,29 +58,6 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
     echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . esc_attr( get_the_ID() ) . '">
         <div class="eael-grid-post-holder">
             <div class="eael-grid-post-holder-inner">';
-                if ( $thumbnail_html && 'yes' === $settings['eael_show_image'] ) {
-                    echo '<div class="eael-entry-media">';
-                        if ( 'yes' === $settings['eael_show_post_terms'] && 'yes' === $settings['eael_post_terms_on_image_hover'] ) {
-                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                            echo Helper::get_terms_as_list($settings['eael_post_terms'], $settings['eael_post_terms_max_length']);
-                        }
-
-                        echo '<div class="eael-entry-overlay ' . esc_attr( $settings['eael_post_grid_hover_animation'] ) . '">';
-                            if (isset($settings['eael_post_grid_bg_hover_icon_new']['url'])) {
-                                echo '<img src="' . esc_url($settings['eael_post_grid_bg_hover_icon_new']['url']) . '" alt="' . esc_attr(get_post_meta($settings['eael_post_grid_bg_hover_icon_new']['id'], '_wp_attachment_image_alt', true)) . '" />';
-                            } else {
-                                echo '<i class="' . esc_attr( $settings['eael_post_grid_bg_hover_icon_new']['value'] ) . '" aria-hidden="true"></i>';
-                            }
-                            
-                            echo '<a href="' . esc_url( get_the_permalink() ) . '"' . ( $settings['image_link_nofollow'] ? 'rel="nofollow"' : '' ) . '' . ( $settings['image_link_target_blank'] ? 'target="_blank"' : '' ) . '></a>';
-                        echo '</div>';
-
-                        echo '<div class="eael-entry-thumbnail '.esc_attr( $enable_ratio ).'">
-                                ' . wp_kses( $thumbnail_html, Helper::eael_allowed_icon_tags() ) . '
-                              </div>
-                      </div>';
-                }
-
                 if ($settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt']) {
                     echo '<div class="eael-entry-wrapper">';
                     if ($settings['eael_show_title']) {
@@ -211,6 +188,28 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
                     }
                     echo '</div>';
                 }
+                if ( $thumbnail_html && 'yes' === $settings['eael_show_image'] ) {
+                    echo '<div class="eael-entry-media">';
+                        if ( 'yes' === $settings['eael_show_post_terms'] && 'yes' === $settings['eael_post_terms_on_image_hover'] ) {
+                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                            echo Helper::get_terms_as_list($settings['eael_post_terms'], $settings['eael_post_terms_max_length']);
+                        }
+
+                        echo '<div class="eael-entry-overlay ' . esc_attr( $settings['eael_post_grid_hover_animation'] ) . '">';
+                            if (isset($settings['eael_post_grid_bg_hover_icon_new']['url'])) {
+                                echo '<img src="' . esc_url($settings['eael_post_grid_bg_hover_icon_new']['url']) . '" alt="' . esc_attr(get_post_meta($settings['eael_post_grid_bg_hover_icon_new']['id'], '_wp_attachment_image_alt', true)) . '" />';
+                            } else {
+                                echo '<i class="' . esc_attr( $settings['eael_post_grid_bg_hover_icon_new']['value'] ) . '" aria-hidden="true"></i>';
+                            }
+                            
+                            echo '<a href="' . esc_url( get_the_permalink() ) . '"' . ( $settings['image_link_nofollow'] ? 'rel="nofollow"' : '' ) . '' . ( $settings['image_link_target_blank'] ? 'target="_blank"' : '' ) . '></a>';
+                        echo '</div>';
+
+                        echo '<div class="eael-entry-thumbnail '.esc_attr( $enable_ratio ).'">
+                                ' . wp_kses( $thumbnail_html, Helper::eael_allowed_icon_tags() ) . '
+                              </div>
+                      </div>';
+                }
     echo '</div>
         </div>
     </article>';
@@ -218,34 +217,6 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
     echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . esc_attr( get_the_ID() ) . '">
         <div class="eael-grid-post-holder">
             <div class="eael-grid-post-holder-inner">';
-
-    if ( $thumbnail_html && 'yes' === $settings['eael_show_image'] ) {
-
-        echo '<div class="eael-entry-media">';
-        if ( 'yes' === $settings['eael_show_post_terms'] && 'yes' === $settings['eael_post_terms_on_image_hover'] ) {
-            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            echo Helper::get_terms_as_list($settings['eael_post_terms'], $settings['eael_post_terms_max_length']);
-        }
-
-        echo '<div class="eael-entry-overlay ' . esc_attr( $settings['eael_post_grid_hover_animation'] ) . '">';
-
-        if (isset($settings['eael_post_grid_bg_hover_icon_new']['url'])) {
-            echo '<img src="' . esc_url($settings['eael_post_grid_bg_hover_icon_new']['url']) . '" alt="' . esc_attr(get_post_meta($settings['eael_post_grid_bg_hover_icon_new']['id'], '_wp_attachment_image_alt', true)) . '" />';
-        } else {
-            echo '<i class="' . esc_attr( $settings['eael_post_grid_bg_hover_icon_new']['value'] ) . '" aria-hidden="true"></i>';
-        }
-        echo '<a href="' . esc_url( get_the_permalink() ) . '"' . ( $settings['image_link_nofollow'] ? 'rel="nofollow"' : '' ) . '' . ( $settings['image_link_target_blank'] ? 'target="_blank"' : '' ) . '></a>';
-        echo '</div>';
-
-        echo '<div class="eael-entry-thumbnail '. esc_attr( $enable_ratio ) .'">
-                 '. wp_kses( $thumbnail_html, Helper::eael_allowed_icon_tags() ) .'
-             </div>
-        </div>';
-        if ( $is_show_meta && 'meta-entry-header' === $settings['meta_position'] && $settings['eael_show_date'] === 'yes') {
-            echo '<span class="eael-meta-posted-on"><time datetime="' . get_the_date() . '"><span>' . get_the_date('d') . '</span>' . get_the_date('F') . '</time></span>';
-        }
-    }
-
     if ($settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt']) {
         echo '<div class="eael-entry-wrapper">';
 
@@ -306,14 +277,6 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
 
         echo '</div>';
     }
-    echo '</div>
-        </div>
-    </article>';
-} else {
-    echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . esc_attr( get_the_ID() ) . '">
-        <div class="eael-grid-post-holder">
-            <div class="eael-grid-post-holder-inner">';
-            
     if ( $thumbnail_html && 'yes' === $settings['eael_show_image'] ) {
 
         echo '<div class="eael-entry-media">';
@@ -327,21 +290,26 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
         if (isset($settings['eael_post_grid_bg_hover_icon_new']['url'])) {
             echo '<img src="' . esc_url($settings['eael_post_grid_bg_hover_icon_new']['url']) . '" alt="' . esc_attr(get_post_meta($settings['eael_post_grid_bg_hover_icon_new']['id'], '_wp_attachment_image_alt', true)) . '" />';
         } else {
-            if (($settings['eael_post_grid_bg_hover_icon_new']['library']) == 'svg') {
-                echo '<img src="' . esc_url($settings['eael_post_grid_bg_hover_icon_new']['value']['url']) . '" alt="' . esc_attr(get_post_meta($settings['eael_post_grid_bg_hover_icon_new']['value']['id'], '_wp_attachment_image_alt', true)) . '" />';
-            } else {
-                echo '<i class="' . esc_attr( $settings['eael_post_grid_bg_hover_icon_new']['value'] ) . '" aria-hidden="true"></i>';
-            }
+            echo '<i class="' . esc_attr( $settings['eael_post_grid_bg_hover_icon_new']['value'] ) . '" aria-hidden="true"></i>';
         }
         echo '<a href="' . esc_url( get_the_permalink() ) . '"' . ( $settings['image_link_nofollow'] ? 'rel="nofollow"' : '' ) . '' . ( $settings['image_link_target_blank'] ? 'target="_blank"' : '' ) . '></a>';
         echo '</div>';
 
-        echo '<div class="eael-entry-thumbnail ' . esc_attr( $enable_ratio ) . '">
-                ' . wp_kses( $thumbnail_html, Helper::eael_allowed_icon_tags() ) . '
-            </div>
+        echo '<div class="eael-entry-thumbnail '. esc_attr( $enable_ratio ) .'">
+                 '. wp_kses( $thumbnail_html, Helper::eael_allowed_icon_tags() ) .'
+             </div>
         </div>';
+        if ( $is_show_meta && 'meta-entry-header' === $settings['meta_position'] && $settings['eael_show_date'] === 'yes') {
+            echo '<span class="eael-meta-posted-on"><time datetime="' . get_the_date() . '"><span>' . get_the_date('d') . '</span>' . get_the_date('F') . '</time></span>';
+        }
     }
-
+    echo '</div>
+        </div>
+    </article>';
+} else {
+    echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . esc_attr( get_the_ID() ) . '">
+        <div class="eael-grid-post-holder">
+            <div class="eael-grid-post-holder-inner">';
     if ($settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt']) {
         echo '<div class="eael-entry-wrapper">';
         if ($settings['eael_show_title']) {
@@ -424,6 +392,33 @@ if ( $settings['eael_post_grid_preset_style'] === 'two' ) {
         }
 
         echo '</div>';
+    }
+    if ( $thumbnail_html && 'yes' === $settings['eael_show_image'] ) {
+
+        echo '<div class="eael-entry-media">';
+        if ( 'yes' === $settings['eael_show_post_terms'] && 'yes' === $settings['eael_post_terms_on_image_hover'] ) {
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo Helper::get_terms_as_list($settings['eael_post_terms'], $settings['eael_post_terms_max_length']);
+        }
+
+        echo '<div class="eael-entry-overlay ' . esc_attr( $settings['eael_post_grid_hover_animation'] ) . '">';
+
+        if (isset($settings['eael_post_grid_bg_hover_icon_new']['url'])) {
+            echo '<img src="' . esc_url($settings['eael_post_grid_bg_hover_icon_new']['url']) . '" alt="' . esc_attr(get_post_meta($settings['eael_post_grid_bg_hover_icon_new']['id'], '_wp_attachment_image_alt', true)) . '" />';
+        } else {
+            if (($settings['eael_post_grid_bg_hover_icon_new']['library']) == 'svg') {
+                echo '<img src="' . esc_url($settings['eael_post_grid_bg_hover_icon_new']['value']['url']) . '" alt="' . esc_attr(get_post_meta($settings['eael_post_grid_bg_hover_icon_new']['value']['id'], '_wp_attachment_image_alt', true)) . '" />';
+            } else {
+                echo '<i class="' . esc_attr( $settings['eael_post_grid_bg_hover_icon_new']['value'] ) . '" aria-hidden="true"></i>';
+            }
+        }
+        echo '<a href="' . esc_url( get_the_permalink() ) . '"' . ( $settings['image_link_nofollow'] ? 'rel="nofollow"' : '' ) . '' . ( $settings['image_link_target_blank'] ? 'target="_blank"' : '' ) . '></a>';
+        echo '</div>';
+
+        echo '<div class="eael-entry-thumbnail ' . esc_attr( $enable_ratio ) . '">
+                ' . wp_kses( $thumbnail_html, Helper::eael_allowed_icon_tags() ) . '
+            </div>
+        </div>';
     }
     echo '</div>
         </div>
