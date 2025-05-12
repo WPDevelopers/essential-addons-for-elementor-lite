@@ -170,6 +170,9 @@ class WPDeveloper_Plugin_Installer
                 'popup' => [
                     'essential-blocks' => 'https://essential-addons.com/eb-install-gutenberg-popup',
                 ],
+                'optin' => [
+                    'essential-blocks' => 'https://essential-addons.com/eb-install-optin',
+                ],
             ];
         
             if ( isset( $remote_urls[ $promotype ][ $slug ] ) ) {

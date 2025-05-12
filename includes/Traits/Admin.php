@@ -1958,6 +1958,7 @@ trait Admin {
                                 action: "wpdeveloper_install_plugin",
                                 security: "<?php echo esc_html( $nonce ); ?>",
                                 slug: "essential-blocks",
+								promotype: "optin"
                             },
                             success: function (response) {
                                 if (response.success) {
@@ -2138,6 +2139,7 @@ trait Admin {
                                 action: "wpdeveloper_install_plugin",
                                 security: "<?php echo esc_html( $nonce ); ?>",
                                 slug: "essential-blocks",
+								promotype: "optin"
                             },
                             success: function (response) {
                                 if (response.success) {
