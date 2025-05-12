@@ -1011,11 +1011,11 @@ trait Ajax_Handler {
 
 		if ( isset( $settings['lr_custom_profile_fields_text'] ) ) {
 			update_option( 'eael_custom_profile_fields_text', sanitize_text_field( $settings['lr_custom_profile_fields_text'] ) );
-		} 
+		}
 
 		if ( isset( $settings['lr_custom_profile_fields_img'] ) ) {
 			update_option( 'eael_custom_profile_fields_img', sanitize_text_field( $settings['lr_custom_profile_fields_img'] ) );
-		} 
+		}
 
 		//pro settings
 		if ( isset( $settings['lr_g_client_id'] ) ) {
