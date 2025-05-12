@@ -870,6 +870,11 @@ class WPDeveloper_Setup_Wizard {
 	}
 
 	public static function redirect() {
+		// Do not redirect AJAX requests
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			return;
+		}
+
 		update_option( 'eael_setup_wizard', 'init' );
 		wp_redirect( admin_url( 'admin.php?page=eael-setup-wizard' ) );
 	}
