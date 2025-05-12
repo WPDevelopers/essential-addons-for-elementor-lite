@@ -775,6 +775,9 @@ class Filterable_Gallery extends Widget_Base
             ]
         );
 
+        // This is for the grid flow layout icon control
+        do_action( 'eael_grid_flow_gallery_icon_control', $repeater );
+
         $repeater->add_control(
 			'fg_video_gallery_heading',
 			[
