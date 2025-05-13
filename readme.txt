@@ -4,7 +4,7 @@ Tags: elementor, elements, elementor addon, elementor widget, woocommerce elemen
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.1.11
+Stable tag: 6.1.12
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -314,6 +314,15 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.1.12 - 13/05/2025 =
+
+- Fixed: 404 Page not found page not working when built with Elementor template
+- Fixed: EA Flip Box | Height Inconsistency and Scroll Not Working on iPhone
+- Fixed: EA Woo Product List | Popup style not working
+- Improved: EA Testimonial | Added Image Height Control
+- Improved: EA Testimonial | Removed default 10px padding
+- Few minor bug fixes & improvements
 
 = 6.1.11 - 22/04/2025 =
 
