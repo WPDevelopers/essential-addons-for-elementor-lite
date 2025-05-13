@@ -504,10 +504,6 @@ class Testimonial extends Widget_Base {
 			[
 				'label' => esc_html__( 'Image Height', 'essential-addons-for-elementor-lite'),
 				'type'  => Controls_Manager::SLIDER,
-				'default' => [
-					'size' => 150,
-					'unit' => 'px',
-				],
 				'range' => [
 					'%' => [
 						'min' => 0,
