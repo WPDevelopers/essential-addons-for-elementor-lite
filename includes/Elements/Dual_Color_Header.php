@@ -258,7 +258,7 @@ class Dual_Color_Header extends Widget_Base
 			'eael_section_dch_separator_settings',
 			[
 				'label' => __('Separator', 'essential-addons-for-elementor-lite'),
-				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+				'tab' => Controls_Manager::TAB_CONTENT,
 				'condition' => [
 					'eael_show_dch_separator' => 'yes',
 				],
@@ -269,7 +269,7 @@ class Dual_Color_Header extends Widget_Base
 			'eael_dch_separator_position',
 			[
 				'label' => __('Separator Position', 'essential-addons-for-elementor-lite'),
-				'type' => \Elementor\Controls_Manager::SELECT,
+				'type' => Controls_Manager::SELECT,
 				'default' => 'after_title',
 				'options' => [
 					'before_title' => __('Before Title', 'essential-addons-for-elementor-lite'),
@@ -281,7 +281,7 @@ class Dual_Color_Header extends Widget_Base
 			'eael_dch_separator_type',
 			[
 				'label' => __('Separator Type', 'essential-addons-for-elementor-lite'),
-				'type' => \Elementor\Controls_Manager::SELECT,
+				'type' => Controls_Manager::SELECT,
 				'default' => 'line',
 				'options' => [
 					'line' => __('Line', 'essential-addons-for-elementor-lite'),
@@ -293,7 +293,7 @@ class Dual_Color_Header extends Widget_Base
 			'eael_dch_separator_icon',
 			[
 				'label' => __('Icon', 'essential-addons-for-elementor-lite'),
-				'type' => \Elementor\Controls_Manager::ICONS,
+				'type' => Controls_Manager::ICONS,
 				'default' => [
 					'value' => 'fas fa-star',
 					'library' => 'solid',
@@ -482,7 +482,7 @@ class Dual_Color_Header extends Widget_Base
 			'eael_dch_dual_color_selector',
 			[
 				'label' => esc_html__('Dual Color', 'essential-addons-for-elementor-lite'),
-				'type' => \Elementor\Controls_Manager::CHOOSE,
+				'type' => Controls_Manager::CHOOSE,
 				'options' => [
 					'solid-color' => [
 						'title' => __('Color', 'essential-addons-for-elementor-lite'),
@@ -638,7 +638,7 @@ class Dual_Color_Header extends Widget_Base
 			'eael_section_dch_separator_alignment',
 			[
 				'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
-				'type' => \Elementor\Controls_Manager::CHOOSE,
+				'type' => Controls_Manager::CHOOSE,
 				'options' => [
 					'flex-start' => [
 						'title' => __('Flex Start', 'essential-addons-for-elementor-lite'),
@@ -701,7 +701,7 @@ class Dual_Color_Header extends Widget_Base
 			'title_color',
 			[
 				'label' => __('Color', 'essential-addons-for-elementor-lite'),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'global' => [
 					'default' => Global_Colors::COLOR_PRIMARY
 				],
@@ -796,7 +796,7 @@ class Dual_Color_Header extends Widget_Base
 			]
 		);
 		$this->add_group_control(
-			\Elementor\Group_Control_Background::get_type(),
+			Group_Control_Background::get_type(),
 			[
 				'name' => 'eael_dch_separator_left_bg',
 				'label' => __('Background', 'essential-addons-for-elementor-lite'),
@@ -876,7 +876,7 @@ class Dual_Color_Header extends Widget_Base
 			]
 		);
 		$this->add_group_control(
-			\Elementor\Group_Control_Background::get_type(),
+			Group_Control_Background::get_type(),
 			[
 				'name' => 'eael_dch_separator_right_bg',
 				'label' => __('Background', 'essential-addons-for-elementor-lite'),
