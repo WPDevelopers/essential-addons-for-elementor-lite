@@ -2,6 +2,8 @@
 
 namespace Essential_Addons_Elementor\Elements;
 
+use Elementor\Repeater;
+
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
 	exit;
@@ -144,6 +146,26 @@ class Dual_Color_Header extends Widget_Base
 		);
 
 		$this->add_control(
+			'eael_dch_title_type',
+			[
+				'label'       => esc_html__('Type', 'essential-addons-for-elementor-lite'),
+				'type'        => Controls_Manager::CHOOSE,
+				'label_block' => true,
+				'default'     => 'dual',
+				'options'     => [
+					'dual' => [
+						'title' => esc_html__('Dual', 'essential-addons-for-elementor-lite'),
+						'text' => 'DUAL',
+					],
+					'multiple' => [
+						'title' => esc_html__('Multiple', 'essential-addons-for-elementor-lite'),
+						'text' => 'MULTIPLE',
+					],
+				],
+			]
+		);
+
+		$this->add_control(
 			'eael_dch_first_title',
 			[
 				'label' => esc_html__('First Part', 'essential-addons-for-elementor-lite'),
@@ -153,6 +175,9 @@ class Dual_Color_Header extends Widget_Base
 				'dynamic' => ['action' => true],
 				'ai' => [
 					'active' => false,
+				],
+				'condition' => [
+					'eael_dch_title_type' => 'dual',
 				],
 			]
 		);
@@ -167,6 +192,56 @@ class Dual_Color_Header extends Widget_Base
 				'dynamic' => ['action' => true],
 				'ai' => [
 					'active' => false,
+				],
+				'condition' => [
+					'eael_dch_title_type' => 'dual',
+				],
+			]
+		);
+
+		$multiple_titles = new Repeater();
+
+		$multiple_titles->add_control(
+			'eael_dch_title',
+			[
+				'label'       => esc_html__('Title', 'essential-addons-for-elementor-lite'),
+				'type'        => Controls_Manager::TEXT,
+				'label_block' => true,
+				'default'     => esc_html__('Dual Heading', 'essential-addons-for-elementor-lite'),
+				'dynamic'     => [ 'action' =>true ],
+				'ai'          => [ 'active' => false ],
+			]
+		);
+
+		$multiple_titles->add_control(
+			'eael_dch_title_color',
+			[
+				'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-dual-header {{CURRENT_ITEM}}' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_dch_multiple_titles',
+			[
+				'label'   => '',
+				'type'    => Controls_Manager::REPEATER,
+				'fields'  => $multiple_titles->get_controls(),
+				'default' => [
+					[
+						'eael_dch_title' => esc_html__('Dual Heading', 'essential-addons-for-elementor-lite'),
+					],
+					[
+						'eael_dch_title' => esc_html__('Example', 'essential-addons-for-elementor-lite'),
+					],
+				],
+				'title_field' => '{{{eael_dch_title}}}',
+				'button_text' => esc_html__('Add Title', 'essential-addons-for-elementor-lite'),
+				'condition' => [
+					'eael_dch_title_type' => 'multiple',
 				],
 			]
 		);
