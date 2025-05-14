@@ -135,9 +135,18 @@ class Dual_Color_Header extends Widget_Base
 		);
 
 		$this->add_control(
+			'eael_dch_title_heading',
+			[
+				'label' => esc_html__('Title', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
 			'eael_dch_first_title',
 			[
-				'label' => esc_html__('Title ( First Part )', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__('First Part', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXT,
 				'label_block' => true,
 				'default' => esc_html__('Dual Heading', 'essential-addons-for-elementor-lite'),
@@ -151,7 +160,7 @@ class Dual_Color_Header extends Widget_Base
 		$this->add_control(
 			'eael_dch_last_title',
 			[
-				'label' => esc_html__('Title ( Last Part )', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__('Last Part', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXT,
 				'label_block' => true,
 				'default' => esc_html__('Example', 'essential-addons-for-elementor-lite'),
@@ -165,7 +174,7 @@ class Dual_Color_Header extends Widget_Base
 		$this->add_control(
 			'title_tag',
 			[
-				'label'       => __('Title Tag', 'essential-addons-for-elementor-lite'),
+				'label'       => __('HTML Tag', 'essential-addons-for-elementor-lite'),
 				'type'        => Controls_Manager::CHOOSE,
 				'label_block' => true,
 				'default'     => 'h2',
@@ -999,7 +1008,7 @@ class Dual_Color_Header extends Widget_Base
 					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					echo $this->parse_text_editor( $settings['eael_dch_subtext'] ); ?></span>
 				<?php endif;
-				
+
 				if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
 					<?php if ($icon_is_new || $icon_migrated) {
 						echo '<span class="eael-dch-svg-icon">';
