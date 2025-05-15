@@ -268,9 +268,11 @@ class Dual_Color_Header extends Widget_Base
 				'default' => [
 					[
 						'eael_dch_title' => esc_html__('Dual Heading', 'essential-addons-for-elementor-lite'),
+						'eael_dch_title_color' => '#9f12ff'
 					],
 					[
 						'eael_dch_title' => esc_html__('Example', 'essential-addons-for-elementor-lite'),
+						'eael_dch_title_color' => '#4d4d4d'
 					],
 				],
 				'title_field' => '{{{eael_dch_title}}}',
