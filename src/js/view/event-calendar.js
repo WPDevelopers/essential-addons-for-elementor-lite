@@ -278,11 +278,11 @@ var EventCalendar = function ($scope, $) {
 				eventWillUnmount: function(arg) {}
 			});
 
-		function refreshPopUpDetailsLink(){
+		function refreshPopUpDetailsLink() {
 			var modalFooter = $(".eaelec-modal-footer"),
 				modalFooterClass = modalFooter.find('a').attr('class'),
-				modalFooterText = $(".eael-event-calendar-cls", $scope).attr( 'data-detailsButtonText' );
-				modalFooter.html('<a class="'+modalFooterClass+'">'+modalFooterText+'</a>');
+				modalFooterText = $(".eael-event-calendar-cls", $scope).attr('data-detailsButtonText');
+			modalFooter.html('<a class="' + modalFooterClass + '">' + DOMPurify.sanitize(modalFooterText) + '</a>');
 		}
 
 		CloseButton.on("click", function (event) {
