@@ -1893,7 +1893,7 @@ trait Admin {
 	}
 
 	public function essential_block_optin() {
-		if ( is_plugin_active( 'essential-blocks/essential-blocks.php' ) || get_option( 'eael_eb_optin_hide' ) ) {
+		if ( is_plugin_active( 'essential-blocks/essential-blocks.php' ) ) {
 			return;
 		}
 
@@ -1951,6 +1951,7 @@ trait Admin {
                                 action: "wpdeveloper_install_plugin",
                                 security: "<?php echo esc_html( $nonce ); ?>",
                                 slug: "essential-blocks",
+								promotype: "optin"
                             },
                             success: function (response) {
                                 if (response.success) {
@@ -2030,7 +2031,7 @@ trait Admin {
 	}
 
 	public function essential_block_special_optin() {
-		if ( is_plugin_active( 'essential-blocks/essential-blocks.php' ) || get_option( 'eael_eb_optin_hide' ) ) {
+		if ( is_plugin_active( 'essential-blocks/essential-blocks.php' ) ) {
 			return;
 		}
 
@@ -2131,6 +2132,7 @@ trait Admin {
                                 action: "wpdeveloper_install_plugin",
                                 security: "<?php echo esc_html( $nonce ); ?>",
                                 slug: "essential-blocks",
+								promotype: "optin"
                             },
                             success: function (response) {
                                 if (response.success) {
@@ -2216,7 +2218,7 @@ trait Admin {
 			wp_send_json_error( __( 'You are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
 		}
 
-		update_option( 'eael_eb_optin_hide', true );
+		set_transient( 'wpdeveloper_eb_optin_hide', true, MONTH_IN_SECONDS * 2 );
 		wp_send_json_success();
 	}
 
@@ -2227,7 +2229,7 @@ trait Admin {
 			wp_send_json_error( __( 'You are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
 		}
 
-		set_transient( 'eael_gb_eb_popup_hide', true, MONTH_IN_SECONDS * 2 );
+		set_transient( 'wpdeveloper_gb_eb_popup_hide', true, MONTH_IN_SECONDS * 2 );
 		wp_send_json_success();
 	}
 
@@ -2238,8 +2240,23 @@ trait Admin {
 			wp_send_json_error( __( 'You are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
 		}
 
-		set_transient( 'eael_eb_banner_promo_hide', true, DAY_IN_SECONDS * 45 );
+		set_transient( 'wpdeveloper_eb_banner_promo_hide', true, DAY_IN_SECONDS * 45 );
 		wp_send_json_success();
 	}
 
+	public function eael_eb_banner_promo_init() {
+		add_action( 'enqueue_block_editor_assets', [ $this, 'essential_blocks_banner_promo_enqueue_scripts' ] );
+		add_action( 'wp_ajax_eael_eb_banner_promo_dismiss', [ $this, 'eael_eb_banner_promo_dismiss' ] );
+	}
+
+	public function eael_eb_popup_promo_init() {
+		add_action( 'enqueue_block_editor_assets', [ $this, 'essential_blocks_promo_enqueue_scripts' ] );
+		add_action( 'wp_ajax_eael_gb_eb_popup_dismiss', [ $this, 'eael_gb_eb_popup_dismiss' ] );
+	}
+
+	public function eael_eb_optin_promo_init() {
+		add_action( 'admin_notices', [ $this, 'essential_block_optin' ] );
+		add_action( 'eael_admin_notices', [ $this, 'essential_block_special_optin' ], 100 );
+		add_action( 'wp_ajax_eael_eb_optin_notice_dismiss', [ $this, 'eael_eb_optin_notice_dismiss' ] );
+	}
 }
