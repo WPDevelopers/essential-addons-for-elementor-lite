@@ -146,22 +146,12 @@ class Dual_Color_Header extends Widget_Base
 		);
 
 		$this->add_control(
-			'eael_dch_title_type',
+			'eael_dch_enable_multple_titles',
 			[
-				'label'       => esc_html__('Type', 'essential-addons-for-elementor-lite'),
-				'type'        => Controls_Manager::CHOOSE,
-				'label_block' => true,
-				'default'     => 'dual',
-				'options'     => [
-					'dual' => [
-						'title' => esc_html__('Dual', 'essential-addons-for-elementor-lite'),
-						'text' => 'DUAL',
-					],
-					'multiple' => [
-						'title' => esc_html__('Multiple', 'essential-addons-for-elementor-lite'),
-						'text' => 'MULTIPLE',
-					],
-				],
+				'label'        => esc_html__('Multiple', 'essential-addons-for-elementor-lite'),
+				'type'         => Controls_Manager::SWITCHER,
+				'default'      => 'no',
+				'return_value' => 'yes',
 			]
 		);
 
@@ -177,7 +167,7 @@ class Dual_Color_Header extends Widget_Base
 					'active' => false,
 				],
 				'condition' => [
-					'eael_dch_title_type' => 'dual',
+					'eael_dch_enable_multple_titles!' => 'yes',
 				],
 			]
 		);
@@ -194,7 +184,7 @@ class Dual_Color_Header extends Widget_Base
 					'active' => false,
 				],
 				'condition' => [
-					'eael_dch_title_type' => 'dual',
+					'eael_dch_enable_multple_titles!' => 'yes',
 				],
 			]
 		);
@@ -212,6 +202,14 @@ class Dual_Color_Header extends Widget_Base
 				'ai'          => [ 'active' => false ],
 			]
 		);
+		
+		$multiple_titles->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'eael_dch_title_typography',
+				'selector' => '{{WRAPPER}} .eael-dual-header .eael-dch-title .eael-dch-title-text{{CURRENT_ITEM}}',
+			]
+		);
 
 		$multiple_titles->add_control(
 			'eael_dch_title_color',
@@ -219,7 +217,7 @@ class Dual_Color_Header extends Widget_Base
 				'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .eael-dual-header {{CURRENT_ITEM}}' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .eael-dual-header .eael-dch-title .eael-dch-title-text{{CURRENT_ITEM}}' => 'color: {{VALUE}};',
 				],
 				'condition' => [
 					'eael_dch_title_use_gradient_color!' => 'yes',
@@ -241,7 +239,7 @@ class Dual_Color_Header extends Widget_Base
 			[
 				'name'           => 'eael_dch_title_gradient_color',
 				'types'          => [ 'gradient' ],
-				'selector'       => '{{WRAPPER}} .eael-dual-header {{CURRENT_ITEM}}',
+				'selector'       => '{{WRAPPER}} .eael-dual-header .eael-dch-title .eael-dch-title-text{{CURRENT_ITEM}}',
 				'fields_options' => [
 					'background' => [
             			'default' => 'gradient',
@@ -267,18 +265,21 @@ class Dual_Color_Header extends Widget_Base
 				'fields'  => $multiple_titles->get_controls(),
 				'default' => [
 					[
-						'eael_dch_title' => esc_html__('Dual Heading', 'essential-addons-for-elementor-lite'),
-						'eael_dch_title_color' => '#9f12ff'
+						'eael_dch_title' => esc_html__('Multiple', 'essential-addons-for-elementor-lite'),
+					],
+					[
+						'eael_dch_title' => esc_html__('Heading', 'essential-addons-for-elementor-lite'),
+						'eael_dch_title_color' => '#4d4d4d'
 					],
 					[
 						'eael_dch_title' => esc_html__('Example', 'essential-addons-for-elementor-lite'),
-						'eael_dch_title_color' => '#4d4d4d'
+						'eael_dch_title_use_gradient_color' => 'yes'
 					],
 				],
 				'title_field' => '{{{eael_dch_title}}}',
 				'button_text' => esc_html__('Add Title', 'essential-addons-for-elementor-lite'),
 				'condition' => [
-					'eael_dch_title_type' => 'multiple',
+					'eael_dch_enable_multple_titles' => 'yes',
 				],
 			]
 		);
@@ -637,7 +638,7 @@ class Dual_Color_Header extends Widget_Base
 					'{{WRAPPER}} .eael-dual-header .eael-dch-title' => 'color: {{VALUE}};',
 				],
 				'condition' => [
-					'eael_dch_title_type' => 'multiple'
+					'eael_dch_enable_multple_titles' => 'yes'
 				],
 			]
 		);
@@ -652,7 +653,7 @@ class Dual_Color_Header extends Widget_Base
 					'{{WRAPPER}} .eael-dual-header .title' => 'color: {{VALUE}};',
 				],
 				'condition' => [
-					'eael_dch_title_type' => 'dual'
+					'eael_dch_enable_multple_titles!' => 'yes'
 				],
 			]
 		);
@@ -673,7 +674,7 @@ class Dual_Color_Header extends Widget_Base
 					],
 				],
 				'condition' => [
-					'eael_dch_title_type' => 'dual'
+					'eael_dch_enable_multple_titles!' => 'yes'
 				],
 				'toggle' => true,
 				'default' => 'solid-color',
@@ -691,7 +692,7 @@ class Dual_Color_Header extends Widget_Base
 				],
 				'condition' => [
 					'eael_dch_dual_color_selector' => 'solid-color',
-					'eael_dch_title_type' => 'dual'
+					'eael_dch_enable_multple_titles!' => 'yes'
 				],
 			]
 		);
@@ -704,7 +705,7 @@ class Dual_Color_Header extends Widget_Base
 				'default' => '#062ACA',
 				'condition' => [
 					'eael_dch_dual_color_selector' => 'gradient-color',
-					'eael_dch_title_type' => 'dual'
+					'eael_dch_enable_multple_titles!' => 'yes'
 				],
 			]
 		);
@@ -717,7 +718,7 @@ class Dual_Color_Header extends Widget_Base
 				'default' => '#9401D9',
 				'condition' => [
 					'eael_dch_dual_color_selector' => 'gradient-color',
-					'eael_dch_title_type' => 'dual'
+					'eael_dch_enable_multple_titles!' => 'yes'
 				],
 			]
 		);
@@ -1103,7 +1104,7 @@ class Dual_Color_Header extends Widget_Base
 		$title_tag = Helper::eael_validate_html_tag( $settings['title_tag'] );
 		$title_html = '<' . $title_tag . ' class="title eael-dch-title">';
 
-		if( ! empty( $settings['eael_dch_title_type'] ) && 'multiple' == $settings['eael_dch_title_type'] ) {
+		if( ! empty( $settings['eael_dch_enable_multple_titles'] ) && 'yes' == $settings['eael_dch_enable_multple_titles'] ) {
 			foreach( $settings['eael_dch_multiple_titles'] as $title ) {
 				$classes = 'eael-dch-title-text elementor-repeater-item-' . esc_attr( $title['_id'] );
 				if( 'yes' == $title['eael_dch_title_use_gradient_color'] ) {
@@ -1130,7 +1131,7 @@ class Dual_Color_Header extends Widget_Base
 				echo wp_kses( $title_html, Helper::eael_allowed_tags() );
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				echo ( $settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : '');
-				
+
 				if( ! empty( $settings['eael_dch_subtext'] ) ) : ?>
 					<span class="subtext"><?php
 					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
