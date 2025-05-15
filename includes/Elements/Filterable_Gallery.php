@@ -388,10 +388,10 @@ class Filterable_Gallery extends Widget_Base
 					],
 				],
                 'condition' => [
-                    'eael_fg_caption_style!'    => 'layout_3',
+                    'eael_fg_caption_style!'    => [ 'grid_flow_gallery', 'harmonic_gallery' ],
                     'eael_fg_caption_style'     => [ 'hoverer', 'card', 'layout_3' ],
                 ],
-				'default'   => 'grid',
+				'default'   => 'buttons',
 				'toggle'    => false,
 			]
 		);
@@ -450,6 +450,7 @@ class Filterable_Gallery extends Widget_Base
                 'condition' => [
                     'eael_fg_show_popup' => 'buttons',
                     'eael_section_fg_full_image_clickable!' => 'yes',
+                    'eael_fg_caption_style!'    => [ 'grid_flow_gallery', 'harmonic_gallery' ],
                 ],
             ]
         );
@@ -467,6 +468,7 @@ class Filterable_Gallery extends Widget_Base
                 'condition' => [
                     'eael_fg_show_popup' => 'buttons',
                     'eael_section_fg_full_image_clickable!' => 'yes',
+                    'eael_fg_caption_style!'    => [ 'grid_flow_gallery', 'harmonic_gallery' ],
                 ],
             ]
         );
