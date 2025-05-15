@@ -2193,7 +2193,7 @@ class Pricing_Table extends Widget_Base
                         'pricing_feature_item_tooltip' . $counter,
                         [
                             'class' => 'eael-pricing-tooltip',
-                            'title' => HelperClass::eael_wp_kses($item['eael_pricing_item_tooltip_content']),
+                            'data-eael-tooltip-content' => HelperClass::eael_wp_kses($item['eael_pricing_item_tooltip_content']),
                             'id'    => $obj->get_id() . $counter,
                         ]
                     );
