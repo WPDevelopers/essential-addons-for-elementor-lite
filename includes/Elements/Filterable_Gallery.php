@@ -1516,6 +1516,18 @@ class Filterable_Gallery extends Widget_Base
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
+
+        $this->add_control(
+			'eael_fg_item_container_bg_color',
+			[
+				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item,
+                    {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-grid-fg-box' => 'background-color: {{VALUE}}',
+                ],
+			]
+		);
         
         $this->add_responsive_control(
             'eael_fg_item_container_padding',
