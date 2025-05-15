@@ -500,6 +500,28 @@ class Testimonial extends Widget_Base {
 		);
 
 		$this->add_responsive_control(
+			'eael_testimonial_image_height',
+			[
+				'label' => esc_html__( 'Image Height', 'essential-addons-for-elementor-lite'),
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+					'px' => [
+						'min' => 0,
+						'max' => 1000,
+					],
+				],
+				'size_units' => [ '%', 'px' ],
+				'selectors' => [
+					'{{WRAPPER}} .eael-testimonial-image figure > img' => 'height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
 			'eael_testimonial_max_image_width',
 			[
 				'label' => esc_html__( 'Image Max Width', 'essential-addons-for-elementor-lite'),
@@ -701,14 +723,26 @@ class Testimonial extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'eael_testimonial_description_margin',
 			[
-				'label' => esc_html__( 'Margin', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::DIMENSIONS,
+				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite'),
+				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
-				'selectors' => [
+				'selectors'  => [
 					'{{WRAPPER}} .eael-testimonial-content .eael-testimonial-text' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_testimonial_description_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite'),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-testimonial-content .eael-testimonial-text' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);

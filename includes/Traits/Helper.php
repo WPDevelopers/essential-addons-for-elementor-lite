@@ -641,8 +641,8 @@ trait Helper
                         </div>
                         <div class="eael-gb-eb-content-info">
                             <h3><?php esc_html_e( 'Supercharge Your Gutenberg Experience With Essential Blocks', 'essential-addons-for-elementor-lite' ); ?></h3>
-                            <p><?php esc_html_e( 'If you like Essential Addons for Elementor, check out Essential Blocks, the ultimate block library for Gutenberg that is trusted by more than 60,000+ web creators.', 'essential-addons-for-elementor-lite' ); ?></p>
-                            <button class="eael-gb-eb-install components-button is-primary" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
+                            <p><?php esc_html_e( 'If you like Essential Addons for Elementor, check out Essential Blocks, the ultimate block library for Gutenberg that is trusted by more than 100,000+ web creators.', 'essential-addons-for-elementor-lite' ); ?></p>
+                            <button class="eael-gb-eb-install components-button is-primary" data-promotype="popup" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
                         </div>
                     </div>
                     <div class="eael-gb-eb-footer">
@@ -661,8 +661,8 @@ trait Helper
                 </div>
                 <div class="eael-gb-eb-content-info">
                     <h3><?php esc_html_e( 'Supercharge Your Gutenberg Experience With Essential Blocks', 'essential-addons-for-elementor-lite' ); ?></h3>
-                    <p><?php esc_html_e( 'If you like Essential Addons for Elementor, check out Essential Blocks, the ultimate block library for Gutenberg that is trusted by more than 60,000+ web creators.', 'essential-addons-for-elementor-lite' ) ?></p>
-                    <button class="eael-gb-eb-install components-button is-primary" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
+                    <p><?php esc_html_e( 'If you like Essential Addons for Elementor, check out Essential Blocks, the ultimate block library for Gutenberg that is trusted by more than 100,000+ web creators.', 'essential-addons-for-elementor-lite' ) ?></p>
+                    <button class="eael-gb-eb-install components-button is-primary" data-promotype="popup" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
                 </div>
             </div>
         </script>
@@ -675,7 +675,7 @@ trait Helper
                 <div class="eael-gb-eb-content-info">
                     <h3><?php esc_html_e( '40+ Amazing Gutenberg Blocks', 'essential-addons-for-elementor-lite' ); ?></h3>
                     <p><?php esc_html_e( 'Create & design your WordPress websites just the way you want with more than 40 amazing, ready blocks from Essential Blocks for Gutenberg.', 'essential-addons-for-elementor-lite' ) ?></p>
-                    <button class="eael-gb-eb-install components-button is-primary" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
+                    <button class="eael-gb-eb-install components-button is-primary" data-promotype="popup" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
                 </div>
             </div>
         </script>
@@ -688,7 +688,7 @@ trait Helper
                 <div class="eael-gb-eb-content-info">
                     <h3><?php esc_html_e( 'Useful Block Control Option', 'essential-addons-for-elementor-lite' ); ?></h3>
                     <p><?php esc_html_e( 'Get the fastest loading time and smoothest experience on your web page by enabling and disabling individual blocks as per your requirements.', 'essential-addons-for-elementor-lite' ) ?></p>
-                    <button class="eael-gb-eb-install components-button is-primary" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
+                    <button class="eael-gb-eb-install components-button is-primary" data-promotype="popup" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
                 </div>
             </div>
         </script>
@@ -701,7 +701,7 @@ trait Helper
                 <div class="eael-gb-eb-content-info">
                     <h3><?php esc_html_e( 'Access To Thousands Of Ready Gutenberg Templates', 'essential-addons-for-elementor-lite' ); ?></h3>
                     <p><?php esc_html_e( 'Design unique websites using ready Gutenberg templates from Templately with absolute ease and instantly grab attention.', 'essential-addons-for-elementor-lite' ) ?></p>
-                    <button class="eael-gb-eb-install components-button is-primary" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
+                    <button class="eael-gb-eb-install components-button is-primary" data-promotype="popup" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
                 </div>
             </div>
         </script>
@@ -714,7 +714,7 @@ trait Helper
                 <div class="eael-gb-eb-content-info">
                     <h3><?php esc_html_e( 'Try Essential Blocks Today!', 'essential-addons-for-elementor-lite' ); ?></h3>
                     <p><?php printf( __( 'Want to get started with Essential Blocks now? Check out %scomplete guides for each blocks%s to learn more about this ultimate block library for Gutenberg.', 'essential-addons-for-elementor-lite' ), '<a href="https://essential-blocks.com/demo" target="_blank">', '</a>' ) ?></p>
-                    <button class="eael-gb-eb-install components-button is-primary" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
+                    <button class="eael-gb-eb-install components-button is-primary" data-promotype="popup" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
                     <button class="eael-gb-eb-never-show" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php esc_html_e( 'Skip for Now', 'essential-addons-for-elementor-lite' ); ?></button>
                 </div>
             </div>

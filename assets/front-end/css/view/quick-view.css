@@ -141,7 +141,8 @@
   width: inherit;
   float: inherit;
 }
-.eael-product-popup.woocommerce div.product.ast-article-single, .eael-product-popup.woocommerce div.product .ast-article-single {
+.eael-product-popup.woocommerce div.product.ast-article-single,
+.eael-product-popup.woocommerce div.product .ast-article-single {
   background: transparent;
 }
 @media (max-width: 767px) {
@@ -218,7 +219,8 @@
   line-height: 1.2em;
   margin: 0;
 }
-.eael-product-popup.woocommerce div.product .woocommerce-product-details__short-description p, .eael-product-popup.woocommerce div.product .woocommerce-product-details__short-description p:last-child {
+.eael-product-popup.woocommerce div.product .woocommerce-product-details__short-description p,
+.eael-product-popup.woocommerce div.product .woocommerce-product-details__short-description p:last-child {
   margin-bottom: 20px;
 }
 .eael-product-popup.woocommerce div.product .button {
@@ -257,7 +259,8 @@
   margin-right: 15px;
   width: auto;
 }
-.eael-product-popup.woocommerce div.product form.cart div.quantity input, .eael-product-popup.woocommerce div.product form.cart div.quantity a {
+.eael-product-popup.woocommerce div.product form.cart div.quantity input,
+.eael-product-popup.woocommerce div.product form.cart div.quantity a {
   height: 100%;
   border: 1px solid;
 }
@@ -351,7 +354,7 @@
   -webkit-box-sizing: content-box;
           box-sizing: content-box;
   overflow: visible;
-  background: #fff !important;
+  background: #fff;
   text-align: center;
   -webkit-box-shadow: 2px 0px 12px 3px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
           box-shadow: 2px 0px 12px 3px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -416,7 +419,8 @@
 .eael-product-popup form.cart.grouped_form .quantity {
   width: 100%;
 }
-.eael-product-popup form.cart.grouped_form .quantity input, .eael-product-popup form.cart.grouped_form .quantity a {
+.eael-product-popup form.cart.grouped_form .quantity input,
+.eael-product-popup form.cart.grouped_form .quantity a {
   height: auto !important;
   min-height: 2.507em;
   line-height: 1.2em;
@@ -502,7 +506,7 @@
   line-height: 74px;
   height: 60px;
   width: 120px;
-  left: -37pX;
+  left: -37px;
   top: -8px;
   right: auto;
   padding: 0;
