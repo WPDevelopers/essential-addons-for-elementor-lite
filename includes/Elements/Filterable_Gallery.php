@@ -1337,6 +1337,69 @@ class Filterable_Gallery extends Widget_Base
                 ]
             ]
         );
+
+        $this->add_control(
+			'eael_fg_control_bar',
+			[
+				'label'     => esc_html__( 'Bar', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+                'separator' => 'after',
+			]
+		);
+
+        $this->add_control(
+            'eael_fg_control_bar_bg_color',
+            [
+                'label'     => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-filter-gallery-control ul' => 'background: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_fg_control_bar_padding',
+            [
+                'label'      => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', 'rem', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-filter-gallery-control ul' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'eael_fg_control_bar_border',
+                'label'    => esc_html__('Border', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .eael-filter-gallery-control ul',
+            ]
+        );
+        
+        $this->add_control(
+            'eael_fg_control_bar_border_radius',
+            [
+                'label'      => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-filter-gallery-control ul' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+			'eael_fg_control_bar_button',
+			[
+				'label'     => esc_html__( 'Buttons', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+                'separator' => 'after',
+			]
+		);
+
         $this->add_responsive_control(
             'eael_fg_control_padding',
             [
