@@ -2186,21 +2186,10 @@ class Filterable_Gallery extends Widget_Base
             'eael_fg_item_content_image_border_radius',
             [
                 'label'      => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
-                'type'       => Controls_Manager::SLIDER,
+                'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
-                'range'      => [
-					'px' => [
-						'min'  => 0,
-						'max'  => 100,
-						'step' => 1,
-					],
-					'%' => [
-						'min' => 0,
-						'max' => 100,
-					],
-				],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item .gallery-item-thumbnail-wrap>img' => 'border-radius: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item .gallery-item-thumbnail-wrap>img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
