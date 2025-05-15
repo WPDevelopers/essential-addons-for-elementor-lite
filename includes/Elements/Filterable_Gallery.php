@@ -1577,6 +1577,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label' => esc_html__('Item', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_fg_caption_style!' => ['harmonic_gallery'],
+                ]
             ]
         );
 
