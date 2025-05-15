@@ -1,4 +1,5 @@
 import { __ } from "@wordpress/i18n";
+import { hasDisplayablePlugins, getPluginPromoCount } from "../utils/pluginPromoUtils";
 
 function ElementsContent({ 
   activeTab, 
@@ -14,10 +15,11 @@ function ElementsContent({
   let elements_list = elements_content?.elements_list;
   let init = 0;
   let disable = "";
-  let ea_pro_local_plugin_data =
-  eaelQuickSetup?.menu_items?.ea_pro_local_plugin_data;
-  let templately_local_plugin_data =
-  eaelQuickSetup?.menu_items?.templately_local_plugin_data;
+  let ea_pro_local_plugin_data = eaelQuickSetup?.menu_items?.ea_pro_local_plugin_data;
+  let hasPluginPromo = Object.keys(eaelQuickSetup?.plugins_content?.plugins).length;
+
+  // Check if there are any non-installed plugins to display
+    const shouldShowPluginsPromo = hasDisplayablePlugins();
 
   elements_list =
     typeof elements_list === "object"
@@ -129,13 +131,7 @@ function ElementsContent({
         <button
           className="primary-btn install-btn flex gap-2 items-center eael-setup-next-btn"
           type="button"
-          data-next={
-            ! ea_pro_local_plugin_data
-              ? "go-pro"
-              : ( ! templately_local_plugin_data
-                ? "templately"
-                : "integrations" )
-          }
+          data-next={ ! ea_pro_local_plugin_data ? "go-pro" : ( hasPluginPromo && shouldShowPluginsPromo ? "pluginspromo" : "integrations" ) }
           onClick={handleTabChange}
         >
           {__("Next", "essential-addons-for-elementor-lite")}
