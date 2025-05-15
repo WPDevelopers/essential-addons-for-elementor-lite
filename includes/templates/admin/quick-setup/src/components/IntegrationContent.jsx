@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { __ } from "@wordpress/i18n";
+import { hasDisplayablePlugins, getPluginPromoCount } from "../utils/pluginPromoUtils";
 
 function IntegrationContent({
   activeTab,
@@ -12,11 +13,12 @@ function IntegrationContent({
 }) {
   let eaelQuickSetup = localize?.eael_quick_setup_data;
   let integrations_content = eaelQuickSetup?.integrations_content;
-  let ea_pro_local_plugin_data =
-    eaelQuickSetup?.menu_items?.ea_pro_local_plugin_data;
-  let templately_local_plugin_data =
-    eaelQuickSetup?.menu_items?.templately_local_plugin_data;
+  let ea_pro_local_plugin_data = eaelQuickSetup?.menu_items?.ea_pro_local_plugin_data;
   let initialPluginList = integrations_content?.plugin_list;
+  let hasPluginPromo = getPluginPromoCount();
+
+  // Check if there are any non-installed plugins to display
+  const shouldShowPluginsPromo = hasDisplayablePlugins();
 
   const [pluginList, setPluginList] = useState(initialPluginList);
 
@@ -108,6 +110,7 @@ function IntegrationContent({
         </div>
         <div className="eael-integration-content-wrapper onboard-scroll-wrap">
           {pluginList.map((plugin) => (
+            'essential-blocks' === plugin?.slug ? '' :
             <div className="eael-integration-item" key={plugin.basename}>
               <div className="eael-integration-header flex gap-2 items-center">
                 <img src={plugin.logo} alt="logo" width="30" />
@@ -161,13 +164,7 @@ function IntegrationContent({
         <button
           className="previous-btn flex gap-2 items-center eael-setup-next-btn"
           type="button"
-          data-next={
-            !templately_local_plugin_data !== false
-              ? "templately"
-              : !ea_pro_local_plugin_data
-              ? "go-pro"
-              : "elements"
-          }
+          data-next={ hasPluginPromo && shouldShowPluginsPromo ? "pluginspromo" : !ea_pro_local_plugin_data ? "go-pro" : "elements" }
           onClick={handleTabChange}
         >
           <i className="ea-dash-icon ea-left-arrow-long"></i>
