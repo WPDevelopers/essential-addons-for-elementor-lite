@@ -1361,6 +1361,18 @@ class Filterable_Gallery extends Widget_Base
         );
 
         $this->add_responsive_control(
+            'eael_fg_control_bar_margin',
+            [
+                'label'      => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', 'rem', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-filter-gallery-control ul' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
             'eael_fg_control_bar_padding',
             [
                 'label'      => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
