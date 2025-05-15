@@ -2030,9 +2030,10 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'eael_fg_item_content_bg_color',
             [
-                'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#f1f2f9',
+                'label'     => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#f1f2f9',
+                'separator' => 'before',
                 'selectors' => [
                     '{{WRAPPER}} .eael-filterable-gallery-item-wrap .gallery-item-caption-wrap.caption-style-card' => 'background-color: {{VALUE}};',
                     '{{WRAPPER}} .fg-layout-3-item-content' => 'background-color: {{VALUE}};'
@@ -2085,6 +2086,47 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'eael_fg_item_content_shadow',
                 'selector' => '{{WRAPPER}} .eael-filterable-gallery-item-wrap .gallery-item-caption-wrap.caption-style-card, {{WRAPPER}} .fg-layout-3-item-content',
+            ]
+        );
+
+        $this->add_control(
+            'eael_fg_item_content_iamge_settings',
+            [
+                'label'     => esc_html__('Image', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::HEADING,
+                'separator' => 'after',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'eael_fg_item_content_image_border',
+                'label'    => esc_html__('Border', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item .gallery-item-thumbnail-wrap>img',
+            ]
+        );
+
+        $this->add_control(
+            'eael_fg_item_content_image_border_radius',
+            [
+                'label'      => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'range'      => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 100,
+						'step' => 1,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item .gallery-item-thumbnail-wrap>img' => 'border-radius: {{SIZE}}px;',
+                ],
             ]
         );
         
