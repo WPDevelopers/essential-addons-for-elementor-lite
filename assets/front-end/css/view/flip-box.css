@@ -33,6 +33,12 @@
 .eael-elements-flip-box-container a {
   display: block;
 }
+.eael-elements-flip-box-container.eael-flip-box-click.--active .eael-elements-flip-box-front-container {
+  pointer-events: none;
+}
+.eael-elements-flip-box-container.eael-flip-box-hover:hover .eael-elements-flip-box-front-container {
+  pointer-events: none;
+}
 .eael-elements-flip-box-vertical-align {
   width: 100%;
 }
