@@ -6,8 +6,8 @@ var PricingTooltip = function ($scope, $) {
         for (i = 0; i < $tooltip.length; i++) {
             var $currentTooltip = $("#" + $($tooltip[i]).attr("id")),
                 $tooltipContent =
-                    $currentTooltip.data("eael-tooltip-content") !== undefined
-                        ? $currentTooltip.data("eael-tooltip-content")
+                    $currentTooltip.data("content") !== undefined
+                        ? $currentTooltip.data("content")
                         : null,
                 $tooltipSide =
                     $currentTooltip.data("side") !== undefined
