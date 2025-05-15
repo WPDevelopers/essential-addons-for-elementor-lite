@@ -333,34 +333,13 @@ class Dual_Color_Header extends Widget_Base
 		);
 
 		$this->add_control(
-			'eael_dch_subtext_heading',
-			[
-				'label'     => esc_html__('Sub Text', 'essential-addons-for-elementor-lite'),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
-		$this->add_control(
-			'eael_dch_subtext_show',
-			[
-				'label'        => __('Show', 'essential-addons-for-elementor-lite'),
-				'type'         => Controls_Manager::SWITCHER,
-				'default'      => 'yes',
-				'return_value' => 'yes',
-			]
-		);
-
-		$this->add_control(
 			'eael_dch_subtext',
 			[
-				'label'       => '',
+				'label'       => esc_html__('Sub Text', 'essential-addons-for-elementor-lite'),
 				'type'        => Controls_Manager::WYSIWYG,
 				'label_block' => true,
 				'default'     => esc_html__('Insert a meaningful line to evaluate the headline.', 'essential-addons-for-elementor-lite'),
-				'condition'   => [
-					'eael_dch_subtext_show' => 'yes',
-				],
+				'separator'   => 'before',
 			]
 		);
 
@@ -1151,7 +1130,8 @@ class Dual_Color_Header extends Widget_Base
 				echo wp_kses( $title_html, Helper::eael_allowed_tags() );
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				echo ( $settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : '');
-				if( 'yes' == $settings['eael_dch_subtext_show'] ) : ?>
+				
+				if( ! empty( $settings['eael_dch_subtext'] ) ) : ?>
 					<span class="subtext"><?php
 					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					echo $this->parse_text_editor( $settings['eael_dch_subtext'] ); ?></span>
