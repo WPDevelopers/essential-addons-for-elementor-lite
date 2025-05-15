@@ -148,7 +148,7 @@ class Dual_Color_Header extends Widget_Base
 		$this->add_control(
 			'eael_dch_enable_multple_titles',
 			[
-				'label'        => esc_html__('Multiple', 'essential-addons-for-elementor-lite'),
+				'label'        => esc_html__('Enable Multilpe Headings', 'essential-addons-for-elementor-lite'),
 				'type'         => Controls_Manager::SWITCHER,
 				'default'      => 'no',
 				'return_value' => 'yes',
