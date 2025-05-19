@@ -150,7 +150,7 @@ class Dual_Color_Header extends Widget_Base
 			[
 				'label'        => esc_html__('Enable Multiple Headings', 'essential-addons-for-elementor-lite'),
 				'type'         => Controls_Manager::SWITCHER,
-				'default'      => 'no',
+				'default'      => '',
 				'return_value' => 'yes',
 			]
 		);
