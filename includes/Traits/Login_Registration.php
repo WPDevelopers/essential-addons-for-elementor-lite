@@ -1051,11 +1051,11 @@ trait Login_Registration {
 					// Do nothing
 					unset( $e );
 				}
-			}
-
-			if (isset($_SERVER['HTTP_REFERER'])) {
-				wp_safe_redirect( strtok( $_SERVER['HTTP_REFERER'], '?' ) );
-				exit();
+			} else {
+				if (isset($_SERVER['HTTP_REFERER'])) {
+					wp_safe_redirect( strtok( $_SERVER['HTTP_REFERER'], '?' ) );
+					exit();
+				}
 			}
 		} else {
 			// if any error found, abort
