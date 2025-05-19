@@ -1,10 +1,10 @@
 === Essential Addons for Elementor – Popular Elementor Addon With Ready Templates, Advanced Widgets, Kits & WooCommerce Builders ===
-Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, robinwpdeveloper, jakariaistauk, himadree12
+Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, nhrrob, jakariaistauk, himadree12
 Tags: elementor, elements, elementor addon, elementor widget, woocommerce elementor
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.1.12
+Stable tag: 6.1.13
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -313,6 +313,11 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.1.13 - 19/05/2025 =
+
+- Improved: Security Enhancement
+- Few minor bug fixes & improvements
 
 = 6.1.12 - 13/05/2025 =
 
