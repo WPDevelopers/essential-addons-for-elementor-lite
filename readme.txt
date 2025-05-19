@@ -14,42 +14,41 @@ The Essential plugin you install after Elementor! Packed with 100+ stunning elem
 
 Enhance your [Elementor](https://wordpress.org/plugins/elementor/) page building experience with 100+ creative elements and extensions. Add powers to your website builder using our easy-to-use Elementor widgets and ready template which were designed to make your next WordPress page and posts design easier and prettier than ever before.
 
-##ESSENTIAL ADDONS FOR ELEMENTOR: 100+ BEST ELEMENTOR WIDGETS WITH KITS, 5,000+ READY TEMPLATES & BEST WOOCOMMERCE BUILDER, SERVING 2 MILLION+ ACTIVE USERS##
+##ESSENTIAL ADDONS: 100+ BEST ELEMENTOR WIDGETS WITH KITS, 5,000+ READY TEMPLATES & BEST WOOCOMMERCE BUILDER, SERVING 2 MILLION+ ACTIVE USERS##
 
 [Check the Demos](https://essential-addons.com/demos)
 
 ### Completely Customizable
-Each Elementor widget and extension comes with a bunch of options to customize your website in every possible way. You can achieve nearly any design of your imagination.
+Each widget and extension comes with a bunch of options to customize your website in every possible way. You can achieve nearly any design of your imagination.
 
 ### Light Weight & Instant Loading
 No extra resources or messy codes to slow down your website. Optimized for super fast loading and instant Live editing.
 
 ### Elements Control option
-Enable and disable individual Elementor adding to make your page load faster and smoother. You can deactivate unnecessary widgets to keep the site lite.
+Enable and disable individual elements adding to make your page load faster and smoother. You can deactivate unnecessary widgets to keep the site light.
 
 
 ### 5000+ Ready Elementor Templates & Blocks through **Templately**
-Grab access to 5,000 pre-made templates from the ultimate templates cloud for WordPress, Templately, that come with Essential Addons.Unlock stunning Elementor templates, blocks and sections,and design your website to stand out from the crowd.
+Grab access to 5,000 pre-made templates from the ultimate templates cloud for WordPress, Templately, that come with Essential Addons.Unlock stunning Elementor templates, blocks & sections;and design your website to stand out from the crowd.
 
 https://youtu.be/Z73muoczARc
 
-Each of these Elementor templates is completely customizable and responsive, and also seamlessly compatible with Essential Addons. You can add Elementor addons, change font or color  and personalize them effortlessly.
+Each of these Elementor templates is completely customizable and responsive, and also seamlessly compatible with Essential Addons. You can personalize them effortlessly by changing font, color, etc.
 
-Templately also offers advanced features and facilities to saving your Elementor templates to cloud. Save all your ready and customized designs with Templately & deploy in hundreds of websites with 1-click. Increase productivity and power up your whole team to build websites faster than ever before.
+Templately also offers advanced features and facilities to save your templates to the cloud. Store all your ready and customized designs with Templately & deploy on hundreds of websites with 1-click. Increase productivity and power up your whole team to build websites faster than ever before.
 
 Ready Elementor Templates From Templately:
 
-- [MerryGift [PRO] - Christmas Website Template For Elementor](https://templately.com/pack/merrygift-christmas-website-template)
-- [AlgoMind AI - Data Science & Machine Learning Template For Elementor](https://templately.com/pack/algomind-ai-machine-learning-template)
-- [FestiveLy [PRO] - Carnival Template For Elementor](https://templately.com/pack/festively-elementor-carnival-template)
-- [Profily - Personal Portfolio Template For Elementor](https://templately.com/pack/profily-personal-portfolio-template)
-- [NatuRetreat [PRO] - Ecotourism Template For Elementor](https://templately.com/pack/naturetreat-elementor-ecotourism-template)
+- [Textivy AI - AI SaaS Template](https://templately.com/pack/textivy-ai-elementor-ai-sass)
+- [KetoFlow - Keto Diet Website Template](https://templately.com/pack/ketoflow-elementor-keto-diet-template)
+- [IllustrateAI - AI Photo Creation Website Template](https://templately.com/pack/illustrateai-elementor-ai-photo-creation)
+- [HeartBloom - Valentine Gift Store Template](https://templately.com/pack/heartbloom-elementor-valentine-gift-store)
 
 
 ### Expert Support
-We have extra-ordinary support team ready to help you. Ask your questions in the support forum, or contact us directly through live chat and contact form.
+We have an extraordinary support team ready to help you. Ask your questions in the support forum, or contact us directly through live chat and contact form.
 
-### [Elementor](https://wordpress.org/plugins/elementor/) Website builder is required for this plugin.
+### [Elementor](https://wordpress.org/plugins/elementor/) Website Builder is required for this plugin.
 
 
 ### 60+ FREE ELEMENTOR ADDONS AND COUNTING
@@ -92,19 +91,19 @@ We have designed more than 50 of the most useful widgets to enhance your Element
 34. [BetterDocs Category Box](https://essential-addons.com/betterdocs-category-box/) - Create documentation in box layout
 35. [BetterDocs Search Form](https://essential-addons.com/betterdocs-search-form/) - Add a live search box for documentation
 36. [Advanced Data Table](https://essential-addons.com/advanced-data-table) - Design large data tables without coding
-37. [Event Calendar](https://essential-addons.com/event-calendar) - Create customized event pages in Elementor
-38. [Formstack](https://essential-addons.com/formstack/) - Design your Formstack forms within Elementor
+37. [Event Calendar](https://essential-addons.com/event-calendar) - Create customized event pages
+38. [Formstack](https://essential-addons.com/formstack/) - Design your Formstack forms
 39. [Woo Checkout](https://essential-addons.com/woo-checkout/) -  Build attractive WooCommerce Checkout pages
 [youtube](https://www.youtube.com/watch?v=l3GNAJHza5c)
-40. [Typeform](https://essential-addons.com/typeform/) - Embed & design your Typeform forms in Elementor
+40. [Typeform](https://essential-addons.com/typeform/) - Embed & design your Typeform forms
 41. [Login | Register Form](https://essential-addons.com/login-register-form/) - Create amazing login/registration forms
 42. [Woo Product Compare](https://essential-addons.com/woo-product-compare/) - Design stunning product compare tables
 43. [Woo Product Carousel](https://essential-addons.com/woo-product-carousel/) - Add Product Carousels for WooCommerce
-44. [Simple Menu](https://essential-addons.com/simple-menu/)- Design minimalist navigation menus in Elementor
+44. [Simple Menu](https://essential-addons.com/simple-menu/)- Design minimalist navigation menus
 45. [Woo Product Gallery](https://essential-addons.com/woo-product-gallery/)- Show your products in a filterable gallery
 46. [Woo Cart](https://essential-addons.com/woo-cart/)- Use WooCommerce Cart page to boost online sales
 47. [Interactive Circle](https://essential-addons.com/interactive-circle/)- Display content with engaging circular layouts
-48. [NFT Gallery](https://essential-addons.com/nft-gallery/)- Add and showcase NFT collections effortlessly in Elementor
+48. [NFT Gallery](https://essential-addons.com/nft-gallery/)- Add and showcase NFT collections effortlessly
 49. [Business Reviews](https://essential-addons.com/business-reviews/)- Display Google Customer Review to increase your online reputation
 50. [SVG Draw](https://essential-addons.com/svg-draw/)- Display SVG elements in a visually striking and interactive way on your website
 51. [Woo Product List](https://essential-addons.com/woo-product-list/)- Showcase your store’s products with a stunning listicle format
@@ -121,7 +120,7 @@ Extensions (Free):
 2. [Duplicator](https://essential-addons.com/duplicator/) - Duplicate any page or post in a single click
 3. [Table of Contents](https://essential-addons.com/table-of-content/) - Display Table of Contents anywhere you want
 [Watch YouTube Tutorial](https://youtu.be/W6woRX7Ud7I)
-4. [Custom JS](https://essential-addons.com/custom-js/) - Add custom JavaScript in Elementor with a few clicks
+4. [Custom JS](https://essential-addons.com/custom-js/) - Add custom JavaScript with a few clicks
 5. [Scroll to Top](https://essential-addons.com/scroll-to-top) - Let visitors quickly navigate to the top of your page
 6. [Wrapper Link](https://essential-addons.com/wrapper-link) - Add custom links into any section, column, or even flexbox
 7. [Hover Interactions](https://essential-addons.com/hover-interaction/) - Create captivating effects on buttons, images, texts and more
@@ -133,7 +132,7 @@ Extensions (Free):
 3. [Testimonial Slider](https://essential-addons.com/testimonial-slider/) - Share customer reviews with animated sliders
 4. [Image Comparison](https://essential-addons.com/image-comparison/) - Let your viewers compare between two images
 5. [Interactive Promo](https://essential-addons.com/interactive-promo/ ) - Display content with attractive animations
-6. [Instagram Feed](https://essential-addons.com/instagram-feed/) - Display Instagram posts beautifully in Elementor
+6. [Instagram Feed](https://essential-addons.com/instagram-feed/) - Display Instagram posts beautifully
 7. [Advanced Google Map](https://essential-addons.com/advanced-google-map/) - Create maps with unlimited themes
 [Watch YouTube Tutorial](https://www.youtube.com/watch?v=kLx9O8ZoBv0)
 8. [Static Product](https://essential-addons.com/static-product/) - Present your static product just the way you want
@@ -144,7 +143,7 @@ Extensions (Free):
 13. [Twitter Feed Carousel](https://essential-addons.com/twitter-feed/) - Share Twitter posts in interactive styles
 14. [Dynamic Gallery](https://essential-addons.com/dynamic-gallery/) - Add filterable gallery for any content
 15. [Smart Post List](https://essential-addons.com/post-list/) - Design your blog page with modern post list
-16. [Mailchimp](https://essential-addons.com/mailchimp/) - Design your Mailchimp form within Elementor with ease
+16. [Mailchimp](https://essential-addons.com/mailchimp/) - Design your Mailchimp form with ease
 17. [Toggle](https://essential-addons.com/content-toggle/) - Share any content in less space with a toggle
 18. [One Page Navigation](https://essential-addons.com/one-page-nav/) - Create one page websites in Elementor
 19. [Price Menu](https://essential-addons.com/price-menu/) - Make a beautiful pricing menu for your brands
@@ -159,7 +158,7 @@ Extensions (Free):
 28. [Image Scroller](https://essential-addons.com/image-scroller/) - Show long height images with image scroller
 29. [Woo Product Slider](https://essential-addons.com/woo-product-slider/) - Showcase your products in a stunning slider
 30. [Woo Product Collections](https://essential-addons.com/woocommerce-product-collections/)- Show product collections beautifully
-31. [LearnDash Course List](https://essential-addons.com/learndash-course-list/)- Share LearnDash course list in Elementor
+31. [LearnDash Course List](https://essential-addons.com/learndash-course-list/)- Share LearnDash course list on website
 32. [Advanced Search](https://essential-addons.com/advanced-search/)- Add a customizable, dynamic search bar
 33. [Woo Thank You](https://essential-addons.com/woo-thank-you)- Design a personalized thank you message on the WooCommerce order confirmation page
 34. [Woo Cross Sells](https://essential-addons.com/woo-cross-sells/)- Customize the display of cross-sell products to boost your sales potential
@@ -176,7 +175,7 @@ Extensions (Pro):
 2. [Particles](https://essential-addons.com/particle-effect/) - Add animated particle effects to your content
 3. [Advanced Tooltip](https://essential-addons.com/advanced-tooltip/) - Make any widget more informative with tooltip
 4. [Content Protection](https://essential-addons.com/content-protection/) - Hide your content with password protection
-5. [Cross-Domain Copy Paste](https://essential-addons.com/cross-domain-copy-paste/)- Copy any section in Elementor from one website and paste it on another
+5. [Cross-Domain Copy Paste](https://essential-addons.com/cross-domain-copy-paste/)- Copy any section from one website and paste it on another website
 6. [Conditional Display](https://essential-addons.com/conditional-display/)- Display your preferred content based on the logic conditions you have set
 7. [Dynamic Tags](https://essential-addons.com/dynamic-tags/)- Display content dynamically on your preferred section of the website
 8. [Interactive animations](https://essential-addons.com/interactive-animations/)- Create stunning animations & build a fully dynamic web page
@@ -186,9 +185,9 @@ More features and improvements are coming on regular updates. Want to unlock the
 
 ### Elementor WooCommerce Widgets From Essential Addons
 
-With Essential Addons, we bring you seamless compatibility with WooCommerce, enhancing your ability to showcase products, categories, and filters with ease. There are 11+ beautiful **Elementor WooCommerce widgets** for your every need:
+With Essential Addons, we bring you seamless compatibility with WooCommerce, enhancing your ability to showcase products, categories, and filters with ease. There are 11+ beautiful **WooCommerce widgets** for your every need:
 
-[EA Woo Product Carousel](https://essential-addons.com/docs/woo-product-carousel/): Display your store’s products interactively with this Elementor WooCommerce widget and implement various styling options and ready-made layouts to create an interactive product showcase on your WordPress website.
+[EA Woo Product Carousel](https://essential-addons.com/docs/woo-product-carousel/): Display your store’s products interactively with this WooCommerce widget and implement various styling options and ready-made layouts to create an interactive product showcase on your WordPress website.
 
 [EA Woo Product Gallery](https://essential-addons.com/docs/woo-product-gallery/): Captivate visitors and drive immediate purchases on your WooCommerce store using the Product Gallery element from Essential Addons. Explore incredible ready layouts, abundant customization choices, and more.
 
@@ -221,7 +220,7 @@ https://youtu.be/EQu8e1MwuKI
 
 [EA Woo Cart](https://essential-addons.com/docs/woocommerce-cart/): Elevate customers’ purchasing experience on your WooCommerce store by effortlessly designing an appealing Cart Page with Essential Addons using no coding.
 
-[EA Woo Checkout](https://essential-addons.com/docs/woo-checkout/): Craft visually appealing Checkout pages for your Elementor WooCommerce store to customize and style the widget effortlessly to ensure increased sales.
+[EA Woo Checkout](https://essential-addons.com/docs/woo-checkout/): Craft visually appealing Checkout pages for your WooCommerce store to customize and style the widget effortlessly to ensure increased sales.
 
 [EA Woo Account Dashboard (PRO)](https://essential-addons.com/docs/ea-woo-account-dashboard/): Create a user-friendly and visually appealing dashboard for your WooCommerce store, consolidating all vital tabs into one convenient location.
 
@@ -240,25 +239,25 @@ https://youtu.be/CEUqgOS4CN0
 https://youtu.be/K9BssSV-KC8
 
 ### BACKED BY A TRUSTED TEAM
-Essential Addons for Elementor is brought to you by [WPDeveloper](https://wpdeveloper.com/), a dedicated WordPress product company, trusted by 5 million+ happy users.
+Essential Addons is brought to you by [WPDeveloper](https://wpdeveloper.com/), a dedicated WordPress product company, trusted by 6 million+ happy users.
 
 ### Documentation and Support
 
 - For documentation and tutorials go to our [Documentation](https://essential-addons.com/docs/).
 - If you have any more questions, visit our support on the [Plugin's Forum](https://wordpress.org/support/plugin/essential-addons-for-elementor-lite).
-- For more information about features, FAQs and documentation, check out our website at [Essential Addons for Elementor](https://essential-addons.com/).
+- For more information about features, FAQs and documentation, check out our website at [Essential Addons](https://essential-addons.com/).
 
 ### Happy User of Essential Addons?
 
 - Join our [Facebook Group](https://www.facebook.com/groups/essentialaddons/).
-- Learn from our tutorials on [Youtube Channel](https://wpdeveloper.com/go/youtube-channel).
-- Or rate us on [WordPress](https://wordpress.org/support/plugin/essential-addons-for-elementor-lite/reviews/?rate=5#new-post) :)
+- Learn from our tutorials on [YouTube Channel](https://wpdeveloper.com/go/youtube-channel).
+- Or rate us on [WordPress](https://wordpress.org/support/plugin/essential-addons-for-elementor-lite/reviews/?rate=5#new-post)
 
 ### 🔥 WHAT’S NEXT
 If you like Essential Addons, then consider checking out our other WordPress Plugins:
 
 
-🔔 **[NotificationX](https://wordpress.org/plugins/notificationx/)** – Best Social Proof & FOMO Marketing Solution to boost conversions & designing stunning WordPress notification bars in Elementor
+🔔 **[NotificationX](https://wordpress.org/plugins/notificationx/)** – Best Social Proof & FOMO Marketing Solution to boost conversions & design stunning WordPress notification bars in Elementor
 
 🗒️ **[BetterDocs](https://wordpress.org/plugins/betterdocs/)** – Best Documentation & Knowledge Base Plugin for WordPress, which also comes with ready doc templates for Elementor
 
@@ -266,7 +265,7 @@ If you like Essential Addons, then consider checking out our other WordPress Plu
 
 🔗 **[EmbedPress](https://wordpress.org/plugins/embedpress/)** - Easiest WordPress solution for embedding videos, images, posts, audio, maps and PDF, DOC, PPT & all other types of content into your website using Elementor, Gutenberg and more.
 
-🔎 **[Easy.Jobs](https://wordpress.org/plugins/easyjobs/)** -  Smart and easy recruitment and talent sourcing solution for hiring remotely with AI-powered screening system, question sets, remote interviews, and designing branded career pages with Elementor.
+🔎 **[easy.jobs](https://wordpress.org/plugins/easyjobs/)** -  Smart and easy recruitment and talent sourcing solution for hiring with AI-powered screening system, question sets, remote interviews, and designing branded career pages with Elementor.
 
 == Installation ==
 
