@@ -72,6 +72,11 @@ var SVGDraw = function ($scope, $) {
                                 });
                             }, transition * 1000 );
                         }
+                    } else if ( 'before' === settings.fill_type && '' !== settings.fill_color ) {
+                        gsap.to(lines, {
+                            fill: settings.fill_color + '00',
+                            duration: transition
+                        });
                     }
                 },
                 onStart: function () {
@@ -79,6 +84,11 @@ var SVGDraw = function ($scope, $) {
                         gsap.to(lines, {
                             fill: settings.fill_color + '00',
                             duration: 0.5
+                        });
+                    }else if ( 'before' === settings.fill_type && '' !== settings.fill_color ) {
+                        gsap.to(lines, {
+                            fill: settings.fill_color,
+                            duration: transition
                         });
                     }
                 }

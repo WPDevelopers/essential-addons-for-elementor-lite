@@ -237,12 +237,13 @@ class SVG_Draw extends Widget_Base {
 		$this->add_control(
 			'eael_svg_fill',
 			[
-				'label'   => esc_html__( 'SVG Fill Type', 'essential-addons-for-elementor-lite' ),
+				'label'   => esc_html__( 'Fill Type', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'none',
 				'options' => [
 					'none'   => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
-					'after'  => esc_html__( 'Fill After Draw', 'essential-addons-for-elementor-lite' ),
+					'after'  => esc_html__( 'After Draw', 'essential-addons-for-elementor-lite' ),
+					'before'  => esc_html__( 'Before Draw', 'essential-addons-for-elementor-lite' ),
 				],
 			]
 		);
@@ -580,7 +581,11 @@ class SVG_Draw extends Widget_Base {
 		}
 
 		echo '<div '; $this->print_render_attribute_string( 'eael-svg-drow-wrapper' ); echo '>';
-
+		if( 'before' === $settings['eael_svg_fill'] ) {
+			echo '<style>';
+			echo '.elementor-element.elementor-element-'. $this->get_id() . ' .eael-svg-draw-container.fill-svg svg *{ fill:' . esc_attr( $settings['eael_svg_fill_color'] ) . '; }';
+			echo '</style>';
+		}
 		if ( $settings['eael_svg_src'] === 'icon' ):
 
 			if ( $settings['eael_svg_icon']['library'] === 'svg' ) {
