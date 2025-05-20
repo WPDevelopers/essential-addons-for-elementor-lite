@@ -367,14 +367,12 @@ class SVG_Draw extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_svg_draw_speed',
+			'eael_svg_drawing_speed',
 			[
 				'label'       => esc_html__( 'Speed', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::NUMBER,
-				'min'         => 1,
-				'max'         => 300,
-				'step'        => 1,
-				'default'     => 20,
+				'min'         => 0.5,
+				'step'        => 0.5,
 				'condition'   => [
 					'eael_svg_animation_on!' => [ 'none', 'page-scroll' ],
 				],
@@ -554,7 +552,6 @@ class SVG_Draw extends Widget_Base {
 		$svg_options = [
 			'fill_type'    => $settings['eael_svg_fill'],
 			'fill_color'   => $settings['eael_svg_fill_color'],
-			'speed'        => esc_attr( $settings['eael_svg_draw_speed'] ),
 			'offset'       => esc_attr( $settings['eael_svg_draw_offset'] ),
 			'loop'         => $settings['eael_svg_loop'] ? esc_attr( $settings['eael_svg_loop'] ) : 'no',
 			'pause'        => $settings['eael_svg_pause_on_hover'] ? esc_attr( $settings['eael_svg_pause_on_hover'] ) : 'no',
@@ -562,8 +559,16 @@ class SVG_Draw extends Widget_Base {
 			'excludeStyle' => esc_attr( $settings['eael_svg_exclude_style'] ),
 			'transition'   => esc_attr( $settings['eael_svg_fill_transition'] ),
 			'stroke_length' => $settings['eael_svg_stroke_dash_adjustment']['size'] ?? '100',
-			'ease_type'    => $settings['eael_svg_animation_type'] ?? 'none' 
+			'ease_type'    => $settings['eael_svg_animation_type'] ?? 'none'
 		];
+
+		if ( ! empty( $settings['eael_svg_drawing_speed'] ) ) {
+			$svg_options['speed'] = $settings['eael_svg_drawing_speed'];
+		} elseif ( isset( $settings['eael_svg_draw_speed'] ) ) {
+			$svg_options['speed'] = $settings['eael_svg_draw_speed'] * 0.05;
+		} else {
+			$svg_options['speed'] = 1;
+		}
 
 		$this->add_render_attribute( 'eael-svg-drow-wrapper', [
 			'data-settings' => wp_json_encode( $svg_options )
