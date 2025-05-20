@@ -245,7 +245,12 @@ $config = [
                     ],
                 ],
                 'js' => [
-                    [
+	                [
+		                'file' => EAEL_PLUGIN_PATH . '/assets/front-end/js/lib-view/dom-purify/purify.min.js',
+		                'type' => 'lib',
+		                'context' => 'view',
+	                ],
+	                [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/tooltipster/tooltipster.bundle.min.js',
                         'type' => 'lib',
                         'context' => 'view',
@@ -949,7 +954,12 @@ $config = [
                     ],
                 ],
                 'js' => [
-                    [
+	                [
+		                'file'    => EAEL_PLUGIN_PATH . '/assets/front-end/js/lib-view/dom-purify/purify.min.js',
+		                'type'    => 'lib',
+		                'context' => 'view',
+	                ],
+	                [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/full-calendar/calendar-main.min.js',
                         'type' => 'lib',
                         'context' => 'view',
