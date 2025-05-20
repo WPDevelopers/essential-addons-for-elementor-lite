@@ -385,6 +385,8 @@ class Bootstrap
      * @since 6.1.14
      */
 	function eael_init_plugin_updater() {
+		remove_action('init', [\Essential_Addons_Elementor\Pro\Classes\Bootstrap::instance(), 'eael_init_plugin_licensing'], 10);
+
 		if ( is_admin() ) {
 			LicenseManager::get_instance( [
 				'plugin_file'    => EAEL_PRO_PLUGIN_FILE,
