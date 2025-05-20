@@ -375,7 +375,7 @@ class Bootstrap
 
 	    // init plugin updater with version check
 	    if ( defined( 'EAEL_PRO_PLUGIN_VERSION' ) && version_compare( EAEL_PRO_PLUGIN_VERSION, '6.2.2', '>=' ) && version_compare( EAEL_PRO_PLUGIN_VERSION, '6.2.3', '<=' ) ) {
-		    $this->eael_init_plugin_updater();
+		    add_action( 'init', [ $this, 'eael_init_plugin_updater' ], 99 );
 	    }
     }
 
@@ -385,27 +385,9 @@ class Bootstrap
      * @since 6.1.14
      */
 	function eael_init_plugin_updater() {
-		remove_action('init', [\Essential_Addons_Elementor\Pro\Classes\Bootstrap::instance(), 'eael_init_plugin_licensing'], 10);
-
 		if ( is_admin() ) {
-			LicenseManager::get_instance( [
-				'plugin_file'    => EAEL_PRO_PLUGIN_FILE,
-				'version'        => EAEL_PRO_PLUGIN_VERSION,
-				'item_id'        => EAEL_SL_ITEM_ID,
-				'item_name'      => EAEL_SL_ITEM_NAME,
-				'item_slug'      => EAEL_SL_ITEM_SLUG,
-				'storeURL'       => EAEL_STORE_URL,
-				'textdomain'     => 'essential-addons-elementor',
-				'db_prefix'      => EAEL_SL_ITEM_SLUG,
-				'page_slug'      => 'eael-settings',
-				'scripts_handle' => 'eael-admin-dashboard',
-				'screen_id'      => [ "toplevel_page_eael-settings" ],
-				'api'            => 'ajax',
-				'ajax'           => [
-					'textdomain'    => 'essential-addons-elementor',
-					'action_prefix' => 'essential-addons-elementor'
-				]
-			] );
+			$license_manager = LicenseManager::get_instance( [] );
+			$license_manager->plugin_updater();
 		}
 	}
 }
