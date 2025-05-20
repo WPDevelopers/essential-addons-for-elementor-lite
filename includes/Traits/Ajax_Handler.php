@@ -155,8 +155,12 @@ trait Ajax_Handler {
 			$settings['read_more_button_text']       = get_transient( 'eael_post_grid_read_more_button_text_' . $widget_id );
 			$settings['excerpt_expanison_indicator'] = get_transient( 'eael_post_grid_excerpt_expanison_indicator_' . $widget_id );
 
-			if ( $settings['orderby'] === 'rand' ) {
-				$args['post__not_in'] = array_map( 'intval', array_unique( $_REQUEST['post__not_in'] ) );
+			if ( $settings['orderby'] === 'rand' && ! empty( $_REQUEST['post__not_in'] ) ) {
+				$post__not_in = $_REQUEST['post__not_in'];
+				if ( ! empty( $args['post__not_in'] ) ) {
+					$post__not_in = array_merge( $post__not_in, $args['post__not_in'] );
+				}
+				$args['post__not_in'] = array_map( 'intval', array_unique( $post__not_in ) );
 				unset( $args['offset'] );
 			}
 		}
