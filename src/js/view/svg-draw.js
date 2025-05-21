@@ -5,6 +5,7 @@ var SVGDraw = function ($scope, $) {
         svg_icon = $('svg', wrapper),
         settings = wrapper.data('settings'),
         transition = Number( settings.transition ),
+        loop_delay = Number( settings.loop_delay ),
         offset = 0,
         lines = $('path, circle, rect, polygon', svg_icon);
 
@@ -27,7 +28,7 @@ var SVGDraw = function ($scope, $) {
                 loopConfig = {
                     repeat: -1,
                     yoyo: "reverse" === settings.direction,
-                    repeatDelay:  transition
+                    repeatDelay: loop_delay
                 };
             }
             
@@ -51,7 +52,7 @@ var SVGDraw = function ($scope, $) {
                                         fill: settings.fill_color + '00',
                                         duration: transition
                                     });
-                                }, transition * 1000);
+                                }, loop_delay * 1000);
                             }
                         } else if ( 'before' === settings.fill_type ) {
                             gsap.to(lines, {

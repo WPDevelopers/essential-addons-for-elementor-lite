@@ -398,6 +398,21 @@ class SVG_Draw extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_svg_loop_delay',
+			[
+				'label'       => esc_html__( 'Repeat Delay', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::NUMBER,
+				'min'         => 0,
+				'step'        => 0.5,
+				'default'     => 1.5,
+				'condition'   => [
+					'eael_svg_animation_on!' => [ 'page-scroll', 'none' ],
+					'eael_svg_loop'          => 'yes'
+				],
+			]
+		);
+
+		$this->add_control(
 			'eael_svg_animation_direction',
 			[
 				'label'     => esc_html__( 'Direction', 'essential-addons-for-elementor-lite' ),
@@ -597,6 +612,7 @@ class SVG_Draw extends Widget_Base {
 			'end_point'    => ! empty( $settings['eael_svg_draw_end_point']['size'] ) ? $settings['eael_svg_draw_end_point']['size'] . '%' : '10%',
 			'marker'       => ! empty( $settings['eael_show_marker'] ) && 'yes' === $settings['eael_show_marker'],
 			'loop'         => $settings['eael_svg_loop'] ? esc_attr( $settings['eael_svg_loop'] ) : 'no',
+			'loop_delay'   => $settings['eael_svg_loop_delay'] ?? 1.5,
 			'pause'        => $settings['eael_svg_pause_on_hover'] ? esc_attr( $settings['eael_svg_pause_on_hover'] ) : 'no',
 			'direction'    => esc_attr( $settings['eael_svg_animation_direction'] ),
 			'excludeStyle' => esc_attr( $settings['eael_svg_exclude_style'] ),
