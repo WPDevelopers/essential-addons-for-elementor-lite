@@ -44,11 +44,14 @@ var SVGDraw = function ($scope, $) {
                                 fill: settings.fill_color,
                                 duration: transition
                             });
+                            
                             if ( 'reverse' === settings.direction ) {
-                                gsap.to(lines, {
-                                    fill: settings.fill_color + '00',
-                                    duration: transition
-                                });
+                                setTimeout( function() {
+                                    gsap.to(lines, {
+                                        fill: settings.fill_color + '00',
+                                        duration: transition
+                                    });
+                                }, transition * 1000);
                             }
                         } else if ( 'before' === settings.fill_type ) {
                             gsap.to(lines, {
