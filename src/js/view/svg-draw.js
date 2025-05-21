@@ -10,6 +10,14 @@ var SVGDraw = function ($scope, $) {
         lines = $('path, circle, rect, polygon', svg_icon),
         max = $doc.height() - $win.height();
 
+        if( 'always' === settings.fill_type ) {
+            wrapper.addClass('fill-svg');
+            gsap.to(lines, {
+                fill: settings.fill_color,
+                duration: transition
+            });
+        }
+
         function dashArrayReset() {
             let largestDashArray = 0, largestPath = '';
             $.each( lines, function (index, line) {
@@ -59,37 +67,39 @@ var SVGDraw = function ($scope, $) {
                 duration: settings.speed,
                 ease: settings.ease_type,
                 onComplete: function() {
-                    if( 'after' === settings.fill_type && '' !== settings.fill_color ) {
-                        gsap.to(lines, {
-                            fill: settings.fill_color,
-                            duration: 1
-                        });
-                        if ( 'reverse' === settings.direction ) {
-                            setTimeout(function(){
+                    if( '' !== settings.fill_color ) {
+                        if( 'after' === settings.fill_type ) {
+                            gsap.to(lines, {
+                                fill: settings.fill_color,
+                                duration: transition
+                            });
+                            if ( 'reverse' === settings.direction ) {
                                 gsap.to(lines, {
                                     fill: settings.fill_color + '00',
-                                    duration: 2
+                                    duration: transition
                                 });
-                            }, transition * 1000 );
+                            }
+                        } else if ( 'before' === settings.fill_type ) {
+                            gsap.to(lines, {
+                                fill: settings.fill_color + '00',
+                                duration: transition
+                            });
                         }
-                    } else if ( 'before' === settings.fill_type && '' !== settings.fill_color ) {
-                        gsap.to(lines, {
-                            fill: settings.fill_color + '00',
-                            duration: transition
-                        });
                     }
                 },
                 onStart: function () {
-                    if( 'after' === settings.fill_type && '' !== settings.fill_color && "restart" === settings.direction ) {
-                        gsap.to(lines, {
-                            fill: settings.fill_color + '00',
-                            duration: 0.5
-                        });
-                    }else if ( 'before' === settings.fill_type && '' !== settings.fill_color ) {
-                        gsap.to(lines, {
-                            fill: settings.fill_color,
-                            duration: transition
-                        });
+                    if( '' !== settings.fill_color ) {
+                        if( 'after' === settings.fill_type && "restart" === settings.direction ) {
+                            gsap.to(lines, {
+                                fill: settings.fill_color + '00',
+                                duration: transition
+                            });
+                        } else if ( 'before' === settings.fill_type ) {
+                            gsap.to(lines, {
+                                fill: settings.fill_color,
+                                duration: transition
+                            });
+                        }
                     }
                 }
             });

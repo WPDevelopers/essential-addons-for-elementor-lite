@@ -100,7 +100,7 @@ class SVG_Draw extends Widget_Base {
 			'eael_svg_icon',
 			[
 				'label'     => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::ICONS,
+				'type'      => Controls_Manager::ICONS,
 				'default'   => [
 					'value'   => [
 						'url' => EAEL_PLUGIN_URL . 'assets/admin/images/svg-draw.svg',
@@ -242,12 +242,12 @@ class SVG_Draw extends Widget_Base {
 				'default' => 'none',
 				'options' => [
 					'none'   => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
+					'always' => esc_html__( 'Always', 'essential-addons-for-elementor-lite' ),
 					'after'  => esc_html__( 'After Draw', 'essential-addons-for-elementor-lite' ),
-					'before'  => esc_html__( 'Before Draw', 'essential-addons-for-elementor-lite' ),
+					'before' => esc_html__( 'Before Draw', 'essential-addons-for-elementor-lite' ),
 				],
 			]
 		);
-
 
 		$this->add_control(
 			'eael_svg_fill_transition',
@@ -460,13 +460,6 @@ class SVG_Draw extends Widget_Base {
 			[
 				'type'      => Controls_Manager::COLOR,
 				'label'     => esc_html__( 'Fill Color', 'essential-addons-for-elementor-lite' ),
-				// 'selectors' => [
-				// 	'{{WRAPPER}} .fill-svg svg path'                            => 'fill:{{VALUE}};',
-				// 	'{{WRAPPER}} .eael-svg-draw-container.fill-svg svg path'    => 'fill:{{VALUE}};',
-				// 	'{{WRAPPER}} .eael-svg-draw-container.fill-svg svg circle'  => 'fill:{{VALUE}};',
-				// 	'{{WRAPPER}} .eael-svg-draw-container.fill-svg svg rect'    => 'fill:{{VALUE}};',
-				// 	'{{WRAPPER}} .eael-svg-draw-container.fill-svg svg polygon' => 'fill:{{VALUE}};'
-				// ],
 				'default'   => '#D8C2F3',
 				'condition' => [
 					'eael_svg_fill!' => 'none'
@@ -581,11 +574,7 @@ class SVG_Draw extends Widget_Base {
 		}
 
 		echo '<div '; $this->print_render_attribute_string( 'eael-svg-drow-wrapper' ); echo '>';
-		if( 'before' === $settings['eael_svg_fill'] ) {
-			echo '<style>';
-			echo '.elementor-element.elementor-element-'. $this->get_id() . ' .eael-svg-draw-container.fill-svg svg *{ fill:' . esc_attr( $settings['eael_svg_fill_color'] ) . '; }';
-			echo '</style>';
-		}
+
 		if ( $settings['eael_svg_src'] === 'icon' ):
 
 			if ( $settings['eael_svg_icon']['library'] === 'svg' ) {
