@@ -1,14 +1,12 @@
 
 var SVGDraw = function ($scope, $) {
     let wrapper = $('.eael-svg-draw-container', $scope),
+        widget_id = $scope.data('id'),
         svg_icon = $('svg', wrapper),
         settings = wrapper.data('settings'),
         transition = Number( settings.transition ),
-        offset = '' !== settings.offset ? settings.offset : 0,
-        $doc = $(document),
-        $win = $(window),
-        lines = $('path, circle, rect, polygon', svg_icon),
-        max = $doc.height() - $win.height();
+        offset = 0,
+        lines = $('path, circle, rect, polygon', svg_icon);
 
         if( 'always' === settings.fill_type || 'before' === settings.fill_type ) {
             gsap.to(lines, {
@@ -102,14 +100,17 @@ var SVGDraw = function ($scope, $) {
             line.style.strokeDasharray = length;
             line.style.strokeDashoffset = length;
         });
+        let showMarkers = settings.marker && elementorFrontend.isEditMode();
+        $('.marker-'+widget_id).remove();
         
         let timeline = gsap.timeline({
             scrollTrigger: {
                 trigger: lines,
-                start: "top 95%",
-                end: "top 10%",
+                start: "top "+settings.start_point,
+                end: "top "+settings.end_point,
                 scrub: true,
-                markers: true,
+                id: widget_id,
+                markers: showMarkers,
                 onUpdate: (self) => {
                     if( '' !== settings.fill_color && ( 'before' === settings.fill_type || 'after' === settings.fill_type ) ) {
                         let fill1 = settings.fill_color, fill2 = settings.fill_color + '00';
@@ -133,7 +134,7 @@ var SVGDraw = function ($scope, $) {
             } 
         });
 
-        timeline.to(lines, { strokeDashoffset: 0, });
+        timeline.to(lines, { strokeDashoffset: 0, }); 
     }
 }
 jQuery(window).on("elementor/frontend/init", function () {

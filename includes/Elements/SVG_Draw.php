@@ -304,19 +304,66 @@ class SVG_Draw extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'eael_svg_draw_offset',
+		$this->add_control( 
+			'eael_show_marker',
 			[
-				'label'       => esc_html__( 'Drawing Start Point', 'essential-addons-for-elementor-lite' ),
-				'type'        => Controls_Manager::NUMBER,
-				'min'         => 1,
-				'max'         => 1000,
-				'step'        => 1,
-				'default'     => 50,
+				'label'        => esc_html__( 'Marker', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'description'  => esc_html__( 'This will help you to understand the start and end point of the animation. It will only work on Editor mode.', 'essential-addons-for-elementor-lite' ),
+				'condition'    => [
+					'eael_svg_animation_on' => 'page-scroll',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_svg_draw_start_point',
+			[
+				'label'       => esc_html__( 'Drawing Start Point(%)', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::SLIDER,
+				'label_block' => true,
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'unit' => '%',
+					'size' => 0,
+				],
 				'condition'   => [
 					'eael_svg_animation_on' => 'page-scroll',
 				],
-				'description' => esc_html__( 'The point at which the drawing begins to animate as scrolls down (in pixels).', 'essential-addons-for-elementor-lite' )
+				'description' => esc_html__( 'The point at which the drawing begins to the page bottom.', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_control(
+			'eael_svg_draw_end_point',
+			[
+				'label'       => esc_html__( 'Drawing End Point(%)', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::SLIDER,
+				'label_block' => true,
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'unit' => '%',
+					'size' => 10,
+				],
+				'condition'   => [
+					'eael_svg_animation_on' => 'page-scroll',
+				],
+				'description' => esc_html__( 'The point at which the drawing ends to page top.', 'essential-addons-for-elementor-lite' )
 			]
 		);
 
@@ -546,7 +593,9 @@ class SVG_Draw extends Widget_Base {
 		$svg_options = [
 			'fill_type'    => $settings['eael_svg_fill'],
 			'fill_color'   => $settings['eael_svg_fill_color'],
-			'offset'       => esc_attr( $settings['eael_svg_draw_offset'] ),
+			'start_point'  => ! empty( $settings['eael_svg_draw_start_point']['size'] ) ? ( 100 - $settings['eael_svg_draw_start_point']['size'] ) . '%' : '95%',
+			'end_point'    => ! empty( $settings['eael_svg_draw_end_point']['size'] ) ? $settings['eael_svg_draw_end_point']['size'] . '%' : '10%',
+			'marker'       => ! empty( $settings['eael_show_marker'] ) && 'yes' === $settings['eael_show_marker'],
 			'loop'         => $settings['eael_svg_loop'] ? esc_attr( $settings['eael_svg_loop'] ) : 'no',
 			'pause'        => $settings['eael_svg_pause_on_hover'] ? esc_attr( $settings['eael_svg_pause_on_hover'] ) : 'no',
 			'direction'    => esc_attr( $settings['eael_svg_animation_direction'] ),
