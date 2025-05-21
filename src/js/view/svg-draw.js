@@ -11,7 +11,6 @@ var SVGDraw = function ($scope, $) {
         max = $doc.height() - $win.height();
 
         if( 'always' === settings.fill_type ) {
-            wrapper.addClass('fill-svg');
             gsap.to(lines, {
                 fill: settings.fill_color,
                 duration: transition
@@ -116,6 +115,12 @@ var SVGDraw = function ($scope, $) {
     if( wrapper.hasClass( 'page-load' ) ) {
         drawSVGLine( lines, settings );
     } else if ( wrapper.hasClass( 'mouse-hover' ) ) {
+        if( 'always' === settings.fill_type || 'before' === settings.fill_type ) {
+            gsap.to(lines, {
+                fill: settings.fill_color,
+                duration: transition
+            });
+        }
         svg_icon.hover( function(){
             if ( ! wrapper.hasClass('draw-initialized') ) {
                 drawSVGLine( lines, settings );
