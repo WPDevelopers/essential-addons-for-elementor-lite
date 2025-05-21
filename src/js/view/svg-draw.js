@@ -10,37 +10,11 @@ var SVGDraw = function ($scope, $) {
         lines = $('path, circle, rect, polygon', svg_icon),
         max = $doc.height() - $win.height();
 
-        if( 'always' === settings.fill_type ) {
+        if( 'always' === settings.fill_type || 'before' === settings.fill_type ) {
             gsap.to(lines, {
                 fill: settings.fill_color,
                 duration: transition
             });
-        }
-
-        function dashArrayReset() {
-            let largestDashArray = 0, largestPath = '';
-            $.each( lines, function (index, line) {
-                let dashArray = $(line).css('stroke-dasharray');
-                let dashArrayValue = parseInt(dashArray);
-                if (dashArrayValue > largestDashArray) {
-                    largestDashArray = dashArrayValue;
-                    largestPath = $(line);
-                }
-            });
-    
-            if ( largestDashArray < 3999 && largestDashArray / 2 > 600 ) {
-                let offset = largestPath.css('stroke-dashoffset');
-                offset = parseInt(offset);
-    
-                if ( 'after' === settings.fill ) {
-                    if (offset < largestDashArray / 2) {
-                        wrapper.addClass('fill-svg');
-                    } else if ( wrapper.hasClass('fill-svg') ) {
-                        wrapper.removeClass('fill-svg');
-                    }
-                }
-                
-            }
         }
 
         function drawSVGLine (){
@@ -115,12 +89,6 @@ var SVGDraw = function ($scope, $) {
     if( wrapper.hasClass( 'page-load' ) ) {
         drawSVGLine( lines, settings );
     } else if ( wrapper.hasClass( 'mouse-hover' ) ) {
-        if( 'always' === settings.fill_type || 'before' === settings.fill_type ) {
-            gsap.to(lines, {
-                fill: settings.fill_color,
-                duration: transition
-            });
-        }
         svg_icon.hover( function(){
             if ( ! wrapper.hasClass('draw-initialized') ) {
                 drawSVGLine( lines, settings );
@@ -128,18 +96,44 @@ var SVGDraw = function ($scope, $) {
             } 
         });
     } else if (wrapper.hasClass('page-scroll')) {
-        $win.on('scroll', function () {
-            let step = (($win.scrollTop() - offset) / max);
-            let offsetTop = svg_icon.offset().top,
-                viewPort = $win.innerHeight(),
-                offsetBottom = offsetTop - viewPort;
-
-            if (offsetTop > $win.scrollTop() && offsetBottom < $win.scrollTop()) {
-                step = (($win.scrollTop() - offset) - offsetBottom) / viewPort;
-                svg_icon.drawsvg('progress', step);
-            }
-            dashArrayReset();
+        gsap.registerPlugin(ScrollTrigger);
+        $.each( lines, function (index, line) { 
+            const length = line.getTotalLength() * ( settings.stroke_length * .01 );
+            line.style.strokeDasharray = length;
+            line.style.strokeDashoffset = length;
         });
+        
+        let timeline = gsap.timeline({
+            scrollTrigger: {
+                trigger: lines,
+                start: "top 95%",
+                end: "top 10%",
+                scrub: true,
+                markers: true,
+                onUpdate: (self) => {
+                    if( '' !== settings.fill_color && ( 'before' === settings.fill_type || 'after' === settings.fill_type ) ) {
+                        let fill1 = settings.fill_color, fill2 = settings.fill_color + '00';
+                        if ( 'after' === settings.fill_type ) {
+                            fill1 = settings.fill_color + '00';
+                            fill2 = settings.fill_color;
+                        }
+                        if ( self.progress < 0.95 ) {
+                            gsap.to(lines, {
+                                fill: fill1,
+                                duration: transition
+                            });
+                        } else if ( self.progress > 0.95 ) {
+                            gsap.to(lines, {
+                                fill: fill2,
+                                duration: transition
+                            });
+                        }
+                    }
+                },
+            } 
+        });
+
+        timeline.to(lines, { strokeDashoffset: 0, });
     }
 }
 jQuery(window).on("elementor/frontend/init", function () {
