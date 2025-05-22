@@ -387,7 +387,7 @@ class Cta_Box extends Widget_Base
 			[
 				'name'           => 'eael_cta_title_gradient_color',
 				'types'          => [ 'gradient' ],
-				'selector'       => '{{WRAPPER}} .eael-call-to-action .eael-cta-heading .eael-cta-title-text{{CURRENT_ITEM}}',
+				'selector'       => '{{WRAPPER}} .eael-call-to-action .eael-cta-heading .eael-cta-gradient-text.eael-cta-title-text{{CURRENT_ITEM}}',
 				'fields_options' => [
 					'background' => [
             			'default' => 'gradient',
@@ -417,7 +417,7 @@ class Cta_Box extends Widget_Base
 					],
 					[
 						'eael_cta_title' => esc_html__('Call To Action', 'essential-addons-for-elementor-lite'),
-						'eael_cta_title_color' => '#4d4d4d'
+						'eael_cta_title_color' => '#006297'
 					],
 					[
 						'eael_cta_title' => esc_html__('Heading', 'essential-addons-for-elementor-lite'),
@@ -946,10 +946,45 @@ class Cta_Box extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-call-to-action .title' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-call-to-action .title:not(.eael-cta-gradient-title)' => 'color: {{VALUE}};',
                 ],
+				'condition' => [
+					'eael_cta_title_use_gradient_color!' => 'yes',
+				],
             ]
         );
+
+        $this->add_control(
+			'eael_cta_title_use_gradient_color',
+			[
+				'label' => esc_html__('Use Gradient Color', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name'           => 'eael_cta_title_gradient_color',
+				'types'          => [ 'gradient' ],
+				'selector'       => '{{WRAPPER}} .eael-call-to-action .eael-cta-heading.eael-cta-gradient-title',
+				'fields_options' => [
+					'background' => [
+            			'default' => 'gradient',
+					],
+					'color' => [
+						'default' => '#571fff',
+					],
+					'color_b' => [
+						'default' => '#9f12ff',
+					],
+				],
+				'condition' => [
+					'eael_cta_title_use_gradient_color' => 'yes',
+				],
+			]
+		);
 
         $this->add_group_control(
             Group_Control_Typography::get_type(),
@@ -1870,21 +1905,22 @@ class Cta_Box extends Widget_Base
             $headingMarkup .= '<h4 class="sub-title">' . $sub_title . '</h4>';
         }
 
+        $title_html = '';
         if ( ! empty($settings['eael_cta_title'] ) ) {
-            $title_tag = Helper::eael_validate_html_tag( $settings['title_tag'] );
-            $headingMarkup .='<' . $title_tag .' class="title">'. $settings['eael_cta_title'] . '</' . $title_tag . '>';
+            $title_html = $settings['eael_cta_title'];
         } else if ( 'yes' === $settings['eael_cta_enable_multi_color_title'] && ! empty( $settings['eael_cta_multi_color_title'] ) ) {
-            $title_html = '';
             foreach( $settings['eael_cta_multi_color_title'] as $title ) {
 				$classes = 'eael-cta-title-text elementor-repeater-item-' . esc_attr( $title['_id'] );
 				if( 'yes' == $title['eael_cta_title_use_gradient_color'] ) {
-					$classes .= ' eael-cta-title-gradient';
+					$classes .= ' eael-cta-gradient-text';
 				}		
 				$title_html .= '<span class="' . $classes . '">' . $title['eael_cta_title'] . '</span> ';
 			}
-
+        }
+        if( ! empty( $title_html ) ) {
+            $is_gradient = isset( $settings['eael_cta_title_use_gradient_color'] ) && 'yes' === $settings['eael_cta_title_use_gradient_color'];
             $title_tag = Helper::eael_validate_html_tag( $settings['title_tag'] );
-            $headingMarkup .='<' . $title_tag .' class="title eael-cta-heading">'. $title_html . '</' . $title_tag . '>';
+            $headingMarkup .='<' . $title_tag .' class="title eael-cta-heading'.( $is_gradient ? ' eael-cta-gradient-title' : '' ) .'">'. $title_html . '</' . $title_tag . '>';
         }
 
         ob_start();
