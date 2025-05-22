@@ -1,6 +1,9 @@
 <?php
 namespace Essential_Addons_Elementor\Elements;
 
+use Elementor\Group_Control_Background;
+use Elementor\Repeater;
+
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
     exit;
@@ -311,18 +314,123 @@ class Cta_Box extends Widget_Base
         );
 
         $this->add_control(
-            'eael_cta_title',
+            'eael_cta_enable_multi_color_title',
             [
-                'label' => esc_html__('Title', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'label_block' => true,
-                'default' => esc_html__('Sample Call to Action Heading', 'essential-addons-for-elementor-lite'),
-                'dynamic' => ['active' => true],
-                'ai' => [
-					'active' => false,
-				],
+                'label' => esc_html__('Multi-Color Title', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'return_value' => 'yes',
             ]
         );
+
+        $this->add_control(
+            'eael_cta_title',
+            [
+                'label'       => esc_html__('Title', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::TEXT,
+                'label_block' => true,
+                'default'     => esc_html__('Sample Call to Action Heading', 'essential-addons-for-elementor-lite'),
+                'dynamic'     => ['active' => true],
+                'ai'          => [ 'active' => false ],
+                'condition'   => [
+                    'eael_cta_enable_multi_color_title!' => 'yes',
+                ]
+            ]
+        );
+
+        $multiple_titles = new Repeater();
+
+		$multiple_titles->add_control(
+			'eael_cta_title',
+			[
+				'label'       => esc_html__('Title', 'essential-addons-for-elementor-lite'),
+				'type'        => Controls_Manager::TEXT,
+				'label_block' => true,
+				'default'     => esc_html__('Title', 'essential-addons-for-elementor-lite'),
+				'dynamic'     => [ 'action' =>true ],
+				'ai'          => [ 'active' => false ],
+			]
+		);
+
+		$multiple_titles->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'eael_cta_title_typography',
+				'selector' => '{{WRAPPER}} .eael-call-to-action .eael-cta-heading .eael-cta-title-text{{CURRENT_ITEM}}',
+			]
+		);
+
+		$multiple_titles->add_control(
+			'eael_cta_title_color',
+			[
+				'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-call-to-action .eael-cta-heading .eael-cta-title-text{{CURRENT_ITEM}}' => 'color: {{VALUE}};',
+				],
+				'condition' => [
+					'eael_cta_title_use_gradient_color!' => 'yes',
+				],
+			]
+		);
+
+		$multiple_titles->add_control(
+			'eael_cta_title_use_gradient_color',
+			[
+				'label' => esc_html__('Use Gradient Color', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+			]
+		);
+
+		$multiple_titles->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name'           => 'eael_cta_title_gradient_color',
+				'types'          => [ 'gradient' ],
+				'selector'       => '{{WRAPPER}} .eael-call-to-action .eael-cta-heading .eael-cta-title-text{{CURRENT_ITEM}}',
+				'fields_options' => [
+					'background' => [
+            			'default' => 'gradient',
+					],
+					'color' => [
+						'default' => '#571fff',
+					],
+					'color_b' => [
+						'default' => '#9f12ff',
+					],
+				],
+				'condition' => [
+					'eael_cta_title_use_gradient_color' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_cta_multi_color_title',
+			[
+				'label'   => '',
+				'type'    => Controls_Manager::REPEATER,
+				'fields'  => $multiple_titles->get_controls(),
+				'default' => [
+					[
+						'eael_cta_title' => esc_html__('Multi-Color', 'essential-addons-for-elementor-lite'),
+					],
+					[
+						'eael_cta_title' => esc_html__('Call To Action', 'essential-addons-for-elementor-lite'),
+						'eael_cta_title_color' => '#4d4d4d'
+					],
+					[
+						'eael_cta_title' => esc_html__('Heading', 'essential-addons-for-elementor-lite'),
+						'eael_cta_title_use_gradient_color' => 'yes'
+					],
+				],
+				'title_field' => '{{{eael_cta_title}}}',
+				'button_text' => esc_html__('Add Title', 'essential-addons-for-elementor-lite'),
+				'condition' => [
+					'eael_cta_enable_multi_color_title' => 'yes',
+				],
+			]
+		);
 
         $this->add_control(
             'eael_cta_sub_title',
@@ -908,7 +1016,7 @@ class Cta_Box extends Widget_Base
         $this->add_control(
             'eael_cta_content_heading',
             [
-                'label' => esc_html__('Content Style', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Content', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -1162,7 +1270,7 @@ class Cta_Box extends Widget_Base
         );
 
         $this->add_group_control(
-			\Elementor\Group_Control_Background::get_type(),
+			Group_Control_Background::get_type(),
 			[
 				'name' => 'eael_cta_btn_normal_gradient_bg_color',
 				'label' => __( 'Background', 'essential-addons-for-elementor-lite' ),
@@ -1372,7 +1480,7 @@ class Cta_Box extends Widget_Base
 
 
         $this->add_group_control(
-			\Elementor\Group_Control_Background::get_type(),
+			Group_Control_Background::get_type(),
 			[
 				'name' => 'eael_cta_btn_hover_gradient_bg_color',
 				'label' => __( 'Background', 'essential-addons-for-elementor-lite' ),
@@ -1545,7 +1653,7 @@ class Cta_Box extends Widget_Base
         );
 
         $this->add_group_control(
-			\Elementor\Group_Control_Background::get_type(),
+			Group_Control_Background::get_type(),
 			[
 				'name' => 'eael_cta_secondary_btn_normal_bg_color',
 				'label' => __( 'Background', 'essential-addons-for-elementor-lite' ),
@@ -1614,7 +1722,7 @@ class Cta_Box extends Widget_Base
         );
 
         $this->add_group_control(
-			\Elementor\Group_Control_Background::get_type(),
+			Group_Control_Background::get_type(),
 			[
 				'name' => 'eael_cta_secondary_btn_hover_bg_color',
 				'label' => __( 'Background', 'essential-addons-for-elementor-lite' ),
@@ -1659,7 +1767,7 @@ class Cta_Box extends Widget_Base
         $this->start_controls_section(
             'eael_section_cta_icon_style_settings',
             [
-                'label' => esc_html__('Icon Style', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_cta_type' => 'cta-icon-flex',
@@ -1762,9 +1870,21 @@ class Cta_Box extends Widget_Base
             $headingMarkup .= '<h4 class="sub-title">' . $sub_title . '</h4>';
         }
 
-        if (!empty($settings['eael_cta_title'])){
+        if ( ! empty($settings['eael_cta_title'] ) ) {
             $title_tag = Helper::eael_validate_html_tag( $settings['title_tag'] );
             $headingMarkup .='<' . $title_tag .' class="title">'. $settings['eael_cta_title'] . '</' . $title_tag . '>';
+        } else if ( 'yes' === $settings['eael_cta_enable_multi_color_title'] && ! empty( $settings['eael_cta_multi_color_title'] ) ) {
+            $title_html = '';
+            foreach( $settings['eael_cta_multi_color_title'] as $title ) {
+				$classes = 'eael-cta-title-text elementor-repeater-item-' . esc_attr( $title['_id'] );
+				if( 'yes' == $title['eael_cta_title_use_gradient_color'] ) {
+					$classes .= ' eael-cta-title-gradient';
+				}		
+				$title_html .= '<span class="' . $classes . '">' . $title['eael_cta_title'] . '</span> ';
+			}
+
+            $title_tag = Helper::eael_validate_html_tag( $settings['title_tag'] );
+            $headingMarkup .='<' . $title_tag .' class="title eael-cta-heading">'. $title_html . '</' . $title_tag . '>';
         }
 
         ob_start();
