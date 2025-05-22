@@ -1,4 +1,4 @@
-=== Essential Addons for Elementor- Widgets, Templates & WooCommerce Builder ===
+=== Essential Addons for Elementor - Widgets, Templates & WooCommerce Builder ===
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, nhrrob, jakariaistauk, himadree12
 Tags: elementor, elements, elementor addon, elementor widget, woocommerce elementor
 Requires at least: 5.0
