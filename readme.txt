@@ -1,4 +1,4 @@
-=== Essential Addons for Elementor – Popular Elementor Addon With Ready Templates, Advanced Widgets, Kits & WooCommerce Builders ===
+=== Essential Addons for Elementor - Widgets, Templates & WooCommerce Builder ===
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, nhrrob, jakariaistauk, himadree12
 Tags: elementor, elements, elementor addon, elementor widget, woocommerce elementor
 Requires at least: 5.0
@@ -8,7 +8,7 @@ Stable tag: 6.1.14
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-The Essential plugin you install after Elementor! Packed with 100+ stunning elements like Data Table, Event Calendar, Filterable Gallery, WooCommerce.
+Most Used Elementor addon, an advanced elements library with 100+ powerful widgets & extensions on various niches, including WooCommerce.
 
 == Description ==
 
