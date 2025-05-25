@@ -95,7 +95,7 @@
 }
 
 #elementor-panel__editor__help__link[href^="https://essential-addons.com/elementor/docs"]:before {
-	content: "\e930";
+	content: "\e98a";
 	font-family: "eaicon" !important;
 	font-size: 190%;
 	font-style: normal;
@@ -106,6 +106,7 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	margin-right: 5px;
+	margin-bottom: 3px;
 }
 
 /* section heading */

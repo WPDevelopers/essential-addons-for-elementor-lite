@@ -19,6 +19,8 @@ use Essential_Addons_Elementor\Traits\Controls;
 use Essential_Addons_Elementor\Traits\Facebook_Feed;
 use Essential_Addons_Elementor\Classes\Asset_Builder;
 use Essential_Addons_Elementor\Traits\Ajax_Handler;
+use Essential_Addons_Elementor\Pro\Classes\License\LicenseManager;
+
 class Bootstrap
 {
     use Library;
@@ -128,8 +130,7 @@ class Bootstrap
 
     }
 
-    protected function register_hooks()
-    {
+    protected function register_hooks() {
         // Core
         add_action('init', [$this, 'i18n']);
         // TODO::RM
@@ -371,5 +372,22 @@ class Bootstrap
 	    // beehive theme compatibility
 	    add_filter( 'beehive_scripts', array( $this, 'beehive_theme_swiper_slider_compatibility' ), 999 );
 
+
+	    // init plugin updater with version check
+	    if ( defined( 'EAEL_PRO_PLUGIN_VERSION' ) && version_compare( EAEL_PRO_PLUGIN_VERSION, '6.2.2', '>=' ) && version_compare( EAEL_PRO_PLUGIN_VERSION, '6.2.3', '<=' ) ) {
+		    add_action( 'init', [ $this, 'eael_init_plugin_updater' ], 99 );
+	    }
     }
+
+    /**
+     * Initialize plugin updater
+     *
+     * @since 6.1.14
+     */
+	function eael_init_plugin_updater() {
+		if ( is_admin() ) {
+			$license_manager = LicenseManager::get_instance( [] );
+			$license_manager->plugin_updater();
+		}
+	}
 }
