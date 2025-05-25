@@ -82,7 +82,7 @@ class Cta_Box extends Widget_Base
     {
 
         /*-----------------------------------------------------------------------------------*/
-        /*    Style Tab
+        /*    Layout section
         /*-----------------------------------------------------------------------------------*/
         $this->start_controls_section(
             'eael_section_cta_content_layout_settings',
@@ -530,14 +530,25 @@ class Cta_Box extends Widget_Base
         $this->add_control(
             'eael_cta_content',
             [
-                'label' => esc_html__('Content', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::WYSIWYG,
+                'label'       => '',
+                'type'        => Controls_Manager::WYSIWYG,
                 'label_block' => true,
-                'default' => __('<p>Add a strong one liner supporting the heading above and giving users a reason to click on the button below.</p>', 'essential-addons-for-elementor-lite'),
-                'separator' => 'after',
-                'condition' => [
+                'default'     => __('<p>Add a strong one liner supporting the heading above and giving users a reason to click on the button below.</p>', 'essential-addons-for-elementor-lite'),
+                'condition'   =>  [
                     'eael_cta_title_content_type' => 'content',
                 ],
+            ]
+        );
+
+         $this->end_controls_section();
+
+        /**
+         * Call to Action button Settings
+         */
+        $this->start_controls_section(
+            'eael_section_cta_button_settings',
+            [
+                'label' => esc_html__('Button', 'essential-addons-for-elementor-lite'),
             ]
         );
 
@@ -545,7 +556,7 @@ class Cta_Box extends Widget_Base
 	    $this->add_control(
 		    'eael_cta_btn_preset',
 		    [
-			    'label' => esc_html__('Button Preset', 'essential-addons-for-elementor-lite'),
+			    'label' => esc_html__('Preset', 'essential-addons-for-elementor-lite'),
 			    'type' => Controls_Manager::SELECT,
 			    'default' => 'cta-btn-preset-2',
 			    'label_block' => false,
@@ -576,9 +587,18 @@ class Cta_Box extends Widget_Base
 	    );
 
         $this->add_control(
+            'eael_cta_btn_text_heading',
+            [
+                'label' => esc_html__('Primary', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
 			'eael_cta_primary_btn_icon_show',
 			[
-				'label'        => __( 'Primary Icon', 'essential-addons-for-elementor-lite' ),
+				'label'        => __( 'Icon', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
@@ -633,23 +653,14 @@ class Cta_Box extends Widget_Base
 		);
 
         $this->add_control(
-            'eael_cta_btn_text_heading',
-            [
-                'label' => esc_html__('Primary Button', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
-                'separator' => 'before',
-            ]
-        );
-
-        $this->add_control(
             'eael_cta_btn_text',
             [
-                'label' => esc_html__('Text', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'dynamic' => ['active' => true],
+                'label'       => esc_html__('Text', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::TEXT,
+                'dynamic'     => ['active' =>true ],
                 'label_block' => true,
-                'default' => esc_html__('Click Here', 'essential-addons-for-elementor-lite'),
-                'ai' => [
+                'default'     => esc_html__('Click Here', 'essential-addons-for-elementor-lite'),
+                'ai'          => [
 					'active' => false,
 				],
             ]
@@ -674,7 +685,7 @@ class Cta_Box extends Widget_Base
         $this->add_control(
             'eael_cta_secondary_btn_text_heading',
             [
-                'label' => esc_html__('Secondary Button', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Secondary', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -796,7 +807,6 @@ class Cta_Box extends Widget_Base
                         'max' => 100,
                     ],
                 ],
-                'separator' => 'after',
                 'selectors' => [
                     '{{WRAPPER}} .eael-call-to-action' => 'max-width: {{SIZE}}{{UNIT}};',
                 ],
@@ -805,7 +815,7 @@ class Cta_Box extends Widget_Base
                 ],
             ]
         );
-
+        
         $this->add_control(
             'eael_cta_bg_color',
             [
@@ -816,6 +826,23 @@ class Cta_Box extends Widget_Base
                     '{{WRAPPER}} .eael-call-to-action' => 'background-color: {{VALUE}};',
                     '{{WRAPPER}} .eael-call-to-action.bg-img:after' => 'background-color: {{VALUE}};',
                 ],
+                'condition' => [
+                    'eael_cta_preset' => 'cta-preset-1',
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_cta_bg_color_preset_2',
+            [
+                'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-call-to-action.cta-preset-2:not(.cta-preset-1)' => 'background: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_cta_preset' => 'cta-preset-2',
+                ]
             ]
         );
 
@@ -841,44 +868,6 @@ class Cta_Box extends Widget_Base
                     'eael_cta_color_type!' => 'cta-bg-color',
                     'eael_cta_bg_overlay' => 'yes',
                     'eael_cta_preset' => 'cta-preset-2',
-                ],
-            ]
-        );
-
-         $this->add_control(
-            'eael_cta_bg_color_preset_2',
-            [
-                'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .eael-call-to-action.cta-preset-2:not(.cta-preset-1)' => 'background: {{VALUE}};',
-                ],
-                'condition' => [
-                    'eael_cta_preset' => 'cta-preset-2',
-                ]
-            ]
-        );
-
-        $this->add_responsive_control(
-            'eael_cta_container_padding',
-            [
-                'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', 'em', '%'],
-                'selectors' => [
-                    '{{WRAPPER}} .eael-call-to-action' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-            ]
-        );
-
-        $this->add_responsive_control(
-            'eael_cta_container_margin',
-            [
-                'label' => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', 'em', '%'],
-                'selectors' => [
-                    '{{WRAPPER}} .eael-call-to-action' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -916,6 +905,30 @@ class Cta_Box extends Widget_Base
             ]
         );
 
+        $this->add_responsive_control(
+            'eael_cta_container_padding',
+            [
+                'label' => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-call-to-action' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_cta_container_margin',
+            [
+                'label' => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-call-to-action' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
         $this->end_controls_section();
 
         /**
@@ -948,43 +961,8 @@ class Cta_Box extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-call-to-action .title:not(.eael-cta-gradient-title)' => 'color: {{VALUE}};',
                 ],
-				'condition' => [
-					'eael_cta_title_use_gradient_color!' => 'yes',
-				],
             ]
         );
-
-        $this->add_control(
-			'eael_cta_title_use_gradient_color',
-			[
-				'label' => esc_html__('Use Gradient Color', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::SWITCHER,
-				'return_value' => 'yes',
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Background::get_type(),
-			[
-				'name'           => 'eael_cta_title_gradient_color',
-				'types'          => [ 'gradient' ],
-				'selector'       => '{{WRAPPER}} .eael-call-to-action .eael-cta-heading.eael-cta-gradient-title',
-				'fields_options' => [
-					'background' => [
-            			'default' => 'gradient',
-					],
-					'color' => [
-						'default' => '#571fff',
-					],
-					'color_b' => [
-						'default' => '#9f12ff',
-					],
-				],
-				'condition' => [
-					'eael_cta_title_use_gradient_color' => 'yes',
-				],
-			]
-		);
 
         $this->add_group_control(
             Group_Control_Typography::get_type(),
@@ -1918,9 +1896,8 @@ class Cta_Box extends Widget_Base
 			}
         }
         if( ! empty( $title_html ) ) {
-            $is_gradient = isset( $settings['eael_cta_title_use_gradient_color'] ) && 'yes' === $settings['eael_cta_title_use_gradient_color'];
             $title_tag = Helper::eael_validate_html_tag( $settings['title_tag'] );
-            $headingMarkup .='<' . $title_tag .' class="title eael-cta-heading'.( $is_gradient ? ' eael-cta-gradient-title' : '' ) .'">'. $title_html . '</' . $title_tag . '>';
+            $headingMarkup .='<' . $title_tag .' class="title eael-cta-heading">'. $title_html . '</' . $title_tag . '>';
         }
 
         ob_start();
