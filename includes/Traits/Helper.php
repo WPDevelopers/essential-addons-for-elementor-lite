@@ -754,7 +754,7 @@ trait Helper
                 </div>
                 <div class="eael-gb-eb-banner-promo-right">
                     <a class="eael-gb-eb-banner-promo-learn-more" href="https://essential-blocks.com/" target="_blank"><?php _e( 'Learn More', 'essential-addons-for-elementor-lite' ) ?></a>
-                    <button class="eael-gb-eb-banner-promo-get-block eael-gb-eb-install" data-promotype="eb-banner" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo $eb_not_installed ? __( 'Get Essential Blocks', 'essential-addons-for-elementor-lite' ) : __( 'Activate', 'essential-addons-for-elementor-lite' ); ?></b>
+                    <button class="eael-gb-eb-banner-promo-get-block eael-gb-eb-install" data-promotype="eb-banner" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo $eb_not_installed ? __( 'Get Essential Blocks', 'essential-addons-for-elementor-lite' ) : __( 'Activate', 'essential-addons-for-elementor-lite' ); ?></button>
                     <button class="eael-gb-eb-banner-promo-close" data-nonce="<?php echo esc_attr( $nonce ); ?>">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <g clip-path="url(#clip0_1_101)">
