@@ -1,10 +1,14 @@
-var PricingTooltip = function($scope, $) {
+var PricingTooltip = function ($scope, $) {
     if ($.fn.tooltipster) {
         var $tooltip = $scope.find(".eael-pricing-tooltip"),
             i;
 
         for (i = 0; i < $tooltip.length; i++) {
             var $currentTooltip = $("#" + $($tooltip[i]).attr("id")),
+                $tooltipContent =
+                    $currentTooltip.data("content") !== undefined
+                        ? $currentTooltip.data("content")
+                        : null,
                 $tooltipSide =
                     $currentTooltip.data("side") !== undefined
                         ? $currentTooltip.data("side")
@@ -30,6 +34,7 @@ var PricingTooltip = function($scope, $) {
             $currentTooltip.tooltipster({
                 animation: $animation,
                 trigger: $tooltipTrigger,
+                content: DOMPurify.sanitize($tooltipContent),
                 contentAsHTML: true,
                 side: $tooltipSide,
                 delay: $anim_duration,
@@ -39,7 +44,7 @@ var PricingTooltip = function($scope, $) {
         }
     }
 };
-jQuery(window).on("elementor/frontend/init", function() {
+jQuery(window).on("elementor/frontend/init", function () {
     elementorFrontend.hooks.addAction(
         "frontend/element_ready/eael-pricing-table.default",
         PricingTooltip
