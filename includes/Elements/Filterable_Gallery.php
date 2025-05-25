@@ -836,14 +836,17 @@ class Filterable_Gallery extends Widget_Base
         $repeater->add_control(
             'eael_fg_gallery_img_link',
             [
-                'type' => Controls_Manager::URL,
-                'dynamic'   => ['active' => true],
+                'type'        => Controls_Manager::URL,
+                'dynamic'     => ['active'       =>true],
                 'label_block' => true,
-                'default' => [
-                    'url' => '#',
+                'default'     => [
+                    'url'         => '#',
                     'is_external' => '',
                 ],
-                'show_external' => true
+                'show_external' => true,
+                'condition'     => [
+                    'fg_video_gallery_switch!' => 'true',
+                ],
             ]
         );
         
