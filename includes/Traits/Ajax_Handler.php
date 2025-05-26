@@ -993,10 +993,10 @@ trait Ajax_Handler {
 
 		//Cloudflare Turnstile
 		if ( isset( $settings['lr_cloudflare_turnstile_sitekey'] ) ) {
-			update_option( 'lr_cloudflare_turnstile_sitekey', sanitize_text_field( $settings['lr_cloudflare_turnstile_sitekey'] ) );
+			update_option( 'eael_cloudflare_turnstile_sitekey', sanitize_text_field( $settings['lr_cloudflare_turnstile_sitekey'] ) );
 		}
 		if ( isset( $settings['lr_cloudflare_turnstile_secretkey'] ) ) {
-			update_option( 'lr_cloudflare_turnstile_secretkey', sanitize_text_field( $settings['lr_cloudflare_turnstile_secretkey'] ) );
+			update_option( 'eael_cloudflare_turnstile_secretkey', sanitize_text_field( $settings['lr_cloudflare_turnstile_secretkey'] ) );
 		}
 
 		//reCAPTCHA v3

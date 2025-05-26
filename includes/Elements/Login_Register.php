@@ -141,6 +141,7 @@ class Login_Register extends Widget_Base {
 		parent::__construct( $data, $args );
 		$this->user_can_register = get_option( 'users_can_register' );
 		$this->recaptcha_sitekey = get_option( 'eael_recaptcha_sitekey' );
+		$this->cloudflare_turnstile_sitekey = get_option( 'eael_cloudflare_turnstile_sitekey' );
 		$this->recaptcha_sitekey_v3 = get_option( 'eael_recaptcha_sitekey_v3' );
 		$this->recaptcha_badge_hide = get_option('eael_recaptcha_badge_hide');
 		$this->in_editor         = Plugin::instance()->editor->is_edit_mode();
@@ -255,6 +256,7 @@ class Login_Register extends Widget_Base {
 		/*----Content Tab----*/
 		do_action( 'eael/login-register/before-content-controls', $this );
 		$this->init_content_general_controls();
+		$this->init_bot_protection_controls();
 		$this->init_form_header_controls();
 		// Login Form Related---
 		$this->init_content_login_fields_controls();
@@ -700,26 +702,68 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 		$this->end_popover();
-		// Lost Password Form general settings ends
+
+		do_action( 'eael/login-register/after-general-controls', $this );
+
+		if ( !$this->pro_enabled ) {
+			$this->add_control( 'enable_ajax', [
+				'label'   => sprintf( __( 'Submit Form via AJAX %s', 'essential-addons-for-elementor-lite' ), '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
+				'type'    => Controls_Manager::SWITCHER,
+				'classes' => 'eael-pro-control',
+			] );
+		}
+
+		$this->end_controls_section();
+	}
+
+	protected function init_bot_protection_controls() {
+		$this->start_controls_section( 
+			'section_content_bot_protection', 
+			[
+				'label' => __( 'Bot Protection', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_control(
+			'bot_protection_notice',
+			[
+				'type'        => Controls_Manager::NOTICE,
+				'notice_type' => 'info',
+				'content'     => esc_html__( 'This helps protect your site from spam form submissions by bots.', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_control(
+			'google_recaptcha_heading',
+			[
+				'label' => __( 'Google reCAPTCHA', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::HEADING,
+			]
+		);
+
 		$this->add_control( 'enable_login_register_recaptcha', [
-			'label'        => __( 'Enable Google reCAPTCHA', 'essential-addons-for-elementor-lite' ),
-			'description'  => __( 'reCAPTCHA will prevent spam login from bots.', 'essential-addons-for-elementor-lite' ),
+			'label'        => __( 'Enable', 'essential-addons-for-elementor-lite' ),
 			'type'         => Controls_Manager::SWITCHER,
-			'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
-			'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
 			'return_value' => 'yes',
 			'default'      => 'yes',
 		] );
 
 		$this->add_control( 'login_register_recaptcha_version', [
-			'label'       => __( 'reCAPTCHA version', 'essential-addons-for-elementor-lite' ),
+			'label'       => __( 'version', 'essential-addons-for-elementor-lite' ),
 			'label_block' => false,
-			'type'        => Controls_Manager::SELECT,
-			'options'     => [
-				'v2' => __( 'v2', 'essential-addons-for-elementor-lite' ),
-				'v3'  => __( 'v3', 'essential-addons-for-elementor-lite' ),
-			],
+			'type'        => Controls_Manager::CHOOSE,
+			'toggle'      => false,
 			'default'     => 'v2',
+			'options'     => [
+				'v2' => [
+					'title' => __( 'v2', 'essential-addons-for-elementor-lite' ),
+					'text'  => 'V2',
+				],
+				'v3' => [
+					'title' => __( 'v3', 'essential-addons-for-elementor-lite' ),
+					'text'  => 'V3',
+				],
+			],
 			'condition'   => [
 				'enable_login_register_recaptcha' => 'yes',
 			],
@@ -809,15 +853,22 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 
-		do_action( 'eael/login-register/after-general-controls', $this );
+		$this->add_control(
+			'cloudflare_turnstile_heading',
+			[
+				'label' => __( 'Cloudflare Turnstile', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
 
-		if ( !$this->pro_enabled ) {
-			$this->add_control( 'enable_ajax', [
-				'label'   => sprintf( __( 'Submit Form via AJAX %s', 'essential-addons-for-elementor-lite' ), '<i class="eael-pro-labe eicon-pro-icon"></i>' ),
-				'type'    => Controls_Manager::SWITCHER,
-				'classes' => 'eael-pro-control',
-			] );
-		}
+		$this->add_control( 
+			'enable_login_register_cloudflare_turnstile', 
+			[
+			'label'        => __( 'Enable', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'return_value' => 'yes',
+		] );
 
 		$this->end_controls_section();
 	}
