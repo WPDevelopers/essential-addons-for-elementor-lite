@@ -1768,6 +1768,18 @@ class Filterable_Gallery extends Widget_Base
                 'selector' => '{{WRAPPER}} .gallery-item-caption-wrap.caption-style-hoverer .fg-item-title',
             ]
         );
+
+        $this->add_responsive_control(
+            'eael_fg_item_title_margin',
+            [
+                'label'      => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'rem', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .gallery-item-caption-wrap.caption-style-hoverer .fg-item-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
         
         $this->add_control(
             'eael_fg_item_hover_content_typography_heading',
@@ -1795,6 +1807,18 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'eael_fg_item_hover_content_typography',
                 'selector' => '{{WRAPPER}} .gallery-item-caption-wrap.caption-style-hoverer .fg-item-content',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_fg_item_content_margin',
+            [
+                'label'      => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'rem', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .gallery-item-caption-wrap.caption-style-hoverer .fg-item-content' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
             ]
         );
         
