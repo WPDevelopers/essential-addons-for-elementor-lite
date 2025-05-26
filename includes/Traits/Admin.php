@@ -669,6 +669,14 @@ trait Admin {
 							    'doc_link'    => 'https://essential-addons.com/docs/creative-buttons/',
 							    'is_activate' => boolval( $this->get_settings( 'creative-btn' ) )
 						    ],
+							'figma-to-elementor'   => [
+							    'key'         => 'figma-to-elementor',
+							    'title'       => __( 'Figma to Elementor', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/figma-to-elementor/',
+							    'doc_link'    => 'https://essential-addons.com/docs/figma-to-elementor/',
+							    'is_pro'      => true,
+							    'is_activate' => boolval( $this->get_settings( 'figma-to-elementor' ) )
+						    ],
 						    'team-members'         => [
 							    'key'         => 'team-members',
 							    'title'       => __( 'Team Member', 'essential-addons-for-elementor-lite' ),
