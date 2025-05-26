@@ -2,6 +2,8 @@
 
 namespace Essential_Addons_Elementor\Elements;
 
+use Elementor\Repeater;
+
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
 	exit;
@@ -75,14 +77,14 @@ class Dual_Color_Header extends Widget_Base
 		$this->start_controls_section(
 			'eael_section_dch_content_settings',
 			[
-				'label' => esc_html__('Content Settings', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__('Content', 'essential-addons-for-elementor-lite'),
 			]
 		);
 
 		$this->add_control(
 			'eael_dch_type',
 			[
-				'label' => esc_html__('Content Style', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__('Style', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SELECT,
 				'default' => 'dch-default',
 				'label_block' => false,
@@ -96,9 +98,20 @@ class Dual_Color_Header extends Widget_Base
 		);
 
 		$this->add_control(
+			'eael_show_dch_separator',
+			[
+				'label' => __('Separator', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
+				'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+				'return_value' => 'yes',
+			]
+		);
+
+		$this->add_control(
 			'eael_show_dch_icon_content',
 			[
-				'label' => __('Show Icon', 'essential-addons-for-elementor-lite'),
+				'label' => __('Icon', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 				'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
@@ -106,25 +119,11 @@ class Dual_Color_Header extends Widget_Base
 				'return_value' => 'yes',
 			]
 		);
-		$this->add_control(
-			'eael_show_dch_separator',
-			[
-				'label' => __('Show Separator', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::SWITCHER,
-				'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-				'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
-				'return_value' => 'yes',
-				'separator' => 'after',
-			]
-		);
 
-		/**
-		 * Condition: 'eael_show_dch_icon_content' => 'yes'
-		 */
 		$this->add_control(
 			'eael_dch_icon_new',
 			[
-				'label' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
+				'label' => '',
 				'type' => Controls_Manager::ICONS,
 				'fa4compatibility' => 'eael_dch_icon',
 				'default' => [
@@ -138,29 +137,28 @@ class Dual_Color_Header extends Widget_Base
 		);
 
 		$this->add_control(
-			'title_tag',
+			'eael_dch_title_content_heading',
 			[
-				'label' => __('Title Tag', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'h2',
-				'options' => [
-					'h1' => __('H1', 'essential-addons-for-elementor-lite'),
-					'h2' => __('H2', 'essential-addons-for-elementor-lite'),
-					'h3' => __('H3', 'essential-addons-for-elementor-lite'),
-					'h4' => __('H4', 'essential-addons-for-elementor-lite'),
-					'h5' => __('H5', 'essential-addons-for-elementor-lite'),
-					'h6' => __('H6', 'essential-addons-for-elementor-lite'),
-					'span' => __('Span', 'essential-addons-for-elementor-lite'),
-					'p' => __('P', 'essential-addons-for-elementor-lite'),
-					'div' => __('Div', 'essential-addons-for-elementor-lite'),
-				],
+				'label' => esc_html__('Title', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'eael_dch_enable_multiple_titles',
+			[
+				'label'        => esc_html__('Enable Multiple Headings', 'essential-addons-for-elementor-lite'),
+				'type'         => Controls_Manager::SWITCHER,
+				'default'      => '',
+				'return_value' => 'yes',
 			]
 		);
 
 		$this->add_control(
 			'eael_dch_first_title',
 			[
-				'label' => esc_html__('Title ( First Part )', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__('First Part', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXT,
 				'label_block' => true,
 				'default' => esc_html__('Dual Heading', 'essential-addons-for-elementor-lite'),
@@ -168,13 +166,16 @@ class Dual_Color_Header extends Widget_Base
 				'ai' => [
 					'active' => false,
 				],
+				'condition' => [
+					'eael_dch_enable_multiple_titles!' => 'yes',
+				],
 			]
 		);
 
 		$this->add_control(
 			'eael_dch_last_title',
 			[
-				'label' => esc_html__('Title ( Last Part )', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__('Last Part', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXT,
 				'label_block' => true,
 				'default' => esc_html__('Example', 'essential-addons-for-elementor-lite'),
@@ -182,16 +183,164 @@ class Dual_Color_Header extends Widget_Base
 				'ai' => [
 					'active' => false,
 				],
+				'condition' => [
+					'eael_dch_enable_multiple_titles!' => 'yes',
+				],
+			]
+		);
+
+		$multiple_titles = new Repeater();
+
+		$multiple_titles->add_control(
+			'eael_dch_title',
+			[
+				'label'       => esc_html__('Title', 'essential-addons-for-elementor-lite'),
+				'type'        => Controls_Manager::TEXT,
+				'label_block' => true,
+				'default'     => esc_html__('Title', 'essential-addons-for-elementor-lite'),
+				'dynamic'     => [ 'action' =>true ],
+				'ai'          => [ 'active' => false ],
+			]
+		);
+		
+		$multiple_titles->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'eael_dch_title_typography',
+				'selector' => '{{WRAPPER}} .eael-dual-header .eael-dch-title .eael-dch-title-text{{CURRENT_ITEM}}',
+			]
+		);
+
+		$multiple_titles->add_control(
+			'eael_dch_title_color',
+			[
+				'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .eael-dual-header .eael-dch-title .eael-dch-title-text{{CURRENT_ITEM}}' => 'color: {{VALUE}};',
+				],
+				'condition' => [
+					'eael_dch_title_use_gradient_color!' => 'yes',
+				],
+			]
+		);
+
+		$multiple_titles->add_control(
+			'eael_dch_title_use_gradient_color',
+			[
+				'label' => esc_html__('Use Gradient Color', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+			]
+		);
+
+		$multiple_titles->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name'           => 'eael_dch_title_gradient_color',
+				'types'          => [ 'gradient' ],
+				'selector'       => '{{WRAPPER}} .eael-dual-header .eael-dch-title .eael-dch-title-text{{CURRENT_ITEM}}',
+				'fields_options' => [
+					'background' => [
+            			'default' => 'gradient',
+					],
+					'color' => [
+						'default' => '#571fff',
+					],
+					'color_b' => [
+						'default' => '#9f12ff',
+					],
+				],
+				'condition' => [
+					'eael_dch_title_use_gradient_color' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_dch_multiple_titles',
+			[
+				'label'   => '',
+				'type'    => Controls_Manager::REPEATER,
+				'fields'  => $multiple_titles->get_controls(),
+				'default' => [
+					[
+						'eael_dch_title' => esc_html__('Multiple', 'essential-addons-for-elementor-lite'),
+					],
+					[
+						'eael_dch_title' => esc_html__('Heading', 'essential-addons-for-elementor-lite'),
+						'eael_dch_title_color' => '#4d4d4d'
+					],
+					[
+						'eael_dch_title' => esc_html__('Example', 'essential-addons-for-elementor-lite'),
+						'eael_dch_title_use_gradient_color' => 'yes'
+					],
+				],
+				'title_field' => '{{{eael_dch_title}}}',
+				'button_text' => esc_html__('Add Title', 'essential-addons-for-elementor-lite'),
+				'condition' => [
+					'eael_dch_enable_multiple_titles' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'title_tag',
+			[
+				'label'       => __('HTML Tag', 'essential-addons-for-elementor-lite'),
+				'type'        => Controls_Manager::CHOOSE,
+				'label_block' => true,
+				'default'     => 'h2',
+				'options' => [
+					'h1' => [
+						'title' => __( 'H1', 'essential-addons-for-elementor-lite' ),
+						'text' => 'H1',
+					],
+					'h2' => [
+						'title' => __( 'H2', 'essential-addons-for-elementor-lite' ),
+						'text' => 'H2',
+					],
+					'h3' => [
+						'title' => __( 'H3', 'essential-addons-for-elementor-lite' ),
+						'text' => 'H3',
+					],
+					'h4' => [
+						'title' => __( 'H4', 'essential-addons-for-elementor-lite' ),
+						'text' => 'H4',
+					],
+					'h5' => [
+						'title' => __( 'H5', 'essential-addons-for-elementor-lite' ),
+						'text' => 'H5',
+					],
+					'h6' => [
+						'title' => __( 'H6', 'essential-addons-for-elementor-lite' ),
+						'text' => 'H6',
+					],
+					'span' => [
+						'title' => __( 'Span', 'essential-addons-for-elementor-lite' ),
+						'text' => 'SPAN',
+					],
+					'p' => [
+						'title' => __( 'P', 'essential-addons-for-elementor-lite' ),
+						'text' => 'P',
+					],
+					'div' => [
+						'title' => __( 'Div', 'essential-addons-for-elementor-lite' ),
+						'text' => 'DIV',
+					],
+				],
+				'toggle' => false,
 			]
 		);
 
 		$this->add_control(
 			'eael_dch_subtext',
 			[
-				'label' => esc_html__('Sub Text', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::WYSIWYG,
+				'label'       => esc_html__('Sub Text', 'essential-addons-for-elementor-lite'),
+				'type'        => Controls_Manager::WYSIWYG,
 				'label_block' => true,
-				'default' => esc_html__('Insert a meaningful line to evaluate the headline.', 'essential-addons-for-elementor-lite'),
+				'default'     => esc_html__('Insert a meaningful line to evaluate the headline.', 'essential-addons-for-elementor-lite'),
+				'separator'   => 'before',
 			]
 		);
 
@@ -200,7 +349,6 @@ class Dual_Color_Header extends Widget_Base
 			[
 				'label' => esc_html__('Alignment', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::CHOOSE,
-				'label_block' => true,
 				'options' => [
 					'left' => [
 						'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
@@ -258,7 +406,7 @@ class Dual_Color_Header extends Widget_Base
 			'eael_section_dch_separator_settings',
 			[
 				'label' => __('Separator', 'essential-addons-for-elementor-lite'),
-				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+				'tab' => Controls_Manager::TAB_CONTENT,
 				'condition' => [
 					'eael_show_dch_separator' => 'yes',
 				],
@@ -268,32 +416,46 @@ class Dual_Color_Header extends Widget_Base
 		$this->add_control(
 			'eael_dch_separator_position',
 			[
-				'label' => __('Separator Position', 'essential-addons-for-elementor-lite'),
-				'type' => \Elementor\Controls_Manager::SELECT,
+				'label' => __('Position', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::CHOOSE,
 				'default' => 'after_title',
 				'options' => [
-					'before_title' => __('Before Title', 'essential-addons-for-elementor-lite'),
-					'after_title' => __('After Title', 'essential-addons-for-elementor-lite'),
+					'before_title' => [
+						'title' => __('Before Title', 'essential-addons-for-elementor-lite'),
+						'icon' => 'eicon-h-align-left',
+					],
+					'after_title' => [
+						'title' => __('After Title', 'essential-addons-for-elementor-lite'),
+						'icon' => 'eicon-h-align-right',
+					],
 				],
+				'toggle' => false
 			]
 		);
 		$this->add_control(
 			'eael_dch_separator_type',
 			[
-				'label' => __('Separator Type', 'essential-addons-for-elementor-lite'),
-				'type' => \Elementor\Controls_Manager::SELECT,
+				'label' => __('Type', 'essential-addons-for-elementor-lite'),
+				'type' => Controls_Manager::CHOOSE,
 				'default' => 'line',
 				'options' => [
-					'line' => __('Line', 'essential-addons-for-elementor-lite'),
-					'icon' => __('Icon', 'essential-addons-for-elementor-lite'),
+					'line' => [
+						'title' => __('Line', 'essential-addons-for-elementor-lite'),
+						'icon' => 'eicon-e-divider',
+					],
+					'icon' => [
+						'title' => __('Icon', 'essential-addons-for-elementor-lite'),
+						'icon' => 'eicon-icon',
+					],
 				],
+				'toggle' => false
 			]
 		);
 		$this->add_control(
 			'eael_dch_separator_icon',
 			[
-				'label' => __('Icon', 'essential-addons-for-elementor-lite'),
-				'type' => \Elementor\Controls_Manager::ICONS,
+				'label' => '',
+				'type' => Controls_Manager::ICONS,
 				'default' => [
 					'value' => 'fas fa-star',
 					'library' => 'solid',
@@ -314,7 +476,7 @@ class Dual_Color_Header extends Widget_Base
 		$this->start_controls_section(
 			'eael_section_dch_style_settings',
 			[
-				'label' => esc_html__('Dual Heading Style', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__('Dual Heading', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -398,7 +560,7 @@ class Dual_Color_Header extends Widget_Base
 		$this->start_controls_section(
 			'eael_section_dch_icon_style_settings',
 			[
-				'label' => esc_html__('Icon Style', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'eael_show_dch_icon_content' => 'yes',
@@ -409,7 +571,7 @@ class Dual_Color_Header extends Widget_Base
 		$this->add_control(
 			'eael_dch_icon_size',
 			[
-				'label' => __('Icon Size', 'essential-addons-for-elementor-lite'),
+				'label' => __('Size', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 36,
@@ -433,7 +595,7 @@ class Dual_Color_Header extends Widget_Base
 		$this->add_control(
 			'eael_dch_icon_color',
 			[
-				'label' => esc_html__('Icon Color', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#4d4d4d',
 				'selectors' => [
@@ -461,8 +623,23 @@ class Dual_Color_Header extends Widget_Base
 		$this->add_control(
 			'eael_dch_title_heading',
 			[
-				'label' => esc_html__('Title Style', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__('Title', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::HEADING,
+			]
+		);
+
+		$this->add_control(
+			'eael_dch_title_common_color',
+			[
+				'label'     => esc_html__('Color', 'essential-addons-for-elementor-lite'),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#9401D9',
+				'selectors' => [
+					'{{WRAPPER}} .eael-dual-header .eael-dch-title' => 'color: {{VALUE}};',
+				],
+				'condition' => [
+					'eael_dch_enable_multiple_titles' => 'yes'
+				],
 			]
 		);
 
@@ -475,6 +652,9 @@ class Dual_Color_Header extends Widget_Base
 				'selectors' => [
 					'{{WRAPPER}} .eael-dual-header .title' => 'color: {{VALUE}};',
 				],
+				'condition' => [
+					'eael_dch_enable_multiple_titles!' => 'yes'
+				],
 			]
 		);
 
@@ -482,7 +662,7 @@ class Dual_Color_Header extends Widget_Base
 			'eael_dch_dual_color_selector',
 			[
 				'label' => esc_html__('Dual Color', 'essential-addons-for-elementor-lite'),
-				'type' => \Elementor\Controls_Manager::CHOOSE,
+				'type' => Controls_Manager::CHOOSE,
 				'options' => [
 					'solid-color' => [
 						'title' => __('Color', 'essential-addons-for-elementor-lite'),
@@ -492,6 +672,9 @@ class Dual_Color_Header extends Widget_Base
 						'title' => __('Gradient', 'essential-addons-for-elementor-lite'),
 						'icon' => 'eicon-barcode',
 					],
+				],
+				'condition' => [
+					'eael_dch_enable_multiple_titles!' => 'yes'
 				],
 				'toggle' => true,
 				'default' => 'solid-color',
@@ -508,7 +691,8 @@ class Dual_Color_Header extends Widget_Base
 					'{{WRAPPER}} .eael-dual-header .title span.lead' => 'color: {{VALUE}};',
 				],
 				'condition' => [
-					'eael_dch_dual_color_selector' => 'solid-color'
+					'eael_dch_dual_color_selector' => 'solid-color',
+					'eael_dch_enable_multiple_titles!' => 'yes'
 				],
 			]
 		);
@@ -520,7 +704,8 @@ class Dual_Color_Header extends Widget_Base
 				'type' => Controls_Manager::COLOR,
 				'default' => '#062ACA',
 				'condition' => [
-					'eael_dch_dual_color_selector' => 'gradient-color'
+					'eael_dch_dual_color_selector' => 'gradient-color',
+					'eael_dch_enable_multiple_titles!' => 'yes'
 				],
 			]
 		);
@@ -532,7 +717,8 @@ class Dual_Color_Header extends Widget_Base
 				'type' => Controls_Manager::COLOR,
 				'default' => '#9401D9',
 				'condition' => [
-					'eael_dch_dual_color_selector' => 'gradient-color'
+					'eael_dch_dual_color_selector' => 'gradient-color',
+					'eael_dch_enable_multiple_titles!' => 'yes'
 				],
 			]
 		);
@@ -548,7 +734,7 @@ class Dual_Color_Header extends Widget_Base
 		$this->add_control(
 			'eael_dch_sub_title_heading',
 			[
-				'label' => esc_html__('Sub-title Style ', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__('Sub-title', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -638,7 +824,7 @@ class Dual_Color_Header extends Widget_Base
 			'eael_section_dch_separator_alignment',
 			[
 				'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
-				'type' => \Elementor\Controls_Manager::CHOOSE,
+				'type' => Controls_Manager::CHOOSE,
 				'options' => [
 					'flex-start' => [
 						'title' => __('Flex Start', 'essential-addons-for-elementor-lite'),
@@ -701,7 +887,7 @@ class Dual_Color_Header extends Widget_Base
 			'title_color',
 			[
 				'label' => __('Color', 'essential-addons-for-elementor-lite'),
-				'type' => \Elementor\Controls_Manager::COLOR,
+				'type' => Controls_Manager::COLOR,
 				'global' => [
 					'default' => Global_Colors::COLOR_PRIMARY
 				],
@@ -796,7 +982,7 @@ class Dual_Color_Header extends Widget_Base
 			]
 		);
 		$this->add_group_control(
-			\Elementor\Group_Control_Background::get_type(),
+			Group_Control_Background::get_type(),
 			[
 				'name' => 'eael_dch_separator_left_bg',
 				'label' => __('Background', 'essential-addons-for-elementor-lite'),
@@ -876,7 +1062,7 @@ class Dual_Color_Header extends Widget_Base
 			]
 		);
 		$this->add_group_control(
-			\Elementor\Group_Control_Background::get_type(),
+			Group_Control_Background::get_type(),
 			[
 				'name' => 'eael_dch_separator_right_bg',
 				'label' => __('Background', 'essential-addons-for-elementor-lite'),
@@ -916,13 +1102,25 @@ class Dual_Color_Header extends Widget_Base
 		$separator_markup .= '</div>'; 
 		
 		$title_tag = Helper::eael_validate_html_tag( $settings['title_tag'] );
-		$title_html = '<' . $title_tag . ' class="title">';
-		$title_html .= '<span';
-		if( $has_gradient ){
-			$title_html .= ' style="' . $gradient_style . '" ';
+		$title_html = '<' . $title_tag . ' class="title eael-dch-title">';
+
+		if( ! empty( $settings['eael_dch_enable_multiple_titles'] ) && 'yes' == $settings['eael_dch_enable_multiple_titles'] ) {
+			foreach( $settings['eael_dch_multiple_titles'] as $title ) {
+				$classes = 'eael-dch-title-text elementor-repeater-item-' . esc_attr( $title['_id'] );
+				if( 'yes' == $title['eael_dch_title_use_gradient_color'] ) {
+					$classes .= ' eael-dch-title-gradient';
+				}		
+				$title_html .= '<span class="' . $classes . '">' . $title['eael_dch_title'] . '</span> ';
+			}
+		} else {
+			$title_html .= '<span';
+			if( $has_gradient ){
+				$title_html .= ' style="' . $gradient_style . '" ';
+			}
+			$title_html .= ' class="eael-dch-title-text eael-dch-title-lead lead ' . $settings['eael_dch_dual_color_selector'] . '">' . $settings['eael_dch_first_title'] . '</span>';
+			$title_html .= ' <span class="eael-dch-title-text">' . $settings['eael_dch_last_title'] . '</span>';
 		}
-		$title_html .= ' class="lead ' . $settings['eael_dch_dual_color_selector'] . '">' . $settings['eael_dch_first_title'] . '</span>';
-		$title_html .= ' <span>' . $settings['eael_dch_last_title'] . '</span>';
+		
 		$title_html .= '</' . $title_tag . '>';
 
 		if ('dch-default' == $settings['eael_dch_type']) : ?>
@@ -932,11 +1130,15 @@ class Dual_Color_Header extends Widget_Base
 				echo ($settings['eael_dch_separator_position'] === 'before_title' ? $separator_markup : '');
 				echo wp_kses( $title_html, Helper::eael_allowed_tags() );
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo ( $settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : ''); ?>
-				<span class="subtext"><?php
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo $this->parse_text_editor( $settings['eael_dch_subtext'] ); ?></span>
-				<?php if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
+				echo ( $settings['eael_dch_separator_position'] === 'after_title' ? $separator_markup : '');
+
+				if( ! empty( $settings['eael_dch_subtext'] ) ) : ?>
+					<span class="subtext"><?php
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					echo $this->parse_text_editor( $settings['eael_dch_subtext'] ); ?></span>
+				<?php endif;
+
+				if ('yes' == $settings['eael_show_dch_icon_content']) : ?>
 					<?php if ($icon_is_new || $icon_migrated) {
 						echo '<span class="eael-dch-svg-icon">';
 						Icons_Manager::render_icon( $settings['eael_dch_icon_new'], [ 'aria-hidden' => 'true' ] );
