@@ -4,7 +4,7 @@ Tags: elementor, elements, elementor addon, elementor widget, woocommerce elemen
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.1.14
+Stable tag: 6.1.15
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -313,6 +313,13 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.1.15 - 25/05/2025 =
+
+- Improved: EA Filterable Gallery | Revamped Controls & Layouts
+- Improved: EA Dual Color Heading | Added Multiple Heading Option
+- Fixed: EA Login/Register Form | Google Social Login assigning "Subscriber" instead of "Editor" role after Signup
+- Few minor bug fixes & improvements
 
 = 6.1.14 - 21/05/2025 =
 
