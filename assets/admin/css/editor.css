@@ -310,3 +310,18 @@
 	position: relative;
 	text-align: start;
 }
+
+/* hides original text and adds new text for Dual Color Header Gradient */
+.elementor-control-eael_dch_title_gradient_color_background {
+	display: none !important;
+}
+.elementor-control-eael_dch_title_gradient_color_background .elementor-control-title {
+  font-size: 0 !important; /* hides original text */
+  position: relative;
+}
+
+.elementor-control-eael_dch_title_gradient_color_background .elementor-control-title::before {
+  content: "Set Gradient"; /* new text */
+  font-size: 12px;
+  color: inherit;
+}
