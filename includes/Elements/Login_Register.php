@@ -128,6 +128,12 @@ class Login_Register extends Widget_Base {
 	protected $recaptcha_badge_hide;
 
 	/**
+	 * Cloudflare Turnstile Site key
+	 * @var string|false
+	 */
+	protected $cloudflare_turnstile_sitekey;
+
+	/**
 	 * @var mixed|void
 	 */
 	protected $pro_enabled;
@@ -146,6 +152,14 @@ class Login_Register extends Widget_Base {
 		$this->recaptcha_badge_hide = get_option('eael_recaptcha_badge_hide');
 		$this->in_editor         = Plugin::instance()->editor->is_edit_mode();
 		$this->pro_enabled       = apply_filters( 'eael/pro_enabled', false );
+
+		if( ! empty( $this->cloudflare_turnstile_sitekey ) ){
+			wp_register_script( 'eael-cloudflare', 'https://challenges.cloudflare.com/turnstile/v0/api.js' );
+
+			if( $this->in_editor ){
+				wp_enqueue_script( 'eael-cloudflare' );
+			}
+		}
 
 		if ( $this->recaptcha_badge_hide ) {
 			add_filter( 'body_class', [ $this, 'add_login_register_body_class' ] );
@@ -886,6 +900,30 @@ class Login_Register extends Widget_Base {
 					'enable_cloudflare_turnstile' => 'yes',
 				],
 			] );
+		}
+
+		$this->add_control( 
+			'enable_cloudflare_turnstile_on_login',
+			[
+				'label'     => __( 'Apply on Login Form', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'condition' => [
+					'enable_cloudflare_turnstile' => 'yes',
+				],
+			]
+		);
+
+		if( $this->user_can_register ) {
+			$this->add_control( 
+				'enable_cloudflare_turnstile_on_register',
+				[
+					'label'     => __( 'Apply on Registration Form', 'essential-addons-for-elementor-lite' ),
+					'type'      => Controls_Manager::SWITCHER,
+					'condition' => [
+						'enable_cloudflare_turnstile' => 'yes',
+					],
+				]
+			);
 		}
 
 		$this->end_controls_section();
@@ -5875,7 +5913,7 @@ class Login_Register extends Widget_Base {
 
 								<?php
 								do_action( 'eael/login-register/before-recaptcha', $this );
-								$this->print_recaptcha_node( 'login' );
+								$this->print_bot_protection_node( 'login' );
 								do_action( 'eael/login-register/after-recaptcha', $this );
 								do_action( 'eael/login-register/before-login-footer', $this );
 								?>
@@ -6230,7 +6268,7 @@ class Login_Register extends Widget_Base {
 							endforeach;
 							$this->print_necessary_hidden_fields( 'register' );
 							$this->print_terms_condition_notice();
-							$this->print_recaptcha_node( 'register' );
+							$this->print_bot_protection_node( 'register' );
 							?>
 
                             <div class="eael-lr-footer">
@@ -6873,7 +6911,7 @@ class Login_Register extends Widget_Base {
 		}
 	}
 
-	protected function print_recaptcha_node( $form_type = 'login' ) {
+	protected function print_bot_protection_node( $form_type = 'login' ) {
 		if ( 'yes' === $this->get_settings_for_display( "enable_{$form_type}_recaptcha" ) || 'v3' === $this->ds["login_register_recaptcha_version"] ) {
 			$id = "{$form_type}-recaptcha-node-" . esc_attr( $this->get_id() );
 			echo "<input type='hidden' name='g-recaptcha-enabled' value='1'/><div id='" . esc_attr( $id ) . "' class='eael-recaptcha-wrapper'></div>";
@@ -6881,6 +6919,12 @@ class Login_Register extends Widget_Base {
 			if( 'v3' === $this->ds["login_register_recaptcha_version"] && ( ! $this->ds[ 'enable_ajax' ] ) ){
 				echo "<input type='hidden' name='action' value='eael_login_register_form'/>";
 			}
+		}
+
+		if ( 'yes' === $this->get_settings_for_display( "enable_cloudflare_turnstile" ) && ( 'yes' === $this->get_settings_for_display( "enable_cloudflare_turnstile_on_{$form_type}" ) ) ) {
+			$id = "eael-{$form_type}-cloudflare-turnstile-" . esc_attr( $this->get_id() );
+			wp_enqueue_script( 'eael-cloudflare' );
+			echo "<div class='cf-turnstile' data-theme='auto' data-sitekey='{$this->cloudflare_turnstile_sitekey}'></div>";
 		}
 	}
 

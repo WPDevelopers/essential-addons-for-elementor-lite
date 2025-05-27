@@ -1585,13 +1585,13 @@ trait Admin {
 							    'fields' => [
 								    [
 									    'name'        => 'lr_cloudflare_turnstile_sitekey',
-									    'value'       => get_option( 'lr_cloudflare_turnstile_sitekey', '' ),
+									    'value'       => get_option( 'eael_cloudflare_turnstile_sitekey', '' ),
 									    'label'       => __( 'Site Key:', 'essential-addons-for-elementor-lite' ),
 									    'placeholder' => __( 'Site Key', 'essential-addons-for-elementor-lite' ),
 								    ],
 								    [
 									    'name'        => 'lr_cloudflare_turnstile_secretkey',
-									    'value'       => get_option( 'lr_cloudflare_turnstile_secretkey', '' ),
+									    'value'       => get_option( 'eael_cloudflare_turnstile_secretkey', '' ),
 									    'label'       => __( 'Secret Key:', 'essential-addons-for-elementor-lite' ),
 									    'placeholder' => __( 'Secret Key', 'essential-addons-for-elementor-lite' ),
 								    ]
