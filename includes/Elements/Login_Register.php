@@ -757,11 +757,11 @@ class Login_Register extends Widget_Base {
 			'options'     => [
 				'v2' => [
 					'title' => __( 'v2', 'essential-addons-for-elementor-lite' ),
-					'text'  => 'V2',
+					'text'  => 'v2',
 				],
 				'v3' => [
 					'title' => __( 'v3', 'essential-addons-for-elementor-lite' ),
-					'text'  => 'V3',
+					'text'  => 'v3',
 				],
 			],
 			'condition'   => [
@@ -806,10 +806,12 @@ class Login_Register extends Widget_Base {
 		}
 		
 		if ( empty( $this->recaptcha_sitekey ) ) {
-			$this->add_control( 'eael_recaptcha_keys_missing', [
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => sprintf( __( 'reCAPTCHA v2 API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<strong>', '</strong>' ),
-				'content_classes' => 'eael-warning',
+			$this->add_control( 
+				'eael_recaptcha_keys_missing', [
+				'type'            => Controls_Manager::NOTICE,
+				'notice_type'     => 'warning',
+				'heading'         => __( 'reCAPTCHA v3 API keys are missing', 'essential-addons-for-elementor-lite' ),
+				'content'         => sprintf( __( 'Please add them from  %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<a href="'.esc_url( site_url( '/wp-admin/admin.php?page=eael-settings' ) ).'" target="_blank"><strong>', '</strong></a>' ),
 				'condition'       => [
 					'enable_login_register_recaptcha' => 'yes',
 					'login_register_recaptcha_version' => 'v2',
@@ -818,10 +820,12 @@ class Login_Register extends Widget_Base {
 		}
 
 		if ( empty( $this->recaptcha_sitekey_v3 ) ) {
-			$this->add_control( 'eael_recaptcha_keys_missing_v3', [
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => sprintf( __( 'reCAPTCHA v3 API keys are missing. Please add them from %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<strong>', '</strong>' ),
-				'content_classes' => 'eael-warning',
+			$this->add_control( 
+				'eael_recaptcha_keys_missing_v3', [
+				'type'            => Controls_Manager::NOTICE,
+				'notice_type'     => 'warning',
+				'heading'         => __( 'reCAPTCHA v3 API keys are missing', 'essential-addons-for-elementor-lite' ),
+				'content'         => sprintf( __( 'Please add them from  %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<a href="'.esc_url( site_url( '/wp-admin/admin.php?page=eael-settings' ) ).'" target="_blank"><strong>', '</strong></a>' ),
 				'condition'       => [
 					'enable_login_register_recaptcha' => 'yes',
 					'login_register_recaptcha_version' => 'v3',
@@ -863,12 +867,26 @@ class Login_Register extends Widget_Base {
 		);
 
 		$this->add_control( 
-			'enable_login_register_cloudflare_turnstile', 
+			'enable_cloudflare_turnstile', 
 			[
 			'label'        => __( 'Enable', 'essential-addons-for-elementor-lite' ),
 			'type'         => Controls_Manager::SWITCHER,
 			'return_value' => 'yes',
 		] );
+
+
+		if ( empty( $this->cloudflare_turnstile_sitekey ) ) {
+			$this->add_control( 
+				'eael_cloudflare_turnstile_sitekey_missing', [
+				'type'            => Controls_Manager::NOTICE,
+				'notice_type'     => 'warning',
+				'heading'         => __( 'Cloudflare Turnstile Site Key is missing', 'essential-addons-for-elementor-lite' ),
+				'content'         => sprintf( __( 'Please add it from  %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<a href="'.esc_url( site_url( '/wp-admin/admin.php?page=eael-settings' ) ).'" target="_blank"><strong>', '</strong></a>' ),
+				'condition'       => [
+					'enable_cloudflare_turnstile' => 'yes',
+				],
+			] );
+		}
 
 		$this->end_controls_section();
 	}
