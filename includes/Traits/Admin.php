@@ -675,6 +675,7 @@ trait Admin {
 							    'demo_link'   => 'https://essential-addons.com/figma-to-elementor/',
 							    'doc_link'    => 'https://essential-addons.com/docs/figma-to-elementor/',
 							    'is_pro'      => true,
+								'promotion'   => 'beta',
 							    'is_activate' => boolval( $this->get_settings( 'figma-to-elementor' ) )
 						    ],
 						    'team-members'         => [
