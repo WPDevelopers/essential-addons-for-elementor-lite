@@ -67,11 +67,71 @@ class Team_Member extends Widget_Base {
 
 	protected function register_controls() {
 
+		$this->start_controls_section(
+			'eael_section_team_members_styles_general',
+			[
+				'label' => esc_html__( 'Layout', 'essential-addons-for-elementor-lite'),
+			]
+		);
+
+		$template_list = apply_filters('eael_team_member_style_presets_options', [
+			'eael-team-members-simple'        => esc_html__( 'Simple Style', 		'essential-addons-for-elementor-lite' ),
+			'eael-team-members-overlay'       => esc_html__( 'Overlay Style', 	'essential-addons-for-elementor-lite' ),
+			'eael-team-members-centered'      => esc_html__( 'Centered Style', 	'essential-addons-for-elementor-lite' ),
+			'eael-team-members-circle'        => esc_html__( 'Circle Style', 	'essential-addons-for-elementor-lite' ),
+			'eael-team-members-social-bottom' => esc_html__( 'Social on Bottom', 	'essential-addons-for-elementor-lite' ),
+			'eael-team-members-social-right'  => esc_html__( 'Social on Right', 	'essential-addons-for-elementor-lite' ),
+		]);
+
+		$layout_options = [];
+
+		if( ! empty( $template_list ) ){
+            $image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/team-preset-';
+            foreach( $template_list as $key => $label ){
+                $layout_options[ $key ] = [
+                    'title' => $label,
+                    'image' => $image_path . str_replace( 'eael-team-members-', '', $key ) . '.png'
+                ];
+            }
+        }
+
+		$this->add_control(
+			'eael_team_members_preset',
+			[
+				'label'       => esc_html__( 'Skin', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => $layout_options,
+				'default'     => 'eael-team-members-simple',
+				'label_block' => true,
+                'toggle'      => false,
+                'image_choose'=> true,
+			]
+		);
+
+		$team_member_style_presets_condition = apply_filters('eael_team_member_style_presets_condition', [
+			'eael-team-members-centered',
+			'eael-team-members-circle',
+			'eael-team-members-social-bottom',
+			'eael-team-members-social-right'
+		]);
+
+		$this->add_control(
+			'eael_team_members_preset_pro_alert',
+			[
+				'label'     => esc_html__( 'Only available in pro version!', 'essential-addons-for-elementor-lite'),
+				'type'      => Controls_Manager::HEADING,
+				'condition' => [
+					'eael_team_members_preset' => $team_member_style_presets_condition
+				]
+			]
+		);
+
+		$this->end_controls_section();
 
   		$this->start_controls_section(
   			'eael_section_team_member_image',
   			[
-  				'label' => esc_html__( 'Team Member Image', 'essential-addons-for-elementor-lite')
+  				'label' => esc_html__( 'Image', 'essential-addons-for-elementor-lite')
   			]
   		);
 
@@ -79,8 +139,8 @@ class Team_Member extends Widget_Base {
 		$this->add_control(
 			'eael_team_member_image',
 			[
-				'label' => __( 'Team Member Avatar', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::MEDIA,
+				'label'   => '',
+				'type'    => Controls_Manager::MEDIA,
 				'default' => [
 					'url' => Utils::get_placeholder_image_src(),
 				],
@@ -97,21 +157,20 @@ class Team_Member extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Image_Size::get_type(),
 			[
-				'name' => 'thumbnail',
-				'default' => 'full',
+				'name'      => 'thumbnail',
+				'default'   => 'full',
 				'condition' => [
 					'eael_team_member_image[url]!' => '',
 				],
 			]
 		);
 
-
 		$this->end_controls_section();
 
   		$this->start_controls_section(
   			'eael_section_team_member_content',
   			[
-  				'label' => esc_html__( 'Team Member Content', 'essential-addons-for-elementor-lite')
+  				'label' => esc_html__( 'Content', 'essential-addons-for-elementor-lite')
   			]
   		);
 
@@ -394,74 +453,12 @@ class Team_Member extends Widget_Base {
 		}
 
 		$this->start_controls_section(
-			'eael_section_team_members_styles_general',
+			'content_card_style_section',
 			[
-				'label' => esc_html__( 'Team Member Styles', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Content Card', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
-
-		$template_list = apply_filters('eael_team_member_style_presets_options', [
-			'eael-team-members-simple'        => esc_html__( 'Simple Style', 		'essential-addons-for-elementor-lite' ),
-			'eael-team-members-overlay'       => esc_html__( 'Overlay Style', 	'essential-addons-for-elementor-lite' ),
-			'eael-team-members-centered'      => esc_html__( 'Centered Style', 	'essential-addons-for-elementor-lite' ),
-			'eael-team-members-circle'        => esc_html__( 'Circle Style', 	'essential-addons-for-elementor-lite' ),
-			'eael-team-members-social-bottom' => esc_html__( 'Social on Bottom', 	'essential-addons-for-elementor-lite' ),
-			'eael-team-members-social-right'  => esc_html__( 'Social on Right', 	'essential-addons-for-elementor-lite' ),
-		]);
-
-		$layout_options = [];
-
-		if( ! empty( $template_list ) ){
-            $image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/team-preset-';
-            foreach( $template_list as $key => $label ){
-                $layout_options[ $key ] = [
-                    'title' => $label,
-                    'image' => $image_path . str_replace( 'eael-team-members-', '', $key ) . '.png'
-                ];
-            }
-        }
-
-		$this->add_control(
-			'eael_team_members_preset',
-			[
-				'label'       => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
-				'type'        => Controls_Manager::CHOOSE,
-				'options'     => $layout_options,
-				'default'     => 'eael-team-members-simple',
-				'label_block' => true,
-                'toggle'      => false,
-                'image_choose'=> true,
-			]
-		);
-
-		$team_member_style_presets_condition = apply_filters('eael_team_member_style_presets_condition', [
-			'eael-team-members-centered',
-			'eael-team-members-circle',
-			'eael-team-members-social-bottom',
-			'eael-team-members-social-right'
-		]);
-
-		$this->add_control(
-			'eael_team_members_preset_pro_alert',
-			[
-				'label'     => esc_html__( 'Only available in pro version!', 'essential-addons-for-elementor-lite'),
-				'type'      => Controls_Manager::HEADING,
-				'condition' => [
-					'eael_team_members_preset' => $team_member_style_presets_condition
-				]
-			]
-		);
-
-		$this->add_control(
-			'content_card_style',
-			[
-				'label' => __( 'Content Card', 'essential-addons-for-elementor-lite'),
-				'type' => Controls_Manager::HEADING,
-				'separator'	=> 'before'
-			]
-		);
-
 
 		$this->add_control(
 			'content_card_height',
@@ -488,7 +485,7 @@ class Team_Member extends Widget_Base {
 		$this->add_control(
 			'eael_team_members_enable_text_overlay',
 			[
-				'label' => esc_html__( 'Enable Description Overlay', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Description Overlay', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => 'no',
 				'return_value' => 'yes',
@@ -529,7 +526,7 @@ class Team_Member extends Widget_Base {
 		$this->add_control(
 			'eael_team_members_background',
 			[
-				'label' => esc_html__( 'Content Background Color', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
@@ -542,7 +539,7 @@ class Team_Member extends Widget_Base {
 		$this->add_control(
 			'eael_team_members_alignment',
 			[
-				'label' => esc_html__( 'Set Alignment', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::CHOOSE,
 				'label_block' => true,
 				'options' => [
@@ -571,7 +568,7 @@ class Team_Member extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_team_members_padding',
 			[
-				'label' => esc_html__( 'Content Padding', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Padding', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -606,7 +603,7 @@ class Team_Member extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_team_members_image_styles',
 			[
-				'label' => esc_html__( 'Team Member Image Style', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Image', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -614,7 +611,7 @@ class Team_Member extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_team_members_image_width',
 			[
-				'label' => esc_html__( 'Image Width', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Width', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 100,
@@ -724,7 +721,7 @@ class Team_Member extends Widget_Base {
 		$this->add_control(
 			'eael_team_members_name_color',
 			[
-				'label' => esc_html__( 'Member Name Color', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#272727',
 				'selectors' => [
@@ -753,7 +750,7 @@ class Team_Member extends Widget_Base {
 		$this->add_control(
 			'eael_team_members_position_color',
 			[
-				'label' => esc_html__( 'Job Position Color', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#272727',
 				'selectors' => [
@@ -782,7 +779,7 @@ class Team_Member extends Widget_Base {
 		$this->add_control(
 			'eael_team_members_description_color',
 			[
-				'label' => esc_html__( 'Description Color', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#272727',
 				'selectors' => [
@@ -807,7 +804,7 @@ class Team_Member extends Widget_Base {
 		$this->start_controls_section(
 			'eael_section_team_members_social_profiles_styles',
 			[
-				'label' => esc_html__( 'Social Profiles Style', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Social Profiles', 'essential-addons-for-elementor-lite'),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -840,7 +837,7 @@ class Team_Member extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_team_members_social_profiles_padding',
 			[
-				'label' => esc_html__( 'Social Profiles Margin', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Margin', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -853,7 +850,7 @@ class Team_Member extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_team_members_social_icons_padding',
 			[
-				'label'      => esc_html__( 'Social Icon Padding', 'essential-addons-for-elementor-lite'),
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
@@ -865,7 +862,7 @@ class Team_Member extends Widget_Base {
 		$this->add_responsive_control(
 			'eael_team_members_social_icons_spacing',
 			[
-				'label'      => esc_html__( 'Social Icon Distance', 'essential-addons-for-elementor-lite'),
+				'label'      => esc_html__( 'Icon Distance', 'essential-addons-for-elementor-lite'),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
@@ -878,7 +875,7 @@ class Team_Member extends Widget_Base {
 			'eael_team_members_social_icons_used_gradient_bg',
 			[
 				'label' => __( 'Use Gradient Background', 'essential-addons-for-elementor-lite' ),
-				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'type' => Controls_Manager::SWITCHER,
 				'label_on' => __( 'Yes', 'essential-addons-for-elementor-lite' ),
 				'label_off' => __( 'No', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
