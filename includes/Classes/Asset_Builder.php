@@ -271,7 +271,10 @@ class Asset_Builder {
 
 		if ( $this->is_edit_mode() || $this->is_preview_mode() ) {
 			if ( $this->custom_js ) {
+
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				printf( '<script>%1$s</script>', 'var localize =' . wp_json_encode( $this->localize_objects ) );
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				printf( '<script id="eael-inline-js">%s</script>', $this->custom_js );
 			}
 		}
@@ -284,6 +287,7 @@ class Asset_Builder {
 	public function add_inline_css() {
 		if ( $this->is_edit_mode() || $this->is_preview_mode() ) {
 			if ( $this->css_strings ) {
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				printf( '<style id="eael-inline-css">%s</style>', $this->css_strings );
 			}
 		}

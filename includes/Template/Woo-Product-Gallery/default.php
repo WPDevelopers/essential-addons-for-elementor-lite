@@ -82,13 +82,14 @@ if ( $gallery_style_preset == 'eael-product-preset-4' ) { ?>
 				do_action( 'woocommerce_before_shop_loop_item' );
 			}
 
-			echo ( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '. esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) .'">'. $stockout_text .'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '. esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) .'">' . $sale_text . '</span>' : '') );
+			echo ( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '. esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) .'">'. esc_html( $stockout_text ) .'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '. esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) .'">' . esc_html( $sale_text ) . '</span>' : '') );
 
 			if( $should_print_image_clickable ) {
-				echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+				echo '<a href="' . esc_url( $product->get_permalink() ) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
 			}?>
 			<?php
-			 echo $product->get_image( $settings['eael_product_gallery_image_size_size'], ['loading' => 'eager', 'alt' => esc_attr( $product->get_title() ) ]  );
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo $product->get_image( $settings['eael_product_gallery_image_size_size'], ['loading' => 'eager', 'alt' => esc_attr( $product->get_title() ) ]  );
 			if ( $should_print_image_clickable ) {
 				echo '</a>';
 			}
@@ -133,10 +134,12 @@ else if (($gallery_style_preset == 'eael-product-preset-3') || ($gallery_style_p
                 <div class="product-image-wrap">
                 <div class="image-wrap">
 					<?php if( $should_print_image_clickable ) {
-						echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+						echo '<a href="' . esc_url( $product->get_permalink() ) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
 					}
 
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					echo ( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '. esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) .'">'. $stockout_text .'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '. esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) .'">' . wp_kses( $sale_text, Helper::eael_allowed_tags() ) . '</span>' : '') );
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					echo $product->get_image($settings['eael_product_gallery_image_size_size'], ['loading' => 'eager', 'alt' => esc_attr( $product->get_title() )]);
 
 					 if( $should_print_image_clickable ) {
@@ -151,15 +154,14 @@ else if (($gallery_style_preset == 'eael-product-preset-3') || ($gallery_style_p
 							<?php } ?>
 							<?php if( $should_print_quick_view ){?>
                                 <li class="eael-product-quick-view">
-                                    <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
+                                    <a id="eael_quick_view_<?php echo esc_attr( uniqid() ); ?>" data-quickview-setting="<?php echo esc_attr( htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES) ); ?>"
                                        class="eael-product-gallery-open-popup open-popup-link">
                                         <i class="fas fa-eye"></i>
                                     </a>
                                 </li>
 							<?php } ?>
 							<?php if( $should_print_link ){?>
-                                <li class="view-details"><?php echo '<a href="' . $product->get_permalink
-										() . '" aria-label="View Details about ' . esc_attr( $product->get_title() ). '"><i class="fas fa-link"></i></a>'; ?></li>
+                                <li class="view-details"><?php echo '<a href="' . esc_url( $product->get_permalink() ) . '" aria-label="View Details about ' . esc_attr( $product->get_title() ). '"><i class="fas fa-link"></i></a>'; ?></li>
 							<?php } ?>
                         </ul>
 					<?php } else { ?>
@@ -170,7 +172,7 @@ else if (($gallery_style_preset == 'eael-product-preset-3') || ($gallery_style_p
 
 							<?php if( $should_print_quick_view ){?>
                                 <li class="eael-product-quick-view">
-                                    <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
+                                    <a id="eael_quick_view_<?php echo esc_attr( uniqid() ); ?>" data-quickview-setting="<?php echo esc_attr( htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES) ); ?>"
                                        class="eael-product-gallery-open-popup open-popup-link">
                                         <i class="fas fa-eye"></i>
                                     </a>
@@ -178,7 +180,7 @@ else if (($gallery_style_preset == 'eael-product-preset-3') || ($gallery_style_p
 							<?php } ?>
 
 							<?php if( $should_print_link ){?>
-                                <li class="view-details" title="Details" aria-label="View Details about <?php echo esc_attr( $product->get_title() ); ?>"><?php echo '<a href="' . $product->get_permalink() . '"><i class="fas fa-link"></i></a>'; ?></li>
+                                <li class="view-details" title="Details" aria-label="View Details about <?php echo esc_attr( $product->get_title() ); ?>"><?php echo '<a href="' . esc_url( $product->get_permalink() ) . '"><i class="fas fa-link"></i></a>'; ?></li>
 							<?php } ?>
                         </ul>
 					<?php }
@@ -237,11 +239,13 @@ else if ($gallery_style_preset == 'eael-product-preset-1') {
             <div class="product-image-wrap">
                 <div class="image-wrap">
 					<?php if( $should_print_image_clickable ) {
-						echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+						echo '<a href="' . esc_url( $product->get_permalink() ) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
 					}
 
-	                    echo( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock ' . esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) . '">' . Helper::eael_wp_kses( $stockout_text ) . '</span>' : ( $product->is_on_sale() ? '<span class="eael-onsale ' . esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) . '">' . wp_kses( $sale_text, Helper::eael_allowed_tags() ) . '</span>' : '' ) );
-	                    echo $product->get_image( $settings['eael_product_gallery_image_size_size'], ['loading' => 'eager', 'alt' => esc_attr( $product->get_title() )] );
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					echo( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock ' . esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) . '">' . Helper::eael_wp_kses( $stockout_text ) . '</span>' : ( $product->is_on_sale() ? '<span class="eael-onsale ' . esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) . '">' . wp_kses( $sale_text, Helper::eael_allowed_tags() ) . '</span>' : '' ) );
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					echo $product->get_image( $settings['eael_product_gallery_image_size_size'], ['loading' => 'eager', 'alt' => esc_attr( $product->get_title() )] );
 
 					if( $should_print_image_clickable ) {
 						echo '</a>';
@@ -254,15 +258,14 @@ else if ($gallery_style_preset == 'eael-product-preset-1') {
 						<?php } ?>
 						<?php if( $should_print_quick_view ){?>
                             <li class="eael-product-quick-view">
-                                <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
+                                <a id="eael_quick_view_<?php echo esc_attr( uniqid() ); ?>" data-quickview-setting="<?php echo esc_attr( htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES) ); ?>"
                                    class="eael-product-gallery-open-popup open-popup-link">
                                     <i class="fas fa-eye"></i>
                                 </a>
                             </li>
 						<?php } ?>
 						<?php if( $should_print_link ){?>
-                            <li class="view-details"><?php echo '<a href="' . $product->get_permalink
-									() . '"><i class="fas fa-link"></i></a>'; ?></li>
+                            <li class="view-details"><?php echo '<a href="' . esc_url( $product->get_permalink() ) . '"><i class="fas fa-link"></i></a>'; ?></li>
 						<?php } ?>
                     </ul>
                 </div>

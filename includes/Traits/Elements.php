@@ -684,6 +684,7 @@ trait Elements {
 				}
 			}
 		}
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		printf( '%1$s', $html );
 	}
 
