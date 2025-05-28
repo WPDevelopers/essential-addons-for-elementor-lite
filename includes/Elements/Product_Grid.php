@@ -3672,6 +3672,7 @@ class Product_Grid extends Widget_Base
                 $settings['loadable_file_name'] = $this->get_filename_only( $template );
                 $dir_name                       = $this->get_temp_dir_name( $settings['loadable_file_name'] );
                 $found_posts                    = 0;
+                $post_offset                    = isset( $settings['product_offset'] ) ? absint( $settings['product_offset'] ) : 0;
 
                 if ( file_exists( $template ) ) {
 	                $settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
@@ -3685,7 +3686,7 @@ class Product_Grid extends Widget_Base
                     }
 
 	                if ( $query->have_posts() && ! $no_products_found ) {
-		                $found_posts        = $query->found_posts;
+		                $found_posts        = $query->found_posts - $post_offset;
 		                $max_page           = ceil( $found_posts / absint( $args['posts_per_page'] ) );
 		                $args['max_page']   = $max_page;
 		                $args['total_post'] = $found_posts;
