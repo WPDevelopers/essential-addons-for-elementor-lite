@@ -16,7 +16,6 @@ use Elementor\Plugin;
 use \Elementor\Widget_Base;
 use \Elementor\Repeater;
 use \Elementor\Group_Control_Background;
-use \Elementor\Utils;
 
 use \Essential_Addons_Elementor\Classes\Helper;
 

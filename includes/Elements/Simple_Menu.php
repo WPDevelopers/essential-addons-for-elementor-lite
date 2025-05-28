@@ -8,8 +8,8 @@ use Elementor\Group_Control_Typography;
 use Elementor\Icons_Manager;
 use Elementor\Plugin;
 use Elementor\Widget_Base;
-use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 use Essential_Addons_Elementor\Traits\Helper;
+use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {

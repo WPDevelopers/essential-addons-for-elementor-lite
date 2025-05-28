@@ -10,7 +10,6 @@ if ( !defined( 'ABSPATH' ) ) {
 
 use Essential_Addons_Elementor\Classes\Elements_Manager;
 use Essential_Addons_Elementor\Classes\Helper as HelperClass;
-use Essential_Addons_Elementor\Classes\WPDeveloper_Notice;
 use PriyoMukul\WPNotice\Notices;
 use PriyoMukul\WPNotice\Utils\CacheBank;
 use PriyoMukul\WPNotice\Utils\NoticeRemover;

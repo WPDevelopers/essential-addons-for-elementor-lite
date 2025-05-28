@@ -8,8 +8,6 @@ if ( !defined( 'ABSPATH' ) ) {
 
 use Elementor\Plugin;
 use \Essential_Addons_Elementor\Classes\Helper as HelperClass;
-use \Essential_Addons_Elementor\Elements\Woo_Checkout;
-use function Crontrol\Event\get;
 
 trait Helper
 {

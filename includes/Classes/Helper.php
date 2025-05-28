@@ -2,13 +2,14 @@
 
 namespace Essential_Addons_Elementor\Classes;
 
+use Elementor\Utils;
+
 if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
 use \Elementor\Controls_Manager;
 use Elementor\Icons_Manager;
-use \Elementor\Utils;
 use Elementor\Plugin;
 
 class Helper

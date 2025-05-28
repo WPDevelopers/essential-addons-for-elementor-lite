@@ -6,7 +6,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit();
 } // Exit if accessed directly
 
-use Elementor\Icons_Manager;
 use \Elementor\Plugin;
 use Essential_Addons_Elementor\Classes\Helper;
 

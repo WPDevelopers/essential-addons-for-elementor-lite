@@ -5,7 +5,6 @@ namespace Essential_Addons_Elementor\Classes;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
-use Elementor\Core\Files\CSS\Post as Post_CSS;
 use Elementor\Plugin;
 use Essential_Addons_Elementor\Classes\Elements_Manager;
 use Essential_Addons_Elementor\Traits\Library;
