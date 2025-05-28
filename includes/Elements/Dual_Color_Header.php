@@ -2,6 +2,7 @@
 
 namespace Essential_Addons_Elementor\Elements;
 
+use Elementor\Group_Control_Background;
 use Elementor\Repeater;
 
 // If this file is called directly, abort.
