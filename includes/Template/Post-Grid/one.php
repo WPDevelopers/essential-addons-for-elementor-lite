@@ -62,6 +62,7 @@ echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . esc_att
 
         echo '<div class="eael-entry-media">';
         if ( 'yes' === $settings['eael_show_post_terms'] && 'yes' === $settings['eael_post_terms_on_image_hover'] ) {
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo Helper::get_terms_as_list($settings['eael_post_terms'], $settings['eael_post_terms_max_length']);
         }
 
@@ -76,11 +77,12 @@ echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . esc_att
                 echo '<i class="' . esc_attr( $settings['eael_post_grid_bg_hover_icon_new']['value'] ) . '" aria-hidden="true"></i>';
             }
         }
-        echo '<a href="' . get_the_permalink() . '"' . $link_settings['image_link_nofollow'] . '' . $link_settings['image_link_target_blank'] . '></a>';
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        echo '<a href="' . esc_url( get_the_permalink() ) . '"' . $link_settings['image_link_nofollow'] . '' . $link_settings['image_link_target_blank'] . '></a>';
         echo '</div>';
 
-        echo '<div class="eael-entry-thumbnail '.$enable_ratio.'">
-                '.$thumbnail_html.'
+        echo '<div class="eael-entry-thumbnail '. esc_attr( $enable_ratio ) .'">
+                '. wp_kses( $thumbnail_html, Helper::eael_allowed_icon_tags() ) .'
             </div>
         </div>';
     }
@@ -88,23 +90,22 @@ echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . esc_att
     if ($settings['eael_show_title'] || $settings['eael_show_meta'] || $settings['eael_show_excerpt']) {
         echo '<div class="eael-entry-wrapper">';
         if ($settings['eael_show_title']) {
-            echo '<header class="eael-entry-header"><' . $title_tag . ' class="eael-entry-title">';
-            echo '<a
-                        class="eael-grid-post-link"
-                        href="' . get_the_permalink() . '"
-                        title="' . strip_tags( get_the_title() ) . '"' . $link_settings['title_link_nofollow'] . '' . $link_settings['title_link_target_blank'] . '>';
+            echo '<header class="eael-entry-header"><' . esc_attr( $title_tag ) . ' class="eael-entry-title">';
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo '<a class="eael-grid-post-link" href="' . esc_url( get_the_permalink() ) . '" title="' . esc_attr( strip_tags( get_the_title() ) ) . '"' . $link_settings['title_link_nofollow'] . '' . $link_settings['title_link_target_blank'] . '>';
 
             if (empty($settings['eael_title_length'])) {
-                echo get_the_title();
+                echo wp_kses( get_the_title(), Helper::eael_allowed_tags() );
             } else {
-                echo implode(" ", array_slice(explode(" ", get_the_title()), 0, $settings['eael_title_length']));
+                echo wp_kses( implode(" ", array_slice(explode(" ", get_the_title()), 0, $settings['eael_title_length'])), Helper::eael_allowed_tags() );
             }
             echo '</a>';
-            echo '</' . $title_tag . '></header>';
+            echo '</' . esc_attr( $title_tag ) . '></header>';
         }
         if ( $is_show_meta && 'meta-entry-header' === $settings['meta_position'] ) {
             echo '<div class="eael-entry-header-after">';
             if ( isset( $settings['eael_show_avatar'] ) && 'yes' === $settings['eael_show_avatar'] ) {
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                 echo '<div class="eael-author-avatar"><a href="' . esc_url( $author_url ) . '">' . get_avatar( get_the_author_meta( 'ID' ), 96, '', $author_name ) . '</a></div>';
 
             }
@@ -112,6 +113,7 @@ echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . esc_att
             if ($settings['eael_show_meta']) {
                 echo '<div class="eael-entry-meta">';
                 if ( isset( $settings['eael_show_author'] ) && 'yes' === $settings['eael_show_author'] ) {
+                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     echo '<span class="eael-posted-by">' . $author_link . '</span>';
                 }
                 if ($settings['eael_show_date'] === 'yes') {
@@ -128,16 +130,17 @@ echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . esc_att
                         <div class="eael-grid-post-excerpt">';
             if ($settings['eael_show_excerpt']) {
                 if (empty($settings['eael_excerpt_length'])) {
+                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     echo '<p>' . strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()) . '</p>';
                 } else {
+                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     echo '<p>' . wp_trim_words( strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()), $settings['eael_excerpt_length'], $settings['excerpt_expanison_indicator']) . '</p>';
                 }
             }
 
             if ($settings['eael_show_read_more_button']) {
-                echo '<a
-                            href="' . get_the_permalink() . '"
-                            class="eael-post-elements-readmore-btn"' . $link_settings['read_more_link_nofollow'] . '' . $link_settings['read_more_link_target_blank'] . '>' . Helper::eael_wp_kses($settings['read_more_button_text']) . '</a>';
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                echo '<a href="' . esc_url( get_the_permalink() ) . '" class="eael-post-elements-readmore-btn"' . $link_settings['read_more_link_nofollow'] . '' . $link_settings['read_more_link_target_blank'] . '>' . wp_kses($settings['read_more_button_text'], Helper::eael_allowed_tags()) . '</a>';
             }
             echo '</div>
                     </div>';
@@ -146,12 +149,14 @@ echo '<article class="eael-grid-post eael-post-grid-column" data-id="' . esc_att
         if ( $is_show_meta && 'meta-entry-footer' === $settings['meta_position'] ) {
             echo '<div class="eael-entry-footer">';
             if ( isset( $settings['eael_show_avatar'] ) && 'yes' === $settings['eael_show_avatar'] ) {
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                 echo '<div class="eael-author-avatar"><a href="' . esc_url( $author_url ) . '">' . get_avatar( get_the_author_meta( 'ID' ), 96, '', $author_name ) . '</a></div>';
             }
 
             if ($settings['eael_show_meta']) {
                 echo '<div class="eael-entry-meta">';
                 if ( isset( $settings['eael_show_author'] ) && 'yes' === $settings['eael_show_author'] ) {
+                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     echo '<span class="eael-posted-by">' . $author_link . '</span>';
                 }
                 if ($settings['eael_show_date'] === 'yes') {
