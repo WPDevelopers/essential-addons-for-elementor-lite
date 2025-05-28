@@ -148,6 +148,7 @@ class Login_Register extends Widget_Base {
 		$this->user_can_register = get_option( 'users_can_register' );
 		$this->recaptcha_sitekey = get_option( 'eael_recaptcha_sitekey' );
 		$this->cloudflare_turnstile_sitekey = get_option( 'eael_cloudflare_turnstile_sitekey' );
+		$this->cloudflare_turnstile_secretkey = get_option( 'eael_cloudflare_turnstile_secretkey' );
 		$this->recaptcha_sitekey_v3 = get_option( 'eael_recaptcha_sitekey_v3' );
 		$this->recaptcha_badge_hide = get_option('eael_recaptcha_badge_hide');
 		$this->in_editor         = Plugin::instance()->editor->is_edit_mode();
@@ -156,9 +157,9 @@ class Login_Register extends Widget_Base {
 		if( ! empty( $this->cloudflare_turnstile_sitekey ) ){
 			wp_register_script( 'eael-cloudflare', 'https://challenges.cloudflare.com/turnstile/v0/api.js' );
 
-			if( $this->in_editor ){
-				wp_enqueue_script( 'eael-cloudflare' );
-			}
+			// if( $this->in_editor ){
+			// 	wp_enqueue_script( 'eael-cloudflare' );
+			// }
 		}
 
 		if ( $this->recaptcha_badge_hide ) {
@@ -895,6 +896,19 @@ class Login_Register extends Widget_Base {
 				'type'            => Controls_Manager::NOTICE,
 				'notice_type'     => 'warning',
 				'heading'         => __( 'Cloudflare Turnstile Site Key is missing', 'essential-addons-for-elementor-lite' ),
+				'content'         => sprintf( __( 'Please add it from  %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<a href="'.esc_url( site_url( '/wp-admin/admin.php?page=eael-settings' ) ).'" target="_blank"><strong>', '</strong></a>' ),
+				'condition'       => [
+					'enable_cloudflare_turnstile' => 'yes',
+				],
+			] );
+		}
+
+		if ( empty( $this->cloudflare_turnstile_secretkey ) ) {
+			$this->add_control( 
+				'eael_cloudflare_turnstile_secretkey_missing', [
+				'type'            => Controls_Manager::NOTICE,
+				'notice_type'     => 'warning',
+				'heading'         => __( 'Cloudflare Turnstile Secret Key is missing', 'essential-addons-for-elementor-lite' ),	
 				'content'         => sprintf( __( 'Please add it from  %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<a href="'.esc_url( site_url( '/wp-admin/admin.php?page=eael-settings' ) ).'" target="_blank"><strong>', '</strong></a>' ),
 				'condition'       => [
 					'enable_cloudflare_turnstile' => 'yes',
@@ -1899,6 +1913,23 @@ class Login_Register extends Widget_Base {
 			'default'     => __( "You did not pass reCAPTCHA challenge.", 'essential-addons-for-elementor-lite' ),
 			'ai' => [
 				'active' => false,
+			],
+			'condition'   => [
+				'enable_recaptcha' => 'yes',
+			],
+		] );
+
+		$this->add_control( 'err_cloudflare_turnstile', [
+			'label'       => __( 'Cloudflare Turnstile Failed', 'essential-addons-for-elementor-lite' ),
+			'type'        => Controls_Manager::TEXT,
+			'label_block' => true,
+			'placeholder' => __( 'Eg. Cloudflare Turnstile Validation Failed', 'essential-addons-for-elementor-lite' ),
+			'default'     => __( "You did not pass Cloudflare Turnstile challenge.", 'essential-addons-for-elementor-lite' ),
+			'ai' => [
+				'active' => false,
+			],
+			'condition'   => [
+				'enable_cloudflare_turnstile' => 'yes',
 			],
 		] );
 
@@ -6921,7 +6952,7 @@ class Login_Register extends Widget_Base {
 			}
 		}
 
-		if ( 'yes' === $this->get_settings_for_display( "enable_cloudflare_turnstile" ) && ( 'yes' === $this->get_settings_for_display( "enable_cloudflare_turnstile_on_{$form_type}" ) ) ) {
+		if ( ! empty( $this->cloudflare_turnstile_sitekey ) && 'yes' === $this->get_settings_for_display( "enable_cloudflare_turnstile" ) && ( 'yes' === $this->get_settings_for_display( "enable_cloudflare_turnstile_on_{$form_type}" ) ) ) {
 			$id = "eael-{$form_type}-cloudflare-turnstile-" . esc_attr( $this->get_id() );
 			wp_enqueue_script( 'eael-cloudflare' );
 			echo "<div class='cf-turnstile' data-theme='auto' data-sitekey='{$this->cloudflare_turnstile_sitekey}'></div>";

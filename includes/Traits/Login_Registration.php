@@ -155,6 +155,21 @@ trait Login_Registration {
 			}
 		}
 
+		if( ! empty( $settings['enable_cloudflare_turnstile'] ) && 'yes' === $settings['enable_cloudflare_turnstile'] && ! empty( $settings['enable_cloudflare_turnstile_on_login'] ) && 'yes' === $settings['enable_cloudflare_turnstile_on_login'] ){
+			if( ! $this->lr_validate_cloudflare_turnstile( $settings ) ) {
+				$err_msg = isset( $settings['err_cloudflare_turnstile'] ) ? Helper::eael_wp_kses( $settings['err_cloudflare_turnstile'] ) : __( 'You did not pass Cloudflare Turnstile challenge.', 'essential-addons-for-elementor-lite' );
+				if ( $ajax ) {
+					wp_send_json_error( $err_msg );
+				}
+				setcookie( 'eael_login_error_' . $widget_id, $err_msg );
+
+				if (isset($_SERVER['HTTP_REFERER'])) {
+					wp_safe_redirect($_SERVER['HTTP_REFERER']);
+					exit();
+				} // fail early if cloudflare turnstile failed
+			}
+		}
+
 		$user_login = ! empty( $_POST['eael-user-login'] ) ? sanitize_text_field( $_POST['eael-user-login'] ) : '';
 		if ( is_email( $user_login ) ) {
 			$user_login = sanitize_email( $user_login );
@@ -422,6 +437,12 @@ trait Login_Registration {
 			
 			if( ! $this->lr_validate_recaptcha( $ld_recaptcha_version, $settings ) ) {
 				$errors['recaptcha'] = isset( $settings['err_recaptcha'] ) ? Helper::eael_wp_kses( $settings['err_recaptcha'] ) : __( 'You did not pass recaptcha challenge.', 'essential-addons-for-elementor-lite' );
+			}
+		}
+
+		if ( isset( $settings['enable_cloudflare_turnstile_on_register'] ) && 'yes' === $settings['enable_cloudflare_turnstile_on_register'] ) {
+			if( ! $this->lr_validate_cloudflare_turnstile( $settings ) ) {
+				$errors['cloudflare_turnstile'] = isset( $settings['err_cloudflare_turnstile'] ) ? Helper::eael_wp_kses( $settings['err_cloudflare_turnstile'] ) : __( 'You did not pass Cloudflare Turnstile challenge.', 'essential-addons-for-elementor-lite' );
 			}
 		}
 
@@ -1532,6 +1553,30 @@ trait Login_Registration {
 			}else {
 				return $res['success'];				
 			}
+		}
+
+		return false;
+	}
+
+	public function lr_validate_cloudflare_turnstile( $settings = [] ) {
+		if ( ! isset( $_REQUEST['cf-turnstile-response'] ) ) {
+			return false;
+		}
+		$secret = get_option( 'eael_cloudflare_turnstile_secretkey' );
+		if( empty( $secret ) ) {
+			return false;
+		}
+
+		$endpoint = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+		$data     = [
+			'secret'   => $secret,
+			'response' => sanitize_text_field( $_REQUEST['cf-turnstile-response'] ),
+			'remoteip' => $_SERVER['REMOTE_ADDR'],
+		];
+
+		$res = json_decode( wp_remote_retrieve_body( wp_remote_post( $endpoint, [ 'body' => $data ] ) ), 1 );
+		if ( isset( $res['success'] ) ) {
+			return $res['success'];
 		}
 
 		return false;
