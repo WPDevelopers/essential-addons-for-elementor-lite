@@ -87,6 +87,7 @@ add_action('woocommerce_before_shop_loop_item_title', function() use ( $stock_ou
 	global $product;
 	if ( ! $product->is_in_stock() ) {
 		remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10 );
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo '<span class="outofstock-badge">'. $stock_out_badge_text .'</span>';
 	}
 }, 9 );
