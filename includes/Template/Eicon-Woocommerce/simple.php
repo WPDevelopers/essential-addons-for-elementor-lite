@@ -67,10 +67,12 @@ if ( $settings['eael_wc_loop_hooks'] === 'yes' ) {
     <?php
 
     if( $should_print_image_clickable ) {
-        echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        echo '<a href="' . esc_url( $product->get_permalink() ) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
     }
 
-    echo wp_kses_post( $product->get_image( $settings['eael_product_grid_image_size_size'], [ 'loading' => 'eager', 'class'=> 'attachment-woocommerce_thumbnail size-woocommerce_thumbnail wvs-archive-product-image' ] ) );
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    echo $product->get_image( $settings['eael_product_grid_image_size_size'], [ 'loading' => 'eager', 'class'=> 'attachment-woocommerce_thumbnail size-woocommerce_thumbnail wvs-archive-product-image' ] );
 
     if ( $should_print_image_clickable ) {
         echo '</a>';
@@ -79,29 +81,34 @@ if ( $settings['eael_wc_loop_hooks'] === 'yes' ) {
     // printf('<%1$s class="woocommerce-loop-product__title"><a href="%3$s" class="woocommerce-LoopProduct-link woocommerce-loop-product__link woocommerce-loop-product__title_link woocommerce-loop-product__title_link_simple woocommerce-loop-product__title_link_reveal">%2$s</a></%1$s>', $title_tag, $product->get_title(), $product->get_permalink());
     echo '<div class="eael-product-title">
     <a href="' . esc_url( $product->get_permalink() ) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
-    printf('<%1$s class="woocommerce-loop-product__title">%2$s</%1$s>', $title_tag, Helper::eael_wp_kses( $product->get_title() ));
+    printf('<%1$s class="woocommerce-loop-product__title">%2$s</%1$s>', esc_attr( $title_tag ), wp_kses( $product->get_title(), Helper::eael_allowed_tags() ));
     echo '</a>
     </div>';
 
     if ( $should_print_rating ) {
         $avg_rating = $product->get_average_rating();
         if( $avg_rating > 0 ){
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo wc_get_rating_html($product->get_average_rating(), $product->get_rating_count());
         } else {
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo Helper::eael_rating_markup( $product->get_average_rating(), $product->get_rating_count() );
         }
     }
 
     if ( $is_show_badge ){
         if ( ! $product->is_in_stock() ) {
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             printf( '<span class="outofstock-badge ' . esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) . '">%s</span>', $stock_out_badge_text );
         } elseif ( $product->is_on_sale() ) {
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             printf( '<span class="onsale ' . esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) . '">%s</span>', $sale_badge_text );
         }
     }
 
 
     if ( $should_print_price ) {
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         echo '<div class="eael-product-price">' . $product->get_price_html() . '</div>';
     }
     ?>
