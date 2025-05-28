@@ -398,7 +398,7 @@ trait Elements {
 
 				if( is_array( $page_body_classes ) && count( $page_body_classes ) ){
 					foreach( $page_body_classes as $page_body_class){
-						if ( strpos( $page_body_class, 'elementor-page-' ) !== FALSE ) {
+						if ( is_string($page_body_class) && strpos( $page_body_class, 'elementor-page-' ) !== FALSE ) {
 							$template_id = intval( str_replace('elementor-page-', '', $page_body_class) );
 						} 
 					}
