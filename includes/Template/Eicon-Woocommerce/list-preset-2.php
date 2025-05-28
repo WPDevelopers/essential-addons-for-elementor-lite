@@ -81,12 +81,15 @@ if ( $should_print_rating ) {
             <div class="image-wrap">
                 <?php
                 if( $should_print_image_clickable ) {
-                    echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                    echo '<a href="' . esc_url( $product->get_permalink() ) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
                 }
                 if ( $is_show_badge ) {
+                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     echo( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock ' . esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) . '">' . $stock_out_badge_text . '</span>' : ( $product->is_on_sale() ? '<span class="eael-onsale ' . esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) . '">' . $sale_badge_text . '</span>' : '' ) );
                 }
-                echo wp_kses_post( $product->get_image( $settings['eael_product_grid_image_size_size'], [ 'loading' => 'eager' ] ) );
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                echo $product->get_image( $settings['eael_product_grid_image_size_size'], [ 'loading' => 'eager' ] );
 
                 if( $should_print_image_clickable ) {
                     echo '</a>';
@@ -140,7 +143,7 @@ if ( $should_print_rating ) {
                 <?php
                 if( $should_print_quick_view ){?>
                     <li class="eael-product-quick-view">
-                        <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
+                        <a id="eael_quick_view_<?php echo esc_attr( uniqid() ); ?>" data-quickview-setting="<?php echo esc_attr( htmlspecialchars(wp_json_encode($quick_view_setting),ENT_QUOTES) ); ?>"
                             class="eael-product-grid-open-popup open-popup-link">
                             <i class="fas fa-eye"></i>
                         </a>
