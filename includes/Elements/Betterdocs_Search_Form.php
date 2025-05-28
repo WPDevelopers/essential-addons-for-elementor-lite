@@ -2,6 +2,8 @@
 
 namespace Essential_Addons_Elementor\Elements;
 
+use Essential_Addons_Elementor\Classes\Helper;
+
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
     exit;
@@ -64,6 +66,10 @@ class Betterdocs_Search_Form extends Widget_Base
             'ea',
             'essential addons'
         ];
+    }
+
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
     }
 
     public function get_custom_help_url()
@@ -578,7 +584,7 @@ class Betterdocs_Search_Form extends Widget_Base
     {
         if (!defined('BETTERDOCS_URL')) return;
         $settings = $this->get_settings_for_display();
-        $shortcode  = sprintf('[betterdocs_search_form placeholder="'.$settings['section_search_field_placeholder'].'"]', apply_filters('eael_betterdocs_search_form_params', []));
+        $shortcode  = sprintf('[betterdocs_search_form placeholder="' . esc_html( $settings['section_search_field_placeholder'] ) . '"]', apply_filters('eael_betterdocs_search_form_params', []));
         echo do_shortcode(shortcode_unautop($shortcode));
     }
 
@@ -586,6 +592,6 @@ class Betterdocs_Search_Form extends Widget_Base
     {
         $settings = $this->get_settings_for_display();
         // In plain mode, render without shortcode
-        echo '[betterdocs_search_form placeholder="'.$settings['section_search_field_placeholder'].'"]';
+        echo '[betterdocs_search_form placeholder="' . esc_html( $settings['section_search_field_placeholder'] ) . '"]';
     }
 }

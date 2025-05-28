@@ -31,7 +31,6 @@ let HoverEffectHandler = function ($scope, $) {
     $eaelOffsetHoverTop      = $scope.data('eael_offset_hover_top'),
     $eaelOffsetHoverLeft     = $scope.data('eael_offset_hover_left'),
     $eaelTilt                = $scope.data('eaeltilt'),
-    $eaelContainer           = $('.elementor-widget-container', $scope);
     $enabledElementList      = [];
 
     /**
@@ -215,7 +214,8 @@ let HoverEffectHandler = function ($scope, $) {
         }
     }
 
-    let hoverSelector = `body [data-id="${$scopeId}"] > .elementor-widget-container`;
+    let hoverSelector = window.isEditMode ? `body [data-id="${$scopeId}"]` : `body .eael_hover_effect[data-id="${$scopeId}"]`,
+        $hoverSelector = $(hoverSelector);
 
     //Opacity
     let $opacityVal = $Opacity ? $Opacity?.opacity : '1';
@@ -306,8 +306,8 @@ let HoverEffectHandler = function ($scope, $) {
         "z-index": 2
     };
 
-    if ($enabledElementList.includes($scopeId)) {
-        $(hoverSelector).hover(
+    if (window.isEditMode && $enabledElementList.includes($scopeId) || !window.isEditMode && $hoverSelector.length) {
+        $hoverSelector.hover(
             function () {
                 $(this).css(hoverStyles);
             },
@@ -316,7 +316,7 @@ let HoverEffectHandler = function ($scope, $) {
             }
         );
 
-        $eaelContainer.css(normalStyles);
+        $hoverSelector.css(normalStyles);
     }
 
     //Tilt Effect
@@ -324,18 +324,22 @@ let HoverEffectHandler = function ($scope, $) {
         $(`.elementor-element-${$scopeId}`).mousemove( function( e ) {
             var cox = ( e.pageX - $(this).offset().left - $(this).width() / 2 ) / 20;
             var coy = ( $(this).height() / 2 - ( e.pageY - $(this).offset().top ) ) / 20;
-            $(this).find( '.elementor-widget-container' ).css( 'transform','perspective(500px) rotateY('+cox+'deg) rotateX('+coy+'deg)' );
+            if( $(this).hasClass( 'eael_hover_effect' ) ) {
+                $(this).css( 'transform','perspective(500px) rotateY('+cox+'deg) rotateX('+coy+'deg)' );
+            }
         });
     
         $(`.elementor-element-${$scopeId}`).mouseleave(function( e ) {
-            $(this).find('.elementor-widget-container').css( 'transform','rotateY(0) rotateX(0)' );
+            if( $(this).hasClass( 'eael_hover_effect' ) ) {
+                $(this).css( 'transform','rotateY(0) rotateX(0)' );
+            }
         });
     }
 
 }
 
 jQuery(window).on("elementor/frontend/init", function () {
-    if (ea.elementStatusCheck('eaelHoverEffect')) {
+    if (eael.elementStatusCheck('eaelHoverEffect')) {
         return false;
     }
     elementorFrontend.hooks.addAction(

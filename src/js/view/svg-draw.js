@@ -30,13 +30,24 @@ var SVGDraw = function ($scope, $) {
             }
         });
 
-        if (largestDashArray < 3999 && largestDashArray / 2 > 600 && settings.fill === 'fill-svg') {
+        if ( largestDashArray < 3999 && largestDashArray / 2 > 600 ) {
             let offset = largestPath.css('stroke-dashoffset');
             offset = parseInt(offset);
 
-            if (offset < largestDashArray / 2) {
-                wrapper.addClass(settings.fill);
+            if ( 'after' === settings.fill ) {
+                if (offset < largestDashArray / 2) {
+                    wrapper.addClass('fill-svg');
+                } else if ( wrapper.hasClass('fill-svg') ) {
+                    wrapper.removeClass('fill-svg');
+                }
+            } else if ( 'before' === settings.fill ) {
+                if( 100 < offset ){
+                    wrapper.addClass('fill-svg');
+                } else if ( 100 > offset ) {
+                    wrapper.removeClass('fill-svg');
+                }
             }
+            
         }
     }
 
@@ -115,7 +126,7 @@ var SVGDraw = function ($scope, $) {
 }
 jQuery(window).on("elementor/frontend/init", function () {
 
-    if (ea.elementStatusCheck('eaelDrawSVG')) {
+    if (eael.elementStatusCheck('eaelDrawSVG')) {
         return false;
     }
 

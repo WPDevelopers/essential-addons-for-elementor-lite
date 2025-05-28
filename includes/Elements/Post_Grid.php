@@ -72,6 +72,10 @@ class Post_Grid extends Widget_Base
         ];
     }
 
+    public function has_widget_inner_wrapper(): bool {
+        return ! HelperClass::eael_e_optimized_markup();
+    }
+
     public function get_custom_help_url()
     {
         return 'https://essential-addons.com/elementor/docs/post-grid/';
@@ -1083,8 +1087,8 @@ class Post_Grid extends Widget_Base
             ]
         );
 
-        echo '<div ' . $this->get_render_attribute_string( 'post_grid_wrapper' ) . '>
-            <div ' . $this->get_render_attribute_string( 'post_grid_container' ) . ' data-layout-mode="' . esc_attr( $settings["layout_mode"] ) . '">';
+        echo '<div '; $this->print_render_attribute_string( 'post_grid_wrapper' ); echo '>
+            <div '; $this->print_render_attribute_string( 'post_grid_container' ); echo ' data-layout-mode="' . esc_attr( $settings["layout_mode"] ) . '">';
 
         $template = $this->get_template($settings['eael_dynamic_template_Layout']);
         $settings['loadable_file_name'] = $this->get_filename_only($template);
@@ -1096,6 +1100,8 @@ class Post_Grid extends Widget_Base
         set_transient( 'eael_post_grid_excerpt_expanison_indicator_'. $this->get_id(), $this->get_settings_for_display('excerpt_expanison_indicator'), DAY_IN_SECONDS );
         $settings['read_more_button_text'] = $this->get_settings_for_display('read_more_button_text');
         $settings['excerpt_expanison_indicator'] = $this->get_settings_for_display('excerpt_expanison_indicator');
+
+        $args['ignore_sticky_posts'] = isset( $settings['ignore_sticky_posts'] ) && 'yes' === $settings['ignore_sticky_posts'];
 
         if(file_exists($template)){
             $query = new \WP_Query( $args );
@@ -1110,11 +1116,11 @@ class Post_Grid extends Widget_Base
                     include($template);
                 }
             }else {
-                _e('<p class="no-posts-found">No posts found!</p>', 'essential-addons-for-elementor-lite');
+                echo '<p class="no-posts-found">' . esc_html__( 'No posts found!', 'essential-addons-for-elementor-lite' ) . '</p>';
             }
             wp_reset_postdata();
         } else {
-            _e('<p class="no-posts-found">No Layout Found!</p>', 'essential-addons-for-elementor-lite');
+            echo '<p class="no-posts-found">' . esc_html__( 'No Layout Found', 'essential-addons-for-elementor-lite' ) . '</p>';
         }
 
 

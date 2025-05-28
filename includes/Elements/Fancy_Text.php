@@ -57,6 +57,14 @@ class Fancy_Text extends Widget_Base {
         ];
     }
 
+	protected function is_dynamic_content():bool {
+        return false;
+    }
+
+	public function has_widget_inner_wrapper(): bool {
+        return ! HelperClass::eael_e_optimized_markup();
+    }
+
     public function get_custom_help_url() {
         return 'https://essential-addons.com/elementor/docs/fancy-text/';
     }
@@ -411,7 +419,7 @@ class Fancy_Text extends Widget_Base {
 				'types'    => ['gradient'],
 				'fields_options' => [
 					'background' => [
-						'label' => _x( 'Gradient Color', 'Text Shadow Control', 'elementor' ),
+						'label' => _x( 'Gradient Color', 'Text Shadow Control', 'essential-addons-for-elementor-lite' ),
 						'toggle' => false,
 						'default' => 'gradient',
 					],
@@ -595,12 +603,12 @@ class Fancy_Text extends Widget_Base {
 				$fancy_text[] = HelperClass::eael_wp_kses( html_entity_decode( $item['eael_fancy_text_strings_text_field'] ) );
 			}
 		}
-		return implode("|",$fancy_text);
+
+		$fancy_text = implode("|",$fancy_text);
+		return str_replace( '&', '&amp;', $fancy_text);
 	}
 
 	protected function render() {
-
-
 		$settings = $this->get_settings_for_display();
 		$fancy_text = $this->fancy_text($settings['eael_fancy_text_strings']);
 		if(!apply_filters('eael/pro_enabled', false)) { $settings['eael_fancy_text_style'] = 'style-1'; }
@@ -615,9 +623,9 @@ class Fancy_Text extends Widget_Base {
 		$this->add_render_attribute( 'fancy-text', 'data-fancy-text-loop', $settings['eael_fancy_text_loop'] );
 	?>
 
-	<div  <?php echo $this->get_render_attribute_string( 'fancy-text' ); ?> >
+	<div  <?php $this->print_render_attribute_string( 'fancy-text' ); ?> >
 		<?php if ( ! empty( $settings['eael_fancy_text_prefix'] ) ) : ?>
-			<span class="eael-fancy-text-prefix"><?php echo HelperClass::eael_wp_kses($settings['eael_fancy_text_prefix']); ?> </span>
+			<span class="eael-fancy-text-prefix"><?php echo wp_kses( $settings['eael_fancy_text_prefix'], HelperClass::eael_allowed_tags() ); ?> </span>
 		<?php endif; ?>
 
 		<?php if ( $settings['eael_fancy_text_transition_type']  == 'fancy' ) : ?>
@@ -631,16 +639,16 @@ class Fancy_Text extends Widget_Base {
 					<?php
 						$eael_fancy_text_strings_list = "";
 						foreach ( $settings['eael_fancy_text_strings'] as $item ) {
-							$eael_fancy_text_strings_list .=  HelperClass::eael_wp_kses($item['eael_fancy_text_strings_text_field']) . ', ';
+							$eael_fancy_text_strings_list .=  $item['eael_fancy_text_strings_text_field'] . ', ';
 						}
-						echo rtrim($eael_fancy_text_strings_list, ", ");
+						echo wp_kses( rtrim($eael_fancy_text_strings_list, ", "), HelperClass::eael_allowed_tags() );
 					?>
 				</noscript>
 			</span>
 		<?php endif; ?>
 
 		<?php if ( ! empty( $settings['eael_fancy_text_suffix'] ) ) : ?>
-			<span class="eael-fancy-text-suffix"> <?php echo HelperClass::eael_wp_kses($settings['eael_fancy_text_suffix']); ?></span>
+			<span class="eael-fancy-text-suffix"> <?php echo wp_kses( $settings['eael_fancy_text_suffix'], HelperClass::eael_allowed_tags() ); ?></span>
 		<?php endif; ?>
 	</div><!-- close .eael-fancy-text-container -->
 
@@ -650,5 +658,4 @@ class Fancy_Text extends Widget_Base {
 
 	}
 
-	protected function content_template() {}
 }

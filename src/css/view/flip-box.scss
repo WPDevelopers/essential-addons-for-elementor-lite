@@ -9,32 +9,45 @@
 			height: 1em
 		}
 	}
-}
 
-.eael-elements-flip-box-container .flipbox-button {
-	display: inline-block;
-	-webkit-transition: all 400ms;
-	-o-transition: all 400ms;
-	transition: all 400ms;
-	padding: 14px 18px;
-	border-radius: 3px;
-	margin-top: 15px;
-	.eaa-svg {
-		font-size: inherit;
-		background: inherit;
-		margin: 0;
-		padding: 0;
-		position: relative;
-		top: 2px;
-		svg {
-			width: 1em;
-			height: 1em
+	.flipbox-button {
+		display: inline-block;
+		-webkit-transition: all 400ms;
+		-o-transition: all 400ms;
+		transition: all 400ms;
+		padding: 14px 18px;
+		border-radius: 3px;
+		margin-top: 15px;
+		.eaa-svg {
+			font-size: inherit;
+			background: inherit;
+			margin: 0;
+			padding: 0;
+			position: relative;
+			top: 2px;
+			svg {
+				width: 1em;
+				height: 1em
+			}
 		}
 	}
-}
-
-.eael-elements-flip-box-container a {
-	display: block;
+	a {
+		display: block;
+	}
+	&.eael-flip-box-click {
+		&.--active {
+			.eael-elements-flip-box-front-container {
+				pointer-events: none;
+			}
+		}
+	}
+	&.eael-flip-box-hover {
+		&:hover{
+			.eael-elements-flip-box-front-container {
+				pointer-events: none;
+			}
+		}
+	}
 }
 
 .eael-elements-flip-box-vertical-align {
@@ -86,7 +99,8 @@
 	z-index: 2;
 	width: 100%;
 	height: 100%;
-	background: #8a35ff;
+	background-color: #8a35ff;
+	background-blend-mode: multiply;
 	color: #ffffff;
 	border-color: #000000;
 	-webkit-display: flex;
@@ -118,7 +132,8 @@
 	left: 0px;
 	width: 100%;
 	height: 100%;
-	background: #502fc6;
+	background-color: #502fc6;
+	background-blend-mode: multiply;
 	color: #ffffff;
 	display: flex;
 	-webkit-align-items: center;
@@ -214,22 +229,26 @@
 }
 
 
-.eael-animate-flip.eael-animate-up.eael-elements-flip-box-container:hover .eael-elements-flip-box-flip-card,
+.eael-animate-flip.eael-animate-up.eael-elements-flip-box-container.eael-flip-box-hover:hover .eael-elements-flip-box-flip-card,
+.eael-animate-flip.eael-animate-up.eael-elements-flip-box-container.eael-flip-box-click.--active .eael-elements-flip-box-flip-card,
 .eael-animate-flip.eael-animate-up .eael-elements-flip-box-rear-container {
 	transform: rotateX(180deg);
 }
 
-.eael-animate-flip.eael-animate-down.eael-elements-flip-box-container:hover .eael-elements-flip-box-flip-card,
+.eael-animate-flip.eael-animate-down.eael-elements-flip-box-container.eael-flip-box-hover:hover .eael-elements-flip-box-flip-card,
+.eael-animate-flip.eael-animate-down.eael-elements-flip-box-container.eael-flip-box-click.--active .eael-elements-flip-box-flip-card,
 .eael-animate-flip.eael-animate-down .eael-elements-flip-box-rear-container {
 	transform: rotateX(-180deg);
 }
 
-.eael-animate-flip.eael-animate-left.eael-elements-flip-box-container:hover .eael-elements-flip-box-flip-card,
+.eael-animate-flip.eael-animate-left.eael-elements-flip-box-container.eael-flip-box-hover:hover .eael-elements-flip-box-flip-card,
+.eael-animate-flip.eael-animate-left.eael-elements-flip-box-container.eael-flip-box-click.--active .eael-elements-flip-box-flip-card,
 .eael-animate-flip.eael-animate-left .eael-elements-flip-box-rear-container {
 	transform: rotateY(-180deg);
 }
 
-.eael-animate-flip.eael-animate-right.eael-elements-flip-box-container:hover .eael-elements-flip-box-flip-card,
+.eael-animate-flip.eael-animate-right.eael-elements-flip-box-container.eael-flip-box-hover:hover .eael-elements-flip-box-flip-card,
+.eael-animate-flip.eael-animate-right.eael-elements-flip-box-container.eael-flip-box-click.--active .eael-elements-flip-box-flip-card,
 .eael-animate-flip.eael-animate-right .eael-elements-flip-box-rear-container {
 	transform: rotateY(180deg);
 }
@@ -250,8 +269,10 @@
 	top: 100%;
 }
 
-.eael-animate-push.eael-animate-up.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container,
-.eael-animate-slide.eael-animate-up.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container {
+.eael-animate-push.eael-animate-up.eael-elements-flip-box-container.eael-flip-box-hover:hover .eael-elements-flip-box-rear-container,
+.eael-animate-push.eael-animate-up.eael-elements-flip-box-container.eael-flip-box-click.--active .eael-elements-flip-box-rear-container,
+.eael-animate-slide.eael-animate-up.eael-elements-flip-box-container.eael-flip-box-click.--active .eael-elements-flip-box-rear-container,
+.eael-animate-slide.eael-animate-up.eael-elements-flip-box-container.eael-flip-box-hover:hover .eael-elements-flip-box-rear-container {
 	top: 0;
 }
 
@@ -261,8 +282,10 @@
 	bottom: 100%;
 }
 
-.eael-animate-push.eael-animate-down.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container,
-.eael-animate-slide.eael-animate-down.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container {
+.eael-animate-push.eael-animate-down.eael-elements-flip-box-container.eael-flip-box-hover:hover .eael-elements-flip-box-rear-container,
+.eael-animate-push.eael-animate-down.eael-elements-flip-box-container.eael-flip-box-click.--active .eael-elements-flip-box-rear-container,
+.eael-animate-slide.eael-animate-down.eael-elements-flip-box-container.eael-flip-box-click.--active .eael-elements-flip-box-rear-container,
+.eael-animate-slide.eael-animate-down.eael-elements-flip-box-container.eael-flip-box-hover:hover .eael-elements-flip-box-rear-container {
 	top: auto;
 	bottom: 0;
 }
@@ -272,8 +295,10 @@
 	left: 100%;
 }
 
-.eael-animate-push.eael-animate-left.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container,
-.eael-animate-slide.eael-animate-left.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container {
+.eael-animate-push.eael-animate-left.eael-elements-flip-box-container.eael-flip-box-hover:hover .eael-elements-flip-box-rear-container,
+.eael-animate-push.eael-animate-left.eael-elements-flip-box-container.eael-flip-box-click.--active .eael-elements-flip-box-rear-container,
+.eael-animate-slide.eael-animate-left.eael-elements-flip-box-container.eael-flip-box-click.--active .eael-elements-flip-box-rear-container,
+.eael-animate-slide.eael-animate-left.eael-elements-flip-box-container.eael-flip-box-hover:hover .eael-elements-flip-box-rear-container {
 	left: 0;
 }
 
@@ -283,26 +308,32 @@
 	right: 100%;
 }
 
-.eael-animate-push.eael-animate-right.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container,
-.eael-animate-slide.eael-animate-right.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container {
+.eael-animate-push.eael-animate-right.eael-elements-flip-box-container.eael-flip-box-hover:hover .eael-elements-flip-box-rear-container,
+.eael-animate-push.eael-animate-right.eael-elements-flip-box-container.eael-flip-box-click.--active .eael-elements-flip-box-rear-container,
+.eael-animate-slide.eael-animate-right.eael-elements-flip-box-container.eael-flip-box-click.--active .eael-elements-flip-box-rear-container,
+.eael-animate-slide.eael-animate-right.eael-elements-flip-box-container.eael-flip-box-hover:hover .eael-elements-flip-box-rear-container {
 	left: auto;
 	right: 0;
 }
 
 /*--- Push + Slide Above ---*/
-.eael-animate-push.eael-animate-up.eael-elements-flip-box-container:hover .eael-elements-flip-box-front-container {
+.eael-animate-push.eael-animate-up.eael-elements-flip-box-container.eael-flip-box-hover:hover .eael-elements-flip-box-front-container,
+.eael-animate-push.eael-animate-up.eael-elements-flip-box-container.eael-flip-box-click.--active .eael-elements-flip-box-front-container {
 	top: -100%;
 }
 
-.eael-animate-push.eael-animate-down.eael-elements-flip-box-container:hover .eael-elements-flip-box-front-container {
+.eael-animate-push.eael-animate-down.eael-elements-flip-box-container.eael-flip-box-hover:hover .eael-elements-flip-box-front-container,
+.eael-animate-push.eael-animate-down.eael-elements-flip-box-container.eael-flip-box-click.--active .eael-elements-flip-box-front-container {
 	top: 100%;
 }
 
-.eael-animate-push.eael-animate-left.eael-elements-flip-box-container:hover .eael-elements-flip-box-front-container {
+.eael-animate-push.eael-animate-left.eael-elements-flip-box-container.eael-flip-box-hover:hover .eael-elements-flip-box-front-container,
+.eael-animate-push.eael-animate-left.eael-elements-flip-box-container.eael-flip-box-click.--active .eael-elements-flip-box-front-container {
 	left: -100%;
 }
 
-.eael-animate-push.eael-animate-right.eael-elements-flip-box-container:hover .eael-elements-flip-box-front-container {
+.eael-animate-push.eael-animate-right.eael-elements-flip-box-container.eael-flip-box-hover:hover .eael-elements-flip-box-front-container,
+.eael-animate-push.eael-animate-right.eael-elements-flip-box-container.eael-flip-box-click.--active .eael-elements-flip-box-front-container {
 	left: 100%;
 }
 
@@ -313,19 +344,22 @@
 	z-index: 3;
 }
 
-.eael-animate-zoom-in.eael-elements-flip-box-container:hover .eael-elements-flip-box-rear-container {
+.eael-animate-zoom-in.eael-elements-flip-box-container.eael-flip-box-hover:hover .eael-elements-flip-box-rear-container,
+.eael-animate-zoom-in.eael-elements-flip-box-container.eael-flip-box-click.--active .eael-elements-flip-box-rear-container {
 	opacity: 1;
 	transform: scale(1);
 }
 
 /*--- Zoom Out ---*/
-.eael-animate-zoom-out.eael-elements-flip-box-container:hover .eael-elements-flip-box-front-container {
+.eael-animate-zoom-out.eael-elements-flip-box-container.eael-flip-box-hover:hover .eael-elements-flip-box-front-container,
+.eael-animate-zoom-out.eael-elements-flip-box-container.eael-flip-box-click.--active .eael-elements-flip-box-front-container {
 	opacity: 0;
 	visibility: hidden;
 	transform: scale(0.75);
 }
 
-.eael-animate-fade.eael-elements-flip-box-container:hover .eael-elements-flip-box-front-container {
+.eael-animate-fade.eael-elements-flip-box-container.eael-flip-box-hover:hover .eael-elements-flip-box-front-container,
+.eael-animate-fade.eael-elements-flip-box-container.eael-flip-box-click.--active .eael-elements-flip-box-front-container {
 	opacity: 0;
 }
 

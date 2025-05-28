@@ -13,7 +13,7 @@ var EventCalendar = function ($scope, $) {
 		defaultDate = element.data("defaultdate"),
 		multiDaysEventDayCount = typeof element.data("multidays_event_day_count") !== 'undefined' ? element.data("multidays_event_day_count") : 0,
 		eventLimit = element.data("event_limit"),
-		popupDateFormate = element.data("popup_date_formate"),
+		popupDateFormate = element.data("popup_date_format"),
 		monthColumnHeaderFormat = element.data("monthcolumnheaderformat"),
 		weekColumnHeaderFormat = element.data("weekcolumnheaderformat"),
 		time_format = element.data("time_format") == "yes" ? true : false;
@@ -24,7 +24,6 @@ var EventCalendar = function ($scope, $) {
 				views: {
 					month: { // will produce something like "Tuesday, September 18, 2018"
 						dayHeaderContent: (args) => {
-							console.log('monthColumnHeaderFormat', monthColumnHeaderFormat)
 							if (args.view.type === 'dayGridMonth' && monthColumnHeaderFormat ) {
 								return moment(args.date).format(monthColumnHeaderFormat)
 							}
@@ -279,12 +278,12 @@ var EventCalendar = function ($scope, $) {
 				eventWillUnmount: function(arg) {}
 			});
 
-	function refreshPopUpDetailsLink(){
-		var modalFooter = $(".eaelec-modal-footer"),
-			modalFooterClass = modalFooter.find('a').attr('class'),
-			modalFooterText = $(".eael-event-calendar-cls", $scope).attr( 'data-detailsButtonText' );
-		modalFooter.html('<a class="'+modalFooterClass+'">'+modalFooterText+'</a>');
-	}
+		function refreshPopUpDetailsLink() {
+			var modalFooter = $(".eaelec-modal-footer"),
+				modalFooterClass = modalFooter.find('a').attr('class'),
+				modalFooterText = $(".eael-event-calendar-cls", $scope).attr('data-detailsButtonText');
+			modalFooter.html('<a class="' + modalFooterClass + '">' + DOMPurify.sanitize(modalFooterText) + '</a>');
+		}
 
 		CloseButton.on("click", function (event) {
 			event.stopPropagation();
@@ -305,6 +304,10 @@ var EventCalendar = function ($scope, $) {
 		});
 
 		calendar.render();
+		setTimeout( function() {
+			calendar.setOption( 'locale', locale );
+		}, 100);
+
 		const observer = new IntersectionObserver((entries) => {
 			for (const entry of entries) {
 				window.dispatchEvent(new Event('resize'));
@@ -315,7 +318,7 @@ var EventCalendar = function ($scope, $) {
 		});
 		observer.observe(element[0]);
 
-		ea.hooks.addAction("eventCalendar.reinit", "ea", () => {
+		eael.hooks.addAction("eventCalendar.reinit", "ea", () => {
 			calendar.today();
 		});
 	}
@@ -338,7 +341,7 @@ var EventCalendar = function ($scope, $) {
 
 jQuery(window).on("elementor/frontend/init", function () {
 
-	if (ea.elementStatusCheck('eaelEventCalendar')) {
+	if (eael.elementStatusCheck('eaelEventCalendar')) {
 		return false;
 	}
 

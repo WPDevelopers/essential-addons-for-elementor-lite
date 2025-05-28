@@ -28,6 +28,12 @@
 	font-size: 24px;
 	display: inline-block;
 	text-align: center;
+
+	&.control{
+		&:focus-visible{
+			outline: 1px solid #a9d204 !important;
+		}
+	}
 }
 
 .eael-filter-gallery-control ul li a.control {
@@ -107,8 +113,9 @@ body.rtl .gallery-item-caption-over {
 	text-align: right;
 }
 
-a.eael-gallery-load-more, a.eael-gallery-load-more:hover {
+.eael-gallery-load-more, .eael-gallery-load-more:hover {
 	text-decoration: none;
+	border: none;
 }
 
 /*--- Caption Animation ---*/
@@ -480,6 +487,14 @@ body.rtl {
 }
 
 /*--- Video Gallery ---*/
+.mfp-bottom-bar {
+	margin-top: 0;
+}
+
+figcaption .mfp-bottom-bar {
+	margin-top: -36px;
+}
+
 .gallery-item-thumbnail-wrap {
 	position: relative;
 }
@@ -1039,7 +1054,6 @@ body.rtl {
 		}
 	}
 
-	.mfp-close,
     .mfp-close {
 		width: auto;
 	}
@@ -1047,6 +1061,7 @@ body.rtl {
 
 .mfp-zoom-out-cur .mfp-image-holder .mfp-close {
 	cursor: pointer;
+	text-align: right !important;
 }
 
 .mfp-zoom-out-cur .mfp-image-holder .mfp-close:hover {

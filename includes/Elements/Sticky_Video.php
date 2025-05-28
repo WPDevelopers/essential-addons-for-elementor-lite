@@ -1,6 +1,7 @@
 <?php
 
 namespace Essential_Addons_Elementor\Elements;
+use Essential_Addons_Elementor\Classes\Helper;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -13,8 +14,6 @@ use \Elementor\Widget_Base;
 
 class Sticky_Video extends Widget_Base
 {
-    
-
     protected $eaelRElem = 1;
 
     public function get_name()
@@ -61,6 +60,14 @@ class Sticky_Video extends Widget_Base
         ];
     }
 
+    protected function is_dynamic_content():bool {
+        return false;
+    }
+
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
+    }
+
     public function get_custom_help_url()
     {
         return 'https://essential-addons.com/elementor/docs/sticky-video/';
@@ -104,9 +111,6 @@ class Sticky_Video extends Widget_Base
                 'label_off' => __('Off', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default' => 'yes',
-                'selectors' => [
-                    '{{WRAPPER}} div.eaelsv-sticky-player' => 'display: block',
-                ],
             ]
         );
 
@@ -220,7 +224,7 @@ class Sticky_Video extends Widget_Base
         $this->add_control(
             'eaelsv_hosted_url',
             [
-                'label' => __('Choose File', 'elementor'),
+                'label' => __('Choose File', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::MEDIA,
                 'dynamic' => [
                     'active' => true,
@@ -746,7 +750,7 @@ class Sticky_Video extends Widget_Base
     {
         $settings = $this->get_settings_for_display();
         $iconNew = $settings['eaelsv_icon_new'];
-        $sticky = $settings['eaelsv_is_sticky'];
+        $sticky = isset( $settings['eaelsv_is_sticky'] ) ? $settings['eaelsv_is_sticky'] : 'yes';
         $autoplay = ($settings['eaelsv_autopaly'] == 'yes') ? $settings['eaelsv_autopaly'] : 'no';
         $eaelsvPlayer = '';
 	    $eaelsv_overlay_visibility = $settings['eaelsv_overlay_options'];
@@ -791,8 +795,8 @@ class Sticky_Video extends Widget_Base
                 ]
             );
 
-            echo '<div ' . $this->get_render_attribute_string('esvp_overlay_wrapper') . '>
-					<div class="eaelsv-overlay-icon">' . $icon . '</div>
+            echo '<div '; $this->print_render_attribute_string('esvp_overlay_wrapper'); echo '>
+					<div class="eaelsv-overlay-icon">' . wp_kses(  $icon, Helper::eael_allowed_icon_tags() ) . '</div>
 				</div>';
         }
 
@@ -802,16 +806,17 @@ class Sticky_Video extends Widget_Base
                 'class' => 'eael-sticky-video-player2',
                 'data-sticky' => $sticky,
                 'data-position' => $settings['eaelsv_sticky_position'],
-                'data-sheight' => $settings['eaelsv_sticky_height'],
-                'data-swidth' => $settings['eaelsv_sticky_width'],
+                'data-sheight' => isset( $settings['eaelsv_sticky_height'] ) ? $settings['eaelsv_sticky_height'] : 169,
+                'data-swidth' => isset( $settings['eaelsv_sticky_width'] ) ? $settings['eaelsv_sticky_width'] : 300,
                 'data-scroll_height' => !empty($settings['eaelsv_scroll_height_display_sticky']['size']) ? $settings['eaelsv_scroll_height_display_sticky']['size'] : '',
                 'data-autoplay' => $autoplay,
                 'data-overlay' => ($settings['eaelsv_overlay_options'] == 'yes') ? $settings['eaelsv_overlay_options'] : 'no',
             ]
         );
 
-        echo '<div ' . $this->get_render_attribute_string('esvp_overlay_wrapper2') . '>
-				' . $eaelsvPlayer . '
+        echo '<div '; $this->print_render_attribute_string('esvp_overlay_wrapper2'); echo '>';
+                //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo $eaelsvPlayer . '
 				<span class="eaelsv-sticky-player-close"><i class="fas fa-times-circle"></i></span>
 			</div>
 		</div>';
@@ -821,9 +826,9 @@ class Sticky_Video extends Widget_Base
     {
 	    $settings = $this->get_settings_for_display();
 	    $id       = $this->eaelsv_get_url_id();
-	    $autoplay = $settings['eaelsv_autopaly'];
-	    $mute     = $autoplay == 'yes' ? 'yes' : $settings['eaelsv_mute'];
-	    $loop     = $settings['eaelsv_loop'];
+	    $autoplay = isset( $settings['eaelsv_autopaly'] ) ? $settings['eaelsv_autopaly'] : '';
+	    $mute     = $autoplay == 'yes' ? 'yes' : ( isset( $settings['eaelsv_mute'] ) ? $settings['eaelsv_mute'] : '' );
+	    $loop     = isset( $settings['eaelsv_loop'] ) ? $settings['eaelsv_loop'] : '';
 
 	    $am = '"storage": {"enabled": false, "key": "plyr"}';
 	    $am .= ( $autoplay == 'yes' ? ', "autoplay":1' : ', "autoplay":0' );
@@ -847,9 +852,9 @@ class Sticky_Video extends Widget_Base
     {
 	    $settings = $this->get_settings_for_display();
 	    $id       = $this->eaelsv_get_url_id();
-	    $autoplay = $settings['eaelsv_autopaly'];
-	    $mute     = $autoplay == 'yes' ? 'yes' : $settings['eaelsv_mute'];
-	    $loop     = $settings['eaelsv_loop'];
+	    $autoplay = isset( $settings['eaelsv_autopaly'] ) ? $settings['eaelsv_autopaly'] : '';
+	    $mute     = $autoplay == 'yes' ? 'yes' : ( isset( $settings['eaelsv_mute'] ) ? $settings['eaelsv_mute'] : '' );
+	    $loop     = isset( $settings['eaelsv_loop'] ) ? $settings['eaelsv_loop'] : '';
 
 	    $am = '"storage": {"enabled": false, "key": "plyr"}';
 	    $am .= ( $autoplay == 'yes' ? ', "autoplay":1' : ', "autoplay":0' );
@@ -871,15 +876,13 @@ class Sticky_Video extends Widget_Base
 
     protected function eaelsv_load_player_self_hosted()
     {
-        $settings = $this->get_settings_for_display();
-        $video = ($settings['eaelsv_external_url'] != '') ? $settings['eaelsv_external_url'] : $settings['eaelsv_hosted_url']['url'];
-        $controlBars = $settings['eaelsv_sh_show_bar'];
-        $autoplay = $settings['eaelsv_autopaly'];
-        $mute = $settings['eaelsv_mute'];
-        $loop = $settings['eaelsv_loop'];
-        $interfaceColor = $settings['eaelsv_sh_video_interface_color'];
-        $startTime = $settings['eaelsv_start_time'];
-        $endTime = $settings['eaelsv_end_time'];
+        $settings  = $this->get_settings_for_display();
+        $video     = ($settings['eaelsv_external_url'] != '') ? $settings['eaelsv_external_url'] : $settings['eaelsv_hosted_url']['url'];
+        $autoplay  = isset( $settings['eaelsv_autopaly'] ) ? $settings['eaelsv_autopaly'] : '';
+        $mute      = isset( $settings['eaelsv_mute'] ) ? $settings['eaelsv_mute'] : '';
+        $loop      = isset( $settings['eaelsv_loop'] ) ? $settings['eaelsv_loop'] : '';
+        $startTime = isset( $settings['eaelsv_start_time'] ) ? $settings['eaelsv_start_time'] : '';
+        $endTime   = isset( $settings['eaelsv_end_time'] ) ? $settings['eaelsv_end_time'] : '';
 
         $am = '';
         $am .= ($autoplay == 'yes' ? '"autoplay":1' : '"autoplay":0');

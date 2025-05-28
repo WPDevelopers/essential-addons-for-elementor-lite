@@ -71,7 +71,8 @@ class Business_Reviews extends Widget_Base {
 	public function get_style_depends() {
 		return [
 			'font-awesome-5-all',
-			'font-awesome-4-shim'
+			'font-awesome-4-shim',
+            'e-swiper'
 		];
 	}
 
@@ -80,6 +81,10 @@ class Business_Reviews extends Widget_Base {
 			'font-awesome-4-shim'
 		];
 	}
+
+	public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
+    }
 
 	protected function register_controls() {
 
@@ -2765,8 +2770,8 @@ class Business_Reviews extends Widget_Base {
 		);
 		?>
 
-        <div <?php echo $this->get_render_attribute_string( 'eael-business-reviews-wrapper' ); ?>>
-            <div <?php echo $this->get_render_attribute_string( 'eael-business-reviews-items' ); ?>>
+        <div <?php $this->print_render_attribute_string( 'eael-business-reviews-wrapper' ); ?>>
+            <div <?php $this->print_render_attribute_string( 'eael-business-reviews-items' ); ?>>
 				<?php
 				switch ( $business_reviews['source'] ) {
 					case 'google-reviews':
@@ -2781,6 +2786,7 @@ class Business_Reviews extends Widget_Base {
         </div>
 
 		<?php
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo ob_get_clean();
 	}
 
@@ -2827,14 +2833,8 @@ class Business_Reviews extends Widget_Base {
 			'id'    => 'eael-google-reviews-' . esc_attr( $this->get_id() ),
 		] );
 
-		$swiper_class = $swiper_version_class = '';
-        if ( class_exists( 'Elementor\Plugin' ) ) {
-            $swiper_class           = \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_swiper_latest' ) ? 'swiper' : 'swiper-container';
-            $swiper_version_class   = 'swiper' === $swiper_class ? 'swiper-8' : 'swiper-8-lower';
-        }
-
 		$this->add_render_attribute( 'eael-google-reviews-content', [
-			'class'               => [ 'eael-google-reviews-content', esc_attr( $swiper_class ), esc_attr( $swiper_version_class ), 'swiper-container-' . esc_attr( $this->get_id() ) ],
+			'class'               => [ 'eael-google-reviews-content', 'swiper', 'swiper-8', 'swiper-container-' . esc_attr( $this->get_id() ) ],
 			'data-pagination'     => '.swiper-pagination-' . esc_attr( $this->get_id() ),
 			'data-arrow-next'     => '.swiper-button-next-' . esc_attr( $this->get_id() ),
 			'data-arrow-prev'     => '.swiper-button-prev-' . esc_attr( $this->get_id() ),
@@ -2854,7 +2854,7 @@ class Business_Reviews extends Widget_Base {
 		if ( ! empty( $google_reviews_data['reviews'] ) && count( $google_reviews_data['reviews'] ) ) {
 			$single_review_data = [];
 			?>
-            <div <?php echo $this->get_render_attribute_string( 'eael-google-reviews-wrapper' ); ?>>
+            <div <?php $this->print_render_attribute_string( 'eael-google-reviews-wrapper' ); ?>>
 
                 <div class="eael-google-reviews-items eael-google-reviews-slider">
                     <div class="eael-google-reviews-arrows eael-google-reviews-arrows-outside">
@@ -2869,7 +2869,7 @@ class Business_Reviews extends Widget_Base {
 
                     </div>
 
-                    <div <?php echo $this->get_render_attribute_string( 'eael-google-reviews-content' ); ?>>
+                    <div <?php $this->print_render_attribute_string( 'eael-google-reviews-content' ); ?>>
                         <div class="eael-google-reviews-slider-header">
 							<?php if ( $business_reviews['business_logo'] ): ?>
                                 <div class="eael-google-reviews-business-logo">
@@ -2942,7 +2942,7 @@ class Business_Reviews extends Widget_Base {
 								] );
 								?>
 
-                                <div <?php echo $this->get_render_attribute_string( 'eael-google-reviews-slider-item-' . $i ); ?>>
+                                <div <?php $this->print_render_attribute_string( 'eael-google-reviews-slider-item-' . $i ); ?>>
                                     <div class="eael-google-review-reviewer-with-text">
 										<?php
 										switch ( $business_reviews['preset'] ) {
@@ -3143,11 +3143,11 @@ class Business_Reviews extends Widget_Base {
 		if ( ! empty( $google_reviews_data['reviews'] ) && count( $google_reviews_data['reviews'] ) ) {
 			$single_review_data = [];
 			?>
-            <div <?php echo $this->get_render_attribute_string( 'eael-google-reviews-wrapper' ); ?>>
+            <div <?php $this->print_render_attribute_string( 'eael-google-reviews-wrapper' ); ?>>
 
                 <div class="eael-google-reviews-items eael-google-reviews-grid">
 
-                    <div <?php echo $this->get_render_attribute_string( 'eael-google-reviews-content' ); ?>>
+                    <div <?php $this->print_render_attribute_string( 'eael-google-reviews-content' ); ?>>
                         <div class="eael-google-reviews-grid-header">
 							<?php if ( $business_reviews['business_logo'] ): ?>
                                 <div class="eael-google-reviews-business-logo">
@@ -3193,7 +3193,7 @@ class Business_Reviews extends Widget_Base {
 							<?php endif; ?>
                         </div>
 
-                        <div <?php echo $this->get_render_attribute_string( 'eael-google-reviews-grid-body' ); ?> >
+                        <div <?php $this->print_render_attribute_string( 'eael-google-reviews-grid-body' ); ?> >
 							<?php
 							$i = 0;
 
@@ -3220,7 +3220,7 @@ class Business_Reviews extends Widget_Base {
 								] );
 								?>
 
-                                <div <?php echo $this->get_render_attribute_string( 'eael-google-reviews-grid-item-' . $i ); ?>>
+                                <div <?php $this->print_render_attribute_string( 'eael-google-reviews-grid-item-' . $i ); ?>>
                                     <div class="eael-google-review-reviewer-with-text">
 										<?php
 										switch ( $business_reviews['preset'] ) {
@@ -3302,10 +3302,12 @@ class Business_Reviews extends Widget_Base {
 		';
 
 		for ( $i = 1; $i <= floor( $rating ); $i ++ ) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			printf( "%s", $rating_svg );
 		}
 
 		if ( ! is_int( $rating ) ) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			printf( "%s", $rating_svg_half );
 		}
 
@@ -3406,6 +3408,7 @@ class Business_Reviews extends Widget_Base {
 			</script>
 			<!-- EA LocalBusiness Schema : Ends-->
 			<?php
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo ob_get_clean();
 		}
 	}

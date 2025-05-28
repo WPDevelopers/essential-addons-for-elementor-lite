@@ -13,8 +13,16 @@
             $gb_editor_panel.find('.edit-post-header__settings, .editor-header__settings').prepend($('#eael-gb-eb-button-template').html());
             if ($('#eael-eb-popup-button').length) {
                 $is_popup_button_added = true;
+
+                if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+                    $('#eael-eb-popup-button').closest('.editor-header').addClass('has-eael-eb-promo');
+                }
             }
         }
+        if( ! $('#eael-gb-eb-banner-promo').length ) {
+            $gb_editor_panel.find('.interface-interface-skeleton__content').prepend($('#eael-gb-eb-banner-promo-template').html());
+        }
+
     }
 
     $(document).on('click', '#eael-eb-popup-button', function () {
@@ -65,11 +73,35 @@
                 console.log(err.responseText);
             },
         });
+    }).on('click', 'button.eael-gb-eb-banner-promo-close', function () {
+        let $this = $(this),
+            nonce = $this.data('nonce');
+
+        $.ajax({
+            url: "admin-ajax.php",
+            type: "POST",
+            data: {
+                action: "eael_eb_banner_promo_dismiss",
+                security: nonce,
+            },
+            success: function (response) {
+                if (response.success) {
+                    $('#eael-gb-eb-banner-promo-template').remove();
+                    $('#eael-gb-eb-banner-promo').remove();
+                } else {
+                    console.log(response.data);
+                }
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            },
+        });
     }).on('click', 'button.eael-gb-eb-install', function (ev) {
         ev.preventDefault();
 
         let button = $(this),
             action = button.data("action"),
+            promoType = button.data("promotype") ?? "",
             nonce = button.data("nonce");
 
         if ($.active && typeof action != "undefined") {
@@ -92,6 +124,7 @@
                     action: "wpdeveloper_install_plugin",
                     security: nonce,
                     slug: "essential-blocks",
+                    promotype: promoType
                 },
                 success: function (response) {
                     if (response.success) {

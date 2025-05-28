@@ -3,6 +3,7 @@
  * Template Name: Preset 1
  */
 
+use Essential_Addons_Elementor\Classes\Helper;
 use Essential_Addons_Elementor\Elements\Woo_Product_List;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -36,7 +37,7 @@ $woo_product_list_loop = Woo_Product_List::get_woo_product_list_loop_settings( $
             <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link" >
             <?php endif; ?>
 
-                <?php echo wp_kses_post( $product->get_image( $woo_product_list['image_size'], ['loading' => 'eager'] ) ); ?>
+                <?php echo wp_kses_post( $product->get_image( $woo_product_list['image_size'], ['loading' => 'eager', 'alt' => $product->get_title() ] ) ); ?>
             
             <?php if ( $woo_product_list['image_clickable'] ) : ?>                   
             </a>
@@ -52,7 +53,7 @@ $woo_product_list_loop = Woo_Product_List::get_woo_product_list_loop_settings( $
 
                 <?php if ( $woo_product_list['quick_view_button_show'] ) : ?>
                 <li class="eael-product-list-quick-view-button eael-m-0">
-                    <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars( json_encode( $woo_product_list_loop['quick_view_setting'] ), ENT_QUOTES ); ?>" class="open-popup-link"><i class="fas fa-eye"></i></a>
+                    <a id="eael_quick_view_<?php echo esc_attr( uniqid() ); ?>" data-quickview-setting="<?php echo esc_attr( htmlspecialchars( json_encode( $woo_product_list_loop['quick_view_setting'] ), ENT_QUOTES ) ); ?>" class="open-popup-link"><i class="fas fa-eye"></i></a>
                 </li>
                 <?php endif; ?>
 
@@ -75,10 +76,19 @@ $woo_product_list_loop = Woo_Product_List::get_woo_product_list_loop_settings( $
             <div class="eael-product-list-content-header <?php echo esc_attr( $woo_product_list_loop['direction_rtl_class'] ) ?>" >
                 <?php if ( $woo_product_list['rating_show'] ) : ?>
                 <div class="eael-product-list-rating">
-                    <?php echo wp_kses_post( wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) ); ?>
+                    <?php
+                    $avg_rating = $product->get_average_rating();
+                    if( $avg_rating > 0 ){
+                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                        echo wc_get_rating_html( $avg_rating, $product->get_rating_count());
+                    } else {
+                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                        echo Helper::eael_rating_markup( $avg_rating, $product->get_rating_count() );
+                    }
+                    ?>
                     
                     <?php if ( $woo_product_list['review_count_show'] && $woo_product_list_loop['review_count'] > 0 ) : ?>
-                        <a href="<?php echo esc_url( get_permalink() ) ?>#reviews" class="woocommerce-review-link eael-product-list-review-count" rel="nofollow">(<?php printf( '%s', __( $woo_product_list_loop['review_count'], 'essential-addons-for-elementor-lite' ) ); ?>)</a>
+                        <a href="<?php echo esc_url( get_permalink() ) ?>#reviews" class="woocommerce-review-link eael-product-list-review-count" rel="nofollow">(<?php printf( '%s', esc_html__( $woo_product_list_loop['review_count'], 'essential-addons-for-elementor-lite' ) ); ?>)</a>
                     <?php endif; ?>
                 </div>
                 <?php endif; ?>
@@ -101,7 +111,14 @@ $woo_product_list_loop = Woo_Product_List::get_woo_product_list_loop_settings( $
 
                 <?php if ( $woo_product_list['excerpt_show'] ) : ?>
                 <div class="eael-product-list-excerpt">
-                    <?php echo wp_trim_words( strip_shortcodes( get_the_excerpt() ), $woo_product_list['excerpt_words_count'], $woo_product_list['excerpt_expanison_indicator'] ); ?>
+                    <?php 
+                    if( $woo_product_list['excerpt_words_count'] ){
+                        $content = wp_trim_words( strip_shortcodes( get_the_excerpt() ), $woo_product_list['excerpt_words_count'], $woo_product_list['excerpt_expanison_indicator'] );
+                        echo esc_html( $content );
+                    } else {
+                        echo wp_kses( get_the_excerpt(), Helper::eael_allowed_tags() );
+                    }
+                    ?>
                 </div>
                 <?php endif; ?>
 
@@ -134,7 +151,7 @@ $woo_product_list_loop = Woo_Product_List::get_woo_product_list_loop_settings( $
 
                     <?php if ( $woo_product_list['quick_view_button_show'] ) : ?>
                     <p class="eael-product-list-quick-view-button eael-m-0">
-                        <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars( json_encode( $woo_product_list_loop['quick_view_setting'] ), ENT_QUOTES ); ?>" class="open-popup-link">
+                        <a id="eael_quick_view_<?php echo esc_attr( uniqid() ); ?>" data-quickview-setting="<?php echo esc_attr( htmlspecialchars( json_encode( $woo_product_list_loop['quick_view_setting'] ), ENT_QUOTES ) ); ?>" class="open-popup-link">
                             <?php esc_html_e( $woo_product_list['quick_view_text'], 'essential-addons-for-elementor-lite' ); ?>
                         </a>
                     </p>

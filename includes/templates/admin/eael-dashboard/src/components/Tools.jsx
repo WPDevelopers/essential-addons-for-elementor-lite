@@ -1,5 +1,6 @@
 import consumer from "../context";
 import {useRef} from "react";
+import {asyncDispatch} from "../helper/index.js";
 
 function Tools() {
     const eaData = localize.eael_dashboard.tools,
@@ -8,13 +9,16 @@ function Tools() {
         {eaState, eaDispatch} = consumer(),
         saveHandler = () => {
             eaDispatch({type: 'BUTTON_LOADER', payload: 'tools'});
-            setTimeout(eaDispatch, 500, {
-                type: 'SAVE_TOOLS',
-                payload: {key: eaData.box_3.name, value: selectRef.current.value}
+            asyncDispatch({eaState, eaDispatch}, 'SAVE_TOOLS', {
+                key: eaData.box_3.name,
+                value: selectRef.current.value
             });
         },
         clickHandler = () => {
-            eaDispatch({type: 'REGENERATE_ASSETS'});
+            asyncDispatch({eaState, eaDispatch}, 'REGENERATE_ASSETS');
+        },
+        changeHandler = (e) => {
+            eaDispatch({type: 'ON_CHANGE_POST_TYPE', payload: {key: e.target.value, value: e.target.checked}});
         };
 
     return (
@@ -52,14 +56,33 @@ function Tools() {
                             <label>{eaData.box_3.heading}</label>
                             <div className="flex-1">
                                 <div className="select-option-external">
-                                    <select name={eaData.box_3.name} defaultValue={eaData.box_3.value} id="select-option"
+                                    <select name={eaData.box_3.name} defaultValue={eaData.box_3.value}
+                                            id="select-option"
                                             className="form-select" ref={selectRef}>
                                         {Object.keys(eaData.box_3.methods).map((item, index) => {
-                                            return <option value={item} key={index}>{eaData.box_3.methods[item]}</option>
+                                            return <option value={item}
+                                                           key={index}>{eaData.box_3.methods[item]}</option>
                                         })}
                                     </select>
                                 </div>
                                 <span className="select-details">{eaData.box_3.content}</span>
+                            </div>
+                        </div>
+                        <div className="ea__connect-others justify-between items-start">
+                            <label>{eaData.box_4.heading}</label>
+                            <div><span className="select-details">{eaData.box_4.content}</span></div>
+                            <div className="flex-1">
+                                <ul className="select-post-type-options">
+                                {Object.keys(eaData.box_4.methods).map((item, index) => {
+                                    return <li key={index}>
+                                                <label htmlFor={item}>
+                                                    <input type="checkbox" checked={eaState.allowedPostTypes[item] === true}  value={item} onChange={changeHandler} id={item} />
+                                                    {eaData.box_4.methods[item]}
+                                                </label>
+                                            </li>
+                                }
+                                )}
+                                </ul>
                             </div>
                         </div>
                         <div className="flex flex-end">

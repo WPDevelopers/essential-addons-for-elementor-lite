@@ -52,6 +52,14 @@ class Team_Member extends Widget_Base {
 		];
     }
 
+	protected function is_dynamic_content():bool {
+        return false;
+    }
+
+	public function has_widget_inner_wrapper(): bool {
+        return ! HelperClass::eael_e_optimized_markup();
+    }
+
 	public function get_custom_help_url()
 	{
         return 'https://essential-addons.com/elementor/docs/team-members/';
@@ -79,6 +87,9 @@ class Team_Member extends Widget_Base {
 				'ai' => [
 					'active' => false,
 				],
+				'dynamic' => [
+                    'active' => true,
+                ],
 			]
 		);
 
@@ -104,11 +115,18 @@ class Team_Member extends Widget_Base {
   			]
   		);
 
+		$this->add_control(
+			'eael_team_member_name_heading',
+			[
+				'label' => __( 'Name', 'essential-addons-for-elementor-lite'),
+				'type'  => Controls_Manager::HEADING,
+			]
+		);
 
 		$this->add_control(
 			'eael_team_member_name',
 			[
-				'label' => esc_html__( 'Name', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Text', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXT,
                 'dynamic' => [
                     'active' => true,
@@ -121,9 +139,68 @@ class Team_Member extends Widget_Base {
 		);
 
 		$this->add_control(
+            'eael_team_member_name_tag',
+            [
+                'label'       => __('HTML Tag', 'essential-addons-elementor'),
+				'label_block' => true,
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => [
+					'h1' => [
+						'title' => esc_html__( 'H1', 'essential-addons-elementor' ),
+						'icon'  => 'eicon-editor-h1',
+					],
+					'h2' => [
+						'title' => esc_html__( 'H2', 'essential-addons-elementor' ),
+						'icon'  => 'eicon-editor-h2',
+					],
+					'h3' => [
+						'title' => esc_html__( 'H3', 'essential-addons-elementor' ),
+						'icon'  => 'eicon-editor-h3',
+					],
+					'h4' => [
+						'title' => esc_html__( 'H4', 'essential-addons-elementor' ),
+						'icon'  => 'eicon-editor-h4',
+					],
+					'h5' => [
+						'title' => esc_html__( 'H5', 'essential-addons-elementor' ),
+						'icon'  => 'eicon-editor-h5',
+					],
+					'h6' => [
+						'title' => esc_html__( 'H6', 'essential-addons-elementor' ),
+						'icon'  => 'eicon-editor-h6',
+					],
+					'div' => [
+						'title' => esc_html__( 'Div', 'essential-addons-elementor' ),
+						'text'  => 'div',
+					],
+					'span' => [
+						'title' => esc_html__( 'Span', 'essential-addons-elementor' ),
+						'text'  => 'span',
+					],
+					'p' => [
+						'title' => esc_html__( 'P', 'essential-addons-elementor' ),
+						'text'  => 'P',
+					],
+				],
+                'default'   => 'h2',
+				'toggle'    => false,
+				'separator' => 'after',
+			]
+		);
+
+		$this->add_control(
+			'eael_team_member_job_position_heading',
+			[
+				'label'     => __( 'Job Position', 'essential-addons-for-elementor-lite'),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before'
+			]
+		);
+
+		$this->add_control(
 			'eael_team_member_job_title',
 			[
-				'label' => esc_html__( 'Job Position', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Text', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::TEXT,
                 'dynamic' => [
                     'active' => true,
@@ -132,6 +209,56 @@ class Team_Member extends Widget_Base {
 				'ai' => [
 					'active' => false,
 				],
+			]
+		);
+
+		$this->add_control(
+            'eael_team_member_job_title_tag',
+            [
+                'label'       => __('HTML Tag', 'essential-addons-elementor'),
+				'label_block' => true,
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => [
+					'h1' => [
+						'title' => esc_html__( 'H1', 'essential-addons-elementor' ),
+						'icon'  => 'eicon-editor-h1',
+					],
+					'h2' => [
+						'title' => esc_html__( 'H2', 'essential-addons-elementor' ),
+						'icon'  => 'eicon-editor-h2',
+					],
+					'h3' => [
+						'title' => esc_html__( 'H3', 'essential-addons-elementor' ),
+						'icon'  => 'eicon-editor-h3',
+					],
+					'h4' => [
+						'title' => esc_html__( 'H4', 'essential-addons-elementor' ),
+						'icon'  => 'eicon-editor-h4',
+					],
+					'h5' => [
+						'title' => esc_html__( 'H5', 'essential-addons-elementor' ),
+						'icon'  => 'eicon-editor-h5',
+					],
+					'h6' => [
+						'title' => esc_html__( 'H6', 'essential-addons-elementor' ),
+						'icon'  => 'eicon-editor-h6',
+					],
+					'div' => [
+						'title' => esc_html__( 'Div', 'essential-addons-elementor' ),
+						'text'  => 'div',
+					],
+					'span' => [
+						'title' => esc_html__( 'Span', 'essential-addons-elementor' ),
+						'text'  => 'span',
+					],
+					'p' => [
+						'title' => esc_html__( 'P', 'essential-addons-elementor' ),
+						'text'  => 'P',
+					],
+				],
+                'default'   => 'h3',
+				'toggle'    => false,
+				'separator' => 'after',
 			]
 		);
 
@@ -906,9 +1033,15 @@ class Team_Member extends Widget_Base {
 	protected function render( ) {
 
         $settings = $this->get_settings_for_display();
-		$team_member_image = $this->get_settings( 'eael_team_member_image' );
-		$team_member_image_url = Group_Control_Image_Size::get_attachment_image_src( $team_member_image['id'], 'thumbnail', $settings );
-		if( empty( $team_member_image_url ) ) : $team_member_image_url = $team_member_image['url']; else: $team_member_image_url = $team_member_image_url; endif;
+		$team_member_image = $settings['eael_team_member_image'] ?? '';
+		$image_url = $team_member_image['url'] ?? '';
+		$alt_text = $settings['eael_team_member_name'] ?? '';
+
+		if( is_array( $team_member_image ) && ! empty( $team_member_image['id'] ) ) {
+			$image_url = Group_Control_Image_Size::get_attachment_image_src( $team_member_image['id'], 'thumbnail', $settings );
+			$alt_text = get_post_meta( $team_member_image['id'], '_wp_attachment_image_alt', true );
+		}
+		
 		$team_member_classes = $this->get_settings('eael_team_members_preset') . " " . $this->get_settings('eael_team_members_image_rounded');
 
 		$this->add_render_attribute( 'eael_team_text', 'class', 'eael-team-text' );
@@ -924,7 +1057,9 @@ class Team_Member extends Widget_Base {
 		<div class="eael-team-item-inner">
 			<div class="eael-team-image">
 				<figure>
-					<img src="<?php echo esc_url($team_member_image_url);?>" alt="<?php echo esc_attr( get_post_meta($team_member_image['id'], '_wp_attachment_image_alt', true) ); ?>">
+					<?php if( !empty( $image_url ) ):  ?>
+					<img src="<?php echo esc_url( $image_url );?>" alt="<?php echo esc_attr( $alt_text ); ?>">
+					<?php endif; ?>
 				</figure>
 				<?php if( 'eael-team-members-social-right' === $settings['eael_team_members_preset'] ) : ?>
 					<?php do_action( 'eael/team_member_social_right_markup', $settings, $this ); ?>
@@ -933,7 +1068,7 @@ class Team_Member extends Widget_Base {
 				<?php 
 					if ( isset( $settings['eael_team_members_enable_text_overlay'] ) && $settings['eael_team_members_enable_text_overlay'] == 'yes' ) {
 						?>
-						<p <?php echo $this->get_render_attribute_string('eael_team_text'); ?>><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_description']); ?></p>
+						<p <?php $this->print_render_attribute_string('eael_team_text'); ?>><?php echo wp_kses( $settings['eael_team_member_description'], HelperClass::eael_allowed_tags() ); ?></p>
 						<?php
 					}
 				?>
@@ -941,8 +1076,13 @@ class Team_Member extends Widget_Base {
 			</div>
 
 			<div class="eael-team-content">
-				<h2 class="eael-team-member-name"><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_name']); ?></h2>
-				<h3 class="eael-team-member-position"><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_job_title']); ?></h3>
+				<?php
+				$title_tag = HelperClass::eael_validate_html_tag( $settings['eael_team_member_name_tag'] );
+				$position_tag = HelperClass::eael_validate_html_tag( $settings['eael_team_member_job_title_tag'] );
+
+				printf( '<%1$s class="eael-team-member-name">%2$s</%1$s>', esc_attr( $title_tag ), wp_kses( $settings['eael_team_member_name'], HelperClass::eael_allowed_tags() ) );
+				printf( '<%1$s class="eael-team-member-position">%2$s</%1$s>', esc_attr( $position_tag ), wp_kses( $settings['eael_team_member_job_title'], HelperClass::eael_allowed_tags() ) );
+				?>
 
 				<?php if( 'eael-team-members-social-bottom' === $settings['eael_team_members_preset'] ) : ?>
 					<?php do_action( 'eael/team_member_social_botton_markup', $settings, $this ); ?>
@@ -971,7 +1111,7 @@ class Team_Member extends Widget_Base {
 							<?php endforeach; ?>
 						</ul>
 					<?php endif; ?>
-					<p <?php echo $this->get_render_attribute_string('eael_team_text'); ?>><?php echo HelperClass::eael_wp_kses($settings['eael_team_member_description']); ?></p>
+					<p <?php $this->print_render_attribute_string('eael_team_text'); ?>><?php echo wp_kses( $settings['eael_team_member_description'], HelperClass::eael_allowed_tags() ); ?></p>
 				<?php endif; ?>
 			</div>
 		</div>

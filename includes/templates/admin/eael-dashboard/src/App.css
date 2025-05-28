@@ -588,6 +588,10 @@ input:focus {
   background: transparent;
 }
 
+#ea__dashboard--wrapper input.input-name::placeholder {
+  opacity: .7;
+}
+
 .ea__input-search-wrapper:after {
   content: '\e930';
   font-family: 'ea-dash-icon';
@@ -1637,6 +1641,13 @@ span.ea__tooltip {
   min-width: 100%;
 }
 
+.select-post-type-options{
+  margin-top: 20px;
+}
+.select-post-type-options li label:hover{
+  cursor: pointer;
+}
+
 span.select-details {
   font-size: 14px;
   line-height: 1.2em;
@@ -2023,6 +2034,7 @@ section.ea__modal-wrapper {
 .ea__modal-body label {
   font-size: 14px;
   line-height: 1.3em;
+  color: var(--text-color-100);
   display: block;
   margin-bottom: 6px;
 }
@@ -2303,7 +2315,7 @@ section.ea__modal-wrapper {
 
 /*-------- Onboard ------------*/
 
-span.title-color-2 {
+span.title-color-1 {
   color: #FF7B8E;
 }
 
