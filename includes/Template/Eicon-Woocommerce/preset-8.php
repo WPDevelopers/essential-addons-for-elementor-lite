@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Default
+ * Template Name: Preset 8
  */
 
 use \Essential_Addons_Elementor\Classes\Helper;
