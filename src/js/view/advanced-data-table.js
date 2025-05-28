@@ -247,7 +247,7 @@ class advancedDataTable {
               currentPage    =  startIndex = 1,
               endIndex       = rows.length;
           
-          currentPage = paginationType == "button" ? $( '.ea-adtp-current', pagination ).data('page') : $("select", pagination).val();
+          currentPage = paginationType == "button" ? jQuery( '.ea-adtp-current', pagination ).data('page') : $("select", pagination).val();
 
           startIndex = (currentPage - 1) * itemsPerPage;
           endIndex = endIndex - (currentPage - 1) * itemsPerPage >= itemsPerPage ? currentPage * itemsPerPage : endIndex;
