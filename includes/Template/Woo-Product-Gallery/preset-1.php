@@ -70,10 +70,11 @@ if( $show_secondary_image ){
     <div class="product-image-wrap">
         <div class="image-wrap">
             <?php if ( $should_print_image_clickable ) {
-                echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+                echo '<a href="' . esc_url( $product->get_permalink() ) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
             }
 
-            echo( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock ' . esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) . '">' . Helper::eael_wp_kses( $stockout_text ) . '</span>' : ( $product->is_on_sale() ? '<span class="eael-onsale ' . esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) . '">' . Helper::eael_wp_kses( $sale_text ) . '</span>' : '' ) );
+            echo( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock ' . esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) . '">' . wp_kses( $stockout_text, Helper::eael_allowed_tags() ) . '</span>' : ( $product->is_on_sale() ? '<span class="eael-onsale ' . esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) . '">' . wp_kses( $sale_text, Helper::eael_allowed_tags() ) . '</span>' : '' ) );
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo $product->get_image( $settings['eael_product_gallery_image_size_size'], ['loading' => 'eager', 'alt' => esc_attr( $product->get_title() )] );
 
             if ( $should_print_image_clickable ) {
@@ -87,14 +88,14 @@ if( $show_secondary_image ){
                 <?php } ?>
                 <?php if( $should_print_quick_view ){?>
                     <li class="eael-product-quick-view">
-                        <a id="eael_quick_view_<?php echo uniqid(); ?>" data-quickview-setting="<?php echo htmlspecialchars(json_encode($quick_view_setting),ENT_QUOTES); ?>"
+                        <a id="eael_quick_view_<?php echo esc_attr( uniqid() ); ?>" data-quickview-setting="<?php echo esc_attr( htmlspecialchars(wp_json_encode($quick_view_setting),ENT_QUOTES) ); ?>"
                             class="eael-product-gallery-open-popup open-popup-link">
                             <i class="fas fa-eye"></i>
                         </a>
                     </li>
                 <?php } ?>
                 <?php if( $should_print_link ){?>
-                    <li class="view-details"><?php echo '<a href="' . $product->get_permalink() . '" aria-label="View Details about ' . esc_attr( $product->get_title() ) . '" ><i class="fas fa-link"></i></a>'; ?></li>
+                    <li class="view-details"><?php echo '<a href="' . esc_url( $product->get_permalink() ) . '" aria-label="View Details about ' . esc_attr( $product->get_title() ) . '" ><i class="fas fa-link"></i></a>'; ?></li>
                 <?php } ?>
             </ul>
         </div>
@@ -102,13 +103,14 @@ if( $show_secondary_image ){
     <div class="product-details-wrap">
         <?php
         if ( $should_print_price ) {
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo '<div class="eael-product-price">' . $product->get_price_html() . '</div>';
         }
         ?>
         <div class="eael-product-title">
             <?php
-            echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
-            printf('<%1$s>%2$s</%1$s>', $title_tag, Helper::eael_wp_kses( $product->get_title() ) );
+            echo '<a href="' . esc_url( $product->get_permalink() ) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+            printf('<%1$s>%2$s</%1$s>', esc_attr( $title_tag ), wp_kses( $product->get_title(), Helper::eael_allowed_tags() ) );
             echo '</a>';
             ?>
         </div>
