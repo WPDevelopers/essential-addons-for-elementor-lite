@@ -156,10 +156,6 @@ class Login_Register extends Widget_Base {
 
 		if( ! empty( $this->cloudflare_turnstile_sitekey ) ){
 			wp_register_script( 'eael-cloudflare', 'https://challenges.cloudflare.com/turnstile/v0/api.js' );
-
-			// if( $this->in_editor ){
-			// 	wp_enqueue_script( 'eael-cloudflare' );
-			// }
 		}
 
 		if ( $this->recaptcha_badge_hide ) {
@@ -888,6 +884,46 @@ class Login_Register extends Widget_Base {
 			'type'         => Controls_Manager::SWITCHER,
 			'return_value' => 'yes',
 		] );
+
+		$this->add_control(
+			'enable_cloudflare_turnstile_appearance_notice',
+			[
+				'type' => Controls_Manager::NOTICE,
+				'notice_type' => 'info',
+				'heading' => __( 'Appearance', 'essential-addons-for-elementor-lite' ),
+				'content' => __( 'Cloudflare Turnstile will be applied on frontend only.', 'essential-addons-for-elementor-lite' ),
+				'condition' => [
+					'enable_cloudflare_turnstile' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'cloudflare_turnstile_theme',
+			[
+				'label'   => __( 'Theme', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'auto' => [
+						'title' => __( 'Auto', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-ai',
+					],
+					'light' => [
+						'title' => __( 'Light', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-light-mode',
+					],
+					'dark' => [
+						'title' => __( 'Dark', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-dark-mode',
+					],
+				],
+				'toggle'    => false,
+				'default'   => 'auto',
+				'condition' => [
+					'enable_cloudflare_turnstile' => 'yes',
+				],
+			]
+		);
 
 
 		if ( empty( $this->cloudflare_turnstile_sitekey ) ) {
@@ -6955,7 +6991,7 @@ class Login_Register extends Widget_Base {
 		if ( ! empty( $this->cloudflare_turnstile_sitekey ) && 'yes' === $this->get_settings_for_display( "enable_cloudflare_turnstile" ) && ( 'yes' === $this->get_settings_for_display( "enable_cloudflare_turnstile_on_{$form_type}" ) ) ) {
 			$id = "eael-{$form_type}-cloudflare-turnstile-" . esc_attr( $this->get_id() );
 			wp_enqueue_script( 'eael-cloudflare' );
-			echo "<div class='cf-turnstile' data-theme='auto' data-sitekey='{$this->cloudflare_turnstile_sitekey}'></div>";
+			echo "<div class='cf-turnstile' data-theme='{$this->ds['cloudflare_turnstile_theme']}' data-sitekey='{$this->cloudflare_turnstile_sitekey}'></div>";
 		}
 	}
 
