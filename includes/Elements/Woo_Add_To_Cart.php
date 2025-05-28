@@ -1,6 +1,8 @@
 <?php
 namespace Essential_Addons_Elementor\Elements;
 
+use Elementor\Plugin;
+
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
    exit;
@@ -981,7 +983,7 @@ class Woo_Add_To_Cart extends Widget_Base {
       ?>
       <div class="eael-single-product-add-to-cart">
 			<?php 
-			if( \Elementor\Plugin::$instance->editor->is_edit_mode() || get_post_type( get_the_ID() ) === 'templately_library' ) {
+			if( Plugin::$instance->editor->is_edit_mode() || get_post_type( get_the_ID() ) === 'templately_library' ) {
 				?>
 				<div class="custom-add-to-cart-wrapper">
 					<?php if( 'simple_product' === $settings['add_to_cart_product_type'] ) { ?>
@@ -992,7 +994,7 @@ class Woo_Add_To_Cart extends Widget_Base {
 							<?php if( 'yes' === $settings['add_to_cart_icon_show'] ) { ?>
 								<span class="cart-icon"><?php $this->eael_add_to_cart_icon( $settings ); ?></span>
 							<?php } ?>
-							<span class="button-text"><?php echo Helper::eael_wp_kses( $settings['add_to_cart_text'] ); ?></span>
+							<span class="button-text"><?php echo wp_kses( $settings['add_to_cart_text'], Helper::eael_allowed_tags() ); ?></span>
 						</button>
 					<?php 
 						}
@@ -1026,7 +1028,7 @@ class Woo_Add_To_Cart extends Widget_Base {
 									<?php if( 'yes' === $settings['add_to_cart_icon_show'] ) { ?>
 										<span class="cart-icon"><?php $this->eael_add_to_cart_icon( $settings ); ?></span>
 									<?php } ?>
-									<span class="button-text"><?php echo Helper::eael_wp_kses( $settings['add_to_cart_text'] ); ?></span>
+									<span class="button-text"><?php echo wp_kses( $settings['add_to_cart_text'], Helper::eael_allowed_tags() ); ?></span>
 								</button>
 							</div>
 							<?php
@@ -1034,7 +1036,7 @@ class Woo_Add_To_Cart extends Widget_Base {
 						elseif ( 'external_product' === $settings['add_to_cart_product_type'] ) {
 							?>
 							<button class="custom-add-to-cart">
-								<span class="button-text"><?php echo Helper::eael_wp_kses( $settings['add_to_cart_text'] ); ?></span>
+								<span class="button-text"><?php echo wp_kses( $settings['add_to_cart_text'], Helper::eael_allowed_tags() ); ?></span>
 							</button>
 							<?php
 						}
@@ -1058,7 +1060,7 @@ class Woo_Add_To_Cart extends Widget_Base {
 									<?php if( 'yes' === $settings['add_to_cart_icon_show'] ) { ?>
 										<span class="cart-icon"><?php $this->eael_add_to_cart_icon( $settings ); ?></span>
 									<?php } ?>
-									<span class="button-text"><?php echo Helper::eael_wp_kses( $settings['add_to_cart_text'] ); ?></span>
+									<span class="button-text"><?php echo wp_kses( $settings['add_to_cart_text'], Helper::eael_allowed_tags() ); ?></span>
 								</button>
 							</div>
 							<?php
