@@ -3,8 +3,8 @@
  * Template Name: Preset 4
  */
 
-use \Essential_Addons_Elementor\Classes\Helper;
-use \Elementor\Group_Control_Image_Size;
+use Essential_Addons_Elementor\Classes\Helper;
+use Elementor\Group_Control_Image_Size;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -67,31 +67,34 @@ $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_cl
         do_action( 'woocommerce_before_shop_loop_item' );
     }
 
-    echo ( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '. esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) .'">'. Helper::eael_wp_kses($stockout_text) .'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '. esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) .'">' . Helper::eael_wp_kses($sale_text) . '</span>' : '') );
+    echo ( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '. esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) .'">'. wp_kses($stockout_text, Helper::eael_allowed_tags()) .'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '. esc_attr( $sale_badge_preset . ' ' . $sale_badge_align ) .'">' . wp_kses($sale_text, Helper::eael_allowed_tags()) . '</span>' : '') );
 
     if( $should_print_image_clickable ) {
-        echo '<a href="' . $product->get_permalink() . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
-    }?>
-        <?php
-        echo $product->get_image( $settings['eael_product_gallery_image_size_size'], ['loading' => 'eager', 'alt' => esc_attr( $product->get_title() ) ] );
-        if ( $should_print_image_clickable ) {
-            echo '</a>';
+        echo '<a href="' . esc_url( $product->get_permalink() ) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+    }
+    
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    echo $product->get_image( $settings['eael_product_gallery_image_size_size'], ['loading' => 'eager', 'alt' => esc_attr( $product->get_title() ) ] );
+    if ( $should_print_image_clickable ) {
+        echo '</a>';
+    }
+    printf('<%1$s class="woocommerce-loop-product__title">%2$s</%1$s>', esc_attr( $title_tag ), wp_kses($product->get_title(), Helper::eael_allowed_tags() ));
+    if ( $should_print_rating ) {
+        $avg_rating = $product->get_average_rating();
+        if( $avg_rating > 0 ){
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo wc_get_rating_html( $avg_rating, $product->get_rating_count());
+        } else {
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo Helper::eael_rating_markup( $avg_rating, $product->get_rating_count() );
         }
-        printf('<%1$s class="woocommerce-loop-product__title">%2$s</%1$s>', $title_tag, Helper::eael_wp_kses($product->get_title()));
-        if ( $should_print_rating ) {
-            $avg_rating = $product->get_average_rating();
-            if( $avg_rating > 0 ){
-                echo wc_get_rating_html( $avg_rating, $product->get_rating_count());
-            } else {
-                echo Helper::eael_rating_markup( $avg_rating, $product->get_rating_count() );
-            }
-        }
+    }
 
-        if ( $should_print_price ) {
-            echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
-        }
-        ?>
-    <?php
+    if ( $should_print_price ) {
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        echo '<div class="eael-product-price">'.$product->get_price_html().'</div>';
+    }
+
     if ( $should_print_addtocart ) {
         woocommerce_template_loop_add_to_cart();
     }
