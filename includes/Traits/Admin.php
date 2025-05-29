@@ -1656,7 +1656,7 @@ trait Admin {
 			    ],
 			    'admin_screen_promo'      => [
 				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
-				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.2 with New \"<b><a target='_blank' href='%s'>360 Degree Photo Viewer</a></b>\" and \"<b><a target='_blank' href='%s'>Multicolumn Pricing Table</a></b>\" widgets! For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/360-degree-photo-viewer' ), esc_url( 'https://essential-addons.com/multicolumn-pricing-table/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
+				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.3 with New & Modern Presets: \"<b>Grid Flow</b>\" & \"<b>Harmonic</b>\". For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
 			    ],
 			    'pro_modal'               => [
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),
@@ -1900,7 +1900,7 @@ trait Admin {
 	}
 
 	public function essential_block_optin() {
-		if ( is_plugin_active( 'essential-blocks/essential-blocks.php' ) || get_option( 'eael_eb_optin_hide' ) ) {
+		if ( is_plugin_active( 'essential-blocks/essential-blocks.php' ) ) {
 			return;
 		}
 
@@ -1958,6 +1958,7 @@ trait Admin {
                                 action: "wpdeveloper_install_plugin",
                                 security: "<?php echo esc_html( $nonce ); ?>",
                                 slug: "essential-blocks",
+								promotype: "optin"
                             },
                             success: function (response) {
                                 if (response.success) {
@@ -2037,7 +2038,7 @@ trait Admin {
 	}
 
 	public function essential_block_special_optin() {
-		if ( is_plugin_active( 'essential-blocks/essential-blocks.php' ) || get_option( 'eael_eb_optin_hide' ) ) {
+		if ( is_plugin_active( 'essential-blocks/essential-blocks.php' ) ) {
 			return;
 		}
 
@@ -2138,6 +2139,7 @@ trait Admin {
                                 action: "wpdeveloper_install_plugin",
                                 security: "<?php echo esc_html( $nonce ); ?>",
                                 slug: "essential-blocks",
+								promotype: "optin"
                             },
                             success: function (response) {
                                 if (response.success) {
@@ -2223,7 +2225,7 @@ trait Admin {
 			wp_send_json_error( __( 'You are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
 		}
 
-		update_option( 'eael_eb_optin_hide', true );
+		set_transient( 'wpdeveloper_eb_optin_hide', true, MONTH_IN_SECONDS * 2 );
 		wp_send_json_success();
 	}
 
@@ -2234,7 +2236,7 @@ trait Admin {
 			wp_send_json_error( __( 'You are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
 		}
 
-		set_transient( 'eael_gb_eb_popup_hide', true, MONTH_IN_SECONDS * 2 );
+		set_transient( 'wpdeveloper_gb_eb_popup_hide', true, MONTH_IN_SECONDS * 2 );
 		wp_send_json_success();
 	}
 
@@ -2245,8 +2247,23 @@ trait Admin {
 			wp_send_json_error( __( 'You are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
 		}
 
-		set_transient( 'eael_eb_banner_promo_hide', true, DAY_IN_SECONDS * 45 );
+		set_transient( 'wpdeveloper_eb_banner_promo_hide', true, DAY_IN_SECONDS * 45 );
 		wp_send_json_success();
 	}
 
+	public function eael_eb_banner_promo_init() {
+		add_action( 'enqueue_block_editor_assets', [ $this, 'essential_blocks_banner_promo_enqueue_scripts' ] );
+		add_action( 'wp_ajax_eael_eb_banner_promo_dismiss', [ $this, 'eael_eb_banner_promo_dismiss' ] );
+	}
+
+	public function eael_eb_popup_promo_init() {
+		add_action( 'enqueue_block_editor_assets', [ $this, 'essential_blocks_promo_enqueue_scripts' ] );
+		add_action( 'wp_ajax_eael_gb_eb_popup_dismiss', [ $this, 'eael_gb_eb_popup_dismiss' ] );
+	}
+
+	public function eael_eb_optin_promo_init() {
+		add_action( 'admin_notices', [ $this, 'essential_block_optin' ] );
+		add_action( 'eael_admin_notices', [ $this, 'essential_block_special_optin' ], 100 );
+		add_action( 'wp_ajax_eael_eb_optin_notice_dismiss', [ $this, 'eael_eb_optin_notice_dismiss' ] );
+	}
 }
