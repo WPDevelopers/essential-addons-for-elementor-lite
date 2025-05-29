@@ -238,12 +238,13 @@
 						if (found_posts.hasClass('found_posts') && found_posts.text() - obj.posts_per_page < 1) {
 							filterable_gallery_load_more_btn($this);
 						}
-					} else {
-						if ($max_page && $data.page >= $max_page) {
-							$this.addClass('hide-load-more');
-						}
 					}
 				}
+
+				if ( $max_page && $data.page >= $max_page ) {
+					$this.remove();
+				}
+				
 			},
 			error: function (response) {
 				console.log(response);
