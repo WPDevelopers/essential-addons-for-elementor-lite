@@ -130,8 +130,7 @@
   -webkit-transition: 0.5s;
   transition: 0.5s;
   -webkit-box-shadow: 0px 0px 3px -1px rgba(0, 0, 0, 0.2);
-  -ms-box-shadow: 0px 0px 3px -1px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 0px 3px -1px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 0px 3px -1px rgba(0, 0, 0, 0.2);
   margin-right: 10px;
   margin-top: 10px;
   z-index: 0;
@@ -150,6 +149,13 @@
   background: #3f51b5;
   -webkit-box-shadow: 0px 1px 12px 1px rgba(0, 0, 0, 0.1);
           box-shadow: 0px 1px 12px 1px rgba(0, 0, 0, 0.1);
+}
+.eael-call-to-action .cta-button.cta-secondary-button .btn-icon i {
+  font-size: 14px;
+}
+.eael-call-to-action .cta-button.cta-secondary-button .btn-icon svg {
+  width: 14px;
+  height: 14px;
 }
 .eael-call-to-action .cta-button.effect-1:after {
   content: "";
