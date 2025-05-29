@@ -150,6 +150,14 @@
   -webkit-box-shadow: 0px 1px 12px 1px rgba(0, 0, 0, 0.1);
           box-shadow: 0px 1px 12px 1px rgba(0, 0, 0, 0.1);
 }
+.eael-call-to-action .cta-button.cta-secondary-button .eael-secondary-btn-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
 .eael-call-to-action .cta-button.cta-secondary-button .btn-icon i {
   font-size: 14px;
 }

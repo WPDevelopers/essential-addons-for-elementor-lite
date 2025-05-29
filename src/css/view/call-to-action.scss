@@ -135,6 +135,10 @@
       }
 
       &.cta-secondary-button {
+         .eael-secondary-btn-flex{
+            display: flex;
+            align-items: center;
+         }
          .btn-icon{
             i{
                font-size: 14px;
