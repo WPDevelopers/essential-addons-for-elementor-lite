@@ -570,22 +570,6 @@ class Cta_Box extends Widget_Base
 		    ]
 	    );
 
-	    $this->add_control(
-		    'eael_cta_btn_icon',
-		    [
-			    'label' => esc_html__('Icon', 'essential-addons-for-elementor-lite'),
-			    'type' => Controls_Manager::ICONS,
-			    'default' => [
-				    'value' => 'fas fa-bullhorn',
-				    'library' => 'fa-solid',
-			    ],
-			    'condition' => [
-				    'eael_cta_preset' => 'cta-preset-2',
-				    'eael_cta_btn_preset' => 'cta-btn-preset-2',
-			    ]
-		    ]
-	    );
-
         $this->add_control(
             'eael_cta_btn_text_heading',
             [
@@ -608,6 +592,22 @@ class Cta_Box extends Widget_Base
                 ]
 			]
 		);
+
+	    $this->add_control(
+		    'eael_cta_btn_icon',
+		    [
+			    'label' => '',
+			    'type' => Controls_Manager::ICONS,
+			    'default' => [
+				    'value' => 'fas fa-bullhorn',
+				    'library' => 'fa-solid',
+			    ],
+			    'condition' => [
+				    'eael_cta_preset' => 'cta-preset-2',
+				    'eael_cta_btn_preset' => 'cta-btn-preset-2',
+			    ]
+		    ]
+	    );
 
         $this->add_control(
             'eael_cta_btn_primary_icon',
@@ -700,6 +700,64 @@ class Cta_Box extends Widget_Base
 				'return_value' => 'yes',
 			]
 		);
+
+        $this->add_control(
+			'eael_cta_secondary_btn_icon_show',
+			[
+				'label'        => __( 'Icon', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+                'condition'    => [
+                    'eael_cta_secondary_btn_is_show' => 'yes',
+                ]
+			]
+		);
+
+        $this->add_control(
+            'eael_cta_btn_secondary_icon',
+            [
+                'label'   => '',
+                'type'    => Controls_Manager::ICONS,
+                'default' => [
+                    'value'   => 'fas fa-arrow-right',
+                    'library' => 'fa-solid',
+                ],
+                'condition' => [
+                    'eael_cta_secondary_btn_is_show' => 'yes',
+                    'eael_cta_secondary_btn_icon_show' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+			'eael_cta_btn_secondary_icon_direction',
+			[
+				'label'   => esc_html__( 'Icon Position', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'left' => [
+						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-arrow-left',
+					],
+					'right' => [
+						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-arrow-right',
+					],
+				],
+				'default'   => 'left',
+				'toggle'    => true,
+				'selectors' => [
+					'{{WRAPPER}} .eael-call-to-action .cta-button.cta-preset-1 .btn-icon' => 'float: {{VALUE}};',
+				],
+                'condition' => [ 
+                    'eael_cta_secondary_btn_is_show' => 'yes',
+                    'eael_cta_secondary_btn_icon_show' => 'yes',
+                ],
+			]
+		);
+
         $this->add_control(
             'eael_cta_secondary_btn_text',
             [
@@ -1935,14 +1993,13 @@ class Cta_Box extends Widget_Base
 	    }
 	    $this->add_render_attribute( 'button', 'class', "cta-button {$settings['eael_cta_preset']} {$settings['eael_cta_btn_preset']} {$cta_btn_effect}" );
 
-        if($settings['eael_cta_btn_preset'] === 'cta-btn-preset-2'){
+        if( $settings['eael_cta_btn_preset'] === 'cta-btn-preset-2' ){
             $btn_icon_wrap = '<span class="btn-icon">';
 	        ob_start();
 	        Icons_Manager::render_icon( $settings['eael_cta_btn_icon'], [ 'aria-hidden' => 'true' ] );
 	        $btn_icon = ob_get_clean();
 	        $btn_icon_wrap_end = '</span>';
         } else if( $settings['eael_cta_primary_btn_icon_show'] == 'yes' && $settings['eael_cta_preset'] === 'cta-preset-1' ){
-            print_r($settings['eael_cta_btn_preset']);
             $btn_icon_wrap = '<span class="btn-icon">';
 	        ob_start();
 	        Icons_Manager::render_icon( $settings['eael_cta_btn_primary_icon'], [ 'aria-hidden' => 'true' ] );
@@ -1971,7 +2028,10 @@ class Cta_Box extends Widget_Base
 		    $this->add_render_attribute( 'secondary_button', 'class', "cta-button cta-secondary-button {$cta_secondary_btn_effect}" );
 
 		    // button markup
-		    $buttonMarkup .= '<a ' . $this->get_render_attribute_string( 'secondary_button' ) . '>' . esc_html( $settings['eael_cta_secondary_btn_text'] ) . '</a>';
+		    $buttonMarkup .= '<a ' . $this->get_render_attribute_string( 'secondary_button' ) . '>' . 
+                         $btn_icon_wrap . wp_kses( $btn_icon, Helper::eael_allowed_icon_tags() )  .
+                         $btn_icon_wrap_end .
+                         esc_html( $settings['eael_cta_secondary_btn_text'] ) . '</a>';
 	    }
     ?>
 	<?php if ('cta-basic' == $settings['eael_cta_type']): ?>
