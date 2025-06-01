@@ -3712,6 +3712,7 @@ class Product_Grid extends Widget_Base
 
                 if ( 'true' == $settings['show_pagination'] && 'source_archive' !== $settings['post_type'] ) {
 	                $settings['eael_widget_name'] = $this->get_name();
+                    $settings['eael_product_grid_template'] = $template_name;
                     // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	                echo HelperClass::eael_pagination( $args, $settings );
                 }
