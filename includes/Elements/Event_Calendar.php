@@ -977,6 +977,19 @@ class Event_Calendar extends Widget_Base
 	    );
 
         $this->add_control(
+            'eael_ec_search_label',
+            [
+                'label'       => esc_html__( 'Label', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::TEXT,
+                'ai'          => [ 'active' => false, ],
+                'placeholder' => esc_html__( 'Search', 'essential-addons-for-elementor-lite' ),
+                'condition'   => [
+                    'eael_ec_show_search' => 'yes',
+                ]
+            ]
+        );
+
+        $this->add_control(
             'eael_ec_search_align',
             [
                 'label' => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
@@ -3281,9 +3294,11 @@ class Event_Calendar extends Widget_Base
 
 	public function eaelec_display_table($data, $settings){
 		if ( $settings['eael_ec_show_search'] === 'yes' ) {
+            $labeltext = !empty( $settings['eael_ec_search_label'] ) ? $settings['eael_ec_search_label'] : '';
 			?>
 			<div class="ea-ec-search-wrap ea-ec-search-right">
-				<input type="search" placeholder="<?php echo esc_html( $settings['eael_ec_search_placeholder'] )?>" class="eael-event-calendar-table-search">
+                <label for="ea-ec-search-input-<?php echo esc_attr( $this->get_id() ) ?>" class="ea-ec-search-label<?php echo empty( $labeltext ) ? ' sr-only' : '' ?>"><?php echo !empty( $labeltext ) ? esc_html( $labeltext ) : esc_html__( 'Search', 'essential-addons-for-elementor-lite' )?></label>
+				<input type="search" id="ea-ec-search-input-<?php echo esc_attr( $this->get_id() ) ?>" placeholder="<?php echo esc_html( $settings['eael_ec_search_placeholder'] )?>" class="eael-event-calendar-table-search">
 			</div>
 			<?php
 		}
