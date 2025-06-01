@@ -737,11 +737,11 @@ class Cta_Box extends Widget_Base
 				'label'   => esc_html__( 'Icon Position', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
-					'row' => [
+					'left' => [
 						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eicon-arrow-left',
 					],
-					'row-reverse' => [
+					'right' => [
 						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
 						'icon'  => 'eicon-arrow-right',
 					],
@@ -749,7 +749,7 @@ class Cta_Box extends Widget_Base
 				'default'   => 'row',
 				'toggle'    => false,
 				'selectors' => [
-					'{{WRAPPER}} .eael-call-to-action .cta-button.cta-secondary-button .eael-secondary-btn-flex' => 'flex-direction: {{VALUE}};',
+					'{{WRAPPER}} .eael-call-to-action .cta-button.cta-secondary-button .btn-icon' => 'float: {{VALUE}};',
 				],
                 'condition' => [ 
                     'eael_cta_secondary_btn_is_show' => 'yes',
@@ -2194,10 +2194,10 @@ class Cta_Box extends Widget_Base
 		    $this->add_render_attribute( 'secondary_button', 'class', "cta-button cta-secondary-button {$cta_secondary_btn_effect}" );
 
 		    // button markup
-		    $buttonMarkup .= '<a ' . $this->get_render_attribute_string( 'secondary_button' ) . '><div class="eael-secondary-btn-flex">' . 
+		    $buttonMarkup .= '<a ' . $this->get_render_attribute_string( 'secondary_button' ) . '>' . 
                          $btn_icon_wrap . wp_kses( $btn_icon, Helper::eael_allowed_icon_tags() )  .
                          $btn_icon_wrap_end .
-                         esc_html( $settings['eael_cta_secondary_btn_text'] ) . '</div></a>';
+                         esc_html( $settings['eael_cta_secondary_btn_text'] ) . '</a>';
 	    }
     ?>
 	<?php if ('cta-basic' == $settings['eael_cta_type']): ?>
