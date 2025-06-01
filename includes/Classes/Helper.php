@@ -955,9 +955,15 @@ class Helper
 		$setPagination             = "";
 		$template_info             = [
 			'dir'       => 'free',
-			'file_name'  => $settings['eael_dynamic_template_Layout'],
+			'file_name'  => 'default',
 			'name'      => $settings['eael_widget_name']
 		];
+
+        if ( ! empty( $settings['eael_dynamic_template_Layout'] ) ) {
+            $template_info['file_name'] = $settings['eael_dynamic_template_Layout'];
+        } else if ( ! empty( $settings['eael_product_grid_template'] ) ) {
+            $template_info['file_name'] = $settings['eael_product_grid_template'];
+        }
 
 		if( $pagination_Paginationlist > 0 ){
 
