@@ -1234,6 +1234,32 @@ class Cta_Box extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_cta_primary_btn_icon_rotation',
+            [
+                'label' => esc_html__('Rotation', 'essential-addons-for-elementor-lite'),
+                'type'  => Controls_Manager::SLIDER,
+                'range' => [
+                    'deg' => [
+                        'min'  => -360,
+                        'max'  => 360,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'deg',
+                    'size' => 0,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-call-to-action .cta-button:not(.cta-secondary-button) .btn-icon i' => 'rotate: {{SIZE}}deg;',
+                    '{{WRAPPER}} .eael-call-to-action .cta-button:not(.cta-secondary-button) .btn-icon svg' => 'rotate: {{SIZE}}deg;',
+                ],
+                'condition' => [ 
+                    'eael_cta_primary_btn_icon_show' => 'yes',
+                ],
+            ]   
+        );
+
         $this->add_responsive_control(
             'eael_cta_primary_btn_icon_margin',
             [
@@ -1712,6 +1738,32 @@ class Cta_Box extends Widget_Base
                     'eael_cta_secondary_btn_icon_show' => 'yes',
                 ],
             ]
+        );
+
+        $this->add_control(
+            'eael_cta_secondary_btn_icon_rotation',
+            [
+                'label' => esc_html__('Rotation', 'essential-addons-for-elementor-lite'),
+                'type'  => Controls_Manager::SLIDER,
+                'range' => [
+                    'deg' => [
+                        'min'  => -360,
+                        'max'  => 360,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'deg',
+                    'size' => 0,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-secondary-button .btn-icon i' => 'rotate: {{SIZE}}deg;',
+                    '{{WRAPPER}} .eael-call-to-action .cta-button.cta-secondary-button .btn-icon svg' => 'rotate: {{SIZE}}deg;',
+                ],
+                'condition' => [ 
+                    'eael_cta_secondary_btn_icon_show' => 'yes',
+                ],
+            ]   
         );
 
         $this->add_control(
