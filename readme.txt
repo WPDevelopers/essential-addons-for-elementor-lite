@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.1.16
+Stable tag: 6.1.17
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -314,7 +314,7 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
-= 6.1.16 - 02/06/2025 =
+= 6.1.17 - 02/06/2025 =
 
 - Added: EA SVG Draw | New Fill Type (Always) Controller
 - Added: EA Filterable Gallery | Added Captions for Videos
