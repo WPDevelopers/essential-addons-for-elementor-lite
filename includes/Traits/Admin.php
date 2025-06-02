@@ -629,6 +629,15 @@ trait Admin {
 						    'is_pro'      => false,
 						    'is_activate' => boolval( $this->get_settings( 'wrapper-link' ) )
 					    ],
+					    'custom-cursor'          => [
+						    'key'         => 'custom-cursor',
+						    'title'       => __( 'Custom Cursor', 'essential-addons-for-elementor-lite' ),
+						    'demo_link'   => 'https://essential-addons.com/custom-cursor/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-custom-cursor/',
+						    'is_pro'      => false,
+							'promotion'   => 'new',
+						    'is_activate' => boolval( $this->get_settings( 'custom-cursor' ) )
+					    ],
 					    'advanced-dynamic-tags' => [
 						    'key'         => 'advanced-dynamic-tags',
 						    'title'       => __( 'Dynamic Tags', 'essential-addons-for-elementor-lite' ),

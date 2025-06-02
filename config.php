@@ -1341,6 +1341,18 @@ $config = [
 		        ],
 	        ],
         ],
+        'custom-cursor' => [
+	        'class'      => '\Essential_Addons_Elementor\Extensions\Custom_Cursor',
+            'dependency' => [
+		        // 'js'  => [
+			    //     [
+				//         'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/wrapper-link.min.js',
+				//         'type'    => 'self',
+				//         'context' => 'view',
+			    //     ],
+		        // ],
+	        ],
+        ],
         'special-hover-effect' => [
             'class'      => '\Essential_Addons_Elementor\Extensions\Hover_Effect',
             'dependency' => [
