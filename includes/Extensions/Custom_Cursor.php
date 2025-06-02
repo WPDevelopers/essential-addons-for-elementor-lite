@@ -3,6 +3,8 @@
 namespace Essential_Addons_Elementor\Extensions;
 
 use Elementor\Controls_Manager;
+use Elementor\Icons_Manager;
+use Essential_Addons_Elementor\Classes\Helper;
 
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -112,7 +114,24 @@ class Custom_Cursor {
 			$element->add_render_attribute( '_wrapper', 'data-eael-custom-cursor', 'yes' );
             if( 'image' === $settings['eael_custom_cursor_type'] && ! empty( $settings['eael_custom_cursor_image']['url'] ) ) {
                 $element->add_render_attribute( '_wrapper', 'style', 'cursor: url("' . $settings['eael_custom_cursor_image']['url'] . '") 0 0, auto;' );
+            }else if( 'icon' === $settings['eael_custom_cursor_type'] && ! empty( $settings['eael_custom_cursor_icon']['value'] ) ) {
+				$svg = '';
+				if( 'icon' === $settings['eael_custom_cursor_icon']['library'] ) {
+					$attributes = [
+						'height' => '50',
+						'width'  => '50',
+						'fill'  => '#c36'
+					];
+					$svg  = Helper::get_svg_by_icon( $settings['eael_custom_cursor_icon'], $attributes );
+				} else if( 'svg' === $settings['eael_custom_cursor_icon']['library'] ) {
+					$svg = Icons_Manager::try_get_icon_html( $settings['eael_custom_cursor_icon'], [ 'aria-hidden' => 'true' ] );
+				}
+				if( ! empty( $svg ) ) {
+					$svg = base64_encode( $svg );
+					$element->add_render_attribute( '_wrapper', 'style', 'cursor: url("data:image/svg+xml;base64,' . $svg . '") 0 0, auto;' );
+				}
             }
+			
 		}
 	}
 }
