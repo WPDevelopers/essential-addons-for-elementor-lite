@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.1.15
+Stable tag: 6.1.17
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -313,6 +313,29 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.1.17 - 02/06/2025 =
+
+- Added: EA SVG Draw | New Fill Type (Always) Controller
+- Added: EA Filterable Gallery | Added Captions for Videos
+- Fixed: EA Advanced Data Table | Sorting Issue for non-English Languages
+- Fixed: EA Advanced Data Table | Sorting Icon Shows Console Error
+- Fixed: EA Woo Product Gallery |  Quick View Popup Styling Issue
+- Fixed: EA Woo Product Gallery |  "View Cart" Button Line Height Is Incorrect
+- Fixed: EA Simple Menu |  Undefined Array Key "eael_simple_menu_menu" Warning
+- Fixed: EA Woo Product Grid | "View More" Button Visible After Full Load in Elementor Tabs
+- Fixed: EA Woo Product Grid | Issues with Missing Products
+- Fixed: EA Woo Product Image | Image Scaling Issue
+- Fixed: EA Login/Register Form | Validation Message Not Showing
+- Fixed: EA Login/Register Form | Issue Submitting Forms With File Uploads
+- Fixed: EA SVG Draw  | Fill After Draw Issue
+- Fixed: EA Post Grid  | Excluding Pages Issue
+- Fixed: Compatibility Issue with Newer PHP Versions.
+- Improved: EA Fancy Text | Animation Delay Until Section Scrolls Into View.
+- Improved: EA Filterable Gallery | Revamped Controls & Layouts
+- Improved : Removed Unused Class “use” Declaration
+- Improved: EA Post Grid, Team Member, Testimonial, Woo Product Grid, Woo Product Gallery | Controls Reorganized in Elementor Panel
+- Few minor bug fixes & improvements
 
 = 6.1.15 - 25/05/2025 =
 

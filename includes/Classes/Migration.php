@@ -97,9 +97,12 @@ class Migration
                     ON options_tb2.option_id = options_tb.option_id";
 		$selection_sql = "select count(options_tb.option_id) as total " . $sql;
 
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$results = $wpdb->get_var( $selection_sql );
 		if ( $results > 0 ) {
 			$deletiation_sql = "delete options_tb " . $sql;
+
+      // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$wpdb->query( $deletiation_sql );
 		}
 

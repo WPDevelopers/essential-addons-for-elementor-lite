@@ -1,6 +1,5 @@
 <?php
 namespace Essential_Addons_Elementor\Controls;
-use Elementor\Base_Data_Control;
 use Elementor\Control_Choose;
 
 if ( ! defined( 'ABSPATH' ) ) {
