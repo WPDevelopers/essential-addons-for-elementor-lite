@@ -34,7 +34,7 @@ class Custom_Cursor {
 		$element->add_control(
 			'eael_custom_cursor_switch',
 			[
-				'label'        => __( 'Enable Custom Cursor', 'essential-addons-for-elementor-lite' ),
+				'label'        => __( 'Enable', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes'
 			]
@@ -43,16 +43,16 @@ class Custom_Cursor {
 		$element->add_control(
 			'eael_custom_cursor_type',
 			[
-				'label'     => __( 'Cursor Type', 'essential-addons-for-elementor-lite' ),
+				'label'     => __( 'Type', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [
 					'icon'   => [
-						'title' => __( 'Pointer', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'eicon-pointer'
+						'title' => __( 'Icon', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-favorite'
 					],
-					'crosshair' => [
-						'title' => __( 'Crosshair', 'essential-addons-for-elementor-lite' ),
-						'icon'  => 'eicon-crosshair'
+					'image' => [
+						'title' => __( 'Image', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-image'
 					]
 				],
 				'default'   => 'icon',
@@ -62,33 +62,57 @@ class Custom_Cursor {
 			]
 		);
 
+        $element->add_control(
+			'eael_custom_cursor_icon',
+			[
+				'label'     => '',
+				'type'      => Controls_Manager::ICONS,
+				'condition' => [
+					'eael_custom_cursor_switch' => 'yes',
+					'eael_custom_cursor_type'   => 'icon'
+				]
+			]
+		);
+
+        $element->add_control(
+			'eael_custom_cursor_image',
+			[
+				'label'     => '',
+				'type'      => Controls_Manager::MEDIA,
+                'ai' => [
+					'active' => false,
+				],
+				'condition' => [
+					'eael_custom_cursor_switch' => 'yes',
+					'eael_custom_cursor_type'   => 'image'
+				]
+			]
+		);
+
+        $element->add_control(
+			'eael_custom_cursor_image_notice',
+			[
+				'type'        => Controls_Manager::NOTICE,
+                'notice_type' => 'warning',
+                'content'     => __( 'Cursor image must be optimized and no larger than 128x128 pixels. For best compatibility across browsers, a 32x32 pixel size is recommended.', 'essential-addons-for-elementor-lite' ),
+				'condition'   => [
+					'eael_custom_cursor_switch' => 'yes',
+					'eael_custom_cursor_type'   => 'image'
+				]
+			]
+		);
+
 		$element->end_controls_section();
 	}
 
 	public function before_render( $element ) {
-		$wrapper_link_settings = $element->get_settings_for_display( 'eael_wrapper_link' );
+		$settings = $element->get_settings_for_display();
 
-		if ( "yes" === $element->get_settings_for_display( 'eael_wrapper_link_switch' ) && ! empty( $wrapper_link_settings['url'] ) ) {
-			$disable_traditional = $element->get_settings_for_display( 'eael_wrapper_link_disable_traditional' );
-			if( 'yes' === $disable_traditional ){
-				$element->add_render_attribute( '_wrapper',
-					'data-eael-wrapper-link',
-					wp_json_encode( [
-						'url'         => esc_url( $wrapper_link_settings['url'] ),
-						'is_external' => esc_attr( $wrapper_link_settings['is_external'] ),
-						'nofollow'    => esc_attr( $wrapper_link_settings['nofollow'] )
-					] )
-				);
-
-				$element->add_render_attribute( '_wrapper', 'class', 'eael-non-traditional-link' );
-			} else {
-				$link_id = 'eael-wrapper-link-' . $element->get_id();
-				$element->add_render_attribute( 'eael_wrapper_link', 'class', $link_id . ' --eael-wrapper-link-tag' );
-				$element->add_link_attributes( 'eael_wrapper_link', $wrapper_link_settings );
-				echo "<a "; $element->print_render_attribute_string( 'eael_wrapper_link' ); echo "></a>";
-
-				$element->add_render_attribute( '_wrapper', 'data-eael-wrapper-link', $link_id );
-			}
+		if ( "yes" === $settings['eael_custom_cursor_switch'] ) {
+			$element->add_render_attribute( '_wrapper', 'data-eael-custom-cursor', 'yes' );
+            if( 'image' === $settings['eael_custom_cursor_type'] && ! empty( $settings['eael_custom_cursor_image']['url'] ) ) {
+                $element->add_render_attribute( '_wrapper', 'style', 'cursor: url("' . $settings['eael_custom_cursor_image']['url'] . '") 0 0, auto;' );
+            }
 		}
 	}
 }
