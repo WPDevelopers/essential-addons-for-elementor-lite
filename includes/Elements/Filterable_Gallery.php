@@ -3874,8 +3874,8 @@ class Filterable_Gallery extends Widget_Base
                             $html .= $title_link_open . '<' . Helper::eael_validate_html_tag( $settings['title_tag'] ) . ' class="fg-item-title">' . $item['title'] . '</' . Helper::eael_validate_html_tag( $settings['title_tag'] ) . '>' . $title_link_close;
                         }
             
-                        if (!empty($item['content'])) {
-                            $html .= '<div class="fg-item-content">' . wpautop( $item['content'] ) . '</div>';
+                        if ( !empty( $item['content'] ) ) {
+                            $html .= '<div class="fg-item-content">' . wpautop( preg_replace('/<a\b[^>]*>(.*?)<\/a>/i', '', $item['content'] ) ) . '</div>';
                         }
                     }
                     $html .= '</div>';
