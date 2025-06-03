@@ -3928,8 +3928,7 @@ class Filterable_Gallery extends Widget_Base
             }
 
             if ( ! empty( $item['content'] ) ) {
-                $content = ! $is_image_clickable ? $item['content'] : preg_replace('/<a\b[^>]*>(.*?)<\/a>/i', '', $item['content'] );
-                $html .= '<div class="fg-item-content">' . wpautop($content ) . '</div>';
+                $html .= '<div class="fg-item-content">' . wpautop($item['content'] ) . '</div>';
             }
         }
 
@@ -4154,17 +4153,16 @@ class Filterable_Gallery extends Widget_Base
                 $html .= '<a area-hidden="true" aria-label="eael-magnific-link" href="' . esc_url($item['image']) . '" class="'. $magnific_class .' media-content-wrap" data-elementor-open-lightbox="' . esc_attr( $is_lightbox ) . '" title="' . esc_attr( $title ) . '">';
             }
 
-
-            if ($item['video_gallery_switch'] != 'true' || $settings['eael_fg_caption_style'] == 'card') {
-                $html .= $this->gallery_item_caption_content($settings, $item, $caption_style);
-            }
-
             if ($settings['eael_fg_show_popup'] == 'media') {
                 $html .= '</a>';
             }
 
             if ($settings['eael_section_fg_full_image_clickable']) {
                 $html .= '</a>';
+            }
+
+            if ($item['video_gallery_switch'] != 'true' || $settings['eael_fg_caption_style'] == 'card') {
+                $html .= $this->gallery_item_caption_content($settings, $item, $caption_style);
             }
 
             $html .= '</div></div>';
