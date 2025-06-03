@@ -3912,7 +3912,7 @@ class Filterable_Gallery extends Widget_Base
         if (isset($item['title']) && !empty($item['title']) || isset($item['content']) && !empty($item['content'])) {
             if (!empty($item['title'])) {
                 $title_link_open = $title_link_close = '';
-                if ( $settings['eael_title_clickable'] === 'yes' && ! $is_image_clickable ){
+                if ( $settings['eael_title_clickable'] === 'yes' ) {
                     static $ea_link_repeater_index = 0;
 	                $link_key = 'link_' . $ea_link_repeater_index++;
                     if ( empty( $this->get_render_attribute_string( $link_key ) ) ){
