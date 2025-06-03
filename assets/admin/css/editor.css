@@ -325,3 +325,8 @@
   font-size: 12px;
   color: inherit;
 }
+
+/* Hide SVG Uploader for custom cursor icon */
+.elementor-control.elementor-control-eael_custom_cursor_icon .elementor-control-field.elementor-control-media .elementor-control-media__tools.elementor-control-dynamic-switcher-wrapper .elementor-control-media__tool.elementor-control-svg-uploader{
+	display: none !important;
+}

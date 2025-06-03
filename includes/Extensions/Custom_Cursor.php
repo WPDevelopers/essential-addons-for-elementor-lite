@@ -76,6 +76,41 @@ class Custom_Cursor {
 			]
 		);
 
+		$element->add_control(
+			'eael_custom_cursor_icon_size',
+			[
+				'label'     => __( 'Icon Size', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => [
+					'px' => [
+						'min' => 1,
+						'max' => 128
+					]
+				],
+				'default'   => [
+					'size' => 50,
+					'unit' => 'px'
+				],
+				'condition' => [
+					'eael_custom_cursor_switch' => 'yes',
+					'eael_custom_cursor_type'   => 'icon'
+				]
+			]
+		);
+
+		$element->add_control(
+			'eael_custom_cursor_icon_color',
+			[
+				'label'     => __( 'Icon Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#9121fc',
+				'condition' => [
+					'eael_custom_cursor_switch' => 'yes',
+					'eael_custom_cursor_type'   => 'icon'
+				]
+			]
+		);
+
         $element->add_control(
 			'eael_custom_cursor_image',
 			[
@@ -112,25 +147,32 @@ class Custom_Cursor {
 
 		if ( "yes" === $settings['eael_custom_cursor_switch'] ) {
 			$element->add_render_attribute( '_wrapper', 'data-eael-custom-cursor', 'yes' );
+			$cursor = '';
             if( 'image' === $settings['eael_custom_cursor_type'] && ! empty( $settings['eael_custom_cursor_image']['url'] ) ) {
-                $element->add_render_attribute( '_wrapper', 'style', 'cursor: url("' . $settings['eael_custom_cursor_image']['url'] . '") 0 0, auto;' );
-            }else if( 'icon' === $settings['eael_custom_cursor_type'] && ! empty( $settings['eael_custom_cursor_icon']['value'] ) ) {
-				$svg = '';
-				if( 'icon' === $settings['eael_custom_cursor_icon']['library'] ) {
-					$attributes = [
-						'height' => '50',
-						'width'  => '50',
-						'fill'  => '#c36'
-					];
-					$svg  = Helper::get_svg_by_icon( $settings['eael_custom_cursor_icon'], $attributes );
-				} else if( 'svg' === $settings['eael_custom_cursor_icon']['library'] ) {
-					$svg = Icons_Manager::try_get_icon_html( $settings['eael_custom_cursor_icon'], [ 'aria-hidden' => 'true' ] );
-				}
+				$cursor = 'url("' . $settings['eael_custom_cursor_image']['url'] . '") 0 0, auto';
+            } else if( 'icon' === $settings['eael_custom_cursor_type'] && ! empty( $settings['eael_custom_cursor_icon']['value'] ) && 'svg' !== $settings['eael_custom_cursor_icon']['library'] ) {
+				$size = !empty( $settings['eael_custom_cursor_icon_size']['size'] ) ? $settings['eael_custom_cursor_icon_size']['size'] : 50;
+				$attributes = [
+					'height' => $size,
+					'width'  => $size,
+				];
+				$attributes['fill'] = !empty( $settings['eael_custom_cursor_icon_color'] ) ? $settings['eael_custom_cursor_icon_color'] : '#000';
+				$svg  = Helper::get_svg_by_icon( $settings['eael_custom_cursor_icon'], $attributes );
 				if( ! empty( $svg ) ) {
 					$svg = base64_encode( $svg );
-					$element->add_render_attribute( '_wrapper', 'style', 'cursor: url("data:image/svg+xml;base64,' . $svg . '") 0 0, auto;' );
+					$cursor = 'url("data:image/svg+xml;base64,' . $svg . '") 0 0, auto';
 				}
-            }
+            } else if( 'svg' === $settings['eael_custom_cursor_type'] && ! empty( $settings['eael_custom_cursor_icon']['value'] ) && 'svg' === $settings['eael_custom_cursor_icon']['library'] ) {
+				$svg = Icons_Manager::try_get_icon_html( $settings['eael_custom_cursor_icon'], [ 'aria-hidden' => 'true' ] );
+				if( ! empty( $svg ) ) {
+					$svg = base64_encode( $svg );
+					$cursor = 'url("data:image/svg+xml;base64,' . $svg . '") 0 0, auto';
+				}
+			}
+
+			if( ! empty( $cursor ) ) {
+				$element->add_render_attribute( '_wrapper', 'style', 'cursor: ' . $cursor . ';' );
+			}
 			
 		}
 	}
