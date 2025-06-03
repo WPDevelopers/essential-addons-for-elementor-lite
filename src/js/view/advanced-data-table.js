@@ -214,8 +214,8 @@ class advancedDataTable {
     
         rows.sort(function(a, b) {
           var colIndex = th.index();
-          var valueA = jQuery(a).children().eq(colIndex).text().toUpperCase().replace(/[^A-Za-z0-9\s]/g, '');
-          var valueB = jQuery(b).children().eq(colIndex).text().toUpperCase().replace(/[^A-Za-z0-9\s]/g, '');
+          var valueA = jQuery(a).children().eq(colIndex).text().toUpperCase().replace(/[^\p{L}\p{N}\s]/gu, '');
+          var valueB = jQuery(b).children().eq(colIndex).text().toUpperCase().replace(/[^\p{L}\p{N}\s]/gu, '');
 
           if (isLikelyDate(valueA) && isLikelyDate(valueB)) {
             // Both are likely dates, sort by parsed date
@@ -247,7 +247,7 @@ class advancedDataTable {
               currentPage    =  startIndex = 1,
               endIndex       = rows.length;
           
-          currentPage = paginationType == "button" ? $( '.ea-adtp-current', pagination ).data('page') : $("select", pagination).val();
+          currentPage = paginationType == "button" ? jQuery( '.ea-adtp-current', pagination ).data('page') : $("select", pagination).val();
 
           startIndex = (currentPage - 1) * itemsPerPage;
           endIndex = endIndex - (currentPage - 1) * itemsPerPage >= itemsPerPage ? currentPage * itemsPerPage : endIndex;

@@ -261,12 +261,13 @@ jQuery(window).on("elementor/frontend/init", function () {
 })(jQuery);
 
 (function ($) {
-	$.fn.isInViewport = function() {
+	$.fn.isInViewport = function( offset = 2 ) {
+		
 		if ($(this).length < 1 ) return false;
 		var elementTop = $(this).offset().top;
-		var elementBottom = elementTop + $(this).outerHeight() / 2;
+		var elementBottom = elementTop + $(this).outerHeight() / offset;
 		var viewportTop = $(window).scrollTop();
-		var viewportHalf = viewportTop + $(window).height() / 2;
+		var viewportHalf = viewportTop + $(window).height() / offset;
 		return elementBottom > viewportTop && elementTop < viewportHalf;
 	};
 
