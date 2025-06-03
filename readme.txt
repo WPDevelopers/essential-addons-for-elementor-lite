@@ -1,4 +1,4 @@
-=== Elementor Essential Addons – Popular Elementor Templates & Widgets ===
+=== Essential Addons for Elementor - Popular Elementor Templates and Widgets ===
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, nhrrob, jakariaistauk, himadree12
 Tags: elementor, elementor addons, elementor widgets, elementor templates, elementor woocommerce
 Requires at least: 5.0
