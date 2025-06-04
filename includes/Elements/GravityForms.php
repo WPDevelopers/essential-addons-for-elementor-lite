@@ -866,6 +866,7 @@ class GravityForms extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'selectors'             => [
                     'html body {{WRAPPER}} .eael-gravity-form .gfield label' => 'color: {{VALUE}}',
+                    'html body {{WRAPPER}} .eael-gravity-form .gfield .gfield_list_header .gform-field-label' => 'color: {{VALUE}}',
                 ],
                 'condition'             => [
                     'labels_switch'   => 'yes',
@@ -878,7 +879,7 @@ class GravityForms extends Widget_Base {
             [
                 'name'                  => 'typography_sub_label',
                 'label'                 => __( 'Typography', 'essential-addons-for-elementor-lite'),
-                'selector'              => 'html body {{WRAPPER}} .eael-gravity-form .gfield label',
+                'selector'              => 'html body {{WRAPPER}} .eael-gravity-form .gfield label, html body {{WRAPPER}} .eael-gravity-form .gfield .gfield_list_header .gform-field-label',
                 'condition'             => [
                     'labels_switch'   => 'yes',
                 ],
