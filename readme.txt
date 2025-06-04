@@ -4,11 +4,11 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.1.17
+Stable tag: 6.1.18
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-Elementor’s most-used addon, featuring an advanced elements library with 100+ powerful Elementor widgets and extensions across various niches.
+Elementor addon offering 100+ widgets and templates— Info Box, Post Grid, Menu, Accordion, Countdown, Gallery, WooCommerce integration & more.
 
 == Description ==
 
@@ -313,6 +313,13 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.1.18 - 04/06/2025 =
+
+- Fixed: EA Woo Product Gallery | category tab not working
+- Few minor bug fixes & improvements
+
+
 
 = 6.1.17 - 02/06/2025 =
 
