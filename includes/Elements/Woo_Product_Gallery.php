@@ -3047,8 +3047,8 @@ class Woo_Product_Gallery extends Widget_Base {
 			return;
 		}
 
-		$template_name = $settings[ 'eael_product_gallery_style_preset' ];	
-		if( in_array( $template_name, [ 'eael-product-preset-1', 'eael-product-preset-2', 'eael-product-preset-3', 'eael-product-preset-4' ] ) ){
+		$template_name = $settings['eael_product_gallery_style_preset'];
+		if ( in_array( $template_name, [ 'eael-product-preset-1', 'eael-product-preset-2', 'eael-product-preset-3', 'eael-product-preset-4' ] ) ) {
 			$template_name = str_replace( 'eael-product-', '', $template_name );
 		}
 
