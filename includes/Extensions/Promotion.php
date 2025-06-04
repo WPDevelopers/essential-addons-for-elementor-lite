@@ -20,6 +20,12 @@ class Promotion
 			add_action( 'elementor/element/section/section_advanced/after_section_end', [ $this, 'conditional_display' ] );
 			add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'smooth_animation' ] );
 			add_action( 'elementor/element/column/section_advanced/after_section_end', [ $this, 'smooth_animation' ] );
+
+            //Custom Cursor
+            add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'custom_cursor' ] );
+            add_action( 'elementor/element/column/section_advanced/after_section_end', [ $this, 'custom_cursor' ] );
+            add_action( 'elementor/element/section/section_advanced/after_section_end', [ $this, 'custom_cursor' ] );
+            add_action( 'elementor/element/container/section_layout/after_section_end', [ $this, 'custom_cursor' ] );
 		}
 	}
 
@@ -180,5 +186,29 @@ class Promotion
 
 		$element->end_controls_section();
 	}
+
+    public function custom_cursor($element)
+    {
+        $element->start_controls_section(
+            'eael_ext_custom_cursor_section',
+            [
+                'label' => __('<i class="eaicon-logo"></i> Custom Cursor', 'essential-addons-for-elementor-lite'),
+                'tab' => Controls_Manager::TAB_ADVANCED,
+            ]
+        );
+
+        $element->add_control(
+            'eael_ext_custom_cursor_section_pro_required',
+            [
+                'type' => Controls_Manager::RAW_HTML,
+                'raw' => $this->teaser_template([
+                    'title'   => __('Meet EACustom Cursor', 'essential-addons-for-elementor-lite'),
+                    'messages' => __('Personalize your cursor with a unique style to enhance user experience and visual appeal.', 'essential-addons-for-elementor-lite'),
+                ]),
+            ]
+        );
+
+        $element->end_controls_section();
+    }
 
 }

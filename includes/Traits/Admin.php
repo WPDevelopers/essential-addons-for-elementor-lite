@@ -633,7 +633,7 @@ trait Admin {
 						    'title'       => __( 'Custom Cursor', 'essential-addons-for-elementor-lite' ),
 						    'demo_link'   => 'https://essential-addons.com/custom-cursor/',
 						    'doc_link'    => 'https://essential-addons.com/docs/ea-custom-cursor/',
-						    'is_pro'      => false,
+						    'is_pro'      => true,
 							'promotion'   => 'new',
 						    'is_activate' => boolval( $this->get_settings( 'custom-cursor' ) )
 					    ],
