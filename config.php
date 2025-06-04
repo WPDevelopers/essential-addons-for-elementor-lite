@@ -1346,18 +1346,6 @@ $config = [
 		        ],
 	        ],
         ],
-        'custom-cursor' => [
-	        'class'      => '\Essential_Addons_Elementor\Extensions\Custom_Cursor',
-            'dependency' => [
-		        'js'  => [
-			        [
-				        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/custom-cursor.min.js',
-				        'type'    => 'self',
-				        'context' => 'edit',
-			        ],
-		        ],
-	        ],
-        ],
         'special-hover-effect' => [
             'class'      => '\Essential_Addons_Elementor\Extensions\Hover_Effect',
             'dependency' => [
