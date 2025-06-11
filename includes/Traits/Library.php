@@ -2,8 +2,6 @@
 
 namespace Essential_Addons_Elementor\Traits;
 
-use Elementor\Plugin;
-
 if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly

@@ -205,6 +205,10 @@
 								$(this).wc_product_gallery();
 							});
 						}
+						
+						if( $page >= $max_page ){
+							$this.remove();
+						}
 					} else {
 						$(".eael-post-appender", $scope).append($content);
 

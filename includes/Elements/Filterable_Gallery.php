@@ -16,7 +16,6 @@ use Elementor\Plugin;
 use \Elementor\Widget_Base;
 use \Elementor\Repeater;
 use \Elementor\Group_Control_Background;
-use \Elementor\Utils;
 
 use \Essential_Addons_Elementor\Classes\Helper;
 
@@ -3828,13 +3827,13 @@ class Filterable_Gallery extends Widget_Base
      * @return string : Html markup
      */
     protected function video_gallery_switch_content( $item, $caption_style, $show_video_popup_bg=true, $settings = null ) {
-        $html           = '';
-        $icon_url       = isset($item['play_icon']['url']) ? $item['play_icon']['url'] : '';
-        $video_url      = isset($item['video_link']) ? $item['video_link'] : '#';
-        $privacy_notice = isset( $settings['eael_privacy_notice'] ) ? $settings['eael_privacy_notice'] : '';
-        $classes        = "video-popup eael-magnific-link eael-magnific-link-clone active eael-magnific-video-link mfp-iframe playout-" . $item['video_layout'];
+        $html       = '';
+        $icon_url   = isset($item['play_icon']['url']) ? $item['play_icon']['url'] : '';
+        $video_url  = isset($item['video_link']) ? $item['video_link'] : '#';
+        $title      = isset( $item['title'] ) ? $item['title'] : '';
+        $classes    = "video-popup eael-magnific-link eael-magnific-link-clone active eael-magnific-video-link mfp-iframe playout-" . $item['video_layout'];
         
-        $html .= '<a area-hidden="true" title="' . esc_attr( strip_tags( $privacy_notice ) ) .'" aria-label="eael-magnific-video-link" href="' . esc_url($video_url) . '" class="' . esc_attr( $classes ) . '" data-id="'. esc_attr( $item['id'] ) .'" data-elementor-open-lightbox="yes">';
+        $html .= '<a area-hidden="true"  title="' . esc_attr( strip_tags( $title ) ) .'" aria-label="eael-magnific-video-link" href="' . esc_url($video_url) . '" class="' . esc_attr( $classes ) . '" data-id="'. esc_attr( $item['id'] ) .'" data-elementor-open-lightbox="yes">';
 
         if( $show_video_popup_bg ) {
             if( 'caption-style-card' === $caption_style ) {
@@ -4271,6 +4270,10 @@ class Filterable_Gallery extends Widget_Base
             'data-is-randomize' => 'yes' === $settings['eael_item_randomize'] ? 'yes' : 'no',
         ]);
 
+        if( 'yes' === $settings['eael_privacy_notice_control'] && !empty( $settings['eael_privacy_notice'] ) ) {
+            $this->add_render_attribute( 'gallery-items-wrap', 'data-privacy-notice', esc_html( $settings['eael_privacy_notice'] ) );
+        }
+
         $html_json   = wp_json_encode( $gallery_items );
         $json_base64 = base64_encode( $html_json );
         
@@ -4328,15 +4331,17 @@ class Filterable_Gallery extends Widget_Base
             jQuery(document).ready(function($) {
                 $('.eael-filter-gallery-container').each(function() {
                     var $node_id = '<?php echo esc_js($this->get_id()); ?>',
-                        $scope = $('[data-id="' + $node_id + '"]'),
-                        $gallery = $(this),
-                        $settings = $gallery.data('settings'),
-						fg_items = $gallery_items = $gallery.data('gallery-items'),
-                        $layout_mode = ($settings.grid_style == 'masonry' ? 'masonry' : 'fitRows'),
+                        $scope           = $('[data-id=" ' + $node_id + '"]'),
+                        $gallery         = $(this),
+                        $settings        = $gallery.data('settings'),
+				        fg_items 		 = JSON.parse( atob( $gallery.data("gallery-items") ) ),
+                        $layout_mode     = ($settings.grid_style      == 'masonry' ? 'masonry': 'fitRows'),
                         $gallery_enabled = ($settings.gallery_enabled == 'yes' ? true : false),
-                        input = $scope.find('#fg-search-box-input'),
+                        input            = $scope.find('#fg-search-box-input'),
                         searchRegex, buttonFilter, timer;
-					    $init_show_setting     = $gallery.data("init-show");
+					    $init_show_setting  = $gallery.data("init-show");
+
+
 					fg_items.splice(0, $init_show_setting)
                     var filterControls = $scope.find(".fg-layout-3-filter-controls").eq(0)
 

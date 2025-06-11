@@ -1,8 +1,6 @@
 <?php
 
 namespace Essential_Addons_Elementor\Template\Woocommerce\Cart;
-
-use Elementor\Icons_Manager;
 use \Essential_Addons_Elementor\Classes\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {

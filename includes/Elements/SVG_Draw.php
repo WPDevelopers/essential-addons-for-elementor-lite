@@ -100,7 +100,7 @@ class SVG_Draw extends Widget_Base {
 			'eael_svg_icon',
 			[
 				'label'     => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::ICONS,
+				'type'      => Controls_Manager::ICONS,
 				'default'   => [
 					'value'   => [
 						'url' => EAEL_PLUGIN_URL . 'assets/admin/images/svg-draw.svg',
@@ -237,17 +237,17 @@ class SVG_Draw extends Widget_Base {
 		$this->add_control(
 			'eael_svg_fill',
 			[
-				'label'   => esc_html__( 'SVG Fill Type', 'essential-addons-for-elementor-lite' ),
+				'label'   => esc_html__( 'Fill Type', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'none',
 				'options' => [
 					'none'   => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
-					'after'  => esc_html__( 'Fill After Draw', 'essential-addons-for-elementor-lite' ),
-					'before' => esc_html__( 'Fill Before Draw', 'essential-addons-for-elementor-lite' ),
+					'always' => esc_html__( 'Always', 'essential-addons-for-elementor-lite' ),
+					'after'  => esc_html__( 'After Draw', 'essential-addons-for-elementor-lite' ),
+					'before' => esc_html__( 'Before Draw', 'essential-addons-for-elementor-lite' ),
 				],
 			]
 		);
-
 
 		$this->add_control(
 			'eael_svg_fill_transition',
@@ -256,9 +256,6 @@ class SVG_Draw extends Widget_Base {
 				'type'        => Controls_Manager::NUMBER,
 				'default'     => 1,
 				'min'         => 0,
-				'selectors'   => [
-					'{{WRAPPER}} .fill-svg svg path' => 'animation-duration: {{SIZE}}s;',
-				],
 				'description' => esc_html__( 'Duration on SVG fills (in seconds)', 'essential-addons-for-elementor-lite' )
 			]
 		);
@@ -273,25 +270,100 @@ class SVG_Draw extends Widget_Base {
 					'none'        => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
 					'page-load'   => esc_html__( 'On Page Load', 'essential-addons-for-elementor-lite' ),
 					'page-scroll' => esc_html__( 'On Page Scroll', 'essential-addons-for-elementor-lite' ),
-					'hover'       => esc_html__( 'Mouse Hover', 'essential-addons-for-elementor-lite' ),
+					'mouse-hover' => esc_html__( 'Mouse Hover', 'essential-addons-for-elementor-lite' ),
 				],
 				'separator' => 'before'
 			]
 		);
 
 		$this->add_control(
-			'eael_svg_draw_offset',
+			'eael_svg_animation_type',
 			[
-				'label'       => esc_html__( 'Drawing Start Point', 'essential-addons-for-elementor-lite' ),
-				'type'        => Controls_Manager::NUMBER,
-				'min'         => 1,
-				'max'         => 1000,
-				'step'        => 1,
-				'default'     => 50,
-				'condition'   => [
-					'eael_svg_animation_on' => [ 'page-scroll' ],
+				'label'     => esc_html__( 'Draw Type', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'none',
+				'options'   => [
+					'none'                 => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
+					'power3.inOut'         => esc_html__( 'Power', 'essential-addons-for-elementor-lite' ),
+					'power3.in'            => esc_html__( 'Power In', 'essential-addons-for-elementor-lite' ),
+					'power3.out'           => esc_html__( 'Power Out', 'essential-addons-for-elementor-lite' ),
+					'back.inOut(2)'        => esc_html__( 'Back', 'essential-addons-for-elementor-lite' ),
+					'back.in(2)'           => esc_html__( 'Back In', 'essential-addons-for-elementor-lite' ),
+					'back.out(2)'          => esc_html__( 'Back Out', 'essential-addons-for-elementor-lite' ),
+					'bounce.inOut'         => esc_html__( 'Bounce', 'essential-addons-for-elementor-lite' ),
+					'bounce.in'            => esc_html__( 'Bounce In', 'essential-addons-for-elementor-lite' ),
+					'bounce.out'           => esc_html__( 'Bounce Out', 'essential-addons-for-elementor-lite' ),
+					'elastic.inOut(1,0.4)' => esc_html__( 'Elastic', 'essential-addons-for-elementor-lite' ),
+					'elastic.in(1,0.4)'    => esc_html__( 'Elastic In', 'essential-addons-for-elementor-lite' ),
+					'elastic.out(1,0.4)'   => esc_html__( 'Elastic 0ut', 'essential-addons-for-elementor-lite' ),
+					'steps(50)'            => esc_html__( 'Steps', 'essential-addons-for-elementor-lite' ),
 				],
-				'description' => esc_html__( 'The point at which the drawing begins to animate as scrolls down (in pixels).', 'essential-addons-for-elementor-lite' )
+				'condition'   => [
+					'eael_svg_animation_on!' => [ 'none', 'page-scroll' ],
+				]
+			]
+		);
+
+		$this->add_control( 
+			'eael_show_marker',
+			[
+				'label'        => esc_html__( 'Marker', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'description'  => esc_html__( 'This will help you to understand the start and end point of the animation. It will only work on Editor mode.', 'essential-addons-for-elementor-lite' ),
+				'condition'    => [
+					'eael_svg_animation_on' => 'page-scroll',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_svg_draw_start_point',
+			[
+				'label'       => esc_html__( 'Drawing Start Point(%)', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::SLIDER,
+				'label_block' => true,
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'unit' => '%',
+					'size' => 0,
+				],
+				'condition'   => [
+					'eael_svg_animation_on' => 'page-scroll',
+				],
+				'description' => esc_html__( 'The point at which the drawing begins to the page bottom.', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
+		$this->add_control(
+			'eael_svg_draw_end_point',
+			[
+				'label'       => esc_html__( 'Drawing End Point(%)', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::SLIDER,
+				'label_block' => true,
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'unit' => '%',
+					'size' => 10,
+				],
+				'condition'   => [
+					'eael_svg_animation_on' => 'page-scroll',
+				],
+				'description' => esc_html__( 'The point at which the drawing ends to page top.', 'essential-addons-for-elementor-lite' )
 			]
 		);
 
@@ -304,7 +376,7 @@ class SVG_Draw extends Widget_Base {
 				'label_off'   => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
 				'default'     => 'yes',
 				'condition'   => [
-					'eael_svg_animation_on' => 'hover',
+					'eael_svg_animation_on' => 'mouse-hover',
 				],
 				'description' => esc_html__( 'Pause SVG drawing on mouse leave', 'essential-addons-for-elementor-lite' )
 			]
@@ -326,6 +398,21 @@ class SVG_Draw extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_svg_loop_delay',
+			[
+				'label'       => esc_html__( 'Repeat Delay', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::NUMBER,
+				'min'         => 0,
+				'step'        => 0.5,
+				'default'     => 1.5,
+				'condition'   => [
+					'eael_svg_animation_on!' => [ 'page-scroll', 'none' ],
+					'eael_svg_loop'          => 'yes'
+				],
+			]
+		);
+
+		$this->add_control(
 			'eael_svg_animation_direction',
 			[
 				'label'     => esc_html__( 'Direction', 'essential-addons-for-elementor-lite' ),
@@ -343,18 +430,39 @@ class SVG_Draw extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_svg_draw_speed',
+			'eael_svg_drawing_speed',
 			[
 				'label'       => esc_html__( 'Speed', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::NUMBER,
-				'min'         => 1,
-				'max'         => 300,
-				'step'        => 1,
-				'default'     => 20,
+				'min'         => 0.5,
+				'step'        => 0.5,
 				'condition'   => [
-					'eael_svg_animation_on!' => [ 'page-scroll' ],
+					'eael_svg_animation_on!' => [ 'none', 'page-scroll' ],
 				],
-				'description' => esc_html__( 'Duration on SVG draws (in ms)', 'essential-addons-for-elementor-lite' )
+				'description' => esc_html__( 'Duration on SVG draws (in seconds)', 'essential-addons-for-elementor-lite' )
+			]
+		);
+
+		$this->add_control(
+			'eael_svg_stroke_dash_adjustment',
+			[
+				'label' => esc_html__( 'Path Length', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ '%' ],
+				'range' => [
+					'%' => [
+						'min' => 10,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => '%',
+					'size' => 100,
+				],
+				'condition'   => [
+					'eael_svg_animation_on!' => [ 'none', 'page-scroll' ],
+				],
+				'description' => esc_html__( 'You can control how much of the shape gets drawn by specifying a percentage of its total length.', 'essential-addons-for-elementor-lite' )
 			]
 		);
 
@@ -414,13 +522,6 @@ class SVG_Draw extends Widget_Base {
 			[
 				'type'      => Controls_Manager::COLOR,
 				'label'     => esc_html__( 'Fill Color', 'essential-addons-for-elementor-lite' ),
-				'selectors' => [
-					'{{WRAPPER}} .fill-svg svg path'                            => 'fill:{{VALUE}};',
-					'{{WRAPPER}} .eael-svg-draw-container.fill-svg svg path'    => 'fill:{{VALUE}};',
-					'{{WRAPPER}} .eael-svg-draw-container.fill-svg svg circle'  => 'fill:{{VALUE}};',
-					'{{WRAPPER}} .eael-svg-draw-container.fill-svg svg rect'    => 'fill:{{VALUE}};',
-					'{{WRAPPER}} .eael-svg-draw-container.fill-svg svg polygon' => 'fill:{{VALUE}};'
-				],
 				'default'   => '#D8C2F3',
 				'condition' => [
 					'eael_svg_fill!' => 'none'
@@ -505,14 +606,28 @@ class SVG_Draw extends Widget_Base {
 		] );
 
 		$svg_options = [
-			'fill'         => $settings['eael_svg_fill'],
-			'speed'        => esc_attr( $settings['eael_svg_draw_speed'] ),
-			'offset'       => esc_attr( $settings['eael_svg_draw_offset'] ),
+			'fill_type'    => $settings['eael_svg_fill'],
+			'fill_color'   => $settings['eael_svg_fill_color'],
+			'start_point'  => ! empty( $settings['eael_svg_draw_start_point']['size'] ) ? ( 100 - $settings['eael_svg_draw_start_point']['size'] ) . '%' : '95%',
+			'end_point'    => ! empty( $settings['eael_svg_draw_end_point']['size'] ) ? $settings['eael_svg_draw_end_point']['size'] . '%' : '10%',
+			'marker'       => ! empty( $settings['eael_show_marker'] ) && 'yes' === $settings['eael_show_marker'],
 			'loop'         => $settings['eael_svg_loop'] ? esc_attr( $settings['eael_svg_loop'] ) : 'no',
+			'loop_delay'   => $settings['eael_svg_loop_delay'] ?? 1.5,
 			'pause'        => $settings['eael_svg_pause_on_hover'] ? esc_attr( $settings['eael_svg_pause_on_hover'] ) : 'no',
 			'direction'    => esc_attr( $settings['eael_svg_animation_direction'] ),
-			'excludeStyle' => esc_attr( $settings['eael_svg_exclude_style'] )
+			'excludeStyle' => esc_attr( $settings['eael_svg_exclude_style'] ),
+			'transition'   => esc_attr( $settings['eael_svg_fill_transition'] ),
+			'stroke_length' => $settings['eael_svg_stroke_dash_adjustment']['size'] ?? '100',
+			'ease_type'    => $settings['eael_svg_animation_type'] ?? 'none'
 		];
+
+		if ( ! empty( $settings['eael_svg_drawing_speed'] ) ) {
+			$svg_options['speed'] = $settings['eael_svg_drawing_speed'];
+		} elseif ( isset( $settings['eael_svg_draw_speed'] ) ) {
+			$svg_options['speed'] = $settings['eael_svg_draw_speed'] * 0.05;
+		} else {
+			$svg_options['speed'] = 1;
+		}
 
 		$this->add_render_attribute( 'eael-svg-drow-wrapper', [
 			'data-settings' => wp_json_encode( $svg_options )
