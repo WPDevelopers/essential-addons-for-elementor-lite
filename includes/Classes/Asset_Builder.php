@@ -5,7 +5,6 @@ namespace Essential_Addons_Elementor\Classes;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
-use Elementor\Core\Files\CSS\Post as Post_CSS;
 use Elementor\Plugin;
 use Essential_Addons_Elementor\Classes\Elements_Manager;
 use Essential_Addons_Elementor\Traits\Library;
@@ -271,7 +270,10 @@ class Asset_Builder {
 
 		if ( $this->is_edit_mode() || $this->is_preview_mode() ) {
 			if ( $this->custom_js ) {
+
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				printf( '<script>%1$s</script>', 'var localize =' . wp_json_encode( $this->localize_objects ) );
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				printf( '<script id="eael-inline-js">%s</script>', $this->custom_js );
 			}
 		}
@@ -284,6 +286,7 @@ class Asset_Builder {
 	public function add_inline_css() {
 		if ( $this->is_edit_mode() || $this->is_preview_mode() ) {
 			if ( $this->css_strings ) {
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				printf( '<style id="eael-inline-css">%s</style>', $this->css_strings );
 			}
 		}

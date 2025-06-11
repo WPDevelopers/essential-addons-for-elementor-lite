@@ -192,9 +192,11 @@ jQuery(window).on("elementor/frontend/init", function () {
                markup: `<div class="mfp-iframe-scaler">
 								<div class="mfp-close"></div>
 								<iframe class="mfp-iframe eael-video-gallery-on" frameborder="0" allowfullscreen></iframe>
-								<div class="mfp-title eael-privacy-message"></div>
+								<div class="eael-privacy-message"></div>
 								<div class="mfp-bottom-bar">
-								<div class="mfp-counter"></div>
+									<div class="mfp-title"></div>
+									<div class="mfp-counter"></div>
+								</div>
 							</div>`,
             },
             callbacks: {
@@ -202,8 +204,22 @@ jQuery(window).on("elementor/frontend/init", function () {
                   if (item.el.attr("title") !== "") {
                      values.title = item.el.attr("title");
                   }
+						
+						if( item.el.hasClass('video-popup') ) {
+							let privacyNotice = $scope.find('.eael-filter-gallery-container').attr('data-privacy-notice');
+							if( privacyNotice ){
+								setTimeout(() => {
+									$('.eael-privacy-message').text(privacyNotice);
+								}, 100);
+							}
+						}
                },
                open: function () {
+						let privacyNotice = $scope.find('.eael-filter-gallery-container').attr('data-privacy-notice');
+						if( privacyNotice ){
+							$('.eael-privacy-message').text(privacyNotice);
+						}
+
                   setTimeout(() => {
                      $(".eael-privacy-message").remove();
                   }, 5000);
