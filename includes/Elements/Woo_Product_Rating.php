@@ -6,8 +6,11 @@ if (!defined('ABSPATH')) {
    exit;
 }
 
+use Elementor\Plugin;
+use Elementor\Controls_Manager;
+use Elementor\Group_Control_Typography;
 use Elementor\Widget_Base;
-use \Essential_Addons_Elementor\Classes\Helper;
+use Essential_Addons_Elementor\Classes\Helper;
 
 class Woo_Product_Rating extends Widget_Base {
    public function get_name() {
@@ -65,7 +68,7 @@ class Woo_Product_Rating extends Widget_Base {
 			'eael_section_title_style',
 			[
 				'label' => esc_html__( 'Rating', 'essential-addons-for-elementor-lite' ),
-				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
 
@@ -73,7 +76,7 @@ class Woo_Product_Rating extends Widget_Base {
 			'eael_star_align',
 			[
 				'label'   => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
-				'type'    => \Elementor\Controls_Manager::CHOOSE,
+				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'left' => [
 						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
@@ -96,7 +99,7 @@ class Woo_Product_Rating extends Widget_Base {
 			'eael_rating_color',
 			[
 				'label'     => esc_html__( 'Rating Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
+				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'.woocommerce {{WRAPPER}} .eael-single-product-rating .star-rating' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap .eael-product-rating.unfilled svg path' => 'fill: {{VALUE}};',
@@ -108,7 +111,7 @@ class Woo_Product_Rating extends Widget_Base {
 			'eael_rating_count_color',
 			[
 				'label'     => esc_html__( 'Rating Given Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
+				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'.woocommerce {{WRAPPER}} .eael-single-product-rating .star-rating' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap .eael-product-rating.filled svg path' => 'fill: {{VALUE}};',
@@ -120,7 +123,7 @@ class Woo_Product_Rating extends Widget_Base {
 			'eael_empty_star_color',
 			[
 				'label'     => esc_html__( 'Empty Star Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
+				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'.woocommerce {{WRAPPER}} .eael-single-product-rating .star-rating:before' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap .eael-product-rating svg path' => 'fill: {{VALUE}};',
@@ -135,7 +138,7 @@ class Woo_Product_Rating extends Widget_Base {
 			'eael_star_size',
 			[
 				'label'      => esc_html__( 'Star Size', 'essential-addons-for-elementor-lite' ),
-				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', 'rem', '%', 'custom' ],
 				'range' => [
 					'px' => [
@@ -159,7 +162,7 @@ class Woo_Product_Rating extends Widget_Base {
 			'eael_star_gap',
 			[
 				'label'      => esc_html__( 'Gap', 'essential-addons-for-elementor-lite' ),
-				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', 'rem', '%', 'custom' ],
 				'range' => [
 					'px' => [
@@ -174,7 +177,6 @@ class Woo_Product_Rating extends Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap' => 'gap: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap' => 'gap: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .eael-single-product-rating .star-rating' => 'letter-spacing: {{SIZE}}{{UNIT}};',
 				],
 			]
@@ -184,7 +186,7 @@ class Woo_Product_Rating extends Widget_Base {
 			'product_rating_margin',
 			[
 				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
-				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'rem', 'custom' ],
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-rating .eael-product-rating-wrap' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -195,7 +197,7 @@ class Woo_Product_Rating extends Widget_Base {
 		$this->add_control(
 			'product_rating_hr1',
 			[
-				'type' => \Elementor\Controls_Manager::DIVIDER,
+				'type' => Controls_Manager::DIVIDER,
 			]
 		);
 
@@ -203,7 +205,7 @@ class Woo_Product_Rating extends Widget_Base {
 			'eael_star_text_color',
 			[
 				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
+				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-rating .woocommerce-review-link' => 'color: {{VALUE}};',
 				],
@@ -211,7 +213,7 @@ class Woo_Product_Rating extends Widget_Base {
 		);
 
       $this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
+			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'eael_star_text_typography',
 				'selector' => '{{WRAPPER}} .eael-single-product-rating .woocommerce-review-link',
@@ -222,7 +224,7 @@ class Woo_Product_Rating extends Widget_Base {
 			'eael_star_text_spaceing',
 			[
 				'label'      => esc_html__( 'Space Between', 'essential-addons-for-elementor-lite' ),
-				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', 'rem', 'em', '%', 'custom' ],
 				'range' => [
 					'px' => [
@@ -260,7 +262,7 @@ class Woo_Product_Rating extends Widget_Base {
 				'label' => __( 'Warning!', 'essential-addons-for-elementor-lite' ),
 			] );
 			$this->add_control( 'eael_global_warning_text', [
-				'type'            => \Elementor\Controls_Manager::RAW_HTML,
+				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => __( '<strong>WooCommerce</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=woocommerce&tab=search&type=term" target="_blank">WooCommerce</a> first.', 'essential-addons-for-elementor-lite' ),
 				'content_classes' => 'eael-warning',
 			] );
@@ -280,7 +282,7 @@ class Woo_Product_Rating extends Widget_Base {
 			'rating_content_section',
 			[
 				'label' => esc_html__( 'Content', 'essential-addons-for-elementor-lite' ),
-				'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
+				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
 
@@ -288,7 +290,7 @@ class Woo_Product_Rating extends Widget_Base {
 			'show_review_count',
 			[
 				'label'        => esc_html__( 'Show Review Count', 'essential-addons-for-elementor-lite' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
@@ -300,7 +302,7 @@ class Woo_Product_Rating extends Widget_Base {
 			'rating_style',
 			[
 				'label'   => esc_html__( 'Rating Style', 'essential-addons-for-elementor-lite' ),
-				'type'    => \Elementor\Controls_Manager::SELECT,
+				'type'    => Controls_Manager::SELECT,
 				'default' => 'style_1',
 				'options' => [
 					'style_1' => esc_html__( 'Style 1', 'essential-addons-for-elementor-lite' ),
@@ -314,7 +316,7 @@ class Woo_Product_Rating extends Widget_Base {
 			'rating_caption',
 			[
 				'label'       => esc_html__( 'Rating Caption', 'essential-addons-for-elementor-lite' ),
-				'type'        => \Elementor\Controls_Manager::TEXT,
+				'type'        => Controls_Manager::TEXT,
 				'default'     => esc_html__( 'Customer Rating', 'essential-addons-for-elementor-lite' ),
 				'ai' => [
 					'active' => false,
@@ -329,7 +331,7 @@ class Woo_Product_Rating extends Widget_Base {
 			'before_rating_caption',
 			[
 				'label'       => esc_html__( 'Before Caption', 'essential-addons-for-elementor-lite' ),
-				'type'        => \Elementor\Controls_Manager::TEXT,
+				'type'        => Controls_Manager::TEXT,
 				'default'     => esc_html__( '( ', 'essential-addons-for-elementor-lite' ),
 				'ai' => [
 					'active' => false,
@@ -344,7 +346,7 @@ class Woo_Product_Rating extends Widget_Base {
 			'after_rating_caption',
 			[
 				'label'       => esc_html__( 'After Caption', 'essential-addons-for-elementor-lite' ),
-				'type'        => \Elementor\Controls_Manager::TEXT,
+				'type'        => Controls_Manager::TEXT,
 				'default'     => esc_html__( ' )', 'essential-addons-for-elementor-lite' ),
 				'ai' => [
 					'active' => false,
@@ -358,7 +360,7 @@ class Woo_Product_Rating extends Widget_Base {
 		$this->add_control(
 			'product_rating_hr',
 			[
-				'type' => \Elementor\Controls_Manager::DIVIDER,
+				'type' => Controls_Manager::DIVIDER,
 			]
 		);
 
@@ -366,7 +368,7 @@ class Woo_Product_Rating extends Widget_Base {
 			'show_empty_review',
 			[
 				'label'        => esc_html__( 'Show Empty Review', 'essential-addons-for-elementor-lite' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
@@ -377,7 +379,7 @@ class Woo_Product_Rating extends Widget_Base {
 			'empty_rating_caption',
 			[
 				'label'       => esc_html__( 'Empty Rating Caption', 'essential-addons-for-elementor-lite' ),
-				'type'        => \Elementor\Controls_Manager::TEXT,
+				'type'        => Controls_Manager::TEXT,
 				'default'     => esc_html__( 'No Customer Rating', 'essential-addons-for-elementor-lite' ),
 				'ai' => [
 					'active' => false,
@@ -444,7 +446,7 @@ class Woo_Product_Rating extends Widget_Base {
       global $product;
 		$settings     = $this->get_settings_for_display();
 
-		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() || get_post_type( get_the_ID() ) === 'templately_library' ) {
+		if ( Plugin::$instance->editor->is_edit_mode() || get_post_type( get_the_ID() ) === 'templately_library' ) {
 			?>
 			<div class="eael-single-product-rating">
 				<div class="woocommerce-product-rating">
@@ -454,14 +456,14 @@ class Woo_Product_Rating extends Widget_Base {
 					<?php if ( 'yes' === $settings['show_review_count'] ) { ?>
 						<a href="#reviews" class="woocommerce-review-link" rel="nofollow">
 							<span class="before-rating">
-								<?php echo Helper::eael_wp_kses( $settings['before_rating_caption'] ); ?>
+								<?php echo wp_kses( $settings['before_rating_caption'], Helper::eael_allowed_tags() ); ?>
 							</span>
 							<span class="count">
 								<?php esc_html_e( '1', 'essential-addons-for-elementor-lite' ); ?>
 							</span> 
-							<?php echo Helper::eael_wp_kses( $settings['rating_caption'] ); ?>
+							<?php echo wp_kses( $settings['rating_caption'], Helper::eael_allowed_tags() ); ?>
 							<span class="after-rating">
-								<?php echo Helper::eael_wp_kses( $settings['after_rating_caption'] ); ?>
+								<?php echo wp_kses( $settings['after_rating_caption'], Helper::eael_allowed_tags() ); ?>
 							</span>
 						</a>
 					<?php } ?>
@@ -494,7 +496,7 @@ class Woo_Product_Rating extends Widget_Base {
 					</div>
 					<?php if ( comments_open() && 'yes' === $settings['show_review_count'] ) { ?>
 						<a href="#reviews" class="woocommerce-review-link" rel="nofollow">
-								<span class="before-rating"><?php echo Helper::eael_wp_kses( $settings['before_rating_caption'] ); ?></span>
+								<span class="before-rating"><?php echo wp_kses( $settings['before_rating_caption'], Helper::eael_allowed_tags() ); ?></span>
 								<span class="count">
 									<?php 
 										if ( $review_count > 0 ) {
@@ -506,15 +508,15 @@ class Woo_Product_Rating extends Widget_Base {
 										}
 									?>
 									<span class="count_text">
-										<?php echo Helper::eael_wp_kses( $review_caption ); ?>
+										<?php echo wp_kses( $review_caption, Helper::eael_allowed_tags() ); ?>
 									</span>
 								</span>
-								<span class="after-rating"><?php echo Helper::eael_wp_kses( $settings['after_rating_caption'] ); ?></span>
+								<span class="after-rating"><?php echo wp_kses( $settings['after_rating_caption'], Helper::eael_allowed_tags() ); ?></span>
 						</a>
 					<?php } elseif ( $rating_count === 0 && 'yes' === $settings['show_empty_review'] ) {
 						?>
 						<a href="#reviews" class="woocommerce-review-link" rel="nofollow">
-							<?php echo Helper::eael_wp_kses( $review_caption ); ?>
+							<?php echo wp_kses( $review_caption, Helper::eael_allowed_tags() ); ?>
 						</a>
 						<?php
 					} ?>

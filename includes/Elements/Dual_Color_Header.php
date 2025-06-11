@@ -2,6 +2,7 @@
 
 namespace Essential_Addons_Elementor\Elements;
 
+use Elementor\Group_Control_Background;
 use Elementor\Repeater;
 
 // If this file is called directly, abort.
@@ -10,7 +11,6 @@ if (!defined('ABSPATH')) {
 }
 
 use \Elementor\Controls_Manager;
-use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;

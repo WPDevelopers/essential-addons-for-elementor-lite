@@ -132,6 +132,8 @@ class Post_Duplicator {
 			}
 
 			global $wpdb;
+
+        	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$post_meta = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id = %d", $post_id ) );
 
 			if ( ! empty( $post_meta ) && is_array( $post_meta ) ) {
@@ -161,6 +163,7 @@ class Post_Duplicator {
 					$insert .= $wpdb->prepare( '(%d, %s, %s)', $duplicated_id, $meta_key, $meta_value );
 				}
 
+        		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				$wpdb->query( $duplicate_insert_query . $insert );
 			}
 		}

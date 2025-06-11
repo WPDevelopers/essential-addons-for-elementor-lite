@@ -358,7 +358,7 @@ class WPDeveloper_Notice {
             $classes .= 'notice-has-thumbnail';
         }
 
-        echo '<div class="'. $classes .' wpdeveloper-'. $current_notice .'-notice" data-notice="'. $current_notice .'">';
+        echo '<div class="'. esc_attr( $classes ) .' wpdeveloper-'. esc_attr( $current_notice ) .'-notice" data-notice="'. esc_attr( $current_notice ) .'">';
     }
     /**
      * After Notice
@@ -414,7 +414,7 @@ class WPDeveloper_Notice {
         if( $this->has_thumbnail('upsale') ) {
             $classes = 'notice-has-thumbnail';
         }
-        echo '<div class="error notice is-dismissible wpdeveloper-upsale-notice '. $classes .'">';
+        echo '<div class="error notice is-dismissible wpdeveloper-upsale-notice '. esc_attr( $classes ) .'">';
     }
     /**
      * Upsale Notice
@@ -444,7 +444,7 @@ class WPDeveloper_Notice {
         if( empty( $plugin_slug ) ) {
             return;
         }
-        echo '<button data-slug="'. esc_attr( $plugin_slug ) .'" id="plugin-install-core-'. $this->plugin_name .'" class="button button-primary">'. Helper::eael_wp_kses( $btn_text ) .'</button>';
+        echo '<button data-slug="'. esc_attr( $plugin_slug ) .'" id="plugin-install-core-'. esc_attr( $this->plugin_name ) .'" class="button button-primary">'. wp_kses( $btn_text, Helper::eael_allowed_tags() ) .'</button>';
     }
     /**
      * This methods is responsible for get notice image.
@@ -486,7 +486,7 @@ class WPDeveloper_Notice {
     protected function get_message( $msg_for ){
         if( isset( $this->data['message'] ) && isset( $this->data['message'][ $msg_for ] ) ) {
             echo '<div class="wpdeveloper-notice-message">';
-	        echo Helper::eael_wp_kses( $this->data['message'][ $msg_for ] );
+	        echo wp_kses( $this->data['message'][ $msg_for ], Helper::eael_allowed_tags() );
                 if( $msg_for === 'upsale' ) {
                     $this->upsale_button();
                 }
@@ -603,6 +603,7 @@ class WPDeveloper_Notice {
             }
             $output .= '</ul>';
 
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             printf( '%1$s', $output );
         endif;
     }
@@ -835,7 +836,9 @@ class WPDeveloper_Notice {
                             type: 'post',
                             data: {
                                 action: 'wpdeveloper_notice_dissmiss_for_<?php echo esc_html( $this->plugin_name ); ?>',
-                                _wpnonce: '<?php echo wp_create_nonce('wpdeveloper_notice_dissmiss'); ?>',
+                                _wpnonce: '<?php 
+                                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                echo wp_create_nonce('wpdeveloper_notice_dissmiss'); ?>',
                                 dismiss: true,
                                 notice: wpdevNotice.data('notice'),
                             },
@@ -885,7 +888,9 @@ class WPDeveloper_Notice {
                         type: 'POST',
                         data: {
                             action: 'wpdeveloper_upsale_core_install_<?php echo esc_html( $this->plugin_name ); ?>',
-                            _wpnonce: '<?php echo wp_create_nonce('wpdeveloper_upsale_core_install_' . esc_html( $this->plugin_name )); ?>',
+                            _wpnonce: '<?php 
+                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                            echo wp_create_nonce('wpdeveloper_upsale_core_install_' . esc_html( $this->plugin_name )); ?>',
                             slug : '<?php echo esc_html( $plugin_slug ); ?>',
                             file : '<?php echo esc_html( $plugin_file ); ?>'
                         },
@@ -912,7 +917,9 @@ class WPDeveloper_Notice {
                         type: 'post',
                         data: {
                             action: 'wpdeveloper_upsale_notice_dissmiss_for_<?php echo esc_html( $this->plugin_name ); ?>',
-                            _wpnonce: '<?php echo wp_create_nonce('wpdeveloper_upsale_notice_dissmiss'); ?>',
+                            _wpnonce: '<?php
+                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                            echo wp_create_nonce('wpdeveloper_upsale_notice_dissmiss'); ?>',
                             dismiss: true
                         },
                         success: function(response) {

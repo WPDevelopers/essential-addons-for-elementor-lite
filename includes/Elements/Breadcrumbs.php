@@ -1,15 +1,17 @@
 <?php 
 namespace Essential_Addons_Elementor\Elements;
 
-use Elementor\Icons_Manager;
-
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
    exit;
 }
 
 use Elementor\Widget_Base;
-use \Essential_Addons_Elementor\Classes\Helper;
+use Elementor\Icons_Manager;
+use Elementor\Controls_Manager;
+use Elementor\Group_Control_Border;
+use Elementor\Group_Control_Typography;
+use Essential_Addons_Elementor\Classes\Helper;
 
 class Breadcrumbs extends Widget_Base {
    public function get_name() {
@@ -54,7 +56,7 @@ class Breadcrumbs extends Widget_Base {
          'breadcrumb_general',
          [
             'label' => esc_html__( 'General', 'essential-addons-for-elementor-lite' ),
-            'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
+            'tab'   => Controls_Manager::TAB_CONTENT,
          ]
       );
 
@@ -62,7 +64,7 @@ class Breadcrumbs extends Widget_Base {
 			'breadcrumb_home_text',
 			[
 				'label'       => esc_html__( 'Label For Home', 'essential-addons-for-elementor-lite' ),
-				'type'        => \Elementor\Controls_Manager::TEXT,
+				'type'        => Controls_Manager::TEXT,
 				'default'     => esc_html__( 'Home', 'essential-addons-for-elementor-lite' ),
             'ai'  => [
 					'active' => false,
@@ -75,7 +77,7 @@ class Breadcrumbs extends Widget_Base {
 			'breadcrumb_prefix_switch',
 			[
 				'label'        => esc_html__( 'Show Prefix', 'essential-addons-for-elementor-lite' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
@@ -87,7 +89,7 @@ class Breadcrumbs extends Widget_Base {
 			'eael_breadcrumb_prefix_type',
 			[
 				'label'   => esc_html__( 'Prefix Type', 'essential-addons-for-elementor-lite' ),
-				'type'    => \Elementor\Controls_Manager::CHOOSE,
+				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'icon' => [
 						'title' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
@@ -109,7 +111,7 @@ class Breadcrumbs extends Widget_Base {
 			'eael_breadcrumb_prefix_icon',
 			[
 				'label'   => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
-				'type'    => \Elementor\Controls_Manager::ICONS,
+				'type'    => Controls_Manager::ICONS,
 				'default' => [
 					'value'   => 'fas fa-home',
 					'library' => 'fa-solid',
@@ -125,7 +127,7 @@ class Breadcrumbs extends Widget_Base {
 			'eael_breadcrumb_prefix_text',
 			[
 				'label'       => esc_html__( 'Text', 'essential-addons-for-elementor-lite' ),
-				'type'        => \Elementor\Controls_Manager::TEXT,
+				'type'        => Controls_Manager::TEXT,
 				'default'     => esc_html__( 'Browse: ', 'essential-addons-for-elementor-lite' ),
 				'condition' => [
 					'eael_breadcrumb_prefix_type' => 'text',
@@ -144,7 +146,7 @@ class Breadcrumbs extends Widget_Base {
 			'eael_separator_type',
 			[
 				'label'   => esc_html__( 'Separator Type', 'essential-addons-for-elementor-lite' ),
-				'type'    => \Elementor\Controls_Manager::CHOOSE,
+				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'icon' => [
 						'title' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
@@ -164,7 +166,7 @@ class Breadcrumbs extends Widget_Base {
 			'eael_separator_icon',
 			[
 				'label'   => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
-				'type'    => \Elementor\Controls_Manager::ICONS,
+				'type'    => Controls_Manager::ICONS,
 				'default' => [
 					'value'   => 'fas fa-angle-double-right',
 					'library' => 'fa-solid',
@@ -179,7 +181,7 @@ class Breadcrumbs extends Widget_Base {
 			'eael_separator_type_text',
 			[
 				'label'       => esc_html__( 'Text', 'essential-addons-for-elementor-lite' ),
-				'type'        => \Elementor\Controls_Manager::TEXT,
+				'type'        => Controls_Manager::TEXT,
 				'default'     => esc_html__( '/', 'essential-addons-for-elementor-lite' ),
 				'condition'   => [
 					'eael_separator_type' => 'text',
@@ -198,7 +200,7 @@ class Breadcrumbs extends Widget_Base {
          'breadcrumb_style',
          [
             'label' => esc_html__( 'Style', 'essential-addons-for-elementor-lite' ),
-            'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+            'tab'   => Controls_Manager::TAB_STYLE,
          ]
       );
 
@@ -206,7 +208,7 @@ class Breadcrumbs extends Widget_Base {
 			'breadcrumb_align',
 			[
 				'label' => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
-				'type'  => \Elementor\Controls_Manager::CHOOSE,
+				'type'  => Controls_Manager::CHOOSE,
 				'options' => [
 					'left' => [
 						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
@@ -232,7 +234,7 @@ class Breadcrumbs extends Widget_Base {
 			'eael_breadcrumb_bg_color',
 			[
 				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
+				'type'      => Controls_Manager::COLOR,
 				'default'   => '#f8f8fa',
 				'selectors' => [
 					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__content' => 'background-color: {{VALUE}}',
@@ -241,7 +243,7 @@ class Breadcrumbs extends Widget_Base {
 		);
 
 		$this->add_group_control(
-			\Elementor\Group_Control_Border::get_type(),
+			Group_Control_Border::get_type(),
 			[
 				'name'     => 'eael_breadcrumb_border',
 				'selector' => '{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__content',
@@ -252,7 +254,7 @@ class Breadcrumbs extends Widget_Base {
 			'eael_breadcrumb_border_radious',
 			[
 				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
-				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'selectors'  => [
 					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__content' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -264,7 +266,7 @@ class Breadcrumbs extends Widget_Base {
 			'eael_breadcrumb_padding',
 			[
 				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
-				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'selectors'  => [
 					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -276,7 +278,7 @@ class Breadcrumbs extends Widget_Base {
 			'breadcrumb_link_color',
 			[
 				'label'     => esc_html__( 'Link Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
+				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__content a' => 'color: {{VALUE}}',
 				]
@@ -287,7 +289,7 @@ class Breadcrumbs extends Widget_Base {
 			'breadcrumb_text_color',
 			[
 				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
+				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__content' => 'color: {{VALUE}}',
 				]
@@ -295,7 +297,7 @@ class Breadcrumbs extends Widget_Base {
 		);
 
 		$this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
+			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'breadcrumb_typography',
 				'selector' => '{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__content',
@@ -310,7 +312,7 @@ class Breadcrumbs extends Widget_Base {
          'prefix_style',
          [
             'label' => esc_html__( 'Prefix', 'essential-addons-for-elementor-lite' ),
-            'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+            'tab'   => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'breadcrumb_prefix_switch' => 'yes',
 				],
@@ -321,7 +323,7 @@ class Breadcrumbs extends Widget_Base {
 			'prefix_style_icon_heading',
 			[
 				'label'     => esc_html__( 'Icon Style', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::HEADING,
+				'type'      => Controls_Manager::HEADING,
 				'separator' => 'after',
 			]
 		);
@@ -330,7 +332,7 @@ class Breadcrumbs extends Widget_Base {
 			'prefix_icon_color',
 			[
 				'label'     => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
+				'type'      => Controls_Manager::COLOR,
             'selectors' => [
 					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__prefix svg path' => 'fill: {{VALUE}}',
 					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__prefix i' => 'color: {{VALUE}}',
@@ -342,7 +344,7 @@ class Breadcrumbs extends Widget_Base {
 			'prefix_icon_size',
 			[
 				'label'      => esc_html__( 'Icon Size', 'essential-addons-for-elementor-lite' ),
-				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'rem', 'custom' ],
 				'range'      => [
 					'px' => [
@@ -370,7 +372,7 @@ class Breadcrumbs extends Widget_Base {
 			'prefix_icon_margin',
 			[
 				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
-				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'rem', 'custom' ],
 				'default'    => [
 					'top'    => 0,
@@ -390,7 +392,7 @@ class Breadcrumbs extends Widget_Base {
 			'prefix_style_text_heading',
 			[
 				'label'     => esc_html__( 'Text Style', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::HEADING,
+				'type'      => Controls_Manager::HEADING,
 				'separator' => 'after',
 			]
 		);
@@ -399,7 +401,7 @@ class Breadcrumbs extends Widget_Base {
 			'prefix_text_color',
 			[
 				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
+				'type'      => Controls_Manager::COLOR,
             'selectors' => [
 					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__prefix span' => 'color: {{VALUE}}',
 				],
@@ -410,7 +412,7 @@ class Breadcrumbs extends Widget_Base {
 			'prefix_text_margin',
 			[
 				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
-				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'rem', 'custom' ],
 				'default'    => [
 					'top'    => -2,
@@ -426,7 +428,7 @@ class Breadcrumbs extends Widget_Base {
 		);
 
       $this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
+			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'prefix_text_typography',
 				'selector' => '{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumbs__prefix span',
@@ -441,7 +443,7 @@ class Breadcrumbs extends Widget_Base {
          'separator_style',
          [
             'label' => esc_html__( 'Separator', 'essential-addons-for-elementor-lite' ),
-            'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+            'tab'   => Controls_Manager::TAB_STYLE,
          ]
       );
 
@@ -449,7 +451,7 @@ class Breadcrumbs extends Widget_Base {
 			'separator_text_color',
 			[
 				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
+				'type'      => Controls_Manager::COLOR,
 				'default'   => '#A5A4B0',
             'selectors' => [
 					'{{WRAPPER}} .eael-breadcrumbs .eael-breadcrumb-separator svg path' => 'fill: {{VALUE}}',
@@ -462,7 +464,7 @@ class Breadcrumbs extends Widget_Base {
 			'eael_separator_spacing',
 			[
 				'label'      => esc_html__( 'Spacing', 'essential-addons-for-elementor-lite' ),
-				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'rem', 'custom' ],
 				'range'      => [
 					'px' => [
@@ -489,7 +491,7 @@ class Breadcrumbs extends Widget_Base {
 			'separator_size',
 			[
 				'label'      => esc_html__( 'Size', 'essential-addons-for-elementor-lite' ),
-				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'rem', 'custom' ],
 				'range'      => [
 					'px' => [
@@ -520,7 +522,7 @@ class Breadcrumbs extends Widget_Base {
 			'separator_margin',
 			[
 				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
-				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'rem', 'custom' ],
 				'default'    => [
 					'top'    => 4,
@@ -544,7 +546,7 @@ class Breadcrumbs extends Widget_Base {
    protected function eael_breadcrumb_home_label() {
       $settings = $this->get_settings_for_display();
       if ( ! empty( $settings['breadcrumb_home_text'] ) ) {
-         return Helper::eael_wp_kses( $settings['breadcrumb_home_text'] );
+         return wp_kses( $settings['breadcrumb_home_text'], Helper::eael_allowed_tags() );
       }
       return;
    }
@@ -561,7 +563,7 @@ class Breadcrumbs extends Widget_Base {
 							Icons_Manager::render_icon( $settings['eael_breadcrumb_prefix_icon'], [ 'aria-hidden' => 'true' ] );
 							break;
 						case 'text':
-							echo "<span>" . Helper::eael_wp_kses( $settings['eael_breadcrumb_prefix_text'] ) . "</span>";
+							echo "<span>" . wp_kses( $settings['eael_breadcrumb_prefix_text'], Helper::eael_allowed_tags() ) . "</span>";
 							break;
 					}
 				?>
@@ -578,7 +580,7 @@ class Breadcrumbs extends Widget_Base {
          	$separator_icon = ob_get_clean();
          	return sprintf( '<span class="eael-breadcrumb-separator">%s</span>', $separator_icon );
       } else {
-			return sprintf( '<span class="eael-breadcrumb-separator">%s</span>', Helper::eael_wp_kses( $settings['eael_separator_type_text'] ) );
+			return sprintf( '<span class="eael-breadcrumb-separator">%s</span>', wp_kses( $settings['eael_separator_type_text'], Helper::eael_allowed_tags() ) );
       }
    }
 
@@ -706,6 +708,7 @@ class Breadcrumbs extends Widget_Base {
 
 			$output .= "</div>";
 		}
+		//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo $output;
 	}
 

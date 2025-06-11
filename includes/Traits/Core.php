@@ -113,6 +113,7 @@ trait Core
 
         $button = '<p><a href="' . esc_url( $activation_url ) . '" class="button-primary">' . esc_html( $button_text ) . '</a></p>';
 
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         printf('<div class="error"><p>%1$s</p>%2$s</div>', $message, $button);
     }
 
