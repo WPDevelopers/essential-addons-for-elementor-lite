@@ -8,8 +8,8 @@ use Elementor\Group_Control_Typography;
 use Elementor\Icons_Manager;
 use Elementor\Plugin;
 use Elementor\Widget_Base;
-use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 use Essential_Addons_Elementor\Traits\Helper;
+use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
@@ -113,25 +113,37 @@ class Simple_Menu extends Widget_Base
 
         $simple_menus = $this->get_simple_menus();
 
-        if ($simple_menus) {
+        if ( $simple_menus ) {
             $this->add_control(
                 'eael_simple_menu_menu',
                 [
                     'label'       => esc_html__('Select Menu', 'essential-addons-for-elementor-lite'),
-                    'description' => sprintf(__('Go to the <a href="%s" target="_blank">Menu screen</a> to manage your menus.', 'essential-addons-for-elementor-lite'), admin_url('nav-menus.php')),
                     'type'        => Controls_Manager::SELECT,
                     'label_block' => false,
                     'options'     => $simple_menus,
                     'default'     => array_keys($simple_menus)[0],
                 ]
             );
+            $this->add_control(
+                'menu_manager_notice',
+                [
+                    'type'        => Controls_Manager::NOTICE,
+                    'notice_type' => 'info',
+                    'dismissible' => false,
+                    'content'     => sprintf(__('Go to the <a href="%s" target="_blank">Menu screen</a> to manage your menus.', 'essential-addons-for-elementor-lite'), admin_url('nav-menus.php')),
+                    'separator'   => 'after',
+                ]
+            );
         } else {
             $this->add_control(
-                'menu',
+                'empty_menu_notice',
                 [
-                    'type'      => Controls_Manager::RAW_HTML,
-                    'raw'       => sprintf(__('<strong>There are no menus in your site.</strong><br>Go to the <a href="%s" target="_blank">Menus screen</a> to create one.', 'essential-addons-for-elementor-lite'), admin_url('nav-menus.php?action=edit&menu=0')),
-                    'separator' => 'after',
+                    'type'        => Controls_Manager::NOTICE,
+                    'notice_type' => 'warning',
+                    'dismissible' => false,
+                    'heading'     => esc_html__( 'There are no menus in your site.', 'essential-addons-for-elementor-lite' ),
+                    'content'     => sprintf(__('Go to the <a href = "%s" target = "_blank">Menus screen</a> to create one.', 'essential-addons-for-elementor-lite'), admin_url('nav-menus.php?action = edit&menu = 0')),
+                    'separator'   => 'after',
                 ]
             );
         }
@@ -1601,7 +1613,7 @@ class Simple_Menu extends Widget_Base
 		    'data-hamburger-device'      => $hamburger_device,
 	    ] );
         
-        if ($settings['eael_simple_menu_menu']) {
+        if ( ! empty( $settings['eael_simple_menu_menu'] ) ) {
             $args = [
                 'menu'        => $settings['eael_simple_menu_menu'],
                 'menu_class'  => implode(' ', array_filter($menu_classes)),

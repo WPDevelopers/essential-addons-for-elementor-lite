@@ -8,8 +8,6 @@ if ( !defined( 'ABSPATH' ) ) {
 
 use Elementor\Plugin;
 use \Essential_Addons_Elementor\Classes\Helper as HelperClass;
-use \Essential_Addons_Elementor\Elements\Woo_Checkout;
-use function Crontrol\Event\get;
 
 trait Helper
 {
@@ -314,7 +312,7 @@ trait Helper
 	 */
 	public function eael_checkout_cart_qty_update() {
         if ( ! wp_verify_nonce( $_POST['nonce'], 'essential-addons-elementor' ) ) {
-            die( __('Permission Denied!', 'essential-addons-for-elementor-lite') );
+            die( esc_html__( 'Permission Denied!', 'essential-addons-elementor' ) );
         }
 
         $cart_item_key = $_POST['cart_item_key'];
@@ -381,10 +379,10 @@ trait Helper
                             <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/templately/logo.svg' ); ?>" alt="">
                         </div>
                         <ul class="eael-promo-temp__feature__list">
-                            <li><?php _e('5,000+ Stunning Templates','essential-addons-for-elementor-lite'); ?></li>
-                            <li><?php _e('Supports Elementor & Gutenberg','essential-addons-for-elementor-lite'); ?></li>
-                            <li><?php _e('Powering up 300,000+ Websites','essential-addons-for-elementor-lite'); ?></li>
-                            <li><?php _e('Cloud Collaboration with Team','essential-addons-for-elementor-lite'); ?></li>
+                            <li><?php esc_html_e('5,000+ Stunning Templates','essential-addons-for-elementor-lite'); ?></li>
+                            <li><?php esc_html_e('Supports Elementor & Gutenberg','essential-addons-for-elementor-lite'); ?></li>
+                            <li><?php esc_html_e('Powering up 300,000+ Websites','essential-addons-for-elementor-lite'); ?></li>
+                            <li><?php esc_html_e('Cloud Collaboration with Team','essential-addons-for-elementor-lite'); ?></li>
                         </ul>
                         <form class="eael-promo-temp__form">
                             <label>
@@ -393,22 +391,22 @@ trait Helper
                             </label>
                             <label>
                                 <input type="radio" value="dnd" class="eael-temp-promo-confirmation" name='eael-promo-temp__radio'>
-                                <span><?php _e('Don’t Show This Again','essential-addons-for-elementor-lite'); ?></span>
+                                <span><?php esc_html_e('Don’t Show This Again','essential-addons-for-elementor-lite'); ?></span>
                             </label>
                         </form>
 
                         <?php if ( HelperClass::get_local_plugin_data( 'templately/templately.php' ) === false ) { ?>
                             <button class="wpdeveloper-plugin-installer" data-action="install"
-                               data-slug="<?php echo 'templately'; ?>"><?php _e( 'Install Templately', 'essential-addons-for-elementor-lite' ); ?></button>
+                               data-slug="<?php echo 'templately'; ?>"><?php esc_html_e( 'Install Templately', 'essential-addons-for-elementor-lite' ); ?></button>
                         <?php } else { ?>
                             <?php if ( is_plugin_active( 'templately/templately.php' ) ) { ?>
-                                <button class="wpdeveloper-plugin-installer"><?php _e( 'Activated Templately', 'essential-addons-for-elementor-lite' ); ?></button>
+                                <button class="wpdeveloper-plugin-installer"><?php esc_html_e( 'Activated Templately', 'essential-addons-for-elementor-lite' ); ?></button>
                             <?php } else { ?>
                                 <button class="wpdeveloper-plugin-installer" data-action="activate"
-                                   data-basename="<?php echo 'templately/templately.php'; ?>"><?php _e( 'Activate Templately', 'essential-addons-for-elementor-lite' ); ?></button>
+                                   data-basename="<?php echo 'templately/templately.php'; ?>"><?php esc_html_e( 'Activate Templately', 'essential-addons-for-elementor-lite' ); ?></button>
                             <?php } ?>
                         <?php } ?>
-                        <button class="eael-prmo-status-submit" style="display: none"><?php _e('Submit','essential-addons-for-elementor-lite') ?></button>
+                        <button class="eael-prmo-status-submit" style="display: none"><?php esc_html_e('Submit','essential-addons-for-elementor-lite') ?></button>
                     </div>
                     <div class="eael-promo-temp--right">
                         <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/templately/templates-edit.jpg' ); ?>" alt="">
@@ -550,6 +548,8 @@ trait Helper
             FROM  $wpdb->options
             WHERE `option_name` LIKE '$key_pattern'
             ORDER BY `option_name`";
+
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$results = $wpdb->get_results( $sql );
 
 		foreach ( $results as $transient ) {
@@ -713,7 +713,9 @@ trait Helper
                 </div>
                 <div class="eael-gb-eb-content-info">
                     <h3><?php esc_html_e( 'Try Essential Blocks Today!', 'essential-addons-for-elementor-lite' ); ?></h3>
-                    <p><?php printf( __( 'Want to get started with Essential Blocks now? Check out %scomplete guides for each blocks%s to learn more about this ultimate block library for Gutenberg.', 'essential-addons-for-elementor-lite' ), '<a href="https://essential-blocks.com/demo" target="_blank">', '</a>' ) ?></p>
+                    <p><?php
+                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                    printf( __( 'Want to get started with Essential Blocks now? Check out %scomplete guides for each blocks%s to learn more about this ultimate block library for Gutenberg.', 'essential-addons-for-elementor-lite' ), '<a href="https://essential-blocks.com/demo" target="_blank">', '</a>' ) ?></p>
                     <button class="eael-gb-eb-install components-button is-primary" data-promotype="popup" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
                     <button class="eael-gb-eb-never-show" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php esc_html_e( 'Skip for Now', 'essential-addons-for-elementor-lite' ); ?></button>
                 </div>
@@ -745,16 +747,16 @@ trait Helper
                                 <rect width="28" height="28" fill="white"/>
                                 </clipPath>
                             </defs>
-                        </svg>                    
+                        </svg>
                     </div>
                     <div class="eael-gb-eb-banner-promo-content">
-                        <h3 class="eael-gb-eb-banner-promo-title"><?php _e( 'Want To Get All Exclusive Gutenberg Blocks For Free?', 'essential-addons-for-elementor-lite' ); ?></h3>
-                        <p class="eael-gb-eb-banner-promo-description"><?php _e( 'If you want to enrich your Gutenberg block library with the latest designs and functionalities, Essential Blocks can be your best companion.', 'essential-addons-for-elementor-lite' ); ?></p>
+                        <h3 class="eael-gb-eb-banner-promo-title"><?php esc_html_e( 'Want To Get All Exclusive Gutenberg Blocks For Free?', 'essential-addons-for-elementor-lite' ); ?></h3>
+                        <p class="eael-gb-eb-banner-promo-description"><?php esc_html_e( 'If you want to enrich your Gutenberg block library with the latest designs and functionalities, Essential Blocks can be your best companion.', 'essential-addons-for-elementor-lite' ); ?></p>
                     </div>
                 </div>
                 <div class="eael-gb-eb-banner-promo-right">
-                    <a class="eael-gb-eb-banner-promo-learn-more" href="https://essential-blocks.com/" target="_blank"><?php _e( 'Learn More', 'essential-addons-for-elementor-lite' ) ?></a>
-                    <button class="eael-gb-eb-banner-promo-get-block eael-gb-eb-install" data-promotype="eb-banner" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo $eb_not_installed ? __( 'Get Essential Blocks', 'essential-addons-for-elementor-lite' ) : __( 'Activate', 'essential-addons-for-elementor-lite' ); ?></button>
+                    <a class="eael-gb-eb-banner-promo-learn-more" href="https://essential-blocks.com/" target="_blank"><?php esc_html_e( 'Learn More', 'essential-addons-for-elementor-lite' ) ?></a>
+                    <button class="eael-gb-eb-banner-promo-get-block eael-gb-eb-install" data-promotype="eb-banner" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo $eb_not_installed ? esc_html__( 'Get Essential Blocks', 'essential-addons-for-elementor-lite' ) : esc_html__( 'Activate', 'essential-addons-for-elementor-lite' ); ?></button>
                     <button class="eael-gb-eb-banner-promo-close" data-nonce="<?php echo esc_attr( $nonce ); ?>">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <g clip-path="url(#clip0_1_101)">

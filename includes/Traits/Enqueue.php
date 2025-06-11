@@ -6,8 +6,6 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-use \Essential_Addons_Elementor\Classes\Helper as EnqueueHelper;
-
 trait Enqueue
 {
 	public function before_enqueue_styles( $widgets ) {

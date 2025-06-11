@@ -882,7 +882,7 @@ class WPDeveloper_Setup_Wizard {
 	public function change_site_title() {
 		?>
         <script>
-			document.title = "<?php _e( 'Quick Setup Wizard- Essential Addons', 'essential-addons-for-elementor-lite' ); ?>"
+			document.title = "<?php esc_html_e( 'Quick Setup Wizard- Essential Addons', 'essential-addons-for-elementor-lite' ); ?>"
         </script>
 		<?php
 	}

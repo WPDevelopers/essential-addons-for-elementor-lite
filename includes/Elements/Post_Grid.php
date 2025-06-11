@@ -1,6 +1,7 @@
 <?php
 
 namespace Essential_Addons_Elementor\Elements;
+use Elementor\Group_Control_Image_Size;
 
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
@@ -84,11 +85,740 @@ class Post_Grid extends Widget_Base
     protected function register_controls()
     {
         /**
+         * Grid Layout Controls!
+         */
+        $this->start_controls_section(
+            'eael_section_post_grid_layout',
+            [
+                'label' => __('Layout', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+
+        // $this->add_control(
+        //     'eael_dynamic_template_Layout',
+        //     [
+        //         'label'   => esc_html__('Template Layout', 'essential-addons-for-elementor-lite'),
+        //         'type'    => Controls_Manager::SELECT,
+        //         'default' => 'default',
+        //         'options' => $this->get_template_list_for_dropdown(),
+        //     ]
+        // );
+
+        $template_list = $this->get_template_list_for_dropdown();
+        $layout_options = [];
+        if( ! empty( $template_list ) ){
+            $image_dir_url = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/';
+            $image_dir_path = EAEL_PLUGIN_PATH . 'assets/admin/images/layout-previews/';
+            foreach( $template_list as $key => $label ){
+                $image_url = $image_dir_url . 'post-grid-' . $key . '.png';
+                $image_url =  file_exists( $image_dir_path . 'post-grid-' . $key . '.png' ) ? $image_url : $image_dir_url . 'custom-layout.png';
+                $layout_options[ $key ] = [
+                    'title' => $label,
+                    'image' => $image_url
+                ];
+            }
+        }
+
+        $this->add_control(
+            'eael_post_grid_preset_style',
+            [
+                'label'       => esc_html__( 'Skin', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::CHOOSE,
+                'options'     => $layout_options,
+                'default'     => 'one',
+                'label_block' => true,
+                'toggle'      => false,
+                'image_choose'=> true,
+            ]
+        );
+
+        $this->add_control(
+            'layout_mode',
+            [
+                'label'   => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::CHOOSE,
+                'default' => 'masonry',
+                'options' => [
+                    'grid'       => [
+                        'title'  => esc_html__('Grid', 'essential-addons-for-elementor-lite'),
+                        'icon'   => 'eicon-gallery-grid'
+                    ],
+                    'masonry' => [
+                        'title'  => esc_html__('Masonry', 'essential-addons-for-elementor-lite'),
+                        'icon'   => 'eicon-gallery-masonry'
+                    ],
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_post_grid_columns',
+            [
+                'label'       => esc_html__('Column', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::CHOOSE,
+                'label_block' => true,
+                'toggle'      => false,
+                'options'     => [
+                    'eael-col-1' => [
+                        'title'  => esc_html__('One', 'essential-addons-for-elementor-lite'),
+                        'text'   => '1'
+                    ],
+                    'eael-col-2' => [
+                        'title'  => esc_html__('Two', 'essential-addons-for-elementor-lite'),
+                        'text'   => '2'
+                    ],
+                    'eael-col-3' => [
+                        'title'  => esc_html__('Three', 'essential-addons-for-elementor-lite'),
+                        'text'   => '3'
+                    ],
+                    'eael-col-4' => [
+                        'title'  => esc_html__('Four', 'essential-addons-for-elementor-lite'),
+                        'text'   => '4'
+                    ],
+                    'eael-col-5' => [
+                        'title'  => esc_html__('Five', 'essential-addons-for-elementor-lite'),
+                        'text'   => '5'
+                    ],
+                    'eael-col-6' => [
+                        'title'  => esc_html__('Six', 'essential-addons-for-elementor-lite'),
+                        'text'   => '6'
+                    ],
+                ],
+                'default'            => 'eael-col-4',
+                'tablet_default'     => 'eael-col-2',
+                'mobile_default'     => 'eael-col-1',
+                'prefix_class'       => 'elementor-grid%s-',
+                'frontend_available' => true,
+            ]
+        );
+
+        $this->add_control(
+            'show_load_more',
+            [
+                'label'   => esc_html__( 'Load More', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::CHOOSE,
+                'options' => [
+                    'no' => [
+                        'title' => esc_html__( 'Disable', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-ban',
+                    ],
+                    'yes' => [
+                        'title' => esc_html__( 'Button', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-button',
+                    ],
+                    'infinity' => [
+                        'title' => esc_html__( 'Infinity Scroll', 'essential-addons-for-elementor-lite' ),
+                        'icon'  => 'eicon-image-box',
+                    ],
+                ],
+                'default'   => 'no',
+                'separator' => 'before',
+                'toggle'    => false,
+            ]
+        );
+
+        $this->add_control(
+            'load_more_infinityscroll_offset',
+            [
+                'label'       => esc_html__('Scroll Offset (px)', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::NUMBER,
+                'dynamic'     => [ 'active' => false ],
+                'label_block' => false,
+                'separator'   => 'after',
+                'default'     => '-200',
+                'description' => esc_html__('Set the position of loading to the viewport before it ends from view', 'essential-addons-for-elementor-lite'),
+                'condition'   => [
+                    'show_load_more' => 'infinity',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'show_load_more_text',
+            [
+                'label'       => esc_html__('Label Text', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' => true ],
+                'label_block' => false,
+                'separator'   => 'after',
+                'default'     => esc_html__('Load More', 'essential-addons-for-elementor-lite'),
+                'condition'   => [
+                    'show_load_more' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+			'eael_title_heading',
+			[
+				'label'     => esc_html__( 'Title', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+        $this->add_control(
+            'eael_show_title',
+            [
+                'label'        => __('Show', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default'      => 'yes',
+            ]
+        );
+
+        $this->add_control(
+            'title_tag',
+            [
+                'label'       => __('HTML Tag', 'essential-addons-for-elementor-lite'),
+				'label_block' => true,
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => [
+					'h1' => [
+						'title' => esc_html__( 'H1', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h1',
+					],
+					'h2' => [
+						'title' => esc_html__( 'H2', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h2',
+					],
+					'h3' => [
+						'title' => esc_html__( 'H3', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h3',
+					],
+					'h4' => [
+						'title' => esc_html__( 'H4', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h4',
+					],
+					'h5' => [
+						'title' => esc_html__( 'H5', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h5',
+					],
+					'h6' => [
+						'title' => esc_html__( 'H6', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-editor-h6',
+					],
+					'div' => [
+						'title' => esc_html__( 'Div', 'essential-addons-for-elementor-lite' ),
+						'text'  => 'div',
+					],
+					'span' => [
+						'title' => esc_html__( 'Span', 'essential-addons-for-elementor-lite' ),
+						'text'  => 'span',
+					],
+					'p' => [
+						'title' => esc_html__( 'P', 'essential-addons-for-elementor-lite' ),
+						'text'  => 'P',
+					],
+				],
+                'default'   => 'h2',
+				'toggle'    => false,
+                'condition' => [
+                    'eael_show_title' => 'yes',
+                ],
+			]
+		);
+
+        $this->add_control(
+            'eael_title_length',
+            [
+                'label'     => __('Length', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::NUMBER,
+                'condition' => [
+                    'eael_show_title' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+			'eael_excerpt_heading',
+			[
+				'label'     => esc_html__( 'Excerpt', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+        $this->add_control(
+            'eael_show_excerpt',
+            [
+                'label'        => __('Show', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default'      => 'yes',
+            ]
+        );
+
+        $this->add_control(
+            'eael_excerpt_length',
+            [
+                'label'     => __('Length', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::NUMBER,
+                'default'   => 10,
+                'condition' => [
+                    'eael_show_excerpt' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'excerpt_expanison_indicator',
+            [
+                'label'       => esc_html__('Expansion Indicator', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active'      =>true ],
+                'ai'          => [ 'active'      =>false ],
+                'label_block' => false,
+                'default'     => esc_html__('...', 'essential-addons-for-elementor-lite'),
+                'condition'   => [
+                    'eael_show_excerpt' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+			'eael_read_more_text_heading',
+			[
+				'label'     => esc_html__( 'Read More Text', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+        $this->add_control(
+            'eael_show_read_more_button',
+            [
+                'label'        => __('Show', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default'      => 'yes',
+            ]
+        );
+
+        $this->add_control(
+            'read_more_button_text',
+            [
+                'label'       => esc_html__('Text', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::TEXT,
+                'ai'          => [ 'active' => false ],
+                'label_block' => false,
+                'default'     => esc_html__('Read More', 'essential-addons-for-elementor-lite'),
+                'condition'   => [
+                    'eael_show_read_more_button' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+			'eael_post_terms_heading',
+			[
+				'label'     => esc_html__( 'Post Terms', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+                'condition'   => [
+                    'eael_post_grid_preset_style' =>  ['two', 'three'],
+                ],
+			]
+		);
+
+        $this->add_control(
+            'eael_show_post_terms',
+            [
+                'label'        => __('Show', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'condition'    => [
+                    'eael_show_image'             => 'yes',
+                    'eael_post_grid_preset_style' => ['two', 'three']
+                ]
+            ]
+        );
+
+        $post_types = HelperClass::get_post_types();
+        unset(
+            $post_types['post'],
+            $post_types['page'],
+            $post_types['product']
+        );
+        $taxonomies     = get_taxonomies( [], 'objects' );
+        $post_types_tax = [];
+
+        foreach ( $taxonomies as $taxonomy => $object ) {
+            if( isset( $object->object_type ) && is_array( $object->object_type ) && count( $object->object_type ) ){
+                foreach( $object->object_type as $object_type ){
+                    if ( ! in_array( $object_type, array_keys( $post_types ) ) ) { 
+                        continue;
+                    }
+                    $post_types_tax[ $object_type ][ $taxonomy ] = $object->label;
+                }
+            }
+        }
+
+        foreach ( $post_types as $post_type => $post_taxonomies ) {
+            $this->add_control(
+                'eael_' . $post_type . '_terms',
+                [
+                    'label'     => __( 'Terms From', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::SELECT,
+                    'options'   => isset( $post_types_tax[ $post_type ] ) ? $post_types_tax[ $post_type ] : [],
+                    'default'   => isset( $post_types_tax[ $post_type ] ) ? key( $post_types_tax[ $post_type ] ) : '',
+                    'condition' => [
+                        'eael_show_image'             => 'yes',
+                        'eael_show_post_terms'        => 'yes',
+                        'post_type'                   => $post_type,
+                        'eael_post_grid_preset_style' =>  ['two', 'three'],
+                    ],
+                ]
+            );
+        }
+
+        $this->add_control(
+            'eael_post_terms',
+            [
+                'label'   => __('Terms From', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::SELECT,
+                'options' => [
+                    'category' => __('Category', 'essential-addons-for-elementor-lite'),
+                    'tags'     => __('Tags', 'essential-addons-for-elementor-lite'),
+                ],
+                'default'   => 'category',
+                'condition' => [
+                    'eael_show_image'      => 'yes',
+                    'eael_show_post_terms' => 'yes',
+                    'post_type'            => [ 'post', 'page', 'product', 'by_id', 'source_dynamic' ],
+                    'eael_post_grid_preset_style' =>  ['two', 'three'],
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_post_terms_max_length',
+            [
+                'label' => __('Max Terms to Show', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    1 => __('1', 'essential-addons-for-elementor-lite'),
+                    2 => __('2', 'essential-addons-for-elementor-lite'),
+                    3 => __('3', 'essential-addons-for-elementor-lite'),
+                ],
+                'default' => 1,
+                'condition' => [
+                    'eael_show_image'             => 'yes', 
+                    'eael_show_post_terms'        => 'yes',
+                    'eael_post_grid_preset_style' => ['two', 'three'],
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_post_terms_separator',
+            [
+                'label'       => esc_html__( 'Terms Separator', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::TEXT,
+                'label_block' => false,
+                'ai'          => [ 'active' => false ],
+                'default'     => esc_html__( '', 'essential-addons-for-elementor-lite' ),
+                'condition'   => [
+                    'eael_show_post_terms'        => 'yes',
+                    'eael_post_grid_preset_style' =>  ['two', 'three'],
+                ],
+            ]
+        );
+        
+        $this->add_control(
+            'eael_post_terms_on_image_hover',
+            [
+                'label'        => esc_html__('Terms on Image Hover', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default'      => 'yes',
+                'condition'    => [
+                    'eael_show_post_terms' => 'yes',
+                    'eael_post_grid_preset_style' =>  ['two', 'three'],
+                ],
+            ]
+        );
+
+        $this->add_control(
+			'eael_meta_data_heading',
+			[
+				'label'     => esc_html__( 'Meta Data', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+        $this->add_control(
+            'eael_show_meta',
+            [
+                'label'        => __('Show', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default'      => 'yes',
+            ]
+        );
+
+        $this->add_control(
+            'meta_position',
+            [
+                'label'   => esc_html__('Meta Position', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'meta-entry-footer',
+                'options' => [
+                    'meta-entry-header' => esc_html__('Entry Header', 'essential-addons-for-elementor-lite'),
+                    'meta-entry-footer' => esc_html__('Entry Footer', 'essential-addons-for-elementor-lite'),
+                ],
+                'condition' => [
+                    'eael_show_meta' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_show_avatar',
+            [
+                'label'        => __('Avatar', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default'      => 'yes',
+                'condition'    => [
+                    'eael_show_meta' => 'yes',
+                    'eael_post_grid_preset_style!' => ['two', 'three'],
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_show_author',
+            [
+                'label'        => __('Author Name', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default'      => 'yes',
+                'condition'    => [
+                    'eael_show_meta' => 'yes',
+                    'eael_post_grid_preset_style' => '',
+                ],
+            ]
+        );
+
+        // Style two and three has different default values and keeping controls consistant (Avatar and Author).
+        $this->add_control(
+            'eael_show_avatar_two',
+            [
+                'label'        => __('Avatar', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default'      => '',
+                'condition'    => [
+                    'eael_show_meta' => 'yes',
+                    'eael_post_grid_preset_style' => 'two',
+                ],
+            ]
+        );
+        
+        $this->add_control(
+            'eael_show_author_two',
+            [
+                'label'        => __('Author Name', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default'      => '',
+                'condition'    => [
+                    'eael_show_meta' => 'yes',
+                    'eael_post_grid_preset_style' => 'two',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_show_author_three',
+            [
+                'label'        => __('Author Name', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default'      => 'yes',
+                'condition'    => [
+                    'eael_show_meta' => 'yes',
+                    'meta_position'  => 'meta-entry-footer',
+                    'eael_post_grid_preset_style' => 'three',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_show_date',
+            [
+                'label'        => __('Date', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default'      => 'yes',
+                'condition'    => [
+                    'eael_show_meta' => 'yes',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        /**
          * Query And Layout Controls!
          * @source includes/elementor-helper.php
          */
         do_action('eael/controls/query', $this);
-        do_action('eael/controls/layout', $this);
+        // do_action('eael/controls/layout', $this);
+
+        /**
+         * Grid Image Controls!
+         */
+        $this->start_controls_section(
+            'eael_section_post_image_section',
+            [
+                'label' => __('Image', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+
+        $this->add_control(
+            'eael_show_image',
+            [
+                'label'        => __('Show', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default'      => 'yes',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Image_Size::get_type(),
+            [
+                'name'      => 'image',
+                'exclude'   => ['custom'],
+                'default'   => 'medium',
+                'condition' => [
+                    'eael_show_image' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'enable_postgrid_image_ratio',
+            [
+                'label'        => __('Manage Ratio', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default'      => 'no',
+                'condition'    => [
+                    'eael_show_image' => 'yes',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
+            'postgrid_image_ratio',
+            [
+                'label' => __('Ratio', 'essential-addons-for-elementor-lite'),
+                'type'  => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min'  => 0.1,
+                        'max'  => 2,
+                        'step' => 0.01,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 0.66,
+                ],
+                'size_units' => ['px'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-entry-thumbnail' => 'padding-bottom: calc({{SIZE}} * 100%);',
+                ],
+                'condition' => [
+                    'enable_postgrid_image_ratio' => 'yes',
+                    'eael_show_image'             => 'yes',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
+            'postgrid_image_height',
+            [
+                'label'      => __('Height', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::SLIDER,
+                'range'      => [
+                    'px' => [
+                        'min'  => 0,
+                        'max'  => 600,
+                        'step' => 1,
+                    ],
+                ],
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-entry-thumbnail' => 'height: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_show_image' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_show_fallback_img_all',
+            [
+                'label'        => __('Fallback', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default'      => '',
+                'condition'    => [
+                    'eael_show_image' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_post_carousel_fallback_img_all',
+            [
+                'label'     => '',
+                'type'      => Controls_Manager::MEDIA,
+                'condition' => [
+                    'eael_show_fallback_img_all' => 'yes',
+                    'eael_show_image'            => 'yes',
+                ],
+                'ai' => [
+                    'active' => false,
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
 
         /**
          * Grid Style Controls!
@@ -96,7 +826,7 @@ class Post_Grid extends Widget_Base
         $this->start_controls_section(
             'section_post_grid_links',
             [
-                'label' => __('Links', 'essential-addons-for-elementor-lite'),
+                'label' => __('Link Options', 'essential-addons-for-elementor-lite'),
                 'conditions' => [
                     'relation' => 'or',
                     'terms' => [
@@ -248,7 +978,7 @@ class Post_Grid extends Widget_Base
         $this->start_controls_section(
             'eael_section_post_grid_style',
             [
-                'label' => __('Post Grid Style', 'essential-addons-for-elementor-lite'),
+                'label' => __('Item', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -269,7 +999,7 @@ class Post_Grid extends Widget_Base
         $this->add_control(
             'eael_post_grid_bg_color',
             [
-                'label' => __('Post Background Color', 'essential-addons-for-elementor-lite'),
+                'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [
@@ -282,7 +1012,7 @@ class Post_Grid extends Widget_Base
         $this->add_responsive_control(
             'eael_post_grid_spacing',
             [
-                'label' => esc_html__('Spacing Between Items', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Space Between Items', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors' => [
@@ -328,7 +1058,7 @@ class Post_Grid extends Widget_Base
         $this->start_controls_section(
             'eael_section_post_grid_thumbnail_style',
             [
-                'label' => __('Thumbnail Style', 'essential-addons-for-elementor-lite'),
+                'label' => __('Image', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -352,7 +1082,7 @@ class Post_Grid extends Widget_Base
         $this->start_controls_section(
             'section_meta_date_style',
             [
-                'label' => __('Meta Date Style', 'essential-addons-for-elementor-lite'),
+                'label' => __('Meta Date', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_show_meta' => 'yes',
@@ -436,7 +1166,7 @@ class Post_Grid extends Widget_Base
         $this->start_controls_section(
             'section_meta_style_style',
             [
-                'label' => __('Meta Style', 'essential-addons-for-elementor-lite'),
+                'label' => __('Meta Data', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_post_grid_preset_style!' => 'three',
@@ -595,7 +1325,7 @@ class Post_Grid extends Widget_Base
         $this->start_controls_section(
             'eael_section_typography',
             [
-                'label' => __('Color, Typography & Spacing', 'essential-addons-for-elementor-lite'),
+                'label' => __('Content', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -603,7 +1333,7 @@ class Post_Grid extends Widget_Base
         $this->add_control(
             'eael_post_grid_title_style',
             [
-                'label' => __('Title Style', 'essential-addons-for-elementor-lite'),
+                'label' => __('Title', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -612,7 +1342,7 @@ class Post_Grid extends Widget_Base
         $this->add_control(
             'eael_post_grid_title_color',
             [
-                'label' => __('Title Color', 'essential-addons-for-elementor-lite'),
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#303133',
                 'selectors' => [
@@ -625,7 +1355,7 @@ class Post_Grid extends Widget_Base
         $this->add_control(
             'eael_post_grid_title_hover_color',
             [
-                'label' => __('Title Hover Color', 'essential-addons-for-elementor-lite'),
+                'label' => __('Hover Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#23527c',
                 'selectors' => [
@@ -638,7 +1368,7 @@ class Post_Grid extends Widget_Base
         $this->add_responsive_control(
             'eael_post_grid_title_alignment',
             [
-                'label' => __('Title Alignment', 'essential-addons-for-elementor-lite'),
+                'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
@@ -696,7 +1426,7 @@ class Post_Grid extends Widget_Base
         $this->add_control(
             'eael_post_grid_excerpt_color',
             [
-                'label' => __('Excerpt Color', 'essential-addons-for-elementor-lite'),
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -708,7 +1438,7 @@ class Post_Grid extends Widget_Base
         $this->add_responsive_control(
             'eael_post_grid_excerpt_alignment',
             [
-                'label' => __('Excerpt Alignment', 'essential-addons-for-elementor-lite'),
+                'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
@@ -738,7 +1468,7 @@ class Post_Grid extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'eael_post_grid_excerpt_typography',
-                'label' => __('Excerpt Typography', 'essential-addons-for-elementor-lite'),
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
                 'global' => [
 	                'default' => Global_Typography::TYPOGRAPHY_TEXT
                 ],
@@ -749,7 +1479,7 @@ class Post_Grid extends Widget_Base
         $this->add_control(
             'content_height',
             [
-                'label' => esc_html__('Content Height', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Height', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', '%', 'em'],
                 'range' => [
@@ -782,7 +1512,7 @@ class Post_Grid extends Widget_Base
         $this->start_controls_section(
             'section_meta_terms_style',
             [
-                'label' => __('Terms Style', 'essential-addons-for-elementor-lite'),
+                'label' => __('Terms', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_post_grid_preset_style' => 'two',
@@ -793,7 +1523,7 @@ class Post_Grid extends Widget_Base
         $this->add_control(
             'eael_post_grid_terms_color',
             [
-                'label' => __('Terms Color', 'essential-addons-for-elementor-lite'),
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -832,7 +1562,7 @@ class Post_Grid extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'eael_post_grid_terms_typography',
-                'label' => __('Meta Typography', 'essential-addons-for-elementor-lite'),
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
                 'global' => [
 	                'default' => Global_Typography::TYPOGRAPHY_TEXT
                 ],
@@ -930,7 +1660,7 @@ class Post_Grid extends Widget_Base
         $this->start_controls_section(
             'eael_section_hover_card_styles',
             [
-                'label' => __('Hover Card Style', 'essential-addons-for-elementor-lite'),
+                'label' => __('Hover Card', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -953,7 +1683,7 @@ class Post_Grid extends Widget_Base
         $this->add_control(
             'eael_post_grid_bg_hover_icon_new',
             [
-                'label' => __('Post Hover Icon', 'essential-addons-for-elementor-lite'),
+                'label' => __('Hover Icon', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::ICONS,
                 'default' => [
                     'value' => 'fas fa-long-arrow-alt-right',
@@ -1090,7 +1820,7 @@ class Post_Grid extends Widget_Base
         echo '<div '; $this->print_render_attribute_string( 'post_grid_wrapper' ); echo '>
             <div '; $this->print_render_attribute_string( 'post_grid_container' ); echo ' data-layout-mode="' . esc_attr( $settings["layout_mode"] ) . '">';
 
-        $template = $this->get_template($settings['eael_dynamic_template_Layout']);
+        $template = $this->get_template($settings['eael_post_grid_preset_style'] );
         $settings['loadable_file_name'] = $this->get_filename_only($template);
 	    $dir_name = $this->get_temp_dir_name($settings['loadable_file_name']);
 	    $found_posts = 0;
