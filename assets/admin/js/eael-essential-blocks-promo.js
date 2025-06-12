@@ -52,7 +52,8 @@
         }
     }).on('click', 'button.eael-gb-eb-never-show', function () {
         let $this = $(this),
-            nonce = $this.data('nonce');
+            nonce = $this.data('nonce'),
+            forever = $this.data('action-type');
 
         $.ajax({
             url: "admin-ajax.php",
@@ -60,6 +61,7 @@
             data: {
                 action: "eael_gb_eb_popup_dismiss",
                 security: nonce,
+                forever: forever
             },
             success: function (response) {
                 if (response.success) {
