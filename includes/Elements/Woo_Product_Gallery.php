@@ -3047,7 +3047,12 @@ class Woo_Product_Gallery extends Widget_Base {
 			return;
 		}
 
-		$template       = $this->get_template( $this->get_settings( 'eael_product_gallery_dynamic_template' ) );
+		$template_name = $settings['eael_product_gallery_style_preset'];
+		if ( in_array( $template_name, [ 'eael-product-preset-1', 'eael-product-preset-2', 'eael-product-preset-3', 'eael-product-preset-4' ] ) ) {
+			$template_name = str_replace( 'eael-product-', '', $template_name );
+		}
+
+		$template       = $this->get_template( $template_name );
 		$dir_name       = method_exists( $this, 'get_temp_dir_name' ) ? $this->get_temp_dir_name( $this->get_filename_only( $template ) ) : "pro";
 		$show_cat_thumb = isset( $settings[ 'eael_woo_product_gallery_terms_thumb' ] ) && 'yes' === $settings[ 'eael_woo_product_gallery_terms_thumb' ];
 
