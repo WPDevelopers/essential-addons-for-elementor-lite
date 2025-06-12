@@ -2258,7 +2258,7 @@ trait Admin {
 		if ( sanitize_text_field( $_POST['forever'] ?? '' ) == 'forever' ) {
 			set_transient( 'wpdeveloper_gb_eb_popup_hide', true );
 		} else {
-			set_transient( 'wpdeveloper_gb_eb_popup_hide', true, 20 );
+			set_transient( 'wpdeveloper_gb_eb_popup_hide', true, MONTH_IN_SECONDS * 2 );
 		}
 
 		wp_send_json_success();
