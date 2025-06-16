@@ -345,6 +345,19 @@
    font-size: 180%;
 }
 
+.elementor-control-type-choose .elementor-choices.eael-multiline{
+	height: auto;
+	flex-wrap: wrap;
+    border-inline-end: var(--e-a-border-bold);
+}
+
+.elementor-control-type-choose .elementor-choices.eael-multiline .elementor-choices-label{
+	flex: auto !important;
+	padding: 5px;
+}
+.elementor-control-type-choose .elementor-choices.eael-multiline .elementor-choices-label:last-child {
+    border-inline-end: none;
+}
 /* Multicolumn Pricing table render package and Features Sync action button */
 .eael-mcpt-action-btn {
    margin: 0 auto;
