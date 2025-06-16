@@ -523,7 +523,7 @@ class Creative_Button extends Widget_Base
             [
                 'label'     => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '#f54',
+                'default'   => '#333333',
                 'selectors' => apply_filters( 'eael_creative_button/normal/background_color/selectors', $eael_creative_button_background_color_selectors ),
                 'condition' => [
                     'use_gradient_background' => '',
