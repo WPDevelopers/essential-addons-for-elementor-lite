@@ -11419,7 +11419,7 @@ msgid ""
 msgstr ""
 
 #: ../includes/Traits/Elements.php:174
-msgid "Figma To Elementor"
+msgid "Figma To Elementor Converter"
 msgstr ""
 
 #: ../includes/Traits/Elements.php:180
