@@ -926,25 +926,12 @@ class Login_Register extends Widget_Base {
 		);
 
 
-		if ( empty( $this->cloudflare_turnstile_sitekey ) ) {
+		if ( empty( $this->cloudflare_turnstile_sitekey ) || empty( $this->cloudflare_turnstile_secretkey ) ) {
 			$this->add_control( 
-				'eael_cloudflare_turnstile_sitekey_missing', [
+				'eael_cloudflare_turnstile_keys_missing', [
 				'type'            => Controls_Manager::NOTICE,
 				'notice_type'     => 'warning',
-				'heading'         => __( 'Cloudflare Turnstile Site Key is missing', 'essential-addons-for-elementor-lite' ),
-				'content'         => sprintf( __( 'Please add it from  %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<a href="'.esc_url( site_url( '/wp-admin/admin.php?page=eael-settings' ) ).'" target="_blank"><strong>', '</strong></a>' ),
-				'condition'       => [
-					'enable_cloudflare_turnstile' => 'yes',
-				],
-			] );
-		}
-
-		if ( empty( $this->cloudflare_turnstile_secretkey ) ) {
-			$this->add_control( 
-				'eael_cloudflare_turnstile_secretkey_missing', [
-				'type'            => Controls_Manager::NOTICE,
-				'notice_type'     => 'warning',
-				'heading'         => __( 'Cloudflare Turnstile Secret Key is missing', 'essential-addons-for-elementor-lite' ),	
+				'heading'         => __( 'Cloudflare Turnstile Site Key or Secret Key is missing', 'essential-addons-for-elementor-lite' ),
 				'content'         => sprintf( __( 'Please add it from  %sDashboard >> Essential Addons >> Elements >> Login | Register Form %sSettings', 'essential-addons-for-elementor-lite' ), '<a href="'.esc_url( site_url( '/wp-admin/admin.php?page=eael-settings' ) ).'" target="_blank"><strong>', '</strong></a>' ),
 				'condition'       => [
 					'enable_cloudflare_turnstile' => 'yes',
