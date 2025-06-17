@@ -1492,7 +1492,7 @@ class Helper
 
         $color = '';
         if( ! empty( $attributes ) ) {
-            $color = $attributes['fill'];
+            $color = $attributes['fill'] ?? '';
             unset( $attributes['fill'] );
             foreach ( $attributes as $key => $value ) {
                 $svg_html .= $value ? "{$key}='{$value}' " : '';
