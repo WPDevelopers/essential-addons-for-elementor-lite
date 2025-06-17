@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'eaicon';
-	src:  url('../fonts/eaicon.eot?2ha98n');
-	src:  url('../fonts/eaicon.eot?2ha98n#iefix') format('embedded-opentype'),
-	url('../fonts/eaicon.ttf?2ha98n') format('truetype'),
-	url('../fonts/eaicon.woff?2ha98n') format('woff'),
-	url('../fonts/eaicon.svg?2ha98n#eaicon') format('svg');
+	src:  url('../fonts/eaicon.eot?ytb6g4');
+	src:  url('../fonts/eaicon.eot?ytb6g4#iefix') format('embedded-opentype'),
+	url('../fonts/eaicon.ttf?ytb6g4') format('truetype'),
+	url('../fonts/eaicon.woff?ytb6g4') format('woff'),
+	url('../fonts/eaicon.svg?ytb6g4#eaicon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 	font-display: block;
@@ -462,6 +462,43 @@
 .eaicon-multicolumn-pricing:before {
 	content: "\e989";
 }
-.icon-ea-logo:before {
+.eaicon-ea-logo:before {
 	content: "\e98a";
+}
+.eaicon-figma-to-elementor:before {
+	content: "\e98b";
+}
+.eaicon-figma-to-elementor-beta .path1:before {
+	content: "\e98c";
+	color: rgb(0, 0, 0);
+}
+.eaicon-figma-to-elementor-beta .path2:before {
+	content: "\e98d";
+	margin-left: -1em;
+	color: rgb(0, 0, 0);
+}
+.eaicon-figma-to-elementor-beta .path3:before {
+	content: "\e98e";
+	margin-left: -1em;
+	color: rgb(0, 0, 0);
+}
+.eaicon-figma-to-elementor-beta .path4:before {
+	content: "\e98f";
+	margin-left: -1em;
+	color: rgb(0, 0, 0);
+}
+.eaicon-figma-to-elementor-beta .path5:before {
+	content: "\e990";
+	margin-left: -1em;
+	color: rgb(0, 0, 0);
+}
+.eaicon-figma-to-elementor-beta .path6:before {
+	content: "\e991";
+	margin-left: -1em;
+	color: rgb(221, 220, 220);
+}
+.eaicon-figma-to-elementor-beta .path7:before {
+	content: "\e992";
+	margin-left: -1em;
+	color: rgb(0, 0, 0);
 }
