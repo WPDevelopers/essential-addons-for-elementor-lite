@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) {
    exit;
 }
 
+use Elementor\Group_Control_Image_Size;
 use Elementor\Widget_Base;
 use \Essential_Addons_Elementor\Classes\Helper;
 
@@ -481,6 +482,18 @@ class Woo_Product_Images extends Widget_Base {
 			]
 		);
 
+		$this->add_group_control(
+			Group_Control_Image_Size::get_type(),
+			[
+				'name'      => 'thumb_image_resolution',
+				'exclude'   => [ 'custom' ],
+				'default'   => 'thumbnail',
+				'condition' => [
+					'eael_pi_thumbnail' => 'yes',
+				]
+			]
+		);
+
 		$this->add_control(
 			'eael_pi_select_thumb_items',
 			[
@@ -708,6 +721,7 @@ class Woo_Product_Images extends Widget_Base {
 	protected function eael_pi_data_settings( $settings ) {
 		$pi_data_settings = [];
 		$pi_data_settings['thumbnail'] = ! empty( $settings['eael_pi_thumbnail'] ) ? $settings['eael_pi_thumbnail'] : '';
+		$pi_data_settings['thumbnail_size'] = ! empty( $settings['thumb_image_resolution_size'] ) ? $settings['thumb_image_resolution_size'] : '';
 		$pi_data_settings['desktop'] = ! empty( $settings['eael_pi_thumb_desktop_items'] ) ? $settings['eael_pi_thumb_desktop_items']['size'] : 4;
 		$pi_data_settings['tablet'] = ! empty( $settings['eael_pi_thumb_tablet_items'] ) ? $settings['eael_pi_thumb_tablet_items']['size'] : 3;
 		$pi_data_settings['mobile'] = ! empty( $settings['eael_pi_thumb_mobile_items'] ) ? $settings['eael_pi_thumb_mobile_items']['size'] : 2;
@@ -912,12 +926,13 @@ class Woo_Product_Images extends Widget_Base {
 		?>
 		<div <?php $this->print_render_attribute_string( 'eael-pi-thumb' ); ?>>
 			<div class="swiper-container">
-				<?php if( 'yes' == $thumb_settings['thumbnail'] ) { ?>
-					<?php $single_thumb_img = ( count($img_links) > 1 ) ? '' : 'single-thumb-img'; ?>
+				<?php if( 'yes' == $thumb_settings['thumbnail'] ) {
+					$single_thumb_img = ( count($img_links) > 1 ) ? '' : 'single-thumb-img';
+					$thumb_size = $thumb_settings['thumbnail_size']; ?>
 					<div class="swiper-wrapper <?php esc_attr_e( $single_thumb_img ); ?>">
-						<?php 
+						<?php
 							foreach ( $img_links as $img_link ) {
-								$this->render_slide( $img_link, 'product_image_slider__thumbs__image', 'thumbnail' );
+								$this->render_slide( $img_link, 'product_image_slider__thumbs__image', $thumb_size );
 							}
 						?>
 					</div>
