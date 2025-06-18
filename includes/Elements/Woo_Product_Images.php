@@ -485,12 +485,17 @@ class Woo_Product_Images extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Image_Size::get_type(),
 			[
-				'name'      => 'thumb_image_resolution',
-				'exclude'   => [ 'custom' ],
-				'default'   => 'thumbnail',
-				'condition' => [
+				'name'           => 'thumb_image_resolution',
+				'exclude'        => [ 'custom' ],
+				'default'        => 'thumbnail',
+				'condition'      => [
 					'eael_pi_thumbnail' => 'yes',
-				]
+				],
+				'fields_options' => [
+					'size' => [
+						'label' => esc_html__( 'Thumbnail Resolution', 'essential-addons-for-elementor-lite' ),
+					],
+				],
 			]
 		);
 
