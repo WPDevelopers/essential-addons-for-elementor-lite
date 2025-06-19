@@ -683,6 +683,11 @@ trait Elements {
 				}
 			}
 		}
+
+		//Custom Cursor
+		if ( $this->get_settings( 'custom-cursor' ) == true ) {
+			do_action( 'eael/cutom_cursor/page_render', $document );
+		}
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		printf( '%1$s', $html );
 	}
