@@ -652,8 +652,8 @@
 }
 .eael-woo-product-carousel-container.swiper-container-dots-outside .swiper-pagination.dots-preset-1 .swiper-pagination-bullet, .eael-woo-product-carousel-container.swiper-container-wrap-dots-outside .swiper-pagination.dots-preset-1 .swiper-pagination-bullet, .eael-woo-product-carousel-container.swiper-container-dots-inside .swiper-pagination.dots-preset-1 .swiper-pagination-bullet, .eael-woo-product-carousel-container.swiper-container-wrap-dots-inside .swiper-pagination.dots-preset-1 .swiper-pagination-bullet {
   border-radius: 2px;
-  width: 8px;
-  height: 3px;
+  width: 12px;
+  height: 4px;
 }
 .eael-woo-product-carousel-container.swiper-container-dots-outside .swiper-pagination.dots-preset-1 .swiper-pagination-bullet.swiper-pagination-bullet-active, .eael-woo-product-carousel-container.swiper-container-wrap-dots-outside .swiper-pagination.dots-preset-1 .swiper-pagination-bullet.swiper-pagination-bullet-active, .eael-woo-product-carousel-container.swiper-container-dots-inside .swiper-pagination.dots-preset-1 .swiper-pagination-bullet.swiper-pagination-bullet-active, .eael-woo-product-carousel-container.swiper-container-wrap-dots-inside .swiper-pagination.dots-preset-1 .swiper-pagination-bullet.swiper-pagination-bullet-active {
   width: 20px;
