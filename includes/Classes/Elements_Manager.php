@@ -172,7 +172,7 @@ class Elements_Manager {
 		if ( ! empty( $element['settings']['eael_wrapper_link_switch'] ) ) {
 			$list['wrapper-link'] = 'wrapper-link';
 		}
-		if ( ! empty( $element['settings']['eael_enable_custom_cursor'] ) ) {
+		if ( ! empty( $element['settings']['eael_enable_custom_cursor'] ) || ! empty( $element['settings']['eael_cursor_trail_show'] ) ) {
 			$list['custom-cursor'] = 'custom-cursor';
 		}
 		
