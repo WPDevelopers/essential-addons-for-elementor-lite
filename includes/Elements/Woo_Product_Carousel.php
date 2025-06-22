@@ -3243,13 +3243,13 @@ class Woo_Product_Carousel extends Widget_Base {
 	                if ( $query->have_posts() ):
                         echo '<div '; $this->print_render_attribute_string( 'eael-woo-product-carousel-wrap' ); echo '>';
 		                    $settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
-                            echo '<ul class="swiper-wrapper products">';
+                            echo '<div class="swiper-wrapper products">';
                             while ( $query->have_posts() ) {
                                 $query->the_post();
                                 include( $template );
                             }
                             wp_reset_postdata();
-                            echo '</ul>';
+                            echo '</div>';
                             do_action( 'eael_woo_after_product_loop' );
                         echo '</div>';
                     else:
