@@ -156,6 +156,83 @@ class Code_Snippet extends Widget_Base {
       );
       
       $this->end_controls_section();
+
+      $this->start_controls_section(
+         'file_preview_section',
+         [
+               'label' => __( 'File Preview Header', 'essential-addons-for-elementor-lite' ),
+               'tab'   => Controls_Manager::TAB_CONTENT,
+               'condition' => [
+                  'show_header' => 'yes',
+               ],
+         ]
+      );
+
+      $this->add_control(
+         'show_language_label',
+         [
+               'label'        => __( 'Show Language Label', 'essential-addons-for-elementor-lite' ),
+               'type'         => Controls_Manager::SWITCHER,
+               'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+               'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+               'return_value' => 'yes',
+               'default'      => 'yes',
+               'description'  => __( 'Display the programming language label in the header.', 'essential-addons-for-elementor-lite' ),
+         ]
+      );
+
+      $this->add_control(
+         'file_name',
+         [
+               'label' => __( 'File Name', 'essential-addons-for-elementor-lite' ),
+               'type' => Controls_Manager::TEXT,
+               'default' => 'filename.js',
+               'placeholder' => __( 'Enter filename with extension', 'essential-addons-for-elementor-lite' ),
+               'description' => __( 'Enter the filename to display in the header (e.g., hero-section.tsx)', 'essential-addons-for-elementor-lite' ),
+         ]
+      );
+
+      $this->add_control(
+         'show_traffic_lights',
+         [
+               'label' => __( 'Show window buttons', 'essential-addons-for-elementor-lite' ),
+               'type' => Controls_Manager::SWITCHER,
+               'label_on' => __( 'Show', 'essential-addons-for-elementor-lite' ),
+               'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+               'return_value' => 'yes',
+               'default' => 'yes',
+               'description' => __( 'Display macOS-style close/minimize/maximize circles.', 'essential-addons-for-elementor-lite' ),
+         ]
+      );
+
+      $this->add_control(
+         'show_file_icon',
+         [
+               'label' => __( 'Show language icon', 'essential-addons-for-elementor-lite' ),
+               'type' => Controls_Manager::SWITCHER,
+               'label_on' => __( 'Show', 'essential-addons-for-elementor-lite' ),
+               'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+               'return_value' => 'yes',
+               'default' => 'yes',
+               'description' => __( 'Display the default icon for this file type.', 'essential-addons-for-elementor-lite' ),
+         ]
+      );
+
+      $this->add_control(
+         'file_icon',
+         [
+               'label' => __( 'Custom language icon', 'essential-addons-for-elementor-lite' ),
+               'type' => Controls_Manager::MEDIA,
+               'media_types' => [ 'image' ],
+               'description' => __( 'Upload a custom icon to override the default.', 'essential-addons-for-elementor-lite' ),
+               'condition' => [
+                  'show_file_icon' => 'yes',
+               ],
+         ]
+      );
+      
+      $this->end_controls_section();
+      
    }
 
    protected function render() {
