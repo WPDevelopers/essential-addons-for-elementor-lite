@@ -35,7 +35,7 @@ class Code_Snippet extends Widget_Base {
 
    protected function register_controls() {
       $this->start_controls_section(
-			'content_section',
+			'code_snippet_section',
 			[
 				'label' => esc_html__( 'Code Snippet', 'essential-addons-for-elementor-lite' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
@@ -86,6 +86,75 @@ class Code_Snippet extends Widget_Base {
          ]
       );
 
+      $this->end_controls_section();
+      
+      $this->start_controls_section(
+			'display_options_section',
+			[
+				'label' => esc_html__( 'Display Options', 'essential-addons-for-elementor-lite' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+      $this->add_control(
+            'show_header',
+         [
+               'label'        => __( 'Show header bar', 'essential-addons-for-elementor-lite' ),
+               'type'         => Controls_Manager::SWITCHER,
+               'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+               'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+               'return_value' => 'yes',
+               'default'      => 'yes',
+               'description'  => __( 'Toggle the filename header and copy button.', 'essential-addons-for-elementor-lite' ),
+         ]
+      );
+
+      $this->add_control(
+         'show_copy_button',
+         [
+               'label'        => __( 'Enable copy button', 'essential-addons-for-elementor-lite' ),
+               'type'         => Controls_Manager::SWITCHER,
+               'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+               'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+               'return_value' => 'yes',
+               'default'      => 'yes',
+               'description'  => __( 'Show a one-click copy-to-clipboard icon.', 'essential-addons-for-elementor-lite' ),
+               'condition'    => [
+                  'show_header' => 'yes',
+               ],
+         ]
+      );
+
+      $this->add_control(
+         'show_copy_tooltip',
+         [
+               'label'        => __( 'Enable copy tooltip', 'essential-addons-for-elementor-lite' ),
+               'type'         => Controls_Manager::SWITCHER,
+               'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+               'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+               'return_value' => 'yes',
+               'default'      => 'no',
+               'description'  => __( 'Display a tooltip (‘Copied!’) on copy button hover or click.', 'essential-addons-for-elementor-lite' ),
+               'condition'    => [
+                  'show_header' => 'yes',
+                  'show_copy_button' => 'yes',
+               ],
+         ]
+      );
+
+      $this->add_control(
+         'show_line_numbers',
+         [
+               'label'        => __( 'Show line numbers', 'essential-addons-for-elementor-lite' ),
+               'type'         => Controls_Manager::SWITCHER,
+               'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+               'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+               'return_value' => 'yes',
+               'default'      => 'no',
+               'description'  => __( 'Display line numbers in the code block.', 'essential-addons-for-elementor-lite' ),
+         ]
+      );
+      
       $this->end_controls_section();
    }
 
