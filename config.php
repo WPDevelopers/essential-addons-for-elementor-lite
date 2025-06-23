@@ -687,7 +687,7 @@ $config = [
                 ],
             ],
         ],
-        'eael-code-snippet' => [
+        'code-snippet' => [
             'class' => '\Essential_Addons_Elementor\Elements\Code_Snippet',
             'dependency' => [
                 'css' => [

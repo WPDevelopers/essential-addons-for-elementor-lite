@@ -824,13 +824,13 @@ trait Admin {
 							    'promotion'   => 'new',
 							    'is_activate' => boolval( $this->get_settings( 'breadcrumbs' ) )
 						    ],
-							 'eael-code-sippet'		=> [
-							    'key'         => 'eael-code-sippet',
+							 'code-snippet'		=> [
+							    'key'         => 'code-snippet',
 							    'title'       => __( 'Code Snippet', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/code-snippet/',
 							    'doc_link'    => 'https://essential-addons.com/docs/ea-code-snippet/',
 							    'promotion'   => 'new',
-							    'is_activate' => boolval( $this->get_settings( 'eael-code-sippet' ) )
+							    'is_activate' => boolval( $this->get_settings( 'code-snippet' ) )
 						    ],
 					    ]
 				    ],

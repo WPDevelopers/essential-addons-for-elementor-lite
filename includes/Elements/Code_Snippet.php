@@ -9,7 +9,7 @@ use Elementor\Widget_Base;
 
 class Code_Snippet extends Widget_Base {
    public function get_name() {
-		return 'eael-code-sippet';
+		return 'eael-code-snippet';
 	}
    
    public function get_title() {
