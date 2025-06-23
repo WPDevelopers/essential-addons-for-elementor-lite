@@ -260,6 +260,15 @@ class Code_Snippet extends Widget_Base {
    }
 
    protected function render() {
+      $settings = $this->get_settings_for_display();
+
+      // Generate line numbers if needed
+      $line_numbers = [];
+      if ( $settings['show_line_numbers'] ) {
+         $lines        = explode( "\n", $settings['code_content'] );
+         $line_numbers = range( 1, count( $lines ) );
+      }
+
       ?>
       <div class="eael-code-snippet-wrapper theme-light">
          <div class="eael-code-snippet-header eael-file-preview-header">
@@ -295,10 +304,14 @@ class Code_Snippet extends Widget_Base {
 
          </div>
          <div class="eael-code-snippet-content">
+            <?php if( $settings['show_line_numbers'] ) { ?>
             <div class="eael-code-snippet-line-numbers" aria-hidden="true">
-                  <div class="line-number">1</div>
+               <?php foreach ( $line_numbers as $key => $line_number ) { ?>
+                  <div class="line-number"><?php echo esc_html( $line_number ); ?></div>
+               <?php } ?>
             </div>
-            <pre class="eael-code-snippet-code language-javascript"><code><?php esc_html_e( 'Content Here', 'essential-addons-for-elementor-lite' ); ?></code></pre>
+            <?php } ?>
+            <pre class="eael-code-snippet-code language-javascript"><code><?php echo esc_html( $settings['code_content'] ); ?></code></pre>
          </div>
       </div>
       <?php
