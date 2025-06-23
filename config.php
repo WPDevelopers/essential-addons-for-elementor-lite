@@ -687,6 +687,18 @@ $config = [
                 ],
             ],
         ],
+        'eael-code-snippet' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Code_Snippet',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/code-snippet.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
         'woo-product-images' => [
             'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Images',
             'dependency' => [
