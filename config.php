@@ -697,6 +697,13 @@ $config = [
                         'context' => 'view',
                     ],
                 ],
+                'js' => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/code-snippet.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                ],
             ],
         ],
         'woo-product-images' => [
