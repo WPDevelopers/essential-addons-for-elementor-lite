@@ -233,6 +233,30 @@ class Code_Snippet extends Widget_Base {
       
       $this->end_controls_section();
       
+      $this->start_controls_section(
+         'theme_section',
+         [
+               'label' => __( 'Theme', 'essential-addons-for-elementor-lite' ),
+               'tab'   => Controls_Manager::TAB_CONTENT,
+         ]
+      );
+
+      $this->add_control(
+         'theme',
+         [
+               'label'   => __( 'Theme', 'essential-addons-for-elementor-lite' ),
+               'type'    => Controls_Manager::SELECT,
+               'default' => 'light',
+               'options' => [
+                  'light' => __( 'Light', 'essential-addons-for-elementor-lite' ),
+                  'dark'  => __( 'Dark', 'essential-addons-for-elementor-lite' ),
+               ],
+               'description' => __( 'Choose light or dark styling for the code snippet block.', 'essential-addons-for-elementor-lite' ),
+         ]
+      );
+
+      $this->end_controls_section();
+      
    }
 
    protected function render() {
