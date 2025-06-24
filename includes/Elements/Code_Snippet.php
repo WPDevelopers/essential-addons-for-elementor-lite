@@ -324,16 +324,19 @@ class Code_Snippet extends Widget_Base {
       $language       = $settings['language'] ?? 'html';
       $file_name      = $settings['file_name'] ?? '';
       $theme          = $settings['theme'] ?? 'light';
+      $show_traffic_lights = $settings['show_traffic_lights'] ?? 'yes';
 
       ?>
       <div class="eael-code-snippet-wrapper theme-<?php echo esc_attr( $theme ); ?>">
          <div class="eael-code-snippet-header eael-file-preview-header">
             <div class="eael-file-preview-left">
+            <?php if ( 'yes' === $show_traffic_lights ) { ?>
                <div class="eael-traffic-lights">
                   <span class="traffic-light traffic-light-red"></span>
                   <span class="traffic-light traffic-light-yellow"></span>
                   <span class="traffic-light traffic-light-green"></span>
                </div>
+            <?php } ?>
                <div class="eael-file-info">
                   <?php if ( 'yes' === $show_file_icon ) { ?>
                   <div class="eael-file-icon">
