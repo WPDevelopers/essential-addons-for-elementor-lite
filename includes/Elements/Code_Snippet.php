@@ -321,11 +321,12 @@ class Code_Snippet extends Widget_Base {
 
       $file_icon      = $settings['file_icon']['url'] ?? '';
       $show_file_icon = $settings['show_file_icon'] ?? 'yes';
-      $language       = $settings[ 'language' ] ?? 'html';
-      $file_name      = $settings[ 'file_name' ] ?? '';
+      $language       = $settings['language'] ?? 'html';
+      $file_name      = $settings['file_name'] ?? '';
+      $theme          = $settings['theme'] ?? 'light';
 
       ?>
-      <div class="eael-code-snippet-wrapper theme-light">
+      <div class="eael-code-snippet-wrapper theme-<?php echo esc_attr( $theme ); ?>">
          <div class="eael-code-snippet-header eael-file-preview-header">
             <div class="eael-file-preview-left">
                <div class="eael-traffic-lights">
