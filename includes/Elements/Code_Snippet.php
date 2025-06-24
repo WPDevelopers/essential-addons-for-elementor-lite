@@ -325,6 +325,7 @@ class Code_Snippet extends Widget_Base {
       $file_name      = $settings['file_name'] ?? '';
       $theme          = $settings['theme'] ?? 'light';
       $show_traffic_lights = $settings['show_traffic_lights'] ?? 'yes';
+      $show_line_numbers = $settings['show_line_numbers'] ?? 'no';
 
       ?>
       <div class="eael-code-snippet-wrapper theme-<?php echo esc_attr( $theme ); ?>">
@@ -381,7 +382,7 @@ class Code_Snippet extends Widget_Base {
 
          </div>
          <div class="eael-code-snippet-content">
-            <?php if( $settings['show_line_numbers'] ) { ?>
+            <?php if( 'yes' === $show_line_numbers ) { ?>
             <div class="eael-code-snippet-line-numbers" aria-hidden="true">
                <?php foreach ( $line_numbers as $key => $line_number ) { ?>
                   <div class="line-number"><?php echo esc_html( $line_number ); ?></div>
