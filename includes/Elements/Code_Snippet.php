@@ -312,6 +312,9 @@ class Code_Snippet extends Widget_Base {
    protected function render() {
       $settings = $this->get_settings_for_display();
 
+      // Generate unique snippet ID for this widget instance
+      $snippet_id = 'eael-code-snippet-' . $this->get_id();
+
       // Generate line numbers if needed
       $line_numbers = [];
       if ( $settings['show_line_numbers'] ) {
@@ -331,7 +334,7 @@ class Code_Snippet extends Widget_Base {
       $show_copy_tooltip = $settings['show_copy_tooltip'] ?? 'no';
 
       ?>
-      <div class="eael-code-snippet-wrapper theme-<?php echo esc_attr( $theme ); ?>">
+      <div class="eael-code-snippet-wrapper theme-<?php echo esc_attr( $theme ); ?>" id="<?php echo esc_attr( $snippet_id ); ?>" data-language="<?php echo esc_attr( $language ); ?>" data-copy-button="<?php echo esc_attr( $show_copy_button === 'yes' ? 'true' : 'false' ); ?>">
       <?php if ( 'yes' === $show_header ) { ?>
          <div class="eael-code-snippet-header eael-file-preview-header">
             <div class="eael-file-preview-left">
@@ -375,7 +378,7 @@ class Code_Snippet extends Widget_Base {
                <div class="eael-code-snippet-copy-container">
                   <button class="eael-code-snippet-copy-button"
                            type="button"
-                           data-clipboard-target="#snippet_id .eael-code-snippet-code code"
+                           data-clipboard-target="#<?php echo esc_attr( $snippet_id ); ?> .eael-code-snippet-code code"
                            aria-label="<?php esc_attr_e( 'Copy code to clipboard', 'essential-addons-for-elementor-lite' ); ?>">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z" fill="currentColor"/>
@@ -393,7 +396,7 @@ class Code_Snippet extends Widget_Base {
          <div class="eael-code-snippet-content">
             <?php if( 'yes' === $show_line_numbers ) { ?>
             <div class="eael-code-snippet-line-numbers" aria-hidden="true">
-               <?php foreach ( $line_numbers as $key => $line_number ) { ?>
+               <?php foreach ( $line_numbers as $line_number ) { ?>
                   <div class="line-number"><?php echo esc_html( $line_number ); ?></div>
                <?php } ?>
             </div>
@@ -402,5 +405,18 @@ class Code_Snippet extends Widget_Base {
          </div>
       </div>
       <?php
+      if ( 'yes' === $show_copy_button ) {
+         ?>
+         <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function() {
+               // Initialize copy functionality for this specific snippet
+               const snippet = document.getElementById('<?php echo esc_js( $snippet_id ); ?>');
+               if (snippet && window.EaelCodeSnippet) {
+                  window.EaelCodeSnippet.initCopyButton(snippet);
+               }
+            });
+         </script>
+         <?php
+      }
    }
 }
