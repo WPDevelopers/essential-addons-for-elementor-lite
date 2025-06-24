@@ -326,9 +326,13 @@ class Code_Snippet extends Widget_Base {
       $theme          = $settings['theme'] ?? 'light';
       $show_traffic_lights = $settings['show_traffic_lights'] ?? 'yes';
       $show_line_numbers = $settings['show_line_numbers'] ?? 'no';
+      $show_header    = $settings['show_header'] ?? 'yes';
+      $show_copy_button = $settings['show_copy_button'] ?? 'yes';
+      $show_copy_tooltip = $settings['show_copy_tooltip'] ?? 'no';
 
       ?>
       <div class="eael-code-snippet-wrapper theme-<?php echo esc_attr( $theme ); ?>">
+      <?php if ( 'yes' === $show_header ) { ?>
          <div class="eael-code-snippet-header eael-file-preview-header">
             <div class="eael-file-preview-left">
             <?php if ( 'yes' === $show_traffic_lights ) { ?>
@@ -366,21 +370,26 @@ class Code_Snippet extends Widget_Base {
                </div>
             </div>
 
+            <?php if ( 'yes' === $show_copy_button ) { ?>
             <div class="eael-file-preview-right">
-                     <div class="eael-code-snippet-copy-container">
-                        <button class="eael-code-snippet-copy-button"
-                                 type="button"
-                                 data-clipboard-target="#snippet_id .eael-code-snippet-code code"
-                                 aria-label="<?php esc_attr_e( 'Copy code to clipboard', 'essential-addons-for-elementor-lite' ); ?>">
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                 <path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z" fill="currentColor"/>
-                              </svg>
-                        </button>
-                        <div class="eael-code-snippet-tooltip"><?php esc_html_e( 'Copy to clipboard', 'essential-addons-for-elementor-lite' ); ?></div>
-                     </div>
+               <div class="eael-code-snippet-copy-container">
+                  <button class="eael-code-snippet-copy-button"
+                           type="button"
+                           data-clipboard-target="#snippet_id .eael-code-snippet-code code"
+                           aria-label="<?php esc_attr_e( 'Copy code to clipboard', 'essential-addons-for-elementor-lite' ); ?>">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z" fill="currentColor"/>
+                        </svg>
+                  </button>
+                  <?php if ( 'yes' === $show_copy_tooltip ) { ?>
+                  <div class="eael-code-snippet-tooltip"><?php esc_html_e( 'Copy to clipboard', 'essential-addons-for-elementor-lite' ); ?></div>
+                  <?php } ?>
+               </div>
             </div>
-
+            <?php } ?>
          </div>
+      <?php } ?>
+
          <div class="eael-code-snippet-content">
             <?php if( 'yes' === $show_line_numbers ) { ?>
             <div class="eael-code-snippet-line-numbers" aria-hidden="true">
