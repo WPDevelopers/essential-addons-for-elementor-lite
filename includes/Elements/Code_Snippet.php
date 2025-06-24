@@ -221,13 +221,16 @@ class Code_Snippet extends Widget_Base {
       $this->add_control(
          'file_icon',
          [
-               'label' => __( 'Custom language icon', 'essential-addons-for-elementor-lite' ),
-               'type' => Controls_Manager::MEDIA,
+               'label'       => __( 'Custom language icon', 'essential-addons-for-elementor-lite' ),
+               'type'        => Controls_Manager::MEDIA,
                'media_types' => [ 'image' ],
                'description' => __( 'Upload a custom icon to override the default.', 'essential-addons-for-elementor-lite' ),
-               'condition' => [
+               'condition'   => [
                   'show_file_icon' => 'yes',
                ],
+               'ai' => [
+					'active' => false,
+				],
          ]
       );
       
@@ -269,6 +272,9 @@ class Code_Snippet extends Widget_Base {
          $line_numbers = range( 1, count( $lines ) );
       }
 
+      $file_icon      = $settings['file_icon']['url'] ?? '';
+      $show_file_icon = $settings['show_file_icon'] ?? 'yes';
+
       ?>
       <div class="eael-code-snippet-wrapper theme-light">
          <div class="eael-code-snippet-header eael-file-preview-header">
@@ -279,9 +285,13 @@ class Code_Snippet extends Widget_Base {
                   <span class="traffic-light traffic-light-green"></span>
                </div>
                <div class="eael-file-info">
+                  <?php if ( 'yes' === $show_file_icon ) { ?>
                   <div class="eael-file-icon">
-                           <span class="eael-file-icon-emoji"></span>
+                     <?php if ( ! empty( $file_icon ) ) { ?>
+                     <img src="<?php echo esc_url( $file_icon ); ?>" alt="<?php esc_attr_e( 'File icon', 'essential-addons-for-elementor-lite' ); ?>" />
+                     <?php } ?>
                   </div>
+                  <?php } ?>
                   <div class="eael-file-name">
                      <span class="file-name-text"><?php esc_html_e( 'filename.html', 'essential-addons-for-elementor-lite' ); ?></span>
                   </div>
