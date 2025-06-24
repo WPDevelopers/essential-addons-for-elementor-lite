@@ -62,25 +62,34 @@ class Code_Snippet extends Widget_Base {
                'type'    => Controls_Manager::SELECT,
                'default' => 'html',
                'options' => [
-                  'javascript'  => __( 'JavaScript', 'essential-addons-for-elementor-lite' ),
+                  'html'        => __( 'HTML', 'essential-addons-for-elementor-lite' ),
+                  'css'         => __( 'CSS', 'essential-addons-for-elementor-lite' ),
+                  'scss'        => __( 'SCSS', 'essential-addons-for-elementor-lite' ),
                   'php'         => __( 'PHP', 'essential-addons-for-elementor-lite' ),
+                  'laravel'     => __( 'Laravel', 'essential-addons-for-elementor-lite' ),
                   'python'      => __( 'Python', 'essential-addons-for-elementor-lite' ),
+                  'javascript'  => __( 'JavaScript', 'essential-addons-for-elementor-lite' ),
+                  'reactjs'     => __( 'React JS', 'essential-addons-for-elementor-lite' ),
+                  'vue'         => __( 'Vue JS', 'essential-addons-for-elementor-lite' ),
+                  'nodejs'      => __( 'Node JS', 'essential-addons-for-elementor-lite' ),
+                  'typescript'  => __( 'TypeScript', 'essential-addons-for-elementor-lite' ),
+                  'sql'         => __( 'SQL', 'essential-addons-for-elementor-lite' ),
+                  'json'        => __( 'JSON', 'essential-addons-for-elementor-lite' ),
+                  'xml'         => __( 'XML', 'essential-addons-for-elementor-lite' ),
                   'java'        => __( 'Java', 'essential-addons-for-elementor-lite' ),
                   'ruby'        => __( 'Ruby', 'essential-addons-for-elementor-lite' ),
                   'bash'        => __( 'Bash', 'essential-addons-for-elementor-lite' ),
-                  'json'        => __( 'JSON', 'essential-addons-for-elementor-lite' ),
                   'yaml'        => __( 'YAML', 'essential-addons-for-elementor-lite' ),
-                  'html'        => __( 'HTML', 'essential-addons-for-elementor-lite' ),
-                  'css'         => __( 'CSS', 'essential-addons-for-elementor-lite' ),
-                  'sql'         => __( 'SQL', 'essential-addons-for-elementor-lite' ),
-                  'xml'         => __( 'XML', 'essential-addons-for-elementor-lite' ),
                   'cpp'         => __( 'C++', 'essential-addons-for-elementor-lite' ),
                   'csharp'      => __( 'C#', 'essential-addons-for-elementor-lite' ),
                   'go'          => __( 'Go', 'essential-addons-for-elementor-lite' ),
                   'rust'        => __( 'Rust', 'essential-addons-for-elementor-lite' ),
                   'swift'       => __( 'Swift', 'essential-addons-for-elementor-lite' ),
                   'kotlin'      => __( 'Kotlin', 'essential-addons-for-elementor-lite' ),
-                  'typescript'  => __( 'TypeScript', 'essential-addons-for-elementor-lite' ),
+                  'markdown'    => __( 'Markdown', 'essential-addons-for-elementor-lite' ),
+                  'shell'       => __( 'Shell', 'essential-addons-for-elementor-lite' ),
+                  'powershell'  => __( 'Powershell', 'essential-addons-for-elementor-lite' ),
+                  'dockerfile'  => __( 'Docker', 'essential-addons-for-elementor-lite' ),
                ],
                'description' => __( 'Choose language for syntax highlighting.', 'essential-addons-for-elementor-lite' ),
          ]
@@ -262,6 +271,45 @@ class Code_Snippet extends Widget_Base {
       
    }
 
+   /**
+     * Get default file icon based on programming language
+     * @return string Emoji icon for the language
+     */
+   public static function get_file_icon_by_language( $language ) {
+      $icons = [
+         'html'       => '🌐',
+         'css'        => '🎨',
+         'scss'       => '🎨',
+         'php'        => '🐘',
+         'laravel'    => '🕸️',
+         'python'     => '🐍',
+         'javascript' => '📄',
+         'reactjs'    => '⚛️',
+         'vue'        => '🟩',
+         'nodejs'     => '🌿',
+         'typescript' => '📘',
+         'sql'        => '🗃️',
+         'json'       => '📋',
+         'xml'        => '📄',
+         'java'       => '☕',
+         'ruby'       => '💎',
+         'bash'       => '💻',
+         'yaml'       => '📋',
+         'cpp'        => '➕➕',
+         'csharp'     => '🔷',
+         'go'         => '🐹',
+         'rust'       => '🦀',
+         'swift'      => '🦉',
+         'kotlin'     => '🎯',
+         'markdown'   => '📝',
+         'shell'      => '💻',
+         'powershell' => '📟',
+         'dockerfile' =>  '🐳',
+      ];
+
+      return $icons[$language] ?? '📄';
+   }
+
    protected function render() {
       $settings = $this->get_settings_for_display();
 
@@ -274,6 +322,7 @@ class Code_Snippet extends Widget_Base {
 
       $file_icon      = $settings['file_icon']['url'] ?? '';
       $show_file_icon = $settings['show_file_icon'] ?? 'yes';
+      $language       = $settings[ 'language' ] ?? 'html';
 
       ?>
       <div class="eael-code-snippet-wrapper theme-light">
@@ -289,7 +338,11 @@ class Code_Snippet extends Widget_Base {
                   <div class="eael-file-icon">
                      <?php if ( ! empty( $file_icon ) ) { ?>
                      <img src="<?php echo esc_url( $file_icon ); ?>" alt="<?php esc_attr_e( 'File icon', 'essential-addons-for-elementor-lite' ); ?>" />
-                     <?php } ?>
+                     <?php } else {
+                        ?>
+                        <span class="eael-file-icon-emoji"><?php echo esc_html( self::get_file_icon_by_language( $language ) ); ?></span>
+                        <?php
+                     } ?>
                   </div>
                   <?php } ?>
                   <div class="eael-file-name">
