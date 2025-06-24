@@ -62,34 +62,32 @@ class Code_Snippet extends Widget_Base {
                'type'    => Controls_Manager::SELECT,
                'default' => 'html',
                'options' => [
-                  'html'        => __( 'HTML', 'essential-addons-for-elementor-lite' ),
-                  'css'         => __( 'CSS', 'essential-addons-for-elementor-lite' ),
-                  'scss'        => __( 'SCSS', 'essential-addons-for-elementor-lite' ),
-                  'php'         => __( 'PHP', 'essential-addons-for-elementor-lite' ),
-                  'laravel'     => __( 'Laravel', 'essential-addons-for-elementor-lite' ),
-                  'python'      => __( 'Python', 'essential-addons-for-elementor-lite' ),
-                  'javascript'  => __( 'JavaScript', 'essential-addons-for-elementor-lite' ),
-                  'reactjs'     => __( 'React JS', 'essential-addons-for-elementor-lite' ),
-                  'vue'         => __( 'Vue JS', 'essential-addons-for-elementor-lite' ),
-                  'nodejs'      => __( 'Node JS', 'essential-addons-for-elementor-lite' ),
-                  'typescript'  => __( 'TypeScript', 'essential-addons-for-elementor-lite' ),
-                  'sql'         => __( 'SQL', 'essential-addons-for-elementor-lite' ),
-                  'json'        => __( 'JSON', 'essential-addons-for-elementor-lite' ),
-                  'xml'         => __( 'XML', 'essential-addons-for-elementor-lite' ),
-                  'java'        => __( 'Java', 'essential-addons-for-elementor-lite' ),
-                  'ruby'        => __( 'Ruby', 'essential-addons-for-elementor-lite' ),
-                  'bash'        => __( 'Bash', 'essential-addons-for-elementor-lite' ),
-                  'yaml'        => __( 'YAML', 'essential-addons-for-elementor-lite' ),
-                  'cpp'         => __( 'C++', 'essential-addons-for-elementor-lite' ),
-                  'csharp'      => __( 'C#', 'essential-addons-for-elementor-lite' ),
-                  'go'          => __( 'Go', 'essential-addons-for-elementor-lite' ),
-                  'rust'        => __( 'Rust', 'essential-addons-for-elementor-lite' ),
-                  'swift'       => __( 'Swift', 'essential-addons-for-elementor-lite' ),
-                  'kotlin'      => __( 'Kotlin', 'essential-addons-for-elementor-lite' ),
-                  'markdown'    => __( 'Markdown', 'essential-addons-for-elementor-lite' ),
-                  'shell'       => __( 'Shell', 'essential-addons-for-elementor-lite' ),
-                  'powershell'  => __( 'Powershell', 'essential-addons-for-elementor-lite' ),
-                  'dockerfile'  => __( 'Docker', 'essential-addons-for-elementor-lite' ),
+                  'html'       => __( 'HTML', 'essential-addons-for-elementor-lite' ),
+                  'css'        => __( 'CSS', 'essential-addons-for-elementor-lite' ),
+                  'scss'       => __( 'SCSS', 'essential-addons-for-elementor-lite' ),
+                  'php'        => __( 'PHP', 'essential-addons-for-elementor-lite' ),
+                  'py'         => __( 'Python', 'essential-addons-for-elementor-lite' ),
+                  'js'         => __( 'JavaScript', 'essential-addons-for-elementor-lite' ),
+                  'jsx'        => __( 'React JS', 'essential-addons-for-elementor-lite' ),
+                  'vue'        => __( 'Vue JS', 'essential-addons-for-elementor-lite' ),
+                  'ts'         => __( 'TypeScript', 'essential-addons-for-elementor-lite' ),
+                  'sql'        => __( 'SQL', 'essential-addons-for-elementor-lite' ),
+                  'json'       => __( 'JSON', 'essential-addons-for-elementor-lite' ),
+                  'xml'        => __( 'XML', 'essential-addons-for-elementor-lite' ),
+                  'java'       => __( 'Java', 'essential-addons-for-elementor-lite' ),
+                  'rd'         => __( 'Ruby', 'essential-addons-for-elementor-lite' ),
+                  'bash'       => __( 'Bash', 'essential-addons-for-elementor-lite' ),
+                  'yml'        => __( 'YAML', 'essential-addons-for-elementor-lite' ),
+                  'cpp'        => __( 'C++', 'essential-addons-for-elementor-lite' ),
+                  'cs'         => __( 'C#', 'essential-addons-for-elementor-lite' ),
+                  'go'         => __( 'Go', 'essential-addons-for-elementor-lite' ),
+                  'rs'         => __( 'Rust', 'essential-addons-for-elementor-lite' ),
+                  'swift'      => __( 'Swift', 'essential-addons-for-elementor-lite' ),
+                  'kt'         => __( 'Kotlin', 'essential-addons-for-elementor-lite' ),
+                  'md'         => __( 'Markdown', 'essential-addons-for-elementor-lite' ),
+                  'sh'         => __( 'Shell', 'essential-addons-for-elementor-lite' ),
+                  'ps1'        => __( 'Powershell', 'essential-addons-for-elementor-lite' ),
+                  'dockerfile' => __( 'Docker', 'essential-addons-for-elementor-lite' ),
                ],
                'description' => __( 'Choose language for syntax highlighting.', 'essential-addons-for-elementor-lite' ),
          ]
@@ -193,11 +191,14 @@ class Code_Snippet extends Widget_Base {
       $this->add_control(
          'file_name',
          [
-               'label' => __( 'File Name', 'essential-addons-for-elementor-lite' ),
-               'type' => Controls_Manager::TEXT,
-               'default' => 'filename.js',
+               'label'       => __( 'File Name', 'essential-addons-for-elementor-lite' ),
+               'type'        => Controls_Manager::TEXT,
+               'default'     => 'filename',
                'placeholder' => __( 'Enter filename with extension', 'essential-addons-for-elementor-lite' ),
                'description' => __( 'Enter the filename to display in the header (e.g., hero-section.tsx)', 'essential-addons-for-elementor-lite' ),
+               'ai'          => [
+                  'active' => false,
+               ]
          ]
       );
 
@@ -281,30 +282,28 @@ class Code_Snippet extends Widget_Base {
          'css'        => '🎨',
          'scss'       => '🎨',
          'php'        => '🐘',
-         'laravel'    => '🕸️',
-         'python'     => '🐍',
-         'javascript' => '📄',
-         'reactjs'    => '⚛️',
+         'py'         => '🐍',
+         'js'         => '📄',
+         'jsx'        => '⚛️',
          'vue'        => '🟩',
-         'nodejs'     => '🌿',
-         'typescript' => '📘',
+         'ts'         => '📘',
          'sql'        => '🗃️',
          'json'       => '📋',
          'xml'        => '📄',
          'java'       => '☕',
-         'ruby'       => '💎',
+         'rd'         => '💎',
          'bash'       => '💻',
-         'yaml'       => '📋',
+         'yml'        => '📋',
          'cpp'        => '➕➕',
-         'csharp'     => '🔷',
+         'cs'         => '🔷',
          'go'         => '🐹',
-         'rust'       => '🦀',
+         'rs'         => '🦀',
          'swift'      => '🦉',
-         'kotlin'     => '🎯',
-         'markdown'   => '📝',
-         'shell'      => '💻',
-         'powershell' => '📟',
-         'dockerfile' =>  '🐳',
+         'kt'         => '🎯',
+         'md'         => '📝',
+         'sh'         => '💻',
+         'ps1'        => '📟',
+         'dockerfile' => '🐳',
       ];
 
       return $icons[$language] ?? '📄';
@@ -323,6 +322,7 @@ class Code_Snippet extends Widget_Base {
       $file_icon      = $settings['file_icon']['url'] ?? '';
       $show_file_icon = $settings['show_file_icon'] ?? 'yes';
       $language       = $settings[ 'language' ] ?? 'html';
+      $file_name      = $settings[ 'file_name' ] ?? '';
 
       ?>
       <div class="eael-code-snippet-wrapper theme-light">
@@ -344,10 +344,20 @@ class Code_Snippet extends Widget_Base {
                         <?php
                      } ?>
                   </div>
-                  <?php } ?>
+                  <?php }
+                  if ( ! empty( $file_name ) ) { ?>
                   <div class="eael-file-name">
-                     <span class="file-name-text"><?php esc_html_e( 'filename.html', 'essential-addons-for-elementor-lite' ); ?></span>
+                     <span class="file-name-text">
+                        <?php 
+                        if ( strpos( $file_name, '.' ) === false && ! empty( $language ) ) {
+                           echo esc_html( $file_name . '.' . $language );
+                        } else {
+                           echo esc_html( $file_name );
+                        }
+                        ?>
+                     </span>
                   </div>
+                  <?php } ?>
                </div>
             </div>
 
