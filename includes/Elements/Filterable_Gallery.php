@@ -3876,7 +3876,7 @@ class Filterable_Gallery extends Widget_Base
      */
     protected function gallery_item_caption_content( $settings, $item, $caption_style){
         $html = '<div class="gallery-item-caption-wrap ' . esc_attr( $caption_style . ' ' . $settings['eael_fg_grid_hover_style'] ) . '">';
-        $is_image_clickable = isset( $settings['eael_section_fg_full_image_clickable'] ) && 'yes' === $settings['eael_section_fg_full_image_clickable'];
+        $is_image_clickable = isset( $settings['eael_section_fg_full_image_clickable'] ) && 'yes' === $settings['eael_section_fg_full_image_clickable'] && 'card' !== $settings['eael_fg_caption_style'];
         if ('hoverer' == $settings['eael_fg_caption_style']) {
             $html .= '<div class="gallery-item-hoverer-bg"></div>';
         }
@@ -3901,7 +3901,7 @@ class Filterable_Gallery extends Widget_Base
             }
 
             if ( ! empty( $item['content'] ) ) {
-                $content = ! $is_image_clickable ? $item['content'] : preg_replace('/<a\b[^>]*>(.*?)<\/a>/i', '', $item['content'] );
+                $content = ! $is_image_clickable ? $item['content'] : preg_replace(['/<a\b[^>]*>/i', '/<\/a>/i'], '', $item['content']);
                 $html .= '<div class="fg-item-content">' . wpautop($content ) . '</div>';
             }
         }
@@ -4101,7 +4101,7 @@ class Filterable_Gallery extends Widget_Base
             ) {
                 $this->popup_status = true;
                 $close_media_content_wrap = true;
-                $html .= '<a aria-hidden="true" aria-label="eael-magnific-link" href="' . esc_url($item['image']) . '" class="'. $magnific_class .' media-content-wrap" data-elementor-open-lightbox="' . esc_attr( $is_lightbox ) . '" title="' . esc_attr( $title ) . '">';
+                $html .= '<a  aria-hidden="true" aria-label="eael-magnific-link" href="' . esc_url($item['image']) . '" class="'. $magnific_class .' media-content-wrap" data-elementor-open-lightbox="' . esc_attr( $is_lightbox ) . '" title="' . esc_attr( $title ) . '">';
             }
             
             if ( $settings['eael_section_fg_full_image_clickable'] && 'true' !== $item['video_gallery_switch'] ) {
@@ -4119,6 +4119,9 @@ class Filterable_Gallery extends Widget_Base
 
             $html .= '</div>';
 
+            if ( $settings['eael_section_fg_full_image_clickable'] && 'card' === $settings['eael_fg_caption_style'] ) {
+                $html .= '</a>';
+            }
             if ($close_media_content_wrap) {
                 $html .= '</a>';
             }
@@ -4136,7 +4139,7 @@ class Filterable_Gallery extends Widget_Base
                 $html .= '</a>';
             }
 
-            if ($settings['eael_section_fg_full_image_clickable']) {
+            if ( $settings['eael_section_fg_full_image_clickable'] && 'card' !== $settings['eael_fg_caption_style'] ) {
                 $html .= '</a>';
             }
 
