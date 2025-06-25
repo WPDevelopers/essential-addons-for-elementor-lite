@@ -1625,11 +1625,11 @@ msgstr ""
 msgid "Show Icon"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Category_Box.php:160, ../includes/Elements/Betterdocs_Category_Box.php:172, ../includes/Elements/Betterdocs_Category_Box.php:207, ../includes/Elements/Betterdocs_Category_Grid.php:180, ../includes/Elements/Betterdocs_Category_Grid.php:193, ../includes/Elements/Betterdocs_Category_Grid.php:208, ../includes/Elements/Betterdocs_Category_Grid.php:247, ../includes/Elements/Betterdocs_Category_Grid.php:263, ../includes/Elements/Betterdocs_Category_Grid.php:275, ../includes/Elements/Betterdocs_Category_Grid.php:1309, ../includes/Elements/Breadcrumbs.php:81, ../includes/Elements/Business_Reviews.php:533, ../includes/Elements/Business_Reviews.php:548, ../includes/Elements/Business_Reviews.php:583, ../includes/Elements/Business_Reviews.php:607, ../includes/Elements/Business_Reviews.php:633, ../includes/Elements/Business_Reviews.php:660, ../includes/Elements/Business_Reviews.php:681, ../includes/Elements/Business_Reviews.php:693, ../includes/Elements/Business_Reviews.php:705, ../includes/Elements/Business_Reviews.php:718, ../includes/Elements/Business_Reviews.php:754, ../includes/Elements/Business_Reviews.php:766, ../includes/Elements/Caldera_Forms.php:159, ../includes/Elements/Caldera_Forms.php:172, ../includes/Elements/Caldera_Forms.php:198, ../includes/Elements/Code_Snippet.php:104, ../includes/Elements/Code_Snippet.php:117, ../includes/Elements/Code_Snippet.php:133, ../includes/Elements/Code_Snippet.php:150, ../includes/Elements/Code_Snippet.php:176, ../includes/Elements/Code_Snippet.php:200, ../includes/Elements/Code_Snippet.php:213, ../includes/Elements/Contact_Form_7.php:212, ../includes/Elements/Contact_Form_7.php:238, ../includes/Elements/Contact_Form_7.php:258, ../includes/Elements/Content_Ticker.php:264, ../includes/Elements/Countdown.php:618, ../includes/Elements/Creative_Button.php:301, ../includes/Elements/Cta_Box.php:261, ../includes/Elements/Cta_Box.php:422, ../includes/Elements/Cta_Box.php:510, ../includes/Elements/Dual_Color_Header.php:105, ../includes/Elements/Dual_Color_Header.php:117, ../includes/Elements/Event_Calendar.php:957, ../includes/Elements/Event_Calendar.php:1014, ../includes/Elements/Event_Calendar.php:1074, ../includes/Elements/Event_Calendar.php:1169, ../includes/Elements/Event_Calendar.php:1326, ../includes/Elements/Facebook_Feed.php:390, ../includes/Elements/Facebook_Feed.php:402, ../includes/Elements/Facebook_Feed.php:417, ../includes/Elements/Facebook_Feed.php:432, ../includes/Elements/Facebook_Feed.php:447, ../includes/Elements/Facebook_Feed.php:516, ../includes/Elements/Feature_List.php:421, ../includes/Elements/Filterable_Gallery.php:429, ../includes/Elements/Filterable_Gallery.php:710, ../includes/Elements/Filterable_Gallery.php:859, ../includes/Elements/Filterable_Gallery.php:889, ../includes/Elements/Filterable_Gallery.php:918, ../includes/Elements/Filterable_Gallery.php:1001, ../includes/Elements/Filterable_Gallery.php:1016, ../includes/Elements/FluentForm.php:200, ../includes/Elements/FluentForm.php:212, ../includes/Elements/FluentForm.php:238, ../includes/Elements/FluentForm.php:1766, ../includes/Elements/FluentForm.php:1835, ../includes/Elements/Formstack.php:244, ../includes/Elements/Formstack.php:256, ../includes/Elements/Formstack.php:282, ../includes/Elements/Formstack.php:295, ../includes/Elements/Formstack.php:1633, ../includes/Elements/GravityForms.php:171, ../includes/Elements/GravityForms.php:186, ../includes/Elements/GravityForms.php:235, ../includes/Elements/GravityForms.php:247, ../includes/Elements/GravityForms.php:285, ../includes/Elements/GravityForms.php:305, ../includes/Elements/Image_Accordion.php:234, ../includes/Elements/Info_Box.php:310, ../includes/Elements/Info_Box.php:431, ../includes/Elements/Login_Register.php:498, ../includes/Elements/Login_Register.php:945, ../includes/Elements/Login_Register.php:1261, ../includes/Elements/Login_Register.php:2130, ../includes/Elements/NFT_Gallery.php:294, ../includes/Elements/NFT_Gallery.php:306, ../includes/Elements/NFT_Gallery.php:349, ../includes/Elements/NFT_Gallery.php:361, ../includes/Elements/NFT_Gallery.php:373, ../includes/Elements/NFT_Gallery.php:408, ../includes/Elements/NFT_Gallery.php:443, ../includes/Elements/NFT_Gallery.php:478, ../includes/Elements/NFT_Gallery.php:508, ../includes/Elements/NinjaForms.php:130, ../includes/Elements/NinjaForms.php:180, ../includes/Elements/NinjaForms.php:193, ../includes/Elements/NinjaForms.php:219, ../includes/Elements/NinjaForms.php:239, ../includes/Elements/Post_Grid.php:263, ../includes/Elements/Post_Grid.php:347, ../includes/Elements/Post_Grid.php:395, ../includes/Elements/Post_Grid.php:433, ../includes/Elements/Post_Grid.php:541, ../includes/Elements/Post_Grid.php:564, ../includes/Elements/Post_Grid.php:594, ../includes/Elements/Post_Grid.php:610, ../includes/Elements/Post_Grid.php:627, ../includes/Elements/Post_Grid.php:643, ../includes/Elements/Post_Grid.php:659, ../includes/Elements/Post_Grid.php:676, ../includes/Elements/Post_Grid.php:708, ../includes/Elements/Post_Grid.php:796, ../includes/Elements/Post_Timeline.php:127, ../includes/Elements/Pricing_Table.php:520, ../includes/Elements/Pricing_Table.php:584, ../includes/Elements/Pricing_Table.php:1749, ../includes/Elements/Product_Grid.php:421, ../includes/Elements/Product_Grid.php:655, ../includes/Elements/Product_Grid.php:733, ../includes/Elements/Product_Grid.php:899, ../includes/Elements/Product_Grid.php:915, ../includes/Elements/Product_Grid.php:967, ../includes/Elements/Product_Grid.php:990, ../includes/Elements/Product_Grid.php:2697, ../includes/Elements/SVG_Draw.php:312, ../includes/Elements/Twitter_Feed.php:676, ../includes/Elements/Woo_Add_To_Cart.php:888, ../includes/Elements/Woo_Add_To_Cart.php:915, ../includes/Elements/Woo_Cart.php:436, ../includes/Elements/Woo_Cart.php:487, ../includes/Elements/Woo_Cart.php:557, ../includes/Elements/Woo_Cart.php:569, ../includes/Elements/Woo_Cart.php:643, ../includes/Elements/Woo_Cart.php:724, ../includes/Elements/Woo_Cart.php:798, ../includes/Elements/Woo_Cart.php:946, ../includes/Elements/Woo_Cart.php:974, ../includes/Elements/Woo_Cart.php:1001, ../includes/Elements/Woo_Cart.php:1044, ../includes/Elements/Woo_Cart.php:1091, ../includes/Elements/Woo_Cart.php:1104, ../includes/Elements/Woo_Cart.php:1119, ../includes/Elements/Woo_Cart.php:1134, ../includes/Elements/Woo_Cart.php:1149, ../includes/Elements/Woo_Cart.php:1164, ../includes/Elements/Woo_Cart.php:1179, ../includes/Elements/Woo_Checkout.php:486, ../includes/Elements/Woo_Product_Carousel.php:256, ../includes/Elements/Woo_Product_Carousel.php:268, ../includes/Elements/Woo_Product_Carousel.php:321, ../includes/Elements/Woo_Product_Carousel.php:798, ../includes/Elements/Woo_Product_Carousel.php:871, ../includes/Elements/Woo_Product_Gallery.php:294, ../includes/Elements/Woo_Product_Gallery.php:324, ../includes/Elements/Woo_Product_Gallery.php:495, ../includes/Elements/Woo_Product_Gallery.php:523, ../includes/Elements/Woo_Product_Gallery.php:742, ../includes/Elements/Woo_Product_Gallery.php:1283, ../includes/Elements/Woo_Product_Images.php:80, ../includes/Elements/Woo_Product_Images.php:172, ../includes/Elements/Woo_Product_Images.php:455, ../includes/Elements/Woo_Product_Images.php:466, ../includes/Elements/Woo_Product_Images.php:477, ../includes/Elements/Woo_Product_Images.php:614, ../includes/Elements/Woo_Product_Images.php:629, ../includes/Elements/Woo_Product_Images.php:640, ../includes/Elements/Woo_Product_Images.php:673, ../includes/Elements/Woo_Product_Images.php:685, ../includes/Elements/Woo_Product_Images.php:697, ../includes/Elements/Woo_Product_List.php:306, ../includes/Elements/Woo_Product_List.php:315, ../includes/Elements/Woo_Product_List.php:324, ../includes/Elements/Woo_Product_List.php:333, ../includes/Elements/Woo_Product_List.php:351, ../includes/Elements/Woo_Product_List.php:360, ../includes/Elements/Woo_Product_List.php:369, ../includes/Elements/Woo_Product_List.php:387, ../includes/Elements/Woo_Product_List.php:399, ../includes/Elements/Woo_Product_List.php:411, ../includes/Elements/Woo_Product_List.php:420, ../includes/Elements/Woo_Product_List.php:429, ../includes/Elements/Woo_Product_List.php:1008, ../includes/Elements/Woo_Product_List.php:1060, ../includes/Elements/Woo_Product_Price.php:210, ../includes/Elements/Woo_Product_Price.php:277, ../includes/Elements/Woo_Product_Rating.php:294, ../includes/Elements/Woo_Product_Rating.php:372, ../includes/Elements/WpForms.php:131, ../includes/Elements/WpForms.php:146, ../includes/Elements/WpForms.php:195, ../includes/Elements/WpForms.php:208, ../includes/Elements/WpForms.php:231, ../includes/Extensions/Table_of_Content.php:570, ../includes/Traits/Controls.php:737, ../includes/Traits/Controls.php:920, ../includes/Traits/Controls.php:1031, ../includes/Traits/Controls.php:1061, ../includes/Traits/Controls.php:1126, ../includes/Traits/Controls.php:1171, ../includes/Traits/Controls.php:1241, ../includes/Traits/Controls.php:1332, ../includes/Traits/Controls.php:1361, ../includes/Traits/Controls.php:1377, ../includes/Traits/Controls.php:1393
+#: ../includes/Elements/Betterdocs_Category_Box.php:160, ../includes/Elements/Betterdocs_Category_Box.php:172, ../includes/Elements/Betterdocs_Category_Box.php:207, ../includes/Elements/Betterdocs_Category_Grid.php:180, ../includes/Elements/Betterdocs_Category_Grid.php:193, ../includes/Elements/Betterdocs_Category_Grid.php:208, ../includes/Elements/Betterdocs_Category_Grid.php:247, ../includes/Elements/Betterdocs_Category_Grid.php:263, ../includes/Elements/Betterdocs_Category_Grid.php:275, ../includes/Elements/Betterdocs_Category_Grid.php:1309, ../includes/Elements/Breadcrumbs.php:81, ../includes/Elements/Business_Reviews.php:533, ../includes/Elements/Business_Reviews.php:548, ../includes/Elements/Business_Reviews.php:583, ../includes/Elements/Business_Reviews.php:607, ../includes/Elements/Business_Reviews.php:633, ../includes/Elements/Business_Reviews.php:660, ../includes/Elements/Business_Reviews.php:681, ../includes/Elements/Business_Reviews.php:693, ../includes/Elements/Business_Reviews.php:705, ../includes/Elements/Business_Reviews.php:718, ../includes/Elements/Business_Reviews.php:754, ../includes/Elements/Business_Reviews.php:766, ../includes/Elements/Caldera_Forms.php:159, ../includes/Elements/Caldera_Forms.php:172, ../includes/Elements/Caldera_Forms.php:198, ../includes/Elements/Code_Snippet.php:111, ../includes/Elements/Code_Snippet.php:124, ../includes/Elements/Code_Snippet.php:140, ../includes/Elements/Code_Snippet.php:157, ../includes/Elements/Code_Snippet.php:183, ../includes/Elements/Code_Snippet.php:210, ../includes/Elements/Code_Snippet.php:223, ../includes/Elements/Contact_Form_7.php:212, ../includes/Elements/Contact_Form_7.php:238, ../includes/Elements/Contact_Form_7.php:258, ../includes/Elements/Content_Ticker.php:264, ../includes/Elements/Countdown.php:618, ../includes/Elements/Creative_Button.php:301, ../includes/Elements/Cta_Box.php:261, ../includes/Elements/Cta_Box.php:422, ../includes/Elements/Cta_Box.php:510, ../includes/Elements/Dual_Color_Header.php:105, ../includes/Elements/Dual_Color_Header.php:117, ../includes/Elements/Event_Calendar.php:957, ../includes/Elements/Event_Calendar.php:1014, ../includes/Elements/Event_Calendar.php:1074, ../includes/Elements/Event_Calendar.php:1169, ../includes/Elements/Event_Calendar.php:1326, ../includes/Elements/Facebook_Feed.php:390, ../includes/Elements/Facebook_Feed.php:402, ../includes/Elements/Facebook_Feed.php:417, ../includes/Elements/Facebook_Feed.php:432, ../includes/Elements/Facebook_Feed.php:447, ../includes/Elements/Facebook_Feed.php:516, ../includes/Elements/Feature_List.php:421, ../includes/Elements/Filterable_Gallery.php:429, ../includes/Elements/Filterable_Gallery.php:710, ../includes/Elements/Filterable_Gallery.php:859, ../includes/Elements/Filterable_Gallery.php:889, ../includes/Elements/Filterable_Gallery.php:918, ../includes/Elements/Filterable_Gallery.php:1001, ../includes/Elements/Filterable_Gallery.php:1016, ../includes/Elements/FluentForm.php:200, ../includes/Elements/FluentForm.php:212, ../includes/Elements/FluentForm.php:238, ../includes/Elements/FluentForm.php:1766, ../includes/Elements/FluentForm.php:1835, ../includes/Elements/Formstack.php:244, ../includes/Elements/Formstack.php:256, ../includes/Elements/Formstack.php:282, ../includes/Elements/Formstack.php:295, ../includes/Elements/Formstack.php:1633, ../includes/Elements/GravityForms.php:171, ../includes/Elements/GravityForms.php:186, ../includes/Elements/GravityForms.php:235, ../includes/Elements/GravityForms.php:247, ../includes/Elements/GravityForms.php:285, ../includes/Elements/GravityForms.php:305, ../includes/Elements/Image_Accordion.php:234, ../includes/Elements/Info_Box.php:310, ../includes/Elements/Info_Box.php:431, ../includes/Elements/Login_Register.php:498, ../includes/Elements/Login_Register.php:945, ../includes/Elements/Login_Register.php:1261, ../includes/Elements/Login_Register.php:2130, ../includes/Elements/NFT_Gallery.php:294, ../includes/Elements/NFT_Gallery.php:306, ../includes/Elements/NFT_Gallery.php:349, ../includes/Elements/NFT_Gallery.php:361, ../includes/Elements/NFT_Gallery.php:373, ../includes/Elements/NFT_Gallery.php:408, ../includes/Elements/NFT_Gallery.php:443, ../includes/Elements/NFT_Gallery.php:478, ../includes/Elements/NFT_Gallery.php:508, ../includes/Elements/NinjaForms.php:130, ../includes/Elements/NinjaForms.php:180, ../includes/Elements/NinjaForms.php:193, ../includes/Elements/NinjaForms.php:219, ../includes/Elements/NinjaForms.php:239, ../includes/Elements/Post_Grid.php:263, ../includes/Elements/Post_Grid.php:347, ../includes/Elements/Post_Grid.php:395, ../includes/Elements/Post_Grid.php:433, ../includes/Elements/Post_Grid.php:541, ../includes/Elements/Post_Grid.php:564, ../includes/Elements/Post_Grid.php:594, ../includes/Elements/Post_Grid.php:610, ../includes/Elements/Post_Grid.php:627, ../includes/Elements/Post_Grid.php:643, ../includes/Elements/Post_Grid.php:659, ../includes/Elements/Post_Grid.php:676, ../includes/Elements/Post_Grid.php:708, ../includes/Elements/Post_Grid.php:796, ../includes/Elements/Post_Timeline.php:127, ../includes/Elements/Pricing_Table.php:520, ../includes/Elements/Pricing_Table.php:584, ../includes/Elements/Pricing_Table.php:1749, ../includes/Elements/Product_Grid.php:421, ../includes/Elements/Product_Grid.php:655, ../includes/Elements/Product_Grid.php:733, ../includes/Elements/Product_Grid.php:899, ../includes/Elements/Product_Grid.php:915, ../includes/Elements/Product_Grid.php:967, ../includes/Elements/Product_Grid.php:990, ../includes/Elements/Product_Grid.php:2697, ../includes/Elements/SVG_Draw.php:312, ../includes/Elements/Twitter_Feed.php:676, ../includes/Elements/Woo_Add_To_Cart.php:888, ../includes/Elements/Woo_Add_To_Cart.php:915, ../includes/Elements/Woo_Cart.php:436, ../includes/Elements/Woo_Cart.php:487, ../includes/Elements/Woo_Cart.php:557, ../includes/Elements/Woo_Cart.php:569, ../includes/Elements/Woo_Cart.php:643, ../includes/Elements/Woo_Cart.php:724, ../includes/Elements/Woo_Cart.php:798, ../includes/Elements/Woo_Cart.php:946, ../includes/Elements/Woo_Cart.php:974, ../includes/Elements/Woo_Cart.php:1001, ../includes/Elements/Woo_Cart.php:1044, ../includes/Elements/Woo_Cart.php:1091, ../includes/Elements/Woo_Cart.php:1104, ../includes/Elements/Woo_Cart.php:1119, ../includes/Elements/Woo_Cart.php:1134, ../includes/Elements/Woo_Cart.php:1149, ../includes/Elements/Woo_Cart.php:1164, ../includes/Elements/Woo_Cart.php:1179, ../includes/Elements/Woo_Checkout.php:486, ../includes/Elements/Woo_Product_Carousel.php:256, ../includes/Elements/Woo_Product_Carousel.php:268, ../includes/Elements/Woo_Product_Carousel.php:321, ../includes/Elements/Woo_Product_Carousel.php:798, ../includes/Elements/Woo_Product_Carousel.php:871, ../includes/Elements/Woo_Product_Gallery.php:294, ../includes/Elements/Woo_Product_Gallery.php:324, ../includes/Elements/Woo_Product_Gallery.php:495, ../includes/Elements/Woo_Product_Gallery.php:523, ../includes/Elements/Woo_Product_Gallery.php:742, ../includes/Elements/Woo_Product_Gallery.php:1283, ../includes/Elements/Woo_Product_Images.php:80, ../includes/Elements/Woo_Product_Images.php:172, ../includes/Elements/Woo_Product_Images.php:455, ../includes/Elements/Woo_Product_Images.php:466, ../includes/Elements/Woo_Product_Images.php:477, ../includes/Elements/Woo_Product_Images.php:614, ../includes/Elements/Woo_Product_Images.php:629, ../includes/Elements/Woo_Product_Images.php:640, ../includes/Elements/Woo_Product_Images.php:673, ../includes/Elements/Woo_Product_Images.php:685, ../includes/Elements/Woo_Product_Images.php:697, ../includes/Elements/Woo_Product_List.php:306, ../includes/Elements/Woo_Product_List.php:315, ../includes/Elements/Woo_Product_List.php:324, ../includes/Elements/Woo_Product_List.php:333, ../includes/Elements/Woo_Product_List.php:351, ../includes/Elements/Woo_Product_List.php:360, ../includes/Elements/Woo_Product_List.php:369, ../includes/Elements/Woo_Product_List.php:387, ../includes/Elements/Woo_Product_List.php:399, ../includes/Elements/Woo_Product_List.php:411, ../includes/Elements/Woo_Product_List.php:420, ../includes/Elements/Woo_Product_List.php:429, ../includes/Elements/Woo_Product_List.php:1008, ../includes/Elements/Woo_Product_List.php:1060, ../includes/Elements/Woo_Product_Price.php:210, ../includes/Elements/Woo_Product_Price.php:277, ../includes/Elements/Woo_Product_Rating.php:294, ../includes/Elements/Woo_Product_Rating.php:372, ../includes/Elements/WpForms.php:131, ../includes/Elements/WpForms.php:146, ../includes/Elements/WpForms.php:195, ../includes/Elements/WpForms.php:208, ../includes/Elements/WpForms.php:231, ../includes/Extensions/Table_of_Content.php:570, ../includes/Traits/Controls.php:737, ../includes/Traits/Controls.php:920, ../includes/Traits/Controls.php:1031, ../includes/Traits/Controls.php:1061, ../includes/Traits/Controls.php:1126, ../includes/Traits/Controls.php:1171, ../includes/Traits/Controls.php:1241, ../includes/Traits/Controls.php:1332, ../includes/Traits/Controls.php:1361, ../includes/Traits/Controls.php:1377, ../includes/Traits/Controls.php:1393
 msgid "Show"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Category_Box.php:161, ../includes/Elements/Betterdocs_Category_Box.php:173, ../includes/Elements/Betterdocs_Category_Box.php:208, ../includes/Elements/Betterdocs_Category_Grid.php:181, ../includes/Elements/Betterdocs_Category_Grid.php:194, ../includes/Elements/Betterdocs_Category_Grid.php:209, ../includes/Elements/Betterdocs_Category_Grid.php:248, ../includes/Elements/Betterdocs_Category_Grid.php:264, ../includes/Elements/Betterdocs_Category_Grid.php:276, ../includes/Elements/Betterdocs_Category_Grid.php:1310, ../includes/Elements/Breadcrumbs.php:82, ../includes/Elements/Business_Reviews.php:534, ../includes/Elements/Business_Reviews.php:549, ../includes/Elements/Business_Reviews.php:584, ../includes/Elements/Business_Reviews.php:608, ../includes/Elements/Business_Reviews.php:634, ../includes/Elements/Business_Reviews.php:661, ../includes/Elements/Business_Reviews.php:682, ../includes/Elements/Business_Reviews.php:694, ../includes/Elements/Business_Reviews.php:706, ../includes/Elements/Business_Reviews.php:719, ../includes/Elements/Business_Reviews.php:755, ../includes/Elements/Business_Reviews.php:767, ../includes/Elements/Caldera_Forms.php:160, ../includes/Elements/Caldera_Forms.php:173, ../includes/Elements/Caldera_Forms.php:199, ../includes/Elements/Code_Snippet.php:105, ../includes/Elements/Code_Snippet.php:118, ../includes/Elements/Code_Snippet.php:134, ../includes/Elements/Code_Snippet.php:151, ../includes/Elements/Code_Snippet.php:177, ../includes/Elements/Code_Snippet.php:201, ../includes/Elements/Code_Snippet.php:214, ../includes/Elements/Contact_Form_7.php:213, ../includes/Elements/Contact_Form_7.php:239, ../includes/Elements/Contact_Form_7.php:259, ../includes/Elements/Content_Ticker.php:265, ../includes/Elements/Countdown.php:619, ../includes/Elements/Creative_Button.php:302, ../includes/Elements/Cta_Box.php:262, ../includes/Elements/Cta_Box.php:423, ../includes/Elements/Cta_Box.php:511, ../includes/Elements/Dual_Color_Header.php:106, ../includes/Elements/Dual_Color_Header.php:118, ../includes/Elements/Event_Calendar.php:958, ../includes/Elements/Event_Calendar.php:1015, ../includes/Elements/Event_Calendar.php:1075, ../includes/Elements/Event_Calendar.php:1170, ../includes/Elements/Event_Calendar.php:1327, ../includes/Elements/Facebook_Feed.php:391, ../includes/Elements/Facebook_Feed.php:403, ../includes/Elements/Facebook_Feed.php:418, ../includes/Elements/Facebook_Feed.php:433, ../includes/Elements/Facebook_Feed.php:448, ../includes/Elements/Facebook_Feed.php:517, ../includes/Elements/Filterable_Gallery.php:430, ../includes/Elements/Filterable_Gallery.php:711, ../includes/Elements/Filterable_Gallery.php:860, ../includes/Elements/Filterable_Gallery.php:890, ../includes/Elements/Filterable_Gallery.php:919, ../includes/Elements/Filterable_Gallery.php:1002, ../includes/Elements/Filterable_Gallery.php:1017, ../includes/Elements/FluentForm.php:201, ../includes/Elements/FluentForm.php:213, ../includes/Elements/FluentForm.php:239, ../includes/Elements/FluentForm.php:1767, ../includes/Elements/FluentForm.php:1836, ../includes/Elements/Formstack.php:245, ../includes/Elements/Formstack.php:257, ../includes/Elements/Formstack.php:283, ../includes/Elements/Formstack.php:296, ../includes/Elements/Formstack.php:1634, ../includes/Elements/GravityForms.php:172, ../includes/Elements/GravityForms.php:187, ../includes/Elements/GravityForms.php:236, ../includes/Elements/GravityForms.php:248, ../includes/Elements/GravityForms.php:286, ../includes/Elements/GravityForms.php:306, ../includes/Elements/Image_Accordion.php:235, ../includes/Elements/Info_Box.php:311, ../includes/Elements/Info_Box.php:432, ../includes/Elements/Login_Register.php:497, ../includes/Elements/Login_Register.php:840, ../includes/Elements/Login_Register.php:944, ../includes/Elements/Login_Register.php:1027, ../includes/Elements/Login_Register.php:1158, ../includes/Elements/Login_Register.php:1260, ../includes/Elements/Login_Register.php:2129, ../includes/Elements/NFT_Gallery.php:295, ../includes/Elements/NFT_Gallery.php:307, ../includes/Elements/NFT_Gallery.php:350, ../includes/Elements/NFT_Gallery.php:362, ../includes/Elements/NFT_Gallery.php:374, ../includes/Elements/NFT_Gallery.php:409, ../includes/Elements/NFT_Gallery.php:444, ../includes/Elements/NFT_Gallery.php:479, ../includes/Elements/NFT_Gallery.php:509, ../includes/Elements/NinjaForms.php:131, ../includes/Elements/NinjaForms.php:181, ../includes/Elements/NinjaForms.php:194, ../includes/Elements/NinjaForms.php:220, ../includes/Elements/NinjaForms.php:240, ../includes/Elements/Post_Grid.php:542, ../includes/Elements/Post_Grid.php:595, ../includes/Elements/Post_Grid.php:611, ../includes/Elements/Post_Grid.php:628, ../includes/Elements/Post_Grid.php:644, ../includes/Elements/Post_Grid.php:660, ../includes/Elements/Post_Grid.php:677, ../includes/Elements/Post_Grid.php:797, ../includes/Elements/Post_Timeline.php:128, ../includes/Elements/Pricing_Table.php:521, ../includes/Elements/Pricing_Table.php:585, ../includes/Elements/Pricing_Table.php:1750, ../includes/Elements/Product_Grid.php:422, ../includes/Elements/Product_Grid.php:656, ../includes/Elements/Product_Grid.php:734, ../includes/Elements/Product_Grid.php:900, ../includes/Elements/Product_Grid.php:916, ../includes/Elements/Product_Grid.php:968, ../includes/Elements/Product_Grid.php:991, ../includes/Elements/Product_Grid.php:2698, ../includes/Elements/SVG_Draw.php:313, ../includes/Elements/Twitter_Feed.php:677, ../includes/Elements/Woo_Add_To_Cart.php:887, ../includes/Elements/Woo_Add_To_Cart.php:916, ../includes/Elements/Woo_Cart.php:437, ../includes/Elements/Woo_Cart.php:488, ../includes/Elements/Woo_Cart.php:558, ../includes/Elements/Woo_Cart.php:570, ../includes/Elements/Woo_Cart.php:644, ../includes/Elements/Woo_Cart.php:725, ../includes/Elements/Woo_Cart.php:799, ../includes/Elements/Woo_Cart.php:947, ../includes/Elements/Woo_Cart.php:975, ../includes/Elements/Woo_Cart.php:1002, ../includes/Elements/Woo_Cart.php:1045, ../includes/Elements/Woo_Cart.php:1092, ../includes/Elements/Woo_Cart.php:1105, ../includes/Elements/Woo_Cart.php:1120, ../includes/Elements/Woo_Cart.php:1135, ../includes/Elements/Woo_Cart.php:1150, ../includes/Elements/Woo_Cart.php:1165, ../includes/Elements/Woo_Cart.php:1180, ../includes/Elements/Woo_Checkout.php:381, ../includes/Elements/Woo_Checkout.php:487, ../includes/Elements/Woo_Product_Carousel.php:257, ../includes/Elements/Woo_Product_Carousel.php:269, ../includes/Elements/Woo_Product_Carousel.php:799, ../includes/Elements/Woo_Product_Carousel.php:872, ../includes/Elements/Woo_Product_Gallery.php:295, ../includes/Elements/Woo_Product_Gallery.php:325, ../includes/Elements/Woo_Product_Gallery.php:496, ../includes/Elements/Woo_Product_Gallery.php:512, ../includes/Elements/Woo_Product_Gallery.php:524, ../includes/Elements/Woo_Product_Gallery.php:743, ../includes/Elements/Woo_Product_Gallery.php:1284, ../includes/Elements/Woo_Product_Images.php:81, ../includes/Elements/Woo_Product_Images.php:173, ../includes/Elements/Woo_Product_Images.php:456, ../includes/Elements/Woo_Product_Images.php:467, ../includes/Elements/Woo_Product_Images.php:478, ../includes/Elements/Woo_Product_Images.php:615, ../includes/Elements/Woo_Product_Images.php:630, ../includes/Elements/Woo_Product_Images.php:641, ../includes/Elements/Woo_Product_Images.php:674, ../includes/Elements/Woo_Product_Images.php:686, ../includes/Elements/Woo_Product_Images.php:698, ../includes/Elements/Woo_Product_List.php:307, ../includes/Elements/Woo_Product_List.php:316, ../includes/Elements/Woo_Product_List.php:325, ../includes/Elements/Woo_Product_List.php:334, ../includes/Elements/Woo_Product_List.php:352, ../includes/Elements/Woo_Product_List.php:361, ../includes/Elements/Woo_Product_List.php:370, ../includes/Elements/Woo_Product_List.php:388, ../includes/Elements/Woo_Product_List.php:400, ../includes/Elements/Woo_Product_List.php:412, ../includes/Elements/Woo_Product_List.php:421, ../includes/Elements/Woo_Product_List.php:430, ../includes/Elements/Woo_Product_List.php:1009, ../includes/Elements/Woo_Product_List.php:1061, ../includes/Elements/Woo_Product_Price.php:211, ../includes/Elements/Woo_Product_Price.php:278, ../includes/Elements/Woo_Product_Rating.php:295, ../includes/Elements/Woo_Product_Rating.php:373, ../includes/Elements/WpForms.php:132, ../includes/Elements/WpForms.php:147, ../includes/Elements/WpForms.php:196, ../includes/Elements/WpForms.php:209, ../includes/Elements/WpForms.php:232, ../includes/Extensions/Table_of_Content.php:571, ../includes/Traits/Controls.php:738, ../includes/Traits/Controls.php:921, ../includes/Traits/Controls.php:1032, ../includes/Traits/Controls.php:1062, ../includes/Traits/Controls.php:1127, ../includes/Traits/Controls.php:1172, ../includes/Traits/Controls.php:1242, ../includes/Traits/Controls.php:1333, ../includes/Traits/Controls.php:1362, ../includes/Traits/Controls.php:1378, ../includes/Traits/Controls.php:1394
+#: ../includes/Elements/Betterdocs_Category_Box.php:161, ../includes/Elements/Betterdocs_Category_Box.php:173, ../includes/Elements/Betterdocs_Category_Box.php:208, ../includes/Elements/Betterdocs_Category_Grid.php:181, ../includes/Elements/Betterdocs_Category_Grid.php:194, ../includes/Elements/Betterdocs_Category_Grid.php:209, ../includes/Elements/Betterdocs_Category_Grid.php:248, ../includes/Elements/Betterdocs_Category_Grid.php:264, ../includes/Elements/Betterdocs_Category_Grid.php:276, ../includes/Elements/Betterdocs_Category_Grid.php:1310, ../includes/Elements/Breadcrumbs.php:82, ../includes/Elements/Business_Reviews.php:534, ../includes/Elements/Business_Reviews.php:549, ../includes/Elements/Business_Reviews.php:584, ../includes/Elements/Business_Reviews.php:608, ../includes/Elements/Business_Reviews.php:634, ../includes/Elements/Business_Reviews.php:661, ../includes/Elements/Business_Reviews.php:682, ../includes/Elements/Business_Reviews.php:694, ../includes/Elements/Business_Reviews.php:706, ../includes/Elements/Business_Reviews.php:719, ../includes/Elements/Business_Reviews.php:755, ../includes/Elements/Business_Reviews.php:767, ../includes/Elements/Caldera_Forms.php:160, ../includes/Elements/Caldera_Forms.php:173, ../includes/Elements/Caldera_Forms.php:199, ../includes/Elements/Code_Snippet.php:112, ../includes/Elements/Code_Snippet.php:125, ../includes/Elements/Code_Snippet.php:141, ../includes/Elements/Code_Snippet.php:158, ../includes/Elements/Code_Snippet.php:184, ../includes/Elements/Code_Snippet.php:211, ../includes/Elements/Code_Snippet.php:224, ../includes/Elements/Contact_Form_7.php:213, ../includes/Elements/Contact_Form_7.php:239, ../includes/Elements/Contact_Form_7.php:259, ../includes/Elements/Content_Ticker.php:265, ../includes/Elements/Countdown.php:619, ../includes/Elements/Creative_Button.php:302, ../includes/Elements/Cta_Box.php:262, ../includes/Elements/Cta_Box.php:423, ../includes/Elements/Cta_Box.php:511, ../includes/Elements/Dual_Color_Header.php:106, ../includes/Elements/Dual_Color_Header.php:118, ../includes/Elements/Event_Calendar.php:958, ../includes/Elements/Event_Calendar.php:1015, ../includes/Elements/Event_Calendar.php:1075, ../includes/Elements/Event_Calendar.php:1170, ../includes/Elements/Event_Calendar.php:1327, ../includes/Elements/Facebook_Feed.php:391, ../includes/Elements/Facebook_Feed.php:403, ../includes/Elements/Facebook_Feed.php:418, ../includes/Elements/Facebook_Feed.php:433, ../includes/Elements/Facebook_Feed.php:448, ../includes/Elements/Facebook_Feed.php:517, ../includes/Elements/Filterable_Gallery.php:430, ../includes/Elements/Filterable_Gallery.php:711, ../includes/Elements/Filterable_Gallery.php:860, ../includes/Elements/Filterable_Gallery.php:890, ../includes/Elements/Filterable_Gallery.php:919, ../includes/Elements/Filterable_Gallery.php:1002, ../includes/Elements/Filterable_Gallery.php:1017, ../includes/Elements/FluentForm.php:201, ../includes/Elements/FluentForm.php:213, ../includes/Elements/FluentForm.php:239, ../includes/Elements/FluentForm.php:1767, ../includes/Elements/FluentForm.php:1836, ../includes/Elements/Formstack.php:245, ../includes/Elements/Formstack.php:257, ../includes/Elements/Formstack.php:283, ../includes/Elements/Formstack.php:296, ../includes/Elements/Formstack.php:1634, ../includes/Elements/GravityForms.php:172, ../includes/Elements/GravityForms.php:187, ../includes/Elements/GravityForms.php:236, ../includes/Elements/GravityForms.php:248, ../includes/Elements/GravityForms.php:286, ../includes/Elements/GravityForms.php:306, ../includes/Elements/Image_Accordion.php:235, ../includes/Elements/Info_Box.php:311, ../includes/Elements/Info_Box.php:432, ../includes/Elements/Login_Register.php:497, ../includes/Elements/Login_Register.php:840, ../includes/Elements/Login_Register.php:944, ../includes/Elements/Login_Register.php:1027, ../includes/Elements/Login_Register.php:1158, ../includes/Elements/Login_Register.php:1260, ../includes/Elements/Login_Register.php:2129, ../includes/Elements/NFT_Gallery.php:295, ../includes/Elements/NFT_Gallery.php:307, ../includes/Elements/NFT_Gallery.php:350, ../includes/Elements/NFT_Gallery.php:362, ../includes/Elements/NFT_Gallery.php:374, ../includes/Elements/NFT_Gallery.php:409, ../includes/Elements/NFT_Gallery.php:444, ../includes/Elements/NFT_Gallery.php:479, ../includes/Elements/NFT_Gallery.php:509, ../includes/Elements/NinjaForms.php:131, ../includes/Elements/NinjaForms.php:181, ../includes/Elements/NinjaForms.php:194, ../includes/Elements/NinjaForms.php:220, ../includes/Elements/NinjaForms.php:240, ../includes/Elements/Post_Grid.php:542, ../includes/Elements/Post_Grid.php:595, ../includes/Elements/Post_Grid.php:611, ../includes/Elements/Post_Grid.php:628, ../includes/Elements/Post_Grid.php:644, ../includes/Elements/Post_Grid.php:660, ../includes/Elements/Post_Grid.php:677, ../includes/Elements/Post_Grid.php:797, ../includes/Elements/Post_Timeline.php:128, ../includes/Elements/Pricing_Table.php:521, ../includes/Elements/Pricing_Table.php:585, ../includes/Elements/Pricing_Table.php:1750, ../includes/Elements/Product_Grid.php:422, ../includes/Elements/Product_Grid.php:656, ../includes/Elements/Product_Grid.php:734, ../includes/Elements/Product_Grid.php:900, ../includes/Elements/Product_Grid.php:916, ../includes/Elements/Product_Grid.php:968, ../includes/Elements/Product_Grid.php:991, ../includes/Elements/Product_Grid.php:2698, ../includes/Elements/SVG_Draw.php:313, ../includes/Elements/Twitter_Feed.php:677, ../includes/Elements/Woo_Add_To_Cart.php:887, ../includes/Elements/Woo_Add_To_Cart.php:916, ../includes/Elements/Woo_Cart.php:437, ../includes/Elements/Woo_Cart.php:488, ../includes/Elements/Woo_Cart.php:558, ../includes/Elements/Woo_Cart.php:570, ../includes/Elements/Woo_Cart.php:644, ../includes/Elements/Woo_Cart.php:725, ../includes/Elements/Woo_Cart.php:799, ../includes/Elements/Woo_Cart.php:947, ../includes/Elements/Woo_Cart.php:975, ../includes/Elements/Woo_Cart.php:1002, ../includes/Elements/Woo_Cart.php:1045, ../includes/Elements/Woo_Cart.php:1092, ../includes/Elements/Woo_Cart.php:1105, ../includes/Elements/Woo_Cart.php:1120, ../includes/Elements/Woo_Cart.php:1135, ../includes/Elements/Woo_Cart.php:1150, ../includes/Elements/Woo_Cart.php:1165, ../includes/Elements/Woo_Cart.php:1180, ../includes/Elements/Woo_Checkout.php:381, ../includes/Elements/Woo_Checkout.php:487, ../includes/Elements/Woo_Product_Carousel.php:257, ../includes/Elements/Woo_Product_Carousel.php:269, ../includes/Elements/Woo_Product_Carousel.php:799, ../includes/Elements/Woo_Product_Carousel.php:872, ../includes/Elements/Woo_Product_Gallery.php:295, ../includes/Elements/Woo_Product_Gallery.php:325, ../includes/Elements/Woo_Product_Gallery.php:496, ../includes/Elements/Woo_Product_Gallery.php:512, ../includes/Elements/Woo_Product_Gallery.php:524, ../includes/Elements/Woo_Product_Gallery.php:743, ../includes/Elements/Woo_Product_Gallery.php:1284, ../includes/Elements/Woo_Product_Images.php:81, ../includes/Elements/Woo_Product_Images.php:173, ../includes/Elements/Woo_Product_Images.php:456, ../includes/Elements/Woo_Product_Images.php:467, ../includes/Elements/Woo_Product_Images.php:478, ../includes/Elements/Woo_Product_Images.php:615, ../includes/Elements/Woo_Product_Images.php:630, ../includes/Elements/Woo_Product_Images.php:641, ../includes/Elements/Woo_Product_Images.php:674, ../includes/Elements/Woo_Product_Images.php:686, ../includes/Elements/Woo_Product_Images.php:698, ../includes/Elements/Woo_Product_List.php:307, ../includes/Elements/Woo_Product_List.php:316, ../includes/Elements/Woo_Product_List.php:325, ../includes/Elements/Woo_Product_List.php:334, ../includes/Elements/Woo_Product_List.php:352, ../includes/Elements/Woo_Product_List.php:361, ../includes/Elements/Woo_Product_List.php:370, ../includes/Elements/Woo_Product_List.php:388, ../includes/Elements/Woo_Product_List.php:400, ../includes/Elements/Woo_Product_List.php:412, ../includes/Elements/Woo_Product_List.php:421, ../includes/Elements/Woo_Product_List.php:430, ../includes/Elements/Woo_Product_List.php:1009, ../includes/Elements/Woo_Product_List.php:1061, ../includes/Elements/Woo_Product_Price.php:211, ../includes/Elements/Woo_Product_Price.php:278, ../includes/Elements/Woo_Product_Rating.php:295, ../includes/Elements/Woo_Product_Rating.php:373, ../includes/Elements/WpForms.php:132, ../includes/Elements/WpForms.php:147, ../includes/Elements/WpForms.php:196, ../includes/Elements/WpForms.php:209, ../includes/Elements/WpForms.php:232, ../includes/Extensions/Table_of_Content.php:571, ../includes/Traits/Controls.php:738, ../includes/Traits/Controls.php:921, ../includes/Traits/Controls.php:1032, ../includes/Traits/Controls.php:1062, ../includes/Traits/Controls.php:1127, ../includes/Traits/Controls.php:1172, ../includes/Traits/Controls.php:1242, ../includes/Traits/Controls.php:1333, ../includes/Traits/Controls.php:1362, ../includes/Traits/Controls.php:1378, ../includes/Traits/Controls.php:1394
 msgid "Hide"
 msgstr ""
 
@@ -2473,48 +2473,48 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:65
-msgid "JavaScript"
-msgstr ""
-
-#: ../includes/Elements/Code_Snippet.php:66
-msgid "PHP"
-msgstr ""
-
-#: ../includes/Elements/Code_Snippet.php:67
-msgid "Python"
-msgstr ""
-
-#: ../includes/Elements/Code_Snippet.php:68
-msgid "Java"
-msgstr ""
-
-#: ../includes/Elements/Code_Snippet.php:69
-msgid "Ruby"
-msgstr ""
-
-#: ../includes/Elements/Code_Snippet.php:70
-msgid "Bash"
-msgstr ""
-
-#: ../includes/Elements/Code_Snippet.php:71
-msgid "JSON"
-msgstr ""
-
-#: ../includes/Elements/Code_Snippet.php:72
-msgid "YAML"
-msgstr ""
-
-#: ../includes/Elements/Code_Snippet.php:73, ../includes/Elements/Login_Register.php:2324, ../includes/Elements/Login_Register.php:2433, ../includes/Elements/Login_Register.php:2536
+#: ../includes/Elements/Code_Snippet.php:65, ../includes/Elements/Login_Register.php:2324, ../includes/Elements/Login_Register.php:2433, ../includes/Elements/Login_Register.php:2536
 msgid "HTML"
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:74
+#: ../includes/Elements/Code_Snippet.php:66
 msgid "CSS"
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:75
+#: ../includes/Elements/Code_Snippet.php:67
+msgid "SCSS"
+msgstr ""
+
+#: ../includes/Elements/Code_Snippet.php:68
+msgid "PHP"
+msgstr ""
+
+#: ../includes/Elements/Code_Snippet.php:69
+msgid "Python"
+msgstr ""
+
+#: ../includes/Elements/Code_Snippet.php:70
+msgid "JavaScript"
+msgstr ""
+
+#: ../includes/Elements/Code_Snippet.php:71
+msgid "React JS"
+msgstr ""
+
+#: ../includes/Elements/Code_Snippet.php:72
+msgid "Vue JS"
+msgstr ""
+
+#: ../includes/Elements/Code_Snippet.php:73
+msgid "TypeScript"
+msgstr ""
+
+#: ../includes/Elements/Code_Snippet.php:74
 msgid "SQL"
+msgstr ""
+
+#: ../includes/Elements/Code_Snippet.php:75
+msgid "JSON"
 msgstr ""
 
 #: ../includes/Elements/Code_Snippet.php:76
@@ -2522,142 +2522,174 @@ msgid "XML"
 msgstr ""
 
 #: ../includes/Elements/Code_Snippet.php:77
-msgid "C++"
+msgid "Java"
 msgstr ""
 
 #: ../includes/Elements/Code_Snippet.php:78
-msgid "C#"
+msgid "Ruby"
 msgstr ""
 
 #: ../includes/Elements/Code_Snippet.php:79
-msgid "Go"
+msgid "Bash"
 msgstr ""
 
 #: ../includes/Elements/Code_Snippet.php:80
-msgid "Rust"
+msgid "YAML"
 msgstr ""
 
 #: ../includes/Elements/Code_Snippet.php:81
-msgid "Swift"
+msgid "C++"
 msgstr ""
 
 #: ../includes/Elements/Code_Snippet.php:82
-msgid "Kotlin"
+msgid "C#"
 msgstr ""
 
 #: ../includes/Elements/Code_Snippet.php:83
-msgid "TypeScript"
+msgid "Go"
+msgstr ""
+
+#: ../includes/Elements/Code_Snippet.php:84
+msgid "Rust"
 msgstr ""
 
 #: ../includes/Elements/Code_Snippet.php:85
+msgid "Swift"
+msgstr ""
+
+#: ../includes/Elements/Code_Snippet.php:86
+msgid "Kotlin"
+msgstr ""
+
+#: ../includes/Elements/Code_Snippet.php:87
+msgid "Markdown"
+msgstr ""
+
+#: ../includes/Elements/Code_Snippet.php:88
+msgid "Shell"
+msgstr ""
+
+#: ../includes/Elements/Code_Snippet.php:89
+msgid "Powershell"
+msgstr ""
+
+#: ../includes/Elements/Code_Snippet.php:90
+msgid "Docker"
+msgstr ""
+
+#: ../includes/Elements/Code_Snippet.php:92
 msgid "Choose language for syntax highlighting."
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:94
+#: ../includes/Elements/Code_Snippet.php:101
 msgid "Display Options"
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:102
+#: ../includes/Elements/Code_Snippet.php:109
 msgid "Show header bar"
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:108
+#: ../includes/Elements/Code_Snippet.php:115
 msgid "Toggle the filename header and copy button."
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:115
+#: ../includes/Elements/Code_Snippet.php:122
 msgid "Enable copy button"
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:121
+#: ../includes/Elements/Code_Snippet.php:128
 msgid "Show a one-click copy-to-clipboard icon."
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:131
+#: ../includes/Elements/Code_Snippet.php:138
 msgid "Enable copy tooltip"
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:137
+#: ../includes/Elements/Code_Snippet.php:144
 msgid "Display a tooltip (‘Copied!’) on copy button hover or click."
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:148
+#: ../includes/Elements/Code_Snippet.php:155
 msgid "Show line numbers"
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:154
+#: ../includes/Elements/Code_Snippet.php:161
 msgid "Display line numbers in the code block."
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:163
+#: ../includes/Elements/Code_Snippet.php:170
 msgid "File Preview Header"
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:174
+#: ../includes/Elements/Code_Snippet.php:181
 msgid "Show Language Label"
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:180
+#: ../includes/Elements/Code_Snippet.php:187
 msgid "Display the programming language label in the header."
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:187
+#: ../includes/Elements/Code_Snippet.php:194
 msgid "File Name"
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:190
+#: ../includes/Elements/Code_Snippet.php:197
 msgid "Enter filename with extension"
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:191
+#: ../includes/Elements/Code_Snippet.php:198
 msgid "Enter the filename to display in the header (e.g., hero-section.tsx)"
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:198
+#: ../includes/Elements/Code_Snippet.php:208
 msgid "Show window buttons"
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:204
+#: ../includes/Elements/Code_Snippet.php:214
 msgid "Display macOS-style close/minimize/maximize circles."
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:211
+#: ../includes/Elements/Code_Snippet.php:221
 msgid "Show language icon"
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:217
+#: ../includes/Elements/Code_Snippet.php:227
 msgid "Display the default icon for this file type."
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:224
+#: ../includes/Elements/Code_Snippet.php:234
 msgid "Custom language icon"
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:227
+#: ../includes/Elements/Code_Snippet.php:237
 msgid "Upload a custom icon to override the default."
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:239, ../includes/Elements/Code_Snippet.php:247, ../includes/Elements/Login_Register.php:5139, ../includes/Elements/Pricing_Table.php:533
+#: ../includes/Elements/Code_Snippet.php:252, ../includes/Elements/Code_Snippet.php:260, ../includes/Elements/Login_Register.php:5139, ../includes/Elements/Pricing_Table.php:533
 msgid "Theme"
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:251, ../includes/Elements/Login_Register.php:5142, ../includes/Elements/Pricing_Table.php:538
+#: ../includes/Elements/Code_Snippet.php:264, ../includes/Elements/Login_Register.php:5142, ../includes/Elements/Pricing_Table.php:538
 msgid "Light"
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:252, ../includes/Elements/Login_Register.php:5143
+#: ../includes/Elements/Code_Snippet.php:265, ../includes/Elements/Login_Register.php:5143
 msgid "Dark"
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:254
+#: ../includes/Elements/Code_Snippet.php:267
 msgid "Choose light or dark styling for the code snippet block."
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:287
+#: ../includes/Elements/Code_Snippet.php:352
+msgid "File icon"
+msgstr ""
+
+#: ../includes/Elements/Code_Snippet.php:382
 msgid "Copy code to clipboard"
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:292
+#: ../includes/Elements/Code_Snippet.php:388
 msgid "Copy to clipboard"
 msgstr ""
 

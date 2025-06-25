@@ -22,6 +22,32 @@
       retryDelay: 1000,
    };
 
+   // Language mapping for Highlight.js compatibility
+   const languageMap = {
+      html: "xml",
+      jsx: "javascript",
+      vue: "javascript",
+      ts: "typescript",
+      py: "python",
+      rd: "ruby",
+      yml: "yaml",
+      cpp: "cpp",
+      cs: "csharp",
+      rs: "rust",
+      kt: "kotlin",
+      md: "markdown",
+      sh: "bash",
+      ps1: "powershell",
+      dockerfile: "dockerfile",
+   };
+
+   /**
+    * Get the correct language name for Highlight.js
+    */
+   function getHighlightLanguage(language) {
+      return languageMap[language] || language;
+   }
+
    // State management
    let highlightJsLoaded = false;
    let highlightJsLoading = false;
@@ -140,6 +166,67 @@
             );
          }
       });
+   }
+
+   /**
+    * Apply syntax highlighting to a specific code block with language
+    */
+   function applySyntaxHighlightingToBlock(codeBlock, language) {
+      if (!highlightJsLoaded || !window.hljs) {
+         return false;
+      }
+
+      try {
+         // Get the correct language for Highlight.js
+         const highlightLanguage = getHighlightLanguage(language);
+
+         // Remove existing highlighting classes
+         codeBlock.className = codeBlock.className
+            .replace(/\bhljs\b/g, "")
+            .replace(/\blanguage-\w+/g, "")
+            .trim();
+
+         // Add the new language class
+         if (highlightLanguage) {
+            codeBlock.className += " language-" + highlightLanguage;
+         }
+
+         // Clear any existing highlighted content
+         codeBlock.removeAttribute("data-highlighted");
+
+         // Apply highlighting
+         window.hljs.highlightElement(codeBlock);
+
+         return true;
+      } catch (error) {
+         console.warn(
+            "Essential Addons Code Snippet: Error highlighting code block with language " +
+               language +
+               ":",
+            error
+         );
+         return false;
+      }
+   }
+
+   /**
+    * Update language and re-highlight a specific snippet
+    */
+   function updateSnippetLanguage(snippet, newLanguage) {
+      if (!snippet) {
+         return false;
+      }
+
+      const codeBlock = snippet.querySelector(".eael-code-snippet-code");
+      if (!codeBlock) {
+         return false;
+      }
+
+      // Update the data attribute
+      snippet.dataset.language = newLanguage;
+
+      // Apply new syntax highlighting
+      return applySyntaxHighlightingToBlock(codeBlock, newLanguage);
    }
 
    /**
@@ -442,6 +529,9 @@
       reinit: reinitialize,
       initCopyButton: initCopyButton,
       applySyntaxHighlighting: applySyntaxHighlighting,
+      applySyntaxHighlightingToBlock: applySyntaxHighlightingToBlock,
+      updateSnippetLanguage: updateSnippetLanguage,
+      getHighlightLanguage: getHighlightLanguage,
       loadHighlightJs: loadHighlightJs,
    };
 

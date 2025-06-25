@@ -401,7 +401,7 @@ class Code_Snippet extends Widget_Base {
                <?php } ?>
             </div>
             <?php } ?>
-            <pre class="eael-code-snippet-code language-javascript"><code><?php echo esc_html( $settings['code_content'] ); ?></code></pre>
+            <pre class="eael-code-snippet-code language-<?php echo esc_attr( $language ); ?>"><code><?php echo esc_html( $settings['code_content'] ); ?></code></pre>
          </div>
       </div>
       <?php
