@@ -45,8 +45,8 @@ class Code_Snippet extends Widget_Base {
       $this->add_control(
             'language',
             [
-               'label'   => __( 'Choose Programming Language', 'essential-addons-for-elementor-lite' ),
-               'type'    => Controls_Manager::SELECT,
+               'label'   => __( 'Programming Language', 'essential-addons-for-elementor-lite' ),
+               'type'    => Controls_Manager::SELECT2,
                'default' => 'html',
                'options' => [
                   'html'       => __( 'HTML', 'essential-addons-for-elementor-lite' ),
