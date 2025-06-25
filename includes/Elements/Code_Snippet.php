@@ -248,7 +248,72 @@ class Code_Snippet extends Widget_Base {
          ]
       );
       $this->end_controls_section();
-      
+
+      // Style Tab - Wrapper
+      $this->start_controls_section(
+			'wrapper_style_section',
+			[
+				'label' => esc_html__( 'Wrapper', 'essential-addons-for-elementor-lite' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+      $this->add_responsive_control(
+            'wrapper_margin',
+            [
+               'label'      => __( 'Margin', 'essential-addons-for-elementor-lite' ),
+               'type'       => Controls_Manager::DIMENSIONS,
+               'size_units' => [ 'px', 'em', '%' ],
+               'selectors'  => [
+                  '{{WRAPPER}} .eael-code-snippet-wrapper' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+               ],
+         ]
+      );
+
+      $this->add_responsive_control(
+            'wrapper_padding',
+            [
+               'label'      => __( 'Padding', 'essential-addons-for-elementor-lite' ),
+               'type'       => Controls_Manager::DIMENSIONS,
+               'size_units' => [ 'px', 'em', '%' ],
+               'selectors'  => [
+                  '{{WRAPPER}} .eael-code-snippet-wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+               ],
+         ]
+      );
+
+      $this->add_control(
+            'wrapper_background_color',
+            [
+               'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
+               'type'      => Controls_Manager::COLOR,
+               'selectors' => [
+                  '{{WRAPPER}} .eael-code-snippet-wrapper' => 'background-color: {{VALUE}};',
+               ],
+         ]
+      );
+
+      $this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'name'     => 'wrapper_border',
+				'selector' => '{{WRAPPER}} .eael-code-snippet-wrapper',
+			]
+		);
+
+      $this->add_control(
+			'wrapper_border_radius',
+			[
+				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-code-snippet-wrapper' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+      $this->end_controls_section();
    }
 
    /**
