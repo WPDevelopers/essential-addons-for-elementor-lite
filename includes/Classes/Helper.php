@@ -281,6 +281,17 @@ class Helper
         return array_diff_key($post_types, ['elementor_library', 'attachment']);
     }
 
+
+    /**
+     * Get All POst Types
+     * @todo should be removed on future version
+     * @return array
+     */
+    public static function get_allowed_post_types()
+    {
+        return self::get_post_types();
+    }
+
     /**
      * Get all types of post.
      *
