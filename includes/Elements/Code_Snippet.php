@@ -314,6 +314,121 @@ class Code_Snippet extends Widget_Base {
 		);
 
       $this->end_controls_section();
+
+      // Style Tab - Header
+      $this->start_controls_section(
+         'header_style_section',
+         [
+               'label'     => __( 'Header', 'essential-addons-for-elementor-lite' ),
+               'tab'       => Controls_Manager::TAB_STYLE,
+               'condition' => [
+                  'show_header' => 'yes',
+               ],
+         ]
+      );
+
+      $this->add_responsive_control(
+         'header_padding',
+         [
+               'label'      => __( 'Padding', 'essential-addons-for-elementor-lite' ),
+               'type'       => Controls_Manager::DIMENSIONS,
+               'size_units' => [ 'px', 'em', '%' ],
+               'selectors'  => [
+                  '{{WRAPPER}} .eael-code-snippet-header.eael-file-preview-header' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+               ],
+         ]
+      );
+
+      $this->add_control(
+         'header_background_color',
+         [
+               'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
+               'type'      => Controls_Manager::COLOR,
+               'selectors' => [
+                  '{{WRAPPER}} .eael-code-snippet-header.eael-file-preview-header' => 'background-color: {{VALUE}};',
+               ],
+         ]
+      );
+
+      $this->add_control(
+         'header_border_color',
+         [
+               'label'     => __( 'Border Color', 'essential-addons-for-elementor-lite' ),
+               'type'      => Controls_Manager::COLOR,
+               'selectors' => [
+                  '{{WRAPPER}} .eael-code-snippet-header.eael-file-preview-header' => 'border-bottom-color: {{VALUE}};',
+               ],
+         ]
+      );
+
+      $this->add_responsive_control(
+         'header_border_width',
+         [
+               'label'      => __( 'Border Width', 'essential-addons-for-elementor-lite' ),
+               'type'       => Controls_Manager::SLIDER,
+               'size_units' => [ 'px' ],
+               'range'      => [
+                  'px' => [
+                     'min' => 0,
+                     'max' => 10,
+                  ],
+               ],
+               'selectors'  => [
+                  '{{WRAPPER}} .eael-code-snippet-header.eael-file-preview-header' => 'border-bottom-width: {{SIZE}}{{UNIT}}; border-bottom-style: solid;',
+               ],
+               'description' => __( 'Controls border bottom width', 'essential-addons-for-elementor-lite' ),
+         ]
+      );
+
+      $this->add_group_control(
+         \Elementor\Group_Control_Typography::get_type(),
+         [
+               'name'     => 'file_name_typography',
+               'label'    => __( 'File Name Typography', 'essential-addons-for-elementor-lite' ),
+               'selector' => '{{WRAPPER}} .eael-code-snippet-header .file-name-text',
+         ]
+      );
+
+   $this->add_control(
+         'file_name_color',
+         [
+               'label'     => __( 'File Name Color', 'essential-addons-for-elementor-lite' ),
+               'type'      => Controls_Manager::COLOR,
+         'selectors' => [
+                  '{{WRAPPER}} .eael-code-snippet-header .file-name-text' => 'color: {{VALUE}};',
+               ],
+         ]
+      );
+
+      $this->add_control(
+         'copy_button_color',
+         [
+               'label'     => __( 'Copy Button Color', 'essential-addons-for-elementor-lite' ),
+               'type'      => Controls_Manager::COLOR,
+               'selectors' => [
+                  '{{WRAPPER}} .eael-code-snippet-copy-button' => 'color: {{VALUE}};',
+               ],
+               'condition' => [
+                  'show_copy_button' => 'yes',
+               ],
+         ]
+      );
+
+      $this->add_control(
+         'copy_button_border_color',
+         [
+               'label'     => __( 'Copy Button Border Color', 'essential-addons-for-elementor-lite' ),
+               'type'      => Controls_Manager::COLOR,
+               'selectors' => [
+                  '{{WRAPPER}} .eael-code-snippet-copy-button' => 'border-color: {{VALUE}};',
+               ],
+               'condition' => [
+                  'show_copy_button' => 'yes',
+               ],
+         ]
+      );
+
+      $this->end_controls_section();
    }
 
    /**
