@@ -429,6 +429,84 @@ class Code_Snippet extends Widget_Base {
       );
 
       $this->end_controls_section();
+
+      // Style Tab - Line Numbers
+      $this->start_controls_section(
+         'line_numbers_style_section',
+         [
+               'label'     => __( 'Line Numbers', 'essential-addons-for-elementor-lite' ),
+               'tab'       => Controls_Manager::TAB_STYLE,
+               'condition' => [
+                  'show_line_numbers' => 'yes',
+               ],
+         ]
+      );
+
+      $this->add_responsive_control(
+         'line_numbers_padding',
+         [
+               'label'      => __( 'Padding', 'essential-addons-for-elementor-lite' ),
+               'type'       => Controls_Manager::DIMENSIONS,
+               'size_units' => [ 'px', 'em', '%' ],
+               'selectors'  => [
+                  '{{WRAPPER}} .eael-code-snippet-line-numbers' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+               ],
+         ]
+      );
+
+      $this->add_control(
+         'line_numbers_color',
+         [
+               'label'     => __( 'Line Number Color', 'essential-addons-for-elementor-lite' ),
+               'type'      => Controls_Manager::COLOR,
+               'selectors' => [
+                  '{{WRAPPER}} .eael-code-snippet-line-numbers .line-number' => 'color: {{VALUE}};',
+               ],
+         ]
+      );
+
+      $this->add_control(
+         'line_numbers_background_color',
+         [
+               'label'     => __( 'Line Number Background', 'essential-addons-for-elementor-lite' ),
+               'type'      => Controls_Manager::COLOR,
+               'selectors' => [
+                  '{{WRAPPER}} .eael-code-snippet-line-numbers' => 'background-color: {{VALUE}};',
+               ],
+         ]
+      );
+
+      $this->add_control(
+         'line_numbers_border_color',
+         [
+               'label'     => __( 'Border Color', 'essential-addons-for-elementor-lite' ),
+               'type'      => Controls_Manager::COLOR,
+               'selectors' => [
+                  '{{WRAPPER}} .eael-code-snippet-line-numbers' => 'border-right-color: {{VALUE}};',
+               ],
+         ]
+      );
+
+      $this->add_responsive_control(
+         'line_numbers_border_width',
+         [
+               'label'      => __( 'Border Width', 'essential-addons-for-elementor-lite' ),
+               'type'       => Controls_Manager::SLIDER,
+               'size_units' => [ 'px' ],
+               'range'      => [
+                  'px' => [
+                     'min' => 0,
+                     'max' => 20,
+                  ],
+               ],
+               'selectors'  => [
+                  '{{WRAPPER}} .eael-code-snippet-line-numbers' => 'border-right-width: {{SIZE}}{{UNIT}}; border-right-style: solid;',
+               ],
+               'description' => __( 'Controls border right width', 'essential-addons-for-elementor-lite' ),
+         ]
+      );
+
+      $this->end_controls_section();
    }
 
    /**
