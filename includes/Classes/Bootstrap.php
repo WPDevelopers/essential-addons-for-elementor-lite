@@ -217,27 +217,6 @@ class Bootstrap
             add_action( 'wp_ajax_templately_promo_status', array($this, 'templately_promo_status'));
         }
 
-	    //Essential Blocks Promo
-	    if ( ! class_exists( 'Classic_Editor' ) && ! class_exists( 'EssentialBlocks' ) ) {
-		    // Essential Blocks Popup
-		    add_action( 'wpdeveloper_eb_popup_promo_init', [ $this, 'eael_eb_popup_promo_init' ] );
-		    if ( ( did_action( 'wpdeveloper_eb_popup_promo_init' ) < 1 ) && ! ( get_transient( 'eael_gb_eb_popup_hide' ) || get_transient( 'wpdeveloper_gb_eb_popup_hide' ) ) ) {
-			    do_action( 'wpdeveloper_eb_popup_promo_init' );
-		    }
-
-		    // Essential Blocks Optin
-		    add_action( 'wpdeveloper_eb_optin_promo_init', [ $this, 'eael_eb_optin_promo_init' ] );
-		    if ( ( did_action( 'wpdeveloper_eb_optin_promo_init' ) < 1 ) && ! ( get_option( 'eael_eb_optin_hide' ) || get_transient( 'wpdeveloper_eb_optin_hide' ) ) ) {
-			    do_action( 'wpdeveloper_eb_optin_promo_init' );
-		    }
-
-		    //Essential Blocks Banner Promo
-		    add_action( 'wpdeveloper_eb_banner_promo_init', [ $this, 'eael_eb_banner_promo_init' ] );
-		    if ( ( did_action( 'wpdeveloper_eb_banner_promo_init' ) < 1 ) && ! ( get_transient( 'eael_eb_banner_promo_hide' ) || get_transient( 'wpdeveloper_eb_banner_promo_hide' ) ) ) {
-			    do_action( 'wpdeveloper_eb_banner_promo_init' );
-		    }
-	    }
-
 	    if( class_exists( 'woocommerce' ) ) {
 		    // quick view
 		    add_action( 'eael_woo_single_product_image', 'woocommerce_show_product_images', 20 );
