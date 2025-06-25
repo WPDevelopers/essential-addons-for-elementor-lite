@@ -507,6 +507,47 @@ class Code_Snippet extends Widget_Base {
       );
 
       $this->end_controls_section();
+
+      // Style Tab - Code Content Area
+      $this->start_controls_section(
+         'code_content_style_section',
+         [
+               'label' => __( 'Code Content Area', 'essential-addons-for-elementor-lite' ),
+               'tab'   => Controls_Manager::TAB_STYLE,
+         ]
+      );
+
+      $this->add_responsive_control(
+         'code_content_padding',
+         [
+               'label'      => __( 'Padding', 'essential-addons-for-elementor-lite' ),
+               'type'       => Controls_Manager::DIMENSIONS,
+               'size_units' => [ 'px', 'em', '%' ],
+               'selectors'  => [
+                  '{{WRAPPER}} .eael-code-snippet-code' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+               ],
+         ]
+      );
+
+      $this->add_control(
+         'code_content_background_color',
+         [
+               'label'     => __( 'Background Color', 'essential-addons-for-elementor-lite' ),
+               'type'      => Controls_Manager::COLOR,
+               'selectors' => [
+                  '{{WRAPPER}} .eael-code-snippet-code' => 'background-color: {{VALUE}};',
+               ],
+         ]
+      );
+
+      $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name'     => 'content_typography',
+				'selector' => '{{WRAPPER}} .eael-code-snippet-code',
+			]
+		);
+      $this->end_controls_section();
    }
 
    /**
