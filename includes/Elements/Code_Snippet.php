@@ -37,28 +37,15 @@ class Code_Snippet extends Widget_Base {
       $this->start_controls_section(
 			'code_snippet_section',
 			[
-				'label' => esc_html__( 'Code Snippet', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Code Settings', 'essential-addons-for-elementor-lite' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
 
       $this->add_control(
-         'code_content',
-         [
-               'label'       => __( 'Code', 'essential-addons-for-elementor-lite' ),
-               'type'        => Controls_Manager::CODE,
-               'language'    => 'html', // Default language for CodeMirror
-               'rows'        => 15,
-               'default'     => "// Paste or type your code here…",
-               'placeholder' => __( 'Enter your code snippet here...', 'essential-addons-for-elementor-lite' ),
-               'description' => __( 'Enter your code snippet. Use Tab for indentation and enjoy syntax highlighting in the editor.', 'essential-addons-for-elementor-lite' ),
-         ]
-      );
-
-      $this->add_control(
             'language',
             [
-               'label'   => __( 'Language', 'essential-addons-for-elementor-lite' ),
+               'label'   => __( 'Choose Programming Language', 'essential-addons-for-elementor-lite' ),
                'type'    => Controls_Manager::SELECT,
                'default' => 'html',
                'options' => [
@@ -93,15 +80,45 @@ class Code_Snippet extends Widget_Base {
          ]
       );
 
+      $this->add_control(
+         'code_content',
+         [
+               'label'       => __( 'Code Snippet', 'essential-addons-for-elementor-lite' ),
+               'type'        => Controls_Manager::CODE,
+               'language'    => 'html',
+               'rows'        => 15,
+               'default'     => "// Paste or type your code here…",
+               'placeholder' => __( 'Enter your code snippet here...', 'essential-addons-for-elementor-lite' ),
+               'description' => __( 'Type or paste your code here. Use Tab to indent; syntax highlighting will appear in the live preview.', 'essential-addons-for-elementor-lite' ),
+               'ai'          => [
+                  'active' => false,
+               ]
+         ]
+      );
+
       $this->end_controls_section();
       
       $this->start_controls_section(
-			'display_options_section',
+			'appearance_section',
 			[
-				'label' => esc_html__( 'Display Options', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Appearance', 'essential-addons-for-elementor-lite' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
+
+      $this->add_control(
+         'theme',
+         [
+               'label'   => __( 'Theme', 'essential-addons-for-elementor-lite' ),
+               'type'    => Controls_Manager::SELECT,
+               'default' => 'light',
+               'options' => [
+                  'light' => __( 'Light', 'essential-addons-for-elementor-lite' ),
+                  'dark'  => __( 'Dark', 'essential-addons-for-elementor-lite' ),
+               ],
+               'description' => __( 'Choose light or dark styling for the code snippet block.', 'essential-addons-for-elementor-lite' ),
+         ]
+      );
 
       $this->add_control(
             'show_header',
@@ -176,19 +193,6 @@ class Code_Snippet extends Widget_Base {
       );
 
       $this->add_control(
-         'show_language_label',
-         [
-               'label'        => __( 'Show Language Label', 'essential-addons-for-elementor-lite' ),
-               'type'         => Controls_Manager::SWITCHER,
-               'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
-               'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
-               'return_value' => 'yes',
-               'default'      => 'yes',
-               'description'  => __( 'Display the programming language label in the header.', 'essential-addons-for-elementor-lite' ),
-         ]
-      );
-
-      $this->add_control(
          'file_name',
          [
                'label'       => __( 'File Name', 'essential-addons-for-elementor-lite' ),
@@ -243,31 +247,6 @@ class Code_Snippet extends Widget_Base {
 				],
          ]
       );
-      
-      $this->end_controls_section();
-      
-      $this->start_controls_section(
-         'theme_section',
-         [
-               'label' => __( 'Theme', 'essential-addons-for-elementor-lite' ),
-               'tab'   => Controls_Manager::TAB_CONTENT,
-         ]
-      );
-
-      $this->add_control(
-         'theme',
-         [
-               'label'   => __( 'Theme', 'essential-addons-for-elementor-lite' ),
-               'type'    => Controls_Manager::SELECT,
-               'default' => 'light',
-               'options' => [
-                  'light' => __( 'Light', 'essential-addons-for-elementor-lite' ),
-                  'dark'  => __( 'Dark', 'essential-addons-for-elementor-lite' ),
-               ],
-               'description' => __( 'Choose light or dark styling for the code snippet block.', 'essential-addons-for-elementor-lite' ),
-         ]
-      );
-
       $this->end_controls_section();
       
    }
