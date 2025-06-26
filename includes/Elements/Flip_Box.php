@@ -185,13 +185,20 @@ class Flip_Box extends Widget_Base
             'eael_flipbox_height_mode',
             [
                 'label'   => esc_html__('Height Mode', 'essential-addons-for-elementor-lite'),
-                'type'    => Controls_Manager::SELECT,
+                'type'    => Controls_Manager::CHOOSE,
                 'default' => 'fixed',
                 'options' => [
-                    'fixed' => esc_html__('Fixed Height', 'essential-addons-for-elementor-lite'),
-                    'auto'  => esc_html__('Auto Height', 'essential-addons-for-elementor-lite'),
+                    'fixed' => [
+                        'title' => esc_html__('Fixed Height', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-text-field',
+                    ],
+                    'auto'  => [
+                        'title' => esc_html__('Auto Height', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-lightbox-expand',
+                    ],
                 ],
                 'description' => esc_html__('Choose between fixed height or auto height that adjusts to content.', 'essential-addons-for-elementor-lite'),
+                'toggle' => false,
             ]
         );
 
