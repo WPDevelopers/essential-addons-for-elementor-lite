@@ -344,7 +344,7 @@
           flex-direction: column;
   padding: 1rem 0.75rem;
   font-size: 0.8125rem;
-  line-height: 1.5;
+  line-height: 1.6;
   text-align: right;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -355,7 +355,6 @@
       flex-shrink: 0;
 }
 .eael-code-snippet-line-numbers .line-number {
-  height: 1.5em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -375,7 +374,7 @@
   padding: 1rem;
   font-family: inherit;
   font-size: 0.875rem;
-  line-height: 1.4;
+  line-height: 1.5;
   white-space: pre;
   overflow-x: auto;
   background: transparent;
