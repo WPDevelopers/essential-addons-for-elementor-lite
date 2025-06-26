@@ -372,3 +372,34 @@
 .eael-template .eael-elements-flip-box-rear-container > .elementor {
   width: 100%;
 }
+.eael-flipbox-auto-height {
+  height: auto !important;
+  min-height: auto !important;
+}
+.eael-flipbox-auto-height .eael-elements-flip-box-front-container,
+.eael-flipbox-auto-height .eael-elements-flip-box-rear-container {
+  height: auto !important;
+  min-height: auto !important;
+  position: relative;
+}
+.eael-flipbox-auto-height .eael-elements-flip-box-rear-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.eael-flipbox-auto-height.eael-animate-flip .eael-elements-flip-box-flip-card {
+  height: auto;
+}
+.eael-flipbox-auto-height.eael-animate-zoom-in .eael-elements-flip-box-rear-container, .eael-flipbox-auto-height.eael-animate-zoom-out .eael-elements-flip-box-rear-container, .eael-flipbox-auto-height.eael-animate-fade-in .eael-elements-flip-box-rear-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.eael-flipbox-auto-height.eael-animate-push, .eael-flipbox-auto-height.eael-animate-slide {
+  overflow: visible;
+}
+.eael-flipbox-auto-height.eael-animate-push .eael-elements-flip-box-rear-container, .eael-flipbox-auto-height.eael-animate-slide .eael-elements-flip-box-rear-container {
+  position: absolute;
+}

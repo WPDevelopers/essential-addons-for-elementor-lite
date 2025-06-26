@@ -181,6 +181,20 @@ class Flip_Box extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_flipbox_height_mode',
+            [
+                'label'   => esc_html__('Height Mode', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'fixed',
+                'options' => [
+                    'fixed' => esc_html__('Fixed Height', 'essential-addons-for-elementor-lite'),
+                    'auto'  => esc_html__('Auto Height', 'essential-addons-for-elementor-lite'),
+                ],
+                'description' => esc_html__('Choose between fixed height or auto height that adjusts to content.', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+
         $this->add_responsive_control(
             'eael_flipbox_height',
             [
@@ -204,8 +218,11 @@ class Flip_Box extends Widget_Base
                     'size' => 300,
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .eael-elements-flip-box-container:not(.eael-template)' => 'height: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .eael-elements-flip-box-container.eael-template' => 'min-height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-flipbox-fixed-height:not(.eael-template)' => 'height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-flipbox-fixed-height.eael-template' => 'min-height: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_flipbox_height_mode' => 'fixed',
                 ],
             ]
         );
@@ -1635,6 +1652,9 @@ class Flip_Box extends Widget_Base
             );
         }
 
+        // Add height mode class
+        $height_mode_class = 'auto' === $settings['eael_flipbox_height_mode'] ? 'eael-flipbox-auto-height' : 'eael-flipbox-fixed-height';
+
         $this->add_render_attribute(
             'eael_flipbox_main_wrap',
             [
@@ -1644,6 +1664,7 @@ class Flip_Box extends Widget_Base
                     'eael-' . esc_attr($settings['eael_flipbox_type']),
                     'eael-' . esc_attr($settings['eael_flipbox_front_content_type']),
                     'eael-flip-box-' . esc_attr($settings['eael_flipbox_event_type']),
+                    $height_mode_class,
                 ],
             ]
         );
