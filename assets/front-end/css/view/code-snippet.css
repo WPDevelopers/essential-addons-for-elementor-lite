@@ -1,7 +1,6 @@
 /* Essential Addons Code Snippet Frontend Styles */
 .eael-code-snippet-wrapper {
   position: relative;
-  margin: 1.5rem 0;
   border-radius: 8px;
   overflow: hidden;
   font-family: "Monaco", "Menlo", "Ubuntu Mono", "Consolas", "Courier New", monospace;
@@ -376,7 +375,7 @@
   padding: 1rem;
   font-family: inherit;
   font-size: 0.875rem;
-  line-height: 1.5;
+  line-height: 1.4;
   white-space: pre;
   overflow-x: auto;
   background: transparent;
