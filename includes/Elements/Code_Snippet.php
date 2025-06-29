@@ -200,9 +200,8 @@ class Code_Snippet extends Widget_Base {
                'default'     => 'filename',
                'placeholder' => __( 'Enter filename with extension', 'essential-addons-for-elementor-lite' ),
                'description' => __( 'Enter the filename to display in the header (e.g., hero-section.tsx)', 'essential-addons-for-elementor-lite' ),
-               'ai'          => [
-                  'active' => false,
-               ]
+               'ai'          => [ 'active' => false ],
+               'dynamic'     => [ 'active' => true ],
          ]
       );
 
