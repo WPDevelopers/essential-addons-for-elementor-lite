@@ -18,7 +18,7 @@ class Code_Snippet extends Widget_Base {
 	}
 
    public function get_icon() {
-		return 'eicon-elementor-circle';
+		return 'eaicon-code-snippet';
 	}
 
    public function get_categories() {
