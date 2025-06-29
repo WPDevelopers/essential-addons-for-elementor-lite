@@ -333,6 +333,24 @@
   display: flex;
   position: relative;
   overflow: hidden;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+.eael-code-snippet-line-numbers,
+.eael-code-snippet-code,
+.eael-code-snippet-code code {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.eael-code-snippet-code,
+.eael-code-snippet-code code {
+  white-space: pre;
+  word-break: normal;
+  overflow-x: auto;
+}
+.eael-code-snippet-line-numbers {
+  white-space: pre;
 }
 .eael-code-snippet-line-numbers {
   display: -webkit-box;
@@ -343,8 +361,6 @@
       -ms-flex-direction: column;
           flex-direction: column;
   padding: 1rem 0.75rem;
-  font-size: 0.8125rem;
-  line-height: 1.6;
   text-align: right;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -373,8 +389,6 @@
   margin: 0;
   padding: 1rem;
   font-family: inherit;
-  font-size: 0.875rem;
-  line-height: 1.5;
   white-space: pre;
   overflow-x: auto;
   background: transparent;
