@@ -514,14 +514,6 @@ class Code_Snippet extends Widget_Base {
          ]
       );
 
-      $this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
-			[
-				'name'     => 'content_typography_line_numbers',
-				'selector' => '{{WRAPPER}} .eael-code-snippet-line-numbers',
-			]
-		);
-
       $this->end_controls_section();
 
       // Style Tab - Code Content Area
@@ -560,7 +552,7 @@ class Code_Snippet extends Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name'     => 'content_typography',
-				'selector' => '{{WRAPPER}} .eael-code-snippet-code',
+				'selector' => '{{WRAPPER}} .eael-code-snippet-line-numbers, {{WRAPPER}} .eael-code-snippet-code, {{WRAPPER}} .eael-code-snippet-code code',
 			]
 		);
       $this->end_controls_section();
