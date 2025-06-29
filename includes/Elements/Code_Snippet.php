@@ -26,7 +26,16 @@ class Code_Snippet extends Widget_Base {
 	}
 
    public function get_keywords() {
-		return [ 'code', 'snippet', 'code snippet', 'ea', 'essential addons' ];
+		return [ 
+         'code', 
+         'snippet', 
+         'code snippet', 
+         'code block', 
+         'programming', 
+         'ea code', 
+         'ea', 
+         'essential addons' 
+      ];
 	}
 
    public function get_custom_help_url() {
