@@ -267,6 +267,12 @@ class Bootstrap
                     remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
                 }
 		    } );
+
+		    add_filter( 'wcml_multi_currency_ajax_actions', function ( $ajax_actions ) {
+			    $ajax_actions[] = 'load_more';
+
+			    return $ajax_actions;
+		    } );
 	    }
 
         // Admin
