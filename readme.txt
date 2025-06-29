@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.1.19
+Stable tag: 6.1.20
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -314,6 +314,16 @@ Your existing elements/content will work with premium version. So you won't lose
 
 == Changelog ==
 
+= 6.1.20 - 26/06/2025 =
+
+- Improved: Security Enhancements
+- Fixed: EA Woo Product Gallery | Compatibility issue with WPML
+- Fixed: EA Filterable Gallery | Resolved layout issues
+- Fixed: EA Woo Product Carousel | Addressed accessibility issues
+- Fixed: EA Product Grid | Pricing now displays correctly in list layout
+- Fixed: Resolved compatibility issue with GiveWP
+- Few minor bug fixes & improvements
+
 = 6.1.19 - 20/06/2025 =
 
 - Few minor bug fixes & improvements
@@ -322,8 +332,6 @@ Your existing elements/content will work with premium version. So you won't lose
 
 - Fixed: EA Woo Product Gallery | category tab not working
 - Few minor bug fixes & improvements
-
-
 
 = 6.1.17 - 02/06/2025 =
 

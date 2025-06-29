@@ -160,19 +160,10 @@ class WPDeveloper_Plugin_Installer
             $slug      = sanitize_text_field( $_POST['slug'] );
         
             $remote_urls = [
-                'eb-banner' => [
-                    'essential-blocks' => 'https://essential-addons.com/essential-blocks-install-gutenberg',
-                ],
                 'quick-setup' => [
                     'essential-blocks' => 'https://essential-addons.com/essential-blocks-install-quick-setup',
                     'templately'       => 'https://essential-addons.com/templately-install-quick-setup',
-                ],
-                'popup' => [
-                    'essential-blocks' => 'https://essential-addons.com/eb-install-gutenberg-popup',
-                ],
-                'optin' => [
-                    'essential-blocks' => 'https://essential-addons.com/eb-install-optin',
-                ],
+                ]
             ];
         
             if ( isset( $remote_urls[ $promotype ][ $slug ] ) ) {
