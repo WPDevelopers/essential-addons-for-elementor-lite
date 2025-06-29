@@ -472,7 +472,7 @@ class Woo_Product_Carousel extends Widget_Base {
             'eael_product_button_appearance_note_for_preset_4',
             [
                 'label' => '',
-                'type' => \Elementor\Controls_Manager::RAW_HTML,
+                'type' => Controls_Manager::RAW_HTML,
                 'raw' => esc_html__( 'Static option will not work for Preset 4.', 'essential-addons-for-elementor-lite' ),
                 'content_classes' => 'eael-warning',
                 'condition' => [
@@ -1116,7 +1116,7 @@ class Woo_Product_Carousel extends Widget_Base {
             'eael_product_carousel_alignment',
             [
                 'label'     => __( 'Alignment', 'essential-addons-for-elementor-lite' ),
-                'type'      => \Elementor\Controls_Manager::CHOOSE,
+                'type'      => Controls_Manager::CHOOSE,
                 'options'   => [
                     'left'   => [
                         'title' => __( 'Left', 'essential-addons-for-elementor-lite' ),
@@ -1215,7 +1215,7 @@ class Woo_Product_Carousel extends Widget_Base {
         );
         
         $this->add_group_control(
-            \Elementor\Group_Control_Box_Shadow::get_type(),
+            Group_Control_Box_Shadow::get_type(),
             [
                 'name'     => 'eael_product_carousel_shadow',
                 'label'    => __( 'Box Shadow', 'essential-addons-for-elementor-lite' ),
@@ -2435,7 +2435,7 @@ class Woo_Product_Carousel extends Widget_Base {
             'is_use_dots_custom_width_height',
             [
                 'label'        => __( 'Use Custom Width/Height?', 'essential-addons-for-elementor-lite' ),
-                'type'         => \Elementor\Controls_Manager::SWITCHER,
+                'type'         => Controls_Manager::SWITCHER,
                 'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
                 'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
                 'return_value' => 'yes',
@@ -2696,7 +2696,7 @@ class Woo_Product_Carousel extends Widget_Base {
         );
 
         $this->add_group_control(
-            \Elementor\Group_Control_Box_Shadow::get_type(),
+            Group_Control_Box_Shadow::get_type(),
             [
                 'name'     => 'active_dots_shadow',
                 'label'    => __( 'Shadow', 'essential-addons-for-elementor-lite' ),
@@ -3056,7 +3056,7 @@ class Woo_Product_Carousel extends Widget_Base {
         $this->end_controls_tabs();
 
         $this->add_group_control(
-            \Elementor\Group_Control_Box_Shadow::get_type(),
+            Group_Control_Box_Shadow::get_type(),
             [
                 'name'     => 'eael_product_carousel_arrow_shadow',
                 'label'    => __( 'Box Shadow', 'essential-addons-for-elementor-lite' ),
@@ -3243,13 +3243,13 @@ class Woo_Product_Carousel extends Widget_Base {
 	                if ( $query->have_posts() ):
                         echo '<div '; $this->print_render_attribute_string( 'eael-woo-product-carousel-wrap' ); echo '>';
 		                    $settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
-                            echo '<ul class="swiper-wrapper products">';
+                            echo '<div class="swiper-wrapper products">';
                             while ( $query->have_posts() ) {
                                 $query->the_post();
                                 include( $template );
                             }
                             wp_reset_postdata();
-                            echo '</ul>';
+                            echo '</div>';
                             do_action( 'eael_woo_after_product_loop' );
                         echo '</div>';
                     else:
