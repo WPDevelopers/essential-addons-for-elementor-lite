@@ -620,7 +620,7 @@ class Code_Snippet extends Widget_Base {
       $show_copy_tooltip = $settings['show_copy_tooltip'] ?? 'no';
 
       ?>
-      <div class="eael-code-snippet-wrapper theme-<?php echo esc_attr( $theme ); ?>" id="<?php echo esc_attr( $snippet_id ); ?>" data-language="<?php echo esc_attr( $language ); ?>" data-copy-button="<?php echo esc_attr( $show_copy_button === 'yes' ? 'true' : 'false' ); ?>">
+      <div class="eael-code-snippet-wrapper theme-<?php echo esc_attr( $theme ); ?>" id="<?php echo esc_attr( $snippet_id ); ?>" data-language="<?php echo esc_attr( $language ); ?>" data-copy-button="<?php echo esc_attr( $show_copy_button === 'yes' ? 'true' : 'false' ); ?>" data-snippet-id="<?php echo esc_attr( $snippet_id ); ?>">
       <?php if ( 'yes' === $show_header ) { ?>
          <div class="eael-code-snippet-header eael-file-preview-header">
             <div class="eael-file-preview-left">
@@ -691,18 +691,5 @@ class Code_Snippet extends Widget_Base {
          </div>
       </div>
       <?php
-      if ( 'yes' === $show_copy_button ) {
-         ?>
-         <script type="text/javascript">
-            document.addEventListener('DOMContentLoaded', function() {
-               // Initialize copy functionality for this specific snippet
-               const snippet = document.getElementById('<?php echo esc_js( $snippet_id ); ?>');
-               if (snippet && window.EaelCodeSnippet) {
-                  window.EaelCodeSnippet.initCopyButton(snippet);
-               }
-            });
-         </script>
-         <?php
-      }
    }
 }

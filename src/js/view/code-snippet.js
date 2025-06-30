@@ -9,14 +9,11 @@
    // Global namespace
    window.EaelCodeSnippet = window.EaelCodeSnippet || {};
 
-   // Configuration
+   // Configuration - Using local files for security
    const config = {
-      highlightJsUrl:
-         "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js",
-      highlightJsCssLight:
-         "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css",
-      highlightJsCssDark:
-         "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css",
+      highlightJsUrl: null,
+      highlightJsCssLight: null,
+      highlightJsCssDark: null,
       copySuccessTimeout: 2000,
       retryAttempts: 3,
       retryDelay: 1000,
@@ -51,47 +48,12 @@
    // State management
    let highlightJsLoaded = false;
    let highlightJsLoading = false;
-   let copyButtonsInitialized = false;
 
-   /**
-    * Utility function to load external scripts
-    */
-   function loadScript(src, callback) {
-      const script = document.createElement("script");
-      script.src = src;
-      script.onload = callback;
-      script.onerror = function () {
-         console.warn(
-            "Essential Addons Code Snippet: Failed to load script:",
-            src
-         );
-         if (callback) callback(false);
-      };
-      document.head.appendChild(script);
-   }
-
-   /**
-    * Utility function to load external stylesheets
-    */
-   function loadStylesheet(href) {
-      // Check if stylesheet is already loaded
-      const existingLink = document.querySelector(`link[href="${href}"]`);
-      if (existingLink) return;
-
-      const link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.href = href;
-      link.onerror = function () {
-         console.warn(
-            "Essential Addons Code Snippet: Failed to load stylesheet:",
-            href
-         );
-      };
-      document.head.appendChild(link);
-   }
+   // Utility functions removed - using WordPress dependency system instead
 
    /**
     * Load Highlight.js library and CSS
+    * Files are loaded via WordPress dependency system in config.php
     */
    function loadHighlightJs(callback) {
       if (highlightJsLoaded) {
@@ -112,36 +74,35 @@
 
       highlightJsLoading = true;
 
-      // Load CSS based on theme
-      const darkThemeSnippets = document.querySelectorAll(
-         ".eael-code-snippet-wrapper.theme-dark"
-      );
-      const lightThemeSnippets = document.querySelectorAll(
-         ".eael-code-snippet-wrapper.theme-light"
-      );
-
-      if (darkThemeSnippets.length > 0) {
-         loadStylesheet(config.highlightJsCssDark);
-      }
-      if (lightThemeSnippets.length > 0) {
-         loadStylesheet(config.highlightJsCssLight);
-      }
-
-      // Load Highlight.js
-      loadScript(config.highlightJsUrl, function (success) {
+      // Check if Highlight.js is already loaded via WordPress dependency system
+      if (window.hljs) {
+         highlightJsLoaded = true;
          highlightJsLoading = false;
-         if (success && window.hljs) {
+         if (callback) callback(true);
+         return;
+      }
+
+      // If not loaded, wait a bit and check again (for async loading)
+      let attempts = 0;
+      const maxAttempts = 10; // Wait up to 1 second
+      const checkInterval = setInterval(function () {
+         attempts++;
+         if (window.hljs) {
             highlightJsLoaded = true;
-            console.log(
-               "Essential Addons Code Snippet: Highlight.js loaded successfully"
-            );
-         } else {
-            console.warn(
-               "Essential Addons Code Snippet: Failed to load Highlight.js"
-            );
+            highlightJsLoading = false;
+            clearInterval(checkInterval);
+            if (callback) callback(true);
+         } else if (attempts >= maxAttempts) {
+            highlightJsLoading = false;
+            clearInterval(checkInterval);
+            if (window.console && window.console.warn) {
+               console.warn(
+                  "Essential Addons: Syntax highlighting unavailable"
+               );
+            }
+            if (callback) callback(false);
          }
-         if (callback) callback(highlightJsLoaded);
-      });
+      }, 100);
    }
 
    /**
@@ -160,10 +121,9 @@
          try {
             window.hljs.highlightElement(block);
          } catch (error) {
-            console.warn(
-               "Essential Addons Code Snippet: Error highlighting code block:",
-               error
-            );
+            if (window.console && window.console.warn) {
+               console.warn("Essential Addons: Syntax highlighting error");
+            }
          }
       });
    }
@@ -199,12 +159,9 @@
 
          return true;
       } catch (error) {
-         console.warn(
-            "Essential Addons Code Snippet: Error highlighting code block with language " +
-               language +
-               ":",
-            error
-         );
+         if (window.console && window.console.warn) {
+            console.warn("Essential Addons: Syntax highlighting error");
+         }
          return false;
       }
    }
@@ -240,11 +197,10 @@
             .then(function () {
                if (callback) callback(true);
             })
-            .catch(function (error) {
-               console.warn(
-                  "Essential Addons Code Snippet: Clipboard API failed:",
-                  error
-               );
+            .catch(function () {
+               if (window.console && window.console.warn) {
+                  console.warn("Essential Addons: Copy operation failed");
+               }
                fallbackCopyToClipboard(text, callback);
             });
       } else {
@@ -269,10 +225,9 @@
          const successful = document.execCommand("copy");
          if (callback) callback(successful);
       } catch (error) {
-         console.warn(
-            "Essential Addons Code Snippet: Fallback copy failed:",
-            error
-         );
+         if (window.console && window.console.warn) {
+            console.warn("Essential Addons: Copy operation failed");
+         }
          if (callback) callback(false);
       } finally {
          document.body.removeChild(textArea);
@@ -433,9 +388,29 @@
       const copyButton = snippet.querySelector(
          ".eael-code-snippet-copy-button"
       );
-      const codeElement = snippet.querySelector(".eael-code-snippet-code code");
 
-      if (!copyButton || !codeElement) {
+      // Try multiple selectors for the code element
+      let codeElement = snippet.querySelector(".eael-code-snippet-code code");
+      if (!codeElement) {
+         codeElement = snippet.querySelector(".eael-code-snippet-code");
+      }
+      if (!codeElement) {
+         codeElement = snippet.querySelector("code");
+      }
+      if (!codeElement) {
+         codeElement = snippet.querySelector("pre");
+      }
+
+      if (!copyButton) {
+         return;
+      }
+
+      if (!codeElement) {
+         if (window.console && window.console.warn) {
+            console.warn(
+               "Essential Addons: Code element not found for copy button"
+            );
+         }
          return;
       }
 
@@ -453,9 +428,9 @@
             codeElement.textContent || codeElement.innerText || "";
 
          if (!codeText.trim()) {
-            console.warn(
-               "Essential Addons Code Snippet: No Code snippet to copy"
-            );
+            if (window.console && window.console.warn) {
+               console.warn("Essential Addons: No content to copy");
+            }
             return;
          }
 
@@ -473,9 +448,9 @@
                });
                document.dispatchEvent(customEvent);
             } else {
-               console.error(
-                  "Essential Addons Code Snippet: Failed to copy code to clipboard"
-               );
+               if (window.console && window.console.error) {
+                  console.error("Essential Addons: Copy operation failed");
+               }
                showCopyError(copyButton);
             }
          });
@@ -502,22 +477,22 @@
          }
       });
 
-      // Initialize copy buttons
+      // Initialize copy buttons - always initialize regardless of data attribute
       snippets.forEach(function (snippet) {
-         const hasCopyButton = snippet.dataset.copyButton === "true";
-         if (hasCopyButton) {
+         // Check if copy button exists in the snippet
+         const copyButton = snippet.querySelector(
+            ".eael-code-snippet-copy-button"
+         );
+         if (copyButton) {
             initCopyButton(snippet);
          }
       });
-
-      copyButtonsInitialized = true;
    }
 
    /**
     * Re-initialize code snippets (useful for dynamic content)
     */
    function reinitialize() {
-      copyButtonsInitialized = false;
       initializeCodeSnippets();
    }
 

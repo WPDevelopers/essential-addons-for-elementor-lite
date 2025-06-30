@@ -696,11 +696,26 @@ $config = [
                         'type'    => 'self',
                         'context' => 'view',
                     ],
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/code-snippet/github.min.css',
+                        'type' => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/code-snippet/github-dark.min.css',
+                        'type' => 'lib',
+                        'context' => 'view',
+                    ],
                 ],
                 'js' => [
                     [
                         'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/code-snippet.min.js',
                         'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/code-snippet/highlight.min.js',
+                        'type'    => 'lib',
                         'context' => 'view',
                     ],
                 ],
