@@ -273,9 +273,9 @@ trait Controls
             $wb->add_control(
                 'fetch_acf_image_gallery',
                 [
-                    'label'        => esc_html__( 'Fetch Images from ACF Gallery', 'essential-addons-for-elementor-lite' ),
+                    'label'        => esc_html__( 'Images from ACF Gallery', 'essential-addons-for-elementor-lite' ),
                     'type'         => Controls_Manager::SWITCHER,
-                    'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+                    'label_on'     => esc_html__( 'Fetch', 'essential-addons-for-elementor-lite' ),
                     'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
                     'return_value' => 'yes',
                     'default'      => 'no',
