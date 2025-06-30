@@ -323,22 +323,6 @@ trait Controls
                         ]
                     ]
                 );
-                
-                $wb->add_control(
-                    'eael_gf_afc_use_parent_data',
-                    [
-                        'label'        => esc_html__( 'Use Parent Data to Populate ACF Gallery Items', 'essential-addons-for-elementor-lite' ),
-                        'type'         => Controls_Manager::SWITCHER,
-                        'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
-                        'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
-                        'return_value' => 'yes',
-                        'default'      => 'no',
-                        'condition'    => [
-                            'fetch_acf_image_gallery' => 'yes'
-                        ]
-                    ]
-                );
-
             } else {
                 $wb->add_control(
                     'eael_scf_gallery_warnig_text',
