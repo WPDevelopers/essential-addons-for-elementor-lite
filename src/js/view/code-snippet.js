@@ -3,9 +3,7 @@
  * Handles syntax highlighting and copy-to-clipboard functionality
  */
 
-(function () {
-   "use strict";
-
+var CodeSnippet = function ($scope, $) {
    // Global namespace
    window.EaelCodeSnippet = window.EaelCodeSnippet || {};
 
@@ -553,4 +551,11 @@
          subtree: true,
       });
    }
-})();
+}
+
+jQuery(window).on("elementor/frontend/init", function () {
+   elementorFrontend.hooks.addAction(
+      "frontend/element_ready/eael-code-snippet.default",
+      CodeSnippet
+   );
+});
