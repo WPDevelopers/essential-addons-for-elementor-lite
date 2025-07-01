@@ -5,21 +5,32 @@ var FlipBox = function ($scope, $) {
         var frontHeight = wrapper.find('.eael-elements-flip-box-front-container').height();
         var rearHeight = wrapper.find('.eael-elements-flip-box-rear-container').height();
         
-        if( wrapper.hasClass('eael-flipbox-max') ){
-            var maxHeight = Math.max(frontHeight, rearHeight);
-            console.log('height', frontHeight, rearHeight, maxHeight);
-            wrapper.find('.eael-elements-flip-box-flip-card').height(maxHeight);
+        var maxHeight = Math.max(frontHeight, rearHeight);
+        wrapper.find('.eael-elements-flip-box-flip-card').height(maxHeight);
+    
+    }
+
+    function setDynamicHeight(){
+        var frontHeight = wrapper.find('.eael-elements-flip-box-front-container').height();
+        var rearHeight = wrapper.find('.eael-elements-flip-box-rear-container').height();
+        
+        if( wrapper.hasClass('--active') ){
+            wrapper.find('.eael-elements-flip-box-flip-card').height(rearHeight);
+        } else {
+            wrapper.find('.eael-elements-flip-box-flip-card').height(frontHeight);
         }
     }
 
     if (wrapper.hasClass('eael-flipbox-auto-height')) {
-        let heightAdjustment = setInterval(setFixedHeight, 200);
-        setTimeout(function(){
-            clearInterval(heightAdjustment);
-        }, 5000);
+        if( wrapper.hasClass('eael-flipbox-max') ){
+            let heightAdjustment = setInterval(setFixedHeight, 200);
+            setTimeout(function(){
+                clearInterval(heightAdjustment);
+            }, 5000);
+        }else if( wrapper.hasClass('eael-flipbox-dynamic') ){
+            $('.eael-flip-box-click', $scope).on('click', debounce(setDynamicHeight, 100));
+        }
 
-        // Get transition speed from data attribute
-        var transitionSpeed = wrapper.data('height-transition-speed') || '300ms';        
     }
 
     // Debounce function to limit resize event frequency
