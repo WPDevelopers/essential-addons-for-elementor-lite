@@ -202,6 +202,28 @@ class Flip_Box extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_flipbox_height_adjustment',
+            [
+                'label'   => esc_html__('Adjustment', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::CHOOSE,
+                'default' => 'maximum',
+                'options' => [
+                    'maximum' => [
+                        'title' => esc_html__('Maximum Content Height', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-align-stretch-v',
+                    ],
+                    'dynamic' => [
+                        'title' => esc_html__('Based on Visible Content', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-align-end-v',
+                    ],
+                ],
+                'condition' => [
+                    'eael_flipbox_height_mode' => 'auto',
+                ],
+            ]
+        );
+
         $this->add_responsive_control(
             'eael_flipbox_height',
             [
@@ -1661,6 +1683,7 @@ class Flip_Box extends Widget_Base
 
         // Add height mode class
         $height_mode_class = 'auto' === $settings['eael_flipbox_height_mode'] ? 'eael-flipbox-auto-height' : 'eael-flipbox-fixed-height';
+        $height_adjustment_class = 'maximum' === $settings['eael_flipbox_height_adjustment'] ? 'eael-flipbox-max' : 'eael-flipbox-dynamic';
 
         $this->add_render_attribute(
             'eael_flipbox_main_wrap',
@@ -1672,6 +1695,7 @@ class Flip_Box extends Widget_Base
                     'eael-' . esc_attr($settings['eael_flipbox_front_content_type']),
                     'eael-flip-box-' . esc_attr($settings['eael_flipbox_event_type']),
                     $height_mode_class,
+                    $height_adjustment_class,
                 ],
             ]
         );
