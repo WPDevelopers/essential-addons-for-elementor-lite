@@ -21,6 +21,14 @@ var FlipBox = function ($scope, $) {
         }
     }
 
+    $('.eael-flip-box-click', $scope).off('click').on( 'click', function() {
+        $(this).toggleClass( '--active' );
+    });
+    
+    $('.eael-flip-box-hover', $scope).on('mouseenter mouseleave', function(){
+        $(this).toggleClass( '--active' );
+    })
+
     if (wrapper.hasClass('eael-flipbox-auto-height')) {
         if( wrapper.hasClass('eael-flipbox-max') ){
             let heightAdjustment = setInterval(setFixedHeight, 200);
@@ -29,8 +37,8 @@ var FlipBox = function ($scope, $) {
             }, 5000);
         }else if( wrapper.hasClass('eael-flipbox-dynamic') ){
             $('.eael-flip-box-click', $scope).on('click', debounce(setDynamicHeight, 100));
+            $('.eael-flip-box-hover', $scope).on('mouseenter mouseleave', debounce(setDynamicHeight, 100));
         }
-
     }
 
     // Debounce function to limit resize event frequency

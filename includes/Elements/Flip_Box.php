@@ -1699,9 +1699,7 @@ class Flip_Box extends Widget_Base
                 ],
             ]
         );
-
-?>
-
+        ?>
         <div <?php $this->print_render_attribute_string('eael_flipbox_main_wrap'); ?>>
 
             <<?php echo esc_html( $flipbox_if_html_tag ) . ' '; $this->print_render_attribute_string('flipbox-container'); ?>>
@@ -1804,16 +1802,7 @@ class Flip_Box extends Widget_Base
                 </div>
             </<?php echo esc_html( $flipbox_if_html_tag ); ?>>
         </div>
-
-        <script>
-            jQuery(document).ready(function( $ ) {
-                $(".eael-flip-box-click").off('click').on( 'click', function( event ) {
-                    $(this).toggleClass( '--active' );
-                });
-            });
-        </script>
-
-<?php
+        <?php
     }
 
     protected function render_icon($settings, $icon_location = 'front')
