@@ -1370,6 +1370,9 @@ $config = [
                 ],
             ],
         ],
+        'liquid-glass-effect' => [
+            'class'      => '\Essential_Addons_Elementor\Extensions\Liquid_Glass_Effect',
+        ],
     ],
 ];
 
