@@ -38,6 +38,5 @@ class Liquid_Glass_Effect {
 
 	public function before_render( $element ) {
 		$settings = $element->get_settings_for_display();
-
-		}
 	}
+}
