@@ -388,18 +388,14 @@
 /*--- Fade ---*/
 
 .eael-animate-fade-in.eael-elements-flip-box-container {
-	//-webkit-transform: scale(1);
-	//-ms-transform: scale(1);
-	//transform: scale(1);
-	//opacity: 1;
-
 	.eael-elements-flip-box-flip-card {
 		transform-style: preserve-3d;
 		perspective: 1000px;
 		transition: all .6s ease-in-out;
 	}
 
-	&:hover {
+	&.eael-flip-box-hover:hover,
+	&.eael-flip-box-click.--active {
 		.eael-elements-flip-box-front-container {
 			opacity: 0;
 			visibility: hidden;
