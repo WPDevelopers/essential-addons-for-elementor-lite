@@ -650,8 +650,8 @@ trait Admin {
 					    'liquid-glass-effect'  => [
 						    'key'         => 'liquid-glass-effect',
 						    'title'       => __( 'Liquid Glass Effect', 'essential-addons-for-elementor-lite' ),
-						    'demo_link'   => 'https://essential-addons.com/hover-interaction/',
-						    'doc_link'    => 'https://essential-addons.com/docs/ea-hover-interaction/',
+						    'demo_link'   => 'https://essential-addons.com/liquid-glass-effect/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-liquid-glass-effect/',
 						    'promotion'   => 'new',
 						    'is_activate' => boolval( $this->get_settings( 'liquid-glass-effect' ) )
 						 ],
