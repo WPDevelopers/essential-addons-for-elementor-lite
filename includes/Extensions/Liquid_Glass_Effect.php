@@ -12,6 +12,7 @@ class Liquid_Glass_Effect {
 	 * Initialize hooks
 	 */
 	public function __construct() {
+		add_action( 'elementor/element/container/section_layout/after_section_end', [ $this, 'register_controls' ] );
 		add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'register_controls' ] );
 		add_action( 'elementor/frontend/before_render', [ $this, 'before_render' ], 100 );
 	}
