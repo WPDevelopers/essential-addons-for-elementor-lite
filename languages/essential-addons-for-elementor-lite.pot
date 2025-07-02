@@ -10086,31 +10086,31 @@ msgstr ""
 msgid "Tilt Effect"
 msgstr ""
 
-#: ../includes/Extensions/Liquid_Glass_Effect.php:23
+#: ../includes/Extensions/Liquid_Glass_Effect.php:24
 msgid "<i class=\"eaicon-logo\"></i> Liquid Glass Effect"
 msgstr ""
 
-#: ../includes/Extensions/Liquid_Glass_Effect.php:31
+#: ../includes/Extensions/Liquid_Glass_Effect.php:32
 msgid "Enable Liquid Glass Effect"
 msgstr ""
 
-#: ../includes/Extensions/Liquid_Glass_Effect.php:39
+#: ../includes/Extensions/Liquid_Glass_Effect.php:40
 msgid "Liquid Glass Effects"
 msgstr ""
 
-#: ../includes/Extensions/Liquid_Glass_Effect.php:43
+#: ../includes/Extensions/Liquid_Glass_Effect.php:44
 msgid "Effect 1"
 msgstr ""
 
-#: ../includes/Extensions/Liquid_Glass_Effect.php:44
+#: ../includes/Extensions/Liquid_Glass_Effect.php:45
 msgid "Effect 2"
 msgstr ""
 
-#: ../includes/Extensions/Liquid_Glass_Effect.php:45
+#: ../includes/Extensions/Liquid_Glass_Effect.php:46
 msgid "Effect 3"
 msgstr ""
 
-#: ../includes/Extensions/Liquid_Glass_Effect.php:46
+#: ../includes/Extensions/Liquid_Glass_Effect.php:47
 msgid "Effect 4"
 msgstr ""
 
