@@ -687,6 +687,40 @@ $config = [
                 ],
             ],
         ],
+        'code-snippet' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Code_Snippet',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/code-snippet.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/code-snippet/github.min.css',
+                        'type' => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/css/lib-view/code-snippet/github-dark.min.css',
+                        'type' => 'lib',
+                        'context' => 'view',
+                    ],
+                ],
+                'js' => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/code-snippet.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/code-snippet/highlight.min.js',
+                        'type'    => 'lib',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
         'woo-product-images' => [
             'class' => '\Essential_Addons_Elementor\Elements\Woo_Product_Images',
             'dependency' => [
