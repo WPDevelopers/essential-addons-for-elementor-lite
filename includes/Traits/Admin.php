@@ -661,15 +661,6 @@ trait Admin {
 							    'doc_link'    => 'https://essential-addons.com/docs/creative-buttons/',
 							    'is_activate' => boolval( $this->get_settings( 'creative-btn' ) )
 						    ],
-							'figma-to-elementor'   => [
-							    'key'         => 'figma-to-elementor',
-							    'title'       => __( 'Figma to Elementor', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/figma-to-elementor/',
-							    'doc_link'    => 'https://essential-addons.com/docs/figma-to-elementor/',
-							    'is_pro'      => true,
-								'promotion'   => 'beta',
-							    'is_activate' => boolval( $this->get_settings( 'figma-to-elementor' ) )
-						    ],
 						    'team-members'         => [
 							    'key'         => 'team-members',
 							    'title'       => __( 'Team Member', 'essential-addons-for-elementor-lite' ),
@@ -1349,6 +1340,21 @@ trait Admin {
 							    'is_activate' => boolval( $this->get_settings( 'betterdocs-search-form' ) )
 						    ],
 					    ]
+					],
+					'figma-design' => [
+					    'title'    => __( 'Figma Design', 'essential-addons-for-elementor-lite' ),
+					    'icon'     => 'ea-figma-to-elementor',
+					    'elements' => [
+							'figma-to-elementor'   => [
+							    'key'         => 'figma-to-elementor',
+							    'title'       => __( 'Figma to Elementor', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/figma-to-elementor/',
+							    'doc_link'    => 'https://essential-addons.com/docs/figma-to-elementor/',
+							    'is_pro'      => true,
+								'promotion'   => 'beta',
+							    'is_activate' => boolval( $this->get_settings( 'figma-to-elementor' ) )
+						    ],
+					    ]
 				    ],
 				    'woocommerce-elements'     => [
 					    'title'    => __( 'WooCommerce Elements', 'essential-addons-for-elementor-lite' ),
@@ -1482,7 +1488,7 @@ trait Admin {
 							    'is_activate' => boolval( $this->get_settings( 'woo-account-dashboard' ) )
 						    ]
 					    ]
-				    ]
+					]
 			    ],
 			    'modal'                   => [
 				    'postDuplicatorSetting'  => [
