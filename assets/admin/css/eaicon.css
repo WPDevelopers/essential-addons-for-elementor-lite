@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'eaicon';
-	src:  url('../fonts/eaicon.eot?2ha98n');
-	src:  url('../fonts/eaicon.eot?2ha98n#iefix') format('embedded-opentype'),
-	url('../fonts/eaicon.ttf?2ha98n') format('truetype'),
-	url('../fonts/eaicon.woff?2ha98n') format('woff'),
-	url('../fonts/eaicon.svg?2ha98n#eaicon') format('svg');
+	src:  url('../fonts/eaicon.eot?311rml');
+	src:  url('../fonts/eaicon.eot?311rml#iefix') format('embedded-opentype'),
+	url('../fonts/eaicon.ttf?311rml') format('truetype'),
+	url('../fonts/eaicon.woff?311rml') format('woff'),
+	url('../fonts/eaicon.svg?311rml#eaicon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 	font-display: block;
@@ -462,6 +462,15 @@
 .eaicon-multicolumn-pricing:before {
 	content: "\e989";
 }
-.icon-ea-logo:before {
+.eaicon-ea-logo:before {
 	content: "\e98a";
+}
+.eaicon-figma-to-elementor:before {
+	content: "\e98b";
+}
+.eaicon-figma-to-elementor-beta:before {
+	content: "\e98c";
+}
+.eaicon-code-snippet:before {
+	content: "\e98d";
 }
