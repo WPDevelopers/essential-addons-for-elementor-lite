@@ -11331,7 +11331,7 @@ msgid "File Type Fields:"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:1659
-msgid "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.3 with New & Modern Presets: \"<b>Grid Flow</b>\" & \"<b>Harmonic</b>\". For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>"
+msgid "<p> <i>📣</i> <b>NEW:</b> Introducing EA 6.2 with new \"<b><a target='_blank' href='%s'>Code Snippet</a></b>\" widget. For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:1662
