@@ -2,8 +2,8 @@ var FlipBox = function ($scope, $) {
     var wrapper = $scope.find('.eael-elements-flip-box-container');
 
     function setFixedHeight(){
-        var frontHeight = wrapper.find('.eael-elements-flip-box-front-container').height();
-        var rearHeight = wrapper.find('.eael-elements-flip-box-rear-container').height();
+        var frontHeight = wrapper.find('.eael-elements-flip-box-front-container').outerHeight();
+        var rearHeight = wrapper.find('.eael-elements-flip-box-rear-container').outerHeight();
         
         var maxHeight = Math.max(frontHeight, rearHeight);
         wrapper.find('.eael-elements-flip-box-flip-card').height(maxHeight);
@@ -11,8 +11,8 @@ var FlipBox = function ($scope, $) {
     }
 
     function setDynamicHeight(){
-        var frontHeight = wrapper.find('.eael-elements-flip-box-front-container').height();
-        var rearHeight = wrapper.find('.eael-elements-flip-box-rear-container').height();
+        var frontHeight = wrapper.find('.eael-elements-flip-box-front-container').outerHeight();
+        var rearHeight = wrapper.find('.eael-elements-flip-box-rear-container').outerHeight();
         
         if( wrapper.hasClass('--active') ){
             wrapper.find('.eael-elements-flip-box-flip-card').height(rearHeight);
