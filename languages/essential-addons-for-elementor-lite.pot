@@ -481,15 +481,15 @@ msgstr ""
 msgid "SVG Draw"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:697, ../includes/Traits/Admin.php:1102, ../includes/Traits/Elements.php:369
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:697, ../includes/Traits/Admin.php:1102, ../includes/Traits/Elements.php:380
 msgid "Fancy Chart"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:702, ../includes/Traits/Admin.php:1110, ../includes/Traits/Elements.php:375
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:702, ../includes/Traits/Admin.php:1110, ../includes/Traits/Elements.php:386
 msgid "Stacked Cards"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:707, ../includes/Traits/Admin.php:1119, ../includes/Traits/Elements.php:381
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:707, ../includes/Traits/Admin.php:1119, ../includes/Traits/Elements.php:392
 msgid "360 Degree Photo Viewer"
 msgstr ""
 
@@ -617,7 +617,7 @@ msgstr ""
 msgid "Woo Cart"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:855, ../includes/Traits/Admin.php:482, ../includes/Traits/Admin.php:1445, ../includes/Traits/Elements.php:357
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:855, ../includes/Traits/Admin.php:482, ../includes/Traits/Admin.php:1445, ../includes/Traits/Elements.php:368
 msgid "Woo Cross Sells"
 msgstr ""
 
@@ -1201,7 +1201,7 @@ msgstr ""
 msgid "Highlight"
 msgstr ""
 
-#: ../includes/Elements/Advanced_Data_Table.php:669, ../includes/Elements/Adv_Tabs.php:251, ../includes/Elements/Countdown.php:514, ../includes/Elements/Data_Table.php:178, ../includes/Elements/Filterable_Gallery.php:335, ../includes/Elements/Filterable_Gallery.php:377, ../includes/Elements/Flip_Box.php:268, ../includes/Elements/Flip_Box.php:508, ../includes/Elements/Flip_Box.php:736, ../includes/Elements/GravityForms.php:1303, ../includes/Elements/Info_Box.php:114, ../includes/Elements/Info_Box.php:1153, ../includes/Elements/Info_Box.php:1233, ../includes/Elements/Info_Box.php:1371, ../includes/Elements/Info_Box.php:1467, ../includes/Elements/Interactive_Circle.php:466, ../includes/Elements/Post_Grid.php:1675, ../includes/Elements/Simple_Menu.php:1556, ../includes/Elements/Sticky_Video.php:602, ../includes/Elements/SVG_Draw.php:244, ../includes/Elements/SVG_Draw.php:270, ../includes/Elements/SVG_Draw.php:286, ../includes/Extensions/Liquid_Glass_Effect.php:64, ../includes/Extensions/Table_of_Content.php:1041, ../includes/Extensions/Table_of_Content.php:1280
+#: ../includes/Elements/Advanced_Data_Table.php:669, ../includes/Elements/Adv_Tabs.php:251, ../includes/Elements/Countdown.php:514, ../includes/Elements/Data_Table.php:178, ../includes/Elements/Filterable_Gallery.php:335, ../includes/Elements/Filterable_Gallery.php:377, ../includes/Elements/Flip_Box.php:268, ../includes/Elements/Flip_Box.php:508, ../includes/Elements/Flip_Box.php:736, ../includes/Elements/GravityForms.php:1303, ../includes/Elements/Info_Box.php:114, ../includes/Elements/Info_Box.php:1153, ../includes/Elements/Info_Box.php:1233, ../includes/Elements/Info_Box.php:1371, ../includes/Elements/Info_Box.php:1467, ../includes/Elements/Interactive_Circle.php:466, ../includes/Elements/Post_Grid.php:1675, ../includes/Elements/Simple_Menu.php:1556, ../includes/Elements/Sticky_Video.php:602, ../includes/Elements/SVG_Draw.php:244, ../includes/Elements/SVG_Draw.php:270, ../includes/Elements/SVG_Draw.php:286, ../includes/Extensions/Liquid_Glass_Effect.php:65, ../includes/Extensions/Table_of_Content.php:1041, ../includes/Extensions/Table_of_Content.php:1280
 msgid "None"
 msgstr ""
 
@@ -1273,7 +1273,7 @@ msgstr ""
 msgid "Accordion"
 msgstr ""
 
-#: ../includes/Elements/Adv_Accordion.php:143, ../includes/Elements/Business_Reviews.php:2151, ../includes/Elements/Login_Register.php:1625, ../includes/Elements/Login_Register.php:4350, ../includes/Elements/Woo_Product_Carousel.php:2869, ../includes/Traits/Admin.php:758, ../includes/Traits/Elements.php:321
+#: ../includes/Elements/Adv_Accordion.php:143, ../includes/Elements/Business_Reviews.php:2151, ../includes/Elements/Login_Register.php:1625, ../includes/Elements/Login_Register.php:4350, ../includes/Elements/Woo_Product_Carousel.php:2869, ../includes/Traits/Admin.php:758, ../includes/Traits/Elements.php:332
 msgid "Toggle"
 msgstr ""
 
@@ -7921,7 +7921,7 @@ msgstr ""
 msgid "Inner Title Color"
 msgstr ""
 
-#: ../includes/Elements/Progress_Bar.php:852, ../includes/Traits/Admin.php:993, ../includes/Traits/Elements.php:165
+#: ../includes/Elements/Progress_Bar.php:852, ../includes/Traits/Admin.php:993, ../includes/Traits/Elements.php:176
 msgid "Counter"
 msgstr ""
 
@@ -10098,19 +10098,19 @@ msgstr ""
 msgid "Liquid Glass Effects"
 msgstr ""
 
-#: ../includes/Extensions/Liquid_Glass_Effect.php:44, ../includes/Extensions/Liquid_Glass_Effect.php:65
+#: ../includes/Extensions/Liquid_Glass_Effect.php:44, ../includes/Extensions/Liquid_Glass_Effect.php:66
 msgid "Effect 1"
 msgstr ""
 
-#: ../includes/Extensions/Liquid_Glass_Effect.php:45, ../includes/Extensions/Liquid_Glass_Effect.php:66
+#: ../includes/Extensions/Liquid_Glass_Effect.php:45, ../includes/Extensions/Liquid_Glass_Effect.php:67
 msgid "Effect 2"
 msgstr ""
 
-#: ../includes/Extensions/Liquid_Glass_Effect.php:46, ../includes/Extensions/Liquid_Glass_Effect.php:67
+#: ../includes/Extensions/Liquid_Glass_Effect.php:46, ../includes/Extensions/Liquid_Glass_Effect.php:68
 msgid "Effect 3"
 msgstr ""
 
-#: ../includes/Extensions/Liquid_Glass_Effect.php:47, ../includes/Extensions/Liquid_Glass_Effect.php:68
+#: ../includes/Extensions/Liquid_Glass_Effect.php:47, ../includes/Extensions/Liquid_Glass_Effect.php:69
 msgid "Effect 4"
 msgstr ""
 
@@ -10118,7 +10118,11 @@ msgstr ""
 msgid "Effect 5"
 msgstr ""
 
-#: ../includes/Extensions/Liquid_Glass_Effect.php:60
+#: ../includes/Extensions/Liquid_Glass_Effect.php:49
+msgid "Effect 6"
+msgstr ""
+
+#: ../includes/Extensions/Liquid_Glass_Effect.php:61
 msgid "Shadow Effects"
 msgstr ""
 
@@ -10654,7 +10658,7 @@ msgstr ""
 msgid "Deactivate"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:286, ../includes/Traits/Admin.php:412, ../includes/Traits/Admin.php:1010, ../includes/Traits/Elements.php:297
+#: ../includes/Traits/Admin.php:286, ../includes/Traits/Admin.php:412, ../includes/Traits/Admin.php:1010, ../includes/Traits/Elements.php:308
 msgid "Protected Content"
 msgstr ""
 
@@ -10666,7 +10670,7 @@ msgstr ""
 msgid "View Demo"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:295, ../includes/Traits/Admin.php:397, ../includes/Traits/Admin.php:901, ../includes/Traits/Elements.php:279
+#: ../includes/Traits/Admin.php:295, ../includes/Traits/Admin.php:397, ../includes/Traits/Admin.php:901, ../includes/Traits/Elements.php:290
 msgid "Smart Post List"
 msgstr ""
 
@@ -10674,7 +10678,7 @@ msgstr ""
 msgid "Display your blog posts in an amazing grid layout with advanced search & filter options."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:304, ../includes/Traits/Admin.php:432, ../includes/Traits/Admin.php:1405, ../includes/Traits/Elements.php:339
+#: ../includes/Traits/Admin.php:304, ../includes/Traits/Admin.php:432, ../includes/Traits/Admin.php:1405, ../includes/Traits/Elements.php:350
 msgid "Woo Product Slider"
 msgstr ""
 
@@ -10682,7 +10686,7 @@ msgstr ""
 msgid "Showcase your WooCommerce products beautifully with amazing ready slider layouts."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:313, ../includes/Traits/Admin.php:442, ../includes/Traits/Admin.php:892, ../includes/Traits/Elements.php:273
+#: ../includes/Traits/Admin.php:313, ../includes/Traits/Admin.php:442, ../includes/Traits/Admin.php:892, ../includes/Traits/Elements.php:284
 msgid "Post Carousel"
 msgstr ""
 
@@ -10690,7 +10694,7 @@ msgstr ""
 msgid "Amaze site visitors by displaying your posts creatively. Add transition effects, overlays, & more to showcase your posts beautifully on your site."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:322, ../includes/Traits/Admin.php:427, ../includes/Traits/Admin.php:1284, ../includes/Traits/Elements.php:213
+#: ../includes/Traits/Admin.php:322, ../includes/Traits/Admin.php:427, ../includes/Traits/Admin.php:1284, ../includes/Traits/Elements.php:224
 msgid "Instagram Feed"
 msgstr ""
 
@@ -10718,7 +10722,7 @@ msgstr ""
 msgid "Integrates Google Maps to display locations, routes, and markers easily on your site as your preferences."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:358, ../includes/Traits/Admin.php:402, ../includes/Traits/Admin.php:918, ../includes/Traits/Elements.php:177
+#: ../includes/Traits/Admin.php:358, ../includes/Traits/Admin.php:402, ../includes/Traits/Admin.php:918, ../includes/Traits/Elements.php:188
 msgid "Dynamic Gallery"
 msgstr ""
 
@@ -10766,7 +10770,7 @@ msgstr ""
 msgid "Parallax"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:447, ../includes/Traits/Admin.php:1307, ../includes/Traits/Elements.php:231
+#: ../includes/Traits/Admin.php:447, ../includes/Traits/Admin.php:1307, ../includes/Traits/Elements.php:242
 msgid "LearnDash Course List"
 msgstr ""
 
@@ -10774,11 +10778,11 @@ msgstr ""
 msgid "Particle Effect"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:457, ../includes/Traits/Admin.php:1037, ../includes/Traits/Elements.php:243
+#: ../includes/Traits/Admin.php:457, ../includes/Traits/Admin.php:1037, ../includes/Traits/Elements.php:254
 msgid "Logo Carousel"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:462, ../includes/Traits/Admin.php:1062, ../includes/Traits/Elements.php:201
+#: ../includes/Traits/Admin.php:462, ../includes/Traits/Admin.php:1062, ../includes/Traits/Elements.php:212
 msgid "Image Hotspots"
 msgstr ""
 
@@ -10786,15 +10790,15 @@ msgstr ""
 msgid "Conditional Display"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:472, ../includes/Traits/Admin.php:814, ../includes/Traits/Elements.php:345
+#: ../includes/Traits/Admin.php:472, ../includes/Traits/Admin.php:814, ../includes/Traits/Elements.php:356
 msgid "Advanced Search"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:477, ../includes/Traits/Admin.php:783, ../includes/Traits/Elements.php:309
+#: ../includes/Traits/Admin.php:477, ../includes/Traits/Admin.php:783, ../includes/Traits/Elements.php:320
 msgid "Team Member Carousel"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:487, ../includes/Traits/Admin.php:1468, ../includes/Traits/Admin.php:1495, ../includes/Traits/Elements.php:363
+#: ../includes/Traits/Admin.php:487, ../includes/Traits/Admin.php:1468, ../includes/Traits/Admin.php:1495, ../includes/Traits/Elements.php:374
 msgid "Woo Account Dashboard"
 msgstr ""
 
@@ -10882,43 +10886,43 @@ msgstr ""
 msgid "Liquid Glass Effect"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:741, ../includes/Traits/Elements.php:255
+#: ../includes/Traits/Admin.php:741, ../includes/Traits/Elements.php:266
 msgid "Offcanvas"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:750, ../includes/Traits/Elements.php:153
+#: ../includes/Traits/Admin.php:750, ../includes/Traits/Elements.php:164
 msgid "Advanced Menu"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:766, ../includes/Traits/Elements.php:315
+#: ../includes/Traits/Admin.php:766, ../includes/Traits/Elements.php:326
 msgid "Testimonial Slider"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:775, ../includes/Traits/Elements.php:303
+#: ../includes/Traits/Admin.php:775, ../includes/Traits/Elements.php:314
 msgid "Static Product"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:883, ../includes/Traits/Elements.php:267
+#: ../includes/Traits/Admin.php:883, ../includes/Traits/Elements.php:278
 msgid "Post Block"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:910, ../includes/Traits/Elements.php:159
+#: ../includes/Traits/Admin.php:910, ../includes/Traits/Elements.php:170
 msgid "Content Timeline"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:985, ../includes/Traits/Elements.php:225
+#: ../includes/Traits/Admin.php:985, ../includes/Traits/Elements.php:236
 msgid "Interactive Promo"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1001, ../includes/Traits/Elements.php:237
+#: ../includes/Traits/Admin.php:1001, ../includes/Traits/Elements.php:248
 msgid "Lightbox & Modal"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1019, ../includes/Traits/Elements.php:195
+#: ../includes/Traits/Admin.php:1019, ../includes/Traits/Elements.php:206
 msgid "Image Comparison"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1028, ../includes/Traits/Elements.php:183
+#: ../includes/Traits/Admin.php:1028, ../includes/Traits/Elements.php:194
 msgid "Flip Carousel"
 msgstr ""
 
@@ -10926,15 +10930,15 @@ msgstr ""
 msgid "Interactive Cards"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1054, ../includes/Traits/Elements.php:261
+#: ../includes/Traits/Admin.php:1054, ../includes/Traits/Elements.php:272
 msgid "One Page Navigation"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1071, ../includes/Traits/Elements.php:171
+#: ../includes/Traits/Admin.php:1071, ../includes/Traits/Elements.php:182
 msgid "Divider"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1079, ../includes/Traits/Elements.php:207
+#: ../includes/Traits/Admin.php:1079, ../includes/Traits/Elements.php:218
 msgid "Image Scroller"
 msgstr ""
 
@@ -10942,15 +10946,15 @@ msgstr ""
 msgid "Marketing Elements"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1149, ../includes/Traits/Elements.php:291
+#: ../includes/Traits/Admin.php:1149, ../includes/Traits/Elements.php:302
 msgid "Multicolumn Pricing Table"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1158, ../includes/Traits/Elements.php:285
+#: ../includes/Traits/Admin.php:1158, ../includes/Traits/Elements.php:296
 msgid "Price Menu"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1243, ../includes/Traits/Elements.php:249
+#: ../includes/Traits/Admin.php:1243, ../includes/Traits/Elements.php:260
 msgid "Mailchimp"
 msgstr ""
 
@@ -10966,11 +10970,11 @@ msgstr ""
 msgid "LearnDash Elements"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1397, ../includes/Traits/Elements.php:333
+#: ../includes/Traits/Admin.php:1397, ../includes/Traits/Elements.php:344
 msgid "Woo Product Collections"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1437, ../includes/Traits/Elements.php:351
+#: ../includes/Traits/Admin.php:1437, ../includes/Traits/Elements.php:362
 msgid "Woo Thank You"
 msgstr ""
 
@@ -11450,15 +11454,15 @@ msgid ""
 "            popular plugins and themes. No spam, I promise."
 msgstr ""
 
-#: ../includes/Traits/Elements.php:189
+#: ../includes/Traits/Elements.php:200
 msgid "Google Map"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:219
+#: ../includes/Traits/Elements.php:230
 msgid "Interactive Card"
 msgstr ""
 
-#: ../includes/Traits/Elements.php:327
+#: ../includes/Traits/Elements.php:338
 msgid "X (Twitter) Feed Carousel"
 msgstr ""
 

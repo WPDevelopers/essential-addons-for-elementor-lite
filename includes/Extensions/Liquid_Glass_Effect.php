@@ -45,6 +45,8 @@ class Liquid_Glass_Effect {
 					'effect2' => esc_html__( 'Effect 2', 'essential-addons-for-elementor-lite' ),
 					'effect3' => esc_html__( 'Effect 3', 'essential-addons-for-elementor-lite' ),
 					'effect4' => esc_html__( 'Effect 4', 'essential-addons-for-elementor-lite' ),
+					'effect5' => esc_html__( 'Effect 5', 'essential-addons-for-elementor-lite' ),
+					'effect6' => esc_html__( 'Effect 6', 'essential-addons-for-elementor-lite' ),
 				],
 				'prefix_class' => 'eael_liquid_glass-',
 				'condition' => [
