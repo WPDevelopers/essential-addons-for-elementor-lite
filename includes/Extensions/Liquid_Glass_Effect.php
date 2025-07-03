@@ -53,6 +53,26 @@ class Liquid_Glass_Effect {
 			]
 		);
 
+		$element->add_control(
+			'eael_liquid_glass_shadow_effect',
+			[
+				'label'   => esc_html__( 'Shadow Effects', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'effect1',
+				'options' => [
+					'' 		 => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
+					'effect1' => esc_html__( 'Effect 1', 'essential-addons-for-elementor-lite' ),
+					'effect2' => esc_html__( 'Effect 2', 'essential-addons-for-elementor-lite' ),
+					'effect3' => esc_html__( 'Effect 3', 'essential-addons-for-elementor-lite' ),
+					'effect4' => esc_html__( 'Effect 4', 'essential-addons-for-elementor-lite' ),
+				],
+				'prefix_class' => 'eael_liquid_glass_shadow-',
+				'condition'    => [
+					'eael_liquid_glass_effect_switch' => 'yes',
+				]
+			]
+		);
+
 		$element->end_controls_section();
 	}
 
