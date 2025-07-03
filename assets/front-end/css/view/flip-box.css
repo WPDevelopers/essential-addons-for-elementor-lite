@@ -41,6 +41,7 @@
 }
 .eael-elements-flip-box-vertical-align {
   width: 100%;
+  display: inline;
 }
 .eael-elements-flip-box-padding {
   padding: 0px 30px 5px 30px;
@@ -175,6 +176,7 @@
           transform: rotateX(0deg);
   -webkit-transform: rotateY(0deg);
           transform: rotateY(0deg);
+  overflow: hidden;
 }
 /*--- Flip ---*/
 .eael-flip-box--3d .eael-elements-flip-box-vertical-align {

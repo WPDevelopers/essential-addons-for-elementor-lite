@@ -52,6 +52,7 @@
 
 .eael-elements-flip-box-vertical-align {
 	width: 100%;
+	display: inline;
 }
 
 .eael-elements-flip-box-padding {
@@ -198,6 +199,7 @@
 	backface-visibility: hidden;
 	transform: rotateX(0deg);
 	transform: rotateY(0deg);
+	overflow: hidden;
 }
 
 
