@@ -211,7 +211,7 @@
 						}
 					} else {
 						$(".eael-post-appender", $scope).append($content);
-
+						
 						if ($layout == "masonry") {
 							var $isotope = $(
 								".eael-post-appender",
@@ -242,6 +242,8 @@
 						if (found_posts.hasClass('found_posts') && found_posts.text() - obj.posts_per_page < 1) {
 							filterable_gallery_load_more_btn($this);
 						}
+						found_posts.remove();
+
 					} else {
 						if ($max_page && $data.page >= $max_page) {
 							$this.addClass('hide-load-more');
