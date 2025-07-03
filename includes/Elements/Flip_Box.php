@@ -941,7 +941,6 @@ class Flip_Box extends Widget_Base
                         'default' => '#502fc6',
                     ],
                 ],
-                'separator' => 'after',
             ]
         );
 
@@ -951,6 +950,7 @@ class Flip_Box extends Widget_Base
                 'label'      => esc_html__('Content Padding', 'essential-addons-for-elementor-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
+                'separator' => 'before',
                 'selectors'  => [
                     '{{WRAPPER}} .eael-elements-flip-box-front-container' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     '{{WRAPPER}} .eael-elements-flip-box-rear-container'  => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
