@@ -189,7 +189,6 @@
 	height: 100%;
 	transform-style: preserve-3d;
 	transition: all 500ms ease;
-	overflow: hidden;
 }
 
 .eael-elements-flip-box-rear-container,
@@ -358,7 +357,8 @@
 	visibility: hidden;
 	transform: scale(0.75);
 }
-.eael-animate-zoom-out.eael-elements-flip-box-container .eael-elements-flip-box-flip-card{
+.eael-animate-zoom-out.eael-elements-flip-box-container .eael-elements-flip-box-flip-card,
+.eael-animate-zoom-in.eael-elements-flip-box-container .eael-elements-flip-box-flip-card{
 	overflow: hidden;
 }
 .eael-animate-fade.eael-elements-flip-box-container.eael-flip-box-hover:hover .eael-elements-flip-box-front-container,
