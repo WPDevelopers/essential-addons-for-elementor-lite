@@ -143,6 +143,7 @@ class Woo_Product_Gallery extends Widget_Base {
 		}
 		// Content Controls
 		$this->init_content_layout_controls();
+		$this->init_content_image_controls();
 		$this->init_content_product_settings_controls();
 		$this->eael_product_badges();
 		$this->init_content_load_more_controls();
@@ -502,19 +503,6 @@ class Woo_Product_Gallery extends Widget_Base {
 
 		] );
 
-		$this->add_responsive_control(
-			'eael_product_gallery_show_secondary_image',
-			[
-				'label'        => __( 'Secondary Image on Hover', 'essential-addons-for-elementor-lite' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'default'      => 'no',
-				'label_on'     => __( 'How', 'essential-addons-for-elementor-lite' ),
-				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
-				'return_value' => 'yes',
-				'description'  => __( 'Enable to show a secondary image from the product gallery on hover.', 'essential-addons-for-elementor-lite' ),
-			]
-		);
-
 		$this->add_control(
 			'eael_product_gallery_price',
 			[
@@ -530,6 +518,30 @@ class Woo_Product_Gallery extends Widget_Base {
 			]
 		);
 
+		$this->end_controls_section();
+	}
+
+	protected function init_content_image_controls() {
+		$this->start_controls_section( 
+			'eael_section_product_gallery_image_settings', 
+			[
+				'label' => esc_html__( 'Image', 'essential-addons-for-elementor-lite' ),
+			] 
+		);
+
+		$this->add_responsive_control(
+			'eael_product_gallery_show_secondary_image',
+			[
+				'label'        => __( 'Secondary Image on Hover', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'default'      => 'no',
+				'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'description'  => __( 'Enable to show a secondary image from the product gallery on hover.', 'essential-addons-for-elementor-lite' ),
+			]
+		);
+
 		$this->add_group_control(
 			Group_Control_Image_Size::get_type(),
 			[
@@ -537,6 +549,92 @@ class Woo_Product_Gallery extends Widget_Base {
 				'exclude'     => [ 'custom' ],
 				'default'     => 'medium',
 				'label_block' => true,
+			]
+		);
+
+		$this->add_control(
+			'eael_product_gallery_image_height',
+			[
+				'label' => esc_html__( 'Height', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 1000,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+					'em' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-gallery .woocommerce .products .product .eael-product-wrap img' => 'height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_product_gallery_image_object_fitting',
+			[
+				'label'     => esc_html__( 'Render Type', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => [
+					'fill' => [
+						'title' => esc_html__( 'Stretched', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-image',
+					],
+					'cover' => [
+						'title' => esc_html__( 'Cropped', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-frame-expand',
+					],
+					'contain' => [
+						'title' => esc_html__( 'Contain', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-frame-minimize',
+					],
+				],
+				'default'   => 'fill',
+				'toggle'    => true,
+				'condition' => [
+					'eael_product_gallery_image_height[size]!' => '',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-gallery .woocommerce .products .product .eael-product-wrap img' => 'object-fit: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_product_gallery_image_object_position',
+			[
+				'label'     => esc_html__( 'Position', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => [
+					'top' => [
+						'title' => esc_html__( 'Top', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-v-align-top',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-v-align-middle',
+					],
+					'bottom' => [
+						'title' => esc_html__( 'Bottom', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-v-align-bottom',
+					],
+				],
+				'default'   => 'center',
+				'toggle'    => true,
+				'selectors' => [
+					'{{WRAPPER}} .eael-product-gallery .woocommerce .products .product .eael-product-wrap img' => 'object-position: {{VALUE}}',
+				],
+				'condition' => [
+					'eael_product_gallery_image_object_fitting' => 'cover',
+					'eael_product_gallery_image_height[size]!' => '',
+				],
 			]
 		);
 
