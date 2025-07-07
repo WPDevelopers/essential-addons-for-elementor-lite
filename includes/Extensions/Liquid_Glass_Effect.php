@@ -75,6 +75,31 @@ class Liquid_Glass_Effect {
 			]
 		);
 
+		$element->add_control(
+			'eael_liquid_glass_shadow_inner',
+			[
+				'label'     => esc_html__( 'Shadow Settings', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+				'condition' => [
+					'eael_liquid_glass_effect_switch'  => 'yes',
+					'eael_liquid_glass_shadow_effect!' => '',
+				],
+			]
+		);
+
+		$element->add_group_control(
+			\Elementor\Group_Control_Box_Shadow::get_type(),
+			[
+				'name'      => 'eael_liquid_glass_shadow_color',
+				'selector'  => '{{WRAPPER}}.eael_liquid_glass_shadow-effect1, {{WRAPPER}}.eael_liquid_glass_shadow-effect2, {{WRAPPER}}.eael_liquid_glass_shadow-effect3, {{WRAPPER}}.eael_liquid_glass_shadow-effect4',
+				'condition' => [
+					'eael_liquid_glass_effect_switch'  => 'yes',
+					'eael_liquid_glass_shadow_effect!' => '',
+				],
+			]
+		);
+
 		$element->end_controls_section();
 	}
 
