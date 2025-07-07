@@ -283,6 +283,17 @@ trait Controls
                 ]
             );
 
+            /**
+             * @todo Need to remove this control in future version.
+             */
+            $wb->add_control( 
+                'eael_gf_afc_use_parent_data',
+                [
+                    'type' => Controls_Manager::HIDDEN,
+                    'default' => 'no',
+                ]
+            );
+
             if( class_exists( 'ACF' ) ){
                 $fields = Helper::get_all_acf_fields();
                 $key_list = [ '' => esc_html__( 'No Gallery Field Found', 'essential-addons-for-elementor-lite' ) ];
