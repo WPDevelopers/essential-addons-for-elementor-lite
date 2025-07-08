@@ -1,14 +1,14 @@
-=== Essential Addons for Elementor - Popular Elementor Templates and Widgets ===
+=== Essential Addons for Elementor - Popular Elementor Templates & Widgets ===
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, sumaiyasiddika, rudlinkon, nhrrob, jakariaistauk, himadree12
 Tags: elementor, elementor addons, elementor widgets, elementor templates, elementor woocommerce
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.1.20
+Stable tag: 6.2.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-Elementor addon offering 100+ widgets and templates — Elementor Info Box, Post Grid, Menu, Accordion, Countdown, Gallery, WooCommerce & more.
+Elementor addon offering 100+ widgets and templates — Elementor Gallery, Slider, Form, Post Grid, Menu, Accordion, WooCommerce & more.
 
 == Description ==
 
@@ -28,8 +28,8 @@ No extra resources or messy codes to slow down your website. Optimized for super
 Enable and disable individual elements adding to make your page load faster and smoother. You can deactivate unnecessary widgets to keep the site light.
 
 
-### 5000+ Ready Elementor Templates & Blocks through **Templately**
-Grab access to 5,000 pre-made templates from the ultimate templates cloud for WordPress, Templately, that come with Essential Addons.Unlock stunning Elementor templates, blocks & sections;and design your website to stand out from the crowd.
+### 6000+ Ready WordPress Templates & Blocks through **Templately**
+Grab access to 3,000+ pre-made Elementor templates from the ultimate templates cloud for WordPress, Templately, that come with Essential Addons.Unlock stunning Elementor templates, blocks & sections;and design your website to stand out from the crowd.
 
 https://youtu.be/Z73muoczARc
 
@@ -112,6 +112,7 @@ We have designed more than 50 of the most useful widgets to enhance your Element
 54. [Woo Product Images](https://essential-addons.com/woo-product-images/)- Display WooCommerce product images with stunning effects
 55. [Woo Add to Cart](https://essential-addons.com/woo-add-to-cart/)- Make shopping easier with an ‘Add to Cart’ button
 56. [Breadcrumbs](https://essential-addons.com/breadcrumbs/)- Improve navigation with breadcrumbs for easy exploration
+57. [Code Snippet](https://essential-addons.com/code-snippet)- Display beautifully formatted code on your Elementor website
 
 Extensions (Free):
 
@@ -313,6 +314,15 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.2.0 - 03/07/2025 =
+
+- Added: New Widget | EA Code Snippet
+- Improved: Security Enhancements
+- Improved: EA Event Calendar | Added label to search field for accessibility
+- Fixed: EA Woo Product Gallery | Resolved cropping and misalignment issues with custom image sizes
+- Few minor bug fixes & improvements
+
 
 = 6.1.20 - 26/06/2025 =
 
