@@ -1201,7 +1201,7 @@ msgstr ""
 msgid "Highlight"
 msgstr ""
 
-#: ../includes/Elements/Advanced_Data_Table.php:669, ../includes/Elements/Adv_Tabs.php:251, ../includes/Elements/Countdown.php:514, ../includes/Elements/Data_Table.php:178, ../includes/Elements/Filterable_Gallery.php:335, ../includes/Elements/Filterable_Gallery.php:377, ../includes/Elements/Flip_Box.php:268, ../includes/Elements/Flip_Box.php:508, ../includes/Elements/Flip_Box.php:736, ../includes/Elements/GravityForms.php:1303, ../includes/Elements/Info_Box.php:114, ../includes/Elements/Info_Box.php:1153, ../includes/Elements/Info_Box.php:1233, ../includes/Elements/Info_Box.php:1371, ../includes/Elements/Info_Box.php:1467, ../includes/Elements/Interactive_Circle.php:466, ../includes/Elements/Post_Grid.php:1675, ../includes/Elements/Simple_Menu.php:1556, ../includes/Elements/Sticky_Video.php:602, ../includes/Elements/SVG_Draw.php:244, ../includes/Elements/SVG_Draw.php:270, ../includes/Elements/SVG_Draw.php:286, ../includes/Extensions/Liquid_Glass_Effect.php:65, ../includes/Extensions/Table_of_Content.php:1041, ../includes/Extensions/Table_of_Content.php:1280
+#: ../includes/Elements/Advanced_Data_Table.php:669, ../includes/Elements/Adv_Tabs.php:251, ../includes/Elements/Countdown.php:514, ../includes/Elements/Data_Table.php:178, ../includes/Elements/Filterable_Gallery.php:335, ../includes/Elements/Filterable_Gallery.php:377, ../includes/Elements/Flip_Box.php:268, ../includes/Elements/Flip_Box.php:508, ../includes/Elements/Flip_Box.php:736, ../includes/Elements/GravityForms.php:1303, ../includes/Elements/Info_Box.php:114, ../includes/Elements/Info_Box.php:1153, ../includes/Elements/Info_Box.php:1233, ../includes/Elements/Info_Box.php:1371, ../includes/Elements/Info_Box.php:1467, ../includes/Elements/Interactive_Circle.php:466, ../includes/Elements/Post_Grid.php:1675, ../includes/Elements/Simple_Menu.php:1556, ../includes/Elements/Sticky_Video.php:602, ../includes/Elements/SVG_Draw.php:244, ../includes/Elements/SVG_Draw.php:270, ../includes/Elements/SVG_Draw.php:286, ../includes/Extensions/Liquid_Glass_Effect.php:212, ../includes/Extensions/Table_of_Content.php:1041, ../includes/Extensions/Table_of_Content.php:1280
 msgid "None"
 msgstr ""
 
@@ -9018,7 +9018,7 @@ msgstr ""
 msgid "Form Height"
 msgstr ""
 
-#: ../includes/Elements/TypeForm.php:272, ../includes/Extensions/Hover_Effect.php:96, ../includes/Extensions/Hover_Effect.php:109, ../includes/Extensions/Hover_Effect.php:718, ../includes/Extensions/Hover_Effect.php:732, ../includes/Extensions/Scroll_to_Top.php:319
+#: ../includes/Elements/TypeForm.php:272, ../includes/Extensions/Hover_Effect.php:96, ../includes/Extensions/Hover_Effect.php:109, ../includes/Extensions/Hover_Effect.php:718, ../includes/Extensions/Hover_Effect.php:732, ../includes/Extensions/Liquid_Glass_Effect.php:92, ../includes/Extensions/Scroll_to_Top.php:319
 msgid "Opacity"
 msgstr ""
 
@@ -10358,19 +10358,19 @@ msgstr ""
 msgid "Liquid Glass Effects"
 msgstr ""
 
-#: ../includes/Extensions/Liquid_Glass_Effect.php:44, ../includes/Extensions/Liquid_Glass_Effect.php:66
+#: ../includes/Extensions/Liquid_Glass_Effect.php:44, ../includes/Extensions/Liquid_Glass_Effect.php:213
 msgid "Effect 1"
 msgstr ""
 
-#: ../includes/Extensions/Liquid_Glass_Effect.php:45, ../includes/Extensions/Liquid_Glass_Effect.php:67
+#: ../includes/Extensions/Liquid_Glass_Effect.php:45, ../includes/Extensions/Liquid_Glass_Effect.php:214
 msgid "Effect 2"
 msgstr ""
 
-#: ../includes/Extensions/Liquid_Glass_Effect.php:46, ../includes/Extensions/Liquid_Glass_Effect.php:68
+#: ../includes/Extensions/Liquid_Glass_Effect.php:46, ../includes/Extensions/Liquid_Glass_Effect.php:215
 msgid "Effect 3"
 msgstr ""
 
-#: ../includes/Extensions/Liquid_Glass_Effect.php:47, ../includes/Extensions/Liquid_Glass_Effect.php:69
+#: ../includes/Extensions/Liquid_Glass_Effect.php:47, ../includes/Extensions/Liquid_Glass_Effect.php:216
 msgid "Effect 4"
 msgstr ""
 
@@ -10383,7 +10383,35 @@ msgid "Effect 6"
 msgstr ""
 
 #: ../includes/Extensions/Liquid_Glass_Effect.php:61
+msgid "Liquid Glass Settings"
+msgstr ""
+
+#: ../includes/Extensions/Liquid_Glass_Effect.php:73
+msgid "Bankground Color"
+msgstr ""
+
+#: ../includes/Extensions/Liquid_Glass_Effect.php:121
+msgid "Backdrop Filter"
+msgstr ""
+
+#: ../includes/Extensions/Liquid_Glass_Effect.php:150
+msgid "Noise Distortion Settings"
+msgstr ""
+
+#: ../includes/Extensions/Liquid_Glass_Effect.php:163
+msgid "Noise Freq"
+msgstr ""
+
+#: ../includes/Extensions/Liquid_Glass_Effect.php:185
+msgid "Strength"
+msgstr ""
+
+#: ../includes/Extensions/Liquid_Glass_Effect.php:207
 msgid "Shadow Effects"
+msgstr ""
+
+#: ../includes/Extensions/Liquid_Glass_Effect.php:228
+msgid "Shadow Settings"
 msgstr ""
 
 #: ../includes/Extensions/Post_Duplicator.php:35, ../includes/Extensions/Post_Duplicator.php:56

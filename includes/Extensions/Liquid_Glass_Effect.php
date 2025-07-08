@@ -145,6 +145,63 @@ class Liquid_Glass_Effect {
 		);
 
 		$element->add_control(
+			'eael_liquid_glass_effect_noise_settings',
+			[
+				'label'     => esc_html__( 'Noise Distortion Settings', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+				'condition' => [
+					'eael_liquid_glass_effect_switch' => 'yes',
+					'eael_liquid_glass_effect' => ['effect4', 'effect5', 'effect6'],
+				]
+			]
+		);
+
+		$element->add_control(
+			'eael_liquid_glass_effect_noise_freq',
+			[
+				'label' => esc_html__( 'Noise Freq', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 0.02,
+						'step' => 0.001,
+					],
+				],
+				'default' => [
+					'size' => 0.008,
+				],
+				'condition' => [
+					'eael_liquid_glass_effect_switch' => 'yes',
+					'eael_liquid_glass_effect' => ['effect4', 'effect5', 'effect6'],
+				],
+			]
+		);
+
+		$element->add_control(
+			'eael_liquid_glass_effect_noise_strength',
+			[
+				'label' => esc_html__( 'Strength', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 200,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'size' => 77,
+				],
+				'condition' => [
+					'eael_liquid_glass_effect_switch' => 'yes',
+					'eael_liquid_glass_effect' => ['effect4', 'effect5', 'effect6'],
+				],
+			]
+		);
+
+		$element->add_control(
 			'eael_liquid_glass_shadow_effect',
 			[
 				'label'     => esc_html__( 'Shadow Effects', 'essential-addons-for-elementor-lite' ),
@@ -195,5 +252,13 @@ class Liquid_Glass_Effect {
 
 	public function before_render( $element ) {
 		$settings = $element->get_settings_for_display();
+
+		if( !empty( $settings['eael_liquid_glass_effect_noise_strength']['size'] ) || !empty( $settings['eael_liquid_glass_effect_noise_freq']['size'] ) ) {
+			$strength_settings = [
+				'scale' => $settings['eael_liquid_glass_effect_noise_strength']['size'],
+				'freq' => $settings['eael_liquid_glass_effect_noise_freq']['size'],
+			];
+			$element->add_render_attribute( '_wrapper', 'data-eael_glass_effects', wp_json_encode( $strength_settings ) );
+		}
 	}
 }
