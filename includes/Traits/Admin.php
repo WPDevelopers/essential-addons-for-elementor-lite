@@ -1342,12 +1342,12 @@ trait Admin {
 					    ]
 					],
 					'figma-design' => [
-					    'title'    => __( 'Figma Design', 'essential-addons-for-elementor-lite' ),
+					    'title'    => __( 'Figma Design Elements', 'essential-addons-for-elementor-lite' ),
 					    'icon'     => 'ea-figma-to-elementor',
 					    'elements' => [
 							'figma-to-elementor'   => [
 							    'key'         => 'figma-to-elementor',
-							    'title'       => __( 'Figma to Elementor', 'essential-addons-for-elementor-lite' ),
+							    'title'       => __( 'Figma to Elementor Converter', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/figma-to-elementor/',
 							    'doc_link'    => 'https://essential-addons.com/docs/figma-to-elementor/',
 							    'is_pro'      => true,
