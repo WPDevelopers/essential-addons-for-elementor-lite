@@ -14,6 +14,7 @@ use Elementor\Repeater;
 use Elementor\Utils;
 use Elementor\Widget_Base;
 use Essential_Addons_Elementor\Classes\Helper as HelperCLass;
+use Essential_Addons_Elementor\Classes\Recaptcha_Manager;
 use Essential_Addons_Elementor\Traits\Login_Registration;
 use WP_Roles;
 
@@ -193,6 +194,7 @@ class Login_Register extends Widget_Base {
 	public function get_script_depends() {
 		$scripts   = parent::get_script_depends();
 		$scripts[] = 'eael-recaptcha';
+		$scripts[] = 'eael-recaptcha-handler'; // New unified reCAPTCHA handler
 
 		return apply_filters( 'eael/login-register/scripts', $scripts );
 	}
@@ -5800,33 +5802,21 @@ class Login_Register extends Widget_Base {
 			$this->resetpassword_in_popup_selector = ! empty( $this->ds[ 'lostpassword_email_message_reset_link_popup_selector' ] ) ? sanitize_text_field( $this->ds[ 'lostpassword_email_message_reset_link_popup_selector' ] ) : '';
 		}
 
-		$login_recaptcha_version = $register_recaptcha_version = $lostpassword_recaptcha_version = ! empty( $this->ds['login_register_recaptcha_version'] ) ? $this->ds['login_register_recaptcha_version'] : 'v2';
-
-		if ( get_option('eael_recaptcha_sitekey_v3') && ( 'v3' === $login_recaptcha_version || 'v3' === $register_recaptcha_version || 'v3' === $lostpassword_recaptcha_version)  ) {
-			$site_key = esc_html( get_option('eael_recaptcha_sitekey_v3') );
-			
-	        if ( $recaptcha_language = esc_html( get_option( 'eael_recaptcha_language_v3' ) ) ) {
-		        $recaptcha_api_args1['hl'] = $recaptcha_language;
-	        }
-
-            $recaptcha_api_args1['render'] = $site_key;
-            
-	        $recaptcha_api_args1 = apply_filters( 'eael_lr_recaptcha_api_args_v3', $recaptcha_api_args1 );
-	        $recaptcha_api_args1 = http_build_query( $recaptcha_api_args1 );
-            wp_register_script('eael-recaptcha-v3', "https://www.recaptcha.net/recaptcha/api.js?{$recaptcha_api_args1}", false, EAEL_PLUGIN_VERSION, false);
-			wp_enqueue_script('eael-recaptcha-v3');
-			wp_dequeue_script('eael-recaptcha');
-        }
+		// Use unified Recaptcha_Manager for script enqueuing
+		$recaptcha_version = Recaptcha_Manager::get_version( $this->ds );
+		Recaptcha_Manager::enqueue_scripts( $recaptcha_version, $this->ds );
 		?>
         <div class="eael-login-registration-wrapper <?php echo empty( $form_image_id ) ? '' : esc_attr( 'has-illustration' ); ?>"
              data-is-ajax="<?php echo esc_attr( $this->get_settings_for_display( 'enable_ajax' ) ); ?>"
              data-widget-id="<?php echo esc_attr( $this->get_id() ); ?>"
              data-page-id="<?php echo esc_attr( $this->page_id ); ?>"
-             data-recaptcha-sitekey="<?php echo esc_attr( get_option( 'eael_recaptcha_sitekey' ) ); ?>"
-			 data-recaptcha-sitekey-v3="<?php echo esc_attr( get_option( 'eael_recaptcha_sitekey_v3' ) ); ?>"
-			 data-login-recaptcha-version="<?php echo esc_attr( $login_recaptcha_version ); ?>"
-			 data-register-recaptcha-version="<?php echo esc_attr( $register_recaptcha_version ); ?>"
-			 data-lostpassword-recaptcha-version="<?php echo esc_attr( $lostpassword_recaptcha_version ); ?>"
+             <?php
+			 // Use unified Recaptcha_Manager for data attributes
+			 $recaptcha_data_attrs = Recaptcha_Manager::get_global_data_attributes( $this->ds );
+			 foreach ( $recaptcha_data_attrs as $attr => $value ) {
+				 echo esc_attr( $attr ) . '="' . $value . '" ';
+			 }
+			 ?>
              data-redirect-to="<?php echo esc_attr( $this->login_custom_redirect_url ); ?>"
              data-resetpassword-redirect-to="<?php echo esc_attr( $resetpassword_redirect_url ); ?>"
         >
@@ -5935,8 +5925,13 @@ class Login_Register extends Widget_Base {
             <section
                     id="eael-login-form-wrapper"
                     class="<?php echo esc_attr( $default_hide_class ); ?>"
-                    data-recaptcha-theme="<?php echo esc_attr( $rc_theme ); ?>"
-                    data-recaptcha-size="<?php echo esc_attr( $rc_size ); ?>">
+                    <?php
+                    // Use unified Recaptcha_Manager for form data attributes
+                    $login_recaptcha_attrs = Recaptcha_Manager::get_data_attributes( 'login', $this->ds );
+                    foreach ( $login_recaptcha_attrs as $attr => $value ) {
+                        echo esc_attr( $attr ) . '="' . $value . '" ';
+                    }
+                    ?>>
                 <div class="eael-login-form-wrapper eael-lr-form-wrapper style-2 <?php echo esc_attr( $icon_class ); ?>">
 					<?php
 					if ( $show_logout_link && is_user_logged_in() && ! $this->in_editor ) {
@@ -6190,8 +6185,13 @@ class Login_Register extends Widget_Base {
             <section
                     id="eael-register-form-wrapper"
                     class="<?php echo esc_attr( $default_hide_class ); ?>"
-                    data-recaptcha-theme="<?php echo esc_attr( $rc_theme ); ?>"
-                    data-recaptcha-size="<?php echo esc_attr( $rc_size ); ?>"
+                    <?php
+                    // Use unified Recaptcha_Manager for form data attributes
+                    $register_recaptcha_attrs = Recaptcha_Manager::get_data_attributes( 'register', $this->ds );
+                    foreach ( $register_recaptcha_attrs as $attr => $value ) {
+                        echo esc_attr( $attr ) . '="' . $value . '" ';
+                    }
+                    ?>
                     data-use-weak-password="<?php echo esc_attr( $use_weak_password ); ?>"
                     data-password-min-length="<?php echo esc_attr( $password_min_length ); ?>"
                     data-password-one-uppercase="<?php echo esc_attr( $password_one_uppercase ); ?>"
@@ -6515,8 +6515,13 @@ class Login_Register extends Widget_Base {
             <section
                     id="eael-lostpassword-form-wrapper"
                     class="<?php echo esc_attr( $default_hide_class ); ?>"
-					data-recaptcha-theme="<?php echo esc_attr( $rc_theme ); ?>"
-                    data-recaptcha-size="<?php echo esc_attr( $rc_size ); ?>"
+					<?php
+                    // Use unified Recaptcha_Manager for form data attributes
+                    $lostpassword_recaptcha_attrs = Recaptcha_Manager::get_data_attributes( 'lostpassword', $this->ds );
+                    foreach ( $lostpassword_recaptcha_attrs as $attr => $value ) {
+                        echo esc_attr( $attr ) . '="' . $value . '" ';
+                    }
+                    ?>
                     >
                 <div class="eael-lostpassword-form-wrapper eael-lr-form-wrapper style-2 <?php echo esc_attr( $icon_class ); ?>">
 					<?php
@@ -7045,14 +7050,8 @@ class Login_Register extends Widget_Base {
 	}
 
 	protected function print_bot_protection_node( $form_type = 'login' ) {
-		if ( 'yes' === $this->get_settings_for_display( "enable_{$form_type}_recaptcha" ) || 'v3' === $this->ds["login_register_recaptcha_version"] ) {
-			$id = "{$form_type}-recaptcha-node-" . esc_attr( $this->get_id() );
-			echo "<input type='hidden' name='g-recaptcha-enabled' value='1'/><div id='" . esc_attr( $id ) . "' class='eael-recaptcha-wrapper'></div>";
-
-			if( 'v3' === $this->ds["login_register_recaptcha_version"] && ( ! $this->ds[ 'enable_ajax' ] ) ){
-				echo "<input type='hidden' name='action' value='eael_login_register_form'/>";
-			}
-		}
+		// Use the new unified Recaptcha_Manager for reCAPTCHA handling
+		echo Recaptcha_Manager::render_node( $form_type, $this->get_id(), $this->get_settings_for_display() );
 
 		if ( ! empty( $this->cloudflare_turnstile_sitekey ) && 'yes' === $this->get_settings_for_display( "enable_cloudflare_turnstile" ) && ( 'yes' === $this->get_settings_for_display( "enable_cloudflare_turnstile_on_{$form_type}" ) ) ) {
 			$id = "eael-{$form_type}-cloudflare-turnstile-" . esc_attr( $this->get_id() );

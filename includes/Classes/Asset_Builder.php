@@ -311,6 +311,9 @@ class Asset_Builder {
 
 		wp_register_script( 'eael-general', EAEL_PLUGIN_URL . 'assets/front-end/js/view/general.min.js', $js_deps, EAEL_PLUGIN_VERSION, true );
 		wp_register_style( 'eael-general', EAEL_PLUGIN_URL . "assets/front-end/css/view/general.min.css", $css_deps, EAEL_PLUGIN_VERSION );
+
+		// Register unified reCAPTCHA handler
+		wp_register_script( 'eael-recaptcha-handler', EAEL_PLUGIN_URL . 'src/js/modules/recaptcha-handler.js', [ 'jquery' ], EAEL_PLUGIN_VERSION, true );
 	}
 
 	/**

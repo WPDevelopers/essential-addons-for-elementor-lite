@@ -7,23 +7,12 @@ eael.hooks.addAction("init", "ea", () => {
 
         const $wrap = $scope.find('.eael-login-registration-wrapper');// cache wrapper
         const widgetId = $wrap.data('widget-id');
-        const recaptchaSiteKey = $wrap.data('recaptcha-sitekey');
-        const recaptchaSiteKeyV3 = $wrap.data('recaptcha-sitekey-v3');
         const isProAndAjaxEnabled = typeof $wrap.data('is-ajax') !== 'undefined' && $wrap.data('is-ajax') == 'yes';
         const loggedInLocation = $scope.find('[data-logged-in-location]').data('logged-in-location');
         const $loginFormWrapper = $scope.find("#eael-login-form-wrapper");
         const $lostpasswordFormWrapper = $scope.find("#eael-lostpassword-form-wrapper");
         const $resetpasswordFormWrapper = $scope.find("#eael-resetpassword-form-wrapper");
-        const loginRcTheme = $loginFormWrapper.data('recaptcha-theme');
-        const loginRcSize = $loginFormWrapper.data('recaptcha-size');
         const $regFormWrapper = $scope.find("#eael-register-form-wrapper");
-        const regRcTheme = $regFormWrapper.data('recaptcha-theme');
-        const regRcSize = $regFormWrapper.data('recaptcha-size');
-        const lostpasswordRcTheme = $lostpasswordFormWrapper.data('recaptcha-theme');
-        const lostpasswordRcSize = $lostpasswordFormWrapper.data('recaptcha-size');
-        const loginRecaptchaVersion = $wrap.data('login-recaptcha-version');
-        const registerRecaptchaVersion = $wrap.data('register-recaptcha-version');
-        const lostpasswordRecaptchaVersion = $wrap.data('lostpassword-recaptcha-version');
         const $regLinkAction = $scope.find('#eael-lr-reg-toggle');
         const $loginLinkAction = $scope.find('#eael-lr-login-toggle');
         const $lostpasswordLinkAction = $scope.find('#eael-lr-lostpassword-toggle');
@@ -33,13 +22,13 @@ eael.hooks.addAction("init", "ea", () => {
         const $passConfirmFieldRegister = $regFormWrapper.find('#form-field-confirm_pass');
         const $pass1Field = $resetpasswordFormWrapper.find('#eael-pass1');
         const $pass2Field = $resetpasswordFormWrapper.find('#eael-pass2');
-        const recaptchaAvailable = (typeof grecaptcha !== 'undefined' && grecaptcha !== null);
         const params = new URLSearchParams(location.search);
 
-        let loginRecaptchaNode = document.getElementById('login-recaptcha-node-' + widgetId);
-        let registerRecaptchaNode = document.getElementById('register-recaptcha-node-' + widgetId);
-        let lostpasswordRecaptchaNode = document.getElementById('lostpassword-recaptcha-node-' + widgetId);
-                
+        // Initialize unified reCAPTCHA handler
+        if (typeof window.EAELRecaptchaHandler !== 'undefined') {
+            window.EAELRecaptchaHandler.create($scope);
+        }
+
         if ( loggedInLocation !== undefined && loggedInLocation !== '' ) {
             location.replace(loggedInLocation);
         }
@@ -190,24 +179,7 @@ eael.hooks.addAction("init", "ea", () => {
                 $('#eael-login-nonce, #eael-register-nonce, #eael-lostpassword-nonce, #eael-resetpassword-nonce').val(updatedNonce);
             });
 
-            if(!isProAndAjaxEnabled){
-                let isRecaptchaVersion3 = false;
-                isRecaptchaVersion3 = loginRecaptchaVersion === 'v3' || registerRecaptchaVersion === 'v3' || lostpasswordRecaptchaVersion === 'v3';
-
-                if (recaptchaAvailable && isRecaptchaVersion3) {
-                    grecaptcha.ready(function() {
-                        grecaptcha.execute(recaptchaSiteKeyV3, {
-                            action: 'eael_login_register_form'
-                        }).then(function (token) {
-                            if ($('form input[name="g-recaptcha-response"]', $scope).length === 0) {
-                                $('form', $scope).append('<input type="hidden" name="g-recaptcha-response" value="' + token + '">');
-                            } else {
-                                $('form input[name="g-recaptcha-response"]', $scope).val(token);
-                            }
-                        });
-                    });
-                }
-            }
+            // reCAPTCHA handling is now managed by the unified EAELRecaptchaHandler
 
             const errormessage = getCookie('eael_login_error_' + widgetId);
             if (errormessage) {
@@ -223,70 +195,7 @@ eael.hooks.addAction("init", "ea", () => {
             }
         });
 
-        // reCAPTCHA
-        function onloadLRcb() {
-            if(typeof grecaptcha.render !="function"){
-                return false;
-            }
-            if (loginRecaptchaNode) {
-                if( ( registerRecaptchaVersion !== 'v3' ) && ( lostpasswordRecaptchaVersion !== 'v3' ) ){
-                    try {
-                        grecaptcha.render(loginRecaptchaNode, {
-                            'sitekey': recaptchaSiteKey,
-                            'theme': loginRcTheme,
-                            'size': loginRcSize,
-                        });
-                    } catch ( error ){
-                        // duplicate instance
-                    }
-                }
-            }
-            if (registerRecaptchaNode) {
-                if( ( loginRecaptchaVersion !== 'v3' ) && ( lostpasswordRecaptchaVersion !== 'v3' ) ){
-                    try {
-                        grecaptcha.render(registerRecaptchaNode, {
-                            'sitekey': recaptchaSiteKey,
-                            'theme': regRcTheme,
-                            'size': regRcSize,
-                        });
-                    } catch ( error ) {
-                        // duplicate instance
-                    }
-                }
-            }
-            if (lostpasswordRecaptchaNode) {
-                if( ( loginRecaptchaVersion !== 'v3' ) && ( registerRecaptchaVersion !== 'v3' ) ){
-                    try {
-                        grecaptcha.render(lostpasswordRecaptchaNode, {
-                            'sitekey': recaptchaSiteKey,
-                            'theme': lostpasswordRcTheme,
-                            'size': lostpasswordRcSize,
-                        });
-                    } catch ( error ) {
-                        // duplicate instance
-                    }
-                }
-            }
-        }
-
-        if (recaptchaAvailable && isEditMode){
-            // on elementor editor, window load event already fired, so run recaptcha
-            onloadLRcb();
-        }else{
-            // on frontend, load even is yet to fire, so wait and fire recaptcha
-            let navData = window.performance.getEntriesByType("navigation");
-            if (navData.length > 0 && navData[0].loadEventEnd > 0) {
-                if (recaptchaAvailable) {
-                    onloadLRcb();
-                }
-            } else {
-                $(window).on('load', function () {
-                    if (recaptchaAvailable) {
-                        onloadLRcb();
-                    }
-                });
-            }
-        }
+        // Old reCAPTCHA handling code removed - now handled by unified EAELRecaptchaHandler
     };
     elementorFrontend.hooks.addAction("frontend/element_ready/eael-login-register.default", EALoginRegister);
 });

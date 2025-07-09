@@ -4,6 +4,7 @@ namespace Essential_Addons_Elementor\Traits;
 
 use Elementor\Plugin;
 use Essential_Addons_Elementor\Classes\Helper;
+use Essential_Addons_Elementor\Classes\Recaptcha_Manager;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -1568,28 +1569,8 @@ trait Login_Registration {
 	}
 
 	public function lr_validate_recaptcha( $version = 'v2', $settings = [] ) {
-		if ( ! isset( $_REQUEST['g-recaptcha-response'] ) ) {
-			return false;
-		}
-		$endpoint = 'https://www.recaptcha.net/recaptcha/api/siteverify';
-		$data     = [
-			'secret'   => 'v3' === $version ? get_option( 'eael_recaptcha_secret_v3' ) : get_option( 'eael_recaptcha_secret' ),
-			'response' => sanitize_text_field( $_REQUEST['g-recaptcha-response'] ),
-			'ip'       => $_SERVER['REMOTE_ADDR'],
-		];
-
-		$res = json_decode( wp_remote_retrieve_body( wp_remote_post( $endpoint, [ 'body' => $data ] ) ), 1 );
-		if ( isset( $res['success'] ) ) {
-			if('v3' === $version ) {
-				$action = self::$recaptcha_v3_default_action;
-				$action_ok = ! isset( $res['action'] ) ? true : $action === $res['action'];
-				return $action_ok && isset( $res['score'] ) && ( $res['score'] > self::get_recaptcha_threshold( $settings ) );
-			}else {
-				return $res['success'];				
-			}
-		}
-
-		return false;
+		// Use the new unified Recaptcha_Manager for validation
+		return Recaptcha_Manager::validate( $version, $settings );
 	}
 
 	public function lr_validate_cloudflare_turnstile( $settings = [] ) {

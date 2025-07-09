@@ -7,3 +7,8 @@ pnpm-lock.yaml
 composer.lock
 /node_modules
 .idea/*
+
+# Internal project documentation
+ESSENTIAL_ADDONS_REVAMP_ROADMAP.md
+RECAPTCHA_CONSOLIDATION_PLAN.md
+*.internal.md
