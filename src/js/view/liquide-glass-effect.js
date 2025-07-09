@@ -8,19 +8,44 @@ let LiquidGlassEffectHandler = function ($scope, $) {
    }
 
    // Apply SVG filter attributes
-   const turbulenceElement = document.querySelector("feTurbulence");
-   const displacementElement = document.querySelector("feDisplacementMap");
+   const glassEffects = {
+      "eael-glass-distortion1": {
+         freq: $glassEffects.freq,
+         scale: $glassEffects.scale,
+      },
+      "eael-glass-distortion2": {
+         freq: $glassEffects.freq,
+         scale: $glassEffects.scale,
+      },
+      "eael-glass-distortion3": {
+         freq: $glassEffects.freq,
+         scale: $glassEffects.scale,
+      },
+   };
 
-   if (turbulenceElement) {
-      turbulenceElement.setAttribute(
-         "baseFrequency",
-         `${$glassEffects.freq} ${$glassEffects.freq}`
-      );
+   // Function to update SVG filter attributes
+   function updateFilterAttributes(filterId, { freq, scale }) {
+      const filterElement = document.querySelector(`#${filterId}`);
+      if (!filterElement) {
+         return;
+      }
+
+      const turbulenceElement = filterElement.querySelector("feTurbulence");
+      if (turbulenceElement) {
+         turbulenceElement.setAttribute("baseFrequency", `${freq} ${freq}`);
+      }
+
+      const displacementElement =
+         filterElement.querySelector("feDisplacementMap");
+      if (displacementElement) {
+         displacementElement.setAttribute("scale", scale);
+      }
    }
 
-   if (displacementElement) {
-      displacementElement.setAttribute("scale", $glassEffects.scale);
-   }
+   // Apply to all filters
+   Object.entries(glassEffects).forEach(([id, config]) => {
+      updateFilterAttributes(id, config);
+   });
 
    // Display values in editor mode only
    if (elementorFrontend.isEditMode()) {
@@ -57,20 +82,48 @@ jQuery(window).on("elementor/frontend/init", function () {
          const glassEffectsData = getCurrentGlassEffectValues(elementView);
 
          // Update SVG filter attributes
-         const turbulenceElement = document.querySelector("feTurbulence");
-         const displacementElement =
-            document.querySelector("feDisplacementMap");
+         const glassEffects = {
+            "eael-glass-distortion1": {
+               freq: glassEffectsData.freq,
+               scale: glassEffectsData.scale,
+            },
+            "eael-glass-distortion2": {
+               freq: glassEffectsData.freq,
+               scale: glassEffectsData.scale,
+            },
+            "eael-glass-distortion3": {
+               freq: glassEffectsData.freq,
+               scale: glassEffectsData.scale,
+            },
+         };
 
-         if (turbulenceElement) {
-            turbulenceElement.setAttribute(
-               "baseFrequency",
-               `${glassEffectsData.freq} ${glassEffectsData.freq}`
-            );
+         // Function to update SVG filter attributes
+         function updateFilterAttributes(filterId, { freq, scale }) {
+            const filterElement = document.querySelector(`#${filterId}`);
+            if (!filterElement) {
+               return;
+            }
+
+            const turbulenceElement =
+               filterElement.querySelector("feTurbulence");
+            if (turbulenceElement) {
+               turbulenceElement.setAttribute(
+                  "baseFrequency",
+                  `${freq} ${freq}`
+               );
+            }
+
+            const displacementElement =
+               filterElement.querySelector("feDisplacementMap");
+            if (displacementElement) {
+               displacementElement.setAttribute("scale", scale);
+            }
          }
 
-         if (displacementElement) {
-            displacementElement.setAttribute("scale", glassEffectsData.scale);
-         }
+         // Apply to all filters
+         Object.entries(glassEffects).forEach(([id, config]) => {
+            updateFilterAttributes(id, config);
+         });
       }
 
       // Listen for control changes in the editor
