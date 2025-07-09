@@ -6513,9 +6513,11 @@ class Login_Register extends Widget_Base {
 							</div>
 
 							<?php
-							do_action( 'eael/login-register/before-lostpassword-recaptcha', $this );
-							$this->print_bot_protection_node( 'lostpassword' );
-							do_action( 'eael/login-register/after-lostpassword-recaptcha', $this );
+							if( empty( $lostpassword_success ) ){
+								do_action( 'eael/login-register/before-lostpassword-recaptcha', $this );
+								$this->print_bot_protection_node( 'lostpassword' );
+								do_action( 'eael/login-register/after-lostpassword-recaptcha', $this );
+							}
 							do_action( 'eael/login-register/before-lostpassword-footer', $this );
 							?>
 
