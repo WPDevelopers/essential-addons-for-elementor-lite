@@ -134,6 +134,12 @@ class Login_Register extends Widget_Base {
 	protected $cloudflare_turnstile_sitekey;
 
 	/**
+	 * Cloudflare Turnstile Secret key
+	 * @var string|false
+	 */
+	protected $cloudflare_turnstile_secretkey;
+
+	/**
 	 * @var mixed|void
 	 */
 	protected $pro_enabled;
@@ -319,6 +325,7 @@ class Login_Register extends Widget_Base {
 		$this->init_style_register_link_controls();
 		$this->init_style_login_recaptcha_controls();
 		$this->init_style_register_recaptcha_controls();
+		$this->init_style_lostpassword_recaptcha_controls();
 		do_action( 'eael/login-register/after-style-controls', $this );
 
 	}
@@ -760,7 +767,7 @@ class Login_Register extends Widget_Base {
 		] );
 
 		$this->add_control( 'login_register_recaptcha_version', [
-			'label'       => __( 'version', 'essential-addons-for-elementor-lite' ),
+			'label'       => __( 'Version', 'essential-addons-for-elementor-lite' ),
 			'label_block' => false,
 			'type'        => Controls_Manager::CHOOSE,
 			'toggle'      => false,
@@ -783,7 +790,7 @@ class Login_Register extends Widget_Base {
 		$this->add_control( 'login_register_recaptcha_v3_description', [
 			'type'      => Controls_Manager::RAW_HTML,
 			'content_classes' => 'elementor-control-field-description',
-			'raw'       => __( '<p style="margin-top:-15px">v3 will be applied to both forms. After saving, reload the preview to see the changes.</p>', 'essential-addons-for-elementor-lite' ),
+			'raw'       => __( '<p style="margin-top:-15px">v3 will be applied to all forms. After saving, reload the preview to see the changes.</p>', 'essential-addons-for-elementor-lite' ),
 			'condition' => [
 				'login_register_recaptcha_version' => 'v3',
 				'enable_login_register_recaptcha'   => 'yes',
@@ -829,7 +836,7 @@ class Login_Register extends Widget_Base {
 		}
 
 		$this->add_control( 'enable_lostpassword_recaptcha', [
-			'label'        => __( 'Reset Password Form', 'essential-addons-for-elementor-lite' ),
+			'label'        => __( 'Lost Password Form', 'essential-addons-for-elementor-lite' ),
 			'type'         => Controls_Manager::SWITCHER,
 			'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
 			'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
@@ -998,7 +1005,7 @@ class Login_Register extends Widget_Base {
 		$this->add_control( 
 			'enable_cloudflare_turnstile_on_lostpassword',
 			[
-				'label'     => __( 'Reset Password Form', 'essential-addons-for-elementor-lite' ),
+				'label'     => __( 'Lost Password Form', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'condition' => [
 					'enable_cloudflare_turnstile' => 'yes',
@@ -5046,6 +5053,10 @@ class Login_Register extends Widget_Base {
 		$this->_init_recaptcha_style( 'register' );
 	}
 
+	protected function init_style_lostpassword_recaptcha_controls() {
+		$this->_init_recaptcha_style( 'lostpassword' );
+	}
+
 	/**
 	 * Print style controls for a specific type of button.
 	 *
@@ -5318,8 +5329,10 @@ class Login_Register extends Widget_Base {
 	 * @param string $form_type the type of the reCAPTCHA. accepts login or register.
 	 */
 	protected function _init_recaptcha_style( $form_type = 'login' ) {
+		$form_label = 'lostpassword' === $form_type ? __( 'Lost Password', 'essential-addons-for-elementor-lite' ) : ucfirst( $form_type );
+
 		$this->start_controls_section( "section_style_{$form_type}_rc", [
-			'label'     => sprintf( __( '%s Form reCAPTCHA', 'essential-addons-for-elementor-lite' ), ucfirst( $form_type ) ),
+			'label'     => sprintf( __( '%s Form reCAPTCHA', 'essential-addons-for-elementor-lite' ), $form_label ),
 			'tab'       => Controls_Manager::TAB_STYLE,
 			'condition' => [
 				"enable_{$form_type}_recaptcha" => 'yes',
@@ -5787,9 +5800,9 @@ class Login_Register extends Widget_Base {
 			$this->resetpassword_in_popup_selector = ! empty( $this->ds[ 'lostpassword_email_message_reset_link_popup_selector' ] ) ? sanitize_text_field( $this->ds[ 'lostpassword_email_message_reset_link_popup_selector' ] ) : '';
 		}
 
-		$login_recaptcha_version = $register_recaptcha_version = ! empty( $this->ds['login_register_recaptcha_version'] ) ? $this->ds['login_register_recaptcha_version'] : 'v2';
+		$login_recaptcha_version = $register_recaptcha_version = $lostpassword_recaptcha_version = ! empty( $this->ds['login_register_recaptcha_version'] ) ? $this->ds['login_register_recaptcha_version'] : 'v2';
 
-		if ( get_option('eael_recaptcha_sitekey_v3') && ( 'v3' === $login_recaptcha_version || 'v3' === $register_recaptcha_version)  ) {
+		if ( get_option('eael_recaptcha_sitekey_v3') && ( 'v3' === $login_recaptcha_version || 'v3' === $register_recaptcha_version || 'v3' === $lostpassword_recaptcha_version)  ) {
 			$site_key = esc_html( get_option('eael_recaptcha_sitekey_v3') );
 			
 	        if ( $recaptcha_language = esc_html( get_option( 'eael_recaptcha_language_v3' ) ) ) {
@@ -5813,6 +5826,7 @@ class Login_Register extends Widget_Base {
 			 data-recaptcha-sitekey-v3="<?php echo esc_attr( get_option( 'eael_recaptcha_sitekey_v3' ) ); ?>"
 			 data-login-recaptcha-version="<?php echo esc_attr( $login_recaptcha_version ); ?>"
 			 data-register-recaptcha-version="<?php echo esc_attr( $register_recaptcha_version ); ?>"
+			 data-lostpassword-recaptcha-version="<?php echo esc_attr( $lostpassword_recaptcha_version ); ?>"
              data-redirect-to="<?php echo esc_attr( $this->login_custom_redirect_url ); ?>"
              data-resetpassword-redirect-to="<?php echo esc_attr( $resetpassword_redirect_url ); ?>"
         >
@@ -6365,7 +6379,11 @@ class Login_Register extends Widget_Base {
 							endforeach;
 							$this->print_necessary_hidden_fields( 'register' );
 							$this->print_terms_condition_notice();
+
+							do_action( 'eael/login-register/before-register-recaptcha', $this );
 							$this->print_bot_protection_node( 'register' );
+							do_action( 'eael/login-register/after-register-recaptcha', $this );
+							do_action( 'eael/login-register/before-register-footer', $this );
 							?>
 
                             <div class="eael-lr-footer">
@@ -6483,8 +6501,13 @@ class Login_Register extends Widget_Base {
 
 			// btn alignment
 			$btn_align = isset( $this->ds['lostpassword_btn_align'] ) ? esc_html( $this->ds['lostpassword_btn_align'] ) : '';
-			// btn alignment
+			// link alignment
 			$link_align = isset( $this->ds['lostpassword_link_align'] ) ? esc_html( $this->ds['lostpassword_link_align'] ) : '';
+
+			// reCAPTCHA style
+			$rc_theme = isset( $this->ds['lostpassword_rc_theme'] ) ? esc_html( $this->ds['lostpassword_rc_theme'] ) : 'light';
+			$rc_size  = isset( $this->ds['lostpassword_rc_size'] ) ? esc_html( $this->ds['lostpassword_rc_size'] ) : 'normal';
+			
 			// input icons
 			$show_icon  = ( $this->pro_enabled && ! empty( $this->ds['show_lostpassword_icon'] ) && 'yes' === esc_html( $this->ds['show_lostpassword_icon'] ) );
 			$icon_class = $show_icon ? 'lr-icon-showing' : '';
@@ -6492,6 +6515,8 @@ class Login_Register extends Widget_Base {
             <section
                     id="eael-lostpassword-form-wrapper"
                     class="<?php echo esc_attr( $default_hide_class ); ?>"
+					data-recaptcha-theme="<?php echo esc_attr( $rc_theme ); ?>"
+                    data-recaptcha-size="<?php echo esc_attr( $rc_size ); ?>"
                     >
                 <div class="eael-lostpassword-form-wrapper eael-lr-form-wrapper style-2 <?php echo esc_attr( $icon_class ); ?>">
 					<?php
@@ -6537,7 +6562,7 @@ class Login_Register extends Widget_Base {
 								<input type="submit"
 									   name="eael-lostpassword-submit"
 									   id="eael-lostpassword-submit"
-									   class="eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?>  <?php echo esc_attr( $hide_class_after_submission ); ?>"
+									   class="g-recaptcha eael-lr-btn eael-lr-btn-block <?php echo esc_attr( $btn_align ); ?>  <?php echo esc_attr( $hide_class_after_submission ); ?>"
 									   value="<?php echo esc_attr( $btn_text ); ?>"/>
 								<?php if ( $show_login_link_lostpassword ) { ?>
 									<div class="eael-sign-wrapper <?php echo esc_attr( $link_align ); ?>">
