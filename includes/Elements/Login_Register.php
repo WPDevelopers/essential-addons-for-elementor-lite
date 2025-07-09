@@ -790,8 +790,20 @@ class Login_Register extends Widget_Base {
 			],
 		] );
 
+		$this->add_control( 
+			'enable_login_recaptcha_heading',
+			[
+				'label' => __( 'Apply on', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::HEADING,
+				'condition' => [
+					'enable_login_register_recaptcha' => 'yes',
+					'login_register_recaptcha_version' => 'v2',
+				],
+			]
+		);
+
 		$this->add_control( 'enable_login_recaptcha', [
-			'label'        => __( 'Apply on Login Form', 'essential-addons-for-elementor-lite' ),
+			'label'        => __( 'Login Form', 'essential-addons-for-elementor-lite' ),
 			'type'         => Controls_Manager::SWITCHER,
 			'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
 			'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
@@ -804,7 +816,7 @@ class Login_Register extends Widget_Base {
 
 		if( $this->user_can_register ) {
 			$this->add_control( 'enable_register_recaptcha', [
-				'label'        => __( 'Apply on Registration Form', 'essential-addons-for-elementor-lite' ),
+				'label'        => __( 'Registration Form', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
@@ -939,10 +951,18 @@ class Login_Register extends Widget_Base {
 			] );
 		}
 
+		$this->add_control( 'enable_cloudflare_turnstile_heading', [
+			'label' => __( 'Apply on', 'essential-addons-for-elementor-lite' ),
+			'type' => Controls_Manager::HEADING,
+			'condition' => [
+				'enable_cloudflare_turnstile' => 'yes',
+			],
+		] );
+
 		$this->add_control( 
 			'enable_cloudflare_turnstile_on_login',
 			[
-				'label'     => __( 'Apply on Login Form', 'essential-addons-for-elementor-lite' ),
+				'label'     => __( 'Login Form', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'condition' => [
 					'enable_cloudflare_turnstile' => 'yes',
@@ -954,7 +974,7 @@ class Login_Register extends Widget_Base {
 			$this->add_control( 
 				'enable_cloudflare_turnstile_on_register',
 				[
-					'label'     => __( 'Apply on Registration Form', 'essential-addons-for-elementor-lite' ),
+					'label'     => __( 'Registration Form', 'essential-addons-for-elementor-lite' ),
 					'type'      => Controls_Manager::SWITCHER,
 					'condition' => [
 						'enable_cloudflare_turnstile' => 'yes',
