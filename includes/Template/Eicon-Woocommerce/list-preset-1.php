@@ -63,7 +63,7 @@ $product_data = [
 	            sprintf( '<%1$s class="woocommerce-loop-product__title">%2$s</%1$s>', $title_tag, $product->get_title() )
 	            . '</a></div>',
 	'ratings' => $should_print_rating ? wc_get_rating_html( $product->get_average_rating(), $product->get_rating_count() ) : '',
-	'price'   => ''
+	'price'   => $should_print_price ? '<div class="eael-product-price">' . $product->get_price_html() . '</div>' : ''
 ];
 
 if ( $should_print_rating ) {
