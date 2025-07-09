@@ -259,8 +259,8 @@ eael.hooks.addAction("init", "ea", () => {
                     try {
                         grecaptcha.render(lostpasswordRecaptchaNode, {
                             'sitekey': recaptchaSiteKey,
-                            'theme': regRcTheme,
-                            'size': regRcSize,
+                            'theme': lostpasswordRcTheme,
+                            'size': lostpasswordRcSize,
                         });
                     } catch ( error ) {
                         // duplicate instance
