@@ -983,6 +983,17 @@ class Login_Register extends Widget_Base {
 			);
 		}
 
+		$this->add_control( 
+			'enable_cloudflare_turnstile_on_lostpassword',
+			[
+				'label'     => __( 'Reset Password Form', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'condition' => [
+					'enable_cloudflare_turnstile' => 'yes',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 	}
 
@@ -6502,6 +6513,9 @@ class Login_Register extends Widget_Base {
 							</div>
 
 							<?php
+							do_action( 'eael/login-register/before-lostpassword-recaptcha', $this );
+							$this->print_bot_protection_node( 'lostpassword' );
+							do_action( 'eael/login-register/after-lostpassword-recaptcha', $this );
 							do_action( 'eael/login-register/before-lostpassword-footer', $this );
 							?>
 
