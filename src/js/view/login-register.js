@@ -35,6 +35,7 @@ eael.hooks.addAction("init", "ea", () => {
 
         let loginRecaptchaNode = document.getElementById('login-recaptcha-node-' + widgetId);
         let registerRecaptchaNode = document.getElementById('register-recaptcha-node-' + widgetId);
+        let lostpasswordRecaptchaNode = document.getElementById('lostpassword-recaptcha-node-' + widgetId);
                 
         if ( loggedInLocation !== undefined && loggedInLocation !== '' ) {
             location.replace(loggedInLocation);
@@ -241,6 +242,19 @@ eael.hooks.addAction("init", "ea", () => {
                 if( loginRecaptchaVersion !== 'v3' ){
                     try {
                         grecaptcha.render(registerRecaptchaNode, {
+                            'sitekey': recaptchaSiteKey,
+                            'theme': regRcTheme,
+                            'size': regRcSize,
+                        });
+                    } catch ( error ) {
+                        // duplicate instance
+                    }
+                }
+            }
+            if (lostpasswordRecaptchaNode) {
+                if( loginRecaptchaVersion !== 'v3' ){
+                    try {
+                        grecaptcha.render(lostpasswordRecaptchaNode, {
                             'sitekey': recaptchaSiteKey,
                             'theme': regRcTheme,
                             'size': regRcSize,

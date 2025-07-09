@@ -823,6 +823,26 @@ trait Login_Registration {
 				} // fail early if cloudflare turnstile failed
 			}
 		}
+
+		//v2 or v3
+		$is_version_2 = isset( $settings['enable_lostpassword_recaptcha'] ) && 'yes' === $settings['enable_lostpassword_recaptcha'];
+		$is_version_3 = isset( $settings['login_register_recaptcha_version'] ) && 'v3' === $settings['login_register_recaptcha_version'];
+		if ( $is_version_2 || $is_version_3 ) {
+			$ld_recaptcha_version = $is_version_3 ? 'v3' : 'v2';
+			
+			if( ! $this->lr_validate_recaptcha( $ld_recaptcha_version, $settings ) ) {
+				$err_msg = isset( $settings['err_recaptcha'] ) ? Helper::eael_wp_kses( $settings['err_recaptcha'] ) : __( 'You did not pass recaptcha challenge.', 'essential-addons-for-elementor-lite' );
+				if ( $ajax ) {
+					wp_send_json_error( $err_msg );
+				}
+				update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
+
+				if (isset($_SERVER['HTTP_REFERER'])) {
+					wp_safe_redirect($_SERVER['HTTP_REFERER']);
+					exit();
+				} // fail early if recaptcha failed
+			}
+		}
 		
 		if ( is_user_logged_in() ) {
 			$err_msg = isset( $settings['err_loggedin'] ) ? Helper::eael_wp_kses( $settings['err_loggedin'] ) : esc_html__( 'You are already logged in', 'essential-addons-for-elementor-lite' );

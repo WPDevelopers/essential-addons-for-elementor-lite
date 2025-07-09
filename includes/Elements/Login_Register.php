@@ -827,6 +827,18 @@ class Login_Register extends Widget_Base {
 				],
 			] );
 		}
+
+		$this->add_control( 'enable_lostpassword_recaptcha', [
+			'label'        => __( 'Reset Password Form', 'essential-addons-for-elementor-lite' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+			'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+			'return_value' => 'yes',
+			'condition'    => [
+				'enable_login_register_recaptcha' => 'yes',
+				'login_register_recaptcha_version' => 'v2',
+			],
+		] );
 		
 		if ( empty( $this->recaptcha_sitekey ) ) {
 			$this->add_control( 
