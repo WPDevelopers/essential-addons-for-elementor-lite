@@ -238,11 +238,83 @@ class Liquid_Glass_Effect {
 		$element->add_group_control(
 			\Elementor\Group_Control_Box_Shadow::get_type(),
 			[
-				'name'      => 'eael_liquid_glass_shadow_color',
-				'selector'  => '{{WRAPPER}}.eael_liquid_glass_shadow-effect1, {{WRAPPER}}.eael_liquid_glass_shadow-effect2, {{WRAPPER}}.eael_liquid_glass_shadow-effect3, {{WRAPPER}}.eael_liquid_glass_shadow-effect4',
+				'name'              => 'eael_liquid_glass_shadow_effect1',
+				'fields_options'     => [
+					'box_shadow_type' => [ 'default' => 'yes' ],
+					'box_shadow'      => [
+						'default'      => [
+							'color'      => 'rgba(0,0,0,0.78)',
+							'horizontal' => -1,
+							'vertical'   => 9,
+							'blur'       => 28,
+							'spread'     => 2,
+						],
+					],
+				],
+				'selector'  => '{{WRAPPER}}.eael_liquid_glass_shadow-effect1',
 				'condition' => [
 					'eael_liquid_glass_effect_switch'  => 'yes',
-					'eael_liquid_glass_shadow_effect!' => '',
+					'eael_liquid_glass_shadow_effect' => 'effect1',
+				],
+			]
+		);
+
+		$element->add_group_control(
+			\Elementor\Group_Control_Box_Shadow::get_type(),
+			[
+				'name'              => 'eael_liquid_glass_shadow_effect2',
+				'fields_options'     => [
+					'box_shadow_type' => [ 'default' => 'yes' ],
+					'box_shadow'      => [
+						'default'      => [
+							'color'      => 'rgb(165 165 165 / 78%)',
+							'horizontal' => 0,
+							'vertical'   => 0,
+							'blur'       => 8,
+							'spread'     => 1,
+						],
+					],
+				],
+				'selector'  => '{{WRAPPER}}.eael_liquid_glass_shadow-effect2',
+				'condition' => [
+					'eael_liquid_glass_effect_switch'  => 'yes',
+					'eael_liquid_glass_shadow_effect' => 'effect2',
+				],
+			]
+		);
+		
+		$element->add_group_control(
+			\Elementor\Group_Control_Box_Shadow::get_type(),
+			[
+				'name'              => 'eael_liquid_glass_shadow_effect3',
+				'fields_options'     => [
+					'box_shadow_type' => [ 'default' => 'yes' ],
+					'box_shadow'      => [
+						'default'      => [
+							'color'      => '#bebebe',
+							'horizontal' =>1,
+							'vertical'   =>1,
+							'blur'       => 60,
+							'spread'     => 5,
+						],
+					],
+				],
+				'selector'  => '{{WRAPPER}}.eael_liquid_glass_shadow-effect3',
+				'condition' => [
+					'eael_liquid_glass_effect_switch'  => 'yes',
+					'eael_liquid_glass_shadow_effect' => 'effect3',
+				],
+			]
+		);
+
+		$element->add_group_control(
+			\Elementor\Group_Control_Box_Shadow::get_type(),
+			[
+				'name'      => 'eael_liquid_glass_shadow_effect4',
+				'selector'  => '{{WRAPPER}}.eael_liquid_glass_shadow-effect4',
+				'condition' => [
+					'eael_liquid_glass_effect_switch'  => 'yes',
+					'eael_liquid_glass_shadow_effect' => 'effect4',
 				],
 			]
 		);
