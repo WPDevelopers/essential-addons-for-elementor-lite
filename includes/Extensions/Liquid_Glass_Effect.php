@@ -67,21 +67,111 @@ class Liquid_Glass_Effect {
 			]
 		);
 
+		// $element->add_control(
+		// 	'eael_liquid_glass_effect_bg_color',
+		// 	[
+		// 		'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
+		// 		'type'      => Controls_Manager::COLOR,
+		// 		'selectors' => [
+		// 			'{{WRAPPER}}.eael_liquid_glass-effect1, 
+		// 			{{WRAPPER}}.eael_liquid_glass-effect2, 
+		// 			{{WRAPPER}}.eael_liquid_glass-effect3, 
+		// 			{{WRAPPER}}.eael_liquid_glass-effect4::before, 
+		// 			{{WRAPPER}}.eael_liquid_glass-effect5::before, 
+		// 			{{WRAPPER}}.eael_liquid_glass-effect6::before' => 'background-color: {{VALUE}}',
+		// 		],
+		// 		'condition' => [
+		// 			'eael_liquid_glass_effect_switch' => 'yes',
+		// 		],
+		// 	]
+		// );
+
 		$element->add_control(
-			'eael_liquid_glass_effect_bg_color',
+			'eael_liquid_glass_effect_bg_color_effect1',
 			[
 				'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}}.eael_liquid_glass-effect1, 
-					{{WRAPPER}}.eael_liquid_glass-effect2, 
-					{{WRAPPER}}.eael_liquid_glass-effect3, 
-					{{WRAPPER}}.eael_liquid_glass-effect4::before, 
-					{{WRAPPER}}.eael_liquid_glass-effect5::before, 
-					{{WRAPPER}}.eael_liquid_glass-effect6::before' => 'background-color: {{VALUE}}',
+					'{{WRAPPER}}.eael_liquid_glass-effect1' => 'background-color: {{VALUE}}',
 				],
 				'condition' => [
 					'eael_liquid_glass_effect_switch' => 'yes',
+					'eael_liquid_glass_effect'        => 'effect1',
+				],
+			]
+		);
+
+		$element->add_control(
+			'eael_liquid_glass_effect_bg_color_effect2',
+			[
+				'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}}.eael_liquid_glass-effect2' => 'background-color: {{VALUE}}',
+				],
+				'condition' => [
+					'eael_liquid_glass_effect_switch' => 'yes',
+					'eael_liquid_glass_effect'        => 'effect2',
+				],
+			]
+		);
+
+		$element->add_control(
+			'eael_liquid_glass_effect_bg_color_effect3',
+			[
+				'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}}.eael_liquid_glass-effect3' => 'background-color: {{VALUE}}',
+				],
+				'condition' => [
+					'eael_liquid_glass_effect_switch' => 'yes',
+					'eael_liquid_glass_effect'        => 'effect3',
+				],
+			]
+		);
+
+		$element->add_control(
+			'eael_liquid_glass_effect_bg_color_effect4',
+			[
+				'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}}.eael_liquid_glass-effect4::before' => 'background-color: {{VALUE}}',
+				],
+				'condition' => [
+					'eael_liquid_glass_effect_switch' => 'yes',
+					'eael_liquid_glass_effect'        => 'effect4',
+				],
+			]
+		);
+
+		$element->add_control(
+			'eael_liquid_glass_effect_bg_color_effect5',
+			[
+				'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}}.eael_liquid_glass-effect5::before' => 'background-color: {{VALUE}}',
+				],
+				'condition' => [
+					'eael_liquid_glass_effect_switch' => 'yes',
+					'eael_liquid_glass_effect'        => 'effect5',
+				],
+			]
+		);
+
+		$element->add_control(
+			'eael_liquid_glass_effect_bg_color_effect6',
+			[
+				'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}}.eael_liquid_glass-effect6::before' => 'background-color: {{VALUE}}',
+				],
+				'condition' => [
+					'eael_liquid_glass_effect_switch' => 'yes',
+					'eael_liquid_glass_effect'        => 'effect6',
 				],
 			]
 		);
