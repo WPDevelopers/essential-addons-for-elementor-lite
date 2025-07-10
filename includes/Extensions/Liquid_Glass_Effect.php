@@ -373,12 +373,13 @@ class Liquid_Glass_Effect {
 				'name'              => 'eael_liquid_glass_shadow_effect3',
 				'fields_options'     => [
 					'box_shadow_type' => [ 'default' => 'yes' ],
+					'box_shadow_position' => [ 'default' => 'inset' ],
 					'box_shadow'      => [
 						'default'      => [
 							'color'      => '#bebebe',
 							'horizontal' =>1,
 							'vertical'   =>1,
-							'blur'       => 60,
+							'blur'       => 10,
 							'spread'     => 5,
 						],
 					],
