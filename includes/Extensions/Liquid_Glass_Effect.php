@@ -308,6 +308,51 @@ class Liquid_Glass_Effect {
 		);
 
 		$element->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'name'     => 'eael_liquid_glass_border_effect4',
+				'selector' => '{{WRAPPER}}.eael_liquid_glass_shadow-effect4',
+				'fields_options' => [
+					'border' => [
+						'default' => 'solid',
+					],
+					'width' => [
+						'default' => [
+							'top'      => '1',
+							'right'    => '1',
+							'bottom'   => '1',
+							'left'     => '1',
+							'isLinked' =>  false,
+						],
+					],
+					'color' => [
+						'default' => '#808080',
+					],
+				],
+				'condition' => [
+					'eael_liquid_glass_effect_switch'  => 'yes',
+					'eael_liquid_glass_shadow_effect' => 'effect4',
+				],
+			]
+		);
+
+		$element->add_control(
+			'eael_liquid_glass_border_radius_effect4',
+			[
+				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'selectors'  => [
+					'{{WRAPPER}}.eael_liquid_glass_shadow-effect4' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition' => [
+					'eael_liquid_glass_effect_switch' => 'yes',
+					'eael_liquid_glass_shadow_effect' => 'effect4',
+				],
+			]
+		);
+
+		$element->add_group_control(
 			\Elementor\Group_Control_Box_Shadow::get_type(),
 			[
 				'name'      => 'eael_liquid_glass_shadow_effect4',
