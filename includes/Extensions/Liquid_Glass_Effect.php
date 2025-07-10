@@ -38,7 +38,7 @@ class Liquid_Glass_Effect {
 			'eael_liquid_glass_effect',
 			[
 				'label'   => esc_html__( 'Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
-				'type'    => Controls_Manager::SELECT,
+				'type'    => Controls_Manager::SELECT2,
 				'default' => 'effect1',
 				'options' => [
 					'effect1' => esc_html__( 'Effect 1', 'essential-addons-for-elementor-lite' ),
@@ -114,35 +114,6 @@ class Liquid_Glass_Effect {
 				],
 			]
 		);
-
-		// $element->add_control(
-		// 	'eael_liquid_glass_effect_backdrop_filter',
-		// 	[
-		// 		'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
-		// 		'type'  => Controls_Manager::SLIDER,
-		// 		'range' => [
-		// 			'px' => [
-		// 				'min'  => 0,
-		// 				'max'  => 30,
-		// 				'step' => 1,
-		// 			],
-		// 		],
-		// 		'default' => [
-		// 			'size' => 5,
-		// 		],
-		// 		'selectors' => [
-		// 			'{{WRAPPER}}.eael_liquid_glass-effect1, 
-		// 			{{WRAPPER}}.eael_liquid_glass-effect2, 
-		// 			{{WRAPPER}}.eael_liquid_glass-effect3, 
-		// 			{{WRAPPER}}.eael_liquid_glass-effect4::before, 
-		// 			{{WRAPPER}}.eael_liquid_glass-effect5::before, 
-		// 			{{WRAPPER}}.eael_liquid_glass-effect6::before' => 'backdrop-filter: blur({{SIZE}}px)',
-		// 		],
-		// 		'condition' => [
-		// 			'eael_liquid_glass_effect_switch' => 'yes',
-		// 		],
-		// 	]
-		// );
 
 		$element->add_control(
 			'eael_liquid_glass_effect_backdrop_filter_effect1',
