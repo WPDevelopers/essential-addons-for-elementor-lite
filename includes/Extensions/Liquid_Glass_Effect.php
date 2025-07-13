@@ -495,7 +495,7 @@ class Liquid_Glass_Effect {
 			'eael_liquid_glass_shadow_effect',
 			[
 				'label'     => esc_html__( 'Shadow Effects', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SELECT,
+				'type'      => Controls_Manager::SELECT2,
 				'default'   => 'effect1',
 				'separator' => 'before',
 				'options'   => [
