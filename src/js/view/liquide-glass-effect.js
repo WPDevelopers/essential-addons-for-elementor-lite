@@ -65,10 +65,40 @@ jQuery(window).on("elementor/frontend/init", function () {
       // Function to get current control values from elementor model
       function getCurrentGlassEffectValues(elementView) {
          const settings = elementView.model.get("settings");
-         const freq = settings.get("eael_liquid_glass_effect_noise_freq");
-         const strength = settings.get(
-            "eael_liquid_glass_effect_noise_strength"
-         );
+         const effectType = settings.get("eael_liquid_glass_effect");
+
+         let freq, strength;
+
+         // Get effect-specific noise settings based on the selected effect
+         switch (effectType) {
+            case "effect4":
+               freq = settings.get(
+                  "eael_liquid_glass_effect_noise_freq_effect4"
+               );
+               strength = settings.get(
+                  "eael_liquid_glass_effect_noise_strength_effect4"
+               );
+               break;
+            case "effect5":
+               freq = settings.get(
+                  "eael_liquid_glass_effect_noise_freq_effect5"
+               );
+               strength = settings.get(
+                  "eael_liquid_glass_effect_noise_strength_effect5"
+               );
+               break;
+            case "effect6":
+               freq = settings.get(
+                  "eael_liquid_glass_effect_noise_freq_effect6"
+               );
+               strength = settings.get(
+                  "eael_liquid_glass_effect_noise_strength_effect6"
+               );
+               break;
+            default:
+               freq = null;
+               strength = null;
+         }
 
          return {
             freq: freq && freq.size ? freq.size : 0.008,
@@ -78,7 +108,6 @@ jQuery(window).on("elementor/frontend/init", function () {
 
       // Function to update SVG filters and display
       function updateGlassEffectDisplay(elementView) {
-         const $element = elementView.$el;
          const glassEffectsData = getCurrentGlassEffectValues(elementView);
 
          // Update SVG filter attributes
@@ -136,8 +165,14 @@ jQuery(window).on("elementor/frontend/init", function () {
 
             // Check if the changed control affects liquid glass effect
             if (
-               controlName === "eael_liquid_glass_effect_noise_freq" ||
-               controlName === "eael_liquid_glass_effect_noise_strength"
+               controlName === "eael_liquid_glass_effect_noise_freq_effect4" ||
+               controlName ===
+                  "eael_liquid_glass_effect_noise_strength_effect4" ||
+               controlName === "eael_liquid_glass_effect_noise_freq_effect5" ||
+               controlName ===
+                  "eael_liquid_glass_effect_noise_strength_effect5" ||
+               controlName === "eael_liquid_glass_effect_noise_freq_effect6" ||
+               controlName === "eael_liquid_glass_effect_noise_strength_effect6"
             ) {
                // Update immediately without delay
                updateGlassEffectDisplay(elementView);
@@ -150,8 +185,12 @@ jQuery(window).on("elementor/frontend/init", function () {
          const controlName = controlView.model.get("name");
 
          if (
-            controlName === "eael_liquid_glass_effect_noise_freq" ||
-            controlName === "eael_liquid_glass_effect_noise_strength"
+            controlName === "eael_liquid_glass_effect_noise_freq_effect4" ||
+            controlName === "eael_liquid_glass_effect_noise_strength_effect4" ||
+            controlName === "eael_liquid_glass_effect_noise_freq_effect5" ||
+            controlName === "eael_liquid_glass_effect_noise_strength_effect5" ||
+            controlName === "eael_liquid_glass_effect_noise_freq_effect6" ||
+            controlName === "eael_liquid_glass_effect_noise_strength_effect6"
          ) {
             // Find the current editing element
             const currentElement = elementor.getCurrentElement();
