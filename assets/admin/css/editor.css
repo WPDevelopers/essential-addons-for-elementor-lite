@@ -346,14 +346,21 @@
 }
 
 .elementor-control-type-choose .elementor-choices.eael-multiline{
-	height: auto;
-	flex-wrap: wrap;
+    height: auto;
     border-inline-end: var(--e-a-border-bold);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .elementor-control-type-choose .elementor-choices.eael-multiline .elementor-choices-label{
-	flex: auto !important;
-	padding: 5px;
+    flex: auto !important;
+    padding: 8px;
+	justify-content: left !important;
+}
+.elementor-control-type-choose .elementor-choices.eael-multiline .elementor-choices-label .eael-text-option{
+	display: flex;
+	align-items: center;
+	gap: 3px;
 }
 .elementor-control-type-choose .elementor-choices.eael-multiline .elementor-choices-label:last-child {
     border-inline-end: none;
