@@ -423,6 +423,9 @@ class Testimonial extends Widget_Base {
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default'      => '',
+				'condition'    => [
+					'eael_testimonial_style!' => 'simple-layout'
+				]
 			]
 		);
 
@@ -1091,14 +1094,14 @@ class Testimonial extends Widget_Base {
 		<?php if('simple-layout' == $settings['eael_testimonial_style']) { ?>
 			<?php $this->render_testimonial_image(); ?>
 			<div class="eael-testimonial-content">
-				<h3 class="eael-testimonial-name"><?php echo wp_kses( $settings['eael_testimonial_name'], HelperClass::eael_allowed_tags() ); ?></h3>
-				<p class="eael-testimonial-company"><?php echo wp_kses( $settings['eael_testimonial_company_title'], HelperClass::eael_allowed_tags() ); ?></p>
+				<h3 class="eael-testimonial-user"><?php echo wp_kses( $settings['eael_testimonial_name'], HelperClass::eael_allowed_tags() ); ?></h3>
+				<p class="eael-testimonial-user-company"><?php echo wp_kses( $settings['eael_testimonial_company_title'], HelperClass::eael_allowed_tags() ); ?></p>
 				<?php
 				if ( 'default' === $settings['eael_testimonial_rating_position'] ) {
 					$this->render_testimonial_rating();
 				}
 				?>
-				<div class="eael-testimonial-quote-content">
+				<div class="eael-testimonial-text">
 					<?php echo wp_kses( $settings['eael_testimonial_description'], HelperClass::eael_allowed_tags() ); ?>
 				</div>
 			</div>

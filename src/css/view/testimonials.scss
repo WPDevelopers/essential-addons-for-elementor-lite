@@ -130,19 +130,20 @@
             flex: 1;
         }
 
-        .eael-testimonial-name {
+        .eael-testimonial-user {
+            display: block;
             font-size: 1.5rem;
             margin: 0 0 5px;
             font-weight: bold;
             color: #111827;
         }
 
-        .eael-testimonial-company {
+        .eael-testimonial-user-company {
             color: #555;
             margin-bottom: 20px;
         }
 
-        .eael-testimonial-quote-content {
+        .eael-testimonial-text {
             color: #4b5563;
             font-size: 1rem;
             line-height: 1.6;
