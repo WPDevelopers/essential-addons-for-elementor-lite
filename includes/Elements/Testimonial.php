@@ -119,11 +119,15 @@ class Testimonial extends Widget_Base {
 					],
 					'content-top-icon-title-inline' => [
 						'title' => esc_html__('Content Top | Icon Title Inline', 'essential-addons-for-elementor-lite'),
-						'image' => $image_path . 'content-top-icon-title-inline.png'
+						'image' => $image_path . 'content-bottom-icon-title-inline.png'
 					],
 					'content-bottom-icon-title-inline' => [
 						'title' => esc_html__('Content Bottom | Icon Title Inline', 'essential-addons-for-elementor-lite'),
-						'image' => $image_path . 'content-bottom-icon-title-inline.png'
+						'image' => $image_path . 'content-top-icon-title-inline.png'
+					],
+					'simple-layout' => [
+						'title' => esc_html__('Simple Layout', 'essential-addons-for-elementor-lite'),
+						'image' => $image_path . 'icon-img-left-content.png'
 					],
 				],
 				'default'     => 'default-style',
@@ -1082,6 +1086,23 @@ class Testimonial extends Widget_Base {
 				}
 				?>
 			</div>
+		<?php } ?>
+
+		<?php if('simple-layout' == $settings['eael_testimonial_style']) { ?>
+			<?php $this->render_testimonial_image(); ?>
+			<div class="eael-testimonial-content">
+				<h3 class="eael-testimonial-name"><?php echo wp_kses( $settings['eael_testimonial_name'], HelperClass::eael_allowed_tags() ); ?></h3>
+				<p class="eael-testimonial-company"><?php echo wp_kses( $settings['eael_testimonial_company_title'], HelperClass::eael_allowed_tags() ); ?></p>
+				<?php
+				if ( 'default' === $settings['eael_testimonial_rating_position'] ) {
+					$this->render_testimonial_rating();
+				}
+				?>
+				<div class="eael-testimonial-quote-content">
+					<?php echo wp_kses( $settings['eael_testimonial_description'], HelperClass::eael_allowed_tags() ); ?>
+				</div>
+			</div>
+
 		<?php } ?>
 
 		<?php 
