@@ -173,7 +173,7 @@
     margin-bottom: 15px;
 }
 
-.eael-pricing.style-1 .eael-pricing-item .header:after {
+.eael-pricing.style-1.eael-header-devider .eael-pricing-item .header:after {
     content: '';
     position: absolute;
     width: 140px;
@@ -585,7 +585,7 @@
 }
 
 .eael-pricing-content-align-left
-    .eael-pricing.style-3
+    .eael-pricing.style-3.eael-header-devider
     .eael-pricing-item
     .header:after {
     -webkit-transform: translateX(-80%);
