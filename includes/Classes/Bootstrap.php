@@ -255,6 +255,7 @@ class Bootstrap
 			    add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close' );
                 //Get current active theme
                 $theme = wp_get_theme();
+                $theme = $theme->parent() ? $theme->parent() : $theme;
                 //Astra Theme
                 if( function_exists( 'astra_woo_woocommerce_shop_product_content' ) ){
                     add_action( 'woocommerce_after_shop_loop_item', 'astra_woo_woocommerce_shop_product_content' );
