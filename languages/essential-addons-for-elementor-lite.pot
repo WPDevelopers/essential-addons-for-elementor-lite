@@ -11359,7 +11359,7 @@ msgid "File Type Fields:"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:1692
-msgid "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.4 with new \"<b><a target='_blank' href='%s'>Figma To Elementor Converter</a></b>\" widget. For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>"
+msgid "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.4 with new \"<b><a target='_blank' href='%s'>Figma To Elementor Converter (Beta)</a></b>\" widget. For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:1695
