@@ -91,6 +91,7 @@ class Liquid_Glass_Effect {
 			[
 				'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
+				'default'   => '#FFFFFF1F',
 				'selectors' => [
 					'{{WRAPPER}}.eael_liquid_glass-effect1' => 'background-color: {{VALUE}}',
 				],
@@ -121,6 +122,7 @@ class Liquid_Glass_Effect {
 			[
 				'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
+				'default'   => '#FFFFFF1F',
 				'selectors' => [
 					'{{WRAPPER}}.eael_liquid_glass-effect3' => 'background-color: {{VALUE}}',
 				],
@@ -218,7 +220,7 @@ class Liquid_Glass_Effect {
 					],
 				],
 				'default' => [
-					'size' => 5,
+					'size' => 24,
 				],
 				'selectors' => [
 					'{{WRAPPER}}.eael_liquid_glass-effect1' => 'backdrop-filter: blur({{SIZE}}px)',
@@ -243,7 +245,7 @@ class Liquid_Glass_Effect {
 					],
 				],
 				'default' => [
-					'size' => 10,
+					'size' => 20,
 				],
 				'selectors' => [
 					'{{WRAPPER}}.eael_liquid_glass-effect2' => 'backdrop-filter: blur({{SIZE}}px) brightness(1.1) saturate(1.5)',
@@ -268,7 +270,7 @@ class Liquid_Glass_Effect {
 					],
 				],
 				'default' => [
-					'size' => 15,
+					'size' => 16,
 				],
 				'selectors' => [
 					'{{WRAPPER}}.eael_liquid_glass-effect3' => 'backdrop-filter: blur({{SIZE}}px)',
@@ -528,7 +530,24 @@ class Liquid_Glass_Effect {
 		$element->add_group_control(
 			\Elementor\Group_Control_Border::get_type(),
 			[
-				'name'      => 'eael_liquid_glass_border_radius_effect1',
+				'name'      => 'eael_liquid_glass_border_effect1',
+				'fields_options' => [
+					'border' => [
+						'default' => 'solid',
+					],
+					'width' => [
+						'default' => [
+							'top'      => '1',
+							'right'    => '1',
+							'bottom'   => '1',
+							'left'     => '1',
+							'isLinked' =>  false,
+						],
+					],
+					'color' => [
+						'default' => '#FFFFFF1F',
+					],
+				],
 				'selector'  => '{{WRAPPER}}.eael_liquid_glass_shadow-effect1',
 				'condition' => [
 					'eael_liquid_glass_effect_switch'  => 'yes',
@@ -543,6 +562,14 @@ class Liquid_Glass_Effect {
 				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'default' => [
+					'top' 	  => 24,
+					'right'    => 24,
+					'bottom'   => 24,
+					'left'     => 24,
+					'unit'     => 'px',
+					'isLinked' => true,
+				],
 				'selectors'  => [
 					'{{WRAPPER}}.eael_liquid_glass_shadow-effect1' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
@@ -562,10 +589,10 @@ class Liquid_Glass_Effect {
 					'box_shadow'      => [
 						'default'      => [
 							'color'      => 'rgba(0,0,0,0.78)',
-							'horizontal' => -1,
-							'vertical'   => 9,
-							'blur'       => 28,
-							'spread'     => 2,
+							'horizontal' => 0,
+							'vertical'   => 19,
+							'blur'       => 26,
+							'spread'     => 1,
 						],
 					],
 				],
@@ -580,7 +607,24 @@ class Liquid_Glass_Effect {
 		$element->add_group_control(
 			\Elementor\Group_Control_Border::get_type(),
 			[
-				'name'      => 'eael_liquid_glass_border_radius_effect2',
+				'name'      => 'eael_liquid_glass_border_effect2',
+				'fields_options' => [
+					'border' => [
+						'default' => 'solid',
+					],
+					'width' => [
+						'default' => [
+							'top'      => '1',
+							'right'    => '1',
+							'bottom'   => '1',
+							'left'     => '1',
+							'isLinked' =>  false,
+						],
+					],
+					'color' => [
+						'default' => '#FFFFFF1F',
+					],
+				],
 				'selector'  => '{{WRAPPER}}.eael_liquid_glass_shadow-effect2',
 				'condition' => [
 					'eael_liquid_glass_effect_switch'  => 'yes',
@@ -595,6 +639,14 @@ class Liquid_Glass_Effect {
 				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'default'    => [
+					'top' 	  => 16,
+					'right'    => 16,
+					'bottom'   => 16,
+					'left'     => 16,
+					'unit'     => 'px',
+					'isLinked' => true,
+				],
 				'selectors'  => [
 					'{{WRAPPER}}.eael_liquid_glass_shadow-effect2' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
@@ -613,11 +665,11 @@ class Liquid_Glass_Effect {
 					'box_shadow_type' => [ 'default' => 'yes' ],
 					'box_shadow'      => [
 						'default'      => [
-							'color'      => 'rgb(165 165 165 / 78%)',
+							'color'      => '#383C65',
 							'horizontal' => 0,
 							'vertical'   => 0,
-							'blur'       => 8,
-							'spread'     => 1,
+							'blur'       => 33,
+							'spread'     => -2,
 						],
 					],
 				],
@@ -633,6 +685,23 @@ class Liquid_Glass_Effect {
 			\Elementor\Group_Control_Border::get_type(),
 			[
 				'name'      => 'eael_liquid_glass_border_radius_effect3',
+				'fields_options' => [
+					'border' => [
+						'default' => 'solid',
+					],
+					'width' => [
+						'default' => [
+							'top'      => '1',
+							'right'    => '1',
+							'bottom'   => '1',
+							'left'     => '1',
+							'isLinked' =>  false,
+						],
+					],
+					'color' => [
+						'default' => '#FFFFFF1F',
+					],
+				],
 				'selector'  => '{{WRAPPER}}.eael_liquid_glass_shadow-effect3',
 				'condition' => [
 					'eael_liquid_glass_effect_switch'  => 'yes',
@@ -647,6 +716,14 @@ class Liquid_Glass_Effect {
 				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'default'    => [
+					'top' 	  => 8,
+					'bottom'   => 8,
+					'left'     => 8,
+					'right'    => 8,
+					'unit'     => 'px',
+					'isLinked' => true,
+				],
 				'selectors'  => [
 					'{{WRAPPER}}.eael_liquid_glass_shadow-effect3' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
@@ -666,7 +743,7 @@ class Liquid_Glass_Effect {
 					'box_shadow_position' => [ 'default' => 'inset' ],
 					'box_shadow'      => [
 						'default'      => [
-							'color'      => '#bebebe',
+							'color'      => 'rgba(255, 255, 255, 0.4)',
 							'horizontal' =>1,
 							'vertical'   =>1,
 							'blur'       => 10,
