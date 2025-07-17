@@ -999,6 +999,15 @@ trait Ajax_Handler {
 		if ( isset( $settings['lr_recaptcha_language'] ) ) {
 			update_option( 'eael_recaptcha_language', sanitize_text_field( $settings['lr_recaptcha_language'] ) );
 		}
+
+		//Cloudflare Turnstile
+		if ( isset( $settings['lr_cloudflare_turnstile_sitekey'] ) ) {
+			update_option( 'eael_cloudflare_turnstile_sitekey', sanitize_text_field( $settings['lr_cloudflare_turnstile_sitekey'] ) );
+		}
+		if ( isset( $settings['lr_cloudflare_turnstile_secretkey'] ) ) {
+			update_option( 'eael_cloudflare_turnstile_secretkey', sanitize_text_field( $settings['lr_cloudflare_turnstile_secretkey'] ) );
+		}
+
 		//reCAPTCHA v3
 		if ( isset( $settings['lr_recaptcha_sitekey_v3'] ) ) {
 			update_option( 'eael_recaptcha_sitekey_v3', sanitize_text_field( $settings['lr_recaptcha_sitekey_v3'] ) );
