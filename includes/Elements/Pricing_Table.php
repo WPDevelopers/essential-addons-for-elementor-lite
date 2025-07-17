@@ -908,31 +908,6 @@ class Pricing_Table extends Widget_Base
             ]
         );
 
-        $this->add_responsive_control(
-            'eael_pricing_table_content_button_alignment',
-            [
-                'label'        => esc_html__('Button Alignment', 'essential-addons-for-elementor-lite'),
-                'type'         => Controls_Manager::CHOOSE,
-                'label_block'  => true,
-                'options'      => [
-                    'left'   => [
-                        'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'eicon-text-align-left',
-                    ],
-                    'center' => [
-                        'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'eicon-text-align-center',
-                    ],
-                    'right'  => [
-                        'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'eicon-text-align-right',
-                    ],
-                ],
-                'default'      => 'center',
-                'prefix_class' => 'eael-pricing-button-align%s-',
-            ]
-        );
-
         $this->end_controls_section();
 
         /**
@@ -2087,6 +2062,32 @@ class Pricing_Table extends Widget_Base
             [
                 'label' => esc_html__('Button', 'essential-addons-for-elementor-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+
+        $this->add_responsive_control(
+            'eael_pricing_table_content_button_alignment',
+            [
+                'label'        => esc_html__('Button Alignment', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::CHOOSE,
+                'label_block'  => true,
+                'options'      => [
+                    'left'   => [
+                        'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-text-align-left',
+                    ],
+                    'center' => [
+                        'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-text-align-center',
+                    ],
+                    'right'  => [
+                        'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-text-align-right',
+                    ],
+                ],
+                'default'      => 'center',
+                'prefix_class' => 'eael-pricing-button-align%s-',
             ]
         );
 

@@ -25,6 +25,10 @@
     transition: 0.3s;
     -webkit-border-radius: 4px;
     border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
 }
 
 .eael-pricing .eael-pricing-button:hover {
