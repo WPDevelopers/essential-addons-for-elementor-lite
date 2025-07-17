@@ -55,7 +55,7 @@ trait Elements {
 
 			<filter id="eael-glass-distortion2" x="0%" y="0%" width="100%" height="100%">
 				<feTurbulence type="fractalNoise" baseFrequency="1.008 1.008" numOctaves="1" seed="9000" result="noise" />
-				<feGaussianBlur in="noise" stdDeviation="1" result="blurred" />
+				<feGaussianBlur in="noise" stdDeviation="0.1" result="blurred" />
 				<feDisplacementMap in="SourceGraphic" in2="blurred" scale="77" xChannelSelector="R" yChannelSelector="G" />
          </filter>
 

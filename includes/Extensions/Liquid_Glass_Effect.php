@@ -338,6 +338,9 @@ class Liquid_Glass_Effect {
 						'step' => 1,
 					],
 				],
+				'default' => [
+					'size' => 7,
+				],
 				'selectors' => [
 					'{{WRAPPER}}.eael_liquid_glass-effect6::before' => 'backdrop-filter: blur({{SIZE}}px)',
 				],
@@ -374,7 +377,7 @@ class Liquid_Glass_Effect {
 					],
 				],
 				'default' => [
-					'size' => 0.008,
+					'size' => 0.009,
 				],
 				'condition' => [
 					'eael_liquid_glass_effect_switch' => 'yes',
@@ -396,7 +399,7 @@ class Liquid_Glass_Effect {
 					],
 				],
 				'default' => [
-					'size' => 1.008,
+					'size' => 1.2,
 				],
 				'condition' => [
 					'eael_liquid_glass_effect_switch' => 'yes',
@@ -462,7 +465,7 @@ class Liquid_Glass_Effect {
 					],
 				],
 				'default' => [
-					'size' => 77,
+					'size' => 70,
 				],
 				'condition' => [
 					'eael_liquid_glass_effect_switch' => 'yes',
@@ -778,7 +781,7 @@ class Liquid_Glass_Effect {
 						],
 					],
 					'color' => [
-						'default' => '#808080',
+						'default' => '#AAAAAA1A',
 					],
 				],
 				'condition' => [
@@ -794,6 +797,14 @@ class Liquid_Glass_Effect {
 				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'default'    => [
+					'top' 	  => 24,
+					'bottom'   => 24,
+					'left'     => 24,
+					'right'    => 24,
+					'unit'     => 'px',
+					'isLinked' => true,
+				],
 				'selectors'  => [
 					'{{WRAPPER}}.eael_liquid_glass_shadow-effect4' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
@@ -808,6 +819,18 @@ class Liquid_Glass_Effect {
 			\Elementor\Group_Control_Box_Shadow::get_type(),
 			[
 				'name'      => 'eael_liquid_glass_shadow_effect4',
+				'fields_options'     => [
+					'box_shadow_type' => [ 'default' => 'yes' ],
+					'box_shadow'      => [
+						'default'      => [
+							'color'      => '#00000040',
+							'horizontal' => 0,
+							'vertical'   => 9,
+							'blur'       => 21,
+							'spread'     => 0,
+						],
+					],
+				],
 				'selector'  => '{{WRAPPER}}.eael_liquid_glass_shadow-effect4',
 				'condition' => [
 					'eael_liquid_glass_effect_switch'  => 'yes',
