@@ -171,7 +171,7 @@ trait Elements {
 			],
 			[
 				'name'       => 'eael-figma-to-elementor',
-				'title'      => __( 'Figma To Elementor Converter', 'essential-addons-for-elementor-lite' ),
+				'title'      => __( 'Figma to Elementor Converter', 'essential-addons-for-elementor-lite' ),
 				'icon'       => 'eaicon-flip-carousel',
 				'categories' => '["essential-addons-elementor"]',
 			],
