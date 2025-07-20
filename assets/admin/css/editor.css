@@ -94,7 +94,7 @@
 	color: #cdcfd2;
 }
 
-#elementor-panel__editor__help__link[href^="https://essential-addons.com/elementor/docs"]:before {
+#elementor-panel__editor__help__link[href^="https://essential-addons.com/"]:before {
 	content: "\e98a";
 	font-family: "eaicon" !important;
 	font-size: 190%;
