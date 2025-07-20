@@ -118,6 +118,10 @@
         position: relative;
         font-family: 'Segoe UI', sans-serif;
 
+        @media screen and (max-width: 767px) {
+            display: block;
+        }
+
         .eael-testimonial-image img {
             width: 180px;
             height: auto;

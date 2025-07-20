@@ -131,6 +131,12 @@
   font-family: "Segoe UI", sans-serif;
 }
 
+@media screen and (max-width: 767px) {
+  .eael-testimonial-item.simple-layout {
+    display: block;
+  }
+}
+
 .eael-testimonial-item.simple-layout .eael-testimonial-image img {
   width: 180px;
   height: auto;
