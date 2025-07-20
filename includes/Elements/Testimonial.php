@@ -978,7 +978,7 @@ class Testimonial extends Widget_Base {
 
 	<div <?php $this->print_render_attribute_string('eael_testimonial_wrap'); ?>>
 		<?php
-			if ( 'top' === $settings['eael_testimonial_rating_position'] ) {
+			if ( 'top' === $settings['eael_testimonial_rating_position'] && 'simple-layout' !== $settings['eael_testimonial_style'] ) {
 				$this->render_testimonial_rating();
 			}
 		?>
@@ -1094,6 +1094,11 @@ class Testimonial extends Widget_Base {
 		<?php if('simple-layout' == $settings['eael_testimonial_style']) { ?>
 			<?php $this->render_testimonial_image(); ?>
 			<div class="eael-testimonial-content">
+				<?php
+					if ( 'top' === $settings['eael_testimonial_rating_position'] ) {
+						$this->render_testimonial_rating();
+					}
+				?>
 				<h3 class="eael-testimonial-user"><?php echo wp_kses( $settings['eael_testimonial_name'], HelperClass::eael_allowed_tags() ); ?></h3>
 				<p class="eael-testimonial-user-company"><?php echo wp_kses( $settings['eael_testimonial_company_title'], HelperClass::eael_allowed_tags() ); ?></p>
 				<?php
