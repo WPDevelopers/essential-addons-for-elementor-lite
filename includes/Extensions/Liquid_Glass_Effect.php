@@ -294,6 +294,9 @@ class Liquid_Glass_Effect {
 						'step' => 1,
 					],
 				],
+				'default' => [
+					'size' => 5,
+				],
 				'selectors' => [
 					'{{WRAPPER}}.eael_liquid_glass-effect4::before' => 'backdrop-filter: blur({{SIZE}}px)',
 				],
