@@ -1348,8 +1348,8 @@ trait Admin {
 							'figma-to-elementor'   => [
 							    'key'         => 'figma-to-elementor',
 							    'title'       => __( 'Figma to Elementor Converter', 'essential-addons-for-elementor-lite' ),
-							    'demo_link'   => 'https://essential-addons.com/figma-to-elementor/',
-							    'doc_link'    => 'https://essential-addons.com/docs/figma-to-elementor/',
+							    'demo_link'   => 'https://essential-addons.com/figma-to-elementor-converter/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-figma-to-elementor-converter/',
 							    'is_pro'      => true,
 								'promotion'   => 'beta',
 							    'is_activate' => boolval( $this->get_settings( 'figma-to-elementor' ) )
@@ -1689,7 +1689,7 @@ trait Admin {
 			    ],
 			    'admin_screen_promo'      => [
 				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
-				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.4 with new \"<b><a target='_blank' href='%s'>Figma To Elementor Converter (Beta)</a></b>\" widget. For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url( 'https://essential-addons.com/figma-to-elementor/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
+				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.4 with new \"<b><a target='_blank' href='%s'>Figma To Elementor Converter (Beta)</a></b>\" widget. For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url( 'https://essential-addons.com/figma-to-elementor-converter/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
 			    ],
 			    'pro_modal'               => [
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),
