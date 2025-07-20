@@ -229,7 +229,7 @@ class Testimonial extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'content_height',
 			[
 				'label' => esc_html__( 'Height', 'essential-addons-for-elementor-lite'),
