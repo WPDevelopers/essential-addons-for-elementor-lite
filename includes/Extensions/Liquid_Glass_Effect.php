@@ -35,6 +35,20 @@ class Liquid_Glass_Effect {
 		);
 
 		$element->add_control(
+			'eael_liquid_glass_effect_notice',
+			[
+				'type'        => Controls_Manager::NOTICE,
+				'notice_type' => 'warning',
+				'dismissible' => false,
+				'heading'     => esc_html__( 'Important: ', 'essential-addons-for-elementor-lite' ),
+				'content'     => esc_html__( 'The effect will be noticeable only if a semi-transparent background color is used.', 'essential-addons-for-elementor-lite' ) . ' <a href = "#">' . esc_html__( 'Learn More', 'essential-addons-for-elementor-lite' ) . '</a>',
+				'condition'   => [
+					'eael_liquid_glass_effect_switch' => 'yes',
+				]
+			]
+		);
+
+		$element->add_control(
 			'eael_liquid_glass_effect',
 			[
 				'label'   => esc_html__( 'Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
