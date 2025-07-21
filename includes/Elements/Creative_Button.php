@@ -861,9 +861,6 @@ class Creative_Button extends Widget_Base
                         'step' => 1,
                     ],
                 ],
-                'default' => [
-                    'size' => 5,
-                ],
                 'selectors' => [
                     '{{WRAPPER}}.eael_wd_liquid_glass-effect4 .eael-creative-button::before' => 'backdrop-filter: blur({{SIZE}}px)',
                 ],
@@ -907,9 +904,6 @@ class Creative_Button extends Widget_Base
                         'max'  => 50,
                         'step' => 1,
                     ],
-                ],
-                'default' => [
-                    'size' => 7,
                 ],
                 'selectors' => [
                     '{{WRAPPER}}.eael_wd_liquid_glass-effect6 .eael-creative-button::before' => 'backdrop-filter: blur({{SIZE}}px)',
