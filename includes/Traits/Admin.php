@@ -1340,6 +1340,21 @@ trait Admin {
 							    'is_activate' => boolval( $this->get_settings( 'betterdocs-search-form' ) )
 						    ],
 					    ]
+					],
+					'figma-design' => [
+					    'title'    => __( 'Figma Design Elements', 'essential-addons-for-elementor-lite' ),
+					    'icon'     => 'ea-figma-to-elementor',
+					    'elements' => [
+							'figma-to-elementor'   => [
+							    'key'         => 'figma-to-elementor',
+							    'title'       => __( 'Figma to Elementor Converter', 'essential-addons-for-elementor-lite' ),
+							    'demo_link'   => 'https://essential-addons.com/figma-to-elementor-converter/',
+							    'doc_link'    => 'https://essential-addons.com/docs/ea-figma-to-elementor-converter/',
+							    'is_pro'      => true,
+								'promotion'   => 'beta',
+							    'is_activate' => boolval( $this->get_settings( 'figma-to-elementor' ) )
+						    ],
+					    ]
 				    ],
 				    'woocommerce-elements'     => [
 					    'title'    => __( 'WooCommerce Elements', 'essential-addons-for-elementor-lite' ),
@@ -1473,7 +1488,7 @@ trait Admin {
 							    'is_activate' => boolval( $this->get_settings( 'woo-account-dashboard' ) )
 						    ]
 					    ]
-				    ]
+					]
 			    ],
 			    'modal'                   => [
 				    'postDuplicatorSetting'  => [
@@ -1579,6 +1594,24 @@ trait Admin {
 								    ]
 							    ]
 						    ],
+						    'cloudflareTurnstile'    => [
+							    'title'  => __( 'Cloudflare Turnstile', 'essential-addons-for-elementor-lite' ),
+							    'icon'   => 'images/cloudflare.svg',
+							    'fields' => [
+								    [
+									    'name'        => 'lr_cloudflare_turnstile_sitekey',
+									    'value'       => get_option( 'eael_cloudflare_turnstile_sitekey', '' ),
+									    'label'       => __( 'Site Key:', 'essential-addons-for-elementor-lite' ),
+									    'placeholder' => __( 'Site Key', 'essential-addons-for-elementor-lite' ),
+								    ],
+								    [
+									    'name'        => 'lr_cloudflare_turnstile_secretkey',
+									    'value'       => get_option( 'eael_cloudflare_turnstile_secretkey', '' ),
+									    'label'       => __( 'Secret Key:', 'essential-addons-for-elementor-lite' ),
+									    'placeholder' => __( 'Secret Key', 'essential-addons-for-elementor-lite' ),
+								    ]
+							    ]
+						    ],
 						    'googleLogin'    => [
 							    'title'  => __( 'Google Login', 'essential-addons-for-elementor-lite' ),
 							    'icon'   => 'images/map.svg',
@@ -1656,7 +1689,7 @@ trait Admin {
 			    ],
 			    'admin_screen_promo'      => [
 				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
-				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA 6.2 with new \"<b><a target='_blank' href='%s'>Code Snippet</a></b>\" widget. For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url( 'https://essential-addons.com/code-snippet/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
+				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.4 with new \"<b><a target='_blank' href='%s'>Figma to Elementor Converter (Beta)</a></b>\" widget. For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url( 'https://essential-addons.com/figma-to-elementor-converter/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
 			    ],
 			    'pro_modal'               => [
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),

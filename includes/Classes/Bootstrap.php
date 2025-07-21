@@ -75,8 +75,8 @@ class Bootstrap
     protected $installer;
 
 
-    const EAEL_PROMOTION_FLAG = 14;
-    const EAEL_ADMIN_MENU_FLAG = 14;
+    const EAEL_PROMOTION_FLAG = 15;
+    const EAEL_ADMIN_MENU_FLAG = 15;
     /**
      * Singleton instance
      *
@@ -255,6 +255,7 @@ class Bootstrap
 			    add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close' );
                 //Get current active theme
                 $theme = wp_get_theme();
+                $theme = $theme->parent() ? $theme->parent() : $theme;
                 //Astra Theme
                 if( function_exists( 'astra_woo_woocommerce_shop_product_content' ) ){
                     add_action( 'woocommerce_after_shop_loop_item', 'astra_woo_woocommerce_shop_product_content' );
