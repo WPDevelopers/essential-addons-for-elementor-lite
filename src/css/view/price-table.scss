@@ -40,7 +40,11 @@
     margin: 0px;
     list-style: none;
 }
-
+.eael-pricing .eael-pricing-item ul li.eael-pricing-item-feature {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .eael-pricing .eael-pricing-item ul li.disable-item {
     text-decoration: line-through;
     opacity: 0.5;
@@ -241,7 +245,7 @@
 }
 
 .eael-pricing.style-1 .eael-pricing-item .body ul li {
-    display: block;
+    // display: block;
     width: 100%;
     height: auto;
     padding: 10px 0px;
@@ -450,7 +454,7 @@
 }
 
 .eael-pricing.style-2 .eael-pricing-item .body ul li {
-    display: block;
+    // display: block;
     width: 100%;
     height: auto;
     padding: 10px 15px;

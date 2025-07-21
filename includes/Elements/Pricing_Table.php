@@ -1367,6 +1367,31 @@ class Pricing_Table extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_pricing_table_list_item_align',
+            [
+                'label'     => esc_html__('Alignment', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::CHOOSE,
+                'options'   => [
+                    'left'   => [
+                        'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-text-align-left',
+                    ],
+                    'center' => [
+                        'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-text-align-center',
+                    ],
+                    'right'  => [
+                        'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-text-align-right',
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-pricing-item .body ul li.eael-pricing-item-feature' => 'justify-content: {{VALUE}};',
+                ],
+            ]
+        );
+
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
@@ -2331,7 +2356,7 @@ class Pricing_Table extends Widget_Base
                 $obj->add_render_attribute(
                     'pricing_feature_item' . $counter, 
                     [ 
-                        'class' => 'elementor-repeater-item-' . esc_attr( $item['_id'] ),
+                        'class' => [ 'eael-pricing-item-feature', 'elementor-repeater-item-' . esc_attr( $item['_id'] ) ]
                     ]
                 );
 
