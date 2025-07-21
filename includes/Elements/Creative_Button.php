@@ -775,35 +775,6 @@ class Creative_Button extends Widget_Base
         );
 
         $this->add_control(
-            'eael_wd_liquid_glass_effect_opacity',
-            [
-                'label' => esc_html__( 'Opacity', 'essential-addons-for-elementor-lite' ),
-                'type'  => Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min'  => 0,
-                        'max'  => 1,
-                        'step' => .1,
-                    ],
-                ],
-                'default' => [
-                    'size' => 1,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}}.eael_wd_liquid_glass-effect1, 
-                    {{WRAPPER}}.eael_wd_liquid_glass-effect2, 
-                    {{WRAPPER}}.eael_wd_liquid_glass-effect3, 
-                    {{WRAPPER}}.eael_wd_liquid_glass-effect4::before, 
-                    {{WRAPPER}}.eael_wd_liquid_glass-effect5::before, 
-                    {{WRAPPER}}.eael_wd_liquid_glass-effect6::before' => 'opacity: {{SIZE}}',
-                ],
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch' => 'yes',
-                ],
-            ]
-        );
-
-        $this->add_control(
             'eael_wd_liquid_glass_effect_backdrop_filter_effect1',
             [
                 'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
