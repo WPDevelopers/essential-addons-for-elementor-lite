@@ -367,7 +367,7 @@
   direction: ltr;
 }
 
-.eael_cb_liquid_glass-effect4 .eael-creative-button {
+.eael_wd_liquid_glass-effect4 .eael-creative-button {
   overflow: hidden;
   border: solid 1px color-mix(in srgb, var(--accent) 30%, transparent);
   -webkit-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -376,7 +376,7 @@
   position: relative;
 }
 
-.eael_cb_liquid_glass-effect4 .eael-creative-button::before {
+.eael_wd_liquid_glass-effect4 .eael-creative-button::before {
   position: absolute;
   content: "";
   z-index: -99;
@@ -390,7 +390,7 @@
           filter: url(#eael-glass-distortion1);
 }
 
-.eael_cb_liquid_glass-effect5 .eael-creative-button {
+.eael_wd_liquid_glass-effect5 .eael-creative-button {
   overflow: hidden;
   border: solid 1px color-mix(in srgb, var(--accent) 30%, transparent);
   -webkit-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -399,7 +399,7 @@
   position: relative;
 }
 
-.eael_cb_liquid_glass-effect5 .eael-creative-button::before {
+.eael_wd_liquid_glass-effect5 .eael-creative-button::before {
   position: absolute;
   content: "";
   z-index: -99;
@@ -413,7 +413,7 @@
           filter: url(#eael-glass-distortion2);
 }
 
-.eael_cb_liquid_glass-effect6 .eael-creative-button {
+.eael_wd_liquid_glass-effect6 .eael-creative-button {
   overflow: hidden;
   border: solid 1px color-mix(in srgb, var(--accent) 30%, transparent);
   -webkit-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -422,7 +422,7 @@
   position: relative;
 }
 
-.eael_cb_liquid_glass-effect6 .eael-creative-button::before {
+.eael_wd_liquid_glass-effect6 .eael-creative-button::before {
   position: absolute;
   content: "";
   z-index: -99;
@@ -434,4 +434,12 @@
   -webkit-backdrop-filter: blur(0px);
   -webkit-filter: url(#eael-glass-distortion3);
           filter: url(#eael-glass-distortion3);
+}
+
+.elementor-edit-area-active .eael_wd_liquid_glass_shadow-effect1,
+.elementor-edit-area-active .eael_wd_liquid_glass_shadow-effect2,
+.elementor-edit-area-active .eael_wd_liquid_glass_shadow-effect3,
+.elementor-edit-area-active .eael_wd_liquid_glass_shadow-effect4 {
+  -webkit-box-shadow: inherit !important;
+          box-shadow: inherit !important;
 }
