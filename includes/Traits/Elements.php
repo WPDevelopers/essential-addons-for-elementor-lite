@@ -170,6 +170,12 @@ trait Elements {
 				'categories' => '["essential-addons-elementor"]',
 			],
 			[
+				'name'       => 'eael-figma-to-elementor',
+				'title'      => __( 'Figma to Elementor Converter', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eaicon-flip-carousel',
+				'categories' => '["essential-addons-elementor"]',
+			],
+			[
 				'name'       => 'eael-google-map',
 				'title'      => __( 'Google Map', 'essential-addons-for-elementor-lite' ),
 				'icon'       => 'eaicon-advanced-google-maps',

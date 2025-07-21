@@ -26,6 +26,7 @@
   --background-15: #FFFCF5;
   --background-16: #FFF1F3;
   --background-17: #FFF6ED;
+  --background-18: #FD853A;
   --toggle-color: #EAECF0;
   --label-color: #EAECF0;
   --label-color-fill: #7F56D9;
@@ -1599,6 +1600,10 @@ span.ea__tooltip {
 
 .content-btn.popular {
   background: var(--background-7);
+}
+
+.content-btn.beta {
+  background: var(--background-18);
 }
 
 .content-icons {
