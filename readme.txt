@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.2.0
+Stable tag: 6.2.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -126,7 +126,7 @@ Extensions (Free):
 6. [Wrapper Link](https://essential-addons.com/wrapper-link) - Add custom links into any section, column, or even flexbox
 7. [Hover Interactions](https://essential-addons.com/hover-interaction/) - Create captivating effects on buttons, images, texts and more
 
-### More elements (45+) on [Premium Version](https://wpdeveloper.com/in/upgrade-essential-addons-elementor)
+### More elements (50+) on [Premium Version](https://wpdeveloper.com/in/upgrade-essential-addons-elementor)
 
 1. [Post Block](https://essential-addons.com/post-block/) - Display your blog posts with a variety of styles
 2. [Lightbox & Modal](https://essential-addons.com/lightbox-modal/) - Create interactive popups after trigger actions
@@ -168,6 +168,7 @@ Extensions (Free):
 37. [Stacked Cards](https://essential-addons.com/stacked-cards/)- Showcase your website content in a distinctive and engaging way
 38. [360 Degree Photo Viewer](https://essential-addons.com/360-degree-photo-viewer)- Make your website image visible from every angle with adjustable controls
 39. [Multicolumn Pricing Table](https://essential-addons.com/multicolumn-pricing-table/)- Display pricing plans in multiple columns to compare features and choose the best option
+40. [Figma to Elementor Converter](https://essential-addons.com/figma-to-elementor-converter/)- Turn Figma designs into fully customizable Elementor Pages
 
 
 Extensions (Pro):
@@ -314,6 +315,14 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.2.1 - 20/07/2025 =
+
+- Improved: EA Call To Action | Added Multi-Color Title support
+- Improved: EA Login/Register Form | Added reCAPTCHA support in Password Reset Form
+- Fixed: EA Woo Product Carousel | Resolved add to cart button Duplication issue with Blocksy theme
+- Fixed: EA Woo Product Carousel | Resolved Badge color styling issue
+- Few minor bug fixes & improvements
 
 = 6.2.0 - 03/07/2025 =
 

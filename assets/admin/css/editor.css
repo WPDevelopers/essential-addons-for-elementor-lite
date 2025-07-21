@@ -94,7 +94,7 @@
 	color: #cdcfd2;
 }
 
-#elementor-panel__editor__help__link[href^="https://essential-addons.com/elementor/docs"]:before {
+#elementor-panel__editor__help__link[href^="https://essential-addons.com/"]:before {
 	content: "\e98a";
 	font-family: "eaicon" !important;
 	font-size: 190%;
@@ -311,17 +311,31 @@
 	text-align: start;
 }
 
-/* hides original text and adds new text for Dual Color Header Gradient */
+/* hides original text and adds new text for CTA Multi Color Header Gradient & Dual Color Header Gradient */
+.elementor-control-eael_cta_title_gradient_color_background,
 .elementor-control-eael_dch_title_gradient_color_background {
 	display: none !important;
 }
+.elementor-control-eael_cta_title_gradient_color_background .elementor-control-title,
 .elementor-control-eael_dch_title_gradient_color_background .elementor-control-title {
   font-size: 0 !important; /* hides original text */
   position: relative;
 }
-
+.elementor-control-eael_cta_title_gradient_color_background .elementor-control-title::before,
 .elementor-control-eael_dch_title_gradient_color_background .elementor-control-title::before {
   content: "Set Gradient"; /* new text */
   font-size: 12px;
   color: inherit;
+}
+
+/* For Figma to Elementor Widget */
+#elementor-panel-elements svg.eael-beta-icon {
+	position: absolute;
+	top: 3px;
+	left: 2px;
+	height: 14px;
+}
+
+#elementor-panel-header-title svg.eael-beta-icon {
+	margin-bottom: 3px;
 }

@@ -1432,9 +1432,9 @@ class Woo_Product_Carousel extends Widget_Base {
                     'size' => 14,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-woo-product-carousel-container .woocommerce ul.products .product .star-rating' => 'font-size: {{SIZE}}px!important;',
-                    '{{WRAPPER}} .eael-woo-product-carousel-container .woocommerce ul.products .product .star-rating::before' => 'font-size: {{SIZE}}px!important;',
-                    '{{WRAPPER}} .eael-woo-product-carousel-container .woocommerce ul.products .product .star-rating span::before' => 'font-size: {{SIZE}}px!important;',
+                    '{{WRAPPER}} .eael-woo-product-carousel-container .woocommerce div.products .product .star-rating' => 'font-size: {{SIZE}}px!important;',
+                    '{{WRAPPER}} .eael-woo-product-carousel-container .woocommerce div.products .product .star-rating::before' => 'font-size: {{SIZE}}px!important;',
+                    '{{WRAPPER}} .eael-woo-product-carousel-container .woocommerce div.products .product .star-rating span::before' => 'font-size: {{SIZE}}px!important;',
                 ],
             
             ]
@@ -1456,7 +1456,7 @@ class Woo_Product_Carousel extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'eael_product_carousel_rating_count_typography',
-                'selector' => '{{WRAPPER}} .eael-woo-product-carousel-container .woocommerce ul.products .product .eael-star-rating .eael-star-rating-text',
+                'selector' => '{{WRAPPER}} .eael-woo-product-carousel-container .woocommerce div.products .product .eael-star-rating .eael-star-rating-text',
                 'condition' => [
                     'eael_rating_count' => 'yes'
                 ]
@@ -1470,7 +1470,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#000',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-woo-product-carousel-container .woocommerce ul.products .product .eael-star-rating .eael-star-rating-text' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-woo-product-carousel-container .woocommerce div.products .product .eael-star-rating .eael-star-rating-text' => 'color: {{VALUE}}',
                 ],
                 'condition' => [
                     'eael_rating_count' => 'yes'
@@ -1532,7 +1532,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#fff',
                 'selectors' => [
-                    '{{WRAPPER}} .woocommerce ul.products li.product .onsale, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .woocommerce div.products div.product .onsale, {{WRAPPER}} .woocommerce div.products div.product .eael-onsale' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -1554,7 +1554,7 @@ class Woo_Product_Carousel extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'eael_product_carousel_sale_badge_typo',
-                'selector' => '{{WRAPPER}} .woocommerce ul.products li.product .onsale, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale:not(.outofstock)',
+                'selector' => '{{WRAPPER}} .woocommerce div.products div.product .onsale, {{WRAPPER}} .woocommerce div.products div.product .eael-onsale:not(.outofstock)',
             ]
         );
         
@@ -1574,7 +1574,7 @@ class Woo_Product_Carousel extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#fff',
                 'selectors' => [
-                    '{{WRAPPER}} .woocommerce ul.products li.product .outofstock-badge, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale.outofstock' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .woocommerce div.products div.product .outofstock-badge, {{WRAPPER}} .woocommerce div.products div.product .eael-onsale.outofstock' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -1586,8 +1586,8 @@ class Woo_Product_Carousel extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#ff2a13',
                 'selectors' => [
-                    '{{WRAPPER}} .woocommerce ul.products li.product .outofstock-badge, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale.outofstock' => 'background-color: {{VALUE}};',
-                    '{{WRAPPER}} .woocommerce ul.products li.product .eael-onsale.outofstock.sale-preset-4:after'                                                => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}};',
+                    '{{WRAPPER}} .woocommerce div.products div.product .outofstock-badge, {{WRAPPER}} .woocommerce div.products div.product .eael-onsale.outofstock' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .woocommerce div.products div.product .eael-onsale.outofstock.sale-preset-4:after' => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}};',
                 ],
             ]
         );
@@ -1596,7 +1596,7 @@ class Woo_Product_Carousel extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'eael_product_carousel_stock_out_badge_typo',
-                'selector' => '{{WRAPPER}} .woocommerce ul.products li.product .outofstock-badge, {{WRAPPER}} .woocommerce ul.products li.product .eael-onsale.outofstock',
+                'selector' => '{{WRAPPER}} .woocommerce div.products div.product .outofstock-badge, {{WRAPPER}} .woocommerce div.products div.product .eael-onsale.outofstock',
             ]
         );
         
