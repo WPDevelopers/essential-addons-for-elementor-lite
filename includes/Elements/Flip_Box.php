@@ -959,6 +959,21 @@ class Flip_Box extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_wd_liquid_glass_effect_rear_section',
+            [
+                'label'     => __('Liquid Glass Effect', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        // Liquid Glass Effects
+        $this->eael_liquid_glass_effects_rear();
+
+        //  Liquid Glass Shadow Effects
+        $this->eael_liquid_glass_shadow_effects_rear();
+
         $this->end_controls_section();
 
         /**
@@ -1795,6 +1810,333 @@ class Flip_Box extends Widget_Base
             ]
         );
     }
+
+    /**
+     * Controller Summary of eael_liquid_glass_effects
+     */
+    protected function eael_liquid_glass_effects_rear() {
+        $this->add_control(
+            'eael_wd_liquid_glass_effect_switch_rear',
+            [
+                'label' => __( 'Enable Liquid Glass Effect', 'essential-addons-for-elementor-lite' ),
+                'type'  => Controls_Manager::SWITCHER
+            ]
+        );
+
+        $this->add_control(
+            'eael_wd_liquid_glass_effect_notice_rear',
+            [
+                'type'        => Controls_Manager::NOTICE,
+                'notice_type' => 'warning',
+                'dismissible' => false,
+                'heading'     => esc_html__( 'Important: ', 'essential-addons-for-elementor-lite' ),
+                'content'     => esc_html__( 'The effect will be noticeable only if a semi-transparent background color is used.', 'essential-addons-for-elementor-lite' ) . ' <a href = "#">' . esc_html__( 'Learn More', 'essential-addons-for-elementor-lite' ) . '</a>',
+                'condition'   => [
+                    'eael_wd_liquid_glass_effect_switch_rear' => 'yes',
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_wd_liquid_glass_effect_rear',
+            [
+                'label'   => esc_html__( 'Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::SELECT2,
+                'default' => 'effect1',
+                'options' => [
+                    'rear_effect1' => esc_html__( 'Effect 1', 'essential-addons-for-elementor-lite' ),
+                    'rear_effect2' => esc_html__( 'Effect 2', 'essential-addons-for-elementor-lite' ),
+                    'rear_effect3' => esc_html__( 'Effect 3', 'essential-addons-for-elementor-lite' ),
+                    'rear_effect4' => esc_html__( 'Effect 4', 'essential-addons-for-elementor-lite' ),
+                    'rear_effect5' => esc_html__( 'Effect 5', 'essential-addons-for-elementor-lite' ),
+                    'rear_effect6' => esc_html__( 'Effect 6', 'essential-addons-for-elementor-lite' ),
+                ],
+                'prefix_class' => 'eael_wd_liquid_glass-',
+                'condition' => [
+                    'eael_wd_liquid_glass_effect_switch_rear' => 'yes',
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'eael_wd_liquid_glass_effect_settings_rear',
+            [
+                'label'     => esc_html__( 'Liquid Glass Settings', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::HEADING,
+                'separator' => 'before',
+                'condition' => [
+                    'eael_wd_liquid_glass_effect_switch_rear' => 'yes',
+                ]
+            ]
+        );
+
+        // Background Color Controls
+        $this->eael_wd_liquid_glass_effect_bg_color_effect_rear( $this, 'rear_effect1', '#FFFFFF1F', 'eael-elements-flip-box-rear-container' );
+        $this->eael_wd_liquid_glass_effect_bg_color_effect_rear( $this, 'rear_effect2', '', 'eael-elements-flip-box-rear-container' );
+        $this->eael_wd_liquid_glass_effect_bg_color_effect_rear( $this, 'rear_effect3', '#FFFFFF1F', 'eael-elements-flip-box-rear-container' );
+        $this->eael_wd_liquid_glass_effect_bg_color_effect_rear( $this, 'rear_effect4', '#FFFFFF1F', 'eael-elements-flip-box-rear-container' );
+        $this->eael_wd_liquid_glass_effect_bg_color_effect_rear( $this, 'rear_effect5', '', 'eael-elements-flip-box-rear-container' );
+        $this->eael_wd_liquid_glass_effect_bg_color_effect_rear( $this, 'rear_effect6', '', 'eael-elements-flip-box-rear-container' );
+
+        // Backdrop Filter Controls
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect_rear( 'rear_effect1', '24', 'eael-elements-flip-box-rear-container' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect_rear( 'rear_effect2', '20', 'eael-elements-flip-box-rear-container' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect_rear( 'rear_effect3', '16', 'eael-elements-flip-box-rear-container' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect_rear( 'rear_effect4', '', 'eael-elements-flip-box-rear-container' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect_rear( 'rear_effect5', '', 'eael-elements-flip-box-rear-container' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect_rear( 'rear_effect6', '', 'eael-elements-flip-box-rear-container' );
+    }
+
+    // Add background control for liquid glass effect.
+	public function eael_wd_liquid_glass_effect_bg_color_effect_rear( $obj, $effect, $default_bg_color, $selector ) {
+		$obj->add_control(
+			'eael_wd_liquid_glass_effect_bg_color_' . $effect,
+			args: [
+					'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+					'type'      => Controls_Manager::COLOR,
+					'default'   => $default_bg_color,
+					'selectors' => [
+						'{{WRAPPER}}.eael_wd_liquid_glass-'.$effect .' .' . $selector => 'background-color: {{VALUE}}',
+					],
+					'condition' => [
+						'eael_wd_liquid_glass_effect_switch_rear' => 'yes',
+						'eael_wd_liquid_glass_effect_rear'        => $effect,
+					],
+			]
+		);
+	}
+
+   //Add backdrop filter control for liquid glass effect.
+	public function eael_wd_liquid_glass_effect_backdrop_filter_effect_rear( $effect, $default_size, $selector ) {
+		$this->add_control(
+			'eael_wd_liquid_glass_effect_backdrop_filter_' . $effect,
+			[
+					'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
+					'type'  => Controls_Manager::SLIDER,
+					'range' => [
+						'px' => [
+							'min'  => 0,
+							'max'  => 50,
+							'step' => 1,
+						],
+					],
+					'default' => [
+						'size' => $default_size,
+					],
+					'selectors' => [
+						'{{WRAPPER}}.eael_wd_liquid_glass-'.$effect .' .' . $selector => 'backdrop-filter: blur({{SIZE}}px)',
+					],
+					'condition' => [
+						'eael_wd_liquid_glass_effect_switch_rear' => 'yes',
+						'eael_wd_liquid_glass_effect_rear' => $effect,
+					],
+			]
+		);
+	}
+
+    /**
+     * Summary of eael_liquid_glass_shadow_effects
+     */
+    protected function eael_liquid_glass_shadow_effects_rear() {
+        $this->add_control(
+			'eael_wd_liquid_glass_shadow_effect_rear',
+			[
+				'label'     => esc_html__( 'Shadow Effects', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SELECT2,
+				'default'   => 'effect1',
+				'separator' => 'before',
+				'options'   => [
+					'' 		 => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
+					'rear_effect1' => esc_html__( 'Effect 1', 'essential-addons-for-elementor-lite' ),
+					'rear_effect2' => esc_html__( 'Effect 2', 'essential-addons-for-elementor-lite' ),
+					'rear_effect3' => esc_html__( 'Effect 3', 'essential-addons-for-elementor-lite' ),
+					'rear_effect4' => esc_html__( 'Effect 4', 'essential-addons-for-elementor-lite' ),
+				],
+				'prefix_class' => 'eael_wd_liquid_glass_shadow-',
+				'condition'    => [
+					'eael_wd_liquid_glass_effect_switch_rear' => 'yes',
+				]
+			]
+		);
+
+		$this->add_control(
+			'eael_wd_liquid_glass_shadow_inner_rear',
+			[
+				'label'     => esc_html__( 'Shadow Settings', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+				'condition' => [
+					'eael_wd_liquid_glass_effect_switch_rear'  => 'yes',
+					'eael_wd_liquid_glass_shadow_effect_rear!' => '',
+				],
+			]
+		);
+
+        // Liquid Glass Border Effects
+        $this->eael_wd_liquid_glass_border_effect_rear( 'rear_effect1', '#FFFFFF1F', 'eael-elements-flip-box-rear-container' );
+        $this->eael_wd_liquid_glass_border_effect_rear( 'rear_effect2', '#FFFFFF1F', 'eael-elements-flip-box-rear-container' );
+        $this->eael_wd_liquid_glass_border_effect_rear( 'rear_effect3', '#FFFFFF1F', 'eael-elements-flip-box-rear-container' );
+        $this->eael_wd_liquid_glass_border_effect_rear( 'rear_effect4', '#FFFFFF1F', 'eael-elements-flip-box-rear-container' );
+
+        // Liquid Glass Border Radius Effects
+        $this->eael_wd_liquid_glass_border_radius_effect_rear('rear_effect1', 'eael-elements-flip-box-rear-container',
+            [
+                'top' 	  => 24,
+                'right'    => 24,
+                'bottom'   => 24,
+                'left'     => 24,
+                'unit'     => 'px',
+                'isLinked' => true,
+            ]
+        );
+
+        $this->eael_wd_liquid_glass_border_radius_effect_rear('rear_effect2', 'eael-elements-flip-box-rear-container',
+            [
+                'top' 	  => 16,
+                'right'    => 16,
+                'bottom'   => 16,
+                'left'     => 16,
+                'unit'     => 'px',
+                'isLinked' => true,
+            ]
+        );
+
+        $this->eael_wd_liquid_glass_border_radius_effect_rear('rear_effect3', 'eael-elements-flip-box-rear-container',
+            [
+                'top' 	  => 8,
+                'bottom'   => 8,
+                'left'     => 8,
+                'right'    => 8,
+                'unit'     => 'px',
+                'isLinked' => true,
+            ]
+        );
+
+        $this->eael_wd_liquid_glass_border_radius_effect_rear('rear_effect4', 'eael-elements-flip-box-rear-container',
+            [
+                'top' 	  => 24,
+                'bottom'   => 24,
+                'left'     => 24,
+                'right'    => 24,
+                'unit'     => 'px',
+                'isLinked' => true,
+            ]
+        );
+
+        // Liquid Glass Shadow Effects
+        $this->eael_wd_liquid_glass_shadow_effect_rear('rear_effect1', 'eael-elements-flip-box-rear-container',
+            [
+                'color'      => 'rgba(0,0,0,0.78)',
+                'horizontal' => 0,
+                'vertical'   => 19,
+                'blur'       => 26,
+                'spread'     => 1,
+            ]
+        );
+        
+        $this->eael_wd_liquid_glass_shadow_effect_rear('rear_effect2', 'eael-elements-flip-box-rear-container',
+            [
+                'color'      => '#383C65',
+                'horizontal' => 0,
+                'vertical'   => 0,
+                'blur'       => 33,
+                'spread'     => -2,
+            ]
+        );
+        
+        $this->eael_wd_liquid_glass_shadow_effect_rear('rear_effect3', 'eael-elements-flip-box-rear-container',
+            [
+                'color'      => 'rgba(255, 255, 255, 0.4)',
+                'horizontal' => 1,
+                'vertical'   => 1,
+                'blur'       => 10,
+                'spread'     => 5,
+            ]
+        );
+
+        $this->eael_wd_liquid_glass_shadow_effect_rear('rear_effect4', 'eael-elements-flip-box-rear-container',
+            [
+                'color'      => '#00000040',
+                'horizontal' => 0,
+                'vertical'   => 9,
+                'blur'       => 21,
+                'spread'     => 0,
+            ]
+        );
+    }
+
+    //Add border effect for Liquid Glass Effect
+	public function eael_wd_liquid_glass_border_effect_rear( $effect, $default_color, $selector ) {
+		$this->add_group_control(
+		Group_Control_Border::get_type(),
+		[
+			'name'      => 'eael_wd_liquid_glass_border_'.$effect,
+			'fields_options' => [
+				'border' => [
+					'default' => 'solid',
+				],
+				'width' => [
+					'default' => [
+						'top'      => '1',
+						'right'    => '1',
+						'bottom'   => '1',
+						'left'     => '1',
+						'isLinked' =>  false,
+					],
+				],
+				'color' => [
+					'default' => $default_color,
+				],
+			],
+			'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-'.$effect .' .'.$selector,
+			'condition' => [
+				'eael_wd_liquid_glass_effect_switch_rear'  => 'yes',
+				'eael_wd_liquid_glass_shadow_effect_rear' => $effect,
+			],
+		]
+	);
+	}
+
+    // Add border radius effect for Liquid Glass Effect
+	public function eael_wd_liquid_glass_border_radius_effect_rear( $effect, $selector, $default_radius ) {
+		$this->add_control(
+		'eael_wd_liquid_glass_border_radius_'.$effect,
+		[
+			'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [ 'px', '%', 'rem', 'custom' ],
+			'default' => $default_radius,
+			'selectors'  => [
+				'{{WRAPPER}}.eael_wd_liquid_glass_shadow-'.$effect.' .'.$selector => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+			'condition' => [
+				'eael_wd_liquid_glass_effect_switch_rear' => 'yes',
+				'eael_wd_liquid_glass_shadow_effect_rear' => $effect,
+			],
+		]
+	);
+	}
+
+    // Add shadow effect for Liquid Glass Effect
+	public function eael_wd_liquid_glass_shadow_effect_rear( $effect, $selector, $default_shadow ) {
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+					'name'      => 'eael_wd_liquid_glass_shadow_' . $effect,
+					'fields_options'     => [
+						'box_shadow_type' => [ 'default' => 'yes' ],
+						'box_shadow'      => [
+							'default' => $default_shadow,
+						],
+					],
+					'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-'.$effect.' .' . $selector,
+					'condition' => [
+						'eael_wd_liquid_glass_effect_switch_rear'  => 'yes',
+						'eael_wd_liquid_glass_shadow_effect_rear' => $effect,
+					],
+			]
+		);
+	}
 
     protected function render()
     {
