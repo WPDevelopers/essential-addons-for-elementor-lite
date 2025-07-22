@@ -681,101 +681,50 @@ class Creative_Button extends Widget_Base
             ]
         );
 
+        // Background Color Controls
+        $this->eael_wd_liquid_glass_effect_bg_color_effect( 'effect1', '#FFFFFF1F', 'eael-creative-button' );
+        $this->eael_wd_liquid_glass_effect_bg_color_effect( 'effect2', '', 'eael-creative-button' );
+        $this->eael_wd_liquid_glass_effect_bg_color_effect( 'effect3', '#FFFFFF1F', 'eael-creative-button' );
+        $this->eael_wd_liquid_glass_effect_bg_color_effect( 'effect4', '#FFFFFF1F', 'eael-creative-button' );
+        $this->eael_wd_liquid_glass_effect_bg_color_effect( 'effect5', '', 'eael-creative-button' );
+        $this->eael_wd_liquid_glass_effect_bg_color_effect( 'effect6', '', 'eael-creative-button' );
+
+        // Backdrop Filter Controls
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( 'effect1', '24', 'eael-creative-button' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( 'effect2', '20', 'eael-creative-button' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( 'effect3', '16', 'eael-creative-button' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( 'effect4', '', 'eael-creative-button' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( 'effect5', '', 'eael-creative-button' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( 'effect6', '', 'eael-creative-button' );
+    }
+
+    /**
+     * Add background control for liquid glass effect.
+     */
+    public function eael_wd_liquid_glass_effect_bg_color_effect( $effect, $default_bg_color, $selector ) {
         $this->add_control(
-            'eael_wd_liquid_glass_effect_bg_color_effect1',
-            [
-                'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
+            'eael_wd_liquid_glass_effect_bg_color_' . $effect,
+            args: [
+                'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '#FFFFFF1F',
+                'default'   => $default_bg_color,
                 'selectors' => [
-                    '{{WRAPPER}}.eael_wd_liquid_glass-effect1 .eael-creative-button' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}}.eael_wd_liquid_glass-'.$effect .' .' . $selector => 'background-color: {{VALUE}}',
                 ],
                 'condition' => [
                     'eael_wd_liquid_glass_effect_switch' => 'yes',
-                    'eael_wd_liquid_glass_effect'        => 'effect1',
+                    'eael_wd_liquid_glass_effect'        => $effect,
                 ],
             ]
         );
+    }
 
+    /**
+     * Add backdrop filter control for liquid glass effect.
+     */
+    public function eael_wd_liquid_glass_effect_backdrop_filter_effect( $effect, $default_size, $selector ) {
         $this->add_control(
-            'eael_wd_liquid_glass_effect_bg_color_effect2',
-            [
-                'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
-                'type'      => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}}.eael_wd_liquid_glass-effect2 .eael-creative-button' => 'background-color: {{VALUE}}',
-                ],
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch' => 'yes',
-                    'eael_wd_liquid_glass_effect'        => 'effect2',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_bg_color_effect3',
-            [
-                'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
-                'type'      => Controls_Manager::COLOR,
-                'default'   => '#FFFFFF1F',
-                'selectors' => [
-                    '{{WRAPPER}}.eael_wd_liquid_glass-effect3 .eael-creative-button' => 'background-color: {{VALUE}}',
-                ],
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch' => 'yes',
-                    'eael_wd_liquid_glass_effect'        => 'effect3',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_bg_color_effect4',
-            [
-                'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
-                'type'      => Controls_Manager::COLOR,
-                'default'   => '#FFFFFF1F',
-                'selectors' => [
-                    '{{WRAPPER}}.eael_wd_liquid_glass-effect4 .eael-creative-button' => 'background-color: {{VALUE}}',
-                ],
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch' => 'yes',
-                    'eael_wd_liquid_glass_effect'        => 'effect4',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_bg_color_effect5',
-            [
-                'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
-                'type'      => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}}.eael_liquid_glass-effect5::before' => 'background-color: {{VALUE}}',
-                ],
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch' => 'yes',
-                    'eael_wd_liquid_glass_effect'        => 'effect5',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_bg_color_effect6',
-            [
-                'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
-                'type'      => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}}.eael_liquid_glass-effect6::before' => 'background-color: {{VALUE}}',
-                ],
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch' => 'yes',
-                    'eael_wd_liquid_glass_effect'        => 'effect6',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_backdrop_filter_effect1',
+            'eael_wd_liquid_glass_effect_backdrop_filter_' . $effect,
             [
                 'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
                 'type'  => Controls_Manager::SLIDER,
@@ -787,130 +736,14 @@ class Creative_Button extends Widget_Base
                     ],
                 ],
                 'default' => [
-                    'size' => 24,
+                    'size' => $default_size,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}}.eael_wd_liquid_glass-effect1 .eael-creative-button' => 'backdrop-filter: blur({{SIZE}}px)',
+                    '{{WRAPPER}}.eael_wd_liquid_glass-'.$effect .' .' . $selector => 'backdrop-filter: blur({{SIZE}}px)',
                 ],
                 'condition' => [
                     'eael_wd_liquid_glass_effect_switch' => 'yes',
-                    'eael_wd_liquid_glass_effect' => 'effect1',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_backdrop_filter_effect2',
-            [
-                'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
-                'type'  => Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min'  => 0,
-                        'max'  => 50,
-                        'step' => 1,
-                    ],
-                ],
-                'default' => [
-                    'size' => 20,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}}.eael_wd_liquid_glass-effect2 .eael-creative-button' => 'backdrop-filter: blur({{SIZE}}px) brightness(1.1) saturate(1.5)',
-                ],
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch' => 'yes',
-                    'eael_wd_liquid_glass_effect'        => 'effect2',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_backdrop_filter_effect3',
-            [
-                'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
-                'type'  => Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min'  => 0,
-                        'max'  => 50,
-                        'step' => 1,
-                    ],
-                ],
-                'default' => [
-                    'size' => 16,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}}.eael_wd_liquid_glass-effect3 .eael-creative-button' => 'backdrop-filter: blur({{SIZE}}px)',
-                ],
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch' => 'yes',
-                    'eael_wd_liquid_glass_effect'        => 'effect3',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_backdrop_filter_effect4',
-            [
-                'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
-                'type'  => Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min'  => 0,
-                        'max'  => 50,
-                        'step' => 1,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}}.eael_wd_liquid_glass-effect4 .eael-creative-button::before' => 'backdrop-filter: blur({{SIZE}}px)',
-                ],
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch' => 'yes',
-                    'eael_wd_liquid_glass_effect'        => 'effect4',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_backdrop_filter_effect5',
-            [
-                'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
-                'type'  => Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min'  => 0,
-                        'max'  => 50,
-                        'step' => 1,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}}.eael_wd_liquid_glass-effect5 .eael-creative-button::before' => 'backdrop-filter: blur({{SIZE}}px)',
-                ],
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch' => 'yes',
-                    'eael_wd_liquid_glass_effect'        => 'effect5',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_backdrop_filter_effect6',
-            [
-                'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
-                'type'  => Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min'  => 0,
-                        'max'  => 50,
-                        'step' => 1,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}}.eael_wd_liquid_glass-effect6 .eael-creative-button::before' => 'backdrop-filter: blur({{SIZE}}px)',
-                ],
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch' => 'yes',
-                    'eael_wd_liquid_glass_effect'        => 'effect6',
+                    'eael_wd_liquid_glass_effect' => $effect,
                 ],
             ]
         );
@@ -954,10 +787,107 @@ class Creative_Button extends Widget_Base
 			]
 		);
 
-		$this->add_group_control(
+        // Liquid Glass Border Effects
+        $this->eael_wd_liquid_glass_border_effect( 'effect1', '#FFFFFF1F', 'eael-creative-button' );
+        $this->eael_wd_liquid_glass_border_effect( 'effect2', '#FFFFFF1F', 'eael-creative-button' );
+        $this->eael_wd_liquid_glass_border_effect( 'effect3', '#FFFFFF1F', 'eael-creative-button' );
+        $this->eael_wd_liquid_glass_border_effect( 'effect4', '#FFFFFF1F', 'eael-creative-button' );
+
+        // Liquid Glass Border Radius Effects
+        $this->eael_wd_liquid_glass_border_radius_effect('effect1', 'eael-creative-button',
+            [
+                'top' 	  => 24,
+                'right'    => 24,
+                'bottom'   => 24,
+                'left'     => 24,
+                'unit'     => 'px',
+                'isLinked' => true,
+            ]
+        );
+
+        $this->eael_wd_liquid_glass_border_radius_effect('effect2', 'eael-creative-button',
+            [
+                'top' 	  => 16,
+                'right'    => 16,
+                'bottom'   => 16,
+                'left'     => 16,
+                'unit'     => 'px',
+                'isLinked' => true,
+            ]
+        );
+
+        $this->eael_wd_liquid_glass_border_radius_effect('effect3', 'eael-creative-button',
+            [
+                'top' 	  => 8,
+                'bottom'   => 8,
+                'left'     => 8,
+                'right'    => 8,
+                'unit'     => 'px',
+                'isLinked' => true,
+            ]
+        );
+
+        $this->eael_wd_liquid_glass_border_radius_effect('effect4', 'eael-creative-button',
+            [
+                'top' 	  => 24,
+                'bottom'   => 24,
+                'left'     => 24,
+                'right'    => 24,
+                'unit'     => 'px',
+                'isLinked' => true,
+            ]
+        );
+
+        // Liquid Glass Shadow Effects
+        $this->eael_wd_liquid_glass_shadow_effect('effect1', 'eael-creative-button',
+            [
+                'color'      => 'rgba(0,0,0,0.78)',
+                'horizontal' => 0,
+                'vertical'   => 19,
+                'blur'       => 26,
+                'spread'     => 1,
+            ]
+        );
+        
+        $this->eael_wd_liquid_glass_shadow_effect('effect2', 'eael-creative-button',
+            [
+                'color'      => '#383C65',
+                'horizontal' => 0,
+                'vertical'   => 0,
+                'blur'       => 33,
+                'spread'     => -2,
+            ]
+        );
+        
+        $this->eael_wd_liquid_glass_shadow_effect('effect3', 'eael-creative-button',
+            [
+                'color'      => 'rgba(255, 255, 255, 0.4)',
+                'horizontal' => 1,
+                'vertical'   => 1,
+                'blur'       => 10,
+                'spread'     => 5,
+            ]
+        );
+
+        $this->eael_wd_liquid_glass_shadow_effect('effect4', 'eael-creative-button',
+            [
+                'color'      => '#00000040',
+                'horizontal' => 0,
+                'vertical'   => 9,
+                'blur'       => 21,
+                'spread'     => 0,
+            ]
+        );
+    }
+
+    /**
+     * Add border effect for Liquid Glass Effect
+     */
+    public function eael_wd_liquid_glass_border_effect( $effect, $default_color, $selector ) {
+        $this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
-				'name'      => 'eael_wd_liquid_glass_border_effect1',
+				'name'      => 'eael_wd_liquid_glass_border_'.$effect,
 				'fields_options' => [
 					'border' => [
 						'default' => 'solid',
@@ -972,296 +902,57 @@ class Creative_Button extends Widget_Base
 						],
 					],
 					'color' => [
-						'default' => '#FFFFFF1F',
+						'default' => $default_color,
 					],
 				],
-				'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-effect1 .eael-creative-button',
+				'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-'.$effect .' .'.$selector,
 				'condition' => [
 					'eael_wd_liquid_glass_effect_switch'  => 'yes',
-					'eael_wd_liquid_glass_shadow_effect' => 'effect1',
+					'eael_wd_liquid_glass_shadow_effect' => $effect,
 				],
 			]
 		);
-
-		$this->add_control(
-			'eael_wd_liquid_glass_border_radius_effect1',
+    }
+    
+    // Add border radius effect for Liquid Glass Effect
+    public function eael_wd_liquid_glass_border_radius_effect( $effect, $selector, $default_radius ) {
+        $this->add_control(
+			'eael_wd_liquid_glass_border_radius_'.$effect,
 			[
 				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'rem', 'custom' ],
-				'default' => [
-					'top' 	  => 24,
-					'right'    => 24,
-					'bottom'   => 24,
-					'left'     => 24,
-					'unit'     => 'px',
-					'isLinked' => true,
-				],
+				'default' => $default_radius,
 				'selectors'  => [
-					'{{WRAPPER}}.eael_wd_liquid_glass_shadow-effect1 .eael-creative-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}}.eael_wd_liquid_glass_shadow-'.$effect.' .'.$selector => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'condition' => [
 					'eael_wd_liquid_glass_effect_switch' => 'yes',
-					'eael_wd_liquid_glass_shadow_effect' => 'effect1',
+					'eael_wd_liquid_glass_shadow_effect' => $effect,
 				],
 			]
 		);
+    }
 
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name'              => 'eael_wd_liquid_glass_shadow_effect1',
-				'fields_options'     => [
-					'box_shadow_type' => [ 'default' => 'yes' ],
-					'box_shadow'      => [
-						'default'      => [
-							'color'      => 'rgba(0,0,0,0.78)',
-							'horizontal' => 0,
-							'vertical'   => 19,
-							'blur'       => 26,
-							'spread'     => 1,
-						],
-					],
-				],
-				'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-effect1 .eael-creative-button',
-				'condition' => [
-					'eael_wd_liquid_glass_effect_switch'  => 'yes',
-					'eael_wd_liquid_glass_shadow_effect' => 'effect1',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-			[
-				'name'      => 'eael_wd_liquid_glass_border_effect2',
-				'fields_options' => [
-					'border' => [
-						'default' => 'solid',
-					],
-					'width' => [
-						'default' => [
-							'top'      => '1',
-							'right'    => '1',
-							'bottom'   => '1',
-							'left'     => '1',
-							'isLinked' =>  false,
-						],
-					],
-					'color' => [
-						'default' => '#FFFFFF1F',
-					],
-				],
-				'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-effect2 .eael-creative-button',
-				'condition' => [
-					'eael_wd_liquid_glass_effect_switch'  => 'yes',
-					'eael_wd_liquid_glass_shadow_effect' => 'effect2',
-				],
-			]
-		);
-
-		$this->add_control(
-			'eael_wd_liquid_glass_border_radius_effect2',
-			[
-				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'rem', 'custom' ],
-				'default'    => [
-					'top' 	  => 16,
-					'right'    => 16,
-					'bottom'   => 16,
-					'left'     => 16,
-					'unit'     => 'px',
-					'isLinked' => true,
-				],
-				'selectors'  => [
-					'{{WRAPPER}}.eael_wd_liquid_glass_shadow-effect2 .eael-creative-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-				'condition' => [
-					'eael_wd_liquid_glass_effect_switch' => 'yes',
-					'eael_wd_liquid_glass_shadow_effect' => 'effect2',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name'              => 'eael_wd_liquid_glass_shadow_effect2',
-				'fields_options'     => [
-					'box_shadow_type' => [ 'default' => 'yes' ],
-					'box_shadow'      => [
-						'default'      => [
-							'color'      => '#383C65',
-							'horizontal' => 0,
-							'vertical'   => 0,
-							'blur'       => 33,
-							'spread'     => -2,
-						],
-					],
-				],
-				'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-effect2 .eael-creative-button',
-				'condition' => [
-					'eael_wd_liquid_glass_effect_switch'  => 'yes',
-					'eael_wd_liquid_glass_shadow_effect' => 'effect2',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-			[
-				'name'      => 'eael_wd_liquid_glass_border_radius_effect3',
-				'fields_options' => [
-					'border' => [
-						'default' => 'solid',
-					],
-					'width' => [
-						'default' => [
-							'top'      => '1',
-							'right'    => '1',
-							'bottom'   => '1',
-							'left'     => '1',
-							'isLinked' =>  false,
-						],
-					],
-					'color' => [
-						'default' => '#FFFFFF1F',
-					],
-				],
-				'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-effect3 .eael-creative-button',
-				'condition' => [
-					'eael_wd_liquid_glass_effect_switch'  => 'yes',
-					'eael_wd_liquid_glass_shadow_effect' => 'effect3',
-				],
-			]
-		);
-
-		$this->add_control(
-			'eael_wd_liquid_glass_border_radius_effect3',
-			[
-				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'rem', 'custom' ],
-				'default'    => [
-					'top' 	  => 8,
-					'bottom'   => 8,
-					'left'     => 8,
-					'right'    => 8,
-					'unit'     => 'px',
-					'isLinked' => true,
-				],
-				'selectors'  => [
-					'{{WRAPPER}}.eael_wd_liquid_glass_shadow-effect3 .eael-creative-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-				'condition' => [
-					'eael_wd_liquid_glass_effect_switch' => 'yes',
-					'eael_wd_liquid_glass_shadow_effect' => 'effect3',
-				],
-			]
-		);
-		
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name'              => 'eael_wd_liquid_glass_shadow_effect3',
-				'fields_options'     => [
-					'box_shadow_type' => [ 'default' => 'yes' ],
-					'box_shadow_position' => [ 'default' => 'inset' ],
-					'box_shadow'      => [
-						'default'      => [
-							'color'      => 'rgba(255, 255, 255, 0.4)',
-							'horizontal' =>1,
-							'vertical'   =>1,
-							'blur'       => 10,
-							'spread'     => 5,
-						],
-					],
-				],
-				'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-effect3 .eael-creative-button',
-				'condition' => [
-					'eael_wd_liquid_glass_effect_switch'  => 'yes',
-					'eael_wd_liquid_glass_shadow_effect' => 'effect3',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-			[
-				'name'     => 'eael_wd_liquid_glass_border_effect4',
-				'selector' => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-effect4 .eael-creative-button',
-				'fields_options' => [
-					'border' => [
-						'default' => 'solid',
-					],
-					'width' => [
-						'default' => [
-							'top'      => '1',
-							'right'    => '1',
-							'bottom'   => '1',
-							'left'     => '1',
-							'isLinked' =>  false,
-						],
-					],
-					'color' => [
-						'default' => '#AAAAAA1A',
-					],
-				],
-				'condition' => [
-					'eael_wd_liquid_glass_effect_switch'  => 'yes',
-					'eael_wd_liquid_glass_shadow_effect' => 'effect4',
-				],
-			]
-		);
-
-		$this->add_control(
-			'eael_wd_liquid_glass_border_radius_effect4',
-			[
-				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'rem', 'custom' ],
-				'default'    => [
-					'top' 	  => 24,
-					'bottom'   => 24,
-					'left'     => 24,
-					'right'    => 24,
-					'unit'     => 'px',
-					'isLinked' => true,
-				],
-				'selectors'  => [
-					'{{WRAPPER}}.eael_wd_liquid_glass_shadow-effect4 .eael-creative-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-				'condition' => [
-					'eael_wd_liquid_glass_effect_switch' => 'yes',
-					'eael_wd_liquid_glass_shadow_effect' => 'effect4',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name'      => 'eael_wd_liquid_glass_shadow_effect4',
-				'fields_options'     => [
-					'box_shadow_type' => [ 'default' => 'yes' ],
-					'box_shadow'      => [
-						'default'      => [
-							'color'      => '#00000040',
-							'horizontal' => 0,
-							'vertical'   => 9,
-							'blur'       => 21,
-							'spread'     => 0,
-						],
-					],
-				],
-				'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-effect4 .eael-creative-button',
-				'condition' => [
-					'eael_wd_liquid_glass_effect_switch'  => 'yes',
-					'eael_wd_liquid_glass_shadow_effect' => 'effect4',
-				],
-			]
-		);
+    // Add shadow effect for Liquid Glass Effect
+    public function eael_wd_liquid_glass_shadow_effect( $effect, $selector, $default_shadow ) {
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name'      => 'eael_wd_liquid_glass_shadow_' . $effect,
+                'fields_options'     => [
+                    'box_shadow_type' => [ 'default' => 'yes' ],
+                    'box_shadow'      => [
+                        'default' => $default_shadow,
+                    ],
+                ],
+                'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-'.$effect.' .' . $selector,
+                'condition' => [
+                    'eael_wd_liquid_glass_effect_switch'  => 'yes',
+                    'eael_wd_liquid_glass_shadow_effect' => $effect,
+                ],
+            ]
+        );
     }
 
     protected function render()
