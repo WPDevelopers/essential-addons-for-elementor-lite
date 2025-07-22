@@ -7,6 +7,9 @@ if ( !defined( 'ABSPATH' ) ) {
 } // Exit if accessed directly
 
 use Elementor\Plugin;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Box_Shadow;
 use \Essential_Addons_Elementor\Classes\Helper as HelperClass;
 
 trait Helper
@@ -614,5 +617,126 @@ trait Helper
 			update_post_meta( $post_id, '_eael_post_view_count', ++ $view_count );
 		}
 	}
+
+   // Add background control for liquid glass effect.
+	public function eael_wd_liquid_glass_effect_bg_color_effect( $obj, $effect, $default_bg_color, $selector ) {
+		$obj->add_control(
+			'eael_wd_liquid_glass_effect_bg_color_' . $effect,
+			args: [
+					'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+					'type'      => Controls_Manager::COLOR,
+					'default'   => $default_bg_color,
+					'selectors' => [
+						'{{WRAPPER}}.eael_wd_liquid_glass-'.$effect .' .' . $selector => 'background-color: {{VALUE}}',
+					],
+					'condition' => [
+						'eael_wd_liquid_glass_effect_switch' => 'yes',
+						'eael_wd_liquid_glass_effect'        => $effect,
+					],
+			]
+		);
+	}
+
+   //Add backdrop filter control for liquid glass effect.
+	public function eael_wd_liquid_glass_effect_backdrop_filter_effect( $effect, $default_size, $selector ) {
+		$this->add_control(
+			'eael_wd_liquid_glass_effect_backdrop_filter_' . $effect,
+			[
+					'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
+					'type'  => Controls_Manager::SLIDER,
+					'range' => [
+						'px' => [
+							'min'  => 0,
+							'max'  => 50,
+							'step' => 1,
+						],
+					],
+					'default' => [
+						'size' => $default_size,
+					],
+					'selectors' => [
+						'{{WRAPPER}}.eael_wd_liquid_glass-'.$effect .' .' . $selector => 'backdrop-filter: blur({{SIZE}}px)',
+					],
+					'condition' => [
+						'eael_wd_liquid_glass_effect_switch' => 'yes',
+						'eael_wd_liquid_glass_effect' => $effect,
+					],
+			]
+		);
+	}
+
+   //Add border effect for Liquid Glass Effect
+	public function eael_wd_liquid_glass_border_effect( $effect, $default_color, $selector ) {
+		$this->add_group_control(
+		Group_Control_Border::get_type(),
+		[
+			'name'      => 'eael_wd_liquid_glass_border_'.$effect,
+			'fields_options' => [
+				'border' => [
+					'default' => 'solid',
+				],
+				'width' => [
+					'default' => [
+						'top'      => '1',
+						'right'    => '1',
+						'bottom'   => '1',
+						'left'     => '1',
+						'isLinked' =>  false,
+					],
+				],
+				'color' => [
+					'default' => $default_color,
+				],
+			],
+			'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-'.$effect .' .'.$selector,
+			'condition' => [
+				'eael_wd_liquid_glass_effect_switch'  => 'yes',
+				'eael_wd_liquid_glass_shadow_effect' => $effect,
+			],
+		]
+	);
+	}
+
+    // Add border radius effect for Liquid Glass Effect
+	public function eael_wd_liquid_glass_border_radius_effect( $effect, $selector, $default_radius ) {
+		$this->add_control(
+		'eael_wd_liquid_glass_border_radius_'.$effect,
+		[
+			'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [ 'px', '%', 'rem', 'custom' ],
+			'default' => $default_radius,
+			'selectors'  => [
+				'{{WRAPPER}}.eael_wd_liquid_glass_shadow-'.$effect.' .'.$selector => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+			'condition' => [
+				'eael_wd_liquid_glass_effect_switch' => 'yes',
+				'eael_wd_liquid_glass_shadow_effect' => $effect,
+			],
+		]
+	);
+	}
+
+    // Add shadow effect for Liquid Glass Effect
+	public function eael_wd_liquid_glass_shadow_effect( $effect, $selector, $default_shadow ) {
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+					'name'      => 'eael_wd_liquid_glass_shadow_' . $effect,
+					'fields_options'     => [
+						'box_shadow_type' => [ 'default' => 'yes' ],
+						'box_shadow'      => [
+							'default' => $default_shadow,
+						],
+					],
+					'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-'.$effect.' .' . $selector,
+					'condition' => [
+						'eael_wd_liquid_glass_effect_switch'  => 'yes',
+						'eael_wd_liquid_glass_shadow_effect' => $effect,
+					],
+			]
+		);
+	}
+	
 }
 
