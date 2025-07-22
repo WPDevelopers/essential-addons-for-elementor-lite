@@ -1959,7 +1959,7 @@ class Info_Box extends Widget_Base
         $this->start_controls_section(
 			'eael_wd_liquid_glass_effect_section',
 			[
-				'label' => esc_html__( 'Liquid Glass Effect', 'textdomain' ),
+				'label' => esc_html__( 'Liquid Glass Effect', 'essential-addons-for-elementor-lite' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
