@@ -1,8 +1,13 @@
 //Editor style
-.custom-add-to-cart-wrapper {
+.eael-add-to-cart-wrapper {
    display: flex;
    align-items: center;
    gap: 8px;
+   &.eael-product-simple form{
+      display: flex;
+      align-items: center;
+      gap: 8px;
+   }
    input[type="number"],
    .quantity-input {
       width: 45px;
@@ -210,8 +215,11 @@
 .eael-add-to-cart--align-flex-start
    form.cart.variations_form
    .woocommerce-variation-add-to-cart {
-   flex-wrap: nowrap;
-   justify-content: flex-start;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      gap: 5px;
+      align-items: center;
 }
 
 .eael-add-to-cart--align-center
