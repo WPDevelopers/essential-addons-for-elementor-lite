@@ -1,6 +1,9 @@
 <?php
 namespace Essential_Addons_Elementor\Elements;
 
+use Elementor\Group_Control_Border;
+use ElementsKit_Lite\Modules\Widget_Builder\Controls\Control_Type_Border;
+
 // If this file is called directly, abort.
 if (!defined( 'ABSPATH' ) ) {
    exit;
@@ -119,11 +122,18 @@ class Code_Snippet extends Widget_Base {
          'theme',
          [
                'label'   => __( 'Theme', 'essential-addons-for-elementor-lite' ),
-               'type'    => Controls_Manager::SELECT,
+               'type'    => Controls_Manager::CHOOSE,
                'default' => 'light',
+               'toggle' => false,
                'options' => [
-                  'light' => __( 'Light', 'essential-addons-for-elementor-lite' ),
-                  'dark'  => __( 'Dark', 'essential-addons-for-elementor-lite' ),
+                  'light' => [
+                     'title' => __( 'Light', 'essential-addons-for-elementor-lite' ),
+                     'icon' => 'eicon-light-mode',
+                  ],
+                  'dark'  => [
+                     'title' => __( 'Dark', 'essential-addons-for-elementor-lite' ),
+                     'icon' => 'eicon-dark-mode',
+                  ],
                ],
                'description' => __( 'Choose light or dark styling for the code snippet block.', 'essential-addons-for-elementor-lite' ),
          ]
@@ -132,7 +142,7 @@ class Code_Snippet extends Widget_Base {
       $this->add_control(
             'show_header',
          [
-               'label'        => __( 'Show header bar', 'essential-addons-for-elementor-lite' ),
+               'label'        => __( 'Header bar', 'essential-addons-for-elementor-lite' ),
                'type'         => Controls_Manager::SWITCHER,
                'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
                'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
@@ -145,7 +155,7 @@ class Code_Snippet extends Widget_Base {
       $this->add_control(
          'show_copy_button',
          [
-               'label'        => __( 'Enable copy button', 'essential-addons-for-elementor-lite' ),
+               'label'        => __( 'Copy button', 'essential-addons-for-elementor-lite' ),
                'type'         => Controls_Manager::SWITCHER,
                'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
                'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
@@ -161,7 +171,7 @@ class Code_Snippet extends Widget_Base {
       $this->add_control(
          'show_copy_tooltip',
          [
-               'label'        => __( 'Enable copy tooltip', 'essential-addons-for-elementor-lite' ),
+               'label'        => __( 'Copy button tooltip', 'essential-addons-for-elementor-lite' ),
                'type'         => Controls_Manager::SWITCHER,
                'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
                'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
@@ -178,7 +188,7 @@ class Code_Snippet extends Widget_Base {
       $this->add_control(
          'show_line_numbers',
          [
-               'label'        => __( 'Show line numbers', 'essential-addons-for-elementor-lite' ),
+               'label'        => __( 'Line numbers', 'essential-addons-for-elementor-lite' ),
                'type'         => Controls_Manager::SWITCHER,
                'label_on'     => __( 'Show', 'essential-addons-for-elementor-lite' ),
                'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
@@ -193,7 +203,7 @@ class Code_Snippet extends Widget_Base {
       $this->start_controls_section(
          'file_preview_section',
          [
-               'label' => __( 'File Preview Header', 'essential-addons-for-elementor-lite' ),
+               'label' => __( 'Header', 'essential-addons-for-elementor-lite' ),
                'tab'   => Controls_Manager::TAB_CONTENT,
                'condition' => [
                   'show_header' => 'yes',
@@ -217,7 +227,7 @@ class Code_Snippet extends Widget_Base {
       $this->add_control(
          'show_traffic_lights',
          [
-               'label' => __( 'Show window buttons', 'essential-addons-for-elementor-lite' ),
+               'label' => __( 'Window buttons', 'essential-addons-for-elementor-lite' ),
                'type' => Controls_Manager::SWITCHER,
                'label_on' => __( 'Show', 'essential-addons-for-elementor-lite' ),
                'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
@@ -230,7 +240,7 @@ class Code_Snippet extends Widget_Base {
       $this->add_control(
          'show_file_icon',
          [
-               'label' => __( 'Show language icon', 'essential-addons-for-elementor-lite' ),
+               'label' => __( 'Language icon', 'essential-addons-for-elementor-lite' ),
                'type' => Controls_Manager::SWITCHER,
                'label_on' => __( 'Show', 'essential-addons-for-elementor-lite' ),
                'label_off' => __( 'Hide', 'essential-addons-for-elementor-lite' ),
@@ -245,7 +255,7 @@ class Code_Snippet extends Widget_Base {
          [
                'label'       => __( 'Custom language icon', 'essential-addons-for-elementor-lite' ),
                'type'        => Controls_Manager::MEDIA,
-               'media_types' => [ 'image' ],
+               // 'media_types' => [ 'image' ],
                'description' => __( 'Upload a custom icon to override the default.', 'essential-addons-for-elementor-lite' ),
                'condition'   => [
                   'show_file_icon' => 'yes',
@@ -388,19 +398,27 @@ class Code_Snippet extends Widget_Base {
          ]
       );
 
+      $this->add_control(
+         'file_name_style_heading',
+         [
+            'label' => esc_html__( 'File Name', 'essential-addons-for-elementor-lite' ),
+            'type' => Controls_Manager::HEADING,
+            'separator' => 'before',
+         ]
+      );
       $this->add_group_control(
          \Elementor\Group_Control_Typography::get_type(),
          [
                'name'     => 'file_name_typography',
-               'label'    => __( 'File Name Typography', 'essential-addons-for-elementor-lite' ),
+               'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
                'selector' => '{{WRAPPER}} .eael-code-snippet-header .file-name-text',
          ]
       );
 
-   $this->add_control(
+      $this->add_control(
          'file_name_color',
          [
-               'label'     => __( 'File Name Color', 'essential-addons-for-elementor-lite' ),
+               'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
                'type'      => Controls_Manager::COLOR,
          'selectors' => [
                   '{{WRAPPER}} .eael-code-snippet-header .file-name-text' => 'color: {{VALUE}};',
@@ -409,9 +427,21 @@ class Code_Snippet extends Widget_Base {
       );
 
       $this->add_control(
+         'copy_button_style_heading',
+         [
+            'label' => esc_html__( 'Copy Button', 'essential-addons-for-elementor-lite' ),
+            'type' => Controls_Manager::HEADING,
+            'separator' => 'before',
+            'condition' => [
+               'show_copy_button' => 'yes',
+            ],
+         ]
+      );
+
+      $this->add_control(
          'copy_button_color',
          [
-               'label'     => __( 'Copy Button Color', 'essential-addons-for-elementor-lite' ),
+               'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
                'type'      => Controls_Manager::COLOR,
                'selectors' => [
                   '{{WRAPPER}} .eael-code-snippet-copy-button' => 'color: {{VALUE}};',
@@ -422,17 +452,23 @@ class Code_Snippet extends Widget_Base {
          ]
       );
 
-      $this->add_control(
-         'copy_button_border_color',
+      $this->add_group_control(
+         Group_Control_Border::get_type(),
          [
-               'label'     => __( 'Copy Button Border Color', 'essential-addons-for-elementor-lite' ),
-               'type'      => Controls_Manager::COLOR,
-               'selectors' => [
-                  '{{WRAPPER}} .eael-code-snippet-copy-button' => 'border-color: {{VALUE}};',
-               ],
-               'condition' => [
-                  'show_copy_button' => 'yes',
-               ],
+            'name' => 'copy_button_border',
+            'selector' => '{{WRAPPER}} .eael-code-snippet-copy-button',
+         ]
+      );
+
+      $this->add_responsive_control(
+         'copy_button_border_radius',
+         [
+            'label' => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+            'type' => Controls_Manager::DIMENSIONS,
+            'size_units' => [ 'px', '%' ],
+            'selectors' => [
+               '{{WRAPPER}} .eael-code-snippet-copy-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
          ]
       );
 
