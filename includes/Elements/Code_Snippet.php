@@ -2,6 +2,7 @@
 namespace Essential_Addons_Elementor\Elements;
 
 use Elementor\Group_Control_Border;
+use Elementor\Icons_Manager;
 use ElementsKit_Lite\Modules\Widget_Builder\Controls\Control_Type_Border;
 
 // If this file is called directly, abort.
@@ -251,20 +252,58 @@ class Code_Snippet extends Widget_Base {
       );
 
       $this->add_control(
+         'file_icon_type',
+         [
+            'label' => esc_html__( 'Icon Type', 'essential-addons-for-elementor-lite' ),
+            'type' => Controls_Manager::CHOOSE,
+            'options' => [
+               'image' => [
+                  'title' => esc_html__( 'Image', 'essential-addons-for-elementor-lite' ),
+                  'icon' => 'eicon-image',
+               ],
+               'icon' => [
+                  'title' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+                  'icon' => 'eicon-favorite',
+               ],
+            ],
+            'default' => 'image',
+            'toggle' => true,
+            'condition' => [
+               'show_file_icon' => 'yes',
+            ],
+         ]
+      );
+
+      $this->add_control(
          'file_icon',
          [
-               'label'       => __( 'Custom language icon', 'essential-addons-for-elementor-lite' ),
+               'label'       => '',
                'type'        => Controls_Manager::MEDIA,
                // 'media_types' => [ 'image' ],
                'description' => __( 'Upload a custom icon to override the default.', 'essential-addons-for-elementor-lite' ),
                'condition'   => [
                   'show_file_icon' => 'yes',
+                  'file_icon_type' => 'image',
                ],
                'ai' => [
 					'active' => false,
 				],
          ]
       );
+
+      $this->add_control(
+         'file_icon_custom',
+         [
+               'label'       => '',
+               'type'        => Controls_Manager::ICONS,
+               'fa4compatibility' => 'icon',
+               'condition'   => [
+                  'show_file_icon' => 'yes',
+                  'file_icon_type' => 'icon',
+               ],
+         ]
+      );
+
       $this->end_controls_section();
 
       // Style Tab - Wrapper
@@ -395,6 +434,35 @@ class Code_Snippet extends Widget_Base {
                   '{{WRAPPER}} .eael-code-snippet-header.eael-file-preview-header' => 'border-bottom-width: {{SIZE}}{{UNIT}}; border-bottom-style: solid;',
                ],
                'description' => __( 'Controls border bottom width', 'essential-addons-for-elementor-lite' ),
+         ]
+      );
+
+      $this->add_control(
+         'file_custom_icon_style_heading',
+         [
+            'label' => esc_html__( 'File Icon', 'essential-addons-for-elementor-lite' ),
+            'type' => Controls_Manager::HEADING,
+            'separator' => 'before',
+            'condition' => [
+               'show_file_icon' => 'yes',
+               'file_icon_type' => 'icon',
+            ],
+         ]
+      );
+
+      $this->add_control(
+         'file_custom_icon_color',
+         [
+               'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
+               'type'      => Controls_Manager::COLOR,
+               'selectors' => [
+                  '{{WRAPPER}} .eael-file-icon i' => 'color: {{VALUE}};',
+                  '{{WRAPPER}} .eael-file-icon svg' => 'fill: {{VALUE}};',
+               ],
+               'condition' => [
+                  'show_file_icon' => 'yes',
+                  'file_icon_type' => 'icon',
+               ],
          ]
       );
 
@@ -644,7 +712,7 @@ class Code_Snippet extends Widget_Base {
          $line_numbers = range( 1, count( $lines ) );
       }
 
-      $file_icon      = $settings['file_icon']['url'] ?? '';
+      $file_icon      = $settings['file_icon']['url'] || $settings['file_icon_custom']['value'] ?? '';
       $show_file_icon = $settings['show_file_icon'] ?? 'yes';
       $language       = $settings['language'] ?? 'html';
       $file_name      = $settings['file_name'] ?? '';
@@ -670,9 +738,13 @@ class Code_Snippet extends Widget_Base {
                <div class="eael-file-info">
                   <?php if ( 'yes' === $show_file_icon ) { ?>
                   <div class="eael-file-icon">
-                     <?php if ( ! empty( $file_icon ) ) { ?>
-                     <img src="<?php echo esc_url( $file_icon ); ?>" alt="<?php esc_attr_e( 'File icon', 'essential-addons-for-elementor-lite' ); ?>" />
-                     <?php } else {
+                     <?php if ( ! empty( $file_icon ) ) { 
+                        if ( $settings['file_icon_type'] === 'icon' ) {
+                           Icons_Manager::render_icon( $settings['file_icon_custom'], [ 'aria-hidden' => 'true' ] );
+                        } else {
+                           echo wp_get_attachment_image( $settings['file_icon']['id'], 'thumbnail', true, [ 'alt' => esc_attr__( 'File icon', 'essential-addons-for-elementor-lite' ) ] );
+                        }
+                        } else {
                         ?>
                         <span class="eael-file-icon-emoji"><?php echo esc_html( self::get_file_icon_by_language( $language ) ); ?></span>
                         <?php
