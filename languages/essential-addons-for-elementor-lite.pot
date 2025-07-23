@@ -1201,7 +1201,7 @@ msgstr ""
 msgid "Highlight"
 msgstr ""
 
-#: ../includes/Elements/Advanced_Data_Table.php:669, ../includes/Elements/Adv_Tabs.php:251, ../includes/Elements/Countdown.php:514, ../includes/Elements/Creative_Button.php:714, ../includes/Elements/Data_Table.php:178, ../includes/Elements/Filterable_Gallery.php:335, ../includes/Elements/Filterable_Gallery.php:377, ../includes/Elements/Flip_Box.php:270, ../includes/Elements/Flip_Box.php:510, ../includes/Elements/Flip_Box.php:738, ../includes/Elements/Flip_Box.php:1697, ../includes/Elements/Flip_Box.php:1951, ../includes/Elements/GravityForms.php:1303, ../includes/Elements/Image_Accordion.php:669, ../includes/Elements/Info_Box.php:114, ../includes/Elements/Info_Box.php:1153, ../includes/Elements/Info_Box.php:1233, ../includes/Elements/Info_Box.php:1371, ../includes/Elements/Info_Box.php:1467, ../includes/Elements/Info_Box.php:2282, ../includes/Elements/Interactive_Circle.php:466, ../includes/Elements/Post_Grid.php:1675, ../includes/Elements/Simple_Menu.php:1556, ../includes/Elements/Sticky_Video.php:602, ../includes/Elements/SVG_Draw.php:244, ../includes/Elements/SVG_Draw.php:270, ../includes/Elements/SVG_Draw.php:286, ../includes/Extensions/Liquid_Glass_Effect.php:524, ../includes/Extensions/Table_of_Content.php:1041, ../includes/Extensions/Table_of_Content.php:1280
+#: ../includes/Elements/Advanced_Data_Table.php:669, ../includes/Elements/Adv_Tabs.php:251, ../includes/Elements/Countdown.php:514, ../includes/Elements/Creative_Button.php:723, ../includes/Elements/Data_Table.php:178, ../includes/Elements/Filterable_Gallery.php:335, ../includes/Elements/Filterable_Gallery.php:377, ../includes/Elements/Flip_Box.php:270, ../includes/Elements/Flip_Box.php:510, ../includes/Elements/Flip_Box.php:738, ../includes/Elements/Flip_Box.php:1697, ../includes/Elements/Flip_Box.php:1951, ../includes/Elements/GravityForms.php:1303, ../includes/Elements/Image_Accordion.php:669, ../includes/Elements/Info_Box.php:114, ../includes/Elements/Info_Box.php:1153, ../includes/Elements/Info_Box.php:1233, ../includes/Elements/Info_Box.php:1371, ../includes/Elements/Info_Box.php:1467, ../includes/Elements/Info_Box.php:2282, ../includes/Elements/Interactive_Circle.php:466, ../includes/Elements/Post_Grid.php:1675, ../includes/Elements/Simple_Menu.php:1556, ../includes/Elements/Sticky_Video.php:602, ../includes/Elements/SVG_Draw.php:244, ../includes/Elements/SVG_Draw.php:270, ../includes/Elements/SVG_Draw.php:286, ../includes/Extensions/Liquid_Glass_Effect.php:524, ../includes/Extensions/Table_of_Content.php:1041, ../includes/Extensions/Table_of_Content.php:1280
 msgid "None"
 msgstr ""
 
@@ -3277,43 +3277,47 @@ msgstr ""
 msgid "Learn More"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:655, ../includes/Elements/Flip_Box.php:1638, ../includes/Elements/Flip_Box.php:1845, ../includes/Elements/Image_Accordion.php:610, ../includes/Elements/Info_Box.php:2005, ../includes/Extensions/Liquid_Glass_Effect.php:54
-msgid "Liquid Glass Effects"
-msgstr ""
-
-#: ../includes/Elements/Creative_Button.php:659, ../includes/Elements/Creative_Button.php:715, ../includes/Elements/Flip_Box.php:1642, ../includes/Elements/Flip_Box.php:1698, ../includes/Elements/Flip_Box.php:1849, ../includes/Elements/Flip_Box.php:1952, ../includes/Elements/Image_Accordion.php:614, ../includes/Elements/Image_Accordion.php:670, ../includes/Elements/Info_Box.php:2009, ../includes/Elements/Info_Box.php:2283, ../includes/Extensions/Liquid_Glass_Effect.php:58, ../includes/Extensions/Liquid_Glass_Effect.php:525
+#: ../includes/Elements/Creative_Button.php:656, ../includes/Elements/Creative_Button.php:724, ../includes/Elements/Flip_Box.php:1642, ../includes/Elements/Flip_Box.php:1698, ../includes/Elements/Flip_Box.php:1849, ../includes/Elements/Flip_Box.php:1952, ../includes/Elements/Image_Accordion.php:614, ../includes/Elements/Image_Accordion.php:670, ../includes/Elements/Info_Box.php:2009, ../includes/Elements/Info_Box.php:2283, ../includes/Extensions/Liquid_Glass_Effect.php:58, ../includes/Extensions/Liquid_Glass_Effect.php:525
 msgid "Effect 1"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:660, ../includes/Elements/Creative_Button.php:716, ../includes/Elements/Flip_Box.php:1643, ../includes/Elements/Flip_Box.php:1699, ../includes/Elements/Flip_Box.php:1850, ../includes/Elements/Flip_Box.php:1953, ../includes/Elements/Image_Accordion.php:615, ../includes/Elements/Image_Accordion.php:671, ../includes/Elements/Info_Box.php:2010, ../includes/Elements/Info_Box.php:2284, ../includes/Extensions/Liquid_Glass_Effect.php:59, ../includes/Extensions/Liquid_Glass_Effect.php:526
+#: ../includes/Elements/Creative_Button.php:657, ../includes/Elements/Creative_Button.php:725, ../includes/Elements/Flip_Box.php:1643, ../includes/Elements/Flip_Box.php:1699, ../includes/Elements/Flip_Box.php:1850, ../includes/Elements/Flip_Box.php:1953, ../includes/Elements/Image_Accordion.php:615, ../includes/Elements/Image_Accordion.php:671, ../includes/Elements/Info_Box.php:2010, ../includes/Elements/Info_Box.php:2284, ../includes/Extensions/Liquid_Glass_Effect.php:59, ../includes/Extensions/Liquid_Glass_Effect.php:526
 msgid "Effect 2"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:661, ../includes/Elements/Creative_Button.php:717, ../includes/Elements/Flip_Box.php:1644, ../includes/Elements/Flip_Box.php:1700, ../includes/Elements/Flip_Box.php:1851, ../includes/Elements/Flip_Box.php:1954, ../includes/Elements/Image_Accordion.php:616, ../includes/Elements/Image_Accordion.php:672, ../includes/Elements/Info_Box.php:2011, ../includes/Elements/Info_Box.php:2285, ../includes/Extensions/Liquid_Glass_Effect.php:60, ../includes/Extensions/Liquid_Glass_Effect.php:527
+#: ../includes/Elements/Creative_Button.php:658, ../includes/Elements/Creative_Button.php:726, ../includes/Elements/Flip_Box.php:1644, ../includes/Elements/Flip_Box.php:1700, ../includes/Elements/Flip_Box.php:1851, ../includes/Elements/Flip_Box.php:1954, ../includes/Elements/Image_Accordion.php:616, ../includes/Elements/Image_Accordion.php:672, ../includes/Elements/Info_Box.php:2011, ../includes/Elements/Info_Box.php:2285, ../includes/Extensions/Liquid_Glass_Effect.php:60, ../includes/Extensions/Liquid_Glass_Effect.php:527
 msgid "Effect 3"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:662, ../includes/Elements/Creative_Button.php:718, ../includes/Elements/Flip_Box.php:1645, ../includes/Elements/Flip_Box.php:1701, ../includes/Elements/Flip_Box.php:1852, ../includes/Elements/Flip_Box.php:1955, ../includes/Elements/Image_Accordion.php:617, ../includes/Elements/Image_Accordion.php:673, ../includes/Elements/Info_Box.php:2012, ../includes/Elements/Info_Box.php:2286, ../includes/Extensions/Liquid_Glass_Effect.php:61, ../includes/Extensions/Liquid_Glass_Effect.php:528
-msgid "Effect 4"
+#: ../includes/Elements/Creative_Button.php:659
+msgid "Effect 4 (Pro)"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:663, ../includes/Elements/Flip_Box.php:1646, ../includes/Elements/Flip_Box.php:1853, ../includes/Elements/Image_Accordion.php:618, ../includes/Elements/Info_Box.php:2013, ../includes/Extensions/Liquid_Glass_Effect.php:62
-msgid "Effect 5"
+#: ../includes/Elements/Creative_Button.php:660
+msgid "Effect 5 (Pro)"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:664, ../includes/Elements/Flip_Box.php:1647, ../includes/Elements/Flip_Box.php:1854, ../includes/Elements/Image_Accordion.php:619, ../includes/Elements/Info_Box.php:2014, ../includes/Extensions/Liquid_Glass_Effect.php:63
-msgid "Effect 6"
+#: ../includes/Elements/Creative_Button.php:661
+msgid "Effect 6 (Pro)"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:676, ../includes/Elements/Flip_Box.php:1659, ../includes/Elements/Flip_Box.php:1866, ../includes/Elements/Image_Accordion.php:631, ../includes/Elements/Info_Box.php:2026, ../includes/Extensions/Liquid_Glass_Effect.php:75
+#: ../includes/Elements/Creative_Button.php:669, ../includes/Elements/Flip_Box.php:1638, ../includes/Elements/Flip_Box.php:1845, ../includes/Elements/Image_Accordion.php:610, ../includes/Elements/Info_Box.php:2005, ../includes/Extensions/Liquid_Glass_Effect.php:54
+msgid "Liquid Glass Effects"
+msgstr ""
+
+#: ../includes/Elements/Creative_Button.php:683, ../includes/Elements/Flip_Box.php:1659, ../includes/Elements/Flip_Box.php:1866, ../includes/Elements/Image_Accordion.php:631, ../includes/Elements/Info_Box.php:2026, ../includes/Extensions/Liquid_Glass_Effect.php:75
 msgid "Liquid Glass Settings"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:709, ../includes/Elements/Flip_Box.php:1692, ../includes/Elements/Flip_Box.php:1946, ../includes/Elements/Image_Accordion.php:664, ../includes/Elements/Info_Box.php:2277, ../includes/Extensions/Liquid_Glass_Effect.php:519
+#: ../includes/Elements/Creative_Button.php:718, ../includes/Elements/Flip_Box.php:1692, ../includes/Elements/Flip_Box.php:1946, ../includes/Elements/Image_Accordion.php:664, ../includes/Elements/Info_Box.php:2277, ../includes/Extensions/Liquid_Glass_Effect.php:519
 msgid "Shadow Effects"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:730, ../includes/Elements/Flip_Box.php:1713, ../includes/Elements/Flip_Box.php:1967, ../includes/Elements/Image_Accordion.php:685, ../includes/Elements/Info_Box.php:2298, ../includes/Extensions/Liquid_Glass_Effect.php:540
+#: ../includes/Elements/Creative_Button.php:727, ../includes/Elements/Flip_Box.php:1645, ../includes/Elements/Flip_Box.php:1701, ../includes/Elements/Flip_Box.php:1852, ../includes/Elements/Flip_Box.php:1955, ../includes/Elements/Image_Accordion.php:617, ../includes/Elements/Image_Accordion.php:673, ../includes/Elements/Info_Box.php:2012, ../includes/Elements/Info_Box.php:2286, ../includes/Extensions/Liquid_Glass_Effect.php:61, ../includes/Extensions/Liquid_Glass_Effect.php:528
+msgid "Effect 4"
+msgstr ""
+
+#: ../includes/Elements/Creative_Button.php:739, ../includes/Elements/Flip_Box.php:1713, ../includes/Elements/Flip_Box.php:1967, ../includes/Elements/Image_Accordion.php:685, ../includes/Elements/Info_Box.php:2298, ../includes/Extensions/Liquid_Glass_Effect.php:540
 msgid "Shadow Settings"
 msgstr ""
 
@@ -5232,6 +5236,14 @@ msgstr ""
 
 #: ../includes/Elements/Flip_Box.php:1595
 msgid "Liquid Glass Effect Back"
+msgstr ""
+
+#: ../includes/Elements/Flip_Box.php:1646, ../includes/Elements/Flip_Box.php:1853, ../includes/Elements/Image_Accordion.php:618, ../includes/Elements/Info_Box.php:2013, ../includes/Extensions/Liquid_Glass_Effect.php:62
+msgid "Effect 5"
+msgstr ""
+
+#: ../includes/Elements/Flip_Box.php:1647, ../includes/Elements/Flip_Box.php:1854, ../includes/Elements/Image_Accordion.php:619, ../includes/Elements/Info_Box.php:2014, ../includes/Extensions/Liquid_Glass_Effect.php:63
+msgid "Effect 6"
 msgstr ""
 
 #: ../includes/Elements/Flip_Box.php:1916, ../includes/Elements/Info_Box.php:2131, ../includes/Elements/Info_Box.php:2156, ../includes/Elements/Info_Box.php:2181, ../includes/Elements/Info_Box.php:2206, ../includes/Elements/Info_Box.php:2228, ../includes/Elements/Info_Box.php:2250, ../includes/Extensions/Liquid_Glass_Effect.php:227, ../includes/Extensions/Liquid_Glass_Effect.php:252, ../includes/Extensions/Liquid_Glass_Effect.php:277, ../includes/Extensions/Liquid_Glass_Effect.php:302, ../includes/Extensions/Liquid_Glass_Effect.php:327, ../includes/Extensions/Liquid_Glass_Effect.php:349, ../includes/Traits/Helper.php:645
