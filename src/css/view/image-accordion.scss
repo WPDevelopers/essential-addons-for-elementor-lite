@@ -148,45 +148,6 @@
 }
 
 /*--- Liquid Glass Effect ---*/
-.eael_wd_liquid_glass-effect4 .eael-img-accordion .overlay-active::before {
-   position: absolute;
-   content: "";
-   z-index: 0;
-   height: 100%;
-   width: 100%;
-   left: 0;
-   top: 0;
-   backdrop-filter: blur(0px);
-   -webkit-backdrop-filter: blur(0px);
-   filter: url(#eael-glass-distortion1);
-}
-
-.eael_wd_liquid_glass-effect5 .eael-img-accordion .overlay-active::before {
-   position: absolute;
-   content: "";
-   z-index: 0;
-   height: 100%;
-   width: 100%;
-   left: 0;
-   top: 0;
-   backdrop-filter: blur(0px);
-   -webkit-backdrop-filter: blur(0px);
-   filter: url(#eael-glass-distortion2);
-}
-
-.eael_wd_liquid_glass-effect6 .eael-img-accordion .overlay-active::before {
-   position: absolute;
-   content: "";
-   z-index: 0;
-   height: 100%;
-   width: 100%;
-   left: 0;
-   top: 0;
-   backdrop-filter: blur(0px);
-   -webkit-backdrop-filter: blur(0px);
-   filter: url(#eael-glass-distortion3);
-}
-
 .elementor-edit-area-active {
    .eael_wd_liquid_glass_shadow-effect1,
    .eael_wd_liquid_glass_shadow-effect2,
