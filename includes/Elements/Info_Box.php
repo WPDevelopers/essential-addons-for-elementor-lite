@@ -17,9 +17,11 @@ use \Elementor\Plugin;
 use \Elementor\Utils;
 use \Elementor\Widget_Base;
 use \Essential_Addons_Elementor\Classes\Helper;
+use Essential_Addons_Elementor\Traits\Helper as HelperTrait;
 
 class Info_Box extends Widget_Base
 {
+    use HelperTrait;
     public function get_name()
     {
         return 'eael-info-box';
@@ -2032,239 +2034,21 @@ class Info_Box extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_bg_color_effect1',
-            [
-                'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
-                'type'      => Controls_Manager::COLOR,
-                'default'   => '#FFFFFF1F',
-                'selectors' => [
-                    '{{WRAPPER}}.eael_wd_liquid_glass-effect1 .eael-infobox-button' => 'background-color: {{VALUE}}',
-                ],
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch' => 'yes',
-                    'eael_wd_liquid_glass_effect'        => 'effect1',
-                ],
-            ]
-        );
+        // Background Color Controls
+        $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect1', '#FFFFFF1F', 'eael-infobox-button' );
+        $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect2', '', 'eael-infobox-button' );
+        $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect3', '#FFFFFF1F', 'eael-infobox-button' );
+        $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect4', '#FFFFFF1F', 'eael-infobox-button' );
+        $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect5', '', 'eael-infobox-button' );
+        $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect6', '', 'eael-infobox-button' );
 
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_bg_color_effect2',
-            [
-                'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
-                'type'      => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}}.eael_wd_liquid_glass-effect2 .eael-infobox-button' => 'background-color: {{VALUE}}',
-                ],
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch' => 'yes',
-                    'eael_wd_liquid_glass_effect'        => 'effect2',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_bg_color_effect3',
-            [
-                'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
-                'type'      => Controls_Manager::COLOR,
-                'default'   => '#FFFFFF1F',
-                'selectors' => [
-                    '{{WRAPPER}}.eael_wd_liquid_glass-effect3 .eael-infobox-button' => 'background-color: {{VALUE}}',
-                ],
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch' => 'yes',
-                    'eael_wd_liquid_glass_effect'        => 'effect3',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_bg_color_effect4',
-            [
-                'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
-                'type'      => Controls_Manager::COLOR,
-                'default'   => '#FFFFFF1F',
-                'selectors' => [
-                    '{{WRAPPER}}.eael_wd_liquid_glass-effect4 .eael-infobox-button' => 'background-color: {{VALUE}}',
-                ],
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch' => 'yes',
-                    'eael_wd_liquid_glass_effect'        => 'effect4',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_bg_color_effect5',
-            [
-                'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
-                'type'      => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}}.eael_liquid_glass-effect5::before' => 'background-color: {{VALUE}}',
-                ],
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch' => 'yes',
-                    'eael_wd_liquid_glass_effect'        => 'effect5',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_bg_color_effect6',
-            [
-                'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
-                'type'      => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}}.eael_liquid_glass-effect6::before' => 'background-color: {{VALUE}}',
-                ],
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch' => 'yes',
-                    'eael_wd_liquid_glass_effect'        => 'effect6',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_backdrop_filter_effect1',
-            [
-                'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
-                'type'  => Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min'  => 0,
-                        'max'  => 50,
-                        'step' => 1,
-                    ],
-                ],
-                'default' => [
-                    'size' => 24,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}}.eael_wd_liquid_glass-effect1 .eael-infobox-button' => 'backdrop-filter: blur({{SIZE}}px)',
-                ],
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch' => 'yes',
-                    'eael_wd_liquid_glass_effect' => 'effect1',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_backdrop_filter_effect2',
-            [
-                'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
-                'type'  => Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min'  => 0,
-                        'max'  => 50,
-                        'step' => 1,
-                    ],
-                ],
-                'default' => [
-                    'size' => 20,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}}.eael_wd_liquid_glass-effect2 .eael-infobox-button' => 'backdrop-filter: blur({{SIZE}}px) brightness(1.1) saturate(1.5)',
-                ],
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch' => 'yes',
-                    'eael_wd_liquid_glass_effect'        => 'effect2',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_backdrop_filter_effect3',
-            [
-                'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
-                'type'  => Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min'  => 0,
-                        'max'  => 50,
-                        'step' => 1,
-                    ],
-                ],
-                'default' => [
-                    'size' => 16,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}}.eael_wd_liquid_glass-effect3 .eael-infobox-button' => 'backdrop-filter: blur({{SIZE}}px)',
-                ],
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch' => 'yes',
-                    'eael_wd_liquid_glass_effect'        => 'effect3',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_backdrop_filter_effect4',
-            [
-                'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
-                'type'  => Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min'  => 0,
-                        'max'  => 50,
-                        'step' => 1,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}}.eael_wd_liquid_glass-effect4 .eael-infobox-button::before' => 'backdrop-filter: blur({{SIZE}}px)',
-                ],
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch' => 'yes',
-                    'eael_wd_liquid_glass_effect'        => 'effect4',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_backdrop_filter_effect5',
-            [
-                'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
-                'type'  => Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min'  => 0,
-                        'max'  => 50,
-                        'step' => 1,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}}.eael_wd_liquid_glass-effect5 .eael-infobox-button::before' => 'backdrop-filter: blur({{SIZE}}px)',
-                ],
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch' => 'yes',
-                    'eael_wd_liquid_glass_effect'        => 'effect5',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_backdrop_filter_effect6',
-            [
-                'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
-                'type'  => Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min'  => 0,
-                        'max'  => 50,
-                        'step' => 1,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}}.eael_wd_liquid_glass-effect6 .eael-infobox-button::before' => 'backdrop-filter: blur({{SIZE}}px)',
-                ],
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch' => 'yes',
-                    'eael_wd_liquid_glass_effect'        => 'effect6',
-                ],
-            ]
-        );
+        // Backdrop Filter Controls
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect1', '24', 'eael-infobox-button' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect2', '20', 'eael-infobox-button' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect3', '16', 'eael-infobox-button' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect4', '', 'eael-infobox-button' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect5', '', 'eael-infobox-button' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect6', '', 'eael-infobox-button' );
     }
 
     /**
