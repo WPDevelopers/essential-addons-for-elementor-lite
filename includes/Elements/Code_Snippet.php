@@ -198,6 +198,30 @@ class Code_Snippet extends Widget_Base {
                'description'  => __( 'Display line numbers in the code block.', 'essential-addons-for-elementor-lite' ),
          ]
       );
+
+      $this->add_control(
+         'code_view_mode',
+         [
+            'label' => esc_html__( 'View Mode', 'essential-addons-for-elementor-lite' ),
+            'type' => Controls_Manager::CHOOSE,
+            'options' => [
+               'default' => [
+                  'title' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
+                  'icon' => 'eicon-text-align-left',
+               ],
+               'fixed' => [
+                  'title' => esc_html__( 'Fixed', 'essential-addons-for-elementor-lite' ),
+                  'icon' => 'eicon-text-align-center',
+               ],
+               'collapsed' => [
+                  'title' => esc_html__( 'Collapsed', 'essential-addons-for-elementor-lite' ),
+                  'icon' => 'eicon-text-align-right',
+               ],
+            ],
+            'default' => 'default',
+            'toggle' => false,
+         ]
+      );
       
       $this->end_controls_section();
 
