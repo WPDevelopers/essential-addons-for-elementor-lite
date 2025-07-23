@@ -1674,12 +1674,12 @@ class Flip_Box extends Widget_Base
         $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect6', '', 'eael-elements-flip-box-front-container' );
 
         // Backdrop Filter Controls
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( 'effect1', '24', 'eael-elements-flip-box-front-container' );
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( 'effect2', '20', 'eael-elements-flip-box-front-container' );
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( 'effect3', '16', 'eael-elements-flip-box-front-container' );
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( 'effect4', '', 'eael-elements-flip-box-front-container' );
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( 'effect5', '', 'eael-elements-flip-box-front-container' );
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( 'effect6', '', 'eael-elements-flip-box-front-container' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect1', '24', 'eael-elements-flip-box-front-container' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect2', '20', 'eael-elements-flip-box-front-container' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect3', '16', 'eael-elements-flip-box-front-container' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect4', '', 'eael-elements-flip-box-front-container' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect5', '', 'eael-elements-flip-box-front-container' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect6', '', 'eael-elements-flip-box-front-container' );
     }
 
     /**
@@ -1721,13 +1721,13 @@ class Flip_Box extends Widget_Base
 		);
 
         // Liquid Glass Border Effects
-        $this->eael_wd_liquid_glass_border_effect( 'effect1', '#FFFFFF1F', 'eael-elements-flip-box-front-container' );
-        $this->eael_wd_liquid_glass_border_effect( 'effect2', '#FFFFFF1F', 'eael-elements-flip-box-front-container' );
-        $this->eael_wd_liquid_glass_border_effect( 'effect3', '#FFFFFF1F', 'eael-elements-flip-box-front-container' );
-        $this->eael_wd_liquid_glass_border_effect( 'effect4', '#FFFFFF1F', 'eael-elements-flip-box-front-container' );
+        $this->eael_wd_liquid_glass_border_effect( $this, 'effect1', '#FFFFFF1F', 'eael-elements-flip-box-front-container' );
+        $this->eael_wd_liquid_glass_border_effect( $this, 'effect2', '#FFFFFF1F', 'eael-elements-flip-box-front-container' );
+        $this->eael_wd_liquid_glass_border_effect( $this, 'effect3', '#FFFFFF1F', 'eael-elements-flip-box-front-container' );
+        $this->eael_wd_liquid_glass_border_effect( $this, 'effect4', '#FFFFFF1F', 'eael-elements-flip-box-front-container' );
 
         // Liquid Glass Border Radius Effects
-        $this->eael_wd_liquid_glass_border_radius_effect('effect1', 'eael-elements-flip-box-front-container',
+        $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect1', 'eael-elements-flip-box-front-container',
             [
                 'top' 	  => 24,
                 'right'    => 24,
@@ -1738,7 +1738,7 @@ class Flip_Box extends Widget_Base
             ]
         );
 
-        $this->eael_wd_liquid_glass_border_radius_effect('effect2', 'eael-elements-flip-box-front-container',
+        $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect2', 'eael-elements-flip-box-front-container',
             [
                 'top' 	  => 16,
                 'right'    => 16,
@@ -1749,7 +1749,7 @@ class Flip_Box extends Widget_Base
             ]
         );
 
-        $this->eael_wd_liquid_glass_border_radius_effect('effect3', 'eael-elements-flip-box-front-container',
+        $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect3', 'eael-elements-flip-box-front-container',
             [
                 'top' 	  => 8,
                 'bottom'   => 8,
@@ -1760,7 +1760,7 @@ class Flip_Box extends Widget_Base
             ]
         );
 
-        $this->eael_wd_liquid_glass_border_radius_effect('effect4', 'eael-elements-flip-box-front-container',
+        $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect4', 'eael-elements-flip-box-front-container',
             [
                 'top' 	  => 24,
                 'bottom'   => 24,
@@ -1772,7 +1772,7 @@ class Flip_Box extends Widget_Base
         );
 
         // Liquid Glass Shadow Effects
-        $this->eael_wd_liquid_glass_shadow_effect('effect1', 'eael-elements-flip-box-front-container',
+        $this->eael_wd_liquid_glass_shadow_effect($this, 'effect1', 'eael-elements-flip-box-front-container',
             [
                 'color'      => 'rgba(0,0,0,0.78)',
                 'horizontal' => 0,
@@ -1781,8 +1781,8 @@ class Flip_Box extends Widget_Base
                 'spread'     => 1,
             ]
         );
-        
-        $this->eael_wd_liquid_glass_shadow_effect('effect2', 'eael-elements-flip-box-front-container',
+
+        $this->eael_wd_liquid_glass_shadow_effect($this, 'effect2', 'eael-elements-flip-box-front-container',
             [
                 'color'      => '#383C65',
                 'horizontal' => 0,
@@ -1791,8 +1791,8 @@ class Flip_Box extends Widget_Base
                 'spread'     => -2,
             ]
         );
-        
-        $this->eael_wd_liquid_glass_shadow_effect('effect3', 'eael-elements-flip-box-front-container',
+
+        $this->eael_wd_liquid_glass_shadow_effect($this, 'effect3', 'eael-elements-flip-box-front-container',
             [
                 'color'      => 'rgba(255, 255, 255, 0.4)',
                 'horizontal' => 1,
@@ -1802,7 +1802,7 @@ class Flip_Box extends Widget_Base
             ]
         );
 
-        $this->eael_wd_liquid_glass_shadow_effect('effect4', 'eael-elements-flip-box-front-container',
+        $this->eael_wd_liquid_glass_shadow_effect($this, 'effect4', 'eael-elements-flip-box-front-container',
             [
                 'color'      => '#00000040',
                 'horizontal' => 0,

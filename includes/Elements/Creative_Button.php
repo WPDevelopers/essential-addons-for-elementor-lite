@@ -700,9 +700,9 @@ use HelperTrait;
         do_action( 'eael_wd_liquid_glass_effect_bg_color_effect6', $this, 'effect6', '', 'eael-creative-button' );
 
         // Backdrop Filter Controls
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( 'effect1', '24', 'eael-creative-button' );
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( 'effect2', '20', 'eael-creative-button' );
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( 'effect3', '16', 'eael-creative-button' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect1', '24', 'eael-creative-button' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect2', '20', 'eael-creative-button' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect3', '16', 'eael-creative-button' );
         
         do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect4', $this, 'effect4', '', 'eael-creative-button' );
         do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect5', $this, 'effect5', '', 'eael-creative-button' );
@@ -748,13 +748,13 @@ use HelperTrait;
 		);
 
         // Liquid Glass Border Effects
-        $this->eael_wd_liquid_glass_border_effect( 'effect1', '#FFFFFF1F', 'eael-creative-button' );
-        $this->eael_wd_liquid_glass_border_effect( 'effect2', '#FFFFFF1F', 'eael-creative-button' );
-        $this->eael_wd_liquid_glass_border_effect( 'effect3', '#FFFFFF1F', 'eael-creative-button' );
-        $this->eael_wd_liquid_glass_border_effect( 'effect4', '#FFFFFF1F', 'eael-creative-button' );
+        $this->eael_wd_liquid_glass_border_effect( $this, 'effect1', '#FFFFFF1F', 'eael-creative-button' );
+        $this->eael_wd_liquid_glass_border_effect( $this, 'effect2', '#FFFFFF1F', 'eael-creative-button' );
+        $this->eael_wd_liquid_glass_border_effect( $this, 'effect3', '#FFFFFF1F', 'eael-creative-button' );
+        $this->eael_wd_liquid_glass_border_effect( $this, 'effect4', '#FFFFFF1F', 'eael-creative-button' );
 
         // Liquid Glass Border Radius Effects
-        $this->eael_wd_liquid_glass_border_radius_effect('effect1', 'eael-creative-button',
+        $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect1', 'eael-creative-button',
             [
                 'top' 	  => 24,
                 'right'    => 24,
@@ -765,7 +765,7 @@ use HelperTrait;
             ]
         );
 
-        $this->eael_wd_liquid_glass_border_radius_effect('effect2', 'eael-creative-button',
+        $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect2', 'eael-creative-button',
             [
                 'top' 	  => 16,
                 'right'    => 16,
@@ -776,7 +776,7 @@ use HelperTrait;
             ]
         );
 
-        $this->eael_wd_liquid_glass_border_radius_effect('effect3', 'eael-creative-button',
+        $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect3', 'eael-creative-button',
             [
                 'top' 	  => 8,
                 'bottom'   => 8,
@@ -787,7 +787,7 @@ use HelperTrait;
             ]
         );
 
-        $this->eael_wd_liquid_glass_border_radius_effect('effect4', 'eael-creative-button',
+        $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect4', 'eael-creative-button',
             [
                 'top' 	  => 24,
                 'bottom'   => 24,
@@ -799,7 +799,7 @@ use HelperTrait;
         );
 
         // Liquid Glass Shadow Effects
-        $this->eael_wd_liquid_glass_shadow_effect('effect1', 'eael-creative-button',
+        $this->eael_wd_liquid_glass_shadow_effect($this, 'effect1', 'eael-creative-button',
             [
                 'color'      => 'rgba(0,0,0,0.78)',
                 'horizontal' => 0,
@@ -808,8 +808,8 @@ use HelperTrait;
                 'spread'     => 1,
             ]
         );
-        
-        $this->eael_wd_liquid_glass_shadow_effect('effect2', 'eael-creative-button',
+
+        $this->eael_wd_liquid_glass_shadow_effect($this, 'effect2', 'eael-creative-button',
             [
                 'color'      => '#383C65',
                 'horizontal' => 0,
@@ -818,8 +818,8 @@ use HelperTrait;
                 'spread'     => -2,
             ]
         );
-        
-        $this->eael_wd_liquid_glass_shadow_effect('effect3', 'eael-creative-button',
+
+        $this->eael_wd_liquid_glass_shadow_effect($this, 'effect3', 'eael-creative-button',
             [
                 'color'      => 'rgba(255, 255, 255, 0.4)',
                 'horizontal' => 1,
@@ -829,7 +829,7 @@ use HelperTrait;
             ]
         );
 
-        $this->eael_wd_liquid_glass_shadow_effect('effect4', 'eael-creative-button',
+        $this->eael_wd_liquid_glass_shadow_effect($this, 'effect4', 'eael-creative-button',
             [
                 'color'      => '#00000040',
                 'horizontal' => 0,

@@ -655,9 +655,9 @@ class Image_Accordion extends Widget_Base {
         do_action( 'eael_wd_liquid_glass_effect_bg_color_effect6', $this, 'effect6', '', 'eael-img-accordion .overlay-active .overlay' );
 
         // Backdrop Filter Controls
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( 'effect1', '24', 'eael-img-accordion .overlay-active .overlay' );
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( 'effect2', '20', 'eael-img-accordion .overlay-active .overlay' );
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( 'effect3', '16', 'eael-img-accordion .overlay-active .overlay' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect1', '24', 'eael-img-accordion .overlay-active .overlay' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect2', '20', 'eael-img-accordion .overlay-active .overlay' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect3', '16', 'eael-img-accordion .overlay-active .overlay' );
 
         do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect4', $this, 'effect4', '', 'eael-img-accordion .overlay-active .overlay' );
         do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect5', $this, 'effect5', '', 'eael-img-accordion .overlay-active .overlay' );
@@ -703,13 +703,13 @@ class Image_Accordion extends Widget_Base {
 		);
 
         // Liquid Glass Border Effects
-        $this->eael_wd_liquid_glass_border_effect( 'effect1', '#FFFFFF1F', 'eael-img-accordion .overlay-active .overlay' );
-        $this->eael_wd_liquid_glass_border_effect( 'effect2', '#FFFFFF1F', 'eael-img-accordion .overlay-active .overlay' );
-        $this->eael_wd_liquid_glass_border_effect( 'effect3', '#FFFFFF1F', 'eael-img-accordion .overlay-active .overlay' );
-        $this->eael_wd_liquid_glass_border_effect( 'effect4', '#FFFFFF1F', 'eael-img-accordion .overlay-active .overlay' );
+        $this->eael_wd_liquid_glass_border_effect( $this, 'effect1', '#FFFFFF1F', 'eael-img-accordion .overlay-active .overlay' );
+        $this->eael_wd_liquid_glass_border_effect( $this, 'effect2', '#FFFFFF1F', 'eael-img-accordion .overlay-active .overlay' );
+        $this->eael_wd_liquid_glass_border_effect( $this, 'effect3', '#FFFFFF1F', 'eael-img-accordion .overlay-active .overlay' );
+        $this->eael_wd_liquid_glass_border_effect( $this, 'effect4', '#FFFFFF1F', 'eael-img-accordion .overlay-active .overlay' );
 
         // Liquid Glass Border Radius Effects
-        $this->eael_wd_liquid_glass_border_radius_effect('effect1', 'eael-img-accordion .overlay-active .overlay',
+        $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect1', 'eael-img-accordion .overlay-active .overlay',
             [
                 'top' 	  => 24,
                 'right'    => 24,
@@ -720,7 +720,7 @@ class Image_Accordion extends Widget_Base {
             ]
         );
 
-        $this->eael_wd_liquid_glass_border_radius_effect('effect2', 'eael-img-accordion .overlay-active .overlay',
+        $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect2', 'eael-img-accordion .overlay-active .overlay',
             [
                 'top' 	  => 16,
                 'right'    => 16,
@@ -731,7 +731,7 @@ class Image_Accordion extends Widget_Base {
             ]
         );
 
-        $this->eael_wd_liquid_glass_border_radius_effect('effect3', 'eael-img-accordion .overlay-active .overlay',
+        $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect3', 'eael-img-accordion .overlay-active .overlay',
             [
                 'top' 	  => 8,
                 'bottom'   => 8,
@@ -742,7 +742,7 @@ class Image_Accordion extends Widget_Base {
             ]
         );
 
-        $this->eael_wd_liquid_glass_border_radius_effect('effect4', 'eael-img-accordion .overlay-active .overlay',
+        $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect4', 'eael-img-accordion .overlay-active .overlay',
             [
                 'top' 	  => 24,
                 'bottom'   => 24,
@@ -754,7 +754,7 @@ class Image_Accordion extends Widget_Base {
         );
 
         // Liquid Glass Shadow Effects
-        $this->eael_wd_liquid_glass_shadow_effect('effect1', 'eael-img-accordion .overlay-active .overlay',
+        $this->eael_wd_liquid_glass_shadow_effect($this, 'effect1', 'eael-img-accordion .overlay-active .overlay',
             [
                 'color'      => 'rgba(0,0,0,0.78)',
                 'horizontal' => 0,
@@ -763,8 +763,8 @@ class Image_Accordion extends Widget_Base {
                 'spread'     => 1,
             ]
         );
-        
-        $this->eael_wd_liquid_glass_shadow_effect('effect2', 'eael-img-accordion .overlay-active .overlay',
+
+        $this->eael_wd_liquid_glass_shadow_effect($this, 'effect2', 'eael-img-accordion .overlay-active .overlay',
             [
                 'color'      => '#383C65',
                 'horizontal' => 0,
@@ -773,8 +773,8 @@ class Image_Accordion extends Widget_Base {
                 'spread'     => -2,
             ]
         );
-        
-        $this->eael_wd_liquid_glass_shadow_effect('effect3', 'eael-img-accordion .overlay-active .overlay',
+
+        $this->eael_wd_liquid_glass_shadow_effect($this, 'effect3', 'eael-img-accordion .overlay-active .overlay',
             [
                 'color'      => 'rgba(255, 255, 255, 0.4)',
                 'horizontal' => 1,
@@ -784,7 +784,7 @@ class Image_Accordion extends Widget_Base {
             ]
         );
 
-        $this->eael_wd_liquid_glass_shadow_effect('effect4', 'eael-img-accordion .overlay-active .overlay',
+        $this->eael_wd_liquid_glass_shadow_effect($this, 'effect4', 'eael-img-accordion .overlay-active .overlay',
             [
                 'color'      => '#00000040',
                 'horizontal' => 0,

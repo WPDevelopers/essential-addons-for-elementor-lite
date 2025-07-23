@@ -638,8 +638,8 @@ trait Helper
 	}
 
    //Add backdrop filter control for liquid glass effect.
-	public function eael_wd_liquid_glass_effect_backdrop_filter_effect( $effect, $default_size, $selector ) {
-		$this->add_control(
+	public function eael_wd_liquid_glass_effect_backdrop_filter_effect( $obj, $effect, $default_size, $selector ) {
+		$obj->add_control(
 			'eael_wd_liquid_glass_effect_backdrop_filter_' . $effect,
 			[
 					'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
@@ -666,8 +666,8 @@ trait Helper
 	}
 
    //Add border effect for Liquid Glass Effect
-	public function eael_wd_liquid_glass_border_effect( $effect, $default_color, $selector ) {
-		$this->add_group_control(
+	public function eael_wd_liquid_glass_border_effect( $obj, $effect, $default_color, $selector ) {
+		$obj->add_group_control(
 		Group_Control_Border::get_type(),
 		[
 			'name'      => 'eael_wd_liquid_glass_border_'.$effect,
@@ -698,8 +698,8 @@ trait Helper
 	}
 
     // Add border radius effect for Liquid Glass Effect
-	public function eael_wd_liquid_glass_border_radius_effect( $effect, $selector, $default_radius ) {
-		$this->add_control(
+	public function eael_wd_liquid_glass_border_radius_effect( $obj, $effect, $selector, $default_radius ) {
+		$obj->add_control(
 		'eael_wd_liquid_glass_border_radius_'.$effect,
 		[
 			'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
@@ -718,8 +718,8 @@ trait Helper
 	}
 
     // Add shadow effect for Liquid Glass Effect
-	public function eael_wd_liquid_glass_shadow_effect( $effect, $selector, $default_shadow ) {
-		$this->add_group_control(
+	public function eael_wd_liquid_glass_shadow_effect( $obj, $effect, $selector, $default_shadow ) {
+		$obj->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
 					'name'      => 'eael_wd_liquid_glass_shadow_' . $effect,
