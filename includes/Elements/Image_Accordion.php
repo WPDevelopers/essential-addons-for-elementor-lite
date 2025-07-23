@@ -653,9 +653,6 @@ class Image_Accordion extends Widget_Base {
         do_action( 'eael_wd_liquid_glass_effect_bg_color_effect4', $this, 'effect4', '#FFFFFF1F', 'eael-img-accordion .overlay-active .overlay' );
         do_action( 'eael_wd_liquid_glass_effect_bg_color_effect5', $this, 'effect5', '', 'eael-img-accordion .overlay-active .overlay' );
         do_action( 'eael_wd_liquid_glass_effect_bg_color_effect6', $this, 'effect6', '', 'eael-img-accordion .overlay-active .overlay' );
-        // $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect4', '#FFFFFF1F', 'eael-img-accordion .overlay-active .overlay' );
-        // $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect5', '', 'eael-img-accordion .overlay-active .overlay' );
-        // $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect6', '', 'eael-img-accordion .overlay-active .overlay' );
 
         // Backdrop Filter Controls
         $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( 'effect1', '24', 'eael-img-accordion .overlay-active .overlay' );
@@ -665,10 +662,6 @@ class Image_Accordion extends Widget_Base {
         do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect4', $this, 'effect4', '', 'eael-img-accordion .overlay-active .overlay' );
         do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect5', $this, 'effect5', '', 'eael-img-accordion .overlay-active .overlay' );
         do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect6', $this, 'effect6', '', 'eael-img-accordion .overlay-active .overlay' );
-        
-        // $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( 'effect4', '', 'eael-img-accordion .overlay-active .overlay' );
-        // $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( 'effect5', '', 'eael-img-accordion .overlay-active .overlay' );
-        // $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( 'effect6', '', 'eael-img-accordion .overlay-active .overlay' );
     }
 
     /**
