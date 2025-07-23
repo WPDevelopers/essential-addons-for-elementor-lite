@@ -2001,20 +2001,28 @@ class Info_Box extends Widget_Base
             ]
         );
 
+        $eael_liquid_glass_effect = apply_filters(
+			'eael_liquid_glass_effect_filter',
+			[
+					'styles' => [
+						'effect1' => esc_html__( 'Effect 1', 'essential-addons-for-elementor-lite' ),
+						'effect2' => esc_html__( 'Effect 2', 'essential-addons-for-elementor-lite' ),
+						'effect3' => esc_html__( 'Effect 3', 'essential-addons-for-elementor-lite' ),
+						'effect4' => esc_html__( 'Effect 4 (Pro)', 'essential-addons-for-elementor-lite' ),
+						'effect5' => esc_html__( 'Effect 5 (Pro)', 'essential-addons-for-elementor-lite' ),
+						'effect6' => esc_html__( 'Effect 6 (Pro)', 'essential-addons-for-elementor-lite' ),
+				],
+				'conditions' => ['effect4', 'effect5', 'effect6'],
+			]
+        );
+        
         $this->add_control(
             'eael_wd_liquid_glass_effect',
             [
                 'label'   => esc_html__( 'Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
                 'type'    => Controls_Manager::SELECT2,
                 'default' => 'effect1',
-                'options' => [
-                    'effect1' => esc_html__( 'Effect 1', 'essential-addons-for-elementor-lite' ),
-                    'effect2' => esc_html__( 'Effect 2', 'essential-addons-for-elementor-lite' ),
-                    'effect3' => esc_html__( 'Effect 3', 'essential-addons-for-elementor-lite' ),
-                    'effect4' => esc_html__( 'Effect 4', 'essential-addons-for-elementor-lite' ),
-                    'effect5' => esc_html__( 'Effect 5', 'essential-addons-for-elementor-lite' ),
-                    'effect6' => esc_html__( 'Effect 6', 'essential-addons-for-elementor-lite' ),
-                ],
+                'options' => $eael_liquid_glass_effect['styles'],
                 'prefix_class' => 'eael_wd_liquid_glass-',
                 'condition' => [
                     'eael_wd_liquid_glass_effect_switch' => 'yes',
@@ -2038,17 +2046,20 @@ class Info_Box extends Widget_Base
         $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect1', '#FFFFFF1F', 'eael-infobox-button' );
         $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect2', '', 'eael-infobox-button' );
         $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect3', '#FFFFFF1F', 'eael-infobox-button' );
-        $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect4', '#FFFFFF1F', 'eael-infobox-button' );
-        $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect5', '', 'eael-infobox-button' );
-        $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect6', '', 'eael-infobox-button' );
+        
+        // Liquid Glass Background Color Effects
+        do_action( 'eael_wd_liquid_glass_effect_bg_color_effect4', $this, 'effect4', '#FFFFFF1F', 'eael-infobox-button' );
+        do_action( 'eael_wd_liquid_glass_effect_bg_color_effect5', $this, 'effect5', '', 'eael-infobox-button' );
+        do_action( 'eael_wd_liquid_glass_effect_bg_color_effect6', $this, 'effect6', '', 'eael-infobox-button' );
 
         // Backdrop Filter Controls
         $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect1', '24', 'eael-infobox-button' );
         $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect2', '20', 'eael-infobox-button' );
         $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect3', '16', 'eael-infobox-button' );
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect4', '', 'eael-infobox-button' );
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect5', '', 'eael-infobox-button' );
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect6', '', 'eael-infobox-button' );
+        
+        do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect4', $this, 'effect4', '', 'eael-infobox-button' );
+        do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect5', $this, 'effect5', '', 'eael-infobox-button' );
+        do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect6', $this, 'effect6', '', 'eael-infobox-button' );
     }
 
     /**
