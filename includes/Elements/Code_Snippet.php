@@ -1,7 +1,9 @@
 <?php
 namespace Essential_Addons_Elementor\Elements;
 
+use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
+use Elementor\Group_Control_Typography;
 use Elementor\Icons_Manager;
 use ElementsKit_Lite\Modules\Widget_Builder\Controls\Control_Type_Border;
 
@@ -207,19 +209,204 @@ class Code_Snippet extends Widget_Base {
             'options' => [
                'default' => [
                   'title' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
-                  'icon' => 'eicon-text-align-left',
+                  'icon' => 'eicon-menu-toggle',
                ],
                'fixed' => [
                   'title' => esc_html__( 'Fixed', 'essential-addons-for-elementor-lite' ),
-                  'icon' => 'eicon-text-align-center',
+                  'icon' => 'eicon-spacer',
                ],
                'collapsed' => [
                   'title' => esc_html__( 'Collapsed', 'essential-addons-for-elementor-lite' ),
-                  'icon' => 'eicon-text-align-right',
+                  'icon' => 'eicon-v-align-stretch',
                ],
             ],
             'default' => 'default',
             'toggle' => false,
+         ]
+      );
+
+      $this->add_responsive_control(
+         'code_snippet_height',
+         [
+            'label'      => esc_html__( 'Height', 'essential-addons-for-elementor-lite' ),
+            'type'       => Controls_Manager::SLIDER,
+            'size_units' => [ 'px', 'em', 'rem' ],
+            'range'      => [
+               'px' => [
+                  'min'  => 0,
+                  'max'  => 1000,
+                  'step' => 5,
+               ],
+               'em' => [
+                  'min'  => 0,
+                  'max'  => 100,
+                  'step' => 0.5,
+               ],
+               'rem' => [
+                  'min'  => 0,
+                  'max'  => 100,
+                  'step' => 0.5,
+               ],
+            ],
+            'default' => [
+               'unit' => 'px',
+               'size' => 300,
+            ],
+            'selectors' => [
+               '{{WRAPPER}} .eael-code-snippet-content' => 'height: {{SIZE}}{{UNIT}};',
+            ],
+            'condition' => [
+               'code_view_mode!' => 'default',
+            ],
+         ]
+      );
+
+      $this->add_control(
+         'code_collapse_inidicator_content',
+         [
+            'label' => esc_html__( 'Indicator', 'essential-addons-for-elementor-lite' ),
+            'type' => Controls_Manager::HEADING,
+            'separator' => 'before',
+            'condition' => [
+               'code_view_mode' => 'collapsed',
+            ],
+         ]
+      );
+
+      $this->add_control(
+         'code_collapse_inidicator_type',
+         [
+            'label' => esc_html__( 'Type', 'essential-addons-for-elementor-lite' ),
+            'type' => Controls_Manager::CHOOSE,
+            'options' => [
+               'full_width' => [
+                  'title' => esc_html__( 'Full Width', 'essential-addons-for-elementor-lite' ),
+                  'icon' => 'eicon-text-align-justify',
+               ],
+               'button' => [
+                  'title' => esc_html__( 'Button', 'essential-addons-for-elementor-lite' ),
+                  'icon' => 'eicon-button',
+               ],
+            ],
+            'default' => 'button',
+            'toggle' => false,
+            'condition' => [
+               'code_view_mode' => 'collapsed',
+            ],
+         ]
+      );
+
+      $this->add_control(
+         'code_collapse_inidicator_position',
+         [
+            'label' => esc_html__( 'Position', 'essential-addons-for-elementor-lite' ),
+            'type' => Controls_Manager::CHOOSE,
+            'options' => [
+               'left' => [
+                  'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+                  'icon' => 'eicon-text-align-left',
+               ],
+               'center' => [
+                  'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
+                  'icon' => 'eicon-text-align-center',
+               ],
+               'right' => [
+                  'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+                  'icon' => 'eicon-text-align-right',
+               ],
+            ],
+            'default' => '',
+            'toggle' => true,
+            'selectors' => [
+               '{{WRAPPER}} .eael-code-snippet-collapsed-indicator-wrapper' => 'justify-content: {{VALUE}};',
+               '{{WRAPPER}} .eael-code-snippet-collapsed-indicator-wrapper .eael-cs-indicator-type-full_width' => 'justify-content: {{VALUE}};',
+            ],
+            'condition' => [
+               'code_view_mode' => 'collapsed',
+            ],
+         ]
+      );
+
+      $this->add_control(
+         'code_collapse_inidicator_content_type',
+         [
+            'label' => esc_html__( 'Content Type', 'essential-addons-for-elementor-lite' ),
+            'type' => Controls_Manager::CHOOSE,
+            'options' => [
+               'text' => [
+                  'title' => esc_html__( 'Text', 'essential-addons-for-elementor-lite' ),
+                  'icon' => 'eicon-animation-text',
+               ],
+               'icon' => [
+                  'title' => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
+                  'icon' => 'eicon-favorite',
+               ],
+            ],
+            'default' => 'text',
+            'toggle' => true,
+         ]
+      );
+
+      $this->add_control(
+         'code_collapse_inidicator_text_collapsed',
+         [
+            'label' => esc_html__( 'Text (Collapsed)', 'essential-addons-for-elementor-lite' ),
+            'type' => Controls_Manager::TEXT,
+            'default' => esc_html__( 'Show more', 'essential-addons-for-elementor-lite' ),
+            'ai' => [
+               'active' => false,
+            ],
+            'condition' => [
+               'code_view_mode' => 'collapsed',
+               'code_collapse_inidicator_content_type' => 'text',
+            ],
+         ]
+      );
+      $this->add_control(
+         'code_collapse_inidicator_text_expanded',
+         [
+            'label' => esc_html__( 'Text (Expanded)', 'essential-addons-for-elementor-lite' ),
+            'type' => Controls_Manager::TEXT,
+            'default' => esc_html__( 'Show less', 'essential-addons-for-elementor-lite' ),
+            'ai' => [
+               'active' => false,
+            ],
+            'condition' => [
+               'code_view_mode' => 'collapsed',
+               'code_collapse_inidicator_content_type' => 'text',
+            ],
+         ]
+      );
+
+      $this->add_control(
+         'code_collapse_inidicator_icon_collapsed',
+         [
+            'label' => esc_html__( 'Icon (Collapsed)', 'essential-addons-for-elementor-lite' ),
+            'type' => Controls_Manager::ICONS,
+            'default' => [
+               'value' => 'fas fa-angle-down',
+               'library' => 'fa-solid',
+            ],
+            'condition' => [
+               'code_view_mode' => 'collapsed',
+               'code_collapse_inidicator_content_type' => 'icon',
+            ],
+         ]
+      );
+
+      $this->add_control(
+         'code_collapse_inidicator_icon_expanded',
+         [
+            'label' => esc_html__( 'Icon (Expanded)', 'essential-addons-for-elementor-lite' ),
+            'type' => Controls_Manager::ICONS,
+            'default' => [
+               'value' => 'fas fa-angle-up',
+               'library' => 'fa-solid',
+            ],
+            'condition' => [
+               'code_view_mode' => 'collapsed',
+               'code_collapse_inidicator_content_type' => 'icon',
+            ],
          ]
       );
       
@@ -375,7 +562,7 @@ class Code_Snippet extends Widget_Base {
       );
 
       $this->add_group_control(
-			\Elementor\Group_Control_Border::get_type(),
+			Group_Control_Border::get_type(),
 			[
 				'name'     => 'wrapper_border',
 				'selector' => '{{WRAPPER}} .eael-code-snippet-wrapper',
@@ -499,7 +686,7 @@ class Code_Snippet extends Widget_Base {
          ]
       );
       $this->add_group_control(
-         \Elementor\Group_Control_Typography::get_type(),
+         Group_Control_Typography::get_type(),
          [
                'name'     => 'file_name_typography',
                'label'    => __( 'Typography', 'essential-addons-for-elementor-lite' ),
@@ -677,12 +864,185 @@ class Code_Snippet extends Widget_Base {
       );
 
       $this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
+			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'content_typography',
 				'selector' => '{{WRAPPER}} .eael-code-snippet-line-numbers, {{WRAPPER}} .eael-code-snippet-code, {{WRAPPER}} .eael-code-snippet-code code',
 			]
 		);
+      $this->end_controls_section();
+
+      // Style Tab - Code Content
+      $this->start_controls_section(
+         'code_content_collapse_style_section',
+         [
+               'label' => __( 'Collapse Indicator', 'essential-addons-for-elementor-lite' ),
+               'tab'   => Controls_Manager::TAB_STYLE,
+               'condition' => [
+                  'code_view_mode' => 'collapsed',
+               ],
+         ]
+      );
+
+      $this->add_group_control(
+         Group_Control_Typography::get_type(),
+         [
+            'name' => 'code_content_collapsed_indicator_typography',
+            'selector' => '{{WRAPPER}} .eael-code-snippet-collapsed-indicator-wrapper .eael-code-snippet-collapsed-indicator ',
+            'condition' => [
+               'code_collapse_inidicator_content_type' => 'text'
+            ]
+         ]
+      );
+
+      $this->add_responsive_control(
+         'code_content_collapsed_indicator_icon_size',
+         [
+            'label' => esc_html__( 'Icon Size', 'essential-addons-for-elementor-lite' ),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => [ 'px', 'em', 'rem', 'custom' ],
+            'range' => [
+               'px' => [
+                  'min' => 0,
+                  'max' => 1000,
+                  'step' => 5,
+               ],
+            ],
+            'selectors' => [
+               '{{WRAPPER}} .eael-code-snippet-collapsed-indicator-wrapper .eael-code-snippet-collapsed-indicator i' => 'font-size: {{SIZE}}{{UNIT}};',
+               '{{WRAPPER}} .eael-code-snippet-collapsed-indicator-wrapper .eael-code-snippet-collapsed-indicator svg' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+            ],
+            'condition' => [
+               'code_collapse_inidicator_content_type' => 'icon'
+            ]
+         ]
+      );
+
+      $this->add_control(
+         'code_content_collapsed_indicator_color',
+         [
+               'label'     => __( 'Color', 'essential-addons-for-elementor-lite' ),
+               'type'      => Controls_Manager::COLOR,
+               'selectors' => [
+                  '{{WRAPPER}} .eael-code-snippet-collapsed-indicator-wrapper .eael-code-snippet-collapsed-indicator i' => 'color: {{VALUE}};',
+                  '{{WRAPPER}} .eael-code-snippet-collapsed-indicator-wrapper .eael-code-snippet-collapsed-indicator svg' => 'fill: {{VALUE}};',
+               ],
+         ]
+      );
+
+      $this->add_group_control(
+         Group_Control_Background::get_type(),
+         [
+            'name' => 'code_content_collapsed_indicator_background',
+            'types' => [ 'classic', 'gradient' ],
+            'exclude' => [ 'image' ],
+            'selector' => '{{WRAPPER}} .eael-code-snippet-collapsed-indicator-wrapper .eael-code-snippet-collapsed-indicator',
+         ]
+      );
+
+      $this->add_group_control(
+         Group_Control_Border::get_type(),
+         [
+            'name' => 'code_content_collapsed_indicator_border',
+            'selector' => '{{WRAPPER}} .eael-code-snippet-collapsed-indicator-wrapper .eael-code-snippet-collapsed-indicator',
+         ]
+      );
+
+      $this->add_responsive_control(
+         'code_content_collapsed_indicator_border_radius',
+         [
+               'label'      => __( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+               'type'       => Controls_Manager::DIMENSIONS,
+               'size_units' => [ 'px', '%' ],
+               'selectors'  => [
+                  '{{WRAPPER}} .eael-code-snippet-collapsed-indicator-wrapper .eael-code-snippet-collapsed-indicator' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+               ],
+         ]
+      );
+
+      $this->add_responsive_control(
+         'code_content_collapsed_indicator_height',
+         [
+            'label' => esc_html__( 'Height', 'essential-addons-for-elementor-lite' ),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => [ 'px', '%', 'em', 'rem' ],
+            'range' => [
+               'px' => [
+                  'min' => 0,
+                  'max' => 100,
+                  'step' => 5,
+               ],
+               '%' => [
+                  'min' => 0,
+                  'max' => 100,
+               ],
+            ],
+            'default' => [
+               'unit' => 'px',
+               'size' => 30,
+            ],
+            'selectors' => [
+               '{{WRAPPER}} .eael-code-snippet-collapsed-indicator-wrapper' => 'height: {{SIZE}}{{UNIT}};',
+               '{{WRAPPER}} .eael-code-snippet-collapsed-indicator-wrapper .eael-code-snippet-collapsed-indicator' => 'height: {{SIZE}}{{UNIT}};',
+            ],
+         ]
+      );
+
+      $this->add_responsive_control(
+         'code_content_collapsed_indicator_width',
+         [
+            'label' => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => [ 'px', 'em', 'rem', 'custom' ],
+            'range' => [
+               'px' => [
+                  'min' => 0,
+                  'max' => 100,
+                  'step' => 5,
+               ],
+               '%' => [
+                  'min' => 0,
+                  'max' => 100,
+               ],
+            ],
+            'default' => [
+               'unit' => 'px',
+               'size' => 30,
+            ],
+            'selectors' => [
+               '{{WRAPPER}} .eael-code-snippet-collapsed-indicator-wrapper .eael-code-snippet-collapsed-indicator.eael-cs-indicator-type-button' => 'width: {{SIZE}}{{UNIT}};',
+            ],
+            'condition' => [
+               'code_view_mode' => 'collapsed',
+               'code_collapse_inidicator_type' => 'button',
+            ],
+         ]
+      );
+
+      $this->add_responsive_control(
+         'code_content_collapsed_indicator_padding',
+         [
+            'label' => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+            'type' => Controls_Manager::DIMENSIONS,
+            'size_units' => [ 'px', 'em', 'rem' ],
+            'default' => [
+               'top'      => 20,
+               'right'    => 20,
+               'bottom'   => 20,
+               'left'     => 20,
+               'unit'     => 'px',
+               'isLinked' => true,
+            ],
+            'selectors' => [
+               '{{WRAPPER}} .eael-code-snippet-collapsed-indicator-wrapper .eael-code-snippet-collapsed-indicator.eael-cs-indicator-type-full_width' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+            'condition' => [
+               'code_view_mode' => 'collapsed',
+               'code_collapse_inidicator_type' => 'full_width',
+            ],
+         ]
+      );
+
       $this->end_controls_section();
    }
 
@@ -747,8 +1107,15 @@ class Code_Snippet extends Widget_Base {
       $show_copy_button = $settings['show_copy_button'] ?? 'yes';
       $show_copy_tooltip = $settings['show_copy_tooltip'] ?? 'no';
 
+      $this->add_render_attribute( 'eael-snippet-wrapper', 'class', 'eael-code-snippet-wrapper theme-' . $theme );
+      $this->add_render_attribute( 'eael-snippet-wrapper', 'data-language', $language );
+      $this->add_render_attribute( 'eael-snippet-wrapper', 'data-copy-button',  'yes' === $show_copy_button );
+      $this->add_render_attribute( 'eael-snippet-wrapper', 'data-snippet-id', $snippet_id );
+      $this->add_render_attribute( 'eael-snippet-wrapper', 'id', $snippet_id );
+      $this->add_render_attribute( 'eael-snippet-wrapper', 'class',  'view-mode-' . $settings['code_view_mode'] );
+
       ?>
-      <div class="eael-code-snippet-wrapper theme-<?php echo esc_attr( $theme ); ?>" id="<?php echo esc_attr( $snippet_id ); ?>" data-language="<?php echo esc_attr( $language ); ?>" data-copy-button="<?php echo esc_attr( $show_copy_button === 'yes' ? 'true' : 'false' ); ?>" data-snippet-id="<?php echo esc_attr( $snippet_id ); ?>">
+      <div <?php $this->print_render_attribute_string( 'eael-snippet-wrapper' ); ?> >
       <?php if ( 'yes' === $show_header ) { ?>
          <div class="eael-code-snippet-header eael-file-preview-header">
             <div class="eael-file-preview-left">
@@ -791,13 +1158,18 @@ class Code_Snippet extends Widget_Base {
                </div>
             </div>
 
-            <?php if ( 'yes' === $show_copy_button ) { ?>
+            <?php if ( 'yes' === $show_copy_button ) { 
+               $this->add_render_attribute( 'eael-code-snippet-copy-button', [
+                  'data-clipboard-target' => '#' . esc_attr( $snippet_id ) . ' .eael-code-snippet-code code',
+                  'class' => 'eael-code-snippet-copy-button',
+                  'type' => 'button',
+                  'aria-label' => esc_attr__( 'Copy code to clipboard', 'essential-addons-for-elementor-lite' )
+               ] );
+               $this->add_render_attribute( 'eael-code-snippet-copy-button', 'aria-label', esc_attr__( 'Copy code to clipboard', 'essential-addons-for-elementor-lite' ) );
+               ?>
             <div class="eael-file-preview-right">
                <div class="eael-code-snippet-copy-container">
-                  <button class="eael-code-snippet-copy-button"
-                           type="button"
-                           data-clipboard-target="#<?php echo esc_attr( $snippet_id ); ?> .eael-code-snippet-code code"
-                           aria-label="<?php esc_attr_e( 'Copy code to clipboard', 'essential-addons-for-elementor-lite' ); ?>">
+                  <button <?php $this->print_render_attribute_string( 'eael-code-snippet-copy-button' ); ?>>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z" fill="currentColor"/>
                         </svg>
@@ -820,6 +1192,27 @@ class Code_Snippet extends Widget_Base {
             </div>
             <?php } ?>
             <pre class="eael-code-snippet-code language-<?php echo esc_attr( $language ); ?>"><code><?php echo esc_html( $settings['code_content'] ); ?></code></pre>
+            <?php if( 'collapsed' === $settings['code_view_mode'] ) { 
+               $this->add_render_attribute( 'eael_code_snippet_view_mode', [
+                  'class' => [ 
+                     'eael-code-snippet-collapsed-indicator',
+                     'eael-cs-indicator-type-' . $settings['code_collapse_inidicator_type'],
+                     'eael-cs-code-collapsed'
+                  ]
+              ] );
+               ?>
+               <div class="eael-code-snippet-collapsed-indicator-wrapper">
+                  <div <?php $this->print_render_attribute_string( 'eael_code_snippet_view_mode' ); ?>>
+                     <?php if ( 'text' === $settings['code_collapse_inidicator_content_type'] ) { ?>
+                        <span class="eael-code-snippet-collapsed-indicator-text eael-csi-collapsed"><?php echo esc_html( $settings['code_collapse_inidicator_text_collapsed'] ); ?></span>
+                        <span class="eael-code-snippet-collapsed-indicator-text eael-csi-expanded"><?php echo esc_html( $settings['code_collapse_inidicator_text_expanded'] ); ?></span>
+                        <?php } else { ?>
+                        <?php Icons_Manager::render_icon( $settings['code_collapse_inidicator_icon_collapsed'], [ 'aria-hidden' => 'true', 'class' => 'eael-code-snippet-collapsed-indicator-icon eael-csi-collapsed' ] ); ?>
+                        <?php Icons_Manager::render_icon( $settings['code_collapse_inidicator_icon_expanded'], [ 'aria-hidden' => 'true', 'class' => 'eael-code-snippet-collapsed-indicator-icon eael-csi-expanded' ] ); ?>
+                        <?php } ?>
+                  </div>
+               </div>
+            <?php } ?>
          </div>
       </div>
       <?php

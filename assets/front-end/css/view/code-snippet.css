@@ -17,6 +17,12 @@
   -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+.eael-code-snippet-wrapper:not(.view-mode-collapsed) .eael-code-snippet-code {
+  overflow-x: auto;
+}
+.eael-code-snippet-wrapper.view-mode-collapsed .eael-code-snippet-code {
+  overflow-y: hidden;
+}
 .eael-code-snippet-wrapper.theme-light {
   background-color: #ffffff;
   border: 1px solid #e1e5e9;
@@ -149,6 +155,59 @@
 }
 .eael-code-snippet-wrapper.theme-dark .eael-code-snippet-copy-button:focus {
   outline: none;
+}
+.eael-code-snippet-wrapper .eael-code-snippet-collapsed-indicator-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  width: 100%;
+}
+.eael-code-snippet-wrapper .eael-code-snippet-collapsed-indicator-wrapper .eael-code-snippet-collapsed-indicator {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+  background-color: #eee;
+}
+.eael-code-snippet-wrapper .eael-code-snippet-collapsed-indicator-wrapper .eael-code-snippet-collapsed-indicator.eael-cs-indicator-type-button {
+  width: 20px;
+}
+.eael-code-snippet-wrapper .eael-code-snippet-collapsed-indicator-wrapper .eael-code-snippet-collapsed-indicator.eael-cs-indicator-type-full_width {
+  padding: 20px;
+  width: 100%;
+}
+.eael-code-snippet-wrapper .eael-code-snippet-collapsed-indicator-wrapper .eael-code-snippet-collapsed-indicator-icon {
+  height: 16px;
+  width: 16px;
+  font-size: 16px;
+}
+.eael-code-snippet-wrapper .eael-code-snippet-collapsed-indicator-wrapper .eael-code-snippet-collapsed-indicator-text {
+  font-size: 12px;
+  line-height: 1;
+  display: inline-block;
+}
+.eael-code-snippet-wrapper .eael-code-snippet-collapsed-indicator-wrapper .eael-cs-code-collapsed .eael-csi-expanded {
+  display: none;
+}
+.eael-code-snippet-wrapper .eael-code-snippet-collapsed-indicator-wrapper .eael-cs-code-expanded .eael-csi-collapsed {
+  display: none;
 }
 /* File Preview Header Styles */
 .eael-file-preview-header {
@@ -390,7 +449,6 @@
   padding: 1rem;
   font-family: inherit;
   white-space: pre;
-  overflow-x: auto;
   background: transparent;
   border: none;
   min-height: 3rem;

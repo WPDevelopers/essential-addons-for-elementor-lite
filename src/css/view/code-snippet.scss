@@ -13,6 +13,17 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
    }
 
+   &:not(.view-mode-collapsed) {
+      .eael-code-snippet-code {
+         overflow-x: auto;
+      }
+   }
+   &.view-mode-collapsed {
+      .eael-code-snippet-code {
+         overflow-y: hidden;
+      }
+   }
+
    /* Light */
    &.theme-light {
       background-color: #ffffff;
@@ -159,6 +170,60 @@
 
          &:focus {
             outline: none;
+         }
+      }
+   }
+
+   .eael-code-snippet-collapsed-indicator-wrapper {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      width: 100%;
+      
+      .eael-code-snippet-collapsed-indicator {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         height: 100%;
+         background-color: #eee;
+
+         &.eael-cs-indicator-type-{
+            &button{
+               width: 20px;
+            }
+            &full_width{
+               padding: 20px;
+               width: 100%;
+            }
+         }
+      }
+
+      .eael-code-snippet-collapsed-indicator-{
+         &icon{
+            height: 16px;
+            width: 16px;
+            font-size: 16px;
+         }
+         &text{
+            font-size: 12px;
+            line-height: 1;
+            display: inline-block;
+         }
+      }
+
+      .eael-cs-code-collapsed{
+         .eael-csi-expanded{
+            display: none;
+         }
+      }
+      .eael-cs-code-expanded{
+         .eael-csi-collapsed{
+            display: none;
          }
       }
    }
@@ -361,7 +426,6 @@
    padding: 1rem;
    font-family: inherit;
    white-space: pre;
-   overflow-x: auto;
    background: transparent;
    border: none;
    min-height: 3rem;
