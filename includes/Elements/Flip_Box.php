@@ -877,21 +877,6 @@ class Flip_Box extends Widget_Base
         );
 
         $this->add_control(
-            'eael_wd_liquid_glass_effect_front_section',
-            [
-                'label'     => __('Liquid Glass Effect', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::HEADING,
-                'separator' => 'before',
-            ]
-        );
-
-        // Liquid Glass Effects
-        $this->eael_liquid_glass_effects();
-
-        //  Liquid Glass Shadow Effects
-        $this->eael_liquid_glass_shadow_effects();
-
-        $this->add_control(
             'eael_flipbox_back_bg_heading',
             [
                 'label'     => __('Back Background Color', 'essential-addons-for-elementor-lite'),
@@ -958,21 +943,6 @@ class Flip_Box extends Widget_Base
                 'selector' => '{{WRAPPER}} .eael-elements-flip-box-front-container, {{WRAPPER}} .eael-elements-flip-box-rear-container',
             ]
         );
-
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_rear_section',
-            [
-                'label'     => __('Liquid Glass Effect', 'essential-addons-for-elementor-lite'),
-                'type'      => Controls_Manager::HEADING,
-                'separator' => 'before',
-            ]
-        );
-
-        // Liquid Glass Effects
-        $this->eael_liquid_glass_effects_rear();
-
-        //  Liquid Glass Shadow Effects
-        $this->eael_liquid_glass_shadow_effects_rear();
 
         $this->end_controls_section();
 
@@ -1600,6 +1570,38 @@ class Flip_Box extends Widget_Base
         $this->end_controls_tab();
 
         $this->end_controls_tabs();
+
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+			'eael_wd_liquid_glass_effect_front_section',
+			[
+				'label' => esc_html__( 'Liquid Glass Effect Front', 'essential-addons-for-elementor-lite' ),
+				'tab' => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+        // Liquid Glass Effects
+        $this->eael_liquid_glass_effects();
+
+        //  Liquid Glass Shadow Effects
+        $this->eael_liquid_glass_shadow_effects();
+
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+			'eael_wd_liquid_glass_effect_back_section',
+			[
+				'label' => esc_html__( 'Liquid Glass Effect Back', 'essential-addons-for-elementor-lite' ),
+				'tab' => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+        // Liquid Glass Effects
+        $this->eael_liquid_glass_effects_rear();
+
+        //  Liquid Glass Shadow Effects
+        $this->eael_liquid_glass_shadow_effects_rear();
 
         $this->end_controls_section();
     }
