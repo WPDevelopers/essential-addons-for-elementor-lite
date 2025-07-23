@@ -148,10 +148,6 @@
 }
 
 /*--- Liquid Glass Effect ---*/
-// .eael_wd_liquid_glass-effect4 .eael-img-accordion .overlay-active .overlay {
-//    position: relative;
-// }
-
 .eael_wd_liquid_glass-effect4 .eael-img-accordion .overlay-active::before {
    position: absolute;
    content: "";
@@ -165,10 +161,6 @@
    filter: url(#eael-glass-distortion1);
 }
 
-// .eael_wd_liquid_glass-effect5 .eael-img-accordion .overlay-active {
-//    position: relative;
-// }
-
 .eael_wd_liquid_glass-effect5 .eael-img-accordion .overlay-active::before {
    position: absolute;
    content: "";
@@ -181,10 +173,6 @@
    -webkit-backdrop-filter: blur(0px);
    filter: url(#eael-glass-distortion2);
 }
-
-// .eael_wd_liquid_glass-effect6 .eael-img-accordion .overlay-active {
-//    position: relative;
-// }
 
 .eael_wd_liquid_glass-effect6 .eael-img-accordion .overlay-active::before {
    position: absolute;
