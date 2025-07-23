@@ -27,7 +27,7 @@
       box-shadow: 0 0 5px rgba(0, 113, 161, 0.5);
    }
 
-   .custom-add-to-cart {
+   .eael-add-to-cart {
       display: inline-flex;
       align-items: center;
       gap: 4px;
@@ -41,8 +41,11 @@
       cursor: pointer;
       transition: background-color 0.3s ease, transform 0.2s ease;
    }
+   button.eael-add-to-cart[type="submit"] {
+      display: flex;
+   }
 
-   .custom-add-to-cart:active {
+   .eael-add-to-cart:active {
       transform: translateY(0);
    }
 
@@ -107,7 +110,7 @@
          }
       }
    }
-   .custom-add-to-cart {
+   .eael-add-to-cart {
       width: 27%;
    }
 }
