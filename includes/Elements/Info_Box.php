@@ -2089,314 +2089,97 @@ class Info_Box extends Widget_Base
 			]
 		);
 
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-			[
-				'name'      => 'eael_wd_liquid_glass_border_effect1',
-				'fields_options' => [
-					'border' => [
-						'default' => 'solid',
-					],
-					'width' => [
-						'default' => [
-							'top'      => '1',
-							'right'    => '1',
-							'bottom'   => '1',
-							'left'     => '1',
-							'isLinked' =>  false,
-						],
-					],
-					'color' => [
-						'default' => '#FFFFFF1F',
-					],
-				],
-				'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-effect1 .eael-infobox-button',
-				'condition' => [
-					'eael_wd_liquid_glass_effect_switch'  => 'yes',
-					'eael_wd_liquid_glass_shadow_effect' => 'effect1',
-				],
-			]
-		);
+        // Liquid Glass Border Effects
+        $this->eael_wd_liquid_glass_border_effect( $this, 'effect1', '#FFFFFF1F', 'eael-infobox-button' );
+        $this->eael_wd_liquid_glass_border_effect( $this, 'effect2', '#FFFFFF1F', 'eael-infobox-button' );
+        $this->eael_wd_liquid_glass_border_effect( $this, 'effect3', '#FFFFFF1F', 'eael-infobox-button' );
+        $this->eael_wd_liquid_glass_border_effect( $this, 'effect4', '#FFFFFF1F', 'eael-infobox-button' );
 
-		$this->add_control(
-			'eael_wd_liquid_glass_border_radius_effect1',
-			[
-				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'rem', 'custom' ],
-				'default' => [
-					'top' 	  => 24,
-					'right'    => 24,
-					'bottom'   => 24,
-					'left'     => 24,
-					'unit'     => 'px',
-					'isLinked' => true,
-				],
-				'selectors'  => [
-					'{{WRAPPER}}.eael_wd_liquid_glass_shadow-effect1 .eael-infobox-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-				'condition' => [
-					'eael_wd_liquid_glass_effect_switch' => 'yes',
-					'eael_wd_liquid_glass_shadow_effect' => 'effect1',
-				],
-			]
-		);
+        // Liquid Glass Border Radius Effects
+        $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect1', 'eael-infobox-button',
+            [
+                'top' 	  => 24,
+                'right'    => 24,
+                'bottom'   => 24,
+                'left'     => 24,
+                'unit'     => 'px',
+                'isLinked' => true,
+            ]
+        );
 
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name'              => 'eael_wd_liquid_glass_shadow_effect1',
-				'fields_options'     => [
-					'box_shadow_type' => [ 'default' => 'yes' ],
-					'box_shadow'      => [
-						'default'      => [
-							'color'      => 'rgba(0,0,0,0.78)',
-							'horizontal' => 0,
-							'vertical'   => 19,
-							'blur'       => 26,
-							'spread'     => 1,
-						],
-					],
-				],
-				'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-effect1 .eael-infobox-button',
-				'condition' => [
-					'eael_wd_liquid_glass_effect_switch'  => 'yes',
-					'eael_wd_liquid_glass_shadow_effect' => 'effect1',
-				],
-			]
-		);
+        $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect2', 'eael-infobox-button',
+            [
+                'top' 	  => 16,
+                'right'    => 16,
+                'bottom'   => 16,
+                'left'     => 16,
+                'unit'     => 'px',
+                'isLinked' => true,
+            ]
+        );
 
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-			[
-				'name'      => 'eael_wd_liquid_glass_border_effect2',
-				'fields_options' => [
-					'border' => [
-						'default' => 'solid',
-					],
-					'width' => [
-						'default' => [
-							'top'      => '1',
-							'right'    => '1',
-							'bottom'   => '1',
-							'left'     => '1',
-							'isLinked' =>  false,
-						],
-					],
-					'color' => [
-						'default' => '#FFFFFF1F',
-					],
-				],
-				'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-effect2 .eael-infobox-button',
-				'condition' => [
-					'eael_wd_liquid_glass_effect_switch'  => 'yes',
-					'eael_wd_liquid_glass_shadow_effect' => 'effect2',
-				],
-			]
-		);
+        $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect3', 'eael-infobox-button',
+            [
+                'top' 	  => 8,
+                'bottom'   => 8,
+                'left'     => 8,
+                'right'    => 8,
+                'unit'     => 'px',
+                'isLinked' => true,
+            ]
+        );
 
-		$this->add_control(
-			'eael_wd_liquid_glass_border_radius_effect2',
-			[
-				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'rem', 'custom' ],
-				'default'    => [
-					'top' 	  => 16,
-					'right'    => 16,
-					'bottom'   => 16,
-					'left'     => 16,
-					'unit'     => 'px',
-					'isLinked' => true,
-				],
-				'selectors'  => [
-					'{{WRAPPER}}.eael_wd_liquid_glass_shadow-effect2 .eael-infobox-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-				'condition' => [
-					'eael_wd_liquid_glass_effect_switch' => 'yes',
-					'eael_wd_liquid_glass_shadow_effect' => 'effect2',
-				],
-			]
-		);
+        $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect4', 'eael-infobox-button',
+            [
+                'top' 	  => 24,
+                'bottom'   => 24,
+                'left'     => 24,
+                'right'    => 24,
+                'unit'     => 'px',
+                'isLinked' => true,
+            ]
+        );
 
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name'              => 'eael_wd_liquid_glass_shadow_effect2',
-				'fields_options'     => [
-					'box_shadow_type' => [ 'default' => 'yes' ],
-					'box_shadow'      => [
-						'default'      => [
-							'color'      => '#383C65',
-							'horizontal' => 0,
-							'vertical'   => 0,
-							'blur'       => 33,
-							'spread'     => -2,
-						],
-					],
-				],
-				'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-effect2 .eael-infobox-button',
-				'condition' => [
-					'eael_wd_liquid_glass_effect_switch'  => 'yes',
-					'eael_wd_liquid_glass_shadow_effect' => 'effect2',
-				],
-			]
-		);
+        // Liquid Glass Shadow Effects
+        $this->eael_wd_liquid_glass_shadow_effect($this, 'effect1', 'eael-infobox-button',
+            [
+                'color'      => 'rgba(0,0,0,0.78)',
+                'horizontal' => 0,
+                'vertical'   => 19,
+                'blur'       => 26,
+                'spread'     => 1,
+            ]
+        );
 
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-			[
-				'name'      => 'eael_wd_liquid_glass_border_radius_effect3',
-				'fields_options' => [
-					'border' => [
-						'default' => 'solid',
-					],
-					'width' => [
-						'default' => [
-							'top'      => '1',
-							'right'    => '1',
-							'bottom'   => '1',
-							'left'     => '1',
-							'isLinked' =>  false,
-						],
-					],
-					'color' => [
-						'default' => '#FFFFFF1F',
-					],
-				],
-				'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-effect3 .eael-infobox-button',
-				'condition' => [
-					'eael_wd_liquid_glass_effect_switch'  => 'yes',
-					'eael_wd_liquid_glass_shadow_effect' => 'effect3',
-				],
-			]
-		);
+        $this->eael_wd_liquid_glass_shadow_effect($this, 'effect2', 'eael-infobox-button',
+            [
+                'color'      => '#383C65',
+                'horizontal' => 0,
+                'vertical'   => 0,
+                'blur'       => 33,
+                'spread'     => -2,
+            ]
+        );
 
-		$this->add_control(
-			'eael_wd_liquid_glass_border_radius_effect3',
-			[
-				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'rem', 'custom' ],
-				'default'    => [
-					'top' 	  => 8,
-					'bottom'   => 8,
-					'left'     => 8,
-					'right'    => 8,
-					'unit'     => 'px',
-					'isLinked' => true,
-				],
-				'selectors'  => [
-					'{{WRAPPER}}.eael_wd_liquid_glass_shadow-effect3 .eael-infobox-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-				'condition' => [
-					'eael_wd_liquid_glass_effect_switch' => 'yes',
-					'eael_wd_liquid_glass_shadow_effect' => 'effect3',
-				],
-			]
-		);
-		
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name'              => 'eael_wd_liquid_glass_shadow_effect3',
-				'fields_options'     => [
-					'box_shadow_type' => [ 'default' => 'yes' ],
-					'box_shadow_position' => [ 'default' => 'inset' ],
-					'box_shadow'      => [
-						'default'      => [
-							'color'      => 'rgba(255, 255, 255, 0.4)',
-							'horizontal' =>1,
-							'vertical'   =>1,
-							'blur'       => 10,
-							'spread'     => 5,
-						],
-					],
-				],
-				'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-effect3 .eael-infobox-button',
-				'condition' => [
-					'eael_wd_liquid_glass_effect_switch'  => 'yes',
-					'eael_wd_liquid_glass_shadow_effect' => 'effect3',
-				],
-			]
-		);
+        $this->eael_wd_liquid_glass_shadow_effect($this, 'effect3', 'eael-infobox-button',
+            [
+                'color'      => 'rgba(255, 255, 255, 0.4)',
+                'horizontal' => 1,
+                'vertical'   => 1,
+                'blur'       => 10,
+                'spread'     => 5,
+            ]
+        );
 
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-			[
-				'name'     => 'eael_wd_liquid_glass_border_effect4',
-				'selector' => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-effect4 .eael-infobox-button',
-				'fields_options' => [
-					'border' => [
-						'default' => 'solid',
-					],
-					'width' => [
-						'default' => [
-							'top'      => '1',
-							'right'    => '1',
-							'bottom'   => '1',
-							'left'     => '1',
-							'isLinked' =>  false,
-						],
-					],
-					'color' => [
-						'default' => '#AAAAAA1A',
-					],
-				],
-				'condition' => [
-					'eael_wd_liquid_glass_effect_switch'  => 'yes',
-					'eael_wd_liquid_glass_shadow_effect' => 'effect4',
-				],
-			]
-		);
-
-		$this->add_control(
-			'eael_wd_liquid_glass_border_radius_effect4',
-			[
-				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'rem', 'custom' ],
-				'default'    => [
-					'top' 	  => 24,
-					'bottom'   => 24,
-					'left'     => 24,
-					'right'    => 24,
-					'unit'     => 'px',
-					'isLinked' => true,
-				],
-				'selectors'  => [
-					'{{WRAPPER}}.eael_wd_liquid_glass_shadow-effect4 .eael-infobox-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-				'condition' => [
-					'eael_wd_liquid_glass_effect_switch' => 'yes',
-					'eael_wd_liquid_glass_shadow_effect' => 'effect4',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name'      => 'eael_wd_liquid_glass_shadow_effect4',
-				'fields_options'     => [
-					'box_shadow_type' => [ 'default' => 'yes' ],
-					'box_shadow'      => [
-						'default'      => [
-							'color'      => '#00000040',
-							'horizontal' => 0,
-							'vertical'   => 9,
-							'blur'       => 21,
-							'spread'     => 0,
-						],
-					],
-				],
-				'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-effect4 .eael-infobox-button',
-				'condition' => [
-					'eael_wd_liquid_glass_effect_switch'  => 'yes',
-					'eael_wd_liquid_glass_shadow_effect' => 'effect4',
-				],
-			]
-		);
+        $this->eael_wd_liquid_glass_shadow_effect($this, 'effect4', 'eael-infobox-button',
+            [
+                'color'      => '#00000040',
+                'horizontal' => 0,
+                'vertical'   => 9,
+                'blur'       => 21,
+                'spread'     => 0,
+            ]
+        );
     }
 
 	/**
