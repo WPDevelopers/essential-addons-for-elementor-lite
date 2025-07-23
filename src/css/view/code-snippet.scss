@@ -227,6 +227,12 @@
          }
       }
    }
+
+   &.view-mode-expanded {
+      .eael-code-snippet-content {
+         height: auto !important;
+      }
+   }
 }
 
 /* File Preview Header Styles */

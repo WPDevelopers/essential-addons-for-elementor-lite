@@ -209,6 +209,9 @@
 .eael-code-snippet-wrapper .eael-code-snippet-collapsed-indicator-wrapper .eael-cs-code-expanded .eael-csi-collapsed {
   display: none;
 }
+.eael-code-snippet-wrapper.view-mode-expanded .eael-code-snippet-content {
+  height: auto !important;
+}
 /* File Preview Header Styles */
 .eael-file-preview-header {
   display: -webkit-box;
