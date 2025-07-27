@@ -1096,7 +1096,7 @@ class Code_Snippet extends Widget_Base {
          $line_numbers = range( 1, count( $lines ) );
       }
 
-      $file_icon      = $settings['file_icon']['url'] || $settings['file_icon_custom']['value'] ?? '';
+      $file_icon      = !empty($settings['file_icon']['url']) || !empty($settings['file_icon_custom']['value']) ?? '';
       $show_file_icon = $settings['show_file_icon'] ?? 'yes';
       $language       = $settings['language'] ?? 'html';
       $file_name      = $settings['file_name'] ?? '';
@@ -1193,10 +1193,11 @@ class Code_Snippet extends Widget_Base {
             <?php } ?>
             <pre class="eael-code-snippet-code language-<?php echo esc_attr( $language ); ?>"><code><?php echo esc_html( $settings['code_content'] ); ?></code></pre>
             <?php if( 'collapsed' === $settings['code_view_mode'] ) { 
+               $indcator_type_class = !empty($settings['code_collapse_inidicator_type']) ? 'eael-cs-indicator-type-' . $settings['code_collapse_inidicator_type'] : '';
                $this->add_render_attribute( 'eael_code_snippet_view_mode', [
                   'class' => [ 
                      'eael-code-snippet-collapsed-indicator',
-                     'eael-cs-indicator-type-' . $settings['code_collapse_inidicator_type'],
+                     $indcator_type_class,
                      'eael-cs-code-collapsed'
                   ]
               ] );
