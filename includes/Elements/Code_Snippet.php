@@ -288,7 +288,7 @@ class Code_Snippet extends Widget_Base {
                   'icon' => 'eicon-button',
                ],
             ],
-            'default' => 'button',
+            'default' => 'full_width',
             'toggle' => false,
             'condition' => [
                'code_view_mode' => 'collapsed',
