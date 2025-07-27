@@ -343,7 +343,10 @@ class Code_Snippet extends Widget_Base {
                ],
             ],
             'default' => 'text',
-            'toggle' => true,
+            'toggle' => false,
+            'condition' => [
+               'code_view_mode' => 'collapsed',
+            ],
          ]
       );
 
