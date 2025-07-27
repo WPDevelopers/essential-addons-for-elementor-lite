@@ -903,7 +903,7 @@ class Code_Snippet extends Widget_Base {
          [
             'label' => esc_html__( 'Icon Size', 'essential-addons-for-elementor-lite' ),
             'type' => Controls_Manager::SLIDER,
-            'size_units' => [ 'px', 'em', 'rem', 'custom' ],
+            'size_units' => [ 'px', 'em', 'rem' ],
             'range' => [
                'px' => [
                   'min' => 0,
@@ -929,6 +929,7 @@ class Code_Snippet extends Widget_Base {
                'selectors' => [
                   '{{WRAPPER}} .eael-code-snippet-collapsed-indicator-wrapper .eael-code-snippet-collapsed-indicator i' => 'color: {{VALUE}};',
                   '{{WRAPPER}} .eael-code-snippet-collapsed-indicator-wrapper .eael-code-snippet-collapsed-indicator svg' => 'fill: {{VALUE}};',
+                  '{{WRAPPER}} .eael-code-snippet-collapsed-indicator-wrapper .eael-code-snippet-collapsed-indicator .eael-code-snippet-collapsed-indicator-text' => 'color: {{VALUE}};',
                ],
          ]
       );
