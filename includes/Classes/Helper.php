@@ -222,7 +222,9 @@ class Helper
 		    $args['meta_key'] = '_eael_post_view_count';
 	    }
 
-	    if ( ! empty( $settings['authors'] ) ) {
+	    if ( ! empty( $settings['posts_by_current_user'] ) && 'yes' === $settings['posts_by_current_user'] ) {
+		    $args['author__in'] = [ get_current_user_id() ];
+	    } elseif ( ! empty( $settings['authors'] ) ) {
 		    $args['author__in'] = $settings['authors'];
 	    }
 
