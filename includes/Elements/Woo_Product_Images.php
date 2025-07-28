@@ -1,11 +1,14 @@
 <?php
 namespace Essential_Addons_Elementor\Elements;
 
+use Elementor\Controls_Manager;
+
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
    exit;
 }
 
+use Elementor\Group_Control_Border;
 use Elementor\Widget_Base;
 use \Essential_Addons_Elementor\Classes\Helper;
 
@@ -32,7 +35,7 @@ class Woo_Product_Images extends Widget_Base {
 			'images', 
 			'product', 
 			'ea',
-         'essential addons',
+         	'essential addons',
 			'ea product',
 			'ea product image',
 			'woo',
@@ -67,7 +70,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_images_section_title_style',
 			[
 				'label' => esc_html__( 'Images', 'essential-addons-for-elementor-lite' ),
-				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
 
@@ -76,7 +79,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_image_sale_flash',
 			[
 				'label'        => esc_html__( 'Sale Flash', 'essential-addons-for-elementor-lite' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'render_type'  => 'template',
@@ -90,7 +93,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_image_sale_flash_text_color',
 			[
 				'label'     => esc_html__( 'Text Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
+				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-images span.onsale, {{WRAPPER}} .eael-single-product-images span.ast-onsale-card ' => 'color: {{VALUE}};',
 				],
@@ -104,7 +107,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_image_sale_flash_bg_color',
 			[
 				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
+				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-images span.onsale, {{WRAPPER}} .eael-single-product-images span.ast-onsale-card ' => 'background-color: {{VALUE}};',
 				],
@@ -118,13 +121,13 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_iamge_heading',
 			[
 				'label'     => esc_html__( 'Image', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::HEADING,
+				'type'      => Controls_Manager::HEADING,
 				'separator' => 'after',
 			]
 		);
 
       $this->add_group_control(
-			\Elementor\Group_Control_Border::get_type(),
+			Group_Control_Border::get_type(),
 			[
 				'name'      => 'eael_image_border',
 				'selector'  => '{{WRAPPER}} .eael-single-product-images .product_image_slider__container .swiper-slide-active img',
@@ -135,7 +138,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_image_border_radius',
 			[
 				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
-				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
 				'selectors'  => [
 						'{{WRAPPER}} .eael-single-product-images .product_image_slider__container .swiper-slide-active img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
@@ -147,7 +150,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_image_spacing',
 			[
 				'label'      => esc_html__( 'Spacing', 'essential-addons-for-elementor-lite' ),
-				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
 				'selectors'  => [
 					'{{WRAPPER}} .eael-single-product-images .product_image_slider__container .swiper-slide' => 'margin-bottom: {{SIZE}}{{UNIT}}',
@@ -159,7 +162,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_image_zoom_box',
 			[
 				'label'     => esc_html__( 'Image Popup', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::HEADING,
+				'type'      => Controls_Manager::HEADING,
 				'separator' => 'after',
 			]
 		);
@@ -168,7 +171,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_image_zoom_show',
 			[
 				'label'        => esc_html__( 'Show Image Popup', 'essential-addons-for-elementor-lite' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
@@ -180,7 +183,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_image_zoom_box_size',
 			[
 				'label'      => esc_html__( 'Size', 'essential-addons-for-elementor-lite' ),
-				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
 				'selectors'  => [
 					'{{WRAPPER}} .eael-single-product-images .product_image_slider__container .product_image_slider__trigger' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
@@ -195,7 +198,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_image_zoom_box_bg_color',
 			[
 				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
+				'type'      => Controls_Manager::COLOR,
 				'default'   => '#fff',
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-images .product_image_slider__container .product_image_slider__trigger' => 'background-color: {{VALUE}}',
@@ -210,7 +213,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_image_zoom_box_icon_color',
 			[
 				'label'     => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
+				'type'      => Controls_Manager::COLOR,
 				'default'   => '#858585',
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-images .product_image_slider__container .product_image_slider__trigger svg path' => 'fill: {{VALUE}}',
@@ -225,7 +228,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_image_zoom_box_padding',
 			[
 				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
-				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'rem', 'custom' ],
 				'default'    => [
 					'top'    => 5,
@@ -248,7 +251,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_image_zoom_box_margin',
 			[
 				'label'      => esc_html__( 'Margin', 'essential-addons-for-elementor-lite' ),
-				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'rem', 'custom' ],
 				'default'    => [
 					'top'    => 15,
@@ -274,7 +277,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_thumb_heading',
 			[
 				'label'     => esc_html__( 'Thumbnails', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::HEADING,
+				'type'      => Controls_Manager::HEADING,
 				'separator' => 'after',
 				'condition' => [
 					'eael_pi_thumbnail' => 'yes',
@@ -283,7 +286,7 @@ class Woo_Product_Images extends Widget_Base {
 		);
 
       $this->add_group_control(
-			\Elementor\Group_Control_Border::get_type(),
+			Group_Control_Border::get_type(),
 			[
 				'name'      => 'eael_thumb_border',
 				'selector'  => '{{WRAPPER}} .eael-single-product-images .product_image_slider__thumbs .swiper-slide',
@@ -297,7 +300,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_thumb_border_radius',
 			[
 				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
-				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
 				'selectors'  => [
 					'{{WRAPPER}} .eael-single-product-images .product_image_slider__thumbs .swiper-slide' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
@@ -312,7 +315,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_thumb_spacing',
 			[
 				'label'      => esc_html__( 'Gap', 'essential-addons-for-elementor-lite' ),
-				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
 				'default'    => [
 					'unit' => 'px',
@@ -331,7 +334,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_thumb_navigation',
 			[
 				'label'     => esc_html__( 'Navigation', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::HEADING,
+				'type'      => Controls_Manager::HEADING,
 				'separator' => 'after',
 				'condition' => [
 					'eael_pi_thumb_navigation' => 'yes',
@@ -344,7 +347,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_thumb_navigator_icon_color',
 			[
 				'label'     => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
+				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-single-product-images .swiper-button-next' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .eael-single-product-images .swiper-button-prev' => 'color: {{VALUE}}',
@@ -360,7 +363,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_thumb_navigator_icon_size',
 			[
 				'label'      => esc_html__( 'Icon Size', 'essential-addons-for-elementor-lite' ),
-				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
 				'default'    => [
 					'unit' => 'px',
@@ -393,7 +396,7 @@ class Woo_Product_Images extends Widget_Base {
 				'label' => __( 'Warning!', 'essential-addons-for-elementor-lite' ),
 			] );
 			$this->add_control( 'eael_global_warning_text', [
-				'type'            => \Elementor\Controls_Manager::RAW_HTML,
+				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => __( '<strong>WooCommerce</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=woocommerce&tab=search&type=term" target="_blank">WooCommerce</a> first.', 'essential-addons-for-elementor-lite' ),
 				'content_classes' => 'eael-warning',
 			] );
@@ -408,7 +411,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_content_section',
 			[
 				'label' => esc_html__( 'Content', 'essential-addons-for-elementor-lite' ),
-				'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
+				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
 
@@ -416,7 +419,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_pi_image_resolution',
 			[
 				'label'   => esc_html__( 'Image Resolution', 'essential-addons-for-elementor-lite' ),
-				'type'    => \Elementor\Controls_Manager::SELECT,
+				'type'    => Controls_Manager::SELECT,
 				'default' => 'full',
 				'options' => [
 					'full'         => esc_html__( 'Full', 'essential-addons-for-elementor-lite' ),
@@ -434,7 +437,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_pi_effects',
 			[
 				'label'   => esc_html__( 'Effects', 'essential-addons-for-elementor-lite' ),
-				'type'    => \Elementor\Controls_Manager::SELECT,
+				'type'    => Controls_Manager::SELECT,
 				'default' => 'slide',
 				'options' => [
 					'slide'     => esc_html__( 'Slide', 'essential-addons-for-elementor-lite' ),
@@ -450,8 +453,8 @@ class Woo_Product_Images extends Widget_Base {
 		$this->add_control(
 			'eael_pi_pagination',
 			[
-				'label'        => esc_html__( 'Show Pagination', 'essential-addons-for-elementor-lite' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label'        => esc_html__( 'Pagination', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
@@ -461,8 +464,8 @@ class Woo_Product_Images extends Widget_Base {
 		$this->add_control(
 			'eael_pi_navigation',
 			[
-				'label'        => esc_html__( 'Show Navigation', 'essential-addons-for-elementor-lite' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label'        => esc_html__( 'Navigation', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
@@ -472,8 +475,8 @@ class Woo_Product_Images extends Widget_Base {
 		$this->add_control(
 			'eael_pi_thumbnail',
 			[
-				'label'        => esc_html__( 'Show Thumbnail', 'essential-addons-for-elementor-lite' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label'        => esc_html__( 'Thumbnail', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
@@ -485,7 +488,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_pi_select_thumb_items',
 			[
 				'label'        => esc_html__( 'Thumb Items', 'essential-addons-for-elementor-lite' ),
-				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
 				'label_off'    => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
 				'label_on'     => esc_html__( 'Custom', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
@@ -501,7 +504,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_pi_thumb_desktop_items',
 			[
 				'label' => esc_html__( 'For Desktop', 'essential-addons-for-elementor-lite' ),
-				'type' => \Elementor\Controls_Manager::SLIDER,
+				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
 						'min' => 1,
@@ -523,7 +526,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_pi_thumb_tablet_items',
 			[
 				'label' => esc_html__( 'For Tablet', 'essential-addons-for-elementor-lite' ),
-				'type' => \Elementor\Controls_Manager::SLIDER,
+				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
 						'min' => 1,
@@ -545,7 +548,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_pi_thumb_mobile_items',
 			[
 				'label' => esc_html__( 'For Mobile', 'essential-addons-for-elementor-lite' ),
-				'type' => \Elementor\Controls_Manager::SLIDER,
+				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
 						'min' => 1,
@@ -569,7 +572,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_pi_thumb_height_for_mobile',
 			[
 				'label' => esc_html__( 'For Mobile Device Height', 'essential-addons-for-elementor-lite' ),
-				'type'  => \Elementor\Controls_Manager::SLIDER,
+				'type'  => Controls_Manager::SLIDER,
 				'description' => esc_html__( 'You can control the height of the image from here', 'essential-addons-for-elementor-lite' ),
 				'range' => [
 					'px' => [
@@ -593,7 +596,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_pi_thumb_position',
 			[
 				'label'   => esc_html__( 'Thumb Position', 'essential-addons-for-elementor-lite' ),
-				'type'    => \Elementor\Controls_Manager::SELECT,
+				'type'    => Controls_Manager::SELECT,
 				'default' => 'bottom',
 				'options' => [
 					'bottom' => esc_html__( 'Bottom', 'essential-addons-for-elementor-lite' ),
@@ -610,7 +613,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_pi_thumb_navigation',
 			[
 				'label'        => esc_html__( 'Thumbnail Navigation', 'essential-addons-for-elementor-lite' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
@@ -625,7 +628,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_product_image_loop',
 			[
 				'label'        => esc_html__( 'Loop', 'essential-addons-for-elementor-lite' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'true',
@@ -636,7 +639,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_product_image_autoplay',
 			[
 				'label'        => esc_html__( 'Autoplay', 'essential-addons-for-elementor-lite' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
@@ -648,7 +651,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_product_image_autoplay_delay',
 			[
 				'label' => esc_html__( 'Delay', 'essential-addons-for-elementor-lite' ),
-				'type'  => \Elementor\Controls_Manager::SLIDER,
+				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
 						'min'  => 300,
@@ -669,7 +672,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_pi_mouse_wheel',
 			[
 				'label'        => esc_html__( 'Mouse Wheel', 'essential-addons-for-elementor-lite' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'true',
@@ -681,7 +684,7 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_pi_grab_cursor',
 			[
 				'label'        => esc_html__( 'Grab Cursor', 'essential-addons-for-elementor-lite' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'true',
@@ -693,11 +696,64 @@ class Woo_Product_Images extends Widget_Base {
 			'eael_pi_keyboard_press',
 			[
 				'label'        => esc_html__( 'Key Press', 'essential-addons-for-elementor-lite' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'true',
 				'default'      => 'true',
+			]
+		);
+
+		$this->add_control(
+			'eael_zoom_effect_heading',
+			[
+				'label' => esc_html__( 'Zoom Effect', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'eael_image_zoom_effect',
+			[
+				'label'        => esc_html__( 'Enable', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'eael_zoom_effect_type',
+			[
+				'label' => esc_html__( 'Effect Type', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'zoom-lense',
+				'options' => [
+					'zoom-lense' => esc_html__( 'Zoom Lens', 'essential-addons-for-elementor-lite' ),
+					'magnify' => esc_html__( 'Magnify', 'essential-addons-for-elementor-lite' ),
+					'inimage' => esc_html__( 'In Image', 'essential-addons-for-elementor-lite' ),
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_zoom_lens_border_radius',
+			[
+				'label' => esc_html__( 'Lens Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em', 'rem' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 1000,
+						'step' => 5,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
 			]
 		);
 		
@@ -726,6 +782,10 @@ class Woo_Product_Images extends Widget_Base {
 		$pi_data_settings['navigation'] = ! empty( $settings['eael_pi_navigation'] ) ? $settings['eael_pi_navigation'] : '';
 		$pi_data_settings['sale_flash'] = ! empty( $settings['eael_image_sale_flash'] ) ? $settings['eael_image_sale_flash'] : '';
 		$pi_data_settings['zoom_show'] = ! empty( $settings['eael_image_zoom_show'] ) ? $settings['eael_image_zoom_show'] : '';
+		$pi_data_settings['eael_image_zoom_effect'] = ! empty( $settings['eael_image_zoom_effect'] ) ? $settings['eael_image_zoom_effect'] : '';
+		$pi_data_settings['eael_zoom_effect_type'] = ! empty( $settings['eael_zoom_effect_type'] ) ? $settings['eael_zoom_effect_type'] : '';
+		$pi_data_settings['eael_zoom_lens_border_radius'] = ! empty( $settings['eael_zoom_lens_border_radius']['size'] ) ? $settings['eael_zoom_lens_border_radius']['size'] . $settings['eael_zoom_lens_border_radius']['unit'] : '8px';
+
 		return $pi_data_settings;
 	}
 
@@ -776,12 +836,16 @@ class Woo_Product_Images extends Widget_Base {
 				'disableOnInteraction' => false,
 			];
 		}
-
-		$sliderImagesObj = json_encode( $sliderImages );
+		$sliderImages['zoomEffect'] = [
+			'enabled' => $image_settings['eael_image_zoom_effect'],
+			'type' => $image_settings['eael_zoom_effect_type'],
+			'lensBorderRadius' => $image_settings['eael_zoom_lens_border_radius'],
+		];
+		
 		$thumb_position = ['left', 'right'];
 		$slider_image_container_width = in_array( $image_settings['thumb_position'], $thumb_position ) ? 'container_width' : 'container_width_full';
 		$this->add_render_attribute( 'eael-pi-image', [
-			'data-pi_image' => $sliderImagesObj,
+			'data-pi_image' => json_encode( $sliderImages ),
 			'class'        => 'product_image_slider__container ' . $slider_image_container_width,
 		] );
 		?>

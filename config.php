@@ -748,6 +748,11 @@ $config = [
                 ],
                 'js' => [
                     [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/image-zoom/zoom-lense.min.js',
+                        'type' => 'lib',
+                        'context' => 'view',
+                    ],
+                    [
                         'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/woo-product-image.min.js',
                         'type' => 'self',
                         'context' => 'view',
