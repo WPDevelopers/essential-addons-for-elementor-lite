@@ -1,0 +1,157 @@
+/**
+ * ---------------------------------------------------------------
+ * Image Zoom Lens Effect
+ * Inspired by the work of HckKiu on CodePen:
+ * https://codepen.io/hckkiu/pen/poyoRKQ
+ *
+ * Original concept by HckKiu — enhanced and adapted to support:
+ * - On-demand DOM injection for lens and result containers
+ * - Scroll-based lens resizing with cursor-centered zoom
+ * - Multi-instance support with cleanup on mouse leave
+ *
+ * Respectfully credited and extended for broader use cases.
+ * ---------------------------------------------------------------
+ */
+(function ($) {
+  $.fn.eaelZoomLense = function (userOptions) {
+    const settings = $.extend({
+      lensWidth: 100,
+      lensHeight: 100,
+      borderRadius: '50%',
+      lensBorder: '1px solid #aaa',
+      resultBorder: '1px solid #aaa',
+      gap: 10,
+      autoResize: false,
+      minLensSize: 40,
+      maxLensSize: 300,
+      step: 10,
+      zoomId: userOptions.zoomId ? 'zoom_' + userOptions.zoomId : 'zoom'
+    }, userOptions);
+
+    $(this).on('mouseenter touchstart mousemove touchmove', function (e) {
+      const $img = $(this);
+      const zoomId = settings.zoomId;
+
+        if ($('.eael-lens-' + zoomId).length || $('.eael-result-' + zoomId).length) {
+            return;
+        }
+      let lensWidth = settings.lensWidth;
+      let lensHeight = settings.lensHeight;
+
+      const $lens = $('<div>', {
+        class: 'eael-lens-' + zoomId,
+        css: {
+          position: 'absolute',
+          pointerEvents: 'none',
+          borderRadius: settings.borderRadius,
+          border: settings.lensBorder,
+          backgroundColor: 'rgba(255,255,255,0.3)',
+          zIndex: 999
+        }
+      }).appendTo('body');
+
+      const $result = $('<div>', {
+        class: 'eael-result-' + zoomId,
+        css: {
+          position: 'absolute',
+          border: settings.resultBorder,
+          backgroundRepeat: 'no-repeat',
+          zIndex: 998
+        }
+      }).appendTo('body');
+
+      const imgOffset = $img.offset();
+      $result.css({
+        width: $img.outerWidth(),
+        height: $img.outerHeight(),
+        top: imgOffset.top,
+        left: imgOffset.left + $img.outerWidth() + settings.gap,
+        backgroundImage: `url(${$img.attr('src')})`,
+        backgroundSize: `${$img.outerWidth() * ($img.outerWidth() / lensWidth)}px ${$img.outerHeight() * ($img.outerHeight() / lensHeight)}px`
+      });
+
+      function moveLens(ev) {
+        const evt = ev.originalEvent.touches ? ev.originalEvent.touches[0] : ev;
+        const pageX = evt.pageX;
+        const pageY = evt.pageY;
+
+        const imgOffset = $img.offset();
+        let lensX = pageX - lensWidth / 2;
+        let lensY = pageY - lensHeight / 2;
+
+        const maxX = imgOffset.left + $img.outerWidth() - lensWidth;
+        const maxY = imgOffset.top + $img.outerHeight() - lensHeight;
+
+        lensX = Math.max(imgOffset.left, Math.min(lensX, maxX));
+        lensY = Math.max(imgOffset.top, Math.min(lensY, maxY));
+
+        $lens.css({
+          width: lensWidth,
+          height: lensHeight,
+          top: lensY,
+          left: lensX,
+          display: 'block'
+        });
+
+        const cx = $result.width() / lensWidth;
+        const cy = $result.height() / lensHeight;
+
+        $result.css({
+          display: 'block',
+          backgroundPosition: `-${(lensX - imgOffset.left) * cx}px -${(lensY - imgOffset.top) * cy}px`
+        });
+      }
+
+      if (settings.autoResize) {
+        $(window).on('wheel.' + zoomId, function (e) {
+          if (!$lens.is(':visible')) return;
+
+          e.preventDefault();
+          const delta = e.originalEvent.deltaY;
+          const direction = delta > 0 ? 1 : -1;
+
+          const newWidth = Math.max(settings.minLensSize, Math.min(settings.maxLensSize, lensWidth - direction * settings.step));
+          const newHeight = Math.max(settings.minLensSize, Math.min(settings.maxLensSize, lensHeight - direction * settings.step));
+
+          const dx = (lensWidth - newWidth) / 2;
+          const dy = (lensHeight - newHeight) / 2;
+
+          lensWidth = newWidth;
+          lensHeight = newHeight;
+
+          const currentOffset = $lens.offset();
+          $lens.css({
+            width: lensWidth,
+            height: lensHeight,
+            top: currentOffset.top + dy,
+            left: currentOffset.left + dx
+          });
+
+          const cx = $result.width() / lensWidth;
+          const cy = $result.height() / lensHeight;
+
+          const imgOffset = $img.offset();
+          $result.css({
+            backgroundSize: `${$img.outerWidth() * cx}px ${$img.outerHeight() * cy}px`,
+            backgroundPosition: `-${($lens.offset().left - imgOffset.left) * cx}px -${($lens.offset().top - imgOffset.top) * cy}px`
+          });
+        });
+      }
+
+      $(document).on('mousemove.' + zoomId + ' touchmove.' + zoomId, moveLens);
+
+      $img.on('mouseleave.' + zoomId + ' touchend.' + zoomId, function () {
+        $lens.remove();
+        $result.remove();
+        $(document).off('mousemove.' + zoomId + ' touchmove.' + zoomId);
+        $(window).off('wheel.' + zoomId);
+        $img.off('mouseleave.' + zoomId + ' touchend.' + zoomId);
+      });
+
+      // Init movement immediately
+      moveLens(e);
+    });
+
+    return this;
+  };
+})(jQuery);
