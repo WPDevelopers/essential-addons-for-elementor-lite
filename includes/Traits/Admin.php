@@ -1879,8 +1879,8 @@ trait Admin {
 				'recurrence'  => false,
 				'dismissible' => true,
 				'refresh'     => EAEL_PLUGIN_VERSION,
-				"expire"      => strtotime( '08:00:00am 3rd August, 2025' ),
-				'display_if'  => ! $this->pro_enabled && $GLOBALS["pagenow"] === 'index.php',
+				"expire"      => strtotime( '10:00:00pm 3rd August, 2025' ),
+				'display_if'  => ! $this->pro_enabled && $GLOBALS["pagenow"] === 'index.php' && time() < strtotime( '08:00:00am 3rd August, 2025' ),
 			]
 		);
 
