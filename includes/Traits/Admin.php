@@ -1859,10 +1859,41 @@ trait Admin {
 		</div>
 		<script>
             jQuery(document).ready(function ($) {
-                $('.eael-holiday-notice-dismiss').on('click', function (e) {
-                    e.preventDefault();
-                    $('.notice-essential-addons-for-elementor-lite-holiday_24_notice button.notice-dismiss').trigger('click');
-                });
+                setTimeout(function () {
+                    var dismissBtn = document.querySelector('#wpnotice-essential-addons-for-elementor-lite-ea8th_birthday_notice .notice-dismiss');
+
+                    function wpNoticeDismissFunc(event) {
+                        event.preventDefault();
+
+                        var httpRequest = new XMLHttpRequest(),
+                            postData = '',
+                            dismiss = event.target.dataset?.hasOwnProperty('dismiss') && event.target.dataset.dismiss || false,
+                            later = event.target.dataset?.hasOwnProperty('later') && event.target.dataset.later || false;
+
+                        if (dismiss || later) {
+                            jQuery(event.target.offsetParent).slideUp(200);
+                        }
+
+                        // Data has to be formatted as a string here.
+                        postData += 'id=ea8th_birthday_notice';
+                        postData += '&action=essential-addons-for-elementor-lite_wpnotice_dismiss_notice';
+                        if (dismiss) {
+                            postData += '&dismiss=' + dismiss;
+                        }
+                        if (later) {
+                            postData += '&later=' + later;
+                        }
+
+                        postData += '&nonce=<?php echo wp_create_nonce( 'wpnotice_dismiss_notice_ea8th_birthday_notice' );?>';
+
+                        httpRequest.open('POST', '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>');
+                        httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                        httpRequest.send(postData);
+                    }
+
+                    // Add an event listener to the dismiss button.
+                    dismissBtn && dismissBtn.addEventListener('click', wpNoticeDismissFunc);
+                }, 1);
             });
 		</script>
 	    <?php
