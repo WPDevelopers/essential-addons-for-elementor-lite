@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.2.1
+Stable tag: 6.2.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -177,10 +177,9 @@ Extensions (Pro):
 2. [Particles](https://essential-addons.com/particle-effect/) - Add animated particle effects to your content
 3. [Advanced Tooltip](https://essential-addons.com/advanced-tooltip/) - Make any widget more informative with tooltip
 4. [Content Protection](https://essential-addons.com/content-protection/) - Hide your content with password protection
-5. [Cross-Domain Copy Paste](https://essential-addons.com/cross-domain-copy-paste/)- Copy any section from one website and paste it on another website
-6. [Conditional Display](https://essential-addons.com/conditional-display/)- Display your preferred content based on the logic conditions you have set
-7. [Dynamic Tags](https://essential-addons.com/dynamic-tags/)- Display content dynamically on your preferred section of the website
-8. [Interactive animations](https://essential-addons.com/interactive-animations/)- Create stunning animations & build a fully dynamic web page
+5. [Conditional Display](https://essential-addons.com/conditional-display/)- Display your preferred content based on the logic conditions you have set
+6. [Dynamic Tags](https://essential-addons.com/dynamic-tags/)- Display content dynamically on your preferred section of the website
+7. [Interactive animations](https://essential-addons.com/interactive-animations/)- Create stunning animations & build a fully dynamic web page
 
 
 More features and improvements are coming on regular updates. Want to unlock the advanced elements? [Upgrade to our Pro version](https://essential-addons.com/upgrade-ea-pro)
@@ -315,6 +314,10 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.2.2 - 28/07/2025 =
+
+- Few minor bug fixes & improvements
 
 = 6.2.1 - 20/07/2025 =
 
