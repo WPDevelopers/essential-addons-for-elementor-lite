@@ -1,18 +1,18 @@
-/**
- * ---------------------------------------------------------------
- * Image Zoom Lens Effect
- * Inspired by the work of HckKiu on CodePen:
- * https://codepen.io/hckkiu/pen/poyoRKQ
- *
- * Original concept by HckKiu — enhanced and adapted to support:
- * - On-demand DOM injection for lens and result containers
- * - Scroll-based lens resizing with cursor-centered zoom
- * - Multi-instance support with cleanup on mouse leave
- *
- * Respectfully credited and extended for broader use cases.
- * ---------------------------------------------------------------
- */
 (function ($) {
+  /**
+   * ---------------------------------------------------------------
+   * Image Zoom Lens Effect
+   * Inspired by the work of HckKiu on CodePen:
+   * https://codepen.io/hckkiu/pen/poyoRKQ
+   *
+   * Original concept by HckKiu — enhanced and adapted to support:
+   * - On-demand DOM injection for lens and result containers
+   * - Scroll-based lens resizing with cursor-centered zoom
+   * - Multi-instance support with cleanup on mouse leave
+   *
+   * Respectfully credited and extended for broader use cases.
+   * ---------------------------------------------------------------
+   */
   $.fn.eaelZoomLense = function (userOptions) {
     const settings = $.extend({
       lensWidth: 100,
@@ -154,4 +154,121 @@
 
     return this;
   };
+
+
+  /**
+   * eaelMagnify - jQuery Image Magnifier Plugin
+   * 
+   * Inspired by and adapted from:
+   * "A Simple Image Magnifier" by Avid Code
+   * CodePen: https://codepen.io/avidcode/pen/YZqEaZ
+   * 
+   * License: Please refer to the original CodePen for license details.
+   */
+  $.fn.eaelMagnify = function (options) {
+    const settings = $.extend({
+      lensSize: 200,
+      zoom: 2,
+      lensBorder: '2px solid #fff',
+    }, options);
+
+    return this.each(function () {
+      const $img = $(this);
+      let $lens = null;
+      let zoom = settings.zoom;
+      let initialized = false;
+
+      function init() {
+        if (initialized) return;
+        initialized = true;
+
+        const natW = $img[0].naturalWidth;
+        const natH = $img[0].naturalHeight;
+
+        function updateLens(e) {
+          if (!$lens) return;
+
+          const imgOffset = $img.offset();
+          const imgW = $img.width();
+          const imgH = $img.height();
+          const x = e.pageX - imgOffset.left;
+          const y = e.pageY - imgOffset.top;
+
+          if (x < 0 || y < 0 || x > imgW || y > imgH) {
+            $lens.css('opacity', 0);
+            return;
+          }
+
+          const rx = (x / imgW) * natW;
+          const ry = (y / imgH) * natH;
+
+          const bgSizeW = natW * zoom;
+          const bgSizeH = natH * zoom;
+
+          const bgPosX = (rx * zoom - $lens.width() / 2);
+          const bgPosY = (ry * zoom - $lens.height() / 2);
+
+          $lens.css({
+            left: `${e.pageX - $lens.width() / 2}px`,
+            top: `${e.pageY - $lens.height() / 2}px`,
+            backgroundPosition: `-${bgPosX}px -${bgPosY}px`,
+            backgroundSize: `${bgSizeW}px ${bgSizeH}px`,
+            opacity: 1
+          });
+        }
+
+        $img.on('mouseenter touchstart mousemove touchmove', function () {
+          if ($lens) return; // avoid duplicates
+          $lens = $('<div class="eael-magnify-lens"></div>').css({
+            width: settings.lensSize,
+            height: settings.lensSize,
+            border: settings.lensBorder,
+            backgroundImage: `url(${$img.attr('src')})`,
+            backgroundRepeat: 'no-repeat',
+            pointerEvents: 'none',
+            opacity: 0,
+            boxShadow: '0 5px 10px rgba(0, 0, 0, 0.2)',
+            borderRadius: '50%',
+            transition: 'opacity 0.2s',
+            position: 'absolute',
+            zIndex: 9999
+          });
+          $('body').append($lens);
+        });
+
+        $img.on('mousemove touchmove', updateLens);
+
+        $img.on('mouseleave touchend', function () {
+          if ($lens) {
+            $lens.css('opacity', 0);
+            setTimeout(() => {
+              $lens?.remove();
+              $lens = null;
+            }, 200); // match fade out duration
+          }
+        });
+
+        $img.on('wheel', function (e) {
+          if (!$lens) return;
+          e.preventDefault();
+
+          const delta = e.originalEvent.deltaY || e.originalEvent.wheelDelta;
+
+          zoom = delta > 0
+            ? Math.max(1, zoom - 0.1)
+            : Math.min(5, zoom + 0.1);
+
+          updateLens(e);
+        });
+      }
+
+      // Init when image is loaded or immediately if already complete
+      if ($img[0].complete && $img[0].naturalWidth) {
+        init();
+      } else {
+        $img.one('load', init);
+      }
+    });
+  };
+
 })(jQuery);

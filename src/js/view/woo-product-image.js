@@ -251,13 +251,10 @@ var WooProdectImage = function ($scope, $) {
       });
    });
 
-   const zoomEffect = $sliderImagesData.zoomEffect;
-   
-   if ( zoomEffect?.enabled === 'yes') {
-      // Image Zoom Lens Configuration
+   function zoomLenseEffect(){
       const zoomOptions = {
-         lensWidth: 120,
-         lensHeight: 100,
+         lensWidth: zoomEffect?.lensSize || 100,
+         lensHeight: zoomEffect?.lensSize || 100,
          borderRadius: zoomEffect?.lensBorderRadius || '8px',
          lensBorder: zoomEffect?.lensBorder,
          autoResize: true
@@ -307,6 +304,32 @@ var WooProdectImage = function ($scope, $) {
 
       // Setup zoom lens
       setupZoomLens();
+   }
+
+   function magnifyEffect(){
+      $(".image_slider__image img", $scope).eaelMagnify({
+         lensSize: zoomEffect?.lensSize || 200,
+         lensBorder: zoomEffect?.lensBorder,
+      });
+   }
+
+   function zoomInsideEffect(){
+
+   }
+   const zoomEffect = $sliderImagesData.zoomEffect;
+   
+   if( window.isEditMode ){
+      $('.eael-magnify-lens').remove();
+   }
+   if ( zoomEffect?.enabled === 'yes') {
+      // Image Zoom Lens Configuration
+      if( 'lense' === zoomEffect?.type ){
+         zoomLenseEffect();
+      } else if( 'magnify' === zoomEffect?.type ){
+         magnifyEffect();
+      } else if( 'inside' === zoomEffect?.type ){
+         zoomInsideEffect();
+      }
    }
 };
 

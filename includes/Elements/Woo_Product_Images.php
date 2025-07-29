@@ -389,7 +389,7 @@ class Woo_Product_Images extends Widget_Base {
 				'label' => esc_html__( 'Zoom', 'essential-addons-for-elementor-lite' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 				'condition' => [
-					'eael_image_zoom_show' => 'yes',
+					'eael_image_zoom_effect' => 'yes',
 				],
 			]
 		);
@@ -463,6 +463,9 @@ class Woo_Product_Images extends Widget_Base {
 						'min' => 0,
 						'max' => 100,
 					],
+				],
+				'condition' => [
+					'eael_zoom_effect_type' => 'lens',
 				],
 			]
 		);
@@ -811,13 +814,32 @@ class Woo_Product_Images extends Widget_Base {
 		$this->add_control(
 			'eael_zoom_effect_type',
 			[
-				'label' => esc_html__( 'Effect Type', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'zoom-lense',
+				'label'   => esc_html__( 'Effect Type', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'lense',
 				'options' => [
-					'zoom-lense' => esc_html__( 'Zoom Lens', 'essential-addons-for-elementor-lite' ),
+					'lense'   => esc_html__( 'Zoom Lense', 'essential-addons-for-elementor-lite' ),
 					'magnify' => esc_html__( 'Magnify', 'essential-addons-for-elementor-lite' ),
-					'inimage' => esc_html__( 'In Image', 'essential-addons-for-elementor-lite' ),
+					'inside'  => esc_html__( 'Inside Image', 'essential-addons-for-elementor-lite' ),
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_zoom_lens_size',
+			[
+				'label' => esc_html__( 'Lens Size', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 10,
+						'max' => 1000,
+						'step' => 1,
+					],
+				],
+				'condition' => [
+					'eael_zoom_effect_type' => [ 'lense', 'magnify' ],
 				],
 			]
 		);
@@ -912,6 +934,7 @@ class Woo_Product_Images extends Widget_Base {
 				'type' => $image_settings['eael_zoom_effect_type'],
 				'lensBorderRadius' => $image_settings['eael_zoom_lens_border_radius'],
 				'lensBorder' => $border_style,
+				'lensSize' => isset( $image_settings['eael_zoom_lens_size']['size'] ) ? $image_settings['eael_zoom_lens_size']['size'] : '',
 			];
 		}
 		
