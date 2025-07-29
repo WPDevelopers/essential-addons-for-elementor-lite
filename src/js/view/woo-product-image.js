@@ -259,6 +259,7 @@ var WooProdectImage = function ($scope, $) {
          lensWidth: 120,
          lensHeight: 100,
          borderRadius: zoomEffect?.lensBorderRadius || '8px',
+         lensBorder: zoomEffect?.lensBorder,
          autoResize: true
       };
 

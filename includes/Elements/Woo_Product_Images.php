@@ -383,6 +383,91 @@ class Woo_Product_Images extends Widget_Base {
 		$this->end_controls_section();
 		// Style Tab End
 
+		$this->start_controls_section(
+			'eael_zoom_style_section',
+			[
+				'label' => esc_html__( 'Zoom', 'essential-addons-for-elementor-lite' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'eael_image_zoom_show' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'zoom_lens_border_style_heading',
+			[
+				'label'     => esc_html__( 'Lens Border Style', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+			]
+		);
+
+		$this->add_control(
+			'eael_zoom_lens_border_type',
+			[
+				'label' => esc_html__( 'Type', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SELECT,
+				'options' => [
+					'solid' => esc_html__( 'Solid', 'essential-addons-for-elementor-lite' ),
+					'dashed' => esc_html__( 'Dashed', 'essential-addons-for-elementor-lite' ),
+					'dotted' => esc_html__( 'Dotted', 'essential-addons-for-elementor-lite' ),
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'eael_zoom_lens_border_width',
+			[
+				'label' => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em', 'rem' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 1000,
+						'step' => 5,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 1,
+				],
+			]
+		);
+
+		$this->add_control(
+			'eael_zoom_lens_border_color',
+			[
+				'label' => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::COLOR,
+			]
+		);
+		
+		$this->add_control(
+			'eael_zoom_lens_border_radius',
+			[
+				'label' => esc_html__( 'Radius', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em', 'rem' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 1000,
+						'step' => 5,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+			]
+		);
+
+		$this->end_controls_section();
 	}
 
 	/**
@@ -736,26 +821,6 @@ class Woo_Product_Images extends Widget_Base {
 				],
 			]
 		);
-
-		$this->add_responsive_control(
-			'eael_zoom_lens_border_radius',
-			[
-				'label' => esc_html__( 'Lens Border Radius', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem' ],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 1000,
-						'step' => 5,
-					],
-					'%' => [
-						'min' => 0,
-						'max' => 100,
-					],
-				],
-			]
-		);
 		
 		$this->end_controls_section();
 		
@@ -836,11 +901,19 @@ class Woo_Product_Images extends Widget_Base {
 				'disableOnInteraction' => false,
 			];
 		}
-		$sliderImages['zoomEffect'] = [
-			'enabled' => $image_settings['eael_image_zoom_effect'],
-			'type' => $image_settings['eael_zoom_effect_type'],
-			'lensBorderRadius' => $image_settings['eael_zoom_lens_border_radius'],
-		];
+
+		if ( 'yes' == $image_settings['eael_image_zoom_effect'] ) {
+			$border_style = isset( $settings['eael_zoom_lens_border_width']['size'] ) ? $settings['eael_zoom_lens_border_width']['size'] : 1;
+			$border_style .= isset( $settings['eael_zoom_lens_border_width']['unit'] ) ? $settings['eael_zoom_lens_border_width']['unit'] : 'px';
+			$border_style .= ' ' . ( isset( $settings['eael_zoom_lens_border_type'] ) ? $settings['eael_zoom_lens_border_type'] : 'solid' );
+			$border_style .= ' ' . ( isset( $settings['eael_zoom_lens_border_color'] ) ? $settings['eael_zoom_lens_border_color'] : '#aaa' );
+			$sliderImages['zoomEffect'] = [
+				'enabled' => $image_settings['eael_image_zoom_effect'],
+				'type' => $image_settings['eael_zoom_effect_type'],
+				'lensBorderRadius' => $image_settings['eael_zoom_lens_border_radius'],
+				'lensBorder' => $border_style,
+			];
+		}
 		
 		$thumb_position = ['left', 'right'];
 		$slider_image_container_width = in_array( $image_settings['thumb_position'], $thumb_position ) ? 'container_width' : 'container_width_full';
