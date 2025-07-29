@@ -820,7 +820,7 @@ class Woo_Product_Images extends Widget_Base {
 				'options' => [
 					'lense'   => esc_html__( 'Zoom Lense', 'essential-addons-for-elementor-lite' ),
 					'magnify' => esc_html__( 'Magnify', 'essential-addons-for-elementor-lite' ),
-					'inside'  => esc_html__( 'Inside Image', 'essential-addons-for-elementor-lite' ),
+					// 'inside'  => esc_html__( 'Inside Image', 'essential-addons-for-elementor-lite' ),
 				],
 			]
 		);
