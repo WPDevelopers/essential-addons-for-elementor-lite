@@ -26,6 +26,7 @@ class Promotion
             add_action( 'elementor/element/column/section_advanced/after_section_end', [ $this, 'custom_cursor' ] );
             add_action( 'elementor/element/section/section_advanced/after_section_end', [ $this, 'custom_cursor' ] );
             add_action( 'elementor/element/container/section_layout/after_section_end', [ $this, 'custom_cursor' ] );
+            add_action( 'elementor/documents/register_controls', [ $this, 'custom_cursor_page' ] );
 		}
 	}
 
@@ -187,13 +188,13 @@ class Promotion
 		$element->end_controls_section();
 	}
 
-    public function custom_cursor($element)
+    public function custom_cursor($element, $page = false)
     {
         $element->start_controls_section(
             'eael_ext_custom_cursor_section',
             [
                 'label' => __('<i class="eaicon-logo"></i> Custom Cursor', 'essential-addons-for-elementor-lite'),
-                'tab' => Controls_Manager::TAB_ADVANCED,
+                'tab' => !$page ? Controls_Manager::TAB_ADVANCED : Controls_Manager::TAB_SETTINGS,
             ]
         );
 
@@ -210,5 +211,11 @@ class Promotion
 
         $element->end_controls_section();
     }
+
+    public function custom_cursor_page($element)
+    {
+        $this->custom_cursor( $element, true );
+    }
+
 
 }
