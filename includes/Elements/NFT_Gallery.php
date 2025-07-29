@@ -102,6 +102,20 @@ class NFT_Gallery extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_nft_gallery_magiceden_api_info',
+			[
+				'type' => Controls_Manager::RAW_HTML,
+				'raw' => '<div style="background: #e8f5e8; padding: 10px; border-radius: 4px; border-left: 4px solid #4caf50;">
+					<strong>' . esc_html__( 'No API Key Required', 'essential-addons-for-elementor-lite' ) . '</strong><br>
+					' . esc_html__( 'Magic Eden provides free public access to their API with a rate limit of 120 requests per minute. No API key is needed for basic data retrieval.', 'essential-addons-for-elementor-lite' ) . '
+				</div>',
+				'condition' => [
+					'eael_nft_gallery_sources' => 'magiceden'
+				],
+			]
+		);
+
+		$this->add_control(
 			'eael_nft_gallery_opensea_type',
 			[
 				'label'     => esc_html__( 'Type', 'essential-addons-for-elementor-lite' ),
@@ -2927,6 +2941,11 @@ class NFT_Gallery extends Widget_Base {
 		$error_message = '';
 
 		if ( false === $items && 'opensea' === $nft_gallery['source'] ) {
+			// Validate API key for OpenSea
+			if ( empty( $nft_gallery['api_key'] ) ) {
+				$error_message = esc_html__( 'API Key is required for OpenSea. Please provide a valid API key.', 'essential-addons-for-elementor-lite' );
+			}
+
 			$nft_gallery['filterby_slug']   = ! empty( $settings['eael_nft_gallery_opensea_filterby_slug'] ) ? $settings['eael_nft_gallery_opensea_filterby_slug'] : '';
 			$nft_gallery['filterby_wallet'] = ! empty( $settings['eael_nft_gallery_opensea_filterby_wallet'] ) ? $settings['eael_nft_gallery_opensea_filterby_wallet'] : '';
 
@@ -3029,7 +3048,7 @@ class NFT_Gallery extends Widget_Base {
 
 			return $data;
 		} elseif ( false === $items && 'magiceden' === $nft_gallery['source'] ) {
-			// Magic Eden API Logic
+			// Magic Eden API Logic - No API key required for public endpoints
 			$url   = "https://api-mainnet.magiceden.dev/v2";
 			$param = array();
 
@@ -3155,11 +3174,24 @@ class NFT_Gallery extends Widget_Base {
     }
 
 	protected function render() {
+		$settings = $this->get_settings_for_display();
 		$nft_gallery_items = $this->fetch_nft_gallery_from_api();
+
 		if( empty ( $nft_gallery_items['items'] ) ) {
+			$source = ! empty( $settings['eael_nft_gallery_sources'] ) ? $settings['eael_nft_gallery_sources'] : 'opensea';
+			$error_message = ! empty( $nft_gallery_items['error_message'] ) ? $nft_gallery_items['error_message'] : '';
+
+			// Provide source-specific error messages
+			if ( empty( $error_message ) ) {
+				if ( 'opensea' === $source ) {
+					$error_message = esc_html__( 'Please insert a valid API Key for OpenSea', 'essential-addons-for-elementor-lite' );
+				} else {
+					$error_message = esc_html__( 'Unable to fetch NFT data. Please check your configuration.', 'essential-addons-for-elementor-lite' );
+				}
+			}
 			?>
 			<p class="eael-nft-gallery-error-message">
-				<?php esc_html_e( 'Please insert a valid API Key', 'essential-addons-for-elementor-lite' ); ?>
+				<?php echo esc_html( $error_message ); ?>
 			</p>
 			<?php
 			return;
