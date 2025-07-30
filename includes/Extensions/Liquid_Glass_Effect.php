@@ -115,6 +115,25 @@ class Liquid_Glass_Effect {
 		);
 	}
 
+	public function eael_liquid_glass_effect_box_shadow( $element, $effect, $default_shadow ) {
+		$element->add_group_control(
+			\Elementor\Group_Control_Box_Shadow::get_type(),
+			[
+				'name'              => 'eael_liquid_glass_shadow_'.$effect,
+				'fields_options'     => [
+					'box_shadow_type' => [ 'default' => 'yes' ],
+					'box_shadow'      => [
+						'default'      => $default_shadow,
+					],
+				],
+				'selector'  => '{{WRAPPER}}.eael_liquid_glass_shadow-'.$effect,
+				'condition' => [
+					'eael_liquid_glass_effect_switch'  => 'yes',
+					'eael_liquid_glass_shadow_effect' => $effect,
+				],
+			]
+		);
+	}
 	public function register_controls( $element ) {
 		$element->start_controls_section(
 			'eael_liquid_glass_effect_section',
@@ -576,106 +595,38 @@ class Liquid_Glass_Effect {
 			'isLinked' => true,
 		] );
 
-		$element->add_group_control(
-			\Elementor\Group_Control_Box_Shadow::get_type(),
-			[
-				'name'              => 'eael_liquid_glass_shadow_effect1',
-				'fields_options'     => [
-					'box_shadow_type' => [ 'default' => 'yes' ],
-					'box_shadow'      => [
-						'default'      => [
-							'color'      => 'rgba(0,0,0,0.78)',
-							'horizontal' => 0,
-							'vertical'   => 19,
-							'blur'       => 26,
-							'spread'     => 1,
-						],
-					],
-				],
-				'selector'  => '{{WRAPPER}}.eael_liquid_glass_shadow-effect1',
-				'condition' => [
-					'eael_liquid_glass_effect_switch'  => 'yes',
-					'eael_liquid_glass_shadow_effect' => 'effect1',
-				],
-			]
-		);
+		// Add box shadow effect for Liquid Glass Effect
+		$this->eael_liquid_glass_effect_box_shadow( $element, 'effect1', [
+			'color'      => 'rgba(0,0,0,0.78)',
+			'horizontal' => 0,
+			'vertical'   => 19,
+			'blur'       => 26,
+			'spread'     => 1,
+		] );
 
-		$element->add_group_control(
-			\Elementor\Group_Control_Box_Shadow::get_type(),
-			[
-				'name'              => 'eael_liquid_glass_shadow_effect2',
-				'fields_options'     => [
-					'box_shadow_type' => [ 'default' => 'yes' ],
-					'box_shadow'      => [
-						'default'      => [
-							'color'      => '#383C65',
-							'horizontal' => 0,
-							'vertical'   => 0,
-							'blur'       => 33,
-							'spread'     => -2,
-						],
-					],
-				],
-				'selector'  => '{{WRAPPER}}.eael_liquid_glass_shadow-effect2',
-				'condition' => [
-					'eael_liquid_glass_effect_switch'  => 'yes',
-					'eael_liquid_glass_shadow_effect' => 'effect2',
-				],
-			]
-		);
+		$this->eael_liquid_glass_effect_box_shadow( $element, 'effect2', [
+			'color'      => '#383C65',
+			'horizontal' => 0,
+			'vertical'   => 0,
+			'blur'       => 33,
+			'spread'     => -2,
+		] );
 
+		$this->eael_liquid_glass_effect_box_shadow( $element, 'effect3', [
+			'color'      => 'rgba(255, 255, 255, 0.4)',
+			'horizontal' => 1,
+			'vertical'   => 1,
+			'blur'       => 10,
+			'spread'     => 5,
+		] );
 
-		
-		
-		$element->add_group_control(
-			\Elementor\Group_Control_Box_Shadow::get_type(),
-			[
-				'name'              => 'eael_liquid_glass_shadow_effect3',
-				'fields_options'     => [
-					'box_shadow_type' => [ 'default' => 'yes' ],
-					'box_shadow_position' => [ 'default' => 'inset' ],
-					'box_shadow'      => [
-						'default'      => [
-							'color'      => 'rgba(255, 255, 255, 0.4)',
-							'horizontal' =>1,
-							'vertical'   =>1,
-							'blur'       => 10,
-							'spread'     => 5,
-						],
-					],
-				],
-				'selector'  => '{{WRAPPER}}.eael_liquid_glass_shadow-effect3',
-				'condition' => [
-					'eael_liquid_glass_effect_switch'  => 'yes',
-					'eael_liquid_glass_shadow_effect' => 'effect3',
-				],
-			]
-		);
-
-
-		$element->add_group_control(
-			\Elementor\Group_Control_Box_Shadow::get_type(),
-			[
-				'name'      => 'eael_liquid_glass_shadow_effect4',
-				'fields_options'     => [
-					'box_shadow_type' => [ 'default' => 'yes' ],
-					'box_shadow'      => [
-						'default'      => [
-							'color'      => '#00000040',
-							'horizontal' => 0,
-							'vertical'   => 9,
-							'blur'       => 21,
-							'spread'     => 0,
-						],
-					],
-				],
-				'selector'  => '{{WRAPPER}}.eael_liquid_glass_shadow-effect4',
-				'condition' => [
-					'eael_liquid_glass_effect_switch'  => 'yes',
-					'eael_liquid_glass_shadow_effect' => 'effect4',
-				],
-			]
-		);
+		$this->eael_liquid_glass_effect_box_shadow( $element, 'effect4', [
+			'color'      => '#00000040',
+			'horizontal' => 0,
+			'vertical'   => 9,
+			'blur'       => 21,
+			'spread'     => 0,
+		] );
 
 		$element->end_controls_section();
 	}
