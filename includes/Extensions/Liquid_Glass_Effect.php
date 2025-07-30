@@ -275,34 +275,34 @@ class Liquid_Glass_Effect {
 			]
 		);
 
-		$element->add_control(
-			'eael_liquid_glass_effect_opacity',
-			[
-				'label' => esc_html__( 'Opacity', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SLIDER,
-				'range' => [
-					'px' => [
-						'min'  => 0,
-						'max'  => 1,
-						'step' => .1,
-					],
-				],
-				'default' => [
-					'size' => 1,
-				],
-				'selectors' => [
-					'{{WRAPPER}}.eael_liquid_glass-effect1, 
-					{{WRAPPER}}.eael_liquid_glass-effect2, 
-					{{WRAPPER}}.eael_liquid_glass-effect3, 
-					{{WRAPPER}}.eael_liquid_glass-effect4::before, 
-					{{WRAPPER}}.eael_liquid_glass-effect5::before, 
-					{{WRAPPER}}.eael_liquid_glass-effect6::before' => 'opacity: {{SIZE}}',
-				],
-				'condition' => [
-					'eael_liquid_glass_effect_switch' => 'yes',
-				],
-			]
-		);
+		// $element->add_control(
+		// 	'eael_liquid_glass_effect_opacity',
+		// 	[
+		// 		'label' => esc_html__( 'Opacity', 'essential-addons-for-elementor-lite' ),
+		// 		'type'  => Controls_Manager::SLIDER,
+		// 		'range' => [
+		// 			'px' => [
+		// 				'min'  => 0,
+		// 				'max'  => 1,
+		// 				'step' => .1,
+		// 			],
+		// 		],
+		// 		'default' => [
+		// 			'size' => 1,
+		// 		],
+		// 		'selectors' => [
+		// 			'{{WRAPPER}}.eael_liquid_glass-effect1, 
+		// 			{{WRAPPER}}.eael_liquid_glass-effect2, 
+		// 			{{WRAPPER}}.eael_liquid_glass-effect3, 
+		// 			{{WRAPPER}}.eael_liquid_glass-effect4::before, 
+		// 			{{WRAPPER}}.eael_liquid_glass-effect5::before, 
+		// 			{{WRAPPER}}.eael_liquid_glass-effect6::before' => 'opacity: {{SIZE}}',
+		// 		],
+		// 		'condition' => [
+		// 			'eael_liquid_glass_effect_switch' => 'yes',
+		// 		],
+		// 	]
+		// );
 
 		// Backdrop Filter Controls
 		$this->eael_liquid_glass_effect_backdrop_filter( $element, 'effect1', 24 );
@@ -381,150 +381,8 @@ class Liquid_Glass_Effect {
 			]
 		);
 
-		$element->add_control(
-			'eael_liquid_glass_effect_noise_settings',
-			[
-				'label'     => esc_html__( 'Noise Distortion Settings', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-				'condition' => [
-					'eael_liquid_glass_effect_switch' => 'yes',
-					'eael_liquid_glass_effect' => ['effect4', 'effect5', 'effect6'],
-				]
-			]
-		);
-
-		$element->add_control(
-			'eael_liquid_glass_effect_noise_freq_effect4',
-			[
-				'label' => esc_html__( 'Noise Freq', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SLIDER,
-				'range' => [
-					'px' => [
-						'min'  => 0,
-						'max'  => 0.02,
-						'step' => 0.001,
-					],
-				],
-				'default' => [
-					'size' => 0.009,
-				],
-				'condition' => [
-					'eael_liquid_glass_effect_switch' => 'yes',
-					'eael_liquid_glass_effect' => 'effect4',
-				],
-			]
-		);
-
-		$element->add_control(
-			'eael_liquid_glass_effect_noise_freq_effect5',
-			[
-				'label' => esc_html__( 'Noise Freq', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SLIDER,
-				'range' => [
-					'px' => [
-						'min'  => 0,
-						'max'  => 5,
-						'step' => 0.001,
-					],
-				],
-				'default' => [
-					'size' => 1.2,
-				],
-				'condition' => [
-					'eael_liquid_glass_effect_switch' => 'yes',
-					'eael_liquid_glass_effect' => 'effect5',
-				],
-			]
-		);
-
-		$element->add_control(
-			'eael_liquid_glass_effect_noise_freq_effect6',
-			[
-				'label' => esc_html__( 'Noise Freq', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SLIDER,
-				'range' => [
-					'px' => [
-						'min'  => 0,
-						'max'  => 0.02,
-						'step' => 0.001,
-					],
-				],
-				'default' => [
-					'size' => 0.02,
-				],
-				'condition' => [
-					'eael_liquid_glass_effect_switch' => 'yes',
-					'eael_liquid_glass_effect' => 'effect6',
-				],
-			]
-		);
-
-		$element->add_control(
-			'eael_liquid_glass_effect_noise_strength_effect4',
-			[
-				'label' => esc_html__( 'Strength', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SLIDER,
-				'range' => [
-					'px' => [
-						'min'  => 0,
-						'max'  => 200,
-						'step' => 1,
-					],
-				],
-				'default' => [
-					'size' => 77,
-				],
-				'condition' => [
-					'eael_liquid_glass_effect_switch' => 'yes',
-					'eael_liquid_glass_effect' => 'effect4',
-				],
-			]
-		);
-
-		$element->add_control(
-			'eael_liquid_glass_effect_noise_strength_effect5',
-			[
-				'label' => esc_html__( 'Strength', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SLIDER,
-				'range' => [
-					'px' => [
-						'min'  => 0,
-						'max'  => 200,
-						'step' => 1,
-					],
-				],
-				'default' => [
-					'size' => 70,
-				],
-				'condition' => [
-					'eael_liquid_glass_effect_switch' => 'yes',
-					'eael_liquid_glass_effect' => 'effect5',
-				],
-			]
-		);
-
-		$element->add_control(
-			'eael_liquid_glass_effect_noise_strength_effect6',
-			[
-				'label' => esc_html__( 'Strength', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SLIDER,
-				'range' => [
-					'px' => [
-						'min'  => 0,
-						'max'  => 200,
-						'step' => 1,
-					],
-				],
-				'default' => [
-					'size' => 30,
-				],
-				'condition' => [
-					'eael_liquid_glass_effect_switch' => 'yes',
-					'eael_liquid_glass_effect' => 'effect6',
-				],
-			]
-		);
+		// Noise Distortion Settings (Pro)
+		do_action( 'eael_liquid_glass_effect_noise_action', $element );
 
 		$element->add_control(
 			'eael_liquid_glass_shadow_effect',
