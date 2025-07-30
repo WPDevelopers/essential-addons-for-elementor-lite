@@ -38,6 +38,33 @@ class Liquid_Glass_Effect {
 		);
 	}
 
+	public function eael_liquid_glass_effect_backdrop_filter( $element, $effect, $default_size ) {
+		$element->add_control(
+			'eael_liquid_glass_effect_backdrop_filter_'.$effect,
+			[
+				'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 50,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'size' => $default_size,
+				],
+				'selectors' => [
+					'{{WRAPPER}}.eael_liquid_glass-'.$effect => 'backdrop-filter: blur({{SIZE}}px)',
+				],
+				'condition' => [
+					'eael_liquid_glass_effect_switch' => 'yes',
+					'eael_liquid_glass_effect' => $effect,
+				],
+			]
+		);
+	}
+
 	public function register_controls( $element ) {
 		$element->start_controls_section(
 			'eael_liquid_glass_effect_section',
@@ -200,80 +227,10 @@ class Liquid_Glass_Effect {
 			]
 		);
 
-		$element->add_control(
-			'eael_liquid_glass_effect_backdrop_filter_effect1',
-			[
-				'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SLIDER,
-				'range' => [
-					'px' => [
-						'min'  => 0,
-						'max'  => 50,
-						'step' => 1,
-					],
-				],
-				'default' => [
-					'size' => 24,
-				],
-				'selectors' => [
-					'{{WRAPPER}}.eael_liquid_glass-effect1' => 'backdrop-filter: blur({{SIZE}}px)',
-				],
-				'condition' => [
-					'eael_liquid_glass_effect_switch' => 'yes',
-					'eael_liquid_glass_effect' => 'effect1',
-				],
-			]
-		);
-
-		$element->add_control(
-			'eael_liquid_glass_effect_backdrop_filter_effect2',
-			[
-				'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SLIDER,
-				'range' => [
-					'px' => [
-						'min'  => 0,
-						'max'  => 50,
-						'step' => 1,
-					],
-				],
-				'default' => [
-					'size' => 20,
-				],
-				'selectors' => [
-					'{{WRAPPER}}.eael_liquid_glass-effect2' => 'backdrop-filter: blur({{SIZE}}px) brightness(1.1) saturate(1.5)',
-				],
-				'condition' => [
-					'eael_liquid_glass_effect_switch' => 'yes',
-					'eael_liquid_glass_effect'        => 'effect2',
-				],
-			]
-		);
-
-		$element->add_control(
-			'eael_liquid_glass_effect_backdrop_filter_effect3',
-			[
-				'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SLIDER,
-				'range' => [
-					'px' => [
-						'min'  => 0,
-						'max'  => 50,
-						'step' => 1,
-					],
-				],
-				'default' => [
-					'size' => 16,
-				],
-				'selectors' => [
-					'{{WRAPPER}}.eael_liquid_glass-effect3' => 'backdrop-filter: blur({{SIZE}}px)',
-				],
-				'condition' => [
-					'eael_liquid_glass_effect_switch' => 'yes',
-					'eael_liquid_glass_effect'        => 'effect3',
-				],
-			]
-		);
+		// Backdrop Filter Controls
+		$this->eael_liquid_glass_effect_backdrop_filter( $element, 'effect1', 24 );
+		$this->eael_liquid_glass_effect_backdrop_filter( $element, 'effect2', 20 );
+		$this->eael_liquid_glass_effect_backdrop_filter( $element, 'effect3', 16 );
 
 		$element->add_control(
 			'eael_liquid_glass_effect_backdrop_filter_effect4',
