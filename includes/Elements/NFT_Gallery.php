@@ -102,20 +102,6 @@ class NFT_Gallery extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_nft_gallery_magiceden_api_info',
-			[
-				'type' => Controls_Manager::RAW_HTML,
-				'raw' => '<div style="background: #e8f5e8; padding: 10px; border-radius: 4px; border-left: 4px solid #4caf50;">
-					<strong>' . esc_html__( 'No API Key Required', 'essential-addons-for-elementor-lite' ) . '</strong><br>
-					' . esc_html__( 'Magic Eden provides free public access to their API with a rate limit of 120 requests per minute. No API key is needed for basic data retrieval.', 'essential-addons-for-elementor-lite' ) . '
-				</div>',
-				'condition' => [
-					'eael_nft_gallery_sources' => 'magiceden'
-				],
-			]
-		);
-
-		$this->add_control(
 			'eael_nft_gallery_opensea_type',
 			[
 				'label'     => esc_html__( 'Type', 'essential-addons-for-elementor-lite' ),
@@ -2706,6 +2692,8 @@ class NFT_Gallery extends Widget_Base {
 		// print_r($items);
 		$error_message = ! empty( $opensea_items['error_message'] ) ? $opensea_items['error_message'] : "";
 
+		$nft_gallery['source'] = ! empty( $settings['eael_nft_gallery_sources'] ) ? esc_html( $settings['eael_nft_gallery_sources'] ) : 'opensea';
+
 		$post_per_page      = ! empty( $settings['eael_nft_gallery_posts_per_page'] ) ? absint( $settings['eael_nft_gallery_posts_per_page'] ) : 6;
 
 		// Set post limit based on source
@@ -2719,8 +2707,6 @@ class NFT_Gallery extends Widget_Base {
 
 		$counter      = 0;
 		$current_page = 1;
-
-		$nft_gallery['source']            = ! empty( $settings['eael_nft_gallery_sources'] ) ? esc_html( $settings['eael_nft_gallery_sources'] ) : 'opensea';
 		$nft_gallery['layout']            = ! empty( $settings['eael_nft_gallery_items_layout'] ) ? $settings['eael_nft_gallery_items_layout'] : 'grid';
 		$nft_gallery['opensea_type']      = ! empty( $settings['eael_nft_gallery_opensea_type'] ) ? esc_html( $settings['eael_nft_gallery_opensea_type'] ) : 'assets';
 		$nft_gallery['preset']            = ! empty( $settings['eael_nft_gallery_style_preset'] ) && 'grid' === $nft_gallery['layout'] ? $settings['eael_nft_gallery_style_preset'] : 'preset-1';
@@ -3048,7 +3034,7 @@ class NFT_Gallery extends Widget_Base {
 
 			return $data;
 		} elseif ( false === $items && 'magiceden' === $nft_gallery['source'] ) {
-			// Magic Eden API Logic - No API key required for public endpoints
+			// Magic Eden API Logic - Using public endpoints
 			$url   = "https://api-mainnet.magiceden.dev/v2";
 			$param = array();
 
