@@ -194,17 +194,28 @@ class Liquid_Glass_Effect {
 			]
 		);
 
-		$element->add_control(
-			'eael_liquid_glass_effect_settings',
-			[
-				'label'     => esc_html__( 'Liquid Glass Settings', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-				'condition' => [
-					'eael_liquid_glass_effect_switch' => 'yes',
+		
+		if ( !apply_filters('eael/pro_enabled', false ) ) {
+			$element->add_control(
+					'eael_liquid_glass_effect_pro_alert',
+					[
+						'label' 		=> sprintf( '<a target="_blank" href="https://wpdeveloper.com/upgrade/ea-pro">%s</a>', esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite')),
+						'type'      => Controls_Manager::HEADING,
 				]
-			]
-		);
+			);
+		} else {
+			$element->add_control(
+				'eael_liquid_glass_effect_settings',
+				[
+					'label'     => esc_html__( 'Liquid Glass Settings', 'essential-addons-for-elementor-lite' ),
+					'type'      => Controls_Manager::HEADING,
+					'separator' => 'before',
+					'condition' => [
+						'eael_liquid_glass_effect_switch' => 'yes',
+					]
+				]
+			);
+		}
 
 		// Background Color Controls
 		$this->eael_liquid_glass_effect_bg_color_effect( $element, 'effect1', '#FFFFFF1F' );
