@@ -165,20 +165,28 @@ class Liquid_Glass_Effect {
 			]
 		);
 
+		$eael_liquid_glass_effect = apply_filters(
+			'eael_liquid_glass_effect_filter',
+			[
+					'styles' => [
+						'effect1' => esc_html__( 'Effect 1', 'essential-addons-for-elementor-lite' ),
+						'effect2' => esc_html__( 'Effect 2', 'essential-addons-for-elementor-lite' ),
+						'effect3' => esc_html__( 'Effect 3', 'essential-addons-for-elementor-lite' ),
+						'effect4' => esc_html__( 'Effect 4 (Pro)', 'essential-addons-for-elementor-lite' ),
+						'effect5' => esc_html__( 'Effect 5 (Pro)', 'essential-addons-for-elementor-lite' ),
+						'effect6' => esc_html__( 'Effect 6 (Pro)', 'essential-addons-for-elementor-lite' ),
+				],
+				'conditions' => ['effect4', 'effect5', 'effect6'],
+			]
+      );
+
 		$element->add_control(
 			'eael_liquid_glass_effect',
 			[
 				'label'   => esc_html__( 'Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::SELECT2,
 				'default' => 'effect1',
-				'options' => [
-					'effect1' => esc_html__( 'Effect 1', 'essential-addons-for-elementor-lite' ),
-					'effect2' => esc_html__( 'Effect 2', 'essential-addons-for-elementor-lite' ),
-					'effect3' => esc_html__( 'Effect 3', 'essential-addons-for-elementor-lite' ),
-					'effect4' => esc_html__( 'Effect 4', 'essential-addons-for-elementor-lite' ),
-					'effect5' => esc_html__( 'Effect 5', 'essential-addons-for-elementor-lite' ),
-					'effect6' => esc_html__( 'Effect 6', 'essential-addons-for-elementor-lite' ),
-				],
+				'options' => $eael_liquid_glass_effect['styles'],
 				'prefix_class' => 'eael_liquid_glass-',
 				'condition' => [
 					'eael_liquid_glass_effect_switch' => 'yes',

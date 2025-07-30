@@ -13,69 +13,6 @@
    backdrop-filter: blur(15px);
 }
 
-.eael_liquid_glass-effect4 {
-   overflow: hidden;
-   border: solid 1px color-mix(in srgb, var(--accent) 30%, transparent);
-   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-   background: color-mix(in srgb, var(--accent) 7.5%, transparent);
-   transform: translateZ(0);
-}
-
-.eael_liquid_glass-effect4::before {
-   position: absolute;
-   content: "";
-   z-index: -99;
-   height: 100%;
-   width: 100%;
-   left: 0;
-   backdrop-filter: blur(0px);
-   -webkit-backdrop-filter: blur(0px);
-   filter: url(#eael-glass-distortion1);
-   transform: translateZ(0);
-}
-
-.eael_liquid_glass-effect5 {
-   overflow: hidden;
-   border: solid 1px color-mix(in srgb, var(--accent) 30%, transparent);
-   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-   background: color-mix(in srgb, var(--accent) 7.5%, transparent);
-   transform: translateZ(0);
-}
-
-.eael_liquid_glass-effect5::before {
-   position: absolute;
-   content: "";
-   z-index: -99;
-   height: 100%;
-   width: 100%;
-   left: 0;
-   backdrop-filter: blur(0px);
-   -webkit-backdrop-filter: blur(0px);
-   filter: url(#eael-glass-distortion2);
-   transform: translateZ(0);
-}
-
-.eael_liquid_glass-effect6 {
-   overflow: hidden;
-   border: solid 1px color-mix(in srgb, var(--accent) 30%, transparent);
-   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-   background: color-mix(in srgb, var(--accent) 7.5%, transparent);
-   transform: translateZ(0);
-}
-
-.eael_liquid_glass-effect6::before {
-   position: absolute;
-   content: "";
-   z-index: -99;
-   height: 100%;
-   width: 100%;
-   left: 0;
-   backdrop-filter: blur(0px);
-   -webkit-backdrop-filter: blur(0px);
-   filter: url(#eael-glass-distortion3);
-   transform: translateZ(0);
-}
-
 .elementor-edit-area-active
    .eael_liquid_glass_shadow-effect1.elementor-widget.elementor-element-editable {
    box-shadow: -1px 9px 28px 2px rgba(0, 0, 0, 0.78);
