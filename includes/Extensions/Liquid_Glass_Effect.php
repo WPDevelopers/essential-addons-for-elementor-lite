@@ -96,6 +96,25 @@ class Liquid_Glass_Effect {
 		);
 	}
 
+	public function eael_liquid_glass_effect_border_radius( $element, $effect, $default_radius ) {
+		$element->add_control(
+			'eael_liquid_glass_border_radius_'.$effect,
+			[
+				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'default' => $default_radius,
+				'selectors'  => [
+					'{{WRAPPER}}.eael_liquid_glass_shadow-'.$effect => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition' => [
+					'eael_liquid_glass_effect_switch' => 'yes',
+					'eael_liquid_glass_shadow_effect' => $effect,
+				],
+			]
+		);
+	}
+
 	public function register_controls( $element ) {
 		$element->start_controls_section(
 			'eael_liquid_glass_effect_section',
@@ -518,31 +537,44 @@ class Liquid_Glass_Effect {
 		$this->eael_liquid_glass_effect_border( $element, 'effect1', '#FFFFFF1F' );
 		$this->eael_liquid_glass_effect_border( $element, 'effect2', '#FFFFFF1F' );
 		$this->eael_liquid_glass_effect_border( $element, 'effect3', '#FFFFFF1F' );
-		$this->eael_liquid_glass_effect_border( $element, 'effect3', '#AAAAAA1A' );
+		$this->eael_liquid_glass_effect_border( $element, 'effect4', '#AAAAAA1A' );
 
-		$element->add_control(
-			'eael_liquid_glass_border_radius_effect1',
-			[
-				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'rem', 'custom' ],
-				'default' => [
-					'top' 	  => 24,
-					'right'    => 24,
-					'bottom'   => 24,
-					'left'     => 24,
-					'unit'     => 'px',
-					'isLinked' => true,
-				],
-				'selectors'  => [
-					'{{WRAPPER}}.eael_liquid_glass_shadow-effect1' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-				'condition' => [
-					'eael_liquid_glass_effect_switch' => 'yes',
-					'eael_liquid_glass_shadow_effect' => 'effect1',
-				],
-			]
-		);
+		// Add border radius effect for Liquid Glass Effect
+		$this->eael_liquid_glass_effect_border_radius( $element, 'effect1', [
+			'top'      => 24,
+			'right'    => 24,
+			'bottom'   => 24,
+			'left'     => 24,
+			'unit'     => 'px',
+			'isLinked' => true,
+		] );
+
+		$this->eael_liquid_glass_effect_border_radius( $element, 'effect2', [
+			'top' 	  => 16,
+			'right'    => 16,
+			'bottom'   => 16,
+			'left'     => 16,
+			'unit'     => 'px',
+			'isLinked' => true,
+		] );
+
+		$this->eael_liquid_glass_effect_border_radius( $element, 'effect3', [
+			'top' 	  => 8,
+			'right'    => 8,
+			'bottom'   => 8,
+			'left'     => 8,
+			'unit'     => 'px',
+			'isLinked' => true,
+		] );
+
+		$this->eael_liquid_glass_effect_border_radius( $element, 'effect4', [
+			'top' 	  => 24,
+			'right'    => 24,
+			'bottom'   => 24,
+			'left'     => 24,
+			'unit'     => 'px',
+			'isLinked' => true,
+		] );
 
 		$element->add_group_control(
 			\Elementor\Group_Control_Box_Shadow::get_type(),
@@ -564,32 +596,6 @@ class Liquid_Glass_Effect {
 				'condition' => [
 					'eael_liquid_glass_effect_switch'  => 'yes',
 					'eael_liquid_glass_shadow_effect' => 'effect1',
-				],
-			]
-		);
-
-		
-
-		$element->add_control(
-			'eael_liquid_glass_border_radius_effect2',
-			[
-				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'rem', 'custom' ],
-				'default'    => [
-					'top' 	  => 16,
-					'right'    => 16,
-					'bottom'   => 16,
-					'left'     => 16,
-					'unit'     => 'px',
-					'isLinked' => true,
-				],
-				'selectors'  => [
-					'{{WRAPPER}}.eael_liquid_glass_shadow-effect2' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-				'condition' => [
-					'eael_liquid_glass_effect_switch' => 'yes',
-					'eael_liquid_glass_shadow_effect' => 'effect2',
 				],
 			]
 		);
@@ -619,29 +625,7 @@ class Liquid_Glass_Effect {
 		);
 
 
-		$element->add_control(
-			'eael_liquid_glass_border_radius_effect3',
-			[
-				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'rem', 'custom' ],
-				'default'    => [
-					'top' 	  => 8,
-					'bottom'   => 8,
-					'left'     => 8,
-					'right'    => 8,
-					'unit'     => 'px',
-					'isLinked' => true,
-				],
-				'selectors'  => [
-					'{{WRAPPER}}.eael_liquid_glass_shadow-effect3' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-				'condition' => [
-					'eael_liquid_glass_effect_switch' => 'yes',
-					'eael_liquid_glass_shadow_effect' => 'effect3',
-				],
-			]
-		);
+		
 		
 		$element->add_group_control(
 			\Elementor\Group_Control_Box_Shadow::get_type(),
@@ -668,29 +652,6 @@ class Liquid_Glass_Effect {
 			]
 		);
 
-		$element->add_control(
-			'eael_liquid_glass_border_radius_effect4',
-			[
-				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'rem', 'custom' ],
-				'default'    => [
-					'top' 	  => 24,
-					'bottom'   => 24,
-					'left'     => 24,
-					'right'    => 24,
-					'unit'     => 'px',
-					'isLinked' => true,
-				],
-				'selectors'  => [
-					'{{WRAPPER}}.eael_liquid_glass_shadow-effect4' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-				'condition' => [
-					'eael_liquid_glass_effect_switch' => 'yes',
-					'eael_liquid_glass_shadow_effect' => 'effect4',
-				],
-			]
-		);
 
 		$element->add_group_control(
 			\Elementor\Group_Control_Box_Shadow::get_type(),
