@@ -1051,6 +1051,11 @@ trait Ajax_Handler {
 			update_option( 'eael_br_google_place_api_key', sanitize_text_field( $settings['br_google_place_api_key'] ) );
 		}
 
+		// Business Reviews : Saving Trustpilot Api Key
+		if ( isset( $settings['br_trustpilot_api_key'] ) ) {
+			update_option( 'eael_br_trustpilot_api_key', sanitize_text_field( $settings['br_trustpilot_api_key'] ) );
+		}
+
 		// Saving Google Map Api Key
 		if ( isset( $settings['google-map-api'] ) ) {
 			update_option( 'eael_save_google_map_api', sanitize_text_field( $settings['google-map-api'] ) );

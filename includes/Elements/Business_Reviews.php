@@ -99,15 +99,17 @@ class Business_Reviews extends Widget_Base {
 			]
 		);
 
+		$review_sources = apply_filters('eael/business_reviews/sources', [
+			'google-reviews' => __( 'Google Reviews', 'essential-addons-for-elementor-lite' ),
+		]);
+
 		$this->add_control(
 			'eael_business_reviews_sources',
 			[
 				'label'   => __( 'Source', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'google-reviews',
-				'options' => [
-					'google-reviews' => __( 'Google Reviews', 'essential-addons-for-elementor-lite' ),
-				],
+				'options' => $review_sources,
 			]
 		);
 
@@ -139,6 +141,23 @@ class Business_Reviews extends Widget_Base {
 				'active' => false,
 			],
 		] );
+
+		if (!apply_filters('eael/pro_enabled', false)) {
+			$this->add_control( 'eael_business_reviews_trustpilot_notice', [
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => sprintf(
+					__( '<div class="eael-notice">%s is a <strong>Premium Feature</strong>. Upgrade to <a href="%s" target="_blank">Essential Addons Premium</a> to unlock this feature.</div>', 'essential-addons-for-elementor-lite' ),
+					__( 'Trustpilot Reviews', 'essential-addons-for-elementor-lite' ),
+					esc_url( 'https://wpdeveloper.com/upgrade/ea-pro' )
+				),
+				'content_classes' => 'eael-notice-wrapper',
+				'condition'       => [
+					'eael_business_reviews_sources' => 'trustpilot-reviews',
+				],
+			] );
+		}
+
+		do_action('eael/business_reviews/controls', $this);
 
 		$this->add_control(
 			'eael_business_reviews_sort_by',
@@ -2540,6 +2559,8 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['reviews_sort']            		= ! empty( $settings['eael_business_reviews_sort_by'] ) ? esc_html( $settings['eael_business_reviews_sort_by'] ) : 'most_relevant';
 		$business_reviews['review_text_translation'] 		= ! empty( $settings['eael_business_reviews_review_text_translation'] ) && 'yes' === $settings['eael_business_reviews_review_text_translation'] ? 1 : 0;
 
+		$business_reviews = apply_filters('eael/business_reviews/settings', $business_reviews, $settings);
+
 		$business_reviews['expiration'] 					= ! empty( $settings['eael_business_reviews_data_cache_time'] ) ? absint( $settings['eael_business_reviews_data_cache_time'] ) * MINUTE_IN_SECONDS : DAY_IN_SECONDS;
 		$business_reviews['md5']        					= md5( $business_reviews['api_key'] . $business_reviews['reviews_sort'] . $business_reviews['review_text_translation'] . $this->get_id() );
 		$business_reviews['cache_key']  					= "eael_{$business_reviews['source']}_{$business_reviews['place_id']}_{$business_reviews['expiration']}_{$business_reviews['md5']}_brev_cache";
@@ -2624,13 +2645,17 @@ class Business_Reviews extends Widget_Base {
 		$items            = get_transient( $business_reviews['cache_key'] );
 
 		if ( false === $items ) {
-			switch ( $business_reviews['source'] ) {
-				case 'google-reviews':
-					$data = $this->fetch_google_reviews_from_api( $business_reviews );
-					break;
-				default:
-					$data = $this->fetch_google_reviews_from_api( $business_reviews );
-					break;
+			$data = apply_filters('eael/business_reviews/fetch_api', null, $business_reviews, $this);
+
+			if ( null === $data ) {
+				switch ( $business_reviews['source'] ) {
+					case 'google-reviews':
+						$data = $this->fetch_google_reviews_from_api( $business_reviews );
+						break;
+					default:
+						$data = $this->fetch_google_reviews_from_api( $business_reviews );
+						break;
+				}
 			}
 
 			return $data;
@@ -2742,6 +2767,8 @@ class Business_Reviews extends Widget_Base {
 		return $error_message;
 	}
 
+
+
 	public function print_business_reviews( $business_reviews_items ) {
 		$settings 			= $this->settings_data         = $this->get_settings_for_display();
 		$business_reviews 	= $this->business_reviews_data = $this->get_business_reviews_settings();
@@ -2774,13 +2801,17 @@ class Business_Reviews extends Widget_Base {
         <div <?php $this->print_render_attribute_string( 'eael-business-reviews-wrapper' ); ?>>
             <div <?php $this->print_render_attribute_string( 'eael-business-reviews-items' ); ?>>
 				<?php
-				switch ( $business_reviews['source'] ) {
-					case 'google-reviews':
-						$this->print_business_reviews_google( $business_reviews_items );
-						break;
-					default:
-						$this->print_business_reviews_google( $business_reviews_items );
-						break;
+				$handled = apply_filters('eael/business_reviews/render', false, $business_reviews, $business_reviews_items, $this);
+
+				if ( ! $handled ) {
+					switch ( $business_reviews['source'] ) {
+						case 'google-reviews':
+							$this->print_business_reviews_google( $business_reviews_items );
+							break;
+						default:
+							$this->print_business_reviews_google( $business_reviews_items );
+							break;
+					}
 				}
 				?>
             </div>
@@ -3252,6 +3283,8 @@ class Business_Reviews extends Widget_Base {
 			<?php
 		}
 	}
+
+
 
 	protected function render_dots() {
 		?>

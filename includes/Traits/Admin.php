@@ -1525,6 +1525,18 @@ trait Admin {
 						    'url'  => 'https://developers.google.com/maps/documentation/places/web-service/get-api-key'
 					    ]
 				    ],
+				    'trustpilotApiSetting' => [
+					    'title'      => __( "Trustpilot API Key", 'essential-addons-for-elementor-lite' ),
+					    'title_icon' => 'images/map.svg',
+					    'label'      => __( "Set API Key", 'essential-addons-for-elementor-lite' ),
+					    'name'       => 'br_trustpilot_api_key',
+					    'value'      => get_option( 'eael_br_trustpilot_api_key', '' ),
+					    'image'      => 'images/map2.png',
+					    'link'       => [
+						    'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
+						    'url'  => 'https://developers.trustpilot.com/authentication'
+					    ]
+				    ],
 				    'mailchimpSetting'       => [
 					    'title'      => __( "MailChimp API Key", 'essential-addons-for-elementor-lite' ),
 					    'title_icon' => 'images/mc.svg',
