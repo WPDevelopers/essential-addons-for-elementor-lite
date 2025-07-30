@@ -206,25 +206,6 @@ class Liquid_Glass_Effect {
 			]
 		);
 
-		// $element->add_control(
-		// 	'eael_liquid_glass_effect_bg_color',
-		// 	[
-		// 		'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
-		// 		'type'      => Controls_Manager::COLOR,
-		// 		'selectors' => [
-		// 			'{{WRAPPER}}.eael_liquid_glass-effect1, 
-		// 			{{WRAPPER}}.eael_liquid_glass-effect2, 
-		// 			{{WRAPPER}}.eael_liquid_glass-effect3, 
-		// 			{{WRAPPER}}.eael_liquid_glass-effect4::before, 
-		// 			{{WRAPPER}}.eael_liquid_glass-effect5::before, 
-		// 			{{WRAPPER}}.eael_liquid_glass-effect6::before' => 'background-color: {{VALUE}}',
-		// 		],
-		// 		'condition' => [
-		// 			'eael_liquid_glass_effect_switch' => 'yes',
-		// 		],
-		// 	]
-		// );
-
 		// Background Color Controls
 		$this->eael_liquid_glass_effect_bg_color_effect( $element, 'effect1', '#FFFFFF1F' );
 		$this->eael_liquid_glass_effect_bg_color_effect( $element, 'effect2', '' );
@@ -234,35 +215,6 @@ class Liquid_Glass_Effect {
 		do_action( 'eael_liquid_glass_effect_bg_color_effect4', $element, 'effect4', '' );
 		do_action( 'eael_liquid_glass_effect_bg_color_effect5', $element, 'effect5', '' );
 		do_action( 'eael_liquid_glass_effect_bg_color_effect6', $element, 'effect6', '' );
-
-		// $element->add_control(
-		// 	'eael_liquid_glass_effect_opacity',
-		// 	[
-		// 		'label' => esc_html__( 'Opacity', 'essential-addons-for-elementor-lite' ),
-		// 		'type'  => Controls_Manager::SLIDER,
-		// 		'range' => [
-		// 			'px' => [
-		// 				'min'  => 0,
-		// 				'max'  => 1,
-		// 				'step' => .1,
-		// 			],
-		// 		],
-		// 		'default' => [
-		// 			'size' => 1,
-		// 		],
-		// 		'selectors' => [
-		// 			'{{WRAPPER}}.eael_liquid_glass-effect1, 
-		// 			{{WRAPPER}}.eael_liquid_glass-effect2, 
-		// 			{{WRAPPER}}.eael_liquid_glass-effect3, 
-		// 			{{WRAPPER}}.eael_liquid_glass-effect4::before, 
-		// 			{{WRAPPER}}.eael_liquid_glass-effect5::before, 
-		// 			{{WRAPPER}}.eael_liquid_glass-effect6::before' => 'opacity: {{SIZE}}',
-		// 		],
-		// 		'condition' => [
-		// 			'eael_liquid_glass_effect_switch' => 'yes',
-		// 		],
-		// 	]
-		// );
 
 		// Backdrop Filter Controls
 		$this->eael_liquid_glass_effect_backdrop_filter( $element, 'effect1', 24 );
