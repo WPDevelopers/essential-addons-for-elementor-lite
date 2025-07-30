@@ -1528,6 +1528,20 @@ trait Admin {
 						    'url'  => 'https://developers.google.com/maps/documentation/places/web-service/get-api-key'
 					    ]
 				    ],
+				    'googleMyBusinessTokenSetting' => [
+					    'title'      => __( "Google My Business Access Token", 'essential-addons-for-elementor-lite' ),
+					    'title_icon' => 'images/map.svg',
+					    'label'      => __( "Set Access Token", 'essential-addons-for-elementor-lite' ),
+					    'name'       => 'br_google_my_business_token',
+					    'type'       => 'textarea',
+					    'placeholder'=> __( "ya29.a0AfH6SMC...", 'essential-addons-for-elementor-lite' ),
+					    'value'      => get_option( 'eael_br_google_my_business_token', '' ),
+					    'image'      => 'images/map2.png',
+					    'link'       => [
+						    'text' => __( 'Get your access token from Google OAuth 2.0 Playground', 'essential-addons-for-elementor-lite' ),
+						    'url'  => 'https://developers.google.com/oauthplayground/'
+					    ]
+				    ],
 				    'trustpilotApiSetting' => [
 					    'title'      => __( "Trustpilot API Key", 'essential-addons-for-elementor-lite' ),
 					    'title_icon' => 'images/map.svg',
