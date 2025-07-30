@@ -65,6 +65,37 @@ class Liquid_Glass_Effect {
 		);
 	}
 
+	public function eael_liquid_glass_effect_border( $element, $effect, $default_color ) {
+		$element->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'name'      => 'eael_liquid_glass_border_'.$effect,
+				'fields_options' => [
+					'border' => [
+						'default' => 'solid',
+					],
+					'width' => [
+						'default' => [
+							'top'      => '1',
+							'right'    => '1',
+							'bottom'   => '1',
+							'left'     => '1',
+							'isLinked' =>  false,
+						],
+					],
+					'color' => [
+						'default' => $default_color,
+					],
+				],
+				'selector'  => '{{WRAPPER}}.eael_liquid_glass_shadow-'.$effect,
+				'condition' => [
+					'eael_liquid_glass_effect_switch'  => 'yes',
+					'eael_liquid_glass_shadow_effect' => $effect,
+				],
+			]
+		);
+	}
+
 	public function register_controls( $element ) {
 		$element->start_controls_section(
 			'eael_liquid_glass_effect_section',
@@ -483,34 +514,11 @@ class Liquid_Glass_Effect {
 			]
 		);
 
-		$element->add_group_control(
-			\Elementor\Group_Control_Border::get_type(),
-			[
-				'name'      => 'eael_liquid_glass_border_effect1',
-				'fields_options' => [
-					'border' => [
-						'default' => 'solid',
-					],
-					'width' => [
-						'default' => [
-							'top'      => '1',
-							'right'    => '1',
-							'bottom'   => '1',
-							'left'     => '1',
-							'isLinked' =>  false,
-						],
-					],
-					'color' => [
-						'default' => '#FFFFFF1F',
-					],
-				],
-				'selector'  => '{{WRAPPER}}.eael_liquid_glass_shadow-effect1',
-				'condition' => [
-					'eael_liquid_glass_effect_switch'  => 'yes',
-					'eael_liquid_glass_shadow_effect' => 'effect1',
-				],
-			]
-		);
+		// Add border effect for Liquid Glass Effect
+		$this->eael_liquid_glass_effect_border( $element, 'effect1', '#FFFFFF1F' );
+		$this->eael_liquid_glass_effect_border( $element, 'effect2', '#FFFFFF1F' );
+		$this->eael_liquid_glass_effect_border( $element, 'effect3', '#FFFFFF1F' );
+		$this->eael_liquid_glass_effect_border( $element, 'effect3', '#AAAAAA1A' );
 
 		$element->add_control(
 			'eael_liquid_glass_border_radius_effect1',
@@ -560,34 +568,7 @@ class Liquid_Glass_Effect {
 			]
 		);
 
-		$element->add_group_control(
-			\Elementor\Group_Control_Border::get_type(),
-			[
-				'name'      => 'eael_liquid_glass_border_effect2',
-				'fields_options' => [
-					'border' => [
-						'default' => 'solid',
-					],
-					'width' => [
-						'default' => [
-							'top'      => '1',
-							'right'    => '1',
-							'bottom'   => '1',
-							'left'     => '1',
-							'isLinked' =>  false,
-						],
-					],
-					'color' => [
-						'default' => '#FFFFFF1F',
-					],
-				],
-				'selector'  => '{{WRAPPER}}.eael_liquid_glass_shadow-effect2',
-				'condition' => [
-					'eael_liquid_glass_effect_switch'  => 'yes',
-					'eael_liquid_glass_shadow_effect' => 'effect2',
-				],
-			]
-		);
+		
 
 		$element->add_control(
 			'eael_liquid_glass_border_radius_effect2',
@@ -637,34 +618,6 @@ class Liquid_Glass_Effect {
 			]
 		);
 
-		$element->add_group_control(
-			\Elementor\Group_Control_Border::get_type(),
-			[
-				'name'      => 'eael_liquid_glass_border_radius_effect3',
-				'fields_options' => [
-					'border' => [
-						'default' => 'solid',
-					],
-					'width' => [
-						'default' => [
-							'top'      => '1',
-							'right'    => '1',
-							'bottom'   => '1',
-							'left'     => '1',
-							'isLinked' =>  false,
-						],
-					],
-					'color' => [
-						'default' => '#FFFFFF1F',
-					],
-				],
-				'selector'  => '{{WRAPPER}}.eael_liquid_glass_shadow-effect3',
-				'condition' => [
-					'eael_liquid_glass_effect_switch'  => 'yes',
-					'eael_liquid_glass_shadow_effect' => 'effect3',
-				],
-			]
-		);
 
 		$element->add_control(
 			'eael_liquid_glass_border_radius_effect3',
@@ -711,35 +664,6 @@ class Liquid_Glass_Effect {
 				'condition' => [
 					'eael_liquid_glass_effect_switch'  => 'yes',
 					'eael_liquid_glass_shadow_effect' => 'effect3',
-				],
-			]
-		);
-
-		$element->add_group_control(
-			\Elementor\Group_Control_Border::get_type(),
-			[
-				'name'     => 'eael_liquid_glass_border_effect4',
-				'selector' => '{{WRAPPER}}.eael_liquid_glass_shadow-effect4',
-				'fields_options' => [
-					'border' => [
-						'default' => 'solid',
-					],
-					'width' => [
-						'default' => [
-							'top'      => '1',
-							'right'    => '1',
-							'bottom'   => '1',
-							'left'     => '1',
-							'isLinked' =>  false,
-						],
-					],
-					'color' => [
-						'default' => '#AAAAAA1A',
-					],
-				],
-				'condition' => [
-					'eael_liquid_glass_effect_switch'  => 'yes',
-					'eael_liquid_glass_shadow_effect' => 'effect4',
 				],
 			]
 		);
