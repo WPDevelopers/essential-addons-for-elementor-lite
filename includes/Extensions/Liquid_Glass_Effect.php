@@ -268,78 +268,11 @@ class Liquid_Glass_Effect {
 		$this->eael_liquid_glass_effect_backdrop_filter( $element, 'effect1', 24 );
 		$this->eael_liquid_glass_effect_backdrop_filter( $element, 'effect2', 20 );
 		$this->eael_liquid_glass_effect_backdrop_filter( $element, 'effect3', 16 );
-
-		$element->add_control(
-			'eael_liquid_glass_effect_backdrop_filter_effect4',
-			[
-				'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SLIDER,
-				'range' => [
-					'px' => [
-						'min'  => 0,
-						'max'  => 50,
-						'step' => 1,
-					],
-				],
-				'default' => [
-					'size' => 5,
-				],
-				'selectors' => [
-					'{{WRAPPER}}.eael_liquid_glass-effect4::before' => 'backdrop-filter: blur({{SIZE}}px)',
-				],
-				'condition' => [
-					'eael_liquid_glass_effect_switch' => 'yes',
-					'eael_liquid_glass_effect'        => 'effect4',
-				],
-			]
-		);
-
-		$element->add_control(
-			'eael_liquid_glass_effect_backdrop_filter_effect5',
-			[
-				'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SLIDER,
-				'range' => [
-					'px' => [
-						'min'  => 0,
-						'max'  => 50,
-						'step' => 1,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}}.eael_liquid_glass-effect5::before' => 'backdrop-filter: blur({{SIZE}}px)',
-				],
-				'condition' => [
-					'eael_liquid_glass_effect_switch' => 'yes',
-					'eael_liquid_glass_effect'        => 'effect5',
-				],
-			]
-		);
-
-		$element->add_control(
-			'eael_liquid_glass_effect_backdrop_filter_effect6',
-			[
-				'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SLIDER,
-				'range' => [
-					'px' => [
-						'min'  => 0,
-						'max'  => 50,
-						'step' => 1,
-					],
-				],
-				'default' => [
-					'size' => 7,
-				],
-				'selectors' => [
-					'{{WRAPPER}}.eael_liquid_glass-effect6::before' => 'backdrop-filter: blur({{SIZE}}px)',
-				],
-				'condition' => [
-					'eael_liquid_glass_effect_switch' => 'yes',
-					'eael_liquid_glass_effect'        => 'effect6',
-				],
-			]
-		);
+		
+		// Backdrop Filter Controls for Pro
+		do_action( 'eael_liquid_glass_effect_backdrop_filter_effect4', $element, 'effect4', 5 );
+		do_action( 'eael_liquid_glass_effect_backdrop_filter_effect5', $element, 'effect5', '' );
+		do_action( 'eael_liquid_glass_effect_backdrop_filter_effect6', $element, 'effect6', 7 );
 
 		// Noise Distortion Settings (Pro)
 		do_action( 'eael_liquid_glass_effect_noise_action', $element );
