@@ -935,7 +935,10 @@ trait Admin {
 							    'title'       => __( 'Business Reviews', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/business-reviews/',
 							    'doc_link'    => 'https://essential-addons.com/docs/ea-business-reviews/',
-							    'setting'     => [ 'id' => 'businessReviewsSetting' ],
+							    'setting'     => [
+								    'id' => 'businessReviewsSetting',
+								    'additional_settings' => [ 'trustpilotApiSetting', 'yelpApiSetting' ]
+							    ],
 							    'is_activate' => boolval( $this->get_settings( 'business-reviews' ) )
 						    ],
 					    ]
@@ -1535,6 +1538,18 @@ trait Admin {
 					    'link'       => [
 						    'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
 						    'url'  => 'https://developers.trustpilot.com/authentication'
+					    ]
+				    ],
+				    'yelpApiSetting' => [
+					    'title'      => __( "Yelp API Key", 'essential-addons-for-elementor-lite' ),
+					    'title_icon' => 'images/map.svg',
+					    'label'      => __( "Set API Key", 'essential-addons-for-elementor-lite' ),
+					    'name'       => 'br_yelp_api_key',
+					    'value'      => get_option( 'eael_br_yelp_api_key', '' ),
+					    'image'      => 'images/map2.png',
+					    'link'       => [
+						    'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
+						    'url'  => 'https://docs.developer.yelp.com/docs/fusion-intro'
 					    ]
 				    ],
 				    'mailchimpSetting'       => [
