@@ -1,13 +1,14 @@
 <?php
 namespace Essential_Addons_Elementor\Extensions;
 use Elementor\Controls_Manager;
+use Essential_Addons_Elementor\Traits\Helper as HelperTrait;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 class Liquid_Glass_Effect {
-
+	use HelperTrait;
 	/**
 	 * Initialize hooks
 	 */
@@ -17,6 +18,24 @@ class Liquid_Glass_Effect {
 		add_action( 'elementor/element/section/section_advanced/after_section_end', [ $this, 'register_controls' ] );
 		add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'register_controls' ] );
 		add_action( 'elementor/frontend/before_render', [ $this, 'before_render' ], 100 );
+	}
+
+	public function eael_liquid_glass_effect_bg_color_effect( $element, $effect, $default_bg_color ) {
+		$element->add_control(
+			'eael_liquid_glass_effect_bg_color_' . $effect,
+			[
+				'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => $default_bg_color,
+				'selectors' => [
+					'{{WRAPPER}}.eael_liquid_glass-'.$effect => 'background-color: {{VALUE}}',
+				],
+				'condition' => [
+					'eael_liquid_glass_effect_switch' => 'yes',
+					'eael_liquid_glass_effect'        => $effect,
+				],
+			]
+		);
 	}
 
 	public function register_controls( $element ) {
@@ -102,52 +121,10 @@ class Liquid_Glass_Effect {
 		// 	]
 		// );
 
-		$element->add_control(
-			'eael_liquid_glass_effect_bg_color_effect1',
-			[
-				'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#FFFFFF1F',
-				'selectors' => [
-					'{{WRAPPER}}.eael_liquid_glass-effect1' => 'background-color: {{VALUE}}',
-				],
-				'condition' => [
-					'eael_liquid_glass_effect_switch' => 'yes',
-					'eael_liquid_glass_effect'        => 'effect1',
-				],
-			]
-		);
-
-		$element->add_control(
-			'eael_liquid_glass_effect_bg_color_effect2',
-			[
-				'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}}.eael_liquid_glass-effect2' => 'background-color: {{VALUE}}',
-				],
-				'condition' => [
-					'eael_liquid_glass_effect_switch' => 'yes',
-					'eael_liquid_glass_effect'        => 'effect2',
-				],
-			]
-		);
-
-		$element->add_control(
-			'eael_liquid_glass_effect_bg_color_effect3',
-			[
-				'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#FFFFFF1F',
-				'selectors' => [
-					'{{WRAPPER}}.eael_liquid_glass-effect3' => 'background-color: {{VALUE}}',
-				],
-				'condition' => [
-					'eael_liquid_glass_effect_switch' => 'yes',
-					'eael_liquid_glass_effect'        => 'effect3',
-				],
-			]
-		);
+		// Background Color Controls
+		$this->eael_liquid_glass_effect_bg_color_effect( $element, 'effect1', '#FFFFFF1F' );
+		$this->eael_liquid_glass_effect_bg_color_effect( $element, 'effect2', '' );
+		$this->eael_liquid_glass_effect_bg_color_effect( $element, 'effect3', '#FFFFFF1F' );
 
 		$element->add_control(
 			'eael_liquid_glass_effect_bg_color_effect4',
