@@ -219,7 +219,7 @@ class Liquid_Glass_Effect {
 
 		// Background Color Controls
 		$this->eael_liquid_glass_effect_bg_color_effect( $element, 'effect1', '#FFFFFF1F' );
-		$this->eael_liquid_glass_effect_bg_color_effect( $element, 'effect2', '' );
+		$this->eael_liquid_glass_effect_bg_color_effect( $element, 'effect2', '#FFFFFF1F' );
 
 		// Background Color Controls for Pro
 		do_action( 'eael_liquid_glass_effect_bg_color_effect4', $element, 'effect4', '' );
