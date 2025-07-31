@@ -1414,13 +1414,13 @@ $config = [
                         'context' => 'view',
                     ],
                 ],
-                'js'  => [
-                    [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/liquide-glass-effect.min.js',
-                        'type'    => 'self',
-                        'context' => 'view',
-                    ],
-                ],
+                // 'js'  => [
+                //     [
+                //         'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/liquide-glass-effect.min.js',
+                //         'type'    => 'self',
+                //         'context' => 'view',
+                //     ],
+                // ],
             ],
         ],
     ],

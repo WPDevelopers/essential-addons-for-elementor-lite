@@ -18,6 +18,7 @@ class Liquid_Glass_Effect {
 		add_action( 'elementor/element/section/section_advanced/after_section_end', [ $this, 'register_controls' ] );
 		add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'register_controls' ] );
 		add_action( 'elementor/frontend/before_render', [ $this, 'before_render' ], 100 );
+		add_filter( 'elementor/widget/render_content', [ $this, 'eael_liquid_glass_effect_svg_render' ], 10, 2 );
 	}
 
 	public function eael_liquid_glass_effect_bg_color_effect( $element, $effect, $default_bg_color ) {
@@ -387,5 +388,12 @@ class Liquid_Glass_Effect {
 			];
 			$element->add_render_attribute( '_wrapper', 'data-eael_glass_effects', wp_json_encode( $strength_settings ) );
 		}
+	}
+
+	public function eael_liquid_glass_effect_svg_render( $content, $element ) {
+		$settings = $element->get_settings_for_display();
+		do_action( 'eael_liquid_glass_effect_svg_pro', $element, $settings );
+
+		return $content;
 	}
 }
