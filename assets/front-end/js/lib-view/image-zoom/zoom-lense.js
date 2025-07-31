@@ -339,11 +339,16 @@
         function updateLens(e) {
           if (!$lens) return;
 
+          // Handle both mouse and touch events
+          const evt = e.originalEvent.touches ? e.originalEvent.touches[0] : e;
+          const pageX = evt.pageX;
+          const pageY = evt.pageY;
+
           const imgOffset = $img.offset();
           const imgW = $img.width();
           const imgH = $img.height();
-          const x = e.pageX - imgOffset.left;
-          const y = e.pageY - imgOffset.top;
+          const x = pageX - imgOffset.left;
+          const y = pageY - imgOffset.top;
 
           if (x < 0 || y < 0 || x > imgW || y > imgH) {
             $lens.css('opacity', 0);
@@ -360,16 +365,22 @@
           const bgPosY = (ry * zoom - $lens.height() / 2);
 
           $lens.css({
-            left: `${e.pageX - $lens.width() / 2}px`,
-            top: `${e.pageY - $lens.height() / 2}px`,
+            left: `${pageX - $lens.width() / 2}px`,
+            top: `${pageY - $lens.height() / 2}px`,
             backgroundPosition: `-${bgPosX}px -${bgPosY}px`,
             backgroundSize: `${bgSizeW}px ${bgSizeH}px`,
             opacity: 1
           });
         }
 
-        $img.on('mouseenter touchstart mousemove touchmove', function () {
+        $img.on('mouseenter touchstart', function (e) {
           if ($lens) return; // avoid duplicates
+
+          // Prevent default touch behavior to avoid scrolling issues
+          if (e.type === 'touchstart') {
+            e.preventDefault();
+          }
+
           $lens = $('<div class="eael-magnify-lens"></div>').css({
             width: settings.lensSize,
             height: settings.lensSize,
@@ -385,17 +396,39 @@
             zIndex: 9999
           });
           $('body').append($lens);
+
+          // Initialize lens position immediately for touch events
+          if (e.type === 'touchstart') {
+            updateLens(e);
+          }
         });
 
-        $img.on('mousemove touchmove', updateLens);
+        $img.on('mousemove touchmove', function(e) {
+          // Prevent default touch behavior to avoid scrolling issues
+          if (e.type === 'touchmove') {
+            e.preventDefault();
+          }
+          updateLens(e);
+        });
 
-        $img.on('mouseleave touchend', function () {
+        function cleanupLens() {
           if ($lens) {
             $lens.css('opacity', 0);
             setTimeout(() => {
               $lens?.remove();
               $lens = null;
+              // Clean up document event listeners
+              $(document).off('touchend.eaelMagnify touchcancel.eaelMagnify');
             }, 200); // match fade out duration
+          }
+        }
+
+        $img.on('mouseleave touchend touchcancel', cleanupLens);
+
+        // Add document-level touch end handler for better mobile support
+        $(document).on('touchend.eaelMagnify touchcancel.eaelMagnify', function(e) {
+          if ($lens && !$(e.target).closest($img).length) {
+            cleanupLens();
           }
         });
 
