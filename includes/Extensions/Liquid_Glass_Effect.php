@@ -172,10 +172,9 @@ class Liquid_Glass_Effect {
 					'styles' => [
 						'effect1' => esc_html__( 'Effect 1', 'essential-addons-for-elementor-lite' ),
 						'effect2' => esc_html__( 'Effect 2', 'essential-addons-for-elementor-lite' ),
-						'effect3' => esc_html__( 'Effect 3', 'essential-addons-for-elementor-lite' ),
-						'effect4' => esc_html__( 'Effect 4 (Pro)', 'essential-addons-for-elementor-lite' ),
-						'effect5' => esc_html__( 'Effect 5 (Pro)', 'essential-addons-for-elementor-lite' ),
-						'effect6' => esc_html__( 'Effect 6 (Pro)', 'essential-addons-for-elementor-lite' ),
+						'effect4' => esc_html__( 'Effect 3 (Pro)', 'essential-addons-for-elementor-lite' ),
+						'effect5' => esc_html__( 'Effect 4 (Pro)', 'essential-addons-for-elementor-lite' ),
+						'effect6' => esc_html__( 'Effect 5 (Pro)', 'essential-addons-for-elementor-lite' ),
 				],
 				'conditions' => ['effect4', 'effect5', 'effect6'],
 			]
@@ -221,7 +220,6 @@ class Liquid_Glass_Effect {
 		// Background Color Controls
 		$this->eael_liquid_glass_effect_bg_color_effect( $element, 'effect1', '#FFFFFF1F' );
 		$this->eael_liquid_glass_effect_bg_color_effect( $element, 'effect2', '' );
-		$this->eael_liquid_glass_effect_bg_color_effect( $element, 'effect3', '#FFFFFF1F' );
 
 		// Background Color Controls for Pro
 		do_action( 'eael_liquid_glass_effect_bg_color_effect4', $element, 'effect4', '' );
@@ -231,7 +229,6 @@ class Liquid_Glass_Effect {
 		// Backdrop Filter Controls
 		$this->eael_liquid_glass_effect_backdrop_filter( $element, 'effect1', 24 );
 		$this->eael_liquid_glass_effect_backdrop_filter( $element, 'effect2', 20 );
-		$this->eael_liquid_glass_effect_backdrop_filter( $element, 'effect3', 16 );
 		
 		// Backdrop Filter Controls for Pro
 		do_action( 'eael_liquid_glass_effect_backdrop_filter_effect4', $element, 'effect4', 5 );
