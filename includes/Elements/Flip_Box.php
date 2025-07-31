@@ -1632,20 +1632,27 @@ class Flip_Box extends Widget_Base
             ]
         );
 
+        $eael_liquid_glass_effect = apply_filters(
+			'eael_liquid_glass_effect_filter',
+			[
+					'styles' => [
+						'effect1' => esc_html__( 'Effect 1', 'essential-addons-for-elementor-lite' ),
+						'effect2' => esc_html__( 'Effect 2', 'essential-addons-for-elementor-lite' ),
+						'effect4' => esc_html__( 'Effect 3 (Pro)', 'essential-addons-for-elementor-lite' ),
+						'effect5' => esc_html__( 'Effect 4 (Pro)', 'essential-addons-for-elementor-lite' ),
+						'effect6' => esc_html__( 'Effect 5 (Pro)', 'essential-addons-for-elementor-lite' ),
+				],
+				'conditions' => ['effect4', 'effect5', 'effect6'],
+			]
+        );
+
         $this->add_control(
             'eael_wd_liquid_glass_effect',
             [
                 'label'   => esc_html__( 'Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
                 'type'    => Controls_Manager::SELECT2,
                 'default' => 'effect1',
-                'options' => [
-                    'effect1' => esc_html__( 'Effect 1', 'essential-addons-for-elementor-lite' ),
-                    'effect2' => esc_html__( 'Effect 2', 'essential-addons-for-elementor-lite' ),
-                    'effect3' => esc_html__( 'Effect 3', 'essential-addons-for-elementor-lite' ),
-                    'effect4' => esc_html__( 'Effect 4', 'essential-addons-for-elementor-lite' ),
-                    'effect5' => esc_html__( 'Effect 5', 'essential-addons-for-elementor-lite' ),
-                    'effect6' => esc_html__( 'Effect 6', 'essential-addons-for-elementor-lite' ),
-                ],
+                'options' => $eael_liquid_glass_effect['styles'],
                 'prefix_class' => 'eael_wd_liquid_glass-',
                 'condition' => [
                     'eael_wd_liquid_glass_effect_switch' => 'yes',
@@ -1653,33 +1660,46 @@ class Flip_Box extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_settings',
-            [
-                'label'     => esc_html__( 'Liquid Glass Settings', 'essential-addons-for-elementor-lite' ),
-                'type'      => Controls_Manager::HEADING,
-                'separator' => 'before',
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch' => 'yes',
-                ]
-            ]
-        );
+        if ( !apply_filters('eael/pro_enabled', false ) ) {
+			$this->add_control(
+					'eael_wp_liquid_glass_effect_pro_alert',
+					[
+						'label'     => sprintf( '<a target="_blank" href="https://wpdeveloper.com/upgrade/ea-pro">%s</a>', esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite')),
+						'type'      => Controls_Manager::HEADING,
+                        'condition' => [
+						'eael_wd_liquid_glass_effect_switch' => 'yes',
+					]
+				]
+			);
+		} else {
+			$this->add_control(
+				'eael_wd_liquid_glass_effect_settings',
+				[
+					'label'     => esc_html__( 'Liquid Glass Settings', 'essential-addons-for-elementor-lite' ),
+					'type'      => Controls_Manager::HEADING,
+					'separator' => 'before',
+					'condition' => [
+						'eael_wd_liquid_glass_effect_switch' => 'yes',
+					]
+				]
+			);
+		}
 
         // Background Color Controls
         $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect1', '#FFFFFF1F', 'eael-elements-flip-box-front-container' );
-        $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect2', '', 'eael-elements-flip-box-front-container' );
-        $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect3', '#FFFFFF1F', 'eael-elements-flip-box-front-container' );
-        $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect4', '#FFFFFF1F', 'eael-elements-flip-box-front-container' );
-        $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect5', '', 'eael-elements-flip-box-front-container' );
-        $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect6', '', 'eael-elements-flip-box-front-container' );
+        $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect2', '#FFFFFF1F', 'eael-elements-flip-box-front-container' );
+
+        do_action( 'eael_wd_liquid_glass_effect_bg_color_effect4', $this, 'effect4', '#FFFFFF1F', 'eael-elements-flip-box-front-container' );
+        do_action( 'eael_wd_liquid_glass_effect_bg_color_effect5', $this, 'effect5', '', 'eael-elements-flip-box-front-container' );
+        do_action( 'eael_wd_liquid_glass_effect_bg_color_effect6', $this, 'effect6', '', 'eael-elements-flip-box-front-container' );
 
         // Backdrop Filter Controls
         $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect1', '24', 'eael-elements-flip-box-front-container' );
         $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect2', '20', 'eael-elements-flip-box-front-container' );
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect3', '16', 'eael-elements-flip-box-front-container' );
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect4', '', 'eael-elements-flip-box-front-container' );
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect5', '', 'eael-elements-flip-box-front-container' );
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect6', '', 'eael-elements-flip-box-front-container' );
+
+        do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect4', $this, 'effect4', '', 'eael-elements-flip-box-front-container' );
+        do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect5', $this, 'effect5', '', 'eael-elements-flip-box-front-container' );
+        do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect6', $this, 'effect6', '', 'eael-elements-flip-box-front-container' );
     }
 
     /**

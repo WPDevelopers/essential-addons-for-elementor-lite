@@ -2007,10 +2007,9 @@ class Info_Box extends Widget_Base
 					'styles' => [
 						'effect1' => esc_html__( 'Effect 1', 'essential-addons-for-elementor-lite' ),
 						'effect2' => esc_html__( 'Effect 2', 'essential-addons-for-elementor-lite' ),
-						'effect3' => esc_html__( 'Effect 3', 'essential-addons-for-elementor-lite' ),
-						'effect4' => esc_html__( 'Effect 4 (Pro)', 'essential-addons-for-elementor-lite' ),
-						'effect5' => esc_html__( 'Effect 5 (Pro)', 'essential-addons-for-elementor-lite' ),
-						'effect6' => esc_html__( 'Effect 6 (Pro)', 'essential-addons-for-elementor-lite' ),
+						'effect4' => esc_html__( 'Effect 3 (Pro)', 'essential-addons-for-elementor-lite' ),
+						'effect5' => esc_html__( 'Effect 4 (Pro)', 'essential-addons-for-elementor-lite' ),
+						'effect6' => esc_html__( 'Effect 5 (Pro)', 'essential-addons-for-elementor-lite' ),
 				],
 				'conditions' => ['effect4', 'effect5', 'effect6'],
 			]
@@ -2030,22 +2029,34 @@ class Info_Box extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_settings',
-            [
-                'label'     => esc_html__( 'Liquid Glass Settings', 'essential-addons-for-elementor-lite' ),
-                'type'      => Controls_Manager::HEADING,
-                'separator' => 'before',
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch' => 'yes',
-                ]
-            ]
-        );
+        if ( !apply_filters('eael/pro_enabled', false ) ) {
+			$this->add_control(
+					'eael_wp_liquid_glass_effect_pro_alert',
+					[
+						'label'     => sprintf( '<a target="_blank" href="https://wpdeveloper.com/upgrade/ea-pro">%s</a>', esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite')),
+						'type'      => Controls_Manager::HEADING,
+                        'condition' => [
+						'eael_wd_liquid_glass_effect_switch' => 'yes',
+					]
+				]
+			);
+		} else {
+			$this->add_control(
+				'eael_wd_liquid_glass_effect_settings',
+				[
+					'label'     => esc_html__( 'Liquid Glass Settings', 'essential-addons-for-elementor-lite' ),
+					'type'      => Controls_Manager::HEADING,
+					'separator' => 'before',
+					'condition' => [
+						'eael_wd_liquid_glass_effect_switch' => 'yes',
+					]
+				]
+			);
+		}
 
         // Background Color Controls
         $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect1', '#FFFFFF1F', 'eael-infobox-button' );
-        $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect2', '', 'eael-infobox-button' );
-        $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect3', '#FFFFFF1F', 'eael-infobox-button' );
+        $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect2', '#FFFFFF1F', 'eael-infobox-button' );
         
         // Liquid Glass Background Color Effects
         do_action( 'eael_wd_liquid_glass_effect_bg_color_effect4', $this, 'effect4', '#FFFFFF1F', 'eael-infobox-button' );
@@ -2055,7 +2066,6 @@ class Info_Box extends Widget_Base
         // Backdrop Filter Controls
         $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect1', '24', 'eael-infobox-button' );
         $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect2', '20', 'eael-infobox-button' );
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect3', '16', 'eael-infobox-button' );
         
         do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect4', $this, 'effect4', '', 'eael-infobox-button' );
         do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect5', $this, 'effect5', '', 'eael-infobox-button' );
