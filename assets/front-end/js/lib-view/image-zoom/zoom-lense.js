@@ -62,13 +62,14 @@
 
       const imgOffset = $img.offset();
 
-      // Calculate optimal position for zoom result window
-      function calculateOptimalPosition() {
+      // Calculate optimal position and adaptive size for zoom result window
+      function calculateOptimalPositionAndSize() {
         const imgWidth = $img.outerWidth();
         const imgHeight = $img.outerHeight();
-        const resultWidth = imgWidth;
-        const resultHeight = imgHeight;
+        const originalResultWidth = imgWidth;
+        const originalResultHeight = imgHeight;
         const gap = settings.gap;
+        const minSize = 150; // Minimum size constraint for usability
 
         // Get viewport dimensions
         const viewportWidth = $(window).width();
@@ -83,61 +84,132 @@
         const spaceTop = imgOffset.top - scrollTop;
 
         let position = { top: imgOffset.top, left: imgOffset.left };
+        let resultWidth = originalResultWidth;
+        let resultHeight = originalResultHeight;
 
-        // Priority sequence: right → left → bottom → top
-        if (spaceRight >= resultWidth + gap) {
-          // Position to the right (default behavior)
-          position.left = imgOffset.left + imgWidth + gap;
-          position.top = imgOffset.top;
-        } else if (spaceLeft >= resultWidth + gap) {
-          // Position to the left
-          position.left = imgOffset.left - resultWidth - gap;
-          position.top = imgOffset.top;
-        } else if (spaceBottom >= resultHeight + gap) {
-          // Position below
-          position.left = imgOffset.left;
-          position.top = imgOffset.top + imgHeight + gap;
-        } else if (spaceTop >= resultHeight + gap) {
-          // Position above
-          position.left = imgOffset.left;
-          position.top = imgOffset.top - resultHeight - gap;
-        } else {
-          // Fallback: position to right but ensure it stays within viewport
-          position.left = Math.min(
-            imgOffset.left + imgWidth + gap,
-            scrollLeft + viewportWidth - resultWidth - 10
-          );
-          position.top = Math.min(
-            imgOffset.top,
-            scrollTop + viewportHeight - resultHeight - 10
-          );
+        // Helper function to calculate adaptive size while maintaining aspect ratio
+        function calculateAdaptiveSize(availableWidth, availableHeight) {
+          const aspectRatio = originalResultWidth / originalResultHeight;
+          let adaptedWidth = Math.min(originalResultWidth, availableWidth - gap - 20); // 20px margin
+          let adaptedHeight = Math.min(originalResultHeight, availableHeight - gap - 20);
 
-          // Ensure minimum distance from left edge
-          position.left = Math.max(position.left, scrollLeft + 10);
-          position.top = Math.max(position.top, scrollTop + 10);
+          // Maintain aspect ratio
+          if (adaptedWidth / aspectRatio > adaptedHeight) {
+            adaptedWidth = adaptedHeight * aspectRatio;
+          } else {
+            adaptedHeight = adaptedWidth / aspectRatio;
+          }
+
+          // Apply minimum size constraints
+          if (adaptedWidth < minSize || adaptedHeight < minSize) {
+            if (aspectRatio >= 1) {
+              adaptedWidth = minSize;
+              adaptedHeight = minSize / aspectRatio;
+            } else {
+              adaptedHeight = minSize;
+              adaptedWidth = minSize * aspectRatio;
+            }
+          }
+
+          return { width: adaptedWidth, height: adaptedHeight };
         }
 
-        return position;
+        // Priority sequence: right → left → bottom → top with adaptive sizing
+        if (spaceRight >= originalResultWidth + gap) {
+          // Position to the right (default behavior) - full size
+          position.left = imgOffset.left + imgWidth + gap;
+          position.top = imgOffset.top;
+        } else if (spaceLeft >= originalResultWidth + gap) {
+          // Position to the left - full size
+          position.left = imgOffset.left - originalResultWidth - gap;
+          position.top = imgOffset.top;
+        } else if (spaceBottom >= originalResultHeight + gap) {
+          // Position below - full size
+          position.left = imgOffset.left;
+          position.top = imgOffset.top + imgHeight + gap;
+        } else if (spaceTop >= originalResultHeight + gap) {
+          // Position above - full size
+          position.left = imgOffset.left;
+          position.top = imgOffset.top - originalResultHeight - gap;
+        } else {
+          // Adaptive sizing needed - find best direction and resize accordingly
+          const directions = [
+            { space: spaceRight, direction: 'right', availableWidth: spaceRight, availableHeight: viewportHeight },
+            { space: spaceLeft, direction: 'left', availableWidth: spaceLeft, availableHeight: viewportHeight },
+            { space: spaceBottom, direction: 'bottom', availableWidth: viewportWidth, availableHeight: spaceBottom },
+            { space: spaceTop, direction: 'top', availableWidth: viewportWidth, availableHeight: spaceTop }
+          ];
+
+          // Sort by available space (largest first)
+          directions.sort((a, b) => b.space - a.space);
+          const bestDirection = directions[0];
+
+          // Calculate adaptive size for the best direction
+          const adaptiveSize = calculateAdaptiveSize(bestDirection.availableWidth, bestDirection.availableHeight);
+          resultWidth = adaptiveSize.width;
+          resultHeight = adaptiveSize.height;
+
+          // Position based on best direction
+          switch (bestDirection.direction) {
+            case 'right':
+              position.left = imgOffset.left + imgWidth + gap;
+              position.top = imgOffset.top;
+              break;
+            case 'left':
+              position.left = imgOffset.left - resultWidth - gap;
+              position.top = imgOffset.top;
+              break;
+            case 'bottom':
+              position.left = imgOffset.left;
+              position.top = imgOffset.top + imgHeight + gap;
+              break;
+            case 'top':
+              position.left = imgOffset.left;
+              position.top = imgOffset.top - resultHeight - gap;
+              break;
+          }
+
+          // Ensure result window stays within viewport boundaries
+          position.left = Math.max(scrollLeft + 10, Math.min(position.left, scrollLeft + viewportWidth - resultWidth - 10));
+          position.top = Math.max(scrollTop + 10, Math.min(position.top, scrollTop + viewportHeight - resultHeight - 10));
+        }
+
+        return {
+          position: position,
+          width: resultWidth,
+          height: resultHeight,
+          scaleX: resultWidth / originalResultWidth,
+          scaleY: resultHeight / originalResultHeight
+        };
       }
 
-      const optimalPosition = calculateOptimalPosition();
+      const optimalConfig = calculateOptimalPositionAndSize();
 
       $result.css({
-        width: $img.outerWidth(),
-        height: $img.outerHeight(),
-        top: optimalPosition.top,
-        left: optimalPosition.left,
+        width: optimalConfig.width,
+        height: optimalConfig.height,
+        top: optimalConfig.position.top,
+        left: optimalConfig.position.left,
         backgroundImage: `url(${$img.attr('src')})`,
-        backgroundSize: `${$img.outerWidth() * ($img.outerWidth() / lensWidth)}px ${$img.outerHeight() * ($img.outerHeight() / lensHeight)}px`
+        backgroundSize: `${$img.outerWidth() * (optimalConfig.width / lensWidth)}px ${$img.outerHeight() * (optimalConfig.height / lensHeight)}px`
       });
 
-      // Function to update result window position dynamically
+      // Store initial configuration for adaptive sizing
+      $result.data('currentConfig', optimalConfig);
+
+      // Function to update result window position and size dynamically
       function updateResultPosition() {
-        const optimalPosition = calculateOptimalPosition();
+        const optimalConfig = calculateOptimalPositionAndSize();
         $result.css({
-          top: optimalPosition.top,
-          left: optimalPosition.left
+          width: optimalConfig.width,
+          height: optimalConfig.height,
+          top: optimalConfig.position.top,
+          left: optimalConfig.position.left,
+          backgroundSize: `${$img.outerWidth() * (optimalConfig.width / lensWidth)}px ${$img.outerHeight() * (optimalConfig.height / lensHeight)}px`
         });
+
+        // Store current config for moveLens function
+        $result.data('currentConfig', optimalConfig);
       }
 
       function moveLens(ev) {
@@ -163,8 +235,11 @@
           display: 'block'
         });
 
-        const cx = $result.width() / lensWidth;
-        const cy = $result.height() / lensHeight;
+        // Get current result window configuration for adaptive sizing
+        const currentConfig = $result.data('currentConfig') || { width: $result.width(), height: $result.height() };
+
+        const cx = currentConfig.width / lensWidth;
+        const cy = currentConfig.height / lensHeight;
 
         $result.css({
           display: 'block',
@@ -197,8 +272,11 @@
             left: currentOffset.left + dx
           });
 
-          const cx = $result.width() / lensWidth;
-          const cy = $result.height() / lensHeight;
+          // Get current result window configuration for adaptive sizing
+          const currentConfig = $result.data('currentConfig') || { width: $result.width(), height: $result.height() };
+
+          const cx = currentConfig.width / lensWidth;
+          const cy = currentConfig.height / lensHeight;
 
           const imgOffset = $img.offset();
           $result.css({
