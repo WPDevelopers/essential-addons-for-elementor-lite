@@ -10974,7 +10974,7 @@ msgstr ""
 msgid "Enhance Your Elementor Experience By <br/> <b>Unlocking</b> <span class='Advance-color'>40+ Advanced PRO</span> <b>Elements</b>"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:376, ../includes/Traits/Admin.php:1857
+#: ../includes/Traits/Admin.php:376
 msgid "Upgrade To PRO"
 msgstr ""
 
@@ -11395,19 +11395,11 @@ msgid "Never show again"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:1848
-msgid "🛍️ This <strong>Black Friday</strong> enjoy up to 30% OFF on PRO plans. Get the best Essential Addons deal of the season now."
+msgid "Join us in celebrating the 8th birthday of Essential Addons and grab up to an exclusive 40% OFF on all the premium plans."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1863
-msgid "🎁 <strong>SAVE 25% now</strong> & unlock 100+ advanced elements & 2800+ ready templates to design Elementor websites faster in 2025."
-msgstr ""
-
-#: ../includes/Traits/Admin.php:1873
-msgid "GET PRO Lifetime Access"
-msgstr ""
-
-#: ../includes/Traits/Admin.php:1875
-msgid "No, I'll Pay Full Price Later"
+#: ../includes/Traits/Admin.php:1857
+msgid "Upgrade To PRO Now"
 msgstr ""
 
 #: ../includes/Traits/Ajax_Handler.php:94, ../includes/Traits/Ajax_Handler.php:618, ../includes/Traits/Login_Registration.php:96, ../includes/Traits/Login_Registration.php:263, ../includes/Traits/Login_Registration.php:786, ../includes/Traits/Login_Registration.php:998

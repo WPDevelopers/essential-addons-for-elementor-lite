@@ -206,6 +206,12 @@
   vertical-align: middle;
   padding: 10px 0;
 }
+.woocommerce div.product .eael-single-product-add-to-cart form.cart .variations td .reset_variations,
+.woocommerce div.product .eael-single-product-add-to-cart form.cart .variations th .reset_variations,
+.woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart .variations td .reset_variations,
+.woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart .variations th .reset_variations {
+  line-height: 30px;
+}
 .woocommerce div.product .eael-single-product-add-to-cart .variations_button,
 .woocommerce .dialog-widget-content .eael-single-product-add-to-cart .variations_button {
   display: -webkit-box;
