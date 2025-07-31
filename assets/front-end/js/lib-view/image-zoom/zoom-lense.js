@@ -61,14 +61,84 @@
       }).appendTo('body');
 
       const imgOffset = $img.offset();
+
+      // Calculate optimal position for zoom result window
+      function calculateOptimalPosition() {
+        const imgWidth = $img.outerWidth();
+        const imgHeight = $img.outerHeight();
+        const resultWidth = imgWidth;
+        const resultHeight = imgHeight;
+        const gap = settings.gap;
+
+        // Get viewport dimensions
+        const viewportWidth = $(window).width();
+        const viewportHeight = $(window).height();
+        const scrollLeft = $(window).scrollLeft();
+        const scrollTop = $(window).scrollTop();
+
+        // Calculate available space in each direction
+        const spaceRight = viewportWidth - (imgOffset.left - scrollLeft + imgWidth);
+        const spaceLeft = imgOffset.left - scrollLeft;
+        const spaceBottom = viewportHeight - (imgOffset.top - scrollTop + imgHeight);
+        const spaceTop = imgOffset.top - scrollTop;
+
+        let position = { top: imgOffset.top, left: imgOffset.left };
+
+        // Priority sequence: right → left → bottom → top
+        if (spaceRight >= resultWidth + gap) {
+          // Position to the right (default behavior)
+          position.left = imgOffset.left + imgWidth + gap;
+          position.top = imgOffset.top;
+        } else if (spaceLeft >= resultWidth + gap) {
+          // Position to the left
+          position.left = imgOffset.left - resultWidth - gap;
+          position.top = imgOffset.top;
+        } else if (spaceBottom >= resultHeight + gap) {
+          // Position below
+          position.left = imgOffset.left;
+          position.top = imgOffset.top + imgHeight + gap;
+        } else if (spaceTop >= resultHeight + gap) {
+          // Position above
+          position.left = imgOffset.left;
+          position.top = imgOffset.top - resultHeight - gap;
+        } else {
+          // Fallback: position to right but ensure it stays within viewport
+          position.left = Math.min(
+            imgOffset.left + imgWidth + gap,
+            scrollLeft + viewportWidth - resultWidth - 10
+          );
+          position.top = Math.min(
+            imgOffset.top,
+            scrollTop + viewportHeight - resultHeight - 10
+          );
+
+          // Ensure minimum distance from left edge
+          position.left = Math.max(position.left, scrollLeft + 10);
+          position.top = Math.max(position.top, scrollTop + 10);
+        }
+
+        return position;
+      }
+
+      const optimalPosition = calculateOptimalPosition();
+
       $result.css({
         width: $img.outerWidth(),
         height: $img.outerHeight(),
-        top: imgOffset.top,
-        left: imgOffset.left + $img.outerWidth() + settings.gap,
+        top: optimalPosition.top,
+        left: optimalPosition.left,
         backgroundImage: `url(${$img.attr('src')})`,
         backgroundSize: `${$img.outerWidth() * ($img.outerWidth() / lensWidth)}px ${$img.outerHeight() * ($img.outerHeight() / lensHeight)}px`
       });
+
+      // Function to update result window position dynamically
+      function updateResultPosition() {
+        const optimalPosition = calculateOptimalPosition();
+        $result.css({
+          top: optimalPosition.top,
+          left: optimalPosition.left
+        });
+      }
 
       function moveLens(ev) {
         const evt = ev.originalEvent.touches ? ev.originalEvent.touches[0] : ev;
@@ -140,11 +210,14 @@
 
       $(document).on('mousemove.' + zoomId + ' touchmove.' + zoomId, moveLens);
 
+      // Add event listeners for dynamic repositioning
+      $(window).on('scroll.' + zoomId + ' resize.' + zoomId, updateResultPosition);
+
       $img.on('mouseleave.' + zoomId + ' touchend.' + zoomId, function () {
         $lens.remove();
         $result.remove();
         $(document).off('mousemove.' + zoomId + ' touchmove.' + zoomId);
-        $(window).off('wheel.' + zoomId);
+        $(window).off('wheel.' + zoomId + ' scroll.' + zoomId + ' resize.' + zoomId);
         $img.off('mouseleave.' + zoomId + ' touchend.' + zoomId);
       });
 
