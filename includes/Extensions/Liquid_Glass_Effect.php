@@ -229,6 +229,32 @@ class Liquid_Glass_Effect {
 		// Backdrop Filter Controls
 		$this->eael_liquid_glass_effect_backdrop_filter( $element, 'effect1', 24 );
 		$this->eael_liquid_glass_effect_backdrop_filter( $element, 'effect2', 20 );
+
+		// Brightness Effect Controls
+		$element->add_control(
+			'eael_liquid_glass_effect_brightness_effect2',
+			[
+				'label' => esc_html__( 'Brightness', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 5,
+						'step' => .1,
+					],
+				],
+				'default' => [
+					'size' => 1,
+				],
+				'selectors' => [
+					'{{WRAPPER}}.eael_liquid_glass-effect2' => 'backdrop-filter: blur({{eael_liquid_glass_effect_backdrop_filter_effect2.SIZE}}px) brightness({{SIZE}});',
+				],
+				'condition'    => [
+					'eael_liquid_glass_effect_switch' => 'yes',
+					'eael_liquid_glass_effect'        => 'effect2',
+				]
+			]
+		);
 		
 		// Backdrop Filter Controls for Pro
 		do_action( 'eael_liquid_glass_effect_backdrop_filter_effect4', $element, 'effect4', 5 );
