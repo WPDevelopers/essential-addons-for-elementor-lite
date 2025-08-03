@@ -302,6 +302,7 @@ class Login_Register extends Widget_Base {
 		$this->init_content_terms_controls();
 		// Error Messages
 		$this->init_content_validation_messages_controls();
+		do_action( 'eael/login-register/animated-character-controls', $this );
 		do_action( 'eael/login-register/after-content-controls', $this );
 
 		if(!$this->pro_enabled){
