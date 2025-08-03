@@ -379,38 +379,6 @@ class Liquid_Glass_Effect {
 
 	public function before_render( $element ) {
 		$settings = $element->get_settings_for_display();
-
-		// Get the current effect type
-		$effect_type = $settings['eael_liquid_glass_effect'] ?? '';
-
-		// Initialize strength and freq variables
-		$strength = null;
-		$freq = null;
-
-		// Get effect-specific noise settings based on the selected effect
-		switch( $effect_type ) {
-			case 'effect4':
-				$strength = $settings['eael_liquid_glass_effect_noise_strength_effect4']['size'] ?? null;
-				$freq = $settings['eael_liquid_glass_effect_noise_freq_effect4']['size'] ?? null;
-				break;
-			case 'effect5':
-				$strength = $settings['eael_liquid_glass_effect_noise_strength_effect5']['size'] ?? null;
-				$freq = $settings['eael_liquid_glass_effect_noise_freq_effect5']['size'] ?? null;
-				break;
-			case 'effect6':
-				$strength = $settings['eael_liquid_glass_effect_noise_strength_effect6']['size'] ?? null;
-				$freq = $settings['eael_liquid_glass_effect_noise_freq_effect6']['size'] ?? null;
-				break;
-		}
-
-		// Add render attribute if we have valid strength or freq values
-		if( !empty( $strength ) || !empty( $freq ) ) {
-			$strength_settings = [
-				'scale' => $strength ?? 77, // Default value
-				'freq' => $freq ?? 0.008,   // Default value
-			];
-			$element->add_render_attribute( '_wrapper', 'data-eael_glass_effects', wp_json_encode( $strength_settings ) );
-		}
 	}
 
 	public function eael_liquid_glass_effect_svg_render( $content, $element ) {
