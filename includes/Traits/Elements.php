@@ -42,32 +42,6 @@ trait Elements {
 	}
 
 	/**
-	 * Liquid Glass Effect SVG
-	 */
-	public function eael_liquid_glass_effect_svg() {
-		?>
-		<svg style="display: none">
-			<filter id="eael-glass-distortion1" x="0%" y="0%" width="100%" height="100%">
-            <feTurbulence type="fractalNoise" baseFrequency="0.008 0.008" numOctaves="2" seed="92" result="noise" />
-            <feGaussianBlur in="noise" stdDeviation="0.02" result="blur" />
-            <feDisplacementMap in="SourceGraphic" in2="blur" scale="77" xChannelSelector="R" yChannelSelector="G" />
-         </filter>
-
-			<filter id="eael-glass-distortion2" x="0%" y="0%" width="100%" height="100%">
-				<feTurbulence type="fractalNoise" baseFrequency="1.008 1.008" numOctaves="1" seed="9000" result="noise" />
-				<feGaussianBlur in="noise" stdDeviation="0.1" result="blurred" />
-				<feDisplacementMap in="SourceGraphic" in2="blurred" scale="77" xChannelSelector="R" yChannelSelector="G" />
-         </filter>
-
-			<filter id="eael-glass-distortion3">
-				<feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" result="turbulence"/>
-				<feDisplacementMap in2="turbulence" in="SourceGraphic" scale="30" xChannelSelector="R" yChannelSelector="G"/>
-			</filter>
-      </svg>
-		<?php
-	}
-
-	/**
 	 * Register widgets
 	 *
 	 * @since v3.0.0

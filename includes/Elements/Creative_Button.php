@@ -717,6 +717,9 @@ use HelperTrait;
         do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect4', $this, 'effect4', '', 'eael-creative-button' );
         do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect5', $this, 'effect5', '', 'eael-creative-button' );
         do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect6', $this, 'effect6', '', 'eael-creative-button' );
+
+        // Noise Distortion Settings (Pro)
+		do_action( 'eael_wd_liquid_glass_effect_noise_action', $this );
     }
 
     /**
@@ -881,7 +884,7 @@ use HelperTrait;
         <div class="eael-creative-button-wrapper">
 
             <a <?php $this->print_render_attribute_string('eael_creative_button'); ?>>
-
+            <?php do_action( 'eael_wd_liquid_glass_effect_svg_pro', $this, $settings, '.eael-creative-button' ); ?>
 	    <?php if ($settings['creative_button_effect'] === 'eael-creative-button--tamaya' ) : ?>
             <div class="eael-creative-button--tamaya-secondary eael-creative-button--tamaya-before"><span><?php echo wp_kses( $settings['creative_button_secondary_text'], Helper::eael_allowed_tags() ); ?></span></div>
         <?php endif; ?>

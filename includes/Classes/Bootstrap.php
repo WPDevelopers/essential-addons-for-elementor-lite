@@ -153,9 +153,6 @@ class Bootstrap
         add_action('wp_ajax_facebook_feed_load_more', [$this, 'facebook_feed_render_items']);
         add_action('wp_ajax_nopriv_facebook_feed_load_more', [$this, 'facebook_feed_render_items']);
 
-        //Liquid Glass Effect
-        add_action( 'wp_footer', [ $this, 'eael_liquid_glass_effect_svg' ] );
-
         // Compare table
 	    add_action( 'wp_ajax_nopriv_eael_product_grid', [$this, 'get_compare_table']);
 	    add_action( 'wp_ajax_eael_product_grid', [$this, 'get_compare_table']);
