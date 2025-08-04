@@ -1963,6 +1963,9 @@ class Info_Box extends Widget_Base
 			[
 				'label' => esc_html__( 'Liquid Glass Effect', 'essential-addons-for-elementor-lite' ),
 				'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_show_infobox_button' => 'yes',
+                ],
 			]
 		);
 
@@ -2031,12 +2034,13 @@ class Info_Box extends Widget_Base
 
         if ( !apply_filters('eael/pro_enabled', false ) ) {
 			$this->add_control(
-					'eael_wp_liquid_glass_effect_pro_alert',
+					'eael_wd_liquid_glass_effect_pro_alert',
 					[
-						'label'     => sprintf( '<a target="_blank" href="https://wpdeveloper.com/upgrade/ea-pro">%s</a>', esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite')),
+						'label'     => sprintf( '<a class="eael_pro_alert" target="_blank" href="https://wpdeveloper.com/upgrade/ea-pro">%s</a>', esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite')),
 						'type'      => Controls_Manager::HEADING,
                         'condition' => [
 						'eael_wd_liquid_glass_effect_switch' => 'yes',
+                        'eael_wd_liquid_glass_effect' => ['effect4', 'effect5', 'effect6'],
 					]
 				]
 			);
@@ -2070,6 +2074,9 @@ class Info_Box extends Widget_Base
         do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect4', $this, 'effect4', '', 'eael-infobox-button' );
         do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect5', $this, 'effect5', '', 'eael-infobox-button' );
         do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect6', $this, 'effect6', '', 'eael-infobox-button' );
+
+        // Noise Distortion Settings (Pro)
+		do_action( 'eael_wd_liquid_glass_effect_noise_action', $this );
     }
 
     /**
@@ -2429,6 +2436,7 @@ class Info_Box extends Widget_Base
         ?>
         <div class="infobox-button">
             <a <?php $this->print_render_attribute_string('infobox_button'); ?>>
+                <?php do_action( 'eael_wd_liquid_glass_effect_svg_pro', $this, $settings, '.eael-infobox-button' ); ?>
                 <?php if ('left' == $settings['eael_infobox_button_icon_alignment']): ?>
                     <?php if ($button_icon_is_new || $button_icon_migrated) {?>
                         <?php if (isset($settings['eael_infobox_button_icon_new']['value']['url'])) {?>
