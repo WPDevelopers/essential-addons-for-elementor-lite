@@ -634,12 +634,13 @@ class Image_Accordion extends Widget_Base {
 
         if ( !apply_filters('eael/pro_enabled', false ) ) {
 			$this->add_control(
-					'eael_wp_liquid_glass_effect_pro_alert',
+					'eael_wd_liquid_glass_effect_pro_alert',
 					[
-						'label'     => sprintf( '<a target="_blank" href="https://wpdeveloper.com/upgrade/ea-pro">%s</a>', esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite')),
+						'label'     => sprintf( '<a class="eael_pro_alert" target="_blank" href="https://wpdeveloper.com/upgrade/ea-pro">%s</a>', esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite')),
 						'type'      => Controls_Manager::HEADING,
                         'condition' => [
 						'eael_wd_liquid_glass_effect_switch' => 'yes',
+                        'eael_wd_liquid_glass_effect' => ['effect4', 'effect5', 'effect6'],
 					]
 				]
 			);
@@ -672,6 +673,9 @@ class Image_Accordion extends Widget_Base {
         do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect4', $this, 'effect4', '', 'eael-img-accordion .overlay-active .overlay' );
         do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect5', $this, 'effect5', '', 'eael-img-accordion .overlay-active .overlay' );
         do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect6', $this, 'effect6', '', 'eael-img-accordion .overlay-active .overlay' );
+
+        // Noise Distortion Settings (Pro)
+		do_action( 'eael_wd_liquid_glass_effect_noise_action', $this );
     }
 
     /**
@@ -849,6 +853,7 @@ class Image_Accordion extends Widget_Base {
 
             <div <?php $this->print_render_attribute_string( 'eael-image-accordion-item-wrapper-' . $key ); ?>  tabindex="0">
                 <div class="overlay">
+                    <?php do_action( 'eael_wd_liquid_glass_effect_svg_pro', $this, $settings, '.overlay-active' ); ?>
                     <div class="overlay-inner <?php echo( $active === 'yes' ? ' overlay-inner-show' : '' ); ?>">
                         <?php
                         $title_linked = false;
