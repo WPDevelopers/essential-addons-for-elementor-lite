@@ -627,7 +627,7 @@ trait Helper
 					'type'      => Controls_Manager::COLOR,
 					'default'   => $default_bg_color,
 					'selectors' => [
-						'{{WRAPPER}}.eael_wd_liquid_glass-'.$effect .' .' . $selector => 'background-color: {{VALUE}}',
+						'{{WRAPPER}}.eael_wd_liquid_glass-'.$effect .' ' . $selector => 'background-color: {{VALUE}}',
 					],
 					'condition' => [
 						'eael_wd_liquid_glass_effect_switch' => 'yes',
@@ -655,7 +655,7 @@ trait Helper
 						'size' => $default_size,
 					],
 					'selectors' => [
-						'{{WRAPPER}}.eael_wd_liquid_glass-'.$effect .' .' . $selector => 'backdrop-filter: blur({{SIZE}}px)',
+						'{{WRAPPER}}.eael_wd_liquid_glass-'.$effect .' ' . $selector => 'backdrop-filter: blur({{SIZE}}px)',
 					],
 					'condition' => [
 						'eael_wd_liquid_glass_effect_switch' => 'yes',
@@ -674,7 +674,7 @@ trait Helper
 					'type'      => Controls_Manager::COLOR,
 					'default'   => $default_bg_color,
 					'selectors' => [
-						'{{WRAPPER}}.eael_wd_liquid_glass_rear-'.$effect .' .' . $selector => 'background-color: {{VALUE}}',
+						'{{WRAPPER}}.eael_wd_liquid_glass_rear-'.$effect .' ' . $selector => 'background-color: {{VALUE}}',
 					],
 					'condition' => [
 						'eael_wd_liquid_glass_effect_switch_rear' => 'yes',
@@ -702,7 +702,7 @@ trait Helper
 						'size' => $default_size,
 					],
 					'selectors' => [
-						'{{WRAPPER}}.eael_wd_liquid_glass_rear-'.$effect .' .' . $selector => 'backdrop-filter: blur({{SIZE}}px)',
+						'{{WRAPPER}}.eael_wd_liquid_glass_rear-'.$effect .' ' . $selector => 'backdrop-filter: blur({{SIZE}}px)',
 					],
 					'condition' => [
 						'eael_wd_liquid_glass_effect_switch_rear' => 'yes',
@@ -735,7 +735,7 @@ trait Helper
 					'default' => $default_color,
 				],
 			],
-			'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-'.$effect .' .'.$selector,
+			'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-'.$effect .' '.$selector,
 			'condition' => [
 				'eael_wd_liquid_glass_effect_switch'  => 'yes',
 				'eael_wd_liquid_glass_shadow_effect' => $effect,
@@ -754,7 +754,7 @@ trait Helper
 			'size_units' => [ 'px', '%', 'rem', 'custom' ],
 			'default' => $default_radius,
 			'selectors'  => [
-				'{{WRAPPER}}.eael_wd_liquid_glass_shadow-'.$effect.' .'.$selector => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				'{{WRAPPER}}.eael_wd_liquid_glass_shadow-'.$effect.' '.$selector => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 			'condition' => [
 				'eael_wd_liquid_glass_effect_switch' => 'yes',
@@ -776,7 +776,7 @@ trait Helper
 							'default' => $default_shadow,
 						],
 					],
-					'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-'.$effect.' .' . $selector,
+					'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-'.$effect.' ' . $selector,
 					'condition' => [
 						'eael_wd_liquid_glass_effect_switch'  => 'yes',
 						'eael_wd_liquid_glass_shadow_effect' => $effect,

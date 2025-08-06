@@ -1687,16 +1687,16 @@ class Flip_Box extends Widget_Base
 		}
 
         // Background Color Controls
-        $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect1', '#FFFFFF1F', 'eael-elements-flip-box-front-container' );
-        $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect2', '#FFFFFF1F', 'eael-elements-flip-box-front-container' );
+        $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect1', '#FFFFFF1F', '.eael-elements-flip-box-front-container' );
+        $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect2', '#FFFFFF1F', '.eael-elements-flip-box-front-container' );
 
-        do_action( 'eael_wd_liquid_glass_effect_bg_color_effect4', $this, 'effect4', '#FFFFFF1F', 'eael-elements-flip-box-front-container' );
-        do_action( 'eael_wd_liquid_glass_effect_bg_color_effect5', $this, 'effect5', '#FFFFFF1F', 'eael-elements-flip-box-front-container' );
-        do_action( 'eael_wd_liquid_glass_effect_bg_color_effect6', $this, 'effect6', '#FFFFFF1F', 'eael-elements-flip-box-front-container' );
+        do_action( 'eael_wd_liquid_glass_effect_bg_color_effect4', $this, 'effect4', '#FFFFFF1F', '.eael-elements-flip-box-front-container' );
+        do_action( 'eael_wd_liquid_glass_effect_bg_color_effect5', $this, 'effect5', '#FFFFFF1F', '.eael-elements-flip-box-front-container' );
+        do_action( 'eael_wd_liquid_glass_effect_bg_color_effect6', $this, 'effect6', '#FFFFFF1F', '.eael-elements-flip-box-front-container' );
 
         // Backdrop Filter Controls
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect1', '24', 'eael-elements-flip-box-front-container' );
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect2', '20', 'eael-elements-flip-box-front-container' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect1', '24', '.eael-elements-flip-box-front-container' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect2', '20', '.eael-elements-flip-box-front-container' );
 
         // Brightness Effect Controls
 		$this->add_control(
@@ -1724,9 +1724,9 @@ class Flip_Box extends Widget_Base
 			]
 		);
 
-        do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect4', $this, 'effect4', '', 'eael-elements-flip-box-front-container' );
-        do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect5', $this, 'effect5', '', 'eael-elements-flip-box-front-container' );
-        do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect6', $this, 'effect6', '', 'eael-elements-flip-box-front-container' );
+        do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect4', $this, 'effect4', '', '.eael-elements-flip-box-front-container' );
+        do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect5', $this, 'effect5', '', '.eael-elements-flip-box-front-container' );
+        do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect6', $this, 'effect6', '', '.eael-elements-flip-box-front-container' );
 
         // Noise Distortion Settings (Pro)
 		do_action( 'eael_wd_liquid_glass_effect_noise_action', $this );
@@ -1771,13 +1771,13 @@ class Flip_Box extends Widget_Base
 		);
 
         // Liquid Glass Border Effects
-        $this->eael_wd_liquid_glass_border_effect( $this, 'effect1', '#FFFFFF1F', 'eael-elements-flip-box-front-container' );
-        $this->eael_wd_liquid_glass_border_effect( $this, 'effect2', '#FFFFFF1F', 'eael-elements-flip-box-front-container' );
-        $this->eael_wd_liquid_glass_border_effect( $this, 'effect3', '#FFFFFF1F', 'eael-elements-flip-box-front-container' );
-        $this->eael_wd_liquid_glass_border_effect( $this, 'effect4', '#FFFFFF1F', 'eael-elements-flip-box-front-container' );
+        $this->eael_wd_liquid_glass_border_effect( $this, 'effect1', '#FFFFFF1F', '.eael-elements-flip-box-front-container' );
+        $this->eael_wd_liquid_glass_border_effect( $this, 'effect2', '#FFFFFF1F', '.eael-elements-flip-box-front-container' );
+        $this->eael_wd_liquid_glass_border_effect( $this, 'effect3', '#FFFFFF1F', '.eael-elements-flip-box-front-container' );
+        $this->eael_wd_liquid_glass_border_effect( $this, 'effect4', '#FFFFFF1F', '.eael-elements-flip-box-front-container' );
 
         // Liquid Glass Border Radius Effects
-        $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect1', 'eael-elements-flip-box-front-container',
+        $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect1', '.eael-elements-flip-box-front-container',
             [
                 'top' 	  => 24,
                 'right'    => 24,
@@ -1788,7 +1788,7 @@ class Flip_Box extends Widget_Base
             ]
         );
 
-        $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect2', 'eael-elements-flip-box-front-container',
+        $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect2', '.eael-elements-flip-box-front-container',
             [
                 'top' 	  => 16,
                 'right'    => 16,
@@ -1799,7 +1799,7 @@ class Flip_Box extends Widget_Base
             ]
         );
 
-        $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect3', 'eael-elements-flip-box-front-container',
+        $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect3', '.eael-elements-flip-box-front-container',
             [
                 'top' 	  => 8,
                 'bottom'   => 8,
@@ -1810,7 +1810,7 @@ class Flip_Box extends Widget_Base
             ]
         );
 
-        $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect4', 'eael-elements-flip-box-front-container',
+        $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect4', '.eael-elements-flip-box-front-container',
             [
                 'top' 	  => 24,
                 'bottom'   => 24,
@@ -1822,7 +1822,7 @@ class Flip_Box extends Widget_Base
         );
 
         // Liquid Glass Shadow Effects
-        $this->eael_wd_liquid_glass_shadow_effect($this, 'effect1', 'eael-elements-flip-box-front-container',
+        $this->eael_wd_liquid_glass_shadow_effect($this, 'effect1', '.eael-elements-flip-box-front-container',
             [
                 'color'      => 'rgba(0,0,0,0.78)',
                 'horizontal' => 0,
@@ -1832,7 +1832,7 @@ class Flip_Box extends Widget_Base
             ]
         );
 
-        $this->eael_wd_liquid_glass_shadow_effect($this, 'effect2', 'eael-elements-flip-box-front-container',
+        $this->eael_wd_liquid_glass_shadow_effect($this, 'effect2', '.eael-elements-flip-box-front-container',
             [
                 'color'      => '#383C65',
                 'horizontal' => 0,
@@ -1842,7 +1842,7 @@ class Flip_Box extends Widget_Base
             ]
         );
 
-        $this->eael_wd_liquid_glass_shadow_effect($this, 'effect3', 'eael-elements-flip-box-front-container',
+        $this->eael_wd_liquid_glass_shadow_effect($this, 'effect3', '.eael-elements-flip-box-front-container',
             [
                 'color'      => 'rgba(255, 255, 255, 0.4)',
                 'horizontal' => 1,
@@ -1852,7 +1852,7 @@ class Flip_Box extends Widget_Base
             ]
         );
 
-        $this->eael_wd_liquid_glass_shadow_effect($this, 'effect4', 'eael-elements-flip-box-front-container',
+        $this->eael_wd_liquid_glass_shadow_effect($this, 'effect4', '.eael-elements-flip-box-front-container',
             [
                 'color'      => '#00000040',
                 'horizontal' => 0,
@@ -1944,17 +1944,17 @@ class Flip_Box extends Widget_Base
 		}
 
         // Background Color Controls
-        $this->eael_wd_liquid_glass_effect_bg_color_effect_rear( $this, 'effect1', '#FFFFFF1F', 'eael-elements-flip-box-rear-container' );
-        $this->eael_wd_liquid_glass_effect_bg_color_effect_rear( $this, 'effect2', '#FFFFFF1F', 'eael-elements-flip-box-rear-container' );
+        $this->eael_wd_liquid_glass_effect_bg_color_effect_rear( $this, 'effect1', '#FFFFFF1F', '.eael-elements-flip-box-rear-container' );
+        $this->eael_wd_liquid_glass_effect_bg_color_effect_rear( $this, 'effect2', '#FFFFFF1F', '.eael-elements-flip-box-rear-container' );
 
 
-        do_action( 'eael_wd_liquid_glass_effect_bg_color_rear_effect4', $this, 'effect4', '#FFFFFF1F', 'eael-elements-flip-box-rear-container' );
-        do_action( 'eael_wd_liquid_glass_effect_bg_color_rear_effect5', $this, 'effect5', '#FFFFFF1F', 'eael-elements-flip-box-rear-container' );
-        do_action( 'eael_wd_liquid_glass_effect_bg_color_rear_effect6', $this, 'effect6', '#FFFFFF1F', 'eael-elements-flip-box-rear-container' );
+        do_action( 'eael_wd_liquid_glass_effect_bg_color_rear_effect4', $this, 'effect4', '#FFFFFF1F', '.eael-elements-flip-box-rear-container' );
+        do_action( 'eael_wd_liquid_glass_effect_bg_color_rear_effect5', $this, 'effect5', '#FFFFFF1F', '.eael-elements-flip-box-rear-container' );
+        do_action( 'eael_wd_liquid_glass_effect_bg_color_rear_effect6', $this, 'effect6', '#FFFFFF1F', '.eael-elements-flip-box-rear-container' );
 
         // Backdrop Filter Controls
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect_rear( $this, 'effect1', '24', 'eael-elements-flip-box-rear-container' );
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect_rear( $this, 'effect2', '20', 'eael-elements-flip-box-rear-container' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect_rear( $this, 'effect1', '24', '.eael-elements-flip-box-rear-container' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect_rear( $this, 'effect2', '20', '.eael-elements-flip-box-rear-container' );
 
         // Brightness Effect Controls
 		$this->add_control(
@@ -1982,9 +1982,9 @@ class Flip_Box extends Widget_Base
 			]
 		);
 
-        do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_rear_effect4', $this, 'effect4', '', 'eael-elements-flip-box-rear-container' );
-        do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_rear_effect5', $this, 'effect5', '', 'eael-elements-flip-box-rear-container' );
-        do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_rear_effect6', $this, 'effect6', '', 'eael-elements-flip-box-rear-container' );
+        do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_rear_effect4', $this, 'effect4', '', '.eael-elements-flip-box-rear-container' );
+        do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_rear_effect5', $this, 'effect5', '', '.eael-elements-flip-box-rear-container' );
+        do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_rear_effect6', $this, 'effect6', '', '.eael-elements-flip-box-rear-container' );
     }
 
     /**
@@ -2026,13 +2026,13 @@ class Flip_Box extends Widget_Base
 		);
 
         // Liquid Glass Border Effects
-        $this->eael_wd_liquid_glass_border_effect_rear( 'rear_effect1', '#FFFFFF1F', 'eael-elements-flip-box-rear-container' );
-        $this->eael_wd_liquid_glass_border_effect_rear( 'rear_effect2', '#FFFFFF1F', 'eael-elements-flip-box-rear-container' );
-        $this->eael_wd_liquid_glass_border_effect_rear( 'rear_effect3', '#FFFFFF1F', 'eael-elements-flip-box-rear-container' );
-        $this->eael_wd_liquid_glass_border_effect_rear( 'rear_effect4', '#FFFFFF1F', 'eael-elements-flip-box-rear-container' );
+        $this->eael_wd_liquid_glass_border_effect_rear( 'rear_effect1', '#FFFFFF1F', '.eael-elements-flip-box-rear-container' );
+        $this->eael_wd_liquid_glass_border_effect_rear( 'rear_effect2', '#FFFFFF1F', '.eael-elements-flip-box-rear-container' );
+        $this->eael_wd_liquid_glass_border_effect_rear( 'rear_effect3', '#FFFFFF1F', '.eael-elements-flip-box-rear-container' );
+        $this->eael_wd_liquid_glass_border_effect_rear( 'rear_effect4', '#FFFFFF1F', '.eael-elements-flip-box-rear-container' );
 
         // Liquid Glass Border Radius Effects
-        $this->eael_wd_liquid_glass_border_radius_effect_rear('rear_effect1', 'eael-elements-flip-box-rear-container',
+        $this->eael_wd_liquid_glass_border_radius_effect_rear('rear_effect1', '.eael-elements-flip-box-rear-container',
             [
                 'top' 	  => 24,
                 'right'    => 24,
@@ -2043,7 +2043,7 @@ class Flip_Box extends Widget_Base
             ]
         );
 
-        $this->eael_wd_liquid_glass_border_radius_effect_rear('rear_effect2', 'eael-elements-flip-box-rear-container',
+        $this->eael_wd_liquid_glass_border_radius_effect_rear('rear_effect2', '.eael-elements-flip-box-rear-container',
             [
                 'top' 	  => 16,
                 'right'    => 16,
@@ -2054,7 +2054,7 @@ class Flip_Box extends Widget_Base
             ]
         );
 
-        $this->eael_wd_liquid_glass_border_radius_effect_rear('rear_effect3', 'eael-elements-flip-box-rear-container',
+        $this->eael_wd_liquid_glass_border_radius_effect_rear('rear_effect3', '.eael-elements-flip-box-rear-container',
             [
                 'top' 	  => 8,
                 'bottom'   => 8,
@@ -2065,7 +2065,7 @@ class Flip_Box extends Widget_Base
             ]
         );
 
-        $this->eael_wd_liquid_glass_border_radius_effect_rear('rear_effect4', 'eael-elements-flip-box-rear-container',
+        $this->eael_wd_liquid_glass_border_radius_effect_rear('rear_effect4', '.eael-elements-flip-box-rear-container',
             [
                 'top' 	  => 24,
                 'bottom'   => 24,
@@ -2077,7 +2077,7 @@ class Flip_Box extends Widget_Base
         );
 
         // Liquid Glass Shadow Effects
-        $this->eael_wd_liquid_glass_shadow_effect_rear('rear_effect1', 'eael-elements-flip-box-rear-container',
+        $this->eael_wd_liquid_glass_shadow_effect_rear('rear_effect1', '.eael-elements-flip-box-rear-container',
             [
                 'color'      => 'rgba(0,0,0,0.78)',
                 'horizontal' => 0,
@@ -2087,7 +2087,7 @@ class Flip_Box extends Widget_Base
             ]
         );
         
-        $this->eael_wd_liquid_glass_shadow_effect_rear('rear_effect2', 'eael-elements-flip-box-rear-container',
+        $this->eael_wd_liquid_glass_shadow_effect_rear('rear_effect2', '.eael-elements-flip-box-rear-container',
             [
                 'color'      => '#383C65',
                 'horizontal' => 0,
@@ -2097,7 +2097,7 @@ class Flip_Box extends Widget_Base
             ]
         );
         
-        $this->eael_wd_liquid_glass_shadow_effect_rear('rear_effect3', 'eael-elements-flip-box-rear-container',
+        $this->eael_wd_liquid_glass_shadow_effect_rear('rear_effect3', '.eael-elements-flip-box-rear-container',
             [
                 'color'      => 'rgba(255, 255, 255, 0.4)',
                 'horizontal' => 1,
@@ -2107,7 +2107,7 @@ class Flip_Box extends Widget_Base
             ]
         );
 
-        $this->eael_wd_liquid_glass_shadow_effect_rear('rear_effect4', 'eael-elements-flip-box-rear-container',
+        $this->eael_wd_liquid_glass_shadow_effect_rear('rear_effect4', '.eael-elements-flip-box-rear-container',
             [
                 'color'      => '#00000040',
                 'horizontal' => 0,
@@ -2141,7 +2141,7 @@ class Flip_Box extends Widget_Base
 					'default' => $default_color,
 				],
 			],
-			'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-'.$effect .' .'.$selector,
+			'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-'.$effect .' '.$selector,
 			'condition' => [
 				'eael_wd_liquid_glass_effect_switch_rear'  => 'yes',
 				'eael_wd_liquid_glass_shadow_effect_rear' => $effect,
@@ -2160,7 +2160,7 @@ class Flip_Box extends Widget_Base
 			'size_units' => [ 'px', '%', 'rem', 'custom' ],
 			'default' => $default_radius,
 			'selectors'  => [
-				'{{WRAPPER}}.eael_wd_liquid_glass_shadow-'.$effect.' .'.$selector => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				'{{WRAPPER}}.eael_wd_liquid_glass_shadow-'.$effect.' '.$selector => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			],
 			'condition' => [
 				'eael_wd_liquid_glass_effect_switch_rear' => 'yes',
@@ -2182,7 +2182,7 @@ class Flip_Box extends Widget_Base
 							'default' => $default_shadow,
 						],
 					],
-					'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-'.$effect.' .' . $selector,
+					'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-'.$effect.' ' . $selector,
 					'condition' => [
 						'eael_wd_liquid_glass_effect_switch_rear'  => 'yes',
 						'eael_wd_liquid_glass_shadow_effect_rear' => $effect,
