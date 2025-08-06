@@ -1891,17 +1891,31 @@ class Flip_Box extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_settings_rear',
-            [
-                'label'     => esc_html__( 'Liquid Glass Settings', 'essential-addons-for-elementor-lite' ),
-                'type'      => Controls_Manager::HEADING,
-                'separator' => 'before',
-                'condition' => [
-                    'eael_wd_liquid_glass_effect_switch_rear' => 'yes',
-                ]
-            ]
-        );
+        if ( !apply_filters('eael/pro_enabled', false ) ) {
+			$this->add_control(
+					'eael_wd_liquid_glass_effect_pro_alert_rear',
+					[
+						'label'     => sprintf( '<a class="eael_pro_alert" target="_blank" href="https://wpdeveloper.com/upgrade/ea-pro">%s</a>', esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite')),
+						'type'      => Controls_Manager::HEADING,
+                        'condition' => [
+						'eael_wd_liquid_glass_effect_switch' => 'yes',
+                        'eael_wd_liquid_glass_effect_rear' => ['effect4', 'effect5', 'effect6'],
+					]
+				]
+			);
+		} else {
+			$this->add_control(
+				'eael_wd_liquid_glass_effect_settings_rear',
+				[
+					'label'     => esc_html__( 'Liquid Glass Settings', 'essential-addons-for-elementor-lite' ),
+					'type'      => Controls_Manager::HEADING,
+					'separator' => 'before',
+					'condition' => [
+						'eael_wd_liquid_glass_effect_switch_rear' => 'yes',
+					]
+				]
+			);
+		}
 
         // Background Color Controls
         $this->eael_wd_liquid_glass_effect_bg_color_effect_rear( $this, 'effect1', '#FFFFFF1F', 'eael-elements-flip-box-rear-container' );
