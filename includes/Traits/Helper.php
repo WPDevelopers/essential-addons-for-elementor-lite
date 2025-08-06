@@ -665,6 +665,53 @@ trait Helper
 		);
 	}
 
+	// Add background color control for liquid glass effect flip box rear.
+	public function eael_wd_liquid_glass_effect_bg_color_effect_rear( $obj, $effect, $default_bg_color, $selector ) {
+		$obj->add_control(
+			'eael_wd_liquid_glass_effect_bg_color_rear_' . $effect,
+			args: [
+					'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+					'type'      => Controls_Manager::COLOR,
+					'default'   => $default_bg_color,
+					'selectors' => [
+						'{{WRAPPER}}.eael_wd_liquid_glass_rear-'.$effect .' .' . $selector => 'background-color: {{VALUE}}',
+					],
+					'condition' => [
+						'eael_wd_liquid_glass_effect_switch_rear' => 'yes',
+						'eael_wd_liquid_glass_effect_rear'        => $effect,
+					],
+			]
+		);
+	}
+
+	// Add backdrop filter control for liquid glass effect flip box rear.
+	public function eael_wd_liquid_glass_effect_backdrop_filter_effect_rear( $effect, $default_size, $selector ) {
+		$this->add_control(
+			'eael_wd_liquid_glass_effect_backdrop_filter_rear_' . $effect,
+			[
+					'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
+					'type'  => Controls_Manager::SLIDER,
+					'range' => [
+						'px' => [
+							'min'  => 0,
+							'max'  => 50,
+							'step' => 1,
+						],
+					],
+					'default' => [
+						'size' => $default_size,
+					],
+					'selectors' => [
+						'{{WRAPPER}}.eael_wd_liquid_glass_rear-'.$effect .' .' . $selector => 'backdrop-filter: blur({{SIZE}}px)',
+					],
+					'condition' => [
+						'eael_wd_liquid_glass_effect_switch_rear' => 'yes',
+						'eael_wd_liquid_glass_effect_rear' => $effect,
+					],
+			]
+		);
+	}
+
    //Add border effect for Liquid Glass Effect
 	public function eael_wd_liquid_glass_border_effect( $obj, $effect, $default_color, $selector ) {
 		$obj->add_group_control(

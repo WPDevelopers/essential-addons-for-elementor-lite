@@ -379,7 +379,7 @@
   position: relative;
 }
 .eael_wd_liquid_glass-effect4 .eael-elements-flip-box-front-container::before,
-.eael_wd_liquid_glass-rear_effect4 .eael-elements-flip-box-rear-container::before {
+.eael_wd_liquid_glass_rear-effect4 .eael-elements-flip-box-rear-container::before {
   position: absolute;
   content: "";
   z-index: -99;
@@ -396,7 +396,7 @@
   position: relative;
 }
 .eael_wd_liquid_glass-effect5 .eael-elements-flip-box-front-container::before,
-.eael_wd_liquid_glass-rear_effect5 .eael-elements-flip-box-rear-container::before {
+.eael_wd_liquid_glass_rear-effect5 .eael-elements-flip-box-rear-container::before {
   position: absolute;
   content: "";
   z-index: -99;
@@ -413,7 +413,7 @@
   position: relative;
 }
 .eael_wd_liquid_glass-effect6 .eael-elements-flip-box-front-container::before,
-.eael_wd_liquid_glass-rear_effect6 .eael-elements-flip-box-rear-container::before {
+.eael_wd_liquid_glass_rear-effect6 .eael-elements-flip-box-rear-container::before {
   position: absolute;
   content: "";
   z-index: -99;
