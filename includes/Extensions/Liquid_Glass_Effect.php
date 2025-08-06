@@ -199,8 +199,12 @@ class Liquid_Glass_Effect {
 			$element->add_control(
 					'eael_liquid_glass_effect_pro_alert',
 					[
-						'label' 		=> sprintf( '<a target="_blank" href="https://wpdeveloper.com/upgrade/ea-pro">%s</a>', esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite')),
+						'label' 		=> sprintf( '<a class="eael_pro_alert" target="_blank" href="https://wpdeveloper.com/upgrade/ea-pro">%s</a>', esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite')),
 						'type'      => Controls_Manager::HEADING,
+						'condition' => [
+							'eael_liquid_glass_effect_switch' => 'yes',
+							'eael_liquid_glass_effect'        => ['effect4', 'effect5', 'effect6'],
+						]
 				]
 			);
 		} else {
