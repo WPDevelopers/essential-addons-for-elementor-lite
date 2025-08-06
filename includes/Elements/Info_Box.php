@@ -2064,12 +2064,38 @@ class Info_Box extends Widget_Base
         
         // Liquid Glass Background Color Effects
         do_action( 'eael_wd_liquid_glass_effect_bg_color_effect4', $this, 'effect4', '#FFFFFF1F', 'eael-infobox-button' );
-        do_action( 'eael_wd_liquid_glass_effect_bg_color_effect5', $this, 'effect5', '', 'eael-infobox-button' );
-        do_action( 'eael_wd_liquid_glass_effect_bg_color_effect6', $this, 'effect6', '', 'eael-infobox-button' );
+        do_action( 'eael_wd_liquid_glass_effect_bg_color_effect5', $this, 'effect5', '#FFFFFF1F', 'eael-infobox-button' );
+        do_action( 'eael_wd_liquid_glass_effect_bg_color_effect6', $this, 'effect6', '#FFFFFF1F', 'eael-infobox-button' );
 
         // Backdrop Filter Controls
         $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect1', '24', 'eael-infobox-button' );
         $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect2', '20', 'eael-infobox-button' );
+
+        // Brightness Effect Controls
+		$this->add_control(
+			'eael_wd_liquid_glass_effect_brightness_effect2',
+			[
+				'label' => esc_html__( 'Brightness', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 5,
+						'step' => .1,
+					],
+				],
+				'default' => [
+					'size' => 1,
+				],
+				'selectors' => [
+					'{{WRAPPER}}.eael_wd_liquid_glass-effect2 .eael-infobox-button' => 'backdrop-filter: blur({{eael_wd_liquid_glass_effect_backdrop_filter_effect2.SIZE}}px) brightness({{SIZE}});',
+				],
+				'condition'    => [
+					'eael_wd_liquid_glass_effect_switch' => 'yes',
+					'eael_wd_liquid_glass_effect'        => 'effect2',
+				]
+			]
+		);
         
         do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect4', $this, 'effect4', '', 'eael-infobox-button' );
         do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect5', $this, 'effect5', '', 'eael-infobox-button' );
