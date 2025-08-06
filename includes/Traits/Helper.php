@@ -685,8 +685,8 @@ trait Helper
 	}
 
 	// Add backdrop filter control for liquid glass effect flip box rear.
-	public function eael_wd_liquid_glass_effect_backdrop_filter_effect_rear( $effect, $default_size, $selector ) {
-		$this->add_control(
+	public function eael_wd_liquid_glass_effect_backdrop_filter_effect_rear( $obj, $effect, $default_size, $selector ) {
+		$obj->add_control(
 			'eael_wd_liquid_glass_effect_backdrop_filter_rear_' . $effect,
 			[
 					'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),

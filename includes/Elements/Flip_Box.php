@@ -1919,7 +1919,7 @@ class Flip_Box extends Widget_Base
 
         // Background Color Controls
         $this->eael_wd_liquid_glass_effect_bg_color_effect_rear( $this, 'effect1', '#FFFFFF1F', 'eael-elements-flip-box-rear-container' );
-        $this->eael_wd_liquid_glass_effect_bg_color_effect_rear( $this, 'effect2', '', 'eael-elements-flip-box-rear-container' );
+        $this->eael_wd_liquid_glass_effect_bg_color_effect_rear( $this, 'effect2', '#FFFFFF1F', 'eael-elements-flip-box-rear-container' );
 
 
         do_action( 'eael_wd_liquid_glass_effect_bg_color_rear_effect4', $this, 'effect4', '#FFFFFF1F', 'eael-elements-flip-box-rear-container' );
@@ -1927,8 +1927,8 @@ class Flip_Box extends Widget_Base
         do_action( 'eael_wd_liquid_glass_effect_bg_color_rear_effect6', $this, 'effect6', '#FFFFFF1F', 'eael-elements-flip-box-rear-container' );
 
         // Backdrop Filter Controls
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect_rear( 'effect1', '24', 'eael-elements-flip-box-rear-container' );
-        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect_rear( 'effect2', '20', 'eael-elements-flip-box-rear-container' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect_rear( $this, 'effect1', '24', 'eael-elements-flip-box-rear-container' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect_rear( $this, 'effect2', '20', 'eael-elements-flip-box-rear-container' );
 
         do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_rear_effect4', $this, 'effect4', '', 'eael-elements-flip-box-rear-container' );
         do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_rear_effect5', $this, 'effect5', '', 'eael-elements-flip-box-rear-container' );
