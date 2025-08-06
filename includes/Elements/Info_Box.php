@@ -1961,7 +1961,7 @@ class Info_Box extends Widget_Base
         $this->start_controls_section(
 			'eael_wd_liquid_glass_effect_section',
 			[
-				'label' => esc_html__( 'Liquid Glass Effect', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Liquid Glass Presets', 'essential-addons-for-elementor-lite' ),
 				'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_show_infobox_button' => 'yes',
@@ -1985,7 +1985,7 @@ class Info_Box extends Widget_Base
         $this->add_control(
             'eael_wd_liquid_glass_effect_switch',
             [
-                'label' => __( 'Enable Liquid Glass Effect', 'essential-addons-for-elementor-lite' ),
+                'label' => __( 'Enable Liquid Glass Presets', 'essential-addons-for-elementor-lite' ),
                 'type'  => Controls_Manager::SWITCHER
             ]
         );
@@ -2021,7 +2021,7 @@ class Info_Box extends Widget_Base
         $this->add_control(
             'eael_wd_liquid_glass_effect',
             [
-                'label'   => esc_html__( 'Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
+                'label'   => esc_html__( 'Liquid Glass Presets', 'essential-addons-for-elementor-lite' ),
                 'type'    => Controls_Manager::SELECT2,
                 'default' => 'effect1',
                 'options' => $eael_liquid_glass_effect['styles'],
