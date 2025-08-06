@@ -1636,11 +1636,11 @@ class Flip_Box extends Widget_Base
 			'eael_liquid_glass_effect_filter',
 			[
 					'styles' => [
-						'effect1' => esc_html__( 'Effect 1', 'essential-addons-for-elementor-lite' ),
-						'effect2' => esc_html__( 'Effect 2', 'essential-addons-for-elementor-lite' ),
-						'effect4' => esc_html__( 'Effect 3 (Pro)', 'essential-addons-for-elementor-lite' ),
-						'effect5' => esc_html__( 'Effect 4 (Pro)', 'essential-addons-for-elementor-lite' ),
-						'effect6' => esc_html__( 'Effect 5 (Pro)', 'essential-addons-for-elementor-lite' ),
+						'effect1' => esc_html__( 'Heavy Frost', 'essential-addons-for-elementor-lite' ),
+						'effect2' => esc_html__( 'Soft Mist', 'essential-addons-for-elementor-lite' ),
+						'effect4' => esc_html__( 'Light Frost (Pro)', 'essential-addons-for-elementor-lite' ),
+						'effect5' => esc_html__( 'Grain Frost (Pro)', 'essential-addons-for-elementor-lite' ),
+						'effect6' => esc_html__( 'Fine Frost (Pro)', 'essential-addons-for-elementor-lite' ),
 				],
 				'conditions' => ['effect4', 'effect5', 'effect6'],
 			]
@@ -1893,11 +1893,11 @@ class Flip_Box extends Widget_Base
 			'eael_liquid_glass_effect_filter',
 			[
 					'styles' => [
-						'effect1' => esc_html__( 'Effect 1', 'essential-addons-for-elementor-lite' ),
-						'effect2' => esc_html__( 'Effect 2', 'essential-addons-for-elementor-lite' ),
-						'effect4' => esc_html__( 'Effect 3 (Pro)', 'essential-addons-for-elementor-lite' ),
-						'effect5' => esc_html__( 'Effect 4 (Pro)', 'essential-addons-for-elementor-lite' ),
-						'effect6' => esc_html__( 'Effect 5 (Pro)', 'essential-addons-for-elementor-lite' ),
+						'effect1' => esc_html__( 'Heavy Frost', 'essential-addons-for-elementor-lite' ),
+						'effect2' => esc_html__( 'Soft Mist', 'essential-addons-for-elementor-lite' ),
+						'effect4' => esc_html__( 'Light Frost (Pro)', 'essential-addons-for-elementor-lite' ),
+						'effect5' => esc_html__( 'Grain Frost (Pro)', 'essential-addons-for-elementor-lite' ),
+						'effect6' => esc_html__( 'Fine Frost (Pro)', 'essential-addons-for-elementor-lite' ),
 				],
 				'conditions' => ['effect4', 'effect5', 'effect6'],
 			]
