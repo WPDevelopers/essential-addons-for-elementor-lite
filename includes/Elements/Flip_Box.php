@@ -1898,7 +1898,7 @@ class Flip_Box extends Widget_Base
 						'label'     => sprintf( '<a class="eael_pro_alert" target="_blank" href="https://wpdeveloper.com/upgrade/ea-pro">%s</a>', esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite')),
 						'type'      => Controls_Manager::HEADING,
                         'condition' => [
-						'eael_wd_liquid_glass_effect_switch' => 'yes',
+						'eael_wd_liquid_glass_effect_switch_rear' => 'yes',
                         'eael_wd_liquid_glass_effect_rear' => ['effect4', 'effect5', 'effect6'],
 					]
 				]
