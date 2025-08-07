@@ -138,6 +138,23 @@ class Liquid_Glass_Effect {
 			]
 		);
 	}
+
+	/**
+	 * Summary of teaser_template
+	 */
+	public function teaser_template($texts) {
+		$html = '<div class="ea-nerd-box">
+			
+			<div class="ea-nerd-box-title">' . $texts['title'] . '</div>
+			<div class="ea-nerd-box-message">' . $texts['messages'] . '</div>
+			<a class="ea-nerd-box-link elementor-button elementor-button-default" href="https://wpdeveloper.com/upgrade/ea-pro" target="_blank">
+			' . __('Upgrade to EA PRO', 'essential-addons-for-elementor-lite') . '
+			</a>
+		</div>';
+
+		return $html;
+   }
+	
 	public function register_controls( $element ) {
 		$element->start_controls_section(
 			'eael_liquid_glass_effect_section',
@@ -220,14 +237,17 @@ class Liquid_Glass_Effect {
 		
 		if ( !apply_filters('eael/pro_enabled', false ) ) {
 			$element->add_control(
-					'eael_liquid_glass_effect_pro_alert',
-					[
-						'label' 		=> sprintf( '<a class="eael_pro_alert" target="_blank" href="https://wpdeveloper.com/upgrade/ea-pro">%s</a>', esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite')),
-						'type'      => Controls_Manager::HEADING,
-						'condition' => [
-							'eael_liquid_glass_effect_switch' => 'yes',
-							'eael_liquid_glass_effect'        => ['effect4', 'effect5', 'effect6'],
-						]
+				'eael_liquid_glass_effect_pro_alert',
+				[
+					'type' => Controls_Manager::RAW_HTML,
+					'raw'  => $this->teaser_template( [
+						'title'    => __( 'Meet EA Liquid Glass Presets', 'essential-addons-for-elementor-lite' ),
+						'messages' => __( "To use this Liquid glass preset, Upgrade to Essential Addons Pro", 'essential-addons-for-elementor-lite' ),
+					] ),
+					'condition' => [
+						'eael_liquid_glass_effect_switch' => 'yes',
+						'eael_liquid_glass_effect'        => ['effect4', 'effect5', 'effect6'],
+					]
 				]
 			);
 		} else {
