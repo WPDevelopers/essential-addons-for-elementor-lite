@@ -174,21 +174,43 @@ class Liquid_Glass_Effect {
 						'effect5' => esc_html__( 'Grain Frost (Pro)', 'essential-addons-for-elementor-lite' ),
 						'effect6' => esc_html__( 'Fine Frost (Pro)', 'essential-addons-for-elementor-lite' ),
 				],
-				'conditions' => ['effect4', 'effect5', 'effect6'],
 			]
       );
 
 		$element->add_control(
 			'eael_liquid_glass_effect',
 			[
-				'label'   => esc_html__( 'Liquid Glass Presets', 'essential-addons-for-elementor-lite' ),
-				'type'    => Controls_Manager::SELECT2,
-				'default' => 'effect1',
-				'options' => $eael_liquid_glass_effect['styles'],
+				'label'       => esc_html__( 'Liquid Glass Presets', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'label_block' => true,
+				'options'     => [
+					'effect1' => [
+						'title' => esc_html__( $eael_liquid_glass_effect['styles']['effect1'], 'essential-addons-for-elementor-lite' ),
+						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect1'], 'essential-addons-for-elementor-lite' ),
+					],
+					'effect2' => [
+						'title' => esc_html__( $eael_liquid_glass_effect['styles']['effect2'], 'essential-addons-for-elementor-lite' ),
+						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect2'], 'essential-addons-for-elementor-lite' ),
+					],
+					'effect4' => [
+						'title' => esc_html__( $eael_liquid_glass_effect['styles']['effect4'], 'essential-addons-for-elementor-lite' ),
+						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect4'], 'essential-addons-for-elementor-lite' ),
+					],
+					'effect5' => [
+						'title' => esc_html__( $eael_liquid_glass_effect['styles']['effect5'], 'essential-addons-for-elementor-lite' ),
+						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect5'], 'essential-addons-for-elementor-lite' ),
+					],
+					'effect6' => [
+						'title' => esc_html__( $eael_liquid_glass_effect['styles']['effect6'], 'essential-addons-for-elementor-lite' ),
+						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect6'], 'essential-addons-for-elementor-lite' ),
+					],
+				],
 				'prefix_class' => 'eael_liquid_glass-',
 				'condition' => [
 					'eael_liquid_glass_effect_switch' => 'yes',
-				]
+				],
+				'default' => 'effect1',
+				'multiline' => true,
 			]
 		);
 
