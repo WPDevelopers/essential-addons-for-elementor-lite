@@ -377,8 +377,16 @@
    .elementor-choices {
       &.eael-multiline {
          .elementor-choices-label {
+            position: relative;
             &:last-child {
                grid-column: 1 / -1;
+               justify-content: center !important;
+            }
+            .e-control-motion-effects-promotion__lock-wrapper {
+               position: absolute;
+               right: -5px;
+               top: 5px;
+               color: #69727d;
             }
          }
       }
