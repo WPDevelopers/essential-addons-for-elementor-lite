@@ -144,8 +144,6 @@ class Liquid_Glass_Effect {
 	 */
 	public function teaser_template($texts) {
 		$html = '<div class="ea-nerd-box">
-			
-			<div class="ea-nerd-box-title">' . $texts['title'] . '</div>
 			<div class="ea-nerd-box-message">' . $texts['messages'] . '</div>
 			<a class="ea-nerd-box-link elementor-button elementor-button-default" href="https://wpdeveloper.com/upgrade/ea-pro" target="_blank">
 			' . __('Upgrade to EA PRO', 'essential-addons-for-elementor-lite') . '
@@ -155,6 +153,14 @@ class Liquid_Glass_Effect {
 		return $html;
    }
 	
+	public function eael_pro_lock_icon() {
+		if ( !apply_filters('eael/pro_enabled', false ) ) {
+			$html = '<span class="e-control-motion-effects-promotion__lock-wrapper"><i class="eicon-lock"></i></span>';
+			return $html;
+		}
+		return;
+	}
+
 	public function register_controls( $element ) {
 		$element->start_controls_section(
 			'eael_liquid_glass_effect_section',
@@ -190,9 +196,9 @@ class Liquid_Glass_Effect {
 					'styles' => [
 						'effect1' => esc_html__( 'Heavy Frost', 'essential-addons-for-elementor-lite' ),
 						'effect2' => esc_html__( 'Soft Mist', 'essential-addons-for-elementor-lite' ),
-						'effect4' => esc_html__( 'Light Frost (Pro)', 'essential-addons-for-elementor-lite' ),
-						'effect5' => esc_html__( 'Grain Frost (Pro)', 'essential-addons-for-elementor-lite' ),
-						'effect6' => esc_html__( 'Fine Frost (Pro)', 'essential-addons-for-elementor-lite' ),
+						'effect4' => esc_html__( 'Light Frost', 'essential-addons-for-elementor-lite' ),
+						'effect5' => esc_html__( 'Grain Frost', 'essential-addons-for-elementor-lite' ),
+						'effect6' => esc_html__( 'Fine Frost', 'essential-addons-for-elementor-lite' ),
 				],
 			]
       );
@@ -214,15 +220,15 @@ class Liquid_Glass_Effect {
 					],
 					'effect4' => [
 						'title' => esc_html__( $eael_liquid_glass_effect['styles']['effect4'], 'essential-addons-for-elementor-lite' ),
-						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect4'], 'essential-addons-for-elementor-lite' ),
+						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect4'], 'essential-addons-for-elementor-lite' )  . $this->eael_pro_lock_icon(),
 					],
 					'effect5' => [
 						'title' => esc_html__( $eael_liquid_glass_effect['styles']['effect5'], 'essential-addons-for-elementor-lite' ),
-						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect5'], 'essential-addons-for-elementor-lite' ),
+						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect5'], 'essential-addons-for-elementor-lite' )  . $this->eael_pro_lock_icon(),
 					],
 					'effect6' => [
 						'title' => esc_html__( $eael_liquid_glass_effect['styles']['effect6'], 'essential-addons-for-elementor-lite' ),
-						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect6'], 'essential-addons-for-elementor-lite' ),
+						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect6'], 'essential-addons-for-elementor-lite' )  . $this->eael_pro_lock_icon(),
 					],
 				],
 				'prefix_class' => 'eael_liquid_glass-',
@@ -241,7 +247,6 @@ class Liquid_Glass_Effect {
 				[
 					'type' => Controls_Manager::RAW_HTML,
 					'raw'  => $this->teaser_template( [
-						'title'    => __( 'Meet EA Liquid Glass Presets', 'essential-addons-for-elementor-lite' ),
 						'messages' => __( "To use this Liquid glass preset, Upgrade to Essential Addons Pro", 'essential-addons-for-elementor-lite' ),
 					] ),
 					'condition' => [
