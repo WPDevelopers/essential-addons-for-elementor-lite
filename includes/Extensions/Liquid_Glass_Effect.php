@@ -66,7 +66,7 @@ class Liquid_Glass_Effect {
 		);
 	}
 
-	public function eael_liquid_glass_effect_border( $element, $effect, $default_color ) {
+	public function eael_liquid_glass_effect_border( $element, $effect, $default_color, $condition ) {
 		$element->add_group_control(
 			\Elementor\Group_Control_Border::get_type(),
 			[
@@ -92,12 +92,13 @@ class Liquid_Glass_Effect {
 				'condition' => [
 					'eael_liquid_glass_effect_switch'  => 'yes',
 					'eael_liquid_glass_shadow_effect' => $effect,
+					'eael_liquid_glass_effect'        => $condition,
 				],
 			]
 		);
 	}
 
-	public function eael_liquid_glass_effect_border_radius( $element, $effect, $default_radius ) {
+	public function eael_liquid_glass_effect_border_radius( $element, $effect, $default_radius, $condition ) {
 		$element->add_control(
 			'eael_liquid_glass_border_radius_'.$effect,
 			[
@@ -111,12 +112,13 @@ class Liquid_Glass_Effect {
 				'condition' => [
 					'eael_liquid_glass_effect_switch' => 'yes',
 					'eael_liquid_glass_shadow_effect' => $effect,
+					'eael_liquid_glass_effect'        => $condition,
 				],
 			]
 		);
 	}
 
-	public function eael_liquid_glass_effect_box_shadow( $element, $effect, $default_shadow ) {
+	public function eael_liquid_glass_effect_box_shadow( $element, $effect, $default_shadow, $condition ) {
 		$element->add_group_control(
 			\Elementor\Group_Control_Box_Shadow::get_type(),
 			[
@@ -131,6 +133,7 @@ class Liquid_Glass_Effect {
 				'condition' => [
 					'eael_liquid_glass_effect_switch'  => 'yes',
 					'eael_liquid_glass_shadow_effect' => $effect,
+					'eael_liquid_glass_effect'        => $condition,
 				],
 			]
 		);
@@ -288,115 +291,232 @@ class Liquid_Glass_Effect {
 		// Noise Distortion Settings (Pro)
 		do_action( 'eael_liquid_glass_effect_noise_action', $element );
 
-		$element->add_control(
-			'eael_liquid_glass_shadow_effect',
-			[
-				'label'     => esc_html__( 'Shadow Effects', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::SELECT2,
-				'default'   => 'effect1',
-				'separator' => 'before',
-				'options'   => [
-					'' 		 => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
-					'effect1' => esc_html__( 'Effect 1', 'essential-addons-for-elementor-lite' ),
-					'effect2' => esc_html__( 'Effect 2', 'essential-addons-for-elementor-lite' ),
-					'effect3' => esc_html__( 'Effect 3', 'essential-addons-for-elementor-lite' ),
-					'effect4' => esc_html__( 'Effect 4', 'essential-addons-for-elementor-lite' ),
-				],
-				'prefix_class' => 'eael_liquid_glass_shadow-',
-				'condition'    => [
-					'eael_liquid_glass_effect_switch' => 'yes',
+		if ( !apply_filters('eael/pro_enabled', false ) ) {
+			$element->add_control(
+				'eael_liquid_glass_shadow_effect',
+				[
+					'label'     => esc_html__( 'Shadow Effects', 'essential-addons-for-elementor-lite' ),
+					'type'      => Controls_Manager::SELECT2,
+					'default'   => 'effect1',
+					'separator' => 'before',
+					'options'   => [
+						'' 		 => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
+						'effect1' => esc_html__( 'Effect 1', 'essential-addons-for-elementor-lite' ),
+						'effect2' => esc_html__( 'Effect 2', 'essential-addons-for-elementor-lite' ),
+						'effect3' => esc_html__( 'Effect 3', 'essential-addons-for-elementor-lite' ),
+						'effect4' => esc_html__( 'Effect 4', 'essential-addons-for-elementor-lite' ),
+					],
+					'prefix_class' => 'eael_liquid_glass_shadow-',
+					'condition'    => [
+						'eael_liquid_glass_effect_switch' => 'yes',
+						'eael_liquid_glass_effect'        => ['effect1', 'effect2'],
+					]
 				]
-			]
-		);
+			);
 
-		$element->add_control(
-			'eael_liquid_glass_shadow_inner',
-			[
-				'label'     => esc_html__( 'Shadow Settings', 'essential-addons-for-elementor-lite' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-				'condition' => [
-					'eael_liquid_glass_effect_switch'  => 'yes',
-					'eael_liquid_glass_shadow_effect!' => '',
-				],
-			]
-		);
+			$element->add_control(
+				'eael_liquid_glass_shadow_inner',
+				[
+					'label'     => esc_html__( 'Shadow Settings', 'essential-addons-for-elementor-lite' ),
+					'type'      => Controls_Manager::HEADING,
+					'separator' => 'before',
+					'condition' => [
+						'eael_liquid_glass_effect_switch'  => 'yes',
+						'eael_liquid_glass_shadow_effect!' => '',
+						'eael_liquid_glass_effect'         => ['effect1', 'effect2'],
+					],
+				]
+			);
 
-		// Add border effect for Liquid Glass Presets
-		$this->eael_liquid_glass_effect_border( $element, 'effect1', '#FFFFFF1F' );
-		$this->eael_liquid_glass_effect_border( $element, 'effect2', '#FFFFFF1F' );
-		$this->eael_liquid_glass_effect_border( $element, 'effect3', '#FFFFFF1F' );
-		$this->eael_liquid_glass_effect_border( $element, 'effect4', '#AAAAAA1A' );
+			// Add border effect for Liquid Glass Presets
+			$this->eael_liquid_glass_effect_border( $element, 'effect1', '#FFFFFF1F', ['effect1', 'effect2'] );
+			$this->eael_liquid_glass_effect_border( $element, 'effect2', '#FFFFFF1F', ['effect1', 'effect2'] );
+			$this->eael_liquid_glass_effect_border( $element, 'effect3', '#FFFFFF1F', ['effect1', 'effect2'] );
+			$this->eael_liquid_glass_effect_border( $element, 'effect4', '#AAAAAA1A', ['effect1', 'effect2'] );
 
-		// Add border radius effect for Liquid Glass Presets
-		$this->eael_liquid_glass_effect_border_radius( $element, 'effect1', [
-			'top'      => 24,
-			'right'    => 24,
-			'bottom'   => 24,
-			'left'     => 24,
-			'unit'     => 'px',
-			'isLinked' => true,
-		] );
+			// Add border radius effect for Liquid Glass Presets
+			$this->eael_liquid_glass_effect_border_radius( $element, 'effect1', [
+				'top'      => 24,
+				'right'    => 24,
+				'bottom'   => 24,
+				'left'     => 24,
+				'unit'     => 'px',
+				'isLinked' => true,
+			], ['effect1', 'effect2'] );
 
-		$this->eael_liquid_glass_effect_border_radius( $element, 'effect2', [
-			'top' 	  => 16,
-			'right'    => 16,
-			'bottom'   => 16,
-			'left'     => 16,
-			'unit'     => 'px',
-			'isLinked' => true,
-		] );
+			$this->eael_liquid_glass_effect_border_radius( $element, 'effect2', [
+				'top' 	  => 16,
+				'right'    => 16,
+				'bottom'   => 16,
+				'left'     => 16,
+				'unit'     => 'px',
+				'isLinked' => true,
+			], ['effect1', 'effect2'] );
 
-		$this->eael_liquid_glass_effect_border_radius( $element, 'effect3', [
-			'top' 	  => 8,
-			'right'    => 8,
-			'bottom'   => 8,
-			'left'     => 8,
-			'unit'     => 'px',
-			'isLinked' => true,
-		] );
+			$this->eael_liquid_glass_effect_border_radius( $element, 'effect3', [
+				'top' 	  => 8,
+				'right'    => 8,
+				'bottom'   => 8,
+				'left'     => 8,
+				'unit'     => 'px',
+				'isLinked' => true,
+			], ['effect1', 'effect2'] );
 
-		$this->eael_liquid_glass_effect_border_radius( $element, 'effect4', [
-			'top' 	  => 24,
-			'right'    => 24,
-			'bottom'   => 24,
-			'left'     => 24,
-			'unit'     => 'px',
-			'isLinked' => true,
-		] );
+			$this->eael_liquid_glass_effect_border_radius( $element, 'effect4', [
+				'top' 	  => 24,
+				'right'    => 24,
+				'bottom'   => 24,
+				'left'     => 24,
+				'unit'     => 'px',
+				'isLinked' => true,
+			], ['effect1', 'effect2'] );
 
-		// Add box shadow effect for Liquid Glass Presets
-		$this->eael_liquid_glass_effect_box_shadow( $element, 'effect1', [
-			'color'      => 'rgba(0,0,0,0.78)',
-			'horizontal' => 0,
-			'vertical'   => 19,
-			'blur'       => 26,
-			'spread'     => 1,
-		] );
+			// Add box shadow effect for Liquid Glass Presets
+			$this->eael_liquid_glass_effect_box_shadow( $element, 'effect1', [
+				'color'      => 'rgba(0,0,0,0.78)',
+				'horizontal' => 0,
+				'vertical'   => 19,
+				'blur'       => 26,
+				'spread'     => 1,
+			], ['effect1', 'effect2'] );
 
-		$this->eael_liquid_glass_effect_box_shadow( $element, 'effect2', [
-			'color'      => '#383C65',
-			'horizontal' => 0,
-			'vertical'   => 0,
-			'blur'       => 33,
-			'spread'     => -2,
-		] );
+			$this->eael_liquid_glass_effect_box_shadow( $element, 'effect2', [
+				'color'      => '#383C65',
+				'horizontal' => 0,
+				'vertical'   => 0,
+				'blur'       => 33,
+				'spread'     => -2,
+			], ['effect1', 'effect2'] );
 
-		$this->eael_liquid_glass_effect_box_shadow( $element, 'effect3', [
-			'color'      => 'rgba(255, 255, 255, 0.4)',
-			'horizontal' => 1,
-			'vertical'   => 1,
-			'blur'       => 10,
-			'spread'     => 5,
-		] );
+			$this->eael_liquid_glass_effect_box_shadow( $element, 'effect3', [
+				'color'      => 'rgba(255, 255, 255, 0.4)',
+				'horizontal' => 1,
+				'vertical'   => 1,
+				'blur'       => 10,
+				'spread'     => 5,
+			], ['effect1', 'effect2'] );
 
-		$this->eael_liquid_glass_effect_box_shadow( $element, 'effect4', [
-			'color'      => '#00000040',
-			'horizontal' => 0,
-			'vertical'   => 9,
-			'blur'       => 21,
-			'spread'     => 0,
-		] );
+			$this->eael_liquid_glass_effect_box_shadow( $element, 'effect4', [
+				'color'      => '#00000040',
+				'horizontal' => 0,
+				'vertical'   => 9,
+				'blur'       => 21,
+				'spread'     => 0,
+			], ['effect1', 'effect2'] );
+
+		} else {
+			$element->add_control(
+				'eael_liquid_glass_shadow_effect',
+				[
+					'label'     => esc_html__( 'Shadow Effects', 'essential-addons-for-elementor-lite' ),
+					'type'      => Controls_Manager::SELECT2,
+					'default'   => 'effect1',
+					'separator' => 'before',
+					'options'   => [
+						'' 		 => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
+						'effect1' => esc_html__( 'Effect 1', 'essential-addons-for-elementor-lite' ),
+						'effect2' => esc_html__( 'Effect 2', 'essential-addons-for-elementor-lite' ),
+						'effect3' => esc_html__( 'Effect 3', 'essential-addons-for-elementor-lite' ),
+						'effect4' => esc_html__( 'Effect 4', 'essential-addons-for-elementor-lite' ),
+					],
+					'prefix_class' => 'eael_liquid_glass_shadow-',
+					'condition'    => [
+						'eael_liquid_glass_effect_switch' => 'yes',
+						'eael_liquid_glass_effect'        => ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'],
+					]
+				]
+			);
+
+			$element->add_control(
+				'eael_liquid_glass_shadow_inner',
+				[
+					'label'     => esc_html__( 'Shadow Settings', 'essential-addons-for-elementor-lite' ),
+					'type'      => Controls_Manager::HEADING,
+					'separator' => 'before',
+					'condition' => [
+						'eael_liquid_glass_effect_switch'  => 'yes',
+						'eael_liquid_glass_shadow_effect!' => '',
+						'eael_liquid_glass_effect'         => ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'],
+					],
+				]
+			);
+
+			// Add border effect for Liquid Glass Presets
+			$this->eael_liquid_glass_effect_border( $element, 'effect1', '#FFFFFF1F', ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'] );
+			$this->eael_liquid_glass_effect_border( $element, 'effect2', '#FFFFFF1F', ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'] );
+			$this->eael_liquid_glass_effect_border( $element, 'effect3', '#FFFFFF1F', ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'] );
+			$this->eael_liquid_glass_effect_border( $element, 'effect4', '#AAAAAA1A', ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'] );
+
+			// Add border radius effect for Liquid Glass Presets
+			$this->eael_liquid_glass_effect_border_radius( $element, 'effect1', [
+				'top'      => 24,
+				'right'    => 24,
+				'bottom'   => 24,
+				'left'     => 24,
+				'unit'     => 'px',
+				'isLinked' => true,
+			], ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'] );
+
+			$this->eael_liquid_glass_effect_border_radius( $element, 'effect2', [
+				'top' 	  => 16,
+				'right'    => 16,
+				'bottom'   => 16,
+				'left'     => 16,
+				'unit'     => 'px',
+				'isLinked' => true,
+			], ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'] );
+
+			$this->eael_liquid_glass_effect_border_radius( $element, 'effect3', [
+				'top' 	  => 8,
+				'right'    => 8,
+				'bottom'   => 8,
+				'left'     => 8,
+				'unit'     => 'px',
+				'isLinked' => true,
+			], ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'] );
+
+			$this->eael_liquid_glass_effect_border_radius( $element, 'effect4', [
+				'top' 	  => 24,
+				'right'    => 24,
+				'bottom'   => 24,
+				'left'     => 24,
+				'unit'     => 'px',
+				'isLinked' => true,
+			], ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'] );
+
+			// Add box shadow effect for Liquid Glass Presets
+			$this->eael_liquid_glass_effect_box_shadow( $element, 'effect1', [
+				'color'      => 'rgba(0,0,0,0.78)',
+				'horizontal' => 0,
+				'vertical'   => 19,
+				'blur'       => 26,
+				'spread'     => 1,
+			], ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'] );
+
+			$this->eael_liquid_glass_effect_box_shadow( $element, 'effect2', [
+				'color'      => '#383C65',
+				'horizontal' => 0,
+				'vertical'   => 0,
+				'blur'       => 33,
+				'spread'     => -2,
+			], ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'] );
+
+			$this->eael_liquid_glass_effect_box_shadow( $element, 'effect3', [
+				'color'      => 'rgba(255, 255, 255, 0.4)',
+				'horizontal' => 1,
+				'vertical'   => 1,
+				'blur'       => 10,
+				'spread'     => 5,
+			], ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'] );
+
+			$this->eael_liquid_glass_effect_box_shadow( $element, 'effect4', [
+				'color'      => '#00000040',
+				'horizontal' => 0,
+				'vertical'   => 9,
+				'blur'       => 21,
+				'spread'     => 0,
+			], ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'] );
+		}
 
 		$element->end_controls_section();
 	}
