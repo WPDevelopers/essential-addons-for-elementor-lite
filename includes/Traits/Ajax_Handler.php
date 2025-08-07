@@ -167,6 +167,9 @@ trait Ajax_Handler {
 		if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' ) {
 			do_action( 'eael_woo_before_product_loop', $settings['eael_product_grid_style_preset'] );
 		}
+		if ( $class === '\Essential_Addons_Elementor\Elements\Woo_Product_List' ) {
+			do_action( 'eael/woo-product-list/before-product-loop' );
+		}
 		// ensure control name compatibility to old code if it is post block
 		if ( $class === '\Essential_Addons_Elementor\Pro\Elements\Post_Block' ) {
 			$settings ['post_block_hover_animation']    = $settings['eael_post_block_hover_animation'];
@@ -233,8 +236,8 @@ trait Ajax_Handler {
 			}
 
 			if ( $file_path ) {
-				// Use WC_Product_Query for Product_Grid, WP_Query for others
-				if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' ) {
+				// Use WC_Product_Query for Product_Grid and Woo_Product_List, WP_Query for others
+				if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' || $class === '\Essential_Addons_Elementor\Elements\Woo_Product_List' ) {
 					// Convert args to WC_Product_Query format
 					$wc_args = $this->convert_pagination_args_to_wc_product_query( $args, $settings );
 					$wc_query = new \WC_Product_Query( $wc_args );
@@ -252,13 +255,26 @@ trait Ajax_Handler {
 					$iterator = 0;
 
 					if ( ! empty( $product_objects ) ) {
-						if ( boolval( $settings['show_add_to_cart_custom_text'] ) ) {
+						// Handle custom add to cart text for Product_Grid
+						if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' && boolval( $settings['show_add_to_cart_custom_text'] ) ) {
 							$add_to_cart_text = [
 								'add_to_cart_simple_product_button_text'   => $settings['add_to_cart_simple_product_button_text'],
 								'add_to_cart_variable_product_button_text' => $settings['add_to_cart_variable_product_button_text'],
 								'add_to_cart_grouped_product_button_text'  => $settings['add_to_cart_grouped_product_button_text'],
 								'add_to_cart_external_product_button_text' => $settings['add_to_cart_external_product_button_text'],
 								'add_to_cart_default_product_button_text'  => $settings['add_to_cart_default_product_button_text'],
+							];
+							$this->change_add_woo_checkout_update_order_reviewto_cart_text( $add_to_cart_text );
+						}
+
+						// Handle custom add to cart text for Woo_Product_List
+						if ( $class === '\Essential_Addons_Elementor\Elements\Woo_Product_List' && boolval( $settings['eael_product_list_content_footer_add_to_cart_custom_text_show'] ) ) {
+							$add_to_cart_text = [
+								'add_to_cart_simple_product_button_text'   => $settings['eael_product_list_content_footer_add_to_cart_simple_text'],
+								'add_to_cart_variable_product_button_text' => $settings['eael_product_list_content_footer_add_to_cart_variable_text'],
+								'add_to_cart_grouped_product_button_text'  => $settings['eael_product_list_content_footer_add_to_cart_grouped_text'],
+								'add_to_cart_external_product_button_text' => $settings['eael_product_list_content_footer_add_to_cart_external_text'],
+								'add_to_cart_default_product_button_text'  => $settings['eael_product_list_content_footer_add_to_cart_default_text'],
 							];
 							$this->change_add_woo_checkout_update_order_reviewto_cart_text( $add_to_cart_text );
 						}
@@ -310,6 +326,9 @@ trait Ajax_Handler {
 
 		if ( $class === '\Essential_Addons_Elementor\Elements\Product_Grid' ) {
 			do_action( 'eael_woo_after_product_loop', $settings['eael_product_grid_style_preset'] );
+		}
+		if ( $class === '\Essential_Addons_Elementor\Elements\Woo_Product_List' ) {
+			do_action( 'eael/woo-product-list/after-product-loop' );
 		}
 		while ( ob_get_status() ) {
 			ob_end_clean();
@@ -498,9 +517,11 @@ trait Ajax_Handler {
 			$wc_args['meta_query'][] = $meta_query;
 		}
 
-		// Set product status from settings
+		// Set product status from settings (handle both Product_Grid and Woo_Product_List)
 		if ( ! empty( $settings['eael_product_grid_products_status'] ) ) {
 			$wc_args['status'] = array_intersect( (array) $settings['eael_product_grid_products_status'], [ 'publish', 'draft', 'pending', 'future' ] );
+		} elseif ( ! empty( $settings['eael_product_list_products_status'] ) ) {
+			$wc_args['status'] = array_intersect( (array) $settings['eael_product_list_products_status'], [ 'publish', 'draft', 'pending', 'future' ] );
 		}
 
 		// Set visibility
