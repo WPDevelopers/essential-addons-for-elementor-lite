@@ -2,6 +2,8 @@
 
 namespace Essential_Addons_Elementor\Elements;
 
+use Elementor\Plugin;
+
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
     exit;
@@ -13,7 +15,6 @@ use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Typography;
-use Elementor\Plugin;
 use Elementor\Widget_Base;
 use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 use Essential_Addons_Elementor\Template\Content\Product_Grid as Product_Grid_Trait;
@@ -417,7 +418,7 @@ class Product_Grid extends Widget_Base
             'eael_show_product_sale_badge',
             [
                 'label' => esc_html__( 'Show Badge ?', 'essential-addons-for-elementor-lite' ),
-                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'type' => Controls_Manager::SWITCHER,
                 'label_on' => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
                 'label_off' => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
                 'return_value' => 'yes',
@@ -429,7 +430,7 @@ class Product_Grid extends Widget_Base
 		    'eael_wc_loop_hooks',
 		    [
 			    'label'        => esc_html__( 'WooCommerce Loop Hooks', 'essential-addons-for-elementor-lite' ),
-			    'type'         => \Elementor\Controls_Manager::SWITCHER,
+			    'type'         => Controls_Manager::SWITCHER,
 			    'label_on'     => esc_html__( 'ON', 'essential-addons-for-elementor-lite' ),
 			    'label_off'    => esc_html__( 'OFF', 'essential-addons-for-elementor-lite' ),
 			    'return_value' => 'yes',
@@ -1199,7 +1200,7 @@ class Product_Grid extends Widget_Base
             'eael_product_grid_content_alignment',
             [
                 'label' => __('Alignment', 'essential-addons-for-elementor-lite'),
-                'type' => \Elementor\Controls_Manager::CHOOSE,
+                'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
@@ -1408,7 +1409,7 @@ class Product_Grid extends Widget_Base
         );
 
         $this->add_group_control(
-            \Elementor\Group_Control_Box_Shadow::get_type(),
+            Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'eael_peoduct_grid_shadow',
                 'label' => __('Box Shadow', 'essential-addons-for-elementor-lite'),
