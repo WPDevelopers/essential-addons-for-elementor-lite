@@ -3220,13 +3220,13 @@ class Woo_Product_Carousel extends Widget_Base {
             if (  in_array( $product_purchase_type, ['purchased', 'not-purchased'] ) ) {
                 $user_ordered_products = HelperClass::eael_get_all_user_ordered_products();
                 $no_products_found = empty( $user_ordered_products ) && 'purchased' === $product_purchase_type ? 1 : 0;
- 
+
                 if ( ! empty( $user_ordered_products ) && 'purchased' === $product_purchase_type ){
-                    $args['post__in'] = $user_ordered_products;
+                    $args['include'] = $user_ordered_products;
                 }
 
                 if ( ! empty( $user_ordered_products ) && 'not-purchased' === $product_purchase_type ){
-                    $args['post__not_in'] = $user_ordered_products;
+                    $args['exclude'] = array_merge( $args['exclude'] ?? [], $user_ordered_products );
                 }
             }
         }
@@ -3239,13 +3239,28 @@ class Woo_Product_Carousel extends Widget_Base {
 
                 $template = $this->get_template( $settings[ 'eael_dynamic_template_layout' ] );
                 if ( file_exists( $template ) ):
-	                $query = new \WP_Query( $args );
-	                if ( $query->have_posts() ):
+	                $wc_query = new \WC_Product_Query( $args );
+	                $products = $wc_query->get_products();
+
+	                // Handle paginated results
+	                if ( is_object( $products ) && isset( $products->products ) ) {
+		                $product_objects = $products->products;
+		                $total = $products->total;
+		                $max_pages = $products->max_num_pages;
+	                } else {
+		                $product_objects = $products;
+		                $total = count( $products );
+		                $max_pages = 1;
+	                }
+
+	                if ( ! empty( $product_objects ) ):
                         echo '<div '; $this->print_render_attribute_string( 'eael-woo-product-carousel-wrap' ); echo '>';
 		                    $settings['eael_page_id'] = $this->page_id ? $this->page_id : get_the_ID();
                             echo '<div class="swiper-wrapper products">';
-                            while ( $query->have_posts() ) {
-                                $query->the_post();
+                            foreach ( $product_objects as $product ) {
+	                            global $post;
+	                            $post = get_post( $product->get_id() );
+	                            setup_postdata( $post );
                                 include( $template );
                             }
                             wp_reset_postdata();
@@ -3264,7 +3279,7 @@ class Woo_Product_Carousel extends Widget_Base {
 
             if( 'yes' !== $settings['enable_marquee'] ){
                 if ( file_exists( $template ) && $settings['image_dots'] === 'yes') {
-                    $this->render_image_dots($query);
+                    $this->render_image_dots($product_objects);
                 } else {
                     $this->render_dots();
                 }
@@ -3295,7 +3310,7 @@ class Woo_Product_Carousel extends Widget_Base {
         <?php }
     }
 
-	protected function render_image_dots($query)
+	protected function render_image_dots($product_objects)
 	{
 		$settings = $this->get_settings_for_display();
 
@@ -3326,10 +3341,13 @@ class Woo_Product_Carousel extends Widget_Base {
             <div <?php $this->print_render_attribute_string('eael_gallery_pagination_wrapper'); ?>>
 
             <?php
-			if ( $query->have_posts() ) {
+			if ( ! empty( $product_objects ) ) {
 				echo '<div class="swiper-wrapper">';
-				while ( $query->have_posts() ) {
-					$query->the_post();
+				foreach ( $product_objects as $product ) {
+					global $post;
+					$post = get_post( $product->get_id() );
+					setup_postdata( $post );
+
 					$image_arr = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ),'full');
 					if(empty($image_arr)){
 						$image_arr[0] = wc_placeholder_img_src( 'full' );
@@ -3381,7 +3399,7 @@ class Woo_Product_Carousel extends Widget_Base {
     }
 
 	/**
-	 * Build proper query to fetch product data from wp query
+	 * Build proper query to fetch product data from WC_Product_Query
 	 * @return array
 	 */
     public function product_query_builder(){
@@ -3391,50 +3409,37 @@ class Woo_Product_Carousel extends Widget_Base {
 	    $order_by                     = $settings[ 'orderby' ];
 	    $filter                        = $settings[ 'eael_product_carousel_product_filter' ];
 	    $args                         = [
-		    'post_type'      => 'product',
-		    'post_status'    => !empty( $settings['eael_product_carousel_products_status'] ) ? $settings['eael_product_carousel_products_status'] : ['publish'],
-		    'posts_per_page' => $settings[ 'eael_product_carousel_products_count' ] ?: 4,
+		    'status'         => !empty( $settings['eael_product_carousel_products_status'] ) ? $settings['eael_product_carousel_products_status'] : ['publish'],
+		    'limit'          => $settings[ 'eael_product_carousel_products_count' ] ?: 4,
 		    'order'          => $settings[ 'order' ],
 		    'offset'         => $settings[ 'product_offset' ],
-            'post__not_in'   => array( get_the_ID() ),
-		    'tax_query'      => [
-			    'relation' => 'AND',
-			    [
-				    'taxonomy' => 'product_visibility',
-				    'field'     => 'name',
-				    'terms'    => [ 'exclude-from-search', 'exclude-from-catalog' ],
-				    'operator' => 'NOT IN',
-			    ],
-		    ],
+            'exclude'        => array( get_the_ID() ),
+		    'paginate'       => true,
+		    'return'         => 'objects',
+		    'visibility'     => 'visible',
 	    ];
 
-	    if ( $order_by == '_price' || $order_by == '_sku' ) {
-		    $args[ 'orderby' ]  = 'meta_value meta_value_num';
-		    $args[ 'meta_key' ] = $order_by;
+	    // Handle orderby with WC_Product_Query native parameters
+	    if ( $order_by == '_price' ) {
+		    $args[ 'orderby' ] = 'price';
+	    } elseif ( $order_by == '_sku' ) {
+		    $args[ 'orderby' ] = 'sku';
 	    } else {
 		    $args[ 'orderby' ] = $order_by;
 	    }
 
 	    if ( $filter == 'featured-products' ) {
-		    $count                         = isset( $args[ 'tax_query' ] ) ? count( $args[ 'tax_query' ] ) : 0;
-		    $args[ 'tax_query' ][ $count ] =
-			    [
-				    'taxonomy' => 'product_visibility',
-				    'field'     => 'name',
-				    'terms'    => 'featured',
-			    ];
+		    $args[ 'featured' ] = true;
 	    }
 
 	    if ( $filter == 'best-selling-products' ) {
-		    $args[ 'meta_key' ] = 'total_sales';
-		    $args[ 'orderby' ]  = 'meta_value_num';
-		    $args[ 'order' ]    = 'DESC';
+		    $args[ 'orderby' ] = 'total_sales';
+		    $args[ 'order' ]   = 'DESC';
 	    }
 
 	    if ( $filter == 'top-products' ) {
-		    $args[ 'meta_key' ] = '_wc_average_rating';
-		    $args[ 'orderby' ]  = 'meta_value_num';
-		    $args[ 'order' ]    = 'DESC';
+		    $args[ 'orderby' ] = 'average_rating';
+		    $args[ 'order' ]   = 'DESC';
 	    }
 
         if ( $filter == 'related-products' ) {
@@ -3459,38 +3464,121 @@ class Woo_Product_Carousel extends Widget_Base {
 	    }
 
 	    if ( get_option( 'woocommerce_hide_out_of_stock_items' ) == 'yes' ) {
-		    $args[ 'meta_query' ]   = [ 'relation' => 'AND' ];
-		    $args[ 'meta_query' ][] = [
-			    'key'   => '_stock_status',
-			    'value' => 'instock'
-		    ];
+		    $args[ 'stock_status' ] = 'instock';
 	    }
 
 	    if ( $filter == 'sale-products' ) {
-		    $args['post__in'] = array_merge( [ 0 ], wc_get_product_ids_on_sale() );
+		    $sale_ids = wc_get_product_ids_on_sale();
+		    $args['include'] = !empty( $sale_ids ) ? $sale_ids : [ 0 ];
 	    }
 
         if ( $filter == 'manual' ) {
-            $args['post__in'] = ! empty( $settings['eael_product_carousel_products_in'] ) ? $settings['eael_product_carousel_products_in'] : [ 0 ];
+            $args['include'] = ! empty( $settings['eael_product_carousel_products_in'] ) ? $settings['eael_product_carousel_products_in'] : [ 0 ];
         }
 
 
-	    $taxonomies      = get_taxonomies( [ 'object_type' => [ 'product' ] ], 'objects' );
-	    $tax_query_count = isset( $args[ 'meta_query' ] ) ? count( $args[ 'meta_query' ] ) : 0;
+	    // Handle taxonomy filters
+	    $taxonomies = get_taxonomies( [ 'object_type' => [ 'product' ] ], 'objects' );
 	    foreach ( $taxonomies as $object ) {
 		    $setting_key = $object->name . '_ids';
 		    if ( !empty( $settings[ $setting_key ] ) ) {
-			    $args[ 'tax_query' ][ $tax_query_count ] = [
-				    'taxonomy' => $object->name,
-				    'field'     => 'term_id',
-				    'terms'    => $settings[ $setting_key ],
-			    ];
+			    // Use native WC_Product_Query parameters for common taxonomies
+			    if ( $object->name === 'product_cat' ) {
+				    $args[ 'category' ] = $settings[ $setting_key ];
+			    } elseif ( $object->name === 'product_tag' ) {
+				    $args[ 'tag' ] = $settings[ $setting_key ];
+			    } else {
+				    // Use tax_query for other taxonomies
+				    if ( !isset( $args[ 'tax_query' ] ) ) {
+					    $args[ 'tax_query' ] = [ 'relation' => 'AND' ];
+				    }
+				    $args[ 'tax_query' ][] = [
+					    'taxonomy' => $object->name,
+					    'field'     => 'term_id',
+					    'terms'    => $settings[ $setting_key ],
+				    ];
+			    }
 		    }
-		    $tax_query_count++;
 	    }
 
 	    return $args;
     }
+
+	/**
+	 * Convert WP_Query arguments to WC_Product_Query arguments
+	 * @param array $wp_args Original WP_Query arguments
+	 * @param array $settings Widget settings
+	 * @return array WC_Product_Query compatible arguments
+	 */
+	public function convert_wp_query_args_to_wc_product_query( $wp_args, $settings = [] ) {
+		$wc_args = [
+			'paginate' => true,
+			'return' => 'objects',
+			'visibility' => 'visible'
+		];
+
+		// Parameter mapping
+		$arg_mapping = [
+			'posts_per_page' => 'limit',
+			'post_status' => 'status',
+			'post__in' => 'include',
+			'post__not_in' => 'exclude',
+			'author__in' => 'author',
+			'paged' => 'page',
+		];
+
+		foreach ( $arg_mapping as $wp_key => $wc_key ) {
+			if ( isset( $wp_args[ $wp_key ] ) ) {
+				$wc_args[ $wc_key ] = $wp_args[ $wp_key ];
+			}
+		}
+
+		// Handle other parameters
+		$direct_copy = [ 'orderby', 'order', 'offset' ];
+		foreach ( $direct_copy as $key ) {
+			if ( isset( $wp_args[ $key ] ) ) {
+				$wc_args[ $key ] = $wp_args[ $key ];
+			}
+		}
+
+		// Handle search
+		if ( isset( $wp_args['s'] ) ) {
+			$wc_args['search'] = $wp_args['s'];
+		}
+
+		// Preserve complex queries
+		if ( isset( $wp_args['meta_query'] ) ) {
+			$wc_args['meta_query'] = $wp_args['meta_query'];
+		}
+		if ( isset( $wp_args['tax_query'] ) ) {
+			$wc_args['tax_query'] = $wp_args['tax_query'];
+		}
+
+		// Handle meta_key/meta_value
+		if ( isset( $wp_args['meta_key'] ) ) {
+			if ( ! isset( $wc_args['meta_query'] ) ) {
+				$wc_args['meta_query'] = [ 'relation' => 'AND' ];
+			}
+			$meta_query = [ 'key' => $wp_args['meta_key'] ];
+			if ( isset( $wp_args['meta_value'] ) ) {
+				$meta_query['value'] = $wp_args['meta_value'];
+			}
+			if ( isset( $wp_args['meta_compare'] ) ) {
+				$meta_query['compare'] = $wp_args['meta_compare'];
+			}
+			$wc_args['meta_query'][] = $meta_query;
+		}
+
+		// Apply settings-based parameters
+		if ( ! empty( $settings['eael_product_carousel_products_status'] ) ) {
+			$wc_args['status'] = array_intersect(
+				(array) $settings['eael_product_carousel_products_status'],
+				[ 'publish', 'draft', 'pending', 'future' ]
+			);
+		}
+
+		return $wc_args;
+	}
 
 	public function load_quick_view_asset(){
 		add_action('wp_footer',function (){
