@@ -2706,6 +2706,9 @@ class Product_Grid extends Widget_Base
             [
                 'label'     => __('Previous Label', 'essential-addons-for-elementor-lite'),
                 'default'   => __('←', 'essential-addons-for-elementor-lite'),
+                'ai' => [
+                    'active' => false,
+                ],
                 'condition' => [
                     'show_pagination' => 'true',
                 ]
@@ -2717,6 +2720,9 @@ class Product_Grid extends Widget_Base
             [
                 'label'     => __('Next Label', 'essential-addons-for-elementor-lite'),
                 'default'   => __('→', 'essential-addons-for-elementor-lite'),
+                'ai' => [
+                    'active' => false,
+                ],
                 'condition' => [
                     'show_pagination' => 'true',
                 ]
