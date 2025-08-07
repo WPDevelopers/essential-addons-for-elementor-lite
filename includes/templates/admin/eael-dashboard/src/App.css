@@ -2126,6 +2126,20 @@ section.ea__modal-wrapper {
   margin-top: 6px;
 }
 
+.ea__api-field-group {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--label-color);
+}
+
+.ea__api-field-group:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.ea__api-field-group:first-child {
+  padding-top: 0;
+}
+
 .ea__modal-body .regenerated-wrapper {
   width: 573px;
 }

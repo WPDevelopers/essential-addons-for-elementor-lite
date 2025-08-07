@@ -935,10 +935,7 @@ trait Admin {
 							    'title'       => __( 'Business Reviews', 'essential-addons-for-elementor-lite' ),
 							    'demo_link'   => 'https://essential-addons.com/business-reviews/',
 							    'doc_link'    => 'https://essential-addons.com/docs/ea-business-reviews/',
-							    'setting'     => [
-								    'id' => 'businessReviewsSetting',
-								    'additional_settings' => [ 'trustpilotApiSetting', 'yelpApiSetting' ]
-							    ],
+							    'setting'     => [ 'id' => 'businessReviewsSetting' ],
 							    'is_activate' => boolval( $this->get_settings( 'business-reviews' ) )
 						    ],
 					    ]
@@ -1517,15 +1514,52 @@ trait Admin {
 					    'value'      => get_option( 'eael_woo_ac_dashboard_custom_tabs', '' ),
 				    ],
 				    'businessReviewsSetting' => [
-					    'title'      => __( "Google Place API Key", 'essential-addons-for-elementor-lite' ),
-					    'title_icon' => 'images/map.svg',
-					    'label'      => __( "Set API Key", 'essential-addons-for-elementor-lite' ),
-					    'name'       => 'br_google_place_api_key',
-					    'value'      => get_option( 'eael_br_google_place_api_key', '' ),
-					    'image'      => 'images/map2.png',
-					    'link'       => [
+					    'accordion' => [
+						    'googlePlaces' => [
+							    'title'  => __( 'Google Places API', 'essential-addons-for-elementor-lite' ),
+							    'icon'   => 'images/map.svg',
+							    'fields' => [
+								    [
+									    'name'        => 'br_google_place_api_key',
+									    'value'       => get_option( 'eael_br_google_place_api_key', '' ),
+									    'label'       => __( 'API Key:', 'essential-addons-for-elementor-lite' ),
+									    'placeholder' => __( 'Enter Google Places API Key', 'essential-addons-for-elementor-lite' ),
+								    ],
+							    ],
+							    'info'   => __( 'Get your Google Places API key from Google Cloud Console. This is used for fetching Google Reviews.', 'essential-addons-for-elementor-lite' ),
+						    ],
+						    'trustpilot'   => [
+							    'title'  => __( 'Trustpilot API', 'essential-addons-for-elementor-lite' ),
+							    'icon'   => 'images/map.svg',
+							    'fields' => [
+								    [
+									    'name'        => 'br_trustpilot_api_key',
+									    'value'       => get_option( 'eael_br_trustpilot_api_key', '' ),
+									    'label'       => __( 'API Key:', 'essential-addons-for-elementor-lite' ),
+									    'placeholder' => __( 'Enter Trustpilot API Key', 'essential-addons-for-elementor-lite' ),
+								    ],
+							    ],
+							    'info'   => __( 'Get your Trustpilot API key from Trustpilot Developer Portal. This is used for fetching Trustpilot Reviews.', 'essential-addons-for-elementor-lite' ),
+							    'isPro'  => true,
+						    ],
+						    'yelp'         => [
+							    'title'  => __( 'Yelp Fusion API', 'essential-addons-for-elementor-lite' ),
+							    'icon'   => 'images/map.svg',
+							    'fields' => [
+								    [
+									    'name'        => 'br_yelp_api_key',
+									    'value'       => get_option( 'eael_br_yelp_api_key', '' ),
+									    'label'       => __( 'API Key:', 'essential-addons-for-elementor-lite' ),
+									    'placeholder' => __( 'Enter Yelp Fusion API Key', 'essential-addons-for-elementor-lite' ),
+								    ],
+							    ],
+							    'info'   => __( 'Get your Yelp Fusion API key from Yelp Developers. This is used for fetching Yelp Reviews.', 'essential-addons-for-elementor-lite' ),
+							    'isPro'  => true,
+						    ],
+					    ],
+					    'link'      => [
 						    'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
-						    'url'  => 'https://developers.google.com/maps/documentation/places/web-service/get-api-key'
+						    'url'  => 'https://essential-addons.com/docs/ea-business-reviews/'
 					    ]
 				    ],
 				    'googleMyBusinessTokenSetting' => [
@@ -1542,30 +1576,7 @@ trait Admin {
 						    'url'  => 'https://developers.google.com/oauthplayground/'
 					    ]
 				    ],
-				    'trustpilotApiSetting' => [
-					    'title'      => __( "Trustpilot API Key", 'essential-addons-for-elementor-lite' ),
-					    'title_icon' => 'images/map.svg',
-					    'label'      => __( "Set API Key", 'essential-addons-for-elementor-lite' ),
-					    'name'       => 'br_trustpilot_api_key',
-					    'value'      => get_option( 'eael_br_trustpilot_api_key', '' ),
-					    'image'      => 'images/map2.png',
-					    'link'       => [
-						    'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
-						    'url'  => 'https://developers.trustpilot.com/authentication'
-					    ]
-				    ],
-				    'yelpApiSetting' => [
-					    'title'      => __( "Yelp API Key", 'essential-addons-for-elementor-lite' ),
-					    'title_icon' => 'images/map.svg',
-					    'label'      => __( "Set API Key", 'essential-addons-for-elementor-lite' ),
-					    'name'       => 'br_yelp_api_key',
-					    'value'      => get_option( 'eael_br_yelp_api_key', '' ),
-					    'image'      => 'images/map2.png',
-					    'link'       => [
-						    'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
-						    'url'  => 'https://docs.developer.yelp.com/docs/fusion-intro'
-					    ]
-				    ],
+
 				    'mailchimpSetting'       => [
 					    'title'      => __( "MailChimp API Key", 'essential-addons-for-elementor-lite' ),
 					    'title_icon' => 'images/mc.svg',
