@@ -381,9 +381,11 @@
       &.eael-multiline {
          .elementor-choices-label {
             position: relative;
+            border-block-end: none;
             &:last-child {
                grid-column: 1 / -1;
                justify-content: center !important;
+               border-block-end: var(--e-a-border-bold) !important;
             }
             .e-control-motion-effects-promotion__lock-wrapper {
                position: absolute;
