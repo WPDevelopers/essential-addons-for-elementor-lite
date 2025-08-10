@@ -373,6 +373,8 @@
    border-inline-end: none;
 }
 
+/* Liquid Glass Effect */
+.elementor-control-eael_wd_liquid_glass_effect,
 .elementor-control-eael_liquid_glass_effect {
    .elementor-choices {
       &.eael-multiline {
