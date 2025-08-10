@@ -713,7 +713,7 @@ trait Helper
 	}
 
    //Add border effect for Liquid Glass Presets
-	public function eael_wd_liquid_glass_border_effect( $obj, $effect, $default_color, $selector ) {
+	public function eael_wd_liquid_glass_border_effect( $obj, $effect, $default_color, $selector, $condition ) {
 		$obj->add_group_control(
 		Group_Control_Border::get_type(),
 		[
@@ -737,15 +737,16 @@ trait Helper
 			],
 			'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-'.$effect .' '.$selector,
 			'condition' => [
-				'eael_wd_liquid_glass_effect_switch'  => 'yes',
+				'eael_wd_liquid_glass_effect_switch' => 'yes',
 				'eael_wd_liquid_glass_shadow_effect' => $effect,
+				'eael_wd_liquid_glass_effect'        => $condition,
 			],
 		]
 	);
 	}
 
     // Add border radius effect for Liquid Glass Presets
-	public function eael_wd_liquid_glass_border_radius_effect( $obj, $effect, $selector, $default_radius ) {
+	public function eael_wd_liquid_glass_border_radius_effect( $obj, $effect, $selector, $default_radius, $condition ) {
 		$obj->add_control(
 		'eael_wd_liquid_glass_border_radius_'.$effect,
 		[
@@ -759,13 +760,14 @@ trait Helper
 			'condition' => [
 				'eael_wd_liquid_glass_effect_switch' => 'yes',
 				'eael_wd_liquid_glass_shadow_effect' => $effect,
+				'eael_wd_liquid_glass_effect'        => $condition,
 			],
 		]
 	);
 	}
 
     // Add shadow effect for Liquid Glass Presets
-	public function eael_wd_liquid_glass_shadow_effect( $obj, $effect, $selector, $default_shadow ) {
+	public function eael_wd_liquid_glass_shadow_effect( $obj, $effect, $selector, $default_shadow, $condition ) {
 		$obj->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
@@ -780,6 +782,7 @@ trait Helper
 					'condition' => [
 						'eael_wd_liquid_glass_effect_switch'  => 'yes',
 						'eael_wd_liquid_glass_shadow_effect' => $effect,
+						'eael_wd_liquid_glass_effect'        => $condition,
 					],
 			]
 		);
