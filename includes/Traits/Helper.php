@@ -639,6 +639,10 @@ trait Helper
 
    //Add backdrop filter control for liquid glass effect.
 	public function eael_wd_liquid_glass_effect_backdrop_filter_effect( $obj, $effect, $default_size, $selector ) {
+		$selectors = in_array($effect, ['effect4','effect5','effect6'], true)
+			? [ "{{WRAPPER}}.eael_wd_liquid_glass-{$effect} {$selector}::before" => 'backdrop-filter: blur({{SIZE}}px)' ]
+			: [ "{{WRAPPER}}.eael_wd_liquid_glass-{$effect} {$selector}" => 'backdrop-filter: blur({{SIZE}}px)' ];
+
 		$obj->add_control(
 			'eael_wd_liquid_glass_effect_backdrop_filter_' . $effect,
 			[
@@ -654,9 +658,7 @@ trait Helper
 					'default' => [
 						'size' => $default_size,
 					],
-					'selectors' => [
-						'{{WRAPPER}}.eael_wd_liquid_glass-'.$effect .' ' . $selector => 'backdrop-filter: blur({{SIZE}}px)',
-					],
+					'selectors' => $selectors,
 					'condition' => [
 						'eael_wd_liquid_glass_effect_switch' => 'yes',
 						'eael_wd_liquid_glass_effect' => $effect,
@@ -686,6 +688,9 @@ trait Helper
 
 	// Add backdrop filter control for liquid glass effect flip box rear.
 	public function eael_wd_liquid_glass_effect_backdrop_filter_effect_rear( $obj, $effect, $default_size, $selector ) {
+		$selectors = in_array($effect, ['effect4','effect5','effect6'], true)
+			? [ "{{WRAPPER}}.eael_wd_liquid_glass_rear-{$effect} {$selector}::before" => 'backdrop-filter: blur({{SIZE}}px)' ]
+			: [ "{{WRAPPER}}.eael_wd_liquid_glass_rear-{$effect} {$selector}" => 'backdrop-filter: blur({{SIZE}}px)' ];
 		$obj->add_control(
 			'eael_wd_liquid_glass_effect_backdrop_filter_rear_' . $effect,
 			[
@@ -701,9 +706,7 @@ trait Helper
 					'default' => [
 						'size' => $default_size,
 					],
-					'selectors' => [
-						'{{WRAPPER}}.eael_wd_liquid_glass_rear-'.$effect .' ' . $selector => 'backdrop-filter: blur({{SIZE}}px)',
-					],
+					'selectors' => $selectors,
 					'condition' => [
 						'eael_wd_liquid_glass_effect_switch_rear' => 'yes',
 						'eael_wd_liquid_glass_effect_rear' => $effect,
