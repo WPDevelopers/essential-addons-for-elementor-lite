@@ -658,7 +658,7 @@ trait Admin {
 						 ],
 					    'liquid-glass-effect'  => [
 						    'key'         => 'liquid-glass-effect',
-						    'title'       => __( 'Liquid Glass Presets', 'essential-addons-for-elementor-lite' ),
+						    'title'       => __( 'Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
 						    'demo_link'   => 'https://essential-addons.com/liquid-glass-effect/',
 						    'doc_link'    => 'https://essential-addons.com/docs/ea-liquid-glass-effect/',
 						    'promotion'   => 'new',

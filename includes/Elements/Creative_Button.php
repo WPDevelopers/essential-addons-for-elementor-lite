@@ -609,7 +609,7 @@ use HelperTrait;
         $this->start_controls_section(
 			'eael_wd_liquid_glass_effect_section',
 			[
-				'label' => esc_html__( 'Liquid Glass Presets', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -649,7 +649,7 @@ use HelperTrait;
         $this->add_control(
             'eael_wd_liquid_glass_effect_switch',
             [
-                'label' => __( 'Enable Liquid Glass Presets', 'essential-addons-for-elementor-lite' ),
+                'label' => __( 'Enable Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
                 'type'  => Controls_Manager::SWITCHER
             ]
         );
