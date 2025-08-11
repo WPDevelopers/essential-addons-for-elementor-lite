@@ -60,30 +60,36 @@ add_action( 'plugins_loaded', function () {
  *
  * @since v3.0.0
  */
-add_action('wp_loaded', function () {
-    $migration = new \Essential_Addons_Elementor\Classes\Migration;
-    $migration->migrator();
-});
+add_action( 'wp_loaded', function () {
+	if ( class_exists( '\Essential_Addons_Elementor\Classes\Migration' ) ) {
+		$migration = new \Essential_Addons_Elementor\Classes\Migration;
+		$migration->migrator();
+	}
+} );
 
 /**
  * Activation hook
  *
  * @since v3.0.0
  */
-register_activation_hook(__FILE__, function () {
-    $migration = new \Essential_Addons_Elementor\Classes\Migration;
-    $migration->plugin_activation_hook();
-});
+register_activation_hook( __FILE__, function () {
+	if ( class_exists( '\Essential_Addons_Elementor\Classes\Migration' ) ) {
+		$migration = new \Essential_Addons_Elementor\Classes\Migration;
+		$migration->plugin_activation_hook();
+	}
+} );
 
 /**
  * Deactivation hook
  *
  * @since v3.0.0
  */
-register_deactivation_hook(__FILE__, function () {
-    $migration = new \Essential_Addons_Elementor\Classes\Migration;
-    $migration->plugin_deactivation_hook();
-});
+register_deactivation_hook( __FILE__, function () {
+	if ( class_exists( '\Essential_Addons_Elementor\Classes\Migration' ) ) {
+		$migration = new \Essential_Addons_Elementor\Classes\Migration;
+		$migration->plugin_deactivation_hook();
+	}
+} );
 
 /**
  * Upgrade hook
