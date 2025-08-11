@@ -536,6 +536,17 @@ class Info_Box extends Widget_Base
         );
 
         $this->add_control(
+            'eael_wd_liquid_glass_effect_switch',
+            [
+                'label' => __( 'Enable Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
+                'type'  => Controls_Manager::SWITCHER,
+                'condition' => [
+                    'eael_show_infobox_button' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'eael_show_infobox_clickable',
             [
                 'label' => __('Infobox Clickable', 'essential-addons-for-elementor-lite'),
@@ -2000,13 +2011,6 @@ class Info_Box extends Widget_Base
 		return $html;
     }
     protected function eael_liquid_glass_effects() {
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_switch',
-            [
-                'label' => __( 'Enable Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
-                'type'  => Controls_Manager::SWITCHER
-            ]
-        );
 
         $this->add_control(
             'eael_wd_liquid_glass_effect_notice',
