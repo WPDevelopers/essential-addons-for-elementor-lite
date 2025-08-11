@@ -1976,6 +1976,7 @@ class Info_Box extends Widget_Base
 				'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'eael_show_infobox_button' => 'yes',
+                    'eael_wd_liquid_glass_effect_switch' => 'yes',
                 ],
 			]
 		);

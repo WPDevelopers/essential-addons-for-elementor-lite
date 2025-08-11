@@ -299,6 +299,14 @@ class Image_Accordion extends Widget_Base {
             ]
         );
 
+        $this->add_control(
+            'eael_wd_liquid_glass_effect_switch',
+            [
+                'label' => __( 'Enable Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
+                'type'  => Controls_Manager::SWITCHER
+            ]
+        );
+
         $this->end_controls_section();
 
         /**
@@ -566,6 +574,9 @@ class Image_Accordion extends Widget_Base {
 			[
 				'label' => esc_html__( 'Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
 				'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_wd_liquid_glass_effect_switch' => 'yes'
+                ]
 			]
 		);
 
@@ -600,14 +611,6 @@ class Image_Accordion extends Widget_Base {
 		return $html;
     }
     protected function eael_liquid_glass_effects() {
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_switch',
-            [
-                'label' => __( 'Enable Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
-                'type'  => Controls_Manager::SWITCHER
-            ]
-        );
-
         $this->add_control(
             'eael_wd_liquid_glass_effect_notice',
             [
