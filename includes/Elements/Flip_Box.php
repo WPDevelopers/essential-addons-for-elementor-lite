@@ -212,6 +212,22 @@ class Flip_Box extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_wd_liquid_glass_effect_switch',
+            [
+                'label' => __( 'Enable Liquid Glass Effects Front', 'essential-addons-for-elementor-lite' ),
+                'type'  => Controls_Manager::SWITCHER
+            ]
+        );
+
+        $this->add_control(
+            'eael_wd_liquid_glass_effect_switch_rear',
+            [
+                'label' => __( 'Enable Liquid Glass Effects Back', 'essential-addons-for-elementor-lite' ),
+                'type'  => Controls_Manager::SWITCHER
+            ]
+        );
+
         $this->end_controls_section();
 
         /**
@@ -1578,6 +1594,9 @@ class Flip_Box extends Widget_Base
 			[
 				'label' => esc_html__( 'Liquid Glass Effects Front', 'essential-addons-for-elementor-lite' ),
 				'tab' => Controls_Manager::TAB_STYLE,
+                'condition'   => [
+                    'eael_wd_liquid_glass_effect_switch' => 'yes',
+                ]
 			]
 		);
 
@@ -1592,8 +1611,11 @@ class Flip_Box extends Widget_Base
         $this->start_controls_section(
 			'eael_wd_liquid_glass_effect_back_section',
 			[
-				'label' => esc_html__( 'Liquid Glass Effects Back', 'essential-addons-for-elementor-lite' ),
-				'tab' => Controls_Manager::TAB_STYLE,
+				'label'       => esc_html__( 'Liquid Glass Effects Back', 'essential-addons-for-elementor-lite' ),
+				'tab'         => Controls_Manager::TAB_STYLE,
+                'condition'   => [
+                    'eael_wd_liquid_glass_effect_switch_rear' => 'yes',
+                ]
 			]
 		);
 
@@ -1628,14 +1650,6 @@ class Flip_Box extends Widget_Base
 		return $html;
     }
     protected function eael_liquid_glass_effects() {
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_switch',
-            [
-                'label' => __( 'Enable Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
-                'type'  => Controls_Manager::SWITCHER
-            ]
-        );
-
         $this->add_control(
             'eael_wd_liquid_glass_effect_notice',
             [
@@ -2056,14 +2070,6 @@ class Flip_Box extends Widget_Base
      * Controller Summary of eael_liquid_glass_effects
      */
     protected function eael_liquid_glass_effects_rear() {
-        $this->add_control(
-            'eael_wd_liquid_glass_effect_switch_rear',
-            [
-                'label' => __( 'Enable Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
-                'type'  => Controls_Manager::SWITCHER
-            ]
-        );
-
         $this->add_control(
             'eael_wd_liquid_glass_effect_notice_rear',
             [
