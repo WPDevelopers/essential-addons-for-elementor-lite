@@ -2196,6 +2196,9 @@ class Flip_Box extends Widget_Base
         do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_rear_effect4', $this, 'effect4', '', '.eael-elements-flip-box-rear-container' );
         do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_rear_effect5', $this, 'effect5', '', '.eael-elements-flip-box-rear-container' );
         do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_rear_effect6', $this, 'effect6', '', '.eael-elements-flip-box-rear-container' );
+
+        // Noise Distortion Settings (Pro)
+        do_action( 'eael_wd_liquid_glass_effect_noise_action_rear', $this );
     }
 
     /**
