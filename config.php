@@ -198,6 +198,13 @@ $config = [
                         'context' => 'view',
                     ],
                 ],
+                'js' => [
+                    [
+                        'file' => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/flip-box.min.js',
+                        'type' => 'self',
+                        'context' => 'view',
+                    ],
+                ],
             ],
         ],
         'call-to-action' => [
