@@ -165,7 +165,7 @@ class Liquid_Glass_Effect {
 		$element->start_controls_section(
 			'eael_liquid_glass_effect_section',
 			[
-				'label' => __( '<i class="eaicon-logo"></i> Liquid Glass Presets', 'essential-addons-for-elementor-lite' ),
+				'label' => __( '<i class="eaicon-logo"></i> Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
 				'tab'   => Controls_Manager::TAB_ADVANCED
 			]
 		);
@@ -173,7 +173,7 @@ class Liquid_Glass_Effect {
 		$element->add_control(
 			'eael_liquid_glass_effect_switch',
 			[
-				'label' => __( 'Enable Liquid Glass Presets', 'essential-addons-for-elementor-lite' ),
+				'label' => __( 'Enable Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
 				'type'  => Controls_Manager::SWITCHER
 			]
 		);
@@ -353,13 +353,13 @@ class Liquid_Glass_Effect {
 				]
 			);
 
-			// Add border effect for Liquid Glass Presets
+			// Add border effect for Liquid Glass Effects
 			$this->eael_liquid_glass_effect_border( $element, 'effect1', '#FFFFFF1F', ['effect1', 'effect2'] );
 			$this->eael_liquid_glass_effect_border( $element, 'effect2', '#FFFFFF1F', ['effect1', 'effect2'] );
 			$this->eael_liquid_glass_effect_border( $element, 'effect3', '#FFFFFF1F', ['effect1', 'effect2'] );
 			$this->eael_liquid_glass_effect_border( $element, 'effect4', '#AAAAAA1A', ['effect1', 'effect2'] );
 
-			// Add border radius effect for Liquid Glass Presets
+			// Add border radius effect for Liquid Glass Effects
 			$this->eael_liquid_glass_effect_border_radius( $element, 'effect1', [
 				'top'      => 24,
 				'right'    => 24,
@@ -396,7 +396,7 @@ class Liquid_Glass_Effect {
 				'isLinked' => true,
 			], ['effect1', 'effect2'] );
 
-			// Add box shadow effect for Liquid Glass Presets
+			// Add box shadow effect for Liquid Glass Effects
 			$this->eael_liquid_glass_effect_box_shadow( $element, 'effect1', [
 				'color'      => 'rgba(0,0,0,0.78)',
 				'horizontal' => 0,
@@ -466,13 +466,13 @@ class Liquid_Glass_Effect {
 				]
 			);
 
-			// Add border effect for Liquid Glass Presets
+			// Add border effect for Liquid Glass Effects
 			$this->eael_liquid_glass_effect_border( $element, 'effect1', '#FFFFFF1F', ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'] );
 			$this->eael_liquid_glass_effect_border( $element, 'effect2', '#FFFFFF1F', ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'] );
 			$this->eael_liquid_glass_effect_border( $element, 'effect3', '#FFFFFF1F', ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'] );
 			$this->eael_liquid_glass_effect_border( $element, 'effect4', '#AAAAAA1A', ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'] );
 
-			// Add border radius effect for Liquid Glass Presets
+			// Add border radius effect for Liquid Glass Effects
 			$this->eael_liquid_glass_effect_border_radius( $element, 'effect1', [
 				'top'      => 24,
 				'right'    => 24,
@@ -509,7 +509,7 @@ class Liquid_Glass_Effect {
 				'isLinked' => true,
 			], ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'] );
 
-			// Add box shadow effect for Liquid Glass Presets
+			// Add box shadow effect for Liquid Glass Effects
 			$this->eael_liquid_glass_effect_box_shadow( $element, 'effect1', [
 				'color'      => 'rgba(0,0,0,0.78)',
 				'horizontal' => 0,
