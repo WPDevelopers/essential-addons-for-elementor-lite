@@ -1713,7 +1713,7 @@ msgstr ""
 msgid "File Not Found"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Category_Box.php:1178, ../includes/Elements/Betterdocs_Category_Box.php:1150, ../includes/Elements/Betterdocs_Category_Grid.php:1691, ../includes/Elements/Betterdocs_Category_Grid.php:1661, ../includes/Elements/Post_Grid.php:1849, ../includes/Elements/Post_Timeline.php:791, ../includes/Elements/Product_Grid.php:3706
+#: ../includes/Elements/Betterdocs_Category_Box.php:1178, ../includes/Elements/Betterdocs_Category_Box.php:1150, ../includes/Elements/Betterdocs_Category_Grid.php:1691, ../includes/Elements/Betterdocs_Category_Grid.php:1661, ../includes/Elements/Post_Grid.php:1850, ../includes/Elements/Post_Timeline.php:792, ../includes/Elements/Product_Grid.php:3706
 msgid "No posts found!"
 msgstr ""
 
@@ -7393,7 +7393,7 @@ msgstr ""
 msgid "Icon font size"
 msgstr ""
 
-#: ../includes/Elements/Post_Grid.php:1853, ../includes/Elements/Woo_Product_Gallery.php:2913
+#: ../includes/Elements/Post_Grid.php:1854, ../includes/Elements/Woo_Product_Gallery.php:2914
 msgid "No Layout Found"
 msgstr ""
 
@@ -7465,7 +7465,7 @@ msgstr ""
 msgid "Timeline Vertical Line Color"
 msgstr ""
 
-#: ../includes/Elements/Post_Timeline.php:795, ../includes/Elements/Product_Grid.php:3710, ../includes/Elements/Woo_Product_Carousel.php:3259, ../includes/Elements/Woo_Product_List.php:4102
+#: ../includes/Elements/Post_Timeline.php:796, ../includes/Elements/Product_Grid.php:3710, ../includes/Elements/Woo_Product_Carousel.php:3259, ../includes/Elements/Woo_Product_List.php:4103
 msgid "No layout found!"
 msgstr ""
 
@@ -9902,7 +9902,7 @@ msgstr ""
 msgid "Show Link?"
 msgstr ""
 
-#: ../includes/Elements/Woo_Product_Gallery.php:2907
+#: ../includes/Elements/Woo_Product_Gallery.php:2908
 msgid "No Product Found"
 msgstr ""
 
