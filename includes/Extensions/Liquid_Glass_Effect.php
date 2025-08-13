@@ -25,7 +25,7 @@ class Liquid_Glass_Effect {
 		$element->add_control(
 			'eael_liquid_glass_effect_bg_color_' . $effect,
 			[
-				'label'     => esc_html__( 'Bankground Color', 'essential-addons-for-elementor-lite' ),
+				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => $default_bg_color,
 				'selectors' => [
