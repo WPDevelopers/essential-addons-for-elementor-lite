@@ -382,6 +382,7 @@
          .elementor-choices-label {
             position: relative;
             border-block-end: none;
+            border-radius: 0;
             &:last-child {
                grid-column: 1 / -1;
                justify-content: center !important;
