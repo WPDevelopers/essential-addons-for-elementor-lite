@@ -179,7 +179,7 @@ trait Helper
 		    $this->add_render_attribute( 'load-more', [ 'data-max-page' => $max_page ] );
 	    }
 
-        if ( $args['posts_per_page'] != '-1' ) {
+        if ( isset( $args['posts_per_page'] ) && $args['posts_per_page'] != '-1' ) {
             $this->add_render_attribute( 'load-more-wrap', 'class', 'eael-load-more-button-wrap' );
         
             if ( "eael-dynamic-filterable-gallery" == $this->get_name() ){
