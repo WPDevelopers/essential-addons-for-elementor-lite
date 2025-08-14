@@ -45,15 +45,15 @@ msgstr ""
 msgid "of"
 msgstr ""
 
-#: ../includes/Classes/Compatibility_Support.php:58
+#: ../includes/Classes/Compatibility_Support.php:63
 msgid "Livraison Mondial Relay"
 msgstr ""
 
-#: ../includes/Classes/Compatibility_Support.php:60
+#: ../includes/Classes/Compatibility_Support.php:65
 msgid "Vous n'avez pas encore choisi de Point Relais®"
 msgstr ""
 
-#: ../includes/Classes/Compatibility_Support.php:62
+#: ../includes/Classes/Compatibility_Support.php:67
 msgid "Choisir un Point Relais®"
 msgstr ""
 
