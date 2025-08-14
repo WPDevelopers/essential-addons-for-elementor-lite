@@ -173,8 +173,9 @@ class Liquid_Glass_Effect {
 		$element->add_control(
 			'eael_liquid_glass_effect_switch',
 			[
-				'label' => __( 'Enable Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
-				'type'  => Controls_Manager::SWITCHER
+				'label'        => __( 'Enable Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
 			]
 		);
 
