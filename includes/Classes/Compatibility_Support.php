@@ -42,6 +42,11 @@ class Compatibility_Support {
 	* @return bool
 	*/
 	private function is_mondialrelay_plugin_active() {
+		// Include plugin.php to ensure plugin functions are available
+		if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
+			include_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+
 		$plugin_path = 'mondialrelay-wordpress/mondialrelay-wordpress.php';
 		return in_array( $plugin_path, apply_filters('active_plugins', get_option('active_plugins' ) ) ) || is_plugin_active_for_network( $plugin_path );
 	}
