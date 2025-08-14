@@ -624,7 +624,7 @@ class SVG_Draw extends Widget_Base {
 		if ( ! empty( $settings['eael_svg_drawing_speed'] ) ) {
 			$svg_options['speed'] = $settings['eael_svg_drawing_speed'];
 		} elseif ( isset( $settings['eael_svg_draw_speed'] ) ) {
-			$svg_options['speed'] = $settings['eael_svg_draw_speed'] * 0.05;
+			$svg_options['speed'] = floatval( $settings['eael_svg_draw_speed'] ) * 0.05;
 		} else {
 			$svg_options['speed'] = 1;
 		}

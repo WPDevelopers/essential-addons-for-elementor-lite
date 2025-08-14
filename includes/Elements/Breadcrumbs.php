@@ -554,19 +554,24 @@ class Breadcrumbs extends Widget_Base {
 	protected function eael_breadcrumb_prefix() {
 		$settings = $this->get_settings_for_display();
 		$prefix_type = $settings['eael_breadcrumb_prefix_type'];
+
 		if ( 'yes' == $settings['breadcrumb_prefix_switch'] ) {
 			?>
 			<div class="eael-breadcrumbs__prefix">
 				<?php 
 					switch ( $prefix_type ) {
 						case 'icon':
+							$home_url = get_bloginfo( 'url' );
+							echo '<a href="' . esc_url( $home_url ) . '" class="eael-breadcrumbs__prefix-link">';
 							Icons_Manager::render_icon( $settings['eael_breadcrumb_prefix_icon'], [ 'aria-hidden' => 'true' ] );
+							echo '</a>';
 							break;
 						case 'text':
 							echo "<span>" . wp_kses( $settings['eael_breadcrumb_prefix_text'], Helper::eael_allowed_tags() ) . "</span>";
 							break;
 					}
 				?>
+			</a>
 			</div>
 			<?php
 		}
