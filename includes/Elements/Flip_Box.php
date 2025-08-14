@@ -59,6 +59,9 @@ class Flip_Box extends Widget_Base
             'rotate',
             'ea',
             'essential addons',
+            'Glassmorphism',
+            'Liquid Glass Effect',
+            'Frost Effect',
         ];
     }
 

@@ -55,6 +55,9 @@ use HelperTrait;
             'ea',
             'marketing button',
             'essential addons',
+            'Glassmorphism',
+            'Liquid Glass Effect',
+            'Frost Effect',
         ];
     }
 
