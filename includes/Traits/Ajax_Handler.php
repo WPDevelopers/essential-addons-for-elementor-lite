@@ -550,6 +550,10 @@ trait Ajax_Handler {
 	 */
 	public function woo_checkout_update_order_review() {
 		$setting = $_POST['orderReviewData'];
+		
+		//Mondial Relay plugin integration
+		do_action( 'eael_mondialrelay_order_after_shipping' );
+
 		ob_start();
 		AllTraits::checkout_order_review_default( $setting );
 		$woo_checkout_update_order_review = ob_get_clean();
