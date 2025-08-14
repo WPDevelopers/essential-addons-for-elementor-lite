@@ -131,6 +131,8 @@
 }
 .woocommerce div.product .eael-single-product-add-to-cart .variations_form,
 .woocommerce div.product .eael-single-product-add-to-cart .grouped_form,
+.woocommerce section.product .eael-single-product-add-to-cart .variations_form,
+.woocommerce section.product .eael-single-product-add-to-cart .grouped_form,
 .woocommerce .dialog-widget-content .eael-single-product-add-to-cart .variations_form,
 .woocommerce .dialog-widget-content .eael-single-product-add-to-cart .grouped_form {
   -webkit-box-orient: vertical;
@@ -139,6 +141,7 @@
           flex-direction: column;
 }
 .woocommerce div.product .eael-single-product-add-to-cart form.cart,
+.woocommerce section.product .eael-single-product-add-to-cart form.cart,
 .woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -147,6 +150,8 @@
 }
 .woocommerce div.product .eael-single-product-add-to-cart form.cart input[type=number] .qty,
 .woocommerce div.product .eael-single-product-add-to-cart form.cart .quantity .qty,
+.woocommerce section.product .eael-single-product-add-to-cart form.cart input[type=number] .qty,
+.woocommerce section.product .eael-single-product-add-to-cart form.cart .quantity .qty,
 .woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart input[type=number] .qty,
 .woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart .quantity .qty {
   width: 45px;
@@ -160,6 +165,7 @@
   background-color: #fff;
 }
 .woocommerce div.product .eael-single-product-add-to-cart form.cart .button,
+.woocommerce section.product .eael-single-product-add-to-cart form.cart .button,
 .woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart .button {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -183,16 +189,19 @@
   width: fit-content;
 }
 .woocommerce div.product .eael-single-product-add-to-cart form.cart table div.quantity,
+.woocommerce section.product .eael-single-product-add-to-cart form.cart table div.quantity,
 .woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart table div.quantity {
   padding-left: 15px;
 }
 .woocommerce div.product .eael-single-product-add-to-cart form.cart .group_table td.woocommerce-grouped-product-list-item__label a,
+.woocommerce section.product .eael-single-product-add-to-cart form.cart .group_table td.woocommerce-grouped-product-list-item__label a,
 .woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart .group_table td.woocommerce-grouped-product-list-item__label a {
   color: #434347;
   font-size: 15px;
   font-weight: 400;
 }
 .woocommerce div.product .eael-single-product-add-to-cart form.cart .group_table td .amount,
+.woocommerce section.product .eael-single-product-add-to-cart form.cart .group_table td .amount,
 .woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart .group_table td .amount {
   margin-bottom: 0;
   color: #434347;
@@ -200,13 +209,24 @@
 }
 .woocommerce div.product .eael-single-product-add-to-cart form.cart .variations td,
 .woocommerce div.product .eael-single-product-add-to-cart form.cart .variations th,
+.woocommerce section.product .eael-single-product-add-to-cart form.cart .variations td,
+.woocommerce section.product .eael-single-product-add-to-cart form.cart .variations th,
 .woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart .variations td,
 .woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart .variations th {
   line-height: 0;
-  vertical-align: middle;
+  vertical-align: text-top;
   padding: 10px 0;
 }
+.woocommerce div.product .eael-single-product-add-to-cart form.cart .variations td .reset_variations,
+.woocommerce div.product .eael-single-product-add-to-cart form.cart .variations th .reset_variations,
+.woocommerce section.product .eael-single-product-add-to-cart form.cart .variations td .reset_variations,
+.woocommerce section.product .eael-single-product-add-to-cart form.cart .variations th .reset_variations,
+.woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart .variations td .reset_variations,
+.woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart .variations th .reset_variations {
+  line-height: 30px;
+}
 .woocommerce div.product .eael-single-product-add-to-cart .variations_button,
+.woocommerce section.product .eael-single-product-add-to-cart .variations_button,
 .woocommerce .dialog-widget-content .eael-single-product-add-to-cart .variations_button {
   display: -webkit-box;
   display: -ms-flexbox;

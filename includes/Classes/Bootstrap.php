@@ -128,6 +128,9 @@ class Bootstrap
 		    new Asset_Builder( $this->registered_elements, $this->registered_extensions );
 	    }
 
+        // Compatibility Support
+        new Compatibility_Support();
+
     }
 
     protected function register_hooks() {

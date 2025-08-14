@@ -973,6 +973,22 @@ class Simple_Menu extends Widget_Base
 	    );
 
         $this->add_control(
+		    'eael_simple_menu_item_indicator_area',
+		    [
+			    'label' => esc_html__( 'Icon Area', 'essential-addons-for-elementor-lite' ),
+			    'type' => Controls_Manager::SLIDER,
+			    'range' => [
+				    'px' => [
+					    'max' => 100,
+				    ],
+			    ],
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-simple-menu li span' => 'width: {{SIZE}}{{UNIT}}; height:{{SIZE}}{{UNIT}};',
+			    ],
+		    ]
+	    );
+
+        $this->add_control(
             'eael_simple_menu_item_indicator_note',
             [
                 'label'      => __('Important Note', 'essential-addons-for-elementor-lite'),

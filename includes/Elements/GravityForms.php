@@ -866,6 +866,7 @@ class GravityForms extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'selectors'             => [
                     'html body {{WRAPPER}} .eael-gravity-form .gfield label' => 'color: {{VALUE}}',
+                    'html body {{WRAPPER}} .eael-gravity-form .gfield .gfield_list_header .gform-field-label' => 'color: {{VALUE}}',
                 ],
                 'condition'             => [
                     'labels_switch'   => 'yes',
@@ -878,7 +879,7 @@ class GravityForms extends Widget_Base {
             [
                 'name'                  => 'typography_sub_label',
                 'label'                 => __( 'Typography', 'essential-addons-for-elementor-lite'),
-                'selector'              => 'html body {{WRAPPER}} .eael-gravity-form .gfield label',
+                'selector'              => 'html body {{WRAPPER}} .eael-gravity-form .gfield label, html body {{WRAPPER}} .eael-gravity-form .gfield .gfield_list_header .gform-field-label',
                 'condition'             => [
                     'labels_switch'   => 'yes',
                 ],
@@ -1949,6 +1950,74 @@ class GravityForms extends Widget_Base {
 				    'html body {{WRAPPER}} .eael-gravity-form .ginput_container_fileupload input[type="file"]::file-selector-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				    'html body {{WRAPPER}} .eael-gravity-form .ginput_container_fileupload input[type="file"]::-webkit-file-upload-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				    'html body {{WRAPPER}} .eael-gravity-form .ginput_container_fileupload .button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				    'html body {{WRAPPER}} .eael-gravity-form .ginput_container_fileupload .large' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			    ],
+		    ]
+	    );
+
+        $this->add_group_control(
+		    Group_Control_Typography::get_type(),
+		    [
+			    'name'                  => 'file_upload_button_typography',
+			    'label'                 => __( 'Typography', 'essential-addons-for-elementor-lite'),
+			    'global' => [
+				    'default' => Global_Typography::TYPOGRAPHY_ACCENT
+			    ],
+			    'selector'              => 'html body {{WRAPPER}} .eael-gravity-form .ginput_container_fileupload input[type="file"]::file-selector-button, html body {{WRAPPER}} .eael-gravity-form .ginput_container_fileupload input[type="file"]::-webkit-file-upload-button, html body {{WRAPPER}} .eael-gravity-form .ginput_container_fileupload .button, html body {{WRAPPER}} .eael-gravity-form .ginput_container_fileupload .large',
+			    'separator'             => 'before',
+		    ]
+	    );
+
+        $this->add_control(
+		    'file_upload_file_chosen',
+		    [
+			    'label'                 => __( 'File Chosen', 'essential-addons-for-elementor-lite'),
+			    'type'                  => Controls_Manager::HEADING,
+			    'separator'             => 'before',
+		    ]
+	    );
+
+        $this->add_control(
+		    'file_upload_file_chosen_bg_color_normal',
+		    [
+			    'label'                 => __( 'Background Color', 'essential-addons-for-elementor-lite'),
+			    'type'                  => Controls_Manager::COLOR,
+			    'selectors'             => [
+				    'html body {{WRAPPER}} .eael-gravity-form .ginput_container_fileupload .large' => 'background-color: {{VALUE}}',
+			    ],
+		    ]
+	    );
+
+        $this->add_control(
+		    'file_upload_file_chosen_color_normal',
+		    [
+			    'label'                 => __( 'Color', 'essential-addons-for-elementor-lite'),
+			    'type'                  => Controls_Manager::COLOR,
+			    'selectors'             => [
+				    'html body {{WRAPPER}} .eael-gravity-form .ginput_container_fileupload .large' => 'color: {{VALUE}}',
+			    ],
+		    ]
+	    );
+
+        $this->add_group_control(
+		    Group_Control_Border::get_type(),
+		    [
+			    'name'                  => 'file_upload_file_chosen_border_normal',
+			    'label'                 => __( 'Border', 'essential-addons-for-elementor-lite'),
+			    'placeholder'           => '1px',
+			    'default'               => '1px',
+			    'selector'              => 'html body {{WRAPPER}} .eael-gravity-form .ginput_container_fileupload .large',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'file_upload_file_chosen_border_radius',
+		    [
+			    'label'                 => __( 'Border Radius', 'essential-addons-for-elementor-lite'),
+			    'type'                  => Controls_Manager::DIMENSIONS,
+			    'size_units'            => [ 'px', 'em', '%' ],
+			    'selectors'             => [
+				    'html body {{WRAPPER}} .eael-gravity-form .ginput_container_fileupload .large' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 			    ],
 		    ]
 	    );
@@ -2007,19 +2076,6 @@ class GravityForms extends Widget_Base {
 	    $this->end_controls_tab();
 
 	    $this->end_controls_tabs();
-
-	    $this->add_group_control(
-		    Group_Control_Typography::get_type(),
-		    [
-			    'name'                  => 'file_upload_button_typography',
-			    'label'                 => __( 'Typography', 'essential-addons-for-elementor-lite'),
-			    'global' => [
-				    'default' => Global_Typography::TYPOGRAPHY_ACCENT
-			    ],
-			    'selector'              => 'html body {{WRAPPER}} .eael-gravity-form .ginput_container_fileupload input[type="file"]::file-selector-button, html body {{WRAPPER}} .eael-gravity-form .ginput_container_fileupload input[type="file"]::-webkit-file-upload-button, html body {{WRAPPER}} .eael-gravity-form .ginput_container_fileupload .button',
-			    'separator'             => 'before',
-		    ]
-	    );
 
 	    $this->add_control(
 		    'file_upload_rules_heading',

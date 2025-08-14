@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.2.2
+Stable tag: 6.2.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -314,6 +314,27 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.2.3 - 13/08/2025 =
+
+- Fixed: EA Simple Menu | Dropdown not working on iPhone
+- Fixed: EA Filterable Gallery | Filters not updating in editor
+- Fixed: Homepage not loading after updating from v6.1.8
+- Fixed: Post Widgets | "Load More" button stays after full load
+- Fixed: EA Woo Checkout | Shipping selection issue
+- Fixed: EA Add to Cart | Spacing issue with variable products
+- Fixed: Migration error | File integrity check added
+- Fixed: EA Gravity Forms | List/File upload field color issue
+- Fixed: EA SVG Draw | Not triggering on scroll
+- Improved: EA Login/Register | Cloudflare Turnstile support
+- Improved: EA Tooltip | WPML Media Translation support
+- Improved: EA Flip Box | Auto height for all devices
+- Improved: EA Woo Product Image | Custom hook for thumbnail
+- Improved: EA Woo Product Image | Enhanced zoom effect
+- Improved: EA Breadcrumbs | Home icon now clickable
+- Improved: Performance | Reduced unnecessary queries
+- Security Enhancement
+- Few minor bug fixes & improvements
 
 = 6.2.2 - 28/07/2025 =
 

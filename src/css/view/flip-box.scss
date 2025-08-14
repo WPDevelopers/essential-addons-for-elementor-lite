@@ -52,6 +52,7 @@
 
 .eael-elements-flip-box-vertical-align {
    width: 100%;
+   display: inline;
 }
 
 .eael-elements-flip-box-padding {
@@ -196,6 +197,7 @@
    backface-visibility: hidden;
    transform: rotateX(0deg);
    transform: rotateY(0deg);
+   overflow: hidden;
 }
 
 /*--- Flip ---*/
@@ -392,7 +394,12 @@
    visibility: hidden;
    transform: scale(0.75);
 }
-
+.eael-animate-zoom-out.eael-elements-flip-box-container
+   .eael-elements-flip-box-flip-card,
+.eael-animate-zoom-in.eael-elements-flip-box-container
+   .eael-elements-flip-box-flip-card {
+   overflow: hidden;
+}
 .eael-animate-fade.eael-elements-flip-box-container.eael-flip-box-hover:hover
    .eael-elements-flip-box-front-container,
 .eael-animate-fade.eael-elements-flip-box-container.eael-flip-box-click.--active
@@ -422,18 +429,14 @@
 /*--- Fade ---*/
 
 .eael-animate-fade-in.eael-elements-flip-box-container {
-   //-webkit-transform: scale(1);
-   //-ms-transform: scale(1);
-   //transform: scale(1);
-   //opacity: 1;
-
    .eael-elements-flip-box-flip-card {
       transform-style: preserve-3d;
       perspective: 1000px;
       transition: all 0.6s ease-in-out;
    }
 
-   &:hover {
+   &.eael-flip-box-hover:hover,
+   &.eael-flip-box-click.--active {
       .eael-elements-flip-box-front-container {
          opacity: 0;
          visibility: hidden;
@@ -461,69 +464,51 @@
    }
 }
 
-/*--- Liquid Glass Effect ---*/
-.eael_wd_liquid_glass-effect4 .eael-elements-flip-box-front-container {
-   position: relative;
-}
+// Auto height mode styles
+.eael-flipbox-auto-height {
+   height: auto !important;
+   min-height: auto !important;
 
-.eael_wd_liquid_glass-effect4 .eael-elements-flip-box-front-container::before,
-.eael_wd_liquid_glass_rear-effect4
-   .eael-elements-flip-box-rear-container::before {
-   position: absolute;
-   content: "";
-   z-index: -99;
-   height: 100%;
-   width: 100%;
-   left: 0;
-   top: 0;
-   backdrop-filter: blur(0px);
-   -webkit-backdrop-filter: blur(0px);
-   filter: url(#eael-glass-distortion1);
-}
+   .eael-elements-flip-box-front-container,
+   .eael-elements-flip-box-rear-container {
+      height: auto !important;
+      min-height: auto !important;
+      position: relative;
+   }
 
-.eael_wd_liquid_glass-effect5 .eael-elements-flip-box-front-container {
-   position: relative;
-}
+   .eael-elements-flip-box-rear-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+   }
 
-.eael_wd_liquid_glass-effect5 .eael-elements-flip-box-front-container::before,
-.eael_wd_liquid_glass_rear-effect5
-   .eael-elements-flip-box-rear-container::before {
-   position: absolute;
-   content: "";
-   z-index: -99;
-   height: 100%;
-   width: 100%;
-   left: 0;
-   top: 0;
-   backdrop-filter: blur(0px);
-   -webkit-backdrop-filter: blur(0px);
-   filter: url(#eael-glass-distortion2);
-}
+   // Ensure flip animations still work with auto height
+   &.eael-animate-flip {
+      .eael-elements-flip-box-flip-card {
+         height: auto;
+      }
+   }
 
-.eael_wd_liquid_glass-effect6 .eael-elements-flip-box-front-container {
-   position: relative;
-}
+   // For zoom and fade animations, maintain proper positioning
+   &.eael-animate-zoom-in,
+   &.eael-animate-zoom-out,
+   &.eael-animate-fade-in {
+      .eael-elements-flip-box-rear-container {
+         position: absolute;
+         top: 0;
+         left: 0;
+         width: 100%;
+      }
+   }
 
-.eael_wd_liquid_glass-effect6 .eael-elements-flip-box-front-container::before,
-.eael_wd_liquid_glass_rear-effect6
-   .eael-elements-flip-box-rear-container::before {
-   position: absolute;
-   content: "";
-   z-index: -99;
-   height: 100%;
-   width: 100%;
-   left: 0;
-   top: 0;
-   backdrop-filter: blur(0px);
-   -webkit-backdrop-filter: blur(0px);
-   filter: url(#eael-glass-distortion3);
-}
+   // For slide and push animations, adjust positioning
+   &.eael-animate-push,
+   &.eael-animate-slide {
+      overflow: visible;
 
-.elementor-edit-area-active {
-   .eael_wd_liquid_glass_shadow-effect1,
-   .eael_wd_liquid_glass_shadow-effect2,
-   .eael_wd_liquid_glass_shadow-effect3,
-   .eael_wd_liquid_glass_shadow-effect4 {
-      box-shadow: inherit !important;
+      .eael-elements-flip-box-rear-container {
+         position: absolute;
+      }
    }
 }
