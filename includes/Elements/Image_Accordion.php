@@ -46,6 +46,9 @@ class Image_Accordion extends Widget_Base {
             'gallery',
             'ea',
             'essential addons',
+            'Glassmorphism',
+            'Liquid Glass Effect',
+            'Frost Effect',
         ];
     }
 

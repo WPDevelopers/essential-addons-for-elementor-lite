@@ -54,6 +54,9 @@ class Info_Box extends Widget_Base
             'card',
             'ea',
             'essential addons',
+            'Glassmorphism',
+            'Liquid Glass Effect',
+            'Frost Effect',
         ];
     }
 
