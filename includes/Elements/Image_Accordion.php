@@ -616,7 +616,7 @@ class Image_Accordion extends Widget_Base {
             [
                 'type'        => Controls_Manager::ALERT,
                 'alert_type'  => 'info',
-                'content'     => esc_html__( 'Liquid glass effect is only visible when a semi-transparent background color is applied.', 'essential-addons-for-elementor-lite' ) . ' <a href = "#">' . esc_html__( 'Learn More', 'essential-addons-for-elementor-lite' ) . '</a>',
+                'content'     => esc_html__( 'Liquid glass effect is only visible when a semi-transparent background color is applied.', 'essential-addons-for-elementor-lite' ) . '<a href="https://essential-addons.com/docs/ea-liquid-glass-effects/" target="_blank">' . esc_html__( 'Learn More', 'essential-addons-for-elementor-lite' ) . '</a>',
                 'condition'   => [
                     'eael_wd_liquid_glass_effect_switch' => 'yes',
                 ]
