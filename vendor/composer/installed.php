@@ -3,7 +3,7 @@
         'name' => 'mukul/essential-addons-for-elementor-lite',
         'pretty_version' => '77358.x-dev',
         'version' => '77358.9999999.9999999.9999999-dev',
-        'reference' => '6e36ed618e4890c2548c95db6b2d78a1c6235fea',
+        'reference' => '404c427ac83573da7843fc6be4bf3fb8881ce40e',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'mukul/essential-addons-for-elementor-lite' => array(
             'pretty_version' => '77358.x-dev',
             'version' => '77358.9999999.9999999.9999999-dev',
-            'reference' => '6e36ed618e4890c2548c95db6b2d78a1c6235fea',
+            'reference' => '404c427ac83573da7843fc6be4bf3fb8881ce40e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
