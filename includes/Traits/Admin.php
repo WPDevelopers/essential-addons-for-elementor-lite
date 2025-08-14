@@ -646,7 +646,15 @@ trait Admin {
 						    'doc_link'    => 'https://essential-addons.com/docs/ea-hover-interaction/',
 						    'promotion'   => 'new',
 						    'is_activate' => boolval( $this->get_settings( 'special-hover-effect' ) )
-					    ]
+						 ],
+					    'liquid-glass-effect'  => [
+						    'key'         => 'liquid-glass-effect',
+						    'title'       => __( 'Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
+						    'demo_link'   => 'https://essential-addons.com/liquid-glass-effects/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-liquid-glass-effects/',
+						    'promotion'   => 'new',
+						    'is_activate' => boolval( $this->get_settings( 'liquid-glass-effect' ) )
+						 ],
 				    ]
 			    ],
 			    'widgets'                 => [

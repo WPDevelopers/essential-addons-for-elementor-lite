@@ -1421,6 +1421,18 @@ $config = [
                 ],
             ],
         ],
+        'liquid-glass-effect' => [
+            'class'      => '\Essential_Addons_Elementor\Extensions\Liquid_Glass_Effect',
+            'dependency' => [
+                'css' => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/css/view/liquid-glass-effect.min.css',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                ],
+            ],
+        ],
     ],
 ];
 
