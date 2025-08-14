@@ -1135,7 +1135,7 @@ trait Login_Registration {
 	}
 
 	public function eael_redirect_to_reset_password(){
-		if( empty($_GET['eael-resetpassword']) ){
+		if ( empty( $_GET['eael-resetpassword'] ) || empty( $_GET['key'] ) || empty( $_GET['login'] ) || empty( $_GET['action'] ) || 'rp' !== $_GET['action'] ) {
 			return;
 		}
 
