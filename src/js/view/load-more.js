@@ -211,8 +211,9 @@
 						}
 					} else {
 						$(".eael-post-appender", $scope).append($content);
+						var settings = $(".eael-post-appender", $scope).data('settings');
 						
-						if ($layout == "masonry") {
+						if ($layout == "masonry" || settings?.has_filter) {
 							var $isotope = $(
 								".eael-post-appender",
 								$scope
