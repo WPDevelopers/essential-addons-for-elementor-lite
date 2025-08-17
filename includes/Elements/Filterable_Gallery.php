@@ -4385,7 +4385,7 @@ class Filterable_Gallery extends Widget_Base
             jQuery(document).ready(function($) {
                 $('.eael-filter-gallery-container').each(function() {
                     var $node_id = '<?php echo esc_js($this->get_id()); ?>',
-                        $scope           = $('[data-id=" ' + $node_id + '"]'),
+                        $scope           = $('[data-id="' + $node_id + '"]'),
                         $gallery         = $(this),
                         $settings        = $gallery.data('settings'),
 				        fg_items 		 = JSON.parse( atob( $gallery.data("gallery-items") ) ),
@@ -4500,10 +4500,9 @@ class Filterable_Gallery extends Widget_Base
                         $this.siblings().removeClass("active");
                         $this.addClass("active");
 	                    if (!firstInit && $items.length > 0) {
-                            $isotope_gallery.isotope();
 		                    $gallery.append($items);
 		                    $isotope_gallery.isotope('appended', $items);
-		                    $isotope_gallery.isotope({filter: buttonFilter});
+		                    $isotope_gallery.isotope();
 		                    $isotope_gallery.imagesLoaded().progress(function () {
 			                    $isotope_gallery.isotope("layout");
 		                    });

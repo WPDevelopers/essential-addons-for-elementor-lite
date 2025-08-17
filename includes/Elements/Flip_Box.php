@@ -181,6 +181,49 @@ class Flip_Box extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_flipbox_height_mode',
+            [
+                'label'   => esc_html__('Height Mode', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::CHOOSE,
+                'default' => 'fixed',
+                'options' => [
+                    'fixed' => [
+                        'title' => esc_html__('Fixed Height', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-text-field',
+                    ],
+                    'auto'  => [
+                        'title' => esc_html__('Auto Height', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-lightbox-expand',
+                    ],
+                ],
+                'description' => esc_html__('Choose between fixed height or auto height that adjusts to content.', 'essential-addons-for-elementor-lite'),
+                'toggle' => false,
+            ]
+        );
+
+        $this->add_control(
+            'eael_flipbox_height_adjustment',
+            [
+                'label'   => esc_html__('Adjustment', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::CHOOSE,
+                'default' => 'maximum',
+                'options' => [
+                    'maximum' => [
+                        'title' => esc_html__('Maximum Content Height', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-align-stretch-v',
+                    ],
+                    'dynamic' => [
+                        'title' => esc_html__('Based on Visible Content', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-align-end-v',
+                    ],
+                ],
+                'condition' => [
+                    'eael_flipbox_height_mode' => 'auto',
+                ],
+            ]
+        );
+
         $this->add_responsive_control(
             'eael_flipbox_height',
             [
@@ -204,8 +247,11 @@ class Flip_Box extends Widget_Base
                     'size' => 300,
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .eael-elements-flip-box-container:not(.eael-template)' => 'height: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .eael-elements-flip-box-container.eael-template' => 'min-height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-flipbox-fixed-height:not(.eael-template)' => 'height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-flipbox-fixed-height.eael-template' => 'min-height: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_flipbox_height_mode' => 'fixed',
                 ],
             ]
         );
@@ -895,7 +941,6 @@ class Flip_Box extends Widget_Base
                         'default' => '#502fc6',
                     ],
                 ],
-                'separator' => 'after',
             ]
         );
 
@@ -905,6 +950,7 @@ class Flip_Box extends Widget_Base
                 'label'      => esc_html__('Content Padding', 'essential-addons-for-elementor-lite'),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
+                'separator' => 'before',
                 'selectors'  => [
                     '{{WRAPPER}} .eael-elements-flip-box-front-container' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     '{{WRAPPER}} .eael-elements-flip-box-rear-container'  => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -1635,6 +1681,10 @@ class Flip_Box extends Widget_Base
             );
         }
 
+        // Add height mode class
+        $height_mode_class = 'auto' === $settings['eael_flipbox_height_mode'] ? 'eael-flipbox-auto-height' : 'eael-flipbox-fixed-height';
+        $height_adjustment_class = 'maximum' === $settings['eael_flipbox_height_adjustment'] ? 'eael-flipbox-max' : 'eael-flipbox-dynamic';
+
         $this->add_render_attribute(
             'eael_flipbox_main_wrap',
             [
@@ -1644,12 +1694,12 @@ class Flip_Box extends Widget_Base
                     'eael-' . esc_attr($settings['eael_flipbox_type']),
                     'eael-' . esc_attr($settings['eael_flipbox_front_content_type']),
                     'eael-flip-box-' . esc_attr($settings['eael_flipbox_event_type']),
+                    $height_mode_class,
+                    $height_adjustment_class,
                 ],
             ]
         );
-
-?>
-
+        ?>
         <div <?php $this->print_render_attribute_string('eael_flipbox_main_wrap'); ?>>
 
             <<?php echo esc_html( $flipbox_if_html_tag ) . ' '; $this->print_render_attribute_string('flipbox-container'); ?>>
@@ -1752,16 +1802,7 @@ class Flip_Box extends Widget_Base
                 </div>
             </<?php echo esc_html( $flipbox_if_html_tag ); ?>>
         </div>
-
-        <script>
-            jQuery(document).ready(function( $ ) {
-                $(".eael-flip-box-click").off('click').on( 'click', function( event ) {
-                    $(this).toggleClass( '--active' );
-                });
-            });
-        </script>
-
-<?php
+        <?php
     }
 
     protected function render_icon($settings, $icon_location = 'front')

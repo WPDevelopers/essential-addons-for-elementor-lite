@@ -560,6 +560,10 @@ trait Ajax_Handler {
 	 */
 	public function woo_checkout_update_order_review() {
 		$setting = $_POST['orderReviewData'];
+		
+		//Mondial Relay plugin integration
+		do_action( 'eael_mondialrelay_order_after_shipping' );
+
 		ob_start();
 		AllTraits::checkout_order_review_default( $setting );
 		$woo_checkout_update_order_review = ob_get_clean();
@@ -1009,6 +1013,15 @@ trait Ajax_Handler {
 		if ( isset( $settings['lr_recaptcha_language'] ) ) {
 			update_option( 'eael_recaptcha_language', sanitize_text_field( $settings['lr_recaptcha_language'] ) );
 		}
+
+		//Cloudflare Turnstile
+		if ( isset( $settings['lr_cloudflare_turnstile_sitekey'] ) ) {
+			update_option( 'eael_cloudflare_turnstile_sitekey', sanitize_text_field( $settings['lr_cloudflare_turnstile_sitekey'] ) );
+		}
+		if ( isset( $settings['lr_cloudflare_turnstile_secretkey'] ) ) {
+			update_option( 'eael_cloudflare_turnstile_secretkey', sanitize_text_field( $settings['lr_cloudflare_turnstile_secretkey'] ) );
+		}
+
 		//reCAPTCHA v3
 		if ( isset( $settings['lr_recaptcha_sitekey_v3'] ) ) {
 			update_option( 'eael_recaptcha_sitekey_v3', sanitize_text_field( $settings['lr_recaptcha_sitekey_v3'] ) );

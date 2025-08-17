@@ -155,6 +155,21 @@ trait Login_Registration {
 			}
 		}
 
+		if( ! empty( $settings['enable_cloudflare_turnstile'] ) && 'yes' === $settings['enable_cloudflare_turnstile'] && ! empty( $settings['enable_cloudflare_turnstile_on_login'] ) && 'yes' === $settings['enable_cloudflare_turnstile_on_login'] ){
+			if( ! $this->lr_validate_cloudflare_turnstile( $settings ) ) {
+				$err_msg = isset( $settings['err_cloudflare_turnstile'] ) ? Helper::eael_wp_kses( $settings['err_cloudflare_turnstile'] ) : __( 'You did not pass Cloudflare Turnstile challenge.', 'essential-addons-for-elementor-lite' );
+				if ( $ajax ) {
+					wp_send_json_error( $err_msg );
+				}
+				setcookie( 'eael_login_error_' . $widget_id, $err_msg );
+
+				if (isset($_SERVER['HTTP_REFERER'])) {
+					wp_safe_redirect($_SERVER['HTTP_REFERER']);
+					exit();
+				} // fail early if cloudflare turnstile failed
+			}
+		}
+
 		$user_login = ! empty( $_POST['eael-user-login'] ) ? sanitize_text_field( $_POST['eael-user-login'] ) : '';
 		if ( is_email( $user_login ) ) {
 			$user_login = sanitize_email( $user_login );
@@ -423,6 +438,12 @@ trait Login_Registration {
 			
 			if( ! $this->lr_validate_recaptcha( $ld_recaptcha_version, $settings ) ) {
 				$errors['recaptcha'] = isset( $settings['err_recaptcha'] ) ? Helper::eael_wp_kses( $settings['err_recaptcha'] ) : __( 'You did not pass recaptcha challenge.', 'essential-addons-for-elementor-lite' );
+			}
+		}
+
+		if ( isset( $settings['enable_cloudflare_turnstile_on_register'] ) && 'yes' === $settings['enable_cloudflare_turnstile_on_register'] ) {
+			if( ! $this->lr_validate_cloudflare_turnstile( $settings ) ) {
+				$errors['cloudflare_turnstile'] = isset( $settings['err_cloudflare_turnstile'] ) ? Helper::eael_wp_kses( $settings['err_cloudflare_turnstile'] ) : __( 'You did not pass Cloudflare Turnstile challenge.', 'essential-addons-for-elementor-lite' );
 			}
 		}
 
@@ -752,7 +773,7 @@ trait Login_Registration {
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
 			}
-			update_option( 'eael_losstpassword_error_' . $widget_id, $err_msg, false );
+			update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
 
             if (isset($_SERVER['HTTP_REFERER'])) {
                 wp_safe_redirect($_SERVER['HTTP_REFERER']);
@@ -785,9 +806,44 @@ trait Login_Registration {
                 exit();
             }
 		}
-		
+
 		$settings = $this->lr_get_widget_settings( $page_id, $widget_id);
 
+		if( ! empty( $settings['enable_cloudflare_turnstile'] ) && 'yes' === $settings['enable_cloudflare_turnstile'] && ! empty( $settings['enable_cloudflare_turnstile_on_lostpassword'] ) && 'yes' === $settings['enable_cloudflare_turnstile_on_lostpassword'] ){
+			if( ! $this->lr_validate_cloudflare_turnstile( $settings ) ) {
+				$err_msg = isset( $settings['err_cloudflare_turnstile'] ) ? Helper::eael_wp_kses( $settings['err_cloudflare_turnstile'] ) : __( 'You did not pass Cloudflare Turnstile challenge.', 'essential-addons-for-elementor-lite' );
+				if ( $ajax ) {
+					wp_send_json_error( $err_msg );
+				}
+				update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
+
+				if (isset($_SERVER['HTTP_REFERER'])) {
+					wp_safe_redirect($_SERVER['HTTP_REFERER']);
+					exit();
+				} // fail early if cloudflare turnstile failed
+			}
+		}
+
+		//v2 or v3
+		$is_version_2 = isset( $settings['enable_lostpassword_recaptcha'] ) && 'yes' === $settings['enable_lostpassword_recaptcha'];
+		$is_version_3 = isset( $settings['login_register_recaptcha_version'] ) && 'v3' === $settings['login_register_recaptcha_version'];
+		if ( $is_version_2 || $is_version_3 ) {
+			$ld_recaptcha_version = $is_version_3 ? 'v3' : 'v2';
+			
+			if( ! $this->lr_validate_recaptcha( $ld_recaptcha_version, $settings ) ) {
+				$err_msg = isset( $settings['err_recaptcha'] ) ? Helper::eael_wp_kses( $settings['err_recaptcha'] ) : __( 'You did not pass recaptcha challenge.', 'essential-addons-for-elementor-lite' );
+				if ( $ajax ) {
+					wp_send_json_error( $err_msg );
+				}
+				update_option( 'eael_lostpassword_error_' . $widget_id, $err_msg, false );
+
+				if (isset($_SERVER['HTTP_REFERER'])) {
+					wp_safe_redirect($_SERVER['HTTP_REFERER']);
+					exit();
+				} // fail early if recaptcha failed
+			}
+		}
+		
 		if ( is_user_logged_in() ) {
 			$err_msg = isset( $settings['err_loggedin'] ) ? Helper::eael_wp_kses( $settings['err_loggedin'] ) : esc_html__( 'You are already logged in', 'essential-addons-for-elementor-lite' );
 			if ( $ajax ) {
@@ -802,8 +858,6 @@ trait Login_Registration {
 		}
 
 		do_action( 'eael/login-register/before-lostpassword-email' );
-
-		$widget_id = ! empty( $_POST['widget_id'] ) ? sanitize_text_field( $_POST['widget_id'] ) : '';
 
 		if( $_POST['eael-user-lostpassword'] != wp_strip_all_tags( $_POST['eael-user-lostpassword'] ) ){
 			// contains html tag
@@ -1533,6 +1587,30 @@ trait Login_Registration {
 			}else {
 				return $res['success'];				
 			}
+		}
+
+		return false;
+	}
+
+	public function lr_validate_cloudflare_turnstile( $settings = [] ) {
+		if ( ! isset( $_REQUEST['cf-turnstile-response'] ) ) {
+			return false;
+		}
+		$secret = get_option( 'eael_cloudflare_turnstile_secretkey' );
+		if( empty( $secret ) ) {
+			return false;
+		}
+
+		$endpoint = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+		$data     = [
+			'secret'   => $secret,
+			'response' => sanitize_text_field( $_REQUEST['cf-turnstile-response'] ),
+			'remoteip' => $_SERVER['REMOTE_ADDR'],
+		];
+
+		$res = json_decode( wp_remote_retrieve_body( wp_remote_post( $endpoint, [ 'body' => $data ] ) ), 1 );
+		if ( isset( $res['success'] ) ) {
+			return $res['success'];
 		}
 
 		return false;

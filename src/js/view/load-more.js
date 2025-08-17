@@ -244,12 +244,13 @@
 						}
 						found_posts.remove();
 
-					} else {
-						if ($max_page && $data.page >= $max_page) {
-							$this.addClass('hide-load-more');
-						}
 					}
 				}
+
+				if ( $max_page && $data.page >= $max_page ) {
+					$this.remove();
+				}
+				
 			},
 			error: function (response) {
 				console.log(response);
