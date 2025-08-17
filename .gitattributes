@@ -54,3 +54,7 @@ includes/templates/admin/eael-dashboard/dist/index.html export-ignore
 includes/templates/admin/icons/icons-svg                export-ignore
 includes/templates/admin/icons/demo.html                export-ignore
 includes/templates/admin/icons/selection.json           export-ignore
+
+# Development dependencies
+vendor/nhrrob/wp-fatal-tester/                          export-ignore
+vendor/bin/fataltest                                               export-ignore

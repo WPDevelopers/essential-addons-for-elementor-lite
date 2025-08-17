@@ -14,5 +14,8 @@
     ],
     "require": {
         "priyomukul/wp-notice": "v2.x-dev"
+    },
+    "require-dev": {
+        "nhrrob/wp-fatal-tester": "^1.1"
     }
 }

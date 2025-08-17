@@ -7,3 +7,7 @@ pnpm-lock.yaml
 composer.lock
 /node_modules
 .idea/*
+
+# Development dependencies
+vendor/nhrrob/wp-fatal-tester/
+vendor/bin/fataltest

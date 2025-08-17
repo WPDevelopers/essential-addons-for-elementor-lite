@@ -60,3 +60,7 @@ includes/templates/admin/eael-dashboard/dist/index.html
 includes/templates/admin/icons/icons-svg
 includes/templates/admin/icons/demo.html
 includes/templates/admin/icons/selection.json
+
+# Development dependencies
+vendor/nhrrob/wp-fatal-tester
+vendor/bin/fataltest
