@@ -36,6 +36,6 @@
             "install-path": "../priyomukul/wp-notice"
         }
     ],
-    "dev": true,
+    "dev": false,
     "dev-package-names": []
 }
