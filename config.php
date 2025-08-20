@@ -1421,6 +1421,10 @@ $config = [
                 ],
             ],
         ],
+        'image-masking' => [
+            'class'      => '\Essential_Addons_Elementor\Extensions\Image_Masking',
+            'dependency' => [],
+        ],
     ],
 ];
 
