@@ -3530,7 +3530,6 @@ class Woo_Product_Carousel extends Widget_Base {
 		    $tax_query_count++;
 	    }
 
-        print_r($args['post__not_in']);
 	    return $args;
     }
 
