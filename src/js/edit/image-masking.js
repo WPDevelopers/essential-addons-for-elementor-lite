@@ -48,11 +48,33 @@ let ImageMaskingHandler = function ($scope, $) {
                 if( clipPath ) {
                     style += '.elementor-element-' + elementId + ' img {clip-path: ' + clipPath + ';}';
                 }
+
+                let hoverClipPath = get_clip_path( settings?.eael_image_masking_clip_path_hover );
+                if( 'custom' === settings?.eael_image_masking_clip_path_hover ){
+                    hoverClipPath = settings?.eael_image_masking_custom_clip_path_hover;
+                    hoverClipPath = hoverClipPath.replace( 'clip-path: ', '' );
+                }
+                if( hoverClipPath ) {
+                    let hoverSelector = settings?.eael_image_masking_hover_selector;
+                    if( hoverSelector ){
+                        hoverSelector = ' ' + hoverSelector.trim();
+                    }
+                    style += '.elementor-element-' + elementId + hoverSelector + ':hover img {clip-path: ' + hoverClipPath + ';}';
+                }
             }
             if( 'image' === settings?.eael_image_masking_type ){
                 let image = settings?.eael_image_masking_image;
                 if( image?.url ) {
                     style += '.elementor-element-' + elementId + ' img {mask-image: url(' + image.url + '); -webkit-mask-image: url(' + image.url + ');}';
+                }
+
+                let hoverImage = settings?.eael_image_masking_image_hover;
+                if( hoverImage?.url ) {
+                    let hoverSelector = settings?.eael_image_masking_hover_selector;
+                    if( hoverSelector ){
+                        hoverSelector = ' ' + hoverSelector.trim();
+                    }
+                    style += '.elementor-element-' + elementId + hoverSelector + ':hover img {mask-image: url(' + hoverImage.url + '); -webkit-mask-image: url(' + hoverImage.url + ');}';
                 }
             }
 
