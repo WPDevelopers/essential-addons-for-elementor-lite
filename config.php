@@ -1423,7 +1423,15 @@ $config = [
         ],
         'image-masking' => [
             'class'      => '\Essential_Addons_Elementor\Extensions\Image_Masking',
-            'dependency' => [],
+            'dependency' => [
+                'js' => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/image-masking.min.js',
+                        'type'    => 'self',
+                        'context' => 'edit',
+                    ],
+                ],
+            ],
         ],
     ],
 ];
