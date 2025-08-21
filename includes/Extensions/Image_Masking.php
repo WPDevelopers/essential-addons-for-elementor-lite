@@ -187,9 +187,9 @@ class Image_Masking {
                 'type' => Controls_Manager::SELECT,
                 'default' => '',
                 'options' => [
-                    '' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
-                    'auto' => esc_html__( 'Auto', 'essential-addons-for-elementor-lite' ),
-                    'cover' => esc_html__( 'Cover', 'essential-addons-for-elementor-lite' ),
+                    ''        => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
+                    'auto'    => esc_html__( 'Auto', 'essential-addons-for-elementor-lite' ),
+                    'cover'   => esc_html__( 'Cover', 'essential-addons-for-elementor-lite' ),
                     'contain' => esc_html__( 'Contain', 'essential-addons-for-elementor-lite' ),
                 ],
                 'condition' => [
@@ -207,12 +207,18 @@ class Image_Masking {
             [
                 'label' => esc_html__( 'Position', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::SELECT,
-                'default' => '',
+                'default' => 'center center',
                 'options' => [
-                    '' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
-                    'center' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
-                    'top' => esc_html__( 'Top', 'essential-addons-for-elementor-lite' ),
-                    'bottom' => esc_html__( 'Bottom', 'essential-addons-for-elementor-lite' ),
+                    ''              => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
+                    'left top'      => esc_html__( 'Left Top', 'essential-addons-for-elementor-lite' ),
+                    'left center'   => esc_html__( 'Left Center', 'essential-addons-for-elementor-lite' ),
+                    'left bottom'   => esc_html__( 'Left Bottom', 'essential-addons-for-elementor-lite' ),
+                    'center top'    => esc_html__( 'Center Top', 'essential-addons-for-elementor-lite' ),
+                    'center center' => esc_html__( 'Center Center', 'essential-addons-for-elementor-lite' ),
+                    'center bottom' => esc_html__( 'Center Bottom', 'essential-addons-for-elementor-lite' ),
+                    'right top'     => esc_html__( 'Right Top', 'essential-addons-for-elementor-lite' ),
+                    'right center'  => esc_html__( 'Right Center', 'essential-addons-for-elementor-lite' ),
+                    'right bottom'  => esc_html__( 'Right Bottom', 'essential-addons-for-elementor-lite' )
                 ],
                 'condition' => [
 					'eael_enable_image_masking' => 'yes',
@@ -232,9 +238,9 @@ class Image_Masking {
                 'default' => 'no-repeat',
                 'options' => [
                     'no-repeat' => esc_html__( 'No-repeat', 'essential-addons-for-elementor-lite' ),
-                    'repeat' => esc_html__( 'Repeat', 'essential-addons-for-elementor-lite' ),
-                    'repeat-x' => esc_html__( 'Repeat-x', 'essential-addons-for-elementor-lite' ),
-                    'repeat-y' => esc_html__( 'Repeat-y', 'essential-addons-for-elementor-lite' ),
+                    'repeat'    => esc_html__( 'Repeat', 'essential-addons-for-elementor-lite' ),
+                    'repeat-x'  => esc_html__( 'Repeat-x', 'essential-addons-for-elementor-lite' ),
+                    'repeat-y'  => esc_html__( 'Repeat-y', 'essential-addons-for-elementor-lite' ),
                 ],
                 'condition' => [
 					'eael_enable_image_masking' => 'yes',
