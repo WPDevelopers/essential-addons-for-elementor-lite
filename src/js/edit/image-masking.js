@@ -28,6 +28,7 @@ let ImageMaskingHandler = function ($scope, $) {
         };
         return shapes[shape] || '';
     }
+
     function renderImageMasking (model) {
         let settings = model?.attributes?.settings?.attributes;
         let elementId = model?.attributes?.id, element = $(`.elementor-element-${elementId}`);
@@ -48,12 +49,19 @@ let ImageMaskingHandler = function ($scope, $) {
                     style += '.elementor-element-' + elementId + ' img {clip-path: ' + clipPath + ';}';
                 }
             }
+            if( 'image' === settings?.eael_image_masking_type ){
+                let image = settings?.eael_image_masking_image;
+                if( image?.url ) {
+                    style += '.elementor-element-' + elementId + ' img {mask-image: url(' + image.url + '); -webkit-mask-image: url(' + image.url + ');}';
+                }
+            }
 
             if( style ){
                 element.append('<style id="' + styleId + '">' + style + '</style>');
             }
         }
     }
+
     function getImageMaskingSettingsVal( models ) {
         $.each(models, function (_, model) {
             renderImageMasking( model );

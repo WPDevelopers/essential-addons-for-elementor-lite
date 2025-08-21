@@ -141,7 +141,7 @@ class Image_Masking {
         $element->add_control(
             'eael_image_masking_custom_clip_path',
             [
-                'label'       => esc_html__( 'Clip Path', 'essential-addons-for-elementor-lite' ),
+                'label'       => '',
                 'type'        => Controls_Manager::TEXTAREA,
                 'rows'        => 10,
                 'label_block' => true,
@@ -168,7 +168,7 @@ class Image_Masking {
 				'label'     => '',
 				'type'      => Controls_Manager::MEDIA,
 				'dynamic'   => [
-					'active' => true,
+					'active' => false,
 				],
                 'ai' => [
 					'active' => false,
@@ -179,6 +179,72 @@ class Image_Masking {
 				]
 			]
 		);
+
+        $element->add_control(
+            'eael_image_masking_image_size',
+            [
+                'label' => esc_html__( 'Size', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SELECT,
+                'default' => '',
+                'options' => [
+                    '' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
+                    'auto' => esc_html__( 'Auto', 'essential-addons-for-elementor-lite' ),
+                    'cover' => esc_html__( 'Cover', 'essential-addons-for-elementor-lite' ),
+                    'contain' => esc_html__( 'Contain', 'essential-addons-for-elementor-lite' ),
+                ],
+                'condition' => [
+					'eael_enable_image_masking' => 'yes',
+					'eael_image_masking_type' => 'image'
+				],
+                'selectors' => [
+                    '{{WRAPPER}} img' => 'mask-size: {{VALUE}}; -webkit-mask-size: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $element->add_control(
+            'eael_image_masking_image_position',
+            [
+                'label' => esc_html__( 'Position', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SELECT,
+                'default' => '',
+                'options' => [
+                    '' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
+                    'center' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
+                    'top' => esc_html__( 'Top', 'essential-addons-for-elementor-lite' ),
+                    'bottom' => esc_html__( 'Bottom', 'essential-addons-for-elementor-lite' ),
+                ],
+                'condition' => [
+					'eael_enable_image_masking' => 'yes',
+					'eael_image_masking_type' => 'image'
+				],
+                'selectors' => [
+                    '{{WRAPPER}} img' => 'mask-position: {{VALUE}}; -webkit-mask-position: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $element->add_control(
+            'eael_image_masking_image_repeat',
+            [
+                'label' => esc_html__( 'Reapeat', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'no-repeat',
+                'options' => [
+                    'no-repeat' => esc_html__( 'No-repeat', 'essential-addons-for-elementor-lite' ),
+                    'repeat' => esc_html__( 'Repeat', 'essential-addons-for-elementor-lite' ),
+                    'repeat-x' => esc_html__( 'Repeat-x', 'essential-addons-for-elementor-lite' ),
+                    'repeat-y' => esc_html__( 'Repeat-y', 'essential-addons-for-elementor-lite' ),
+                ],
+                'condition' => [
+					'eael_enable_image_masking' => 'yes',
+					'eael_image_masking_type' => 'image'
+				],
+                'selectors' => [
+                    '{{WRAPPER}} img' => 'mask-repeat: {{VALUE}}; -webkit-mask-repeat: {{VALUE}};',
+                ],
+            ]
+        );
 
 		$element->end_controls_section();
 	}
@@ -200,6 +266,11 @@ class Image_Masking {
                 }
                 if( $clip_path_value ) {
                     $style .= '.eael-image-masking-'.$element_id.' img {clip-path: '.$clip_path_value.'}';
+                }
+			} else if( 'image' === $type ) {
+                $image = $element->get_settings_for_display( 'eael_image_masking_image' );
+                if( $image['url'] ) {
+                    $style .= '.eael-image-masking-'.$element_id.' img {mask-image: url('.$image['url'].'); -webkit-mask-image: url('.$image['url'].');}';
                 }
 			}
 		
