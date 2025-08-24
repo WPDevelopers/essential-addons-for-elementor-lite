@@ -190,6 +190,10 @@ class Image_Masking {
                         'title' => esc_html__( 'Clip Path', 'essential-addons-for-elementor-lite' ),
                         'icon' => 'eicon-integration',
                     ],
+                    'blob' => [
+                        'title' => esc_html__( 'Blob', 'essential-addons-for-elementor-lite' ),
+                        'icon' => 'eicon-animation',
+                    ]
                 ],
                 'condition' => [
 					'eael_enable_image_masking' => 'yes'
@@ -201,7 +205,8 @@ class Image_Masking {
 
         $element->start_controls_tabs( 'eael_image_masking_tabs', [
             'condition' => [
-                'eael_enable_image_masking' => 'yes'
+                'eael_enable_image_masking' => 'yes',
+                'eael_image_masking_type!' => 'blob'
             ]
         ] );
         
@@ -300,6 +305,142 @@ class Image_Masking {
             ]
         );
 
+        $element->add_control(
+            'eael_image_masking_blob',
+            [
+                'label' => '',
+                'type' => Controls_Manager::TEXTAREA,
+                'rows' => 8,
+                'default' => '<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <path fill="#FF0066" d="M51.2,-16C58.7,6.6,52,34.4,34.7,46.6C17.5,58.9,-10.2,55.5,-31,40.8C-51.7,26.2,-65.6,0.2,-59.3,-20.7C-53,-41.6,-26.5,-57.3,-2.3,-56.6C21.8,-55.8,43.7,-38.5,51.2,-16Z" transform="translate(100 100)" />
+</svg>',
+                'condition' => [
+					'eael_enable_image_masking' => 'yes',
+					'eael_image_masking_type' => 'blob'
+				],
+            ]
+        );
+
+        $element->add_control(
+            'eael_blob_animation_enable',
+            [
+                'label' => __('Enable Blob Animation', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default' => 'no',
+                'condition' => [
+					'eael_enable_image_masking' => 'yes',
+					'eael_image_masking_type' => 'blob'
+				],
+            ]
+        );
+
+        $element->add_control(
+            'eael_blob_animation_type',
+            [
+                'label' => __('Animation Type', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'morph',
+                'options' => [
+                    'morph' => __('Morph', 'essential-addons-for-elementor-lite'),
+                    'pulse' => __('Pulse', 'essential-addons-for-elementor-lite'),
+                    'rotate' => __('Rotate', 'essential-addons-for-elementor-lite'),
+                    'float' => __('Float', 'essential-addons-for-elementor-lite'),
+                ],
+                'condition' => [
+					'eael_enable_image_masking' => 'yes',
+					'eael_image_masking_type' => 'blob',
+					'eael_blob_animation_enable' => 'yes'
+				],
+            ]
+        );
+
+        $element->add_control(
+            'eael_blob_animation_duration',
+            [
+                'label' => __('Animation Duration (ms)', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['ms'],
+                'range' => [
+                    'ms' => [
+                        'min' => 1000,
+                        'max' => 10000,
+                        'step' => 100,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'ms',
+                    'size' => 4000,
+                ],
+                'condition' => [
+					'eael_enable_image_masking' => 'yes',
+					'eael_image_masking_type' => 'blob',
+					'eael_blob_animation_enable' => 'yes'
+				],
+            ]
+        );
+
+        $element->add_control(
+            'eael_blob_animation_intensity',
+            [
+                'label' => __('Animation Intensity', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => 0.1,
+                        'max' => 1,
+                        'step' => 0.1,
+                    ],
+                ],
+                'default' => [
+                    'size' => 0.3,
+                ],
+                'condition' => [
+					'eael_enable_image_masking' => 'yes',
+					'eael_image_masking_type' => 'blob',
+					'eael_blob_animation_enable' => 'yes'
+				],
+            ]
+        );
+
+        $element->add_control(
+            'eael_blob_animation_direction',
+            [
+                'label' => __('Animation Direction', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'clockwise',
+                'options' => [
+                    'clockwise' => __('Clockwise', 'essential-addons-for-elementor-lite'),
+                    'counterclockwise' => __('Counter Clockwise', 'essential-addons-for-elementor-lite'),
+                    'alternate' => __('Alternate', 'essential-addons-for-elementor-lite'),
+                ],
+                'condition' => [
+					'eael_enable_image_masking' => 'yes',
+					'eael_image_masking_type' => 'blob',
+					'eael_blob_animation_enable' => 'yes'
+				],
+            ]
+        );
+
+        $element->add_control(
+            'eael_blob_animation_loop',
+            [
+                'label' => __('Loop Animation', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default' => 'yes',
+                'condition' => [
+					'eael_enable_image_masking' => 'yes',
+					'eael_image_masking_type' => 'blob',
+					'eael_blob_animation_enable' => 'yes'
+				],
+            ]
+        );
+
 		$element->end_controls_section();
 	}
 
@@ -347,6 +488,27 @@ class Image_Masking {
                         $hover_selector = ' ' . trim( $hover_selector );
                     }
                     $style .= '.eael-image-masking-'.$element_id. $hover_selector .':hover img {mask-image: url('.$hover_image['url'].'); -webkit-mask-image: url('.$hover_image['url'].');}';
+                }
+			} else if( 'blob' === $type ) {
+                $blob = $element->get_settings_for_display( 'eael_image_masking_blob' );
+                if( $blob ) {
+                    $style .= '.eael-image-masking-'.$element_id.' img {mask-image: url("data:image/svg+xml,'.urlencode($blob).'"); -webkit-mask-image: url("data:image/svg+xml,'.urlencode($blob).'");}';
+                }
+
+                // Add blob animation data attributes if enabled
+                $blob_animation_enable = $element->get_settings_for_display( 'eael_blob_animation_enable' );
+                if( 'yes' === $blob_animation_enable ) {
+                    $animation_settings = [
+                        'animationType' => $element->get_settings_for_display( 'eael_blob_animation_type' ) ?: 'morph',
+                        'duration' => $element->get_settings_for_display( 'eael_blob_animation_duration' )['size'] ?: 4000,
+                        'intensity' => $element->get_settings_for_display( 'eael_blob_animation_intensity' )['size'] ?: 0.3,
+                        'direction' => $element->get_settings_for_display( 'eael_blob_animation_direction' ) ?: 'clockwise',
+                        'loop' => 'yes' === $element->get_settings_for_display( 'eael_blob_animation_loop' ),
+                        'autoStart' => true
+                    ];
+
+                    $element->add_render_attribute( '_wrapper', 'data-blob-animation', wp_json_encode( $animation_settings ) );
+                    $element->add_render_attribute( '_wrapper', 'class', 'eael-blob-animation-enabled' );
                 }
 			}
 		
