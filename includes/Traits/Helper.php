@@ -622,7 +622,7 @@ trait Helper
 	public function eael_wd_liquid_glass_effect_bg_color_effect( $obj, $effect, $default_bg_color, $selector ) {
 		$obj->add_control(
 			'eael_wd_liquid_glass_effect_bg_color_' . $effect,
-			args: [
+			[
 					'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
 					'type'      => Controls_Manager::COLOR,
 					'default'   => $default_bg_color,
@@ -671,7 +671,7 @@ trait Helper
 	public function eael_wd_liquid_glass_effect_bg_color_effect_rear( $obj, $effect, $default_bg_color, $selector ) {
 		$obj->add_control(
 			'eael_wd_liquid_glass_effect_bg_color_rear_' . $effect,
-			args: [
+			[
 					'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
 					'type'      => Controls_Manager::COLOR,
 					'default'   => $default_bg_color,
