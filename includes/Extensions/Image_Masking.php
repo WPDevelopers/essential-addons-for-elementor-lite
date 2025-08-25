@@ -555,6 +555,24 @@ class Image_Masking {
 		$element->end_controls_section();
 	}
 
+    private function extract_first_path_d($svg) {
+        // Try DOM first
+        libxml_use_internal_errors(true);
+        $dom = new \DOMDocument();
+        if (@$dom->loadXML($svg)) {
+            $path = $dom->getElementsByTagName('path')->item(0);
+            if ($path) {
+                return $path->getAttribute('d');
+            }
+        }
+
+        // Regex fallback
+        if (preg_match('/<path[^>]+d="([^"]+)"/i', $svg, $match)) {
+            return $match[1];
+        }
+
+        return null; // not found
+    }
 	public function before_render( $element ) {
 		$is_enabled = $element->get_settings_for_display( 'eael_enable_image_masking' );
         $settings = $element->get_settings_for_display();
@@ -607,11 +625,24 @@ class Image_Masking {
                 if( 'clip-path' === $morphing_type ){
                     $clip_paths = $settings['eael_clip_paths'];
                     foreach( $clip_paths as $clip_path ){
+                        if( empty( $clip_path['eael_clip_path'] ) ){
+                            continue;
+                        }
                         $paths[] = str_replace( [ 'clip-path: ', ';' ], '', $clip_path['eael_clip_path'] );
+                    }
+                } else if( 'svg' === $morphing_type ){
+                    $svg_paths = $settings['eael_svg_paths'];
+                    foreach( $svg_paths as $svg_path ){
+                        $path  = $this->extract_first_path_d( $svg_path['eael_svg_path'] );
+                        if( !$path ){
+                            continue;
+                        }
+                        $paths[] = $path;
                     }
                 }
                 $morphing_options = [
                     'shapes'        => base64_encode( wp_json_encode( $paths ) ),
+                    'type'        => $morphing_type,
                 ];
 
                 if( !empty( $settings['eael_image_morphing_duration']['size'] ) ){

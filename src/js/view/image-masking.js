@@ -10,6 +10,10 @@ let ImageMaskingHandler = function ($scope, $) {
             blobShapes: JSON.parse(shapes)
         };
 
+        if( 'svg' === options.type ){
+            animationData.shapeType = 'auto';
+        }
+
         if( options.duration ){
             animationData.duration = options.duration;
         }
