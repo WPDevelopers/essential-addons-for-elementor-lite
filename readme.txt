@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.2.4
+Stable tag: 6.3.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -14,7 +14,7 @@ Elementor addon offering 100+ widgets and templates — Elementor Gallery, Slide
 
 Enhance **[Elementor](https://wordpress.org/plugins/elementor/)** page building experience with 100+ creative elements and extensions. Add powers to your website builder using our easy-to-use Elementor widgets and ready Elementor templates, which were designed to make your next WordPress website design easier and prettier than ever before.
 
-= Essential Addons for Elementor offers 100+ best Elementor widgets with kits, 5,500+ ready templates & best WooCommerce builder, serving 2 million+ active users. =
+= Essential Addons for Elementor offers 110+ advanced Elementor widgets with kits, 6,000+ ready templates & WooCommerce builder, serving 2 million+ active users. =
 
 [Check the Demos](https://essential-addons.com/demos)
 
@@ -22,14 +22,14 @@ Enhance **[Elementor](https://wordpress.org/plugins/elementor/)** page building 
 Each widget and extension comes with a bunch of options to customize your website in every possible way. You can achieve nearly any design of your imagination.
 
 ### Light Weight & Instant Loading
-No extra resources or messy codes to slow down your website. Optimized for super fast loading and instant Live editing.
+No extra resources or messy code to slow down your website. Optimized for super fast loading and instant Live editing.
 
 ### Elements Control option
 Enable and disable individual elements adding to make your page load faster and smoother. You can deactivate unnecessary widgets to keep the site light.
 
 
 ### 6000+ Ready WordPress Templates & Blocks through **Templately**
-Grab access to 3,000+ pre-made Elementor templates from the ultimate templates cloud for WordPress, Templately, that come with Essential Addons.Unlock stunning Elementor templates, blocks & sections;and design your website to stand out from the crowd.
+Grab access to 3,000+ pre-made Elementor templates from Templately (a large templates cloud for WordPress), that come with Essential Addons.Unlock stunning Elementor templates, blocks & sections;and design your website to stand out from the crowd.
 
 https://youtu.be/Z73muoczARc
 
@@ -53,7 +53,7 @@ We have an extraordinary support team ready to help you. Ask your questions in t
 
 ### 60+ FREE ELEMENTOR ADDONS AND COUNTING
 
-We have designed more than 50 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
+We have designed more than 60 useful widgets to enhance your Elementor Page Building experience and allow you to climb the peak of your design capabilities.
 
 1. [Post Grid](https://essential-addons.com/post-grid/) - Showcase your blog posts in 3 unique styles
 2. [Post Timeline](https://essential-addons.com/post-timeline/) - Create stunning timeline for your posts & pages
@@ -68,13 +68,13 @@ We have designed more than 50 of the most useful widgets to enhance your Element
 11. [Ninja Forms](https://essential-addons.com/ninja-forms/) - Easily create your form style just the way you want
 12. [Caldera Forms](https://essential-addons.com/caldera-forms/) - Design effective mobile-friendly forms
 13. [WPForms](https://essential-addons.com/wpforms/) - Create powerful WordPress forms in minutes
-14. [weForms](https://essential-addons.com/weforms/) - Get the fastest form building experience
+14. [weForms](https://essential-addons.com/weforms/) - Get an incredibly fast form building experience
 15. [Info Box](https://essential-addons.com/info-box/) - Design beautiful info box from predefined styles
 16. [Flip Box](https://essential-addons.com/flip-box/) - Use animated Flip Boxes to highlight any content
 17. [Dual Color Heading](https://essential-addons.com/dual-color-headline/) - Highlight your headings with dual colors
 18. [Call to Action](https://essential-addons.com/call-to-action/) - Design call-to-action buttons with a few clicks
-19. [Pricing Table](https://essential-addons.com/pricing-table/) - Create Pricing Tables within minutes that converts
-20. [Twitter Feed](https://essential-addons.com/twitter-feed/) - Showcase your latest tweets to your visitor
+19. [Pricing Table](https://essential-addons.com/pricing-table/) - Create Pricing Tables within minutes that convert
+20. [Twitter Feed](https://essential-addons.com/twitter-feed/) - Showcase your latest tweets to your visitors
 21. [Data Table](https://essential-addons.com/table/) - Insert attractive data table anywhere you want
 22. [Filterable Gallery](https://essential-addons.com/filterable-gallery/) - Share images with an interactive gallery
 23. [Image Accordion](https://essential-addons.com/image-accordion/) - Highlight your images with amazing hover effects
@@ -125,6 +125,7 @@ Extensions (Free):
 5. [Scroll to Top](https://essential-addons.com/scroll-to-top) - Let visitors quickly navigate to the top of your page
 6. [Wrapper Link](https://essential-addons.com/wrapper-link) - Add custom links into any section, column, or even flexbox
 7. [Hover Interactions](https://essential-addons.com/hover-interaction/) - Create captivating effects on buttons, images, texts and more
+8. [Liquid Glass Effects](https://essential-addons.com/liquid-glass-effects/) - Give your website a sleek, futuristic feel with stunning glass effects
 
 ### More elements (50+) on [Premium Version](https://wpdeveloper.com/in/upgrade-essential-addons-elementor)
 
@@ -167,7 +168,7 @@ Extensions (Free):
 36. [Fancy Chart](https://essential-addons.com/fancy-chart/)- Visualize important data with interactive charts and graphs on your website
 37. [Stacked Cards](https://essential-addons.com/stacked-cards/)- Showcase your website content in a distinctive and engaging way
 38. [360 Degree Photo Viewer](https://essential-addons.com/360-degree-photo-viewer)- Make your website image visible from every angle with adjustable controls
-39. [Multicolumn Pricing Table](https://essential-addons.com/multicolumn-pricing-table/)- Display pricing plans in multiple columns to compare features and choose the best option
+39. [Multicolumn Pricing Table](https://essential-addons.com/multicolumn-pricing-table/)- Display pricing plans in multiple columns to compare features and choose the right option
 40. [Figma to Elementor Converter](https://essential-addons.com/figma-to-elementor-converter/)- Turn Figma designs into fully customizable Elementor Pages
 
 
@@ -234,8 +235,8 @@ https://youtu.be/CEUqgOS4CN0
 
 **WP Mayor:** “If you use Elementor, Essential Addons is a great way to expand your library of available widgets without slowing your site down.”
 **WP Pagebuilders:** “With 60+ additional widgets, Essential Addons is a great add-on to enhance your experience in building a website with WordPress+Elementor.”
-**MonsterPost:** “Essential Addons for Elementor has the largest number of active users among all third-party extensions on the market. The widgets are tested in all popular web browsers to ensure full browser compatibility for all elements.”
-**WPCrafter:** WordPress influencer Adam Preiser did a Speed Test & found Essential Addons for Elementor is the fastest solution out there 👇
+**MonsterPost:** “Essential Addons for Elementor has a huge number of active users among all third-party extensions on the market. The widgets are tested in all popular web browsers to ensure full browser compatibility for all elements.”
+**WPCrafter:** WordPress influencer Adam Preiser did a Speed Test & found Essential Addons for Elementor is the high-performance solution out there 👇
 
 https://youtu.be/K9BssSV-KC8
 
@@ -258,13 +259,13 @@ Essential Addons is brought to you by [WPDeveloper](https://wpdeveloper.com/), a
 If you like Essential Addons, then consider checking out our other WordPress Plugins:
 
 
-🔔 **[NotificationX](https://wordpress.org/plugins/notificationx/)** – Best Social Proof & FOMO Marketing Solution to boost conversions & design stunning WordPress notification bars in Elementor
+🔔 **[NotificationX](https://wordpress.org/plugins/notificationx/)** – Powerful Social Proof & FOMO Marketing Solution to boost conversions & design stunning WordPress notification bars in Elementor
 
-🗒️ **[BetterDocs](https://wordpress.org/plugins/betterdocs/)** – Best Documentation & Knowledge Base Plugin for WordPress, which also comes with ready doc templates for Elementor
+🗒️ **[BetterDocs](https://wordpress.org/plugins/betterdocs/)** – Advanced Documentation & Knowledge Base Plugin for WordPress, which also comes with ready doc templates for Elementor
 
 ⏰ **[SchedulePress](https://wordpress.org/plugins/wp-scheduled-posts/)**  – Complete solution for managing WordPress content scheduling through an editorial calendar & Social Share
 
-🔗 **[EmbedPress](https://wordpress.org/plugins/embedpress/)** - Easiest WordPress solution for embedding videos, images, posts, audio, maps and PDF, DOC, PPT & all other types of content into your website using Elementor, Gutenberg and more.
+🔗 **[EmbedPress](https://wordpress.org/plugins/embedpress/)** - Easy WordPress solution for embedding videos, images, posts, audio, maps and PDF, DOC, PPT & all other types of content into your website using Elementor, Gutenberg and more.
 
 🔎 **[easy.jobs](https://wordpress.org/plugins/easyjobs/)** -  Smart and easy recruitment and talent sourcing solution for hiring with AI-powered screening system, question sets, remote interviews, and designing branded career pages with Elementor.
 
@@ -314,6 +315,13 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.3.0 - 24/08/2025 =
+
+- Added: New Extension | Liquid Glass Effects
+- Improved: Security Enhancement
+- Fixed: EA Login/Register Form | Password reset URL is always showing expired when MemberPress is used to change Login URL
+- Few minor bug fixes & improvements
 
 = 6.2.4 - 14/08/2025 =
 

@@ -187,6 +187,11 @@ class Elements_Manager {
 			$list['special-hover-effect'] = 'special-hover-effect';
 		}
 
+		//Liquid Glass Effects
+		if ( ! empty( $element['settings']['eael_liquid_glass_effect_switch'] ) ) {
+			$list['liquid-glass-effect'] = 'liquid-glass-effect';
+		}
+
 		return $list;
 	}
 
