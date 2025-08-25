@@ -2,11 +2,22 @@ let ImageMaskingHandler = function ($scope, $) {
     let $img = $scope.find('img');
 
     // Check if blob animation is enabled and get settings
-    if ($scope.hasClass('eael-blob-animation-enabled')) {
-        let animationData = $scope.data('blob-animation');
+    
+    if ( $scope.hasClass('eael-morphing-enabled') ) {
+        let options = $scope.data('morphing-options');
+        let shapes = atob(options.shapes);
+        let animationData = {
+            blobShapes: JSON.parse(shapes)
+        };
+
+        console.log(JSON.parse(shapes));
+        
 
         if (animationData && typeof MorphingBlobAnimation !== 'undefined' && $img.length > 0) {
-            let imageMasking = new MorphingBlobAnimation($img, animationData);
+            // Create animation instance for each image individually
+            $img.each(function(_, imgElement) {
+                new MorphingBlobAnimation(imgElement, animationData);
+            });
         }
     }
 }
