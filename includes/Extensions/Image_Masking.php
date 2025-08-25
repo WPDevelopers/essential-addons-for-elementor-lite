@@ -322,14 +322,11 @@ class Image_Masking {
         );
 
         $element->add_control(
-            'eael_blob_animation_enable',
+            'eael_blob_animation_heading',
             [
-                'label' => __('Enable Blob Animation', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
-                'return_value' => 'yes',
-                'default' => 'no',
+                'label' => __('🎬 Morphing Animation Settings', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
                 'condition' => [
 					'eael_enable_image_masking' => 'yes',
 					'eael_image_masking_type' => 'blob'
@@ -338,21 +335,18 @@ class Image_Masking {
         );
 
         $element->add_control(
-            'eael_blob_animation_type',
+            'eael_blob_animation_enable',
             [
-                'label' => __('Animation Type', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'default' => 'morph',
-                'options' => [
-                    'morph' => __('Morph', 'essential-addons-for-elementor-lite'),
-                    'pulse' => __('Pulse', 'essential-addons-for-elementor-lite'),
-                    'rotate' => __('Rotate', 'essential-addons-for-elementor-lite'),
-                    'float' => __('Float', 'essential-addons-for-elementor-lite'),
-                ],
+                'label' => __('Enable Blob Animation', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default' => 'no',
+                'description' => __('Enable morphing blob animation effects for dynamic visual appeal.', 'essential-addons-for-elementor-lite'),
                 'condition' => [
 					'eael_enable_image_masking' => 'yes',
-					'eael_image_masking_type' => 'blob',
-					'eael_blob_animation_enable' => 'yes'
+					'eael_image_masking_type' => 'blob'
 				],
             ]
         );
@@ -360,42 +354,17 @@ class Image_Masking {
         $element->add_control(
             'eael_blob_animation_duration',
             [
-                'label' => __('Animation Duration (ms)', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => ['ms'],
-                'range' => [
-                    'ms' => [
-                        'min' => 1000,
-                        'max' => 10000,
-                        'step' => 100,
-                    ],
-                ],
-                'default' => [
-                    'unit' => 'ms',
-                    'size' => 4000,
-                ],
-                'condition' => [
-					'eael_enable_image_masking' => 'yes',
-					'eael_image_masking_type' => 'blob',
-					'eael_blob_animation_enable' => 'yes'
-				],
-            ]
-        );
-
-        $element->add_control(
-            'eael_blob_animation_intensity',
-            [
-                'label' => __('Animation Intensity', 'essential-addons-for-elementor-lite'),
+                'label' => __('Animation Duration (seconds)', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
-                        'min' => 0.1,
-                        'max' => 1,
-                        'step' => 0.1,
+                        'min' => 1,
+                        'max' => 20,
+                        'step' => 0.5,
                     ],
                 ],
                 'default' => [
-                    'size' => 0.3,
+                    'size' => 4,
                 ],
                 'condition' => [
 					'eael_enable_image_masking' => 'yes',
@@ -406,15 +375,31 @@ class Image_Masking {
         );
 
         $element->add_control(
-            'eael_blob_animation_direction',
+            'eael_blob_animation_easing',
             [
-                'label' => __('Animation Direction', 'essential-addons-for-elementor-lite'),
+                'label' => __('Animation Easing', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
-                'default' => 'clockwise',
+                'default' => 'power2.inOut',
                 'options' => [
-                    'clockwise' => __('Clockwise', 'essential-addons-for-elementor-lite'),
-                    'counterclockwise' => __('Counter Clockwise', 'essential-addons-for-elementor-lite'),
-                    'alternate' => __('Alternate', 'essential-addons-for-elementor-lite'),
+                    'none' => __('None', 'essential-addons-for-elementor-lite'),
+                    'power1.out' => __('Power1 Out', 'essential-addons-for-elementor-lite'),
+                    'power1.in' => __('Power1 In', 'essential-addons-for-elementor-lite'),
+                    'power1.inOut' => __('Power1 InOut', 'essential-addons-for-elementor-lite'),
+                    'power2.out' => __('Power2 Out', 'essential-addons-for-elementor-lite'),
+                    'power2.in' => __('Power2 In', 'essential-addons-for-elementor-lite'),
+                    'power2.inOut' => __('Power2 InOut', 'essential-addons-for-elementor-lite'),
+                    'power3.out' => __('Power3 Out', 'essential-addons-for-elementor-lite'),
+                    'power3.in' => __('Power3 In', 'essential-addons-for-elementor-lite'),
+                    'power3.inOut' => __('Power3 InOut', 'essential-addons-for-elementor-lite'),
+                    'back.out' => __('Back Out', 'essential-addons-for-elementor-lite'),
+                    'back.in' => __('Back In', 'essential-addons-for-elementor-lite'),
+                    'back.inOut' => __('Back InOut', 'essential-addons-for-elementor-lite'),
+                    'elastic.out' => __('Elastic Out', 'essential-addons-for-elementor-lite'),
+                    'elastic.in' => __('Elastic In', 'essential-addons-for-elementor-lite'),
+                    'elastic.inOut' => __('Elastic InOut', 'essential-addons-for-elementor-lite'),
+                    'bounce.out' => __('Bounce Out', 'essential-addons-for-elementor-lite'),
+                    'bounce.in' => __('Bounce In', 'essential-addons-for-elementor-lite'),
+                    'bounce.inOut' => __('Bounce InOut', 'essential-addons-for-elementor-lite'),
                 ],
                 'condition' => [
 					'eael_enable_image_masking' => 'yes',
@@ -437,6 +422,162 @@ class Image_Masking {
 					'eael_enable_image_masking' => 'yes',
 					'eael_image_masking_type' => 'blob',
 					'eael_blob_animation_enable' => 'yes'
+				],
+            ]
+        );
+
+        $element->add_control(
+            'eael_blob_animation_auto_start',
+            [
+                'label' => __('Auto Start Animation', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default' => 'yes',
+                'condition' => [
+					'eael_enable_image_masking' => 'yes',
+					'eael_image_masking_type' => 'blob',
+					'eael_blob_animation_enable' => 'yes'
+				],
+            ]
+        );
+
+        $element->add_control(
+            'eael_blob_animation_scale_min',
+            [
+                'label' => __('Scale Min', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => 0.5,
+                        'max' => 2,
+                        'step' => 0.1,
+                    ],
+                ],
+                'default' => [
+                    'size' => 1,
+                ],
+                'condition' => [
+					'eael_enable_image_masking' => 'yes',
+					'eael_image_masking_type' => 'blob',
+					'eael_blob_animation_enable' => 'yes'
+				],
+            ]
+        );
+
+        $element->add_control(
+            'eael_blob_animation_scale_max',
+            [
+                'label' => __('Scale Max', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => 0.5,
+                        'max' => 2,
+                        'step' => 0.1,
+                    ],
+                ],
+                'default' => [
+                    'size' => 1,
+                ],
+                'condition' => [
+					'eael_enable_image_masking' => 'yes',
+					'eael_image_masking_type' => 'blob',
+					'eael_blob_animation_enable' => 'yes'
+				],
+            ]
+        );
+
+        $element->add_control(
+            'eael_blob_animation_rotation',
+            [
+                'label' => __('Enable Rotation', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default' => 'no',
+                'condition' => [
+					'eael_enable_image_masking' => 'yes',
+					'eael_image_masking_type' => 'blob',
+					'eael_blob_animation_enable' => 'yes'
+				],
+            ]
+        );
+
+        $element->add_control(
+            'eael_blob_animation_rotation_speed',
+            [
+                'label' => __('Rotation Speed (degrees)', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => 90,
+                        'max' => 720,
+                        'step' => 90,
+                    ],
+                ],
+                'default' => [
+                    'size' => 360,
+                ],
+                'condition' => [
+					'eael_enable_image_masking' => 'yes',
+					'eael_image_masking_type' => 'blob',
+					'eael_blob_animation_enable' => 'yes',
+					'eael_blob_animation_rotation' => 'yes'
+				],
+            ]
+        );
+
+        $element->add_control(
+            'eael_blob_animation_shape_type',
+            [
+                'label' => __('Shape Type', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'polygon',
+                'options' => [
+                    'polygon' => __('Polygon (CSS Clip-path)', 'essential-addons-for-elementor-lite'),
+                    'path' => __('Path (SVG)', 'essential-addons-for-elementor-lite'),
+                ],
+                'description' => __('Polygon uses CSS clip-path for better performance, Path uses SVG for more complex shapes.', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+					'eael_enable_image_masking' => 'yes',
+					'eael_image_masking_type' => 'blob',
+					'eael_blob_animation_enable' => 'yes'
+				],
+            ]
+        );
+
+        $element->add_control(
+            'eael_blob_animation_advanced_heading',
+            [
+                'label' => __('⚙️ Advanced Settings', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+                'condition' => [
+					'eael_enable_image_masking' => 'yes',
+					'eael_image_masking_type' => 'blob',
+					'eael_blob_animation_enable' => 'yes'
+				],
+            ]
+        );
+
+        $element->add_control(
+            'eael_blob_animation_custom_shapes',
+            [
+                'label' => __('Custom Blob Shapes', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXTAREA,
+                'rows' => 6,
+                'placeholder' => __('Enter custom polygon shapes, one per line. Example:
+polygon(30% 40%, 70% 30%, 80% 70%, 20% 80%)
+polygon(40% 20%, 80% 40%, 60% 80%, 10% 60%)', 'essential-addons-for-elementor-lite'),
+                'description' => __('Add custom polygon shapes for morphing animation. Leave empty to use default shapes.', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+					'eael_enable_image_masking' => 'yes',
+					'eael_image_masking_type' => 'blob',
+					'eael_blob_animation_enable' => 'yes',
+					'eael_blob_animation_shape_type' => 'polygon'
 				],
             ]
         );
@@ -491,21 +632,32 @@ class Image_Masking {
                 }
 			} else if( 'blob' === $type ) {
                 $blob = $element->get_settings_for_display( 'eael_image_masking_blob' );
-                if( $blob ) {
-                    $style .= '.eael-image-masking-'.$element_id.' img {mask-image: url("data:image/svg+xml,'.urlencode($blob).'"); -webkit-mask-image: url("data:image/svg+xml,'.urlencode($blob).'");}';
-                }
 
                 // Add blob animation data attributes if enabled
                 $blob_animation_enable = $element->get_settings_for_display( 'eael_blob_animation_enable' );
                 if( 'yes' === $blob_animation_enable ) {
                     $animation_settings = [
-                        'animationType' => $element->get_settings_for_display( 'eael_blob_animation_type' ) ?: 'morph',
-                        'duration' => $element->get_settings_for_display( 'eael_blob_animation_duration' )['size'] ?: 4000,
-                        'intensity' => $element->get_settings_for_display( 'eael_blob_animation_intensity' )['size'] ?: 0.3,
-                        'direction' => $element->get_settings_for_display( 'eael_blob_animation_direction' ) ?: 'clockwise',
+                        'duration' => $element->get_settings_for_display( 'eael_blob_animation_duration' )['size'] ?: 4,
+                        'easing' => $element->get_settings_for_display( 'eael_blob_animation_easing' ) ?: 'power2.inOut',
                         'loop' => 'yes' === $element->get_settings_for_display( 'eael_blob_animation_loop' ),
-                        'autoStart' => true
+                        'autoStart' => 'yes' === $element->get_settings_for_display( 'eael_blob_animation_auto_start' ),
+                        'scale' => [
+                            'min' => $element->get_settings_for_display( 'eael_blob_animation_scale_min' )['size'] ?: 1,
+                            'max' => $element->get_settings_for_display( 'eael_blob_animation_scale_max' )['size'] ?: 1
+                        ],
+                        'rotation' => 'yes' === $element->get_settings_for_display( 'eael_blob_animation_rotation' ),
+                        'rotationSpeed' => $element->get_settings_for_display( 'eael_blob_animation_rotation_speed' )['size'] ?: 360,
+                        'shapeType' => $element->get_settings_for_display( 'eael_blob_animation_shape_type' ) ?: 'polygon'
                     ];
+
+                    // Add custom shapes if provided
+                    $custom_shapes = $element->get_settings_for_display( 'eael_blob_animation_custom_shapes' );
+                    if( !empty( $custom_shapes ) ) {
+                        $shapes_array = array_filter( array_map( 'trim', explode( "\n", $custom_shapes ) ) );
+                        if( !empty( $shapes_array ) ) {
+                            $animation_settings['blobShapes'] = $shapes_array;
+                        }
+                    }
 
                     $element->add_render_attribute( '_wrapper', 'data-blob-animation', wp_json_encode( $animation_settings ) );
                     $element->add_render_attribute( '_wrapper', 'class', 'eael-blob-animation-enabled' );

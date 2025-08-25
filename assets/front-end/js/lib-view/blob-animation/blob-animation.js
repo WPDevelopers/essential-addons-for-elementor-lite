@@ -1,10 +1,10 @@
-
 /**
  * Morphing Blob Animation Library
  * Applies CSS clip-path blob shape effects to images with GSAP animations
+ * jQuery-based implementation with automatic initialization
  *
  * @author Essential Addons
- * @version 1.1.0
+ * @version 1.2.0
  */
 
 class MorphingBlobAnimation {
@@ -14,7 +14,7 @@ class MorphingBlobAnimation {
             duration: 4,
             easing: 'power2.inOut',
             loop: true,
-            autoStart: false,
+            autoStart: true, // Changed to true for automatic initialization
             scale: { min: 1, max: 1 },
             rotation: false,
             rotationSpeed: 360,
@@ -33,6 +33,7 @@ class MorphingBlobAnimation {
 
         // Initialize properties
         this.selector = selector;
+        this.$element = null;
         this.element = null;
         this.svgElement = null;
         this.pathElement = null;
@@ -45,14 +46,39 @@ class MorphingBlobAnimation {
     }
 
     /**
-     * Initialize the blob animation
+     * Initialize the blob animation with jQuery support
      */
     init() {
         try {
-            // Find target element
-            this.element = document.querySelector(this.selector);
-            if (!this.element) {
-                console.error(`MorphingBlobAnimation: Element not found for selector "${this.selector}"`);
+            // Check if jQuery is available
+            if (typeof jQuery === 'undefined') {
+                console.error('MorphingBlobAnimation: jQuery library is required');
+                return;
+            }
+
+            // Handle different selector types
+            if (typeof this.selector === 'string') {
+                // String selector - use jQuery to find element
+                this.$element = jQuery(this.selector);
+                if (this.$element.length === 0) {
+                    console.error(`MorphingBlobAnimation: Element not found for selector "${this.selector}"`);
+                    return;
+                }
+                this.element = this.$element[0];
+            } else if (this.selector instanceof jQuery) {
+                // jQuery object passed directly
+                this.$element = this.selector;
+                if (this.$element.length === 0) {
+                    console.error('MorphingBlobAnimation: Empty jQuery object provided');
+                    return;
+                }
+                this.element = this.$element[0];
+            } else if (this.selector instanceof HTMLElement) {
+                // DOM element passed directly
+                this.element = this.selector;
+                this.$element = jQuery(this.element);
+            } else {
+                console.error('MorphingBlobAnimation: Invalid selector type. Expected string, jQuery object, or DOM element');
                 return;
             }
 
@@ -74,7 +100,7 @@ class MorphingBlobAnimation {
                 this.applyClipPath(this.options.blobShapes[0]);
             }
 
-            // Auto start if enabled
+            // Auto start if enabled (default behavior for jQuery-based libraries)
             if (this.options.autoStart) {
                 this.start();
             }
@@ -97,15 +123,18 @@ class MorphingBlobAnimation {
     }
 
     /**
-     * Create SVG clip-path for path-based shapes
+     * Create SVG clip-path for path-based shapes using jQuery
      */
     createSVGClipPath() {
-        // Create SVG element
-        this.svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        this.svgElement.setAttribute('width', '0');
-        this.svgElement.setAttribute('height', '0');
-        this.svgElement.style.position = 'absolute';
-        this.svgElement.style.pointerEvents = 'none';
+        // Create SVG element using jQuery
+        this.svgElement = jQuery('<svg>', {
+            width: '0',
+            height: '0',
+            css: {
+                position: 'absolute',
+                pointerEvents: 'none'
+            }
+        })[0];
 
         // Create defs element
         const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
@@ -124,13 +153,15 @@ class MorphingBlobAnimation {
         defs.appendChild(clipPath);
         this.svgElement.appendChild(defs);
 
-        // Add SVG to document
-        document.body.appendChild(this.svgElement);
+        // Add SVG to document using jQuery
+        jQuery('body').append(this.svgElement);
 
-        // Apply SVG clip-path to element
-        if (this.element) {
-            this.element.style.clipPath = `url(#blob-clip-${this.uniqueId})`;
-            this.element.style.webkitClipPath = `url(#blob-clip-${this.uniqueId})`;
+        // Apply SVG clip-path to element using jQuery
+        if (this.$element) {
+            this.$element.css({
+                'clip-path': `url(#blob-clip-${this.uniqueId})`,
+                '-webkit-clip-path': `url(#blob-clip-${this.uniqueId})`
+            });
         }
     }
 
@@ -155,12 +186,14 @@ class MorphingBlobAnimation {
     }
 
     /**
-     * Apply clip-path to target element
+     * Apply clip-path to target element using jQuery
      */
     applyClipPath(clipPath) {
-        if (this.element) {
-            this.element.style.clipPath = clipPath;
-            this.element.style.webkitClipPath = clipPath;
+        if (this.$element) {
+            this.$element.css({
+                'clip-path': clipPath,
+                '-webkit-clip-path': clipPath
+            });
         }
     }
 
@@ -222,7 +255,7 @@ class MorphingBlobAnimation {
     }
 
     /**
-     * Add scaling animation to timeline
+     * Add scaling animation to timeline using jQuery element
      */
     addScalingAnimation() {
         const scaleTimeline = gsap.timeline({ repeat: -1, yoyo: true });
@@ -241,7 +274,7 @@ class MorphingBlobAnimation {
     }
 
     /**
-     * Add rotation animation to timeline
+     * Add rotation animation to timeline using jQuery element
      */
     addRotationAnimation() {
         gsap.to(this.element, {
@@ -265,24 +298,27 @@ class MorphingBlobAnimation {
     }
 
     /**
-     * Destroy the blob animation and clean up
+     * Destroy the blob animation and clean up using jQuery
      */
     destroy() {
         this.stop();
 
-        // Remove clip-path from element
-        if (this.element) {
-            this.element.style.clipPath = '';
-            this.element.style.webkitClipPath = '';
-            this.element.style.transform = '';
+        // Remove clip-path from element using jQuery
+        if (this.$element) {
+            this.$element.css({
+                'clip-path': '',
+                '-webkit-clip-path': '',
+                'transform': ''
+            });
         }
 
-        // Remove SVG element if it exists
-        if (this.svgElement && this.svgElement.parentNode) {
-            this.svgElement.parentNode.removeChild(this.svgElement);
+        // Remove SVG element if it exists using jQuery
+        if (this.svgElement) {
+            jQuery(this.svgElement).remove();
         }
 
         // Reset properties
+        this.$element = null;
         this.element = null;
         this.svgElement = null;
         this.pathElement = null;
@@ -316,7 +352,8 @@ class MorphingBlobAnimation {
         return {
             isActive: this.isActive,
             options: this.options,
-            element: this.element
+            element: this.element,
+            $element: this.$element
         };
     }
 
