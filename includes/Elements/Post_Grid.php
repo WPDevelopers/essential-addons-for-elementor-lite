@@ -1824,6 +1824,7 @@ class Post_Grid extends Widget_Base
         $settings['loadable_file_name'] = $this->get_filename_only($template);
 	    $dir_name = $this->get_temp_dir_name($settings['loadable_file_name']);
 	    $found_posts = 0;
+        $offset = $settings['offset'] ? absint( $settings['offset'] ) : 0;
         $posts_per_page = isset($args['posts_per_page']) && $args['posts_per_page'] > 0 ? $args['posts_per_page'] : -1 ;
 
         set_transient( 'eael_post_grid_read_more_button_text_'. $this->get_id(), $this->get_settings_for_display('read_more_button_text'), DAY_IN_SECONDS );
@@ -1837,7 +1838,7 @@ class Post_Grid extends Widget_Base
             $query = new \WP_Query( $args );
 
             if ( $query->have_posts() ) {
-	            $found_posts      = $query->found_posts;
+	            $found_posts      = $query->found_posts - $offset;
 	            $max_page         = ceil( $found_posts / absint( $posts_per_page ) );
 	            $args['max_page'] = $max_page;
 

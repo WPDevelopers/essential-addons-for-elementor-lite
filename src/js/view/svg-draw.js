@@ -98,18 +98,28 @@ var SVGDraw = function ($scope, $) {
             } 
         });
     } else if (wrapper.hasClass('page-scroll')) {
+        // Check if ScrollTrigger is available
+        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+            console.warn('GSAP or ScrollTrigger not available for SVG Draw widget');
+            return;
+        }
+
         gsap.registerPlugin(ScrollTrigger);
-        $.each( lines, function (index, line) { 
+
+        // Initialize stroke dash properties
+        $.each( lines, function (index, line) {
             const length = line.getTotalLength() * ( settings.stroke_length * .01 );
             line.style.strokeDasharray = length;
             line.style.strokeDashoffset = length;
         });
+
         let showMarkers = settings.marker && elementorFrontend.isEditMode();
         $('.marker-'+widget_id).remove();
-        
+
+        // Use wrapper as trigger instead of lines collection
         let timeline = gsap.timeline({
             scrollTrigger: {
-                trigger: lines,
+                trigger: wrapper[0], // Use the wrapper element as trigger
                 start: "top "+settings.start_point,
                 end: "top "+settings.end_point,
                 scrub: true,
@@ -135,10 +145,15 @@ var SVGDraw = function ($scope, $) {
                         }
                     }
                 },
-            } 
+            }
         });
 
-        timeline.to(lines, { strokeDashoffset: 0, }); 
+        // Add duration to the animation
+        timeline.to(lines, {
+            strokeDashoffset: 0,
+            duration: settings.speed || 1,
+            ease: settings.ease_type || 'none'
+        });
     }
 }
 jQuery(window).on("elementor/frontend/init", function () {

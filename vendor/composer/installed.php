@@ -1,19 +1,19 @@
 <?php return array(
     'root' => array(
         'name' => 'mukul/essential-addons-for-elementor-lite',
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
-        'reference' => '121d81bbe09fd3f6d431fce576b3901317b96416',
+        'pretty_version' => '77358.x-dev',
+        'version' => '77358.9999999.9999999.9999999-dev',
+        'reference' => 'd49d34f9926dc62fd7fe94224f08190aae1a9a3e',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'dev' => true,
+        'dev' => false,
     ),
     'versions' => array(
         'mukul/essential-addons-for-elementor-lite' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'reference' => '121d81bbe09fd3f6d431fce576b3901317b96416',
+            'pretty_version' => '77358.x-dev',
+            'version' => '77358.9999999.9999999.9999999-dev',
+            'reference' => 'd49d34f9926dc62fd7fe94224f08190aae1a9a3e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -22,7 +22,7 @@
         'priyomukul/wp-notice' => array(
             'pretty_version' => 'v2.x-dev',
             'version' => '2.9999999.9999999.9999999-dev',
-            'reference' => 'f3d02f6e772cb459e9b89d77605e02646f9c5d65',
+            'reference' => '5471f3262e583ebcba56062d84faecc910bd04d6',
             'type' => 'library',
             'install_path' => __DIR__ . '/../priyomukul/wp-notice',
             'aliases' => array(),

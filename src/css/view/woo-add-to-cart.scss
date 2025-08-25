@@ -118,6 +118,7 @@
 //For front-end view
 .woocommerce {
    div.product,
+   section.product,
    .dialog-widget-content {
       .eael-single-product-add-to-cart {
          .variations_form,
@@ -175,8 +176,12 @@
             .variations td,
             .variations th {
                line-height: 0;
-               vertical-align: middle;
+               vertical-align: text-top;
                padding: 10px 0;
+
+               .reset_variations {
+                  line-height: 30px;
+               }
             }
          }
          .variations_button {
