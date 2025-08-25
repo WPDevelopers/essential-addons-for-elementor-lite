@@ -10,7 +10,34 @@ let ImageMaskingHandler = function ($scope, $) {
             blobShapes: JSON.parse(shapes)
         };
 
-        console.log(JSON.parse(shapes));
+        if( options.duration ){
+            animationData.duration = options.duration;
+        }
+
+        if( options.scaleMin ){
+            animationData.scale.min = options.scaleMin;
+        }
+
+        if( options.scaleMax ){
+            animationData.scale.max = options.scaleMax;
+        }
+
+        if( options.rotation ){
+            animationData.rotation = options.rotation;
+        }
+
+        if( options.rotationSpeed ){
+            animationData.rotationSpeed = options.rotationSpeed;
+        }
+
+        if( options.scaleMin ){
+            animationData.scale.min = options.scaleMin;
+        }
+        if( options.scaleMax ){
+            animationData.scale.max = options.scaleMax;
+        }
+
+        console.log(animationData);
         
 
         if (animationData && typeof MorphingBlobAnimation !== 'undefined' && $img.length > 0) {

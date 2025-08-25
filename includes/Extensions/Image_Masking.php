@@ -436,245 +436,118 @@ class Image_Masking {
         );
 
         $element->add_control(
-            'eael_blob_animation_heading',
+            'eael_image_morphing_duration',
             [
-                'label' => __('🎬 Morphing Animation Settings', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
-                'separator' => 'before',
-                'condition' => [
-					'eael_enable_image_masking' => 'yes',
-					'eael_image_masking_type' => 'blob'
-				],
-            ]
-        );
-
-        $element->add_control(
-            'eael_blob_animation_enable',
-            [
-                'label'        => __('Enable Blob Animation', 'essential-addons-for-elementor-lite'),
-                'type'         => Controls_Manager::SWITCHER,
-                'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
-                'return_value' => 'yes',
-                'default'      => 'no',
-                'description'  => __('Enable morphing blob animation effects for dynamic visual appeal.', 'essential-addons-for-elementor-lite'),
-                'condition'    => [
-					'eael_enable_image_masking' => 'yes',
-					'eael_image_masking_type' => 'blob'
-				],
-            ]
-        );
-
-        $element->add_control(
-            'eael_blob_animation_duration',
-            [
-                'label' => __('Animation Duration (seconds)', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__( 'Duration (seconds)', 'text-domain' ),
                 'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px' ],
                 'range' => [
                     'px' => [
                         'min' => 1,
-                        'max' => 20,
-                        'step' => 0.5,
+                        'max' => 100,
+                        'step' => 1,
                     ],
                 ],
                 'default' => [
-                    'size' => 4,
+                    'unit' => 'px',
+                    'size' => 10,
                 ],
                 'condition' => [
 					'eael_enable_image_masking' => 'yes',
 					'eael_image_masking_type' => 'morphing',
-					'eael_blob_animation_enable' => 'yes'
 				],
             ]
         );
 
         $element->add_control(
-            'eael_blob_animation_easing',
+            'eael_image_morphing_loop',
             [
-                'label' => __('Animation Easing', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'default' => 'power2.inOut',
-                'options' => [
-                    'none'          => __('None', 'essential-addons-for-elementor-lite'),
-                    'power1.out'    => __('Power1 Out', 'essential-addons-for-elementor-lite'),
-                    'power1.in'     => __('Power1 In', 'essential-addons-for-elementor-lite'),
-                    'power1.inOut'  => __('Power1 InOut', 'essential-addons-for-elementor-lite'),
-                    'power2.out'    => __('Power2 Out', 'essential-addons-for-elementor-lite'),
-                    'power2.in'     => __('Power2 In', 'essential-addons-for-elementor-lite'),
-                    'power2.inOut'  => __('Power2 InOut', 'essential-addons-for-elementor-lite'),
-                    'power3.out'    => __('Power3 Out', 'essential-addons-for-elementor-lite'),
-                    'power3.in'     => __('Power3 In', 'essential-addons-for-elementor-lite'),
-                    'power3.inOut'  => __('Power3 InOut', 'essential-addons-for-elementor-lite'),
-                    'back.out'      => __('Back Out', 'essential-addons-for-elementor-lite'),
-                    'back.in'       => __('Back In', 'essential-addons-for-elementor-lite'),
-                    'back.inOut'    => __('Back InOut', 'essential-addons-for-elementor-lite'),
-                    'elastic.out'   => __('Elastic Out', 'essential-addons-for-elementor-lite'),
-                    'elastic.in'    => __('Elastic In', 'essential-addons-for-elementor-lite'),
-                    'elastic.inOut' => __('Elastic InOut', 'essential-addons-for-elementor-lite'),
-                    'bounce.out'    => __('Bounce Out', 'essential-addons-for-elementor-lite'),
-                    'bounce.in'     => __('Bounce In', 'essential-addons-for-elementor-lite'),
-                    'bounce.inOut'  => __('Bounce InOut', 'essential-addons-for-elementor-lite'),
-                ],
-                'condition' => [
-					'eael_enable_image_masking' => 'yes',
-					'eael_image_masking_type' => 'morphing',
-					'eael_blob_animation_enable' => 'yes'
-				],
-            ]
-        );
-
-        $element->add_control(
-            'eael_blob_animation_loop',
-            [
-                'label'        => __('Loop Animation', 'essential-addons-for-elementor-lite'),
+                'label'        => esc_html__( 'Animation Loop', 'text-domain' ),
                 'type'         => Controls_Manager::SWITCHER,
-                'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default'      => 'yes',
                 'condition'    => [
 					'eael_enable_image_masking' => 'yes',
 					'eael_image_masking_type' => 'morphing',
-					'eael_blob_animation_enable' => 'yes'
 				],
             ]
         );
 
         $element->add_control(
-            'eael_blob_animation_scale_min',
+            'eael_image_morphing_enable_rotation',
             [
-                'label' => __('Scale Min', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min' => 50,
-                        'max' => 200,
-                        'step' => 1,
-                    ],
-                ],
-                'default' => [
-                    'size' => 100,
-                ],
-                'condition' => [
-					'eael_enable_image_masking' => 'yes',
-					'eael_image_masking_type' => 'morphing',
-					'eael_blob_animation_enable' => 'yes'
-				],
-            ]
-        );
-
-        $element->add_control(
-            'eael_blob_animation_scale_max',
-            [
-                'label' => __('Scale Max', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min' => 50,
-                        'max' => 200,
-                        'step' => 1,
-                    ],
-                ],
-                'default' => [
-                    'size' => 100,
-                ],
-                'condition' => [
-					'eael_enable_image_masking' => 'yes',
-					'eael_image_masking_type' => 'morphing',
-					'eael_blob_animation_enable' => 'yes'
-				],
-            ]
-        );
-
-        $element->add_control(
-            'eael_blob_animation_rotation',
-            [
-                'label'        => __('Enable Rotation', 'essential-addons-for-elementor-lite'),
+                'label'        => esc_html__( 'Enable Rotation', 'text-domain' ),
                 'type'         => Controls_Manager::SWITCHER,
-                'label_on'     => __('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off'    => __('No', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default'      => 'no',
                 'condition'    => [
 					'eael_enable_image_masking' => 'yes',
 					'eael_image_masking_type' => 'morphing',
-					'eael_blob_animation_enable' => 'yes'
 				],
             ]
         );
 
         $element->add_control(
-            'eael_blob_animation_rotation_speed',
+            'eael_image_morphing_rotation',
             [
-                'label' => __('Rotation Speed (degrees)', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__( 'Rotation (degrees)', 'text-domain' ),
                 'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px' ],
                 'range' => [
                     'px' => [
-                        'min' => 90,
-                        'max' => 720,
-                        'step' => 90,
+                        'min' => 0,
+                        'max' => 360,
+                        'step' => 1,
                     ],
                 ],
                 'default' => [
-                    'size' => 360,
+                    'unit' => 'px',
+                    'size' => 90,
                 ],
                 'condition' => [
 					'eael_enable_image_masking' => 'yes',
 					'eael_image_masking_type' => 'morphing',
-					'eael_blob_animation_enable' => 'yes',
-					'eael_blob_animation_rotation' => 'yes'
+					'eael_image_morphing_enable_rotation' => 'yes',
 				],
             ]
         );
 
         $element->add_control(
-            'eael_blob_animation_shape_type',
+            'eael_image_morphing_scalling_max',
             [
-                'label' => __('Shape Type', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'default' => 'polygon',
-                'options' => [
-                    'polygon' => __('Polygon (CSS Clip-path)', 'essential-addons-for-elementor-lite'),
-                    'path' => __('Path (SVG)', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__( 'Scalling Max', 'text-domain' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px' ],
+                'range' => [
+                    'px' => [
+                        'min' => 1,
+                        'max' => 10,
+                        'step' => .1,
+                    ],
                 ],
-                'description' => __('Polygon uses CSS clip-path for better performance, Path uses SVG for more complex shapes.', 'essential-addons-for-elementor-lite'),
                 'condition' => [
 					'eael_enable_image_masking' => 'yes',
 					'eael_image_masking_type' => 'morphing',
-					'eael_blob_animation_enable' => 'yes'
 				],
             ]
         );
 
         $element->add_control(
-            'eael_blob_animation_advanced_heading',
+            'eael_image_morphing_scalling_min',
             [
-                'label' => __('⚙️ Advanced Settings', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
-                'separator' => 'before',
+                'label' => esc_html__( 'Scalling Min', 'text-domain' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px' ],
+                'range' => [
+                    'px' => [
+                        'min' => 1,
+                        'max' => 10,
+                        'step' => .1,
+                    ],
+                ],
                 'condition' => [
 					'eael_enable_image_masking' => 'yes',
 					'eael_image_masking_type' => 'morphing',
-					'eael_blob_animation_enable' => 'yes'
-				],
-            ]
-        );
-
-        $element->add_control(
-            'eael_blob_animation_custom_shapes',
-            [
-                'label' => __('Custom Blob Shapes', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXTAREA,
-                'rows' => 6,
-                'placeholder' => __('Enter custom polygon shapes, one per line. Example:
-polygon(30% 40%, 70% 30%, 80% 70%, 20% 80%)
-polygon(40% 20%, 80% 40%, 60% 80%, 10% 60%)', 'essential-addons-for-elementor-lite'),
-                'description' => __('Add custom polygon shapes for morphing animation. Leave empty to use default shapes.', 'essential-addons-for-elementor-lite'),
-                'condition' => [
-					'eael_enable_image_masking' => 'yes',
-					'eael_image_masking_type' => 'morphing',
-					'eael_blob_animation_enable' => 'yes',
-					'eael_blob_animation_shape_type' => 'polygon'
 				],
             ]
         );
@@ -739,14 +612,31 @@ polygon(40% 20%, 80% 40%, 60% 80%, 10% 60%)', 'essential-addons-for-elementor-li
                 }
                 $morphing_options = [
                     'shapes'        => base64_encode( wp_json_encode( $paths ) ),
-                    'duration'      => $settings['eael_blob_animation_duration'],
-                    'loop'          => 'yes' === $settings['eael_blob_animation_loop'],
-                    'scaleMin'      => $settings['eael_blob_animation_scale_min'] / 100,
-                    'scaleMax'      => $settings['eael_blob_animation_scale_max'] / 100,
-                    'rotation'      => 'yes' === $settings['eael_blob_animation_rotation'],
-                    'rotationSpeed' => $settings['eael_blob_animation_rotation_speed'],
-                    'shapeType'     => $settings['eael_blob_animation_shape_type'],
                 ];
+
+                if( !empty( $settings['eael_image_morphing_duration']['size'] ) ){
+                    $morphing_options['duration'] = $settings['eael_image_morphing_duration']['size'];
+                }
+
+                if( !empty( $settings['eael_image_morphing_loop'] ) ){
+                    $morphing_options['loop'] = 'yes' === $settings['eael_image_morphing_loop'];
+                }
+
+                if( !empty( $settings['eael_image_morphing_scalling_min']['size'] ) ){
+                    $morphing_options['scaleMin'] = $settings['eael_image_morphing_scalling_min']['size'];
+                }
+
+                if( !empty( $settings['eael_image_morphing_scalling_max']['size'] ) ){
+                    $morphing_options['scaleMax'] = $settings['eael_image_morphing_scalling_max']['size'];
+                }
+
+                if( !empty( $settings['eael_image_morphing_enable_rotation'] ) ){
+                    $morphing_options['rotation'] = 'yes' === $settings['eael_image_morphing_enable_rotation'];
+
+                    if( !empty( $settings['eael_image_morphing_rotation']['size'] ) ){
+                        $morphing_options['rotationSpeed'] = $settings['eael_image_morphing_rotation']['size'];
+                    }
+                }
 
                 $element->add_render_attribute( '_wrapper', 'data-morphing-options', wp_json_encode( $morphing_options ) );
                 $element->add_render_attribute( '_wrapper', 'class', 'eael-morphing-enabled' );
