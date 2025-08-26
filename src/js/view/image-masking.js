@@ -7,12 +7,10 @@ let ImageMaskingHandler = function ($scope, $) {
         let options = $scope.data('morphing-options');
         let shapes = atob(options.shapes);
         let animationData = {
-            blobShapes: JSON.parse(shapes)
+            polygonShapes: JSON.parse(shapes)
         };
 
-        if( 'svg' === options.type ){
-            animationData.shapeType = 'auto';
-        }
+
 
         if( options.duration ){
             animationData.duration = options.duration;
@@ -44,10 +42,10 @@ let ImageMaskingHandler = function ($scope, $) {
         console.log(animationData);
         
 
-        if (animationData && typeof MorphingBlobAnimation !== 'undefined' && $img.length > 0) {
+        if (animationData && typeof PolygonMorphingAnimation !== 'undefined' && $img.length > 0) {
             // Create animation instance for each image individually
             $img.each(function(_, imgElement) {
-                new MorphingBlobAnimation(imgElement, animationData);
+                new PolygonMorphingAnimation(imgElement, animationData);
             });
         }
     }
