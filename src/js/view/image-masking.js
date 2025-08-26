@@ -1,52 +1,50 @@
 let ImageMaskingHandler = function ($scope, $) {
     let $img = $scope.find('img');
 
-    // Check if blob animation is enabled and get settings
+    // Check if polygon animation is enabled and get settings
     
     if ( $scope.hasClass('eael-morphing-enabled') ) {
         let options = $scope.data('morphing-options');
-        let shapes = atob(options.shapes);
-        let animationData = {
-            polygonShapes: JSON.parse(shapes)
-        };
-
-
-
-        if( options.duration ){
-            animationData.duration = options.duration;
-        }
-
-        if( options.scaleMin ){
-            animationData.scale.min = options.scaleMin;
-        }
-
-        if( options.scaleMax ){
-            animationData.scale.max = options.scaleMax;
-        }
-
-        if( options.rotation ){
-            animationData.rotation = options.rotation;
-        }
-
-        if( options.rotationSpeed ){
-            animationData.rotationSpeed = options.rotationSpeed;
-        }
-
-        if( options.scaleMin ){
-            animationData.scale.min = options.scaleMin;
-        }
-        if( options.scaleMax ){
-            animationData.scale.max = options.scaleMax;
-        }
-
-        console.log(animationData);
         
+        if( 'clip-path' === options.type ){
+            let shapes = atob(options.shapes);
+            let animationData = {
+                polygonShapes: JSON.parse(shapes)
+            };
 
-        if (animationData && typeof PolygonMorphingAnimation !== 'undefined' && $img.length > 0) {
-            // Create animation instance for each image individually
-            $img.each(function(_, imgElement) {
-                new PolygonMorphingAnimation(imgElement, animationData);
-            });
+            if( options.duration ){
+                animationData.duration = options.duration;
+            }
+
+            if( options.scaleMin ){
+                animationData.scale.min = options.scaleMin;
+            }
+
+            if( options.scaleMax ){
+                animationData.scale.max = options.scaleMax;
+            }
+
+            if( options.rotation ){
+                animationData.rotation = options.rotation;
+            }
+
+            if( options.rotationSpeed ){
+                animationData.rotationSpeed = options.rotationSpeed;
+            }
+
+            if( options.scaleMin ){
+                animationData.scale.min = options.scaleMin;
+            }
+            if( options.scaleMax ){
+                animationData.scale.max = options.scaleMax;
+            }
+
+            if (animationData && typeof PolygonMorphingAnimation !== 'undefined' && $img.length > 0) {
+                // Create animation instance for each image individually
+                $img.each(function(_, imgElement) {
+                    new PolygonMorphingAnimation(imgElement, animationData);
+                });
+            }
         }
     }
 }
