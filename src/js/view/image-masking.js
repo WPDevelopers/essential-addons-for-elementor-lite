@@ -45,6 +45,15 @@ let ImageMaskingHandler = function ($scope, $) {
                     new PolygonMorphingAnimation(imgElement, animationData);
                 });
             }
+        } else if( 'svg' === options.type ){
+            let shapes = JSON.parse(atob(options.shapes));
+            let animationData = {
+                paths: shapes
+            };
+            
+            $img.each(function(index, imgElement) {
+                new BlobImageMask($(imgElement), animationData);
+            });
         }
     }
 }
