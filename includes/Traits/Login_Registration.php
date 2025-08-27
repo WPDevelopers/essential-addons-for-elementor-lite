@@ -722,6 +722,9 @@ trait Login_Registration {
 				if ( in_array( 'redirect', $register_actions ) && ! empty( $custom_redirect_url ) ) {
 					$data['redirect_to'] = $custom_redirect_url;
 				}
+
+				$data['auto_login'] = true;
+				
 				wp_send_json_success( $data );
 			}
 
