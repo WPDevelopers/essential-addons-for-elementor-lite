@@ -30,7 +30,15 @@ class Woo_Cart extends Widget_Base {
 			throw new \Exception( '`$args` argument is required when initializing a full widget instance.' );
 		}
 
-		if ( $is_type_instance && class_exists( 'woocommerce' ) ) {
+		$widgets    = get_post_meta( get_the_ID(), '_elementor_controls_usage', true );
+		$widget_key = 'eael-woo-cart';
+
+		if ( ! $widgets ) {
+			$widget_key = 'woo-cart';
+			$widgets    = get_post_meta( get_the_ID(), '_eael_widget_elements', true );
+		}
+
+		if ( isset( $widgets[ $widget_key ] ) && $is_type_instance && class_exists( 'woocommerce' ) ) {
 
 			if ( is_null( WC()->cart ) ) {
 				include_once WC_ABSPATH . 'includes/wc-cart-functions.php';
