@@ -704,11 +704,18 @@ trait Login_Registration {
 		];
 		// should user be auto logged in?
 		if ( in_array( 'auto_login', $register_actions ) && ! is_user_logged_in() ) {
-			wp_signon( [
+			$user_signon = wp_signon( [
 				'user_login'    => $username,
 				'user_password' => $password,
 				'remember'      => true,
 			] );
+
+			// wp_signon() doesn't set the current user for the current request
+			if ( ! is_wp_error( $user_signon ) ) {
+				wp_set_current_user( $user_signon->ID, $user_signon->user_login );
+				do_action( 'wp_login', $user_signon->user_login, $user_signon );
+			}
+
             $this->delete_registration_options($widget_id);
 
 			if ( $ajax ) {
