@@ -32,14 +32,14 @@ class EAEL_Choose extends Control_Choose {
 		<div class="elementor-control-field">
 			<label class="elementor-control-title">{{{ data.label }}}</label>
 			<div class="elementor-control-input-wrapper">
-				<div class="elementor-choices {{ data.image_choose ? 'eael-image-choices' : 'eael-choices' }}">
+				<div class="elementor-choices{{ data.image_choose ? ' eael-image-choices' : ' eael-choices' }}{{ data.multiline ? ' eael-multiline' : '' }}">
 					<# _.each( data.options, function( options, value ) { #>
 					<input id="<?php $this->print_control_uid( $control_uid_input_type ); ?>" type="radio" name="elementor-choose-{{ data.name }}-{{ data._cid }}" value="{{ value }}">
-					<label class="elementor-choices-label elementor-control-unit-1 tooltip-target" for="<?php $this->print_control_uid( $control_uid_input_type ); ?>" data-tooltip="{{ options.title }}" title="{{ options.title }}">
+					<label class="elementor-choices-label elementor-control-unit-1 {{ !options.text ? ' tooltip-target' : '' }}" for="<?php $this->print_control_uid( $control_uid_input_type ); ?>" data-tooltip="{{ options.title }}" title="{{ options.title }}">
 						<# if( options.image ){ #>
 							<img class="eael-image-option" src="{{ options.image }}" alt="{{ options.title }}" />
 						<# } else if( options.text ){ #>
-                            <span class="eael-text-option" alt="{{ options.title }}">{{{ options.text }}}</span>
+                            <span class="eael-text-option">{{{ options.text }}}</span>
 						<# } else{ #>
 							<i class="{{ options.icon }}" aria-hidden="true"></i>
 						<# } #>

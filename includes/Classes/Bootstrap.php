@@ -75,8 +75,8 @@ class Bootstrap
     protected $installer;
 
 
-    const EAEL_PROMOTION_FLAG = 15;
-    const EAEL_ADMIN_MENU_FLAG = 15;
+    const EAEL_PROMOTION_FLAG = 16;
+    const EAEL_ADMIN_MENU_FLAG = 16;
     /**
      * Singleton instance
      *
@@ -195,7 +195,7 @@ class Bootstrap
         add_action('init', [$this, 'login_or_register_user']);
         add_filter('wp_new_user_notification_email', array($this, 'new_user_notification_email'), 10, 3);
         add_filter('wp_new_user_notification_email_admin', array($this, 'new_user_notification_email_admin'), 10, 3);
-        add_action( 'login_init', [$this, 'eael_redirect_to_reset_password'] );
+        add_action( 'init', [$this, 'eael_redirect_to_reset_password'] );
 
         if( 'on' === get_option( 'eael_custom_profile_fields' ) ){
             add_action( 'show_user_profile', [ $this, 'eael_extra_user_profile_fields' ] );
