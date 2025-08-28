@@ -10534,6 +10534,10 @@ msgstr ""
 msgid "EA Duplicator"
 msgstr ""
 
+#: ../includes/Extensions/Post_Duplicator.php:81
+msgid "You do not have sufficient permissions to edit this post."
+msgstr ""
+
 #: ../includes/Extensions/Promotion.php:35
 msgid "Upgrade Essential Addons"
 msgstr ""
@@ -11043,7 +11047,7 @@ msgid "Get more powerful widgets & extensions to elevate your Elementor website"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:204, ../includes/Traits/Admin.php:372
-msgid "3400+"
+msgid "3700+"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:205, ../includes/Traits/Admin.php:373
