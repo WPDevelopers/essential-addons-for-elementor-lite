@@ -10534,6 +10534,10 @@ msgstr ""
 msgid "EA Duplicator"
 msgstr ""
 
+#: ../includes/Extensions/Post_Duplicator.php:81
+msgid "You do not have sufficient permissions to edit this post."
+msgstr ""
+
 #: ../includes/Extensions/Promotion.php:35
 msgid "Upgrade Essential Addons"
 msgstr ""
