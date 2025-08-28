@@ -2,6 +2,7 @@
 
 namespace Essential_Addons_Elementor\Elements;
 
+use Elementor\Plugin;
 use Essential_Addons_Elementor\Classes\Helper;
 
 // If this file is called directly, abort.
@@ -30,7 +31,15 @@ class Woo_Cart extends Widget_Base {
 			throw new \Exception( '`$args` argument is required when initializing a full widget instance.' );
 		}
 
-		if ( $is_type_instance && class_exists( 'woocommerce' ) ) {
+		$widgets    = get_post_meta( get_the_ID(), '_elementor_controls_usage', true );
+		$widget_key = 'eael-woo-cart';
+
+		if ( ! $widgets ) {
+			$widget_key = 'woo-cart';
+			$widgets    = get_post_meta( get_the_ID(), '_eael_widget_elements', true );
+		}
+
+		if ( isset( $widgets[ $widget_key ] ) && $is_type_instance && class_exists( 'woocommerce' ) ) {
 
 			if ( is_null( WC()->cart ) ) {
 				include_once WC_ABSPATH . 'includes/wc-cart-functions.php';
@@ -1188,18 +1197,6 @@ class Woo_Cart extends Widget_Base {
 		);
 
 		$this->add_control(
-			'eael_woo_cart_components_cart_checkout_button_text',
-			[
-				'label'   => esc_html__( 'Checkout Button Text', 'essential-addons-for-elementor-lite' ),
-				'type'    => Controls_Manager::TEXT,
-				'default' => esc_html__( 'Proceed to Checkout', 'essential-addons-for-elementor-lite' ),
-				'ai' => [
-					'active' => false,
-				],
-			]
-		);
-
-		$this->add_control(
 			'eael_woo_cart_components_empty_cart_text',
 			[
 				'label'   => esc_html__( 'Empty Cart Text', 'essential-addons-for-elementor-lite' ),
@@ -1208,6 +1205,40 @@ class Woo_Cart extends Widget_Base {
 				'ai' => [
 					'active' => false,
 				],
+			]
+		);
+
+		$this->add_control(
+			'cart_checkout_button',
+			[
+				'label' => esc_html__( 'Checkout Button', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cart_hide_checkout_btn',
+			[
+				'label'        => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'      => '',
+			]
+		);
+
+		$this->add_control(
+			'eael_woo_cart_components_cart_checkout_button_text',
+			[
+				'label'   => esc_html__( 'Text', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::TEXT,
+				'default' => esc_html__( 'Proceed to Checkout', 'essential-addons-for-elementor-lite' ),
+				'ai' => [
+					'active' => false,
+				],
+				'condition' => [
+					'eael_woo_cart_hide_checkout_btn!' => 'yes'
+				]
 			]
 		);
 
