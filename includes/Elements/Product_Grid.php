@@ -660,6 +660,18 @@ class Product_Grid extends Widget_Base
 			]
 		);
 
+        $this->add_control(
+            'eael_product_grid_show_onsale',
+            [
+                'label' => esc_html__( 'On Sale', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+                'label_off' => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+                'return_value' => 'yes',
+                'default' => 'yes',
+            ]
+        );
+
         $this->add_control('product_type_logged_users', [
             'label' => __('Product Type', 'essential-addons-for-elementor-lite'),
             'type' => Controls_Manager::SELECT,
@@ -3833,6 +3845,16 @@ class Product_Grid extends Widget_Base
                 'key' => '_stock_status',
                 'value' => 'instock'
             ];
+        }
+
+        // Handle on sale products exclusion
+        if ( 'yes' !== $settings['eael_product_grid_show_onsale'] ) {
+            $on_sale_ids = wc_get_product_ids_on_sale();
+            if ( ! empty( $on_sale_ids ) ) {
+                $args['post__not_in'] = isset( $args['post__not_in'] ) ?
+                    array_merge( $args['post__not_in'], $on_sale_ids ) :
+                    $on_sale_ids;
+            }
         }
 
         if( function_exists('whols_lite') ){
