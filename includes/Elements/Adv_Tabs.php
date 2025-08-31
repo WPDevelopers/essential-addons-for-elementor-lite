@@ -96,6 +96,21 @@ class Adv_Tabs extends Widget_Base
                 'label' => esc_html__('General Settings', 'essential-addons-for-elementor-lite'),
             ]
         );
+
+        $this->add_control(
+            'eael_adv_tab_style',
+            [
+                'label'       => esc_html__('Style', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::SELECT,
+                'default'     => 'default',
+                'label_block' => false,
+                'options'     => [
+                    'default' => esc_html__('Default', 'essential-addons-for-elementor-lite'),
+                    'glassey' => esc_html__('Glassey', 'essential-addons-for-elementor-lite'),
+                ],
+            ]
+        );
+
         $this->add_control(
             'eael_adv_tab_layout',
             [
@@ -1050,9 +1065,18 @@ class Adv_Tabs extends Widget_Base
 
         $this->add_render_attribute('eael_tab_icon_position', 'class', esc_attr($settings['eael_adv_tab_icon_position']));
         $this->add_render_attribute('eael_tab_icon_position', 'role', 'tablist'); 
+
+        $tab_glassey = $settings['eael_adv_tab_style'] === 'glassey' ? 'eael-tabs-glassey' : '';
+        $this->add_render_attribute(
+            'eael_tab_glassey',
+            [
+                'class' => [ 'eael-tabs-nav', $tab_glassey ],
+            ]
+        );
+
         ?>
         <div <?php $this->print_render_attribute_string('eael_tab_wrapper'); ?>>
-            <div class="eael-tabs-nav">
+            <div <?php $this->print_render_attribute_string('eael_tab_glassey'); ?>>
                 <ul <?php $this->print_render_attribute_string('eael_tab_icon_position'); ?>>
                     <?php foreach ($settings['eael_adv_tabs_tab'] as $index => $tab) :
 	                    $tab_id = $tab['eael_adv_tabs_tab_id'] ? $tab['eael_adv_tabs_tab_id'] : Helper::str_to_css_id( $tab['eael_adv_tabs_tab_title'] );
