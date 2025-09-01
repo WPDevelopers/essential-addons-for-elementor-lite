@@ -24,15 +24,11 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 8px;
   height: 70px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  padding: 8px 12px 10px;
   margin: 0 auto;
   border: none;
-  border-radius: 99em;
-  font-size: var(--fz);
   background-color: color-mix(in srgb, var(--c-glass) 12%, transparent);
   backdrop-filter: blur(1px) url(#switcher) saturate(var(--saturation));
   -webkit-backdrop-filter: blur(8px) saturate(var(--saturation));

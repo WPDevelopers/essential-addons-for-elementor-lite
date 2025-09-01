@@ -631,6 +631,94 @@ class Adv_Tabs extends Widget_Base
             ]
         );
 
+      $this->add_control(
+			'eael_adv_tabs_tab_color_glassey_bar',
+			[
+				'label'     => esc_html__( 'Tab Bar', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+            'condition' => [
+               'eael_adv_tab_new_style' => 'glassey',
+            ],
+			]
+		);
+
+      $this->add_control(
+			'eael_adv_tabs_tab_color_glassey_bar_align',
+			[
+				'label'   => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'flex-start' => [
+						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-center',
+					],
+					'flex-end' => [
+						'title' => esc_html__( 'Right', 'essential-addons-for-elementor-lite' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+				],
+				'default'   => 'flex-start',
+				'toggle'    => true,
+				'selectors' => [
+					'{{WRAPPER}} .eael-tabs-nav.eael-tabs-glassey' => 'justify-content: {{VALUE}};',
+				],
+            'condition' => [
+               'eael_adv_tab_new_style' => 'glassey',
+            ],
+			]
+		);
+
+      $this->add_control(
+			'eael_adv_tabs_tab_color_glassey_bar_border',
+			[
+				'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'custom' ],
+				'default'    => [
+					'top'      => 30,
+					'right'    => 30,
+					'bottom'   => 30,
+					'left'     => 30,
+					'unit'     => 'px',
+					'isLinked' => true,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-tabs-nav.eael-tabs-glassey' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+            'condition' => [
+               'eael_adv_tab_new_style' => 'glassey',
+            ],
+			]
+		);
+
+      $this->add_control(
+			'eael_adv_tabs_tab_color_glassey_bar_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'custom' ],
+				'default'    => [
+					'top'      => 5,
+					'right'    => 5,
+					'bottom'   => 5,
+					'left'     => 5,
+					'unit'     => 'px',
+					'isLinked' => true,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .eael-tabs-nav.eael-tabs-glassey' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+            'condition' => [
+               'eael_adv_tab_new_style' => 'glassey',
+            ],
+			]
+		);
+
         $this->start_controls_tabs('eael_adv_tabs_header_tabs');
         // Normal State Tab
         $this->start_controls_tab('eael_adv_tabs_header_normal', ['label' => esc_html__('Normal', 'essential-addons-for-elementor-lite')]);
