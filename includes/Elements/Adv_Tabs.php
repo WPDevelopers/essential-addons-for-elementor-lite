@@ -634,6 +634,7 @@ class Adv_Tabs extends Widget_Base
         $this->start_controls_tabs('eael_adv_tabs_header_tabs');
         // Normal State Tab
         $this->start_controls_tab('eael_adv_tabs_header_normal', ['label' => esc_html__('Normal', 'essential-addons-for-elementor-lite')]);
+        
         $this->add_control(
             'eael_adv_tabs_tab_color',
             [
@@ -643,8 +644,27 @@ class Adv_Tabs extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'background-color: {{VALUE}};',
                 ],
+                'condition' => [
+                    'eael_adv_tab_style!' => 'glassey',
+                ],
             ]
         );
+
+        $this->add_control(
+        'eael_adv_tabs_tab_color_glassey_normal',
+        [
+                'label'     => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#f1f1f100',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav.eael-tabs-glassey > ul li' => 'background-color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_adv_tab_style' => 'glassey',
+                ],
+            ]
+        );
+
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -710,8 +730,27 @@ class Adv_Tabs extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover' => 'background-color: {{VALUE}};',
                 ],
+                'condition' => [
+                    'eael_adv_tab_style!' => 'glassey',
+                ],
             ]
         );
+
+        $this->add_control(
+        'eael_adv_tabs_tab_color_glassey_hover',
+        [
+                'label'     => esc_html__('Tab Background Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#f1f1f100',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav.eael-tabs-glassey > ul li:hover' => 'background-color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_adv_tab_style' => 'glassey',
+                ],
+            ]
+        );
+
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
@@ -777,8 +816,27 @@ class Adv_Tabs extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active' => 'background-color: {{VALUE}};',
                 ],
+                'condition' => [
+                    'eael_adv_tab_style!' => 'glassey',
+                ],
             ]
         );
+
+        $this->add_control(
+        'eael_adv_tabs_tab_color_glassey_active',
+        [
+                'label'     => esc_html__('Tab Background Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#44444400',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav.eael-tabs-glassey > ul li.active' => 'background-color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_adv_tab_style' => 'glassey',
+                ],
+            ]
+        );
+
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
