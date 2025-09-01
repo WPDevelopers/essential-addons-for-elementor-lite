@@ -203,7 +203,7 @@ class Promotion
             [
                 'type' => Controls_Manager::RAW_HTML,
                 'raw' => $this->teaser_template([
-                    'title'   => __('Meet EACustom Cursor', 'essential-addons-for-elementor-lite'),
+                    'title'   => __('Meet EA Custom Cursor', 'essential-addons-for-elementor-lite'),
                     'messages' => __('Personalize your cursor with a unique style to enhance user experience and visual appeal.', 'essential-addons-for-elementor-lite'),
                 ]),
             ]
