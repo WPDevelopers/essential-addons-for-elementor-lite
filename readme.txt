@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.3.0
+Stable tag: 6.3.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -315,6 +315,13 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.3.1 - 01/09/2025 =
+
+- Improvement | EA Woo Product Carousel | Add option to exclude "On Sale" and "Out of Stock" products
+- Fixed: EA Login/Register Form | Auto login not working properly
+- Fixed: EA Advanced Data Table | Header background color doesn't work on the editor page when we import data from a CSV file
+- Few minor bug fixes & improvements
 
 = 6.3.0 - 24/08/2025 =
 
