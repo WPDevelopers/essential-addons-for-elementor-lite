@@ -181,6 +181,7 @@ Extensions (Pro):
 5. [Conditional Display](https://essential-addons.com/conditional-display/)- Display your preferred content based on the logic conditions you have set
 6. [Dynamic Tags](https://essential-addons.com/dynamic-tags/)- Display content dynamically on your preferred section of the website
 7. [Interactive animations](https://essential-addons.com/interactive-animations/)- Create stunning animations & build a fully dynamic web page
+8. [Custom Cursor](https://essential-addons.com/custom-cursor/)-  Transform the default mouse pointer into a fully personalized design
 
 
 More features and improvements are coming on regular updates. Want to unlock the advanced elements? [Upgrade to our Pro version](https://essential-addons.com/upgrade-ea-pro)
