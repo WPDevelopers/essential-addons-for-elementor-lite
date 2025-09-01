@@ -98,7 +98,7 @@ class Adv_Tabs extends Widget_Base
         );
 
         $this->add_control(
-            'eael_adv_tab_style',
+            'eael_adv_tab_new_style',
             [
                 'label'       => esc_html__('Style', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::SELECT,
@@ -645,7 +645,7 @@ class Adv_Tabs extends Widget_Base
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'background-color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'eael_adv_tab_style!' => 'glassey',
+                    'eael_adv_tab_new_style!' => 'glassey',
                 ],
             ]
         );
@@ -660,7 +660,7 @@ class Adv_Tabs extends Widget_Base
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav.eael-tabs-glassey > ul li' => 'background-color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'eael_adv_tab_style' => 'glassey',
+                    'eael_adv_tab_new_style' => 'glassey',
                 ],
             ]
         );
@@ -731,7 +731,7 @@ class Adv_Tabs extends Widget_Base
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover' => 'background-color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'eael_adv_tab_style!' => 'glassey',
+                    'eael_adv_tab_new_style!' => 'glassey',
                 ],
             ]
         );
@@ -746,7 +746,7 @@ class Adv_Tabs extends Widget_Base
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav.eael-tabs-glassey > ul li:hover' => 'background-color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'eael_adv_tab_style' => 'glassey',
+                    'eael_adv_tab_new_style' => 'glassey',
                 ],
             ]
         );
@@ -817,7 +817,7 @@ class Adv_Tabs extends Widget_Base
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active' => 'background-color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'eael_adv_tab_style!' => 'glassey',
+                    'eael_adv_tab_new_style!' => 'glassey',
                 ],
             ]
         );
@@ -832,7 +832,7 @@ class Adv_Tabs extends Widget_Base
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav.eael-tabs-glassey > ul li.active' => 'background-color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'eael_adv_tab_style' => 'glassey',
+                    'eael_adv_tab_new_style' => 'glassey',
                 ],
             ]
         );
@@ -1124,7 +1124,7 @@ class Adv_Tabs extends Widget_Base
         $this->add_render_attribute('eael_tab_icon_position', 'class', esc_attr($settings['eael_adv_tab_icon_position']));
         $this->add_render_attribute('eael_tab_icon_position', 'role', 'tablist'); 
 
-        $tab_glassey = $settings['eael_adv_tab_style'] === 'glassey' ? 'eael-tabs-glassey' : '';
+        $tab_glassey = $settings['eael_adv_tab_new_style'] === 'glassey' ? 'eael-tabs-glassey' : '';
         $this->add_render_attribute(
             'eael_tab_glassey',
             [
