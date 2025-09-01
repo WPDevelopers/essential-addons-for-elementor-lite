@@ -1154,6 +1154,15 @@ class Adv_Tabs extends Widget_Base
                             <?php endif; ?>
                         </li>
                     <?php endforeach; ?>
+
+                  <div class="eael-tabs-glassey-svg">
+                     <svg style="display: none">
+                        <filter id="switcher" x="0" y="0" width="100%" height="100%" filterUnits="objectBoundingBox">
+                           <feTurbulence type="fractalNoise" baseFrequency="0.003 0.007" numOctaves="1" result="turbulence" />
+                           <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="200" xChannelSelector="R" yChannelSelector="G" />
+                        </filter>
+                     </svg>
+                  </div>
                 </ul>
             </div>
             
