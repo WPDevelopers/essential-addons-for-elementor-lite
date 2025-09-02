@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.3.0
+Stable tag: 6.3.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -181,6 +181,7 @@ Extensions (Pro):
 5. [Conditional Display](https://essential-addons.com/conditional-display/)- Display your preferred content based on the logic conditions you have set
 6. [Dynamic Tags](https://essential-addons.com/dynamic-tags/)- Display content dynamically on your preferred section of the website
 7. [Interactive animations](https://essential-addons.com/interactive-animations/)- Create stunning animations & build a fully dynamic web page
+8. [Custom Cursor](https://essential-addons.com/custom-cursor/)-  Transform the default mouse pointer into a fully personalized design
 
 
 More features and improvements are coming on regular updates. Want to unlock the advanced elements? [Upgrade to our Pro version](https://essential-addons.com/upgrade-ea-pro)
@@ -315,6 +316,13 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.3.1 - 01/09/2025 =
+
+- Improvement | EA Woo Product Carousel | Add option to exclude "On Sale" and "Out of Stock" products
+- Fixed: EA Login/Register Form | Auto login not working properly
+- Fixed: EA Advanced Data Table | Header background color doesn't work on the editor page when we import data from a CSV file
+- Few minor bug fixes & improvements
 
 = 6.3.0 - 24/08/2025 =
 
