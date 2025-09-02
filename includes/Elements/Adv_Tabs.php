@@ -721,7 +721,12 @@ class Adv_Tabs extends Widget_Base
 
         $this->start_controls_tabs('eael_adv_tabs_header_tabs');
         // Normal State Tab
-        $this->start_controls_tab('eael_adv_tabs_header_normal', ['label' => esc_html__('Normal', 'essential-addons-for-elementor-lite')]);
+      $this->start_controls_tab(
+         'eael_adv_tabs_header_normal', 
+         [
+            'label' => esc_html__('Normal', 'essential-addons-for-elementor-lite'),
+         ]
+      );
         
         $this->add_control(
             'eael_adv_tabs_tab_color',
@@ -793,6 +798,9 @@ class Adv_Tabs extends Widget_Base
                 'name' => 'eael_adv_tabs_tab_border',
                 'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
                 'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li',
+                'condition' => [
+                  'eael_adv_tab_new_style!' => 'glassey',
+               ],
             ]
         );
         $this->add_responsive_control(
@@ -804,6 +812,9 @@ class Adv_Tabs extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
+                'condition' => [
+                  'eael_adv_tab_new_style!' => 'glassey',
+               ],
             ]
         );
         $this->end_controls_tab();
