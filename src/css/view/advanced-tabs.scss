@@ -85,7 +85,6 @@
    left: 4px;
    top: 4px;
    display: block;
-   width: 140px;
    height: calc(100% - 10px);
    border-radius: 99em;
    background-color: color-mix(in srgb, var(--c-glass) 36%, transparent);
@@ -121,61 +120,13 @@
             transparent
          );
 }
-.eael-tabs-glassey > ul:has(li.active[data-tab="1"])::after {
-   translate: 0 0;
-   transform-origin: right;
-   transition: background-color 400ms cubic-bezier(1, 0, 0.4, 1),
-      box-shadow 400ms cubic-bezier(1, 0, 0.4, 1),
-      translate 400ms cubic-bezier(1, 0, 0.4, 1);
-   animation: scaleToggle 440ms ease;
-}
-
-.eael-tabs-glassey > ul:has(li.active[data-tab="2"])::after  {
-   translate: 150px 0;
-   transition: background-color 400ms cubic-bezier(1, 0, 0.4, 1),
-      box-shadow 400ms cubic-bezier(1, 0, 0.4, 1),
-      translate 400ms cubic-bezier(1, 0, 0.4, 1);
-   animation: scaleToggle2 440ms ease;
-}
-
-.eael-tabs-glassey > ul:has(li.active[data-tab="3"])::after  {
-   translate: 300px 0;
-   transition: background-color 400ms cubic-bezier(1, 0, 0.4, 1),
-      box-shadow 400ms cubic-bezier(1, 0, 0.4, 1),
-      translate 400ms cubic-bezier(1, 0, 0.4, 1);
-   animation: scaleToggle3 440ms ease;
-}
 
 @keyframes scaleToggle {
    0% {
       scale: 1 1;
    }
    50% {
-      scale: 1.1 1;
-   }
-   100% {
-      scale: 1 1;
-   }
-}
-
-@keyframes scaleToggle2 {
-   0% {
-      scale: 1 1;
-   }
-   50% {
       scale: 1.2 1;
-   }
-   100% {
-      scale: 1 1;
-   }
-}
-
-@keyframes scaleToggle3 {
-   0% {
-      scale: 1 1;
-   }
-   50% {
-      scale: 1.1 1;
    }
    100% {
       scale: 1 1;
