@@ -23,7 +23,7 @@
    z-index: 1;
    display: flex;
    align-items: center;
-   height: 70px;
+   height: auto;
    box-sizing: border-box;
    margin: 0 auto;
    border: none;
@@ -85,7 +85,6 @@
    left: 4px;
    top: 4px;
    display: block;
-   height: calc(100% - 10px);
    border-radius: 99em;
    background-color: color-mix(in srgb, var(--c-glass) 36%, transparent);
    z-index: -1;
@@ -142,6 +141,10 @@
 
 .eael-advance-tabs .eael-tabs-nav.eael-tabs-glassey > ul li:after {
    display: none !important;
+}
+
+.eael-tabs-vertical .eael-tabs-nav.eael-tabs-glassey {
+   height: auto;
 }
 
 /*-------End new tab bar style--------*/

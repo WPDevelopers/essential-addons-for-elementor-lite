@@ -197,7 +197,7 @@ eael.hooks.addAction("init", "ea", () => {
          
          // Glassey tab bar style
          const $glasseyTabs = $scope.find('.eael-tabs-glassey');
-         console.log( $glasseyTabs );
+         // console.log( $glasseyTabs );
          
          if ($glasseyTabs.length) {
             initGlasseyTabStyle($glasseyTabs);
@@ -252,14 +252,18 @@ eael.hooks.addAction("init", "ea", () => {
                const tabNumber = $tab.data('tab');
                const tabPosition = $tab.position();
                const tabWidth = $tab.outerWidth();
+               const tabHeight = $tab.outerHeight();
 
                if (tabPosition && typeof tabPosition.left !== 'undefined' && tabWidth) {
                      const translateX = Math.round(tabPosition.left);
+                     const translateY = Math.round(tabPosition.top);
                      const dynamicWidth = Math.round(tabWidth - 8);
+                     const dynamicHeight = Math.round(tabHeight - 8);
                      cssRules += `
                         #${widgetId} .eael-tabs-glassey > ul:has(li.active[data-tab="${tabNumber}"])::after {
-                           translate: ${translateX}px 0;
+                           translate: ${translateX}px ${translateY}px;
                            width: ${dynamicWidth}px;
+                           height: ${dynamicHeight}px;
                            transform-origin: right;
                            transition: background-color 400ms cubic-bezier(1, 0, 0.4, 1),
                                  box-shadow 400ms cubic-bezier(1, 0, 0.4, 1),
