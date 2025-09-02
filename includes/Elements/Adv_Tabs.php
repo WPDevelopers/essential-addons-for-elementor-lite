@@ -719,6 +719,27 @@ class Adv_Tabs extends Widget_Base
 			]
 		);
 
+      $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+               'name'           => 'eael_adv_tabs_tab_color_glassey_tab_bar_bg',
+               'types'          => ['classic', 'gradient'],
+               'selector'       => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav.eael-tabs-glassey',
+               'fields_options' => [
+                  'background' => [
+                     'label'   => esc_html__('Background', 'essential-addons-for-elementor-lite'),
+                     'default' => 'classic',
+                  ],
+                  'color' => [
+                     'default' => '#808080',
+                  ],
+               ],
+               'condition' => [
+                  'eael_adv_tab_new_style' => 'glassey',
+               ],
+         ]
+      );
+
         $this->start_controls_tabs('eael_adv_tabs_header_tabs');
         // Normal State Tab
       $this->start_controls_tab(
