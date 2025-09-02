@@ -917,7 +917,7 @@ class Adv_Tabs extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#44444400',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav.eael-tabs-glassey > ul li.active' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav.eael-tabs-glassey > ul:after' => 'background-color: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_adv_tab_new_style' => 'glassey',
@@ -961,25 +961,57 @@ class Adv_Tabs extends Widget_Base
                 ],
             ]
         );
+
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
                 'name' => 'eael_adv_tabs_tab_border_active',
                 'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
                 'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active',
+                'condition' => [
+                  'eael_adv_tab_new_style!' => 'glassey',
+               ],
             ]
         );
-        $this->add_responsive_control(
-            'eael_adv_tabs_tab_border_radius_active',
-            [
-                'label' => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', 'em', '%'],
-                'selectors' => [
-                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-            ]
-        );
+
+      $this->add_responsive_control(
+         'eael_adv_tabs_tab_border_radius_active',
+         [
+               'label'      => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+               'type'       => Controls_Manager::DIMENSIONS,
+               'size_units' => ['px', 'em', '%'],
+               'selectors' => [
+                  '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+               ],
+               'condition' => [
+               'eael_adv_tab_new_style!' => 'glassey',
+            ],
+         ]
+      );
+
+      $this->add_responsive_control(
+         'eael_adv_tabs_tab_border_active_glassey',
+         [
+               'label'      => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+               'type'       => Controls_Manager::DIMENSIONS,
+               'size_units' => ['px', 'em', '%'],
+               'default'    => [
+                  'top'      => 25,
+                  'right'    => 25,
+                  'bottom'   => 25,
+                  'left'     => 25,
+                  'unit'     => 'px',
+                  'isLinked' => true,
+               ],
+               'selectors'  => [
+                  '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav.eael-tabs-glassey > ul:after' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+               ],
+               'condition' => [
+                  'eael_adv_tab_new_style' => 'glassey',
+               ],
+         ]
+      );
+
         $this->end_controls_tab();
         $this->end_controls_tabs();
         $this->end_controls_section();
