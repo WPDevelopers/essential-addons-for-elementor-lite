@@ -890,6 +890,9 @@ class Adv_Tabs extends Widget_Base
                 'name' => 'eael_adv_tabs_tab_border_hover',
                 'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
                 'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover',
+                'condition' => [
+                  'eael_adv_tab_new_style!' => 'glassey',
+               ],
             ]
         );
         $this->add_responsive_control(
@@ -901,6 +904,9 @@ class Adv_Tabs extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
+                'condition' => [
+                  'eael_adv_tab_new_style!' => 'glassey',
+               ],
             ]
         );
         $this->end_controls_tab();
