@@ -364,6 +364,9 @@ trait Woo_Cart_Helper {
 	}
 
 	public static function eael_cart_button_proceed_to_checkout( $settings ) {
+		if ( 'yes' === $settings['eael_woo_cart_hide_checkout_btn'] ) {
+			return;
+		}
 		if ( ! empty( $settings['ea_woo_cart_layout'] ) ) {
 			$button_text = apply_filters( 'eael_woo_cart_checkout_button_text', $settings['eael_woo_cart_components_cart_checkout_button_text'] );
 			?>
