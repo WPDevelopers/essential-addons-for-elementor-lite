@@ -289,6 +289,8 @@ trait Core
 
         //Scroll to Top global settings : updated on elementor/editor/after_save action
         $global_settings['eael_ext_scroll_to_top'] = $this->get_ext_scroll_to_top_global_settings($post_id, $document, $global_settings);
+
+        $global_settings = apply_filters('eael/extentions/global_settings', $global_settings, $document, $post_id);
         
         // set editor time
         update_option('eael_editor_updated_at', strtotime('now'));
