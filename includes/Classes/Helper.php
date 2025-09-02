@@ -1459,7 +1459,7 @@ class Helper
      *
      * @return string
      */
-    public static function get_svg_by_icon( $icon ) {
+    public static function get_svg_by_icon( $icon, $attributes = [] ) {
         if ( empty( $icon ) || empty( $icon['value'] ) || empty( $icon['library'] ) ) return '';
 
         $svg_html = "";
@@ -1474,8 +1474,18 @@ class Helper
 
         $icon       = $svg_object['icons'][$icon_name];
         $view_box   = "0 0 {$icon[0]} {$icon[1]}";
-        $svg_html  .= "<svg class='svg-inline--". $i_class ."  eael-svg-icon' aria-hidden='true' data-icon='store' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='{$view_box}' >";
-        $svg_html  .= "<path d='{$icon[4]}'></path>";
+        $svg_html  .= "<svg ";
+
+        $color = '';
+        if( ! empty( $attributes ) ) {
+            $color = $attributes['fill'] ?? '';
+            unset( $attributes['fill'] );
+            foreach ( $attributes as $key => $value ) {
+                $svg_html .= $value ? "{$key}='{$value}' " : '';
+            }
+        }
+        $svg_html  .= " class='svg-inline--". $i_class ."  eael-svg-icon' aria-hidden='true' data-icon='store' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='{$view_box}' >";
+        $svg_html  .= "<path fill='{$color}' d='{$icon[4]}'></path>";
         $svg_html  .= "</svg>";
 
         return $svg_html;
