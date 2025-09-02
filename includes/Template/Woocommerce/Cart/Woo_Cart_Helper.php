@@ -191,6 +191,25 @@ trait Woo_Cart_Helper {
                                                 </td>
 										        <?php
 										        break;
+									        case 'description': ?>
+                                                <td class="product-description <?php echo esc_attr( $item_class ); ?>">
+											        <?php
+											        $description = $_product->get_short_description();
+											        if ( empty( $description ) ) {
+												        $description = $_product->get_description();
+												        if ( ! empty( $description ) ) {
+													        $description = wp_trim_words( $description, 20, '...' );
+												        }
+											        }
+											        if ( ! empty( $description ) ) {
+												        echo wp_kses_post( apply_filters( 'eael_woo_cart_item_description', $description, $cart_item, $cart_item_key ) );
+											        } else {
+												        echo esc_html__( 'No description available', 'essential-addons-for-elementor-lite' );
+											        }
+											        ?>
+                                                </td>
+										        <?php
+										        break;
 									        case 'subtotal': ?>
                                                 <td class="product-subtotal <?php echo esc_attr( $item_class ); ?>">
 											        <?php

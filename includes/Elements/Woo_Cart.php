@@ -204,12 +204,13 @@ class Woo_Cart extends Widget_Base {
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'name',
 				'options' => [
-					'remove'    => __( 'Remove', 'essential-addons-for-elementor-lite' ),
-					'thumbnail' => __( 'Image', 'essential-addons-for-elementor-lite' ),
-					'name'      => __( 'Title', 'essential-addons-for-elementor-lite' ),
-					'price'     => __( 'Price', 'essential-addons-for-elementor-lite' ),
-					'quantity'  => __( 'Quantity', 'essential-addons-for-elementor-lite' ),
-					'subtotal'  => __( 'Subtotal', 'essential-addons-for-elementor-lite' ),
+					'remove'      => __( 'Remove', 'essential-addons-for-elementor-lite' ),
+					'thumbnail'   => __( 'Image', 'essential-addons-for-elementor-lite' ),
+					'name'        => __( 'Title', 'essential-addons-for-elementor-lite' ),
+					'description' => __( 'Product Description', 'essential-addons-for-elementor-lite' ),
+					'price'       => __( 'Price', 'essential-addons-for-elementor-lite' ),
+					'quantity'    => __( 'Quantity', 'essential-addons-for-elementor-lite' ),
+					'subtotal'    => __( 'Subtotal', 'essential-addons-for-elementor-lite' ),
 				],
 			]
 		);

@@ -226,6 +226,12 @@ $thumb-bg-1: #E5F6FC;
                         &.product-name {
                             text-align: left;
                         }
+
+                        &.product-description {
+                            text-align: left;
+                            max-width: 200px;
+                            word-wrap: break-word;
+                        }
                     }
                 }
             }
@@ -305,6 +311,25 @@ $thumb-bg-1: #E5F6FC;
 
                         &.product-name {
                             text-align: left;
+                        }
+
+                        &.product-description {
+                            color: $text-color-2;
+                            font-size: 14px;
+                            line-height: 1.5;
+                            max-width: 200px;
+                            word-wrap: break-word;
+                            overflow-wrap: break-word;
+                            hyphens: auto;
+                            text-align: left;
+
+                            p {
+                                margin: 0 0 8px 0;
+
+                                &:last-child {
+                                    margin-bottom: 0;
+                                }
+                            }
                         }
 
                         &.product-price {
@@ -1057,6 +1082,13 @@ body.theme-woodmart.eael-woo-cart .eael-woo-cart-wrapper {
 
                             &.product-name {
                                 width: 100% !important;
+                            }
+
+                            &.product-description {
+                                width: 100% !important;
+                                max-width: none;
+                                margin-bottom: 10px;
+                                font-size: 13px;
                             }
 
                             &.product-price,
