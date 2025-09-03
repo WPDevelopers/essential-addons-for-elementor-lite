@@ -1162,6 +1162,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 						$element_name = 'eael-custom-cursor';
 					} elseif ( $key === 'eael_liquid_glass_effect_switch' ) {
 						$element_name = 'eael-liquid-glass-effect';
+					} elseif ( $key === 'eael_wrapper_link_switch' ) {
+						$element_name = 'eael-wrapper-link';
 					}
 
 					if ( ! empty( $element_name ) ) {
