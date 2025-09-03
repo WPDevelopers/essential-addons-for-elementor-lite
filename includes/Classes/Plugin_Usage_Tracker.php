@@ -1160,6 +1160,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 						$element_name = 'eael-advanced-dynamic-tags';
 					} elseif ( $key === 'eael_enable_custom_cursor' ) {
 						$element_name = 'eael-custom-cursor';
+					} elseif ( $key === 'eael_liquid_glass_effect_switch' ) {
+						$element_name = 'eael-liquid-glass-effect';
 					}
 
 					if ( ! empty( $element_name ) ) {
