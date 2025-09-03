@@ -133,7 +133,7 @@ msgstr ""
 msgid "Select a WPForm"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:1696
+#: ../includes/Classes/Helper.php:1697
 msgid "Edit Template"
 msgstr ""
 

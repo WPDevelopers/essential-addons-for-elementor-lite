@@ -1,7 +1,7 @@
 let ImageMaskingHandler = function ($scope, $) {
     let $images = $scope.find('img');
     let options = $scope.data('morphing-options');
-        
+
     if( options?.exclude ){
         let exclude = options.exclude.split(',').map(item => item.trim());
         $images = $images.not(exclude.join(', '));
@@ -10,10 +10,10 @@ let ImageMaskingHandler = function ($scope, $) {
     // Check if polygon animation is enabled and get settings
     function createClippedSVG(imageSrc, uniqueId, viewBox, pathD) {
         return `
-            <svg viewBox="${viewBox}" width="100%" style="visibility: visible;">
+            <svg viewBox="${viewBox}" width="100%" style="visibility: visible; overflow: hidden;">
                 <defs>
                     <clipPath id="clip-path-${uniqueId}">
-                        <path class="clip-path" d="${pathD}" transform="translate(100, 100)"/>
+                        <path class="clip-path" d="${pathD}"/>
                     </clipPath>
                 </defs>
                 <image width="100%" height="100%" clip-path="url(#clip-path-${uniqueId})" href="${imageSrc}"/>
@@ -55,9 +55,9 @@ let ImageMaskingHandler = function ($scope, $) {
                 animationData.scale.max = options.scaleMax;
             }
 
-            if (animationData && typeof PolygonMorphingAnimation !== 'undefined' && $img.length > 0) {
+            if (animationData && typeof PolygonMorphingAnimation !== 'undefined' && $images.length > 0) {
                 // Create animation instance for each image individually
-                $img.each(function(_, imgElement) {
+                $images.each(function(_, imgElement) {
                     new PolygonMorphingAnimation(imgElement, animationData);
                 });
             }
@@ -66,8 +66,10 @@ let ImageMaskingHandler = function ($scope, $) {
             if( !svg_items.length ){
                 return;
             }
+            
             let viewBox = svg_items.first().attr('viewBox');
             let defaultPath = svg_items.first().find('path').first().attr('d');
+
             $images.each(function(index, image) {
                 image = $(image);
 				let image_src = image.attr('src');
@@ -82,32 +84,11 @@ let ImageMaskingHandler = function ($scope, $) {
 				repeatDelay: 0.001,
 				delay: 0.001
 			});
-			let ease = options?.ease || "sine.inOut";
-			let gap = "+=0";
-
-            function clipPathTransform( transform, svgElement ){
-                let $clip = $(svgElement).find('path');
-                let oldTransform = $clip.attr('transform') || "translate(0,0)";
-                let newTransform = transform;
-
-                function parseTransform(str) {
-                    let t = /translate\(([^,]+)[ ,]+([^,]+)\)/.exec(str);
-                    return { x: t ? parseFloat(t[1]) : 0, y: t ? parseFloat(t[2]) : 0 };
-                }
-
-                let from = parseTransform(oldTransform);
-                let to   = parseTransform(newTransform);
-
-                gsap.fromTo($clip, 
-                    { attr: { transform: `translate(${from.x}, ${from.y})` } },
-                    { attr: { transform: `translate(${to.x}, ${to.y})` }, duration: options?.duration || 6, ease: ease }
-                );
-            }
 
             svg_items.each(function(index, element){
                 const $svg = $(element);
                 const $path = $svg.find('path').first();
-                const transform = $path.attr('transform') || "translate(0, 0)";
+                const transform = $path.attr('transform') || "translate(0,0)";
                 const clipPath = $scope.find('.clip-path');
 
                 morphing.to(clipPath, {
@@ -115,9 +96,11 @@ let ImageMaskingHandler = function ($scope, $) {
                         shape: $path[0]
                     },
                     duration: options?.duration || 6,
-                    ease: ease,
-                    onStart: function() { clipPathTransform(transform, element) }
-                }, gap);
+                    ease: options?.ease || "sine.inOut",
+                    onStart: function() {
+                        clipPath.attr('transform', transform);
+                    }
+                }, "+=0");
             });
         }
     }
