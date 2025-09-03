@@ -1443,12 +1443,12 @@ $config = [
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/blob-animation/polygon-morphing-animation.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/gsap/MorphSVGPlugin.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],
                     [
-                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/blob-animation/blob-animation.min.js',
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/blob-animation/polygon-morphing-animation.min.js',
                         'type'    => 'lib',
                         'context' => 'view',
                     ],

@@ -4,6 +4,7 @@ namespace Essential_Addons_Elementor\Extensions;
 
 use Elementor\Controls_Manager;
 use Elementor\Repeater;
+use Essential_Addons_Elementor\Classes\Helper;
 
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -405,9 +406,9 @@ class Image_Masking {
         $svg_paths->add_control(
             'eael_svg_path',
             [
-                'label' => esc_html__( 'SVG Path', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'SVG', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::TEXTAREA,
-                'default' => __( '', 'essential-addons-for-elementor-lite' ),
+                'default' => '',
                 'ai' => [
                     'active' => false,
                 ],
@@ -422,8 +423,34 @@ class Image_Masking {
                 'fields' => $svg_paths->get_controls(),
                 'default' => [
                     [
-                        'eael_svg_path_title' => 'Path 1',
-                        'eael_svg_path' => '<path d="M10 10 H 90 V 90 H 10 Z" />',
+                        'eael_svg_path_title' => 'SVG 1',
+                        'eael_svg_path' => '<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">'.
+                                            '<path d="M62.8,-19.7C72,7.8,63.5,41.8,44,54.6C24.4,67.5,-6.2,59.1,-25.2,43.3C-44.2,27.5,-51.5,4.2,-45.3,-19.1C-39.2,-42.5,-19.6,-65.8,3.6,-67C26.8,-68.2,53.7,-47.2,62.8,-19.7Z" transform="translate(100 100)" />'.
+                                        '</svg>',
+                    ],
+                    [
+                        'eael_svg_path_title' => 'SVG 2',
+                        'eael_svg_path' => '<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">'.
+                                                '<path d="M62.8,-19.7C72,7.8,63.5,41.8,44,54.6C24.4,67.5,-6.2,59.1,-25.2,43.3C-44.2,27.5,-51.5,4.2,-45.3,-19.1C-39.2,-42.5,-19.6,-65.8,3.6,-67C26.8,-68.2,53.7,-47.2,62.8,-19.7Z" transform="translate(100 100)" />'.
+                                            '</svg>',
+                    ],
+                    [
+                        'eael_svg_path_title' => 'SVG 3',
+                        'eael_svg_path' => '<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">'.
+                                                '<path d="M62,-36.5C75.7,-12,79.2,17.9,67.1,41.3C55,64.8,27.5,82,6,78.6C-15.6,75.1,-31.2,51.1,-42.4,28.1C-53.7,5.1,-60.5,-16.9,-52.7,-38C-44.9,-59.1,-22.5,-79.4,0.8,-79.9C24.1,-80.3,48.2,-61.1,62,-36.5Z" transform="translate(100 100)" />'.
+                                            '</svg>',
+                    ],
+                    [
+                        'eael_svg_path_title' => 'SVG 4',
+                        'eael_svg_path' => '<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">'.
+                                                '<path d="M34,-19.6C42.7,-4.5,47.5,12.9,41.2,30.6C34.9,48.4,17.4,66.6,-3.8,68.9C-25.1,71.1,-50.3,57.3,-61.6,36.6C-72.9,15.9,-70.5,-11.7,-57.9,-29C-45.4,-46.3,-22.7,-53.4,-5,-50.5C12.6,-47.6,25.2,-34.7,34,-19.6Z" transform="translate(100 100)" />'.
+                                            '</svg>',
+                    ],
+                    [
+                        'eael_svg_path_title' => 'SVG 5',
+                        'eael_svg_path' => '<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">'.
+                                                '<path d="M56.3,-30.7C66.7,-14.5,64.6,10.8,53.1,22.4C41.6,34.1,20.8,32.1,-1,32.7C-22.8,33.3,-45.6,36.4,-50.2,28.7C-54.8,21.1,-41.1,2.6,-29.7,-14.1C-18.3,-30.9,-9.1,-45.9,6.9,-49.9C23,-53.9,45.9,-46.8,56.3,-30.7Z" transform="translate(100 100)" />'.
+                                            '</svg>',
                     ]
                 ],
                 'title_field' => '{{{ eael_svg_path_title }}}',
@@ -632,13 +659,13 @@ class Image_Masking {
                     }
                 } else if( 'svg' === $morphing_type ){
                     $svg_paths = $settings['eael_svg_paths'];
+                    $svg_html = '<div id="eael-svg-items-' . $element_id . '" style="display: none;">';
                     foreach( $svg_paths as $svg_path ){
-                        $path  = $this->extract_first_path_d( $svg_path['eael_svg_path'] );
-                        if( !$path ){
-                            continue;
-                        }
-                        $paths[] = $path;
+                        $svg_html  .= wp_kses( $svg_path['eael_svg_path'], Helper::eael_allowed_icon_tags() );
                     }
+                    $svg_html .= '</div>';
+                    //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                    echo $svg_html;
                 }
                 $morphing_options = [
                     'shapes'        => base64_encode( wp_json_encode( $paths ) ),
