@@ -194,15 +194,24 @@ trait Woo_Cart_Helper {
 									        case 'description': ?>
                                                 <td class="product-description <?php echo esc_attr( $item_class ); ?>">
 											        <?php
+											        // Get word limit from settings with fallback to 20
+											        $word_limit = isset( $column_data['description_word_limit'] ) && is_numeric( $column_data['description_word_limit'] )
+												        ? max( 5, min( 100, intval( $column_data['description_word_limit'] ) ) )
+												        : 20;
+
 											        $description = $_product->get_short_description();
 											        if ( empty( $description ) ) {
 												        $description = $_product->get_description();
 												        if ( ! empty( $description ) ) {
-													        $description = wp_trim_words( $description, 20, '...' );
+													        $description = wp_trim_words( $description, $word_limit, '...' );
 												        }
+											        } else {
+												        // Also trim short description if it's too long
+												        $description = wp_trim_words( $description, $word_limit, '...' );
 											        }
+
 											        if ( ! empty( $description ) ) {
-												        echo wp_kses_post( apply_filters( 'eael_woo_cart_item_description', $description, $cart_item, $cart_item_key ) );
+												        echo wp_kses_post( apply_filters( 'eael_woo_cart_item_description', $description, $cart_item, $cart_item_key, $word_limit ) );
 											        } else {
 												        echo esc_html__( 'No description available', 'essential-addons-for-elementor-lite' );
 											        }

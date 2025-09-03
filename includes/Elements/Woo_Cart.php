@@ -388,6 +388,22 @@ class Woo_Cart extends Widget_Base {
 			]
 		);
 
+		$repeater->add_control(
+			'description_word_limit',
+			[
+				'label'       => __( 'Description Word Limit', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::NUMBER,
+				'min'         => 5,
+				'max'         => 100,
+				'step'        => 1,
+				'default'     => 20,
+				'description' => __( 'Maximum number of words to display in the product description.', 'essential-addons-for-elementor-lite' ),
+				'condition'   => [
+					'column_type' => 'description'
+				]
+			]
+		);
+
 		$this->add_control(
 			'table_items',
 			[
