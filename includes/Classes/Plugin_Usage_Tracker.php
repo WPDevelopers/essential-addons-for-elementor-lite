@@ -1166,6 +1166,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 						$element_name = 'eael-wrapper-link';
 					} elseif ( $key === 'eael_smooth_animation_section' ) {
 						$element_name = 'eael-smooth-animation';
+					} elseif ( $key === 'eael_hover_effect_switch' ) {
+						$element_name = 'eael-special-hover-effect';
 					}
 
 					if ( ! empty( $element_name ) ) {
