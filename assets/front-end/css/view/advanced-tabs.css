@@ -2,9 +2,6 @@
   --c-glass: #bbbbbc;
   --c-light: #fff;
   --c-dark: #000;
-  --c-content: #224;
-  --c-action: #0052f5;
-  --c-bg: #e8e8e9;
   --glass-reflex-dark: 1;
   --glass-reflex-light: 1;
   --saturation: 150%;
@@ -16,7 +13,7 @@
 
 /*-------Start new tab bar style--------*/
 
-.eael-tabs-glassey {
+.eael-advance-tabs .eael-tabs-nav.eael-tabs-glassey {
   z-index: 1;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -41,7 +38,7 @@
   position: relative;
 }
 
-.eael-tabs-glassey > ul::after {
+.eael-advance-tabs .eael-tabs-nav.eael-tabs-glassey > ul::after {
   content: "";
   position: absolute;
   left: 4px;

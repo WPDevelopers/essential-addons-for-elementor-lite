@@ -1493,8 +1493,8 @@ msgstr ""
 msgid "Caret Color"
 msgstr ""
 
-#: ../includes/Elements/Adv_Tabs.php:103, ../includes/Elements/Breadcrumbs.php:202, ../includes/Elements/Cta_Box.php:97, ../includes/Elements/Dual_Color_Header.php:87, ../includes/Elements/Filterable_Gallery.php:331, ../includes/Elements/Interactive_Circle.php:273, ../includes/Elements/Login_Register.php:4544, ../includes/Elements/Login_Register.php:4556, ../includes/Elements/Login_Register.php:4692, ../includes/Elements/Login_Register.php:4821, ../includes/Elements/Product_Grid.php:2205, ../includes/Elements/SVG_Draw.php:474, ../includes/Extensions/Table_of_Content.php:1273
-msgid "Style"
+#: ../includes/Elements/Adv_Tabs.php:103
+msgid "Styles"
 msgstr ""
 
 #: ../includes/Elements/Adv_Tabs.php:109
@@ -1633,7 +1633,7 @@ msgstr ""
 msgid "Vertical Layout"
 msgstr ""
 
-#: ../includes/Elements/Adv_Tabs.php:1404
+#: ../includes/Elements/Adv_Tabs.php:1410
 msgid "The provided Template matches the current page or one of its revisions!"
 msgstr ""
 
@@ -1911,6 +1911,10 @@ msgstr ""
 
 #: ../includes/Elements/Breadcrumbs.php:185, ../includes/Elements/Pricing_Table.php:322
 msgid "/"
+msgstr ""
+
+#: ../includes/Elements/Breadcrumbs.php:202, ../includes/Elements/Cta_Box.php:97, ../includes/Elements/Dual_Color_Header.php:87, ../includes/Elements/Filterable_Gallery.php:331, ../includes/Elements/Interactive_Circle.php:273, ../includes/Elements/Login_Register.php:4544, ../includes/Elements/Login_Register.php:4556, ../includes/Elements/Login_Register.php:4692, ../includes/Elements/Login_Register.php:4821, ../includes/Elements/Product_Grid.php:2205, ../includes/Elements/SVG_Draw.php:474, ../includes/Extensions/Table_of_Content.php:1273
+msgid "Style"
 msgstr ""
 
 #: ../includes/Elements/Breadcrumbs.php:325, ../includes/Elements/Data_Table.php:1098, ../includes/Elements/Feature_List.php:115, ../includes/Elements/Flip_Box.php:1083, ../includes/Elements/Flip_Box.php:1102, ../includes/Elements/Flip_Box.php:1216
