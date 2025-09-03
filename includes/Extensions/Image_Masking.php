@@ -319,7 +319,7 @@ class Image_Masking {
                     ],
                     'svg' => [
                         'title' => esc_html__( 'SVG', 'essential-addons-for-elementor-lite' ),
-                        'icon' => 'eicon-image',
+                        'icon' => 'eicon-svg',
                     ],
                 ],
                 'default' => 'clip-path',
@@ -328,6 +328,24 @@ class Image_Masking {
 					'eael_enable_image_masking' => 'yes',
 					'eael_image_masking_type' => 'morphing'
 				],
+            ]
+        );
+
+        $element->add_control(
+            'eael_image_morphing_exclude_selectors',
+            [
+                'label'       => esc_html__( 'Exclude Selectors', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::TEXT,
+                'default'     => '.avatar, .exclude',
+                'label_block' => true,
+                'ai'          => [
+                    'active' => false,
+                ],
+                'description' => esc_html__( 'Exclude selectors from morphing animation. Separate multiple selectors with comma.', 'essential-addons-for-elementor-lite' ),
+                'condition' => [
+					'eael_enable_image_masking' => 'yes',
+					'eael_image_masking_type' => 'morphing',
+				]
             ]
         );
 
@@ -359,7 +377,7 @@ class Image_Masking {
         $element->add_control(
             'eael_clip_paths',
             [
-                'label' => esc_html__( 'Shapes', 'text-domain' ),
+                'label' => esc_html__( 'Shapes', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::REPEATER,
                 'fields' => $clip_paths->get_controls(),
                 'default' => [
@@ -409,6 +427,9 @@ class Image_Masking {
                 'label' => esc_html__( 'SVG', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::TEXTAREA,
                 'default' => '',
+                'placeholder' => '<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">'.
+                                    '<path d="M56.3,-30.7C66.7,-14.5,64.6,10.8,53.1,22.4C41.6,34.1,20.8,32.1,-1,32.7C-22.8,33.3,-45.6,36.4,-50.2,28.7C-54.8,21.1,-41.1,2.6,-29.7,-14.1C-18.3,-30.9,-9.1,-45.9,6.9,-49.9C23,-53.9,45.9,-46.8,56.3,-30.7Z" transform="translate(100 100)" />'.
+                                '</svg>',
                 'ai' => [
                     'active' => false,
                 ],
@@ -418,7 +439,7 @@ class Image_Masking {
         $element->add_control(
             'eael_svg_paths',
             [
-                'label' => esc_html__( 'Paths', 'text-domain' ),
+                'label' => esc_html__( 'SVGs', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::REPEATER,
                 'fields' => $svg_paths->get_controls(),
                 'default' => [
@@ -465,7 +486,7 @@ class Image_Masking {
         $element->add_control(
             'eael_image_morphing_duration',
             [
-                'label' => esc_html__( 'Duration (seconds)', 'text-domain' ),
+                'label' => esc_html__( 'Duration (seconds)', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'px' ],
                 'range' => [
@@ -489,7 +510,7 @@ class Image_Masking {
         $element->add_control(
             'eael_image_morphing_loop',
             [
-                'label'        => esc_html__( 'Animation Loop', 'text-domain' ),
+                'label'        => esc_html__( 'Animation Loop', 'essential-addons-for-elementor-lite' ),
                 'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default'      => 'yes',
@@ -501,15 +522,36 @@ class Image_Masking {
         );
 
         $element->add_control(
+            'eael_image_morphing_ease',
+            [
+                'label'   => esc_html__( 'Easing', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'sine.inOut',
+                'options' => [
+                    'none'         => esc_html__( 'Linear', 'essential-addons-for-elementor-lite' ),
+                    'power1.inOut' => esc_html__( 'Gentle start/stop', 'essential-addons-for-elementor-lite' ),
+                    'sine.inOut'   => esc_html__( 'Smooth Wave Feel', 'essential-addons-for-elementor-lite' ),
+                    'power2.inOut' => esc_html__( 'A Bit Stronger', 'essential-addons-for-elementor-lite' ),
+                ],
+                'condition' => [
+					'eael_enable_image_masking' => 'yes',
+					'eael_image_masking_type' => 'morphing',
+                    'eael_morphing_type' => 'svg',
+				],
+            ]
+        );
+
+        $element->add_control(
             'eael_image_morphing_enable_rotation',
             [
-                'label'        => esc_html__( 'Enable Rotation', 'text-domain' ),
+                'label'        => esc_html__( 'Enable Rotation', 'essential-addons-for-elementor-lite' ),
                 'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
                 'default'      => 'no',
                 'condition'    => [
 					'eael_enable_image_masking' => 'yes',
 					'eael_image_masking_type' => 'morphing',
+                    'eael_morphing_type' => 'clip-path',
 				],
             ]
         );
@@ -517,7 +559,7 @@ class Image_Masking {
         $element->add_control(
             'eael_image_morphing_rotation',
             [
-                'label' => esc_html__( 'Rotation (degrees)', 'text-domain' ),
+                'label' => esc_html__( 'Rotation (degrees)', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'px' ],
                 'range' => [
@@ -535,6 +577,7 @@ class Image_Masking {
 					'eael_enable_image_masking' => 'yes',
 					'eael_image_masking_type' => 'morphing',
 					'eael_image_morphing_enable_rotation' => 'yes',
+                    'eael_morphing_type' => 'clip-path',
 				],
             ]
         );
@@ -542,7 +585,7 @@ class Image_Masking {
         $element->add_control(
             'eael_image_morphing_scalling_max',
             [
-                'label' => esc_html__( 'Scalling Max', 'text-domain' ),
+                'label' => esc_html__( 'Scalling Max', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'px' ],
                 'range' => [
@@ -555,6 +598,7 @@ class Image_Masking {
                 'condition' => [
 					'eael_enable_image_masking' => 'yes',
 					'eael_image_masking_type' => 'morphing',
+                    'eael_morphing_type' => 'clip-path',
 				],
             ]
         );
@@ -562,7 +606,7 @@ class Image_Masking {
         $element->add_control(
             'eael_image_morphing_scalling_min',
             [
-                'label' => esc_html__( 'Scalling Min', 'text-domain' ),
+                'label' => esc_html__( 'Scalling Min', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'px' ],
                 'range' => [
@@ -575,6 +619,7 @@ class Image_Masking {
                 'condition' => [
 					'eael_enable_image_masking' => 'yes',
 					'eael_image_masking_type' => 'morphing',
+                    'eael_morphing_type' => 'clip-path',
 				],
             ]
         );
@@ -648,15 +693,40 @@ class Image_Masking {
                 }
 			} else if( 'morphing' === $type ) {
                 $morphing_type = $settings['eael_morphing_type'];
-                $paths = [];
+                $morphing_options = [ 'type' => $morphing_type ];
+
+                $excludes = !empty( $settings['eael_image_morphing_exclude_selectors'] ) ? trim( $settings['eael_image_morphing_exclude_selectors'] ) : '';
+                if( !empty( $excludes ) ){
+                    $morphing_options['exclude'] = $excludes;
+                }
+                
                 if( 'clip-path' === $morphing_type ){
                     $clip_paths = $settings['eael_clip_paths'];
+                    $paths = [];
                     foreach( $clip_paths as $clip_path ){
                         if( empty( $clip_path['eael_clip_path'] ) ){
                             continue;
                         }
                         $paths[] = str_replace( [ 'clip-path: ', ';' ], '', $clip_path['eael_clip_path'] );
                     }
+
+                     if( !empty( $settings['eael_image_morphing_scalling_min']['size'] ) ){
+                        $morphing_options['scaleMin'] = $settings['eael_image_morphing_scalling_min']['size'];
+                    }
+
+                    if( !empty( $settings['eael_image_morphing_scalling_max']['size'] ) ){
+                        $morphing_options['scaleMax'] = $settings['eael_image_morphing_scalling_max']['size'];
+                    }
+
+                    if( !empty( $settings['eael_image_morphing_enable_rotation'] ) ){
+                        $morphing_options['rotation'] = 'yes' === $settings['eael_image_morphing_enable_rotation'];
+
+                        if( !empty( $settings['eael_image_morphing_rotation']['size'] ) ){
+                            $morphing_options['rotationSpeed'] = $settings['eael_image_morphing_rotation']['size'];
+                        }
+                    }
+                    $morphing_options['shapes'] = base64_encode( wp_json_encode( $paths ) );
+
                 } else if( 'svg' === $morphing_type ){
                     $svg_paths = $settings['eael_svg_paths'];
                     $svg_html = '<div id="eael-svg-items-' . $element_id . '" style="display: none;">';
@@ -667,33 +737,16 @@ class Image_Masking {
                     //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     echo $svg_html;
                 }
-                $morphing_options = [
-                    'shapes'        => base64_encode( wp_json_encode( $paths ) ),
-                    'type'        => $morphing_type,
-                ];
+                
 
                 if( !empty( $settings['eael_image_morphing_duration']['size'] ) ){
                     $morphing_options['duration'] = $settings['eael_image_morphing_duration']['size'];
                 }
-
                 if( !empty( $settings['eael_image_morphing_loop'] ) ){
                     $morphing_options['loop'] = 'yes' === $settings['eael_image_morphing_loop'];
                 }
-
-                if( !empty( $settings['eael_image_morphing_scalling_min']['size'] ) ){
-                    $morphing_options['scaleMin'] = $settings['eael_image_morphing_scalling_min']['size'];
-                }
-
-                if( !empty( $settings['eael_image_morphing_scalling_max']['size'] ) ){
-                    $morphing_options['scaleMax'] = $settings['eael_image_morphing_scalling_max']['size'];
-                }
-
-                if( !empty( $settings['eael_image_morphing_enable_rotation'] ) ){
-                    $morphing_options['rotation'] = 'yes' === $settings['eael_image_morphing_enable_rotation'];
-
-                    if( !empty( $settings['eael_image_morphing_rotation']['size'] ) ){
-                        $morphing_options['rotationSpeed'] = $settings['eael_image_morphing_rotation']['size'];
-                    }
+                if( !empty( $settings['eael_image_morphing_ease'] ) ){
+                    $morphing_options['ease'] = $settings['eael_image_morphing_ease'];
                 }
 
                 $element->add_render_attribute( '_wrapper', 'data-morphing-options', wp_json_encode( $morphing_options ) );

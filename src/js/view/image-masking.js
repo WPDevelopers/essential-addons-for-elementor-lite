@@ -1,5 +1,11 @@
 let ImageMaskingHandler = function ($scope, $) {
     let $images = $scope.find('img');
+    let options = $scope.data('morphing-options');
+        
+    if( options?.exclude ){
+        let exclude = options.exclude.split(',').map(item => item.trim());
+        $images = $images.not(exclude.join(', '));
+    }
 
     // Check if polygon animation is enabled and get settings
     function createClippedSVG(imageSrc, uniqueId, viewBox, pathD) {
@@ -16,8 +22,6 @@ let ImageMaskingHandler = function ($scope, $) {
     }
 
     if ( $scope.hasClass('eael-morphing-enabled') ) {
-        let options = $scope.data('morphing-options');
-        
         if( 'clip-path' === options.type ){
             let shapes = atob(options.shapes);
             let animationData = {
@@ -73,16 +77,16 @@ let ImageMaskingHandler = function ($scope, $) {
             });
 
             var morphing = gsap.timeline({
-				repeat: -1,
-				yoyo: true,
+				repeat: options?.loop ? -1 : 0,
+				yoyo: options?.loop,
 				repeatDelay: 0.001,
 				delay: 0.001
 			});
-			let ease = "power2.inOut";
-			let gap = "-=2";
+			let ease = options?.ease || "sine.inOut";
+			let gap = "+=0";
 
             function clipPathTransform( transform, svgElement ){
-                let $clip = svgElement.find('path');
+                let $clip = $(svgElement).find('path');
                 let oldTransform = $clip.attr('transform') || "translate(0,0)";
                 let newTransform = transform;
 
@@ -96,7 +100,7 @@ let ImageMaskingHandler = function ($scope, $) {
 
                 gsap.fromTo($clip, 
                     { attr: { transform: `translate(${from.x}, ${from.y})` } },
-                    { attr: { transform: `translate(${to.x}, ${to.y})` }, duration: 6, ease: "sine.inOut" }
+                    { attr: { transform: `translate(${to.x}, ${to.y})` }, duration: options?.duration || 6, ease: ease }
                 );
             }
 
@@ -110,7 +114,7 @@ let ImageMaskingHandler = function ($scope, $) {
                     morphSVG: {
                         shape: $path[0]
                     },
-                    duration: 6,
+                    duration: options?.duration || 6,
                     ease: ease,
                     onStart: function() { clipPathTransform(transform, element) }
                 }, gap);

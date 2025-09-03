@@ -10506,7 +10506,7 @@ msgstr ""
 msgid "Delay (ms)"
 msgstr ""
 
-#: ../includes/Extensions/Hover_Effect.php:683, ../includes/Extensions/Hover_Effect.php:1326
+#: ../includes/Extensions/Hover_Effect.php:683, ../includes/Extensions/Hover_Effect.php:1326, ../includes/Extensions/Image_Masking.php:527
 msgid "Easing"
 msgstr ""
 
@@ -10630,7 +10630,7 @@ msgstr ""
 msgid "Image/SVG Masking"
 msgstr ""
 
-#: ../includes/Extensions/Image_Masking.php:192, ../includes/Extensions/Image_Masking.php:317, ../includes/Extensions/Image_Masking.php:350
+#: ../includes/Extensions/Image_Masking.php:192, ../includes/Extensions/Image_Masking.php:317, ../includes/Extensions/Image_Masking.php:368
 msgid "Clip Path"
 msgstr ""
 
@@ -10694,16 +10694,72 @@ msgstr ""
 msgid "Morphing Type"
 msgstr ""
 
-#: ../includes/Extensions/Image_Masking.php:321, ../includes/Extensions/Image_Masking.php:409
+#: ../includes/Extensions/Image_Masking.php:321, ../includes/Extensions/Image_Masking.php:427
 msgid "SVG"
 msgstr ""
 
-#: ../includes/Extensions/Image_Masking.php:338
+#: ../includes/Extensions/Image_Masking.php:337
+msgid "Exclude Selectors"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:344
+msgid "Exclude selectors from morphing animation. Separate multiple selectors with comma."
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:356
 msgid "Shape Title"
 msgstr ""
 
-#: ../includes/Extensions/Image_Masking.php:397
+#: ../includes/Extensions/Image_Masking.php:380
+msgid "Shapes"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:415
 msgid "SVG Title"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:442
+msgid "SVGs"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:489
+msgid "Duration (seconds)"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:513
+msgid "Animation Loop"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:531
+msgid "Linear"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:532
+msgid "Gentle start/stop"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:533
+msgid "Smooth Wave Feel"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:534
+msgid "A Bit Stronger"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:547
+msgid "Enable Rotation"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:562
+msgid "Rotation (degrees)"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:588
+msgid "Scalling Max"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:609
+msgid "Scalling Min"
 msgstr ""
 
 #: ../includes/Extensions/Liquid_Glass_Effect.php:46, ../includes/Traits/Helper.php:649, ../includes/Traits/Helper.php:697
