@@ -100,7 +100,7 @@ class Adv_Tabs extends Widget_Base
         $this->add_control(
             'eael_adv_tab_new_style',
             [
-                'label'       => esc_html__('Style', 'essential-addons-for-elementor-lite'),
+                'label'       => esc_html__('Styles', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::SELECT,
                 'default'     => 'default',
                 'label_block' => false,
@@ -1371,14 +1371,20 @@ class Adv_Tabs extends Widget_Base
                         </li>
                     <?php endforeach; ?>
 
-                  <div class="eael-tabs-glassey-svg">
-                     <svg style="display: none">
-                        <filter id="switcher" x="0" y="0" width="100%" height="100%" filterUnits="objectBoundingBox">
-                           <feTurbulence type="fractalNoise" baseFrequency="0.003 0.007" numOctaves="1" result="turbulence" />
-                           <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="200" xChannelSelector="R" yChannelSelector="G" />
-                        </filter>
-                     </svg>
-                  </div>
+                  <?php 
+                  if ( 'glassey' === $settings['eael_adv_tab_new_style'] ) {
+                     ?>
+                     <div class="eael-tabs-glassey-svg">
+                        <svg style="display: none">
+                           <filter id="switcher" x="0" y="0" width="100%" height="100%" filterUnits="objectBoundingBox">
+                              <feTurbulence type="fractalNoise" baseFrequency="0.003 0.007" numOctaves="1" result="turbulence" />
+                              <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="200" xChannelSelector="R" yChannelSelector="G" />
+                           </filter>
+                        </svg>
+                     </div>
+                     <?php
+                  }
+                  ?>
                 </ul>
             </div>
             
