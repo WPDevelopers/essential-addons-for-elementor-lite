@@ -61,8 +61,7 @@ let ImageMaskingHandler = function ($scope, $) {
                     }
                     style += '.elementor-element-' + elementId + hoverSelector + ':hover img {clip-path: ' + hoverClipPath + ';}';
                 }
-            }
-            if( 'image' === settings?.eael_image_masking_type ){
+            } else if( 'image' === settings?.eael_image_masking_type ){
                 let image = settings?.eael_image_masking_image;
                 if( image?.url ) {
                     style += '.elementor-element-' + elementId + ' img {mask-image: url(' + image.url + '); -webkit-mask-image: url(' + image.url + ');}';
@@ -75,6 +74,53 @@ let ImageMaskingHandler = function ($scope, $) {
                         hoverSelector = ' ' + hoverSelector.trim();
                     }
                     style += '.elementor-element-' + elementId + hoverSelector + ':hover img {mask-image: url(' + hoverImage.url + '); -webkit-mask-image: url(' + hoverImage.url + ');}';
+                }
+            }  else if( 'morphing' === settings?.eael_image_masking_type ){
+                let morphingType = settings?.eael_morphing_type;
+                let $images = $(`.elementor-element-${elementId}`).find('img');
+
+                if( settings?.eael_image_morphing_exclude_selectors ){
+                    $images = $images.not( settings?.eael_image_morphing_exclude_selectors );
+                }
+                if( 'clip-path' === morphingType ){
+                    let clipPaths = settings?.eael_clip_paths;
+                    let paths = [];
+                    clipPaths.forEach(function( clipPath ){
+                        paths.push( clipPath?.attributes?.eael_clip_path.replace( 'clip-path: ', '' ).replace( ';', '' ).replace( '\n', '' ) );
+                    });
+
+                    let animationData = {
+                        polygonShapes: paths
+                    };
+                    if( settings?.eael_image_morphing_duration?.size ){
+                        animationData.duration = settings?.eael_image_morphing_duration?.size;
+                    }
+                    if( settings?.eael_image_morphing_loop ){
+                        animationData.loop = 'yes' === settings?.eael_image_morphing_loop;
+                    }
+                    if( settings?.eael_image_morphing_ease ){
+                        animationData.ease = settings?.eael_image_morphing_ease;
+                    }
+                    if( settings?.eael_image_morphing_scale_min?.size ){
+                        animationData.scale.min = settings?.eael_image_morphing_scale_min?.size;
+                    }
+                    if( settings?.eael_image_morphing_scale_max?.size ){
+                        animationData.scale.max = settings?.eael_image_morphing_scale_max?.size;
+                    }
+                    if( settings?.eael_image_morphing_rotation ){
+                        animationData.rotation = 'yes' === settings?.eael_image_morphing_rotation;
+                    }
+                    if( settings?.eael_image_morphing_rotation_speed?.size ){
+                        animationData.rotationSpeed = settings?.eael_image_morphing_rotation_speed?.size;
+                    }
+
+                    if (animationData && typeof PolygonMorphingAnimation !== 'undefined' && $images.length > 0) {
+                        // Create animation instance for each image individually
+                        $images.each(function(_, imgElement) {
+                            new PolygonMorphingAnimation($(imgElement), animationData);
+                        });
+                    }
+
                 }
             }
 
