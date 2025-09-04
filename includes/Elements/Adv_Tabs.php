@@ -1204,7 +1204,8 @@ class Adv_Tabs extends Widget_Base
         $this->add_render_attribute('eael_tab_icon_position', 'class', esc_attr($settings['eael_adv_tab_icon_position']));
         $this->add_render_attribute('eael_tab_icon_position', 'role', 'tablist'); 
 
-        $tab_glassey = $settings['eael_adv_tab_new_style'] === 'glassey' ? 'eael-tabs-glassey' : '';
+        //For Pro
+        $tab_glassey = apply_filters( 'eael_adv_tab_glassey_class', $settings ) ?? '';
         $this->add_render_attribute(
             'eael_tab_glassey',
             [
