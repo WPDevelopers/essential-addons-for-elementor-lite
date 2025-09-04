@@ -33,6 +33,7 @@ let ImageMaskingHandler = function ($scope, $) {
         let settings = model?.attributes?.settings?.attributes;
         let elementId = model?.attributes?.id, element = $(`.elementor-element-${elementId}`);
         let styleId = 'eael-image-masking-' + elementId;
+        $scope = element;
 
         // Remove existing style if present
         $('#' + styleId).remove();
@@ -138,7 +139,7 @@ let ImageMaskingHandler = function ($scope, $) {
 
                     element.append( svg_html );
                     
-                    let svg_items = $(svg_html_wrapper).find('svg');
+                    let svg_items = $('#eael-svg-items-' + elementId).find('svg');
                     if( !svg_items.length ){
                         return;
                     }
@@ -161,13 +162,12 @@ let ImageMaskingHandler = function ($scope, $) {
                         repeatDelay: 0.001,
                         delay: 0.001
                     });
-                    console.log('morphing: ', morphing);
                     
                     svg_items.each(function(index, element){
                         const $svg = $(element);
                         const $path = $svg.find('path').first();
                         const transform = $path.attr('transform') || "translate(0,0)";
-                        const clipPath = $scope.find('.clip-path');
+                        const clipPath = $scope.find('.eael-clip-path');
 
                         morphing.to(clipPath, {
                             morphSVG: {
@@ -191,14 +191,17 @@ let ImageMaskingHandler = function ($scope, $) {
 
     // Check if polygon animation is enabled and get settings
     function createClippedSVG(imageSrc, uniqueId, viewBox, pathD) {
+        if( $(`#eael-morphing-svg-${uniqueId}`).length ){
+            return;
+        }
         return `
-            <svg viewBox="${viewBox}" width="100%" style="visibility: visible; overflow: hidden;">
+            <svg id="eael-morphing-svg-${uniqueId}" viewBox="${viewBox}" width="100%" style="visibility: visible; overflow: hidden;">
                 <defs>
-                    <clipPath id="clip-path-${uniqueId}">
-                        <path class="clip-path" d="${pathD}"/>
+                    <clipPath id="eael-clip-path-${uniqueId}">
+                        <path class="eael-clip-path" d="${pathD}"/>
                     </clipPath>
                 </defs>
-                <image width="100%" height="100%" clip-path="url(#clip-path-${uniqueId})" href="${imageSrc}"/>
+                <image width="100%" height="100%" clip-path="url(#eael-clip-path-${uniqueId})" href="${imageSrc}"/>
             </svg>
         `;
     }
@@ -221,4 +224,6 @@ jQuery(window).on("elementor/frontend/init", function () {
         return false;
     }
     elementorFrontend.hooks.addAction( "frontend/element_ready/widget", ImageMaskingHandler );
+    elementorFrontend.hooks.addAction( "frontend/element_ready/container", ImageMaskingHandler );
+    elementorFrontend.hooks.addAction( "frontend/element_ready/section", ImageMaskingHandler );
 });

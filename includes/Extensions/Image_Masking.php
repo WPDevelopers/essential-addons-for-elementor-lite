@@ -322,7 +322,7 @@ class Image_Masking {
                         'icon' => 'eicon-svg',
                     ],
                 ],
-                'default' => 'clip-path',
+                'default' => 'svg',
                 'toggle' => false,
                 'condition' => [
 					'eael_enable_image_masking' => 'yes',
