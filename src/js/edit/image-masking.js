@@ -166,26 +166,33 @@ let ImageMaskingHandler = function ($scope, $) {
                     morphing = gsap.timeline({
                         repeat: loop ? -1 : 0,
                         yoyo: loop,
-                        repeatDelay: 0.001,
-                        delay: 0.001
+                        repeatDelay: 0,
+                        delay: 0
                     });
-                    
+
                     svg_items.each(function(index, element){
                         const $svg = $(element);
                         const $path = $svg.find('path').first();
                         const transform = $path.attr('transform') || "translate(0,0)";
                         const clipPath = $scope.find('.eael-clip-path');
 
+                        // Calculate duration per shape for smooth transitions
+                        const totalDuration = duration || 6;
+                        const durationPerShape = totalDuration / svg_items.length;
+
+                        // Start first animation immediately, others at calculated intervals
+                        const startTime = index * durationPerShape;
+
                         morphing.to(clipPath, {
                             morphSVG: {
                                 shape: $path[0]
                             },
-                            duration: duration,
+                            duration: durationPerShape,
                             ease: settings?.eael_image_morphing_ease || "sine.inOut",
                             onStart: function() {
                                 clipPath.attr('transform', transform);
                             }
-                        }, "+=0.01");
+                        }, startTime);
                     });
                 }
             }

@@ -90,15 +90,15 @@ let ImageMaskingHandler = function ($scope, $) {
 
                 // Hide original image and add SVG
                 image.css('visibility', 'hidden');
-				image.after(createClippedSVG(image_src, uniqueId, viewBox, defaultPath, image[0]));
+                image.after(createClippedSVG(image_src, uniqueId, viewBox, defaultPath, image[0]));
             });
 
+            // Start animation immediately - remove any delays
             var morphing = gsap.timeline({
-				repeat: options?.loop ? -1 : 0,
-				yoyo: options?.loop,
-				repeatDelay: 0.001,
-				delay: 0.001
-			});
+                repeat: options?.loop ? -1 : 0,
+                yoyo: options?.loop,
+                repeatDelay: 0,
+            });
 
             svg_items.each(function(index, element){
                 const $svg = $(element);
@@ -106,16 +106,23 @@ let ImageMaskingHandler = function ($scope, $) {
                 const transform = $path.attr('transform') || "translate(0,0)";
                 const clipPath = $scope.find('.clip-path');
 
+                // Calculate duration per shape for smooth transitions
+                const totalDuration = options?.duration || 6;
+                const durationPerShape = totalDuration / svg_items.length;
+
+                // Start first animation immediately, others at calculated intervals
+                const startTime = index * durationPerShape;
+
                 morphing.to(clipPath, {
                     morphSVG: {
                         shape: $path[0]
                     },
-                    duration: options?.duration || 6,
+                    duration: durationPerShape,
                     ease: options?.ease || "sine.inOut",
                     onStart: function() {
                         clipPath.attr('transform', transform);
                     }
-                }, "+=0");
+                }, startTime);
             });
         }
     }
@@ -125,7 +132,7 @@ jQuery(window).on("elementor/frontend/init", function () {
     if (eael.elementStatusCheck('eaelImageMaskingView') || window.isEditMode) {
         return false;
     }
-    
+
     elementorFrontend.hooks.addAction( "frontend/element_ready/widget", ImageMaskingHandler );
     elementorFrontend.hooks.addAction( "frontend/element_ready/container", ImageMaskingHandler );
     elementorFrontend.hooks.addAction( "frontend/element_ready/section", ImageMaskingHandler );
