@@ -120,7 +120,66 @@ let ImageMaskingHandler = function ($scope, $) {
                             new PolygonMorphingAnimation($(imgElement), animationData);
                         });
                     }
+                } else if ( 'svg' === settings?.eael_morphing_type ) {
+                    let svgPaths = settings?.eael_svg_paths;
+                    let svg_html = '<div id="eael-svg-items-' + elementId + '" style="display: none;">';
+                    let svg_html_wrapper = $('#eael-svg-items-' + elementId);
+                    let duration = settings?.eael_image_morphing_duration?.size || 6;
+                    let loop = 'yes' === settings?.eael_image_morphing_loop;
 
+                    svgPaths.forEach(function( svgPath ){
+                        svg_html += DOMPurify.sanitize( svgPath?.attributes?.eael_svg_path );
+                    });
+                    svg_html += '</div>';
+
+                    if( svg_html_wrapper.length > 0 ){
+                        svg_html_wrapper.remove();
+                    }
+
+                    element.append( svg_html );
+                    
+                    let svg_items = $(svg_html_wrapper).find('svg');
+                    if( !svg_items.length ){
+                        return;
+                    }
+                    
+                    let viewBox = svg_items.first().attr('viewBox');
+                    let defaultPath = svg_items.first().find('path').first().attr('d');
+
+                    $images.each(function(index, image) {
+                        image = $(image);
+                        let image_src = image.attr('src');
+                        let uniqueId = $scope.data('id') + '-' + index;
+                        image.hide();
+                        image.after(createClippedSVG(image_src, uniqueId, viewBox, defaultPath));
+                    });
+
+                    var morphing = null;
+                    morphing = gsap.timeline({
+                        repeat: loop ? -1 : 0,
+                        yoyo: loop,
+                        repeatDelay: 0.001,
+                        delay: 0.001
+                    });
+                    console.log('morphing: ', morphing);
+                    
+                    svg_items.each(function(index, element){
+                        const $svg = $(element);
+                        const $path = $svg.find('path').first();
+                        const transform = $path.attr('transform') || "translate(0,0)";
+                        const clipPath = $scope.find('.clip-path');
+
+                        morphing.to(clipPath, {
+                            morphSVG: {
+                                shape: $path[0]
+                            },
+                            duration: duration,
+                            ease: settings?.eael_image_morphing_ease || "sine.inOut",
+                            onStart: function() {
+                                clipPath.attr('transform', transform);
+                            }
+                        }, "+=0.01");
+                    });
                 }
             }
 
@@ -128,6 +187,20 @@ let ImageMaskingHandler = function ($scope, $) {
                 element.append('<style id="' + styleId + '">' + style + '</style>');
             }
         }
+    }
+
+    // Check if polygon animation is enabled and get settings
+    function createClippedSVG(imageSrc, uniqueId, viewBox, pathD) {
+        return `
+            <svg viewBox="${viewBox}" width="100%" style="visibility: visible; overflow: hidden;">
+                <defs>
+                    <clipPath id="clip-path-${uniqueId}">
+                        <path class="clip-path" d="${pathD}"/>
+                    </clipPath>
+                </defs>
+                <image width="100%" height="100%" clip-path="url(#clip-path-${uniqueId})" href="${imageSrc}"/>
+            </svg>
+        `;
     }
 
     function getImageMaskingSettingsVal( models ) {

@@ -1453,6 +1453,11 @@ $config = [
                         'context' => 'view',
                     ],
                     [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/lib-view/dom-purify/purify.min.js',
+                        'type'    => 'lib',
+                        'context' => 'edit',
+                    ],
+                    [
                         'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/image-masking.min.js',
                         'type'    => 'self',
                         'context' => 'edit',
