@@ -26,7 +26,7 @@ class Image_Masking {
 
     private function clip_paths( $shape ){
         $shapes = [
-            'circle'      => 'circle(50% at 50% 50%)',
+            'circle'      => 'circle(42% at 50% 50%)',
             'ellipse'     => 'ellipse(50% 35% at 50% 50%)',
             'inset'       => 'inset(10% 10% 10% 10%)',
             'triangle'    => 'polygon(50% 0%, 0% 100%, 100% 100%)',
@@ -94,7 +94,7 @@ class Image_Masking {
                 'type'        => Controls_Manager::SELECT2,
                 'label_block' => true,
                 'options'     => $this->get_clip_path_options(),
-                'default'     => 'circle',
+                'default'     => $tab !== '_hover' ? 'circle' : 'inset',
                 'condition'   => [
 					'eael_image_masking_type' => 'clip'
 				]
@@ -498,7 +498,7 @@ class Image_Masking {
                 ],
                 'default' => [
                     'unit' => 'px',
-                    'size' => 10,
+                    'size' => 6,
                 ],
                 'condition' => [
 					'eael_enable_image_masking' => 'yes',

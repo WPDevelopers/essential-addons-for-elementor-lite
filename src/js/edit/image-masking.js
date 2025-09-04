@@ -5,7 +5,7 @@ let ImageMaskingHandler = function ($scope, $) {
 
     function get_clip_path( shape ){
         let shapes = {
-            'circle': 'circle(50% at 50% 50%)',
+            'circle': 'circle(42% at 50% 50%)',
             'ellipse': 'ellipse(50% 35% at 50% 50%)',
             'inset': 'inset(10% 10% 10% 10%)',
             'triangle': 'polygon(50% 0%, 0% 100%, 100% 100%)',
@@ -208,9 +208,8 @@ let ImageMaskingHandler = function ($scope, $) {
 
                     var morphing = gsap.timeline({
                         repeat: loop ? -1 : 0,
-                        yoyo: loop,
-                        repeatDelay: 0,
-                        delay: 0,
+                        yoyo: false,
+                        repeatDelay: 0.001,
                         onComplete: function() {
                             // Clean up reference when animation completes (if not infinite)
                             if (!loop) {
@@ -225,6 +224,8 @@ let ImageMaskingHandler = function ($scope, $) {
                         type: 'svg-morphing'
                     };
 
+                    svg_items.first().appendTo(svg_items.parent());
+                    svg_items = $('#eael-svg-items-' + $scope.data('id')).find('svg');
                     svg_items.each(function(index, element){
                         const $svg = $(element);
                         const $path = $svg.find('path').first();
