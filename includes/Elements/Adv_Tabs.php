@@ -120,7 +120,7 @@ class Adv_Tabs extends Widget_Base
             [
                 'label'       => esc_html__('Styles', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::CHOOSE,
-                'default'     => 'hoverer',
+                'default'     => 'default',
                 'label_block' => true,
                 'toggle'      => false,
                 'image_choose'=> true,
@@ -1204,8 +1204,10 @@ class Adv_Tabs extends Widget_Base
         $this->add_render_attribute('eael_tab_icon_position', 'class', esc_attr($settings['eael_adv_tab_icon_position']));
         $this->add_render_attribute('eael_tab_icon_position', 'role', 'tablist'); 
 
-        //For Pro
-        $tab_glassey = apply_filters( 'eael_adv_tab_glassey_class', $settings ) ?? '';
+        // Filter allows Pro version to return CSS class based on style
+        $tab_glassey_class = apply_filters( 'eael_adv_tab_glassey_class', '', $settings['eael_adv_tab_new_style'] );
+        $tab_glassey = $settings['eael_adv_tab_new_style'] === 'glassey' ? $tab_glassey_class : '';
+
         $this->add_render_attribute(
             'eael_tab_glassey',
             [
