@@ -1,4 +1,8 @@
 let ImageMaskingHandler = function ($scope, $) {
+
+    // Global storage for animation instances to prevent duplicates
+    window.eaelImageMaskingAnimations = window.eaelImageMaskingAnimations || {};
+
     function get_clip_path( shape ){
         let shapes = {
             'circle': 'circle(50% at 50% 50%)',
@@ -29,11 +33,41 @@ let ImageMaskingHandler = function ($scope, $) {
         return shapes[shape] || '';
     }
 
+    // Function to clean up existing animations for an element
+    function cleanupExistingAnimations(elementId) {
+        // Check if GSAP is available before attempting cleanup
+        if (typeof gsap === 'undefined') {
+            return;
+        }
+
+        if (window.eaelImageMaskingAnimations[elementId]) {
+            const existingAnimation = window.eaelImageMaskingAnimations[elementId];
+
+            // Kill existing GSAP timeline
+            if (existingAnimation.timeline) {
+                existingAnimation.timeline.kill();
+            }
+
+            // Remove animation reference
+            delete window.eaelImageMaskingAnimations[elementId];
+        }
+
+        // Also clean up any orphaned GSAP animations on the element
+        const element = $(`.elementor-element-${elementId}`);
+        if (element.length) {
+            gsap.killTweensOf(element.find('.eael-clip-path'));
+            gsap.killTweensOf(element.find('.clip-path'));
+        }
+    }
+
     function renderImageMasking (model) {
         let settings = model?.attributes?.settings?.attributes;
         let elementId = model?.attributes?.id, element = $(`.elementor-element-${elementId}`);
         let styleId = 'eael-image-masking-' + elementId;
         $scope = element;
+
+        // Clean up existing animations before creating new ones
+        cleanupExistingAnimations(elementId);
 
         // Remove existing style if present
         $('#' + styleId).remove();
@@ -162,13 +196,34 @@ let ImageMaskingHandler = function ($scope, $) {
                         image.after(createClippedSVG(image_src, uniqueId, viewBox, defaultPath, image[0]));
                     });
 
-                    var morphing = null;
-                    morphing = gsap.timeline({
+                    // Check if GSAP and required plugins are available
+                    if (typeof gsap === 'undefined') {
+                        return;
+                    }
+
+                    // Check if animation already exists for this element
+                    if (window.eaelImageMaskingAnimations[elementId]) {
+                        return; // Animation already running, prevent duplicate
+                    }
+
+                    var morphing = gsap.timeline({
                         repeat: loop ? -1 : 0,
                         yoyo: loop,
                         repeatDelay: 0,
-                        delay: 0
+                        delay: 0,
+                        onComplete: function() {
+                            // Clean up reference when animation completes (if not infinite)
+                            if (!loop) {
+                                delete window.eaelImageMaskingAnimations[elementId];
+                            }
+                        }
                     });
+
+                    // Store animation reference to prevent duplicates
+                    window.eaelImageMaskingAnimations[elementId] = {
+                        timeline: morphing,
+                        type: 'svg-morphing'
+                    };
 
                     svg_items.each(function(index, element){
                         const $svg = $(element);
