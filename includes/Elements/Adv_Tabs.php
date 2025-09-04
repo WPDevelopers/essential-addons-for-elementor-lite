@@ -97,16 +97,44 @@ class Adv_Tabs extends Widget_Base
             ]
         );
 
+        $image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/filterable-gallery-';
+        $eael_fg_layout = apply_filters(
+            'eael_adv_tab_styles',
+            [
+                'styles' => [
+                    'default' => [
+                        'title' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
+						'image' => $image_path . 'overlay.png'
+                    ],
+                    'glassey' => [
+                        'title' => esc_html__( 'Glassey (Pro)', 'essential-addons-for-elementor-lite' ),
+						'image' => $image_path . 'grid_flow_gallery.png'
+                    ],
+                ],
+                'conditions' => ['glassey'],
+            ]
+        );
+
         $this->add_control(
             'eael_adv_tab_new_style',
             [
                 'label'       => esc_html__('Styles', 'essential-addons-for-elementor-lite'),
-                'type'        => Controls_Manager::SELECT,
-                'default'     => 'default',
-                'label_block' => false,
-                'options'     => [
-                    'default' => esc_html__('Default', 'essential-addons-for-elementor-lite'),
-                    'glassey' => esc_html__('Glassey', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::CHOOSE,
+                'default'     => 'hoverer',
+                'label_block' => true,
+                'toggle'      => false,
+                'image_choose'=> true,
+                'options'     => $eael_fg_layout['styles'],
+            ]
+        );
+
+        $this->add_control(
+            'eael_adv_tab_style_pro_alert',
+            [
+                'label'     => sprintf( '<a target = "_blank" href = "https: //wpdeveloper.com/upgrade/ea-pro">%s</a>', esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite')),
+                'type'      => Controls_Manager::HEADING,
+                'condition' => [
+                    'eael_adv_tab_new_style' => $eael_fg_layout['conditions'],
                 ],
             ]
         );
