@@ -8,15 +8,23 @@ let ImageMaskingHandler = function ($scope, $) {
     }
 
     // Check if polygon animation is enabled and get settings
-    function createClippedSVG(imageSrc, uniqueId, viewBox, pathD) {
+    function createClippedSVG(imageSrc, uniqueId, viewBox, pathD, originalImage) {
+        const imgWidth = originalImage.offsetWidth || originalImage.naturalWidth;
+        const imgHeight = originalImage.offsetHeight || originalImage.naturalHeight;
+
+        // Parse viewBox to get the coordinate system dimensions
+        const viewBoxValues = viewBox.split(' ').map(Number);
+        const viewBoxWidth = viewBoxValues[2];
+        const viewBoxHeight = viewBoxValues[3];
+
         return `
-            <svg viewBox="${viewBox}" width="100%" style="visibility: visible; overflow: hidden;">
+            <svg viewBox="${viewBox}" width="${imgWidth}" height="${imgHeight}" style="position: absolute; top: 0; left: 0; visibility: visible; display: block;">
                 <defs>
                     <clipPath id="clip-path-${uniqueId}">
                         <path class="clip-path" d="${pathD}"/>
                     </clipPath>
                 </defs>
-                <image width="100%" height="100%" clip-path="url(#clip-path-${uniqueId})" href="${imageSrc}"/>
+                <image x="0" y="0" width="${viewBoxWidth}" height="${viewBoxHeight}" clip-path="url(#clip-path-${uniqueId})" href="${imageSrc}" preserveAspectRatio="xMidYMid slice"/>
             </svg>
         `;
     }
@@ -74,8 +82,15 @@ let ImageMaskingHandler = function ($scope, $) {
                 image = $(image);
 				let image_src = image.attr('src');
                 let uniqueId = $scope.data('id') + '-' + index;
-				image.hide();
-				image.after(createClippedSVG(image_src, uniqueId, viewBox, defaultPath));
+
+                // Wrap image in container for proper positioning
+                if (!image.parent().hasClass('eael-image-masking-container')) {
+                    image.wrap('<div class="eael-image-masking-container" style="position: relative; display: inline-block; overflow: hidden;"></div>');
+                }
+
+                // Hide original image and add SVG
+                image.css('visibility', 'hidden');
+				image.after(createClippedSVG(image_src, uniqueId, viewBox, defaultPath, image[0]));
             });
 
             var morphing = gsap.timeline({
