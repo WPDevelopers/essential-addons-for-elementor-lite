@@ -249,6 +249,41 @@ trait Controls
         );
 
         $wb->add_control(
+            'meta_key',
+            [
+                'label' => __('Meta Key', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'ai' => [
+                    'active' => false,
+                ],
+                'placeholder' => __('_event_start_date', 'essential-addons-for-elementor-lite'),
+                'description' => __('Enter the meta key name for custom field sorting (e.g., _event_start_date, custom_price)', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                    'orderby' => 'meta_value',
+                ],
+            ]
+        );
+
+        $wb->add_control(
+            'meta_type',
+            [
+                'label' => __('Meta Value Type', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'CHAR' => __('Character', 'essential-addons-for-elementor-lite'),
+                    'NUMERIC' => __('Numeric', 'essential-addons-for-elementor-lite'),
+                    'DATE' => __('Date', 'essential-addons-for-elementor-lite'),
+                    'DATETIME' => __('DateTime', 'essential-addons-for-elementor-lite'),
+                ],
+                'default' => 'CHAR',
+                'description' => __('Select the data type of your custom field for proper sorting', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                    'orderby' => 'meta_value',
+                ],
+            ]
+        );
+
+        $wb->add_control(
 			'order',
 			[
 				'label'   => __( 'Order', 'essential-addons-for-elementor-lite' ),
