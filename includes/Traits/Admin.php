@@ -630,6 +630,15 @@ trait Admin {
 							'promotion'   => 'new',
 						    'is_activate' => boolval( $this->get_settings( 'custom-cursor' ) )
 					    ],
+						'image-masking' => [
+						    'key'         => 'image-masking',
+						    'title'       => __( 'Image Masking', 'essential-addons-for-elementor-lite' ),
+						    'demo_link'   => 'https://essential-addons.com/image-masking/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-image-masking/',
+						    'is_pro'      => false,
+						    'promotion'   => 'new',
+						    'is_activate' => boolval( $this->get_settings( 'image-masking' ) )
+					    ],
 					    'advanced-dynamic-tags' => [
 						    'key'         => 'advanced-dynamic-tags',
 						    'title'       => __( 'Dynamic Tags', 'essential-addons-for-elementor-lite' ),
