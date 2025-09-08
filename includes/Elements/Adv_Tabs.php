@@ -97,18 +97,18 @@ class Adv_Tabs extends Widget_Base
             ]
         );
 
-        $image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/filterable-gallery-';
+        $image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/advtab-';
         $eael_fg_layout = apply_filters(
             'eael_adv_tab_styles',
             [
                 'styles' => [
                     'default' => [
                         'title' => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
-						'image' => $image_path . 'overlay.png'
+						'image' => $image_path . 'default.png'
                     ],
                     'glassey' => [
                         'title' => esc_html__( 'Glassey (Pro)', 'essential-addons-for-elementor-lite' ),
-						'image' => $image_path . 'grid_flow_gallery.png'
+						'image' => $image_path . 'glassey.png'
                     ],
                 ],
                 'conditions' => ['glassey'],
