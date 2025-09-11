@@ -96,6 +96,61 @@ $enable-prefers-reduced-motion-media-query: true !default;
             }
         }
 
+        // Responsive layout overrides using data attributes
+        @media all and (max-width: 1024px) and (min-width: 768px) {
+            &[data-layout-tablet="horizontal"] {
+                display: flex !important;
+                overflow: auto;
+
+                .eael-feature-list-item{
+                    flex-shrink: 0;
+                    flex-grow: 0;
+                }
+                .eael-feature-list-title{
+                    white-space: nowrap;
+                }
+            }
+
+            &[data-layout-tablet="vertical"] {
+                display: block !important;
+
+                .eael-feature-list-item{
+                    flex-shrink: initial;
+                    flex-grow: initial;
+                }
+                .eael-feature-list-title{
+                    white-space: normal;
+                }
+            }
+        }
+
+        @media all and (max-width: 767px) {
+            &[data-layout-mobile="horizontal"] {
+                display: flex !important;
+                overflow: auto;
+
+                .eael-feature-list-item{
+                    flex-shrink: 0;
+                    flex-grow: 0;
+                }
+                .eael-feature-list-title{
+                    white-space: nowrap;
+                }
+            }
+
+            &[data-layout-mobile="vertical"] {
+                display: block !important;
+
+                .eael-feature-list-item{
+                    flex-shrink: initial;
+                    flex-grow: initial;
+                }
+                .eael-feature-list-title{
+                    white-space: normal;
+                }
+            }
+        }
+
         .eael-feature-list-item {
             position: relative;
 
@@ -379,6 +434,8 @@ $enable-prefers-reduced-motion-media-query: true !default;
             -ms-flex-direction: row-reverse;
             flex-direction: row-reverse;
         }
+
+
     }
 
     @media all and (max-width: 1024px) {
