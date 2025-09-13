@@ -738,6 +738,42 @@ class Business_Reviews extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_business_reviews_review_2_star_hide',
+			[
+				'label'        => __( 'Hide 2 Star Reviews', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => '',
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_review_3_star_hide',
+			[
+				'label'        => __( 'Hide 3 Star Reviews', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => '',
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_review_4_star_hide',
+			[
+				'label'        => __( 'Hide 4 Star Reviews', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => '',
+			]
+		);
+
+		$this->add_control(
 			'eael_business_reviews_reviewer_content',
 			[
 				'label'     => esc_html__( 'Reviewer', 'essential-addons-for-elementor-lite' ),
@@ -2572,6 +2608,9 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['review_text']       				= ! empty( $settings['eael_business_reviews_review_text'] ) && 'yes' === $settings['eael_business_reviews_review_text'] ? 1 : 0;
 		$business_reviews['review_rating']     				= ! empty( $settings['eael_business_reviews_review_rating'] ) && 'yes' === $settings['eael_business_reviews_review_rating'] ? 1 : 0;
 		$business_reviews['review_1_star']     				= empty( $settings['eael_business_reviews_review_1_star_hide'] ) ? 1 : 0;
+		$business_reviews['review_2_star']     				= empty( $settings['eael_business_reviews_review_2_star_hide'] ) ? 1 : 0;
+		$business_reviews['review_3_star']     				= empty( $settings['eael_business_reviews_review_3_star_hide'] ) ? 1 : 0;
+		$business_reviews['review_4_star']     				= empty( $settings['eael_business_reviews_review_4_star_hide'] ) ? 1 : 0;
 		$business_reviews['reviews_max_count'] 				= ! empty( $settings['eael_business_reviews_max_reviews'] ) ? intval( $settings['eael_business_reviews_max_reviews'] ) : 5;
 
 		$business_reviews['business_logo_icon_migrated']	= isset( $settings['__fa4_migrated']['eael_business_reviews_business_logo_icon_new'] );
@@ -2932,10 +2971,23 @@ class Business_Reviews extends Widget_Base {
 								$single_review_data['relative_time_description'] = ! empty( $single_review->relative_time_description ) ? $single_review->relative_time_description : '';
 								$single_review_data['text']                      = ! empty( $single_review->text ) ? $single_review->text : '';
 
-								if( ! $business_reviews['review_1_star'] ){
-									if ( $single_review_data['rating'] === 1 ) {
-										continue;
-									}
+								// Check if this review should be hidden based on rating filters
+								$should_hide_review = false;
+								if( ! $business_reviews['review_1_star'] && $single_review_data['rating'] === 1 ){
+									$should_hide_review = true;
+								}
+								if( ! $business_reviews['review_2_star'] && $single_review_data['rating'] === 2 ){
+									$should_hide_review = true;
+								}
+								if( ! $business_reviews['review_3_star'] && $single_review_data['rating'] === 3 ){
+									$should_hide_review = true;
+								}
+								if( ! $business_reviews['review_4_star'] && $single_review_data['rating'] === 4 ){
+									$should_hide_review = true;
+								}
+
+								if( $should_hide_review ){
+									continue;
 								}
 
 								$this->add_render_attribute( 'eael-google-reviews-slider-item-' . $i, [
@@ -3210,10 +3262,23 @@ class Business_Reviews extends Widget_Base {
 								$single_review_data['relative_time_description'] = ! empty( $single_review->relative_time_description ) ? $single_review->relative_time_description : '';
 								$single_review_data['text']                      = ! empty( $single_review->text ) ? $single_review->text : '';
 
-								if( ! $business_reviews['review_1_star'] ){
-									if ( $single_review_data['rating'] === 1 ) {
-										continue;
-									}
+								// Check if this review should be hidden based on rating filters
+								$should_hide_review = false;
+								if( ! $business_reviews['review_1_star'] && $single_review_data['rating'] === 1 ){
+									$should_hide_review = true;
+								}
+								if( ! $business_reviews['review_2_star'] && $single_review_data['rating'] === 2 ){
+									$should_hide_review = true;
+								}
+								if( ! $business_reviews['review_3_star'] && $single_review_data['rating'] === 3 ){
+									$should_hide_review = true;
+								}
+								if( ! $business_reviews['review_4_star'] && $single_review_data['rating'] === 4 ){
+									$should_hide_review = true;
+								}
+
+								if( $should_hide_review ){
+									continue;
 								}
 
 								$this->add_render_attribute( 'eael-google-reviews-grid-item-' . $i, [
