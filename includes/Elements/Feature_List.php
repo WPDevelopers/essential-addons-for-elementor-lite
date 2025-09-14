@@ -468,6 +468,8 @@ class Feature_List extends Widget_Base {
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-horizontal .eael-feature-list-item' => 'width: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-feature-list-items[data-layout-tablet="horizontal"] .eael-feature-list-item' => 'width: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-feature-list-items[data-layout-mobile="horizontal"] .eael-feature-list-item' => 'width: {{SIZE}}{{UNIT}}',
                 ],
                 'condition'   => [
                     'eael_feature_list_layout'      => 'horizontal',

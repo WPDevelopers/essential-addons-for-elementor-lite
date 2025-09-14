@@ -117,6 +117,7 @@ $enable-prefers-reduced-motion-media-query: true !default;
                 .eael-feature-list-item{
                     flex-shrink: initial;
                     flex-grow: initial;
+                    width: 100% !important; // Force full width when layout switches to vertical
                 }
                 .eael-feature-list-title{
                     white-space: normal;
@@ -144,6 +145,7 @@ $enable-prefers-reduced-motion-media-query: true !default;
                 .eael-feature-list-item{
                     flex-shrink: initial;
                     flex-grow: initial;
+                    width: 100% !important; // Force full width when layout switches to vertical
                 }
                 .eael-feature-list-title{
                     white-space: normal;
