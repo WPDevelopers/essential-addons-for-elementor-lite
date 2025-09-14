@@ -492,6 +492,8 @@ class Feature_List extends Widget_Base {
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-horizontal' => 'gap: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-horizontal[data-layout-tablet="vertical"] .eael-feature-list-item:not(:last-child)' => 'padding-bottom: calc({{SIZE}}{{UNIT}}/2)',
+                    '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-horizontal[data-layout-tablet="vertical"] .eael-feature-list-item:not(:first-child)' => 'padding-top: calc({{SIZE}}{{UNIT}}/2)',
                     '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-vertical .eael-feature-list-item:not(:last-child)'  => 'padding-bottom: calc({{SIZE}}{{UNIT}}/2)',
                     '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-vertical .eael-feature-list-item:not(:first-child)' => 'padding-top: calc({{SIZE}}{{UNIT}}/2)',
                     'body.rtl {{WRAPPER}} .eael-feature-list-items.eael-feature-list-vertical .eael-feature-list-item:after'    => 'left: calc(-{{SIZE}}{{UNIT}}/2)',
