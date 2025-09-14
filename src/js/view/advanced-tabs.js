@@ -130,7 +130,11 @@ eael.hooks.addAction("init", "ea", () => {
 						}, $scrollSpeed);
 					}
 				}
-				eael.hooks.doAction("ea-advanced-tabs-triggered", $(tabsContent).eq(currentTabIndex));
+
+				// Trigger hook with a small delay to ensure content is fully rendered
+				setTimeout(function() {
+					eael.hooks.doAction("ea-advanced-tabs-triggered", $(tabsContent).eq(currentTabIndex));
+				}, 50);
 				
 				$(tabsContent).each(function (index) {
 					$(this).removeClass("active-default");

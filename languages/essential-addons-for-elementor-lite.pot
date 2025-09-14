@@ -10623,7 +10623,7 @@ msgid "<i class=\"eaicon-logo\"></i> Custom Cursor"
 msgstr ""
 
 #: ../includes/Extensions/Promotion.php:206
-msgid "Meet EACustom Cursor"
+msgid "Meet EA Custom Cursor"
 msgstr ""
 
 #: ../includes/Extensions/Promotion.php:207
