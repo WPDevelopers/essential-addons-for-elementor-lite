@@ -178,8 +178,8 @@ let ImageMaskingHandler = function ($scope, $) {
                     $images.each(function(index, image) {
                         image = $(image);
                         let image_src = image.attr('src');
-                        let uniqueId = $scope.data('id') + '-' + index;
-
+                        let uniqueId = elementId + '-' + index;
+                        
                         // Wrap image in container for proper positioning
                         if (!image.parent().hasClass('eael-image-masking-container')) {
                             image.wrap('<div class="eael-image-masking-container" style="position: relative; display: inline-block; overflow: hidden;"></div>');
@@ -219,31 +219,61 @@ let ImageMaskingHandler = function ($scope, $) {
                     };
 
                     svg_items.first().appendTo(svg_items.parent());
-                    svg_items = $('#eael-svg-items-' + $scope.data('id')).find('svg');
-                    svg_items.each(function(index, element){
-                        const $svg = $(element);
-                        const $path = $svg.find('path').first();
-                        const transform = $path.attr('transform') || "translate(0,0)";
-                        const clipPath = $scope.find('.eael-clip-path');
+                    svg_items = $('#eael-svg-items-' + elementId).find('svg');
 
-                        // Calculate duration per shape for smooth transitions
-                        const totalDuration = duration || 6;
-                        const durationPerShape = totalDuration / svg_items.length;
+                    // Function to wait for clipPath element to be available
+                    const waitForClipPath = (retries = 0, maxRetries = 10) => {
+                        const clipPath = $('.elementor-element-' + elementId).find('.eael-clip-path');
 
-                        // Start first animation immediately, others at calculated intervals
-                        const startTime = index * durationPerShape;
+                        if (clipPath.length > 0) {
+                            // Element found, proceed with animation
+                            startMorphingAnimation(clipPath);
+                        } else if (retries < maxRetries) {
+                            // Element not found, retry after a short delay
+                            setTimeout(() => {
+                                waitForClipPath(retries + 1, maxRetries);
+                            }, 100);
+                        } else {
+                            console.warn('EAEL Image Masking: clipPath element not found for element ID after retries:', elementId);
+                        }
+                    };
 
-                        morphing.to(clipPath, {
-                            morphSVG: {
-                                shape: $path[0]
-                            },
-                            duration: durationPerShape,
-                            ease: settings?.eael_image_morphing_ease || "sine.inOut",
-                            onStart: function() {
-                                clipPath.attr('transform', transform);
+                    // Function to start the morphing animation
+                    const startMorphingAnimation = (clipPath) => {
+                        svg_items.each(function(index, element){
+                            const $svg = $(element);
+                            const $path = $svg.find('path').first();
+
+                            // Check if path element exists
+                            if ($path.length === 0) {
+                                console.warn('EAEL Image Masking: path element not found in SVG at index:', index);
+                                return; // Skip this iteration
                             }
-                        }, startTime);
-                    });
+
+                            const transform = $path.attr('transform') || "translate(0,0)";
+
+                            // Calculate duration per shape for smooth transitions
+                            const totalDuration = duration || 6;
+                            const durationPerShape = totalDuration / svg_items.length;
+
+                            // Start first animation immediately, others at calculated intervals
+                            const startTime = index * durationPerShape;
+
+                            morphing.to(clipPath[0], {
+                                morphSVG: {
+                                    shape: $path[0]
+                                },
+                                duration: durationPerShape,
+                                ease: settings?.eael_image_morphing_ease || "sine.inOut",
+                                onStart: function() {
+                                    clipPath.attr('transform', transform);
+                                }
+                            }, startTime);
+                        });
+                    };
+
+                    // Start waiting for clipPath element
+                    waitForClipPath();
                 }
             }
 
