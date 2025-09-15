@@ -437,9 +437,19 @@ class Image_Masking {
         );
 
         $element->add_control(
-            'eael_svg_paths',
+            'eael_svg_paths_information',
             [
                 'label' => esc_html__( 'SVGs', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::RAW_HTML,
+                'raw' => '<p class="elementor-control-field-description">' . sprintf( __( 'SVGs are used to create morphing effect. you can generate your own SVGs using online tools like %sblobmaker%s. you may also use font awesome icons SVG.', 'essential-addons-for-elementor-lite' ), '<a href="https://www.blobmaker.app/" target="_blank">','</a>' ) . '</p>',
+                'content_classes' => '',
+            ]
+        );
+
+        $element->add_control(
+            'eael_svg_paths',
+            [
+                'label' => '',
                 'type' => Controls_Manager::REPEATER,
                 'fields' => $svg_paths->get_controls(),
                 'default' => [
