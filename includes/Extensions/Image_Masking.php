@@ -373,11 +373,26 @@ class Image_Masking {
                 'default' => 'clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);',
             ]
         );
+
+        $element->add_control(
+            'eael_clip_paths_information',
+            [
+                'label' => esc_html__( 'Shapes', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::RAW_HTML,
+                'raw' => sprintf( __( 'Shapes are used to create morphing effect. you can generate your own shapes using online tools %sclippy%s.', 'essential-addons-for-elementor-lite' ), '<a href="https://bennettfeely.com/clippy/" target="_blank">','</a>' ),
+                'content_classes' => 'elementor-control-field-description',
+                'condition' => [
+					'eael_enable_image_masking' => 'yes',
+					'eael_image_masking_type' => 'morphing',
+					'eael_morphing_type' => 'clip-path'
+				],
+            ]
+        );
         
         $element->add_control(
             'eael_clip_paths',
             [
-                'label' => esc_html__( 'Shapes', 'essential-addons-for-elementor-lite' ),
+                'label' => '',
                 'type' => Controls_Manager::REPEATER,
                 'fields' => $clip_paths->get_controls(),
                 'default' => [
