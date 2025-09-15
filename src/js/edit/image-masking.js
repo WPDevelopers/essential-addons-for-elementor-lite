@@ -174,7 +174,7 @@ let ImageMaskingHandler = function ($scope, $) {
                     
                     let viewBox = svg_items.first().attr('viewBox');
                     let defaultPath = svg_items.first().find('path').first().attr('d');
-
+                    let transform = svg_items.first().find('path').first().attr('transform') || "";
                     $images.each(function(index, image) {
                         image = $(image);
                         let image_src = image.attr('src');
@@ -187,7 +187,7 @@ let ImageMaskingHandler = function ($scope, $) {
 
                         // Hide original image and add SVG
                         image.css('visibility', 'hidden');
-                        image.after(createClippedSVG(image_src, uniqueId, viewBox, defaultPath, image[0]));
+                        image.after(createClippedSVG(image_src, uniqueId, viewBox, defaultPath, image[0], transform));
                     });
 
                     // Check if GSAP and required plugins are available
@@ -284,7 +284,7 @@ let ImageMaskingHandler = function ($scope, $) {
     }
 
     // Check if polygon animation is enabled and get settings
-    function createClippedSVG(imageSrc, uniqueId, viewBox, pathD, originalImage) {
+    function createClippedSVG(imageSrc, uniqueId, viewBox, pathD, originalImage, transform) {
         if( $(`#eael-morphing-svg-${uniqueId}`).length ){
             return;
         }
@@ -296,12 +296,14 @@ let ImageMaskingHandler = function ($scope, $) {
         const viewBoxValues = viewBox.split(' ').map(Number);
         const viewBoxWidth = viewBoxValues[2];
         const viewBoxHeight = viewBoxValues[3];
-
+        if( transform ){
+            transform = 'transform="' + transform + '"';
+        }
         return `
             <svg id="eael-morphing-svg-${uniqueId}" viewBox="${viewBox}" width="${imgWidth}" height="${imgHeight}" style="position: absolute; top: 0; left: 0; visibility: visible; display: block;">
                 <defs>
                     <clipPath id="eael-clip-path-${uniqueId}">
-                        <path class="eael-clip-path" d="${pathD}"/>
+                        <path class="eael-clip-path" d="${pathD}" ${transform}/>
                     </clipPath>
                 </defs>
                 <image x="0" y="0" width="${viewBoxWidth}" height="${viewBoxHeight}" clip-path="url(#eael-clip-path-${uniqueId})" href="${imageSrc}" preserveAspectRatio="xMidYMid slice"/>
@@ -327,6 +329,4 @@ jQuery(window).on("elementor/frontend/init", function () {
         return false;
     }
     elementorFrontend.hooks.addAction( "frontend/element_ready/widget", ImageMaskingHandler );
-    elementorFrontend.hooks.addAction( "frontend/element_ready/container", ImageMaskingHandler );
-    elementorFrontend.hooks.addAction( "frontend/element_ready/section", ImageMaskingHandler );
 });
