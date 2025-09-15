@@ -597,48 +597,6 @@ class Image_Masking {
             ]
         );
 
-        $element->add_control(
-            'eael_image_morphing_scalling_max',
-            [
-                'label' => esc_html__( 'Scalling Max', 'essential-addons-for-elementor-lite' ),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => [ 'px' ],
-                'range' => [
-                    'px' => [
-                        'min' => 1,
-                        'max' => 10,
-                        'step' => .1,
-                    ],
-                ],
-                'condition' => [
-					'eael_enable_image_masking' => 'yes',
-					'eael_image_masking_type' => 'morphing',
-                    'eael_morphing_type' => 'clip-path',
-				],
-            ]
-        );
-
-        $element->add_control(
-            'eael_image_morphing_scalling_min',
-            [
-                'label' => esc_html__( 'Scalling Min', 'essential-addons-for-elementor-lite' ),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => [ 'px' ],
-                'range' => [
-                    'px' => [
-                        'min' => 1,
-                        'max' => 10,
-                        'step' => .1,
-                    ],
-                ],
-                'condition' => [
-					'eael_enable_image_masking' => 'yes',
-					'eael_image_masking_type' => 'morphing',
-                    'eael_morphing_type' => 'clip-path',
-				],
-            ]
-        );
-
 		$element->end_controls_section();
 	}
 
@@ -723,14 +681,6 @@ class Image_Masking {
                             continue;
                         }
                         $paths[] = str_replace( [ 'clip-path: ', ';' ], '', $clip_path['eael_clip_path'] );
-                    }
-
-                     if( !empty( $settings['eael_image_morphing_scalling_min']['size'] ) ){
-                        $morphing_options['scaleMin'] = $settings['eael_image_morphing_scalling_min']['size'];
-                    }
-
-                    if( !empty( $settings['eael_image_morphing_scalling_max']['size'] ) ){
-                        $morphing_options['scaleMax'] = $settings['eael_image_morphing_scalling_max']['size'];
                     }
 
                     if( !empty( $settings['eael_image_morphing_enable_rotation'] ) ){

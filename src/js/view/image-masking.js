@@ -44,23 +44,12 @@ let ImageMaskingHandler = function ($scope, $) {
                 animationData.scale.min = options.scaleMin;
             }
 
-            if( options.scaleMax ){
-                animationData.scale.max = options.scaleMax;
-            }
-
             if( options.rotation ){
                 animationData.rotation = options.rotation;
             }
 
             if( options.rotationSpeed ){
                 animationData.rotationSpeed = options.rotationSpeed;
-            }
-
-            if( options.scaleMin ){
-                animationData.scale.min = options.scaleMin;
-            }
-            if( options.scaleMax ){
-                animationData.scale.max = options.scaleMax;
             }
 
             if (animationData && typeof PolygonMorphingAnimation !== 'undefined' && $images.length > 0) {

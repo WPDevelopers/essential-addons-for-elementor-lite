@@ -136,12 +136,6 @@ let ImageMaskingHandler = function ($scope, $) {
                     if( settings?.eael_image_morphing_ease ){
                         animationData.ease = settings?.eael_image_morphing_ease;
                     }
-                    if( settings?.eael_image_morphing_scale_min?.size ){
-                        animationData.scale.min = settings?.eael_image_morphing_scale_min?.size;
-                    }
-                    if( settings?.eael_image_morphing_scale_max?.size ){
-                        animationData.scale.max = settings?.eael_image_morphing_scale_max?.size;
-                    }
                     if( settings?.eael_image_morphing_rotation ){
                         animationData.rotation = 'yes' === settings?.eael_image_morphing_rotation;
                     }
