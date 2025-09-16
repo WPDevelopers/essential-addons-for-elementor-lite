@@ -679,6 +679,21 @@ class Event_Calendar extends Widget_Base
 	    );
 
         $this->add_control(
+            'eael_event_location_display',
+            [
+                'label' => __('Show Event Location', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_block' => false,
+                'return_value' => 'yes',
+                'default' => 'no',
+                'description' => __('Display event location information in the popup modal', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                    'eael_event_calendar_type' => 'google',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'eael_event_limit',
             [
                 'label' => __('Event Limit', 'essential-addons-for-elementor-lite'),
@@ -3342,6 +3357,7 @@ class Event_Calendar extends Widget_Base
             data-weekColumnHeaderFormat = "' . esc_attr( $settings['eael_calendar_column_heading_week'] ) . '"
             data-hideDetailsLink= "' . esc_attr( $settings['eael_event_details_link_hide'] ) . '"
             data-detailsButtonText = "' . wp_kses( $settings['eael_event_details_text'], Helper::eael_allowed_tags() ) . '"
+            data-location-display = "' . esc_attr( $settings['eael_event_location_display'] ) . '"
             data-events="' . esc_attr( htmlspecialchars( json_encode( $data ), ENT_QUOTES, 'UTF-8' ) ) . '"
             data-first_day="' . esc_attr( $settings['eael_event_calendar_first_day'] ) . '"></div>';
 
@@ -3523,6 +3539,7 @@ class Event_Calendar extends Widget_Base
                     <h2 class="eael-ec-modal-title"></h2>
                     <span class="eaelec-event-date-start eaelec-event-popup-date"></span>
                     <span class="eaelec-event-date-end eaelec-event-popup-date"></span>
+                    <span class="eaelec-event-location eaelec-event-popup-location" style="display: none;"></span>
                 </div>
                 <div class="eaelec-modal-body">
                     <p></p>
@@ -3814,6 +3831,7 @@ class Event_Calendar extends Widget_Base
                     'id'             => ++$key,
                     'title'          => !empty($item->summary) ? $item->summary                                                                : 'No Title',
                     'description'    => isset($item->description) ? $item->description                                                         : '',
+                    'location'       => isset($item->location) ? $item->location                                                               : '',
                     'start'          => $ev_start_date,
                     'end'            => $ev_end_date,
                     'start_timezone' => $start_timezone,
