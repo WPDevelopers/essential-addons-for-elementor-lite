@@ -2729,7 +2729,10 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['review_text']       				= ! empty( $settings['eael_business_reviews_review_text'] ) && 'yes' === $settings['eael_business_reviews_review_text'] ? 1 : 0;
 		$business_reviews['review_rating']     				= ! empty( $settings['eael_business_reviews_review_rating'] ) && 'yes' === $settings['eael_business_reviews_review_rating'] ? 1 : 0;
 		$business_reviews['review_1_star']     				= empty( $settings['eael_business_reviews_review_1_star_hide'] ) ? 1 : 0;
-
+		$business_reviews['review_2_star']     				= empty( $settings['eael_business_reviews_review_2_star_hide'] ) ? 1 : 0;
+		$business_reviews['review_3_star']     				= empty( $settings['eael_business_reviews_review_3_star_hide'] ) ? 1 : 0;
+		$business_reviews['review_4_star']     				= empty( $settings['eael_business_reviews_review_4_star_hide'] ) ? 1 : 0;
+		
 		// Set max reviews count based on API type and source (with backward compatibility)
 		if ( 'google-reviews' === $business_reviews['source'] ) {
 			if ( 'my_business_api' === $business_reviews['google_api_type'] ) {
@@ -2746,10 +2749,7 @@ class Business_Reviews extends Widget_Base {
 				}
 			}
 		} else {
-			$business_reviews['review_2_star']     				= empty( $settings['eael_business_reviews_review_2_star_hide'] ) ? 1 : 0;
-		$business_reviews['review_3_star']     				= empty( $settings['eael_business_reviews_review_3_star_hide'] ) ? 1 : 0;
-		$business_reviews['review_4_star']     				= empty( $settings['eael_business_reviews_review_4_star_hide'] ) ? 1 : 0;
-		$business_reviews['reviews_max_count'] 			= ! empty( $settings['eael_business_reviews_max_reviews'] ) ? intval( $settings['eael_business_reviews_max_reviews'] ) : 5;
+			$business_reviews['reviews_max_count'] 			= ! empty( $settings['eael_business_reviews_max_reviews'] ) ? intval( $settings['eael_business_reviews_max_reviews'] ) : 5;
 		}
 
 		$business_reviews['business_logo_icon_migrated']	= isset( $settings['__fa4_migrated']['eael_business_reviews_business_logo_icon_new'] );
