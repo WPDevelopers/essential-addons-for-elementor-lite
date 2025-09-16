@@ -112,7 +112,7 @@ let ImageMaskingHandler = function ($scope, $) {
                 }
             }  else if( 'morphing' === settings?.eael_image_masking_type ){
                 let morphingType = settings?.eael_morphing_type;
-                let $images = $(`.elementor-element-${elementId}`).find('img');
+                let $images = $scope.find('img'); // Use $scope like frontend for proper container support
 
                 if( settings?.eael_image_morphing_exclude_selectors ){
                     $images = $images.not( settings?.eael_image_morphing_exclude_selectors );
@@ -150,7 +150,24 @@ let ImageMaskingHandler = function ($scope, $) {
                         });
                     }
                 } else if ( 'svg' === settings?.eael_morphing_type ) {
+                    // Check if animation already exists for this element - prevent duplicates early
+                    if (window.eaelImageMaskingAnimations[elementId]) {
+                        return; // Animation already running, prevent duplicate
+                    }
+
+                    // Mark element as being processed to prevent race conditions
+                    window.eaelImageMaskingAnimations[elementId] = {
+                        timeline: null,
+                        type: 'svg-morphing',
+                        processing: true
+                    };
+
                     let svgPaths = settings?.eael_svg_paths;
+                    if (!svgPaths || !svgPaths.length) {
+                        console.warn('EAEL Image Masking: No SVG paths found for morphing');
+                        return;
+                    }
+
                     let svg_html = '<div id="eael-svg-items-' + elementId + '" style="display: none;">';
                     let svg_html_wrapper = $('#eael-svg-items-' + elementId);
                     let duration = settings?.eael_image_morphing_duration?.size || 6;
@@ -165,8 +182,25 @@ let ImageMaskingHandler = function ($scope, $) {
                         svg_html_wrapper.remove();
                     }
 
+                    // Clean up any existing SVG masking elements to prevent accumulation
+                    $scope.find('.eael-image-masking-container').each(function() {
+                        const $container = $(this);
+                        const $img = $container.find('img');
+                        const $svg = $container.find('svg');
+
+                        if ($img.length && $svg.length) {
+                            // Restore original image visibility and remove SVG
+                            $img.css('visibility', 'visible');
+                            $svg.remove();
+                            // Unwrap the container if it only contains the image
+                            if ($container.children().length === 1) {
+                                $img.unwrap();
+                            }
+                        }
+                    });
+
                     element.append( svg_html );
-                    
+
                     let svg_items = $('#eael-svg-items-' + elementId).find('svg');
                     if( !svg_items.length ){
                         return;
@@ -192,12 +226,14 @@ let ImageMaskingHandler = function ($scope, $) {
 
                     // Check if GSAP and required plugins are available
                     if (typeof gsap === 'undefined') {
+                        console.warn('EAEL Image Masking: GSAP is not available for morphing animation');
                         return;
                     }
 
-                    // Check if animation already exists for this element
-                    if (window.eaelImageMaskingAnimations[elementId]) {
-                        return; // Animation already running, prevent duplicate
+                    // Check if morphSVG plugin is available
+                    if (typeof gsap.plugins === 'undefined' || typeof gsap.plugins.morphSVG === 'undefined') {
+                        console.warn('EAEL Image Masking: GSAP morphSVG plugin is not available for animation');
+                        return;
                     }
 
                     var morphing = gsap.timeline({
@@ -212,68 +248,53 @@ let ImageMaskingHandler = function ($scope, $) {
                         }
                     });
 
-                    // Store animation reference to prevent duplicates
+                    // Update animation reference with actual timeline
                     window.eaelImageMaskingAnimations[elementId] = {
                         timeline: morphing,
-                        type: 'svg-morphing'
+                        type: 'svg-morphing',
+                        processing: false
                     };
 
                     svg_items.first().appendTo(svg_items.parent());
                     svg_items = $('#eael-svg-items-' + elementId).find('svg');
 
-                    // Function to wait for clipPath element to be available
-                    const waitForClipPath = (retries = 0, maxRetries = 10) => {
-                        const clipPath = $('.elementor-element-' + elementId).find('.eael-clip-path');
+                    // Start animation immediately like frontend - no delays
+                    svg_items.each(function(index, element){
+                        const $svg = $(element);
+                        const $path = $svg.find('path').first();
 
-                        if (clipPath.length > 0) {
-                            // Element found, proceed with animation
-                            startMorphingAnimation(clipPath);
-                        } else if (retries < maxRetries) {
-                            // Element not found, retry after a short delay
-                            setTimeout(() => {
-                                waitForClipPath(retries + 1, maxRetries);
-                            }, 100);
-                        } else {
-                            console.warn('EAEL Image Masking: clipPath element not found for element ID after retries:', elementId);
+                        // Check if path element exists
+                        if ($path.length === 0) {
+                            console.warn('EAEL Image Masking: path element not found in SVG at index:', index);
+                            return; // Skip this iteration
                         }
-                    };
 
-                    // Function to start the morphing animation
-                    const startMorphingAnimation = (clipPath) => {
-                        svg_items.each(function(index, element){
-                            const $svg = $(element);
-                            const $path = $svg.find('path').first();
+                        const transform = $path.attr('transform') || "translate(0,0)";
+                        const clipPath = $scope.find('.clip-path'); // Use $scope for proper container support
 
-                            // Check if path element exists
-                            if ($path.length === 0) {
-                                console.warn('EAEL Image Masking: path element not found in SVG at index:', index);
-                                return; // Skip this iteration
+                        if (clipPath.length === 0) {
+                            console.warn('EAEL Image Masking: No clip-path elements found for animation');
+                            return;
+                        }
+
+                        // Calculate duration per shape for smooth transitions
+                        const totalDuration = duration || 6;
+                        const durationPerShape = totalDuration / svg_items.length;
+
+                        // Start first animation immediately, others at calculated intervals
+                        const startTime = index * durationPerShape;
+
+                        morphing.to(clipPath, {
+                            morphSVG: {
+                                shape: $path[0]
+                            },
+                            duration: durationPerShape,
+                            ease: settings?.eael_image_morphing_ease || "sine.inOut",
+                            onStart: function() {
+                                clipPath.attr('transform', transform);
                             }
-
-                            const transform = $path.attr('transform') || "translate(0,0)";
-
-                            // Calculate duration per shape for smooth transitions
-                            const totalDuration = duration || 6;
-                            const durationPerShape = totalDuration / svg_items.length;
-
-                            // Start first animation immediately, others at calculated intervals
-                            const startTime = index * durationPerShape;
-
-                            morphing.to(clipPath[0], {
-                                morphSVG: {
-                                    shape: $path[0]
-                                },
-                                duration: durationPerShape,
-                                ease: settings?.eael_image_morphing_ease || "sine.inOut",
-                                onStart: function() {
-                                    clipPath.attr('transform', transform);
-                                }
-                            }, startTime);
-                        });
-                    };
-
-                    // Start waiting for clipPath element
-                    waitForClipPath();
+                        }, startTime);
+                    });
                 }
             }
 
@@ -296,24 +317,29 @@ let ImageMaskingHandler = function ($scope, $) {
         const viewBoxValues = viewBox.split(' ').map(Number);
         const viewBoxWidth = viewBoxValues[2];
         const viewBoxHeight = viewBoxValues[3];
-        if( transform ){
-            transform = 'transform="' + transform + '"';
-        }
+
+        // Handle transform attribute if provided
+        const transformAttr = transform ? `transform="${transform}"` : '';
+
         return `
             <svg id="eael-morphing-svg-${uniqueId}" viewBox="${viewBox}" width="${imgWidth}" height="${imgHeight}" style="position: absolute; top: 0; left: 0; visibility: visible; display: block;">
                 <defs>
-                    <clipPath id="eael-clip-path-${uniqueId}">
-                        <path class="eael-clip-path" d="${pathD}" ${transform}/>
+                    <clipPath id="clip-path-${uniqueId}">
+                        <path class="clip-path" d="${pathD}" ${transformAttr}/>
                     </clipPath>
                 </defs>
-                <image x="0" y="0" width="${viewBoxWidth}" height="${viewBoxHeight}" clip-path="url(#eael-clip-path-${uniqueId})" href="${imageSrc}" preserveAspectRatio="xMidYMid slice"/>
+                <image x="0" y="0" width="${viewBoxWidth}" height="${viewBoxHeight}" clip-path="url(#clip-path-${uniqueId})" href="${imageSrc}" preserveAspectRatio="xMidYMid slice"/>
             </svg>
         `;
     }
 
     function getImageMaskingSettingsVal( models ) {
         $.each(models, function (_, model) {
-            renderImageMasking( model );
+            // Only process if image masking is enabled for this element
+            let settings = model?.attributes?.settings?.attributes;
+            if (settings && 'yes' === settings?.eael_enable_image_masking) {
+                renderImageMasking( model );
+            }
 
             if ( model.attributes.elType !== 'widget' ) {
                 getImageMaskingSettingsVal( model.attributes.elements.models );
