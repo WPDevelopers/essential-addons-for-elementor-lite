@@ -891,7 +891,7 @@ class Code_Snippet extends Widget_Base {
          Group_Control_Typography::get_type(),
          [
             'name' => 'code_content_collapsed_indicator_typography',
-            'selector' => '{{WRAPPER}} .eael-code-snippet-collapsed-indicator-wrapper .eael-code-snippet-collapsed-indicator ',
+            'selector' => '{{WRAPPER}} .eael-code-snippet-collapsed-indicator-wrapper .eael-code-snippet-collapsed-indicator .eael-code-snippet-collapsed-indicator-text',
             'condition' => [
                'code_collapse_inidicator_content_type' => 'text'
             ]
