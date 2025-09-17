@@ -664,6 +664,14 @@ trait Admin {
 						    'promotion'   => 'new',
 						    'is_activate' => boolval( $this->get_settings( 'liquid-glass-effect' ) )
 						 ],
+					    'vertical-text-orientation'  => [
+						    'key'         => 'vertical-text-orientation',
+						    'title'       => __( 'Vertical Text Orientation', 'essential-addons-for-elementor-lite' ),
+						    'demo_link'   => 'https://essential-addons.com/vertical-text-orientations/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-vertical-text-orientation/',
+						    'promotion'   => 'new',
+						    'is_activate' => boolval( $this->get_settings( 'vertical-text-orientation' ) )
+						 ],
 				    ]
 			    ],
 			    'widgets'                 => [

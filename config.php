@@ -1433,6 +1433,12 @@ $config = [
                 ],
             ],
         ],
+        'vertical-text-orientation' => [
+            'class'      => '\Essential_Addons_Elementor\Extensions\Vertical_Text_Orientation',
+            'dependency' => [
+                
+            ],
+        ],
     ],
 ];
 
