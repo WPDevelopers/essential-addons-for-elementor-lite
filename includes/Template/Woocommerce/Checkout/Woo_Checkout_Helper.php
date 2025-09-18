@@ -546,13 +546,16 @@ trait Woo_Checkout_Helper {
 					</div>
 
                     <?php
-                    if( class_exists('WC_Subscriptions_Cart') && (\WC_Subscriptions_Cart::cart_contains_subscription())) {
+					$has_subscription = class_exists('WC_Subscriptions_Cart') && (\WC_Subscriptions_Cart::cart_contains_subscription());
+                    if( $has_subscription ) {
                         echo '<table class="recurring-wrapper">';
                         do_action( 'eael_display_recurring_total_total' );
-                        echo '</table>';
                     }
+					do_action( 'woocommerce_review_order_after_order_total' );
+					if( $has_subscription ){
+						echo '</table>';
+					}
                     ?>
-					<?php do_action( 'woocommerce_review_order_after_order_total' ); ?>
 				</div>
 			</div>
 		</div>

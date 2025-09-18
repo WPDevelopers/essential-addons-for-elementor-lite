@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.3.1
+Stable tag: 6.3.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -316,6 +316,29 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.3.2 - 18/09/2025 =
+
+- Fixed: EA Image Accordion | Horizontal layout not working on mobile
+- Fixed: EA Product Images | Zoom lens size not working
+- Fixed: EA Advanced Tabs | Tab title background color not working
+- Fixed: EA Add to Cart & Rating | Conflict with Cusrev causing layout issues
+- Fixed: EA Woo Product Compare | Header column styling issue
+- Fixed: EA Feature List | Icon size rendering incorrectly
+- Fixed: EA Woo Checkout | Styling issue with WooCommerce Subscriptions
+- Fixed: EA Woo Cart | Body color issue on Safari/iPhone
+- Improved: EA Advanced Tabs | Vertical layout offset now starts from content
+- Improved: EA Feature List | Layout enhancements
+- Improved: EA Pricing Table | Style & functional refinements
+- Improved: Woo Product Grid | Show secondary image on hover
+- Improved: Woo Product Grid | On Sale badge toggle added
+- Improved: EA Content Ticker | “Order By” custom field meta key support
+- Improved: EA Business Reviews | Google My Business API support
+- Improved: EA Business Reviews | Display selected reviews
+- Improved: EA Testimonial | New layout added
+- Improved: EA Post Grid | Text placed before image for accessibility
+- Improved: EA NFT Gallery | New source: Magic Eden
+- Few minor bug fixes & improvements
 
 = 6.3.1 - 01/09/2025 =
 

@@ -249,6 +249,41 @@ trait Controls
         );
 
         $wb->add_control(
+            'meta_key',
+            [
+                'label' => __('Meta Key', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'ai' => [
+                    'active' => false,
+                ],
+                'placeholder' => __('_event_start_date', 'essential-addons-for-elementor-lite'),
+                'description' => __('Enter the meta key name for custom field sorting (e.g., _event_start_date, custom_price)', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                    'orderby' => 'meta_value',
+                ],
+            ]
+        );
+
+        $wb->add_control(
+            'meta_type',
+            [
+                'label' => __('Meta Value Type', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'CHAR' => __('Character', 'essential-addons-for-elementor-lite'),
+                    'NUMERIC' => __('Numeric', 'essential-addons-for-elementor-lite'),
+                    'DATE' => __('Date', 'essential-addons-for-elementor-lite'),
+                    'DATETIME' => __('DateTime', 'essential-addons-for-elementor-lite'),
+                ],
+                'default' => 'CHAR',
+                'description' => __('Select the data type of your custom field for proper sorting', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                    'orderby' => 'meta_value',
+                ],
+            ]
+        );
+
+        $wb->add_control(
 			'order',
 			[
 				'label'   => __( 'Order', 'essential-addons-for-elementor-lite' ),
@@ -273,13 +308,24 @@ trait Controls
             $wb->add_control(
                 'fetch_acf_image_gallery',
                 [
-                    'label'        => esc_html__( 'Fetch Images from ACF Gallery', 'essential-addons-for-elementor-lite' ),
+                    'label'        => esc_html__( 'Images from ACF Gallery', 'essential-addons-for-elementor-lite' ),
                     'type'         => Controls_Manager::SWITCHER,
-                    'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
+                    'label_on'     => esc_html__( 'Fetch', 'essential-addons-for-elementor-lite' ),
                     'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
                     'return_value' => 'yes',
                     'default'      => 'no',
                     'separator'    => 'before',
+                ]
+            );
+
+            /**
+             * @todo Need to remove this control in future version.
+             */
+            $wb->add_control( 
+                'eael_gf_afc_use_parent_data',
+                [
+                    'type' => Controls_Manager::HIDDEN,
+                    'default' => 'no',
                 ]
             );
 
@@ -323,22 +369,6 @@ trait Controls
                         ]
                     ]
                 );
-                
-                $wb->add_control(
-                    'eael_gf_afc_use_parent_data',
-                    [
-                        'label'        => esc_html__( 'Use Parent Data to Populate ACF Gallery Items', 'essential-addons-for-elementor-lite' ),
-                        'type'         => Controls_Manager::SWITCHER,
-                        'label_on'     => esc_html__( 'Yes', 'essential-addons-for-elementor-lite' ),
-                        'label_off'    => esc_html__( 'No', 'essential-addons-for-elementor-lite' ),
-                        'return_value' => 'yes',
-                        'default'      => 'no',
-                        'condition'    => [
-                            'fetch_acf_image_gallery' => 'yes'
-                        ]
-                    ]
-                );
-
             } else {
                 $wb->add_control(
                     'eael_scf_gallery_warnig_text',

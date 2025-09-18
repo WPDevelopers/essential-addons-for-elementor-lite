@@ -183,10 +183,19 @@ trait Ajax_Handler {
 			$settings['show_load_more_text']       = $settings['eael_fg_loadmore_btn_text'];
 			$settings['layout_mode']               = isset( $settings['layout_mode'] ) ? $settings['layout_mode'] : 'masonry';
 
+			if ( ! empty( $args['fetch_acf_image'] ) && 'yes' === $args['fetch_acf_image'] && ! empty( $args['post__in'] ) ) {
+				$args['post_status'] = 'any';
+				$args['post_type'] = 'any';
+			}
+
 			$exclude_ids = json_decode( html_entity_decode( stripslashes ( $_POST['exclude_ids'] ) ) );
 			$args['post__not_in'] = ( !empty( $_POST['exclude_ids'] ) ) ? array_map( 'intval', array_unique($exclude_ids) ) : array();
 			$active_term_id = ( !empty( $_POST['active_term_id'] ) ) ? intval( $_POST['active_term_id'] ) : 0;
 			$active_taxonomy = ( !empty( $_POST['active_taxonomy'] ) ) ? sanitize_text_field( $_POST['active_taxonomy'] ) : '';
+
+			if ( ! empty( $args['post__not_in'] ) && ! empty( $args['post__in'] ) ) {
+				$args['post__in'] = array_diff( $args['post__in'], array_unique( $args['post__not_in'] ) );
+			}
 
 			if( 0 < $active_term_id &&
 				!empty( $active_taxonomy ) &&
@@ -233,6 +242,7 @@ trait Ajax_Handler {
 			}
 
 			if ( $file_path ) {
+				// wp_send_json( $args );
 				$query = new \WP_Query( $args );
 				$found_posts = $query->found_posts;
 				$iterator = 0;
@@ -1053,6 +1063,21 @@ trait Ajax_Handler {
 		// Business Reviews : Saving Google Place Api Key
 		if ( isset( $settings['br_google_place_api_key'] ) ) {
 			update_option( 'eael_br_google_place_api_key', sanitize_text_field( $settings['br_google_place_api_key'] ) );
+		}
+
+		// Business Reviews : Saving Google My Business Access Token
+		if ( isset( $settings['br_google_my_business_token'] ) ) {
+			update_option( 'eael_br_google_my_business_token', sanitize_textarea_field( $settings['br_google_my_business_token'] ) );
+		}
+
+		// Business Reviews : Saving Trustpilot Api Key
+		if ( isset( $settings['br_trustpilot_api_key'] ) ) {
+			update_option( 'eael_br_trustpilot_api_key', sanitize_text_field( $settings['br_trustpilot_api_key'] ) );
+		}
+
+		// Business Reviews : Saving Yelp Api Key
+		if ( isset( $settings['br_yelp_api_key'] ) ) {
+			update_option( 'eael_br_yelp_api_key', sanitize_text_field( $settings['br_yelp_api_key'] ) );
 		}
 
 		// Saving Google Map Api Key
