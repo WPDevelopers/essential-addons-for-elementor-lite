@@ -3079,6 +3079,73 @@ class Event_Calendar extends Widget_Base
         );
 
         $this->add_control(
+            'event_popup_location_heading',
+            [
+                'label' => __('Location', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'event_popup_location_typography',
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .eaelec-modal-header .eaelec-event-popup-location',
+            ]
+        );
+
+        $this->add_control(
+            'event_popup_location_color',
+            [
+                'label' => __('Location Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eaelec-modal-header .eaelec-event-popup-location' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'event_popup_location_icon',
+            [
+                'label' => __('Location Icon', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'event_popup_location_icon_size',
+            [
+                'label' => __('Icon Size', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eaelec-modal-header .eaelec-event-popup-location i' => 'font-size: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'event_popup_location_icon_color',
+            [
+                'label' => __('Icon Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eaelec-modal-header .eaelec-event-popup-location i' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'event_popup_content_heading',
             [
                 'label' => __('Content', 'essential-addons-for-elementor-lite'),
