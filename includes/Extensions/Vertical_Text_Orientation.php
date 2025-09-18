@@ -36,6 +36,21 @@ class Vertical_Text_Orientation {
 			]
 		);
 
+        $element->add_control(
+			'eael_vto_writing_mode',
+			[
+				'label'   => esc_html__( 'Writing Mode', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'vertical_rl',
+				'options' => [
+					'horizontal'  => esc_html__( 'Horizontal', 'essential-addons-for-elementor-lite' ),
+					'vertical_rl' => esc_html__( 'Vertical RL', 'essential-addons-for-elementor-lite' ),
+					'vertical_lr' => esc_html__( 'Vertical LR', 'essential-addons-for-elementor-lite' ),
+				],
+				'prefix_class' => 'eael_vto-',
+			]
+		);
+
 		
 		$element->end_controls_section();
 	}
