@@ -20,7 +20,7 @@ function ModalStyleOne() {
                        onChange={changeHandler}/>
                 {eaData.link === undefined || <a className="ea__api-link" target="_blank" href={eaData.link.url}>{eaData.link.text}</a>}
             </div>
-            { eaData.image ? 
+            { eaData.image ?
             <img className="ea__modal-map-img" src={localize.eael_dashboard.reactPath + eaData.image} alt={eaData.title}/>
             : '' }</>
     );

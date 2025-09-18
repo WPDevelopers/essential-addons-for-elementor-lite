@@ -4,14 +4,14 @@
  * Description: The Essential plugin you install after Elementor! Packed with 100+ stunning elements like Data Table, Event Calendar, Filterable Gallery, WooCommerce.
  * Plugin URI: https://essential-addons.com/
  * Author: WPDeveloper
- * Version: 6.3.1
+ * Version: 6.3.2
  * Author URI: https://wpdeveloper.com/
  * Text Domain: essential-addons-for-elementor-lite
  * Domain Path: /languages
  *
  * WC tested up to: 10.0
- * Elementor tested up to: 3.31
- * Elementor Pro tested up to: 3.31
+ * Elementor tested up to: 3.32
+ * Elementor Pro tested up to: 3.32
  */
 
 if (!defined('ABSPATH')) {
@@ -27,7 +27,7 @@ define('EAEL_PLUGIN_FILE', __FILE__);
 define('EAEL_PLUGIN_BASENAME', plugin_basename(__FILE__));
 define('EAEL_PLUGIN_PATH', trailingslashit(plugin_dir_path(__FILE__)));
 define('EAEL_PLUGIN_URL', trailingslashit(plugins_url('/', __FILE__)));
-define('EAEL_PLUGIN_VERSION', '6.3.1');
+define('EAEL_PLUGIN_VERSION', '6.3.2');
 define('EAEL_ASSET_PATH', wp_upload_dir()['basedir'] . '/essential-addons-elementor');
 define('EAEL_ASSET_URL', wp_upload_dir()['baseurl'] . '/essential-addons-elementor');
 /**

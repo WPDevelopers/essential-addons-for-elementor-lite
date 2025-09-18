@@ -497,6 +497,21 @@
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
+.eael-product-grid .woocommerce ul.products .product .eael-product-wrap,
+.eael-post-grid .woocommerce ul.products .product .eael-product-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.eael-product-grid .woocommerce ul.products .product .eael-product-wrap img,
+.eael-post-grid .woocommerce ul.products .product .eael-product-wrap img {
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  width: 100%;
+  height: auto;
+  display: block;
+}
 .eael-product-grid .woocommerce ul.products .ast-on-card-button.ast-onsale-card,
 .eael-post-grid .woocommerce ul.products .ast-on-card-button.ast-onsale-card {
   display: none !important;
