@@ -1,6 +1,7 @@
 <?php
 namespace Essential_Addons_Elementor\Extensions;
 use Elementor\Controls_Manager;
+use Elementor\Element_Base;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -37,19 +38,24 @@ class Vertical_Text_Orientation {
 		);
 
         $element->add_control(
-			'eael_vto_writing_mode',
-			[
-				'label'   => esc_html__( 'Writing Mode', 'essential-addons-for-elementor-lite' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'vertical_rl',
-				'options' => [
-					'horizontal'  => esc_html__( 'Horizontal', 'essential-addons-for-elementor-lite' ),
-					'vertical_rl' => esc_html__( 'Vertical RL', 'essential-addons-for-elementor-lite' ),
-					'vertical_lr' => esc_html__( 'Vertical LR', 'essential-addons-for-elementor-lite' ),
-				],
-				'prefix_class' => 'eael_vto-',
-			]
-		);
+            'eael_vto_writing_mode',
+            [
+                'label'   => esc_html__( 'Writing Mode', 'essential-addons-for-elementor-lite' ),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'vertical-lr',
+                'options' => [
+                    'vertical-lr' => esc_html__( 'Vertical LR', 'essential-addons-for-elementor-lite' ),
+                    'vertical-rl' => esc_html__( 'Vertical RL', 'essential-addons-for-elementor-lite' ),
+                ],
+                'selectors' => [
+                    '{{WRAPPER}}.eael_vto-vertical-lr, {{WRAPPER}}.eael_vto-vertical-rl' => 'writing-mode: {{VALUE}};',
+                ],
+                'prefix_class' => 'eael_vto-vertical eael_vto-',
+                'condition' => [
+                    'eael_vertical_text_orientation_switch' => 'yes',
+                ],
+            ]
+        );
 
 		
 		$element->end_controls_section();
