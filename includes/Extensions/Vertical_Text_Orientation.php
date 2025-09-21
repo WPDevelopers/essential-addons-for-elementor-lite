@@ -118,6 +118,50 @@ class Vertical_Text_Orientation {
 				],
 			]
 		);
+
+        $element->add_control(
+			'eael_vto_writing_letter_spacing',
+			[
+				'label'      => esc_html__( 'Letter Spacing', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'range'      => [
+					'px' => [
+						'min'  => -100,
+						'max'  => 100,
+						'step' => 1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}}.eael_vto-vertical-lr, {{WRAPPER}}.eael_vto-vertical-rl' => 'letter-spacing: {{SIZE}}{{UNIT}};',
+				],
+                'condition' => [
+					'eael_vertical_text_orientation_switch' => 'yes',
+				],
+			]
+		);
+
+        $element->add_control(
+			'eael_vto_writing_word_spacing',
+			[
+				'label'      => esc_html__( 'Word Spacing', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'range'      => [
+					'px' => [
+						'min'  => -100,
+						'max'  => 100,
+						'step' => 1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title' => 'word-spacing: {{SIZE}}{{UNIT}};',
+				],
+                'condition' => [
+					'eael_vertical_text_orientation_switch' => 'yes',
+				],
+			]
+		);
 		
 		$element->end_controls_section();
 	}
