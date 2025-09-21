@@ -258,12 +258,13 @@ class Image_Masking {
             [
                 'label' => esc_html__( 'Size', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::SELECT,
-                'default' => '',
+                'default' => 'contain',
                 'options' => [
                     ''        => esc_html__( 'Default', 'essential-addons-for-elementor-lite' ),
                     'auto'    => esc_html__( 'Auto', 'essential-addons-for-elementor-lite' ),
                     'cover'   => esc_html__( 'Cover', 'essential-addons-for-elementor-lite' ),
                     'contain' => esc_html__( 'Contain', 'essential-addons-for-elementor-lite' ),
+                    'custom'  => esc_html__( 'Custom', 'essential-addons-for-elementor-lite' ),
                 ],
                 'condition' => [
                     'eael_enable_image_masking' => 'yes',
@@ -272,6 +273,34 @@ class Image_Masking {
                 'selectors' => [
                     '{{WRAPPER}} img' => 'mask-size: {{VALUE}}; -webkit-mask-size: {{VALUE}};',
                 ],
+            ]
+        );
+
+        $element->add_control(
+            'eael_image_masking_image_custom_size_custom',
+            [
+                'label' => '',
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%' ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1000,
+                        'step' => 5,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} img' => 'mask-size: {{SIZE}}{{UNIT}}; -webkit-mask-size: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_enable_image_masking' => 'yes',
+					'eael_image_masking_type' => 'image',
+                    'eael_image_masking_image_size' => 'custom'
+				],
             ]
         );
 
