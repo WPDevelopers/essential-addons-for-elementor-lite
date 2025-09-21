@@ -675,7 +675,7 @@ class Adv_Tabs extends Widget_Base
             'eael_adv_tabs_tab_color',
             [
                 'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
+                'type' => Controls_Manager::HIDDEN,
                 'default' => '#f1f1f1',
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'background-color: {{VALUE}};',
@@ -706,7 +706,7 @@ class Adv_Tabs extends Widget_Base
             [
                 'name' => 'eael_adv_tabs_tab_bgtype',
                 'types' => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li',
+                'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.eael-tab-nav-item',
             ]
         );
         $this->add_control(
@@ -767,7 +767,7 @@ class Adv_Tabs extends Widget_Base
             'eael_adv_tabs_tab_color_hover',
             [
                 'label' => esc_html__('Tab Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
+                'type' => Controls_Manager::HIDDEN,
                 'default' => '#333',
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover' => 'background-color: {{VALUE}};',
@@ -798,7 +798,7 @@ class Adv_Tabs extends Widget_Base
             [
                 'name' => 'eael_adv_tabs_tab_bgtype_hover',
                 'types' => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover',
+                'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.eael-tab-nav-item:hover',
             ]
         );
         $this->add_control(
@@ -859,10 +859,10 @@ class Adv_Tabs extends Widget_Base
             'eael_adv_tabs_tab_color_active',
             [
                 'label' => esc_html__('Tab Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
+                'type' => Controls_Manager::HIDDEN,
                 'default' => '#444',
                 'selectors' => [
-                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul .active' => 'background-color: {{VALUE}};',
                 ],
                 'condition' => [
                     'eael_adv_tab_new_style!' => 'glassey',
@@ -992,7 +992,7 @@ class Adv_Tabs extends Widget_Base
             'adv_tabs_content_bg_color',
             [
                 'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
+                'type' => Controls_Manager::HIDDEN,
                 'default' => '',
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-content > div' => 'background-color: {{VALUE}};',
@@ -1004,7 +1004,7 @@ class Adv_Tabs extends Widget_Base
             [
                 'name' => 'adv_tabs_content_bgtype',
                 'types' => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-content > div',
+                'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-content > div.eael-tab-content-item',
             ]
         );
         $this->add_control(

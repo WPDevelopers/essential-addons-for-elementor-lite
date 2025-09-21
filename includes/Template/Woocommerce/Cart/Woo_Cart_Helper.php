@@ -1,6 +1,7 @@
 <?php
 
 namespace Essential_Addons_Elementor\Template\Woocommerce\Cart;
+use Elementor\Icons_Manager;
 use \Essential_Addons_Elementor\Classes\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -45,27 +46,34 @@ trait Woo_Cart_Helper {
             </div>
 
             <div class="eael-woo-cart-table-warp">
-                <table class="shop_table cart woocommerce-cart-form__contents eael-woo-cart-table">
-                    <thead>
-                    <tr>
+                <div class="shop_table cart woocommerce-cart-form__contents eael-woo-cart-table">
+                    <div class="eael-wc-table-header">
+                    <div class="eael-wct-tr">
 				        <?php
 				        if ( ! empty( $settings['table_items'] ) && is_array( $settings['table_items'] ) ) {
 					        foreach ( $settings['table_items'] as $column_data ) {
 						        $item_class = "elementor-repeater-item-{$column_data['_id']}";
 						        ?>
-                                <th class="<?php echo esc_attr( "product-{$column_data['column_type']} {$item_class}" ); ?>">
+                                <div class="eael-wct-th <?php echo esc_attr( "product-{$column_data['column_type']} {$item_class}" ); ?>">
 							        <?php
 							        $title = apply_filters( "eael_woo_cart_table_{$column_data['column_type']}_title", $column_data['column_heading_title'] );
-							        echo esc_html( $title );
+
+									if ( 'remove' === $column_data['column_type'] ) {
+										echo '<a class="remove">';
+										Icons_Manager::render_icon( $column_data['item_remove_icon'], [ 'aria-hidden' => 'true' ] );
+										echo '</a>';
+									} else {
+										echo esc_html( $title );
+									}
 							        ?>
-                                </th>
+                                </div>
 						        <?php
 					        }
 				        }
 				        ?>
-                    </tr>
-                    </thead>
-                    <tbody>
+                    </div>
+                    </div>
+                    <div class="eael-wc-table-body">
 			        <?php
 			        do_action( 'woocommerce_before_cart_contents' );
 
@@ -80,7 +88,7 @@ trait Woo_Cart_Helper {
 						        $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item,
 						        $cart_item_key );
 					        ?>
-                            <tr class="woocommerce-cart-form__cart-item <?php echo esc_attr( apply_filters( 'woocommerce_cart_item_class',
+                            <div class="eael-wct-tr woocommerce-cart-form__cart-item <?php echo esc_attr( apply_filters( 'woocommerce_cart_item_class',
 						        'cart_item', $cart_item, $cart_item_key ) ); ?>">
 						        <?php
 						        if ( ! empty( $settings['table_items'] ) && is_array( $settings['table_items'] ) ) {
@@ -89,7 +97,7 @@ trait Woo_Cart_Helper {
 
 								        switch ( $column_data['column_type'] ) {
 									        case 'remove': ?>
-                                                <td class="product-remove <?php echo esc_attr( $item_class ); ?>">
+                                                <div class="eael-wct-td product-remove <?php echo esc_attr( $item_class ); ?>">
 											        <?php
 											        echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 												        'woocommerce_cart_item_remove_link',
@@ -104,11 +112,11 @@ trait Woo_Cart_Helper {
 												        $cart_item_key
 											        );
 											        ?>
-                                                </td>
+                                                </div>
 										        <?php
 										        break;
 									        case 'thumbnail': ?>
-                                                <td class="product-thumbnail <?php echo esc_attr( $item_class ); ?>">
+                                                <div class="eael-wct-td product-thumbnail <?php echo esc_attr( $item_class ); ?>">
 											        <?php
 											        $thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
 
@@ -120,11 +128,11 @@ trait Woo_Cart_Helper {
 												        printf( '<a href="%s">%s</a>', esc_url( $product_permalink ), $thumbnail ); // PHPCS: XSS ok.
 											        }
 											        ?>
-                                                </td>
+                                                </div>
 										        <?php
 										        break;
 									        case 'name': ?>
-                                                <td class="product-name <?php echo esc_attr( $item_class ); ?>">
+                                                <div class="eael-wct-td product-name <?php echo esc_attr( $item_class ); ?>">
 											        <?php
 											        if ( ! $product_permalink ) {
 												        echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name',
@@ -152,22 +160,22 @@ trait Woo_Cart_Helper {
 													        . '</p>', $product_id ) );
 											        }
 											        ?>
-                                                </td>
+                                                </div>
 										        <?php
 										        break;
 									        case 'price': ?>
-                                                <td class="product-price <?php echo esc_attr( $item_class ); ?>">
+                                                <div class="eael-wct-td product-price <?php echo esc_attr( $item_class ); ?>">
 											        <?php
 													// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 											        echo apply_filters( 'woocommerce_cart_item_price',
 												        WC()->cart->get_product_price( $_product ), $cart_item,
 												        $cart_item_key ); // PHPCS: XSS ok.
 											        ?>
-                                                </td>
+                                                </div>
 										        <?php
 										        break;
 									        case 'quantity': ?>
-                                                <td class="product-quantity <?php echo esc_attr( $item_class ); ?>">
+                                                <div class="eael-wct-td product-quantity <?php echo esc_attr( $item_class ); ?>">
 											        <?php
 											        if ( $_product->is_sold_individually() ) {
 												        $product_quantity = sprintf( '1 <input type="hidden" name="cart[%s][qty]" value="1" />', $cart_item_key );
@@ -188,11 +196,11 @@ trait Woo_Cart_Helper {
 											        echo apply_filters( 'woocommerce_cart_item_quantity', $product_quantity,
 												        $cart_item_key, $cart_item ); // PHPCS: XSS ok.
 											        ?>
-                                                </td>
+                                                </div>
 										        <?php
 										        break;
 									        case 'subtotal': ?>
-                                                <td class="product-subtotal <?php echo esc_attr( $item_class ); ?>">
+                                                <div class="eael-wct-td product-subtotal <?php echo esc_attr( $item_class ); ?>">
 											        <?php
 													// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 											        echo apply_filters( 'woocommerce_cart_item_subtotal',
@@ -200,22 +208,22 @@ trait Woo_Cart_Helper {
 												        $cart_item,
 												        $cart_item_key ); // PHPCS: XSS ok.
 											        ?>
-                                                </td>
+                                                </div>
 										        <?php
 										        break;
 								        }
 							        }
 						        }
 						        ?>
-                            </tr>
+                            </div>
 					        <?php
 				        }
 			        }
 
 			        do_action( 'woocommerce_cart_contents' );
 			        do_action( 'woocommerce_after_cart_contents' ); ?>
-                    </tbody>
-                </table>
+                    </div>
+                </div>
             </div>
 			<?php
 			do_action( 'woocommerce_after_cart_table' );

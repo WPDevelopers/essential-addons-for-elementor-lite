@@ -908,31 +908,6 @@ class Pricing_Table extends Widget_Base
             ]
         );
 
-        $this->add_responsive_control(
-            'eael_pricing_table_content_button_alignment',
-            [
-                'label'        => esc_html__('Button Alignment', 'essential-addons-for-elementor-lite'),
-                'type'         => Controls_Manager::CHOOSE,
-                'label_block'  => true,
-                'options'      => [
-                    'left'   => [
-                        'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'eicon-text-align-left',
-                    ],
-                    'center' => [
-                        'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'eicon-text-align-center',
-                    ],
-                    'right'  => [
-                        'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'eicon-text-align-right',
-                    ],
-                ],
-                'default'      => 'center',
-                'prefix_class' => 'eael-pricing-button-align%s-',
-            ]
-        );
-
         $this->end_controls_section();
 
         /**
@@ -1081,6 +1056,113 @@ class Pricing_Table extends Widget_Base
                 'selector'  => '{{WRAPPER}} .eael-pricing.style-4 .eael-pricing-item .header, {{WRAPPER}} .eael-pricing.style-5 .eael-pricing-item .header',
                 'condition' => [
                     'eael_pricing_table_style' => apply_filters('eael_pricing_table_header_bg_supported_style', ['style-4']),
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_pricing_table_devider_heading',
+            [
+                'label' => esc_html__( 'Divider', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+                'condition' => [
+                    'eael_pricing_table_style' => ['style-1', 'style-3'],
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_pricing_table_devider_show',
+            [
+                'label' => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+                'label_off' => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+                'return_value' => 'yes',
+                'default' => 'yes',
+                'condition' => [
+                    'eael_pricing_table_style' => ['style-1', 'style-3'],
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_pricing_table_devider_color',
+            [
+                'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#dbdbdb',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-pricing.style-1 .eael-pricing-item .header:after, {{WRAPPER}} .eael-pricing.style-3 .eael-pricing-item .header:after' => 'background: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_pricing_table_style' => ['style-1', 'style-3'],
+                    'eael_pricing_table_devider_show' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_pricing_table_devider_width',
+            [
+                'label'      => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%' ],
+                'range'      => [
+                    'px' => [
+                        'min' => 1,
+                        'max' => 100,
+                    ],
+                    '%'  => [
+                        'min' => 1,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-pricing.style-1 .eael-pricing-item .header:after, {{WRAPPER}} .eael-pricing.style-3 .eael-pricing-item .header:after' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_pricing_table_style' => ['style-1', 'style-3'],
+                    'eael_pricing_table_devider_show' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_pricing_table_devider_height',
+            [
+                'label'      => esc_html__( 'Height', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::SLIDER,
+                'size_units' => [ 'px' ],
+                'range'      => [
+                    'px' => [
+                        'min' => 1,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-pricing.style-1 .eael-pricing-item .header:after, {{WRAPPER}} .eael-pricing.style-3 .eael-pricing-item .header:after' => 'height: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_pricing_table_style' => ['style-1', 'style-3'],
+                    'eael_pricing_table_devider_show' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_pricing_table_devider_border_radius',
+            [
+                'label' => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px' ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-pricing.style-1 .eael-pricing-item .header:after, {{WRAPPER}} .eael-pricing.style-3 .eael-pricing-item .header:after' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_pricing_table_style' => ['style-1', 'style-3'],
+                    'eael_pricing_table_devider_show' => 'yes',
                 ],
             ]
         );
@@ -1286,6 +1368,39 @@ class Pricing_Table extends Widget_Base
         );
 
         $this->add_control(
+            'eael_pricing_table_list_item_align',
+            [
+                'label'     => esc_html__('Alignment', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::CHOOSE,
+                'options'   => [
+                    'left'   => [
+                        'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-text-align-left',
+                    ],
+                    'center' => [
+                        'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-text-align-center',
+                    ],
+                    'right'  => [
+                        'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-text-align-right',
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-pricing-item .body ul li.eael-pricing-item-feature' => 'justify-content: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_pricing_table_list_item_typography',
+                'selector' => '{{WRAPPER}} .eael-pricing-item .body ul li',
+            ]
+        );
+
+        $this->add_control(
             'eael_pricing_table_list_item_color',
             [
                 'label'     => esc_html__('Color', 'essential-addons-for-elementor-lite'),
@@ -1365,10 +1480,46 @@ class Pricing_Table extends Widget_Base
         );
 
         $this->add_group_control(
-            Group_Control_Typography::get_type(),
+            Group_Control_Border::get_type(),
             [
-                'name'     => 'eael_pricing_table_list_item_typography',
+                'name' => 'eael_pricing_table_list_item_border',
                 'selector' => '{{WRAPPER}} .eael-pricing-item .body ul li',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_pricing_table_list_item_border_radius',
+            [
+                'label'      => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-pricing-item .body ul li' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_pricing_table_list_item_padding',
+            [
+                'label'      => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-pricing-item .body ul li' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_pricing_table_list_item_margin',
+            [
+                'label'      => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-pricing-item .body ul li' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
             ]
         );
 
@@ -1939,6 +2090,32 @@ class Pricing_Table extends Widget_Base
             ]
         );
 
+
+        $this->add_responsive_control(
+            'eael_pricing_table_content_button_alignment',
+            [
+                'label'        => esc_html__('Button Alignment', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::CHOOSE,
+                'label_block'  => true,
+                'options'      => [
+                    'left'   => [
+                        'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-text-align-left',
+                    ],
+                    'center' => [
+                        'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-text-align-center',
+                    ],
+                    'right'  => [
+                        'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
+                        'icon'  => 'eicon-text-align-right',
+                    ],
+                ],
+                'default'      => 'center',
+                'prefix_class' => 'eael-pricing-button-align%s-',
+            ]
+        );
+
         $this->add_responsive_control(
             'eael_pricing_table_btn_padding',
             [
@@ -2179,7 +2356,7 @@ class Pricing_Table extends Widget_Base
                 $obj->add_render_attribute(
                     'pricing_feature_item' . $counter, 
                     [ 
-                        'class' => 'elementor-repeater-item-' . esc_attr( $item['_id'] ),
+                        'class' => [ 'eael-pricing-item-feature', 'elementor-repeater-item-' . esc_attr( $item['_id'] ) ]
                     ]
                 );
 
@@ -2262,6 +2439,18 @@ class Pricing_Table extends Widget_Base
 	    $settings['eael_pricing_table_price_cur'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_price_cur']);
 	    $settings['eael_pricing_table_btn'] = HelperClass::eael_wp_kses($settings['eael_pricing_table_btn']);
         $button_url = ! empty( $settings['eael_pricing_table_btn_link']['url'] ) ? $settings['eael_pricing_table_btn_link']['url'] : '';
+        $has_devider = isset( $settings['eael_pricing_table_devider_show'] ) && 'yes' === $settings['eael_pricing_table_devider_show'];
+
+        $this->add_render_attribute('eael_pricing', [ 'class' => [ 'eael-pricing', $settings['eael_pricing_table_style'] ] ]);
+
+        if( $inline_style ){
+            $this->add_render_attribute('eael_pricing', [ 'style' => 'overflow: hidden;' ]);
+        }
+
+        if( ( 'style-1' === $settings['eael_pricing_table_style'] || 'style-3' === $settings['eael_pricing_table_style'] ) && $has_devider ){
+            $this->add_render_attribute('eael_pricing', [ 'class' => [ 'eael-header-devider' ] ]);
+        }
+
         
         $this->add_render_attribute('eael_pricing_button', [ 'class' => [ 'eael-pricing-button' ] ]);
 
@@ -2310,7 +2499,7 @@ class Pricing_Table extends Widget_Base
         }
     ?>
         <?php if ('style-1' === $settings['eael_pricing_table_style']) : ?>
-            <div class="eael-pricing style-1" <?php echo $inline_style ? 'style="overflow: hidden;"' : ''; ?>>
+            <div <?php $this->print_render_attribute_string('eael_pricing'); ?>>
                 <div class="eael-pricing-item <?php echo esc_attr($featured_class); ?>">
                     <div class="header">
                         <h2 class="title"><?php echo wp_kses( $settings['eael_pricing_table_title'], HelperClass::eael_allowed_tags() ); ?></h2>
@@ -2350,7 +2539,7 @@ class Pricing_Table extends Widget_Base
             </div>
         <?php endif; ?>
         <?php if ('style-2' === $settings['eael_pricing_table_style']) : ?>
-            <div class="eael-pricing style-2" <?php echo $inline_style ? 'style="overflow: hidden;"' : ''; ?>>
+            <div <?php $this->print_render_attribute_string('eael_pricing'); ?>>
                 <div class="eael-pricing-item <?php echo esc_attr($featured_class); ?>">
                     <div class="eael-pricing-icon">
                         <span class="icon" style="background:<?php if ('yes' != $settings['eael_pricing_table_icon_bg_show']) : echo 'none';
