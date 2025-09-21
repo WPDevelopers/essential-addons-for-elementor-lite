@@ -160,11 +160,11 @@
   height: auto !important;
 }
 
-.theme-martfury .elementor-wc-products .woocommerce ul.products li.product .product-inner .mf-rating .eael-star-rating.star-rating {
+.theme-martfury .elementor-wc-products .woocommerce ul.products li.product .product-inner .mf-rating .eael-star-rating.star-rating ~ .count {
   display: none;
 }
 
-.theme-martfury .elementor-wc-products .woocommerce ul.products li.product .product-inner .mf-rating .eael-star-rating.star-rating ~ .count {
+.theme-martfury .elementor-wc-products .woocommerce ul.products li.product .product-inner .mf-rating .eael-star-rating.star-rating {
   display: none;
 }
 

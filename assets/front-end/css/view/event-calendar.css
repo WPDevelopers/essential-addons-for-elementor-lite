@@ -484,11 +484,11 @@ span.fc-day-number {
   }
 }
 @media only screen and (max-width: 767px) {
-  .eael-event-calendar-wrapper .fc-dayGridMonth-view .fc-day-grid-event {
-    padding: 8px 0px 8px 0px !important;
-  }
   .eael-event-calendar-wrapper .fc-dayGridMonth-view .fc-day-grid-event .fc-content {
     font-size: 12px;
+  }
+  .eael-event-calendar-wrapper .fc-dayGridMonth-view .fc-day-grid-event {
+    padding: 8px 0px 8px 0px !important;
   }
   .eael-event-calendar-wrapper .fc-daygrid.fc-dayGridMonth-view.fc-view {
     overflow: auto;
