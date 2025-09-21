@@ -87,6 +87,22 @@ class Image_Masking {
 
     private function masking_controllers( $element, $tab = '' ) {
 
+        $condition = [];
+        if( '_hover' === $tab ) {
+            $element->add_control(
+                'eael_image_masking_hover_effect',
+                [
+                    'label' => esc_html__( 'Enable', 'essential-addons-for-elementor-lite' ),
+                    'type' => Controls_Manager::SWITCHER,
+                    'return_value' => 'yes',
+                ]
+            );
+            $condition = [
+				'eael_image_masking_hover_effect' => 'yes',
+			];
+        }
+
+        $condition['eael_image_masking_type'] = 'clip';
         $element->add_control(
             'eael_image_masking_clip_path' . $tab,
             [
@@ -95,12 +111,11 @@ class Image_Masking {
                 'label_block' => true,
                 'options'     => $this->get_clip_path_options(),
                 'default'     => $tab !== '_hover' ? 'circle' : 'inset',
-                'condition'   => [
-					'eael_image_masking_type' => 'clip'
-				]
+                'condition'   => $condition
             ]
         );
 
+        $condition['eael_image_masking_clip_path' . $tab] = 'custom';
         $element->add_control(
             'eael_image_masking_custom_clip_path' . $tab,
             [
@@ -117,13 +132,14 @@ class Image_Masking {
                 'default'     => 'clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);',
                 'placeholder' => 'clip-path: polygon(50% 0%, 0% 100%, 100% 100%);',
                 'description' => __( 'Enter your custom clip path value. You can use <a href = "https://bennettfeely.com/clippy/" target = "_blank">Clippy</a> to generate your custom clip path.', 'essential-addons-for-elementor-lite' ),
-                'condition'   => [
-					'eael_image_masking_type'      => 'clip',
-					'eael_image_masking_clip_path' . $tab => 'custom'
-				],
+                'condition'   => $condition,
             ]
         );
 
+        $condition = [ 'eael_image_masking_type' => 'image' ];
+        if( '_hover' === $tab ){
+            $condition['eael_image_masking_hover_effect'] = 'yes';
+        }
 		$element->add_control(
 			'eael_image_masking_image' . $tab,
 			[
@@ -135,9 +151,7 @@ class Image_Masking {
                 'ai' => [
 					'active' => false,
 				],
-				'condition' => [
-					'eael_image_masking_type' => 'image'
-				]
+				'condition' => $condition
 			]
 		);
 
@@ -156,6 +170,9 @@ class Image_Masking {
                     ],
                     'placeholder' => '.not-masked-element, #not-masked-element',
                     'description' => __( 'Enter the selector for the element you want to apply the hover effect on. If you leave this field empty, the hover effect will be applied on hover for full section.', 'essential-addons-for-elementor-lite' ),
+                    'condition'   => [
+                        'eael_image_masking_hover_effect' => 'yes',
+                    ]
                 ]
             );
         }
@@ -652,14 +669,22 @@ class Image_Masking {
                 if( $clip_path_value ) {
                     $style .= '.eael-image-masking-'.$element_id.' img {clip-path: '.$clip_path_value.'}';
                 }
-
-                $hover_clip_path = $settings['eael_image_masking_clip_path_hover'];
-                $hover_clip_path_value = $this->clip_paths( $hover_clip_path );
-                if( 'custom' === $hover_clip_path ){
-                    $hover_clip_path_value = $settings['eael_image_masking_custom_clip_path_hover'];
-                    $hover_clip_path_value = str_replace( 'clip-path: ', '', $hover_clip_path_value );
-                }
-                if( $hover_clip_path_value ) {
+    
+                if( 'yes' === $settings['eael_image_masking_hover_effect'] ){
+                    $hover_clip_path = $settings['eael_image_masking_clip_path_hover'];
+                    $hover_clip_path_value = $this->clip_paths( $hover_clip_path );
+                    if( 'custom' === $hover_clip_path ){
+                        $hover_clip_path_value = $settings['eael_image_masking_custom_clip_path_hover'];
+                        $hover_clip_path_value = str_replace( 'clip-path: ', '', $hover_clip_path_value );
+                    }
+                    if( $hover_clip_path_value ) {
+                        $hover_selector = $settings['eael_image_masking_hover_selector'];
+                        if( $hover_selector ){
+                            $hover_selector = ' ' . trim( $hover_selector );
+                        }
+                        $style .= '.eael-image-masking-'.$element_id.$hover_selector.':hover img {clip-path: '.$hover_clip_path_value.'}';
+                    }
+                    
                     $hover_selector = $settings['eael_image_masking_hover_selector'];
                     if( $hover_selector ){
                         $hover_selector = ' ' . trim( $hover_selector );
@@ -671,13 +696,16 @@ class Image_Masking {
                 if( $image['url'] ) {
                     $style .= '.eael-image-masking-'.$element_id.' img {mask-image: url('.$image['url'].'); -webkit-mask-image: url('.$image['url'].');}';
                 }
-                $hover_image = $element->get_settings_for_display( 'eael_image_masking_image_hover' );
-                if( $hover_image['url'] ) {
-                    $hover_selector = $element->get_settings_for_display( 'eael_image_masking_hover_selector' );
-                    if( $hover_selector ){
-                        $hover_selector = ' ' . trim( $hover_selector );
+
+                if( 'yes' === $settings['eael_image_masking_hover_effect'] ){
+                    $hover_image = $element->get_settings_for_display( 'eael_image_masking_image_hover' );
+                    if( $hover_image['url'] ) {
+                        $hover_selector = $element->get_settings_for_display( 'eael_image_masking_hover_selector' );
+                        if( $hover_selector ){
+                            $hover_selector = ' ' . trim( $hover_selector );
+                        }
+                        $style .= '.eael-image-masking-'.$element_id. $hover_selector .':hover img {mask-image: url('.$hover_image['url'].'); -webkit-mask-image: url('.$hover_image['url'].');}';
                     }
-                    $style .= '.eael-image-masking-'.$element_id. $hover_selector .':hover img {mask-image: url('.$hover_image['url'].'); -webkit-mask-image: url('.$hover_image['url'].');}';
                 }
 			} else if( 'morphing' === $type ) {
                 $morphing_type = $settings['eael_morphing_type'];
