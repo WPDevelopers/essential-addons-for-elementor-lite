@@ -107,12 +107,12 @@ let ImageMaskingHandler = function ($scope, $) {
                 if( 'yes' === settings?.eael_image_masking_hover_effect ){
                     let hoverImage = settings?.eael_image_masking_image_hover;
                     if( hoverImage?.url ) {
-                        let hoverSelector = settings?.eael_image_masking_hover_selector;
-                        if( hoverSelector ){
-                            hoverSelector = ' ' + hoverSelector.trim();
+                        let hover_selector = settings?.eael_image_masking_hover_selector;
+                        if( hover_selector ){
+                            hover_selector = ' ' + hover_selector.trim();
                         }
                     }
-                    style += '.elementor-element-' + elementId + hoverSelector + ':hover img {mask-image: url(' + hoverImage.url + '); -webkit-mask-image: url(' + hoverImage.url + ');}';
+                    style += '.elementor-element-' + elementId + hover_selector + ':hover img {mask-image: url(' + hoverImage.url + '); -webkit-mask-image: url(' + hoverImage.url + ');}';
                 }
             }  else if( 'morphing' === settings?.eael_image_masking_type ){
                 let morphingType = settings?.eael_morphing_type;
@@ -301,7 +301,8 @@ let ImageMaskingHandler = function ($scope, $) {
                     });
                 }
             }
-
+            console.log('style', style);
+            
             if( style ){
                 element.append('<style id="' + styleId + '">' + style + '</style>');
             }
