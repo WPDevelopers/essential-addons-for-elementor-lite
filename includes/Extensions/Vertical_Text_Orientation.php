@@ -162,6 +162,50 @@ class Vertical_Text_Orientation {
 				],
 			]
 		);
+
+        $element->add_control(
+			'eael_vto_writing_text_indent',
+			[
+				'label'      => esc_html__( 'Text Indent', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'range'      => [
+					'px' => [
+						'min'  => -100,
+						'max'  => 100,
+						'step' => 1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title' => 'text-indent: {{SIZE}}{{UNIT}};',
+				],
+                'condition' => [
+					'eael_vertical_text_orientation_switch' => 'yes',
+				],
+			]
+		);
+
+        $element->add_control(
+			'eael_vto_writing_line_height',
+			[
+				'label'      => esc_html__( 'Line Height', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'range'      => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 100,
+						'step' => 1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title' => 'line-height: {{SIZE}}{{UNIT}};',
+				],
+                'condition' => [
+					'eael_vertical_text_orientation_switch' => 'yes',
+				],
+			]
+		);
 		
 		$element->end_controls_section();
 	}
