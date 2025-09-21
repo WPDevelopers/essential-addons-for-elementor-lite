@@ -18,10 +18,13 @@
 
 .eael-grid-post-holder-inner {
 	height: 100%;
+	display: flex;
+	flex-direction: column;
 }
 
 .eael-entry-media {
 	position: relative;
+	order: -1;
 }
 
 .eael-entry-overlay {

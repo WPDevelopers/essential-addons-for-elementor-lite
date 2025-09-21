@@ -127,15 +127,15 @@
 }
 
 @media screen and (max-width: 800px) {
-   .eael-img-accordion {
+   .eael-img-accordion:not(.accordion-direction-horizontal) {
       flex-direction: column;
    }
 
-   .eael-img-accordion .eael-image-accordion-hover:hover {
+   .eael-img-accordion:not(.accordion-direction-horizontal) .eael-image-accordion-hover:hover {
       flex: 1;
    }
 
-   .eael-img-accordion .eael-image-accordion-hover:hover .overlay {
+   .eael-img-accordion:not(.accordion-direction-horizontal) .eael-image-accordion-hover:hover .overlay {
       background-color: transparent;
    }
 }
