@@ -206,6 +206,51 @@ class Vertical_Text_Orientation {
 				],
 			]
 		);
+
+        $element->add_control(
+			'eael_vto_writing_styling_heading',
+			[
+				'label' => esc_html__( 'Styling Options', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+                'condition' => [
+					'eael_vertical_text_orientation_switch' => 'yes',
+				],
+			]
+		);
+
+        $element->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'name'     => 'eael_vto_writing_styling_background',
+				'types'    => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title',
+                'condition' => [
+					'eael_vertical_text_orientation_switch' => 'yes',
+				],
+			]
+		);
+
+        $element->add_control(
+			'eael_vto_writing_styling_text_clip',
+			[
+				'label'        => esc_html__( 'Text Clip', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+                'selectors_dictionary' => [
+					'yes' => 'text',
+				],
+                'selectors' => [
+                    '{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title' => 'background-clip: {{VALUE}}; color: transparent;',
+                ],
+				'condition' => [
+					'eael_vertical_text_orientation_switch' => 'yes',
+				],
+			]
+		);
 		
 		$element->end_controls_section();
 	}
