@@ -98,6 +98,26 @@ class Vertical_Text_Orientation {
 				],
 			]
 		);
+
+        $element->add_control(
+			'eael_vto_writing_text_orientation',
+			[
+				'label'        => esc_html__( 'Text Orientation', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+                'selectors_dictionary' => [
+					'yes' => 'upright',
+				],
+                'selectors' => [
+                    '{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title' => 'text-orientation: {{VALUE}};',
+                ],
+				'condition' => [
+					'eael_vertical_text_orientation_switch' => 'yes',
+				],
+			]
+		);
 		
 		$element->end_controls_section();
 	}
