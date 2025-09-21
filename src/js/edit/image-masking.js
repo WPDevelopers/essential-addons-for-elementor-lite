@@ -301,7 +301,6 @@ let ImageMaskingHandler = function ($scope, $) {
                     });
                 }
             }
-            console.log('style', style);
             
             if( style ){
                 element.append('<style id="' + styleId + '">' + style + '</style>');
