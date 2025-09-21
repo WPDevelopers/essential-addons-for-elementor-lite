@@ -76,6 +76,28 @@ class Vertical_Text_Orientation {
 				],
 			]
 		);
+
+        $element->add_control(
+			'eael_vto_writing_height',
+			[
+				'label'      => esc_html__( 'Height', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'range'      => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 1000,
+						'step' => 1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title' => 'inline-size: {{SIZE}}{{UNIT}};',
+				],
+                'condition' => [
+					'eael_vertical_text_orientation_switch' => 'yes',
+				],
+			]
+		);
 		
 		$element->end_controls_section();
 	}
