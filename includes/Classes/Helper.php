@@ -222,6 +222,30 @@ class Helper
 		    $args['meta_key'] = '_eael_post_view_count';
 	    }
 
+	    // Handle custom field sorting
+	    if ( $args['orderby'] === 'meta_value' && ! empty( $settings['meta_key'] ) ) {
+		    $args['meta_key'] = sanitize_text_field( $settings['meta_key'] );
+
+		    // Set the appropriate orderby based on meta_type
+		    $meta_type = ! empty( $settings['meta_type'] ) ? $settings['meta_type'] : 'CHAR';
+
+		    switch ( $meta_type ) {
+			    case 'NUMERIC':
+				    $args['orderby'] = 'meta_value_num';
+				    break;
+			    case 'DATE':
+			    case 'DATETIME':
+				    $args['orderby'] = 'meta_value';
+				    $args['meta_type'] = $meta_type;
+				    break;
+			    case 'CHAR':
+			    default:
+				    $args['orderby'] = 'meta_value';
+				    $args['meta_type'] = 'CHAR';
+				    break;
+		    }
+	    }
+
 	    if ( ! empty( $settings['authors'] ) ) {
 		    $args['author__in'] = $settings['authors'];
 	    }
@@ -321,7 +345,8 @@ class Helper
 		    'rand'          => __( 'Random', 'essential-addons-for-elementor-lite' ),
 		    'comment_count' => __( 'Comment Count', 'essential-addons-for-elementor-lite' ),
 		    'most_viewed'   => __( 'Most Viewed', 'essential-addons-for-elementor-lite' ),
-		    'menu_order'    => __( 'Menu Order', 'essential-addons-for-elementor-lite' )
+		    'menu_order'    => __( 'Menu Order', 'essential-addons-for-elementor-lite' ),
+		    'meta_value'    => __( 'Custom Field', 'essential-addons-for-elementor-lite' )
 	    );
 
         return $orderby;

@@ -891,6 +891,7 @@ class Woo_Product_Images extends Widget_Base {
 		$pi_data_settings['eael_image_zoom_effect'] = ! empty( $settings['eael_image_zoom_effect'] ) ? $settings['eael_image_zoom_effect'] : '';
 		$pi_data_settings['eael_zoom_effect_type'] = ! empty( $settings['eael_zoom_effect_type'] ) ? $settings['eael_zoom_effect_type'] : '';
 		$pi_data_settings['eael_zoom_lens_border_radius'] = ! empty( $settings['eael_zoom_lens_border_radius']['size'] ) ? $settings['eael_zoom_lens_border_radius']['size'] . $settings['eael_zoom_lens_border_radius']['unit'] : '8px';
+		$pi_data_settings['eael_zoom_lens_size'] = ! empty( $settings['eael_zoom_lens_size']['size'] ) ? $settings['eael_zoom_lens_size']['size'] : '';
 
 		return $pi_data_settings;
 	}
@@ -953,7 +954,7 @@ class Woo_Product_Images extends Widget_Base {
 				'type' => $image_settings['eael_zoom_effect_type'],
 				'lensBorderRadius' => $image_settings['eael_zoom_lens_border_radius'],
 				'lensBorder' => $border_style,
-				'lensSize' => isset( $image_settings['eael_zoom_lens_size']['size'] ) ? $image_settings['eael_zoom_lens_size']['size'] : '',
+				'lensSize' => $image_settings['eael_zoom_lens_size'] ?? '',
 			];
 		}
 

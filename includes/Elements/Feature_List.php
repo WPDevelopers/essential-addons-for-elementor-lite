@@ -446,6 +446,17 @@ class Feature_List extends Widget_Base {
             ]
         );
 
+        $this->add_control(
+            'eael_feature_list_auto_width',
+            [
+                'label'        => esc_html__( 'Width', 'essential-addons-for-elementor-lite' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => esc_html__( 'Auto', 'essential-addons-for-elementor-lite' ),
+                'label_off'    => esc_html__( 'Fixed', 'essential-addons-for-elementor-lite' ),
+                'return_value' => 'yes',
+            ]
+        );
+
         $this->add_responsive_control(
             'eael_feature_list_item_width',
             [
@@ -472,7 +483,8 @@ class Feature_List extends Widget_Base {
                     '{{WRAPPER}} .eael-feature-list-items[data-layout-mobile="horizontal"] .eael-feature-list-item' => 'width: {{SIZE}}{{UNIT}}',
                 ],
                 'condition'   => [
-                    'eael_feature_list_layout'      => 'horizontal',
+                    'eael_feature_list_layout' => 'horizontal',
+                    'eael_feature_list_auto_width!' => 'yes',
                 ],
             ]
         );
@@ -684,7 +696,8 @@ class Feature_List extends Widget_Base {
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-feature-list-icon-box .eael-feature-list-icon'     => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-feature-list-icon-box .eael-feature-list-icon i'   => 'font-size: {{SIZE}}{{UNIT}} !important;',
+                    '{{WRAPPER}} .eael-feature-list-icon-box .eael-feature-list-icon svg' => 'width: {{SIZE}}{{UNIT}} !important; height: {{SIZE}}{{UNIT}} !important;line-height: {{SIZE}}{{UNIT}} !important;',
                     '{{WRAPPER}} .eael-feature-list-icon-box .eael-feature-list-icon img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .eael-feature-list-img'                                  => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
                 ],
@@ -705,7 +718,7 @@ class Feature_List extends Widget_Base {
                     'isLinked' => true,
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .eael-feature-list-icon-box .eael-feature-list-icon' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-feature-list-icon-box .eael-feature-list-icon' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
                 ],
             ]
         );
