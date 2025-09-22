@@ -201,7 +201,7 @@ trait Admin {
 				    'heading' => __( 'Want Advanced Features?', 'essential-addons-for-elementor-lite' ),
 				    'content' => __( 'Get more powerful widgets & extensions to elevate your Elementor website', 'essential-addons-for-elementor-lite' ),
 				    'review'  => [
-					    'count' => __( '3400+', 'essential-addons-for-elementor-lite' ),
+					    'count' => __( '3700+', 'essential-addons-for-elementor-lite' ),
 					    'label' => __( 'Five Star Reviews', 'essential-addons-for-elementor-lite' )
 				    ],
 				    'button'  => [
@@ -369,7 +369,7 @@ trait Admin {
 				    'top_heading' => __( '2+ Million Active Users', 'essential-addons-for-elementor-lite' ),
 				    'heading'     => __( "Enhance Your Elementor Experience By <br/> <b>Unlocking</b> <span class='Advance-color'>40+ Advanced PRO</span> <b>Elements</b>", 'essential-addons-for-elementor-lite' ),
 				    'review'      => [
-					    'count' => __( '3400+', 'essential-addons-for-elementor-lite' ),
+					    'count' => __( '3700+', 'essential-addons-for-elementor-lite' ),
 					    'label' => __( 'Five Star Reviews', 'essential-addons-for-elementor-lite' )
 				    ],
 				    'button'      => [
@@ -621,6 +621,15 @@ trait Admin {
 						    'is_pro'      => false,
 						    'is_activate' => boolval( $this->get_settings( 'wrapper-link' ) )
 					    ],
+					    'custom-cursor'          => [
+						    'key'         => 'custom-cursor',
+						    'title'       => __( 'Custom Cursor', 'essential-addons-for-elementor-lite' ),
+						    'demo_link'   => 'https://essential-addons.com/custom-cursor/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-custom-cursor/',
+						    'is_pro'      => true,
+							'promotion'   => 'new',
+						    'is_activate' => boolval( $this->get_settings( 'custom-cursor' ) )
+					    ],
 					    'advanced-dynamic-tags' => [
 						    'key'         => 'advanced-dynamic-tags',
 						    'title'       => __( 'Dynamic Tags', 'essential-addons-for-elementor-lite' ),
@@ -646,7 +655,15 @@ trait Admin {
 						    'doc_link'    => 'https://essential-addons.com/docs/ea-hover-interaction/',
 						    'promotion'   => 'new',
 						    'is_activate' => boolval( $this->get_settings( 'special-hover-effect' ) )
-					    ]
+						 ],
+					    'liquid-glass-effect'  => [
+						    'key'         => 'liquid-glass-effect',
+						    'title'       => __( 'Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
+						    'demo_link'   => 'https://essential-addons.com/liquid-glass-effects/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-liquid-glass-effects/',
+						    'promotion'   => 'new',
+						    'is_activate' => boolval( $this->get_settings( 'liquid-glass-effect' ) )
+						 ],
 				    ]
 			    ],
 			    'widgets'                 => [
@@ -1514,17 +1531,69 @@ trait Admin {
 					    'value'      => get_option( 'eael_woo_ac_dashboard_custom_tabs', '' ),
 				    ],
 				    'businessReviewsSetting' => [
-					    'title'      => __( "Google Place API Key", 'essential-addons-for-elementor-lite' ),
-					    'title_icon' => 'images/map.svg',
-					    'label'      => __( "Set API Key", 'essential-addons-for-elementor-lite' ),
-					    'name'       => 'br_google_place_api_key',
-					    'value'      => get_option( 'eael_br_google_place_api_key', '' ),
-					    'image'      => 'images/map2.png',
-					    'link'       => [
+					    'accordion' => [
+						    'googlePlaces' => [
+							    'title'  => __( 'Google Places API', 'essential-addons-for-elementor-lite' ),
+							    'icon'   => 'images/map.svg',
+							    'fields' => [
+								    [
+									    'name'        => 'br_google_place_api_key',
+									    'value'       => get_option( 'eael_br_google_place_api_key', '' ),
+									    'label'       => __( 'API Key:', 'essential-addons-for-elementor-lite' ),
+									    'placeholder' => __( 'Enter Google Places API Key', 'essential-addons-for-elementor-lite' ),
+								    ],
+							    ],
+							    'info'   => __( 'Get your Google Places API key from Google Cloud Console. This is used for fetching Google Reviews.', 'essential-addons-for-elementor-lite' ),
+						    ],
+						    'trustpilot'   => [
+							    'title'  => __( 'Trustpilot API', 'essential-addons-for-elementor-lite' ),
+							    'icon'   => 'images/map.svg',
+							    'fields' => [
+								    [
+									    'name'        => 'br_trustpilot_api_key',
+									    'value'       => get_option( 'eael_br_trustpilot_api_key', '' ),
+									    'label'       => __( 'API Key:', 'essential-addons-for-elementor-lite' ),
+									    'placeholder' => __( 'Enter Trustpilot API Key', 'essential-addons-for-elementor-lite' ),
+								    ],
+							    ],
+							    'info'   => __( 'Get your Trustpilot API key from Trustpilot Developer Portal. This is used for fetching Trustpilot Reviews.', 'essential-addons-for-elementor-lite' ),
+							    'isPro'  => true,
+						    ],
+						    'yelp'         => [
+							    'title'  => __( 'Yelp Fusion API', 'essential-addons-for-elementor-lite' ),
+							    'icon'   => 'images/map.svg',
+							    'fields' => [
+								    [
+									    'name'        => 'br_yelp_api_key',
+									    'value'       => get_option( 'eael_br_yelp_api_key', '' ),
+									    'label'       => __( 'API Key:', 'essential-addons-for-elementor-lite' ),
+									    'placeholder' => __( 'Enter Yelp Fusion API Key', 'essential-addons-for-elementor-lite' ),
+								    ],
+							    ],
+							    'info'   => __( 'Get your Yelp Fusion API key from Yelp Developers. This is used for fetching Yelp Reviews.', 'essential-addons-for-elementor-lite' ),
+							    'isPro'  => true,
+						    ],
+					    ],
+					    'link'      => [
 						    'text' => __( 'To configure the API Keys, check out this doc', 'essential-addons-for-elementor-lite' ),
-						    'url'  => 'https://developers.google.com/maps/documentation/places/web-service/get-api-key'
+						    'url'  => 'https://essential-addons.com/docs/ea-business-reviews/'
 					    ]
 				    ],
+				    'googleMyBusinessTokenSetting' => [
+					    'title'      => __( "Google My Business Access Token", 'essential-addons-for-elementor-lite' ),
+					    'title_icon' => 'images/map.svg',
+					    'label'      => __( "Set Access Token", 'essential-addons-for-elementor-lite' ),
+					    'name'       => 'br_google_my_business_token',
+					    'type'       => 'textarea',
+					    'placeholder'=> __( "ya29.a0AfH6SMC...", 'essential-addons-for-elementor-lite' ),
+					    'value'      => get_option( 'eael_br_google_my_business_token', '' ),
+					    'image'      => 'images/map2.png',
+					    'link'       => [
+						    'text' => __( 'Get your access token from Google OAuth 2.0 Playground', 'essential-addons-for-elementor-lite' ),
+						    'url'  => 'https://developers.google.com/oauthplayground/'
+					    ]
+				    ],
+
 				    'mailchimpSetting'       => [
 					    'title'      => __( "MailChimp API Key", 'essential-addons-for-elementor-lite' ),
 					    'title_icon' => 'images/mc.svg',
@@ -1689,7 +1758,7 @@ trait Admin {
 			    ],
 			    'admin_screen_promo'      => [
 				    'display' => get_option( 'eael_admin_promotion' ) < self::EAEL_PROMOTION_FLAG,
-				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.4 with new \"<b><a target='_blank' href='%s'>Figma to Elementor Converter (Beta)</a></b>\" widget. For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url( 'https://essential-addons.com/figma-to-elementor-converter/' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
+				    'content' => sprintf( __( "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.6 with new \"<b><a target='_blank' href='%s'>Custom Cursor</a></b>\" extension. For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>", "essential-addons-for-elementor-lite" ),  esc_url( 'https://essential-addons.com/custom-cursor' ), esc_url( 'https://essential-addons.com/view-ea-changelog' ) )
 			    ],
 			    'pro_modal'               => [
 				    'heading' => __( 'Unlock the PRO Features', 'essential-addons-for-elementor-lite' ),

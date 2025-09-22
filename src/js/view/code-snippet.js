@@ -551,6 +551,13 @@ var CodeSnippet = function ($scope, $) {
          subtree: true,
       });
    }
+
+
+   $scope.find(".eael-code-snippet-collapsed-indicator").on("click", function () {
+      const codeSnippet = jQuery(this).closest(".eael-code-snippet-wrapper");
+      codeSnippet.toggleClass("view-mode-expanded view-mode-collapsed");
+      $(this).toggleClass("eael-cs-code-collapsed eael-cs-code-expanded");
+   });
 }
 
 jQuery(window).on("elementor/frontend/init", function () {

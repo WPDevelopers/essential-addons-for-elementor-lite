@@ -1158,6 +1158,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 						$element_name = 'eael-conditional-display';
 					} elseif ( $key === 'eael_ext_advanced_dynamic_tags' ) {
 						$element_name = 'eael-advanced-dynamic-tags';
+					} elseif ( $key === 'eael_custom_cursor_switch' ) {
+						$element_name = 'eael-custom-cursor';
 					} 
 
 					if ( ! empty( $element_name ) ) {
