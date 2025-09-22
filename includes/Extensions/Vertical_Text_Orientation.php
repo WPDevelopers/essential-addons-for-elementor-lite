@@ -208,6 +208,19 @@ class Vertical_Text_Orientation {
 		);
 
         $element->add_control(
+			'eael_vto_writing_gradient_color_heading',
+			[
+				'label' => esc_html__( 'Gradient Color', 'essential-addons-for-elementor-lite' ),
+				'type' => Controls_Manager::HEADING,
+				'separator' => 'before',
+                'condition' => [
+					'eael_vertical_text_orientation_switch' => 'yes',
+				],
+			]
+		);
+
+
+        $element->add_control(
 			'eael_vto_writing_styling_heading',
 			[
 				'label' => esc_html__( 'Styling Options', 'essential-addons-for-elementor-lite' ),

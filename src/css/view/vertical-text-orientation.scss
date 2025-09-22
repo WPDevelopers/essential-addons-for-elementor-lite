@@ -1,0 +1,15 @@
+.eael_vto-vertical-lr .elementor-heading-title {
+   background: linear-gradient(90deg, #00f, #0ff, #00f) -100%/ 200%;
+   color: transparent;
+   animation: shimmer 2s linear infinite;
+}
+
+@keyframes shimmer {
+   0% {
+      background-position: 0;
+   }
+
+   100% {
+      background-position: 100%;
+   }
+}
