@@ -139,18 +139,18 @@
   transition: all 0.3s 0.3s;
 }
 @media screen and (max-width: 800px) {
-  .eael-img-accordion {
+  .eael-img-accordion:not(.accordion-direction-horizontal) {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
   }
-  .eael-img-accordion .eael-image-accordion-hover:hover {
+  .eael-img-accordion:not(.accordion-direction-horizontal) .eael-image-accordion-hover:hover {
     -webkit-box-flex: 1;
         -ms-flex: 1;
             flex: 1;
   }
-  .eael-img-accordion .eael-image-accordion-hover:hover .overlay {
+  .eael-img-accordion:not(.accordion-direction-horizontal) .eael-image-accordion-hover:hover .overlay {
     background-color: transparent;
   }
 }
