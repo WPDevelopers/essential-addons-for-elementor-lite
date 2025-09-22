@@ -99,14 +99,33 @@ class Business_Reviews extends Widget_Base {
 			]
 		);
 
+		$review_sources = apply_filters('eael/business_reviews/sources', [
+			'google-reviews' => __( 'Google Reviews', 'essential-addons-for-elementor-lite' ),
+		]);
+
 		$this->add_control(
 			'eael_business_reviews_sources',
 			[
 				'label'   => __( 'Source', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'google-reviews',
+				'options' => $review_sources,
+			]
+		);
+
+		// Add Google API Type selection for Google Reviews
+		$this->add_control(
+			'eael_business_reviews_google_api_type',
+			[
+				'label'   => __( 'Google API Type', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'places_api',
 				'options' => [
-					'google-reviews' => __( 'Google Reviews', 'essential-addons-for-elementor-lite' ),
+					'places_api' => __( 'Google Places API (Max 5 reviews)', 'essential-addons-for-elementor-lite' ),
+					'my_business_api' => __( 'Google My Business API (More reviews)', 'essential-addons-for-elementor-lite' ),
+				],
+				'condition' => [
+					'eael_business_reviews_sources' => 'google-reviews',
 				],
 			]
 		);
@@ -118,9 +137,12 @@ class Business_Reviews extends Widget_Base {
 				'content_classes' => 'eael-warning',
 				'condition'       => [
 					'eael_business_reviews_sources' => 'google-reviews',
+					'eael_business_reviews_google_api_type' => 'places_api',
 				],
 			] );
 		}
+
+
 
 		$this->add_control( 'eael_business_reviews_business_place_id', [
 			'label'       => esc_html__( 'Place ID', 'essential-addons-for-elementor-lite' ),
@@ -134,11 +156,41 @@ class Business_Reviews extends Widget_Base {
 			],
 			'condition'   => [
 				'eael_business_reviews_sources' => 'google-reviews',
+				'eael_business_reviews_google_api_type' => 'places_api',
 			],
 			'ai' => [
 				'active' => false,
 			],
 		] );
+
+		if ( empty( get_option( 'eael_br_google_my_business_token' ) ) ) {
+			$this->add_control( 'eael_br_google_my_business_token_missing', [
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => sprintf( __( 'Google My Business access token is missing. Please add it from EA Dashboard » Elements » <a href="%s" target="_blank">Business Reviews Settings</a>', 'essential-addons-for-elementor-lite' ), esc_attr( site_url( '/wp-admin/admin.php?page=eael-settings' ) ) ),
+				'content_classes' => 'eael-warning',
+				'condition'       => [
+					'eael_business_reviews_sources' => 'google-reviews',
+					'eael_business_reviews_google_api_type' => 'my_business_api',
+				],
+			] );
+		}
+
+		if (!apply_filters('eael/pro_enabled', false)) {
+			$this->add_control( 'eael_business_reviews_trustpilot_notice', [
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => sprintf(
+					__( '<div class="eael-notice">%s is a <strong>Premium Feature</strong>. Upgrade to <a href="%s" target="_blank">Essential Addons Premium</a> to unlock this feature.</div>', 'essential-addons-for-elementor-lite' ),
+					__( 'Trustpilot Reviews', 'essential-addons-for-elementor-lite' ),
+					esc_url( 'https://wpdeveloper.com/upgrade/ea-pro' )
+				),
+				'content_classes' => 'eael-notice-wrapper',
+				'condition'       => [
+					'eael_business_reviews_sources' => 'trustpilot-reviews',
+				],
+			] );
+		}
+
+		do_action('eael/business_reviews/controls', $this);
 
 		$this->add_control(
 			'eael_business_reviews_sort_by',
@@ -153,8 +205,9 @@ class Business_Reviews extends Widget_Base {
 			]
 		);
 
+		// Max reviews for Google Places API (limited to 5)
 		$this->add_control(
-			'eael_business_reviews_max_reviews',
+			'eael_business_reviews_max_reviews_places',
 			[
 				'label'       => __( 'Reviews to Show', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::NUMBER,
@@ -162,6 +215,43 @@ class Business_Reviews extends Widget_Base {
 				'max'         => 5,
 				'default'     => 5,
 				'description' => __( 'Max 5 reviews, please specify amount.', 'essential-addons-for-elementor-lite' ),
+				'condition'   => [
+					'eael_business_reviews_sources' => 'google-reviews',
+					'eael_business_reviews_google_api_type' => 'places_api',
+				],
+			]
+		);
+
+		// Max reviews for Google My Business API (up to 50)
+		$this->add_control(
+			'eael_business_reviews_max_reviews_mybusiness',
+			[
+				'label'       => __( 'Reviews to Show', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::NUMBER,
+				'min'         => 0,
+				'max'         => 50,
+				'default'     => 10,
+				'description' => __( 'Max 50 reviews, please specify amount.', 'essential-addons-for-elementor-lite' ),
+				'condition'   => [
+					'eael_business_reviews_sources' => 'google-reviews',
+					'eael_business_reviews_google_api_type' => 'my_business_api',
+				],
+			]
+		);
+
+		// Max reviews for other sources (maintain existing behavior)
+		$this->add_control(
+			'eael_business_reviews_max_reviews',
+			[
+				'label'       => __( 'Reviews to Show', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::NUMBER,
+				'min'         => 0,
+				'max'         => 50,
+				'default'     => 5,
+				'description' => __( 'Please specify amount.', 'essential-addons-for-elementor-lite' ),
+				'condition'   => [
+					'eael_business_reviews_sources!' => 'google-reviews',
+				],
 			]
 		);
 
@@ -729,6 +819,42 @@ class Business_Reviews extends Widget_Base {
 			'eael_business_reviews_review_1_star_hide',
 			[
 				'label'        => __( 'Hide 1 Star Reviews', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => '',
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_review_2_star_hide',
+			[
+				'label'        => __( 'Hide 2 Star Reviews', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => '',
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_review_3_star_hide',
+			[
+				'label'        => __( 'Hide 3 Star Reviews', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+				'default'      => '',
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_review_4_star_hide',
+			[
+				'label'        => __( 'Hide 4 Star Reviews', 'essential-addons-for-elementor-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
 				'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
@@ -2532,16 +2658,47 @@ class Business_Reviews extends Widget_Base {
 	public function get_business_reviews_settings() {
 		$settings                                     		= $this->get_settings_for_display();
 		$settings['eael_business_reviews_source_key'] 		= get_option( 'eael_br_google_place_api_key' );
+		$settings['eael_business_reviews_my_business_token'] = get_option( 'eael_br_google_my_business_token' );
 
 		$business_reviews                            		= [];
 		$business_reviews['source']                  		= ! empty( $settings['eael_business_reviews_sources'] ) ? esc_html( $settings['eael_business_reviews_sources'] ) : 'google-reviews';
-		$business_reviews['place_id']                		= ! empty( $settings['eael_business_reviews_business_place_id'] ) ? esc_html( $settings['eael_business_reviews_business_place_id'] ) : 'ChIJj61dQgK6j4AR4GeTYWZsKWw';
-		$business_reviews['api_key']                 		= ! empty( $settings['eael_business_reviews_source_key'] ) ? esc_html( $settings['eael_business_reviews_source_key'] ) : '';
+
+		// Handle Google API type selection (backward compatibility)
+		$business_reviews['google_api_type']         		= ! empty( $settings['eael_business_reviews_google_api_type'] ) ? esc_html( $settings['eael_business_reviews_google_api_type'] ) : 'places_api';
+
+		// Ensure backward compatibility for existing widgets
+		if ( 'google-reviews' === $business_reviews['source'] && ! isset( $settings['eael_business_reviews_google_api_type'] ) ) {
+			$business_reviews['google_api_type'] = 'places_api';
+		}
+
+		if ( 'google-reviews' === $business_reviews['source'] && 'my_business_api' === $business_reviews['google_api_type'] ) {
+			$business_reviews['access_token']        		= ! empty( $settings['eael_business_reviews_my_business_token'] ) ? esc_html( $settings['eael_business_reviews_my_business_token'] ) : '';
+			$business_reviews['place_id']            		= 'my_business_api';
+		} else {
+			$business_reviews['place_id']            		= ! empty( $settings['eael_business_reviews_business_place_id'] ) ? esc_html( $settings['eael_business_reviews_business_place_id'] ) : 'ChIJj61dQgK6j4AR4GeTYWZsKWw';
+			$business_reviews['api_key']             		= ! empty( $settings['eael_business_reviews_source_key'] ) ? esc_html( $settings['eael_business_reviews_source_key'] ) : '';
+		}
+
 		$business_reviews['reviews_sort']            		= ! empty( $settings['eael_business_reviews_sort_by'] ) ? esc_html( $settings['eael_business_reviews_sort_by'] ) : 'most_relevant';
 		$business_reviews['review_text_translation'] 		= ! empty( $settings['eael_business_reviews_review_text_translation'] ) && 'yes' === $settings['eael_business_reviews_review_text_translation'] ? 1 : 0;
 
+		$business_reviews = apply_filters('eael/business_reviews/settings', $business_reviews, $settings);
+
 		$business_reviews['expiration'] 					= ! empty( $settings['eael_business_reviews_data_cache_time'] ) ? absint( $settings['eael_business_reviews_data_cache_time'] ) * MINUTE_IN_SECONDS : DAY_IN_SECONDS;
-		$business_reviews['md5']        					= md5( $business_reviews['api_key'] . $business_reviews['reviews_sort'] . $business_reviews['review_text_translation'] . $this->get_id() );
+
+		$cache_key_parts = [ $business_reviews['reviews_sort'], $business_reviews['review_text_translation'], $this->get_id() ];
+		if ( 'google-reviews' === $business_reviews['source'] ) {
+			$cache_key_parts[] = $business_reviews['google_api_type'];
+			if ( 'my_business_api' === $business_reviews['google_api_type'] ) {
+				$cache_key_parts[] = isset( $business_reviews['access_token'] ) ? substr( md5( $business_reviews['access_token'] ), 0, 8 ) : '';
+			} else {
+				$cache_key_parts[] = isset( $business_reviews['api_key'] ) ? $business_reviews['api_key'] : '';
+			}
+		} else {
+			$cache_key_parts[] = isset( $business_reviews['api_key'] ) ? $business_reviews['api_key'] : '';
+		}
+
+		$business_reviews['md5']        					= md5( implode( '_', $cache_key_parts ) );
 		$business_reviews['cache_key']  					= "eael_{$business_reviews['source']}_{$business_reviews['place_id']}_{$business_reviews['expiration']}_{$business_reviews['md5']}_brev_cache";
 
 		$business_reviews['layout'] 						= ! empty( $settings['eael_business_reviews_items_layout'] ) ? $settings['eael_business_reviews_items_layout'] : 'slider';
@@ -2572,7 +2729,28 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['review_text']       				= ! empty( $settings['eael_business_reviews_review_text'] ) && 'yes' === $settings['eael_business_reviews_review_text'] ? 1 : 0;
 		$business_reviews['review_rating']     				= ! empty( $settings['eael_business_reviews_review_rating'] ) && 'yes' === $settings['eael_business_reviews_review_rating'] ? 1 : 0;
 		$business_reviews['review_1_star']     				= empty( $settings['eael_business_reviews_review_1_star_hide'] ) ? 1 : 0;
-		$business_reviews['reviews_max_count'] 				= ! empty( $settings['eael_business_reviews_max_reviews'] ) ? intval( $settings['eael_business_reviews_max_reviews'] ) : 5;
+		$business_reviews['review_2_star']     				= empty( $settings['eael_business_reviews_review_2_star_hide'] ) ? 1 : 0;
+		$business_reviews['review_3_star']     				= empty( $settings['eael_business_reviews_review_3_star_hide'] ) ? 1 : 0;
+		$business_reviews['review_4_star']     				= empty( $settings['eael_business_reviews_review_4_star_hide'] ) ? 1 : 0;
+		
+		// Set max reviews count based on API type and source (with backward compatibility)
+		if ( 'google-reviews' === $business_reviews['source'] ) {
+			if ( 'my_business_api' === $business_reviews['google_api_type'] ) {
+				$business_reviews['reviews_max_count'] 		= ! empty( $settings['eael_business_reviews_max_reviews_mybusiness'] ) ? intval( $settings['eael_business_reviews_max_reviews_mybusiness'] ) : 10;
+			} else {
+				// For Places API, check both new and old control for backward compatibility
+				if ( ! empty( $settings['eael_business_reviews_max_reviews_places'] ) ) {
+					$business_reviews['reviews_max_count'] 	= intval( $settings['eael_business_reviews_max_reviews_places'] );
+				} elseif ( ! empty( $settings['eael_business_reviews_max_reviews'] ) ) {
+					// Fallback to old control for existing widgets
+					$business_reviews['reviews_max_count'] 	= intval( $settings['eael_business_reviews_max_reviews'] );
+				} else {
+					$business_reviews['reviews_max_count'] 	= 5;
+				}
+			}
+		} else {
+			$business_reviews['reviews_max_count'] 			= ! empty( $settings['eael_business_reviews_max_reviews'] ) ? intval( $settings['eael_business_reviews_max_reviews'] ) : 5;
+		}
 
 		$business_reviews['business_logo_icon_migrated']	= isset( $settings['__fa4_migrated']['eael_business_reviews_business_logo_icon_new'] );
 		$business_reviews['business_logo_icon_new']      	= empty( $settings['eael_business_reviews_business_logo_icon'] );
@@ -2624,13 +2802,22 @@ class Business_Reviews extends Widget_Base {
 		$items            = get_transient( $business_reviews['cache_key'] );
 
 		if ( false === $items ) {
-			switch ( $business_reviews['source'] ) {
-				case 'google-reviews':
-					$data = $this->fetch_google_reviews_from_api( $business_reviews );
-					break;
-				default:
-					$data = $this->fetch_google_reviews_from_api( $business_reviews );
-					break;
+			$data = apply_filters('eael/business_reviews/fetch_api', null, $business_reviews, $this);
+
+			if ( null === $data ) {
+				switch ( $business_reviews['source'] ) {
+					case 'google-reviews':
+						// Check which Google API type to use
+						if ( 'my_business_api' === $business_reviews['google_api_type'] ) {
+							$data = $this->fetch_google_my_business_reviews_from_api( $business_reviews );
+						} else {
+							$data = $this->fetch_google_reviews_from_api( $business_reviews );
+						}
+						break;
+					default:
+						$data = $this->fetch_google_reviews_from_api( $business_reviews );
+						break;
+				}
 			}
 
 			return $data;
@@ -2742,6 +2929,115 @@ class Business_Reviews extends Widget_Base {
 		return $error_message;
 	}
 
+	public function fetch_google_my_business_reviews_from_api( $business_reviews_settings ) {
+		$business_reviews = $business_reviews_settings;
+		$error_message = '';
+		$response = false;
+
+		if ( empty( $business_reviews['access_token'] ) ) {
+			$error_message = esc_html__( 'Google My Business API access token is missing.', 'essential-addons-for-elementor-lite' );
+		} elseif ( ! $this->validate_access_token( $business_reviews['access_token'] ) ) {
+			$error_message = esc_html__( 'Invalid access token format.', 'essential-addons-for-elementor-lite' );
+		} else {
+			$response = $this->fetch_reviews_from_google_my_business( $business_reviews['access_token'] );
+
+			if ( ! empty( $response ) ) {
+				set_transient( $business_reviews['cache_key'], $response, $business_reviews['expiration'] );
+			} else {
+				$error_message = esc_html__( 'Failed to fetch reviews. Please check your access token or try refreshing it.', 'essential-addons-for-elementor-lite' );
+			}
+		}
+
+		$data = [
+			'items'         => $response,
+			'error_message' => $error_message,
+		];
+
+		return $data;
+	}
+
+	private function validate_access_token( $token ) {
+		return ! empty( $token ) && is_string( $token ) && strlen( $token ) > 20;
+	}
+
+	private function fetch_reviews_from_google_my_business( $access_token ) {
+		$url = 'https://mybusiness.googleapis.com/v4/accounts/me/locations';
+
+		$locations_response = wp_remote_get( $url, [
+			'headers' => [
+				'Authorization' => 'Bearer ' . $access_token,
+				'Content-Type' => 'application/json',
+			],
+			'timeout' => 30,
+		] );
+
+		if ( is_wp_error( $locations_response ) ) {
+			return false;
+		}
+
+		$locations_body = json_decode( wp_remote_retrieve_body( $locations_response ), true );
+
+		if ( ! isset( $locations_body['locations'] ) || empty( $locations_body['locations'] ) ) {
+			return false;
+		}
+
+		$location = $locations_body['locations'][0];
+		$location_name = $location['name'];
+
+		$reviews_url = "https://mybusiness.googleapis.com/v4/{$location_name}/reviews";
+
+		$reviews_response = wp_remote_get( $reviews_url, [
+			'headers' => [
+				'Authorization' => 'Bearer ' . $access_token,
+				'Content-Type' => 'application/json',
+			],
+			'timeout' => 30,
+		] );
+
+		if ( is_wp_error( $reviews_response ) ) {
+			return false;
+		}
+
+		$reviews_body = json_decode( wp_remote_retrieve_body( $reviews_response ), true );
+
+		if ( isset( $reviews_body['reviews'] ) ) {
+			return $this->transform_google_my_business_data( $reviews_body, $location );
+		}
+
+		return false;
+	}
+
+	private function transform_google_my_business_data( $data, $location = null ) {
+		$transformed = new \stdClass();
+		$transformed->reviews = [];
+
+		if ( isset( $data['reviews'] ) ) {
+			foreach ( $data['reviews'] as $review ) {
+				$transformed_review = new \stdClass();
+				$transformed_review->author_name = isset( $review['reviewer']['displayName'] ) ? $review['reviewer']['displayName'] : 'Anonymous';
+				$transformed_review->author_url = isset( $review['reviewer']['profilePhotoUrl'] ) ? $review['reviewer']['profilePhotoUrl'] : '';
+				$transformed_review->profile_photo_url = isset( $review['reviewer']['profilePhotoUrl'] ) ? $review['reviewer']['profilePhotoUrl'] : '';
+				$transformed_review->rating = isset( $review['starRating'] ) ? intval( $review['starRating'] ) : 5;
+				$transformed_review->relative_time_description = isset( $review['createTime'] ) ? human_time_diff( strtotime( $review['createTime'] ) ) . ' ago' : '';
+				$transformed_review->text = isset( $review['comment'] ) ? $review['comment'] : '';
+				$transformed_review->time = isset( $review['createTime'] ) ? strtotime( $review['createTime'] ) : time();
+
+				$transformed->reviews[] = $transformed_review;
+			}
+		}
+
+		if ( $location ) {
+			$transformed->name = isset( $location['locationName'] ) ? $location['locationName'] : '';
+			$transformed->rating = isset( $location['averageRating'] ) ? $location['averageRating'] : 0;
+			$transformed->user_ratings_total = isset( $location['reviewCount'] ) ? $location['reviewCount'] : 0;
+			$transformed->formatted_address = isset( $location['address']['addressLines'] ) ? implode( ', ', $location['address']['addressLines'] ) : '';
+			$transformed->international_phone_number = isset( $location['primaryPhone'] ) ? $location['primaryPhone'] : '';
+			$transformed->url = isset( $location['websiteUrl'] ) ? $location['websiteUrl'] : '';
+		}
+
+		return $transformed;
+	}
+
 	public function print_business_reviews( $business_reviews_items ) {
 		$settings 			= $this->settings_data         = $this->get_settings_for_display();
 		$business_reviews 	= $this->business_reviews_data = $this->get_business_reviews_settings();
@@ -2774,13 +3070,17 @@ class Business_Reviews extends Widget_Base {
         <div <?php $this->print_render_attribute_string( 'eael-business-reviews-wrapper' ); ?>>
             <div <?php $this->print_render_attribute_string( 'eael-business-reviews-items' ); ?>>
 				<?php
-				switch ( $business_reviews['source'] ) {
-					case 'google-reviews':
-						$this->print_business_reviews_google( $business_reviews_items );
-						break;
-					default:
-						$this->print_business_reviews_google( $business_reviews_items );
-						break;
+				$handled = apply_filters('eael/business_reviews/render', false, $business_reviews, $business_reviews_items, $this);
+
+				if ( ! $handled ) {
+					switch ( $business_reviews['source'] ) {
+						case 'google-reviews':
+							$this->print_business_reviews_google( $business_reviews_items );
+							break;
+						default:
+							$this->print_business_reviews_google( $business_reviews_items );
+							break;
+					}
 				}
 				?>
             </div>
@@ -2932,10 +3232,23 @@ class Business_Reviews extends Widget_Base {
 								$single_review_data['relative_time_description'] = ! empty( $single_review->relative_time_description ) ? $single_review->relative_time_description : '';
 								$single_review_data['text']                      = ! empty( $single_review->text ) ? $single_review->text : '';
 
-								if( ! $business_reviews['review_1_star'] ){
-									if ( $single_review_data['rating'] === 1 ) {
-										continue;
-									}
+								// Check if this review should be hidden based on rating filters
+								$should_hide_review = false;
+								if( ! $business_reviews['review_1_star'] && $single_review_data['rating'] === 1 ){
+									$should_hide_review = true;
+								}
+								if( ! $business_reviews['review_2_star'] && $single_review_data['rating'] === 2 ){
+									$should_hide_review = true;
+								}
+								if( ! $business_reviews['review_3_star'] && $single_review_data['rating'] === 3 ){
+									$should_hide_review = true;
+								}
+								if( ! $business_reviews['review_4_star'] && $single_review_data['rating'] === 4 ){
+									$should_hide_review = true;
+								}
+
+								if( $should_hide_review ){
+									continue;
 								}
 
 								$this->add_render_attribute( 'eael-google-reviews-slider-item-' . $i, [
@@ -3210,10 +3523,23 @@ class Business_Reviews extends Widget_Base {
 								$single_review_data['relative_time_description'] = ! empty( $single_review->relative_time_description ) ? $single_review->relative_time_description : '';
 								$single_review_data['text']                      = ! empty( $single_review->text ) ? $single_review->text : '';
 
-								if( ! $business_reviews['review_1_star'] ){
-									if ( $single_review_data['rating'] === 1 ) {
-										continue;
-									}
+								// Check if this review should be hidden based on rating filters
+								$should_hide_review = false;
+								if( ! $business_reviews['review_1_star'] && $single_review_data['rating'] === 1 ){
+									$should_hide_review = true;
+								}
+								if( ! $business_reviews['review_2_star'] && $single_review_data['rating'] === 2 ){
+									$should_hide_review = true;
+								}
+								if( ! $business_reviews['review_3_star'] && $single_review_data['rating'] === 3 ){
+									$should_hide_review = true;
+								}
+								if( ! $business_reviews['review_4_star'] && $single_review_data['rating'] === 4 ){
+									$should_hide_review = true;
+								}
+
+								if( $should_hide_review ){
+									continue;
 								}
 
 								$this->add_render_attribute( 'eael-google-reviews-grid-item-' . $i, [
@@ -3252,6 +3578,8 @@ class Business_Reviews extends Widget_Base {
 			<?php
 		}
 	}
+
+
 
 	protected function render_dots() {
 		?>
