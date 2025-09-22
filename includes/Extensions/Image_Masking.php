@@ -455,57 +455,16 @@ class Image_Masking {
                     }
                 }
 			} else if( 'morphing' === $type ) {
-                $morphing_type = $settings['eael_morphing_type'];
-                $morphing_options = [ 'type' => $morphing_type ];
-
-                $excludes = !empty( $settings['eael_image_morphing_exclude_selectors'] ) ? trim( $settings['eael_image_morphing_exclude_selectors'] ) : '';
-                if( !empty( $excludes ) ){
-                    $morphing_options['exclude'] = $excludes;
-                }
-                
-                if( 'clip-path' === $morphing_type ){
-                    $clip_paths = $settings['eael_clip_paths'];
-                    $paths = [];
-                    foreach( $clip_paths as $clip_path ){
-                        if( empty( $clip_path['eael_clip_path'] ) ){
-                            continue;
-                        }
-                        $paths[] = str_replace( [ 'clip-path: ', ';' ], '', $clip_path['eael_clip_path'] );
+                $morphing_options = apply_filters( 'eael/image_masking/morphing_options', [], $element, $element_id );
+                if( !empty( $morphing_options ) ){
+                    if( !empty( $morphing_options['svg_html'] ) ){
+                        //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                        echo $morphing_options['svg_html'];
                     }
-
-                    if( !empty( $settings['eael_image_morphing_enable_rotation'] ) ){
-                        $morphing_options['rotation'] = 'yes' === $settings['eael_image_morphing_enable_rotation'];
-
-                        if( !empty( $settings['eael_image_morphing_rotation']['size'] ) ){
-                            $morphing_options['rotationSpeed'] = $settings['eael_image_morphing_rotation']['size'];
-                        }
-                    }
-                    $morphing_options['shapes'] = base64_encode( wp_json_encode( $paths ) );
-
-                } else if( 'svg' === $morphing_type ){
-                    $svg_paths = $settings['eael_svg_paths'];
-                    $svg_html = '<div id="eael-svg-items-' . $element_id . '" style="display: none;">';
-                    foreach( $svg_paths as $svg_path ){
-                        $svg_html  .= wp_kses( $svg_path['eael_svg_path'], Helper::eael_allowed_icon_tags() );
-                    }
-                    $svg_html .= '</div>';
-                    //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                    echo $svg_html;
+                    unset( $morphing_options['svg_html'] );
+                    $element->add_render_attribute( '_wrapper', 'data-morphing-options', wp_json_encode( $morphing_options ) );
+                    $element->add_render_attribute( '_wrapper', 'class', 'eael-morphing-enabled' );
                 }
-                
-
-                if( !empty( $settings['eael_image_morphing_duration']['size'] ) ){
-                    $morphing_options['duration'] = $settings['eael_image_morphing_duration']['size'];
-                }
-                if( !empty( $settings['eael_image_morphing_loop'] ) ){
-                    $morphing_options['loop'] = 'yes' === $settings['eael_image_morphing_loop'];
-                }
-                if( !empty( $settings['eael_image_morphing_ease'] ) ){
-                    $morphing_options['ease'] = $settings['eael_image_morphing_ease'];
-                }
-
-                $element->add_render_attribute( '_wrapper', 'data-morphing-options', wp_json_encode( $morphing_options ) );
-                $element->add_render_attribute( '_wrapper', 'class', 'eael-morphing-enabled' );
 			}
             
 		
