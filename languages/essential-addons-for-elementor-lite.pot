@@ -37,7 +37,7 @@ msgstr ""
 msgid "Billing"
 msgstr ""
 
-#: ../includes/Classes/Asset_Builder.php:403, ../includes/Elements/Woo_Cart.php:1142, ../includes/Elements/Woo_Checkout.php:304, ../includes/Elements/Woo_Checkout.php:754, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:281
+#: ../includes/Classes/Asset_Builder.php:403, ../includes/Elements/Woo_Cart.php:1142, ../includes/Elements/Woo_Checkout.php:304, ../includes/Elements/Woo_Checkout.php:754, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:282
 msgid "Shipping"
 msgstr ""
 
@@ -969,7 +969,7 @@ msgstr ""
 msgid "Quantity"
 msgstr ""
 
-#: ../includes/Controls/Select2.php:33, ../includes/Elements/Woo_Cart.php:212, ../includes/Elements/Woo_Cart.php:732, ../includes/Elements/Woo_Cart.php:747, ../includes/Elements/Woo_Checkout.php:287, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:250, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:487
+#: ../includes/Controls/Select2.php:33, ../includes/Elements/Woo_Cart.php:212, ../includes/Elements/Woo_Cart.php:732, ../includes/Elements/Woo_Cart.php:747, ../includes/Elements/Woo_Checkout.php:287, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:251, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:487
 msgid "Subtotal"
 msgstr ""
 
@@ -9522,7 +9522,7 @@ msgstr ""
 msgid "Product"
 msgstr ""
 
-#: ../includes/Elements/Woo_Cart.php:419, ../includes/Elements/Woo_Cart.php:1187, ../includes/Elements/Woo_Checkout.php:321, ../includes/Elements/Woo_Checkout.php:1323, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:338, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:542
+#: ../includes/Elements/Woo_Cart.php:419, ../includes/Elements/Woo_Cart.php:1187, ../includes/Elements/Woo_Checkout.php:321, ../includes/Elements/Woo_Checkout.php:1323, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:339, ../includes/Template/Woocommerce/Checkout/Woo_Checkout_Helper.php:542
 msgid "Total"
 msgstr ""
 
@@ -12727,20 +12727,20 @@ msgstr ""
 msgid "Posts by %s"
 msgstr ""
 
-#: ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:106, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:505, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:613
+#: ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:107, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:506, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:614
 msgid "Remove this item"
 msgstr ""
 
-#: ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:158, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:542
+#: ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:159, ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:543
 msgid "Available on backorder"
 msgstr ""
 
 #. translators: %s location.
-#: ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:311
+#: ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:312
 msgid "(estimated for %s)"
 msgstr ""
 
-#: ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:650
+#: ../includes/Template/Woocommerce/Cart/Woo_Cart_Helper.php:651
 msgid "Coupon:"
 msgstr ""
 
