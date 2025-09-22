@@ -55,6 +55,16 @@
      'page_id' => $settings['eael_page_id'],
  ];
  $product_wrapper_classes = implode( " ", apply_filters( 'eael_product_wrapper_class', [], $product->get_id(), 'eicon-woocommerce' ) );
+
+ // Get secondary image data for hover effect
+ $show_secondary_image = isset( $settings['eael_product_grid_show_secondary_image'] ) && 'yes' === $settings['eael_product_grid_show_secondary_image'];
+ $image_sources = [
+     'src' => '',
+     'src_hover' => ''
+ ];
+ if( $show_secondary_image ){
+     $image_sources = Helper::eael_get_woo_product_gallery_image_srcs( $product, $settings['eael_product_grid_image_size_size'] );
+ }
  ?>
  <li <?php post_class( "product {$product_wrapper_classes}" ); ?>>
      <?php
@@ -63,7 +73,8 @@
          do_action( 'woocommerce_before_shop_loop_item' );
      }
      ?>
-     <div class="overlay">
+     <div class="eael-product-wrap" data-src="<?php echo esc_url( $image_sources['src'] ); ?>" data-src-hover="<?php echo esc_url( $image_sources['src_hover'] ); ?>">
+         <div class="overlay">
          <?php
          if( $should_print_image_clickable ) {
              // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -130,5 +141,6 @@
      }
      do_action( 'eael_woocommerce_after_shop_loop_item' );
      ?>
+     </div>
 
- </li> 
+ </li>
