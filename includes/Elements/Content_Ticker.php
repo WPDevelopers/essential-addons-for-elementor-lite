@@ -782,6 +782,9 @@ class Content_Ticker extends Widget_Base
                         if ('dynamic' === $settings['eael_ticker_type']) {
 
                             if (\file_exists($this->get_template($settings['eael_dynamic_template_Layout']))) {
+	                            if ( $args['post_type'] === 'tribe_events' ) {
+		                            $this->eael_forcefully_remove_action( 'pre_get_posts', 'attach_monitor', 200 );
+	                            }
                                 $query = new \WP_Query($args);
                                 if ($query->have_posts()) {
                                     while ($query->have_posts()) {
