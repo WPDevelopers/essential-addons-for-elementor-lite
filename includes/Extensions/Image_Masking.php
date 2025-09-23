@@ -533,19 +533,36 @@ class Image_Masking {
                     $style .= '.eael-image-masking-'.$element_id.$hover_selector.':hover img {clip-path: '.$hover_clip_path_value.'}';
                 }
 			} else if( 'image' === $type ) {
-                $image = $element->get_settings_for_display( 'eael_image_masking_image' );
-                if( $image['url'] ) {
-                    $style .= '.eael-image-masking-'.$element_id.' img {mask-image: url('.$image['url'].'); -webkit-mask-image: url('.$image['url'].');}';
+                $svg = $element->get_settings_for_display( 'eael_image_masking_svg' );
+                $mask_url = '';
+                if( 'upload' !== $svg ){
+                    $svg_url = $element->get_settings_for_display( 'eael_image_masking_svg_url' );
+                    $mask_url = $svg_url . $svg . '.svg';
+                } else if( 'upload' === $svg ){
+                    $image = $element->get_settings_for_display( 'eael_image_masking_image' );
+                    $mask_url = $image['url'];
+                }
+
+                if( $mask_url ) {
+                    $style .= '.eael-image-masking-'.$element_id.' img {mask-image: url('.$mask_url.'); -webkit-mask-image: url('.$mask_url.');}';
                 }
 
                 if( 'yes' === $settings['eael_image_masking_hover_effect'] ){
                     $hover_image = $element->get_settings_for_display( 'eael_image_masking_image_hover' );
-                    if( $hover_image['url'] ) {
+                    $hover_mask_url = '';
+                    if( 'upload' !== $hover_image ){
+                        $svg_url = $element->get_settings_for_display( 'eael_image_masking_svg_url' );
+                        $hover_mask_url = $svg_url . $hover_image . '.svg';
+                    } else if( 'upload' === $hover_image ){
+                        $hover_image = $element->get_settings_for_display( 'eael_image_masking_image_hover' );
+                        $hover_mask_url = $hover_image['url'];
+                    }
+                    if( $hover_mask_url ) {
                         $hover_selector = $element->get_settings_for_display( 'eael_image_masking_hover_selector' );
                         if( $hover_selector ){
                             $hover_selector = ' ' . trim( $hover_selector );
                         }
-                        $style .= '.eael-image-masking-'.$element_id. $hover_selector .':hover img {mask-image: url('.$hover_image['url'].'); -webkit-mask-image: url('.$hover_image['url'].');}';
+                        $style .= '.eael-image-masking-'.$element_id. $hover_selector .':hover img {mask-image: url('.$hover_mask_url.'); -webkit-mask-image: url('.$hover_mask_url.');}';
                     }
                 }
 			} else if( 'morphing' === $type ) {

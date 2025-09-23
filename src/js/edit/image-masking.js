@@ -84,20 +84,36 @@ let ImageMaskingHandler = function ($scope, $) {
                     }
                 }
             } else if( 'image' === settings?.eael_image_masking_type ){
-                let image = settings?.eael_image_masking_image;
-                if( image?.url ) {
-                    style += '.elementor-element-' + elementId + ' img {mask-image: url(' + image.url + '); -webkit-mask-image: url(' + image.url + ');}';
+                let svg_url = settings?.eael_image_masking_svg_url;
+                let image = settings?.eael_image_masking_svg;
+                let mask_url = '';
+                if( 'upload' !== image ){
+                    mask_url = svg_url + image + '.svg';
+                } else if( 'upload' === image ){
+                    let image = settings?.eael_image_masking_image;
+                    mask_url = image?.url;
                 }
-
+                if( mask_url ) {
+                    style += '.elementor-element-' + elementId + ' img {mask-image: url(' + mask_url + '); -webkit-mask-image: url(' + mask_url + ');}';
+                }
+                console.log('image',mask_url, image, settings?.eael_image_masking_image);
+                
                 if( 'yes' === settings?.eael_image_masking_hover_effect ){
                     let hoverImage = settings?.eael_image_masking_image_hover;
-                    if( hoverImage?.url ) {
+                    let hover_mask_url = '';
+                    if( 'upload' !== hoverImage ){
+                        let svg_url = settings?.eael_image_masking_svg_url;
+                        hover_mask_url = svg_url + hoverImage + '.svg';
+                    } else if( 'upload' === hoverImage ){
+                        hover_mask_url = hoverImage?.url;
+                    }
+                    if( hover_mask_url ) {
                         let hover_selector = settings?.eael_image_masking_hover_selector;
                         if( hover_selector ){
                             hover_selector = ' ' + hover_selector.trim();
                         }
+                        style += '.elementor-element-' + elementId + hover_selector + ':hover img {mask-image: url(' + hover_mask_url + '); -webkit-mask-image: url(' + hover_mask_url + ');}';
                     }
-                    style += '.elementor-element-' + elementId + hover_selector + ':hover img {mask-image: url(' + hoverImage.url + '); -webkit-mask-image: url(' + hoverImage.url + ');}';
                 }
             }  else if( 'morphing' === settings?.eael_image_masking_type ){
                 let morphingType = settings?.eael_morphing_type;
@@ -168,7 +184,6 @@ let ImageMaskingHandler = function ($scope, $) {
                     svgPaths.forEach(function( svgPath, index ){
                         if( 'code' === svgPath?.attributes?.eael_svg_file_type ){
                             // Handle inline SVG code
-                            console.log('svgPath?.attributes?.eael_svg_code', svgPath?.attributes?.eael_svg_code);
                             svgContents[index] = DOMPurify.sanitize( svgPath?.attributes?.eael_svg_code );
                             svgPromises.push(Promise.resolve());
                         } else if( 'file' === svgPath?.attributes?.eael_svg_file_type ){
