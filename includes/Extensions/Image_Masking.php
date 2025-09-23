@@ -26,65 +26,14 @@ class Image_Masking {
 
     private function clip_paths( $shape ){
         $shapes = [
-            'circle'      => 'circle(42% at 50% 50%)',
-            'ellipse'     => 'ellipse(50% 35% at 50% 50%)',
-            'inset'       => 'inset(10% 10% 10% 10%)',
-            'triangle'    => 'polygon(50% 0%, 0% 100%, 100% 100%)',
-            'trapezoid'   => 'polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)',
-            'parallelogram' => 'polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%)',
-            'rhombus'     => 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)',
-            'pentagon'    => 'polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%)',
-            'hexagon'     => 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)',
-            'heptagon'    => 'polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%)',
-            'octagon'     => 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)',
-            'nonagon'     => 'polygon(50% 0%, 85% 15%, 100% 50%, 85% 85%, 50% 100%, 15% 85%, 0% 50%, 15% 15%)',
-            'decagon'     => 'polygon(50% 0%, 80% 10%, 100% 40%, 95% 80%, 65% 100%, 35% 100%, 5% 80%, 0% 40%, 20% 10%)',
-            'star'        => 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)',
-            'cross'       => 'polygon(30% 0%, 70% 0%, 70% 30%, 100% 30%, 100% 70%, 70% 70%, 70% 100%, 30% 100%, 30% 70%, 0% 70%, 0% 30%, 30% 30%)',
-            'arrow'       => 'polygon(0% 40%, 60% 40%, 60% 20%, 100% 50%, 60% 80%, 60% 60%, 0% 60%)',
-            'left_arrow'  => 'polygon(100% 40%, 40% 40%, 40% 20%, 0% 50%, 40% 80%, 40% 60%, 100% 60%)',
-            'chevron'     => 'polygon(25% 0%, 100% 50%, 25% 100%, 0% 75%, 50% 50%, 0% 25%)',
-            'message'     => 'polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 50% 100%, 50% 75%, 0% 75%)',
-            'close'       => 'polygon(20% 0%, 50% 30%, 80% 0%, 100% 20%, 70% 50%, 100% 80%, 80% 100%, 50% 70%, 20% 100%, 0% 80%, 30% 50%, 0% 20%)',
-            'frame'       => 'polygon(0% 0%, 0% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 75%, 25% 75%, 25% 100%, 100% 100%, 100% 0%)',
-            'rabbet'      => 'polygon(20% 0%, 80% 0%, 80% 20%, 100% 20%, 100% 80%, 80% 80%, 80% 100%, 20% 100%, 20% 80%, 0% 80%, 0% 20%, 20% 20%)',
-            'starburst'   => 'polygon(50% 0%, 60% 20%, 80% 10%, 70% 30%, 90% 50%, 70% 70%, 80% 90%, 60% 80%, 50% 100%, 40% 80%, 20% 90%, 30% 70%, 10% 50%, 30% 30%, 20% 10%, 40% 20%)',
-            'blob'        => 'polygon(50% 0%, 80% 10%, 100% 40%, 90% 70%, 60% 100%, 30% 90%, 10% 60%, 0% 30%, 20% 10%)',
+            'bavel' => 'polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%)',
+            'rabbet' => 'polygon(0% 15%, 15% 15%, 15% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 85%, 85% 85%, 85% 100%, 15% 100%, 15% 85%, 0% 85%)',
+            'chevron-left' => 'polygon(100% 0%, 75% 50%, 100% 100%, 25% 100%, 0% 50%, 25% 0%)',
+            'chevron-right' => 'polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%)',
+            'star' => 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)',
         ];
         return $shapes[$shape] ?? '';
     }
-
-    private function get_clip_path_options() {
-        return [
-            'circle'        => '⚪ ' . esc_html__( 'Circle', 'essential-addons-for-elementor-lite' ),
-            'ellipse'       => '🟣 ' . esc_html__( 'Ellipse', 'essential-addons-for-elementor-lite' ),
-            'inset'         => '⬛ ' . esc_html__( 'Inset', 'essential-addons-for-elementor-lite' ),
-            'triangle'      => '🔺 ' . esc_html__( 'Triangle', 'essential-addons-for-elementor-lite' ),
-            'trapezoid'     => '🟪 ' . esc_html__( 'Trapezoid', 'essential-addons-for-elementor-lite' ),
-            'parallelogram' => '📐 ' . esc_html__( 'Parallelogram', 'essential-addons-for-elementor-lite' ),
-            'rhombus'       => '🔷 ' . esc_html__( 'Rhombus', 'essential-addons-for-elementor-lite' ),
-            'pentagon'      => '🔺 ' . esc_html__( 'Pentagon', 'essential-addons-for-elementor-lite' ),
-            'hexagon'       => '⬡ ' . esc_html__( 'Hexagon', 'essential-addons-for-elementor-lite' ),
-            'heptagon'      => '⬣ ' . esc_html__( 'Heptagon', 'essential-addons-for-elementor-lite' ),
-            'octagon'       => '🛑 ' . esc_html__( 'Octagon', 'essential-addons-for-elementor-lite' ),
-            'nonagon'       => '🔷 ' . esc_html__( 'Nonagon', 'essential-addons-for-elementor-lite' ),
-            'decagon'       => '🔟 ' . esc_html__( 'Decagon', 'essential-addons-for-elementor-lite' ),
-            'star'          => '⭐ ' . esc_html__( 'Star', 'essential-addons-for-elementor-lite' ),
-            'cross'         => '✝️ ' . esc_html__( 'Cross', 'essential-addons-for-elementor-lite' ),
-            'arrow'         => '➡️ ' . esc_html__( 'Arrow', 'essential-addons-for-elementor-lite' ),
-            'left_arrow'    => '⬅️ ' . esc_html__( 'Left Arrow', 'essential-addons-for-elementor-lite' ),
-            'chevron'       => '💠 ' . esc_html__( 'Chevron', 'essential-addons-for-elementor-lite' ),
-            'message'       => '💬 ' . esc_html__( 'Message', 'essential-addons-for-elementor-lite' ),
-            'close'         => '❌ ' . esc_html__( 'Close', 'essential-addons-for-elementor-lite' ),
-            'frame'         => '🖼️ ' . esc_html__( 'Frame', 'essential-addons-for-elementor-lite' ),
-            'rabbet'        => '🧩 ' . esc_html__( 'Rabbet', 'essential-addons-for-elementor-lite' ),
-            'starburst'     => '🌟 ' . esc_html__( 'Starburst', 'essential-addons-for-elementor-lite' ),
-            'blob'          => '💧 ' . esc_html__( 'Blob', 'essential-addons-for-elementor-lite' ),
-            'custom'        => '✏️ ' . esc_html__( 'Custom', 'essential-addons-for-elementor-lite' ),
-        ];
-
-    }
-
     private function masking_controllers( $element, $tab = '' ) {
 
         $condition = [];
@@ -103,15 +52,51 @@ class Image_Masking {
         }
 
         $condition['eael_image_masking_type'] = 'clip';
+        // $element->add_control(
+        //     'eael_image_masking_clip_path' . $tab,
+        //     [
+        //         'label'       => esc_html__( 'Select Clip Path', 'essential-addons-for-elementor-lite' ),
+        //         'type'        => Controls_Manager::SELECT2,
+        //         'label_block' => true,
+        //         'options'     => $this->get_clip_path_options(),
+        //         'default'     => $tab !== '_hover' ? 'circle' : 'inset',
+        //         'condition'   => $condition
+        //     ]
+        // );
+        $image_dir_url = EAEL_PLUGIN_URL . 'assets/front-end/img/image-masking/clip-paths/';
         $element->add_control(
             'eael_image_masking_clip_path' . $tab,
             [
-                'label'       => esc_html__( 'Select Clip Path', 'essential-addons-for-elementor-lite' ),
-                'type'        => Controls_Manager::SELECT2,
+                'label' => esc_html__( 'Select Clip Path', 'essential-addons-for-elementor-lite' ),
                 'label_block' => true,
-                'options'     => $this->get_clip_path_options(),
-                'default'     => $tab !== '_hover' ? 'circle' : 'inset',
-                'condition'   => $condition
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'bavel' => [
+                        'title' => esc_html__( 'Bavel', 'essential-addons-for-elementor-lite' ),
+                        'image' => $image_dir_url . 'bavel.svg',
+                    ],
+                    'rabbet' => [
+                        'title' => esc_html__( 'Rabbet', 'essential-addons-for-elementor-lite' ),
+                        'image' => $image_dir_url . 'rabbet.svg',
+                    ],
+                    'chevron-left' => [
+                        'title' => esc_html__( 'Chevron Left', 'essential-addons-for-elementor-lite' ),
+                        'image' => $image_dir_url . 'chevron-left.svg',
+                    ],
+                    'chevron-right' => [
+                        'title' => esc_html__( 'Chevron Right', 'essential-addons-for-elementor-lite' ),
+                        'image' => $image_dir_url . 'chevron-right.svg',
+                    ],
+                    'star' => [
+                        'title' => esc_html__( 'Start', 'essential-addons-for-elementor-lite' ),
+                        'image' => $image_dir_url . 'star.svg',
+                    ],
+                ],
+                'default' => 'bavel',
+                'toggle'       => false,
+                'image_choose' => true,
+                'css_class'    => 'eael-image-masking-choose',
+                'condition'    => $condition
             ]
         );
 

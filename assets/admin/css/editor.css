@@ -372,6 +372,12 @@
    .elementor-choices-label:last-child {
    border-inline-end: none;
 }
+.elementor-control-type-choose .eael-image-choices.eael-image-masking-choose {
+   grid-template-columns: repeat(5, 1fr);
+}
+.elementor-control-type-choose .eael-image-choices.eael-image-masking-choose .elementor-choices-label{
+   border: 1px solid #5F6367;
+}
 
 /* Liquid Glass Effect */
 .elementor-control-eael_wd_liquid_glass_effect,
