@@ -123,6 +123,113 @@ class Image_Masking {
         if( '_hover' === $tab ){
             $condition['eael_image_masking_hover_effect'] = 'yes';
         }
+
+        $svg_url = EAEL_PLUGIN_URL . 'assets/front-end/img/image-masking/svg-shapes/';
+        $element->add_control(
+            'eael_image_masking_svg' . $tab,
+            [
+                'label' => esc_html__( 'Choose Shape', 'essential-addons-for-elementor-lite' ),
+                'label_block' => true,
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'polygon' => [
+                        'title' => esc_html__( 'Polygon', 'essential-addons-for-elementor-lite' ),
+                        'image' => $svg_url . 'polygon.svg',
+                    ],
+                    'rounded' => [
+                        'title' => esc_html__( 'Rounded', 'essential-addons-for-elementor-lite' ),
+                        'image' => $svg_url . 'rounded.svg',
+                    ],
+                    'arch-down' => [
+                        'title' => esc_html__( 'Arch Down', 'essential-addons-for-elementor-lite' ),
+                        'image' => $svg_url . 'arch-down.svg',
+                    ],
+                    'arch-group' => [
+                        'title' => esc_html__( 'Arch Group', 'essential-addons-for-elementor-lite' ),
+                        'image' => $svg_url . 'arch-group.svg',
+                    ],
+                    'arch-up' => [
+                        'title' => esc_html__( 'Arch Up', 'essential-addons-for-elementor-lite' ),
+                        'image' => $svg_url . 'arch-up.svg',
+                    ],
+                    'asterisk' => [
+                        'title' => esc_html__( 'Asterisk', 'essential-addons-for-elementor-lite' ),
+                        'image' => $svg_url . 'asterisk.svg',
+                    ],
+                    'blob' => [
+                        'title' => esc_html__( 'Blob', 'essential-addons-for-elementor-lite' ),
+                        'image' => $svg_url . 'blob.svg',
+                    ],
+                    'blocks' => [
+                        'title' => esc_html__( 'Blocks', 'essential-addons-for-elementor-lite' ),
+                        'image' => $svg_url . 'blocks.svg',
+                    ],
+                    'brash-1' => [
+                        'title' => esc_html__( 'Brash 1', 'essential-addons-for-elementor-lite' ),
+                        'image' => $svg_url . 'brash-1.svg',
+                    ],
+                    'brash-2' => [
+                        'title' => esc_html__( 'Brash 2', 'essential-addons-for-elementor-lite' ),
+                        'image' => $svg_url . 'brash-2.svg',
+                    ],
+                    'brash-3' => [
+                        'title' => esc_html__( 'Brash 3', 'essential-addons-for-elementor-lite' ),
+                        'image' => $svg_url . 'brash-3.svg',
+                    ],
+                    'burst' => [
+                        'title' => esc_html__( 'Burst', 'essential-addons-for-elementor-lite' ),
+                        'image' => $svg_url . 'burst.svg',
+                    ],
+                    'chat' => [
+                        'title' => esc_html__( 'Chat', 'essential-addons-for-elementor-lite' ),
+                        'image' => $svg_url . 'chat.svg',
+                    ],
+                    'hex-tile' => [
+                        'title' => esc_html__( 'Hex Tile', 'essential-addons-for-elementor-lite' ),
+                        'image' => $svg_url . 'hex-tile.svg',
+                    ],
+                    'leaf' => [
+                        'title' => esc_html__( 'Leaf', 'essential-addons-for-elementor-lite' ),
+                        'image' => $svg_url . 'leaf.svg',
+                    ],
+                    'oval' => [
+                        'title' => esc_html__( 'Oval', 'essential-addons-for-elementor-lite' ),
+                        'image' => $svg_url . 'oval.svg',
+                    ],
+                    'pixel-cross' => [
+                        'title' => esc_html__( 'Pixel Cross', 'essential-addons-for-elementor-lite' ),
+                        'image' => $svg_url . 'pixel-cross.svg',
+                    ],
+                    'quote' => [
+                        'title' => esc_html__( 'Quote', 'essential-addons-for-elementor-lite' ),
+                        'image' => $svg_url . 'quote.svg',
+                    ],
+                    'star-dimond' => [
+                        'title' => esc_html__( 'Star Diamond', 'essential-addons-for-elementor-lite' ),
+                        'image' => $svg_url . 'star-dimond.svg',
+                    ],
+                    'upload' => [
+                        'title' => esc_html__( 'Upload', 'essential-addons-for-elementor-lite' ),
+                        'image' => $svg_url . 'upload.svg',
+                    ],
+                ],
+                'toggle'       => false,
+                'image_choose' => true,
+                'css_class'    => 'eael-image-masking-choose',
+                'default'      => '',
+				'condition'    => $condition
+            ]
+        );
+
+        $element->add_control(
+            'eael_image_masking_svg_url',
+            [
+                'label' => '',
+                'type' => Controls_Manager::HIDDEN,
+                'default' => $svg_url,
+            ]
+        );
+
 		$element->add_control(
 			'eael_image_masking_image' . $tab,
 			[
@@ -134,7 +241,7 @@ class Image_Masking {
                 'ai' => [
 					'active' => false,
 				],
-				'condition' => $condition
+				'condition' => array_merge( $condition, [ 'eael_image_masking_svg' . $tab => 'upload' ] )
 			]
 		);
 
