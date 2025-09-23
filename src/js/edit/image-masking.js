@@ -56,20 +56,24 @@ let ImageMaskingHandler = function ($scope, $) {
         if( 'yes' === settings?.eael_enable_image_masking ) {
             let style = '';
             if( 'clip' === settings?.eael_image_masking_type ){
-                let clipPath = get_clip_path( settings?.eael_image_masking_clip_path );
-                if( 'custom' === settings?.eael_image_masking_clip_path ){
+                let clipPath = '';
+                if( 'yes' === settings?.eael_image_masking_enable_custom_clip_path ){
                     clipPath = settings?.eael_image_masking_custom_clip_path;
                     clipPath = clipPath.replace( 'clip-path: ', '' );
+                } else {
+                    clipPath = get_clip_path( settings?.eael_image_masking_clip_path )
                 }
                 if( clipPath ) {
                     style += '.elementor-element-' + elementId + ' img {clip-path: ' + clipPath + ';}';
                 }
 
                 if( 'yes' === settings?.eael_image_masking_hover_effect ){
-                    let hoverClipPath = get_clip_path( settings?.eael_image_masking_clip_path_hover );
-                    if( 'custom' === settings?.eael_image_masking_clip_path_hover ){
+                    let hoverClipPath = '';
+                    if( 'yes' === settings?.eael_image_masking_enable_custom_clip_path_hover ){
                         hoverClipPath = settings?.eael_image_masking_custom_clip_path_hover;
                         hoverClipPath = hoverClipPath.replace( 'clip-path: ', '' );
+                    } else {
+                        hoverClipPath = get_clip_path( settings?.eael_image_masking_clip_path_hover )
                     }
                     if( hoverClipPath ) {
                         let hoverSelector = settings?.eael_image_masking_hover_selector;

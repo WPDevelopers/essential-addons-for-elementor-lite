@@ -52,17 +52,6 @@ class Image_Masking {
         }
 
         $condition['eael_image_masking_type'] = 'clip';
-        // $element->add_control(
-        //     'eael_image_masking_clip_path' . $tab,
-        //     [
-        //         'label'       => esc_html__( 'Select Clip Path', 'essential-addons-for-elementor-lite' ),
-        //         'type'        => Controls_Manager::SELECT2,
-        //         'label_block' => true,
-        //         'options'     => $this->get_clip_path_options(),
-        //         'default'     => $tab !== '_hover' ? 'circle' : 'inset',
-        //         'condition'   => $condition
-        //     ]
-        // );
         $image_dir_url = EAEL_PLUGIN_URL . 'assets/front-end/img/image-masking/clip-paths/';
         $element->add_control(
             'eael_image_masking_clip_path' . $tab,
@@ -96,11 +85,20 @@ class Image_Masking {
                 'toggle'       => false,
                 'image_choose' => true,
                 'css_class'    => 'eael-image-masking-choose',
-                'condition'    => $condition
+                'condition'    => array_merge( $condition, [ 'eael_image_masking_enable_custom_clip_path' . $tab . '!' => 'yes' ] )
             ]
         );
 
-        $condition['eael_image_masking_clip_path' . $tab] = 'custom';
+        $element->add_control(
+            'eael_image_masking_enable_custom_clip_path' . $tab,
+            [
+                'label'       => esc_html__( 'Use Custom Clip Path', 'essential-addons-for-elementor-lite' ),
+                'type'        => Controls_Manager::SWITCHER,
+                'return_value' => 'yes',
+                'condition'   => $condition,
+            ]
+        );
+
         $element->add_control(
             'eael_image_masking_custom_clip_path' . $tab,
             [
@@ -117,7 +115,7 @@ class Image_Masking {
                 'default'     => 'clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);',
                 'placeholder' => 'clip-path: polygon(50% 0%, 0% 100%, 100% 100%);',
                 'description' => __( 'Enter your custom clip path value. You can use <a href = "https://bennettfeely.com/clippy/" target = "_blank">Clippy</a> to generate your custom clip path.', 'essential-addons-for-elementor-lite' ),
-                'condition'   => $condition,
+                'condition'   => array_merge( $condition, [ 'eael_image_masking_enable_custom_clip_path' . $tab => 'yes' ] ),
             ]
         );
 
@@ -392,22 +390,26 @@ class Image_Masking {
             $style = '';
             $element->add_render_attribute( '_wrapper', 'class', 'eael-image-masking-' . $element_id );
 			if( 'clip' === $type ){
-                $clip_path = $settings['eael_image_masking_clip_path'];
-                $clip_path_value = $this->clip_paths( $clip_path );
-                if( 'custom' === $clip_path ){
+                $clip_path_value = '';
+                if( 'yes' === $settings['eael_image_masking_enable_custom_clip_path'] ){
                     $clip_path_value = $settings['eael_image_masking_custom_clip_path'];
                     $clip_path_value = str_replace( 'clip-path: ', '', $clip_path_value );
+                } else {
+                    $clip_path = $settings['eael_image_masking_clip_path'];
+                    $clip_path_value = $this->clip_paths( $clip_path );
                 }
                 if( $clip_path_value ) {
                     $style .= '.eael-image-masking-'.$element_id.' img {clip-path: '.$clip_path_value.'}';
                 }
     
                 if( 'yes' === $settings['eael_image_masking_hover_effect'] ){
-                    $hover_clip_path = $settings['eael_image_masking_clip_path_hover'];
-                    $hover_clip_path_value = $this->clip_paths( $hover_clip_path );
-                    if( 'custom' === $hover_clip_path ){
+                    $hover_clip_path_value = '';
+                    if( 'yes' === $settings['eael_image_masking_enable_custom_clip_path_hover'] ){
                         $hover_clip_path_value = $settings['eael_image_masking_custom_clip_path_hover'];
                         $hover_clip_path_value = str_replace( 'clip-path: ', '', $hover_clip_path_value );
+                    } else {
+                        $hover_clip_path = $settings['eael_image_masking_clip_path_hover'];
+                        $hover_clip_path_value = $this->clip_paths( $hover_clip_path );
                     }
                     if( $hover_clip_path_value ) {
                         $hover_selector = $settings['eael_image_masking_hover_selector'];
