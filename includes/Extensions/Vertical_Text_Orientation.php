@@ -207,6 +207,8 @@ class Vertical_Text_Orientation {
 			]
 		);
 
+        $repeater = new \Elementor\Repeater();
+
         $element->add_control(
 			'eael_vto_writing_gradient_color_heading',
 			[
@@ -219,6 +221,65 @@ class Vertical_Text_Orientation {
 			]
 		);
 
+		$repeater->add_control(
+			'eael_vto_writing_gradient_color',
+			[
+				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}}.eael_vto-vertical {{CURRENT_ITEM}}' => 'color: {{VALUE}}'
+				],
+			]
+		);
+
+        $repeater->add_control(
+			'eael_vto_writing_gradient_color_location',
+			[
+				'label'      => esc_html__( 'Location', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'rem', 'custom' ],
+				'range'      => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 1000,
+						'step' => 1,
+					],
+                    '%' => [
+						'min'  => 0,
+						'max'  => 100,
+						'step' => 1,
+					],
+				],
+                'default' => [
+                    'unit' => '%',
+                    'size' => 0,
+                ],
+			]
+		);
+
+        $element->add_control(
+			'eael_vto_writing_gradient_color_repeater',
+			[
+				'label'   => esc_html__( 'Repeater Color', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::REPEATER,
+				'fields'  => $repeater->get_controls(),
+				'default' => [
+					[
+						'list_color' => '#000000',
+					],
+					[
+						'list_color' => '#0ff',
+					],
+					[
+						'list_color' => '#00f',
+					],
+				],
+				'title_field' => '{{{ list_color }}}',
+                'condition' => [
+					'eael_vertical_text_orientation_switch' => 'yes',
+				],
+			]
+		);
 
         $element->add_control(
 			'eael_vto_writing_styling_heading',
