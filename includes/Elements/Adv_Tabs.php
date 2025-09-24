@@ -435,9 +435,27 @@ class Adv_Tabs extends Widget_Base
                 'type' => Controls_Manager::REPEATER,
                 'seperator' => 'before',
                 'default' => [
-                    ['eael_adv_tabs_tab_title' => esc_html__('Tab Title 1', 'essential-addons-for-elementor-lite')],
-                    ['eael_adv_tabs_tab_title' => esc_html__('Tab Title 2', 'essential-addons-for-elementor-lite')],
-                    ['eael_adv_tabs_tab_title' => esc_html__('Tab Title 3', 'essential-addons-for-elementor-lite')],
+                    [
+                        'eael_adv_tabs_tab_title' => esc_html__('Mission', 'essential-addons-for-elementor-lite'),
+                        'eael_adv_tabs_tab_title_icon_new' => [
+                            'value' => 'far fa-lightbulb',
+                            'library' => 'fa-solid',
+                        ],
+                    ],
+                    [
+                        'eael_adv_tabs_tab_title' => esc_html__('Vission', 'essential-addons-for-elementor-lite'),
+                        'eael_adv_tabs_tab_title_icon_new' => [
+                            'value' => 'fas fa-eye',
+                            'library' => 'fa-solid',
+                        ],
+                    ],
+                    [
+                        'eael_adv_tabs_tab_title' => esc_html__('Philosophy', 'essential-addons-for-elementor-lite'),
+                        'eael_adv_tabs_tab_title_icon_new' => [
+                            'value' => 'fas fa-filter',
+                            'library' => 'fa-solid',
+                        ],
+                    ],
                 ],
                 'fields' => $repeater->get_controls(),
                 'title_field' => '{{eael_adv_tabs_tab_title}}',
@@ -718,6 +736,9 @@ class Adv_Tabs extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'color: {{VALUE}};',
                 ],
+                'condition' => [
+                    'eael_adv_tab_new_style!' => 'glassey',
+                ],
             ]
         );
         $this->add_control(
@@ -732,9 +753,43 @@ class Adv_Tabs extends Widget_Base
                 ],
                 'condition' => [
                     'eael_adv_tabs_icon_show' => 'yes',
+                    'eael_adv_tab_new_style!' => 'glassey',
                 ],
             ]
         );
+
+        $this->add_control(
+            'eael_adv_tabs_tab_text_color_glassey',
+            [
+                'label'     => esc_html__('Text Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#AFAFAF',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav.eael-tabs-glassey > ul li' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_adv_tab_new_style' => 'glassey',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_adv_tabs_tab_icon_color_glassey',
+            [
+                'label'     => esc_html__('Icon Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#AFAFAF',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav.eael-tabs-glassey > ul li i' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav.eael-tabs-glassey > ul li svg' => 'fill: {{VALUE}};',
+                ],
+                'condition' => [
+                    'eael_adv_tabs_icon_show' => 'yes',
+                    'eael_adv_tab_new_style'  => 'glassey',
+                ],
+            ]
+        );
+
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -875,7 +930,7 @@ class Adv_Tabs extends Widget_Base
         [
                 'label'     => esc_html__('Tab Background Color', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::COLOR,
-                'default'   => '#44444400',
+                'default'   => '#F7F1F124',
                 'selectors' => [
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav.eael-tabs-glassey > ul:after' => 'background-color: {{VALUE}};',
                 ],
