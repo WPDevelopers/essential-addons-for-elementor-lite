@@ -241,6 +241,34 @@ class Adv_Tabs extends Widget_Base
         );
 
         $repeater->add_control(
+            'eael_adv_tabs_tab_show_as_scheduled',
+            [
+                'label' => __('Active as Scheduled', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'yes',
+                'default' => 'no',
+                'description' => __('When enabled, this tab will become active if the current date matches or is past the scheduled date.', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_adv_tabs_schedule_date',
+            [
+                'label' => __('Schedule Date', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'placeholder' => 'yyyy-mm-dd',
+                'condition' => [
+                    'eael_adv_tabs_tab_show_as_scheduled' => 'yes',
+                ],
+                'ai' => [
+                    'active' => false,
+                ],
+            ]
+        );
+
+        $repeater->add_control(
             'eael_adv_tabs_icon_type',
             [
                 'label' => esc_html__('Icon Type', 'essential-addons-for-elementor-lite'),
@@ -1012,9 +1040,52 @@ class Adv_Tabs extends Widget_Base
         $this->end_controls_section();
     }
 
+    /**
+     * Determine which tab should be active based on simple scheduling
+     *
+     * @param array $settings Widget settings
+     * @return int|null Index of the tab that should be active, or null if no schedule matches
+     */
+    private function get_scheduled_active_tab($settings)
+    {
+        if (empty($settings['eael_adv_tabs_tab'])) {
+            return null;
+        }
+
+        $current_date = current_time('Y-m-d');
+        $matching_tabs = [];
+
+        foreach ($settings['eael_adv_tabs_tab'] as $index => $tab) {
+            if ('yes' === $tab['eael_adv_tabs_tab_show_as_scheduled'] && !empty($tab['eael_adv_tabs_schedule_date'])) {
+                $schedule_date = trim($tab['eael_adv_tabs_schedule_date']);
+
+                if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $schedule_date)) {
+                    if ($current_date >= $schedule_date) {
+                        $matching_tabs[] = [
+                            'index' => $index,
+                            'date' => $schedule_date
+                        ];
+                    }
+                }
+            }
+        }
+
+        if (empty($matching_tabs)) {
+            return null;
+        }
+
+        usort($matching_tabs, function($a, $b) {
+            return strcmp($b['date'], $a['date']);
+        });
+
+        return $matching_tabs[0]['index'];
+    }
+
     protected function render()
     {
         $settings = $this->get_settings_for_display();
+
+        $scheduled_active_tab_index = $this->get_scheduled_active_tab($settings);
 
 		$page_id = get_the_ID();
         $eael_find_default_tab = [];
@@ -1060,11 +1131,19 @@ class Adv_Tabs extends Widget_Base
 
                         $tab_count = $index + 1;
 					    $tab_title_setting_key = $this->get_repeater_setting_key( 'eael_adv_tabs_tab_title', 'eael_adv_tabs_tab', $index );
-					    
+
+                        $tab_active_class = '';
+                        if ($scheduled_active_tab_index !== null) {
+                            if ($index === $scheduled_active_tab_index) {
+                                $tab_active_class = 'active-default';
+                            }
+                        } else {
+                            $tab_active_class = $tab['eael_adv_tabs_tab_show_as_default'];
+                        }
 
                         $this->add_render_attribute( $tab_title_setting_key, [
                             'id' => $tab_id,
-                            'class' => [ $tab['eael_adv_tabs_tab_show_as_default'], 'eael-tab-item-trigger', 'eael-tab-nav-item' ],
+                            'class' => [ $tab_active_class, 'eael-tab-item-trigger', 'eael-tab-nav-item' ],
                             'aria-selected' => 1 === $tab_count ? 'true' : 'false',
                             'data-tab' => $tab_count,
                             'role' => 'tab',
@@ -1134,12 +1213,22 @@ class Adv_Tabs extends Widget_Base
             </div>
             
             <div class="eael-tabs-content">
-		        <?php foreach ($settings['eael_adv_tabs_tab'] as $tab) :
+		        <?php foreach ($settings['eael_adv_tabs_tab'] as $content_index => $tab) :
 			        $eael_find_default_tab[] = $tab['eael_adv_tabs_tab_show_as_default'];
 			        $tab_id = $tab['eael_adv_tabs_tab_id'] ? $tab['eael_adv_tabs_tab_id'] : Helper::str_to_css_id( $tab['eael_adv_tabs_tab_title'] );
-			        $tab_id = $tab_id === 'safari' ? 'eael-safari-tab' : $tab_id . '-tab'; ?>
+			        $tab_id = $tab_id === 'safari' ? 'eael-safari-tab' : $tab_id . '-tab';
 
-                    <div id="<?php echo esc_attr( $tab_id ); ?>" class="clearfix eael-tab-content-item <?php echo esc_attr($tab['eael_adv_tabs_tab_show_as_default']); ?>" data-title-link="<?php echo esc_attr( $tab_id ); ?>">
+                    $content_active_class = '';
+                    if ($scheduled_active_tab_index !== null) {
+                        if ($content_index === $scheduled_active_tab_index) {
+                            $content_active_class = 'active-default';
+                        }
+                    } else {
+                        $content_active_class = $tab['eael_adv_tabs_tab_show_as_default'];
+                    }
+			        ?>
+
+                    <div id="<?php echo esc_attr( $tab_id ); ?>" class="clearfix eael-tab-content-item <?php echo esc_attr($content_active_class); ?>" data-title-link="<?php echo esc_attr( $tab_id ); ?>">
 				        <?php
                         if ('content' == $tab['eael_adv_tabs_text_type']) :
                             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
