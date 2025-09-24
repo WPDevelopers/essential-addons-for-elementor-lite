@@ -211,6 +211,7 @@ class Image_Masking {
                     'upload' => [
                         'title' => esc_html__( 'Upload', 'essential-addons-for-elementor-lite' ),
                         'image' => $svg_url . 'upload.svg',
+                        'fullwidth' => true,
                     ],
                 ],
                 'toggle'       => false,
@@ -230,20 +231,25 @@ class Image_Masking {
             ]
         );
 
-		$element->add_control(
-			'eael_image_masking_image' . $tab,
-			[
-				'label'     => '',
-				'type'      => Controls_Manager::MEDIA,
-				'dynamic'   => [
-					'active' => false,
-				],
-                'ai' => [
-					'active' => false,
-				],
-				'condition' => array_merge( $condition, [ 'eael_image_masking_svg' . $tab => 'upload' ] )
-			]
-		);
+        if ( !apply_filters('eael/pro_enabled', false ) ) {
+            $element->add_control(
+                'eael_image_masking_upload_pro_message',
+                [
+                    'label' => '',
+                    'type' => Controls_Manager::RAW_HTML,
+                    'raw' => '<div class="ea-nerd-box">
+                            <div class="ea-nerd-box-message">' . __('This feature is available in the pro version.', 'essential-addons-for-elementor-lite') . '</div>
+                            <a class="ea-nerd-box-link elementor-button elementor-button-default" href="https://wpdeveloper.com/upgrade/ea-pro" target="_blank">
+                            ' . __('Upgrade to EA PRO', 'essential-addons-for-elementor-lite') . '
+                            </a>
+                        </div>',
+                    'content_classes' => 'eael-pro-notice',
+                    'condition' => array_merge( $condition, [ 'eael_image_masking_svg' . $tab => 'upload' ] )   
+                ]
+            );
+        } else {
+            do_action( 'eael/image-masking/image_control', $element, array_merge( $condition, [ 'eael_image_masking_svg' . $tab => 'upload' ] ), $tab );
+        }
 
         if( '_hover' === $tab ){
             $element->add_control(

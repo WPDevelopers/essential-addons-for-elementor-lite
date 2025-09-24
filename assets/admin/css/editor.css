@@ -378,7 +378,14 @@
 .elementor-control-type-choose .eael-image-choices.eael-image-masking-choose .elementor-choices-label{
    border: 1px solid #5F6367;
 }
-
+.elementor-control-type-choose .eael-image-choices.eael-image-masking-choose .elementor-choices-label.fullwidth{
+   grid-column: 1 / -1;
+   height: 47px;
+}
+.elementor-control-type-choose .eael-image-choices.eael-image-masking-choose .elementor-choices-label.fullwidth img{
+   max-height: 100%;
+   width: auto;
+}
 /* Liquid Glass Effect */
 .elementor-control-eael_wd_liquid_glass_effect,
 .elementor-control-eael_wd_liquid_glass_effect_rear,

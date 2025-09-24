@@ -96,7 +96,6 @@ let ImageMaskingHandler = function ($scope, $) {
                 if( mask_url ) {
                     style += '.elementor-element-' + elementId + ' img {mask-image: url(' + mask_url + '); -webkit-mask-image: url(' + mask_url + ');}';
                 }
-                console.log('image',mask_url, image, settings?.eael_image_masking_image);
                 
                 if( 'yes' === settings?.eael_image_masking_hover_effect ){
                     let hoverImage = settings?.eael_image_masking_image_hover;
