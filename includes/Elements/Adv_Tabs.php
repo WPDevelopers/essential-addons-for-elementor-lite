@@ -249,21 +249,42 @@ class Adv_Tabs extends Widget_Base
                 'label_off' => __('No', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
                 'default' => 'no',
-                'description' => __('When enabled, this tab will become active if the current date matches or is past the scheduled date.', 'essential-addons-for-elementor-lite'),
+                'description' => __('When enabled, this tab will become active if the current date matches the scheduled date/time.', 'essential-addons-for-elementor-lite'),
             ]
         );
 
         $repeater->add_control(
             'eael_adv_tabs_schedule_date',
             [
-                'label' => __('Schedule Date', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'placeholder' => 'yyyy-mm-dd',
+                'label' => __('Start Date', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DATE_TIME,
+                'default' => date('Y-m-d H:i', current_time('timestamp', 0)),
+                'picker_options' => [
+                    'enableTime' => true,
+                    'altInput' => true,
+                    'altFormat' => 'M j, Y h:i K',
+                    'dateFormat' => 'Y-m-d H:i',
+                ],
                 'condition' => [
                     'eael_adv_tabs_tab_show_as_scheduled' => 'yes',
                 ],
-                'ai' => [
-                    'active' => false,
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_adv_tabs_schedule_end_date',
+            [
+                'label' => __('End Date', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DATE_TIME,
+                'default' => '',
+                'picker_options' => [
+                    'enableTime' => true,
+                    'altInput' => true,
+                    'altFormat' => 'M j, Y h:i K',
+                    'dateFormat' => 'Y-m-d H:i',
+                ],
+                'condition' => [
+                    'eael_adv_tabs_tab_show_as_scheduled' => 'yes',
                 ],
             ]
         );
@@ -1041,7 +1062,7 @@ class Adv_Tabs extends Widget_Base
     }
 
     /**
-     * Determine which tab should be active based on simple scheduling
+     * Determine which tab should be active based on date/time scheduling windows
      *
      * @param array $settings Widget settings
      * @return int|null Index of the tab that should be active, or null if no schedule matches
@@ -1052,20 +1073,41 @@ class Adv_Tabs extends Widget_Base
             return null;
         }
 
-        $current_date = current_time('Y-m-d');
+        $current_timestamp = current_time('timestamp');
         $matching_tabs = [];
 
         foreach ($settings['eael_adv_tabs_tab'] as $index => $tab) {
             if ('yes' === $tab['eael_adv_tabs_tab_show_as_scheduled'] && !empty($tab['eael_adv_tabs_schedule_date'])) {
-                $schedule_date = trim($tab['eael_adv_tabs_schedule_date']);
+                $start_datetime = trim($tab['eael_adv_tabs_schedule_date']);
+                $end_datetime = !empty($tab['eael_adv_tabs_schedule_end_date']) ? trim($tab['eael_adv_tabs_schedule_end_date']) : '';
 
-                if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $schedule_date)) {
-                    if ($current_date >= $schedule_date) {
-                        $matching_tabs[] = [
-                            'index' => $index,
-                            'date' => $schedule_date
-                        ];
+                $start_timestamp = null;
+                if (preg_match('/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/', $start_datetime)) {
+                    $start_timestamp = strtotime($start_datetime);
+                }
+
+                $end_timestamp = null;
+                if (!empty($end_datetime)) {
+                    if (preg_match('/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/', $end_datetime)) {
+                        $end_timestamp = strtotime($end_datetime);
                     }
+                }
+
+                $is_active = false;
+                if ($start_timestamp) {
+                    if ($end_timestamp) {
+                        $is_active = ($current_timestamp >= $start_timestamp && $current_timestamp <= $end_timestamp);
+                    } else {
+                        $is_active = ($current_timestamp >= $start_timestamp);
+                    }
+                }
+
+                if ($is_active) {
+                    $matching_tabs[] = [
+                        'index' => $index,
+                        'start_timestamp' => $start_timestamp,
+                        'end_timestamp' => $end_timestamp,
+                    ];
                 }
             }
         }
@@ -1075,7 +1117,7 @@ class Adv_Tabs extends Widget_Base
         }
 
         usort($matching_tabs, function($a, $b) {
-            return strcmp($b['date'], $a['date']);
+            return $b['start_timestamp'] - $a['start_timestamp'];
         });
 
         return $matching_tabs[0]['index'];
