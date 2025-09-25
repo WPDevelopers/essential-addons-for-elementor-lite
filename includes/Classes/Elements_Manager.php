@@ -281,7 +281,7 @@ class Elements_Manager {
 	 */
 	public function generate_script( $post_id, $elements, $context, $ext ) {
 		// if folder not exists, create new folder
-		if ( ! file_exists( EAEL_ASSET_PATH ) ) {
+		if ( ! is_dir( EAEL_ASSET_PATH ) ) {
 			wp_mkdir_p( EAEL_ASSET_PATH );
 		}
 
