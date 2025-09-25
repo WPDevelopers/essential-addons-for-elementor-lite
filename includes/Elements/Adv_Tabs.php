@@ -685,15 +685,15 @@ class Adv_Tabs extends Widget_Base
 
         $this->start_controls_tabs('eael_adv_tabs_header_tabs');
         // Normal State Tab
-      $this->start_controls_tab(
-         'eael_adv_tabs_header_normal', 
-         [
-            'label' => esc_html__('Normal', 'essential-addons-for-elementor-lite'),
-            'condition' => [
-                    'eael_adv_tab_new_style!' => 'glassey',
-                ],
-         ]
-      );
+        $this->start_controls_tab(
+            'eael_adv_tabs_header_normal', 
+            [
+                'label' => esc_html__('Normal', 'essential-addons-for-elementor-lite'),
+                'condition' => [
+                        'eael_adv_tab_new_style' => 'default',
+                    ],
+            ]
+        );
         
         $this->add_control(
             'eael_adv_tabs_tab_color',
@@ -705,7 +705,7 @@ class Adv_Tabs extends Widget_Base
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'background-color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'eael_adv_tab_new_style!' => 'glassey',
+                    'eael_adv_tab_new_style' => 'default',
                 ],
             ]
         );
@@ -717,7 +717,7 @@ class Adv_Tabs extends Widget_Base
                 'types' => ['classic', 'gradient'],
                 'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.eael-tab-nav-item',
                 'condition' => [
-                    'eael_adv_tab_new_style!' => 'glassey',
+                    'eael_adv_tab_new_style' => 'default',
                 ],
             ]
         );
@@ -731,7 +731,7 @@ class Adv_Tabs extends Widget_Base
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'eael_adv_tab_new_style!' => 'glassey',
+                    'eael_adv_tab_new_style' => 'default',
                 ],
             ]
         );
@@ -747,7 +747,7 @@ class Adv_Tabs extends Widget_Base
                 ],
                 'condition' => [
                     'eael_adv_tabs_icon_show' => 'yes',
-                    'eael_adv_tab_new_style!' => 'glassey',
+                    'eael_adv_tab_new_style' => 'default',
                 ],
             ]
         );
@@ -759,7 +759,7 @@ class Adv_Tabs extends Widget_Base
                 'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
                 'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li',
                 'condition' => [
-                  'eael_adv_tab_new_style!' => 'glassey',
+                  'eael_adv_tab_new_style' => 'default',
                ],
             ]
         );
@@ -773,7 +773,7 @@ class Adv_Tabs extends Widget_Base
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'condition' => [
-                  'eael_adv_tab_new_style!' => 'glassey',
+                  'eael_adv_tab_new_style' => 'default',
                ],
             ]
         );
@@ -784,7 +784,7 @@ class Adv_Tabs extends Widget_Base
             [
                     'label' => esc_html__('Hover', 'essential-addons-for-elementor-lite'),
                     'condition' => [
-                        'eael_adv_tab_new_style!' => 'glassey',
+                        'eael_adv_tab_new_style' => 'default',
                     ],
                 ]
         );
@@ -798,7 +798,7 @@ class Adv_Tabs extends Widget_Base
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover' => 'background-color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'eael_adv_tab_new_style!' => 'glassey',
+                    'eael_adv_tab_new_style' => 'default',
                 ],
             ]
         );
@@ -810,7 +810,7 @@ class Adv_Tabs extends Widget_Base
                 'types'     => ['classic', 'gradient'],
                 'selector'  => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.eael-tab-nav-item: hover',
                 'condition' => [
-                    'eael_adv_tab_new_style!' => 'glassey',
+                    'eael_adv_tab_new_style' => 'default',
                 ],
             ]
         );
@@ -847,7 +847,7 @@ class Adv_Tabs extends Widget_Base
                 'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
                 'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover',
                 'condition' => [
-                  'eael_adv_tab_new_style!' => 'glassey',
+                  'eael_adv_tab_new_style' => 'default',
                ],
             ]
         );
@@ -861,7 +861,7 @@ class Adv_Tabs extends Widget_Base
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'condition' => [
-                  'eael_adv_tab_new_style!' => 'glassey',
+                  'eael_adv_tab_new_style' => 'default',
                ],
             ]
         );
@@ -872,7 +872,7 @@ class Adv_Tabs extends Widget_Base
             [
                     'label' => esc_html__('Active', 'essential-addons-for-elementor-lite'),
                     'condition' => [
-                        'eael_adv_tab_new_style!' => 'glassey',
+                        'eael_adv_tab_new_style' => 'default',
                     ],
                 ]
         );
@@ -886,7 +886,7 @@ class Adv_Tabs extends Widget_Base
                     '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul .active' => 'background-color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'eael_adv_tab_new_style!' => 'glassey',
+                    'eael_adv_tab_new_style' => 'default',
                 ],
             ]
         );
@@ -898,7 +898,7 @@ class Adv_Tabs extends Widget_Base
                 'types'    => ['classic', 'gradient'],
                 'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active',
                 'condition' => [
-                    'eael_adv_tab_new_style!' => 'glassey',
+                    'eael_adv_tab_new_style' => 'default',
                 ],
             ]
         );
@@ -938,7 +938,7 @@ class Adv_Tabs extends Widget_Base
                 'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
                 'selector' => '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active',
                 'condition' => [
-                  'eael_adv_tab_new_style!' => 'glassey',
+                  'eael_adv_tab_new_style' => 'default',
                ],
             ]
         );
@@ -953,7 +953,7 @@ class Adv_Tabs extends Widget_Base
                   '{{WRAPPER}} .eael-advance-tabs .eael-tabs-nav > ul li.active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                ],
                'condition' => [
-               'eael_adv_tab_new_style!' => 'glassey',
+               'eael_adv_tab_new_style' => 'default',
             ],
          ]
       );
