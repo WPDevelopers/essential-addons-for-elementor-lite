@@ -443,7 +443,7 @@ class Adv_Tabs extends Widget_Base
                         ],
                     ],
                     [
-                        'eael_adv_tabs_tab_title' => esc_html__('Vission', 'essential-addons-for-elementor-lite'),
+                        'eael_adv_tabs_tab_title' => esc_html__('Vision', 'essential-addons-for-elementor-lite'),
                         'eael_adv_tabs_tab_title_icon_new' => [
                             'value' => 'fas fa-eye',
                             'library' => 'fa-solid',
