@@ -55,6 +55,9 @@ class Adv_Tabs extends Widget_Base
             'product tabs',
             'ea',
             'essential addons',
+            'Liquid Glass Effect',
+            'Glassmorphism',
+            'Frost Effect',
         ];
     }
     
@@ -107,7 +110,7 @@ class Adv_Tabs extends Widget_Base
 						'image' => $image_path . 'default.png'
                     ],
                     'glassey' => [
-                        'title' => esc_html__( 'Glassey (Pro)', 'essential-addons-for-elementor-lite' ),
+                        'title' => esc_html__( 'Liquid Glass (Pro)', 'essential-addons-for-elementor-lite' ),
 						'image' => $image_path . 'glassey.png'
                     ],
                 ],
