@@ -166,9 +166,9 @@ let ImageMaskingHandler = function ($scope, $) {
                         processing: true
                     };
 
-                    let svgPaths = settings?.eael_svg_paths;
-                    if (!svgPaths || !svgPaths.length) {
-                        console.warn('EAEL Image Masking: No SVG paths found for morphing');
+                    let svgPathsType = settings?.eael_svg_paths;
+                    if (!svgPathsType) {
+                        console.warn('EAEL Image Masking: No SVG paths type found for morphing');
                         return;
                     }
 
@@ -180,23 +180,54 @@ let ImageMaskingHandler = function ($scope, $) {
                     let svgPromises = [];
                     let svgContents = [];
 
-                    svgPaths.forEach(function( svgPath, index ){
-                        if( 'code' === svgPath?.attributes?.eael_svg_file_type ){
-                            // Handle inline SVG code
-                            svgContents[index] = DOMPurify.sanitize( svgPath?.attributes?.eael_svg_code );
-                            svgPromises.push(Promise.resolve());
-                        } else if( 'file' === svgPath?.attributes?.eael_svg_file_type ){
-                            // Handle SVG file URL - check if URL exists
-                            let svgFileUrl = svgPath?.attributes?.eael_svg_file?.url;
-                            if (!svgFileUrl) {
-                                console.warn('EAEL Image Masking: SVG file URL not found for path at index:', index);
-                                svgContents[index] = '';
-                                svgPromises.push(Promise.resolve());
-                                return;
-                            }
+                    if ('custom' === svgPathsType) {
+                        // Handle custom SVG paths (from uploaded files or custom code)
+                        let customSvgPaths = settings?.eael_svg_paths_custom;
+                        if (!customSvgPaths || !customSvgPaths.length) {
+                            console.warn('EAEL Image Masking: No custom SVG paths found for morphing asfdasfd');
+                            return;
+                        }
 
-                            // Fetch SVG file content
-                            let fetchPromise = fetch(svgFileUrl)
+                        customSvgPaths.forEach(function( svgPath, index ){
+                            if( 'code' === svgPath?.attributes?.eael_svg_file_type ){
+                                // Handle inline SVG code
+                                svgContents[index] = DOMPurify.sanitize( svgPath?.attributes?.eael_svg_code );
+                                svgPromises.push(Promise.resolve());
+                            } else if( 'file' === svgPath?.attributes?.eael_svg_file_type ){
+                                // Handle SVG file URL - check if URL exists
+                                let svgFileUrl = svgPath?.attributes?.eael_svg_file?.url;
+                                if (!svgFileUrl) {
+                                    console.warn('EAEL Image Masking: SVG file URL not found for path at index:', index);
+                                    svgContents[index] = '';
+                                    svgPromises.push(Promise.resolve());
+                                    return;
+                                }
+
+                                // Fetch SVG file content
+                                let fetchPromise = fetch(svgFileUrl)
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error(`HTTP error! status: ${response.status}`);
+                                        }
+                                        return response.text();
+                                    })
+                                    .then(data => {
+                                        svgContents[index] = DOMPurify.sanitize(data);
+                                    })
+                                    .catch(error => {
+                                        console.error('EAEL Image Masking: Error fetching SVG file:', error);
+                                        svgContents[index] = '';
+                                    });
+                                svgPromises.push(fetchPromise);
+                            }
+                        });
+                    } else {
+                        // Handle predefined SVG paths (blob, brush, dimond)
+                        // Use the pro plugin URL for morphing assets (matches PHP implementation)
+                        let svgPathUrl = settings?.eael_pro_image_masking_svg_url + svgPathsType + '-';
+
+                        for (let i = 1; i <= 5; i++) {
+                            let fetchPromise = fetch(svgPathUrl + i + '.svg')
                                 .then(response => {
                                     if (!response.ok) {
                                         throw new Error(`HTTP error! status: ${response.status}`);
@@ -204,15 +235,15 @@ let ImageMaskingHandler = function ($scope, $) {
                                     return response.text();
                                 })
                                 .then(data => {
-                                    svgContents[index] = DOMPurify.sanitize(data);
+                                    svgContents[i - 1] = DOMPurify.sanitize(data);
                                 })
                                 .catch(error => {
-                                    console.error('EAEL Image Masking: Error fetching SVG file:', error);
-                                    svgContents[index] = '';
+                                    console.error('EAEL Image Masking: Error fetching predefined SVG file:', error);
+                                    svgContents[i - 1] = '';
                                 });
                             svgPromises.push(fetchPromise);
                         }
-                    });
+                    }
 
                     // Wait for all SVG content to be loaded before proceeding
                     Promise.all(svgPromises).then(() => {
