@@ -372,9 +372,17 @@
    .elementor-choices-label:last-child {
    border-inline-end: none;
 }
-.elementor-control-type-choose .eael-image-choices.eael-image-masking-choose {
+
+.elementor-control-type-choose .eael-image-choices.eael-image-masking-choose.col-3{
+   grid-template-columns: repeat(3, 1fr);
+}
+.elementor-control-type-choose .eael-image-choices.eael-image-masking-choose.col-4{
+   grid-template-columns: repeat(4, 1fr);
+}
+.elementor-control-type-choose .eael-image-choices.eael-image-masking-choose.col-5{
    grid-template-columns: repeat(5, 1fr);
 }
+
 .elementor-control-type-choose .eael-image-choices.eael-image-masking-choose .elementor-choices-label{
    border: 1px solid #5F6367;
 }

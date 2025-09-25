@@ -216,8 +216,8 @@ class Image_Masking {
                 ],
                 'toggle'       => false,
                 'image_choose' => true,
-                'css_class'    => 'eael-image-masking-choose',
-                'default'      => '',
+                'css_class'    => 'eael-image-masking-choose col-5',
+                'default'      => 'polygon',
 				'condition'    => $condition
             ]
         );
