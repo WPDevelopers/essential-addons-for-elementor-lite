@@ -134,7 +134,7 @@ class Adv_Tabs extends Widget_Base
         $this->add_control(
             'eael_adv_tab_style_pro_alert',
             [
-                'label'     => sprintf( '<a target = "_blank" href = "https: //wpdeveloper.com/upgrade/ea-pro">%s</a>', esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite')),
+                'label'     => sprintf( '<a target="_blank" href="https://wpdeveloper.com/upgrade/ea-pro">%s</a>', esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite')),
                 'type'      => Controls_Manager::HEADING,
                 'condition' => [
                     'eael_adv_tab_new_style' => $eael_fg_layout['conditions'],
