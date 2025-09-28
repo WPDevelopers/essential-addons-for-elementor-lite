@@ -207,12 +207,10 @@ class Vertical_Text_Orientation {
 			]
 		);
 
-        $repeater = new \Elementor\Repeater();
-
         $element->add_control(
-			'eael_vto_writing_gradient_color_heading',
+			'eael_vto_writing_styling_heading',
 			[
-				'label' => esc_html__( 'Gradient Color', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Styling Options', 'essential-addons-for-elementor-lite' ),
 				'type' => Controls_Manager::HEADING,
 				'separator' => 'before',
                 'condition' => [
@@ -221,14 +219,39 @@ class Vertical_Text_Orientation {
 			]
 		);
 
+        $element->add_control(
+			'eael_vto_writing_styling_type',
+			[
+				'label'   => esc_html__( 'Select Style', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'background',
+				'options' => [
+					'background' => esc_html__( 'Background Type', 'essential-addons-for-elementor-lite' ),
+					'gradient'   => esc_html__( 'Gradient Type', 'essential-addons-for-elementor-lite' ),
+				],
+			]
+		);
+
+        $element->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'name'     => 'eael_vto_writing_styling_background',
+				'types'    => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title',
+                'condition' => [
+					'eael_vertical_text_orientation_switch' => 'yes',
+					'eael_vto_writing_styling_type' => 'background',
+				],
+			]
+		);
+
+        $repeater = new \Elementor\Repeater();
+
 		$repeater->add_control(
 			'eael_vto_writing_gradient_color',
 			[
 				'label'     => esc_html__( 'Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}}.eael_vto-vertical {{CURRENT_ITEM}}' => 'color: {{VALUE}}'
-				],
 			]
 		);
 
@@ -239,11 +262,6 @@ class Vertical_Text_Orientation {
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'rem', 'custom' ],
 				'range'      => [
-					'px' => [
-						'min'  => 0,
-						'max'  => 1000,
-						'step' => 1,
-					],
                     '%' => [
 						'min'  => 0,
 						'max'  => 100,
@@ -260,47 +278,24 @@ class Vertical_Text_Orientation {
         $element->add_control(
 			'eael_vto_writing_gradient_color_repeater',
 			[
-				'label'   => esc_html__( 'Repeater Color', 'essential-addons-for-elementor-lite' ),
+				'label'   => esc_html__( 'Choose Gradient Colors', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::REPEATER,
 				'fields'  => $repeater->get_controls(),
 				'default' => [
 					[
-						'list_color' => '#000000',
+						'eael_vto_writing_gradient_color' => '#000000',
 					],
 					[
-						'list_color' => '#0ff',
+						'eael_vto_writing_gradient_color' => '#0ff',
 					],
 					[
-						'list_color' => '#00f',
+						'eael_vto_writing_gradient_color' => '#00f',
 					],
 				],
-				'title_field' => '{{{ list_color }}}',
+				'title_field' => '{{{ eael_vto_writing_gradient_color }}}',
                 'condition' => [
 					'eael_vertical_text_orientation_switch' => 'yes',
-				],
-			]
-		);
-
-        $element->add_control(
-			'eael_vto_writing_styling_heading',
-			[
-				'label' => esc_html__( 'Styling Options', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::HEADING,
-				'separator' => 'before',
-                'condition' => [
-					'eael_vertical_text_orientation_switch' => 'yes',
-				],
-			]
-		);
-
-        $element->add_group_control(
-			\Elementor\Group_Control_Background::get_type(),
-			[
-				'name'     => 'eael_vto_writing_styling_background',
-				'types'    => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title',
-                'condition' => [
-					'eael_vertical_text_orientation_switch' => 'yes',
+                    'eael_vto_writing_styling_type' => 'gradient',
 				],
 			]
 		);
