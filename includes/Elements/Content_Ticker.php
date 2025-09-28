@@ -17,6 +17,7 @@ class Content_Ticker extends Widget_Base
 {
     
     use \Essential_Addons_Elementor\Traits\Template_Query;
+	use \Essential_Addons_Elementor\Traits\Helper;
 
     public function get_name()
     {
