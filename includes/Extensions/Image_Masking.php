@@ -222,15 +222,6 @@ class Image_Masking {
             ]
         );
 
-        $element->add_control(
-            'eael_image_masking_svg_url',
-            [
-                'label' => '',
-                'type' => Controls_Manager::HIDDEN,
-                'default' => $svg_url,
-            ]
-        );
-
         if ( !apply_filters('eael/pro_enabled', false ) ) {
             $element->add_control(
                 'eael_image_masking_upload_pro_message',
@@ -472,6 +463,15 @@ class Image_Masking {
             do_action( 'eael/image_masking/morphing_controls', $element );
         }
 
+        $svg_url = EAEL_PLUGIN_URL . 'assets/front-end/img/image-masking/svg-shapes/';
+        $element->add_control(
+            'eael_image_masking_svg_url',
+            [
+                'label' => '',
+                'type' => Controls_Manager::HIDDEN,
+                'default' => $svg_url,
+            ]
+        );
 		$element->end_controls_section();
 	}
 
