@@ -554,9 +554,10 @@ class Image_Masking {
                 }
 
                 if( 'yes' === $settings['eael_image_masking_hover_effect'] ){
-                    $hover_image = $element->get_settings_for_display( 'eael_image_masking_image_hover' );
+                    $hover_image = $element->get_settings_for_display( 'eael_image_masking_svg_hover' );
                     $hover_mask_url = '';
                     if( 'upload' !== $hover_image ){
+                        $svg = $element->get_settings_for_display( 'eael_image_masking_svg' );
                         $svg_url = $element->get_settings_for_display( 'eael_image_masking_svg_url' );
                         $hover_mask_url = $svg_url . $hover_image . '.svg';
                     } else if( 'upload' === $hover_image ){
@@ -571,6 +572,7 @@ class Image_Masking {
                         $style .= '.eael-image-masking-'.$element_id. $hover_selector .':hover img {mask-image: url('.$hover_mask_url.'); -webkit-mask-image: url('.$hover_mask_url.');}';
                     }
                 }
+
 			} else if( 'morphing' === $type ) {
                 $morphing_options = apply_filters( 'eael/image_masking/morphing_options', [], $element, $element_id );
                 if( !empty( $morphing_options ) ){

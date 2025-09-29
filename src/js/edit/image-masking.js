@@ -98,7 +98,7 @@ let ImageMaskingHandler = function ($scope, $) {
                 }
                 
                 if( 'yes' === settings?.eael_image_masking_hover_effect ){
-                    let hoverImage = settings?.eael_image_masking_image_hover;
+                    let hoverImage = settings?.eael_image_masking_svg_hover;
                     let hover_mask_url = '';
                     if( 'upload' !== hoverImage ){
                         let svg_url = settings?.eael_image_masking_svg_url;
@@ -431,7 +431,9 @@ let ImageMaskingHandler = function ($scope, $) {
         });
     }
 
-    getImageMaskingSettingsVal( window.elementor.elements.models );
+    if( window.elementor?.elements?.models ){
+        getImageMaskingSettingsVal( window.elementor?.elements?.models );
+    }
 }
 
 jQuery(window).on("elementor/frontend/init", function () {
