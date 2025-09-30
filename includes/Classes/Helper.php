@@ -41,11 +41,7 @@ class Helper
      */
     public static $eael_advanced_accordion_faq = [];
 
-    /**
-     * It stores language setting for FAQ schema
-     * @since 6.3.2
-     */
-    public static $eael_advanced_accordion_language = '';
+
     
     /**
      * Returns all the faqs in one instance
@@ -56,17 +52,11 @@ class Helper
     public static function get_eael_advanced_accordion_faq(){
         $json = [];
         if( count( self::$eael_advanced_accordion_faq ) ) {
-            $language_code = ! empty( self::$eael_advanced_accordion_language ) ? self::$eael_advanced_accordion_language : '';
-
             $json = [
                 '@context' => 'https://schema.org',
                 '@type' => 'FAQPage',
                 'mainEntity' => self::$eael_advanced_accordion_faq,
             ];
-
-            if ( ! empty( $language_code ) ) {
-                $json['inLanguage'] = $language_code;
-            }
         }
 
         return $json;
@@ -79,8 +69,9 @@ class Helper
      * @param string $language Language code
      */
     public static function set_eael_advanced_accordion_faq( $faq, $language = '' ){
-        if ( ! empty( $language ) && empty( self::$eael_advanced_accordion_language ) ) {
-            self::$eael_advanced_accordion_language = $language;
+        // Add inLanguage property to individual Question object when language is provided
+        if ( ! empty( $language ) ) {
+            $faq['inLanguage'] = $language;
         }
 
         return self::$eael_advanced_accordion_faq[] = $faq;
