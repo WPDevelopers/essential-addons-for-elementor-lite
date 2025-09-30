@@ -40,8 +40,6 @@ class Helper
      * @since 5.1.9
      */
     public static $eael_advanced_accordion_faq = [];
-
-
     
     /**
      * Returns all the faqs in one instance
@@ -69,7 +67,6 @@ class Helper
      * @param string $language Language code
      */
     public static function set_eael_advanced_accordion_faq( $faq, $language = '' ){
-        // Add inLanguage property to individual Question object when language is provided
         if ( ! empty( $language ) ) {
             $faq['inLanguage'] = $language;
         }

@@ -257,7 +257,7 @@ class Adv_Accordion extends Widget_Base
         );
 
         $this->add_control(
-            'eael_adv_accordion_manual_language_enable',
+            'eael_adv_accordion_language_enable',
             [
                 'label'        => esc_html__('Enable Language Selection', 'essential-addons-for-elementor-lite'),
                 'description'  => esc_html__('Enable to specify the language for FAQ schema markup.', 'essential-addons-for-elementor-lite'),
@@ -320,7 +320,7 @@ class Adv_Accordion extends Widget_Base
                 ],
                 'condition'   => [
                     'eael_adv_accordion_faq_schema_show'        => 'yes',
-                    'eael_adv_accordion_manual_language_enable' => 'yes',
+                    'eael_adv_accordion_language_enable' => 'yes',
                 ],
             ]
         );
@@ -1366,7 +1366,7 @@ class Adv_Accordion extends Widget_Base
         // FAQ Schema
         if ( !empty( $settings['eael_adv_accordion_faq_schema_show'] ) && 'yes' === $settings['eael_adv_accordion_faq_schema_show'] ) {
             $schema_language = '';
-            if ( !empty( $settings['eael_adv_accordion_manual_language_enable'] ) && 'yes' === $settings['eael_adv_accordion_manual_language_enable'] ) {
+            if ( !empty( $settings['eael_adv_accordion_language_enable'] ) && 'yes' === $settings['eael_adv_accordion_language_enable'] ) {
                 $schema_language = !empty( $settings['eael_adv_accordion_language_code'] ) ? $settings['eael_adv_accordion_language_code'] : 'en-US';
             }
 
