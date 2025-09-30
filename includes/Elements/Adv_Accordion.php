@@ -260,7 +260,7 @@ class Adv_Accordion extends Widget_Base
             'eael_adv_accordion_manual_language_enable',
             [
                 'label'        => esc_html__('Enable Language Selection', 'essential-addons-for-elementor-lite'),
-                'description'  => esc_html__('Enable this feature to manually specify the language for FAQ schema markup.', 'essential-addons-for-elementor-lite'),
+                'description'  => esc_html__('Enable to specify the language for FAQ schema markup.', 'essential-addons-for-elementor-lite'),
                 'type'         => Controls_Manager::SWITCHER,
                 'default'      => 'no',
                 'return_value' => 'yes',
@@ -274,7 +274,6 @@ class Adv_Accordion extends Widget_Base
             'eael_adv_accordion_language_code',
             [
                 'label'       => esc_html__('Language', 'essential-addons-for-elementor-lite'),
-                'description' => esc_html__('Select the language for FAQ schema markup.', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::SELECT,
                 'default'     => 'en-US',
                 'options'     => [
