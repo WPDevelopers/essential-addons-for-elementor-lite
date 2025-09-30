@@ -51,18 +51,12 @@ class Helper
      * Returns all the faqs in one instance
      *
      * @since 5.1.9
-     * @param string $language Language code
      * @return array
      */
-    public static function get_eael_advanced_accordion_faq( $language = '' ){
+    public static function get_eael_advanced_accordion_faq(){
         $json = [];
         if( count( self::$eael_advanced_accordion_faq ) ) {
-            $language_code = '';
-            if ( ! empty( $language ) ) {
-                $language_code = $language;
-            } elseif ( ! empty( self::$eael_advanced_accordion_language ) ) {
-                $language_code = self::$eael_advanced_accordion_language;
-            }
+            $language_code = ! empty( self::$eael_advanced_accordion_language ) ? self::$eael_advanced_accordion_language : '';
 
             $json = [
                 '@context' => 'https://schema.org',
