@@ -3730,10 +3730,10 @@ class Business_Reviews extends Widget_Base {
 			];
 
 			ob_start();
-			?> 
+			?>
 			<!-- EA LocalBusiness Schema : Starts-->
 			<script type="application/ld+json">
-				<?php echo json_encode( $full_schema_array ); ?>
+				<?php echo wp_json_encode( $full_schema_array, JSON_UNESCAPED_UNICODE ); ?>
 			</script>
 			<!-- EA LocalBusiness Schema : Ends-->
 			<?php

@@ -56,7 +56,7 @@ class Helper
                 'mainEntity' => self::$eael_advanced_accordion_faq,
             ];
         }
-
+        
         return $json;
     }
 
@@ -64,13 +64,8 @@ class Helper
      * Adds faq to the faq list
      * @since 5.1.9
      * @param array $faq single faq data - question and answer
-     * @param string $language Language code
      */
-    public static function set_eael_advanced_accordion_faq( $faq, $language = '' ){
-        if ( ! empty( $language ) ) {
-            $faq['inLanguage'] = $language;
-        }
-
+    public static function set_eael_advanced_accordion_faq( $faq ){
         return self::$eael_advanced_accordion_faq[] = $faq;
     }
 

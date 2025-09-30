@@ -256,75 +256,6 @@ class Adv_Accordion extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'eael_adv_accordion_language_enable',
-            [
-                'label'        => esc_html__('Enable Language Selection', 'essential-addons-for-elementor-lite'),
-                'description'  => esc_html__('Enable to specify the language for FAQ schema markup.', 'essential-addons-for-elementor-lite'),
-                'type'         => Controls_Manager::SWITCHER,
-                'default'      => 'no',
-                'return_value' => 'yes',
-                'condition'    => [
-                    'eael_adv_accordion_faq_schema_show' => 'yes',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'eael_adv_accordion_language_code',
-            [
-                'label'       => esc_html__('Language', 'essential-addons-for-elementor-lite'),
-                'type'        => Controls_Manager::SELECT,
-                'default'     => 'en-US',
-                'options'     => [
-                    'en-US' => esc_html__('English (United States)', 'essential-addons-for-elementor-lite'),
-                    'en-GB' => esc_html__('English (United Kingdom)', 'essential-addons-for-elementor-lite'),
-                    'hu-HU' => esc_html__('Hungarian (Hungary)', 'essential-addons-for-elementor-lite'),
-                    'de-DE' => esc_html__('German (Germany)', 'essential-addons-for-elementor-lite'),
-                    'fr-FR' => esc_html__('French (France)', 'essential-addons-for-elementor-lite'),
-                    'es-ES' => esc_html__('Spanish (Spain)', 'essential-addons-for-elementor-lite'),
-                    'it-IT' => esc_html__('Italian (Italy)', 'essential-addons-for-elementor-lite'),
-                    'pt-PT' => esc_html__('Portuguese (Portugal)', 'essential-addons-for-elementor-lite'),
-                    'pt-BR' => esc_html__('Portuguese (Brazil)', 'essential-addons-for-elementor-lite'),
-                    'nl-NL' => esc_html__('Dutch (Netherlands)', 'essential-addons-for-elementor-lite'),
-                    'pl-PL' => esc_html__('Polish (Poland)', 'essential-addons-for-elementor-lite'),
-                    'ru-RU' => esc_html__('Russian (Russia)', 'essential-addons-for-elementor-lite'),
-                    'ja-JP' => esc_html__('Japanese (Japan)', 'essential-addons-for-elementor-lite'),
-                    'ko-KR' => esc_html__('Korean (South Korea)', 'essential-addons-for-elementor-lite'),
-                    'zh-CN' => esc_html__('Chinese (Simplified)', 'essential-addons-for-elementor-lite'),
-                    'zh-TW' => esc_html__('Chinese (Traditional)', 'essential-addons-for-elementor-lite'),
-                    'ar-SA' => esc_html__('Arabic (Saudi Arabia)', 'essential-addons-for-elementor-lite'),
-                    'tr-TR' => esc_html__('Turkish (Turkey)', 'essential-addons-for-elementor-lite'),
-                    'sv-SE' => esc_html__('Swedish (Sweden)', 'essential-addons-for-elementor-lite'),
-                    'da-DK' => esc_html__('Danish (Denmark)', 'essential-addons-for-elementor-lite'),
-                    'nb-NO' => esc_html__('Norwegian (Norway)', 'essential-addons-for-elementor-lite'),
-                    'fi-FI' => esc_html__('Finnish (Finland)', 'essential-addons-for-elementor-lite'),
-                    'cs-CZ' => esc_html__('Czech (Czech Republic)', 'essential-addons-for-elementor-lite'),
-                    'sk-SK' => esc_html__('Slovak (Slovakia)', 'essential-addons-for-elementor-lite'),
-                    'ro-RO' => esc_html__('Romanian (Romania)', 'essential-addons-for-elementor-lite'),
-                    'bg-BG' => esc_html__('Bulgarian (Bulgaria)', 'essential-addons-for-elementor-lite'),
-                    'hr-HR' => esc_html__('Croatian (Croatia)', 'essential-addons-for-elementor-lite'),
-                    'sl-SI' => esc_html__('Slovenian (Slovenia)', 'essential-addons-for-elementor-lite'),
-                    'et-EE' => esc_html__('Estonian (Estonia)', 'essential-addons-for-elementor-lite'),
-                    'lv-LV' => esc_html__('Latvian (Latvia)', 'essential-addons-for-elementor-lite'),
-                    'lt-LT' => esc_html__('Lithuanian (Lithuania)', 'essential-addons-for-elementor-lite'),
-                    'el-GR' => esc_html__('Greek (Greece)', 'essential-addons-for-elementor-lite'),
-                    'he-IL' => esc_html__('Hebrew (Israel)', 'essential-addons-for-elementor-lite'),
-                    'th-TH' => esc_html__('Thai (Thailand)', 'essential-addons-for-elementor-lite'),
-                    'vi-VN' => esc_html__('Vietnamese (Vietnam)', 'essential-addons-for-elementor-lite'),
-                    'hi-IN' => esc_html__('Hindi (India)', 'essential-addons-for-elementor-lite'),
-                    'bn-BD' => esc_html__('Bengali (Bangladesh)', 'essential-addons-for-elementor-lite'),
-                    'ur-PK' => esc_html__('Urdu (Pakistan)', 'essential-addons-for-elementor-lite'),
-                    'fa-IR' => esc_html__('Persian (Iran)', 'essential-addons-for-elementor-lite'),
-                    'uk-UA' => esc_html__('Ukrainian (Ukraine)', 'essential-addons-for-elementor-lite'),
-                ],
-                'condition'   => [
-                    'eael_adv_accordion_faq_schema_show'        => 'yes',
-                    'eael_adv_accordion_language_enable' => 'yes',
-                ],
-            ]
-        );
-
         $this->end_controls_section();
     }
 
@@ -1365,14 +1296,9 @@ class Adv_Accordion extends Widget_Base
         
         // FAQ Schema
         if ( !empty( $settings['eael_adv_accordion_faq_schema_show'] ) && 'yes' === $settings['eael_adv_accordion_faq_schema_show'] ) {
-            $schema_language = '';
-            if ( !empty( $settings['eael_adv_accordion_language_enable'] ) && 'yes' === $settings['eael_adv_accordion_language_enable'] ) {
-                $schema_language = !empty( $settings['eael_adv_accordion_language_code'] ) ? $settings['eael_adv_accordion_language_code'] : 'en-US';
-            }
-
             foreach ( $settings['eael_adv_accordion_tab'] as $index => $tab ) {
                 $faq_schema_text = ! empty( $tab['eael_adv_accordion_tab_faq_schema_text'] ) ? $tab['eael_adv_accordion_tab_faq_schema_text'] : '';
-
+                
                 $faq = [
                     '@type' => 'Question',
                     'name' => Helper::eael_wp_kses( $tab['eael_adv_accordion_tab_title'] ),
@@ -1382,8 +1308,8 @@ class Adv_Accordion extends Widget_Base
                     ],
                 ];
 
-                Helper::set_eael_advanced_accordion_faq($faq, $schema_language);
-            }
+                Helper::set_eael_advanced_accordion_faq($faq);
+            }	
         }
 
     }
