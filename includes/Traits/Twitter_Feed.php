@@ -2,8 +2,6 @@
 
 namespace Essential_Addons_Elementor\Traits;
 
-use function Better_Payment\Lite\Classes\better_payment_dd;
-
 if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly

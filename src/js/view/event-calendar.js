@@ -24,7 +24,6 @@ var EventCalendar = function ($scope, $) {
 				views: {
 					month: { // will produce something like "Tuesday, September 18, 2018"
 						dayHeaderContent: (args) => {
-							console.log('monthColumnHeaderFormat', monthColumnHeaderFormat)
 							if (args.view.type === 'dayGridMonth' && monthColumnHeaderFormat ) {
 								return moment(args.date).format(monthColumnHeaderFormat)
 							}
@@ -236,8 +235,8 @@ var EventCalendar = function ($scope, $) {
 							}
 							startSelector.html('<i class="eicon-calendar"></i> ' + startView);
 
-							$(".eaelec-modal-header h2").html(event.title);
-							$(".eaelec-modal-body").html(event.extendedProps.description);
+							$(".eaelec-modal-header h2").html(DOMPurify.sanitize(event.title));
+							$(".eaelec-modal-body").html(DOMPurify.sanitize(event.extendedProps.description));
 							if (event.extendedProps.description.length < 1) {
 								$(".eaelec-modal-body").css("height", "auto");
 							} else {
@@ -279,12 +278,12 @@ var EventCalendar = function ($scope, $) {
 				eventWillUnmount: function(arg) {}
 			});
 
-	function refreshPopUpDetailsLink(){
-		var modalFooter = $(".eaelec-modal-footer"),
-			modalFooterClass = modalFooter.find('a').attr('class'),
-			modalFooterText = $(".eael-event-calendar-cls", $scope).attr( 'data-detailsButtonText' );
-		modalFooter.html('<a class="'+modalFooterClass+'">'+modalFooterText+'</a>');
-	}
+		function refreshPopUpDetailsLink() {
+			var modalFooter = $(".eaelec-modal-footer"),
+				modalFooterClass = modalFooter.find('a').attr('class'),
+				modalFooterText = $(".eael-event-calendar-cls", $scope).attr('data-detailsButtonText');
+			modalFooter.html('<a class="' + modalFooterClass + '">' + DOMPurify.sanitize(modalFooterText) + '</a>');
+		}
 
 		CloseButton.on("click", function (event) {
 			event.stopPropagation();
@@ -305,6 +304,10 @@ var EventCalendar = function ($scope, $) {
 		});
 
 		calendar.render();
+		setTimeout( function() {
+			calendar.setOption( 'locale', locale );
+		}, 100);
+
 		const observer = new IntersectionObserver((entries) => {
 			for (const entry of entries) {
 				window.dispatchEvent(new Event('resize'));
