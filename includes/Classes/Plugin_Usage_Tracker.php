@@ -1110,27 +1110,102 @@ if ( ! defined( 'ABSPATH' ) ) {
          * @since 3.7.0
 		 */
 		public static function get_used_elements_count() {
+			$used_elements = [];
+
+			// First, try to get data from the new Elementor options table (prioritized)
+			$global_usage = get_option( 'elementor_controls_usage', [] );
+			if ( ! empty( $global_usage ) && is_array( $global_usage ) ) {
+				$used_elements = self::extract_elements_from_global_usage( $global_usage );
+			}
+
+			// If no data from options table or for backward compatibility, check post meta
+			if ( empty( $used_elements ) ) {
+				$used_elements = self::extract_elements_from_post_meta();
+			}
+
+			return $used_elements;
+		}
+
+		/**
+		 * Extract elements from new global usage data structure
+		 *
+		 * @param array $global_usage Global usage data from elementor_controls_usage option
+		 * @return array Used elements count
+		 *
+		 * @since 6.3.3
+		 */
+		private static function extract_elements_from_global_usage( $global_usage ) {
+			$used_elements       = [];
+			$replace_widget_name = array_flip( Elements_Manager::replace_widget_name() );
+
+			// Iterate through document types (wp-post, wp-page, etc.)
+			foreach ( $global_usage as $doc_type => $elements ) {
+				if ( ! is_array( $elements ) ) {
+					continue;
+				}
+
+				// Iterate through element types within each document type
+				foreach ( $elements as $element_type => $element_data ) {
+					if ( ! is_array( $element_data ) || ! isset( $element_data['count'] ) ) {
+						continue;
+					}
+
+					$element_name = $element_type;
+					$count        = (int) $element_data['count'];
+
+					// Handle widget name replacements
+					if ( isset( $replace_widget_name[ $element_name ] ) ) {
+						$element_name = $replace_widget_name[ $element_name ];
+					}
+
+					// Only count Essential Addons elements
+					if ( strpos( $element_name, 'eael-' ) === 0 ) {
+						$used_elements[ $element_name ] = isset( $used_elements[ $element_name ] )
+								? $used_elements[ $element_name ] + $count
+								: $count;
+					}
+
+					// Check for extension usage in controls data
+					if ( isset( $element_data['controls'] ) && is_array( $element_data['controls'] ) ) {
+						self::extract_extension_usage_from_controls( $element_data['controls'], $used_elements );
+					}
+				}
+			}
+
+			return $used_elements;
+		}
+
+		/**
+		 * Extract elements from legacy post meta approach (backward compatibility)
+		 *
+		 * @return array Used elements count
+		 *
+		 * @since 6.3.3
+		 */
+		private static function extract_elements_from_post_meta() {
 			global $wpdb;
 
-			$sql           = "SELECT `post_id`
+			$sql = "SELECT `post_id`
             FROM  $wpdb->postmeta
             WHERE `meta_key` = '_eael_widget_elements'";
-			
-        	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$post_ids      = $wpdb->get_col( $sql );
 			$used_elements = [];
 
 			foreach ( $post_ids as $post_id ) {
 				$ea_elements = get_post_meta( (int) $post_id, '_eael_widget_elements', true );
 				$el_controls = get_post_meta( (int) $post_id, '_elementor_controls_usage', true );
+
 				if ( empty( $ea_elements ) || empty( $el_controls ) || ! is_array( $ea_elements ) || ! is_array( $el_controls ) ) {
 					continue;
 				}
 
+				$replace_widget_name = array_flip( Elements_Manager::replace_widget_name() );
+
 				foreach ( $ea_elements as $element ) {
-					$element_name        = "eael-{$element}";
-					$replace_widget_name = array_flip( Elements_Manager::replace_widget_name() );
-					$count               = 0;
+					$element_name = "eael-{$element}";
+					$count        = 0;
 
 					if ( isset( $replace_widget_name[ $element_name ] ) ) {
 						$element_name = $replace_widget_name[ $element_name ];
@@ -1140,34 +1215,59 @@ if ( ! defined( 'ABSPATH' ) ) {
 						$count = $el_controls[ $element_name ]['count'];
 					}
 
-					$used_elements[ $element_name ] = isset( $used_elements[ $element_name ] ) ? $used_elements[ $element_name ] + $count : $count;
+					$used_elements[ $element_name ] = isset( $used_elements[ $element_name ] )
+							? $used_elements[ $element_name ] + $count
+							: $count;
 				}
 
-				array_walk_recursive( $el_controls, function ( $value, $key ) use ( &$used_elements ) {
-					$element_name = '';
-
-					if ( $key === 'eael_particle_switch' ) {
-						$element_name = 'eael-section-particles';
-					} elseif ( $key === 'eael_parallax_switcher' ) {
-						$element_name = 'eael-section-parallax';
-					} elseif ( $key === 'eael_tooltip_section_enable' ) {
-						$element_name = 'eael-tooltip-section';
-					} elseif ( $key === 'eael_ext_content_protection' ) {
-						$element_name = 'eael-content-protection';
-					} elseif ( $key === 'eael_cl_enable' ) {
-						$element_name = 'eael-conditional-display';
-					} elseif ( $key === 'eael_ext_advanced_dynamic_tags' ) {
-						$element_name = 'eael-advanced-dynamic-tags';
-					} elseif ( $key === 'eael_custom_cursor_switch' ) {
-						$element_name = 'eael-custom-cursor';
-					} 
-
-					if ( ! empty( $element_name ) ) {
-						$used_elements[ $element_name ] = isset( $used_elements[ $element_name ] ) ? $used_elements[ $element_name ] + $value : $value;
-					}
-				} );
+				// Extract extension usage from controls
+				self::extract_extension_usage_from_controls( $el_controls, $used_elements );
 			}
 
 			return $used_elements;
+		}
+
+		/**
+		 * Extract extension usage from controls data
+		 *
+		 * @param array $controls Controls data
+		 * @param array &$used_elements Reference to used elements array
+		 *
+		 * @since 6.3.3
+		 */
+		private static function extract_extension_usage_from_controls( $controls, &$used_elements ) {
+			array_walk_recursive( $controls, function ( $value, $key ) use ( &$used_elements ) {
+				$element_name = '';
+
+				if ( $key === 'eael_particle_switch' ) {
+					$element_name = 'eael-section-particles';
+				} elseif ( $key === 'eael_parallax_switcher' ) {
+					$element_name = 'eael-section-parallax';
+				} elseif ( $key === 'eael_tooltip_section_enable' ) {
+					$element_name = 'eael-tooltip-section';
+				} elseif ( $key === 'eael_ext_content_protection' ) {
+					$element_name = 'eael-content-protection';
+				} elseif ( $key === 'eael_cl_enable' ) {
+					$element_name = 'eael-conditional-display';
+				} elseif ( $key === 'eael_ext_advanced_dynamic_tags' ) {
+					$element_name = 'eael-advanced-dynamic-tags';
+				} elseif ( $key === 'eael_enable_custom_cursor' ) {
+					$element_name = 'eael-custom-cursor';
+				} elseif ( $key === 'eael_liquid_glass_effect_switch' ) {
+					$element_name = 'eael-liquid-glass-effect';
+				} elseif ( $key === 'eael_wrapper_link_switch' ) {
+					$element_name = 'eael-wrapper-link';
+				} elseif ( $key === 'eael_smooth_animation_section' ) {
+					$element_name = 'eael-smooth-animation';
+				} elseif ( $key === 'eael_hover_effect_switch' ) {
+					$element_name = 'eael-special-hover-effect';
+				}
+
+				if ( ! empty( $element_name ) ) {
+					$used_elements[ $element_name ] = isset( $used_elements[ $element_name ] )
+							? $used_elements[ $element_name ] + $value
+							: $value;
+				}
+			} );
 		}
 	}
