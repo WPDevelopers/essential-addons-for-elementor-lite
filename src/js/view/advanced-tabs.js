@@ -157,6 +157,7 @@ eael.hooks.addAction("init", "ea", () => {
 
 				// Trigger hook with a small delay to ensure content is fully rendered
 				setTimeout(function() {
+					window.eaelPreventResizeOnClick = true; // disabling resize event to prevent browser unresponsiveness behavior
 					eael.hooks.doAction("ea-advanced-tabs-triggered", $(tabsContent).eq(currentTabIndex));
 				}, 50);
 				
