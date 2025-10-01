@@ -258,15 +258,18 @@ class Feature_List extends Widget_Base {
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'eael_feature_list_layout',
             [
-                'label'       => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
-                'type'        => Controls_Manager::SELECT,
-                'default'     => 'vertical',
-                'label_block' => false,
-                'separator'   => 'before',
-                'options'     => [
+                'label'           => esc_html__( 'Layout', 'essential-addons-for-elementor-lite' ),
+                'type'            => Controls_Manager::SELECT,
+                'default'         => 'vertical',
+                'desktop_default' => 'vertical',
+                'tablet_default'  => 'vertical',
+                'mobile_default'  => 'vertical',
+                'label_block'     => false,
+                'separator'       => 'before',
+                'options'         => [
                     'vertical'   => esc_html__( 'Vertical', 'essential-addons-for-elementor-lite' ),
                     'horizontal' => esc_html__( 'Horizontal', 'essential-addons-for-elementor-lite' ),
                 ],
@@ -476,6 +479,8 @@ class Feature_List extends Widget_Base {
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-horizontal .eael-feature-list-item' => 'width: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-feature-list-items[data-layout-tablet="horizontal"] .eael-feature-list-item' => 'width: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-feature-list-items[data-layout-mobile="horizontal"] .eael-feature-list-item' => 'width: {{SIZE}}{{UNIT}}',
                 ],
                 'condition'   => [
                     'eael_feature_list_layout' => 'horizontal',
@@ -499,6 +504,8 @@ class Feature_List extends Widget_Base {
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-horizontal' => 'gap: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-horizontal[data-layout-tablet="vertical"] .eael-feature-list-item:not(:last-child)' => 'padding-bottom: calc({{SIZE}}{{UNIT}}/2)',
+                    '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-horizontal[data-layout-tablet="vertical"] .eael-feature-list-item:not(:first-child)' => 'padding-top: calc({{SIZE}}{{UNIT}}/2)',
                     '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-vertical .eael-feature-list-item:not(:last-child)'  => 'padding-bottom: calc({{SIZE}}{{UNIT}}/2)',
                     '{{WRAPPER}} .eael-feature-list-items.eael-feature-list-vertical .eael-feature-list-item:not(:first-child)' => 'padding-top: calc({{SIZE}}{{UNIT}}/2)',
                     'body.rtl {{WRAPPER}} .eael-feature-list-items.eael-feature-list-vertical .eael-feature-list-item:after'    => 'left: calc(-{{SIZE}}{{UNIT}}/2)',
@@ -933,7 +940,11 @@ class Feature_List extends Widget_Base {
     protected function render() {
         $settings = $this->get_settings_for_display();
         $css_id = 'eael-feature-list-' . esc_attr( $this->get_id() );
-        $layout = ( !empty($settings['eael_feature_list_layout']) && $settings['eael_feature_list_layout'] ) ? $settings['eael_feature_list_layout'] : 'vertical';
+
+        // Get responsive layout settings
+        $layout_desktop = ( !empty($settings['eael_feature_list_layout']) && $settings['eael_feature_list_layout'] ) ? $settings['eael_feature_list_layout'] : 'vertical';
+        $layout_tablet = ( !empty($settings['eael_feature_list_layout_tablet']) && $settings['eael_feature_list_layout_tablet'] ) ? $settings['eael_feature_list_layout_tablet'] : $layout_desktop;
+        $layout_mobile = ( !empty($settings['eael_feature_list_layout_mobile']) && $settings['eael_feature_list_layout_mobile'] ) ? $settings['eael_feature_list_layout_mobile'] : $layout_tablet;
 
         $this->add_render_attribute( 'eael_feature_list', [
             'id'    => $css_id,
@@ -942,8 +953,10 @@ class Feature_List extends Widget_Base {
                 $settings['eael_feature_list_icon_shape'],
                 $settings['eael_feature_list_icon_shape_view'],
                 $settings['eael_feature_list_connector_type'],
-                'eael-feature-list-' . $layout,
+                'eael-feature-list-' . $layout_desktop, // Keep existing class for desktop
             ],
+            'data-layout-tablet' => $layout_tablet,
+            'data-layout-mobile' => $layout_mobile,
         ] );
         // connector class change by connector type
         if ( $settings['eael_feature_list_icon_position'] == 'top' && $settings['eael_feature_list_connector'] == 'yes' ) {
