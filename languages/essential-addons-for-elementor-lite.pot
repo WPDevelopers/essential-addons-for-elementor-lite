@@ -3369,7 +3369,7 @@ msgstr ""
 msgid "Liquid Glass Effects"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:655, ../includes/Elements/Flip_Box.php:1695, ../includes/Elements/Image_Accordion.php:610, ../includes/Elements/Info_Box.php:2011, ../includes/Extensions/Image_Masking.php:234, ../includes/Extensions/Image_Masking.php:452, ../includes/Extensions/Liquid_Glass_Effect.php:149
+#: ../includes/Elements/Creative_Button.php:655, ../includes/Elements/Flip_Box.php:1695, ../includes/Elements/Image_Accordion.php:610, ../includes/Elements/Info_Box.php:2011, ../includes/Extensions/Image_Masking.php:234, ../includes/Extensions/Image_Masking.php:453, ../includes/Extensions/Liquid_Glass_Effect.php:149
 msgid "Upgrade to EA PRO"
 msgstr ""
 
@@ -10774,7 +10774,7 @@ msgstr ""
 msgid "Upload"
 msgstr ""
 
-#: ../includes/Extensions/Image_Masking.php:232, ../includes/Extensions/Image_Masking.php:450
+#: ../includes/Extensions/Image_Masking.php:232, ../includes/Extensions/Image_Masking.php:451
 msgid "This feature is available in the pro version."
 msgstr ""
 

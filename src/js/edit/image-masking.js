@@ -98,14 +98,15 @@ let ImageMaskingHandler = function ($scope, $) {
                 }
                 
                 if( 'yes' === settings?.eael_image_masking_hover_effect ){
-                    let hoverImage = settings?.eael_image_masking_svg_hover;
                     let hover_mask_url = '';
+                    let hoverImage = settings?.eael_image_masking_svg_hover;
                     if( 'upload' !== hoverImage ){
                         let svg_url = settings?.eael_image_masking_svg_url;
                         hover_mask_url = svg_url + hoverImage + '.svg';
                     } else if( 'upload' === hoverImage ){
-                        hover_mask_url = hoverImage?.url;
+                        hover_mask_url = settings?.eael_image_masking_image_hover?.url;
                     }
+                    
                     if( hover_mask_url ) {
                         let hover_selector = settings?.eael_image_masking_hover_selector;
                         if( hover_selector ){

@@ -432,6 +432,7 @@ class Image_Masking {
                     'repeat-y'  => esc_html__( 'Repeat-y', 'essential-addons-for-elementor-lite' ),
                 ],
                 'condition' => [
+                    'eael_enable_image_masking' => 'yes',
 					'eael_image_masking_type' => 'image'
 				],
                 'selectors' => [
