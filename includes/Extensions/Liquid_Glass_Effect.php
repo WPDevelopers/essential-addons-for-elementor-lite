@@ -19,6 +19,9 @@ class Liquid_Glass_Effect {
 		add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'register_controls' ] );
 		add_action( 'elementor/frontend/before_render', [ $this, 'before_render' ], 100 );
 		add_filter( 'elementor/widget/render_content', [ $this, 'eael_liquid_glass_effect_svg_render' ], 10, 2 );
+
+		// Add support for containers
+		add_action( 'elementor/frontend/container/after_render', [ $this, 'eael_liquid_glass_effect_container_svg_render' ], 10 );
 	}
 
 	public function eael_liquid_glass_effect_bg_color_effect( $element, $effect, $default_bg_color ) {
@@ -556,5 +559,10 @@ class Liquid_Glass_Effect {
 		do_action( 'eael_liquid_glass_effect_svg_pro', $element, $settings );
 
 		return $content;
+	}
+
+	public function eael_liquid_glass_effect_container_svg_render( $element ) {
+		$settings = $element->get_settings_for_display();
+		do_action( 'eael_liquid_glass_effect_svg_pro', $element, $settings );
 	}
 }
