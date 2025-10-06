@@ -10169,3 +10169,6 @@
     border: none !important;
   }
 }
+.theme-whiskers .eael-circle-wrapper div {
+  text-align: inherit;
+}

@@ -13,7 +13,6 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Widget_Base;
 use \Elementor\Group_Control_Box_Shadow;
-use \Essential_Addons_Elementor\Classes\Controls;
 use \Essential_Addons_Elementor\Classes\Helper;
 
 class Betterdocs_Category_Grid extends Widget_Base
@@ -71,6 +70,10 @@ class Betterdocs_Category_Grid extends Widget_Base
             'ea',
             'essential addons',
         ];
+    }
+
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
     }
 
     public function get_custom_help_url()
