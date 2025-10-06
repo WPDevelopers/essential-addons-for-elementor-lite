@@ -19,8 +19,11 @@ eael.hooks.addAction("init", "ea", () => {
         const $regFormWrapper = $scope.find("#eael-register-form-wrapper");
         const regRcTheme = $regFormWrapper.data('recaptcha-theme');
         const regRcSize = $regFormWrapper.data('recaptcha-size');
+        const lostpasswordRcTheme = $lostpasswordFormWrapper.data('recaptcha-theme');
+        const lostpasswordRcSize = $lostpasswordFormWrapper.data('recaptcha-size');
         const loginRecaptchaVersion = $wrap.data('login-recaptcha-version');
         const registerRecaptchaVersion = $wrap.data('register-recaptcha-version');
+        const lostpasswordRecaptchaVersion = $wrap.data('lostpassword-recaptcha-version');
         const $regLinkAction = $scope.find('#eael-lr-reg-toggle');
         const $loginLinkAction = $scope.find('#eael-lr-login-toggle');
         const $lostpasswordLinkAction = $scope.find('#eael-lr-lostpassword-toggle');
@@ -35,6 +38,7 @@ eael.hooks.addAction("init", "ea", () => {
 
         let loginRecaptchaNode = document.getElementById('login-recaptcha-node-' + widgetId);
         let registerRecaptchaNode = document.getElementById('register-recaptcha-node-' + widgetId);
+        let lostpasswordRecaptchaNode = document.getElementById('lostpassword-recaptcha-node-' + widgetId);
                 
         if ( loggedInLocation !== undefined && loggedInLocation !== '' ) {
             location.replace(loggedInLocation);
@@ -188,8 +192,8 @@ eael.hooks.addAction("init", "ea", () => {
 
             if(!isProAndAjaxEnabled){
                 let isRecaptchaVersion3 = false;
-                isRecaptchaVersion3 = loginRecaptchaVersion === 'v3' || registerRecaptchaVersion === 'v3' ;
-                
+                isRecaptchaVersion3 = loginRecaptchaVersion === 'v3' || registerRecaptchaVersion === 'v3' || lostpasswordRecaptchaVersion === 'v3';
+
                 if (recaptchaAvailable && isRecaptchaVersion3) {
                     grecaptcha.ready(function() {
                         grecaptcha.execute(recaptchaSiteKeyV3, {
@@ -225,7 +229,7 @@ eael.hooks.addAction("init", "ea", () => {
                 return false;
             }
             if (loginRecaptchaNode) {
-                if( registerRecaptchaVersion !== 'v3' ){
+                if( ( registerRecaptchaVersion !== 'v3' ) && ( lostpasswordRecaptchaVersion !== 'v3' ) ){
                     try {
                         grecaptcha.render(loginRecaptchaNode, {
                             'sitekey': recaptchaSiteKey,
@@ -238,12 +242,25 @@ eael.hooks.addAction("init", "ea", () => {
                 }
             }
             if (registerRecaptchaNode) {
-                if( loginRecaptchaVersion !== 'v3' ){
+                if( ( loginRecaptchaVersion !== 'v3' ) && ( lostpasswordRecaptchaVersion !== 'v3' ) ){
                     try {
                         grecaptcha.render(registerRecaptchaNode, {
                             'sitekey': recaptchaSiteKey,
                             'theme': regRcTheme,
                             'size': regRcSize,
+                        });
+                    } catch ( error ) {
+                        // duplicate instance
+                    }
+                }
+            }
+            if (lostpasswordRecaptchaNode) {
+                if( ( loginRecaptchaVersion !== 'v3' ) && ( registerRecaptchaVersion !== 'v3' ) ){
+                    try {
+                        grecaptcha.render(lostpasswordRecaptchaNode, {
+                            'sitekey': recaptchaSiteKey,
+                            'theme': lostpasswordRcTheme,
+                            'size': lostpasswordRcSize,
                         });
                     } catch ( error ) {
                         // duplicate instance

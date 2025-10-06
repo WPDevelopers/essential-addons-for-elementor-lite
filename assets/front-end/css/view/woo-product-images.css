@@ -177,9 +177,6 @@
 .eael-single-product-images .product_image_slider__container .product_image_slider__trigger svg {
   width: 15px;
 }
-.eael-single-product-images .product_image_slider__container .swiper-slide {
-  width: auto;
-}
 .eael-single-product-images .product_image_slider__container .swiper-slide .image_slider__image {
   width: 100%;
   height: 100%;

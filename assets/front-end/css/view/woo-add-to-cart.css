@@ -1,4 +1,4 @@
-.custom-add-to-cart-wrapper {
+.eael-add-to-cart-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -7,8 +7,17 @@
           align-items: center;
   gap: 8px;
 }
-.custom-add-to-cart-wrapper input[type=number],
-.custom-add-to-cart-wrapper .quantity-input {
+.eael-add-to-cart-wrapper.eael-product-simple form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 8px;
+}
+.eael-add-to-cart-wrapper input[type=number],
+.eael-add-to-cart-wrapper .quantity-input {
   width: 45px;
   height: 40px;
   padding: 0;
@@ -19,13 +28,13 @@
   border-radius: 8px;
   background-color: #fff;
 }
-.custom-add-to-cart-wrapper .quantity-input:focus {
+.eael-add-to-cart-wrapper .quantity-input:focus {
   border-color: #a5a4b0;
   outline: none;
   -webkit-box-shadow: 0 0 5px rgba(0, 113, 161, 0.5);
           box-shadow: 0 0 5px rgba(0, 113, 161, 0.5);
 }
-.custom-add-to-cart-wrapper .custom-add-to-cart {
+.eael-add-to-cart-wrapper .eael-add-to-cart {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
@@ -46,16 +55,21 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
   transition: background-color 0.3s ease, transform 0.2s ease, -webkit-transform 0.2s ease;
 }
-.custom-add-to-cart-wrapper .custom-add-to-cart:active {
+.eael-add-to-cart-wrapper button.eael-add-to-cart[type=submit] {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.eael-add-to-cart-wrapper .eael-add-to-cart:active {
   -webkit-transform: translateY(0);
       -ms-transform: translateY(0);
           transform: translateY(0);
 }
-.custom-add-to-cart-wrapper .cart-icon {
+.eael-add-to-cart-wrapper .cart-icon {
   margin-right: 8px;
   display: inline-block;
 }
-.custom-add-to-cart-wrapper .button-text {
+.eael-add-to-cart-wrapper .button-text {
   display: inline-block;
 }
 .eael-variable-product-edit {
@@ -126,11 +140,13 @@
   color: #434347;
   font-size: 15px;
 }
-.eael-grouped-product-edit .custom-add-to-cart {
+.eael-grouped-product-edit .eael-add-to-cart {
   width: 27%;
 }
 .woocommerce div.product .eael-single-product-add-to-cart .variations_form,
 .woocommerce div.product .eael-single-product-add-to-cart .grouped_form,
+.woocommerce section.product .eael-single-product-add-to-cart .variations_form,
+.woocommerce section.product .eael-single-product-add-to-cart .grouped_form,
 .woocommerce .dialog-widget-content .eael-single-product-add-to-cart .variations_form,
 .woocommerce .dialog-widget-content .eael-single-product-add-to-cart .grouped_form {
   -webkit-box-orient: vertical;
@@ -139,6 +155,7 @@
           flex-direction: column;
 }
 .woocommerce div.product .eael-single-product-add-to-cart form.cart,
+.woocommerce section.product .eael-single-product-add-to-cart form.cart,
 .woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -147,6 +164,8 @@
 }
 .woocommerce div.product .eael-single-product-add-to-cart form.cart input[type=number] .qty,
 .woocommerce div.product .eael-single-product-add-to-cart form.cart .quantity .qty,
+.woocommerce section.product .eael-single-product-add-to-cart form.cart input[type=number] .qty,
+.woocommerce section.product .eael-single-product-add-to-cart form.cart .quantity .qty,
 .woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart input[type=number] .qty,
 .woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart .quantity .qty {
   width: 45px;
@@ -160,6 +179,7 @@
   background-color: #fff;
 }
 .woocommerce div.product .eael-single-product-add-to-cart form.cart .button,
+.woocommerce section.product .eael-single-product-add-to-cart form.cart .button,
 .woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart .button {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -183,16 +203,19 @@
   width: fit-content;
 }
 .woocommerce div.product .eael-single-product-add-to-cart form.cart table div.quantity,
+.woocommerce section.product .eael-single-product-add-to-cart form.cart table div.quantity,
 .woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart table div.quantity {
   padding-left: 15px;
 }
 .woocommerce div.product .eael-single-product-add-to-cart form.cart .group_table td.woocommerce-grouped-product-list-item__label a,
+.woocommerce section.product .eael-single-product-add-to-cart form.cart .group_table td.woocommerce-grouped-product-list-item__label a,
 .woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart .group_table td.woocommerce-grouped-product-list-item__label a {
   color: #434347;
   font-size: 15px;
   font-weight: 400;
 }
 .woocommerce div.product .eael-single-product-add-to-cart form.cart .group_table td .amount,
+.woocommerce section.product .eael-single-product-add-to-cart form.cart .group_table td .amount,
 .woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart .group_table td .amount {
   margin-bottom: 0;
   color: #434347;
@@ -200,13 +223,24 @@
 }
 .woocommerce div.product .eael-single-product-add-to-cart form.cart .variations td,
 .woocommerce div.product .eael-single-product-add-to-cart form.cart .variations th,
+.woocommerce section.product .eael-single-product-add-to-cart form.cart .variations td,
+.woocommerce section.product .eael-single-product-add-to-cart form.cart .variations th,
 .woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart .variations td,
 .woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart .variations th {
   line-height: 0;
-  vertical-align: middle;
+  vertical-align: text-top;
   padding: 10px 0;
 }
+.woocommerce div.product .eael-single-product-add-to-cart form.cart .variations td .reset_variations,
+.woocommerce div.product .eael-single-product-add-to-cart form.cart .variations th .reset_variations,
+.woocommerce section.product .eael-single-product-add-to-cart form.cart .variations td .reset_variations,
+.woocommerce section.product .eael-single-product-add-to-cart form.cart .variations th .reset_variations,
+.woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart .variations td .reset_variations,
+.woocommerce .dialog-widget-content .eael-single-product-add-to-cart form.cart .variations th .reset_variations {
+  line-height: 30px;
+}
 .woocommerce div.product .eael-single-product-add-to-cart .variations_button,
+.woocommerce section.product .eael-single-product-add-to-cart .variations_button,
 .woocommerce .dialog-widget-content .eael-single-product-add-to-cart .variations_button {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -233,11 +267,18 @@
 }
 .eael-add-to-cart--align-flex-start form.cart:not(.grouped_form):not(.variations_form),
 .eael-add-to-cart--align-flex-start form.cart.variations_form .woocommerce-variation-add-to-cart {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
+  gap: 5px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 .eael-add-to-cart--align-center form.cart:not(.grouped_form):not(.variations_form),
 .eael-add-to-cart--align-center form.cart.variations_form .woocommerce-variation-add-to-cart {

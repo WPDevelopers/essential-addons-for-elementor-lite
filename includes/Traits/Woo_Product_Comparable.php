@@ -587,7 +587,7 @@ trait Woo_Product_Comparable {
 		$this->init_style_table_common_style( $table );
 		$this->end_controls_section();
 
-		$this->init_style_header_column_style();
+		$this->init_style_header_column_style( $table );
 		foreach ( range( 0, 2 ) as $column ) {
 			$this->init_style_product_column_style( $column, $table );
 		}

@@ -227,6 +227,8 @@
                 <field type="Tooltip: Link" key_of="eael_tooltip_link" editor_type="LINE">url</field>
                 <field type="Tooltip: Description" editor_type="VISUAL">eael_tooltip_content</field>
                 <field type="Tooltip: Hover Description" editor_type="VISUAL">eael_tooltip_hover_content</field>
+                <field type="Tooltip: Image" key_of="eael_tooltip_img_content" editor_type="MEDIA">id</field>
+                <field type="Tooltip: Icon Image" key_of="eael_tooltip_icon_content_new" editor_type="MEDIA">value.id</field>
             </fields>
         </widget>
         <widget name="eael-feature-list">
