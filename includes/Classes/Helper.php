@@ -2,13 +2,14 @@
 
 namespace Essential_Addons_Elementor\Classes;
 
+use Elementor\Utils;
+
 if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
 use \Elementor\Controls_Manager;
 use Elementor\Icons_Manager;
-use \Elementor\Utils;
 use Elementor\Plugin;
 
 class Helper
@@ -152,6 +153,8 @@ class Helper
             $post_id = get_the_ID();
             $data = get_post_meta($post_id, '_elementor_data', true);
             $data = str_replace('eaeposts_', '', $data);
+
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
             $wpdb->update(
                 $wpdb->postmeta,
                 [
@@ -219,6 +222,30 @@ class Helper
 		    $args['meta_key'] = '_eael_post_view_count';
 	    }
 
+	    // Handle custom field sorting
+	    if ( $args['orderby'] === 'meta_value' && ! empty( $settings['meta_key'] ) ) {
+		    $args['meta_key'] = sanitize_text_field( $settings['meta_key'] );
+
+		    // Set the appropriate orderby based on meta_type
+		    $meta_type = ! empty( $settings['meta_type'] ) ? $settings['meta_type'] : 'CHAR';
+
+		    switch ( $meta_type ) {
+			    case 'NUMERIC':
+				    $args['orderby'] = 'meta_value_num';
+				    break;
+			    case 'DATE':
+			    case 'DATETIME':
+				    $args['orderby'] = 'meta_value';
+				    $args['meta_type'] = $meta_type;
+				    break;
+			    case 'CHAR':
+			    default:
+				    $args['orderby'] = 'meta_value';
+				    $args['meta_type'] = 'CHAR';
+				    break;
+		    }
+	    }
+
 	    if ( ! empty( $settings['authors'] ) ) {
 		    $args['author__in'] = $settings['authors'];
 	    }
@@ -278,6 +305,17 @@ class Helper
         return array_diff_key($post_types, ['elementor_library', 'attachment']);
     }
 
+
+    /**
+     * Get All POst Types
+     * @todo should be removed on future version
+     * @return array
+     */
+    public static function get_allowed_post_types()
+    {
+        return self::get_post_types();
+    }
+
     /**
      * Get all types of post.
      *
@@ -307,7 +345,8 @@ class Helper
 		    'rand'          => __( 'Random', 'essential-addons-for-elementor-lite' ),
 		    'comment_count' => __( 'Comment Count', 'essential-addons-for-elementor-lite' ),
 		    'most_viewed'   => __( 'Most Viewed', 'essential-addons-for-elementor-lite' ),
-		    'menu_order'    => __( 'Menu Order', 'essential-addons-for-elementor-lite' )
+		    'menu_order'    => __( 'Menu Order', 'essential-addons-for-elementor-lite' ),
+		    'meta_value'    => __( 'Custom Field', 'essential-addons-for-elementor-lite' )
 	    );
 
         return $orderby;
@@ -665,7 +704,7 @@ class Helper
             $link = ($term_type === 'category') ? get_category_link($term->term_id) : get_tag_link($term->term_id);
             $html .= '<li>';
             $html .= '<a href="' . esc_url($link) . '">';
-            $html .= $term->name;
+            $html .= esc_html( $term->name );
             $html .= '</a>';
             $html .= '</li>';
             $count++;
@@ -850,6 +889,8 @@ class Helper
         }
 
         $query = "select post_title,ID  from $wpdb->posts where post_status = 'publish' $where $limit";
+
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $results = $wpdb->get_results($query);
         if (!empty($results)) {
             foreach ($results as $row) {
@@ -925,9 +966,15 @@ class Helper
 		$setPagination             = "";
 		$template_info             = [
 			'dir'       => 'free',
-			'file_name'  => $settings['eael_dynamic_template_Layout'],
+			'file_name'  => 'default',
 			'name'      => $settings['eael_widget_name']
 		];
+
+        if ( ! empty( $settings['eael_dynamic_template_Layout'] ) ) {
+            $template_info['file_name'] = $settings['eael_dynamic_template_Layout'];
+        } else if ( ! empty( $settings['eael_product_grid_template'] ) ) {
+            $template_info['file_name'] = $settings['eael_product_grid_template'];
+        }
 
 		if( $pagination_Paginationlist > 0 ){
 
@@ -937,17 +984,17 @@ class Helper
                     if ( $pagination_Paginationlist < 7 + ($adjacents * 2) ){
                         for ( $pagination = 1; $pagination <= $pagination_Paginationlist; $pagination ++ ) {
                             $active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
-	                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
+	                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" , esc_attr( $active ) ,esc_html( $pagination ) );
                         }
 
                     } else if ( $pagination_Paginationlist >= 5 + ($adjacents * 2) ){
                         for ( $pagination = 1; $pagination <= 4 + ( $adjacents * 2 ); $pagination ++ ) {
                             $active        = ( $pagination == 0 || $pagination == 1 ) ? 'current' : '';
-	                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
+	                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,esc_attr( $active ) ,esc_html( $pagination ) );
                         }
 
                         $setPagination .="<li class='pagitext dots'>...</li>";
-                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,$active ,$pagination);
+                        $setPagination .= sprintf("<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>" ,esc_attr( $active ) ,esc_html( $pagination ) );
                     }
 
                     if ($pagination_Paginationlist > 1) {
@@ -971,7 +1018,7 @@ class Helper
         
         remove_action( 'eael_woo_single_product_summary', 'woocommerce_template_single_title', 5 );
         add_action( 'eael_woo_single_product_summary', function () use ( $tag ) {
-            printf('<%1$s class="eael-product-quick-view-title product_title entry-title">%2$s</%1$s>',$tag,Helper::eael_wp_kses( get_the_title() ));
+            printf('<%1$s class="eael-product-quick-view-title product_title entry-title">%2$s</%1$s>',esc_html( $tag ), wp_kses( get_the_title(), Helper::eael_allowed_tags() ));
         }, 5 );
 
 	    ?>
@@ -983,6 +1030,7 @@ class Helper
 				<div id="product-<?php esc_attr( get_the_ID() ); ?>" <?php post_class( 'product' ); ?>>
 					<div class="eael-product-image-wrap">
 						<?php
+                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						echo ( ! $product->is_in_stock() ? '<span class="eael-onsale outofstock '.esc_attr( $sale_badge_preset ).' '.esc_attr( $sale_badge_align ).'">'. Helper::eael_wp_kses( $stockout_text ) .'</span>' : ($product->is_on_sale() ? '<span class="eael-onsale '.esc_attr( $sale_badge_preset ).' '.esc_attr( $sale_badge_align ).'">' . Helper::eael_wp_kses( $sale_text ) . '</span>' : '') );
 						do_action( 'eael_woo_single_product_image' );
 						?>
@@ -1033,7 +1081,7 @@ class Helper
 	 * @return mixed|string
 	 */
     public static function eael_validate_html_tag( $tag ){
-	    return in_array( strtolower( $tag ), self::EAEL_ALLOWED_HTML_TAGS ) ? $tag : 'div';
+	    return in_array( strtolower( (string) $tag ), self::EAEL_ALLOWED_HTML_TAGS ) ? $tag : 'div';
     }
 
 	/**
@@ -1048,6 +1096,20 @@ class Helper
             return '';
         }
 		return wp_kses( $text, self::eael_allowed_tags(), array_merge( wp_allowed_protocols(), [ 'data' ] ) );
+	}
+
+    /**
+     * List of allowed protocols for wp_kses
+     *
+	 * eael_allowed_protocols
+	 * @return array
+	 */
+    public static function eael_allowed_protocols( $extra = [] ) {
+        $protocols = array_merge( wp_allowed_protocols(), [ 'data' ] );
+        if ( count( $extra ) > 0 ) {
+			$protocols = array_merge( $protocols, $extra );
+		}
+        return $protocols;
 	}
 
 	/**
@@ -1076,6 +1138,7 @@ class Helper
 			'img'     => [
 				'src'    => [],
 				'alt'    => [],
+				'title'  => [],
 				'height' => [],
 				'width'  => [],
 				'class'  => [],
@@ -1421,7 +1484,7 @@ class Helper
      *
      * @return string
      */
-    public static function get_svg_by_icon( $icon ) {
+    public static function get_svg_by_icon( $icon, $attributes = [] ) {
         if ( empty( $icon ) || empty( $icon['value'] ) || empty( $icon['library'] ) ) return '';
 
         $svg_html = "";
@@ -1436,8 +1499,18 @@ class Helper
 
         $icon       = $svg_object['icons'][$icon_name];
         $view_box   = "0 0 {$icon[0]} {$icon[1]}";
-        $svg_html  .= "<svg class='svg-inline--". $i_class ."  eael-svg-icon' aria-hidden='true' data-icon='store' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='{$view_box}' >";
-        $svg_html  .= "<path d='{$icon[4]}'></path>";
+        $svg_html  .= "<svg ";
+
+        $color = '';
+        if( ! empty( $attributes ) ) {
+            $color = $attributes['fill'] ?? '';
+            unset( $attributes['fill'] );
+            foreach ( $attributes as $key => $value ) {
+                $svg_html .= $value ? "{$key}='{$value}' " : '';
+            }
+        }
+        $svg_html  .= " class='svg-inline--". $i_class ."  eael-svg-icon' aria-hidden='true' data-icon='store' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='{$view_box}' >";
+        $svg_html  .= "<path fill='{$color}' d='{$icon[4]}'></path>";
         $svg_html  .= "</svg>";
 
         return $svg_html;
@@ -1559,5 +1632,134 @@ class Helper
 
 		// If no match is found, you can return a default value or handle it as needed.
 		return "unknown";
+	}
+
+    public static function get_all_acf_fields() {
+
+        if ( ! class_exists( 'ACF' ) || ! function_exists( 'acf_get_field_groups' ) ) {
+            return [];
+        }
+
+        $acf_field_groups = acf_get_field_groups();
+
+        if ( empty( $acf_field_groups ) ) return [];
+
+        $acf_fields = [];
+		foreach( $acf_field_groups as $group ){
+			$default_acf_fields = acf_get_fields( $group['key'] );
+			if ( ! empty( $default_acf_fields ) ) {
+				foreach( $default_acf_fields as $field ) {
+					$acf_fields[ $field['name'] ] = [
+						'ID'    => $field['ID'],
+						'key'   => $field['key'],
+						'label' => $field['label'] ?? '',
+						'name'  => $field['name'] ?? '',
+						'type'  => $field['type'],
+						'group' => $group['title'] ?? '',
+					];
+				}
+			}
+		}
+    
+        return $acf_fields;
+    }
+
+    public static function eael_get_attachment_id_from_url( $attachment_url ) {
+        global $wpdb;
+    
+        // Strip the image size from the file name (if any)
+        $attachment_url = preg_replace( '/-\d+x\d+(?=\.[^.\s]{2,4}$)/i', '', $attachment_url );
+    
+        // Prepare the query to search in the 'guid' column in 'wp_posts'
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        $attachment_id = $wpdb->get_var( $wpdb->prepare(
+            "SELECT ID FROM $wpdb->posts WHERE guid = %s AND post_type = 'attachment'", $attachment_url
+        ));
+    
+        return $attachment_id;
+    }
+      
+    public static function eael_rating_markup( $rating, $count ) {
+        $html = '';
+		if ( 0 == $rating ) {
+			$html  = '<div class="eael-star-rating star-rating">';
+			$html .= wc_get_star_rating_html( $rating, $count );
+			$html .= '</div>';
+		}
+		return $html;
+	}
+
+    //WooCommerce Helper Function
+    public static function get_product_variation( $product_id = false ) {
+		return wc_get_product( get_the_ID() );
+	}
+    
+    public static function get_product( $product_id = false ) {
+		if ( 'product_variation' === get_post_type() ) {
+			return self::get_product_variation( $product_id );
+		}
+		$product = wc_get_product( $product_id );
+		if ( ! $product ) {
+			$product = wc_get_product();
+		}
+		return $product;
+	}
+
+	public static function eael_onpage_edit_template_markup( $page_id, $template_id, $return = false ) {
+		if ( $return ) {
+			ob_start();
+		}
+
+		if ( Plugin::$instance->editor->is_edit_mode() ) {
+			$active_doc = $_GET['active-document'] ?? 0;
+			$mode       = $active_doc === $template_id ? 'save' : 'edit';
+			?>
+			<div class='eael-onpage-edit-template-wrapper'>
+				<div class='eael-onpage-edit-template' data-eael-template-id='<?php echo esc_attr( $template_id ); ?>'
+					 data-page-id='<?php echo esc_attr( $page_id ); ?>' data-mode='<?php echo esc_attr( $mode ); ?>'>
+					<i class='eicon-edit'></i>
+					<span><?php esc_html_e( 'Edit Template', 'essential-addons-for-elementor-lite' ); ?></span>
+				</div>
+			</div>
+			<?php
+			if ( $mode === 'save' ) {
+				?>
+				<script>
+                    (function ($) {
+                        let $this = $("[data-eael-template-id='<?php echo esc_js( $template_id ); ?>']");
+                        $this.find('span').text('Save & Back');
+                        $this.find('i').addClass('eicon-arrow-left').removeClass('eicon-edit');
+                        $this.closest('.eael-onpage-edit-template-wrapper').addClass('eael-onpage-edit-activate').parent().addClass('eael-widget-otea-active');
+                    })(jQuery);
+				</script>
+				<?php
+			}
+		}
+
+		if ( $return ) {
+			return ob_get_clean();
+		}
+	}
+
+    public static function eael_e_optimized_markup(){
+        return Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
+    }
+
+    //Get revision id by post id
+    public static function current_revision_id( $post_id = null ) {
+		$current_revision_id = $post_id ?? get_the_ID();
+		$autosave = Utils::get_post_autosave( $current_revision_id );
+
+		if ( is_object( $autosave ) ) {
+			$current_revision_id = $autosave->ID;
+		}
+
+		return $current_revision_id;
+	}
+
+	public static function is_elementor_publish_template( $template_id ) {
+		$template_id = absint( $template_id );
+
+		return get_post_status( $template_id ) === 'publish' && get_post_type( $template_id ) === 'elementor_library';
 	}
 }

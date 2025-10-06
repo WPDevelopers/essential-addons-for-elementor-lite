@@ -15,21 +15,30 @@
         margin: 20px 0 10px 0;
         font-size: 36px;
     }
-    .title,
-    .title span {
+    .eael-dch-title {
         font-size: 36px;
         font-weight: 700;
         text-transform: uppercase;
         line-height: 48px;
         margin: 10px 0;
 
-        &.load {
-            color: #1abc9c;
+        .eael-dch-title-text {
+            font-size: 36px;
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: 48px;
+            margin: 10px 0;
 
-            &.gradient-color {
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
+            &.eael-dch-title-lead{
+                color: #1abc9c;
             }
+        }
+
+
+        .gradient-color,
+        .eael-dch-title-gradient{
+            background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
         }
     }
     .subtext {
@@ -41,41 +50,41 @@
 
 
 /*--- Builder Related Css ---*/
-.eael-dual-header-content-align-center {
-    text-align: center;
-}
-
-.eael-dual-header-content-align-left {
-    text-align: left;
-}
-
-.eael-dual-header-content-align-right {
-    text-align: right;
-}
-@media screen and (max-width: 1024px) and (min-width: 768px) {
-    .eael-dual-header-content-tablet-align-center {
+.eael-dual-header-content-align{
+    &-center {
         text-align: center;
     }
-
-    .eael-dual-header-content-tablet-align-left {
+    &-left {
         text-align: left;
     }
-
-    .eael-dual-header-content-tablet-align-right {
+    &-right {
         text-align: right;
+    }
+}
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+    .eael-dual-header-content-tablet-align{
+        &-center {
+            text-align: center;
+        }
+        &-left {
+            text-align: left;
+        }
+        &-right {
+            text-align: right;
+        }
     }
 }
 @media screen and (max-width: 767px) {
-    .eael-dual-header-content-mobile-align-center {
-        text-align: center;
-    }
-
-    .eael-dual-header-content-mobile-align-left {
-        text-align: left;
-    }
-
-    .eael-dual-header-content-mobile-align-right {
-        text-align: right;
+    .eael-dual-header-content-mobile-align{
+        &-center {
+            text-align: center;
+        }
+        &-left {
+            text-align: left;
+        }
+        &-right {
+            text-align: right;
+        }
     }
 }
 
@@ -83,16 +92,17 @@
 .eael-dch-separator-wrap {
     display: flex;
     justify-content: center;
-}
-.eael-dch-separator-wrap .separator-one,
-.eael-dch-separator-wrap .separator-two {
-    display: inline-block;
-    width: 15%;
-    height: 5px;
-}
-.eael-dch-separator-wrap .separator-one {
-    background: #207eff;
-}
-.eael-dch-separator-wrap .separator-two {
-    background: #4f6592;
+
+    .separator-one,
+    .separator-two {
+        display: inline-block;
+        width: 15%;
+        height: 5px;
+    }
+    .separator-one {
+        background: #207eff;
+    }
+    .separator-two {
+        background: #4f6592;
+    }
 }

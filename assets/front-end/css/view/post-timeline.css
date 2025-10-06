@@ -430,7 +430,6 @@
     left: auto;
     right: calc(100% + 85px);
     text-align: right;
-    font-size: 1em;
   }
 }
 

@@ -12,11 +12,15 @@ const QuickView = {
 	
 	openPopup:($scope, $)=>{
 		// Quick view
-		$scope.on("click", ".open-popup-link", function (e) {
+		jQuery(document).on("click", ".open-popup-link", function (e) {
 			e.preventDefault();
 			e.stopPropagation();
+
 			const $this = $(this);
 			const quickview_setting = $this.data('quickview-setting');
+			if (quickview_setting === undefined) {
+				return;
+			}
 			const popup_view = $(".eael-woocommerce-popup-view");
 			popup_view.find(".eael-popup-details-render").html('<div class="eael-preloader"></div>')
 			popup_view
@@ -80,7 +84,7 @@ const QuickView = {
 	singlePageAddToCartButton: ($scope, $) => {
 		$(document).on(
 			"click",
-			".eael-woo-slider-popup .single_add_to_cart_button:not(.wc-variation-selection-needed)",
+			".eael-woo-slider-popup .product.product-type-simple .single_add_to_cart_button:not(.wc-variation-selection-needed), .eael-woo-slider-popup .product.product-type-variable .single_add_to_cart_button:not(.wc-variation-selection-needed), .eael-woo-slider-popup .product.product-type-grouped .single_add_to_cart_button:not(.wc-variation-selection-needed)",
 			function (e) {
 				e.preventDefault();
 				e.stopImmediatePropagation();
@@ -173,12 +177,17 @@ const QuickView = {
 	},
 }
 
-if (!ea.elementStatusCheck('eaelQuickView')) {
-	ea.hooks.addAction('quickViewAddMarkup', 'ea', QuickView.quickViewAddMarkup, 10);
-	ea.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.openPopup, 10);
-	ea.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.closePopup, 10);
-	ea.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.singlePageAddToCartButton, 10);
-	ea.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.preventStringInNumberField, 10);
+//This is only for YITH WooCommerce Ajax Product Filter
+jQuery( document ).on( 'click', '.yith-wcan-filters', function() {
+    window.forceFullyRun = true;
+} );
+
+if (!eael.elementStatusCheck('eaelQuickView') || window.forceFullyRun !== undefined ) {
+	eael.hooks.addAction('quickViewAddMarkup', 'ea', QuickView.quickViewAddMarkup, 10);
+	eael.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.openPopup, 10);
+	eael.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.closePopup, 10);
+	eael.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.singlePageAddToCartButton, 10);
+	eael.hooks.addAction('quickViewPopupViewInit', 'ea', QuickView.preventStringInNumberField, 10);
 }
 
 

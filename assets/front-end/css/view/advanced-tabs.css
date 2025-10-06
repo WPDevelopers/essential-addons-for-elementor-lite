@@ -70,6 +70,10 @@
   background-color: #444;
 }
 
+.eael-advance-tabs .eael-tabs-nav > ul li:focus-visible {
+  outline: 1px solid #a9d204 !important;
+}
+
 .eael-advance-tabs.active-caret-on .eael-tabs-nav > ul li.active:after {
   display: none;
 }

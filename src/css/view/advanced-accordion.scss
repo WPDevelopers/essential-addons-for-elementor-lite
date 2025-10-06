@@ -87,26 +87,6 @@
     display: block;
 }
 
-@keyframes rotate-90 {
-    0% {
-        transform: rotateY(0deg);
-    }
-    100% {
-        transform: rotateY(-180deg);
-    }
-}
-
-@keyframes fadeIn {
-    0% {
-        opacity: 1;
-        transition: all 0.3s ease-in-out;
-    }
-    100% {
-        opacity: 1;
-        transition: all 0.3s ease-in-out;
-    }
-}
-
 .rtl {
     .eael-adv-accordion .eael-accordion-list .eael-accordion-header.active .fa-toggle {
         transform: rotate(-90deg);

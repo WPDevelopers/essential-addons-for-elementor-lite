@@ -2,6 +2,8 @@
 
 namespace Essential_Addons_Elementor\Elements;
 
+use Essential_Addons_Elementor\Classes\Helper;
+
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
     exit;
@@ -50,6 +52,10 @@ class Formstack extends Widget_Base {
             'ea',
             'essential addons'
         ];
+    }
+
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
     }
 
     public function get_custom_help_url () {
@@ -2059,20 +2065,25 @@ class Formstack extends Widget_Base {
             return;
         }
 
+	    $settings = $this->get_settings_for_display();
 
-        $settings = $this->get_settings_for_display();
-        $key = 'eael_formstack_'.md5($settings['eael_form_key']);
-        $form_data = get_transient($key);
-        if (empty($form_data) && $settings['eael_form_key']!='') {
-            $wp = wp_remote_get(
-                $settings['eael_form_key'],
-                array(
-                    'timeout' => 120,
-                )
-            );
-            $form_data = wp_remote_retrieve_body($wp);
-            set_transient($key, $form_data, 1 * HOUR_IN_SECONDS);
-        }
+	    if ( ! preg_match( '/\bhttps?:\/\/[a-zA-Z0-9.-]+\.formstack\.com\/[^\s"\']*/', $settings['eael_form_key'], $matches ) ) {
+		    return;
+	    }
+	    $settings['eael_form_key'] = $matches[0];
+
+	    $key       = 'eael_formstack_' . md5( $settings['eael_form_key'] );
+	    $form_data = get_transient( $key );
+	    if ( empty( $form_data ) && $settings['eael_form_key'] != '' ) {
+		    $wp        = wp_remote_get(
+			    $settings['eael_form_key'],
+			    array(
+				    'timeout' => 120,
+			    )
+		    );
+		    $form_data = wp_remote_retrieve_body( $wp );
+		    set_transient( $key, $form_data, 1 * HOUR_IN_SECONDS );
+	    }
 
         $this->add_render_attribute(
             'eael_formstack_wrapper',
@@ -2112,7 +2123,7 @@ class Formstack extends Widget_Base {
 
 
         ?>
-        <div <?php echo $this->get_render_attribute_string('eael_formstack_wrapper'); ?>>
+        <div <?php $this->print_render_attribute_string('eael_formstack_wrapper'); ?>>
             <?php if ($settings['eael_formstack_custom_title_description'] == 'yes') { ?>
                 <div class="eael-formstack-heading">
                     <?php if ($settings['eael_formstack_form_title_custom'] != '') { ?>
@@ -2122,13 +2133,17 @@ class Formstack extends Widget_Base {
                     <?php } ?>
                     <?php if ($settings['eael_formstack_form_description_custom'] != '') { ?>
                         <div class="eael-contact-form-description eael-formstack-description">
-                            <?php echo $this->parse_text_editor($settings['eael_formstack_form_description_custom']); ?>
+                            <?php 
+                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                            echo $this->parse_text_editor( $settings['eael_formstack_form_description_custom'] ); ?>
                         </div>
                     <?php } ?>
                 </div>
             <?php } ?>
             <div class="fsForm">
-                <?php echo $form_data; ?>
+                <?php
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                echo $this->parse_text_editor( $form_data ); ?>
             </div>
         </div>
         <?php
