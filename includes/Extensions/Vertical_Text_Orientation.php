@@ -326,5 +326,17 @@ class Vertical_Text_Orientation {
 
 	public function before_render( $element ) {
 		$settings = $element->get_settings_for_display();
+        $element->add_render_attribute( '_wrapper', 'class', 'eael_vto-vertical' );
+        $gradient_colors = [];
+        if ( !empty( $settings['eael_vto_writing_gradient_color_repeater'] ) && is_array( $settings['eael_vto_writing_gradient_color_repeater'] ) ) {
+            foreach ( $settings['eael_vto_writing_gradient_color_repeater'] as $value ) {
+                $gradient_colors[] = [
+                    'color' => $value['eael_vto_writing_gradient_color'],
+                    'location' => $value['eael_vto_writing_gradient_color_location']['size'] . $value['eael_vto_writing_gradient_color_location']['unit'],
+                ];
+            }
+        }
+
+        $element->add_render_attribute( '_wrapper', 'data-gradient_colors', wp_json_encode( $gradient_colors ) );
 	}
 }

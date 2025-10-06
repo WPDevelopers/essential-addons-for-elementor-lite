@@ -197,7 +197,7 @@ class Elements_Manager {
         
         // Vertical Text Orientation
 		if ( ! empty( $element['settings']['eael_vertical_text_orientation_switch'] ) ) {
-			$list['vertical_text_orientation'] = 'vertical_text_orientation';
+			$list['vertical-text-orientation'] = 'vertical-text-orientation';
 		}
 
 		return $list;

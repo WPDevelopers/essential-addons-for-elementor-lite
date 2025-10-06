@@ -1443,6 +1443,13 @@ $config = [
                         'context' => 'view',
                     ],
                 ],
+                'js'  => [
+                    [
+                        'file'    => EAEL_PLUGIN_PATH . 'assets/front-end/js/view/vertical-text-orientation.min.js',
+                        'type'    => 'self',
+                        'context' => 'view',
+                    ],
+                ],
             ],
         ],
     ],
