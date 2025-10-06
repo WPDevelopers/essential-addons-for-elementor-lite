@@ -8,10 +8,10 @@
 }
 .eael-circle-wrapper.eael-interactive-circle-rotate,
 .eael-circle-wrapper .eael-interactive-circle-rotate {
-  -webkit-animation: rotation 50s linear infinite;
-          animation: rotation 50s linear infinite;
+  -webkit-animation: eaelRotation 50s linear infinite;
+          animation: eaelRotation 50s linear infinite;
 }
-@-webkit-keyframes rotation {
+@-webkit-keyframes eaelRotation {
   from {
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg);
@@ -21,7 +21,7 @@
             transform: rotate(360deg);
   }
 }
-@keyframes rotation {
+@keyframes eaelRotation {
   from {
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg);
@@ -31,7 +31,7 @@
             transform: rotate(360deg);
   }
 }
-@-webkit-keyframes rotation-reverse {
+@-webkit-keyframes eaelRotation-reverse {
   from {
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
@@ -41,7 +41,7 @@
             transform: rotate(0deg);
   }
 }
-@keyframes rotation-reverse {
+@keyframes eaelRotation-reverse {
   from {
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
@@ -54,8 +54,8 @@
 .eael-circle-wrapper.eael-interactive-circle-rotate .eael-circle-btn-icon, .eael-circle-wrapper.eael-interactive-circle-rotate .eael-circle-content,
 .eael-circle-wrapper .eael-interactive-circle-rotate .eael-circle-btn-icon,
 .eael-circle-wrapper .eael-interactive-circle-rotate .eael-circle-content {
-  -webkit-animation: rotation-reverse 50s linear infinite;
-          animation: rotation-reverse 50s linear infinite;
+  -webkit-animation: eaelRotation-reverse 50s linear infinite;
+          animation: eaelRotation-reverse 50s linear infinite;
 }
 @media only screen and (max-width: 600px) {
   .eael-circle-wrapper.eael-interactive-circle-rotate.eael-circle-responsive-view,
@@ -10168,4 +10168,7 @@
   .eael-circle-wrapper .eael-circle-info .eael-circle-inner .eael-circle-item {
     border: none !important;
   }
+}
+.theme-whiskers .eael-circle-wrapper div {
+  text-align: inherit;
 }

@@ -43,12 +43,13 @@ function Modal() {
                     </div>
                     <div className="ea__modal-body">
                         {eaState.modalID === 'loginRegisterSetting' && <ModalStyleThree/>}
+                        {eaState.modalID === 'businessReviewsSetting' && <ModalStyleThree/>}
                         {eaState.modalID === 'postDuplicatorSetting' && <ModalStyleTwo/>}
-                        {['loginRegisterSetting', 'postDuplicatorSetting'].includes(eaState.modalID) ||
+                        {['loginRegisterSetting', 'businessReviewsSetting', 'postDuplicatorSetting'].includes(eaState.modalID) ||
                             <ModalStyleOne/>}
                     </div>
                     <div className="ea__modal-footer flex items-center">
-                        {eaState.modalID === 'loginRegisterSetting' &&
+                        {(eaState.modalID === 'loginRegisterSetting' || eaState.modalID === 'businessReviewsSetting') &&
                             <a className="ea__api-link" target="_blank"
                                href={eaData[eaState.modalID].link.url}>{eaData[eaState.modalID].link.text}</a>}
                         <div className='flex flex-end flex-1'>

@@ -53,6 +53,10 @@ class Interactive_Circle extends Widget_Base {
         return false;
     }
 
+	public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
+    }
+
 	public function get_custom_help_url() {
 		return 'https://essential-addons.com/elementor/docs/interactive-circle/';
 	}
@@ -249,6 +253,7 @@ class Interactive_Circle extends Widget_Base {
 				'name'    => 'eael_interactive_circle_content_icon',
 				'label'   => esc_html__( 'Icon', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::ICONS,
+				'description' => esc_html__( 'Icon will only visible for Preset 2', 'essential-addons-for-elementor-lite' )
 			]
 		);
 
@@ -711,7 +716,7 @@ class Interactive_Circle extends Widget_Base {
 				//			    'default' => '#333',
 				'selectors' => [
 					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn .eael-circle-btn-icon i'   => 'color: {{VALUE}}!important;',
-					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn .eael-circle-btn-icon svg' => 'fill: {{VALUE}}!important;',
+					// '{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn .eael-circle-btn-icon svg' => 'fill: {{VALUE}}!important;',
 					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn .eael-circle-btn-icon svg path' => 'fill: {{VALUE}}!important;',
 				],
 				'condition' => [
@@ -773,7 +778,7 @@ class Interactive_Circle extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn:hover .eael-circle-btn-icon i, {{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn.active:hover .eael-circle-btn-icon i'     => 'color: {{VALUE}}!important;',
-					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn:hover .eael-circle-btn-icon svg, {{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn.active:hover .eael-circle-btn-icon svg' => 'fill: {{VALUE}}!important;',
+					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn:hover .eael-circle-btn-icon svg path, {{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn.active:hover .eael-circle-btn-icon svg path' => 'fill: {{VALUE}}!important;',
 				],
 				'condition' => [
 					'eael_interactive_circle_btn_icon_show' => 'yes'
@@ -837,14 +842,9 @@ class Interactive_Circle extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
 				'type'      => Controls_Manager::COLOR,
-				//			    'default' => '#fff',
-				'selectors' => [
-					'{{WRAPPER}} .eael-circle-btn.active i'   => 'color: {{VALUE}}!important;',
-					'{{WRAPPER}} .eael-circle-btn.active svg' => 'fill: {{VALUE}}!important;',
-				],
 				'selectors' => [
 					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn.active .eael-circle-btn-icon i'   => 'color: {{VALUE}}!important;',
-					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn.active .eael-circle-btn-icon svg' => 'fill: {{VALUE}}!important;',
+					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-btn.active .eael-circle-btn-icon svg path' => 'fill: {{VALUE}}!important;',
 				],
 				'condition' => [
 					'eael_interactive_circle_btn_icon_show' => 'yes'
@@ -956,7 +956,7 @@ class Interactive_Circle extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-content .eael-circle-content-icon i'   => 'color: {{VALUE}}!important;',
-					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-content .eael-circle-content-icon svg' => 'fill: {{VALUE}}!important;',
+					'{{WRAPPER}} .eael-circle-info .eael-circle-inner .eael-circle-item .eael-circle-content .eael-circle-content-icon svg path' => 'fill: {{VALUE}}!important;',
 				],
 				'condition' => [
 					'eael_interactive_circle_content_icon_show' => 'yes'
@@ -1046,7 +1046,7 @@ class Interactive_Circle extends Widget_Base {
 			]
 		);
 
-		$this->add_render_attribute( 'eael_circle_wrapper', 'data-animation', $settings['eael_interactive_circle_animation'] );
+		$this->add_render_attribute( 'eael_circle_wrapper', 'data-appearance', $settings['eael_interactive_circle_animation'] );
 		$this->add_render_attribute( 'eael_circle_wrapper', 'data-autoplay', esc_attr( 'yes' === $settings['eael_interactive_circle_autoplay'] ? 1 : 0 ) );
 		$this->add_render_attribute( 'eael_circle_wrapper', 'data-autoplay-interval', esc_attr( ! empty( $settings['eael_interactive_circle_autoplay_interval']['size'] ) ? intval( $settings['eael_interactive_circle_autoplay_interval']['size'] ) : 2000 ) );
 
@@ -1070,10 +1070,10 @@ class Interactive_Circle extends Widget_Base {
 		}
 
 		?>
-        <div <?php echo $this->get_render_attribute_string( 'eael_interactive_circle_container' ); ?>>
+        <div <?php $this->print_render_attribute_string( 'eael_interactive_circle_container' ); ?>>
 			<?php if ( ( $settings['eael_interactive_circle_preset'] != 'eael-interactive-circle-preset-2' ) ) { ?>
-                <div <?php echo $this->get_render_attribute_string( 'eael_circle_wrapper' ); ?>>
-                    <div <?php echo $this->get_render_attribute_string( 'eael_circle_info' ); ?>>
+                <div <?php $this->print_render_attribute_string( 'eael_circle_wrapper' ); ?>>
+                    <div <?php $this->print_render_attribute_string( 'eael_circle_info' ); ?>>
                         <div class="eael-circle-inner">
 							<?php
 							foreach ( $settings['eael_interactive_circle_item'] as $index => $item ) :
@@ -1082,7 +1082,7 @@ class Interactive_Circle extends Widget_Base {
 								$is_active  = $item['eael_interactive_circle_default_active'] === 'yes' ? 'active' : '';
 								?>
                                 <div class="eael-circle-item elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
-                                    <div aria-controls="eael-interactive-<?php echo esc_attr( $item_count ); ?>" tabindex="0" class="eael-circle-btn <?php echo $is_active; ?>" id="eael-circle-item-<?php echo $item_count; ?>">
+                                    <div aria-controls="eael-interactive-<?php echo esc_attr( $item_count ); ?>" tabindex="0" class="eael-circle-btn <?php echo esc_attr( $is_active ); ?>" id="eael-circle-item-<?php echo esc_attr( $item_count ); ?>">
 										<?php if ( in_array( $settings['eael_interactive_circle_preset'], [ 'eael-interactive-circle-preset-3', 'eael-interactive-circle-preset-4'] ) ) { ?>
 										<div class="eael-circle-icon-shapes <?php echo esc_attr( $item_style_classic ); ?>">
 											<div class="eael-shape-1"></div>
@@ -1097,7 +1097,7 @@ class Interactive_Circle extends Widget_Base {
 													$this->add_link_attributes( 'interactive_circle_link_' . $index, $item['eael_interactive_circle_btn_link'] );
 												}
 											?>
-											<a <?php echo $this->get_render_attribute_string( 'interactive_circle_link_' . $index ); ?>>
+											<a <?php $this->print_render_attribute_string( 'interactive_circle_link_' . $index ); ?>>
 												<div class="eael-circle-btn-icon <?php echo esc_attr( $item_style_classic ); ?>">
 													<div class="eael-circle-icon-inner">
 														<?php
@@ -1131,9 +1131,11 @@ class Interactive_Circle extends Widget_Base {
 										<!-- End URL support -->
                                         
                                     </div>
-                                    <div id="eael-interactive-<?php echo esc_attr( $item_count ); ?>" aria-labelledby="eael-circle-item-<?php echo esc_attr( $item_count ); ?>" class="eael-circle-btn-content eael-circle-item-<?php echo $item_count . ' ' . $is_active; ?>">
+                                    <div id="eael-interactive-<?php echo esc_attr( $item_count ); ?>" aria-labelledby="eael-circle-item-<?php echo esc_attr( $item_count ); ?>" class="eael-circle-btn-content eael-circle-item-<?php echo esc_attr( $item_count . ' ' . $is_active ); ?>">
                                         <div class="eael-circle-content">
-											<?php echo wp_kses( $item['eael_interactive_circle_item_content'], Helper::eael_allowed_tags() ); ?>
+											<?php 
+											// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+											echo $this->parse_text_editor( $item['eael_interactive_circle_item_content'] ); ?>
                                         </div>
                                     </div>
                                 </div>
@@ -1146,16 +1148,16 @@ class Interactive_Circle extends Widget_Base {
 
 			<?php } else { ?>
 
-                <div <?php echo $this->get_render_attribute_string( 'eael_circle_wrapper' ); ?>>
+                <div <?php $this->print_render_attribute_string( 'eael_circle_wrapper' ); ?>>
                     <div class="eael-circle-info">
-                        <div class="eael-circle-inner" data-items="<?php echo $item_count; ?>">
+                        <div class="eael-circle-inner" data-items="<?php echo esc_attr( $item_count ); ?>">
 							<?php
 							foreach ( $settings['eael_interactive_circle_item'] as $index => $item ) :
 								$item_count = $index + 1;
 								$is_active  = $item['eael_interactive_circle_default_active'] === 'yes' ? 'active' : '';
 								?>
                                 <div class="eael-circle-item elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
-                                    <div aria-controls="eael-interactive-<?php echo esc_attr( $item_count ); ?>" tabindex="0" class="eael-circle-btn <?php echo $is_active; ?>" id="eael-circle-item-<?php echo $item_count; ?>">
+                                    <div aria-controls="eael-interactive-<?php echo esc_attr( $item_count ); ?>" tabindex="0" class="eael-circle-btn <?php echo esc_attr( $is_active ); ?>" id="eael-circle-item-<?php echo esc_attr( $item_count ); ?>">
                                         <div class="eael-circle-icon-shapes">
                                             <div class="eael-shape-1"></div>
                                             <div class="eael-shape-2"></div>
@@ -1168,7 +1170,7 @@ class Interactive_Circle extends Widget_Base {
 												$this->add_link_attributes( 'interactive_circle_link_' . $index, $item['eael_interactive_circle_btn_link'] );
 											}
 											?>
-											<a <?php echo $this->get_render_attribute_string( 'interactive_circle_link_' . $index ); ?>>
+											<a <?php $this->print_render_attribute_string( 'interactive_circle_link_' . $index ); ?>>
 												<div class="eael-circle-btn-icon">
 													<div class="eael-circle-btn-icon-inner">
 														<?php
@@ -1203,7 +1205,7 @@ class Interactive_Circle extends Widget_Base {
 										<!-- End URL support -->
 
                                     </div>
-                                    <div class="eael-circle-btn-content eael-circle-item-<?php echo $item_count . ' ' . $is_active; ?>">
+                                    <div class="eael-circle-btn-content eael-circle-item-<?php echo esc_attr( $item_count . ' ' . $is_active ); ?>">
                                         <div id="eael-interactive<?php echo esc_attr( $item_count ); ?>" aria-labelledby="eael-circle-item-<?php echo esc_attr( $item_count ); ?>" class="eael-circle-content">
 											<?php if ( $show_content_icon ) : ?>
 												<div class="eael-circle-content-icon">

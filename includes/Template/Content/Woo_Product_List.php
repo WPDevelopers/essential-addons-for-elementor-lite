@@ -25,16 +25,18 @@ trait Woo_Product_List {
 							if ( 'yes' === $settings['eael_woo_product_list_rating'] ) {
 								$avg_rating = $product->get_average_rating();
 								if( $avg_rating > 0 ){
+									// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 									echo wc_get_rating_html($product->get_average_rating(), $product->get_rating_count());
 								} else {
+									// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 									echo Helper::eael_rating_markup( $product->get_average_rating(), $product->get_rating_count() );
 								}
 							}
 
 							if ( ! $product->managing_stock() && ! $product->is_in_stock() ) {
-								printf( '<span class="outofstock-badge">%s</span>', __( 'Stock <br/> Out', 'essential-addons-for-elementor-lite' ) );
+								printf( '<span class="outofstock-badge">%s <br/> %s</span>', esc_html__( 'Stock', 'essential-addons-for-elementor-lite' ), esc_html__( 'Out', 'essential-addons-for-elementor-lite' ) );
 							} elseif ( $product->is_on_sale() ) {
-								printf( '<span class="onsale">%s</span>', __( 'Sale!', 'essential-addons-for-elementor-lite' ) );
+								printf( '<span class="onsale">%s</span>', esc_html__( 'Sale!', 'essential-addons-for-elementor-lite' ) );
 							}
 							?>
                             <span class="price"><?php echo wp_kses_post( $product->get_price_html()); ?></span>
@@ -51,7 +53,9 @@ trait Woo_Product_List {
 				    ?>
 					<li class="product">
                         <div class="overlay">
-                            <?php echo $product->get_image( 'woocommerce_thumbnail' ); ?>
+                            <?php 
+							// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							echo $product->get_image( 'woocommerce_thumbnail' ); ?>
                             <div class="button-wrap clearfix">
                                 <a href="<?php echo esc_url( $product->get_permalink()); ?>" class="product-link"><span class="fas fa-link"></span></a>
                                 <?php
@@ -67,16 +71,20 @@ trait Woo_Product_List {
                         if ( 'yes' === $settings['eael_woo_product_list_rating'] ) {
 							$avg_rating = $product->get_average_rating();
 							if( $avg_rating > 0 ){
+								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 								echo wc_get_rating_html($product->get_average_rating(), $product->get_rating_count());
 							} else {
+								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 								echo Helper::eael_rating_markup( $product->get_average_rating(), $product->get_rating_count() );
 							}
 						}
                         if ($product->is_on_sale()){
-                            printf( '<span class="onsale">%s</span>', __( 'Sale!', 'essential-addons-for-elementor-lite' ));
+                            printf( '<span class="onsale">%s</span>', esc_html__( 'Sale!', 'essential-addons-for-elementor-lite' ));
                         }
                         ?>
-                        <span class="price"> <?php echo $product->get_price_html(); ?> </span>
+                        <span class="price"> <?php
+						// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						echo $product->get_price_html(); ?> </span>
                     </li>
                     <?php
 				} else {
@@ -92,7 +100,7 @@ trait Woo_Product_List {
 				}
 			}
 		} else {
-			printf( '<p class="no-posts-found">%</p>', __( 'No products found!', 'essential-addons-for-elementor-lite' ) );
+			printf( '<p class="no-posts-found">%</p>', esc_html__( 'No products found!', 'essential-addons-for-elementor-lite' ) );
 
 		}
 

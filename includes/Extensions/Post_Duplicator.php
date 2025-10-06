@@ -77,6 +77,10 @@ class Post_Duplicator {
 			return; // Return if nonce is not valid
 		}
 
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			wp_die( __( 'You do not have sufficient permissions to edit this post.', 'essential-addons-for-elementor-lite' ) );
+		}
+
 		$post = sanitize_post( get_post( $post_id ), 'db' );
 
 		if ( is_null( $post ) ) {
@@ -132,6 +136,8 @@ class Post_Duplicator {
 			}
 
 			global $wpdb;
+
+        	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$post_meta = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id = %d", $post_id ) );
 
 			if ( ! empty( $post_meta ) && is_array( $post_meta ) ) {
@@ -161,6 +167,7 @@ class Post_Duplicator {
 					$insert .= $wpdb->prepare( '(%d, %s, %s)', $duplicated_id, $meta_key, $meta_value );
 				}
 
+        		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				$wpdb->query( $duplicate_insert_query . $insert );
 			}
 		}

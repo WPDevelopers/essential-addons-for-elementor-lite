@@ -391,7 +391,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			 */
 			$plugin = $this->plugin_data();
 			if( empty( $plugin ) ) {
-				$body['message'] .= __( 'We can\'t detect any plugin information. This is most probably because you have not included the code in the plugin main file.', 'disable-comments' );
+				$body['message'] .= __( 'We can\'t detect any plugin information. This is most probably because you have not included the code in the plugin main file.', 'essential-addons-for-elementor-lite' );
 				$body['status'] = 'NOT FOUND';
 			} else {
 				if( isset( $plugin['Name'] ) ) {
@@ -637,7 +637,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$output .= "<script type='text/javascript'>jQuery('.wpinsights-". esc_attr( $this->plugin_name ) ."-collect').on('click', function(e) {e.preventDefault();jQuery('.wpinsights-data').slideToggle('fast');});</script>";
 			$output .= '</div>';
 
-			printf( '%1$s', $output );
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo $output;
 		}
 		/**
 		 * Set all notice options to customized notice.
@@ -648,9 +649,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 		 */
 		public function set_notice_options( $options = [] ){
 			$default_options = [
-				'consent_button_text' => __( 'What we collect.', 'disable-comments' ),
-				'yes'                 => __( 'Sure, I\'d like to help', 'disable-comments' ),
-				'no'                  => __( 'No Thanks.', 'disable-comments' ),
+				'consent_button_text' => __( 'What we collect.', 'essential-addons-for-elementor-lite' ),
+				'yes'                 => __( 'Sure, I\'d like to help', 'essential-addons-for-elementor-lite' ),
+				'no'                  => __( 'No Thanks.', 'essential-addons-for-elementor-lite' ),
 			];
 			$options = wp_parse_args( $options, $default_options );
 			$this->notice_options = $options;
@@ -747,20 +748,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 		 */
 		public function deactivation_reasons() {
 			$form = array();
-			$form['heading'] = __( 'We Value Your Feedback', 'disable-comments' );
-			$form['body'] = __( "Could you please tell us why you're deactivating our plugin? Your insights will help us to improve.", 'disable-comments' );
+			$form['heading'] = __( 'We Value Your Feedback', 'essential-addons-for-elementor-lite' );
+			$form['body'] = __( "Could you please tell us why you're deactivating our plugin? Your insights will help us to improve.", 'essential-addons-for-elementor-lite' );
 
 			$form['options'] = array(
-				__( 'I no longer need the plugin', 'disable-comments' ),
+				__( 'I no longer need the plugin', 'essential-addons-for-elementor-lite' ),
 				[
-					'label' => __( 'I found a better plugin', 'disable-comments' ),
-					'extra_field' => __( 'Please share which plugin', 'disable-comments' )
+					'label' => __( 'I found a better plugin', 'essential-addons-for-elementor-lite' ),
+					'extra_field' => __( 'Please share which plugin', 'essential-addons-for-elementor-lite' )
 				],
-				__( "I couldn't get the plugin to work", 'disable-comments' ),
-				__( 'It\'s a temporary deactivation', 'disable-comments' ),
+				__( "I couldn't get the plugin to work", 'essential-addons-for-elementor-lite' ),
+				__( 'It\'s a temporary deactivation', 'essential-addons-for-elementor-lite' ),
 				[
-					'label' => __( 'Other', 'disable-comments' ),
-					'extra_field' => __( 'Please share the reason', 'disable-comments' ),
+					'label' => __( 'Other', 'essential-addons-for-elementor-lite' ),
+					'extra_field' => __( 'Please share the reason', 'essential-addons-for-elementor-lite' ),
 					'type' => 'textarea'
 				]
 			);
@@ -802,7 +803,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$html .= '</ul></div><!-- .wpinsights-'. $class_plugin_name .'-goodbye-options -->';
 			}
 			$html .= '</div><!-- .wpinsights-goodbye-form-body -->';
-			$html .= '<p class="deactivating-spinner"><span class="spinner"></span> ' . __( 'Submitting form', 'disable-comments' ) . '</p>';
+			$html .= '<p class="deactivating-spinner"><span class="spinner"></span> ' . __( 'Submitting form', 'essential-addons-for-elementor-lite' ) . '</p>';
 
 			$wrapper_class = '.wpinsights-goodbye-form-wrapper-'. $class_plugin_name;
 
@@ -1032,26 +1033,26 @@ if ( ! defined( 'ABSPATH' ) ) {
                     
                 ';
 			$styles .= '</style>';
-			$styles .= '';
 
-
-
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $styles;
 			?>
 			<script type="text/javascript">
 				jQuery(document).ready(function($){
-					$("#wpinsights-goodbye-link-<?php echo $class_plugin_name; ?>").on("click",function(){
+					$("#wpinsights-goodbye-link-<?php echo esc_js( $class_plugin_name ); ?>").on("click",function(){
 						// We'll send the user to this deactivation link when they've completed or dismissed the form
-						var url = document.getElementById("wpinsights-goodbye-link-<?php echo $class_plugin_name; ?>");
-						$('body').toggleClass('wpinsights-form-active-<?php echo $class_plugin_name; ?>');
-						$(".wpinsights-goodbye-form-wrapper-<?php echo $class_plugin_name; ?> #wpinsights-goodbye-form").fadeIn();
-						$(".wpinsights-goodbye-form-wrapper-<?php echo $class_plugin_name; ?> #wpinsights-goodbye-form").html( '<?php echo $html; ?>' + '<div class="wpinsights-goodbye-form-footer"><div class="wpinsights-goodbye-form-buttons"><a id="wpinsights-submit-form-<?php echo $class_plugin_name; ?>" class="wpinsights-submit-btn" href="#"><?php _e( 'Submit and Deactivate', 'disable-comments' ); ?></a>&nbsp;<a class="wpsp-put-deactivate-btn" href="'+url+'"><?php _e( 'Just Deactivate', 'disable-comments' ); ?></a></div></div>');
-						$('#wpinsights-submit-form-<?php echo $class_plugin_name; ?>').on('click', function(e){
+						var url = document.getElementById("wpinsights-goodbye-link-<?php echo esc_js( $class_plugin_name ); ?>");
+						$('body').toggleClass('wpinsights-form-active-<?php echo esc_js( $class_plugin_name ); ?>');
+						$(".wpinsights-goodbye-form-wrapper-<?php echo esc_js( $class_plugin_name ); ?> #wpinsights-goodbye-form").fadeIn();
+						$(".wpinsights-goodbye-form-wrapper-<?php echo esc_js( $class_plugin_name ); ?> #wpinsights-goodbye-form").html( '<?php
+						// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						echo $html; ?>' + '<div class="wpinsights-goodbye-form-footer"><div class="wpinsights-goodbye-form-buttons"><a id="wpinsights-submit-form-<?php echo esc_js( $class_plugin_name ); ?>" class="wpinsights-submit-btn" href="#"><?php esc_html_e( 'Submit and Deactivate', 'disable-comments' ); ?></a>&nbsp;<a class="wpsp-put-deactivate-btn" href="'+url+'"><?php esc_html_e( 'Just Deactivate', 'disable-comments' ); ?></a></div></div>');
+						$('#wpinsights-submit-form-<?php echo esc_js( $class_plugin_name ); ?>').on('click', function(e){
 							// As soon as we click, the body of the form should disappear
-							$("#wpinsights-goodbye-form-<?php echo $class_plugin_name; ?> .wpinsights-goodbye-form-body").fadeOut();
-							$("#wpinsights-goodbye-form-<?php echo $class_plugin_name; ?> .wpinsights-goodbye-form-footer").fadeOut();
+							$("#wpinsights-goodbye-form-<?php echo esc_js( $class_plugin_name ); ?> .wpinsights-goodbye-form-body").fadeOut();
+							$("#wpinsights-goodbye-form-<?php echo esc_js( $class_plugin_name ); ?> .wpinsights-goodbye-form-footer").fadeOut();
 							// Fade in spinner
-							$("#wpinsights-goodbye-form-<?php echo $class_plugin_name; ?> .deactivating-spinner").fadeIn();
+							$("#wpinsights-goodbye-form-<?php echo esc_js( $class_plugin_name ); ?> .deactivating-spinner").fadeIn();
 							e.preventDefault();
 							var checkedInput = $("input[name='wpinsights-<?php echo esc_attr( $class_plugin_name ); ?>-goodbye-options']:checked"),
 								checkedInputVal, details;
@@ -1071,7 +1072,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 								'action': 'deactivation_form_<?php echo esc_attr( $class_plugin_name ); ?>',
 								'values': checkedInputVal,
 								'details': details,
-								'security': "<?php echo wp_create_nonce ( 'wpins_deactivation_nonce' ); ?>",
+								'security': "<?php
+								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+								echo wp_create_nonce ( 'wpins_deactivation_nonce' ); ?>",
 								'dataType': "json"
 							}
 
@@ -1112,6 +1115,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$sql           = "SELECT `post_id`
             FROM  $wpdb->postmeta
             WHERE `meta_key` = '_eael_widget_elements'";
+			
+        	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$post_ids      = $wpdb->get_col( $sql );
 			$used_elements = [];
 
@@ -1153,6 +1158,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 						$element_name = 'eael-conditional-display';
 					} elseif ( $key === 'eael_ext_advanced_dynamic_tags' ) {
 						$element_name = 'eael-advanced-dynamic-tags';
+					} elseif ( $key === 'eael_custom_cursor_switch' ) {
+						$element_name = 'eael-custom-cursor';
 					} 
 
 					if ( ! empty( $element_name ) ) {

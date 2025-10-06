@@ -86,14 +86,9 @@ eael.hooks.addAction("init", "ea", () => {
 				e.preventDefault();
 				
 				var currentTabIndex = $(this).index();
-				var tabsContainer = $(this).closest(".eael-advance-tabs");
-				var tabsNav = $(tabsContainer)
-				.children(".eael-tabs-nav")
-				.children("ul")
-				.children("li");
-				var tabsContent = $(tabsContainer)
-				.children(".eael-tabs-content")
-				.children("div");
+				var tabsContainer   = $(this).closest(".eael-advance-tabs");
+				var tabsNav         = $(tabsContainer).children(".eael-tabs-nav").children("ul").children("li");
+				var tabsContent     = $(tabsContainer).children(".eael-tabs-content").children("div");
 
 				if ($($currentTabId).hasClass('eael-tab-toggle')) {
 					$(this).toggleClass('active inactive');
@@ -106,7 +101,19 @@ eael.hooks.addAction("init", "ea", () => {
 					//Scroll on click
 					if ( $scrollOnClick === 'yes' ) {
 						let $eaelContainerSelect = $(this).attr('aria-controls');
-						$(this).attr('data-scroll', $('#'+$eaelContainerSelect).offset().top)
+						let $scrollTarget = $('#'+$eaelContainerSelect);
+						let scrollPosition = $scrollTarget.offset().top;
+
+						// For vertical layout, adjust scroll position to account for content area positioning
+						if (tabsContainer.hasClass('eael-tabs-vertical')) {
+							// In vertical layout, use the content container's position instead of individual tab content
+							let $contentContainer = tabsContainer.find('.eael-tabs-content');
+							if ($contentContainer.length) {
+								scrollPosition = $contentContainer.offset().top;
+							}
+						}
+
+						$(this).attr('data-scroll', scrollPosition);
 					}
 					if ($scrollOnClick === 'yes' && $(this).hasClass("active") ) {
 						let $customIdOffsetVal = $customIdOffsetTab ? parseFloat($customIdOffsetTab) : 0;
@@ -126,7 +133,19 @@ eael.hooks.addAction("init", "ea", () => {
 					//Scroll on click
 					if ($scrollOnClick === 'yes') {
 						let $eaelContainerSelect = $(this).attr('aria-controls');
-						$(this).attr('data-scroll', $('#'+$eaelContainerSelect).offset().top)
+						let $scrollTarget = $('#'+$eaelContainerSelect);
+						let scrollPosition = $scrollTarget.offset().top;
+
+						// For vertical layout, adjust scroll position to account for content area positioning
+						if (tabsContainer.hasClass('eael-tabs-vertical')) {
+							// In vertical layout, use the content container's position instead of individual tab content
+							let $contentContainer = tabsContainer.find('.eael-tabs-content');
+							if ($contentContainer.length) {
+								scrollPosition = $contentContainer.offset().top;
+							}
+						}
+
+						$(this).attr('data-scroll', scrollPosition);
 					}
 					if ($scrollOnClick === 'yes' && $(this).hasClass("active")) {
 						let $customIdOffsetVal = $customIdOffsetTab ? parseFloat($customIdOffsetTab) : 0;
@@ -140,23 +159,15 @@ eael.hooks.addAction("init", "ea", () => {
 				$(tabsContent).each(function (index) {
 					$(this).removeClass("active-default");
 				});
+				$($currentTabId + ' > .eael-tabs-nav ul li', $scope).attr('tabindex', '-1');
+				$($currentTabId + ' > .eael-tabs-nav ul li.active', $scope).attr('tabindex', '0');
 				
-				let $filterGallery = tabsContent
-					.eq(currentTabIndex)
-					.find(".eael-filter-gallery-container"),
-					$postGridGallery = tabsContent
-					.eq(currentTabIndex)
-					.find(".eael-post-grid.eael-post-appender"),
-					$twitterfeedGallery = tabsContent
-					.eq(currentTabIndex)
-					.find(".eael-twitter-feed-masonry"),
-					$instaGallery = tabsContent
-					.eq(currentTabIndex)
-					.find(".eael-instafeed"),
-					$paGallery = tabsContent
-					.eq(currentTabIndex)
-					.find(".premium-gallery-container"),
-					$evCalendar = $(".eael-event-calendar-cls", tabsContent);
+				let $filterGallery      = tabsContent.eq(currentTabIndex).find(".eael-filter-gallery-container"),
+					$postGridGallery    = tabsContent.eq(currentTabIndex).find(".eael-post-grid.eael-post-appender"),
+					$twitterfeedGallery = tabsContent.eq(currentTabIndex).find(".eael-twitter-feed-masonry"),
+					$instaGallery       = tabsContent.eq(currentTabIndex).find(".eael-instafeed"),
+					$paGallery          = tabsContent.eq(currentTabIndex).find(".premium-gallery-container"),
+					$evCalendar         = $(".eael-event-calendar-cls", tabsContent);
 				
 				if ($postGridGallery.length) {
 					$postGridGallery.isotope("layout");
@@ -185,14 +196,39 @@ eael.hooks.addAction("init", "ea", () => {
 				}
 			});
 
+			$($currentTabId + ' > .eael-tabs-nav ul li.eael-tab-nav-item', $scope).keydown(function(e) {
+                if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                    const tabs 		 = $($currentTabId + ' > .eael-tabs-nav ul li.eael-tab-nav-item', $scope);
+					let currentIndex = $($currentTabId + ' > .eael-tabs-nav ul li.eael-tab-nav-item.active', $scope);
+                    let index 		 = currentIndex < 0 ? tabs.index(this) : tabs.index(currentIndex);
+
+                    if (e.key === 'ArrowRight') index = (index + 1) % tabs.length;
+                    if (e.key === 'ArrowLeft') index = (index - 1 + tabs.length) % tabs.length;
+                    $(tabs[index]).focus().click();
+                }
+            });
+
+			$($currentTabId + ' > .eael-tabs-nav ul li', $scope).attr('tabindex', '-1');
+			$($currentTabId + ' > .eael-tabs-nav ul li.active', $scope).attr('tabindex', '0');
+
 			// If hashTag is not null then scroll to that hashTag smoothly
 			if( typeof hashTag !== 'undefined' && hashTag && !eael.elementStatusCheck('eaelAdvancedTabScroll')){
 				let $customIdOffsetValTab = $customIdOffsetTab ? parseFloat($customIdOffsetTab) : 0;
-					$('html, body').animate({
-						scrollTop: $("#"+hashTag).offset().top - $customIdOffsetValTab,
-					}, 300);
-			}
+				let scrollPosition = $("#"+hashTag).offset().top;
 
+				// For vertical layout, adjust scroll position to account for content area positioning
+				if ($currentTab.hasClass('eael-tabs-vertical')) {
+					// In vertical layout, use the content container's position instead of individual tab content
+					let $contentContainer = $currentTab.find('.eael-tabs-content');
+					if ($contentContainer.length) {
+						scrollPosition = $contentContainer.offset().top;
+					}
+				}
+
+				$('html, body').animate({
+					scrollTop: scrollPosition - $customIdOffsetValTab,
+				}, 300);
+			}
 		}
 	);
 });

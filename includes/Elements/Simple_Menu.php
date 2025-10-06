@@ -8,8 +8,8 @@ use Elementor\Group_Control_Typography;
 use Elementor\Icons_Manager;
 use Elementor\Plugin;
 use Elementor\Widget_Base;
-use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 use Essential_Addons_Elementor\Traits\Helper;
+use Essential_Addons_Elementor\Classes\Helper as HelperClass;
 
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
@@ -69,6 +69,10 @@ class Simple_Menu extends Widget_Base
         ];
     }
 
+    public function has_widget_inner_wrapper(): bool {
+        return ! HelperClass::eael_e_optimized_markup();
+    }
+
     public function get_custom_help_url()
     {
         return 'https://essential-addons.com/elementor/docs/simple-menu/';
@@ -109,25 +113,37 @@ class Simple_Menu extends Widget_Base
 
         $simple_menus = $this->get_simple_menus();
 
-        if ($simple_menus) {
+        if ( $simple_menus ) {
             $this->add_control(
                 'eael_simple_menu_menu',
                 [
                     'label'       => esc_html__('Select Menu', 'essential-addons-for-elementor-lite'),
-                    'description' => sprintf(__('Go to the <a href="%s" target="_blank">Menu screen</a> to manage your menus.', 'essential-addons-for-elementor-lite'), admin_url('nav-menus.php')),
                     'type'        => Controls_Manager::SELECT,
                     'label_block' => false,
                     'options'     => $simple_menus,
                     'default'     => array_keys($simple_menus)[0],
                 ]
             );
+            $this->add_control(
+                'menu_manager_notice',
+                [
+                    'type'        => Controls_Manager::NOTICE,
+                    'notice_type' => 'info',
+                    'dismissible' => false,
+                    'content'     => sprintf(__('Go to the <a href="%s" target="_blank">Menu screen</a> to manage your menus.', 'essential-addons-for-elementor-lite'), admin_url('nav-menus.php')),
+                    'separator'   => 'after',
+                ]
+            );
         } else {
             $this->add_control(
-                'menu',
+                'empty_menu_notice',
                 [
-                    'type'      => Controls_Manager::RAW_HTML,
-                    'raw'       => sprintf(__('<strong>There are no menus in your site.</strong><br>Go to the <a href="%s" target="_blank">Menus screen</a> to create one.', 'essential-addons-for-elementor-lite'), admin_url('nav-menus.php?action=edit&menu=0')),
-                    'separator' => 'after',
+                    'type'        => Controls_Manager::NOTICE,
+                    'notice_type' => 'warning',
+                    'dismissible' => false,
+                    'heading'     => esc_html__( 'There are no menus in your site.', 'essential-addons-for-elementor-lite' ),
+                    'content'     => sprintf(__('Go to the <a href = "%s" target = "_blank">Menus screen</a> to create one.', 'essential-addons-for-elementor-lite'), admin_url('nav-menus.php?action = edit&menu = 0')),
+                    'separator'   => 'after',
                 ]
             );
         }
@@ -957,6 +973,22 @@ class Simple_Menu extends Widget_Base
 	    );
 
         $this->add_control(
+		    'eael_simple_menu_item_indicator_area',
+		    [
+			    'label' => esc_html__( 'Icon Area', 'essential-addons-for-elementor-lite' ),
+			    'type' => Controls_Manager::SLIDER,
+			    'range' => [
+				    'px' => [
+					    'max' => 100,
+				    ],
+			    ],
+			    'selectors' => [
+				    '{{WRAPPER}} .eael-simple-menu li span' => 'width: {{SIZE}}{{UNIT}}; height:{{SIZE}}{{UNIT}};',
+			    ],
+		    ]
+	    );
+
+        $this->add_control(
             'eael_simple_menu_item_indicator_note',
             [
                 'label'      => __('Important Note', 'essential-addons-for-elementor-lite'),
@@ -1597,7 +1629,7 @@ class Simple_Menu extends Widget_Base
 		    'data-hamburger-device'      => $hamburger_device,
 	    ] );
         
-        if ($settings['eael_simple_menu_menu']) {
+        if ( ! empty( $settings['eael_simple_menu_menu'] ) ) {
             $args = [
                 'menu'        => $settings['eael_simple_menu_menu'],
                 'menu_class'  => implode(' ', array_filter($menu_classes)),
@@ -1616,14 +1648,14 @@ class Simple_Menu extends Widget_Base
 		        }
 
 		        echo "<style>
-                        @media screen and (max-width: {$eael_get_breakpoint_from_option}px) {
-                            .eael-hamburger--{$hamburger_device} {
+                        @media screen and (max-width: " . esc_html( $eael_get_breakpoint_from_option ) . "px) {
+                            .eael-hamburger--" . esc_html( $hamburger_device ) . " {
                                 .eael-simple-menu-horizontal,
                                 .eael-simple-menu-vertical {
                                     display: none;
                                 }
                             }
-                            .eael-hamburger--{$hamburger_device} {
+                            .eael-hamburger--" . esc_html( $hamburger_device ) . " {
                                 .eael-simple-menu-container .eael-simple-menu-toggle {
                                     display: block;
                                 }
@@ -1632,10 +1664,10 @@ class Simple_Menu extends Widget_Base
                     </style>";
 	        }
             ?>
-            <div <?php echo $this->get_render_attribute_string('eael-simple-menu'); ?>>
+            <div <?php $this->print_render_attribute_string('eael-simple-menu'); ?>>
                 <?php echo wp_nav_menu( $args ); ?>
                 <button class="eael-simple-menu-toggle">
-                    <span class="sr-only "><?php esc_html_e( 'Humberger Toggle Menu', 'essential-addons-for-elementor-lite' ); ?></span>
+                    <span class="sr-only "><?php esc_html_e( 'Hamburger Toggle Menu', 'essential-addons-for-elementor-lite' ); ?></span>
                     <?php Icons_Manager::render_icon( $settings['eael_simple_menu_hamburger_icon'], [ 'aria-hidden' => 'true' ] ); ?>
                 </button>
             </div>

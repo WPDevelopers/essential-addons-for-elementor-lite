@@ -6,8 +6,6 @@ if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-use \Essential_Addons_Elementor\Classes\Helper as EnqueueHelper;
-
 trait Enqueue
 {
 	public function before_enqueue_styles( $widgets ) {
@@ -22,6 +20,22 @@ trait Enqueue
         if (in_array('caldera-form', $widgets) && class_exists('Caldera_Forms')) {
             add_filter('caldera_forms_force_enqueue_styles_early', '__return_true');
         }
+
+		// Compatibility: Gravity Forms
+		if ( in_array( 'gravity-form', $widgets ) && class_exists( 'GFForms' ) && class_exists( 'GFCommon' ) ) {
+			wp_register_style( 'gravity_forms_theme_reset', \GFCommon::get_base_url() . "/assets/css/dist/gravity-forms-theme-reset.min.css", array(), \GFForms::$version );
+			wp_register_style( 'gravity_forms_theme_foundation', \GFCommon::get_base_url() . "/assets/css/dist/gravity-forms-theme-foundation.min.css", array(), \GFForms::$version );
+
+			wp_register_style(
+				'gravity_forms_theme_framework',
+				\GFCommon::get_base_url() . "/assets/css/dist/gravity-forms-theme-framework.min.css",
+				array(
+					'gravity_forms_theme_reset',
+					'gravity_forms_theme_foundation',
+				),
+				\GFForms::$version
+			);
+		}
 
         // Compatibility: reCaptcha with login/register
         if (in_array('login-register', $widgets) && $site_key = get_option('eael_recaptcha_sitekey')) {
@@ -112,16 +126,6 @@ trait Enqueue
         }";
         wp_add_inline_style( 'elementor-icons', $css );
     }
-
-	public function essential_blocks_promo_enqueue_scripts() {
-		if ( is_plugin_active( 'essential-blocks/essential-blocks.php' ) || get_option( 'eael_gb_eb_popup_hide' ) ) {
-			return;
-		}
-
-		add_action( 'admin_footer', [ $this, 'essential_blocks_promo_admin_js_template' ] );
-		wp_enqueue_script( 'eael-gutenberg', $this->safe_url( EAEL_PLUGIN_URL . 'assets/admin/js/eael-essential-blocks-promo.js' ), [ 'jquery' ], EAEL_PLUGIN_VERSION, true );
-		wp_enqueue_style( 'eael-gutenberg', $this->safe_url( EAEL_PLUGIN_URL . 'assets/admin/css/eael-essential-blocks-promo.css' ), [], EAEL_PLUGIN_VERSION );
-	}
 
 	// replace beehive theme's swiper slider lib file with elementor's swiper lib file
 	public function beehive_theme_swiper_slider_compatibility( $scripts ) {

@@ -51,6 +51,10 @@ class Caldera_Forms extends Widget_Base
         ];
     }
 
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
+    }
+
     public function get_custom_help_url() {
         return 'https://essential-addons.com/elementor/docs/caldera-forms/';
     }
@@ -1484,6 +1488,7 @@ class Caldera_Forms extends Widget_Base
     protected function render()
     {
 	    if ( ! class_exists( '\Caldera_Forms' ) ) {
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		    printf( '<center>%s</center>', __( '<strong>Caldera Forms</strong> has been closed as of April 5, 2022 and is not available for download. You can try the other Form plugins instead', 'essential-addons-for-elementor-lite' ) );
 
 		    return;
@@ -1518,7 +1523,7 @@ class Caldera_Forms extends Widget_Base
         }
 
         if (!empty($settings['contact_form_list'])) {?>
-            <div <?php echo $this->get_render_attribute_string('contact-form'); ?>>
+            <div <?php $this->print_render_attribute_string('contact-form'); ?>>
                 <?php if ($settings['custom_title_description'] == 'yes') {?>
                     <div class="eael-caldera-form-heading">
                         <?php if ($settings['form_title_custom'] != '') {?>
@@ -1528,7 +1533,9 @@ class Caldera_Forms extends Widget_Base
                         <?php }?>
                         <?php if ($settings['form_description_custom'] != '') {?>
                             <div class="eael-contact-form-description eael-caldera-form-description">
-                                <?php echo $this->parse_text_editor($settings['form_description_custom']); ?>
+                                <?php 
+                                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                echo $this->parse_text_editor($settings['form_description_custom']); ?>
                             </div>
                         <?php }?>
                     </div>
