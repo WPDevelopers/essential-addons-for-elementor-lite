@@ -1,4 +1,27 @@
 .eael-wpforms {
+	&.eael-contact-form{
+		width: 100%;
+
+		&:not(.eael-wpforms-align-default) {
+			display: flex;
+		}
+		&.eael-wpforms-align-left {
+			justify-content: start;
+		}
+		&.eael-wpforms-align-center {
+			justify-content: center;
+		}
+		&.eael-wpforms-align-right {
+			justify-content: end;
+		}
+		&.eael-wpforms-align-left,
+		&.eael-wpforms-align-center,
+		&.eael-wpforms-align-right {
+			.wpforms-container-full {
+				margin: 0;
+			}
+		}
+	}
 	.wpforms-container {
 		.wpforms-form {
 			input[type="submit"],

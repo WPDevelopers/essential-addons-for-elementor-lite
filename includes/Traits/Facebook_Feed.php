@@ -151,7 +151,7 @@ trait Facebook_Feed {
 
 						if ( isset( $settings['eael_facebook_feed_is_show_preview_description'] ) && 'yes' == $settings['eael_facebook_feed_is_show_preview_description'] ) {
 							$description = isset( $item['attachments']['data'][0]['description'] ) ? $item['attachments']['data'][0]['description'] : '';
-							$html        .= '<p class="eael-facebook-feed-url-description">' . $description . '</p>';
+							$html        .= '<p class="eael-facebook-feed-url-description">' . wp_kses( $description, HelperClass::eael_allowed_tags() ) . '</p>';
 						}
 						$html .= '</div>';
 
@@ -228,16 +228,7 @@ trait Facebook_Feed {
 			while ( ob_get_status() ) {
 				ob_end_clean();
 			}
-			if ( function_exists( 'gzencode' ) ) {
-				$response = gzencode( wp_json_encode( $data ) );
-				header( 'Content-Type: application/json; charset=utf-8' );
-				header( 'Content-Encoding: gzip' );
-				header( 'Content-Length: ' . strlen( $response ) );
-
-				printf( '%1$s', $response );
-			} else {
-				wp_send_json( $data );
-			}
+			wp_send_json( $data );
 			wp_die();
 
 		}
