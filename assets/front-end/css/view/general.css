@@ -180,3 +180,123 @@
   width: 1px !important;
   white-space: nowrap !important; /* 3 */
 }
+
+/* Onpage Edit Template */
+
+.elementor-widget-eael-adv-tabs .eael-tab-content-item,
+.elementor-widget-eael-adv-accordion .eael-accordion-content,
+.elementor-widget-eael-data-table .td-content,
+.elementor-widget-eael-info-box .eael-infobox-template-wrapper,
+.elementor-widget-eael-countdown .eael-countdown-expiry-template,
+.elementor-widget-eael-countdown .eael-countdown-container,
+.elementor-widget-eael-cta-box .eael-cta-template-wrapper,
+.elementor-widget-eael-toggle .eael-toggle-primary-wrap,
+.elementor-widget-eael-toggle .eael-toggle-secondary-wrap,
+.elementor-widget-eael-protected-content .eael-protected-content-message,
+.elementor-widget-eael-protected-content .protected-content,
+.eael-offcanvas-content-visible .eael-offcanvas-body,
+.elementor-widget-eael-stacked-cards .eael-stacked-cards__item {
+  position: relative;
+}
+
+.elementor-widget-eael-adv-tabs .eael-tab-content-item:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-adv-accordion .eael-accordion-content:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-data-table .td-content:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-info-box .eael-infobox-template-wrapper:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-countdown .eael-countdown-expiry-template:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-countdown .eael-countdown-container:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-cta-box .eael-cta-template-wrapper:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-toggle .eael-toggle-primary-wrap:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-toggle .eael-toggle-secondary-wrap:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-protected-content .eael-protected-content-message:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-protected-content .protected-content:hover .eael-onpage-edit-template-wrapper,
+.eael-offcanvas-content-visible .eael-offcanvas-body:hover .eael-onpage-edit-template-wrapper,
+.elementor-widget-eael-stacked-cards .eael-stacked-cards__item:hover .eael-onpage-edit-template-wrapper {
+  display: block;
+}
+
+.eael-widget-otea-active .elementor-element:hover > .elementor-element-overlay,
+.eael-widget-otea-active .elementor-empty-view,
+.eael-widget-otea-active .elementor-add-section-inline,
+.eael-widget-otea-active .elementor-add-section {
+  display: initial !important;
+}
+
+.eael-onpage-edit-template-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  border: 2px solid #5eead4;
+}
+
+.eael-onpage-edit-template-wrapper::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  background: #5eead4;
+  opacity: 0.3;
+}
+
+.eael-onpage-edit-template-wrapper.eael-onpage-edit-activate {
+  display: block;
+}
+
+.eael-onpage-edit-template-wrapper.eael-onpage-edit-activate::after {
+  display: none;
+}
+
+.eael-onpage-edit-template-wrapper .eael-onpage-edit-template {
+  background: #5eead4;
+  color: #000;
+  width: 150px;
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+  font-size: 12px;
+  cursor: pointer;
+  position: relative;
+  z-index: 3;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
+.eael-onpage-edit-template-wrapper .eael-onpage-edit-template::before {
+  content: "";
+  border-top: 30px solid #5eead4;
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 14px solid transparent;
+  right: 100%;
+  position: absolute;
+}
+
+.eael-onpage-edit-template-wrapper .eael-onpage-edit-template::after {
+  content: "";
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 30px solid transparent;
+  border-left: 14px solid #5eead4;
+  left: 100%;
+  position: absolute;
+}
+
+.eael-onpage-edit-template-wrapper .eael-onpage-edit-template > i {
+  margin-right: 8px;
+}
+
+.elementor-edit-area-active .eael_wd_liquid_glass_shadow-effect1,
+.elementor-edit-area-active .eael_wd_liquid_glass_shadow-effect2,
+.elementor-edit-area-active .eael_wd_liquid_glass_shadow-effect3,
+.elementor-edit-area-active .eael_wd_liquid_glass_shadow-effect4 {
+  -webkit-box-shadow: inherit !important;
+          box-shadow: inherit !important;
+}

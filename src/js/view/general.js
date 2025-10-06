@@ -1,7 +1,7 @@
 import { createHooks } from "@wordpress/hooks";
 
 window.isEditMode = false;
-window.ea = {
+window.eael = window.ea = {
 	hooks: createHooks(),
 	isEditMode: false,
 	elementStatusCheck:function(name){
@@ -11,10 +11,21 @@ window.ea = {
 			window.eaElementList = {...window.eaElementList, [name]: true}
 		}
 		return false;
+	},
+	debounce: function(func, delay) {
+		var timeout;
+		return function() {
+			var context = this;
+			var args = arguments;
+			clearTimeout(timeout);
+			timeout = setTimeout(function() {
+				func.apply(context, args);
+			}, delay);
+		};
 	}
 };
 
-ea.hooks.addAction("widgets.reinit", "ea", ($content) => {
+eael.hooks.addAction("widgets.reinit", "ea", ($content) => {
 	let filterGallery = jQuery(".eael-filter-gallery-container", $content);
 	let postGridGallery = jQuery(
 		".eael-post-grid:not(.eael-post-carousel)",
@@ -54,32 +65,39 @@ ea.hooks.addAction("widgets.reinit", "ea", ($content) => {
 	}
 
 	if (eventCalendar.length) {
-		ea.hooks.doAction("eventCalendar.reinit");
+		eael.hooks.doAction("eventCalendar.reinit");
 	}
 
 	if (testimonialSlider.length) {
-		ea.hooks.doAction("testimonialSlider.reinit");
+		eael.hooks.doAction("testimonialSlider.reinit");
 	}
 
 	if (teamMemberCarousel.length) {
-		ea.hooks.doAction("teamMemberCarousel.reinit");
+		eael.hooks.doAction("teamMemberCarousel.reinit");
 	}
 
 	if (postCarousel.length) {
-		ea.hooks.doAction("postCarousel.reinit");
+		eael.hooks.doAction("postCarousel.reinit");
 	}
 
 	if (logoCarousel.length) {
-		ea.hooks.doAction("logoCarousel.reinit");
+		eael.hooks.doAction("logoCarousel.reinit");
 	}
 
 	if (twitterCarousel.length) {
-		ea.hooks.doAction("twitterCarousel.reinit");
+		eael.hooks.doAction("twitterCarousel.reinit");
 	}
 });
 
 let ea_swiper_slider_init_inside_template = (content) => {
-	window.dispatchEvent(new Event('resize'));
+
+	/*
+	* If you want to prevent calling the resize event use this code.
+	* window.eaelPreventResizeOnClick = true;
+	*/
+	if ( window.eaelPreventResizeOnClick === undefined ) {
+		window.dispatchEvent(new Event('resize'));
+	}
 
 	content = typeof content === 'object' ? content : jQuery(content);
 	content.find('.swiper-wrapper').each(function () {
@@ -88,25 +106,25 @@ let ea_swiper_slider_init_inside_template = (content) => {
 	});
 }
 
-ea.hooks.addAction("ea-advanced-tabs-triggered", "ea", ea_swiper_slider_init_inside_template);
-ea.hooks.addAction("ea-advanced-accordion-triggered", "ea", ea_swiper_slider_init_inside_template);
+eael.hooks.addAction("ea-advanced-tabs-triggered", "ea", ea_swiper_slider_init_inside_template);
+eael.hooks.addAction("ea-advanced-accordion-triggered", "ea", ea_swiper_slider_init_inside_template);
 
 jQuery(window).on("elementor/frontend/init", function () {
 	window.isEditMode = elementorFrontend.isEditMode();
-	window.ea.isEditMode = elementorFrontend.isEditMode();
+	window.eael.isEditMode = elementorFrontend.isEditMode();
 
 	// hooks
-	ea.hooks.doAction("init");
+	eael.hooks.doAction("init");
 
 	// init edit mode hook
-	if (ea.isEditMode) {
-		ea.hooks.doAction("editMode.init");
+	if (eael.isEditMode) {
+		eael.hooks.doAction("editMode.init");
 	}
 });
 
 (function ($) {
-	ea.getToken = () => {
-		if (localize.nonce && !ea.noncegenerated) {
+	eael.getToken = () => {
+		if (localize.nonce && !eael.noncegenerated) {
 			$.ajax({
 				url: localize.ajaxurl,
 				type: "post",
@@ -116,13 +134,13 @@ jQuery(window).on("elementor/frontend/init", function () {
 				success: function (response) {
 					if (response.success) {
 						localize.nonce = response.data.nonce
-						ea.noncegenerated = true;
+						eael.noncegenerated = true;
 					}
 				}
 			});
 		}
 	}
-	ea.sanitizeURL = function (url) {
+	eael.sanitizeURL = function (url) {
 		if (url.startsWith('/') || url.startsWith('#')) {
 			return url;
 		}
@@ -143,16 +161,16 @@ jQuery(window).on("elementor/frontend/init", function () {
 		}
 	}
 
-	//Add hashchange code form advanced-accordion
-	let  isTriggerOnHashchange = true;
-	window.addEventListener( 'hashchange', function () {
-		if( !isTriggerOnHashchange ) {
+	//Add hashchange code from advanced-accordion
+	let isTriggerOnHashchange = true;
+	window.addEventListener('hashchange', function () {
+		if (!isTriggerOnHashchange) {
 			return;
 		}
 		let hashTag = window.location.hash.substr(1);
 		hashTag = hashTag === 'safari' ? 'eael-safari' : hashTag;
-		if ( hashTag !== 'undefined' && hashTag ) {
-			jQuery( '#' + hashTag ).trigger( 'click' );
+		if (hashTag !== 'undefined' && hashTag && /^[A-Za-z][-A-Za-z0-9_:.]*$/.test(hashTag)) {
+			$('#' + hashTag).trigger('click');
 		}
 	});
 
@@ -187,7 +205,7 @@ jQuery(window).on("elementor/frontend/init", function () {
 					if (typeof hashURL !== 'undefined' && hashURL) {
 						let tabs = $(hashURL).closest('.eael-advance-tabs');
 						if( tabs.length > 0 ){
-							let idOffset = tab.data('custom-id-offset');
+							let idOffset = tabs.data('custom-id-offset');
 							idOffset = idOffset ? parseFloat(idOffset) : 0;
 							$('html, body').animate({
 								scrollTop: $(hashURL).offset().top - idOffset,
@@ -202,7 +220,9 @@ jQuery(window).on("elementor/frontend/init", function () {
 	});
 
 	$(document).on('click', '.e-n-tab-title', function () {
-		window.dispatchEvent(new Event('resize'));
+		setTimeout(function () {
+			window.dispatchEvent(new Event('resize'));
+		}, 100);
 	});
 })(jQuery);
 
@@ -241,26 +261,58 @@ jQuery(window).on("elementor/frontend/init", function () {
 })(jQuery);
 
 (function ($) {
-	$.fn.isInViewport = function() {
+	$.fn.isInViewport = function( offset = 2 ) {
+		
 		if ($(this).length < 1 ) return false;
 		var elementTop = $(this).offset().top;
-		var elementBottom = elementTop + $(this).outerHeight() / 2;
+		var elementBottom = elementTop + $(this).outerHeight() / offset;
 		var viewportTop = $(window).scrollTop();
-		var viewportHalf = viewportTop + $(window).height() / 2;
+		var viewportHalf = viewportTop + $(window).height() / offset;
 		return elementBottom > viewportTop && elementTop < viewportHalf;
 	};
 
-	$(document).ready(function(){ 
+	$(document).ready(function () {
 		let resetPasswordParams = new URLSearchParams(location.search);
-	
-		if ( resetPasswordParams.has('popup-selector') && ( resetPasswordParams.has('eael-lostpassword') || resetPasswordParams.has('eael-resetpassword') ) ){
+
+		if (resetPasswordParams.has('popup-selector') && (resetPasswordParams.has('eael-lostpassword') || resetPasswordParams.has('eael-resetpassword'))) {
 			let popupSelector = resetPasswordParams.get('popup-selector');
-			if(popupSelector.length){
-				popupSelector = popupSelector.replace(/_/g," ");
-				setTimeout(function(){
+
+			if (popupSelector.length && /^[A-Za-z.#][A-Za-z0-9_:.#\s-]*$/.test(popupSelector)) {
+				popupSelector = popupSelector.replace(/_/g, " ");
+				setTimeout(function () {
 					jQuery(popupSelector).trigger('click');
 				}, 300);
 			}
+		}
+	});
+
+	$(document).on('click', '.eael-onpage-edit-template', function () {
+		let $this = $(this),
+			templateID = $this.data('eael-template-id'),
+			pageID = $this.data('page-id'),
+			mode = $this.data('mode');
+
+		if (mode === 'edit') {
+			parent.window.$e.internal('panel/state-loading');
+			parent.window.$e.run('editor/documents/switch', {
+				id: parseInt(templateID)  // Switch back to the original document
+			}).then(function () {
+				$this.data('mode', 'save');
+				$this.find('span').text('Save & Back');
+				$this.find('i').addClass('eicon-arrow-left').removeClass('eicon-edit');
+				$this.closest('.eael-onpage-edit-template-wrapper').addClass('eael-onpage-edit-activate').parent().addClass('eael-widget-otea-active');
+				parent.window.$e.internal('panel/state-ready');
+			});
+		} else if (mode === 'save') {
+			parent.window.$e.internal('panel/state-loading');
+			parent.window.$e.run('editor/documents/switch', {
+				id: parseInt(pageID),  // Switch back to the original document
+				mode: 'save',  // You can use 'edit' mode here if you want to continue editing the original document
+				shouldScroll: false
+			}).then(function () {
+				parent.window.$e.internal('panel/state-ready');
+				$this.data('mode', 'edit');
+			});
 		}
 	});
 })(jQuery);

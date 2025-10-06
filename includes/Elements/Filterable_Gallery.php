@@ -17,7 +17,6 @@ use Elementor\Plugin;
 use \Elementor\Widget_Base;
 use \Elementor\Repeater;
 use \Elementor\Group_Control_Background;
-use \Elementor\Utils;
 
 use \Essential_Addons_Elementor\Classes\Helper;
 
@@ -81,6 +80,14 @@ class Filterable_Gallery extends Widget_Base
             'essential addons'
         ];
     }
+
+    protected function is_dynamic_content():bool {
+        return false;
+    }
+
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
+    }
     
     public function get_custom_help_url()
     {
@@ -98,16 +105,59 @@ class Filterable_Gallery extends Widget_Base
                 'label' => esc_html__('Settings', 'essential-addons-for-elementor-lite'),
             ]
         );
+
+        $image_path = EAEL_PLUGIN_URL . 'assets/admin/images/layout-previews/filterable-gallery-';
+        $eael_fg_layout = apply_filters(
+            'eael_fg_caption_styles',
+            [
+                'styles' => [
+                    'hoverer' => [
+                        'title' => esc_html__( 'Overlay', 'essential-addons-for-elementor-lite' ),
+						'image' => $image_path . 'overlay.png'
+                    ],
+                    'card' => [
+                        'title' => esc_html__( 'Card', 'essential-addons-for-elementor-lite' ),
+						'image' => $image_path . 'card.png'
+                    ],
+                    'layout_3' => [
+                        'title' => esc_html__( 'Search and Filter', 'essential-addons-for-elementor-lite' ),
+						'image' => $image_path . 'search.png'
+                    ],
+                    'grid_flow_gallery' => [
+                        'title' => esc_html__( 'Grid Flow (Pro)', 'essential-addons-for-elementor-lite' ),
+						'image' => $image_path . 'grid_flow_gallery.png'
+                    ],
+                    'harmonic_gallery' => [
+                        'title' => esc_html__( 'Harmonic (Pro)', 'essential-addons-for-elementor-lite' ),
+						'image' => $image_path . 'harmonic_gallery.png'
+                    ],
+                ],
+                'conditions' => ['grid_flow_gallery', 'harmonic_gallery'],
+            ]
+        );
+
+        $this->add_control(
+            'eael_fg_caption_style',
+            [
+                'label'       => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::CHOOSE,
+                'default'     => 'hoverer',
+                'label_block' => true,
+                'toggle'      => false,
+                'image_choose'=> true,
+                'options'     => $eael_fg_layout['styles'],
+            ]
+        );
         
         $this->add_control(
             'eael_fg_items_to_show',
             [
-                'label' => esc_html__('Items to show', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
+                'label'       => esc_html__('Items to show', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::NUMBER,
                 'dynamic'     => [ 'active' => true ],
                 'label_block' => false,
-                'default' => 6,
-                'ai' => [
+                'default'     => 6,
+                'ai'          => [
 					'active' => false,
 				],
             ]
@@ -116,59 +166,93 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'eael_fg_filter_duration',
             [
-                'label' => esc_html__('Animation Duration (ms)', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
+                'label'       => esc_html__('Animation Duration (ms)', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::NUMBER,
                 'label_block' => false,
-                'default' => 500,
-                'ai' => [
+                'default'     => 500,
+                'ai'          => [
 					'active' => false,
 				],
+                'condition' => [
+                    'eael_fg_caption_style' => [ 'hoverer', 'card', 'layout_3' ],
+                ],
             ]
         );
         
         $this->add_responsive_control(
             'columns',
             [
-                'label' => __('Columns', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'default' => '3',
+                'label'   => __('Columns', 'essential-addons-for-elementor-lite'),
+                'type'    => Controls_Manager::CHOOSE,
+                'options' => [
+					'1' => [
+						'title' => '1',
+						'text' => '1',
+					],
+					'2' => [
+						'title' => '2',
+						'text' => '2',
+					],
+					'3' => [
+						'title' => '3',
+						'text' => '3',
+					],
+					'4' => [
+						'title' => '4',
+						'text' => '4',
+					],
+					'5' => [
+						'title' => '5',
+						'text' => '5',
+					],
+					'6' => [
+						'title' => '6',
+						'text' => '6',
+					],
+				],
+                'default'        => '3',
                 'tablet_default' => '2',
                 'mobile_default' => '1',
-                'options' => [
-                    '1' => '1',
-                    '2' => '2',
-                    '3' => '3',
-                    '4' => '4',
-                    '5' => '5',
-                    '6' => '6',
-                ],
+				'toggle'         => false,
             ]
         );
-        
+
         $this->add_control(
-            'eael_fg_grid_style',
-            [
-                'label' => esc_html__('Grid Style', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'default' => 'grid',
-                'options' => [
-                    'grid' => esc_html__('Grid', 'essential-addons-for-elementor-lite'),
-                    'masonry' => esc_html__('Masonry', 'essential-addons-for-elementor-lite'),
+			'eael_fg_grid_style',
+			[
+				'label'   => esc_html__( 'Grid Style', 'essential-addons-for-elementor-lite' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'grid' => [
+						'title' => esc_html__( 'Grid', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-gallery-grid',
+					],
+					'masonry' => [
+						'title' => esc_html__( 'Masonry', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-gallery-masonry',
+					],
+				],
+				'default'   => 'grid',
+				'toggle'    => false,
+                'condition' => [
+                    'eael_fg_caption_style' => [ 'hoverer', 'card', 'layout_3' ],
                 ],
-            ]
-        );
+			]
+		);
         
         $this->add_control(
             'eael_fg_grid_item_height',
             [
-                'label' => esc_html__('Image Height', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'default' => '300',
+                'label'     => esc_html__('Image Height', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::NUMBER,
+                'default'   => 300,
                 'condition' => [
                     'eael_fg_grid_style' => 'grid',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item .gallery-item-thumbnail-wrap' => 'height: {{VALUE}}px;',
+                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item .gallery-item-thumbnail-wrap, 
+                    {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-grid-fg-box .eael-grid-fg-img,
+                    {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-hg-grid__cell-img .grid__cell-img-inner' => 'height: {{VALUE}}px;',
                 ],
                 'ai' => [
 					'active' => false,
@@ -185,17 +269,14 @@ class Filterable_Gallery extends Widget_Base
                 'label_block' => true,
             ]
         );
-        
+
         $this->add_control(
-            'eael_fg_caption_style',
+            'eael_fg_caption_style_pro_alert',
             [
-                'label' => esc_html__('Layout', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'default' => 'hoverer',
-                'options' => [
-                    'hoverer' => __('Overlay', 'essential-addons-for-elementor-lite'),
-                    'card' => __('Card', 'essential-addons-for-elementor-lite'),
-                    'layout_3'  => esc_html__('Search & Filter', 'essential-addons-for-elementor-lite')
+                'label' => sprintf( '<a target="_blank" href="https://wpdeveloper.com/upgrade/ea-pro">%s</a>', esc_html__('Only Available in Pro Version!', 'essential-addons-for-elementor-lite')),
+                'type'      => Controls_Manager::HEADING,
+                'condition' => [
+                    'eael_fg_caption_style' => $eael_fg_layout['conditions'],
                 ],
             ]
         );
@@ -203,13 +284,11 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'eael_search_among_all',
             [
-                'label' => __('Search Full Gallery ?', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off' => __('No', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Search Full Gallery ?', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
-                'default' => '',
-                'condition' => [
+                'default'      => '',
+                'condition'    => [
                       'eael_fg_caption_style' =>  'layout_3'
                 ]
             ]
@@ -218,7 +297,7 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
 			'eael_search_among_note',
 			[
-				'label' => esc_html__( '', 'essential-addons-for-elementor-lite' ),
+				'label' => '',
 				'type' => Controls_Manager::RAW_HTML,
 				'raw' => esc_html__( 'Enabling this will load all prior items up to the one you searched for.', 'essential-addons-for-elementor-lite' ),
 				'content_classes' => 'eael-warning',
@@ -246,9 +325,21 @@ class Filterable_Gallery extends Widget_Base
 		);
 
         $this->add_control(
+			'hover_style_heading',
+			[
+				'label'     => esc_html__( 'Hover', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+                'condition' => [
+                    'eael_fg_caption_style' => 'hoverer',
+                ],
+			]
+		);
+
+        $this->add_control(
             'eael_fg_grid_hover_style',
             [
-                'label' => esc_html__('Hover Style', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Style', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'eael-slide-up',
                 'options' => [
@@ -266,7 +357,7 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'eael_fg_grid_hover_transition',
             [
-                'label' => esc_html__('Hover Transition', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Transition', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 500,
@@ -283,59 +374,76 @@ class Filterable_Gallery extends Widget_Base
                     'eael_fg_caption_style' => 'hoverer',
                     'eael_fg_grid_hover_style!' => 'eael-none',
                 ],
-            ]
-        );
-        
-        $this->add_control(
-            'eael_fg_show_popup',
-            [
-                'label' => esc_html__('Link to', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'default' => 'buttons',
-                'options' => [
-                    'none' => esc_html__('None', 'essential-addons-for-elementor-lite'),
-                    'media' => esc_html__('Media', 'essential-addons-for-elementor-lite'),
-                    'buttons' => esc_html__('Buttons', 'essential-addons-for-elementor-lite'),
-                ],
-                'condition' => [
-                    'eael_fg_caption_style!'    => 'layout_3'
-                ]
+				'separator' => 'after',
             ]
         );
 
         $this->add_control(
+			'eael_fg_show_popup',
+			[
+                'label'   => esc_html__('Link to', 'essential-addons-for-elementor-lite'),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'none' => [
+						'title' => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-ban',
+					],
+					'media' => [
+						'title' => esc_html__( 'Media', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-e-image',
+					],
+					'buttons' => [
+						'title' => esc_html__( 'Buttons', 'essential-addons-for-elementor-lite' ),
+						'icon' => 'eicon-button',
+					],
+				],
+                'condition' => [
+                    'eael_fg_caption_style!'    => [ 'grid_flow_gallery', 'harmonic_gallery' ],
+                    'eael_fg_caption_style'     => [ 'hoverer', 'card', 'layout_3' ],
+                ],
+				'default'   => 'buttons',
+				'toggle'    => false,
+			]
+		);
+
+        $this->add_control(
             'eael_title_clickable',
             [
-                'label' => __('Title Clickable', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Enable', 'essential-addons-for-elementor-lite'),
-                'label_off' => __('Disable', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Title Clickable', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
-                'default' => ''
+                'default'      => '',   
+                'condition'    => [
+                    'eael_fg_caption_style' => [ 'hoverer', 'card', 'layout_3' ],
+                ],
             ]
         );
 
         $this->add_control(
             'eael_section_fg_full_image_clickable',
             [
-                'label' => __('Image Clickable', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Enable', 'essential-addons-for-elementor-lite'),
-                'label_off' => __('Disable', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Image Clickable', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
-                'default' => ''
+                'default'      => '',
+                'condition'    => [
+                    'eael_fg_caption_style' => [ 'hoverer', 'card', 'layout_3' ],
+                ],
             ]
         );
 
         $this->add_control(
             'eael_section_fg_mfp_caption',
             [
-                'label' => __('Show Popup Caption', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Show', 'essential-addons-for-elementor-lite'),
-                'label_off' => __('Hide', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Caption in Popup', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'yes',
-                'default' => ''
+                'default'      => '',
+                'condition'    => [
+                    'eael_fg_caption_style' => [ 'hoverer', 'card', 'layout_3' ],
+                ],
             ]
         );
         
@@ -352,6 +460,7 @@ class Filterable_Gallery extends Widget_Base
                 'condition' => [
                     'eael_fg_show_popup' => 'buttons',
                     'eael_section_fg_full_image_clickable!' => 'yes',
+                    'eael_fg_caption_style!'    => [ 'grid_flow_gallery', 'harmonic_gallery' ],
                 ],
             ]
         );
@@ -369,6 +478,7 @@ class Filterable_Gallery extends Widget_Base
                 'condition' => [
                     'eael_fg_show_popup' => 'buttons',
                     'eael_section_fg_full_image_clickable!' => 'yes',
+                    'eael_fg_caption_style!'    => [ 'grid_flow_gallery', 'harmonic_gallery' ],
                 ],
             ]
         );
@@ -404,8 +514,10 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'filter_enable',
             [
-                'label' => __('Enable Filter', 'essential-addons-for-elementor-lite'),
+                'label' => __('Filter', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
+                'label_on'     => __('Enable', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('Disable', 'essential-addons-for-elementor-lite'),
                 'default' => 'yes',
             ]
         );
@@ -445,19 +557,47 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'title_tag',
             [
-                'label' => __('Select Title Tag', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
-                'default' => 'h5',
+                'label' => __('Title Tag', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::CHOOSE,
+                'label_block' => true,
+                'default' => 'h2',
                 'options' => [
-                    'h1' => __('H1', 'essential-addons-for-elementor-lite'),
-                    'h2' => __('H2', 'essential-addons-for-elementor-lite'),
-                    'h3' => __('H3', 'essential-addons-for-elementor-lite'),
-                    'h4' => __('H4', 'essential-addons-for-elementor-lite'),
-                    'h5' => __('H5', 'essential-addons-for-elementor-lite'),
-                    'h6' => __('H6', 'essential-addons-for-elementor-lite'),
-                    'span' => __('Span', 'essential-addons-for-elementor-lite'),
-                    'p' => __('P', 'essential-addons-for-elementor-lite'),
-                    'div' => __('Div', 'essential-addons-for-elementor-lite'),
+                    'h1' => [
+						'title' => __('H1', 'essential-addons-for-elementor-lite'),
+						'text' => 'H1',
+					],
+                    'h2' => [
+						'title' => __('H2', 'essential-addons-for-elementor-lite'),
+						'text' => 'H2',
+					],
+                    'h3' => [
+						'title' => __('H3', 'essential-addons-for-elementor-lite'),
+						'text' => 'H3',
+					],
+                    'h4' => [
+						'title' => __('H4', 'essential-addons-for-elementor-lite'),
+						'text' => 'H4',
+					],
+                    'h5' => [
+						'title' => __('H5', 'essential-addons-for-elementor-lite'),
+						'text' => 'H5',
+					],
+                    'h6' => [
+						'title' => __('H6', 'essential-addons-for-elementor-lite'),
+						'text' => 'H6',
+					],
+                    'span' => [
+						'title' => __('SPAN', 'essential-addons-for-elementor-lite'),
+						'text' => 'SPAN',
+					],
+                    'p' => [
+						'title' => __('P', 'essential-addons-for-elementor-lite'),
+						'text' => 'P',
+					],
+                    'div' => [
+						'title' => __('DIV', 'essential-addons-for-elementor-lite'),
+						'text' => 'DIV',
+					],
                 ],
             ]
         );
@@ -466,18 +606,17 @@ class Filterable_Gallery extends Widget_Base
             'eael_fg_controls',
             [
                 'type' => Controls_Manager::REPEATER,
-                'seperator' => 'before',
                 'default' => [
-                    ['eael_fg_control' => 'Gallery Item'],
+                    ['eael_fg_control' => 'Gallery Filter'],
                 ],
                 'fields' => [
                     [
                         'name' => 'eael_fg_control',
-                        'label' => esc_html__('List Item', 'essential-addons-for-elementor-lite'),
+                        'label' => esc_html__('Filter Title', 'essential-addons-for-elementor-lite'),
                         'type' => Controls_Manager::TEXT,
                         'dynamic' => ['active' => true],
                         'label_block' => true,
-                        'default' => esc_html__('Gallery Item', 'essential-addons-for-elementor-lite'),
+                        'default' => esc_html__('Gallery Filter', 'essential-addons-for-elementor-lite'),
                         'ai' => [
                             'active' => false,
                         ],
@@ -539,14 +678,22 @@ class Filterable_Gallery extends Widget_Base
                 'label' => esc_html__('Gallery Items', 'essential-addons-for-elementor-lite'),
             ]
         );
+
+        // This is for the grid flow layout item animator control
+        do_action( 'eael_grid_fg_item_animator_popover', $this );
         
         $this->add_control(
             'photo_gallery',
             [
-                'label' => __('Enable Photo Gallery', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'default' => 'yes',
+                'label'              => __('Photo Gallery', 'essential-addons-for-elementor-lite'),
+                'type'               => Controls_Manager::SWITCHER,
+                'label_on'           => __('Enable', 'essential-addons-for-elementor-lite'),
+                'label_off'          => __('Disable', 'essential-addons-for-elementor-lite'),
+                'default'            => 'yes',
                 'frontend_available' => true,
+                'condition'          => [
+                    'eael_fg_caption_style!' => [ 'grid_flow_gallery', 'harmonic_gallery' ]
+                ],
             ]
         );
 
@@ -554,11 +701,14 @@ class Filterable_Gallery extends Widget_Base
 		$this->add_control(
 			'video_gallery_yt_privacy',
 			[
-				'label' => esc_html__( 'Video Privacy Mode', 'essential-addons-for-elementor-lite' ),
-				'type' => Controls_Manager::SWITCHER,
-				'description' => esc_html__( 'If enabled, YouTube won\'t store information about visitors unless they play the video.', 'essential-addons-for-elementor-lite' ),
-				'frontend_available' => true,
-                'default' => '',
+				'label'               => esc_html__( 'Video Privacy Mode', 'essential-addons-for-elementor-lite' ),
+				'type'                => Controls_Manager::SWITCHER,
+				'description'         => esc_html__( 'If enabled, YouTube won\'t store information about visitors unless they play the video.', 'essential-addons-for-elementor-lite' ),
+				'frontend_available'  => true,
+                'default'             => '',
+                'condition'           => [
+                    'eael_fg_caption_style!' => [ 'grid_flow_gallery', 'harmonic_gallery' ]
+                ],
 			]
 		);
 
@@ -566,10 +716,15 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
 			'eael_privacy_notice_control',
 			[
-				'label'        => esc_html__( 'Display Consent Notice', 'essential-addons-for-elementor-lite' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
-                'description'  => esc_html__( 'If enabled, The consent motice will appear before playing the video.', 'essential-addons-for-elementor-lite' ),
+				'label'        => esc_html__( 'Consent Notice', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => __('Hide', 'essential-addons-for-elementor-lite'),
+                'description'  => esc_html__( 'If enabled, The consent notice will appear before playing the video.', 'essential-addons-for-elementor-lite' ),
 				'default'      => '',
+                'condition'    => [
+                    'eael_fg_caption_style!' => [ 'grid_flow_gallery', 'harmonic_gallery' ]
+                ],
 			]
 		);
 
@@ -579,45 +734,102 @@ class Filterable_Gallery extends Widget_Base
 				'label'       => esc_html__( 'Privacy Notice', 'essential-addons-for-elementor-lite' ),
 				'type'        => Controls_Manager::TEXT,
                 'ai'          => [ 'active' => false, ],
-                'condition'   => ['eael_privacy_notice_control' => 'yes' ]
+                'condition'   => ['eael_privacy_notice_control' => 'yes' ],
+                'condition'   => [
+                    'eael_fg_caption_style!' => [ 'grid_flow_gallery', 'harmonic_gallery' ]
+                ],
 			]
 		);
 
         $this->add_control(
             'eael_item_randomize',
             [
-                'label' => __('Randomize Item', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('YES', 'essential-addons-for-elementor-lite'),
-                'label_off' => __('NO', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Randomize Item', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
                 'return_value' => 'yes',
-                'default' => '',
-                'description' => __( 'Items will be displayed in a random order.', 'essential-addons-for-elementor-lite' )
+                'default'      => '',
+                'description'  => __( 'Items will be displayed in a random order.', 'essential-addons-for-elementor-lite' ),
+                'condition'    => [
+                    'eael_fg_caption_style!' => [ 'grid_flow_gallery', 'harmonic_gallery' ]
+                ],
             ]
         );
 
         $repeater = new Repeater();
-        
+
+        $repeater->add_control(
+            'eael_fg_gallery_item_name',
+            [
+                'label'       => esc_html__('Gallery Item Title', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::TEXT,
+                'dynamic'     => [ 'active' =>true ],
+                'label_block' => true,
+                'default'     => esc_html__('Gallery item name', 'essential-addons-for-elementor-lite'),
+                'ai'          => [
+					'active' => false,
+				],
+            ]
+        );
+
+        $repeater->add_control(
+            'eael_fg_gallery_control_name',
+            [
+                'label'       => esc_html__('Gallery Filter Title', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::TEXT,
+                'dynamic'     => ['active' =>true ],
+                'label_block' => true,
+                'default'     => '',
+                'description' => __('Use the gallery filter title from Control Settings. Separate multiple items with comma (e.g. <strong>Gallery Filter, Gallery Filter 2</strong>)', 'essential-addons-for-elementor-lite'),
+                'ai'          => [
+					'active' => false,
+				],
+                'separator' => 'before',
+            ]
+        );
+
+        // This is for the grid flow layout icon control
+        do_action( 'eael_grid_flow_gallery_icon_control', $repeater );
+
+        $repeater->add_control(
+			'fg_video_gallery_heading',
+			[
+				'label'     => esc_html__( 'Video Gallery?', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
         $repeater->add_control(
             'fg_video_gallery_switch',
             [
-                'label' => __('Video Gallery?', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'default' => 'false',
-                'label_on' => esc_html__('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off' => esc_html__('No', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Enable', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'default'      => 'false',
                 'return_value' => 'true',
             ]
         );
-        
+
+        $repeater->add_control(
+			'eael_fg_video_gallery_alert',
+			[
+				'type'       => \Elementor\Controls_Manager::ALERT,
+				'alert_type' => 'info',
+				'heading'    => esc_html__( 'For Video Display', 'essential-addons-for-elementor-lite' ),
+				'content'    => esc_html__( 'Currently, videos are displayed in the Overlay, Card and Search and Filter layout', 'essential-addons-for-elementor-lite' ),
+                'condition'  => [
+                    'fg_video_gallery_switch' => 'true',
+                ]
+			]
+		);
+
         $repeater->add_control(
             'eael_fg_gallery_item_video_link',
             [
-                'label' => esc_html__('Video Link', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
+                'label'       => esc_html__('Link', 'essential-addons-for-elementor-lite'),
+                'type'        => Controls_Manager::TEXT,
                 'label_block' => true,
-                'default' => 'https://www.youtube.com/watch?v=kB4U67tiQLA',
-                'condition' => [
+                'default'     => 'https://www.youtube.com/watch?v = kB4U67tiQLA',
+                'condition'   => [
                     'fg_video_gallery_switch' => 'true',
                 ],
                 'ai' => [
@@ -629,7 +841,7 @@ class Filterable_Gallery extends Widget_Base
         $repeater->add_control(
 			'eael_fg_gallery_video_layout',
 			[
-				'label' => esc_html__( 'Video Layout Type', 'essential-addons-for-elementor-lite' ),
+				'label' => esc_html__( 'Layout Type', 'essential-addons-for-elementor-lite' ),
 				'type'  => Controls_Manager::CHOOSE,
 				'options' => [
 					'horizontal' => [
@@ -646,59 +858,30 @@ class Filterable_Gallery extends Widget_Base
                 ],
 				'default'   => 'horizontal',
 				'toggle'    => false,
-				'separator' => 'after',
 			]
 		);
-        
-        $repeater->add_control(
-            'eael_fg_gallery_control_name',
-            [
-                'label' => esc_html__('Control Name', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'dynamic' => ['active' => true],
-                'label_block' => true,
-                'default' => '',
-                'description' => __('Use the gallery control name from Control Settings. Separate multiple items with comma (e.g. <strong>Gallery Item, Gallery Item 2</strong>)', 'essential-addons-for-elementor-lite'),
-                'ai' => [
-					'active' => false,
-				],
-            ]
-        );
-        
-        $repeater->add_control(
-            'eael_fg_gallery_item_name',
-            [
-                'label' => esc_html__('Item Name', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'dynamic' => ['active' => true],
-                'label_block' => true,
-                'default' => esc_html__('Gallery item name', 'essential-addons-for-elementor-lite'),
-                'ai' => [
-					'active' => false,
-				],
-            ]
-        );
-        
-        
+
         $repeater->add_control(
             'fg_item_price_switch',
             [
-                'label' => __('Enable Price ?', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'default'   => 'false',
-                'label_on' => esc_html__('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off' => esc_html__('No', 'essential-addons-for-elementor-lite'),
-                'return_value'  => 'true'
+                'label'        => __('Price', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'default'      => 'false',
+                'label_on'     => esc_html__('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => esc_html__('Hide', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'true',
+				'separator'    => 'before',
             ]
         );
         
         $repeater->add_control(
             'fg_item_price',
             [
-                'label' => esc_html__('Item Price', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::TEXT,
-                'dynamic' => ['active' => true],
-                'default' => esc_html__('$20.00', 'essential-addons-for-elementor-lite'),
+                'label'     => esc_html__('Value', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::TEXT,
+                'dynamic'   => ['active' => true ],
+                'default'   => esc_html__('$20.00', 'essential-addons-for-elementor-lite'),
+				'separator' => 'after',
                 'condition' => [
                     'fg_item_price_switch' => 'true'
                 ],
@@ -711,22 +894,23 @@ class Filterable_Gallery extends Widget_Base
         $repeater->add_control(
             'fg_item_ratings_switch',
             [
-                'label' => __('Enable Ratings ?', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'default'   => 'false',
-                'label_on' => esc_html__('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off' => esc_html__('No', 'essential-addons-for-elementor-lite'),
-                'return_value'  => 'true'
+                'label'        => __('Ratings', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'default'      => 'false',
+                'label_on'     => esc_html__('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => esc_html__('Hide', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'true'
             ]
         );
         
         $repeater->add_control(
             'fg_item_ratings',
             [
-                'label' => esc_html__('Item Ratings', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Value', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'dynamic' => ['active' => true],
                 'default' => esc_html__('5', 'essential-addons-for-elementor-lite'),
+				'separator' => 'after',
                 'condition' => [
                     'fg_item_ratings_switch' => 'true'
                 ],
@@ -739,19 +923,19 @@ class Filterable_Gallery extends Widget_Base
         $repeater->add_control(
             'fg_item_cat_switch',
             [
-                'label' => __('Enable Category ?', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'default'   => 'false',
-                'label_on' => esc_html__('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off' => esc_html__('No', 'essential-addons-for-elementor-lite'),
-                'return_value'  => 'true'
+                'label'        => __('Category', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'default'      => 'false',
+                'label_on'     => esc_html__('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => esc_html__('Hide', 'essential-addons-for-elementor-lite'),
+                'return_value' => 'true'
             ]
         );
         
         $repeater->add_control(
             'fg_item_cat',
             [
-                'label' => esc_html__('Item Category', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Name', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'dynamic' => ['active' => true],
                 'default' => esc_html__('Essential Addons', 'essential-addons-for-elementor-lite'),
@@ -763,13 +947,26 @@ class Filterable_Gallery extends Widget_Base
 				],
             ]
         );
-        
+
+        $repeater->add_control(
+            'filterable_item_notice',
+            [
+                'type'        => Controls_Manager::NOTICE,
+                'notice_type' => 'info',
+				'dismissible' => false,
+                'content'     => sprintf( '<strong>%s</strong> %s',
+                        esc_html__('Price, Ratings and Category', 'essential-addons-for-elementor-lite'),
+                                sprintf( esc_html__('will be visible only on the "%1$sSearch & Filter%2$s" layout.', 'essential-addons-for-elementor-lite'), '<strong>', '</strong>' ) ),
+            ]
+        );
+
         $repeater->add_control(
             'eael_fg_gallery_item_content',
             [
-                'label' => esc_html__('Item Content', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Content', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::WYSIWYG,
                 'label_block' => true,
+				'separator' => 'before',
                 'default' => esc_html__('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, provident.', 'essential-addons-for-elementor-lite'),
             ]
         );
@@ -781,7 +978,7 @@ class Filterable_Gallery extends Widget_Base
                 'type' => Controls_Manager::MEDIA,
                 'dynamic' => ['active' => true],
                 'default' => [
-                    'url' => EAEL_PLUGIN_URL . '/assets/front-end/img/flexia-preview.jpg',
+                    'url' => EAEL_PLUGIN_URL . '/assets/front-end/img/eael-default-placeholder.png',
                 ],
                 'ai' => [
                     'active' => false,
@@ -809,13 +1006,13 @@ class Filterable_Gallery extends Widget_Base
         $repeater->add_control(
             'eael_fg_gallery_lightbox',
             [
-                'label' => __('Gallery Lightbox Button?', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'default' => 'true',
-                'label_on' => esc_html__('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off' => esc_html__('No', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Lightbox Button?', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'default'      => 'true',
+                'label_on'     => esc_html__('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => esc_html__('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'true',
-                'condition' => [
+                'condition'    => [
                     'fg_video_gallery_switch!' => 'true',
                 ],
             ]
@@ -824,13 +1021,13 @@ class Filterable_Gallery extends Widget_Base
         $repeater->add_control(
             'eael_fg_gallery_link',
             [
-                'label' => __('Gallery Link Button?', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SWITCHER,
-                'default' => 'true',
-                'label_on' => esc_html__('Yes', 'essential-addons-for-elementor-lite'),
-                'label_off' => esc_html__('No', 'essential-addons-for-elementor-lite'),
+                'label'        => __('Link Button?', 'essential-addons-for-elementor-lite'),
+                'type'         => Controls_Manager::SWITCHER,
+                'default'      => 'true',
+                'label_on'     => esc_html__('Show', 'essential-addons-for-elementor-lite'),
+                'label_off'    => esc_html__('Hide', 'essential-addons-for-elementor-lite'),
                 'return_value' => 'true',
-                'condition' => [
+                'condition'    => [
                     'fg_video_gallery_switch!' => 'true',
                 ],
             ]
@@ -839,14 +1036,17 @@ class Filterable_Gallery extends Widget_Base
         $repeater->add_control(
             'eael_fg_gallery_img_link',
             [
-                'type' => Controls_Manager::URL,
-                'dynamic'   => ['active' => true],
+                'type'        => Controls_Manager::URL,
+                'dynamic'     => ['active'       =>true],
                 'label_block' => true,
-                'default' => [
-                    'url' => '#',
+                'default'     => [
+                    'url'         => '#',
                     'is_external' => '',
                 ],
-                'show_external' => true
+                'show_external' => true,
+                'condition'     => [
+                    'fg_video_gallery_switch!' => 'true',
+                ],
             ]
         );
         
@@ -909,7 +1109,7 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'load_more_text',
             [
-                'label' => __('Button Text', 'essential-addons-for-elementor-lite'),
+                'label' => __('Button Label', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
                 'dynamic'   => ['active' => true],
                 'default' => __('Load More', 'essential-addons-for-elementor-lite'),
@@ -974,11 +1174,17 @@ class Filterable_Gallery extends Widget_Base
             'button_icon_position',
             [
                 'label' => __('Icon Position', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::SELECT,
+                'type' => Controls_Manager::CHOOSE,
                 'default' => 'after',
                 'options' => [
-                    'after' => __('After', 'essential-addons-for-elementor-lite'),
-                    'before' => __('Before', 'essential-addons-for-elementor-lite'),
+                    'before' => [
+                        'title' => __('Before', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-h-align-left',
+                    ],
+                    'after' => [
+                        'title' => __('After', 'essential-addons-for-elementor-lite'),
+                        'icon' => 'eicon-h-align-right',
+                    ],
                 ],
                 'condition' => [
                     'pagination' => 'yes',
@@ -1146,6 +1352,81 @@ class Filterable_Gallery extends Widget_Base
                 ]
             ]
         );
+
+        $this->add_control(
+			'eael_fg_control_bar',
+			[
+				'label'     => esc_html__( 'Bar', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+                'separator' => 'after',
+			]
+		);
+
+        $this->add_control(
+            'eael_fg_control_bar_bg_color',
+            [
+                'label'     => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-filter-gallery-control ul' => 'background: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_fg_control_bar_margin',
+            [
+                'label'      => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', 'rem', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-filter-gallery-control ul' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_fg_control_bar_padding',
+            [
+                'label'      => esc_html__('Padding', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', 'rem', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-filter-gallery-control ul' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'eael_fg_control_bar_border',
+                'label'    => esc_html__('Border', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .eael-filter-gallery-control ul',
+            ]
+        );
+        
+        $this->add_control(
+            'eael_fg_control_bar_border_radius',
+            [
+                'label'      => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'rem', 'em', 'custom' ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eael-filter-gallery-control ul' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+			'eael_fg_control_bar_button',
+			[
+				'label'     => esc_html__( 'Buttons', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::HEADING,
+                'separator' => 'after',
+			]
+		);
+
         $this->add_responsive_control(
             'eael_fg_control_padding',
             [
@@ -1239,7 +1520,6 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'eael_fg_control_shadow',
                 'selector' => '{{WRAPPER}} .eael-filter-gallery-control ul li.control',
-                'separator' => 'before',
             ]
         );
         
@@ -1305,7 +1585,6 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'eael_fg_control_active_shadow',
                 'selector' => '{{WRAPPER}} .eael-filter-gallery-control ul li.control.active',
-                'separator' => 'before',
             ]
         );
         
@@ -1325,8 +1604,23 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label' => esc_html__('Item', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_fg_caption_style!' => ['harmonic_gallery'],
+                ]
             ]
         );
+
+        $this->add_control(
+			'eael_fg_item_container_bg_color',
+			[
+				'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item,
+                    {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-grid-fg-box' => 'background-color: {{VALUE}}',
+                ],
+			]
+		);
         
         $this->add_responsive_control(
             'eael_fg_item_container_padding',
@@ -1335,7 +1629,9 @@ class Filterable_Gallery extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item,
+                    {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-grid-fg-box,
+                    {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-hg-grid__cell-img' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1347,7 +1643,9 @@ class Filterable_Gallery extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item,
+                    {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-grid-fg-box,
+                    {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-hg-grid__cell-img' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1357,7 +1655,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'eael_fg_item_border',
                 'label' => esc_html__('Border', 'essential-addons-for-elementor-lite'),
-                'selector' => '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item',
+                'selector' => '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item, 
+                {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-grid-fg-box,
+                {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-hg-grid__cell-img',
             ]
         );
         
@@ -1375,7 +1675,9 @@ class Filterable_Gallery extends Widget_Base
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item' => 'border-radius: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item, 
+                    {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-grid-fg-box,
+                    {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-hg-grid__cell-img' => 'border-radius: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -1384,10 +1686,11 @@ class Filterable_Gallery extends Widget_Base
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'eael_fg_item_shadow',
-                'selector' => '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item',
+                'selector' => '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item, 
+                {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-grid-fg-box,
+                {{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-hg-grid__cell-img',
             ]
         );
-        
         $this->end_controls_section();
         
         /**
@@ -1475,6 +1778,18 @@ class Filterable_Gallery extends Widget_Base
                 'selector' => '{{WRAPPER}} .gallery-item-caption-wrap.caption-style-hoverer .fg-item-title',
             ]
         );
+
+        $this->add_responsive_control(
+            'eael_fg_item_title_margin',
+            [
+                'label'      => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'rem', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .gallery-item-caption-wrap.caption-style-hoverer .fg-item-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
         
         $this->add_control(
             'eael_fg_item_hover_content_typography_heading',
@@ -1502,6 +1817,18 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'eael_fg_item_hover_content_typography',
                 'selector' => '{{WRAPPER}} .gallery-item-caption-wrap.caption-style-hoverer .fg-item-content',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_fg_item_content_margin',
+            [
+                'label'      => esc_html__('Margin', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'rem', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .gallery-item-caption-wrap.caption-style-hoverer .fg-item-content' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
             ]
         );
         
@@ -1633,7 +1960,8 @@ class Filterable_Gallery extends Widget_Base
                 'label' => esc_html__('Video', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
-                    'eael_fg_caption_style!' => 'layout_3'
+                    'eael_fg_caption_style!' => 'layout_3',
+                    'eael_fg_caption_style!' => ['grid_flow_gallery', 'harmonic_gallery'],
                 ]
             ]
         );
@@ -1797,7 +2125,21 @@ class Filterable_Gallery extends Widget_Base
 		);
 
         $this->end_controls_section();
-        
+
+        /**
+         * -------------------------------------------
+         * Grid Flow Gallery
+         * -------------------------------------------
+         */
+        do_action( 'eael_grid_flow_gallery_style', $this );
+
+        /**
+         * -------------------------------------------
+         * Harmonic Gallery Style
+         * -------------------------------------------
+         */
+        do_action( 'eael_harmonic_gallery_style', $this );
+
         /**
          * -------------------------------------------
          * Tab Style (Card Style)
@@ -1817,9 +2159,10 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'eael_fg_item_content_bg_color',
             [
-                'label' => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#f1f2f9',
+                'label'     => esc_html__('Background Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#f1f2f9',
+                'separator' => 'before',
                 'selectors' => [
                     '{{WRAPPER}} .eael-filterable-gallery-item-wrap .gallery-item-caption-wrap.caption-style-card' => 'background-color: {{VALUE}};',
                     '{{WRAPPER}} .fg-layout-3-item-content' => 'background-color: {{VALUE}};'
@@ -1874,6 +2217,36 @@ class Filterable_Gallery extends Widget_Base
                 'selector' => '{{WRAPPER}} .eael-filterable-gallery-item-wrap .gallery-item-caption-wrap.caption-style-card, {{WRAPPER}} .fg-layout-3-item-content',
             ]
         );
+
+        $this->add_control(
+            'eael_fg_item_content_iamge_settings',
+            [
+                'label'     => esc_html__('Image', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::HEADING,
+                'separator' => 'after',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'eael_fg_item_content_image_border',
+                'label'    => esc_html__('Border', 'essential-addons-for-elementor-lite'),
+                'selector' => '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item .gallery-item-thumbnail-wrap>img',
+            ]
+        );
+
+        $this->add_control(
+            'eael_fg_item_content_image_border_radius',
+            [
+                'label'      => esc_html__('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-filterable-gallery-item-wrap .eael-gallery-grid-item .gallery-item-thumbnail-wrap>img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
         
         $this->add_control(
             'eael_fg_item_content_title_typography_settings',
@@ -1887,14 +2260,14 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'eael_fg_item_content_title_color',
             [
-                'label' => esc_html__('Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#F56A6A',
+                'label'     => esc_html__('Color', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '#F56A6A',
                 'selectors' => [
                     '{{WRAPPER}} .gallery-item-caption-wrap.caption-style-card .fg-item-title' => 'color: {{VALUE}};'
                 ],
                 'condition' => [
-                    'eael_fg_caption_style' => 'card'
+                    'eael_fg_caption_style' => ['card']
                 ],
             ]
         );
@@ -1931,7 +2304,8 @@ class Filterable_Gallery extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'eael_fg_item_content_title_typography',
-                'selector' => '{{WRAPPER}} .gallery-item-caption-wrap.caption-style-card .fg-item-title, {{WRAPPER}} .fg-layout-3-item-content .fg-item-title',
+                'selector' => '{{WRAPPER}} .gallery-item-caption-wrap.caption-style-card .fg-item-title, 
+                {{WRAPPER}} .fg-layout-3-item-content .fg-item-title',
             ]
         );
         
@@ -2020,6 +2394,9 @@ class Filterable_Gallery extends Widget_Base
             [
                 'label' => esc_html__('Icons', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_fg_caption_style!' => ['grid_flow_gallery', 'harmonic_gallery'],
+                ]
             ]
         );
         
@@ -2763,7 +3140,7 @@ class Filterable_Gallery extends Widget_Base
         $this->start_controls_section(
             'eael_not_found_text_style',
             [
-                'label' => esc_html__('Not found text', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Not Found Text', 'essential-addons-for-elementor-lite'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -2780,7 +3157,7 @@ class Filterable_Gallery extends Widget_Base
 			'eael_fg_not_found_text_align',
 			[
 				'label' => esc_html__( 'Alignment', 'essential-addons-for-elementor-lite' ),
-				'type' => \Elementor\Controls_Manager::CHOOSE,
+				'type' => Controls_Manager::CHOOSE,
 				'options' => [
 					'left' => [
 						'title' => esc_html__( 'Left', 'essential-addons-for-elementor-lite' ),
@@ -2920,103 +3297,21 @@ class Filterable_Gallery extends Widget_Base
                 ],
             ]
         );
-        
-        $this->start_controls_tabs('tabs_eael_load_more_button_style');
-        
-        $this->start_controls_tab(
-            'tab_load_more_button_normal',
-            [
-                'label' => __('Normal', 'essential-addons-for-elementor-lite'),
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
-                ],
-            ]
-        );
-        
+
+
         $this->add_control(
-            'load_more_button_bg_color_normal',
+            'load_more_button_icon_heading',
             [
-                'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#333',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-gallery-load-more' => 'background-color: {{VALUE}}',
-                ],
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
-                ],
-            ]
-        );
-        
-        $this->add_control(
-            'load_more_button_text_color_normal',
-            [
-                'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#fff',
-                'selectors' => [
-                    '{{WRAPPER}} .eael-gallery-load-more' => 'color: {{VALUE}}',
-                ],
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
-                ],
-            ]
-        );
-        
-        $this->add_group_control(
-            Group_Control_Border::get_type(),
-            [
-                'name' => 'load_more_button_border_normal',
-                'label' => __('Border', 'essential-addons-for-elementor-lite'),
-                'placeholder' => '1px',
-                'default' => '1px',
-                'selector' => '{{WRAPPER}} .eael-gallery-load-more',
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
-                ],
-            ]
-        );
-        
-        $this->add_control(
-            'load_more_button_border_radius',
-            [
-                'label' => __('Border Radius', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', '%'],
-                'selectors' => [
-                    '{{WRAPPER}} .eael-gallery-load-more' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
-                ],
-            ]
-        );
-        
-        $this->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name' => 'load_more_button_typography',
-                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
-                'global' => [
-					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				],
-                'selector' => '{{WRAPPER}} .eael-gallery-load-more .eael-filterable-gallery-load-more-text',
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
-                ],
+                'label' => __('Button Icon', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
             ]
         );
         
         $this->add_control(
             'load_more_button_icon_size',
             [
-                'label' => __('Icon Size', 'essential-addons-for-elementor-lite'),
+                'label' => __('Size', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 15,
@@ -3038,7 +3333,7 @@ class Filterable_Gallery extends Widget_Base
         $this->add_control(
             'load_more_button_icon_spacing',
             [
-                'label' => __('Icon Spacing', 'essential-addons-for-elementor-lite'),
+                'label' => __('Spacing', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -3049,7 +3344,48 @@ class Filterable_Gallery extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-gallery-load-more .fg-load-more-icon-left' => 'margin-right: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .eael-gallery-load-more .fg-load-more-icon-right' => 'margin-left: {{SIZE}}{{UNIT}};',
-                ]
+                ],
+                'separator' => 'after',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'load_more_button_typography',
+                'label' => __('Typography', 'essential-addons-for-elementor-lite'),
+                'global' => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
+                'selector' => '{{WRAPPER}} .eael-gallery-load-more .eael-filterable-gallery-load-more-text',
+                'condition' => [
+                    'pagination' => 'yes',
+                    'load_more_text!' => '',
+                ],
+            ]
+        );
+        
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'load_more_button_border_normal',
+                'label' => __('Border', 'essential-addons-for-elementor-lite'),
+                'placeholder' => '1px',
+                'default' => '1px',
+                'selector' => '{{WRAPPER}} .eael-gallery-load-more',
+                'exclude'  => [ 'color' ],
+            ]
+        );
+
+        $this->add_control(
+            'load_more_button_border_radius',
+            [
+                'label' => __('Border Radius', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-gallery-load-more' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
             ]
         );
         
@@ -3061,35 +3397,6 @@ class Filterable_Gallery extends Widget_Base
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
                     '{{WRAPPER}} .eael-gallery-load-more' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
-                ],
-            ]
-        );
-        
-        $this->add_group_control(
-            Group_Control_Box_Shadow::get_type(),
-            [
-                'name' => 'load_more_button_box_shadow',
-                'selector' => '{{WRAPPER}} .eael-gallery-load-more',
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
-                ],
-            ]
-        );
-        
-        $this->add_control(
-            'load_more_button_icon_heading',
-            [
-                'label' => __('Button Icon', 'essential-addons-for-elementor-lite'),
-                'type' => Controls_Manager::HEADING,
-                'separator' => 'before',
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_icon!' => '',
                 ],
             ]
         );
@@ -3109,10 +3416,59 @@ class Filterable_Gallery extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-gallery-load-more .eael-filterable-gallery-load-more-icon' => 'margin-top: {{TOP}}{{UNIT}}; margin-left: {{LEFT}}{{UNIT}}; margin-right: {{RIGHT}}{{UNIT}}; margin-bottom: {{BOTTOM}}{{UNIT}};',
                 ],
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_icon!' => '',
+            ]
+        );
+        
+        $this->start_controls_tabs('tabs_eael_load_more_button_style');
+        
+        $this->start_controls_tab(
+            'tab_load_more_button_normal',
+            [
+                'label' => __('Normal', 'essential-addons-for-elementor-lite'),
+            ]
+        );
+        
+        $this->add_control(
+            'load_more_button_bg_color_normal',
+            [
+                'label' => __('Background Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#333',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-gallery-load-more' => 'background-color: {{VALUE}}',
                 ],
+            ]
+        );
+        
+        $this->add_control(
+            'load_more_button_text_color_normal',
+            [
+                'label' => __('Text Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#fff',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-gallery-load-more' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'load_more_button_border_normal_color',
+            [
+                'label' => __('Border Color', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-gallery-load-more:hover' => 'border-color: {{VALUE}}',
+                ],
+            ]
+        );
+        
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'load_more_button_box_shadow',
+                'selector' => '{{WRAPPER}} .eael-gallery-load-more',
             ]
         );
         
@@ -3122,10 +3478,6 @@ class Filterable_Gallery extends Widget_Base
             'tab_button_hover',
             [
                 'label' => __('Hover', 'essential-addons-for-elementor-lite'),
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
-                ],
             ]
         );
         
@@ -3137,10 +3489,6 @@ class Filterable_Gallery extends Widget_Base
                 'default' => '',
                 'selectors' => [
                     '{{WRAPPER}} .eael-gallery-load-more:hover' => 'background-color: {{VALUE}}',
-                ],
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
                 ],
             ]
         );
@@ -3154,10 +3502,6 @@ class Filterable_Gallery extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-gallery-load-more:hover' => 'color: {{VALUE}}',
                 ],
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
-                ],
             ]
         );
         
@@ -3170,10 +3514,6 @@ class Filterable_Gallery extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .eael-gallery-load-more:hover' => 'border-color: {{VALUE}}',
                 ],
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
-                ],
             ]
         );
         
@@ -3182,10 +3522,6 @@ class Filterable_Gallery extends Widget_Base
             [
                 'name' => 'button_box_shadow_hover',
                 'selector' => '{{WRAPPER}} .eael-gallery-load-more:hover',
-                'condition' => [
-                    'pagination' => 'yes',
-                    'load_more_text!' => '',
-                ],
             ]
         );
         
@@ -3243,14 +3579,14 @@ class Filterable_Gallery extends Widget_Base
     protected function render_filters()
     {
         $settings = $this->get_settings_for_display();
-        $all_text = ($settings['eael_fg_all_label_text'] != '') ? Helper::eael_wp_kses($settings['eael_fg_all_label_text']) : esc_html__('All', 'essential-addons-for-elementor-lite');
+        $all_text = ($settings['eael_fg_all_label_text'] != '') ? $settings['eael_fg_all_label_text'] : esc_html__('All', 'essential-addons-for-elementor-lite');
         
         if ($settings['filter_enable'] == 'yes') {
             ?>
             <div class="eael-filter-gallery-control">
                 <ul><?php
                     if ($settings['eael_fg_all_label_text']) {
-                        ?><li data-load-more-status="0" data-first-init="1" class="control all-control <?php if( ! $this->custom_default_control ) : ?> active <?php endif; ?>" data-filter="*"><?php echo $all_text; ?></li><?php
+                        ?><li data-load-more-status="0" data-first-init="1" class="control all-control <?php if( ! $this->custom_default_control ) : ?> active <?php endif; ?>" data-filter="*"><?php echo wp_kses( $all_text, Helper::eael_allowed_tags() ); ?></li><?php
                     }
 
                     foreach ($settings['eael_fg_controls'] as $key => $control) :
@@ -3282,9 +3618,9 @@ class Filterable_Gallery extends Widget_Base
                         <span>
                             <?php
                             if ($settings['eael_fg_all_label_text']) {
-                                echo Helper::eael_wp_kses($settings['eael_fg_all_label_text']);
+                                echo wp_kses( $settings['eael_fg_all_label_text'], Helper::eael_allowed_tags() );
                             } elseif (isset($settings['eael_fg_controls']) && !empty($settings['eael_fg_controls'])) {
-                                echo $settings['eael_fg_controls'][0]['eael_fg_control'];
+                                echo wp_kses( $settings['eael_fg_controls'][0]['eael_fg_control'], Helper::eael_allowed_tags() );
                             }
                             ?>
                         </span>
@@ -3303,7 +3639,7 @@ class Filterable_Gallery extends Widget_Base
                     </button>
                     <ul class="fg-layout-3-filter-controls">
                         <?php if ($settings['eael_fg_all_label_text']) { ?>
-                            <li class="control <?php if( ! $this->custom_default_control ) : ?> active <?php endif; ?>" data-filter="*"><?php echo Helper::eael_wp_kses($settings['eael_fg_all_label_text']); ?></li>
+                            <li class="control <?php if( ! $this->custom_default_control ) : ?> active <?php endif; ?>" data-filter="*"><?php echo wp_kses( $settings['eael_fg_all_label_text'], Helper::eael_allowed_tags() ); ?></li>
                         <?php } ?>
                         
                         <?php foreach ($settings['eael_fg_controls'] as $key => $control) :
@@ -3314,7 +3650,7 @@ class Filterable_Gallery extends Widget_Base
                                 if ( $this->default_control_key === $key ){
                                     echo 'active';
                                 }
-                            } ?>" data-filter=".eael-cf-<?php echo esc_attr($sorter_filter); ?>"><?php echo esc_html__($control['eael_fg_control']); ?></li>
+                            } ?>" data-filter=".eael-cf-<?php echo esc_attr($sorter_filter); ?>"><?php echo esc_html__($control['eael_fg_control'], 'essential-addons-for-elementor-lite'); ?></li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
@@ -3342,7 +3678,7 @@ class Filterable_Gallery extends Widget_Base
         
         if ($settings['pagination'] == 'yes') { ?>
             <div class="eael-filterable-gallery-loadmore">
-                <a href="#" <?php echo $this->get_render_attribute_string('load-more-button'); ?>>
+                <button <?php $this->print_render_attribute_string('load-more-button'); ?>>
                     <span class="eael-btn-loader"></span>
                     <?php if ($settings['button_icon_position'] == 'before') { ?>
                         <?php if ($icon_is_new || $icon_migrated) { ?>
@@ -3356,7 +3692,7 @@ class Filterable_Gallery extends Widget_Base
                         <?php } ?>
                     <?php } ?>
                     <span class="eael-filterable-gallery-load-more-text">
-                        <?php echo Helper::eael_wp_kses($settings['load_more_text']); ?>
+                        <?php echo wp_kses( $settings['load_more_text'], Helper::eael_allowed_tags() ); ?>
                     </span>
                     <?php if ($settings['button_icon_position'] == 'after') { ?>
                         <?php if ($icon_is_new || $icon_migrated) { ?>
@@ -3369,7 +3705,7 @@ class Filterable_Gallery extends Widget_Base
                             <span class="eael-filterable-gallery-load-more-icon fg-load-more-icon-right <?php echo esc_attr($settings['load_more_icon']); ?>" aria-hidden="true"></span>
                         <?php } ?>
                     <?php } ?>
-                </a>
+                </button>
             </div>
         <?php }
     }
@@ -3384,23 +3720,32 @@ class Filterable_Gallery extends Widget_Base
         
         foreach ($gallery_items as $gallery) {
             $gallery_store[$counter]['title']        = Helper::eael_wp_kses($gallery['eael_fg_gallery_item_name']);
-            $gallery_store[$counter]['content']      = $gallery['eael_fg_gallery_item_content'];
+            $gallery_store[$counter]['content']      = $this->parse_text_editor( $gallery['eael_fg_gallery_item_content'] );
             $gallery_store[$counter]['id']           = $gallery['_id'];
             $gallery_store[$counter]['image']        = $gallery['eael_fg_gallery_img'];
             $gallery_store[$counter]['image']        = sanitize_url( $gallery['eael_fg_gallery_img']['url'] );
             $gallery_store[$counter]['image_id']     = $gallery['eael_fg_gallery_img']['id'];
             $gallery_store[$counter]['maybe_link']   = $gallery['eael_fg_gallery_link'];
-            $gallery_store[$counter]['link']         = $gallery['eael_fg_gallery_img_link'];
+            $gallery_store[$counter]['link']         = $gallery['eael_fg_gallery_img_link'] ?? [];
+            $gallery_store[$counter]['toggle']       = isset( $gallery['eael_fg_gallery_item_toggle'] ) ? $gallery['eael_fg_gallery_item_toggle'] : '';
+            $gallery_store[$counter]['writing_mode'] = isset( $gallery['eael_fg_gallery_item_tag_writing_mode'] ) ? $gallery['eael_fg_gallery_item_tag_writing_mode'] : 'vertical-lr';
+            $gallery_store[$counter]['tag_icon_enable'] = isset( $gallery['eael_fg_gallery_item_tag_icon_enable'] ) ? $gallery['eael_fg_gallery_item_tag_icon_enable'] : '';
+            $gallery_store[$counter]['tag_icon']     = isset( $gallery['eael_fg_gallery_item_tag_icon'] ) ? $gallery['eael_fg_gallery_item_tag_icon'] : '';
             $gallery_store[$counter]['video_layout'] = isset( $gallery['eael_fg_gallery_video_layout'] ) && !empty( $gallery['eael_fg_gallery_video_layout'] ) ? $gallery['eael_fg_gallery_video_layout'] : 'horizontal';
             
-            $gallery_store[$counter]['video_gallery_switch'] = $gallery['fg_video_gallery_switch'];
+            $gallery_store[$counter]['video_gallery_switch'] = isset( $gallery['fg_video_gallery_switch'] ) ? $gallery['fg_video_gallery_switch'] : '';
 
             $gallery['eael_fg_gallery_item_video_link'] = empty( $gallery['eael_fg_gallery_item_video_link'] ) ? '' : $gallery['eael_fg_gallery_item_video_link'];
-            if (strpos($gallery['eael_fg_gallery_item_video_link'], 'youtu.be') != false) {
+            if ( strpos( $gallery['eael_fg_gallery_item_video_link'] , 'youtu.be') != false) {
                 preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/', $gallery['eael_fg_gallery_item_video_link'], $matches);
                 $video_link = !empty($matches) ? sprintf('https://www.youtube.com/watch?v=%s', $matches[1]) : '';
                 $gallery_store[$counter]['video_link'] = $video_link;
-            } else {
+            } else if ( strpos($gallery['eael_fg_gallery_item_video_link'], 'youtube.com/shorts/') !== false ){
+                preg_match('/shorts\/([a-zA-Z0-9_-]+)/', $gallery['eael_fg_gallery_item_video_link'], $matches);
+                $video_link = ! empty( $matches ) ? sprintf('https://www.youtube.com/watch?v=%s', $matches[1]) : '';
+                $gallery_store[$counter]['video_link'] = $video_link;
+            }
+            else {
                 $gallery_store[$counter]['video_link'] = $gallery['eael_fg_gallery_item_video_link'];
             }
             
@@ -3417,6 +3762,7 @@ class Filterable_Gallery extends Widget_Base
             $gallery_store[$counter]['show_lightbox'] = $gallery['eael_fg_gallery_lightbox'];
             $gallery_store[$counter]['play_icon'] = $gallery['fg_video_gallery_play_icon'];
             $gallery_store[$counter]['controls'] = $this->sorter_class($gallery['eael_fg_gallery_control_name']);
+            $gallery_store[$counter]['controls_name'] = $gallery['eael_fg_gallery_control_name'];
             $gallery_store[$counter]['price_switch'] = $gallery['fg_item_price_switch'];
             $gallery_store[$counter]['price'] = $gallery['fg_item_price'];
             $gallery_store[$counter]['ratings_switch'] = $gallery['fg_item_ratings_switch'];
@@ -3455,11 +3801,11 @@ class Filterable_Gallery extends Widget_Base
         if($check_popup_status){
             if ($settings['eael_section_fg_full_image_action'] === 'lightbox' && !$this->popup_status) {
                 $this->popup_status = true;
-                $html .= '<a href="' . esc_url($item['image']) . '" class="'. $magnific_class .' media-content-wrap active" data-elementor-open-lightbox="' . esc_attr( $is_lightbox ) . '" title="' . esc_attr( $title ) . '">';
+                $html .= '<a area-hidden="true" href="' . esc_url($item['image']) . '" class="'. $magnific_class .' media-content-wrap active" data-elementor-open-lightbox="' . esc_attr( $is_lightbox ) . '" title="' . esc_attr( $title ) . '">';
             }
         }else {
             if ($settings['eael_section_fg_full_image_action'] === 'lightbox') {
-                $html .= '<a href="' . esc_url($item['image']) . '" class="'. $magnific_class .' media-content-wrap active" data-elementor-open-lightbox="' . esc_attr( $is_lightbox ) . '" title="' . esc_attr( $title ) . '">';
+                $html .= '<a area-hidden="true" href="' . esc_url($item['image']) . '" class="'. $magnific_class .' media-content-wrap active" data-elementor-open-lightbox="' . esc_attr( $is_lightbox ) . '" title="' . esc_attr( $title ) . '">';
             }
         }
 
@@ -3487,6 +3833,10 @@ class Filterable_Gallery extends Widget_Base
      */
     protected function gallery_item_thumbnail_content($settings, $item){
         
+        $caption_style  = $settings['eael_fg_caption_style'] == 'card' ? 'caption-style-card' : 'caption-style-hoverer';
+        $image_alt = get_post_meta( $item['image_id'], '_wp_attachment_image_alt', true );
+        $alt_text = $image_alt ? $image_alt : $item['title'];
+        
         if( isset( $item['image_id'] ) && "" !== $item['image_id'] ){
             $settings[ 'eael_image_size_customize' ] = [
                 'id' => $item['image_id'],
@@ -3494,7 +3844,7 @@ class Filterable_Gallery extends Widget_Base
             $settings['eael_image_size_customize_size'] = $settings['eael_fg_image_resolution_size'];
             $html = Group_Control_Image_Size::get_attachment_image_html( $settings, 'eael_image_size_customize' );
         } else {
-            $html = '<img src="' . esc_url( $item['image'] ) . '" data-lazy-src="' . esc_url( $item['image'] ) . '" alt="' . esc_attr( get_post_meta( $item['image_id'], '_wp_attachment_image_alt', true ) ) . '" class="gallery-item-thumbnail">';
+            $html = '<img src="' . esc_url( $item['image'] ) . '" data-lazy-src="' . esc_url( $item['image'] ) . '" alt="' . esc_attr( $alt_text ) . '" class="gallery-item-thumbnail">';
         }
         
         if ( empty($settings['eael_section_fg_full_image_clickable']) && $item['video_gallery_switch'] !== 'true' ) {
@@ -3508,7 +3858,7 @@ class Filterable_Gallery extends Widget_Base
         }
 
         if (isset($item['video_gallery_switch']) && ($item['video_gallery_switch'] === 'true')) {
-            $html .= $this->video_gallery_switch_content( $item, true, $settings );
+            $html .= $this->video_gallery_switch_content( $item, $caption_style, true, $settings );
         }
 
         return $html;
@@ -3522,17 +3872,34 @@ class Filterable_Gallery extends Widget_Base
      * @param boolean $show_video_popup_bg
      * @return string : Html markup
      */
-    protected function video_gallery_switch_content( $item, $show_video_popup_bg=true, $settings = null ) {
-        $html           = '';
-        $icon_url       = isset($item['play_icon']['url']) ? $item['play_icon']['url'] : '';
-        $video_url      = isset($item['video_link']) ? $item['video_link'] : '#';
-        $privacy_notice = isset( $settings['eael_privacy_notice'] ) ? $settings['eael_privacy_notice'] : '';
-        $classes        = "video-popup eael-magnific-link eael-magnific-link-clone active eael-magnific-video-link mfp-iframe playout-" . $item['video_layout'];
+    protected function video_gallery_switch_content( $item, $caption_style, $show_video_popup_bg=true, $settings = null ) {
+        $html       = '';
+        $icon_url   = isset($item['play_icon']['url']) ? $item['play_icon']['url'] : '';
+        $video_url  = isset($item['video_link']) ? $item['video_link'] : '#';
+        $title      = isset( $item['title'] ) ? $item['title'] : '';
+        $classes    = "video-popup eael-magnific-link eael-magnific-link-clone active eael-magnific-video-link mfp-iframe playout-" . $item['video_layout'];
         
-        $html .= '<a title="' . esc_attr( strip_tags( $privacy_notice ) ) .'" aria-label="eael-magnific-video-link" href="' . esc_url($video_url) . '" class="' . esc_attr( $classes ) . '" data-id="'. esc_attr( $item['id'] ) .'" data-elementor-open-lightbox="yes">';
+        $html .= '<a area-hidden="true"  title="' . esc_attr( strip_tags( $title ) ) .'" aria-label="eael-magnific-video-link" href="' . esc_url($video_url) . '" class="' . esc_attr( $classes ) . '" data-id="'. esc_attr( $item['id'] ) .'" data-elementor-open-lightbox="yes">';
 
-        if( $show_video_popup_bg ){
-            $html .= '<div class="video-popup-bg"></div>';
+        if( $show_video_popup_bg ) {
+            if( 'caption-style-card' === $caption_style ) {
+                $html .= '<div class="video-popup-bg"></div>';
+            } else {
+                $html .= '<div class="video-popup-bg gallery-item-caption-wrap ' . esc_attr( $caption_style . ' ' . $settings['eael_fg_grid_hover_style'] ) . '">';
+                    $html .= '<div class="gallery-item-caption-over">';
+                    if ( isset($item['title'] ) && !empty( $item['title'] ) || isset( $item['content'] ) && !empty( $item['content'] ) ) {
+                        if ( !empty( $item['title'] ) ) {
+                            $title_link_open = $title_link_close = '';
+                            $html .= $title_link_open . '<' . Helper::eael_validate_html_tag( $settings['title_tag'] ) . ' class="fg-item-title">' . $item['title'] . '</' . Helper::eael_validate_html_tag( $settings['title_tag'] ) . '>' . $title_link_close;
+                        }
+            
+                        if ( !empty( $item['content'] ) ) {
+                            $html .= '<div class="fg-item-content">' . wpautop( preg_replace('/<a\b[^>]*>(.*?)<\/a>/i', '', $item['content'] ) ) . '</div>';
+                        }
+                    }
+                    $html .= '</div>';
+                $html .= '</div>';
+            }
         }
 
         if (!empty($icon_url)) {
@@ -3553,9 +3920,9 @@ class Filterable_Gallery extends Widget_Base
      * @param string $caption_style
      * @return string : Html markup
      */
-    protected function gallery_item_caption_content($settings, $item, $caption_style){
+    protected function gallery_item_caption_content( $settings, $item, $caption_style){
         $html = '<div class="gallery-item-caption-wrap ' . esc_attr( $caption_style . ' ' . $settings['eael_fg_grid_hover_style'] ) . '">';
-
+        $is_image_clickable = isset( $settings['eael_section_fg_full_image_clickable'] ) && 'yes' === $settings['eael_section_fg_full_image_clickable'] && 'card' !== $settings['eael_fg_caption_style'];
         if ('hoverer' == $settings['eael_fg_caption_style']) {
             $html .= '<div class="gallery-item-hoverer-bg"></div>';
         }
@@ -3564,37 +3931,52 @@ class Filterable_Gallery extends Widget_Base
         if (isset($item['title']) && !empty($item['title']) || isset($item['content']) && !empty($item['content'])) {
             if (!empty($item['title'])) {
                 $title_link_open = $title_link_close = '';
-                if ( $settings['eael_title_clickable'] === 'yes' ){
+                
+                // Determine if title should be clickable
+                $should_make_title_clickable = false;
+                
+                if ( $settings['eael_fg_caption_style'] === 'hoverer' ) {
+                    $should_make_title_clickable = $settings['eael_title_clickable'] === 'yes' && !$is_image_clickable;
+                } else {
+                    $should_make_title_clickable = $settings['eael_title_clickable'] === 'yes';
+                }
+                
+                // Generate link HTML if title should be clickable
+                if ( $should_make_title_clickable ) {
                     static $ea_link_repeater_index = 0;
-	                $link_key = 'link_' . $ea_link_repeater_index++;
-                    if ( empty( $this->get_render_attribute_string( $link_key ) ) ){
-	                    $link_key = 'eael_link_' . $ea_link_repeater_index++;
+                    $link_key = 'link_' . $ea_link_repeater_index++;
+                    
+                    if ( empty($this->get_render_attribute_string( $link_key ) ) ) {
+                        $link_key = 'eael_link_' . $ea_link_repeater_index++;
                         $this->add_link_attributes( $link_key, $item['link'] );
                     }
-                    $title_link_open = '<a '. $this->get_render_attribute_string( $link_key ) . '>';
+                    
+                    $title_link_open = '<a ' . $this->get_render_attribute_string( $link_key ) . '>';
                     $title_link_close = '</a>';
                 }
 
-                $html .= $title_link_open . '<' . Helper::eael_validate_html_tag($settings['title_tag']) . ' class="fg-item-title">' . $item['title'] . '</' . Helper::eael_validate_html_tag($settings['title_tag']) . '>' . $title_link_close;
+                $title_tag = Helper::eael_validate_html_tag( $settings['title_tag'] );
+                $html .= $title_link_open . '<' . $title_tag . ' class="fg-item-title">' . $item['title'] . '</' . $title_tag . '>' . $title_link_close;
             }
 
-            if (!empty($item['content'])) {
-                $html .= '<div class="fg-item-content">' . wpautop($item['content']) . '</div>';
+            if ( ! empty( $item['content'] ) ) {
+                if ( $settings['eael_fg_caption_style'] === 'hoverer' ) {
+                    $content = ! $is_image_clickable ? $item['content'] : preg_replace(['/<a\b[^>]*>/i', '/<\/a>/i'], '', $item['content']);
+                    $html .= '<div class="fg-item-content">' . wpautop($content ) . '</div>';
+                } else {
+                    $html .= '<div class="fg-item-content">' . wpautop($item['content'] ) . '</div>';
+                }
             }
         }
 
         if ($settings['eael_fg_show_popup'] == 'buttons' && $settings['eael_fg_caption_style'] !== 'card') {
-            if (empty($settings['eael_section_fg_full_image_clickable'])) {
-                $html .= ($this->render_fg_buttons($settings, $item));
+            if ( ! $is_image_clickable ) {
+                $html .= $this->render_fg_buttons($settings, $item);
             }
         }
         $html .= '</div>';
 
         $html .= '</div>';
-
-        if ($settings['eael_section_fg_full_image_clickable']) {
-            $html .= '</a>';
-        }
 
         return $html;
     }
@@ -3616,7 +3998,7 @@ class Filterable_Gallery extends Widget_Base
         echo '<div class="gallery-item-buttons">';
         
         if ($item['show_lightbox'] == true) {
-            echo '<a aria-label="eael-magnific-link" href="' . esc_url($item['image']) . '" class="eael-magnific-link eael-magnific-link-clone active" data-elementor-open-lightbox="yes" title="' . esc_attr( $title ) . '">';
+            echo '<a area-hidden="true" aria-label="eael-magnific-link" href="' . esc_url($item['image']) . '" class="eael-magnific-link eael-magnific-link-clone active" data-elementor-open-lightbox="yes" title="' . esc_attr( $title ) . '">';
 
             echo '<span class="fg-item-icon-inner">';
             if ($zoom_icon_is_new || $zoom_icon_migrated) {
@@ -3667,13 +4049,14 @@ class Filterable_Gallery extends Widget_Base
     {
         $settings = $this->get_settings_for_display();
         $gallery = $this->gallery_item_store();
+        $caption_style  = $settings['eael_fg_caption_style'] == 'card' ? 'caption-style-card' : 'caption-style-hoverer';
         $gallery_markup = [];
         
         foreach ($gallery as $item) {
             $html = '<div class="eael-filterable-gallery-item-wrap eael-cf-' . esc_attr( $item['controls'] ) . '" data-search-key="' . esc_attr( strtolower(str_replace(" ", "-", $item['title'])) ) . '">';
             $html .= '<div class="fg-layout-3-item eael-gallery-grid-item">';
             
-            if ($settings['eael_section_fg_full_image_clickable']) {
+            if ( $settings['eael_section_fg_full_image_clickable'] && 'true' !== $item['video_gallery_switch'] ) {
                 $html .= $this->gallery_item_full_image_clickable_content($settings, $item, false);
             }
             
@@ -3684,6 +4067,9 @@ class Filterable_Gallery extends Widget_Base
                 $html .= '<div class="gallery-item-thumbnail-wrap fg-layout-3-item-thumb">';
             }
             
+            $alt_text = get_post_meta( $item['image_id'], '_wp_attachment_image_alt', true );
+            $alt_text = ! empty( $alt_text ) ? $alt_text : $item['title'];
+            
             if( isset( $item['image_id'] ) && "" !== $item['image_id'] ){
                 $settings[ 'eael_image_size_customize' ] = [
                     'id' => $item['image_id'],
@@ -3691,7 +4077,7 @@ class Filterable_Gallery extends Widget_Base
                 $settings['eael_image_size_customize_size'] = $settings['eael_fg_image_resolution_size'];
                 $html .= Group_Control_Image_Size::get_attachment_image_html( $settings, 'eael_image_size_customize' );
             } else {
-                $html .= '<img src="' . esc_url( $item['image'] ) . '" data-lazy-src="' . esc_url( $item['image'] ) . '" alt="' . esc_attr(get_post_meta($item['image_id'], '_wp_attachment_image_alt', true)) . '" class="gallery-item-thumbnail">';
+                $html .= '<img src="' . esc_url( $item['image'] ) . '" data-lazy-src="' . esc_url( $item['image'] ) . '" alt="' . esc_attr( $alt_text ) . '" class="gallery-item-thumbnail">';
             }
             
             $html .= '<div class="gallery-item-caption-wrap card-hover-bg caption-style-hoverer">';
@@ -3705,7 +4091,7 @@ class Filterable_Gallery extends Widget_Base
             $html .= '</div>';
 
             if (isset($item['video_gallery_switch']) && ($item['video_gallery_switch'] === 'true')) {
-                $html .= $this->video_gallery_switch_content( $item, false );
+                $html .= $this->video_gallery_switch_content( $item, $caption_style, false );
             } else {
                 if (empty($settings['eael_section_fg_full_image_clickable'])) {
                     $html .= $this->render_fg_buttons($settings, $item);
@@ -3735,7 +4121,8 @@ class Filterable_Gallery extends Widget_Base
                 $title_link_close = '</a>';
             }
 
-            $html .= $title_link_open . '<' . Helper::eael_validate_html_tag($settings['title_tag']) . ' class="fg-item-title">' . $item['title'] . '</' . Helper::eael_validate_html_tag($settings['title_tag']) . '>' . $title_link_close;
+            $title_tag = Helper::eael_validate_html_tag( $settings['title_tag'] );
+            $html .= $title_link_open . '<' . $title_tag . ' class="fg-item-title">' . $item['title'] . '</' . $title_tag . '>' . $title_link_close;
             $html .= '<div class="fg-item-content">' . wpautop($item['content']) . '</div>';
             $html .= '</div>';
             
@@ -3786,11 +4173,11 @@ class Filterable_Gallery extends Widget_Base
             ) {
                 $this->popup_status = true;
                 $close_media_content_wrap = true;
-                $html .= '<a  href="' . esc_url($item['image']) . '" class="'. $magnific_class .' media-content-wrap" data-elementor-open-lightbox="' . esc_attr( $is_lightbox ) . '" title="' . esc_attr( $title ) . '">';
+                $html .= '<a  aria-hidden="true" aria-label="eael-magnific-link" href="' . esc_url($item['image']) . '" class="'. $magnific_class .' media-content-wrap" data-elementor-open-lightbox="' . esc_attr( $is_lightbox ) . '" title="' . esc_attr( $title ) . '">';
             }
-
-            if ($settings['eael_section_fg_full_image_clickable']) {
-                $html .= $this->gallery_item_full_image_clickable_content($settings, $item);
+            
+            if ( $settings['eael_section_fg_full_image_clickable'] && 'true' !== $item['video_gallery_switch'] ) {
+                $html .= $this->gallery_item_full_image_clickable_content($settings, $item );
             }
 
             if (isset($item['video_gallery_switch']) && ($item['video_gallery_switch'] === 'true')
@@ -3804,25 +4191,35 @@ class Filterable_Gallery extends Widget_Base
 
             $html .= '</div>';
 
+            if ( $settings['eael_section_fg_full_image_clickable'] && 'card' === $settings['eael_fg_caption_style'] ) {
+                $html .= '</a>';
+            }
             if ($close_media_content_wrap) {
                 $html .= '</a>';
             }
 
             if ($settings['eael_fg_show_popup'] == 'media' && $settings['eael_fg_caption_style'] !== 'card' && !$this->popup_status) {
-                $html .= '<a href="' . esc_url($item['image']) . '" class="'. $magnific_class .' media-content-wrap" data-elementor-open-lightbox="' . esc_attr( $is_lightbox ) . '" title="' . esc_attr( $title ) . '">';
+                $html .= '<a area-hidden="true" aria-label="eael-magnific-link" href="' . esc_url($item['image']) . '" class="'. $magnific_class .' media-content-wrap" data-elementor-open-lightbox="' . esc_attr( $is_lightbox ) . '" title="' . esc_attr( $title ) . '">';
             }
 
-
-            if ($item['video_gallery_switch'] != 'true' || $settings['eael_fg_caption_style'] == 'card') {
-                $html .= $this->gallery_item_caption_content($settings, $item, $caption_style);
+            // Overlay
+            if ( $settings['eael_fg_caption_style'] === 'hoverer' ) {
+                if ( $item['video_gallery_switch'] !== 'true' ) {
+                    $html .= $this->gallery_item_caption_content( $settings, $item, $caption_style );
+                }
             }
 
             if ($settings['eael_fg_show_popup'] == 'media') {
                 $html .= '</a>';
             }
 
-            if ($settings['eael_section_fg_full_image_clickable']) {
+            if ( $settings['eael_section_fg_full_image_clickable'] && 'card' !== $settings['eael_fg_caption_style'] ) {
                 $html .= '</a>';
+            }
+
+            // Card
+            if ( $settings['eael_fg_caption_style'] === 'card' ) {
+                $html .= $this->gallery_item_caption_content( $settings, $item, $caption_style );
             }
 
             $html .= '</div></div>';
@@ -3860,7 +4257,39 @@ class Filterable_Gallery extends Widget_Base
             }
         }
 
-        echo '<style id="eael-fg-inline-css-'. esc_attr( $section_id ) .'">'. $media_query .'</style>';
+        echo '<style id="eael-fg-inline-css-'. esc_attr( $section_id ) .'">'. esc_html( $media_query ) .'</style>';
+    }
+
+    /**
+     * Render gallery items
+     *
+     * @param [type] $settings
+     * @param [type] $gallery_items
+     * @return void
+     */
+    public function eael_render_gallery_item_wrap( $settings, $gallery_items ) {
+        ?>
+        <div <?php $this->print_render_attribute_string('gallery-items-wrap'); ?>>
+            <?php
+            $init_show = absint($settings['eael_fg_items_to_show']);
+
+            for ($i = 0; $i < $init_show; $i++) {
+
+                if (array_key_exists($i, $gallery_items)) {
+                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                    echo  $gallery_items[$i];
+                }
+            }
+            if ( $settings['eael_fg_caption_style'] === 'layout_3' ):
+            ?>
+            <div id="eael-fg-no-items-found" style="display:none;">
+                <?php
+                    echo wp_kses( $settings['eael_fg_not_found_text'], Helper::eael_allowed_tags() );
+                ?>
+            </div>
+            <?php endif; ?>
+        </div>
+        <?php
     }
 
     protected function render() {
@@ -3890,19 +4319,19 @@ class Filterable_Gallery extends Widget_Base
             'control_all_text' => $settings['eael_fg_all_label_text'],
         ];
         
-        if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
-            $gallery_settings['post_id'] = \Elementor\Plugin::$instance->editor->get_post_id();
+        if ( Plugin::$instance->editor->is_edit_mode()) {
+            $gallery_settings['post_id'] =  Plugin::$instance->editor->get_post_id();
         } else {
             $gallery_settings['post_id'] = get_the_ID();
         }
-        if ( method_exists( \Elementor\Plugin::$instance->breakpoints, 'get_breakpoints_config' ) && ! empty( $breakpoints = \Elementor\Plugin::$instance->breakpoints->get_breakpoints_config() ) ) {
+        if ( method_exists(  Plugin::$instance->breakpoints, 'get_breakpoints_config' ) && ! empty( $breakpoints = \Elementor\Plugin::$instance->breakpoints->get_breakpoints_config() ) ) {
 
             $this->add_render_attribute('gallery', 'data-breakpoints', wp_json_encode( $breakpoints ) );
         }
 
         $gallery_settings['widget_id'] = $this->get_id();
         
-        $no_more_items_text = Helper::eael_wp_kses($settings['nomore_items_text']);
+        $no_more_items_text = esc_html($settings['nomore_items_text']);
         $grid_class = $settings['eael_fg_grid_style'] == 'grid' ? 'eael-filter-gallery-grid' : 'masonry';
 
         if ('layout_3' == $settings['eael_fg_caption_style']) {
@@ -3910,10 +4339,6 @@ class Filterable_Gallery extends Widget_Base
         }
         else {
             $gallery_items = $items = $this->render_gallery_items();
-        }
-
-        if ( $settings['eael_item_randomize'] === 'yes' ){
-            shuffle($gallery_items);
         }
 
         $this->add_render_attribute('gallery-items-wrap', [
@@ -3924,11 +4349,19 @@ class Filterable_Gallery extends Widget_Base
             'data-images-per-page' => $settings['images_per_page'],
             'data-total-gallery-items' => count($settings['eael_fg_gallery_items']),
             'data-nomore-item-text' => $no_more_items_text,
+            'data-is-randomize' => 'yes' === $settings['eael_item_randomize'] ? 'yes' : 'no',
         ]);
 
+        if( 'yes' === $settings['eael_privacy_notice_control'] && !empty( $settings['eael_privacy_notice'] ) ) {
+            $this->add_render_attribute( 'gallery-items-wrap', 'data-privacy-notice', esc_html( $settings['eael_privacy_notice'] ) );
+        }
+
+        $html_json   = wp_json_encode( $gallery_items );
+        $json_base64 = base64_encode( $html_json );
+        
         $this->add_render_attribute('gallery-items-wrap', 'data-settings', wp_json_encode($gallery_settings));
         $this->add_render_attribute('gallery-items-wrap', 'data-search-all', esc_attr( $settings['eael_search_among_all'] ));
-        $this->add_render_attribute( 'gallery-items-wrap', 'data-gallery-items', wp_json_encode( $gallery_items, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE ) );
+        $this->add_render_attribute( 'gallery-items-wrap', 'data-gallery-items', esc_attr( $json_base64 ) );
         $this->add_render_attribute('gallery-items-wrap', 'data-init-show', esc_attr($settings['eael_fg_items_to_show']));
         $this->render_media_query( $settings );
 
@@ -3944,37 +4377,22 @@ class Filterable_Gallery extends Widget_Base
         $this->add_render_attribute('gallery', 'data-default_control_key', esc_attr( $this->default_control_key ) );
         $this->add_render_attribute('gallery', 'data-custom_default_control', esc_attr( $this->custom_default_control ) );
         ?>
-        <div <?php echo $this->get_render_attribute_string('gallery'); ?>>
-            
+        <div <?php $this->print_render_attribute_string('gallery'); ?>>
             <?php
-            if ('layout_3' == $settings['eael_fg_caption_style'])
-                $this->render_layout_3_filters();
-            else
+            if ( in_array( $settings['eael_fg_caption_style'], ['grid_flow_gallery', 'harmonic_gallery'] ) ) {
+                $gallery_items_pro = $this->gallery_item_store();
                 $this->render_filters();
-            ?>
+                do_action( 'add_filterable_gallery_style_block', $settings, $this, $gallery_items_pro );
+            } elseif ('layout_3' == $settings['eael_fg_caption_style']) {
+                $this->render_layout_3_filters();
+                $this->eael_render_gallery_item_wrap( $settings, $gallery_items );
+            } else {
+                $this->render_filters();
+                $this->eael_render_gallery_item_wrap( $settings, $gallery_items );
+            }
+            // gallery-items-wrap
 
-            <div <?php echo $this->get_render_attribute_string('gallery-items-wrap'); ?>>
-                <?php
-                $init_show = absint($settings['eael_fg_items_to_show']);
-
-                for ($i = 0; $i < $init_show; $i++) {
-
-                    if (array_key_exists($i, $gallery_items)) {
-                        echo wp_kses( $gallery_items[$i], Helper::eael_allowed_tags(['a'=>['data-elementor-lightbox-slideshow'=>[]]]) );
-                    }
-                }
-                if ( $settings['eael_fg_caption_style'] === 'layout_3' ):
-                ?>
-                <div id="eael-fg-no-items-found" style="display:none;">
-                    <?php
-                       echo wp_kses( $settings['eael_fg_not_found_text'], Helper::eael_allowed_tags() );
-                    ?>
-                </div>
-                <?php endif; ?>
-            </div>
-            
-            <?php
-            if (\Elementor\Plugin::instance()->editor->is_edit_mode()) {
+            if ( Plugin::instance()->editor->is_edit_mode() ) {
                 $this->render_editor_script();
             }
             $this->render_loadmore_button();
@@ -3994,16 +4412,18 @@ class Filterable_Gallery extends Widget_Base
         <script type="text/javascript">
             jQuery(document).ready(function($) {
                 $('.eael-filter-gallery-container').each(function() {
-                    var $node_id = '<?php echo $this->get_id(); ?>',
-                        $scope = $('[data-id="' + $node_id + '"]'),
-                        $gallery = $(this),
-                        $settings = $gallery.data('settings'),
-						fg_items = $gallery_items = $gallery.data('gallery-items'),
-                        $layout_mode = ($settings.grid_style == 'masonry' ? 'masonry' : 'fitRows'),
+                    var $node_id = '<?php echo esc_js($this->get_id()); ?>',
+                        $scope           = $('[data-id="' + $node_id + '"]'),
+                        $gallery         = $(this),
+                        $settings        = $gallery.data('settings'),
+				        fg_items 		 = JSON.parse( atob( $gallery.data("gallery-items") ) ),
+                        $layout_mode     = ($settings.grid_style      == 'masonry' ? 'masonry': 'fitRows'),
                         $gallery_enabled = ($settings.gallery_enabled == 'yes' ? true : false),
-                        input = $scope.find('#fg-search-box-input'),
+                        input            = $scope.find('#fg-search-box-input'),
                         searchRegex, buttonFilter, timer;
-					    $init_show_setting     = $gallery.data("init-show");
+					    $init_show_setting  = $gallery.data("init-show");
+
+
 					fg_items.splice(0, $init_show_setting)
                     var filterControls = $scope.find(".fg-layout-3-filter-controls").eq(0)
 
@@ -4108,10 +4528,9 @@ class Filterable_Gallery extends Widget_Base
                         $this.siblings().removeClass("active");
                         $this.addClass("active");
 	                    if (!firstInit && $items.length > 0) {
-                            $isotope_gallery.isotope();
 		                    $gallery.append($items);
 		                    $isotope_gallery.isotope('appended', $items);
-		                    $isotope_gallery.isotope({filter: buttonFilter});
+		                    $isotope_gallery.isotope();
 		                    $isotope_gallery.imagesLoaded().progress(function () {
 			                    $isotope_gallery.isotope("layout");
 		                    });
@@ -4215,8 +4634,9 @@ class Filterable_Gallery extends Widget_Base
 							});
 						}
 
-						if (fg_items.length<1) {
-							$this.html('<div class="no-more-items-text">' + $nomore_text + "</div>");
+						if (fg_items.length < 1) {
+							$this.html('<div class="no-more-items-text"></div>');
+							$this.children('.no-more-items-text').text($nomore_text);
 							setTimeout(function () {
 								$this.fadeOut("slow");
 							}, 600);

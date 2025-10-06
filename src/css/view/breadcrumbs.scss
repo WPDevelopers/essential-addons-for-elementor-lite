@@ -1,0 +1,42 @@
+.eael-breadcrumbs {
+   display: flex;
+   &__prefix {
+      display: flex;
+      align-items: center;
+
+      &-link {
+         display: flex;
+         align-items: center;
+      }
+   }
+   &__content {
+      display: flex;
+      color: #434347;
+      font-size: 15px;
+      margin-bottom: 0;
+      padding: 5px 15px;
+      border: 1px solid #edecf6;
+      border-radius: 8px;
+      a {
+         color: #a5a4b0;
+      }
+   }
+}
+
+.woocommerce {
+   .woocommerce-breadcrumb {
+      &.eael-breadcrumbs {
+         &__content {
+            color: #434347;
+            font-size: 15px;
+            margin-bottom: 0;
+            padding: 5px 15px;
+            border: 1px solid #edecf6;
+            border-radius: 8px;
+            a {
+               color: #a5a4b0;
+            }
+         }
+      }
+   }
+}

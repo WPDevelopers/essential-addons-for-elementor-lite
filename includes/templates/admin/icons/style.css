@@ -1,0 +1,180 @@
+@font-face {
+  font-family: 'ea-dash-icon';
+  src:  url('fonts/ea-dash-icon.eot?g7g8jp');
+  src:  url('fonts/ea-dash-icon.eot?g7g8jp#iefix') format('embedded-opentype'),
+    url('fonts/ea-dash-icon.ttf?g7g8jp') format('truetype'),
+    url('fonts/ea-dash-icon.woff?g7g8jp') format('woff'),
+    url('fonts/ea-dash-icon.svg?g7g8jp#ea-dash-icon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.ea-dash-icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'ea-dash-icon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ea-search:before {
+  content: "\e930";
+}
+.ea-priority-support:before {
+  content: "\e92e";
+}
+.ea-security-update:before {
+  content: "\e92f";
+}
+.ea-moon:before {
+  content: "\e92b";
+}
+.ea-active:before {
+  content: "\e92c";
+}
+.ea-incative:before {
+  content: "\e92d";
+}
+.ea-down-arrow-long:before {
+  content: "\e929";
+}
+.ea-left-arrow-long:before {
+  content: "\e92a";
+}
+.ea-key:before {
+  content: "\e928";
+}
+.ea-dropdown-up:before {
+  content: "\e925";
+}
+.ea-play:before {
+  content: "\e926";
+}
+.ea-right-arrow-long:before {
+  content: "\e927";
+}
+.ea-info:before {
+  content: "\e924";
+}
+.ea-close:before {
+  content: "\e923";
+}
+.ea-crown-1:before {
+  content: "\e901";
+}
+.ea-link-2:before {
+  content: "\e922";
+}
+.ea-docs-fill:before {
+  content: "\e900";
+}
+.ea-notes-2:before {
+  content: "\e902";
+}
+.ea-cart:before {
+  content: "\e903";
+}
+.ea-check:before {
+  content: "\e904";
+}
+.ea-community:before {
+  content: "\e905";
+}
+.ea-content:before {
+  content: "\e906";
+}
+.ea-crown:before {
+  content: "\e907";
+}
+.ea-docs-2:before {
+  content: "\e908";
+}
+.ea-docs:before {
+  content: "\e909";
+}
+.ea-dropdown:before {
+  content: "\e90a";
+}
+.ea-elements:before {
+  content: "\e90b";
+}
+.ea-extensions:before {
+  content: "\e90c";
+}
+.ea-form-marketing:before {
+  content: "\e90d";
+}
+.ea-github:before {
+  content: "\e90e";
+}
+.ea-home:before {
+  content: "\e90f";
+}
+.ea-install:before {
+  content: "\e910";
+}
+.ea-leardash:before {
+  content: "\e911";
+}
+.ea-light:before {
+  content: "\e912";
+}
+.ea-link:before {
+  content: "\e913";
+}
+.ea-lock:before {
+  content: "\e914";
+}
+.ea-marketing:before {
+  content: "\e915";
+}
+.ea-notes:before {
+  content: "\e916";
+}
+.ea-plug:before {
+  content: "\e917";
+}
+.ea-regenerate:before {
+  content: "\e918";
+}
+.ea-right-arrow:before {
+  content: "\e919";
+}
+.ea-settings:before {
+  content: "\e91a";
+}
+.ea-share-fill:before {
+  content: "\e91b";
+}
+.ea-star-2:before {
+  content: "\e91c";
+}
+.ea-star-half:before {
+  content: "\e91d";
+}
+.ea-star:before {
+  content: "\e91e";
+}
+.ea-sun:before {
+  content: "\e91f";
+}
+.ea-support:before {
+  content: "\e920";
+}
+.ea-tool:before {
+  content: "\e921";
+}
+.ea-star-lite:before {
+  content: "\e931";
+}
+.ea-figma-to-elementor:before {
+  content: "\e932";
+}

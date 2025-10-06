@@ -6,7 +6,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit();
 } // Exit if accessed directly
 
-use Elementor\Icons_Manager;
 use \Elementor\Plugin;
 use Essential_Addons_Elementor\Classes\Helper;
 
@@ -22,6 +21,7 @@ trait Elements {
 		if ( version_compare( ELEMENTOR_VERSION, '3.5.0', '>=' ) ) {
 			$controls_manager->register( new \Essential_Addons_Elementor\Controls\Select2() );
 			$controls_manager->add_group_control( 'eael-background', new \Essential_Addons_Elementor\Controls\EAEL_Background() );
+			$controls_manager->register( new \Essential_Addons_Elementor\Controls\EAEL_Choose() );
 		} else {
 			$controls_manager->register_control( 'eael-select2', new \Essential_Addons_Elementor\Controls\Select2() );
 		}
@@ -109,7 +109,9 @@ trait Elements {
 				continue;
 			}
 
-			new $extension['class'];
+			if ( class_exists( $extension['class'] ) ) {
+				new $extension['class']; // Safely instantiate
+			}
 		}
 	}
 
@@ -164,6 +166,12 @@ trait Elements {
 			[
 				'name'       => 'eael-flip-carousel',
 				'title'      => __( 'Flip Carousel', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eaicon-flip-carousel',
+				'categories' => '["essential-addons-elementor"]',
+			],
+			[
+				'name'       => 'eael-figma-to-elementor',
+				'title'      => __( 'Figma to Elementor Converter', 'essential-addons-for-elementor-lite' ),
 				'icon'       => 'eaicon-flip-carousel',
 				'categories' => '["essential-addons-elementor"]',
 			],
@@ -270,6 +278,12 @@ trait Elements {
 				'categories' => '["essential-addons-elementor"]',
 			],
 			[
+				'name'       => 'eael-multicolumn-pricing-table',
+				'title'      => __( 'Multicolumn Pricing Table', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eaicon-multicolumn-pricing',
+				'categories' => '["essential-addons-elementor"]',
+			],
+			[
 				'name'       => 'eael-protected-content',
 				'title'      => __( 'Protected Content', 'essential-addons-for-elementor-lite' ),
 				'icon'       => 'eaicon-protected-content',
@@ -344,7 +358,19 @@ trait Elements {
 			[
 				'name'       => 'fancy-chart',
 				'title'      => __( 'Fancy Chart', 'essential-addons-for-elementor-lite' ),
-				'icon'       => 'eicon-elementor-circle',
+				'icon'       => 'eaicon-fancy-chart',
+				'categories' => '["essential-addons-elementor"]',
+			],
+			[
+				'name'       => 'stacked-cards',
+				'title'      => __( 'Stacked Cards', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eaicon-stacked-cards',
+				'categories' => '["essential-addons-elementor"]',
+			],
+			[
+				'name'       => 'sphere-photo-viewer',
+				'title'      => __( '360 Degree Photo Viewer', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eaicon-photo-sphere',
 				'categories' => '["essential-addons-elementor"]',
 			],
 		] );
@@ -377,7 +403,7 @@ trait Elements {
 
 				if( is_array( $page_body_classes ) && count( $page_body_classes ) ){
 					foreach( $page_body_classes as $page_body_class){
-						if ( strpos( $page_body_class, 'elementor-page-' ) !== FALSE ) {
+						if ( is_string($page_body_class) && strpos( $page_body_class, 'elementor-page-' ) !== FALSE ) {
 							$template_id = intval( str_replace('elementor-page-', '', $page_body_class) );
 						} 
 					}
@@ -398,7 +424,7 @@ trait Elements {
 			return;
 		}
 
-		if ( ! is_singular() && ! is_archive() ) {
+		if ( ! ( is_singular() || is_archive() || is_home() || is_front_page() || is_search() ) ) {
 			return;
 		}
 
@@ -406,7 +432,13 @@ trait Elements {
 		$html            = '';
 		$global_settings = $settings_data = $document = [];
 
-		if ( $this->get_settings( 'reading-progress' ) || $this->get_settings( 'table-of-content' ) || $this->get_settings( 'scroll-to-top' ) ) {
+		if ( is_front_page() ) {
+			$post_id = get_option('page_on_front');
+		} else if ( is_home() ) {
+			$post_id = get_option('page_for_posts');
+		}
+		
+		if ( $this->get_settings( 'reading-progress' ) || $this->get_settings( 'table-of-content' ) || $this->get_settings( 'scroll-to-top' ) || $this->get_settings( 'custom-cursor' ) ) {
 			$html            = '';
 			$global_settings = get_option( 'eael_global_settings' );
 
@@ -512,6 +544,8 @@ trait Elements {
 				$support_tag                     = (array) $settings_data['eael_ext_toc_supported_heading_tag'];
 				$support_tag                     = implode( ',', array_filter( $support_tag ) );
 				$position                        = $settings_data['eael_ext_toc_position'];
+				$is_mobile_on                    = isset( $settings_data['eael_ext_toc_position_mobile'] ) ? $settings_data['eael_ext_toc_position_mobile'] : 'no';
+				$mobile_position                 = isset( $settings_data['eael_ext_toc_position_mobile_top_bottom'] ) ? $settings_data['eael_ext_toc_position_mobile_top_bottom'] : $position;
 				$page_offset                     = ! empty( $settings_data['eael_ext_toc_main_page_offset'] ) ? $settings_data['eael_ext_toc_main_page_offset']['size'] : 0;
 				$close_bt_text_style             = $settings_data['eael_ext_toc_close_button_text_style'];
 				$auto_collapse                   = $settings_data['eael_ext_toc_auto_collapse'];
@@ -523,7 +557,7 @@ trait Elements {
 				$toc_collapse                    = $settings_data['eael_ext_toc_collapse_sub_heading'];
 				$list_icon                       = $settings_data['eael_ext_toc_list_icon'];
 				$toc_title                       = $settings_data['eael_ext_toc_title'];
-				$toc_title_tag                   = $settings_data['eael_ext_toc_title_tag'];
+				$toc_title_tag                   = isset( $settings_data['eael_ext_toc_title_tag'] ) ? $settings_data['eael_ext_toc_title_tag'] : 'h2';
 				$icon_check                      = $settings_data['eael_ext_table_of_content_header_icon'];
 				$sticky_scroll                   = $settings_data['eael_ext_toc_sticky_scroll'];
 				$hide_mobile                     = $settings_data['eael_ext_toc_hide_in_mobile'];
@@ -534,6 +568,10 @@ trait Elements {
 				$el_class .= ( $close_bt_text_style == 'bottom_to_top' ) ? ' eael-bottom-to-top' : ' ';
 				$el_class .= ( $auto_collapse == 'yes' ) ? ' eael-toc-auto-collapse collapsed' : ' ';
 				$el_class .= ( $hide_mobile == 'yes' ) ? ' eael-toc-mobile-hide' : ' ';
+
+				if( 'yes' === $is_mobile_on ) {
+					$el_class .= ( 'top' === $mobile_position ) ? ' eael-toc-top' : ' eael-toc-bottom';
+				}
 
 				$toc_style_class = ' eael-toc-list-' . $toc_style;
 				$toc_style_class .= ( $toc_collapse == 'yes' ) ? ' eael-toc-collapse' : ' ';
@@ -651,6 +689,12 @@ trait Elements {
 				}
 			}
 		}
+
+		//Custom Cursor
+		if ( $this->get_settings( 'custom-cursor' ) == true ) {
+			do_action( 'eael/custom_cursor/page_render', $document, $global_settings );
+		}
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		printf( '%1$s', $html );
 	}
 
@@ -872,7 +916,7 @@ trait Elements {
 	 * @return string|void
 	 */
 	public function progress_bar_local_css( $document_settings ) {
-		$eael_reading_progress_fill_color = isset( $document_settings['eael_ext_reading_progress_fill_color'] ) ? $document_settings['eael_ext_reading_progress_fill_color'] : '';
+		$eael_reading_progress_fill_color = Helper::eael_fetch_color_or_global_color($document_settings, 'eael_ext_reading_progress_fill_color');
 
 		$reading_progress_local_css = '';
 		$eael_reading_progress_id_selector = '#eael-reading-progress-' . get_the_ID();
@@ -946,8 +990,8 @@ trait Elements {
 
             .eael-ext-scroll-to-top-wrap .eael-ext-scroll-to-top-button svg {
                 fill: {$eael_stt_button_icon_color};
-                width: {$eael_stt_button_icon_svg_size_size}{$eael_stt_button_icon_svg_size_unit};
-                height: {$eael_stt_button_icon_svg_size_size}{$eael_stt_button_icon_svg_size_unit};
+                width: {$eael_stt_button_icon_size_size}{$eael_stt_button_icon_size_unit};
+                height: {$eael_stt_button_icon_size_size}{$eael_stt_button_icon_size_unit};
             } 
         ";
 

@@ -1,6 +1,6 @@
-ea.hooks.addAction("init", "ea", () => {
+eael.hooks.addAction("init", "ea", () => {
 	const productGrid = function ($scope, $) {
-		ea.hooks.doAction("quickViewAddMarkup",$scope,$);
+		eael.hooks.doAction("quickViewAddMarkup",$scope,$);
 		const $wrap = $scope.find("#eael-product-grid"); // cache wrapper
 		const widgetId = $wrap.data("widget-id");
 		const pageId = $wrap.data("page-id");
@@ -257,7 +257,7 @@ ea.hooks.addAction("init", "ea", () => {
 			});
 		});
 
-		ea.hooks.doAction("quickViewPopupViewInit",$scope,$);
+		eael.hooks.doAction("quickViewPopupViewInit",$scope,$);
 
 		if (isEditMode) {
 			$(".eael-product-image-wrap .woocommerce-product-gallery").css(
@@ -280,7 +280,47 @@ ea.hooks.addAction("init", "ea", () => {
 			$("body").append(markup);
 		}
 
+		// Secondary Image Hover functionality
+		let dataSrc = dataSrcHover = srcset = srcsetHover = '';
+		$(document).on("mouseover", ".eael-product-wrap", function () {
+			var currentDevice = $('body').attr('data-elementor-device-mode');
+			var is_enabled = $scope.find(".products.eael-post-appender").attr('data-ssi-'+currentDevice);
+
+			if( "yes" !== is_enabled ) return;
+
+			dataSrc = $(this).data("src");
+			dataSrcHover = $(this).data("src-hover");
+			srcset = $(this).find('img').attr('srcset');
+
+			if( dataSrcHover ){
+				$(this).find('img').attr('srcset-hover', srcset);
+
+				$(this).find('img').attr( 'src', dataSrcHover );
+				$(this).find('img').attr('srcset', dataSrcHover );
+			}
+		  }).on( "mouseout", ".eael-product-wrap", function () {
+			var currentDevice = $('body').attr('data-elementor-device-mode');
+			var is_enabled = $scope.find(".products.eael-post-appender").attr('data-ssi-'+currentDevice);
+
+			if( "yes" !== is_enabled ) return;
+
+			dataSrc = $(this).data("src");
+			dataSrcHover = $(this).data("src-hover")
+			srcsetHover = $(this).find('img').attr('srcset-hover');
+
+			if( dataSrcHover ){
+				$(this).find('img').attr( 'src', dataSrc );
+				$(this).find('img').attr('srcset', srcsetHover );
+				$(this).find('img').attr('srcset-hover', '' );
+			}
+		});
+
 	};
+
+	if ( eael.elementStatusCheck('eaelProductGridLoad') && window.forceFullyRun === undefined ) {
+        return;
+    }
+
 	elementorFrontend.hooks.addAction(
 		"frontend/element_ready/eicon-woocommerce.default",
 		productGrid

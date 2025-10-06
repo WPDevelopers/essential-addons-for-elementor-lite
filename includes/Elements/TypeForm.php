@@ -2,6 +2,8 @@
 
 namespace Essential_Addons_Elementor\Elements;
 
+use Essential_Addons_Elementor\Classes\Helper;
+
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
     exit;
@@ -46,6 +48,10 @@ class TypeForm extends Widget_Base {
             'ea',
             'essential addons'
         ];
+    }
+
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
     }
 
     public function get_custom_help_url () {
@@ -365,8 +371,8 @@ class TypeForm extends Widget_Base {
             'hideHeaders' => ($this->get_settings('eael_typeform_hideheaders') == 'yes'),
             'opacity'     => $this->get_settings('eael_typeform_opacity')['size']
         ];
-        echo '<div data-typeform="'.htmlspecialchars(json_encode($data), ENT_QUOTES,
-                'UTF-8').'" '.$this->get_render_attribute_string('eael_typeform_wrapper').'></div>';
+        echo '<div data-typeform="'. esc_attr( htmlspecialchars(json_encode($data), ENT_QUOTES,
+                'UTF-8') ) .'" '; $this->print_render_attribute_string('eael_typeform_wrapper'); echo'></div>';
     }
 
 }

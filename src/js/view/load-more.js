@@ -1,7 +1,7 @@
 (function ($) {
 	"use strict";
 
-	ea.getToken();
+	eael.getToken();
 
 	$(document).on("click", ".eael-load-more-button", function (e) {
 		e.preventDefault();
@@ -57,7 +57,22 @@
 				var $gallery_page = 1 + 1;
 
 			} else {
-				var $gallery_page = parseInt($('.eael-cat-tab li a.active', $scope).data("page")) + 1;
+				let active_tab = $('.eael-cat-tab li a.active', $scope);
+				var paging = parseInt(active_tab.data("page"));
+				if( isNaN( paging ) ) {
+					if ( active_tab.length > 0 ){
+						paging = 1;
+						active_tab.data("page", 1);
+					} else {
+						let load_more_btn = $('.eael-load-more-button', $scope);
+						var paging = parseInt(load_more_btn.data("page"));
+						if( isNaN( paging ) ){
+							paging = 1;
+						}
+					}
+				} 
+				
+				var $gallery_page = paging + 1;
 			}
 
 			$data.taxonomy = $taxonomy;
@@ -126,10 +141,16 @@
 			success: function (response) {
 				var $content = $(response);
 				$this.removeAttr('disabled');
+
 				if ( $content.hasClass("no-posts-found") || $content.length === 0 ) {
+					
 					if ($data.class == "Essential_Addons_Elementor\\Elements\\Woo_Product_Gallery") {
 						$this.removeClass('button--loading').addClass('hide-load-more');
 						$LoaderSpan.html($text);
+						
+						if( $this.parent().hasClass('eael-infinity-scroll') ){
+							$this.parent().remove();
+						}
 					} else if ($data.class == "Essential_Addons_Elementor\\Pro\\Elements\\Dynamic_Filterable_Gallery") {
 						$this.removeClass('button--loading');
 						$LoaderSpan.html($text);
@@ -184,10 +205,15 @@
 								$(this).wc_product_gallery();
 							});
 						}
+						
+						if( $page >= $max_page ){
+							$this.remove();
+						}
 					} else {
 						$(".eael-post-appender", $scope).append($content);
-
-						if ($layout == "masonry") {
+						var settings = $(".eael-post-appender", $scope).data('settings');
+						
+						if ($layout == "masonry" || settings?.has_filter) {
 							var $isotope = $(
 								".eael-post-appender",
 								$scope
@@ -217,16 +243,39 @@
 						if (found_posts.hasClass('found_posts') && found_posts.text() - obj.posts_per_page < 1) {
 							filterable_gallery_load_more_btn($this);
 						}
-					} else {
-						if ($max_page && $data.page >= $max_page) {
-							$this.addClass('hide-load-more');
-						}
+						found_posts.remove();
+
 					}
 				}
+
+				if ( $max_page && $data.page >= $max_page ) {
+					$this.remove();
+				}
+				
 			},
 			error: function (response) {
 				console.log(response);
 			},
+		});
+	});
+
+	$(window).on('scroll', function(){
+		var scrollElements = $('.eael-infinity-scroll');
+
+		if ( scrollElements.length < 1 ) return false;
+
+		$.each(scrollElements, function(index, element){
+			var scrollElement = $(element);
+			var offset        = scrollElement.data('offset');
+			var elementTop    = scrollElement.offset().top;
+			var elementBottom = elementTop + scrollElement.outerHeight() - ( offset );
+			var viewportTop   = $(window).scrollTop();
+			var viewportHalf  = viewportTop + $(window).height() - ( offset );
+			var inView        = elementBottom > viewportTop && elementTop < viewportHalf;
+
+			if( inView ){
+				$(".eael-load-more-button", scrollElement ).trigger('click');
+			}
 		});
 	});
 })(jQuery);
