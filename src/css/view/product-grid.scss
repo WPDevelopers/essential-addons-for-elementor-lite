@@ -25,6 +25,16 @@
                     //margin-left: 10px !important;
                     //margin-right: 10px !important;
                 }
+                .eael-product-sold-count-progress-bar-wrapper{
+                    background-color: #f1f1f1;
+                    border-radius: 0 10px 10px 0;
+                    overflow: hidden;
+                }
+                .eael-product-sold-count-progress-bar{
+                    background-color: #2196F3;
+                    height: 10px;
+                    border-radius: 0 10px 10px 0;
+                }
                 .eael-wc-compare{
                     display: inline-flex;
                     align-items: center;
@@ -68,6 +78,20 @@
                             font-family: "Font Awesome 5 Free";
                             font-weight: 900;
                         }
+                    }
+                }
+
+                // Secondary Image Hover Effect
+                .eael-product-wrap {
+                    position: relative;
+                    overflow: hidden;
+
+                    img {
+                        transition: opacity 0.3s ease;
+                        backface-visibility: hidden;
+                        width: 100%;
+                        height: auto;
+                        display: block;
                     }
                 }
             }
@@ -2392,6 +2416,9 @@
                 }
             }
         }
+        .eael-sold-count-number{
+            text-align: left;
+        }
     }
 }
 
@@ -2727,7 +2754,7 @@
         line-height: 0;
     }
     #content {
-        .elementor-widget-container{
+        .elementor-widget-eicon-woocommerce{
             .eael-product-grid,
             .eael-post-grid{
                 &.grid,&.list{

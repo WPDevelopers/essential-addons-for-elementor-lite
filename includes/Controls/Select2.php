@@ -73,7 +73,9 @@ class Select2 extends Base_Data_Control
                 <select id="<?php echo esc_attr( $control_uid ); ?>" {{ multiple }} class="ea-select2" data-setting="{{ data.name }}"></select>
             </div>
         </div>
-        <#
+		<# if ( data.source_type === 'elementor_library' ) { #>
+		<a href="#" target="_blank" class="elementor-button elementor-edit-template" style="margin-top:0px;"><i class="eicon-pencil" style="margin-left:10px;"></i>Edit Template</a>
+		<# }
         ( function( $ ) {
         $( document.body ).trigger( 'eael_select2_init',{currentID:data.controlValue,data:data,controlUID:controlUID,multiple:data.multiple} );
         }( jQuery ) );

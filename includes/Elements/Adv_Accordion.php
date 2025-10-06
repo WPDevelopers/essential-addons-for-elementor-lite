@@ -89,7 +89,15 @@ class Adv_Accordion extends Widget_Base
             }
         }
 
+        if( ! $is_dynamic_content ) {
+            $is_dynamic_content = 'yes' === $this->get_settings( 'eael_adv_accordion_faq_schema_show' );
+        }
+
         return $is_dynamic_content;
+    }
+
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
     }
 
     public function get_custom_help_url()
@@ -1270,12 +1278,13 @@ class Adv_Accordion extends Widget_Base
                 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                 echo $this->parse_text_editor( $tab['eael_adv_accordion_tab_content'] );
             } elseif ('template' == $tab['eael_adv_accordion_text_type']) {
-                if ( ! empty( $tab['eael_primary_templates'] ) ) {
+                if ( ! empty( $tab['eael_primary_templates'] ) && Helper::is_elementor_publish_template( $tab['eael_primary_templates'] ) ) {
                     // WPML Compatibility
                     if ( ! is_array( $tab['eael_primary_templates'] ) ) {
                         $tab['eael_primary_templates'] = apply_filters( 'wpml_object_id', $tab['eael_primary_templates'], 'wp_template', true );
                     }
-                    
+
+	                Helper::eael_onpage_edit_template_markup( get_the_ID(), $tab['eael_primary_templates'] );
                     // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     echo Plugin::$instance->frontend->get_builder_content( $tab['eael_primary_templates'], true ); 
                 }
