@@ -3139,13 +3139,54 @@ class Event_Calendar extends Widget_Base
         $this->add_control(
             'event_popup_content_color',
             [
-                'label' => __('Content Color', 'essential-addons-for-elementor-lite'),
+                'label' => __('Color', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eaelec-modal-body' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eaelec-modal-body *' => 'color: {{VALUE}};',
                 ],
                 'default' => '#555'
+            ]
+        );
+
+        $this->add_control(
+            '_heading_thumbnail_style',
+            [
+                'label' => esc_html__( 'Thumbnail', 'text-domain' ),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+                'condition' => [
+                    'eael_event_show_thumbnail' => 'yes',
+                    'eael_event_thumbnail_position' => [ 'body-left', 'body-right' ]
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'event_popup_thumbnail_border',
+                'selector' => '{{WRAPPER}} .eaelec-modal-body-img',
+                'condition' => [
+                    'eael_event_show_thumbnail' => 'yes',
+                    'eael_event_thumbnail_position' => [ 'body-left', 'body-right' ]
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'event_popup_thumbnail_border_radius',
+            [
+                'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%' ],
+                'selectors'  => [
+                    '{{WRAPPER}} .eaelec-modal-body-img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'eael_event_show_thumbnail' => 'yes',
+                    'eael_event_thumbnail_position' => [ 'body-left', 'body-right' ]
+                ]
             ]
         );
 
@@ -3573,7 +3614,6 @@ class Event_Calendar extends Widget_Base
     {
     	$event_details_text = $this->get_settings('eael_event_details_text');
         $html = '<div id="eaelecModal" class="eaelec-modal eael-zoom-in">
-            <div class="eael-ec-modal-bg"></div>
             <div class="eaelec-modal-content">
                 <div class="eaelec-modal-header">
                     <div class="eaelec-modal-close"><span><i class="fas fa-times"></i></span></div>

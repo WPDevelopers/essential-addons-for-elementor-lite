@@ -128,7 +128,7 @@
 }
 .eael-event-calendar-wrapper .eaelec-modal-header.eaelec-img-header {
   background-size: cover;
-  background-position: center center;
+  background-position: top center;
   background-repeat: no-repeat;
 }
 .eael-event-calendar-wrapper .eaelec-modal-header h2 {
