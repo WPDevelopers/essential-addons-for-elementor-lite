@@ -223,6 +223,7 @@ class Vertical_Text_Orientation {
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'background',
 				'options' => [
+					'normal' => esc_html__( 'Normal Type', 'essential-addons-for-elementor-lite' ),
 					'background' => esc_html__( 'Background Type', 'essential-addons-for-elementor-lite' ),
 					'gradient'   => esc_html__( 'Gradient Type', 'essential-addons-for-elementor-lite' ),
 				],
@@ -236,7 +237,7 @@ class Vertical_Text_Orientation {
 			\Elementor\Group_Control_Background::get_type(),
 			[
 				'name'     => 'eael_vto_writing_styling_background',
-				'types'    => [ 'classic', 'gradient' ],
+				'types'    => [ 'classic' ],
 				'selector' => '{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title',
                 'condition' => [
 					'eael_vertical_text_orientation_switch' => 'yes',
@@ -317,6 +318,8 @@ class Vertical_Text_Orientation {
                 ],
 				'condition' => [
 					'eael_vertical_text_orientation_switch' => 'yes',
+					'eael_vto_writing_styling_type' => 'background',
+					'eael_vto_writing_styling_background_background' => 'classic',
 				],
 			]
 		);
