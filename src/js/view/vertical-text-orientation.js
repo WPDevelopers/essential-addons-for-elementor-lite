@@ -17,7 +17,7 @@ let verticalTextOrientation = function ($scope, $) {
             $.each($el, function (i, el) {
                let $getSettings = el.attributes.settings.attributes;
                if (el.attributes.elType === 'widget') {
-                  if ($getSettings['eael_vertical_text_orientation_switch'] === 'yes') {
+                  if ($getSettings['eael_vertical_text_orientation_switch'] === 'yes' && $getSettings['eael_vto_writing_styling_type'] === 'gradient') {
                      eaelEditModeSettings[el.attributes.id] = el.attributes.settings.attributes;
                   }
                }
