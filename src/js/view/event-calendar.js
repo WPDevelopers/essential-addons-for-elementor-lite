@@ -16,6 +16,7 @@ var EventCalendar = function ($scope, $) {
 		popupDateFormate = element.data("popup_date_format"),
 		monthColumnHeaderFormat = element.data("monthcolumnheaderformat"),
 		weekColumnHeaderFormat = element.data("weekcolumnheaderformat"),
+		thumbnailPosition = element.data("thumbnail_position"),
 		time_format = element.data("time_format") == "yes" ? true : false;
 
 	if ( wrapper.hasClass( 'layout-calendar' ) ){
@@ -237,6 +238,36 @@ var EventCalendar = function ($scope, $) {
 
 							$(".eaelec-modal-header h2").html(DOMPurify.sanitize(event.title));
 							$(".eaelec-modal-body").html(DOMPurify.sanitize(event.extendedProps.description));
+							if (thumbnailPosition) {
+								if (event.extendedProps.imageUrl) {
+									if (thumbnailPosition === 'header') {
+										$(".eaelec-modal-header").addClass('eaelec-img-header').css('background-image', 'url(' + event.extendedProps.imageUrl + ')');
+									} else if (thumbnailPosition === 'background') {
+										$(".eaelec-modal-overlay").remove();
+										$(".eaelec-modal-content").append('<div class="eaelec-modal-overlay"></div>')
+											.addClass('eaelec-bg-img')
+											.css('background-image', 'url(' + event.extendedProps.imageUrl + ')');
+									} else if (thumbnailPosition === 'body-bg') {
+										$(".eaelec-modal-overlay").remove();
+										let bodyContent = $(".eaelec-modal-body").html();
+										$(".eaelec-modal-body")
+											.addClass('eaelec-bg-img')
+											.css('background-image', 'url(' + event.extendedProps.imageUrl + ')')
+											.html('<div class="eaelec-modal-body-content">' + bodyContent + '</div><div class="eaelec-modal-overlay"></div>');
+									} else if (thumbnailPosition === 'body-left') {
+										var bodyContent = '<div class="eaelec-modal-body-content">' + $(".eaelec-modal-body").html() + '</div>';
+										$(".eaelec-modal-body").addClass('eaelec-img-inside').html('<img class="eaelec-modal-body-img" src="' + event.extendedProps.imageUrl + '" alt="' + event.title + '">' + bodyContent);
+									} else if (thumbnailPosition === 'body-right') {
+										var bodyContent = '<div class="eaelec-modal-body-content">' + $(".eaelec-modal-body").html() + '</div>';
+										$(".eaelec-modal-body").addClass('eaelec-img-inside').html(bodyContent +'<img class="eaelec-modal-body-img" src="' + event.extendedProps.imageUrl + '" alt="' + event.title + '">');
+									}
+								} else {
+									$(".eaelec-modal-header").removeClass('eaelec-img-header').css('background-image', 'none');
+									$(".eaelec-modal-content").removeClass('eaelec-bg-img').css('background-image', 'none');
+									$(".eaelec-modal-body").removeClass('eaelec-img-inside eaelec-bg-img').css('background-image', 'none');
+									$(".eaelec-modal-overlay").remove();
+								}
+							}
 							if (event.extendedProps.description.length < 1) {
 								$(".eaelec-modal-body").css("height", "auto");
 							} else {
