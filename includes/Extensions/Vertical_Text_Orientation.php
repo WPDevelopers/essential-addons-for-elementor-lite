@@ -12,9 +12,6 @@ class Vertical_Text_Orientation {
 	 * Initialize hooks
 	 */
 	public function __construct() {
-		add_action( 'elementor/element/container/section_layout/after_section_end', [ $this, 'register_controls' ] );
-		add_action( 'elementor/element/column/section_advanced/after_section_end', [ $this, 'register_controls' ] );
-		add_action( 'elementor/element/section/section_advanced/after_section_end', [ $this, 'register_controls' ] );
 		add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'register_controls' ] );
 		add_action( 'elementor/frontend/before_render', [ $this, 'before_render' ], 100 );
 	}
@@ -228,6 +225,9 @@ class Vertical_Text_Orientation {
 				'options' => [
 					'background' => esc_html__( 'Background Type', 'essential-addons-for-elementor-lite' ),
 					'gradient'   => esc_html__( 'Gradient Type', 'essential-addons-for-elementor-lite' ),
+				],
+                'condition' => [
+					'eael_vertical_text_orientation_switch' => 'yes',
 				],
 			]
 		);
