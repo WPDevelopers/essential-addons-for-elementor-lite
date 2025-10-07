@@ -918,6 +918,9 @@ class Event_Calendar extends Widget_Base
                 'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
                 'return_value' => 'yes',
                 'default'      => 'no',
+                'condition' => [
+                    'eael_event_calendar_type' => 'the_events_calendar'
+                ]
             ]
         );
 
@@ -951,7 +954,8 @@ class Event_Calendar extends Widget_Base
                 'default'   => 'body-right',
                 'toggle'    => false,
                 'condition' => [
-                    'eael_event_show_thumbnail' => 'yes'
+                    'eael_event_show_thumbnail' => 'yes',
+                    'eael_event_calendar_type' => 'the_events_calendar'
                 ]
             ]
         );
@@ -3157,7 +3161,8 @@ class Event_Calendar extends Widget_Base
                 'separator' => 'before',
                 'condition' => [
                     'eael_event_show_thumbnail' => 'yes',
-                    'eael_event_thumbnail_position' => [ 'body-left', 'body-right' ]
+                    'eael_event_thumbnail_position' => [ 'body-left', 'body-right' ],
+                    'eael_event_calendar_type' => 'the_events_calendar'
                 ]
             ]
         );
@@ -3169,7 +3174,8 @@ class Event_Calendar extends Widget_Base
                 'selector' => '{{WRAPPER}} .eaelec-modal-body-img',
                 'condition' => [
                     'eael_event_show_thumbnail' => 'yes',
-                    'eael_event_thumbnail_position' => [ 'body-left', 'body-right' ]
+                    'eael_event_thumbnail_position' => [ 'body-left', 'body-right' ],
+                    'eael_event_calendar_type' => 'the_events_calendar'
                 ]
             ]
         );
@@ -3185,7 +3191,8 @@ class Event_Calendar extends Widget_Base
                 ],
                 'condition' => [
                     'eael_event_show_thumbnail' => 'yes',
-                    'eael_event_thumbnail_position' => [ 'body-left', 'body-right' ]
+                    'eael_event_thumbnail_position' => [ 'body-left', 'body-right' ],
+                    'eael_event_calendar_type' => 'the_events_calendar'
                 ]
             ]
         );
