@@ -221,7 +221,7 @@ class Vertical_Text_Orientation {
 			[
 				'label'   => esc_html__( 'Select Style', 'essential-addons-for-elementor-lite' ),
 				'type'    => Controls_Manager::SELECT,
-				'default' => 'background',
+				'default' => 'normal',
 				'options' => [
 					'normal' => esc_html__( 'Normal Type', 'essential-addons-for-elementor-lite' ),
 					'background' => esc_html__( 'Background Type', 'essential-addons-for-elementor-lite' ),
@@ -319,6 +319,43 @@ class Vertical_Text_Orientation {
 				'condition' => [
 					'eael_vertical_text_orientation_switch' => 'yes',
 					'eael_vto_writing_styling_type' => 'background',
+					'eael_vto_writing_styling_background_background' => 'classic',
+				],
+			]
+		);
+
+        $element->add_control(
+			'eael_vto_writing_styling_text_animation',
+			[
+				'label'        => esc_html__( 'Animation', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+                'selectors' => [
+                    '{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title' => 'animation: eaelAnimationVTO 5s linear infinite;',
+                ],
+				'condition' => [
+					'eael_vertical_text_orientation_switch' => 'yes',
+                    'eael_vto_writing_styling_type' => ['gradient'],
+				],
+			]
+		);
+
+        $element->add_control(
+			'eael_vto_writing_styling_text_animation_bg',
+			[
+				'label'        => esc_html__( 'Animation', 'essential-addons-for-elementor-lite' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'essential-addons-for-elementor-lite' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
+				'return_value' => 'yes',
+                'selectors' => [
+                    '{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title' => 'animation: eaelAnimationVTO 30s linear infinite;',
+                ],
+				'condition' => [
+					'eael_vertical_text_orientation_switch' => 'yes',
+                    'eael_vto_writing_styling_type' => ['background'],
 					'eael_vto_writing_styling_background_background' => 'classic',
 				],
 			]

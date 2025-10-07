@@ -88,7 +88,7 @@ let verticalTextOrientation = function ($scope, $) {
                         $(
                            `.elementor-element-${$scopeId} .elementor-heading-title`
                         ).css({
-                           background: linearGradient,
+                           background: linearGradient + " -100% / 200%",
                            "-webkit-background-clip": "text",
                            "-webkit-text-fill-color": "transparent",
                            "background-clip": "text",
@@ -123,7 +123,7 @@ let verticalTextOrientation = function ($scope, $) {
             )})`;
 
             $(`.elementor-element-${$scopeId} .elementor-heading-title`).css({
-               background: linearGradient,
+               background: linearGradient + " -100% / 200%",
                "-webkit-background-clip": "text",
                "-webkit-text-fill-color": "transparent",
                "background-clip": "text",
