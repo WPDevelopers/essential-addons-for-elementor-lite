@@ -2,7 +2,6 @@
 
 namespace Essential_Addons_Elementor\Elements;
 
-use Elementor\Controls_Manager;
 use Elementor\Widget_Base;
 use Essential_Addons_Elementor\Classes\Helper;
 use Essential_Addons_Elementor\Traits\Woo_Product_Comparable;
