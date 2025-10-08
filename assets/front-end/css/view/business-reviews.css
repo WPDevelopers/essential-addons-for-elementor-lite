@@ -135,6 +135,14 @@
   text-align: center;
   margin-top: 20px;
 }
+.eael-business-reviews-wrapper .eael-google-review-rating.eael-rating-position-top {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+.eael-business-reviews-wrapper .eael-google-review-rating.eael-rating-position-bottom {
+  margin-top: 20px;
+  margin-bottom: 0;
+}
 .eael-business-reviews-wrapper .swiper-container-wrap-dots-outside .swiper-pagination {
   position: static;
 }
