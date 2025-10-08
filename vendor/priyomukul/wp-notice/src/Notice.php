@@ -114,15 +114,17 @@ class Notice extends Base {
 	}
 
 	public function links( $links ) {
-		$_attributes = '';
 		$output      = '<ul style="display: flex; width: 100%; align-items: center;" class="notice-links ' . $this->app->id . '-notice-links">';
 		foreach ( $links as $link ) {
+			$_attributes = '';
 			$class = ! empty( $link['class'] ) ? $link['class'] : '';
 
 			if ( ! empty( $link['attributes'] ) ) {
-				$link['attributes']['target'] = '_top';
-				$_attributes                  = $this->attributes( $link['attributes'] );
-				$link['link']                 = '#';
+				$_attributes = $this->attributes( $link['attributes'] );
+			}
+
+			if( empty( $link['link'] ) ) {
+				$link['link'] = '#';
 			}
 
 			$output .= '<li style="margin: 0 15px 0 0;" class="notice-link-item ' . $class . '">';
@@ -141,24 +143,29 @@ class Notice extends Base {
 	}
 
 	public function attributes( $params = [] ) {
-		$_attr     = [];
-		$classname = 'dismiss-btn ';
-
-		if ( ! empty( $params['class'] ) ) {
-			$classname .= $params['class'];
-			unset( $params['class'] );
-		}
-
-		$_attr[] = 'class="' . esc_attr( $classname ) . '"';
-
-		$_attr[] = 'target="_blank"';
+		$_attr = [];
 		if ( ! empty( $params ) ) {
 			foreach ( $params as $key => $value ) {
-				$_attr[] = "$key='$value'";
+				$_attr[ $key ] = $value;
+
+				if( $key === 'class' ) {
+					$_attr[ $key ] = [ $value ];
+				}
+
+				if( in_array( $key, [ 'data-later', 'data-dismiss' ] ) ) {
+					$_attr[ 'class' ][] = 'dismiss-btn';
+				}
 			}
 		}
 
-		return \implode( ' ', $_attr );
+		$_attrs = [];
+		if( ! empty( $_attr ) ) {
+			foreach ( $_attr as $property => $value ) {
+				$_attrs[] = "$property=" . '"' . ( is_array( $value ) ? esc_attr( implode(' ', $value ) ) : esc_attr( $value ) ) . '"';
+			}
+		}
+
+		return implode( ' ', $_attrs );
 	}
 
 	public function url( $params = [] ) {

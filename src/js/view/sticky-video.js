@@ -233,9 +233,12 @@ function PositionStickyPlayer(p, h, w) {
 function PlayerPlay(a, b) {
   a.on("play", function (event) {
     eaelsvDomHeight = GetDomElementHeight(b);
-    jQuery(".eael-sticky-video-player2").removeAttr("id");
-    jQuery(".eael-sticky-video-player2").removeClass("out");
+    let isOut = b.hasClass('out');
+    jQuery(".eael-sticky-video-player2").removeAttr("id").removeClass("out");
     b.attr("id", "videobox");
+    if ( isOut ){
+      b.addClass('out');
+    }
     
     if ( players.length ) {
       players.forEach( function( other, index ) {

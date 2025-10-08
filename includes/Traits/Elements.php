@@ -6,7 +6,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit();
 } // Exit if accessed directly
 
-use Elementor\Icons_Manager;
 use \Elementor\Plugin;
 use Essential_Addons_Elementor\Classes\Helper;
 
@@ -171,6 +170,12 @@ trait Elements {
 				'categories' => '["essential-addons-elementor"]',
 			],
 			[
+				'name'       => 'eael-figma-to-elementor',
+				'title'      => __( 'Figma to Elementor Converter', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eaicon-flip-carousel',
+				'categories' => '["essential-addons-elementor"]',
+			],
+			[
 				'name'       => 'eael-google-map',
 				'title'      => __( 'Google Map', 'essential-addons-for-elementor-lite' ),
 				'icon'       => 'eaicon-advanced-google-maps',
@@ -273,6 +278,12 @@ trait Elements {
 				'categories' => '["essential-addons-elementor"]',
 			],
 			[
+				'name'       => 'eael-multicolumn-pricing-table',
+				'title'      => __( 'Multicolumn Pricing Table', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eaicon-multicolumn-pricing',
+				'categories' => '["essential-addons-elementor"]',
+			],
+			[
 				'name'       => 'eael-protected-content',
 				'title'      => __( 'Protected Content', 'essential-addons-for-elementor-lite' ),
 				'icon'       => 'eaicon-protected-content',
@@ -347,7 +358,19 @@ trait Elements {
 			[
 				'name'       => 'fancy-chart',
 				'title'      => __( 'Fancy Chart', 'essential-addons-for-elementor-lite' ),
-				'icon'       => 'eicon-elementor-circle',
+				'icon'       => 'eaicon-fancy-chart',
+				'categories' => '["essential-addons-elementor"]',
+			],
+			[
+				'name'       => 'stacked-cards',
+				'title'      => __( 'Stacked Cards', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eaicon-stacked-cards',
+				'categories' => '["essential-addons-elementor"]',
+			],
+			[
+				'name'       => 'sphere-photo-viewer',
+				'title'      => __( '360 Degree Photo Viewer', 'essential-addons-for-elementor-lite' ),
+				'icon'       => 'eaicon-photo-sphere',
 				'categories' => '["essential-addons-elementor"]',
 			],
 		] );
@@ -380,7 +403,7 @@ trait Elements {
 
 				if( is_array( $page_body_classes ) && count( $page_body_classes ) ){
 					foreach( $page_body_classes as $page_body_class){
-						if ( strpos( $page_body_class, 'elementor-page-' ) !== FALSE ) {
+						if ( is_string($page_body_class) && strpos( $page_body_class, 'elementor-page-' ) !== FALSE ) {
 							$template_id = intval( str_replace('elementor-page-', '', $page_body_class) );
 						} 
 					}
@@ -415,7 +438,7 @@ trait Elements {
 			$post_id = get_option('page_for_posts');
 		}
 		
-		if ( $this->get_settings( 'reading-progress' ) || $this->get_settings( 'table-of-content' ) || $this->get_settings( 'scroll-to-top' ) ) {
+		if ( $this->get_settings( 'reading-progress' ) || $this->get_settings( 'table-of-content' ) || $this->get_settings( 'scroll-to-top' ) || $this->get_settings( 'custom-cursor' ) ) {
 			$html            = '';
 			$global_settings = get_option( 'eael_global_settings' );
 
@@ -666,6 +689,12 @@ trait Elements {
 				}
 			}
 		}
+
+		//Custom Cursor
+		if ( $this->get_settings( 'custom-cursor' ) == true ) {
+			do_action( 'eael/custom_cursor/page_render', $document, $global_settings );
+		}
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		printf( '%1$s', $html );
 	}
 
