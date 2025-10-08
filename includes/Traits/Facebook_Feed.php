@@ -228,16 +228,7 @@ trait Facebook_Feed {
 			while ( ob_get_status() ) {
 				ob_end_clean();
 			}
-			if ( function_exists( 'gzencode' ) ) {
-				$response = gzencode( wp_json_encode( $data ) );
-				header( 'Content-Type: application/json; charset=utf-8' );
-				header( 'Content-Encoding: gzip' );
-				header( 'Content-Length: ' . strlen( $response ) );
-
-				printf( '%1$s', wp_kses( $response, HelperClass::eael_allowed_tags() ) );
-			} else {
-				wp_send_json( $data );
-			}
+			wp_send_json( $data );
 			wp_die();
 
 		}

@@ -16,20 +16,25 @@
   margin: 20px 0 10px 0;
   font-size: 36px;
 }
-.eael-dual-header .title,
-.eael-dual-header .title span {
+.eael-dual-header .eael-dch-title {
   font-size: 36px;
   font-weight: 700;
   text-transform: uppercase;
   line-height: 48px;
   margin: 10px 0;
 }
-.eael-dual-header .title.lead,
-.eael-dual-header .title span.lead {
+.eael-dual-header .eael-dch-title .eael-dch-title-text {
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 48px;
+  margin: 10px 0;
+}
+.eael-dual-header .eael-dch-title .eael-dch-title-text.eael-dch-title-lead {
   color: #1abc9c;
 }
-.eael-dual-header .title.lead.gradient-color,
-.eael-dual-header .title span.lead.gradient-color {
+.eael-dual-header .eael-dch-title .gradient-color,
+.eael-dual-header .eael-dch-title .eael-dch-title-gradient {
   -webkit-background-clip: text !important;
           background-clip: text !important;
   -webkit-text-fill-color: transparent !important;

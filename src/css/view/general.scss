@@ -1,8 +1,8 @@
 .clearfix::before,
 .clearfix::after {
-	content: " ";
-	display: table;
-	clear: both;
+   content: " ";
+   display: table;
+   clear: both;
 }
 
 // Common styles for slider elements
@@ -16,7 +16,7 @@
 .eael-post-carousel.nav-top-right,
 .eael-product-carousel.nav-top-left,
 .eael-product-carousel.nav-top-right {
-	padding-top: 40px;
+   padding-top: 40px;
 }
 
 // Contact forms common
@@ -27,165 +27,173 @@
 .eael-contact-form input[type="date"],
 .eael-contact-form input[type="number"],
 .eael-contact-form textarea {
-	background: #fff;
-	box-shadow: none;
-	-webkit-box-shadow: none;
-	float: none;
-	height: auto;
-	margin: 0;
-	outline: 0;
-	width: 100%;
+   background: #fff;
+   box-shadow: none;
+   -webkit-box-shadow: none;
+   float: none;
+   height: auto;
+   margin: 0;
+   outline: 0;
+   width: 100%;
 }
 
 .eael-contact-form input[type="submit"] {
-	border: 0;
-	float: none;
-	height: auto;
-	margin: 0;
-	padding: 10px 20px;
-	width: auto;
-	-webkit-transition: all 0.25s linear 0s;
-	transition: all 0.25s linear 0s;
+   border: 0;
+   float: none;
+   height: auto;
+   margin: 0;
+   padding: 10px 20px;
+   width: auto;
+   -webkit-transition: all 0.25s linear 0s;
+   transition: all 0.25s linear 0s;
 }
 
 .eael-contact-form.placeholder-hide input::-webkit-input-placeholder,
 .eael-contact-form.placeholder-hide textarea::-webkit-input-placeholder {
-	opacity: 0;
-	visibility: hidden;
+   opacity: 0;
+   visibility: hidden;
 }
 
 .eael-contact-form.placeholder-hide input::-moz-placeholder,
 .eael-contact-form.placeholder-hide textarea::-moz-placeholder {
-	opacity: 0;
-	visibility: hidden;
+   opacity: 0;
+   visibility: hidden;
 }
 
 .eael-contact-form.placeholder-hide input:-ms-input-placeholder,
 .eael-contact-form.placeholder-hide textarea:-ms-input-placeholder {
-	opacity: 0;
-	visibility: hidden;
+   opacity: 0;
+   visibility: hidden;
 }
 
 .eael-contact-form.placeholder-hide input:-moz-placeholder,
 .eael-contact-form.placeholder-hide textarea:-moz-placeholder {
-	opacity: 0;
-	visibility: hidden;
+   opacity: 0;
+   visibility: hidden;
 }
 
 .eael-custom-radio-checkbox input[type="checkbox"],
 .eael-custom-radio-checkbox input[type="radio"] {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	border-style: solid;
-	border-width: 0;
-	outline: none;
-	min-width: 1px;
-	width: 15px;
-	height: 15px;
-	background: #ddd;
-	padding: 3px;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   border-style: solid;
+   border-width: 0;
+   outline: none;
+   min-width: 1px;
+   width: 15px;
+   height: 15px;
+   background: #ddd;
+   padding: 3px;
 }
 
 .eael-custom-radio-checkbox input[type="checkbox"]:before,
 .eael-custom-radio-checkbox input[type="radio"]:before {
-	content: "";
-	width: 100%;
-	height: 100%;
-	padding: 0;
-	margin: 0;
-	display: block;
+   content: "";
+   width: 100%;
+   height: 100%;
+   padding: 0;
+   margin: 0;
+   display: block;
 }
 
 .eael-custom-radio-checkbox input[type="checkbox"]:checked:before,
 .eael-custom-radio-checkbox input[type="radio"]:checked:before {
-	background: #999;
-	-webkit-transition: all 0.25s linear 0s;
-	transition: all 0.25s linear 0s;
+   background: #999;
+   -webkit-transition: all 0.25s linear 0s;
+   transition: all 0.25s linear 0s;
 }
 
 .eael-custom-radio-checkbox input[type="radio"] {
-	border-radius: 50%;
+   border-radius: 50%;
 }
 
 .eael-custom-radio-checkbox input[type="radio"]:before {
-	border-radius: 50%;
+   border-radius: 50%;
 }
 
 .eael-post-elements-readmore-btn {
-	font-size: 12px;
-	font-weight: 500;
-	transition: all 300ms ease-in-out;
-	display: inline-block;
+   font-size: 12px;
+   font-weight: 500;
+   transition: all 300ms ease-in-out;
+   display: inline-block;
 }
 
 .elementor-lightbox .dialog-widget-content {
-	width: 100%;
-	height: 100%;
+   width: 100%;
+   height: 100%;
 }
 
 .eael-contact-form-align-left,
-.elementor-widget-eael-weform.eael-contact-form-align-left .eael-weform-container {
-	margin: 0 auto 0 0;
-	display: inline-block;
-    text-align: left;
+.elementor-widget-eael-weform.eael-contact-form-align-left
+   .eael-weform-container {
+   margin: 0 auto 0 0;
+   display: inline-block;
+   text-align: left;
 }
 
 .eael-contact-form-align-center,
-.elementor-widget-eael-weform.eael-contact-form-align-center .eael-weform-container {
-	float: none;
-	margin: 0 auto;
-	display: inline-block;
-    text-align: left;
+.elementor-widget-eael-weform.eael-contact-form-align-center
+   .eael-weform-container {
+   float: none;
+   margin: 0 auto;
+   display: inline-block;
+   text-align: left;
 }
 
 .eael-contact-form-align-right,
-.elementor-widget-eael-weform.eael-contact-form-align-right .eael-weform-container {
-	margin: 0 0 0 auto;
-	display: inline-block;
-    text-align: left;
+.elementor-widget-eael-weform.eael-contact-form-align-right
+   .eael-weform-container {
+   margin: 0 0 0 auto;
+   display: inline-block;
+   text-align: left;
 }
 
 .eael-force-hide {
-	display: none !important;
+   display: none !important;
 }
 
 .eael-d-none {
-    display: none !important;
+   display: none !important;
 }
 
 .eael-d-block {
-    display: block !important;
+   display: block !important;
 }
 
 .eael-h-auto {
-	height: auto !important;
+   height: auto !important;
 }
 
 //martfury theme compatibilty
 .theme-martfury {
-	.elementor-wc-products .woocommerce ul.products li.product .product-inner .mf-rating {
-		.eael-star-rating.star-rating {
-			~ .count {
-				display: none;
-			}
+   .elementor-wc-products
+      .woocommerce
+      ul.products
+      li.product
+      .product-inner
+      .mf-rating {
+      .eael-star-rating.star-rating {
+         ~ .count {
+            display: none;
+         }
 
-			display: none;
-		}
-	}
+         display: none;
+      }
+   }
 }
 
 .sr-only {
-	border: 0 !important;
-	clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
-	-webkit-clip-path: inset(50%) !important;
-		clip-path: inset(50%) !important;  /* 2 */
-	height: 1px !important;
-	margin: -1px !important;
-	overflow: hidden !important;
-	padding: 0 !important;
-	position: absolute !important;
-	width: 1px !important;
-	white-space: nowrap !important;            /* 3 */
+   border: 0 !important;
+   clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
+   -webkit-clip-path: inset(50%) !important;
+   clip-path: inset(50%) !important; /* 2 */
+   height: 1px !important;
+   margin: -1px !important;
+   overflow: hidden !important;
+   padding: 0 !important;
+   position: absolute !important;
+   width: 1px !important;
+   white-space: nowrap !important; /* 3 */
 }
 
 /* Onpage Edit Template */
@@ -202,90 +210,99 @@
 .elementor-widget-eael-protected-content .protected-content,
 .eael-offcanvas-content-visible .eael-offcanvas-body,
 .elementor-widget-eael-stacked-cards .eael-stacked-cards__item {
-	position: relative;
+   position: relative;
 
-	&:hover {
-		.eael-onpage-edit-template-wrapper {
-			display: block;
-		}
-	}
+   &:hover {
+      .eael-onpage-edit-template-wrapper {
+         display: block;
+      }
+   }
 }
 
 // Onpage Template edit area
 .eael-widget-otea-active {
-	.elementor-element:hover > .elementor-element-overlay,
-	.elementor-empty-view,
-	.elementor-add-section-inline,
-	.elementor-add-section {
-		display: initial !important;
-	}
+   .elementor-element:hover > .elementor-element-overlay,
+   .elementor-empty-view,
+   .elementor-add-section-inline,
+   .elementor-add-section {
+      display: initial !important;
+   }
 }
 
 .eael-onpage-edit-template-wrapper {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	display: none;
-	border: 2px solid #5eead4;
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   display: none;
+   border: 2px solid #5eead4;
 
-	&::after {
-		position: absolute;
-		content: "";
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		z-index: 2;
-		background: #5eead4;
-		opacity: .3;
-	}
+   &::after {
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 2;
+      background: #5eead4;
+      opacity: 0.3;
+   }
 
-	&.eael-onpage-edit-activate {
-		display: block;
+   &.eael-onpage-edit-activate {
+      display: block;
 
-		&::after {
-			display: none;
-		}
-	}
+      &::after {
+         display: none;
+      }
+   }
 
-	.eael-onpage-edit-template {
-		background: #5eead4;
-		color: #000;
-		width: 150px;
-		text-align: center;
-		height: 30px;
-		line-height: 30px;
-		font-size: 12px;
-		cursor: pointer;
-		position: relative;
-		z-index: 3;
-		left: 50%;
-		transform: translateX(-50%);
+   .eael-onpage-edit-template {
+      background: #5eead4;
+      color: #000;
+      width: 150px;
+      text-align: center;
+      height: 30px;
+      line-height: 30px;
+      font-size: 12px;
+      cursor: pointer;
+      position: relative;
+      z-index: 3;
+      left: 50%;
+      transform: translateX(-50%);
 
-		&::before {
-			content: "";
-			border-top: 30px solid #5eead4;
-			border-right: 0;
-			border-bottom: 0;
-			border-left: 14px solid transparent;
-			right: 100%;
-			position: absolute;
-		}
+      &::before {
+         content: "";
+         border-top: 30px solid #5eead4;
+         border-right: 0;
+         border-bottom: 0;
+         border-left: 14px solid transparent;
+         right: 100%;
+         position: absolute;
+      }
 
-		&::after {
-			content: "";
-			border-top: 0;
-			border-right: 0;
-			border-bottom: 30px solid transparent;
-			border-left: 14px solid #5eead4;
-			left: 100%;
-			position: absolute;
-		}
+      &::after {
+         content: "";
+         border-top: 0;
+         border-right: 0;
+         border-bottom: 30px solid transparent;
+         border-left: 14px solid #5eead4;
+         left: 100%;
+         position: absolute;
+      }
 
-		> i {
-			margin-right: 8px;
-		}
-	}
+      > i {
+         margin-right: 8px;
+      }
+   }
+}
+
+.elementor-edit-area-active {
+   .eael_wd_liquid_glass_shadow-effect1,
+   .eael_wd_liquid_glass_shadow-effect2,
+   .eael_wd_liquid_glass_shadow-effect3,
+   .eael_wd_liquid_glass_shadow-effect4 {
+      box-shadow: inherit !important;
+   }
 }

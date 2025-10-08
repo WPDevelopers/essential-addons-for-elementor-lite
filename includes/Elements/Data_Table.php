@@ -1463,14 +1463,16 @@ class Data_Table extends Widget_Base {
 											<div class="td-content-wrapper">
 												<div <?php $this->print_render_attribute_string('td_content'); ?>>
 													<?php
-													// WPML Compatibility
-													if ( ! is_array( $table_td[ $j ]['template'] ) ) {
-														$table_td[ $j ]['template'] = apply_filters( 'wpml_object_id', $table_td[ $j ]['template'], 'wp_template', true );
-													}
+													if ( Helper::is_elementor_publish_template( $table_td[ $j ]['template'] ) ) {
+														// WPML Compatibility
+														if ( ! is_array( $table_td[ $j ]['template'] ) ) {
+															$table_td[ $j ]['template'] = apply_filters( 'wpml_object_id', $table_td[ $j ]['template'], 'wp_template', true );
+														}
 
-													Helper::eael_onpage_edit_template_markup( get_the_ID(), $table_td[ $j ]['template'] );
-													// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-													echo Plugin::$instance->frontend->get_builder_content( intval( $table_td[ $j ]['template'] ), true );
+														Helper::eael_onpage_edit_template_markup( get_the_ID(), $table_td[ $j ]['template'] );
+														// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+														echo Plugin::$instance->frontend->get_builder_content( intval( $table_td[ $j ]['template'] ), true );
+													}
 													?>
 												</div>
 											</div>
