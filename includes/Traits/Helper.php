@@ -7,9 +7,10 @@ if ( !defined( 'ABSPATH' ) ) {
 } // Exit if accessed directly
 
 use Elementor\Plugin;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Box_Shadow;
 use \Essential_Addons_Elementor\Classes\Helper as HelperClass;
-use \Essential_Addons_Elementor\Elements\Woo_Checkout;
-use function Crontrol\Event\get;
 
 trait Helper
 {
@@ -314,7 +315,7 @@ trait Helper
 	 */
 	public function eael_checkout_cart_qty_update() {
         if ( ! wp_verify_nonce( $_POST['nonce'], 'essential-addons-elementor' ) ) {
-            die( __('Permission Denied!', 'essential-addons-for-elementor-lite') );
+            die( esc_html__( 'Permission Denied!', 'essential-addons-elementor' ) );
         }
 
         $cart_item_key = $_POST['cart_item_key'];
@@ -381,10 +382,10 @@ trait Helper
                             <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/templately/logo.svg' ); ?>" alt="">
                         </div>
                         <ul class="eael-promo-temp__feature__list">
-                            <li><?php _e('5,000+ Stunning Templates','essential-addons-for-elementor-lite'); ?></li>
-                            <li><?php _e('Supports Elementor & Gutenberg','essential-addons-for-elementor-lite'); ?></li>
-                            <li><?php _e('Powering up 300,000+ Websites','essential-addons-for-elementor-lite'); ?></li>
-                            <li><?php _e('Cloud Collaboration with Team','essential-addons-for-elementor-lite'); ?></li>
+                            <li><?php esc_html_e('5,000+ Stunning Templates','essential-addons-for-elementor-lite'); ?></li>
+                            <li><?php esc_html_e('Supports Elementor & Gutenberg','essential-addons-for-elementor-lite'); ?></li>
+                            <li><?php esc_html_e('Powering up 300,000+ Websites','essential-addons-for-elementor-lite'); ?></li>
+                            <li><?php esc_html_e('Cloud Collaboration with Team','essential-addons-for-elementor-lite'); ?></li>
                         </ul>
                         <form class="eael-promo-temp__form">
                             <label>
@@ -393,22 +394,22 @@ trait Helper
                             </label>
                             <label>
                                 <input type="radio" value="dnd" class="eael-temp-promo-confirmation" name='eael-promo-temp__radio'>
-                                <span><?php _e('Don’t Show This Again','essential-addons-for-elementor-lite'); ?></span>
+                                <span><?php esc_html_e('Don’t Show This Again','essential-addons-for-elementor-lite'); ?></span>
                             </label>
                         </form>
 
                         <?php if ( HelperClass::get_local_plugin_data( 'templately/templately.php' ) === false ) { ?>
                             <button class="wpdeveloper-plugin-installer" data-action="install"
-                               data-slug="<?php echo 'templately'; ?>"><?php _e( 'Install Templately', 'essential-addons-for-elementor-lite' ); ?></button>
+                               data-slug="<?php echo 'templately'; ?>"><?php esc_html_e( 'Install Templately', 'essential-addons-for-elementor-lite' ); ?></button>
                         <?php } else { ?>
                             <?php if ( is_plugin_active( 'templately/templately.php' ) ) { ?>
-                                <button class="wpdeveloper-plugin-installer"><?php _e( 'Activated Templately', 'essential-addons-for-elementor-lite' ); ?></button>
+                                <button class="wpdeveloper-plugin-installer"><?php esc_html_e( 'Activated Templately', 'essential-addons-for-elementor-lite' ); ?></button>
                             <?php } else { ?>
                                 <button class="wpdeveloper-plugin-installer" data-action="activate"
-                                   data-basename="<?php echo 'templately/templately.php'; ?>"><?php _e( 'Activate Templately', 'essential-addons-for-elementor-lite' ); ?></button>
+                                   data-basename="<?php echo 'templately/templately.php'; ?>"><?php esc_html_e( 'Activate Templately', 'essential-addons-for-elementor-lite' ); ?></button>
                             <?php } ?>
                         <?php } ?>
-                        <button class="eael-prmo-status-submit" style="display: none"><?php _e('Submit','essential-addons-for-elementor-lite') ?></button>
+                        <button class="eael-prmo-status-submit" style="display: none"><?php esc_html_e('Submit','essential-addons-for-elementor-lite') ?></button>
                     </div>
                     <div class="eael-promo-temp--right">
                         <img src="<?php echo esc_url( EAEL_PLUGIN_URL . 'assets/admin/images/templately/templates-edit.jpg' ); ?>" alt="">
@@ -509,7 +510,7 @@ trait Helper
 	 * @return array|array[]|string[]
 	 * @since 5.0.4
 	 */
-    protected function sanitize_taxonomy_data( $tax_list ){
+    public function sanitize_taxonomy_data( $tax_list ){
 	    return array_map( function ( $param ) {
 		    return is_array( $param ) ? array_map( 'sanitize_text_field', $param ) : sanitize_text_field( $param );
 	    }, $tax_list );
@@ -550,6 +551,8 @@ trait Helper
             FROM  $wpdb->options
             WHERE `option_name` LIKE '$key_pattern'
             ORDER BY `option_name`";
+
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$results = $wpdb->get_results( $sql );
 
 		foreach ( $results as $transient ) {
@@ -602,132 +605,191 @@ trait Helper
 		return defined( 'ELEMENTOR_VERSION' ) && class_exists( 'Elementor\Plugin' );
 	}
 
-	public function essential_blocks_promo_admin_js_template() {
-		$eb_logo          = EAEL_PLUGIN_URL . 'assets/admin/images/eb-new.svg';
-		$eb_promo_cross   = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/cross.svg';
-		$eb_promo_img1    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img1.gif';
-		$eb_promo_img2    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img2.gif';
-		$eb_promo_img3    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img3.gif';
-		$eb_promo_img4    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img4.jpg';
-		$eb_promo_img5    = EAEL_PLUGIN_URL . 'assets/admin/images/essential-blocks/eb-promo-img5.png';
-		$eb_not_installed = HelperClass::get_local_plugin_data( 'essential-blocks/essential-blocks.php' ) === false;
-		$action           = $eb_not_installed ? 'install' : 'activate';
-		$button_title     = $eb_not_installed ? esc_html__( 'Try Essential Blocks', 'essential-addons-for-elementor-lite' ) : esc_html__( 'Activate', 'essential-addons-for-elementor-lite' );
-		$nonce            = wp_create_nonce( 'essential-addons-elementor' );
-		?>
-        <script id="eael-gb-eb-button-template" type="text/html">
-            <button id="eael-eb-popup-button" type="button" class="components-button is-primary">
-                <img width="20" src="<?php echo esc_url( $eb_logo ); ?>" alt=""><?php esc_html_e( 'Essential Blocks', 'essential-addons-for-elementor-lite' ); ?>
-            </button>
-        </script>
-
-        <script id="eael-gb-eb-popup-template" type="text/html">
-            <div class="eael-gb-eb-popup">
-                <div class="eael-gb-eb-header">
-                    <img src="<?php echo esc_url( $eb_promo_cross ); ?>" class="eael-gb-eb-dismiss" alt="">
-                    <div class="eael-gb-eb-tooltip"><?php esc_html_e( 'Close dialog', 'essential-addons-for-elementor-lite' ); ?></div>
-                </div>
-                <div class="eael-gb-eb-popup-content --page-1">
-                    <div class="eael-gb-eb-content">
-                        <div class="eael-gb-eb-content-image">
-                            <img src="<?php echo esc_url( $eb_promo_img1 ); ?>" alt="">
-                        </div>
-                        <div class="eael-gb-eb-content-pagination">
-                            <span class="active" data-page="1"></span>
-                            <span data-page="2"></span>
-                            <span data-page="3"></span>
-                            <span data-page="4"></span>
-                            <span data-page="5"></span>
-                        </div>
-                        <div class="eael-gb-eb-content-info">
-                            <h3><?php esc_html_e( 'Supercharge Your Gutenberg Experience With Essential Blocks', 'essential-addons-for-elementor-lite' ); ?></h3>
-                            <p><?php esc_html_e( 'If you like Essential Addons for Elementor, check out Essential Blocks, the ultimate block library for Gutenberg that is trusted by more than 60,000+ web creators.', 'essential-addons-for-elementor-lite' ); ?></p>
-                            <button class="eael-gb-eb-install components-button is-primary" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
-                        </div>
-                    </div>
-                    <div class="eael-gb-eb-footer">
-	                    <button class="eael-gb-eb-never-show" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php esc_html_e( 'Skip for Now', 'essential-addons-for-elementor-lite' ); ?></button>
-                        <button class="eael-gb-eb-prev"><?php esc_html_e( 'Previous', 'essential-addons-for-elementor-lite' ); ?></button>
-                        <button class="eael-gb-eb-next"><?php esc_html_e( 'Next', 'essential-addons-for-elementor-lite' ); ?></button>
-                    </div>
-                </div>
-            </div>
-        </script>
-
-        <script id="eael-gb-eb-button-template-page-1" type="text/html">
-            <div>
-                <div class="eael-gb-eb-content-image">
-                    <img src="<?php echo esc_url( $eb_promo_img1 ); ?>" alt="">
-                </div>
-                <div class="eael-gb-eb-content-info">
-                    <h3><?php esc_html_e( 'Supercharge Your Gutenberg Experience With Essential Blocks', 'essential-addons-for-elementor-lite' ); ?></h3>
-                    <p><?php esc_html_e( 'If you like Essential Addons for Elementor, check out Essential Blocks, the ultimate block library for Gutenberg that is trusted by more than 60,000+ web creators.', 'essential-addons-for-elementor-lite' ) ?></p>
-                    <button class="eael-gb-eb-install components-button is-primary" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
-                </div>
-            </div>
-        </script>
-
-        <script id="eael-gb-eb-button-template-page-2" type="text/html">
-            <div>
-                <div class="eael-gb-eb-content-image">
-                    <img src="<?php echo esc_url( $eb_promo_img2 ); ?>" alt="">
-                </div>
-                <div class="eael-gb-eb-content-info">
-                    <h3><?php esc_html_e( '40+ Amazing Gutenberg Blocks', 'essential-addons-for-elementor-lite' ); ?></h3>
-                    <p><?php esc_html_e( 'Create & design your WordPress websites just the way you want with more than 40 amazing, ready blocks from Essential Blocks for Gutenberg.', 'essential-addons-for-elementor-lite' ) ?></p>
-                    <button class="eael-gb-eb-install components-button is-primary" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
-                </div>
-            </div>
-        </script>
-
-        <script id="eael-gb-eb-button-template-page-3" type="text/html">
-            <div>
-                <div class="eael-gb-eb-content-image">
-                    <img src="<?php echo esc_url( $eb_promo_img3 ); ?>" alt="">
-                </div>
-                <div class="eael-gb-eb-content-info">
-                    <h3><?php esc_html_e( 'Useful Block Control Option', 'essential-addons-for-elementor-lite' ); ?></h3>
-                    <p><?php esc_html_e( 'Get the fastest loading time and smoothest experience on your web page by enabling and disabling individual blocks as per your requirements.', 'essential-addons-for-elementor-lite' ) ?></p>
-                    <button class="eael-gb-eb-install components-button is-primary" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
-                </div>
-            </div>
-        </script>
-
-        <script id="eael-gb-eb-button-template-page-4" type="text/html">
-            <div>
-                <div class="eael-gb-eb-content-image">
-                    <img src="<?php echo esc_url( $eb_promo_img4 ); ?>" alt="">
-                </div>
-                <div class="eael-gb-eb-content-info">
-                    <h3><?php esc_html_e( 'Access To Thousands Of Ready Gutenberg Templates', 'essential-addons-for-elementor-lite' ); ?></h3>
-                    <p><?php esc_html_e( 'Design unique websites using ready Gutenberg templates from Templately with absolute ease and instantly grab attention.', 'essential-addons-for-elementor-lite' ) ?></p>
-                    <button class="eael-gb-eb-install components-button is-primary" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
-                </div>
-            </div>
-        </script>
-
-        <script id="eael-gb-eb-button-template-page-5" type="text/html">
-            <div>
-                <div class="eael-gb-eb-content-image">
-                    <img src="<?php echo esc_url( $eb_promo_img5 ); ?>" alt="">
-                </div>
-                <div class="eael-gb-eb-content-info">
-                    <h3><?php esc_html_e( 'Try Essential Blocks Today!', 'essential-addons-for-elementor-lite' ); ?></h3>
-                    <p><?php printf( __( 'Want to get started with Essential Blocks now? Check out %scomplete guides for each blocks%s to learn more about this ultimate block library for Gutenberg.', 'essential-addons-for-elementor-lite' ), '<a href="https://essential-blocks.com/demo" target="_blank">', '</a>' ) ?></p>
-                    <button class="eael-gb-eb-install components-button is-primary" data-action="<?php echo esc_attr( $action ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php echo esc_html( $button_title ); ?></button>
-                    <button class="eael-gb-eb-never-show" data-nonce="<?php echo esc_attr( $nonce ); ?>"><?php esc_html_e( 'Skip for Now', 'essential-addons-for-elementor-lite' ); ?></button>
-                </div>
-            </div>
-        </script>
-		<?php
-	}
-
 	public function eael_post_view_count() {
-		if ( is_single() ) {
+        $post_types = HelperClass::get_post_types();
+        unset( $post_types['give_forms'] );
+
+        $post_types = apply_filters( 'eael_post_view_count_post_types', $post_types, HelperClass::get_post_types() );
+        
+		if ( ! empty( $post_types ) && is_singular( array_keys( $post_types ) ) ) {
 			$post_id    = get_the_ID();
 			$view_count = absint( get_post_meta( $post_id, '_eael_post_view_count', true ) );
 			update_post_meta( $post_id, '_eael_post_view_count', ++ $view_count );
 		}
 	}
+
+   // Add background control for Liquid Glass Effects.
+	public function eael_wd_liquid_glass_effect_bg_color_effect( $obj, $effect, $default_bg_color, $selector ) {
+		$obj->add_control(
+			'eael_wd_liquid_glass_effect_bg_color_' . $effect,
+			[
+					'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+					'type'      => Controls_Manager::COLOR,
+					'default'   => $default_bg_color,
+					'selectors' => [
+						'{{WRAPPER}}.eael_wd_liquid_glass-'.$effect .' ' . $selector => 'background-color: {{VALUE}}',
+					],
+					'condition' => [
+						'eael_wd_liquid_glass_effect_switch' => 'yes',
+						'eael_wd_liquid_glass_effect'        => $effect,
+					],
+			]
+		);
+	}
+
+   //Add backdrop filter control for liquid glass effect.
+	public function eael_wd_liquid_glass_effect_backdrop_filter_effect( $obj, $effect, $default_size, $selector ) {
+		$selectors = in_array($effect, ['effect4','effect5','effect6'], true)
+			? [ "{{WRAPPER}}.eael_wd_liquid_glass-{$effect} {$selector}::before" => 'backdrop-filter: blur({{SIZE}}px)' ]
+			: [ "{{WRAPPER}}.eael_wd_liquid_glass-{$effect} {$selector}" => 'backdrop-filter: blur({{SIZE}}px)' ];
+
+		$obj->add_control(
+			'eael_wd_liquid_glass_effect_backdrop_filter_' . $effect,
+			[
+					'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
+					'type'  => Controls_Manager::SLIDER,
+					'range' => [
+						'px' => [
+							'min'  => 0,
+							'max'  => 50,
+							'step' => 1,
+						],
+					],
+					'default' => [
+						'size' => $default_size,
+					],
+					'selectors' => $selectors,
+					'condition' => [
+						'eael_wd_liquid_glass_effect_switch' => 'yes',
+						'eael_wd_liquid_glass_effect' => $effect,
+					],
+			]
+		);
+	}
+
+	// Add background color control for liquid glass effect flip box rear.
+	public function eael_wd_liquid_glass_effect_bg_color_effect_rear( $obj, $effect, $default_bg_color, $selector ) {
+		$obj->add_control(
+			'eael_wd_liquid_glass_effect_bg_color_rear_' . $effect,
+			[
+					'label'     => esc_html__( 'Background Color', 'essential-addons-for-elementor-lite' ),
+					'type'      => Controls_Manager::COLOR,
+					'default'   => $default_bg_color,
+					'selectors' => [
+						'{{WRAPPER}}.eael_wd_liquid_glass_rear-'.$effect .' ' . $selector => 'background-color: {{VALUE}}',
+					],
+					'condition' => [
+						'eael_wd_liquid_glass_effect_switch_rear' => 'yes',
+						'eael_wd_liquid_glass_effect_rear'        => $effect,
+					],
+			]
+		);
+	}
+
+	// Add backdrop filter control for liquid glass effect flip box rear.
+	public function eael_wd_liquid_glass_effect_backdrop_filter_effect_rear( $obj, $effect, $default_size, $selector ) {
+		$selectors = in_array($effect, ['effect4','effect5','effect6'], true)
+			? [ "{{WRAPPER}}.eael_wd_liquid_glass_rear-{$effect} {$selector}::before" => 'backdrop-filter: blur({{SIZE}}px)' ]
+			: [ "{{WRAPPER}}.eael_wd_liquid_glass_rear-{$effect} {$selector}" => 'backdrop-filter: blur({{SIZE}}px)' ];
+		$obj->add_control(
+			'eael_wd_liquid_glass_effect_backdrop_filter_rear_' . $effect,
+			[
+					'label' => esc_html__( 'Backdrop Filter', 'essential-addons-for-elementor-lite' ),
+					'type'  => Controls_Manager::SLIDER,
+					'range' => [
+						'px' => [
+							'min'  => 0,
+							'max'  => 50,
+							'step' => 1,
+						],
+					],
+					'default' => [
+						'size' => $default_size,
+					],
+					'selectors' => $selectors,
+					'condition' => [
+						'eael_wd_liquid_glass_effect_switch_rear' => 'yes',
+						'eael_wd_liquid_glass_effect_rear' => $effect,
+					],
+			]
+		);
+	}
+
+   //Add border effect for Liquid Glass Effects
+	public function eael_wd_liquid_glass_border_effect( $obj, $effect, $default_color, $selector, $condition ) {
+		$obj->add_group_control(
+		Group_Control_Border::get_type(),
+		[
+			'name'      => 'eael_wd_liquid_glass_border_'.$effect,
+			'fields_options' => [
+				'border' => [
+					'default' => 'solid',
+				],
+				'width' => [
+					'default' => [
+						'top'      => '1',
+						'right'    => '1',
+						'bottom'   => '1',
+						'left'     => '1',
+						'isLinked' =>  false,
+					],
+				],
+				'color' => [
+					'default' => $default_color,
+				],
+			],
+			'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-'.$effect .' '.$selector,
+			'condition' => [
+				'eael_wd_liquid_glass_effect_switch' => 'yes',
+				'eael_wd_liquid_glass_shadow_effect' => $effect,
+				'eael_wd_liquid_glass_effect'        => $condition,
+			],
+		]
+	);
+	}
+
+    // Add border radius effect for Liquid Glass Effects
+	public function eael_wd_liquid_glass_border_radius_effect( $obj, $effect, $selector, $default_radius, $condition ) {
+		$obj->add_control(
+		'eael_wd_liquid_glass_border_radius_'.$effect,
+		[
+			'label'      => esc_html__( 'Border Radius', 'essential-addons-for-elementor-lite' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [ 'px', '%', 'rem', 'custom' ],
+			'default' => $default_radius,
+			'selectors'  => [
+				'{{WRAPPER}}.eael_wd_liquid_glass_shadow-'.$effect.' '.$selector => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+			'condition' => [
+				'eael_wd_liquid_glass_effect_switch' => 'yes',
+				'eael_wd_liquid_glass_shadow_effect' => $effect,
+				'eael_wd_liquid_glass_effect'        => $condition,
+			],
+		]
+	);
+	}
+
+    // Add shadow effect for Liquid Glass Effects
+	public function eael_wd_liquid_glass_shadow_effect( $obj, $effect, $selector, $default_shadow, $condition ) {
+		$obj->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+					'name'      => 'eael_wd_liquid_glass_shadow_' . $effect,
+					'fields_options'     => [
+						'box_shadow_type' => [ 'default' => 'yes' ],
+						'box_shadow'      => [
+							'default' => $default_shadow,
+						],
+					],
+					'selector'  => '{{WRAPPER}}.eael_wd_liquid_glass_shadow-'.$effect.' ' . $selector,
+					'condition' => [
+						'eael_wd_liquid_glass_effect_switch'  => 'yes',
+						'eael_wd_liquid_glass_shadow_effect' => $effect,
+						'eael_wd_liquid_glass_effect'        => $condition,
+					],
+			]
+		);
+	}
+	
 }
 

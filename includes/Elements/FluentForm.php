@@ -1,6 +1,8 @@
 <?php
 namespace Essential_Addons_Elementor\Elements;
 
+use Essential_Addons_Elementor\Classes\Helper;
+
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
     exit;
@@ -14,8 +16,6 @@ use \Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use \Elementor\Widget_Base;
 use \Elementor\Group_Control_Background;
 use \Elementor\Core\Kits\Documents\Tabs\Global_Colors;
-
-use \Essential_Addons_Elementor\Classes\Helper;
 
 class FluentForm extends Widget_Base
 {

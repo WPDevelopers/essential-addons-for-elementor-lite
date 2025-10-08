@@ -6,8 +6,6 @@ use \Essential_Addons_Elementor\Classes\Helper;
  * Template Name: Preset 2
  */
 
-use Essential_Addons_Elementor\Elements\Woo_Product_Carousel;
-
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 } // Exit if accessed directly
@@ -44,7 +42,7 @@ $product_details_none_class = $product_details_wrap_show ? '' : 'product-details
 
 if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->is_visible() ) {
     ?>
-    <li <?php post_class( ['product', 'swiper-slide'] ); ?>>
+    <div <?php post_class( ['product', 'swiper-slide'] ); ?>>
         <div class="eael-product-carousel <?php echo esc_attr( $product_details_none_class ); ?>">
             <div class="carousel-overlay <?php echo $should_print_image_clickable ? 'eael-img-clickable' : ''; ?>"></div>
             <div class="product-image-wrap">
@@ -139,6 +137,6 @@ if ( true === wc_get_loop_product_visibility( $product->get_id() ) || $product->
                 </div>
             </div>
         </div>
-    </li>
+	</div>
     <?php
 }

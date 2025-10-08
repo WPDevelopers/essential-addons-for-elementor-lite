@@ -1333,7 +1333,7 @@ class Countdown extends Widget_Base {
 		<div <?php $this->print_render_attribute_string( 'eael-countdown' ); ?>>
 			<div <?php $this->print_render_attribute_string( 'eael-countdown-container' ); ?>>
                 <?php if( 'due_date' === $settings['eael_countdown_type'] &&  current_time( 'timestamp' ) > strtotime( $get_due_date ) && 'template' == $settings['countdown_expire_type'] ) : 
-                    if ( ! empty( $settings['countdown_expiry_templates'] ) ) {
+                    if ( ! empty( $settings['countdown_expiry_templates'] ) && Helper::is_elementor_publish_template( $settings['countdown_expiry_templates'] ) ) {
                         // WPML Compatibility
                         if ( ! is_array( $settings['countdown_expiry_templates'] ) ) {
                             $settings['countdown_expiry_templates'] = apply_filters( 'wpml_object_id', $settings['countdown_expiry_templates'], 'wp_template', true );
@@ -1353,7 +1353,7 @@ class Countdown extends Widget_Base {
                     <div class="eael-countdown-expiry-template" style="display: none;">
                         <?php
                         if ( 'template' == $settings['countdown_expire_type'] ) {
-                            if ( ! empty( $settings['countdown_expiry_templates'] ) ) {
+                            if ( ! empty( $settings['countdown_expiry_templates'] ) && Helper::is_elementor_publish_template( $settings['countdown_expiry_templates'] ) ) {
                                 // WPML Compatibility
                                 if ( ! is_array( $settings['countdown_expiry_templates'] ) ) {
                                     $settings['countdown_expiry_templates'] = apply_filters( 'wpml_object_id', $settings['countdown_expiry_templates'], 'wp_template', true );
