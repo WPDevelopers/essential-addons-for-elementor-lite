@@ -727,6 +727,21 @@ class Tooltip extends Widget_Base {
 		$icon_migrated = isset($settings['__fa4_migrated']['eael_tooltip_icon_content_new']);
 		$icon_is_new = empty($settings['eael_tooltip_icon_content']);
         $this->add_link_attributes( 'eael_tooltip_link', (array) $settings['eael_tooltip_link'] );
+
+        // WPML Media Translation compatibility
+        if ( ! empty( $settings['eael_tooltip_img_content']['id'] ) ) {
+            $settings['eael_tooltip_img_content']['id'] = apply_filters( 'wpml_object_id', $settings['eael_tooltip_img_content']['id'], 'attachment', true );
+            if ( $settings['eael_tooltip_img_content']['id'] ) {
+                $settings['eael_tooltip_img_content']['url'] = wp_get_attachment_url( $settings['eael_tooltip_img_content']['id'] );
+            }
+        }
+
+        if ( ! empty( $settings['eael_tooltip_icon_content_new']['value']['id'] ) ) {
+            $settings['eael_tooltip_icon_content_new']['value']['id'] = apply_filters( 'wpml_object_id', $settings['eael_tooltip_icon_content_new']['value']['id'], 'attachment', true );
+            if ( $settings['eael_tooltip_icon_content_new']['value']['id'] ) {
+                $settings['eael_tooltip_icon_content_new']['value']['url'] = wp_get_attachment_url( $settings['eael_tooltip_icon_content_new']['value']['id'] );
+            }
+        }
 	?>
 	<div class="eael-tooltip">
 		<?php if( $settings['eael_tooltip_type'] === 'text' ) : ?>

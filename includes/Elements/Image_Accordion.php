@@ -16,8 +16,10 @@ use \Elementor\Repeater;
 
 
 use \Essential_Addons_Elementor\Classes\Helper;
+use Essential_Addons_Elementor\Traits\Helper as HelperTrait;
 
 class Image_Accordion extends Widget_Base {
+    use HelperTrait;
     public function get_name() {
         return 'eael-image-accordion';
     }
@@ -44,6 +46,9 @@ class Image_Accordion extends Widget_Base {
             'gallery',
             'ea',
             'essential addons',
+            'Glassmorphism',
+            'Liquid Glass Effect',
+            'Frost Effect',
         ];
     }
 
@@ -294,6 +299,14 @@ class Image_Accordion extends Widget_Base {
                 ],
                 'fields'      => $repeater->get_controls(),
                 'title_field' => '{{eael_accordion_tittle}}',
+            ]
+        );
+
+        $this->add_control(
+            'eael_wd_liquid_glass_effect_switch',
+            [
+                'label' => __( 'Enable Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
+                'type'  => Controls_Manager::SWITCHER
             ]
         );
 
@@ -559,6 +572,461 @@ class Image_Accordion extends Widget_Base {
 
         $this->end_controls_section();
 
+        $this->start_controls_section(
+			'eael_wd_liquid_glass_effect_section',
+			[
+				'label' => esc_html__( 'Liquid Glass Effects', 'essential-addons-for-elementor-lite' ),
+				'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_wd_liquid_glass_effect_switch' => 'yes'
+                ]
+			]
+		);
+
+        // Liquid Glass Effects
+        $this->eael_liquid_glass_effects();
+
+        //  Liquid Glass Shadow Effects
+        $this->eael_liquid_glass_shadow_effects();
+
+        $this->end_controls_section();
+    }
+
+    /**
+     * Controller Summary of eael_liquid_glass_effects
+     */
+    public function eael_pro_lock_icon() {
+		if ( !apply_filters('eael/pro_enabled', false ) ) {
+			$html = '<span class="e-control-motion-effects-promotion__lock-wrapper"><i class="eicon-lock"></i></span>';
+			return $html;
+		}
+		return;
+	}
+
+    public function eael_teaser_template($texts) {
+		$html = '<div class="ea-nerd-box">
+			<div class="ea-nerd-box-message">' . $texts['messages'] . '</div>
+			<a class="ea-nerd-box-link elementor-button elementor-button-default" href="https://wpdeveloper.com/upgrade/ea-pro" target="_blank">
+			' . __('Upgrade to EA PRO', 'essential-addons-for-elementor-lite') . '
+			</a>
+		</div>';
+
+		return $html;
+    }
+    protected function eael_liquid_glass_effects() {
+        $this->add_control(
+            'eael_wd_liquid_glass_effect_notice',
+            [
+                'type'        => Controls_Manager::ALERT,
+                'alert_type'  => 'info',
+                'content'     => esc_html__( 'Liquid glass effect is only visible when a semi-transparent background color is applied.', 'essential-addons-for-elementor-lite' ) . '<a href="https://essential-addons.com/docs/ea-liquid-glass-effects/" target="_blank">' . esc_html__( 'Learn More', 'essential-addons-for-elementor-lite' ) . '</a>',
+                'condition'   => [
+                    'eael_wd_liquid_glass_effect_switch' => 'yes',
+                ]
+            ]
+        );
+
+        $eael_liquid_glass_effect = apply_filters(
+			'eael_liquid_glass_effect_filter',
+			[
+					'styles' => [
+						'effect1' => esc_html__( 'Heavy Frost', 'essential-addons-for-elementor-lite' ),
+						'effect2' => esc_html__( 'Soft Mist', 'essential-addons-for-elementor-lite' ),
+						'effect4' => esc_html__( 'Light Frost', 'essential-addons-for-elementor-lite' ),
+						'effect5' => esc_html__( 'Grain Frost', 'essential-addons-for-elementor-lite' ),
+						'effect6' => esc_html__( 'Fine Frost', 'essential-addons-for-elementor-lite' ),
+				],
+			]
+        );
+
+        $this->add_control(
+            'eael_wd_liquid_glass_effect',
+            [
+				'label'       => esc_html__( 'Liquid Glass Presets', 'essential-addons-for-elementor-lite' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'label_block' => true,
+				'options'     => [
+					'effect1' => [
+						'title' => esc_html__( $eael_liquid_glass_effect['styles']['effect1'], 'essential-addons-for-elementor-lite' ),
+						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect1'], 'essential-addons-for-elementor-lite' ),
+					],
+					'effect2' => [
+						'title' => esc_html__( $eael_liquid_glass_effect['styles']['effect2'], 'essential-addons-for-elementor-lite' ),
+						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect2'], 'essential-addons-for-elementor-lite' ),
+					],
+					'effect4' => [
+						'title' => esc_html__( $eael_liquid_glass_effect['styles']['effect4'], 'essential-addons-for-elementor-lite' ),
+						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect4'], 'essential-addons-for-elementor-lite' )  . $this->eael_pro_lock_icon(),
+					],
+					'effect5' => [
+						'title' => esc_html__( $eael_liquid_glass_effect['styles']['effect5'], 'essential-addons-for-elementor-lite' ),
+						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect5'], 'essential-addons-for-elementor-lite' )  . $this->eael_pro_lock_icon(),
+					],
+					'effect6' => [
+						'title' => esc_html__( $eael_liquid_glass_effect['styles']['effect6'], 'essential-addons-for-elementor-lite' ),
+						'text'  => esc_html__( $eael_liquid_glass_effect['styles']['effect6'], 'essential-addons-for-elementor-lite' )  . $this->eael_pro_lock_icon(),
+					],
+				],
+				'prefix_class' => 'eael_wd_liquid_glass-',
+				'condition' => [
+					'eael_wd_liquid_glass_effect_switch' => 'yes',
+				],
+				'default' => 'effect1',
+				'multiline' => true,
+			]
+        );
+
+        if ( !apply_filters('eael/pro_enabled', false ) ) {
+			$this->add_control(
+				'eael_wd_liquid_glass_effect_pro_alert',
+				[
+					'type' => Controls_Manager::RAW_HTML,
+					'raw'  => $this->eael_teaser_template( [
+						'messages' => __( "To use this Liquid glass preset, Upgrade to Essential Addons Pro", 'essential-addons-for-elementor-lite' ),
+					] ),
+					'condition' => [
+						'eael_wd_liquid_glass_effect_switch' => 'yes',
+						'eael_wd_liquid_glass_effect'        => ['effect4', 'effect5', 'effect6'],
+					]
+				]
+			);
+		} else {
+			$this->add_control(
+				'eael_wd_liquid_glass_effect_settings',
+				[
+					'label'     => esc_html__( 'Liquid Glass Settings', 'essential-addons-for-elementor-lite' ),
+					'type'      => Controls_Manager::HEADING,
+					'separator' => 'before',
+					'condition' => [
+						'eael_wd_liquid_glass_effect_switch' => 'yes',
+					]
+				]
+			);
+		}
+
+        // Background Color Controls
+        $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect1', '#FFFFFF1F', '.eael-img-accordion .overlay-active .overlay' );
+        $this->eael_wd_liquid_glass_effect_bg_color_effect( $this, 'effect2', '#FFFFFF1F', '.eael-img-accordion .overlay-active .overlay' );
+
+        do_action( 'eael_wd_liquid_glass_effect_bg_color_effect4', $this, 'effect4', '#FFFFFF1F', '.eael-img-accordion .overlay-active .overlay' );
+        do_action( 'eael_wd_liquid_glass_effect_bg_color_effect5', $this, 'effect5', '#FFFFFF1F', '.eael-img-accordion .overlay-active .overlay' );
+        do_action( 'eael_wd_liquid_glass_effect_bg_color_effect6', $this, 'effect6', '#FFFFFF1F', '.eael-img-accordion .overlay-active .overlay' );
+
+        // Backdrop Filter Controls
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect1', '24', '.eael-img-accordion .overlay-active .overlay' );
+        $this->eael_wd_liquid_glass_effect_backdrop_filter_effect( $this, 'effect2', '20', '.eael-img-accordion .overlay-active .overlay' );
+
+        // Brightness Effect Controls
+		$this->add_control(
+			'eael_wd_liquid_glass_effect_brightness_effect2',
+			[
+				'label' => esc_html__( 'Brightness', 'essential-addons-for-elementor-lite' ),
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 5,
+						'step' => .1,
+					],
+				],
+				'default' => [
+					'size' => 1,
+				],
+				'selectors' => [
+					'{{WRAPPER}}.eael_wd_liquid_glass-effect2 .eael-img-accordion .overlay-active .overlay' => 'backdrop-filter: blur({{eael_wd_liquid_glass_effect_backdrop_filter_effect2.SIZE}}px) brightness({{SIZE}});',
+				],
+				'condition'    => [
+					'eael_wd_liquid_glass_effect_switch' => 'yes',
+					'eael_wd_liquid_glass_effect'        => 'effect2',
+				]
+			]
+		);
+
+        do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect4', $this, 'effect4', '', '.eael-img-accordion .overlay-active .overlay' );
+        do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect5', $this, 'effect5', '', '.eael-img-accordion .overlay-active .overlay' );
+        do_action( 'eael_wd_liquid_glass_effect_backdrop_filter_effect6', $this, 'effect6', '', '.eael-img-accordion .overlay-active .overlay' );
+
+        // Noise Distortion Settings (Pro)
+		do_action( 'eael_wd_liquid_glass_effect_noise_action', $this );
+    }
+
+    /**
+     * Summary of eael_liquid_glass_shadow_effects
+     */
+    protected function eael_liquid_glass_shadow_effects() {
+        if ( !apply_filters('eael/pro_enabled', false ) ) {
+            $this->add_control(
+                'eael_wd_liquid_glass_shadow_effect',
+                [
+                    'label'     => esc_html__( 'Shadow Effects', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::SELECT2,
+                    'default'   => 'effect1',
+                    'separator' => 'before',
+                    'options'   => [
+                        '' 		 => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
+                        'effect1' => esc_html__( 'Effect 1', 'essential-addons-for-elementor-lite' ),
+                        'effect2' => esc_html__( 'Effect 2', 'essential-addons-for-elementor-lite' ),
+                        'effect3' => esc_html__( 'Effect 3', 'essential-addons-for-elementor-lite' ),
+                        'effect4' => esc_html__( 'Effect 4', 'essential-addons-for-elementor-lite' ),
+                    ],
+                    'prefix_class' => 'eael_wd_liquid_glass_shadow-',
+                    'condition'    => [
+                        'eael_wd_liquid_glass_effect_switch' => 'yes',
+                        'eael_wd_liquid_glass_effect'        => ['effect1', 'effect2'],
+                    ]
+                ]
+            );
+
+            $this->add_control(
+                'eael_wd_liquid_glass_shadow_inner',
+                [
+                    'label'     => esc_html__( 'Shadow Settings', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::HEADING,
+                    'separator' => 'before',
+                    'condition' => [
+                        'eael_wd_liquid_glass_effect_switch'  => 'yes',
+                        'eael_wd_liquid_glass_shadow_effect!' => '',
+                        'eael_wd_liquid_glass_effect'         => ['effect1', 'effect2'],
+                    ],
+                ]
+            );
+
+            // Liquid Glass Border Effects
+            $this->eael_wd_liquid_glass_border_effect( $this, 'effect1', '#FFFFFF1F', '.eael-img-accordion .overlay-active .overlay', ['effect1', 'effect2'] );
+            $this->eael_wd_liquid_glass_border_effect( $this, 'effect2', '#FFFFFF1F', '.eael-img-accordion .overlay-active .overlay', ['effect1', 'effect2'] );
+            $this->eael_wd_liquid_glass_border_effect( $this, 'effect3', '#FFFFFF1F', '.eael-img-accordion .overlay-active .overlay', ['effect1', 'effect2'] );
+            $this->eael_wd_liquid_glass_border_effect( $this, 'effect4', '#FFFFFF1F', '.eael-img-accordion .overlay-active .overlay', ['effect1', 'effect2'] );
+
+            // Liquid Glass Border Radius Effects
+            $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect1', '.eael-img-accordion .overlay-active .overlay',
+                [
+                    'top' 	  => 24,
+                    'right'    => 24,
+                    'bottom'   => 24,
+                    'left'     => 24,
+                    'unit'     => 'px',
+                    'isLinked' => true,
+                ],
+                ['effect1', 'effect2']
+            );
+
+            $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect2', '.eael-img-accordion .overlay-active .overlay',
+                [
+                    'top' 	  => 16,
+                    'right'    => 16,
+                    'bottom'   => 16,
+                    'left'     => 16,
+                    'unit'     => 'px',
+                    'isLinked' => true,
+                ],
+                ['effect1', 'effect2']
+            );
+
+            $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect3', '.eael-img-accordion .overlay-active .overlay',
+                [
+                    'top' 	  => 8,
+                    'bottom'   => 8,
+                    'left'     => 8,
+                    'right'    => 8,
+                    'unit'     => 'px',
+                    'isLinked' => true,
+                ],
+                ['effect1', 'effect2']
+            );
+
+            $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect4', '.eael-img-accordion .overlay-active .overlay',
+                [
+                    'top' 	  => 24,
+                    'bottom'   => 24,
+                    'left'     => 24,
+                    'right'    => 24,
+                    'unit'     => 'px',
+                    'isLinked' => true,
+                ],
+                ['effect1', 'effect2']
+            );
+
+            // Liquid Glass Shadow Effects
+            $this->eael_wd_liquid_glass_shadow_effect($this, 'effect1', '.eael-img-accordion .overlay-active .overlay',
+                [
+                    'color'      => 'rgba(0,0,0,0.78)',
+                    'horizontal' => 0,
+                    'vertical'   => 19,
+                    'blur'       => 26,
+                    'spread'     => 1,
+                ],
+                ['effect1', 'effect2']
+            );
+
+            $this->eael_wd_liquid_glass_shadow_effect($this, 'effect2', '.eael-img-accordion .overlay-active .overlay',
+                [
+                    'color'      => '#383C65',
+                    'horizontal' => 0,
+                    'vertical'   => 0,
+                    'blur'       => 33,
+                    'spread'     => -2,
+                ],
+                ['effect1', 'effect2']
+            );
+
+            $this->eael_wd_liquid_glass_shadow_effect($this, 'effect3', '.eael-img-accordion .overlay-active .overlay',
+                [
+                    'color'      => 'rgba(255, 255, 255, 0.4)',
+                    'horizontal' => 1,
+                    'vertical'   => 1,
+                    'blur'       => 10,
+                    'spread'     => 5,
+                ],
+                ['effect1', 'effect2']
+            );
+
+            $this->eael_wd_liquid_glass_shadow_effect($this, 'effect4', '.eael-img-accordion .overlay-active .overlay',
+                [
+                    'color'      => '#00000040',
+                    'horizontal' => 0,
+                    'vertical'   => 9,
+                    'blur'       => 21,
+                    'spread'     => 0,
+                ],
+                ['effect1', 'effect2']
+            );
+        } else {
+            $this->add_control(
+                'eael_wd_liquid_glass_shadow_effect',
+                [
+                    'label'     => esc_html__( 'Shadow Effects', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::SELECT2,
+                    'default'   => 'effect1',
+                    'separator' => 'before',
+                    'options'   => [
+                        '' 		 => esc_html__( 'None', 'essential-addons-for-elementor-lite' ),
+                        'effect1' => esc_html__( 'Effect 1', 'essential-addons-for-elementor-lite' ),
+                        'effect2' => esc_html__( 'Effect 2', 'essential-addons-for-elementor-lite' ),
+                        'effect3' => esc_html__( 'Effect 3', 'essential-addons-for-elementor-lite' ),
+                        'effect4' => esc_html__( 'Effect 4', 'essential-addons-for-elementor-lite' ),
+                    ],
+                    'prefix_class' => 'eael_wd_liquid_glass_shadow-',
+                    'condition'    => [
+                        'eael_wd_liquid_glass_effect_switch' => 'yes',
+                        'eael_wd_liquid_glass_effect'        => ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'],
+                    ]
+                ]
+            );
+
+            $this->add_control(
+                'eael_wd_liquid_glass_shadow_inner',
+                [
+                    'label'     => esc_html__( 'Shadow Settings', 'essential-addons-for-elementor-lite' ),
+                    'type'      => Controls_Manager::HEADING,
+                    'separator' => 'before',
+                    'condition' => [
+                        'eael_wd_liquid_glass_effect_switch'  => 'yes',
+                        'eael_wd_liquid_glass_shadow_effect!' => '',
+                        'eael_wd_liquid_glass_effect'         => ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'],
+                    ],
+                ]
+            );
+
+            // Liquid Glass Border Effects
+            $this->eael_wd_liquid_glass_border_effect( $this, 'effect1', '#FFFFFF1F', '.eael-img-accordion .overlay-active .overlay', ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'] );
+            $this->eael_wd_liquid_glass_border_effect( $this, 'effect2', '#FFFFFF1F', '.eael-img-accordion .overlay-active .overlay', ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'] );
+            $this->eael_wd_liquid_glass_border_effect( $this, 'effect3', '#FFFFFF1F', '.eael-img-accordion .overlay-active .overlay', ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'] );
+            $this->eael_wd_liquid_glass_border_effect( $this, 'effect4', '#FFFFFF1F', '.eael-img-accordion .overlay-active .overlay', ['effect1', 'effect2', 'effect4', 'effect5', 'effect6'] );
+
+            // Liquid Glass Border Radius Effects
+            $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect1', '.eael-img-accordion .overlay-active .overlay',
+                [
+                    'top' 	  => 24,
+                    'right'    => 24,
+                    'bottom'   => 24,
+                    'left'     => 24,
+                    'unit'     => 'px',
+                    'isLinked' => true,
+                ],
+                ['effect1', 'effect2', 'effect4', 'effect5', 'effect6']
+            );
+
+            $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect2', '.eael-img-accordion .overlay-active .overlay',
+                [
+                    'top' 	  => 16,
+                    'right'    => 16,
+                    'bottom'   => 16,
+                    'left'     => 16,
+                    'unit'     => 'px',
+                    'isLinked' => true,
+                ],
+                ['effect1', 'effect2', 'effect4', 'effect5', 'effect6']
+            );
+
+            $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect3', '.eael-img-accordion .overlay-active .overlay',
+                [
+                    'top' 	  => 8,
+                    'bottom'   => 8,
+                    'left'     => 8,
+                    'right'    => 8,
+                    'unit'     => 'px',
+                    'isLinked' => true,
+                ],
+                ['effect1', 'effect2', 'effect4', 'effect5', 'effect6']
+            );
+
+            $this->eael_wd_liquid_glass_border_radius_effect($this, 'effect4', '.eael-img-accordion .overlay-active .overlay',
+                [
+                    'top' 	  => 24,
+                    'bottom'   => 24,
+                    'left'     => 24,
+                    'right'    => 24,
+                    'unit'     => 'px',
+                    'isLinked' => true,
+                ],
+                ['effect1', 'effect2', 'effect4', 'effect5', 'effect6']
+            );
+
+            // Liquid Glass Shadow Effects
+            $this->eael_wd_liquid_glass_shadow_effect($this, 'effect1', '.eael-img-accordion .overlay-active .overlay',
+                [
+                    'color'      => 'rgba(0,0,0,0.78)',
+                    'horizontal' => 0,
+                    'vertical'   => 19,
+                    'blur'       => 26,
+                    'spread'     => 1,
+                ],
+                ['effect1', 'effect2', 'effect4', 'effect5', 'effect6']
+            );
+
+            $this->eael_wd_liquid_glass_shadow_effect($this, 'effect2', '.eael-img-accordion .overlay-active .overlay',
+                [
+                    'color'      => '#383C65',
+                    'horizontal' => 0,
+                    'vertical'   => 0,
+                    'blur'       => 33,
+                    'spread'     => -2,
+                ],
+                ['effect1', 'effect2', 'effect4', 'effect5', 'effect6']
+            );
+
+            $this->eael_wd_liquid_glass_shadow_effect($this, 'effect3', '.eael-img-accordion .overlay-active .overlay',
+                [
+                    'color'      => 'rgba(255, 255, 255, 0.4)',
+                    'horizontal' => 1,
+                    'vertical'   => 1,
+                    'blur'       => 10,
+                    'spread'     => 5,
+                ],
+                ['effect1', 'effect2', 'effect4', 'effect5', 'effect6']
+            );
+
+            $this->eael_wd_liquid_glass_shadow_effect($this, 'effect4', '.eael-img-accordion .overlay-active .overlay',
+                [
+                    'color'      => '#00000040',
+                    'horizontal' => 0,
+                    'vertical'   => 9,
+                    'blur'       => 21,
+                    'spread'     => 0,
+                ],
+                ['effect1', 'effect2', 'effect4', 'effect5', 'effect6']
+            );
+        }
     }
 
     protected function render() {
@@ -605,6 +1073,7 @@ class Image_Accordion extends Widget_Base {
 
             <div <?php $this->print_render_attribute_string( 'eael-image-accordion-item-wrapper-' . $key ); ?>  tabindex="0">
                 <div class="overlay">
+                    <?php do_action( 'eael_wd_liquid_glass_effect_svg_pro', $this, $settings, '.overlay-active' ); ?>
                     <div class="overlay-inner <?php echo( $active === 'yes' ? ' overlay-inner-show' : '' ); ?>">
                         <?php
                         $title_linked = false;
