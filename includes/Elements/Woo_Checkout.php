@@ -8,14 +8,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use \Elementor\Controls_Manager;
-use \Elementor\Frontend;
 use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Widget_Base;
-use \Elementor\Icons_Manager;
 use Essential_Addons_Elementor\Traits\Helper;
+use \Essential_Addons_Elementor\Classes\Helper as HelperClass;
 
 class Woo_Checkout extends Widget_Base {
 	
@@ -79,6 +78,10 @@ class Woo_Checkout extends Widget_Base {
             'font-awesome-5-all',
             'font-awesome-4-shim',
         ];
+    }
+
+	public function has_widget_inner_wrapper(): bool {
+        return ! HelperClass::eael_e_optimized_markup();
     }
 
 	public function get_custom_help_url() {

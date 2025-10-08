@@ -147,15 +147,20 @@ trait Ajax_Handler {
 				$this->sanitize_taxonomy_data( $_REQUEST['taxonomy'] ),
 			];
 
-			$args['tax_query'] = $this->eael_terms_query_multiple( $args['tax_query'] );
+			$relation = isset( $settings['relation_cats_tags'] ) ? $settings['relation_cats_tags'] : 'OR';
+			$args['tax_query'] = $this->eael_terms_query_multiple( $args['tax_query'], $relation );
 		}
 
 		if ( $class == '\Essential_Addons_Elementor\Elements\Post_Grid' ) {
 			$settings['read_more_button_text']       = get_transient( 'eael_post_grid_read_more_button_text_' . $widget_id );
 			$settings['excerpt_expanison_indicator'] = get_transient( 'eael_post_grid_excerpt_expanison_indicator_' . $widget_id );
 
-			if ( $settings['orderby'] === 'rand' ) {
-				$args['post__not_in'] = array_map( 'intval', array_unique( $_REQUEST['post__not_in'] ) );
+			if ( $settings['orderby'] === 'rand' && ! empty( $_REQUEST['post__not_in'] ) ) {
+				$post__not_in = $_REQUEST['post__not_in'];
+				if ( ! empty( $args['post__not_in'] ) ) {
+					$post__not_in = array_merge( $post__not_in, $args['post__not_in'] );
+				}
+				$args['post__not_in'] = array_map( 'intval', array_unique( $post__not_in ) );
 				unset( $args['offset'] );
 			}
 		}
@@ -178,10 +183,19 @@ trait Ajax_Handler {
 			$settings['show_load_more_text']       = $settings['eael_fg_loadmore_btn_text'];
 			$settings['layout_mode']               = isset( $settings['layout_mode'] ) ? $settings['layout_mode'] : 'masonry';
 
+			if ( ! empty( $args['fetch_acf_image'] ) && 'yes' === $args['fetch_acf_image'] && ! empty( $args['post__in'] ) ) {
+				$args['post_status'] = 'any';
+				$args['post_type'] = 'any';
+			}
+
 			$exclude_ids = json_decode( html_entity_decode( stripslashes ( $_POST['exclude_ids'] ) ) );
 			$args['post__not_in'] = ( !empty( $_POST['exclude_ids'] ) ) ? array_map( 'intval', array_unique($exclude_ids) ) : array();
 			$active_term_id = ( !empty( $_POST['active_term_id'] ) ) ? intval( $_POST['active_term_id'] ) : 0;
 			$active_taxonomy = ( !empty( $_POST['active_taxonomy'] ) ) ? sanitize_text_field( $_POST['active_taxonomy'] ) : '';
+
+			if ( ! empty( $args['post__not_in'] ) && ! empty( $args['post__in'] ) ) {
+				$args['post__in'] = array_diff( $args['post__in'], array_unique( $args['post__not_in'] ) );
+			}
 
 			if( 0 < $active_term_id &&
 				!empty( $active_taxonomy ) &&
@@ -228,6 +242,7 @@ trait Ajax_Handler {
 			}
 
 			if ( $file_path ) {
+				// wp_send_json( $args );
 				$query = new \WP_Query( $args );
 				$found_posts = $query->found_posts;
 				$iterator = 0;
@@ -278,7 +293,8 @@ trait Ajax_Handler {
 			header( 'Content-Encoding: gzip' );
 			header( 'Content-Length: ' . strlen( $response ) );
 
-			printf( '%1$s', $response );
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo $response;
 		} else {
 			echo wp_kses_post( $html );
 		}
@@ -364,6 +380,7 @@ trait Ajax_Handler {
 			}
 			wp_reset_postdata();
 		}
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo ob_get_clean();
 		wp_die();
 	}
@@ -433,14 +450,14 @@ trait Ajax_Handler {
 			$setPagination .= "<ul class='page-numbers'>";
 
 			if ( 1 < $paginationNumber ) {
-				$setPagination .= "<li class='pagitext'><a href='javascript:void(0);' class='page-numbers'   data-pnumber='$paginationprev' >$prev_label</a></li>";
+				$setPagination .= "<li class='pagitext'><a href='javascript:void(0);' class='page-numbers'   data-pnumber='" . esc_attr( $paginationprev ) . "' >" . esc_html( $prev_label ) . "</a></li>";
 			}
 
 			if ( $pagination_Paginationlist < 7 + ( $adjacents * 2 ) ) {
 
 				for ( $pagination = 1; $pagination <= $pagination_Paginationlist; $pagination ++ ) {
 					$active        = ( $paginationNumber == $pagination ) ? 'current' : '';
-					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, $pagination );
+					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", esc_attr( $active ), esc_html( $pagination ) );
 				}
 
 			} else if ( $pagination_Paginationlist > 5 + ( $adjacents * 2 ) ) {
@@ -449,49 +466,50 @@ trait Ajax_Handler {
 					for ( $pagination = 1; $pagination <= 4 + ( $adjacents * 2 ); $pagination ++ ) {
 
 						$active        = ( $paginationNumber == $pagination ) ? 'current' : '';
-						$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, $pagination );
+						$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", esc_attr( $active ), esc_html( $pagination ) );
 					}
 					$setPagination .= "<li class='pagitext dots'>...</li>";
-					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, $pagination );
+					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", esc_attr( $active ), esc_html( $pagination ) );
 
 				} elseif ( $pagination_Paginationlist - ( $adjacents * 2 ) > $paginationNumber && $paginationNumber > ( $adjacents * 2 ) ) {
 					$active        = '';
-					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, 1 );
+					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", esc_attr( $active ), 1 );
 					$setPagination .= "<li class='pagitext dots'>...</li>";
 					for ( $pagination = $paginationNumber - $adjacents; $pagination <= $paginationNumber + $adjacents; $pagination ++ ) {
 						$active        = ( $paginationNumber == $pagination ) ? 'current' : '';
-						$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, $pagination );
+						$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", esc_attr( $active ), esc_html( $pagination ) );
 					}
 
 					$setPagination .= "<li class='pagitext dots'>...</li>";
-					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, $last );
+					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", esc_attr( $active ), esc_html( $last ) );
 
 				} else {
 					$active        = '';
-					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, 1 );
+					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", esc_attr( $active ), 1 );
 					$setPagination .= "<li class='pagitext dots'>...</li>";
 					for ( $pagination = $last - ( 2 + ( $adjacents * 2 ) ); $pagination <= $last; $pagination ++ ) {
 						$active        = ( $paginationNumber == $pagination ) ? 'current' : '';
-						$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, $pagination );
+						$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", esc_attr( $active ), esc_html( $pagination ) );
 					}
 				}
 
 			} else {
 				for ( $pagination = 1; $pagination <= $pagination_Paginationlist; $pagination ++ ) {
 					$active        = ( $paginationNumber == $pagination ) ? 'current' : '';
-					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, $pagination );
+					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", esc_attr( $active ), esc_html( $pagination ) );
 				}
 
 			}
 
 			if ( $paginationNumber < $pagination_Paginationlist ) {
-				$setPagination .= "<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-pnumber='$paginationnext' >$next_label</a></li>";
+				$setPagination .= "<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-pnumber='" . esc_attr( $paginationnext ) . "' > " . esc_html( $next_label ) . " </a></li>";
 			}
 
 			$setPagination .= "</ul>";
 		}
 
-		printf( '%1$s', $setPagination );
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo $setPagination;
 		wp_die();
 	}
 
@@ -542,6 +560,10 @@ trait Ajax_Handler {
 	 */
 	public function woo_checkout_update_order_review() {
 		$setting = $_POST['orderReviewData'];
+		
+		//Mondial Relay plugin integration
+		do_action( 'eael_mondialrelay_order_after_shipping' );
+
 		ob_start();
 		AllTraits::checkout_order_review_default( $setting );
 		$woo_checkout_update_order_review = ob_get_clean();
@@ -664,7 +686,27 @@ trait Ajax_Handler {
 				$this->sanitize_taxonomy_data( $_REQUEST['taxonomy'] ),
 			];
 
-			$args['tax_query'] = $this->eael_terms_query_multiple( $args['tax_query'] );
+			$relation = isset( $settings['relation_cats_tags'] ) ? $settings['relation_cats_tags'] : 'OR';
+			if ( 'and' === strtolower( $relation ) ) {
+				if ( 'product_cat' === $_REQUEST['taxonomy']['taxonomy'] && ! empty( $settings['eael_product_gallery_tags'] ) ) {
+					$args['tax_query'][] = [
+						'taxonomy' => 'product_tag',
+						'field'    => 'term_id',
+						'terms'    => $settings['eael_product_gallery_tags'],
+						'operator' => 'IN',
+					];
+				}
+				if ( 'product_tag' === $_REQUEST['taxonomy']['taxonomy'] && ! empty( $settings['eael_product_gallery_categories'] ) ) {
+					$args['tax_query'][] = [
+						'taxonomy' => 'product_cat',
+						'field'    => 'term_id',
+						'terms'    => $settings['eael_product_gallery_categories'],
+						'operator' => 'IN',
+					];
+				}
+			}
+
+			$args['tax_query'] = $this->eael_terms_query_multiple( $args['tax_query'], $relation );
 
 			if ( $settings[ 'eael_product_gallery_product_filter' ] == 'featured-products' ) {
 				$args[ 'tax_query' ][] = [
@@ -725,7 +767,9 @@ trait Ajax_Handler {
 					do_action( 'eael_woo_after_product_loop' );
 
 					$html .= '<div class="eael-max-page" style="display:none;">'. ceil($query->found_posts / absint( $args['posts_per_page'] ) ) . '</div>';
-					printf( '%1$s', $html );
+
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					echo $html;
 					wp_reset_postdata();
 				}
 			}
@@ -733,7 +777,7 @@ trait Ajax_Handler {
 		wp_die();
 	}
 
-	public function eael_terms_query_multiple( $args_tax_query = [] ){
+	public function eael_terms_query_multiple( $args_tax_query = [], $relation = 'OR' ){
 		if ( strpos($args_tax_query[0]['taxonomy'], '|') !== false ) {
 			$args_tax_query_item = $args_tax_query[0];
 
@@ -758,7 +802,7 @@ trait Ajax_Handler {
 
 
 			if ( count( $args_multiple['tax_query'] ) ) {
-				$args_multiple['tax_query']['relation'] = 'OR';
+				$args_multiple['tax_query']['relation'] = $relation;
 			}
 
 			$args_tax_query = $args_multiple['tax_query'];
@@ -969,6 +1013,15 @@ trait Ajax_Handler {
 		if ( isset( $settings['lr_recaptcha_language'] ) ) {
 			update_option( 'eael_recaptcha_language', sanitize_text_field( $settings['lr_recaptcha_language'] ) );
 		}
+
+		//Cloudflare Turnstile
+		if ( isset( $settings['lr_cloudflare_turnstile_sitekey'] ) ) {
+			update_option( 'eael_cloudflare_turnstile_sitekey', sanitize_text_field( $settings['lr_cloudflare_turnstile_sitekey'] ) );
+		}
+		if ( isset( $settings['lr_cloudflare_turnstile_secretkey'] ) ) {
+			update_option( 'eael_cloudflare_turnstile_secretkey', sanitize_text_field( $settings['lr_cloudflare_turnstile_secretkey'] ) );
+		}
+
 		//reCAPTCHA v3
 		if ( isset( $settings['lr_recaptcha_sitekey_v3'] ) ) {
 			update_option( 'eael_recaptcha_sitekey_v3', sanitize_text_field( $settings['lr_recaptcha_sitekey_v3'] ) );
@@ -990,14 +1043,10 @@ trait Ajax_Handler {
 
 		if ( isset( $settings['lr_custom_profile_fields_text'] ) ) {
 			update_option( 'eael_custom_profile_fields_text', sanitize_text_field( $settings['lr_custom_profile_fields_text'] ) );
-		} else {
-			update_option( 'eael_custom_profile_fields_text', '' );
 		}
 
 		if ( isset( $settings['lr_custom_profile_fields_img'] ) ) {
 			update_option( 'eael_custom_profile_fields_img', sanitize_text_field( $settings['lr_custom_profile_fields_img'] ) );
-		} else {
-			update_option( 'eael_custom_profile_fields_img', '' );
 		}
 
 		//pro settings
@@ -1014,6 +1063,21 @@ trait Ajax_Handler {
 		// Business Reviews : Saving Google Place Api Key
 		if ( isset( $settings['br_google_place_api_key'] ) ) {
 			update_option( 'eael_br_google_place_api_key', sanitize_text_field( $settings['br_google_place_api_key'] ) );
+		}
+
+		// Business Reviews : Saving Google My Business Access Token
+		if ( isset( $settings['br_google_my_business_token'] ) ) {
+			update_option( 'eael_br_google_my_business_token', sanitize_textarea_field( $settings['br_google_my_business_token'] ) );
+		}
+
+		// Business Reviews : Saving Trustpilot Api Key
+		if ( isset( $settings['br_trustpilot_api_key'] ) ) {
+			update_option( 'eael_br_trustpilot_api_key', sanitize_text_field( $settings['br_trustpilot_api_key'] ) );
+		}
+
+		// Business Reviews : Saving Yelp Api Key
+		if ( isset( $settings['br_yelp_api_key'] ) ) {
+			update_option( 'eael_br_yelp_api_key', sanitize_text_field( $settings['br_yelp_api_key'] ) );
 		}
 
 		// Saving Google Map Api Key
@@ -1039,6 +1103,11 @@ trait Ajax_Handler {
 		// Saving Duplicator Settings
 		if ( isset( $settings['post-duplicator-post-type'] ) ) {
 			update_option( 'eael_save_post_duplicator_post_type', sanitize_text_field( $settings['post-duplicator-post-type'] ) );
+		}
+
+		// Saving Woo Acount Dashboard Settings
+		if ( isset( $settings['woo-account-dashboard-custom-tabs'] ) ) {
+			update_option( 'eael_woo_ac_dashboard_custom_tabs', sanitize_text_field( $settings['woo-account-dashboard-custom-tabs'] ) );
 		}
 
 		// save js print method

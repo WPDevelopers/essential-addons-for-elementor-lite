@@ -133,6 +133,19 @@
 		}
 	}
 
+	.eaelec-modal-header .eaelec-event-popup-location {
+		color: #555;
+		padding-top: 5px;
+		display: block;
+		font-size: 14px;
+		line-height: 1.4;
+
+		i {
+			color: #5725ff;
+			margin-right: 5px;
+		}
+	}
+
 	.eaelec-modal-close {
 		position: absolute;
 		right: -15px;

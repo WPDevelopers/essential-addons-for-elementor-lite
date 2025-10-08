@@ -78,6 +78,10 @@ class Data_Table extends Widget_Base {
         return $is_dynamic_content;
     }
 
+	public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
+    }
+
     public function get_custom_help_url()
     {
         return 'https://essential-addons.com/elementor/docs/data-table/';
@@ -313,7 +317,7 @@ class Data_Table extends Widget_Base {
 			[
 				'label'			=> esc_html__( 'Col Span', 'essential-addons-for-elementor-lite'),
 				'type'			=> Controls_Manager::NUMBER,
-				'description'	=> esc_html__( 'Default: 1 (optional).'),
+				'description'	=> esc_html__( 'Default: 1 (optional).', 'essential-addons-for-elementor-lite'),
 				'default' 		=> 1,
 				'min'     		=> 1,
 				'label_block'	=> true,
@@ -358,7 +362,7 @@ class Data_Table extends Widget_Base {
 			[
 				'label'			=> esc_html__( 'Row Span', 'essential-addons-for-elementor-lite'),
 				'type'			=> Controls_Manager::NUMBER,
-				'description'	=> esc_html__( 'Default: 1 (optional).'),
+				'description'	=> esc_html__( 'Default: 1 (optional).', 'essential-addons-for-elementor-lite'),
 				'default' 		=> 1,
 				'min'     		=> 1,
 				'label_block'	=> true,
@@ -1459,12 +1463,16 @@ class Data_Table extends Widget_Base {
 											<div class="td-content-wrapper">
 												<div <?php $this->print_render_attribute_string('td_content'); ?>>
 													<?php
-													// WPML Compatibility
-													if ( ! is_array( $table_td[ $j ]['template'] ) ) {
-														$table_td[ $j ]['template'] = apply_filters( 'wpml_object_id', $table_td[ $j ]['template'], 'wp_template', true );
+													if ( Helper::is_elementor_publish_template( $table_td[ $j ]['template'] ) ) {
+														// WPML Compatibility
+														if ( ! is_array( $table_td[ $j ]['template'] ) ) {
+															$table_td[ $j ]['template'] = apply_filters( 'wpml_object_id', $table_td[ $j ]['template'], 'wp_template', true );
+														}
+
+														Helper::eael_onpage_edit_template_markup( get_the_ID(), $table_td[ $j ]['template'] );
+														// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+														echo Plugin::$instance->frontend->get_builder_content( intval( $table_td[ $j ]['template'] ), true );
 													}
-													// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-													echo Plugin::$instance->frontend->get_builder_content( intval( $table_td[ $j ]['template'] ), true );
 													?>
 												</div>
 											</div>

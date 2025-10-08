@@ -546,13 +546,16 @@ trait Woo_Checkout_Helper {
 					</div>
 
                     <?php
-                    if( class_exists('WC_Subscriptions_Cart') && (\WC_Subscriptions_Cart::cart_contains_subscription())) {
+					$has_subscription = class_exists('WC_Subscriptions_Cart') && (\WC_Subscriptions_Cart::cart_contains_subscription());
+                    if( $has_subscription ) {
                         echo '<table class="recurring-wrapper">';
                         do_action( 'eael_display_recurring_total_total' );
-                        echo '</table>';
                     }
+					do_action( 'woocommerce_review_order_after_order_total' );
+					if( $has_subscription ){
+						echo '</table>';
+					}
                     ?>
-					<?php do_action( 'woocommerce_review_order_after_order_total' ); ?>
 				</div>
 			</div>
 		</div>
@@ -611,7 +614,7 @@ trait Woo_Checkout_Helper {
 		$checkout = WC()->checkout();
 		$settings = self::ea_get_woo_checkout_settings();
 	    ?>
-		<div class="woocommerce-billing-fields">
+		<div class="woocommerce-billing-fields eael-billing-fields">
             <?php if ( wc_ship_to_billing_address_only() && WC()->cart->needs_shipping() ) : ?>
 
                 <h3><?php esc_html_e( 'Billing &amp; Shipping', 'essential-addons-for-elementor-lite' ); ?></h3>
@@ -675,7 +678,7 @@ trait Woo_Checkout_Helper {
         $checkout = WC()->checkout();
 		$settings = self::ea_get_woo_checkout_settings();
         ?>
-        <div class="woocommerce-shipping-fields">
+        <div class="woocommerce-shipping-fields eael-shipping-fields">
 			<?php if ( true === WC()->cart->needs_shipping_address() ) : ?>
 
                 <h3 id="ship-to-different-address">

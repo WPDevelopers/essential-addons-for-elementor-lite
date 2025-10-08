@@ -37,6 +37,14 @@ class WpForms extends Widget_Base {
         return 'eaicon-wpforms';
     }
 
+    public function get_script_depends(): array {
+        if ( ! class_exists( '\WPForms\WPForms' ) ) {
+            return [];
+        }
+        
+		return [ 'wpforms-elementor' ];
+	}
+
     public function get_keywords()
     {
         return [
@@ -52,6 +60,10 @@ class WpForms extends Widget_Base {
             'ea',
             'essential addons'
         ];
+    }
+
+    public function has_widget_inner_wrapper(): bool {
+        return ! Helper::eael_e_optimized_markup();
     }
 
     public function get_custom_help_url()
@@ -1400,6 +1412,7 @@ class WpForms extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
+                    '{{WRAPPER}} .eael-wpforms .wpforms-error' => 'color: {{VALUE}}',
                     '{{WRAPPER}} .eael-wpforms label.wpforms-error' => 'color: {{VALUE}}',
                 ],
                 'condition'             => [
@@ -1415,7 +1428,8 @@ class WpForms extends Widget_Base {
                 'type'                  => Controls_Manager::COLOR,
                 'default'               => '',
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-wpforms input.wpforms-error, {{WRAPPER}} .eael-wpforms textarea.wpforms-error' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-wpforms input.wpforms-error' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .eael-wpforms textarea.wpforms-error' => 'border-color: {{VALUE}}',
                 ],
                 'condition'             => [
                     'error_messages' => 'show',
@@ -1433,7 +1447,8 @@ class WpForms extends Widget_Base {
                 'max'                   => 10,
                 'step'                  => 1,
                 'selectors'             => [
-                    '{{WRAPPER}} .eael-wpforms input.wpforms-error, {{WRAPPER}} .eael-wpforms textarea.wpforms-error' => 'border-width: {{VALUE}}px',
+                    '{{WRAPPER}} .eael-wpforms input.wpforms-error' => 'border-width: {{VALUE}}px',
+                    '{{WRAPPER}} .eael-wpforms textarea.wpforms-error' => 'border-width: {{VALUE}}px',
                 ],
                 'condition'             => [
                     'error_messages' => 'show',
