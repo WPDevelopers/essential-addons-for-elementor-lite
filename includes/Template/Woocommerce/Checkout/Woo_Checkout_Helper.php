@@ -614,7 +614,7 @@ trait Woo_Checkout_Helper {
 		$checkout = WC()->checkout();
 		$settings = self::ea_get_woo_checkout_settings();
 	    ?>
-		<div class="woocommerce-billing-fields">
+		<div class="woocommerce-billing-fields eael-billing-fields">
             <?php if ( wc_ship_to_billing_address_only() && WC()->cart->needs_shipping() ) : ?>
 
                 <h3><?php esc_html_e( 'Billing &amp; Shipping', 'essential-addons-for-elementor-lite' ); ?></h3>
@@ -678,7 +678,7 @@ trait Woo_Checkout_Helper {
         $checkout = WC()->checkout();
 		$settings = self::ea_get_woo_checkout_settings();
         ?>
-        <div class="woocommerce-shipping-fields">
+        <div class="woocommerce-shipping-fields eael-shipping-fields">
 			<?php if ( true === WC()->cart->needs_shipping_address() ) : ?>
 
                 <h3 id="ship-to-different-address">
