@@ -13,6 +13,7 @@ var EventCalendar = function ($scope, $) {
 		defaultDate = element.data("defaultdate"),
 		multiDaysEventDayCount = typeof element.data("multidays_event_day_count") !== 'undefined' ? element.data("multidays_event_day_count") : 0,
 		eventLimit = element.data("event_limit"),
+		locationDisplay = element.data("location-display"),
 		popupDateFormate = element.data("popup_date_format"),
 		monthColumnHeaderFormat = element.data("monthcolumnheaderformat"),
 		weekColumnHeaderFormat = element.data("weekcolumnheaderformat"),
@@ -272,6 +273,14 @@ var EventCalendar = function ($scope, $) {
 								$(".eaelec-modal-body").css("height", "auto");
 							} else {
 								$(".eaelec-modal-body").css("height", "300px");
+							}
+
+							// Handle location display
+							var locationSelector = $(".eaelec-event-location");
+							if (locationDisplay === 'yes' && event.extendedProps.location && event.extendedProps.location.trim() !== '') {
+								locationSelector.html('<i class="eicon-map-pin"></i> ' + DOMPurify.sanitize(event.extendedProps.location)).show();
+							} else {
+								locationSelector.hide();
 							}
 
 						if ( $(".eael-event-calendar-cls", $scope).data('hidedetailslink') !== 'yes'){
