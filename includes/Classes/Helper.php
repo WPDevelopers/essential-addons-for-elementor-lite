@@ -213,7 +213,7 @@ class Helper
 		    }
 
 		    if ( ! empty( $args['tax_query'] ) ) {
-			    $args['tax_query']['relation'] = 'AND';
+			    $args['tax_query']['relation'] = isset( $settings['tax_query_relation'] ) ? $settings['tax_query_relation'] : 'AND';
 		    }
 	    }
 
