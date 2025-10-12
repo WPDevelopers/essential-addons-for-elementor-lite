@@ -1021,12 +1021,20 @@ class Helper
             printf('<%1$s class="eael-product-quick-view-title product_title entry-title">%2$s</%1$s>',esc_html( $tag ), wp_kses( get_the_title(), Helper::eael_allowed_tags() ));
         }, 5 );
 
+        $popup_classes = array();
+
+        if ( isset( $settings['eael_product_quick_view_hide_categories'] ) && 'yes' === $settings['eael_product_quick_view_hide_categories'] ) {
+            $popup_classes[] = 'eael-quick-view-hide-categories';
+        }
+        if ( isset( $settings['eael_product_quick_view_hide_quantity'] ) && 'yes' === $settings['eael_product_quick_view_hide_quantity'] ) {
+            $popup_classes[] = 'eael-quick-view-hide-quantity';
+        }
 	    ?>
 
 		<div id="eaproduct<?php echo esc_attr( $widget_id . $product->get_id() ); ?>" class="eael-product-popup
 		eael-product-zoom-in woocommerce">
 			<div class="eael-product-modal-bg"></div>
-			<div class="eael-product-popup-details">
+			<div class="eael-product-popup-details <?php echo esc_attr( implode( ' ', $popup_classes ) ); ?>">
 				<div id="product-<?php esc_attr( get_the_ID() ); ?>" <?php post_class( 'product' ); ?>>
 					<div class="eael-product-image-wrap">
 						<?php
