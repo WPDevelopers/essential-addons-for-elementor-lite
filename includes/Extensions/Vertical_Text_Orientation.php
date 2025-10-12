@@ -284,13 +284,25 @@ class Vertical_Text_Orientation {
 				'fields'  => $repeater->get_controls(),
 				'default' => [
 					[
-						'eael_vto_writing_gradient_color' => '#000000',
+						'eael_vto_writing_gradient_color' => '#F50404',
+                        'eael_vto_writing_gradient_color_location' => [
+                            'unit' => '%',
+                            'size' => 50,
+                        ],
 					],
 					[
 						'eael_vto_writing_gradient_color' => '#0ff',
+                        'eael_vto_writing_gradient_color_location' => [
+                            'unit' => '%',
+                            'size' => 70,
+                        ],
 					],
 					[
 						'eael_vto_writing_gradient_color' => '#00f',
+                        'eael_vto_writing_gradient_color_location' => [
+                            'unit' => '%',
+                            'size' => 100,
+                        ],
 					],
 				],
 				'title_field' => '{{{ eael_vto_writing_gradient_color }}}',
