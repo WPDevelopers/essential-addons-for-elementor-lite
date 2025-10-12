@@ -74,7 +74,7 @@ class Vertical_Text_Orientation {
 			]
 		);
 
-        $element->add_control(
+        $element->add_responsive_control(
 			'eael_vto_writing_height',
 			[
 				'label'      => esc_html__( 'Height', 'essential-addons-for-elementor-lite' ),
@@ -116,7 +116,7 @@ class Vertical_Text_Orientation {
 			]
 		);
 
-        $element->add_control(
+        $element->add_responsive_control(
 			'eael_vto_writing_letter_spacing',
 			[
 				'label'      => esc_html__( 'Letter Spacing', 'essential-addons-for-elementor-lite' ),
@@ -138,7 +138,7 @@ class Vertical_Text_Orientation {
 			]
 		);
 
-        $element->add_control(
+        $element->add_responsive_control(
 			'eael_vto_writing_word_spacing',
 			[
 				'label'      => esc_html__( 'Word Spacing', 'essential-addons-for-elementor-lite' ),
@@ -160,7 +160,7 @@ class Vertical_Text_Orientation {
 			]
 		);
 
-        $element->add_control(
+        $element->add_responsive_control(
 			'eael_vto_writing_text_indent',
 			[
 				'label'      => esc_html__( 'Text Indent', 'essential-addons-for-elementor-lite' ),
@@ -182,7 +182,7 @@ class Vertical_Text_Orientation {
 			]
 		);
 
-        $element->add_control(
+        $element->add_responsive_control(
 			'eael_vto_writing_line_height',
 			[
 				'label'      => esc_html__( 'Line Height', 'essential-addons-for-elementor-lite' ),
