@@ -4,7 +4,7 @@ Tags: elementor, elementor addons, elementor widgets, elementor templates, eleme
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.3.2
+Stable tag: 6.3.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -316,6 +316,19 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 6.3.3 - 08/10/2025 =
+
+- Fixed: EA Content Ticker | Tags not working properly with The Events Calendar
+- Fixed: EA Advanced Tabs | Multiple saved templates causing design and responsiveness issues
+- Fixed: EA Woo Checkout | Conflict with WooPayments
+- Improved: EA Advanced Tab | Added Liquid Glass Effect
+- Improved: EA Feature List | Horizontal layout enhancements
+- Improved: EA Business Review | New design update
+- Improved: EA Dynamic Tags | Enhanced flexibility
+- Improved: EA Advanced Tabs | Added scheduling option for "Active as Default" controller
+- Improved: EA Event Calendar | Added location field in event popup
+- Few minor bug fixes & improvements
 
 = 6.3.2 - 18/09/2025 =
 
