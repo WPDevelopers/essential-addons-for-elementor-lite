@@ -611,7 +611,7 @@
 .theme-buddyboss-theme .eael-product-popup.woocommerce div.product form.cart .button.single_add_to_cart_button {
   padding: 5px 36px;
 }
-.eael-product-popup-details.eael-quick-view-hide-categories .product_meta .posted_in {
+.eael-product-popup-details.eael-quick-view-hide-categories .product .product_meta .posted_in {
   display: none;
 }
 .eael-product-popup-details.eael-quick-view-hide-quantity .cart .quantity {
