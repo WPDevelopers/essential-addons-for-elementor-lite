@@ -137,7 +137,7 @@ msgstr ""
 msgid "Select a WPForm"
 msgstr ""
 
-#: ../includes/Classes/Helper.php:1723
+#: ../includes/Classes/Helper.php:1724
 msgid "Edit Template"
 msgstr ""
 
@@ -377,135 +377,135 @@ msgstr ""
 msgid "Enhance Gutenberg experience with 50+ unique blocks (more coming soon). Boost your block editor with easy-to-use blocks for a simpler WordPress page or post design."
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:550, ../includes/Traits/Admin.php:671
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:550, ../includes/Traits/Admin.php:680
 msgid "Content Elements"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:554, ../includes/Elements/Creative_Button.php:33, ../includes/Traits/Admin.php:676
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:554, ../includes/Elements/Creative_Button.php:33, ../includes/Traits/Admin.php:685
 msgid "Creative Button"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:559, ../includes/Elements/Team_Member.php:26, ../includes/Traits/Admin.php:683
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:559, ../includes/Elements/Team_Member.php:26, ../includes/Traits/Admin.php:692
 msgid "Team Member"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:564, ../includes/Elements/Testimonial.php:24, ../includes/Elements/Testimonial.php:343, ../includes/Traits/Admin.php:691
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:564, ../includes/Elements/Testimonial.php:24, ../includes/Elements/Testimonial.php:343, ../includes/Traits/Admin.php:700
 msgid "Testimonial"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:569, ../includes/Elements/Flip_Box.php:35, ../includes/Traits/Admin.php:699
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:569, ../includes/Elements/Flip_Box.php:35, ../includes/Traits/Admin.php:708
 msgid "Flip Box"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:574, ../includes/Elements/Info_Box.php:32, ../includes/Traits/Admin.php:706
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:574, ../includes/Elements/Info_Box.php:32, ../includes/Traits/Admin.php:715
 msgid "Info Box"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:579, ../includes/Elements/Dual_Color_Header.php:31, ../includes/Traits/Admin.php:713
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:579, ../includes/Elements/Dual_Color_Header.php:31, ../includes/Traits/Admin.php:722
 msgid "Dual Color Heading"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:584, ../includes/Elements/Pricing_Table.php:406, ../includes/Elements/Pricing_Table.php:1730, ../includes/Elements/Tooltip.php:26, ../includes/Traits/Admin.php:720
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:584, ../includes/Elements/Pricing_Table.php:406, ../includes/Elements/Pricing_Table.php:1730, ../includes/Elements/Tooltip.php:26, ../includes/Traits/Admin.php:729
 msgid "Tooltip"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:589, ../includes/Elements/Adv_Accordion.php:31, ../includes/Traits/Admin.php:727
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:589, ../includes/Elements/Adv_Accordion.php:31, ../includes/Traits/Admin.php:736
 msgid "Advanced Accordion"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:594, ../includes/Elements/Adv_Tabs.php:31, ../includes/Traits/Admin.php:734
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:594, ../includes/Elements/Adv_Tabs.php:31, ../includes/Traits/Admin.php:743
 msgid "Advanced Tabs"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:599, ../includes/Elements/Feature_List.php:28, ../includes/Elements/Pricing_Table.php:1365, ../includes/Traits/Admin.php:742
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:599, ../includes/Elements/Feature_List.php:28, ../includes/Elements/Pricing_Table.php:1365, ../includes/Traits/Admin.php:751
 msgid "Feature List"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:605, ../includes/Elements/Sticky_Video.php:26, ../includes/Traits/Admin.php:801
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:605, ../includes/Elements/Sticky_Video.php:26, ../includes/Traits/Admin.php:810
 msgid "Sticky Video"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:610, ../includes/Elements/Event_Calendar.php:39, ../includes/Traits/Admin.php:808
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:610, ../includes/Elements/Event_Calendar.php:39, ../includes/Traits/Admin.php:817
 msgid "Event Calendar"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:615, ../includes/Elements/Simple_Menu.php:33, ../includes/Traits/Admin.php:816
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:615, ../includes/Elements/Simple_Menu.php:33, ../includes/Traits/Admin.php:825
 msgid "Simple Menu"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:621, ../includes/Traits/Admin.php:848
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:621, ../includes/Traits/Admin.php:857
 msgid "Dynamic Content Elements"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:625, ../includes/Elements/Post_Grid.php:34, ../includes/Traits/Admin.php:853
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:625, ../includes/Elements/Post_Grid.php:34, ../includes/Traits/Admin.php:862
 msgid "Post Grid"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:630, ../includes/Elements/Post_Timeline.php:31, ../includes/Traits/Admin.php:861
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:630, ../includes/Elements/Post_Timeline.php:31, ../includes/Traits/Admin.php:870
 msgid "Post Timeline"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:634, ../includes/Elements/Data_Table.php:32, ../includes/Traits/Admin.php:868
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:634, ../includes/Elements/Data_Table.php:32, ../includes/Traits/Admin.php:877
 msgid "Data Table"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:639, ../includes/Elements/Advanced_Data_Table.php:26, ../includes/Traits/Admin.php:875
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:639, ../includes/Elements/Advanced_Data_Table.php:26, ../includes/Traits/Admin.php:884
 msgid "Advanced Data Table"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:643, ../includes/Elements/Content_Ticker.php:29, ../includes/Traits/Admin.php:883
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:643, ../includes/Elements/Content_Ticker.php:29, ../includes/Traits/Admin.php:892
 msgid "Content Ticker"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:648, ../includes/Elements/NFT_Gallery.php:26, ../includes/Elements/NFT_Gallery.php:2496, ../includes/Elements/NFT_Gallery.php:2619, ../includes/Traits/Admin.php:944
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:648, ../includes/Elements/NFT_Gallery.php:26, ../includes/Elements/NFT_Gallery.php:2496, ../includes/Elements/NFT_Gallery.php:2619, ../includes/Traits/Admin.php:953
 msgid "NFT Gallery"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:653, ../includes/Elements/Business_Reviews.php:38, ../includes/Traits/Admin.php:952
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:653, ../includes/Elements/Business_Reviews.php:38, ../includes/Traits/Admin.php:961
 msgid "Business Reviews"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:658, ../includes/Traits/Admin.php:961
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:658, ../includes/Traits/Admin.php:970
 msgid "Creative Elements"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:662, ../includes/Elements/Countdown.php:27, ../includes/Traits/Admin.php:966
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:662, ../includes/Elements/Countdown.php:27, ../includes/Traits/Admin.php:975
 msgid "Countdown"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:667, ../includes/Elements/Fancy_Text.php:27, ../includes/Elements/Fancy_Text.php:78, ../includes/Traits/Admin.php:973
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:667, ../includes/Elements/Fancy_Text.php:27, ../includes/Elements/Fancy_Text.php:78, ../includes/Traits/Admin.php:982
 msgid "Fancy Text"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:672, ../includes/Elements/Filterable_Gallery.php:35, ../includes/Traits/Admin.php:980
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:672, ../includes/Elements/Filterable_Gallery.php:35, ../includes/Traits/Admin.php:989
 msgid "Filterable Gallery"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:677, ../includes/Elements/Image_Accordion.php:28, ../includes/Traits/Admin.php:988
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:677, ../includes/Elements/Image_Accordion.php:28, ../includes/Traits/Admin.php:997
 msgid "Image Accordion"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:682, ../includes/Elements/GravityForms.php:591, ../includes/Elements/GravityForms.php:657, ../includes/Elements/Progress_Bar.php:28, ../includes/Elements/Progress_Bar.php:135, ../includes/Elements/Progress_Bar.php:187, ../includes/Traits/Admin.php:995
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:682, ../includes/Elements/GravityForms.php:591, ../includes/Elements/GravityForms.php:657, ../includes/Elements/Progress_Bar.php:28, ../includes/Elements/Progress_Bar.php:135, ../includes/Elements/Progress_Bar.php:187, ../includes/Traits/Admin.php:1004
 msgid "Progress Bar"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:687, ../includes/Elements/Interactive_Circle.php:26, ../includes/Traits/Admin.php:1104
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:687, ../includes/Elements/Interactive_Circle.php:26, ../includes/Traits/Admin.php:1113
 msgid "Interactive Circle"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:692, ../includes/Elements/SVG_Draw.php:24, ../includes/Traits/Admin.php:1112
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:692, ../includes/Elements/SVG_Draw.php:24, ../includes/Traits/Admin.php:1121
 msgid "SVG Draw"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:697, ../includes/Traits/Admin.php:1119, ../includes/Traits/Elements.php:360
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:697, ../includes/Traits/Admin.php:1128, ../includes/Traits/Elements.php:360
 msgid "Fancy Chart"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:702, ../includes/Traits/Admin.php:1127, ../includes/Traits/Elements.php:366
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:702, ../includes/Traits/Admin.php:1136, ../includes/Traits/Elements.php:366
 msgid "Stacked Cards"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:707, ../includes/Traits/Admin.php:1136, ../includes/Traits/Elements.php:372
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:707, ../includes/Traits/Admin.php:1145, ../includes/Traits/Elements.php:372
 msgid "360 Degree Photo Viewer"
 msgstr ""
 
@@ -513,59 +513,59 @@ msgstr ""
 msgid "Marketing & Social Feed Elements"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:717, ../includes/Elements/Cta_Box.php:419, ../includes/Traits/Admin.php:1151
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:717, ../includes/Elements/Cta_Box.php:419, ../includes/Traits/Admin.php:1160
 msgid "Call To Action"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:722, ../includes/Elements/Pricing_Table.php:29, ../includes/Traits/Admin.php:1158
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:722, ../includes/Elements/Pricing_Table.php:29, ../includes/Traits/Admin.php:1167
 msgid "Pricing Table"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:727, ../includes/Traits/Admin.php:1285
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:727, ../includes/Traits/Admin.php:1294
 msgid "Twitter Feed"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:732, ../includes/Elements/Facebook_Feed.php:28, ../includes/Traits/Admin.php:1310
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:732, ../includes/Elements/Facebook_Feed.php:28, ../includes/Traits/Admin.php:1319
 msgid "Facebook Feed"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:739, ../includes/Traits/Admin.php:1184
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:739, ../includes/Traits/Admin.php:1193
 msgid "Form Styler Elements"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:743, ../includes/Elements/Contact_Form_7.php:43, ../includes/Traits/Admin.php:1189
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:743, ../includes/Elements/Contact_Form_7.php:43, ../includes/Traits/Admin.php:1198
 msgid "Contact Form 7"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:748, ../includes/Traits/Admin.php:1196
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:748, ../includes/Traits/Admin.php:1205
 msgid "weForms"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:752, ../includes/Traits/Admin.php:1203
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:752, ../includes/Traits/Admin.php:1212
 msgid "Ninja Form"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:756, ../includes/Traits/Admin.php:1210
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:756, ../includes/Traits/Admin.php:1219
 msgid "Gravity Form"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:760, ../includes/Elements/Caldera_Forms.php:100, ../includes/Traits/Admin.php:1218
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:760, ../includes/Elements/Caldera_Forms.php:100, ../includes/Traits/Admin.php:1227
 msgid "Caldera Form"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:764, ../includes/Elements/WpForms.php:27, ../includes/Elements/WpForms.php:99, ../includes/Traits/Admin.php:1225
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:764, ../includes/Elements/WpForms.php:27, ../includes/Elements/WpForms.php:99, ../includes/Traits/Admin.php:1234
 msgid "WPForms"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:768, ../includes/Elements/FluentForm.php:30, ../includes/Traits/Admin.php:1232
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:768, ../includes/Elements/FluentForm.php:30, ../includes/Traits/Admin.php:1241
 msgid "Fluent Forms"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:772, ../includes/Elements/Formstack.php:30, ../includes/Elements/Formstack.php:175, ../includes/Traits/Admin.php:1240
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:772, ../includes/Elements/Formstack.php:30, ../includes/Elements/Formstack.php:175, ../includes/Traits/Admin.php:1249
 msgid "Formstack"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:776, ../includes/Elements/TypeForm.php:26, ../includes/Elements/TypeForm.php:131, ../includes/Elements/TypeForm.php:137, ../includes/Traits/Admin.php:1247
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:776, ../includes/Elements/TypeForm.php:26, ../includes/Elements/TypeForm.php:131, ../includes/Elements/TypeForm.php:137, ../includes/Traits/Admin.php:1256
 msgid "Typeform"
 msgstr ""
 
@@ -573,75 +573,75 @@ msgstr ""
 msgid "Login Register Form"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:786, ../includes/Traits/Admin.php:1334
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:786, ../includes/Traits/Admin.php:1343
 msgid "Documentation Elements"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:790, ../includes/Elements/Betterdocs_Category_Grid.php:29, ../includes/Traits/Admin.php:1339
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:790, ../includes/Elements/Betterdocs_Category_Grid.php:29, ../includes/Traits/Admin.php:1348
 msgid "BetterDocs Category Grid"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:794, ../includes/Elements/Betterdocs_Category_Box.php:32, ../includes/Traits/Admin.php:1347
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:794, ../includes/Elements/Betterdocs_Category_Box.php:32, ../includes/Traits/Admin.php:1356
 msgid "BetterDocs Category Box"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:799, ../includes/Elements/Betterdocs_Search_Form.php:30, ../includes/Traits/Admin.php:1354
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:799, ../includes/Elements/Betterdocs_Search_Form.php:30, ../includes/Traits/Admin.php:1363
 msgid "BetterDocs Search Form"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:804, ../includes/Traits/Admin.php:1377
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:804, ../includes/Traits/Admin.php:1386
 msgid "WooCommerce Elements"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:808, ../includes/Elements/Product_Grid.php:61, ../includes/Traits/Admin.php:1382
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:808, ../includes/Elements/Product_Grid.php:61, ../includes/Traits/Admin.php:1391
 msgid "Woo Product Grid"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:813, ../includes/Elements/Woo_Product_List.php:50, ../includes/Traits/Admin.php:1390
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:813, ../includes/Elements/Woo_Product_List.php:50, ../includes/Traits/Admin.php:1399
 msgid "Woo Product List"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:818, ../includes/Elements/Woo_Product_Images.php:22, ../includes/Traits/Admin.php:1413
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:818, ../includes/Elements/Woo_Product_Images.php:22, ../includes/Traits/Admin.php:1422
 msgid "Woo Product Images"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:823, ../includes/Elements/Woo_Add_To_Cart.php:20, ../includes/Traits/Admin.php:1421
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:823, ../includes/Elements/Woo_Add_To_Cart.php:20, ../includes/Traits/Admin.php:1430
 msgid "Woo Add To Cart"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:828, ../includes/Elements/Woo_Product_Price.php:23, ../includes/Traits/Admin.php:1397
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:828, ../includes/Elements/Woo_Product_Price.php:23, ../includes/Traits/Admin.php:1406
 msgid "Woo Product Price"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:833, ../includes/Elements/Woo_Product_Rating.php:21, ../includes/Traits/Admin.php:1405
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:833, ../includes/Elements/Woo_Product_Rating.php:21, ../includes/Traits/Admin.php:1414
 msgid "Woo Product Rating"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:838, ../includes/Elements/Breadcrumbs.php:22, ../includes/Traits/Admin.php:831
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:838, ../includes/Elements/Breadcrumbs.php:22, ../includes/Traits/Admin.php:840
 msgid "Breadcrumbs"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:843, ../includes/Elements/Woo_Product_Carousel.php:63, ../includes/Traits/Admin.php:1446
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:843, ../includes/Elements/Woo_Product_Carousel.php:63, ../includes/Traits/Admin.php:1455
 msgid "Woo Product Carousel"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:847, ../includes/Elements/Woo_Checkout.php:51, ../includes/Traits/Admin.php:1454
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:847, ../includes/Elements/Woo_Checkout.php:51, ../includes/Traits/Admin.php:1463
 msgid "Woo Checkout"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:851, ../includes/Controls/Select2.php:45, ../includes/Elements/Woo_Cart.php:77, ../includes/Traits/Admin.php:1462
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:851, ../includes/Controls/Select2.php:45, ../includes/Elements/Woo_Cart.php:77, ../includes/Traits/Admin.php:1471
 msgid "Woo Cart"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:855, ../includes/Traits/Admin.php:482, ../includes/Traits/Admin.php:1477, ../includes/Traits/Elements.php:348
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:855, ../includes/Traits/Admin.php:482, ../includes/Traits/Admin.php:1486, ../includes/Traits/Elements.php:348
 msgid "Woo Cross Sells"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:859, ../includes/Elements/Woo_Product_Compare.php:34, ../includes/Traits/Admin.php:1485
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:859, ../includes/Elements/Woo_Product_Compare.php:34, ../includes/Traits/Admin.php:1494
 msgid "Woo Product Compare"
 msgstr ""
 
-#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:864, ../includes/Elements/Woo_Product_Gallery.php:49, ../includes/Traits/Admin.php:1492
+#: ../includes/Classes/WPDeveloper_Setup_Wizard.php:864, ../includes/Elements/Woo_Product_Gallery.php:49, ../includes/Traits/Admin.php:1501
 msgid "Woo Product Gallery"
 msgstr ""
 
@@ -909,19 +909,19 @@ msgstr ""
 msgid "Background Size"
 msgstr ""
 
-#: ../includes/Controls/EAEL_Background.php:586, ../includes/Controls/EAEL_Background.php:605, ../includes/Elements/Adv_Tabs.php:109, ../includes/Elements/Caldera_Forms.php:420, ../includes/Elements/Code_Snippet.php:211, ../includes/Elements/Contact_Form_7.php:334, ../includes/Elements/Contact_Form_7.php:844, ../includes/Elements/Countdown.php:87, ../includes/Elements/Creative_Button.php:288, ../includes/Elements/Cta_Box.php:200, ../includes/Elements/Cta_Box.php:1139, ../includes/Elements/Cta_Box.php:1680, ../includes/Elements/Dual_Color_Header.php:92, ../includes/Elements/Event_Calendar.php:861, ../includes/Elements/Event_Calendar.php:873, ../includes/Elements/Flip_Box.php:1040, ../includes/Elements/FluentForm.php:466, ../includes/Elements/Formstack.php:339, ../includes/Elements/GravityForms.php:356, ../includes/Elements/Login_Register.php:603, ../includes/Elements/Login_Register.php:1032, ../includes/Elements/Login_Register.php:1219, ../includes/Elements/Login_Register.php:1350, ../includes/Elements/Login_Register.php:2420, ../includes/Elements/Login_Register.php:2767, ../includes/Elements/Login_Register.php:2949, ../includes/Elements/Login_Register.php:3210, ../includes/Elements/Login_Register.php:3354, ../includes/Elements/Login_Register.php:3504, ../includes/Elements/Login_Register.php:3647, ../includes/Elements/Login_Register.php:3738, ../includes/Elements/Login_Register.php:3836, ../includes/Elements/Login_Register.php:4038, ../includes/Elements/Login_Register.php:4083, ../includes/Elements/Login_Register.php:4115, ../includes/Elements/Login_Register.php:4546, ../includes/Elements/Login_Register.php:4694, ../includes/Elements/Login_Register.php:4823, ../includes/Elements/Login_Register.php:5087, ../includes/Elements/Login_Register.php:5417, ../includes/Elements/NinjaForms.php:285, ../includes/Elements/Pricing_Table.php:91, ../includes/Elements/Pricing_Table.php:536, ../includes/Elements/Product_Grid.php:268, ../includes/Elements/Simple_Menu.php:409, ../includes/Elements/Simple_Menu.php:535, ../includes/Elements/Simple_Menu.php:897, ../includes/Elements/Simple_Menu.php:1320, ../includes/Elements/Sticky_Video.php:399, ../includes/Elements/Team_Member.php:547, ../includes/Elements/Testimonial.php:101, ../includes/Elements/Testimonial.php:293, ../includes/Elements/Testimonial.php:395, ../includes/Elements/TypeForm.php:201, ../includes/Elements/WeForms.php:165, ../includes/Elements/WeForms.php:635, ../includes/Elements/Woo_Checkout.php:130, ../includes/Elements/Woo_Product_Images.php:598, ../includes/Elements/WpForms.php:282, ../includes/Extensions/Hover_Effect.php:688, ../includes/Extensions/Hover_Effect.php:1331, ../includes/Traits/Controls.php:756, ../includes/Traits/Controls.php:1979, ../includes/Traits/Login_Registration.php:1304, ../includes/Traits/Woo_Product_Comparable.php:419, ../includes/Traits/Woo_Product_Comparable.php:533, ../includes/Traits/Woo_Product_Comparable.php:624, ../includes/Traits/Woo_Product_Comparable.php:693, ../includes/Template/Betterdocs-Category-Box/Layout_Default.php:4, ../includes/Template/Betterdocs-Category-Grid/Layout_Default.php:4, ../includes/Template/Content-Ticker/default.php:4, ../includes/Template/Eicon-Woocommerce/default.php:3, ../includes/Template/Post-Grid/default.php:6, ../includes/Template/Post-Timeline/default.php:4
+#: ../includes/Controls/EAEL_Background.php:586, ../includes/Controls/EAEL_Background.php:605, ../includes/Elements/Adv_Tabs.php:109, ../includes/Elements/Caldera_Forms.php:420, ../includes/Elements/Code_Snippet.php:211, ../includes/Elements/Contact_Form_7.php:334, ../includes/Elements/Contact_Form_7.php:844, ../includes/Elements/Countdown.php:87, ../includes/Elements/Creative_Button.php:288, ../includes/Elements/Cta_Box.php:200, ../includes/Elements/Cta_Box.php:1139, ../includes/Elements/Cta_Box.php:1680, ../includes/Elements/Dual_Color_Header.php:92, ../includes/Elements/Event_Calendar.php:861, ../includes/Elements/Event_Calendar.php:873, ../includes/Elements/Flip_Box.php:1040, ../includes/Elements/FluentForm.php:466, ../includes/Elements/Formstack.php:339, ../includes/Elements/GravityForms.php:356, ../includes/Elements/Login_Register.php:603, ../includes/Elements/Login_Register.php:1032, ../includes/Elements/Login_Register.php:1219, ../includes/Elements/Login_Register.php:1350, ../includes/Elements/Login_Register.php:2420, ../includes/Elements/Login_Register.php:2767, ../includes/Elements/Login_Register.php:2949, ../includes/Elements/Login_Register.php:3210, ../includes/Elements/Login_Register.php:3354, ../includes/Elements/Login_Register.php:3504, ../includes/Elements/Login_Register.php:3647, ../includes/Elements/Login_Register.php:3738, ../includes/Elements/Login_Register.php:3836, ../includes/Elements/Login_Register.php:4038, ../includes/Elements/Login_Register.php:4083, ../includes/Elements/Login_Register.php:4115, ../includes/Elements/Login_Register.php:4546, ../includes/Elements/Login_Register.php:4694, ../includes/Elements/Login_Register.php:4823, ../includes/Elements/Login_Register.php:5087, ../includes/Elements/Login_Register.php:5417, ../includes/Elements/NinjaForms.php:285, ../includes/Elements/Pricing_Table.php:91, ../includes/Elements/Pricing_Table.php:536, ../includes/Elements/Product_Grid.php:268, ../includes/Elements/Simple_Menu.php:409, ../includes/Elements/Simple_Menu.php:535, ../includes/Elements/Simple_Menu.php:897, ../includes/Elements/Simple_Menu.php:1320, ../includes/Elements/Sticky_Video.php:399, ../includes/Elements/Team_Member.php:547, ../includes/Elements/Testimonial.php:101, ../includes/Elements/Testimonial.php:293, ../includes/Elements/Testimonial.php:395, ../includes/Elements/TypeForm.php:201, ../includes/Elements/WeForms.php:165, ../includes/Elements/WeForms.php:635, ../includes/Elements/Woo_Checkout.php:130, ../includes/Elements/Woo_Product_Images.php:598, ../includes/Elements/WpForms.php:282, ../includes/Extensions/Hover_Effect.php:688, ../includes/Extensions/Hover_Effect.php:1331, ../includes/Extensions/Image_Masking.php:350, ../includes/Extensions/Image_Masking.php:401, ../includes/Traits/Controls.php:756, ../includes/Traits/Controls.php:1979, ../includes/Traits/Login_Registration.php:1304, ../includes/Traits/Woo_Product_Comparable.php:419, ../includes/Traits/Woo_Product_Comparable.php:533, ../includes/Traits/Woo_Product_Comparable.php:624, ../includes/Traits/Woo_Product_Comparable.php:693, ../includes/Template/Betterdocs-Category-Box/Layout_Default.php:4, ../includes/Template/Betterdocs-Category-Grid/Layout_Default.php:4, ../includes/Template/Content-Ticker/default.php:4, ../includes/Template/Eicon-Woocommerce/default.php:3, ../includes/Template/Post-Grid/default.php:6, ../includes/Template/Post-Timeline/default.php:4
 msgid "Default"
 msgstr ""
 
-#: ../includes/Controls/EAEL_Background.php:587, ../includes/Elements/Feature_List.php:454, ../includes/Elements/Login_Register.php:939
+#: ../includes/Controls/EAEL_Background.php:587, ../includes/Elements/Feature_List.php:454, ../includes/Elements/Login_Register.php:939, ../includes/Extensions/Image_Masking.php:351
 msgid "Auto"
 msgstr ""
 
-#: ../includes/Controls/EAEL_Background.php:588, ../includes/Elements/Cta_Box.php:256
+#: ../includes/Controls/EAEL_Background.php:588, ../includes/Elements/Cta_Box.php:256, ../includes/Extensions/Image_Masking.php:352
 msgid "Cover"
 msgstr ""
 
-#: ../includes/Controls/EAEL_Background.php:589, ../includes/Elements/Cta_Box.php:257, ../includes/Elements/Woo_Product_Gallery.php:595
+#: ../includes/Controls/EAEL_Background.php:589, ../includes/Elements/Cta_Box.php:257, ../includes/Elements/Woo_Product_Gallery.php:595, ../includes/Extensions/Image_Masking.php:353
 msgid "Contain"
 msgstr ""
 
@@ -1153,7 +1153,7 @@ msgstr ""
 msgid "Border"
 msgstr ""
 
-#: ../includes/Elements/Advanced_Data_Table.php:405, ../includes/Elements/Advanced_Data_Table.php:1075, ../includes/Elements/Advanced_Data_Table.php:1273, ../includes/Elements/Advanced_Data_Table.php:1345, ../includes/Elements/Advanced_Data_Table.php:1472, ../includes/Elements/Adv_Accordion.php:545, ../includes/Elements/Adv_Accordion.php:736, ../includes/Elements/Adv_Accordion.php:797, ../includes/Elements/Adv_Accordion.php:859, ../includes/Elements/Adv_Tabs.php:592, ../includes/Elements/Adv_Tabs.php:818, ../includes/Elements/Adv_Tabs.php:906, ../includes/Elements/Adv_Tabs.php:998, ../includes/Elements/Adv_Tabs.php:1096, ../includes/Elements/Betterdocs_Category_Box.php:313, ../includes/Elements/Betterdocs_Category_Box.php:381, ../includes/Elements/Betterdocs_Category_Box.php:502, ../includes/Elements/Betterdocs_Category_Box.php:579, ../includes/Elements/Betterdocs_Category_Box.php:901, ../includes/Elements/Betterdocs_Category_Box.php:1006, ../includes/Elements/Betterdocs_Category_Grid.php:355, ../includes/Elements/Betterdocs_Category_Grid.php:403, ../includes/Elements/Betterdocs_Category_Grid.php:488, ../includes/Elements/Betterdocs_Category_Grid.php:529, ../includes/Elements/Betterdocs_Category_Grid.php:654, ../includes/Elements/Betterdocs_Category_Grid.php:708, ../includes/Elements/Betterdocs_Category_Grid.php:861, ../includes/Elements/Betterdocs_Category_Grid.php:958, ../includes/Elements/Betterdocs_Category_Grid.php:1400, ../includes/Elements/Betterdocs_Category_Grid.php:1499, ../includes/Elements/Betterdocs_Search_Form.php:214, ../includes/Elements/Breadcrumbs.php:256, ../includes/Elements/Business_Reviews.php:1021, ../includes/Elements/Business_Reviews.php:1151, ../includes/Elements/Business_Reviews.php:1637, ../includes/Elements/Business_Reviews.php:1765, ../includes/Elements/Business_Reviews.php:2445, ../includes/Elements/Business_Reviews.php:2607, ../includes/Elements/Caldera_Forms.php:489, ../includes/Elements/Caldera_Forms.php:637, ../includes/Elements/Caldera_Forms.php:1055, ../includes/Elements/Caldera_Forms.php:1081, ../includes/Elements/Caldera_Forms.php:1248, ../includes/Elements/Code_Snippet.php:578, ../includes/Elements/Code_Snippet.php:748, ../includes/Elements/Code_Snippet.php:958, ../includes/Elements/Contact_Form_7.php:406, ../includes/Elements/Contact_Form_7.php:736, ../includes/Elements/Contact_Form_7.php:1093, ../includes/Elements/Contact_Form_7.php:1119, ../includes/Elements/Contact_Form_7.php:1284, ../includes/Elements/Content_Ticker.php:411, ../includes/Elements/Content_Ticker.php:485, ../includes/Elements/Content_Ticker.php:648, ../includes/Elements/Countdown.php:742, ../includes/Elements/Creative_Button.php:396, ../includes/Elements/Cta_Box.php:945, ../includes/Elements/Cta_Box.php:1420, ../includes/Elements/Cta_Box.php:1879, ../includes/Elements/Dual_Color_Header.php:532, ../includes/Elements/Event_Calendar.php:1574, ../includes/Elements/Event_Calendar.php:2063, ../includes/Elements/Event_Calendar.php:2421, ../includes/Elements/Event_Calendar.php:2488, ../includes/Elements/Event_Calendar.php:2542, ../includes/Elements/Event_Calendar.php:2784, ../includes/Elements/Event_Calendar.php:2955, ../includes/Elements/Event_Calendar.php:3268, ../includes/Elements/Event_Calendar.php:3382, ../includes/Elements/Event_Calendar.php:3453, ../includes/Elements/Facebook_Feed.php:563, ../includes/Elements/Facebook_Feed.php:623, ../includes/Elements/Fancy_Text.php:552, ../includes/Elements/Feature_List.php:753, ../includes/Elements/Filterable_Gallery.php:1303, ../includes/Elements/Filterable_Gallery.php:1401, ../includes/Elements/Filterable_Gallery.php:1491, ../includes/Elements/Filterable_Gallery.php:1556, ../includes/Elements/Filterable_Gallery.php:1656, ../includes/Elements/Filterable_Gallery.php:1893, ../includes/Elements/Filterable_Gallery.php:2231, ../includes/Elements/Filterable_Gallery.php:2514, ../includes/Elements/Filterable_Gallery.php:2575, ../includes/Elements/Filterable_Gallery.php:2745, ../includes/Elements/Filterable_Gallery.php:2876, ../includes/Elements/Filterable_Gallery.php:3016, ../includes/Elements/Filterable_Gallery.php:3114, ../includes/Elements/Filterable_Gallery.php:3229, ../includes/Elements/Filterable_Gallery.php:3372, ../includes/Elements/Flip_Box.php:994, ../includes/Elements/Flip_Box.php:1055, ../includes/Elements/Flip_Box.php:1180, ../includes/Elements/Flip_Box.php:1294, ../includes/Elements/Flip_Box.php:1555, ../includes/Elements/Flip_Box.php:2576, ../includes/Elements/FluentForm.php:535, ../includes/Elements/FluentForm.php:685, ../includes/Elements/FluentForm.php:1050, ../includes/Elements/FluentForm.php:1076, ../includes/Elements/FluentForm.php:1598, ../includes/Elements/FluentForm.php:1897, ../includes/Elements/FluentForm.php:2023, ../includes/Elements/FluentForm.php:2077, ../includes/Elements/Formstack.php:408, ../includes/Elements/Formstack.php:887, ../includes/Elements/Formstack.php:1213, ../includes/Elements/Formstack.php:1239, ../includes/Elements/Formstack.php:1486, ../includes/Elements/Formstack.php:1707, ../includes/Elements/Formstack.php:1835, ../includes/Elements/Formstack.php:1891, ../includes/Elements/GravityForms.php:449, ../includes/Elements/GravityForms.php:705, ../includes/Elements/GravityForms.php:1127, ../includes/Elements/GravityForms.php:1604, ../includes/Elements/GravityForms.php:1800, ../includes/Elements/GravityForms.php:1932, ../includes/Elements/GravityForms.php:2016, ../includes/Elements/GravityForms.php:2195, ../includes/Elements/GravityForms.php:2368, ../includes/Elements/GravityForms.php:2604, ../includes/Elements/Image_Accordion.php:392, ../includes/Elements/Image_Accordion.php:483, ../includes/Elements/Info_Box.php:787, ../includes/Elements/Info_Box.php:895, ../includes/Elements/Info_Box.php:968, ../includes/Elements/Info_Box.php:1591, ../includes/Elements/Login_Register.php:2910, ../includes/Elements/Login_Register.php:3145, ../includes/Elements/Login_Register.php:3323, ../includes/Elements/Login_Register.php:3479, ../includes/Elements/Login_Register.php:3619, ../includes/Elements/Login_Register.php:3713, ../includes/Elements/Login_Register.php:3804, ../includes/Elements/Login_Register.php:3978, ../includes/Elements/Login_Register.php:4015, ../includes/Elements/Login_Register.php:4129, ../includes/Elements/Login_Register.php:5215, ../includes/Elements/Login_Register.php:5252, ../includes/Elements/Login_Register.php:5567, ../includes/Elements/Login_Register.php:5604, ../includes/Elements/NFT_Gallery.php:883, ../includes/Elements/NFT_Gallery.php:1011, ../includes/Elements/NFT_Gallery.php:1223, ../includes/Elements/NFT_Gallery.php:1534, ../includes/Elements/NFT_Gallery.php:1787, ../includes/Elements/NFT_Gallery.php:2018, ../includes/Elements/NFT_Gallery.php:2041, ../includes/Elements/NFT_Gallery.php:2251, ../includes/Elements/NinjaForms.php:376, ../includes/Elements/NinjaForms.php:679, ../includes/Elements/NinjaForms.php:1103, ../includes/Elements/NinjaForms.php:1130, ../includes/Elements/NinjaForms.php:1420, ../includes/Elements/Post_Grid.php:1036, ../includes/Elements/Post_Timeline.php:191, ../includes/Elements/Post_Timeline.php:274, ../includes/Elements/Post_Timeline.php:573, ../includes/Elements/Pricing_Table.php:858, ../includes/Elements/Pricing_Table.php:1157, ../includes/Elements/Pricing_Table.php:1493, ../includes/Elements/Pricing_Table.php:1810, ../includes/Elements/Pricing_Table.php:2062, ../includes/Elements/Pricing_Table.php:2241, ../includes/Elements/Product_Grid.php:1492, ../includes/Elements/Product_Grid.php:2610, ../includes/Elements/Product_Grid.php:3001, ../includes/Elements/Product_Grid.php:3341, ../includes/Elements/Product_Grid.php:3540, ../includes/Elements/Product_Grid.php:3572, ../includes/Elements/Simple_Menu.php:682, ../includes/Elements/Sticky_Video.php:641, ../includes/Elements/SVG_Draw.php:553, ../includes/Elements/Team_Member.php:592, ../includes/Elements/Team_Member.php:691, ../includes/Elements/Team_Member.php:942, ../includes/Elements/Testimonial.php:443, ../includes/Elements/Testimonial.php:608, ../includes/Elements/Tooltip.php:522, ../includes/Elements/Twitter_Feed.php:753, ../includes/Elements/Twitter_Feed.php:846, ../includes/Elements/Twitter_Feed.php:1319, ../includes/Elements/TypeForm.php:315, ../includes/Elements/WeForms.php:257, ../includes/Elements/WeForms.php:398, ../includes/Elements/WeForms.php:728, ../includes/Elements/Woo_Add_To_Cart.php:171, ../includes/Elements/Woo_Add_To_Cart.php:428, ../includes/Elements/Woo_Add_To_Cart.php:697, ../includes/Elements/Woo_Cart.php:1461, ../includes/Elements/Woo_Cart.php:1636, ../includes/Elements/Woo_Cart.php:1892, ../includes/Elements/Woo_Cart.php:2031, ../includes/Elements/Woo_Cart.php:2155, ../includes/Elements/Woo_Cart.php:2318, ../includes/Elements/Woo_Cart.php:2529, ../includes/Elements/Woo_Cart.php:2615, ../includes/Elements/Woo_Cart.php:2699, ../includes/Elements/Woo_Checkout.php:922, ../includes/Elements/Woo_Checkout.php:1083, ../includes/Elements/Woo_Checkout.php:1281, ../includes/Elements/Woo_Checkout.php:1550, ../includes/Elements/Woo_Checkout.php:1755, ../includes/Elements/Woo_Checkout.php:1919, ../includes/Elements/Woo_Checkout.php:2126, ../includes/Elements/Woo_Checkout.php:2334, ../includes/Elements/Woo_Checkout.php:2560, ../includes/Elements/Woo_Checkout.php:2740, ../includes/Elements/Woo_Checkout.php:3028, ../includes/Elements/Woo_Product_Carousel.php:1288, ../includes/Elements/Woo_Product_Carousel.php:1751, ../includes/Elements/Woo_Product_Carousel.php:2154, ../includes/Elements/Woo_Product_Carousel.php:2350, ../includes/Elements/Woo_Product_Carousel.php:2382, ../includes/Elements/Woo_Product_Carousel.php:2592, ../includes/Elements/Woo_Product_Carousel.php:2715, ../includes/Elements/Woo_Product_Carousel.php:2839, ../includes/Elements/Woo_Product_Carousel.php:3026, ../includes/Elements/Woo_Product_Gallery.php:1049, ../includes/Elements/Woo_Product_Gallery.php:2117, ../includes/Elements/Woo_Product_Gallery.php:2518, ../includes/Elements/Woo_Product_Gallery.php:2717, ../includes/Elements/Woo_Product_Gallery.php:2749, ../includes/Elements/Woo_Product_Images.php:141, ../includes/Elements/Woo_Product_Images.php:303, ../includes/Elements/Woo_Product_List.php:1323, ../includes/Elements/Woo_Product_List.php:1436, ../includes/Elements/Woo_Product_List.php:1559, ../includes/Elements/Woo_Product_List.php:1849, ../includes/Elements/Woo_Product_List.php:1911, ../includes/Elements/Woo_Product_List.php:1976, ../includes/Elements/Woo_Product_List.php:2047, ../includes/Elements/Woo_Product_List.php:3329, ../includes/Elements/Woo_Product_List.php:3530, ../includes/Elements/Woo_Product_List.php:3562, ../includes/Elements/WpForms.php:353, ../includes/Elements/WpForms.php:658, ../includes/Elements/WpForms.php:1072, ../includes/Elements/WpForms.php:1098, ../includes/Elements/WpForms.php:1268, ../includes/Elements/WpForms.php:1378, ../includes/Extensions/Liquid_Glass_Effect.php:105, ../includes/Extensions/Scroll_to_Top.php:430, ../includes/Extensions/Table_of_Content.php:746, ../includes/Extensions/Table_of_Content.php:963, ../includes/Traits/Controls.php:1613, ../includes/Traits/Controls.php:1725, ../includes/Traits/Controls.php:1677, ../includes/Traits/Controls.php:1856, ../includes/Traits/Helper.php:756, ../includes/Traits/Woo_Product_Comparable.php:368, ../includes/Traits/Woo_Product_Comparable.php:513, ../includes/Traits/Woo_Product_Comparable.php:1394
+#: ../includes/Elements/Advanced_Data_Table.php:405, ../includes/Elements/Advanced_Data_Table.php:1075, ../includes/Elements/Advanced_Data_Table.php:1273, ../includes/Elements/Advanced_Data_Table.php:1345, ../includes/Elements/Advanced_Data_Table.php:1472, ../includes/Elements/Adv_Accordion.php:545, ../includes/Elements/Adv_Accordion.php:736, ../includes/Elements/Adv_Accordion.php:797, ../includes/Elements/Adv_Accordion.php:859, ../includes/Elements/Adv_Tabs.php:592, ../includes/Elements/Adv_Tabs.php:818, ../includes/Elements/Adv_Tabs.php:906, ../includes/Elements/Adv_Tabs.php:998, ../includes/Elements/Adv_Tabs.php:1096, ../includes/Elements/Betterdocs_Category_Box.php:313, ../includes/Elements/Betterdocs_Category_Box.php:381, ../includes/Elements/Betterdocs_Category_Box.php:502, ../includes/Elements/Betterdocs_Category_Box.php:579, ../includes/Elements/Betterdocs_Category_Box.php:901, ../includes/Elements/Betterdocs_Category_Box.php:1006, ../includes/Elements/Betterdocs_Category_Grid.php:355, ../includes/Elements/Betterdocs_Category_Grid.php:403, ../includes/Elements/Betterdocs_Category_Grid.php:488, ../includes/Elements/Betterdocs_Category_Grid.php:529, ../includes/Elements/Betterdocs_Category_Grid.php:654, ../includes/Elements/Betterdocs_Category_Grid.php:708, ../includes/Elements/Betterdocs_Category_Grid.php:861, ../includes/Elements/Betterdocs_Category_Grid.php:958, ../includes/Elements/Betterdocs_Category_Grid.php:1400, ../includes/Elements/Betterdocs_Category_Grid.php:1499, ../includes/Elements/Betterdocs_Search_Form.php:214, ../includes/Elements/Breadcrumbs.php:256, ../includes/Elements/Business_Reviews.php:1021, ../includes/Elements/Business_Reviews.php:1151, ../includes/Elements/Business_Reviews.php:1637, ../includes/Elements/Business_Reviews.php:1765, ../includes/Elements/Business_Reviews.php:2445, ../includes/Elements/Business_Reviews.php:2607, ../includes/Elements/Caldera_Forms.php:489, ../includes/Elements/Caldera_Forms.php:637, ../includes/Elements/Caldera_Forms.php:1055, ../includes/Elements/Caldera_Forms.php:1081, ../includes/Elements/Caldera_Forms.php:1248, ../includes/Elements/Code_Snippet.php:578, ../includes/Elements/Code_Snippet.php:748, ../includes/Elements/Code_Snippet.php:958, ../includes/Elements/Contact_Form_7.php:406, ../includes/Elements/Contact_Form_7.php:736, ../includes/Elements/Contact_Form_7.php:1093, ../includes/Elements/Contact_Form_7.php:1119, ../includes/Elements/Contact_Form_7.php:1284, ../includes/Elements/Content_Ticker.php:411, ../includes/Elements/Content_Ticker.php:485, ../includes/Elements/Content_Ticker.php:648, ../includes/Elements/Countdown.php:742, ../includes/Elements/Creative_Button.php:396, ../includes/Elements/Cta_Box.php:945, ../includes/Elements/Cta_Box.php:1420, ../includes/Elements/Cta_Box.php:1879, ../includes/Elements/Dual_Color_Header.php:532, ../includes/Elements/Event_Calendar.php:1574, ../includes/Elements/Event_Calendar.php:2063, ../includes/Elements/Event_Calendar.php:2421, ../includes/Elements/Event_Calendar.php:2488, ../includes/Elements/Event_Calendar.php:2542, ../includes/Elements/Event_Calendar.php:2784, ../includes/Elements/Event_Calendar.php:2955, ../includes/Elements/Event_Calendar.php:3268, ../includes/Elements/Event_Calendar.php:3382, ../includes/Elements/Event_Calendar.php:3453, ../includes/Elements/Facebook_Feed.php:563, ../includes/Elements/Facebook_Feed.php:623, ../includes/Elements/Fancy_Text.php:552, ../includes/Elements/Feature_List.php:753, ../includes/Elements/Filterable_Gallery.php:1303, ../includes/Elements/Filterable_Gallery.php:1401, ../includes/Elements/Filterable_Gallery.php:1491, ../includes/Elements/Filterable_Gallery.php:1556, ../includes/Elements/Filterable_Gallery.php:1656, ../includes/Elements/Filterable_Gallery.php:1893, ../includes/Elements/Filterable_Gallery.php:2231, ../includes/Elements/Filterable_Gallery.php:2514, ../includes/Elements/Filterable_Gallery.php:2575, ../includes/Elements/Filterable_Gallery.php:2745, ../includes/Elements/Filterable_Gallery.php:2876, ../includes/Elements/Filterable_Gallery.php:3016, ../includes/Elements/Filterable_Gallery.php:3114, ../includes/Elements/Filterable_Gallery.php:3229, ../includes/Elements/Filterable_Gallery.php:3372, ../includes/Elements/Flip_Box.php:994, ../includes/Elements/Flip_Box.php:1055, ../includes/Elements/Flip_Box.php:1180, ../includes/Elements/Flip_Box.php:1294, ../includes/Elements/Flip_Box.php:1555, ../includes/Elements/Flip_Box.php:2576, ../includes/Elements/FluentForm.php:535, ../includes/Elements/FluentForm.php:685, ../includes/Elements/FluentForm.php:1050, ../includes/Elements/FluentForm.php:1076, ../includes/Elements/FluentForm.php:1598, ../includes/Elements/FluentForm.php:1897, ../includes/Elements/FluentForm.php:2023, ../includes/Elements/FluentForm.php:2077, ../includes/Elements/Formstack.php:408, ../includes/Elements/Formstack.php:887, ../includes/Elements/Formstack.php:1213, ../includes/Elements/Formstack.php:1239, ../includes/Elements/Formstack.php:1486, ../includes/Elements/Formstack.php:1707, ../includes/Elements/Formstack.php:1835, ../includes/Elements/Formstack.php:1891, ../includes/Elements/GravityForms.php:449, ../includes/Elements/GravityForms.php:705, ../includes/Elements/GravityForms.php:1127, ../includes/Elements/GravityForms.php:1604, ../includes/Elements/GravityForms.php:1800, ../includes/Elements/GravityForms.php:1932, ../includes/Elements/GravityForms.php:2016, ../includes/Elements/GravityForms.php:2195, ../includes/Elements/GravityForms.php:2368, ../includes/Elements/GravityForms.php:2604, ../includes/Elements/Image_Accordion.php:392, ../includes/Elements/Image_Accordion.php:483, ../includes/Elements/Info_Box.php:787, ../includes/Elements/Info_Box.php:895, ../includes/Elements/Info_Box.php:968, ../includes/Elements/Info_Box.php:1591, ../includes/Elements/Login_Register.php:2910, ../includes/Elements/Login_Register.php:3145, ../includes/Elements/Login_Register.php:3323, ../includes/Elements/Login_Register.php:3479, ../includes/Elements/Login_Register.php:3619, ../includes/Elements/Login_Register.php:3713, ../includes/Elements/Login_Register.php:3804, ../includes/Elements/Login_Register.php:3978, ../includes/Elements/Login_Register.php:4015, ../includes/Elements/Login_Register.php:4129, ../includes/Elements/Login_Register.php:5215, ../includes/Elements/Login_Register.php:5252, ../includes/Elements/Login_Register.php:5567, ../includes/Elements/Login_Register.php:5604, ../includes/Elements/NFT_Gallery.php:883, ../includes/Elements/NFT_Gallery.php:1011, ../includes/Elements/NFT_Gallery.php:1223, ../includes/Elements/NFT_Gallery.php:1534, ../includes/Elements/NFT_Gallery.php:1787, ../includes/Elements/NFT_Gallery.php:2018, ../includes/Elements/NFT_Gallery.php:2041, ../includes/Elements/NFT_Gallery.php:2251, ../includes/Elements/NinjaForms.php:376, ../includes/Elements/NinjaForms.php:679, ../includes/Elements/NinjaForms.php:1103, ../includes/Elements/NinjaForms.php:1130, ../includes/Elements/NinjaForms.php:1420, ../includes/Elements/Post_Grid.php:1036, ../includes/Elements/Post_Timeline.php:191, ../includes/Elements/Post_Timeline.php:274, ../includes/Elements/Post_Timeline.php:573, ../includes/Elements/Pricing_Table.php:858, ../includes/Elements/Pricing_Table.php:1157, ../includes/Elements/Pricing_Table.php:1493, ../includes/Elements/Pricing_Table.php:1810, ../includes/Elements/Pricing_Table.php:2062, ../includes/Elements/Pricing_Table.php:2241, ../includes/Elements/Product_Grid.php:1492, ../includes/Elements/Product_Grid.php:2610, ../includes/Elements/Product_Grid.php:3001, ../includes/Elements/Product_Grid.php:3341, ../includes/Elements/Product_Grid.php:3540, ../includes/Elements/Product_Grid.php:3572, ../includes/Elements/Simple_Menu.php:682, ../includes/Elements/Sticky_Video.php:641, ../includes/Elements/SVG_Draw.php:553, ../includes/Elements/Team_Member.php:592, ../includes/Elements/Team_Member.php:691, ../includes/Elements/Team_Member.php:942, ../includes/Elements/Testimonial.php:443, ../includes/Elements/Testimonial.php:608, ../includes/Elements/Tooltip.php:522, ../includes/Elements/Twitter_Feed.php:753, ../includes/Elements/Twitter_Feed.php:846, ../includes/Elements/Twitter_Feed.php:1319, ../includes/Elements/TypeForm.php:315, ../includes/Elements/WeForms.php:257, ../includes/Elements/WeForms.php:398, ../includes/Elements/WeForms.php:728, ../includes/Elements/Woo_Add_To_Cart.php:171, ../includes/Elements/Woo_Add_To_Cart.php:428, ../includes/Elements/Woo_Add_To_Cart.php:697, ../includes/Elements/Woo_Cart.php:1461, ../includes/Elements/Woo_Cart.php:1636, ../includes/Elements/Woo_Cart.php:1892, ../includes/Elements/Woo_Cart.php:2031, ../includes/Elements/Woo_Cart.php:2155, ../includes/Elements/Woo_Cart.php:2318, ../includes/Elements/Woo_Cart.php:2529, ../includes/Elements/Woo_Cart.php:2615, ../includes/Elements/Woo_Cart.php:2699, ../includes/Elements/Woo_Checkout.php:922, ../includes/Elements/Woo_Checkout.php:1083, ../includes/Elements/Woo_Checkout.php:1281, ../includes/Elements/Woo_Checkout.php:1550, ../includes/Elements/Woo_Checkout.php:1755, ../includes/Elements/Woo_Checkout.php:1919, ../includes/Elements/Woo_Checkout.php:2126, ../includes/Elements/Woo_Checkout.php:2334, ../includes/Elements/Woo_Checkout.php:2560, ../includes/Elements/Woo_Checkout.php:2740, ../includes/Elements/Woo_Checkout.php:3028, ../includes/Elements/Woo_Product_Carousel.php:1288, ../includes/Elements/Woo_Product_Carousel.php:1751, ../includes/Elements/Woo_Product_Carousel.php:2154, ../includes/Elements/Woo_Product_Carousel.php:2350, ../includes/Elements/Woo_Product_Carousel.php:2382, ../includes/Elements/Woo_Product_Carousel.php:2592, ../includes/Elements/Woo_Product_Carousel.php:2715, ../includes/Elements/Woo_Product_Carousel.php:2839, ../includes/Elements/Woo_Product_Carousel.php:3026, ../includes/Elements/Woo_Product_Gallery.php:1049, ../includes/Elements/Woo_Product_Gallery.php:2117, ../includes/Elements/Woo_Product_Gallery.php:2518, ../includes/Elements/Woo_Product_Gallery.php:2717, ../includes/Elements/Woo_Product_Gallery.php:2749, ../includes/Elements/Woo_Product_Images.php:141, ../includes/Elements/Woo_Product_Images.php:303, ../includes/Elements/Woo_Product_List.php:1323, ../includes/Elements/Woo_Product_List.php:1436, ../includes/Elements/Woo_Product_List.php:1559, ../includes/Elements/Woo_Product_List.php:1849, ../includes/Elements/Woo_Product_List.php:1911, ../includes/Elements/Woo_Product_List.php:1976, ../includes/Elements/Woo_Product_List.php:2047, ../includes/Elements/Woo_Product_List.php:3329, ../includes/Elements/Woo_Product_List.php:3530, ../includes/Elements/Woo_Product_List.php:3562, ../includes/Elements/WpForms.php:353, ../includes/Elements/WpForms.php:658, ../includes/Elements/WpForms.php:1072, ../includes/Elements/WpForms.php:1098, ../includes/Elements/WpForms.php:1268, ../includes/Elements/WpForms.php:1378, ../includes/Extensions/Liquid_Glass_Effect.php:108, ../includes/Extensions/Scroll_to_Top.php:430, ../includes/Extensions/Table_of_Content.php:746, ../includes/Extensions/Table_of_Content.php:963, ../includes/Traits/Controls.php:1613, ../includes/Traits/Controls.php:1725, ../includes/Traits/Controls.php:1677, ../includes/Traits/Controls.php:1856, ../includes/Traits/Helper.php:756, ../includes/Traits/Woo_Product_Comparable.php:368, ../includes/Traits/Woo_Product_Comparable.php:513, ../includes/Traits/Woo_Product_Comparable.php:1394
 msgid "Border Radius"
 msgstr ""
 
@@ -1189,7 +1189,7 @@ msgstr ""
 msgid "Text Color"
 msgstr ""
 
-#: ../includes/Elements/Advanced_Data_Table.php:486, ../includes/Elements/Advanced_Data_Table.php:627, ../includes/Elements/Advanced_Data_Table.php:700, ../includes/Elements/Advanced_Data_Table.php:731, ../includes/Elements/Advanced_Data_Table.php:762, ../includes/Elements/Advanced_Data_Table.php:793, ../includes/Elements/Advanced_Data_Table.php:825, ../includes/Elements/Advanced_Data_Table.php:857, ../includes/Elements/Advanced_Data_Table.php:1036, ../includes/Elements/Advanced_Data_Table.php:1233, ../includes/Elements/Advanced_Data_Table.php:1304, ../includes/Elements/Advanced_Data_Table.php:1402, ../includes/Elements/Advanced_Data_Table.php:1432, ../includes/Elements/Adv_Accordion.php:1045, ../includes/Elements/Adv_Accordion.php:1092, ../includes/Elements/Adv_Accordion.php:1139, ../includes/Elements/Adv_Tabs.php:750, ../includes/Elements/Adv_Tabs.php:1029, ../includes/Elements/Breadcrumbs.php:236, ../includes/Elements/Business_Reviews.php:1046, ../includes/Elements/Business_Reviews.php:1079, ../includes/Elements/Business_Reviews.php:1177, ../includes/Elements/Business_Reviews.php:1211, ../includes/Elements/Business_Reviews.php:1662, ../includes/Elements/Business_Reviews.php:1695, ../includes/Elements/Business_Reviews.php:1790, ../includes/Elements/Business_Reviews.php:1825, ../includes/Elements/Business_Reviews.php:2410, ../includes/Elements/Business_Reviews.php:2466, ../includes/Elements/Caldera_Forms.php:601, ../includes/Elements/Caldera_Forms.php:809, ../includes/Elements/Caldera_Forms.php:1213, ../includes/Elements/Caldera_Forms.php:1319, ../includes/Elements/Caldera_Forms.php:1373, ../includes/Elements/Code_Snippet.php:559, ../includes/Elements/Code_Snippet.php:616, ../includes/Elements/Code_Snippet.php:861, ../includes/Elements/Contact_Form_7.php:564, ../includes/Elements/Contact_Form_7.php:779, ../includes/Elements/Contact_Form_7.php:1250, ../includes/Elements/Contact_Form_7.php:1358, ../includes/Elements/Contact_Form_7.php:1449, ../includes/Elements/Contact_Form_7.php:1544, ../includes/Elements/Content_Ticker.php:355, ../includes/Elements/Content_Ticker.php:432, ../includes/Elements/Content_Ticker.php:612, ../includes/Elements/Content_Ticker.php:669, ../includes/Elements/Countdown.php:852, ../includes/Elements/Countdown.php:864, ../includes/Elements/Countdown.php:924, ../includes/Elements/Countdown.php:936, ../includes/Elements/Countdown.php:996, ../includes/Elements/Countdown.php:1008, ../includes/Elements/Countdown.php:1068, ../includes/Elements/Countdown.php:1080, ../includes/Elements/Creative_Button.php:351, ../includes/Elements/Creative_Button.php:444, ../includes/Elements/Cta_Box.php:880, ../includes/Elements/Cta_Box.php:896, ../includes/Elements/Cta_Box.php:1324, ../includes/Elements/Cta_Box.php:1340, ../includes/Elements/Cta_Box.php:1528, ../includes/Elements/Cta_Box.php:1563, ../includes/Elements/Data_Table.php:684, ../includes/Elements/Data_Table.php:724, ../includes/Elements/Data_Table.php:1252, ../includes/Elements/Dual_Color_Header.php:487, ../includes/Elements/Event_Calendar.php:2876, ../includes/Elements/Filterable_Gallery.php:1258, ../includes/Elements/Filterable_Gallery.php:1357, ../includes/Elements/Filterable_Gallery.php:1470, ../includes/Elements/Filterable_Gallery.php:1535, ../includes/Elements/Filterable_Gallery.php:1605, ../includes/Elements/Filterable_Gallery.php:1710, ../includes/Elements/Filterable_Gallery.php:1930, ../includes/Elements/Filterable_Gallery.php:1969, ../includes/Elements/Filterable_Gallery.php:2151, ../includes/Elements/Filterable_Gallery.php:2168, ../includes/Elements/Filterable_Gallery.php:2404, ../includes/Elements/Filterable_Gallery.php:2542, ../includes/Elements/Filterable_Gallery.php:3423, ../includes/Elements/Filterable_Gallery.php:3476, ../includes/Elements/FluentForm.php:649, ../includes/Elements/FluentForm.php:857, ../includes/Elements/FluentForm.php:1291, ../includes/Elements/FluentForm.php:1377, ../includes/Elements/FluentForm.php:1563, ../includes/Elements/FluentForm.php:1690, ../includes/Elements/FluentForm.php:2110, ../includes/Elements/Formstack.php:851, ../includes/Elements/Formstack.php:1059, ../includes/Elements/Formstack.php:1451, ../includes/Elements/Formstack.php:1557, ../includes/Elements/GravityForms.php:941, ../includes/Elements/GravityForms.php:1172, ../includes/Elements/GravityForms.php:1893, ../includes/Elements/GravityForms.php:1983, ../includes/Elements/GravityForms.php:2037, ../includes/Elements/GravityForms.php:2149, ../includes/Elements/GravityForms.php:2329, ../includes/Elements/GravityForms.php:2391, ../includes/Elements/GravityForms.php:2569, ../includes/Elements/GravityForms.php:2656, ../includes/Elements/Image_Accordion.php:347, ../includes/Elements/Info_Box.php:744, ../includes/Elements/Info_Box.php:834, ../includes/Elements/Info_Box.php:920, ../includes/Elements/Info_Box.php:1149, ../includes/Elements/Info_Box.php:1228, ../includes/Elements/Info_Box.php:1399, ../includes/Elements/Info_Box.php:1462, ../includes/Elements/Info_Box.php:1630, ../includes/Elements/Info_Box.php:1679, ../includes/Elements/Info_Box.php:1861, ../includes/Elements/Interactive_Circle.php:692, ../includes/Elements/Interactive_Circle.php:750, ../includes/Elements/Interactive_Circle.php:818, ../includes/Elements/Interactive_Circle.php:895, ../includes/Elements/Login_Register.php:2925, ../includes/Elements/Login_Register.php:3058, ../includes/Elements/Login_Register.php:3160, ../includes/Elements/Login_Register.php:3338, ../includes/Elements/Login_Register.php:3694, ../includes/Elements/Login_Register.php:3785, ../includes/Elements/Login_Register.php:3965, ../includes/Elements/Login_Register.php:4003, ../includes/Elements/Login_Register.php:4100, ../includes/Elements/Login_Register.php:4774, ../includes/Elements/Login_Register.php:4934, ../includes/Elements/Login_Register.php:5203, ../includes/Elements/Login_Register.php:5240, ../includes/Elements/Login_Register.php:5555, ../includes/Elements/Login_Register.php:5592, ../includes/Elements/NFT_Gallery.php:908, ../includes/Elements/NFT_Gallery.php:941, ../includes/Elements/NFT_Gallery.php:1053, ../includes/Elements/NFT_Gallery.php:1086, ../includes/Elements/NFT_Gallery.php:2077, ../includes/Elements/NFT_Gallery.php:2122, ../includes/Elements/NFT_Gallery.php:2204, ../includes/Elements/NFT_Gallery.php:2399, ../includes/Elements/NinjaForms.php:643, ../includes/Elements/NinjaForms.php:853, ../includes/Elements/NinjaForms.php:1382, ../includes/Elements/NinjaForms.php:1475, ../includes/Elements/Post_Grid.php:1002, ../includes/Elements/Post_Grid.php:1701, ../includes/Elements/Post_Timeline.php:161, ../includes/Elements/Pricing_Table.php:813, ../includes/Elements/Pricing_Table.php:950, ../includes/Elements/Pricing_Table.php:1669, ../includes/Elements/Pricing_Table.php:1746, ../includes/Elements/Pricing_Table.php:1912, ../includes/Elements/Pricing_Table.php:2205, ../includes/Elements/Pricing_Table.php:2275, ../includes/Elements/Product_Grid.php:2451, ../includes/Elements/Product_Grid.php:2559, ../includes/Elements/Product_Grid.php:2667, ../includes/Elements/Product_Grid.php:2880, ../includes/Elements/Product_Grid.php:2921, ../includes/Elements/Product_Grid.php:2968, ../includes/Elements/Product_Grid.php:3218, ../includes/Elements/Product_Grid.php:3261, ../includes/Elements/Product_Grid.php:3322, ../includes/Elements/Product_Grid.php:3373, ../includes/Elements/Progress_Bar.php:687, ../includes/Elements/Simple_Menu.php:318, ../includes/Elements/Simple_Menu.php:429, ../includes/Elements/Simple_Menu.php:463, ../includes/Elements/Simple_Menu.php:497, ../includes/Elements/Simple_Menu.php:555, ../includes/Elements/Simple_Menu.php:589, ../includes/Elements/Simple_Menu.php:661, ../includes/Elements/Simple_Menu.php:733, ../includes/Elements/Simple_Menu.php:918, ../includes/Elements/Simple_Menu.php:1019, ../includes/Elements/Simple_Menu.php:1065, ../includes/Elements/Simple_Menu.php:1110, ../includes/Elements/Simple_Menu.php:1158, ../includes/Elements/Simple_Menu.php:1205, ../includes/Elements/Simple_Menu.php:1339, ../includes/Elements/Simple_Menu.php:1423, ../includes/Elements/Simple_Menu.php:1470, ../includes/Elements/Simple_Menu.php:1517, ../includes/Elements/Team_Member.php:529, ../includes/Elements/Team_Member.php:906, ../includes/Elements/Testimonial.php:362, ../includes/Elements/Tooltip.php:428, ../includes/Elements/Tooltip.php:472, ../includes/Elements/Tooltip.php:646, ../includes/Elements/Twitter_Feed.php:698, ../includes/Elements/Twitter_Feed.php:1272, ../includes/Elements/Twitter_Feed.php:1467, ../includes/Elements/WeForms.php:709, ../includes/Elements/WeForms.php:759, ../includes/Elements/Woo_Add_To_Cart.php:204, ../includes/Elements/Woo_Add_To_Cart.php:248, ../includes/Elements/Woo_Add_To_Cart.php:474, ../includes/Elements/Woo_Add_To_Cart.php:518, ../includes/Elements/Woo_Add_To_Cart.php:622, ../includes/Elements/Woo_Cart.php:1268, ../includes/Elements/Woo_Cart.php:1954, ../includes/Elements/Woo_Cart.php:1992, ../includes/Elements/Woo_Cart.php:2228, ../includes/Elements/Woo_Cart.php:2273, ../includes/Elements/Woo_Checkout.php:892, ../includes/Elements/Woo_Checkout.php:1007, ../includes/Elements/Woo_Checkout.php:1141, ../includes/Elements/Woo_Checkout.php:1674, ../includes/Elements/Woo_Checkout.php:1714, ../includes/Elements/Woo_Checkout.php:2045, ../includes/Elements/Woo_Checkout.php:2085, ../includes/Elements/Woo_Checkout.php:2503, ../includes/Elements/Woo_Checkout.php:2623, ../includes/Elements/Woo_Checkout.php:2650, ../includes/Elements/Woo_Checkout.php:2699, ../includes/Elements/Woo_Checkout.php:2829, ../includes/Elements/Woo_Checkout.php:2947, ../includes/Elements/Woo_Checkout.php:2987, ../includes/Elements/Woo_Product_Carousel.php:1175, ../includes/Elements/Woo_Product_Carousel.php:1729, ../includes/Elements/Woo_Product_Carousel.php:1811, ../includes/Elements/Woo_Product_Carousel.php:2030, ../includes/Elements/Woo_Product_Carousel.php:2073, ../includes/Elements/Woo_Product_Carousel.php:2135, ../includes/Elements/Woo_Product_Carousel.php:2187, ../includes/Elements/Woo_Product_Carousel.php:2991, ../includes/Elements/Woo_Product_Carousel.php:3047, ../includes/Elements/Woo_Product_Gallery.php:952, ../includes/Elements/Woo_Product_Gallery.php:2105, ../includes/Elements/Woo_Product_Gallery.php:2155, ../includes/Elements/Woo_Product_Gallery.php:2354, ../includes/Elements/Woo_Product_Gallery.php:2395, ../includes/Elements/Woo_Product_Gallery.php:2438, ../includes/Elements/Woo_Product_Gallery.php:2499, ../includes/Elements/Woo_Product_Gallery.php:2550, ../includes/Elements/Woo_Product_Images.php:110, ../includes/Elements/Woo_Product_Images.php:201, ../includes/Elements/Woo_Product_List.php:1342, ../includes/Elements/Woo_Product_List.php:1452, ../includes/Elements/Woo_Product_List.php:3177, ../includes/Elements/Woo_Product_List.php:3220, ../includes/Elements/Woo_Product_List.php:3273, ../includes/Elements/Woo_Product_List.php:3289, ../includes/Elements/Woo_Product_List.php:3305, ../includes/Elements/Woo_Product_List.php:3362, ../includes/Elements/WpForms.php:622, ../includes/Elements/WpForms.php:1233, ../includes/Elements/WpForms.php:1342, ../includes/Extensions/Liquid_Glass_Effect.php:28, ../includes/Extensions/Reading_Progress.php:156, ../includes/Extensions/Scroll_to_Top.php:415, ../includes/Extensions/Table_of_Content.php:791, ../includes/Extensions/Table_of_Content.php:939, ../includes/Extensions/Table_of_Content.php:1003, ../includes/Traits/Controls.php:1835, ../includes/Traits/Controls.php:1897, ../includes/Traits/Controls.php:2278, ../includes/Traits/Helper.php:626, ../includes/Traits/Helper.php:675, ../includes/Traits/Woo_Product_Comparable.php:380, ../includes/Traits/Woo_Product_Comparable.php:486
+#: ../includes/Elements/Advanced_Data_Table.php:486, ../includes/Elements/Advanced_Data_Table.php:627, ../includes/Elements/Advanced_Data_Table.php:700, ../includes/Elements/Advanced_Data_Table.php:731, ../includes/Elements/Advanced_Data_Table.php:762, ../includes/Elements/Advanced_Data_Table.php:793, ../includes/Elements/Advanced_Data_Table.php:825, ../includes/Elements/Advanced_Data_Table.php:857, ../includes/Elements/Advanced_Data_Table.php:1036, ../includes/Elements/Advanced_Data_Table.php:1233, ../includes/Elements/Advanced_Data_Table.php:1304, ../includes/Elements/Advanced_Data_Table.php:1402, ../includes/Elements/Advanced_Data_Table.php:1432, ../includes/Elements/Adv_Accordion.php:1045, ../includes/Elements/Adv_Accordion.php:1092, ../includes/Elements/Adv_Accordion.php:1139, ../includes/Elements/Adv_Tabs.php:750, ../includes/Elements/Adv_Tabs.php:1029, ../includes/Elements/Breadcrumbs.php:236, ../includes/Elements/Business_Reviews.php:1046, ../includes/Elements/Business_Reviews.php:1079, ../includes/Elements/Business_Reviews.php:1177, ../includes/Elements/Business_Reviews.php:1211, ../includes/Elements/Business_Reviews.php:1662, ../includes/Elements/Business_Reviews.php:1695, ../includes/Elements/Business_Reviews.php:1790, ../includes/Elements/Business_Reviews.php:1825, ../includes/Elements/Business_Reviews.php:2410, ../includes/Elements/Business_Reviews.php:2466, ../includes/Elements/Caldera_Forms.php:601, ../includes/Elements/Caldera_Forms.php:809, ../includes/Elements/Caldera_Forms.php:1213, ../includes/Elements/Caldera_Forms.php:1319, ../includes/Elements/Caldera_Forms.php:1373, ../includes/Elements/Code_Snippet.php:559, ../includes/Elements/Code_Snippet.php:616, ../includes/Elements/Code_Snippet.php:861, ../includes/Elements/Contact_Form_7.php:564, ../includes/Elements/Contact_Form_7.php:779, ../includes/Elements/Contact_Form_7.php:1250, ../includes/Elements/Contact_Form_7.php:1358, ../includes/Elements/Contact_Form_7.php:1449, ../includes/Elements/Contact_Form_7.php:1544, ../includes/Elements/Content_Ticker.php:355, ../includes/Elements/Content_Ticker.php:432, ../includes/Elements/Content_Ticker.php:612, ../includes/Elements/Content_Ticker.php:669, ../includes/Elements/Countdown.php:852, ../includes/Elements/Countdown.php:864, ../includes/Elements/Countdown.php:924, ../includes/Elements/Countdown.php:936, ../includes/Elements/Countdown.php:996, ../includes/Elements/Countdown.php:1008, ../includes/Elements/Countdown.php:1068, ../includes/Elements/Countdown.php:1080, ../includes/Elements/Creative_Button.php:351, ../includes/Elements/Creative_Button.php:444, ../includes/Elements/Cta_Box.php:880, ../includes/Elements/Cta_Box.php:896, ../includes/Elements/Cta_Box.php:1324, ../includes/Elements/Cta_Box.php:1340, ../includes/Elements/Cta_Box.php:1528, ../includes/Elements/Cta_Box.php:1563, ../includes/Elements/Data_Table.php:684, ../includes/Elements/Data_Table.php:724, ../includes/Elements/Data_Table.php:1252, ../includes/Elements/Dual_Color_Header.php:487, ../includes/Elements/Event_Calendar.php:2876, ../includes/Elements/Filterable_Gallery.php:1258, ../includes/Elements/Filterable_Gallery.php:1357, ../includes/Elements/Filterable_Gallery.php:1470, ../includes/Elements/Filterable_Gallery.php:1535, ../includes/Elements/Filterable_Gallery.php:1605, ../includes/Elements/Filterable_Gallery.php:1710, ../includes/Elements/Filterable_Gallery.php:1930, ../includes/Elements/Filterable_Gallery.php:1969, ../includes/Elements/Filterable_Gallery.php:2151, ../includes/Elements/Filterable_Gallery.php:2168, ../includes/Elements/Filterable_Gallery.php:2404, ../includes/Elements/Filterable_Gallery.php:2542, ../includes/Elements/Filterable_Gallery.php:3423, ../includes/Elements/Filterable_Gallery.php:3476, ../includes/Elements/FluentForm.php:649, ../includes/Elements/FluentForm.php:857, ../includes/Elements/FluentForm.php:1291, ../includes/Elements/FluentForm.php:1377, ../includes/Elements/FluentForm.php:1563, ../includes/Elements/FluentForm.php:1690, ../includes/Elements/FluentForm.php:2110, ../includes/Elements/Formstack.php:851, ../includes/Elements/Formstack.php:1059, ../includes/Elements/Formstack.php:1451, ../includes/Elements/Formstack.php:1557, ../includes/Elements/GravityForms.php:941, ../includes/Elements/GravityForms.php:1172, ../includes/Elements/GravityForms.php:1893, ../includes/Elements/GravityForms.php:1983, ../includes/Elements/GravityForms.php:2037, ../includes/Elements/GravityForms.php:2149, ../includes/Elements/GravityForms.php:2329, ../includes/Elements/GravityForms.php:2391, ../includes/Elements/GravityForms.php:2569, ../includes/Elements/GravityForms.php:2656, ../includes/Elements/Image_Accordion.php:347, ../includes/Elements/Info_Box.php:744, ../includes/Elements/Info_Box.php:834, ../includes/Elements/Info_Box.php:920, ../includes/Elements/Info_Box.php:1149, ../includes/Elements/Info_Box.php:1228, ../includes/Elements/Info_Box.php:1399, ../includes/Elements/Info_Box.php:1462, ../includes/Elements/Info_Box.php:1630, ../includes/Elements/Info_Box.php:1679, ../includes/Elements/Info_Box.php:1861, ../includes/Elements/Interactive_Circle.php:692, ../includes/Elements/Interactive_Circle.php:750, ../includes/Elements/Interactive_Circle.php:818, ../includes/Elements/Interactive_Circle.php:895, ../includes/Elements/Login_Register.php:2925, ../includes/Elements/Login_Register.php:3058, ../includes/Elements/Login_Register.php:3160, ../includes/Elements/Login_Register.php:3338, ../includes/Elements/Login_Register.php:3694, ../includes/Elements/Login_Register.php:3785, ../includes/Elements/Login_Register.php:3965, ../includes/Elements/Login_Register.php:4003, ../includes/Elements/Login_Register.php:4100, ../includes/Elements/Login_Register.php:4774, ../includes/Elements/Login_Register.php:4934, ../includes/Elements/Login_Register.php:5203, ../includes/Elements/Login_Register.php:5240, ../includes/Elements/Login_Register.php:5555, ../includes/Elements/Login_Register.php:5592, ../includes/Elements/NFT_Gallery.php:908, ../includes/Elements/NFT_Gallery.php:941, ../includes/Elements/NFT_Gallery.php:1053, ../includes/Elements/NFT_Gallery.php:1086, ../includes/Elements/NFT_Gallery.php:2077, ../includes/Elements/NFT_Gallery.php:2122, ../includes/Elements/NFT_Gallery.php:2204, ../includes/Elements/NFT_Gallery.php:2399, ../includes/Elements/NinjaForms.php:643, ../includes/Elements/NinjaForms.php:853, ../includes/Elements/NinjaForms.php:1382, ../includes/Elements/NinjaForms.php:1475, ../includes/Elements/Post_Grid.php:1002, ../includes/Elements/Post_Grid.php:1701, ../includes/Elements/Post_Timeline.php:161, ../includes/Elements/Pricing_Table.php:813, ../includes/Elements/Pricing_Table.php:950, ../includes/Elements/Pricing_Table.php:1669, ../includes/Elements/Pricing_Table.php:1746, ../includes/Elements/Pricing_Table.php:1912, ../includes/Elements/Pricing_Table.php:2205, ../includes/Elements/Pricing_Table.php:2275, ../includes/Elements/Product_Grid.php:2451, ../includes/Elements/Product_Grid.php:2559, ../includes/Elements/Product_Grid.php:2667, ../includes/Elements/Product_Grid.php:2880, ../includes/Elements/Product_Grid.php:2921, ../includes/Elements/Product_Grid.php:2968, ../includes/Elements/Product_Grid.php:3218, ../includes/Elements/Product_Grid.php:3261, ../includes/Elements/Product_Grid.php:3322, ../includes/Elements/Product_Grid.php:3373, ../includes/Elements/Progress_Bar.php:687, ../includes/Elements/Simple_Menu.php:318, ../includes/Elements/Simple_Menu.php:429, ../includes/Elements/Simple_Menu.php:463, ../includes/Elements/Simple_Menu.php:497, ../includes/Elements/Simple_Menu.php:555, ../includes/Elements/Simple_Menu.php:589, ../includes/Elements/Simple_Menu.php:661, ../includes/Elements/Simple_Menu.php:733, ../includes/Elements/Simple_Menu.php:918, ../includes/Elements/Simple_Menu.php:1019, ../includes/Elements/Simple_Menu.php:1065, ../includes/Elements/Simple_Menu.php:1110, ../includes/Elements/Simple_Menu.php:1158, ../includes/Elements/Simple_Menu.php:1205, ../includes/Elements/Simple_Menu.php:1339, ../includes/Elements/Simple_Menu.php:1423, ../includes/Elements/Simple_Menu.php:1470, ../includes/Elements/Simple_Menu.php:1517, ../includes/Elements/Team_Member.php:529, ../includes/Elements/Team_Member.php:906, ../includes/Elements/Testimonial.php:362, ../includes/Elements/Tooltip.php:428, ../includes/Elements/Tooltip.php:472, ../includes/Elements/Tooltip.php:646, ../includes/Elements/Twitter_Feed.php:698, ../includes/Elements/Twitter_Feed.php:1272, ../includes/Elements/Twitter_Feed.php:1467, ../includes/Elements/WeForms.php:709, ../includes/Elements/WeForms.php:759, ../includes/Elements/Woo_Add_To_Cart.php:204, ../includes/Elements/Woo_Add_To_Cart.php:248, ../includes/Elements/Woo_Add_To_Cart.php:474, ../includes/Elements/Woo_Add_To_Cart.php:518, ../includes/Elements/Woo_Add_To_Cart.php:622, ../includes/Elements/Woo_Cart.php:1268, ../includes/Elements/Woo_Cart.php:1954, ../includes/Elements/Woo_Cart.php:1992, ../includes/Elements/Woo_Cart.php:2228, ../includes/Elements/Woo_Cart.php:2273, ../includes/Elements/Woo_Checkout.php:892, ../includes/Elements/Woo_Checkout.php:1007, ../includes/Elements/Woo_Checkout.php:1141, ../includes/Elements/Woo_Checkout.php:1674, ../includes/Elements/Woo_Checkout.php:1714, ../includes/Elements/Woo_Checkout.php:2045, ../includes/Elements/Woo_Checkout.php:2085, ../includes/Elements/Woo_Checkout.php:2503, ../includes/Elements/Woo_Checkout.php:2623, ../includes/Elements/Woo_Checkout.php:2650, ../includes/Elements/Woo_Checkout.php:2699, ../includes/Elements/Woo_Checkout.php:2829, ../includes/Elements/Woo_Checkout.php:2947, ../includes/Elements/Woo_Checkout.php:2987, ../includes/Elements/Woo_Product_Carousel.php:1175, ../includes/Elements/Woo_Product_Carousel.php:1729, ../includes/Elements/Woo_Product_Carousel.php:1811, ../includes/Elements/Woo_Product_Carousel.php:2030, ../includes/Elements/Woo_Product_Carousel.php:2073, ../includes/Elements/Woo_Product_Carousel.php:2135, ../includes/Elements/Woo_Product_Carousel.php:2187, ../includes/Elements/Woo_Product_Carousel.php:2991, ../includes/Elements/Woo_Product_Carousel.php:3047, ../includes/Elements/Woo_Product_Gallery.php:952, ../includes/Elements/Woo_Product_Gallery.php:2105, ../includes/Elements/Woo_Product_Gallery.php:2155, ../includes/Elements/Woo_Product_Gallery.php:2354, ../includes/Elements/Woo_Product_Gallery.php:2395, ../includes/Elements/Woo_Product_Gallery.php:2438, ../includes/Elements/Woo_Product_Gallery.php:2499, ../includes/Elements/Woo_Product_Gallery.php:2550, ../includes/Elements/Woo_Product_Images.php:110, ../includes/Elements/Woo_Product_Images.php:201, ../includes/Elements/Woo_Product_List.php:1342, ../includes/Elements/Woo_Product_List.php:1452, ../includes/Elements/Woo_Product_List.php:3177, ../includes/Elements/Woo_Product_List.php:3220, ../includes/Elements/Woo_Product_List.php:3273, ../includes/Elements/Woo_Product_List.php:3289, ../includes/Elements/Woo_Product_List.php:3305, ../includes/Elements/Woo_Product_List.php:3362, ../includes/Elements/WpForms.php:622, ../includes/Elements/WpForms.php:1233, ../includes/Elements/WpForms.php:1342, ../includes/Extensions/Liquid_Glass_Effect.php:31, ../includes/Extensions/Reading_Progress.php:156, ../includes/Extensions/Scroll_to_Top.php:415, ../includes/Extensions/Table_of_Content.php:791, ../includes/Extensions/Table_of_Content.php:939, ../includes/Extensions/Table_of_Content.php:1003, ../includes/Traits/Controls.php:1835, ../includes/Traits/Controls.php:1897, ../includes/Traits/Controls.php:2278, ../includes/Traits/Helper.php:626, ../includes/Traits/Helper.php:675, ../includes/Traits/Woo_Product_Comparable.php:380, ../includes/Traits/Woo_Product_Comparable.php:486
 msgid "Background Color"
 msgstr ""
 
@@ -1217,7 +1217,7 @@ msgstr ""
 msgid "Highlight"
 msgstr ""
 
-#: ../includes/Elements/Advanced_Data_Table.php:669, ../includes/Elements/Adv_Tabs.php:346, ../includes/Elements/Countdown.php:514, ../includes/Elements/Creative_Button.php:950, ../includes/Elements/Creative_Button.php:813, ../includes/Elements/Data_Table.php:178, ../includes/Elements/Filterable_Gallery.php:335, ../includes/Elements/Filterable_Gallery.php:377, ../includes/Elements/Flip_Box.php:335, ../includes/Elements/Flip_Box.php:575, ../includes/Elements/Flip_Box.php:803, ../includes/Elements/Flip_Box.php:1988, ../includes/Elements/Flip_Box.php:1852, ../includes/Elements/Flip_Box.php:2408, ../includes/Elements/Flip_Box.php:2272, ../includes/Elements/GravityForms.php:1304, ../includes/Elements/Image_Accordion.php:902, ../includes/Elements/Image_Accordion.php:766, ../includes/Elements/Info_Box.php:119, ../includes/Elements/Info_Box.php:1169, ../includes/Elements/Info_Box.php:1249, ../includes/Elements/Info_Box.php:1387, ../includes/Elements/Info_Box.php:1483, ../includes/Elements/Info_Box.php:2305, ../includes/Elements/Info_Box.php:2169, ../includes/Elements/Interactive_Circle.php:466, ../includes/Elements/Post_Grid.php:1675, ../includes/Elements/Simple_Menu.php:1572, ../includes/Elements/Sticky_Video.php:602, ../includes/Elements/SVG_Draw.php:244, ../includes/Elements/SVG_Draw.php:270, ../includes/Elements/SVG_Draw.php:286, ../includes/Extensions/Liquid_Glass_Effect.php:442, ../includes/Extensions/Liquid_Glass_Effect.php:329, ../includes/Extensions/Table_of_Content.php:1041, ../includes/Extensions/Table_of_Content.php:1280
+#: ../includes/Elements/Advanced_Data_Table.php:669, ../includes/Elements/Adv_Tabs.php:346, ../includes/Elements/Countdown.php:514, ../includes/Elements/Creative_Button.php:950, ../includes/Elements/Creative_Button.php:813, ../includes/Elements/Data_Table.php:178, ../includes/Elements/Filterable_Gallery.php:335, ../includes/Elements/Filterable_Gallery.php:377, ../includes/Elements/Flip_Box.php:335, ../includes/Elements/Flip_Box.php:575, ../includes/Elements/Flip_Box.php:803, ../includes/Elements/Flip_Box.php:1988, ../includes/Elements/Flip_Box.php:1852, ../includes/Elements/Flip_Box.php:2408, ../includes/Elements/Flip_Box.php:2272, ../includes/Elements/GravityForms.php:1304, ../includes/Elements/Image_Accordion.php:902, ../includes/Elements/Image_Accordion.php:766, ../includes/Elements/Info_Box.php:119, ../includes/Elements/Info_Box.php:1169, ../includes/Elements/Info_Box.php:1249, ../includes/Elements/Info_Box.php:1387, ../includes/Elements/Info_Box.php:1483, ../includes/Elements/Info_Box.php:2305, ../includes/Elements/Info_Box.php:2169, ../includes/Elements/Interactive_Circle.php:466, ../includes/Elements/Post_Grid.php:1675, ../includes/Elements/Simple_Menu.php:1572, ../includes/Elements/Sticky_Video.php:602, ../includes/Elements/SVG_Draw.php:244, ../includes/Elements/SVG_Draw.php:270, ../includes/Elements/SVG_Draw.php:286, ../includes/Extensions/Liquid_Glass_Effect.php:445, ../includes/Extensions/Liquid_Glass_Effect.php:332, ../includes/Extensions/Table_of_Content.php:1041, ../includes/Extensions/Table_of_Content.php:1280
 msgid "None"
 msgstr ""
 
@@ -1261,11 +1261,11 @@ msgstr ""
 msgid "Margin"
 msgstr ""
 
-#: ../includes/Elements/Advanced_Data_Table.php:1215, ../includes/Elements/Advanced_Data_Table.php:1384, ../includes/Elements/Adv_Accordion.php:691, ../includes/Elements/Adv_Accordion.php:1023, ../includes/Elements/Adv_Tabs.php:740, ../includes/Elements/Betterdocs_Category_Box.php:289, ../includes/Elements/Betterdocs_Category_Box.php:457, ../includes/Elements/Betterdocs_Category_Box.php:682, ../includes/Elements/Betterdocs_Category_Box.php:851, ../includes/Elements/Betterdocs_Category_Grid.php:321, ../includes/Elements/Betterdocs_Category_Grid.php:461, ../includes/Elements/Betterdocs_Category_Grid.php:616, ../includes/Elements/Betterdocs_Category_Grid.php:806, ../includes/Elements/Betterdocs_Category_Grid.php:1354, ../includes/Elements/Betterdocs_Search_Form.php:406, ../includes/Elements/Business_Reviews.php:1040, ../includes/Elements/Business_Reviews.php:1171, ../includes/Elements/Business_Reviews.php:1656, ../includes/Elements/Business_Reviews.php:1784, ../includes/Elements/Business_Reviews.php:2403, ../includes/Elements/Business_Reviews.php:2565, ../includes/Elements/Caldera_Forms.php:594, ../includes/Elements/Caldera_Forms.php:982, ../includes/Elements/Caldera_Forms.php:1206, ../includes/Elements/Contact_Form_7.php:557, ../includes/Elements/Contact_Form_7.php:1020, ../includes/Elements/Contact_Form_7.php:1243, ../includes/Elements/Content_Ticker.php:605, ../includes/Elements/Creative_Button.php:321, ../includes/Elements/Cta_Box.php:1290, ../includes/Elements/Cta_Box.php:1802, ../includes/Elements/Data_Table.php:664, ../includes/Elements/Data_Table.php:857, ../includes/Elements/Data_Table.php:1029, ../includes/Elements/Data_Table.php:1130, ../includes/Elements/Event_Calendar.php:2083, ../includes/Elements/Event_Calendar.php:2383, ../includes/Elements/Filterable_Gallery.php:1453, ../includes/Elements/Filterable_Gallery.php:2397, ../includes/Elements/Filterable_Gallery.php:3416, ../includes/Elements/Flip_Box.php:1500, ../includes/Elements/FluentForm.php:642, ../includes/Elements/FluentForm.php:977, ../includes/Elements/FluentForm.php:1556, ../includes/Elements/FluentForm.php:1749, ../includes/Elements/FluentForm.php:1966, ../includes/Elements/Formstack.php:844, ../includes/Elements/Formstack.php:1176, ../includes/Elements/Formstack.php:1444, ../includes/Elements/Formstack.php:1614, ../includes/Elements/Formstack.php:1776, ../includes/Elements/GravityForms.php:934, ../includes/Elements/GravityForms.php:1531, ../includes/Elements/GravityForms.php:1727, ../includes/Elements/GravityForms.php:1886, ../includes/Elements/GravityForms.php:2322, ../includes/Elements/GravityForms.php:2562, ../includes/Elements/Info_Box.php:827, ../includes/Elements/Info_Box.php:1129, ../includes/Elements/Info_Box.php:1361, ../includes/Elements/Info_Box.php:1607, ../includes/Elements/Info_Box.php:1726, ../includes/Elements/Interactive_Circle.php:688, ../includes/Elements/Login_Register.php:3948, ../includes/Elements/Login_Register.php:5192, ../includes/Elements/Login_Register.php:5369, ../includes/Elements/Login_Register.php:5544, ../includes/Elements/NFT_Gallery.php:902, ../includes/Elements/NFT_Gallery.php:1047, ../includes/Elements/NFT_Gallery.php:1613, ../includes/Elements/NFT_Gallery.php:1866, ../includes/Elements/NFT_Gallery.php:2060, ../includes/Elements/NFT_Gallery.php:2193, ../includes/Elements/NinjaForms.php:636, ../includes/Elements/NinjaForms.php:1029, ../includes/Elements/NinjaForms.php:1375, ../includes/Elements/Pricing_Table.php:2187, ../includes/Elements/Product_Grid.php:1410, ../includes/Elements/Product_Grid.php:2075, ../includes/Elements/Product_Grid.php:2541, ../includes/Elements/Product_Grid.php:2862, ../includes/Elements/Product_Grid.php:3305, ../includes/Elements/Team_Member.php:888, ../includes/Elements/Tooltip.php:424, ../includes/Elements/Twitter_Feed.php:1261, ../includes/Elements/WeForms.php:693, ../includes/Elements/Woo_Add_To_Cart.php:185, ../includes/Elements/Woo_Add_To_Cart.php:455, ../includes/Elements/Woo_Cart.php:1947, ../includes/Elements/Woo_Cart.php:2221, ../includes/Elements/Woo_Checkout.php:1189, ../includes/Elements/Woo_Checkout.php:1232, ../includes/Elements/Woo_Checkout.php:1375, ../includes/Elements/Woo_Checkout.php:1667, ../includes/Elements/Woo_Checkout.php:2038, ../includes/Elements/Woo_Checkout.php:2518, ../includes/Elements/Woo_Checkout.php:2620, ../includes/Elements/Woo_Checkout.php:2778, ../includes/Elements/Woo_Checkout.php:2940, ../includes/Elements/Woo_Product_Carousel.php:1216, ../includes/Elements/Woo_Product_Carousel.php:1713, ../includes/Elements/Woo_Product_Carousel.php:2118, ../includes/Elements/Woo_Product_Carousel.php:2562, ../includes/Elements/Woo_Product_Carousel.php:2984, ../includes/Elements/Woo_Product_Gallery.php:978, ../includes/Elements/Woo_Product_Gallery.php:1389, ../includes/Elements/Woo_Product_Gallery.php:1693, ../includes/Elements/Woo_Product_Gallery.php:2088, ../includes/Elements/Woo_Product_Gallery.php:2482, ../includes/Elements/Woo_Product_List.php:2392, ../includes/Elements/Woo_Product_List.php:2719, ../includes/Elements/Woo_Product_List.php:2840, ../includes/Elements/Woo_Product_List.php:2951, ../includes/Elements/Woo_Product_List.php:3255, ../includes/Elements/WpForms.php:615, ../includes/Elements/WpForms.php:999, ../includes/Elements/WpForms.php:1226, ../includes/Extensions/Hover_Effect.php:85, ../includes/Extensions/Table_of_Content.php:1132, ../includes/Traits/Controls.php:1572, ../includes/Traits/Controls.php:1818, ../includes/Traits/Woo_Product_Comparable.php:838, ../includes/Traits/Woo_Product_Comparable.php:1224, ../includes/Traits/Woo_Product_Comparable.php:1643
+#: ../includes/Elements/Advanced_Data_Table.php:1215, ../includes/Elements/Advanced_Data_Table.php:1384, ../includes/Elements/Adv_Accordion.php:691, ../includes/Elements/Adv_Accordion.php:1023, ../includes/Elements/Adv_Tabs.php:740, ../includes/Elements/Betterdocs_Category_Box.php:289, ../includes/Elements/Betterdocs_Category_Box.php:457, ../includes/Elements/Betterdocs_Category_Box.php:682, ../includes/Elements/Betterdocs_Category_Box.php:851, ../includes/Elements/Betterdocs_Category_Grid.php:321, ../includes/Elements/Betterdocs_Category_Grid.php:461, ../includes/Elements/Betterdocs_Category_Grid.php:616, ../includes/Elements/Betterdocs_Category_Grid.php:806, ../includes/Elements/Betterdocs_Category_Grid.php:1354, ../includes/Elements/Betterdocs_Search_Form.php:406, ../includes/Elements/Business_Reviews.php:1040, ../includes/Elements/Business_Reviews.php:1171, ../includes/Elements/Business_Reviews.php:1656, ../includes/Elements/Business_Reviews.php:1784, ../includes/Elements/Business_Reviews.php:2403, ../includes/Elements/Business_Reviews.php:2565, ../includes/Elements/Caldera_Forms.php:594, ../includes/Elements/Caldera_Forms.php:982, ../includes/Elements/Caldera_Forms.php:1206, ../includes/Elements/Contact_Form_7.php:557, ../includes/Elements/Contact_Form_7.php:1020, ../includes/Elements/Contact_Form_7.php:1243, ../includes/Elements/Content_Ticker.php:605, ../includes/Elements/Creative_Button.php:321, ../includes/Elements/Cta_Box.php:1290, ../includes/Elements/Cta_Box.php:1802, ../includes/Elements/Data_Table.php:664, ../includes/Elements/Data_Table.php:857, ../includes/Elements/Data_Table.php:1029, ../includes/Elements/Data_Table.php:1130, ../includes/Elements/Event_Calendar.php:2083, ../includes/Elements/Event_Calendar.php:2383, ../includes/Elements/Filterable_Gallery.php:1453, ../includes/Elements/Filterable_Gallery.php:2397, ../includes/Elements/Filterable_Gallery.php:3416, ../includes/Elements/Flip_Box.php:1500, ../includes/Elements/FluentForm.php:642, ../includes/Elements/FluentForm.php:977, ../includes/Elements/FluentForm.php:1556, ../includes/Elements/FluentForm.php:1749, ../includes/Elements/FluentForm.php:1966, ../includes/Elements/Formstack.php:844, ../includes/Elements/Formstack.php:1176, ../includes/Elements/Formstack.php:1444, ../includes/Elements/Formstack.php:1614, ../includes/Elements/Formstack.php:1776, ../includes/Elements/GravityForms.php:934, ../includes/Elements/GravityForms.php:1531, ../includes/Elements/GravityForms.php:1727, ../includes/Elements/GravityForms.php:1886, ../includes/Elements/GravityForms.php:2322, ../includes/Elements/GravityForms.php:2562, ../includes/Elements/Info_Box.php:827, ../includes/Elements/Info_Box.php:1129, ../includes/Elements/Info_Box.php:1361, ../includes/Elements/Info_Box.php:1607, ../includes/Elements/Info_Box.php:1726, ../includes/Elements/Interactive_Circle.php:688, ../includes/Elements/Login_Register.php:3948, ../includes/Elements/Login_Register.php:5192, ../includes/Elements/Login_Register.php:5369, ../includes/Elements/Login_Register.php:5544, ../includes/Elements/NFT_Gallery.php:902, ../includes/Elements/NFT_Gallery.php:1047, ../includes/Elements/NFT_Gallery.php:1613, ../includes/Elements/NFT_Gallery.php:1866, ../includes/Elements/NFT_Gallery.php:2060, ../includes/Elements/NFT_Gallery.php:2193, ../includes/Elements/NinjaForms.php:636, ../includes/Elements/NinjaForms.php:1029, ../includes/Elements/NinjaForms.php:1375, ../includes/Elements/Pricing_Table.php:2187, ../includes/Elements/Product_Grid.php:1410, ../includes/Elements/Product_Grid.php:2075, ../includes/Elements/Product_Grid.php:2541, ../includes/Elements/Product_Grid.php:2862, ../includes/Elements/Product_Grid.php:3305, ../includes/Elements/Team_Member.php:888, ../includes/Elements/Tooltip.php:424, ../includes/Elements/Twitter_Feed.php:1261, ../includes/Elements/WeForms.php:693, ../includes/Elements/Woo_Add_To_Cart.php:185, ../includes/Elements/Woo_Add_To_Cart.php:455, ../includes/Elements/Woo_Cart.php:1947, ../includes/Elements/Woo_Cart.php:2221, ../includes/Elements/Woo_Checkout.php:1189, ../includes/Elements/Woo_Checkout.php:1232, ../includes/Elements/Woo_Checkout.php:1375, ../includes/Elements/Woo_Checkout.php:1667, ../includes/Elements/Woo_Checkout.php:2038, ../includes/Elements/Woo_Checkout.php:2518, ../includes/Elements/Woo_Checkout.php:2620, ../includes/Elements/Woo_Checkout.php:2778, ../includes/Elements/Woo_Checkout.php:2940, ../includes/Elements/Woo_Product_Carousel.php:1216, ../includes/Elements/Woo_Product_Carousel.php:1713, ../includes/Elements/Woo_Product_Carousel.php:2118, ../includes/Elements/Woo_Product_Carousel.php:2562, ../includes/Elements/Woo_Product_Carousel.php:2984, ../includes/Elements/Woo_Product_Gallery.php:978, ../includes/Elements/Woo_Product_Gallery.php:1389, ../includes/Elements/Woo_Product_Gallery.php:1693, ../includes/Elements/Woo_Product_Gallery.php:2088, ../includes/Elements/Woo_Product_Gallery.php:2482, ../includes/Elements/Woo_Product_List.php:2392, ../includes/Elements/Woo_Product_List.php:2719, ../includes/Elements/Woo_Product_List.php:2840, ../includes/Elements/Woo_Product_List.php:2951, ../includes/Elements/Woo_Product_List.php:3255, ../includes/Elements/WpForms.php:615, ../includes/Elements/WpForms.php:999, ../includes/Elements/WpForms.php:1226, ../includes/Extensions/Hover_Effect.php:85, ../includes/Extensions/Image_Masking.php:322, ../includes/Extensions/Table_of_Content.php:1132, ../includes/Traits/Controls.php:1572, ../includes/Traits/Controls.php:1818, ../includes/Traits/Woo_Product_Comparable.php:838, ../includes/Traits/Woo_Product_Comparable.php:1224, ../includes/Traits/Woo_Product_Comparable.php:1643
 msgid "Normal"
 msgstr ""
 
-#: ../includes/Elements/Advanced_Data_Table.php:1285, ../includes/Elements/Advanced_Data_Table.php:1414, ../includes/Elements/Adv_Accordion.php:750, ../includes/Elements/Adv_Accordion.php:1071, ../includes/Elements/Adv_Tabs.php:834, ../includes/Elements/Betterdocs_Category_Box.php:335, ../includes/Elements/Betterdocs_Category_Box.php:553, ../includes/Elements/Betterdocs_Category_Box.php:715, ../includes/Elements/Betterdocs_Category_Box.php:964, ../includes/Elements/Betterdocs_Category_Grid.php:369, ../includes/Elements/Betterdocs_Category_Grid.php:502, ../includes/Elements/Betterdocs_Category_Grid.php:670, ../includes/Elements/Betterdocs_Category_Grid.php:878, ../includes/Elements/Betterdocs_Category_Grid.php:1438, ../includes/Elements/Betterdocs_Search_Form.php:490, ../includes/Elements/Business_Reviews.php:1073, ../includes/Elements/Business_Reviews.php:1205, ../includes/Elements/Business_Reviews.php:1689, ../includes/Elements/Business_Reviews.php:1819, ../includes/Elements/Business_Reviews.php:2459, ../includes/Elements/Business_Reviews.php:2621, ../includes/Elements/Caldera_Forms.php:1312, ../includes/Elements/Contact_Form_7.php:1351, ../includes/Elements/Content_Ticker.php:662, ../includes/Elements/Creative_Button.php:413, ../includes/Elements/Cta_Box.php:1494, ../includes/Elements/Cta_Box.php:1895, ../includes/Elements/Data_Table.php:704, ../includes/Elements/Data_Table.php:948, ../includes/Elements/Data_Table.php:1046, ../includes/Elements/Data_Table.php:1148, ../includes/Elements/Event_Calendar.php:2129, ../includes/Elements/Event_Calendar.php:2450, ../includes/Elements/Filterable_Gallery.php:319, ../includes/Elements/Filterable_Gallery.php:2535, ../includes/Elements/Filterable_Gallery.php:3469, ../includes/Elements/Flip_Box.php:109, ../includes/Elements/Flip_Box.php:1607, ../includes/Elements/FluentForm.php:1683, ../includes/Elements/FluentForm.php:2049, ../includes/Elements/Formstack.php:1550, ../includes/Elements/Formstack.php:1861, ../includes/Elements/GravityForms.php:2030, ../includes/Elements/GravityForms.php:2384, ../includes/Elements/GravityForms.php:2649, ../includes/Elements/Info_Box.php:913, ../includes/Elements/Info_Box.php:1200, ../includes/Elements/Info_Box.php:1433, ../includes/Elements/Info_Box.php:1660, ../includes/Elements/Info_Box.php:1905, ../includes/Elements/Interactive_Circle.php:433, ../includes/Elements/Interactive_Circle.php:746, ../includes/Elements/Login_Register.php:5229, ../includes/Elements/Login_Register.php:5581, ../includes/Elements/NFT_Gallery.php:935, ../includes/Elements/NFT_Gallery.php:1080, ../includes/Elements/NFT_Gallery.php:1630, ../includes/Elements/NFT_Gallery.php:1883, ../includes/Elements/NFT_Gallery.php:2105, ../includes/Elements/NFT_Gallery.php:2388, ../includes/Elements/NinjaForms.php:1468, ../includes/Elements/Pricing_Table.php:471, ../includes/Elements/Pricing_Table.php:2257, ../includes/Elements/Product_Grid.php:1460, ../includes/Elements/Product_Grid.php:2154, ../includes/Elements/Product_Grid.php:2650, ../includes/Elements/Product_Grid.php:2903, ../includes/Elements/Product_Grid.php:3356, ../includes/Elements/Simple_Menu.php:443, ../includes/Elements/Simple_Menu.php:569, ../includes/Elements/Simple_Menu.php:1045, ../includes/Elements/Simple_Menu.php:1449, ../includes/Elements/Team_Member.php:966, ../includes/Elements/Tooltip.php:468, ../includes/Elements/Twitter_Feed.php:1456, ../includes/Elements/WeForms.php:743, ../includes/Elements/Woo_Add_To_Cart.php:229, ../includes/Elements/Woo_Cart.php:1985, ../includes/Elements/Woo_Cart.php:2266, ../includes/Elements/Woo_Checkout.php:1205, ../includes/Elements/Woo_Checkout.php:1249, ../includes/Elements/Woo_Checkout.php:1391, ../includes/Elements/Woo_Checkout.php:1707, ../includes/Elements/Woo_Checkout.php:2078, ../includes/Elements/Woo_Checkout.php:2538, ../includes/Elements/Woo_Checkout.php:2647, ../includes/Elements/Woo_Checkout.php:2980, ../includes/Elements/Woo_Product_Carousel.php:1256, ../includes/Elements/Woo_Product_Carousel.php:1795, ../includes/Elements/Woo_Product_Carousel.php:2170, ../includes/Elements/Woo_Product_Carousel.php:2625, ../includes/Elements/Woo_Product_Carousel.php:3040, ../includes/Elements/Woo_Product_Gallery.php:1017, ../includes/Elements/Woo_Product_Gallery.php:1462, ../includes/Elements/Woo_Product_Gallery.php:1727, ../includes/Elements/Woo_Product_Gallery.php:2138, ../includes/Elements/Woo_Product_Gallery.php:2533, ../includes/Elements/Woo_Product_List.php:2420, ../includes/Elements/Woo_Product_List.php:2765, ../includes/Elements/Woo_Product_List.php:2883, ../includes/Elements/Woo_Product_List.php:2986, ../includes/Elements/Woo_Product_List.php:3345, ../includes/Elements/WpForms.php:1335, ../includes/Extensions/Hover_Effect.php:707, ../includes/Extensions/Table_of_Content.php:1155, ../includes/Traits/Controls.php:1627, ../includes/Traits/Controls.php:1880, ../includes/Traits/Woo_Product_Comparable.php:938, ../includes/Traits/Woo_Product_Comparable.php:1305, ../includes/Traits/Woo_Product_Comparable.php:1693
+#: ../includes/Elements/Advanced_Data_Table.php:1285, ../includes/Elements/Advanced_Data_Table.php:1414, ../includes/Elements/Adv_Accordion.php:750, ../includes/Elements/Adv_Accordion.php:1071, ../includes/Elements/Adv_Tabs.php:834, ../includes/Elements/Betterdocs_Category_Box.php:335, ../includes/Elements/Betterdocs_Category_Box.php:553, ../includes/Elements/Betterdocs_Category_Box.php:715, ../includes/Elements/Betterdocs_Category_Box.php:964, ../includes/Elements/Betterdocs_Category_Grid.php:369, ../includes/Elements/Betterdocs_Category_Grid.php:502, ../includes/Elements/Betterdocs_Category_Grid.php:670, ../includes/Elements/Betterdocs_Category_Grid.php:878, ../includes/Elements/Betterdocs_Category_Grid.php:1438, ../includes/Elements/Betterdocs_Search_Form.php:490, ../includes/Elements/Business_Reviews.php:1073, ../includes/Elements/Business_Reviews.php:1205, ../includes/Elements/Business_Reviews.php:1689, ../includes/Elements/Business_Reviews.php:1819, ../includes/Elements/Business_Reviews.php:2459, ../includes/Elements/Business_Reviews.php:2621, ../includes/Elements/Caldera_Forms.php:1312, ../includes/Elements/Contact_Form_7.php:1351, ../includes/Elements/Content_Ticker.php:662, ../includes/Elements/Creative_Button.php:413, ../includes/Elements/Cta_Box.php:1494, ../includes/Elements/Cta_Box.php:1895, ../includes/Elements/Data_Table.php:704, ../includes/Elements/Data_Table.php:948, ../includes/Elements/Data_Table.php:1046, ../includes/Elements/Data_Table.php:1148, ../includes/Elements/Event_Calendar.php:2129, ../includes/Elements/Event_Calendar.php:2450, ../includes/Elements/Filterable_Gallery.php:319, ../includes/Elements/Filterable_Gallery.php:2535, ../includes/Elements/Filterable_Gallery.php:3469, ../includes/Elements/Flip_Box.php:109, ../includes/Elements/Flip_Box.php:1607, ../includes/Elements/FluentForm.php:1683, ../includes/Elements/FluentForm.php:2049, ../includes/Elements/Formstack.php:1550, ../includes/Elements/Formstack.php:1861, ../includes/Elements/GravityForms.php:2030, ../includes/Elements/GravityForms.php:2384, ../includes/Elements/GravityForms.php:2649, ../includes/Elements/Info_Box.php:913, ../includes/Elements/Info_Box.php:1200, ../includes/Elements/Info_Box.php:1433, ../includes/Elements/Info_Box.php:1660, ../includes/Elements/Info_Box.php:1905, ../includes/Elements/Interactive_Circle.php:433, ../includes/Elements/Interactive_Circle.php:746, ../includes/Elements/Login_Register.php:5229, ../includes/Elements/Login_Register.php:5581, ../includes/Elements/NFT_Gallery.php:935, ../includes/Elements/NFT_Gallery.php:1080, ../includes/Elements/NFT_Gallery.php:1630, ../includes/Elements/NFT_Gallery.php:1883, ../includes/Elements/NFT_Gallery.php:2105, ../includes/Elements/NFT_Gallery.php:2388, ../includes/Elements/NinjaForms.php:1468, ../includes/Elements/Pricing_Table.php:471, ../includes/Elements/Pricing_Table.php:2257, ../includes/Elements/Product_Grid.php:1460, ../includes/Elements/Product_Grid.php:2154, ../includes/Elements/Product_Grid.php:2650, ../includes/Elements/Product_Grid.php:2903, ../includes/Elements/Product_Grid.php:3356, ../includes/Elements/Simple_Menu.php:443, ../includes/Elements/Simple_Menu.php:569, ../includes/Elements/Simple_Menu.php:1045, ../includes/Elements/Simple_Menu.php:1449, ../includes/Elements/Team_Member.php:966, ../includes/Elements/Tooltip.php:468, ../includes/Elements/Twitter_Feed.php:1456, ../includes/Elements/WeForms.php:743, ../includes/Elements/Woo_Add_To_Cart.php:229, ../includes/Elements/Woo_Cart.php:1985, ../includes/Elements/Woo_Cart.php:2266, ../includes/Elements/Woo_Checkout.php:1205, ../includes/Elements/Woo_Checkout.php:1249, ../includes/Elements/Woo_Checkout.php:1391, ../includes/Elements/Woo_Checkout.php:1707, ../includes/Elements/Woo_Checkout.php:2078, ../includes/Elements/Woo_Checkout.php:2538, ../includes/Elements/Woo_Checkout.php:2647, ../includes/Elements/Woo_Checkout.php:2980, ../includes/Elements/Woo_Product_Carousel.php:1256, ../includes/Elements/Woo_Product_Carousel.php:1795, ../includes/Elements/Woo_Product_Carousel.php:2170, ../includes/Elements/Woo_Product_Carousel.php:2625, ../includes/Elements/Woo_Product_Carousel.php:3040, ../includes/Elements/Woo_Product_Gallery.php:1017, ../includes/Elements/Woo_Product_Gallery.php:1462, ../includes/Elements/Woo_Product_Gallery.php:1727, ../includes/Elements/Woo_Product_Gallery.php:2138, ../includes/Elements/Woo_Product_Gallery.php:2533, ../includes/Elements/Woo_Product_List.php:2420, ../includes/Elements/Woo_Product_List.php:2765, ../includes/Elements/Woo_Product_List.php:2883, ../includes/Elements/Woo_Product_List.php:2986, ../includes/Elements/Woo_Product_List.php:3345, ../includes/Elements/WpForms.php:1335, ../includes/Extensions/Hover_Effect.php:707, ../includes/Extensions/Image_Masking.php:333, ../includes/Extensions/Table_of_Content.php:1155, ../includes/Traits/Controls.php:1627, ../includes/Traits/Controls.php:1880, ../includes/Traits/Woo_Product_Comparable.php:938, ../includes/Traits/Woo_Product_Comparable.php:1305, ../includes/Traits/Woo_Product_Comparable.php:1693
 msgid "Hover"
 msgstr ""
 
@@ -1289,7 +1289,7 @@ msgstr ""
 msgid "Accordion"
 msgstr ""
 
-#: ../includes/Elements/Adv_Accordion.php:143, ../includes/Elements/Business_Reviews.php:2294, ../includes/Elements/Login_Register.php:1819, ../includes/Elements/Login_Register.php:4561, ../includes/Elements/Woo_Product_Carousel.php:2895, ../includes/Traits/Admin.php:767, ../includes/Traits/Elements.php:312
+#: ../includes/Elements/Adv_Accordion.php:143, ../includes/Elements/Business_Reviews.php:2294, ../includes/Elements/Login_Register.php:1819, ../includes/Elements/Login_Register.php:4561, ../includes/Elements/Woo_Product_Carousel.php:2895, ../includes/Traits/Admin.php:776, ../includes/Traits/Elements.php:312
 msgid "Toggle"
 msgstr ""
 
@@ -1713,7 +1713,7 @@ msgstr ""
 msgid "Area"
 msgstr ""
 
-#: ../includes/Elements/Betterdocs_Category_Box.php:428, ../includes/Elements/Betterdocs_Category_Box.php:463, ../includes/Elements/Betterdocs_Category_Box.php:820, ../includes/Elements/Betterdocs_Category_Box.php:927, ../includes/Elements/Betterdocs_Category_Grid.php:545, ../includes/Elements/Betterdocs_Category_Grid.php:783, ../includes/Elements/Betterdocs_Category_Grid.php:1103, ../includes/Elements/Betterdocs_Category_Grid.php:1256, ../includes/Elements/Betterdocs_Search_Form.php:265, ../includes/Elements/Breadcrumbs.php:493, ../includes/Elements/Business_Reviews.php:2525, ../includes/Elements/Caldera_Forms.php:954, ../includes/Elements/Contact_Form_7.php:992, ../includes/Elements/Cta_Box.php:252, ../includes/Elements/Dual_Color_Header.php:574, ../includes/Elements/Feature_List.php:667, ../includes/Elements/Filterable_Gallery.php:1133, ../includes/Elements/Filterable_Gallery.php:3303, ../includes/Elements/FluentForm.php:949, ../includes/Elements/Formstack.php:1148, ../includes/Elements/Formstack.php:1301, ../includes/Elements/GravityForms.php:1503, ../includes/Elements/GravityForms.php:1699, ../includes/Elements/Info_Box.php:1300, ../includes/Elements/Login_Register.php:4170, ../includes/Elements/Login_Register.php:5366, ../includes/Elements/NFT_Gallery.php:767, ../includes/Elements/NinjaForms.php:1001, ../includes/Elements/Post_Timeline.php:466, ../includes/Elements/Progress_Bar.php:660, ../includes/Elements/Twitter_Feed.php:512, ../includes/Elements/Woo_Add_To_Cart.php:761, ../includes/Elements/Woo_Product_Carousel.php:2518, ../includes/Elements/Woo_Product_Images.php:186, ../includes/Elements/WpForms.php:971, ../includes/Traits/Woo_Product_Comparable.php:111, ../includes/Traits/Woo_Product_Comparable.php:1437
+#: ../includes/Elements/Betterdocs_Category_Box.php:428, ../includes/Elements/Betterdocs_Category_Box.php:463, ../includes/Elements/Betterdocs_Category_Box.php:820, ../includes/Elements/Betterdocs_Category_Box.php:927, ../includes/Elements/Betterdocs_Category_Grid.php:545, ../includes/Elements/Betterdocs_Category_Grid.php:783, ../includes/Elements/Betterdocs_Category_Grid.php:1103, ../includes/Elements/Betterdocs_Category_Grid.php:1256, ../includes/Elements/Betterdocs_Search_Form.php:265, ../includes/Elements/Breadcrumbs.php:493, ../includes/Elements/Business_Reviews.php:2525, ../includes/Elements/Caldera_Forms.php:954, ../includes/Elements/Contact_Form_7.php:992, ../includes/Elements/Cta_Box.php:252, ../includes/Elements/Dual_Color_Header.php:574, ../includes/Elements/Feature_List.php:667, ../includes/Elements/Filterable_Gallery.php:1133, ../includes/Elements/Filterable_Gallery.php:3303, ../includes/Elements/FluentForm.php:949, ../includes/Elements/Formstack.php:1148, ../includes/Elements/Formstack.php:1301, ../includes/Elements/GravityForms.php:1503, ../includes/Elements/GravityForms.php:1699, ../includes/Elements/Info_Box.php:1300, ../includes/Elements/Login_Register.php:4170, ../includes/Elements/Login_Register.php:5366, ../includes/Elements/NFT_Gallery.php:767, ../includes/Elements/NinjaForms.php:1001, ../includes/Elements/Post_Timeline.php:466, ../includes/Elements/Progress_Bar.php:660, ../includes/Elements/Twitter_Feed.php:512, ../includes/Elements/Woo_Add_To_Cart.php:761, ../includes/Elements/Woo_Product_Carousel.php:2518, ../includes/Elements/Woo_Product_Images.php:186, ../includes/Elements/WpForms.php:971, ../includes/Extensions/Image_Masking.php:346, ../includes/Traits/Woo_Product_Comparable.php:111, ../includes/Traits/Woo_Product_Comparable.php:1437
 msgid "Size"
 msgstr ""
 
@@ -2037,7 +2037,7 @@ msgstr ""
 msgid "Local Business Schema"
 msgstr ""
 
-#: ../includes/Elements/Business_Reviews.php:274, ../includes/Elements/Filterable_Gallery.php:508, ../includes/Elements/Filterable_Gallery.php:679, ../includes/Elements/Filterable_Gallery.php:794, ../includes/Elements/Interactive_Circle.php:618, ../includes/Elements/Login_Register.php:763, ../includes/Elements/Login_Register.php:914, ../includes/Elements/Pricing_Table.php:415, ../includes/Elements/Twitter_Feed.php:420, ../includes/Elements/Twitter_Feed.php:432, ../includes/Elements/Woo_Product_Images.php:825
+#: ../includes/Elements/Business_Reviews.php:274, ../includes/Elements/Filterable_Gallery.php:508, ../includes/Elements/Filterable_Gallery.php:679, ../includes/Elements/Filterable_Gallery.php:794, ../includes/Elements/Interactive_Circle.php:618, ../includes/Elements/Login_Register.php:763, ../includes/Elements/Login_Register.php:914, ../includes/Elements/Pricing_Table.php:415, ../includes/Elements/Twitter_Feed.php:420, ../includes/Elements/Twitter_Feed.php:432, ../includes/Elements/Woo_Product_Images.php:825, ../includes/Extensions/Image_Masking.php:44
 msgid "Enable"
 msgstr ""
 
@@ -2533,7 +2533,7 @@ msgstr ""
 msgid "Full Width"
 msgstr ""
 
-#: ../includes/Elements/Caldera_Forms.php:1173, ../includes/Elements/Contact_Form_7.php:1210, ../includes/Elements/Content_Ticker.php:99, ../includes/Elements/Cta_Box.php:201, ../includes/Elements/FluentForm.php:1522, ../includes/Elements/Formstack.php:1411, ../includes/Elements/GravityForms.php:2283, ../includes/Elements/Login_Register.php:436, ../includes/Elements/Login_Register.php:604, ../includes/Elements/Login_Register.php:671, ../includes/Elements/Login_Register.php:1033, ../includes/Elements/Login_Register.php:1220, ../includes/Elements/Login_Register.php:1351, ../includes/Elements/Login_Register.php:1846, ../includes/Elements/Login_Register.php:2488, ../includes/Elements/Login_Register.php:2597, ../includes/Elements/Login_Register.php:2768, ../includes/Elements/Login_Register.php:2950, ../includes/Elements/Login_Register.php:3211, ../includes/Elements/Login_Register.php:3355, ../includes/Elements/Login_Register.php:3505, ../includes/Elements/Login_Register.php:3648, ../includes/Elements/Login_Register.php:3739, ../includes/Elements/Login_Register.php:3837, ../includes/Elements/Login_Register.php:4039, ../includes/Elements/Login_Register.php:4084, ../includes/Elements/Login_Register.php:4116, ../includes/Elements/Login_Register.php:4547, ../includes/Elements/Login_Register.php:4695, ../includes/Elements/Login_Register.php:4824, ../includes/Elements/Login_Register.php:5088, ../includes/Elements/Login_Register.php:5418, ../includes/Elements/NinjaForms.php:1337, ../includes/Elements/Sticky_Video.php:400, ../includes/Elements/Woo_Product_Images.php:599, ../includes/Elements/WpForms.php:1193, ../includes/Traits/Woo_Product_Comparable.php:420, ../includes/Traits/Woo_Product_Comparable.php:534, ../includes/Traits/Woo_Product_Comparable.php:625, ../includes/Traits/Woo_Product_Comparable.php:694
+#: ../includes/Elements/Caldera_Forms.php:1173, ../includes/Elements/Contact_Form_7.php:1210, ../includes/Elements/Content_Ticker.php:99, ../includes/Elements/Cta_Box.php:201, ../includes/Elements/FluentForm.php:1522, ../includes/Elements/Formstack.php:1411, ../includes/Elements/GravityForms.php:2283, ../includes/Elements/Login_Register.php:436, ../includes/Elements/Login_Register.php:604, ../includes/Elements/Login_Register.php:671, ../includes/Elements/Login_Register.php:1033, ../includes/Elements/Login_Register.php:1220, ../includes/Elements/Login_Register.php:1351, ../includes/Elements/Login_Register.php:1846, ../includes/Elements/Login_Register.php:2488, ../includes/Elements/Login_Register.php:2597, ../includes/Elements/Login_Register.php:2768, ../includes/Elements/Login_Register.php:2950, ../includes/Elements/Login_Register.php:3211, ../includes/Elements/Login_Register.php:3355, ../includes/Elements/Login_Register.php:3505, ../includes/Elements/Login_Register.php:3648, ../includes/Elements/Login_Register.php:3739, ../includes/Elements/Login_Register.php:3837, ../includes/Elements/Login_Register.php:4039, ../includes/Elements/Login_Register.php:4084, ../includes/Elements/Login_Register.php:4116, ../includes/Elements/Login_Register.php:4547, ../includes/Elements/Login_Register.php:4695, ../includes/Elements/Login_Register.php:4824, ../includes/Elements/Login_Register.php:5088, ../includes/Elements/Login_Register.php:5418, ../includes/Elements/NinjaForms.php:1337, ../includes/Elements/Sticky_Video.php:400, ../includes/Elements/Woo_Product_Images.php:599, ../includes/Elements/WpForms.php:1193, ../includes/Extensions/Image_Masking.php:354, ../includes/Traits/Woo_Product_Comparable.php:420, ../includes/Traits/Woo_Product_Comparable.php:534, ../includes/Traits/Woo_Product_Comparable.php:625, ../includes/Traits/Woo_Product_Comparable.php:694
 msgid "Custom"
 msgstr ""
 
@@ -2565,7 +2565,7 @@ msgstr ""
 msgid "<strong>EasyJobs</strong> is not installed/activated on your site. Please install and activate <a href=\"plugin-install.php?s=easyjobs&tab=search&type=term\" target=\"_blank\">EasyJobs</a> first."
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:23, ../includes/Elements/Code_Snippet.php:101, ../includes/Traits/Admin.php:839
+#: ../includes/Elements/Code_Snippet.php:23, ../includes/Elements/Code_Snippet.php:101, ../includes/Traits/Admin.php:848
 msgid "Code Snippet"
 msgstr ""
 
@@ -2761,11 +2761,11 @@ msgstr ""
 msgid "Indicator"
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:279, ../includes/Elements/Countdown.php:84, ../includes/Elements/Dual_Color_Header.php:438, ../includes/Elements/Info_Box.php:98, ../includes/Elements/Login_Register.php:2146, ../includes/Elements/NFT_Gallery.php:107, ../includes/Elements/NFT_Gallery.php:239, ../includes/Elements/Product_Grid.php:760, ../includes/Elements/Product_Grid.php:792, ../includes/Elements/Woo_Product_Images.php:409, ../includes/Traits/Woo_Product_Comparable.php:241
+#: ../includes/Elements/Code_Snippet.php:279, ../includes/Elements/Countdown.php:84, ../includes/Elements/Dual_Color_Header.php:438, ../includes/Elements/Info_Box.php:98, ../includes/Elements/Login_Register.php:2146, ../includes/Elements/NFT_Gallery.php:107, ../includes/Elements/NFT_Gallery.php:239, ../includes/Elements/Product_Grid.php:760, ../includes/Elements/Product_Grid.php:792, ../includes/Elements/Woo_Product_Images.php:409, ../includes/Extensions/Image_Masking.php:288, ../includes/Traits/Woo_Product_Comparable.php:241
 msgid "Type"
 msgstr ""
 
-#: ../includes/Elements/Code_Snippet.php:302, ../includes/Elements/Cta_Box.php:233, ../includes/Elements/Dual_Color_Header.php:419, ../includes/Elements/Event_Calendar.php:945, ../includes/Elements/Info_Box.php:324, ../includes/Elements/Sticky_Video.php:120, ../includes/Elements/Woo_Product_Carousel.php:2450, ../includes/Elements/Woo_Product_Gallery.php:216, ../includes/Elements/Woo_Product_Gallery.php:613, ../includes/Elements/Woo_Product_List.php:703, ../includes/Elements/Woo_Product_List.php:727, ../includes/Extensions/Reading_Progress.php:110, ../includes/Extensions/Scroll_to_Top.php:111, ../includes/Extensions/Table_of_Content.php:550, ../includes/Extensions/Table_of_Content.php:579, ../includes/Traits/Controls.php:799, ../includes/Traits/Controls.php:826, ../includes/Traits/Controls.php:1975, ../includes/Traits/Woo_Product_Comparable.php:1473
+#: ../includes/Elements/Code_Snippet.php:302, ../includes/Elements/Cta_Box.php:233, ../includes/Elements/Dual_Color_Header.php:419, ../includes/Elements/Event_Calendar.php:945, ../includes/Elements/Info_Box.php:324, ../includes/Elements/Sticky_Video.php:120, ../includes/Elements/Woo_Product_Carousel.php:2450, ../includes/Elements/Woo_Product_Gallery.php:216, ../includes/Elements/Woo_Product_Gallery.php:613, ../includes/Elements/Woo_Product_List.php:703, ../includes/Elements/Woo_Product_List.php:727, ../includes/Extensions/Image_Masking.php:397, ../includes/Extensions/Reading_Progress.php:110, ../includes/Extensions/Scroll_to_Top.php:111, ../includes/Extensions/Table_of_Content.php:550, ../includes/Extensions/Table_of_Content.php:579, ../includes/Traits/Controls.php:799, ../includes/Traits/Controls.php:826, ../includes/Traits/Controls.php:1975, ../includes/Traits/Woo_Product_Comparable.php:1473
 msgid "Position"
 msgstr ""
 
@@ -3325,7 +3325,7 @@ msgstr ""
 msgid "Icon Spacing"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:235, ../includes/Elements/Image_Accordion.php:308, ../includes/Elements/Info_Box.php:544, ../includes/Extensions/Liquid_Glass_Effect.php:176
+#: ../includes/Elements/Creative_Button.php:235, ../includes/Elements/Image_Accordion.php:308, ../includes/Elements/Info_Box.php:544, ../includes/Extensions/Liquid_Glass_Effect.php:179
 msgid "Enable Liquid Glass Effects"
 msgstr ""
 
@@ -3405,79 +3405,79 @@ msgstr ""
 msgid "Button Padding"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:623, ../includes/Elements/Image_Accordion.php:578, ../includes/Elements/Info_Box.php:1978, ../includes/Traits/Admin.php:661
+#: ../includes/Elements/Creative_Button.php:623, ../includes/Elements/Image_Accordion.php:578, ../includes/Elements/Info_Box.php:1978, ../includes/Traits/Admin.php:670
 msgid "Liquid Glass Effects"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:655, ../includes/Elements/Flip_Box.php:1695, ../includes/Elements/Image_Accordion.php:610, ../includes/Elements/Info_Box.php:2011, ../includes/Extensions/Liquid_Glass_Effect.php:149
+#: ../includes/Elements/Creative_Button.php:655, ../includes/Elements/Flip_Box.php:1695, ../includes/Elements/Image_Accordion.php:610, ../includes/Elements/Info_Box.php:2011, ../includes/Extensions/Image_Masking.php:234, ../includes/Extensions/Image_Masking.php:453, ../includes/Extensions/Liquid_Glass_Effect.php:152
 msgid "Upgrade to EA PRO"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:668, ../includes/Elements/Flip_Box.php:1707, ../includes/Elements/Flip_Box.php:2127, ../includes/Elements/Image_Accordion.php:622, ../includes/Elements/Info_Box.php:2024, ../includes/Extensions/Liquid_Glass_Effect.php:187
+#: ../includes/Elements/Creative_Button.php:668, ../includes/Elements/Flip_Box.php:1707, ../includes/Elements/Flip_Box.php:2127, ../includes/Elements/Image_Accordion.php:622, ../includes/Elements/Info_Box.php:2024, ../includes/Extensions/Liquid_Glass_Effect.php:190
 msgid "Liquid glass effect is only visible when a semi-transparent background color is applied."
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:668, ../includes/Elements/Flip_Box.php:1707, ../includes/Elements/Flip_Box.php:2127, ../includes/Elements/Image_Accordion.php:622, ../includes/Elements/Info_Box.php:2024, ../includes/Extensions/Liquid_Glass_Effect.php:187
+#: ../includes/Elements/Creative_Button.php:668, ../includes/Elements/Flip_Box.php:1707, ../includes/Elements/Flip_Box.php:2127, ../includes/Elements/Image_Accordion.php:622, ../includes/Elements/Info_Box.php:2024, ../includes/Extensions/Liquid_Glass_Effect.php:190
 msgid "Learn More"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:679, ../includes/Elements/Flip_Box.php:1718, ../includes/Elements/Flip_Box.php:2138, ../includes/Elements/Image_Accordion.php:633, ../includes/Elements/Info_Box.php:2035, ../includes/Extensions/Liquid_Glass_Effect.php:198
+#: ../includes/Elements/Creative_Button.php:679, ../includes/Elements/Flip_Box.php:1718, ../includes/Elements/Flip_Box.php:2138, ../includes/Elements/Image_Accordion.php:633, ../includes/Elements/Info_Box.php:2035, ../includes/Extensions/Liquid_Glass_Effect.php:201
 msgid "Heavy Frost"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:680, ../includes/Elements/Flip_Box.php:1719, ../includes/Elements/Flip_Box.php:2139, ../includes/Elements/Image_Accordion.php:634, ../includes/Elements/Info_Box.php:2036, ../includes/Extensions/Liquid_Glass_Effect.php:199
+#: ../includes/Elements/Creative_Button.php:680, ../includes/Elements/Flip_Box.php:1719, ../includes/Elements/Flip_Box.php:2139, ../includes/Elements/Image_Accordion.php:634, ../includes/Elements/Info_Box.php:2036, ../includes/Extensions/Liquid_Glass_Effect.php:202
 msgid "Soft Mist"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:681, ../includes/Elements/Flip_Box.php:1720, ../includes/Elements/Flip_Box.php:2140, ../includes/Elements/Image_Accordion.php:635, ../includes/Elements/Info_Box.php:2037, ../includes/Extensions/Liquid_Glass_Effect.php:200
+#: ../includes/Elements/Creative_Button.php:681, ../includes/Elements/Flip_Box.php:1720, ../includes/Elements/Flip_Box.php:2140, ../includes/Elements/Image_Accordion.php:635, ../includes/Elements/Info_Box.php:2037, ../includes/Extensions/Liquid_Glass_Effect.php:203
 msgid "Light Frost"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:682, ../includes/Elements/Flip_Box.php:1721, ../includes/Elements/Flip_Box.php:2141, ../includes/Elements/Image_Accordion.php:636, ../includes/Elements/Info_Box.php:2038, ../includes/Extensions/Liquid_Glass_Effect.php:201
+#: ../includes/Elements/Creative_Button.php:682, ../includes/Elements/Flip_Box.php:1721, ../includes/Elements/Flip_Box.php:2141, ../includes/Elements/Image_Accordion.php:636, ../includes/Elements/Info_Box.php:2038, ../includes/Extensions/Liquid_Glass_Effect.php:204
 msgid "Grain Frost"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:683, ../includes/Elements/Flip_Box.php:1722, ../includes/Elements/Flip_Box.php:2142, ../includes/Elements/Image_Accordion.php:637, ../includes/Elements/Info_Box.php:2039, ../includes/Extensions/Liquid_Glass_Effect.php:202
+#: ../includes/Elements/Creative_Button.php:683, ../includes/Elements/Flip_Box.php:1722, ../includes/Elements/Flip_Box.php:2142, ../includes/Elements/Image_Accordion.php:637, ../includes/Elements/Info_Box.php:2039, ../includes/Extensions/Liquid_Glass_Effect.php:205
 msgid "Fine Frost"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:691, ../includes/Elements/Flip_Box.php:1731, ../includes/Elements/Flip_Box.php:2150, ../includes/Elements/Image_Accordion.php:645, ../includes/Elements/Info_Box.php:2047, ../includes/Extensions/Liquid_Glass_Effect.php:210
+#: ../includes/Elements/Creative_Button.php:691, ../includes/Elements/Flip_Box.php:1731, ../includes/Elements/Flip_Box.php:2150, ../includes/Elements/Image_Accordion.php:645, ../includes/Elements/Info_Box.php:2047, ../includes/Extensions/Liquid_Glass_Effect.php:213
 msgid "Liquid Glass Presets"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:743, ../includes/Elements/Flip_Box.php:1783, ../includes/Elements/Flip_Box.php:2202, ../includes/Elements/Image_Accordion.php:697, ../includes/Elements/Info_Box.php:2099, ../includes/Extensions/Liquid_Glass_Effect.php:263
+#: ../includes/Elements/Creative_Button.php:743, ../includes/Elements/Flip_Box.php:1783, ../includes/Elements/Flip_Box.php:2202, ../includes/Elements/Image_Accordion.php:697, ../includes/Elements/Info_Box.php:2099, ../includes/Extensions/Liquid_Glass_Effect.php:266
 msgid "Liquid Glass Settings"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:731, ../includes/Elements/Flip_Box.php:1771, ../includes/Elements/Flip_Box.php:2190, ../includes/Elements/Image_Accordion.php:685, ../includes/Elements/Info_Box.php:2087, ../includes/Extensions/Liquid_Glass_Effect.php:251
+#: ../includes/Elements/Creative_Button.php:731, ../includes/Elements/Flip_Box.php:1771, ../includes/Elements/Flip_Box.php:2190, ../includes/Elements/Image_Accordion.php:685, ../includes/Elements/Info_Box.php:2087, ../includes/Extensions/Liquid_Glass_Effect.php:254
 msgid "To use this Liquid glass preset, Upgrade to Essential Addons Pro"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:770, ../includes/Elements/Flip_Box.php:1809, ../includes/Elements/Flip_Box.php:2229, ../includes/Elements/Image_Accordion.php:723, ../includes/Elements/Info_Box.php:2126, ../includes/Extensions/Liquid_Glass_Effect.php:290
+#: ../includes/Elements/Creative_Button.php:770, ../includes/Elements/Flip_Box.php:1809, ../includes/Elements/Flip_Box.php:2229, ../includes/Elements/Image_Accordion.php:723, ../includes/Elements/Info_Box.php:2126, ../includes/Extensions/Liquid_Glass_Effect.php:293
 msgid "Brightness"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:945, ../includes/Elements/Creative_Button.php:808, ../includes/Elements/Flip_Box.php:1983, ../includes/Elements/Flip_Box.php:1847, ../includes/Elements/Flip_Box.php:2403, ../includes/Elements/Flip_Box.php:2267, ../includes/Elements/Image_Accordion.php:897, ../includes/Elements/Image_Accordion.php:761, ../includes/Elements/Info_Box.php:2300, ../includes/Elements/Info_Box.php:2164, ../includes/Extensions/Liquid_Glass_Effect.php:437, ../includes/Extensions/Liquid_Glass_Effect.php:324
+#: ../includes/Elements/Creative_Button.php:945, ../includes/Elements/Creative_Button.php:808, ../includes/Elements/Flip_Box.php:1983, ../includes/Elements/Flip_Box.php:1847, ../includes/Elements/Flip_Box.php:2403, ../includes/Elements/Flip_Box.php:2267, ../includes/Elements/Image_Accordion.php:897, ../includes/Elements/Image_Accordion.php:761, ../includes/Elements/Info_Box.php:2300, ../includes/Elements/Info_Box.php:2164, ../includes/Extensions/Liquid_Glass_Effect.php:440, ../includes/Extensions/Liquid_Glass_Effect.php:327
 msgid "Shadow Effects"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:951, ../includes/Elements/Creative_Button.php:814, ../includes/Elements/Flip_Box.php:1989, ../includes/Elements/Flip_Box.php:1853, ../includes/Elements/Flip_Box.php:2409, ../includes/Elements/Flip_Box.php:2273, ../includes/Elements/Image_Accordion.php:903, ../includes/Elements/Image_Accordion.php:767, ../includes/Elements/Info_Box.php:2306, ../includes/Elements/Info_Box.php:2170, ../includes/Extensions/Liquid_Glass_Effect.php:443, ../includes/Extensions/Liquid_Glass_Effect.php:330
+#: ../includes/Elements/Creative_Button.php:951, ../includes/Elements/Creative_Button.php:814, ../includes/Elements/Flip_Box.php:1989, ../includes/Elements/Flip_Box.php:1853, ../includes/Elements/Flip_Box.php:2409, ../includes/Elements/Flip_Box.php:2273, ../includes/Elements/Image_Accordion.php:903, ../includes/Elements/Image_Accordion.php:767, ../includes/Elements/Info_Box.php:2306, ../includes/Elements/Info_Box.php:2170, ../includes/Extensions/Liquid_Glass_Effect.php:446, ../includes/Extensions/Liquid_Glass_Effect.php:333
 msgid "Effect 1"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:952, ../includes/Elements/Creative_Button.php:815, ../includes/Elements/Flip_Box.php:1990, ../includes/Elements/Flip_Box.php:1854, ../includes/Elements/Flip_Box.php:2410, ../includes/Elements/Flip_Box.php:2274, ../includes/Elements/Image_Accordion.php:904, ../includes/Elements/Image_Accordion.php:768, ../includes/Elements/Info_Box.php:2307, ../includes/Elements/Info_Box.php:2171, ../includes/Extensions/Liquid_Glass_Effect.php:444, ../includes/Extensions/Liquid_Glass_Effect.php:331
+#: ../includes/Elements/Creative_Button.php:952, ../includes/Elements/Creative_Button.php:815, ../includes/Elements/Flip_Box.php:1990, ../includes/Elements/Flip_Box.php:1854, ../includes/Elements/Flip_Box.php:2410, ../includes/Elements/Flip_Box.php:2274, ../includes/Elements/Image_Accordion.php:904, ../includes/Elements/Image_Accordion.php:768, ../includes/Elements/Info_Box.php:2307, ../includes/Elements/Info_Box.php:2171, ../includes/Extensions/Liquid_Glass_Effect.php:447, ../includes/Extensions/Liquid_Glass_Effect.php:334
 msgid "Effect 2"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:953, ../includes/Elements/Creative_Button.php:816, ../includes/Elements/Flip_Box.php:1991, ../includes/Elements/Flip_Box.php:1855, ../includes/Elements/Flip_Box.php:2411, ../includes/Elements/Flip_Box.php:2275, ../includes/Elements/Image_Accordion.php:905, ../includes/Elements/Image_Accordion.php:769, ../includes/Elements/Info_Box.php:2308, ../includes/Elements/Info_Box.php:2172, ../includes/Extensions/Liquid_Glass_Effect.php:445, ../includes/Extensions/Liquid_Glass_Effect.php:332
+#: ../includes/Elements/Creative_Button.php:953, ../includes/Elements/Creative_Button.php:816, ../includes/Elements/Flip_Box.php:1991, ../includes/Elements/Flip_Box.php:1855, ../includes/Elements/Flip_Box.php:2411, ../includes/Elements/Flip_Box.php:2275, ../includes/Elements/Image_Accordion.php:905, ../includes/Elements/Image_Accordion.php:769, ../includes/Elements/Info_Box.php:2308, ../includes/Elements/Info_Box.php:2172, ../includes/Extensions/Liquid_Glass_Effect.php:448, ../includes/Extensions/Liquid_Glass_Effect.php:335
 msgid "Effect 3"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:954, ../includes/Elements/Creative_Button.php:817, ../includes/Elements/Flip_Box.php:1992, ../includes/Elements/Flip_Box.php:1856, ../includes/Elements/Flip_Box.php:2412, ../includes/Elements/Flip_Box.php:2276, ../includes/Elements/Image_Accordion.php:906, ../includes/Elements/Image_Accordion.php:770, ../includes/Elements/Info_Box.php:2309, ../includes/Elements/Info_Box.php:2173, ../includes/Extensions/Liquid_Glass_Effect.php:446, ../includes/Extensions/Liquid_Glass_Effect.php:333
+#: ../includes/Elements/Creative_Button.php:954, ../includes/Elements/Creative_Button.php:817, ../includes/Elements/Flip_Box.php:1992, ../includes/Elements/Flip_Box.php:1856, ../includes/Elements/Flip_Box.php:2412, ../includes/Elements/Flip_Box.php:2276, ../includes/Elements/Image_Accordion.php:906, ../includes/Elements/Image_Accordion.php:770, ../includes/Elements/Info_Box.php:2309, ../includes/Elements/Info_Box.php:2173, ../includes/Extensions/Liquid_Glass_Effect.php:449, ../includes/Extensions/Liquid_Glass_Effect.php:336
 msgid "Effect 4"
 msgstr ""
 
-#: ../includes/Elements/Creative_Button.php:967, ../includes/Elements/Creative_Button.php:830, ../includes/Elements/Flip_Box.php:2005, ../includes/Elements/Flip_Box.php:1869, ../includes/Elements/Flip_Box.php:2425, ../includes/Elements/Flip_Box.php:2289, ../includes/Elements/Image_Accordion.php:919, ../includes/Elements/Image_Accordion.php:783, ../includes/Elements/Info_Box.php:2322, ../includes/Elements/Info_Box.php:2186, ../includes/Extensions/Liquid_Glass_Effect.php:459, ../includes/Extensions/Liquid_Glass_Effect.php:346
+#: ../includes/Elements/Creative_Button.php:967, ../includes/Elements/Creative_Button.php:830, ../includes/Elements/Flip_Box.php:2005, ../includes/Elements/Flip_Box.php:1869, ../includes/Elements/Flip_Box.php:2425, ../includes/Elements/Flip_Box.php:2289, ../includes/Elements/Image_Accordion.php:919, ../includes/Elements/Image_Accordion.php:783, ../includes/Elements/Info_Box.php:2322, ../includes/Elements/Info_Box.php:2186, ../includes/Extensions/Liquid_Glass_Effect.php:462, ../includes/Extensions/Liquid_Glass_Effect.php:349
 msgid "Shadow Settings"
 msgstr ""
 
@@ -3513,7 +3513,7 @@ msgstr ""
 msgid "Image Options"
 msgstr ""
 
-#: ../includes/Elements/Cta_Box.php:214, ../includes/Elements/Cta_Box.php:219
+#: ../includes/Elements/Cta_Box.php:214, ../includes/Elements/Cta_Box.php:219, ../includes/Extensions/Image_Masking.php:430
 msgid "Repeat"
 msgstr ""
 
@@ -3965,7 +3965,7 @@ msgstr ""
 msgid "Google Calendar"
 msgstr ""
 
-#: ../includes/Elements/Event_Calendar.php:341, ../includes/Elements/NFT_Gallery.php:90, ../includes/Traits/Admin.php:1522
+#: ../includes/Elements/Event_Calendar.php:341, ../includes/Elements/NFT_Gallery.php:90, ../includes/Traits/Admin.php:1531
 msgid "API Key"
 msgstr ""
 
@@ -4389,7 +4389,7 @@ msgstr ""
 msgid "Page ID"
 msgstr ""
 
-#: ../includes/Elements/Facebook_Feed.php:115, ../includes/Traits/Admin.php:1680
+#: ../includes/Elements/Facebook_Feed.php:115, ../includes/Traits/Admin.php:1689
 msgid "Secret Key"
 msgstr ""
 
@@ -5950,7 +5950,7 @@ msgstr ""
 msgid "Desktop view for mobile"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:183, ../includes/Traits/Admin.php:1270
+#: ../includes/Elements/Login_Register.php:183, ../includes/Traits/Admin.php:1279
 msgid "Login | Register Form"
 msgstr ""
 
@@ -6235,7 +6235,7 @@ msgstr ""
 msgid "By default, you can use a threshold of 0.5."
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:905, ../includes/Traits/Admin.php:1667
+#: ../includes/Elements/Login_Register.php:905, ../includes/Traits/Admin.php:1676
 msgid "Cloudflare Turnstile"
 msgstr ""
 
@@ -7194,7 +7194,7 @@ msgstr ""
 msgid "Justify Content"
 msgstr ""
 
-#: ../includes/Elements/Login_Register.php:5146, ../includes/Elements/Login_Register.php:5476, ../includes/Elements/Login_Register.php:5496
+#: ../includes/Elements/Login_Register.php:5146, ../includes/Elements/Login_Register.php:5476, ../includes/Elements/Login_Register.php:5496, ../includes/Extensions/Image_Masking.php:80
 msgid "Start"
 msgstr ""
 
@@ -7941,7 +7941,7 @@ msgstr ""
 msgid "Subtitle Style"
 msgstr ""
 
-#: ../includes/Elements/Pricing_Table.php:1066, ../includes/Traits/Admin.php:1088, ../includes/Traits/Elements.php:156
+#: ../includes/Elements/Pricing_Table.php:1066, ../includes/Traits/Admin.php:1097, ../includes/Traits/Elements.php:156
 msgid "Divider"
 msgstr ""
 
@@ -8541,7 +8541,7 @@ msgstr ""
 msgid "Inner Title Color"
 msgstr ""
 
-#: ../includes/Elements/Progress_Bar.php:852, ../includes/Traits/Admin.php:1010, ../includes/Traits/Elements.php:150
+#: ../includes/Elements/Progress_Bar.php:852, ../includes/Traits/Admin.php:1019, ../includes/Traits/Elements.php:150
 msgid "Counter"
 msgstr ""
 
@@ -10718,11 +10718,207 @@ msgstr ""
 msgid "Tilt Effect"
 msgstr ""
 
-#: ../includes/Extensions/Liquid_Glass_Effect.php:46, ../includes/Traits/Helper.php:649, ../includes/Traits/Helper.php:697
+#: ../includes/Extensions/Image_Masking.php:59
+msgid "Select Clip Path"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:64
+msgid "Bavel"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:68
+msgid "Rabbet"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:72
+msgid "Chevron Left"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:76
+msgid "Chevron Right"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:95
+msgid "Use Custom Clip Path"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:117
+msgid "Enter your custom clip path value. You can use <a href = \"https://bennettfeely.com/clippy/\" target = \"_blank\">Clippy</a> to generate your custom clip path."
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:131
+msgid "Choose Shape"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:136
+msgid "Polygon"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:140
+msgid "Rounded"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:144
+msgid "Arch Down"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:148
+msgid "Arch Group"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:152
+msgid "Arch Up"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:156
+msgid "Asterisk"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:160
+msgid "Blob"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:164
+msgid "Blocks"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:168
+msgid "Brash 1"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:172
+msgid "Brash 2"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:176
+msgid "Brash 3"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:180
+msgid "Burst"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:184
+msgid "Chat"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:188
+msgid "Hex Tile"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:192
+msgid "Leaf"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:196
+msgid "Oval"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:200
+msgid "Pixel Cross"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:204
+msgid "Quote"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:208
+msgid "Star Diamond"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:212
+msgid "Upload"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:232, ../includes/Extensions/Image_Masking.php:451
+msgid "This feature is available in the pro version."
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:249
+msgid "Hover Selector"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:259
+msgid "Enter the selector for the element you want to apply the hover effect on. If you leave this field empty, the hover effect will be applied on hover for full section."
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:272
+msgid "<i class=\"eaicon-logo\"></i> Image Masking"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:280
+msgid "Enable Image Masking"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:292
+msgid "Image/SVG Masking"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:296
+msgid "Clip Path"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:300
+msgid "Morphing"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:402
+msgid "Left Top"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:403
+msgid "Left Center"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:404
+msgid "Left Bottom"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:405
+msgid "Center Top"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:406
+msgid "Center Center"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:407
+msgid "Center Bottom"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:408
+msgid "Right Top"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:409
+msgid "Right Center"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:410
+msgid "Right Bottom"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:425
+msgid "Reapeat"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:429
+msgid "No-repeat"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:431
+msgid "Repeat-x"
+msgstr ""
+
+#: ../includes/Extensions/Image_Masking.php:432
+msgid "Repeat-y"
+msgstr ""
+
+#: ../includes/Extensions/Liquid_Glass_Effect.php:49, ../includes/Traits/Helper.php:649, ../includes/Traits/Helper.php:697
 msgid "Backdrop Filter"
 msgstr ""
 
-#: ../includes/Extensions/Liquid_Glass_Effect.php:168
+#: ../includes/Extensions/Liquid_Glass_Effect.php:171
 msgid "<i class=\"eaicon-logo\"></i> Liquid Glass Effects"
 msgstr ""
 
@@ -11262,7 +11458,7 @@ msgstr ""
 msgid "Five Star Reviews"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:208, ../includes/Traits/Admin.php:1772
+#: ../includes/Traits/Admin.php:208, ../includes/Traits/Admin.php:1781
 msgid "Upgrade to PRO"
 msgstr ""
 
@@ -11274,7 +11470,7 @@ msgstr ""
 msgid "Deactivate"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:286, ../includes/Traits/Admin.php:412, ../includes/Traits/Admin.php:1027, ../includes/Traits/Elements.php:288
+#: ../includes/Traits/Admin.php:286, ../includes/Traits/Admin.php:412, ../includes/Traits/Admin.php:1036, ../includes/Traits/Elements.php:288
 msgid "Protected Content"
 msgstr ""
 
@@ -11286,7 +11482,7 @@ msgstr ""
 msgid "View Demo"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:295, ../includes/Traits/Admin.php:397, ../includes/Traits/Admin.php:918, ../includes/Traits/Elements.php:270
+#: ../includes/Traits/Admin.php:295, ../includes/Traits/Admin.php:397, ../includes/Traits/Admin.php:927, ../includes/Traits/Elements.php:270
 msgid "Smart Post List"
 msgstr ""
 
@@ -11294,7 +11490,7 @@ msgstr ""
 msgid "Display your blog posts in an amazing grid layout with advanced search & filter options."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:304, ../includes/Traits/Admin.php:432, ../includes/Traits/Admin.php:1437, ../includes/Traits/Elements.php:330
+#: ../includes/Traits/Admin.php:304, ../includes/Traits/Admin.php:432, ../includes/Traits/Admin.php:1446, ../includes/Traits/Elements.php:330
 msgid "Woo Product Slider"
 msgstr ""
 
@@ -11302,7 +11498,7 @@ msgstr ""
 msgid "Showcase your WooCommerce products beautifully with amazing ready slider layouts."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:313, ../includes/Traits/Admin.php:442, ../includes/Traits/Admin.php:909, ../includes/Traits/Elements.php:264
+#: ../includes/Traits/Admin.php:313, ../includes/Traits/Admin.php:442, ../includes/Traits/Admin.php:918, ../includes/Traits/Elements.php:264
 msgid "Post Carousel"
 msgstr ""
 
@@ -11310,7 +11506,7 @@ msgstr ""
 msgid "Amaze site visitors by displaying your posts creatively. Add transition effects, overlays, & more to showcase your posts beautifully on your site."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:322, ../includes/Traits/Admin.php:427, ../includes/Traits/Admin.php:1301, ../includes/Traits/Elements.php:204
+#: ../includes/Traits/Admin.php:322, ../includes/Traits/Admin.php:427, ../includes/Traits/Admin.php:1310, ../includes/Traits/Elements.php:204
 msgid "Instagram Feed"
 msgstr ""
 
@@ -11330,7 +11526,7 @@ msgstr ""
 msgid "Helps you easily connect your site with MailChimp. You can create and manage subscription forms directly on your website."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:349, ../includes/Traits/Admin.php:417, ../includes/Traits/Admin.php:890
+#: ../includes/Traits/Admin.php:349, ../includes/Traits/Admin.php:417, ../includes/Traits/Admin.php:899
 msgid "Advanced Google Map"
 msgstr ""
 
@@ -11338,7 +11534,7 @@ msgstr ""
 msgid "Integrates Google Maps to display locations, routes, and markers easily on your site as your preferences."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:358, ../includes/Traits/Admin.php:402, ../includes/Traits/Admin.php:935, ../includes/Traits/Elements.php:162
+#: ../includes/Traits/Admin.php:358, ../includes/Traits/Admin.php:402, ../includes/Traits/Admin.php:944, ../includes/Traits/Elements.php:162
 msgid "Dynamic Gallery"
 msgstr ""
 
@@ -11366,15 +11562,15 @@ msgstr ""
 msgid "Discover the premium features of the most popular elements library for Elementor. Experience the web building experience with:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:385, ../includes/Traits/Admin.php:1767
+#: ../includes/Traits/Admin.php:385, ../includes/Traits/Admin.php:1776
 msgid "Customization Flexibility in Design with Premium Creative Elements."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:386, ../includes/Traits/Admin.php:1768
+#: ../includes/Traits/Admin.php:386, ../includes/Traits/Admin.php:1777
 msgid "Advanced WooCommerce Widgets like Checkout, Cross-Sells & more."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:387, ../includes/Traits/Admin.php:1769
+#: ../includes/Traits/Admin.php:387, ../includes/Traits/Admin.php:1778
 msgid "Cutting-edge Extensions Like Custom JS, Content Protection & more."
 msgstr ""
 
@@ -11386,7 +11582,7 @@ msgstr ""
 msgid "Parallax"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:447, ../includes/Traits/Admin.php:1324, ../includes/Traits/Elements.php:222
+#: ../includes/Traits/Admin.php:447, ../includes/Traits/Admin.php:1333, ../includes/Traits/Elements.php:222
 msgid "LearnDash Course List"
 msgstr ""
 
@@ -11394,11 +11590,11 @@ msgstr ""
 msgid "Particle Effect"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:457, ../includes/Traits/Admin.php:1054, ../includes/Traits/Elements.php:234
+#: ../includes/Traits/Admin.php:457, ../includes/Traits/Admin.php:1063, ../includes/Traits/Elements.php:234
 msgid "Logo Carousel"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:462, ../includes/Traits/Admin.php:1079, ../includes/Traits/Elements.php:192
+#: ../includes/Traits/Admin.php:462, ../includes/Traits/Admin.php:1088, ../includes/Traits/Elements.php:192
 msgid "Image Hotspots"
 msgstr ""
 
@@ -11406,15 +11602,15 @@ msgstr ""
 msgid "Conditional Display"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:472, ../includes/Traits/Admin.php:823, ../includes/Traits/Elements.php:336
+#: ../includes/Traits/Admin.php:472, ../includes/Traits/Admin.php:832, ../includes/Traits/Elements.php:336
 msgid "Advanced Search"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:477, ../includes/Traits/Admin.php:792, ../includes/Traits/Elements.php:300
+#: ../includes/Traits/Admin.php:477, ../includes/Traits/Admin.php:801, ../includes/Traits/Elements.php:300
 msgid "Team Member Carousel"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:487, ../includes/Traits/Admin.php:1500, ../includes/Traits/Admin.php:1527, ../includes/Traits/Elements.php:354
+#: ../includes/Traits/Admin.php:487, ../includes/Traits/Admin.php:1509, ../includes/Traits/Admin.php:1536, ../includes/Traits/Elements.php:354
 msgid "Woo Account Dashboard"
 msgstr ""
 
@@ -11491,346 +11687,350 @@ msgid "Custom Cursor"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:635
-msgid "Dynamic Tags"
+msgid "Image Masking"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:644
-msgid "Interactive Animations"
+msgid "Dynamic Tags"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:653
+msgid "Interactive Animations"
+msgstr ""
+
+#: ../includes/Traits/Admin.php:662
 msgid "Hover Interactions"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:750, ../includes/Traits/Elements.php:246
+#: ../includes/Traits/Admin.php:759, ../includes/Traits/Elements.php:246
 msgid "Offcanvas"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:759, ../includes/Traits/Elements.php:138
+#: ../includes/Traits/Admin.php:768, ../includes/Traits/Elements.php:138
 msgid "Advanced Menu"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:775, ../includes/Traits/Elements.php:306
+#: ../includes/Traits/Admin.php:784, ../includes/Traits/Elements.php:306
 msgid "Testimonial Slider"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:784, ../includes/Traits/Elements.php:294
+#: ../includes/Traits/Admin.php:793, ../includes/Traits/Elements.php:294
 msgid "Static Product"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:900, ../includes/Traits/Elements.php:258
+#: ../includes/Traits/Admin.php:909, ../includes/Traits/Elements.php:258
 msgid "Post Block"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:927, ../includes/Traits/Elements.php:144
+#: ../includes/Traits/Admin.php:936, ../includes/Traits/Elements.php:144
 msgid "Content Timeline"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1002, ../includes/Traits/Elements.php:216
+#: ../includes/Traits/Admin.php:1011, ../includes/Traits/Elements.php:216
 msgid "Interactive Promo"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1018, ../includes/Traits/Elements.php:228
+#: ../includes/Traits/Admin.php:1027, ../includes/Traits/Elements.php:228
 msgid "Lightbox & Modal"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1036, ../includes/Traits/Elements.php:186
+#: ../includes/Traits/Admin.php:1045, ../includes/Traits/Elements.php:186
 msgid "Image Comparison"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1045, ../includes/Traits/Elements.php:168
+#: ../includes/Traits/Admin.php:1054, ../includes/Traits/Elements.php:168
 msgid "Flip Carousel"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1063
+#: ../includes/Traits/Admin.php:1072
 msgid "Interactive Cards"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1071, ../includes/Traits/Elements.php:252
+#: ../includes/Traits/Admin.php:1080, ../includes/Traits/Elements.php:252
 msgid "One Page Navigation"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1096, ../includes/Traits/Elements.php:198
+#: ../includes/Traits/Admin.php:1105, ../includes/Traits/Elements.php:198
 msgid "Image Scroller"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1146
+#: ../includes/Traits/Admin.php:1155
 msgid "Marketing Elements"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1166, ../includes/Traits/Elements.php:282
+#: ../includes/Traits/Admin.php:1175, ../includes/Traits/Elements.php:282
 msgid "Multicolumn Pricing Table"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1175, ../includes/Traits/Elements.php:276
+#: ../includes/Traits/Admin.php:1184, ../includes/Traits/Elements.php:276
 msgid "Price Menu"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1260, ../includes/Traits/Elements.php:240
+#: ../includes/Traits/Admin.php:1269, ../includes/Traits/Elements.php:240
 msgid "Mailchimp"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1280
+#: ../includes/Traits/Admin.php:1289
 msgid "Social Feed Elements"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1293
+#: ../includes/Traits/Admin.php:1302
 msgid "Twitter Feed Carousel"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1319
+#: ../includes/Traits/Admin.php:1328
 msgid "LearnDash Elements"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1362
+#: ../includes/Traits/Admin.php:1371
 msgid "Figma Design Elements"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1367, ../includes/Traits/Elements.php:174
+#: ../includes/Traits/Admin.php:1376, ../includes/Traits/Elements.php:174
 msgid "Figma to Elementor Converter"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1429, ../includes/Traits/Elements.php:324
+#: ../includes/Traits/Admin.php:1438, ../includes/Traits/Elements.php:324
 msgid "Woo Product Collections"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1469, ../includes/Traits/Elements.php:342
+#: ../includes/Traits/Admin.php:1478, ../includes/Traits/Elements.php:342
 msgid "Woo Thank You"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1512
+#: ../includes/Traits/Admin.php:1521
 msgid "Select Post Types"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1518
+#: ../includes/Traits/Admin.php:1527
 msgid "Google Map API Key"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1520, ../includes/Traits/Admin.php:1600
+#: ../includes/Traits/Admin.php:1529, ../includes/Traits/Admin.php:1609
 msgid "Set API Key"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1528
+#: ../includes/Traits/Admin.php:1537
 msgid "Set Custom Tabs"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1530
+#: ../includes/Traits/Admin.php:1539
 msgid "Custom Tab 1, Custom Tab 2, Custom Tab 3"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1536
+#: ../includes/Traits/Admin.php:1545
 msgid "Google Places API"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1542, ../includes/Traits/Admin.php:1555, ../includes/Traits/Admin.php:1569
+#: ../includes/Traits/Admin.php:1551, ../includes/Traits/Admin.php:1564, ../includes/Traits/Admin.php:1578
 msgid "API Key:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1543
+#: ../includes/Traits/Admin.php:1552
 msgid "Enter Google Places API Key"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1546
+#: ../includes/Traits/Admin.php:1555
 msgid "Get your Google Places API key from Google Cloud Console. This is used for fetching Google Reviews."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1549
+#: ../includes/Traits/Admin.php:1558
 msgid "Trustpilot API"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1556
+#: ../includes/Traits/Admin.php:1565
 msgid "Enter Trustpilot API Key"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1559
+#: ../includes/Traits/Admin.php:1568
 msgid "Get your Trustpilot API key from Trustpilot Developer Portal. This is used for fetching Trustpilot Reviews."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1563
+#: ../includes/Traits/Admin.php:1572
 msgid "Yelp Fusion API"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1570
+#: ../includes/Traits/Admin.php:1579
 msgid "Enter Yelp Fusion API Key"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1573
+#: ../includes/Traits/Admin.php:1582
 msgid "Get your Yelp Fusion API key from Yelp Developers. This is used for fetching Yelp Reviews."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1578, ../includes/Traits/Admin.php:1605, ../includes/Traits/Admin.php:1754
+#: ../includes/Traits/Admin.php:1587, ../includes/Traits/Admin.php:1614, ../includes/Traits/Admin.php:1763
 msgid "To configure the API Keys, check out this doc"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1583
+#: ../includes/Traits/Admin.php:1592
 msgid "Google My Business Access Token"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1585
+#: ../includes/Traits/Admin.php:1594
 msgid "Set Access Token"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1588
+#: ../includes/Traits/Admin.php:1597
 msgid "ya29.a0AfH6SMC..."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1592
+#: ../includes/Traits/Admin.php:1601
 msgid "Get your access token from Google OAuth 2.0 Playground"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1598
+#: ../includes/Traits/Admin.php:1607
 msgid "MailChimp API Key"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1612
+#: ../includes/Traits/Admin.php:1621
 msgid "reCAPTCHA v2"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1618, ../includes/Traits/Admin.php:1642, ../includes/Traits/Admin.php:1673
+#: ../includes/Traits/Admin.php:1627, ../includes/Traits/Admin.php:1651, ../includes/Traits/Admin.php:1682
 msgid "Site Key:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1619, ../includes/Traits/Admin.php:1643, ../includes/Traits/Admin.php:1674
+#: ../includes/Traits/Admin.php:1628, ../includes/Traits/Admin.php:1652, ../includes/Traits/Admin.php:1683
 msgid "Site Key"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1624, ../includes/Traits/Admin.php:1648
+#: ../includes/Traits/Admin.php:1633, ../includes/Traits/Admin.php:1657
 msgid "Site Secret:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1625, ../includes/Traits/Admin.php:1649
+#: ../includes/Traits/Admin.php:1634, ../includes/Traits/Admin.php:1658
 msgid "Site Secret"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1630, ../includes/Traits/Admin.php:1654
+#: ../includes/Traits/Admin.php:1639, ../includes/Traits/Admin.php:1663
 msgid "Language:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1631, ../includes/Traits/Admin.php:1655
+#: ../includes/Traits/Admin.php:1640, ../includes/Traits/Admin.php:1664
 msgid "reCAPTCHA Language Code"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1636
+#: ../includes/Traits/Admin.php:1645
 msgid "reCAPTCHA v3"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1660
+#: ../includes/Traits/Admin.php:1669
 msgid "Hide Badge"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1662
+#: ../includes/Traits/Admin.php:1671
 msgid "We are allowed to hide the badge as long as we include the reCAPTCHA branding visibly in the user flow."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1679
+#: ../includes/Traits/Admin.php:1688
 msgid "Secret Key:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1685
+#: ../includes/Traits/Admin.php:1694
 msgid "Google Login"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1691
+#: ../includes/Traits/Admin.php:1700
 msgid "Google Client ID:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1692
+#: ../includes/Traits/Admin.php:1701
 msgid "Google Client ID"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1698
+#: ../includes/Traits/Admin.php:1707
 msgid "Facebook Login"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1704
+#: ../includes/Traits/Admin.php:1713
 msgid "Facebook App ID:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1705
+#: ../includes/Traits/Admin.php:1714
 msgid "Facebook App ID"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1710
+#: ../includes/Traits/Admin.php:1719
 msgid "Facebook App Secret:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1711
+#: ../includes/Traits/Admin.php:1720
 msgid "Facebook App Secret"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1717
+#: ../includes/Traits/Admin.php:1726
 msgid "Mailchimp Integration"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1723
+#: ../includes/Traits/Admin.php:1732
 msgid "Mailchimp API Key:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1724
+#: ../includes/Traits/Admin.php:1733
 msgid "Mailchimp API"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1730
+#: ../includes/Traits/Admin.php:1739
 msgid "Enable Custom Fields"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1732
+#: ../includes/Traits/Admin.php:1741
 msgid "Fields will be available on both the edit profile page and the EA Login | Register Form."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1737
+#: ../includes/Traits/Admin.php:1746
 msgid "Text Type Fields:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1738, ../includes/Traits/Admin.php:1744
+#: ../includes/Traits/Admin.php:1747, ../includes/Traits/Admin.php:1753
 msgid "Field 1, Field 2 ..."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1743
+#: ../includes/Traits/Admin.php:1752
 msgid "File Type Fields:"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1761
+#: ../includes/Traits/Admin.php:1770
 msgid "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.6 with new \"<b><a target='_blank' href='%s'>Custom Cursor</a></b>\" extension. For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1764
+#: ../includes/Traits/Admin.php:1773
 msgid "Unlock the PRO Features"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1765
+#: ../includes/Traits/Admin.php:1774
 msgid "Upgrade to Essential Addons PRO and gain access to advanced elements and functionalities to build websites more efficiently"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1859
+#: ../includes/Traits/Admin.php:1868
 msgid "We hope you're enjoying Essential Addons for Elementor! Could you please do us a BIG favor and give it a 5-star rating on WordPress to help us spread the word and boost our motivation?"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1867
+#: ../includes/Traits/Admin.php:1876
 msgid "Ok, you deserve it!"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1871
+#: ../includes/Traits/Admin.php:1880
 msgid "I already did"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1878
+#: ../includes/Traits/Admin.php:1887
 msgid "Maybe Later"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1886
+#: ../includes/Traits/Admin.php:1895
 msgid "I need help"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1890
+#: ../includes/Traits/Admin.php:1899
 msgid "Never show again"
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1917
+#: ../includes/Traits/Admin.php:1926
 msgid "Join us in celebrating the 8th birthday of Essential Addons and grab up to an exclusive 40% OFF on all the premium plans."
 msgstr ""
 
-#: ../includes/Traits/Admin.php:1926
+#: ../includes/Traits/Admin.php:1935
 msgid "Upgrade To PRO Now"
 msgstr ""
 
