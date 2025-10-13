@@ -85,9 +85,16 @@ let verticalTextOrientation = function ($scope, $) {
                            ", "
                         )})`;
 
-                        $(
-                           `.elementor-element-${$scopeId} .elementor-heading-title`
-                        ).css({
+                        const targetSelectors = [
+                           ".elementor-heading-title",
+                           ".elementor-text-editor p",
+                           ".elementor-headline",
+                           ".eael-dual-header",
+                           ".eael-fancy-text-container",
+                        ];
+                        const fullSelectors = targetSelectors.map(selector => `.elementor-element-${$scopeId} ${selector}`).join(', ');
+                        
+                        $(fullSelectors).css({
                            background: linearGradient + " -100% / 200%",
                            "-webkit-background-clip": "text",
                            "-webkit-text-fill-color": "transparent",
@@ -122,7 +129,18 @@ let verticalTextOrientation = function ($scope, $) {
                ", "
             )})`;
 
-            $(`.elementor-element-${$scopeId} .elementor-heading-title`).css({
+            // Define target selectors
+            const targetSelectors = [
+               ".elementor-heading-title",
+               ".elementor-widget-text-editor p",
+               ".elementor-headline",
+               ".eael-dual-header",
+               ".eael-fancy-text-container",
+            ];
+
+            const fullSelector = targetSelectors.map(selector => `.elementor-element-${$scopeId} ${selector}`).join(', ');
+
+            $(fullSelector).css({
                background: linearGradient + " -100% / 200%",
                "-webkit-background-clip": "text",
                "-webkit-text-fill-color": "transparent",
