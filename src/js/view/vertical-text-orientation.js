@@ -1,9 +1,6 @@
-let {log} = console;
 let verticalTextOrientation = function ($scope, $) {
    let gradientColor = $scope.data("gradient_colors"),
        $scopeId = $scope.data("id");
-
-      log('gradientColor: ', gradientColor);
 
    /**
     * For editor page - following hover-effect.js pattern
@@ -60,8 +57,6 @@ let verticalTextOrientation = function ($scope, $) {
 
                // Update gradientColor with the properly formatted array
                if (gradientArray.length > 0) {
-                  // log('gradientArray: ', gradientArray);
-                  // gradientColorEditor = gradientArray;
                   let gradientStops = [];
 
                   // Check if gradientColor exists and is an array
@@ -80,7 +75,6 @@ let verticalTextOrientation = function ($scope, $) {
 
                      // Only apply gradient if we have valid gradient stops
                      if (gradientStops.length > 0) {
-                        log("gradientStops: ", gradientStops);
                         let linearGradient = `linear-gradient(90deg, ${gradientStops.join(
                            ", "
                         )})`;
@@ -124,7 +118,6 @@ let verticalTextOrientation = function ($scope, $) {
 
          // Only apply gradient if we have valid gradient stops
          if (gradientStops.length > 0) {
-            log("gradientStops: ", gradientStops);
             let linearGradient = `linear-gradient(90deg, ${gradientStops.join(
                ", "
             )})`;
