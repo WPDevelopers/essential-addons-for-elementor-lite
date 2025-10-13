@@ -47,7 +47,7 @@ class Vertical_Text_Orientation {
                 'selectors' => [
                     '{{WRAPPER}}.eael_vto-vertical-lr, {{WRAPPER}}.eael_vto-vertical-rl' => 'writing-mode: {{VALUE}};',
                 ],
-                'prefix_class' => 'eael_vto-vertical eael_vto-',
+                'prefix_class' => 'eael_vto-',
                 'condition' => [
                     'eael_vertical_text_orientation_switch' => 'yes',
                 ],
@@ -66,7 +66,7 @@ class Vertical_Text_Orientation {
 					'yes' => 'rotate(180deg)',
 				],
                 'selectors' => [
-                    '{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title' => 'transform: {{VALUE}};',
+                    '{{WRAPPER}}.eael_vto-vertical-lr, {{WRAPPER}}.eael_vto-vertical-rl' => 'transform: {{VALUE}};',
                 ],
 				'condition' => [
 					'eael_vertical_text_orientation_switch' => 'yes',
@@ -88,7 +88,7 @@ class Vertical_Text_Orientation {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title' => 'inline-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}}.eael_vto-vertical-lr' => 'inline-size: {{SIZE}}{{UNIT}};',
 				],
                 'condition' => [
 					'eael_vertical_text_orientation_switch' => 'yes',
@@ -108,7 +108,7 @@ class Vertical_Text_Orientation {
 					'yes' => 'upright',
 				],
                 'selectors' => [
-                    '{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title' => 'text-orientation: {{VALUE}};',
+                    '{{WRAPPER}}.eael_vto-vertical-lr, {{WRAPPER}}.eael_vto-vertical-rl' => 'text-orientation: {{VALUE}};',
                 ],
 				'condition' => [
 					'eael_vertical_text_orientation_switch' => 'yes',
@@ -152,7 +152,7 @@ class Vertical_Text_Orientation {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title' => 'word-spacing: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}}.eael_vto-vertical-lr, {{WRAPPER}}.eael_vto-vertical-rl' => 'word-spacing: {{SIZE}}{{UNIT}};',
 				],
                 'condition' => [
 					'eael_vertical_text_orientation_switch' => 'yes',
@@ -174,7 +174,7 @@ class Vertical_Text_Orientation {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title' => 'text-indent: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}}.eael_vto-vertical-lr, {{WRAPPER}}.eael_vto-vertical-rl' => 'text-indent: {{SIZE}}{{UNIT}};',
 				],
                 'condition' => [
 					'eael_vertical_text_orientation_switch' => 'yes',
@@ -196,7 +196,7 @@ class Vertical_Text_Orientation {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title' => 'line-height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}}.eael_vto-vertical-lr, {{WRAPPER}}.eael_vto-vertical-rl' => 'line-height: {{SIZE}}{{UNIT}};',
 				],
                 'condition' => [
 					'eael_vertical_text_orientation_switch' => 'yes',
@@ -238,7 +238,18 @@ class Vertical_Text_Orientation {
 			[
 				'name'     => 'eael_vto_writing_styling_background',
 				'types'    => [ 'classic' ],
-				'selector' => '{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title',
+				'selector' => '{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, 
+                    {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title, 
+                    {{WRAPPER}}.eael_vto-vertical-lr .elementor-headline, 
+                    {{WRAPPER}}.eael_vto-vertical-rl .elementor-headline, 
+                    {{WRAPPER}}.eael_vto-vertical-lr .elementor-text-editor p, 
+                    {{WRAPPER}}.eael_vto-vertical-rl .elementor-text-editor p, 
+                    {{WRAPPER}}.eael_vto-vertical-lr.elementor-widget-text-editor p, 
+                    {{WRAPPER}}.eael_vto-vertical-rl.elementor-widget-text-editor p, 
+                    {{WRAPPER}}.eael_vto-vertical-lr .eael-dual-header, 
+                    {{WRAPPER}}.eael_vto-vertical-rl .eael-dual-header, 
+                    {{WRAPPER}}.eael_vto-vertical-lr .eael-fancy-text-container, 
+                    {{WRAPPER}}.eael_vto-vertical-rl .eael-fancy-text-container',
                 'condition' => [
 					'eael_vertical_text_orientation_switch' => 'yes',
 					'eael_vto_writing_styling_type' => 'background',
@@ -326,7 +337,18 @@ class Vertical_Text_Orientation {
 					'yes' => 'text',
 				],
                 'selectors' => [
-                    '{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title' => 'background-clip: {{VALUE}}; color: transparent;',
+                    '{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, 
+                    {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title, 
+                    {{WRAPPER}}.eael_vto-vertical-lr .elementor-headline, 
+                    {{WRAPPER}}.eael_vto-vertical-rl .elementor-headline, 
+                    {{WRAPPER}}.eael_vto-vertical-lr .elementor-text-editor p, 
+                    {{WRAPPER}}.eael_vto-vertical-rl .elementor-text-editor p, 
+                    {{WRAPPER}}.eael_vto-vertical-lr.elementor-widget-text-editor p, 
+                    {{WRAPPER}}.eael_vto-vertical-rl.elementor-widget-text-editor p, 
+                    {{WRAPPER}}.eael_vto-vertical-lr .eael-dual-header, 
+                    {{WRAPPER}}.eael_vto-vertical-rl .eael-dual-header, 
+                    {{WRAPPER}}.eael_vto-vertical-lr .eael-fancy-text-container, 
+                    {{WRAPPER}}.eael_vto-vertical-rl .eael-fancy-text-container' => 'background-clip: {{VALUE}}; color: transparent;',
                 ],
 				'condition' => [
 					'eael_vertical_text_orientation_switch' => 'yes',
@@ -345,7 +367,7 @@ class Vertical_Text_Orientation {
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
                 'selectors' => [
-                    '{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title' => 'animation: eaelAnimationVTO 5s linear infinite;',
+                    '{{WRAPPER}}.eael_vto-vertical-lr, {{WRAPPER}}.eael_vto-vertical-rl' => 'animation: eaelAnimationVTO 5s linear infinite;',
                 ],
 				'condition' => [
 					'eael_vertical_text_orientation_switch' => 'yes',
@@ -363,7 +385,18 @@ class Vertical_Text_Orientation {
 				'label_off'    => esc_html__( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
                 'selectors' => [
-                    '{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title' => 'animation: eaelAnimationVTO 30s linear infinite;',
+                    '{{WRAPPER}}.eael_vto-vertical-lr .elementor-heading-title, 
+                    {{WRAPPER}}.eael_vto-vertical-rl .elementor-heading-title, 
+                    {{WRAPPER}}.eael_vto-vertical-lr .elementor-headline, 
+                    {{WRAPPER}}.eael_vto-vertical-rl .elementor-headline, 
+                    {{WRAPPER}}.eael_vto-vertical-lr .elementor-text-editor p, 
+                    {{WRAPPER}}.eael_vto-vertical-rl .elementor-text-editor p, 
+                    {{WRAPPER}}.eael_vto-vertical-lr.elementor-widget-text-editor p, 
+                    {{WRAPPER}}.eael_vto-vertical-rl.elementor-widget-text-editor p, 
+                    {{WRAPPER}}.eael_vto-vertical-lr .eael-dual-header, 
+                    {{WRAPPER}}.eael_vto-vertical-rl .eael-dual-header, 
+                    {{WRAPPER}}.eael_vto-vertical-lr .eael-fancy-text-container, 
+                    {{WRAPPER}}.eael_vto-vertical-rl .eael-fancy-text-container' => 'animation: eaelAnimationVTO 30s linear infinite;',
                 ],
 				'condition' => [
 					'eael_vertical_text_orientation_switch' => 'yes',
@@ -378,7 +411,6 @@ class Vertical_Text_Orientation {
 
 	public function before_render( $element ) {
 		$settings = $element->get_settings_for_display();
-        $element->add_render_attribute( '_wrapper', 'class', 'eael_vto-vertical' );
         $gradient_colors = [];
         if ( !empty( $settings['eael_vto_writing_gradient_color_repeater'] ) && is_array( $settings['eael_vto_writing_gradient_color_repeater'] ) ) {
             foreach ( $settings['eael_vto_writing_gradient_color_repeater'] as $value ) {
