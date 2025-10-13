@@ -547,7 +547,7 @@ class Image_Masking {
                     $mask_url = $svg_url . $svg . '.svg';
                 } else if( 'upload' === $svg ){
                     $image = $element->get_settings_for_display( 'eael_image_masking_image' );
-                    $mask_url = $image['url'];
+                    $mask_url = isset( $image['url'] ) ? $image['url'] : '';
                 }
 
                 if( $mask_url ) {
