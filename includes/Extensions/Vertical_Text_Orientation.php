@@ -12,8 +12,13 @@ class Vertical_Text_Orientation {
 	 * Initialize hooks
 	 */
 	public function __construct() {
-		add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'register_controls' ] );
+		// add_action( 'elementor/element/common/_section_style/before_section_end', [ $this, 'register_controls' ] );
 		add_action( 'elementor/frontend/before_render', [ $this, 'before_render' ], 100 );
+        add_action( 'elementor/element/heading/section_title_style/after_section_end', [ $this, 'register_controls' ] );
+		add_action( 'elementor/element/text-editor/section_style/after_section_end', [ $this, 'register_controls' ] );
+		add_action( 'elementor/element/animated-headline/section_style_text/after_section_end', [ $this, 'register_controls' ] );
+		add_action( 'elementor/element/eael-dual-color-header/eael_section_dch_title_style_settings/after_section_end', [ $this, 'register_controls' ] );
+		add_action( 'elementor/element/eael-fancy-text/eael_fancy_text_suffix_styles/after_section_end', [ $this, 'register_controls' ] );
 	}
 
 	public function register_controls( $element ) {
@@ -21,7 +26,7 @@ class Vertical_Text_Orientation {
 			'eael_vertical_text_orientation_section',
 			[
 				'label' => __( '<i class="eaicon-logo"></i> Vertical Text Orientation', 'essential-addons-for-elementor-lite' ),
-				'tab'   => Controls_Manager::TAB_ADVANCED
+				'tab'   => Controls_Manager::TAB_STYLE
 			]
 		);
 
