@@ -132,7 +132,7 @@ let verticalTextOrientation = function ($scope, $) {
             // Define target selectors
             const targetSelectors = [
                ".elementor-heading-title",
-               ".elementor-widget-text-editor p",
+               "p",
                ".elementor-headline",
                ".eael-dual-header",
                ".eael-fancy-text-container",
