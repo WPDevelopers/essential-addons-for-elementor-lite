@@ -93,7 +93,7 @@ class Vertical_Text_Orientation {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}}.eael_vto-vertical-lr' => 'inline-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}}.eael_vto-vertical-lr, {{WRAPPER}}.eael_vto-vertical-rl' => 'inline-size: {{SIZE}}{{UNIT}};',
 				],
                 'condition' => [
 					'eael_vertical_text_orientation_switch' => 'yes',
