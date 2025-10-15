@@ -787,6 +787,28 @@ class Business_Reviews extends Widget_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'eael_business_reviews_review_text_height',
+			[
+				'label'      => __( 'Text Max Height', 'essential-addons-for-elementor-lite' ),
+				'type'       => Controls_Manager::SLIDER,
+				'range'      => [
+					'px' => [
+						'min'  => 15,
+						'max'  => 500,
+						'step' => 1,
+					],
+				],
+				'size_units' => [ 'px' ],
+				'selectors'  => [
+					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-text' => 'height: {{SIZE}}{{UNIT}}; overflow-y: auto;',
+				],
+				'condition'  => [
+					'eael_business_reviews_review_text' => 'yes',
+				],
+			]
+		);
+
 		$this->add_control(
 			'eael_business_reviews_review_rating',
 			[
@@ -796,6 +818,23 @@ class Business_Reviews extends Widget_Base {
 				'label_off'    => __( 'Hide', 'essential-addons-for-elementor-lite' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'eael_business_reviews_review_rating_position',
+			[
+				'label'     => __( 'Rating Position', 'essential-addons-for-elementor-lite' ),
+				'type'      => Controls_Manager::SELECT,
+				'options'   => [
+					'top'    => __( 'Top', 'essential-addons-for-elementor-lite' ),
+					'bottom' => __( 'Bottom', 'essential-addons-for-elementor-lite' ),
+				],
+				'default'   => 'bottom',
+				'condition' => [
+					'eael_business_reviews_review_rating' => 'yes',
+					'eael_business_reviews_style_preset_slider' => 'preset-1',
+				],
 			]
 		);
 
@@ -2109,28 +2148,6 @@ class Business_Reviews extends Widget_Base {
 			]
 		);
 
-		$this->add_responsive_control(
-			'eael_business_reviews_review_text_height',
-			[
-				'label'      => __( 'Height', 'essential-addons-for-elementor-lite' ),
-				'type'       => Controls_Manager::SLIDER,
-				'range'      => [
-					'px' => [
-						'min'  => 15,
-						'max'  => 500,
-						'step' => 1,
-					],
-				],
-				'size_units' => [ 'px' ],
-				'selectors'  => [
-					'{{WRAPPER}} .eael-business-reviews-wrapper .eael-google-review-text' => 'height: {{SIZE}}{{UNIT}}; overflow-y: auto;',
-				],
-				'condition'  => [
-					'eael_business_reviews_review_text' => 'yes',
-				],
-			]
-		);
-
 		$this->add_control(
 			'eael_business_reviews_review_rating_label',
 			[
@@ -2728,6 +2745,7 @@ class Business_Reviews extends Widget_Base {
 		$business_reviews['review_time']       				= ! empty( $settings['eael_business_reviews_review_time'] ) && 'yes' === $settings['eael_business_reviews_review_time'] ? 1 : 0;
 		$business_reviews['review_text']       				= ! empty( $settings['eael_business_reviews_review_text'] ) && 'yes' === $settings['eael_business_reviews_review_text'] ? 1 : 0;
 		$business_reviews['review_rating']     				= ! empty( $settings['eael_business_reviews_review_rating'] ) && 'yes' === $settings['eael_business_reviews_review_rating'] ? 1 : 0;
+		$business_reviews['review_rating_position']			= ! empty( $settings['eael_business_reviews_review_rating_position'] ) ? sanitize_text_field( $settings['eael_business_reviews_review_rating_position'] ) : 'bottom';
 		$business_reviews['review_1_star']     				= empty( $settings['eael_business_reviews_review_1_star_hide'] ) ? 1 : 0;
 		$business_reviews['review_2_star']     				= empty( $settings['eael_business_reviews_review_2_star_hide'] ) ? 1 : 0;
 		$business_reviews['review_3_star']     				= empty( $settings['eael_business_reviews_review_3_star_hide'] ) ? 1 : 0;
@@ -3312,14 +3330,20 @@ class Business_Reviews extends Widget_Base {
             </div>
 		<?php endif;
 
+		if ( $business_reviews['review_rating'] && 'top' === $business_reviews['review_rating_position'] ): ?>
+			<div class="eael-google-review-rating eael-rating-position-top">
+				<?php $this->print_business_reviews_ratings( $single_review_data['rating'] ); ?>
+			</div>
+		<?php endif;
+
 		if ( $business_reviews['review_text'] ): ?>
             <div class="eael-google-review-text">
 				<?php echo esc_html( $single_review_data['text'] ); ?>
             </div>
 		<?php endif;
 
-		if ( $business_reviews['review_rating'] ): ?>
-            <div class="eael-google-review-rating">
+		if ( $business_reviews['review_rating'] && 'bottom' === $business_reviews['review_rating_position'] ): ?>
+            <div class="eael-google-review-rating eael-rating-position-bottom">
 				<?php $this->print_business_reviews_ratings( $single_review_data['rating'] ); ?>
             </div>
 		<?php endif;
