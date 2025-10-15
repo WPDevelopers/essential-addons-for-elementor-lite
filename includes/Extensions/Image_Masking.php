@@ -422,7 +422,7 @@ class Image_Masking {
         $element->add_control(
             'eael_image_masking_image_repeat',
             [
-                'label' => esc_html__( 'Reapeat', 'essential-addons-for-elementor-lite' ),
+                'label' => esc_html__( 'Repeat', 'essential-addons-for-elementor-lite' ),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'no-repeat',
                 'options' => [
