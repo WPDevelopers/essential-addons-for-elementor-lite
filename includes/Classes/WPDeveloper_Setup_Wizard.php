@@ -615,6 +615,16 @@ class WPDeveloper_Setup_Wizard {
 						'title'       => __( 'Simple Menu', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'basic',
 					],
+					[
+						'key'         => 'breadcrumbs',
+						'title'       => __( 'Breadcrumbs', 'essential-addons-for-elementor-lite' ),
+						'preferences' => 'advance',
+					],
+					[
+						'key'         => 'code-snippet',
+						'title'       => __( 'Code Snippet', 'essential-addons-for-elementor-lite' ),
+						'preferences' => 'advance',
+					],
 				]
 			],
 			'dynamic-content-elements' => [
@@ -831,11 +841,6 @@ class WPDeveloper_Setup_Wizard {
 					[
 						'key'         => 'woo-product-rating',
 						'title'       => __( 'Woo Product Rating', 'essential-addons-for-elementor-lite' ),
-						'preferences' => 'advance',
-					],
-					[
-						'key'         => 'breadcrumbs',
-						'title'       => __( 'Breadcrumbs', 'essential-addons-for-elementor-lite' ),
 						'preferences' => 'advance',
 					],
 					[
