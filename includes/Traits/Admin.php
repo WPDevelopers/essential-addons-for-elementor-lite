@@ -48,6 +48,10 @@ trait Admin {
             wp_enqueue_style( 'essential_addons_elementor-template-cloud-css', EAEL_PLUGIN_URL . 'assets/admin/css/cloud.css', false, EAEL_PLUGIN_VERSION );
         }
 
+        if ( isset( $hook ) && $hook == 'elementor_page_elementor-element-manager' ) {
+		    wp_enqueue_style( 'ea-icon-admin', EAEL_PLUGIN_URL . 'assets/admin/css/eaicon.css', array(), EAEL_PLUGIN_VERSION );
+        }
+
 	    if ( isset( $hook ) && $hook == 'toplevel_page_eael-settings' ) {
 		    wp_enqueue_style( 'eael-admin-icon-css', EAEL_PLUGIN_URL . 'includes/templates/admin/icons/style.css', array(), EAEL_PLUGIN_VERSION );
 		    wp_enqueue_style( 'eael-admin-css', EAEL_PLUGIN_URL . 'includes/templates/admin/eael-dashboard/dist/assets/ea-dashboard.css', array(), EAEL_PLUGIN_VERSION );
