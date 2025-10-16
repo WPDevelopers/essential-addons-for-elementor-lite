@@ -3513,7 +3513,7 @@ msgstr ""
 msgid "Image Options"
 msgstr ""
 
-#: ../includes/Elements/Cta_Box.php:214, ../includes/Elements/Cta_Box.php:219, ../includes/Extensions/Image_Masking.php:430
+#: ../includes/Elements/Cta_Box.php:214, ../includes/Elements/Cta_Box.php:219, ../includes/Extensions/Image_Masking.php:425, ../includes/Extensions/Image_Masking.php:430
 msgid "Repeat"
 msgstr ""
 
@@ -10896,10 +10896,6 @@ msgstr ""
 
 #: ../includes/Extensions/Image_Masking.php:410
 msgid "Right Bottom"
-msgstr ""
-
-#: ../includes/Extensions/Image_Masking.php:425
-msgid "Reapeat"
 msgstr ""
 
 #: ../includes/Extensions/Image_Masking.php:429
