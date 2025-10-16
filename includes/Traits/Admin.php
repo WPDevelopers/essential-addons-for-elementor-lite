@@ -630,6 +630,15 @@ trait Admin {
 							'promotion'   => 'new',
 						    'is_activate' => boolval( $this->get_settings( 'custom-cursor' ) )
 					    ],
+						'section-slider'        => [
+						    'key'         => 'section-slider',
+						    'title'       => __( 'Section Slider', 'essential-addons-for-elementor-lite' ),
+						    'demo_link'   => 'https://essential-addons.com/section-slider/',
+						    'doc_link'    => 'https://essential-addons.com/docs/ea-section-slider/',
+						    'is_pro'      => true,
+						    'promotion'   => 'new',
+						    'is_activate' => boolval( $this->get_settings( 'section-slider' ) )
+					    ],
 					    'advanced-dynamic-tags' => [
 						    'key'         => 'advanced-dynamic-tags',
 						    'title'       => __( 'Dynamic Tags', 'essential-addons-for-elementor-lite' ),

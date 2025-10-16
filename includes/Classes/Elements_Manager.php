@@ -195,6 +195,11 @@ class Elements_Manager {
 			$list['liquid-glass-effect'] = 'liquid-glass-effect';
 		}
 
+		//Section Slider
+		if ( ! empty( $element['settings']['eael_enable_section_slider'] ) ) {
+			$list['section-slider'] = 'section-slider';
+		}
+
 		return $list;
 	}
 
