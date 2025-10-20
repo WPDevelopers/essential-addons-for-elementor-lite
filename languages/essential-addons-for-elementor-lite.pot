@@ -11987,7 +11987,7 @@ msgid "File Type Fields:"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:1770
-msgid "<p> <i>📣</i> <b>NEW:</b> Introducing EA Pro 6.6 with new \"<b><a target='_blank' href='%s'>Custom Cursor</a></b>\" extension. For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>"
+msgid "<p> <i>📣</i> <b>NEW:</b> Introducing EA 6.4 with new \"<b><a target='_blank' href='%s'>Image Masking</a></b>\" extension. For more info, check out the <a target='_blank' href='%s'>Changelog</a> 🎉</p>"
 msgstr ""
 
 #: ../includes/Traits/Admin.php:1773
