@@ -30,12 +30,12 @@ var BusinessReviewsHandler = function ($scope, $) {
 				speed: parseInt(speed),
 				grabCursor: parseInt(grabCursor),
 				pagination: {
-					el: pagination,
+					el: DOMPurify.sanitize(pagination),
 					clickable: true,
 				},
 				navigation: {
-					nextEl: arrowNext,
-					prevEl: arrowPrev,
+					nextEl: DOMPurify.sanitize(arrowNext),
+					prevEl: DOMPurify.sanitize(arrowPrev),
 				},
 				autoplay: {
 					delay: parseInt(autoplay) ? parseInt(autoplayDelay) : 999999,

@@ -313,10 +313,10 @@
 }
 .eael-product-gallery.eael-product-preset-4 .woocommerce ul.products li.product a.added_to_cart {
   display: block;
-  margin: 0 0 15px 0;
+  margin: 15px;
   padding: 0;
   font-size: 14px;
-  line-height: 1;
+  line-height: 38px;
   text-transform: capitalize;
   color: #333;
   background-color: transparent;

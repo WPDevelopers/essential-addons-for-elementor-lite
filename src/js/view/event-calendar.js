@@ -13,6 +13,7 @@ var EventCalendar = function ($scope, $) {
 		defaultDate = element.data("defaultdate"),
 		multiDaysEventDayCount = typeof element.data("multidays_event_day_count") !== 'undefined' ? element.data("multidays_event_day_count") : 0,
 		eventLimit = element.data("event_limit"),
+		locationDisplay = element.data("location-display"),
 		popupDateFormate = element.data("popup_date_format"),
 		monthColumnHeaderFormat = element.data("monthcolumnheaderformat"),
 		weekColumnHeaderFormat = element.data("weekcolumnheaderformat"),
@@ -235,12 +236,20 @@ var EventCalendar = function ($scope, $) {
 							}
 							startSelector.html('<i class="eicon-calendar"></i> ' + startView);
 
-							$(".eaelec-modal-header h2").html(event.title);
-							$(".eaelec-modal-body").html(event.extendedProps.description);
+							$(".eaelec-modal-header h2").html(DOMPurify.sanitize(event.title));
+							$(".eaelec-modal-body").html(DOMPurify.sanitize(event.extendedProps.description));
 							if (event.extendedProps.description.length < 1) {
 								$(".eaelec-modal-body").css("height", "auto");
 							} else {
 								$(".eaelec-modal-body").css("height", "300px");
+							}
+
+							// Handle location display
+							var locationSelector = $(".eaelec-event-location");
+							if (locationDisplay === 'yes' && event.extendedProps.location && event.extendedProps.location.trim() !== '') {
+								locationSelector.html('<i class="eicon-map-pin"></i> ' + DOMPurify.sanitize(event.extendedProps.location)).show();
+							} else {
+								locationSelector.hide();
 							}
 
 						if ( $(".eael-event-calendar-cls", $scope).data('hidedetailslink') !== 'yes'){
@@ -278,11 +287,11 @@ var EventCalendar = function ($scope, $) {
 				eventWillUnmount: function(arg) {}
 			});
 
-		function refreshPopUpDetailsLink(){
+		function refreshPopUpDetailsLink() {
 			var modalFooter = $(".eaelec-modal-footer"),
 				modalFooterClass = modalFooter.find('a').attr('class'),
-				modalFooterText = $(".eael-event-calendar-cls", $scope).attr( 'data-detailsButtonText' );
-				modalFooter.html('<a class="'+modalFooterClass+'">'+modalFooterText+'</a>');
+				modalFooterText = $(".eael-event-calendar-cls", $scope).attr('data-detailsButtonText');
+			modalFooter.html('<a class="' + modalFooterClass + '">' + DOMPurify.sanitize(modalFooterText) + '</a>');
 		}
 
 		CloseButton.on("click", function (event) {

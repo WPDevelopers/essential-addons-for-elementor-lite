@@ -8,13 +8,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use \Elementor\Controls_Manager;
-use \Elementor\Frontend;
 use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Widget_Base;
-use \Elementor\Icons_Manager;
 use Essential_Addons_Elementor\Traits\Helper;
 use \Essential_Addons_Elementor\Classes\Helper as HelperClass;
 

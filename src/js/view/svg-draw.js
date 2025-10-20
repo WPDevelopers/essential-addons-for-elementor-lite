@@ -1,126 +1,158 @@
+
 var SVGDraw = function ($scope, $) {
     let wrapper = $('.eael-svg-draw-container', $scope),
+        widget_id = $scope.data('id'),
         svg_icon = $('svg', wrapper),
         settings = wrapper.data('settings'),
-        speed = settings.speed,
-        is_repeat = settings.loop,
-        pauseOnHover = settings.pause,
-        direction = settings.direction,
-        offset = settings.offset,
-        draw_interval,
-        addOrSubtract,
-        stepCount = 0,
-        $doc = $(document),
-        $win = $(window),
-        lines = $('path, circle, rect, polygon', svg_icon),
-        max = $doc.height() - $win.height();
+        transition = Number( settings.transition ),
+        loop_delay = Number( settings.loop_delay ),
+        offset = 0,
+        lines = $('path, circle, rect, polygon', svg_icon);
 
-    if (settings.excludeStyle === 'yes') {
-        lines.attr('style', '');
-    }
+        if( 'always' === settings.fill_type || 'before' === settings.fill_type ) {
+            gsap.to(lines, {
+                fill: settings.fill_color,
+                duration: transition
+            });
+        }
 
-    function dashArrayReset() {
-        let largestDashArray = 0, largestPath = '';
-        $('path', svg_icon).each(function () {
-            let dashArray = $(this).css('stroke-dasharray');
-            let dashArrayValue = parseInt(dashArray);
-            if (dashArrayValue > largestDashArray) {
-                largestDashArray = dashArrayValue;
-                largestPath = $(this);
-            }
-        });
-
-        if ( largestDashArray < 3999 && largestDashArray / 2 > 600 ) {
-            let offset = largestPath.css('stroke-dashoffset');
-            offset = parseInt(offset);
-
-            if ( 'after' === settings.fill ) {
-                if (offset < largestDashArray / 2) {
-                    wrapper.addClass('fill-svg');
-                } else if ( wrapper.hasClass('fill-svg') ) {
-                    wrapper.removeClass('fill-svg');
-                }
-            } else if ( 'before' === settings.fill ) {
-                if( 100 < offset ){
-                    wrapper.addClass('fill-svg');
-                } else if ( 100 > offset ) {
-                    wrapper.removeClass('fill-svg');
-                }
+        function drawSVGLine (){
+            $.each( lines, function (index, line) { 
+                const length = line.getTotalLength() * ( settings.stroke_length * .01 );
+                line.style.strokeDasharray = length;
+                line.style.strokeDashoffset = length;
+            });
+        
+            let loopConfig = {};
+            if ( 'yes' === settings.loop ) {
+                loopConfig = {
+                    repeat: -1,
+                    yoyo: "reverse" === settings.direction,
+                    repeatDelay: loop_delay
+                };
             }
             
-        }
-    }
-
-    function stepManager() {
-        dashArrayReset();
-        if (addOrSubtract) {
-            stepCount += 0.01;
-            if (stepCount >= 1) {
-                addOrSubtract = false;
-                if (settings.fill === 'fill-svg') {
-                    wrapper.removeClass('fillout-svg').addClass(settings.fill);
-                }
-            }
-        } else if (direction === 'restart') {
-            stepCount = 0;
-            addOrSubtract = true;
-        } else {
-            stepCount -= 0.01;
-            if (stepCount <= 0) {
-                addOrSubtract = true;
-            }
-        }
-
-        return stepCount;
-    }
-
-    if (svg_icon.parent().hasClass('page-scroll')) {
-        $win.on('scroll', function () {
-            let step = (($win.scrollTop() - offset) / max);
-            let offsetTop = svg_icon.offset().top,
-                viewPort = $win.innerHeight(),
-                offsetBottom = offsetTop - viewPort;
-
-            if (offsetTop > $win.scrollTop() && offsetBottom < $win.scrollTop()) {
-                step = (($win.scrollTop() - offset) - offsetBottom) / viewPort;
-                svg_icon.drawsvg('progress', step);
-            }
-            dashArrayReset();
-        });
-    } else if (svg_icon.parent().hasClass('page-load')) {
-        let lastSvg = '';
-        let drawSvg = setInterval(function () {
-            let currentSvg = svg_icon.html();
-            svg_icon.drawsvg('progress', stepManager());
-            if (is_repeat === 'no'){
-                stepManager();
-            }
-            if (currentSvg === lastSvg && is_repeat === 'no') {
-                wrapper.addClass(settings.fill);
-                clearInterval(drawSvg);
-            }
-            lastSvg = currentSvg;
-        }, speed);
-    } else if (svg_icon.parent().hasClass('hover')) {
-        let lastSvg = '';
-        svg_icon.hover(function () {
-            if (pauseOnHover === 'yes' || typeof draw_interval === 'undefined') {
-                draw_interval = window.setInterval(function () {
-                    let currentSvg = svg_icon.html();
-                    svg_icon.drawsvg('progress', stepManager());
-
-                    if (currentSvg === lastSvg && is_repeat === 'no') {
-                        wrapper.addClass(settings.fill);
-                        window.clearInterval(draw_interval);
+            let timeline = gsap.timeline(loopConfig);
+        
+            timeline.to(lines, {
+                strokeDashoffset: offset,
+                duration: settings.speed,
+                ease: settings.ease_type,
+                onComplete: function() {
+                    if( '' !== settings.fill_color ) {
+                        if( 'after' === settings.fill_type ) {
+                            gsap.to(lines, {
+                                fill: settings.fill_color,
+                                duration: transition
+                            });
+                            
+                            if ( 'reverse' === settings.direction ) {
+                                setTimeout( function() {
+                                    gsap.to(lines, {
+                                        fill: settings.fill_color + '00',
+                                        duration: transition
+                                    });
+                                }, loop_delay * 1000);
+                            }
+                        } else if ( 'before' === settings.fill_type ) {
+                            gsap.to(lines, {
+                                fill: settings.fill_color + '00',
+                                duration: transition
+                            });
+                        }
                     }
+                },
+                onStart: function () {
+                    if( '' !== settings.fill_color ) {
+                        if( 'after' === settings.fill_type && "restart" === settings.direction ) {
+                            gsap.to(lines, {
+                                fill: settings.fill_color + '00',
+                                duration: transition
+                            });
+                        } else if ( 'before' === settings.fill_type ) {
+                            gsap.to(lines, {
+                                fill: settings.fill_color,
+                                duration: transition
+                            });
+                        }
+                    }
+                }
+            });
 
-                    lastSvg = currentSvg;
-                }, speed);
+            if( 'yes' === settings.pause ) {
+                svg_icon.hover(function(){
+                    timeline.pause();
+                }, function(){
+                    timeline.play();
+                });
             }
-        }, function () {
-            if (pauseOnHover === 'yes') {
-                window.clearInterval(draw_interval);
+        }
+
+    if( wrapper.hasClass( 'page-load' ) ) {
+        drawSVGLine( lines, settings );
+    } else if ( wrapper.hasClass( 'mouse-hover' ) ) {
+        svg_icon.hover( function(){
+            if ( ! wrapper.hasClass('draw-initialized') ) {
+                drawSVGLine( lines, settings );
+                wrapper.addClass('draw-initialized');
+            } 
+        });
+    } else if (wrapper.hasClass('page-scroll')) {
+        // Check if ScrollTrigger is available
+        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+            console.warn('GSAP or ScrollTrigger not available for SVG Draw widget');
+            return;
+        }
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Initialize stroke dash properties
+        $.each( lines, function (index, line) {
+            const length = line.getTotalLength() * ( settings.stroke_length * .01 );
+            line.style.strokeDasharray = length;
+            line.style.strokeDashoffset = length;
+        });
+
+        let showMarkers = settings.marker && elementorFrontend.isEditMode();
+        $('.marker-'+widget_id).remove();
+
+        // Use wrapper as trigger instead of lines collection
+        let timeline = gsap.timeline({
+            scrollTrigger: {
+                trigger: wrapper[0], // Use the wrapper element as trigger
+                start: "top "+settings.start_point,
+                end: "top "+settings.end_point,
+                scrub: true,
+                id: widget_id,
+                markers: showMarkers,
+                onUpdate: (self) => {
+                    if( '' !== settings.fill_color && ( 'before' === settings.fill_type || 'after' === settings.fill_type ) ) {
+                        let fill1 = settings.fill_color, fill2 = settings.fill_color + '00';
+                        if ( 'after' === settings.fill_type ) {
+                            fill1 = settings.fill_color + '00';
+                            fill2 = settings.fill_color;
+                        }
+                        if ( self.progress < 0.95 ) {
+                            gsap.to(lines, {
+                                fill: fill1,
+                                duration: transition
+                            });
+                        } else if ( self.progress > 0.95 ) {
+                            gsap.to(lines, {
+                                fill: fill2,
+                                duration: transition
+                            });
+                        }
+                    }
+                },
             }
+        });
+
+        // Add duration to the animation
+        timeline.to(lines, {
+            strokeDashoffset: 0,
+            duration: settings.speed || 1,
+            ease: settings.ease_type || 'none'
         });
     }
 }

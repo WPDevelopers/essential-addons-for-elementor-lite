@@ -80,8 +80,21 @@
                   }
                }
             }
-         }
-         .ast-on-card-button.ast-onsale-card {
+
+         // Secondary Image Hover Effect
+                .eael-product-wrap {
+                    position: relative;
+                    overflow: hidden;
+
+                    img {
+                        transition: opacity 0.3s ease;
+                        backface-visibility: hidden;
+                        width: 100%;
+                        height: auto;
+                        display: block;
+                    }
+                }
+            }.ast-on-card-button.ast-onsale-card {
             display: none !important;
          }
          li.product {

@@ -56,6 +56,11 @@ var WooProdectImage = function ($scope, $) {
    function updateProductImage(variationImage) {
       setImageAttributes($productGalleryImage, variationImage);
       setThumbImageAttributes($productThumbImage, variationImage);
+
+      // Re-initialize zoom lens for the updated image
+      setTimeout(() => {
+         initializeZoomLens($productGalleryImage);
+      }, 100); // Small delay to ensure image attributes are updated
    }
 
    //Set image attributes
@@ -107,7 +112,14 @@ var WooProdectImage = function ($scope, $) {
             .attr("sizes", originalAttributes.sizes)
             .removeAttr("data-src")
             .removeAttr("data-large_image");
-         $image.fadeIn(100);
+         $image.fadeIn(100, function() {
+            // Re-initialize zoom lens after image is reset and visible
+            if ($image.hasClass('image_slider__image')) {
+               setTimeout(() => {
+                  initializeZoomLens($image);
+               }, 50);
+            }
+         });
       });
    }
 
@@ -195,7 +207,20 @@ var WooProdectImage = function ($scope, $) {
 
          // Initialize the main slider after setting the thumbs swiper
          swiperLoader($(sliderImageSelector), $sliderImages)
-            .then((mainSwiperInstance) => {})
+            .then((mainSwiperInstance) => {
+               // Initialize zoom lens for the active slide when swiper changes
+               if (mainSwiperInstance) {
+                  mainSwiperInstance.on('slideChange', function() {
+                     setTimeout(() => {
+                        const $activeSlide = $(mainSwiperInstance.slides[mainSwiperInstance.activeIndex]);
+                        const $activeImg = $activeSlide.find('.image_slider__image img');
+                        if ($activeImg.length) {
+                           initializeZoomLens($activeImg);
+                        }
+                     }, 100);
+                  });
+               }
+            })
             .catch((error) => {
                console.log("Error initializing main Swiper:", error);
             });
@@ -225,6 +250,87 @@ var WooProdectImage = function ($scope, $) {
          type: "image",
       });
    });
+
+   function zoomLenseEffect(){
+      const zoomOptions = {
+         lensWidth: zoomEffect?.lensSize || 100,
+         lensHeight: zoomEffect?.lensSize || 100,
+         borderRadius: zoomEffect?.lensBorderRadius || '8px',
+         lensBorder: zoomEffect?.lensBorder,
+         autoResize: true
+      };
+
+      // Initialize zoom lens for image(s)
+      function initializeZoomLens($images) {
+            if (!$images) {
+               $images = $(".image_slider__image img", $scope);
+            }
+
+         $images.each(function() {
+            const $img = $(this);
+
+            // Clean up existing zoom lens
+            $img.off('.zoom');
+            $('.eael-lens-zoom, .eael-result-zoom').remove();
+
+            // Initialize when image is ready
+            if (this.complete && this.naturalHeight !== 0) {
+               $img.eaelZoomLense(zoomOptions);
+            } else {
+               $img.on('load.zoom', function() {
+                  $(this).eaelZoomLense(zoomOptions);
+               });
+            }
+         });
+      }
+
+      // Initialize zoom lens with multiple fallbacks
+      function setupZoomLens() {
+         // Try immediate initialization
+         initializeZoomLens();
+
+         // Fallback for window load
+         $(window).on('load', function() {
+            initializeZoomLens();
+         });
+
+         // Use imagesLoaded if available
+         if (typeof $.fn.imagesLoaded === 'function') {
+            $(".image_slider__image img", $scope).imagesLoaded(function() {
+               initializeZoomLens();
+            });
+         }
+      }
+
+      // Setup zoom lens
+      setupZoomLens();
+   }
+
+   function magnifyEffect(){
+      $(".image_slider__image img", $scope).eaelMagnify({
+         lensSize: zoomEffect?.lensSize || 200,
+         lensBorder: zoomEffect?.lensBorder,
+      });
+   }
+
+   function zoomInsideEffect(){
+
+   }
+   const zoomEffect = $sliderImagesData.zoomEffect;
+   
+   if( window.isEditMode ){
+      $('.eael-magnify-lens').remove();
+   }
+   if ( zoomEffect?.enabled === 'yes') {
+      // Image Zoom Lens Configuration
+      if( 'lense' === zoomEffect?.type ){
+         zoomLenseEffect();
+      } else if( 'magnify' === zoomEffect?.type ){
+         magnifyEffect();
+      } else if( 'inside' === zoomEffect?.type ){
+         zoomInsideEffect();
+      }
+   }
 };
 
 jQuery(window).on("elementor/frontend/init", function () {

@@ -358,7 +358,7 @@
   -webkit-box-sizing: content-box;
           box-sizing: content-box;
   overflow: visible;
-  background: #fff !important;
+  background: #fff;
   text-align: center;
   -webkit-box-shadow: 2px 0px 12px 3px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
           box-shadow: 2px 0px 12px 3px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
